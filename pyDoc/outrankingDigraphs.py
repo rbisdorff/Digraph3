@@ -1258,7 +1258,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
     def showPairwiseComparisonsDistributions(self):
         """
-        show the lt,leq, eq, geq, gt distributions for all pairs
+        Renders the lt,leq, eq, geq, gt distributions for all pairs
         """
         a = [x for x in self.actions]
         a.sort()
@@ -1271,21 +1271,11 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[i],a[j],pc[a[i]][a[j]]['lt'],pc[a[i]][a[j]]['leq'],pc[a[i]][a[j]]['eq'],pc[a[i]][a[j]]['geq'],pc[a[i]][a[j]]['gt'],self.relation[a[i]][a[j]]))
                 print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[j],a[i],pc[a[j]][a[i]]['lt'],pc[a[j]][a[i]]['leq'],pc[a[j]][a[i]]['eq'],pc[a[j]][a[i]]['geq'],pc[a[j]][a[i]]['gt'],self.relation[a[j]][a[i]]))
 
-    def showPairwiseOutrankings(self,a,b,\
-                               Debug=False,isReturningHTML=False,\
-                               hasSymmetricThresholds=True):
-        self.showPairwiseComparison(a,b,\
-                               Debug=Debug,isReturningHTML=isReturningHTML,\
-                               hasSymmetricThresholds=hasSymmetricThresholds)
-        self.showPairwiseComparison(b,a,\
-                               Debug=Debug,isReturningHTML=isReturningHTML,\
-                               hasSymmetricThresholds=hasSymmetricThresholds)
-
     def showPairwiseComparison(self,a,b,\
                                Debug=False,isReturningHTML=False,\
                                hasSymmetricThresholds=True):
         """
-        renders the pairwise comprison parameters on all criteria
+        Renders the pairwise comprison parameters on all criteria
         in html format
         """
         evaluation = self.evaluation
@@ -1457,7 +1447,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     if not isReturningHTML:
                         print(c,'    %s %s' % (eval_c_a,eval_c_b))
                     else:
-                        html += '<td bgcolor="#FFEEAA" align="center">%s</td> <td>%s</td><td>%s</td><td>%s</td><td></td><td></td><td></td><td></td><td>%.2f</td></tr>' % (c, criteria[c]['weight'],eval_c_a,eval_c_b, self.valuationdomain['med']*criteria[c]['weight'])
+                        html += '<tr><td bgcolor="#FFEEAA" align="center">%s</td> <td>%.2f</td><td>%s</td><td>%s</td><td></td><td></td><td></td><td></td><td>%.2f</td></tr>' %\
+                                (c, criteria[c]['weight'],eval_c_a,eval_c_b, self.valuationdomain['med']*criteria[c]['weight'])
             if not isReturningHTML:
                 print('             ----------------------------------------')
                 print(' Valuation in range: %+.2f to %+.2f; global concordance: %+.2f' % (-sumWeights,sumWeights,concordance))
@@ -1467,7 +1458,50 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         if isReturningHTML:
             return html
 
-    
+
+    def showHTMLPairwiseComparison(self,a,b,\
+                               fileName=None):
+        """
+        Exporting the pairwise comparison table of actions a and b in the default system browser. A specific file name may be provided.
+        """
+        import webbrowser
+        if fileName == None:
+            fileName = '/tmp/pairwiseComparison_%s_%s.html' % (a,b)
+        fo = open(fileName,'w')
+        fo.write(self.showPairwiseComparison(a,b,isReturningHTML=True))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+
+    def showPairwiseOutrankings(self,a,b,\
+                               Debug=False,isReturningHTML=False,\
+                               hasSymmetricThresholds=True):
+        """
+        Renders the pairwise outrankings table for actions *a* and *b*.
+        """
+        self.showPairwiseComparison(a,b,\
+                               Debug=Debug,isReturningHTML=isReturningHTML,\
+                               hasSymmetricThresholds=hasSymmetricThresholds)
+        self.showPairwiseComparison(b,a,\
+                               Debug=Debug,isReturningHTML=isReturningHTML,\
+                               hasSymmetricThresholds=hasSymmetricThresholds)
+
+    def showHTMLPairwiseOutrankings(self,a,b,\
+                               fileName=None):
+        """
+        Exporting the pairwise outrankings table of actions a and b
+        in the default system browser. A specific file name may be provided.
+        """
+        import webbrowser
+        if fileName == None:
+            fileName = '/tmp/pairwiseOutrankings_%s_%s.html' % (a,b)
+        fo = open(fileName,'w')
+        fo.write(self.showPairwiseComparison(a,b,isReturningHTML=True))
+        fo.write(self.showPairwiseComparison(b,a,isReturningHTML=True))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+
 
     def showShort(self):
         """
@@ -3078,7 +3112,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 else:
                     try:
                         if self.criteria[g]['preferenceDirection'] == 'min':
-                            pdir = Decimal('-1')
+                            if self.criteria[g]['weight'] > Decimal('0'):
+                                pdir = Decimal('-1')
+                            else:
+                                pdir = Decimal('1')
                         else:
                             pdir = Decimal('1')
                     except:
@@ -5294,7 +5331,10 @@ class _BipolarOutrankingDigraph(OutrankingDigraph):
                                     p = px + py * abs(evaluation[c][a]) 
                             except:
                                 p = None
-                            d = evaluation[c][a] - evaluation[c][b]
+                            if criteria[g]['weight'] > Decimal('0'):
+                                d = evaluation[c][a] - evaluation[c][b]
+                            else:
+                                d = evaluation[c][b] - evaluation[c][a]
                             lc0 = self._localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
                             concordance += (lc0 * criteria[c]['weight'])
@@ -5432,7 +5472,10 @@ class _BipolarOutrankingDigraph(OutrankingDigraph):
                     p = px + py * abs(evaluation[c][a])
             except:
                 p = None
-            d = evaluation[c][a] - evaluation[c][b]
+            if criteria[c]['weight'] > Decimal('0'):
+                d = evaluation[c][a] - evaluation[c][b]
+            else:
+                d = evaluation[c][b] - evaluation[c][a]
             return self._localConcordance(d,ind,wp,p)
         else:
             return Decimal('0.0')
@@ -5698,7 +5741,10 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                     
                             except:
                                 p = None
-                            d = evaluation[c][a] - evaluation[c][b]
+                            if criteria[c]['weight'] > Decimal('0'):
+                                d = evaluation[c][a] - evaluation[c][b]
+                            else:
+                                d = evaluation[c][b] - evaluation[c][a]
                             lc0 = self._localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
                             concordance = concordance + (lc0 * criteria[c]['weight'])
@@ -5826,7 +5872,10 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     p = px + py * abs(evaluation[c][a])
             except:
                 p = None
-            d = evaluation[c][a] - evaluation[c][b]
+            if criteria[c]['weight'] > Decimal('0'):
+                d = evaluation[c][a] - evaluation[c][b]
+            else:
+                d = evaluation[c][b] - evaluation[c][a]
             return self._localConcordance(d,ind,wp,p)
         else:
             return Decimal('0.0')
@@ -6260,8 +6309,11 @@ class _BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTable
                                     p = prefx + prefy * abs(evaluation[c][a])
                             except:
                                 p = None
-                                
-                            d = evaluation[c][a] - evaluation[c][b]
+
+                            if criteria[c]['weight'] > Decimal('0'):    
+                                d = evaluation[c][a] - evaluation[c][b]
+                            else:
+                                d = evaluation[c][b] - evaluation[c][a]
 
                             lc0 = self._localConcordance(d,ind,wp,p)
                             #print 'a,b,c,w,d,ind,wp,p,localConcordance(d,ind,wp,p)',a,b,c,criteria[c]['weight'],d,ind,wp,p,lc0
@@ -6918,8 +6970,11 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
                             vv = None
                         if hasNoVeto:
                             vv = None
-
-                        d = evaluation[c][a] - evaluation[c][b]
+                            
+                        if criteria[c]['weight'] < Decimal('0'):
+                            d = evaluation[c][b] - evaluation[c][a]
+                        else:
+                            d = evaluation[c][a] - evaluation[c][b]
 
                         veto = veto + self._localVeto(d,wvv,vv)
                         counter = self._localConcordance(d,ind,wp,p)
@@ -6983,8 +7038,11 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
                                 p = prefx + prefy * abs(evaluation[c][a])
                         except:
                             p = None
-
-                        d = evaluation[c][a] - evaluation[c][b]
+                        
+                        if criteria[c]['weight'] < Decimal('0'):
+                            d = evaluation[c][b] - evaluation[c][a]
+                        else:
+                            d = evaluation[c][a] - evaluation[c][b]
                             
                         counter = self._localConcordance(d,ind,wp,p)
                             
@@ -7184,7 +7242,7 @@ class UnanimousOutrankingDigraph(OutrankingDigraph):
                 veto = 0
                 for c in criteria:
                     if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):
-                        d = evaluation[c][a] - evaluation[c][b]
+                        #d = evaluation[c][a] - evaluation[c][b]
                         try:
                             indx = criteria[c]['thresholds']['ind'][0]
                             indy = criteria[c]['thresholds']['ind'][1]
@@ -7215,8 +7273,11 @@ class UnanimousOutrankingDigraph(OutrankingDigraph):
                         except:
                             p = None
                             
-                        d = evaluation[c][a] - evaluation[c][b]
-
+                        if criteria[c]['weight'] < Decimal('0'):    
+                            d = evaluation[c][b] - evaluation[c][a]
+                        else:
+                            d = evaluation[c][a] - evaluation[c][b]
+                            
                         lc0 = self._localConcordance(d,ind,wp,p)
                             
                         counter += lc0
@@ -8188,7 +8249,10 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph):
                     counter = Decimal('0.0')
                     for g in criteria:
                         if evaluation[g][a] != Decimal('-999') and evaluation[g][b] != Decimal('-999'):
-                            d = abs(evaluation[g][a] - evaluation[g][b])
+                            if criteria[g]['weight'] > Decimal('0'):
+                                d = abs(evaluation[g][a] - evaluation[g][b])
+                            else:
+                                d = abs(evaluation[g][b] - evaluation[g][a])
                             try:
                                 hx = criteria[g]['thresholds']['ind'][0]
                                 hy = criteria[g]['thresholds']['ind'][1]
@@ -8451,7 +8515,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         
         weightSquares = {}
         for g in criteriaList:
-            gWeight = self.criteria[g]['weight']
+            gWeight = abs(self.criteria[g]['weight'])
 ##            if Debug:
 ##                print(g,gWeight)
             weightSquares[g] = gWeight*gWeight
@@ -8888,7 +8952,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         m = len(criteriaList)
         weightSquares = {}
         for g in criteriaList:
-            gWeight = self.criteria[g]['weight']
+            gWeight = abs(self.criteria[g]['weight'])
 ##            if Debug:
 ##                print(g,gWeight)
             weightSquares[g] = gWeight*gWeight
@@ -9238,13 +9302,16 @@ if __name__ == "__main__":
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
     Threading = False
-    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=100,\
+    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
                                    numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
-                                   seed=100)
+                                             NegativeWeights=True,
+                                    negativeWeightProbability=0.25,
+                                   seed=101)
     
     g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,
                                   tempDir=None,nbrCores=8,Comments=True,Debug=False)
+    g1.showHTMLPairwiseComparison('a01','a02')
     #print(g1)
     #g1.saveXMCDA2RubisChoiceRecommendation()
     #g1.showRelationTable()

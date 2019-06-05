@@ -3087,7 +3087,7 @@ class BestDeterminedSpanningForest(RandomSpanningForest):
        neato -Tpng spanningTree.dot -o spanningTree.png
 
     .. image:: spanningTree.png
-       :alt: 7-cycle instance
+       :alt: Colored bes determined panning tree
        :width: 300 px
        :align: center
 

@@ -548,17 +548,14 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="BigOutrankingDigraph-convertWeight2Integer"><strong>convertWeight2Integer</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;Decimal&nbsp;format<br>
 to&nbsp;int&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="BigOutrankingDigraph-convertWeights2Negative"><strong>convertWeights2Negative</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
+<dl><dt><a name="BigOutrankingDigraph-convertWeights2Positive"><strong>convertWeights2Positive</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
 <dl><dt><a name="BigOutrankingDigraph-csvAllQuantiles"><strong>csvAllQuantiles</strong></a>(self, fileName='quantiles')</dt><dd><tt>save&nbsp;quantiles&nbsp;matrix&nbsp;criterionxaction&nbsp;in&nbsp;CSV&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraph-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
-
-<dl><dt><a name="BigOutrankingDigraph-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, argCriteriaList=None, argActionsList=None, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, ContentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
-actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.<br>
-&nbsp;<br>
-See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;method.</tt></dd></dl>
-
-<dl><dt><a name="BigOutrankingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, actions=None, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraph-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -589,7 +586,9 @@ Store&nbsp;the&nbsp;performance&nbsp;Tableau&nbsp;self&nbsp;Actions&nbsp;x&nbsp;
 <dl><dt><a name="BigOutrankingDigraph-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
 the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="BigOutrankingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="BigOutrankingDigraph-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
+
+<dl><dt><a name="BigOutrankingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
@@ -629,7 +628,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="BigOutrankingDigraph-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="BigOutrankingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="BigOutrankingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, fromIndex=None, toIndex=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraph-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
 
@@ -979,17 +978,14 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="BigOutrankingDigraphDev-convertWeight2Integer"><strong>convertWeight2Integer</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;Decimal&nbsp;format<br>
 to&nbsp;int&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="BigOutrankingDigraphDev-convertWeights2Negative"><strong>convertWeights2Negative</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
+<dl><dt><a name="BigOutrankingDigraphDev-convertWeights2Positive"><strong>convertWeights2Positive</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
 <dl><dt><a name="BigOutrankingDigraphDev-csvAllQuantiles"><strong>csvAllQuantiles</strong></a>(self, fileName='quantiles')</dt><dd><tt>save&nbsp;quantiles&nbsp;matrix&nbsp;criterionxaction&nbsp;in&nbsp;CSV&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraphDev-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
-
-<dl><dt><a name="BigOutrankingDigraphDev-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, argCriteriaList=None, argActionsList=None, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, ContentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
-actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.<br>
-&nbsp;<br>
-See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;method.</tt></dd></dl>
-
-<dl><dt><a name="BigOutrankingDigraphDev-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, actions=None, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraphDev-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -1020,7 +1016,9 @@ Store&nbsp;the&nbsp;performance&nbsp;Tableau&nbsp;self&nbsp;Actions&nbsp;x&nbsp;
 <dl><dt><a name="BigOutrankingDigraphDev-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
 the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="BigOutrankingDigraphDev-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="BigOutrankingDigraphDev-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
+
+<dl><dt><a name="BigOutrankingDigraphDev-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
@@ -1060,7 +1058,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="BigOutrankingDigraphDev-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="BigOutrankingDigraphDev-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="BigOutrankingDigraphDev-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, fromIndex=None, toIndex=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraphDev-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
 
@@ -1410,17 +1408,14 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="BigOutrankingDigraphMP-convertWeight2Integer"><strong>convertWeight2Integer</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;Decimal&nbsp;format<br>
 to&nbsp;int&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="BigOutrankingDigraphMP-convertWeights2Negative"><strong>convertWeights2Negative</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
+<dl><dt><a name="BigOutrankingDigraphMP-convertWeights2Positive"><strong>convertWeights2Positive</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
 <dl><dt><a name="BigOutrankingDigraphMP-csvAllQuantiles"><strong>csvAllQuantiles</strong></a>(self, fileName='quantiles')</dt><dd><tt>save&nbsp;quantiles&nbsp;matrix&nbsp;criterionxaction&nbsp;in&nbsp;CSV&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraphMP-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
-
-<dl><dt><a name="BigOutrankingDigraphMP-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, argCriteriaList=None, argActionsList=None, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, ContentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
-actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.<br>
-&nbsp;<br>
-See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;method.</tt></dd></dl>
-
-<dl><dt><a name="BigOutrankingDigraphMP-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, actions=None, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraphMP-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -1451,7 +1446,9 @@ Store&nbsp;the&nbsp;performance&nbsp;Tableau&nbsp;self&nbsp;Actions&nbsp;x&nbsp;
 <dl><dt><a name="BigOutrankingDigraphMP-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
 the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="BigOutrankingDigraphMP-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="BigOutrankingDigraphMP-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
+
+<dl><dt><a name="BigOutrankingDigraphMP-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
@@ -1491,7 +1488,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="BigOutrankingDigraphMP-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="BigOutrankingDigraphMP-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="BigOutrankingDigraphMP-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, fromIndex=None, toIndex=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraphMP-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
 

@@ -99,16 +99,17 @@ Example&nbsp;Python&nbsp;session:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;#&nbsp;rating&nbsp;the&nbsp;new&nbsp;set&nbsp;of&nbsp;decision&nbsp;actions&nbsp;after<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;#&nbsp;updating&nbsp;the&nbsp;historical&nbsp;performance&nbsp;quantiles<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;pq.<a href="#NormedQuantilesRatingDigraph-updateQuantiles">updateQuantiles</a>(newActions,historySize=None)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;nqr&nbsp;=&nbsp;<a href="#NormedQuantilesRatingDigraph">NormedQuantilesRatingDigraph</a>(pq,newActions,Debug=True)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;nqr&nbsp;=&nbsp;<a href="#NormedQuantilesRatingDigraph">NormedQuantilesRatingDigraph</a>(pq,newActions)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;#&nbsp;inspecting&nbsp;the&nbsp;rating&nbsp;result<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;nqr.<a href="#NormedQuantilesRatingDigraph-showQuantilesRating">showQuantilesRating</a>()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*--------&nbsp;Normed&nbsp;quantiles&nbsp;rating&nbsp;result&nbsp;---------<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0.50&nbsp;-&nbsp;0.60[&nbsp;['a1',&nbsp;'a7',&nbsp;'a3',&nbsp;'a10',&nbsp;'a2']<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0.40&nbsp;-&nbsp;0.50[&nbsp;['a6',&nbsp;'a9',&nbsp;'a8']<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0.20&nbsp;-&nbsp;0.30[&nbsp;['a4',&nbsp;'a5']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*--------&nbsp;Normed&nbsp;quantiles&nbsp;rating&nbsp;result&nbsp;---------<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[0.60&nbsp;-&nbsp;0.70[&nbsp;['a01']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[0.50&nbsp;-&nbsp;0.60[&nbsp;['a07',&nbsp;'a10',&nbsp;'a02',&nbsp;'a08',&nbsp;'a09']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[0.40&nbsp;-&nbsp;0.50[&nbsp;['a03',&nbsp;'a06',&nbsp;'a05']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[0.30&nbsp;-&nbsp;0.40[&nbsp;['a04']<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;nqr.<a href="#NormedQuantilesRatingDigraph-showHTMLRatingHeatmap">showHTMLRatingHeatmap</a>(pageTitle='Heatmap&nbsp;of&nbsp;Quantiles&nbsp;Rating')<br>
 &nbsp;<br>
-..&nbsp;image::&nbsp;exampleIncRatDigraph.png<br>
+..&nbsp;image::&nbsp;heatMap3.png<br>
 &nbsp;&nbsp;&nbsp;&nbsp;:alt:&nbsp;usage&nbsp;example&nbsp;of&nbsp;Normed&nbsp;Quantiles&nbsp;Rating&nbsp;Digraph<br>
 &nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;500&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
@@ -152,28 +153,30 @@ and&nbsp;x&nbsp;does&nbsp;not&nbsp;outrank&nbsp;the&nbsp;category&nbsp;high&nbsp
 If&nbsp;LowerClosed&nbsp;is&nbsp;False,&nbsp;ie&nbsp;UPPERCLosed&nbsp;is&nbsp;True,&nbsp;the&nbsp;category<br>
 low&nbsp;limit&nbsp;does&nbsp;not&nbsp;outrank&nbsp;x&nbsp;and&nbsp;the&nbsp;category&nbsp;high&nbsp;limit&nbsp;does&nbsp;outrank&nbsp;x.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-exportRatingGraphViz"><strong>exportRatingGraphViz</strong></a>(self, fileName=None, relation=None, direction='best', Comments=True, graphType='png', graphSize='7,7', fontSize=10)</dt><dd><tt>The&nbsp;rating&nbsp;drawing&nbsp;is&nbsp;using&nbsp;the&nbsp;weakOrders.WeakOrder&nbsp;<a href="#NormedQuantilesRatingDigraph-exportGraphViz">exportGraphViz</a>()&nbsp;method&nbsp;for<br>
+<dl><dt><a name="NormedQuantilesRatingDigraph-exportRatingGraphViz"><strong>exportRatingGraphViz</strong></a>(self, fileName=None, relation=None, direction='best', Comments=True, graphType='png', graphSize='7,7', fontSize=10)</dt><dd><tt>The&nbsp;rating&nbsp;drawing&nbsp;is&nbsp;using&nbsp;the&nbsp;:py:func:`weakOrders.WeakOrder.exportGraphViz`&nbsp;method&nbsp;for<br>
 drawing&nbsp;oriented&nbsp;Hasse&nbsp;diagrams&nbsp;of&nbsp;weak&nbsp;orderings,&nbsp;ie&nbsp;the&nbsp;negation<br>
 of&nbsp;the&nbsp;corresponding&nbsp;preorder&nbsp;relation.<br>
 &nbsp;<br>
 Continuing&nbsp;the&nbsp;previous&nbsp;Python&nbsp;session:<br>
-&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;nqr.<a href="#NormedQuantilesRatingDigraph-showQuantilesRating">showQuantilesRating</a>()<br>
-&nbsp;&nbsp;&nbsp;*--------&nbsp;Quantile&nbsp;sorting&nbsp;result&nbsp;---------<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[0.40&nbsp;-&nbsp;0.60[&nbsp;['a1',&nbsp;'a2',&nbsp;'a3']<br>
-&nbsp;&nbsp;&nbsp;&nbsp;[0.20&nbsp;-&nbsp;0.40[&nbsp;['a4',&nbsp;'a5']<br>
-&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;nqr.<a href="#NormedQuantilesRatingDigraph-exportRatingGraphViz">exportRatingGraphViz</a>(Comments=False)<br>
-&nbsp;&nbsp;&nbsp;*----&nbsp;exporting&nbsp;a&nbsp;dot&nbsp;file&nbsp;for&nbsp;GraphViz&nbsp;tools&nbsp;---------*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Exporting&nbsp;to&nbsp;quantilesRatingDigraph.dot<br>
-&nbsp;&nbsp;&nbsp;&nbsp;dot&nbsp;-Grankdir=TB&nbsp;-Tpng&nbsp;quantilesRatingDigraph.dot&nbsp;-o&nbsp;quantilesRatingDigraph.png<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;nqr.<a href="#NormedQuantilesRatingDigraph-showQuantilesRating">showQuantilesRating</a>()<br>
+*--------&nbsp;Quantile&nbsp;sorting&nbsp;result&nbsp;---------<br>
+[0.50&nbsp;-&nbsp;0.75[&nbsp;['a01']<br>
+[0.25&nbsp;-&nbsp;0.50[&nbsp;['a07',&nbsp;'a02',&nbsp;'a10',&nbsp;'a06',&nbsp;'a03',&nbsp;'a08',&nbsp;'a09',&nbsp;'a04']<br>
+[0.00&nbsp;-&nbsp;0.25[&nbsp;['a05']<br>
+&gt;&gt;&gt;&nbsp;nqr.<a href="#NormedQuantilesRatingDigraph-exportRatingGraphViz">exportRatingGraphViz</a>('quantilesRatingDigraph',Comments=False)<br>
+*----&nbsp;exporting&nbsp;a&nbsp;dot&nbsp;file&nbsp;for&nbsp;GraphViz&nbsp;tools&nbsp;---------*<br>
+Exporting&nbsp;to&nbsp;quantilesRatingDigraph.dot<br>
+dot&nbsp;-Grankdir=TB&nbsp;-Tpng&nbsp;quantilesRatingDigraph.dot&nbsp;-o&nbsp;quantilesRatingDigraph.png<br>
 &nbsp;<br>
 ..&nbsp;image::&nbsp;quantilesRatingDigraph.png<br>
 &nbsp;&nbsp;&nbsp;&nbsp;:alt:&nbsp;usage&nbsp;example&nbsp;of&nbsp;Normed&nbsp;Quantiles&nbsp;Rating&nbsp;Digraph<br>
-&nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;200&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>
 &nbsp;<br>
 ..&nbsp;warning::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;graphviz,&nbsp;nodes&nbsp;or&nbsp;action&nbsp;keys&nbsp;of&nbsp;the&nbsp;digraph&nbsp;must&nbsp;start&nbsp;with&nbsp;a&nbsp;letter<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;graphviz,&nbsp;nodes'&nbsp;or&nbsp;actions'&nbsp;keys&nbsp;of&nbsp;the&nbsp;digraph&nbsp;must&nbsp;start&nbsp;with&nbsp;a&nbsp;letter<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;may&nbsp;not&nbsp;contain&nbsp;special&nbsp;characters&nbsp;like&nbsp;'-'&nbsp;or&nbsp;'_'.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-htmlRatingHeatmap"><strong>htmlRatingHeatmap</strong></a>(self, argCriteriaList=None, argActionsList=None, quantiles=None, ndigits=2, contentCentered=True, colorLevels=None, pageTitle='Rating Heatmap', Correlations=False, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
@@ -209,14 +212,13 @@ see&nbsp;:py:meth:`perfTabs.showHTMLPerformanceHeatMap`&nbsp;method.<br>
 Suppose&nbsp;we&nbsp;observe&nbsp;the&nbsp;following&nbsp;rating&nbsp;result:<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;nqr.<a href="#NormedQuantilesRatingDigraph-showQuantilesRating">showQuantilesRating</a>()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0.50&nbsp;-&nbsp;0.75[&nbsp;['a1008',&nbsp;'a1006',&nbsp;'a1005',&nbsp;'a1001',&nbsp;'a1003',&nbsp;'a1010']<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0.25&nbsp;-&nbsp;0.50[&nbsp;['a1002']<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0.00&nbsp;-&nbsp;0.25[&nbsp;['a1004',&nbsp;'a1009',&nbsp;'a1007']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[0.50&nbsp;-&nbsp;0.75[&nbsp;['a1005',&nbsp;'a1010',&nbsp;'a1008',&nbsp;'a1002',&nbsp;'a1006']<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[0.25&nbsp;-&nbsp;0.50[&nbsp;['a1003',&nbsp;'a1001',&nbsp;'a1007',&nbsp;'a1004',&nbsp;'a1009']<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;nqr.<a href="#NormedQuantilesRatingDigraph-showHTMLRatingHeatmap">showHTMLRatingHeatmap</a>(pageTitle='Heat&nbsp;map&nbsp;of&nbsp;the&nbsp;ratings',<br>
 &nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Correlations=True,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colorLevels&nbsp;=&nbsp;5)<br>
 &nbsp;<br>
-..&nbsp;image::&nbsp;exampleIncRatDigraphTut.png<br>
+..&nbsp;image::&nbsp;heatMap1.png<br>
 &nbsp;&nbsp;&nbsp;&nbsp;:alt:&nbsp;usage&nbsp;example&nbsp;of&nbsp;Normed&nbsp;Quantiles&nbsp;Rating&nbsp;Digraph<br>
 &nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;550&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
@@ -404,14 +406,19 @@ and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-showCriterionRelationTable"><strong>showCriterionRelationTable</strong></a>(self, criterion, actionsSubset=None)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLPairwiseComparison"><strong>showHTMLPairwiseComparison</strong></a>(self, a, b, fileName=None)</dt><dd><tt>Exporting&nbsp;the&nbsp;pairwise&nbsp;comparison&nbsp;table&nbsp;of&nbsp;actions&nbsp;a&nbsp;and&nbsp;b&nbsp;in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;file&nbsp;name&nbsp;may&nbsp;be&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLPairwiseOutrankings"><strong>showHTMLPairwiseOutrankings</strong></a>(self, a, b, fileName=None)</dt><dd><tt>Exporting&nbsp;the&nbsp;pairwise&nbsp;outrankings&nbsp;table&nbsp;of&nbsp;actions&nbsp;a&nbsp;and&nbsp;b<br>
+in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;file&nbsp;name&nbsp;may&nbsp;be&nbsp;provided.</tt></dd></dl>
+
 <dl><dt><a name="NormedQuantilesRatingDigraph-showMarginalVersusGlobalOutrankingCorrelation"><strong>showMarginalVersusGlobalOutrankingCorrelation</strong></a>(self, Sorted=True, Threading=False, nbrOfCPUs=None, Comments=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;computeCriterionCorrelation&nbsp;results.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+<dl><dt><a name="NormedQuantilesRatingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-showPairwiseComparisonsDistributions"><strong>showPairwiseComparisonsDistributions</strong></a>(self)</dt><dd><tt>show&nbsp;the&nbsp;lt,leq,&nbsp;eq,&nbsp;geq,&nbsp;gt&nbsp;distributions&nbsp;for&nbsp;all&nbsp;pairs</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-showPairwiseComparisonsDistributions"><strong>showPairwiseComparisonsDistributions</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;lt,leq,&nbsp;eq,&nbsp;geq,&nbsp;gt&nbsp;distributions&nbsp;for&nbsp;all&nbsp;pairs</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-showPairwiseOutrankings"><strong>showPairwiseOutrankings</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-showPairwiseOutrankings"><strong>showPairwiseOutrankings</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;outrankings&nbsp;table&nbsp;for&nbsp;actions&nbsp;*a*&nbsp;and&nbsp;*b*.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
@@ -617,9 +624,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -1034,10 +1041,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="NormedQuantilesRatingDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="NormedQuantilesRatingDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -1263,7 +1266,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#NormedQuantilesRatingDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -1484,7 +1487,7 @@ on&nbsp;each&nbsp;criteria.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-showLimitingQuantiles"><strong>showLimitingQuantiles</strong></a>(self, ByObjectives=False, Sorted=False, ndigits=2)</dt><dd><tt>Prints&nbsp;the&nbsp;performance&nbsp;quantile&nbsp;limits&nbsp;in&nbsp;table&nbsp;format:&nbsp;criteria&nbsp;x&nbsp;limits.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-updateQuantiles"><strong>updateQuantiles</strong></a>(self, newData, historySize=None)</dt><dd><tt>Update&nbsp;the&nbsp;<a href="performanceQuantiles.html#PerformanceQuantiles">PerformanceQuantiles</a>&nbsp;with&nbsp;a&nbsp;set&nbsp;of&nbsp;new&nbsp;random&nbsp;decision&nbsp;actions.<br>
+<dl><dt><a name="NormedQuantilesRatingDigraph-updateQuantiles"><strong>updateQuantiles</strong></a>(self, newData, historySize=None, Debug=False)</dt><dd><tt>Update&nbsp;the&nbsp;<a href="performanceQuantiles.html#PerformanceQuantiles">PerformanceQuantiles</a>&nbsp;with&nbsp;a&nbsp;set&nbsp;of&nbsp;new&nbsp;random&nbsp;decision&nbsp;actions.<br>
 Parameter&nbsp;*historysize*&nbsp;allows&nbsp;to&nbsp;take&nbsp;more&nbsp;or&nbsp;less&nbsp;into&nbsp;account&nbsp;the&nbsp;historical&nbsp;situtaion.<br>
 For&nbsp;instance,&nbsp;*historySize=0*&nbsp;does&nbsp;not&nbsp;take&nbsp;into&nbsp;account&nbsp;at&nbsp;all&nbsp;any&nbsp;past&nbsp;observations.<br>
 Otherwise,&nbsp;if&nbsp;*historySize=None*&nbsp;(the&nbsp;default&nbsp;setting),&nbsp;the&nbsp;new&nbsp;observations&nbsp;become&nbsp;less&nbsp;and&nbsp;less<br>
@@ -1572,17 +1575,14 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="NormedQuantilesRatingDigraph-convertWeight2Integer"><strong>convertWeight2Integer</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;Decimal&nbsp;format<br>
 to&nbsp;int&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="NormedQuantilesRatingDigraph-convertWeights2Negative"><strong>convertWeights2Negative</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
+<dl><dt><a name="NormedQuantilesRatingDigraph-convertWeights2Positive"><strong>convertWeights2Positive</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
 <dl><dt><a name="NormedQuantilesRatingDigraph-csvAllQuantiles"><strong>csvAllQuantiles</strong></a>(self, fileName='quantiles')</dt><dd><tt>save&nbsp;quantiles&nbsp;matrix&nbsp;criterionxaction&nbsp;in&nbsp;CSV&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
-
-<dl><dt><a name="NormedQuantilesRatingDigraph-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, argCriteriaList=None, argActionsList=None, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, ContentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
-actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.<br>
-&nbsp;<br>
-See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;method.</tt></dd></dl>
-
-<dl><dt><a name="NormedQuantilesRatingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, actions=None, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -1600,7 +1600,9 @@ See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;
 <dl><dt><a name="NormedQuantilesRatingDigraph-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
 the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
+
+<dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
@@ -1640,7 +1642,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="NormedQuantilesRatingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, fromIndex=None, toIndex=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="NormedQuantilesRatingDigraph-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
 
@@ -1900,14 +1902,19 @@ and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showCriterionRelationTable"><strong>showCriterionRelationTable</strong></a>(self, criterion, actionsSubset=None)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLPairwiseComparison"><strong>showHTMLPairwiseComparison</strong></a>(self, a, b, fileName=None)</dt><dd><tt>Exporting&nbsp;the&nbsp;pairwise&nbsp;comparison&nbsp;table&nbsp;of&nbsp;actions&nbsp;a&nbsp;and&nbsp;b&nbsp;in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;file&nbsp;name&nbsp;may&nbsp;be&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLPairwiseOutrankings"><strong>showHTMLPairwiseOutrankings</strong></a>(self, a, b, fileName=None)</dt><dd><tt>Exporting&nbsp;the&nbsp;pairwise&nbsp;outrankings&nbsp;table&nbsp;of&nbsp;actions&nbsp;a&nbsp;and&nbsp;b<br>
+in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;file&nbsp;name&nbsp;may&nbsp;be&nbsp;provided.</tt></dd></dl>
+
 <dl><dt><a name="QuantilesSortingDigraph-showMarginalVersusGlobalOutrankingCorrelation"><strong>showMarginalVersusGlobalOutrankingCorrelation</strong></a>(self, Sorted=True, Threading=False, nbrOfCPUs=None, Comments=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;computeCriterionCorrelation&nbsp;results.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+<dl><dt><a name="QuantilesSortingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showPairwiseComparisonsDistributions"><strong>showPairwiseComparisonsDistributions</strong></a>(self)</dt><dd><tt>show&nbsp;the&nbsp;lt,leq,&nbsp;eq,&nbsp;geq,&nbsp;gt&nbsp;distributions&nbsp;for&nbsp;all&nbsp;pairs</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showPairwiseComparisonsDistributions"><strong>showPairwiseComparisonsDistributions</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;lt,leq,&nbsp;eq,&nbsp;geq,&nbsp;gt&nbsp;distributions&nbsp;for&nbsp;all&nbsp;pairs</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showPairwiseOutrankings"><strong>showPairwiseOutrankings</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showPairwiseOutrankings"><strong>showPairwiseOutrankings</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;outrankings&nbsp;table&nbsp;for&nbsp;actions&nbsp;*a*&nbsp;and&nbsp;*b*.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
@@ -2113,9 +2120,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="QuantilesSortingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="QuantilesSortingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -2530,10 +2537,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="QuantilesSortingDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="QuantilesSortingDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -2759,7 +2762,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#QuantilesSortingDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -3049,17 +3052,14 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="QuantilesSortingDigraph-convertWeight2Integer"><strong>convertWeight2Integer</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;Decimal&nbsp;format<br>
 to&nbsp;int&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="QuantilesSortingDigraph-convertWeights2Negative"><strong>convertWeights2Negative</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-convertWeights2Positive"><strong>convertWeights2Positive</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
 <dl><dt><a name="QuantilesSortingDigraph-csvAllQuantiles"><strong>csvAllQuantiles</strong></a>(self, fileName='quantiles')</dt><dd><tt>save&nbsp;quantiles&nbsp;matrix&nbsp;criterionxaction&nbsp;in&nbsp;CSV&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, argCriteriaList=None, argActionsList=None, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, ContentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
-actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.<br>
-&nbsp;<br>
-See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;method.</tt></dd></dl>
-
-<dl><dt><a name="QuantilesSortingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, actions=None, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -3079,7 +3079,9 @@ See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;
 <dl><dt><a name="QuantilesSortingDigraph-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
 the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
+
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
@@ -3119,7 +3121,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="QuantilesSortingDigraph-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="QuantilesSortingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="QuantilesSortingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, fromIndex=None, toIndex=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="QuantilesSortingDigraph-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
 
@@ -3403,14 +3405,19 @@ and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showCriterionRelationTable"><strong>showCriterionRelationTable</strong></a>(self, criterion, actionsSubset=None)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="SortingDigraph-showHTMLPairwiseComparison"><strong>showHTMLPairwiseComparison</strong></a>(self, a, b, fileName=None)</dt><dd><tt>Exporting&nbsp;the&nbsp;pairwise&nbsp;comparison&nbsp;table&nbsp;of&nbsp;actions&nbsp;a&nbsp;and&nbsp;b&nbsp;in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;file&nbsp;name&nbsp;may&nbsp;be&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-showHTMLPairwiseOutrankings"><strong>showHTMLPairwiseOutrankings</strong></a>(self, a, b, fileName=None)</dt><dd><tt>Exporting&nbsp;the&nbsp;pairwise&nbsp;outrankings&nbsp;table&nbsp;of&nbsp;actions&nbsp;a&nbsp;and&nbsp;b<br>
+in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;file&nbsp;name&nbsp;may&nbsp;be&nbsp;provided.</tt></dd></dl>
+
 <dl><dt><a name="SortingDigraph-showMarginalVersusGlobalOutrankingCorrelation"><strong>showMarginalVersusGlobalOutrankingCorrelation</strong></a>(self, Sorted=True, Threading=False, nbrOfCPUs=None, Comments=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;computeCriterionCorrelation&nbsp;results.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+<dl><dt><a name="SortingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showPairwiseComparisonsDistributions"><strong>showPairwiseComparisonsDistributions</strong></a>(self)</dt><dd><tt>show&nbsp;the&nbsp;lt,leq,&nbsp;eq,&nbsp;geq,&nbsp;gt&nbsp;distributions&nbsp;for&nbsp;all&nbsp;pairs</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-showPairwiseComparisonsDistributions"><strong>showPairwiseComparisonsDistributions</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;lt,leq,&nbsp;eq,&nbsp;geq,&nbsp;gt&nbsp;distributions&nbsp;for&nbsp;all&nbsp;pairs</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showPairwiseOutrankings"><strong>showPairwiseOutrankings</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt></dl>
+<dl><dt><a name="SortingDigraph-showPairwiseOutrankings"><strong>showPairwiseOutrankings</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;outrankings&nbsp;table&nbsp;for&nbsp;actions&nbsp;*a*&nbsp;and&nbsp;*b*.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
@@ -3616,9 +3623,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="SortingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="SortingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -4033,10 +4040,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="SortingDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="SortingDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="SortingDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -4262,7 +4265,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#SortingDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -4552,17 +4555,14 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="SortingDigraph-convertWeight2Integer"><strong>convertWeight2Integer</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;Decimal&nbsp;format<br>
 to&nbsp;int&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="SortingDigraph-convertWeights2Negative"><strong>convertWeights2Negative</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-convertWeights2Positive"><strong>convertWeights2Positive</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
 <dl><dt><a name="SortingDigraph-csvAllQuantiles"><strong>csvAllQuantiles</strong></a>(self, fileName='quantiles')</dt><dd><tt>save&nbsp;quantiles&nbsp;matrix&nbsp;criterionxaction&nbsp;in&nbsp;CSV&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
-
-<dl><dt><a name="SortingDigraph-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, argCriteriaList=None, argActionsList=None, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, ContentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
-actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.<br>
-&nbsp;<br>
-See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;method.</tt></dd></dl>
-
-<dl><dt><a name="SortingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, actions=None, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -4582,7 +4582,9 @@ See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;
 <dl><dt><a name="SortingDigraph-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
 the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="SortingDigraph-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
+
+<dl><dt><a name="SortingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
@@ -4622,7 +4624,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="SortingDigraph-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="SortingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="SortingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, fromIndex=None, toIndex=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="SortingDigraph-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
 

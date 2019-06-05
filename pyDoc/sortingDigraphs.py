@@ -3091,16 +3091,17 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         >>> # rating the new set of decision actions after
         >>> # updating the historical performance quantiles
         >>> pq.updateQuantiles(newActions,historySize=None)
-        >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,Debug=True)
+        >>> nqr = NormedQuantilesRatingDigraph(pq,newActions)
         >>> # inspecting the rating result
         >>> nqr.showQuantilesRating()
-         *-------- Normed quantiles rating result ---------
-         [0.50 - 0.60[ ['a1', 'a7', 'a3', 'a10', 'a2']
-         [0.40 - 0.50[ ['a6', 'a9', 'a8']
-         [0.20 - 0.30[ ['a4', 'a5']
+        *-------- Normed quantiles rating result ---------
+        [0.60 - 0.70[ ['a01']
+        [0.50 - 0.60[ ['a07', 'a10', 'a02', 'a08', 'a09']
+        [0.40 - 0.50[ ['a03', 'a06', 'a05']
+        [0.30 - 0.40[ ['a04']
         >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating')
 
-    .. image:: exampleIncRatDigraph.png
+    .. image:: heatMap3.png
         :alt: usage example of Normed Quantiles Rating Digraph
         :width: 500 px
         :align: center
@@ -3125,6 +3126,9 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         from time import time
         from decimal import Decimal
 
+        # set Debug status
+##        if Debug:
+##            self.Debug = Debug
         # import the performance quantiles
         self.runTimes = {}
         tt = time()
@@ -3172,6 +3176,10 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
         # instantiate rating categories
         t0 = time()
+
+        # convertWeights to positive
+##        from perfTabs import PerformanceTableau
+##        PerformanceTableau.convertWeights2Positive(self)        
 
         # check if new quantile limits should be interpolated
         if quantiles != None:
@@ -3256,10 +3264,10 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             else:
                 cKey = 'M'+c
             if LowerClosed:
-                profiles[cKey] = {'category': c, 'name': 'categorical low limits',\
+                profiles[cKey] = {'category': c, 'name': categories[c]['lowLimit'] + ' -',\
                                   'comment': 'Inferior or equal limits for category membership assessment'}
             else:
-                profiles[cKey] = {'category': c, 'name': 'categorical high limits',\
+                profiles[cKey] = {'category': c, 'name': '- ' + categories[c]['highLimit'],\
                                   'comment': 'Lower or equal limits for category membership assessment'}
             for g in criteria:
                 if LowerClosed:
@@ -3752,28 +3760,30 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                              graphType='png',graphSize='7,7',\
                              fontSize=10):
         """
-        The rating drawing is using the weakOrders.WeakOrder exportGraphViz() method for
+        The rating drawing is using the :py:func:`weakOrders.WeakOrder.exportGraphViz` method for
         drawing oriented Hasse diagrams of weak orderings, ie the negation
         of the corresponding preorder relation.
 
         Continuing the previous Python session:
-           >>> nqr.showQuantilesRating()
-           *-------- Quantile sorting result ---------
-            [0.40 - 0.60[ ['a1', 'a2', 'a3']
-            [0.20 - 0.40[ ['a4', 'a5']
-           >>> nqr.exportRatingGraphViz(Comments=False)
-           *---- exporting a dot file for GraphViz tools ---------*
-            Exporting to quantilesRatingDigraph.dot
-            dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
+
+        >>> nqr.showQuantilesRating()
+        *-------- Quantile sorting result ---------
+        [0.50 - 0.75[ ['a01']
+        [0.25 - 0.50[ ['a07', 'a02', 'a10', 'a06', 'a03', 'a08', 'a09', 'a04']
+        [0.00 - 0.25[ ['a05']
+        >>> nqr.exportRatingGraphViz('quantilesRatingDigraph',Comments=False)
+        *---- exporting a dot file for GraphViz tools ---------*
+        Exporting to quantilesRatingDigraph.dot
+        dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
 
         .. image:: quantilesRatingDigraph.png
             :alt: usage example of Normed Quantiles Rating Digraph
-            :width: 200 px
+            :width: 400 px
             :align: center
         
         .. warning::
 
-             For graphviz, nodes or action keys of the digraph must start with a letter
+             For graphviz, nodes' or actions' keys of the digraph must start with a letter
              and may not contain special characters like '-' or '_'.
              
         """
@@ -3896,8 +3906,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             else:
                 criteriaList = list(criteria.keys())
                 criteriaList.sort()
-                criteriaWeightsList = [(-criteria[g]['weight'],g) for g in criteriaList]
-                criteriaWeightsList.sort(reverse=False)
+                criteriaWeightsList = [(abs(criteria[g]['weight']),g) for g in criteriaList]
+                criteriaWeightsList.sort(reverse=True)
                 criteriaList = [g[1] for g in criteriaWeightsList]
                 criteriaCorrelation = None
         else:
@@ -3955,7 +3965,10 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         for x in actionsList:
             if x in profiles:
                 xcat = profiles[x]['category']
-                xName = categories[xcat]['name']
+                if self.LowerClosed:
+                    xName = categories[xcat]['lowLimit'] + ' -'
+                else:
+                    xName = '- ' + categories[xcat]['highLimit']
             else:
                 try:
                     xName = self.actions[x]['shortName']
@@ -3987,7 +4000,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         html += '</tr>\n'
         html += '</table>\n'
         if criteriaCorrelation != None:
-            html += '<i>(*) tau: Ordinal (Kendall) correlation between marginal criterion and global ranking relation.</i><br/>\n'
+            html += '<i>(*) tau: Ordinal (Kendall) correlation between</i><br/>'
+            html += '<i>marginal criterion and global ranking relation.</i><br/>\n'
 ##        if rankCorrelation != None:
 ##            html += '<i>Ordinal (Kendall) correlation between global ranking and outranking relation: %.2f.</i>' % (rankCorrelation['correlation'])
         html += '</body></html>'
@@ -4072,14 +4086,13 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         Suppose we observe the following rating result:
         
             >>> nqr.showQuantilesRating()
-             [0.50 - 0.75[ ['a1008', 'a1006', 'a1005', 'a1001', 'a1003', 'a1010']
-             [0.25 - 0.50[ ['a1002']
-             [0.00 - 0.25[ ['a1004', 'a1009', 'a1007']
+            [0.50 - 0.75[ ['a1005', 'a1010', 'a1008', 'a1002', 'a1006']
+            [0.25 - 0.50[ ['a1003', 'a1001', 'a1007', 'a1004', 'a1009']
             >>> nqr.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings',
             ...                           Correlations=True,
             ...                           colorLevels = 5)
 
-        .. image:: exampleIncRatDigraphTut.png
+        .. image:: heatMap1.png
             :alt: usage example of Normed Quantiles Rating Digraph
             :width: 550 px
             :align: center
@@ -4224,7 +4237,7 @@ if __name__ == "__main__":
     ****************************************************
     * Python sortingDigraphs module                    *
     * depends on BipolarOutrankingDigraph and          *
-    * $Revision: 2959 $                                 *
+    * $Revision: 3124 $                                 *
     * Copyright (C) 2010 Raymond Bisdorff              *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
@@ -4438,7 +4451,7 @@ if __name__ == "__main__":
 
     print('*************************************')
     print('* R.B. december 2010                *')
-    print('* $Revision: 2959 $                  *')
+    print('* $Revision: 3124 $                  *')
     print('*************************************')
 
 #############################

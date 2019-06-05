@@ -321,29 +321,97 @@ class RandomPerformanceTableau(PerformanceTableau):
 
 class RandomPerformanceGenerator(object):
     """
-    Wrapper for generating new decision actions with random evaluation for a given RandomPerformanceTableau instance.
+    Generic wrapper for generating new decision actions or performance tableaux
+    with random evaluations generated with a given performance tableau model of type:
+    RandomPerformanceTableau, RandomCBPerformanceTableau,
+    or Random3ObjectivesPerformanceTableau.
+
+    The return format of generated new set of random actions is schown below.
+    This return may be directly feeded to the PerformanceQuantiles.updateQuantiles() method.
+
+    >>> from randomPerfTabs import *
+    >>> t = RandomPerformanceTableau(seed=100)
+    >>> t
+    *------- PerformanceTableau instance description ------*
+    Instance class   : RandomPerformanceTableau
+    Seed             : 100
+    Instance name    : randomperftab
+    # Actions        : 13
+    # Criteria       : 7
+    Attributes       : [
+    'randomSeed', 'name', 'BigData', 'sumWeights', 'digits', 'commonScale',
+    'commonMode', 'missingDataProbability', 'actions', 'criteria',
+    'evaluation', 'weightPreorder']
+    >>> rpg = RandomPerformanceGenerator(t,seed= 100)
+    >>> newActions = rpg.randomActions(2)
+    >>> print(newActions)
+    {'actions': OrderedDict([
+    ('a14', {'shortName': 'a14',
+             'name': 'random decision action',
+             'comment': 'RandomPerformanceGenerator'}),
+    ('a15', {'shortName': 'a15',
+             'name': 'random decision action',
+             'comment': 'RandomPerformanceGenerator'})]),
+    'evaluation': {
+    'g1': {'a14': Decimal('15.17'), 'a15': Decimal('80.87')},
+    'g2': {'a14': Decimal('44.51'), 'a15': Decimal('62.74')},
+    'g3': {'a14': Decimal('57.87'), 'a15': Decimal('64.24')},
+    'g4': {'a14': Decimal('58.0'), 'a15': Decimal('26.99')},
+    'g5': {'a14': Decimal('24.22'), 'a15': Decimal('21.18')},
+    'g6': {'a14': Decimal('29.1'), 'a15': Decimal('73.09')},
+    'g7': {'a14': Decimal('96.58'), 'a15': Decimal('-999')}}}
+    >>> newTableau = rpg.randomPerformanceTableau(2)
+    >>> newTab.showPerformanceTableau()
+    *----  performance tableau -----*
+    criteria | weights | 'a17'   'a18'   
+    ---------|-----------------------------------------
+       'g1'  |   1   |   55.80   22.03  
+       'g2'  |   1   |   57.78   33.83  
+       'g3'  |   1   |   80.54   31.83  
+       'g4'  |   1   |   31.15   69.98  
+       'g5'  |   1   |   46.25   48.80  
+       'g6'  |   1   |   42.24   82.88  
+       'g7'  |   1   |   57.31   41.66  
     
     """
     def __init__(self,argPerfTab,actionNamePrefix='a',\
                  instanceCounter=None,seed=None):
-        from randomPerfTabs import RandomStdPerformanceGenerator,\
-                                  RandomCBPerformanceGenerator,\
-                                  Random3ObjectivesPerformanceGenerator
+        from randomPerfTabs import _RandomStdPerformanceGenerator,\
+                                  _RandomCBPerformanceGenerator,\
+                                  _Random3ObjectivesPerformanceGenerator
+        from performanceQuantiles import PerformanceQuantiles
         if argPerfTab.__class__ == RandomPerformanceTableau:
-            self.__class__ = RandomStdPerformanceGenerator
-            return RandomStdPerformanceGenerator.__init__(self,argPerfTab,\
+            self.__class__ = _RandomStdPerformanceGenerator
+            return _RandomStdPerformanceGenerator.__init__(self,argPerfTab,\
                             actionNamePrefix=actionNamePrefix,\
                             instanceCounter=instanceCounter,seed=seed)
         elif argPerfTab.__class__ == RandomCBPerformanceTableau:
-            self.__class__ = RandomCBPerformanceGenerator
-            return RandomCBPerformanceGenerator.__init__(self,argPerfTab,\
+            self.__class__ = _RandomCBPerformanceGenerator
+            return _RandomCBPerformanceGenerator.__init__(self,argPerfTab,\
                             actionNamePrefix=actionNamePrefix,\
                             instanceCounter=instanceCounter,seed=seed)
         elif argPerfTab.__class__ == Random3ObjectivesPerformanceTableau:
-            self.__class__ = Random3ObjectivesPerformanceGenerator
-            return Random3ObjectivesPerformanceGenerator.__init__(self,argPerfTab,\
+            self.__class__ = _Random3ObjectivesPerformanceGenerator
+            return _Random3ObjectivesPerformanceGenerator.__init__(self,argPerfTab,\
                             actionNamePrefix=actionNamePrefix,\
-                            instanceCounter=instanceCounter,seed=seed)    
+                            instanceCounter=instanceCounter,seed=seed)
+        elif argPerfTab.__class__ == PerformanceQuantiles:
+            if argPerfTab.perfTabType == 'RandomPerformanceTableau':
+                self.__class__ = _RandomStdPerformanceGenerator
+                return _RandomStdPerformanceGenerator.__init__(self,argPerfTab,\
+                            actionNamePrefix=actionNamePrefix,\
+                            instanceCounter=instanceCounter,seed=seed)
+            elif argPerfTab.perfTabType == 'RandomCBPerformanceTableau':
+                self.__class__ = _RandomCBPerformanceGenerator
+                return _RandomCBPerformanceGenerator.__init__(self,argPerfTab,\
+                                actionNamePrefix=actionNamePrefix,\
+                                instanceCounter=instanceCounter,seed=seed)
+            elif argPerfTab.perfTabType == 'Random3ObjectivesPerformanceTableau':
+                self.__class__ = _Random3ObjectivesPerformanceGenerator
+                return _Random3ObjectivesPerformanceGenerator.__init__(self,argPerfTab,\
+                                actionNamePrefix=actionNamePrefix,\
+                                instanceCounter=instanceCounter,seed=seed)
+            
 
     def randomActions(self,nbrOfRandomActions=1):
         """
@@ -351,6 +419,8 @@ class RandomPerformanceGenerator(object):
         """
         from collections import OrderedDict
         criteria = self.perfTab.criteria
+        n = self.counter + nbrOfRandomActions
+        self.nd = len(str(n))  
         newActions = OrderedDict()
         newEvaluation ={}
         for g in criteria:
@@ -369,8 +439,23 @@ class RandomPerformanceGenerator(object):
         """
         from collections import OrderedDict
         from perfTabs import EmptyPerformanceTableau
+        from randomPerfTabs import RandomPerformanceTableau,\
+             RandomCBPerformanceTableau,\
+             Random3ObjectivesPerformanceTableau
         newPerfTab = EmptyPerformanceTableau()
-        newPerfTab.__class__ = self.perfTab.__class__
+        try:
+            if self.perfTab.perfTabType == 'PerformanceQuantiles':
+                if self.perfTab.perfTabType != 'RandomPerformanceTableau':
+                    newPerfTab.__class__ = RandomPerformanceTableau
+                elif self.perfTab.perfTabType != 'RandomCBPerformanceTableau':
+                    newPerfTab.__class__ = RandomCBPerformanceTableau
+                elif self.perfTab.perfTabType != 'Random3ObjectivesPerformanceTableau':
+                    newPerfTab.__class__ = Random3ObjectivesPerformanceTableau
+                else:
+                    print('Error')
+                    return None
+        except:
+            newPerfTab.__class__ = self.perfTab.__class__
         newPerfTab.name = self.perfTab.name
         try:
             newPerfTab.objectives = self.perfTab.objectives
@@ -382,6 +467,8 @@ class RandomPerformanceGenerator(object):
         newEvaluation ={}
         for g in criteria:
             newEvaluation[g] = {}
+        n = self.counter + nbrOfRandomActions
+        self.nd = len(str(n))
         for i in range(nbrOfRandomActions):
             newAction = self._randomAction()
             newKey = newAction['action'].pop('key')
@@ -393,9 +480,10 @@ class RandomPerformanceGenerator(object):
         return newPerfTab
 
 
-class RandomStdPerformanceGenerator(RandomPerformanceGenerator):
+class _RandomStdPerformanceGenerator(RandomPerformanceGenerator):
     """
-    Generates for a given standard RandomPerformanceTableau instance.
+    Generator for genrating new decision actions from a
+    given <RandomPerformanceTableau> model.
     """
     def __init__(self,argPerfTab,actionNamePrefix='a',
                  instanceCounter=0,seed=None):
@@ -534,9 +622,9 @@ class RandomStdPerformanceGenerator(RandomPerformanceGenerator):
 class RandomAcademicPerformanceTableau(PerformanceTableau):
     """
     Specialization of the PerformanceTableau class for generating a temporary
-    academic performance tableau.
-
-    Random generator for performances of a number Of Students in different academic courses.
+    academic performance tableau with random grading results performances
+    of a number of students in different academic courses (see Lecture 4: Grading
+    of the Algorithmic decision Theory Course http://hdl.handle.net/10993/37933 )
     
     *Parameters*:
         * number of students,
@@ -554,7 +642,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
 
     """
     def __init__(self,numberOfStudents = 10, numberOfCourses = 5,\
-                 weightDistribution = 'random', weightScale = None,\
+                 weightDistribution = 'random', weightScale = (1,5),\
                  commonScale = (0,20), ndigits = 0,\
                  WithTypes = False,\
                  commonMode = ('triangular',12,0.25),\
@@ -566,10 +654,6 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         """
         # didactic
         if WithTypes:
-            _WithTypes = True
-        else:
-            _WithTypes = False
-        if _WithTypes:
             types = ['weak','fair','fair','good','good','excellent']
             nt = len(types)
         # set random seed
@@ -585,12 +669,12 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         nd = len(str(numberOfActions))
         actions = OrderedDict()
         for i in range(numberOfActions):
-            if _WithTypes:
+            if WithTypes:
                 ri = random.randint(0,nt-1)
             if BigData:
                 actionName = ('s%%0%dd' % (nd)) % (i+1)
                 actions[i] = {'name': actionName}
-                if _WithTypes:
+                if WithTypes:
                     actions[i]['type'] = types[ri]
                     actions[i]['name'] = '%s%s' % (actions[i]['name'],(actions[i]['type'])[0])
                 
@@ -599,7 +683,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                 actions[actionKey] = {'shortName':actionKey,
                         'name': 'student',
                         'comment': 'RandomAcademicPerformanceTableau() generated.' }
-                if _WithTypes:
+                if WithTypes:
                     actions[actionKey]['type'] = types[ri]
                     actions[actionKey]['shortName'] = '%s%s' %\
                                         (actionKey,actions[actionKey]['type'][0])
@@ -668,7 +752,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         digits = ndigits
         evaluation = {}
         # evaluation ranges for student types
-        if _WithTypes:
+        if WithTypes:
             randEvalRanges = {'weak':(commonScale[0],commonScale[1]*0.5),
                     'fair':(commonScale[0]+commonScale[1]*0.2,commonScale[1]*0.8),
                     'good':(commonScale[0]+commonScale[1]*0.4,commonScale[1]),
@@ -680,13 +764,13 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         for g in criteria:
             evaluation[g] = {}       
             for x in actions:
-                if _WithTypes:
+                if WithTypes:
                     rangex = randEvalRanges[actions[x]['type']]
                     if Debug:
                         print(actions[x],rangex)
                 #--------
                 if str(commonMode[0]) == 'uniform':              
-                    if _WithTypes:
+                    if WithTypes:
                         randeval = random.uniform(rangex[0],rangex[1])
                     else:
                         randeval = random.uniform(commonScale[0],commonScale[1])
@@ -694,7 +778,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                 # ---------        
                 elif str(commonMode[0]) == 'triangular':
                     #from randomNumbers import ExtendedTriangularRandomVariable as RNGTr
-                    if _WithTypes:
+                    if WithTypes:
                         rdseed = random.random()
                         rng = RNGTr(rangex[0],rangex[1],min(rangex[1],\
                                     commonMode[1]),commonMode[2],seed=rdseed)
@@ -705,7 +789,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                     evaluation[g][x] = Decimal(str(round(rng.random(),digits)))
                 #-------------------       
                 elif str(commonMode[0]) == 'beta':
-                    if _WithTypes:
+                    if WithTypes:
                         m = rangex[0]
                         M = rangex[1]
                     else:
@@ -743,30 +827,195 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         self.criteria = criteria
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
-                                             
+
+    def showHTMLPerformanceTableau(self,studentsSubset=None,isSorted=True,\
+                                   Transposed=False,ndigits=0,\
+                                   ContentCentered=True,title=None):
+        """
+        shows the html version of the academic performance tableau in a browser window.
+        """
+        import webbrowser
+        fileName = '/tmp/performanceTable.html'
+        fo = open(fileName,'w')
+        fo.write(self._htmlPerformanceTable(actions=studentsSubset,isSorted=isSorted,\
+                                           Transposed=Transposed,\
+                                           ndigits=ndigits,
+                                           ContentCentered=ContentCentered,
+                                           title=title))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+           
+            
+    def _htmlPerformanceTable(self,actions=None,isSorted=False,\
+                             Transposed=False,ndigits=0,\
+                             ContentCentered=True,
+                             title=None):
+        """
+        Renders the performance table citerion x actions in html format.
+        """
+        criteria = self.criteria
+        minMaxEvaluations = self.computeMinMaxEvaluations()
+        if title == None:
+            html = '<h1>Random Student Gradings</h1>'
+        else:
+            html = '<h1>%s</h1>' % title            
+        criteriaKeys = list(criteria.keys())
+        if isSorted:
+            criteriaKeys.sort()
+        if actions == None:
+            actions = self.actions
+            actionsKeys = list(self.actions.keys())
+        else:
+            actionsKeys = [x for x in actions]
+        if isSorted:
+            actionsKeys.sort()
+        evaluation = self.evaluation
+        if ContentCentered:
+            alignFormat = 'center'
+        else:
+            alignFormat = 'right'
+        if Transposed:
+            html += '<table style="background-color:White;" border="1">'
+            html += '<tr bgcolor="#9acd32"><th>Courses</th>'
+            for x in actionsKeys:
+                try:
+                    xName = actions[x]['shortName']
+                except:
+                    xName = str(x)
+                html += '<th bgcolor="#FFF79B">%s</th>' % (xName)
+            html += '</tr>'
+            for g in criteriaKeys:
+                try:
+                    gName = '%s (%d)' % (criteria[g]['shortName'],criteria[g]['weight'])
+                except:
+                    gName = '%s (%d)' % (g,int(criteria[g]['weight']))
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (gName)
+                for x in actionsKeys:
+                    if self.evaluation[g][x] != Decimal("-999"):
+                        if self.evaluation[g][x] < Decimal('10'):
+                            formatString = '<td bgcolor="#ffddff"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                        elif minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                        elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td bgcolor="#ddffdd" align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                        else:
+                            formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                            
+                    else:
+                        html += '<td align="center"><span style="color: LightGrey;font-size:75%; ">NA</span></td>'
+                html += '</tr>'
+            html += '</table>'
+        else:
+            html += '<table style="background-color:White;" border="1">'
+            html += '<tr bgcolor="#9acd32"><th>Courses</th>'
+            for g in criteriaKeys:
+                try:
+                    gName = criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<th bgcolor="#FFF79B">%s</th>' % (gName)
+            html += '</tr>'
+            html += '<tr><th bgcolor="#9acd32" >Students</th>'
+            for g in criteriaKeys:
+                gweight = criteria[g]['weight']
+                html += '<td  align="center" bgcolor="#FFF79B" ><i>%d</i></td>' % (int(gweight))
+            html += '</tr>'
+            for x in actionsKeys:
+                try:
+                    xName = actions[x]['shortName']
+                except:
+                    xName = str(x)
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (xName)
+                for g in criteriaKeys:
+                    if self.evaluation[g][x] != Decimal("-999"):
+                        if self.evaluation[g][x] < Decimal('10'):
+                            formatString = '<td bgcolor="#ffddff"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                        elif minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                        #elif self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
+                        elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
+                            formatString = '<td bgcolor="#ddffdd" align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                        else:
+                            formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                            html += formatString % (evaluation[g][x])
+                            
+                    else:
+                        html += '<td align="center"><span style="color: LightGrey;font-size:75%;">NA</span></td>'
+                html += '</tr>'
+            html += '</table>'
+            
+        return html
+                                            
     
 #-----------------
 class RandomRankPerformanceTableau(PerformanceTableau):
     """
     Specialization of the PerformanceTableau class for generating a temporary
-    random performance tableau.
-
-    Random generator for multiple criteria ranked (without ties) performances of a
-    given number of decision actions. On each criterion,
-    all decision actions are hence lineraly ordered. The RandomRankPerformanceTableau class is
-    matching the RandomLinearVotingProfiles class (see the votingDigraphs module)  
+    random performance tableau with multiple criteria ranked (without ties)
+    performances of a given number of decision actions.
+    On each criterion, all decision actions are hence lineraly ordered.
+    The :py:class:`randomPerfTabs.RandomRankPerformanceTableau` class
+    is matching the :py:class:`votingDigraphs.RandomLinearVotingProfiles`
+    class (see http://hdl.handle.net/10993/37933 Lecture 2 : Voting of
+    the Algorithmic Decision Theory Course)
         
     *Parameters*:
         * number of actions,
         * number of performance criteria,
         * weightDistribution := equisignificant | random (default, see RandomPerformanceTableau)
         * weightScale := (1, 1 | numberOfCriteria (default when random))
-        * IntegerWeights := Boolean (True = default) 
+        * IntegerWeights := Boolean (True = default). Weights are negative, as all the criteria preference directions are 'min', as the rank performance is to be minimized. 
         * commonThresholds (default) := {
             | 'ind':(0,0),
             | 'pref':(1,0),
             | 'veto':(numberOfActions,0)
             | } (default)
+
+    >>> t = RandomRankPerformanceTableau(numberOfActions=3,numberOfCriteria=2)
+    >>> t.showObjectives()
+    The performance tableau does not contain objectives.
+    >>> t.showCriteria()
+    *----  criteria -----*
+    g1 'Random criteria (voter)'
+      Scale = (Decimal('0'), Decimal('3'))
+      Weight = -1 # ranks to be minimal 
+      Threshold ind : 0.00 + 0.00x ; percentile:  0.0
+      Threshold pref : 1.00 + 0.00x ; percentile:  0.667
+      Threshold veto : 3.00 + 0.00x ; percentile:  1.0
+    g2 'Random criteria (voter)'
+      Scale = (Decimal('0'), Decimal('3'))
+      Weight = -1 # ranks to be minimal
+      Threshold ind : 0.00 + 0.00x ; percentile:  0.0
+      Threshold pref : 1.00 + 0.00x ; percentile:  0.667
+      Threshold veto : 3.00 + 0.00x ; percentile:  1.0
+    >>> t.showActions()
+    *----- show decision action --------------*
+    key:  a1
+      short name: a1
+      name:       random decision action (candidate)
+      comment:    RandomRankPerformanceTableau() generated.
+    key:  a2
+      short name: a2
+      name:       random decision action (candidate)
+      comment:    RandomRankPerformanceTableau() generated.
+    key:  a3
+      short name: a3
+      name:       random decision action (candidate)
+      comment:    RandomRankPerformanceTableau() generated.
+    >>> t.showPerformanceTableau()
+    *----  performance tableau -----*
+    criteria | weights | 'a1' 'a2' 'a3'   
+    ---------|--------------------------
+       'g1'  |    -1   |   3    1    2  
+       'g2'  |    -1   |   2    1    3  
 
     """
     def __init__(self,numberOfActions = 13, numberOfCriteria = 7,\
@@ -776,6 +1025,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
                  seed = None,\
                  Debug = False):
         """
+        Constructor of random ranks performance tableaux. 
         """
 
         # set random seed
@@ -796,8 +1046,8 @@ class RandomRankPerformanceTableau(PerformanceTableau):
             else:   
                 actionKey = ('a%%0%dd' % (nd)) % (i+1)
                 actions[actionKey] = {'shortName':actionKey,
-                        'name': 'random decision action',
-                        'comment': 'RandomPerformanceTableau() generated.' }
+                        'name': 'random decision actions (candidate)',
+                        'comment': 'Random Ranks' }
         # generate the criteria weights
         if weightScale == None:
             weightScale = (1,numberOfCriteria)
@@ -828,8 +1078,9 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         for i in range(numberOfCriteria):
             g = ('g%%0%dd' % ngd) % (i+1)
             criteria[g] = {}
-            criteria[g]['name']='RandomRankPerformanceTableau() instance'
+            criteria[g]['name']='Random criteria (voter)'
             criteria[g]['comment']=commentString
+            criteria[g]['preferenceDirection'] = 'min'
             try:
                 indThreshold  =(Decimal(str(commonThresholds['ind'][0])),
                                 Decimal(str(commonThresholds['ind'][1])))
@@ -851,10 +1102,11 @@ class RandomRankPerformanceTableau(PerformanceTableau):
                                               }
             commonScale = ( Decimal("0"), Decimal(numberOfActions) )
             criteria[g]['scale'] = commonScale
+            # weights are negative
             if IntegerWeights:
-                criteria[g]['weight'] = weightsList[i]
+                criteria[g]['weight'] = -weightsList[i]
             else:
-                criteria[g]['weight'] = weightsList[i]/sumWeights
+                criteria[g]['weight'] = -weightsList[i]/sumWeights
                 
         # generate evaluations
         evaluation = {}       
@@ -870,6 +1122,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         self.actions = actions
         self.criteria = criteria
         self.evaluation = evaluation
+        self.sumWeights = sumWeights
         self.weightPreorder = self.computeWeightPreorder()
 
 # ------------------------------
@@ -1568,10 +1821,9 @@ class _RandomCoalitionsPerformanceTableau(PerformanceTableau):
 
 class Random3ObjectivesPerformanceTableau(PerformanceTableau):
     """
-    Specialization of the PerformanceTableau
-    for 3 objectives: *Eco*, *Soc* and *Env*.
-
-    Each decision action is qualified at random as weak (-), fair (~) or good (+)
+    Specialization of the :py:class:`perfTabs.PerformanceTableau` class 
+    for 3 objectives: *Eco*, *Soc* and *Env*. Each decision action
+    is qualified randomly as weak (-), fair (~) or good (+)
     on each of the three objectives.
     
     Generator arguments:
@@ -1583,6 +1835,8 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         * weightScale := [1,numerOfCriteria] (random default)
         * IntegerWeights := True (default) / False
         * OrdinalScales := True / False (default), if True commonScale is set to (0,10)
+        * NegativeWeights := True (default) / False. If False, evaluations to be minimized are negative.
+        * negativeWeightProbability := [0,1] (default 0.10), 'min' preference direction probability  
         * commonScale := (Min, Max)
                 | when common Scale = False, (0.0,10.0) by default if OrdinalScales == True and CommonScale=None,
                 | and (0.0,100.0) by default otherwise 
@@ -1601,14 +1855,76 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         * valueDigits := 2 (default, for cardinal scales only)
         * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.
         * Debug := True / False (default)
+
+    .. warning::
+
+        Minimal number required of criteria is 3!
+
+    >>> from randomPerfTabs import Random3ObjectivesPerformanceTableau
+    >>> t = Random3ObjectivesPerformanceTableau(numberOfActions=5,numberOfCriteria=3,seed=1)
+    >>> t
+    *------- PerformanceTableau instance description ------*
+    Instance class   : Random3ObjectivesPerformanceTableau
+    Seed             : 1
+    Instance name    : random3ObjectivesPerfTab
+    # Actions        : 5
+    # Objectives     : 3
+    # Criteria       : 3
+    Attributes       : ['name', 'valueDigits', 'BigData', 'OrdinalScales',
+                        'missingDataProbability', 'negativeWeightProbability',
+                        'randomSeed', 'sumWeights', 'valuationPrecision',
+                        'commonScale', 'objectiveSupportingTypes',
+                        'actions', 'objectives', 'criteriaWeightMode',
+                        'criteria', 'evaluation', 'weightPreorder']
+    >>> t.showObjectives()
+    *------ show objectives -------"
+    Eco: Economical aspect
+       g1 criterion of objective Eco 1
+      Total weight: 1.00 (1 criteria)
+    Soc: Societal aspect
+       g2 criterion of objective Soc 1
+      Total weight: 1.00 (1 criteria)
+    Env: Environmental aspect
+       g3 criterion of objective Env 1
+      Total weight: 1.00 (1 criteria)
+    >>> t.showActions()
+    *----- show decision action --------------*
+    key:  a1
+      short name:  a1
+      name:       random decision action Eco+ Soc- Env+
+      profile:    {'Eco': 'good', 'Soc': 'weak', 'Env': 'good'}
+    key:  a2
+      short name:  a2
+      name:       random decision action Eco~ Soc+ Env~
+      profile:    {'Eco': 'fair', 'Soc': 'good', 'Env': 'fair'}
+    key:  a3
+      short name:  a3
+      name:       random decision action Eco~ Soc~ Env-
+      profile:    {'Eco': 'fair', 'Soc': 'fair', 'Env': 'weak'}
+    key:  a4
+      short name:  a4
+      name:       random decision action Eco~ Soc+ Env+
+      profile:    {'Eco': 'fair', 'Soc': 'good', 'Env': 'good'}
+    key:  a5
+      short name:  a5
+      name:       random decision action Eco~ Soc+ Env~
+      profile:    {'Eco': 'fair', 'Soc': 'good', 'Env': 'fair'}
+    >>> t.showPerformanceTableau()
+    *----  performance tableau -----*
+    criteria | weights |  'a1'   'a2'   'a3'   'a4'   'a5'   
+    ---------|---------------------------------------------
+    'g1Eco'  |    1    | 36.29  85.17  34.49    NA   56.58  
+    'g2Soc'  |    1    | 55.00  56.33    NA   67.36  72.22  
+    'g3Env'  |    1    | 66.58  48.71  21.59    NA     NA  
+    >>>
         
     """
 
     def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\
                  weightDistribution = 'equiobjectives', weightScale=None,\
                  IntegerWeights = True, OrdinalScales=False,\
-                 commonScale = None,\
-                 commonThresholds = None, commonMode = None,\
+                 NegativeWeights = False, negativeWeightProbability = 0.0,\
+                 commonScale = None, commonThresholds = None, commonMode = None,\
                  valueDigits=2,\
                  vetoProbability=0.5,\
                  missingDataProbability = 0.05,\
@@ -1622,7 +1938,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         self.BigData = BigData
         self.OrdinalScales = OrdinalScales
         self.missingDataProbability = missingDataProbability
-        
+        self.negativeWeightProbability = negativeWeightProbability
         # randomizer init
         self.randomSeed = seed
         from random import Random
@@ -1706,8 +2022,6 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         #randChoice1 = Random(seed)
         ng = len(str(numberOfCriteria))
         for i in range(numberOfCriteria):
-            g = ('g%%0%dd' % ng) % (i+1)
-            criteria[g] = {}
             if i == 0:
                 criterionObjective = 'Eco'
             elif i == 1:
@@ -1718,9 +2032,19 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 #criterionObjective = _random.choice(objectivesKeys)
                 objInd = _random1.randint(1,len(objectivesKeys))
                 criterionObjective = objectivesKeys[objInd-1]
-            #print(g,criterionObjective,objectivesKeys)
+            if criterionObjective == 'Eco':
+                g = ('ec%%0%dd' % ng) % (i+1)
+            elif criterionObjective == 'Soc':
+                g = ('so%%0%dd' % ng) % (i+1)
+            else:
+                g = ('en%%0%dd' % ng) % (i+1)
+            criteria[g] = {}
+           #print(g,criterionObjective,objectivesKeys)
             criteria[g]['objective'] = criterionObjective
-            criteria[g]['preferenceDirection'] = 'max'           
+            if _random.random() > negativeWeightProbability:
+                criteria[g]['preferenceDirection'] = 'max'
+            else:
+                criteria[g]['preferenceDirection'] = 'min'
             criteria[g]['name'] = 'criterion of objective %s' % (criterionObjective)
             criteria[g]['shortName'] = g + criterionObjective[0:2]
             span = commonScale[1] - commonScale[0]
@@ -1747,10 +2071,23 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                    (Decimal(str(thresholds[t][0])),Decimal(str(thresholds[t][1])))
                 
             criteria[g]['scale'] = commonScale
-            if IntegerWeights:
-                criteria[g]['weight'] = weightsList[i]
+            if criteria[g]['preferenceDirection'] == 'max':
+                if IntegerWeights:
+                    criteria[g]['weight'] = weightsList[i]
+                else:
+                    criteria[g]['weight'] = weightsList[i] / sumWeights
             else:
-                criteria[g]['weight'] = weightsList[i] / sumWeights
+                if NegativeWeights:
+                    if IntegerWeights:
+                        criteria[g]['weight'] = weightsList[i]
+                    else:
+                        criteria[g]['weight'] = weightsList[i] / sumWeights
+                else:
+                    if IntegerWeights:
+                        criteria[g]['weight'] = -weightsList[i]
+                    else:
+                        criteria[g]['weight'] = -weightsList[i] / sumWeights
+
 
         # determine equisignificant objectives
         if weightMode[0] == 'equiobjectives':
@@ -1768,9 +2105,17 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             if Debug:
                 print(weightsProduct)
             for g in criteria:
-                criteria[g]['weight'] =\
-                    weightsProduct // objectivesCardinality[criteria[g]['objective']]
+                gweight = weightsProduct // objectivesCardinality[criteria[g]['objective']]
+                if criteria[g]['preferenceDirection'] == 'max':
+                    criteria[g]['weight'] = gweight
+                else:
+                    if NegativeWeights:
+                        criteria[g]['weight'] = -gweight
+                    else:
+                        criteria[g]['weight'] = gweight
                 if Debug:
+                    print(weightsProduct)
+                    print(objectivesCardinality[criteria[g]['objective']])
                     print(criteria[g]['weight'])
                 
         # allocate (criterion,action) to coalition supporting type
@@ -1835,12 +2180,18 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                         if criteria[g]['preferenceDirection'] == 'max':
                             evaluation[g][a] = Decimal(str(round(randeval,0)))
                         else:
-                            evaluation[g][a] = Decimal(str(-round(randeval,0)))
+                            if criteria[g]['weight'] < Decimal('0'):
+                                evaluation[g][a] = Decimal(str(round(randeval,0)))
+                            else:
+                                evaluation[g][a] = Decimal(str(-round(randeval,0)))
                     else:
                         if criteria[g]['preferenceDirection'] == 'max':
                             evaluation[g][a] = Decimal(str(round(randeval,digits)))
                         else:
-                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                            if criteria[g]['weight'] < Decimal('0'):
+                                evaluation[g][a] = Decimal(str(round(randeval,0)))
+                            else:
+                                evaluation[g][a] = Decimal(str(-round(randeval,0)))
 
             elif str(randomMode[0]) == 'beta':
                 for a in actions:
@@ -1881,12 +2232,18 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                         if criteria[g]['preferenceDirection'] == 'max':
                             evaluation[g][a] = Decimal(str(round(randeval,0)))
                         else:
-                            evaluation[g][a] = Decimal(str(-round(randeval,0)))
+                            if criteria[g]['weight'] < Decimal('0'):
+                                evaluation[g][a] = Decimal(str(round(randeval,0)))
+                            else:
+                                evaluation[g][a] = Decimal(str(-round(randeval,0)))
                     else:
                         if criteria[g]['preferenceDirection'] == 'max':
                             evaluation[g][a] = Decimal(str(round(randeval,digits)))
                         else:
-                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                            if criteria[g]['weight'] < Decimal('0'):
+                                evaluation[g][a] = Decimal(str(round(randeval,0)))
+                            else:
+                                evaluation[g][a] = Decimal(str(-round(randeval,0)))
     
             elif str(randomMode[0]) == 'triangular':
                 for a in actions:
@@ -1918,12 +2275,18 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                         if criteria[g]['preferenceDirection'] == 'max':
                             evaluation[g][a] = Decimal(str(round(randeval,0)))
                         else:
-                            evaluation[g][a] = Decimal(str(-round(randeval,0)))
+                            if criteria[g]['weight'] < Decimal('0'):
+                                evaluation[g][a] = Decimal(str(round(randeval,0)))
+                            else:
+                                evaluation[g][a] = Decimal(str(-round(randeval,0)))
                     else:
                         if criteria[g]['preferenceDirection'] == 'max':
                             evaluation[g][a] = Decimal(str(round(randeval,digits)))
                         else:
-                            evaluation[g][a] = Decimal(str(-round(randeval,digits)))
+                            if criteria[g]['weight'] < Decimal('0'):
+                                evaluation[g][a] = Decimal(str(round(randeval,0)))
+                            else:
+                                evaluation[g][a] = Decimal(str(-round(randeval,0)))
                    
                     if Debug:
                         print(randeval, criteria[g]['preferenceDirection'], evaluation[g][a])
@@ -1937,7 +2300,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             objectives[obj]['criteria'] = objCriteria
             objWeight = Decimal('0')
             for g in objCriteria:
-                objWeight += criteria[g]['weight']
+                objWeight += abs(criteria[g]['weight'])
             objectives[obj]['weight'] = objWeight
 
         # instantiate the peformance tableau slots
@@ -1991,10 +2354,10 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 print('  name:      ',actions[x]['name'])
                 print('  profile:   ',actions[x]['profile'])
 
-class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
+class _Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
     """
-    Generates and/or new decision actions with random evaluation for a
-    given Random3ObjectivesPerformanceTableau instance.
+    Generator for new decision actions with random evaluation following a
+    given Random3ObjectivesPerformanceTableau model.
     """
     def __init__(self,argPerfTab,actionNamePrefix='a',
                  instanceCounter=0,seed=None,Debug=False):
@@ -2009,7 +2372,10 @@ class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
         self.perfTab = argPerfTab
         self.actionNamePrefix = actionNamePrefix
         if instanceCounter == None:
-            self.counter = len(argPerfTab.actions)
+            try:
+                self.counter = len(argPerfTab.actions)
+            except:
+                self.counter = 0
         else:
             self.counter = instanceCounter
         self.nd = len(str(self.counter))
@@ -2025,7 +2391,10 @@ class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
         # generate random evaluation
         Debug = self.Debug
         random = self.random
-        digits = self.perfTab.valueDigits
+        try:
+            digits = self.perfTab.valueDigits
+        except:
+            digits = 2
         criteria = self.perfTab.criteria
         objectives = self.perfTab.objectives
         objectiveSupportingTypes = self.perfTab.objectiveSupportingTypes
@@ -2091,12 +2460,18 @@ class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g] = Decimal(str(round(randeval,0)))
                     else:
-                        evaluation[g] = Decimal(str(-round(randeval,0)))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            evaluation[g] = Decimal(str(-round(randeval,0)))
+                        else:
+                            evaluation[g] = Decimal(str(round(randeval,0)))
                 else:
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g] = Decimal(str(round(randeval,digits)))
                     else:
-                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            evaluation[g] = Decimal(str(-round(randeval,digits)))
+                        else:
+                            evaluation[g] = Decimal(str(round(randeval,digits)))
                         
             # beta distribution
             elif str(randomMode[0]) == 'beta':
@@ -2137,12 +2512,18 @@ class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g] = Decimal(str(round(randeval,0)))
                     else:
-                        evaluation[g] = Decimal(str(-round(randeval,0)))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            evaluation[g] = Decimal(str(-round(randeval,0)))
+                        else:
+                            evaluation[g] = Decimal(str(round(randeval,0)))
                 else:
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g] = Decimal(str(round(randeval,digits)))
                     else:
-                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            evaluation[g] = Decimal(str(-round(randeval,digits)))
+                        else:
+                            evaluation[g] = Decimal(str(round(randeval,digits)))
             # triangular
             elif str(randomMode[0]) == 'triangular':
                 m = commonScale[0]
@@ -2167,12 +2548,18 @@ class Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g] = Decimal(str(round(randeval,0)))
                     else:
-                        evaluation[g] = Decimal(str(-round(randeval,0)))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            evaluation[g] = Decimal(str(-round(randeval,0)))
+                        else:
+                            evaluation[g] = Decimal(str(round(randeval,0)))
                 else:
                     if criteria[g]['preferenceDirection'] == 'max':
                         evaluation[g] = Decimal(str(round(randeval,digits)))
                     else:
-                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+                        if criteria[g]['weight'] > Decimal('0'):
+                            evaluation[g] = Decimal(str(-round(randeval,digits)))
+                        else:
+                            evaluation[g] = Decimal(str(round(randeval,digits)))
                
                 if Debug:
                     print(randeval, criteria[g]['preferenceDirection'], evaluation[g])
@@ -2409,31 +2796,95 @@ class _Random3ObjectivesPerformanceTableau(_RandomCoalitionsPerformanceTableau):
 #---------------
 class RandomCBPerformanceTableau(PerformanceTableau):
     """
-    Full automatic generation of random
-    Cost versus Benefit oriented performance tableaux.
+    Full automatic generation of random Costs versus Benefits
+    oriented performance tableaux.
 
     Parameters:
     
-        * If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
-        * If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria. 
-           Cost criteria have probability 1/3, whereas benefit criteria respectively 2/3 probability to be generated.
-           However, at least one criterion of each kind is always instantiated.
-        * weightDistribution := {'equiobjectives'|'fixed'|'random'|'equisignificant'} By default, the sum of
-           significance of the cost criteria is set equal to the sum of the significance of the benefit criteria. 
-        * default weightScale for 'random' weightDistribution is 1 - numberOfCriteria.
-        * commonScale parameter is not used. The scale of cost criteria is cardinal or ordinal (0-10)
-           with proabailities 1/4 respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal
-           with probabilities 2/3, respectively 1/3.
-        * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria
-           are evaluated with integers between 0 and 10.
-        * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of
-           concerned performance differences (see below).
-        * CommonPercentiles = {'ind':0.05, 'pref':0.10, 'veto':'95} are expressed
-           in percentiles of the observed performance differences and only concern cardinal criteria.
+        * If numberOfActions == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated.
+        * If numberOfCriteria == None, a uniform random number between 5 and 21 of cost or benefit criteria. Cost criteria have probability 1/3, whereas benefit criteria respectively 2/3 probability to be generated. However, at least one criterion of each kind is always instantiated.
+        * weightDistribution := {'equiobjectives'|'fixed'|'random'|'equisignificant'} By default, the sum of significance of the cost criteria is set equal to the sum of the significance of the benefit criteria. 
+        * Default weightScale for 'random' weightDistribution is 1 - numberOfCriteria.
+        * If NegativeWeights = True | False (default), the performance evaluation of the criteria with a 'min' preference direction will be positive, otherwise they will be negative.
+        * Parameter commonScale is not used. The scale of cost criteria is cardinal or ordinal (0-10) with probability 1/4, respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.
+        * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
+        * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of concerned performance differences (see below).
+        * CommonPercentiles = {'ind':0.05, 'pref':0.10, 'veto':'95} are expressed in percentiles of the observed performance differences and only concern cardinal criteria.
 
-    .. warning::
+    .. note::
 
-        Minimal number of decision actions required is 3 ! 
+        Minimal number required of criteria is 2, and minimal number
+        required of decision actions is 3 !
+    
+    >>> from randomPerfTabs import RandomCBPerformanceTableau
+    >>> t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=3,seed=1)
+    >>> t
+    *------- PerformanceTableau instance description ------*
+    Instance class   : RandomCBPerformanceTableau
+    Seed             : 1
+    Instance name    : randomCBperftab
+    # Actions        : 5
+    # Objectives     : 2
+    # Criteria       : 3
+    Attributes       : ['randomSeed', 'name', 'digits', 'BigData',
+                        'missingDataProbability', 'commonPercentiles',
+                        'samplingSize', 'Debug', 'actionsTypesList',
+                        'sumWeights', 'valuationPrecision', 'actions',
+                        'objectives', 'criteriaWeightMode', 'criteria',
+                        'evaluation', 'weightPreorder']
+    >>> t.showObjectives()
+    *------ show objectives -------"
+    C: Costs
+       c1 random ordinal cost criterion 2
+      Total weight: 2.00 (1 criteria)
+    B: Benefits
+       b1 random ordinal benefit criterion 1
+       b2 random cardinal benefit criterion 1
+      Total weight: 2.00 (2 criteria)
+    >>> t.showCriteria()
+    *----  criteria -----*
+    c1 'Costs/random ordinal cost criterion'
+      Scale = (0, 10)
+      Weight = 2
+    b1 'Benefits/random ordinal benefit criterion'
+      Scale = (0, 10)
+      Weight = 1 
+    b2 'Benefits/random cardinal benefit criterion'
+      Scale = (0.0, 100.0)
+      Weight = 1 
+      Threshold ind : 4.70 + 0.00x ; percentile:  0.1
+      Threshold pref : 4.70 + 0.00x ; percentile:  0.1
+      Threshold veto : 30.84 + 0.00x ; percentile:  1.0
+    >>> t.showActions()
+    *----- show decision action --------------*
+    key:  a1
+      short name: a1c
+      name:       random cheap decision action
+      comment:    Cost-Benefit
+    key:  a2
+      short name: a2a
+      name:       random advantageous decision action
+      comment:    Cost-Benefit
+    key:  a3
+      short name: a3c
+      name:       random cheap decision action
+      comment:    Cost-Benefit
+    key:  a4
+      short name: a4n
+      name:       random neutral decision action
+      comment:    Cost-Benefit
+    key:  a5
+      short name: a5c
+      name:       random cheap decision action
+      comment:    Cost-Benefit
+    >>> t.showPerformanceTableau()
+    *----  performance tableau -----*
+    criteria | weights |   'a1'   'a2'   'a3'   'a4'   'a5'   
+    ---------|-----------------------------------------
+       'b1'  |    1    |   4.00   8.00   5.00   4.00   6.00  
+       'b2'  |    1    |  36.70  31.65  23.90  10.56  41.40  
+       'c1'  |    2    |    NA   -5.00  -3.00  -8.00  -3.00  
+    >>> ...  
 
     """
 
@@ -2444,7 +2895,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                  weightScale=None,\
                  IntegerWeights = True,\
                  NegativeWeights = False,\
-                 commonScale = None, commonThresholds = None,\
+                 #commonScale = None, commonThresholds = None,\
                  commonPercentiles= None,\
                  samplingSize = 100000,\
                  commonMode = None,\
@@ -2930,9 +3381,10 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                 print('criteria',g,' default thresholds:')
                 print(criteria[g]['thresholds'])
 
-class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
+class _RandomCBPerformanceGenerator(RandomPerformanceGenerator):
     """
-    Instantiates a generator of new decision actions with associated random evaluations using the model parameters provided by a given RandomCBPerformanceTableau instance.
+    Generator of new decision actions with random evaluations using
+    the model parameters provided by a given RandomCBPerformanceTableau instance.
 
     """
     def __init__(self,argPerfTab,actionNamePrefix='a',
@@ -3006,7 +3458,7 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
                 if criteria[g]['preferenceDirection'] == 'max':
                     evaluation[g] = Decimal(str(round(randeval,digits)))
                 else:
-                    if NegativeWeights:
+                    if criteria[g]['weight'] < Decimal('0'):
                         evaluation[g][a] = Decimal(str(round(randeval,digits)))
                     else:
                         evaluation[g][a] = Decimal(str(-round(randeval,digits)))
@@ -3042,7 +3494,10 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
                 if criteria[g]['preferenceDirection'] == 'max':
                     evaluation[g] = Decimal(str(round(randeval,digits)))
                 else:
-                    evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    if criteria[g]['weight'] > Decimal('0'):
+                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    else:
+                        evaluation[g] = Decimal(str(round(randeval,digits)))
                 #print randeval, criteria[g]['preferenceDirection'], evaluation[g][a]
                         
             elif str(randomMode[0]) == 'normal':
@@ -3070,7 +3525,10 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
                 if criteria[g]['preferenceDirection'] == 'max':
                     evaluation[g] = Decimal(str(round(randeval,digits)))
                 else:
-                    evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    if criteria[g]['weight'] > Decimal('0'):
+                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    else:
+                        evaluation[g] = Decimal(str(round(randeval,digits)))
             elif str(randomMode[0]) == 'beta':
                 m = criterionScale[0]
                 M = criterionScale[1]
@@ -3092,7 +3550,10 @@ class RandomCBPerformanceGenerator(RandomPerformanceGenerator):
                 if criteria[g]['preferenceDirection'] == 'max':
                     evaluation[g] = Decimal(str(round(randeval,digits)))
                 else:
-                    evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    if criteria[g]['weight'] > Decimal('0'):
+                        evaluation[g] = Decimal(str(-round(randeval,digits)))
+                    else:
+                        evaluation[g] = Decimal(str(round(randeval,digits)))
                 if Debug:
                     print('alpha,beta,u,m,M,randeval',alpha,beta,u,m,M,randeval)
                         
@@ -3149,14 +3610,14 @@ if __name__ == "__main__":
 ##    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
 ##                                         commonMode=('uniform',None,None),
 ##                                         missingDataProbability=0.01)
-    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
-                                         commonMode=('beta',None,None),
-                                         missingDataProbability=0.01,
-                                         WithTypes=True,
-                                         seed=1)
-    print(t)
-    t.showHTMLPerformanceTableau(ndigits=0)
-    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
+##    t = RandomAcademicPerformanceTableau(numberOfStudents=20,numberOfCourses=10,
+##                                         commonMode=('triangular',14,0.4),
+##                                         missingDataProbability=0.01,
+##                                         WithTypes=True,
+##                                         seed=1)
+##    print(t)
+##    t.showHTMLPerformanceTableau(Transposed=True)
+##    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
                                              
 
 
@@ -3171,21 +3632,24 @@ if __name__ == "__main__":
 ##    print(time()-t0)
 ##    t.saveXMCDA2('test2')
 ##    t.showCriteria()
-##    t = Random3ObjectivesPerformanceTableau(numberOfActions=100,
-##                                            numberOfCriteria=13,
-##                                            OrdinalScales=False,
-##                                            commonScale=None,
-##                                            weightDistribution='equiobjectives',
-##     #weightScale=(1,5),
-##                                            commonMode=('triangular','variable',None),
-##                                            vetoProbability=0.5,
-##                                            seed=120)
-##
-##    t.showObjectives()
-##    t.showCriteria()
-##    t.csvAllQuantiles('q')
-##    t.showAllQuantiles()
-##    t.showStatistics()
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,
+                                            numberOfCriteria=13,
+                                            OrdinalScales=False,
+                                            commonScale=None,
+                                            weightDistribution='equiobjectives',
+     #weightScale=(1,5),
+                                            commonMode=('triangular','variable',None),
+                                            vetoProbability=0.5,
+                                            NegativeWeights=False,
+                                            negativeWeightProbability=0.25,
+                                            seed=120,Debug=False)
+
+    t.showObjectives()
+    t.showCriteria()
+    t.showPerformanceTableau()
+    t.csvAllQuantiles('q')
+    t.showAllQuantiles()
+    t.showStatistics()
     
 ##    #t.showActions(Debug=True)
 ##    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Eco']['criteria'])

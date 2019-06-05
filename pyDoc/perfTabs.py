@@ -619,8 +619,6 @@ The performance evaluations of each decision alternative on each criterion are g
                         wpy = criteria[c]['thresholds']['weakPreference'][1]
                         if hasSymmetricThresholds:
                             wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
-                        else:
-                            wp = wpx + wpy * abs(evaluation[c][a])
                     except:
                         wp = None
                     try:
@@ -632,7 +630,10 @@ The performance evaluations of each decision alternative on each criterion are g
                             p = px + py * abs(evaluation[c][a])
                     except:
                         p = None
-                    d = evaluation[c][a] - evaluation[c][b]
+                    if criteria[c]['weight'] > Decimal('0'):
+                        d = evaluation[c][a] - evaluation[c][b]
+                    else:
+                        d = evaluation[c][b] - evaluation[c][a]
                     lc0 = BipolarOutrankingDigraph._localConcordance(self,d,ind,wp,p)
                     if ind != None:
                         ind = round(ind,2)
@@ -971,6 +972,44 @@ The performance evaluations of each decision alternative on each criterion are g
                 evaluation[g][x] = Decimal(str(evaluation[g][x]))
         self.evaluation = evaluation
 
+    def convertWeights2Negative(self):
+        """
+        Negates the weights of criteria to be minimzed.
+        """
+        from decimal import Decimal
+        criteria = self.criteria
+        evaluation = self.evaluation
+        for g in criteria:
+            critg = criteria[g]
+            if critg['preferenceDirection'] == 'min':
+                critg['weight'] = -abs(critg['weight'])
+                valg = evaluation[g]
+                for x in valg:
+                    if valg[x] != Decimal('-999'):
+                        #print(g,x,valg[x])
+                        valg[x] = abs(valg[x])
+        self.criteria = criteria
+        self.evaluation = evaluation
+
+    def convertWeights2Positive(self):
+        """
+        Negates the weights of criteria to be minimzed.
+        """
+        from decimal import Decimal
+        criteria = self.criteria
+        evaluation = self.evaluation
+        for g in criteria:
+            critg = criteria[g]
+            if critg['preferenceDirection'] == 'min':
+                critg['weight'] = abs(critg['weight'])
+                valg = evaluation[g]
+                for x in valg:
+                    if valg[x] != Decimal('-999'):
+                        #print(g,x,valg[x])
+                        valg[x] = -abs(valg[x])
+        self.criteria = criteria
+        self.evaluation = evaluation
+        
     def computePerformanceDifferences(self,Comments = False,
                                       Debug = False,
                                       NotPermanentDiffs=True,
@@ -1389,6 +1428,7 @@ The performance evaluations of each decision alternative on each criterion are g
             if Comments:
                 print(str(g) + '\t', end=' ')
             html += '<th>%s</th>' % (g)
+        print()
         html += '</tr>\n'
         if Comments:
             print('\nweights  | ', end=' ') 
@@ -1799,8 +1839,111 @@ The performance evaluations of each decision alternative on each criterion are g
                 result[g]['minimum'] = Decimal('-999')
                 result[g]['maximum'] = Decimal('-999')
         return result
+
+    def showHTMLCriteria(self,criteriaSubset=None,Sorted=True,\
+                         ndigits=2,\
+                         title=None):
+        """
+        shows the criteria in the system browser view.
+        """
+        import webbrowser
+        fileName = '/tmp/criteriaView.html'
+        fo = open(fileName,'w')
+        fo.write(self._htmlCriteriaView(criteria=criteriaSubset,Sorted=Sorted,\
+                                           ndigits=ndigits,\
+                                           title=title))
+        fo.close()
+        url = 'file://'+fileName
+        webbrowser.open_new(url)
+
+    def _htmlCriteriaView(self,criteria=None,Sorted=False,\
+                         ndigits=2,title='Family of Criteria'):
+        """
+        Renders a html view of the in the XMCDA2 format.
+        """
+        if title == None:
+            html = '<h1>%s: Family of Criteria</h1>' % self.name
+        else:
+            html = '<h1>%s</h1>' % title            
+        if criteria == None:
+            criteria = self.criteria
+        criteriaList = [x for x in criteria]
+        if Sorted:
+            criteriaList.sort()
         
-    def showHTMLPerformanceTableau(self,actionsSubset=None,isSorted=True,\
+        html += """<table border="1">
+        <tr bgcolor="#9acd32">
+        <th rowspan="2">#</th>
+        <th rowspan="2">Identifyer</th>
+        <th rowspan="2">Name</th>
+        <th rowspan="2">Comment</th>
+        <th rowspan="2">Weight</th>
+        <th colspan="3">Scale</th>
+        <th colspan="5">Thresholds (ax + b)</th>
+        </tr>
+        <tr bgcolor="#9acd32">
+        <th>direction</th>
+        <th>min</th>
+        <th>max</th>
+        <th>indifference</th>
+        <th>preference</th>
+        <th>veto</th>
+        </tr>"""
+        i = 0
+        for g in criteriaList:
+            i += 1
+            critg = criteria[g]
+            #print(g,critg)
+            html += '<tr><td align="center">%s</td>' % i
+            try:
+                html += '<th bgcolor="#FFF79B">%s</th>' % critg['shortName']
+            except:
+                html += '<th bgcolor="#FFF79B">%s</th>' % g
+            html += '<td>%s</td><td>%s</td>' % (critg['name'],critg['comment'])
+            html += '<td align="center">%.2f</td>' % critg['weight']
+            html += '<td align="center">%s</td>' % critg['preferenceDirection']
+            html += '<td align="center">%.2f</td>' % critg['scale'][0]
+            html += '<td align="center">%.2f</td>' % critg['scale'][1]
+
+            try:
+                if critg['thresholds']['ind'] != None:
+                    html += '<td align="center">%.2fx + %.2f</td>' %\
+                                (critg['thresholds']['ind'][1],\
+                                 critg['thresholds']['ind'][0])                
+            except:
+                html += '<td></td>'
+                
+            try:
+                if critg['thresholds']['pref'] != None:
+                    html += '<td align="center">%.2fx + %.2f</td>' %\
+                                (critg['thresholds']['pref'][1],\
+                                 critg['thresholds']['pref'][0])                
+            except:
+                html += '<td></td>'
+            try:
+                if critg['thresholds']['veto'] != None:
+                    html += '<td align="center">%.2fx + %.2f</td>' %\
+                                (critg['thresholds']['veto'][1],\
+                                 critg['thresholds']['veto'][0])                
+            except:
+                html += '<td></td>'
+
+            html += '</tr>'
+##            <td align="center">%.2f</td>
+##            <td align="center">%.2f</td>
+##            <td align="center">%.2f</td>
+##            <td align="center">%.2f</td>
+##            <td align="center">%.2f</td>
+##            <td align="center">%.2f</td>
+##            <td align="center">%.2f</td>
+            
+        html += '</table>'
+        return html
+        
+        
+    def showHTMLPerformanceTableau(self,actionsSubset=None,\
+                                   fromIndex=None,toIndex=None,\
+                                   isSorted=True,\
                                    Transposed=False,ndigits=2,\
                                    ContentCentered=True,title=None):
         """
@@ -1809,7 +1952,10 @@ The performance evaluations of each decision alternative on each criterion are g
         import webbrowser
         fileName = '/tmp/performanceTable.html'
         fo = open(fileName,'w')
-        fo.write(self.htmlPerformanceTable(actions=actionsSubset,isSorted=isSorted,\
+        fo.write(self._htmlPerformanceTableau(actions=actionsSubset,\
+                                             fromIndex=fromIndex,\
+                                             toIndex=toIndex,\
+                                             isSorted=isSorted,\
                                            Transposed=Transposed,\
                                            ndigits=ndigits,
                                            ContentCentered=ContentCentered,
@@ -1819,12 +1965,15 @@ The performance evaluations of each decision alternative on each criterion are g
         webbrowser.open_new(url)
            
             
-    def htmlPerformanceTable(self,actions=None,isSorted=False,\
+    def _htmlPerformanceTableau(self,actions=None,\
+                               fromIndex=None,\
+                               toIndex=None,\
+                               isSorted=False,\
                              Transposed=False,ndigits=2,\
                              ContentCentered=True,
                              title=None):
         """
-        Renders the performance table citerion x actions in html format.
+        Renders the performance tableau citerion x actions in html format.
         """
         criteria = self.criteria
         minMaxEvaluations = self.computeMinMaxEvaluations()
@@ -1850,7 +1999,13 @@ The performance evaluations of each decision alternative on each criterion are g
         if Transposed:
             html += '<table style="background-color:White;" border="1">'
             html += '<tr bgcolor="#9acd32"><th>criterion</th>'
-            for x in actionsKeys:
+            if fromIndex == None:
+                fromIndex = 0
+            if toIndex == None:
+                fromIndex = len(actionsKeys)
+            for i in raneg(fromIndex,toIndex):
+                x = actionsKeys[i]
+            #for x in actionsKeys:
                 try:
                     xName = actions[x]['shortName']
                 except:
@@ -1884,7 +2039,7 @@ The performance evaluations of each decision alternative on each criterion are g
             html += '</table>'
         else:
             html += '<table style="background-color:White;" border="1">'
-            html += '<tr bgcolor="#9acd32"><th>criterion</th>'
+            html += '<tr bgcolor="#9acd32"><th>criteria</th>'
             for g in criteriaKeys:
                 try:
                     gName = criteria[g]['shortName']
@@ -1892,29 +2047,57 @@ The performance evaluations of each decision alternative on each criterion are g
                     gName = str(g)
                 html += '<th bgcolor="#FFF79B">%s</th>' % (gName)
             html += '</tr>'
-            for x in actionsKeys:
+            html += '<tr bgcolor="#9acd32"><th>weight</th>'
+            for g in criteriaKeys:
+                gWeight = criteria[g]['weight']
+                html += '<th bgcolor="#FFF79B">%.2f</th>' % (gWeight)
+            html += '</tr>'
+            if fromIndex == None:
+                fromIndex = 0
+            if toIndex == None:
+                toIndex = len(actionsKeys)
+            #for x in actionsKeys:
+            for i in range(fromIndex,toIndex):
+                x = actionsKeys[i]
                 try:
                     xName = actions[x]['shortName']
                 except:
                     xName = str(x)
                 html += '<tr><th bgcolor="#FFF79B">%s</th>' % (xName)
                 for g in criteriaKeys:
-                    if self.evaluation[g][x] != Decimal("-999"):
-                        if minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
-                            formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
-                            html += formatString % (evaluation[g][x])
-                        elif self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
-                            formatString = '<td bgcolor="#ffddff"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
-                            html += formatString % (evaluation[g][x])
-                        elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
-                            formatString = '<td bgcolor="#ddffdd" align="%s">%% .%df</td>' % (alignFormat,ndigits)
-                            html += formatString % (evaluation[g][x])
+                    if self.criteria[g]['weight'] < Decimal('0'):
+                        if self.evaluation[g][x] != Decimal("-999"):
+                            if minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
+                                formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
+                            elif self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
+                                formatString = '<td bgcolor="#ddffdd"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
+                            elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
+                                formatString = '<td bgcolor="#ffddff" align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
+                            else:
+                                formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
                         else:
-                            formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
-                            html += formatString % (evaluation[g][x])
-                            
+                            html += '<td align="center"><span style="color: LightGrey;font-size:75%;">NA</span></td>'
                     else:
-                        html += '<td align="center"><span style="color: LightGrey;font-size:75%;">NA</span></td>'
+                        if self.evaluation[g][x] != Decimal("-999"):
+                            if minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
+                                formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
+                            elif self.evaluation[g][x] == minMaxEvaluations[g]['minimum']:
+                                formatString = '<td bgcolor="#ffddff"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
+                            elif self.evaluation[g][x] == minMaxEvaluations[g]['maximum']:
+                                formatString = '<td bgcolor="#ddffdd" align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
+                            else:
+                                formatString = '<td align="%s">%% .%df</td>' % (alignFormat,ndigits)
+                                html += formatString % (evaluation[g][x])
+                        else:
+                            html += '<td align="center"><span style="color: LightGrey;font-size:75%;">NA</span></td>'
+                        
                 html += '</tr>'
             html += '</table>'
             
@@ -2321,19 +2504,21 @@ The performance evaluations of each decision alternative on each criterion are g
 #####                                                         END                                             ######
 ######################################################################################################################
 
-    def showHTMLPerformanceHeatmap(self,actionsList=None,
-                                   criteriaList=None,
-                                   colorLevels=7,
-                                   pageTitle=None,
-                                   ndigits=2,
-                                   SparseModel=False,
-                                   minimalComponentSize=1,
-                                   rankingRule='Copeland',
-                                   quantiles=None,
-                                   strategy='average',
-                                   Correlations=False,
-                                   Threading=False,
-                                   nbrOfCPUs=None,
+    def showHTMLPerformanceHeatmap(self,actionsList=None,\
+                                   fromIndex=None,\
+                                   toIndex=None,\
+                                   criteriaList=None,\
+                                   colorLevels=7,\
+                                   pageTitle=None,\
+                                   ndigits=2,\
+                                   SparseModel=False,\
+                                   minimalComponentSize=1,\
+                                   rankingRule='Copeland',\
+                                   quantiles=None,\
+                                   strategy='average',\
+                                   Correlations=False,\
+                                   Threading=False,\
+                                   nbrOfCPUs=None,\
                                    Debug=False):
         """
         shows the html heatmap version of the performance tableau in a browser window
@@ -2381,8 +2566,10 @@ The performance evaluations of each decision alternative on each criterion are g
         if pageTitle == None:
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
             
-        fo.write(self.htmlPerformanceHeatmap(argCriteriaList=criteriaList,
+        fo.write(self._htmlPerformanceHeatmap(argCriteriaList=criteriaList,
                                              argActionsList=actionsList,
+                                             fromIndex=fromIndex,
+                                             toIndex=toIndex,
                                              SparseModel=SparseModel,
                                              minimalComponentSize=minimalComponentSize,
                                              rankingRule=rankingRule,
@@ -2399,8 +2586,10 @@ The performance evaluations of each decision alternative on each criterion are g
         url = 'file://'+fileName
         webbrowser.open_new(url)
 
-    def htmlPerformanceHeatmap(self,argCriteriaList=None,
+    def _htmlPerformanceHeatmap(self,argCriteriaList=None,
                                argActionsList=None,
+                               fromIndex=None,
+                               toIndex=None,
                                SparseModel=False,
                                minimalComponentSize=1,
                                rankingRule='Copeland',
@@ -2555,7 +2744,6 @@ The performance evaluations of each decision alternative on each criterion are g
                                 nbrCores=nbrOfCPUs)
             else:
                 criteriaCorrelation = None
-            
         quantileColor={}
         for x in actionsList:
             quantileColor[x] = {}
@@ -2604,7 +2792,7 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</tr>\n'
         html += '<tr><th bgcolor=%s>weights</th>' % (columnHeaderColor)
         for g in criteriaList:
-            html += '<td align="center">%s</td>' % (str(self.criteria[g]['weight']))
+            html += '<td align="center">%+.2f</td>' % (self.criteria[g]['weight'])
         html += '</tr>\n'
         if criteriaCorrelation != None:
             html += '<tr><th bgcolor=%s>tau<sup>(*)</sup></th>' % (columnHeaderColor)
@@ -2613,7 +2801,12 @@ The performance evaluations of each decision alternative on each criterion are g
             html += '</tr>\n'
         if Debug:
             print(html)
-        for x in actionsList:
+        if fromIndex == None:
+            fromIndex=0
+        if toIndex == None:
+            toIndex = len(actionsList)
+        for i in range(fromIndex,toIndex):
+            x = actionsList[i]
             try:
                 xName = self.actions[x]['shortName']
             except:
@@ -2662,7 +2855,7 @@ The performance evaluations of each decision alternative on each criterion are g
         # generate weightslist
         weightslist = []
         for g in criteria:
-            weightslist.append((criteria[g]['weight'],g))
+            weightslist.append((abs(criteria[g]['weight']),g))
         weightslist.sort()
         # generate weightPreorder
         weightPreorder = []
@@ -3541,7 +3734,10 @@ The performance evaluations of each decision alternative on each criterion are g
             for g in criteriaList:
                 try:
                     if self.criteria[g]['preferenceDirection'] == 'min':
-                        pdir = Decimal('-1')
+                        if self.criteria[g]['weight'] > Decimal('0'):
+                            pdir = Decimal('-1')
+                        else:
+                            pdir = Decimal('1')
                     else:
                         pdir = Decimal('1')
                 except:
@@ -3551,7 +3747,10 @@ The performance evaluations of each decision alternative on each criterion are g
                 fo.write('<criterionID>')       
                 fo.write(g)
                 fo.write('</criterionID>\n')
-                val = pdir*evaluation[g][actionsList[i]]
+                if evaluation[g][actionsList[i]] == Decimal('-999'):
+                    val = evaluation[g][actionsList[i]]
+                else:
+                    val = pdir*evaluation[g][actionsList[i]]
                 if val == Decimal("-999"):
                     fo.write('<value><NA>')
                     fo.write('%s' % stringNA )
@@ -4385,6 +4584,10 @@ class PartialPerformanceTableau(PerformanceTableau):
     def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None,objectivesSubset=None):
         from copy import deepcopy
         from collections import OrderedDict
+        from randomPerfTabs import RandomCBPerformanceTableau,\
+                                   Random3ObjectivesPerformanceTableau,\
+                                   RandomPerformanceTableau
+        self.__class__ = inPerfTab.__class__
         # name
         self.name = 'partial-'+inPerfTab.name
         # actions
@@ -4395,6 +4598,23 @@ class PartialPerformanceTableau(PerformanceTableau):
         else:
             actions = deepcopy(inPerfTab.actions)
         self.actions = actions
+        actionsTypeStatistics = {}
+        for x in inPerfTab.actions:
+            if type(inPerfTab) == RandomCBPerformanceTableau:
+                xType = inPerfTab.actions[x]['type']
+            elif type(inPerfTab) == Random3ObjectivesPerformanceTableau:
+                self.objectiveSupportingTypes = inPerfTab.objectiveSupportingTypes
+                xType = 'Soc' + inPerfTab.actions[x]['profile']['Soc']
+                xType += 'Eco' + inPerfTab.actions[x]['profile']['Eco']
+                xType += 'Env' + inPerfTab.actions[x]['profile']['Env']
+            else:
+                xType = 'NA'
+            try:
+                actionsTypeStatistics[xType] += 1
+            except:
+                actionsTypeStatistics[xType] = 1
+        self.actionsTypeStatistics = actionsTypeStatistics
+        
         # objectives & criteria
         objectives = OrderedDict()
         HasObjectives = True
@@ -4431,9 +4651,31 @@ class PartialPerformanceTableau(PerformanceTableau):
                         criteria[g] = deepcopy(inPerfTab.criteria[g])
                         objectives[obj]['criteria'].append(g)
         self.objectives = objectives
+        try:
+            self.commonScale = perfTab.commonScale
+        except:
+            pass
+        try:
+            self.OrdinalScales = perfTab.OrdinalScales
+        except:
+            pass
+        try:
+            self.BigData = perfTab.BigData
+        except:
+            pass
+        try:
+            self.missingDataProbability = perfTab.missingDataProbability
+        except:
+            pass
+        
         self.criteria = criteria
         self.weightPreorder = self.computeWeightPreorder()
         # evaluations
+        try:
+            self.valueDigits = perfTab.valueDigits
+        except:
+            self.valueDigits = 2
+
         evaluation = {}
         for g in criteria.keys():
             evaluation[g] = {}
@@ -7196,7 +7438,10 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
         for g in self.criteria:
             try:
                 if self.criteria[g]['preferenceDirection'] == 'min':
-                    pdir = Decimal('-1')
+                    if self.criteria[g]['weight'] > Decimal('0'):
+                        pdir = Decimal('-1')
+                    else:
+                        pdir = Decimal('1')
                 else:
                     pdir = Decimal('1')
             except:
@@ -7287,23 +7532,82 @@ if __name__ == "__main__":
 
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
+##    t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,
+##                                   numberOfActions=10,
+##                                   weightDistribution='equiobjectives',
+##                                   IntegerWeights=True,
+##                                   #NegativeWeights=False,
+##                                   Debug=False,
+##                                   missingDataProbability=0.1,
+##                                   seed=105,
+##                                            #Threading=False
+##                                            )
     t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=10,
+                                   numberOfActions=50,
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
                                    NegativeWeights=True,
                                    Debug=False,
                                    missingDataProbability=0.1,
-                                   seed=101,Threading=False)
-    t.showPerformanceTableau()
-    nt = NormalizedPerformanceTableau(t)
-    nt.showPerformanceTableau()
-    #t.showHTMLPerformanceHeatmap(Correlations=True)
-    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
-    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
-    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='ArrowRaynaud')
-    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
+                                   seed=102,
+                                   Threading=False,
+                                            )
+    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Copeland')
+    g = BipolarOutrankingDigraph(t)
+    ranking = g.computeCopelandRanking()
+    critCorr = g.computeMarginalVersusGlobalRankingCorrelations(ranking)
+    print('copSum',sum([x[0] for x in critCorr]))
+    n = len(critCorr)
+    nd = Decimal(n*(n-1)/2)
+    totDif = Decimal('0')
+    for i in range(n):
+        for j in range(i+1,n):
+            totDif += abs(critCorr[i][0] - critCorr[j][0])
+    print('difcop',totDif/nd)
+    ranking = g.computeNetFlowsRanking()
+    critCorr = g.computeMarginalVersusGlobalRankingCorrelations(ranking)
+    print('nfSum',sum([x[0] for x in critCorr]))
+    totDif = Decimal('0')
+    for i in range(n):
+        for j in range(i+1,n):
+            totDif += abs(critCorr[i][0] - critCorr[j][0])
+    print('difnf',totDif/nd)
+    t.showHTMLPerformanceHeatmap(Correlations=True,
+                                 rankingRule='NetFlows',
+                                 toIndex=10)
+
+       
+
     
+##    t.showPerformanceTableau()
+##    nt = NormalizedPerformanceTableau(t)
+##    nt.showPerformanceTableau()
+##    #t.showHTMLPerformanceHeatmap(Correlations=True)
+##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
+##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
+##
+##    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='ArrowRaynaud')
+##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
+##    t1 = RandomCBPerformanceTableau(numberOfCriteria=13,
+##                                   numberOfActions=10,
+##                                   weightDistribution='equiobjectives',
+##                                   IntegerWeights=True,
+##                                   NegativeWeights=True,
+##                                   Debug=False,
+##                                   missingDataProbability=0.1,
+##                                   seed=101,Threading=False)
+##    t1.showPerformanceTableau()
+##
+##    g = BipolarOutrankingDigraph(t)
+##    g1 = BipolarOutrankingDigraph(t1)
+##    
+##    nt = NormalizedPerformanceTableau(t1)
+##    nt.showPerformanceTableau()
+##    #t.showHTMLPerformanceHeatmap(Correlations=True)
+##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
+##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
+##    t1.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='ArrowRaynaud')
+##   
     #nt.showHTMLPerformanceHeatmap(Correlations=True)
 #     t.saveCSV('test')
 #     T = CSVPerformanceTableau('test',Debug=True)

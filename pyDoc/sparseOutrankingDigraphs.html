@@ -364,6 +364,8 @@ By&nbsp;default&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;is&nbsp;normalized&nbsp
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLRelationMap"><strong>showHTMLRelationMap</strong></a>(self, actionsSubset=None, Colored=True, tableTitle='Relation Map', relationName='r(x S y)', symbols=['+', '&amp;middot;', '&amp;nbsp;', '&amp;#150;', '&amp;#151;'])</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;map&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self)</dt><dd><tt>Not&nbsp;yet&nbsp;availbale&nbsp;!</tt></dd></dl>
+
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showRelationMap"><strong>showRelationMap</strong></a>(self, fromIndex=None, toIndex=None, symbols=None, actionsList=None)</dt><dd><tt>Prints&nbsp;on&nbsp;the&nbsp;console,&nbsp;in&nbsp;text&nbsp;map&nbsp;format,&nbsp;the&nbsp;location&nbsp;of<br>
 the&nbsp;diagonal&nbsp;outranking&nbsp;components&nbsp;of&nbsp;the&nbsp;sparse&nbsp;outranking&nbsp;digraph.<br>
 &nbsp;<br>
@@ -557,14 +559,19 @@ and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showCriterionRelationTable"><strong>showCriterionRelationTable</strong></a>(self, criterion, actionsSubset=None)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLPairwiseComparison"><strong>showHTMLPairwiseComparison</strong></a>(self, a, b, fileName=None)</dt><dd><tt>Exporting&nbsp;the&nbsp;pairwise&nbsp;comparison&nbsp;table&nbsp;of&nbsp;actions&nbsp;a&nbsp;and&nbsp;b&nbsp;in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;file&nbsp;name&nbsp;may&nbsp;be&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLPairwiseOutrankings"><strong>showHTMLPairwiseOutrankings</strong></a>(self, a, b, fileName=None)</dt><dd><tt>Exporting&nbsp;the&nbsp;pairwise&nbsp;outrankings&nbsp;table&nbsp;of&nbsp;actions&nbsp;a&nbsp;and&nbsp;b<br>
+in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;file&nbsp;name&nbsp;may&nbsp;be&nbsp;provided.</tt></dd></dl>
+
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showMarginalVersusGlobalOutrankingCorrelation"><strong>showMarginalVersusGlobalOutrankingCorrelation</strong></a>(self, Sorted=True, Threading=False, nbrOfCPUs=None, Comments=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;computeCriterionCorrelation&nbsp;results.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showPairwiseComparisonsDistributions"><strong>showPairwiseComparisonsDistributions</strong></a>(self)</dt><dd><tt>show&nbsp;the&nbsp;lt,leq,&nbsp;eq,&nbsp;geq,&nbsp;gt&nbsp;distributions&nbsp;for&nbsp;all&nbsp;pairs</tt></dd></dl>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showPairwiseComparisonsDistributions"><strong>showPairwiseComparisonsDistributions</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;lt,leq,&nbsp;eq,&nbsp;geq,&nbsp;gt&nbsp;distributions&nbsp;for&nbsp;all&nbsp;pairs</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showPairwiseOutrankings"><strong>showPairwiseOutrankings</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt></dl>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showPairwiseOutrankings"><strong>showPairwiseOutrankings</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;outrankings&nbsp;table&nbsp;for&nbsp;actions&nbsp;*a*&nbsp;and&nbsp;*b*.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
@@ -763,9 +770,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -1127,8 +1134,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -1333,8 +1338,6 @@ Dummy&nbsp;for&nbsp;<a href="#PreRankedConfidentOutrankingDigraph-showCircuits">
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLBestChoiceRecommendation"><strong>showHTMLBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt></dl>
-
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#PreRankedConfidentOutrankingDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -1579,17 +1582,14 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-convertWeight2Integer"><strong>convertWeight2Integer</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;Decimal&nbsp;format<br>
 to&nbsp;int&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-convertWeights2Negative"><strong>convertWeights2Negative</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-convertWeights2Positive"><strong>convertWeights2Positive</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-csvAllQuantiles"><strong>csvAllQuantiles</strong></a>(self, fileName='quantiles')</dt><dd><tt>save&nbsp;quantiles&nbsp;matrix&nbsp;criterionxaction&nbsp;in&nbsp;CSV&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
-
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, argCriteriaList=None, argActionsList=None, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, ContentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
-actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.<br>
-&nbsp;<br>
-See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;method.</tt></dd></dl>
-
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, actions=None, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -1607,7 +1607,9 @@ See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
 the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
+
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
@@ -1647,7 +1649,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, fromIndex=None, toIndex=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
 
@@ -1949,6 +1951,8 @@ By&nbsp;default&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;is&nbsp;normalized&nbsp
 
 <dl><dt><a name="PreRankedOutrankingDigraph-showHTMLRelationMap"><strong>showHTMLRelationMap</strong></a>(self, actionsSubset=None, Colored=True, tableTitle='Relation Map', relationName='r(x S y)', symbols=['+', '&amp;middot;', '&amp;nbsp;', '&amp;#150;', '&amp;#151;'])</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;map&nbsp;of&nbsp;self.</tt></dd></dl>
 
+<dl><dt><a name="PreRankedOutrankingDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self)</dt><dd><tt>Not&nbsp;yet&nbsp;availbale&nbsp;!</tt></dd></dl>
+
 <dl><dt><a name="PreRankedOutrankingDigraph-showRelationMap"><strong>showRelationMap</strong></a>(self, fromIndex=None, toIndex=None, symbols=None, actionsList=None)</dt><dd><tt>Prints&nbsp;on&nbsp;the&nbsp;console,&nbsp;in&nbsp;text&nbsp;map&nbsp;format,&nbsp;the&nbsp;location&nbsp;of<br>
 the&nbsp;diagonal&nbsp;outranking&nbsp;components&nbsp;of&nbsp;the&nbsp;sparse&nbsp;outranking&nbsp;digraph.<br>
 &nbsp;<br>
@@ -2142,14 +2146,19 @@ and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-showCriterionRelationTable"><strong>showCriterionRelationTable</strong></a>(self, criterion, actionsSubset=None)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="PreRankedOutrankingDigraph-showHTMLPairwiseComparison"><strong>showHTMLPairwiseComparison</strong></a>(self, a, b, fileName=None)</dt><dd><tt>Exporting&nbsp;the&nbsp;pairwise&nbsp;comparison&nbsp;table&nbsp;of&nbsp;actions&nbsp;a&nbsp;and&nbsp;b&nbsp;in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;file&nbsp;name&nbsp;may&nbsp;be&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="PreRankedOutrankingDigraph-showHTMLPairwiseOutrankings"><strong>showHTMLPairwiseOutrankings</strong></a>(self, a, b, fileName=None)</dt><dd><tt>Exporting&nbsp;the&nbsp;pairwise&nbsp;outrankings&nbsp;table&nbsp;of&nbsp;actions&nbsp;a&nbsp;and&nbsp;b<br>
+in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;file&nbsp;name&nbsp;may&nbsp;be&nbsp;provided.</tt></dd></dl>
+
 <dl><dt><a name="PreRankedOutrankingDigraph-showMarginalVersusGlobalOutrankingCorrelation"><strong>showMarginalVersusGlobalOutrankingCorrelation</strong></a>(self, Sorted=True, Threading=False, nbrOfCPUs=None, Comments=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;computeCriterionCorrelation&nbsp;results.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+<dl><dt><a name="PreRankedOutrankingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-showPairwiseComparisonsDistributions"><strong>showPairwiseComparisonsDistributions</strong></a>(self)</dt><dd><tt>show&nbsp;the&nbsp;lt,leq,&nbsp;eq,&nbsp;geq,&nbsp;gt&nbsp;distributions&nbsp;for&nbsp;all&nbsp;pairs</tt></dd></dl>
+<dl><dt><a name="PreRankedOutrankingDigraph-showPairwiseComparisonsDistributions"><strong>showPairwiseComparisonsDistributions</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;lt,leq,&nbsp;eq,&nbsp;geq,&nbsp;gt&nbsp;distributions&nbsp;for&nbsp;all&nbsp;pairs</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-showPairwiseOutrankings"><strong>showPairwiseOutrankings</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt></dl>
+<dl><dt><a name="PreRankedOutrankingDigraph-showPairwiseOutrankings"><strong>showPairwiseOutrankings</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;outrankings&nbsp;table&nbsp;for&nbsp;actions&nbsp;*a*&nbsp;and&nbsp;*b*.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
@@ -2348,9 +2357,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="PreRankedOutrankingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="PreRankedOutrankingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -2712,8 +2721,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="PreRankedOutrankingDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -2918,8 +2925,6 @@ Dummy&nbsp;for&nbsp;<a href="#PreRankedOutrankingDigraph-showCircuits">showCircu
 <dl><dt><a name="PreRankedOutrankingDigraph-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-showHTMLBestChoiceRecommendation"><strong>showHTMLBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt></dl>
-
-<dl><dt><a name="PreRankedOutrankingDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#PreRankedOutrankingDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -3164,17 +3169,14 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="PreRankedOutrankingDigraph-convertWeight2Integer"><strong>convertWeight2Integer</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;Decimal&nbsp;format<br>
 to&nbsp;int&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="PreRankedOutrankingDigraph-convertWeights2Negative"><strong>convertWeights2Negative</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
+<dl><dt><a name="PreRankedOutrankingDigraph-convertWeights2Positive"><strong>convertWeights2Positive</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
 <dl><dt><a name="PreRankedOutrankingDigraph-csvAllQuantiles"><strong>csvAllQuantiles</strong></a>(self, fileName='quantiles')</dt><dd><tt>save&nbsp;quantiles&nbsp;matrix&nbsp;criterionxaction&nbsp;in&nbsp;CSV&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
-
-<dl><dt><a name="PreRankedOutrankingDigraph-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, argCriteriaList=None, argActionsList=None, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, ContentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
-actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.<br>
-&nbsp;<br>
-See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;method.</tt></dd></dl>
-
-<dl><dt><a name="PreRankedOutrankingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, actions=None, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -3192,7 +3194,9 @@ See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;
 <dl><dt><a name="PreRankedOutrankingDigraph-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
 the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="PreRankedOutrankingDigraph-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
+
+<dl><dt><a name="PreRankedOutrankingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
@@ -3232,7 +3236,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="PreRankedOutrankingDigraph-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="PreRankedOutrankingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, fromIndex=None, toIndex=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
 
@@ -3424,6 +3428,8 @@ in&nbsp;*decreasing*&nbsp;(default)&nbsp;or&nbsp;*increasing*&nbsp;preference&nb
 <dl><dt><a name="SparseOutrankingDigraph-showHTMLMarginalQuantileLimits"><strong>showHTMLMarginalQuantileLimits</strong></a>(self)</dt><dd><tt>shows&nbsp;the&nbsp;marginal&nbsp;quantiles&nbsp;limits.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-showHTMLRelationMap"><strong>showHTMLRelationMap</strong></a>(self, actionsSubset=None, Colored=True, tableTitle='Relation Map', relationName='r(x S y)', symbols=['+', '&amp;middot;', '&amp;nbsp;', '&amp;#150;', '&amp;#151;'])</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;map&nbsp;of&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="SparseOutrankingDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self)</dt><dd><tt>Not&nbsp;yet&nbsp;availbale&nbsp;!</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-showRelationMap"><strong>showRelationMap</strong></a>(self, fromIndex=None, toIndex=None, symbols=None, actionsList=None)</dt><dd><tt>Prints&nbsp;on&nbsp;the&nbsp;console,&nbsp;in&nbsp;text&nbsp;map&nbsp;format,&nbsp;the&nbsp;location&nbsp;of<br>
 the&nbsp;diagonal&nbsp;outranking&nbsp;components&nbsp;of&nbsp;the&nbsp;sparse&nbsp;outranking&nbsp;digraph.<br>
@@ -3630,14 +3636,19 @@ and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-showCriterionRelationTable"><strong>showCriterionRelationTable</strong></a>(self, criterion, actionsSubset=None)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="SparseOutrankingDigraph-showHTMLPairwiseComparison"><strong>showHTMLPairwiseComparison</strong></a>(self, a, b, fileName=None)</dt><dd><tt>Exporting&nbsp;the&nbsp;pairwise&nbsp;comparison&nbsp;table&nbsp;of&nbsp;actions&nbsp;a&nbsp;and&nbsp;b&nbsp;in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;file&nbsp;name&nbsp;may&nbsp;be&nbsp;provided.</tt></dd></dl>
+
+<dl><dt><a name="SparseOutrankingDigraph-showHTMLPairwiseOutrankings"><strong>showHTMLPairwiseOutrankings</strong></a>(self, a, b, fileName=None)</dt><dd><tt>Exporting&nbsp;the&nbsp;pairwise&nbsp;outrankings&nbsp;table&nbsp;of&nbsp;actions&nbsp;a&nbsp;and&nbsp;b<br>
+in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;file&nbsp;name&nbsp;may&nbsp;be&nbsp;provided.</tt></dd></dl>
+
 <dl><dt><a name="SparseOutrankingDigraph-showMarginalVersusGlobalOutrankingCorrelation"><strong>showMarginalVersusGlobalOutrankingCorrelation</strong></a>(self, Sorted=True, Threading=False, nbrOfCPUs=None, Comments=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;computeCriterionCorrelation&nbsp;results.</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+<dl><dt><a name="SparseOutrankingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-showPairwiseComparisonsDistributions"><strong>showPairwiseComparisonsDistributions</strong></a>(self)</dt><dd><tt>show&nbsp;the&nbsp;lt,leq,&nbsp;eq,&nbsp;geq,&nbsp;gt&nbsp;distributions&nbsp;for&nbsp;all&nbsp;pairs</tt></dd></dl>
+<dl><dt><a name="SparseOutrankingDigraph-showPairwiseComparisonsDistributions"><strong>showPairwiseComparisonsDistributions</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;lt,leq,&nbsp;eq,&nbsp;geq,&nbsp;gt&nbsp;distributions&nbsp;for&nbsp;all&nbsp;pairs</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-showPairwiseOutrankings"><strong>showPairwiseOutrankings</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt></dl>
+<dl><dt><a name="SparseOutrankingDigraph-showPairwiseOutrankings"><strong>showPairwiseOutrankings</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;outrankings&nbsp;table&nbsp;for&nbsp;actions&nbsp;*a*&nbsp;and&nbsp;*b*.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
@@ -3840,9 +3851,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="SparseOutrankingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="SparseOutrankingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -4204,8 +4215,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="SparseOutrankingDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="SparseOutrankingDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -4414,8 +4423,6 @@ Dummy&nbsp;for&nbsp;<a href="#SparseOutrankingDigraph-showCircuits">showCircuits
 <dl><dt><a name="SparseOutrankingDigraph-showGoodChoices"><strong>showGoodChoices</strong></a>(self, Recompute=True)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-showHTMLBestChoiceRecommendation"><strong>showHTMLBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt></dl>
-
-<dl><dt><a name="SparseOutrankingDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#SparseOutrankingDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -4660,17 +4667,14 @@ to&nbsp;decimal&nbsp;format.</tt></dd></dl>
 <dl><dt><a name="SparseOutrankingDigraph-convertWeight2Integer"><strong>convertWeight2Integer</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;Decimal&nbsp;format<br>
 to&nbsp;int&nbsp;format.</tt></dd></dl>
 
+<dl><dt><a name="SparseOutrankingDigraph-convertWeights2Negative"><strong>convertWeights2Negative</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
+<dl><dt><a name="SparseOutrankingDigraph-convertWeights2Positive"><strong>convertWeights2Positive</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
 <dl><dt><a name="SparseOutrankingDigraph-csvAllQuantiles"><strong>csvAllQuantiles</strong></a>(self, fileName='quantiles')</dt><dd><tt>save&nbsp;quantiles&nbsp;matrix&nbsp;criterionxaction&nbsp;in&nbsp;CSV&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
 Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
-
-<dl><dt><a name="SparseOutrankingDigraph-htmlPerformanceHeatmap"><strong>htmlPerformanceHeatmap</strong></a>(self, argCriteriaList=None, argActionsList=None, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', ndigits=2, ContentCentered=True, colorLevels=None, pageTitle='Performance Heatmap', Correlations=False, Threading=False, nbrOfCPUs=1, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;Brewer&nbsp;RdYlGn&nbsp;5,7,&nbsp;or&nbsp;9&nbsp;levels&nbsp;colored&nbsp;heatmap&nbsp;of&nbsp;the&nbsp;performance&nbsp;table<br>
-actions&nbsp;x&nbsp;criteria&nbsp;in&nbsp;html&nbsp;format.<br>
-&nbsp;<br>
-See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;method.</tt></dd></dl>
-
-<dl><dt><a name="SparseOutrankingDigraph-htmlPerformanceTable"><strong>htmlPerformanceTable</strong></a>(self, actions=None, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>Renders&nbsp;the&nbsp;performance&nbsp;table&nbsp;citerion&nbsp;x&nbsp;actions&nbsp;in&nbsp;html&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
 
@@ -4690,7 +4694,9 @@ See&nbsp;the&nbsp;corresponding&nbsp;perfTabs.showHTMLPerformanceHeatMap()&nbsp;
 <dl><dt><a name="SparseOutrankingDigraph-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
 the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="SparseOutrankingDigraph-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
+
+<dl><dt><a name="SparseOutrankingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
@@ -4730,7 +4736,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="SparseOutrankingDigraph-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+<dl><dt><a name="SparseOutrankingDigraph-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, fromIndex=None, toIndex=None, isSorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
 

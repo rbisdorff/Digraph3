@@ -341,6 +341,12 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         url = 'file://'+fileName
         webbrowser.open_new(url)
 
+    def showHTMLRelationTable(self):
+        """
+        Not yet availbale !
+        """
+        print('Method not yet implemented for This class of digraphs!')
+        print('Try instead: self.showRelationTable()')
 
     def htmlRelationMap(self,actionsSubset=None,
                           tableTitle='Relation Map',
@@ -1599,7 +1605,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         print('*----  criteria -----*')
         sumWeights = Decimal('0.0')
         for g in self.criteria:
-            sumWeights += self.criteria[g]['weight']
+            sumWeights += abs(self.criteria[g]['weight'])
         criteriaList = [c for c in self.criteria]
         criteriaList.sort()
         for c in criteriaList:
@@ -1720,6 +1726,13 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         if isReturningHTML:
             html += '</table>'
             return html
+
+##    def showHTMLRelationTable(self):
+##        """
+##        Not yet availbale !
+##        """
+##        print('Method not yet implemented for This class of digraphs!')
+##        print('Try instead: self.showRelationTable()')
 
     def showRelationTable(self,compKeys=None):
         """
@@ -2435,7 +2448,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
 
         weightSquares = {}
         for g in criteriaList:
-            gWeight = self.criteria[g]['weight']
+            gWeight = abs(self.criteria[g]['weight'])
             weightSquares[g] = gWeight*gWeight
             sumWeights += gWeight
         concordanceRelation = self._recodeConcordanceValuation(\

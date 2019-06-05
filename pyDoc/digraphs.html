@@ -299,9 +299,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="AsymmetricPartialDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="AsymmetricPartialDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="AsymmetricPartialDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="AsymmetricPartialDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="AsymmetricPartialDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -723,10 +723,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="AsymmetricPartialDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="AsymmetricPartialDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="AsymmetricPartialDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="AsymmetricPartialDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="AsymmetricPartialDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -961,7 +957,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="AsymmetricPartialDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="AsymmetricPartialDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="AsymmetricPartialDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#AsymmetricPartialDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -1409,9 +1405,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="BreakAddCocsDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="BreakAddCocsDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="BreakAddCocsDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="BreakAddCocsDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="BreakAddCocsDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -1833,10 +1829,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="BreakAddCocsDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="BreakAddCocsDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="BreakAddCocsDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="BreakAddCocsDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="BreakAddCocsDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -2067,7 +2059,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="BreakAddCocsDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="BreakAddCocsDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="BreakAddCocsDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#BreakAddCocsDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -2512,9 +2504,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="BrokenCocsDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="BrokenCocsDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="BrokenCocsDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="BrokenCocsDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="BrokenCocsDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -2936,10 +2928,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="BrokenCocsDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="BrokenCocsDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="BrokenCocsDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="BrokenCocsDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="BrokenCocsDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -3172,7 +3160,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="BrokenCocsDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="BrokenCocsDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="BrokenCocsDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#BrokenCocsDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -3607,9 +3595,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="CSVDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="CSVDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="CSVDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="CSVDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="CSVDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -4031,10 +4019,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="CSVDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="CSVDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CSVDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="CSVDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="CSVDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -4267,7 +4251,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="CSVDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="CSVDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="CSVDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#CSVDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -4745,9 +4729,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="CirculantDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="CirculantDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="CirculantDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="CirculantDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="CirculantDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -5169,10 +5153,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="CirculantDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="CirculantDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CirculantDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="CirculantDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="CirculantDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -5407,7 +5387,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="CirculantDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="CirculantDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="CirculantDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#CirculantDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -5841,9 +5821,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="CoDualDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="CoDualDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="CoDualDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="CoDualDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="CoDualDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -6265,10 +6245,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="CoDualDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="CoDualDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CoDualDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="CoDualDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="CoDualDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -6503,7 +6479,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="CoDualDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="CoDualDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="CoDualDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#CoDualDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -6955,9 +6931,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="CocaDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="CocaDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="CocaDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="CocaDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="CocaDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -7379,10 +7355,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="CocaDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="CocaDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CocaDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="CocaDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="CocaDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -7613,7 +7585,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="CocaDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="CocaDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="CocaDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#CocaDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -8046,9 +8018,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="CompleteDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="CompleteDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="CompleteDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="CompleteDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="CompleteDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -8470,10 +8442,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="CompleteDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="CompleteDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CompleteDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="CompleteDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="CompleteDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -8708,7 +8676,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="CompleteDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="CompleteDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="CompleteDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#CompleteDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -9143,9 +9111,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="ConverseDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="ConverseDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="ConverseDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="ConverseDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="ConverseDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -9567,10 +9535,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="ConverseDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="ConverseDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="ConverseDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="ConverseDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="ConverseDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -9805,7 +9769,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="ConverseDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="ConverseDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="ConverseDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#ConverseDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -10242,9 +10206,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="CoverDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="CoverDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="CoverDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="CoverDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="CoverDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -10666,10 +10630,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="CoverDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="CoverDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="CoverDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="CoverDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="CoverDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -10904,7 +10864,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="CoverDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="CoverDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="CoverDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#CoverDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -11359,9 +11319,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="Digraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="Digraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="Digraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="Digraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="Digraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -11783,10 +11743,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="Digraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="Digraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="Digraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="Digraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="Digraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -12021,7 +11977,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="Digraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="Digraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="Digraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#Digraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -12458,9 +12414,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="DualDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="DualDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="DualDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="DualDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="DualDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -12882,10 +12838,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="DualDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="DualDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="DualDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="DualDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="DualDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -13120,7 +13072,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="DualDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="DualDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="DualDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#DualDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -13553,9 +13505,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="EmptyDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="EmptyDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="EmptyDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="EmptyDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="EmptyDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -13977,10 +13929,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="EmptyDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="EmptyDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="EmptyDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="EmptyDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="EmptyDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -14215,7 +14163,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="EmptyDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="EmptyDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="EmptyDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#EmptyDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -14648,9 +14596,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="EquivalenceDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="EquivalenceDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="EquivalenceDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="EquivalenceDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="EquivalenceDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -15072,10 +15020,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="EquivalenceDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="EquivalenceDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="EquivalenceDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="EquivalenceDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="EquivalenceDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -15310,7 +15254,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="EquivalenceDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="EquivalenceDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="EquivalenceDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#EquivalenceDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -15744,9 +15688,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="FusionDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="FusionDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="FusionDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="FusionDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="FusionDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -16168,10 +16112,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="FusionDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="FusionDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="FusionDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="FusionDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="FusionDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -16406,7 +16346,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="FusionDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="FusionDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="FusionDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#FusionDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -16839,9 +16779,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="FusionLDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="FusionLDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="FusionLDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="FusionLDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="FusionLDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -17263,10 +17203,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="FusionLDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="FusionLDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="FusionLDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="FusionLDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="FusionLDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -17501,7 +17437,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="FusionLDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="FusionLDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="FusionLDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#FusionLDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -17941,9 +17877,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="GridDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="GridDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="GridDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="GridDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="GridDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -18365,10 +18301,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="GridDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="GridDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="GridDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="GridDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="GridDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -18603,7 +18535,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="GridDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="GridDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="GridDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#GridDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -19032,9 +18964,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="IndeterminateDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="IndeterminateDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="IndeterminateDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="IndeterminateDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="IndeterminateDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -19456,10 +19388,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="IndeterminateDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="IndeterminateDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="IndeterminateDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="IndeterminateDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="IndeterminateDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -19694,7 +19622,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="IndeterminateDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="IndeterminateDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="IndeterminateDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#IndeterminateDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -20133,9 +20061,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="KneserDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="KneserDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="KneserDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="KneserDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="KneserDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -20557,10 +20485,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="KneserDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="KneserDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="KneserDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="KneserDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="KneserDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -20795,7 +20719,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="KneserDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="KneserDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="KneserDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#KneserDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -21229,9 +21153,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="PolarisedDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="PolarisedDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="PolarisedDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="PolarisedDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="PolarisedDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -21653,10 +21577,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="PolarisedDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="PolarisedDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="PolarisedDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="PolarisedDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="PolarisedDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -21891,7 +21811,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="PolarisedDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="PolarisedDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="PolarisedDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#PolarisedDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -22326,9 +22246,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="RedhefferDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="RedhefferDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="RedhefferDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="RedhefferDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="RedhefferDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -22750,10 +22670,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="RedhefferDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="RedhefferDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="RedhefferDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="RedhefferDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="RedhefferDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -22988,7 +22904,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="RedhefferDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="RedhefferDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="RedhefferDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#RedhefferDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -23419,9 +23335,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="StrongComponentsCollapsedDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="StrongComponentsCollapsedDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="StrongComponentsCollapsedDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="StrongComponentsCollapsedDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="StrongComponentsCollapsedDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -23843,10 +23759,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="StrongComponentsCollapsedDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="StrongComponentsCollapsedDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="StrongComponentsCollapsedDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="StrongComponentsCollapsedDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="StrongComponentsCollapsedDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -24079,7 +23991,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="StrongComponentsCollapsedDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="StrongComponentsCollapsedDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="StrongComponentsCollapsedDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#StrongComponentsCollapsedDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -24513,9 +24425,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="SymmetricPartialDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="SymmetricPartialDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="SymmetricPartialDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="SymmetricPartialDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="SymmetricPartialDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -24937,10 +24849,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="SymmetricPartialDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="SymmetricPartialDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="SymmetricPartialDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="SymmetricPartialDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="SymmetricPartialDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -25175,7 +25083,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="SymmetricPartialDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="SymmetricPartialDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="SymmetricPartialDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#SymmetricPartialDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -25611,9 +25519,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2Digraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="XMCDA2Digraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2Digraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="XMCDA2Digraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2Digraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -26035,10 +25943,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="XMCDA2Digraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2Digraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="XMCDA2Digraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="XMCDA2Digraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2Digraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -26271,7 +26175,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2Digraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="XMCDA2Digraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2Digraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#XMCDA2Digraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -26701,9 +26605,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="XORDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="XORDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="XORDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="XORDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="XORDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -27125,10 +27029,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="XORDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="XORDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="XORDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="XORDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="XORDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -27363,7 +27263,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="XORDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="XORDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="XORDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#XORDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -27797,9 +27697,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
 
-<dl><dt><a name="kChoicesDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt></dl>
+<dl><dt><a name="kChoicesDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
-<dl><dt><a name="kChoicesDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt></dl>
+<dl><dt><a name="kChoicesDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="kChoicesDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -28221,10 +28121,6 @@ Usage&nbsp;example:<br>
 
 <dl><dt><a name="kChoicesDigraph-htmlChoiceVector"><strong>htmlChoiceVector</strong></a>(self, ch, ChoiceVector=True, choiceType='good')</dt><dd><tt>Show&nbsp;procedure&nbsp;for&nbsp;annotated&nbsp;bipolar&nbsp;choices.</tt></dd></dl>
 
-<dl><dt><a name="kChoicesDigraph-htmlRelationMap"><strong>htmlRelationMap</strong></a>(self, tableTitle='Relation Map', relationName='r(x R y)', actionsSubset=None, rankingRule='Copeland', symbols=['+', '&amp;middot;', '&amp;nbsp;', '-', '_'], Colored=True, ContentCentered=True)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;map&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="kChoicesDigraph-htmlRelationTable"><strong>htmlRelationTable</strong></a>(self, tableTitle='Valued Relation Table', relationName='r(x R y)', hasIntegerValues=False, actionsSubset=None, isColored=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;html&nbsp;table&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="kChoicesDigraph-inDegrees"><strong>inDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;indegrees</tt></dd></dl>
 
 <dl><dt><a name="kChoicesDigraph-inDegreesDistribution"><strong>inDegreesDistribution</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;indegrees.</tt></dd></dl>
@@ -28459,7 +28355,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="kChoicesDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)')</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="kChoicesDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="kChoicesDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#kChoicesDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
