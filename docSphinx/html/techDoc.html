@@ -3249,6 +3249,16 @@ where Max (resp. Min) equals valuation maximum (resp. minimum).</dd>
 </dd>
 </dl>
 <dl class="method">
+<dt id="graphs.Graph.breadthFirstSearch">
+<code class="descname">breadthFirstSearch</code><span class="sig-paren">(</span><em>s</em>, <em>alphabeticOrder=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.breadthFirstSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.breadthFirstSearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Breadth first search through a graph in lexicographical order
+of the vertex keys.</p>
+<p>Renders a list of vertice keys in
+increasing distance from the origin vertex <em>s</em>. Ties in the distances
+are resolved by alphabetic ordering of the vertice keys.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="graphs.Graph.computeChordlessCycles">
 <code class="descname">computeChordlessCycles</code><span class="sig-paren">(</span><em>Cycle3=False</em>, <em>Comments=False</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.computeChordlessCycles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.computeChordlessCycles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the set of all chordless cycles observed in a Graph

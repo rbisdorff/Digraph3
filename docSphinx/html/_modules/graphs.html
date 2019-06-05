@@ -1034,12 +1034,60 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
         <span class="k">return</span> <span class="n">size</span></div>
 
+<div class="viewcode-block" id="Graph.breadthFirstSearch"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.breadthFirstSearch">[docs]</a>    <span class="k">def</span> <span class="nf">breadthFirstSearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">alphabeticOrder</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Breadth first search through a graph in lexicographical order</span>
+<span class="sd">        of the vertex keys.</span>
+
+<span class="sd">        Renders a list of vertice keys in</span>
+<span class="sd">        increasing distance from the origin vertex *s*. Ties in the distances</span>
+<span class="sd">        are resolved by alphabetic ordering of the vertice keys.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">vertices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span>
+        <span class="n">verticesKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">vertices</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">alphabeticOrder</span><span class="p">:</span>
+            <span class="n">verticesKeys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">nv</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">verticesKeys</span><span class="p">)</span>
+        <span class="n">verticesKeys</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">vs</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">verticesKeys</span><span class="p">:</span>
+            <span class="n">vx</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="n">vx</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">vx</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nv</span>
+            <span class="n">vx</span><span class="p">[</span><span class="s1">&#39;parent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">vs</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">vs</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">vs</span><span class="p">[</span><span class="s1">&#39;parent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="p">]</span>
+        <span class="k">while</span> <span class="n">F</span> <span class="o">!=</span> <span class="p">[]:</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">F</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">u</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">vertices</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">vertices</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="n">vertices</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vertices</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+                    <span class="n">vertices</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;parent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+                    <span class="n">F</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">F</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;u,v,F&#39;</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">F</span><span class="p">)</span>
+            <span class="n">vertices</span><span class="p">[</span><span class="n">u</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
+        <span class="n">bfs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">vertices</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;distance&#39;</span><span class="p">],</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vertices</span><span class="p">]</span>
+        <span class="n">bfs</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">bfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">bfs</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bfs</span></div>
+
 <div class="viewcode-block" id="Graph.depthFirstSearch"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.depthFirstSearch">[docs]</a>    <span class="k">def</span> <span class="nf">depthFirstSearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Depth first search through a graph in lexicographical order</span>
 <span class="sd">        of the vertex keys.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">def</span> <span class="nf">visitVertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">_visitVertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Visits all followers of vertex x.</span>
 <span class="sd">            &quot;&quot;&quot;</span>
@@ -1056,18 +1104,21 @@
             <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">nextVertices</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">+=</span> <span class="mi">1</span>
-                    <span class="n">visitVertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span><span class="p">)</span>
+                    <span class="n">_visitVertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span><span class="p">)</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">_dfsx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;endDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">date</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">date</span> <span class="o">+=</span> <span class="mi">1</span>
 
-        <span class="k">def</span> <span class="nf">visitAllVertices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">_visitAllVertices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
             <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Mark the starting date for all vertices</span>
 <span class="sd">            and controls the progress of the search with vertices colors:</span>
 <span class="sd">            White (0), Grey (1), Black (2)</span>
+
+<span class="sd">            Stores the depth first search path in the *self.dfs* attribute</span>
+<span class="sd">            and returns it.</span>
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">:</span>
@@ -1080,14 +1131,14 @@
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Starting from </span><span class="si">%s</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
-                    <span class="n">visitVertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span><span class="p">)</span>
+                    <span class="n">_visitVertex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dfsx</span><span class="p">)</span>
                 <span class="c1">#self.vertices[x][&#39;color&#39;] = 2</span>
                 <span class="c1">#self.vertices[x][&#39;endDate&#39;] = self.date</span>
 
 
         <span class="c1"># ---- main -----</span>
-        <span class="n">visitAllVertices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+        <span class="n">_visitAllVertices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span></div>
 
 <div class="viewcode-block" id="Graph.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">verticesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -4406,21 +4457,27 @@
 <span class="c1">##    print(i.isTriangulated())</span>
 <span class="c1">##    print((-i).isTriangulated())</span>
 
-    <span class="n">ri</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">4335</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">ri</span><span class="p">)</span>
-    <span class="c1">#print(ri.intervals)</span>
-    <span class="c1">#print(ri.isIntervalGraph(Comments=True))</span>
-    <span class="c1">#print(ri.isTriangulated())</span>
-    <span class="c1">#print((-ri).isTriangulated())</span>
-    <span class="n">ri</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-    <span class="c1">#ri.isSplitGraph(Comments=True)</span>
-    <span class="c1">#ri.isPermutationGraph(Comments=True)</span>
-    <span class="c1">#print(ri.computePermutation())</span>
-    <span class="k">if</span> <span class="n">ri</span><span class="o">.</span><span class="n">isComparabilityGraph</span><span class="p">():</span>
-        <span class="n">ri</span><span class="o">.</span><span class="n">exportEdgeOrientationsGraphViz</span><span class="p">(</span><span class="s1">&#39;testColors1&#39;</span><span class="p">)</span>
-    <span class="n">rid</span> <span class="o">=</span> <span class="o">-</span><span class="n">ri</span>
-    <span class="k">if</span> <span class="n">rid</span><span class="o">.</span><span class="n">isComparabilityGraph</span><span class="p">():</span>
-        <span class="n">rid</span><span class="o">.</span><span class="n">exportEdgeOrientationsGraphViz</span><span class="p">(</span><span class="s1">&#39;testColors2&#39;</span><span class="p">,</span><span class="n">palette</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">##    ri = RandomGraph(order=8,seed=4335)</span>
+<span class="c1">##    print(ri)</span>
+<span class="c1">##    #print(ri.intervals)</span>
+<span class="c1">##    #print(ri.isIntervalGraph(Comments=True))</span>
+<span class="c1">##    #print(ri.isTriangulated())</span>
+<span class="c1">##    #print((-ri).isTriangulated())</span>
+<span class="c1">##    ri.exportGraphViz()</span>
+<span class="c1">##    #ri.isSplitGraph(Comments=True)</span>
+<span class="c1">##    #ri.isPermutationGraph(Comments=True)</span>
+<span class="c1">##    #print(ri.computePermutation())</span>
+<span class="c1">##    if ri.isComparabilityGraph():</span>
+<span class="c1">##        ri.exportEdgeOrientationsGraphViz(&#39;testColors1&#39;)</span>
+<span class="c1">##    rid = -ri</span>
+<span class="c1">##    if rid.isComparabilityGraph():</span>
+<span class="c1">##        rid.exportEdgeOrientationsGraphViz(&#39;testColors2&#39;,palette=2)</span>
+
+    <span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;testbfs&#39;</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s1">&#39;testbfs&#39;</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">breadthFirstSearch</span><span class="p">(</span><span class="s1">&#39;v1&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
     
     
 <span class="c1">##    rg = RandomPermutationGraph(order=6,seed=None)</span>

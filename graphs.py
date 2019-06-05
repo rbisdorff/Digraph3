@@ -987,12 +987,60 @@ class Graph(object):
         self.size = size
         return size
 
+    def breadthFirstSearch(self,s,alphabeticOrder=True,Debug=False):
+        """
+        Breadth first search through a graph in lexicographical order
+        of the vertex keys.
+
+        Renders a list of vertice keys in
+        increasing distance from the origin vertex *s*. Ties in the distances
+        are resolved by alphabetic ordering of the vertice keys.
+        """
+        vertices = self.vertices
+        verticesKeys = [x for x in vertices]
+        if alphabeticOrder:
+            verticesKeys.sort()
+        nv = len(verticesKeys)
+        verticesKeys.remove(s)
+        vs = vertices[s]
+        for x in verticesKeys:
+            vx = vertices[x]
+            vx['color'] = 0
+            vx['distance'] = nv
+            vx['parent'] = None
+        vs['color'] = 0
+        vs['distance'] = 0
+        vs['parent'] = None
+        if Debug:
+            print(self.vertices)
+        F = [s]
+        while F != []:
+            u = F.pop()
+            F.append(u)
+            for v in self.gamma[u]:
+                if vertices[v]['color'] == 0:
+                    vertices[v]['color'] = 1
+                    vertices[v]['distance'] = vertices[u]['distance'] + 1
+                    vertices[v]['parent'] = u
+                    F.append(v)
+            F.remove(u)
+            if Debug:
+                print('u,v,F',u,v,F)
+            vertices[u]['color'] = 2
+        if Debug:
+            print(self.vertices)
+        bfs = [(vertices[v]['distance'],v) for v in vertices]
+        bfs.sort()
+        
+        self.bfs = [x[1] for x in bfs]
+        return self.bfs
+
     def depthFirstSearch(self,Debug=False):
         """
         Depth first search through a graph in lexicographical order
         of the vertex keys.
         """
-        def visitVertex(self, x, Debug = False):
+        def _visitVertex(self, x, Debug = False):
             """
             Visits all followers of vertex x.
             """
@@ -1009,18 +1057,21 @@ class Graph(object):
             for y in nextVertices:
                 if self.vertices[y]['color'] == 0:
                     self.date += 1
-                    visitVertex(self,y, Debug = Debug)
+                    _visitVertex(self,y, Debug = Debug)
                     if self.vertices[x]['color'] == 1:
                         self._dfsx.append(x)
             self.vertices[x]['color'] = 2
             self.vertices[x]['endDate'] = self.date
             self.date += 1
 
-        def visitAllVertices(self, Debug=False):
+        def _visitAllVertices(self, Debug=False):
             """
             Mark the starting date for all vertices
             and controls the progress of the search with vertices colors:
             White (0), Grey (1), Black (2)
+
+            Stores the depth first search path in the *self.dfs* attribute
+            and returns it.
             """
             self.dfs = []
             for x in self.vertices:
@@ -1033,14 +1084,14 @@ class Graph(object):
                 if self.vertices[x]['color'] == 0:
                     if Debug:
                         print('==>> Starting from %s ' % x)
-                    visitVertex(self, x, Debug = Debug)
+                    _visitVertex(self, x, Debug = Debug)
                     self.dfs.append(self._dfsx)
                 #self.vertices[x]['color'] = 2
                 #self.vertices[x]['endDate'] = self.date
 
 
         # ---- main -----
-        visitAllVertices(self, Debug=Debug)
+        _visitAllVertices(self, Debug=Debug)
         return self.dfs
 
     def exportGraphViz(self,fileName=None,verticesSubset=None,
@@ -4359,21 +4410,27 @@ if __name__ == '__main__':
 ##    print(i.isTriangulated())
 ##    print((-i).isTriangulated())
 
-    ri = RandomGraph(order=8,seed=4335)
-    print(ri)
-    #print(ri.intervals)
-    #print(ri.isIntervalGraph(Comments=True))
-    #print(ri.isTriangulated())
-    #print((-ri).isTriangulated())
-    ri.exportGraphViz()
-    #ri.isSplitGraph(Comments=True)
-    #ri.isPermutationGraph(Comments=True)
-    #print(ri.computePermutation())
-    if ri.isComparabilityGraph():
-        ri.exportEdgeOrientationsGraphViz('testColors1')
-    rid = -ri
-    if rid.isComparabilityGraph():
-        rid.exportEdgeOrientationsGraphViz('testColors2',palette=2)
+##    ri = RandomGraph(order=8,seed=4335)
+##    print(ri)
+##    #print(ri.intervals)
+##    #print(ri.isIntervalGraph(Comments=True))
+##    #print(ri.isTriangulated())
+##    #print((-ri).isTriangulated())
+##    ri.exportGraphViz()
+##    #ri.isSplitGraph(Comments=True)
+##    #ri.isPermutationGraph(Comments=True)
+##    #print(ri.computePermutation())
+##    if ri.isComparabilityGraph():
+##        ri.exportEdgeOrientationsGraphViz('testColors1')
+##    rid = -ri
+##    if rid.isComparabilityGraph():
+##        rid.exportEdgeOrientationsGraphViz('testColors2',palette=2)
+
+    g = RandomGraph(order=8)
+    g.save('testbfs')
+    g = Graph('testbfs')
+    g.exportGraphViz()
+    print(g.breadthFirstSearch('v1',Debug=False))
     
     
 ##    rg = RandomPermutationGraph(order=6,seed=None)
