@@ -9284,11 +9284,17 @@
         <span class="k">return</span> <span class="n">rank</span>
 
 <div class="viewcode-block" id="Digraph.computeKohlerOrder"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeKohlerOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computeKohlerOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders an ordering (worst to best) of the actions following Kohler&#39;s rule.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeKohlerRankingDict</span><span class="p">()</span>
         <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ranking</span><span class="p">]</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">res</span><span class="p">))</span></div>
     
 <div class="viewcode-block" id="Digraph.computeKohlerRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeKohlerRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeKohlerRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders a ranking (best to worst) of the actions following Kohler&#39;s rule.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeKohlerRankingDict</span><span class="p">()</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ranking</span><span class="p">]</span></div>
 

@@ -9237,11 +9237,17 @@ class Digraph(object):
         return rank
 
     def computeKohlerOrder(self):
+        """
+        Renders an ordering (worst to best) of the actions following Kohler's rule.
+        """
         ranking = self._computeKohlerRankingDict()
         res = [x for x in ranking]
         return list(reversed(res))
     
     def computeKohlerRanking(self):
+        """
+        Renders a ranking (best to worst) of the actions following Kohler's rule.
+        """
         ranking = self._computeKohlerRankingDict()
         return [x for x in ranking]
 
