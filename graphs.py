@@ -995,6 +995,8 @@ class Graph(object):
         Renders a list of vertice keys in
         increasing distance from the origin vertex *s*. Ties in the distances
         are resolved by alphabetic ordering of the vertice keys.
+
+        Source: Cormen, Leiserson, Rivest, Stein, *Introduction to Algorithms* 2d Ed., MIT Press 2001.
         """
         vertices = self.vertices
         verticesKeys = [x for x in vertices]
