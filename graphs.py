@@ -989,62 +989,54 @@ class Graph(object):
 
     def breadthFirstSearch(self,s,alphabeticOrder=True,Debug=False):
         """
-        Breadth first search through a connected graph in lexicographical order
+        Breadth first search through a graph in lexicographical order
         of the vertex keys.
 
         Renders a list of vertice keys in
-        increasing distance from the origin vertex *s*. Ties in the distances
+        increasing distance from the origin *s*. Ties in the distances
         are resolved by alphabetic ordering of the vertice keys.
 
-        .. note::
-            The graph instance must be connected ! 
-
-        Source: Cormen, Leiserson, Rivest, Stein, *Introduction to Algorithms* 2d Ed., MIT Press 2001.
+        Source: Cormen, Leiserson, Rivest & Stein, *Introduction to Algorithms* 2d Ed., MIT Press 2001.
         """
-        if not self.isConnected():
-            print('Error: the graph %s is not connected !' % self.name)
-            return
-        else:
-            vertices = self.vertices
-            verticesKeys = [x for x in vertices]
-            if alphabeticOrder:
-                verticesKeys.sort()
-            nv = len(verticesKeys)
-            verticesKeys.remove(s)
-            vs = vertices[s]
-            color = {}
-            bfsDepth = {}
-            parent = {}
-            for x in verticesKeys:
-                color[x] = 0
-                bfsDepth[x] = nv
-                parent[x] = None
-            color[s] = 0
-            bfsDepth[s] = 0
-            parent[s] = None
+        vertices = self.vertices
+        verticesKeys = [x for x in vertices]
+        if alphabeticOrder:
+            verticesKeys.sort()
+        nv = len(verticesKeys)
+        verticesKeys.remove(s)
+        color = {}
+        bfsDepth = {}
+        parent = {}
+        for x in verticesKeys:
+            color[x] = 0
+            bfsDepth[x] = nv
+            parent[x] = None
+        color[s] = 1
+        bfsDepth[s] = 0
+        parent[s] = None
+        if Debug:
+            print(color,bfsDepth,parent)
+        F = [s]
+        while F != []:
+            u = F.pop()
+            F.append(u)
+            for v in self.gamma[u]:
+                if color[v] == 0:
+                    color[v] = 1
+                    bfsDepth[v] = bfsDepth[u] + 1
+                    parent[v] = u
+                    F.append(v)
+            F.remove(u)
             if Debug:
-                print(color,bfsDepth,parent)
-            F = [s]
-            while F != []:
-                u = F.pop()
-                F.append(u)
-                for v in self.gamma[u]:
-                    if color[v] == 0:
-                        color[v] = 1
-                        bfsDepth[v] = bfsDepth[u] + 2
-                        parent[v] = u
-                        F.append(v)
-                F.remove(u)
-                if Debug:
-                    print('u,v,F',u,v,F)
-                color[u] = 2
-                #vertices[u]['color'] = 2
-            if Debug:
-                print(color,bfsDepth,parent)
-            bfs = [(bfsDepth[v],v) for v in vertices]
-            bfs.sort()
-            self.bfs = [x[1] for x in bfs]
-            return self.bfs
+                print('u,v,F',u,v,F)
+            color[u] = 2
+            #vertices[u]['color'] = 2
+        if Debug:
+            print(color,bfsDepth,parent)
+        bfs = [(bfsDepth[v],v) for v in vertices]
+        bfs.sort()
+        self.bfs = [x[1] for x in bfs]
+        return self.bfs
 
     def depthFirstSearch(self,Debug=False):
         """
