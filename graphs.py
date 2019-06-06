@@ -1030,12 +1030,12 @@ class Graph(object):
             if Debug:
                 print('u,v,F',u,v,F)
             color[u] = 2
-            #vertices[u]['color'] = 2
         if Debug:
             print(color,bfsDepth,parent)
         bfs = [(bfsDepth[v],v) for v in vertices]
         bfs.sort()
         self.bfs = [x[1] for x in bfs]
+        self.bfsDepth = bfsDepth
         return self.bfs
 
     def depthFirstSearch(self,Debug=False):
