@@ -23,7 +23,7 @@ import cSparseIntegerOutrankingDigraphs as iBg
 #from SparseOutrankingDigraphs import *
 from time import time
 from os import path
-from cRandPerfTabs import Random3ObjectivesPerformanceTableau as cR3ObjPT
+from cRandPerfTabs import *
 from randomPerfTabs import Random3ObjectivesPerformanceTableau as R3ObjPT
 from multiprocessing import set_start_method
 
@@ -83,7 +83,7 @@ for s in range(sampleSize):
 ##
 ##    print(bg1)
     t0 = time()
-    tp2 = cR3ObjPT(numberOfActions=nbrActions,
+    tp2 = cRandom3ObjectivesPerformanceTableau(numberOfActions=nbrActions,
                                     numberOfCriteria=nbrCriteria,
                                     weightDistribution='equiobjectives',
 #                                    commonPercentiles={'ind':0.01,'pref':0.025,'veto':0.975},

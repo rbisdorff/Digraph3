@@ -356,7 +356,7 @@ class cPerformanceTableau(PerformanceTableau):
         if pageTitle == None:
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
             
-        fo.write(self.htmlPerformanceHeatmap(argCriteriaList=criteriaList,
+        fo.write(self._htmlPerformanceHeatmap(argCriteriaList=criteriaList,
                                              argActionsList=actionsList,
                                              SparseModel=SparseModel,
                                              minimalComponentSize=minimalComponentSize,
