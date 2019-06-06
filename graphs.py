@@ -989,53 +989,62 @@ class Graph(object):
 
     def breadthFirstSearch(self,s,alphabeticOrder=True,Debug=False):
         """
-        Breadth first search through a graph in lexicographical order
+        Breadth first search through a connected graph in lexicographical order
         of the vertex keys.
 
         Renders a list of vertice keys in
         increasing distance from the origin vertex *s*. Ties in the distances
         are resolved by alphabetic ordering of the vertice keys.
 
+        .. note::
+            The graph instance must be connected ! 
+
         Source: Cormen, Leiserson, Rivest, Stein, *Introduction to Algorithms* 2d Ed., MIT Press 2001.
         """
-        vertices = self.vertices
-        verticesKeys = [x for x in vertices]
-        if alphabeticOrder:
-            verticesKeys.sort()
-        nv = len(verticesKeys)
-        verticesKeys.remove(s)
-        vs = vertices[s]
-        for x in verticesKeys:
-            vx = vertices[x]
-            vx['color'] = 0
-            vx['distance'] = nv
-            vx['parent'] = None
-        vs['color'] = 0
-        vs['distance'] = 0
-        vs['parent'] = None
-        if Debug:
-            print(self.vertices)
-        F = [s]
-        while F != []:
-            u = F.pop()
-            F.append(u)
-            for v in self.gamma[u]:
-                if vertices[v]['color'] == 0:
-                    vertices[v]['color'] = 1
-                    vertices[v]['distance'] = vertices[u]['distance'] + 1
-                    vertices[v]['parent'] = u
-                    F.append(v)
-            F.remove(u)
+        if not self.isConnected():
+            print('Error: the graph %s is not connected !' % self.name)
+            return
+        else:
+            vertices = self.vertices
+            verticesKeys = [x for x in vertices]
+            if alphabeticOrder:
+                verticesKeys.sort()
+            nv = len(verticesKeys)
+            verticesKeys.remove(s)
+            vs = vertices[s]
+            color = {}
+            bfsDepth = {}
+            parent = {}
+            for x in verticesKeys:
+                color[x] = 0
+                bfsDepth[x] = nv
+                parent[x] = None
+            color[s] = 0
+            bfsDepth[s] = 0
+            parent[s] = None
             if Debug:
-                print('u,v,F',u,v,F)
-            vertices[u]['color'] = 2
-        if Debug:
-            print(self.vertices)
-        bfs = [(vertices[v]['distance'],v) for v in vertices]
-        bfs.sort()
-        
-        self.bfs = [x[1] for x in bfs]
-        return self.bfs
+                print(color,bfsDepth,parent)
+            F = [s]
+            while F != []:
+                u = F.pop()
+                F.append(u)
+                for v in self.gamma[u]:
+                    if color[v] == 0:
+                        color[v] = 1
+                        bfsDepth[v] = bfsDepth[u] + 2
+                        parent[v] = u
+                        F.append(v)
+                F.remove(u)
+                if Debug:
+                    print('u,v,F',u,v,F)
+                color[u] = 2
+                #vertices[u]['color'] = 2
+            if Debug:
+                print(color,bfsDepth,parent)
+            bfs = [(bfsDepth[v],v) for v in vertices]
+            bfs.sort()
+            self.bfs = [x[1] for x in bfs]
+            return self.bfs
 
     def depthFirstSearch(self,Debug=False):
         """
@@ -4428,11 +4437,12 @@ if __name__ == '__main__':
 ##    if rid.isComparabilityGraph():
 ##        rid.exportEdgeOrientationsGraphViz('testColors2',palette=2)
 
-    g = RandomGraph(order=8)
+    g = RandomGraph(order=8,edgeProbability=0.2)
+    #g = RandomTree(order=8)
     g.save('testbfs')
     g = Graph('testbfs')
     g.exportGraphViz()
-    print(g.breadthFirstSearch('v1',Debug=False))
+    print(g.breadthFirstSearch('v1',Debug=True))
     
     
 ##    rg = RandomPermutationGraph(order=6,seed=None)

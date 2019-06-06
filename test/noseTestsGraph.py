@@ -260,12 +260,12 @@ def testIntervalIntersectionsGraphs():
     print(g.isIntervalGraph(Comments=True))
     print(g.isSplitGraph(Comments=True))
 
-def testDeapthFirstSearch():
-    print('==>> Testing deapth first serach algorithm')
+def testBreadthFirstSearch():
+    print('==>> Testing breadth first search algorithm')
     g = RandomGraph(order=8)
     g.save('testbfs')
     g = Graph('testbfs')
     g.exportGraphViz()
-    print(g.breadthFirstSearch('v1',Debug=False))
+    print(g.breadthFirstSearch('v1',Debug=True))
 
 
