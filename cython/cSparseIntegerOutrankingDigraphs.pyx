@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
 c-Extension for the Digraph3 collection.
-Module cBigIntegerOutrankingDigraphs.py is a c-compiled partial version of the
-:py:mod:`sparseOutrankingDigraphs` module for handling outranking digraphs of very large order.
+Module cSparseIntegerOutrankingDigraphs.py is a c-compiled partial version of the corresponding :py:mod:`sparseOutrankingDigraphs` module for handling integer outranking digraphs of very large order.
 
 Copyright (C) 2018  Raymond Bisdorff 
 """
@@ -858,8 +857,8 @@ def _decompose(int i, int nc,tempDirName):
     return '%d/%d (%d)' % (i,nc,pg.order)
 
 #from weakOrders import QuantilesRankingDigraph
-from cRandPerfTabs import PerformanceTableau
-class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
+from cRandPerfTabs import cPerformanceTableau
+class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
     """
     *Parameters*:
         * argPerfTab,
@@ -892,7 +891,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
     Example python3.6 session:
 
     >>> from cRandPerfTabs import *
-    >>> tp = RandomCBPerformanceTableau(numberOfActions=1000,
+    >>> tp = cRandomCBPerformanceTableau(numberOfActions=1000,\
                                         Threading=True,seed=100)
     >>> tp
     *------- PerformanceTableau instance description ------*
@@ -901,37 +900,36 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
     # Actions        : 1000
     # Objectives     : 2
     # Criteria       : 7
-    Attributes       : ['name', 'actions', 'objectives', 
+    Attributes       : ['name', 'randomSeed', 'actions', 'objectives', 
                         'criteriaWeightMode', 'criteria', 
                         'evaluation', 'weightPreorder']
     >>> from cSparseIntegerOutrankingDigraphs import *
-    >>> bg = SparseIntegerOutrankingDigraph(tp,quantiles=35,
-    ...                        quantilesOrderingStrategy='average',
-    ...                        LowerClosed=False,
-    ...                        minimalComponentSize=10,
-    ...                        Threading=True,Debug=False)
+    >>> bg = SparseIntegerOutrankingDigraph(tp,quantiles=5,\
+                           quantilesOrderingStrategy='average',\
+                           LowerClosed=False,\
+                           minimalComponentSize=10,\
+                           Threading=True,nbrOfCPUs=8,\
+                           Debug=False)
     >>> bg
       *----- Object instance description --------------*
       Instance class    : SparseIntegerOutrankingDigraph
       Instance name     : randomCBperftab_mp
       # Actions         : 1000
       # Criteria        : 7
-      Sorting by        : 35-Tiling
+      Sorting by        : 5-Tiling
       Ordering strategy : average
       Ranking rule      : Copeland
-      # Components      : 75
+      # Components      : 90
       Minimal order     : 10
-      Maximal order     : 36
-      Average order     : 13.3
-      fill rate         : 1.489%
+      Maximal order     : 24
+      Average order     : 12.5
+      fill rate         : 1.230%
       ----  Constructor run times (in sec.) ----
-      Nbr of threads    : 1
       Nbr of threads    : 8
-      Total time        : 0.54866
-      QuantilesSorting  : 0.39175
-      Preordering       : 0.00509
-      Decomposing       : 0.15179
-      Ordering          : 0.00000
+      Total time        : 0.19518
+      QuantilesSorting  : 0.07454
+      Preordering       : 0.00218
+      Decomposing       : 0.11841
     >>> bg.showBestChoiceRecommendation()
       ***********************
       * --- Best choice recommendation(s) ---*
@@ -943,9 +941,9 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
         independence        : 0.00
         dominance           : 2.00
         absorbency          : -10.00
-        covering (%)        : 61.90
-        determinateness (%) : 50.00
-        - most credible action(s) = { }
+        covering (%)        : 58.33
+        determinateness (%) : 51.60
+        - most credible action(s) = { '679': 1.00, '131': 1.00, }
       ***********************
       * --- Worst choice recommendation(s) ---*
       (in decreasing order of determinateness)   
@@ -954,14 +952,15 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,PerformanceTableau):
       * choice              : [312]
       +-irredundancy      : 24.00
       independence        : 24.00
-      dominance           : -10.00
-      absorbency          : 4.00
+      dominance           : -24.00
+      absorbency          : 10.00
       covering (%)        : 0.00
-      determinateness (%) : 58.33
-      - most credible action(s) = { '312': 4.00, }
+      determinateness (%) : 70.83
+      - most credible action(s) = { '312': 10.00, }
     >>> print(bg.boostedRanking[:10],' ... ',bg.boostedRanking[-10:] )
-      [388, 131, 151, 275, 679, 406, 741, 623, 579, 894]  ... 
-      [278, 886, 202, 473, 841, 878, 713, 62, 17, 312]
+      [679, 388, 741, 131, 151, 275, 716, 623, 180, 579]  
+      ...  
+      [202, 32, 62, 680, 878, 549, 769, 859, 924, 312]
     >>>
 
     """
@@ -1829,6 +1828,8 @@ def _decompose1(int i, int nc,tempDirName):
 #from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
 class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
     """
+    Cythonized version of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankingDigraph` class for the multiprocessing implementation of multiple criteria quantiles ranking of very big performance tableaux - > 100000.
+
     *Parameters*:
         * argPerfTab,
         * quantiles=4,
@@ -1844,16 +1845,15 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         * Comments=False,
         * Debug=False.
 
-    Cythonized class for the multiprocessing implementation of multiple criteria quantiles ranking of very big performance tableaux - > 100000.
     
     By default, the number of quantiles q is set to quartiles. However, the ranking quality gets better with a finer grained quantiles decomposition. 
     
-    For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
+    For other parameters settings, see the corresponding :py:class:`sparseOutrankigDigraphs.PreRankedOutrankingDigraph` class.
 
     Example python3.6 session:
 
     >>> from cRandPerfTabs import *
-    >>> tp = RandomCBPerformanceTableau(numberOfActions=1000,
+    >>> tp = cRandomCBPerformanceTableau(numberOfActions=1000,\
                                         Threading=True,seed=100)
     >>> tp
     *------- PerformanceTableau instance description ------*
@@ -1862,63 +1862,35 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
     # Actions        : 1000
     # Objectives     : 2
     # Criteria       : 7
-    Attributes       : ['name', 'actions', 'objectives', 
-                        'criteriaWeightMode', 'criteria', 
-                        'evaluation', 'weightPreorder']
+    Attributes       : ['name', 'randomSeed', 'actions', 'objectives', 
+                        'criteriaWeightMode', 'criteria', 'evaluation', 
+                        'weightPreorder']
     >>> from cSparseIntegerOutrankingDigraphs import *
-    >>> bg = cQuantilesRankingDigraph(tp,quantiles=35,
-    ...                        quantilesOrderingStrategy='average',
-    ...                        LowerClosed=False,
-    ...                        minimalComponentSize=10,
-    ...                        Threading=True,nbrOfCPUs=8,Debug=False)
+    >>> bg = cQuantilesRankingDigraph(tp,quantiles=5,\
+                            quantilesOrderingStrategy='average',\
+                            LowerClosed=False,\
+                            minimalComponentSize=10,\
+                            Threading=True,nbrOfCPUs=8,Debug=False)
     >>> bg
       *----- Object instance description --------------*
       Instance class    : cQuantilesRankingDigraph
       Instance name     : randomCBperftab_mp
       # Actions         : 1000
       # Criteria        : 7
-      Sorting by        : 35-Tiling
+      Sorting by        : 5-Tiling
       Ordering strategy : average
       Ranking rule      : Copeland
-      # Components      : 75
+      # Components      : 82
       Minimal order     : 10
-      Maximal order     : 36
-      Average order     : 13.3
-      fill rate         : 1.489%
+      Maximal order     : 25
+      Average order     : 12.2
+      fill rate         : 1.201%
       ----  Constructor run times (in sec.) ----
       Nbr of threads    : 8
-      Total time        : 0.54866
-      QuantilesSorting  : 0.39175
-      Preordering       : 0.00509
-      Decomposing       : 0.15179
-      Ordering          : 0.00000
-    >>> bg.showBestChoiceRecommendation()
-      ***********************
-      * --- Best choice recommendation(s) ---*
-      (in decreasing order of determinateness)   
-      Credibility domain:  {'min': -24, 'med': 0, 'max': 24, 
-                            'hasIntegerValuation': True}
-      * choice              : [131, 151, 388]
-        +-irredundancy      : 0.00
-        independence        : 0.00
-        dominance           : 2.00
-        absorbency          : -10.00
-        covering (%)        : 61.90
-        determinateness (%) : 50.00
-        - most credible action(s) = { }
-      ***********************
-      * --- Worst choice recommendation(s) ---*
-      (in decreasing order of determinateness)   
-      Credibility domain:  {'min': -24, 'med': 0, 'max': 24, 
-                            'hasIntegerValuation': True}
-      * choice              : [312]
-      +-irredundancy      : 24.00
-      independence        : 24.00
-      dominance           : -10.00
-      absorbency          : 4.00
-      covering (%)        : 0.00
-      determinateness (%) : 58.33
-      - most credible action(s) = { '312': 4.00, }
+      Total time        : 0.17159
+      QuantilesSorting  : 0.07006
+      Preordering       : 0.00214
+      Decomposing       : 0.09931
     >>> print(bg.boostedRanking[:10],' ... ',bg.boostedRanking[-10:] )
       [388, 131, 151, 275, 679, 406, 741, 623, 579, 894]  ... 
       [278, 886, 202, 473, 841, 878, 713, 62, 17, 312]

@@ -29,13 +29,13 @@ from multiprocessing import set_start_method
 
 # parameters
 sampleSize = 1
-MP = False
-nbrOfCPUs = 4
-nbrOfThreads = 4
+MP = True
+nbrOfCPUs = 8
+nbrOfThreads = 8
 nbrOfSubProcesses = 0
 #set_start_method('fork')
 #componentThreadingThreshold = 500
-nbrActions = 100
+nbrActions = 50000
 nbrCriteria = 21
 #commonPar = ('beta','variable',None)
 #commonPar = ('triangular','variable',0.5)
@@ -110,15 +110,15 @@ for s in range(sampleSize):
                                Debug=False)
 
     print(bg2)
-    print(bg2.boostedRanking[:100])
-    bg2.showActions()
+    print(bg2.boostedRanking[:10])
+    #bg2.showActions()
     #bg2.showCriteria()
-    bg2.showDecomposition()
-    bg2.showComponents()
+    #bg2.showDecomposition()
+    #g2.showComponents()
     #bg2.showRelationTable()
     
     #tp2.convertBigData2Standard()
-    tp2.showHTMLPerformanceHeatmap(actionsList=bg2.boostedRanking,rankingRule='NetFlows',Correlations=True)
+    #tp2.showHTMLPerformanceHeatmap(actionsList=bg2.boostedRanking,rankingRule='NetFlows',Correlations=True)
     ## bg2.showActions()
     ## bg2.showCriteria()
     ## bg2.showDecomposition()

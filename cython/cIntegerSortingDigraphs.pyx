@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """
 c-Extension for the Digraph3 collection.
-Module cIntegerOutrankingDigraphs.py is a c-compiled part of the
-:py:mod:`outrankingDigraphs` module for handling random performance tableaux of Big Data type,
-ie with integer action keys and float performance evaluations.  
+Module cIntegerSortingDigraphs.py is a c-compiled part of the
+:py:mod:`sortingDigraphs` module for sorting with cIntegerOutrankingDigraphs ressources.  
 
 Copyright (C) 2018  Raymond Bisdorff
 
@@ -695,15 +694,16 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
     def showActionCategories(self,int action,bint Debug=False,bint Comments=True,\
                              bint Threading=False,nbrOfCPUs=None):
         """
-        *Parameters*:
-            * action,
-            * Debug=False,
-            * Comments=True,
-            * Threading=False,
-            * nbrOfCPUs=None.
-
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
+
+        *Parameters*:
+            * action key (int),
+            * Debug = False | True,
+            * Comments = True | False,
+            * Threading = False | True
+            * nbrOfCPUs = None.
+
         """
         Med = self.valuationdomain['med']
         try:
@@ -742,11 +742,12 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 
     def showActionsSortingResult(self,actionSubset=None,bint Debug=False):
         """
+        Shows the quantiles sorting result of all (default) or a subset of the decision actions.
+
         *Parameters*:
-            * actionSubset=None,
+            * actionSubset = None,
             * Debug=False.
 
-        shows the quantiles sorting result all (default) of a subset of the decision actions.
         """
         if actionSubset == None:
             actions = self.actions
@@ -763,7 +764,6 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         *Parameter*:
             * Descending=True.
 
-        Specialisation for QuantilesSortingDigraphs.
         """
         from decimal import Decimal
         from weakOrders import WeakOrder
@@ -870,12 +870,12 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                                 Debug=False):
         """
         *Parameters*:
-            * Descending: listing in *decreasing* (default) or *increasing* quantile order.
+            * Descending: listing in *decreasing* (default) or *increasing* quantile order,
             * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average'(default) }
-              in the uppest, the lowest or the average potential quantile.
-            * HTML=False (for generating a HTML version of the result)
-            * Comments=False,
-            * Debug=False
+              in the uppest, the lowest or the average potential quantile,
+            * HTML = False | True (for generating a HTML version of the result),
+            * Comments = False| True,
+            * Debug = False | True.
         
         """
         if strategy == None:
@@ -1069,7 +1069,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
     def showOrderedRelationTable(self,direction="decreasing"):
         """
         *Parameter*:
-            * direction="decreasing".
+            * direction = "decreasing" | "increasing".
 
         Showing the relation table in decreasing (default) or increasing order.
         """

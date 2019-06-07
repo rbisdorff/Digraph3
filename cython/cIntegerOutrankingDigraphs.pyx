@@ -422,14 +422,14 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         
     def computeCriterionRelation(self,c, a,b,hasSymmetricThresholds=True):
         """
-        *Parameters*:
-             * c, 
-             * a,
-             * b,
-             * hasSymmetricThresholds=True.
+        Renders the outranking characteristic for actions *x* and *y*
+        on criterion *c*.
 
-        Compute the outranking characteristic for actions x and y
-        on criterion c.
+        *Parameters*:
+             * c, criterion
+             * a, decision action
+             * b, decision action
+             * hasSymmetricThresholds = True
 
         """
         if a == b:
@@ -473,7 +473,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
 
     def computeSize(self):
         """
-        Renders the number of validated non reflexive arcs
+        Renders the number of validated non reflexive arcs.
         """
         Med = self.valuationdomain['med']
         #actions = [x for x in self.actions]
@@ -906,7 +906,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
     def computeOrdinalCorrelation(self, other, bint Debug=False):
         """
         *Parameters*:
-            * other,
+            * other, integer Digraph instance
             * Debug=False.
         
         Renders the ordinal correlation K of an integer Digraph instance
@@ -925,12 +925,12 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
              from the ordered dictionary of the components.
 
              Renders a tuple with at position 0 the actual bipolar correlation index
-             and in position 1 the minimal determination level D of self and
+             and in position 1 the minimal determination level *D* of self and
              the other relation.
 
-             D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)
+             *D* = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)
 
-             where n is the number of actions considered.
+             where *n* is the number of actions considered.
 
              The correlation index with a completely indeterminate relation
              is by convention 0.0 at determination level 0.0 .
@@ -983,7 +983,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         """
         *Parameters*:
             * order (ordered sequence from worst to best of action keys), 
-            * bint Debug=False.
+            * Debug = False | True.
 
         wrapper for the self.computeRankingCorrelation method
         The given argOrder is previously reversed.
@@ -996,7 +996,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         """
         *Parameters*:
             * ranking (ordered sequence from best to worst of action keys),
-            * Debug=False.
+            * Debug = False | True
 
         Renders the ordinal correlation K of an integer digraph instance
         when compared with a given linear ranking of its actions
