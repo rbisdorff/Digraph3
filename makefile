@@ -19,8 +19,7 @@ sphinx:
 
 sphinxLatex:
 		(cd docSphinx; \
-		${SPHINX} -M latexpdf -E -a . latex/ )
-##		${SPHINX} -E -a -b latex . latex/ )
+		${SPHINX} -E -a -b latex . latex/ )
 
 pydocs:
 		for md in ${modules}; do \
