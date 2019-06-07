@@ -987,7 +987,7 @@ class Graph(object):
         self.size = size
         return size
 
-    def breadthFirstSearch(self,s,alphabeticOrder=True,Debug=False):
+    def breadthFirstSearch(self,s,alphabeticOrder=True,Warnings=True,Debug=False):
         """
         Breadth first search through a graph in lexicographical order
         of the vertex keys.
@@ -996,48 +996,60 @@ class Graph(object):
         increasing distance from the origin *s*. Ties in the distances
         are resolved by alphabetic ordering of the vertice keys.
 
+        A warning is issued when the graph is not connected and the resulting
+        search does not cover the whole set of graph vertices. 
+
         Source: Cormen, Leiserson, Rivest & Stein, *Introduction to Algorithms* 2d Ed., MIT Press 2001.
         """
         vertices = self.vertices
-        verticesKeys = [x for x in vertices]
-        if alphabeticOrder:
-            verticesKeys.sort()
-        nv = len(verticesKeys)
-        verticesKeys.remove(s)
-        color = {}
-        bfsDepth = {}
-        parent = {}
-        for x in verticesKeys:
-            color[x] = 0
-            bfsDepth[x] = nv
-            parent[x] = None
-        color[s] = 1
-        bfsDepth[s] = 0
-        parent[s] = None
+        components = self.computeComponents()
         if Debug:
-            print(color,bfsDepth,parent)
-        F = [s]
-        while F != []:
-            u = F.pop()
-            F.append(u)
-            for v in self.gamma[u]:
-                if color[v] == 0:
-                    color[v] = 1
-                    bfsDepth[v] = bfsDepth[u] + 1
-                    parent[v] = u
-                    F.append(v)
-            F.remove(u)
-            if Debug:
-                print('u,v,F',u,v,F)
-            color[u] = 2
-        if Debug:
-            print(color,bfsDepth,parent)
-        bfs = [(bfsDepth[v],v) for v in vertices]
-        bfs.sort()
-        self.bfs = [x[1] for x in bfs]
-        self.bfsDepth = bfsDepth
+            print(components)
+        for comp in components:
+            if s in comp:
+                verticesKeys = [x for x in comp]
+                if alphabeticOrder:
+                    verticesKeys.sort()
+                nv = len(vertices)
+                verticesKeys.remove(s)
+                color = {}
+                bfsDepth = {}
+                parent = {}
+                for x in verticesKeys:
+                    color[x] = 0
+                    bfsDepth[x] = nv
+                    parent[x] = None
+                color[s] = 1
+                bfsDepth[s] = 0
+                parent[s] = None
+                if Debug:
+                    print(color,bfsDepth,parent)
+                F = [s]
+                while F != []:
+                    u = F.pop()
+                    F.append(u)
+                    for v in self.gamma[u]:
+                        if color[v] == 0:
+                            color[v] = 1
+                            bfsDepth[v] = bfsDepth[u] + 1
+                            parent[v] = u
+                            F.append(v)
+                        if Debug:
+                            print('u,v,F',u,v,F)
+                    F.remove(u)
+                    color[u] = 2
+                if Debug:
+                    print(color,bfsDepth,parent)
+                bfs = [(bfsDepth[v],v) for v in comp]
+                bfs.sort()
+                self.bfs = [x[1] for x in bfs]
+                self.bfsDepth = bfsDepth
+            else:
+                if Warnings:
+                    print('Warning: graph %s is not connected!' % self.name)
+                    print('Not with %s connected vertices: %s' % (s,str(comp)) )
         return self.bfs
-
+                                
     def depthFirstSearch(self,Debug=False):
         """
         Depth first search through a graph in lexicographical order

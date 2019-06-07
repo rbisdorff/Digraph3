@@ -3258,12 +3258,14 @@ where Max (resp. Min) equals valuation maximum (resp. minimum).</dd>
 </dl>
 <dl class="method">
 <dt id="graphs.Graph.breadthFirstSearch">
-<code class="descname">breadthFirstSearch</code><span class="sig-paren">(</span><em>s</em>, <em>alphabeticOrder=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.breadthFirstSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.breadthFirstSearch" title="Permalink to this definition">¶</a></dt>
+<code class="descname">breadthFirstSearch</code><span class="sig-paren">(</span><em>s</em>, <em>alphabeticOrder=True</em>, <em>Warnings=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.breadthFirstSearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.breadthFirstSearch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Breadth first search through a graph in lexicographical order
 of the vertex keys.</p>
 <p>Renders a list of vertice keys in
 increasing distance from the origin <em>s</em>. Ties in the distances
 are resolved by alphabetic ordering of the vertice keys.</p>
+<p>A warning is issued when the graph is not connected and the resulting
+search does not cover the whole set of graph vertices.</p>
 <p>Source: Cormen, Leiserson, Rivest &amp; Stein, <em>Introduction to Algorithms</em> 2d Ed., MIT Press 2001.</p>
 </dd></dl>
 
