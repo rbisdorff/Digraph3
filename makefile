@@ -15,11 +15,12 @@ readme:
 		echo -n " Digraph3 python3 modules' installer \n (c) R Bisdorff 2013-2014 University of Luxembourg\n Usage: \n ..> make install # installs in Python3, Python3.3 and Python3.4 (Linux, Mac OS)\n ..> make tests # runs the nose tests\n ..> make verbosetests # runs the verbose nose tests\n ..> make pTests # runs all available nose tests with GNU parallel\n\n Technical documentation available here:\n http://digraph3.readthedocs.io/en/latest/ or here:\n http://leopold-loewenheim.uni.lu/docDigraph3/ \n"
 sphinx:
 		(cd docSphinx; \
-		${SPHINX} -E -a . html/ )
+		${SPHINX} -Ea . html/ )
 
 sphinxLatex:
 		(cd docSphinx; \
-		${SPHINX} -E -b latex . latex/ )
+		${SPHINX} -M latexpdf -E -a . latex/ )
+##		${SPHINX} -E -a -b latex . latex/ )
 
 pydocs:
 		for md in ${modules}; do \
