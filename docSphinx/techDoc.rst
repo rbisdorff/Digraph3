@@ -141,6 +141,8 @@ Handling big data
      Sparse implementation design for large bipolar outranking digraphs (order
      > 1000);
 
+     .. inheritance-diagram:: sparseOutrankingDigraphs    
+
 Cythonized modules
 ..................
 
