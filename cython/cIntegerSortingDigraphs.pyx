@@ -1683,6 +1683,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 html += '<table style="background-color:White;" border="1"><tr bgcolor="#9acd32"><th>Categories</th><th>Assorting</th></tr>'
 
         for c in categoryKeys:
+            # categoryContent[c].sort()
             print('%s:' % (self.categories[c]['name']), end=' ')
             print('\t',categoryContent[c])
             if isReturningHTML:

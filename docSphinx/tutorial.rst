@@ -4406,6 +4406,464 @@ neato -Tpng bestDeterminedSpanningTree.dot -o bestDeterminedSpanningTree.png
 One may easily verify that all other potential spanning trees, including instead the edges {*v3*, *v5*} and/or {*v4*, *v5*} - will show a lower average determination.
 
 Back to :ref:`Tutorial-label`
+
+.. _HPC-Tutorial-label:
+
+HPC ranking with big outranking digraphs
+----------------------------------------
+.. contents:: 
+	:depth: 1
+	:local:
+
+The Digraph3 collection provides cythonized [6]_, i.e. C-compiled and optimised versions of the main python modules for tackling multiple criteria decision problems facing large sets of decision alternatives ( > 1000 ). Such problems appear usually with a combinatorial organisation of the potential decision alternatives, as is frequently the case in bioinformatics for instance. If HPC facilities with numerous cores ( > 64) and big memory (> 1TB ) are available, it is thus possible to rank up to several millions of alternatives (see [BIS-2016]_).
+
+The cythonized Digraph3 modules, prefixed with the letter *c* and take a *pyx* extension, are stored in the cython directory:
+    - *cRandPerfTabs.pyx*,
+    - *cIntegerOutrankingDigraphs.pyx*, *cIntegerSortingDigraphs.pyx* and *cSparseIntegerOutrankingDigraphs.pyx*. Their compilation and installation requires the cython compiler ( ...$ pip install cython ).
+
+Big Data performance tableaux
+.............................
+
+In order to efficiently typing the C variables, the :py:mod:`cRandPerfTabs` module provides the usual random performance tableau models, but, with **integer** action keys, **float** performance evaluations, **integer** criteria weights and **float** discrimination thresholds. In order to limit as much as possible memory occupation of class instances, all the usual comments are dropped from the description of the decision actions.
+
+  >>> from cRandPerfTabs import *
+  >>> t = cRandomPerformanceTableau(numberOfActions=4,numberOfCriteria=2)
+  >>> t
+   *------- PerformanceTableau instance description ------*
+   Instance class   : cRandomPerformanceTableau
+   Seed             : None
+   Instance name    : cRandomperftab
+   # Actions        : 4
+   # Criteria       : 2
+   Attributes       : ['randomSeed', 'name', 'actions', 'criteria',
+                       'evaluation', 'weightPreorder']
+  >>> t.actions
+   OrderedDict([(0, {'name': 'a1'}), (1, {'name': 'a2'}),
+                 (2, {'name': 'a3'}), (3, {'name': 'a4'})])
+  >>> t.criteria
+   OrderedDict([
+   ('g1', {'name': 'RandomPerformanceTableau() instance',
+           'comment': 'Arguments: ; weightDistribution=equisignificant;
+	                weightScale=(1, 1); commonMode=None',
+           'thresholds': {'ind': (10.0, 0.0),
+	                   'pref': (20.0, 0.0),
+			   'veto': (80.0, 0.0)},
+	   'scale': (0.0, 100.0),
+	   'weight': 1,
+	   'preferenceDirection': 'max'}),
+   ('g2', {'name': 'RandomPerformanceTableau() instance',
+           'comment': 'Arguments: ; weightDistribution=equisignificant;
+	               weightScale=(1, 1); commonMode=None',
+	   'thresholds': {'ind': (10.0, 0.0),
+	                   'pref': (20.0, 0.0),
+			   'veto': (80.0, 0.0)},
+	   'scale': (0.0, 100.0),
+	   'weight': 1,
+	   'preferenceDirection': 'max'})])
+   >>> t.evaluation
+    {'g1': {0: 35.17, 1: 56.4, 2: 1.94, 3: 5.51},
+     'g2': {0: 95.12, 1: 90.54, 2: 51.84, 3: 15.42}}
+   >>> t.showPerformanceTableau()
+    Criteria |  'g1'    'g2'   
+    Actions  |    1       1    
+    ---------|---------------
+       'a1'  |  91.18   90.42  
+       'a2'  |  66.82   41.31  
+       'a3'  |  35.76   28.86  
+       'a4'  |   7.78   37.64  
+
+Conversions from the standard to the Big Data model and vice versa are provided:
+
+   >>> t1 = t.convert2Standard()
+    >>> t1.convertWeight2Decimal()
+    >>> t1.convertEvaluation2Decimal()
+   >>> t1
+    *------- PerformanceTableau instance description ------*
+    Instance class   : PerformanceTableau
+    Seed             : None
+    Instance name    : std_cRandomperftab
+    # Actions        : 4
+    # Criteria       : 2
+    Attributes       : ['name', 'actions', 'criteria', 'weightPreorder',
+                        'evaluation', 'randomSeed']
+
+C-implemented integer-valued outranking digraphs
+................................................
+
+The C compiled version of the bipolar-valued digraph models takes integer relation characteristic values.
+
+    >>> t = cRandomPerformanceTableau(numberOfActions=1000,numberOfCriteria=2)
+    >>> from cIntegerOutrankingDigraphs import *
+    >>> g = IntegerBipolarOutrankingDigraph(t,Threading=True,nbrCores=4)
+    >>> g
+      *------- Object instance description ------*
+      Instance class   : IntegerBipolarOutrankingDigraph
+      Instance name    : rel_cRandomperftab
+      # Actions        : 1000
+      # Criteria       : 2
+      Size             : 465024
+      Determinateness  : 56.877
+      Valuation domain : {'min': -2, 'med': 0, 'max': 2,
+                          'hasIntegerValuation': True}
+      ----  Constructor run times (in sec.) ----
+      Total time       : 4.23880
+      Data input       : 0.01203
+      Compute relation : 3.60788
+      Gamma sets       : 0.61889
+      #Threads         : 4
+      Attributes       : ['name', 'actions', 'criteria', 'totalWeight',
+                          'valuationdomain', 'methodData', 'evaluation',
+                          'order', 'runTimes', 'nbrThreads', 'relation',
+                          'gamma', 'notGamma']
+
+On a classic single threaded intel7 equipped PC, with four single threaded cores, the :py:class:`cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` constructor takes about four seconds for computing a **million** pairwise outranking characteristic values. In a similar setting, the standard :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class constructor appears more than two times slower.
+
+    >>> from outrankingDigraphs import BipolarOutrankingDigraph
+    >>> g1 = BipolarOutrankingDigraph(t1,Threading=True,nbrCores=4)
+    >>> g1
+      *------- Object instance description ------*
+      Instance class   : BipolarOutrankingDigraph
+      Instance name    : rel_std_cRandomperftab
+      # Actions        : 1000
+      # Criteria       : 2
+      Size             : 465024
+      Determinateness  : 56.817
+      Valuation domain : {'min': Decimal('-100.0'),
+			  'med': Decimal('0.0'),
+			  'max': Decimal('100.0'),
+			  'precision': Decimal('0')}
+      ----  Constructor run times (in sec.) ----
+      Total time       : 8.63340
+      Data input       : 0.01564
+      Compute relation : 7.52787
+      Gamma sets       : 1.08987
+      #Threads         : 4
+
+By far, most of the run time is in each case needed for computing the individual pairwise outranking characteristic values. Notice also below the memory occupations of both outranking digraph instances. 
+
+    >>> from digraphsTools import total_size
+    >>> total_size(g)
+    108662777
+    >>> total_size(g1)
+    212679272
+    >>> total_size(g.relation)/total_size(g)
+    0.34
+    >>> total_size(g.gamma)/total_size(g)
+    0.45
+
+About 103MB for *g* and 202MB for *g1*. The standard *Decimal* valued :code:`BipolarOutrankingDigraph` instance *g1* thus nearly doubles the memory occupation of the corresponding :code:`IntegerBipolarOutrankingDigraph` *g* instance (see Line 3 and 5 above). 3/4 of this memory occupation is due to the *g.relation* (34%) and the *g.gamma* (45%) dictionaries. And these ratios quadratically grow with the digraph order. To limit the object sizes for really big outranking digraphs, we need to abandon the complete implementation of the adjancency table.
+
+
+The sparse outranking digraph implementation
+............................................
+
+The idea is to first decompose the complete outranking relation into an ordered collection of equivalent performance classes. Let us consider for this illustration a random performance tableau with 100 decision alternatives evaluated on 7 criteria.
+
+    >>> from cRandPerfTabs import *
+    >>> t = cRandomPerformanceTableau(numberOfActions=100,
+    ...                               numberOfCriteria=7,seed=100)
+
+We sort the 100 decision alternatives into overlapping quantile classes and rank with respect to the average quantile limits, the characteristic value of being less performing than the upper quantile limit, and the characteristic value of being at least as good performoing than the lower limit.
+
+    >>> from cSparseIntegerOutrankingDigraphs import *
+    >>> sg = SparseIntegerOutrankingDigraph(t,quantiles=3)
+    >>> sg
+    *----- Object instance description --------------*
+    Instance class    : SparseIntegerOutrankingDigraph
+    Instance name     : cRandomperftab_mp
+    # Actions         : 100
+    # Criteria        : 7
+    Sorting by        : 3-Tiling
+    Ordering strategy : average
+    Ranking rule      : Copeland
+    # Components      : 42
+    Minimal order     : 1
+    Maximal order     : 10
+    Average order     : 2.4
+    fill rate         : 2.990%
+    ----  Constructor run times (in sec.) ----
+    Nbr of threads    : 1
+    Total time        : 0.03821
+    QuantilesSorting  : 0.01729
+    Preordering       : 0.00022
+    Decomposing       : 0.02061
+    Ordering          : 0.00001
+    Attributes       : ['runTimes', 'name', 'actions', 'criteria',
+                        'evaluation', 'order', 'dimension',
+                        'sortingParameters', 'nbrOfCPUs',
+                        'valuationdomain', 'profiles', 'categories',
+                        'sorting', 'minimalComponentSize',
+                        'decomposition', 'nbrComponents',
+                        'nd', 'components', 'fillRate',
+                        'maximalComponentSize', 'componentRankingRule',
+                        'boostedRanking']
+
+We obtain in this example here a decomposition into 42 linearly ordered components with a maximal component size of 10 for component *c04*.
+
+    >>> sg.showComponents()
+    *--- quantiles decomposition in decreasing order---*
+    c01. ]0.67-1.00] : [92]
+    c02. ]0.67-1.00] : [2, 21, 49, 52, 61]
+    c03. ]0.67-1.00] : [40, 43, 55, 57, 80]
+    c04. ]0.67-1.00] : [4, 6, 23, 28, 33, 34, 42, 47, 62, 95]
+    c05. ]0.33-1.00] : [7, 75]
+    c06. ]0.33-1.00] : [10, 69, 90]
+    c07. ]0.33-1.00] : [58]
+    c08. ]0.33-1.00] : [72, 88]
+    c09. ]0.33-1.00] : [35]
+    c10. ]0.33-0.67] : [0, 5, 9, 24, 41, 60, 65, 93]
+    c11. ]0.33-0.67] : [64]
+    c12. ]0.33-0.67] : [59, 76, 81, 84, 86]
+    c13. ]0.33-0.67] : [29, 56]
+    c14. ]0.33-0.67] : [44]
+    c15. ]0.33-0.67] : [37, 98]
+    c16. ]0.33-0.67] : [45, 96]
+    c17. ]0.33-0.67] : [39]
+    c18. ]0.33-0.67] : [97]
+    c19. ]0.33-0.67] : [36, 63, 67, 89, 91]
+    c20. ]0.33-0.67] : [32]
+    c21. ]0.33-0.67] : [19, 54, 94]
+    c22. ]0.33-0.67] : [99]
+    c23. ]0.33-0.67] : [3, 30, 68]
+    c24. ]0.33-0.67] : [1]
+    c25. ]0.33-0.67] : [20]
+    c26. ]0.33-0.67] : [11, 16, 26]
+    c27. ]0.33-0.67] : [8, 22, 70, 87]
+    c28. ]0.33-0.67] : [25, 27]
+    c29. ]0.33-0.67] : [18, 53]
+    c30. ]0.33-0.67] : [71]
+    c31. ]0.33-0.67] : [79]
+    c32. ]0.33-0.67] : [17, 31, 46]
+    c33. ]0.33-0.67] : [66]
+    c34. ]0.33-0.67] : [12, 38]
+    c35. ]<-0.67] : [51]
+    c36. ]<-0.67] : [15, 85]
+    c37. ]<-0.67] : [77]
+    c38. ]<-0.67] : [48, 50]
+    c39. ]<-0.67] : [14]
+    c40. ]<-0.67] : [74]
+    c41. ]<-0.33] : [13, 73, 78]
+    c42. ]<-0.33] : [82, 83]
+
+The corresponding sparse outranking relation appears as follows:
+
+    >>> sg.showRelationTable()
+    42 quantiles decomposed relation table in decreasing order
+    Component : c01 [92]
+    Component : c02 [2, 21, 49, 52, 61]
+    * ---- Relation Table -----
+      S   |  '2'	  '21'	  '49'	  '52'	  '61'	  
+    ------|-------------------------------------------
+     '2' |  0	 0	 7	 3	 7	 
+     '21' |  2	 0	 3	 2	 4	 
+     '49' |  0	 1	 0	 0	 0	 
+     '52' |  3	 4	 7	 0	 5	 
+     '61' |  0	 3	 7	 5	 0	 
+    Valuation domain: [-7;+7]
+    Component : c03 [40, 43, 55, 57, 80]
+    * ---- Relation Table -----
+      S   |  '40'	  '43'	  '55'	  '57'	  '80'	  
+    ------|-------------------------------------------
+     '40' |  0	 2	 0	 3	 0	 
+     '43' |  5	 0	 4	 5	 5	 
+     '55' |  4	 0	 0	 3	 7	 
+     '57' |  5	 4	 4	 0	 5	 
+     '80' |  7	 0	 0	 2	 0	 
+    Valuation domain: [-7;+7]
+    ...
+    ...
+    ...
+    Component : c40 [74]
+    Component : c41 [13, 73, 78]
+    * ---- Relation Table -----
+      S   |  '13'	  '73'	  '78'	  
+    ------|-------------------------------------------
+     '13' |  0	 3	 2	 
+     '73' |  3	 0	 1	 
+     '78' |  5	 3	 0	 
+    Valuation domain: [-7;+7]
+    Component : c42 [82, 83]
+    * ---- Relation Table -----
+      S   |  '82'	  '83'	  
+    ------|-------------------------------------------
+     '82' |  0	 3	 
+     '83' |  1	 0	 
+    Valuation domain: [-7;+7]
+
+A restricted outranking relation is stored for each component with more than one alternative. The resulting global relation map of the first ranked 50 alternatives looks as follows.
+
+    >>> sg.showRelationMap(toIndex=50)
+     ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴  +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴+ +++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴++ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴ ++ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴ +   ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴ ++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴  +┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴++ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴  + ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴+ +  ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴ ++++++┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴+ +++++┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴++  +++┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴+++ ┬+┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴+++  +  ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴+++++ +┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴ +   + +++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴  + ┴+ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴---+ +++ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴   + ++++ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴   ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +++┬┬+┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+  +┬+++┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+  ++++┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+++ +++┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ++ ┬+┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- ++  +┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴---+--  ┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+      ┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ++++┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ +++┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+  +┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ++ +┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-+ + ┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- ┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ 
+    Component ranking rule: Copeland
+    >>> print('%.0fkB' % (total_size(sg)/1024) )
+    516kB
+
+The memory occupation of this sparse outranking digraph *sg* instance takes only 516kB, compared to the 1.7MB required by a corresponding standard IntegerBipolarOutrankingDigraph instance.
+
+We may now rank the complete set of 100 decision alternatives by locally ranking with the Copeland rule, for instance, all these individual components.
+
+    >>> sg.boostedRanking
+    [92,  2,21,52,61,49,  43,55,57,80,40,  23,33,34,62,
+     28,95,42,4,6,47,  7,75,  90,69,10,  58,  72,88,  35,
+     24,60,65,0,9,5,41,93,  64,  81,86,84,59,76,  29,56,
+     44,  37,98,  45,96,  39,  97,  36,63,67,91,89,  32,
+     54,19,94,99,  3,30,68,  1,  20,  26,11,16,  70,87,8,22,
+     25,27,  18,53,  71,  79, 46,17,31,  66,  12,38, 51,
+     15,85,  77,  48,50,  14,  74,  13,73,78,  82,83]
+
+Ranking huge sets of decision alternatives
+..........................................
+
+When actually computing linear rankings of the set of alternatives, the local outranking relations are of no practical usage, and we may furthermore reduce the memory occupation of the resulting digraph by dropping the local outranking digraphs and keeping only a local ranked list of alternatives. We provide therfore the cQuantilesRanking class.
+
+>>> qr = cQuantilesRankingDigraph(t,3)
+>>> qr
+*----- Object instance description --------------*
+Instance class    : cQuantilesRankingDigraph
+Instance name     : cRandomperftab_mp
+# Actions         : 100
+# Criteria        : 7
+Sorting by        : 3-Tiling
+Ordering strategy : average
+Ranking rule      : Copeland
+# Components      : 42
+Minimal order     : 1
+Maximal order     : 10
+Average order     : 2.4
+fill rate         : 2.990%
+----  Constructor run times (in sec.) ----
+Nbr of threads    : 1
+Total time        : 0.04178
+QuantilesSorting  : 0.02192
+Preordering       : 0.00022
+Decomposing       : 0.01951
+Ordering          : 0.00000
+Attributes       : ['runTimes', 'name', 'actions', 'order',
+                    'dimension', 'sortingParameters', 'nbrOfCPUs',
+		    'valuationdomain', 'profiles', 'categories',
+		    'sorting', 'minimalComponentSize',
+		    'decomposition', 'nbrComponents', 'nd',
+		    'components', 'fillRate', 'maximalComponentSize',
+		    'componentRankingRule', 'boostedRanking']
+>>> qr.components
+OrderedDict([
+('c01', {'rank': 1,
+         'lowQtileLimit': ']0.67', 'highQtileLimit': '1.00]',
+	 'componentRanking': [92]}),
+('c02', {'rank': 2,
+         'lowQtileLimit': ']0.67', 'highQtileLimit': '1.00]',
+	 'componentRanking': [2, 52, 21, 61, 49]}),
+('c03', {'rank': 3,
+         'lowQtileLimit': ']0.67', 'highQtileLimit': '1.00]',
+	 'componentRanking': [43, 55, 57, 80, 40]}),
+...
+...
+...
+('c40', {'rank': 40,
+         'lowQtileLimit': ']<', 'highQtileLimit': '0.67]',
+	 'componentRanking': [51]}),
+('c41', {'rank': 41,
+         'lowQtileLimit': ']<', 'highQtileLimit': '0.33]',
+	 'componentRanking': [82, 83]}),
+('c42', {'rank': 42,
+         'lowQtileLimit': ']<', 'highQtileLimit': '0.33]',
+	 'componentRanking': [78, 73, 13]})])
+>>> print('%.0fkB' % (total_size(qr)/1024) )
+179kB
+
+For sparse outranking digraphs, the adjacancy table is iplemented as a dynamic function:: 
+
+    def relation(self, int x, int y):
+	"""
+	*Parameters*:
+	    * x (int action key),
+	    * y (int action key).
+	Dynamic construction of the global outranking
+        characteristic function *r(x S y)*.
+	"""
+	cdef int Min, Med, Max, rx, ry
+	Min = self.valuationdomain['min']
+	Med = self.valuationdomain['med']
+	Max = self.valuationdomain['max']
+	if x == y:
+	    return Med
+	cx = self.actions[x]['component']
+	cy = self.actions[y]['component']
+	#print(self.components)
+	rx = self.components[cx]['rank']
+	ry = self.components[cy]['rank']
+	if rx == ry:
+	    try:
+		rxpg = self.components[cx]['subGraph'].relation
+		return rxpg[x][y]
+	    except AttributeError:
+		componentRanking = self.components[cx]['componentRanking']
+		if componentRanking.index(x) < componentRanking.index(x):
+		    return Max
+		else:
+		    return Min
+	elif rx > ry:
+	    return Min
+	else:
+	    return Max
+
+
+
+
+
+
+
+
+Back to :ref:`Tutorial-label`
 	   
 .. only:: html
 
@@ -4486,3 +4944,5 @@ Footnotes
 .. [4] *Wilson* 's algorithm uses *loop-erased random walks*. See https://en.wikipedia.org/wiki/Loop-erased_random_walk .
 
 .. [5] *Kruskal* 's algorithm is a *minimum-spanning-tree* algorithm which finds an edge of the least possible weight that connects any two trees in the forest.  See https://en.wikipedia.org/wiki/Kruskal%27s_algorithm .
+
+.. [6] See https://cython.org/

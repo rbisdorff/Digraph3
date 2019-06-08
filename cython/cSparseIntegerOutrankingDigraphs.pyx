@@ -347,8 +347,15 @@ class SparseIntegerDigraph(object):
         ry = self.components[cy]['rank']
         
         if rx == ry:
-            rxpg = self.components[cx]['subGraph'].relation
-            return rxpg[x][y]
+            try:
+                rxpg = self.components[cx]['subGraph'].relation
+                return rxpg[x][y]
+            except AttributeError:
+                componentRanking = self.components[cx]['componentRanking']
+                if componentRanking.index(x) < componentRanking.index(x):
+                    return Max
+                else:
+                    return Min
         elif rx > ry:
             return Min
         else:
