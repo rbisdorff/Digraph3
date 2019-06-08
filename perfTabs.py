@@ -1707,7 +1707,8 @@ The performance evaluations of each decision alternative on each criterion are g
             print('percentile =', percentile)   
         return percentile
 
-    def showPerformanceTableau(self,actionsSubset=None,Sorted=True,ndigits=2):
+    def showPerformanceTableau(self,Transposed=False,actionsSubset=None,\
+                               fromIndex=None,toIndex=None,Sorted=True,ndigits=2):
         """
         Print the performance Tableau.
         """
@@ -1721,21 +1722,49 @@ The performance evaluations of each decision alternative on each criterion are g
             if Sorted:
                 actionsList.sort()
         else:
-            actionsList = list(actionsSubset)     
-        print('criteria | weights |', end=' ')
-        for x in actionsList:
-            print('\''+str(x)+'\'  ', end=' ')
-        print('\n---------|-----------------------------------------')
-        formatString = '%% .%df ' % ndigits
-        for g in criteriaList:
-            print('   \''+str(g)+'\'  |   '+str(self.criteria[g]['weight'])+'   | ', end=' ')
+            actionsList = list(actionsSubset)
+        if fromIndex == None:
+            fromIndex = 0
+        if toIndex == None:
+            toIndex=len(actionsList)
+        # view criteria x actions
+        if Transposed:
+            print('criteria | weights |', end=' ')
             for x in actionsList:
-                evalgx = self.evaluation[g][x]
-                if evalgx == Decimal('-999'):
-                    print(' NA ', end=' ')
-                else:                    
-                    print(formatString % (evalgx), end=' ')
-            print()      
+                print('\''+str(x)+'\'  ', end=' ')
+            print('\n---------|-----------------------------------------')
+            formatString = '%% .%df ' % ndigits
+            for g in criteriaList:
+                print('   \''+str(g)+'\'  |   '+str(self.criteria[g]['weight'])+'   | ', end=' ')
+                for i in range(fromIndex,toIndex):
+                    x = actionsList[i]
+                    evalgx = self.evaluation[g][x]
+                    if evalgx == Decimal('-999'):
+                        print(' NA ', end=' ')
+                    else:                    
+                        print(formatString % (evalgx), end=' ')
+                print()
+        # view actions x criteria
+        else:
+            print('Criteria | ', end=' ')
+            for g in criteriaList:
+                print('\''+str(g)+'\'  ', end=' ')
+            print('\nActions  | ', end=' ')
+            for g in criteriaList:
+                print('  %s   ' % str(self.criteria[g]['weight'] ), end=' ')          
+            print('\n---------|-----------------------------------------')
+            formatString = '%% .%df ' % ndigits
+            for i in range(fromIndex,toIndex):
+                x = actionsList[i]
+                print('   \''+str(self.actions[x]['name'])+'\'  |' , end=' ')
+                for g in criteriaList:
+                    evalgx = self.evaluation[g][x]
+                    if evalgx == Decimal('-999'):
+                        print('  NA  ', end=' ')
+                    else:                    
+                        print(formatString % (evalgx), end=' ')
+                print()
+            
 
     def saveCSV(self,fileName='tempPerfTab',Sorted=True,criteriaList=None,actionsList=None,ndigits=2,Debug=False):
         """1
@@ -2002,10 +2031,9 @@ The performance evaluations of each decision alternative on each criterion are g
             if fromIndex == None:
                 fromIndex = 0
             if toIndex == None:
-                fromIndex = len(actionsKeys)
-            for i in raneg(fromIndex,toIndex):
+                toIndex = len(actionsKeys)
+            for i in range(fromIndex,toIndex):
                 x = actionsKeys[i]
-            #for x in actionsKeys:
                 try:
                     xName = actions[x]['shortName']
                 except:

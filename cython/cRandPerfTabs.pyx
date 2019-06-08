@@ -250,7 +250,67 @@ class cPerformanceTableau(PerformanceTableau):
                     pass
                 print()
 
-    def normalizeEvaluations(self,lowValue=0.0,highValue=100.0,Debug=False):
+    def showPerformanceTableau(self,bint Transposed=False,actionsSubset=None,\
+                               int fromIndex=-1,int toIndex=-1,bint Sorted=True,ndigits=2):
+        """
+        Print the performance Tableau.
+        """
+        cdef int i, x
+        from decimal import Decimal
+        print('*----  performance tableau -----*')
+        criteriaList = list(self.criteria)
+        if Sorted:
+            criteriaList.sort()
+        if actionsSubset == None:
+            actionsList = list(self.actions)
+            if Sorted:
+                actionsList.sort()
+        else:
+            actionsList = list(actionsSubset)
+        if fromIndex == -1:
+            fromIndex = 0
+        if toIndex == -1:
+            toIndex=len(actionsList)
+        # view criteria x actions
+        if Transposed:
+            print('criteria | weights |', end=' ')
+            for x in actionsList:
+                print('\''+str(self.actions[x]['name'])+'\'  ', end=' ')
+            print('\n---------|-----------------------------------------')
+            formatString = '%% .%df ' % ndigits
+            for g in criteriaList:
+                print('   \''+str(g)+'\'  |   '+str(self.criteria[g]['weight'])+'   | ', end=' ')
+                for i in range(fromIndex,toIndex):
+                    x = actionsList[i]
+                    evalgx = self.evaluation[g][x]
+                    if evalgx == Decimal('-999'):
+                        print(' NA ', end=' ')
+                    else:                    
+                        print(formatString % (evalgx), end=' ')
+                print()
+        # view actions x criteria
+        else:
+            print('  Criteria| ', end=' ')
+            for g in criteriaList:
+                print('\''+str(g)+'\'  ', end=' ')
+            print('\nActions\  | ', end=' ')
+            for g in criteriaList:
+                print('  %s   ' % str(self.criteria[g]['weight'] ), end=' ')          
+            print('\n---------|-----------------------------------------')
+            formatString = '%% .%df ' % ndigits
+            for i in range(fromIndex,toIndex):
+                x = actionsList[i]
+                print('   \''+str(self.actions[x]['name'])+'\'  |' , end=' ')
+                for g in criteriaList:
+                    evalgx = self.evaluation[g][x]
+                    if evalgx == Decimal('-999'):
+                        print('  NA  ', end=' ')
+                    else:                    
+                        print(formatString % (evalgx), end=' ')
+                print()
+
+
+    def normalizeEvaluations(self,lowValue=0.0,highValue=100.0,bint Debug=False):
         """
         Recodes the evaluations between lowValue and highValue on all criteria.
 
