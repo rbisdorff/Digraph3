@@ -1756,7 +1756,7 @@ The performance evaluations of each decision alternative on each criterion are g
             formatString = '%% .%df ' % ndigits
             for i in range(fromIndex,toIndex):
                 x = actionsList[i]
-                print('   \''+str(self.actions[x]['name'])+'\'  |' , end=' ')
+                print('   \''+str(self.actions[x]['name'])+'\'   |' , end=' ')
                 for g in criteriaList:
                     evalgx = self.evaluation[g][x]
                     if evalgx == Decimal('-999'):

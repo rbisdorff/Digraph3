@@ -296,11 +296,11 @@ class cPerformanceTableau(PerformanceTableau):
             print('\nActions\  | ', end=' ')
             for g in criteriaList:
                 print('  %s   ' % str(self.criteria[g]['weight'] ), end=' ')          
-            print('\n---------|-----------------------------------------')
+            print('\n----------|-----------------------------------------')
             formatString = '%% .%df ' % ndigits
             for i in range(fromIndex,toIndex):
                 x = actionsList[i]
-                print('   \''+str(self.actions[x]['name'])+'\'  |' , end=' ')
+                print('   \''+str(self.actions[x]['name'])+'\'   |' , end=' ')
                 for g in criteriaList:
                     evalgx = self.evaluation[g][x]
                     if evalgx == Decimal('-999'):
