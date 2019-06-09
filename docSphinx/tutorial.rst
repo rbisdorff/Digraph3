@@ -4417,7 +4417,7 @@ HPC ranking with big outranking digraphs
 
 The Digraph3 collection provides cythonized [6]_, i.e. C-compiled and optimised versions of the main python modules for tackling multiple criteria decision problems facing large sets of decision alternatives ( > 1000 ). Such problems appear usually with a combinatorial organisation of the potential decision alternatives, as is frequently the case in bioinformatics for instance. If HPC facilities with numerous cores ( > 64) and big memory (> 1TB ) are available, it is thus possible to rank up to several millions of alternatives (see [BIS-2016]_).
 
-The cythonized Digraph3 modules, prefixed with the letter *c* and take a *pyx* extension, are stored in the cython directory:
+The cythonized Digraph3 modules, prefixed with the letter *c* and taking a *pyx* extension, are stored in the cython directory:
     - *cRandPerfTabs.pyx*,
     - *cIntegerOutrankingDigraphs.pyx*,
     - *cIntegerSortingDigraphs.pyx* and
@@ -4520,7 +4520,7 @@ The C compiled version of the bipolar-valued digraph models takes integer relati
                           'order', 'runTimes', 'nbrThreads', 'relation',
                           'gamma', 'notGamma']
 
-On a classic single threaded intel7 equipped PC, with four single threaded cores, the :py:class:`cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` constructor takes about four seconds for computing a **million** pairwise outranking characteristic values. In a similar setting, the standard :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class constructor appears more than two times slower.
+On a classic single threaded intel7 equipped PC, with four single threaded cores, the :py:class:`cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` constructor takes about four seconds for computing a **million** pairwise outranking characteristic values. In a similar setting, the standard :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class constructor operates more than two times slower.
 
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> g1 = BipolarOutrankingDigraph(t1,Threading=True,nbrCores=4)
@@ -4555,7 +4555,7 @@ By far, most of the run time is in each case needed for computing the individual
     >>> total_size(g.gamma)/total_size(g)
     0.45
 
-About 103MB for *g* and 202MB for *g1*. The standard *Decimal* valued :code:`BipolarOutrankingDigraph` instance *g1* thus nearly doubles the memory occupation of the corresponding :code:`IntegerBipolarOutrankingDigraph` *g* instance (see Line 3 and 5 above). 3/4 of this memory occupation is due to the *g.relation* (34%) and the *g.gamma* (45%) dictionaries. And these ratios quadratically grow with the digraph order. To limit the object sizes for really big outranking digraphs, we need to abandon the complete implementation of the adjancency table.
+About 103MB for *g* and 202MB for *g1*. The standard *Decimal* valued :code:`BipolarOutrankingDigraph` instance *g1* thus nearly doubles the memory occupation of the corresponding :code:`IntegerBipolarOutrankingDigraph` *g* instance (see Line 3 and 5 above). 3/4 of this memory occupation is due to the *g.relation* (34%) and the *g.gamma* (45%) dictionaries. And these ratios quadratically grow with the digraph order. To limit the object sizes for really big outranking digraphs, we need to abandon the complete implementation of adjancency tables and gamma functions.
 
 
 The sparse outranking digraph implementation
@@ -4739,7 +4739,7 @@ For sparse outranking digraphs, the adjacancy table is now implemented as a dyna
 Ranking big sets of decision alternatives
 ..........................................
 
-We may now rank the complete set of 100 decision alternatives by locally ranking with the Copeland rule, for instance, all these individual components.
+We may now rank the complete set of 100 decision alternatives by locally ranking with the Copeland rule or the 'NetFlows' rule, for instance, all these individual components.
 
     >>> sg.boostedRanking
     [21, 52, 2, 33, 55, 61, 23, 43, 49, 92, 40, 62, 28, 57, 95, 6,
@@ -4837,7 +4837,7 @@ We obtain hence an even more considerably less voluminous memory occupation: 208
     ...        list(reversed(qr.boostedRanking)))['correlation']))
     Optimzed sparse 4-tiling: +0.7051
 
-The best ranking correlation with the pairwise outranking situations (+0.75) is naturally given when we apply the Copeland rule to the complete outranking digraph. When we apply the Copeland rule to the sparse 4-tiled outranking digraph we get a correlation of +0.72, and when apllying the Copeland rule to the optimized 4-tiled digraph, we still obtain a correlation of +0.71. These results naturally depend on the number of quantiles we use and on the given model of performance tableau. In case of Random3ObjectivesPerformanceTableau instances, we may get in a similar setting a complete outranking correlation of +0.86, a sparse 4-tiling correlation of +0.82, and an optimzed sparse 4-tiling correlation of +0.81.
+The best ranking correlation with the pairwise outranking situations (+0.75) is naturally given when we apply the Copeland rule to the complete outranking digraph. When we apply the Copeland rule to the sparse 4-tiled outranking digraph we get a correlation of +0.72, and when apllying the Copeland rule to the optimized 4-tiled digraph, we still obtain a correlation of +0.71. These results actually depend on the number of quantiles we use as well as on the given model of random performance tableau. In case of Random3ObjectivesPerformanceTableau instances, for instance, we would get in a similar setting a complete outranking correlation of +0.86, a sparse 4-tiling correlation of +0.82, and an optimzed sparse 4-tiling correlation of +0.81.
 
 HPC quantiles ranking records
 .............................
@@ -4865,14 +4865,14 @@ Using the HPC platform of the University of Luxembourg (https://hpc.uni.lu/), th
 
    HPC-UL Ranking Performance Records (Spring 2018)
 
-Example session on Iris-126 -skylake node::
+Example python3.6.5 session on the HCP-UL Iris-126 -skylake node::
 
     (myPy365ICC) [rbisdorff@iris-126 Test]$ python
     Python 3.6.5 (default, May  9 2018, 09:54:28) 
     [GCC Intel(R) C++ gcc 6.3 mode] on linux
     Type "help", "copyright", "credits" or "license" for more information.
     >>> from cRandPerfTabs import\
-    ...         cRandom3ObjectivesPerformanceTableau as cR3ObjPT
+    ...          cRandom3ObjectivesPerformanceTableau as cR3ObjPT
     >>> tp = cR3ObjPT(numberOfActions=1000000,
     ...          numberOfCriteria=21,
     ...          weightDistribution='equiobjectives',
@@ -4882,13 +4882,13 @@ Example session on Iris-126 -skylake node::
     ...          seed=15)
     >>> import cSparseIntegerOutrankingDigraphs as iBg
     >>> qr = iBg.cQuantilesRankingDigraph(tp,quantiles=10,
-    ...                               quantilesOrderingStrategy='average',
-    ...                               minimalComponentSize=1,
-    ...                               componentRankingRule='NetFlows',
-    ...                               LowerClosed=False,
-    ...                               Threading=True,
-    ...                               tempDir='/tmp',
-    ...                               nbrOfCPUs=28)
+    ...            quantilesOrderingStrategy='average',
+    ...            minimalComponentSize=1,
+    ...            componentRankingRule='NetFlows',
+    ...            LowerClosed=False,
+    ...            Threading=True,
+    ...            tempDir='/tmp',
+    ...            nbrOfCPUs=28)
     >>> qr
     *----- Object instance description --------------*
     Instance class    : cQuantilesRankingDigraph
@@ -4910,7 +4910,7 @@ Example session on Iris-126 -skylake node::
     Preordering       : 5.17954
     Decomposing       : 72.29356
 
-10-tiling and locally ranking a million decision alternatives evaluated on 21 incommensurable criteria by balancing an economic, an environmental and a societal objective takes thus less than 3 minutes with 28 computing cores and a memory occupation of less than 60GB. The performances of the five best-ranked alternatives are listed below.
+10-tiling and locally ranking a million decision alternatives evaluated on 21 incommensurable criteria by balancing an economic, an environmental and a societal objective takes thus less than 3 minutes with 28 computing cores and a shared CPU memory occupation of less than 60GB. The performances of the five best-ranked alternatives are listed below.
 
     >>> tp.showPerformanceTableau(actionsSubset=qr.boostedRanking2[:5])
     *----  performance tableau -----*

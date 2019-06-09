@@ -6916,7 +6916,7 @@ best covered terminal kernel</span></p>
 </div>
 <p>The Digraph3 collection provides cythonized <a class="footnote-reference" href="#id85" id="id76">[6]</a>, i.e. C-compiled and optimised versions of the main python modules for tackling multiple criteria decision problems facing large sets of decision alternatives ( &gt; 1000 ). Such problems appear usually with a combinatorial organisation of the potential decision alternatives, as is frequently the case in bioinformatics for instance. If HPC facilities with numerous cores ( &gt; 64) and big memory (&gt; 1TB ) are available, it is thus possible to rank up to several millions of alternatives (see <a class="reference internal" href="#bis-2016" id="id77">[BIS-2016]</a>).</p>
 <dl class="docutils">
-<dt>The cythonized Digraph3 modules, prefixed with the letter <em>c</em> and take a <em>pyx</em> extension, are stored in the cython directory:</dt>
+<dt>The cythonized Digraph3 modules, prefixed with the letter <em>c</em> and taking a <em>pyx</em> extension, are stored in the cython directory:</dt>
 <dd><ul class="first last simple">
 <li><em>cRandPerfTabs.pyx</em>,</li>
 <li><em>cIntegerOutrankingDigraphs.pyx</em>,</li>
@@ -7097,7 +7097,7 @@ best covered terminal kernel</span></p>
 <span class="go">                      &#39;gamma&#39;, &#39;notGamma&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>On a classic single threaded intel7 equipped PC, with four single threaded cores, the <a class="reference internal" href="techDoc.html#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph" title="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph</span></code></a> constructor takes about four seconds for computing a <strong>million</strong> pairwise outranking characteristic values. In a similar setting, the standard <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class constructor appears more than two times slower.</p>
+<p>On a classic single threaded intel7 equipped PC, with four single threaded cores, the <a class="reference internal" href="techDoc.html#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph" title="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph</span></code></a> constructor takes about four seconds for computing a <strong>million</strong> pairwise outranking characteristic values. In a similar setting, the standard <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class constructor operates more than two times slower.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -7159,7 +7159,7 @@ best covered terminal kernel</span></p>
 <span class="go">0.45</span>
 </pre></div>
 </td></tr></table></div>
-<p>About 103MB for <em>g</em> and 202MB for <em>g1</em>. The standard <em>Decimal</em> valued <code class="code docutils literal"><span class="pre">BipolarOutrankingDigraph</span></code> instance <em>g1</em> thus nearly doubles the memory occupation of the corresponding <code class="code docutils literal"><span class="pre">IntegerBipolarOutrankingDigraph</span></code> <em>g</em> instance (see Line 3 and 5 above). 3/4 of this memory occupation is due to the <em>g.relation</em> (34%) and the <em>g.gamma</em> (45%) dictionaries. And these ratios quadratically grow with the digraph order. To limit the object sizes for really big outranking digraphs, we need to abandon the complete implementation of the adjancency table.</p>
+<p>About 103MB for <em>g</em> and 202MB for <em>g1</em>. The standard <em>Decimal</em> valued <code class="code docutils literal"><span class="pre">BipolarOutrankingDigraph</span></code> instance <em>g1</em> thus nearly doubles the memory occupation of the corresponding <code class="code docutils literal"><span class="pre">IntegerBipolarOutrankingDigraph</span></code> <em>g</em> instance (see Line 3 and 5 above). 3/4 of this memory occupation is due to the <em>g.relation</em> (34%) and the <em>g.gamma</em> (45%) dictionaries. And these ratios quadratically grow with the digraph order. To limit the object sizes for really big outranking digraphs, we need to abandon the complete implementation of adjancency tables and gamma functions.</p>
 </div>
 <div class="section" id="the-sparse-outranking-digraph-implementation">
 <h3><a class="toc-backref" href="#id231">The sparse outranking digraph implementation</a><a class="headerlink" href="#the-sparse-outranking-digraph-implementation" title="Permalink to this headline">¶</a></h3>
@@ -7493,7 +7493,7 @@ best covered terminal kernel</span></p>
 </div>
 <div class="section" id="ranking-big-sets-of-decision-alternatives">
 <h3><a class="toc-backref" href="#id232">Ranking big sets of decision alternatives</a><a class="headerlink" href="#ranking-big-sets-of-decision-alternatives" title="Permalink to this headline">¶</a></h3>
-<p>We may now rank the complete set of 100 decision alternatives by locally ranking with the Copeland rule, for instance, all these individual components.</p>
+<p>We may now rank the complete set of 100 decision alternatives by locally ranking with the Copeland rule or the ‘NetFlows’ rule, for instance, all these individual components.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -7673,7 +7673,7 @@ best covered terminal kernel</span></p>
 <span class="go">Optimzed sparse 4-tiling: +0.7051</span>
 </pre></div>
 </td></tr></table></div>
-<p>The best ranking correlation with the pairwise outranking situations (+0.75) is naturally given when we apply the Copeland rule to the complete outranking digraph. When we apply the Copeland rule to the sparse 4-tiled outranking digraph we get a correlation of +0.72, and when apllying the Copeland rule to the optimized 4-tiled digraph, we still obtain a correlation of +0.71. These results naturally depend on the number of quantiles we use and on the given model of performance tableau. In case of Random3ObjectivesPerformanceTableau instances, we may get in a similar setting a complete outranking correlation of +0.86, a sparse 4-tiling correlation of +0.82, and an optimzed sparse 4-tiling correlation of +0.81.</p>
+<p>The best ranking correlation with the pairwise outranking situations (+0.75) is naturally given when we apply the Copeland rule to the complete outranking digraph. When we apply the Copeland rule to the sparse 4-tiled outranking digraph we get a correlation of +0.72, and when apllying the Copeland rule to the optimized 4-tiled digraph, we still obtain a correlation of +0.71. These results actually depend on the number of quantiles we use as well as on the given model of random performance tableau. In case of Random3ObjectivesPerformanceTableau instances, for instance, we would get in a similar setting a complete outranking correlation of +0.86, a sparse 4-tiling correlation of +0.82, and an optimzed sparse 4-tiling correlation of +0.81.</p>
 </div>
 <div class="section" id="hpc-quantiles-ranking-records">
 <h3><a class="toc-backref" href="#id233">HPC quantiles ranking records</a><a class="headerlink" href="#hpc-quantiles-ranking-records" title="Permalink to this headline">¶</a></h3>
@@ -7700,7 +7700,7 @@ Debian 8 Linux.</li>
 <a class="reference internal image-reference" href="_images/rankingRecords.png"><img alt="_images/rankingRecords.png" src="_images/rankingRecords.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 60 </span><span class="caption-text">HPC-UL Ranking Performance Records (Spring 2018)</span></p>
 </div>
-<p>Example session on Iris-126 -skylake node:</p>
+<p>Example python3.6.5 session on the HCP-UL Iris-126 -skylake node:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -7747,7 +7747,7 @@ Python 3.6.5 (default, May  9 2018, 09:54:28)
 [GCC Intel(R) C++ gcc 6.3 mode] on linux
 Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
 &gt;&gt;&gt; from cRandPerfTabs import\
-...         cRandom3ObjectivesPerformanceTableau as cR3ObjPT
+...          cRandom3ObjectivesPerformanceTableau as cR3ObjPT
 &gt;&gt;&gt; tp = cR3ObjPT(numberOfActions=1000000,
 ...          numberOfCriteria=21,
 ...          weightDistribution=&#39;equiobjectives&#39;,
@@ -7757,13 +7757,13 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 ...          seed=15)
 &gt;&gt;&gt; import cSparseIntegerOutrankingDigraphs as iBg
 &gt;&gt;&gt; qr = iBg.cQuantilesRankingDigraph(tp,quantiles=10,
-...                               quantilesOrderingStrategy=&#39;average&#39;,
-...                               minimalComponentSize=1,
-...                               componentRankingRule=&#39;NetFlows&#39;,
-...                               LowerClosed=False,
-...                               Threading=True,
-...                               tempDir=&#39;/tmp&#39;,
-...                               nbrOfCPUs=28)
+...            quantilesOrderingStrategy=&#39;average&#39;,
+...            minimalComponentSize=1,
+...            componentRankingRule=&#39;NetFlows&#39;,
+...            LowerClosed=False,
+...            Threading=True,
+...            tempDir=&#39;/tmp&#39;,
+...            nbrOfCPUs=28)
 &gt;&gt;&gt; qr
 *----- Object instance description --------------*
 Instance class    : cQuantilesRankingDigraph
@@ -7786,7 +7786,7 @@ Preordering       : 5.17954
 Decomposing       : 72.29356
 </pre></div>
 </td></tr></table></div>
-<p>10-tiling and locally ranking a million decision alternatives evaluated on 21 incommensurable criteria by balancing an economic, an environmental and a societal objective takes thus less than 3 minutes with 28 computing cores and a memory occupation of less than 60GB. The performances of the five best-ranked alternatives are listed below.</p>
+<p>10-tiling and locally ranking a million decision alternatives evaluated on 21 incommensurable criteria by balancing an economic, an environmental and a societal objective takes thus less than 3 minutes with 28 computing cores and a shared CPU memory occupation of less than 60GB. The performances of the five best-ranked alternatives are listed below.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
