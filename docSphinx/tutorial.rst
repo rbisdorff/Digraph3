@@ -4863,7 +4863,80 @@ Using the HPC platform of the University of Luxembourg (https://hpc.uni.lu/), th
    :width: 550 px
    :align: center
 
-   HPC-UL Ranking Performance Records (Spring 2018)	   
+   HPC-UL Ranking Performance Records (Spring 2018)
+
+Example session on Iris-126 -skylake node::
+
+    (myPy365ICC) [rbisdorff@iris-126 Test]$ python
+    Python 3.6.5 (default, May  9 2018, 09:54:28) 
+    [GCC Intel(R) C++ gcc 6.3 mode] on linux
+    Type "help", "copyright", "credits" or "license" for more information.
+    >>> from cRandPerfTabs import\
+    ...         cRandom3ObjectivesPerformanceTableau as cR3ObjPT
+    >>> tp = cR3ObjPT(numberOfActions=1000000,
+    ...          numberOfCriteria=21,
+    ...          weightDistribution='equiobjectives',
+    ...          commonScale = (0.0,1000.0),
+    ...          commonThresholds = [(2.5,0.0),(5.0,0.0),(75.0,0.0)],
+    ...          missingDataProbability=0.05,
+    ...          seed=15)
+    >>> import cSparseIntegerOutrankingDigraphs as iBg
+    >>> qr = iBg.cQuantilesRankingDigraph(tp,quantiles=10,
+    ...                               quantilesOrderingStrategy='average',
+    ...                               minimalComponentSize=1,
+    ...                               componentRankingRule='NetFlows',
+    ...                               LowerClosed=False,
+    ...                               Threading=True,
+    ...                               tempDir='/tmp',
+    ...                               nbrOfCPUs=28)
+    >>> qr
+    *----- Object instance description --------------*
+    Instance class    : cQuantilesRankingDigraph
+    Instance name     : random3ObjectivesPerfTab_mp
+    # Actions         : 1000000
+    # Criteria        : 21
+    Sorting by        : 10-Tiling
+    Ordering strategy : average
+    Ranking rule      : NetFlows
+    # Components      : 233645
+    Minimal order     : 1
+    Maximal order     : 153
+    Average order     : 4.3
+    fill rate         : 0.001%
+    ----  Constructor run times (in sec.) ----
+    Nbr of threads    : 28
+    Total time        : 177.02770
+    QuantilesSorting  : 99.55377
+    Preordering       : 5.17954
+    Decomposing       : 72.29356
+
+10-tiling and locally ranking a million decision alternatives evaluated on 21 incommensurable criteria by balancing an economic, an environmental and a societal objective takes thus less than 3 minutes with 28 computing cores and a memory occupation of less than 60GB. The performances of the five best-ranked alternatives are listed below.
+
+    >>> tp.showPerformanceTableau(actionsSubset=qr.boostedRanking2[:5])
+    *----  performance tableau -----*
+    criteria | weights | '155873' '426463' '279728' '115897' '605980'
+    ---------|-------------------------------------------------------
+       'g01'  |   42   |   928.36   808.35    NA     846.11   978.29 
+       'g02'  |   48   |   587.25   899.22   669.79  297.24   778.95
+       'g03'  |   56   |   938.06    NA      936.63  908.40   908.58
+       'g04'  |   48   |    NA      956.14   838.31  905.09   807.40
+       'g05'  |   56   |   919.29   950.51   670.52  910.34   542.09
+       'g06'  |   42   |   770.13   974.63   969.88  879.66   850.42
+       'g07'  |   42   |   782.88   574.08   813.90  800.26   617.08
+       'g08'  |   48   |   814.57   943.34   796.62  517.79   750.57
+       'g09'  |   56   |   774.62   376.70   879.65  670.40   815.36
+       'g10'  |   42   |   861.36   739.94   731.94  577.11   865.63
+       'g11'  |   56   |   784.36   953.77   653.01  812.49   929.55
+       'g12'  |   42   |   638.40   599.17   934.24  734.45   355.25
+       'g13'  |   56   |   852.43   877.23   832.42  809.85   816.22
+       'g14'  |   48   |   916.15   461.04   395.36  969.43   784.14
+       'g15'  |   56   |   876.06   863.72   864.49  727.30   808.42
+       'g16'  |   42   |   886.12   859.70   882.21  865.89   460.98
+       'g17'  |   48   |   688.37   655.37   833.06  797.29   927.91
+       'g18'  |   42   |   898.26   914.32   872.53  825.91   833.77
+       'g19'  |   48   |   527.26   842.85   843.93  802.15   787.54
+       'g20'  |   42   |   821.26   864.81   710.15  717.19   614.74
+       'g21'  |   48   |   823.13   863.82   821.06  901.20   839.27
 
 Back to :ref:`Tutorial-label`
 	   
