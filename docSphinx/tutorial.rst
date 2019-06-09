@@ -4419,7 +4419,11 @@ The Digraph3 collection provides cythonized [6]_, i.e. C-compiled and optimised 
 
 The cythonized Digraph3 modules, prefixed with the letter *c* and take a *pyx* extension, are stored in the cython directory:
     - *cRandPerfTabs.pyx*,
-    - *cIntegerOutrankingDigraphs.pyx*, *cIntegerSortingDigraphs.pyx* and *cSparseIntegerOutrankingDigraphs.pyx*. Their compilation and installation requires the cython compiler ( ...$ pip install cython ).
+    - *cIntegerOutrankingDigraphs.pyx*,
+    - *cIntegerSortingDigraphs.pyx* and
+    - *cSparseIntegerOutrankingDigraphs.pyx*.
+
+Their compilation and installation requires the cython compiler ( ...$ pip install cython ).
 
 Big Data performance tableaux
 .............................
@@ -4557,270 +4561,146 @@ About 103MB for *g* and 202MB for *g1*. The standard *Decimal* valued :code:`Bip
 The sparse outranking digraph implementation
 ............................................
 
-The idea is to first decompose the complete outranking relation into an ordered collection of equivalent performance classes. Let us consider for this illustration a random performance tableau with 100 decision alternatives evaluated on 7 criteria.
+The idea is to first decompose the complete outranking relation into an ordered collection of equivalent quantile performance classes. Let us consider for this illustration a random performance tableau with 100 decision alternatives evaluated on 7 criteria.
 
     >>> from cRandPerfTabs import *
     >>> t = cRandomPerformanceTableau(numberOfActions=100,
     ...                               numberOfCriteria=7,seed=100)
 
-We sort the 100 decision alternatives into overlapping quantile classes and rank with respect to the average quantile limits, the characteristic value of being less performing than the upper quantile limit, and the characteristic value of being at least as good performoing than the lower limit.
+We sort the 100 decision alternatives into overlapping quartile classes and rank with respect to the average quantile limits.
 
     >>> from cSparseIntegerOutrankingDigraphs import *
-    >>> sg = SparseIntegerOutrankingDigraph(t,quantiles=3)
+    >>> sg = SparseIntegerOutrankingDigraph(t,quantiles=4)
     >>> sg
     *----- Object instance description --------------*
     Instance class    : SparseIntegerOutrankingDigraph
     Instance name     : cRandomperftab_mp
     # Actions         : 100
     # Criteria        : 7
-    Sorting by        : 3-Tiling
+    Sorting by        : 4-Tiling
     Ordering strategy : average
     Ranking rule      : Copeland
-    # Components      : 42
+    # Components      : 6
     Minimal order     : 1
-    Maximal order     : 10
-    Average order     : 2.4
-    fill rate         : 2.990%
+    Maximal order     : 35
+    Average order     : 16.7
+    fill rate         : 24.970%
     ----  Constructor run times (in sec.) ----
     Nbr of threads    : 1
-    Total time        : 0.03821
-    QuantilesSorting  : 0.01729
+    Total time        : 0.08212
+    QuantilesSorting  : 0.01481
     Preordering       : 0.00022
-    Decomposing       : 0.02061
-    Ordering          : 0.00001
+    Decomposing       : 0.06707
+    Ordering          : 0.00000
     Attributes       : ['runTimes', 'name', 'actions', 'criteria',
                         'evaluation', 'order', 'dimension',
                         'sortingParameters', 'nbrOfCPUs',
                         'valuationdomain', 'profiles', 'categories',
                         'sorting', 'minimalComponentSize',
-                        'decomposition', 'nbrComponents',
-                        'nd', 'components', 'fillRate',
+                        'decomposition', 'nbrComponents', 'nd',
+                        'components', 'fillRate',
                         'maximalComponentSize', 'componentRankingRule',
                         'boostedRanking']
 
-We obtain in this example here a decomposition into 42 linearly ordered components with a maximal component size of 10 for component *c04*.
+We obtain in this example here a decomposition into 6 linearly ordered components with a maximal component size of 35 for component *c3*.
 
-    >>> sg.showComponents()
+    >>> sg.showDecomposition()
     *--- quantiles decomposition in decreasing order---*
-    c01. ]0.67-1.00] : [92]
-    c02. ]0.67-1.00] : [2, 21, 49, 52, 61]
-    c03. ]0.67-1.00] : [40, 43, 55, 57, 80]
-    c04. ]0.67-1.00] : [4, 6, 23, 28, 33, 34, 42, 47, 62, 95]
-    c05. ]0.33-1.00] : [7, 75]
-    c06. ]0.33-1.00] : [10, 69, 90]
-    c07. ]0.33-1.00] : [58]
-    c08. ]0.33-1.00] : [72, 88]
-    c09. ]0.33-1.00] : [35]
-    c10. ]0.33-0.67] : [0, 5, 9, 24, 41, 60, 65, 93]
-    c11. ]0.33-0.67] : [64]
-    c12. ]0.33-0.67] : [59, 76, 81, 84, 86]
-    c13. ]0.33-0.67] : [29, 56]
-    c14. ]0.33-0.67] : [44]
-    c15. ]0.33-0.67] : [37, 98]
-    c16. ]0.33-0.67] : [45, 96]
-    c17. ]0.33-0.67] : [39]
-    c18. ]0.33-0.67] : [97]
-    c19. ]0.33-0.67] : [36, 63, 67, 89, 91]
-    c20. ]0.33-0.67] : [32]
-    c21. ]0.33-0.67] : [19, 54, 94]
-    c22. ]0.33-0.67] : [99]
-    c23. ]0.33-0.67] : [3, 30, 68]
-    c24. ]0.33-0.67] : [1]
-    c25. ]0.33-0.67] : [20]
-    c26. ]0.33-0.67] : [11, 16, 26]
-    c27. ]0.33-0.67] : [8, 22, 70, 87]
-    c28. ]0.33-0.67] : [25, 27]
-    c29. ]0.33-0.67] : [18, 53]
-    c30. ]0.33-0.67] : [71]
-    c31. ]0.33-0.67] : [79]
-    c32. ]0.33-0.67] : [17, 31, 46]
-    c33. ]0.33-0.67] : [66]
-    c34. ]0.33-0.67] : [12, 38]
-    c35. ]<-0.67] : [51]
-    c36. ]<-0.67] : [15, 85]
-    c37. ]<-0.67] : [77]
-    c38. ]<-0.67] : [48, 50]
-    c39. ]<-0.67] : [14]
-    c40. ]<-0.67] : [74]
-    c41. ]<-0.33] : [13, 73, 78]
-    c42. ]<-0.33] : [82, 83]
+    c1. ]0.75-1.00] : [2, 21, 23, 33, 40, 43, 49, 52, 55, 61, 92]
+    c2. ]0.50-1.00] : [6, 28, 42, 57, 62, 80, 95]
+    c3. ]0.50-0.75] : [0, 1, 4, 7, 9, 10, 19, 20, 24, 27, 29, 32,
+                       34, 35, 44, 47, 56, 58, 60, 64, 65, 67, 69,
+                       70, 72, 75, 81, 84, 88, 89, 90, 91, 93, 94, 96]
+    c4. ]0.25-0.75] : [16, 18, 25, 26, 39, 45, 54, 63, 68, 86, 97, 99]
+    c5. ]0.25-0.50] : [3, 5, 8, 11, 12, 13, 14, 15, 17, 22, 30, 31,
+                       36, 37, 38, 41, 46, 48, 50, 51, 53, 59, 66,
+                       71, 73, 74, 76, 77, 79, 85, 87, 98]
+    c6. ]<-0.25] : [78, 82, 83]
 
-The corresponding sparse outranking relation appears as follows:
+A restricted outranking relation is stored for each component with more than one alternative. The resulting global relation map of the first ranked 75 alternatives looks as follows.
 
-    >>> sg.showRelationTable()
-    42 quantiles decomposed relation table in decreasing order
-    Component : c01 [92]
-    Component : c02 [2, 21, 49, 52, 61]
-    * ---- Relation Table -----
-      S   |  '2'	  '21'	  '49'	  '52'	  '61'	  
-    ------|-------------------------------------------
-     '2' |  0	 0	 7	 3	 7	 
-     '21' |  2	 0	 3	 2	 4	 
-     '49' |  0	 1	 0	 0	 0	 
-     '52' |  3	 4	 7	 0	 5	 
-     '61' |  0	 3	 7	 5	 0	 
-    Valuation domain: [-7;+7]
-    Component : c03 [40, 43, 55, 57, 80]
-    * ---- Relation Table -----
-      S   |  '40'	  '43'	  '55'	  '57'	  '80'	  
-    ------|-------------------------------------------
-     '40' |  0	 2	 0	 3	 0	 
-     '43' |  5	 0	 4	 5	 5	 
-     '55' |  4	 0	 0	 3	 7	 
-     '57' |  5	 4	 4	 0	 5	 
-     '80' |  7	 0	 0	 2	 0	 
-    Valuation domain: [-7;+7]
-    ...
-    ...
-    ...
-    Component : c40 [74]
-    Component : c41 [13, 73, 78]
-    * ---- Relation Table -----
-      S   |  '13'	  '73'	  '78'	  
-    ------|-------------------------------------------
-     '13' |  0	 3	 2	 
-     '73' |  3	 0	 1	 
-     '78' |  5	 3	 0	 
-    Valuation domain: [-7;+7]
-    Component : c42 [82, 83]
-    * ---- Relation Table -----
-      S   |  '82'	  '83'	  
-    ------|-------------------------------------------
-     '82' |  0	 3	 
-     '83' |  1	 0	 
-    Valuation domain: [-7;+7]
-
-A restricted outranking relation is stored for each component with more than one alternative. The resulting global relation map of the first ranked 50 alternatives looks as follows.
-
-    >>> sg.showRelationMap(toIndex=50)
-     ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴  +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴+ +++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴++ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴ ++ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴ +   ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴ ++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴  +┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴++ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴  + ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴+ +  ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴ ++++++┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴+ +++++┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴++  +++┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴+++ ┬+┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴+++  +  ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴+++++ +┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴ +   + +++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴  + ┴+ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴---+ +++ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴   + ++++ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴   ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +++┬┬+┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+  +┬+++┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+  ++++┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+++ +++┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ++ ┬+┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- ++  +┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴---+--  ┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+      ┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ++++┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ +++┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+  +┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ++ +┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-+ + ┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- ┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ 
-    Component ranking rule: Copeland
+    >>> sg.showRelationMap(toIndex=75)
+     ++++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    + ++++┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+     + ++┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    +++ +++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ++++ ┬+ +++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ++ +  ++┬ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    +┴++++ ++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+     ++ +++ +++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    +  ++ ++ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    -   + +++ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+	 ┴++++ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴ ┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴  ++┬ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴++ ++┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴+++ +++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴+ ++ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴   ++ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴  +++  ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ++++┬ +┬+┬+++++++┬++++┬┬++++┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┬  ++┬┬+++ ++++┬┬ ┬+┬++ +┬+┬┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++ ++++┬++++++++++┬++┬+┬+++┬+++┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+++ ┬++++++++++++┬┬++++┬+++┬+++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-+++ ++++  ++++ + ┬++++┬+++┬+++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ +++ ┬+++++++++++++++++┬++++┬┬+┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  +++   +++ ++ +++┬++ +┬+┬+┬+++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +  ++┬ ++ +++ ┬   ++++┬++++ ++++┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ++++- + ++++++ +┬┬++++┬+ + +++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ++++++++ ++ ++++++++ ++ ┬+ ++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ++ ++┬++ -┬++++++ +┬++++┬+┬-+++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +++ + ++++ ++++++++++++ ++ +++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- ++++++++ + ++++++++++++++++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ++++++++++++ +++-+++++++++++┬┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++ --+┬ ++++-+ +++++++++┬+++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴   + ++ ++++++- +++++┬++ ┬+┬++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ++++  +++++ ++ ++++++++++++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ +  ++  ++-+++++ ++ ++++++++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-    +   +++++++++ ++++++++++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +--+ +-++++-+++++- +┬+++┬+┬++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- +++ -++++++++++┬++ + + ++++++++┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ - --+ + + ++++ +++ + ++┬++++┬┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++-++++ --++ +++++++++ ++++++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- ┴  +   +++++ ++++ +++ -┬+┬+┬┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ -+-- + -┬+ ++ +-+++  ++ ++++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ++++ ++ +++++ ++  +++ + ++++ ++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+  - + ++  +++++++ +++++++ ++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ┴┴┴   + + ++++ +-  +++ +++ ++-+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-  - -+ +++-+ +++++++-+++++  -+++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ - -  -++ +++ +-+++++ + + +++ +++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- -+ + --  + ++ ++++ + ++++++ ++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- --+++--  --+++- -+ ++++++++++ +++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ┴-- + ++-+- ++ ++  +++++ + + ++ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+    -    ++++-+++++ - +-+++++-++ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ -┴     ┴ --  - + ++   +-+ + ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +++++++++++┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ++++++┬++┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ + +┬+++-+┬+┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+++ +++++++┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++ - +++┬┬+┬┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+++++ ++++++┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++++++ +++++┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-  ++++ ++++┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ++ ++  +++┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +-+ ++++ ++┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-+ +--++++ +┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴     ++++++ ┬┬┬┬┬┬┬┬┬┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +++++++++
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ++++++++
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++ +++++++
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+++ + + ++
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++++ +++++
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-++ +  ++┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ++ ++ +++
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+++┬+++ +┬
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+-++++++ +
+    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-++ + + + 
     >>> print('%.0fkB' % (total_size(sg)/1024) )
-    516kB
+    769kB
 
-The memory occupation of this sparse outranking digraph *sg* instance takes only 516kB, compared to the 1.7MB required by a corresponding standard IntegerBipolarOutrankingDigraph instance.
+With a fill rate of 25%, the memory occupation of this sparse outranking digraph *sg* instance takes only 769kB, compared to the 1.7MB required by a corresponding standard IntegerBipolarOutrankingDigraph instance.
 
-We may now rank the complete set of 100 decision alternatives by locally ranking with the Copeland rule, for instance, all these individual components.
-
-    >>> sg.boostedRanking
-    [92,  2,21,52,61,49,  43,55,57,80,40,  23,33,34,62,
-     28,95,42,4,6,47,  7,75,  90,69,10,  58,  72,88,  35,
-     24,60,65,0,9,5,41,93,  64,  81,86,84,59,76,  29,56,
-     44,  37,98,  45,96,  39,  97,  36,63,67,91,89,  32,
-     54,19,94,99,  3,30,68,  1,  20,  26,11,16,  70,87,8,22,
-     25,27,  18,53,  71,  79, 46,17,31,  66,  12,38, 51,
-     15,85,  77,  48,50,  14,  74,  13,73,78,  82,83]
-
-Ranking huge sets of decision alternatives
-..........................................
-
-When actually computing linear rankings of the set of alternatives, the local outranking relations are of no practical usage, and we may furthermore reduce the memory occupation of the resulting digraph by dropping the local outranking digraphs and keeping only a local ranked list of alternatives. We provide therfore the cQuantilesRanking class.
-
->>> qr = cQuantilesRankingDigraph(t,3)
->>> qr
-*----- Object instance description --------------*
-Instance class    : cQuantilesRankingDigraph
-Instance name     : cRandomperftab_mp
-# Actions         : 100
-# Criteria        : 7
-Sorting by        : 3-Tiling
-Ordering strategy : average
-Ranking rule      : Copeland
-# Components      : 42
-Minimal order     : 1
-Maximal order     : 10
-Average order     : 2.4
-fill rate         : 2.990%
-----  Constructor run times (in sec.) ----
-Nbr of threads    : 1
-Total time        : 0.04178
-QuantilesSorting  : 0.02192
-Preordering       : 0.00022
-Decomposing       : 0.01951
-Ordering          : 0.00000
-Attributes       : ['runTimes', 'name', 'actions', 'order',
-                    'dimension', 'sortingParameters', 'nbrOfCPUs',
-		    'valuationdomain', 'profiles', 'categories',
-		    'sorting', 'minimalComponentSize',
-		    'decomposition', 'nbrComponents', 'nd',
-		    'components', 'fillRate', 'maximalComponentSize',
-		    'componentRankingRule', 'boostedRanking']
->>> qr.components
-OrderedDict([
-('c01', {'rank': 1,
-         'lowQtileLimit': ']0.67', 'highQtileLimit': '1.00]',
-	 'componentRanking': [92]}),
-('c02', {'rank': 2,
-         'lowQtileLimit': ']0.67', 'highQtileLimit': '1.00]',
-	 'componentRanking': [2, 52, 21, 61, 49]}),
-('c03', {'rank': 3,
-         'lowQtileLimit': ']0.67', 'highQtileLimit': '1.00]',
-	 'componentRanking': [43, 55, 57, 80, 40]}),
-...
-...
-...
-('c40', {'rank': 40,
-         'lowQtileLimit': ']<', 'highQtileLimit': '0.67]',
-	 'componentRanking': [51]}),
-('c41', {'rank': 41,
-         'lowQtileLimit': ']<', 'highQtileLimit': '0.33]',
-	 'componentRanking': [82, 83]}),
-('c42', {'rank': 42,
-         'lowQtileLimit': ']<', 'highQtileLimit': '0.33]',
-	 'componentRanking': [78, 73, 13]})])
->>> print('%.0fkB' % (total_size(qr)/1024) )
-179kB
-
-For sparse outranking digraphs, the adjacancy table is iplemented as a dynamic function:: 
+For sparse outranking digraphs, the adjacancy table is now implemented as a dynamic :code:`self.relation(x,y)` function instead of a double dictionary :code:`self.relation[x][y]`:: 
 
     def relation(self, int x, int y):
 	"""
@@ -4856,12 +4736,134 @@ For sparse outranking digraphs, the adjacancy table is iplemented as a dynamic f
 	else:
 	    return Max
 
+Ranking big sets of decision alternatives
+..........................................
 
+We may now rank the complete set of 100 decision alternatives by locally ranking with the Copeland rule, for instance, all these individual components.
 
+    >>> sg.boostedRanking
+    [21, 52, 2, 33, 55, 61, 23, 43, 49, 92, 40, 62, 28, 57, 95, 6,
+     42, 80, 90, 34, 24, 75, 65, 64, 7, 9, 0, 10, 60, 29, 47, 44,
+     67, 4, 88, 56, 58, 84, 81, 72, 32, 93, 69, 96, 19, 91, 70, 89,
+     94, 20, 27, 1, 35, 86, 39, 97, 45, 54, 99, 63, 16, 25, 26, 18,
+     68, 5, 37, 3, 36, 59, 30, 76, 77, 46, 98, 17, 11, 79, 53, 87,
+     38, 8, 71, 85, 41, 12, 22, 66, 51, 14, 31, 48, 50, 73, 15, 13,
+     74, 78, 82, 83]
 
+When actually computing linear rankings of a set of alternatives, the local outranking relations are of no practical usage, and we may furthermore reduce the memory occupation of the resulting digraph by,
+     1. refining the ordering of the quantile classes by taking into account how well an alternative is outranking the lower limit of its quantile class, respectively the upper limit of its quantile class is outranking the alternative;
+     2. dropping the local outranking digraphs and keeping for each quantile class only a locally ranked list of alternatives.
 
+We provide therefore the :py:class:`cSparseIntegerOutrankingDigraphs.cQuantilesRanking` class.
 
+    >>> qr = cQuantilesRankingDigraph(t,4)
+    >>> qr
+    *----- Object instance description --------------*
+    Instance class    : cQuantilesRankingDigraph
+    Instance name     : cRandomperftab_mp
+    # Actions         : 100
+    # Criteria        : 7
+    Sorting by        : 4-Tiling
+    Ordering strategy : average
+    Ranking rule      : Copeland
+    # Components      : 47
+    Minimal order     : 1
+    Maximal order     : 10
+    Average order     : 2.1
+    fill rate         : 2.566%
+    ----  Constructor run times (in sec.) ----
+    Nbr of threads    : 1
+    Total time        : 0.03702
+    QuantilesSorting  : 0.01785
+    Preordering       : 0.00022
+    Decomposing       : 0.01892
+    Ordering          : 0.00000
+    Attributes       : ['runTimes', 'name', 'actions', 'order',
+			'dimension', 'sortingParameters', 'nbrOfCPUs',
+			'valuationdomain', 'profiles', 'categories',
+			'sorting', 'minimalComponentSize',
+			'decomposition', 'nbrComponents', 'nd',
+			'components', 'fillRate', 'maximalComponentSize',
+			'componentRankingRule', 'boostedRanking']
 
+With this optimal quantile ordering strategy, we obtain 47 performance equivalence classes.
+
+    >>> qr.components
+    OrderedDict([
+    ('c01', {'rank': 1,
+	     'lowQtileLimit': ']0.75',
+	     'highQtileLimit': '1.00]',
+	     'componentRanking': [52]}),
+    ('c02', {'rank': 2,
+	     'lowQtileLimit': ']0.75',
+	     'highQtileLimit': '1.00]',
+	     'componentRanking': [2, 21, 61, 49]}),
+    ('c03', {'rank': 3,
+	     'lowQtileLimit': ']0.75',
+	     'highQtileLimit': '1.00]',
+	     'componentRanking': [33, 43, 55, 23, 92, 40]}), 
+    ...
+    ...
+    ...
+    ('c45', {'rank': 45,
+	     'lowQtileLimit': ']0.25',
+	     'highQtileLimit': '0.50]',
+	     'componentRanking': [48]}),
+    ('c46', {'rank': 46,
+	     'lowQtileLimit': ']0.25',
+	     'highQtileLimit': '0.50]',
+	     'componentRanking': [51, 15, 85]}),
+    ('c47', {'rank': 47,
+	     'lowQtileLimit': ']<',
+	     'highQtileLimit': '0.25]',
+	     'componentRanking': [78, 82, 83]})])
+    >>> print('%.0fkB' % (total_size(qr)/1024) )
+    208kB
+
+We obtain hence an even more considerably less voluminous memory occupation: 208kB compared to the 769kB of the SparseIntegerOutrankingDigraph instance. It is opportune, however, to measure the loss of quality of the resulting Copeland ranking when working with sparse outranking digraphs.
+
+    >>> from cIntegerOutrankingDigraphs import *
+    >>> ig = IntegerBipolarOutrankingDigraph(t)
+    >>> print('Complete outranking : %+.4f'\
+    ...     % (ig.computeOrderCorrelation(ig.computeCopelandOrder())\
+    ...        ['correlation']))
+    Complete outranking : +0.7474
+    print('Sparse 4-tiling : %+.4f'\
+    ...     % (ig.computeOrderCorrelation(\
+    ...        list(reversed(sg.boostedRanking)))['correlation']))
+    Sparse 4-tiling          : +0.7172
+    >>> print('Optimzed sparse 4-tiling: %+.4f'\
+    ...     % (ig.computeOrderCorrelation(\
+    ...        list(reversed(qr.boostedRanking)))['correlation']))
+    Optimzed sparse 4-tiling: +0.7051
+
+The best ranking correlation with the pairwise outranking situations (+0.75) is naturally given when we apply the Copeland rule to the complete outranking digraph. When we apply the Copeland rule to the sparse 4-tiled outranking digraph we get a correlation of +0.72, and when apllying the Copeland rule to the optimized 4-tiled digraph, we still obtain a correlation of +0.71. These results naturally depend on the number of quantiles we use and on the given model of performance tableau. In case of Random3ObjectivesPerformanceTableau instances, we may get in a similar setting a complete outranking correlation of +0.86, a sparse 4-tiling correlation of +0.82, and an optimzed sparse 4-tiling correlation of +0.81.
+
+HPC quantiles ranking records
+.............................
+
+Following from the separability property of the *q*-tiles sorting
+of each action into each *q*-tiles class, the *q*-sorting algorithm
+may be safely split into as much threads as are multiple
+processing cores available in parallel.
+
+Furthermore, the ranking procedure being local to each
+diagonal component, these procedures may as well be safely
+processed in parallel threads on each component restricted outranking
+digraph.
+
+Using the HPC platform of the University of Luxembourg (https://hpc.uni.lu/), the following run times for very big ranking problems could be achieved both:
+    - on Iris -skylake nodes with 28 cores,
+    - on the 3TB -bigmem Gaia-183 node with 64 cores, and
+    - running the cythonized python modules in an Intel compiled virtual Python 3.6.5
+      environment [GCC Intel(R) 17.0.1 –enable-optimizations c++ 6.3 mode] on
+      Debian 8 Linux.
+
+.. figure:: rankingRecords.png
+   :width: 550 px
+   :align: center
+
+   HPC-UL Ranking Performance Records (Spring 2018)	   
 
 Back to :ref:`Tutorial-label`
 	   

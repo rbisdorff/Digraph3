@@ -191,22 +191,30 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 %(limitingQuantiles[i],limitingQuantiles[i+1]),\
                                 'order':i+1,\
                                 'lowLimit': '[%.2f' % (limitingQuantiles[i]),
-                                'highLimit': '%.2f[' % (limitingQuantiles[i+1])}
+                                        'highLimit': '%.2f[' % (limitingQuantiles[i+1]),
+                                'lowLimitValue': '%.2f' % (limitingQuantiles[i]),
+                                'highLimitValue': '%.2f' % (limitingQuantiles[i+1])}
             categories[str(k)] = {'name':'[%.2f - <['\
                 %(limitingQuantiles[k-1]), 'order':k,\
                                   'lowLimit': '[%.2f' % (limitingQuantiles[k-1]),\
-                                  'highLimit': '<['}                 
+                                  'highLimit': '<[',                
+                                  'lowLimitValue': '%.2f' % (limitingQuantiles[k-1]),\
+                                  'highLimitValue': '%.2f' % (limitingQuantiles[k]) }                 
         else:
             categories[str(1)] = {'name':']< - %.2f]'\
                 %(limitingQuantiles[1]), 'order':1,
                     'highLimit': '%.2f]' % (limitingQuantiles[1]),\
-                    'lowLimit': ']<'}                                  
+                                  'lowLimit': ']<',                                  
+                    'highLimitValue': '%.2f' % (limitingQuantiles[1]),\
+                    'lowLimitValue': '%.2f' % (limitingQuantiles[0])}                                  
             #for i in range(1,k):
             for i from 1 <= i < k:
                 categories[str(i+1)] = {'name':']%.2f - %.2f]'\
                 %(limitingQuantiles[i],limitingQuantiles[i+1]), 'order':i+1,
                         'lowLimit': ']%.2f' % (limitingQuantiles[i]),
-                        'highLimit': '%.2f]' % (limitingQuantiles[i+1])}
+                                        'highLimit': '%.2f]' % (limitingQuantiles[i+1]),
+                        'lowLimitValue': '%.2f' % (limitingQuantiles[i]),
+                        'highLimitValue': '%.2f' % (limitingQuantiles[i+1])}
         self.categories = categories
         if Debug:
             print('categories',self.categories)

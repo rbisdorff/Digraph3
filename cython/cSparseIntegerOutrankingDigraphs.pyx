@@ -871,6 +871,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
         * argPerfTab,
         * quantiles=4,
         * quantilesOrderingStrategy="average",
+        * OptimalQuantileOrdering=False,
         * LowerClosed=False,
         * componentRankingRule="Copeland",
         * minimalComponentSize=1,
@@ -975,6 +976,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
     def __init__(self,argPerfTab,\
                  int quantiles=4,\
                  quantilesOrderingStrategy="average",\
+                 bint OptimalQuantileOrdering=False,\
                  bint LowerClosed=False,\
                  componentRankingRule="Copeland",\
                  int minimalComponentSize=1,\
@@ -1080,6 +1082,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
         decomposition = [[(item[0][0],item[0][1]),item[1]]\
                 for item in self._computeQuantileOrdering(\
                     strategy=quantilesOrderingStrategy,\
+                    Optimal=OptimalQuantileOrdering,\
                     Descending=True,
                     Threading=Threading,
                     nbrOfCPUs=nbrOfCPUs)]
@@ -1207,6 +1210,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
     # ----- class methods ------------
 
     def _computeQuantileOrdering(self,strategy=None,
+                                 bint Optimal=False,
                                 bint Descending=True,
                                 bint  Threading=False,
                                 int nbrOfCPUs=1,
@@ -1235,6 +1239,8 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                      self.computeActionCategories(x,Comments=Comments,Debug=False,\
                                                Threading=Threading,\
                                                nbrOfCPUs = nbrOfCPUs)
+            lowQtileValue = self.categories[lowCateg]['lowLimitValue']
+            highQtileValue = self.categories[highCateg]['highLimitValue']
             lowQtileLimit = self.categories[lowCateg]['lowLimit']
             highQtileLimit = self.categories[highCateg]['highLimit']
             if   strategy == "average":
@@ -1255,29 +1261,57 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                 score3 = int(highCateg)
                 score4 = -notHighLimit
             #print(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
-            try:
-                actionsCategories[(score1,highQtileLimit,\
-                                   lowQtileLimit,lowCateg,highCateg,score2,score3,score4)].append(a)
-            except:
-                actionsCategories[(score1,highQtileLimit,\
-                                   lowQtileLimit,lowCateg,highCateg,score2,score3,score4)] = [a]
-        if Debug:
-            print(actionsCategories)
+            if Optimal:
+                try:
+                    actionsCategories[(score1,highQtileValue,\
+                                       lowQtileValue,lowCateg,highCateg,\
+                                       score2,score3,score4,\
+                                       highQtileLimit,lowQtileLimit)].append(a)
+                except:
+                    actionsCategories[(score1,highQtileValue,\
+                                       lowQtileValue,lowCateg,highCateg,\
+                                       score2,score3,score4,\
+                                       highQtileLimit,lowQtileLimit)] = [a]
+            else:
+                try:
+                    actionsCategories[(score1,highQtileValue,\
+                                       lowQtileValue,lowCateg,highCateg,\
+                                       #score2,score3,score4,\
+                                       highQtileLimit,lowQtileLimit)].append(a)
+                except:
+                    actionsCategories[(score1,highQtileValue,\
+                                       lowQtileValue,lowCateg,highCateg,\
+                                       #score2,score3,score4,\
+                                       highQtileLimit,lowQtileLimit)] = [a]
+                    
+        #if Debug:
+        #    print(actionsCategories)
 
         actionsCategKeys = list(actionsCategories.keys())
-        actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5,6,7), reverse=True)
+        if Optimal:
+            actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5,6,7),reverse=True)
+        else:
+            actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0),reverse=True)
 
         #if Debug:
         #    print(actionsCategIntervals)
         compSize = self.minimalComponentSize
         
         if compSize == 1:
-            if Descending:
-                componentsIntervals = [[(item[1],item[2]),actionsCategories[item],item[0],item[3],item[4]]\
-                                   for item in actionsCategIntervals]
+            if Optimal:
+                if Descending:
+                    componentsIntervals = [[(item[8],item[9]),actionsCategories[item],item[0],item[3],item[4]]\
+                                       for item in actionsCategIntervals]
+                else:
+                    componentsIntervals = [[(item[9],item[8]),actionsCategories[item],item[0],item[3],item[4]]\
+                                       for item in actionsCategIntervals]
             else:
-                componentsIntervals = [[(item[2],item[1]),actionsCategories[item],item[0],item[3],item[4]]\
-                                   for item in actionsCategIntervals]
+                if Descending:
+                    componentsIntervals = [[(item[5],item[6]),actionsCategories[item],item[0],item[3],item[4]]\
+                                       for item in actionsCategIntervals]
+                else:
+                    componentsIntervals = [[(item[6],item[5]),actionsCategories[item],item[0],item[3],item[4]]\
+                                       for item in actionsCategIntervals]
                 
         else:
             componentsIntervals = []
@@ -1287,9 +1321,14 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                 currContLength = len(compContent)
                 comp = actionsCategIntervals[i]
                 #print(comp)
-                if currContLength == 0:
-                    lowQtileLimit = comp[2]
-                highQtileLimit = comp[1]             
+                if Optimal:
+                    if currContLength == 0:
+                        lowQtileLimit = comp[9]
+                    highQtileLimit = comp[8]
+                else:
+                    if currContLength == 0:
+                        lowQtileLimit = comp[6]
+                    highQtileLimit = comp[5]
                 compContent += actionsCategories[comp]
                 if len(compContent) >= compSize or i == nc-1:
                     score = comp[0]
@@ -1302,8 +1341,8 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                         componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent,\
                                                     score,lowCateg,highCateg])
                     compContent = []
-        if Debug:
-            print(componentsIntervals)
+        #if Debug:
+        #    print(componentsIntervals)
         return componentsIntervals        
 
     def computeActionCategories(self,int action,
@@ -2007,6 +2046,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         decomposition = [[(item[0][0],item[0][1]),item[1]]\
                 for item in self._computeQuantileOrdering(\
                     strategy=quantilesOrderingStrategy,\
+                    #OptimalQuantileOrdering=True,\                                      
                     Descending=True,
                     Threading=Threading,
                     nbrOfCPUs=nbrOfCPUs)]
@@ -2178,6 +2218,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                      self.computeActionCategories(x,Comments=Comments,Debug=False,\
                                                Threading=Threading,\
                                                nbrOfCPUs = nbrOfCPUs)
+            lowQtileValue = self.categories[lowCateg]['lowLimitValue']
+            highQtileValue = self.categories[highCateg]['highLimitValue']
             lowQtileLimit = self.categories[lowCateg]['lowLimit']
             highQtileLimit = self.categories[highCateg]['highLimit']
             if strategy == "average":
@@ -2185,7 +2227,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 hc = int(highCateg)
                 score1 = lc + hc
                 score2 = hc
-                score3 = lowLimit + notHighLimit
+                score3 = lowLimit - notHighLimit
                 score4 = lowLimit
             elif strategy == "optimistic":
                 score1 = int(highCateg)
@@ -2199,13 +2241,17 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 score4 = -notHighLimit
             #print(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
             try:
-                actionsCategories[(score1,highQtileLimit,\
-                                   lowQtileLimit,lowCateg,highCateg,score2,score3,score4)].append(a)
+                actionsCategories[(score1,highQtileValue,\
+                                   lowQtileValue,lowCateg,highCateg,\
+                                   score2,score3,score4,\
+                                   highQtileLimit,lowQtileLimit)].append(a)
             except:
-                actionsCategories[(score1,highQtileLimit,\
-                                   lowQtileLimit,lowCateg,highCateg,score2,score3,score4)] = [a]
-        if Debug:
-            print(actionsCategories)
+                actionsCategories[(score1,highQtileValue,\
+                                   lowQtileValue,lowCateg,highCateg,\
+                                   score2,score3,score4,\
+                                   highQtileLimit,lowQtileLimit)] = [a]
+        #if Debug:
+        #    print(actionsCategories)
 
         actionsCategKeys = list(actionsCategories.keys())
         actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5,6,7), reverse=True)
@@ -2216,10 +2262,10 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         
         if compSize == 1:
             if Descending:
-                componentsIntervals = [[(item[1],item[2]),actionsCategories[item],item[0],item[3],item[4]]\
+                componentsIntervals = [[(item[8],item[9]),actionsCategories[item],item[0],item[3],item[4]]\
                                    for item in actionsCategIntervals]
             else:
-                componentsIntervals = [[(item[2],item[1]),actionsCategories[item],item[0],item[3],item[4]]\
+                componentsIntervals = [[(item[9],item[8]),actionsCategories[item],item[0],item[3],item[4]]\
                                    for item in actionsCategIntervals]
                 
         else:
@@ -2231,8 +2277,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 comp = actionsCategIntervals[i]
                 #print(comp)
                 if currContLength == 0:
-                    lowQtileLimit = comp[2]
-                highQtileLimit = comp[1]             
+                    lowQtileLimit = comp[9]
+                highQtileLimit = comp[8]             
                 compContent += actionsCategories[comp]
                 if len(compContent) >= compSize or i == nc-1:
                     score = comp[0]
@@ -2245,8 +2291,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                         componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent,\
                                                     score,lowCateg,highCateg])
                     compContent = []
-        if Debug:
-            print(componentsIntervals)
+        #if Debug:
+        #    print(componentsIntervals)
         return componentsIntervals        
 
     def computeActionCategories(self,int action,
