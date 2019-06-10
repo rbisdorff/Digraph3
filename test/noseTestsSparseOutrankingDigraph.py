@@ -4,7 +4,6 @@
 #
 # (..$ pip3 nose   # installing the nose test environment)
 # ..$ nosetests3 -vs noseTestsBigOutrankingDigraph.py
-# # Current $Revision: 1.8 $
 ########################
 
 from digraphs import *
@@ -54,7 +53,7 @@ def testMinimalComponentSize():
     print(total_size(tp.evaluation))
     bg1 = PreRankedOutrankingDigraph(tp,quantiles=5,
                                      quantilesOrderingStrategy='average',
-                                    OptimalQuantileOrdering=True,
+                                    OptimalQuantileOrdering=True,svn add
                                 LowerClosed=False,
                                minimalComponentSize=5,
                                     Threading=MP,Debug=False)
