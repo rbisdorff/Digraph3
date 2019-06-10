@@ -52,7 +52,9 @@ def testMinimalComponentSize():
     tp = RandomCBPerformanceTableau(numberOfActions=200,BigData=True,Threading=MP)
     print(time()-t0)
     print(total_size(tp.evaluation))
-    bg1 = PreRankedOutrankingDigraph(tp,quantiles=5,quantilesOrderingStrategy='average',
+    bg1 = PreRankedOutrankingDigraph(tp,quantiles=5,
+                                     quantilesOrderingStrategy='average',
+                                    OptimalQuantileOrdering=True,
                                 LowerClosed=False,
                                minimalComponentSize=5,
                                     Threading=MP,Debug=False)

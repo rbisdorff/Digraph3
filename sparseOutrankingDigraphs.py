@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Digraph3 collection of python3 modules for Algorithmic Decision Theory applications
 
@@ -998,6 +999,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
     def __init__(self,argPerfTab,\
                  quantiles=None,\
                  quantilesOrderingStrategy='average',\
+                 OptimalQuantileOrdering=False,\
                  LowerClosed=False,\
                  componentRankingRule='Copeland',\
                  minimalComponentSize=1,\
@@ -1099,6 +1101,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         decomposition = [[(item[0][0],item[0][1]),item[1],item[2],item[3],item[4]]\
                 for item in self._computeQuantileOrdering(\
                     strategy=quantilesOrderingStrategy,\
+                    Optimal=OptimalQuantileOrdering,\
                     Descending=True,Threading=Threading,nbrOfCPUs=nbrOfCPUs)]
         if Debug:
             print(decomposition)
@@ -1230,6 +1233,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
 
 
     def _computeQuantileOrdering(self,strategy=None,
+                                 Optimal=False,
                                 Descending=True,
                                  Threading=False,
                                  nbrOfCPUs=None,
@@ -1256,6 +1260,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                                                nbrOfCPUs = nbrOfCPUs)
             lowQtileLimit = self.categories[lowCateg]['lowLimit']
             highQtileLimit = self.categories[highCateg]['highLimit']
+            lowQtileValue = self.categories[lowCateg]['quantile']
+            highQtileValue = self.categories[highCateg]['quantile']
             if strategy == "optimistic":
                 score1 = float(highCateg)
                 score2 = -float(notHighLimit)
@@ -1270,29 +1276,51 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 lc = float(lowCateg)
                 hc = float(highCateg)
                 score1 = (lc+hc)/2.0
-                score2 = float(highCateg)
-                score3 = float(lowLimit) - float(notHighLimit)
+                score2 = float(lowLimit) - float(notHighLimit)
+                score3 = float(highCateg)
                 score4 = -float(notHighLimit)
             #print(score1,highQtileLimit,lowQtileLimit,lowCateg,highCateg,score2,score3,score4)
-            try:
-                actionsCategories[(score1,highQtileLimit,\
-                                   lowQtileLimit,lowCateg,highCateg,score2,score3,score4)].append(a)
-            except:
-                actionsCategories[(score1,highQtileLimit,\
-                                   lowQtileLimit,lowCateg,highCateg,score2,score3,score4)] = [a]
+            if Optimal:
+                try:
+                    actionsCategories[(score1,highQtileValue,\
+                                       lowQtileValue,lowCateg,highCateg,score2,score3,score4,highQtileLimit,lowQtileLimit)].append(a)
+                except:
+                    actionsCategories[(score1,highQtileValue,\
+                                       lowQtileValue,lowCateg,highCateg,score2,score3,score4,highQtileLimit,lowQtileLimit)] = [a]
+            else:
+                try:
+                    actionsCategories[(score1,highQtileValue,\
+                                       lowQtileValue,lowCateg,highCateg,highQtileLimit,lowQtileLimit)].append(a)
+                except:
+                    actionsCategories[(score1,highQtileValue,\
+                                       lowQtileValue,lowCateg,highCateg,highQtileLimit,lowQtileLimit)] = [a]
+               
 
-        actionsCategIntervals = sorted(actionsCategories,key=itemgetter(0,5,6,7), reverse=True)
+        if Optimal:
+            actionsCategIntervals = sorted(actionsCategories,key=itemgetter(0,5,6,7), reverse=True)
+        else:
+            actionsCategIntervals = sorted(actionsCategories,key=itemgetter(0), reverse=True)
+      
         if Debug:
             print(actionsCategIntervals)
         compSize = self.minimalComponentSize
 
         if compSize == 1:
-            if Descending:
-                componentsIntervals = [[(item[1],item[2]),actionsCategories[item],item[0],item[3],item[4]]\
-                                   for item in actionsCategIntervals]
+            if Optimal:
+                if Descending:
+                    componentsIntervals = [[(item[8],item[9]),actionsCategories[item],item[0],item[3],item[4]]\
+                                       for item in actionsCategIntervals]
+                else:
+                    componentsIntervals = [[(item[9],item[8]),actionsCategories[item],item[0],item[3],item[4]]\
+                                       for item in actionsCategIntervals]
             else:
-                componentsIntervals = [[(item[2],item[1]),actionsCategories[item],item[0],item[3],item[4]]\
-                                   for item in actionsCategIntervals]
+                if Descending:
+                    componentsIntervals = [[(item[5],item[6]),actionsCategories[item],item[0],item[3],item[4]]\
+                                       for item in actionsCategIntervals]
+                else:
+                    componentsIntervals = [[(item[6],item[5]),actionsCategories[item],item[0],item[3],item[4]]\
+                                       for item in actionsCategIntervals]
+                
 
         else:
             componentsIntervals = []
@@ -1302,9 +1330,15 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 currContLength = len(compContent)
                 comp = actionsCategIntervals[i]
                 #print(comp)
-                if currContLength == 0:
-                    lowQtileLimit = comp[2]
-                highQtileLimit = comp[1]
+                if Optimal:
+                    if currContLength == 0:
+                        lowQtileLimit = comp[9]
+                    highQtileLimit = comp[8]
+                else:
+                    if currContLength == 0:
+                        lowQtileLimit = comp[6]
+                    highQtileLimit = comp[5]
+                    
                 compContent += actionsCategories[comp]
                 if len(compContent) >= compSize or i == nc-1:
                     score = comp[0]
@@ -2699,8 +2733,8 @@ if __name__ == "__main__":
 ##    pre = PreRankedOutrankingDigraph(tenv,Debug=True)
 ##    print(pre.computeOrderCorrelation(pre.boostedOrder))
 ##    tenv.showHTMLPerformanceHeatmap()
-    MP  = True
-    nbrActions=500
+    MP  = False
+    nbrActions=100
 ##    t0 = time()
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=105)
 ##    tp = XMCDA2PerformanceTableau('the_cs_2016')
@@ -2709,6 +2743,7 @@ if __name__ == "__main__":
 ##                                     seed=100)
     bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
                                  quantilesOrderingStrategy='average',
+                                     OptimalQuantileOrdering=False,
                                  componentRankingRule='Copeland',
                                  LowerClosed=False,
                                  minimalComponentSize=1,
@@ -2718,7 +2753,7 @@ if __name__ == "__main__":
                                  Comments=True,Debug=False,
                                  save2File='testbgMP')
     print(bg1)
-    bg1.showHTMLPrformanceHeatmap()
+##    bg1.showHTMLPerformanceHeatmap()
 ##    bg1.showComponents(direction='descending')
 ##    #bg1.showRelationTable()
 ##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
