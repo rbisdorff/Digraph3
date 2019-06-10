@@ -194,8 +194,8 @@ latex_elements = {
 # Additional stuff for the LaTeX preamble.
 'preamble': r'''
 \usepackage{newunicodechar}
-\newunicodechar{┬}{\ensuremath{\top}}
-\newunicodechar{┴}{\ensuremath{\bot}}
+\newunicodechar{┬}{\scriptsize{\ensuremath{\top}}}
+\newunicodechar{┴}{\scriptsize{\ensuremath{\bot}}}
 ''',
 
 # Latex figure (float) alignment

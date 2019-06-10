@@ -4242,14 +4242,13 @@ Given a graph *g* of order *n* and size *s*, the following 5 assertions *A1*, *A
 
 Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. In case of a *lazy evaluation* of the test in Line 3 below, it is opportune, from a computational complexity perspective, to first, check the order and size of the graph, before checking its potential connectedness.
 
->>> from graphs import RandomGraph
->>> g = RandomGraph(order=6,edgeProbability=0.3,seed=62)
->>> if g.order == (g.size +1) and g.isConnected():
-...     print('The graph is a tree ?', True)
-... else:
-...     print('The graph is a tree ?',False)
-...
-The graph is a tree ? True
+    >>> from graphs import RandomGraph
+    >>> g = RandomGraph(order=6,edgeProbability=0.3,seed=62)
+    >>> if g.order == (g.size +1) and g.isConnected():
+    ...     print('The graph is a tree ?', True)
+    ... else:
+    ...     print('The graph is a tree ?',False)
+    The graph is a tree ? True
 
 The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in Fig. 56 (see also the :py:func:`graphs.Graph.isTree` method for an implemented alternative test).
 
@@ -4415,9 +4414,10 @@ HPC ranking with big outranking digraphs
 	:depth: 1
 	:local:
 
-The Digraph3 collection provides cythonized [6]_, i.e. C-compiled and optimised versions of the main python modules for tackling multiple criteria decision problems facing large sets of decision alternatives ( > 1000 ). Such problems appear usually with a combinatorial organisation of the potential decision alternatives, as is frequently the case in bioinformatics for instance. If HPC facilities with numerous cores ( > 64) and big memory (> 1TB ) are available, it is thus possible to rank up to several millions of alternatives (see [BIS-2016]_).
+The Digraph3 collection provides cythonized [6]_, i.e. C-compiled and optimised versions of the main python modules for tackling multiple criteria decision problems facing large sets of decision alternatives ( > 1000 ). Such problems appear usually with a combinatorial organisation of the potential decision alternatives, as is frequently the case in bioinformatics for instance. If HPC facilities with numerous cores ( > 24) and big memory ( > 32GB ) are available, it is thus possible to rank up to several millions of alternatives (see [BIS-2016]_).
 
-The cythonized Digraph3 modules, prefixed with the letter *c* and taking a *pyx* extension, are stored in the cython directory:
+The four cythonized Digraph3 modules, prefixed with the letter *c* and taking a *pyx* extension, are stored in the cython directory:
+
     - *cRandPerfTabs.pyx*,
     - *cIntegerOutrankingDigraphs.pyx*,
     - *cIntegerSortingDigraphs.pyx* and
@@ -4428,7 +4428,7 @@ Their compilation and installation requires the cython compiler ( ...$ pip insta
 Big Data performance tableaux
 .............................
 
-In order to efficiently typing the C variables, the :py:mod:`cRandPerfTabs` module provides the usual random performance tableau models, but, with **integer** action keys, **float** performance evaluations, **integer** criteria weights and **float** discrimination thresholds. In order to limit as much as possible memory occupation of class instances, all the usual comments are dropped from the description of the decision actions.
+In order to efficiently type the C variables, the :py:mod:`cRandPerfTabs` module provides the usual random performance tableau models, but, with **integer** action keys, **float** performance evaluations, **integer** criteria weights and **float** discrimination thresholds. And, to limit as much as possible memory occupation of class instances, all the usual verbose comments are dropped from the description of the *actions* and *criteria* dictionaries.
 
   >>> from cRandPerfTabs import *
   >>> t = cRandomPerformanceTableau(numberOfActions=4,numberOfCriteria=2)
@@ -4619,91 +4619,27 @@ We obtain in this example here a decomposition into 6 linearly ordered component
 
 A restricted outranking relation is stored for each component with more than one alternative. The resulting global relation map of the first ranked 75 alternatives looks as follows.
 
-
-.. only:: html
-	  
 >>> sg.showRelationMap(toIndex=75)
-     ++++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    + ++++┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-     + ++┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    +++ +++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ++++ ┬+ +++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ++ +  ++┬ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    +┴++++ ++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-     ++ +++ +++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    +  ++ ++ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    -   + +++ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-	 ┴++++ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴ ┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴  ++┬ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴++ ++┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴+++ +++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴+ ++ ++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴   ++ ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴  +++  ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ++++┬ +┬+┬+++++++┬++++┬┬++++┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┬  ++┬┬+++ ++++┬┬ ┬+┬++ +┬+┬┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++ ++++┬++++++++++┬++┬+┬+++┬+++┬++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+++ ┬++++++++++++┬┬++++┬+++┬+++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-+++ ++++  ++++ + ┬++++┬+++┬+++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ +++ ┬+++++++++++++++++┬++++┬┬+┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  +++   +++ ++ +++┬++ +┬+┬+┬+++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +  ++┬ ++ +++ ┬   ++++┬++++ ++++┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ++++- + ++++++ +┬┬++++┬+ + +++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ++++++++ ++ ++++++++ ++ ┬+ ++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ++ ++┬++ -┬++++++ +┬++++┬+┬-+++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +++ + ++++ ++++++++++++ ++ +++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- ++++++++ + ++++++++++++++++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ++++++++++++ +++-+++++++++++┬┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++ --+┬ ++++-+ +++++++++┬+++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴   + ++ ++++++- +++++┬++ ┬+┬++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ++++  +++++ ++ ++++++++++++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ +  ++  ++-+++++ ++ ++++++++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-    +   +++++++++ ++++++++++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +--+ +-++++-+++++- +┬+++┬+┬++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- +++ -++++++++++┬++ + + ++++++++┬+┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ - --+ + + ++++ +++ + ++┬++++┬┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++-++++ --++ +++++++++ ++++++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- ┴  +   +++++ ++++ +++ -┬+┬+┬┬+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ -+-- + -┬+ ++ +-+++  ++ ++++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴  ++++ ++ +++++ ++  +++ + ++++ ++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+  - + ++  +++++++ +++++++ ++++++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ┴┴┴   + + ++++ +-  +++ +++ ++-+++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-  - -+ +++-+ +++++++-+++++  -+++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ - -  -++ +++ +-+++++ + + +++ +++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- -+ + --  + ++ ++++ + ++++++ ++++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴- --+++--  --+++- -+ ++++++++++ +++┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ┴-- + ++-+- ++ ++  +++++ + + ++ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+    -    ++++-+++++ - +-+++++-++ +┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ -┴     ┴ --  - + ++   +-+ + ┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +++++++++++┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ++++++┬++┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ + +┬+++-+┬+┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+++ +++++++┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++ - +++┬┬+┬┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+++++ ++++++┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++++++ +++++┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-  ++++ ++++┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ++ ++  +++┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +-+ ++++ ++┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-+ +--++++ +┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴     ++++++ ┬┬┬┬┬┬┬┬┬┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ +++++++++
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+ ++++++++
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++ +++++++
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+++ + + ++
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴++++ +++++
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-++ +  ++┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴ ++ ++ +++
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+++┬+++ +┬
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴+-++++++ +
-    ┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴-++ + + + 
+
+.. figure:: sparseRelationMap.png
+   :width: 450 px
+   :align: center
+
+   Sparse quartiles-sorting decomposed outranking relation (extract).
+
+Legend:
+   - outranking for certain ( **┬** )
+   - outranked for certain ( **┴** )
+   - more or less outranking (**+** )
+   - more or less outranked (**-**)
+   - indeterminate ( )
+
+With a fill rate of 25%, the memory occupation of this sparse outranking digraph *sg* instance takes now only 769kB, compared to the 1.7MB required by a corresponding standard IntegerBipolarOutrankingDigraph instance.
+
     >>> print('%.0fkB' % (total_size(sg)/1024) )
     769kB
 
-With a fill rate of 25%, the memory occupation of this sparse outranking digraph *sg* instance takes only 769kB, compared to the 1.7MB required by a corresponding standard IntegerBipolarOutrankingDigraph instance.
-
-For sparse outranking digraphs, the adjacancy table is now implemented as a dynamic :code:`self.relation(x,y)` function instead of a double dictionary :code:`self.relation[x][y]`:: 
+For sparse outranking digraphs, the adjacancy table is implemented as a dynamic :code:`self.relation(x,y)` function instead of a double dictionary :code:`self.relation[x][y]`::
 
     def relation(self, int x, int y):
 	"""
@@ -4742,7 +4678,7 @@ For sparse outranking digraphs, the adjacancy table is now implemented as a dyna
 Ranking big sets of decision alternatives
 ..........................................
 
-We may now rank the complete set of 100 decision alternatives by locally ranking with the Copeland rule or the 'NetFlows' rule, for instance, all these individual components.
+We may now rank the complete set of 100 decision alternatives by locally ranking with the *Copeland* or the *NetFlows* rule, for instance, all these individual components.
 
     >>> sg.boostedRanking
     [21, 52, 2, 33, 55, 61, 23, 43, 49, 92, 40, 62, 28, 57, 95, 6,
@@ -4753,7 +4689,9 @@ We may now rank the complete set of 100 decision alternatives by locally ranking
      38, 8, 71, 85, 41, 12, 22, 66, 51, 14, 31, 48, 50, 73, 15, 13,
      74, 78, 82, 83]
 
-When actually computing linear rankings of a set of alternatives, the local outranking relations are of no practical usage, and we may furthermore reduce the memory occupation of the resulting digraph by,
+
+When actually computing linear rankings of a set of alternatives, the local outranking relations are of no practical usage, and we may furthermore reduce the memory occupation of the resulting digraph by
+
      1. refining the ordering of the quantile classes by taking into account how well an alternative is outranking the lower limit of its quantile class, respectively the upper limit of its quantile class is outranking the alternative;
      2. dropping the local outranking digraphs and keeping for each quantile class only a locally ranked list of alternatives.
 
@@ -4856,6 +4794,7 @@ processed in parallel threads on each component restricted outranking
 digraph.
 
 Using the HPC platform of the University of Luxembourg (https://hpc.uni.lu/), the following run times for very big ranking problems could be achieved both:
+
     - on Iris -skylake nodes with 28 cores,
     - on the 3TB -bigmem Gaia-183 node with 64 cores, and
     - running the cythonized python modules in an Intel compiled virtual Python 3.6.5
@@ -4917,7 +4856,7 @@ With 28 computing cores and a shared CPU memory occupation of about 50GB, decile
 
 The optimized deciles sorting leads to 233645 components with a maximal order of 153. The fill rate of the adjacency table is reduced to 0.001%, ie of the potential trillion pairwaise outrankings, we effectively only keep a billion. This high number of components results from the high number (21) of involved performance criteria, leading in fact to a very refined epistemic discrimination of majority outranking margins. 
 
-A non-optimized deciles sorting would instead give at most 110 components with inevitably very big intractable local digraph orders. Proceeding with a more detailed quantiles sorting, for reducing the unduced decomposing tun times, leads however quickly to intractable quantiles sorting times. A good compromise is given when the quantiles sorting and decomposing steps show somehow equivalent run times as is the case in our example session (99.6 versus 77.3 seconds).     
+A non-optimized deciles sorting would instead give at most 110 components with inevitably very big intractable local digraph orders. Proceeding with a more detailed quantiles sorting, for reducing the induced decomposing run times, leads however quickly to intractable quantiles sorting times. A good compromise is given when the quantiles sorting and decomposing steps show somehow equivalent run times as is the case in our example session (99.6 versus 77.3 seconds).     
 
 The apparent quality of the global ranking result may be checked, for instance, by inspecting the 21 marginal performances of the five best-ranked alternatives listed below. 
 
