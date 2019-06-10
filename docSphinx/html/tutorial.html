@@ -7159,7 +7159,7 @@ best covered terminal kernel</span></p>
 <span class="go">0.45</span>
 </pre></div>
 </td></tr></table></div>
-<p>About 103MB for <em>g</em> and 202MB for <em>g1</em>. The standard <em>Decimal</em> valued <code class="code docutils literal"><span class="pre">BipolarOutrankingDigraph</span></code> instance <em>g1</em> thus nearly doubles the memory occupation of the corresponding <code class="code docutils literal"><span class="pre">IntegerBipolarOutrankingDigraph</span></code> <em>g</em> instance (see Line 3 and 5 above). 3/4 of this memory occupation is due to the <em>g.relation</em> (34%) and the <em>g.gamma</em> (45%) dictionaries. And these ratios quadratically grow with the digraph order. To limit the object sizes for really big outranking digraphs, we need to abandon the complete implementation of adjancency tables and gamma functions.</p>
+<p>About 103MB for <em>g</em> and 202MB for <em>g1</em>. The standard <em>Decimal</em> valued <code class="code docutils literal"><span class="pre">BipolarOutrankingDigraph</span></code> instance <em>g1</em> thus nearly doubles the memory occupation of the corresponding <code class="code docutils literal"><span class="pre">IntegerBipolarOutrankingDigraph</span></code> <em>g</em> instance (see Line 3 and 5 above). 3/4 of this memory occupation is due to the <em>g.relation</em> (34%) and the <em>g.gamma</em> (45%) dictionaries. And these ratios quadratically grow with the digraph order. To limit the object sizes for really big outranking digraphs, we need to abandon the complete implementation of adjacency tables and gamma functions.</p>
 </div>
 <div class="section" id="the-sparse-outranking-digraph-implementation">
 <h3><a class="toc-backref" href="#id231">The sparse outranking digraph implementation</a><a class="headerlink" href="#the-sparse-outranking-digraph-implementation" title="Permalink to this headline">¶</a></h3>
@@ -7786,7 +7786,10 @@ Preordering       : 5.17954
 Decomposing       : 72.29356
 </pre></div>
 </td></tr></table></div>
-<p>10-tiling and locally ranking a million decision alternatives evaluated on 21 incommensurable criteria by balancing an economic, an environmental and a societal objective takes thus less than 3 minutes with 28 computing cores and a shared CPU memory occupation of less than 60GB. The performances of the five best-ranked alternatives are listed below.</p>
+<p>With 28 computing cores and a shared CPU memory occupation of about 50GB, deciles sorting and locally ranking a million decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes thus less than 3 minutes. About 1.5 minutes does take the deciles sorting and, a bit more than a minute, the local ranking of the individual components.</p>
+<p>The optimized deciles sorting leads to 233645 components with a maximal order of 153. The fill rate of the adjacency table is reduced to 0.001%, ie of the potential trillion pairwaise outrankings, we effectively only keep a billion. This high number of components results from the high number (21) of involved performance criteria, leading in fact to a very refined epistemic discrimination of majority outranking margins.</p>
+<p>A non-optimized deciles sorting would instead give at most 110 components with inevitably very big intractable local digraph orders. Proceeding with a more detailed quantiles sorting, for reducing the unduced decomposing tun times, leads however quickly to intractable quantiles sorting times. A good compromise is given when the quantiles sorting and decomposing steps show somehow equivalent run times as is the case in our example session (99.6 versus 77.3 seconds).</p>
+<p>The apparent quality of the global ranking result may be checked, for instance, by inspecting the 21 marginal performances of the five best-ranked alternatives listed below.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -7815,27 +7818,27 @@ Decomposing       : 72.29356
 <span class="go">*----  performance tableau -----*</span>
 <span class="go">criteria | weights | &#39;155873&#39; &#39;426463&#39; &#39;279728&#39; &#39;115897&#39; &#39;605980&#39;</span>
 <span class="go">---------|-------------------------------------------------------</span>
-<span class="go">   &#39;g01&#39;  |   42   |   928.36   808.35    NA     846.11   978.29</span>
-<span class="go">   &#39;g02&#39;  |   48   |   587.25   899.22   669.79  297.24   778.95</span>
-<span class="go">   &#39;g03&#39;  |   56   |   938.06    NA      936.63  908.40   908.58</span>
-<span class="go">   &#39;g04&#39;  |   48   |    NA      956.14   838.31  905.09   807.40</span>
-<span class="go">   &#39;g05&#39;  |   56   |   919.29   950.51   670.52  910.34   542.09</span>
-<span class="go">   &#39;g06&#39;  |   42   |   770.13   974.63   969.88  879.66   850.42</span>
-<span class="go">   &#39;g07&#39;  |   42   |   782.88   574.08   813.90  800.26   617.08</span>
-<span class="go">   &#39;g08&#39;  |   48   |   814.57   943.34   796.62  517.79   750.57</span>
-<span class="go">   &#39;g09&#39;  |   56   |   774.62   376.70   879.65  670.40   815.36</span>
-<span class="go">   &#39;g10&#39;  |   42   |   861.36   739.94   731.94  577.11   865.63</span>
-<span class="go">   &#39;g11&#39;  |   56   |   784.36   953.77   653.01  812.49   929.55</span>
-<span class="go">   &#39;g12&#39;  |   42   |   638.40   599.17   934.24  734.45   355.25</span>
-<span class="go">   &#39;g13&#39;  |   56   |   852.43   877.23   832.42  809.85   816.22</span>
-<span class="go">   &#39;g14&#39;  |   48   |   916.15   461.04   395.36  969.43   784.14</span>
-<span class="go">   &#39;g15&#39;  |   56   |   876.06   863.72   864.49  727.30   808.42</span>
-<span class="go">   &#39;g16&#39;  |   42   |   886.12   859.70   882.21  865.89   460.98</span>
-<span class="go">   &#39;g17&#39;  |   48   |   688.37   655.37   833.06  797.29   927.91</span>
-<span class="go">   &#39;g18&#39;  |   42   |   898.26   914.32   872.53  825.91   833.77</span>
-<span class="go">   &#39;g19&#39;  |   48   |   527.26   842.85   843.93  802.15   787.54</span>
-<span class="go">   &#39;g20&#39;  |   42   |   821.26   864.81   710.15  717.19   614.74</span>
-<span class="go">   &#39;g21&#39;  |   48   |   823.13   863.82   821.06  901.20   839.27</span>
+<span class="go">  &#39;g01&#39;  |    42   |  928.36   808.35    NA      846.11   978.29</span>
+<span class="go">  &#39;g02&#39;  |    48   |  587.25   899.22   669.79   297.24   778.95</span>
+<span class="go">  &#39;g03&#39;  |    56   |  938.06    NA      936.63   908.40   908.58</span>
+<span class="go">  &#39;g04&#39;  |    48   |   NA      956.14   838.31   905.09   807.40</span>
+<span class="go">  &#39;g05&#39;  |    56   |  919.29   950.51   670.52   910.34   542.09</span>
+<span class="go">  &#39;g06&#39;  |    42   |  770.13   974.63   969.88   879.66   850.42</span>
+<span class="go">  &#39;g07&#39;  |    42   |  782.88   574.08   813.90   800.26   617.08</span>
+<span class="go">  &#39;g08&#39;  |    48   |  814.57   943.34   796.62   517.79   750.57</span>
+<span class="go">  &#39;g09&#39;  |    56   |  774.62   376.70   879.65   670.40   815.36</span>
+<span class="go">  &#39;g10&#39;  |    42   |  861.36   739.94   731.94   577.11   865.63</span>
+<span class="go">  &#39;g11&#39;  |    56   |  784.36   953.77   653.01   812.49   929.55</span>
+<span class="go">  &#39;g12&#39;  |    42   |  638.40   599.17   934.24   734.45   355.25</span>
+<span class="go">  &#39;g13&#39;  |    56   |  852.43   877.23   832.42   809.85   816.22</span>
+<span class="go">  &#39;g14&#39;  |    48   |  916.15   461.04   395.36   969.43   784.14</span>
+<span class="go">  &#39;g15&#39;  |    56   |  876.06   863.72   864.49   727.30   808.42</span>
+<span class="go">  &#39;g16&#39;  |    42   |  886.12   859.70   882.21   865.89   460.98</span>
+<span class="go">  &#39;g17&#39;  |    48   |  688.37   655.37   833.06   797.29   927.91</span>
+<span class="go">  &#39;g18&#39;  |    42   |  898.26   914.32   872.53   825.91   833.77</span>
+<span class="go">  &#39;g19&#39;  |    48   |  527.26   842.85   843.93   802.15   787.54</span>
+<span class="go">  &#39;g20&#39;  |    42   |  821.26   864.81   710.15   717.19   614.74</span>
+<span class="go">  &#39;g21&#39;  |    48   |  823.13   863.82   821.06   901.20   839.27</span>
 </pre></div>
 </td></tr></table></div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
