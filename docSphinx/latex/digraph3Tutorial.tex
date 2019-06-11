@@ -146,7 +146,7 @@ Revision: Python 3.7
 
 
 \section{Working with the \sphinxstyleemphasis{Digraph3} software resources}
-\label{\detokenize{tutorial:digraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}
+\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}\label{\detokenize{tutorial:digraphs-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -435,7 +435,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Manipulating \sphinxstyleliteralintitle{Digraph} objects}
-\label{\detokenize{tutorial:manipulating-digraph-objects}}\label{\detokenize{tutorial:digraph-tools-label}}
+\label{\detokenize{tutorial:digraph-tools-label}}\label{\detokenize{tutorial:manipulating-digraph-objects}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1449,7 +1449,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Generating random performance tableaux}
-\label{\detokenize{tutorial:generating-random-performance-tableaux}}\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}
+\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}\label{\detokenize{tutorial:generating-random-performance-tableaux}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1981,7 +1981,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Ranking with multiple incommensurable criteria}
-\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:ranking-tutorial-label}}
+\label{\detokenize{tutorial:ranking-tutorial-label}}\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3332,7 +3332,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Rating with learned quantile norms}
-\label{\detokenize{tutorial:rating-tutorial-label}}\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}
+\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}\label{\detokenize{tutorial:rating-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4514,7 +4514,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{On computing digraph kernels}
-\label{\detokenize{tutorial:on-computing-digraph-kernels}}\label{\detokenize{tutorial:kernel-tutorial-label}}
+\label{\detokenize{tutorial:kernel-tutorial-label}}\label{\detokenize{tutorial:on-computing-digraph-kernels}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -5209,7 +5209,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{About split, interval and permutation graphs}
-\label{\detokenize{tutorial:permutation-tutorial-label}}\label{\detokenize{tutorial:about-split-interval-and-permutation-graphs}}
+\label{\detokenize{tutorial:about-split-interval-and-permutation-graphs}}\label{\detokenize{tutorial:permutation-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -5751,7 +5751,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{On tree graphs and graph forests}
-\label{\detokenize{tutorial:trees-tutorial-label}}\label{\detokenize{tutorial:on-tree-graphs-and-graph-forests}}
+\label{\detokenize{tutorial:on-tree-graphs-and-graph-forests}}\label{\detokenize{tutorial:trees-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -6649,13 +6649,13 @@ Let us inspect the 21 marginal performances of the five best-ranked alternatives
 
 The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best ranked alternatives are, in decreasing order: \#773908, \#668946, \#567307, \#578559 and \#426463.
 
-If a file \sphinxstyleemphasis{best10.py}, for instance, gathers the performances of the ten best-ranked alternatives, including the five best-ranked shown above, we may compute a restricted bipolar outranking relation among these 10 actions.
+If we consider a partial performance tableau \sphinxstyleemphasis{tb10}, consisting only of the best-ranked alternatives, for instance, we may compute a restricted integer bipolar outranking relation among these 10 actions.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{tb10} \PYG{o}{=} \PYG{n}{cPartialPerformanceTableau}\PYG{p}{(}\PYG{n}{pt}\PYG{p}{,}\PYG{n}{qr}\PYG{o}{.}\PYG{n}{boostedRanking2}\PYG{p}{[}\PYG{p}{:}\PYG{l+m+mi}{10}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{cIntegerOutrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{cPerformanceTableau}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{best10}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{IntegerBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{IntegerBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{tb10}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{n+nb+bp}{False}\PYG{p}{)}
 \PYG{g+go}{* \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{r(x \PYGZgt{}= y) \textbar{} 155873 279728 298060 426463 567307 578559 668946 773908 815551 928563}
@@ -6695,7 +6695,7 @@ Three alternatives, namely \#155873, \#426463, and \#567307 qualify as Condorcet
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{converse-dual_rel_best5}.png}
 \caption{Validated strict outranking situations between the ten best-ranked alternatives}\label{\detokenize{tutorial:id147}}\end{figure}
 
-Restricted to these ten best-ranked alternatives, the \sphinxstyleemphasis{Copeland}, the \sphinxstyleemphasis{NetFlows} as well as the \sphinxstyleemphasis{Kemeny} ranking rule will rank alternative \#426463 first and alternative \#578559 last. Otherwise the three ranking rules produce more or less different rankings.
+Restricted to these ten best-ranked alternatives, the \sphinxstyleemphasis{Copeland}, the \sphinxstyleemphasis{NetFlows} as well as the \sphinxstyleemphasis{Kemeny} ranking rule will all rank alternative \#426463 first and alternative \#578559 last. Otherwise the three ranking rules produce more or less different rankings.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]

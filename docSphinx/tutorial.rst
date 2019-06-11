@@ -4881,11 +4881,11 @@ Let us inspect the 21 marginal performances of the five best-ranked alternatives
 
 The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best ranked alternatives are, in decreasing order: #773908, #668946, #567307, #578559 and #426463.
 
-If a file *best10.py*, for instance, gathers the performances of the ten best-ranked alternatives, including the five best-ranked shown above, we may compute a restricted bipolar outranking relation among these 10 actions.
+If we consider a partial performance tableau *tb10*, consisting only of the best-ranked alternatives, for instance, we may compute a restricted integer bipolar outranking relation among these 10 actions.
 
+>>> tb10 = cPartialPerformanceTableau(pt,qr.boostedRanking2[:10])
 >>> from cIntegerOutrankingDigraphs import *   
->>> t = cPerformanceTableau('best10')
->>> g = IntegerBipolarOutrankingDigraph(t)
+>>> g = IntegerBipolarOutrankingDigraph(tb10)
 >>> g.showRelationTable(ReflexiveTerms=False)
 * ---- Relation Table -----
 r(x >= y) | 155873 279728 298060 426463 567307 578559 668946 773908 815551 928563  
@@ -4920,7 +4920,7 @@ dot -Tpng converse-dual_rel_best10.dot -o converse-dual_rel_best10.png
 
    Validated strict outranking situations between the ten best-ranked alternatives
 
-Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows* as well as the *Kemeny* ranking rule will rank alternative #426463 first and alternative #578559 last. Otherwise the three ranking rules produce more or less different rankings.
+Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows* as well as the *Kemeny* ranking rule will all rank alternative #426463 first and alternative #578559 last. Otherwise the three ranking rules produce more or less different rankings.
 
 >>> g.computeCopelandRanking()
 [426463, 567307, 155873, 279728, 773908, 928563, 668946, 815551, 298060, 578559]
