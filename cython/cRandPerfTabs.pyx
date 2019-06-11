@@ -437,6 +437,63 @@ class cPerformanceTableau(PerformanceTableau):
         ### convert back to Bgd
         self.convertInsite2BigData()
 
+    def save(self,fileName='tempperftab',isDecimal=True,valueDigits=2):
+        """
+        Persistant storage of Performance Tableaux.
+        """
+        print('*--- Saving performance tableau in file: <' + str(fileName) + '.py> ---*')
+        actions = self.actions
+        try:
+            objectives = self.objectives
+        except:
+            objectives = {}
+        criteria = self.criteria
+        evaluation = self.evaluation
+        fileNameExt = str(fileName)+str('.py')
+        fo = open(fileNameExt, 'w')
+        fo.write('# Saved performance Tableau: \n')
+        fo.write('from decimal import Decimal\n')
+        fo.write('from collections import OrderedDict\n')
+        # actions
+        fo.write('actions = OrderedDict([\n')
+        for x in actions:
+            fo.write('(%d, {\n' % x)
+            for it in self.actions[x].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.actions[x][it])) )
+            fo.write('}),\n')
+        fo.write('])\n')
+        # objectives
+        fo.write('objectives = OrderedDict([\n')
+        for obj in objectives:
+            fo.write('(\'%s\', {\n' % str(obj))
+            for it in self.objectives[obj].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.objectives[obj][it])))
+            fo.write('}),\n')
+        fo.write('])\n')            
+        # criteria
+        fo.write('criteria = OrderedDict([\n') 
+        for g in criteria:
+            fo.write('(\'%s\', {\n' % str(g))
+            for it in self.criteria[g].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.criteria[g][it])))
+            fo.write('}),\n')
+        fo.write('])\n')
+        # evaluation
+        fo.write('evaluation = {\n')
+        for g in criteria:
+            fo.write('\'' +str(g)+'\': {\n')
+            for x in actions:
+                if Decimal:
+                    evaluationString = '%%d:Decimal("%%.%df"),\n' % (valueDigits)
+                    fo.write(evaluationString % (x,evaluation[g][x]) )
+                else:
+                    fo.write(x + ':' + str(evaluation[g][x]) + ',\n')
+                    
+            fo.write('},\n')
+        fo.write( '}\n')
+        fo.close()
+
+
 ############ Specialized cPerformanceTableau models ################
 
 
