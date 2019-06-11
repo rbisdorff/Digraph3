@@ -7377,7 +7377,7 @@ best covered terminal kernel</span></p>
 <p>When actually computing linear rankings of a set of alternatives, the local outranking relations are of no practical usage, and we may furthermore reduce the memory occupation of the resulting digraph by</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>refining the ordering of the quantile classes by taking into account how well an alternative is outranking the lower limit of its quantile class, respectively the upper limit of its quantile class is outranking the alternative;</li>
+<li>refining the ordering of the quantile classes by taking into account how well an alternative is outranking the lower limit of its quantile class, respectively the upper limit of its quantile class is <em>not</em> outranking the alternative;</li>
 <li>dropping the local outranking digraphs and keeping for each quantile class only a locally ranked list of alternatives.</li>
 </ol>
 </div></blockquote>
@@ -7441,7 +7441,7 @@ best covered terminal kernel</span></p>
 <span class="go">                    &#39;componentRankingRule&#39;, &#39;boostedRanking&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>With this optimal quantile ordering strategy, we obtain 47 performance equivalence classes.</p>
+<p>With this <em>optimized</em> quantile ordering strategy, we obtain now 47 performance equivalence classes.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -7505,7 +7505,7 @@ best covered terminal kernel</span></p>
 <span class="go">208kB</span>
 </pre></div>
 </td></tr></table></div>
-<p>We obtain hence an even more considerably less voluminous memory occupation: 208kB compared to the 769kB of the SparseIntegerOutrankingDigraph instance. It is opportune, however, to measure the loss of quality of the resulting Copeland ranking when working with sparse outranking digraphs.</p>
+<p>We observe an even more considerably less voluminous memory occupation: 208kB compared to the 769kB of the SparseIntegerOutrankingDigraph instance. It is opportune, however, to measure the loss of quality of the resulting Copeland ranking when working with sparse outranking digraphs.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -7535,18 +7535,11 @@ best covered terminal kernel</span></p>
 <span class="go">Optimzed sparse 4-tiling: +0.7051</span>
 </pre></div>
 </td></tr></table></div>
-<p>The best ranking correlation with the pairwise outranking situations (+0.75) is naturally given when we apply the Copeland rule to the complete outranking digraph. When we apply the Copeland rule to the sparse 4-tiled outranking digraph we get a correlation of +0.72, and when apllying the Copeland rule to the optimized 4-tiled digraph, we still obtain a correlation of +0.71. These results actually depend on the number of quantiles we use as well as on the given model of random performance tableau. In case of Random3ObjectivesPerformanceTableau instances, for instance, we would get in a similar setting a complete outranking correlation of +0.86, a sparse 4-tiling correlation of +0.82, and an optimzed sparse 4-tiling correlation of +0.81.</p>
+<p>The best ranking correlation with the pairwise outranking situations (+0.75) is naturally given when we apply the <em>Copeland</em> rule to the complete outranking digraph. When we apply the same rule to the sparse 4-tiled outranking digraph, we get a correlation of +0.72, and when applying the <em>Copeland</em> rule to the optimized 4-tiled digraph, we still obtain a correlation of +0.71. These results actually depend on the number of quantiles we use as well as on the given model of random performance tableau. In case of Random3ObjectivesPerformanceTableau instances, for instance, we would get in a similar setting a complete outranking correlation of +0.86, a sparse 4-tiling correlation of +0.82, and an optimzed sparse 4-tiling correlation of +0.81.</p>
 </div>
 <div class="section" id="hpc-quantiles-ranking-records">
 <h3><a class="toc-backref" href="#id235">HPC quantiles ranking records</a><a class="headerlink" href="#hpc-quantiles-ranking-records" title="Permalink to this headline">¶</a></h3>
-<p>Following from the separability property of the <em>q</em>-tiles sorting
-of each action into each <em>q</em>-tiles class, the <em>q</em>-sorting algorithm
-may be safely split into as much threads as are multiple
-processing cores available in parallel.</p>
-<p>Furthermore, the ranking procedure being local to each
-diagonal component, these procedures may as well be safely
-processed in parallel threads on each component restricted outranking
-digraph.</p>
+<p>Following from the separability property of the <em>q</em>-tiles sorting of each action into each <em>q</em>-tiles class, the <em>q</em>-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph.</p>
 <p>Using the HPC platform of the University of Luxembourg (<a class="reference external" href="https://hpc.uni.lu/">https://hpc.uni.lu/</a>), the following run times for very big ranking problems could be achieved both:</p>
 <blockquote>
 <div><ul class="simple">
@@ -7647,9 +7640,9 @@ Preordering       : 5.17954
 Decomposing       : 72.29356
 </pre></div>
 </td></tr></table></div>
-<p>With 28 computing cores and a shared CPU memory occupation of about 50GB, deciles sorting and locally ranking a million decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes thus less than 3 minutes. About 1.5 minutes does take the deciles sorting and, a bit more than a minute, the local ranking of the individual components.</p>
-<p>The optimized deciles sorting leads to 233645 components with a maximal order of 153. The fill rate of the adjacency table is reduced to 0.001%, ie of the potential trillion pairwise outrankings, we effectively only keep a billion. This high number of components results from the high number (21) of involved performance criteria, leading in fact to a very refined epistemic discrimination of majority outranking margins.</p>
-<p>A non-optimized deciles sorting would instead give at most 110 components with inevitably very big intractable local digraph orders. Proceeding with a more detailed quantiles sorting, for reducing the induced decomposing run times, leads however quickly to intractable quantiles sorting times. A good compromise is given when the quantiles sorting and decomposing steps show somehow equivalent run times as is the case in our example session (99.6 versus 77.3 seconds).</p>
+<p>With 28 computing cores and a shared CPU memory occupation of about 50GB, deciles sorting and locally ranking a <strong>million</strong> decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes thus <strong>less than 3 minutes</strong> (see Lines 37-42 above). About 1.5 minute does take the deciles sorting and, a bit more than a minute, the local ranking of the individual components.</p>
+<p>The optimized deciles sorting leads to 233645 components (see Lines 32-36 above) with a maximal order of 153. The fill rate of the adjacency table is reduced to 0.001%, ie of the potential trillion pairwise outrankings, we effectively only keep a billion. This high number of components results from the high number (21) of involved performance criteria, leading in fact to a very refined epistemic discrimination of majority outranking margins.</p>
+<p>A non-optimized deciles sorting would instead give at most 110 components with inevitably very big intractable local digraph orders. Proceeding with a more detailed quantiles sorting, for reducing the induced decomposing run times, leads however quickly to intractable quantiles sorting times. A good compromise is given when the quantiles sorting and decomposing steps show somehow equivalent run times; as is the case in our example session: 99.6 versus 77.3 seconds (see Lines 40 and 42 above).</p>
 <p>Let us inspect the 21 marginal performances of the five best-ranked alternatives listed below.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -7702,7 +7695,7 @@ Decomposing       : 72.29356
 <span class="go"> &#39;So21&#39;  |    48   |  823.13   863.82   821.06   901.20   839.27</span>
 </pre></div>
 </td></tr></table></div>
-<p>The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria weights (336) is the same for all three decision objectives. The five best ranked alternatives are in decreasing order: ‘155873’, ‘426463’, ‘279728’, ‘115897’ and ‘605980’.</p>
+<p>The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best ranked alternatives are, in decreasing order: ‘155873’, ‘426463’, ‘279728’, ‘115897’ and ‘605980’.</p>
 <p>If a file <em>best5.py</em>, for instance, gathers the partial performance tableau shown above, we may compute a restricted bipolar outranking relation among these five actions.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -7747,19 +7740,21 @@ Decomposing       : 72.29356
 <a class="reference internal image-reference" href="_images/converse-dual_rel_best5.png"><img alt="_images/converse-dual_rel_best5.png" src="_images/converse-dual_rel_best5.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 62 </span><span class="caption-text">Validated strict outranking situations between the five best alternatives</span></p>
 </div>
-<p>Alternative ‘155873’ does not strictly outrank any of the other four best ranked alternatives, whereas alternatives ‘426463’ and ‘279728’ strictly outrank the last two, respectively the last one. Restricted to these five alternatives, the <em>Copeland</em> as well as the <em>NetFlows</em> ranking rule will hence both rank alternative ‘426463’ and ‘279728’ before ‘155873’. And the Kemeny ranking rule will furthermore invert the two last alternatives (see Line 7 below).</p>
+<p>Alternative ‘155873’ does not strictly outrank any of the other four best ranked alternatives, whereas alternatives ‘426463’ and ‘279728’ strictly outrank the last two, respectively the last one (see Fig. 62). Restricted to these five alternatives, the <em>Copeland</em> as well as the <em>NetFlows</em> ranking rule will hence both rank alternative ‘426463’ and ‘279728’ before ‘155873’. And the Kemeny ranking rule will furthermore invert the two last alternatives (see Line 8 below).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
 5
 6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
 <span class="go">[&#39;426463&#39;, &#39;279728&#39;, &#39;155873&#39;, &#39;115897&#39;, &#39;605980&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
 <span class="go">[&#39;426463&#39;, &#39;279728&#39;, &#39;155873&#39;, &#39;115897&#39;, &#39;605980&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span> <span class="o">=</span> <span class="n">KemenyOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span><span class="o">.</span><span class="n">KemenyRanking</span>
 <span class="go">[&#39;426463&#39;, &#39;279728&#39;, &#39;155873&#39;, &#39;605980&#39;, &#39;115897&#39;]</span>
 </pre></div>
 </td></tr></table></div>
