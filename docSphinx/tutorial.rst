@@ -4803,7 +4803,7 @@ Using the HPC platform of the University of Luxembourg (https://hpc.uni.lu/), th
       Debian 8 Linux.
 
 .. figure:: rankingRecords.png
-   :width: 550 px
+   :width: 350 px
    :align: center
 
    HPC-UL Ranking Performance Records (Spring 2018)
@@ -4913,7 +4913,7 @@ If a file *best5.py*, for instance, gathers the partial performance tableau show
 
 
 .. figure:: converse-dual_rel_best5.png
-   :width: 400 px
+   :width: 300 px
    :align: center
 
    Validated strict outranking situations between the five best alternatives
