@@ -4816,15 +4816,15 @@ Example python3.6.5 session on the HCP-UL Iris-126 -skylake node::
     Type "help", "copyright", "credits" or "license" for more information.
     >>> from cRandPerfTabs import\
     ...          cRandom3ObjectivesPerformanceTableau as cR3ObjPT
-    >>> tp = cR3ObjPT(numberOfActions=1000000,
+    >>> pt = cR3ObjPT(numberOfActions=1000000,
     ...          numberOfCriteria=21,
     ...          weightDistribution='equiobjectives',
     ...          commonScale = (0.0,1000.0),
     ...          commonThresholds = [(2.5,0.0),(5.0,0.0),(75.0,0.0)],
     ...          missingDataProbability=0.05,
-    ...          seed=15)
+    ...          seed=16)
     >>> import cSparseIntegerOutrankingDigraphs as iBg
-    >>> qr = iBg.cQuantilesRankingDigraph(tp,quantiles=10,
+    >>> qr = iBg.cQuantilesRankingDigraph(pt,quantiles=10,
     ...            quantilesOrderingStrategy='average',
     ...            minimalComponentSize=1,
     ...            componentRankingRule='NetFlows',
@@ -4855,13 +4855,13 @@ Example python3.6.5 session on the HCP-UL Iris-126 -skylake node::
 
 With 28 computing cores and a shared CPU memory occupation of about 50GB, deciles sorting and locally ranking a million decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes thus less than 3 minutes. About 1.5 minutes does take the deciles sorting and, a bit more than a minute, the local ranking of the individual components. 
 
-The optimized deciles sorting leads to 233645 components with a maximal order of 153. The fill rate of the adjacency table is reduced to 0.001%, ie of the potential trillion pairwaise outrankings, we effectively only keep a billion. This high number of components results from the high number (21) of involved performance criteria, leading in fact to a very refined epistemic discrimination of majority outranking margins. 
+The optimized deciles sorting leads to 233645 components with a maximal order of 153. The fill rate of the adjacency table is reduced to 0.001%, ie of the potential trillion pairwise outrankings, we effectively only keep a billion. This high number of components results from the high number (21) of involved performance criteria, leading in fact to a very refined epistemic discrimination of majority outranking margins. 
 
 A non-optimized deciles sorting would instead give at most 110 components with inevitably very big intractable local digraph orders. Proceeding with a more detailed quantiles sorting, for reducing the induced decomposing run times, leads however quickly to intractable quantiles sorting times. A good compromise is given when the quantiles sorting and decomposing steps show somehow equivalent run times as is the case in our example session (99.6 versus 77.3 seconds).     
 
-The apparent quality of the global ranking result may be checked, for instance, by inspecting the 21 marginal performances of the five best-ranked alternatives listed below. 
+Let us inspect the 21 marginal performances of the five best-ranked alternatives listed below. 
 
-    >>> tp.showPerformanceTableau(actionsSubset=qr.boostedRanking2[:5])
+    >>> pt.showPerformanceTableau(actionsSubset=qr.boostedRanking2[:5])
     *----  performance tableau -----*
     criteria | weights | '155873' '426463' '279728' '115897' '605980'
     ---------|-------------------------------------------------------
@@ -4887,7 +4887,48 @@ The apparent quality of the global ranking result may be checked, for instance, 
      'Ec20'  |    42   |  821.26   864.81   710.15   717.19   614.74
      'So21'  |    48   |  823.13   863.82   821.06   901.20   839.27
 
-The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria weights (336) is the same for all three decision objectives.
+The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria weights (336) is the same for all three decision objectives. The five best ranked alternatives are in decreasing order: '155873', '426463', '279728', '115897' and '605980'.
+
+If a file *best5.py*, for instance, gathers the partial performance tableau shown above, we may compute a restricted bipolar outranking relation among these five actions.
+
+    >>> from outrankingDigraphs import *   
+    >>> t = PerformanceTableau('best5')
+    >>> g = BipolarOutrankingDigraph(t)
+    >>> g.recodeValuation(-1,1)
+    >>> g.showRelationTable(\
+    ...    actionsSubset= ['155873','426463','279728','115897','605980'],\
+    ...    Sorted=False,ReflexiveTerms=False)
+    * ---- Relation Table -----
+      r(x >= y) | '155873' '426463' '279728' '115897' '605980'   
+    ------------|---------------------------------------------
+       '155873' |     -      +0.27    +0.31    +0.35    +0.38  
+       '426463' |   +0.31      -      +0.53    +0.39    +0.43  
+       '279728' |   +0.38    +0.07      -      +0.45    +0.48  
+       '115897' |   +0.10    -0.11    +0.10      -      +0.21  
+       '605980' |   +0.01    -0.19    -0.08    +0.23      -  
+    >>> (~(-g)).exportGraphViz()
+    *---- exporting a dot file dor GraphViz tools ---------*
+    Exporting to converse-dual_rel_best5.dot
+    dot -Tpng converse-dual_rel_best5.dot -o converse-dual_rel_best5.png
+
+
+.. figure:: converse-dual_rel_best5.png
+   :width: 400 px
+   :align: center
+
+   Validated strict outranking situations between the five best alternatives
+
+Alternative '155873' does not strictly outrank any of the other four best ranked alternatives, whereas alternatives '426463' and '279728' strictly outrank the last two, respectively the last one. Restricted to these five alternatives, the *Copeland* as well as the *NetFlows* ranking rule will hence both rank alternative '426463' and '279728' before '155873'. And the Kemeny ranking rule will furthermore invert the two last alternatives (see Line 7 below).
+
+>>> g.computeCopelandRanking()
+['426463', '279728', '155873', '115897', '605980']
+>>> g.computeNetFlowsRanking()
+['426463', '279728', '155873', '115897', '605980']
+>>> from linearOrders import *
+>>> ke = KemenyOrder(g)
+['426463', '279728', '155873', '605980', '115897']
+
+It is hence *important to keep in mind* eventually here that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking** of the given decision alternatives; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimal quantile ordering strategy, all this will indeed produce, sometimes even substantially, different global ranking results. 
 
 Back to :ref:`Tutorial-label`
 	   
