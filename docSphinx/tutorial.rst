@@ -4855,73 +4855,83 @@ Let us inspect the 21 marginal performances of the five best-ranked alternatives
 
     >>> pt.showPerformanceTableau(actionsSubset=qr.boostedRanking2[:5])
     *----  performance tableau -----*
-    criteria | weights | '155873' '426463' '279728' '115897' '605980'
+    criteria | weights |   773908   668946   567307   578559   426463
     ---------|-------------------------------------------------------
-     'Ec01'  |    42   |  928.36   808.35    NA      846.11   978.29 
-     'So02'  |    48   |  587.25   899.22   669.79   297.24   778.95
-     'En03'  |    56   |  938.06    NA      936.63   908.40   908.58
-     'So04'  |    48   |   NA      956.14   838.31   905.09   807.40
-     'En05'  |    56   |  919.29   950.51   670.52   910.34   542.09
-     'Ec06'  |    42   |  770.13   974.63   969.88   879.66   850.42
-     'Ec07'  |    42   |  782.88   574.08   813.90   800.26   617.08
-     'So08'  |    48   |  814.57   943.34   796.62   517.79   750.57
-     'En09'  |    56   |  774.62   376.70   879.65   670.40   815.36
-     'Ec10'  |    42   |  861.36   739.94   731.94   577.11   865.63
-     'En11'  |    56   |  784.36   953.77   653.01   812.49   929.55
-     'Ec12'  |    42   |  638.40   599.17   934.24   734.45   355.25
-     'En13'  |    56   |  852.43   877.23   832.42   809.85   816.22
-     'So14'  |    48   |  916.15   461.04   395.36   969.43   784.14
-     'En15'  |    56   |  876.06   863.72   864.49   727.30   808.42
-     'Ec16'  |    42   |  886.12   859.70   882.21   865.89   460.98
-     'So17'  |    48   |  688.37   655.37   833.06   797.29   927.91
-     'Ec18'  |    42   |  898.26   914.32   872.53   825.91   833.77
-     'So19'  |    48   |  527.26   842.85   843.93   802.15   787.54
-     'Ec20'  |    42   |  821.26   864.81   710.15   717.19   614.74
-     'So21'  |    48   |  823.13   863.82   821.06   901.20   839.27
+     'Ec01'  |    42   |   969.81   844.71   917.00     NA     808.35  
+     'So02'  |    48   |     NA     891.52   836.43     NA     899.22  
+     'En03'  |    56   |   687.10     NA     503.38   873.90     NA  
+     'So04'  |    48   |   455.05   845.29   866.16   800.39   956.14  
+     'En05'  |    56   |   809.60   846.87   939.46   851.83   950.51  
+     'Ec06'  |    42   |   919.62   802.45   717.39   832.44   974.63  
+     'Ec07'  |    42   |   889.01   722.09   606.11   902.28   574.08  
+     'So08'  |    48   |   862.19   699.38   907.34   571.18   943.34  
+     'En09'  |    56   |   857.34   817.44   819.92   674.60   376.70  
+     'Ec10'  |    42   |     NA     874.86     NA     847.75   739.94  
+     'En11'  |    56   |     NA     824.24   855.76     NA     953.77  
+     'Ec12'  |    42   |   802.18   871.06   488.76   841.41   599.17  
+     'En13'  |    56   |   827.73   839.70   864.48   720.31   877.23  
+     'So14'  |    48   |   943.31   580.69   827.45   815.18   461.04  
+     'En15'  |    56   |   794.57   801.44   924.29   938.70   863.72  
+     'Ec16'  |    42   |   581.15   599.87   949.84   367.34   859.70  
+     'So17'  |    48   |   881.55   856.05     NA     796.10   655.37  
+     'Ec18'  |    42   |   863.44   520.24   919.75   865.14   914.32  
+     'So19'  |    48   |     NA       NA       NA     790.43   842.85  
+     'Ec20'  |    42   |   582.52   831.93   820.92   881.68   864.81  
+     'So21'  |    48   |   880.87     NA     628.96   746.67   863.82  
 
-The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best ranked alternatives are, in decreasing order: '155873', '426463', '279728', '115897' and '605980'.
+The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best ranked alternatives are, in decreasing order: #773908, #668946, #567307, #578559 and #426463.
 
-If a file *best5.py*, for instance, gathers the partial performance tableau shown above, we may compute a restricted bipolar outranking relation among these five actions.
+If a file *best10.py*, for instance, gathers the performances of the ten best-ranked alternatives, including the five best-ranked shown above, we may compute a restricted bipolar outranking relation among these 10 actions.
 
-    >>> from outrankingDigraphs import *   
-    >>> t = PerformanceTableau('best5')
-    >>> g = BipolarOutrankingDigraph(t)
-    >>> g.recodeValuation(-1,1)
-    >>> g.showRelationTable(\
-    ...    actionsSubset= ['155873','426463','279728','115897','605980'],\
-    ...    Sorted=False,ReflexiveTerms=False)
-    * ---- Relation Table -----
-      r(x >= y) | '155873' '426463' '279728' '115897' '605980'   
-    ------------|---------------------------------------------
-       '155873' |     -      +0.27    +0.31    +0.35    +0.38  
-       '426463' |   +0.31      -      +0.53    +0.39    +0.43  
-       '279728' |   +0.38    +0.07      -      +0.45    +0.48  
-       '115897' |   +0.10    -0.11    +0.10      -      +0.21  
-       '605980' |   +0.01    -0.19    -0.08    +0.23      -  
-    >>> (~(-g)).exportGraphViz()
-    *---- exporting a dot file dor GraphViz tools ---------*
-    Exporting to converse-dual_rel_best5.dot
-    dot -Tpng converse-dual_rel_best5.dot -o converse-dual_rel_best5.png
+>>> from cIntegerOutrankingDigraphs import *   
+>>> t = cPerformanceTableau('best10')
+>>> g = IntegerBipolarOutrankingDigraph(t)
+>>> g.showRelationTable(ReflexiveTerms=False)
+* ---- Relation Table -----
+r(x >= y) | 155873 279728 298060 426463 567307 578559 668946 773908 815551 928563  
+----------|----------------------------------------------------------------------
+  155873  |    -    +308   +466   +274   +322   +174   +378    +72   +212   +418  
+  279728  |  +388     -    +140    +72   -110   +290   +230   +240    +62   +250  
+  298060  |   +54   +248     -     -42   +172    +32    +68    -48    +48   +374  
+  426463  |  +312   +534   +416     -    +284   +138   +258   +202   +382   +278  
+  567307  |  +266   +256   +174   +156     -    +180   +418    +70    +78   +306  
+  578559  |   -48   -110   +100    -12    +28     -     +78     -4   +154    -10  
+  668946  |   +56    +74   +218    -22    +42   +250     -     +78   +172    +64  
+  773908  |  +220   +116   +340    -50    +90   +270   +390     -     +60   +222  
+  815551  |  +172    -14   +194    +54   +272   +318   +126    +78     -     +22  
+  928563  |   +56   +318    +78    +36    -14   +246   +228    +22   +110     -  
+>>> g.condorcetWinners()
+[155873, 426463, 567307]
+>>> g.computeChordlessCircuits()
+[]
+>>> g.computeTransitivityDegree()
+Decimal('0.78')
 
+Three alternatives, namely #155873, #426463, and #567307 qualify as Condorcet winners, i.e. they outrank all the other alternatives. No chordless outranking circuits may be detected, yet the transitivity of the apparent outranking relation is not given. No clear ranking alignment hence appears when inspecting the *strict* outranking relations shown in Fig. 62.
+  
+>>> (~(-g)).exportGraphViz()
+*---- exporting a dot file dor GraphViz tools ---------*
+Exporting to converse-dual_rel_best10.dot
+dot -Tpng converse-dual_rel_best10.dot -o converse-dual_rel_best10.png
 
 .. figure:: converse-dual_rel_best5.png
-   :width: 300 px
+   :width: 400 px
    :align: center
 
-   Validated strict outranking situations between the five best alternatives
+   Validated strict outranking situations between the ten best-ranked alternatives
 
-Alternative '155873' does not strictly outrank any of the other four best ranked alternatives, whereas alternatives '426463' and '279728' strictly outrank the last two, respectively the last one (see Fig. 62). Restricted to these five alternatives, the *Copeland* as well as the *NetFlows* ranking rule will hence both rank alternative '426463' and '279728' before '155873'. And the Kemeny ranking rule will furthermore invert the two last alternatives (see Line 8 below).
+Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows* as well as the *Kemeny* ranking rule will rank alternative #426463 first and alternative #578559 last. Otherwise the three ranking rules produce more or less different rankings.
 
 >>> g.computeCopelandRanking()
-['426463', '279728', '155873', '115897', '605980']
+[426463, 567307, 155873, 279728, 773908, 928563, 668946, 815551, 298060, 578559]
 >>> g.computeNetFlowsRanking()
-['426463', '279728', '155873', '115897', '605980']
+[426463, 155873, 773908, 567307, 815551, 279728, 928563, 298060, 668946, 578559]
 >>> from linearOrders import *
 >>> ke = KemenyOrder(g)
 >>> ke.KemenyRanking
-['426463', '279728', '155873', '605980', '115897']
+[426463, 773908, 155873, 815551, 567307, 298060, 928563, 279728, 668946, 578559]
 
-It is hence *important to keep in mind* eventually here that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking** of the given decision alternatives; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimal quantile ordering strategy, all this will indeed produce, sometimes even substantially, different global ranking results. 
+It is hence *important to keep in mind* eventually here that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking** of the given decision alternatives; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimized quantile ordering strategy, all this will indeed produce, sometimes even substantially, different global ranking results. 
 
 Back to :ref:`Tutorial-label`
 	   
