@@ -466,7 +466,7 @@ class cPartialPerformanceTableau(cPerformanceTableau):
             if type(inPerfTab) == cRandomCBPerformanceTableau:
                 xType = inPerfTab.actions[x]['type']
             elif type(inPerfTab) == cRandom3ObjectivesPerformanceTableau:
-                self.objectiveSupportingTypes = inPerfTab.objectiveSupportingTypes
+                #self.objectiveSupportingTypes = inPerfTab.objectiveSupportingTypes
                 xType = 'Soc' + inPerfTab.actions[x]['profile']['Soc']
                 xType += 'Eco' + inPerfTab.actions[x]['profile']['Eco']
                 xType += 'Env' + inPerfTab.actions[x]['profile']['Env']
