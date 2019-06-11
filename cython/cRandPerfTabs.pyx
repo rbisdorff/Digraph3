@@ -439,6 +439,7 @@ class cPerformanceTableau(PerformanceTableau):
 
 ############ Specialized cPerformanceTableau models ################
 
+
 class cPartialPerformanceTableau(cPerformanceTableau):
     """
     Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives
