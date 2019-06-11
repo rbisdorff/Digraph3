@@ -445,6 +445,8 @@ class cPartialPerformanceTableau(cPerformanceTableau):
     Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives
     """
     def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None,objectivesSubset=None):
+        cdef int key
+        
         from copy import deepcopy
         from collections import OrderedDict
         from cRandPerfTabs import cRandomCBPerformanceTableau,\
@@ -454,12 +456,14 @@ class cPartialPerformanceTableau(cPerformanceTableau):
         # name
         self.name = 'partial-'+inPerfTab.name
         # actions
+        na = len(inPerfTab.actions)
+        actions = OrderedDict()
         if actionsSubset != None:
-            actions = OrderedDict()
             for x in actionsSubset:
-                actions[x] = deepcopy(inPerfTab.actions[x])
+                intKey = int(x)
+                actions[intKey] = deepcopy(inPerfTab.actions[x])
         else:
-            actions = deepcopy(inPerfTab.actions)
+                actions = deepcopy(inPerfTab.actions)
         self.actions = actions
         actionsTypeStatistics = {}
         for x in inPerfTab.actions:
