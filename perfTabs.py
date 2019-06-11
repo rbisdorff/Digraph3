@@ -4670,7 +4670,7 @@ class PartialPerformanceTableau(PerformanceTableau):
             else:
                 criteria = deepcopy(inPerfTab.criteria)
         else:
-            objectibes = OrderedDict()
+            objectives = OrderedDict()
             criteria = OrderedDict()
             if criteriaSubset == None:
                 criteriaSubset = list(inPerfTab.criteria.keys())

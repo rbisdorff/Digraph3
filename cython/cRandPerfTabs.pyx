@@ -439,6 +439,113 @@ class cPerformanceTableau(PerformanceTableau):
 
 ############ Specialized cPerformanceTableau models ################
 
+class cPartialPerformanceTableau(cPerformanceTableau):
+    """
+    Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives
+    """
+    def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None,objectivesSubset=None):
+        from copy import deepcopy
+        from collections import OrderedDict
+        from cRandPerfTabs import cRandomCBPerformanceTableau,\
+                                  cRandom3ObjectivesPerformanceTableau,\
+                                  cRandomPerformanceTableau
+        self.__class__ = inPerfTab.__class__
+        # name
+        self.name = 'partial-'+inPerfTab.name
+        # actions
+        if actionsSubset != None:
+            actions = OrderedDict()
+            for x in actionsSubset:
+                actions[x] = deepcopy(inPerfTab.actions[x])
+        else:
+            actions = deepcopy(inPerfTab.actions)
+        self.actions = actions
+        actionsTypeStatistics = {}
+        for x in inPerfTab.actions:
+            if type(inPerfTab) == cRandomCBPerformanceTableau:
+                xType = inPerfTab.actions[x]['type']
+            elif type(inPerfTab) == cRandom3ObjectivesPerformanceTableau:
+                self.objectiveSupportingTypes = inPerfTab.objectiveSupportingTypes
+                xType = 'Soc' + inPerfTab.actions[x]['profile']['Soc']
+                xType += 'Eco' + inPerfTab.actions[x]['profile']['Eco']
+                xType += 'Env' + inPerfTab.actions[x]['profile']['Env']
+            else:
+                xType = 'NA'
+            try:
+                actionsTypeStatistics[xType] += 1
+            except:
+                actionsTypeStatistics[xType] = 1
+        self.actionsTypeStatistics = actionsTypeStatistics
+        
+        # objectives & criteria
+        objectives = OrderedDict()
+        HasObjectives = True
+        if objectivesSubset == None:
+            try:
+                objectives = deepcopy(inPerfTab.objectives)
+            except:
+                HasObjectives = False
+            if criteriaSubset != None:
+                criteria = OrderedDict()
+                if HasObjectives:
+                    for obj in objectives.keys():
+                        objectives[obj]['criteria'] = []
+                for g in criteriaSubset:
+                    criteria[g] = deepcopy(inPerfTab.criteria[g])
+##                    if HasObjectives:
+                    try:
+                        obj = inPerfTab.criteria[g]['objective']
+                        objectives[obj]['criteria'].append(g)
+                    except:
+                        pass
+            else:
+                criteria = deepcopy(inPerfTab.criteria)
+        else:
+            objectives = OrderedDict()
+            criteria = OrderedDict()
+            if criteriaSubset == None:
+                criteriaSubset = list(inPerfTab.criteria.keys())
+            for obj in objectivesSubset:
+                objectives[obj] = deepcopy(inPerfTab.objectives[obj])
+                objectives[obj]['criteria'] = []
+                for g in inPerfTab.objectives[obj]['criteria']:
+                    if g in criteriaSubset:
+                        criteria[g] = deepcopy(inPerfTab.criteria[g])
+                        objectives[obj]['criteria'].append(g)
+        self.objectives = objectives
+        try:
+            self.commonScale = perfTab.commonScale
+        except:
+            pass
+        try:
+            self.OrdinalScales = perfTab.OrdinalScales
+        except:
+            pass
+        try:
+            self.BigData = perfTab.BigData
+        except:
+            pass
+        try:
+            self.missingDataProbability = perfTab.missingDataProbability
+        except:
+            pass
+        
+        self.criteria = criteria
+        self.weightPreorder = self.computeWeightPreorder()
+        # evaluations
+        try:
+            self.valueDigits = perfTab.valueDigits
+        except:
+            self.valueDigits = 2
+
+        evaluation = {}
+        for g in criteria.keys():
+            evaluation[g] = {}
+            for x in actions.keys():
+                evaluation[g][x] = deepcopy(inPerfTab.evaluation[g][x])
+        self.evaluation = evaluation
+
+
 class cRandomPerformanceTableau(cPerformanceTableau):
     """
     Specialization of the cPerformanceTableau class for generating a temporary
