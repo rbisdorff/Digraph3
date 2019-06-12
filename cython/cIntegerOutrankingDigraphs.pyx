@@ -233,7 +233,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                  bint hasNoVeto=False,\
                  bint hasBipolarVeto=True,\
                  bint CopyPerfTab=True,\
-                 bint BigData=False,\
+                 bint BigData=True,\
                  bint Threading=False,\
                  tempDir=None,\
                  bint WithConcordanceRelation=False,\
@@ -901,6 +901,74 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         # return outranking relation    
 
         return relation
+
+    def showRelationTable(self,Sorted=False,\
+                          IntegerValues=True,\
+                          actionsSubset= None,\
+                          relation=None,\
+                          ndigits=2,\
+                          ReflexiveTerms=False):
+        """
+        prints the relation valuation in actions X actions table format.
+        """
+        cdef int k
+        if actionsSubset == None:
+            actionKeys = [k for k in self.actions]
+        else:
+            actionKeys = actionsSubset
+        if relation == None:
+            relation = self.relation
+        print('* ---- Relation Table -----\n', end=' ')
+        
+        print('r(x>y) | ', end=' ')
+        #actions = [x for x in actions]
+        actionsList = []
+        for x in actionKeys:
+#            if isinstance(x,frozenset):
+            try:
+                actionsList += [(self.actions[x]['shortName'],x)]
+            except:
+                actionsList += [(self.actions[x]['name'],x)]
+        if Sorted:
+            actionsList.sort()
+        #print actionsList
+        #actionsList.sort()
+
+        try:
+            hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
+        except KeyError:
+            hasIntegerValuation = IntegerValues
+
+        for x in actionsList:
+            print(x[0]+"\t", end=' ')
+        print('\n------|-------------------------------------------')
+        for x in actionsList:
+            print(x[0]+" | ", end=' ')
+            for y in actionsList:
+                if x != y:
+                    if hasIntegerValuation:
+                        print('%+d\t' % (relation[x[1]][y[1]]), end=' ')
+                    else:
+                        formatString = '%%+2.%df\t' % ndigits
+                        print(formatString % (relation[x[1]][y[1]]), end=' ')
+                else:
+                    if ReflexiveTerms:
+                        if hasIntegerValuation:
+                            print('%+d\t' % (relation[x[1]][y[1]]), end=' ')
+                        else:
+                            formatString = '%%+2.%df\t' % ndigits
+                            print(formatString % (relation[x[1]][y[1]]), end=' ')
+                    else:  
+                        formatString = ' - \t'
+                        print(formatString, end=' ')
+            print('')
+        if hasIntegerValuation:
+            print('r(x>y) image range := [%+d;%+d]'% (self.valuationdomain['min'],
+                                                 self.valuationdomain['max']))
+        else:
+            formatString = 'Valuation domain: [%%+2.%df;%%+2.%df]\n' % (ndigits,ndigits)
+            print( formatString % (self.valuationdomain['min'],
+                                   self.valuationdomain['max']))
 
 
     def computeOrdinalCorrelation(self, other, bint Debug=False):

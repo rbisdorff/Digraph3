@@ -22,8 +22,38 @@ from collections import OrderedDict
 # generators for random PerformanceTableaux
 class cPerformanceTableau(PerformanceTableau):
     """
-    Abstract root class for cythenized performace tableau methods.
+    Root class for cythonized performace tableau instances.
     """
+
+    def __init__(self,filePerfTab=None):
+        from collections import OrderedDict
+        if filePerfTab != None:
+            fileName = filePerfTab + '.py'
+            argDict = {}
+            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            self.name = str(filePerfTab)
+            try:
+                self.actions = argDict['actions']
+            except:
+                self.actions = argDict['actionset']
+            try:
+                self.objectives = argDict['objectives']
+            except:
+                pass
+            self.criteria = argDict['criteria']
+            try:
+                self.weightPreorder = argDict['weightorder']
+            except:
+                self.weightPreorder = self.computeWeightPreorder()
+            self.evaluation = argDict['evaluation']
+            self.convertInsite2BigData()
+        else:
+            self.name = "empty_instance"
+            self.actions = OrderedDict()
+            self.criteria = OrderedDict()
+            self.weightPreorder = {}
+            self.evaluation = {}
+
     def convertInsite2BigData(self):
         """
         Converts in site weights, evaluations and discrimination thresholds to bigData float format.
@@ -437,11 +467,11 @@ class cPerformanceTableau(PerformanceTableau):
         ### convert back to Bgd
         self.convertInsite2BigData()
 
-    def save(self,fileName='tempperftab',isDecimal=True,valueDigits=2):
+    def save(self,fileName='tempperftab',valueDigits=2):
         """
         Persistant storage of Performance Tableaux.
         """
-        print('*--- Saving performance tableau in file: <' + str(fileName) + '.py> ---*')
+        print('*--- Saving cPerformanceTableau instance in file: <' + str(fileName) + '.py> ---*')
         actions = self.actions
         try:
             objectives = self.objectives
@@ -451,8 +481,7 @@ class cPerformanceTableau(PerformanceTableau):
         evaluation = self.evaluation
         fileNameExt = str(fileName)+str('.py')
         fo = open(fileNameExt, 'w')
-        fo.write('# Saved performance Tableau: \n')
-        fo.write('from decimal import Decimal\n')
+        fo.write('# Saved cPerformanceTableau: \n')
         fo.write('from collections import OrderedDict\n')
         # actions
         fo.write('actions = OrderedDict([\n')
@@ -483,12 +512,8 @@ class cPerformanceTableau(PerformanceTableau):
         for g in criteria:
             fo.write('\'' +str(g)+'\': {\n')
             for x in actions:
-                if Decimal:
-                    evaluationString = '%%d:Decimal("%%.%df"),\n' % (valueDigits)
-                    fo.write(evaluationString % (x,evaluation[g][x]) )
-                else:
-                    fo.write(x + ':' + str(evaluation[g][x]) + ',\n')
-                    
+                evaluationString = '%%d:%%.%df,\n' % (valueDigits)
+                fo.write(evaluationString % (x,evaluation[g][x]) )    
             fo.write('},\n')
         fo.write( '}\n')
         fo.close()
@@ -640,9 +665,9 @@ class cRandomPerformanceTableau(cPerformanceTableau):
         >>> t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1,seed=100)
         >>> t.actions
         OrderedDict([
-        (0: {'name': 'a1'}),
-        (1: {'name': 'a2'}),
-        (3: {'name': 'a3'})
+        (1: {'name': '#1'}),
+        (2: {'name': '#2'}),
+        (3: {'name': '#3'})
         ])
         >>> t.criteria
         OrderedDict([
@@ -656,7 +681,7 @@ class cRandomPerformanceTableau(cPerformanceTableau):
                         weightScale=(1, 1); commonMode=None'}).
         ])
         >>> t.evaluation
-        {'g01': {0: 45.95, 1: 95.17, 2: 17.47.}}
+        {'g01': {1: 45.95, 2: 95.17, 3: 17.47.}}
 
     """
     def __init__(self,long numberOfActions = 13,\
@@ -691,8 +716,8 @@ class cRandomPerformanceTableau(cPerformanceTableau):
         # generate actions
         nd = len(str(numberOfActions))
         actions = OrderedDict()
-        for i in range(numberOfActions):
-            actionName = ('a%%0%dd' % (nd)) % (i+1)
+        for i in range(1,numberOfActions+1):
+            actionName = ('#%%0%dd' % (nd)) % (i)
             actions[i] = {'name': actionName}
                 
 #        # generate weights
@@ -859,7 +884,7 @@ class cRandomPerformanceTableau(cPerformanceTableau):
         for c in criteria:
             for x in actions:
                 if random.random() < missingDataProbability:
-                    evaluation[c][x] = Decimal('-999')
+                    evaluation[c][x] = -999
 
         # store object dict
         self.actions = actions
@@ -913,8 +938,8 @@ class cRandomRankPerformanceTableau(cPerformanceTableau):
         # generate actions
         nd = len(str(numberOfActions))
         actions = OrderedDict()
-        for i in range(numberOfActions):
-            actionName = ('a%%0%dd' % (nd)) % (i+1)
+        for i in range(1,numberOfActions+1):
+            actionName = ('#%%0%dd' % (nd)) % (i)
             actions[i] = {'name': actionName}
 
         # generate the criteria weights
@@ -986,7 +1011,7 @@ class cRandomRankPerformanceTableau(cPerformanceTableau):
 # ------------------------------
 
 
-class cRandomCoalitionsPerformanceTableau(cPerformanceTableau):
+class _cRandomCoalitionsPerformanceTableau(cPerformanceTableau):
     """
     Full automatic generation of performance tableaux with random coalitions of criteria
 
@@ -1041,8 +1066,8 @@ class cRandomCoalitionsPerformanceTableau(cPerformanceTableau):
         # generate actions
         nd = len(str(numberOfActions))
         actions = OrderedDict()
-        for i in range(numberOfActions):
-            actionKey = ('a%%0%dd' % (nd)) % (i+1)
+        for i in range(1,numberOfActions+1):
+            actionKey = ('#%%0%dd' % (nd)) % (i)
             #if BigData:
             actions[i] = {'shortName':actionKey,
                           'name': actionKey}
@@ -1426,8 +1451,8 @@ class cRandom3ObjectivesPerformanceTableau(cPerformanceTableau):
         # generate actions
         nd = len(str(numberOfActions))
         actions = OrderedDict()
-        for i in range(numberOfActions):
-            actionKey = ('a%%0%dd' % (nd)) % (i+1)
+        for i in range(1,numberOfActions+1):
+            actionKey = ('#%%0%dd' % (nd)) % (i)
             actions[i] = {'name': actionKey, 'shortName': actionKey}                 
         # generate random weights
         if weightDistribution == 'equisignificant':
@@ -1721,7 +1746,7 @@ class cRandom3ObjectivesPerformanceTableau(cPerformanceTableau):
             sevalg = self.evaluation[g]
             for x in actions:
                 if random.random() < missingDataProbability:
-                    sevalg[x] = Decimal('-999')
+                    sevalg[x] = -999
 
     def showObjectives(self):
         print('*------ show objectives -------"')
@@ -1826,9 +1851,9 @@ class cRandomCBPerformanceTableau(cPerformanceTableau):
         nd = len(str(numberOfActions))
         actionsTypesList = ['cheap','neutral','advantageous']        
         actions = OrderedDict()
-        for i in range(numberOfActions):
+        for i in range(1,numberOfActions+1):
             actionType = random.choice(actionsTypesList)
-            actionName = ('a%%0%dd' % (nd)) % (i+1)
+            actionName = ('#%%0%dd' % (nd)) % (i)
             actions[i] = {'shortName':actionName+actionType[0],
                               'name':actionName+actionType[0],
                               'type': actionType}
@@ -2105,7 +2130,7 @@ class cRandomCBPerformanceTableau(cPerformanceTableau):
         for g in criteria:
             for x in actions:
                 if random.random() < missingDataProbability:
-                    evaluation[g][x] = Decimal('-999')
+                    evaluation[g][x] = -999
 
         # final storage
         self.actions = actions
@@ -2139,10 +2164,10 @@ class cRandomCBPerformanceTableau(cPerformanceTableau):
                 sample = 0
                 for x in actions.keys():
                     evx = self.evaluation[g][x]
-                    if evx != Decimal('-999'):
+                    if evx != -999:
                         for y in actions.keys():
                             evy = self.evaluation[g][y]
-                            if x != y and evy != Decimal('-999'):
+                            if x != y and evy != -999:
                                 est.add( float( abs(evx-evy) ) )
                                 sample += 1
                                 if sample > samplingSize:
@@ -2218,12 +2243,9 @@ class cNormalizedPerformanceTableau(cPerformanceTableau):
         cdef int x
         cdef float amplitude
         from decimal import Decimal
-        ##from math import copysign
         criteria = self.criteria
         actions = self.actions
         evaluation = self.evaluation
-        #owValue = Decimal(str(lowValue))
-        #ighValue = Decimal(str(highValue))
         amplitude = highValue-lowValue
         if Debug:
             print('lowValue', lowValue, 'amplitude', amplitude)
@@ -2238,19 +2260,16 @@ class cNormalizedPerformanceTableau(cPerformanceTableau):
             if Debug:
                 print('-->> g, glow, ghigh, gamp', g, glow, ghigh, gamp)
             for x in actionKeys:
-                if evaluation[g][x] != Decimal('-999'):
+                if evaluation[g][x] != -999:
                     evalx = abs(evaluation[g][x])
                     if Debug:
                         print(evalx)
-                    ## normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
                     try:
                         if criteria[g]['preferenceDirection'] == 'min':
                             sign = -1
                         else:
                             sign = 1
                         normEvaluation[g][x] = (lowValue + ((evalx-glow)/gamp)*amplitude)*sign
-                        ## else:
-                        ##     normEvaluation[g][x] = -(lowValue + ((evalx-glow)/gamp)*(-amplitude))
                     except:
                         self.criteria[g]['preferenceDirection'] = 'max'
                         normEvaluation[g][x] = lowValue + ((evalx-glow)/gamp)*amplitude
@@ -2258,7 +2277,7 @@ class cNormalizedPerformanceTableau(cPerformanceTableau):
                     if Debug:
                         print(criteria[g]['preferenceDirection'], evaluation[g][x], normEvaluation[g][x])
                 else:
-                    normEvaluation[g][x] = Decimal('-999')
+                    normEvaluation[g][x] = -999
                     
         return normEvaluation
 

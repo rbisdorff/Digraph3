@@ -9110,9 +9110,9 @@ instances from a given argPerfTab instance.</p>
 
 <dl class="class">
 <dt id="cRandPerfTabs.cPerformanceTableau">
-<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">cPerformanceTableau</code><span class="sig-paren">(</span><em>filePerfTab=None</em>, <em>isEmpty=False</em><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">cPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
-<p>Abstract root class for cythenized performace tableau methods.</p>
+<p>Root class for cythonized performace tableau instances.</p>
 <dl class="attribute">
 <dt id="cRandPerfTabs.cPerformanceTableau.convert2Standard">
 <code class="descname">convert2Standard</code><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convert2Standard" title="Permalink to this definition">¶</a></dt>
@@ -9357,33 +9357,6 @@ Cost versus Benefit oriented performance tableaux.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="cRandPerfTabs.cRandomCoalitionsPerformanceTableau">
-<em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">cRandomCoalitionsPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.cRandomCoalitionsPerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
-<p>Full automatic generation of performance tableaux with random coalitions of criteria</p>
-<dl class="docutils">
-<dt><em>Parameters</em>:</dt>
-<dd><ul class="first last simple">
-<li>numberOf Actions := 20 (default)</li>
-<li>number of Criteria := 13 (default)</li>
-<li>weightDistribution := ‘equisignificant’ (default with all weights = 1.0), ‘random’, ‘fixed’ (default w_1 = numberOfCriteria-1, w_{i!=1} = 1</li>
-<li>weightScale := [1,numerOfCriteria] (random default), [w_1, w_{i!=1] (fixed)</li>
-<li>commonScale := (0.0, 100.0) (default)</li>
-<li>commonThresholds := [(1.0,0.0),(2.001,0.0),(8.001,0.0)] if OrdinalSacles, [(0.10001*span,0),(0.20001*span,0.0),(0.80001*span,0.0)] with span = commonScale[1] - commonScale[0].</li>
-<li>commonMode := [‘triangular’,50.0,0.50] (default), [‘uniform’,None,None], [‘beta’, None,None] (three alpha, beta combinations (5.8661,2.62203) chosen by default for high(‘+’), medium (‘~’) and low (‘-‘) evaluations.</li>
-<li>valueDigits := 2 (default, for cardinal scales only)</li>
-<li>Coalitions := True (default)/False, three coalitions if True</li>
-<li>VariableGenerators := True (default) / False, variable high(‘+’), medium (‘~’) or low (‘-‘) law generated evaluations.</li>
-<li>OrdinalScales := True / False (default)</li>
-<li>Debug := True / False (default)</li>
-<li>RandomCoalitions = True / False (default) zero or more than three coalitions if Coalitions == False.</li>
-<li>vetoProbability := x in ]0.0-1.0[ / None (default), probability that a cardinal criterion shows a veto preference discrimination threshold.</li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="class">
 <dt id="cRandPerfTabs.cRandomPerformanceTableau">
 <em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">cRandomPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.cRandomPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
@@ -9438,9 +9411,9 @@ and considerable performance difference discrimination thresholds.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">actions</span>
 <span class="go">OrderedDict([</span>
-<span class="go">(0: {&#39;name&#39;: &#39;a1&#39;}),</span>
-<span class="go">(1: {&#39;name&#39;: &#39;a2&#39;}),</span>
-<span class="go">(3: {&#39;name&#39;: &#39;a3&#39;})</span>
+<span class="go">(1: {&#39;name&#39;: &#39;#1&#39;}),</span>
+<span class="go">(2: {&#39;name&#39;: &#39;#2&#39;}),</span>
+<span class="go">(3: {&#39;name&#39;: &#39;#3&#39;})</span>
 <span class="go">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">criteria</span>
 <span class="go">OrderedDict([</span>
@@ -9454,7 +9427,7 @@ and considerable performance difference discrimination thresholds.</p>
 <span class="go">                weightScale=(1, 1); commonMode=None&#39;}).</span>
 <span class="go">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">evaluation</span>
-<span class="go">{&#39;g01&#39;: {0: 45.95, 1: 95.17, 2: 17.47.}}</span>
+<span class="go">{&#39;g01&#39;: {1: 45.95, 2: 95.17, 3: 17.47.}}</span>
 </pre></div>
 </div>
 </dd>
@@ -9757,6 +9730,12 @@ is by convention 0.0 at determination level 0.0 .</p>
 </dd>
 </dl>
 <p>Presentation methods for decision actions or alternatives.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.showRelationTable">
+<code class="descname">showRelationTable</code><a class="headerlink" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>prints the relation valuation in actions X actions table format.</p>
 </dd></dl>
 
 </dd></dl>

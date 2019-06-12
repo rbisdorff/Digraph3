@@ -4813,6 +4813,7 @@ Example python3.6.5 session on the HCP-UL Iris-126 -skylake node::
     ...          weightDistribution='equiobjectives',
     ...          commonScale = (0.0,1000.0),
     ...          commonThresholds = [(2.5,0.0),(5.0,0.0),(75.0,0.0)],
+    ...          commonMode = [‘beta’,’variable’,None] 
     ...          missingDataProbability=0.05,
     ...          seed=16)
     >>> import cSparseIntegerOutrankingDigraphs as iBg
@@ -4879,13 +4880,15 @@ Let us inspect the 21 marginal performances of the five best-ranked alternatives
      'Ec20'  |    42   |   582.52   831.93   820.92   881.68   864.81  
      'So21'  |    48   |   880.87     NA     628.96   746.67   863.82  
 
-The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best ranked alternatives are, in decreasing order: #773908, #668946, #567307, #578559 and #426463.
+The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best-ranked alternatives are, in decreasing order: #773908, #668946, #567307, #578559 and #426463. Their random performance evaluations were obviously drawn on all criteria with a *good* performance profile, ie a Beta(alpha=5.8661,beta=2.62203) law (see the tutorial on generating random performance tableaux). 
 
-If we consider a partial performance tableau *tb10*, consisting, for instance, only of the ten best-ranked alternatives, we may compute a restricted integer bipolar outranking relation among these 10 actions.
+We consider now a partial performance tableau *tb10*, consisting only, for instance, of the **ten best-ranked alternatives**, with which we may compute a corresponding integer outranking digraph valued in the range (-1008, +1008).  
 
 >>> tb10 = cPartialPerformanceTableau(pt,qr.boostedRanking[:10])
 >>> from cIntegerOutrankingDigraphs import *   
 >>> g = IntegerBipolarOutrankingDigraph(tb10)
+>>> >>> g.valuationdomain
+{'min': -1008, 'med': 0, 'max': 1008, 'hasIntegerValuation': True}
 >>> g.showRelationTable(ReflexiveTerms=False)
 * ---- Relation Table -----
 r(x >= y) | 155873 279728 298060 426463 567307 578559 668946 773908 815551 928563  
@@ -4907,7 +4910,7 @@ r(x >= y) | 155873 279728 298060 426463 567307 578559 668946 773908 815551 92856
 >>> g.computeTransitivityDegree()
 Decimal('0.78')
 
-Three alternatives, namely #155873, #426463, and #567307 qualify as Condorcet winners, i.e. they outrank all the other alternatives. No chordless outranking circuits may be detected, yet the transitivity of the apparent outranking relation is not given. No clear ranking alignment hence appears when inspecting the *strict* outranking relations shown in Fig. 62.
+Three alternatives -#155873, #426463 and #567307- qualify as Condorcet winners, i.e. they each positively outrank all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking relations shown in Fig. 62.
   
 >>> (~(-g)).exportGraphViz()
 *---- exporting a dot file dor GraphViz tools ---------*
@@ -4920,7 +4923,7 @@ dot -Tpng converse-dual_rel_best10.dot -o converse-dual_rel_best10.png
 
    Validated strict outranking situations between the ten best-ranked alternatives
 
-Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows* as well as the *Kemeny* ranking rule will all rank alternative #426463 first and alternative #578559 last. Otherwise the three ranking rules produce more or less different rankings.
+Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows* as well as the *Kemeny* ranking rule will all rank alternative #426463 first and alternative #578559 last. Otherwise the three ranking rules produce in this case more or less different rankings.
 
 >>> g.computeCopelandRanking()
 [426463, 567307, 155873, 279728, 773908, 928563, 668946, 815551, 298060, 578559]
@@ -4931,7 +4934,9 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
 >>> ke.kemenyRanking
 [426463, 773908, 155873, 815551, 567307, 298060, 928563, 279728, 668946, 578559]
 
-It is hence *important to keep in mind* eventually here that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking** of the given decision alternatives; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimized quantile ordering strategy, all this will indeed produce, sometimes even substantially, different global ranking results. 
+.. note::
+
+   It is therefore *important* to always keep in mind that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking**; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimized quantile ordering strategy, all this will indeed produce, sometimes even substantially, different global ranking results. 
 
 Back to :ref:`Tutorial-label`
 	   
