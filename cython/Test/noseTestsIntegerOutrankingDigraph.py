@@ -15,6 +15,7 @@ from outrankingDigraphs import BipolarOutrankingDigraph
 from time import time
 
 def testcIntegerOutrankingDigraph():
+    print('==>> Testing IntegerBipolarOutrankingDigraph instantiation')
     tc = cR3ObjPT(seed=1)
     print(tc)
     gi = IntegerBipolarOutrankingDigraph(tc,Threading=True,nbrCores=4)
@@ -26,7 +27,8 @@ def testcIntegerOutrankingDigraph():
     g.showRelationTable()
 
 def testBigDataConversion():
-    t = R3ObjPT(numberOfActions=50,seed=1)
+    print('==>> Testing 2 Big Data conversion')
+    t = R3ObjPT(numberOfActions=10,seed=1)
     print(t)
     g = BipolarOutrankingDigraph(t,Threading=True,nbrCores=4)
     print(g)
@@ -35,9 +37,33 @@ def testBigDataConversion():
     gi = IntegerBipolarOutrankingDigraph(tbd)
     print(gi)
     gi.showRelationTable()
+
+def testStandardConversion():
+    print('==>> Testing 2 Standard conversion')
+    t = cR3ObjPT(numberOfActions=10,seed=1)
+    print(t)
+    gi = IntegerBipolarOutrankingDigraph(t,Threading=True,nbrCores=4)
+    print(gi)
+    gi.showRelationTable()
+    tstd = t.convert2Standard()
+    g = BipolarOutrankingDigraph(tstd)
+    print(g)
+    g.showRelationTable()
     
+def testSaveCPerformanceTableau():
+    print('==>> Testing CPerformanceTableau saving and loading')
+    t = cR3ObjPT(numberOfActions=5,seed=1)
+    print(t)
+    t.showPerformanceTableau()
+    t.save('voir')
+    g = IntegerBipolarOutrankingDigraph(t,Threading=True,nbrCores=4)
+    g.showRelationTable()
+    t1 = cPerformanceTableau('voir')
+    print(t)
+    t1.showPerformanceTableau()
+    g1 = IntegerBipolarOutrankingDigraph(t,Threading=True,nbrCores=4)
+    g1.showRelationTable()
     
-        
         
 
    

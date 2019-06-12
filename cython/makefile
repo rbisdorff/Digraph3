@@ -25,6 +25,11 @@ testsCorrelation:
 		(cd Test; ${NOSETESTS} -vs noseTestsVerifyFitness.py)
 
 tests:
+		(cd Test; ${NOSETESTS} -v noseTestsSparseIntegerOutrankingDigraph.py)
+		(cd Test; ${NOSETESTS} -v noseTestsIntegerOutrankingDigraph.py)
+		(cd Test; ${NOSETESTS} -v noseTestsVerifyFitness.py)
+
+verboseTests:
 		(cd Test; ${NOSETESTS} -vs noseTestsSparseIntegerOutrankingDigraph.py)
 		(cd Test; ${NOSETESTS} -vs noseTestsIntegerOutrankingDigraph.py)
 		(cd Test; ${NOSETESTS} -vs noseTestsVerifyFitness.py)
