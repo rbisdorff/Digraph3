@@ -4847,13 +4847,13 @@ Example python3.6.5 session on the HCP-UL Iris-126 -skylake node::
 
 With 28 computing cores and a shared CPU memory occupation of about 50GB, deciles sorting and locally ranking a **million** decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes thus **less than 3 minutes** (see Lines 37-42 above). About 1.5 minute does take the deciles sorting and, a bit more than a minute, the local ranking of the individual components. 
 
-The optimized deciles sorting leads to 233645 components (see Lines 32-36 above) with a maximal order of 153. The fill rate of the adjacency table is reduced to 0.001%, ie of the potential trillion pairwise outrankings, we effectively only keep a billion. This high number of components results from the high number (21) of involved performance criteria, leading in fact to a very refined epistemic discrimination of majority outranking margins. 
+The optimized deciles sorting leads to 233645 components (see Lines 32-36 above) with a maximal order of 153. The fill rate of the adjacency table is reduced to 0.001%. Of the potential trillion (10^12) pairwise outrankings, we effectively keep only 10 millions (10^7). This high number of components results from the high number (21) of involved performance criteria, leading in fact to a very refined epistemic discrimination of majority outranking margins. 
 
 A non-optimized deciles sorting would instead give at most 110 components with inevitably very big intractable local digraph orders. Proceeding with a more detailed quantiles sorting, for reducing the induced decomposing run times, leads however quickly to intractable quantiles sorting times. A good compromise is given when the quantiles sorting and decomposing steps show somehow equivalent run times; as is the case in our example session: 99.6 versus 77.3 seconds (see Lines 40 and 42 above).     
 
 Let us inspect the 21 marginal performances of the five best-ranked alternatives listed below. 
 
-    >>> pt.showPerformanceTableau(actionsSubset=qr.boostedRanking2[:5])
+    >>> pt.showPerformanceTableau(actionsSubset=qr.boostedRanking[:5])
     *----  performance tableau -----*
     criteria | weights |   773908   668946   567307   578559   426463
     ---------|-------------------------------------------------------
@@ -4881,9 +4881,9 @@ Let us inspect the 21 marginal performances of the five best-ranked alternatives
 
 The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best ranked alternatives are, in decreasing order: #773908, #668946, #567307, #578559 and #426463.
 
-If we consider a partial performance tableau *tb10*, consisting only of the best-ranked alternatives, for instance, we may compute a restricted integer bipolar outranking relation among these 10 actions.
+If we consider a partial performance tableau *tb10*, consisting, for instance, only of the ten best-ranked alternatives, we may compute a restricted integer bipolar outranking relation among these 10 actions.
 
->>> tb10 = cPartialPerformanceTableau(pt,qr.boostedRanking2[:10])
+>>> tb10 = cPartialPerformanceTableau(pt,qr.boostedRanking[:10])
 >>> from cIntegerOutrankingDigraphs import *   
 >>> g = IntegerBipolarOutrankingDigraph(tb10)
 >>> g.showRelationTable(ReflexiveTerms=False)
@@ -4928,7 +4928,7 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
 [426463, 155873, 773908, 567307, 815551, 279728, 928563, 298060, 668946, 578559]
 >>> from linearOrders import *
 >>> ke = KemenyOrder(g)
->>> ke.KemenyRanking
+>>> ke.kemenyRanking
 [426463, 773908, 155873, 815551, 567307, 298060, 928563, 279728, 668946, 578559]
 
 It is hence *important to keep in mind* eventually here that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking** of the given decision alternatives; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimized quantile ordering strategy, all this will indeed produce, sometimes even substantially, different global ranking results. 
