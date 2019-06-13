@@ -4415,16 +4415,20 @@ HPC ranking with big outranking digraphs
 	:depth: 1
 	:local:
 
-The Digraph3 collection provides cythonized [6]_, i.e. C-compiled and optimised versions of the main python modules for tackling multiple criteria decision problems facing large sets of decision alternatives ( > 1000 ). Such problems appear usually with a combinatorial organisation of the potential decision alternatives, as is frequently the case in bioinformatics for instance. If HPC facilities with numerous cores ( > 24) and big memory ( > 32GB ) are available, it is thus possible to rank up to several millions of alternatives (see [BIS-2016]_).
+C-compiled Python modules
+-------------------------
 
-The four cythonized Digraph3 modules, prefixed with the letter *c* and taking a *pyx* extension, are stored in the cython directory:
+The Digraph3 collection provides cythonized [6]_, i.e. C-compiled and optimised versions of the main python modules for tackling multiple criteria decision problems facing large sets of decision alternatives ( > 1000 ). Such problems appear usually with a combinatorial organisation of the potential decision alternatives, as is frequently the case in bioinformatics for instance. If HPC facilities with nodes supporing numerous cores (> 12) and big RAM (> 32GB) are available, ranking up to several millions of alternatives (see [BIS-2016]_) become effectively tractable.
 
-    - *cRandPerfTabs.pyx*,
-    - *cIntegerOutrankingDigraphs.pyx*,
-    - *cIntegerSortingDigraphs.pyx* and
-    - *cSparseIntegerOutrankingDigraphs.pyx*.
+Four cythonized Digraph3 modules, prefixed with the letter *c* and taking a *pyx* extension, are provided with the corresponding setup tools in the *Digraph3/cython* directory, namely
 
-Their compilation and installation requires the cython compiler ( ...$ pip install cython ).
+    - *cRandPerfTabs.pyx*
+    - *cIntegerOutrankingDigraphs.pyx*
+    - *cIntegerSortingDigraphs.pyx*
+    - *cSparseIntegerOutrankingDigraphs.pyx*
+
+Their automatic compilation and installation, alongside the standard Digraph3 python modules, requires the *cython* compiler [6]_ ( ...$ pip install cython ) and a C compiler (...$ sudo apt install gcc on Ubuntu).
+
 
 Big Data performance tableaux
 -----------------------------
@@ -4443,8 +4447,8 @@ In order to efficiently type the C variables, the :py:mod:`cRandPerfTabs` module
    Attributes       : ['randomSeed', 'name', 'actions', 'criteria',
                        'evaluation', 'weightPreorder']
   >>> t.actions
-   OrderedDict([(0, {'name': 'a1'}), (1, {'name': 'a2'}),
-                 (2, {'name': 'a3'}), (3, {'name': 'a4'})])
+   OrderedDict([(1, {'name': '#1'}), (2, {'name': '#2'}),
+                 (3, {'name': '#3'}), (4, {'name': '#4'})])
   >>> t.criteria
    OrderedDict([
    ('g1', {'name': 'RandomPerformanceTableau() instance',
@@ -4466,18 +4470,18 @@ In order to efficiently type the C variables, the :py:mod:`cRandPerfTabs` module
 	   'weight': 1,
 	   'preferenceDirection': 'max'})])
    >>> t.evaluation
-    {'g1': {0: 35.17, 1: 56.4, 2: 1.94, 3: 5.51},
-     'g2': {0: 95.12, 1: 90.54, 2: 51.84, 3: 15.42}}
+    {'g1': {1: 35.17, 2: 56.4, 3: 1.94, 4: 5.51},
+     'g2': {1: 95.12, 2: 90.54, 3: 51.84, 4: 15.42}}
    >>> t.showPerformanceTableau()
     Criteria |  'g1'    'g2'   
     Actions  |    1       1    
     ---------|---------------
-       'a1'  |  91.18   90.42  
-       'a2'  |  66.82   41.31  
-       'a3'  |  35.76   28.86  
-       'a4'  |   7.78   37.64  
+       '#1'  |  91.18   90.42  
+       '#2'  |  66.82   41.31  
+       '#3'  |  35.76   28.86  
+       '#4'  |   7.78   37.64  
 
-Conversions from the standard to the Big Data model and vice versa are provided:
+Conversions from the Big Data model to the standard model and vice versa are provided:
 
    >>> t1 = t.convert2Standard()
     >>> t1.convertWeight2Decimal()
@@ -4628,12 +4632,12 @@ A restricted outranking relation is stored for each component with more than one
 
    Sparse quartiles-sorting decomposed outranking relation (extract).
 
-Legend:
-   - outranking for certain ( **┬** )
-   - outranked for certain ( **┴** )
-   - more or less outranking (**+** )
-   - more or less outranked (**-**)
-   - indeterminate ( )
+**Legend**:
+   - *outranking* for certain ( **┬** )
+   - *outranked* for certain ( **┴** )
+   - more or less *outranking* (**+** )
+   - more or less *outranked* (**-**)
+   - *indeterminate* ( )
 
 With a fill rate of 25%, the memory occupation of this sparse outranking digraph *sg* instance takes now only 769kB, compared to the 1.7MB required by a corresponding standard IntegerBipolarOutrankingDigraph instance.
 
@@ -4855,7 +4859,7 @@ Let us inspect the 21 marginal performances of the five best-ranked alternatives
 
     >>> pt.showPerformanceTableau(actionsSubset=qr.boostedRanking[:5])
     *----  performance tableau -----*
-    criteria | weights |   773908   668946   567307   578559   426463
+    criteria | weights |  #773908  #668946  #567307  #578559  #426463
     ---------|-------------------------------------------------------
      'Ec01'  |    42   |   969.81   844.71   917.00     NA     808.35  
      'So02'  |    48   |     NA     891.52   836.43     NA     899.22  
@@ -4901,18 +4905,18 @@ We consider now a partial performance tableau *tb10*, consisting only, for insta
 {'min': -1008, 'med': 0, 'max': 1008, 'hasIntegerValuation': True}
 >>> g.showRelationTable(ReflexiveTerms=False)
 * ---- Relation Table -----
-r(x >= y) | 155873 279728 298060 426463 567307 578559 668946 773908 815551 928563  
+r(x >= y) | #155873 #279728 #298060 #426463 #567307 #578559 #668946 #773908 #815551 #928563  
 ----------|----------------------------------------------------------------------
-  155873  |    -    +308   +466   +274   +322   +174   +378    +72   +212   +418  
-  279728  |  +388     -    +140    +72   -110   +290   +230   +240    +62   +250  
-  298060  |   +54   +248     -     -42   +172    +32    +68    -48    +48   +374  
-  426463  |  +312   +534   +416     -    +284   +138   +258   +202   +382   +278  
-  567307  |  +266   +256   +174   +156     -    +180   +418    +70    +78   +306  
-  578559  |   -48   -110   +100    -12    +28     -     +78     -4   +154    -10  
-  668946  |   +56    +74   +218    -22    +42   +250     -     +78   +172    +64  
-  773908  |  +220   +116   +340    -50    +90   +270   +390     -     +60   +222  
-  815551  |  +172    -14   +194    +54   +272   +318   +126    +78     -     +22  
-  928563  |   +56   +318    +78    +36    -14   +246   +228    +22   +110     -  
+ #155873  |    -     +308    +466    +274    +322    +174    +378     +72    +212    +418  
+ #279728  |  +388     -      +140     +72    -110    +290    +230    +240     +62    +250  
+ #298060  |   +54    +248     -       -42    +172     +32     +68     -48     +48    +374  
+ #426463  |  +312    +534    +416      -     +284    +138    +258    +202    +382    +278  
+ #567307  |  +266    +256    +174    +156     -      +180    +418     +70     +78    +306  
+ #578559  |   -48    -110    +100     -12     +28     -       +78      -4    +154     -10  
+ #668946  |   +56     +74    +218     -22     +42    +250      -      +78    +172     +64  
+ #773908  |  +220    +116    +340     -50     +90    +270    +390      -      +60    +222  
+ #815551  |  +172     -14    +194     +54    +272    +318    +126     +78      -      +22  
+ #928563  |   +56    +318     +78     +36     -14    +246    +228     +22    +110      -  
 >>> g.condorcetWinners()
 [155873, 426463, 567307]
 >>> g.computeChordlessCircuits()
