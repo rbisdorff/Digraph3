@@ -83,7 +83,7 @@ class RandomPerformanceTableau(PerformanceTableau):
 
     """
     def __init__(self,numberOfActions = 13,\
-                 actionNamePrefix = 'a',\
+                 actionNamePrefix = '#',\
                  numberOfCriteria = 7,\
                  weightDistribution = 'equisignificant',\
                  weightScale=None,\
@@ -113,14 +113,14 @@ class RandomPerformanceTableau(PerformanceTableau):
         # generate actions
         nd = len(str(numberOfActions))
         actions = OrderedDict()
-        for i in range(numberOfActions):
+        for i in range(1,numberOfActions+1):
             if BigData:
-                actionName = ('%s%%0%dd' % (actionNamePrefix,nd)) % (i+1)
+                actionName = ('%s%%0%dd' % (actionNamePrefix,nd)) % (i)
                 actions[i] = {'name': actionName}
             else:   
-                actionKey = ('%s%%0%dd' % (actionNamePrefix,nd)) % (i+1)
+                actionKey = ('%s%%0%dd' % (actionNamePrefix,nd)) % (i)
                 actions[actionKey] = {'shortName':actionKey,
-                        'name': 'random decision action',
+                        'name': 'action #%d' % i,
                         'comment': 'RandomPerformanceTableau() generated.' }
                 
 #        # generate weights
@@ -1952,13 +1952,13 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         # generate actions
         nd = len(str(numberOfActions))
         actions = OrderedDict()
-        for i in range(numberOfActions):
-            actionKey = ('a%%0%dd' % (nd)) % (i+1)
+        for i in range(1, numberOfActions+1):
+            actionKey = ('#%%0%dd' % (nd)) % (i)
             if BigData:
                 actions[i] = {'name': actionKey,'generators': {}}
             else:      
                 actions[actionKey] = {'shortName':actionKey,
-                        'name': 'random decision action',
+                        'name': 'action %s' % actionKey,
                         'comment': '3 Objectives',
                         'generators': {}}
 ##        self.actions = actions
@@ -2934,17 +2934,17 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         self.actionsTypesList = ['cheap','neutral','advantageous']        
         actions = OrderedDict()
         actionsTypesList = self.actionsTypesList
-        for i in range(numberOfActions):
+        for i in range(1,numberOfActions+1):
             actionType = random.choice(actionsTypesList)
             if BigData:
-                actionName = ('a%%0%dd' % (nd)) % (i+1)
+                actionName = ('#%%0%dd' % (nd)) % (i)
                 actions[i] = {'shortName':actionName+actionType[0],
                               'name':actionName+actionType[0],
                               'type': actionType}
             else:   
-                actionKey = ('a%%0%dd' % (nd)) % (i+1)
+                actionKey = ('#%%0%dd' % (nd)) % (i)
                 actions[actionKey] = {'shortName':actionKey+actionType[0],
-                        'name': 'random %s decision action' % (actionType),
+                        'name': 'action %s' % (actionKey),
                         'comment': 'Cost-Benefit',
                         'type': actionType}
         # generate objectives

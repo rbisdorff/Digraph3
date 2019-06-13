@@ -3007,7 +3007,7 @@ In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of
 	# Generating MIS set of Cn with the      #
 	# Perrin sequence algorithm.             #
 	# Temporary files used.                  #
-	# even versus odd order optimized.       #
+	# even versus odd order optimised.       #
 	# RB December 2006                       #
 	# Current revision Dec 2018              #
 	# -------------------------------------- #
@@ -4521,7 +4521,7 @@ The C compiled version of the bipolar-valued digraph models takes integer relati
                           'order', 'runTimes', 'nbrThreads', 'relation',
                           'gamma', 'notGamma']
 
-On a classic single threaded intel7 equipped PC, with four single threaded cores, the :py:class:`cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` constructor takes about four seconds for computing a **million** pairwise outranking characteristic values. In a similar setting, the standard :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class constructor operates more than two times slower.
+On a classic intel-i7 equipped PC with four single threaded cores, the :py:class:`cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` constructor takes about four seconds for computing a **million** pairwise outranking characteristic values. In a similar setting, the standard :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class constructor operates more than two times slower.
 
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> g1 = BipolarOutrankingDigraph(t1,Threading=True,nbrCores=4)
@@ -4728,7 +4728,7 @@ We provide therefore the :py:class:`cSparseIntegerOutrankingDigraphs.cQuantilesR
 			'components', 'fillRate', 'maximalComponentSize',
 			'componentRankingRule', 'boostedRanking']
 
-With this *optimized* quantile ordering strategy, we obtain now 47 performance equivalence classes.
+With this *optimised* quantile ordering strategy, we obtain now 47 performance equivalence classes.
 
     >>> qr.components
     OrderedDict([
@@ -4779,7 +4779,7 @@ We observe an even more considerably less voluminous memory occupation: 208kB co
     ...        list(reversed(qr.boostedRanking)))['correlation']))
     Optimzed sparse 4-tiling: +0.7051
 
-The best ranking correlation with the pairwise outranking situations (+0.75) is naturally given when we apply the *Copeland* rule to the complete outranking digraph. When we apply the same rule to the sparse 4-tiled outranking digraph, we get a correlation of +0.72, and when applying the *Copeland* rule to the optimized 4-tiled digraph, we still obtain a correlation of +0.71. These results actually depend on the number of quantiles we use as well as on the given model of random performance tableau. In case of Random3ObjectivesPerformanceTableau instances, for instance, we would get in a similar setting a complete outranking correlation of +0.86, a sparse 4-tiling correlation of +0.82, and an optimzed sparse 4-tiling correlation of +0.81.
+The best ranking correlation with the pairwise outranking situations (+0.75) is naturally given when we apply the *Copeland* rule to the complete outranking digraph. When we apply the same rule to the sparse 4-tiled outranking digraph, we get a correlation of +0.72, and when applying the *Copeland* rule to the optimised 4-tiled digraph, we still obtain a correlation of +0.71. These results actually depend on the number of quantiles we use as well as on the given model of random performance tableau. In case of Random3ObjectivesPerformanceTableau instances, for instance, we would get in a similar setting a complete outranking correlation of +0.86, a sparse 4-tiling correlation of +0.82, and an optimzed sparse 4-tiling correlation of +0.81.
 
 HPC quantiles ranking records
 -----------------------------
@@ -4788,11 +4788,10 @@ Following from the separability property of the *q*-tiles sorting of each action
 
 Using the HPC platform of the University of Luxembourg (https://hpc.uni.lu/), the following run times for very big ranking problems could be achieved both:
 
-    - on Iris -skylake nodes with 28 cores,
-    - on the 3TB -bigmem Gaia-183 node with 64 cores, and
-    - running the cythonized python modules in an Intel compiled virtual Python 3.6.5
-      environment [GCC Intel(R) 17.0.1 –enable-optimizations c++ 6.3 mode] on
-      Debian 8 Linux.
+    - on Iris -skylake nodes with 28 cores [7]_, and
+    - on the 3TB -bigmem Gaia-183 node with 64 cores [8]_,
+
+by running the cythonized python modules in an Intel compiled virtual Python 3.6.5 environment [GCC Intel(R) 17.0.1 –enable-optimizations c++ gcc 6.3 mode] on Debian 8 Linux.
 
 .. figure:: rankingRecords.png
    :width: 350 px
@@ -4800,7 +4799,7 @@ Using the HPC platform of the University of Luxembourg (https://hpc.uni.lu/), th
 
    HPC-UL Ranking Performance Records (Spring 2018)
 
-Example python3.6.5 session on the HCP-UL Iris-126 -skylake node::
+Example python session on the HCP-UL Iris-126 -skylake node [7]_::
 
     (myPy365ICC) [rbisdorff@iris-126 Test]$ python
     Python 3.6.5 (default, May  9 2018, 09:54:28) 
@@ -4846,11 +4845,11 @@ Example python3.6.5 session on the HCP-UL Iris-126 -skylake node::
     Preordering       : 5.17954
     Decomposing       : 72.29356
 
-With 28 computing cores and a shared CPU memory occupation of about 50GB, deciles sorting and locally ranking a **million** decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes thus **less than 3 minutes** (see Lines 37-42 above). About 1.5 minute does take the deciles sorting and, a bit more than a minute, the local ranking of the individual components. 
+On this 2x14c Intel Xeon Gold 6132 @ 2.6 GHz equipped HPC node with 132GB RAM [7]_, deciles sorting and locally ranking a **million** decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes us **less than 3 minutes** (see Lines 37-42 above). About 1.5 minute does take the deciles sorting and, a bit more than one minute, the local ranking of the individual components. 
 
-The optimized deciles sorting leads to 233645 components (see Lines 32-36 above) with a maximal order of 153. The fill rate of the adjacency table is reduced to 0.001%. Of the potential trillion (10^12) pairwise outrankings, we effectively keep only 10 millions (10^7). This high number of components results from the high number (21) of involved performance criteria, leading in fact to a very refined epistemic discrimination of majority outranking margins. 
+The optimised deciles sorting leads to 233645 components (see Lines 32-36 above) with a maximal order of 153. The fill rate of the adjacency table is reduced to 0.001%. Of the potential trillion (10^12) pairwise outrankings, we effectively keep only 10 millions (10^7). This high number of components results from the high number of involved performance criteria (21), leading in fact to a very refined epistemic discrimination of majority outranking margins. 
 
-A non-optimized deciles sorting would instead give at most 110 components with inevitably very big intractable local digraph orders. Proceeding with a more detailed quantiles sorting, for reducing the induced decomposing run times, leads however quickly to intractable quantiles sorting times. A good compromise is given when the quantiles sorting and decomposing steps show somehow equivalent run times; as is the case in our example session: 99.6 versus 77.3 seconds (see Lines 40 and 42 above).     
+A non-optimised deciles sorting would instead give at most 110 components with inevitably very big intractable local digraph orders. Proceeding with a more detailed quantiles sorting, for reducing the induced decomposing run times, leads however quickly to intractable quantiles sorting times. A good compromise is given when the quantiles sorting and decomposing steps show somehow equivalent run times; as is the case in our example session: 99.6 versus 77.3 seconds (see Lines 40 and 42 above).     
 
 Let us inspect the 21 marginal performances of the five best-ranked alternatives listed below. 
 
@@ -4880,7 +4879,18 @@ Let us inspect the 21 marginal performances of the five best-ranked alternatives
      'Ec20'  |    42   |   582.52   831.93   820.92   881.68   864.81  
      'So21'  |    48   |   880.87     NA     628.96   746.67   863.82  
 
-The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best-ranked alternatives are, in decreasing order: #773908, #668946, #567307, #578559 and #426463. Their random performance evaluations were obviously drawn on all criteria with a *good* performance profile, ie a Beta(alpha=5.8661,beta=2.62203) law (see the tutorial on generating random performance tableaux). 
+The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best-ranked alternatives are, in decreasing order: #773908, #668946, #567307, #578559 and #426463.
+
+Their random performance evaluations were obviously drawn on all criteria with a *good* (+) performance profile, ie a Beta(alpha=5.8661,beta=2.62203) law (see the tutorial on generating random performance tableaux). 
+
+    >>> for x in qr.boostedRanking[:5]:
+    ...     print(pt.actions[x]['name'],\
+    ...           pt.actions[x]['profile'])  
+    #773908 {'Eco': '+', 'Soc': '+', 'Env': '+'}
+    #668946 {'Eco': '+', 'Soc': '+', 'Env': '+'}
+    #567307 {'Eco': '+', 'Soc': '+', 'Env': '+'}
+    #578559 {'Eco': '+', 'Soc': '+', 'Env': '+'}
+    #426463 {'Eco': '+', 'Soc': '+', 'Env': '+'}
 
 We consider now a partial performance tableau *tb10*, consisting only, for instance, of the **ten best-ranked alternatives**, with which we may compute a corresponding integer outranking digraph valued in the range (-1008, +1008).  
 
@@ -4910,7 +4920,7 @@ r(x >= y) | 155873 279728 298060 426463 567307 578559 668946 773908 815551 92856
 >>> g.computeTransitivityDegree()
 Decimal('0.78')
 
-Three alternatives -#155873, #426463 and #567307- qualify as Condorcet winners, i.e. they each positively outrank all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking relations shown in Fig. 62.
+Three alternatives -#155873, #426463 and #567307- qualify as Condorcet winners, i.e. they each **positively outrank** all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking digraph (ie the codual ~(-*g*) of *g*) shown in Fig. 62.
   
 >>> (~(-g)).exportGraphViz()
 *---- exporting a dot file dor GraphViz tools ---------*
@@ -4921,7 +4931,7 @@ dot -Tpng converse-dual_rel_best10.dot -o converse-dual_rel_best10.png
    :width: 400 px
    :align: center
 
-   Validated strict outranking situations between the ten best-ranked alternatives
+   Validated *strict* outranking situations between the ten best-ranked alternatives
 
 Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows* as well as the *Kemeny* ranking rule will all rank alternative #426463 first and alternative #578559 last. Otherwise the three ranking rules produce in this case more or less different rankings.
 
@@ -4936,7 +4946,7 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
 
 .. note::
 
-   It is therefore *important* to always keep in mind that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking**; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimized quantile ordering strategy, all this will indeed produce, sometimes even substantially, different global ranking results. 
+   It is therefore *important* to always keep in mind that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking**; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimised quantile ordering strategy, all this will indeed produce, sometimes even substantially, different global ranking results. 
 
 Back to :ref:`Tutorial-label`
 	   
@@ -5021,3 +5031,7 @@ Footnotes
 .. [5] *Kruskal* 's algorithm is a *minimum-spanning-tree* algorithm which finds an edge of the least possible weight that connects any two trees in the forest.  See https://en.wikipedia.org/wiki/Kruskal%27s_algorithm .
 
 .. [6] See https://cython.org/
+
+.. [7] See https://hpc.uni.lu/systems/iris/
+
+.. [8] See https://hpc.uni.lu/systems/gaia/

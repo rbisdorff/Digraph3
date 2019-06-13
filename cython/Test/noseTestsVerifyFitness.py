@@ -22,7 +22,7 @@ def testSparseModelFitness():
     for s in range(Nsim):
         print(s)
         tp = cRandomCBPerformanceTableau(numberOfActions=nbrOfActions,seed=s)
-        bg1 = SparseIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
+        bg1 = SparseIntegerOutrankingDigraph(tp,quantiles=4,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                 CopyPerfTab=True,
                                minimalComponentSize=minimalComponentSize,
@@ -34,15 +34,39 @@ def testSparseModelFitness():
                                     Threading=MP,Comments=False,Debug=False)
         #bg2.showDecomposition()
         #bg2._computeQuantileOrdering(Debug=False)
-        #print(bg2.components['c1'])
-        corr = bg1.computeOrdinalCorrelation(bg2,Debug=False)
+        #print(bg2.components['c1'])        
+        corr = bg2.computeOrdinalCorrelation(bg1)
         statistics['correlation'] += corr['correlation']
         statistics['determination'] += corr['determination']
     statistics['correlation'] /= Nsim
     statistics['determination'] /= Nsim
     print(statistics)
-    
-        
-        
 
-   
+def testCQRModelFitness():
+    print('==>> Testing cQuantilesRanking fitness')
+    MP = True
+    Nsim = 5
+    nbrOfActions = 100
+    minimalComponentSize=1
+    statistics = {'correlation': 0.0, 'determination': 0.0}
+    for s in range(Nsim):
+        print(s)
+        tp = cRandomCBPerformanceTableau(numberOfActions=nbrOfActions,seed=s)
+        bg1 = cQuantilesRankingDigraph(tp,quantiles=4,quantilesOrderingStrategy='optimal',
+                                LowerClosed=False,
+                                CopyPerfTab=True,
+                               minimalComponentSize=minimalComponentSize,
+                                    Threading=MP,Debug=False)
+        
+        #bg1.showDecomposition()
+        #bg1Ordering = list(reversed(bg1.boostedRanking))
+        bg2 = IntegerBipolarOutrankingDigraph(tp, Threading=MP,Comments=False,Debug=False)
+        #bg2.showDecomposition()
+        #bg2._computeQuantileOrdering(Debug=False)
+        #print(bg2.components['c1'])
+        corr = bg2.computeOrdinalCorrelation(bg1)
+        statistics['correlation'] += corr['correlation']
+        statistics['determination'] += corr['determination']
+    statistics['correlation'] /= Nsim
+    statistics['determination'] /= Nsim
+    print(statistics)

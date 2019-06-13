@@ -1946,7 +1946,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
     
     def __init__(self,argPerfTab,\
                  int quantiles=4,\
-                 quantilesOrderingStrategy="average",\
+                 quantilesOrderingStrategy="optimal",\
                  bint LowerClosed=False,\
                  componentRankingRule="Copeland",\
                  int minimalComponentSize=1,\
@@ -2206,7 +2206,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         """
         cdef int x,i,nc,currentContLength,CompSize
         cdef int lc,hc,score1,score2,score3,score4
-        
+
+        #print('===>')
         from operator import itemgetter
 
         if strategy == None:
@@ -2214,50 +2215,73 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         #actions = [key for key in self.actions if key not in self.profiles]
         actionsCategories = {}
         for x in self.actions:
-            a,lowCateg,highCateg,credibility,lowLimit,notHighLimit =\
+            #print(x)
+            a,lowCateg,highCateg,credibility,rLowLimit,rNotHighLimit =\
                      self.computeActionCategories(x,Comments=Comments,Debug=False,\
                                                Threading=Threading,\
                                                nbrOfCPUs = nbrOfCPUs)
+            #print(a,lowCateg,highCateg,credibility,lowLimit,notHighLimit)
             lowQtileValue = self.categories[lowCateg]['lowLimitValue']
             highQtileValue = self.categories[highCateg]['highLimitValue']
             lowQtileLimit = self.categories[lowCateg]['lowLimit']
             highQtileLimit = self.categories[highCateg]['highLimit']
-            if strategy == "average":
+            if strategy == "optimal":  # default
                 lc = int(lowCateg)
                 hc = int(highCateg)
                 score1 = lc + hc
                 score2 = hc
-                score3 = lowLimit - notHighLimit
-                score4 = lowLimit
+                score3 = rLowLimit - rNotHighLimit
+                score4 = rLowLimit                
+            elif strategy == "average":
+                lc = int(lowCateg)
+                hc = int(highCateg)
+                score1 = lc + hc
+                score2 = hc
+                score3 = rLowLimit - rNotHighLimit
+                score4 = rLowLimit
             elif strategy == "optimistic":
                 score1 = int(highCateg)
-                score2 = -notHighLimit
+                score2 = -rNotHighLimit
                 score3 = int(lowCateg)
-                score4 = lowLimit
+                score4 = rLowLimit
             else:    # strategy == "pessimistic":
                 score1 = int(lowCateg)
-                score2 = lowLimit
+                score2 = rLowLimit
                 score3 = int(highCateg)
-                score4 = -notHighLimit
-            #print(score,highQtileLimit,lowQtileLimit,lowCateg,highCateg)
+                score4 = -rNotHighLimit
+            #print(x,a,score1,highQtileValue,lowQtileValue,lowCateg,highCateg,\
+            #     score2, score3, score4,highQtileLimit,lowQtileLimit)
             try:
-                actionsCategories[(score1,highQtileValue,\
-                                   lowQtileValue,lowCateg,highCateg,\
-                                   score2,score3,score4,\
+                actionsCategories[(score1,score2,score3,score4,\
+                                   highQtileValue,lowQtileValue,\
+                                   lowCateg,highCateg,\
                                    highQtileLimit,lowQtileLimit)].append(a)
             except:
-                actionsCategories[(score1,highQtileValue,\
-                                   lowQtileValue,lowCateg,highCateg,\
-                                   score2,score3,score4,\
+                actionsCategories[(score1,score2,score3,score4,\
+                                   highQtileValue,lowQtileValue,\
+                                   lowCateg,highCateg,\
                                    highQtileLimit,lowQtileLimit)] = [a]
+            # try:
+            #     actionsCategories[(score1,\
+            #                        highQtileValue,lowQtileValue,\
+            #                        lowCateg,highCateg,\
+            #                        score2,score3,score4,\
+            #                        highQtileLimit,lowQtileLimit)].append(a)
+            # except:
+            #     actionsCategories[(score1,\
+            #                        highQtileValue,lowQtileValue,\
+            #                        lowCateg,highCateg,\
+            #                        score2,score3,score4,\
+            #                        highQtileLimit,lowQtileLimit)] = [a]
         #if Debug:
         #    print(actionsCategories)
 
         actionsCategKeys = list(actionsCategories.keys())
-        actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5,6,7), reverse=True)
+        actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,1,2,3), reverse=True)
+#        actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5,6,7), reverse=True)
 
-        #if Debug:
-        #    print(actionsCategIntervals)
+        if Debug:
+            print(actionsCategIntervals)
         compSize = self.minimalComponentSize
         
         if compSize == 1:
