@@ -4418,7 +4418,7 @@ HPC ranking with big outranking digraphs
 C-compiled Python modules
 -------------------------
 
-The Digraph3 collection provides cythonized [6]_, i.e. C-compiled and optimised versions of the main python modules for tackling multiple criteria decision problems facing large sets of decision alternatives ( > 1000 ). Such problems appear usually with a combinatorial organisation of the potential decision alternatives, as is frequently the case in bioinformatics for instance. If HPC facilities with nodes supporing numerous cores (> 12) and big RAM (> 32GB) are available, ranking up to several millions of alternatives (see [BIS-2016]_) become effectively tractable.
+The Digraph3 collection provides cythonized [6]_, i.e. C-compiled and optimised versions of the main python modules for tackling multiple criteria decision problems facing large sets of decision alternatives ( > 1000 ). Such problems appear usually with a combinatorial organisation of the potential decision alternatives, as is frequently the case in bioinformatics for instance. If HPC facilities with nodes supporting numerous cores (> 12) and big RAM (> 32GB) are available, ranking up to several millions of alternatives (see [BIS-2016]_) becomes effectively tractable.
 
 Four cythonized Digraph3 modules, prefixed with the letter *c* and taking a *pyx* extension, are provided with the corresponding setup tools in the *Digraph3/cython* directory, namely
 
