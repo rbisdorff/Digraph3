@@ -1022,7 +1022,7 @@ class KemenyOrder(LinearOrder):
         of all permutations of actions.
         """
         if other.order > orderLimit:
-            print('Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.')
+            print('Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.' % (other.order) )
             return
                   
         from digraphs import all_perms
