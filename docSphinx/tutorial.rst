@@ -4803,7 +4803,7 @@ by running the cythonized python modules in an Intel compiled virtual Python 3.6
 
    HPC-UL Ranking Performance Records (Spring 2018)
 
-Example python session on the HCP-UL Iris-126 -skylake node [7]_::
+Example python session on the HPC-UL Iris-126 -skylake node [7]_::
 
     (myPy365ICC) [rbisdorff@iris-126 Test]$ python
     Python 3.6.5 (default, May  9 2018, 09:54:28) 
@@ -4816,7 +4816,7 @@ Example python session on the HCP-UL Iris-126 -skylake node [7]_::
     ...          weightDistribution='equiobjectives',
     ...          commonScale = (0.0,1000.0),
     ...          commonThresholds = [(2.5,0.0),(5.0,0.0),(75.0,0.0)],
-    ...          commonMode = [‘beta’,’variable’,None] 
+    ...          commonMode = ['beta','variable',None], 
     ...          missingDataProbability=0.05,
     ...          seed=16)
     >>> import cSparseIntegerOutrankingDigraphs as iBg
@@ -4849,7 +4849,7 @@ Example python session on the HCP-UL Iris-126 -skylake node [7]_::
     Preordering       : 5.17954
     Decomposing       : 72.29356
 
-On this 2x14c Intel Xeon Gold 6132 @ 2.6 GHz equipped HPC node with 132GB RAM [7]_, deciles sorting and locally ranking a **million** decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes us **less than 3 minutes** (see Lines 37-42 above). About 1.5 minute does take the deciles sorting and, a bit more than one minute, the local ranking of the individual components. 
+On this 2x14c Intel Xeon Gold 6132 @ 2.6 GHz equipped HPC node with 132GB RAM [7]_, deciles sorting and locally ranking a **million** decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes us about **3 minutes** (see Lines 37-42 above); with 1.5 minutes for the deciles sorting and, a bit more than one minute, for the local ranking of the individual components. 
 
 The optimised deciles sorting leads to 233645 components (see Lines 32-36 above) with a maximal order of 153. The fill rate of the adjacency table is reduced to 0.001%. Of the potential trillion (10^12) pairwise outrankings, we effectively keep only 10 millions (10^7). This high number of components results from the high number of involved performance criteria (21), leading in fact to a very refined epistemic discrimination of majority outranking margins. 
 
@@ -4857,9 +4857,11 @@ A non-optimised deciles sorting would instead give at most 110 components with i
 
 Let us inspect the 21 marginal performances of the five best-ranked alternatives listed below. 
 
-    >>> pt.showPerformanceTableau(actionsSubset=qr.boostedRanking[:5])
+    >>> pt.showPerformanceTableau(\
+    ...               actionsSubset=qr.boostedRanking[:5],\
+    ...               Transposed=True)
     *----  performance tableau -----*
-    criteria | weights |  #773908  #668946  #567307  #578559  #426463
+    criteria | weights |  #773909  #668947  #567308  #578560  #426464
     ---------|-------------------------------------------------------
      'Ec01'  |    42   |   969.81   844.71   917.00     NA     808.35  
      'So02'  |    48   |     NA     891.52   836.43     NA     899.22  
@@ -4883,70 +4885,72 @@ Let us inspect the 21 marginal performances of the five best-ranked alternatives
      'Ec20'  |    42   |   582.52   831.93   820.92   881.68   864.81  
      'So21'  |    48   |   880.87     NA     628.96   746.67   863.82  
 
-The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best-ranked alternatives are, in decreasing order: #773908, #668946, #567307, #578559 and #426463.
+The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best-ranked alternatives are, in decreasing order: #773909, #668947, #567308, #578560 and #426464.
 
 Their random performance evaluations were obviously drawn on all criteria with a *good* (+) performance profile, ie a Beta(alpha=5.8661,beta=2.62203) law (see the tutorial on generating random performance tableaux). 
 
     >>> for x in qr.boostedRanking[:5]:
     ...     print(pt.actions[x]['name'],\
     ...           pt.actions[x]['profile'])  
-    #773908 {'Eco': '+', 'Soc': '+', 'Env': '+'}
-    #668946 {'Eco': '+', 'Soc': '+', 'Env': '+'}
-    #567307 {'Eco': '+', 'Soc': '+', 'Env': '+'}
-    #578559 {'Eco': '+', 'Soc': '+', 'Env': '+'}
-    #426463 {'Eco': '+', 'Soc': '+', 'Env': '+'}
+    #773909 {'Eco': '+', 'Soc': '+', 'Env': '+'}
+    #668947 {'Eco': '+', 'Soc': '+', 'Env': '+'}
+    #567308 {'Eco': '+', 'Soc': '+', 'Env': '+'}
+    #578560 {'Eco': '+', 'Soc': '+', 'Env': '+'}
+    #426464 {'Eco': '+', 'Soc': '+', 'Env': '+'}
 
 We consider now a partial performance tableau *tb10*, consisting only, for instance, of the **ten best-ranked alternatives**, with which we may compute a corresponding integer outranking digraph valued in the range (-1008, +1008).  
 
->>> tb10 = cPartialPerformanceTableau(pt,qr.boostedRanking[:10])
+>>> best10 = cPartialPerformanceTableau(pt,qr.boostedRanking[:10])
 >>> from cIntegerOutrankingDigraphs import *   
->>> g = IntegerBipolarOutrankingDigraph(tb10)
+>>> g = IntegerBipolarOutrankingDigraph(best10)
 >>> >>> g.valuationdomain
 {'min': -1008, 'med': 0, 'max': 1008, 'hasIntegerValuation': True}
 >>> g.showRelationTable(ReflexiveTerms=False)
 * ---- Relation Table -----
-r(x >= y) | #155873 #279728 #298060 #426463 #567307 #578559 #668946 #773908 #815551 #928563  
-----------|----------------------------------------------------------------------
- #155873  |    -     +308    +466    +274    +322    +174    +378     +72    +212    +418  
- #279728  |  +388     -      +140     +72    -110    +290    +230    +240     +62    +250  
- #298060  |   +54    +248     -       -42    +172     +32     +68     -48     +48    +374  
- #426463  |  +312    +534    +416      -     +284    +138    +258    +202    +382    +278  
- #567307  |  +266    +256    +174    +156     -      +180    +418     +70     +78    +306  
- #578559  |   -48    -110    +100     -12     +28     -       +78      -4    +154     -10  
- #668946  |   +56     +74    +218     -22     +42    +250      -      +78    +172     +64  
- #773908  |  +220    +116    +340     -50     +90    +270    +390      -      +60    +222  
- #815551  |  +172     -14    +194     +54    +272    +318    +126     +78      -      +22  
- #928563  |   +56    +318     +78     +36     -14    +246    +228     +22    +110      -  
+ r(x>y) | #773909 #668947 #567308 #578560 #426464 #298061 #155874 #815552 #279729 #928564
+--------|-----------------------------------------------------------------------------------
+#773909 |    -      +390     +90    +270     -50    +340    +220     +60    +116    +222
+#668947 |    +78     -       +42    +250     -22    +218     +56    +172     +74     +64
+#567308 |    +70    +418     -      +180    +156    +174    +266     +78    +256    +306
+#578560 |     -4     +78     +28     -       -12    +100     -48    +154    -110     -10
+#426464 |   +202    +258    +284    +138     -      +416    +312    +382    +534    +278
+#298061 |    -48     +68    +172     +32     -42      -      +54     +48    +248    +374
+#155874 |    +72    +378    +322    +174    +274    +466     -      +212    +308    +418
+#815552 |    +78    +126    +272    +318     +54    +194    +172     -       -14     +22
+#279729 |   +240    +230    -110    +290     +72    +140    +388     +62     -      +250
+#928564 |    +22    +228     -14    +246     +36     +78     +56    +110    +318     -
+r(x>y) image range := [-1008;+1008]
+
 >>> g.condorcetWinners()
-[155873, 426463, 567307]
+[155874, 426464, 567308]
 >>> g.computeChordlessCircuits()
 []
 >>> g.computeTransitivityDegree()
 Decimal('0.78')
 
-Three alternatives -#155873, #426463 and #567307- qualify as Condorcet winners, i.e. they each **positively outrank** all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking digraph (ie the codual ~(-*g*) of *g*) shown in Fig. 62.
+Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each **positively outrank** all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking digraph (ie the codual ~(-*g*) of *g*) shown in Fig. 62.
   
 >>> (~(-g)).exportGraphViz()
 *---- exporting a dot file dor GraphViz tools ---------*
 Exporting to converse-dual_rel_best10.dot
 dot -Tpng converse-dual_rel_best10.dot -o converse-dual_rel_best10.png
 
-.. figure:: converse-dual_rel_best5.png
+.. figure:: converse-dual_rel_best10.png
    :width: 400 px
    :align: center
 
    Validated *strict* outranking situations between the ten best-ranked alternatives
 
-Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows* as well as the *Kemeny* ranking rule will all rank alternative #426463 first and alternative #578559 last. Otherwise the three ranking rules produce in this case more or less different rankings.
+Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows* as well as the *Kemeny* ranking rule will all rank alternative #426464 first and alternative #578560 last. Otherwise the three ranking rules produce in this case more or less different rankings.
 
 >>> g.computeCopelandRanking()
-[426463, 567307, 155873, 279728, 773908, 928563, 668946, 815551, 298060, 578559]
+[426464, 567308, 155874, 279729, 773909, 928564, 668947, 815552, 298061, 578560]
 >>> g.computeNetFlowsRanking()
-[426463, 155873, 773908, 567307, 815551, 279728, 928563, 298060, 668946, 578559]
+[426464, 155874, 773909, 567308, 815552, 279729, 928564, 298061, 668947, 578560]
 >>> from linearOrders import *
->>> ke = KemenyOrder(g)
+>>> ke = KemenyOrder(g,orderLimit=10)
 >>> ke.kemenyRanking
-[426463, 773908, 155873, 815551, 567307, 298060, 928563, 279728, 668946, 578559]
+[426464, 773909, 155874, 815552, 567308, 298061, 928564, 279729, 668947, 578560]
 
 .. note::
 
