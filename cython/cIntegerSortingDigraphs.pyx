@@ -909,9 +909,9 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 except:
                     actionsCategories[(int(lowCateg),int(highCateg))] = [a]
             elif strategy == "average":
-                lc = float(lowCateg)
-                hc = float(highCateg)
-                ac = (lc+hc)/2.0
+                lc = int(lowCateg)
+                hc = int(highCateg)
+                ac = (lc+hc)
                 try:
                     actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
                 except:

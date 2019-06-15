@@ -233,7 +233,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                  bint hasNoVeto=False,\
                  bint hasBipolarVeto=True,\
                  bint CopyPerfTab=True,\
-                 bint BigData=True,\
+                 bint BigData=False,\
                  bint Threading=False,\
                  tempDir=None,\
                  bint WithConcordanceRelation=False,\
@@ -295,7 +295,6 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
             else:
                 criteria[g] = perfTab.criteria[g]
         self.criteria = criteria
-
         #self.convertWeightsToIntegers()
            
         # valuation domain
@@ -422,24 +421,25 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         
     def computeCriterionRelation(self,c, a,b,hasSymmetricThresholds=True):
         """
-        Renders the outranking characteristic for actions *x* and *y*
-        on criterion *c*.
-
         *Parameters*:
-             * c, criterion
-             * a, decision action
-             * b, decision action
-             * hasSymmetricThresholds = True
+             * c, 
+             * a,
+             * b,
+             * hasSymmetricThresholds=True.
+
+        Compute the outranking characteristic for actions x and y
+        on criterion c.
 
         """
+        critc = self.criteria[c]
         if a == b:
             return 1
         else:
 
             if self.evaluation[c][a] != Decimal('-999') and self.evaluation[c][b] != Decimal('-999'):		
                 try:
-                    indx = self.criteria[c]['thresholds']['ind'][0]
-                    indy = self.criteria[c]['thresholds']['ind'][1]
+                    indx = critc['thresholds']['ind'][0]
+                    indy = critc['thresholds']['ind'][1]
                     if hasSymmetricThresholds:
                         ind = indx +indy * cMAX(absFloat(self.evaluation[c][a]), absFloat(self.evaluation[c][b]))
                     else:
@@ -447,8 +447,8 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                 except:
                     ind = -1.0
                 try:
-                    wpx = self.criteria[c]['thresholds']['weakPreference'][0]
-                    wpy = self.criteria[c]['thresholds']['weakPreference'][1]
+                    wpx = critc['thresholds']['weakPreference'][0]
+                    wpy = critc['thresholds']['weakPreference'][1]
                     if hasSymmetricThresholds:
                         wp = wpx + wpy * cMAX(absFloat(self.evaluation[c][a]), absFlost(self.evaluation[c][b]))
                     else:
@@ -456,14 +456,15 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                 except:
                     wp = -1.0
                 try:
-                    px = self.criteria[c]['thresholds']['pref'][0]
-                    py = self.criteria[c]['thresholds']['pref'][1]
+                    px = critc['thresholds']['pref'][0]
+                    py = critc['thresholds']['pref'][1]
                     if hasSymmetricThresholds:
                         p = px + py * cMAX(absFloat(self.evaluation[c][a]), absFloat(self.evaluation[c][b]))
                     else:
                         p = px + py * absFloat(self.evaluation[c][a]) 
                 except:
                     p = -1.0
+                
                 d = self.evaluation[c][a] - self.evaluation[c][b]
 
                 return self._localConcordance(d,ind,wp,p)
@@ -473,7 +474,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
 
     def computeSize(self):
         """
-        Renders the number of validated non reflexive arcs.
+        Renders the number of validated non reflexive arcs
         """
         Med = self.valuationdomain['med']
         #actions = [x for x in self.actions]
@@ -700,11 +701,11 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)
                     splitThread.start()
-                    #splitThread.join()	
+                    splitThread.join()	
 	
                     
-                while active_children() != []:
-                    pass
+##                while active_children() != []:
+##                    pass
 
                 if Comments:    
                     print('Exiting computing threads')
@@ -775,7 +776,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
 ##        totalweight = Decimal('0.0')
 ##        for c in dict.keys(criteria):
 ##            totalweight = totalweight + criteria[c]['weight']
-        totalWeight = sum(crit['weight'] for crit in criteria.values())
+        totalWeight = sum(abs(crit['weight']) for crit in criteria.values())
 
         relation = {}
         #vetos = []
@@ -828,7 +829,10 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                                     p = px + py * absFloat(evalca) 
                             except KeyError:
                                 p = -1
-                            d = evalca - evalcb
+                            if crit['weight'] >= 0:
+                                d = evalca - evalcb
+                            else:
+                                d = evalcb - evalca
                             lc0 = _localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
                             concordance = concordance + (lc0 * crit['weight'])
@@ -902,79 +906,11 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
 
         return relation
 
-    def showRelationTable(self,Sorted=False,\
-                          IntegerValues=True,\
-                          actionsSubset= None,\
-                          relation=None,\
-                          ndigits=2,\
-                          ReflexiveTerms=False):
-        """
-        prints the relation valuation in actions X actions table format.
-        """
-        cdef int k
-        if actionsSubset == None:
-            actionKeys = [k for k in self.actions]
-        else:
-            actionKeys = actionsSubset
-        if relation == None:
-            relation = self.relation
-        print('* ---- Relation Table -----\n', end=' ')
-        
-        print('r(x>y) | ', end=' ')
-        #actions = [x for x in actions]
-        actionsList = []
-        for x in actionKeys:
-#            if isinstance(x,frozenset):
-            try:
-                actionsList += [(self.actions[x]['shortName'],x)]
-            except:
-                actionsList += [(self.actions[x]['name'],x)]
-        if Sorted:
-            actionsList.sort()
-        #print actionsList
-        #actionsList.sort()
-
-        try:
-            hasIntegerValuation = self.valuationdomain['hasIntegerValuation']
-        except KeyError:
-            hasIntegerValuation = IntegerValues
-
-        for x in actionsList:
-            print(x[0]+"\t", end=' ')
-        print('\n------|-------------------------------------------')
-        for x in actionsList:
-            print(x[0]+" | ", end=' ')
-            for y in actionsList:
-                if x != y:
-                    if hasIntegerValuation:
-                        print('%+d\t' % (relation[x[1]][y[1]]), end=' ')
-                    else:
-                        formatString = '%%+2.%df\t' % ndigits
-                        print(formatString % (relation[x[1]][y[1]]), end=' ')
-                else:
-                    if ReflexiveTerms:
-                        if hasIntegerValuation:
-                            print('%+d\t' % (relation[x[1]][y[1]]), end=' ')
-                        else:
-                            formatString = '%%+2.%df\t' % ndigits
-                            print(formatString % (relation[x[1]][y[1]]), end=' ')
-                    else:  
-                        formatString = ' - \t'
-                        print(formatString, end=' ')
-            print('')
-        if hasIntegerValuation:
-            print('r(x>y) image range := [%+d;%+d]'% (self.valuationdomain['min'],
-                                                 self.valuationdomain['max']))
-        else:
-            formatString = 'Valuation domain: [%%+2.%df;%%+2.%df]\n' % (ndigits,ndigits)
-            print( formatString % (self.valuationdomain['min'],
-                                   self.valuationdomain['max']))
-
 
     def computeOrdinalCorrelation(self, other, bint Debug=False):
         """
         *Parameters*:
-            * other, integer Digraph instance
+            * other,
             * Debug=False.
         
         Renders the ordinal correlation K of an integer Digraph instance
@@ -993,12 +929,12 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
              from the ordered dictionary of the components.
 
              Renders a tuple with at position 0 the actual bipolar correlation index
-             and in position 1 the minimal determination level *D* of self and
+             and in position 1 the minimal determination level D of self and
              the other relation.
 
-             *D* = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)
+             D = sum_{x != y} min(abs(self.relation(x,y)),abs(other.relation(x,y)) / n(n-1)
 
-             where *n* is the number of actions considered.
+             where n is the number of actions considered.
 
              The correlation index with a completely indeterminate relation
              is by convention 0.0 at determination level 0.0 .
@@ -1051,7 +987,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         """
         *Parameters*:
             * order (ordered sequence from worst to best of action keys), 
-            * Debug = False | True.
+            * bint Debug=False.
 
         wrapper for the self.computeRankingCorrelation method
         The given argOrder is previously reversed.
@@ -1064,7 +1000,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         """
         *Parameters*:
             * ranking (ordered sequence from best to worst of action keys),
-            * Debug = False | True
+            * Debug=False.
 
         Renders the ordinal correlation K of an integer digraph instance
         when compared with a given linear ranking of its actions
@@ -1315,10 +1251,10 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                     splitThread = myThread(jb,tempDirName,\
                                     selfMultiple,otherMultiple,Debug)
                     splitThread.start()
-                    #splitThread.join()
+                    splitThread.join()
                     
-                while active_children() != []:
-                    pass
+##                while active_children() != []:
+##                    pass
                 
                 # post threading operations
                 if Comments:    
@@ -1423,7 +1359,10 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                     p = px + py * abs(evalca)
             except:
                 p = -1.0
-            d = evalca - evalcb
+            if crit['weight'] > 0:
+                d = evalca - evalcb
+            else:
+                d = evalcb - evalca
             return self._localConcordance(d,ind,wp,p)
         else:
             return 0

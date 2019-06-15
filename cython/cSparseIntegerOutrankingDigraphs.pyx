@@ -1207,7 +1207,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
             self.showShort(fileName=save2File,WithFileSize=False)
             
 
-    # ----- class methods ------------
+    # ----- SparseIntegerOutrankingDigraph class methods ------------
 
     def _computeQuantileOrdering(self,strategy=None,
                                  bint Optimal=False,
@@ -1247,9 +1247,9 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                 lc = int(lowCateg)
                 hc = int(highCateg)
                 score1 = (lc+hc)
-                score2 = hc
-                score3 = lowLimit - notHighLimit
-                score4 = -notHighLimit
+                score2 = lowLimit - notHighLimit
+                score3 = (lc+hc)
+                score4 = lowLimit - notHighLimit
             elif strategy == "optimistic":
                 score1 = int(highCateg)
                 score2 = -notHighLimit
@@ -2185,7 +2185,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             self.showShort(fileName=save2File,WithFileSize=False)
             
 
-    # ----- class methods ------------
+    # ----- cQuantilesRankingDigraph class methods ------------
     
 
     def _computeQuantileOrdering(self,strategy=None,
@@ -2231,14 +2231,14 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 score1 = lc + hc
                 score2 = hc
                 score3 = rLowLimit - rNotHighLimit
-                score4 = rLowLimit                
+                score4 = -rNotHighLimit              
             elif strategy == "average":
                 lc = int(lowCateg)
                 hc = int(highCateg)
                 score1 = lc + hc
-                score2 = hc
-                score3 = rLowLimit - rNotHighLimit
-                score4 = rLowLimit
+                score2 = rLowLimit - rNotHighLimit
+                score3 = lc + hc
+                score4 = rLowLimit - rNotHighLimit
             elif strategy == "optimistic":
                 score1 = int(highCateg)
                 score2 = -rNotHighLimit

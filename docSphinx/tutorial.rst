@@ -4898,7 +4898,7 @@ Their random performance evaluations were obviously drawn on all criteria with a
     #578560 {'Eco': '+', 'Soc': '+', 'Env': '+'}
     #426464 {'Eco': '+', 'Soc': '+', 'Env': '+'}
 
-We consider now a partial performance tableau *tb10*, consisting only, for instance, of the **ten best-ranked alternatives**, with which we may compute a corresponding integer outranking digraph valued in the range (-1008, +1008).  
+We consider now a partial performance tableau *best10*, consisting only, for instance, of the **ten best-ranked alternatives**, with which we may compute a corresponding integer outranking digraph valued in the range (-1008, +1008).  
 
 >>> best10 = cPartialPerformanceTableau(pt,qr.boostedRanking[:10])
 >>> from cIntegerOutrankingDigraphs import *   
