@@ -4611,16 +4611,16 @@ We obtain in this example here a decomposition into 6 linearly ordered component
 
     >>> sg.showDecomposition()
     *--- quantiles decomposition in decreasing order---*
-    c1. ]0.75-1.00] : [2, 21, 23, 33, 40, 43, 49, 52, 55, 61, 92]
-    c2. ]0.50-1.00] : [6, 28, 42, 57, 62, 80, 95]
-    c3. ]0.50-0.75] : [0, 1, 4, 7, 9, 10, 19, 20, 24, 27, 29, 32,
-                       34, 35, 44, 47, 56, 58, 60, 64, 65, 67, 69,
-                       70, 72, 75, 81, 84, 88, 89, 90, 91, 93, 94, 96]
-    c4. ]0.25-0.75] : [16, 18, 25, 26, 39, 45, 54, 63, 68, 86, 97, 99]
-    c5. ]0.25-0.50] : [3, 5, 8, 11, 12, 13, 14, 15, 17, 22, 30, 31,
-                       36, 37, 38, 41, 46, 48, 50, 51, 53, 59, 66,
-                       71, 73, 74, 76, 77, 79, 85, 87, 98]
-    c6. ]<-0.25] : [78, 82, 83]
+    c1. ]0.75-1.00] : [3, 22, 24, 34, 41, 44, 50, 53, 56, 62, 93]
+    c2. ]0.50-1.00] : [7, 29, 43, 58, 63, 81, 96]
+    c3. ]0.50-0.75] : [1, 2, 5, 8, 10, 11, 20, 21, 25, 28, 30, 33,
+		       35, 36, 45, 48, 57, 59, 61, 65, 66, 68, 70,
+		       71, 73, 76, 82, 85, 89, 90, 91, 92, 94, 95, 97]
+    c4. ]0.25-0.75] : [17, 19, 26, 27, 40, 46, 55, 64, 69, 87, 98, 100]
+    c5. ]0.25-0.50] : [4, 6, 9, 12, 13, 14, 15, 16, 18, 23, 31, 32,
+		       37, 38, 39, 42, 47, 49, 51, 52, 54, 60, 67, 72,
+		       74, 75, 77, 78, 80, 86, 88, 99]
+    c6. ]<-0.25] : [79, 83, 84]
 
 A restricted outranking relation is stored for each component with more than one alternative. The resulting global relation map of the first ranked 75 alternatives looks as follows.
 
@@ -4686,14 +4686,13 @@ Ranking big sets of decision alternatives
 We may now rank the complete set of 100 decision alternatives by locally ranking with the *Copeland* or the *NetFlows* rule, for instance, all these individual components.
 
     >>> sg.boostedRanking
-    [21, 52, 2, 33, 55, 61, 23, 43, 49, 92, 40, 62, 28, 57, 95, 6,
-     42, 80, 90, 34, 24, 75, 65, 64, 7, 9, 0, 10, 60, 29, 47, 44,
-     67, 4, 88, 56, 58, 84, 81, 72, 32, 93, 69, 96, 19, 91, 70, 89,
-     94, 20, 27, 1, 35, 86, 39, 97, 45, 54, 99, 63, 16, 25, 26, 18,
-     68, 5, 37, 3, 36, 59, 30, 76, 77, 46, 98, 17, 11, 79, 53, 87,
-     38, 8, 71, 85, 41, 12, 22, 66, 51, 14, 31, 48, 50, 73, 15, 13,
-     74, 78, 82, 83]
-
+    [22, 53, 3, 34, 56, 62, 24, 44, 50, 93, 41, 63, 29, 58,
+     96, 7, 43, 81, 91, 35, 25, 76, 66, 65, 8, 10, 1, 11, 61,
+     30, 48, 45, 68, 5, 89, 57, 59, 85, 82, 73, 33, 94, 70,
+     97, 20, 92, 71, 90, 95, 21, 28, 2, 36, 87, 40, 98, 46, 55,
+     100, 64, 17, 26, 27, 19, 69, 6, 38, 4, 37, 60, 31, 77, 78,
+     47, 99, 18, 12, 80, 54, 88, 39, 9, 72, 86, 42, 13, 23, 67,
+     52, 15, 32, 49, 51, 74, 16, 14, 75, 79, 83, 84]
 
 When actually computing linear rankings of a set of alternatives, the local outranking relations are of no practical usage, and we may furthermore reduce the memory occupation of the resulting digraph by
 
@@ -4739,30 +4738,30 @@ With this *optimised* quantile ordering strategy, we obtain now 47 performance e
     ('c01', {'rank': 1,
 	     'lowQtileLimit': ']0.75',
 	     'highQtileLimit': '1.00]',
-	     'componentRanking': [52]}),
+	     'componentRanking': [53]}),
     ('c02', {'rank': 2,
 	     'lowQtileLimit': ']0.75',
 	     'highQtileLimit': '1.00]',
-	     'componentRanking': [2, 21, 61, 49]}),
+	     'componentRanking': [3, 23, 63, 50]}),
     ('c03', {'rank': 3,
 	     'lowQtileLimit': ']0.75',
 	     'highQtileLimit': '1.00]',
-	     'componentRanking': [33, 43, 55, 23, 92, 40]}), 
+	     'componentRanking': [34, 44, 56, 24, 93, 41]}), 
     ...
     ...
     ...
     ('c45', {'rank': 45,
 	     'lowQtileLimit': ']0.25',
 	     'highQtileLimit': '0.50]',
-	     'componentRanking': [48]}),
+	     'componentRanking': [49]}),
     ('c46', {'rank': 46,
 	     'lowQtileLimit': ']0.25',
 	     'highQtileLimit': '0.50]',
-	     'componentRanking': [51, 15, 85]}),
+	     'componentRanking': [52, 16, 86]}),
     ('c47', {'rank': 47,
 	     'lowQtileLimit': ']<',
 	     'highQtileLimit': '0.25]',
-	     'componentRanking': [78, 82, 83]})])
+	     'componentRanking': [79, 83, 84]})])
     >>> print('%.0fkB' % (total_size(qr)/1024) )
     208kB
 
