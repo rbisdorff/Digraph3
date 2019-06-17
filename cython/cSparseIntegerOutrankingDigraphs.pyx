@@ -28,6 +28,7 @@ class SparseIntegerDigraph(object):
     Abstract root class for linearly decomposed big digraphs (order > 1000)
     using multiprocessing ressources.
     """
+
     def __repr__(self):
         """
         Default presentation method for bigDigraphs instances.
@@ -46,7 +47,7 @@ class SparseIntegerDigraph(object):
         reprString += 'Average order     : %.1f\n' % (self.order/self.nbrComponents)
         reprString += 'fill rate         : %.3f%%\n' % (self.fillRate*100.0)    
         reprString += '----  Constructor run times (in sec.) ----\n'
-        reprString += 'Nbr of threads    : %d\n' % self.nbrOfCPUs
+        reprString += '# Threads         : %d\n' % self.nbrOfCPUs
         reprString += 'Total time        : %.5f\n' % self.runTimes['totalTime']
         reprString += 'QuantilesSorting  : %.5f\n' % self.runTimes['sorting']
         reprString += 'Preordering       : %.5f\n' % self.runTimes['preordering']
@@ -686,7 +687,7 @@ class SparseIntegerDigraph(object):
                 selfRelation = self.relation(y,x)
                 otherRelation = -sMax
                 corr = cMIN( cMAX(-selfRelation,otherRelation),\
-                            cMmax(selfRelation,-otherRelation) )
+                            cMAX(selfRelation,-otherRelation) )
                 corrSum += corr
                 determ = cMIN( ABS(selfRelation),ABS(otherRelation) )
                 determSum += determ
