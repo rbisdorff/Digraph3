@@ -726,7 +726,18 @@ class SparseIntegerDigraph(object):
             actions.sort()
             print('%s: %s' % (compKey,actions))
 
-    def estimateRankingCorrelation(self,sampleSize=100,seed=1,Debug=False):
+    def estimateRankingCorrelation(self,sampleSize=100,seed=None,Debug=False):
+        """
+        The correlation between *self* and *self.boostedRanking* is estimated by sampling the given performance tableau.
+  
+        *Parameters*:
+             - sampleSize = 100 (default)
+             - seed = None
+
+        .. note:: 
+             The *cSparseOutrankingDigraphs* instance must contain a copy of its initially given performance tableau !
+
+        """
         import random
         random.seed(seed)
         actionKeys = [x for x in self.actions]

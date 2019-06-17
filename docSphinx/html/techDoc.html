@@ -10180,7 +10180,20 @@ is by convention 0.0 at determination level 0.0 .</p>
 <dl class="attribute">
 <dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.estimateRankingCorrelation">
 <code class="descname">estimateRankingCorrelation</code><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.estimateRankingCorrelation" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The correlation between <em>self</em> and <em>self.boostedRanking</em> is estimated by sampling the given performance tableau.</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>sampleSize = 100 (default)</li>
+<li>seed = None</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <em>cSparseOutrankingDigraphs</em> instance must contain a copy of its initially given performance tableau !</p>
+</div>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph.ordering2Preorder">
