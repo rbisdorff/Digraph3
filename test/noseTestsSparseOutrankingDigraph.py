@@ -53,10 +53,9 @@ def testMinimalComponentSize():
     print(total_size(tp.evaluation))
     bg1 = PreRankedOutrankingDigraph(tp,quantiles=5,
                                      quantilesOrderingStrategy='average',
-                                    OptimalQuantileOrdering=True,
-                                LowerClosed=False,
-                               minimalComponentSize=5,
-                                    Threading=MP,Debug=False)
+                                     LowerClosed=False,
+                                     minimalComponentSize=5,
+                                     Threading=MP,Debug=False)
     print(bg1.computeDecompositionSummaryStatistics())
     bg1.showDecomposition()
     print(bg1)

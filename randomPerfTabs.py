@@ -83,7 +83,7 @@ class RandomPerformanceTableau(PerformanceTableau):
 
     """
     def __init__(self,numberOfActions = 13,\
-                 actionNamePrefix = '#',\
+                 actionNamePrefix = 'a',\
                  numberOfCriteria = 7,\
                  weightDistribution = 'equisignificant',\
                  weightScale=None,\
@@ -1953,11 +1953,11 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         nd = len(str(numberOfActions))
         actions = OrderedDict()
         for i in range(1, numberOfActions+1):
-            actionKey = ('#%%0%dd' % (nd)) % (i)
+            actionKey = ('%%0%dd' % (nd)) % (i)
             if BigData:
                 actions[i] = {'name': actionKey,'generators': {}}
             else:      
-                actions[actionKey] = {'shortName':actionKey,
+                actions[actionKey] = {'shortName': actionKey,
                         'name': 'action %s' % actionKey,
                         'comment': '3 Objectives',
                         'generators': {}}
@@ -2937,12 +2937,12 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         for i in range(1,numberOfActions+1):
             actionType = random.choice(actionsTypesList)
             if BigData:
-                actionName = ('#%%0%dd' % (nd)) % (i)
+                actionName = ('%%0%dd' % (nd)) % (i)
                 actions[i] = {'shortName':actionName+actionType[0],
                               'name':actionName+actionType[0],
                               'type': actionType}
             else:   
-                actionKey = ('#%%0%dd' % (nd)) % (i)
+                actionKey = ('a%%0%dd' % (nd)) % (i)
                 actions[actionKey] = {'shortName':actionKey+actionType[0],
                         'name': 'action %s' % (actionKey),
                         'comment': 'Cost-Benefit',
