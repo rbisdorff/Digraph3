@@ -169,6 +169,25 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
             return { 'correlation': 0.0,\
                      'determination': 0.0 }
 
+    def estimateRankingCorrelation(self,sampleSize=100,seed=1,Debug=False):
+        import random
+        random.seed(seed)
+        actionKeys = [x for x in self.actions]
+        sample = random.sample(actionKeys,sampleSize)
+        if Debug:
+            print(sample)
+        preRankedSample = []
+        for x in self.boostedRanking:
+            if x in sample:
+                preRankedSample.append(x)
+        if Debug:
+            print(preRankedSample)
+        ptp = PartialPerformanceTableau(self,sample)
+        from outrankingDigraphs import BipolarOutrankingDigraph
+        pg = BipolarOutrankingDigraph(ptp,Normalized=True)
+        corr = pg.computeRankingCorrelation(preRankedSample)
+        return corr
+
     def sortingRelation(self,x,y,Debug=False):
         """
         Dynamic construction of the quantiles sorting characteristic function *r(x QS y)*.
@@ -976,6 +995,8 @@ def _decompose(i, nc,tempDirName,componentRankingRule):
     fo.write(dumps(splitComponent,-1))
     fo.close()
     return '%d/%d (%d)' % (i,nc,pg.order)
+
+
 
 class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
     """
@@ -2740,21 +2761,40 @@ if __name__ == "__main__":
 ##    print(pre.computeOrderCorrelation(pre.boostedOrder))
 ##    tenv.showHTMLPerformanceHeatmap()
     MP  = False
-    nbrActions=100
+    nbrActions=1000
 ##    t0 = time()
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=100)
 ##    tp = XMCDA2PerformanceTableau('the_cs_2016')
 
 ##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
 ##                                     seed=100)
-    bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
-                                 quantilesOrderingStrategy='average',
+    bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=4,
+                                 quantilesOrderingStrategy='optimal',
                                  componentRankingRule='NetFlows',
-                                 LowerClosed=False,
-                                 minimalComponentSize=20,
+                                 LowerClosed=True,
+                                 minimalComponentSize=1,
                                  Threading=MP,nbrOfCPUs=8,
                                  #tempDir='.',
                                  nbrOfThreads=8,
                                  Comments=True,Debug=False,
                                  save2File='testbgMP')
-    bg1.showDecomposition(direction='increasing')
+    bg1.showDecomposition(direction='decreasing')
+
+    seed= 1
+    sampleSize = 100
+##    import random
+##    random.seed(seed)
+##    actionKeys = [x for x in bg1.actions]
+##    sample = random.sample(actionKeys,sampleSize)
+##    print(sample)
+##    print(bg1.boostedRanking)
+##    preRankedSample = []
+##    for x in bg1.boostedRanking:
+##        if x in sample:
+##            preRankedSample.append(x)
+##    print(preRankedSample)
+##    ptp = PartialPerformanceTableau(tp,sample)
+##    from outrankingDigraphs import BipolarOutrankingDigraph
+##    pg = BipolarOutrankingDigraph(ptp,Normalized=True)
+##    print(pg.computeRankingCorrelation(preRankedSample))
+    print(bg1.estimateRankingCorrelation(sampleSize,seed))

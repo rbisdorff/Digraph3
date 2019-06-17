@@ -53,7 +53,7 @@ def testCQRModelFitness():
     for s in range(Nsim):
         print(s)
         tp = cRandomCBPerformanceTableau(numberOfActions=nbrOfActions,seed=s)
-        bg1 = cQuantilesRankingDigraph(tp,quantiles=4,quantilesOrderingStrategy='average',
+        bg1 = cQuantilesRankingDigraph(tp,quantiles=4,quantilesOrderingStrategy='optimal',
                                 LowerClosed=False,
                                 CopyPerfTab=True,
                                minimalComponentSize=minimalComponentSize,
@@ -66,6 +66,31 @@ def testCQRModelFitness():
         #bg2._computeQuantileOrdering(Debug=False)
         #print(bg2.components['c1'])
         corr = bg2.computeOrdinalCorrelation(bg1)
+        statistics['correlation'] += corr['correlation']
+        statistics['determination'] += corr['determination']
+    statistics['correlation'] /= Nsim
+    statistics['determination'] /= Nsim
+    print(statistics)
+
+def testEstimateCorrelation():
+    print('==>> Testing Correlation estimation fitness')
+    import random
+    MP = True
+    Nsim = 1
+    nbrOfActions = 5000
+    sampleSize = 200
+    minimalComponentSize = 1
+    statistics = {'correlation': 0.0, 'determination': 0.0}
+    for s in range(Nsim):
+        print(s)
+        tp = cRandomCBPerformanceTableau(numberOfActions=nbrOfActions,seed=s)
+        bg1 = cQuantilesRankingDigraph(tp,quantiles=4,quantilesOrderingStrategy='optimal',
+                                LowerClosed=False,
+                                CopyPerfTab=True,
+                               minimalComponentSize=minimalComponentSize,
+                                    Threading=MP,Debug=False)
+        
+        corr = bg1.estimateRankingCorrelation(sampleSize,s)
         statistics['correlation'] += corr['correlation']
         statistics['determination'] += corr['determination']
     statistics['correlation'] /= Nsim

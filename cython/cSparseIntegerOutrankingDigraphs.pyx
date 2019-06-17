@@ -726,6 +726,30 @@ class SparseIntegerDigraph(object):
             actions.sort()
             print('%s: %s' % (compKey,actions))
 
+    def estimateRankingCorrelation(self,sampleSize=100,seed=1,Debug=False):
+        import random
+        random.seed(seed)
+        actionKeys = [x for x in self.actions]
+        sample = random.sample(actionKeys,sampleSize)
+        if Debug:
+            print(sample)
+        preRankedSample = []
+        for x in self.boostedRanking:
+            if x in sample:
+                preRankedSample.append(x)
+        if Debug:
+            print(preRankedSample)
+        from cRandPerfTabs import cPartialPerformanceTableau
+        ppt = cPartialPerformanceTableau(self,actionsSubset=sample)
+        from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
+        try:
+            pg = IntegerBipolarOutrankingDigraph(ppt)
+        except:
+            print('The SparseIntegerOutrankingDigraph must contain its cPerformanceTableau instance (set Flag CopyPerftab = True)')
+            return None
+        corr = pg.computeRankingCorrelation(preRankedSample)
+        return corr
+
     def computeDecompositionSummaryStatistics(self):
         """
         Returns the summary of the distribution of the length of
@@ -1986,15 +2010,17 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         perfTab = argPerfTab
         self.name = perfTab.name + '_mp'
         # setting quantiles sorting parameters
-##        if CopyPerfTab:
-##            self.actions = deepcopy(perfTab.actions)
-##            self.criteria = deepcopy(perfTab.criteria)
-##            self.evaluation = deepcopy(perfTab.evaluation)
-##        else:
-        self.actions = perfTab.actions
-        #self.actionsOrig = [x for x in perfTab.actions]
-        criteria = perfTab.criteria
-        evaluation = perfTab.evaluation
+        if CopyPerfTab:
+            self.actions = deepcopy(perfTab.actions)
+            self.criteria = deepcopy(perfTab.criteria)
+            criteria = self.criteria
+            self.evaluation = deepcopy(perfTab.evaluation)
+            evaluation = self.evaluation
+        else:
+            self.actions = perfTab.actions
+            #self.actionsOrig = [x for x in perfTab.actions]
+            criteria = perfTab.criteria
+            evaluation = perfTab.evaluation
         na = len(self.actions)
         self.order = na
         dimension = len(criteria)

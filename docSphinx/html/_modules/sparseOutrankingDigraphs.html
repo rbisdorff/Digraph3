@@ -216,6 +216,25 @@
             <span class="k">return</span> <span class="p">{</span> <span class="s1">&#39;correlation&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>\
                      <span class="s1">&#39;determination&#39;</span><span class="p">:</span> <span class="mf">0.0</span> <span class="p">}</span></div>
 
+<div class="viewcode-block" id="SparseOutrankingDigraph.estimateRankingCorrelation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.estimateRankingCorrelation">[docs]</a>    <span class="k">def</span> <span class="nf">estimateRankingCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">actionKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">actionKeys</span><span class="p">,</span><span class="n">sampleSize</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+        <span class="n">preRankedSample</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">:</span>
+                <span class="n">preRankedSample</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">preRankedSample</span><span class="p">)</span>
+        <span class="n">ptp</span> <span class="o">=</span> <span class="n">PartialPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sample</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
+        <span class="n">pg</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">ptp</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">corr</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">preRankedSample</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">corr</span></div>
+
 <div class="viewcode-block" id="SparseOutrankingDigraph.sortingRelation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.sortingRelation">[docs]</a>    <span class="k">def</span> <span class="nf">sortingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic construction of the quantiles sorting characteristic function *r(x QS y)*.</span>
@@ -1023,6 +1042,8 @@
     <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">splitComponent</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
     <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/</span><span class="si">%d</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">nc</span><span class="p">,</span><span class="n">pg</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
+
+
 
 <div class="viewcode-block" id="PreRankedOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">SparseOutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -2787,24 +2808,43 @@
 <span class="c1">##    print(pre.computeOrderCorrelation(pre.boostedOrder))</span>
 <span class="c1">##    tenv.showHTMLPerformanceHeatmap()</span>
     <span class="n">MP</span>  <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">100</span>
+    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
 <span class="c1">##    t0 = time()</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="c1">##    tp = XMCDA2PerformanceTableau(&#39;the_cs_2016&#39;)</span>
 
 <span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,</span>
 <span class="c1">##                                     seed=100)</span>
-    <span class="n">bg1</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                                 <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
+    <span class="n">bg1</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                 <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;optimal&#39;</span><span class="p">,</span>
                                  <span class="n">componentRankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
-                                 <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                 <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                                 <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                 <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                                  <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
                                  <span class="c1">#tempDir=&#39;.&#39;,</span>
                                  <span class="n">nbrOfThreads</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
                                  <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                  <span class="n">save2File</span><span class="o">=</span><span class="s1">&#39;testbgMP&#39;</span><span class="p">)</span>
-    <span class="n">bg1</span><span class="o">.</span><span class="n">showDecomposition</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;increasing&#39;</span><span class="p">)</span>
+    <span class="n">bg1</span><span class="o">.</span><span class="n">showDecomposition</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">)</span>
+
+    <span class="n">seed</span><span class="o">=</span> <span class="mi">1</span>
+    <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="c1">##    import random</span>
+<span class="c1">##    random.seed(seed)</span>
+<span class="c1">##    actionKeys = [x for x in bg1.actions]</span>
+<span class="c1">##    sample = random.sample(actionKeys,sampleSize)</span>
+<span class="c1">##    print(sample)</span>
+<span class="c1">##    print(bg1.boostedRanking)</span>
+<span class="c1">##    preRankedSample = []</span>
+<span class="c1">##    for x in bg1.boostedRanking:</span>
+<span class="c1">##        if x in sample:</span>
+<span class="c1">##            preRankedSample.append(x)</span>
+<span class="c1">##    print(preRankedSample)</span>
+<span class="c1">##    ptp = PartialPerformanceTableau(tp,sample)</span>
+<span class="c1">##    from outrankingDigraphs import BipolarOutrankingDigraph</span>
+<span class="c1">##    pg = BipolarOutrankingDigraph(ptp,Normalized=True)</span>
+<span class="c1">##    print(pg.computeRankingCorrelation(preRankedSample))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">bg1</span><span class="o">.</span><span class="n">estimateRankingCorrelation</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">,</span><span class="n">seed</span><span class="p">))</span>
 </pre></div>
 
           </div>
