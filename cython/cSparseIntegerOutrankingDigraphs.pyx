@@ -727,13 +727,19 @@ class SparseIntegerDigraph(object):
             actions.sort()
             print('%s: %s' % (compKey,actions))
 
-    def estimateRankingCorrelation(self,sampleSize=100,seed=None,Debug=False):
+    def estimateRankingCorrelation(self,int sampleSize=100,\
+                                   seed=None, \
+                                   bint Threading=False,
+                                   int nbrCores=1,
+                                   Debug=False):
         """
         The correlation between *self* and *self.boostedRanking* is estimated by sampling the given performance tableau.
   
         *Parameters*:
              - sampleSize = 100 (default)
              - seed = None
+             - Threading = False (default) | True
+             - nbrCores = 1 (default)
 
         .. note:: 
              The *cSparseOutrankingDigraphs* instance must contain a copy of its initially given performance tableau !
@@ -755,7 +761,8 @@ class SparseIntegerDigraph(object):
         ppt = cPartialPerformanceTableau(self,actionsSubset=sample)
         from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
         try:
-            pg = IntegerBipolarOutrankingDigraph(ppt)
+            pg = IntegerBipolarOutrankingDigraph(ppt,Threading=Threading,
+                                                 nbrCores=nbrCores)
         except:
             print('The SparseIntegerOutrankingDigraph must contain its cPerformanceTableau instance (set Flag CopyPerftab = True)')
             return None
