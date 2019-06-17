@@ -1226,9 +1226,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             self.showShort(fileName=save2File)
 
 
-    # ----- class methods ------------
-
-
+    # ----- PreRankedOutrankingDigraph class methods ------------
 
     def _computeQuantileOrdering(self,strategy=None,
                                 Descending=True,
@@ -1309,7 +1307,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             print(actionsCategIntervals)
         compSize = self.minimalComponentSize
 
-        if compSize == 1:
+        if compSize <= 1:
             #if Optimal:
             if Descending:
                 componentsIntervals = [[(item[8],item[9]),actionsCategories[item],item[0],item[6],item[7]]\
@@ -1349,9 +1347,13 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                     lowCateg = comp[6]
                     highCateg = comp[7]
                     if Descending:
+                        highQtileLimit = comp[8]
+                        lowQtileLimit = comp[9]
                         componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent,\
                                                     score,lowCateg,highCateg])
                     else:
+                        highQtileLimit = comp[8]
+                        lowQtileLimit = comp[9]
                         componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent,\
                                                     score,lowCateg,highCateg])
                     compContent = []
@@ -2747,102 +2749,12 @@ if __name__ == "__main__":
 ##                                     seed=100)
     bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
                                  quantilesOrderingStrategy='average',
-                                 componentRankingRule='Copeland',
+                                 componentRankingRule='NetFlows',
                                  LowerClosed=False,
-                                 minimalComponentSize=1,
+                                 minimalComponentSize=20,
                                  Threading=MP,nbrOfCPUs=8,
                                  #tempDir='.',
                                  nbrOfThreads=8,
                                  Comments=True,Debug=False,
                                  save2File='testbgMP')
-    bg1.showDecomposition()
-##    bg1.showHTMLPerformanceHeatmap()
-##    bg1.showComponents(direction='descending')
-##    #bg1.showRelationTable()
-##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
-##                                 quantilesOrderingStrategy='average',
-##                                 componentRankingRule='Copeland',
-##                                 LowerClosed=False,
-##                                 minimalComponentSize=1,
-##                                 Threading=MP,nbrOfCPUs=8,
-##                                 #tempDir='.',
-##                                 nbrOfThreads=8,
-##                                 Comments=False,Debug=False,
-##                                 save2File='testbgMP')
-##    print(bg2)
-##    bg2.showComponents(direction='descending')
-##    from weakOrders import WeakRankingOrder
-##    wr = WeakRankingOrder(bg1,[bg1.boostedRanking,bg2.boostedRanking])
-##    wr.exportGraphViz('fusion-cpr-pr',graphType="pdf")
-
-##    rag = RandomCBPerformanceGenerator(bg1,actionNamePrefix='t')
-##    rag = Random3ObjectivesPerformanceGenerator(bg1,actionNamePrefix='t')
-##    rag.randomUpdate(2)
-##    newActions = [key for key in bg1.actions if key[0] == 't']
-##    print(newActions)
-##    if bg1.sortingParameters['LowerClosed']:
-##        newRelation = bg1._constructRelationSimple(bg1.criteria,bg1.evaluation,
-##                                               initial=newActions,terminal=bg1.profiles)
-##    else:
-##        newRelation = bg1._constructRelationSimple(bg1.criteria,bg1.evaluation,
-##                                               initial=bg1.profiles,terminal=newActions)
-##    print(newRelation)
-##    newSorting = bg1.computeNewSortingCharacteristics(newActions,newRelation)
-##    print(newSorting)
-##    for x in newActions:
-##        res = bg1.computeNewActionCategories(x,newSorting)
-##        print(res,bg1.categories[res[1]]['lowLimit'],bg1.categories[res[2]]['highLimit'])
-##        #compute score
-##        strategy = bg1.sortingParameters['strategy']
-##        if strategy == 'optimistic':
-##            score = float(res[1])
-##        elif strategy == 'pessimistic':
-##            score = float(res[2])
-##        else:
-##            score = (float(res[1])+float(res[2]))/2.0
-##
-##        bg1.showNewActionCategories(x,newSorting)
-##        for compKey in bg1.components:
-##            comp = bg1.components[compKey]
-##            #print(score,comp)
-##            if comp['lowQtileLimit'] == bg1.categories[res[1]]['lowLimit'] and\
-##               comp['highQtileLimit'] == bg1.categories[res[2]]['highLimit']:
-##                Found = True
-##                print('new Action \'%s\' joins component %s-%s: %s (%s)' % (res[0],comp['lowQtileLimit'],\
-##                                                comp['highQtileLimit'], list(comp['subGraph'].actions.keys()), str(comp['score']) ) )
-##                break
-##            if score > comp['score'][0]:
-##                print('New component: %s-%s : [\'%s\'] needs to be inserted!' %\
-##                  (bg1.categories[res[1]]['lowLimit'],bg1.categories[res[2]]['highLimit'],res[0]) )
-##                break
-##
-##    bg1.sorting.update(newSorting)
-##    bg1.showDecomposition(direction='increasing')
-##    bg1.showDecomposition(direction='decreasing')
-##    bg1.showSorting()
-##    bg1.showActionSortingResult('a001')
-
-##    bg1.sorting.update(newSorting)
-##    bg1.showActionsSortingResult()
-
-
-
-    #bg1.exportSortingGraphViz(actionsSubset=bg1.boostedRanking[:100])
-
-##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
-##                                      seed=100)
-##
-##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=False,quantiles=10,
-##                                 quantilesOrderingStrategy='average',
-##                                 componentRankingRule='NetFlows',
-##                                 LowerClosed=True,
-##                                 minimalComponentSize=10,
-##                                 Threading=MP,nbrOfCPUs=8,
-##                                 #tempDir='.',
-##                                 nbrOfThreads=8,
-##                                 Comments=True,Debug=False,
-##                                 save2File='testbgDev')
-##    print(bg2)
-    #print(bg1.computeDecompositionSummaryStatistics())
-    #bg1.showDecomposition(direction='increasing')
-    #bg2.showHTMLRelationMap(0,100)
+    bg1.showDecomposition(direction='increasing')

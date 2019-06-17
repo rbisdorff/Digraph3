@@ -1273,9 +1273,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">showShort</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="n">save2File</span><span class="p">)</span>
 
 
-    <span class="c1"># ----- class methods ------------</span>
-
-
+    <span class="c1"># ----- PreRankedOutrankingDigraph class methods ------------</span>
 
     <span class="k">def</span> <span class="nf">_computeQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                 <span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -1356,7 +1354,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">actionsCategIntervals</span><span class="p">)</span>
         <span class="n">compSize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimalComponentSize</span>
 
-        <span class="k">if</span> <span class="n">compSize</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">compSize</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1">#if Optimal:</span>
             <span class="k">if</span> <span class="n">Descending</span><span class="p">:</span>
                 <span class="n">componentsIntervals</span> <span class="o">=</span> <span class="p">[[(</span><span class="n">item</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">9</span><span class="p">]),</span><span class="n">actionsCategories</span><span class="p">[</span><span class="n">item</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">7</span><span class="p">]]</span>\
@@ -1396,9 +1394,13 @@
                     <span class="n">lowCateg</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
                     <span class="n">highCateg</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
                     <span class="k">if</span> <span class="n">Descending</span><span class="p">:</span>
+                        <span class="n">highQtileLimit</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+                        <span class="n">lowQtileLimit</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
                         <span class="n">componentsIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">([(</span><span class="n">highQtileLimit</span><span class="p">,</span><span class="n">lowQtileLimit</span><span class="p">),</span><span class="n">compContent</span><span class="p">,</span>\
                                                     <span class="n">score</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">,</span><span class="n">highCateg</span><span class="p">])</span>
                     <span class="k">else</span><span class="p">:</span>
+                        <span class="n">highQtileLimit</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+                        <span class="n">lowQtileLimit</span> <span class="o">=</span> <span class="n">comp</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span>
                         <span class="n">componentsIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">([(</span><span class="n">lowQtileLimit</span><span class="p">,</span><span class="n">highQtileLimit</span><span class="p">),</span><span class="n">compContent</span><span class="p">,</span>\
                                                     <span class="n">score</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">,</span><span class="n">highCateg</span><span class="p">])</span>
                     <span class="n">compContent</span> <span class="o">=</span> <span class="p">[]</span>
@@ -2794,105 +2796,15 @@
 <span class="c1">##                                     seed=100)</span>
     <span class="n">bg1</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                                  <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
-                                 <span class="n">componentRankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>
+                                 <span class="n">componentRankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
                                  <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                 <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                 <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
                                  <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
                                  <span class="c1">#tempDir=&#39;.&#39;,</span>
                                  <span class="n">nbrOfThreads</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
                                  <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                  <span class="n">save2File</span><span class="o">=</span><span class="s1">&#39;testbgMP&#39;</span><span class="p">)</span>
-    <span class="n">bg1</span><span class="o">.</span><span class="n">showDecomposition</span><span class="p">()</span>
-<span class="c1">##    bg1.showHTMLPerformanceHeatmap()</span>
-<span class="c1">##    bg1.showComponents(direction=&#39;descending&#39;)</span>
-<span class="c1">##    #bg1.showRelationTable()</span>
-<span class="c1">##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,</span>
-<span class="c1">##                                 quantilesOrderingStrategy=&#39;average&#39;,</span>
-<span class="c1">##                                 componentRankingRule=&#39;Copeland&#39;,</span>
-<span class="c1">##                                 LowerClosed=False,</span>
-<span class="c1">##                                 minimalComponentSize=1,</span>
-<span class="c1">##                                 Threading=MP,nbrOfCPUs=8,</span>
-<span class="c1">##                                 #tempDir=&#39;.&#39;,</span>
-<span class="c1">##                                 nbrOfThreads=8,</span>
-<span class="c1">##                                 Comments=False,Debug=False,</span>
-<span class="c1">##                                 save2File=&#39;testbgMP&#39;)</span>
-<span class="c1">##    print(bg2)</span>
-<span class="c1">##    bg2.showComponents(direction=&#39;descending&#39;)</span>
-<span class="c1">##    from weakOrders import WeakRankingOrder</span>
-<span class="c1">##    wr = WeakRankingOrder(bg1,[bg1.boostedRanking,bg2.boostedRanking])</span>
-<span class="c1">##    wr.exportGraphViz(&#39;fusion-cpr-pr&#39;,graphType=&quot;pdf&quot;)</span>
-
-<span class="c1">##    rag = RandomCBPerformanceGenerator(bg1,actionNamePrefix=&#39;t&#39;)</span>
-<span class="c1">##    rag = Random3ObjectivesPerformanceGenerator(bg1,actionNamePrefix=&#39;t&#39;)</span>
-<span class="c1">##    rag.randomUpdate(2)</span>
-<span class="c1">##    newActions = [key for key in bg1.actions if key[0] == &#39;t&#39;]</span>
-<span class="c1">##    print(newActions)</span>
-<span class="c1">##    if bg1.sortingParameters[&#39;LowerClosed&#39;]:</span>
-<span class="c1">##        newRelation = bg1._constructRelationSimple(bg1.criteria,bg1.evaluation,</span>
-<span class="c1">##                                               initial=newActions,terminal=bg1.profiles)</span>
-<span class="c1">##    else:</span>
-<span class="c1">##        newRelation = bg1._constructRelationSimple(bg1.criteria,bg1.evaluation,</span>
-<span class="c1">##                                               initial=bg1.profiles,terminal=newActions)</span>
-<span class="c1">##    print(newRelation)</span>
-<span class="c1">##    newSorting = bg1.computeNewSortingCharacteristics(newActions,newRelation)</span>
-<span class="c1">##    print(newSorting)</span>
-<span class="c1">##    for x in newActions:</span>
-<span class="c1">##        res = bg1.computeNewActionCategories(x,newSorting)</span>
-<span class="c1">##        print(res,bg1.categories[res[1]][&#39;lowLimit&#39;],bg1.categories[res[2]][&#39;highLimit&#39;])</span>
-<span class="c1">##        #compute score</span>
-<span class="c1">##        strategy = bg1.sortingParameters[&#39;strategy&#39;]</span>
-<span class="c1">##        if strategy == &#39;optimistic&#39;:</span>
-<span class="c1">##            score = float(res[1])</span>
-<span class="c1">##        elif strategy == &#39;pessimistic&#39;:</span>
-<span class="c1">##            score = float(res[2])</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            score = (float(res[1])+float(res[2]))/2.0</span>
-<span class="c1">##</span>
-<span class="c1">##        bg1.showNewActionCategories(x,newSorting)</span>
-<span class="c1">##        for compKey in bg1.components:</span>
-<span class="c1">##            comp = bg1.components[compKey]</span>
-<span class="c1">##            #print(score,comp)</span>
-<span class="c1">##            if comp[&#39;lowQtileLimit&#39;] == bg1.categories[res[1]][&#39;lowLimit&#39;] and\</span>
-<span class="c1">##               comp[&#39;highQtileLimit&#39;] == bg1.categories[res[2]][&#39;highLimit&#39;]:</span>
-<span class="c1">##                Found = True</span>
-<span class="c1">##                print(&#39;new Action \&#39;%s\&#39; joins component %s-%s: %s (%s)&#39; % (res[0],comp[&#39;lowQtileLimit&#39;],\</span>
-<span class="c1">##                                                comp[&#39;highQtileLimit&#39;], list(comp[&#39;subGraph&#39;].actions.keys()), str(comp[&#39;score&#39;]) ) )</span>
-<span class="c1">##                break</span>
-<span class="c1">##            if score &gt; comp[&#39;score&#39;][0]:</span>
-<span class="c1">##                print(&#39;New component: %s-%s : [\&#39;%s\&#39;] needs to be inserted!&#39; %\</span>
-<span class="c1">##                  (bg1.categories[res[1]][&#39;lowLimit&#39;],bg1.categories[res[2]][&#39;highLimit&#39;],res[0]) )</span>
-<span class="c1">##                break</span>
-<span class="c1">##</span>
-<span class="c1">##    bg1.sorting.update(newSorting)</span>
-<span class="c1">##    bg1.showDecomposition(direction=&#39;increasing&#39;)</span>
-<span class="c1">##    bg1.showDecomposition(direction=&#39;decreasing&#39;)</span>
-<span class="c1">##    bg1.showSorting()</span>
-<span class="c1">##    bg1.showActionSortingResult(&#39;a001&#39;)</span>
-
-<span class="c1">##    bg1.sorting.update(newSorting)</span>
-<span class="c1">##    bg1.showActionsSortingResult()</span>
-
-
-
-    <span class="c1">#bg1.exportSortingGraphViz(actionsSubset=bg1.boostedRanking[:100])</span>
-
-<span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,</span>
-<span class="c1">##                                      seed=100)</span>
-<span class="c1">##</span>
-<span class="c1">##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=False,quantiles=10,</span>
-<span class="c1">##                                 quantilesOrderingStrategy=&#39;average&#39;,</span>
-<span class="c1">##                                 componentRankingRule=&#39;NetFlows&#39;,</span>
-<span class="c1">##                                 LowerClosed=True,</span>
-<span class="c1">##                                 minimalComponentSize=10,</span>
-<span class="c1">##                                 Threading=MP,nbrOfCPUs=8,</span>
-<span class="c1">##                                 #tempDir=&#39;.&#39;,</span>
-<span class="c1">##                                 nbrOfThreads=8,</span>
-<span class="c1">##                                 Comments=True,Debug=False,</span>
-<span class="c1">##                                 save2File=&#39;testbgDev&#39;)</span>
-<span class="c1">##    print(bg2)</span>
-    <span class="c1">#print(bg1.computeDecompositionSummaryStatistics())</span>
-    <span class="c1">#bg1.showDecomposition(direction=&#39;increasing&#39;)</span>
-    <span class="c1">#bg2.showHTMLRelationMap(0,100)</span>
+    <span class="n">bg1</span><span class="o">.</span><span class="n">showDecomposition</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;increasing&#39;</span><span class="p">)</span>
 </pre></div>
 
           </div>
