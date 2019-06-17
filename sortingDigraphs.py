@@ -394,10 +394,10 @@ class SortingDigraph(BipolarOutrankingDigraph):
         String += 'Determinateness     : %.3f\n' % self.computeDeterminateness()
         String += '*------  Constructor run times (in sec.) ------*\n'
         try:
-            String += '#Threads         : %d\n' % self.nbrThreads
+            String += '# Threads        : %d\n' % self.nbrThreads
         except:
             self.nbrThreads = 1
-            String += '#Threads         : %d\n' % self.nbrThreads
+            String += '# Threads        : %d\n' % self.nbrThreads
         String += 'Total time       : %.5f\n' % self.runTimes['totalTime']
         String += 'Data input       : %.5f\n' % self.runTimes['dataInput']
         String += 'Compute profiles : %.5f\n' % self.runTimes['computeProfiles']
@@ -3400,10 +3400,10 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         String += 'Attributes: %s\n' % list(self.__dict__.keys())
         String += '*------  Constructor run times (in sec.) ------*\n'
         try:
-            String += '#Threads         : %d\n' % self.nbrThreads
+            String += '# Threads        : %d\n' % self.nbrThreads
         except:
             self.nbrThreads = 1
-            String += '#Threads         : %d\n' % self.nbrThreads
+            String += '# Threads        : %d\n' % self.nbrThreads
         String += 'Total time       : %.5f\n' % self.runTimes['totalTime']
         String += 'Data input       : %.5f\n' % self.runTimes['dataInput']
         String += 'Quantile classes : %.5f\n' % self.runTimes['categories']

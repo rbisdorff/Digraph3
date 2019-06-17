@@ -3851,10 +3851,10 @@
             <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Compute relation : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">val3</span>
             <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Gamma sets       : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">val4</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;#Threads         : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span>
+                <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Threads        : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">1</span>
-                <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;#Threads         : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span>
+                <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Threads        : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="k">return</span> <span class="n">reprString</span>

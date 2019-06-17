@@ -3804,10 +3804,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
             reprString += 'Compute relation : %.5f\n' % val3
             reprString += 'Gamma sets       : %.5f\n' % val4
             try:
-                reprString += '#Threads         : %d\n' % self.nbrThreads
+                reprString += '# Threads        : %d\n' % self.nbrThreads
             except:
                 self.nbrThreads = 1
-                reprString += '#Threads         : %d\n' % self.nbrThreads
+                reprString += '# Threads        : %d\n' % self.nbrThreads
         except:
             pass
         return reprString
