@@ -23,6 +23,10 @@ from collections import OrderedDict
 class cPerformanceTableau(PerformanceTableau):
     """
     Root class for cythonized performace tableau instances.
+
+    *Parameter*:
+        - filePerfTab = None (default). Loads a cPerformanceTableau instance from a stored file in python format named *filePerfTab* (without the .py extension).
+
     """
 
     def __init__(self,filePerfTab=None):
@@ -281,9 +285,18 @@ class cPerformanceTableau(PerformanceTableau):
                 print()
 
     def showPerformanceTableau(self,bint Transposed=False,actionsSubset=None,\
-                               int fromIndex=-1,int toIndex=-1,bint Sorted=True,ndigits=2):
+                               int fromIndex=-1,int toIndex=-1,bint Sorted=False,ndigits=2):
         """
-        Print the performance Tableau.
+        Print the object's performance tableau.
+
+        *Parameters*:
+            - Transposed = False (default = actions x criteria) | True (criteria x actions)
+            - actionsSubset = None
+            - fromIndex = -1 (by default put to 0)
+            - toIndex = -1 (by default put to len(self.actions)
+            - Sorted = False (default) | True
+            - ndigits = 2 (default)
+        
         """
         cdef int i, x
         from decimal import Decimal
@@ -524,7 +537,17 @@ class cPerformanceTableau(PerformanceTableau):
 
 class cPartialPerformanceTableau(cPerformanceTableau):
     """
-    Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives
+    Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives.
+
+    *Parameters*:
+        - inPerfTab: valid cPerformanceTableau object instance
+        - actionsSubset = None
+        - criteriaSubset = None
+        - objectivesSubset = None
+
+    .. note::
+        Returns the case given a partial deep copy of the *inPerfTab* object.
+
     """
     def __init__(self,inPerfTab,actionsSubset=None,criteriaSubset=None,objectivesSubset=None):
         cdef int key

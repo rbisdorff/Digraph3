@@ -9110,7 +9110,21 @@ instances from a given argPerfTab instance.</p>
 <dt id="cRandPerfTabs.cPartialPerformanceTableau">
 <em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">cPartialPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.cPartialPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau" title="cRandPerfTabs.cPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">cRandPerfTabs.cPerformanceTableau</span></code></a></p>
-<p>Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives</p>
+<p>Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives.</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>inPerfTab: valid cPerformanceTableau object instance</li>
+<li>actionsSubset = None</li>
+<li>criteriaSubset = None</li>
+<li>objectivesSubset = None</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Returns the case given a partial deep copy of the <em>inPerfTab</em> object.</p>
+</div>
 </dd></dl>
 
 <dl class="class">
@@ -9118,6 +9132,13 @@ instances from a given argPerfTab instance.</p>
 <em class="property">class </em><code class="descclassname">cRandPerfTabs.</code><code class="descname">cPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Root class for cythonized performace tableau instances.</p>
+<dl class="docutils">
+<dt><em>Parameter</em>:</dt>
+<dd><ul class="first last simple">
+<li>filePerfTab = None (default). Loads a cPerformanceTableau instance from a stored file in python format named <em>filePerfTab</em> (without the .py extension).</li>
+</ul>
+</dd>
+</dl>
 <dl class="attribute">
 <dt id="cRandPerfTabs.cPerformanceTableau.convert2Standard">
 <code class="descname">convert2Standard</code><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.convert2Standard" title="Permalink to this definition">¶</a></dt>
@@ -9242,7 +9263,19 @@ to int format.</p>
 <dl class="attribute">
 <dt id="cRandPerfTabs.cPerformanceTableau.showPerformanceTableau">
 <code class="descname">showPerformanceTableau</code><a class="headerlink" href="#cRandPerfTabs.cPerformanceTableau.showPerformanceTableau" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print the performance Tableau.</p>
+<dd><p>Print the object’s performance tableau.</p>
+<dl class="docutils">
+<dt><em>Parameters</em>:</dt>
+<dd><ul class="first last simple">
+<li>Transposed = False (default = actions x criteria) | True (criteria x actions)</li>
+<li>actionsSubset = None</li>
+<li>fromIndex = -1 (by default put to 0)</li>
+<li>toIndex = -1 (by default put to len(self.actions)</li>
+<li>Sorted = False (default) | True</li>
+<li>ndigits = 2 (default)</li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
