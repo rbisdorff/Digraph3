@@ -942,8 +942,8 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
     Example python3.6 session:
 
     >>> from cRandPerfTabs import *
-    >>> tp = cRandomCBPerformanceTableau(numberOfActions=1000,\
-                                        Threading=True,seed=100)
+    >>> tp = cRandomCBPerformanceTableau(numberOfActions=1000,
+    ...                        Threading=True,seed=100)
     >>> tp
     *------- PerformanceTableau instance description ------*
     Instance class   : RandomCBPerformanceTableau
@@ -955,12 +955,12 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                         'criteriaWeightMode', 'criteria', 
                         'evaluation', 'weightPreorder']
     >>> from cSparseIntegerOutrankingDigraphs import *
-    >>> bg = SparseIntegerOutrankingDigraph(tp,quantiles=5,\
-                           quantilesOrderingStrategy='average',\
-                           LowerClosed=False,\
-                           minimalComponentSize=10,\
-                           Threading=True,nbrOfCPUs=8,\
-                           Debug=False)
+    >>> bg = SparseIntegerOutrankingDigraph(tp,quantiles=5,
+    ...                       quantilesOrderingStrategy='average',
+    ...                       LowerClosed=False,
+    ...                       minimalComponentSize=10,
+    ...                       Threading=True,nbrOfCPUs=8,
+    ...                       Debug=False)
     >>> bg
       *----- Object instance description --------------*
       Instance class    : SparseIntegerOutrankingDigraph
@@ -1937,13 +1937,13 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
     
     By default, the number of quantiles q is set to quartiles. However, the ranking quality gets better with a finer grained quantiles decomposition. 
     
-    For other parameters settings, see the corresponding :py:class:`sparseOutrankigDigraphs.PreRankedOutrankingDigraph` class.
+    For other parameters settings, see the corresponding :py:class:`sparseOutrankingDigraphs.PreRankedOutrankingDigraph` class.
 
     Example python3.6 session:
 
     >>> from cRandPerfTabs import *
-    >>> tp = cRandomCBPerformanceTableau(numberOfActions=1000,\
-                                        Threading=True,seed=100)
+    >>> tp = cRandomCBPerformanceTableau(numberOfActions=1000,
+    ...                                    Threading=True,seed=100)
     >>> tp
     *------- PerformanceTableau instance description ------*
     Instance class   : RandomCBPerformanceTableau
@@ -1955,11 +1955,11 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                         'criteriaWeightMode', 'criteria', 'evaluation', 
                         'weightPreorder']
     >>> from cSparseIntegerOutrankingDigraphs import *
-    >>> bg = cQuantilesRankingDigraph(tp,quantiles=5,\
-                            quantilesOrderingStrategy='average',\
-                            LowerClosed=False,\
-                            minimalComponentSize=10,\
-                            Threading=True,nbrOfCPUs=8,Debug=False)
+    >>> bg = cQuantilesRankingDigraph(tp,quantiles=5,
+    ...                  quantilesOrderingStrategy='average',
+    ...                  LowerClosed=False,
+    ...                  minimalComponentSize=10,
+    ...                  Threading=True,nbrOfCPUs=8,Debug=False)
     >>> bg
       *----- Object instance description --------------*
       Instance class    : cQuantilesRankingDigraph

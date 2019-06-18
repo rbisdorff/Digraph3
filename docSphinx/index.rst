@@ -21,7 +21,7 @@ Contents
 Introduction
 ------------
 
-This documentation, also available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a bipolarly-valued outranking approach ([1]_, [2]_). These computing resources are useful in the field of *Algorithmic Decision Theory* (https://www.algodec.org/) and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA).
+This documentation, also available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a bipolarly-valued outranking approach ([1]_, [2]_). These computing resources are useful in the field of *Algorithmic Decision Theory* (http://www.algodec.org/) and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They provide the practical tools for a |location_link4| at the University of Luxembourg.
 
 .. image:: introDoc2.png
     :width: 500pt
@@ -68,11 +68,15 @@ For further scientific documentation of the Digraph3 resources, see |location_li
 
 .. |location_link2| raw:: html
 
-   <a href="https://sma.uni.lu/bisdorff/publications.html" target="_blank">https://sma.uni.lu/bisdorff/publications.html</a>
+   <a href="https://sma.uni.lu/bisdorff/publications.html" target="_blank">https://leopold-loewenheim.uni.lu/bisdorff/publications.html</a>
 
 .. |location_link3| raw:: html
 
    <a href="https://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.html" target="_blank">Copyright</a>
+
+.. |location_link4| raw:: html
+
+   <a href="http://hdl.handle.net/10993/37933" target="_blank">Master Course on Algorithmic Decision Theory</a>
 
 
 
