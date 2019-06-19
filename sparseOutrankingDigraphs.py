@@ -649,6 +649,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         export GraphViz dot file  for graph drawing filtering.
         """
         import os
+        
         if Comments:
             print('*---- exporting a dot file dor GraphViz tools ---------*')
         if actionsSubset == None:
@@ -742,8 +743,8 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         fo.close()
         if type(self) == CirculantDigraph:
             commandString = 'circo -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
-        elif type(self) == RandomTree:
-            commandString = 'neato -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
+        # elif type(self) == RandomTree:
+        #     commandString = 'neato -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
         else:
             commandString = 'dot -Grankdir=BT -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType

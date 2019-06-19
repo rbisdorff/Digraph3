@@ -696,6 +696,7 @@
 <span class="sd">        export GraphViz dot file  for graph drawing filtering.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
+        
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file dor GraphViz tools ---------*&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">actionsSubset</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -789,8 +790,8 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="n">CirculantDigraph</span><span class="p">:</span>
             <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;circo -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">graphType</span>
-        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="n">RandomTree</span><span class="p">:</span>
-            <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;neato -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">graphType</span>
+        <span class="c1"># elif type(self) == RandomTree:</span>
+        <span class="c1">#     commandString = &#39;neato -T&#39;+graphType+&#39; &#39;+dotName+&#39; -o &#39;+name+&#39;.&#39; + graphType</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;dot -Grankdir=BT -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span> <span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
             <span class="c1">#commandString = &#39;dot -T&#39;+graphType+&#39; &#39; +dotName+&#39; -o &#39;+name+&#39;.&#39;+graphType</span>

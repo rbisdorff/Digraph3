@@ -2334,7 +2334,7 @@ r(x>y) image range := [-1008;+1008]
 >>> g.computeTransitivityDegree()
 Decimal('0.78')
 
-Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each **positively outrank** all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking digraph (ie the codual ~(-*g*) of *g*) shown in Fig. 62.
+Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each **positively outrank** all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking digraph (ie the codual ~(-*g*) of *g*) shown in Fig. 19.
   
 >>> (~(-g)).exportGraphViz()
 *---- exporting a dot file dor GraphViz tools ---------*
@@ -3079,7 +3079,7 @@ A browser view may again more conveniently illustrate this preciser *deciles* ra
 
 .. figure:: heatMap2.png
     :alt: Heatmap of normed deciles rating
-    :width: 550 px
+    :width: 400 px
     :align: center
 
     Heatmap of mormed deciles rating 
@@ -3634,7 +3634,7 @@ The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled repr
   stabilizer size: [1, 2, 3, ..., 8, 9, ..., 12, 13, ...]
   frequency      : [0, 2, 0, ..., 1, 0, ...,  1,  0, ...]
 
-The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of Fig. 31 below.
+The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of Fig. 34 below.
 
 .. figure:: c12.png
     :width: 400 px
@@ -3661,7 +3661,7 @@ What is a graph kernel ?
 
 We call **choice** in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice *Y* is called **internally stable** or **independent** when there exist **no links** (edges) or relations (arcs) between its members. Furthermore, a choice *Y* is called **externally stable** when for each vertex, node or action *x* not in *Y*, there exists at least a member *y* of *Y* such that *x* is linked or related to *y*. Now, an internally **and** externally stable choice is called a **kernel**.  
 
-A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see :ref:`IsomorphicMIS-Tutorial-label`). Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 31. 
+A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see :ref:`IsomorphicMIS-Tutorial-label`). Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 34. 
 
 In all graph or symmetric digraph, the *maximality condition* imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal **holes** in the given graph.
 
@@ -3700,7 +3700,7 @@ fdp -Tpng random3RegularGraph-mis.dot -o random3RegularGraph-mis.png
 
     A random MIS colored in the random 3-regular graph
 
-It is easily verified in Fig. 33 above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance coincides hence with the set of its MISs. 
+It is easily verified in Fig. 36 above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance coincides hence with the set of its MISs. 
 
 >>> g.showMIS()
 *---  Maximal Independent Sets ---*
@@ -3774,7 +3774,7 @@ current representative:  frozenset({'a09', 'a11', 'a12', 'a08'})
 length   :  4
 number of isomorph choices 2
 isormorph choices
-['a06', 'a02', 'a12', 'a10']  # <<== the random MIS shown in Fig. 33
+['a06', 'a02', 'a12', 'a10']  # <<== the random MIS shown in Fig. 36
 ['a09', 'a11', 'a12', 'a08']
 ----------------------------
 *---- Global result ----
@@ -3796,7 +3796,7 @@ Symmetry vector
 stabilizer size  :  [1, 2]
 frequency        :  [11, 0]
 
-In our random 3-regular graph instance (see Fig. 32), we may thus find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 33.
+In our random 3-regular graph instance (see Fig. 35), we may thus find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 36.
 
 .. figure:: random3RegularGraphKernelOrbit.png
    :width: 700 px
@@ -3940,7 +3940,7 @@ Absorbent preKernels :
 ['1', '3', '5'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 ['2', '4', '6'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 
-Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of **all** chordless circuits of *odd* **or** *even* length, ie *filled* circuits also called **anti-holes** (see Fig. 36), never contain any potential kernel candidates.
+Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of **all** chordless circuits of *odd* **or** *even* length, ie *filled* circuits also called **anti-holes** (see Fig. 39), never contain any potential kernel candidates.
 
 >>> dc6 = -c6   # dc6 = DualDigraph(c6)
 >>> dc6.showPreKernels()
@@ -3982,7 +3982,7 @@ dot -Grankdir=BT -Tpng randomLaterality.dot -o randomLaterality.png
 
    A random digraph instance of order 7 and arc probability 0.3
 
-The random digraph shown in Fig. 37 above has no apparent special properties, except from being connected.
+The random digraph shown in Fig. 40 above has no apparent special properties, except from being connected.
 
 >>> rd.showComponents()
 *--- Connected Components ---*
@@ -4032,7 +4032,7 @@ Absorbent preKernels :
    covering     :  0.600  # <<==
 ...
 
-Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph's *laterality*. We may hence redraw the same digraph in Fig. 38 by looking into its interior via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of it via the *best covered* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
+Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph's *laterality*. We may hence redraw the same digraph in Fig. 41 by looking into its interior via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of it via the *best covered* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
 
 >>> rd.exportGraphViz(fileName='orientedLaterality',\
 ...                   bestChoice=set(['a4', 'a3']),\
@@ -4077,7 +4077,7 @@ Valuation domain : {'min': -100.0, 'med': 0.0, 'max': 100.0}
 
    The performance tableau of a random outranking digraph instance
 
-The underlying random performance tableau (see Fig. 39) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions 'a2' and 'a5'. The resulting **strict outranking** - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in Fig. 40 below.
+The underlying random performance tableau (see Fig. 42) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions 'a2' and 'a5'. The resulting **strict outranking** - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in Fig. 43 below.
 
 >>> gcd = ~(-g)  # Codual: the converse of the negation
 >>> gcd.exportGraphViz(fileName='tutOutRanking')
@@ -4137,7 +4137,7 @@ Credibility domain: [-100.00,100.00]
 
 Notice that solving the valued *Berge* kernel equations ([BIS-2006a]_) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions 'a2' and 'a4' are equivalent candidates for a unique best choice, and action 'a7' is clearly confirmed as the worst choice.
 
-In Fig. 41 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations. 
+In Fig. 44 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations. 
 
 >>> gcd.exportGraphViz(fileName='bestWorstOrientation',
 ...       bestChoice=['a2','a4'], worstChoice=['a7'])
@@ -4152,7 +4152,7 @@ dot -Grankdir=BT -Tpng bestWorstOrientation.dot -o bestWorstOrientation.png
 
    The strict outranking digraph oriented by its best and worst choice recommendations
 
-The grey arrows in Fig. 41, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-Tutorial-label`).
+The grey arrows in Fig. 44, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-Tutorial-label`).
 
 >>> g.showHTMLPerformanceHeatmap(colorLevels=5, ndigits=0,
 ...          Correlations=True, rankingRule='Copeland')
@@ -4164,7 +4164,7 @@ The grey arrows in Fig. 41, like the one between actions 'a4' and 'a1', represen
 
    Heatmap with Copeland ranking of the peformance tableau
 
-In the resulting linear ranking (see Fig. 42), action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile. Both decision actions, hence, don't show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in Fig. 44  above.
+In the resulting linear ranking (see Fig. 45), action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile. Both decision actions, hence, don't show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in Fig. 45 above.
 
 Tractability
 ------------
@@ -4314,7 +4314,7 @@ fdp -Tpng randomSplitGraph.dot -o randomSplitGraph.png
 
     A conjointly triangulated, comparability, interval, permutation and split graph
 
-In Fig. 43 we may readily recognize the essential characteristic of **split graphs**, namely being always splitable into two disjoint sub-graphs: an *independentt choice* (*v6*) and a *clique* (*v1*, *v2*, *v3*, *v4*, *v5*, *v7*, *v8*); which explains their name.
+In Fig. 46 we may readily recognize the essential characteristic of **split graphs**, namely being always splitable into two disjoint sub-graphs: an *independentt choice* (*v6*) and a *clique* (*v1*, *v2*, *v3*, *v4*, *v5*, *v7*, *v8*); which explains their name.
 
 Notice however that the four properties:
 
@@ -4480,7 +4480,7 @@ fdp -Tpng coloredPermutationGraph.dot -o coloredPermutationGraph.png
 	    
     Minimal vertex coloring of the permutation graph
 
-The correspondingly colored **matching diagram** of the nine **inversions** -the actual *edges* of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz *neato* layout and explicitely positioned horizontal lists of vertices (see Fig. 48).
+The correspondingly colored **matching diagram** of the nine **inversions** -the actual *edges* of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz *neato* layout and explicitely positioned horizontal lists of vertices (see Fig. 51).
 
 >>> g.exportPermutationGraphViz(WithEdgeColoring=True)
 *---- exporting a dot file for GraphViz tools ---------*
@@ -4560,7 +4560,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
 
     Random graph of order 8 generated with edge probability 0.4
 
-If the random graph instance *g* (see Fig. 50) is a permutation graph, *g* and its dual *-g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct an implication class decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
+If the random graph instance *g* (see Fig. 53) is a permutation graph, *g* and its dual *-g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct an implication class decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
 
 >>> if g.isComparabilityGraph():
 ...     print(g.edgeOrientations)
@@ -4588,7 +4588,7 @@ If the random graph instance *g* (see Fig. 50) is a permutation graph, *g* and i
 	    
     Transitive orientation of the graph *g*
 
-The resulting orientation of the edges of *g* (see Fig. 51) is indeed transitive. The same procedure applied to the dual graph *gd = -g* gives a transitive orientation to the edges of *-g*.
+The resulting orientation of the edges of *g* (see Fig. 54) is indeed transitive. The same procedure applied to the dual graph *gd = -g* gives a transitive orientation to the edges of *-g*.
 
 >>> gd = -g
 >>> if gd.isComparabilityGraph():
@@ -4617,7 +4617,7 @@ The resulting orientation of the edges of *g* (see Fig. 51) is indeed transitive
 	    
     Transitive orientation of the dual graph *-g*
  
-It is worthwhile noticing that the orientation of *g* is achieved with a *single implication class* covering all the vertices, whereas the orientation of the dual *-g* needs a decomposition into *three implication classes* marked in black, red and blue (see Fig.52).
+It is worthwhile noticing that the orientation of *g* is achieved with a *single implication class* covering all the vertices, whereas the orientation of the dual *-g* needs a decomposition into *three implication classes* marked in black, red and blue (see Fig.55).
 
 Let us recheck these facts by explicitely constructing transitively oriented digraph instances with the :py:func:`graphs.Graph.computeTransitivelyOrientedDigraph` method. 
 
@@ -4692,7 +4692,7 @@ We may finally check that, for instance, the two permutations [2, 3, 4, 8, 6, 1,
 
     Isomorphic permutation graphs
 
-And, we recover indeed two *isomorphic copies* of the original random graph (see Fig. 50).
+And, we recover indeed two *isomorphic copies* of the original random graph (see Fig. 53).
 
 Back to :ref:`Tutorial-label`
 
@@ -4800,7 +4800,7 @@ Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. 
     ...     print('The graph is a tree ?',False)
     The graph is a tree ? True
 
-The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in Fig. 56 (see also the :py:func:`graphs.Graph.isTree` method for an implemented alternative test).
+The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in Fig. 59 (see also the :py:func:`graphs.Graph.isTree` method for an implemented alternative test).
 
 >>> g.exportGraphViz(
 *---- exporting a dot file for GraphViz tools ---------*
@@ -4936,7 +4936,7 @@ Depth first search path(s) :
 [['v1', 'v2', 'v4', 'v2', 'v5', 'v2', 'v1', 'v3', 'v1']]
 Average determination(s) : [Decimal('0.655')]
 
-The given graph is connected and, hence, admids a single spanning tree (see Fig. 59) of **maximum mean determination** = (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655** (see Lines 9, 6 and 10 in the relation table above).
+The given graph is connected and, hence, admids a single spanning tree (see Fig. 62) of **maximum mean determination** = (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655** (see Lines 9, 6 and 10 in the relation table above).
 
 >>> mt.exportGraphViz(fileName='bestDeterminedspanningTree',\
 ...                   WithSpanningTree=True)

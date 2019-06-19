@@ -3687,7 +3687,7 @@ Decomposing       : 72.29356
 <span class="go">Decimal(&#39;0.78&#39;)</span>
 </pre></div>
 </td></tr></table></div>
-<p>Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each <strong>positively outrank</strong> all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the <em>strict</em> outranking digraph (ie the codual ~(-<em>g</em>) of <em>g</em>) shown in Fig. 62.</p>
+<p>Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each <strong>positively outrank</strong> all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the <em>strict</em> outranking digraph (ie the codual ~(-<em>g</em>) of <em>g</em>) shown in Fig. 19.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -5005,7 +5005,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="id119">
-<a class="reference internal image-reference" href="_images/heatMap2.png"><img alt="Heatmap of normed deciles rating" src="_images/heatMap2.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/heatMap2.png"><img alt="Heatmap of normed deciles rating" src="_images/heatMap2.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 27 </span><span class="caption-text">Heatmap of mormed deciles rating</span></p>
 </div>
 <p>In this preciser <em>deciles</em> rating, decision alternatives <em>a1001</em> and <em>a1010</em> are now rated in the <em>6th</em> decile (D6), respectively in the <em>7th</em> decile (D7).</p>
@@ -5896,7 +5896,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">  frequency      : [0, 2, 0, ..., 1, 0, ...,  1,  0, ...]</span>
 </pre></div>
 </td></tr></table></div>
-<p>The corresponding group stabilizers’ sizes and frequencies – orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of Fig. 31 below.</p>
+<p>The corresponding group stabilizers’ sizes and frequencies – orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of Fig. 34 below.</p>
 <div class="figure align-center" id="id126">
 <a class="reference internal image-reference" href="_images/c12.png"><img alt="The 4 non isomorphic MIS of the 12-cycle graph" src="_images/c12.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 34 </span><span class="caption-text">The symmetry axes of the four non isomorphic MISs of the 12-cycle graph</span></p>
@@ -5918,7 +5918,7 @@ execution time: 0 sec. and 2 millisec.
 <div class="section" id="what-is-a-graph-kernel">
 <h3><a class="toc-backref" href="#id231">What is a graph kernel ?</a><a class="headerlink" href="#what-is-a-graph-kernel" title="Permalink to this headline">¶</a></h3>
 <p>We call <strong>choice</strong> in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice <em>Y</em> is called <strong>internally stable</strong> or <strong>independent</strong> when there exist <strong>no links</strong> (edges) or relations (arcs) between its members. Furthermore, a choice <em>Y</em> is called <strong>externally stable</strong> when for each vertex, node or action <em>x</em> not in <em>Y</em>, there exists at least a member <em>y</em> of <em>Y</em> such that <em>x</em> is linked or related to <em>y</em>. Now, an internally <strong>and</strong> externally stable choice is called a <strong>kernel</strong>.</p>
-<p>A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see <a class="reference internal" href="#isomorphicmis-tutorial-label"><span class="std std-ref">Computing the non isomorphic MISs of the n-cycle graph</span></a>). Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 31.</p>
+<p>A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see <a class="reference internal" href="#isomorphicmis-tutorial-label"><span class="std std-ref">Computing the non isomorphic MISs of the n-cycle graph</span></a>). Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 34.</p>
 <p>In all graph or symmetric digraph, the <em>maximality condition</em> imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal <strong>holes</strong> in the given graph.</p>
 <p>We may illustrate this coincidence between MISs and kernels in graphs and symmetric digraphs with the following random 3-regular graph instance.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -5962,7 +5962,7 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/random3RegularGraph-mis.png"><img alt="A random MIS colored in the graph." src="_images/random3RegularGraph-mis.png" style="width: 350px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 36 </span><span class="caption-text">A random MIS colored in the random 3-regular graph</span></p>
 </div>
-<p>It is easily verified in Fig. 33 above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance coincides hence with the set of its MISs.</p>
+<p>It is easily verified in Fig. 36 above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance coincides hence with the set of its MISs.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -6123,7 +6123,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">length   :  4</span>
 <span class="go">number of isomorph choices 2</span>
 <span class="go">isormorph choices</span>
-<span class="go">[&#39;a06&#39;, &#39;a02&#39;, &#39;a12&#39;, &#39;a10&#39;]  # &lt;&lt;== the random MIS shown in Fig. 33</span>
+<span class="go">[&#39;a06&#39;, &#39;a02&#39;, &#39;a12&#39;, &#39;a10&#39;]  # &lt;&lt;== the random MIS shown in Fig. 36</span>
 <span class="go">[&#39;a09&#39;, &#39;a11&#39;, &#39;a12&#39;, &#39;a08&#39;]</span>
 <span class="go">----------------------------</span>
 <span class="go">*---- Global result ----</span>
@@ -6146,7 +6146,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">frequency        :  [11, 0]</span>
 </pre></div>
 </td></tr></table></div>
-<p>In our random 3-regular graph instance (see Fig. 32), we may thus find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 33.</p>
+<p>In our random 3-regular graph instance (see Fig. 35), we may thus find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 36.</p>
 <div class="figure align-center" id="id129">
 <a class="reference internal image-reference" href="_images/random3RegularGraphKernelOrbit.png"><img alt="Two isomorphic kernels of the random 3-regular graph instance" src="_images/random3RegularGraphKernelOrbit.png" style="width: 700px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 37 </span><span class="caption-text">Two isomorphic kernels of the random 3-regular graph instance</span></p>
@@ -6364,7 +6364,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="go">[&#39;2&#39;, &#39;4&#39;, &#39;6&#39;] independence: 1.0, dominance: 1.0, absorbency: 1.0</span>
 </pre></div>
 </td></tr></table></div>
-<p>Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of <strong>all</strong> chordless circuits of <em>odd</em> <strong>or</strong> <em>even</em> length, ie <em>filled</em> circuits also called <strong>anti-holes</strong> (see Fig. 36), never contain any potential kernel candidates.</p>
+<p>Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of <strong>all</strong> chordless circuits of <em>odd</em> <strong>or</strong> <em>even</em> length, ie <em>filled</em> circuits also called <strong>anti-holes</strong> (see Fig. 39), never contain any potential kernel candidates.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -6414,7 +6414,7 @@ execution time: 0 sec. and 2 millisec.
 <a class="reference internal image-reference" href="_images/randomLaterality.png"><img alt="A random digraph instance" src="_images/randomLaterality.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 40 </span><span class="caption-text">A random digraph instance of order 7 and arc probability 0.3</span></p>
 </div>
-<p>The random digraph shown in Fig. 37 above has no apparent special properties, except from being connected.</p>
+<p>The random digraph shown in Fig. 40 above has no apparent special properties, except from being connected.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6503,7 +6503,7 @@ execution time: 0 sec. and 2 millisec.
 <span class="gp">...</span>
 </pre></div>
 </td></tr></table></div>
-<p>Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showPreKernels" title="digraphs.Digraph.showPreKernels"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showPreKernels()</span></code></a> method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph’s <em>laterality</em>. We may hence redraw the same digraph in Fig. 38 by looking into its interior via the <em>best covering</em> initial kernel candidate: the dominant choice {‘3’,‘4’} (coloured in yellow), and looking out of it via the <em>best covered</em> terminal kernel candidate: the absorbent choice {‘1’,‘6’} (coloured in blue).</p>
+<p>Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showPreKernels" title="digraphs.Digraph.showPreKernels"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.showPreKernels()</span></code></a> method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph’s <em>laterality</em>. We may hence redraw the same digraph in Fig. 41 by looking into its interior via the <em>best covering</em> initial kernel candidate: the dominant choice {‘3’,‘4’} (coloured in yellow), and looking out of it via the <em>best covered</em> terminal kernel candidate: the absorbent choice {‘1’,‘6’} (coloured in blue).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6556,7 +6556,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/randomOutranking.png"><img alt="A random performance tableau" src="_images/randomOutranking.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 42 </span><span class="caption-text">The performance tableau of a random outranking digraph instance</span></p>
 </div>
-<p>The underlying random performance tableau (see Fig. 39) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions ‘a2’ and ‘a5’. The resulting <strong>strict outranking</strong> - ie a weighted majority supported - <em>better than without considerable counter-performance</em> - digraph is shown in Fig. 40 below.</p>
+<p>The underlying random performance tableau (see Fig. 42) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions ‘a2’ and ‘a5’. The resulting <strong>strict outranking</strong> - ie a weighted majority supported - <em>better than without considerable counter-performance</em> - digraph is shown in Fig. 43 below.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6651,7 +6651,7 @@ best covered terminal kernel</span></p>
 </pre></div>
 </td></tr></table></div>
 <p>Notice that solving the valued <em>Berge</em> kernel equations (<a class="reference internal" href="#bis-2006a" id="id60">[BIS-2006a]</a>) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions ‘a2’ and ‘a4’ are equivalent candidates for a unique best choice, and action ‘a7’ is clearly confirmed as the worst choice.</p>
-<p>In Fig. 41 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations.</p>
+<p>In Fig. 44 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6667,7 +6667,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/bestWorstOrientation.png"><img alt="The random outranking digraph oriented by its initial and terminal prekernels" src="_images/bestWorstOrientation.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 44 </span><span class="caption-text">The strict outranking digraph oriented by its best and worst choice recommendations</span></p>
 </div>
-<p>The grey arrows in Fig. 41, like the one between actions ‘a4’ and ‘a1’, represent indeterminate preferential situations. Action ‘a1’ appears hence to be rather incomparable to all the other, except action ‘a7’. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a>).</p>
+<p>The grey arrows in Fig. 44, like the one between actions ‘a4’ and ‘a1’, represent indeterminate preferential situations. Action ‘a1’ appears hence to be rather incomparable to all the other, except action ‘a7’. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a>).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="gp">... </span>         <span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">)</span>
@@ -6677,7 +6677,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/outrankingResult.png"><img alt="Copeland ranking of the random outranking digraph instance" src="_images/outrankingResult.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 45 </span><span class="caption-text">Heatmap with Copeland ranking of the peformance tableau</span></p>
 </div>
-<p>In the resulting linear ranking (see Fig. 42), action ‘a4’ is set at first rank, followed by action ‘a2’. This makes sense as ‘a4’ shows three performances in the first quintile, whereas ‘a2’ is only partially evaluated and shows only two such excellent performances. But ‘a4’ also shows a very weak performance in the first quintile. Both decision actions, hence, don’t show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any ‘forced’ linear ranking result as shown in Fig. 44  above.</p>
+<p>In the resulting linear ranking (see Fig. 45), action ‘a4’ is set at first rank, followed by action ‘a2’. This makes sense as ‘a4’ shows three performances in the first quintile, whereas ‘a2’ is only partially evaluated and shows only two such excellent performances. But ‘a4’ also shows a very weak performance in the first quintile. Both decision actions, hence, don’t show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any ‘forced’ linear ranking result as shown in Fig. 45 above.</p>
 </div>
 <div class="section" id="tractability">
 <h3><a class="toc-backref" href="#id235">Tractability</a><a class="headerlink" href="#tractability" title="Permalink to this headline">¶</a></h3>
@@ -6917,7 +6917,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/randomSplitGraph.png"><img alt="Ransdom split graph" src="_images/randomSplitGraph.png" style="width: 350px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 46 </span><span class="caption-text">A conjointly triangulated, comparability, interval, permutation and split graph</span></p>
 </div>
-<p>In Fig. 43 we may readily recognize the essential characteristic of <strong>split graphs</strong>, namely being always splitable into two disjoint sub-graphs: an <em>independentt choice</em> (<em>v6</em>) and a <em>clique</em> (<em>v1</em>, <em>v2</em>, <em>v3</em>, <em>v4</em>, <em>v5</em>, <em>v7</em>, <em>v8</em>); which explains their name.</p>
+<p>In Fig. 46 we may readily recognize the essential characteristic of <strong>split graphs</strong>, namely being always splitable into two disjoint sub-graphs: an <em>independentt choice</em> (<em>v6</em>) and a <em>clique</em> (<em>v1</em>, <em>v2</em>, <em>v3</em>, <em>v4</em>, <em>v5</em>, <em>v7</em>, <em>v8</em>); which explains their name.</p>
 <p>Notice however that the four properties:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -7164,7 +7164,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/coloredPermutationGraph.png"><img alt="minimal vertex coloring" src="_images/coloredPermutationGraph.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 50 </span><span class="caption-text">Minimal vertex coloring of the permutation graph</span></p>
 </div>
-<p>The correspondingly colored <strong>matching diagram</strong> of the nine <strong>inversions</strong> -the actual <em>edges</em> of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz <em>neato</em> layout and explicitely positioned horizontal lists of vertices (see Fig. 48).</p>
+<p>The correspondingly colored <strong>matching diagram</strong> of the nine <strong>inversions</strong> -the actual <em>edges</em> of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz <em>neato</em> layout and explicitely positioned horizontal lists of vertices (see Fig. 51).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -7272,7 +7272,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/randomGraph4335.png"><img alt="Random graph" src="_images/randomGraph4335.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 53 </span><span class="caption-text">Random graph of order 8 generated with edge probability 0.4</span></p>
 </div>
-<p>If the random graph instance <em>g</em> (see Fig. 50) is a permutation graph, <em>g</em> and its dual <em>-g</em> must be <em>transitively orientable</em>, ie <strong>comparability graphs</strong> (see <a class="reference internal" href="#gol-2004" id="id71">[GOL-2004]</a>). With the <a class="reference internal" href="techDoc.html#graphs.Graph.isComparabilityGraph" title="graphs.Graph.isComparabilityGraph"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.isComparabilityGraph()</span></code></a> test, we may easily check this fact. This method proceeds indeed by trying to construct an implication class decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a <em>self.edgeOrientations</em> attribute (see <a class="reference internal" href="#gol-2004" id="id72">[GOL-2004]</a> p.129-132).</p>
+<p>If the random graph instance <em>g</em> (see Fig. 53) is a permutation graph, <em>g</em> and its dual <em>-g</em> must be <em>transitively orientable</em>, ie <strong>comparability graphs</strong> (see <a class="reference internal" href="#gol-2004" id="id71">[GOL-2004]</a>). With the <a class="reference internal" href="techDoc.html#graphs.Graph.isComparabilityGraph" title="graphs.Graph.isComparabilityGraph"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.isComparabilityGraph()</span></code></a> test, we may easily check this fact. This method proceeds indeed by trying to construct an implication class decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a <em>self.edgeOrientations</em> attribute (see <a class="reference internal" href="#gol-2004" id="id72">[GOL-2004]</a> p.129-132).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -7314,7 +7314,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/transOrientGraph.png"><img alt="transitive orientation of a graph" src="_images/transOrientGraph.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 54 </span><span class="caption-text">Transitive orientation of the graph <em>g</em></span></p>
 </div>
-<p>The resulting orientation of the edges of <em>g</em> (see Fig. 51) is indeed transitive. The same procedure applied to the dual graph <em>gd = -g</em> gives a transitive orientation to the edges of <em>-g</em>.</p>
+<p>The resulting orientation of the edges of <em>g</em> (see Fig. 54) is indeed transitive. The same procedure applied to the dual graph <em>gd = -g</em> gives a transitive orientation to the edges of <em>-g</em>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -7358,7 +7358,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/transOrientDualGraph.png"><img alt="transitive orientation of the dual graph" src="_images/transOrientDualGraph.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 55 </span><span class="caption-text">Transitive orientation of the dual graph <em>-g</em></span></p>
 </div>
-<p>It is worthwhile noticing that the orientation of <em>g</em> is achieved with a <em>single implication class</em> covering all the vertices, whereas the orientation of the dual <em>-g</em> needs a decomposition into <em>three implication classes</em> marked in black, red and blue (see Fig.52).</p>
+<p>It is worthwhile noticing that the orientation of <em>g</em> is achieved with a <em>single implication class</em> covering all the vertices, whereas the orientation of the dual <em>-g</em> needs a decomposition into <em>three implication classes</em> marked in black, red and blue (see Fig.55).</p>
 <p>Let us recheck these facts by explicitely constructing transitively oriented digraph instances with the <a class="reference internal" href="techDoc.html#graphs.Graph.computeTransitivelyOrientedDigraph" title="graphs.Graph.computeTransitivelyOrientedDigraph"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.computeTransitivelyOrientedDigraph()</span></code></a> method.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -7454,7 +7454,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/isomorphicPerms.png"><img alt="Isomorphic permutation graphs" src="_images/isomorphicPerms.png" style="width: 700px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 56 </span><span class="caption-text">Isomorphic permutation graphs</span></p>
 </div>
-<p>And, we recover indeed two <em>isomorphic copies</em> of the original random graph (see Fig. 50).</p>
+<p>And, we recover indeed two <em>isomorphic copies</em> of the original random graph (see Fig. 53).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>
 </div>
@@ -7598,7 +7598,7 @@ best covered terminal kernel</span></p>
 <span class="go">The graph is a tree ? True</span>
 </pre></div>
 </td></tr></table></div>
-<p>The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its <em>graphviz</em> drawing in Fig. 56 (see also the <a class="reference internal" href="techDoc.html#graphs.Graph.isTree" title="graphs.Graph.isTree"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.isTree()</span></code></a> method for an implemented alternative test).</p>
+<p>The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its <em>graphviz</em> drawing in Fig. 59 (see also the <a class="reference internal" href="techDoc.html#graphs.Graph.isTree" title="graphs.Graph.isTree"><code class="xref py py-func docutils literal"><span class="pre">graphs.Graph.isTree()</span></code></a> method for an implemented alternative test).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -7794,7 +7794,7 @@ best covered terminal kernel</span></p>
 <span class="go">Average determination(s) : [Decimal(&#39;0.655&#39;)]</span>
 </pre></div>
 </td></tr></table></div>
-<p>The given graph is connected and, hence, admids a single spanning tree (see Fig. 59) of <strong>maximum mean determination</strong> = (0.47 + 0.91 + 0.90 + 0.34)/4 = <strong>0.655</strong> (see Lines 9, 6 and 10 in the relation table above).</p>
+<p>The given graph is connected and, hence, admids a single spanning tree (see Fig. 62) of <strong>maximum mean determination</strong> = (0.47 + 0.91 + 0.90 + 0.34)/4 = <strong>0.655</strong> (see Lines 9, 6 and 10 in the relation table above).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
