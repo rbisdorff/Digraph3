@@ -10697,7 +10697,7 @@ Components are stored in an ordered dictionary.</p>
 <dd><ul class="first last simple">
 <li>argPerfTab,</li>
 <li>quantiles=4,</li>
-<li>quantilesOrderingStrategy=”average”,</li>
+<li>quantilesOrderingStrategy=”optimal”,</li>
 <li>LowerClosed=False,</li>
 <li>componentRankingRule=”Copeland”,</li>
 <li>minimalComponentSize=1,</li>
@@ -10729,7 +10729,7 @@ Components are stored in an ordered dictionary.</p>
 <span class="go">                    &#39;weightPreorder&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cSparseIntegerOutrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">cQuantilesRankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-<span class="gp">... </span>                 <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                 <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;optimal&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                 <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="gp">... </span>                 <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 <span class="gp">... </span>                 <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>

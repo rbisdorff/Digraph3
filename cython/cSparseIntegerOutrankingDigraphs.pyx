@@ -1922,7 +1922,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
     *Parameters*:
         * argPerfTab,
         * quantiles=4,
-        * quantilesOrderingStrategy="average",
+        * quantilesOrderingStrategy="optimal",
         * LowerClosed=False,
         * componentRankingRule="Copeland",
         * minimalComponentSize=1,
@@ -1956,7 +1956,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                         'weightPreorder']
     >>> from cSparseIntegerOutrankingDigraphs import *
     >>> bg = cQuantilesRankingDigraph(tp,quantiles=5,
-    ...                  quantilesOrderingStrategy='average',
+    ...                  quantilesOrderingStrategy='optimal',
     ...                  LowerClosed=False,
     ...                  minimalComponentSize=10,
     ...                  Threading=True,nbrOfCPUs=8,Debug=False)

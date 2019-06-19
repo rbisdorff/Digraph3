@@ -2227,7 +2227,7 @@ Example python session on the HPC-UL Iris-126 -skylake node [7]_::
     ...          seed=16)
     >>> import cSparseIntegerOutrankingDigraphs as iBg
     >>> qr = iBg.cQuantilesRankingDigraph(pt,quantiles=10,
-    ...            quantilesOrderingStrategy='average',
+    ...            quantilesOrderingStrategy='optimal',
     ...            minimalComponentSize=1,
     ...            componentRankingRule='NetFlows',
     ...            LowerClosed=False,
