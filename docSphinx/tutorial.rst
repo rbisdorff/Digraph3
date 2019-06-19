@@ -39,9 +39,14 @@ Working with the *Digraph3* software resources
 Purpose
 -------
 
-The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the *Algorithmic Decision Theory* course given at the University of Luxembourg in the context of its Master in Information and Computer Science (MICS). 
+The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the |location_link1| given at the University of Luxembourg in the context of its *Master in Information and Computer Science* (MICS). 
 
 The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
+
+.. |location_link1| raw:: html
+
+   <a href="http://hdl.handle.net/10993/37933" target="_blank">Master Course on *Algorithmic Decision Theory*</a>
+
 
 Downloading of the Digraph3 resources
 -------------------------------------
@@ -95,7 +100,7 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
 ``Digraph`` object structure
 ----------------------------
 
-All :py:class:`digraphs.Digraph` objects (see Line 12 above) contain at least the following attributes:
+All :py:class:`digraphs.Digraph` objects contain at least the following attributes:
 
 0. A **name** attribute, holding usually the actual name of the stored instance that was used to create the instance; 
 1. A collection of digraph nodes called **actions** (decision actions): an ordered dictionary of nodes with at least a 'name' attribute;
@@ -172,7 +177,7 @@ We may reload a previously saved ``Digraph`` instance from the file named :code:
     'a5': in => {'a1', 'a4', 'a3'}, out => {'a4'}
     >>> 
 
-The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g*, if the `graphviz <https://graphviz.org/>`_ tools are installed on your system [1]_.
+The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in the current working directory a :code:`tutorial.dot` file and a :code:`tutorialdigraph.png` picture of the tutorial digraph *g* (see Fig.1), if the `graphviz <https://graphviz.org/>`_ tools are installed on your system [1]_.
 
 	>>> dg.exportGraphViz('tutorialDigraph')
         *---- exporting a dot file do GraphViz tools ---------*
@@ -230,7 +235,7 @@ Some simple methods are easily applicable to this instantiated Digraph object *d
 Special classes
 ---------------
 
-Some special classes of digraphs, like the :py:class:`digraphs.CompleteDigraph`, the :py:class:`digraphs.EmptyDigraph` or the oriented :py:class:`digraphs.GridDigraph` class for instance, are readily available.
+Some special classes of digraphs, like the :py:class:`digraphs.CompleteDigraph`, the :py:class:`digraphs.EmptyDigraph` or the oriented :py:class:`digraphs.GridDigraph` class for instance, are readily available (see Fig.2).
 
     >>> from digraphs import GridDigraph
     >>> grid = GridDigraph(n=5,m=5,hasMedianSplitOrientation=True)
@@ -313,12 +318,12 @@ With the ``save()`` method (see Line 3) we may keep a backup version for future 
     
 .. warning::
     
-    Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value :math:`r(x\,S\,x)` for all action *x* is put to the median, i.e. indeterminate, value) in this case (see [BIS-2004]_)
+    Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is **indeterminate**, i.e. the characteristic value :math:`r(x\,S\,x)` for all action *x* is put to the median, i.e. indeterminate, value in this case (see [BIS-2004]_).
 
 Graphviz drawings
 -----------------
 
-We may have an even better insight into the ``Digraph`` object *dg* by looking at a `graphviz <https://graphviz.org/>`_  drawing [1]_.
+We may have an even better insight into the ``Digraph`` object *dg* by looking at a `graphviz <https://graphviz.org/>`_  drawing [1]_ .
 
     >>> dg.exportGraphViz('tutRandValDigraph')
     *---- exporting a dot file for GraphViz tools ---------*
@@ -331,7 +336,7 @@ We may have an even better insight into the ``Digraph`` object *dg* by looking a
 
    The tutorial random valuation digraph
 
-Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (:math:`r(6\,S\,2) = 0.00`) observed between nodes '6' and '2'. The corresponding link is marked in gray with an open arrowhead in the drawing. 
+Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (:math:`r(6\,S\,2) = 0.00`) observed between nodes '6' and '2'. The corresponding link is marked in gray with an open arrowhead in the drawing (see Fig. 3). 
 
 Asymmetric and symmetric parts
 ------------------------------
@@ -352,7 +357,7 @@ We may now extract both this symmetric as well as this asymmetric part of digrap
    
 .. note::
 
-    Notice that the partial objects *asymDg* and *symDg* put to the indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes. 
+    Notice that the partial objects *asymDg* and *symDg* put to the indeterminate characteristic value all *not-asymmetric*, respectively *not-symmetric* links between nodes (see Fig. 4). 
 
 Here below, for illustration the source code of *relation* constructor of the :py:class:`digraphs.AsymmetricPartialDigraph` class::
 
@@ -442,7 +447,7 @@ Computing the dual, respectively the converse, may also be done with prefixing t
 
     >>> ddg = -dg   # dual of dg
     >>> cdg = ~dg   # converse of dg
-    >>> cddg = -(~dg) = ~(-dg)  # codual of dg
+    >>> cddg = ~(-dg) # = -(~(dg) codual of dg
     >>> cddg.showRelationTable()
     * ---- Relation Table -----
     -r(ySx) |  '1'    '2'   '3'   '4'   '5'   '6'   '7'	    
@@ -458,7 +463,7 @@ Computing the dual, respectively the converse, may also be done with prefixing t
 Symmetric and transitive closures
 ---------------------------------
 
-Symmetric and transitive closure in-site constructors are also available. Note that it is a good idea, before going ahead with these in-site operations who irreversibly modify the original *dg* object, to previously make a backup version of *dg*. The simplest storage method, always provided by the generic :py:func:`diggraphs.Digraph.save()`, writes out in a named file the python content of the Digraph object in string representation.
+Symmetric and transitive closure in-site constructors are also available (see Fig. 5). Note that it is a good idea, before going ahead with these in-site operations who irreversibly modify the original *dg* object, to previously make a backup version of *dg*. The simplest storage method, always provided by the generic :py:func:`diggraphs.Digraph.save()`, writes out in a named file the python content of the Digraph object in string representation.
 
     >>> dg.save('tutRandValDigraph')
     >>> dg.closeSymmetric()
@@ -528,7 +533,7 @@ It is possible to reload a Digraph instance from its previously saved CSV file c
 	'6'    | -0.84  0.00 -0.40 -0.96 -0.18   -   -0.22	 
 	'7'    |  0.88  0.72  0.82  0.52 -0.84  0.04   -
 
-It is as well possible to show a colored version of the valued relation table in a system browser window tab.
+It is as well possible to show a colored version of the valued relation table in a system browser window tab (see Fig. 6).
 
         >>> dgcsv.showHTMLRelationTable(tableTitle="Tutorial random digraph")
 	>>> ...
@@ -610,7 +615,7 @@ Let us finally mention some special universal classes of digraphs that are readi
 
 .. note::
 
-   Notice the subtle difference between the neighborhoods of an *empty* and the neighborhoods of an *indeterminate* digraph instance. In the first kind, the neighborhoods are known to be completely *empty* whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar valuation domain, we need both a *gamma* **and** a *notGamma* function.
+   Notice the subtle difference between the neighborhoods of an *empty* and the neighborhoods of an *indeterminate* digraph instance. In the first kind, the neighborhoods are known to be completely *empty* whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar characteristic valuation domain, we need both a *gamma* **and** a *notGamma* function.
 
 Back to :ref:`Tutorial-label`
 
@@ -626,7 +631,7 @@ Computing the winner of an election
 Linear voting profiles
 ----------------------
 
-The :ref:`votingProfiles-label` provides resources for handling election results [ADT-L2]_, like the :py:class:`votingProfiles.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary::
+The :py:mod:`votingProfiles` module provides resources for handling election results [ADT-L2]_, like the :py:class:`votingProfiles.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary::
 
     candidates = OrderedDict([('a1',...), ('a2',...), ('a3', ...), ...}
     voters = OrderedDict([('v1',{'weight':10}), ('v2',{'weight':3}), ...}
@@ -919,6 +924,7 @@ Valuation semantics
 -------------------
 
 Considering the given performance tableau, the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class constructor computes the characteristic value :math:`r(x\,S\,y)` of a pairwise outranking relation ":math:`x\,S\,y`" (see [BIS-2013]_, [ADT-L7]_) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following.
+
     1. If :math:`r(x\,S\,y) > 0.0` it is more *True* than *False* that *x outranks y*, i.e. alternative x is at least as well performing than alternative y **and** there is no considerable negative performance difference observed in disfavour of x,
     2. If :math:`r(x\,S\,y) < 0.0` it is more *False* than *True* that *x outranks y*, i.e. alternative x is **not** at least as well performing than alternative y **and** there is no considerable positive performance difference observed in favour of x,
     3. If :math:`r(x\,S\,y) = 0.0` it is *indeterminate* whether *x outranks y or not*.
@@ -1071,7 +1077,7 @@ Generating random performance tableaux
 Introduction
 ------------
 
-The :py:mod:`randomPerfTabs` module provides several constructors for random performance tableaux generators of different kind, mainly for the purpose of testing implemented methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators:
+The :py:mod:`randomPerfTabs` module provides several constructors for random performance tableaux generators of different kind, mainly for the purpose of testing implemented methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators.
 
     1. The simplest model, called **RandomPerformanceTableau**, generates
     a set of *n* decision actions, a set of *m* real-valued
@@ -1104,23 +1110,28 @@ Generating standard random performance tableaux
 -----------------------------------------------
     
 The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of the kind, specializes the generic :py:class:`refTabs.PerformanceTableau` class, and takes the following parameters.
+
     * numberOfActions := nbr of decision actions.
     * numberOfCriteria := number performance criteria.
-    * weightDistribution := 'random' (default) | 'fixed' | 'equisignificant'.
+    * weightDistribution := 'random' (default) | 'fixed' | 'equisignificant':
+      
          | If 'random', weights are uniformly selected randomly
          | from the given weight scale;
          | If 'fixed', the weightScale must provided a corresponding weights
          | distribution;
          | If 'equisignificant', all criterion weights are put to unity.
+	 
     * weightScale := [Min,Max] (default =(1,numberOfCriteria).
     * IntegerWeights := True (default) | False (normalized to proportions of 1.0).
     * commonScale := [a,b]; common performance measuring scales (default = [0.0,100.0])
     * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type *x* in *{q,p,v}*, the float x0 value represents a constant percentage of the common scale and the float x1 value a proportional value of the actual perforamance measure. Default values are [(2.5.0,0.0),(5.0,0.0),(60.0,0,0)]. 
     * commonMode := common random distribution of random performance measurements:
+      
          | ('uniform',None,None), uniformly distributed float values on the given common scales' range [Min,Max]. 
          | ('normal',*mu*,*sigma*), truncated Gaussian distribution, by default *mu* = (*b-a*)/2 and *sigma* = (*b-a*)/4. 
          | ('triangular',*mode*,*repartition*), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value. By deafult, *mode* = (*b-a*)/2 and *repartition* = 0.5.
          | ('beta',None,(alpha,beta)), a beta generator with standard alpha=2 and beta=2 parameters.
+	 
     * valueDigits := <integer>, precision of performance measurements (2 decimal digits by default).
         
 Code example.
@@ -1282,6 +1293,7 @@ We provide the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` cl
 Each decision action is qualified randomly as performing **weak** (-), **fair** (~) or **good** (+) on each of the three objectives. 
 
 Generator directives are the following:
+
     * numberOfActions = 20 (default),
     * numberOfCriteria = 13 (default),
     * weightDistribution = 'equiobjectives' (default) | 'random' | 'equisignificant', 
@@ -1429,6 +1441,7 @@ This type of random performance tabeau is matching the :py:class:`votingDigrahs.
     * weightScale := (1, 1 | numberOfCriteria (default when random))
     * integerWeights := Boolean (True = default) 
     * commonThresholds (default) := {
+      
         | 'ind':(0,0),
         | 'pref':(1,0),
         | 'veto':(numberOfActions,0)
@@ -1521,7 +1534,7 @@ There is one chordless circuit detected in the given strict outranking digraph *
 
 Several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.
 
-The Digraph3 resources provide some of the most common of these ranking rules, like Copeland's, Kemeny's, Slater's, Kohler and Tideman's ranking rules.
+The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland* 's, *Kemeny* 's, *Slater* 's, *Kohler* and *Tideman* 's ranking rules.
 
 The Copeland ranking
 --------------------

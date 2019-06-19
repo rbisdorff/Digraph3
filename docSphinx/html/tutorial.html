@@ -100,7 +100,7 @@
 </div>
 <div class="section" id="purpose">
 <h3><a class="toc-backref" href="#id170">Purpose</a><a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
-<p>The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the <em>Algorithmic Decision Theory</em> course given at the University of Luxembourg in the context of its Master in Information and Computer Science (MICS).</p>
+<p>The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the <a href="http://hdl.handle.net/10993/37933" target="_blank">Master Course on *Algorithmic Decision Theory*</a> given at the University of Luxembourg in the context of its <em>Master in Information and Computer Science</em> (MICS).</p>
 <p>The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.</p>
 </div>
 <div class="section" id="downloading-of-the-digraph3-resources">
@@ -176,7 +176,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 </div>
 <div class="section" id="digraph-object-structure">
 <h3><a class="toc-backref" href="#id173"><code class="docutils literal"><span class="pre">Digraph</span></code> object structure</a><a class="headerlink" href="#digraph-object-structure" title="Permalink to this headline">¶</a></h3>
-<p>All <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> objects (see Line 12 above) contain at least the following attributes:</p>
+<p>All <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a> objects contain at least the following attributes:</p>
 <ol class="arabic simple" start="0">
 <li>A <strong>name</strong> attribute, holding usually the actual name of the stored instance that was used to create the instance;</li>
 <li>A collection of digraph nodes called <strong>actions</strong> (decision actions): an ordered dictionary of nodes with at least a ‘name’ attribute;</li>
@@ -297,7 +297,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </td></tr></table></div>
-<p>The <a class="reference internal" href="techDoc.html#digraphs.Digraph.exportGraphViz" title="digraphs.Digraph.exportGraphViz"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.exportGraphViz()</span></code></a> method generates in the current working directory a <code class="code docutils literal"><span class="pre">tutorial.dot</span></code> file and a <code class="code docutils literal"><span class="pre">tutorialdigraph.png</span></code> picture of the tutorial digraph <em>g</em>, if the <a class="reference external" href="https://graphviz.org/">graphviz</a> tools are installed on your system <a class="footnote-reference" href="#id84" id="id1">[1]</a>.</p>
+<p>The <a class="reference internal" href="techDoc.html#digraphs.Digraph.exportGraphViz" title="digraphs.Digraph.exportGraphViz"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.exportGraphViz()</span></code></a> method generates in the current working directory a <code class="code docutils literal"><span class="pre">tutorial.dot</span></code> file and a <code class="code docutils literal"><span class="pre">tutorialdigraph.png</span></code> picture of the tutorial digraph <em>g</em> (see Fig.1), if the <a class="reference external" href="https://graphviz.org/">graphviz</a> tools are installed on your system <a class="footnote-reference" href="#id84" id="id1">[1]</a>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -394,7 +394,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 </div>
 <div class="section" id="special-classes">
 <h3><a class="toc-backref" href="#id176">Special classes</a><a class="headerlink" href="#special-classes" title="Permalink to this headline">¶</a></h3>
-<p>Some special classes of digraphs, like the <a class="reference internal" href="techDoc.html#digraphs.CompleteDigraph" title="digraphs.CompleteDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.CompleteDigraph</span></code></a>, the <a class="reference internal" href="techDoc.html#digraphs.EmptyDigraph" title="digraphs.EmptyDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.EmptyDigraph</span></code></a> or the oriented <a class="reference internal" href="techDoc.html#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a> class for instance, are readily available.</p>
+<p>Some special classes of digraphs, like the <a class="reference internal" href="techDoc.html#digraphs.CompleteDigraph" title="digraphs.CompleteDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.CompleteDigraph</span></code></a>, the <a class="reference internal" href="techDoc.html#digraphs.EmptyDigraph" title="digraphs.EmptyDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.EmptyDigraph</span></code></a> or the oriented <a class="reference internal" href="techDoc.html#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.GridDigraph</span></code></a> class for instance, are readily available (see Fig.2).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -523,12 +523,12 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 </td></tr></table></div>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value <img class="math" src="_images/math/a0d0c5b5e7ae9ca9be55ee2768f3a75b69bd9bc9.png" alt="r(x\,S\,x)"/> for all action <em>x</em> is put to the median, i.e. indeterminate, value) in this case (see <a class="reference internal" href="#bis-2004" id="id3">[BIS-2004]</a>)</p>
+<p class="last">Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is <strong>indeterminate</strong>, i.e. the characteristic value <img class="math" src="_images/math/a0d0c5b5e7ae9ca9be55ee2768f3a75b69bd9bc9.png" alt="r(x\,S\,x)"/> for all action <em>x</em> is put to the median, i.e. indeterminate, value in this case (see <a class="reference internal" href="#bis-2004" id="id3">[BIS-2004]</a>).</p>
 </div>
 </div>
 <div class="section" id="graphviz-drawings">
 <h3><a class="toc-backref" href="#id178">Graphviz drawings</a><a class="headerlink" href="#graphviz-drawings" title="Permalink to this headline">¶</a></h3>
-<p>We may have an even better insight into the <code class="docutils literal"><span class="pre">Digraph</span></code> object <em>dg</em> by looking at a <a class="reference external" href="https://graphviz.org/">graphviz</a>  drawing <a class="footnote-reference" href="#id84" id="id5">[1]</a>.</p>
+<p>We may have an even better insight into the <code class="docutils literal"><span class="pre">Digraph</span></code> object <em>dg</em> by looking at a <a class="reference external" href="https://graphviz.org/">graphviz</a>  drawing <a class="footnote-reference" href="#id84" id="id5">[1]</a> .</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -542,7 +542,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 <a class="reference internal image-reference" href="_images/tutRandValDigraph.png"><img alt="_images/tutRandValDigraph.png" src="_images/tutRandValDigraph.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">The tutorial random valuation digraph</span></p>
 </div>
-<p>Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (<img class="math" src="_images/math/e3061269b88984f61f92e3fc79316900d7baba89.png" alt="r(6\,S\,2) = 0.00"/>) observed between nodes ‘6’ and ‘2’. The corresponding link is marked in gray with an open arrowhead in the drawing.</p>
+<p>Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (<img class="math" src="_images/math/e3061269b88984f61f92e3fc79316900d7baba89.png" alt="r(6\,S\,2) = 0.00"/>) observed between nodes ‘6’ and ‘2’. The corresponding link is marked in gray with an open arrowhead in the drawing (see Fig. 3).</p>
 </div>
 <div class="section" id="asymmetric-and-symmetric-parts">
 <h3><a class="toc-backref" href="#id179">Asymmetric and symmetric parts</a><a class="headerlink" href="#asymmetric-and-symmetric-parts" title="Permalink to this headline">¶</a></h3>
@@ -564,7 +564,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 </div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Notice that the partial objects <em>asymDg</em> and <em>symDg</em> put to the indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes.</p>
+<p class="last">Notice that the partial objects <em>asymDg</em> and <em>symDg</em> put to the indeterminate characteristic value all <em>not-asymmetric</em>, respectively <em>not-symmetric</em> links between nodes (see Fig. 4).</p>
 </div>
 <p>Here below, for illustration the source code of <em>relation</em> constructor of the <a class="reference internal" href="techDoc.html#digraphs.AsymmetricPartialDigraph" title="digraphs.AsymmetricPartialDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.AsymmetricPartialDigraph</span></code></a> class:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -732,7 +732,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 13
 14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ddg</span> <span class="o">=</span> <span class="o">-</span><span class="n">dg</span>   <span class="c1"># dual of dg</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span> <span class="o">=</span> <span class="o">~</span><span class="n">dg</span>   <span class="c1"># converse of dg</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cddg</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="o">~</span><span class="n">dg</span><span class="p">)</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">dg</span><span class="p">)</span>  <span class="c1"># codual of dg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cddg</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">dg</span><span class="p">)</span> <span class="c1"># = -(~(dg) codual of dg</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cddg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
 <span class="go">* ---- Relation Table -----</span>
 <span class="go">-r(ySx) |  &#39;1&#39;    &#39;2&#39;   &#39;3&#39;   &#39;4&#39;   &#39;5&#39;   &#39;6&#39;   &#39;7&#39;</span>
@@ -749,7 +749,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 </div>
 <div class="section" id="symmetric-and-transitive-closures">
 <h3><a class="toc-backref" href="#id182">Symmetric and transitive closures</a><a class="headerlink" href="#symmetric-and-transitive-closures" title="Permalink to this headline">¶</a></h3>
-<p>Symmetric and transitive closure in-site constructors are also available. Note that it is a good idea, before going ahead with these in-site operations who irreversibly modify the original <em>dg</em> object, to previously make a backup version of <em>dg</em>. The simplest storage method, always provided by the generic <code class="xref py py-func docutils literal"><span class="pre">diggraphs.Digraph.save()</span></code>, writes out in a named file the python content of the Digraph object in string representation.</p>
+<p>Symmetric and transitive closure in-site constructors are also available (see Fig. 5). Note that it is a good idea, before going ahead with these in-site operations who irreversibly modify the original <em>dg</em> object, to previously make a backup version of <em>dg</em>. The simplest storage method, always provided by the generic <code class="xref py py-func docutils literal"><span class="pre">diggraphs.Digraph.save()</span></code>, writes out in a named file the python content of the Digraph object in string representation.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -859,7 +859,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 <span class="go">&#39;7&#39;    |  0.88  0.72  0.82  0.52 -0.84  0.04   -</span>
 </pre></div>
 </td></tr></table></div>
-<p>It is as well possible to show a colored version of the valued relation table in a system browser window tab.</p>
+<p>It is as well possible to show a colored version of the valued relation table in a system browser window tab (see Fig. 6).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dgcsv</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">tableTitle</span><span class="o">=</span><span class="s2">&quot;Tutorial random digraph&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="o">...</span>
@@ -999,7 +999,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 </td></tr></table></div>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Notice the subtle difference between the neighborhoods of an <em>empty</em> and the neighborhoods of an <em>indeterminate</em> digraph instance. In the first kind, the neighborhoods are known to be completely <em>empty</em> whereas, in the latter, <em>nothing is known</em> about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar valuation domain, we need both a <em>gamma</em> <strong>and</strong> a <em>notGamma</em> function.</p>
+<p class="last">Notice the subtle difference between the neighborhoods of an <em>empty</em> and the neighborhoods of an <em>indeterminate</em> digraph instance. In the first kind, the neighborhoods are known to be completely <em>empty</em> whereas, in the latter, <em>nothing is known</em> about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar characteristic valuation domain, we need both a <em>gamma</em> <strong>and</strong> a <em>notGamma</em> function.</p>
 </div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>
@@ -1016,7 +1016,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 </div>
 <div class="section" id="linear-voting-profiles">
 <h3><a class="toc-backref" href="#id186">Linear voting profiles</a><a class="headerlink" href="#linear-voting-profiles" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="techDoc.html#votingprofiles-label"><span class="std std-ref">votingProfiles module</span></a> provides resources for handling election results <a class="reference internal" href="#adt-l2" id="id7">[ADT-L2]</a>, like the <a class="reference internal" href="techDoc.html#votingProfiles.LinearVotingProfile" title="votingProfiles.LinearVotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingProfiles.LinearVotingProfile</span></code></a> class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary:</p>
+<p>The <a class="reference internal" href="techDoc.html#module-votingProfiles" title="votingProfiles"><code class="xref py py-mod docutils literal"><span class="pre">votingProfiles</span></code></a> module provides resources for handling election results <a class="reference internal" href="#adt-l2" id="id7">[ADT-L2]</a>, like the <a class="reference internal" href="techDoc.html#votingProfiles.LinearVotingProfile" title="votingProfiles.LinearVotingProfile"><code class="xref py py-class docutils literal"><span class="pre">votingProfiles.LinearVotingProfile</span></code></a> class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1444,15 +1444,14 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 </div>
 <div class="section" id="valuation-semantics">
 <h3><a class="toc-backref" href="#id192">Valuation semantics</a><a class="headerlink" href="#valuation-semantics" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt>Considering the given performance tableau, the <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class constructor computes the characteristic value <img class="math" src="_images/math/695ed665bf18eb08d098dfa192d47766d22268fe.png" alt="r(x\,S\,y)"/> of a pairwise outranking relation “<img class="math" src="_images/math/f77d95e5b3095ffa485a8d2acd5e8367686d6bfa.png" alt="x\,S\,y"/>” (see <a class="reference internal" href="#bis-2013" id="id12">[BIS-2013]</a>, <a class="reference internal" href="#adt-l7" id="id13">[ADT-L7]</a>) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following.</dt>
-<dd><ol class="first last arabic simple">
+<p>Considering the given performance tableau, the <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class constructor computes the characteristic value <img class="math" src="_images/math/695ed665bf18eb08d098dfa192d47766d22268fe.png" alt="r(x\,S\,y)"/> of a pairwise outranking relation “<img class="math" src="_images/math/f77d95e5b3095ffa485a8d2acd5e8367686d6bfa.png" alt="x\,S\,y"/>” (see <a class="reference internal" href="#bis-2013" id="id12">[BIS-2013]</a>, <a class="reference internal" href="#adt-l7" id="id13">[ADT-L7]</a>) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following.</p>
+<blockquote>
+<div><ol class="arabic simple">
 <li>If <img class="math" src="_images/math/7b95cdf4d0d7ded67a358f08f1e29b142a962371.png" alt="r(x\,S\,y) &gt; 0.0"/> it is more <em>True</em> than <em>False</em> that <em>x outranks y</em>, i.e. alternative x is at least as well performing than alternative y <strong>and</strong> there is no considerable negative performance difference observed in disfavour of x,</li>
 <li>If <img class="math" src="_images/math/8396e0f084210f2d2494034603b8808c2fea89ac.png" alt="r(x\,S\,y) &lt; 0.0"/> it is more <em>False</em> than <em>True</em> that <em>x outranks y</em>, i.e. alternative x is <strong>not</strong> at least as well performing than alternative y <strong>and</strong> there is no considerable positive performance difference observed in favour of x,</li>
 <li>If <img class="math" src="_images/math/a5538af83d8626a913376b10b08ab29f15f492e1.png" alt="r(x\,S\,y) = 0.0"/> it is <em>indeterminate</em> whether <em>x outranks y or not</em>.</li>
 </ol>
-</dd>
-</dl>
+</div></blockquote>
 <p>The resulting bipolarly valued outranking relation may be inspected with the following command.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -1673,7 +1672,7 @@ Attributes       : [&#39;actions&#39;, &#39;valuationdomain&#39;, &#39;relation&
 </div>
 <div class="section" id="introduction">
 <h3><a class="toc-backref" href="#id197">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference internal" href="techDoc.html#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal"><span class="pre">randomPerfTabs</span></code></a> module provides several constructors for random performance tableaux generators of different kind, mainly for the purpose of testing implemented methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators:</p>
+<p>The <a class="reference internal" href="techDoc.html#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal"><span class="pre">randomPerfTabs</span></code></a> module provides several constructors for random performance tableaux generators of different kind, mainly for the purpose of testing implemented methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators.</p>
 <blockquote>
 <div><p>1. The simplest model, called <strong>RandomPerformanceTableau</strong>, generates
 a set of <em>n</em> decision actions, a set of <em>m</em> real-valued
@@ -1702,24 +1701,23 @@ a given number of decision actions.</p>
 </div>
 <div class="section" id="generating-standard-random-performance-tableaux">
 <h3><a class="toc-backref" href="#id198">Generating standard random performance tableaux</a><a class="headerlink" href="#generating-standard-random-performance-tableaux" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt>The <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomPerformanceTableau" title="randomPerfTabs.RandomPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomPerformanceTableau</span></code></a> class, the simplest of the kind, specializes the generic <code class="xref py py-class docutils literal"><span class="pre">refTabs.PerformanceTableau</span></code> class, and takes the following parameters.</dt>
-<dd><ul class="first last">
+<p>The <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomPerformanceTableau" title="randomPerfTabs.RandomPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.RandomPerformanceTableau</span></code></a> class, the simplest of the kind, specializes the generic <code class="xref py py-class docutils literal"><span class="pre">refTabs.PerformanceTableau</span></code> class, and takes the following parameters.</p>
+<blockquote>
+<div><ul>
 <li><p class="first">numberOfActions := nbr of decision actions.</p>
 </li>
 <li><p class="first">numberOfCriteria := number performance criteria.</p>
 </li>
-<li><dl class="first docutils">
-<dt>weightDistribution := ‘random’ (default) | ‘fixed’ | ‘equisignificant’.</dt>
-<dd><div class="first last line-block">
+<li><p class="first">weightDistribution := ‘random’ (default) | ‘fixed’ | ‘equisignificant’:</p>
+<blockquote>
+<div><div class="line-block">
 <div class="line">If ‘random’, weights are uniformly selected randomly</div>
 <div class="line">from the given weight scale;</div>
 <div class="line">If ‘fixed’, the weightScale must provided a corresponding weights</div>
 <div class="line">distribution;</div>
 <div class="line">If ‘equisignificant’, all criterion weights are put to unity.</div>
 </div>
-</dd>
-</dl>
+</div></blockquote>
 </li>
 <li><p class="first">weightScale := [Min,Max] (default =(1,numberOfCriteria).</p>
 </li>
@@ -1729,22 +1727,20 @@ a given number of decision actions.</p>
 </li>
 <li><p class="first">commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type <em>x</em> in <em>{q,p,v}</em>, the float x0 value represents a constant percentage of the common scale and the float x1 value a proportional value of the actual perforamance measure. Default values are [(2.5.0,0.0),(5.0,0.0),(60.0,0,0)].</p>
 </li>
-<li><dl class="first docutils">
-<dt>commonMode := common random distribution of random performance measurements:</dt>
-<dd><div class="first last line-block">
+<li><p class="first">commonMode := common random distribution of random performance measurements:</p>
+<blockquote>
+<div><div class="line-block">
 <div class="line">(‘uniform’,None,None), uniformly distributed float values on the given common scales’ range [Min,Max].</div>
 <div class="line">(‘normal’,*mu*,*sigma*), truncated Gaussian distribution, by default <em>mu</em> = (<em>b-a</em>)/2 and <em>sigma</em> = (<em>b-a</em>)/4.</div>
 <div class="line">(‘triangular’,*mode*,*repartition*), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value. By deafult, <em>mode</em> = (<em>b-a</em>)/2 and <em>repartition</em> = 0.5.</div>
 <div class="line">(‘beta’,None,(alpha,beta)), a beta generator with standard alpha=2 and beta=2 parameters.</div>
 </div>
-</dd>
-</dl>
+</div></blockquote>
 </li>
 <li><p class="first">valueDigits := &lt;integer&gt;, precision of performance measurements (2 decimal digits by default).</p>
 </li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 <p>Code example.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -1999,9 +1995,9 @@ a given number of decision actions.</p>
 <h3><a class="toc-backref" href="#id200">Generating three objectives tableaux</a><a class="headerlink" href="#generating-three-objectives-tableaux" title="Permalink to this headline">¶</a></h3>
 <p>We provide the <a class="reference internal" href="techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="randomPerfTabs.Random3ObjectivesPerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">randomPerfTabs.Random3ObjectivesPerformanceTableau</span></code></a> class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account <em>economical</em>, <em>societal</em> as well as <em>environmental</em> aspects.</p>
 <p>Each decision action is qualified randomly as performing <strong>weak</strong> (-), <strong>fair</strong> (~) or <strong>good</strong> (+) on each of the three objectives.</p>
-<dl class="docutils">
-<dt>Generator directives are the following:</dt>
-<dd><ul class="first last simple">
+<p>Generator directives are the following:</p>
+<blockquote>
+<div><ul class="simple">
 <li>numberOfActions = 20 (default),</li>
 <li>numberOfCriteria = 13 (default),</li>
 <li>weightDistribution = ‘equiobjectives’ (default) | ‘random’ | ‘equisignificant’,</li>
@@ -2014,8 +2010,7 @@ a given number of decision actions.</p>
 <li>missingProbability = 0.05 (default): random insertion of missing values with given probability,</li>
 <li>seed= None.</li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If the mode of the <strong>triangular</strong> distribution is set to ‘<em>variable</em>’,
@@ -2368,7 +2363,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </td></tr></table></div>
 <p>There is one chordless circuit detected in the given strict outranking digraph <em>gcd</em>, namely <em>a4</em> outranks <em>a9</em>, the latter outranks <em>a8</em>, and <em>a8</em> outranks again <em>a4</em>. Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.</p>
 <p>Several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.</p>
-<p>The Digraph3 resources provide some of the most common of these ranking rules, like Copeland’s, Kemeny’s, Slater’s, Kohler and Tideman’s ranking rules.</p>
+<p>The Digraph3 resources provide some of the most common of these ranking rules, like <em>Copeland</em> ‘s, <em>Kemeny</em> ‘s, <em>Slater</em> ‘s, <em>Kohler</em> and <em>Tideman</em> ‘s ranking rules.</p>
 </div>
 <div class="section" id="the-copeland-ranking">
 <h3><a class="toc-backref" href="#id203">The Copeland ranking</a><a class="headerlink" href="#the-copeland-ranking" title="Permalink to this headline">¶</a></h3>

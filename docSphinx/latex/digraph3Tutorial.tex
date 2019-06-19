@@ -74,7 +74,7 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:preface}}
+\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
 here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version).
 
@@ -176,7 +176,7 @@ Revision: Python 3.7
 
 \subsection{Purpose}
 \label{\detokenize{tutorial:purpose}}
-The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the \sphinxstyleemphasis{Algorithmic Decision Theory} course given at the University of Luxembourg in the context of its Master in Information and Computer Science (MICS).
+The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the  given at the University of Luxembourg in the context of its \sphinxstyleemphasis{Master in Information and Computer Science} (MICS).
 
 The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
@@ -249,7 +249,7 @@ Attributes       : [\PYGZsq{}actions\PYGZsq{}, \PYGZsq{}valuationdomain\PYGZsq{}
 
 \subsection{\sphinxstyleliteralintitle{Digraph} object structure}
 \label{\detokenize{tutorial:digraph-object-structure}}
-All \sphinxcode{digraphs.Digraph} objects (see Line 12 above) contain at least the following attributes:
+All \sphinxcode{digraphs.Digraph} objects contain at least the following attributes:
 \begin{enumerate}
 \setcounter{enumi}{-1}
 \item {} 
@@ -343,7 +343,7 @@ We may reload a previously saved \sphinxcode{Digraph} instance from the file nam
 \PYG{g+go}{\PYGZgt{}\PYGZgt{}\PYGZgt{}}
 \end{sphinxVerbatim}
 
-The \sphinxcode{digraphs.Digraph.exportGraphViz()} method generates in the current working directory a \sphinxcode{tutorial.dot} file and a \sphinxcode{tutorialdigraph.png} picture of the tutorial digraph \sphinxstyleemphasis{g}, if the \sphinxhref{https://graphviz.org/}{graphviz} (https://graphviz.org/) tools are installed on your system %
+The \sphinxcode{digraphs.Digraph.exportGraphViz()} method generates in the current working directory a \sphinxcode{tutorial.dot} file and a \sphinxcode{tutorialdigraph.png} picture of the tutorial digraph \sphinxstyleemphasis{g} (see Fig.1), if the \sphinxhref{https://graphviz.org/}{graphviz} (https://graphviz.org/) tools are installed on your system %
 \begin{footnote}[1]\sphinxAtStartFootnote
 The \sphinxcode{exportGraphViz} method is depending on drawing tools from \sphinxhref{https://graphviz.org/}{graphviz} (https://graphviz.org/). On Linux Ubuntu or Debian you may try \sphinxcode{sudo apt-get install graphviz} to install them. There are ready \sphinxcode{dmg} installers for Mac OSX.
 %
@@ -412,7 +412,7 @@ Some simple methods are easily applicable to this instantiated Digraph object \s
 
 \subsection{Special classes}
 \label{\detokenize{tutorial:special-classes}}
-Some special classes of digraphs, like the \sphinxcode{digraphs.CompleteDigraph}, the \sphinxcode{digraphs.EmptyDigraph} or the oriented \sphinxcode{digraphs.GridDigraph} class for instance, are readily available.
+Some special classes of digraphs, like the \sphinxcode{digraphs.CompleteDigraph}, the \sphinxcode{digraphs.EmptyDigraph} or the oriented \sphinxcode{digraphs.GridDigraph} class for instance, are readily available (see Fig.2).
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -435,7 +435,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Manipulating \sphinxstyleliteralintitle{Digraph} objects}
-\label{\detokenize{tutorial:manipulating-digraph-objects}}\label{\detokenize{tutorial:digraph-tools-label}}
+\label{\detokenize{tutorial:digraph-tools-label}}\label{\detokenize{tutorial:manipulating-digraph-objects}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -526,13 +526,13 @@ With the \sphinxcode{save()} method (see Line 3) we may keep a backup version fo
 \end{sphinxVerbatim}
 
 \begin{sphinxadmonition}{warning}{Warning:}
-Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is indeterminate (the characteristic value \(r(x\,S\,x)\) for all action \sphinxstyleemphasis{x} is put to the median, i.e. indeterminate, value) in this case (see \phantomsection\label{\detokenize{tutorial:id3}}{\hyperref[\detokenize{tutorial:bis-2004}]{\sphinxcrossref{{[}BIS-2004{]}}}} (\autopageref*{\detokenize{tutorial:bis-2004}}))
+Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is \sphinxstylestrong{indeterminate}, i.e. the characteristic value \(r(x\,S\,x)\) for all action \sphinxstyleemphasis{x} is put to the median, i.e. indeterminate, value in this case (see \phantomsection\label{\detokenize{tutorial:id3}}{\hyperref[\detokenize{tutorial:bis-2004}]{\sphinxcrossref{{[}BIS-2004{]}}}} (\autopageref*{\detokenize{tutorial:bis-2004}})).
 \end{sphinxadmonition}
 
 
 \subsection{Graphviz drawings}
 \label{\detokenize{tutorial:graphviz-drawings}}
-We may have an even better insight into the \sphinxcode{Digraph} object \sphinxstyleemphasis{dg} by looking at a \sphinxhref{https://graphviz.org/}{graphviz} (https://graphviz.org/)  drawing \sphinxfootnotemark[1].
+We may have an even better insight into the \sphinxcode{Digraph} object \sphinxstyleemphasis{dg} by looking at a \sphinxhref{https://graphviz.org/}{graphviz} (https://graphviz.org/)  drawing \sphinxfootnotemark[1] .
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -549,7 +549,7 @@ We may have an even better insight into the \sphinxcode{Digraph} object \sphinxs
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{tutRandValDigraph}.png}
 \caption{The tutorial random valuation digraph}\label{\detokenize{tutorial:id95}}\end{figure}
 
-Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (\(r(6\,S\,2) = 0.00\)) observed between nodes ‘6’ and ‘2’. The corresponding link is marked in gray with an open arrowhead in the drawing.
+Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (\(r(6\,S\,2) = 0.00\)) observed between nodes ‘6’ and ‘2’. The corresponding link is marked in gray with an open arrowhead in the drawing (see Fig. 3).
 
 
 \subsection{Asymmetric and symmetric parts}
@@ -573,7 +573,7 @@ We may now extract both this symmetric as well as this asymmetric part of digrap
 \caption{Asymmetric part of the tutorial random valuation digraph}\label{\detokenize{tutorial:id96}}\end{figure}
 
 \begin{sphinxadmonition}{note}{Note:}
-Notice that the partial objects \sphinxstyleemphasis{asymDg} and \sphinxstyleemphasis{symDg} put to the indeterminate characteristic value all not-asymmetric, respectively not-symmetric links between nodes.
+Notice that the partial objects \sphinxstyleemphasis{asymDg} and \sphinxstyleemphasis{symDg} put to the indeterminate characteristic value all \sphinxstyleemphasis{not-asymmetric}, respectively \sphinxstyleemphasis{not-symmetric} links between nodes (see Fig. 4).
 \end{sphinxadmonition}
 
 Here below, for illustration the source code of \sphinxstyleemphasis{relation} constructor of the \sphinxcode{digraphs.AsymmetricPartialDigraph} class:
@@ -675,7 +675,7 @@ Computing the dual, respectively the converse, may also be done with prefixing t
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ddg} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{n}{dg}   \PYG{c+c1}{\PYGZsh{} dual of dg}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cdg} \PYG{o}{=} \PYG{o}{\PYGZti{}}\PYG{n}{dg}   \PYG{c+c1}{\PYGZsh{} converse of dg}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cddg} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{n}{dg}\PYG{p}{)} \PYG{o}{=} \PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{dg}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} codual of dg}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cddg} \PYG{o}{=} \PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{dg}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} = \PYGZhy{}(\PYGZti{}(dg) codual of dg}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cddg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{* \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{\PYGZhy{}r(ySx) \textbar{}  \PYGZsq{}1\PYGZsq{}    \PYGZsq{}2\PYGZsq{}   \PYGZsq{}3\PYGZsq{}   \PYGZsq{}4\PYGZsq{}   \PYGZsq{}5\PYGZsq{}   \PYGZsq{}6\PYGZsq{}   \PYGZsq{}7\PYGZsq{}}
@@ -692,7 +692,7 @@ Computing the dual, respectively the converse, may also be done with prefixing t
 
 \subsection{Symmetric and transitive closures}
 \label{\detokenize{tutorial:symmetric-and-transitive-closures}}
-Symmetric and transitive closure in-site constructors are also available. Note that it is a good idea, before going ahead with these in-site operations who irreversibly modify the original \sphinxstyleemphasis{dg} object, to previously make a backup version of \sphinxstyleemphasis{dg}. The simplest storage method, always provided by the generic \sphinxcode{diggraphs.Digraph.save()}, writes out in a named file the python content of the Digraph object in string representation.
+Symmetric and transitive closure in-site constructors are also available (see Fig. 5). Note that it is a good idea, before going ahead with these in-site operations who irreversibly modify the original \sphinxstyleemphasis{dg} object, to previously make a backup version of \sphinxstyleemphasis{dg}. The simplest storage method, always provided by the generic \sphinxcode{diggraphs.Digraph.save()}, writes out in a named file the python content of the Digraph object in string representation.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -775,7 +775,7 @@ It is possible to reload a Digraph instance from its previously saved CSV file c
 \PYG{g+go}{\PYGZsq{}7\PYGZsq{}    \textbar{}  0.88  0.72  0.82  0.52 \PYGZhy{}0.84  0.04   \PYGZhy{}}
 \end{sphinxVerbatim}
 
-It is as well possible to show a colored version of the valued relation table in a system browser window tab.
+It is as well possible to show a colored version of the valued relation table in a system browser window tab (see Fig. 6).
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -863,7 +863,7 @@ Let us finally mention some special universal classes of digraphs that are readi
 \end{sphinxVerbatim}
 
 \begin{sphinxadmonition}{note}{Note:}
-Notice the subtle difference between the neighborhoods of an \sphinxstyleemphasis{empty} and the neighborhoods of an \sphinxstyleemphasis{indeterminate} digraph instance. In the first kind, the neighborhoods are known to be completely \sphinxstyleemphasis{empty} whereas, in the latter, \sphinxstyleemphasis{nothing is known} about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar valuation domain, we need both a \sphinxstyleemphasis{gamma} \sphinxstylestrong{and} a \sphinxstyleemphasis{notGamma} function.
+Notice the subtle difference between the neighborhoods of an \sphinxstyleemphasis{empty} and the neighborhoods of an \sphinxstyleemphasis{indeterminate} digraph instance. In the first kind, the neighborhoods are known to be completely \sphinxstyleemphasis{empty} whereas, in the latter, \sphinxstyleemphasis{nothing is known} about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar characteristic valuation domain, we need both a \sphinxstyleemphasis{gamma} \sphinxstylestrong{and} a \sphinxstyleemphasis{notGamma} function.
 \end{sphinxadmonition}
 
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Tutorials of the Digraph3 resources}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
@@ -891,7 +891,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 \subsection{Linear voting profiles}
 \label{\detokenize{tutorial:linear-voting-profiles}}
-The \DUrole{xref,std,std-ref}{votingProfiles-label} provides resources for handling election results \phantomsection\label{\detokenize{tutorial:id7}}{\hyperref[\detokenize{tutorial:adt-l2}]{\sphinxcrossref{{[}ADT-L2{]}}}} (\autopageref*{\detokenize{tutorial:adt-l2}}), like the \sphinxcode{votingProfiles.LinearVotingProfile} class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary:
+The \sphinxcode{votingProfiles} module provides resources for handling election results \phantomsection\label{\detokenize{tutorial:id7}}{\hyperref[\detokenize{tutorial:adt-l2}]{\sphinxcrossref{{[}ADT-L2{]}}}} (\autopageref*{\detokenize{tutorial:adt-l2}}), like the \sphinxcode{votingProfiles.LinearVotingProfile} class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary:
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -1116,7 +1116,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{outrankingDigraphs} module}
-\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}
+\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1274,8 +1274,9 @@ There is no doubt that action \sphinxstyleemphasis{a03}, with a performance in t
 
 
 \subsection{Valuation semantics}
-\label{\detokenize{tutorial:valuation-semantics}}\begin{description}
-\item[{Considering the given performance tableau, the \sphinxcode{outrankingDigraphs.BipolarOutrankingDigraph} class constructor computes the characteristic value \(r(x\,S\,y)\) of a pairwise outranking relation “\(x\,S\,y\)” (see \phantomsection\label{\detokenize{tutorial:id12}}{\hyperref[\detokenize{tutorial:bis-2013}]{\sphinxcrossref{{[}BIS-2013{]}}}} (\autopageref*{\detokenize{tutorial:bis-2013}}), \phantomsection\label{\detokenize{tutorial:id13}}{\hyperref[\detokenize{tutorial:adt-l7}]{\sphinxcrossref{{[}ADT-L7{]}}}} (\autopageref*{\detokenize{tutorial:adt-l7}})) in a default valuation domain {[}-100.0,+100.0{]} with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following.}] \leavevmode\begin{enumerate}
+\label{\detokenize{tutorial:valuation-semantics}}
+Considering the given performance tableau, the \sphinxcode{outrankingDigraphs.BipolarOutrankingDigraph} class constructor computes the characteristic value \(r(x\,S\,y)\) of a pairwise outranking relation “\(x\,S\,y\)” (see \phantomsection\label{\detokenize{tutorial:id12}}{\hyperref[\detokenize{tutorial:bis-2013}]{\sphinxcrossref{{[}BIS-2013{]}}}} (\autopageref*{\detokenize{tutorial:bis-2013}}), \phantomsection\label{\detokenize{tutorial:id13}}{\hyperref[\detokenize{tutorial:adt-l7}]{\sphinxcrossref{{[}ADT-L7{]}}}} (\autopageref*{\detokenize{tutorial:adt-l7}})) in a default valuation domain {[}-100.0,+100.0{]} with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following.
+\begin{enumerate}
 \item {} 
 If \(r(x\,S\,y) > 0.0\) it is more \sphinxstyleemphasis{True} than \sphinxstyleemphasis{False} that \sphinxstyleemphasis{x outranks y}, i.e. alternative x is at least as well performing than alternative y \sphinxstylestrong{and} there is no considerable negative performance difference observed in disfavour of x,
 
@@ -1286,8 +1287,6 @@ If \(r(x\,S\,y) < 0.0\) it is more \sphinxstyleemphasis{False} than \sphinxstyle
 If \(r(x\,S\,y) = 0.0\) it is \sphinxstyleemphasis{indeterminate} whether \sphinxstyleemphasis{x outranks y or not}.
 
 \end{enumerate}
-
-\end{description}
 
 The resulting bipolarly valued outranking relation may be inspected with the following command.
 
@@ -1449,7 +1448,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Generating random performance tableaux}
-\label{\detokenize{tutorial:generating-random-performance-tableaux}}\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}
+\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}\label{\detokenize{tutorial:generating-random-performance-tableaux}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1473,7 +1472,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 \subsection{Introduction}
 \label{\detokenize{tutorial:introduction}}
-The \sphinxcode{randomPerfTabs} module provides several constructors for random performance tableaux generators of different kind, mainly for the purpose of testing implemented methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators:
+The \sphinxcode{randomPerfTabs} module provides several constructors for random performance tableaux generators of different kind, mainly for the purpose of testing implemented methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators.
 \begin{quote}
 
 1. The simplest model, called \sphinxstylestrong{RandomPerformanceTableau}, generates
@@ -1506,16 +1505,19 @@ a given number of decision actions.
 
 
 \subsection{Generating standard random performance tableaux}
-\label{\detokenize{tutorial:generating-standard-random-performance-tableaux}}\begin{description}
-\item[{The \sphinxcode{randomPerfTabs.RandomPerformanceTableau} class, the simplest of the kind, specializes the generic \sphinxcode{refTabs.PerformanceTableau} class, and takes the following parameters.}] \leavevmode\begin{itemize}
+\label{\detokenize{tutorial:generating-standard-random-performance-tableaux}}
+The \sphinxcode{randomPerfTabs.RandomPerformanceTableau} class, the simplest of the kind, specializes the generic \sphinxcode{refTabs.PerformanceTableau} class, and takes the following parameters.
+\begin{itemize}
 \item {} 
 numberOfActions := nbr of decision actions.
 
 \item {} 
 numberOfCriteria := number performance criteria.
 
-\item {} \begin{description}
-\item[{weightDistribution := ‘random’ (default) \textbar{} ‘fixed’ \textbar{} ‘equisignificant’.}] \leavevmode
+\item {} 
+weightDistribution := ‘random’ (default) \textbar{} ‘fixed’ \textbar{} ‘equisignificant’:
+\begin{quote}
+
 \begin{DUlineblock}{0em}
 \item[] If ‘random’, weights are uniformly selected randomly
 \item[] from the given weight scale;
@@ -1523,8 +1525,7 @@ numberOfCriteria := number performance criteria.
 \item[] distribution;
 \item[] If ‘equisignificant’, all criterion weights are put to unity.
 \end{DUlineblock}
-
-\end{description}
+\end{quote}
 
 \item {} 
 weightScale := {[}Min,Max{]} (default =(1,numberOfCriteria).
@@ -1538,23 +1539,22 @@ commonScale := {[}a,b{]}; common performance measuring scales (default = {[}0.0,
 \item {} 
 commonThresholds := {[}(q0,q1),(p0,p1),(v0,v1){]}; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type \sphinxstyleemphasis{x} in \sphinxstyleemphasis{\{q,p,v\}}, the float x0 value represents a constant percentage of the common scale and the float x1 value a proportional value of the actual perforamance measure. Default values are {[}(2.5.0,0.0),(5.0,0.0),(60.0,0,0){]}.
 
-\item {} \begin{description}
-\item[{commonMode := common random distribution of random performance measurements:}] \leavevmode
+\item {} 
+commonMode := common random distribution of random performance measurements:
+\begin{quote}
+
 \begin{DUlineblock}{0em}
 \item[] (‘uniform’,None,None), uniformly distributed float values on the given common scales’ range {[}Min,Max{]}.
 \item[] (‘normal’,*mu*,*sigma*), truncated Gaussian distribution, by default \sphinxstyleemphasis{mu} = (\sphinxstyleemphasis{b-a})/2 and \sphinxstyleemphasis{sigma} = (\sphinxstyleemphasis{b-a})/4.
 \item[] (‘triangular’,*mode*,*repartition*), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value. By deafult, \sphinxstyleemphasis{mode} = (\sphinxstyleemphasis{b-a})/2 and \sphinxstyleemphasis{repartition} = 0.5.
 \item[] (‘beta’,None,(alpha,beta)), a beta generator with standard alpha=2 and beta=2 parameters.
 \end{DUlineblock}
-
-\end{description}
+\end{quote}
 
 \item {} 
 valueDigits := \textless{}integer\textgreater{}, precision of performance measurements (2 decimal digits by default).
 
 \end{itemize}
-
-\end{description}
 
 Code example.
 
@@ -1760,8 +1760,9 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 We provide the \sphinxcode{randomPerfTabs.Random3ObjectivesPerformanceTableau} class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account \sphinxstyleemphasis{economical}, \sphinxstyleemphasis{societal} as well as \sphinxstyleemphasis{environmental} aspects.
 
 Each decision action is qualified randomly as performing \sphinxstylestrong{weak} (-), \sphinxstylestrong{fair} (\textasciitilde{}) or \sphinxstylestrong{good} (+) on each of the three objectives.
-\begin{description}
-\item[{Generator directives are the following:}] \leavevmode\begin{itemize}
+
+Generator directives are the following:
+\begin{itemize}
 \item {} 
 numberOfActions = 20 (default),
 
@@ -1796,8 +1797,6 @@ missingProbability = 0.05 (default): random insertion of missing values with giv
 seed= None.
 
 \end{itemize}
-
-\end{description}
 
 \begin{sphinxadmonition}{note}{Note:}
 If the mode of the \sphinxstylestrong{triangular} distribution is set to ‘\sphinxstyleemphasis{variable}’,
@@ -1962,16 +1961,17 @@ weightScale := (1, 1 \textbar{} numberOfCriteria (default when random))
 \item {} 
 integerWeights := Boolean (True = default)
 
-\item {} \begin{description}
-\item[{commonThresholds (default) := \{}] \leavevmode
+\item {} 
+commonThresholds (default) := \{
+\begin{quote}
+
 \begin{DUlineblock}{0em}
 \item[] ‘ind’:(0,0),
 \item[] ‘pref’:(1,0),
 \item[] ‘veto’:(numberOfActions,0)
 \item[] \} (default)
 \end{DUlineblock}
-
-\end{description}
+\end{quote}
 
 \end{itemize}
 
@@ -1981,7 +1981,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Ranking with multiple incommensurable criteria}
-\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:ranking-tutorial-label}}
+\label{\detokenize{tutorial:ranking-tutorial-label}}\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -2103,7 +2103,7 @@ There is one chordless circuit detected in the given strict outranking digraph \
 
 Several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.
 
-The Digraph3 resources provide some of the most common of these ranking rules, like Copeland’s, Kemeny’s, Slater’s, Kohler and Tideman’s ranking rules.
+The Digraph3 resources provide some of the most common of these ranking rules, like \sphinxstyleemphasis{Copeland} ‘s, \sphinxstyleemphasis{Kemeny} ‘s, \sphinxstyleemphasis{Slater} ‘s, \sphinxstyleemphasis{Kohler} and \sphinxstyleemphasis{Tideman} ‘s ranking rules.
 
 
 \subsection{The Copeland ranking}
@@ -2464,7 +2464,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{HPC ranking with big outranking digraphs}
-\label{\detokenize{tutorial:hpc-ranking-with-big-outranking-digraphs}}\label{\detokenize{tutorial:hpc-tutorial-label}}
+\label{\detokenize{tutorial:hpc-tutorial-label}}\label{\detokenize{tutorial:hpc-ranking-with-big-outranking-digraphs}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -2984,7 +2984,7 @@ Type \PYGZdq{}help\PYGZdq{}, \PYGZdq{}copyright\PYGZdq{}, \PYGZdq{}credits\PYGZd
 ...          seed=16)
 \PYGZgt{}\PYGZgt{}\PYGZgt{} import cSparseIntegerOutrankingDigraphs as iBg
 \PYGZgt{}\PYGZgt{}\PYGZgt{} qr = iBg.cQuantilesRankingDigraph(pt,quantiles=10,
-...            quantilesOrderingStrategy=\PYGZsq{}average\PYGZsq{},
+...            quantilesOrderingStrategy=\PYGZsq{}optimal\PYGZsq{},
 ...            minimalComponentSize=1,
 ...            componentRankingRule=\PYGZsq{}NetFlows\PYGZsq{},
 ...            LowerClosed=False,
@@ -3143,7 +3143,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing a best choice recommendation}
-\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}\label{\detokenize{tutorial:rubis-tutorial-label}}
+\label{\detokenize{tutorial:rubis-tutorial-label}}\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -5888,7 +5888,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{About split, interval and permutation graphs}
-\label{\detokenize{tutorial:about-split-interval-and-permutation-graphs}}\label{\detokenize{tutorial:permutation-tutorial-label}}
+\label{\detokenize{tutorial:permutation-tutorial-label}}\label{\detokenize{tutorial:about-split-interval-and-permutation-graphs}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
