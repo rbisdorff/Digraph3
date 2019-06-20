@@ -59,47 +59,59 @@ Using the Digraph3 modules is easy. You only need to have installed on your syst
 
 Several download options (easiest under Linux or Mac OS-X) are given.
 
-1. Either , by using a git client either, from github::
+1. Either , by using a git client either, from github
 
-   ...$ git clone https://github.com/rbisdorff/Digraph3 
+     .. code-block:: bash
+   
+	...$ git clone https://github.com/rbisdorff/Digraph3 
 
-2. Or, from sourceforge.net::
+2. Or, from sourceforge.net
 
-   ...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3 
+     .. code-block:: bash    
 
-3. or a subversion client::
+	...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3 
 
-   ...$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
+3. or a subversion client
+
+     .. code-block:: bash
+
+	...$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
 
 4. Or, with a browser access, download and extract the latest distribution zip archive either, from the `github link above <https://github.com/rbisdorff/Digraph3>`_  or, from the `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
 
 
-Starting a python3 session
+Starting a Python3 session
 --------------------------
 
-You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`digraphs` module. To do so, enter the ``python3`` commands following the session prompts marked with >>>. The lines without the prompt are output from the Python interpreter::
+You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`digraphs` module. To do so, enter the ``python3`` commands following the session prompts marked with >>>. The lines without the prompt are output from the Python interpreter.
 
-    $HOME/.../Digraph3$ python3
-    Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
-    [GCC 8.2.0] on linux
-    Type "help", "copyright", "credits" or
-          "license" for more information.
-    >>> from randomDigraphs import RandomDigraph
-    >>> dg = RandomDigraph(order=5,arcProbability=0.5,
-                           seed=101)
-    >>> dg
-    *------- Digraph instance description ------*
-    Instance class   : RandomDigraph
-    Instance name    : randomDigraph
-    Digraph Order      : 5
-    Digraph Size       : 12
-    Valuation domain : [-1.00; 1.00]
-    Determinateness  : 100.000
-    Attributes       : ['actions', 'valuationdomain', 'relation',
-                        'order', 'name', 'gamma', 'notGamma']
-    >>> dg.save('tutorialDigraph')
-    *--- Saving digraph in file: <tutorialDigraph.py> ---*
-    >>> ...
+    .. code-block:: bash 
+
+	$HOME/.../Digraph3$ python3
+	Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
+	[GCC 8.2.0] on linux
+	Type "help", "copyright", "credits" or
+	      "license" for more information.
+        >>> ...
+
+    .. code-block:: python
+
+	>>> from randomDigraphs import RandomDigraph
+	>>> dg = RandomDigraph(order=5, arcProbability=0.5,
+			       seed=101)
+	>>> dg
+	*------- Digraph instance description ------*
+	Instance class   : RandomDigraph
+	Instance name    : randomDigraph
+	Digraph Order      : 5
+	Digraph Size       : 12
+	Valuation domain : [-1.00; 1.00]
+	Determinateness  : 100.000
+	Attributes       : ['actions', 'valuationdomain', 'relation',
+			    'order', 'name', 'gamma', 'notGamma']
+	>>> dg.save('tutorialDigraph')
+	*--- Saving digraph in file: <tutorialDigraph.py> ---*
+	>>> ...
 
 ``Digraph`` object structure
 ----------------------------
@@ -345,7 +357,7 @@ Double links are drawn in bold black with an arrowhead at each end, whereas sing
 Asymmetric and symmetric parts
 ------------------------------
 
-We may now extract both this symmetric as well as this asymmetric part of digraph *dg* with the help of two corresponding constructors.
+We may now extract both this symmetric as well as this asymmetric part of digraph *dg* with the help of two corresponding constructors (see Fig. 4).
 
     >>> from digraphs import AsymmetricPartialDigraph, SymmetricPartialDigraph
     >>> asymDg = AsymmetricPartialDigraph(dg)
@@ -357,7 +369,7 @@ We may now extract both this symmetric as well as this asymmetric part of digrap
    :width: 600 px
    :align: center
 
-   Asymmetric part of the tutorial random valuation digraph
+   Asymmetric and symmetric part of the tutorial random valuation digraph
    
 .. note::
 
@@ -2226,51 +2238,57 @@ by running the cythonized python modules in an Intel compiled virtual Python 3.6
 
    HPC-UL Ranking Performance Records (Spring 2018)
 
-Example python session on the HPC-UL Iris-126 -skylake node [7]_::
+Example python session on the HPC-UL Iris-126 -skylake node [7]_
 
-    (myPy365ICC) [rbisdorff@iris-126 Test]$ python
-    Python 3.6.5 (default, May  9 2018, 09:54:28) 
-    [GCC Intel(R) C++ gcc 6.3 mode] on linux
-    Type "help", "copyright", "credits" or "license" for more information.
-    >>> from cRandPerfTabs import\
-    ...          cRandom3ObjectivesPerformanceTableau as cR3ObjPT
-    >>> pt = cR3ObjPT(numberOfActions=1000000,
-    ...          numberOfCriteria=21,
-    ...          weightDistribution='equiobjectives',
-    ...          commonScale = (0.0,1000.0),
-    ...          commonThresholds = [(2.5,0.0),(5.0,0.0),(75.0,0.0)],
-    ...          commonMode = ['beta','variable',None], 
-    ...          missingDataProbability=0.05,
-    ...          seed=16)
-    >>> import cSparseIntegerOutrankingDigraphs as iBg
-    >>> qr = iBg.cQuantilesRankingDigraph(pt,quantiles=10,
-    ...            quantilesOrderingStrategy='optimal',
-    ...            minimalComponentSize=1,
-    ...            componentRankingRule='NetFlows',
-    ...            LowerClosed=False,
-    ...            Threading=True,
-    ...            tempDir='/tmp',
-    ...            nbrOfCPUs=28)
-    >>> qr
-    *----- Object instance description --------------*
-    Instance class    : cQuantilesRankingDigraph
-    Instance name     : random3ObjectivesPerfTab_mp
-    # Actions         : 1000000
-    # Criteria        : 21
-    Sorting by        : 10-Tiling
-    Ordering strategy : optimal
-    Ranking rule      : NetFlows
-    # Components      : 233645
-    Minimal order     : 1
-    Maximal order     : 153
-    Average order     : 4.3
-    fill rate         : 0.001%
-    ----  Constructor run times (in sec.) ----
-    Nbr of threads    : 28
-    Total time        : 177.02770
-    QuantilesSorting  : 99.55377
-    Preordering       : 5.17954
-    Decomposing       : 72.29356
+    .. code-block:: bash
+
+	(myPy365ICC) [rbisdorff@iris-126 Test]$ python
+	Python 3.6.5 (default, May  9 2018, 09:54:28) 
+	[GCC Intel(R) C++ gcc 6.3 mode] on linux
+	Type "help", "copyright", "credits" or "license" for more information.
+	>>>
+
+    .. code-block:: python
+
+	>>> from cRandPerfTabs import\
+	...          cRandom3ObjectivesPerformanceTableau as cR3ObjPT
+	>>> pt = cR3ObjPT(numberOfActions=1000000,
+	...          numberOfCriteria=21,
+	...          weightDistribution='equiobjectives',
+	...          commonScale = (0.0,1000.0),
+	...          commonThresholds = [(2.5,0.0),(5.0,0.0),(75.0,0.0)],
+	...          commonMode = ['beta','variable',None], 
+	...          missingDataProbability=0.05,
+	...          seed=16)
+	>>> import cSparseIntegerOutrankingDigraphs as iBg
+	>>> qr = iBg.cQuantilesRankingDigraph(pt,quantiles=10,
+	...            quantilesOrderingStrategy='optimal',
+	...            minimalComponentSize=1,
+	...            componentRankingRule='NetFlows',
+	...            LowerClosed=False,
+	...            Threading=True,
+	...            tempDir='/tmp',
+	...            nbrOfCPUs=28)
+	>>> qr
+	*----- Object instance description --------------*
+	Instance class    : cQuantilesRankingDigraph
+	Instance name     : random3ObjectivesPerfTab_mp
+	# Actions         : 1000000
+	# Criteria        : 21
+	Sorting by        : 10-Tiling
+	Ordering strategy : optimal
+	Ranking rule      : NetFlows
+	# Components      : 233645
+	Minimal order     : 1
+	Maximal order     : 153
+	Average order     : 4.3
+	fill rate         : 0.001%
+	----  Constructor run times (in sec.) ----
+	Nbr of threads    : 28
+	Total time        : 177.02770
+	QuantilesSorting  : 99.55377
+	Preordering       : 5.17954
+	Decomposing       : 72.29356
 
 On this 2x14c Intel Xeon Gold 6132 @ 2.6 GHz equipped HPC node with 132GB RAM [7]_, deciles sorting and locally ranking a **million** decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes us about **3 minutes** (see Lines 37-42 above); with 1.5 minutes for the deciles sorting and, a bit more than one minute, for the local ranking of the individual components. 
 
@@ -3568,7 +3586,9 @@ A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an or
 	  freq.:  [0, 0, 0, 0, 3, 24,  2, 0, 0, 0,  0,  0,  0]
 	  Results in c12.misset
 
-In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of n-cycle graphs with *n* > 20, as the cardinality of the MISs becomes big, it is preferable to use the shell :code:`perrinMIS` command compiled from C and installed [3]_  along with all the Digraphs3 python modules for computing the set of MISs observed in the graph::
+In the 12-cycle graph, we observe 29 labelled MISs: -- 3 of cardinality 4, 24 of cardinality 5, and 2  of cardinality 6. In case of n-cycle graphs with *n* > 20, as the cardinality of the MISs becomes big, it is preferable to use the shell :code:`perrinMIS` command compiled from C and installed [3]_  along with all the Digraphs3 python modules for computing the set of MISs observed in the graph.
+
+    .. code-block:: bash
 
 	...$ echo 12 | /usr/local/bin/perrinMIS
 	# -------------------------------------- #

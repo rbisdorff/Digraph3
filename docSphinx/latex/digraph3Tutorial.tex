@@ -74,7 +74,7 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}
+\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:tutorial-label}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
 here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version).
 
@@ -146,7 +146,7 @@ Revision: Python 3.7
 
 
 \section{Working with the \sphinxstyleemphasis{Digraph3} software resources}
-\label{\detokenize{tutorial:digraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}
+\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}\label{\detokenize{tutorial:digraphs-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -156,7 +156,7 @@ Revision: Python 3.7
 \phantomsection\label{\detokenize{tutorial:id171}}{\hyperref[\detokenize{tutorial:downloading-of-the-digraph3-resources}]{\sphinxcrossref{Downloading of the Digraph3 resources}}} (\autopageref*{\detokenize{tutorial:downloading-of-the-digraph3-resources}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id172}}{\hyperref[\detokenize{tutorial:starting-a-python3-session}]{\sphinxcrossref{Starting a python3 session}}} (\autopageref*{\detokenize{tutorial:starting-a-python3-session}})
+\phantomsection\label{\detokenize{tutorial:id172}}{\hyperref[\detokenize{tutorial:starting-a-python3-session}]{\sphinxcrossref{Starting a Python3 session}}} (\autopageref*{\detokenize{tutorial:starting-a-python3-session}})
 
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id173}}{\hyperref[\detokenize{tutorial:digraph-object-structure}]{\sphinxcrossref{\sphinxcode{Digraph} object structure}}} (\autopageref*{\detokenize{tutorial:digraph-object-structure}})
@@ -188,28 +188,34 @@ Using the Digraph3 modules is easy. You only need to have installed on your syst
 Several download options (easiest under Linux or Mac OS-X) are given.
 \begin{enumerate}
 \item {} 
-Either , by using a git client either, from github:
+Either , by using a git client either, from github
+\begin{quote}
 
 \fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
 ...\PYGZdl{} git clone https://github.com/rbisdorff/Digraph3
 \end{sphinxVerbatim}
+\end{quote}
 
 \item {} 
-Or, from sourceforge.net:
+Or, from sourceforge.net
+\begin{quote}
 
 \fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
 ...\PYGZdl{} git clone https://git.code.sf.net/p/digraph3/code Digraph3
 \end{sphinxVerbatim}
+\end{quote}
 
 \item {} 
-or a subversion client:
+or a subversion client
+\begin{quote}
 
 \fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
 ...\PYGZdl{} svn co https://leopold\PYGZhy{}loewenheim.uni.lu/svn/repos/Digraph3
 \end{sphinxVerbatim}
+\end{quote}
 
 \item {} 
 Or, with a browser access, download and extract the latest distribution zip archive either, from the \sphinxhref{https://github.com/rbisdorff/Digraph3}{github link above} (https://github.com/rbisdorff/Digraph3)  or, from the \sphinxhref{https://sourceforge.net/projects/digraph3/}{sourceforge page} (https://sourceforge.net/projects/digraph3/) .
@@ -217,34 +223,41 @@ Or, with a browser access, download and extract the latest distribution zip arch
 \end{enumerate}
 
 
-\subsection{Starting a python3 session}
+\subsection{Starting a Python3 session}
 \label{\detokenize{tutorial:starting-a-python3-session}}
-You may start an interactive Python3 session in the \sphinxcode{Digraph3} directory for exploring the classes and methods provided by the \sphinxcode{digraphs} module. To do so, enter the \sphinxcode{python3} commands following the session prompts marked with \textgreater{}\textgreater{}\textgreater{}. The lines without the prompt are output from the Python interpreter:
+You may start an interactive Python3 session in the \sphinxcode{Digraph3} directory for exploring the classes and methods provided by the \sphinxcode{digraphs} module. To do so, enter the \sphinxcode{python3} commands following the session prompts marked with \textgreater{}\textgreater{}\textgreater{}. The lines without the prompt are output from the Python interpreter.
+\begin{quote}
 
 \fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYGZdl{}HOME/.../Digraph3\PYGZdl{} python3
-Python 3.6.7 (default, Oct 22 2018, 11:32:17)
-[GCC 8.2.0] on linux
-Type \PYGZdq{}help\PYGZdq{}, \PYGZdq{}copyright\PYGZdq{}, \PYGZdq{}credits\PYGZdq{} or
-      \PYGZdq{}license\PYGZdq{} for more information.
-\PYGZgt{}\PYGZgt{}\PYGZgt{} from randomDigraphs import RandomDigraph
-\PYGZgt{}\PYGZgt{}\PYGZgt{} dg = RandomDigraph(order=5,arcProbability=0.5,
-                       seed=101)
-\PYGZgt{}\PYGZgt{}\PYGZgt{} dg
-*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Digraph instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*
-Instance class   : RandomDigraph
-Instance name    : randomDigraph
-Digraph Order      : 5
-Digraph Size       : 12
-Valuation domain : [\PYGZhy{}1.00; 1.00]
-Determinateness  : 100.000
-Attributes       : [\PYGZsq{}actions\PYGZsq{}, \PYGZsq{}valuationdomain\PYGZsq{}, \PYGZsq{}relation\PYGZsq{},
-                    \PYGZsq{}order\PYGZsq{}, \PYGZsq{}name\PYGZsq{}, \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]
-\PYGZgt{}\PYGZgt{}\PYGZgt{} dg.save(\PYGZsq{}tutorialDigraph\PYGZsq{})
-*\PYGZhy{}\PYGZhy{}\PYGZhy{} Saving digraph in file: \PYGZlt{}tutorialDigraph.py\PYGZgt{} \PYGZhy{}\PYGZhy{}\PYGZhy{}*
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n+nv}{\PYGZdl{}HOME}/.../Digraph3\PYGZdl{} python3
+Python \PYG{l+m}{3}.6.7 \PYG{o}{(}default, Oct \PYG{l+m}{22} \PYG{l+m}{2018}, \PYG{l+m}{11}:32:17\PYG{o}{)}
+\PYG{o}{[}GCC \PYG{l+m}{8}.2.0\PYG{o}{]} on linux
+Type \PYG{l+s+s2}{\PYGZdq{}help\PYGZdq{}}, \PYG{l+s+s2}{\PYGZdq{}copyright\PYGZdq{}}, \PYG{l+s+s2}{\PYGZdq{}credits\PYGZdq{}} or
+      \PYG{l+s+s2}{\PYGZdq{}license\PYGZdq{}} \PYG{k}{for} more information.
 \PYGZgt{}\PYGZgt{}\PYGZgt{} ...
 \end{sphinxVerbatim}
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg} \PYG{o}{=} \PYG{n}{RandomDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{n}{arcProbability}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,}
+\PYG{g+go}{                       seed=101)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Digraph instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Instance class   : RandomDigraph}
+\PYG{g+go}{Instance name    : randomDigraph}
+\PYG{g+go}{Digraph Order      : 5}
+\PYG{g+go}{Digraph Size       : 12}
+\PYG{g+go}{Valuation domain : [\PYGZhy{}1.00; 1.00]}
+\PYG{g+go}{Determinateness  : 100.000}
+\PYG{g+go}{Attributes       : [\PYGZsq{}actions\PYGZsq{}, \PYGZsq{}valuationdomain\PYGZsq{}, \PYGZsq{}relation\PYGZsq{},}
+\PYG{g+go}{                    \PYGZsq{}order\PYGZsq{}, \PYGZsq{}name\PYGZsq{}, \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{save}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tutorialDigraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{} Saving digraph in file: \PYGZlt{}tutorialDigraph.py\PYGZgt{} \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{o}{.}\PYG{o}{.}\PYG{o}{.}
+\end{sphinxVerbatim}
+\end{quote}
 
 
 \subsection{\sphinxstyleliteralintitle{Digraph} object structure}
@@ -554,7 +567,7 @@ Double links are drawn in bold black with an arrowhead at each end, whereas sing
 
 \subsection{Asymmetric and symmetric parts}
 \label{\detokenize{tutorial:asymmetric-and-symmetric-parts}}
-We may now extract both this symmetric as well as this asymmetric part of digraph \sphinxstyleemphasis{dg} with the help of two corresponding constructors.
+We may now extract both this symmetric as well as this asymmetric part of digraph \sphinxstyleemphasis{dg} with the help of two corresponding constructors (see Fig. 4).
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -570,7 +583,7 @@ We may now extract both this symmetric as well as this asymmetric part of digrap
 \capstart
 
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{asymSymParts}.png}
-\caption{Asymmetric part of the tutorial random valuation digraph}\label{\detokenize{tutorial:id96}}\end{figure}
+\caption{Asymmetric and symmetric parts of the tutorial random valuation digraph}\label{\detokenize{tutorial:id96}}\end{figure}
 
 \begin{sphinxadmonition}{note}{Note:}
 Notice that the partial objects \sphinxstyleemphasis{asymDg} and \sphinxstyleemphasis{symDg} put to the indeterminate characteristic value all \sphinxstyleemphasis{not-asymmetric}, respectively \sphinxstyleemphasis{not-symmetric} links between nodes (see Fig. 4).
@@ -2964,54 +2977,61 @@ by running the cythonized python modules in an Intel compiled virtual Python 3.6
 \noindent\sphinxincludegraphics[width=350\sphinxpxdimen]{{rankingRecords}.png}
 \caption{HPC-UL Ranking Performance Records (Spring 2018)}\label{\detokenize{tutorial:id110}}\end{figure}
 
-Example python session on the HPC-UL Iris-126 -skylake node \sphinxfootnotemark[7]:
+Example python session on the HPC-UL Iris-126 -skylake node \sphinxfootnotemark[7]
+\begin{quote}
 
 \fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-(myPy365ICC) [rbisdorff@iris\PYGZhy{}126 Test]\PYGZdl{} python
-Python 3.6.5 (default, May  9 2018, 09:54:28)
-[GCC Intel(R) C++ gcc 6.3 mode] on linux
-Type \PYGZdq{}help\PYGZdq{}, \PYGZdq{}copyright\PYGZdq{}, \PYGZdq{}credits\PYGZdq{} or \PYGZdq{}license\PYGZdq{} for more information.
-\PYGZgt{}\PYGZgt{}\PYGZgt{} from cRandPerfTabs import\PYGZbs{}
-...          cRandom3ObjectivesPerformanceTableau as cR3ObjPT
-\PYGZgt{}\PYGZgt{}\PYGZgt{} pt = cR3ObjPT(numberOfActions=1000000,
-...          numberOfCriteria=21,
-...          weightDistribution=\PYGZsq{}equiobjectives\PYGZsq{},
-...          commonScale = (0.0,1000.0),
-...          commonThresholds = [(2.5,0.0),(5.0,0.0),(75.0,0.0)],
-...          commonMode = [\PYGZsq{}beta\PYGZsq{},\PYGZsq{}variable\PYGZsq{},None],
-...          missingDataProbability=0.05,
-...          seed=16)
-\PYGZgt{}\PYGZgt{}\PYGZgt{} import cSparseIntegerOutrankingDigraphs as iBg
-\PYGZgt{}\PYGZgt{}\PYGZgt{} qr = iBg.cQuantilesRankingDigraph(pt,quantiles=10,
-...            quantilesOrderingStrategy=\PYGZsq{}optimal\PYGZsq{},
-...            minimalComponentSize=1,
-...            componentRankingRule=\PYGZsq{}NetFlows\PYGZsq{},
-...            LowerClosed=False,
-...            Threading=True,
-...            tempDir=\PYGZsq{}/tmp\PYGZsq{},
-...            nbrOfCPUs=28)
-\PYGZgt{}\PYGZgt{}\PYGZgt{} qr
-*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*
-Instance class    : cQuantilesRankingDigraph
-Instance name     : random3ObjectivesPerfTab\PYGZus{}mp
-\PYGZsh{} Actions         : 1000000
-\PYGZsh{} Criteria        : 21
-Sorting by        : 10\PYGZhy{}Tiling
-Ordering strategy : optimal
-Ranking rule      : NetFlows
-\PYGZsh{} Components      : 233645
-Minimal order     : 1
-Maximal order     : 153
-Average order     : 4.3
-fill rate         : 0.001\PYGZpc{}
-\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Constructor run times (in sec.) \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}
-Nbr of threads    : 28
-Total time        : 177.02770
-QuantilesSorting  : 99.55377
-Preordering       : 5.17954
-Decomposing       : 72.29356
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{o}{(}myPy365ICC\PYG{o}{)} \PYG{o}{[}rbisdorff@iris\PYGZhy{}126 Test\PYG{o}{]}\PYGZdl{} python
+Python \PYG{l+m}{3}.6.5 \PYG{o}{(}default, May  \PYG{l+m}{9} \PYG{l+m}{2018}, \PYG{l+m}{09}:54:28\PYG{o}{)}
+\PYG{o}{[}GCC Intel\PYG{o}{(}R\PYG{o}{)} C++ gcc \PYG{l+m}{6}.3 mode\PYG{o}{]} on linux
+Type \PYG{l+s+s2}{\PYGZdq{}help\PYGZdq{}}, \PYG{l+s+s2}{\PYGZdq{}copyright\PYGZdq{}}, \PYG{l+s+s2}{\PYGZdq{}credits\PYGZdq{}} or \PYG{l+s+s2}{\PYGZdq{}license\PYGZdq{}} \PYG{k}{for} more information.
+\PYGZgt{}\PYGZgt{}\PYGZgt{}
 \end{sphinxVerbatim}
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{cRandPerfTabs} \PYG{k+kn}{import}\PYGZbs{}
+\PYG{g+gp}{... }         \PYG{n}{cRandom3ObjectivesPerformanceTableau} \PYG{k}{as} \PYG{n}{cR3ObjPT}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pt} \PYG{o}{=} \PYG{n}{cR3ObjPT}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{1000000}\PYG{p}{,}
+\PYG{g+gp}{... }         \PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{21}\PYG{p}{,}
+\PYG{g+gp}{... }         \PYG{n}{weightDistribution}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{equiobjectives}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{g+gp}{... }         \PYG{n}{commonScale} \PYG{o}{=} \PYG{p}{(}\PYG{l+m+mf}{0.0}\PYG{p}{,}\PYG{l+m+mf}{1000.0}\PYG{p}{)}\PYG{p}{,}
+\PYG{g+gp}{... }         \PYG{n}{commonThresholds} \PYG{o}{=} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mf}{2.5}\PYG{p}{,}\PYG{l+m+mf}{0.0}\PYG{p}{)}\PYG{p}{,}\PYG{p}{(}\PYG{l+m+mf}{5.0}\PYG{p}{,}\PYG{l+m+mf}{0.0}\PYG{p}{)}\PYG{p}{,}\PYG{p}{(}\PYG{l+m+mf}{75.0}\PYG{p}{,}\PYG{l+m+mf}{0.0}\PYG{p}{)}\PYG{p}{]}\PYG{p}{,}
+\PYG{g+gp}{... }         \PYG{n}{commonMode} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{beta}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{variable}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n+nb+bp}{None}\PYG{p}{]}\PYG{p}{,}
+\PYG{g+gp}{... }         \PYG{n}{missingDataProbability}\PYG{o}{=}\PYG{l+m+mf}{0.05}\PYG{p}{,}
+\PYG{g+gp}{... }         \PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{16}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{import} \PYG{n+nn}{cSparseIntegerOutrankingDigraphs} \PYG{k+kn}{as} \PYG{n+nn}{iBg}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qr} \PYG{o}{=} \PYG{n}{iBg}\PYG{o}{.}\PYG{n}{cQuantilesRankingDigraph}\PYG{p}{(}\PYG{n}{pt}\PYG{p}{,}\PYG{n}{quantiles}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,}
+\PYG{g+gp}{... }           \PYG{n}{quantilesOrderingStrategy}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{optimal}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{g+gp}{... }           \PYG{n}{minimalComponentSize}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}
+\PYG{g+gp}{... }           \PYG{n}{componentRankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NetFlows}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{g+gp}{... }           \PYG{n}{LowerClosed}\PYG{o}{=}\PYG{n+nb+bp}{False}\PYG{p}{,}
+\PYG{g+gp}{... }           \PYG{n}{Threading}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{,}
+\PYG{g+gp}{... }           \PYG{n}{tempDir}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{/tmp}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{g+gp}{... }           \PYG{n}{nbrOfCPUs}\PYG{o}{=}\PYG{l+m+mi}{28}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qr}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Instance class    : cQuantilesRankingDigraph}
+\PYG{g+go}{Instance name     : random3ObjectivesPerfTab\PYGZus{}mp}
+\PYG{g+go}{\PYGZsh{} Actions         : 1000000}
+\PYG{g+go}{\PYGZsh{} Criteria        : 21}
+\PYG{g+go}{Sorting by        : 10\PYGZhy{}Tiling}
+\PYG{g+go}{Ordering strategy : optimal}
+\PYG{g+go}{Ranking rule      : NetFlows}
+\PYG{g+go}{\PYGZsh{} Components      : 233645}
+\PYG{g+go}{Minimal order     : 1}
+\PYG{g+go}{Maximal order     : 153}
+\PYG{g+go}{Average order     : 4.3}
+\PYG{g+go}{fill rate         : 0.001\PYGZpc{}}
+\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Constructor run times (in sec.) \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{Nbr of threads    : 28}
+\PYG{g+go}{Total time        : 177.02770}
+\PYG{g+go}{QuantilesSorting  : 99.55377}
+\PYG{g+go}{Preordering       : 5.17954}
+\PYG{g+go}{Decomposing       : 72.29356}
+\end{sphinxVerbatim}
+\end{quote}
 
 On this 2x14c Intel Xeon Gold 6132 @ 2.6 GHz equipped HPC node with 132GB RAM \sphinxfootnotemark[7], deciles sorting and locally ranking a \sphinxstylestrong{million} decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes us about \sphinxstylestrong{3 minutes} (see Lines 37-42 above); with 1.5 minutes for the deciles sorting and, a bit more than one minute, for the local ranking of the individual components.
 
@@ -4008,7 +4028,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Rating with learned quantile norms}
-\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}\label{\detokenize{tutorial:rating-tutorial-label}}
+\label{\detokenize{tutorial:rating-tutorial-label}}\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4503,7 +4523,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{graphs} module}
-\label{\detokenize{tutorial:working-with-the-graphs-module}}\label{\detokenize{tutorial:graphs-tutorial-label}}
+\label{\detokenize{tutorial:graphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-graphs-module}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -5038,46 +5058,48 @@ In the 12-cycle graph, we observe 29 labelled MISs: \textendash{} 3 of cardinali
 \begin{footnote}[3]\sphinxAtStartFootnote
 The \sphinxcode{perrinMIS} shell command may be installed system wide with the command \sphinxcode{.../Digraph3\$ make installPerrin} from the main Digraph3 directory. It is stored by default into \sphinxcode{\textless{}/usr/local/bin/\textgreater{}}. This may be changed with the \sphinxcode{INSTALLDIR} flag. The command \sphinxcode{.../Digraph3\$ make installPerrinUser} installs it instead without sudo into the user’s private \sphinxcode{\textless{}\$Home/.bin\textgreater{}} directory.
 %
-\end{footnote}  along with all the Digraphs3 python modules for computing the set of MISs observed in the graph:
+\end{footnote}  along with all the Digraphs3 python modules for computing the set of MISs observed in the graph.
+\begin{quote}
 
 \fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-...\PYGZdl{} echo 12 \textbar{} /usr/local/bin/perrinMIS
-\PYGZsh{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} \PYGZsh{}
-\PYGZsh{} Generating MIS set of Cn with the      \PYGZsh{}
-\PYGZsh{} Perrin sequence algorithm.             \PYGZsh{}
-\PYGZsh{} Temporary files used.                  \PYGZsh{}
-\PYGZsh{} even versus odd order optimised.       \PYGZsh{}
-\PYGZsh{} RB December 2006                       \PYGZsh{}
-\PYGZsh{} Current revision Dec 2018              \PYGZsh{}
-\PYGZsh{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} \PYGZsh{}
-Input cycle order ? \PYGZlt{}\PYGZhy{}\PYGZhy{} 12
-mis 1 : 100100100100
-mis 2 : 010010010010
-mis 3 : 001001001001
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+...\PYGZdl{} \PYG{n+nb}{echo} \PYG{l+m}{12} \PYG{p}{\textbar{}} /usr/local/bin/perrinMIS
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} \PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} Generating MIS set of Cn with the      \PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} Perrin sequence algorithm.             \PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} Temporary files used.                  \PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} even versus odd order optimised.       \PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} RB December 2006                       \PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} Current revision Dec 2018              \PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} \PYGZsh{}}
+Input cycle order ? \PYGZlt{}\PYGZhy{}\PYGZhy{} \PYG{l+m}{12}
+mis \PYG{l+m}{1} : \PYG{l+m}{100100100100}
+mis \PYG{l+m}{2} : \PYG{l+m}{010010010010}
+mis \PYG{l+m}{3} : \PYG{l+m}{001001001001}
 ...
 ...
 ...
-mis 27 : 001001010101
-mis 28 : 101010101010
-mis 29 : 010101010101
+mis \PYG{l+m}{27} : \PYG{l+m}{001001010101}
+mis \PYG{l+m}{28} : \PYG{l+m}{101010101010}
+mis \PYG{l+m}{29} : \PYG{l+m}{010101010101}
 Cardinalities:
-0 : 0
-1 : 0
-2 : 0
-3 : 0
-4 : 3
-5 : 24
-6 : 2
-7 : 0
-8 : 0
-9 : 0
-10 : 0
-11 : 0
-12 : 0
-Total: 29
-execution time: 0 sec. and 2 millisec.
+\PYG{l+m}{0} : \PYG{l+m}{0}
+\PYG{l+m}{1} : \PYG{l+m}{0}
+\PYG{l+m}{2} : \PYG{l+m}{0}
+\PYG{l+m}{3} : \PYG{l+m}{0}
+\PYG{l+m}{4} : \PYG{l+m}{3}
+\PYG{l+m}{5} : \PYG{l+m}{24}
+\PYG{l+m}{6} : \PYG{l+m}{2}
+\PYG{l+m}{7} : \PYG{l+m}{0}
+\PYG{l+m}{8} : \PYG{l+m}{0}
+\PYG{l+m}{9} : \PYG{l+m}{0}
+\PYG{l+m}{10} : \PYG{l+m}{0}
+\PYG{l+m}{11} : \PYG{l+m}{0}
+\PYG{l+m}{12} : \PYG{l+m}{0}
+Total: \PYG{l+m}{29}
+execution time: \PYG{l+m}{0} sec. and \PYG{l+m}{2} millisec.
 \end{sphinxVerbatim}
+\end{quote}
 
 Reading in the result of the \sphinxcode{perrinMIS} shell command, stored in a file called by default \sphinxcode{curd.dat}, may be operated with the \sphinxcode{digraphs.Digraph.readPerrinMisset()} method.
 
@@ -5849,7 +5871,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{About split, interval and permutation graphs}
-\label{\detokenize{tutorial:permutation-tutorial-label}}\label{\detokenize{tutorial:about-split-interval-and-permutation-graphs}}
+\label{\detokenize{tutorial:about-split-interval-and-permutation-graphs}}\label{\detokenize{tutorial:permutation-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
