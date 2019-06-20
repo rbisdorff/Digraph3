@@ -2328,7 +2328,7 @@ Let us inspect the 21 marginal performances of the five best-ranked alternatives
 
 The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best-ranked alternatives are, in decreasing order: #773909, #668947, #567308, #578560 and #426464.
 
-Their random performance evaluations were obviously drawn on all criteria with a *good* (+) performance profile, ie a Beta(alpha=5.8661,beta=2.62203) law (see the tutorial on generating random performance tableaux). 
+Their random performance evaluations were obviously drawn on all criteria with a *good* (+) performance profile, i.e. a Beta(*alpha* = 5.8661, *beta* = 2.62203) law (see the tutorial :ref:`RandomPerformanceTableau-Tutorial-label`). 
 
     >>> for x in qr.boostedRanking[:5]:
     ...     print(pt.actions[x]['name'],\
@@ -2361,7 +2361,6 @@ We consider now a partial performance tableau *best10*, consisting only, for ins
 #279729 |   +240    +230    -110    +290     +72    +140    +388     +62     -      +250
 #928564 |    +22    +228     -14    +246     +36     +78     +56    +110    +318     -
 r(x>y) image range := [-1008;+1008]
-
 >>> g.condorcetWinners()
 [155874, 426464, 567308]
 >>> g.computeChordlessCircuits()
