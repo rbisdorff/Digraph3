@@ -39,13 +39,17 @@ Working with the *Digraph3* software resources
 Purpose
 -------
 
-The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the |location_link1| given at the University of Luxembourg in the context of its *Master in Information and Computer Science* (MICS). 
+The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the |location_linkHTML1| |location_linkLatex1| given at the University of Luxembourg in the context of its *Master in Information and Computer Science* (MICS). 
 
 The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
-.. |location_link1| raw:: html
+.. |location_linkHTML1| raw:: html
 
-   <a href="http://hdl.handle.net/10993/37933" target="_blank">Master Course on *Algorithmic Decision Theory*</a>
+   <a href="http://hdl.handle.net/10993/37933" target="_blank">Course on *Algorithmic Decision Theory*</a>
+
+.. |location_linkLatex1| raw:: latex
+
+   Course on \emph{Algorithmic Decision Theory}
 
 
 Downloading of the Digraph3 resources
@@ -2129,7 +2133,7 @@ We provide therefore the :py:class:`cSparseIntegerOutrankingDigraphs.cQuantilesR
     # Actions         : 100
     # Criteria        : 7
     Sorting by        : 4-Tiling
-    Ordering strategy : average
+    Ordering strategy : optimal
     Ranking rule      : Copeland
     # Components      : 47
     Minimal order     : 1
@@ -2254,7 +2258,7 @@ Example python session on the HPC-UL Iris-126 -skylake node [7]_::
     # Actions         : 1000000
     # Criteria        : 21
     Sorting by        : 10-Tiling
-    Ordering strategy : average
+    Ordering strategy : optimal
     Ranking rule      : NetFlows
     # Components      : 233645
     Minimal order     : 1
@@ -2406,6 +2410,7 @@ A SME, specialized in printing and copy services, has to move into new offices, 
   ====================== ==== ==================================================
 
 Three **decision objectives** are guiding the CEO's choice:
+
       1. *minimize* the yearly costs induced by the moving,
       2. *maximize* the future turnover of the SME,
       3. *maximize* the new working conditions.
@@ -2474,7 +2479,7 @@ We may inspect the performance tableau data with the computing resources provide
     'V'      |    1.00   |     60.00     80.00    70.00     50.00     60.00      0.00    100.00  
     'W'      |    1.00   |     75.00     30.00     0.00     55.00    100.00      0.00     50.00  
 
-We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the ``showCriteria`` method.
+We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the :py:func:`PerformanceTableau.showCriteria` method.
 
     >>> t.showCriteria()
     *----  criteria -----*
@@ -2491,7 +2496,7 @@ We thus recover all the input data. To measure the actual preference discriminat
     Threshold veto : 80.00 + 0.00x ; percentile:  0.905
     ...
 
-On the *Costs* criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative *Comfort* criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged *considerably large* (line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria. 
+On the *Costs* criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative *Comfort* criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged *considerably large* (Line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria. 
  
 A colorful comparison of all the performances is shown by the **heat map** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.
 
@@ -2509,22 +2514,23 @@ Outranking digraph
 ------------------
 
 To help now the CEO choosing the best site, we are going to compute pairwise outrankings (see [BIS-2013]_) on the set of potential sites. For two sites *x* and *y*, the situation "*x* outranks *y*", denoted (*x* S *y*), is given if there is:
+
      1. a **significant majority** of criteria concordantly supporting that site *x* is *at least as satisfactory as* site *y*, and
      2. **no considerable** counter-performance observed on any discordant criterion.
 
 The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted r(*x* S *y*), is measured in a bipolar significance valuation [-100.00, 100.00], where **positive** terms r(*x* S *y*) > 0.0 indicate a **validated**, and **negative** terms r(*x* S *y*) < 0.0 indicate a **non-validated** outrankings; whereas the **median** value r(*x* S *y*) = 0.0 represents an **indeterminate** situation (see [BIS-2004]_).   
-
-For computing such a bipolar valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigraph`` constructor from the :ref:`outrankingDigraphs-label` module. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window.
-
-    >>> from outrankingDigraphs import BipolarOutrankingDigraph
-    >>> g = BipolarOutrankingDigraph(t)
-    >>> g.showHTMLRelationTable()
 
 .. figure:: officeChoiceOutranking.png
    :width: 400 px
    :align: center
 
    The office choice outranking digraph  
+
+For computing such a bipolar valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigraph`` constructor from the :ref:`outrankingDigraphs-label` module. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window (see Fig. 21).
+
+    >>> from outrankingDigraphs import BipolarOutrankingDigraph
+    >>> g = BipolarOutrankingDigraph(t)
+    >>> g.showHTMLRelationTable()
 	   
 We may notice that Alternative *D* is **positively outranking** all other potential office sites (a *Condorcet winner*). Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are *not* outranked by any other site; they are in fact **weak** *Condorcet winners*.
 
@@ -2533,7 +2539,7 @@ We may notice that Alternative *D* is **positively outranking** all other potent
     >>> g.weakCondorcetWinners()
     ['A', 'C', 'D']
 
-We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph.
+We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph (see Fig.22).
 
     >>> g.exportGraphViz('officeChoice')
     *---- exporting a dot file for GraphViz tools ---------*
@@ -2558,7 +2564,7 @@ One may check that the outranking digraph *g* does not admit in fact a cyclic st
 *Rubis* best choice recommendations
 -----------------------------------
 
-Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of *g*.
+Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of *g* (see the tutorial :ref:`Kernel-Tutorial-label`).
 
     >>> g.showPreKernels()
     *--- Computing preKernels ---*
@@ -2596,9 +2602,9 @@ Following the Rubis outranking method (see [BIS-2008]_), potential best choice r
     Execution time  : 0.00018 sec.
     Results in sets: dompreKernels and abspreKernels.
 
-We notice three potential best choice recommendations: the Condorcet winner *D* (line 4), the triplet *B*, *C* and *E* (line 9), and finally the pair *A* and *G* (line 14). The Rubis best choice recommendation is given by the **most determined** pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command.
+We notice three potential best choice recommendations: the Condorcet winner *D* (Line 4), the triplet *B*, *C* and *E* (Line 9), and finally the pair *A* and *G* (Line 14). The Rubis best choice recommendation is given by the **most determined** pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command.
 
->>> g.showRubisBestChoiceRecommendation(CoDual=False)
+>>> g.showBestChoiceRecommendation(CoDual=False)
 *****************************************
 Rubis best choice recommendation(s) (BCR)
  (in decreasing order of determinateness)   
@@ -2642,12 +2648,12 @@ Credibility domain: [-100.00,100.00]
 Execution time: 0.014 seconds
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We notice in line 6 above that the most significantly supported best
+We notice in Line 6 above that the most significantly supported best
 choice recommendation is indeed the Condorcet winner *D* with a
-majority of 56% of the criteria significance (see line 12). Both other
+majority of 56% of the criteria significance (see Line 12). Both other
 potential best choice recommendations, as well as the potential worst
 choice recommendation, are not positively validated as best,
-resp. worst choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see lines 27 and 37) and seams hence not actually comparable to its competitors.
+resp. worst choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see Lines 27 and 37) and seams hence not actually comparable to its competitors.
 
 The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in the default system browser, is provided by the :py:mod:`xmcda` module. In a python3 session working in the directory where the XMCDA encoded problem data is stored, we may proceed as follows.
 
@@ -2661,6 +2667,7 @@ And, in a system browser window, browse the `solution file`_.
    .. _solution file: _static/officeChoice.xml1BYyGVwV866hSNZoSolution.html
 
 The :code:`valuationType` parameter allows to work:
+
     - on the standard bipolar outranking digraph (valuationType = 'bipolar', default),
     - on the normalized --[-1,1] valued-- bipolar outranking digraph (valuationType = 'normalized'),
     - on the robust --ordinal criteria weights-- bipolar outranking digraph (valuationType = 'robust'),
@@ -2764,9 +2771,9 @@ Credibility domain:  {'min':-100.0, 'max': 100.0', 'med':0.0'}
      {'A': 0.00, 'B': 0.00, 'C': 0.00, 'D': 0.00, 
       'E': 0.00, 'F': 0.00, 'G': 0.00, }
 
-It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D' (see line 6). In the corresponding characteristic vector (see line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
+It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D' (see Line 6). In the corresponding characteristic vector (see Line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
 
-We may also notice (see line 17 and line 21) that both alternatives *A* and *F* are reported as certainly outranked choices, hence a **potential worst choice recommendation** . This confirms again the global incomparability status of alternative *A*.
+We may also notice (see Line 17 and Line 21) that both alternatives *A* and *F* are reported as certainly outranked choices, hence a **potential worst choice recommendation** . This confirms again the global incomparability status of alternative *A*.
 
 Weakly ordering
 ---------------
@@ -2836,7 +2843,7 @@ To illustrate the decision problem we face, consider for a moment that, in a giv
      Criterion      b1       b2       b3       b4       b5       c1      c2
    ============= ======== ======== ======== ======== ======== ======== ========
        weight        2        2        2        2        2        5       5
-         \           \        \        \        \        \        \       \
+   ------------- -------- -------- -------- -------- -------- -------- --------
       *a1001*      37.0       2        2      61.0     31.0      -4    -40.0   
       *a1010*      32.0       9        6      55.0     51.0      -4    -35.0
    ============= ======== ======== ======== ======== ======== ======== ========
@@ -2912,7 +2919,7 @@ Given a new Performance Tableau with 100 new decision alternatives, the so far e
     >>> # Updating the quartile norms shown above 
     >>> pq.updateQuantiles(newTab,historySize=None)
 
-Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance** the **new** evaluations against the **historical** ones. With **historySize = None** (the default setting), the balance in the example above is 900/1000 (90%, weight of historical data) against 100/1000 (10%, weight of the new incoming observations). Putting **historySize = 0**, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view.
+Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance** the **new** evaluations against the **historical** ones. With **historySize = None** (the default setting), the balance in the example above is 900/1000 (90%, weight of historical data) against 100/1000 (10%, weight of the new incoming observations). Putting **historySize = 0**, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view (see Fig. 24).
 
     >>> # showing the updated quantile limits in a browser view
     >>> pq.showHTMLLimitingQuantiles(Transposed=True)
@@ -2974,15 +2981,15 @@ Let us have a look at the digraph's nodes, here called **newActions**.
 
 >>> nqr.showPerformanceTableau(actionsSubset=nqr.newActions)
 *----  performance tableau -----*
-criteria |  'a1001' 'a1002' 'a1003' 'a1004' 'a1005' 'a1006' 'a1007' 'a1008' 'a1009' 'a1010'   
----------|---------------------------------------------------------------------------------
-   'b1'  |   37.0    27.0    24.0    16.0    42.0    33.0    39.0    64.0    42.0    32.0  
-   'b2'  |    2.0     5.0     8.0     3.0     3.0     3.0     6.0     5.0     4.0     9.0  
-   'b3'  |    2.0     4.0     2.0     1.0     6.0     3.0     2.0     6.0     6.0     6.0  
-   'b4'  |   61.0    54.0    74.0    25.0    28.0    20.0    20.0    49.0    44.0    55.0  
-   'b5'  |   31.0    63.0    61.0    48.0    30.0    39.0    16.0    96.0    57.0    51.0  
-   'c1'  |   -4.0    -6.0    -8.0    -5.0    -1.0    -5.0    -1.0    -6.0    -6.0    -4.0  
-   'c2'  |  -40.0   -23.0   -37.0   -37.0   -24.0   -27.0   -73.0   -43.0   -94.0   -35.0  
+criteria | a1001 a1002 a1003 a1004 a1005 a1006 a1007 a1008 a1009 a1010   
+---------|-------------------------------------------------------------
+   'b1'  |  37.0  27.0  24.0  16.0  42.0  33.0  39.0  64.0  42.0  32.0  
+   'b2'  |   2.0   5.0   8.0   3.0   3.0   3.0   6.0   5.0   4.0   9.0  
+   'b3'  |   2.0   4.0   2.0   1.0   6.0   3.0   2.0   6.0   6.0   6.0  
+   'b4'  |  61.0  54.0  74.0  25.0  28.0  20.0  20.0  49.0  44.0  55.0  
+   'b5'  |  31.0  63.0  61.0  48.0  30.0  39.0  16.0  96.0  57.0  51.0  
+   'c1'  |  -4.0  -6.0  -8.0  -5.0  -1.0  -5.0  -1.0  -6.0  -6.0  -4.0  
+   'c2'  | -40.0 -23.0 -37.0 -37.0 -24.0 -27.0 -73.0 -43.0 -94.0 -35.0  
 
 Among the 10 new incoming decision alternatives (see below), we recognize alternatives *a1001* (see column 2) and *a1010* (see last column) we have mentioned in our introduction.
 
@@ -3033,7 +3040,7 @@ We notice above that no new decision alternative is rated in the lowest [0.0-0.2
     [0.50 - 0.75[ ['a1005', 'a1010', 'a1008', 'a1002', 'a1006']
     [0.25 - 0.50[ ['a1003', 'a1001', 'a1007', 'a1004', 'a1009']
     
-The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method.
+The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method (see Fig. 25).
 
     >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quartiles Rating',
     ...               Correlations=True,colorLevels=5)
@@ -3045,7 +3052,7 @@ The same result may even more conviently be consulted in a browser view via a sp
 
     Heatmap of normed quartiles ranking 
 	    
-Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the same rating result in a Hasse diagram format.
+Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the same rating result in a Hasse diagram format (see Fig. 26).
 
    >>> nqr.exportRatingGraphViz('normedRatingDigraph')
     *---- exporting a dot file for GraphViz tools ---------*
@@ -3065,7 +3072,6 @@ We may now answer the **normed rating decision problem** stated at the beginning
       Rating     Criterion     b1       b2       b3       b4       b5       c1       c2    
    ============ =========== ======== ======== ======== ======== ======== ======== ========
     quartiles      weight       2        2        2        2        2        5        5     
-         \            \         \        \        \        \        \        \        \
       **Q2**       *a1001*    37.0      2        2      61.0     31.0       -4     -40.0    
       **Q3**       *a1010*    32.0      9        6      55.0     51.0       -4     -35.0 
    ============ =========== ======== ======== ======== ======== ======== ======== ========
@@ -3085,7 +3091,7 @@ A more precise rating result may be achieved when we use **deciles** instead of 
 
 Compared with the quartiles rating result, we notice that the five alternatives (*a1002*, *a1005*, *a1006*, *a1008*, and *a1010*), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives *a1002*, *a1005*, *a1008* and *a1010* attain the 7th decile class [0.6-0.7[, whereas alternative *a1006* attains only the the 6th decile class [0.5-0.6[. Of the five *Q2* [0.25-0.50[ rated alternatives (*a1001*, *a1003*, *a1004*, *a1006* and *a1007*), alternatives *a1001* and *a1003* are now rated in the 6th decile class [0.5 - 0.6[, whereas *a1004* and *a1007* are rated the 5th decile class [0.4-0.5[ and *a1009* is lowest rated in the 4th decile class [0.3 - 0.4[.
 
-A browser view may again more conveniently illustrate this preciser *deciles* rating result.
+A browser view may again more conveniently illustrate this preciser *deciles* rating result (see Fig. 27).
 
     >>> nqr1.showHTMLRatingHeatmap(pageTitle='Heatmap of the deciles rating',\
     ...                            colorLevels=5,Correlations=True)
@@ -3457,7 +3463,7 @@ Special classes of graphs, like *n* x *m* **rectangular** or **triangular grids*
 Simulating Metropolis random walks
 ----------------------------------
 
-Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specialization of the :py:class:`graphs.Graph` class, for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertex (see lines 14-22).
+Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specialization of the :py:class:`graphs.Graph` class, for implementing a generic **Metropolis MCMC** (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  :code:`probs = {‘v1’: x, ‘v2’: y, ...}` for visiting each vertex (see Lines 14-22).
 
         >>> from graphs import MetropolisChain
 	>>> g = Graph(numberOfVertices=5,edgeProbability=0.5)
@@ -3499,7 +3505,7 @@ Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specializati
 	  'v4' |  0.33   0.33    0.00    0.08    0.25
 	  'v5' |  0.00   0.00    0.50    0.50    0.00
 
-The ``checkSampling()`` method (see line 23) generates a random walk of *nSim=30000* steps on the given graph and records by the way the observed relative frequency with which each vertex is passed by. In this example, the stationary transition probability distribution, shown by the ``showTransitionMatrix()`` method above (see lines 31-), is quite adequately simulated.
+The ``checkSampling()`` method (see Line 23) generates a random walk of *nSim=30000* steps on the given graph and records by the way the observed relative frequency with which each vertex is passed by. In this example, the stationary transition probability distribution, shown by the ``showTransitionMatrix()`` method above (see Lines 31-), is quite adequately simulated.
 
 For more technical information and more code examples, look into the technical documentation of the :ref:`graphs-label`. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström's 2002 book: [FMCAA]_.
 

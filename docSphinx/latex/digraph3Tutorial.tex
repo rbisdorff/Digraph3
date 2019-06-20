@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{June 19, 2019}
+\date{June 20, 2019}
 \release{3.7-2980+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -74,7 +74,7 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}
+\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
 here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version).
 
@@ -146,7 +146,7 @@ Revision: Python 3.7
 
 
 \section{Working with the \sphinxstyleemphasis{Digraph3} software resources}
-\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}\label{\detokenize{tutorial:digraphs-tutorial-label}}
+\label{\detokenize{tutorial:digraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -176,7 +176,7 @@ Revision: Python 3.7
 
 \subsection{Purpose}
 \label{\detokenize{tutorial:purpose}}
-The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the  given at the University of Luxembourg in the context of its \sphinxstyleemphasis{Master in Information and Computer Science} (MICS).
+The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the  Course on \emph{Algorithmic Decision Theory} given at the University of Luxembourg in the context of its \sphinxstyleemphasis{Master in Information and Computer Science} (MICS).
 
 The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
@@ -1116,7 +1116,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{outrankingDigraphs} module}
-\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}
+\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -2850,7 +2850,7 @@ We provide therefore the \sphinxcode{cSparseIntegerOutrankingDigraphs.cQuantiles
 \PYG{g+go}{\PYGZsh{} Actions         : 100}
 \PYG{g+go}{\PYGZsh{} Criteria        : 7}
 \PYG{g+go}{Sorting by        : 4\PYGZhy{}Tiling}
-\PYG{g+go}{Ordering strategy : average}
+\PYG{g+go}{Ordering strategy : optimal}
 \PYG{g+go}{Ranking rule      : Copeland}
 \PYG{g+go}{\PYGZsh{} Components      : 47}
 \PYG{g+go}{Minimal order     : 1}
@@ -2998,7 +2998,7 @@ Instance name     : random3ObjectivesPerfTab\PYGZus{}mp
 \PYGZsh{} Actions         : 1000000
 \PYGZsh{} Criteria        : 21
 Sorting by        : 10\PYGZhy{}Tiling
-Ordering strategy : average
+Ordering strategy : optimal
 Ranking rule      : NetFlows
 \PYGZsh{} Components      : 233645
 Minimal order     : 1
@@ -3143,7 +3143,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing a best choice recommendation}
-\label{\detokenize{tutorial:rubis-tutorial-label}}\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}
+\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}\label{\detokenize{tutorial:rubis-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3241,8 +3241,9 @@ Main town shopping street
 \par
 \sphinxattableend\end{savenotes}
 \end{quote}
-\begin{description}
-\item[{Three \sphinxstylestrong{decision objectives} are guiding the CEO’s choice:}] \leavevmode\begin{enumerate}
+
+Three \sphinxstylestrong{decision objectives} are guiding the CEO’s choice:
+\begin{enumerate}
 \item {} 
 \sphinxstyleemphasis{minimize} the yearly costs induced by the moving,
 
@@ -3253,8 +3254,6 @@ Main town shopping street
 \sphinxstyleemphasis{maximize} the new working conditions.
 
 \end{enumerate}
-
-\end{description}
 
 The decision consequences to take into account for evaluating the potential new office sites with respect to each of the three objectives are modelled by the following \sphinxstylestrong{family of criteria}.
 \begin{quote}
@@ -3599,7 +3598,7 @@ We may inspect the performance tableau data with the computing resources provide
 \PYG{g+go}{\PYGZsq{}W\PYGZsq{}      \textbar{}    1.00   \textbar{}     75.00     30.00     0.00     55.00    100.00      0.00     50.00}
 \end{sphinxVerbatim}
 
-We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the \sphinxcode{showCriteria} method.
+We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the \sphinxcode{PerformanceTableau.showCriteria()} method.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -3619,7 +3618,7 @@ We thus recover all the input data. To measure the actual preference discriminat
 \PYG{g+gp}{...}
 \end{sphinxVerbatim}
 
-On the \sphinxstyleemphasis{Costs} criterion, 9.5\% of the performance differences are considered insignificant and 14.3\% below the preference discrimination threshold (lines 6-7). On the qualitative \sphinxstyleemphasis{Comfort} criterion, we observe again 9.5\% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6\% of performance differences below the preference discrimination threshold (line 12). Furthermore, 100.0 - 90.5 = 9.5\% of the performance differences are judged \sphinxstyleemphasis{considerably large} (line 13); 80\% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria.
+On the \sphinxstyleemphasis{Costs} criterion, 9.5\% of the performance differences are considered insignificant and 14.3\% below the preference discrimination threshold (lines 6-7). On the qualitative \sphinxstyleemphasis{Comfort} criterion, we observe again 9.5\% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6\% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5\% of the performance differences are judged \sphinxstyleemphasis{considerably large} (Line 13); 80\% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria.
 
 A colorful comparison of all the performances is shown by the \sphinxstylestrong{heat map} statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.
 
@@ -3639,8 +3638,9 @@ Site \sphinxstyleemphasis{A} shows extreme and contradictory performances: highe
 
 
 \subsection{Outranking digraph}
-\label{\detokenize{tutorial:id35}}\begin{description}
-\item[{To help now the CEO choosing the best site, we are going to compute pairwise outrankings (see \phantomsection\label{\detokenize{tutorial:id36}}{\hyperref[\detokenize{tutorial:bis-2013}]{\sphinxcrossref{{[}BIS-2013{]}}}} (\autopageref*{\detokenize{tutorial:bis-2013}})) on the set of potential sites. For two sites \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y}, the situation “\sphinxstyleemphasis{x} outranks \sphinxstyleemphasis{y}”, denoted (\sphinxstyleemphasis{x} S \sphinxstyleemphasis{y}), is given if there is:}] \leavevmode\begin{enumerate}
+\label{\detokenize{tutorial:id35}}
+To help now the CEO choosing the best site, we are going to compute pairwise outrankings (see \phantomsection\label{\detokenize{tutorial:id36}}{\hyperref[\detokenize{tutorial:bis-2013}]{\sphinxcrossref{{[}BIS-2013{]}}}} (\autopageref*{\detokenize{tutorial:bis-2013}})) on the set of potential sites. For two sites \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y}, the situation “\sphinxstyleemphasis{x} outranks \sphinxstyleemphasis{y}”, denoted (\sphinxstyleemphasis{x} S \sphinxstyleemphasis{y}), is given if there is:
+\begin{enumerate}
 \item {} 
 a \sphinxstylestrong{significant majority} of criteria concordantly supporting that site \sphinxstyleemphasis{x} is \sphinxstyleemphasis{at least as satisfactory as} site \sphinxstyleemphasis{y}, and
 
@@ -3649,18 +3649,7 @@ a \sphinxstylestrong{significant majority} of criteria concordantly supporting t
 
 \end{enumerate}
 
-\end{description}
-
 The credibility of each pairwise outranking situation (see \phantomsection\label{\detokenize{tutorial:id37}}{\hyperref[\detokenize{tutorial:bis-2013}]{\sphinxcrossref{{[}BIS-2013{]}}}} (\autopageref*{\detokenize{tutorial:bis-2013}})), denoted r(\sphinxstyleemphasis{x} S \sphinxstyleemphasis{y}), is measured in a bipolar significance valuation {[}-100.00, 100.00{]}, where \sphinxstylestrong{positive} terms r(\sphinxstyleemphasis{x} S \sphinxstyleemphasis{y}) \textgreater{} 0.0 indicate a \sphinxstylestrong{validated}, and \sphinxstylestrong{negative} terms r(\sphinxstyleemphasis{x} S \sphinxstyleemphasis{y}) \textless{} 0.0 indicate a \sphinxstylestrong{non-validated} outrankings; whereas the \sphinxstylestrong{median} value r(\sphinxstyleemphasis{x} S \sphinxstyleemphasis{y}) = 0.0 represents an \sphinxstylestrong{indeterminate} situation (see \phantomsection\label{\detokenize{tutorial:id38}}{\hyperref[\detokenize{tutorial:bis-2004}]{\sphinxcrossref{{[}BIS-2004{]}}}} (\autopageref*{\detokenize{tutorial:bis-2004}})).
-
-For computing such a bipolar valued outranking digraph from the given performance tableau \sphinxstyleemphasis{t}, we use the \sphinxcode{BipolarOutrankingDigraph} constructor from the \DUrole{xref,std,std-ref}{outrankingDigraphs-label} module. The \sphinxcode{Digraph.showHTMLRelationTable} method shows here the resulting bipolar-valued adjacency matrix in a system browser window.
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{p}{)}
-\end{sphinxVerbatim}
 
 \begin{figure}[htbp]
 \centering
@@ -3668,6 +3657,15 @@ For computing such a bipolar valued outranking digraph from the given performanc
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{officeChoiceOutranking}.png}
 \caption{The office choice outranking digraph}\label{\detokenize{tutorial:id113}}\end{figure}
+
+For computing such a bipolar valued outranking digraph from the given performance tableau \sphinxstyleemphasis{t}, we use the \sphinxcode{BipolarOutrankingDigraph} constructor from the \DUrole{xref,std,std-ref}{outrankingDigraphs-label} module. The \sphinxcode{Digraph.showHTMLRelationTable} method shows here the resulting bipolar-valued adjacency matrix in a system browser window (see Fig. 21).
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{p}{)}
+\end{sphinxVerbatim}
 
 We may notice that Alternative \sphinxstyleemphasis{D} is \sphinxstylestrong{positively outranking} all other potential office sites (a \sphinxstyleemphasis{Condorcet winner}). Yet, alternatives \sphinxstyleemphasis{A} (the most expensive) and \sphinxstyleemphasis{C} (the cheapest) are \sphinxstyleemphasis{not} outranked by any other site; they are in fact \sphinxstylestrong{weak} \sphinxstyleemphasis{Condorcet winners}.
 
@@ -3679,7 +3677,7 @@ We may notice that Alternative \sphinxstyleemphasis{D} is \sphinxstylestrong{pos
 \PYG{g+go}{[\PYGZsq{}A\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}D\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph.
+We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph (see Fig.22).
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -3711,7 +3709,7 @@ One may check that the outranking digraph \sphinxstyleemphasis{g} does not admit
 
 \subsection{\sphinxstyleemphasis{Rubis} best choice recommendations}
 \label{\detokenize{tutorial:rubis-best-choice-recommendations}}
-Following the Rubis outranking method (see \phantomsection\label{\detokenize{tutorial:id39}}{\hyperref[\detokenize{tutorial:bis-2008}]{\sphinxcrossref{{[}BIS-2008{]}}}} (\autopageref*{\detokenize{tutorial:bis-2008}})), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of \sphinxstyleemphasis{g}.
+Following the Rubis outranking method (see \phantomsection\label{\detokenize{tutorial:id39}}{\hyperref[\detokenize{tutorial:bis-2008}]{\sphinxcrossref{{[}BIS-2008{]}}}} (\autopageref*{\detokenize{tutorial:bis-2008}})), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of \sphinxstyleemphasis{g} (see the tutorial {\hyperref[\detokenize{tutorial:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{On computing digraph kernels}}}} (\autopageref*{\detokenize{tutorial:kernel-tutorial-label}})).
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -3752,11 +3750,11 @@ Following the Rubis outranking method (see \phantomsection\label{\detokenize{tut
 \PYG{g+go}{Results in sets: dompreKernels and abspreKernels.}
 \end{sphinxVerbatim}
 
-We notice three potential best choice recommendations: the Condorcet winner \sphinxstyleemphasis{D} (line 4), the triplet \sphinxstyleemphasis{B}, \sphinxstyleemphasis{C} and \sphinxstyleemphasis{E} (line 9), and finally the pair \sphinxstyleemphasis{A} and \sphinxstyleemphasis{G} (line 14). The Rubis best choice recommendation is given by the \sphinxstylestrong{most determined} pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command.
+We notice three potential best choice recommendations: the Condorcet winner \sphinxstyleemphasis{D} (Line 4), the triplet \sphinxstyleemphasis{B}, \sphinxstyleemphasis{C} and \sphinxstyleemphasis{E} (Line 9), and finally the pair \sphinxstyleemphasis{A} and \sphinxstyleemphasis{G} (Line 14). The Rubis best choice recommendation is given by the \sphinxstylestrong{most determined} pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showRubisBestChoiceRecommendation}\PYG{p}{(}\PYG{n}{CoDual}\PYG{o}{=}\PYG{n+nb+bp}{False}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{n}{CoDual}\PYG{o}{=}\PYG{n+nb+bp}{False}\PYG{p}{)}
 \PYG{g+go}{*****************************************}
 \PYG{g+go}{Rubis best choice recommendation(s) (BCR)}
 \PYG{g+go}{ (in decreasing order of determinateness)}
@@ -3801,12 +3799,12 @@ We notice three potential best choice recommendations: the Condorcet winner \sph
 \PYG{g+go}{\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}\PYGZti{}}
 \end{sphinxVerbatim}
 
-We notice in line 6 above that the most significantly supported best
+We notice in Line 6 above that the most significantly supported best
 choice recommendation is indeed the Condorcet winner \sphinxstyleemphasis{D} with a
-majority of 56\% of the criteria significance (see line 12). Both other
+majority of 56\% of the criteria significance (see Line 12). Both other
 potential best choice recommendations, as well as the potential worst
 choice recommendation, are not positively validated as best,
-resp. worst choices. They may or may not be considered so. Alternative \sphinxstyleemphasis{A}, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see lines 27 and 37) and seams hence not actually comparable to its competitors.
+resp. worst choices. They may or may not be considered so. Alternative \sphinxstyleemphasis{A}, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see Lines 27 and 37) and seams hence not actually comparable to its competitors.
 
 The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in the default system browser, is provided by the \sphinxcode{xmcda} module. In a python3 session working in the directory where the XMCDA encoded problem data is stored, we may proceed as follows.
 
@@ -3821,8 +3819,9 @@ The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in
 And, in a system browser window, browse the \sphinxhref{\_static/officeChoice.xml1BYyGVwV866hSNZoSolution.html}{solution file}.
 \begin{quote}
 \end{quote}
-\begin{description}
-\item[{The \sphinxcode{valuationType} parameter allows to work:}] \leavevmode\begin{itemize}
+
+The \sphinxcode{valuationType} parameter allows to work:
+\begin{itemize}
 \item {} 
 on the standard bipolar outranking digraph (valuationType = ‘bipolar’, default),
 
@@ -3839,8 +3838,6 @@ on the confident outranking digraph (valuationType = ‘confident’),
 ignoring considerable performances differences (valuationType = ‘noVeto’).
 
 \end{itemize}
-
-\end{description}
 
 One may as well use the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg,
 
@@ -3956,9 +3953,9 @@ To model these \sphinxstyleemphasis{strict outranking} situations, we may comput
 \PYG{g+go}{      \PYGZsq{}E\PYGZsq{}: 0.00, \PYGZsq{}F\PYGZsq{}: 0.00, \PYGZsq{}G\PYGZsq{}: 0.00, \PYGZcb{}}
 \end{sphinxVerbatim}
 
-It is interesting to notice that the \sphinxstylestrong{strict best choice recommendation} consists in the set of weak Condorcet winners: ‘A’, ‘C’ and ‘D’ (see line 6). In the corresponding characteristic vector (see line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see \phantomsection\label{\detokenize{tutorial:id41}}{\hyperref[\detokenize{tutorial:bis-2006a}]{\sphinxcrossref{{[}BIS-2006a{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006a}})), we find confirmed that alternative \sphinxstyleemphasis{D} is the only positively validated one, whereas both extreme alternatives - \sphinxstyleemphasis{A} (the most expensive) and \sphinxstyleemphasis{C} (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides \sphinxstyleemphasis{D}. Notice furthermore that compromise alternative \sphinxstyleemphasis{G}, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate.
+It is interesting to notice that the \sphinxstylestrong{strict best choice recommendation} consists in the set of weak Condorcet winners: ‘A’, ‘C’ and ‘D’ (see Line 6). In the corresponding characteristic vector (see Line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see \phantomsection\label{\detokenize{tutorial:id41}}{\hyperref[\detokenize{tutorial:bis-2006a}]{\sphinxcrossref{{[}BIS-2006a{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006a}})), we find confirmed that alternative \sphinxstyleemphasis{D} is the only positively validated one, whereas both extreme alternatives - \sphinxstyleemphasis{A} (the most expensive) and \sphinxstyleemphasis{C} (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides \sphinxstyleemphasis{D}. Notice furthermore that compromise alternative \sphinxstyleemphasis{G}, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate.
 
-We may also notice (see line 17 and line 21) that both alternatives \sphinxstyleemphasis{A} and \sphinxstyleemphasis{F} are reported as certainly outranked choices, hence a \sphinxstylestrong{potential worst choice recommendation} . This confirms again the global incomparability status of alternative \sphinxstyleemphasis{A}.
+We may also notice (see Line 17 and Line 21) that both alternatives \sphinxstyleemphasis{A} and \sphinxstyleemphasis{F} are reported as certainly outranked choices, hence a \sphinxstylestrong{potential worst choice recommendation} . This confirms again the global incomparability status of alternative \sphinxstyleemphasis{A}.
 
 
 \subsection{Weakly ordering}
@@ -4011,7 +4008,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Rating with learned quantile norms}
-\label{\detokenize{tutorial:rating-tutorial-label}}\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}
+\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}\label{\detokenize{tutorial:rating-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4072,23 +4069,6 @@ weight
 5
 &
 5
-\\
-\hline
-
-&
-
-&
-
-&
-
-&
-
-&
-
-&
-
-&
-
 \\
 \hline
 \sphinxstyleemphasis{a1001}
@@ -4219,7 +4199,7 @@ Given a new Performance Tableau with 100 new decision alternatives, the so far e
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq}\PYG{o}{.}\PYG{n}{updateQuantiles}\PYG{p}{(}\PYG{n}{newTab}\PYG{p}{,}\PYG{n}{historySize}\PYG{o}{=}\PYG{n+nb+bp}{None}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-Parameter \sphinxstyleemphasis{historySize} (see Line 6) of the \sphinxcode{performanceQuantiles.PerformanceQuantiles.updateQuantiles()} method allows to \sphinxstylestrong{balance} the \sphinxstylestrong{new} evaluations against the \sphinxstylestrong{historical} ones. With \sphinxstylestrong{historySize = None} (the default setting), the balance in the example above is 900/1000 (90\%, weight of historical data) against 100/1000 (10\%, weight of the new incoming observations). Putting \sphinxstylestrong{historySize = 0}, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view.
+Parameter \sphinxstyleemphasis{historySize} (see Line 6) of the \sphinxcode{performanceQuantiles.PerformanceQuantiles.updateQuantiles()} method allows to \sphinxstylestrong{balance} the \sphinxstylestrong{new} evaluations against the \sphinxstylestrong{historical} ones. With \sphinxstylestrong{historySize = None} (the default setting), the balance in the example above is 900/1000 (90\%, weight of historical data) against 100/1000 (10\%, weight of the new incoming observations). Putting \sphinxstylestrong{historySize = 0}, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view (see Fig. 24).
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4288,15 +4268,15 @@ Let us have a look at the digraph’s nodes, here called \sphinxstylestrong{newA
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showPerformanceTableau}\PYG{p}{(}\PYG{n}{actionsSubset}\PYG{o}{=}\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{newActions}\PYG{p}{)}
 \PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  performance tableau \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{criteria \textbar{}  \PYGZsq{}a1001\PYGZsq{} \PYGZsq{}a1002\PYGZsq{} \PYGZsq{}a1003\PYGZsq{} \PYGZsq{}a1004\PYGZsq{} \PYGZsq{}a1005\PYGZsq{} \PYGZsq{}a1006\PYGZsq{} \PYGZsq{}a1007\PYGZsq{} \PYGZsq{}a1008\PYGZsq{} \PYGZsq{}a1009\PYGZsq{} \PYGZsq{}a1010\PYGZsq{}}
-\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\textbar{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{   \PYGZsq{}b1\PYGZsq{}  \textbar{}   37.0    27.0    24.0    16.0    42.0    33.0    39.0    64.0    42.0    32.0}
-\PYG{g+go}{   \PYGZsq{}b2\PYGZsq{}  \textbar{}    2.0     5.0     8.0     3.0     3.0     3.0     6.0     5.0     4.0     9.0}
-\PYG{g+go}{   \PYGZsq{}b3\PYGZsq{}  \textbar{}    2.0     4.0     2.0     1.0     6.0     3.0     2.0     6.0     6.0     6.0}
-\PYG{g+go}{   \PYGZsq{}b4\PYGZsq{}  \textbar{}   61.0    54.0    74.0    25.0    28.0    20.0    20.0    49.0    44.0    55.0}
-\PYG{g+go}{   \PYGZsq{}b5\PYGZsq{}  \textbar{}   31.0    63.0    61.0    48.0    30.0    39.0    16.0    96.0    57.0    51.0}
-\PYG{g+go}{   \PYGZsq{}c1\PYGZsq{}  \textbar{}   \PYGZhy{}4.0    \PYGZhy{}6.0    \PYGZhy{}8.0    \PYGZhy{}5.0    \PYGZhy{}1.0    \PYGZhy{}5.0    \PYGZhy{}1.0    \PYGZhy{}6.0    \PYGZhy{}6.0    \PYGZhy{}4.0}
-\PYG{g+go}{   \PYGZsq{}c2\PYGZsq{}  \textbar{}  \PYGZhy{}40.0   \PYGZhy{}23.0   \PYGZhy{}37.0   \PYGZhy{}37.0   \PYGZhy{}24.0   \PYGZhy{}27.0   \PYGZhy{}73.0   \PYGZhy{}43.0   \PYGZhy{}94.0   \PYGZhy{}35.0}
+\PYG{g+go}{criteria \textbar{} a1001 a1002 a1003 a1004 a1005 a1006 a1007 a1008 a1009 a1010}
+\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\textbar{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{   \PYGZsq{}b1\PYGZsq{}  \textbar{}  37.0  27.0  24.0  16.0  42.0  33.0  39.0  64.0  42.0  32.0}
+\PYG{g+go}{   \PYGZsq{}b2\PYGZsq{}  \textbar{}   2.0   5.0   8.0   3.0   3.0   3.0   6.0   5.0   4.0   9.0}
+\PYG{g+go}{   \PYGZsq{}b3\PYGZsq{}  \textbar{}   2.0   4.0   2.0   1.0   6.0   3.0   2.0   6.0   6.0   6.0}
+\PYG{g+go}{   \PYGZsq{}b4\PYGZsq{}  \textbar{}  61.0  54.0  74.0  25.0  28.0  20.0  20.0  49.0  44.0  55.0}
+\PYG{g+go}{   \PYGZsq{}b5\PYGZsq{}  \textbar{}  31.0  63.0  61.0  48.0  30.0  39.0  16.0  96.0  57.0  51.0}
+\PYG{g+go}{   \PYGZsq{}c1\PYGZsq{}  \textbar{}  \PYGZhy{}4.0  \PYGZhy{}6.0  \PYGZhy{}8.0  \PYGZhy{}5.0  \PYGZhy{}1.0  \PYGZhy{}5.0  \PYGZhy{}1.0  \PYGZhy{}6.0  \PYGZhy{}6.0  \PYGZhy{}4.0}
+\PYG{g+go}{   \PYGZsq{}c2\PYGZsq{}  \textbar{} \PYGZhy{}40.0 \PYGZhy{}23.0 \PYGZhy{}37.0 \PYGZhy{}37.0 \PYGZhy{}24.0 \PYGZhy{}27.0 \PYGZhy{}73.0 \PYGZhy{}43.0 \PYGZhy{}94.0 \PYGZhy{}35.0}
 \end{sphinxVerbatim}
 
 Among the 10 new incoming decision alternatives (see below), we recognize alternatives \sphinxstyleemphasis{a1001} (see column 2) and \sphinxstyleemphasis{a1010} (see last column) we have mentioned in our introduction.
@@ -4360,7 +4340,7 @@ We notice above that no new decision alternative is rated in the lowest {[}0.0-0
 \PYG{g+go}{[0.25 \PYGZhy{} 0.50[ [\PYGZsq{}a1003\PYGZsq{}, \PYGZsq{}a1001\PYGZsq{}, \PYGZsq{}a1007\PYGZsq{}, \PYGZsq{}a1004\PYGZsq{}, \PYGZsq{}a1009\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see \sphinxcode{perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()} method.
+The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see \sphinxcode{perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()} method (see Fig. 25).
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4375,7 +4355,7 @@ The same result may even more conviently be consulted in a browser view via a sp
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{heatMap1}.png}
 \caption{Heatmap of normed quartiles ranking}\label{\detokenize{tutorial:id117}}\end{figure}
 
-Using furthermore a specialised version of the \sphinxcode{weakOrders.WeakOrder.exportGraphViz()} method allows drawing the same rating result in a Hasse diagram format.
+Using furthermore a specialised version of the \sphinxcode{weakOrders.WeakOrder.exportGraphViz()} method allows drawing the same rating result in a Hasse diagram format (see Fig. 26).
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4439,25 +4419,6 @@ weight
 5
 \\
 \hline
-
-&
-
-&
-
-&
-
-&
-
-&
-
-&
-
-&
-
-&
-
-\\
-\hline
 \sphinxstylestrong{Q2}
 &
 \sphinxstyleemphasis{a1001}
@@ -4519,7 +4480,7 @@ A more precise rating result may be achieved when we use \sphinxstylestrong{deci
 
 Compared with the quartiles rating result, we notice that the five alternatives (\sphinxstyleemphasis{a1002}, \sphinxstyleemphasis{a1005}, \sphinxstyleemphasis{a1006}, \sphinxstyleemphasis{a1008}, and \sphinxstyleemphasis{a1010}), rated before into the third quartile class {[}0.50-0.75{[}, are now divided up: alternatives \sphinxstyleemphasis{a1002}, \sphinxstyleemphasis{a1005}, \sphinxstyleemphasis{a1008} and \sphinxstyleemphasis{a1010} attain the 7th decile class {[}0.6-0.7{[}, whereas alternative \sphinxstyleemphasis{a1006} attains only the the 6th decile class {[}0.5-0.6{[}. Of the five \sphinxstyleemphasis{Q2} {[}0.25-0.50{[} rated alternatives (\sphinxstyleemphasis{a1001}, \sphinxstyleemphasis{a1003}, \sphinxstyleemphasis{a1004}, \sphinxstyleemphasis{a1006} and \sphinxstyleemphasis{a1007}), alternatives \sphinxstyleemphasis{a1001} and \sphinxstyleemphasis{a1003} are now rated in the 6th decile class {[}0.5 - 0.6{[}, whereas \sphinxstyleemphasis{a1004} and \sphinxstyleemphasis{a1007} are rated the 5th decile class {[}0.4-0.5{[} and \sphinxstyleemphasis{a1009} is lowest rated in the 4th decile class {[}0.3 - 0.4{[}.
 
-A browser view may again more conveniently illustrate this preciser \sphinxstyleemphasis{deciles} rating result.
+A browser view may again more conveniently illustrate this preciser \sphinxstyleemphasis{deciles} rating result (see Fig. 27).
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4542,7 +4503,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{graphs} module}
-\label{\detokenize{tutorial:graphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-graphs-module}}
+\label{\detokenize{tutorial:working-with-the-graphs-module}}\label{\detokenize{tutorial:graphs-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4962,7 +4923,7 @@ Special classes of graphs, like \sphinxstyleemphasis{n} x \sphinxstyleemphasis{m
 
 \subsection{Simulating Metropolis random walks}
 \label{\detokenize{tutorial:simulating-metropolis-random-walks}}
-Finally, we provide the \sphinxcode{graphs.MetropolisChain} class, a specialization of the \sphinxcode{graphs.Graph} class, for implementing a generic \sphinxstylestrong{Metropolis MCMC} (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  \sphinxcode{probs = \{‘v1’: x, ‘v2’: y, ...\}} for visiting each vertex (see lines 14-22).
+Finally, we provide the \sphinxcode{graphs.MetropolisChain} class, a specialization of the \sphinxcode{graphs.Graph} class, for implementing a generic \sphinxstylestrong{Metropolis MCMC} (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  \sphinxcode{probs = \{‘v1’: x, ‘v2’: y, ...\}} for visiting each vertex (see Lines 14-22).
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -5007,7 +4968,7 @@ Finally, we provide the \sphinxcode{graphs.MetropolisChain} class, a specializat
 \PYG{g+go}{  \PYGZsq{}v5\PYGZsq{} \textbar{}  0.00   0.00    0.50    0.50    0.00}
 \end{sphinxVerbatim}
 
-The \sphinxcode{checkSampling()} method (see line 23) generates a random walk of \sphinxstyleemphasis{nSim=30000} steps on the given graph and records by the way the observed relative frequency with which each vertex is passed by. In this example, the stationary transition probability distribution, shown by the \sphinxcode{showTransitionMatrix()} method above (see lines 31-), is quite adequately simulated.
+The \sphinxcode{checkSampling()} method (see Line 23) generates a random walk of \sphinxstyleemphasis{nSim=30000} steps on the given graph and records by the way the observed relative frequency with which each vertex is passed by. In this example, the stationary transition probability distribution, shown by the \sphinxcode{showTransitionMatrix()} method above (see Lines 31-), is quite adequately simulated.
 
 For more technical information and more code examples, look into the technical documentation of the \DUrole{xref,std,std-ref}{graphs-label}. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström’s 2002 book: \phantomsection\label{\detokenize{tutorial:id50}}{\hyperref[\detokenize{tutorial:fmcaa}]{\sphinxcrossref{{[}FMCAA{]}}}} (\autopageref*{\detokenize{tutorial:fmcaa}}).
 
@@ -6430,7 +6391,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{On tree graphs and graph forests}
-\label{\detokenize{tutorial:on-tree-graphs-and-graph-forests}}\label{\detokenize{tutorial:trees-tutorial-label}}
+\label{\detokenize{tutorial:trees-tutorial-label}}\label{\detokenize{tutorial:on-tree-graphs-and-graph-forests}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 

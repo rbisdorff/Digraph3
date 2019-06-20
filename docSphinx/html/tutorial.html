@@ -100,7 +100,7 @@
 </div>
 <div class="section" id="purpose">
 <h3><a class="toc-backref" href="#id170">Purpose</a><a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
-<p>The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the <a href="http://hdl.handle.net/10993/37933" target="_blank">Master Course on *Algorithmic Decision Theory*</a> given at the University of Luxembourg in the context of its <em>Master in Information and Computer Science</em> (MICS).</p>
+<p>The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the <a href="http://hdl.handle.net/10993/37933" target="_blank">Course on *Algorithmic Decision Theory*</a>  given at the University of Luxembourg in the context of its <em>Master in Information and Computer Science</em> (MICS).</p>
 <p>The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.</p>
 </div>
 <div class="section" id="downloading-of-the-digraph3-resources">
@@ -2224,16 +2224,15 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </li>
 <li><p class="first">integerWeights := Boolean (True = default)</p>
 </li>
-<li><dl class="first docutils">
-<dt>commonThresholds (default) := {</dt>
-<dd><div class="first last line-block">
+<li><p class="first">commonThresholds (default) := {</p>
+<blockquote>
+<div><div class="line-block">
 <div class="line">‘ind’:(0,0),</div>
 <div class="line">‘pref’:(1,0),</div>
 <div class="line">‘veto’:(numberOfActions,0)</div>
 <div class="line">} (default)</div>
 </div>
-</dd>
-</dl>
+</div></blockquote>
 </li>
 </ul>
 </dd>
@@ -3327,7 +3326,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"># Actions         : 100</span>
 <span class="go"># Criteria        : 7</span>
 <span class="go">Sorting by        : 4-Tiling</span>
-<span class="go">Ordering strategy : average</span>
+<span class="go">Ordering strategy : optimal</span>
 <span class="go">Ranking rule      : Copeland</span>
 <span class="go"># Components      : 47</span>
 <span class="go">Minimal order     : 1</span>
@@ -3534,7 +3533,7 @@ Instance name     : random3ObjectivesPerfTab_mp
 # Actions         : 1000000
 # Criteria        : 21
 Sorting by        : 10-Tiling
-Ordering strategy : average
+Ordering strategy : optimal
 Ranking rule      : NetFlows
 # Components      : 233645
 Minimal order     : 1
@@ -3782,15 +3781,14 @@ Decomposing       : 72.29356
 </tbody>
 </table>
 </div></blockquote>
-<dl class="docutils">
-<dt>Three <strong>decision objectives</strong> are guiding the CEO’s choice:</dt>
-<dd><ol class="first last arabic simple">
+<p>Three <strong>decision objectives</strong> are guiding the CEO’s choice:</p>
+<blockquote>
+<div><ol class="arabic simple">
 <li><em>minimize</em> the yearly costs induced by the moving,</li>
 <li><em>maximize</em> the future turnover of the SME,</li>
 <li><em>maximize</em> the new working conditions.</li>
 </ol>
-</dd>
-</dl>
+</div></blockquote>
 <p>The decision consequences to take into account for evaluating the potential new office sites with respect to each of the three objectives are modelled by the following <strong>family of criteria</strong>.</p>
 <blockquote>
 <div><table border="1" class="docutils">
@@ -4016,7 +4014,7 @@ Decomposing       : 72.29356
 <span class="go">&#39;W&#39;      |    1.00   |     75.00     30.00     0.00     55.00    100.00      0.00     50.00</span>
 </pre></div>
 </td></tr></table></div>
-<p>We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the <code class="docutils literal"><span class="pre">showCriteria</span></code> method.</p>
+<p>We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the <code class="xref py py-func docutils literal"><span class="pre">PerformanceTableau.showCriteria()</span></code> method.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -4046,7 +4044,7 @@ Decomposing       : 72.29356
 <span class="gp">...</span>
 </pre></div>
 </td></tr></table></div>
-<p>On the <em>Costs</em> criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative <em>Comfort</em> criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged <em>considerably large</em> (line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria.</p>
+<p>On the <em>Costs</em> criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative <em>Comfort</em> criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged <em>considerably large</em> (Line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria.</p>
 <p>A colorful comparison of all the performances is shown by the <strong>heat map</strong> statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
@@ -4059,16 +4057,19 @@ Decomposing       : 72.29356
 </div>
 <div class="section" id="id35">
 <h3><a class="toc-backref" href="#id218">Outranking digraph</a><a class="headerlink" href="#id35" title="Permalink to this headline">¶</a></h3>
-<dl class="docutils">
-<dt>To help now the CEO choosing the best site, we are going to compute pairwise outrankings (see <a class="reference internal" href="#bis-2013" id="id36">[BIS-2013]</a>) on the set of potential sites. For two sites <em>x</em> and <em>y</em>, the situation “<em>x</em> outranks <em>y</em>”, denoted (<em>x</em> S <em>y</em>), is given if there is:</dt>
-<dd><ol class="first last arabic simple">
+<p>To help now the CEO choosing the best site, we are going to compute pairwise outrankings (see <a class="reference internal" href="#bis-2013" id="id36">[BIS-2013]</a>) on the set of potential sites. For two sites <em>x</em> and <em>y</em>, the situation “<em>x</em> outranks <em>y</em>”, denoted (<em>x</em> S <em>y</em>), is given if there is:</p>
+<blockquote>
+<div><ol class="arabic simple">
 <li>a <strong>significant majority</strong> of criteria concordantly supporting that site <em>x</em> is <em>at least as satisfactory as</em> site <em>y</em>, and</li>
 <li><strong>no considerable</strong> counter-performance observed on any discordant criterion.</li>
 </ol>
-</dd>
-</dl>
+</div></blockquote>
 <p>The credibility of each pairwise outranking situation (see <a class="reference internal" href="#bis-2013" id="id37">[BIS-2013]</a>), denoted r(<em>x</em> S <em>y</em>), is measured in a bipolar significance valuation [-100.00, 100.00], where <strong>positive</strong> terms r(<em>x</em> S <em>y</em>) &gt; 0.0 indicate a <strong>validated</strong>, and <strong>negative</strong> terms r(<em>x</em> S <em>y</em>) &lt; 0.0 indicate a <strong>non-validated</strong> outrankings; whereas the <strong>median</strong> value r(<em>x</em> S <em>y</em>) = 0.0 represents an <strong>indeterminate</strong> situation (see <a class="reference internal" href="#bis-2004" id="id38">[BIS-2004]</a>).</p>
-<p>For computing such a bipolar valued outranking digraph from the given performance tableau <em>t</em>, we use the <code class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></code> constructor from the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><span class="std std-ref">outrankingDigraphs module</span></a> module. The <code class="docutils literal"><span class="pre">Digraph.showHTMLRelationTable</span></code> method shows here the resulting bipolar-valued adjacency matrix in a system browser window.</p>
+<div class="figure align-center" id="id113">
+<a class="reference internal image-reference" href="_images/officeChoiceOutranking.png"><img alt="_images/officeChoiceOutranking.png" src="_images/officeChoiceOutranking.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">The office choice outranking digraph</span></p>
+</div>
+<p>For computing such a bipolar valued outranking digraph from the given performance tableau <em>t</em>, we use the <code class="docutils literal"><span class="pre">BipolarOutrankingDigraph</span></code> constructor from the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><span class="std std-ref">outrankingDigraphs module</span></a> module. The <code class="docutils literal"><span class="pre">Digraph.showHTMLRelationTable</span></code> method shows here the resulting bipolar-valued adjacency matrix in a system browser window (see Fig. 21).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
@@ -4076,10 +4077,6 @@ Decomposing       : 72.29356
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div>
-<div class="figure align-center" id="id113">
-<a class="reference internal image-reference" href="_images/officeChoiceOutranking.png"><img alt="_images/officeChoiceOutranking.png" src="_images/officeChoiceOutranking.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">The office choice outranking digraph</span></p>
-</div>
 <p>We may notice that Alternative <em>D</em> is <strong>positively outranking</strong> all other potential office sites (a <em>Condorcet winner</em>). Yet, alternatives <em>A</em> (the most expensive) and <em>C</em> (the cheapest) are <em>not</em> outranked by any other site; they are in fact <strong>weak</strong> <em>Condorcet winners</em>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -4090,7 +4087,7 @@ Decomposing       : 72.29356
 <span class="go">[&#39;A&#39;, &#39;C&#39;, &#39;D&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph.</p>
+<p>We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph (see Fig.22).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -4121,7 +4118,7 @@ Decomposing       : 72.29356
 </div>
 <div class="section" id="rubis-best-choice-recommendations">
 <h3><a class="toc-backref" href="#id219"><em>Rubis</em> best choice recommendations</a><a class="headerlink" href="#rubis-best-choice-recommendations" title="Permalink to this headline">¶</a></h3>
-<p>Following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id39">[BIS-2008]</a>), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of <em>g</em>.</p>
+<p>Following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id39">[BIS-2008]</a>), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of <em>g</em> (see the tutorial <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -4193,7 +4190,7 @@ Decomposing       : 72.29356
 <span class="go">Results in sets: dompreKernels and abspreKernels.</span>
 </pre></div>
 </td></tr></table></div>
-<p>We notice three potential best choice recommendations: the Condorcet winner <em>D</em> (line 4), the triplet <em>B</em>, <em>C</em> and <em>E</em> (line 9), and finally the pair <em>A</em> and <em>G</em> (line 14). The Rubis best choice recommendation is given by the <strong>most determined</strong> pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command.</p>
+<p>We notice three potential best choice recommendations: the Condorcet winner <em>D</em> (Line 4), the triplet <em>B</em>, <em>C</em> and <em>E</em> (Line 9), and finally the pair <em>A</em> and <em>G</em> (Line 14). The Rubis best choice recommendation is given by the <strong>most determined</strong> pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -4236,7 +4233,7 @@ Decomposing       : 72.29356
 40
 41
 42
-43</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+43</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="go">*****************************************</span>
 <span class="go">Rubis best choice recommendation(s) (BCR)</span>
 <span class="go"> (in decreasing order of determinateness)</span>
@@ -4281,12 +4278,12 @@ Decomposing       : 72.29356
 <span class="go">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
 </pre></div>
 </td></tr></table></div>
-<p>We notice in line 6 above that the most significantly supported best
+<p>We notice in Line 6 above that the most significantly supported best
 choice recommendation is indeed the Condorcet winner <em>D</em> with a
-majority of 56% of the criteria significance (see line 12). Both other
+majority of 56% of the criteria significance (see Line 12). Both other
 potential best choice recommendations, as well as the potential worst
 choice recommendation, are not positively validated as best,
-resp. worst choices. They may or may not be considered so. Alternative <em>A</em>, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see lines 27 and 37) and seams hence not actually comparable to its competitors.</p>
+resp. worst choices. They may or may not be considered so. Alternative <em>A</em>, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see Lines 27 and 37) and seams hence not actually comparable to its competitors.</p>
 <p>The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in the default system browser, is provided by the <a class="reference internal" href="techDoc.html#module-xmcda" title="xmcda"><code class="xref py py-mod docutils literal"><span class="pre">xmcda</span></code></a> module. In a python3 session working in the directory where the XMCDA encoded problem data is stored, we may proceed as follows.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -4300,17 +4297,16 @@ resp. worst choices. They may or may not be considered so. Alternative <em>A</em
 <p>And, in a system browser window, browse the <a class="reference external" href="_static/officeChoice.xml1BYyGVwV866hSNZoSolution.html">solution file</a>.</p>
 <blockquote>
 <div></div></blockquote>
-<dl class="docutils">
-<dt>The <code class="code docutils literal"><span class="pre">valuationType</span></code> parameter allows to work:</dt>
-<dd><ul class="first last simple">
+<p>The <code class="code docutils literal"><span class="pre">valuationType</span></code> parameter allows to work:</p>
+<blockquote>
+<div><ul class="simple">
 <li>on the standard bipolar outranking digraph (valuationType = ‘bipolar’, default),</li>
 <li>on the normalized –[-1,1] valued– bipolar outranking digraph (valuationType = ‘normalized’),</li>
 <li>on the robust –ordinal criteria weights– bipolar outranking digraph (valuationType = ‘robust’),</li>
 <li>on the confident outranking digraph (valuationType = ‘confident’),</li>
 <li>ignoring considerable performances differences (valuationType = ‘noVeto’).</li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 <p>One may as well use the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg,</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -4467,8 +4463,8 @@ resp. worst choices. They may or may not be considered so. Alternative <em>A</em
 <span class="go">      &#39;E&#39;: 0.00, &#39;F&#39;: 0.00, &#39;G&#39;: 0.00, }</span>
 </pre></div>
 </td></tr></table></div>
-<p>It is interesting to notice that the <strong>strict best choice recommendation</strong> consists in the set of weak Condorcet winners: ‘A’, ‘C’ and ‘D’ (see line 6). In the corresponding characteristic vector (see line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see <a class="reference internal" href="#bis-2006a" id="id41">[BIS-2006a]</a>), we find confirmed that alternative <em>D</em> is the only positively validated one, whereas both extreme alternatives - <em>A</em> (the most expensive) and <em>C</em> (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides <em>D</em>. Notice furthermore that compromise alternative <em>G</em>, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate.</p>
-<p>We may also notice (see line 17 and line 21) that both alternatives <em>A</em> and <em>F</em> are reported as certainly outranked choices, hence a <strong>potential worst choice recommendation</strong> . This confirms again the global incomparability status of alternative <em>A</em>.</p>
+<p>It is interesting to notice that the <strong>strict best choice recommendation</strong> consists in the set of weak Condorcet winners: ‘A’, ‘C’ and ‘D’ (see Line 6). In the corresponding characteristic vector (see Line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see <a class="reference internal" href="#bis-2006a" id="id41">[BIS-2006a]</a>), we find confirmed that alternative <em>D</em> is the only positively validated one, whereas both extreme alternatives - <em>A</em> (the most expensive) and <em>C</em> (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides <em>D</em>. Notice furthermore that compromise alternative <em>G</em>, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate.</p>
+<p>We may also notice (see Line 17 and Line 21) that both alternatives <em>A</em> and <em>F</em> are reported as certainly outranked choices, hence a <strong>potential worst choice recommendation</strong> . This confirms again the global incomparability status of alternative <em>A</em>.</p>
 </div>
 <div class="section" id="weakly-ordering">
 <h3><a class="toc-backref" href="#id221">Weakly ordering</a><a class="headerlink" href="#weakly-ordering" title="Permalink to this headline">¶</a></h3>
@@ -4574,16 +4570,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <td>5</td>
 <td>5</td>
 </tr>
-<tr class="row-odd"><td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><em>a1001</em></td>
+<tr class="row-odd"><td><em>a1001</em></td>
 <td>37.0</td>
 <td>2</td>
 <td>2</td>
@@ -4592,7 +4579,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <td>-4</td>
 <td>-40.0</td>
 </tr>
-<tr class="row-odd"><td><em>a1010</em></td>
+<tr class="row-even"><td><em>a1010</em></td>
 <td>32.0</td>
 <td>9</td>
 <td>6</td>
@@ -4702,7 +4689,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newTab</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<p>Parameter <em>historySize</em> (see Line 6) of the <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles" title="performanceQuantiles.PerformanceQuantiles.updateQuantiles"><code class="xref py py-meth docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles.updateQuantiles()</span></code></a> method allows to <strong>balance</strong> the <strong>new</strong> evaluations against the <strong>historical</strong> ones. With <strong>historySize = None</strong> (the default setting), the balance in the example above is 900/1000 (90%, weight of historical data) against 100/1000 (10%, weight of the new incoming observations). Putting <strong>historySize = 0</strong>, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view.</p>
+<p>Parameter <em>historySize</em> (see Line 6) of the <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles" title="performanceQuantiles.PerformanceQuantiles.updateQuantiles"><code class="xref py py-meth docutils literal"><span class="pre">performanceQuantiles.PerformanceQuantiles.updateQuantiles()</span></code></a> method allows to <strong>balance</strong> the <strong>new</strong> evaluations against the <strong>historical</strong> ones. With <strong>historySize = None</strong> (the default setting), the balance in the example above is 900/1000 (90%, weight of historical data) against 100/1000 (10%, weight of the new incoming observations). Putting <strong>historySize = 0</strong>, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view (see Fig. 24).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># showing the updated quantile limits in a browser view</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -4795,15 +4782,15 @@ play much a role, it would be perhaps better to decide to move to the most advan
 10
 11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">nqr</span><span class="o">.</span><span class="n">newActions</span><span class="p">)</span>
 <span class="go">*----  performance tableau -----*</span>
-<span class="go">criteria |  &#39;a1001&#39; &#39;a1002&#39; &#39;a1003&#39; &#39;a1004&#39; &#39;a1005&#39; &#39;a1006&#39; &#39;a1007&#39; &#39;a1008&#39; &#39;a1009&#39; &#39;a1010&#39;</span>
-<span class="go">---------|---------------------------------------------------------------------------------</span>
-<span class="go">   &#39;b1&#39;  |   37.0    27.0    24.0    16.0    42.0    33.0    39.0    64.0    42.0    32.0</span>
-<span class="go">   &#39;b2&#39;  |    2.0     5.0     8.0     3.0     3.0     3.0     6.0     5.0     4.0     9.0</span>
-<span class="go">   &#39;b3&#39;  |    2.0     4.0     2.0     1.0     6.0     3.0     2.0     6.0     6.0     6.0</span>
-<span class="go">   &#39;b4&#39;  |   61.0    54.0    74.0    25.0    28.0    20.0    20.0    49.0    44.0    55.0</span>
-<span class="go">   &#39;b5&#39;  |   31.0    63.0    61.0    48.0    30.0    39.0    16.0    96.0    57.0    51.0</span>
-<span class="go">   &#39;c1&#39;  |   -4.0    -6.0    -8.0    -5.0    -1.0    -5.0    -1.0    -6.0    -6.0    -4.0</span>
-<span class="go">   &#39;c2&#39;  |  -40.0   -23.0   -37.0   -37.0   -24.0   -27.0   -73.0   -43.0   -94.0   -35.0</span>
+<span class="go">criteria | a1001 a1002 a1003 a1004 a1005 a1006 a1007 a1008 a1009 a1010</span>
+<span class="go">---------|-------------------------------------------------------------</span>
+<span class="go">   &#39;b1&#39;  |  37.0  27.0  24.0  16.0  42.0  33.0  39.0  64.0  42.0  32.0</span>
+<span class="go">   &#39;b2&#39;  |   2.0   5.0   8.0   3.0   3.0   3.0   6.0   5.0   4.0   9.0</span>
+<span class="go">   &#39;b3&#39;  |   2.0   4.0   2.0   1.0   6.0   3.0   2.0   6.0   6.0   6.0</span>
+<span class="go">   &#39;b4&#39;  |  61.0  54.0  74.0  25.0  28.0  20.0  20.0  49.0  44.0  55.0</span>
+<span class="go">   &#39;b5&#39;  |  31.0  63.0  61.0  48.0  30.0  39.0  16.0  96.0  57.0  51.0</span>
+<span class="go">   &#39;c1&#39;  |  -4.0  -6.0  -8.0  -5.0  -1.0  -5.0  -1.0  -6.0  -6.0  -4.0</span>
+<span class="go">   &#39;c2&#39;  | -40.0 -23.0 -37.0 -37.0 -24.0 -27.0 -73.0 -43.0 -94.0 -35.0</span>
 </pre></div>
 </td></tr></table></div>
 <p>Among the 10 new incoming decision alternatives (see below), we recognize alternatives <em>a1001</em> (see column 2) and <em>a1010</em> (see last column) we have mentioned in our introduction.</p>
@@ -4876,7 +4863,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">[0.25 - 0.50[ [&#39;a1003&#39;, &#39;a1001&#39;, &#39;a1007&#39;, &#39;a1004&#39;, &#39;a1009&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see <code class="xref py py-meth docutils literal"><span class="pre">perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()</span></code> method.</p>
+<p>The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see <code class="xref py py-meth docutils literal"><span class="pre">perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()</span></code> method (see Fig. 25).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quartiles Rating&#39;</span><span class="p">,</span>
 <span class="gp">... </span>              <span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -4886,7 +4873,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <a class="reference internal image-reference" href="_images/heatMap1.png"><img alt="heatmap of Normed Quartiles Rating" src="_images/heatMap1.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 25 </span><span class="caption-text">Heatmap of normed quartiles ranking</span></p>
 </div>
-<p>Using furthermore a specialised version of the <a class="reference internal" href="techDoc.html#weakOrders.WeakOrder.exportGraphViz" title="weakOrders.WeakOrder.exportGraphViz"><code class="xref py py-meth docutils literal"><span class="pre">weakOrders.WeakOrder.exportGraphViz()</span></code></a> method allows drawing the same rating result in a Hasse diagram format.</p>
+<p>Using furthermore a specialised version of the <a class="reference internal" href="techDoc.html#weakOrders.WeakOrder.exportGraphViz" title="weakOrders.WeakOrder.exportGraphViz"><code class="xref py py-meth docutils literal"><span class="pre">weakOrders.WeakOrder.exportGraphViz()</span></code></a> method allows drawing the same rating result in a Hasse diagram format (see Fig. 26).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -4937,17 +4924,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <td>5</td>
 <td>5</td>
 </tr>
-<tr class="row-odd"><td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="row-even"><td><strong>Q2</strong></td>
+<tr class="row-odd"><td><strong>Q2</strong></td>
 <td><em>a1001</em></td>
 <td>37.0</td>
 <td>2</td>
@@ -4957,7 +4934,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <td>-4</td>
 <td>-40.0</td>
 </tr>
-<tr class="row-odd"><td><strong>Q3</strong></td>
+<tr class="row-even"><td><strong>Q3</strong></td>
 <td><em>a1010</em></td>
 <td>32.0</td>
 <td>9</td>
@@ -4993,7 +4970,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 </pre></div>
 </td></tr></table></div>
 <p>Compared with the quartiles rating result, we notice that the five alternatives (<em>a1002</em>, <em>a1005</em>, <em>a1006</em>, <em>a1008</em>, and <em>a1010</em>), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives <em>a1002</em>, <em>a1005</em>, <em>a1008</em> and <em>a1010</em> attain the 7th decile class [0.6-0.7[, whereas alternative <em>a1006</em> attains only the the 6th decile class [0.5-0.6[. Of the five <em>Q2</em> [0.25-0.50[ rated alternatives (<em>a1001</em>, <em>a1003</em>, <em>a1004</em>, <em>a1006</em> and <em>a1007</em>), alternatives <em>a1001</em> and <em>a1003</em> are now rated in the 6th decile class [0.5 - 0.6[, whereas <em>a1004</em> and <em>a1007</em> are rated the 5th decile class [0.4-0.5[ and <em>a1009</em> is lowest rated in the 4th decile class [0.3 - 0.4[.</p>
-<p>A browser view may again more conveniently illustrate this preciser <em>deciles</em> rating result.</p>
+<p>A browser view may again more conveniently illustrate this preciser <em>deciles</em> rating result (see Fig. 27).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of the deciles rating&#39;</span><span class="p">,</span>\
 <span class="gp">... </span>                           <span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -5579,7 +5556,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 </div>
 <div class="section" id="simulating-metropolis-random-walks">
 <h3><a class="toc-backref" href="#id230">Simulating Metropolis random walks</a><a class="headerlink" href="#simulating-metropolis-random-walks" title="Permalink to this headline">¶</a></h3>
-<p>Finally, we provide the <a class="reference internal" href="techDoc.html#graphs.MetropolisChain" title="graphs.MetropolisChain"><code class="xref py py-class docutils literal"><span class="pre">graphs.MetropolisChain</span></code></a> class, a specialization of the <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></code></a> class, for implementing a generic <strong>Metropolis MCMC</strong> (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  <code class="code docutils literal"><span class="pre">probs</span> <span class="pre">=</span> <span class="pre">{‘v1’:</span> <span class="pre">x,</span> <span class="pre">‘v2’:</span> <span class="pre">y,</span> <span class="pre">...}</span></code> for visiting each vertex (see lines 14-22).</p>
+<p>Finally, we provide the <a class="reference internal" href="techDoc.html#graphs.MetropolisChain" title="graphs.MetropolisChain"><code class="xref py py-class docutils literal"><span class="pre">graphs.MetropolisChain</span></code></a> class, a specialization of the <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal"><span class="pre">graphs.Graph</span></code></a> class, for implementing a generic <strong>Metropolis MCMC</strong> (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  <code class="code docutils literal"><span class="pre">probs</span> <span class="pre">=</span> <span class="pre">{‘v1’:</span> <span class="pre">x,</span> <span class="pre">‘v2’:</span> <span class="pre">y,</span> <span class="pre">...}</span></code> for visiting each vertex (see Lines 14-22).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -5659,7 +5636,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">  &#39;v5&#39; |  0.00   0.00    0.50    0.50    0.00</span>
 </pre></div>
 </td></tr></table></div>
-<p>The <code class="docutils literal"><span class="pre">checkSampling()</span></code> method (see line 23) generates a random walk of <em>nSim=30000</em> steps on the given graph and records by the way the observed relative frequency with which each vertex is passed by. In this example, the stationary transition probability distribution, shown by the <code class="docutils literal"><span class="pre">showTransitionMatrix()</span></code> method above (see lines 31-), is quite adequately simulated.</p>
+<p>The <code class="docutils literal"><span class="pre">checkSampling()</span></code> method (see Line 23) generates a random walk of <em>nSim=30000</em> steps on the given graph and records by the way the observed relative frequency with which each vertex is passed by. In this example, the stationary transition probability distribution, shown by the <code class="docutils literal"><span class="pre">showTransitionMatrix()</span></code> method above (see Lines 31-), is quite adequately simulated.</p>
 <p>For more technical information and more code examples, look into the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><span class="std std-ref">graphs module</span></a>. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström’s 2002 book: <a class="reference internal" href="#fmcaa" id="id50">[FMCAA]</a>.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>
