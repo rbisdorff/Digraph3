@@ -74,7 +74,7 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:tutorial-label}}
+\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:preface}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
 here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version).
 
@@ -448,7 +448,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Manipulating \sphinxstyleliteralintitle{Digraph} objects}
-\label{\detokenize{tutorial:digraph-tools-label}}\label{\detokenize{tutorial:manipulating-digraph-objects}}
+\label{\detokenize{tutorial:manipulating-digraph-objects}}\label{\detokenize{tutorial:digraph-tools-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -583,7 +583,7 @@ We may now extract both this symmetric as well as this asymmetric part of digrap
 \capstart
 
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{asymSymParts}.png}
-\caption{Asymmetric and symmetric parts of the tutorial random valuation digraph}\label{\detokenize{tutorial:id96}}\end{figure}
+\caption{Asymmetric and symmetric part of the tutorial random valuation digraph}\label{\detokenize{tutorial:id96}}\end{figure}
 
 \begin{sphinxadmonition}{note}{Note:}
 Notice that the partial objects \sphinxstyleemphasis{asymDg} and \sphinxstyleemphasis{symDg} put to the indeterminate characteristic value all \sphinxstyleemphasis{not-asymmetric}, respectively \sphinxstyleemphasis{not-symmetric} links between nodes (see Fig. 4).
@@ -1461,7 +1461,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Generating random performance tableaux}
-\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}\label{\detokenize{tutorial:generating-random-performance-tableaux}}
+\label{\detokenize{tutorial:generating-random-performance-tableaux}}\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1994,7 +1994,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Ranking with multiple incommensurable criteria}
-\label{\detokenize{tutorial:ranking-tutorial-label}}\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}
+\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:ranking-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -2477,7 +2477,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{HPC ranking with big outranking digraphs}
-\label{\detokenize{tutorial:hpc-tutorial-label}}\label{\detokenize{tutorial:hpc-ranking-with-big-outranking-digraphs}}
+\label{\detokenize{tutorial:hpc-ranking-with-big-outranking-digraphs}}\label{\detokenize{tutorial:hpc-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3074,7 +3074,7 @@ Let us inspect the 21 marginal performances of the five best-ranked alternatives
 
 The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best-ranked alternatives are, in decreasing order: \#773909, \#668947, \#567308, \#578560 and \#426464.
 
-Their random performance evaluations were obviously drawn on all criteria with a \sphinxstyleemphasis{good} (+) performance profile, ie a Beta(alpha=5.8661,beta=2.62203) law (see the tutorial on generating random performance tableaux).
+Their random performance evaluations were obviously drawn on all criteria with a \sphinxstyleemphasis{good} (+) performance profile, i.e. a Beta(\sphinxstyleemphasis{alpha} = 5.8661, \sphinxstyleemphasis{beta} = 2.62203) law (see the tutorial {\hyperref[\detokenize{tutorial:randomperformancetableau-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Generating random performance tableaux}}}} (\autopageref*{\detokenize{tutorial:randomperformancetableau-tutorial-label}})).
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -3112,10 +3112,6 @@ We consider now a partial performance tableau \sphinxstyleemphasis{best10}, cons
 \PYG{g+go}{\PYGZsh{}279729 \textbar{}   +240    +230    \PYGZhy{}110    +290     +72    +140    +388     +62     \PYGZhy{}      +250}
 \PYG{g+go}{\PYGZsh{}928564 \textbar{}    +22    +228     \PYGZhy{}14    +246     +36     +78     +56    +110    +318     \PYGZhy{}}
 \PYG{g+go}{r(x\PYGZgt{}y) image range := [\PYGZhy{}1008;+1008]}
-\end{sphinxVerbatim}
-
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{condorcetWinners}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{[155874, 426464, 567308]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeChordlessCircuits}\PYG{p}{(}\PYG{p}{)}
@@ -3163,7 +3159,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing a best choice recommendation}
-\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}\label{\detokenize{tutorial:rubis-tutorial-label}}
+\label{\detokenize{tutorial:rubis-tutorial-label}}\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4028,7 +4024,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Rating with learned quantile norms}
-\label{\detokenize{tutorial:rating-tutorial-label}}\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}
+\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}\label{\detokenize{tutorial:rating-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4996,7 +4992,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the non isomorphic MISs of the n-cycle graph}
-\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}
+\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}
 Due to the public success of our common 2008 publication with Jean-Luc Marichal \phantomsection\label{\detokenize{tutorial:id52}}{\hyperref[\detokenize{tutorial:isomis-08}]{\sphinxcrossref{{[}ISOMIS-08{]}}}} (\autopageref*{\detokenize{tutorial:isomis-08}}) , we present in this tutorial an example Python session for computing the \sphinxstylestrong{non isomorphic maximal independent sets} (MISs) from the 12-cycle graph, i.e. a \sphinxcode{digraphs.CirculantDigraph} class instance of order 12 and symmetric circulants 1 and -1.
 
 \fvset{hllines={, ,}}%
@@ -5176,7 +5172,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{On computing digraph kernels}
-\label{\detokenize{tutorial:kernel-tutorial-label}}\label{\detokenize{tutorial:on-computing-digraph-kernels}}
+\label{\detokenize{tutorial:on-computing-digraph-kernels}}\label{\detokenize{tutorial:kernel-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -5871,7 +5867,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{About split, interval and permutation graphs}
-\label{\detokenize{tutorial:about-split-interval-and-permutation-graphs}}\label{\detokenize{tutorial:permutation-tutorial-label}}
+\label{\detokenize{tutorial:permutation-tutorial-label}}\label{\detokenize{tutorial:about-split-interval-and-permutation-graphs}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
