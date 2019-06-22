@@ -4598,7 +4598,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
 
     Random graph of order 8 generated with edge probability 0.4
 
-If the random graph instance *g* (see Fig. 53) is a permutation graph, *g* and its dual *-g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct an implication class decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
+If the random graph instance *g* (see Fig. 53) is a permutation graph, *g* and its dual *-g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a transitive neighbourhodd decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
 
 >>> if g.isComparabilityGraph():
 ...     print(g.edgeOrientations)
@@ -4624,7 +4624,7 @@ If the random graph instance *g* (see Fig. 53) is a permutation graph, *g* and i
     :width: 400 px
     :align: center
 	    
-    Transitive orientation of the graph *g*
+    Transitive neighbourhoods of the graph *g*
 
 The resulting orientation of the edges of *g* (see Fig. 54) is indeed transitive. The same procedure applied to the dual graph *gd = -g* gives a transitive orientation to the edges of *-g*.
 
@@ -4653,9 +4653,9 @@ The resulting orientation of the edges of *g* (see Fig. 54) is indeed transitive
     :width: 400 px
     :align: center
 	    
-    Transitive orientation of the dual graph *-g*
+    Transitive neighbourhoods of the dual graph *-g*
  
-It is worthwhile noticing that the orientation of *g* is achieved with a *single implication class* covering all the vertices, whereas the orientation of the dual *-g* needs a decomposition into *three implication classes* marked in black, red and blue (see Fig.55).
+It is worthwhile noticing that the orientation of *g* is achieved with a *single neighbourhood* decomposition, covering all the vertices. Whereas, the orientation of the dual *-g* needs a decomposition into *three subsequent neighbourhoods* marked in black, red and blue (see Fig.55).
 
 Let us recheck these facts by explicitely constructing transitively oriented digraph instances with the :py:func:`graphs.Graph.computeTransitivelyOrientedDigraph` method. 
 
@@ -4994,34 +4994,132 @@ One may easily verify that all other potential spanning trees, including instead
 
 Back to :ref:`Tutorial-label`
 
+.. _Pearls-Tutorial-label:
+
+Pearls of bipolar epistemic logic
+=================================
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+To be written
+
 	   
+Coping with missing data and indeterminateness
+----------------------------------------------
+
+In a stubborn keeping with a two-valued logic, where every argument can only be true or false, there is no place for efficiently taking into account missing data or logical indeterminateness. These cases are seen as problematic and, at best are simply ignored. Worst, in modern data science, missing data get often replaced with *fictive* values, potentially falsifying hence all subsequent computations.
+
+In social choice problems like elections, *abstentions* are, however, frequently observed and represent a social expression that may be significant for revealing non represented social preferences.
+
+In marketing studies, interviewees will not always respond to all the submitted questions. Again, such abstentions do sometimes contain nevertheless valid information concerning consumer preferences.
+
+Let us take an example performance tableau from a Movie magazine's evaluation of movies that could be seen in town [9]_ (see Fig. 63).
+
+>>> from outrankingDigraphs import *
+>>> t = XMCDA2PerformanceTableau('graffiti07')
+>>> t.showHTMLPerformanceTableau(ndigits=0)
+
+.. Figure:: graffiti07_1.png
+   :alt: Ratings of movies
+   :width: 600 px
+   :align: center
+
+   *Graffiti* magazine's movie ratings from September 2007
+
+15 journalists and movie critics provide here their rating of 25 movies: 5 stars (*masterpiece*), 4 stars (*must be seen*), 3 stars (*excellent*), 2 stars (*good*), 1 star (*could be seen*), -1 star (*I do not like*), -2 (*I hate*), NA (*not seen*).
+
+To aggregate all the critics' rating opinions, the *Graffiti* magazine provides for each movie a global score computed as an *average grade*, just ignoring the *not seen* data. These averages are thus not computed on comparable numerators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic *SJ*, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
+
+A better approach is to rank the movies on the basis of pairwise bipolar-valued  *outranking* opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the ranking tutorial) of the 25 movies is provided, for instance, by the **heat map** view shown in Fig. 64.
+
+>>> t.showHTMLPerformanceHeatmap(Correlations=True,
+...                              rankingRule='NetFlows',
+...                              ndigits=0)
+
+.. Figure:: graffiti07_2.png
+   :alt: Ordered Ratings of movies
+   :width: 600 px
+   :align: center
+
+   *Graffiti* magazine's ordered movie ratings from September 2007
+
+There is no doubt that movie *mv_QS*, with 6 '*must be seen*' marks, is correctly best-ranked and the movie *mv_TV* is worst-ranked with five '*don't like*' marks.
+
+Let us explicitly construct the corresponding bipolar-valued outranking digraph and consult in Fig. 65 the pairwise characteristic values we observe between the two best-ranked movies, namely *mv_QS* and *mv_RR*.
+
+>>> g = BipolarOutrankingDigraph(t)
+>>> g.recodeValuation(-19,19) # integer characteristic values
+>>> g.showHTMLPairwiseOutrankings('mv_QS','mv_RR')
+
+.. Figure:: graffiti07_45.png
+   :alt: Comparing mv_QS and mv_RR
+   :width: 600 px
+   :align: center
+
+   Pairwise comparison of the two best-ranked movies
+
+Four out of the fifteen critics have not seen one or the other of these two movies. Notice the higher significance (3) that is granted to two locally renowned movie critics, namely *JH* and *VT*. Their opinion count for three times the opinions of the other critics. All critics that have seen both movies, except critic *MR*, state that *mv_QS* is rated at least as good as *mv_RR* and the balance of positive against negative opinions amounts to +11, a characteristic value which positively validates the outranking situation with a majority of (11/19 + 1.0) / 2.0 = 79%.  
+
+The complete table of pairwise majority margins of global '*at least as good rated*' opinions, ranked by the same rule as shown in the heat map above (see Fig. 64), may be shown as follows. 
+
+>>> ranking = g.computeNetFlowsRanking()
+>>> g.showHTMLRelationTable(actionsList=ranking, ndigits=0,\
+... tableTitle='Bipolar characteristic values of\
+... "rated at least as good as" situations')
+
+.. Figure:: graffiti07_3.png
+   :alt: Pairwise outranking characteristic values
+   :width: 800 px
+   :align: center
+
+   Pairwise majority margins of '*at least as good as*' rating opinions
+
+Positive characteristic values, validating a global '*at least as good rated*' opinion are marked in light green (see Fig. 66). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best-ranked movie *mv_QS* is indeed a *Condorcet* winner, i.e. *better rated than all the other movies* by a 65% majority of critics. This majority may be assessed from the average determinateness of the given bipolar valued outranking digraph *g*.
+
+>>> print('%.0f%%' % ((float(g.computeDeterminateness()) + 100.0)/2.0))
+65%
+
+Notice also the *indeterminate* situation we observe, for instance, when comparing movie *mv_PE* with movie *mv_NP*.
+
+>>> g.showHTMLPairwiseComparison('mv_PE','mv_NP')
+
+.. Figure:: graffiti07_6.png
+   :alt: Comparing mv_PE and mv_NP
+   :width: 400 px
+   :align: center
+
+   Indeterminate pairwise comparison example
+
+Only eight, out of the fifteen critics, have seen both movies and the positive opinions do neatly balance the negative ones. A global statement that *mv_PE* is '*at least as good rated*' as *mv_NP*  may in this case hence neither be validated, nor invalidated; a preferential situation that cannot be modelled with any scoring approach.
+
+It is fair, however, to eventually mention here that the *Graffiti* magazine's average scoring method is actually showing a very similar ranking. Indeed, average scores usually confirm well all evident pairwise comparisons, yet *enforce* comparability for all less evident ones.
+
+Notice finally the ordinal correlation figures *tau* in Fig. 64  3rd row. The global ranking represents obviously a rather balanced compromise with respect to all movie critics'opinions as there appears no negative correlation with anyone of them. The global ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight.
+
+How may we compute these ordinal correlation indexes ?
+
+Ordinal correlation equals bipolar relational equivalence
+---------------------------------------------------------
+
+under construction
+
+.. comments::
+
+    Sound data fusions
+    ------------------
+    to be written
+    Valued bipolar Berge kernel equations
+    -------------------------------------
+    to be written
+
 .. only:: html
-
-Links and appendices
-====================
-
-.. only:: html
-	  
-     Documents
-     .........
-     
-     * `Introduction <index.html>`_
-     * `Reference manual <techDoc.html>`_
-     * `Tutorial <tutorial.html>`_
-
-.. only:: html
-
-     Indices and tables
-     ..................
-
-     * :ref:`genindex`
-     * :ref:`modindex`
-     * :ref:`search`
-	  
-       
+	   	  
 References
-----------
-     
+==========
+
+
 .. [CPSTAT-L5] R. Bisdorff (2017) *Simulating from abitrary empirical random distributions*. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winterr Semester 2017 (`PDF 2x2 reduced presentation slides 211kB downloadable here <_static/quantileEstimation-2x2.pdf>`_).
 
 .. [BIS-2016] R. Bisdorff (2016). *On linear ranking from trillions of pairwise outranking situations*. Research Note 16-1, FSTC/ILIAS Decision Systems Group, University of Luxembourg pp. 1-6 (dowloadable  `PDF file 625.3 kB <https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf>`_).
@@ -5062,8 +5160,33 @@ References
 
 .. only:: html
 
-Footnotes
----------
+    Appendices
+    ==========
+
+    
+.. only:: html
+	  
+    Documents
+    .........
+     
+    * `Introduction <index.html>`_
+    * `Reference manual <techDoc.html>`_
+    * `Tutorial <tutorial.html>`_
+
+.. only:: html
+
+    Indices and tables
+    ..................
+
+    * :ref:`genindex`
+    * :ref:`modindex`
+    * :ref:`search`
+	  
+
+.. only:: html
+
+    Footnotes
+    ---------
 
 .. [1] The ``exportGraphViz`` method is depending on drawing tools from `graphviz <https://graphviz.org/>`_. On Linux Ubuntu or Debian you may try ``sudo apt-get install graphviz`` to install them. There are ready ``dmg`` installers for Mac OSX. 
 
@@ -5080,3 +5203,5 @@ Footnotes
 .. [7] See https://hpc.uni.lu/systems/iris/
 
 .. [8] See https://hpc.uni.lu/systems/gaia/
+
+.. [9] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30 
