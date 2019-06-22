@@ -5060,7 +5060,7 @@ Let us explicitly construct the corresponding bipolar-valued outranking digraph 
 
    Pairwise comparison of the two best-ranked movies
 
-Four out of the fifteen critics have not seen one or the other of these two movies. Notice the higher significance (3) that is granted to two locally renowned movie critics, namely *JH* and *VT*. Their opinion count for three times the opinions of the other critics. All critics that have seen both movies, except critic *MR*, state that *mv_QS* is rated at least as good as *mv_RR* and the balance of positive against negative opinions amounts to +11, a characteristic value which positively validates the outranking situation with a majority of (11/19 + 1.0) / 2.0 = 79%.  
+Four out of the fifteen critics have not seen one or the other of these two movies. Notice the higher significance (3) that is granted to two locally renowned movie critics, namely *JH* and *VT*. Their opinion counts for three times the opinion of the other critics. All critics that have seen both movies, except critic *MR*, state that *mv_QS* is rated at least as good as *mv_RR* and the balance of positive against negative opinions amounts to +11, a characteristic value which positively validates the outranking situation with a majority of (11/19 + 1.0) / 2.0 = 79%.  
 
 The complete table of pairwise majority margins of global '*at least as good rated*' opinions, ranked by the same rule as shown in the heat map above (see Fig. 64), may be shown as follows. 
 
@@ -5078,7 +5078,7 @@ The complete table of pairwise majority margins of global '*at least as good rat
 
 Positive characteristic values, validating a global '*at least as good rated*' opinion are marked in light green (see Fig. 66). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best-ranked movie *mv_QS* is indeed a *Condorcet* winner, i.e. *better rated than all the other movies* by a 65% majority of critics. This majority may be assessed from the average determinateness of the given bipolar valued outranking digraph *g*.
 
->>> print('%.0f%%' % ((float(g.computeDeterminateness()) + 100.0)/2.0))
+>>> print( '%.0f%%' % g.computeDeterminateness(InPercents=True) )
 65%
 
 Notice also the *indeterminate* situation we observe, for instance, when comparing movie *mv_PE* with movie *mv_NP*.
