@@ -5030,7 +5030,7 @@ Let us take an example performance tableau from a Movie magazine's evaluation of
 
 15 journalists and movie critics provide here their rating of 25 movies: 5 stars (*masterpiece*), 4 stars (*must be seen*), 3 stars (*excellent*), 2 stars (*good*), 1 star (*could be seen*), -1 star (*I do not like*), -2 (*I hate*), NA (*not seen*).
 
-To aggregate all the critics' rating opinions, the *Graffiti* magazine provides for each movie a global score computed as an *average grade*, just ignoring the *not seen* data. These averages are thus not computed on comparable numerators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic *SJ*, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
+To aggregate all the critics' rating opinions, the *Graffiti* magazine provides for each movie a global score computed as an *average grade*, just ignoring the *not seen* data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic *SJ*, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
 
 A better approach is to rank the movies on the basis of pairwise bipolar-valued  *outranking* opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the ranking tutorial) of the 25 movies is provided, for instance, by the **heat map** view shown in Fig. 64.
 
@@ -5103,7 +5103,187 @@ How may we compute these ordinal correlation indexes ?
 Ordinal correlation equals bipolar relational equivalence
 ---------------------------------------------------------
 
-under construction
+Kendall's *tau* index
+.....................
+
+Originally, *M. G. Kendall* ([KEN-1938]_) defined his **ordinal correlation index** *tau* for linear orders of dimension *n* as *balancing* the number *#C* of correctly oriented pairs against the number *#I* of incorrectly oriented pairs. The total number of irreflexive pairs being *n(n-1)*, in the case of linear orders, *#C* + *#I* = *n(n-1)*.  Hence *tau* = (*#C* / *n(n-1)*) - (*#I* / *n(n-1)*). In case *#I* is zero, *tau* = +1 (all pairs are equivalently ordered); inversely, in case *C#* is zero, *tau* = -1 (all pairs are in reversed order).
+
+Noticing that (*#C* / *n(n-1)*) = 1 - (*#I* / *n(n-1)*), and recalling that the bipolar valued negation is operated by changing the sign of the characteristic value, *tau* represents in fact the bipolar **negation** of the **non equivalence** of two linear orders: 
+
+    *tau* = 1 - 2(*#I* / *n(n-1)*) = -[2(*#I* / *n(n-1)*) - 1] = 2(*#C* / *n(n-1)*) - 1,
+
+i.e. the **normalized majority margin** of equivalently oriented irreflexive pairs.
+
+Let *R1* and *R2* be two random crisp relations defined on a same set of 5 alternatives. We may compute Kendall's *tau* index as follows.
+
+>>> from digraphs import *
+>>> R1 = RandomDigraph(order=5,Bipolar=True)
+>>> R2 = RandomDigraph(order=5,Bipolar=True)
+>>> E = EquivalenceDigraph(R1,R2)
+>>> E.showRelationTable(ReflexiveTerms=False)
+* ---- Relation Table -----
+  S   |  'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
+------|-------------------------------------------
+ 'a1' |   - 	 -1.00	  1.00	 -1.00	  1.00	 
+ 'a2' |  -1.00	  - 	 -1.00	  1.00	 -1.00	 
+ 'a3' |  -1.00	 -1.00	  - 	  1.00	  1.00	 
+ 'a4' |  -1.00	  1.00	 -1.00	  - 	  1.00	 
+ 'a5' |  -1.00	  1.00	 -1.00	  1.00	  - 	 
+Valuation domain: [-1.00;1.00]
+>>> E.correlation
+{'correlation': -0.1, 'determination': 1.0}
+
+In the table of the equivalence relation *R1 <=> R2* above, we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall's *tau* index in this plainly determined crisp case.
+
+What happens now with less determined and even partially indeterminate relations ? May we proceed in a similar way ?
+
+Bipolar-valued relational equivalence
+.....................................
+
+Let us now consider two bipolar valued digraphs *R1* and *R2* defined on the same set of five nodes.
+
+>>> R1 = RandomValuationDigraph(order=5,seed=1)
+>>> R1.showRelationTable(ReflexiveTerms=False)
+* ---- Relation Table -----
+  S   |   'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
+------|-------------------------------------------
+ 'a1' |    - 	 -0.66	  0.44	  0.94	 -0.84	 
+ 'a2' |  -0.36	   - 	 -0.70	  0.26	  0.94	 
+ 'a3' |   0.14	  0.20	   - 	  0.66	 -0.04	 
+ 'a4' |  -0.48	 -0.76	  0.24	   - 	 -0.94	 
+ 'a5' |  -0.02	  0.10	  0.54	  0.94	   - 	 
+Valuation domain: [-1.00;1.00]
+>>> R2 = RandomValuationDigraph(order=5,seed=2)
+>>> R2.showRelationTable(ReflexiveTerms=False)
+* ---- Relation Table -----
+  S   |   'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
+------|-------------------------------------------
+ 'a1' |   - 	 -0.86	 -0.78	 -0.80	 -0.08	 
+ 'a2' |  -0.58	  - 	  0.88	  0.70	 -0.22	 
+ 'a3' |  -0.36	  0.54	  - 	 -0.46	 0.54	 
+ 'a4' |  -0.92	  0.48	 0.74	  - 	 -0.60	 
+ 'a5' |   0.10	  0.62	 0.00	  0.84	  - 	 
+Valuation domain: [-1.00;1.00]
+>>> eq = EquivalenceDigraph(R1,R2)
+>>> eq.showRelationTable(ReflexiveTerms=False)
+* ---- Relation Table -----
+  S   |  'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
+------|-------------------------------------------
+ 'a1' |   - 	 0.66	 -0.44	 -0.80	 0.08	 
+ 'a2' |  0.36	  - 	 -0.70	 0.26	 -0.22	 
+ 'a3' |  -0.14	 0.20	  - 	 -0.46	 -0.04	 
+ 'a4' |  0.48	 -0.48	 0.24	  - 	 0.60	 
+ 'a5' |  -0.02	 0.10	 0.00	 0.84	  - 	 
+Valuation domain: [-1.00;1.00]
+>>> eq.correlation
+{'correlation': 0.07303370786516854, 'determination': 0.356}
+
+In our bipolar epistemic logic, logical disjunctions and conjunctions are implemented as *max*, respectively *min* operators. Notice also that the logical equivalence *R1 <=> R2* corresponds to a double implication *(R1 => R2) and (R2 => R1)* and that the implication *(R1 => R2)* is logically equivalent to the disjunction of *not R1* and *R2*.
+
+If *r(x R1 y)* and *r(x R2 y)* denote the bipolar characteristic values of relation *R1*, resp. *R2*, we may hence compute a majority margin *mm(R1 <=> R2)* between equivalently and not equivalently oriented irreflexive pairs *(x,y)* as follows.
+
+    | *mm(R1 <=> R2)* = sum _ *(x,y)* { min [ max( *-r(x R1 y)*, *r(x R2 y)* ), \
+    |                                     max( *-r(x R2 y)*, *r(x R1 y)* ) ] },
+
+In the crisp case, *mm(R1 <=> R2)*  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r* -valued case, the maximal possible equivalence majority margin *mm* corresponds to the sum *dt* of the **conjoint determinations** of *(x R1 y)* and *(x R2 y)* (see [BIS-2012]_). 
+
+    *dt(R1,R2)* = sum _*(x,y)* min [ abs(*r(x R1 y)*, abs(*r(x R2 y)*) ].
+
+Thus, we obtain in the general *r* -valued case:
+
+    *tau(R1,R2)* =  *mm(R1 <=> R2)* / *dt(R1,R2)* .
+
+*tau(R1,R2)* gives us hence a classical ordinal correlation index, but restricted to the conjointly determined parts of the given relations *R1* and *R2*. In the limit case of two crisp linear orders, *dt(R1,R2)* equals *n(n-1)*, i.e. the number of irreflexive pairs, and we recover hence *Kendall* 's original *tau* index.
+
+>>> tau = R1.computeOrdinalCorrelation(R2)['correlation']
+>>> D = R1.computeOrdinalCorrelation(R2)['determination']
+>>> E = tau * D
+>>> print('tau(R1,R2) = %+.3f, D = %.3f, E(R1,R2) = %+.3f' % (tau, D, M))
+tau(R1,R2) = +0.073, D = 0.356, E(R1,R2) = +0.026
+
+The *tau(R1,R2)* index we obtain here is in fact the ratio of
+
+    * *E(R1,R2)* = mm(R1 <=> R2)* / *n(n-1)*: The normalized majority margin of the pairwise relational equivalence statements, and
+    * *D* = *dt(R1,R2)* / *n(n-1)*: The normalized determination of the correspondingpairwise relational equivalence statements.
+
+>>> E = Decimal('0'); D = Decimal('0')
+>>> for x in eq.actions:
+...     for y in eq.actions:
+...         E += eq.relation[x][y]
+...         D += abs(eq.relation[x][y])
+>>> E/20; D/20; E/D
+Decimal('0.026')
+Decimal('0.356')
+Decimal('0.07303370786516853932584269663')
+
+We have thus successfully **outfactored** the *correlation* effect from the *determination* effect.   
+
+With randomly chosen *r*-valued relations *R1* and *R2*, the **expected** *tau* index value is **0.0**, denoting in fact an **indeterminate** correlation observed on the conjoint determined epistemic content of the equivalence between *R1* and *R2*.
+
+By convention, we set the ordinal correlation with a *completely indeterminate* relation, i.e. when *D = 0*, to the *indeterminate* correlation value 0.0. 
+
+Fitness of ranking heuristics
+.............................
+
+Reconsidering again the bipolar valued outranking digraph *g* modelling the pairwise global '*as well rated as*' relation among the 25 movies seen above. The corresponding ranked heat map of the underlying performance tableau *t* is shown in Fig. 64.  
+
+>>> g
+*------- Object instance description ------*
+Instance class   : BipolarOutrankingDigraph
+Instance name    : rel_grafittiPerfTab.xml
+# Actions        : 25
+# Criteria       : 15
+Size             : 390
+Determinateness  : 65%
+Valuation domain : {'min': Decimal('-1.0'),
+                    'med': Decimal('0.0'),
+		    'max': Decimal('1.0'),}
+>>> g.computeCoSize()
+188
+
+Out of the 25 x 24 = 600 irreflexive movie pairs, digraph *g* contains 390 positively validated, and 188 positively invalidated outranking situations. 22 outranking situations appear *indeterminate* (see the zero-valued cells in Fig. 66).
+
+Let us now compute the normalized majority margin *E* of the equivalence between the individual critic's pairwise ratings and the global pairwise equivalence majorities.
+
+>>> from linearOrders import NetFlowsOrder
+>>> nf = NetFlowsOrder(g)
+>>> nf.netFlowsRanking
+['mv_QS', 'mv_RR', 'mv_DG', 'mv_NP', 'mv_HN', 'mv_HS', 'mv_SM',
+ 'mv_JB', 'mv_PE', 'mv_FC', 'mv_TP', 'mv_CM', 'mv_DF', 'mv_TM',
+ 'mv_DJ', 'mv_AL', 'mv_RG', 'mv_MB', 'mv_GH', 'mv_HP', 'mv_BI',
+ 'mv_DI', 'mv_FF', 'mv_GG', 'mv_TF']
+>>> for i,item in enumerate(\
+... g.computeMarginalVersusGlobalRankingCorrelations(\
+... nf.netFlowsRanking,ValuedCorrelation=True)): 
+...    print('E(%s,nf) = %+.3f' % (item[1],item[0]) )
+E(JH,nf) = +0.500
+E(JPT,nf) = +0.430
+E(AP,nf) = +0.323
+E(DR,nf) = +0.263
+E(MR,nf) = +0.247
+E(VT,nf) = +0.227
+E(GS,nf) = +0.160
+E(CS,nf) = +0.140
+E(SJ,nf) = +0.137
+E(RR,nf) = +0.133
+E(TD,nf) = +0.110
+E(CF,nf) = +0.110
+E(SF,nf) = +0.103
+E(AS,nf) = +0.080
+E(FG,nf) = +0.027
+
+We hence recover the relational equivalence characteristic values shown in the third row of the table shown in Fig.64. The ordinal correlation between the global Net-Flows ranking and the digraph *g* is furthermore computed as follows: 
+
+>>> corr = g.computeOrdinalCorrelatin(nf)
+>>> tau = corr['correlation']
+>>> D = corr['determination']
+>>> E = tau * D
+>>> print('tau(g,nf) = %+.3f, D = %.3f, E(g,nf) = %+.3f' % (tau,D,E))
+tau(g,nf) = +0.780, D = 0.300, E(g,nf) = +0.234
+
+We may notice that the correlation *tau* index between the Net-Flows ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence *E* between the *nf* and the *g* digraph may be misleading with a characteristics value of only +0.234 corresponding nevertheless to an epistemic majority support of nearly 62%.
+
+It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the *Copeland* or the *Kohler* rule. 
 
 .. comments::
 
@@ -5114,6 +5294,7 @@ under construction
     -------------------------------------
     to be written
 
+    
 .. only:: html
 	   	  
 References
@@ -5157,6 +5338,9 @@ References
 .. [BAR-1991] J.-P. Barthélemy and A. Guenoche (1991), *Trees and Proximities Representations*, Wiley, ISBN: 978-0471922636.
 
 .. [KRU-1956] J. B. Kruskal (1956), *On the shortest spanning subtree of a graph and the traveling salesman problem*, Proceedings of the American Mathematical Society. 7: 48–50.
+
+.. [KEN-1938] M. G. Kendall (1938), *A New Measure of Rank Correlation*. Biometrica 30:81–93
+
 
 .. only:: html
 
@@ -5204,4 +5388,4 @@ References
 
 .. [8] See https://hpc.uni.lu/systems/gaia/
 
-.. [9] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30 
+.. [9] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file *graffiti07.xml* (XMCDA-2.0 Format) in the *examples/Graffiti* directory of the Digraph3 ressources.
