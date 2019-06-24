@@ -5287,22 +5287,11 @@ tau(g,nf) = +0.780, D = 0.300, E(g,nf) = +0.234
 We may notice that the correlation *tau* index between the Net-Flows ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence *E* between the *nf* and the *g* digraph may be misleading with a characteristics value of *only* +0.234; a value corresponding nevertheless to an epistemic majority support of nearly 62% of the movie critics' voices.
 
 It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the *Copeland* or the *Kohler* ranking rule. 
-
-.. comments::
-
-    Sound data fusions
-    ------------------
-    to be written
-    Valued bipolar Berge kernel equations
-    -------------------------------------
-    to be written
-
     
 .. only:: html
 	   	  
-References
-==========
-
+   References
+   ==========
 
 .. [CPSTAT-L5] R. Bisdorff (2017) *Simulating from abitrary empirical random distributions*. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winterr Semester 2017 (`PDF 2x2 reduced presentation slides 211kB downloadable here <_static/quantileEstimation-2x2.pdf>`_).
 
