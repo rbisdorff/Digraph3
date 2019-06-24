@@ -5124,11 +5124,11 @@ Let *R1* and *R2* be two random crisp relations defined on a same set of 5 alter
 * ---- Relation Table -----
   S   |  'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
 ------|-------------------------------------------
- 'a1' |   - 	 -1.00	  1.00	 -1.00	  1.00	 
- 'a2' |  -1.00	  - 	 -1.00	  1.00	 -1.00	 
- 'a3' |  -1.00	 -1.00	  - 	  1.00	  1.00	 
- 'a4' |  -1.00	  1.00	 -1.00	  - 	  1.00	 
- 'a5' |  -1.00	  1.00	 -1.00	  1.00	  - 	 
+ 'a1' |    - 	 -1.00	  1.00	 -1.00	  1.00	 
+ 'a2' |  -1.00	   - 	 -1.00	  1.00	 -1.00	 
+ 'a3' |  -1.00	 -1.00	   - 	  1.00	  1.00	 
+ 'a4' |  -1.00	  1.00	 -1.00	   - 	  1.00	 
+ 'a5' |  -1.00	  1.00	 -1.00	  1.00	   - 	 
 Valuation domain: [-1.00;1.00]
 >>> E.correlation
 {'correlation': -0.1, 'determination': 1.0}
@@ -5176,7 +5176,7 @@ We may notice in the relation tables shown above that 9 pairs, like *(a1,a2)* or
  'a2' |  0.36	  - 	 -0.70	  0.26	 -0.22	 
  'a3' | -0.14	 0.20	   - 	 -0.46	 -0.04	 
  'a4' |  0.48	-0.48	  0.24	   - 	  0.60	 
- 'a5' | -0.02	 0.10	  0.00	  0.84	  - 	 
+ 'a5' | -0.02	 0.10	  0.00	  0.84	   - 	 
 Valuation domain: [-1.00;1.00]
 
 In our bipolar epistemic logic, logical disjunctions and conjunctions are implemented as *max*, respectively *min* operators. Notice also that the logical equivalence *R1 <=> R2* corresponds to a double implication *(R1 => R2) and (R2 => R1)* and that the implication *(R1 => R2)* is logically equivalent to the disjunction *not R1 or R2*.
