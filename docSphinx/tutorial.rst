@@ -5158,25 +5158,25 @@ Valuation domain: [-1.00;1.00]
 * ---- Relation Table -----
   S   |   'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
 ------|-------------------------------------------
- 'a1' |   - 	 -0.86	 -0.78	 -0.80	 -0.08	 
- 'a2' |  -0.58	  - 	  0.88	  0.70	 -0.22	 
- 'a3' |  -0.36	  0.54	  - 	 -0.46	  0.54	 
- 'a4' |  -0.92	  0.48	 0.74	  - 	 -0.60	 
- 'a5' |   0.10	  0.62	 0.00	  0.84	  - 	 
+ 'a1' |    - 	 -0.86	 -0.78	 -0.80	 -0.08	 
+ 'a2' |  -0.58	   - 	  0.88	  0.70	 -0.22	 
+ 'a3' |  -0.36	  0.54	   - 	 -0.46	  0.54	 
+ 'a4' |  -0.92	  0.48	  0.74	   - 	 -0.60	 
+ 'a5' |   0.10	  0.62	  0.00	  0.84	   - 	 
 Valuation domain: [-1.00;1.00]
 
-We may notice in the relation tables shown above that 9 pairs, like *('a1','a2)* or *('a3','a2')* for instance, appear equivalently oriented. The :py:class:`digraphs.EquivalenceDigraph` class implements this *relational equivalence* relation between digraphs *R1* and *R2*.
+We may notice in the relation tables shown above that 9 pairs, like *(a1,a2)* or *(a3,a2)* for instance, appear equivalently oriented. The :py:class:`digraphs.EquivalenceDigraph` class implements this *relational equivalence* relation between digraphs *R1* and *R2*.
 
 >>> eq = EquivalenceDigraph(R1,R2)
 >>> eq.showRelationTable(ReflexiveTerms=False)
 * ---- Relation Table -----
   S   |  'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
 ------|-------------------------------------------
- 'a1' |   - 	 0.66	 -0.44	 -0.80	 0.08	 
- 'a2' |  0.36	  - 	 -0.70	 0.26	 -0.22	 
- 'a3' |  -0.14	 0.20	  - 	 -0.46	 -0.04	 
- 'a4' |  0.48	 -0.48	 0.24	  - 	 0.60	 
- 'a5' |  -0.02	 0.10	 0.00	 0.84	  - 	 
+ 'a1' |   - 	 0.66	 -0.44	 -0.80	  0.08	 
+ 'a2' |  0.36	  - 	 -0.70	  0.26	 -0.22	 
+ 'a3' | -0.14	 0.20	   - 	 -0.46	 -0.04	 
+ 'a4' |  0.48	-0.48	  0.24	   - 	  0.60	 
+ 'a5' | -0.02	 0.10	  0.00	  0.84	  - 	 
 Valuation domain: [-1.00;1.00]
 
 In our bipolar epistemic logic, logical disjunctions and conjunctions are implemented as *max*, respectively *min* operators. Notice also that the logical equivalence *R1 <=> R2* corresponds to a double implication *(R1 => R2) and (R2 => R1)* and that the implication *(R1 => R2)* is logically equivalent to the disjunction *not R1 or R2*.
@@ -5191,7 +5191,7 @@ If *r(x R1 y)* and *r(x R2 y)* denote the bipolar characteristic values of relat
 
 In the crisp case, *mm(R1 <=> R2)*  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r* -valued case, the maximal possible equivalence majority margin *mm* corresponds to the sum *dt* of the **conjoint determinations** of *(x R1 y)* and *(x R2 y)* (see [BIS-2012]_). 
 
-    *dt(R1,R2)* = sum _*(x,y)* min [ abs(*r(x R1 y)*, abs(*r(x R2 y)*) ].
+    *dt(R1,R2)* = sum _ *(x,y)* min [ abs(*r(x R1 y)*, abs(*r(x R2 y)*) ].
 
 Thus, we obtain in the general *r* -valued case:
 
@@ -5210,7 +5210,7 @@ With *uniformly* chosen random *r*-valued relations, the **expected** *tau* inde
 
 It is worthwhile noticing that the *tau(R1,R2)* index we obtain above is in fact the ratio of
 
-    * *E(R1,R2)* = mm(R1 <=> R2)* / *n(n-1)*: The normalized majority margin of the pairwise relational equivalence statements, and
+    * *E(R1,R2)* = *mm(R1 <=> R2)* / *n(n-1)*: The normalized majority margin of the pairwise relational equivalence statements, and
     * *D* = *dt(R1,R2)* / *n(n-1)*: The normalized determination of the corresponding pairwise relational equivalence statements.
 
 >>> mm = Decimal('0'); dt = Decimal('0')

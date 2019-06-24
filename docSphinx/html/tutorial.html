@@ -7883,15 +7883,15 @@ best covered terminal kernel</span></p>
 <span class="go">* ---- Relation Table -----</span>
 <span class="go">  S   |   &#39;a1&#39;    &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;</span>
 <span class="go">------|-------------------------------------------</span>
-<span class="go"> &#39;a1&#39; |   -      -0.86   -0.78   -0.80   -0.08</span>
-<span class="go"> &#39;a2&#39; |  -0.58    -       0.88    0.70   -0.22</span>
-<span class="go"> &#39;a3&#39; |  -0.36    0.54    -      -0.46    0.54</span>
-<span class="go"> &#39;a4&#39; |  -0.92    0.48   0.74     -      -0.60</span>
-<span class="go"> &#39;a5&#39; |   0.10    0.62   0.00     0.84    -</span>
+<span class="go"> &#39;a1&#39; |    -     -0.86   -0.78   -0.80   -0.08</span>
+<span class="go"> &#39;a2&#39; |  -0.58     -      0.88    0.70   -0.22</span>
+<span class="go"> &#39;a3&#39; |  -0.36    0.54     -     -0.46    0.54</span>
+<span class="go"> &#39;a4&#39; |  -0.92    0.48    0.74     -     -0.60</span>
+<span class="go"> &#39;a5&#39; |   0.10    0.62    0.00    0.84     -</span>
 <span class="go">Valuation domain: [-1.00;1.00]</span>
 </pre></div>
 </td></tr></table></div>
-<p>We may notice in the relation tables shown above that 9 pairs, like <em>(‘a1’,’a2)</em> or <em>(‘a3’,’a2’)</em> for instance, appear equivalently oriented. The <a class="reference internal" href="techDoc.html#digraphs.EquivalenceDigraph" title="digraphs.EquivalenceDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.EquivalenceDigraph</span></code></a> class implements this <em>relational equivalence</em> relation between digraphs <em>R1</em> and <em>R2</em>.</p>
+<p>We may notice in the relation tables shown above that 9 pairs, like <em>(a1,a2)</em> or <em>(a3,a2)</em> for instance, appear equivalently oriented. The <a class="reference internal" href="techDoc.html#digraphs.EquivalenceDigraph" title="digraphs.EquivalenceDigraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.EquivalenceDigraph</span></code></a> class implements this <em>relational equivalence</em> relation between digraphs <em>R1</em> and <em>R2</em>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -7907,11 +7907,11 @@ best covered terminal kernel</span></p>
 <span class="go">* ---- Relation Table -----</span>
 <span class="go">  S   |  &#39;a1&#39;     &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;</span>
 <span class="go">------|-------------------------------------------</span>
-<span class="go"> &#39;a1&#39; |   -      0.66    -0.44   -0.80   0.08</span>
-<span class="go"> &#39;a2&#39; |  0.36     -      -0.70   0.26    -0.22</span>
-<span class="go"> &#39;a3&#39; |  -0.14   0.20     -      -0.46   -0.04</span>
-<span class="go"> &#39;a4&#39; |  0.48    -0.48   0.24     -      0.60</span>
-<span class="go"> &#39;a5&#39; |  -0.02   0.10    0.00    0.84     -</span>
+<span class="go"> &#39;a1&#39; |   -      0.66    -0.44   -0.80    0.08</span>
+<span class="go"> &#39;a2&#39; |  0.36     -      -0.70    0.26   -0.22</span>
+<span class="go"> &#39;a3&#39; | -0.14    0.20      -     -0.46   -0.04</span>
+<span class="go"> &#39;a4&#39; |  0.48   -0.48     0.24     -      0.60</span>
+<span class="go"> &#39;a5&#39; | -0.02    0.10     0.00    0.84    -</span>
 <span class="go">Valuation domain: [-1.00;1.00]</span>
 </pre></div>
 </td></tr></table></div>
@@ -7929,7 +7929,7 @@ best covered terminal kernel</span></p>
 <p><em>mm(R1 &lt;=&gt; R2)</em> is hence given by the sum of the non reflexive terms of the relation table of <em>eq</em>, the relation equivalence digraph computed above.</p>
 <p>In the crisp case, <em>mm(R1 &lt;=&gt; R2)</em>  is now normalized with the maximum number of possible irreflexive pairs, namely <em>n(n-1)</em>. In a generalized <em>r</em> -valued case, the maximal possible equivalence majority margin <em>mm</em> corresponds to the sum <em>dt</em> of the <strong>conjoint determinations</strong> of <em>(x R1 y)</em> and <em>(x R2 y)</em> (see <a class="reference internal" href="#bis-2012" id="id86">[BIS-2012]</a>).</p>
 <blockquote>
-<div><em>dt(R1,R2)</em> = sum _*(x,y)* min [ abs(<em>r(x R1 y)</em>, abs(<em>r(x R2 y)</em>) ].</div></blockquote>
+<div><em>dt(R1,R2)</em> = sum _ <em>(x,y)</em> min [ abs(<em>r(x R1 y)</em>, abs(<em>r(x R2 y)</em>) ].</div></blockquote>
 <p>Thus, we obtain in the general <em>r</em> -valued case:</p>
 <blockquote>
 <div><em>tau(R1,R2)</em> =  <em>mm(R1 &lt;=&gt; R2)</em> / <em>dt(R1,R2)</em> .</div></blockquote>
@@ -7951,7 +7951,7 @@ best covered terminal kernel</span></p>
 <p>It is worthwhile noticing that the <em>tau(R1,R2)</em> index we obtain above is in fact the ratio of</p>
 <blockquote>
 <div><ul class="simple">
-<li><em>E(R1,R2)</em> = mm(R1 &lt;=&gt; R2)* / <em>n(n-1)</em>: The normalized majority margin of the pairwise relational equivalence statements, and</li>
+<li><em>E(R1,R2)</em> = <em>mm(R1 &lt;=&gt; R2)</em> / <em>n(n-1)</em>: The normalized majority margin of the pairwise relational equivalence statements, and</li>
 <li><em>D</em> = <em>dt(R1,R2)</em> / <em>n(n-1)</em>: The normalized determination of the corresponding pairwise relational equivalence statements.</li>
 </ul>
 </div></blockquote>
