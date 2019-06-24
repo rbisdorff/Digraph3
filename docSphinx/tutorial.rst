@@ -5096,9 +5096,7 @@ Only eight, out of the fifteen critics, have seen both movies and the positive o
 
 It is fair, however, to eventually mention here that the *Graffiti* magazine's average scoring method is actually showing a very similar ranking. Indeed, average scores usually confirm well all evident pairwise comparisons, yet *enforce* comparability for all less evident ones.
 
-Notice finally the ordinal correlation figures *tau* in Fig. 64  3rd row. The global ranking represents obviously a rather balanced compromise with respect to all movie critics'opinions as there appears no negative correlation with anyone of them. The global ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight.
-
-How may we compute these ordinal correlation indexes ?
+Notice finally the ordinal correlation figures *tau* in Fig. 64  3rd row. How may we compute these ordinal correlation indexes ?
 
 Ordinal correlation equals bipolar relational equivalence
 ---------------------------------------------------------
@@ -5275,7 +5273,9 @@ E(SF,nf) = +0.103
 E(AS,nf) = +0.080
 E(FG,nf) = +0.027
 
-We hence recover the relational equivalence characteristic values shown in the third row of the table shown in Fig.64. The ordinal correlation between the global Net-Flows ranking and the digraph *g* is furthermore computed as follows: 
+We hence recover the relational equivalence characteristic values shown in the third row of the table shown in Fig. 64. The global ranking represents obviously a rather balanced compromise with respect to all movie critics'opinions as there appears no negative correlation with anyone of them. The global ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight.
+
+The ordinal correlation between the global Net-Flows ranking and the digraph *g* is furthermore computed as follows: 
 
 >>> corr = g.computeOrdinalCorrelatin(nf)
 >>> tau = corr['correlation']
@@ -5286,7 +5286,12 @@ tau(g,nf) = +0.780, D = 0.300, E(g,nf) = +0.234
 
 We may notice that the correlation *tau* index between the Net-Flows ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence *E* between the *nf* and the *g* digraph may be misleading with a characteristics value of *only* +0.234; a value corresponding nevertheless to an epistemic majority support of nearly 62% of the movie critics' voices.
 
-It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the *Copeland* or the *Kohler* ranking rule. 
+It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the *Copeland* or the *Kohler* ranking rule.
+
+Illustrating preference divergences
+...................................
+
+Under Construction
     
 .. only:: html
 	   	  
