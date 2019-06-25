@@ -5308,31 +5308,12 @@ To get a picture of the actual divergence of rating opinions, we may develop a *
 
 Again we may notice the same remarquable fact that all the movie critics do express somehow different rating opinions one from the other. Their common preference space is hence highly dimensional. Most excentric and different in their respective rating opinions (*E(CF,MR)* = -075) appear, on the first principal axis with 19.3% inertia, critics *CF* (conservative press) and *MR* (labour press). On the second principal axis with 14.7% inertia, it is critics *AS* (Belgian conservative press) and *RR* (young and immigration related press) who express the most diverging rating opinions (*E(AS,RR)* = -0.66).
 
-Knowledge fusion by epistemic disjunction
------------------------------------------
+Exploring the better rated and the as well as rated opinions
+............................................................
 
-Additive fusion of relational data
-..................................
+In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of a digraph (see introduction tutorial of the :py:mod:`digraphs` module).
 
->>> g.recodeValuation(-19,19)
->>> g
-*------- Object instance description ------*
-Instance class   : BipolarOutrankingDigraph
-Instance name    : rel_grafittiPerfTab.xml
-# Actions        : 25
-# Criteria       : 15
-Size             : 390
-Determinateness  : 29.965
-Valuation domain : {'min': Decimal('-19'),
-                    'med': Decimal('0.000'),
-		    'max': Decimal('19')}
->>> sg = SymmetricPartialDigraph(g)
->>> sg.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
-
-.. image:: symmetricPart.png
-   :alt: symmetric part of graffiti07 digraph
-   :width: 600 px
-   :align: center
+Let us indeed first have a look at the pairwise asymmetric ' *at least as well as rated* ' opinions of the movie critics. 
 
 >>> ag = AsymmetricPartialDigraph(g)
 >>> ag.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
@@ -5342,22 +5323,40 @@ Valuation domain : {'min': Decimal('-19'),
    :width: 600 px
    :align: center
 
->>> fg = FusionDigraph(sg,ag, operator = 'o-max')
->>> fg
-*------- Digraph instance description ------*
-Instance class   : FusionDigraph
-Instance name    : fusion-symmetric_rel_grafittiPerfTab.xml\
-                   -asymmetric_rel_grafittiPerfTab.xml
-Digraph Order      : 25
-Digraph Size       : 390
-Valuation domain : [-19.00 - 19.00]
-Determinateness  : 29.965
-Attributes       : ['name', 'actions', 'order', 'valuationdomain',
-                    'relation', 'gamma', 'notGamma']
+We notice here that the *Net-Flows* ranking rule inverts in fact just three *less well ranked* opinion and four *better ranked* ones. A similar look at the symmetric part, the pairwise ' *as well as rated* ' opinions, suggests clearly a preordered structure in several equivalently rated classes.
 
+>>> sg = SymmetricPartialDigraph(g)
+>>> sg.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
 
-Adversary versus consensual social choice
-.........................................
+.. image:: symmetricPart.png
+   :alt: symmetric part of graffiti07 digraph
+   :width: 600 px
+   :align: center
+
+Such a preorder of the movies may be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method where we fusion by epistemic conjunction of the preorder obtained by iteratively extracting dominant kernels (best remaining choices) with the preorder obtained by iteratively extracting absorbent kernels (worst remaining choices). We operate herefore on the *better rated* opinins, i.e. the codual of the ' *at least as well as rated* ' opinions.
+
+>>> gcd = ~(-g)
+>>> from weakOrders import RankingByChoosingDigraph
+>>> rbc = RankingByChoosingDigraph(gcd)
+>>> rbc.showRankingByChoosing()
+Ranking by Choosing and Rejecting
+ 1st Best Choice ['mv_QS']
+   2nd Best Choice ['mv_DG', 'mv_FC', 'mv_HN', 'mv_HS', 'mv_NP',
+                    'mv_PE', 'mv_RR', 'mv_SM']
+     3rd Best Choice ['mv_CM', 'mv_JB', 'mv_TM']
+       4th Best Choice ['mv_AL', 'mv_TP']
+       4th Worst Choice ['mv_AL', 'mv_TP']
+     3rd Worst Choice ['mv_GH', 'mv_MB', 'mv_RG']
+   2nd Worst Choice ['mv_DF', 'mv_DJ', 'mv_FF', 'mv_GG']
+ 1st Worst Choice ['mv_BI', 'mv_DI', 'mv_HP', 'mv_TF']
+Ordinal bipolar correlation with outranking relation: tau = +0.516 (D = 0.27)
+Ordinal bipolar correlation with median cut outranking relation: tau = +0.452 (D = 0.94)
+
+Sound handling of knowledge fusion
+----------------------------------
+
+Consensual or adversary social choice ?
+.......................................
 
 To be written
 

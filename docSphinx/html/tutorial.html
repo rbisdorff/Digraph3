@@ -7716,7 +7716,7 @@ best covered terminal kernel</span></p>
 <ul class="simple">
 <li><a class="reference internal" href="#coping-with-missing-data-and-indeterminateness" id="id257">Coping with missing data and indeterminateness</a></li>
 <li><a class="reference internal" href="#ordinal-correlation-equals-bipolar-relational-equivalence" id="id258">Ordinal correlation equals bipolar relational equivalence</a></li>
-<li><a class="reference internal" href="#knowledge-fusion-by-epistemic-disjunction" id="id259">Knowledge fusion by epistemic disjunction</a></li>
+<li><a class="reference internal" href="#sound-handling-of-knowledge-fusion" id="id259">Sound handling of knowledge fusion</a></li>
 </ul>
 </div>
 <div class="section" id="coping-with-missing-data-and-indeterminateness">
@@ -8092,11 +8092,24 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/correlationPCA.png"><img alt="3D plot of criteria correlation PCA" class="align-center" src="_images/correlationPCA.png" style="width: 500px;" /></a>
 <p>Again we may notice the same remarquable fact that all the movie critics do express somehow different rating opinions one from the other. Their common preference space is hence highly dimensional. Most excentric and different in their respective rating opinions (<em>E(CF,MR)</em> = -075) appear, on the first principal axis with 19.3% inertia, critics <em>CF</em> (conservative press) and <em>MR</em> (labour press). On the second principal axis with 14.7% inertia, it is critics <em>AS</em> (Belgian conservative press) and <em>RR</em> (young and immigration related press) who express the most diverging rating opinions (<em>E(AS,RR)</em> = -0.66).</p>
 </div>
-</div>
-<div class="section" id="knowledge-fusion-by-epistemic-disjunction">
-<h3><a class="toc-backref" href="#id259">Knowledge fusion by epistemic disjunction</a><a class="headerlink" href="#knowledge-fusion-by-epistemic-disjunction" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="additive-fusion-of-relational-data">
-<h4>Additive fusion of relational data<a class="headerlink" href="#additive-fusion-of-relational-data" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="exploring-the-better-rated-and-the-as-well-as-rated-opinions">
+<h4>Exploring the better rated and the as well as rated opinions<a class="headerlink" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions" title="Permalink to this headline">¶</a></h4>
+<p>In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of a digraph (see introduction tutorial of the <a class="reference internal" href="techDoc.html#module-digraphs" title="digraphs"><code class="xref py py-mod docutils literal"><span class="pre">digraphs</span></code></a> module).</p>
+<p>Let us indeed first have a look at the pairwise asymmetric ‘ <em>at least as well as rated</em> ‘ opinions of the movie critics.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">(),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<a class="reference internal image-reference" href="_images/asymmetricPart.png"><img alt="asymmetric part of graffiti07 digraph" class="align-center" src="_images/asymmetricPart.png" style="width: 600px;" /></a>
+<p>We notice here that the <em>Net-Flows</em> ranking rule inverts in fact just three <em>less well ranked</em> opinion and four <em>better ranked</em> ones. A similar look at the symmetric part, the pairwise ‘ <em>as well as rated</em> ‘ opinions, suggests clearly a preordered structure in several equivalently rated classes.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span> <span class="o">=</span> <span class="n">SymmetricPartialDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">(),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<a class="reference internal image-reference" href="_images/symmetricPart.png"><img alt="symmetric part of graffiti07 digraph" class="align-center" src="_images/symmetricPart.png" style="width: 600px;" /></a>
+<p>Such a preorder of the movies may be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeRankingByChoosing" title="digraphs.Digraph.computeRankingByChoosing"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeRankingByChoosing()</span></code></a> method where we fusion by epistemic conjunction of the preorder obtained by iteratively extracting dominant kernels (best remaining choices) with the preorder obtained by iteratively extracting absorbent kernels (worst remaining choices). We operate herefore on the <em>better rated</em> opinins, i.e. the codual of the ‘ <em>at least as well as rated</em> ‘ opinions.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8110,57 +8123,32 @@ best covered terminal kernel</span></p>
 11
 12
 13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mi">19</span><span class="p">,</span><span class="mi">19</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
-<span class="go">*------- Object instance description ------*</span>
-<span class="go">Instance class   : BipolarOutrankingDigraph</span>
-<span class="go">Instance name    : rel_grafittiPerfTab.xml</span>
-<span class="go"># Actions        : 25</span>
-<span class="go"># Criteria       : 15</span>
-<span class="go">Size             : 390</span>
-<span class="go">Determinateness  : 29.965</span>
-<span class="go">Valuation domain : {&#39;min&#39;: Decimal(&#39;-19&#39;),</span>
-<span class="go">                    &#39;med&#39;: Decimal(&#39;0.000&#39;),</span>
-<span class="go">                    &#39;max&#39;: Decimal(&#39;19&#39;)}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span> <span class="o">=</span> <span class="n">SymmetricPartialDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">(),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</td></tr></table></div>
-<a class="reference internal image-reference" href="_images/symmetricPart.png"><img alt="symmetric part of graffiti07 digraph" class="align-center" src="_images/symmetricPart.png" style="width: 600px;" /></a>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">(),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</td></tr></table></div>
-<a class="reference internal image-reference" href="_images/asymmetricPart.png"><img alt="asymmetric part of graffiti07 digraph" class="align-center" src="_images/asymmetricPart.png" style="width: 600px;" /></a>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fg</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">sg</span><span class="p">,</span><span class="n">ag</span><span class="p">,</span> <span class="n">operator</span> <span class="o">=</span> <span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fg</span>
-<span class="go">*------- Digraph instance description ------*</span>
-<span class="go">Instance class   : FusionDigraph</span>
-<span class="go">Instance name    : fusion-symmetric_rel_grafittiPerfTab.xml\</span>
-<span class="go">                   -asymmetric_rel_grafittiPerfTab.xml</span>
-<span class="go">Digraph Order      : 25</span>
-<span class="go">Digraph Size       : 390</span>
-<span class="go">Valuation domain : [-19.00 - 19.00]</span>
-<span class="go">Determinateness  : 29.965</span>
-<span class="go">Attributes       : [&#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;valuationdomain&#39;,</span>
-<span class="go">                    &#39;relation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;]</span>
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">gcd</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
+<span class="go">Ranking by Choosing and Rejecting</span>
+<span class="go"> 1st Best Choice [&#39;mv_QS&#39;]</span>
+<span class="go">   2nd Best Choice [&#39;mv_DG&#39;, &#39;mv_FC&#39;, &#39;mv_HN&#39;, &#39;mv_HS&#39;, &#39;mv_NP&#39;,</span>
+<span class="go">                    &#39;mv_PE&#39;, &#39;mv_RR&#39;, &#39;mv_SM&#39;]</span>
+<span class="go">     3rd Best Choice [&#39;mv_CM&#39;, &#39;mv_JB&#39;, &#39;mv_TM&#39;]</span>
+<span class="go">       4th Best Choice [&#39;mv_AL&#39;, &#39;mv_TP&#39;]</span>
+<span class="go">       4th Worst Choice [&#39;mv_AL&#39;, &#39;mv_TP&#39;]</span>
+<span class="go">     3rd Worst Choice [&#39;mv_GH&#39;, &#39;mv_MB&#39;, &#39;mv_RG&#39;]</span>
+<span class="go">   2nd Worst Choice [&#39;mv_DF&#39;, &#39;mv_DJ&#39;, &#39;mv_FF&#39;, &#39;mv_GG&#39;]</span>
+<span class="go"> 1st Worst Choice [&#39;mv_BI&#39;, &#39;mv_DI&#39;, &#39;mv_HP&#39;, &#39;mv_TF&#39;]</span>
+<span class="go">Ordinal bipolar correlation with outranking relation: tau = +0.516 (D = 0.27)</span>
+<span class="go">Ordinal bipolar correlation with median cut outranking relation: tau = +0.452 (D = 0.94)</span>
 </pre></div>
 </td></tr></table></div>
 </div>
-<div class="section" id="adversary-versus-consensual-social-choice">
-<h4>Adversary versus consensual social choice<a class="headerlink" href="#adversary-versus-consensual-social-choice" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="sound-handling-of-knowledge-fusion">
+<h3><a class="toc-backref" href="#id259">Sound handling of knowledge fusion</a><a class="headerlink" href="#sound-handling-of-knowledge-fusion" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="consensual-or-adversary-social-choice">
+<h4>Consensual or adversary social choice ?<a class="headerlink" href="#consensual-or-adversary-social-choice" title="Permalink to this headline">¶</a></h4>
 <p>To be written</p>
 </div>
 <div class="section" id="computing-valued-digraphs-kernels">
@@ -8566,11 +8554,11 @@ best covered terminal kernel</span></p>
 <li><a class="reference internal" href="#bipolar-valued-relational-equivalence">Bipolar-valued relational equivalence</a></li>
 <li><a class="reference internal" href="#fitness-of-ranking-heuristics">Fitness of ranking heuristics</a></li>
 <li><a class="reference internal" href="#illustrating-preference-divergences">Illustrating preference divergences</a></li>
+<li><a class="reference internal" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions">Exploring the better rated and the as well as rated opinions</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#knowledge-fusion-by-epistemic-disjunction">Knowledge fusion by epistemic disjunction</a><ul>
-<li><a class="reference internal" href="#additive-fusion-of-relational-data">Additive fusion of relational data</a></li>
-<li><a class="reference internal" href="#adversary-versus-consensual-social-choice">Adversary versus consensual social choice</a></li>
+<li><a class="reference internal" href="#sound-handling-of-knowledge-fusion">Sound handling of knowledge fusion</a><ul>
+<li><a class="reference internal" href="#consensual-or-adversary-social-choice">Consensual or adversary social choice ?</a></li>
 <li><a class="reference internal" href="#computing-valued-digraphs-kernels">Computing valued digraphs kernels</a></li>
 </ul>
 </li>

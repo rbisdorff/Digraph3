@@ -1558,9 +1558,9 @@ class Digraph(object):
                 print('  %s Ambiguous Choice %s' % (space,list(iach)))
             print(' %s%s%s Worst Choice %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
         corr1 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(rankingByChoosing))
-        print('Ordinal bipolar correlation with outranking relation: %.3f (%.1f%%)'% (corr1['correlation'],corr1['determination']*Decimal('100')))
+        print('Ordinal bipolar correlation with outranking relation: tau = %+.3f (D = %.1f)'% (corr1['correlation'],corr1['determination']))
         corr2 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(rankingByChoosing),MedianCut=True)
-        print('Ordinal bipolar correlation with median cut outranking relation: %.3f (%.1f%%)'% (corr2['correlation'],corr2['determination']*Decimal('100')))
+        print('Ordinal bipolar correlation with median cut outranking relation: tau = %+.3f (D = %.1f)'% (corr2['correlation'],corr2['determination']))
 
     def showRankingByLastChoosing(self,rankingByLastChoosing=None,Debug=None):
         """
