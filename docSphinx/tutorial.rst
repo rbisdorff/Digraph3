@@ -5297,16 +5297,14 @@ The bipolar relational equivalence index gives us a further measure for studying
 
 It is remarquable that all pairwise relational equivalence indexes *E(x,y)* appear to be negative, except the *diagonal* ones. The reflexive indexes *E(x,x)* would trivially all amount to +1.0 in a plainly determined case. As *tau(x,x)* = 1.0 and *E(x,x)* = *tau(x,x)* * *D*, in this reflexive cases they indicate a reflexive determination score *D*, i.e. how many movies a critic did actually evaluate. The lower *D*, the less movies a critic has evaluated. Critic *JPT*, the editor of the Graffiti magazine for instance, evaluated all but one, whereas critic *FG* evaluated only 10 movies among the 25 in discussion.
 
-To get a picture of the actual divergence of rating opinions, we may develop a *Principal Component Analysis* ([10]_) of the correlation matrix shown above. The 3D plot of the first 3 principal axes is shown in Fig. 68.
+To get a picture of the actual divergence of rating opinions, we may develop a *Principal Component Analysis* ([10]_) of the correlation matrix shown above. The 3D plot of the first 3 principal axes is shown below.
 
 >>> g.export3DplotOfCriteriaCorrelation()
 
-.. Figure:: correlationPCA.png
+.. image:: correlationPCA.png
    :alt: 3D plot of criteria correlation PCA
    :width: 500 px
    :align: center
-
-   3D PCA plot of movie critics opinion correlations
 
 Again we may notice the same remarquable fact that all the movie critics do express somehow different rating opinions one from the other. Their common preference space is hence highly dimensional. Most excentric and different in their respective rating opinions (*E(CF,MR)* = -075) appear, on the first principal axis with 19.3% inertia, critics *CF* (conservative press) and *MR* (labour press). On the second principal axis with 14.7% inertia, it is critics *AS* (Belgian conservative press) and *RR* (young and immigration related press) who express the most diverging rating opinions (*E(AS,RR)* = -0.66).
 
@@ -5333,7 +5331,7 @@ Valuation domain : {'min': Decimal('-19'),
 
 .. image:: symmetricPart.png
    :alt: symmetric part of graffiti07 digraph
-   :width: 400 px
+   :width: 600 px
    :align: center
 
 >>> ag = AsymmetricPartialDigraph(g)
@@ -5341,10 +5339,22 @@ Valuation domain : {'min': Decimal('-19'),
 
 .. image:: asymmetricPart.png
    :alt: asymmetric part of graffiti07 digraph
-   :width: 400 px
+   :width: 600 px
    :align: center
 
 >>> fg = FusionDigraph(sg,ag, operator = 'o-max')
+>>> fg
+*------- Digraph instance description ------*
+Instance class   : FusionDigraph
+Instance name    : fusion-symmetric_rel_grafittiPerfTab.xml\
+                   -asymmetric_rel_grafittiPerfTab.xml
+Digraph Order      : 25
+Digraph Size       : 390
+Valuation domain : [-19.00 - 19.00]
+Determinateness  : 29.965
+Attributes       : ['name', 'actions', 'order', 'valuationdomain',
+                    'relation', 'gamma', 'notGamma']
+
 
 Adversary versus consensual social choice
 .........................................
