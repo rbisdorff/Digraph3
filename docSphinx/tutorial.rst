@@ -5291,12 +5291,38 @@ It would be interesting to compare similarly the correlations one may obtain wit
 Illustrating preference divergences
 ...................................
 
-Under Construction
-    
-.. only:: html
+>>> g.showCriteriaCorrelationTable()
+Criteria ordinal correlation index
+     |   AP    AS    CF    CS    DR    FG    GS    JH   JPT    MR    RR    SF    SJ    TD    VT   
+-----|-------------------------------------------------------------------------------------------
+  AP | +0.97 -0.66 -0.33 -0.38 -0.25 -0.44 -0.52 -0.44 -0.39 -0.69 -0.71 -0.53 -0.27 -0.38 -0.51   
+  AS |       +0.99 -0.55 -0.58 -0.52 -0.47 -0.50 -0.63 -0.36 -0.62 -0.66 -0.32 -0.63 -0.60 -0.29   
+  CF |             +0.99 -0.46 -0.62 -0.44 -0.57 -0.60 -0.51 -0.75 -0.55 -0.57 -0.55 -0.57 -0.55   
+  CS |                   +0.97 -0.64 -0.51 -0.43 -0.41 -0.39 -0.75 -0.32 -0.58 -0.62 -0.51 -0.59   
+  DR |                         +0.91 -0.08 -0.59 -0.27 -0.28 -0.45 -0.36 -0.36 -0.31 -0.31 -0.33   
+  FG |                               +0.65 -0.41 -0.33 -0.49 -0.16 -0.45 -0.04 -0.35 -0.29 -0.25   
+  GS |                                     +0.88 -0.52 -0.61 -0.28 -0.55 -0.33 -0.47 -0.36 -0.33   
+  JH |                                           +0.99 -0.29 -0.11 -0.26 -0.32 -0.45 -0.43 -0.44   
+ JPT |                                                 +1.00 -0.51 -0.60 -0.42 -0.60 -0.47 -0.51   
+  MR |                                                       +0.97 -0.52 -0.16 -0.62 -0.31 -0.42   
+  RR |                                                             +0.93 -0.47 -0.63 -0.19 -0.51   
+  SF |                                                                   +0.70 -0.44 -0.29 -0.11   
+  SJ |                                                                         +0.93 -0.43 -0.23   
+  TD |                                                                               +0.78 -0.48   
+  VT |                                                                                     +0.88 
+>>> g.export3DplotOfCriteriaCorrelation()
+
+.. Figure:: correlationPCA.png
+   :alt: 3D plot of criteria correlation PCA
+   :width: 500 px
+   :align: center
+
+   PCA of movie critics opinion correlations
+
+
 	   	  
-   References
-   ==========
+Bibliography
+============
 
 .. [CPSTAT-L5] R. Bisdorff (2017) *Simulating from abitrary empirical random distributions*. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winterr Semester 2017 (`PDF 2x2 reduced presentation slides 211kB downloadable here <_static/quantileEstimation-2x2.pdf>`_).
 
