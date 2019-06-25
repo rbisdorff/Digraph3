@@ -5002,9 +5002,6 @@ Pearls of bipolar epistemic logic
 .. contents:: 
 	:depth: 1
 	:local:
-
-To be written
-
 	   
 Coping with missing data and indeterminateness
 ----------------------------------------------
@@ -5291,25 +5288,17 @@ It would be interesting to compare similarly the correlations one may obtain wit
 Illustrating preference divergences
 ...................................
 
->>> g.showCriteriaCorrelationTable()
-Criteria ordinal correlation index
-     |   AP    AS    CF    CS    DR    FG    GS    JH   JPT    MR    RR    SF    SJ    TD    VT   
------|-------------------------------------------------------------------------------------------
-  AP | +0.97 -0.66 -0.33 -0.38 -0.25 -0.44 -0.52 -0.44 -0.39 -0.69 -0.71 -0.53 -0.27 -0.38 -0.51   
-  AS |       +0.99 -0.55 -0.58 -0.52 -0.47 -0.50 -0.63 -0.36 -0.62 -0.66 -0.32 -0.63 -0.60 -0.29   
-  CF |             +0.99 -0.46 -0.62 -0.44 -0.57 -0.60 -0.51 -0.75 -0.55 -0.57 -0.55 -0.57 -0.55   
-  CS |                   +0.97 -0.64 -0.51 -0.43 -0.41 -0.39 -0.75 -0.32 -0.58 -0.62 -0.51 -0.59   
-  DR |                         +0.91 -0.08 -0.59 -0.27 -0.28 -0.45 -0.36 -0.36 -0.31 -0.31 -0.33   
-  FG |                               +0.65 -0.41 -0.33 -0.49 -0.16 -0.45 -0.04 -0.35 -0.29 -0.25   
-  GS |                                     +0.88 -0.52 -0.61 -0.28 -0.55 -0.33 -0.47 -0.36 -0.33   
-  JH |                                           +0.99 -0.29 -0.11 -0.26 -0.32 -0.45 -0.43 -0.44   
- JPT |                                                 +1.00 -0.51 -0.60 -0.42 -0.60 -0.47 -0.51   
-  MR |                                                       +0.97 -0.52 -0.16 -0.62 -0.31 -0.42   
-  RR |                                                             +0.93 -0.47 -0.63 -0.19 -0.51   
-  SF |                                                                   +0.70 -0.44 -0.29 -0.11   
-  SJ |                                                                         +0.93 -0.43 -0.23   
-  TD |                                                                               +0.78 -0.48   
-  VT |                                                                                     +0.88 
+The bipolar relational equivalence index gives us a further measure for studying how divergent or not are the rating opinions expressed by the movie critics.
+
+.. image:: correlationTable.png
+   :alt: g.showCriteriaCorrelationTable() result
+   :width: 600 px
+   :align: center
+
+It is remarquable that all pairwise relational equivalence indexes *E(x,y)* appear to be negative, except the *diagonal* ones. The reflexive indexes *E(x,x)* would trivially all amount to +1.0 in a plainly determined case. As *tau(x,x)* = 1.0 and *E(x,x)* = *tau(x,x)* * *D*, in this reflexive cases they indicate a reflexive determination score *D*, i.e. how many movies a critic did actually evaluate. The lower *D*, the less movies a critic has evaluated. Critic *JPT*, the editor of the Graffiti magazine for instance, evaluated all but one, whereas critic *FG* evaluated only 10 movies among the 25 in discussion.
+
+To get a picture of the actual divergence of rating opinions, we may develop a *Principal Component Analysis* ([10]_) of the correlation matrix shown above. The 3D plot of the first 3 principal axes is shown in Fig. 68.
+
 >>> g.export3DplotOfCriteriaCorrelation()
 
 .. Figure:: correlationPCA.png
@@ -5317,8 +5306,55 @@ Criteria ordinal correlation index
    :width: 500 px
    :align: center
 
-   PCA of movie critics opinion correlations
+   3D PCA plot of movie critics opinion correlations
 
+Again we may notice the same remarquable fact that all the movie critics do express somehow different rating opinions one from the other. Their common preference space is hence highly dimensional. Most excentric and different in their respective rating opinions (*E(CF,MR)* = -075) appear, on the first principal axis with 19.3% inertia, critics *CF* (conservative press) and *MR* (labour press). On the second principal axis with 14.7% inertia, it is critics *AS* (Belgian conservative press) and *RR* (young and immigration related press) who express the most diverging rating opinions (*E(AS,RR)* = -0.66).
+
+Knowledge fusion by epistemic disjunction
+-----------------------------------------
+
+Additive fusion of relational data
+..................................
+
+>>> g.recodeValuation(-19,19)
+>>> g
+*------- Object instance description ------*
+Instance class   : BipolarOutrankingDigraph
+Instance name    : rel_grafittiPerfTab.xml
+# Actions        : 25
+# Criteria       : 15
+Size             : 390
+Determinateness  : 29.965
+Valuation domain : {'min': Decimal('-19'),
+                    'med': Decimal('0.000'),
+		    'max': Decimal('19')}
+>>> sg = SymmetricPartialDigraph(g)
+>>> sg.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
+
+.. image:: symmetricPart.png
+   :alt: symmetric part of graffiti07 digraph
+   :width: 400 px
+   :align: center
+
+>>> ag = AsymmetricPartialDigraph(g)
+>>> ag.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
+
+.. image:: asymmetricPart.png
+   :alt: asymmetric part of graffiti07 digraph
+   :width: 400 px
+   :align: center
+
+>>> fg = FusionDigraph(sg,ag, operator = 'o-max')
+
+Adversary versus consensual social choice
+.........................................
+
+To be written
+
+Computing valued digraphs kernels
+.................................
+
+To be written
 
 	   	  
 Bibliography
@@ -5412,3 +5448,5 @@ Bibliography
 .. [8] See https://hpc.uni.lu/systems/gaia/
 
 .. [9] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file *graffiti07.xml* (XMCDA-2.0 Format) in the *examples/Graffiti* directory of the Digraph3 ressources.
+
+.. [10] The 3D PCA plot method requires a running *R statistics software*  (https://www.r-project.org/) installation.
