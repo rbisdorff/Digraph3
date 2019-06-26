@@ -5244,7 +5244,7 @@ let us therefore reconsider the bipolar valued outranking digraph *g* modelling 
 
 Out of the 25 x 24 = 600 irreflexive movie pairs, digraph *g* contains 390 positively validated, and 188 positively invalidated outranking situations. The other 22 outranking situations appear *indeterminate* (see the zero-valued cells in Fig. 66).
 
-Let us now compute the normalized majority margin *r(<=>)  of the equivalence between the marginal critic's pairwise ratings and the global Net-Flows ranking shown in the ordered heat map.
+Let us now compute the normalized majority margin *r(<=>)*  of the equivalence between the marginal critic's pairwise ratings and the global Net-Flows ranking shown in the ordered heat map.
 
 >>> from linearOrders import NetFlowsOrder
 >>> nf = NetFlowsOrder(g)
