@@ -715,7 +715,7 @@ def testActionsCorrelation():
     print('*---- test computing actions correlation table and digraph ---*')
     g = RandomOutrankingDigraph()
     g.showStatistics()
-    print(g.computeActionsCorrelations())
+    print(g.computeActionsComparisonCorrelations())
     g.saveCriteriaCorrelationTable('crit.prn')
     g.saveActionsCorrelationTable('act.prn')
     g.export3DplotOfActionsCorrelation('actionsCorrelation')
