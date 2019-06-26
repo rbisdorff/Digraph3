@@ -5326,7 +5326,7 @@ To get a picture of the actual divergence of rating opinions, we may develop a *
    :width: 500 px
    :align: center
 
-The first 3 principal axes support together about 50% of the total inertia. Most excentric and different in their respective rating opinions (*tau(CF,MR)* = -0.75) appear, on the first principal axis with 19.3% inertia, critics *CF* (conservative press) and *MR* (labour press). On the second principal axis with 14.7% inertia, it is critics *AS* (Belgian conservative press) and *RR* (young and immigration related press) who express the most diverging rating opinions (*tau(AS,RR)* = -0.66).
+The first 3 principal axes support together about 70% of the total inertia. Most excentric and different in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against  labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written press appears opposing to the radio press.
 
 
 Exploring the *better rated*  and the *as well as rated* opinions

@@ -949,7 +949,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('Actions Correlation saved on file %s' % (fileName))
         
         
-    def saveCriteriaCorrelationTable(self,fileName='tempcorr.prn',delimiter=' ',Bipolar=True,Silent=False,Centered=False):
+    def saveCriteriaCorrelationTable(self,fileName='tempcorr.prn',delimiter=' ',ValuedCorrelation=True,Bipolar=True,Silent=False,Centered=False):
         """
         Delimited save of correlation table
         """
@@ -959,7 +959,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         #print(criteriaList)
         n = len(criteriaList)
         nd = Decimal(str(n))
-        corr,d = self.computeCriteriaCorrelations()
+        corr,d = self.computeCriteriaCorrelations(ValuedCorrelation=ValuedCorrelation)
         #print(corr)
         if not Bipolar:
             for i in range(n):
@@ -992,7 +992,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         if not Silent:
             print('Criteria Correlation saved on file %s' % (fileName))
 
-    def export3DplotOfCriteriaCorrelation(self,plotFileName="correlation",Type="pdf",Comments=False,bipolarFlag=False,dist=True,centeredFlag=False):
+    def export3DplotOfCriteriaCorrelation(self,plotFileName="correlationPCA",ValuedCorrelation=True,Type="pdf",Comments=False,bipolarFlag=False,dist=True,centeredFlag=False):
         """
         use Calmat and R for producing a plot of the principal components of
         the criteria ordinal correlation table.
@@ -1009,7 +1009,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         for key in criteriaList:
             fo.write('%s ' % (key))
         fo.close()
-        self.saveCriteriaCorrelationTable(fileName='tempcorr.prn',Silent=True,Bipolar=bipolarFlag,Centered=centeredFlag)
+        self.saveCriteriaCorrelationTable(fileName='tempcorr.prn',Silent=True,ValuedCorrelation=ValuedCorrelation,Bipolar=bipolarFlag,Centered=centeredFlag)
         # create Calmat script and calmat execution (the prn extension is standard)
         try:
             if Comments:
@@ -1115,7 +1115,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         except:
             print('Error: You need to install R !!!')
 
-    def export3DplotOfActionsCorrelation(self,plotFileName="correlation",Type="pdf",Comments=False,bipolarFlag=False,dist=True,centeredFlag=False):
+    def export3DplotOfActionsCorrelation(self,plotFileName="correlation",ValuedCorrelation=True,Type="pdf",Comments=False,bipolarFlag=False,dist=True,centeredFlag=False):
         """
         use Calmat and R for producing a png plot of the principal components of
         the the actions ordinal correlation table.
@@ -1132,7 +1132,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         for key in actionsList:
             fo.write('%s ' % (key))
         fo.close()
-        self.saveActionsCorrelationTable(fileName='tempcorr.prn',Silent=True,Bipolar=bipolarFlag,Centered=centeredFlag)
+        self.saveActionsCorrelationTable(fileName='tempcorr.prn',ValuedCorrelation=ValuedCorrelation,Silent=True,Bipolar=bipolarFlag,Centered=centeredFlag)
         # create Calmat script and calmat execution (the prn extension is standard)
         try:
             if Comments:
