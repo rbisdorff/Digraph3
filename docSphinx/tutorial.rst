@@ -5176,48 +5176,50 @@ Valuation domain: [-1.00;1.00]
 
 In our bipolar epistemic logic, logical disjunctions and conjunctions are implemented as *max*, respectively *min* operators. Notice also that the logical equivalence *R1 <=> R2* corresponds to a double implication *(R1 => R2) and (R2 => R1)* and that the implication *(R1 => R2)* is logically equivalent to the disjunction *not R1 or R2*.
 
-If *r(x R1 y)* and *r(x R2 y)* denote the bipolar characteristic values of relation *R1*, resp. *R2*, we may hence compute as follows a majority margin *mm(R1 <=> R2)* between equivalently and not equivalently oriented irreflexive pairs *(x,y)*.
+If *r(x R1 y)* and *r(x R2 y)* denote the bipolar characteristic values of relation *R1*, resp. *R2*, we may hence compute as follows a majority margin *M(R1 <=> R2)* between equivalently and not equivalently oriented irreflexive pairs *(x,y)*.
 
-| *mm(R1 <=> R2)* = sum _ *(x,y)* { \
+| *M(R1 <=> R2)* = sum _ *(x,y)* { \
 |                   min [ max( *-r(x R1 y)*, *r(x R2 y)* ), \
 |                         max( *-r(x R2 y)*, *r(x R1 y)* ) ] }.
 
-*mm(R1 <=> R2)* is hence given by the sum of the non reflexive terms of the relation table of *eq*, the relation equivalence digraph computed above.
+*M(R1 <=> R2)* is hence given by the sum of the non reflexive terms of the relation table of *eq*, the relation equivalence digraph computed above.
 
-In the crisp case, *mm(R1 <=> R2)*  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r* -valued case, the maximal possible equivalence majority margin *mm* corresponds to the sum *dt* of the **conjoint determinations** of *(x R1 y)* and *(x R2 y)* (see [BIS-2012]_). 
+In the crisp case, *M(R1 <=> R2)*  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r* -valued case, the maximal possible equivalence majority margin *mm* corresponds to the sum *D* of the **conjoint determinations** of *(x R1 y)* and *(x R2 y)* (see [BIS-2012]_). 
 
-    *dt(R1,R2)* = sum _ *(x,y)* min [ abs(*r(x R1 y)*, abs(*r(x R2 y)*) ].
+    *D(R1,R2)* = sum _ *(x,y)* min [ abs(*r(x R1 y)*, abs(*r(x R2 y)*) ].
 
 Thus, we obtain in the general *r* -valued case:
 
-    *tau(R1,R2)* =  *mm(R1 <=> R2)* / *dt(R1,R2)* .
+    *tau(R1,R2)* =  *M(R1 <=> R2)* / *D(R1,R2)* .
 
-*tau(R1,R2)* gives us hence a classical ordinal correlation index, but restricted to the **conjointly determined parts** of the given relations *R1* and *R2*. In the limit case of two crisp linear orders, *dt(R1,R2)* equals *n(n-1)*, i.e. the number of irreflexive pairs, and we recover hence *Kendall* 's original *tau* index definition.
+*tau(R1,R2)* gives us hence a classical ordinal correlation index, but restricted to the **conjointly determined parts** of the given relations *R1* and *R2*. In the limit case of two crisp linear orders, *D(R1,R2)* equals *n(n-1)*, i.e. the number of irreflexive pairs, and we recover hence *Kendall* 's original *tau* index definition.
 
->>> corr = R1.computeOrdinalCorrelation(R2)
->>> tau = corr['correlation']
->>> D = corr['determination']
->>> E = tau * D
->>> print('tau(R1,R2) = %+.3f, D = %.3f, E(R1,R2) = %+.3f' % (tau, D, M))
-tau(R1,R2) = +0.073, D = 0.356, E(R1,R2) = +0.026
+It is worthwhile noticing that the ordinal correlation index *tau(R1,R2)* we obtain above corresponds to the ratio of
 
-With *uniformly* chosen random *r*-valued relations, the **expected** *tau* index is **0.0**, denoting in fact an **indeterminate** correlation. The expected determination *D* is about 0.333.
+    * *r(R1<=>R2)* = *M(R1 <=> R2)* / *n(n-1)*: The normalized majority margin of the pairwise relational equivalence statements, also called *valued ordinal correlation*, and 
+    * *d* = *D(R1,R2)* / *n(n-1)*: The normalized determination of the corresponding pairwise relational equivalence statements, in fact de determinateness of the relational equivalence digraph.
 
-It is worthwhile noticing that the *tau(R1,R2)* index we obtain above is in fact the ratio of
+We have thus successfully **out-factored** the *determination* effect from the *correlation* effect. With completely determined relations, *tau(R1,R2)* = *r(R<=>R2)*. By convention, we set the ordinal correlation with a *completely indeterminate* relation, i.e. when *D = 0*, to the *indeterminate* correlation value 0.0. With *uniformly* chosen random *r*-valued relations, the **expected** *tau* index is **0.0**, denoting in fact an **indeterminate** correlation. The corresponding expected normalized determination *d* is about 0.333.
 
-    * *E(R1,R2)* = *mm(R1 <=> R2)* / *n(n-1)*: The normalized majority margin of the pairwise relational equivalence statements, and
-    * *D* = *dt(R1,R2)* / *n(n-1)*: The normalized determination of the corresponding pairwise relational equivalence statements.
+We may verify these relation in the relation equivalence digraph *eq* (see above).
 
->>> mm = Decimal('0'); dt = Decimal('0')
+>>> M = Decimal('0'); D = Decimal('0')
 >>> n2 = eq.order*(eq.order - 1)
 >>> for x in eq.actions:
 ...     for y in eq.actions:
-...         mm += eq.relation[x][y]
-...         dt += abs(eq.relation[x][y])
->>> print('E = %+.3f, D = %.3f, tau = %+.3f' % (mm/n2,dt/n2,mm/dt))
-E = +0.026, D = 0.356, tau = +0.073  
+...         M += eq.relation[x][y]
+...         D += abs(eq.relation[x][y])
+>>> print('r(R1<=>R2) = %+.3f, d = %.3f, tau = %+.3f' % (M/n2,D/n2,M/D))
+r(R1<=>R2) = +0.026, d = 0.356, tau = +0.073  
 
-We have thus successfully **out-factored** the *determination* effect from the *correlation* effect. By convention, we set the ordinal correlation with a *completely indeterminate* relation, i.e. when *D = 0*, to the *indeterminate* correlation value 0.0.
+In general we may simply use the :py:func:`digraphs.Digraph.ComputeOrdinalCorrelation` method.
+
+>>> corr = R1.computeOrdinalCorrelation(R2)
+>>> tau = corr['correlation']
+>>> d = corr['determination']
+>>> r = tau * D
+>>> print('tau(R1,R2) = %+.3f, d = %.3f, r(R1<=>R2) = %+.3f' % (tau, d, r))
+tau(R1,R2) = +0.073, d = 0.356, r(R1<=>R2) = +0.026
 
 We may now illustrate the quality of the global ranking of the movies shown with the heat map in Fig. 64. 
 
@@ -5241,7 +5243,7 @@ let us therefore reconsider the bipolar valued outranking digraph *g* modelling 
 
 Out of the 25 x 24 = 600 irreflexive movie pairs, digraph *g* contains 390 positively validated, and 188 positively invalidated outranking situations. The other 22 outranking situations appear *indeterminate* (see the zero-valued cells in Fig. 66).
 
-Let us now compute the normalized majority margin *E* of the equivalence between the individual critic's pairwise ratings and the global pairwise equivalence majorities.
+Let us now compute the normalized majority margin *r(<=>)  of the equivalence between the marginal critic's pairwise ratings and the global Net-Flows ranking shown in the ordered heat map.
 
 >>> from linearOrders import NetFlowsOrder
 >>> nf = NetFlowsOrder(g)
@@ -5253,35 +5255,35 @@ Let us now compute the normalized majority margin *E* of the equivalence between
 >>> for i,item in enumerate(\
 ... g.computeMarginalVersusGlobalRankingCorrelations(\
 ... nf.netFlowsRanking,ValuedCorrelation=True)): 
-...    print('E(%s,nf) = %+.3f' % (item[1],item[0]) )
-E(JH,nf) = +0.500
-E(JPT,nf) = +0.430
-E(AP,nf) = +0.323
-E(DR,nf) = +0.263
-E(MR,nf) = +0.247
-E(VT,nf) = +0.227
-E(GS,nf) = +0.160
-E(CS,nf) = +0.140
-E(SJ,nf) = +0.137
-E(RR,nf) = +0.133
-E(TD,nf) = +0.110
-E(CF,nf) = +0.110
-E(SF,nf) = +0.103
-E(AS,nf) = +0.080
-E(FG,nf) = +0.027
+...    print('r(%s <=> nf) = %+.3f' % (item[1],item[0]) )
+r(JH <=> nf) = +0.500
+r(JPT <=> nf)  = +0.430
+r(AP <=> nf) = +0.323
+r(DR <=> nf) = +0.263
+r(MR <=> nf) = +0.247
+r(VT <=> nf) = +0.227
+r(GS <=> nf) = +0.160
+r(CS <=> nf) = +0.140
+r(SJ <=> nf) = +0.137
+r(RR <=> nf) = +0.133
+r(TD <=> nf) = +0.110
+r(CF <=> nf) = +0.110
+r(SF <=> nf) = +0.103
+r(AS <=> nf) = +0.080
+r(FG <=> nf) = +0.027
 
-We hence recover the relational equivalence characteristic values shown in the third row of the table shown in Fig. 64. The global ranking represents obviously a rather balanced compromise with respect to all movie critics'opinions as there appears no negative correlation with anyone of them. The global ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight.
+We hence recover the relational equivalence characteristic values shown in the third row of the table shown in Fig. 64. The global ranking represents obviously a rather balanced compromise with respect to all movie critics'opinions as there appears no negative correlation with anyone of them. The Net-Flows ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight.
 
 The ordinal correlation between the global Net-Flows ranking and the digraph *g* is furthermore computed as follows: 
 
 >>> corr = g.computeOrdinalCorrelatin(nf)
 >>> tau = corr['correlation']
->>> D = corr['determination']
->>> E = tau * D
->>> print('tau(g,nf) = %+.3f, D = %.3f, E(g,nf) = %+.3f' % (tau,D,E))
-tau(g,nf) = +0.780, D = 0.300, E(g,nf) = +0.234
+>>> d = corr['determination']
+>>> r = tau * d
+>>> print('Tau(g,nf) = %+.3f, d = %.3f, r(g <=> nf) = %+.3f' % (Tau,d,r))
+tau(g,nf) = +0.780, D = 0.300, r(g<=>nf) = +0.234
 
-We may notice that the correlation *tau* index between the Net-Flows ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence *E* between the *nf* and the *g* digraph may be misleading with a characteristics value of *only* +0.234; a value corresponding nevertheless to an epistemic majority support of nearly 62% of the movie critics' voices.
+We may notice that the correlation *tau* index between the Net-Flows ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence between the *nf* and the *g* digraph may be misleading with a characteristics value of *only* +0.234; a value corresponding nevertheless to an epistemic majority support of nearly 62% of the movie critics' rating opinions.
 
 It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the *Copeland* or the *Kohler* ranking rule.
 
@@ -5295,7 +5297,7 @@ The bipolar relational equivalence index gives us a further measure for studying
    :width: 600 px
    :align: center
 
-It is remarquable that all pairwise relational equivalence indexes *E(x,y)* appear to be negative, except the *diagonal* ones. The reflexive indexes *E(x,x)* would trivially all amount to +1.0 in a plainly determined case. As *tau(x,x)* = 1.0 and *E(x,x)* = *tau(x,x)* * *D*, in this reflexive cases they indicate a reflexive determination score *D*, i.e. how many movies a critic did actually evaluate. The lower *D*, the less movies a critic has evaluated. Critic *JPT*, the editor of the Graffiti magazine for instance, evaluated all but one, whereas critic *FG* evaluated only 10 movies among the 25 in discussion.
+It is remarquable that all pairwise ordinal correlation indexes *tau(x,y)* appear to be negative, except the *diagonal* ones. The reflexive indexes *tau(x,x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. how many movies a critic did actually evaluate. The lower *D*, the less movies a critic has evaluated. Critic *JPT*, the editor of the Graffiti magazine for instance, evaluated all but one, whereas critic *FG* evaluated only 10 movies among the 25 in discussion.
 
 To get a picture of the actual divergence of rating opinions, we may develop a *Principal Component Analysis* ([10]_) of the correlation matrix shown above. The 3D plot of the first 3 principal axes is shown below.
 
@@ -5306,7 +5308,7 @@ To get a picture of the actual divergence of rating opinions, we may develop a *
    :width: 500 px
    :align: center
 
-Again we may notice the same remarquable fact that all the movie critics do express somehow different rating opinions one from the other. Their common preference space is hence highly dimensional. Most excentric and different in their respective rating opinions (*E(CF,MR)* = -075) appear, on the first principal axis with 19.3% inertia, critics *CF* (conservative press) and *MR* (labour press). On the second principal axis with 14.7% inertia, it is critics *AS* (Belgian conservative press) and *RR* (young and immigration related press) who express the most diverging rating opinions (*E(AS,RR)* = -0.66).
+Again we may notice the same remarquable fact that all the movie critics do express somehow different rating opinions one from the other. Their common preference space is hence highly dimensional. Most excentric and different in their respective rating opinions (*tau(CF,MR)* = -0.75) appear, on the first principal axis with 19.3% inertia, critics *CF* (conservative press) and *MR* (labour press). On the second principal axis with 14.7% inertia, it is critics *AS* (Belgian conservative press) and *RR* (young and immigration related press) who express the most diverging rating opinions (*tau(AS,RR)* = -0.66).
 
 Exploring the better rated and the as well as rated opinions
 ............................................................
@@ -5349,8 +5351,8 @@ Ranking by Choosing and Rejecting
      3rd Worst Choice ['mv_GH', 'mv_MB', 'mv_RG']
    2nd Worst Choice ['mv_DF', 'mv_DJ', 'mv_FF', 'mv_GG']
  1st Worst Choice ['mv_BI', 'mv_DI', 'mv_HP', 'mv_TF']
-Ordinal bipolar correlation with outranking relation: tau = +0.516 (D = 0.27)
-Ordinal bipolar correlation with median cut outranking relation: tau = +0.452 (D = 0.94)
+Ordinal bipolar correlation with outranking relation: tau = +0.516 (d = 0.27)
+Ordinal bipolar correlation with median cut outranking relation: tau = +0.452 (d = 0.94)
 
 Sound handling of knowledge fusion
 ----------------------------------
