@@ -689,7 +689,41 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 actionsCorrelationIndex[a][b] = (Decimal('2.0') * actionsCorrelationIndex[a][b] - nPairs) / nPairs
         return actionsCorrelationIndex
 
-    def computeCriteriaCorrelations(self):
+    def computeCriteriaCorrelations(self,ValuedCorrelation=False):
+        """
+        renders the relation equivalence or correlation between the criteria
+        """
+        from digraphs import EquivalenceDigraph
+        criteriaList = [x for x in self.criteria]
+        actionsList = [x for x in self.actions]
+        nPairs = Decimal(str(len(actionsList)*((len(actionsList)-1))))
+
+        tau = {}
+        d = {}
+        
+        for gi in criteriaList:
+            tau[gi] = {}
+            d[gi] = {}
+            Pgi = BipolarOutrankingDigraph(self,coalition=[gi],Normalized=True)
+            for gj in criteriaList:
+                M = Decimal('0.0')
+                D = Decimal('0.0')
+                Pgj = BipolarOutrankingDigraph(self,coalition=[gj],Normalized=True)
+                EQ = EquivalenceDigraph(Pgi,Pgj)
+                #nPairs = 0.0
+                for x in actionsList:
+                    for y in actionsList:
+                        M += EQ.relation[x][y]
+                        D += abs(EQ.relation[x][y])
+                if ValuedCorrelation:
+                    tau[gi][gj] = M / nPairs
+                else:
+                    tau[gi][gj] = M / D
+                d[gi][gj] = D / nPairs                            
+                
+        return tau, d
+
+    def computeCriteriaComparisonCorrelations(self):
         """
         renders the comparison correlations between the criteria
         """
@@ -723,7 +757,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 criteriaCorrelationIndex[gi][gj] = (Decimal('2.0') * criteriaCorrelationIndex[gi][gj] - nPairs) / nPairs
         return criteriaCorrelationIndex
 
-    def showCriteriaCorrelationTable(self,isReturningHTML=False):
+
+    def showCriteriaCorrelationTable(self,ValuedCorrelation=True,isReturningHTML=False):
         """
         prints the criteriaCorrelationIndex in table format
         """
@@ -731,13 +766,19 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         criteriaList.sort()
         n = len(self.actions)
         nPairs = n*n
-        corr = self.computeCriteriaCorrelations()
+        corr,deter = self.computeCriteriaCorrelations(ValuedCorrelation=ValuedCorrelation)
         html = ''
         # title
         if isReturningHTML:
-            html += '<h1>Criteria ordinal correlation index</h1>'
+            if ValuedCorrelation:
+                html += '<h1>Criteria valued ordinal correlation index</h1>'
+            else:
+                html += '<h1>Criteria ordinal correlation index</h1>'
         else:
-            print('Criteria ordinal correlation index')
+            if ValuedCorrelation:
+                print('Criteria valued ordinal correlation index')
+            else:
+                print('Criteria ordinal correlation index')
         # header row
         if isReturningHTML:
             html += '<table border=1><tr bgcolor="#9acd32"><th>&tau;</th>'
@@ -791,16 +832,21 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         return html
                 
 
-    def computeCriteriaCorrelationDigraph(self):
+    def computeCriteriaCorrelationDigraph(self,ValuedCorrelation=True):
         """
         renders the ordinal criteria correlation digraph
         """
+        from digraphs import Digraph
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
-        corr = self.computeCriteriaCorrelations()
+        corr,d = self.computeCriteriaCorrelations(ValuedCorrelation=ValuedCorrelation)
         n = len(criteriaList)
-        g = RandomValuationDigraph(order=n)
-        g.name = 'corrGraph'
+        g = EmptyDigraph(order=n)
+        g.__class__ = Digraph
+        if ValuedCorrelation:
+            g.name = 'valCorrGraph'
+        else:
+            gname = 'corrGraph'
         g.valuationdomain = {'min':Decimal('-1.0'),'med':Decimal('0.0'),'max':Decimal('1.0')}
         Min = g.valuationdomain['min']
         Med = g.valuationdomain['med']
@@ -822,7 +868,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         """
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
-        corr = self.computeCriteriaCorrelations()
+        corr,d = self.computeCriteriaCorrelations()
         n = len(criteriaList)
         g = RandomValuationDigraph(order=n)
         g.name = 'corrGraph'
@@ -912,7 +958,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         criteriaList.sort()
         n = len(criteriaList)
         nd = Decimal(str(n))
-        corr = self.computeCriteriaCorrelations()
+        corr,d = self.computeCriteriaCorrelations()
         if not Bipolar:
             for i in range(n):
                 for j in range(n):
@@ -2345,7 +2391,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
         # criteria ordinal correlation analysis
         if category != 'Robust Rubis':
-            corr = selfOrig.computeCriteriaCorrelations()
+            corr,d = selfOrig.computeCriteriaCorrelations()
             criteriaList = [x for x in self.criteria]
             cn = len(criteriaList)
             criteriaList.sort()
@@ -3131,7 +3177,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
         # criteria ordinal correlation analysis
         if category != 'Robust Rubis':
-            corr = selfOrig.computeCriteriaCorrelations()
+            corr,d = selfOrig.computeCriteriaCorrelations()
             criteriaList = [x for x in self.criteria]
             cn = len(criteriaList)
             criteriaList.sort()
@@ -9304,7 +9350,7 @@ if __name__ == "__main__":
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
     Threading = False
     t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
-                                   numberOfCriteria=21,\
+                                   numberOfCriteria=5,\
                                    weightDistribution='equiobjectives',
                                              NegativeWeights=True,
                                     negativeWeightProbability=0.25,
@@ -9312,7 +9358,6 @@ if __name__ == "__main__":
     
     g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,
                                   tempDir=None,nbrCores=8,Comments=True,Debug=False)
-    g1.showHTMLPairwiseComparison('a01','a02')
     #print(g1)
     #g1.saveXMCDA2RubisChoiceRecommendation()
     #g1.showRelationTable()
