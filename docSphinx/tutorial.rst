@@ -5201,8 +5201,9 @@ It is worthwhile noticing that the ordinal correlation index *tau(R1,R2)* we obt
 
 We have thus successfully **out-factored** the *determination* effect from the *correlation* effect. With completely determined relations, *tau(R1,R2)* = *r(R<=>R2)*. By convention, we set the ordinal correlation with a *completely indeterminate* relation, i.e. when *D = 0*, to the *indeterminate* correlation value 0.0. With *uniformly* chosen random *r*-valued relations, the **expected** *tau* index is **0.0**, denoting in fact an **indeterminate** correlation. The corresponding expected normalized determination *d* is about 0.333.
 
-We may verify these relation in the relation equivalence digraph *eq* (see above).
+We may verify these relations with help of the corresponding equivalence digraph *eq* (see above).
 
+>>> eq = EquivalenceDigraph(R1,R2)
 >>> M = Decimal('0'); D = Decimal('0')
 >>> n2 = eq.order*(eq.order - 1)
 >>> for x in eq.actions:
@@ -5212,7 +5213,7 @@ We may verify these relation in the relation equivalence digraph *eq* (see above
 >>> print('r(R1<=>R2) = %+.3f, d = %.3f, tau = %+.3f' % (M/n2,D/n2,M/D))
 r(R1<=>R2) = +0.026, d = 0.356, tau = +0.073  
 
-In general we may simply use the :py:func:`digraphs.Digraph.ComputeOrdinalCorrelation` method.
+In general we simply use the :py:func:`digraphs.Digraph.ComputeOrdinalCorrelation` method.
 
 >>> corr = R1.computeOrdinalCorrelation(R2)
 >>> tau = corr['correlation']
