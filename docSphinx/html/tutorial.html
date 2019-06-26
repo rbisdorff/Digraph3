@@ -7979,9 +7979,8 @@ best covered terminal kernel</span></p>
 </div>
 <div class="section" id="fitness-of-ranking-heuristics">
 <h4>Fitness of ranking heuristics<a class="headerlink" href="#fitness-of-ranking-heuristics" title="Permalink to this headline">¶</a></h4>
-<dl class="docutils">
-<dt>let us therefore reconsider the bipolar valued outranking digraph <em>g</em> modelling the pairwise global ‘<em>at least as well rated as</em>’ relation among the 25 movies seen above.</dt>
-<dd><div class="first last highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<p>let us therefore reconsider the bipolar valued outranking digraph <em>g</em> modelling the pairwise global ‘<em>at least as well rated as</em>’ relation among the 25 movies seen above.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -8008,8 +8007,6 @@ best covered terminal kernel</span></p>
 <span class="go">188</span>
 </pre></div>
 </td></tr></table></div>
-</dd>
-</dl>
 <p>Out of the 25 x 24 = 600 irreflexive movie pairs, digraph <em>g</em> contains 390 positively validated, 188 positively invalidated outranking situations, and 22 <em>indeterminate</em> outranking situations (see the zero-valued cells in Fig. 66).</p>
 <p>Let us now compute the normalized majority margin <em>r(&lt;=&gt;)</em>  of the equivalence between the marginal critic’s pairwise ratings and the global Net-Flows ranking shown in the ordered heat map.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -8106,7 +8103,7 @@ best covered terminal kernel</span></p>
 18
 19
 20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCriteriaCorrelationTable</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCriteriaCorrelationTable</span><span class="p">(</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go">Criteria valued ordinal correlation index</span>
 <span class="go">     |   AP    AS    CF    CS    DR    FG    GS    JH   JPT    MR    RR    SF    SJ    TD    VT</span>
 <span class="go">-----|------------------------------------------------------------------------------------------</span>
@@ -8127,17 +8124,17 @@ best covered terminal kernel</span></p>
 <span class="go">  VT |                                                                                     +0.40</span>
 </pre></div>
 </td></tr></table></div>
-<p>It is remarquable that all pairwise valued ordinal correlation indexes <em>tau(x,y)</em> appear to be small, except the <em>diagonal</em> ones. The reflexive indexes <em>tau(x,x)</em> would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score <em>d</em>, i.e. how many movies a critic did actually evaluate. The lower <em>D</em>, the less movies a critic has evaluated. Critic <em>JPT</em>, the editor of the Graffiti magazine for instance, evaluated all but one ((600-2*24)/600 = 0.92), whereas critic <em>FG</em> evaluated only 10 movies among the 25 in discussion ((600-420)/600 = 0.14667).</p>
-<p>To get a picture of the actual divergence of rating opinions, we may develop a <em>Principal Component Analysis</em> (<a class="footnote-reference" href="#id100" id="id87">[10]</a>) of the correlation matrix shown above. The 3D plot of the first 3 principal axes is shown below.</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">export3DplotOfCriteriaCorrelation</span><span class="p">()</span>
+<p>It is remarquable that all pairwise valued ordinal correlation indexes <em>tau(x,y)</em> appear to be small, except the <em>diagonal</em> ones. The reflexive indexes <em>tau(x,x)</em> would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score <em>d</em>, i.e. how many movies a critic did actually evaluate. The lower <em>d</em> appears, the less movies a critic has evaluated. Critic <em>JPT</em>, the editor of the Graffiti magazine for instance, evaluated all but one (<em>d</em> = 24*23/600 = 0.92), whereas critic <em>FG</em> evaluated only 10 movies among the 25 in discussion (<em>d</em> = 10*9/600 = 0.15).</p>
+<p>To get a picture of the actual divergence of rating opinions concerning jointly seen pairs of movies, we may develop a <em>Principal Component Analysis</em> (<a class="footnote-reference" href="#id100" id="id87">[10]</a>) of the <em>tau</em> correlation matrix. The 3D plot of the first 3 principal axes is shown below.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">export3DplotOfCriteriaCorrelation</span><span class="p">(</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <a class="reference internal image-reference" href="_images/correlationPCA.png"><img alt="3D plot of criteria correlation PCA" class="align-center" src="_images/correlationPCA.png" style="width: 500px;" /></a>
-<p>The first 3 principal axes support together about 70% of the total inertia. Most excentric and different in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against  labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written press appears opposed to the radio press.</p>
+<p>The first 3 principal axes support together about 70% of the total inertia. Most excentric and different in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written medias appear opposed to the radio media.</p>
 </div>
 <div class="section" id="exploring-the-better-rated-and-the-as-well-as-rated-opinions">
 <h4>Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions<a class="headerlink" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions" title="Permalink to this headline">¶</a></h4>
-<p>In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of a digraph (see introduction tutorial of the <a class="reference internal" href="techDoc.html#module-digraphs" title="digraphs"><code class="xref py py-mod docutils literal"><span class="pre">digraphs</span></code></a> module).</p>
+<p>In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of an outranking digraph (see introduction tutorial of the <a class="reference internal" href="techDoc.html#module-digraphs" title="digraphs"><code class="xref py py-mod docutils literal"><span class="pre">digraphs</span></code></a> module).</p>
 <p>Let us indeed first have a look at the pairwise asymmetric part of the <em>at least as well as rated</em>, namely the <em>better rated</em> opinions of the movie critics.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>

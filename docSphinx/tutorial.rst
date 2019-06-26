@@ -5228,6 +5228,7 @@ Fitness of ranking heuristics
 .............................
 
 let us therefore reconsider the bipolar valued outranking digraph *g* modelling the pairwise global '*at least as well rated as*' relation among the 25 movies seen above.
+
     >>> g = BipolarOutrankingDigraph(t,Normalized=True)
     *------- Object instance description ------*
     Instance class   : BipolarOutrankingDigraph
@@ -5294,7 +5295,7 @@ Illustrating preference divergences
 The correlation index gives us a further measure for studying how divergent or not are the rating opinions expressed by the movie critics.
 
 >>> g = BipolarOutrankingDigraph(t,Normalized=True)
->>> g.showCriteriaCorrelationTable()
+>>> g.showCriteriaCorrelationTable(ValuedCorrelation=True)
 Criteria valued ordinal correlation index
      |   AP    AS    CF    CS    DR    FG    GS    JH   JPT    MR    RR    SF    SJ    TD    VT   
 -----|------------------------------------------------------------------------------------------
@@ -5315,24 +5316,24 @@ Criteria valued ordinal correlation index
   VT |                                                                                     +0.40   
 
 
-It is remarquable that all pairwise valued ordinal correlation indexes *tau(x,y)* appear to be small, except the *diagonal* ones. The reflexive indexes *tau(x,x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. how many movies a critic did actually evaluate. The lower *D*, the less movies a critic has evaluated. Critic *JPT*, the editor of the Graffiti magazine for instance, evaluated all but one ((600-2*24)/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion ((600-420)/600 = 0.14667).
+It is remarquable that all pairwise valued ordinal correlation indexes *tau(x,y)* appear to be small, except the *diagonal* ones. The reflexive indexes *tau(x,x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. how many movies a critic did actually evaluate. The lower *d* appears, the less movies a critic has evaluated. Critic *JPT*, the editor of the Graffiti magazine for instance, evaluated all but one (*d* = 24*23/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion (*d* = 10*9/600 = 0.15).
 
-To get a picture of the actual divergence of rating opinions, we may develop a *Principal Component Analysis* ([10]_) of the correlation matrix shown above. The 3D plot of the first 3 principal axes is shown below.
+To get a picture of the actual divergence of rating opinions concerning jointly seen pairs of movies, we may develop a *Principal Component Analysis* ([10]_) of the *tau* correlation matrix. The 3D plot of the first 3 principal axes is shown below.
 
->>> g.export3DplotOfCriteriaCorrelation()
+>>> g.export3DplotOfCriteriaCorrelation(ValuedCorrelation=False)
 
 .. image:: correlationPCA.png
    :alt: 3D plot of criteria correlation PCA
    :width: 500 px
    :align: center
 
-The first 3 principal axes support together about 70% of the total inertia. Most excentric and different in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against  labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written press appears opposed to the radio press.
+The first 3 principal axes support together about 70% of the total inertia. Most excentric and different in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written medias appear opposed to the radio media.
 
 
 Exploring the *better rated*  and the *as well as rated* opinions
 .................................................................
 
-In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of a digraph (see introduction tutorial of the :py:mod:`digraphs` module).
+In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of an outranking digraph (see introduction tutorial of the :py:mod:`digraphs` module).
 
 Let us indeed first have a look at the pairwise asymmetric part of the *at least as well as rated*, namely the *better rated* opinions of the movie critics. 
 
