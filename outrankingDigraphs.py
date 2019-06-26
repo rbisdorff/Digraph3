@@ -956,9 +956,11 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         import math
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
+        #print(criteriaList)
         n = len(criteriaList)
         nd = Decimal(str(n))
         corr,d = self.computeCriteriaCorrelations()
+        #print(corr)
         if not Bipolar:
             for i in range(n):
                 for j in range(n):
