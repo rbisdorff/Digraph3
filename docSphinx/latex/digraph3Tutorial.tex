@@ -74,7 +74,7 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}
+\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:preface}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
 here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version).
 
@@ -149,7 +149,7 @@ Revision: Python 3.7
 
 
 \section{Working with the \sphinxstyleemphasis{Digraph3} software resources}
-\label{\detokenize{tutorial:digraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}
+\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}\label{\detokenize{tutorial:digraphs-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -451,7 +451,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Manipulating \sphinxstyleliteralintitle{Digraph} objects}
-\label{\detokenize{tutorial:digraph-tools-label}}\label{\detokenize{tutorial:manipulating-digraph-objects}}
+\label{\detokenize{tutorial:manipulating-digraph-objects}}\label{\detokenize{tutorial:digraph-tools-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -886,7 +886,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the winner of an election}
-\label{\detokenize{tutorial:computing-the-winner-of-an-election}}\label{\detokenize{tutorial:linearvoting-tutorial-label}}
+\label{\detokenize{tutorial:linearvoting-tutorial-label}}\label{\detokenize{tutorial:computing-the-winner-of-an-election}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1132,7 +1132,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{outrankingDigraphs} module}
-\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}
+\label{\detokenize{tutorial:working-with-the-outrankingdigraphs-module}}\label{\detokenize{tutorial:outrankingdigraphs-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3162,7 +3162,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing a best choice recommendation}
-\label{\detokenize{tutorial:rubis-tutorial-label}}\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}
+\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}\label{\detokenize{tutorial:rubis-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -5175,7 +5175,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{On computing digraph kernels}
-\label{\detokenize{tutorial:kernel-tutorial-label}}\label{\detokenize{tutorial:on-computing-digraph-kernels}}
+\label{\detokenize{tutorial:on-computing-digraph-kernels}}\label{\detokenize{tutorial:kernel-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -6412,7 +6412,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{On tree graphs and graph forests}
-\label{\detokenize{tutorial:on-tree-graphs-and-graph-forests}}\label{\detokenize{tutorial:trees-tutorial-label}}
+\label{\detokenize{tutorial:trees-tutorial-label}}\label{\detokenize{tutorial:on-tree-graphs-and-graph-forests}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -6734,7 +6734,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Pearls of bipolar epistemic logic}
-\label{\detokenize{tutorial:pearls-of-bipolar-epistemic-logic}}\label{\detokenize{tutorial:pearls-tutorial-label}}
+\label{\detokenize{tutorial:pearls-tutorial-label}}\label{\detokenize{tutorial:pearls-of-bipolar-epistemic-logic}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -7102,29 +7102,7 @@ It would be interesting to compare similarly the correlations one may obtain wit
 \label{\detokenize{tutorial:illustrating-preference-divergences}}
 The valued relational equivalence index gives us a further measure for studying how \sphinxstylestrong{divergent} or not are the rating opinions expressed by the movie critics.
 
-\fvset{hllines={, ,}}%
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{Normalized}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showCriteriaCorrelationTable}\PYG{p}{(}\PYG{n}{ValuedCorrelation}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
-\PYG{g+go}{Criteria valued ordinal correlation index}
-\PYG{g+go}{     \textbar{}   AP    AS    CF    CS    DR    FG    GS    JH   JPT    MR    RR    SF    SJ    TD    VT}
-\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\textbar{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{  AP \textbar{} +0.63 +0.04 +0.19 +0.09 +0.22 \PYGZhy{}0.01 +0.11 +0.23 +0.25 +0.08 +0.02 +0.04 +0.19 +0.04 +0.12}
-\PYG{g+go}{  AS \textbar{}       +0.77 +0.12 +0.12 +0.04 \PYGZhy{}0.02 \PYGZhy{}0.06 +0.02 +0.24 \PYGZhy{}0.08 +0.07 +0.04 \PYGZhy{}0.07 \PYGZhy{}0.01 +0.02}
-\PYG{g+go}{  CF \textbar{}             +0.77 +0.07 +0.11 +0.03 +0.05 +0.07 +0.10 \PYGZhy{}0.03 +0.01 +0.00 +0.06 +0.03 \PYGZhy{}0.04}
-\PYG{g+go}{  CS \textbar{}                   +0.63 +0.04 \PYGZhy{}0.02 +0.07 +0.13 +0.25 +0.01 +0.03 +0.00 +0.02 +0.03 +0.07}
-\PYG{g+go}{  DR \textbar{}                         +0.45 +0.03 +0.07 +0.17 +0.23 +0.16 +0.06 +0.03 +0.10 +0.07 +0.10}
-\PYG{g+go}{  FG \textbar{}                               +0.15 \PYGZhy{}0.01 +0.04 +0.01 +0.06 \PYGZhy{}0.00 +0.02 +0.01 +0.01 +0.02}
-\PYG{g+go}{  GS \textbar{}                                     +0.40 +0.07 +0.07 +0.09 \PYGZhy{}0.02 +0.00 +0.06 +0.04 +0.04}
-\PYG{g+go}{  JH \textbar{}                                           +0.77 +0.28 +0.26 +0.15 +0.12 +0.10 +0.05 +0.14}
-\PYG{g+go}{ JPT \textbar{}                                                 +0.92 +0.15 +0.06 +0.09 +0.08 +0.08 +0.17}
-\PYG{g+go}{  MR \textbar{}                                                       +0.63 +0.10 +0.08 +0.03 +0.09 +0.10}
-\PYG{g+go}{  RR \textbar{}                                                             +0.51 +0.04 +0.01 +0.05 +0.05}
-\PYG{g+go}{  SF \textbar{}                                                                   +0.18 +0.01 +0.02 +0.05}
-\PYG{g+go}{  SJ \textbar{}                                                                         +0.51 +0.03 +0.07}
-\PYG{g+go}{  TD \textbar{}                                                                               +0.26 +0.00}
-\PYG{g+go}{  VT \textbar{}                                                                                     +0.40}
-\end{sphinxVerbatim}
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{correlationTable}.png}\hspace*{\fill}}
 
 It is remarquable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes \sphinxstyleemphasis{r(x\textless{}=\textgreater{}y)} appear to be small, except the \sphinxstyleemphasis{diagonal} ones. The reflexive indexes \sphinxstyleemphasis{s(x\textless{}=\textgreater{}x)} would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score \sphinxstyleemphasis{d}, i.e. how many movies a critic did actually evaluate. The lower \sphinxstyleemphasis{d} appears, the less movies a critic has evaluated. Critic \sphinxstyleemphasis{JPT}, the editor of the Graffiti magazine for instance, evaluated all but one (\sphinxstyleemphasis{d} = 24*23/600 = 0.92), whereas critic \sphinxstyleemphasis{FG} evaluated only 10 movies among the 25 in discussion (\sphinxstyleemphasis{d} = 10*9/600 = 0.15).
 
@@ -7139,7 +7117,7 @@ The 3D PCA plot method requires a running \sphinxstyleemphasis{R statistics soft
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{export3DplotOfCriteriaCorrelation}\PYG{p}{(}\PYG{n}{ValuedCorrelation}\PYG{o}{=}\PYG{n+nb+bp}{False}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=500\sphinxpxdimen]{{correlationPCA}.png}\hspace*{\fill}}
+\noindent{\hspace*{\fill}\sphinxincludegraphics[width=400\sphinxpxdimen]{{correlationPCA}.png}\hspace*{\fill}}
 
 The first 3 principal axes support together about 70\% of the total inertia. Most excentric and different in their respective rating opinions appear, on the first principal axis with 27.2\% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7\% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3\% inertia, the written media appear opposed to the radio media.
 
@@ -7158,7 +7136,7 @@ Let us indeed first have a look at the pairwise asymmetric part of the \sphinxst
 
 \noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{asymmetricPart}.png}\hspace*{\fill}}
 
-We notice here that the \sphinxstyleemphasis{Net-Flows} ranking rule inverts in fact just three ‘\sphinxstyleemphasis{less well ranked than}’ opinion and four ‘\sphinxstyleemphasis{better ranked than}’ ones. A similar look at the symmetric part, the pairwise ‘\sphinxstyleemphasis{as well rated as}’ opinions, suggests clearly a preordered structure in several \sphinxstyleemphasis{equivalently rated} classes.
+We notice here that the \sphinxstyleemphasis{Net-Flows} ranking rule inverts in fact just three ‘\sphinxstyleemphasis{less well ranked than}’ opinions and four ‘\sphinxstyleemphasis{better ranked than}’ ones. A similar look at the symmetric part, the pairwise ‘\sphinxstyleemphasis{as well rated as}’ opinions, suggests clearly a preordered structure in several \sphinxstyleemphasis{equivalently rated} classes.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]

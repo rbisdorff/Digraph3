@@ -5307,7 +5307,7 @@ To get a picture of the actual divergence of rating opinions concerning **jointl
 
 .. image:: correlationPCA.png
    :alt: 3D plot of criteria correlation PCA
-   :width: 500 px
+   :width: 400 px
    :align: center
 
 The first 3 principal axes support together about 70% of the total inertia. Most excentric and different in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written media appear opposed to the radio media.
@@ -5328,7 +5328,7 @@ Let us indeed first have a look at the pairwise asymmetric part of the *at least
    :width: 600 px
    :align: center
 
-We notice here that the *Net-Flows* ranking rule inverts in fact just three '*less well ranked than*' opinion and four '*better ranked than*' ones. A similar look at the symmetric part, the pairwise '*as well rated as*' opinions, suggests clearly a preordered structure in several *equivalently rated* classes.
+We notice here that the *Net-Flows* ranking rule inverts in fact just three '*less well ranked than*' opinions and four '*better ranked than*' ones. A similar look at the symmetric part, the pairwise '*as well rated as*' opinions, suggests clearly a preordered structure in several *equivalently rated* classes.
 
 >>> sg = SymmetricPartialDigraph(g)
 >>> sg.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
