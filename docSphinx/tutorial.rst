@@ -5029,7 +5029,7 @@ Let us take an example performance tableau from a Movie magazine's evaluation of
 
 To aggregate all the critics' rating opinions, the *Graffiti* magazine provides for each movie a global score computed as an *average grade*, just ignoring the *not seen* data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic *SJ*, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
 
-A better approach is to rank the movies on the basis of pairwise bipolar-valued  *outranking* opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the ranking tutorial) of the 25 movies is provided, for instance, by the **heat map** view shown in Fig. 64.
+A better approach is to rank the movies on the basis of pairwise bipolar-valued  *at least as well rated as* opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the :ref:`Ranking-Tutorial-label` tutorial) of the 25 movies is provided, for instance, by the **heat map** view shown in Fig. 64.
 
 >>> t.showHTMLPerformanceHeatmap(Correlations=True,
 ...                              rankingRule='NetFlows',
@@ -5057,9 +5057,9 @@ Let us explicitly construct the corresponding bipolar-valued outranking digraph 
 
    Pairwise comparison of the two best-ranked movies
 
-Four out of the fifteen critics have not seen one or the other of these two movies. Notice the higher significance (3) that is granted to two locally renowned movie critics, namely *JH* and *VT*. Their opinion counts for three times the opinion of the other critics. All critics that have seen both movies, except critic *MR*, state that *mv_QS* is rated at least as good as *mv_RR* and the balance of positive against negative opinions amounts to +11, a characteristic value which positively validates the outranking situation with a majority of (11/19 + 1.0) / 2.0 = 79%.  
+Six out of the fifteen critics have not seen one or the other of these two movies. Notice the higher significance (3) that is granted to two locally renowned movie critics, namely *JH* and *VT*. Their opinion counts for three times the opinion of the other critics. All nine critics that have seen both movies, except critic *MR*, state that *mv_QS* is rated at least as well as *mv_RR* and the balance of positive against negative opinions amounts to +11, a characteristic value which positively validates the outranking situation with a majority of (11/19 + 1.0) / 2.0 = 79%.  
 
-The complete table of pairwise majority margins of global '*at least as good rated*' opinions, ranked by the same rule as shown in the heat map above (see Fig. 64), may be shown as follows. 
+The complete table of pairwise majority margins of global '*at least as well rated as*' opinions, ranked by the same rule as shown in the heat map above (see Fig. 64), may be shown as follows. 
 
 >>> ranking = g.computeNetFlowsRanking()
 >>> g.showHTMLRelationTable(actionsList=ranking, ndigits=0,\
@@ -5071,9 +5071,9 @@ The complete table of pairwise majority margins of global '*at least as good rat
    :width: 650 px
    :align: center
 
-   Pairwise majority margins of '*at least as good as*' rating opinions
+   Pairwise majority margins of '*at least as well rated as*' rating opinions
 
-Positive characteristic values, validating a global '*at least as good rated*' opinion are marked in light green (see Fig. 66). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best-ranked movie *mv_QS* is indeed a *Condorcet* winner, i.e. *better rated than all the other movies* by a 65% majority of critics. This majority may be assessed from the average determinateness of the given bipolar valued outranking digraph *g*.
+Positive characteristic values, validating a global '*at least as well rated as*' opinion are marked in light green (see Fig. 66). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best-ranked movie *mv_QS* is indeed a *Condorcet* winner, i.e. *better rated than all the other movies* by a 65% majority of critics. This majority may be assessed from the average determinateness of the given bipolar valued outranking digraph *g*.
 
 >>> print( '%.0f%%' % g.computeDeterminateness(InPercents=True) )
 65%
@@ -5089,7 +5089,7 @@ Notice also the *indeterminate* situation we observe, for instance, when compari
 
    Indeterminate pairwise comparison example
 
-Only eight, out of the fifteen critics, have seen both movies and the positive opinions do neatly balance the negative ones. A global statement that *mv_PE* is '*at least as good rated*' as *mv_NP*  may in this case hence neither be validated, nor invalidated; a preferential situation that cannot be modelled with any scoring approach.
+Only eight, out of the fifteen critics, have seen both movies and the positive opinions do neatly balance the negative ones. A global statement that *mv_PE* is '*at least as well rated as*' *mv_NP*  may in this case hence **neither be validated, nor invalidated**; a preferential situation that cannot be modelled with any scoring approach.
 
 It is fair, however, to eventually mention here that the *Graffiti* magazine's average scoring method is actually showing a very similar ranking. Indeed, average scores usually confirm well all evident pairwise comparisons, yet *enforce* comparability for all less evident ones.
 
@@ -5128,7 +5128,7 @@ Valuation domain: [-1.00;1.00]
 >>> E.correlation
 {'correlation': -0.1, 'determination': 1.0}
 
-In the table of the equivalence relation *R1 <=> R2* above, we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall's *tau* index in this plainly determined crisp case.
+In the table of the equivalence relation *R1<=>R2* above, we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall's *tau* index in this plainly determined crisp case.
 
 What happens now with more or less determined and even partially indeterminate relations ? May we proceed in a similar way ?
 
@@ -5285,14 +5285,14 @@ The ordinal correlation between the global *Net-Flows* ranking and the digraph *
 >>> print('Tau(g,nf) = %+.3f, d = %.3f, r(g<=>nf) = %+.3f' % (Tau,d,r))
 tau(g,nf) = +0.780, D = 0.300, r(g<=>nf) = +0.234
 
-We may notice that the determined correlation *tau* index between the *Net-Flows* ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence between the *nf* and the *g* digraph may, however, be misleading with a characteristics value of *only* +0.234; a value corresponding nevertheless to an epistemic majority support of nearly 62% of the movie critics' rating opinions.
+We may notice that the correlation *tau* index between the *Net-Flows* ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence between the *nf* and the *g* digraph may, however, be misleading with a characteristics value of *only* +0.234; a value corresponding nevertheless to an epistemic majority support of nearly 62% of the movie critics' rating opinions.
 
 It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the *Copeland* or the *Kohler* ranking rule.
 
 Illustrating preference divergences
 ...................................
 
-The correlation index gives us a further measure for studying how divergent or not are the rating opinions expressed by the movie critics.
+The valued relational equivalence index gives us a further measure for studying how **divergent** or not are the rating opinions expressed by the movie critics.
 
 >>> g = BipolarOutrankingDigraph(t,Normalized=True)
 >>> g.showCriteriaCorrelationTable(ValuedCorrelation=True)
@@ -5316,9 +5316,9 @@ Criteria valued ordinal correlation index
   VT |                                                                                     +0.40   
 
 
-It is remarquable that all pairwise valued ordinal correlation indexes *tau(x,y)* appear to be small, except the *diagonal* ones. The reflexive indexes *tau(x,x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. how many movies a critic did actually evaluate. The lower *d* appears, the less movies a critic has evaluated. Critic *JPT*, the editor of the Graffiti magazine for instance, evaluated all but one (*d* = 24*23/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion (*d* = 10*9/600 = 0.15).
+It is remarquable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes *r(x<=>y)* appear to be small, except the *diagonal* ones. The reflexive indexes *s(x<=>x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. how many movies a critic did actually evaluate. The lower *d* appears, the less movies a critic has evaluated. Critic *JPT*, the editor of the Graffiti magazine for instance, evaluated all but one (*d* = 24*23/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion (*d* = 10*9/600 = 0.15).
 
-To get a picture of the actual divergence of rating opinions concerning jointly seen pairs of movies, we may develop a *Principal Component Analysis* ([10]_) of the *tau* correlation matrix. The 3D plot of the first 3 principal axes is shown below.
+To get a picture of the actual divergence of rating opinions concerning **jointly seen** pairs of movies, we may develop a *Principal Component Analysis* ([10]_) of the *tau* correlation matrix. The 3D plot of the first 3 principal axes is shown below.
 
 >>> g.export3DplotOfCriteriaCorrelation(ValuedCorrelation=False)
 
@@ -5327,7 +5327,7 @@ To get a picture of the actual divergence of rating opinions concerning jointly 
    :width: 500 px
    :align: center
 
-The first 3 principal axes support together about 70% of the total inertia. Most excentric and different in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written medias appear opposed to the radio media.
+The first 3 principal axes support together about 70% of the total inertia. Most excentric and different in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written media appear opposed to the radio media.
 
 
 Exploring the *better rated*  and the *as well as rated* opinions
@@ -5335,7 +5335,7 @@ Exploring the *better rated*  and the *as well as rated* opinions
 
 In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of an outranking digraph (see introduction tutorial of the :py:mod:`digraphs` module).
 
-Let us indeed first have a look at the pairwise asymmetric part of the *at least as well as rated*, namely the *better rated* opinions of the movie critics. 
+Let us indeed first have a look at the pairwise asymmetric part of the *at least as well as rated*, namely the '*better rated than*' and '*less well rated than*' opinions of the movie critics. 
 
 >>> ag = AsymmetricPartialDigraph(g)
 >>> ag.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
@@ -5345,7 +5345,7 @@ Let us indeed first have a look at the pairwise asymmetric part of the *at least
    :width: 600 px
    :align: center
 
-We notice here that the *Net-Flows* ranking rule inverts in fact just three *less well ranked* opinion and four *better ranked* ones. A similar look at the symmetric part, the pairwise ' *as well as rated* ' opinions, suggests clearly a preordered structure in several equivalently rated classes.
+We notice here that the *Net-Flows* ranking rule inverts in fact just three '*less well ranked than*' opinion and four '*better ranked than*' ones. A similar look at the symmetric part, the pairwise '*as well rated as*' opinions, suggests clearly a preordered structure in several *equivalently rated* classes.
 
 >>> sg = SymmetricPartialDigraph(g)
 >>> sg.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
@@ -5355,7 +5355,7 @@ We notice here that the *Net-Flows* ranking rule inverts in fact just three *les
    :width: 600 px
    :align: center
 
-Such a preorder of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we fusion by epistemic conjunction the preorder obtained from iteratively extracted *dominant kernels* (best remaining choices) with the preorder obtained by the iteratively extracted *absorbent kernels* (worst remaining choices). We operate herefore on the *better rated* opinins, i.e. the *codual* ([11]_) of the ' *at least as well as rated* ' opinions.
+Such a preorder of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we fusion by epistemic conjunction the preorder obtained from iteratively extracted *dominant kernels* (best remaining choices) with the preorder obtained by the iteratively extracted *absorbent kernels* (worst remaining choices). We operate herefore on the the *codual* ([11]_) of the '*at least as well rated as*' opinions.
 
 >>> from weakOrders import RankingByChoosingDigraph
 >>> rbc = RankingByChoosingDigraph(g,CoDual=True)
