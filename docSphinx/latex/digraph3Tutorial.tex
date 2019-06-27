@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{June 26, 2019}
+\date{June 27, 2019}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -74,7 +74,7 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:tutorial-label}}
+\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
 here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version).
 
@@ -149,7 +149,7 @@ Revision: Python 3.7
 
 
 \section{Working with the \sphinxstyleemphasis{Digraph3} software resources}
-\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}\label{\detokenize{tutorial:digraphs-tutorial-label}}
+\label{\detokenize{tutorial:digraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -451,7 +451,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Manipulating \sphinxstyleliteralintitle{Digraph} objects}
-\label{\detokenize{tutorial:manipulating-digraph-objects}}\label{\detokenize{tutorial:digraph-tools-label}}
+\label{\detokenize{tutorial:digraph-tools-label}}\label{\detokenize{tutorial:manipulating-digraph-objects}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -886,7 +886,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the winner of an election}
-\label{\detokenize{tutorial:linearvoting-tutorial-label}}\label{\detokenize{tutorial:computing-the-winner-of-an-election}}
+\label{\detokenize{tutorial:computing-the-winner-of-an-election}}\label{\detokenize{tutorial:linearvoting-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3162,7 +3162,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing a best choice recommendation}
-\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}\label{\detokenize{tutorial:rubis-tutorial-label}}
+\label{\detokenize{tutorial:rubis-tutorial-label}}\label{\detokenize{tutorial:computing-a-best-choice-recommendation}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -6743,9 +6743,6 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id260}}{\hyperref[\detokenize{tutorial:ordinal-correlation-equals-bipolar-relational-equivalence}]{\sphinxcrossref{Ordinal correlation equals bipolar relational equivalence}}} (\autopageref*{\detokenize{tutorial:ordinal-correlation-equals-bipolar-relational-equivalence}})
 
-\item {} 
-\phantomsection\label{\detokenize{tutorial:id261}}{\hyperref[\detokenize{tutorial:sound-handling-of-knowledge-fusion}]{\sphinxcrossref{Sound handling of knowledge fusion}}} (\autopageref*{\detokenize{tutorial:sound-handling-of-knowledge-fusion}})
-
 \end{itemize}
 \end{sphinxShadowBox}
 
@@ -6782,7 +6779,7 @@ Let us take an example performance tableau from a Movie magazine’s evaluation 
 
 To aggregate all the critics’ rating opinions, the \sphinxstyleemphasis{Graffiti} magazine provides for each movie a global score computed as an \sphinxstyleemphasis{average grade}, just ignoring the \sphinxstyleemphasis{not seen} data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic \sphinxstyleemphasis{SJ}, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
 
-A better approach is to rank the movies on the basis of pairwise bipolar-valued  \sphinxstyleemphasis{outranking} opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the ranking tutorial) of the 25 movies is provided, for instance, by the \sphinxstylestrong{heat map} view shown in Fig. 64.
+A better approach is to rank the movies on the basis of pairwise bipolar-valued  \sphinxstyleemphasis{at least as well rated as} opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}}) tutorial) of the 25 movies is provided, for instance, by the \sphinxstylestrong{heat map} view shown in Fig. 64.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -6816,9 +6813,9 @@ Let us explicitly construct the corresponding bipolar-valued outranking digraph 
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{graffiti07_45}.png}
 \caption{Pairwise comparison of the two best-ranked movies}\label{\detokenize{tutorial:id166}}\end{figure}
 
-Four out of the fifteen critics have not seen one or the other of these two movies. Notice the higher significance (3) that is granted to two locally renowned movie critics, namely \sphinxstyleemphasis{JH} and \sphinxstyleemphasis{VT}. Their opinion counts for three times the opinion of the other critics. All critics that have seen both movies, except critic \sphinxstyleemphasis{MR}, state that \sphinxstyleemphasis{mv\_QS} is rated at least as good as \sphinxstyleemphasis{mv\_RR} and the balance of positive against negative opinions amounts to +11, a characteristic value which positively validates the outranking situation with a majority of (11/19 + 1.0) / 2.0 = 79\%.
+Six out of the fifteen critics have not seen one or the other of these two movies. Notice the higher significance (3) that is granted to two locally renowned movie critics, namely \sphinxstyleemphasis{JH} and \sphinxstyleemphasis{VT}. Their opinion counts for three times the opinion of the other critics. All nine critics that have seen both movies, except critic \sphinxstyleemphasis{MR}, state that \sphinxstyleemphasis{mv\_QS} is rated at least as well as \sphinxstyleemphasis{mv\_RR} and the balance of positive against negative opinions amounts to +11, a characteristic value which positively validates the outranking situation with a majority of (11/19 + 1.0) / 2.0 = 79\%.
 
-The complete table of pairwise majority margins of global ‘\sphinxstyleemphasis{at least as good rated}’ opinions, ranked by the same rule as shown in the heat map above (see Fig. 64), may be shown as follows.
+The complete table of pairwise majority margins of global ‘\sphinxstyleemphasis{at least as well rated as}’ opinions, ranked by the same rule as shown in the heat map above (see Fig. 64), may be shown as follows.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -6833,9 +6830,9 @@ The complete table of pairwise majority margins of global ‘\sphinxstyleemphasi
 \capstart
 
 \noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{graffiti07_3}.png}
-\caption{Pairwise majority margins of ‘\sphinxstyleemphasis{at least as good as}’ rating opinions}\label{\detokenize{tutorial:id167}}\end{figure}
+\caption{Pairwise majority margins of ‘\sphinxstyleemphasis{at least as well rated as}’ rating opinions}\label{\detokenize{tutorial:id167}}\end{figure}
 
-Positive characteristic values, validating a global ‘\sphinxstyleemphasis{at least as good rated}’ opinion are marked in light green (see Fig. 66). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best-ranked movie \sphinxstyleemphasis{mv\_QS} is indeed a \sphinxstyleemphasis{Condorcet} winner, i.e. \sphinxstyleemphasis{better rated than all the other movies} by a 65\% majority of critics. This majority may be assessed from the average determinateness of the given bipolar valued outranking digraph \sphinxstyleemphasis{g}.
+Positive characteristic values, validating a global ‘\sphinxstyleemphasis{at least as well rated as}’ opinion are marked in light green (see Fig. 66). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best-ranked movie \sphinxstyleemphasis{mv\_QS} is indeed a \sphinxstyleemphasis{Condorcet} winner, i.e. \sphinxstyleemphasis{better rated than all the other movies} by a 65\% majority of critics. This majority may be assessed from the average determinateness of the given bipolar valued outranking digraph \sphinxstyleemphasis{g}.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -6857,7 +6854,7 @@ Notice also the \sphinxstyleemphasis{indeterminate} situation we observe, for in
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{graffiti07_6}.png}
 \caption{Indeterminate pairwise comparison example}\label{\detokenize{tutorial:id168}}\end{figure}
 
-Only eight, out of the fifteen critics, have seen both movies and the positive opinions do neatly balance the negative ones. A global statement that \sphinxstyleemphasis{mv\_PE} is ‘\sphinxstyleemphasis{at least as good rated}’ as \sphinxstyleemphasis{mv\_NP}  may in this case hence neither be validated, nor invalidated; a preferential situation that cannot be modelled with any scoring approach.
+Only eight, out of the fifteen critics, have seen both movies and the positive opinions do neatly balance the negative ones. A global statement that \sphinxstyleemphasis{mv\_PE} is ‘\sphinxstyleemphasis{at least as well rated as}’ \sphinxstyleemphasis{mv\_NP}  may in this case hence \sphinxstylestrong{neither be validated, nor invalidated}; a preferential situation that cannot be modelled with any scoring approach.
 
 It is fair, however, to eventually mention here that the \sphinxstyleemphasis{Graffiti} magazine’s average scoring method is actually showing a very similar ranking. Indeed, average scores usually confirm well all evident pairwise comparisons, yet \sphinxstyleemphasis{enforce} comparability for all less evident ones.
 
@@ -6901,7 +6898,7 @@ Let \sphinxstyleemphasis{R1} and \sphinxstyleemphasis{R2} be two random crisp re
 \PYG{g+go}{\PYGZob{}\PYGZsq{}correlation\PYGZsq{}: \PYGZhy{}0.1, \PYGZsq{}determination\PYGZsq{}: 1.0\PYGZcb{}}
 \end{sphinxVerbatim}
 
-In the table of the equivalence relation \sphinxstyleemphasis{R1 \textless{}=\textgreater{} R2} above, we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall’s \sphinxstyleemphasis{tau} index in this plainly determined crisp case.
+In the table of the equivalence relation \sphinxstyleemphasis{R1\textless{}=\textgreater{}R2} above, we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall’s \sphinxstyleemphasis{tau} index in this plainly determined crisp case.
 
 What happens now with more or less determined and even partially indeterminate relations ? May we proceed in a similar way ?
 
@@ -6971,7 +6968,7 @@ If \sphinxstyleemphasis{r(x R1 y)} and \sphinxstyleemphasis{r(x R2 y)} denote th
 
 \sphinxstyleemphasis{M(R1\textless{}=\textgreater{}R2)} is hence given by the sum of the non reflexive terms of the relation table of \sphinxstyleemphasis{eq}, the relation equivalence digraph computed above.
 
-In the crisp case, \sphinxstyleemphasis{M(R1\textless{}=\textgreater{}R2)}  is now normalized with the maximum number of possible irreflexive pairs, namely \sphinxstyleemphasis{n(n-1)}. In a generalized \sphinxstyleemphasis{r} -valued case, the maximal possible equivalence majority margin \sphinxstyleemphasis{mm} corresponds to the sum \sphinxstyleemphasis{D} of the \sphinxstylestrong{conjoint determinations} of \sphinxstyleemphasis{(x R1 y)} and \sphinxstyleemphasis{(x R2 y)} (see \phantomsection\label{\detokenize{tutorial:id86}}{\hyperref[\detokenize{tutorial:bis-2012}]{\sphinxcrossref{{[}BIS-2012{]}}}} (\autopageref*{\detokenize{tutorial:bis-2012}})).
+In the crisp case, \sphinxstyleemphasis{M(R1\textless{}=\textgreater{}R2)}  is now normalized with the maximum number of possible irreflexive pairs, namely \sphinxstyleemphasis{n(n-1)}. In a generalized \sphinxstyleemphasis{r} -valued case, the maximal possible equivalence majority margin \sphinxstyleemphasis{M} corresponds to the sum \sphinxstyleemphasis{D} of the \sphinxstylestrong{conjoint determinations} of \sphinxstyleemphasis{(x R1 y)} and \sphinxstyleemphasis{(x R2 y)} (see \phantomsection\label{\detokenize{tutorial:id86}}{\hyperref[\detokenize{tutorial:bis-2012}]{\sphinxcrossref{{[}BIS-2012{]}}}} (\autopageref*{\detokenize{tutorial:bis-2012}})).
 \begin{quote}
 
 \sphinxstyleemphasis{D} = sum \_ \sphinxstyleemphasis{(x,y)} min {[} abs(\sphinxstyleemphasis{r(x R1 y)}, abs(\sphinxstyleemphasis{r(x R2 y)}) {]}.
@@ -6980,7 +6977,7 @@ In the crisp case, \sphinxstyleemphasis{M(R1\textless{}=\textgreater{}R2)}  is n
 Thus, we obtain in the general \sphinxstyleemphasis{r} -valued case:
 \begin{quote}
 
-\sphinxstyleemphasis{tau(R1,R2)} =  \sphinxstyleemphasis{M(R1 \textless{}=\textgreater{} R2)} / \sphinxstyleemphasis{D} .
+\sphinxstyleemphasis{tau(R1,R2)} =  \sphinxstyleemphasis{M(R1\textless{}=\textgreater{}R2)} / \sphinxstyleemphasis{D} .
 \end{quote}
 
 \sphinxstyleemphasis{tau(R1,R2)} gives us hence a classical ordinal correlation index, but restricted to the \sphinxstylestrong{conjointly determined parts} of the given relations \sphinxstyleemphasis{R1} and \sphinxstyleemphasis{R2}. In the limit case of two crisp linear orders, \sphinxstyleemphasis{D} equals \sphinxstyleemphasis{n(n-1)}, i.e. the number of irreflexive pairs, and we recover hence \sphinxstyleemphasis{Kendall} ‘s original \sphinxstyleemphasis{tau} index definition.
@@ -7012,7 +7009,7 @@ We may verify these relations with help of the corresponding equivalence digraph
 \PYG{g+go}{r(R1\PYGZlt{}=\PYGZgt{}R2) = +0.026, d = 0.356, tau = +0.073}
 \end{sphinxVerbatim}
 
-In general we simply use the \sphinxcode{digraphs.Digraph.ComputeOrdinalCorrelation()} method which renders a dictionary with a ‘correlation’ (\sphinxstyleemphasis{tau}) and a ‘determination’ (\sphinxstyleemphasis{d}) attribute. We may recover \sphinxstyleemphasis{r(\textless{}=\textgreater{})} by multiplying \sphinxstyleemphasis{tau} with \sphinxstyleemphasis{d}.
+In general we simply use the \sphinxcode{digraphs.Digraph.computeOrdinalCorrelation()} method which renders a dictionary with a ‘correlation’ (\sphinxstyleemphasis{tau}) and a ‘determination’ (\sphinxstyleemphasis{d}) attribute. We may recover \sphinxstyleemphasis{r(\textless{}=\textgreater{})} by multiplying \sphinxstyleemphasis{tau} with \sphinxstyleemphasis{d}.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -7096,14 +7093,14 @@ The ordinal correlation between the global \sphinxstyleemphasis{Net-Flows} ranki
 \PYG{g+go}{tau(g,nf) = +0.780, D = 0.300, r(g\PYGZlt{}=\PYGZgt{}nf) = +0.234}
 \end{sphinxVerbatim}
 
-We may notice that the determined correlation \sphinxstyleemphasis{tau} index between the \sphinxstyleemphasis{Net-Flows} ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the \sphinxstyleemphasis{r} -valued relational equivalence between the \sphinxstyleemphasis{nf} and the \sphinxstyleemphasis{g} digraph may, however, be misleading with a characteristics value of \sphinxstyleemphasis{only} +0.234; a value corresponding nevertheless to an epistemic majority support of nearly 62\% of the movie critics’ rating opinions.
+We may notice that the correlation \sphinxstyleemphasis{tau} index between the \sphinxstyleemphasis{Net-Flows} ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the \sphinxstyleemphasis{r} -valued relational equivalence between the \sphinxstyleemphasis{nf} and the \sphinxstyleemphasis{g} digraph may, however, be misleading with a characteristics value of \sphinxstyleemphasis{only} +0.234; a value corresponding nevertheless to an epistemic majority support of nearly 62\% of the movie critics’ rating opinions.
 
 It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the \sphinxstyleemphasis{Copeland} or the \sphinxstyleemphasis{Kohler} ranking rule.
 
 
 \subsubsection{Illustrating preference divergences}
 \label{\detokenize{tutorial:illustrating-preference-divergences}}
-The correlation index gives us a further measure for studying how divergent or not are the rating opinions expressed by the movie critics.
+The valued relational equivalence index gives us a further measure for studying how \sphinxstylestrong{divergent} or not are the rating opinions expressed by the movie critics.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -7129,9 +7126,9 @@ The correlation index gives us a further measure for studying how divergent or n
 \PYG{g+go}{  VT \textbar{}                                                                                     +0.40}
 \end{sphinxVerbatim}
 
-It is remarquable that all pairwise valued ordinal correlation indexes \sphinxstyleemphasis{tau(x,y)} appear to be small, except the \sphinxstyleemphasis{diagonal} ones. The reflexive indexes \sphinxstyleemphasis{tau(x,x)} would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score \sphinxstyleemphasis{d}, i.e. how many movies a critic did actually evaluate. The lower \sphinxstyleemphasis{d} appears, the less movies a critic has evaluated. Critic \sphinxstyleemphasis{JPT}, the editor of the Graffiti magazine for instance, evaluated all but one (\sphinxstyleemphasis{d} = 24*23/600 = 0.92), whereas critic \sphinxstyleemphasis{FG} evaluated only 10 movies among the 25 in discussion (\sphinxstyleemphasis{d} = 10*9/600 = 0.15).
+It is remarquable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes \sphinxstyleemphasis{r(x\textless{}=\textgreater{}y)} appear to be small, except the \sphinxstyleemphasis{diagonal} ones. The reflexive indexes \sphinxstyleemphasis{s(x\textless{}=\textgreater{}x)} would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score \sphinxstyleemphasis{d}, i.e. how many movies a critic did actually evaluate. The lower \sphinxstyleemphasis{d} appears, the less movies a critic has evaluated. Critic \sphinxstyleemphasis{JPT}, the editor of the Graffiti magazine for instance, evaluated all but one (\sphinxstyleemphasis{d} = 24*23/600 = 0.92), whereas critic \sphinxstyleemphasis{FG} evaluated only 10 movies among the 25 in discussion (\sphinxstyleemphasis{d} = 10*9/600 = 0.15).
 
-To get a picture of the actual divergence of rating opinions concerning jointly seen pairs of movies, we may develop a \sphinxstyleemphasis{Principal Component Analysis} (%
+To get a picture of the actual divergence of rating opinions concerning \sphinxstylestrong{jointly seen} pairs of movies, we may develop a \sphinxstyleemphasis{Principal Component Analysis} (%
 \begin{footnote}[10]\sphinxAtStartFootnote
 The 3D PCA plot method requires a running \sphinxstyleemphasis{R statistics software}  (\sphinxurl{https://www.r-project.org/}) installation.
 %
@@ -7144,14 +7141,14 @@ The 3D PCA plot method requires a running \sphinxstyleemphasis{R statistics soft
 
 \noindent{\hspace*{\fill}\sphinxincludegraphics[width=500\sphinxpxdimen]{{correlationPCA}.png}\hspace*{\fill}}
 
-The first 3 principal axes support together about 70\% of the total inertia. Most excentric and different in their respective rating opinions appear, on the first principal axis with 27.2\% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7\% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3\% inertia, the written medias appear opposed to the radio media.
+The first 3 principal axes support together about 70\% of the total inertia. Most excentric and different in their respective rating opinions appear, on the first principal axis with 27.2\% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7\% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3\% inertia, the written media appear opposed to the radio media.
 
 
 \subsubsection{Exploring the \sphinxstyleemphasis{better rated}  and the \sphinxstyleemphasis{as well as rated} opinions}
 \label{\detokenize{tutorial:exploring-the-better-rated-and-the-as-well-as-rated-opinions}}
 In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of an outranking digraph (see introduction tutorial of the \sphinxcode{digraphs} module).
 
-Let us indeed first have a look at the pairwise asymmetric part of the \sphinxstyleemphasis{at least as well as rated}, namely the \sphinxstyleemphasis{better rated} opinions of the movie critics.
+Let us indeed first have a look at the pairwise asymmetric part of the \sphinxstyleemphasis{at least as well as rated}, namely the ‘\sphinxstyleemphasis{better rated than}’ and ‘\sphinxstyleemphasis{less well rated than}’ opinions of the movie critics.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -7161,7 +7158,7 @@ Let us indeed first have a look at the pairwise asymmetric part of the \sphinxst
 
 \noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{asymmetricPart}.png}\hspace*{\fill}}
 
-We notice here that the \sphinxstyleemphasis{Net-Flows} ranking rule inverts in fact just three \sphinxstyleemphasis{less well ranked} opinion and four \sphinxstyleemphasis{better ranked} ones. A similar look at the symmetric part, the pairwise ‘ \sphinxstyleemphasis{as well as rated} ‘ opinions, suggests clearly a preordered structure in several equivalently rated classes.
+We notice here that the \sphinxstyleemphasis{Net-Flows} ranking rule inverts in fact just three ‘\sphinxstyleemphasis{less well ranked than}’ opinion and four ‘\sphinxstyleemphasis{better ranked than}’ ones. A similar look at the symmetric part, the pairwise ‘\sphinxstyleemphasis{as well rated as}’ opinions, suggests clearly a preordered structure in several \sphinxstyleemphasis{equivalently rated} classes.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -7171,11 +7168,11 @@ We notice here that the \sphinxstyleemphasis{Net-Flows} ranking rule inverts in 
 
 \noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{symmetricPart}.png}\hspace*{\fill}}
 
-Such a preorder of the movies may, for instance, be computed with the \sphinxcode{digraphs.Digraph.computeRankingByChoosing()} method where we fusion by epistemic conjunction the preorder obtained from iteratively extracted \sphinxstyleemphasis{dominant kernels} (best remaining choices) with the preorder obtained by the iteratively extracted \sphinxstyleemphasis{absorbent kernels} (worst remaining choices). We operate herefore on the \sphinxstyleemphasis{better rated} opinins, i.e. the \sphinxstyleemphasis{codual} (%
+Such a preorder of the movies may, for instance, be computed with the \sphinxcode{digraphs.Digraph.computeRankingByChoosing()} method, where we fusion by epistemic conjunction the preorder obtained from iteratively extracted \sphinxstyleemphasis{dominant kernels} (best remaining choices) with the preorder obtained by the iteratively extracted \sphinxstyleemphasis{absorbent kernels} (worst remaining choices). We operate herefore on the asymmetric ‘\sphinxstyleemphasis{better rated than}’, i.e. the \sphinxstyleemphasis{codual} (%
 \begin{footnote}[11]\sphinxAtStartFootnote
 A \sphinxstyleemphasis{kernel} in a digraph \sphinxstyleemphasis{g} is a \sphinxstyleemphasis{clique} in the dual digraph \sphinxstyleemphasis{-g}.
 %
-\end{footnote}) of the ‘ \sphinxstyleemphasis{at least as well as rated} ‘ opinions.
+\end{footnote}) of the ‘\sphinxstyleemphasis{at least as well rated as}’ opinions.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -7196,18 +7193,7 @@ A \sphinxstyleemphasis{kernel} in a digraph \sphinxstyleemphasis{g} is a \sphinx
 \PYG{g+go}{Ordinal bipolar correlation with median cut outranking relation: tau = +0.452 (d = 0.94)}
 \end{sphinxVerbatim}
 
-
-\subsection{Sound handling of knowledge fusion}
-\label{\detokenize{tutorial:sound-handling-of-knowledge-fusion}}
-
-\subsubsection{Consensual or adversary social choice ?}
-\label{\detokenize{tutorial:consensual-or-adversary-social-choice}}
-To be written
-
-
-\subsubsection{Computing valued digraphs kernels}
-\label{\detokenize{tutorial:computing-valued-digraphs-kernels}}
-To be written
+Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Tutorials of the Digraph3 resources}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
 
 
 \section{Bibliography}

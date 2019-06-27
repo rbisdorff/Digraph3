@@ -8082,47 +8082,7 @@ best covered terminal kernel</span></p>
 <div class="section" id="illustrating-preference-divergences">
 <h4>Illustrating preference divergences<a class="headerlink" href="#illustrating-preference-divergences" title="Permalink to this headline">¶</a></h4>
 <p>The valued relational equivalence index gives us a further measure for studying how <strong>divergent</strong> or not are the rating opinions expressed by the movie critics.</p>
-<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCriteriaCorrelationTable</span><span class="p">(</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="go">Criteria valued ordinal correlation index</span>
-<span class="go">     |   AP    AS    CF    CS    DR    FG    GS    JH   JPT    MR    RR    SF    SJ    TD    VT</span>
-<span class="go">-----|------------------------------------------------------------------------------------------</span>
-<span class="go">  AP | +0.63 +0.04 +0.19 +0.09 +0.22 -0.01 +0.11 +0.23 +0.25 +0.08 +0.02 +0.04 +0.19 +0.04 +0.12</span>
-<span class="go">  AS |       +0.77 +0.12 +0.12 +0.04 -0.02 -0.06 +0.02 +0.24 -0.08 +0.07 +0.04 -0.07 -0.01 +0.02</span>
-<span class="go">  CF |             +0.77 +0.07 +0.11 +0.03 +0.05 +0.07 +0.10 -0.03 +0.01 +0.00 +0.06 +0.03 -0.04</span>
-<span class="go">  CS |                   +0.63 +0.04 -0.02 +0.07 +0.13 +0.25 +0.01 +0.03 +0.00 +0.02 +0.03 +0.07</span>
-<span class="go">  DR |                         +0.45 +0.03 +0.07 +0.17 +0.23 +0.16 +0.06 +0.03 +0.10 +0.07 +0.10</span>
-<span class="go">  FG |                               +0.15 -0.01 +0.04 +0.01 +0.06 -0.00 +0.02 +0.01 +0.01 +0.02</span>
-<span class="go">  GS |                                     +0.40 +0.07 +0.07 +0.09 -0.02 +0.00 +0.06 +0.04 +0.04</span>
-<span class="go">  JH |                                           +0.77 +0.28 +0.26 +0.15 +0.12 +0.10 +0.05 +0.14</span>
-<span class="go"> JPT |                                                 +0.92 +0.15 +0.06 +0.09 +0.08 +0.08 +0.17</span>
-<span class="go">  MR |                                                       +0.63 +0.10 +0.08 +0.03 +0.09 +0.10</span>
-<span class="go">  RR |                                                             +0.51 +0.04 +0.01 +0.05 +0.05</span>
-<span class="go">  SF |                                                                   +0.18 +0.01 +0.02 +0.05</span>
-<span class="go">  SJ |                                                                         +0.51 +0.03 +0.07</span>
-<span class="go">  TD |                                                                               +0.26 +0.00</span>
-<span class="go">  VT |                                                                                     +0.40</span>
-</pre></div>
-</td></tr></table></div>
+<a class="reference internal image-reference" href="_images/correlationTable.png"><img alt="Pairwise valued correlation of movie critics" class="align-center" src="_images/correlationTable.png" style="width: 600px;" /></a>
 <p>It is remarquable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes <em>r(x&lt;=&gt;y)</em> appear to be small, except the <em>diagonal</em> ones. The reflexive indexes <em>s(x&lt;=&gt;x)</em> would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score <em>d</em>, i.e. how many movies a critic did actually evaluate. The lower <em>d</em> appears, the less movies a critic has evaluated. Critic <em>JPT</em>, the editor of the Graffiti magazine for instance, evaluated all but one (<em>d</em> = 24*23/600 = 0.92), whereas critic <em>FG</em> evaluated only 10 movies among the 25 in discussion (<em>d</em> = 10*9/600 = 0.15).</p>
 <p>To get a picture of the actual divergence of rating opinions concerning <strong>jointly seen</strong> pairs of movies, we may develop a <em>Principal Component Analysis</em> (<a class="footnote-reference" href="#id100" id="id87">[10]</a>) of the <em>tau</em> correlation matrix. The 3D plot of the first 3 principal axes is shown below.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">export3DplotOfCriteriaCorrelation</span><span class="p">(</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
@@ -8148,7 +8108,7 @@ best covered terminal kernel</span></p>
 </pre></div>
 </td></tr></table></div>
 <a class="reference internal image-reference" href="_images/symmetricPart.png"><img alt="symmetric part of graffiti07 digraph" class="align-center" src="_images/symmetricPart.png" style="width: 600px;" /></a>
-<p>Such a preorder of the movies may, for instance, be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeRankingByChoosing" title="digraphs.Digraph.computeRankingByChoosing"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeRankingByChoosing()</span></code></a> method, where we fusion by epistemic conjunction the preorder obtained from iteratively extracted <em>dominant kernels</em> (best remaining choices) with the preorder obtained by the iteratively extracted <em>absorbent kernels</em> (worst remaining choices). We operate herefore on the the <em>codual</em> (<a class="footnote-reference" href="#id101" id="id88">[11]</a>) of the ‘<em>at least as well rated as</em>’ opinions.</p>
+<p>Such a preorder of the movies may, for instance, be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeRankingByChoosing" title="digraphs.Digraph.computeRankingByChoosing"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeRankingByChoosing()</span></code></a> method, where we fusion by epistemic conjunction the preorder obtained from iteratively extracted <em>dominant kernels</em> (best remaining choices) with the preorder obtained by the iteratively extracted <em>absorbent kernels</em> (worst remaining choices). We operate herefore on the asymmetric ‘<em>better rated than</em>’, i.e. the <em>codual</em> (<a class="footnote-reference" href="#id101" id="id88">[11]</a>) of the ‘<em>at least as well rated as</em>’ opinions.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3

@@ -5294,27 +5294,10 @@ Illustrating preference divergences
 
 The valued relational equivalence index gives us a further measure for studying how **divergent** or not are the rating opinions expressed by the movie critics.
 
->>> g = BipolarOutrankingDigraph(t,Normalized=True)
->>> g.showCriteriaCorrelationTable(ValuedCorrelation=True)
-Criteria valued ordinal correlation index
-     |   AP    AS    CF    CS    DR    FG    GS    JH   JPT    MR    RR    SF    SJ    TD    VT   
------|------------------------------------------------------------------------------------------
-  AP | +0.63 +0.04 +0.19 +0.09 +0.22 -0.01 +0.11 +0.23 +0.25 +0.08 +0.02 +0.04 +0.19 +0.04 +0.12   
-  AS |       +0.77 +0.12 +0.12 +0.04 -0.02 -0.06 +0.02 +0.24 -0.08 +0.07 +0.04 -0.07 -0.01 +0.02   
-  CF |             +0.77 +0.07 +0.11 +0.03 +0.05 +0.07 +0.10 -0.03 +0.01 +0.00 +0.06 +0.03 -0.04   
-  CS |                   +0.63 +0.04 -0.02 +0.07 +0.13 +0.25 +0.01 +0.03 +0.00 +0.02 +0.03 +0.07   
-  DR |                         +0.45 +0.03 +0.07 +0.17 +0.23 +0.16 +0.06 +0.03 +0.10 +0.07 +0.10   
-  FG |                               +0.15 -0.01 +0.04 +0.01 +0.06 -0.00 +0.02 +0.01 +0.01 +0.02   
-  GS |                                     +0.40 +0.07 +0.07 +0.09 -0.02 +0.00 +0.06 +0.04 +0.04   
-  JH |                                           +0.77 +0.28 +0.26 +0.15 +0.12 +0.10 +0.05 +0.14   
- JPT |                                                 +0.92 +0.15 +0.06 +0.09 +0.08 +0.08 +0.17   
-  MR |                                                       +0.63 +0.10 +0.08 +0.03 +0.09 +0.10   
-  RR |                                                             +0.51 +0.04 +0.01 +0.05 +0.05   
-  SF |                                                                   +0.18 +0.01 +0.02 +0.05   
-  SJ |                                                                         +0.51 +0.03 +0.07   
-  TD |                                                                               +0.26 +0.00   
-  VT |                                                                                     +0.40   
-
+.. image:: correlationTable.png
+   :alt: Pairwise valued correlation of movie critics 
+   :width: 600 px
+   :align: center
 
 It is remarquable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes *r(x<=>y)* appear to be small, except the *diagonal* ones. The reflexive indexes *s(x<=>x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. how many movies a critic did actually evaluate. The lower *d* appears, the less movies a critic has evaluated. Critic *JPT*, the editor of the Graffiti magazine for instance, evaluated all but one (*d* = 24*23/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion (*d* = 10*9/600 = 0.15).
 
@@ -5355,7 +5338,7 @@ We notice here that the *Net-Flows* ranking rule inverts in fact just three '*le
    :width: 600 px
    :align: center
 
-Such a preorder of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we fusion by epistemic conjunction the preorder obtained from iteratively extracted *dominant kernels* (best remaining choices) with the preorder obtained by the iteratively extracted *absorbent kernels* (worst remaining choices). We operate herefore on the the *codual* ([11]_) of the '*at least as well rated as*' opinions.
+Such a preorder of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we fusion by epistemic conjunction the preorder obtained from iteratively extracted *dominant kernels* (best remaining choices) with the preorder obtained by the iteratively extracted *absorbent kernels* (worst remaining choices). We operate herefore on the asymmetric '*better rated than*', i.e. the *codual* ([11]_) of the '*at least as well rated as*' opinions.
 
 >>> from weakOrders import RankingByChoosingDigraph
 >>> rbc = RankingByChoosingDigraph(g,CoDual=True)
