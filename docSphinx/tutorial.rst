@@ -5213,7 +5213,7 @@ We may verify these relations with help of the corresponding equivalence digraph
 >>> print('r(R1<=>R2) = %+.3f, d = %.3f, tau = %+.3f' % (M/n2,D/n2,M/D))
 r(R1<=>R2) = +0.026, d = 0.356, tau = +0.073  
 
-In general we simply use the :py:func:`digraphs.Digraph.ComputeOrdinalCorrelation` method which renders a dictionary with a 'correlation' (*tau*) and a 'determination' (*d*) attribute. We may recover *r(<=>)* by multiplying *tau* with *d*. 
+In general we simply use the :py:func:`digraphs.Digraph.computeOrdinalCorrelation` method which renders a dictionary with a 'correlation' (*tau*) and a 'determination' (*d*) attribute. We may recover *r(<=>)* by multiplying *tau* with *d*. 
 
 >>> corr = R1.computeOrdinalCorrelation(R2)
 >>> tau = corr['correlation']
