@@ -5184,13 +5184,13 @@ If *r(x R1 y)* and *r(x R2 y)* denote the bipolar characteristic values of relat
 
 *M(R1<=>R2)* is hence given by the sum of the non reflexive terms of the relation table of *eq*, the relation equivalence digraph computed above.
 
-In the crisp case, *M(R1<=>R2)*  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r* -valued case, the maximal possible equivalence majority margin *mm* corresponds to the sum *D* of the **conjoint determinations** of *(x R1 y)* and *(x R2 y)* (see [BIS-2012]_). 
+In the crisp case, *M(R1<=>R2)*  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r* -valued case, the maximal possible equivalence majority margin *M* corresponds to the sum *D* of the **conjoint determinations** of *(x R1 y)* and *(x R2 y)* (see [BIS-2012]_). 
 
     *D* = sum _ *(x,y)* min [ abs(*r(x R1 y)*, abs(*r(x R2 y)*) ].
 
 Thus, we obtain in the general *r* -valued case:
 
-    *tau(R1,R2)* =  *M(R1 <=> R2)* / *D* .
+    *tau(R1,R2)* =  *M(R1<=>R2)* / *D* .
 
 *tau(R1,R2)* gives us hence a classical ordinal correlation index, but restricted to the **conjointly determined parts** of the given relations *R1* and *R2*. In the limit case of two crisp linear orders, *D* equals *n(n-1)*, i.e. the number of irreflexive pairs, and we recover hence *Kendall* 's original *tau* index definition.
 
@@ -5355,7 +5355,7 @@ We notice here that the *Net-Flows* ranking rule inverts in fact just three *les
    :width: 600 px
    :align: center
 
-Such a preorder of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method where we fusion by epistemic conjunction the preorder obtained from iteratively extracted *dominant kernels* (best remaining choices) with the preorder obtained by the iteratively extracted *absorbent kernels* (worst remaining choices). We operate herefore on the *better rated* opinins, i.e. the *codual* ([11]_) of the ' *at least as well as rated* ' opinions.
+Such a preorder of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we fusion by epistemic conjunction the preorder obtained from iteratively extracted *dominant kernels* (best remaining choices) with the preorder obtained by the iteratively extracted *absorbent kernels* (worst remaining choices). We operate herefore on the *better rated* opinins, i.e. the *codual* ([11]_) of the ' *at least as well as rated* ' opinions.
 
 >>> from weakOrders import RankingByChoosingDigraph
 >>> rbc = RankingByChoosingDigraph(g,CoDual=True)
@@ -5373,19 +5373,7 @@ Ranking by Choosing and Rejecting
 Ordinal bipolar correlation with outranking relation: tau = +0.516 (d = 0.27)
 Ordinal bipolar correlation with median cut outranking relation: tau = +0.452 (d = 0.94)
 
-
-Sound handling of knowledge fusion
-----------------------------------
-
-Consensual or adversary social choice ?
-.......................................
-
-To be written
-
-Computing valued digraphs kernels
-.................................
-
-To be written
+Back to :ref:`Tutorial-label`
 
 	   	  
 Bibliography

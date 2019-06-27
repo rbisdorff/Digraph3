@@ -760,7 +760,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
     def showCriteriaCorrelationTable(self,ValuedCorrelation=False,isReturningHTML=False):
         """
-        prints the criteriaCorrelationIndex in table format
+        prints the ordinal correlation index tau between criteria in table format.
         """
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
@@ -949,7 +949,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('Actions Correlation saved on file %s' % (fileName))
         
         
-    def saveCriteriaCorrelationTable(self,fileName='tempcorr.prn',delimiter=' ',ValuedCorrelation=False,Bipolar=True,Silent=False,Centered=False):
+    def saveCriteriaCorrelationTable(self,fileName='tempcorr.prn',delimiter=' ',
+                                     ValuedCorrelation=False,Bipolar=True,
+                                     Silent=False,Centered=False):
         """
         Delimited save of correlation table
         """
@@ -992,7 +994,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         if not Silent:
             print('Criteria Correlation saved on file %s' % (fileName))
 
-    def export3DplotOfCriteriaCorrelation(self,plotFileName="correlation",ValuedCorrelation=False,Type="pdf",Comments=False,bipolarFlag=False,dist=True,centeredFlag=False):
+    def export3DplotOfCriteriaCorrelation(self,plotFileName="correlation",
+                                          ValuedCorrelation=False,Type="pdf",
+                                          Comments=False,bipolarFlag=False,
+                                          dist=True,centeredFlag=False):
         """
         use Calmat and R for producing a plot of the principal components of
         the criteria ordinal correlation table.
@@ -1009,7 +1014,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         for key in criteriaList:
             fo.write('%s ' % (key))
         fo.close()
-        self.saveCriteriaCorrelationTable(fileName='tempcorr.prn',Silent=True,ValuedCorrelation=ValuedCorrelation,Bipolar=bipolarFlag,Centered=centeredFlag)
+        self.saveCriteriaCorrelationTable(fileName='tempcorr.prn',Silent=True,
+                                          ValuedCorrelation=ValuedCorrelation,
+                                          Bipolar=bipolarFlag,Centered=centeredFlag)
         # create Calmat script and calmat execution (the prn extension is standard)
         try:
             if Comments:
@@ -1132,7 +1139,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         for key in actionsList:
             fo.write('%s ' % (key))
         fo.close()
-        self.saveActionsCorrelationTable(fileName='tempcorr.prn',Silent=True,Bipolar=bipolarFlag,Centered=centeredFlag)
+        self.saveActionsCorrelationTable(fileName='tempcorr.prn',Silent=True,
+                                         Bipolar=bipolarFlag,Centered=centeredFlag)
         # create Calmat script and calmat execution (the prn extension is standard)
         try:
             if Comments:

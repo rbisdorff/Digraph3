@@ -7716,7 +7716,6 @@ best covered terminal kernel</span></p>
 <ul class="simple">
 <li><a class="reference internal" href="#coping-with-missing-data-and-indeterminateness" id="id259">Coping with missing data and indeterminateness</a></li>
 <li><a class="reference internal" href="#ordinal-correlation-equals-bipolar-relational-equivalence" id="id260">Ordinal correlation equals bipolar relational equivalence</a></li>
-<li><a class="reference internal" href="#sound-handling-of-knowledge-fusion" id="id261">Sound handling of knowledge fusion</a></li>
 </ul>
 </div>
 <div class="section" id="coping-with-missing-data-and-indeterminateness">
@@ -7926,12 +7925,12 @@ best covered terminal kernel</span></p>
 </div>
 </div>
 <p><em>M(R1&lt;=&gt;R2)</em> is hence given by the sum of the non reflexive terms of the relation table of <em>eq</em>, the relation equivalence digraph computed above.</p>
-<p>In the crisp case, <em>M(R1&lt;=&gt;R2)</em>  is now normalized with the maximum number of possible irreflexive pairs, namely <em>n(n-1)</em>. In a generalized <em>r</em> -valued case, the maximal possible equivalence majority margin <em>mm</em> corresponds to the sum <em>D</em> of the <strong>conjoint determinations</strong> of <em>(x R1 y)</em> and <em>(x R2 y)</em> (see <a class="reference internal" href="#bis-2012" id="id86">[BIS-2012]</a>).</p>
+<p>In the crisp case, <em>M(R1&lt;=&gt;R2)</em>  is now normalized with the maximum number of possible irreflexive pairs, namely <em>n(n-1)</em>. In a generalized <em>r</em> -valued case, the maximal possible equivalence majority margin <em>M</em> corresponds to the sum <em>D</em> of the <strong>conjoint determinations</strong> of <em>(x R1 y)</em> and <em>(x R2 y)</em> (see <a class="reference internal" href="#bis-2012" id="id86">[BIS-2012]</a>).</p>
 <blockquote>
 <div><em>D</em> = sum _ <em>(x,y)</em> min [ abs(<em>r(x R1 y)</em>, abs(<em>r(x R2 y)</em>) ].</div></blockquote>
 <p>Thus, we obtain in the general <em>r</em> -valued case:</p>
 <blockquote>
-<div><em>tau(R1,R2)</em> =  <em>M(R1 &lt;=&gt; R2)</em> / <em>D</em> .</div></blockquote>
+<div><em>tau(R1,R2)</em> =  <em>M(R1&lt;=&gt;R2)</em> / <em>D</em> .</div></blockquote>
 <p><em>tau(R1,R2)</em> gives us hence a classical ordinal correlation index, but restricted to the <strong>conjointly determined parts</strong> of the given relations <em>R1</em> and <em>R2</em>. In the limit case of two crisp linear orders, <em>D</em> equals <em>n(n-1)</em>, i.e. the number of irreflexive pairs, and we recover hence <em>Kendall</em> ‘s original <em>tau</em> index definition.</p>
 <p>It is worthwhile noticing that the ordinal correlation index <em>tau(R1,R2)</em> we obtain above corresponds to the ratio of</p>
 <blockquote>
@@ -8149,7 +8148,7 @@ best covered terminal kernel</span></p>
 </pre></div>
 </td></tr></table></div>
 <a class="reference internal image-reference" href="_images/symmetricPart.png"><img alt="symmetric part of graffiti07 digraph" class="align-center" src="_images/symmetricPart.png" style="width: 600px;" /></a>
-<p>Such a preorder of the movies may, for instance, be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeRankingByChoosing" title="digraphs.Digraph.computeRankingByChoosing"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeRankingByChoosing()</span></code></a> method where we fusion by epistemic conjunction the preorder obtained from iteratively extracted <em>dominant kernels</em> (best remaining choices) with the preorder obtained by the iteratively extracted <em>absorbent kernels</em> (worst remaining choices). We operate herefore on the <em>better rated</em> opinins, i.e. the <em>codual</em> (<a class="footnote-reference" href="#id101" id="id88">[11]</a>) of the ‘ <em>at least as well as rated</em> ‘ opinions.</p>
+<p>Such a preorder of the movies may, for instance, be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeRankingByChoosing" title="digraphs.Digraph.computeRankingByChoosing"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeRankingByChoosing()</span></code></a> method, where we fusion by epistemic conjunction the preorder obtained from iteratively extracted <em>dominant kernels</em> (best remaining choices) with the preorder obtained by the iteratively extracted <em>absorbent kernels</em> (worst remaining choices). We operate herefore on the <em>better rated</em> opinins, i.e. the <em>codual</em> (<a class="footnote-reference" href="#id101" id="id88">[11]</a>) of the ‘ <em>at least as well as rated</em> ‘ opinions.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8181,17 +8180,7 @@ best covered terminal kernel</span></p>
 <span class="go">Ordinal bipolar correlation with median cut outranking relation: tau = +0.452 (d = 0.94)</span>
 </pre></div>
 </td></tr></table></div>
-</div>
-</div>
-<div class="section" id="sound-handling-of-knowledge-fusion">
-<h3><a class="toc-backref" href="#id261">Sound handling of knowledge fusion</a><a class="headerlink" href="#sound-handling-of-knowledge-fusion" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="consensual-or-adversary-social-choice">
-<h4>Consensual or adversary social choice ?<a class="headerlink" href="#consensual-or-adversary-social-choice" title="Permalink to this headline">¶</a></h4>
-<p>To be written</p>
-</div>
-<div class="section" id="computing-valued-digraphs-kernels">
-<h4>Computing valued digraphs kernels<a class="headerlink" href="#computing-valued-digraphs-kernels" title="Permalink to this headline">¶</a></h4>
-<p>To be written</p>
+<p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>
 </div>
 </div>
@@ -8599,11 +8588,6 @@ best covered terminal kernel</span></p>
 <li><a class="reference internal" href="#fitness-of-ranking-heuristics">Fitness of ranking heuristics</a></li>
 <li><a class="reference internal" href="#illustrating-preference-divergences">Illustrating preference divergences</a></li>
 <li><a class="reference internal" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions">Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#sound-handling-of-knowledge-fusion">Sound handling of knowledge fusion</a><ul>
-<li><a class="reference internal" href="#consensual-or-adversary-social-choice">Consensual or adversary social choice ?</a></li>
-<li><a class="reference internal" href="#computing-valued-digraphs-kernels">Computing valued digraphs kernels</a></li>
 </ul>
 </li>
 </ul>
