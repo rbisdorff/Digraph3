@@ -3246,7 +3246,8 @@
 
     <span class="c1"># criteria correlation</span>
 
-    <span class="n">similarityPlotFileName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tempDir</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;/similarityPlot-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">problemFileName</span><span class="p">)</span>
+    <span class="c1">#similarityPlotFileName = str(tempDir)+&#39;/similarityPlot-&#39; + str(problemFileName)</span>
+    <span class="n">similarityPlotFileName</span> <span class="o">=</span> <span class="n">problemFileName</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">isRobust</span><span class="p">:</span>
             <span class="n">g_orig</span><span class="o">.</span><span class="n">export3DplotOfCriteriaCorrelation</span><span class="p">(</span><span class="n">plotFileName</span><span class="o">=</span><span class="n">similarityPlotFileName</span><span class="p">,</span><span class="n">Type</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">bipolarFlag</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">dist</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">centeredFlag</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

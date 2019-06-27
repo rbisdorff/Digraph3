@@ -5925,9 +5925,21 @@ the the actions ordinal correlation table.</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.export3DplotOfCriteriaCorrelation">
-<code class="descname">export3DplotOfCriteriaCorrelation</code><span class="sig-paren">(</span><em>plotFileName='correlation'</em>, <em>ValuedCorrelation=False</em>, <em>Type='pdf'</em>, <em>Comments=False</em>, <em>bipolarFlag=False</em>, <em>dist=True</em>, <em>centeredFlag=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.export3DplotOfCriteriaCorrelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.export3DplotOfCriteriaCorrelation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">export3DplotOfCriteriaCorrelation</code><span class="sig-paren">(</span><em>plotFileName='correlation'</em>, <em>ValuedCorrelation=False</em>, <em>Type='pdf'</em>, <em>Comments=False</em>, <em>bipolarFlag=False</em>, <em>dist=True</em>, <em>centeredFlag=False</em>, <em>tempDir=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.export3DplotOfCriteriaCorrelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.export3DplotOfCriteriaCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>use Calmat and R for producing a plot of the principal components of
 the criteria ordinal correlation table.</p>
+<p><em>Parameters</em>;</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>plotFileName</em> := name of the created R plot image.</li>
+<li><em>Type</em> := format of graphics file: pdf, png, jpeg, xfig</li>
+<li><em>ValuedCorrelation</em> := False (tau by default) | True (r(&lt;=&gt;) otherwise</li>
+<li><em>tempDir</em> : if None the tempfile.gettempdir() is used to get the platform independent temporary directory.</li>
+<li><em>bipolarFlag</em>: obsolete</li>
+<li><em>dist</em>: internal Calmat flag</li>
+<li><em>centeredFlag</em> : internal Calmat flag</li>
+</ul>
+</div></blockquote>
 </dd></dl>
 
 <dl class="method">

@@ -3199,7 +3199,8 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
 
     # criteria correlation
 
-    similarityPlotFileName = str(tempDir)+'/similarityPlot-' + str(problemFileName)
+    #similarityPlotFileName = str(tempDir)+'/similarityPlot-' + str(problemFileName)
+    similarityPlotFileName = problemFileName
     try:
         if not isRobust:
             g_orig.export3DplotOfCriteriaCorrelation(plotFileName=similarityPlotFileName,Type="pdf",Comments=True,bipolarFlag=True,dist=False,centeredFlag=True)
