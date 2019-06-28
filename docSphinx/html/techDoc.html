@@ -4908,7 +4908,13 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <dd><p>Bases: <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal"><span class="pre">perfTabs.PerformanceTableau</span></code></a></p>
 <p>Implements the incremental performance quantiles representation of a
 given performance tableau.</p>
-<p><em>NumberOfBins</em> may be either ‘quartiles’, ‘deciles’, … or ‘n’, the integer number of bins.</p>
+<p><em>Parameters</em>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>perfTab</em>: may be either a PerformanceTableau object or the name of a previously saved PerformanceQuantiles instance</li>
+<li><em>NumberOfBins</em> may be either ‘quartiles’, ‘deciles’, … or ‘n’, the integer number of bins.</li>
+</ul>
+</div></blockquote>
 <dl class="docutils">
 <dt>Example python session:</dt>
 <dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">performanceQuantiles</span>
