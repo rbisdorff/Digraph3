@@ -5356,12 +5356,12 @@ Ranking by Choosing and Rejecting
 
 Other relational clustering methods, as provided for instance by the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class, may be found in the :py:mod:`sortingDigraphs` module. 
 
-Valued digraph kernels is the concern of the next pearl.
+Digraph *kernels* is the topic of the next pearl of bipolar epistemic logic.
 
 Bipolar valued kernel membership characteristic vectors
 -------------------------------------------------------
 
-In the :ref:`Kernel-Tutorial-label` turorial we have discussed the computation of crisp kernels in bipolar outranking digrpahs. Yet, we did not tackle the problem of computing the corresponding bipolar-valued kernel membership characteristic vectors.
+In the :ref:`Kernel-Tutorial-label` turorial we have discussed the computation of *kernels* in bipolar outranking digraphs. Yet, we did not tackle the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors.
 
 Under Construction.
 
