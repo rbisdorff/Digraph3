@@ -5117,7 +5117,7 @@ Let *R1* and *R2* be two random crisp relations defined on a same set of 5 alter
 >>> E = EquivalenceDigraph(R1,R2)
 >>> E.showRelationTable(ReflexiveTerms=False)
 * ---- Relation Table -----
-  S   |  'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
+r(<=>)|  'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
 ------|-------------------------------------------
  'a1' |    - 	 -1.00	  1.00	 -1.00	  1.00	 
  'a2' |  -1.00	   - 	 -1.00	  1.00	 -1.00	 
@@ -5140,7 +5140,7 @@ Let us now consider two randomly valued bipolar digraphs *R1* and *R2* of order 
 >>> R1 = RandomValuationDigraph(order=5,seed=1)
 >>> R1.showRelationTable(ReflexiveTerms=False)
 * ---- Relation Table -----
-  S   |   'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
+ r(R1)|   'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
 ------|-------------------------------------------
  'a1' |    - 	 -0.66	  0.44	  0.94	 -0.84	 
  'a2' |  -0.36	   - 	 -0.70	  0.26	  0.94	 
@@ -5151,7 +5151,7 @@ Valuation domain: [-1.00;1.00]
 >>> R2 = RandomValuationDigraph(order=5,seed=2)
 >>> R2.showRelationTable(ReflexiveTerms=False)
 * ---- Relation Table -----
-  S   |   'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
+ r(R2)|   'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
 ------|-------------------------------------------
  'a1' |    - 	 -0.86	 -0.78	 -0.80	 -0.08	 
  'a2' |  -0.58	   - 	  0.88	  0.70	 -0.22	 
@@ -5165,7 +5165,7 @@ We may notice in the relation tables shown above that 9 pairs, like *(a1,a2)* or
 >>> eq = EquivalenceDigraph(R1,R2)
 >>> eq.showRelationTable(ReflexiveTerms=False)
 * ---- Relation Table -----
-  S   |  'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
+r(<=>)|  'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
 ------|-------------------------------------------
  'a1' |   - 	 0.66	 -0.44	 -0.80	  0.08	 
  'a2' |  0.36	  - 	 -0.70	  0.26	 -0.22	 
@@ -5199,7 +5199,7 @@ It is worthwhile noticing that the ordinal correlation index *tau(R1,R2)* we obt
     * *r(R1<=>R2)* = *M(R1<=>R2)* / *n(n-1)*: The normalized majority margin of the pairwise relational equivalence statements, also called *valued ordinal correlation*, and 
     * *d* = *D* / *n(n-1)*: The normalized determination of the corresponding pairwise relational equivalence statements, in fact de determinateness of the relational equivalence digraph.
 
-We have thus successfully **out-factored** the *determination* effect from the *correlation* effect. With completely determined relations, *tau(R1,R2)* = *r(R<=>R2)*. By convention, we set the ordinal correlation with a *completely indeterminate* relation, i.e. when *D = 0*, to the *indeterminate* correlation value 0.0. With *uniformly* chosen random *r*-valued relations, the **expected** *tau* index is **0.0**, denoting in fact an **indeterminate** correlation. The corresponding expected normalized determination *d* is about 0.333.
+We have thus successfully **out-factored** the *determination* effect from the *correlation* effect. With completely determined relations, *tau(R1,R2)* = *r(R1<=>R2)*. By convention, we set the ordinal correlation with a *completely indeterminate* relation, i.e. when *D = 0*, to the *indeterminate* correlation value 0.0. With *uniformly* chosen random *r*-valued relations, the **expected** *tau* index is **0.0**, denoting in fact an **indeterminate** correlation. The corresponding expected normalized determination *d* is about 0.333.
 
 We may verify these relations with help of the corresponding equivalence digraph *eq* (see above).
 
@@ -5213,7 +5213,7 @@ We may verify these relations with help of the corresponding equivalence digraph
 >>> print('r(R1<=>R2) = %+.3f, d = %.3f, tau = %+.3f' % (M/n2,D/n2,M/D))
 r(R1<=>R2) = +0.026, d = 0.356, tau = +0.073  
 
-In general we simply use the :py:func:`digraphs.Digraph.computeOrdinalCorrelation` method which renders a dictionary with a 'correlation' (*tau*) and a 'determination' (*d*) attribute. We may recover *r(<=>)* by multiplying *tau* with *d*. 
+In general we simply use the :py:func:`digraphs.Digraph.computeOrdinalCorrelation` method which renders a dictionary with a '*correlation*' (*tau*) and a '*determination*' (*d*) attribute. We may recover *r(<=>)* by multiplying *tau* with *d*. 
 
 >>> corr = R1.computeOrdinalCorrelation(R2)
 >>> tau = corr['correlation']
@@ -5227,7 +5227,7 @@ We may now illustrate the quality of the global ranking of the movies shown with
 Fitness of ranking heuristics
 .............................
 
-let us therefore reconsider the bipolar valued outranking digraph *g* modelling the pairwise global '*at least as well rated as*' relation among the 25 movies seen above.
+We reconsider the bipolar valued outranking digraph *g* modelling the pairwise global '*at least as well rated as*' relation among the 25 movies seen above.
 
     >>> g = BipolarOutrankingDigraph(t,Normalized=True)
     *------- Object instance description ------*
@@ -5245,7 +5245,7 @@ let us therefore reconsider the bipolar valued outranking digraph *g* modelling 
 
 Out of the 25 x 24 = 600 irreflexive movie pairs, digraph *g* contains 390 positively validated, 188 positively invalidated outranking situations, and 22 *indeterminate* outranking situations (see the zero-valued cells in Fig. 66).
 
-Let us now compute the normalized majority margin *r(<=>)*  of the equivalence between the marginal critic's pairwise ratings and the global Net-Flows ranking shown in the ordered heat map.
+Let us now compute the normalized majority margin *r(<=>)*  of the equivalence between the marginal critic's pairwise ratings and the global *Net-Flows* ranking shown in the ordered heat map (se Fig.64).
 
 >>> from linearOrders import NetFlowsOrder
 >>> nf = NetFlowsOrder(g)
@@ -5274,9 +5274,9 @@ r(SF<=>nf) = +0.103
 r(AS<=>nf) = +0.080
 r(FG<=>nf) = +0.027
 
-We hence recover the relational equivalence characteristic values shown in the third row of the table shown in Fig. 64. The global ranking represents obviously a rather balanced compromise with respect to all movie critics'opinions as there appears no valued negative correlation with anyone of them. The *Net-Flows* ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight.
+We hence recover the relational equivalence characteristic values shown in the third row of the table shown in Fig. 64. The global *Net-Flows* ranking represents obviously a rather balanced compromise with respect to all movie critics'opinions as there appears no valued negative correlation with anyone of them. The *Net-Flows* ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight.
 
-The ordinal correlation between the global *Net-Flows* ranking and the digraph *g* is furthermore computed as follows: 
+The ordinal correlation between the global *Net-Flows* ranking and the digraph *g* may be furthermore computed as follows: 
 
 >>> corr = g.computeOrdinalCorrelatin(nf)
 >>> tau = corr['correlation']
@@ -5285,23 +5285,23 @@ The ordinal correlation between the global *Net-Flows* ranking and the digraph *
 >>> print('Tau(g,nf) = %+.3f, d = %.3f, r(g<=>nf) = %+.3f' % (Tau,d,r))
 tau(g,nf) = +0.780, D = 0.300, r(g<=>nf) = +0.234
 
-We may notice that the correlation *tau* index between the *Net-Flows* ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence between the *nf* and the *g* digraph may, however, be misleading with a characteristics value of *only* +0.234; a value corresponding nevertheless to an epistemic majority support of nearly 62% of the movie critics' rating opinions.
+We notice that the correlation *tau* index between the *Net-Flows* ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence between the *nf* and the *g* digraph, with a characteristics value of *only* +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62% of the movie critics' rating opinions.
 
 It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the *Copeland* or the *Kohler* ranking rule.
 
 Illustrating preference divergences
 ...................................
 
-The valued relational equivalence index gives us a further measure for studying how **divergent** or not are the rating opinions expressed by the movie critics.
+The valued relational equivalence index gives us a further measure for studying how **divergent** appear the rating opinions expressed by the movie critics.
 
 .. image:: correlationTable.png
    :alt: Pairwise valued correlation of movie critics 
    :width: 600 px
    :align: center
 
-It is remarquable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes *r(x<=>y)* appear to be small, except the *diagonal* ones. The reflexive indexes *s(x<=>x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. how many movies a critic did actually evaluate. The lower *d* appears, the less movies a critic has evaluated. Critic *JPT*, the editor of the Graffiti magazine for instance, evaluated all but one (*d* = 24*23/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion (*d* = 10*9/600 = 0.15).
+It is remarquable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes *r(x<=>y)* appear to be of low value, except the *diagonal* ones. These reflexive indexes *s(x<=>x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. the *proportion* of pairs of movies each critic did evaluate. Critic *JPT* (the editor of the Graffiti magazine), for instance, evaluated all but one (*d* = 24*23/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion (*d* = 10*9/600 = 0.15).
 
-To get a picture of the actual divergence of rating opinions concerning **jointly seen** pairs of movies, we may develop a *Principal Component Analysis* ([10]_) of the *tau* correlation matrix. The 3D plot of the first 3 principal axes is shown below.
+To get a picture of the actual divergence of rating opinions concerning **jointly seen** pairs of movies, we may develop a *Principal Component Analysis* ([10]_) of the corresponding *tau* correlation matrix. The 3D plot of the first 3 principal axes is shown below.
 
 >>> g.export3DplotOfCriteriaCorrelation(ValuedCorrelation=False)
 
@@ -5310,15 +5310,15 @@ To get a picture of the actual divergence of rating opinions concerning **jointl
    :width: 400 px
    :align: center
 
-The first 3 principal axes support together about 70% of the total inertia. Most excentric and different in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written media appear opposed to the radio media.
+The first 3 principal axes support together about 70% of the total inertia. Most *excentric* and *opposed* in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written media appear most opposed to the radio media.
 
 
 Exploring the *better rated*  and the *as well as rated* opinions
 .................................................................
 
-In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of an outranking digraph (see introduction tutorial of the :py:mod:`digraphs` module).
+In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of the '*at least as well rated as*' opinions (see introduction tutorial of the :py:mod:`digraphs` module).
 
-Let us indeed first have a look at the pairwise asymmetric part of the *at least as well as rated*, namely the '*better rated than*' and '*less well rated than*' opinions of the movie critics. 
+Let us first have a look at the pairwise asymmetric part, namely the '*better rated than*' and '*less well rated than*' opinions of the movie critics. 
 
 >>> ag = AsymmetricPartialDigraph(g)
 >>> ag.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
@@ -5328,7 +5328,7 @@ Let us indeed first have a look at the pairwise asymmetric part of the *at least
    :width: 600 px
    :align: center
 
-We notice here that the *Net-Flows* ranking rule inverts in fact just three '*less well ranked than*' opinions and four '*better ranked than*' ones. A similar look at the symmetric part, the pairwise '*as well rated as*' opinions, suggests clearly a preordered structure in several *equivalently rated* classes.
+We notice here that the *Net-Flows* ranking rule inverts in fact just three '*less well ranked than*' opinions and four '*better ranked than*' ones. A similar look at the symmetric part, the pairwise '*as well rated as*' opinions, suggests a preordered preference structure in several *equivalently rated* classes.
 
 >>> sg = SymmetricPartialDigraph(g)
 >>> sg.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
@@ -5338,7 +5338,7 @@ We notice here that the *Net-Flows* ranking rule inverts in fact just three '*le
    :width: 600 px
    :align: center
 
-Such a preorder of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we fusion by epistemic conjunction the preorder obtained from iteratively extracted *dominant kernels* (best remaining choices) with the preorder obtained by the iteratively extracted *absorbent kernels* (worst remaining choices). We operate herefore on the asymmetric '*better rated than*', i.e. the *codual* ([11]_) of the '*at least as well rated as*' opinions.
+Such a preordering of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -best remaining choices- and *absorbent kernels* -worst remaining choices- (see the :ref:`Kernel-Tutorial-label` tutorial). We operate herefore on the asymmetric '*better rated than*', i.e. the *codual* ([11]_) of the '*at least as well rated as*' opinions.
 
 >>> from weakOrders import RankingByChoosingDigraph
 >>> rbc = RankingByChoosingDigraph(g,CoDual=True)
@@ -5353,8 +5353,8 @@ Ranking by Choosing and Rejecting
      3rd Worst Choice ['mv_GH', 'mv_MB', 'mv_RG']
    2nd Worst Choice ['mv_DF', 'mv_DJ', 'mv_FF', 'mv_GG']
  1st Worst Choice ['mv_BI', 'mv_DI', 'mv_HP', 'mv_TF']
-Ordinal bipolar correlation with outranking relation: tau = +0.516 (d = 0.27)
-Ordinal bipolar correlation with median cut outranking relation: tau = +0.452 (d = 0.94)
+
+Other relational clustering methods, as provided for instance by the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class, may be found in the :py:mod:`sortingDigraphs` module. 
 
 Back to :ref:`Tutorial-label`
 
@@ -5449,8 +5449,8 @@ Bibliography
 
 .. [8] See https://hpc.uni.lu/systems/gaia/
 
-.. [9] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file *graffiti07.xml* (XMCDA-2.0 Format) in the *examples/Graffiti* directory of the Digraph3 ressources.
+.. [9] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file *graffiti07.xml* (XMCDA-2.0 Format) in the *examples/Graffiti* directory of the Digraph3 ressources.       
 
-.. [10] The 3D PCA plot method requires a running *R statistics software*  (https://www.r-project.org/) installation.
+.. [10] The 3D PCA plot method requires a running *R statistics software*  (https://www.r-project.org/) installation and the Calmat matrix calculator (see the calmat directory in the Digraph3 ressources)
 
 .. [11] A *kernel* in a digraph *g* is a *clique* in the dual digraph *-g*.

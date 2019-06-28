@@ -7826,7 +7826,7 @@ best covered terminal kernel</span></p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="n">EquivalenceDigraph</span><span class="p">(</span><span class="n">R1</span><span class="p">,</span><span class="n">R2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">E</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="go">* ---- Relation Table -----</span>
-<span class="go">  S   |  &#39;a1&#39;     &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;</span>
+<span class="go">r(&lt;=&gt;)|  &#39;a1&#39;     &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;</span>
 <span class="go">------|-------------------------------------------</span>
 <span class="go"> &#39;a1&#39; |    -     -1.00    1.00   -1.00    1.00</span>
 <span class="go"> &#39;a2&#39; |  -1.00     -     -1.00    1.00   -1.00</span>
@@ -7868,7 +7868,7 @@ best covered terminal kernel</span></p>
 22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R1</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R1</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="go">* ---- Relation Table -----</span>
-<span class="go">  S   |   &#39;a1&#39;    &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;</span>
+<span class="go"> r(R1)|   &#39;a1&#39;    &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;</span>
 <span class="go">------|-------------------------------------------</span>
 <span class="go"> &#39;a1&#39; |    -     -0.66    0.44    0.94   -0.84</span>
 <span class="go"> &#39;a2&#39; |  -0.36     -     -0.70    0.26    0.94</span>
@@ -7879,7 +7879,7 @@ best covered terminal kernel</span></p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R2</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R2</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="go">* ---- Relation Table -----</span>
-<span class="go">  S   |   &#39;a1&#39;    &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;</span>
+<span class="go"> r(R2)|   &#39;a1&#39;    &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;</span>
 <span class="go">------|-------------------------------------------</span>
 <span class="go"> &#39;a1&#39; |    -     -0.86   -0.78   -0.80   -0.08</span>
 <span class="go"> &#39;a2&#39; |  -0.58     -      0.88    0.70   -0.22</span>
@@ -7903,7 +7903,7 @@ best covered terminal kernel</span></p>
 11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="n">EquivalenceDigraph</span><span class="p">(</span><span class="n">R1</span><span class="p">,</span><span class="n">R2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="go">* ---- Relation Table -----</span>
-<span class="go">  S   |  &#39;a1&#39;     &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;</span>
+<span class="go">r(&lt;=&gt;)|  &#39;a1&#39;     &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;</span>
 <span class="go">------|-------------------------------------------</span>
 <span class="go"> &#39;a1&#39; |   -      0.66    -0.44   -0.80    0.08</span>
 <span class="go"> &#39;a2&#39; |  0.36     -      -0.70    0.26   -0.22</span>
@@ -7939,7 +7939,7 @@ best covered terminal kernel</span></p>
 <li><em>d</em> = <em>D</em> / <em>n(n-1)</em>: The normalized determination of the corresponding pairwise relational equivalence statements, in fact de determinateness of the relational equivalence digraph.</li>
 </ul>
 </div></blockquote>
-<p>We have thus successfully <strong>out-factored</strong> the <em>determination</em> effect from the <em>correlation</em> effect. With completely determined relations, <em>tau(R1,R2)</em> = <em>r(R&lt;=&gt;R2)</em>. By convention, we set the ordinal correlation with a <em>completely indeterminate</em> relation, i.e. when <em>D = 0</em>, to the <em>indeterminate</em> correlation value 0.0. With <em>uniformly</em> chosen random <em>r</em>-valued relations, the <strong>expected</strong> <em>tau</em> index is <strong>0.0</strong>, denoting in fact an <strong>indeterminate</strong> correlation. The corresponding expected normalized determination <em>d</em> is about 0.333.</p>
+<p>We have thus successfully <strong>out-factored</strong> the <em>determination</em> effect from the <em>correlation</em> effect. With completely determined relations, <em>tau(R1,R2)</em> = <em>r(R1&lt;=&gt;R2)</em>. By convention, we set the ordinal correlation with a <em>completely indeterminate</em> relation, i.e. when <em>D = 0</em>, to the <em>indeterminate</em> correlation value 0.0. With <em>uniformly</em> chosen random <em>r</em>-valued relations, the <strong>expected</strong> <em>tau</em> index is <strong>0.0</strong>, denoting in fact an <strong>indeterminate</strong> correlation. The corresponding expected normalized determination <em>d</em> is about 0.333.</p>
 <p>We may verify these relations with help of the corresponding equivalence digraph <em>eq</em> (see above).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -7960,7 +7960,7 @@ best covered terminal kernel</span></p>
 <span class="go">r(R1&lt;=&gt;R2) = +0.026, d = 0.356, tau = +0.073</span>
 </pre></div>
 </td></tr></table></div>
-<p>In general we simply use the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeOrdinalCorrelation" title="digraphs.Digraph.computeOrdinalCorrelation"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeOrdinalCorrelation()</span></code></a> method which renders a dictionary with a ‘correlation’ (<em>tau</em>) and a ‘determination’ (<em>d</em>) attribute. We may recover <em>r(&lt;=&gt;)</em> by multiplying <em>tau</em> with <em>d</em>.</p>
+<p>In general we simply use the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeOrdinalCorrelation" title="digraphs.Digraph.computeOrdinalCorrelation"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeOrdinalCorrelation()</span></code></a> method which renders a dictionary with a ‘<em>correlation</em>’ (<em>tau</em>) and a ‘<em>determination</em>’ (<em>d</em>) attribute. We may recover <em>r(&lt;=&gt;)</em> by multiplying <em>tau</em> with <em>d</em>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -7978,7 +7978,7 @@ best covered terminal kernel</span></p>
 </div>
 <div class="section" id="fitness-of-ranking-heuristics">
 <h4>Fitness of ranking heuristics<a class="headerlink" href="#fitness-of-ranking-heuristics" title="Permalink to this headline">¶</a></h4>
-<p>let us therefore reconsider the bipolar valued outranking digraph <em>g</em> modelling the pairwise global ‘<em>at least as well rated as</em>’ relation among the 25 movies seen above.</p>
+<p>We reconsider the bipolar valued outranking digraph <em>g</em> modelling the pairwise global ‘<em>at least as well rated as</em>’ relation among the 25 movies seen above.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8007,7 +8007,7 @@ best covered terminal kernel</span></p>
 </pre></div>
 </td></tr></table></div>
 <p>Out of the 25 x 24 = 600 irreflexive movie pairs, digraph <em>g</em> contains 390 positively validated, 188 positively invalidated outranking situations, and 22 <em>indeterminate</em> outranking situations (see the zero-valued cells in Fig. 66).</p>
-<p>Let us now compute the normalized majority margin <em>r(&lt;=&gt;)</em>  of the equivalence between the marginal critic’s pairwise ratings and the global Net-Flows ranking shown in the ordered heat map.</p>
+<p>Let us now compute the normalized majority margin <em>r(&lt;=&gt;)</em>  of the equivalence between the marginal critic’s pairwise ratings and the global <em>Net-Flows</em> ranking shown in the ordered heat map (se Fig.64).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8061,8 +8061,8 @@ best covered terminal kernel</span></p>
 <span class="go">r(FG&lt;=&gt;nf) = +0.027</span>
 </pre></div>
 </td></tr></table></div>
-<p>We hence recover the relational equivalence characteristic values shown in the third row of the table shown in Fig. 64. The global ranking represents obviously a rather balanced compromise with respect to all movie critics’opinions as there appears no valued negative correlation with anyone of them. The <em>Net-Flows</em> ranking apparently takes also correctly in account that the journalist <em>JH</em>, a locally renowned movie critic, shows a higher significance weight.</p>
-<p>The ordinal correlation between the global <em>Net-Flows</em> ranking and the digraph <em>g</em> is furthermore computed as follows:</p>
+<p>We hence recover the relational equivalence characteristic values shown in the third row of the table shown in Fig. 64. The global <em>Net-Flows</em> ranking represents obviously a rather balanced compromise with respect to all movie critics’opinions as there appears no valued negative correlation with anyone of them. The <em>Net-Flows</em> ranking apparently takes also correctly in account that the journalist <em>JH</em>, a locally renowned movie critic, shows a higher significance weight.</p>
+<p>The ordinal correlation between the global <em>Net-Flows</em> ranking and the digraph <em>g</em> may be furthermore computed as follows:</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -8076,39 +8076,39 @@ best covered terminal kernel</span></p>
 <span class="go">tau(g,nf) = +0.780, D = 0.300, r(g&lt;=&gt;nf) = +0.234</span>
 </pre></div>
 </td></tr></table></div>
-<p>We may notice that the correlation <em>tau</em> index between the <em>Net-Flows</em> ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the <em>r</em> -valued relational equivalence between the <em>nf</em> and the <em>g</em> digraph may, however, be misleading with a characteristics value of <em>only</em> +0.234; a value corresponding nevertheless to an epistemic majority support of nearly 62% of the movie critics’ rating opinions.</p>
+<p>We notice that the correlation <em>tau</em> index between the <em>Net-Flows</em> ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the <em>r</em> -valued relational equivalence between the <em>nf</em> and the <em>g</em> digraph, with a characteristics value of <em>only</em> +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62% of the movie critics’ rating opinions.</p>
 <p>It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the <em>Copeland</em> or the <em>Kohler</em> ranking rule.</p>
 </div>
 <div class="section" id="illustrating-preference-divergences">
 <h4>Illustrating preference divergences<a class="headerlink" href="#illustrating-preference-divergences" title="Permalink to this headline">¶</a></h4>
-<p>The valued relational equivalence index gives us a further measure for studying how <strong>divergent</strong> or not are the rating opinions expressed by the movie critics.</p>
+<p>The valued relational equivalence index gives us a further measure for studying how <strong>divergent</strong> appear the rating opinions expressed by the movie critics.</p>
 <a class="reference internal image-reference" href="_images/correlationTable.png"><img alt="Pairwise valued correlation of movie critics" class="align-center" src="_images/correlationTable.png" style="width: 600px;" /></a>
-<p>It is remarquable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes <em>r(x&lt;=&gt;y)</em> appear to be small, except the <em>diagonal</em> ones. The reflexive indexes <em>s(x&lt;=&gt;x)</em> would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score <em>d</em>, i.e. how many movies a critic did actually evaluate. The lower <em>d</em> appears, the less movies a critic has evaluated. Critic <em>JPT</em>, the editor of the Graffiti magazine for instance, evaluated all but one (<em>d</em> = 24*23/600 = 0.92), whereas critic <em>FG</em> evaluated only 10 movies among the 25 in discussion (<em>d</em> = 10*9/600 = 0.15).</p>
-<p>To get a picture of the actual divergence of rating opinions concerning <strong>jointly seen</strong> pairs of movies, we may develop a <em>Principal Component Analysis</em> (<a class="footnote-reference" href="#id100" id="id87">[10]</a>) of the <em>tau</em> correlation matrix. The 3D plot of the first 3 principal axes is shown below.</p>
+<p>It is remarquable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes <em>r(x&lt;=&gt;y)</em> appear to be of low value, except the <em>diagonal</em> ones. These reflexive indexes <em>s(x&lt;=&gt;x)</em> would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score <em>d</em>, i.e. the <em>proportion</em> of pairs of movies each critic did evaluate. Critic <em>JPT</em> (the editor of the Graffiti magazine), for instance, evaluated all but one (<em>d</em> = 24*23/600 = 0.92), whereas critic <em>FG</em> evaluated only 10 movies among the 25 in discussion (<em>d</em> = 10*9/600 = 0.15).</p>
+<p>To get a picture of the actual divergence of rating opinions concerning <strong>jointly seen</strong> pairs of movies, we may develop a <em>Principal Component Analysis</em> (<a class="footnote-reference" href="#id100" id="id87">[10]</a>) of the corresponding <em>tau</em> correlation matrix. The 3D plot of the first 3 principal axes is shown below.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">export3DplotOfCriteriaCorrelation</span><span class="p">(</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <a class="reference internal image-reference" href="_images/correlationPCA.png"><img alt="3D plot of criteria correlation PCA" class="align-center" src="_images/correlationPCA.png" style="width: 400px;" /></a>
-<p>The first 3 principal axes support together about 70% of the total inertia. Most excentric and different in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written media appear opposed to the radio media.</p>
+<p>The first 3 principal axes support together about 70% of the total inertia. Most <em>excentric</em> and <em>opposed</em> in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written media appear most opposed to the radio media.</p>
 </div>
 <div class="section" id="exploring-the-better-rated-and-the-as-well-as-rated-opinions">
 <h4>Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions<a class="headerlink" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions" title="Permalink to this headline">¶</a></h4>
-<p>In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of an outranking digraph (see introduction tutorial of the <a class="reference internal" href="techDoc.html#module-digraphs" title="digraphs"><code class="xref py py-mod docutils literal"><span class="pre">digraphs</span></code></a> module).</p>
-<p>Let us indeed first have a look at the pairwise asymmetric part of the <em>at least as well as rated</em>, namely the ‘<em>better rated than</em>’ and ‘<em>less well rated than</em>’ opinions of the movie critics.</p>
+<p>In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of the ‘<em>at least as well rated as</em>’ opinions (see introduction tutorial of the <a class="reference internal" href="techDoc.html#module-digraphs" title="digraphs"><code class="xref py py-mod docutils literal"><span class="pre">digraphs</span></code></a> module).</p>
+<p>Let us first have a look at the pairwise asymmetric part, namely the ‘<em>better rated than</em>’ and ‘<em>less well rated than</em>’ opinions of the movie critics.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">(),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <a class="reference internal image-reference" href="_images/asymmetricPart.png"><img alt="asymmetric part of graffiti07 digraph" class="align-center" src="_images/asymmetricPart.png" style="width: 600px;" /></a>
-<p>We notice here that the <em>Net-Flows</em> ranking rule inverts in fact just three ‘<em>less well ranked than</em>’ opinions and four ‘<em>better ranked than</em>’ ones. A similar look at the symmetric part, the pairwise ‘<em>as well rated as</em>’ opinions, suggests clearly a preordered structure in several <em>equivalently rated</em> classes.</p>
+<p>We notice here that the <em>Net-Flows</em> ranking rule inverts in fact just three ‘<em>less well ranked than</em>’ opinions and four ‘<em>better ranked than</em>’ ones. A similar look at the symmetric part, the pairwise ‘<em>as well rated as</em>’ opinions, suggests a preordered preference structure in several <em>equivalently rated</em> classes.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span> <span class="o">=</span> <span class="n">SymmetricPartialDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">(),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <a class="reference internal image-reference" href="_images/symmetricPart.png"><img alt="symmetric part of graffiti07 digraph" class="align-center" src="_images/symmetricPart.png" style="width: 600px;" /></a>
-<p>Such a preorder of the movies may, for instance, be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeRankingByChoosing" title="digraphs.Digraph.computeRankingByChoosing"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeRankingByChoosing()</span></code></a> method, where we fusion by epistemic conjunction the preorder obtained from iteratively extracted <em>dominant kernels</em> (best remaining choices) with the preorder obtained by the iteratively extracted <em>absorbent kernels</em> (worst remaining choices). We operate herefore on the asymmetric ‘<em>better rated than</em>’, i.e. the <em>codual</em> (<a class="footnote-reference" href="#id101" id="id88">[11]</a>) of the ‘<em>at least as well rated as</em>’ opinions.</p>
+<p>Such a preordering of the movies may, for instance, be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeRankingByChoosing" title="digraphs.Digraph.computeRankingByChoosing"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeRankingByChoosing()</span></code></a> method, where we iteratively extract <em>dominant kernels</em> -best remaining choices- and <em>absorbent kernels</em> -worst remaining choices- (see the <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a> tutorial). We operate herefore on the asymmetric ‘<em>better rated than</em>’, i.e. the <em>codual</em> (<a class="footnote-reference" href="#id101" id="id88">[11]</a>) of the ‘<em>at least as well rated as</em>’ opinions.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8121,9 +8121,7 @@ best covered terminal kernel</span></p>
 10
 11
 12
-13
-14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
 <span class="go">Ranking by Choosing and Rejecting</span>
@@ -8136,10 +8134,9 @@ best covered terminal kernel</span></p>
 <span class="go">     3rd Worst Choice [&#39;mv_GH&#39;, &#39;mv_MB&#39;, &#39;mv_RG&#39;]</span>
 <span class="go">   2nd Worst Choice [&#39;mv_DF&#39;, &#39;mv_DJ&#39;, &#39;mv_FF&#39;, &#39;mv_GG&#39;]</span>
 <span class="go"> 1st Worst Choice [&#39;mv_BI&#39;, &#39;mv_DI&#39;, &#39;mv_HP&#39;, &#39;mv_TF&#39;]</span>
-<span class="go">Ordinal bipolar correlation with outranking relation: tau = +0.516 (d = 0.27)</span>
-<span class="go">Ordinal bipolar correlation with median cut outranking relation: tau = +0.452 (d = 0.94)</span>
 </pre></div>
 </td></tr></table></div>
+<p>Other relational clustering methods, as provided for instance by the <a class="reference internal" href="techDoc.html#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> class, may be found in the <a class="reference internal" href="techDoc.html#module-sortingDigraphs" title="sortingDigraphs"><code class="xref py py-mod docutils literal"><span class="pre">sortingDigraphs</span></code></a> module.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>
 </div>
@@ -8402,7 +8399,7 @@ best covered terminal kernel</span></p>
 <table class="docutils footnote" frame="void" id="id100" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id87">[10]</a></td><td>The 3D PCA plot method requires a running <em>R statistics software</em>  (<a class="reference external" href="https://www.r-project.org/">https://www.r-project.org/</a>) installation.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id87">[10]</a></td><td>The 3D PCA plot method requires a running <em>R statistics software</em>  (<a class="reference external" href="https://www.r-project.org/">https://www.r-project.org/</a>) installation and the Calmat matrix calculator (see the calmat directory in the Digraph3 ressources)</td></tr>
 </tbody>
 </table>
 <table class="docutils footnote" frame="void" id="id101" rules="none">
