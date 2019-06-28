@@ -29,7 +29,10 @@ class PerformanceQuantiles(PerformanceTableau):
     Implements the incremental performance quantiles representation of a
     given performance tableau.
 
-    *NumberOfBins* may be either 'quartiles', 'deciles', ... or 'n', the integer number of bins.
+    *Parameters*:
+
+        * *perfTab*: may be either a PerformanceTableau object or the name of a previously saved PerformanceQuantiles instance
+        * *NumberOfBins* may be either 'quartiles', 'deciles', ... or 'n', the integer number of bins.
 
     Example python session:
         >>> import performanceQuantiles

@@ -191,14 +191,14 @@ class Digraph(object):
         Default presentation method for Digraph instances.
         """
         reprString = '*------- Digraph instance description ------*\n'
-        reprString += 'Instance class   : %s\n' % self.__class__.__name__
-        reprString += 'Instance name    : %s\n' % self.name
-        reprString += 'Digraph Order      : %d\n' % self.order
-        reprString += 'Digraph Size       : %d\n' % self.computeSize()
-        reprString += 'Valuation domain : [%.2f - %.2f]\n'\
+        reprString += 'Instance class      : %s\n' % self.__class__.__name__
+        reprString += 'Instance name       : %s\n' % self.name
+        reprString += 'Digraph Order       : %d\n' % self.order
+        reprString += 'Digraph Size        : %d\n' % self.computeSize()
+        reprString += 'Valuation domain    : [%.2f;%.2f]\n'\
                       % (self.valuationdomain['min'],self.valuationdomain['max'])
-        reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()
-        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())
+        reprString += 'Determinateness (%%) : %.2f\n' % self.computeDeterminateness(InPercents=True)
+        reprString += 'Attributes          : %s\n' % list(self.__dict__.keys())
        
         return reprString
     

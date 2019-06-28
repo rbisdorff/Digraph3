@@ -3869,13 +3869,16 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         Default presentation method for BipolarOutrankingDigraph instance.
         """
         reprString = '*------- Object instance description ------*\n'
-        reprString += 'Instance class   : %s\n' % self.__class__.__name__
-        reprString += 'Instance name    : %s\n' % self.name
-        reprString += '# Actions        : %d\n' % self.order
-        reprString += '# Criteria       : %d\n' % len(self.criteria)
-        reprString += 'Size             : %d\n' % self.computeSize()
-        reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()
-        reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
+        reprString += 'Instance class      : %s\n' % self.__class__.__name__
+        reprString += 'Instance name       : %s\n' % self.name
+        reprString += '# Actions           : %d\n' % self.order
+        reprString += '# Criteria          : %d\n' % len(self.criteria)
+        reprString += 'Size                : %d\n' % self.computeSize()
+        reprString += 'Determinateness (%%) : %.2f\n' % self.computeDeterminateness(InPercents=True)
+        reprString += 'Valuation domain    : [%.2f;%.2f]\n'\
+                      % (self.valuationdomain['min'],self.valuationdomain['max'])
+        #reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
+        reprString += 'Attributes          : %s\n' % list(self.__dict__.keys())
         try:
             val1 = self.runTimes['totalTime']
             val2 = self.runTimes['dataInput']
