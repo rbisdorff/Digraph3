@@ -5361,7 +5361,7 @@ Digraph *kernels* is the topic of the next pearl of bipolar epistemic logic.
 Bipolar valued kernel membership characteristic vectors
 -------------------------------------------------------
 
-In the :ref:`Kernel-Tutorial-label` turorial we have discussed the computation of *kernels* in bipolar outranking digraphs. Yet, we did not tackle the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors.
+In the :ref:`Kernel-Tutorial-label` turorial we discuss the computation of *kernels* in bipolar valued digraphs. Yet, we did not tackle the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors.
 
 Under Construction.
 
