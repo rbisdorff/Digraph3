@@ -5354,14 +5354,10 @@ Ranking by Choosing and Rejecting
    2nd Worst Choice ['mv_DF', 'mv_DJ', 'mv_FF', 'mv_GG']
  1st Worst Choice ['mv_BI', 'mv_DI', 'mv_HP', 'mv_TF']
 
-Other relational clustering methods, as provided for instance by the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class, may be found in the :py:mod:`sortingDigraphs` module. 
-
-Digraph *kernels* is the topic of the next pearl of bipolar epistemic logic.
+In the :ref:`Kernel-Tutorial-label` turorial we thoroughly discuss the computation of *kernels* in bipolar valued digraphs. Yet, we do not tackle there the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors. This is the topic for the next pearl of bipolar epistemic logic.
 
 Bipolar valued kernel membership characteristic vectors
 -------------------------------------------------------
-
-In the :ref:`Kernel-Tutorial-label` turorial we discuss the computation of *kernels* in bipolar valued digraphs. Yet, we did not tackle the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors.
 
 Under Construction.
 
