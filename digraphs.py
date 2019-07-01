@@ -3456,6 +3456,7 @@ class Digraph(object):
 
 
     def showHTMLRelationTable(self,actionsList=None,\
+                              relation=None,
                               IntegerValues=False,\
                               ndigits=2,\
                               Colored=True,\
@@ -3469,6 +3470,7 @@ class Digraph(object):
         fileName = '/tmp/relationMap.html'
         fo = open(fileName,'w')
         fo.write(self._htmlRelationTable(actionsSubset=actionsList,
+                                         relation=relation,
                                         isColored=Colored,
                                         ndigits=ndigits,
                                         hasIntegerValues=IntegerValues,
@@ -3481,6 +3483,7 @@ class Digraph(object):
         
         
     def _htmlRelationTable(self,tableTitle='Valued Relation Table',
+                           relation=None,
                           relationName='r(x R y)',
                           ndigits=2,
                           hasIntegerValues=False,
@@ -3497,6 +3500,8 @@ class Digraph(object):
             actions = self.actions
         else:
             actions = actionsSubset
+        if relation == None:
+            relation = self.relation
         s = ''
         s += '<h1>%s</h1>' % tableTitle
         s += '<table border="1">'
@@ -3545,58 +3550,58 @@ class Digraph(object):
                     if ReflexiveTerms:
                         if hasIntegerValuation:
                             if isColored:
-                                if self.relation[x[1]][y[1]] > Med:
-                                    s += '<td bgcolor="#ddffdd" align="right">%d</td>' % (self.relation[x[1]][y[1]])
-                                elif self.relation[x[1]][y[1]] < Med:
-                                    s += '<td bgcolor="#ffddff"  align="right">%d</td>' % (self.relation[x[1]][y[1]])
+                                if relation[x[1]][y[1]] > Med:
+                                    s += '<td bgcolor="#ddffdd" align="right">%d</td>' % (relation[x[1]][y[1]])
+                                elif relation[x[1]][y[1]] < Med:
+                                    s += '<td bgcolor="#ffddff"  align="right">%d</td>' % (relation[x[1]][y[1]])
                                 else:
-                                    s += '<td bgcolor="#dddddd" align="right" >%d</td>' % (self.relation[x[1]][y[1]])
+                                    s += '<td bgcolor="#dddddd" align="right" >%d</td>' % (relation[x[1]][y[1]])
                             else:
-                                s += '<td>%d</td>' % (self.relation[x[1]][y[1]])
+                                s += '<td>%d</td>' % (relation[x[1]][y[1]])
                         else:
                             ndigitsFormat = '%%2.%df' % ndigits
                             if isColored:
-                                if self.relation[x[1]][y[1]] > Med:
+                                if relation[x[1]][y[1]] > Med:
                                     formatStr = '<td bgcolor="#ddffdd" align="right">%s</td>' % ndigitsFormat 
-                                    s += formatStr % (self.relation[x[1]][y[1]])
-                                elif self.relation[x[1]][y[1]] < Med:
+                                    s += formatStr % (relation[x[1]][y[1]])
+                                elif relation[x[1]][y[1]] < Med:
                                     formatStr = '<td  bgcolor="#ffddff" align="right">%s</td>' % ndigitsFormat
-                                    s +=  formatStr % (self.relation[x[1]][y[1]])
+                                    s +=  formatStr % (relation[x[1]][y[1]])
                                 else:
                                     formatStr = '<td  bgcolor="#dddddd" align="right">%s</td>' % ndigitsFormat
-                                    s += formatStr % (self.relation[x[1]][y[1]])
+                                    s += formatStr % (relation[x[1]][y[1]])
                             else:
                                 formatStr = '<td>%s</td>' % ndigitsFormat
-                                s += formatStr % (self.relation[x[1]][y[1]])
+                                s += formatStr % (relation[x[1]][y[1]])
                     else:
                         s += '<td bgcolor="#eeeeee" align="center"> &ndash; </td>'
                     
                 else:
                     if hasIntegerValuation:
                         if isColored:
-                            if self.relation[x[1]][y[1]] > Med:
-                                s += '<td bgcolor="#ddffdd" align="right">%d</td>' % (self.relation[x[1]][y[1]])
-                            elif self.relation[x[1]][y[1]] < Med:
-                                s += '<td bgcolor="#ffddff"  align="right">%d</td>' % (self.relation[x[1]][y[1]])
+                            if relation[x[1]][y[1]] > Med:
+                                s += '<td bgcolor="#ddffdd" align="right">%d</td>' % (relation[x[1]][y[1]])
+                            elif relation[x[1]][y[1]] < Med:
+                                s += '<td bgcolor="#ffddff"  align="right">%d</td>' % (relation[x[1]][y[1]])
                             else:
-                                s += '<td bgcolor="#dddddd" align="right" >%d</td>' % (self.relation[x[1]][y[1]])
+                                s += '<td bgcolor="#dddddd" align="right" >%d</td>' % (relation[x[1]][y[1]])
                         else:
-                            s += '<td>%d</td>' % (self.relation[x[1]][y[1]])
+                            s += '<td>%d</td>' % (relation[x[1]][y[1]])
                     else:
                         ndigitsFormat = '%%2.%df' % ndigits
                         if isColored:
-                            if self.relation[x[1]][y[1]] > Med:
+                            if relation[x[1]][y[1]] > Med:
                                 formatStr = '<td bgcolor="#ddffdd" align="right">%s</td>' % ndigitsFormat 
-                                s += formatStr % (self.relation[x[1]][y[1]])
-                            elif self.relation[x[1]][y[1]] < Med:
+                                s += formatStr % (relation[x[1]][y[1]])
+                            elif relation[x[1]][y[1]] < Med:
                                 formatStr = '<td  bgcolor="#ffddff" align="right">%s</td>' % ndigitsFormat
-                                s +=  formatStr % (self.relation[x[1]][y[1]])
+                                s +=  formatStr % (relation[x[1]][y[1]])
                             else:
                                 formatStr = '<td  bgcolor="#dddddd" align="right">%s</td>' % ndigitsFormat
-                                s += formatStr % (self.relation[x[1]][y[1]])
+                                s += formatStr % (relation[x[1]][y[1]])
                         else:
                             formatStr = '<td>%s</td>' % ndigitsFormat
-                            s += formatStr % (self.relation[x[1]][y[1]])
+                            s += formatStr % (relation[x[1]][y[1]])
             s += '</tr>'
         s += '</table>'
         if hasIntegerValuation:
@@ -7767,8 +7772,8 @@ class Digraph(object):
             veclowa = vec0_a
             vechigha = vec1_a
             if Comments:
-                print('initial veclowa',veclowa)
-                print('initial vechigha', vechigha)
+                print('initial veclow',veclowa)
+                print('initial vechigh', vechigha)
             it = 1
             while veclowa != vechigha and it < 2*n*n:
                 veclowb = temp.matmult2(mat,veclowa)
@@ -7779,15 +7784,17 @@ class Digraph(object):
                 veclowa = veclow
                 vechigha = vechigh
                 if Comments:
-                    print(it, 'th veclowa  :',veclowa)
-                    print(it, 'th vechigha :',vechigha)
+                    print(it, 'th veclow  :',veclowa)
+                    print(it, 'th vechigh :',vechigha)
                 it += 1
             if Comments:
-                print('final veclowa  :', veclowa)
-                print('final vechigha :', vechigha)
+                print('final veclow  :', veclowa)
+                print('final vechigh :', vechigha)
                 print('#iterations    :', it)
             #domvec = temp.sharpvec(veclowa,vechigha)
             domvecsharp = temp.sharpvec(veclowa,vechigha)
+            if Comments:
+                print('final result   ;',domvecsharp)
             domvec = [(domvecsharp[i],str(actions[i])) for i in range(n)]
             domvec.sort(reverse=True)
             determ = temp.determinateness(domvec)
