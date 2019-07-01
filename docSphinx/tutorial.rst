@@ -5362,19 +5362,19 @@ Bipolar valued kernel membership characteristic vectors
 *Berge*'s Kernel Equation Systems
 .................................
 
-Let *G(X,R)* be a crisp irreflixive digraph defined on a finite set *X* of nodes and where *R* is the corresponding {-1,+1}-valued adjacency matrix. Let *Y* be the {-1,+1}-valued membership characteristic (row) vector of a choice in *X* that satisfies the following equation system
+Let *G(X,R)* be a crisp irreflixive digraph defined on a finite set *X* of nodes and where *R* is the corresponding {-1,+1}-valued adjacency matrix. Let *Y* be the {-1,+1}-valued membership characteristic (row) vector of a choice in *X*. When *Y* satisfies the following equation system
 
      :math:`Y \circ R \; = \; -Y\;,`
 
 where for all *x* in *X*,
 
-     :math:`(Y \circ R)(x) \;=\; \max_{y \in X, x \neq y} \big ( \min(Y(x), R(x,y))\big)\;,`
+     :math:`(Y \circ R)(x) \;=\; \max_{y \in X, x \neq y} \big ( \min(Y(x), R(x,y))\big)\;.`
 
-characterizes an *initial kernel* ([BER-1958]_). Tranposing the characteristic vector characterizes similarly a *terminal kernel*
+than *Y* characterizes an *initial kernel* ([BER-1958]_). Tranposing the characteristic vector characterizes similarly a *terminal kernel*
 
      :math:`R \circ Y^t \; = \; -Y^t\;.`
 
-Let us verify this proporty on a tiny example.
+Let us verify this result on a tiny example.
 
 >>> from digraphs import *
 >>> g = RandomDigraph(order=3,seed=1)
@@ -5400,9 +5400,9 @@ Absorbent preKernels :
    covered      :  1.000
 >>> 
 
-It is easy to verify now that, for instance, the characteristic vector *[-1, -1, +1]* satisfies the initial kernel equation system; *'a3'* gives an initial kernel. Similarly, the characteristic vector *[-1, +1, -1]* verifies indeed the terminal kernel equation system; 
+It is easy to verify now that, for instance, the characteristic vector *[-1, -1, +1]* satisfies the initial kernel equation system; *'a3'* gives an initial kernel. Similarly, the characteristic vector *[-1, +1, -1]* verifies indeed the terminal kernel equation system and hence 'a2' gives a terminal kernel.
 
-We succeeded in generalizing *Berge*'s kernel equation systems to genuine bipolar-valued digraphs ([BIS-2006a]_). The constructive proof, found by M. Pirlot, provided by the way the following fixpoint equation
+We succeeded now in generalizing *Berge*'s kernel equation systems to genuine bipolar-valued digraphs ([BIS-2006a]_). The constructive proof, found by M. Pirlot, provided by the way the following fixpoint equation
 
      :math:`T(Y) \; := \; -(Y \circ R) = Y,`
 
@@ -5411,7 +5411,7 @@ that may be used for computing bipolar-valued kernel membership vectors.
 Solving bipolar-valued kernel equation systems
 ..............................................
 
-Von Neumann [XXX} showed indeed that the initial kernel *Y* of a digraph *G(X, R)* corresponds to the followng dual bipolar fixpoint equation
+Von Neumann ([SCH-1985]_) showed indeed that the initial kernel *Y* of a digraph *G(X, R)* corresponds to the following dual bipolar fixpoint equation
 
      :math:`T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;.`
 
@@ -5483,9 +5483,9 @@ dominant kernel :  [0, 0, 0, 1, 0, 0, 0, 0]
 absorbent kernel:  [0, 0, 1, 0, 0, 0, 0, 0]
 Execution time  : 0.00022 sec.
 
-The codual outranking digraph, modelling a strict outranking relation, admits an initial kernel *['a1','a2','a4']* and a terminal one *['a3','a7']*.
+The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel *['a1','a2','a4']* and a terminal one *['a3','a7']* (see the indeterminate independance qualifications).
 
-Let us compute the inital kernel restricted adjacency table.
+Let us compute the inital pre-kernel restricted adjacency table.
  
 >>> k1Relation = gcd.domkernelrestrict(['a1','a2','a4'])
 >>> gcd.showHTMLRelationTable(
@@ -5500,7 +5500,7 @@ Let us compute the inital kernel restricted adjacency table.
 
    Initial kernel ['a1','a2','a4'] restricted adjacency table
 
-We first notice that indeed this initil kernel is only weakly independent: The outranking situation between 'a4' and 'a1' appears indeterminate. The corresponding initial kernel membership characteristic vector may be computed as follows.
+We first notice that this initial pre-kernel is indeed only weakly independent: The outranking situation between '*a4*' and '*a1*' appears indeterminate. The corresponding initial pre-kernel membership characteristic vector may be computed as follows.
 
 >>> gcd.computeGoodChoices(Comments=True)
 --> kernel: frozenset({'a1', 'a4', 'a2'})
@@ -5525,9 +5525,9 @@ initial high vector
 4th high vector
 [0.0000, +0.2093, -0.2093, +0.2093, -0.2093, -0.0698, -0.2093]
 
-A unique stable kernel membership vector *Y* is attained at the fourth iteration with positive members 'a2': +0.21 and 'a4': +0.21 (60.5% criteria significance majority), 'a1': 0.00 being an ambigous potential member. 'a3','a5','a6' and 'a7' are positive non members of this outranking kernel.
+A unique stable kernel membership vector *Y* is attained at the fourth iteration with positive members '*a2*': +0.21 and '*a4*': +0.21 (60.5% criteria significance majority); '*a1*': 0.00 being an ambigous potential member. Nodes '*a3*','*a5*','*a6*' and '*a7*' are all positive **non members** of this outranking pre-kernel.
 
-Let us now compute the terminal kernel restricted adjacency table.
+Let us now compute the restricted adjacency table for the terminal pre-kernel *['a3','a7']*.
  
 >>> k2Relation = gcd.abskernelrestrict(['a3','a7'])
 >>> gcd.showHTMLRelationTable(
@@ -5542,7 +5542,7 @@ Let us now compute the terminal kernel restricted adjacency table.
 
    Terminal kernel ['a3','a7'] restricted adjacency table
 
-Again, we notice that this terminal kernel is only weakly independent. The corresponding bipolar-valued membership vector may be computed as follws.
+Again, we notice that this terminal pre-kernel is indeed only weakly independent. The corresponding bipolar-valued membership vector may be computed as follws.
 
 >>> gcd.computeBadChoices(Comments=True)
 --> kernel: frozenset({'a3', 'a7'})
@@ -5563,14 +5563,14 @@ initial high vector
 3rd high vector
 [-0.1628, -0.4884, 0.0000, -0.4884, -0.1628, -0.2558, +0.4884]
 
-A unique stable bipolar-valued fixpoint is attained at the third iteration with 'a7' positively confirmed (about 75% criteria significance majority) as member of this terminal kernel, whereas the membership of 'a3' in this kernel appears indeterminate.
+A unique stable bipolar-valued fixpoint is attained at the third iteration with '*a7*' positively confirmed (about 75% criteria significance majority) as member of this terminal pre-kernel, whereas the membership of '*a3*' in this pre-kernel appears indeterminate.
 
 Back to :ref:`Tutorial-label`
 	   	  
 Bibliography
 ============
 
-.. [CPSTAT-L5] R. Bisdorff (2017) *Simulating from abitrary empirical random distributions*. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winterr Semester 2017 (`PDF 2x2 reduced presentation slides 211kB downloadable here <_static/quantileEstimation-2x2.pdf>`_).
+.. [CPSTAT-L5] R. Bisdorff (2017) *Simulating from abitrary empirical random distributions*. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winter Semester 2017 (`PDF 2x2 reduced presentation slides 211kB downloadable here <_static/quantileEstimation-2x2.pdf>`_).
 
 .. [BIS-2016] R. Bisdorff (2016). *On linear ranking from trillions of pairwise outranking situations*. Research Note 16-1, FSTC/ILIAS Decision Systems Group, University of Luxembourg pp. 1-6 (dowloadable  `PDF file 625.3 kB <https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf>`_).
 
@@ -5594,7 +5594,7 @@ Bibliography
 
 .. [BIS-2006b] R. Bisdorff (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf>`_).
 
-.. [BIS-2004] R. Bisdorff (2004) *On a natural fuzzification of Boolean logic*. In Erich Peter Klement and Endre Pap (editors), Proceedings of the 25th Linz Seminar on *Fuzzy Set Theory, Mathematics of Fuzzy Systems*. Bildungszentrum St. Magdalena, Linz (Austria), February 2004. pp. 20-26 (PDF file (133.4 Kb) for `downloading <_static/Linz2004.pdf>`_)
+.. [BIS-2004] R. Bisdorff (2004) "On a natural fuzzification of Boolean logic". In Erich Peter Klement and Endre Pap (editors), Proceedings of the 25th Linz Seminar on *Fuzzy Set Theory, Mathematics of Fuzzy Systems*. Bildungszentrum St. Magdalena, Linz (Austria), February 2004. pp. 20-26 (PDF file (133.4 Kb) for `downloading <_static/Linz2004.pdf>`_)
 
 .. [GOL-2004] M. Ch. Golumbic (2004), *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier.
 
@@ -5606,9 +5606,11 @@ Bibliography
 
 .. [BAR-1991] J.-P. Barthélemy and A. Guenoche (1991), *Trees and Proximities Representations*, Wiley, ISBN: 978-0471922636.
 
-.. [KRU-1956] J. B. Kruskal (1956), *On the shortest spanning subtree of a graph and the traveling salesman problem*, Proceedings of the American Mathematical Society. 7: 48–50.
+.. [SCH-1985] G. Schmidt and Th. Ströhlein (1985), *On kernels of graphs and solutions of games: a synopsis based on relations and fixpoints*. SIAM, J. Algebraic Discrete Methods, 6, 1985, 54–65.
 
 .. [BER-1958] C. Berge (2001), *The theory of graphs*. Dover Publications Inc. 2001. First published in English by Methuen & Co Ltd., London 1962. Translated from a French edition by Dunod, Paris 1958.
+
+.. [KRU-1956] J. B. Kruskal (1956), *On the shortest spanning subtree of a graph and the traveling salesman problem*, Proceedings of the American Mathematical Society. 7: 48–50.
 	    
 .. [KEN-1938] M. G. Kendall (1938), *A New Measure of Rank Correlation*. Biometrica 30:81–93
 
