@@ -5362,7 +5362,7 @@ Bipolar valued kernel membership characteristic vectors
 *Berge*'s Kernel Equation Systems
 .................................
 
-Let *G(X,R)* be a crisp irreflixive digraph defined on a finite set *X* of nodes and where *R* is the corresponding {-1,+1}-valued adjacency matrix. Let *Y* be the {-1,+1}-valued membership characteristic (row) vector of a choice in *X*. When *Y* satisfies the following equation system
+Let *G(X,R)* be a crisp irreflexive digraph defined on a finite set *X* of nodes and where *R* is the corresponding {-1,+1}-valued adjacency matrix. Let *Y* be the {-1,+1}-valued membership characteristic (row) vector of a choice in *X*. When *Y* satisfies the following equation system
 
      :math:`Y \circ R \; = \; -Y\;,`
 
@@ -5370,7 +5370,7 @@ where for all *x* in *X*,
 
      :math:`(Y \circ R)(x) \; = \; \max_{y \in X, x \neq y} \big ( \min(Y(x), R(x,y))\big)\;.`
 
-than *Y* characterizes an *initial kernel* ([BER-1958]_). Tranposing the characteristic vector characterizes similarly a *terminal kernel*
+than *Y* characterizes an *initial kernel* ([BER-1958]_). Transposing the characteristic vector characterizes similarly a *terminal kernel*
 
      :math:`R \circ Y^t \; = \; -Y^t\;.`
 
@@ -5483,7 +5483,7 @@ dominant kernel :  [0, 0, 0, 1, 0, 0, 0, 0]
 absorbent kernel:  [0, 0, 1, 0, 0, 0, 0, 0]
 Execution time  : 0.00022 sec.
 
-The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel [*a1*, *a2*, *a4*] and a terminal one [*a3*, *a7*] (see above the indeterminate independance qualifications in Line 7 and 13).
+The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel [*a1*, *a2*, *a4*] and a terminal one [*a3*, *a7*] (see above the indeterminate independence qualifications in Line 7 and 13).
 
 Let us compute the *initial* pre-kernel restricted adjacency table.
  
@@ -5527,7 +5527,7 @@ a7: -0.21
  
 We start the fixpoint computation with an empty set characterization as first low vector and a complete set *X* characterizing high vector. After each iteration, the low vector is set to the negation of the previous high vector and the high vector is set to the negation of the previous low vector.
 
-A unique stable kernel characteristic vector *Y1* is here attained at the fourth iteration with positive members *a2*: +0.21 and *a4*: +0.21 (60.5% criteria significance majority); *a1*: 0.00 being an ambigous potential member. Alternatives *a3*, *a5*, *a6* and *a7* are all positive **non members** of this outranking pre-kernel.
+A unique stable kernel characteristic vector *Y1* is here attained at the fourth iteration with positive members *a2*: +0.21 and *a4*: +0.21 (60.5% criteria significance majority); *a1*: 0.00 being an ambiguous potential member. Alternatives *a3*, *a5*, *a6* and *a7* are all positive **non members** of this outranking pre-kernel.
 
 Let us now compute the restricted adjacency table for the *terminal* pre-kernel [*a3*, *a7*].
  
@@ -5584,7 +5584,7 @@ Attributes          : ['name', 'order', 'circulants', 'actions',
                        'valuationdomain', 'relation',
 		       'gamma', 'notGamma']
 		       
-Digraph *c7* is a symmetric crisp digraph showing, among others, the following initial as well as terminal kernel: ['2','5','7']. Let us compute the corresponding inital pre-kernel characteristic vector.
+Digraph *c7* is a symmetric crisp digraph showing, among others, the following initial as well as terminal kernel: ['2','5','7']. Let us compute the corresponding initial pre-kernel characteristic vector.
 
 >>> g.computeKernelVector(['2','5','7'],Initial=True,Comments=True)
 --> Initial pre-kernel: {'2', '5', '7'}
@@ -5609,7 +5609,7 @@ Choice vector for initial pre-kernel: {'2', '5', '7'}
 
 Notice that the stable low vector characterizes the **negative membership** part, whereas, the stable high vector characterizes the **positive membership** part (see Lines 9-10 above). The bipolar **fusion** assembles eventually both stable parts into the correct pre-kernel characteristic vector (Line 12). 
 
-The adjacency matrix of a symmetric digraph staying *unchanged* by the transposition operator, the previous computations, when qualifyfing the same pre-kernel as a *terminal* instance, will hence produce exactly the same result.
+The adjacency matrix of a symmetric digraph staying *unchanged* by the transposition operator, the previous computations, when qualifying the same pre-kernel as a *terminal* instance, will hence produce exactly the same result.
 
 It is worthwhile noticing again the essential computational role, the logical *indeterminate* value **0.0** is playing in this dual fixpoint algorithm implementation. To implement such kind of algorithms without this logical neutral term, would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many *impossibility results* would come up. 
 
@@ -5638,7 +5638,7 @@ Bibliography
 
 .. [CHAM-2006] Chambers J.M., James D.A., Lambert D. and Vander Wiel S. (2006) "Monitoring Networked Applications with Incremental Quantile Estimation". *Statistical Science*, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.
 
-.. [BIS-2006a] R. Bisdorff, M. Pirlot and M. Roubens (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf>`_).
+.. [BIS-2006a] Bisdorff R., Pirlot M. and Roubens M. (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf>`_).
 
 .. [BIS-2006b] Bisdorff R. (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf>`_).
 
