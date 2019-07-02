@@ -1997,7 +1997,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Ranking with multiple incommensurable criteria}
-\label{\detokenize{tutorial:ranking-tutorial-label}}\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}
+\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:ranking-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -2480,7 +2480,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{HPC ranking with big outranking digraphs}
-\label{\detokenize{tutorial:hpc-tutorial-label}}\label{\detokenize{tutorial:hpc-ranking-with-big-outranking-digraphs}}
+\label{\detokenize{tutorial:hpc-ranking-with-big-outranking-digraphs}}\label{\detokenize{tutorial:hpc-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -5870,7 +5870,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{About split, interval and permutation graphs}
-\label{\detokenize{tutorial:about-split-interval-and-permutation-graphs}}\label{\detokenize{tutorial:permutation-tutorial-label}}
+\label{\detokenize{tutorial:permutation-tutorial-label}}\label{\detokenize{tutorial:about-split-interval-and-permutation-graphs}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -6412,7 +6412,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{On tree graphs and graph forests}
-\label{\detokenize{tutorial:trees-tutorial-label}}\label{\detokenize{tutorial:on-tree-graphs-and-graph-forests}}
+\label{\detokenize{tutorial:on-tree-graphs-and-graph-forests}}\label{\detokenize{tutorial:trees-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -6734,7 +6734,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Pearls of bipolar epistemic logic}
-\label{\detokenize{tutorial:pearls-of-bipolar-epistemic-logic}}\label{\detokenize{tutorial:pearls-tutorial-label}}
+\label{\detokenize{tutorial:pearls-tutorial-label}}\label{\detokenize{tutorial:pearls-of-bipolar-epistemic-logic}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -7239,22 +7239,18 @@ that may be used for computing bipolar-valued kernel membership vectors.
 
 
 \subsubsection{Solving bipolar-valued kernel equation systems}
-\label{\detokenize{tutorial:solving-bipolar-valued-kernel-equation-systems}}\begin{enumerate}
-\setcounter{enumi}{9}
-\item {} 
-von Neumann (\phantomsection\label{\detokenize{tutorial:id91}}{\hyperref[\detokenize{tutorial:sch-1985}]{\sphinxcrossref{{[}SCH-1985{]}}}} (\autopageref*{\detokenize{tutorial:sch-1985}})) showed indeed that the initial kernel \sphinxstyleemphasis{Y} of a digraph \sphinxstyleemphasis{G(X, R)} corresponds to the following dual bipolar fixpoint equation
+\label{\detokenize{tutorial:solving-bipolar-valued-kernel-equation-systems}}
+\sphinxstyleemphasis{John von Neumann} (\phantomsection\label{\detokenize{tutorial:id91}}{\hyperref[\detokenize{tutorial:sch-1985}]{\sphinxcrossref{{[}SCH-1985{]}}}} (\autopageref*{\detokenize{tutorial:sch-1985}})) showed indeed that the initial kernel \sphinxstyleemphasis{K} of a digraph \sphinxstyleemphasis{G(X, R)} corresponds to the solution of the following dual bipolar fixpoint equation
 \begin{quote}
 
 \(T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;.\)
 \end{quote}
 
-\end{enumerate}
+admitting a high and a low fixpoint converging both to a unique solution \sphinxstyleemphasis{Y} when \sphinxstyleemphasis{G(X,R)} is acyclic and \sphinxstyleemphasis{K} is its unique kernel.
 
-admitting a high and a low fixpoint converging both to a unique solution when \sphinxstyleemphasis{G(X,R)} is acyclic and \sphinxstyleemphasis{Y} is its unique kernel.
+Inspired by this crisp fixpoint equation, we observed that for a given bipolar-valued digraph \sphinxstyleemphasis{G(X,R)}, each of its independent and dominant or absorbent choices \sphinxstyleemphasis{K} in \sphinxstyleemphasis{X} determines an induced partial subgraph \sphinxstyleemphasis{G(X,R/K)} which is acyclyc and admits \sphinxstyleemphasis{K} as unique kernel.
 
-Inspired by this dual fixpoint approach, we observed that for a given bipolar-valued digraph \sphinxstyleemphasis{G(X,R)}, each of its independent and dominant or absorbent choices \sphinxstyleemphasis{Y} in determines an induced partial subgraph \sphinxstyleemphasis{G(X,R/Y)} which is acyclyc amd admits a \sphinxstyleemphasis{Y} as unique kernel.
-
-Following the von Neumann algorithm, a similar bipolar-valued extended dual fixpoint algorithm applied to \sphinxstyleemphasis{G(X,R/Y)} allows to compute the associated bipolar-valued kernel solution in polynomial complexity.
+Following the \sphinxstyleemphasis{von Neumann} fixpoint algorithm, a similar bipolar-valued extended dual fixpoint algorithm, applied to \sphinxstyleemphasis{G(X,R/K)}, allows to compute the associated bipolar-valued kernel characteristic vector \sphinxstyleemphasis{Y} in polynomial complexity.
 
 \sphinxstylestrong{Algorithm}
 \begin{quote}
@@ -7306,7 +7302,7 @@ Time for a practical illustration.
 \PYG{g+go}{                       \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-The random outranking digraph \sphinxstyleemphasis{g} we consider here for illustration models the pairwise outranking situations between seven decision alternatives evaluated on seven incommensurable performance criteria. We compute its corresponding bipolar valued kernels on the associated codual digraph \sphinxstyleemphasis{gcd}.
+The random outranking digraph \sphinxstyleemphasis{g}, we consider here for illustration, models the pairwise outranking situations between seven decision alternatives evaluated on seven incommensurable performance criteria. We compute its corresponding bipolar valued kernels on the associated codual digraph \sphinxstyleemphasis{gcd}.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -7338,9 +7334,9 @@ The random outranking digraph \sphinxstyleemphasis{g} we consider here for illus
 \PYG{g+go}{Execution time  : 0.00022 sec.}
 \end{sphinxVerbatim}
 
-The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel {[}‘a1’,’a2’,’a4’{]} and a terminal one {[}‘a3’,’a7’{]} (see above the indeterminate independance qualifications in Line 7 and 13).
+The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel {[}\sphinxstyleemphasis{a1}, \sphinxstyleemphasis{a2}, \sphinxstyleemphasis{a4}{]} and a terminal one {[}\sphinxstyleemphasis{a3}, \sphinxstyleemphasis{a7}{]} (see above the indeterminate independance qualifications in Line 7 and 13).
 
-Let us compute the inital pre-kernel restricted adjacency table.
+Let us compute the \sphinxstyleemphasis{initial} pre-kernel restricted adjacency table.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -7356,28 +7352,26 @@ Let us compute the inital pre-kernel restricted adjacency table.
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{k1restricted}.png}
-\caption{Initial kernel {[}‘a1’,’a2’,’a4’{]} restricted adjacency table}\label{\detokenize{tutorial:id172}}\end{figure}
+\caption{Initial kernel {[}\sphinxstyleemphasis{a1}, \sphinxstyleemphasis{a2}, \sphinxstyleemphasis{a4}{]} restricted adjacency table}\label{\detokenize{tutorial:id172}}\end{figure}
 
-We first notice that this initial pre-kernel is indeed only weakly independent: The outranking situation between \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a1} appears indeterminate. The corresponding initial pre-kernel membership characteristic vector may be computed as follows.
+We first notice that this initial pre-kernel is indeed only \sphinxstyleemphasis{weakly independent}: The outranking situation between \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a1} appears \sphinxstyleemphasis{indeterminate}. The corresponding initial pre-kernel membership characteristic vector may be computed as follows.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeKernelVector}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}\PYG{n}{Initial}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
 \PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZgt{} Initial pre\PYGZhy{}kernel: \PYGZob{}\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}\PYGZcb{}}
-\PYG{g+go}{initial low vector}
-\PYG{g+go}{[\PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0]}
-\PYG{g+go}{initial high vector}
-\PYG{g+go}{[+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0)]}
-\PYG{g+go}{1st low vector    : [ 0.00, +0.21, \PYGZhy{}0.21,  0.00, \PYGZhy{}0.44, \PYGZhy{}0.07, \PYGZhy{}0.58]}
-\PYG{g+go}{1st high vector   : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]}
-\PYG{g+go}{2nd low vector    : [ 0.00, +0.21, \PYGZhy{}0.21,  0.00, \PYGZhy{}0.44, \PYGZhy{}0.07, \PYGZhy{}0.58]}
-\PYG{g+go}{2nd high vector   : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.05, \PYGZhy{}0.21]}
-\PYG{g+go}{3rd low vector    : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.07, \PYGZhy{}0.21]}
-\PYG{g+go}{3rd high vector   : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.05, \PYGZhy{}0.21]}
-\PYG{g+go}{4th low vector    : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.07, \PYGZhy{}0.21]}
-\PYG{g+go}{4th high vector   : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.07, \PYGZhy{}0.21]}
-\PYG{g+go}{\PYGZsh{} iterations      : 4}
-\PYG{g+go}{low \PYGZam{} high fusion : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.07, \PYGZhy{}0.21]}
+\PYG{g+go}{initial low vector : [\PYGZhy{}1.00, \PYGZhy{}1.00, \PYGZhy{}1.00, \PYGZhy{}1.00, \PYGZhy{}1.00, \PYGZhy{}1.00, \PYGZhy{}1.00]}
+\PYG{g+go}{initial high vector: [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]}
+\PYG{g+go}{1st low vector     : [ 0.00, +0.21, \PYGZhy{}0.21,  0.00, \PYGZhy{}0.44, \PYGZhy{}0.07, \PYGZhy{}0.58]}
+\PYG{g+go}{1st high vector    : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]}
+\PYG{g+go}{2nd low vector     : [ 0.00, +0.21, \PYGZhy{}0.21,  0.00, \PYGZhy{}0.44, \PYGZhy{}0.07, \PYGZhy{}0.58]}
+\PYG{g+go}{2nd high vector    : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.05, \PYGZhy{}0.21]}
+\PYG{g+go}{3rd low vector     : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.07, \PYGZhy{}0.21]}
+\PYG{g+go}{3rd high vector    : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.05, \PYGZhy{}0.21]}
+\PYG{g+go}{4th low vector     : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.07, \PYGZhy{}0.21]}
+\PYG{g+go}{4th high vector    : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.07, \PYGZhy{}0.21]}
+\PYG{g+go}{\PYGZsh{} iterations       : 4}
+\PYG{g+go}{low \PYGZam{} high fusion  : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.07, \PYGZhy{}0.21]}
 \PYG{g+go}{Choice vector for initial pre\PYGZhy{}kernel: \PYGZob{}\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}\PYGZcb{}}
 \PYG{g+go}{a2: +0.21}
 \PYG{g+go}{a4: +0.21}
@@ -7390,9 +7384,9 @@ We first notice that this initial pre-kernel is indeed only weakly independent: 
 
 We start the fixpoint computation with an empty set characterization as first low vector and a complete set \sphinxstyleemphasis{X} characterizing high vector. After each iteration, the low vector is set to the negation of the previous high vector and the high vector is set to the negation of the previous low vector.
 
-A unique stable kernel characteristic vector \sphinxstyleemphasis{Y1} is here attained at the fourth iteration with positive members \sphinxstyleemphasis{a2}: +0.21 and \sphinxstyleemphasis{a4}: +0.21 (60.5\% criteria significance majority); \sphinxstyleemphasis{a1}: 0.00 being an ambigous potential member. Nodes \sphinxstyleemphasis{a3}, \sphinxstyleemphasis{a5}, \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a7} are all positive \sphinxstylestrong{non members} of this outranking pre-kernel.
+A unique stable kernel characteristic vector \sphinxstyleemphasis{Y1} is here attained at the fourth iteration with positive members \sphinxstyleemphasis{a2}: +0.21 and \sphinxstyleemphasis{a4}: +0.21 (60.5\% criteria significance majority); \sphinxstyleemphasis{a1}: 0.00 being an ambigous potential member. Alternatives \sphinxstyleemphasis{a3}, \sphinxstyleemphasis{a5}, \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a7} are all positive \sphinxstylestrong{non members} of this outranking pre-kernel.
 
-Let us now compute the restricted adjacency table for the terminal pre-kernel {[}‘a3’,’a7’{]}.
+Let us now compute the restricted adjacency table for the \sphinxstyleemphasis{terminal} pre-kernel {[}\sphinxstyleemphasis{a3}, \sphinxstyleemphasis{a7}{]}.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -7454,8 +7448,9 @@ To show why we need sometimes to operate an epistemic fusion of unequal low and 
 \PYG{g+go}{Attributes          : [\PYGZsq{}name\PYGZsq{}, \PYGZsq{}order\PYGZsq{}, \PYGZsq{}circulants\PYGZsq{}, \PYGZsq{}actions\PYGZsq{},}
 \PYG{g+go}{                       \PYGZsq{}valuationdomain\PYGZsq{}, \PYGZsq{}relation\PYGZsq{},}
 \PYG{g+go}{                       \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
-\PYG{g+go}{Digraph *c7* is a symmetric crisp digraph showing, among others, the following initial as well as terminal kernel: [\PYGZsq{}2\PYGZsq{},\PYGZsq{}5\PYGZsq{},\PYGZsq{}7\PYGZsq{}]. Let us compute the corresponding inital pre\PYGZhy{}kernel characteristic vector.}
 \end{sphinxVerbatim}
+
+Digraph \sphinxstyleemphasis{c7} is a symmetric crisp digraph showing, among others, the following initial as well as terminal kernel: {[}‘2’,‘5’,‘7’{]}. Let us compute the corresponding inital pre-kernel characteristic vector.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -7481,11 +7476,11 @@ To show why we need sometimes to operate an epistemic fusion of unequal low and 
 \PYG{g+go}{1: \PYGZhy{}1.00}
 \end{sphinxVerbatim}
 
-Notice that the stable low vector characterizes the negative membership part, whereas, the stable high vector characterizes the positive membership part (see Lines 9-10 above). The bipolar fusion assembles eventually both stable parts into the correct pre-kernel characteristic vector (Line 12).
+Notice that the stable low vector characterizes the \sphinxstylestrong{negative membership} part, whereas, the stable high vector characterizes the \sphinxstylestrong{positive membership} part (see Lines 9-10 above). The bipolar \sphinxstylestrong{fusion} assembles eventually both stable parts into the correct pre-kernel characteristic vector (Line 12).
 
-The adjacency matrix of a symmetric digraph stays unchanged by the transposition operator. The previous computation when qualifyfing the same pre-kernel as a terminal instance will hence produce exactly the same result.
+The adjacency matrix of a symmetric digraph staying \sphinxstyleemphasis{unchanged} by the transposition operator, the previous computations, when qualifyfing the same pre-kernel as a \sphinxstyleemphasis{terminal} instance, will hence produce exactly the same result.
 
-It is worthwhile noticing again, the essential role the \sphinxstyleemphasis{indeterminate} logical value \sphinxstylestrong{0.0} is playing in this dual fixpoint algorithm.
+It is worthwhile noticing again the essential computational role, the logical \sphinxstyleemphasis{indeterminate} value \sphinxstylestrong{0.0} is playing in this dual fixpoint algorithm implementation. To implement such kind of algorithms without this logical neutral term, would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many \sphinxstyleemphasis{impossibility results} would come up.
 
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Tutorials of the Digraph3 resources}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
 

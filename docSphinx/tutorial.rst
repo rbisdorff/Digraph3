@@ -5411,15 +5411,15 @@ that may be used for computing bipolar-valued kernel membership vectors.
 Solving bipolar-valued kernel equation systems
 ..............................................
 
-J. von Neumann ([SCH-1985]_) showed indeed that the initial kernel *Y* of a digraph *G(X, R)* corresponds to the following dual bipolar fixpoint equation
+*John von Neumann* ([SCH-1985]_) showed indeed that the initial kernel *K* of a digraph *G(X, R)* corresponds to the solution of the following dual bipolar fixpoint equation
 
      :math:`T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;.`
 
-admitting a high and a low fixpoint converging both to a unique solution when *G(X,R)* is acyclic and *Y* is its unique kernel.
+admitting a high and a low fixpoint converging both to a unique solution *Y* when *G(X,R)* is acyclic and *K* is its unique kernel.
 
-Inspired by this dual fixpoint approach, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its independent and dominant or absorbent choices *Y* in determines an induced partial subgraph *G(X,R/Y)* which is acyclyc amd admits a *Y* as unique kernel.
+Inspired by this crisp fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its independent and dominant or absorbent choices *K* in *X* determines an induced partial subgraph *G(X,R/K)* which is acyclyc and admits *K* as unique kernel.
 
-Following the von Neumann algorithm, a similar bipolar-valued extended dual fixpoint algorithm applied to *G(X,R/Y)* allows to compute the associated bipolar-valued kernel solution in polynomial complexity.
+Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extended dual fixpoint algorithm, applied to *G(X,R/K)*, allows to compute the associated bipolar-valued kernel characteristic vector *Y* in polynomial complexity.
 
 **Algorithm** 
 
@@ -5454,7 +5454,7 @@ Attributes          : ['name', 'actions', 'criteria', 'evaluation',
                        'relation', 'valuationdomain', 'order',
 		       'gamma', 'notGamma']
 
-The random outranking digraph *g* we consider here for illustration models the pairwise outranking situations between seven decision alternatives evaluated on seven incommensurable performance criteria. We compute its corresponding bipolar valued kernels on the associated codual digraph *gcd*.
+The random outranking digraph *g*, we consider here for illustration, models the pairwise outranking situations between seven decision alternatives evaluated on seven incommensurable performance criteria. We compute its corresponding bipolar valued kernels on the associated codual digraph *gcd*.
 
 >>> gcd = ~(-g) # strict outranking digraph
 >>> gcd
@@ -5483,9 +5483,9 @@ dominant kernel :  [0, 0, 0, 1, 0, 0, 0, 0]
 absorbent kernel:  [0, 0, 1, 0, 0, 0, 0, 0]
 Execution time  : 0.00022 sec.
 
-The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel ['a1','a2','a4'] and a terminal one ['a3','a7'] (see above the indeterminate independance qualifications in Line 7 and 13).
+The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel [*a1*, *a2*, *a4*] and a terminal one [*a3*, *a7*] (see above the indeterminate independance qualifications in Line 7 and 13).
 
-Let us compute the inital pre-kernel restricted adjacency table.
+Let us compute the *initial* pre-kernel restricted adjacency table.
  
 >>> k1Relation = gcd.domkernelrestrict(['a1','a2','a4'])
 >>> gcd.showHTMLRelationTable(
@@ -5498,26 +5498,24 @@ Let us compute the inital pre-kernel restricted adjacency table.
    :width: 400 px
    :align: center
 
-   Initial kernel ['a1','a2','a4'] restricted adjacency table
+   Initial kernel [*a1*, *a2*, *a4*] restricted adjacency table
 
-We first notice that this initial pre-kernel is indeed only weakly independent: The outranking situation between *a4* and *a1* appears indeterminate. The corresponding initial pre-kernel membership characteristic vector may be computed as follows.
+We first notice that this initial pre-kernel is indeed only *weakly independent*: The outranking situation between *a4* and *a1* appears *indeterminate*. The corresponding initial pre-kernel membership characteristic vector may be computed as follows.
 
 >>> gcd.computeKernelVector(['a1','a2','a4'],Initial=True,Comments=True)
 --> Initial pre-kernel: {'a1', 'a4', 'a2'}
-initial low vector
-[-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0]
-initial high vector
-[+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0)]
-1st low vector    : [ 0.00, +0.21, -0.21,  0.00, -0.44, -0.07, -0.58]
-1st high vector   : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]
-2nd low vector    : [ 0.00, +0.21, -0.21,  0.00, -0.44, -0.07, -0.58]
-2nd high vector   : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.05, -0.21]
-3rd low vector    : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.07, -0.21]
-3rd high vector   : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.05, -0.21]
-4th low vector    : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.07, -0.21]
-4th high vector   : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.07, -0.21]
-# iterations      : 4
-low & high fusion : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.07, -0.21]
+initial low vector : [-1.00, -1.00, -1.00, -1.00, -1.00, -1.00, -1.00]
+initial high vector: [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]
+1st low vector     : [ 0.00, +0.21, -0.21,  0.00, -0.44, -0.07, -0.58]
+1st high vector    : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]
+2nd low vector     : [ 0.00, +0.21, -0.21,  0.00, -0.44, -0.07, -0.58]
+2nd high vector    : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.05, -0.21]
+3rd low vector     : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.07, -0.21]
+3rd high vector    : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.05, -0.21]
+4th low vector     : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.07, -0.21]
+4th high vector    : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.07, -0.21]
+# iterations       : 4
+low & high fusion  : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.07, -0.21]
 Choice vector for initial pre-kernel: {'a1', 'a2', 'a4'}
 a2: +0.21
 a4: +0.21
@@ -5529,9 +5527,9 @@ a7: -0.21
  
 We start the fixpoint computation with an empty set characterization as first low vector and a complete set *X* characterizing high vector. After each iteration, the low vector is set to the negation of the previous high vector and the high vector is set to the negation of the previous low vector.
 
-A unique stable kernel characteristic vector *Y1* is here attained at the fourth iteration with positive members *a2*: +0.21 and *a4*: +0.21 (60.5% criteria significance majority); *a1*: 0.00 being an ambigous potential member. Nodes *a3*, *a5*, *a6* and *a7* are all positive **non members** of this outranking pre-kernel.
+A unique stable kernel characteristic vector *Y1* is here attained at the fourth iteration with positive members *a2*: +0.21 and *a4*: +0.21 (60.5% criteria significance majority); *a1*: 0.00 being an ambigous potential member. Alternatives *a3*, *a5*, *a6* and *a7* are all positive **non members** of this outranking pre-kernel.
 
-Let us now compute the restricted adjacency table for the terminal pre-kernel ['a3','a7'].
+Let us now compute the restricted adjacency table for the *terminal* pre-kernel [*a3*, *a7*].
  
 >>> k2Relation = gcd.abskernelrestrict(['a3','a7'])
 >>> gcd.showHTMLRelationTable(
@@ -5585,6 +5583,7 @@ Determinateness (%) : 100.00
 Attributes          : ['name', 'order', 'circulants', 'actions',
                        'valuationdomain', 'relation',
 		       'gamma', 'notGamma']
+		       
 Digraph *c7* is a symmetric crisp digraph showing, among others, the following initial as well as terminal kernel: ['2','5','7']. Let us compute the corresponding inital pre-kernel characteristic vector.
 
 >>> g.computeKernelVector(['2','5','7'],Initial=True,Comments=True)
@@ -5608,11 +5607,11 @@ Choice vector for initial pre-kernel: {'2', '5', '7'}
 3: -1.00
 1: -1.00
 
-Notice that the stable low vector characterizes the negative membership part, whereas, the stable high vector characterizes the positive membership part (see Lines 9-10 above). The bipolar fusion assembles eventually both stable parts into the correct pre-kernel characteristic vector (Line 12). 
+Notice that the stable low vector characterizes the **negative membership** part, whereas, the stable high vector characterizes the **positive membership** part (see Lines 9-10 above). The bipolar **fusion** assembles eventually both stable parts into the correct pre-kernel characteristic vector (Line 12). 
 
-The adjacency matrix of a symmetric digraph stays unchanged by the transposition operator. The previous computation when qualifyfing the same pre-kernel as a terminal instance will hence produce exactly the same result.
+The adjacency matrix of a symmetric digraph staying *unchanged* by the transposition operator, the previous computations, when qualifyfing the same pre-kernel as a *terminal* instance, will hence produce exactly the same result.
 
-It is worthwhile noticing again, the essential role the *indeterminate* logical value **0.0** is playing in this dual fixpoint algorithm.
+It is worthwhile noticing again the essential computational role, the logical *indeterminate* value **0.0** is playing in this dual fixpoint algorithm implementation. To implement such kind of algorithms without this logical neutral term, would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many *impossibility results* would come up. 
 
 Back to :ref:`Tutorial-label`
 	   	  
