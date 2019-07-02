@@ -7665,8 +7665,8 @@ class Digraph(object):
 
     def computeGoodChoiceVector(self,ker,Comments=False):
         """
-        | Characteristic values for potentially good choices.
-        | [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]
+        | Computing Characteristic values for dominant pre-kernels
+        | using the von Neumann dual fixoint equation
         """
         import copy
         from operator import itemgetter
@@ -7680,13 +7680,12 @@ class Digraph(object):
         if Comments:
             print('--> kernel:', ker)
         choice = [y for y in ker]
-        #choice.sort()
-        degi = temp.intstab(ker)
-        dega = temp.absorb(ker)
-        degd = temp.domin(ker)
-        degirred = temp.domirredval(ker,relation)
-        degmd = min(degi,degd)
-        cover = temp.averageCoveringIndex(ker)
+##        degi = temp.intstab(ker)
+##        dega = temp.absorb(ker)
+##        degd = temp.domin(ker)
+##        degirred = temp.domirredval(ker,relation)
+##        degmd = min(degi,degd)
+##        cover = temp.averageCoveringIndex(ker)
         relation_k = temp.domkernelrestrict(choice)
         n = len(actions)
         #vec1_a = array.array('f', [Max] * n)
@@ -7697,8 +7696,8 @@ class Digraph(object):
         veclowa = vec0_a
         vechigha = vec1_a
         if Comments:
-            print('initial veclowa',veclowa)
-            print('initial vechigha', vechigha)
+            print('initial low vector  :',veclowa)
+            print('initial high vector :', vechigha)
         it = 1
         while veclowa != vechigha and it < 2*n*n:
             veclowb = temp.matmult2(mat,veclowa)
@@ -7709,13 +7708,13 @@ class Digraph(object):
             veclowa = veclow
             vechigha = vechigh
             if Comments:
-                print(it, 'th veclowa  :',veclowa)
-                print(it, 'th vechigha :',vechigha)
+                print(it, 'th low vector  :',veclowa)
+                print(it, 'th high vector :',vechigha)
             it += 1
         if Comments:
-            print('final veclowa  :', veclowa)
-            print('final vechigha :', vechigha)
-            print('#iterations    :', it)
+            print('final low vector  :', veclowa)
+            print('final high vector :', vechigha)
+            print('#iterations       :', it)
         domvec = temp.sharpvec(veclowa,vechigha)
         determ = temp.determinateness(domvec)
         goodChoiceVector = []
@@ -7723,8 +7722,84 @@ class Digraph(object):
             goodChoiceVector.append((domvec[i],str(actions[i])))
         goodChoiceVector.sort(reverse=True)
         if Comments:
-            print(goodChoiceVector)
-        return goodChoiceVector        
+            print('Choice vector for dominant pre-kernel: %s' % str(ker))
+            for i,item in enumerate(goodChoiceVector):
+                print('%s: %+.2f' % (item[1],item[0]) )
+        else:
+            return goodChoiceVector        
+
+    def computeKernelVector(self,kernel,Initial=True,Comments=False):
+        """
+        | Computing Characteristic values for dominant pre-kernels
+        | using the von Neumann dual fixoint equation
+        """
+        import copy
+        from operator import itemgetter
+        temp = copy.deepcopy(self)
+        Max = Decimal(str(temp.valuationdomain['max']))
+        Min = Decimal(str(temp.valuationdomain['min']))
+        Med = Decimal(str(temp.valuationdomain['med']))
+        actions = [x for x in temp.actions]
+        #actions.sort()
+        relation = temp.relation
+        ker = set(kernel)
+        if Comments:
+            if Initial:
+                print('--> Initial kernel:', ker)
+            else:
+                print('--> Terminal kernel:', ker)
+        choice = [x for x in ker]
+        if Initial:
+            relation_k = temp.domkernelrestrict(choice)
+        else:
+            relation_k = temp.abskernelrestrict(choice)
+        n = len(actions)
+        #vec1_a = array.array('f', [Max] * n)
+        vec1_a = [Max for i in range(n)]
+        #vec0_a = array.array('f', [Min] * n)
+        vec0_a = [Min for i in range(n)]
+        if Initial:
+            mat = [temp.readdomvector(x,relation_k) for x in actions]
+        else:
+            mat = [temp.readabsvector(x,relation_k) for x in actions]
+        veclowa = vec0_a
+        vechigha = vec1_a
+        if Comments:
+            print('initial low vector  :',veclowa)
+            print('initial high vector :', vechigha)
+        it = 1
+        while veclowa != vechigha and it < 2*n*n:
+            veclowb = temp.matmult2(mat,veclowa)
+            vechighb = temp.matmult2(mat,vechigha)
+            veclow = temp.contra(vechighb)
+            vechigh = temp.contra(veclowb)
+            if veclow == veclowa and vechigh == vechigha : break
+            veclowa = veclow
+            vechigha = vechigh
+            if Comments:
+                print(it, 'th low vector  :',veclowa)
+                print(it, 'th high vector :',vechigha)
+            it += 1
+        if Comments:
+            print('final low vector  :', veclowa)
+            print('final high vector :', vechigha)
+            print('#iterations       :', it)
+        domvec = temp.sharpvec(veclowa,vechigha)
+        determ = temp.determinateness(domvec)
+        choiceVector = []
+        for i in range(n):
+            choiceVector.append((domvec[i],str(actions[i])))
+        choiceVector.sort(reverse=True)
+        if Comments:
+            if Initial:
+                print('Choice vector for initial pre-kernel: %s' % str(ker))
+            else:
+                print('Choice vector for terminal pre-kernel: %s' % str(ker))
+            for i,item in enumerate(choiceVector):
+                print('%s: %+.2f' % (item[1],item[0]) )
+        else:
+            return choiceVector        
+
                                 
     def computeGoodChoices(self,Comments=False):
         """

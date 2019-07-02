@@ -8149,7 +8149,7 @@ best covered terminal kernel</span></p>
 <div><img class="math" src="_images/math/5d1b28612543309ad6ce04c13742a3336db3575d.png" alt="Y \circ R \; = \; -Y\;,"/></div></blockquote>
 <p>where for all <em>x</em> in <em>X</em>,</p>
 <blockquote>
-<div><img class="math" src="_images/math/8f610fc1a267cea292fd560f78c99aa515cbc950.png" alt="(Y \circ R)(x) \;=\; \max_{y \in X, x \neq y} \big ( \min(Y(x), R(x,y))\big)\;."/></div></blockquote>
+<div><img class="math" src="_images/math/77b34354125a948197bd738ac2e72be17f127fe3.png" alt="(Y \circ R)(x) \; = \; \max_{y \in X, x \neq y} \big ( \min(Y(x), R(x,y))\big)\;."/></div></blockquote>
 <p>than <em>Y</em> characterizes an <em>initial kernel</em> (<a class="reference internal" href="#ber-1958" id="id89">[BER-1958]</a>). Tranposing the characteristic vector characterizes similarly a <em>terminal kernel</em></p>
 <blockquote>
 <div><img class="math" src="_images/math/f9151ba36d7b45b4ceb1c726e8b1502bb63e1600.png" alt="R \circ Y^t \; = \; -Y^t\;."/></div></blockquote>
@@ -8201,7 +8201,7 @@ best covered terminal kernel</span></p>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </td></tr></table></div>
-<p>It is easy to verify now that, for instance, the characteristic vector <em>[-1, -1, +1]</em> satisfies the initial kernel equation system; <em>‘a3’</em> gives an initial kernel. Similarly, the characteristic vector <em>[-1, +1, -1]</em> verifies indeed the terminal kernel equation system and hence ‘a2’ gives a terminal kernel.</p>
+<p>It is easy to verify now that, for instance, the characteristic vector [-1, -1, +1] satisfies the initial kernel equation system; <em>a3</em> gives an initial kernel. Similarly, the characteristic vector [-1, +1, -1] verifies indeed the terminal kernel equation system and hence <em>a2</em> gives a terminal kernel.</p>
 <p>We succeeded now in generalizing <em>Berge</em>’s kernel equation systems to genuine bipolar-valued digraphs (<a class="reference internal" href="#bis-2006a" id="id90">[BIS-2006a]</a>). The constructive proof, found by M. Pirlot, provided by the way the following fixpoint equation</p>
 <blockquote>
 <div><img class="math" src="_images/math/5101832c693889c173ffef357073af04ee8b44c6.png" alt="T(Y) \; := \; -(Y \circ R) = Y,"/></div></blockquote>
@@ -8209,18 +8209,22 @@ best covered terminal kernel</span></p>
 </div>
 <div class="section" id="solving-bipolar-valued-kernel-equation-systems">
 <h4>Solving bipolar-valued kernel equation systems<a class="headerlink" href="#solving-bipolar-valued-kernel-equation-systems" title="Permalink to this headline">¶</a></h4>
-<p>Von Neumann (<a class="reference internal" href="#sch-1985" id="id91">[SCH-1985]</a>) showed indeed that the initial kernel <em>Y</em> of a digraph <em>G(X, R)</em> corresponds to the following dual bipolar fixpoint equation</p>
+<ol class="upperalpha" start="10">
+<li><p class="first">von Neumann (<a class="reference internal" href="#sch-1985" id="id91">[SCH-1985]</a>) showed indeed that the initial kernel <em>Y</em> of a digraph <em>G(X, R)</em> corresponds to the following dual bipolar fixpoint equation</p>
 <blockquote>
-<div><img class="math" src="_images/math/36e98ba0e21f769eaff6fc1fa627132707bdbae6.png" alt="T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;."/></div></blockquote>
+<div><p><img class="math" src="_images/math/36e98ba0e21f769eaff6fc1fa627132707bdbae6.png" alt="T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;."/></p>
+</div></blockquote>
+</li>
+</ol>
 <p>admitting a high and a low fixpoint converging both to a unique solution when <em>G(X,R)</em> is acyclic and <em>Y</em> is its unique kernel.</p>
 <p>Inspired by this dual fixpoint approach, we observed that for a given bipolar-valued digraph <em>G(X,R)</em>, each of its independent and dominant or absorbent choices <em>Y</em> in determines an induced partial subgraph <em>G(X,R/Y)</em> which is acyclyc amd admits a <em>Y</em> as unique kernel.</p>
 <p>Following the von Neumann algorithm, a similar bipolar-valued extended dual fixpoint algorithm applied to <em>G(X,R/Y)</em> allows to compute the associated bipolar-valued kernel solution in polynomial complexity.</p>
 <p><strong>Algorithm</strong></p>
 <blockquote>
 <div><p><em>in</em> : bipolar-valued digraph <em>G(X,R)</em>,</p>
-<p><em>out</em> : set {Y1, Y2, .. } of bipolar-valued kernel membership characteristic vectors.</p>
+<p><em>out</em> : set {<em>Y1</em>, <em>Y2</em>, .. } of bipolar-valued kernel membership characteristic vectors.</p>
 <ol class="arabic">
-<li><p class="first">enumerate all initial and terminal crisp pre-kernels <em>K1, K2, …</em> in the given bipolar-valued digraph (see the <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a> tutorial);</p>
+<li><p class="first">enumerate all initial and terminal crisp pre-kernels <em>K</em>, <em>K2</em>, … in the given bipolar-valued digraph (see the <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a> tutorial);</p>
 </li>
 <li><p class="first">for each crisp initial kernel <em>Ki</em>:</p>
 <blockquote>
@@ -8231,7 +8235,7 @@ best covered terminal kernel</span></p>
 </ol>
 </div></blockquote>
 </li>
-<li><p class="first">repeat step (2) for each terminal kernel <em>Kj</em> by using the dual fixpoint equation with the transpose of the adjacency matrix <em>R/Kj</em></p>
+<li><p class="first">repeat step (2) for each terminal kernel <em>Kj</em> by using the dual fixpoint equation with the transpose of the adjacency matrix <em>R/Kj</em>.</p>
 </li>
 </ol>
 </div></blockquote>
@@ -8319,7 +8323,7 @@ best covered terminal kernel</span></p>
 <span class="go">Execution time  : 0.00022 sec.</span>
 </pre></div>
 </td></tr></table></div>
-<p>The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel <em>[‘a1’,’a2’,’a4’]</em> and a terminal one <em>[‘a3’,’a7’]</em> (see the indeterminate independance qualifications).</p>
+<p>The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel [‘a1’,’a2’,’a4’] and a terminal one [‘a3’,’a7’] (see above the indeterminate independance qualifications in Line 7 and 13).</p>
 <p>Let us compute the inital pre-kernel restricted adjacency table.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -8336,7 +8340,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/k1restricted.png"><img alt="Kernel restricted adjacency table" src="_images/k1restricted.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 68 </span><span class="caption-text">Initial kernel [‘a1’,’a2’,’a4’] restricted adjacency table</span></p>
 </div>
-<p>We first notice that this initial pre-kernel is indeed only weakly independent: The outranking situation between ‘<em>a4</em>’ and ‘<em>a1</em>’ appears indeterminate. The corresponding initial pre-kernel membership characteristic vector may be computed as follows.</p>
+<p>We first notice that this initial pre-kernel is indeed only weakly independent: The outranking situation between <em>a4</em> and <em>a1</em> appears indeterminate. The corresponding initial pre-kernel membership characteristic vector may be computed as follows.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8358,32 +8362,37 @@ best covered terminal kernel</span></p>
 19
 20
 21
-22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeGoodChoices</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="go">--&gt; kernel: frozenset({&#39;a1&#39;, &#39;a4&#39;, &#39;a2&#39;})</span>
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeKernelVector</span><span class="p">([</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a4&#39;</span><span class="p">],</span><span class="n">Initial</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">--&gt; Initial pre-kernel: {&#39;a1&#39;, &#39;a4&#39;, &#39;a2&#39;}</span>
 <span class="go">initial low vector</span>
 <span class="go">[-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0]</span>
 <span class="go">initial high vector</span>
 <span class="go">[+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0)]</span>
-<span class="go">1st low vector</span>
-<span class="go">[0.0000, +0.2093, -0.2093, 0.0000, -0.4419, -0.0698, -0.5814]</span>
-<span class="go">1st high vector</span>
-<span class="go">[+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0]</span>
-<span class="go">2nd low vector</span>
-<span class="go">[0.0000, +0.2093, -0.2093, 0.0000, -0.4419, -0.0698, -0.5814]</span>
-<span class="go">2nd high vector</span>
-<span class="go">[0.0000, +0.2093, -0.2093, +0.2093, -0.2093, -0.0465, -0.2093]</span>
-<span class="go">3rd low vector</span>
-<span class="go">[0.0000, +0.2093, -0.2093, +0.2093, -0.2093, -0.0698, -0.2093]</span>
-<span class="go">3rd high vector</span>
-<span class="go">[0.0000, +0.2093, -0.2093, +0.2093, -0.2093, -0.0465, -0.2093]</span>
-<span class="go">4th low vector</span>
-<span class="go">[0.0000, +0.2093, -0.2093, +0.2093, -0.2093, -0.0698, -0.2093]</span>
-<span class="go">4th high vector</span>
-<span class="go">[0.0000, +0.2093, -0.2093, +0.2093, -0.2093, -0.0698, -0.2093]</span>
+<span class="go">1st low vector    : [ 0.00, +0.21, -0.21,  0.00, -0.44, -0.07, -0.58]</span>
+<span class="go">1st high vector   : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]</span>
+<span class="go">2nd low vector    : [ 0.00, +0.21, -0.21,  0.00, -0.44, -0.07, -0.58]</span>
+<span class="go">2nd high vector   : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.05, -0.21]</span>
+<span class="go">3rd low vector    : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.07, -0.21]</span>
+<span class="go">3rd high vector   : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.05, -0.21]</span>
+<span class="go">4th low vector    : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.07, -0.21]</span>
+<span class="go">4th high vector   : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.07, -0.21]</span>
+<span class="go"># iterations      : 4</span>
+<span class="go">low &amp; high fusion : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.07, -0.21]</span>
+<span class="go">Choice vector for initial pre-kernel: {&#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;}</span>
+<span class="go">a2: +0.21</span>
+<span class="go">a4: +0.21</span>
+<span class="go">a1:  0.00</span>
+<span class="go">a6: -0.07</span>
+<span class="go">a3: -0.21</span>
+<span class="go">a5: -0.21</span>
+<span class="go">a7: -0.21</span>
 </pre></div>
 </td></tr></table></div>
-<p>A unique stable kernel membership vector <em>Y</em> is attained at the fourth iteration with positive members ‘<em>a2</em>’: +0.21 and ‘<em>a4</em>’: +0.21 (60.5% criteria significance majority); ‘<em>a1</em>’: 0.00 being an ambigous potential member. Nodes ‘<em>a3</em>’,’<em>a5</em>’,’<em>a6</em>’ and ‘<em>a7</em>’ are all positive <strong>non members</strong> of this outranking pre-kernel.</p>
-<p>Let us now compute the restricted adjacency table for the terminal pre-kernel <em>[‘a3’,’a7’]</em>.</p>
+<p>We start the fixpoint computation with an empty set characterization as first low vector and a complete set <em>X</em> characterizing high vector. After each iteration, the low vector is set to the negation of the previous high vector and the high vector is set to the negation of the previous low vector.</p>
+<p>A unique stable kernel characteristic vector <em>Y1</em> is here attained at the fourth iteration with positive members <em>a2</em>: +0.21 and <em>a4</em>: +0.21 (60.5% criteria significance majority); <em>a1</em>: 0.00 being an ambigous potential member. Nodes <em>a3</em>, <em>a5</em>, <em>a6</em> and <em>a7</em> are all positive <strong>non members</strong> of this outranking pre-kernel.</p>
+<p>Let us now compute the restricted adjacency table for the terminal pre-kernel [‘a3’,’a7’].</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -8399,7 +8408,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/k2restricted.png"><img alt="Kernel restricted adjacency table" src="_images/k2restricted.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 69 </span><span class="caption-text">Terminal kernel [‘a3’,’a7’] restricted adjacency table</span></p>
 </div>
-<p>Again, we notice that this terminal pre-kernel is indeed only weakly independent. The corresponding bipolar-valued membership vector may be computed as follws.</p>
+<p>Again, we notice that this terminal pre-kernel is indeed only weakly independent. The corresponding bipolar-valued characteristic vector <em>Y2</em> may be computed as follws.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8417,27 +8426,103 @@ best covered terminal kernel</span></p>
 15
 16
 17
-18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeBadChoices</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="go">--&gt; kernel: frozenset({&#39;a3&#39;, &#39;a7&#39;})</span>
-<span class="go">initial low vector</span>
-<span class="go">[-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0]</span>
-<span class="go">initial high vector</span>
-<span class="go">[+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0]</span>
-<span class="go">1st low vector</span>
-<span class="go">[-0.1628, -0.4884, 0.0000, -0.5814, -0.1628, -0.3023, +0.4884]</span>
-<span class="go">1st high vector</span>
-<span class="go">[+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0]</span>
-<span class="go">2nd low vector</span>
-<span class="go">[-0.1628, -0.4884, 0.0000, -0.5814, -0.1628, -0.3023, +0.4884]</span>
-<span class="go">2nd high vector</span>
-<span class="go">[-0.1628, -0.4884, 0.0000, -0.4884, -0.1628, -0.2558, +0.4884]</span>
-<span class="go">3rd low vector</span>
-<span class="go">[-0.1628, -0.4884, 0.0000, -0.4884, -0.1628, -0.2558, +0.4884]</span>
-<span class="go">3rd high vector</span>
-<span class="go">[-0.1628, -0.4884, 0.0000, -0.4884, -0.1628, -0.2558, +0.4884]</span>
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeKernelVector</span><span class="p">([</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a7&#39;</span><span class="p">],</span><span class="n">Initial</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">--&gt; Terminal pre-kernel: {&#39;a3&#39;, &#39;a7&#39;}</span>
+<span class="go">initial low vector  : [-1.00, -1.00, -1.00, -1.00, -1.00, -1.00, -1.00]</span>
+<span class="go">initial high vector : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]</span>
+<span class="go">1st low vector      : [-0.16, -0.49,  0.00, -0.58, -0.16, -0.30, +0.49]</span>
+<span class="go">1st high vector     : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]</span>
+<span class="go">2nd low vector      : [-0.16, -0.49,  0.00, -0.58, -0.16, -0.30, +0.49]</span>
+<span class="go">2nd high vector     : [-0.16, -0.49,  0.00, -0.49, -0.16, -0.26, +0.49]</span>
+<span class="go">3rd low vector      : [-0.16, -0.49,  0.00, -0.49, -0.16, -0.26, +0.49]</span>
+<span class="go">3rd high vector     : [-0.16, -0.49,  0.00, -0.49, -0.16, -0.26, +0.49]</span>
+<span class="go"># iterations        : 3</span>
+<span class="go">high &amp; low fusion   : [-0.16, -0.49,  0.00, -0.49, -0.16, -0.26, +0.49]</span>
+<span class="go">Choice vector for terminal pre-kernel: {&#39;a3&#39;, &#39;a7&#39;}</span>
+<span class="go">a7: +0.49</span>
+<span class="go">a3:  0.00</span>
+<span class="go">a1: -0.16</span>
+<span class="go">a5: -0.16</span>
+<span class="go">a6: -0.26</span>
+<span class="go">a2: -0.49</span>
+<span class="go">a4: -0.49</span>
 </pre></div>
 </td></tr></table></div>
-<p>A unique stable bipolar-valued fixpoint is attained at the third iteration with ‘<em>a7</em>’ positively confirmed (about 75% criteria significance majority) as member of this terminal pre-kernel, whereas the membership of ‘<em>a3</em>’ in this pre-kernel appears indeterminate.</p>
+<p>A unique stable bipolar-valued high and low fixpoint is attained at the third iteration with <em>a7</em> positively confirmed (about 75% criteria significance majority) as member of this terminal pre-kernel, whereas the membership of <em>a3</em> in this pre-kernel appears indeterminate. All the remaining nodes have <em>negative</em> membership characteristic values and are hence positively excluded from this pre-kernel.</p>
+<p>To show why we need sometimes to operate an epistemic fusion of unequal low and high vectors (see Step 2.a.), let us consider the following 7-<em>cycle</em> digraph.</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">circulants</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
+<span class="go">*------- Digraph instance description ------*</span>
+<span class="go">Instance class      : CirculantDigraph</span>
+<span class="go">Instance name       : c7</span>
+<span class="go">Digraph Order       : 7</span>
+<span class="go">Digraph Size        : 14</span>
+<span class="go">Valuation domain    : [-1.00;1.00]</span>
+<span class="go">Determinateness (%) : 100.00</span>
+<span class="go">Attributes          : [&#39;name&#39;, &#39;order&#39;, &#39;circulants&#39;, &#39;actions&#39;,</span>
+<span class="go">                       &#39;valuationdomain&#39;, &#39;relation&#39;,</span>
+<span class="go">                       &#39;gamma&#39;, &#39;notGamma&#39;]</span>
+<span class="go">Digraph *c7* is a symmetric crisp digraph showing, among others, the following initial as well as terminal kernel: [&#39;2&#39;,&#39;5&#39;,&#39;7&#39;]. Let us compute the corresponding inital pre-kernel characteristic vector.</span>
+</pre></div>
+</td></tr></table></div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeKernelVector</span><span class="p">([</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="s1">&#39;7&#39;</span><span class="p">],</span><span class="n">Initial</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go">--&gt; Initial pre-kernel: {&#39;2&#39;, &#39;5&#39;, &#39;7&#39;}</span>
+<span class="go">initial low vector  : [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0]</span>
+<span class="go">initial high vector : [+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0]</span>
+<span class="go">1 st low vector     : [-1.0,  0.0, -1.0, -1.0,  0.0, -1.0,  0.0]</span>
+<span class="go">1 st high vector    : [+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0]</span>
+<span class="go">2 nd low vector     : [-1.0,  0.0, -1.0, -1.0,  0.0, -1.0,  0.0]</span>
+<span class="go">2 nd high vector    : [ 0.0, +1.0,  0.0,  0.0, +1.0,  0.0, +1.0]</span>
+<span class="go">stable low vector   : [-1.0,  0.0, -1.0, -1.0,  0.0, -1.0,  0.0]</span>
+<span class="go">stable high vector  : [ 0.0, +1.0,  0.0,  0.0, +1.0,  0.0, +1.0]</span>
+<span class="go">#iterations         : 3</span>
+<span class="go">low &amp; high fusion   : [-1.0, +1.0, -1.0, -1.0, +1.0, -1.0, +1.0]</span>
+<span class="go">Choice vector for initial pre-kernel: {&#39;2&#39;, &#39;5&#39;, &#39;7&#39;}</span>
+<span class="go">7: +1.00</span>
+<span class="go">5: +1.00</span>
+<span class="go">2: +1.00</span>
+<span class="go">6: -1.00</span>
+<span class="go">4: -1.00</span>
+<span class="go">3: -1.00</span>
+<span class="go">1: -1.00</span>
+</pre></div>
+</td></tr></table></div>
+<p>Notice that the stable low vector characterizes the negative membership part, whereas, the stable high vector characterizes the positive membership part (see Lines 9-10 above). The bipolar fusion assembles eventually both stable parts into the correct pre-kernel characteristic vector (Line 12).</p>
+<p>The adjacency matrix of a symmetric digraph stays unchanged by the transposition operator. The previous computation when qualifyfing the same pre-kernel as a terminal instance will hence produce exactly the same result.</p>
+<p>It is worthwhile noticing again, the essential role the <em>indeterminate</em> logical value <strong>0.0</strong> is playing in this dual fixpoint algorithm.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>
 </div>
 </div>
@@ -8447,85 +8532,61 @@ best covered terminal kernel</span></p>
 <table class="docutils citation" frame="void" id="cpstat-l5" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id44">[CPSTAT-L5]</a></td><td><ol class="first last upperalpha simple" start="18">
-<li>Bisdorff (2017) <em>Simulating from abitrary empirical random distributions</em>. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winter Semester 2017 (<a class="reference external" href="_static/quantileEstimation-2x2.pdf">PDF 2x2 reduced presentation slides 211kB downloadable here</a>).</li>
-</ol>
-</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id44">[CPSTAT-L5]</a></td><td>Bisdorff R. (2017) <em>Simulating from abitrary empirical random distributions</em>. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winter Semester 2017 (<a class="reference external" href="_static/quantileEstimation-2x2.pdf">PDF 2x2 reduced presentation slides 211kB downloadable here</a>).</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="bis-2016" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BIS-2016]</td><td><em>(<a class="fn-backref" href="#id23">1</a>, <a class="fn-backref" href="#id26">2</a>)</em> <ol class="last upperalpha simple" start="18">
-<li>Bisdorff (2016). <em>On linear ranking from trillions of pairwise outranking situations</em>. Research Note 16-1, FSTC/ILIAS Decision Systems Group, University of Luxembourg pp. 1-6 (dowloadable  <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf">PDF file 625.3 kB</a>).</li>
-</ol>
-</td></tr>
+<tr><td class="label">[BIS-2016]</td><td><em>(<a class="fn-backref" href="#id23">1</a>, <a class="fn-backref" href="#id26">2</a>)</em> Bisdorff R. (2016). <em>On linear ranking from trillions of pairwise outranking situations</em>. Research Note 16-1, FSTC/ILIAS Decision Systems Group, University of Luxembourg pp. 1-6 (dowloadable  <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf">PDF file 625.3 kB</a>).</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="adt-l2" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[ADT-L2]</td><td><em>(<a class="fn-backref" href="#id7">1</a>, <a class="fn-backref" href="#id8">2</a>)</em> <ol class="last upperalpha simple" start="18">
-<li>Bisdorff (2014)  <em>Who wins the election</em>? MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( <a class="reference external" href="_static/adtVoting-2x2.pdf">PDF 2x2 reduced presentation slides 195 kB downloadable here</a>).</li>
-</ol>
-</td></tr>
+<tr><td class="label">[ADT-L2]</td><td><em>(<a class="fn-backref" href="#id7">1</a>, <a class="fn-backref" href="#id8">2</a>)</em> Bisdorff R. (2014)  <em>Who wins the election</em>? MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( <a class="reference external" href="_static/adtVoting-2x2.pdf">PDF 2x2 reduced presentation slides 195 kB downloadable here</a>).</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="adt-l7" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[ADT-L7]</td><td><em>(<a class="fn-backref" href="#id13">1</a>, <a class="fn-backref" href="#id16">2</a>, <a class="fn-backref" href="#id33">3</a>)</em> <ol class="last upperalpha simple" start="18">
-<li>Bisdorff (2014)  <em>Best multiple criteria choice: the Rubis outranking method</em>. MICS Algorithmic Decision Theory course, Lecture 7. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 (<a class="reference external" href="_static/adtOutranking-2x2.pdf">PDF 2x2 reduced slides 310kB downloadable here</a>).</li>
-</ol>
-</td></tr>
+<tr><td class="label">[ADT-L7]</td><td><em>(<a class="fn-backref" href="#id13">1</a>, <a class="fn-backref" href="#id16">2</a>, <a class="fn-backref" href="#id33">3</a>)</em> Bisdorff R.(2014)  <em>Best multiple criteria choice: the Rubis outranking method</em>. MICS Algorithmic Decision Theory course, Lecture 7. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 (<a class="reference external" href="_static/adtOutranking-2x2.pdf">PDF 2x2 reduced slides 310kB downloadable here</a>).</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="bis-2013" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BIS-2013]</td><td><em>(<a class="fn-backref" href="#id12">1</a>, <a class="fn-backref" href="#id14">2</a>, <a class="fn-backref" href="#id15">3</a>, <a class="fn-backref" href="#id20">4</a>, <a class="fn-backref" href="#id34">5</a>, <a class="fn-backref" href="#id36">6</a>, <a class="fn-backref" href="#id37">7</a>, <a class="fn-backref" href="#id40">8</a>)</em> <ol class="last upperalpha simple" start="18">
-<li>Bisdorff (2013) “On Polarizing Outranking Relations with Large Performance Differences” <em>Journal of Multi-Criteria Decision Analysis</em> (Wiley) <strong>20</strong>:3-12 (downloadable preprint <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf">PDF file 403.5 Kb</a>).</li>
-</ol>
-</td></tr>
+<tr><td class="label">[BIS-2013]</td><td><em>(<a class="fn-backref" href="#id12">1</a>, <a class="fn-backref" href="#id14">2</a>, <a class="fn-backref" href="#id15">3</a>, <a class="fn-backref" href="#id20">4</a>, <a class="fn-backref" href="#id34">5</a>, <a class="fn-backref" href="#id36">6</a>, <a class="fn-backref" href="#id37">7</a>, <a class="fn-backref" href="#id40">8</a>)</em> Bisdorff R. (2013) “On Polarizing Outranking Relations with Large Performance Differences” <em>Journal of Multi-Criteria Decision Analysis</em> (Wiley) <strong>20</strong>:3-12 (downloadable preprint <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf">PDF file 403.5 Kb</a>).</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="bis-2012" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BIS-2012]</td><td><em>(<a class="fn-backref" href="#id21">1</a>, <a class="fn-backref" href="#id22">2</a>, <a class="fn-backref" href="#id47">3</a>, <a class="fn-backref" href="#id86">4</a>)</em> <ol class="last upperalpha simple" start="18">
-<li>Bisdorff (2012). “On measuring and testing the ordinal correlation between bipolar outranking relations”. In Proceedings of DA2PL’2012 <em>From Multiple Criteria Decision Aid to Preference Learning</em>, University of Mons 91-100. (downloadable preliminary version <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf">PDF file 408.5 kB</a> ).</li>
-</ol>
-</td></tr>
+<tr><td class="label">[BIS-2012]</td><td><em>(<a class="fn-backref" href="#id21">1</a>, <a class="fn-backref" href="#id22">2</a>, <a class="fn-backref" href="#id47">3</a>, <a class="fn-backref" href="#id86">4</a>)</em> Bisdorff R. (2012). “On measuring and testing the ordinal correlation between bipolar outranking relations”. In Proceedings of DA2PL’2012 <em>From Multiple Criteria Decision Aid to Preference Learning</em>, University of Mons 91-100. (downloadable preliminary version <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf">PDF file 408.5 kB</a> ).</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="bis-2008" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BIS-2008]</td><td><em>(<a class="fn-backref" href="#id10">1</a>, <a class="fn-backref" href="#id39">2</a>)</em> <ol class="last upperalpha simple" start="18">
-<li>Bisdorff, P. Meyer and M. Roubens (2008) “RUBIS: a bipolar-valued outranking method for the choice problem”. 4OR, <em>A Quarterly Journal of Operations Research</em> Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf">PDF file 271.5Kb</a>).</li>
-</ol>
-</td></tr>
+<tr><td class="label">[BIS-2008]</td><td><em>(<a class="fn-backref" href="#id10">1</a>, <a class="fn-backref" href="#id39">2</a>)</em> Bisdorff R., Meyer P. and Roubens M.(2008) “RUBIS: a bipolar-valued outranking method for the choice problem”. 4OR, <em>A Quarterly Journal of Operations Research</em> Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf">PDF file 271.5Kb</a>).</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="isomis-08" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[ISOMIS-08]</td><td><em>(<a class="fn-backref" href="#id52">1</a>, <a class="fn-backref" href="#id55">2</a>)</em> <ol class="last upperalpha simple" start="18">
-<li>Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. <em>Journal of Integer Sequences</em>, Vol. 11 Article 08.5.7 (<a class="reference external" href="https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html">openly accessible here</a>).</li>
-</ol>
-</td></tr>
+<tr><td class="label">[ISOMIS-08]</td><td><em>(<a class="fn-backref" href="#id52">1</a>, <a class="fn-backref" href="#id55">2</a>)</em> Bisdorff R. and Marichal J.-L. (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. <em>Journal of Integer Sequences</em>, Vol. 11 Article 08.5.7 (<a class="reference external" href="https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html">openly accessible here</a>).</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="nr3-2007" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id46">[NR3-2007]</a></td><td>W.H. Press, S.A. Teukolsky, W.T. Vetterling and B.P. Flannery (2007) “Single-Pass Estimation of Arbitrary Quantiles” Section 5.8.2 in <em>Numerical Recipes: The Art of Scientific Computing 3rd Ed.</em>, Cambridge University Press, pp 435-438.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id46">[NR3-2007]</a></td><td>Press W.H., Teukolsky S.A., Vetterling W.T. and Flannery B.P. (2007) “Single-Pass Estimation of Arbitrary Quantiles” Section 5.8.2 in <em>Numerical Recipes: The Art of Scientific Computing 3rd Ed.</em>, Cambridge University Press, pp 435-438.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="cham-2006" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id45">[CHAM-2006]</a></td><td>J.M. Chambers, D.A. James, D. Lambert and S. Vander Wiel (2006) “Monitoring Networked Applications with Incremental Quantile Estimation”. <em>Statistical Science</em>, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id45">[CHAM-2006]</a></td><td>Chambers J.M., James D.A., Lambert D. and Vander Wiel S. (2006) “Monitoring Networked Applications with Incremental Quantile Estimation”. <em>Statistical Science</em>, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="bis-2006a" rules="none">
@@ -8540,106 +8601,67 @@ best covered terminal kernel</span></p>
 <table class="docutils citation" frame="void" id="bis-2006b" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BIS-2006b]</td><td><em>(<a class="fn-backref" href="#id61">1</a>, <a class="fn-backref" href="#id62">2</a>, <a class="fn-backref" href="#id63">3</a>)</em> <ol class="last upperalpha simple" start="18">
-<li>Bisdorff (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf">PDF file 532.2 Kb</a>).</li>
-</ol>
-</td></tr>
+<tr><td class="label">[BIS-2006b]</td><td><em>(<a class="fn-backref" href="#id61">1</a>, <a class="fn-backref" href="#id62">2</a>, <a class="fn-backref" href="#id63">3</a>)</em> Bisdorff R. (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf">PDF file 532.2 Kb</a>).</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="bis-2004" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BIS-2004]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id38">2</a>, <a class="fn-backref" href="#id59">3</a>)</em> <ol class="last upperalpha simple" start="18">
-<li>Bisdorff (2004) “On a natural fuzzification of Boolean logic”. In Erich Peter Klement and Endre Pap (editors), Proceedings of the 25th Linz Seminar on <em>Fuzzy Set Theory, Mathematics of Fuzzy Systems</em>. Bildungszentrum St. Magdalena, Linz (Austria), February 2004. pp. 20-26 (PDF file (133.4 Kb) for <a class="reference external" href="_static/Linz2004.pdf">downloading</a>)</li>
-</ol>
-</td></tr>
+<tr><td class="label">[BIS-2004]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id38">2</a>, <a class="fn-backref" href="#id59">3</a>)</em> Bisdorff R. (2004) “On a natural fuzzification of Boolean logic”. In Erich Peter Klement and Endre Pap (editors), Proceedings of the 25th Linz Seminar on <em>Fuzzy Set Theory, Mathematics of Fuzzy Systems</em>. Bildungszentrum St. Magdalena, Linz (Austria), February 2004. pp. 20-26 (PDF file (133.4 Kb) for <a class="reference external" href="_static/Linz2004.pdf">downloading</a>)</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="gol-2004" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[GOL-2004]</td><td><em>(<a class="fn-backref" href="#id65">1</a>, <a class="fn-backref" href="#id66">2</a>, <a class="fn-backref" href="#id67">3</a>, <a class="fn-backref" href="#id68">4</a>, <a class="fn-backref" href="#id69">5</a>, <a class="fn-backref" href="#id70">6</a>, <a class="fn-backref" href="#id71">7</a>, <a class="fn-backref" href="#id72">8</a>, <a class="fn-backref" href="#id73">9</a>, <a class="fn-backref" href="#id74">10</a>)</em> <ol class="last upperalpha simple" start="13">
-<li>Ch. Golumbic (2004), <em>Agorithmic Graph Theory and Perfect Graphs</em> 2nd Ed., Annals of Discrete Mathematics 57, Elsevier.</li>
-</ol>
-</td></tr>
+<tr><td class="label">[GOL-2004]</td><td><em>(<a class="fn-backref" href="#id65">1</a>, <a class="fn-backref" href="#id66">2</a>, <a class="fn-backref" href="#id67">3</a>, <a class="fn-backref" href="#id68">4</a>, <a class="fn-backref" href="#id69">5</a>, <a class="fn-backref" href="#id70">6</a>, <a class="fn-backref" href="#id71">7</a>, <a class="fn-backref" href="#id72">8</a>, <a class="fn-backref" href="#id73">9</a>, <a class="fn-backref" href="#id74">10</a>)</em> Golumbic M.Ch. (2004), <em>Agorithmic Graph Theory and Perfect Graphs</em> 2nd Ed., Annals of Discrete Mathematics 57, Elsevier.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="fmcaa" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id50">[FMCAA]</a></td><td><ol class="first last upperalpha simple" start="15">
-<li>Häggström (2002) <em>Finite Markov Chains and Algorithmic Applications</em>. Cambridge University Press.</li>
-</ol>
-</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id50">[FMCAA]</a></td><td>Häggström O. (2002) <em>Finite Markov Chains and Algorithmic Applications</em>. Cambridge University Press.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="bis-2000" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id58">[BIS-2000]</a></td><td><ol class="first last upperalpha simple" start="18">
-<li>Bisdorff (2000), Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods, <em>Computers and Operations Research</em>, 27:673-687 (downloadable version <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf">PDF file 159.1Kb</a>).</li>
-</ol>
-</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id58">[BIS-2000]</a></td><td>Bisdorff R. (2000), Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods, <em>Computers and Operations Research</em>, 27:673-687 (downloadable version <a class="reference external" href="https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf">PDF file 159.1Kb</a>).</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="wil-1996" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id79">[WIL-1996]</a></td><td><ol class="first last upperalpha simple" start="4">
-<li><ol class="first upperalpha" start="2">
-<li>Wilson (1996), <em>Generating random spanning trees more quickly than the cover time</em>, Proceedings of the Twenty-eighth Annual ACM <em>Symposium on the Theory of Computing</em> (Philadelphia, PA, 1996), 296-303, ACM, New York, 1996.</li>
-</ol>
-</li>
-</ol>
-</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id79">[WIL-1996]</a></td><td>Wilson D.B. (1996), <em>Generating random spanning trees more quickly than the cover time</em>, Proceedings of the Twenty-eighth Annual ACM <em>Symposium on the Theory of Computing</em> (Philadelphia, PA, 1996), 296-303, ACM, New York, 1996.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="bar-1991" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[BAR-1991]</td><td><em>(<a class="fn-backref" href="#id76">1</a>, <a class="fn-backref" href="#id77">2</a>, <a class="fn-backref" href="#id78">3</a>)</em> J.-P. Barthélemy and A. Guenoche (1991), <em>Trees and Proximities Representations</em>, Wiley, ISBN: 978-0471922636.</td></tr>
+<tr><td class="label">[BAR-1991]</td><td><em>(<a class="fn-backref" href="#id76">1</a>, <a class="fn-backref" href="#id77">2</a>, <a class="fn-backref" href="#id78">3</a>)</em> Barthélemy J.-P. and Guenoche A. (1991), <em>Trees and Proximities Representations</em>, Wiley, ISBN: 978-0471922636.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="sch-1985" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id91">[SCH-1985]</a></td><td><ol class="first last upperalpha simple" start="7">
-<li>Schmidt and Th. Ströhlein (1985), <em>On kernels of graphs and solutions of games: a synopsis based on relations and fixpoints</em>. SIAM, J. Algebraic Discrete Methods, 6, 1985, 54–65.</li>
-</ol>
-</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id91">[SCH-1985]</a></td><td>Schmidt G. and Ströhlein Th. (1985), <em>On kernels of graphs and solutions of games: a synopsis based on relations and fixpoints</em>. SIAM, J. Algebraic Discrete Methods, 6, 1985, 54–65.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="ber-1958" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id89">[BER-1958]</a></td><td><ol class="first last upperalpha simple" start="3">
-<li>Berge (2001), <em>The theory of graphs</em>. Dover Publications Inc. 2001. First published in English by Methuen &amp; Co Ltd., London 1962. Translated from a French edition by Dunod, Paris 1958.</li>
-</ol>
-</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id89">[BER-1958]</a></td><td>Berge C. (2001), <em>The theory of graphs</em>. Dover Publications Inc. 2001. First published in English by Methuen &amp; Co Ltd., London 1962. Translated from a French edition by Dunod, Paris 1958.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="kru-1956" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id82">[KRU-1956]</a></td><td><ol class="first last upperalpha simple" start="10">
-<li><ol class="first upperalpha" start="2">
-<li>Kruskal (1956), <em>On the shortest spanning subtree of a graph and the traveling salesman problem</em>, Proceedings of the American Mathematical Society. 7: 48–50.</li>
-</ol>
-</li>
-</ol>
-</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id82">[KRU-1956]</a></td><td>Kruskal J.B. (1956), <em>On the shortest spanning subtree of a graph and the traveling salesman problem</em>, Proceedings of the American Mathematical Society. 7: 48–50.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="ken-1938" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id85">[KEN-1938]</a></td><td><ol class="first last upperalpha simple" start="13">
-<li><ol class="first upperalpha" start="7">
-<li>Kendall (1938), <em>A New Measure of Rank Correlation</em>. Biometrica 30:81–93</li>
-</ol>
-</li>
-</ol>
-</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id85">[KEN-1938]</a></td><td>Kendall M.G. (1938), <em>A New Measure of Rank Correlation</em>. Biometrica 30:81–93</td></tr>
 </tbody>
 </table>
 <div class="section" id="documents">

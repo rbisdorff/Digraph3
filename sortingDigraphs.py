@@ -4254,15 +4254,15 @@ if __name__ == "__main__":
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-    t = RandomCBPerformanceTableau(numberOfActions=25,
-                                    numberOfCriteria=13,
-                                             NegativeWeights=True,
-                                    weightDistribution='equiobjectives',
-                                    missingDataProbability=0.05,
-                                    seed=1)
-    #t.showHTMLPerformanceHeatmap(Correlations=True)
-    nt = NormalizedPerformanceTableau(t)
-    nt.showHTMLPerformanceHeatmap(Correlations=True)
+##    t = RandomCBPerformanceTableau(numberOfActions=25,
+##                                    numberOfCriteria=13,
+##                                             NegativeWeights=True,
+##                                    weightDistribution='equiobjectives',
+##                                    missingDataProbability=0.05,
+##                                    seed=1)
+##    #t.showHTMLPerformanceHeatmap(Correlations=True)
+##    nt = NormalizedPerformanceTableau(t)
+##    nt.showHTMLPerformanceHeatmap(Correlations=True)
     
 ##    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)
 ####    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
@@ -4301,15 +4301,15 @@ if __name__ == "__main__":
 ##    so2.showSorting()
     
 ##    t.saveXMCDA2('test',servingD3=False)
-    #t = XMCDA2PerformanceTableau('test')  
-    #t.showHTMLPerformanceHeatmap(colorLevels=5,ndigits=0,Correlations=True)
-    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
-                                     Threading=MP,tempDir='.',Comments=True,
-                                     Debug=False)
-    qs.showHTMLQuantileOrdering(strategy='average')
-    qs.showWeakOrder()
-    qs.showQuantileOrdering(strategy='average')
-    qs.showActionsSortingResult()
+##    #t = XMCDA2PerformanceTableau('test')  
+##    #t.showHTMLPerformanceHeatmap(colorLevels=5,ndigits=0,Correlations=True)
+##    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
+##                                     Threading=MP,tempDir='.',Comments=True,
+##                                     Debug=False)
+##    qs.showHTMLQuantileOrdering(strategy='average')
+##    qs.showWeakOrder()
+##    qs.showQuantileOrdering(strategy='average')
+##    qs.showActionsSortingResult()
 ##    qs0 = _QuantilesSortingDigraph(t,15,LowerClosed=False,
 ##                                     Threading=False,
 ##                                     Debug=False)
@@ -4335,9 +4335,9 @@ if __name__ == "__main__":
 ##    print(g.computeOrdinalCorrelation(qsrbc))
     
 ##    # test incremental rating agent
-##    MP = False
-##    seed = 105
-##    nbrOfCPUs = 4
+    MP = False
+    seed = 105
+    nbrOfCPUs = 4
 
 ##    from randomPerfTabs import RandomPerformanceTableau
 ##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
@@ -4354,23 +4354,23 @@ if __name__ == "__main__":
 ##                                    numberOfCriteria=nbrCrit,\
 ##                                    Threading=MP,seed=seed)
 ##
-##    from randomPerfTabs import Random3ObjectivesPerformanceTableau
-##    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
-##    nbrActions=1000
-##    nbrCrit = 21
-##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
-##                                    numberOfCriteria=nbrCrit,seed=seed)
+    from randomPerfTabs import Random3ObjectivesPerformanceTableau
+    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
+    nbrActions=1000
+    nbrCrit = 21
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
+                                    numberOfCriteria=nbrCrit,seed=seed)
 
-##    pq = PerformanceQuantiles(tp,20,LowerClosed=False,Debug=False)
-##    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-##    newActions = tpg.randomActions(10)
-##    pq.updateQuantiles(newActions,historySize=None)
-##    ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=10,\
-##                                       PrefThresholds=False,\
-##                                   WithSorting=True,Debug=False,\
-##                                       Threading=MP,nbrOfCPUs=nbrOfCPUs)
-##    print(ira)
-##    ira.showQuantilesRating()
+    pq = PerformanceQuantiles(tp,20,LowerClosed=True,Debug=False)
+    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
+    newActions = tpg.randomActions(100)
+    pq.updateQuantiles(newActions,historySize=None)
+    ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=20,\
+                                       #PrefThresholds=False,\
+                                   WithSorting=True,Debug=False,\
+                                       Threading=MP,nbrOfCPUs=nbrOfCPUs)
+    print(ira)
+    ira.showQuantilesRating()
 ##    #ira.sorting = ira.computeSortingCharacteristics()
 ##    #ira.categoryContent = ira.computeCategoryContents()
 ##    ira.showSorting()
@@ -4390,10 +4390,10 @@ if __name__ == "__main__":
 ##    #ira.showRefinedQuantileOrdering()
 ##    #ira.showOrderedRelationTable()
 ##    #ira.showSortingCharacteristics()
-##    ira.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings',
-##                                   Correlations=True,
-##                                   #rankingRule='best',
-##                                   )
+    ira.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings',
+                                   Correlations=True,
+                                   #rankingRule='best',
+                                   )
 ##    ira.showRankingScores()
 ##    print(ira)
 ##    print(ira.computeQuantileProfile(0.25))

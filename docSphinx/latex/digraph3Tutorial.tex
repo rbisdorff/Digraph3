@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{July 01, 2019}
+\date{July 02, 2019}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -74,7 +74,7 @@
 
 
 \section{Preface}
-\label{\detokenize{tutorial:tutorial-label}}\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}
+\label{\detokenize{tutorial:preface}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:tutorial-label}}
 This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation
 here \textless{}\sphinxurl{https://digraph3.readthedocs.io/en/latest/index.html}\textgreater{} for the corresponding HTML version).
 
@@ -149,7 +149,7 @@ Revision: Python 3.7
 
 
 \section{Working with the \sphinxstyleemphasis{Digraph3} software resources}
-\label{\detokenize{tutorial:digraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}
+\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}\label{\detokenize{tutorial:digraphs-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1997,7 +1997,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Ranking with multiple incommensurable criteria}
-\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:ranking-tutorial-label}}
+\label{\detokenize{tutorial:ranking-tutorial-label}}\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4522,7 +4522,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{graphs} module}
-\label{\detokenize{tutorial:working-with-the-graphs-module}}\label{\detokenize{tutorial:graphs-tutorial-label}}
+\label{\detokenize{tutorial:graphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-graphs-module}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -6412,7 +6412,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{On tree graphs and graph forests}
-\label{\detokenize{tutorial:on-tree-graphs-and-graph-forests}}\label{\detokenize{tutorial:trees-tutorial-label}}
+\label{\detokenize{tutorial:trees-tutorial-label}}\label{\detokenize{tutorial:on-tree-graphs-and-graph-forests}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -7189,7 +7189,7 @@ Let \sphinxstyleemphasis{G(X,R)} be a crisp irreflixive digraph defined on a fin
 where for all \sphinxstyleemphasis{x} in \sphinxstyleemphasis{X},
 \begin{quote}
 
-\((Y \circ R)(x) \;=\; \max_{y \in X, x \neq y} \big ( \min(Y(x), R(x,y))\big)\;.\)
+\((Y \circ R)(x) \; = \; \max_{y \in X, x \neq y} \big ( \min(Y(x), R(x,y))\big)\;.\)
 \end{quote}
 
 than \sphinxstyleemphasis{Y} characterizes an \sphinxstyleemphasis{initial kernel} (\phantomsection\label{\detokenize{tutorial:id89}}{\hyperref[\detokenize{tutorial:ber-1958}]{\sphinxcrossref{{[}BER-1958{]}}}} (\autopageref*{\detokenize{tutorial:ber-1958}})). Tranposing the characteristic vector characterizes similarly a \sphinxstyleemphasis{terminal kernel}
@@ -7227,7 +7227,7 @@ Let us verify this result on a tiny example.
 \PYG{g+go}{\PYGZgt{}\PYGZgt{}\PYGZgt{}}
 \end{sphinxVerbatim}
 
-It is easy to verify now that, for instance, the characteristic vector \sphinxstyleemphasis{{[}-1, -1, +1{]}} satisfies the initial kernel equation system; \sphinxstyleemphasis{‘a3’} gives an initial kernel. Similarly, the characteristic vector \sphinxstyleemphasis{{[}-1, +1, -1{]}} verifies indeed the terminal kernel equation system and hence ‘a2’ gives a terminal kernel.
+It is easy to verify now that, for instance, the characteristic vector {[}-1, -1, +1{]} satisfies the initial kernel equation system; \sphinxstyleemphasis{a3} gives an initial kernel. Similarly, the characteristic vector {[}-1, +1, -1{]} verifies indeed the terminal kernel equation system and hence \sphinxstyleemphasis{a2} gives a terminal kernel.
 
 We succeeded now in generalizing \sphinxstyleemphasis{Berge}’s kernel equation systems to genuine bipolar-valued digraphs (\phantomsection\label{\detokenize{tutorial:id90}}{\hyperref[\detokenize{tutorial:bis-2006a}]{\sphinxcrossref{{[}BIS-2006a{]}}}} (\autopageref*{\detokenize{tutorial:bis-2006a}})). The constructive proof, found by M. Pirlot, provided by the way the following fixpoint equation
 \begin{quote}
@@ -7239,12 +7239,16 @@ that may be used for computing bipolar-valued kernel membership vectors.
 
 
 \subsubsection{Solving bipolar-valued kernel equation systems}
-\label{\detokenize{tutorial:solving-bipolar-valued-kernel-equation-systems}}
-Von Neumann (\phantomsection\label{\detokenize{tutorial:id91}}{\hyperref[\detokenize{tutorial:sch-1985}]{\sphinxcrossref{{[}SCH-1985{]}}}} (\autopageref*{\detokenize{tutorial:sch-1985}})) showed indeed that the initial kernel \sphinxstyleemphasis{Y} of a digraph \sphinxstyleemphasis{G(X, R)} corresponds to the following dual bipolar fixpoint equation
+\label{\detokenize{tutorial:solving-bipolar-valued-kernel-equation-systems}}\begin{enumerate}
+\setcounter{enumi}{9}
+\item {} 
+von Neumann (\phantomsection\label{\detokenize{tutorial:id91}}{\hyperref[\detokenize{tutorial:sch-1985}]{\sphinxcrossref{{[}SCH-1985{]}}}} (\autopageref*{\detokenize{tutorial:sch-1985}})) showed indeed that the initial kernel \sphinxstyleemphasis{Y} of a digraph \sphinxstyleemphasis{G(X, R)} corresponds to the following dual bipolar fixpoint equation
 \begin{quote}
 
 \(T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;.\)
 \end{quote}
+
+\end{enumerate}
 
 admitting a high and a low fixpoint converging both to a unique solution when \sphinxstyleemphasis{G(X,R)} is acyclic and \sphinxstyleemphasis{Y} is its unique kernel.
 
@@ -7257,10 +7261,10 @@ Following the von Neumann algorithm, a similar bipolar-valued extended dual fixp
 
 \sphinxstyleemphasis{in} : bipolar-valued digraph \sphinxstyleemphasis{G(X,R)},
 
-\sphinxstyleemphasis{out} : set \{Y1, Y2, .. \} of bipolar-valued kernel membership characteristic vectors.
+\sphinxstyleemphasis{out} : set \{\sphinxstyleemphasis{Y1}, \sphinxstyleemphasis{Y2}, .. \} of bipolar-valued kernel membership characteristic vectors.
 \begin{enumerate}
 \item {} 
-enumerate all initial and terminal crisp pre-kernels \sphinxstyleemphasis{K1, K2, …} in the given bipolar-valued digraph (see the {\hyperref[\detokenize{tutorial:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{On computing digraph kernels}}}} (\autopageref*{\detokenize{tutorial:kernel-tutorial-label}}) tutorial);
+enumerate all initial and terminal crisp pre-kernels \sphinxstyleemphasis{K}, \sphinxstyleemphasis{K2}, … in the given bipolar-valued digraph (see the {\hyperref[\detokenize{tutorial:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{On computing digraph kernels}}}} (\autopageref*{\detokenize{tutorial:kernel-tutorial-label}}) tutorial);
 
 \item {} 
 for each crisp initial kernel \sphinxstyleemphasis{Ki}:
@@ -7277,7 +7281,7 @@ Determine the bipolar-valued \sphinxstyleemphasis{Ki}-membership characteristic 
 \end{enumerate}
 
 \item {} 
-repeat step (2) for each terminal kernel \sphinxstyleemphasis{Kj} by using the dual fixpoint equation with the transpose of the adjacency matrix \sphinxstyleemphasis{R/Kj}
+repeat step (2) for each terminal kernel \sphinxstyleemphasis{Kj} by using the dual fixpoint equation with the transpose of the adjacency matrix \sphinxstyleemphasis{R/Kj}.
 
 \end{enumerate}
 \end{quote}
@@ -7334,7 +7338,7 @@ The random outranking digraph \sphinxstyleemphasis{g} we consider here for illus
 \PYG{g+go}{Execution time  : 0.00022 sec.}
 \end{sphinxVerbatim}
 
-The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel \sphinxstyleemphasis{{[}‘a1’,’a2’,’a4’{]}} and a terminal one \sphinxstyleemphasis{{[}‘a3’,’a7’{]}} (see the indeterminate independance qualifications).
+The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel {[}‘a1’,’a2’,’a4’{]} and a terminal one {[}‘a3’,’a7’{]} (see above the indeterminate independance qualifications in Line 7 and 13).
 
 Let us compute the inital pre-kernel restricted adjacency table.
 
@@ -7354,37 +7358,41 @@ Let us compute the inital pre-kernel restricted adjacency table.
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{k1restricted}.png}
 \caption{Initial kernel {[}‘a1’,’a2’,’a4’{]} restricted adjacency table}\label{\detokenize{tutorial:id172}}\end{figure}
 
-We first notice that this initial pre-kernel is indeed only weakly independent: The outranking situation between ‘\sphinxstyleemphasis{a4}’ and ‘\sphinxstyleemphasis{a1}’ appears indeterminate. The corresponding initial pre-kernel membership characteristic vector may be computed as follows.
+We first notice that this initial pre-kernel is indeed only weakly independent: The outranking situation between \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a1} appears indeterminate. The corresponding initial pre-kernel membership characteristic vector may be computed as follows.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeGoodChoices}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
-\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZgt{} kernel: frozenset(\PYGZob{}\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}\PYGZcb{})}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeKernelVector}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}\PYG{n}{Initial}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
+\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZgt{} Initial pre\PYGZhy{}kernel: \PYGZob{}\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}\PYGZcb{}}
 \PYG{g+go}{initial low vector}
 \PYG{g+go}{[\PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0]}
 \PYG{g+go}{initial high vector}
 \PYG{g+go}{[+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0)]}
-\PYG{g+go}{1st low vector}
-\PYG{g+go}{[0.0000, +0.2093, \PYGZhy{}0.2093, 0.0000, \PYGZhy{}0.4419, \PYGZhy{}0.0698, \PYGZhy{}0.5814]}
-\PYG{g+go}{1st high vector}
-\PYG{g+go}{[+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0]}
-\PYG{g+go}{2nd low vector}
-\PYG{g+go}{[0.0000, +0.2093, \PYGZhy{}0.2093, 0.0000, \PYGZhy{}0.4419, \PYGZhy{}0.0698, \PYGZhy{}0.5814]}
-\PYG{g+go}{2nd high vector}
-\PYG{g+go}{[0.0000, +0.2093, \PYGZhy{}0.2093, +0.2093, \PYGZhy{}0.2093, \PYGZhy{}0.0465, \PYGZhy{}0.2093]}
-\PYG{g+go}{3rd low vector}
-\PYG{g+go}{[0.0000, +0.2093, \PYGZhy{}0.2093, +0.2093, \PYGZhy{}0.2093, \PYGZhy{}0.0698, \PYGZhy{}0.2093]}
-\PYG{g+go}{3rd high vector}
-\PYG{g+go}{[0.0000, +0.2093, \PYGZhy{}0.2093, +0.2093, \PYGZhy{}0.2093, \PYGZhy{}0.0465, \PYGZhy{}0.2093]}
-\PYG{g+go}{4th low vector}
-\PYG{g+go}{[0.0000, +0.2093, \PYGZhy{}0.2093, +0.2093, \PYGZhy{}0.2093, \PYGZhy{}0.0698, \PYGZhy{}0.2093]}
-\PYG{g+go}{4th high vector}
-\PYG{g+go}{[0.0000, +0.2093, \PYGZhy{}0.2093, +0.2093, \PYGZhy{}0.2093, \PYGZhy{}0.0698, \PYGZhy{}0.2093]}
+\PYG{g+go}{1st low vector    : [ 0.00, +0.21, \PYGZhy{}0.21,  0.00, \PYGZhy{}0.44, \PYGZhy{}0.07, \PYGZhy{}0.58]}
+\PYG{g+go}{1st high vector   : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]}
+\PYG{g+go}{2nd low vector    : [ 0.00, +0.21, \PYGZhy{}0.21,  0.00, \PYGZhy{}0.44, \PYGZhy{}0.07, \PYGZhy{}0.58]}
+\PYG{g+go}{2nd high vector   : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.05, \PYGZhy{}0.21]}
+\PYG{g+go}{3rd low vector    : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.07, \PYGZhy{}0.21]}
+\PYG{g+go}{3rd high vector   : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.05, \PYGZhy{}0.21]}
+\PYG{g+go}{4th low vector    : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.07, \PYGZhy{}0.21]}
+\PYG{g+go}{4th high vector   : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.07, \PYGZhy{}0.21]}
+\PYG{g+go}{\PYGZsh{} iterations      : 4}
+\PYG{g+go}{low \PYGZam{} high fusion : [ 0.00, +0.21, \PYGZhy{}0.21, +0.21, \PYGZhy{}0.21, \PYGZhy{}0.07, \PYGZhy{}0.21]}
+\PYG{g+go}{Choice vector for initial pre\PYGZhy{}kernel: \PYGZob{}\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{a2: +0.21}
+\PYG{g+go}{a4: +0.21}
+\PYG{g+go}{a1:  0.00}
+\PYG{g+go}{a6: \PYGZhy{}0.07}
+\PYG{g+go}{a3: \PYGZhy{}0.21}
+\PYG{g+go}{a5: \PYGZhy{}0.21}
+\PYG{g+go}{a7: \PYGZhy{}0.21}
 \end{sphinxVerbatim}
 
-A unique stable kernel membership vector \sphinxstyleemphasis{Y} is attained at the fourth iteration with positive members ‘\sphinxstyleemphasis{a2}’: +0.21 and ‘\sphinxstyleemphasis{a4}’: +0.21 (60.5\% criteria significance majority); ‘\sphinxstyleemphasis{a1}’: 0.00 being an ambigous potential member. Nodes ‘\sphinxstyleemphasis{a3}’,’\sphinxstyleemphasis{a5}’,’\sphinxstyleemphasis{a6}’ and ‘\sphinxstyleemphasis{a7}’ are all positive \sphinxstylestrong{non members} of this outranking pre-kernel.
+We start the fixpoint computation with an empty set characterization as first low vector and a complete set \sphinxstyleemphasis{X} characterizing high vector. After each iteration, the low vector is set to the negation of the previous high vector and the high vector is set to the negation of the previous low vector.
 
-Let us now compute the restricted adjacency table for the terminal pre-kernel \sphinxstyleemphasis{{[}‘a3’,’a7’{]}}.
+A unique stable kernel characteristic vector \sphinxstyleemphasis{Y1} is here attained at the fourth iteration with positive members \sphinxstyleemphasis{a2}: +0.21 and \sphinxstyleemphasis{a4}: +0.21 (60.5\% criteria significance majority); \sphinxstyleemphasis{a1}: 0.00 being an ambigous potential member. Nodes \sphinxstyleemphasis{a3}, \sphinxstyleemphasis{a5}, \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a7} are all positive \sphinxstylestrong{non members} of this outranking pre-kernel.
+
+Let us now compute the restricted adjacency table for the terminal pre-kernel {[}‘a3’,’a7’{]}.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -7402,31 +7410,82 @@ Let us now compute the restricted adjacency table for the terminal pre-kernel \s
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{k2restricted}.png}
 \caption{Terminal kernel {[}‘a3’,’a7’{]} restricted adjacency table}\label{\detokenize{tutorial:id173}}\end{figure}
 
-Again, we notice that this terminal pre-kernel is indeed only weakly independent. The corresponding bipolar-valued membership vector may be computed as follws.
+Again, we notice that this terminal pre-kernel is indeed only weakly independent. The corresponding bipolar-valued characteristic vector \sphinxstyleemphasis{Y2} may be computed as follws.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeBadChoices}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
-\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZgt{} kernel: frozenset(\PYGZob{}\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}\PYGZcb{})}
-\PYG{g+go}{initial low vector}
-\PYG{g+go}{[\PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0]}
-\PYG{g+go}{initial high vector}
-\PYG{g+go}{[+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0]}
-\PYG{g+go}{1st low vector}
-\PYG{g+go}{[\PYGZhy{}0.1628, \PYGZhy{}0.4884, 0.0000, \PYGZhy{}0.5814, \PYGZhy{}0.1628, \PYGZhy{}0.3023, +0.4884]}
-\PYG{g+go}{1st high vector}
-\PYG{g+go}{[+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0]}
-\PYG{g+go}{2nd low vector}
-\PYG{g+go}{[\PYGZhy{}0.1628, \PYGZhy{}0.4884, 0.0000, \PYGZhy{}0.5814, \PYGZhy{}0.1628, \PYGZhy{}0.3023, +0.4884]}
-\PYG{g+go}{2nd high vector}
-\PYG{g+go}{[\PYGZhy{}0.1628, \PYGZhy{}0.4884, 0.0000, \PYGZhy{}0.4884, \PYGZhy{}0.1628, \PYGZhy{}0.2558, +0.4884]}
-\PYG{g+go}{3rd low vector}
-\PYG{g+go}{[\PYGZhy{}0.1628, \PYGZhy{}0.4884, 0.0000, \PYGZhy{}0.4884, \PYGZhy{}0.1628, \PYGZhy{}0.2558, +0.4884]}
-\PYG{g+go}{3rd high vector}
-\PYG{g+go}{[\PYGZhy{}0.1628, \PYGZhy{}0.4884, 0.0000, \PYGZhy{}0.4884, \PYGZhy{}0.1628, \PYGZhy{}0.2558, +0.4884]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeKernelVector}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a7}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}\PYG{n}{Initial}\PYG{o}{=}\PYG{n+nb+bp}{False}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
+\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZgt{} Terminal pre\PYGZhy{}kernel: \PYGZob{}\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{initial low vector  : [\PYGZhy{}1.00, \PYGZhy{}1.00, \PYGZhy{}1.00, \PYGZhy{}1.00, \PYGZhy{}1.00, \PYGZhy{}1.00, \PYGZhy{}1.00]}
+\PYG{g+go}{initial high vector : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]}
+\PYG{g+go}{1st low vector      : [\PYGZhy{}0.16, \PYGZhy{}0.49,  0.00, \PYGZhy{}0.58, \PYGZhy{}0.16, \PYGZhy{}0.30, +0.49]}
+\PYG{g+go}{1st high vector     : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]}
+\PYG{g+go}{2nd low vector      : [\PYGZhy{}0.16, \PYGZhy{}0.49,  0.00, \PYGZhy{}0.58, \PYGZhy{}0.16, \PYGZhy{}0.30, +0.49]}
+\PYG{g+go}{2nd high vector     : [\PYGZhy{}0.16, \PYGZhy{}0.49,  0.00, \PYGZhy{}0.49, \PYGZhy{}0.16, \PYGZhy{}0.26, +0.49]}
+\PYG{g+go}{3rd low vector      : [\PYGZhy{}0.16, \PYGZhy{}0.49,  0.00, \PYGZhy{}0.49, \PYGZhy{}0.16, \PYGZhy{}0.26, +0.49]}
+\PYG{g+go}{3rd high vector     : [\PYGZhy{}0.16, \PYGZhy{}0.49,  0.00, \PYGZhy{}0.49, \PYGZhy{}0.16, \PYGZhy{}0.26, +0.49]}
+\PYG{g+go}{\PYGZsh{} iterations        : 3}
+\PYG{g+go}{high \PYGZam{} low fusion   : [\PYGZhy{}0.16, \PYGZhy{}0.49,  0.00, \PYGZhy{}0.49, \PYGZhy{}0.16, \PYGZhy{}0.26, +0.49]}
+\PYG{g+go}{Choice vector for terminal pre\PYGZhy{}kernel: \PYGZob{}\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{a7: +0.49}
+\PYG{g+go}{a3:  0.00}
+\PYG{g+go}{a1: \PYGZhy{}0.16}
+\PYG{g+go}{a5: \PYGZhy{}0.16}
+\PYG{g+go}{a6: \PYGZhy{}0.26}
+\PYG{g+go}{a2: \PYGZhy{}0.49}
+\PYG{g+go}{a4: \PYGZhy{}0.49}
 \end{sphinxVerbatim}
 
-A unique stable bipolar-valued fixpoint is attained at the third iteration with ‘\sphinxstyleemphasis{a7}’ positively confirmed (about 75\% criteria significance majority) as member of this terminal pre-kernel, whereas the membership of ‘\sphinxstyleemphasis{a3}’ in this pre-kernel appears indeterminate.
+A unique stable bipolar-valued high and low fixpoint is attained at the third iteration with \sphinxstyleemphasis{a7} positively confirmed (about 75\% criteria significance majority) as member of this terminal pre-kernel, whereas the membership of \sphinxstyleemphasis{a3} in this pre-kernel appears indeterminate. All the remaining nodes have \sphinxstyleemphasis{negative} membership characteristic values and are hence positively excluded from this pre-kernel.
+
+To show why we need sometimes to operate an epistemic fusion of unequal low and high vectors (see Step 2.a.), let us consider the following 7-\sphinxstyleemphasis{cycle} digraph.
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{CirculantDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{circulants}\PYG{o}{=}\PYG{p}{[}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Digraph instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{Instance class      : CirculantDigraph}
+\PYG{g+go}{Instance name       : c7}
+\PYG{g+go}{Digraph Order       : 7}
+\PYG{g+go}{Digraph Size        : 14}
+\PYG{g+go}{Valuation domain    : [\PYGZhy{}1.00;1.00]}
+\PYG{g+go}{Determinateness (\PYGZpc{}) : 100.00}
+\PYG{g+go}{Attributes          : [\PYGZsq{}name\PYGZsq{}, \PYGZsq{}order\PYGZsq{}, \PYGZsq{}circulants\PYGZsq{}, \PYGZsq{}actions\PYGZsq{},}
+\PYG{g+go}{                       \PYGZsq{}valuationdomain\PYGZsq{}, \PYGZsq{}relation\PYGZsq{},}
+\PYG{g+go}{                       \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
+\PYG{g+go}{Digraph *c7* is a symmetric crisp digraph showing, among others, the following initial as well as terminal kernel: [\PYGZsq{}2\PYGZsq{},\PYGZsq{}5\PYGZsq{},\PYGZsq{}7\PYGZsq{}]. Let us compute the corresponding inital pre\PYGZhy{}kernel characteristic vector.}
+\end{sphinxVerbatim}
+
+\fvset{hllines={, ,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeKernelVector}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{7}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}\PYG{n}{Initial}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
+\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZgt{} Initial pre\PYGZhy{}kernel: \PYGZob{}\PYGZsq{}2\PYGZsq{}, \PYGZsq{}5\PYGZsq{}, \PYGZsq{}7\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{initial low vector  : [\PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, \PYGZhy{}1.0]}
+\PYG{g+go}{initial high vector : [+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0]}
+\PYG{g+go}{1 st low vector     : [\PYGZhy{}1.0,  0.0, \PYGZhy{}1.0, \PYGZhy{}1.0,  0.0, \PYGZhy{}1.0,  0.0]}
+\PYG{g+go}{1 st high vector    : [+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0]}
+\PYG{g+go}{2 nd low vector     : [\PYGZhy{}1.0,  0.0, \PYGZhy{}1.0, \PYGZhy{}1.0,  0.0, \PYGZhy{}1.0,  0.0]}
+\PYG{g+go}{2 nd high vector    : [ 0.0, +1.0,  0.0,  0.0, +1.0,  0.0, +1.0]}
+\PYG{g+go}{stable low vector   : [\PYGZhy{}1.0,  0.0, \PYGZhy{}1.0, \PYGZhy{}1.0,  0.0, \PYGZhy{}1.0,  0.0]}
+\PYG{g+go}{stable high vector  : [ 0.0, +1.0,  0.0,  0.0, +1.0,  0.0, +1.0]}
+\PYG{g+go}{\PYGZsh{}iterations         : 3}
+\PYG{g+go}{low \PYGZam{} high fusion   : [\PYGZhy{}1.0, +1.0, \PYGZhy{}1.0, \PYGZhy{}1.0, +1.0, \PYGZhy{}1.0, +1.0]}
+\PYG{g+go}{Choice vector for initial pre\PYGZhy{}kernel: \PYGZob{}\PYGZsq{}2\PYGZsq{}, \PYGZsq{}5\PYGZsq{}, \PYGZsq{}7\PYGZsq{}\PYGZcb{}}
+\PYG{g+go}{7: +1.00}
+\PYG{g+go}{5: +1.00}
+\PYG{g+go}{2: +1.00}
+\PYG{g+go}{6: \PYGZhy{}1.00}
+\PYG{g+go}{4: \PYGZhy{}1.00}
+\PYG{g+go}{3: \PYGZhy{}1.00}
+\PYG{g+go}{1: \PYGZhy{}1.00}
+\end{sphinxVerbatim}
+
+Notice that the stable low vector characterizes the negative membership part, whereas, the stable high vector characterizes the positive membership part (see Lines 9-10 above). The bipolar fusion assembles eventually both stable parts into the correct pre-kernel characteristic vector (Line 12).
+
+The adjacency matrix of a symmetric digraph stays unchanged by the transposition operator. The previous computation when qualifyfing the same pre-kernel as a terminal instance will hence produce exactly the same result.
+
+It is worthwhile noticing again, the essential role the \sphinxstyleemphasis{indeterminate} logical value \sphinxstylestrong{0.0} is playing in this dual fixpoint algorithm.
 
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Tutorials of the Digraph3 resources}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
 
@@ -7434,67 +7493,35 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \section{Bibliography}
 \label{\detokenize{tutorial:bibliography}}
 \begin{sphinxthebibliography}{CPSTAT-L5}
-\bibitem[CPSTAT-L5]{\detokenize{CPSTAT-L5}}{\phantomsection\label{\detokenize{tutorial:cpstat-l5}} \begin{enumerate}
-\setcounter{enumi}{17}
-\item {} 
-Bisdorff (2017) \sphinxstyleemphasis{Simulating from abitrary empirical random distributions}. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winter Semester 2017 (\sphinxhref{\_static/quantileEstimation-2x2.pdf}{PDF 2x2 reduced presentation slides 211kB downloadable here}).
-
-\end{enumerate}
+\bibitem[CPSTAT-L5]{\detokenize{CPSTAT-L5}}{\phantomsection\label{\detokenize{tutorial:cpstat-l5}} 
+Bisdorff R. (2017) \sphinxstyleemphasis{Simulating from abitrary empirical random distributions}. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winter Semester 2017 (\sphinxhref{\_static/quantileEstimation-2x2.pdf}{PDF 2x2 reduced presentation slides 211kB downloadable here}).
 }
-\bibitem[BIS-2016]{\detokenize{BIS-2016}}{\phantomsection\label{\detokenize{tutorial:bis-2016}} \begin{enumerate}
-\setcounter{enumi}{17}
-\item {} 
-Bisdorff (2016). \sphinxstyleemphasis{On linear ranking from trillions of pairwise outranking situations}. Research Note 16-1, FSTC/ILIAS Decision Systems Group, University of Luxembourg pp. 1-6 (dowloadable  \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf}{PDF file 625.3 kB} (https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf)).
-
-\end{enumerate}
+\bibitem[BIS-2016]{\detokenize{BIS-2016}}{\phantomsection\label{\detokenize{tutorial:bis-2016}} 
+Bisdorff R. (2016). \sphinxstyleemphasis{On linear ranking from trillions of pairwise outranking situations}. Research Note 16-1, FSTC/ILIAS Decision Systems Group, University of Luxembourg pp. 1-6 (dowloadable  \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf}{PDF file 625.3 kB} (https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf)).
 }
-\bibitem[ADT-L2]{\detokenize{ADT-L2}}{\phantomsection\label{\detokenize{tutorial:adt-l2}} \begin{enumerate}
-\setcounter{enumi}{17}
-\item {} 
-Bisdorff (2014)  \sphinxstyleemphasis{Who wins the election}? MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( \sphinxhref{\_static/adtVoting-2x2.pdf}{PDF 2x2 reduced presentation slides 195 kB downloadable here}).
-
-\end{enumerate}
+\bibitem[ADT-L2]{\detokenize{ADT-L2}}{\phantomsection\label{\detokenize{tutorial:adt-l2}} 
+Bisdorff R. (2014)  \sphinxstyleemphasis{Who wins the election}? MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( \sphinxhref{\_static/adtVoting-2x2.pdf}{PDF 2x2 reduced presentation slides 195 kB downloadable here}).
 }
-\bibitem[ADT-L7]{\detokenize{ADT-L7}}{\phantomsection\label{\detokenize{tutorial:adt-l7}} \begin{enumerate}
-\setcounter{enumi}{17}
-\item {} 
-Bisdorff (2014)  \sphinxstyleemphasis{Best multiple criteria choice: the Rubis outranking method}. MICS Algorithmic Decision Theory course, Lecture 7. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 (\sphinxhref{\_static/adtOutranking-2x2.pdf}{PDF 2x2 reduced slides 310kB downloadable here}).
-
-\end{enumerate}
+\bibitem[ADT-L7]{\detokenize{ADT-L7}}{\phantomsection\label{\detokenize{tutorial:adt-l7}} 
+Bisdorff R.(2014)  \sphinxstyleemphasis{Best multiple criteria choice: the Rubis outranking method}. MICS Algorithmic Decision Theory course, Lecture 7. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 (\sphinxhref{\_static/adtOutranking-2x2.pdf}{PDF 2x2 reduced slides 310kB downloadable here}).
 }
-\bibitem[BIS-2013]{\detokenize{BIS-2013}}{\phantomsection\label{\detokenize{tutorial:bis-2013}} \begin{enumerate}
-\setcounter{enumi}{17}
-\item {} 
-Bisdorff (2013) “On Polarizing Outranking Relations with Large Performance Differences” \sphinxstyleemphasis{Journal of Multi-Criteria Decision Analysis} (Wiley) \sphinxstylestrong{20}:3-12 (downloadable preprint \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf}{PDF file 403.5 Kb} (https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf)).
-
-\end{enumerate}
+\bibitem[BIS-2013]{\detokenize{BIS-2013}}{\phantomsection\label{\detokenize{tutorial:bis-2013}} 
+Bisdorff R. (2013) “On Polarizing Outranking Relations with Large Performance Differences” \sphinxstyleemphasis{Journal of Multi-Criteria Decision Analysis} (Wiley) \sphinxstylestrong{20}:3-12 (downloadable preprint \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf}{PDF file 403.5 Kb} (https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf)).
 }
-\bibitem[BIS-2012]{\detokenize{BIS-2012}}{\phantomsection\label{\detokenize{tutorial:bis-2012}} \begin{enumerate}
-\setcounter{enumi}{17}
-\item {} 
-Bisdorff (2012). “On measuring and testing the ordinal correlation between bipolar outranking relations”. In Proceedings of DA2PL’2012 \sphinxstyleemphasis{From Multiple Criteria Decision Aid to Preference Learning}, University of Mons 91-100. (downloadable preliminary version \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf}{PDF file 408.5 kB} (https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf) ).
-
-\end{enumerate}
+\bibitem[BIS-2012]{\detokenize{BIS-2012}}{\phantomsection\label{\detokenize{tutorial:bis-2012}} 
+Bisdorff R. (2012). “On measuring and testing the ordinal correlation between bipolar outranking relations”. In Proceedings of DA2PL’2012 \sphinxstyleemphasis{From Multiple Criteria Decision Aid to Preference Learning}, University of Mons 91-100. (downloadable preliminary version \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf}{PDF file 408.5 kB} (https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf) ).
 }
-\bibitem[BIS-2008]{\detokenize{BIS-2008}}{\phantomsection\label{\detokenize{tutorial:bis-2008}} \begin{enumerate}
-\setcounter{enumi}{17}
-\item {} 
-Bisdorff, P. Meyer and M. Roubens (2008) “RUBIS: a bipolar-valued outranking method for the choice problem”. 4OR, \sphinxstyleemphasis{A Quarterly Journal of Operations Research} Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf}{PDF file 271.5Kb} (https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf)).
-
-\end{enumerate}
+\bibitem[BIS-2008]{\detokenize{BIS-2008}}{\phantomsection\label{\detokenize{tutorial:bis-2008}} 
+Bisdorff R., Meyer P. and Roubens M.(2008) “RUBIS: a bipolar-valued outranking method for the choice problem”. 4OR, \sphinxstyleemphasis{A Quarterly Journal of Operations Research} Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf}{PDF file 271.5Kb} (https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf)).
 }
-\bibitem[ISOMIS-08]{\detokenize{ISOMIS-08}}{\phantomsection\label{\detokenize{tutorial:isomis-08}} \begin{enumerate}
-\setcounter{enumi}{17}
-\item {} 
-Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. \sphinxstyleemphasis{Journal of Integer Sequences}, Vol. 11 Article 08.5.7 (\sphinxhref{https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html}{openly accessible here} (https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html)).
-
-\end{enumerate}
+\bibitem[ISOMIS-08]{\detokenize{ISOMIS-08}}{\phantomsection\label{\detokenize{tutorial:isomis-08}} 
+Bisdorff R. and Marichal J.-L. (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. \sphinxstyleemphasis{Journal of Integer Sequences}, Vol. 11 Article 08.5.7 (\sphinxhref{https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html}{openly accessible here} (https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html)).
 }
 \bibitem[NR3-2007]{\detokenize{NR3-2007}}{\phantomsection\label{\detokenize{tutorial:nr3-2007}} 
-W.H. Press, S.A. Teukolsky, W.T. Vetterling and B.P. Flannery (2007) “Single-Pass Estimation of Arbitrary Quantiles” Section 5.8.2 in \sphinxstyleemphasis{Numerical Recipes: The Art of Scientific Computing 3rd Ed.}, Cambridge University Press, pp 435-438.
+Press W.H., Teukolsky S.A., Vetterling W.T. and Flannery B.P. (2007) “Single-Pass Estimation of Arbitrary Quantiles” Section 5.8.2 in \sphinxstyleemphasis{Numerical Recipes: The Art of Scientific Computing 3rd Ed.}, Cambridge University Press, pp 435-438.
 }
 \bibitem[CHAM-2006]{\detokenize{CHAM-2006}}{\phantomsection\label{\detokenize{tutorial:cham-2006}} 
-J.M. Chambers, D.A. James, D. Lambert and S. Vander Wiel (2006) “Monitoring Networked Applications with Incremental Quantile Estimation”. \sphinxstyleemphasis{Statistical Science}, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.
+Chambers J.M., James D.A., Lambert D. and Vander Wiel S. (2006) “Monitoring Networked Applications with Incremental Quantile Estimation”. \sphinxstyleemphasis{Statistical Science}, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.
 }
 \bibitem[BIS-2006a]{\detokenize{BIS-2006a}}{\phantomsection\label{\detokenize{tutorial:bis-2006a}} \begin{enumerate}
 \setcounter{enumi}{17}
@@ -7503,90 +7530,38 @@ Bisdorff, M. Pirlot and M. Roubens (2006). “Choices and kernels from bipolar v
 
 \end{enumerate}
 }
-\bibitem[BIS-2006b]{\detokenize{BIS-2006b}}{\phantomsection\label{\detokenize{tutorial:bis-2006b}} \begin{enumerate}
-\setcounter{enumi}{17}
-\item {} 
-Bisdorff (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf}{PDF file 532.2 Kb} (https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf)).
-
-\end{enumerate}
+\bibitem[BIS-2006b]{\detokenize{BIS-2006b}}{\phantomsection\label{\detokenize{tutorial:bis-2006b}} 
+Bisdorff R. (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf}{PDF file 532.2 Kb} (https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf)).
 }
-\bibitem[BIS-2004]{\detokenize{BIS-2004}}{\phantomsection\label{\detokenize{tutorial:bis-2004}} \begin{enumerate}
-\setcounter{enumi}{17}
-\item {} 
-Bisdorff (2004) \sphinxstyleemphasis{On a natural fuzzification of Boolean logic}. In Erich Peter Klement and Endre Pap (editors), Proceedings of the 25th Linz Seminar on \sphinxstyleemphasis{Fuzzy Set Theory, Mathematics of Fuzzy Systems}. Bildungszentrum St. Magdalena, Linz (Austria), February 2004. pp. 20-26 (PDF file (133.4 Kb) for \sphinxhref{\_static/Linz2004.pdf}{downloading})
-
-\end{enumerate}
+\bibitem[BIS-2004]{\detokenize{BIS-2004}}{\phantomsection\label{\detokenize{tutorial:bis-2004}} 
+Bisdorff R. (2004) “On a natural fuzzification of Boolean logic”. In Erich Peter Klement and Endre Pap (editors), Proceedings of the 25th Linz Seminar on \sphinxstyleemphasis{Fuzzy Set Theory, Mathematics of Fuzzy Systems}. Bildungszentrum St. Magdalena, Linz (Austria), February 2004. pp. 20-26 (PDF file (133.4 Kb) for \sphinxhref{\_static/Linz2004.pdf}{downloading})
 }
-\bibitem[GOL-2004]{\detokenize{GOL-2004}}{\phantomsection\label{\detokenize{tutorial:gol-2004}} \begin{enumerate}
-\setcounter{enumi}{12}
-\item {} 
-Ch. Golumbic (2004), \sphinxstyleemphasis{Agorithmic Graph Theory and Perfect Graphs} 2nd Ed., Annals of Discrete Mathematics 57, Elsevier.
-
-\end{enumerate}
+\bibitem[GOL-2004]{\detokenize{GOL-2004}}{\phantomsection\label{\detokenize{tutorial:gol-2004}} 
+Golumbic M.Ch. (2004), \sphinxstyleemphasis{Agorithmic Graph Theory and Perfect Graphs} 2nd Ed., Annals of Discrete Mathematics 57, Elsevier.
 }
-\bibitem[FMCAA]{\detokenize{FMCAA}}{\phantomsection\label{\detokenize{tutorial:fmcaa}} \begin{enumerate}
-\setcounter{enumi}{14}
-\item {} 
-Häggström (2002) \sphinxstyleemphasis{Finite Markov Chains and Algorithmic Applications}. Cambridge University Press.
-
-\end{enumerate}
+\bibitem[FMCAA]{\detokenize{FMCAA}}{\phantomsection\label{\detokenize{tutorial:fmcaa}} 
+Häggström O. (2002) \sphinxstyleemphasis{Finite Markov Chains and Algorithmic Applications}. Cambridge University Press.
 }
-\bibitem[BIS-2000]{\detokenize{BIS-2000}}{\phantomsection\label{\detokenize{tutorial:bis-2000}} \begin{enumerate}
-\setcounter{enumi}{17}
-\item {} 
-Bisdorff (2000), Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods, \sphinxstyleemphasis{Computers and Operations Research}, 27:673-687 (downloadable version \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf}{PDF file 159.1Kb} (https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf)).
-
-\end{enumerate}
+\bibitem[BIS-2000]{\detokenize{BIS-2000}}{\phantomsection\label{\detokenize{tutorial:bis-2000}} 
+Bisdorff R. (2000), Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods, \sphinxstyleemphasis{Computers and Operations Research}, 27:673-687 (downloadable version \sphinxhref{https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf}{PDF file 159.1Kb} (https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf)).
 }
-\bibitem[WIL-1996]{\detokenize{WIL-1996}}{\phantomsection\label{\detokenize{tutorial:wil-1996}} \begin{enumerate}
-\setcounter{enumi}{3}
-\item {} \begin{enumerate}
-\setcounter{enumi}{1}
-\item {} 
-Wilson (1996), \sphinxstyleemphasis{Generating random spanning trees more quickly than the cover time}, Proceedings of the Twenty-eighth Annual ACM \sphinxstyleemphasis{Symposium on the Theory of Computing} (Philadelphia, PA, 1996), 296-303, ACM, New York, 1996.
-
-\end{enumerate}
-
-\end{enumerate}
+\bibitem[WIL-1996]{\detokenize{WIL-1996}}{\phantomsection\label{\detokenize{tutorial:wil-1996}} 
+Wilson D.B. (1996), \sphinxstyleemphasis{Generating random spanning trees more quickly than the cover time}, Proceedings of the Twenty-eighth Annual ACM \sphinxstyleemphasis{Symposium on the Theory of Computing} (Philadelphia, PA, 1996), 296-303, ACM, New York, 1996.
 }
 \bibitem[BAR-1991]{\detokenize{BAR-1991}}{\phantomsection\label{\detokenize{tutorial:bar-1991}} 
-J.-P. Barthélemy and A. Guenoche (1991), \sphinxstyleemphasis{Trees and Proximities Representations}, Wiley, ISBN: 978-0471922636.
+Barthélemy J.-P. and Guenoche A. (1991), \sphinxstyleemphasis{Trees and Proximities Representations}, Wiley, ISBN: 978-0471922636.
 }
-\bibitem[SCH-1985]{\detokenize{SCH-1985}}{\phantomsection\label{\detokenize{tutorial:sch-1985}} \begin{enumerate}
-\setcounter{enumi}{6}
-\item {} 
-Schmidt and Th. Ströhlein (1985), \sphinxstyleemphasis{On kernels of graphs and solutions of games: a synopsis based on relations and fixpoints}. SIAM, J. Algebraic Discrete Methods, 6, 1985, 54\textendash{}65.
-
-\end{enumerate}
+\bibitem[SCH-1985]{\detokenize{SCH-1985}}{\phantomsection\label{\detokenize{tutorial:sch-1985}} 
+Schmidt G. and Ströhlein Th. (1985), \sphinxstyleemphasis{On kernels of graphs and solutions of games: a synopsis based on relations and fixpoints}. SIAM, J. Algebraic Discrete Methods, 6, 1985, 54\textendash{}65.
 }
-\bibitem[BER-1958]{\detokenize{BER-1958}}{\phantomsection\label{\detokenize{tutorial:ber-1958}} \begin{enumerate}
-\setcounter{enumi}{2}
-\item {} 
-Berge (2001), \sphinxstyleemphasis{The theory of graphs}. Dover Publications Inc. 2001. First published in English by Methuen \& Co Ltd., London 1962. Translated from a French edition by Dunod, Paris 1958.
-
-\end{enumerate}
+\bibitem[BER-1958]{\detokenize{BER-1958}}{\phantomsection\label{\detokenize{tutorial:ber-1958}} 
+Berge C. (2001), \sphinxstyleemphasis{The theory of graphs}. Dover Publications Inc. 2001. First published in English by Methuen \& Co Ltd., London 1962. Translated from a French edition by Dunod, Paris 1958.
 }
-\bibitem[KRU-1956]{\detokenize{KRU-1956}}{\phantomsection\label{\detokenize{tutorial:kru-1956}} \begin{enumerate}
-\setcounter{enumi}{9}
-\item {} \begin{enumerate}
-\setcounter{enumi}{1}
-\item {} 
-Kruskal (1956), \sphinxstyleemphasis{On the shortest spanning subtree of a graph and the traveling salesman problem}, Proceedings of the American Mathematical Society. 7: 48\textendash{}50.
-
-\end{enumerate}
-
-\end{enumerate}
+\bibitem[KRU-1956]{\detokenize{KRU-1956}}{\phantomsection\label{\detokenize{tutorial:kru-1956}} 
+Kruskal J.B. (1956), \sphinxstyleemphasis{On the shortest spanning subtree of a graph and the traveling salesman problem}, Proceedings of the American Mathematical Society. 7: 48\textendash{}50.
 }
-\bibitem[KEN-1938]{\detokenize{KEN-1938}}{\phantomsection\label{\detokenize{tutorial:ken-1938}} \begin{enumerate}
-\setcounter{enumi}{12}
-\item {} \begin{enumerate}
-\setcounter{enumi}{6}
-\item {} 
-Kendall (1938), \sphinxstyleemphasis{A New Measure of Rank Correlation}. Biometrica 30:81\textendash{}93
-
-\end{enumerate}
-
-\end{enumerate}
+\bibitem[KEN-1938]{\detokenize{KEN-1938}}{\phantomsection\label{\detokenize{tutorial:ken-1938}} 
+Kendall M.G. (1938), \sphinxstyleemphasis{A New Measure of Rank Correlation}. Biometrica 30:81\textendash{}93
 }
 \end{sphinxthebibliography}
 

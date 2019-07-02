@@ -7712,8 +7712,8 @@
 
 <div class="viewcode-block" id="Digraph.computeGoodChoiceVector"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeGoodChoiceVector">[docs]</a>    <span class="k">def</span> <span class="nf">computeGoodChoiceVector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ker</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        | Characteristic values for potentially good choices.</span>
-<span class="sd">        | [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</span>
+<span class="sd">        | Computing Characteristic values for dominant pre-kernels</span>
+<span class="sd">        | using the von Neumann dual fixoint equation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">copy</span>
         <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
@@ -7727,13 +7727,12 @@
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--&gt; kernel:&#39;</span><span class="p">,</span> <span class="n">ker</span><span class="p">)</span>
         <span class="n">choice</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">ker</span><span class="p">]</span>
-        <span class="c1">#choice.sort()</span>
-        <span class="n">degi</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">intstab</span><span class="p">(</span><span class="n">ker</span><span class="p">)</span>
-        <span class="n">dega</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">absorb</span><span class="p">(</span><span class="n">ker</span><span class="p">)</span>
-        <span class="n">degd</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">domin</span><span class="p">(</span><span class="n">ker</span><span class="p">)</span>
-        <span class="n">degirred</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">domirredval</span><span class="p">(</span><span class="n">ker</span><span class="p">,</span><span class="n">relation</span><span class="p">)</span>
-        <span class="n">degmd</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">degi</span><span class="p">,</span><span class="n">degd</span><span class="p">)</span>
-        <span class="n">cover</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">averageCoveringIndex</span><span class="p">(</span><span class="n">ker</span><span class="p">)</span>
+<span class="c1">##        degi = temp.intstab(ker)</span>
+<span class="c1">##        dega = temp.absorb(ker)</span>
+<span class="c1">##        degd = temp.domin(ker)</span>
+<span class="c1">##        degirred = temp.domirredval(ker,relation)</span>
+<span class="c1">##        degmd = min(degi,degd)</span>
+<span class="c1">##        cover = temp.averageCoveringIndex(ker)</span>
         <span class="n">relation_k</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">domkernelrestrict</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
         <span class="c1">#vec1_a = array.array(&#39;f&#39;, [Max] * n)</span>
@@ -7744,8 +7743,8 @@
         <span class="n">veclowa</span> <span class="o">=</span> <span class="n">vec0_a</span>
         <span class="n">vechigha</span> <span class="o">=</span> <span class="n">vec1_a</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;initial veclowa&#39;</span><span class="p">,</span><span class="n">veclowa</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;initial vechigha&#39;</span><span class="p">,</span> <span class="n">vechigha</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;initial low vector  :&#39;</span><span class="p">,</span><span class="n">veclowa</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;initial high vector :&#39;</span><span class="p">,</span> <span class="n">vechigha</span><span class="p">)</span>
         <span class="n">it</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">while</span> <span class="n">veclowa</span> <span class="o">!=</span> <span class="n">vechigha</span> <span class="ow">and</span> <span class="n">it</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="p">:</span>
             <span class="n">veclowb</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">matmult2</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span><span class="n">veclowa</span><span class="p">)</span>
@@ -7756,13 +7755,13 @@
             <span class="n">veclowa</span> <span class="o">=</span> <span class="n">veclow</span>
             <span class="n">vechigha</span> <span class="o">=</span> <span class="n">vechigh</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="s1">&#39;th veclowa  :&#39;</span><span class="p">,</span><span class="n">veclowa</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="s1">&#39;th vechigha :&#39;</span><span class="p">,</span><span class="n">vechigha</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="s1">&#39;th low vector  :&#39;</span><span class="p">,</span><span class="n">veclowa</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="s1">&#39;th high vector :&#39;</span><span class="p">,</span><span class="n">vechigha</span><span class="p">)</span>
             <span class="n">it</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;final veclowa  :&#39;</span><span class="p">,</span> <span class="n">veclowa</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;final vechigha :&#39;</span><span class="p">,</span> <span class="n">vechigha</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#iterations    :&#39;</span><span class="p">,</span> <span class="n">it</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;final low vector  :&#39;</span><span class="p">,</span> <span class="n">veclowa</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;final high vector :&#39;</span><span class="p">,</span> <span class="n">vechigha</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#iterations       :&#39;</span><span class="p">,</span> <span class="n">it</span><span class="p">)</span>
         <span class="n">domvec</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">sharpvec</span><span class="p">(</span><span class="n">veclowa</span><span class="p">,</span><span class="n">vechigha</span><span class="p">)</span>
         <span class="n">determ</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">determinateness</span><span class="p">(</span><span class="n">domvec</span><span class="p">)</span>
         <span class="n">goodChoiceVector</span> <span class="o">=</span> <span class="p">[]</span>
@@ -7770,8 +7769,84 @@
             <span class="n">goodChoiceVector</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">domvec</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="nb">str</span><span class="p">(</span><span class="n">actions</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
         <span class="n">goodChoiceVector</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">goodChoiceVector</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">goodChoiceVector</span>        </div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Choice vector for dominant pre-kernel: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">ker</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">goodChoiceVector</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%+.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">goodChoiceVector</span>        </div>
+
+<div class="viewcode-block" id="Digraph.computeKernelVector"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeKernelVector">[docs]</a>    <span class="k">def</span> <span class="nf">computeKernelVector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">kernel</span><span class="p">,</span><span class="n">Initial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Computing Characteristic values for dominant pre-kernels</span>
+<span class="sd">        | using the von Neumann dual fixoint equation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">copy</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">Max</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]))</span>
+        <span class="n">Min</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]))</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]))</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">temp</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+        <span class="c1">#actions.sort()</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">relation</span>
+        <span class="n">ker</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Initial</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--&gt; Initial kernel:&#39;</span><span class="p">,</span> <span class="n">ker</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--&gt; Terminal kernel:&#39;</span><span class="p">,</span> <span class="n">ker</span><span class="p">)</span>
+        <span class="n">choice</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ker</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Initial</span><span class="p">:</span>
+            <span class="n">relation_k</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">domkernelrestrict</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">relation_k</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">abskernelrestrict</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+        <span class="c1">#vec1_a = array.array(&#39;f&#39;, [Max] * n)</span>
+        <span class="n">vec1_a</span> <span class="o">=</span> <span class="p">[</span><span class="n">Max</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="c1">#vec0_a = array.array(&#39;f&#39;, [Min] * n)</span>
+        <span class="n">vec0_a</span> <span class="o">=</span> <span class="p">[</span><span class="n">Min</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="n">Initial</span><span class="p">:</span>
+            <span class="n">mat</span> <span class="o">=</span> <span class="p">[</span><span class="n">temp</span><span class="o">.</span><span class="n">readdomvector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">relation_k</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mat</span> <span class="o">=</span> <span class="p">[</span><span class="n">temp</span><span class="o">.</span><span class="n">readabsvector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">relation_k</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">]</span>
+        <span class="n">veclowa</span> <span class="o">=</span> <span class="n">vec0_a</span>
+        <span class="n">vechigha</span> <span class="o">=</span> <span class="n">vec1_a</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;initial low vector  :&#39;</span><span class="p">,</span><span class="n">veclowa</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;initial high vector :&#39;</span><span class="p">,</span> <span class="n">vechigha</span><span class="p">)</span>
+        <span class="n">it</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">veclowa</span> <span class="o">!=</span> <span class="n">vechigha</span> <span class="ow">and</span> <span class="n">it</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="p">:</span>
+            <span class="n">veclowb</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">matmult2</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span><span class="n">veclowa</span><span class="p">)</span>
+            <span class="n">vechighb</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">matmult2</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span><span class="n">vechigha</span><span class="p">)</span>
+            <span class="n">veclow</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">contra</span><span class="p">(</span><span class="n">vechighb</span><span class="p">)</span>
+            <span class="n">vechigh</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">contra</span><span class="p">(</span><span class="n">veclowb</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">veclow</span> <span class="o">==</span> <span class="n">veclowa</span> <span class="ow">and</span> <span class="n">vechigh</span> <span class="o">==</span> <span class="n">vechigha</span> <span class="p">:</span> <span class="k">break</span>
+            <span class="n">veclowa</span> <span class="o">=</span> <span class="n">veclow</span>
+            <span class="n">vechigha</span> <span class="o">=</span> <span class="n">vechigh</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="s1">&#39;th low vector  :&#39;</span><span class="p">,</span><span class="n">veclowa</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="s1">&#39;th high vector :&#39;</span><span class="p">,</span><span class="n">vechigha</span><span class="p">)</span>
+            <span class="n">it</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;final low vector  :&#39;</span><span class="p">,</span> <span class="n">veclowa</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;final high vector :&#39;</span><span class="p">,</span> <span class="n">vechigha</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#iterations       :&#39;</span><span class="p">,</span> <span class="n">it</span><span class="p">)</span>
+        <span class="n">domvec</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">sharpvec</span><span class="p">(</span><span class="n">veclowa</span><span class="p">,</span><span class="n">vechigha</span><span class="p">)</span>
+        <span class="n">determ</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">determinateness</span><span class="p">(</span><span class="n">domvec</span><span class="p">)</span>
+        <span class="n">choiceVector</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">choiceVector</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">domvec</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="nb">str</span><span class="p">(</span><span class="n">actions</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+        <span class="n">choiceVector</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Initial</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Choice vector for initial pre-kernel: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">ker</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Choice vector for terminal pre-kernel: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">ker</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">choiceVector</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%+.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">choiceVector</span>        </div>
+
                                 
 <div class="viewcode-block" id="Digraph.computeGoodChoices"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeGoodChoices">[docs]</a>    <span class="k">def</span> <span class="nf">computeGoodChoices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
