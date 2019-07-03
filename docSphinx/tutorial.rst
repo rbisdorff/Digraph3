@@ -4774,7 +4774,7 @@ neato -Tpng tutRandomTree.dot -o tutRandomTree.png
 
 A tree graph of order *n* contains *n-1* edges (see Line 8 and 9) and we may distinguish vertices like *v1*, *v2*, *v4*, *v5* or *v9*  of degree 1, called the **leaves** of the tree, and vertices like *v3*, *v6*, *v7* or *v8* of degree 2 or more, called the **nodes** of the tree.
 
-The structure of a tree of order :math:`n > 2` is entirely characterized by a corresponding *Prüfer* **code** -ie a *list of vertices keys*- of length *n-2*. See, for instance in Line 12 the code ['v3', 'v8', 'v8', 'v3', 'v7', 'v6', 'v7'] corresponding to our sample tree graph *t*.
+The structure of a tree of order :math:`n > 2` is entirely characterised by a corresponding *Prüfer* **code** -ie a *list of vertices keys*- of length *n-2*. See, for instance in Line 12 the code ['v3', 'v8', 'v8', 'v3', 'v7', 'v6', 'v7'] corresponding to our sample tree graph *t*.
 
 Each position of the code indicates the parent of the remaining leaf with the smallest vertex label. Vertex *v3* is thus the parent of *v1* and we drop leaf *v1*, *v8* is now the parent of leaf *v2* and we drop *v2*, vertex *v8* is again the parent of leaf *v4* and we drop *v4*, vertex *v3* is the parent of leaf *v5* and we drop *v5*, *v7* is now the parent of leaf *v3* and we may drop *v3*, *v6* becomes the parent of leaf *v8* and we drop *v8*, *v7* becomes now the parent of leaf *v6* and we may drop *v6*. The two eventually remaining vertices, *v7* and *v9*, give the last link in the reconstructed tree (see [BAR-1991]_).  
 
@@ -5370,7 +5370,7 @@ where for all *x* in *X*,
 
      :math:`(Y \circ R)(x) \; = \; \max_{y \in X, x \neq y} \big ( \min(Y(x), R(x,y))\big)\;.`
 
-than *Y* characterizes an *initial kernel* ([BER-1958]_). Transposing the characteristic vector characterizes similarly a *terminal kernel*
+than *Y* characterises an *initial kernel* ([BER-1958]_). Transposing the membership characteristic vector characterises similarly a *terminal kernel*
 
      :math:`R \circ Y^t \; = \; -Y^t\;.`
 
@@ -5400,9 +5400,9 @@ Absorbent preKernels :
    covered      :  1.000
 >>> 
 
-It is easy to verify now that, for instance, the characteristic vector [-1, -1, +1] satisfies the initial kernel equation system; *a3* gives an initial kernel. Similarly, the characteristic vector [-1, +1, -1] verifies indeed the terminal kernel equation system and hence *a2* gives a terminal kernel.
+It is easy to verify now that the characteristic vector [-1, -1, +1] satisfies the initial kernel equation system; *a3* gives an initial kernel. Similarly, the characteristic vector [-1, +1, -1] verifies indeed the terminal kernel equation system and hence *a2* gives a terminal kernel.
 
-We succeeded now in generalizing *Berge*'s kernel equation systems to genuine bipolar-valued digraphs ([BIS-2006a]_). The constructive proof, found by M. Pirlot, provided by the way the following fixpoint equation
+We succeeded in generalizing *Berge*'s kernel equation systems to genuine bipolar-valued digraphs ([BIS-2006a]_). The constructive proof, found by M. Pirlot, provided by the way the following fixpoint equation
 
      :math:`T(Y) \; := \; -(Y \circ R) = Y,`
 
@@ -5411,15 +5411,15 @@ that may be used for computing bipolar-valued kernel membership vectors.
 Solving bipolar-valued kernel equation systems
 ..............................................
 
-*John von Neumann* ([SCH-1985]_) showed indeed that the initial kernel *K* of a digraph *G(X, R)* corresponds to the solution of the following dual bipolar fixpoint equation
+*John von Neumann* ([SCH-1985]_) showed indeed that, when a digraph *G(X,R)* is acyclic with a  unique inital kernel *K* characterised by the the membership characteristics vector *Y*, then the following dual bipolar fixpoint equation
 
      :math:`T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;.`
 
-admitting a high and a low fixpoint converging both to a unique solution *Y* when *G(X,R)* is acyclic and *K* is its unique kernel.
+will admit a stable high and a low fixpoint solution converging both to *Y*.
 
-Inspired by this crisp fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its independent and dominant or absorbent choices *K* in *X* determines an induced partial subgraph *G(X,R/K)* which is acyclyc and admits *K* as unique kernel.
+Inspired by this crisp fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its independent and dominant or absorbent choices *Ki* in *X* determines an induced partial subgraph *G(X,R/Ki)* which is acyclyc and admits *Ki* as unique kernel.
 
-Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extended dual fixpoint algorithm, applied to *G(X,R/K)*, allows to compute the associated bipolar-valued kernel characteristic vector *Y* in polynomial complexity.
+Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extended dual fixpoint algorithm, applied to *G(X,R/Ki)*, allows to compute the associated bipolar-valued kernel characteristic vectors *Yi* in polynomial complexity.
 
 **Algorithm** 
 
@@ -5569,7 +5569,18 @@ a4: -0.49
 
 A unique stable bipolar-valued high and low fixpoint is attained at the third iteration with *a7* positively confirmed (about 75% criteria significance majority) as member of this terminal pre-kernel, whereas the membership of *a3* in this pre-kernel appears indeterminate. All the remaining nodes have *negative* membership characteristic values and are hence positively excluded from this pre-kernel.
 
-To show why we need sometimes to operate an epistemic fusion of unequal low and high vectors (see Step 2.a.), let us consider the following 7-*cycle* digraph.
+When we reconsider in the graphviz drawing of this outranking digraph in Fig. 70 and 44,
+
+.. figure:: bestWorstOrientation.png
+   :width: 300 px
+   :align: center
+   :alt: The random outranking digraph oriented by its initial and terminal prekernels
+
+   The strict outranking digraph oriented by the positive members of its initial and terminal kernels
+
+it becomes obvious why alternative *a1* is **neither included nor excluded** from the initial kernel. Same observation is applicable to alternative *a3* which may **neither be included nor excluded** from the terminal kernel. 
+
+To illustrate finally why sometimes we need to operate an *epistemic disjunctive fusion* of **unequal** stable low and high membership characteristics vectors (see Step 2.c.), let us consider, for instance, the following crisp 7-*cycle* graph.
 
 >>> g = CirculantDigraph(order=7,circulants=[-1,1])			     
 >>> g			     
@@ -5584,7 +5595,7 @@ Attributes          : ['name', 'order', 'circulants', 'actions',
                        'valuationdomain', 'relation',
 		       'gamma', 'notGamma']
 		       
-Digraph *c7* is a symmetric crisp digraph showing, among others, the following initial as well as terminal kernel: ['2','5','7']. Let us compute the corresponding initial pre-kernel characteristic vector.
+Digraph *c7* is a symmetric crisp digraph showing, among others, the maximal independent nodes set {'2','5','7'}, i.e. an initial as well as terminal kernel. We may  compute the corresponding initial pre-kernel characteristic vector.
 
 >>> g.computeKernelVector(['2','5','7'],Initial=True,Comments=True)
 --> Initial pre-kernel: {'2', '5', '7'}
@@ -5607,11 +5618,11 @@ Choice vector for initial pre-kernel: {'2', '5', '7'}
 3: -1.00
 1: -1.00
 
-Notice that the stable low vector characterizes the **negative membership** part, whereas, the stable high vector characterizes the **positive membership** part (see Lines 9-10 above). The bipolar **fusion** assembles eventually both stable parts into the correct pre-kernel characteristic vector (Line 12). 
+Notice that the stable low vector characterises the **negative membership** part, whereas, the stable high vector characterises the **positive membership** part (see Lines 9-10 above). The bipolar **disjunctive fusion** assembles eventually both stable parts into the correct pre-kernel characteristic vector (Line 12). 
 
 The adjacency matrix of a symmetric digraph staying *unchanged* by the transposition operator, the previous computations, when qualifying the same pre-kernel as a *terminal* instance, will hence produce exactly the same result.
 
-It is worthwhile noticing again the essential computational role, the logical *indeterminate* value **0.0** is playing in this dual fixpoint algorithm implementation. To implement such kind of algorithms without this logical neutral term, would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many *impossibility results* would come up. 
+It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this dual fixpoint algorithm implementation. To implement such kind of algorithms without this logical neutral term, would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many *impossibility results* would come up. 
 
 Back to :ref:`Tutorial-label`
 	   	  
