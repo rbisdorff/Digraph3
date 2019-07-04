@@ -2299,13 +2299,15 @@
                 <span class="k">except</span><span class="p">:</span>
                     <span class="n">actionsCategories</span><span class="p">[(</span><span class="n">highCateg</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">,</span><span class="n">lowCateg</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">]</span>      
                 
+        <span class="c1">#actionsCategIntervals.sort(reverse=Descending)</span>
+        <span class="n">actionsCategoriesKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">actionsCategories</span><span class="p">]</span>
+        <span class="n">actionsCategoriesKeys</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">actionsCategoriesKeys</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
         <span class="n">actionsCategIntervals</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">actionsCategories</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">actionsCategoriesKeys</span><span class="p">:</span>
             <span class="n">actionsCategIntervals</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">interval</span><span class="p">,</span>\
                                           <span class="n">actionsCategories</span><span class="p">[</span><span class="n">interval</span><span class="p">]])</span>
         
-        <span class="n">actionsCategIntervals</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="n">Descending</span><span class="p">)</span>
-        <span class="c1">#actionsCategIntervals = sorted(actionsCategIntervals,key=itemgetter(0,1,2), reverse=True)</span>
         <span class="n">weakOrdering</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">actionsCategIntervals</span><span class="p">:</span>
             <span class="c1">#print(item)</span>
@@ -4288,7 +4290,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 3250 $                                 *</span>
+<span class="s2">    * $Revision: 3256 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -4415,7 +4417,7 @@
     <span class="n">qs</span> <span class="o">=</span> <span class="n">QuantilesSortingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="c1">#qs.showSorting()</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; average&#39;</span><span class="p">)</span>
-    <span class="n">qs</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+    <span class="n">qs</span><span class="o">.</span><span class="n">showHTMLQuantileOrdering</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; optimistic&#39;</span><span class="p">)</span>
     <span class="n">qs</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; pessimistic&#39;</span><span class="p">)</span>
@@ -4510,7 +4512,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 3250 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 3256 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

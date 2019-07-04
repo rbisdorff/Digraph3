@@ -9188,7 +9188,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 
         print('\n')
 
-class RubisRestServer(ServerProxy):
+class _RubisRestServer(ServerProxy):
     """
     xmlrpc-cgi Proxy Server for accessing on-line
     a Rubis Rest Solver.
@@ -9218,11 +9218,11 @@ class RubisRestServer(ServerProxy):
         >>> ...
 
     """
-    def __init__(self,host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=False):
+    def __init__(self,host="https://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=False):
         """
         Rubis Rest Server connection.
         """
-        import sys,xmlrpc.client
+        import sys,xmlrpc.client,ssl
         self._server = xmlrpc.client.ServerProxy(host)
         
         if Debug:
@@ -9382,7 +9382,6 @@ if __name__ == "__main__":
     from time import time, sleep
     from outrankingDigraphs import BipolarOutrankingDigraph
     from weakOrders import RankingByChoosingDigraph
-    from outrankingDigraphs import RubisRestServer
     
     print('*-------- Testing classes and methods -------')
 
