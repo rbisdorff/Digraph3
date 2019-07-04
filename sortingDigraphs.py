@@ -2214,6 +2214,7 @@ class QuantilesSortingDigraph(SortingDigraph):
               in the uppest, the lowest or the average potential quantile.
         
         """
+        from operator import itemgetter
         if strategy == None:
             strategy = 'optimistic'
         if HTML:
@@ -2226,35 +2227,38 @@ class QuantilesSortingDigraph(SortingDigraph):
         for x in self.actions:
             a,lowCateg,highCateg,credibility =\
                      self.showActionCategories(x,Comments=Debug)
+            #print(a,lowCateg,highCateg,credibility)
             if strategy == "optimistic":
                 try:
-                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                    actionsCategories[(highCateg,lowCateg,lowCateg)].append(a)
                 except:
-                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+                    actionsCategories[(highCateg,lowCateg,lowCateg)] = [a]
             elif strategy == "pessimistic":
                 try:
-                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
+                    actionsCategories[(lowCateg,highCateg,lowCateg)].append(a)
                 except:
-                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
+                    actionsCategories[(lowCateg,highCateg,lowCateg)] = [a]
             elif strategy == "average":
                 lc = float(lowCateg)
                 hc = float(highCateg)
                 ac = (lc+hc)/2.0
                 try:
-                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
+                    actionsCategories[(ac,highCateg,lowCateg)].append(a)
                 except:
-                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
+                    actionsCategories[(ac,highCateg,lowCateg)] = [a]
             else:  # optimistic by default
                 try:
-                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                    actionsCategories[(highCateg,lowCateg,lowCateg)].append(a)
                 except:
-                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
+                    actionsCategories[(highCateg,lowCateg,lowCateg)] = [a]      
                 
         actionsCategIntervals = []
         for interval in actionsCategories:
             actionsCategIntervals.append([interval,\
                                           actionsCategories[interval]])
+        
         actionsCategIntervals.sort(reverse=Descending)
+        #actionsCategIntervals = sorted(actionsCategIntervals,key=itemgetter(0,1,2), reverse=True)
         weakOrdering = []
         for item in actionsCategIntervals:
             #print(item)
@@ -2271,8 +2275,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                 str(item[1])) )
                     else:
                         if HTML:
-                            html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][1])]['lowLimit'],\
-                                                self.categories[str(item[0][0])]['highLimit'])
+                            html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][0])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'])
                             html += '<td>%s</td></tr>' % str(item[1])                            
                         else:
                             print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
@@ -2311,7 +2315,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                     else:
                         if HTML:
                             html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][2])]['lowLimit'],\
-                                                self.categories[str(item[0][2])]['highLimit'])
+                                                self.categories[str(item[0][1])]['highLimit'])
                             html += '<td>%s</td></tr>' % str(item[1])
                         else:
                             print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
@@ -4336,7 +4340,7 @@ if __name__ == "__main__":
     
 ##    # test incremental rating agent
     MP = False
-    seed = 105
+    seed = 1000
     nbrOfCPUs = 4
 
 ##    from randomPerfTabs import RandomPerformanceTableau
@@ -4356,21 +4360,29 @@ if __name__ == "__main__":
 ##
     from randomPerfTabs import Random3ObjectivesPerformanceTableau
     from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
-    nbrActions=1000
+    nbrActions=100
     nbrCrit = 21
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
                                     numberOfCriteria=nbrCrit,seed=seed)
 
-    pq = PerformanceQuantiles(tp,20,LowerClosed=True,Debug=False)
-    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-    newActions = tpg.randomActions(100)
-    pq.updateQuantiles(newActions,historySize=None)
-    ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=20,\
-                                       #PrefThresholds=False,\
-                                   WithSorting=True,Debug=False,\
-                                       Threading=MP,nbrOfCPUs=nbrOfCPUs)
-    print(ira)
-    ira.showQuantilesRating()
+    qs = QuantilesSortingDigraph(tp,7,LowerClosed=True)
+    #qs.showSorting()
+    print('==>> average')
+    qs.showQuantileOrdering(strategy='average')
+    print('==>> optimistic')
+    qs.showQuantileOrdering(strategy='optimistic')
+    print('==>> pessimistic')
+    qs.showQuantileOrdering(strategy='pessimistic')
+##    pq = PerformanceQuantiles(tp,20,LowerClosed=True,Debug=False)
+##    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
+##    newActions = tpg.randomActions(100)
+##    pq.updateQuantiles(newActions,historySize=None)
+##    ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=20,\
+##                                       #PrefThresholds=False,\
+##                                   WithSorting=True,Debug=False,\
+##                                       Threading=MP,nbrOfCPUs=nbrOfCPUs)
+##    print(ira)
+##    ira.showQuantilesRating()
 ##    #ira.sorting = ira.computeSortingCharacteristics()
 ##    #ira.categoryContent = ira.computeCategoryContents()
 ##    ira.showSorting()
@@ -4390,10 +4402,10 @@ if __name__ == "__main__":
 ##    #ira.showRefinedQuantileOrdering()
 ##    #ira.showOrderedRelationTable()
 ##    #ira.showSortingCharacteristics()
-    ira.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings',
-                                   Correlations=True,
-                                   #rankingRule='best',
-                                   )
+##    ira.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings',
+##                                   Correlations=True,
+##                                   #rankingRule='best',
+##                                   )
 ##    ira.showRankingScores()
 ##    print(ira)
 ##    print(ira.computeQuantileProfile(0.25))

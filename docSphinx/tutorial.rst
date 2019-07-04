@@ -5411,11 +5411,11 @@ that may be used for computing bipolar-valued kernel membership vectors.
 Solving bipolar-valued kernel equation systems
 ..............................................
 
-*John von Neumann* ([SCH-1985]_) showed indeed that, when a digraph *G(X,R)* is acyclic with a  unique inital kernel *K* characterised by its membership characteristics vector *Y*, then the following dual bipolar fixpoint equation
+*John von Neumann* ([SCH-1985]_) showed indeed that, when a digraph *G(X,R)* is acyclic with a  unique inital kernel *K* characterised by its membership characteristics vector *Yk*, then the following dual bipolar fixpoint equation
 
      :math:`T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;.`
 
-will admit a stable high and a low fixpoint solution converging both to *Y*.
+will admit a stable high and a low fixpoint solution converging both to *Yk*.
 
 Inspired by this crisp fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its independent and dominant or absorbent choices *Ki* in *X* determines an induced partial subgraph *G(X,R/Ki)* which is acyclyc and admits *Ki* as unique kernel.
 
@@ -5577,7 +5577,7 @@ When we reconsider in the graphviz drawing of this outranking digraph in Fig. 70
 
    The strict outranking digraph oriented by the positive members of its initial and terminal pre-kernel
 
-it becomes obvious why alternative *a1* is **neither included nor excluded** from the initial kernel. Same observation is applicable to alternative *a3* which can **neither be included nor excluded** from the terminal kernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent pre-kernel; the corresponding bipolar valued membership characteristic vector being completely indeterminate (see for instance the ':ref:`Rubis-Tutorial-label` ' tutorial).
+it becomes obvious why alternative *a1* is **neither included nor excluded** from the initial kernel. Same observation is applicable to alternative *a3* which can **neither be included nor excluded** from the terminal kernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent pre-kernel; the corresponding bipolar valued membership characteristic vector being completely indeterminate (see for instance the ':ref:`Rubis-Tutorial-label`' tutorial).
 
 To illustrate finally why sometimes we need to operate an *epistemic disjunctive fusion* of **unequal** stable low and high membership characteristics vectors (see Step 2.c.), let us consider, for instance, the following crisp 7-*cycle* graph.
 

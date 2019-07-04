@@ -8209,10 +8209,10 @@ best covered terminal kernel</span></p>
 </div>
 <div class="section" id="solving-bipolar-valued-kernel-equation-systems">
 <h4>Solving bipolar-valued kernel equation systems<a class="headerlink" href="#solving-bipolar-valued-kernel-equation-systems" title="Permalink to this headline">¶</a></h4>
-<p><em>John von Neumann</em> (<a class="reference internal" href="#sch-1985" id="id92">[SCH-1985]</a>) showed indeed that, when a digraph <em>G(X,R)</em> is acyclic with a  unique inital kernel <em>K</em> characterised by its membership characteristics vector <em>Y</em>, then the following dual bipolar fixpoint equation</p>
+<p><em>John von Neumann</em> (<a class="reference internal" href="#sch-1985" id="id92">[SCH-1985]</a>) showed indeed that, when a digraph <em>G(X,R)</em> is acyclic with a  unique inital kernel <em>K</em> characterised by its membership characteristics vector <em>Yk</em>, then the following dual bipolar fixpoint equation</p>
 <blockquote>
 <div><img class="math" src="_images/math/36e98ba0e21f769eaff6fc1fa627132707bdbae6.png" alt="T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;."/></div></blockquote>
-<p>will admit a stable high and a low fixpoint solution converging both to <em>Y</em>.</p>
+<p>will admit a stable high and a low fixpoint solution converging both to <em>Yk</em>.</p>
 <p>Inspired by this crisp fixpoint equation, we observed that for a given bipolar-valued digraph <em>G(X,R)</em>, each of its independent and dominant or absorbent choices <em>Ki</em> in <em>X</em> determines an induced partial subgraph <em>G(X,R/Ki)</em> which is acyclyc and admits <em>Ki</em> as unique kernel.</p>
 <p>Following the <em>von Neumann</em> fixpoint algorithm, a similar bipolar-valued extended dual fixpoint algorithm, applied to <em>G(X,R/Ki)</em>, allows to compute the associated bipolar-valued kernel characteristic vectors <em>Yi</em> in polynomial complexity.</p>
 <p><strong>Algorithm</strong></p>
@@ -8450,7 +8450,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/bestWorstOrientation.png"><img alt="The random outranking digraph oriented by its initial and terminal prekernels" src="_images/bestWorstOrientation.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 70 </span><span class="caption-text">The strict outranking digraph oriented by the positive members of its initial and terminal pre-kernel</span></p>
 </div>
-<p>it becomes obvious why alternative <em>a1</em> is <strong>neither included nor excluded</strong> from the initial kernel. Same observation is applicable to alternative <em>a3</em> which can <strong>neither be included nor excluded</strong> from the terminal kernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent pre-kernel; the corresponding bipolar valued membership characteristic vector being completely indeterminate (see for instance the ‘<a class="reference internal" href="#rubis-tutorial-label"><span class="std std-ref">Computing a best choice recommendation</span></a> ‘ tutorial).</p>
+<p>it becomes obvious why alternative <em>a1</em> is <strong>neither included nor excluded</strong> from the initial kernel. Same observation is applicable to alternative <em>a3</em> which can <strong>neither be included nor excluded</strong> from the terminal kernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent pre-kernel; the corresponding bipolar valued membership characteristic vector being completely indeterminate (see for instance the ‘<a class="reference internal" href="#rubis-tutorial-label"><span class="std std-ref">Computing a best choice recommendation</span></a>’ tutorial).</p>
 <p>To illustrate finally why sometimes we need to operate an <em>epistemic disjunctive fusion</em> of <strong>unequal</strong> stable low and high membership characteristics vectors (see Step 2.c.), let us consider, for instance, the following crisp 7-<em>cycle</em> graph.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
