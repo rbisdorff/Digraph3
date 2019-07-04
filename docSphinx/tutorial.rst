@@ -2788,7 +2788,7 @@ Credibility domain:  {'min':-100.0, 'max': 100.0', 'med':0.0'}
      {'A': 0.00, 'B': 0.00, 'C': 0.00, 'D': 0.00, 
       'E': 0.00, 'F': 0.00, 'G': 0.00, }
 
-It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D' (see Line 6). In the corresponding characteristic vector (see Line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the strict best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
+It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D' (see Line 6). In the corresponding characteristic vector (see Line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see the ':ref:`Pearls-Tutorial-label` ' tutorial and [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the crisp best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
 
 We may also notice (see Line 17 and Line 21) that both alternatives *A* and *F* are reported as certainly outranked choices, hence a **potential worst choice recommendation** . This confirms again the global incomparability status of alternative *A*.
 
@@ -5411,7 +5411,7 @@ that may be used for computing bipolar-valued kernel membership vectors.
 Solving bipolar-valued kernel equation systems
 ..............................................
 
-*John von Neumann* ([SCH-1985]_) showed indeed that, when a digraph *G(X,R)* is acyclic with a  unique inital kernel *K* characterised by the the membership characteristics vector *Y*, then the following dual bipolar fixpoint equation
+*John von Neumann* ([SCH-1985]_) showed indeed that, when a digraph *G(X,R)* is acyclic with a  unique inital kernel *K* characterised by its membership characteristics vector *Y*, then the following dual bipolar fixpoint equation
 
      :math:`T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;.`
 
@@ -5423,11 +5423,10 @@ Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extende
 
 **Algorithm** 
 
-    *in* : bipolar-valued digraph *G(X,R)*,
-
-    *out* : set {*Y1*, *Y2*, .. } of bipolar-valued kernel membership characteristic vectors.
+    | *in*  : bipolar-valued digraph *G(X,R)*,
+    | *out* : set {*Y1*, *Y2*, .. } of bipolar-valued kernel membership characteristic vectors.
     
-    1. enumerate all initial and terminal crisp pre-kernels *K*, *K2*, ... in the given bipolar-valued digraph (see the :ref:`Kernel-Tutorial-label` tutorial);
+    1. enumerate all initial and terminal crisp pre-kernels *K*, *K2*, ... in the given bipolar-valued digraph (see the ':ref:`Kernel-Tutorial-label`' tutorial);
        
     #. for each crisp initial kernel *Ki*:
     
@@ -5483,7 +5482,7 @@ dominant kernel :  [0, 0, 0, 1, 0, 0, 0, 0]
 absorbent kernel:  [0, 0, 1, 0, 0, 0, 0, 0]
 Execution time  : 0.00022 sec.
 
-The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel [*a1*, *a2*, *a4*] and a terminal one [*a3*, *a7*] (see above the indeterminate independence qualifications in Line 7 and 13).
+The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel [*a1*, *a2*, *a4*] and a terminal one [*a3*, *a7*] (see above the *indeterminate independence* qualifications in Line 7 and 13).
 
 Let us compute the *initial* pre-kernel restricted adjacency table.
  
@@ -5525,11 +5524,11 @@ a3: -0.21
 a5: -0.21
 a7: -0.21
  
-We start the fixpoint computation with an empty set characterization as first low vector and a complete set *X* characterizing high vector. After each iteration, the low vector is set to the negation of the previous high vector and the high vector is set to the negation of the previous low vector.
+We start the fixpoint computation with an empty set characterisation as first low vector and a complete set *X* characterising high vector. After each iteration, the low vector is set to the negation of the previous high vector and the high vector is set to the negation of the previous low vector.
 
-A unique stable kernel characteristic vector *Y1* is here attained at the fourth iteration with positive members *a2*: +0.21 and *a4*: +0.21 (60.5% criteria significance majority); *a1*: 0.00 being an ambiguous potential member. Alternatives *a3*, *a5*, *a6* and *a7* are all positive **non members** of this outranking pre-kernel.
+A unique stable kernel characteristic vector *Y1* is here attained at the fourth iteration with positive members *a2*: +0.21 and *a4*: +0.21 (60.5% criteria significance majority); *a1*: 0.00 being an ambiguous potential member. Alternatives *a3*, *a5*, *a6* and *a7* are all negative members, i.e. positive **non members** of this outranking pre-kernel.
 
-Let us now compute the restricted adjacency table for the *terminal* pre-kernel [*a3*, *a7*].
+Let us now compute the restricted adjacency table for the outranked, i.e. the *terminal* pre-kernel [*a3*, *a7*].
  
 >>> k2Relation = gcd.abskernelrestrict(['a3','a7'])
 >>> gcd.showHTMLRelationTable(
@@ -5569,16 +5568,16 @@ a4: -0.49
 
 A unique stable bipolar-valued high and low fixpoint is attained at the third iteration with *a7* positively confirmed (about 75% criteria significance majority) as member of this terminal pre-kernel, whereas the membership of *a3* in this pre-kernel appears indeterminate. All the remaining nodes have *negative* membership characteristic values and are hence positively excluded from this pre-kernel.
 
-When we reconsider in the graphviz drawing of this outranking digraph in Fig. 70 and 44,
+When we reconsider in the graphviz drawing of this outranking digraph in Fig. 70 and Fig. 44 (see ':ref:`Kernel-Tutorial-label`' tutorial),
 
 .. figure:: bestWorstOrientation.png
    :width: 300 px
    :align: center
    :alt: The random outranking digraph oriented by its initial and terminal prekernels
 
-   The strict outranking digraph oriented by the positive members of its initial and terminal kernels
+   The strict outranking digraph oriented by the positive members of its initial and terminal pre-kernel
 
-it becomes obvious why alternative *a1* is **neither included nor excluded** from the initial kernel. Same observation is applicable to alternative *a3* which may **neither be included nor excluded** from the terminal kernel. 
+it becomes obvious why alternative *a1* is **neither included nor excluded** from the initial kernel. Same observation is applicable to alternative *a3* which can **neither be included nor excluded** from the terminal kernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent pre-kernel; the corresponding bipolar valued membership characteristic vector being completely indeterminate (see for instance the ':ref:`Rubis-Tutorial-label` ' tutorial).
 
 To illustrate finally why sometimes we need to operate an *epistemic disjunctive fusion* of **unequal** stable low and high membership characteristics vectors (see Step 2.c.), let us consider, for instance, the following crisp 7-*cycle* graph.
 
@@ -5595,10 +5594,10 @@ Attributes          : ['name', 'order', 'circulants', 'actions',
                        'valuationdomain', 'relation',
 		       'gamma', 'notGamma']
 		       
-Digraph *c7* is a symmetric crisp digraph showing, among others, the maximal independent nodes set {'2','5','7'}, i.e. an initial as well as terminal kernel. We may  compute the corresponding initial pre-kernel characteristic vector.
+Digraph *c7* is a symmetric crisp digraph showing, among others, the maximal independent set {'2','5','7'}, i.e. an initial as well as terminal kernel. We may  compute the corresponding initial kernel characteristic vector.
 
 >>> g.computeKernelVector(['2','5','7'],Initial=True,Comments=True)
---> Initial pre-kernel: {'2', '5', '7'}
+--> Initial kernel: {'2', '5', '7'}
 initial low vector  : [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0]
 initial high vector : [+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0]
 1 st low vector     : [-1.0,  0.0, -1.0, -1.0,  0.0, -1.0,  0.0]
@@ -5620,9 +5619,9 @@ Choice vector for initial pre-kernel: {'2', '5', '7'}
 
 Notice that the stable low vector characterises the **negative membership** part, whereas, the stable high vector characterises the **positive membership** part (see Lines 9-10 above). The bipolar **disjunctive fusion** assembles eventually both stable parts into the correct pre-kernel characteristic vector (Line 12). 
 
-The adjacency matrix of a symmetric digraph staying *unchanged* by the transposition operator, the previous computations, when qualifying the same pre-kernel as a *terminal* instance, will hence produce exactly the same result.
+The adjacency matrix of a symmetric digraph staying *unchanged* by the transposition operator, the previous computations, when qualifying the same kernel as a *terminal* instance, will hence produce exactly the same result.
 
-It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this dual fixpoint algorithm implementation. To implement such kind of algorithms without this logical neutral term, would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many *impossibility results* would come up. 
+It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this dual fixpoint algorithm. To implement such kind of algorithms without a logical **neutral term** would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial *impossibility theorems* and *dubious logical results* come up. 
 
 Back to :ref:`Tutorial-label`
 	   	  
