@@ -2252,13 +2252,15 @@ class QuantilesSortingDigraph(SortingDigraph):
                 except:
                     actionsCategories[(highCateg,lowCateg,lowCateg)] = [a]      
                 
+        #actionsCategIntervals.sort(reverse=Descending)
+        actionsCategoriesKeys = [key for key in actionsCategories]
+        actionsCategoriesKeys = sorted(actionsCategoriesKeys,key=itemgetter(0,1,2), reverse=True)
+
         actionsCategIntervals = []
-        for interval in actionsCategories:
+        for interval in actionsCategoriesKeys:
             actionsCategIntervals.append([interval,\
                                           actionsCategories[interval]])
         
-        actionsCategIntervals.sort(reverse=Descending)
-        #actionsCategIntervals = sorted(actionsCategIntervals,key=itemgetter(0,1,2), reverse=True)
         weakOrdering = []
         for item in actionsCategIntervals:
             #print(item)
@@ -4368,7 +4370,7 @@ if __name__ == "__main__":
     qs = QuantilesSortingDigraph(tp,7,LowerClosed=True)
     #qs.showSorting()
     print('==>> average')
-    qs.showQuantileOrdering(strategy='average')
+    qs.showHTMLQuantileOrdering(strategy='average')
     print('==>> optimistic')
     qs.showQuantileOrdering(strategy='optimistic')
     print('==>> pessimistic')
