@@ -5199,7 +5199,7 @@ It is worthwhile noticing that the ordinal correlation index *tau(R1,R2)* we obt
     * *r(R1<=>R2)* = *M(R1<=>R2)* / *n(n-1)*: The normalized majority margin of the pairwise relational equivalence statements, also called *valued ordinal correlation*, and 
     * *d* = *D* / *n(n-1)*: The normalized determination of the corresponding pairwise relational equivalence statements, in fact de determinateness of the relational equivalence digraph.
 
-We have thus successfully **out-factored** the *determination* effect from the *correlation* effect. With completely determined relations, *tau(R1,R2)* = *r(R1<=>R2)*. By convention, we set the ordinal correlation with a *completely indeterminate* relation, i.e. when *D = 0*, to the *indeterminate* correlation value 0.0. With *uniformly* chosen random *r*-valued relations, the **expected** *tau* index is **0.0**, denoting in fact an **indeterminate** correlation. The corresponding expected normalized determination *d* is about 0.333.
+We have thus successfully **out-factored** the *determination* effect from the *correlation* effect. With completely determined relations, *tau(R1,R2)* = *r(R1<=>R2)*. By convention, we set the ordinal correlation with a *completely indeterminate* relation, i.e. when *D = 0*, to the *indeterminate* correlation value 0.0. With *uniformly* chosen random *r*-valued relations, the **expected** *tau* index is **0.0**, denoting in fact an **indeterminate** correlation. The corresponding expected normalized determination *d* is about 0.333 (see [BIS-2012]_).
 
 We may verify these relations with help of the corresponding equivalence digraph *eq* (see above).
 
@@ -5415,7 +5415,7 @@ Solving bipolar-valued kernel equation systems
 
      :math:`T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;.`
 
-will admit a stable high and a low fixpoint solution converging both to *Yk*.
+will admit a stable high and a stable low fixpoint solutions converging both to *Yk*.
 
 Inspired by this crisp fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its independent and dominant or absorbent choices *Ki* in *X* determines an induced partial subgraph *G(X,R/Ki)* which is acyclyc and admits *Ki* as unique kernel.
 
