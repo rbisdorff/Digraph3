@@ -39,7 +39,7 @@ Working with the *Digraph3* software resources
 Purpose
 -------
 
-The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the |location_linkHTML1| |location_linkLatex1| given at the University of Luxembourg in the context of its *Master in Information and Computer Science* (MICS). 
+The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar-valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the |location_linkHTML1| |location_linkLatex1| given at the University of Luxembourg in the context of its *Master in Information and Computer Science* (MICS). 
 
 The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
@@ -760,7 +760,7 @@ A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candida
     >>> cdg.computeCondorcetWinner()
     ['a1']  
     
-By seeing the majority margins like a bipolarly-valued characteristic function for a global preference relation defined on the set of canditates, we may use all operational resources of the generic ``Digraph`` class (see :ref:`Digraphs-Tutorial-label`), and especially its ``exportGraphViz`` method [1]_, for visualizing an election result.
+By seeing the majority margins like a bipolar-valued characteristic function for a global preference relation defined on the set of candidates, we may use all operational resources of the generic ``Digraph`` class (see :ref:`Digraphs-Tutorial-label`), and especially its ``exportGraphViz`` method [1]_, for visualizing an election result.
 
    >>> cdg.exportGraphViz('tutorialLinearBallots')
    *---- exporting a dot file for GraphViz tools ---------*
@@ -840,7 +840,7 @@ See also the technical documentation of the :ref:`outrankingDigraphs-label`.
 Outranking digraph
 ------------------
 
-In this *Digraph3* module, the main :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class provides a generic **bipolar outranking digraph model**. A given object of this class consists in
+In this *Digraph3* module, the main :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class provides a generic **bipolar-valued outranking digraph model**. A given object of this class consists in
 
 1. a potential set of decision **actions** : a dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
 2. a coherent family of **criteria**: a dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
@@ -848,7 +848,7 @@ In this *Digraph3* module, the main :py:class:`outrankingDigraphs.BipolarOutrank
 4. the digraph **valuationdomain**, a dictionary with three entries: the *minimum* (-100, means certainly no link), the *median* (0, means missing information) and the *maximum* characteristic value (+100, means certainly a link),
 5. the **outranking relation** : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise *outranking situation* computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.   
 
-With the help of the :py:class:`outrankingDigraphs.RandomBipolarOutrankingDigraph` class (of type :py:class:`outrankingDigraphs.BipolarOutrankingDigraph`) , let us generate for illustration a random bipolar outranking digraph consisting of 7 decision actions denoted *a01*, *a02*, ..., *a07*.
+With the help of the :py:class:`outrankingDigraphs.RandomBipolarOutrankingDigraph` class (of type :py:class:`outrankingDigraphs.BipolarOutrankingDigraph`) , let us generate for illustration a random bipolar-valued outranking digraph consisting of 7 decision actions denoted *a01*, *a02*, ..., *a07*.
 
        >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
        >>> odg = RandomBipolarOutrankingDigraph()
@@ -932,7 +932,7 @@ We may, furthermore, rank the alternatives on the basis of the weighted marginal
    :width: 400 px
    :align: center
 
-   Ranked heatmap of the performance table 
+   Ranked heat map of the performance table 
 
 There is no doubt that action *a03*, with a performance in the highest quintile in five out of seven criteria, appears definitely to be best performing. Action *a05* shows a more or less average performance on most criteria, whereas action *a02* appears to be the weakest alternative.
 
@@ -945,7 +945,7 @@ Considering the given performance tableau, the :py:class:`outrankingDigraphs.Bip
     2. If :math:`r(x\,S\,y) < 0.0` it is more *False* than *True* that *x outranks y*, i.e. alternative x is **not** at least as well performing than alternative y **and** there is no considerable positive performance difference observed in favour of x,
     3. If :math:`r(x\,S\,y) = 0.0` it is *indeterminate* whether *x outranks y or not*.
 
-The resulting bipolarly valued outranking relation may be inspected with the following command.
+The resulting bipolar-valued outranking relation may be inspected with the following command.
 
 	>>> odg.showRelationTable()
 	* ---- Relation Table -----
@@ -1031,7 +1031,7 @@ All outranking digraphs, being of root type :py:class:`digraphs.Digraph`, inheri
 Codual digraph
 --------------
 
-From the theory (see [BIS-2013]_, [ADT-L7]_ )  we know that the bipolarly outranking relation is **weakly complete**, i.e. if :math:`r(x\,S\,y) < 0.0` then :math:`r(y\,S\,x) >= 0.0` . From this property follows that the bipolarly valued outranking relation verifies the coduality principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_.
+From the theory (see [BIS-2013]_, [ADT-L7]_ )  we know that a bipolar-valued outranking relation is **weakly complete**, i.e. if :math:`r(x\,S\,y) < 0.0` then :math:`r(y\,S\,x) >= 0.0` . From this property follows that a bipolar-valued outranking relation verifies the **coduality** principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_.
 
 	>>> cdodg = -(~odg)
 	>>> cdodg.exportGraphViz('codualOdg')
@@ -1075,9 +1075,9 @@ The resulting XML file may be visualized in a browser window (other than Chrome 
 	'a07' |   +67.57  +45.95  -24.32  +27.03  +27.03  +45.95   +0.00  
 	>>> ...
 
-We recover the original bipolarly valued outranking characteristics, and we may restart again the preference modelling process. 
+We recover the original bipolar-valued outranking characteristics, and we may restart again the preference modelling process. 
 
-Many more tools for exploiting bipolarly valued outranking digraphs are available in the Digraph3 resources (see the technical documentation of the :ref:`outrankingDiGraphs-label` and the :ref:`perfTabs-label`).
+Many more tools for exploiting bipolar-valued outranking digraphs are available in the Digraph3 resources (see the technical documentation of the :ref:`outrankingDiGraphs-label` and the :ref:`perfTabs-label`).
 
 Back to :ref:`Tutorial-label`
 
@@ -1140,12 +1140,12 @@ The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of t
     * weightScale := [Min,Max] (default =(1,numberOfCriteria).
     * IntegerWeights := True (default) | False (normalized to proportions of 1.0).
     * commonScale := [a,b]; common performance measuring scales (default = [0.0,100.0])
-    * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type *x* in *{q,p,v}*, the float x0 value represents a constant percentage of the common scale and the float x1 value a proportional value of the actual perforamance measure. Default values are [(2.5.0,0.0),(5.0,0.0),(60.0,0,0)]. 
+    * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type *x* in *{q,p,v}*, the float x0 value represents a constant percentage of the common scale and the float x1 value a proportional value of the actual performance measure. Default values are [(2.5.0,0.0),(5.0,0.0),(60.0,0,0)]. 
     * commonMode := common random distribution of random performance measurements:
       
          | ('uniform',None,None), uniformly distributed float values on the given common scales' range [Min,Max]. 
          | ('normal',*mu*,*sigma*), truncated Gaussian distribution, by default *mu* = (*b-a*)/2 and *sigma* = (*b-a*)/4. 
-         | ('triangular',*mode*,*repartition*), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value. By deafult, *mode* = (*b-a*)/2 and *repartition* = 0.5.
+         | ('triangular',*mode*,*repartition*), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value. By default, *mode* = (*b-a*)/2 and *repartition* = 0.5.
          | ('beta',None,(alpha,beta)), a beta generator with standard alpha=2 and beta=2 parameters.
 	 
     * valueDigits := <integer>, precision of performance measurements (2 decimal digits by default).
@@ -1274,7 +1274,7 @@ A (potentially ranked) colored heat map with 5 color levels is also provided.
    :width: 400 px
    :align: center
 
-   Unranked heatmap of a random Cost-Benefit performance tableau
+   Unranked heat map of a random Cost-Benefit performance tableau
    
 Such a performance tableau may be stored and re-accessed in the XMCDA2 encoded format.
 
@@ -1390,7 +1390,7 @@ For testing purposes we provifde a special :py:class:`perfTabs.PartialPerformanc
     >>> tenv = PartialPerformanceTableau(t,criteriaSubset=\
                               t.objectives['Env']['criteria'])
 
-One may thus compute a partial bipolar outranking digraph for each individual objective.
+One may thus compute a partial bipolar-valued outranking digraph for each individual objective.
 
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> geco = BipolarOutrankingDigraph(teco)
@@ -2543,7 +2543,7 @@ The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted
 
    The office choice outranking digraph  
 
-For computing such a bipolar valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigraph`` constructor from the :ref:`outrankingDigraphs-label` module. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window (see Fig. 21).
+For computing such a bipolar-valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigraph`` constructor from the :ref:`outrankingDigraphs-label` module. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window (see Fig. 21).
 
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> g = BipolarOutrankingDigraph(t)
@@ -2685,7 +2685,7 @@ And, in a system browser window, browse the `solution file`_.
 
 The :code:`valuationType` parameter allows to work:
 
-    - on the standard bipolar outranking digraph (valuationType = 'bipolar', default),
+    - on the standard bipolar-valued outranking digraph (valuationType = 'bipolar', default),
     - on the normalized --[-1,1] valued-- bipolar outranking digraph (valuationType = 'normalized'),
     - on the robust --ordinal criteria weights-- bipolar outranking digraph (valuationType = 'robust'),
     - on the confident outranking digraph (valuationType = 'confident'),
@@ -3024,9 +3024,9 @@ criteria |   'm1'   'm2'   'm3'   'm4'
    'c1'  |  -10.0   -7.4   -5.4   -3.4  
    'c2'  |  -96.4  -72.2  -52.3  -34.0  
 
-The main run time (see Lines 23-29 of the object description above) is spent by the class constructor in computing a bipolar valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, ie many new decision alternatives and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
+The main run time (see Lines 23-29 of the object description above) is spent by the class constructor in computing a bipolar-valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, ie many new decision alternatives and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
 
-The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
+The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar-valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
 
 In this rating example, the *NetFlows* rule appears to be the more appropriate ranking rule.
 
@@ -3879,7 +3879,7 @@ A both *internally* **and** *dominant*, resp. *absorbent stable* choice is calle
 
 Furthermore, as the kernel concept involves conjointly a **positive logical refutation** (the *internal stability*) and a **positive logical affirmation** (the *external stability*), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, modelling *negation* by change of numerical sign and including explicitely a third **median** logical value (0) expressing logical **indeterminateness** (neither positive, nor negative, see [BIS-2000]_ and [BIS-2004]_).
 
-In such a  bipolar valued context, we call **prekernel** a choice which is **externally stable** and for which the **internal stability** condition is **valid or indeterminate**. We say that the independence condition is in this case only **weakly** validated. Notice that all kernels are hence prekernels, but not vice-versa.
+In such a  bipolar-valued context, we call **prekernel** a choice which is **externally stable** and for which the **internal stability** condition is **valid or indeterminate**. We say that the independence condition is in this case only **weakly** validated. Notice that all kernels are hence prekernels, but not vice-versa.
 
 In graphs or symmetric digraphs, where there is essentially no apparent ' *laterality* ', all kernels are *initial* **and** *terminal* at the same time. They correspond to what we call *holes* in the graph. An *universal* example is given by the **complete** digraph.
 
@@ -4093,7 +4093,7 @@ In algorithmic decision theory, initial and terminal prekernels may provide conv
 Computing good and bad choice recommendations
 ---------------------------------------------
 
-To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolarly-valued **outranking** digraph.
+To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolar-valued **outranking** digraph.
 
 >>> from outrankingDigraphs import *
 >>> g = RandomBipolarOutrankingDigraph(seed=5)
@@ -4598,7 +4598,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
 
     Random graph of order 8 generated with edge probability 0.4
 
-If the random graph instance *g* (see Fig. 53) is a permutation graph, *g* and its dual *-g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a transitive neighbourhodd decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
+If the random graph instance *g* (see Fig. 53) is a permutation graph, *g* and its dual *-g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a transitive neighbourhood decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
 
 >>> if g.isComparabilityGraph():
 ...     print(g.edgeOrientations)
@@ -4929,7 +4929,7 @@ Maximum determined spanning forests
 
 In case of valued graphs supporting weighted edges, we may finally construct a **most determined** spanning tree (or forest if not connected) using *Kruskal* 's *greedy* **minimum-spanning-tree algorithm** [5]_ on the *dual* valuation of the graph [KRU-1956]_.
 
-We consider, for instance, a randomly valued graph with five vertices and seven edges bipolarly valued in [-1.0; 1.0]. 
+We consider, for instance, a randomly valued graph with five vertices and seven edges bipolar-valued in [-1.0; 1.0]. 
 
 >>> from graphs import *
 >>> g = RandomValuationGraph(seed=2)
@@ -4996,8 +4996,8 @@ Back to :ref:`Tutorial-label`
 
 .. _Pearls-Tutorial-label:
 
-Pearls of bipolar epistemic logic
-=================================
+Pearls of bipolar-valued epistemic logic
+========================================
 
 .. contents:: 
 	:depth: 1
@@ -5073,7 +5073,7 @@ The complete table of pairwise majority margins of global '*at least as well rat
 
    Pairwise majority margins of '*at least as well rated as*' rating opinions
 
-Positive characteristic values, validating a global '*at least as well rated as*' opinion are marked in light green (see Fig. 66). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best-ranked movie *mv_QS* is indeed a *Condorcet* winner, i.e. *better rated than all the other movies* by a 65% majority of critics. This majority may be assessed from the average determinateness of the given bipolar valued outranking digraph *g*.
+Positive characteristic values, validating a global '*at least as well rated as*' opinion are marked in light green (see Fig. 66). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best-ranked movie *mv_QS* is indeed a *Condorcet* winner, i.e. *better rated than all the other movies* by a 65% majority of critics. This majority may be assessed from the average determinateness of the given bipolar-valued outranking digraph *g*.
 
 >>> print( '%.0f%%' % g.computeDeterminateness(InPercents=True) )
 65%
@@ -5095,15 +5095,15 @@ It is fair, however, to eventually mention here that the *Graffiti* magazine's a
 
 Notice finally the ordinal correlation figures *tau* in Fig. 64  3rd row. How may we compute these ordinal correlation indexes ?
 
-Ordinal correlation equals bipolar relational equivalence
----------------------------------------------------------
+Ordinal correlation equals bipolar-valued relational equivalence
+----------------------------------------------------------------
 
 Kendall's *tau* index
 .....................
 
 *M. G. Kendall* ([KEN-1938]_) defined his **ordinal correlation index** *tau* for linear orders of dimension *n* as a *balancing* of the number *#C* of correctly oriented pairs against the number *#I* of incorrectly oriented pairs. The total number of irreflexive pairs being *n(n-1)*, in the case of linear orders, *#C* + *#I* = *n(n-1)*.  Hence *tau* = (*#C* / *n(n-1)*) - (*#I* / *n(n-1)*). In case *#I* is zero, *tau* = +1 (all pairs are *equivalently oriented*); inversely, in case *C#* is zero, *tau* = -1 (all pairs are *differently oriented*).
 
-Noticing that (*#C* / *n(n-1)*) = 1 - (*#I* / *n(n-1)*), and recalling that the bipolar valued negation is operated by changing the sign of the characteristic value, *Kendall*'s original *tau* definition implemented in fact the bipolar **negation** of the **non equivalence** of two linear orders: 
+Noticing that (*#C* / *n(n-1)*) = 1 - (*#I* / *n(n-1)*), and recalling that the bipolar-valued negation is operated by changing the sign of the characteristic value, *Kendall*'s original *tau* definition implemented in fact the bipolar-valued **negation** of the **non equivalence** of two linear orders: 
 
     *tau* = 1 - 2(*#I* / *n(n-1)*) = -[2(*#I* / *n(n-1)*) - 1] = 2(*#C* / *n(n-1)*) - 1,
 
@@ -5135,7 +5135,7 @@ What happens now with more or less determined and even partially indeterminate r
 Bipolar-valued relational equivalence
 .....................................
 
-Let us now consider two randomly valued bipolar digraphs *R1* and *R2* of order five.
+Let us now consider two randomly bipolar-valued digraphs *R1* and *R2* of order five.
 
 >>> R1 = RandomValuationDigraph(order=5,seed=1)
 >>> R1.showRelationTable(ReflexiveTerms=False)
@@ -5174,9 +5174,9 @@ r(<=>)|  'a1'	  'a2'	  'a3'	  'a4'	  'a5'
  'a5' | -0.02	 0.10	  0.00	  0.84	   - 	 
 Valuation domain: [-1.00;1.00]
 
-In our bipolar epistemic logic, logical disjunctions and conjunctions are implemented as *max*, respectively *min* operators. Notice also that the logical equivalence *R1 <=> R2* corresponds to a double implication *(R1 => R2) and (R2 => R1)* and that the implication *(R1 => R2)* is logically equivalent to the disjunction *not R1 or R2*.
+In our bipolar-valued epistemic logic, logical disjunctions and conjunctions are implemented as *max*, respectively *min* operators. Notice also that the logical equivalence *R1 <=> R2* corresponds to a double implication *(R1 => R2) and (R2 => R1)* and that the implication *(R1 => R2)* is logically equivalent to the disjunction *not R1 or R2*.
 
-If *r(x R1 y)* and *r(x R2 y)* denote the bipolar characteristic values of relation *R1*, resp. *R2*, we may hence compute as follows a majority margin *M(R1 <=> R2)* between equivalently and not equivalently oriented irreflexive pairs *(x,y)*.
+If *r(x R1 y)* and *r(x R2 y)* denote the bipolar-valued characteristic values of relation *R1*, resp. *R2*, we may hence compute as follows a majority margin *M(R1 <=> R2)* between equivalently and not equivalently oriented irreflexive pairs *(x,y)*.
 
 | *M(R1<=>R2)* = sum _ *(x,y)* { \
 |                   min [ max( *-r(x R1 y)*, *r(x R2 y)* ), \
@@ -5227,7 +5227,7 @@ We may now illustrate the quality of the global ranking of the movies shown with
 Fitness of ranking heuristics
 .............................
 
-We reconsider the bipolar valued outranking digraph *g* modelling the pairwise global '*at least as well rated as*' relation among the 25 movies seen above.
+We reconsider the bipolar-valued outranking digraph *g* modelling the pairwise global '*at least as well rated as*' relation among the 25 movies seen above.
 
     >>> g = BipolarOutrankingDigraph(t,Normalized=True)
     *------- Object instance description ------*
@@ -5354,7 +5354,7 @@ Ranking by Choosing and Rejecting
    2nd Worst Choice ['mv_DF', 'mv_DJ', 'mv_FF', 'mv_GG']
  1st Worst Choice ['mv_BI', 'mv_DI', 'mv_HP', 'mv_TF']
 
-In the :ref:`Kernel-Tutorial-label` turorial we thoroughly discuss the computation of *kernels* in bipolar valued digraphs. Yet, we do not tackle there the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors. This is the topic for the next pearl of bipolar epistemic logic.
+In the :ref:`Kernel-Tutorial-label` turorial we thoroughly discuss the computation of *kernels* in bipolar-valued digraphs. Yet, we do not tackle there the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors. This is the topic for the next pearl of bipolar-valued epistemic logic.
 
 Bipolar valued kernel membership characteristic vectors
 -------------------------------------------------------
@@ -5411,7 +5411,7 @@ that may be used for computing bipolar-valued kernel membership vectors.
 Solving bipolar-valued kernel equation systems
 ..............................................
 
-*John von Neumann* ([SCH-1985]_) showed indeed that, when a digraph *G(X,R)* is acyclic with a  unique inital kernel *K* characterised by its membership characteristics vector *Yk*, then the following dual bipolar fixpoint equation
+*John von Neumann* ([SCH-1985]_) showed indeed that, when a digraph *G(X,R)* is acyclic with a  unique inital kernel *K* characterised by its membership characteristics vector *Yk*, then the following dual bipolar-valued fixpoint equation
 
      :math:`T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;.`
 
@@ -5453,7 +5453,7 @@ Attributes          : ['name', 'actions', 'criteria', 'evaluation',
                        'relation', 'valuationdomain', 'order',
 		       'gamma', 'notGamma']
 
-The random outranking digraph *g*, we consider here for illustration, models the pairwise outranking situations between seven decision alternatives evaluated on seven incommensurable performance criteria. We compute its corresponding bipolar valued kernels on the associated codual digraph *gcd*.
+The random outranking digraph *g*, we consider here for illustration, models the pairwise outranking situations between seven decision alternatives evaluated on seven incommensurable performance criteria. We compute its corresponding bipolar-valued kernels on the associated codual digraph *gcd*.
 
 >>> gcd = ~(-g) # strict outranking digraph
 >>> gcd
@@ -5568,7 +5568,7 @@ a4: -0.49
 
 A unique stable bipolar-valued high and low fixpoint is attained at the third iteration with *a7* positively confirmed (about 75% criteria significance majority) as member of this terminal pre-kernel, whereas the membership of *a3* in this pre-kernel appears indeterminate. All the remaining nodes have *negative* membership characteristic values and are hence positively excluded from this pre-kernel.
 
-When we reconsider in the graphviz drawing of this outranking digraph in Fig. 70 and Fig. 44 (see ':ref:`Kernel-Tutorial-label`' tutorial),
+When we reconsider in the graphviz drawing of this outranking digraph in Fig. 70 (see the tutorial ':ref:`Kernel-Tutorial-label`' Fig. 44),
 
 .. figure:: bestWorstOrientation.png
    :width: 300 px
@@ -5577,7 +5577,7 @@ When we reconsider in the graphviz drawing of this outranking digraph in Fig. 70
 
    The strict outranking digraph oriented by the positive members of its initial and terminal pre-kernel
 
-it becomes obvious why alternative *a1* is **neither included nor excluded** from the initial kernel. Same observation is applicable to alternative *a3* which can **neither be included nor excluded** from the terminal kernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent pre-kernel; the corresponding bipolar valued membership characteristic vector being completely indeterminate (see for instance the ':ref:`Rubis-Tutorial-label`' tutorial).
+it becomes obvious why alternative *a1* is **neither included nor excluded** from the initial kernel. Same observation is applicable to alternative *a3* which can **neither be included nor excluded** from the terminal kernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent pre-kernel; the corresponding bipolar-valued membership characteristic vector being completely indeterminate (see for instance the ':ref:`Rubis-Tutorial-label`' tutorial).
 
 To illustrate finally why sometimes we need to operate an *epistemic disjunctive fusion* of **unequal** stable low and high membership characteristics vectors (see Step 2.c.), let us consider, for instance, the following crisp 7-*cycle* graph.
 
@@ -5724,3 +5724,36 @@ Bibliography
 .. [10] The 3D PCA plot method requires a running *R statistics software*  (https://www.r-project.org/) installation and the Calmat matrix calculator (see the calmat directory in the Digraph3 ressources)
 
 .. [11] A *kernel* in a digraph *g* is a *clique* in the dual digraph *-g*.
+
+..  LocalWords:  randomDigraph Determinateness valuationdomain py png
+..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
+..  LocalWords:  hasIntegerValuation showAll tutorialdigraph graphviz
+..  LocalWords:  exportGraphViz GraphViz Grankdir BT Tpng outdegrees
+..  LocalWords:  showStatistics determinateness indegrees outdegree
+..  LocalWords:  indegree symdegrees neighbourhood CompleteDigraph dg
+..  LocalWords:  EmptyDigraph GridDigraph hasMedianSplitOrientation
+..  LocalWords:  tutorialGrid modelling randomDigraphs showShort xSy
+..  LocalWords:  RandomValuationDigraph tutRandValDigraph px asymDg
+..  LocalWords:  showRelationTable showNeighborhoods ReflexiveTerms
+..  LocalWords:  randomValuationDigraph randomdomValuation symDG elif
+..  LocalWords:  AsymmetricPartialDigraph SymmetricPartialDigraph CSV
+..  LocalWords:  symDg asymSymParts constructRelation relationIn csv
+..  LocalWords:  relationOut disjunction FusionDigraph codual saveCSV
+..  LocalWords:  DualDigraph ConverseDigraph CoDualDigraph frozenset
+..  LocalWords:  closeSymmetric closeTransitive strongComponents de
+..  LocalWords:  StrongComponentsCollapsedDigraph votingProfiles pts
+..  LocalWords:  LinearVotingProfile OrderedDict linearBallot Borda
+..  LocalWords:  RandomLinearVotingProfile numberOfVoters candi XMCDA
+..  LocalWords:  numberOfCandidates votersWeights showLinearBallots
+..  LocalWords:  tutorialLinearVotingProfile computeUninominalVotes
+..  LocalWords:  computeSimpleMajorityWinner computeRankAnalysis MCDA
+..  LocalWords:  computeInstantRunoffWinner computeBordaScores favour
+..  LocalWords:  computeBordaWinners showRankAnalysisTable chordless
+..  LocalWords:  CondorcetDigraph computeChordlessCircuits quintiles
+..  LocalWords:  outrankingDigraphs BipolarOutrankingDigraph quintile
+..  LocalWords:  RandomBipolarOutrankingDigraph showActions quantiles
+..  LocalWords:  RandomPerformanceTableau equisignificant colorLevels
+..  LocalWords:  showCriteria showPerformanceTableau tutorialHeatmap
+..  LocalWords:  showHTMLPerformanceTableau disfavour Recoding
+..  LocalWords:  recoded coduality PerformanceTableau quantile
+..  LocalWords:  showHTMLPerformanceHeatmap randomCBHeatmap saveXMCDA
