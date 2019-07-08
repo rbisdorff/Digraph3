@@ -7716,7 +7716,7 @@ best covered terminal kernel</span></p>
 <ul class="simple">
 <li><a class="reference internal" href="#coping-with-missing-data-and-indeterminateness" id="id267">Coping with missing data and indeterminateness</a></li>
 <li><a class="reference internal" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" id="id268">Ordinal correlation equals bipolar-valued relational equivalence</a></li>
-<li><a class="reference internal" href="#bipolar-valued-kernel-membership-characteristic-vectors" id="id269">Bipolar valued kernel membership characteristic vectors</a></li>
+<li><a class="reference internal" href="#bipolar-valued-kernel-membership-characteristic-vectors" id="id269">Bipolar-valued kernel membership characteristic vectors</a></li>
 </ul>
 </div>
 <div class="section" id="coping-with-missing-data-and-indeterminateness">
@@ -7914,8 +7914,8 @@ best covered terminal kernel</span></p>
 <span class="go">Valuation domain: [-1.00;1.00]</span>
 </pre></div>
 </td></tr></table></div>
-<p>In our bipolar-valued epistemic logic, logical disjunctions and conjunctions are implemented as <em>max</em>, respectively <em>min</em> operators. Notice also that the logical equivalence <em>R1 &lt;=&gt; R2</em> corresponds to a double implication <em>(R1 =&gt; R2) and (R2 =&gt; R1)</em> and that the implication <em>(R1 =&gt; R2)</em> is logically equivalent to the disjunction <em>not R1 or R2</em>.</p>
-<p>If <em>r(x R1 y)</em> and <em>r(x R2 y)</em> denote the bipolar-valued characteristic values of relation <em>R1</em>, resp. <em>R2</em>, we may hence compute as follows a majority margin <em>M(R1 &lt;=&gt; R2)</em> between equivalently and not equivalently oriented irreflexive pairs <em>(x,y)</em>.</p>
+<p>In our bipolar-valued epistemic logic, logical disjunctions and conjunctions are implemented as <em>max</em>, respectively <em>min</em> operators. Notice also that the logical equivalence <em>(R1&lt;=&gt;R2)</em> corresponds to a double implication <em>(R1 =&gt; R2) and (R2 =&gt; R1)</em> and that the implication <em>(R1 =&gt; R2)</em> is logically equivalent to the disjunction <em>(not R1 or R2)</em>.</p>
+<p>If <em>r(x R1 y)</em> and <em>r(x R2 y)</em> denote the bipolar-valued characteristic values of relation <em>R1</em>, resp. <em>R2</em>, we may hence compute as follows a majority margin <em>M(R1&lt;=&gt;R2)</em> between equivalently and not equivalently oriented irreflexive pairs <em>(x,y)</em>.</p>
 <div class="line-block">
 <div class="line"><em>M(R1&lt;=&gt;R2)</em> = sum _ <em>(x,y)</em> { </div>
 <div class="line-block">
@@ -7926,7 +7926,7 @@ best covered terminal kernel</span></p>
 </div>
 </div>
 <p><em>M(R1&lt;=&gt;R2)</em> is hence given by the sum of the non reflexive terms of the relation table of <em>eq</em>, the relation equivalence digraph computed above.</p>
-<p>In the crisp case, <em>M(R1&lt;=&gt;R2)</em>  is now normalized with the maximum number of possible irreflexive pairs, namely <em>n(n-1)</em>. In a generalized <em>r</em> -valued case, the maximal possible equivalence majority margin <em>M</em> corresponds to the sum <em>D</em> of the <strong>conjoint determinations</strong> of <em>(x R1 y)</em> and <em>(x R2 y)</em> (see <a class="reference internal" href="#bis-2012" id="id87">[BIS-2012]</a>).</p>
+<p>In the crisp case, <em>M(R1&lt;=&gt;R2)</em>  is now normalized with the maximum number of possible irreflexive pairs, namely <em>n(n-1)</em>. In a generalized <em>r</em>-valued case, the maximal possible equivalence majority margin <em>M</em> corresponds to the sum <em>D</em> of the <strong>conjoint determinations</strong> of <em>(x R1 y)</em> and <em>(x R2 y)</em> (see <a class="reference internal" href="#bis-2012" id="id87">[BIS-2012]</a>).</p>
 <blockquote>
 <div><em>D</em> = sum _ <em>(x,y)</em> min [ abs(<em>r(x R1 y)</em>, abs(<em>r(x R2 y)</em>) ].</div></blockquote>
 <p>Thus, we obtain in the general <em>r</em> -valued case:</p>
@@ -8141,7 +8141,7 @@ best covered terminal kernel</span></p>
 </div>
 </div>
 <div class="section" id="bipolar-valued-kernel-membership-characteristic-vectors">
-<h3><a class="toc-backref" href="#id269">Bipolar valued kernel membership characteristic vectors</a><a class="headerlink" href="#bipolar-valued-kernel-membership-characteristic-vectors" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id269">Bipolar-valued kernel membership characteristic vectors</a><a class="headerlink" href="#bipolar-valued-kernel-membership-characteristic-vectors" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="berge-s-kernel-equation-systems">
 <h4><em>Berge</em>’s Kernel Equation Systems<a class="headerlink" href="#berge-s-kernel-equation-systems" title="Permalink to this headline">¶</a></h4>
 <p>Let <em>G(X,R)</em> be a crisp irreflexive digraph defined on a finite set <em>X</em> of nodes and where <em>R</em> is the corresponding {-1,+1}-valued adjacency matrix. Let <em>Y</em> be the {-1,+1}-valued membership characteristic (row) vector of a choice in <em>X</em>. When <em>Y</em> satisfies the following equation system</p>
@@ -8322,7 +8322,7 @@ best covered terminal kernel</span></p>
 </pre></div>
 </td></tr></table></div>
 <p>The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel [<em>a1</em>, <em>a2</em>, <em>a4</em>] and a terminal one [<em>a3</em>, <em>a7</em>] (see above the <em>indeterminate independence</em> qualifications in Line 7 and 13).</p>
-<p>Let us compute the <em>initial</em> pre-kernel restricted adjacency table.</p>
+<p>Let us compute the <em>initial</em> pre-kernel restricted adjacency table with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.domkernelrestrict" title="digraphs.Digraph.domkernelrestrict"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.domkernelrestrict()</span></code></a> method.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -8338,7 +8338,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/k1restricted.png"><img alt="Kernel restricted adjacency table" src="_images/k1restricted.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 68 </span><span class="caption-text">Initial kernel [<em>a1</em>, <em>a2</em>, <em>a4</em>] restricted adjacency table</span></p>
 </div>
-<p>We first notice that this initial pre-kernel is indeed only <em>weakly independent</em>: The outranking situation between <em>a4</em> and <em>a1</em> appears <em>indeterminate</em>. The corresponding initial pre-kernel membership characteristic vector may be computed as follows.</p>
+<p>We first notice that this initial pre-kernel is indeed only <em>weakly independent</em>: The outranking situation between <em>a4</em> and <em>a1</em> appears <em>indeterminate</em>. The corresponding initial pre-kernel membership characteristic vector may be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeKernelVector" title="digraphs.Digraph.computeKernelVector"><code class="xref py py-func docutils literal"><span class="pre">digraphs.Digraph.computeKernelVector()</span></code></a> method.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8884,7 +8884,7 @@ best covered terminal kernel</span></p>
 <li><a class="reference internal" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions">Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#bipolar-valued-kernel-membership-characteristic-vectors">Bipolar valued kernel membership characteristic vectors</a><ul>
+<li><a class="reference internal" href="#bipolar-valued-kernel-membership-characteristic-vectors">Bipolar-valued kernel membership characteristic vectors</a><ul>
 <li><a class="reference internal" href="#berge-s-kernel-equation-systems"><em>Berge</em>’s Kernel Equation Systems</a></li>
 <li><a class="reference internal" href="#solving-bipolar-valued-kernel-equation-systems">Solving bipolar-valued kernel equation systems</a></li>
 </ul>

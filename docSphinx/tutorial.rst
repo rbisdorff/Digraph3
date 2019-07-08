@@ -5174,9 +5174,9 @@ r(<=>)|  'a1'	  'a2'	  'a3'	  'a4'	  'a5'
  'a5' | -0.02	 0.10	  0.00	  0.84	   - 	 
 Valuation domain: [-1.00;1.00]
 
-In our bipolar-valued epistemic logic, logical disjunctions and conjunctions are implemented as *max*, respectively *min* operators. Notice also that the logical equivalence *R1 <=> R2* corresponds to a double implication *(R1 => R2) and (R2 => R1)* and that the implication *(R1 => R2)* is logically equivalent to the disjunction *not R1 or R2*.
+In our bipolar-valued epistemic logic, logical disjunctions and conjunctions are implemented as *max*, respectively *min* operators. Notice also that the logical equivalence *(R1<=>R2)* corresponds to a double implication *(R1 => R2) and (R2 => R1)* and that the implication *(R1 => R2)* is logically equivalent to the disjunction *(not R1 or R2)*.
 
-If *r(x R1 y)* and *r(x R2 y)* denote the bipolar-valued characteristic values of relation *R1*, resp. *R2*, we may hence compute as follows a majority margin *M(R1 <=> R2)* between equivalently and not equivalently oriented irreflexive pairs *(x,y)*.
+If *r(x R1 y)* and *r(x R2 y)* denote the bipolar-valued characteristic values of relation *R1*, resp. *R2*, we may hence compute as follows a majority margin *M(R1<=>R2)* between equivalently and not equivalently oriented irreflexive pairs *(x,y)*.
 
 | *M(R1<=>R2)* = sum _ *(x,y)* { \
 |                   min [ max( *-r(x R1 y)*, *r(x R2 y)* ), \
@@ -5184,7 +5184,7 @@ If *r(x R1 y)* and *r(x R2 y)* denote the bipolar-valued characteristic values o
 
 *M(R1<=>R2)* is hence given by the sum of the non reflexive terms of the relation table of *eq*, the relation equivalence digraph computed above.
 
-In the crisp case, *M(R1<=>R2)*  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r* -valued case, the maximal possible equivalence majority margin *M* corresponds to the sum *D* of the **conjoint determinations** of *(x R1 y)* and *(x R2 y)* (see [BIS-2012]_). 
+In the crisp case, *M(R1<=>R2)*  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r*-valued case, the maximal possible equivalence majority margin *M* corresponds to the sum *D* of the **conjoint determinations** of *(x R1 y)* and *(x R2 y)* (see [BIS-2012]_). 
 
     *D* = sum _ *(x,y)* min [ abs(*r(x R1 y)*, abs(*r(x R2 y)*) ].
 
@@ -5356,7 +5356,7 @@ Ranking by Choosing and Rejecting
 
 In the :ref:`Kernel-Tutorial-label` turorial we thoroughly discuss the computation of *kernels* in bipolar-valued digraphs. Yet, we do not tackle there the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors. This is the topic for the next pearl of bipolar-valued epistemic logic.
 
-Bipolar valued kernel membership characteristic vectors
+Bipolar-valued kernel membership characteristic vectors
 -------------------------------------------------------
 
 *Berge*'s Kernel Equation Systems
@@ -5484,7 +5484,7 @@ Execution time  : 0.00022 sec.
 
 The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel [*a1*, *a2*, *a4*] and a terminal one [*a3*, *a7*] (see above the *indeterminate independence* qualifications in Line 7 and 13).
 
-Let us compute the *initial* pre-kernel restricted adjacency table.
+Let us compute the *initial* pre-kernel restricted adjacency table with the :py:func:`digraphs.Digraph.domkernelrestrict` method.
  
 >>> k1Relation = gcd.domkernelrestrict(['a1','a2','a4'])
 >>> gcd.showHTMLRelationTable(
@@ -5499,7 +5499,7 @@ Let us compute the *initial* pre-kernel restricted adjacency table.
 
    Initial kernel [*a1*, *a2*, *a4*] restricted adjacency table
 
-We first notice that this initial pre-kernel is indeed only *weakly independent*: The outranking situation between *a4* and *a1* appears *indeterminate*. The corresponding initial pre-kernel membership characteristic vector may be computed as follows.
+We first notice that this initial pre-kernel is indeed only *weakly independent*: The outranking situation between *a4* and *a1* appears *indeterminate*. The corresponding initial pre-kernel membership characteristic vector may be computed with the :py:func:`digraphs.Digraph.computeKernelVector` method.
 
 >>> gcd.computeKernelVector(['a1','a2','a4'],Initial=True,Comments=True)
 --> Initial pre-kernel: {'a1', 'a4', 'a2'}
