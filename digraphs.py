@@ -4603,28 +4603,65 @@ class Digraph(object):
 
     def computeDeterminateness(self,InPercents=False):
         """
-        Computes the Kendalll distance in % of self
-        with the all median valued (indeterminate) digraph.
+        Computes the Kendalll distance of self
+        with the all median-valued indeterminate digraph of order n.
+
+        Return the average determination of the irreflexive part of the digraph.
+
+        *determination* = sum_(x,y) { abs[ r(xRy) - Med ] } / n(n-1)
+        
+        If *InPercents* is True, returns the average determination in percentage of
+        (Max - Med) difference.
+
+        >>> from outrankingDigraphs import BipolarOutrankingDigraph
+        >>> from randomPerfTabs import Random3ObjectivesPerformanceTableau
+        >>> t = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)
+        >>> g = BipolarOutrankingDigraph(t,Normalized=True)
+        >>> g
+        *------- Object instance description ------*
+        Instance class      : BipolarOutrankingDigraph
+        Instance name       : rel_random3ObjectivesPerfTab
+        # Actions           : 7
+        # Criteria          : 7
+        Size                : 27
+        Determinateness (%) : 65.67
+        Valuation domain    : [-1.00;1.00]
+        >>> print(g.computeDeterminateness())
+        0.3134920634920634920634920638
+        >>> print(g.computeDeterminateness(InPercents=True))
+        65.67460317460317460317460320
+        >>> g.recodeValuation(0,1)
+        >>> g
+        *------- Object instance description ------*
+        Instance class      : BipolarOutrankingDigraph
+        Instance name       : rel_random3ObjectivesPerfTab
+        # Actions           : 7
+        # Criteria          : 7
+        Size                : 27
+        Determinateness (%) : 65.67
+        Valuation domain    : [0.00;1.00]
+        >>> print(g.computeDeterminateness())
+        0.1567460317460317460317460318
+        >>> print(g.computeDeterminateness(InPercents=True))
+        65.67460317460317460317460320
+
         """
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
         relation = self.relation
         #actions = self.actions
         order = self.order
-        deter = Decimal('0.0')
+        D = Decimal('0.0')
         for x,rx in relation.items():
             for y,rxy in rx.items():
                 if x != y:
-                    #print(relation[x][y], Med, relation[x][y] - Med)
-                    deter += abs(rxy - Med)
-                    #print(deter)
-        #deter = (deter /Decimal(str((order * (order-1))))) * (Max - Med)
-        deter = deter / Decimal(str((order * (order-1))))
+                    D += abs(rxy - Med)
+        determination = D / Decimal(str((order * (order-1))))
         if InPercents:
-            return ((deter/Decimal(str(Max-Med)) +Decimal('1.0'))\
-                     / Decimal('2.0'))*Decimal('100.0')
+            return (determination / (Max-Med) + Decimal('1')) / Decimal('2') * Decimal('100.0')
         else:
-            return deter/(Decimal(str(Max-Med)))*Decimal('100')
+            return determination
 
     def showStatistics(self):
         """
@@ -4661,21 +4698,22 @@ class Digraph(object):
 
         self.agglomerationCoefficient,self.meanAgglomerationCoefficient = self.agglomerationDistribution()
         # Outranking determinateness
-        Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']
-        deter = Decimal('0.0')
-        for x,rx in relation.items():
-            for y,rxy in rx.items():
-                if x != y:
-                    # print(relation[x][y], Med)
-                    deter += abs(rxy - Med)
-        deter /= order * (order-1) * (Max - Med)
+##        Max = self.valuationdomain['max']
+##        Med = self.valuationdomain['med']
+##        deter = Decimal('0.0')
+##        for x,rx in relation.items():
+##            for y,rxy in rx.items():
+##                if x != y:
+##                    # print(relation[x][y], Med)
+##                    deter += abs(rxy - Med)
+##        deter /= order * (order-1) * (Max - Med)
+        deter = self.computeDeterminateness(InPercents=True)
         #  output results
         print('for digraph              : <' + str(self.name) + '.py>')
-        print('order                    : ', self.order, 'nodes')
-        print('size                     : ', self.size, 'arcs')
-        print('# undetermined           : ', self.undeterm, 'arcs')
-        print('determinateness          : %.2f' % (deter))
+        print('order                    :', self.order, 'nodes')
+        print('size                     :', self.size, 'arcs')
+        print('# undetermined           :', self.undeterm, 'arcs')
+        print('determinateness (in %%)   : %.2f' % (deter))
         print("arc density              : %.2f" % (density['arc']))
         print("double arc density       : %.2f" % (density['double']))
         print("single arc density       : %.2f" % (density['single']))
@@ -4686,35 +4724,35 @@ class Digraph(object):
         print('# strong components      : ', nbrstrcomp)
         print('transitivity degree      : %.2f' % (self.computeTransitivityDegree()))
 
-        print('                         : ', list(range(len(outDegrees))))
-        print('outdegrees distribution  : ', list(outDegrees))
-        print('indegrees distribution   : ', list(inDegrees))
+        print('                         :', list(range(len(outDegrees))))
+        print('outdegrees distribution  :', list(outDegrees))
+        print('indegrees distribution   :', list(inDegrees))
         print('mean outdegree           : %.2f' % (self.computeMeanOutDegree()))
         print('mean indegree            : %.2f' % (self.computeMeanInDegree()))
-        print('                         : ', list(range(len(symDegrees))))
-        print('symmetric degrees dist.  : ', list(symDegrees))
+        print('                         :', list(range(len(symDegrees))))
+        print('symmetric degrees dist.  :', list(symDegrees))
         print('mean symmetric degree    : %.2f' % (self.computeMeanSymDegree()))
 
         outgini = self.computeConcentrationIndex(list(range(len(outDegrees))),list(outDegrees))
         ingini = self.computeConcentrationIndex(list(range(len(inDegrees))),list(inDegrees))
         symgini = self.computeConcentrationIndex(list(range(len(symDegrees))),list(symDegrees))
-        print('outdegrees concentration index   : %.4f' % (outgini))
-        print('indegrees concentration index    : %.4f' % (ingini))
-        print('symdegrees concentration index   : %.4f' % (symgini))
+        print('outdegrees concentration index    : %.4f' % (outgini))
+        print('indegrees concentration index     : %.4f' % (ingini))
+        print('symdegrees concentration index    : %.4f' % (symgini))
         listindex = list(range(order))
         listindex.append('inf')
-        print('                                 : ', listindex)
-        print('neighbourhood depths distribution: ', list(nbDepths))
+        print('                                  :', listindex)
+        print('neighbourhood depths distribution :', list(nbDepths))
         if meanLength != 'infinity':
             print("mean neighbourhood depth         : %.2f " % (meanLength))
         else:
-            print('mean neighbourhood length        : ', meanLength)
-        print('digraph diameter                 : ', self.digraphDiameter)
-        print('agglomeration distribution       : ')
+            print('mean neighbourhood length         :', meanLength)
+        print('digraph diameter                  :', self.digraphDiameter)
+        print('agglomeration distribution        :')
         for i in range(order):
             print(actions[i], end=' ')
             print(": %.2f" % (self.agglomerationCoefficient[i]))
-        print("agglomeration coefficient        : %.2f" % (self.meanAgglomerationCoefficient))
+        print("agglomeration coefficient         : %.2f" % (self.meanAgglomerationCoefficient))
 
     def meanLength(self,Oriented=False):
         """
@@ -4867,7 +4905,7 @@ class Digraph(object):
                     break
         return diameter
 
-    def graphDetermination(self,Normalized=True):
+    def _graphDetermination(self,Normalized=True):
         """
         Output: average normalized (by default) arc determination:
 
@@ -12966,10 +13004,16 @@ if __name__ == "__main__":
         t1 = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)
         g = BipolarOutrankingDigraph(t1,Normalized=True)
         g.showRelationTable()
-        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
-        g.showPreKernels()
-        g.showRelationTable()
-        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
+        print(g.computeDeterminateness())
+        print(g.computeDeterminateness(InPercents=True))
+        g.recodeValuation(0,1)
+        print(g.computeDeterminateness())
+        print(g.computeDeterminateness(InPercents=True))
+      
+##        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
+##        g.showPreKernels()
+##        g.showRelationTable()
+##        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
 ##        gcd = ~(-g)
 ##        cocb = BrokenCocsDigraph(gcd,Comments=True)
 ##        print(cocb.brokenLinks)

@@ -1105,8 +1105,45 @@ arc density, double arc density, single arc density, absence arc density.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computeDeterminateness">
 <code class="descname">computeDeterminateness</code><span class="sig-paren">(</span><em>InPercents=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeDeterminateness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeDeterminateness" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the Kendalll distance in % of self
-with the all median valued (indeterminate) digraph.</p>
+<dd><p>Computes the Kendalll distance of self
+with the all median-valued indeterminate digraph of order n.</p>
+<p>Return the average determination of the irreflexive part of the digraph.</p>
+<p><em>determination</em> = sum_(x,y) { abs[ r(xRy) - Med ] } / n(n-1)</p>
+<p>If <em>InPercents</em> is True, returns the average determination in percentage of
+(Max - Med) difference.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">101</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
+<span class="go">*------- Object instance description ------*</span>
+<span class="go">Instance class      : BipolarOutrankingDigraph</span>
+<span class="go">Instance name       : rel_random3ObjectivesPerfTab</span>
+<span class="go"># Actions           : 7</span>
+<span class="go"># Criteria          : 7</span>
+<span class="go">Size                : 27</span>
+<span class="go">Determinateness (%) : 65.67</span>
+<span class="go">Valuation domain    : [-1.00;1.00]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeDeterminateness</span><span class="p">())</span>
+<span class="go">0.3134920634920634920634920638</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeDeterminateness</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="go">65.67460317460317460317460320</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
+<span class="go">*------- Object instance description ------*</span>
+<span class="go">Instance class      : BipolarOutrankingDigraph</span>
+<span class="go">Instance name       : rel_random3ObjectivesPerfTab</span>
+<span class="go"># Actions           : 7</span>
+<span class="go"># Criteria          : 7</span>
+<span class="go">Size                : 27</span>
+<span class="go">Determinateness (%) : 65.67</span>
+<span class="go">Valuation domain    : [0.00;1.00]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeDeterminateness</span><span class="p">())</span>
+<span class="go">0.1567460317460317460317460318</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeDeterminateness</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="go">65.67460317460317460317460320</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -1880,14 +1917,6 @@ the absorbed neighborhood.</p>
 <dt id="digraphs.Digraph.generateDomPreKernels">
 <code class="descname">generateDomPreKernels</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.generateDomPreKernels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.generateDomPreKernels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate all dominant prekernels from independent choices generator.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.Digraph.graphDetermination">
-<code class="descname">graphDetermination</code><span class="sig-paren">(</span><em>Normalized=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.graphDetermination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.graphDetermination" title="Permalink to this definition">¶</a></dt>
-<dd><p>Output: average normalized (by default) arc determination:</p>
-<p>averageDeterm = ( sum_(x,y) [ abs( relf-relation[x][y] - Med )] / n ) / [( Max-Med ) if Normalized],</p>
-<p>where Med = self.valuationdomain[‘med’] and Max = self.valuationdomain[‘max’].</p>
 </dd></dl>
 
 <dl class="method">

@@ -462,7 +462,9 @@ def testXORDigraph():
     print('crisp K-Distance d(g1,g2) = ', g1.crispKDistance(g2))
     print('bipolar K-Correlation d(g1,g2) = ', g1.bipolarKCorrelation(g2))
     print('bipolar K-Distance d(g2,g1) = ', g2.bipolarKDistance(g2))
-    print('determination = ', g1.graphDetermination(), g2.graphDetermination(), gxor.graphDetermination())
+    print('determination = ', g1.computeDeterminateness(),\
+                              g2.computeDeterminateness(),\
+                              gxor.computeDeterminateness())
 
 def testIndeterminateDigraph():
     print('*----- test IndeterminateDigraph -----*')
@@ -780,7 +782,7 @@ def testCoceDigraph():
     coceg = _CoceDigraph(g,Comments=True)
     coceg.computeChordlessCircuits()
     print(coceg.computeDeterminateness())
-    print(coceg.graphDetermination())
+    print(coceg.computeDeterminateness())
     print(g.computeBipolarCorrelation(coceg))
     print(g.computeOrdinalCorrelation(coceg))
 
@@ -792,7 +794,7 @@ def testEquivDigraph():
     g1 = BipolarOutrankingDigraph(t1)
     equivg = EquivalenceDigraph(g,g1)
     print(equivg.computeDeterminateness())
-    print(equivg.graphDetermination())
+    print(equivg.computeDeterminateness())
     print(g.computeBipolarCorrelation(equivg))
     print(g.computeOrdinalCorrelation(equivg))
 
