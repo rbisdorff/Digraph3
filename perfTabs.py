@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-# testing commit - ian
-# -*- coding: utf-8 -*-
-# Python implementation of digraphs
-# submodule perfTabs.py  for performance tableaux  
-# Current revision $Revision: 1.37 $
-# Copyright (C) 2011  Raymond Bisdorff
-#
+"""
+Python implementation of digraphs
+Module for working with performance tableaux  
+Copyright (C) 2011-2019  Raymond Bisdorff
+
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation; either version 3 of the License, or
@@ -19,7 +17,8 @@
 #    You should have received a copy of the GNU General Public License along
 #    with this program; if not, write to the Free Software Foundation, Inc.,
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-#
+
+"""
 #######################
 
 __version__ = "$Revision: 1.37 $"

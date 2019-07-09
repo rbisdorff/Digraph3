@@ -4144,7 +4144,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <span class="go">Results in sets: dompreKernels and abspreKernels.</span>
 </pre></div>
 </td></tr></table></div>
-<p>We notice three potential best choice recommendations: the Condorcet winner <em>D</em> (Line 4), the triplet <em>B</em>, <em>C</em> and <em>E</em> (Line 9), and finally the pair <em>A</em> and <em>G</em> (Line 14). The Rubis best choice recommendation is given by the <strong>most determined</strong> pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command.</p>
+<p>We notice three potential best choice recommendations: the Condorcet winner <em>D</em> (Line 4), the triplet <em>B</em>, <em>C</em> and <em>E</em> (Line 9), and finally the pair <em>A</em> and <em>G</em> (Line 14). The Rubis best choice recommendation is given by the <strong>most determined</strong> prekernel; the one supported by the most significant criteria coalition. This result is shown with the following command.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8201,8 +8201,8 @@ best covered terminal kernel</span></p>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </td></tr></table></div>
-<p>It is easy to verify now that the characteristic vector [-1, -1, +1] satisfies the initial kernel equation system; <em>a3</em> gives an initial kernel. Similarly, the characteristic vector [-1, +1, -1] verifies indeed the terminal kernel equation system and hence <em>a2</em> gives a terminal kernel.</p>
-<p>We succeeded now in generalizing <em>Berge</em>’s kernel equation systems to genuine bipolar-valued digraphs (<a class="reference internal" href="#bis-2006a" id="id92">[BIS-2006a]</a>). The constructive proof, found by M. Pirlot, is based on the following fixpoint equation that may be used for computing bipolar-valued kernel membership vectors</p>
+<p>It is easy to verify that the characteristic vector [-1, -1, +1] satisfies the initial kernel equation system; <em>a3</em> gives an initial kernel. Similarly, the characteristic vector [-1, +1, -1] verifies indeed the terminal kernel equation system and hence <em>a2</em> gives a terminal kernel.</p>
+<p>We succeeded now in generalizing <em>Berge</em>’s kernel equation systems to genuine bipolar-valued digraphs (<a class="reference internal" href="#bis-2006a" id="id92">[BIS-2006a]</a>). The constructive proof, found by M. Pirlot, is based on the following fixpoint equation that may be used for computing bipolar-valued kernel membership vectors,</p>
 <blockquote>
 <div><img class="math" src="_images/math/5101832c693889c173ffef357073af04ee8b44c6.png" alt="T(Y) \; := \; -(Y \circ R) = Y,"/></div></blockquote>
 </div>
@@ -8422,7 +8422,7 @@ best covered terminal kernel</span></p>
 18
 19
 20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeKernelVector</span><span class="p">([</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a7&#39;</span><span class="p">],</span><span class="n">Initial</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="go">--&gt; Terminal pre-kernel: {&#39;a3&#39;, &#39;a7&#39;}</span>
+<span class="go">--&gt; Terminal prekernel: {&#39;a3&#39;, &#39;a7&#39;}</span>
 <span class="go">initial low vector  : [-1.00, -1.00, -1.00, -1.00, -1.00, -1.00, -1.00]</span>
 <span class="go">initial high vector : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]</span>
 <span class="go">1st low vector      : [-0.16, -0.49,  0.00, -0.58, -0.16, -0.30, +0.49]</span>
@@ -8433,7 +8433,7 @@ best covered terminal kernel</span></p>
 <span class="go">3rd high vector     : [-0.16, -0.49,  0.00, -0.49, -0.16, -0.26, +0.49]</span>
 <span class="go"># iterations        : 3</span>
 <span class="go">high &amp; low fusion   : [-0.16, -0.49,  0.00, -0.49, -0.16, -0.26, +0.49]</span>
-<span class="go">Choice vector for terminal pre-kernel: {&#39;a3&#39;, &#39;a7&#39;}</span>
+<span class="go">Choice vector for terminal prekernel: {&#39;a3&#39;, &#39;a7&#39;}</span>
 <span class="go">a7: +0.49</span>
 <span class="go">a3:  0.00</span>
 <span class="go">a1: -0.16</span>
@@ -8508,7 +8508,7 @@ best covered terminal kernel</span></p>
 <span class="go">stable high vector  : [ 0.0, +1.0,  0.0,  0.0, +1.0,  0.0, +1.0]</span>
 <span class="go">#iterations         : 3</span>
 <span class="go">low &amp; high fusion   : [-1.0, +1.0, -1.0, -1.0, +1.0, -1.0, +1.0]</span>
-<span class="go">Choice vector for initial pre-kernel: {&#39;2&#39;, &#39;5&#39;, &#39;7&#39;}</span>
+<span class="go">Choice vector for initial prekernel: {&#39;2&#39;, &#39;5&#39;, &#39;7&#39;}</span>
 <span class="go">7: +1.00</span>
 <span class="go">5: +1.00</span>
 <span class="go">2: +1.00</span>
@@ -8518,7 +8518,7 @@ best covered terminal kernel</span></p>
 <span class="go">1: -1.00</span>
 </pre></div>
 </td></tr></table></div>
-<p>Notice that the stable low vector characterises the <strong>negative membership</strong> part, whereas, the stable high vector characterises the <strong>positive membership</strong> part (see Lines 9-10 above). The bipolar <strong>disjunctive fusion</strong> assembles eventually both stable parts into the correct pre-kernel characteristic vector (Line 12).</p>
+<p>Notice that the stable low vector characterises the <strong>negative membership</strong> part, whereas, the stable high vector characterises the <strong>positive membership</strong> part (see Lines 9-10 above). The bipolar <strong>disjunctive fusion</strong> assembles eventually both stable parts into the correct prekernel characteristic vector (Line 12).</p>
 <p>The adjacency matrix of a symmetric digraph staying <em>unchanged</em> by the transposition operator, the previous computations, when qualifying the same kernel as a <em>terminal</em> instance, will hence produce exactly the same result.</p>
 <p>It is worthwhile noticing again the essential computational role, the logical <strong>indeterminate value 0.0</strong> is playing in this dual fixpoint algorithm. To implement such kind of algorithms without a logical <strong>neutral term</strong> would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial <em>impossibility theorems</em> and <em>dubious logical results</em> come up.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Tutorials of the Digraph3 resources</span></a></p>

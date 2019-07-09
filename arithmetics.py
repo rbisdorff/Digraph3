@@ -1,7 +1,12 @@
 #!/Usr/bin/env python3
-# Python3+ implementation of arithmetics tools
-# Copyright (C) 2016-2017  Raymond Bisdorff
-#
+"""
+Python3+ implementation of arithmetics tools
+Copyright (C) 2016-2019  Raymond Bisdorff
+Tools gathered for doing arithmetics.
+Mainly inspired from G.A. Jones & J.M. Jones
+Elementary Number Theroy
+Springer Verlag London 1998
+
 #    This program is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
 #    the Free Software Foundation; either version 3 of the License, or
@@ -15,7 +20,8 @@
 #    You should have received a copy of the GNU General Public License along
 #    with this program; if not, write to the Free Software Foundation, Inc.,
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-#
+
+"""
 #######################
 from arithmetics import *
 from digraphs import Digraph
@@ -27,10 +33,6 @@ __version__ = "Branch: 3.5 $"
 
 """
 
-Tools gathered for doing arithmetics.
-Mainly inspired from G.A. Jones & J.M. Jones
-Elementary Number Theroy
-Springer Verlag London 1998
 
 """
 class QuadraticResiduesDigraph(Digraph):
