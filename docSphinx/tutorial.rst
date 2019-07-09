@@ -2619,7 +2619,7 @@ Following the Rubis outranking method (see [BIS-2008]_), potential best choice r
     Execution time  : 0.00018 sec.
     Results in sets: dompreKernels and abspreKernels.
 
-We notice three potential best choice recommendations: the Condorcet winner *D* (Line 4), the triplet *B*, *C* and *E* (Line 9), and finally the pair *A* and *G* (Line 14). The Rubis best choice recommendation is given by the **most determined** pre-kernel; the one supported by the most significant criteria coalition. This result is shown with the following command.
+We notice three potential best choice recommendations: the Condorcet winner *D* (Line 4), the triplet *B*, *C* and *E* (Line 9), and finally the pair *A* and *G* (Line 14). The Rubis best choice recommendation is given by the **most determined** prekernel; the one supported by the most significant criteria coalition. This result is shown with the following command.
 
 >>> g.showBestChoiceRecommendation(CoDual=False)
 *****************************************
@@ -5370,7 +5370,7 @@ where for all *x* in *X*,
 
      :math:`(Y \circ R)(x) \; = \; \max_{y \in X, x \neq y} \big ( \min(Y(x), R(x,y))\big)\;.`
 
-than *Y* characterises an *initial kernel* ([BER-1958]_). Transposing the membership characteristic vector, *Berge*'s euqation system characterises similarly a *terminal kernel*
+than *Y* characterises an *initial kernel* ([BER-1958]_). Transposing the membership characteristic vector into a column vector :math:`Y^t`, makes *Berge*'s equation system similarly characterise a *terminal kernel*,
 
      :math:`R \circ Y^t \; = \; -Y^t\;.`
 
@@ -5400,9 +5400,9 @@ Absorbent preKernels :
    covered      :  1.000
 >>> 
 
-It is easy to verify now that the characteristic vector [-1, -1, +1] satisfies the initial kernel equation system; *a3* gives an initial kernel. Similarly, the characteristic vector [-1, +1, -1] verifies indeed the terminal kernel equation system and hence *a2* gives a terminal kernel.
+It is easy to verify that the characteristic vector [-1, -1, +1] satisfies the initial kernel equation system; *a3* gives an initial kernel. Similarly, the characteristic vector [-1, +1, -1] verifies indeed the terminal kernel equation system and hence *a2* gives a terminal kernel.
 
-We succeeded in generalizing *Berge*'s kernel equation systems to genuine bipolar-valued digraphs ([BIS-2006a]_). The constructive proof, found by M. Pirlot, is based on the following fixpoint equation that may be used for computing bipolar-valued kernel membership vectors
+We succeeded now in generalizing *Berge*'s kernel equation systems to genuine bipolar-valued digraphs ([BIS-2006a]_). The constructive proof, found by M. Pirlot, is based on the following fixpoint equation that may be used for computing bipolar-valued kernel membership vectors,
 
      :math:`T(Y) \; := \; -(Y \circ R) = Y,`
 
@@ -5544,7 +5544,7 @@ Let us now compute the restricted adjacency table for the outranked, i.e. the *t
 Again, we notice that this terminal prekernel is indeed only weakly independent. The corresponding bipolar-valued characteristic vector *Y2* may be computed as follws.
 
 >>> gcd.computeKernelVector(['a3','a7'],Initial=False,Comments=True)
---> Terminal pre-kernel: {'a3', 'a7'}
+--> Terminal prekernel: {'a3', 'a7'}
 initial low vector  : [-1.00, -1.00, -1.00, -1.00, -1.00, -1.00, -1.00]
 initial high vector : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]
 1st low vector      : [-0.16, -0.49,  0.00, -0.58, -0.16, -0.30, +0.49]
@@ -5555,7 +5555,7 @@ initial high vector : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]
 3rd high vector     : [-0.16, -0.49,  0.00, -0.49, -0.16, -0.26, +0.49]
 # iterations        : 3
 high & low fusion   : [-0.16, -0.49,  0.00, -0.49, -0.16, -0.26, +0.49]
-Choice vector for terminal pre-kernel: {'a3', 'a7'}
+Choice vector for terminal prekernel: {'a3', 'a7'}
 a7: +0.49
 a3:  0.00
 a1: -0.16
@@ -5606,7 +5606,7 @@ stable low vector   : [-1.0,  0.0, -1.0, -1.0,  0.0, -1.0,  0.0]
 stable high vector  : [ 0.0, +1.0,  0.0,  0.0, +1.0,  0.0, +1.0]
 #iterations         : 3
 low & high fusion   : [-1.0, +1.0, -1.0, -1.0, +1.0, -1.0, +1.0]
-Choice vector for initial pre-kernel: {'2', '5', '7'}
+Choice vector for initial prekernel: {'2', '5', '7'}
 7: +1.00
 5: +1.00
 2: +1.00
@@ -5615,7 +5615,7 @@ Choice vector for initial pre-kernel: {'2', '5', '7'}
 3: -1.00
 1: -1.00
 
-Notice that the stable low vector characterises the **negative membership** part, whereas, the stable high vector characterises the **positive membership** part (see Lines 9-10 above). The bipolar **disjunctive fusion** assembles eventually both stable parts into the correct pre-kernel characteristic vector (Line 12). 
+Notice that the stable low vector characterises the **negative membership** part, whereas, the stable high vector characterises the **positive membership** part (see Lines 9-10 above). The bipolar **disjunctive fusion** assembles eventually both stable parts into the correct prekernel characteristic vector (Line 12). 
 
 The adjacency matrix of a symmetric digraph staying *unchanged* by the transposition operator, the previous computations, when qualifying the same kernel as a *terminal* instance, will hence produce exactly the same result.
 
