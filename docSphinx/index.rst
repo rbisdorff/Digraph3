@@ -39,7 +39,7 @@ criteria. Other tutorials concern more specifically operational
 aspects of computing maximal independent sets (MISs) and kernels in
 graphs and digraphs. The tutorial about split, interval and permutation graphs
 is inspired by Martin Golumbic's book on *Algorithmic Graph Theory and Perfect Graphs* ([3]_). Finally, we provide a tutorial on
-tree graphs and spanning forests. 
+tree graphs and spanning forests and three pearls of bipolar epistemic logic.
 
 .. toctree:: tutorial
    :maxdepth: 2

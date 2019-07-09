@@ -5870,7 +5870,7 @@ class Digraph(object):
 
         .. note::
 
-             Initiate with S = self.actions,copy().
+             Initiate with S = self.actions.copy().
              
         """
         Med = self.valuationdomain['med']

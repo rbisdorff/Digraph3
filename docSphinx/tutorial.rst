@@ -2581,7 +2581,7 @@ One may check that the outranking digraph *g* does not admit in fact a cyclic st
 *Rubis* best choice recommendations
 -----------------------------------
 
-Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking pre-kernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the pre-kernels of *g* (see the tutorial :ref:`Kernel-Tutorial-label`).
+Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking prekernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the prekernels of *g* (see the tutorial :ref:`Kernel-Tutorial-label`).
 
     >>> g.showPreKernels()
     *--- Computing preKernels ---*
@@ -5178,11 +5178,11 @@ In our bipolar-valued epistemic logic, logical disjunctions and conjunctions are
 
 If *r(x R1 y)* and *r(x R2 y)* denote the bipolar-valued characteristic values of relation *R1*, resp. *R2*, we may hence compute as follows a majority margin *M(R1<=>R2)* between equivalently and not equivalently oriented irreflexive pairs *(x,y)*.
 
-| *M(R1<=>R2)* = sum _ *(x,y)* { \
+| M(R1<=>R2)* = sum _ *(x,y)* { \
 |                   min [ max( *-r(x R1 y)*, *r(x R2 y)* ), \
 |                         max( *-r(x R2 y)*, *r(x R1 y)* ) ] }.
 
-*M(R1<=>R2)* is hence given by the sum of the non reflexive terms of the relation table of *eq*, the relation equivalence digraph computed above.
+*M(R1<=>R2)* is thus given by the sum of the non reflexive terms of the relation table of *eq*, the relation equivalence digraph computed above.
 
 In the crisp case, *M(R1<=>R2)*  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r*-valued case, the maximal possible equivalence majority margin *M* corresponds to the sum *D* of the **conjoint determinations** of *(x R1 y)* and *(x R2 y)* (see [BIS-2012]_). 
 
@@ -5192,7 +5192,7 @@ Thus, we obtain in the general *r* -valued case:
 
     *tau(R1,R2)* =  *M(R1<=>R2)* / *D* .
 
-*tau(R1,R2)* gives us hence a classical ordinal correlation index, but restricted to the **conjointly determined parts** of the given relations *R1* and *R2*. In the limit case of two crisp linear orders, *D* equals *n(n-1)*, i.e. the number of irreflexive pairs, and we recover hence *Kendall* 's original *tau* index definition.
+*tau(R1,R2)* corresponds thus to a classical ordinal correlation index, but restricted to the **conjointly determined parts** of the given relations *R1* and *R2*. In the limit case of two crisp linear orders, *D* equals *n(n-1)*, i.e. the number of irreflexive pairs, and we recover hence *Kendall* 's original *tau* index definition.
 
 It is worthwhile noticing that the ordinal correlation index *tau(R1,R2)* we obtain above corresponds to the ratio of
 
@@ -5274,7 +5274,7 @@ r(SF<=>nf) = +0.103
 r(AS<=>nf) = +0.080
 r(FG<=>nf) = +0.027
 
-We hence recover the relational equivalence characteristic values shown in the third row of the table shown in Fig. 64. The global *Net-Flows* ranking represents obviously a rather balanced compromise with respect to all movie critics'opinions as there appears no valued negative correlation with anyone of them. The *Net-Flows* ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight.
+We recover above the relational equivalence characteristic values shown in the third row of the table in Fig. 64. The global *Net-Flows* ranking represents obviously a rather balanced compromise with respect to all movie critics'opinions as there appears no valued negative correlation with anyone of them. The *Net-Flows* ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight.
 
 The ordinal correlation between the global *Net-Flows* ranking and the digraph *g* may be furthermore computed as follows: 
 
@@ -5316,7 +5316,7 @@ The first 3 principal axes support together about 70% of the total inertia. Most
 Exploring the *better rated*  and the *as well as rated* opinions
 .................................................................
 
-In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of the '*at least as well rated as*' opinions (see introduction tutorial of the :py:mod:`digraphs` module).
+In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of the '*at least as well rated as*' opinions (see the tutorial :ref:`Digraphs-Tutorial-label`).
 
 Let us first have a look at the pairwise asymmetric part, namely the '*better rated than*' and '*less well rated than*' opinions of the movie critics. 
 
@@ -5338,7 +5338,7 @@ We notice here that the *Net-Flows* ranking rule inverts in fact just three '*le
    :width: 600 px
    :align: center
 
-Such a preordering of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -best remaining choices- and *absorbent kernels* -worst remaining choices- (see the :ref:`Kernel-Tutorial-label` tutorial). We operate herefore on the asymmetric '*better rated than*', i.e. the *codual* ([11]_) of the '*at least as well rated as*' opinions.
+Such a preordering of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -best remaining choices- and *absorbent kernels* -worst remaining choices- (see the tutorial :ref:`Kernel-Tutorial-label`). We operate herefore on the asymmetric '*better rated than*', i.e. the *codual* ([11]_) of the '*at least as well rated as*' opinions.
 
 >>> from weakOrders import RankingByChoosingDigraph
 >>> rbc = RankingByChoosingDigraph(g,CoDual=True)
@@ -5354,13 +5354,13 @@ Ranking by Choosing and Rejecting
    2nd Worst Choice ['mv_DF', 'mv_DJ', 'mv_FF', 'mv_GG']
  1st Worst Choice ['mv_BI', 'mv_DI', 'mv_HP', 'mv_TF']
 
-In the :ref:`Kernel-Tutorial-label` turorial we thoroughly discuss the computation of *kernels* in bipolar-valued digraphs. Yet, we do not tackle there the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors. This is the topic for the next pearl of bipolar-valued epistemic logic.
+In the tutorial :ref:`Kernel-Tutorial-label`, we thouroughly discuss the computation of *kernels* in bipolar-valued digraphs. Yet, we do not tackle there the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors. This is the topic for the next pearl of bipolar-valued epistemic logic.
 
 Bipolar-valued kernel membership characteristic vectors
 -------------------------------------------------------
 
-*Berge*'s Kernel Equation Systems
-.................................
+*Claude Berge*'s Kernel Equation Systems
+........................................
 
 Let *G(X,R)* be a crisp irreflexive digraph defined on a finite set *X* of nodes and where *R* is the corresponding {-1,+1}-valued adjacency matrix. Let *Y* be the {-1,+1}-valued membership characteristic (row) vector of a choice in *X*. When *Y* satisfies the following equation system
 
@@ -5370,7 +5370,7 @@ where for all *x* in *X*,
 
      :math:`(Y \circ R)(x) \; = \; \max_{y \in X, x \neq y} \big ( \min(Y(x), R(x,y))\big)\;.`
 
-than *Y* characterises an *initial kernel* ([BER-1958]_). Transposing the membership characteristic vector characterises similarly a *terminal kernel*
+than *Y* characterises an *initial kernel* ([BER-1958]_). Transposing the membership characteristic vector, *Berge*'s euqation system characterises similarly a *terminal kernel*
 
      :math:`R \circ Y^t \; = \; -Y^t\;.`
 
@@ -5402,31 +5402,29 @@ Absorbent preKernels :
 
 It is easy to verify now that the characteristic vector [-1, -1, +1] satisfies the initial kernel equation system; *a3* gives an initial kernel. Similarly, the characteristic vector [-1, +1, -1] verifies indeed the terminal kernel equation system and hence *a2* gives a terminal kernel.
 
-We succeeded in generalizing *Berge*'s kernel equation systems to genuine bipolar-valued digraphs ([BIS-2006a]_). The constructive proof, found by M. Pirlot, provided by the way the following fixpoint equation
+We succeeded in generalizing *Berge*'s kernel equation systems to genuine bipolar-valued digraphs ([BIS-2006a]_). The constructive proof, found by M. Pirlot, is based on the following fixpoint equation that may be used for computing bipolar-valued kernel membership vectors
 
      :math:`T(Y) \; := \; -(Y \circ R) = Y,`
-
-that may be used for computing bipolar-valued kernel membership vectors.
 
 Solving bipolar-valued kernel equation systems
 ..............................................
 
-*John von Neumann* ([SCH-1985]_) showed indeed that, when a digraph *G(X,R)* is acyclic with a  unique inital kernel *K* characterised by its membership characteristics vector *Yk*, then the following dual bipolar-valued fixpoint equation
+*John von Neumann* ([SCH-1985]_) showed indeed that, when a digraph *G(X,R)* is **acyclic** with a  **unique inital kernel** *K* characterised by its membership characteristics vector *Yk*, then the following dual bipolar-valued fixpoint equation
 
      :math:`T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;.`
 
-will admit a stable high and a stable low fixpoint solutions converging both to *Yk*.
+will admit a stable high and a stable low fixpoint solution that converge both to *Yk*.
 
-Inspired by this crisp fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its independent and dominant or absorbent choices *Ki* in *X* determines an induced partial subgraph *G(X,R/Ki)* which is acyclyc and admits *Ki* as unique kernel.
+Inspired by this crisp dual fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its dominant or absorbent prekernels *Ki* in *X* determines an induced **partial graph** *G(X,R/Ki)* which is *acyclyc* and admits *Ki* as unique kernel.
 
-Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extended dual fixpoint algorithm, applied to *G(X,R/Ki)*, allows to compute the associated bipolar-valued kernel characteristic vectors *Yi* in polynomial complexity.
+Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extended dual fixpoint algorithm, applied to *G(X,R/Ki)*, allows to compute hence the associated bipolar-valued kernel characteristic vectors *Yi* in polynomial complexity.
 
 **Algorithm** 
 
     | *in*  : bipolar-valued digraph *G(X,R)*,
     | *out* : set {*Y1*, *Y2*, .. } of bipolar-valued kernel membership characteristic vectors.
     
-    1. enumerate all initial and terminal crisp pre-kernels *K*, *K2*, ... in the given bipolar-valued digraph (see the ':ref:`Kernel-Tutorial-label`' tutorial);
+    1. enumerate all initial and terminal crisp prekernels *K*, *K2*, ... in the given bipolar-valued digraph (see the ':ref:`Kernel-Tutorial-label`' tutorial);
        
     #. for each crisp initial kernel *Ki*:
     
@@ -5453,7 +5451,7 @@ Attributes          : ['name', 'actions', 'criteria', 'evaluation',
                        'relation', 'valuationdomain', 'order',
 		       'gamma', 'notGamma']
 
-The random outranking digraph *g*, we consider here for illustration, models the pairwise outranking situations between seven decision alternatives evaluated on seven incommensurable performance criteria. We compute its corresponding bipolar-valued kernels on the associated codual digraph *gcd*.
+The random outranking digraph *g*, we consider here for illustration, models the pairwise outranking situations between seven decision alternatives evaluated on seven incommensurable performance criteria. We compute its corresponding bipolar-valued prekernels on the associated codual digraph *gcd*.
 
 >>> gcd = ~(-g) # strict outranking digraph
 >>> gcd
@@ -5482,9 +5480,9 @@ dominant kernel :  [0, 0, 0, 1, 0, 0, 0, 0]
 absorbent kernel:  [0, 0, 1, 0, 0, 0, 0, 0]
 Execution time  : 0.00022 sec.
 
-The codual outranking digraph, modelling a strict outranking relation, admits an initial pre-kernel [*a1*, *a2*, *a4*] and a terminal one [*a3*, *a7*] (see above the *indeterminate independence* qualifications in Line 7 and 13).
+The codual outranking digraph, modelling a *strict outranking* relation, admits an initial prekernel [*a1*, *a2*, *a4*] and a terminal one [*a3*, *a7*] (see above the *indeterminate independence* qualifications in Line 7 and 13).
 
-Let us compute the *initial* pre-kernel restricted adjacency table with the :py:func:`digraphs.Digraph.domkernelrestrict` method.
+Let us compute the *initial* prekernel restricted adjacency table with the :py:func:`digraphs.Digraph.domkernelrestrict` method.
  
 >>> k1Relation = gcd.domkernelrestrict(['a1','a2','a4'])
 >>> gcd.showHTMLRelationTable(
@@ -5499,10 +5497,10 @@ Let us compute the *initial* pre-kernel restricted adjacency table with the :py:
 
    Initial kernel [*a1*, *a2*, *a4*] restricted adjacency table
 
-We first notice that this initial pre-kernel is indeed only *weakly independent*: The outranking situation between *a4* and *a1* appears *indeterminate*. The corresponding initial pre-kernel membership characteristic vector may be computed with the :py:func:`digraphs.Digraph.computeKernelVector` method.
+We first notice that this initial prekernel is indeed only *weakly independent*: The outranking situation between *a4* and *a1* appears *indeterminate*. The corresponding initial prekernel membership characteristic vector may be computed with the :py:func:`digraphs.Digraph.computeKernelVector` method.
 
 >>> gcd.computeKernelVector(['a1','a2','a4'],Initial=True,Comments=True)
---> Initial pre-kernel: {'a1', 'a4', 'a2'}
+--> Initial prekernel: {'a1', 'a4', 'a2'}
 initial low vector : [-1.00, -1.00, -1.00, -1.00, -1.00, -1.00, -1.00]
 initial high vector: [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]
 1st low vector     : [ 0.00, +0.21, -0.21,  0.00, -0.44, -0.07, -0.58]
@@ -5515,7 +5513,7 @@ initial high vector: [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]
 4th high vector    : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.07, -0.21]
 # iterations       : 4
 low & high fusion  : [ 0.00, +0.21, -0.21, +0.21, -0.21, -0.07, -0.21]
-Choice vector for initial pre-kernel: {'a1', 'a2', 'a4'}
+Choice vector for initial prekernel: {'a1', 'a2', 'a4'}
 a2: +0.21
 a4: +0.21
 a1:  0.00
@@ -5526,9 +5524,9 @@ a7: -0.21
  
 We start the fixpoint computation with an empty set characterisation as first low vector and a complete set *X* characterising high vector. After each iteration, the low vector is set to the negation of the previous high vector and the high vector is set to the negation of the previous low vector.
 
-A unique stable kernel characteristic vector *Y1* is here attained at the fourth iteration with positive members *a2*: +0.21 and *a4*: +0.21 (60.5% criteria significance majority); *a1*: 0.00 being an ambiguous potential member. Alternatives *a3*, *a5*, *a6* and *a7* are all negative members, i.e. positive **non members** of this outranking pre-kernel.
+A unique stable prekernel characteristic vector *Y1* is here attained at the fourth iteration with positive members *a2*: +0.21 and *a4*: +0.21 (60.5% criteria significance majority); *a1*: 0.00 being an ambiguous potential member. Alternatives *a3*, *a5*, *a6* and *a7* are all negative members, i.e. positive **non members** of this outranking prekernel.
 
-Let us now compute the restricted adjacency table for the outranked, i.e. the *terminal* pre-kernel [*a3*, *a7*].
+Let us now compute the restricted adjacency table for the outranked, i.e. the *terminal* prekernel [*a3*, *a7*].
  
 >>> k2Relation = gcd.abskernelrestrict(['a3','a7'])
 >>> gcd.showHTMLRelationTable(
@@ -5543,7 +5541,7 @@ Let us now compute the restricted adjacency table for the outranked, i.e. the *t
 
    Terminal kernel ['a3','a7'] restricted adjacency table
 
-Again, we notice that this terminal pre-kernel is indeed only weakly independent. The corresponding bipolar-valued characteristic vector *Y2* may be computed as follws.
+Again, we notice that this terminal prekernel is indeed only weakly independent. The corresponding bipolar-valued characteristic vector *Y2* may be computed as follws.
 
 >>> gcd.computeKernelVector(['a3','a7'],Initial=False,Comments=True)
 --> Terminal pre-kernel: {'a3', 'a7'}
@@ -5566,7 +5564,7 @@ a6: -0.26
 a2: -0.49
 a4: -0.49
 
-A unique stable bipolar-valued high and low fixpoint is attained at the third iteration with *a7* positively confirmed (about 75% criteria significance majority) as member of this terminal pre-kernel, whereas the membership of *a3* in this pre-kernel appears indeterminate. All the remaining nodes have *negative* membership characteristic values and are hence positively excluded from this pre-kernel.
+A unique stable bipolar-valued high and low fixpoint is attained at the third iteration with *a7* positively confirmed (about 75% criteria significance majority) as member of this terminal prekernel, whereas the membership of *a3* in this prekernel appears indeterminate. All the remaining nodes have *negative* membership characteristic values and are hence positively excluded from this prekernel.
 
 When we reconsider in the graphviz drawing of this outranking digraph in Fig. 70 (see the tutorial ':ref:`Kernel-Tutorial-label`' Fig. 44),
 
@@ -5575,9 +5573,9 @@ When we reconsider in the graphviz drawing of this outranking digraph in Fig. 70
    :align: center
    :alt: The random outranking digraph oriented by its initial and terminal prekernels
 
-   The strict outranking digraph oriented by the positive members of its initial and terminal pre-kernel
+   The strict outranking digraph oriented by the positive members of its initial and terminal prekernels
 
-it becomes obvious why alternative *a1* is **neither included nor excluded** from the initial kernel. Same observation is applicable to alternative *a3* which can **neither be included nor excluded** from the terminal kernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent pre-kernel; the corresponding bipolar-valued membership characteristic vector being completely indeterminate (see for instance the ':ref:`Rubis-Tutorial-label`' tutorial).
+it becomes obvious why alternative *a1* is **neither included nor excluded** from the initial prekernel. Same observation is applicable to alternative *a3* which can **neither be included nor excluded** from the terminal prekernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent prekernel; the corresponding bipolar-valued membership characteristic vector being completely indeterminate (see for instance the tutorial ':ref:`Rubis-Tutorial-label`').
 
 To illustrate finally why sometimes we need to operate an *epistemic disjunctive fusion* of **unequal** stable low and high membership characteristics vectors (see Step 2.c.), let us consider, for instance, the following crisp 7-*cycle* graph.
 
