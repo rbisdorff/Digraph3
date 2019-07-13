@@ -24,6 +24,9 @@
 	:depth: 1
 	:local:
 
+.. highlight:: python
+	:linenothreshold: 1
+
 .. _Digraphs-Tutorial-label:
 
 Working with the *Digraph3* software resources
@@ -33,8 +36,6 @@ Working with the *Digraph3* software resources
 	:depth: 2
 	:local:
 
-.. highlight:: python
-	:linenothreshold: 1
 
 Purpose
 -------
@@ -2788,7 +2789,7 @@ Credibility domain:  {'min':-100.0, 'max': 100.0', 'med':0.0'}
      {'A': 0.00, 'B': 0.00, 'C': 0.00, 'D': 0.00, 
       'E': 0.00, 'F': 0.00, 'G': 0.00, }
 
-It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D' (see Line 6). In the corresponding characteristic vector (see Line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see the ':ref:`Pearls-Tutorial-label` ' tutorial and [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the crisp best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
+It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D' (see Line 6). In the corresponding characteristic vector (see Line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see the tutorial on :ref:`Bipolar-Valued-Kernels-Tutorial-label` and [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the crisp best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
 
 We may also notice (see Line 17 and Line 21) that both alternatives *A* and *F* are reported as certainly outranked choices, hence a **potential worst choice recommendation** . This confirms again the global incomparability status of alternative *A*.
 
@@ -5132,6 +5133,8 @@ In the table of the equivalence relation *R1<=>R2* above, we observe that the no
 
 What happens now with more or less determined and even partially indeterminate relations ? May we proceed in a similar way ?
 
+
+
 Bipolar-valued relational equivalence
 .....................................
 
@@ -5356,6 +5359,8 @@ Ranking by Choosing and Rejecting
 
 In the tutorial :ref:`Kernel-Tutorial-label`, we thouroughly discuss the computation of *kernels* in bipolar-valued digraphs. Yet, we do not tackle there the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors. This is the topic for the next pearl of bipolar-valued epistemic logic.
 
+.. _Bipolar-Valued-Kernels-Tutorial-label:
+
 Bipolar-valued kernel membership characteristic vectors
 -------------------------------------------------------
 
@@ -5415,7 +5420,7 @@ Solving bipolar-valued kernel equation systems
 
 will admit a stable high and a stable low fixpoint solution that converge both to *Yk*.
 
-Inspired by this crisp dual fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its dominant or absorbent prekernels *Ki* in *X* determines an induced **partial graph** *G(X,R/Ki)* which is *acyclyc* and admits *Ki* as unique kernel.
+Inspired by this crisp dual fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its dominant or absorbent prekernels *Ki* in *X* determines an induced **partial graph** *G(X,R/Ki)* which is *acyclyc* and admits *Ki* as unique kernel (see [BIS-2006b]_).
 
 Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extended dual fixpoint algorithm, applied to *G(X,R/Ki)*, allows to compute hence the associated bipolar-valued kernel characteristic vectors *Yi* in polynomial complexity.
 
@@ -5566,7 +5571,7 @@ a4: -0.49
 
 A unique stable bipolar-valued high and low fixpoint is attained at the third iteration with *a7* positively confirmed (about 75% criteria significance majority) as member of this terminal prekernel, whereas the membership of *a3* in this prekernel appears indeterminate. All the remaining nodes have *negative* membership characteristic values and are hence positively excluded from this prekernel.
 
-When we reconsider in the graphviz drawing of this outranking digraph in Fig. 70 (see the tutorial ':ref:`Kernel-Tutorial-label`' Fig. 44),
+When we reconsider the graphviz drawing of this outranking digraph in Fig. 70 (see the tutorial ':ref:`Kernel-Tutorial-label`' Fig. 44),
 
 .. figure:: bestWorstOrientation.png
    :width: 300 px
