@@ -1154,27 +1154,45 @@ The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of t
 Code example.
 
         >>> from randomPerfTabs import RandomPerformanceTableau
-        >>> t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1,seed=100)
+        >>> t = RandomPerformanceTableau(numberOfActions=21,numberOfCriteria=13,seed=100)
         >>> t.actions
-            {'a1': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
-             'a2': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'},
-             'a3': {'comment': 'RandomPerformanceTableau() generated.', 'name': 'random decision action'}}
+            {'a01': {'comment': 'RandomPerformanceTableau() generated.',
+	            'name': 'random decision action'},
+             'a02': { ... },
+	     ...
+	    }
         >>> t.criteria
-            {'g1': {'thresholds': {'ind' : (Decimal('10.0'), Decimal('0.0')),
+            {'g01': {'thresholds': {'ind' : (Decimal('10.0'), Decimal('0.0')),
                                    'veto': (Decimal('80.0'), Decimal('0.0')),
                                    'pref': (Decimal('20.0'), Decimal('0.0'))},
                     'scale': [0.0, 100.0],
                     'weight': Decimal('1'),
                     'name': 'digraphs.RandomPerformanceTableau() instance',
                     'comment': 'Arguments: ; weightDistribution=random;
-                        weightScale=(1, 1); commonMode=None'}}
+                        weightScale=(1, 1); commonMode=None'},
+	      'g02':  { ... },
+	      ...
+	     }
         >>> t.evaluation
-            {'g01': {'a01': Decimal('45.95'),
-                     'a02': Decimal('95.17'),
-                     'a03': Decimal('17.47')
-                    }
-            }
+            {'g01': {'a01': Decimal('15.17'),
+                     'a02': Decimal('44.51'),
+                     'a03': Decimal('-999'),  # missing evaluation
+		     ...
+		     },
+              ...
+	     }
+	>>> t.showHTMLPerformanceTableau()
 
+.. figure:: randomPerfTab1.png
+   :width: 500 px
+   :align: center
+
+   Browser view on random performance tableau instance
+
+.. note::
+
+   Missing (NA) evaluation are registered in a performance tableau as *Decimal('-999')* value (see Line 24). Best and worst performance on each criterion are marked in *light green*, respectively in *light red*. 
+	    
 Generating random Cost-Benefit tableaux
 ---------------------------------------
 
