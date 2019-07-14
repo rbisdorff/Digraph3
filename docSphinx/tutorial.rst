@@ -2387,7 +2387,7 @@ r(x>y) image range := [-1008;+1008]
 >>> g.computeTransitivityDegree()
 Decimal('0.78')
 
-Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each **positively outrank** all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking digraph (ie the codual ~(-*g*) of *g*) shown in Fig. 19.
+Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each **positively outrank** all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking digraph (ie the codual ~(-*g*) of *g*) shown in Fig. 20.
   
 >>> (~(-g)).exportGraphViz()
 *---- exporting a dot file dor GraphViz tools ---------*
@@ -2562,7 +2562,7 @@ The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted
 
    The office choice outranking digraph  
 
-For computing such a bipolar-valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigraph`` constructor from the :ref:`outrankingDigraphs-label` module. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window (see Fig. 21).
+For computing such a bipolar-valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigraph`` constructor from the :ref:`outrankingDigraphs-label` module. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window (see Fig. 22).
 
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> g = BipolarOutrankingDigraph(t)
@@ -2575,7 +2575,7 @@ We may notice that Alternative *D* is **positively outranking** all other potent
     >>> g.weakCondorcetWinners()
     ['A', 'C', 'D']
 
-We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph (see Fig.22).
+We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph (see Fig.23).
 
     >>> g.exportGraphViz('officeChoice')
     *---- exporting a dot file for GraphViz tools ---------*
@@ -2955,7 +2955,7 @@ Given a new Performance Tableau with 100 new decision alternatives, the so far e
     >>> # Updating the quartile norms shown above 
     >>> pq.updateQuantiles(newTab,historySize=None)
 
-Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance** the **new** evaluations against the **historical** ones. With **historySize = None** (the default setting), the balance in the example above is 900/1000 (90%, weight of historical data) against 100/1000 (10%, weight of the new incoming observations). Putting **historySize = 0**, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view (see Fig. 24).
+Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance** the **new** evaluations against the **historical** ones. With **historySize = None** (the default setting), the balance in the example above is 900/1000 (90%, weight of historical data) against 100/1000 (10%, weight of the new incoming observations). Putting **historySize = 0**, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view (see Fig. 25).
 
     >>> # showing the updated quantile limits in a browser view
     >>> pq.showHTMLLimitingQuantiles(Transposed=True)
@@ -3076,7 +3076,7 @@ We notice above that no new decision alternative is rated in the lowest [0.0-0.2
     [0.50 - 0.75[ ['a1005', 'a1010', 'a1008', 'a1002', 'a1006']
     [0.25 - 0.50[ ['a1003', 'a1001', 'a1007', 'a1004', 'a1009']
     
-The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method (see Fig. 25).
+The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method (see Fig. 26).
 
     >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quartiles Rating',
     ...               Correlations=True,colorLevels=5)
@@ -3088,7 +3088,7 @@ The same result may even more conviently be consulted in a browser view via a sp
 
     Heatmap of normed quartiles ranking 
 	    
-Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the same rating result in a Hasse diagram format (see Fig. 26).
+Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the same rating result in a Hasse diagram format (see Fig. 27).
 
    >>> nqr.exportRatingGraphViz('normedRatingDigraph')
     *---- exporting a dot file for GraphViz tools ---------*
@@ -3127,7 +3127,7 @@ A more precise rating result may be achieved when we use **deciles** instead of 
 
 Compared with the quartiles rating result, we notice that the five alternatives (*a1002*, *a1005*, *a1006*, *a1008*, and *a1010*), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives *a1002*, *a1005*, *a1008* and *a1010* attain the 7th decile class [0.6-0.7[, whereas alternative *a1006* attains only the the 6th decile class [0.5-0.6[. Of the five *Q2* [0.25-0.50[ rated alternatives (*a1001*, *a1003*, *a1004*, *a1006* and *a1007*), alternatives *a1001* and *a1003* are now rated in the 6th decile class [0.5 - 0.6[, whereas *a1004* and *a1007* are rated the 5th decile class [0.4-0.5[ and *a1009* is lowest rated in the 4th decile class [0.3 - 0.4[.
 
-A browser view may again more conveniently illustrate this preciser *deciles* rating result (see Fig. 27).
+A browser view may again more conveniently illustrate this preciser *deciles* rating result (see Fig. 28).
 
     >>> nqr1.showHTMLRatingHeatmap(pageTitle='Heatmap of the deciles rating',\
     ...                            colorLevels=5,Correlations=True)
@@ -3691,7 +3691,7 @@ The command :py:func:`digraphs.Digraph.showOrbits` renders now the labelled repr
   stabilizer size: [1, 2, 3, ..., 8, 9, ..., 12, 13, ...]
   frequency      : [0, 2, 0, ..., 1, 0, ...,  1,  0, ...]
 
-The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of Fig. 34 below.
+The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of Fig. 35 below.
 
 .. figure:: c12.png
     :width: 400 px
@@ -3718,7 +3718,7 @@ What is a graph kernel ?
 
 We call **choice** in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice *Y* is called **internally stable** or **independent** when there exist **no links** (edges) or relations (arcs) between its members. Furthermore, a choice *Y* is called **externally stable** when for each vertex, node or action *x* not in *Y*, there exists at least a member *y* of *Y* such that *x* is linked or related to *y*. Now, an internally **and** externally stable choice is called a **kernel**.  
 
-A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see :ref:`IsomorphicMIS-Tutorial-label`). Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 34. 
+A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see :ref:`IsomorphicMIS-Tutorial-label`). Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in Fig. 35. 
 
 In all graph or symmetric digraph, the *maximality condition* imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal **holes** in the given graph.
 
@@ -3757,7 +3757,7 @@ fdp -Tpng random3RegularGraph-mis.dot -o random3RegularGraph-mis.png
 
     A random MIS colored in the random 3-regular graph
 
-It is easily verified in Fig. 36 above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance coincides hence with the set of its MISs. 
+It is easily verified in Fig. 37 above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance coincides hence with the set of its MISs. 
 
 >>> g.showMIS()
 *---  Maximal Independent Sets ---*
@@ -3831,7 +3831,7 @@ current representative:  frozenset({'a09', 'a11', 'a12', 'a08'})
 length   :  4
 number of isomorph choices 2
 isormorph choices
-['a06', 'a02', 'a12', 'a10']  # <<== the random MIS shown in Fig. 36
+['a06', 'a02', 'a12', 'a10']  # <<== the random MIS shown in Fig. 37
 ['a09', 'a11', 'a12', 'a08']
 ----------------------------
 *---- Global result ----
@@ -3853,7 +3853,7 @@ Symmetry vector
 stabilizer size  :  [1, 2]
 frequency        :  [11, 0]
 
-In our random 3-regular graph instance (see Fig. 35), we may thus find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 36.
+In our random 3-regular graph instance (see Fig. 36), we may thus find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in Fig. 37.
 
 .. figure:: random3RegularGraphKernelOrbit.png
    :width: 700 px
@@ -3997,7 +3997,7 @@ Absorbent preKernels :
 ['1', '3', '5'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 ['2', '4', '6'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 
-Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of **all** chordless circuits of *odd* **or** *even* length, ie *filled* circuits also called **anti-holes** (see Fig. 39), never contain any potential kernel candidates.
+Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of **all** chordless circuits of *odd* **or** *even* length, ie *filled* circuits also called **anti-holes** (see Fig. 40), never contain any potential kernel candidates.
 
 >>> dc6 = -c6   # dc6 = DualDigraph(c6)
 >>> dc6.showPreKernels()
@@ -4039,7 +4039,7 @@ dot -Grankdir=BT -Tpng randomLaterality.dot -o randomLaterality.png
 
    A random digraph instance of order 7 and arc probability 0.3
 
-The random digraph shown in Fig. 40 above has no apparent special properties, except from being connected.
+The random digraph shown in Fig. 41 above has no apparent special properties, except from being connected.
 
 >>> rd.showComponents()
 *--- Connected Components ---*
@@ -4089,7 +4089,7 @@ Absorbent preKernels :
    covering     :  0.600  # <<==
 ...
 
-Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph's *laterality*. We may hence redraw the same digraph in Fig. 41 by looking into its interior via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of it via the *best covered* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
+Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph's *laterality*. We may hence redraw the same digraph in Fig. 42 by looking into its interior via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of it via the *best covered* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
 
 >>> rd.exportGraphViz(fileName='orientedLaterality',\
 ...                   bestChoice=set(['a4', 'a3']),\
@@ -4134,7 +4134,7 @@ Valuation domain : {'min': -100.0, 'med': 0.0, 'max': 100.0}
 
    The performance tableau of a random outranking digraph instance
 
-The underlying random performance tableau (see Fig. 42) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions 'a2' and 'a5'. The resulting **strict outranking** - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in Fig. 43 below.
+The underlying random performance tableau (see Fig. 43) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions 'a2' and 'a5'. The resulting **strict outranking** - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in Fig. 44 below.
 
 >>> gcd = ~(-g)  # Codual: the converse of the negation
 >>> gcd.exportGraphViz(fileName='tutOutRanking')
@@ -4194,7 +4194,7 @@ Credibility domain: [-100.00,100.00]
 
 Notice that solving the valued *Berge* kernel equations ([BIS-2006a]_) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions 'a2' and 'a4' are equivalent candidates for a unique best choice, and action 'a7' is clearly confirmed as the worst choice.
 
-In Fig. 44 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations. 
+In Fig. 45 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations. 
 
 >>> gcd.exportGraphViz(fileName='bestWorstOrientation',
 ...       bestChoice=['a2','a4'], worstChoice=['a7'])
@@ -4209,7 +4209,7 @@ dot -Grankdir=BT -Tpng bestWorstOrientation.dot -o bestWorstOrientation.png
 
    The strict outranking digraph oriented by its best and worst choice recommendations
 
-The grey arrows in Fig. 44, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-Tutorial-label`).
+The grey arrows in Fig. 45, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-Tutorial-label`).
 
 >>> g.showHTMLPerformanceHeatmap(colorLevels=5, ndigits=0,
 ...          Correlations=True, rankingRule='Copeland')
@@ -4221,7 +4221,7 @@ The grey arrows in Fig. 44, like the one between actions 'a4' and 'a1', represen
 
    Heatmap with Copeland ranking of the peformance tableau
 
-In the resulting linear ranking (see Fig. 45), action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile. Both decision actions, hence, don't show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in Fig. 45 above.
+In the resulting linear ranking (see Fig. 46), action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile. Both decision actions, hence, don't show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in Fig. 46 above.
 
 Tractability
 ------------
@@ -4371,7 +4371,7 @@ fdp -Tpng randomSplitGraph.dot -o randomSplitGraph.png
 
     A conjointly triangulated, comparability, interval, permutation and split graph
 
-In Fig. 46 we may readily recognize the essential characteristic of **split graphs**, namely being always splitable into two disjoint sub-graphs: an *independentt choice* (*v6*) and a *clique* (*v1*, *v2*, *v3*, *v4*, *v5*, *v7*, *v8*); which explains their name.
+In Fig. 47 we may readily recognize the essential characteristic of **split graphs**, namely being always splitable into two disjoint sub-graphs: an *independentt choice* (*v6*) and a *clique* (*v1*, *v2*, *v3*, *v4*, *v5*, *v7*, *v8*); which explains their name.
 
 Notice however that the four properties:
 
@@ -4537,7 +4537,7 @@ fdp -Tpng coloredPermutationGraph.dot -o coloredPermutationGraph.png
 	    
     Minimal vertex coloring of the permutation graph
 
-The correspondingly colored **matching diagram** of the nine **inversions** -the actual *edges* of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz *neato* layout and explicitely positioned horizontal lists of vertices (see Fig. 51).
+The correspondingly colored **matching diagram** of the nine **inversions** -the actual *edges* of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz *neato* layout and explicitely positioned horizontal lists of vertices (see Fig. 52).
 
 >>> g.exportPermutationGraphViz(WithEdgeColoring=True)
 *---- exporting a dot file for GraphViz tools ---------*
@@ -4617,7 +4617,7 @@ Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
 
     Random graph of order 8 generated with edge probability 0.4
 
-If the random graph instance *g* (see Fig. 53) is a permutation graph, *g* and its dual *-g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a transitive neighbourhood decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
+If the random graph instance *g* (see Fig. 54) is a permutation graph, *g* and its dual *-g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a transitive neighbourhood decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
 
 >>> if g.isComparabilityGraph():
 ...     print(g.edgeOrientations)
@@ -4645,7 +4645,7 @@ If the random graph instance *g* (see Fig. 53) is a permutation graph, *g* and i
 	    
     Transitive neighbourhoods of the graph *g*
 
-The resulting orientation of the edges of *g* (see Fig. 54) is indeed transitive. The same procedure applied to the dual graph *gd = -g* gives a transitive orientation to the edges of *-g*.
+The resulting orientation of the edges of *g* (see Fig. 55) is indeed transitive. The same procedure applied to the dual graph *gd = -g* gives a transitive orientation to the edges of *-g*.
 
 >>> gd = -g
 >>> if gd.isComparabilityGraph():
@@ -4674,7 +4674,7 @@ The resulting orientation of the edges of *g* (see Fig. 54) is indeed transitive
 	    
     Transitive neighbourhoods of the dual graph *-g*
  
-It is worthwhile noticing that the orientation of *g* is achieved with a *single neighbourhood* decomposition, covering all the vertices. Whereas, the orientation of the dual *-g* needs a decomposition into *three subsequent neighbourhoods* marked in black, red and blue (see Fig.55).
+It is worthwhile noticing that the orientation of *g* is achieved with a *single neighbourhood* decomposition, covering all the vertices. Whereas, the orientation of the dual *-g* needs a decomposition into *three subsequent neighbourhoods* marked in black, red and blue (see Fig.56).
 
 Let us recheck these facts by explicitely constructing transitively oriented digraph instances with the :py:func:`graphs.Graph.computeTransitivelyOrientedDigraph` method. 
 
@@ -4749,7 +4749,7 @@ We may finally check that, for instance, the two permutations [2, 3, 4, 8, 6, 1,
 
     Isomorphic permutation graphs
 
-And, we recover indeed two *isomorphic copies* of the original random graph (see Fig. 53).
+And, we recover indeed two *isomorphic copies* of the original random graph (see Fig. 54).
 
 Back to :ref:`Tutorial-label`
 
@@ -4857,7 +4857,7 @@ Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. 
     ...     print('The graph is a tree ?',False)
     The graph is a tree ? True
 
-The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in Fig. 59 (see also the :py:func:`graphs.Graph.isTree` method for an implemented alternative test).
+The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in Fig. 60 (see also the :py:func:`graphs.Graph.isTree` method for an implemented alternative test).
 
 >>> g.exportGraphViz(
 *---- exporting a dot file for GraphViz tools ---------*
@@ -4993,7 +4993,7 @@ Depth first search path(s) :
 [['v1', 'v2', 'v4', 'v2', 'v5', 'v2', 'v1', 'v3', 'v1']]
 Average determination(s) : [Decimal('0.655')]
 
-The given graph is connected and, hence, admids a single spanning tree (see Fig. 62) of **maximum mean determination** = (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655** (see Lines 9, 6 and 10 in the relation table above).
+The given graph is connected and, hence, admids a single spanning tree (see Fig. 63) of **maximum mean determination** = (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655** (see Lines 9, 6 and 10 in the relation table above).
 
 >>> mt.exportGraphViz(fileName='bestDeterminedspanningTree',\
 ...                   WithSpanningTree=True)
@@ -5031,7 +5031,7 @@ In social choice problems like elections, *abstentions* are, however, frequently
 
 In marketing studies, interviewees will not always respond to all the submitted questions. Again, such abstentions do sometimes contain nevertheless valid information concerning consumer preferences.
 
-Let us take an example performance tableau from a Movie magazine's evaluation of movies that could be seen in town [9]_ (see Fig. 63).
+Let us take an example performance tableau from a Movie magazine's evaluation of movies that could be seen in town [9]_ (see Fig. 64).
 
 >>> from outrankingDigraphs import *
 >>> t = XMCDA2PerformanceTableau('graffiti07')
@@ -5048,7 +5048,7 @@ Let us take an example performance tableau from a Movie magazine's evaluation of
 
 To aggregate all the critics' rating opinions, the *Graffiti* magazine provides for each movie a global score computed as an *average grade*, just ignoring the *not seen* data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic *SJ*, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
 
-A better approach is to rank the movies on the basis of pairwise bipolar-valued  *at least as well rated as* opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the :ref:`Ranking-Tutorial-label` tutorial) of the 25 movies is provided, for instance, by the **heat map** view shown in Fig. 64.
+A better approach is to rank the movies on the basis of pairwise bipolar-valued  *at least as well rated as* opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the :ref:`Ranking-Tutorial-label` tutorial) of the 25 movies is provided, for instance, by the **heat map** view shown in Fig. 65.
 
 >>> t.showHTMLPerformanceHeatmap(Correlations=True,
 ...                              rankingRule='NetFlows',
@@ -5063,7 +5063,7 @@ A better approach is to rank the movies on the basis of pairwise bipolar-valued 
 
 There is no doubt that movie *mv_QS*, with 6 '*must be seen*' marks, is correctly best-ranked and the movie *mv_TV* is worst-ranked with five '*don't like*' marks.
 
-Let us explicitly construct the corresponding bipolar-valued outranking digraph and consult in Fig. 65 the pairwise characteristic values we observe between the two best-ranked movies, namely *mv_QS* and *mv_RR*.
+Let us explicitly construct the corresponding bipolar-valued outranking digraph and consult in Fig. 66 the pairwise characteristic values we observe between the two best-ranked movies, namely *mv_QS* and *mv_RR*.
 
 >>> g = BipolarOutrankingDigraph(t)
 >>> g.recodeValuation(-19,19) # integer characteristic values
@@ -5078,7 +5078,7 @@ Let us explicitly construct the corresponding bipolar-valued outranking digraph 
 
 Six out of the fifteen critics have not seen one or the other of these two movies. Notice the higher significance (3) that is granted to two locally renowned movie critics, namely *JH* and *VT*. Their opinion counts for three times the opinion of the other critics. All nine critics that have seen both movies, except critic *MR*, state that *mv_QS* is rated at least as well as *mv_RR* and the balance of positive against negative opinions amounts to +11, a characteristic value which positively validates the outranking situation with a majority of (11/19 + 1.0) / 2.0 = 79%.  
 
-The complete table of pairwise majority margins of global '*at least as well rated as*' opinions, ranked by the same rule as shown in the heat map above (see Fig. 64), may be shown as follows. 
+The complete table of pairwise majority margins of global '*at least as well rated as*' opinions, ranked by the same rule as shown in the heat map above (see Fig. 65), may be shown as follows. 
 
 >>> ranking = g.computeNetFlowsRanking()
 >>> g.showHTMLRelationTable(actionsList=ranking, ndigits=0,\
@@ -5092,7 +5092,7 @@ The complete table of pairwise majority margins of global '*at least as well rat
 
    Pairwise majority margins of '*at least as well rated as*' rating opinions
 
-Positive characteristic values, validating a global '*at least as well rated as*' opinion are marked in light green (see Fig. 66). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best-ranked movie *mv_QS* is indeed a *Condorcet* winner, i.e. *better rated than all the other movies* by a 65% majority of critics. This majority may be assessed from the average determinateness of the given bipolar-valued outranking digraph *g*.
+Positive characteristic values, validating a global '*at least as well rated as*' opinion are marked in light green (see Fig. 67). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best-ranked movie *mv_QS* is indeed a *Condorcet* winner, i.e. *better rated than all the other movies* by a 65% majority of critics. This majority may be assessed from the average determinateness of the given bipolar-valued outranking digraph *g*.
 
 >>> print( '%.0f%%' % g.computeDeterminateness(InPercents=True) )
 65%
@@ -5112,7 +5112,7 @@ Only eight, out of the fifteen critics, have seen both movies and the positive o
 
 It is fair, however, to eventually mention here that the *Graffiti* magazine's average scoring method is actually showing a very similar ranking. Indeed, average scores usually confirm well all evident pairwise comparisons, yet *enforce* comparability for all less evident ones.
 
-Notice finally the ordinal correlation figures *tau* in Fig. 64  3rd row. How may we compute these ordinal correlation indexes ?
+Notice finally the ordinal correlation figures *tau* in Fig. 65  3rd row. How may we compute these ordinal correlation indexes ?
 
 Ordinal correlation equals bipolar-valued relational equivalence
 ----------------------------------------------------------------
@@ -5243,7 +5243,7 @@ In general we simply use the :py:func:`digraphs.Digraph.computeOrdinalCorrelatio
 >>> print('tau(R1,R2) = %+.3f, d = %.3f, r(R1<=>R2) = %+.3f' % (tau, d, r))
 tau(R1,R2) = +0.073, d = 0.356, r(R1<=>R2) = +0.026
 
-We may now illustrate the quality of the global ranking of the movies shown with the heat map in Fig. 64. 
+We may now illustrate the quality of the global ranking of the movies shown with the heat map in Fig. 65. 
 
 Fitness of ranking heuristics
 .............................
@@ -5264,9 +5264,9 @@ We reconsider the bipolar-valued outranking digraph *g* modelling the pairwise g
     >>> g.computeCoSize()
     188
 
-Out of the 25 x 24 = 600 irreflexive movie pairs, digraph *g* contains 390 positively validated, 188 positively invalidated outranking situations, and 22 *indeterminate* outranking situations (see the zero-valued cells in Fig. 66).
+Out of the 25 x 24 = 600 irreflexive movie pairs, digraph *g* contains 390 positively validated, 188 positively invalidated outranking situations, and 22 *indeterminate* outranking situations (see the zero-valued cells in Fig. 67).
 
-Let us now compute the normalized majority margin *r(<=>)*  of the equivalence between the marginal critic's pairwise ratings and the global *Net-Flows* ranking shown in the ordered heat map (se Fig.64).
+Let us now compute the normalized majority margin *r(<=>)*  of the equivalence between the marginal critic's pairwise ratings and the global *Net-Flows* ranking shown in the ordered heat map (se Fig.65).
 
 >>> from linearOrders import NetFlowsOrder
 >>> nf = NetFlowsOrder(g)
@@ -5295,7 +5295,7 @@ r(SF<=>nf) = +0.103
 r(AS<=>nf) = +0.080
 r(FG<=>nf) = +0.027
 
-We recover above the relational equivalence characteristic values shown in the third row of the table in Fig. 64. The global *Net-Flows* ranking represents obviously a rather balanced compromise with respect to all movie critics'opinions as there appears no valued negative correlation with anyone of them. The *Net-Flows* ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight.
+We recover above the relational equivalence characteristic values shown in the third row of the table in Fig. 65. The global *Net-Flows* ranking represents obviously a rather balanced compromise with respect to all movie critics'opinions as there appears no valued negative correlation with anyone of them. The *Net-Flows* ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight.
 
 The ordinal correlation between the global *Net-Flows* ranking and the digraph *g* may be furthermore computed as follows: 
 
@@ -5589,7 +5589,7 @@ a4: -0.49
 
 A unique stable bipolar-valued high and low fixpoint is attained at the third iteration with *a7* positively confirmed (about 75% criteria significance majority) as member of this terminal prekernel, whereas the membership of *a3* in this prekernel appears indeterminate. All the remaining nodes have *negative* membership characteristic values and are hence positively excluded from this prekernel.
 
-When we reconsider the graphviz drawing of this outranking digraph in Fig. 70 (see the tutorial ':ref:`Kernel-Tutorial-label`' Fig. 44),
+When we reconsider the graphviz drawing of this outranking digraph in Fig. 71 (see the tutorial ':ref:`Kernel-Tutorial-label`' Fig. 45),
 
 .. figure:: bestWorstOrientation.png
    :width: 300 px
