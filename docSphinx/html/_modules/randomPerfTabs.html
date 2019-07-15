@@ -86,17 +86,16 @@
 <span class="sd">        * weightScale := [Min,Max] (default =[1,numberOfCriteria].</span>
 <span class="sd">        * IntegerWeights := True (default) | False (normalized to proportions of 1.0).</span>
 <span class="sd">        * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])</span>
-<span class="sd">        * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p)</span>
-<span class="sd">          and considerable performance difference discrimination thresholds. q0, p0 and v0 are</span>
-<span class="sd">          expressed in percentige of the common scale amplitude: Max - Min.</span>
-<span class="sd">        * commonMode := common random distribution of random performance measurements:</span>
+<span class="sd">        * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. q0, p0 and v0 are expressed in percentige of the common scale amplitude: Max - Min.</span>
+<span class="sd">        * commonMode := common random distribution of random performance measurements (default = (&#39;beta&#39;,None,(2,2)) ):</span>
 <span class="sd">             | (&#39;uniform&#39;,None,None), uniformly distributed between min and max values. </span>
 <span class="sd">             | (&#39;normal&#39;,mu,sigma), truncated Gaussion distribution. </span>
 <span class="sd">             | (&#39;triangular&#39;,mode,repartition), generalized triangular distribution </span>
 <span class="sd">             | (&#39;beta&#39;,mod,(alpha,beta)), mode in ]0,1[.</span>
 <span class="sd">        * valueDigits := &lt;integer&gt;, precision of performance measurements</span>
 <span class="sd">          (2 decimal digits by default).</span>
-<span class="sd">        </span>
+<span class="sd">        * missingDataProbability := 0 &lt;= x &lt;= 1.0; probability of missing performance evaluation on a criterion for an alternative (default 0.025).        </span>
+
 <span class="sd">    Code example:</span>
 <span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomPerformanceTableau</span>
 <span class="sd">        &gt;&gt;&gt; t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1,seed=100)</span>

@@ -39,17 +39,16 @@ class RandomPerformanceTableau(PerformanceTableau):
         * weightScale := [Min,Max] (default =[1,numberOfCriteria].
         * IntegerWeights := True (default) | False (normalized to proportions of 1.0).
         * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])
-        * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p)
-          and considerable performance difference discrimination thresholds. q0, p0 and v0 are
-          expressed in percentige of the common scale amplitude: Max - Min.
-        * commonMode := common random distribution of random performance measurements:
+        * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. q0, p0 and v0 are expressed in percentige of the common scale amplitude: Max - Min.
+        * commonMode := common random distribution of random performance measurements (default = ('beta',None,(2,2)) ):
              | ('uniform',None,None), uniformly distributed between min and max values. 
              | ('normal',mu,sigma), truncated Gaussion distribution. 
              | ('triangular',mode,repartition), generalized triangular distribution 
              | ('beta',mod,(alpha,beta)), mode in ]0,1[.
         * valueDigits := <integer>, precision of performance measurements
           (2 decimal digits by default).
-        
+        * missingDataProbability := 0 <= x <= 1.0; probability of missing performance evaluation on a criterion for an alternative (default 0.025).        
+
     Code example:
         >>> from randomPerfTabs import RandomPerformanceTableau
         >>> t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1,seed=100)

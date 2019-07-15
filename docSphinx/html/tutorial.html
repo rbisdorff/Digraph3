@@ -1719,17 +1719,19 @@ a given number of decision actions.</p>
 </li>
 <li><p class="first">commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type <em>x</em> in <em>{q,p,v}</em>, the float x0 value represents a constant percentage of the common scale and the float x1 value a proportional value of the actual performance measure. Default values are [(2.5.0,0.0),(5.0,0.0),(60.0,0,0)].</p>
 </li>
-<li><p class="first">commonMode := common random distribution of random performance measurements:</p>
+<li><p class="first">commonMode := common random distribution of random performance measurements (default = (‘beta’,None,(2,2)) ):</p>
 <blockquote>
 <div><div class="line-block">
 <div class="line">(‘uniform’,None,None), uniformly distributed float values on the given common scales’ range [Min,Max].</div>
 <div class="line">(‘normal’,*mu*,*sigma*), truncated Gaussian distribution, by default <em>mu</em> = (<em>b-a</em>)/2 and <em>sigma</em> = (<em>b-a</em>)/4.</div>
 <div class="line">(‘triangular’,*mode*,*repartition*), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value. By default, <em>mode</em> = (<em>b-a</em>)/2 and <em>repartition</em> = 0.5.</div>
-<div class="line">(‘beta’,None,(alpha,beta)), a beta generator with standard alpha=2 and beta=2 parameters.</div>
+<div class="line">(‘beta’,None,(alpha,beta)), a beta generator with default alpha=2 and beta=2 parameters.</div>
 </div>
 </div></blockquote>
 </li>
 <li><p class="first">valueDigits := &lt;integer&gt;, precision of performance measurements (2 decimal digits by default).</p>
+</li>
+<li><p class="first">missingDataProbability := 0 &lt;= float &lt;= 1.0 ; probability of missing performance evaluation on a criterion for an alternative (default 0.025).</p>
 </li>
 </ul>
 </div></blockquote>

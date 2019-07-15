@@ -1142,15 +1142,16 @@ The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of t
     * IntegerWeights := True (default) | False (normalized to proportions of 1.0).
     * commonScale := [a,b]; common performance measuring scales (default = [0.0,100.0])
     * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. For each threshold type *x* in *{q,p,v}*, the float x0 value represents a constant percentage of the common scale and the float x1 value a proportional value of the actual performance measure. Default values are [(2.5.0,0.0),(5.0,0.0),(60.0,0,0)]. 
-    * commonMode := common random distribution of random performance measurements:
+    * commonMode := common random distribution of random performance measurements (default = ('beta',None,(2,2)) ):
       
          | ('uniform',None,None), uniformly distributed float values on the given common scales' range [Min,Max]. 
          | ('normal',*mu*,*sigma*), truncated Gaussian distribution, by default *mu* = (*b-a*)/2 and *sigma* = (*b-a*)/4. 
          | ('triangular',*mode*,*repartition*), generalized triangular distribution with a probability repartition parameter specifying the probability mass accumulated until the mode value. By default, *mode* = (*b-a*)/2 and *repartition* = 0.5.
-         | ('beta',None,(alpha,beta)), a beta generator with standard alpha=2 and beta=2 parameters.
+         | ('beta',None,(alpha,beta)), a beta generator with default alpha=2 and beta=2 parameters.
 	 
     * valueDigits := <integer>, precision of performance measurements (2 decimal digits by default).
-        
+    * missingDataProbability := 0 <= float <= 1.0 ; probability of missing performance evaluation on a criterion for an alternative (default 0.025). 
+  
 Code example.
 
         >>> from randomPerfTabs import RandomPerformanceTableau
