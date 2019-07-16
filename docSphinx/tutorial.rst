@@ -4193,7 +4193,7 @@ Credibility domain: [-100.00,100.00]
   determinateness (%) : 64.62
   - most credible action(s) = { 'a7': 48.84, }
 
-Notice that solving the valued *Berge* kernel equations ([BIS-2006a]_) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions 'a2' and 'a4' are equivalent candidates for a unique best choice, and action 'a7' is clearly confirmed as the worst choice.
+Notice that solving the valued *Berge* kernel equations (see the tutorial on :ref:`Bipolar-Valued-Kernels-Tutorial-label` and [BIS-2006a]_) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions 'a2' and 'a4' are equivalent candidates for a unique best choice, and action 'a7' is clearly confirmed as the worst choice.
 
 In Fig. 45 below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations. 
 
