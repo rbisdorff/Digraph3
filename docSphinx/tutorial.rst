@@ -2711,40 +2711,12 @@ The :code:`valuationType` parameter allows to work:
     - on the confident outranking digraph (valuationType = 'confident'),
     - ignoring considerable performances differences (valuationType = 'noVeto').
 
-One may as well use the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg,
-
->>> from outrankingDigraphs import RubisRestServer
->>> solver = RubisRestServer()
->>> solver.ping()
-*************************************************
-* This is the Leopold-Loewenheim Apache Server  *
-* of the University of Luxembourg.              *
-* Welcome to the Rubis XMCDA 2.0 Web service    *
-* R. Bisdorff (c) 2009-2013                     *
-* November 2013, version REST/D4 1.1            *
-*************************************************
-
-We may submit the given performance tableau.
-
->>> t = XMCDA2PerformanceTableau('officeChoice')
->>> solver.submitProblem(t)
-The problem submission was successful !
-Server ticket: 1BYyGVwV866hSNZo
-
-With the given ticket, saved in a text file in the working directory, we may request from the Rubis solver the corresponding best choice recommendation.
-
->>> solver.showSolution()
-
-And, in a system browser window, browse again the `solution file`_.
-
-Here, we find confirmed again that alternative *D*, indeed, appears to be the most significant best choice candidate. 
-
-Yet, what about alternative *G*, the other good compromise best choice we have noticed from the performance heat map shown above?
 
 Rubis *strict best* choice recommendation
 -----------------------------------------
 
-When comparing the performances of alternatives *D* and *G* on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100.0).
+When comparing the performances of alternatives *D* and *G* on a
+pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100.0).
 
 >>> g.showPairwiseComparison('G','D')
 *------------  pairwise comparison ----*

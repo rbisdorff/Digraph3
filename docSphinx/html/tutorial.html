@@ -4278,49 +4278,11 @@ resp. worst choices. They may or may not be considered so. Alternative <em>A</em
 <li>ignoring considerable performances differences (valuationType = ‘noVeto’).</li>
 </ul>
 </div></blockquote>
-<p>One may as well use the Rubis XMCDA 2.0 Web services available at the Leopold-Loewenheim Apache Server of the University of Luxembourg,</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RubisRestServer</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span> <span class="o">=</span> <span class="n">RubisRestServer</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
-<span class="go">*************************************************</span>
-<span class="go">* This is the Leopold-Loewenheim Apache Server  *</span>
-<span class="go">* of the University of Luxembourg.              *</span>
-<span class="go">* Welcome to the Rubis XMCDA 2.0 Web service    *</span>
-<span class="go">* R. Bisdorff (c) 2009-2013                     *</span>
-<span class="go">* November 2013, version REST/D4 1.1            *</span>
-<span class="go">*************************************************</span>
-</pre></div>
-</td></tr></table></div>
-<p>We may submit the given performance tableau.</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;officeChoice&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">submitProblem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="go">The problem submission was successful !</span>
-<span class="go">Server ticket: 1BYyGVwV866hSNZo</span>
-</pre></div>
-</td></tr></table></div>
-<p>With the given ticket, saved in a text file in the working directory, we may request from the Rubis solver the corresponding best choice recommendation.</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solver</span><span class="o">.</span><span class="n">showSolution</span><span class="p">()</span>
-</pre></div>
-</td></tr></table></div>
-<p>And, in a system browser window, browse again the <a class="reference external" href="_static/officeChoice.xml1BYyGVwV866hSNZoSolution.html">solution file</a>.</p>
-<p>Here, we find confirmed again that alternative <em>D</em>, indeed, appears to be the most significant best choice candidate.</p>
-<p>Yet, what about alternative <em>G</em>, the other good compromise best choice we have noticed from the performance heat map shown above?</p>
 </div>
 <div class="section" id="rubis-strict-best-choice-recommendation">
 <h3><a class="toc-backref" href="#id245">Rubis <em>strict best</em> choice recommendation</a><a class="headerlink" href="#rubis-strict-best-choice-recommendation" title="Permalink to this headline">¶</a></h3>
-<p>When comparing the performances of alternatives <em>D</em> and <em>G</em> on a pairwise perspective, we notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em> ( r(<em>G</em> outranks <em>D</em>) = 100.0).</p>
+<p>When comparing the performances of alternatives <em>D</em> and <em>G</em> on a
+pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em> ( r(<em>G</em> outranks <em>D</em>) = 100.0).</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
