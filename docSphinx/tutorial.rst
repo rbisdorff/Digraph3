@@ -1,4 +1,3 @@
-.. _Tutorial-label:
 
 =====================================
  Tutorials of the Digraph3 resources
@@ -19,6 +18,8 @@
 :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg FSTC/CSC
 :Version: Revision: Python 3.7
 :Copyright: `R. Bisdorff <https://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2019
+
+.. _Tutorial-label:
 
 .. contents:: List of Digraph3 tutorials
 	:depth: 1
@@ -275,7 +276,7 @@ Some special classes of digraphs, like the :py:class:`digraphs.CompleteDigraph`,
 
 	  For more information about its resources, see the technical documentation of the :ref:`digraphs-label`. 
 
-Back to :ref:`Tutorial-label`
+Back to :ref:`Content Table <Tutorial-label>`
 
 .. _Digraph-Tools-label:
 
@@ -642,7 +643,7 @@ Let us finally mention some special universal classes of digraphs that are readi
 
    Notice the subtle difference between the neighborhoods of an *empty* and the neighborhoods of an *indeterminate* digraph instance. In the first kind, the neighborhoods are known to be completely *empty* whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar characteristic valuation domain, we need both a *gamma* **and** a *notGamma* function.
 
-Back to :ref:`Tutorial-label`
+Back to :ref:`Content Table <Tutorial-label>`
 
 .. _LinearVoting-Tutorial-label:
 
@@ -833,7 +834,7 @@ Condorcet's approach for determining the winner of an election is hence not deci
 
 Many more tools for exploiting voting results are available, see the technical documentation of the :ref:`votingProfiles-label`.
 
-Back to :ref:`Tutorial-label`
+Back to :ref:`Content Table <Tutorial-label>`
 
 .. _OutrankingDigraphs-Tutorial-label:
 
@@ -1088,7 +1089,7 @@ We recover the original bipolar-valued outranking characteristics, and we may re
 
 Many more tools for exploiting bipolar-valued outranking digraphs are available in the Digraph3 resources (see the technical documentation of the :ref:`outrankingDiGraphs-label` and the :ref:`perfTabs-label`).
 
-Back to :ref:`Tutorial-label`
+Back to :ref:`Content Table <Tutorial-label>`
 
 .. _RandomPerformanceTableau-Tutorial-label:
 
@@ -1327,7 +1328,7 @@ If needed for instance in an R session, a CSV version of the performance tableau
     "a6",7.00,-32.47,-24.91,79.24,9.00
     "a7",4.00,-91.11,-7.44,48.22,7.00
 
-Back to :ref:`Tutorial-label`
+Back to :ref:`Content Table <Tutorial-label>`
 
 Generating three objectives tableaux
 ------------------------------------
@@ -1491,7 +1492,7 @@ This type of random performance tabeau is matching the :py:class:`votingDigrahs.
         | 'veto':(numberOfActions,0)
         | } (default)
 
-Back to :ref:`Tutorial-label`
+Back to :ref:`Content Table <Tutorial-label>`
 
 .. _Ranking-Tutorial-label:
 
@@ -1870,7 +1871,7 @@ Alternative *52* appears first ranked, whereas alternative *59* is last ranked. 
 
 This ranking heuristic is readily scalable with ad hoc HPC tuning to several millions of decision alternatives (see [BIS-2016]_).
 
-Back to :ref:`Tutorial-label`
+Back to :ref:`Content Table <Tutorial-label>`
 
 .. _HPC-Tutorial-label:
 
@@ -2425,7 +2426,7 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
 
    It is therefore *important* to always keep in mind that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking**; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimised quantile ordering strategy, all this will indeed produce, sometimes even substantially, different global ranking results. 
 
-Back to :ref:`Tutorial-label`
+Back to :ref:`Content Table <Tutorial-label>`
 
 .. _Rubis-Tutorial-label:
 
@@ -2838,7 +2839,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 
 It might be worth, as an **exercise**, to modify on the one hand this importance balance in the XMCDA data file by lowering the significance of the *Costs* criterion; all criteria are considered **equi-significant** (weight = 1.0) for instance. It may as well be opportune, on the other hand, to **rank** the importance of the three objectives as follows:  *minimize costs* (weight = 9.0) **>** *maximize turnover* (weight = 3 x 2.0) **>** *maximize working conditions* (weight = 3 x 1.0). What will become the best choice recommendation under both working hypotheses?  
 
-Back to :ref:`Tutorial-label`
+Back to :ref:`Content Table <Tutorial-label>`
 
 ..
    See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
@@ -3131,7 +3132,7 @@ In this preciser *deciles* rating, decision alternatives *a1001* and *a1010* are
     
 More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions with **dodeciles** or even **centiles**. Especially if **tail** rating results, i.e. distinguishing **very best**, or **very worst** multiple criteria performances, becomes a critical purpose. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	
 
-Back to :ref:`Tutorial-label`   
+Back to :ref:`Content Table <Tutorial-label>`   
 
 .. _Graphs-Tutorial-label:
 
@@ -3533,7 +3534,7 @@ The ``checkSampling()`` method (see Line 23) generates a random walk of *nSim=30
 
 For more technical information and more code examples, look into the technical documentation of the :ref:`graphs-label`. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström's 2002 book: [FMCAA]_.
 
-Back to :ref:`Tutorial-label`   
+Back to :ref:`Content Table <Tutorial-label>`  
 
 .. _IsomorphicMIS-Tutorial-label:
 
@@ -3691,7 +3692,7 @@ The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 sy
 
 The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of '2's and '3's without distinguishing opposite directions of writing. The first orbit corresponds to writing six times a '2'; the second orbit corresponds to writing four times a '3'. The third and fourth orbit correspond to writing two times a '3' and three times a '2'. There are two non isomorphic ways to do this latter circular sum. Either separating the '3's by one and two '2's, or by zero and three '2's (see Bisdorff & Marichal [ISOMIS-08]_ ).
 
-Back to :ref:`Tutorial-label`
+Back to :ref:`Content Table <Tutorial-label>`
 
 .. _Kernel-Tutorial-label:
 
@@ -4304,7 +4305,7 @@ And, checking maximality of independent choices via the external stability condi
 
 provides the effective advantage of computing all initial **and** terminal prekernels in a single loop (see Line 10 and [BIS-2006b]_).
 
-Back to :ref:`Tutorial-label`
+Back to :ref:`Content Table <Tutorial-label>`
 
 .. _Permutation-Tutorial-label:
 
@@ -4757,7 +4758,7 @@ We may finally check that, for instance, the two permutations [2, 3, 4, 8, 6, 1,
 
 And, we recover indeed two *isomorphic copies* of the original random graph (see :numref:`randomGraph4335`).
 
-Back to :ref:`Tutorial-label`
+Back to :ref:`Content Table <Tutorial-label>`
 
 .. _Trees-Tutorial-label:
 
@@ -5019,7 +5020,7 @@ neato -Tpng bestDeterminedSpanningTree.dot -o bestDeterminedSpanningTree.png
 
 One may easily verify that all other potential spanning trees, including instead the edges {*v3*, *v5*} and/or {*v4*, *v5*} - will show a lower average determination.
 
-Back to :ref:`Tutorial-label`
+Back to :ref:`Content Table <Tutorial-label>`
 
 .. _Pearls-Tutorial-label:
 
@@ -5659,7 +5660,7 @@ The adjacency matrix of a symmetric digraph staying *unchanged* by the transposi
 
 It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this dual fixpoint algorithm. To implement such kind of algorithms without a logical **neutral term** would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial *impossibility theorems* and *dubious logical results* come up. 
 
-Back to :ref:`Tutorial-label`
+Back to :ref:`Content Table <Tutorial-label>`
 	   	  
 Bibliography
 ============
