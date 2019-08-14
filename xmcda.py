@@ -1356,7 +1356,7 @@ Copyright (C) 2009 DECISION DECK Consortium
     <p>Bisdorff R., Meyer P., Roubens M., <b>Rubis</b>: A new methodology for the choice decision problem. 4OR, 
       <em>A Quarterly Journal of Operational Research</em>, Springer (2008), Vol 6 Number 2 pp. 143-165, DOI 10.1007/s10288-007-0045-5.
     <a href="http://sma.uni.lu/bisdorff/documents/HyperKernels.pdf">PDF preprint version</a>.</p>
-   <p>Online documentation: <a href="http://sma.uni.lu/d2cms">Decision Deck Project</a><br/>
+   <p>Online documentation: <a href="https://www.decision-deck.org">Decision Deck Project</a><br/>
      <b>Rubis XSL Transformation to HTML</b> R. Bisdorff, $Revision: 1.6 $<br/>
           <a href="http://www.decision-deck.org/xmcda">XMCDA 2.0 Schema</a> P. Meyer and Th. Veneziano 2009 <br/>
            Copyright © 2009 DECISION DECK Consortium</p>
@@ -2136,7 +2136,7 @@ Copyright (C) 2009 DECISION DECK Consortium
     <p>Bisdorff R., Meyer P., Roubens M., <b>Rubis</b>: A new methodology for the choice decision problem. 4OR, 
       <em>A Quarterly Journal of Operational Research</em>, Springer (2008), Vol 6 Number 2 pp. 143-165, DOI 10.1007/s10288-007-0045-5.
     <a href="http://sma.uni.lu/bisdorff/documents/HyperKernels.pdf">PDF preprint version</a>.</p>
-   <p>Online documentation: <a href="http://sma.uni.lu/d2cms">Decision Deck Project</a><br/>
+   <p>Online documentation: <a href="https://www.decision-deck.org/project/">Decision Deck Project</a><br/>
      <b>Rubis XSL Transformation to HTML</b> R. Bisdorff, $Revision: 1.5 $<br/>
           <a href="http://www.decision-deck.org/xmcda">XMCDA 2.0 Schema</a> P. Meyer and Th. Veneziano 2009 <br/>
            Copyright © 2009 DECISION DECK Consortium</p>
