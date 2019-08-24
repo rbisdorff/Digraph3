@@ -5843,7 +5843,7 @@ Decimal('0.1428571428571428571428571429')
 The resulting 90% confident expected outranking relation is shown above. The (*lh*) figures, indicated in the table above, correspond to bipolar likelihoods and the required bipolar confidence level equals abs(0.80). Action '*a1*' thus confidently outranks all other actions, except '*a7*'
 where the actual likelihood (+0.65) is lower than the required one (0.80) and we furthermore observe a considerable counter-performance on criterion '*g1*'.
 
-Notice also the lack of confidence in the outranking situations we observe between action '*a2*' and actions '*a4*' and '*a5*'. In the deterministic case we would have :math:`r(a2 \geq a4) \,=\, -0.143` and :math:`r(a2 \geq a5) \,=\, +0.143` . All outranking situation with a  characteristic value lower or equal to abs(+-0.14) appear indeed to be *not confident* at level 90%. (see last Line above). 
+Notice also the lack of confidence in the outranking situations we observe between action '*a2*' and actions '*a4*' and '*a5*'. In the deterministic case we would have :math:`r(a2 \geq a4) \,=\, -0.143` and :math:`r(a2 \geq a5) \,=\, +0.143` . All outranking situation with a  characteristic value lower or equal to abs(+-0.143), i.e. a majority support of 1.143/2 = 57.5% and less, appear indeed to be *not confident* at level 90% (see last Line above). 
 
 Back to :ref:`Content Table <Tutorial-label>`
 	   	  
