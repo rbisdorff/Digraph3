@@ -5660,6 +5660,235 @@ The adjacency matrix of a symmetric digraph staying *unchanged* by the transposi
 
 It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this dual fixpoint algorithm. To implement such kind of algorithms without a logical **neutral term** would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial *impossibility theorems* and *dubious logical results* come up. 
 
+
+.. _Bipolar-Valued-Likelihood-Tutorial-label:
+
+On confident outrankings
+------------------------
+When modelling preferences following the outranking approach, the sign
+of the majority margins do sharply distribute validation and
+invalidation of pairwise outranking situations. How can we be confident in the resulting outranking digraph, when we acknowledge the usual imprecise knowledge of criteria significance weights and a small major- ity margin? To answer this question, we propose to model the significance weights as random variables following more less widespread distributions around an average weight value that corresponds to the given deterministic weight. As the bipolarly valued random credibility of an outranking statement results from a simple sum of positive or negative independent and similarly distributed random variables, we may apply the CLT for computing likelihoods that a given majority margin is indeed positive, respectively negative
+
+Modelling uncertain criteria significances
+..........................................
+
+Let us consider the significance weights of a family F of n criteria to be **independent random variables** *Wj*, distributing the potential significance weights of each criterion *i* = 1, ..., *m* around a mean value *E(Wj)* with variance *V(Wj)*.
+
+Choosing a specific stochastic model of uncertainty may be application
+specific. In the limited scope of this tutorial, we will illustrate
+the consequence of this design decision on the resulting outranking
+modelling with four slightly different models for taking into account
+the uncertainty with which we know the numerical significance weights:
+uniform, triangular, and two models of Beta laws, one more widespread
+and, the other, more concentrated. When considering that the potential
+range of a significance weight is distributed between 0 and two times
+its mean value, we obtain the following random variates:
+
+      #. A continuous **uniform** distribution on the range 0 to
+	 2 x *E(Wj)*. Thus *Wj* ∼ U(0, 2 × *E(Wj)*) and *V(Wj)* = 1/3 *E(Wj)* ^2;
+
+      #. A **symmetric beta** distribution with, for instance,
+	 parameters  *alpha* = 2 and *beta* = 2. Thus, *Wi* ∼
+	 Beta(2,2) × 2 × *E(Wj)* and *V(Wj)* = 1/5 *E(Wj)* ^2.
+
+      #. A **symmetric triangular** distribution on the same range with
+	 mode *E(Wj)*. Thus *Wj* ∼ Tr(0, 2 × *E(Wj)*, *E(Wj)*) with
+	 *V(Wj)* = 1/6 *E(Wj)* ^2;
+	 
+      #. A **narrower beta** distribution with for instance
+	 parameters *alpha* = 4 and *beta* = 4. Thus *Wj* ∼ Beta(4,4) × 2
+	 *E(Wj)* , *V(Wj)* = 1/9 *E(Wj)* ^2.
+
+	 
+.. Figure:: weightDistributions.png
+   :name: weightDistributions
+   :alt: Four models of uncertain significabce weights
+   :width: 650 px
+   :align: center
+
+   Four models of uncertain significance weights
+
+It is worthwhile noticing that these four uncertainty models all admit
+the same expected value, *E(Wj)*, however, with a respective variance
+which goes decreasing from 1/3, to 1/9 of the square of *E(W)* (see :numref:`weightDistributions`).
+
+Bipolar-valued likelihood of ''at least as good as " situations
+...............................................................
+
+Let *A* = {*x*,*y*,*z*,...} be a finite set of *n* potential decision
+actions, evaluated on *F* = {1,...,*m*}, a finite and coherent family
+of *m* performance criteria. On each criterion *j* in *F*, the
+decision actions are evaluated on a real performance scale [0; *Mj* ],
+supporting an upper-closed indifference threshold *indj* and a
+lower-closed preference threshold *prj* such that 0 <= *indj* < prj
+<= *Mj*. The marginal performance of object *x* on criterion *j* is
+denoted *xj*. Each criterion *j* is thus characterizing a marginal
+double threshold order :math:`\geq_j` on *A* (see :numref:`rCharacteristic`):
+
+:math:`r(x \geq_j y) \; = \; \begin{cases} +1 \quad \text{if} \quad x_j - y_j \leq ind_j,\\  -1 \quad \text{if} \quad x_j - y_j \leq pr_j,\\ 0 \quad \text{otherwise}. \end{cases}`
+
+Semantics of the marginal bipolar-valued characteristic function:
+      * +1 signifies *x* is performing at least as good as *y* on
+	criterion *j*,
+      * −1 signifies that *x* is not performing at least as good as *y* on
+	criterion *j*,	
+      * 0 signifies that it is
+	unclear whether, on criterion *j*, *x* is performing at least as good as *y*.
+
+
+.. Figure:: rCharacteristic.png
+   :name: rCharacteristic
+   :alt: Bipolar characteristic function of *<=_j* situation
+   :width: 550 px
+   :align: center
+
+   Bipolar characteristic function of *<=_j* situation
+
+Each criterion *j* in *F* contributes the random significance *Wj* of
+his '*at least as good as*' characterization :math:`r(x \geq_j y)`
+to the global characterization :math:`\tilde{r}(x \geq y)` in the
+following way:
+
+:math:`\tilde{r}(x \geq y) \; = \; \sum_{j \in F} W_j \times r(x \geq_j y) )`
+
+Thus, :math:`\tilde{r}(x \geq y)` becomes a simple sum of positive or
+negative independent random variables with known means and variances
+where :math:`\tilde{r}(x \geq y) \, > \, 0` signifies *x* is globally
+performing at least as good as *y*, :math:`\tilde{r}(x \geq y) \, < \,
+0` signifies that *x* is not globally performing at least as good as
+*y*, and :math:`\tilde{r}(x \geq y)\,=\,0` signifies that it is unclear whether *x* is globally performing at least as good as *y*.
+
+From the Central Limit Theorem (CLT), we know that such a sum of
+random variables leads, with *m* getting large, to a Gaussian
+distribution *Y* with
+
+:math:`E(Y ) = \sum_{j \in F} E(W_j) \times r(x \geq_j y)` and
+
+:math:`V(Y) = \sum_{j \in F} V(W_j)\times |r(x \geq_j y)|`.
+
+And the **likelihood of validation**, respectively
+**invalidation** of an '*at least as good as*' situation, denoted
+:math:`lh(x \geq y)`,  may be assessed by the probability *P(Y>0)* =      1.0 -      *P(Y<=0)* that *Y*       takes a positive,      resp. *P(Y<0)* takes      a negative value. In the      bipolar-valued     case here, we can judiciously make usage of      the  bipolar standard **error function** , i.e. the 2*P(Z)* -      1.0 version of the standard Gaussian *Z* probabilty function:
+
+:math:`lh(x \geq y) \;=\; -\text{erf}\big(\frac{1}{\sqrt{2}}\frac{-E(Y)}{\sqrt{V(Y)}} \big)`
+
+The range of the bipolar-valued :math:`lh(x \geq y)` hence becomes [−1.0;+1.0], and
+:math:`-lh(x \geq y) \,=\, lh(x \not\geq y)` , i.e. a **negative likelihood**
+represents the likelihood of the correspondent **negated** '*at least as good as*'
+situtation. A likelihood of +1.0 (resp. −1.0) means the corresponding preferential
+situation appears **certainly validated** (resp. **invalidated**).
+
+**Example**
+
+Let *x* and *y* be evaluated wrt 7 equi-significant criteria; Four
+criteria positively support that *x* is *as least as good performing* than *y*
+and three criteria support that *x* is *not at least as good* performang
+than *y*. Suppose *E(Wj)* = *w* for *j* = 1,...,7 and *Wj* ∼ Tr(0,
+*2w*, *w*) for *j* = 1,...7. The expected value of the global '*at least as good
+as*' characteristic value becomes: :math:`E\big(\tilde{r}(x \geq y)\big)\, = \,
+4w − 3w = w` with a variance :math:`V\big(\tilde{r}(x \geq y)\big)\,=\, 7\frac{1}{6}w^2`. 
+If *w* = 1, :math:`E\big(\tilde{r}(x \geq y)\big)\, = \, 1` and
+:math:`sd\big(\tilde{r}(x \geq y)\big)\,=\, 1.08`. By the CLT, the      bipolar    likelihood of the *at least as good* performing      situation      becomes: :math:`lh(x \geq y)\,=\, 0.66` which      corresponds to a global support of (0.66 + 1.0)/2 = 83% of the criteria significance weights.  
+      
+Confidence level of outranking situations
+.........................................
+
+Following the classic outranking difinition, we may say from an
+epistemic point of view that decision action *x* **outranks** decision
+action *y* at confidence level *alpha*, if
+
+   #. a majority of criteria validates, at confidence level *alpha*, a global '*at least as good as*' situation between *x* and *y*, and
+
+   #. no considerably less performing is observed on a discordant criterion.
+
+Dually, decision action *x* **does not outrank** decision action *y* at
+confidence level *alpha*, if
+
+    #. a majority of criteria at confidence level *alpha* invalidates
+       a global '*at least as good as*' situation between *x* and *y*, and
+
+    #. no considerably better performing situation is observed on a concordant criterion.
+
+**Time for a coded example**
+
+Let us consider the following random performance tableau.
+
+>>> from outrankingDigraphs import *
+>>> t = RandomPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=100)
+>>> t.showPerformanceTableau(Transposed=True)
+*----  performance tableau -----*
+criteria | weights |   'a1'   'a2'   'a3'   'a4'   'a5'   'a6'   'a7'   
+---------|------------------------------------------------------------
+   'g1'  |     1   |  15.17  44.51  57.87  58.00  24.22  29.10  96.58  
+   'g2'  |     1   |  82.29  43.90    NA   35.84  29.12  34.79  62.22  
+   'g3'  |     1   |  44.23  19.10  27.73  41.46  22.41  21.52  56.90  
+   'g4'  |     1   |  46.37  16.22  21.53  51.16  77.01  39.35  32.06  
+   'g5'  |     1   |  47.67  14.81  79.70  67.48    NA   90.72  80.16  
+   'g6'  |     1   |  69.62  45.49  22.03  33.83  31.83    NA   48.80  
+   'g7'  |     1   |  82.88  41.66  12.82  21.92  75.74  15.45   6.05  
+
+For the corresponding outranking digraph, we require a confidence
+level of *alpha* = 90%. The
+:py:class:`outrankingDigraphs.ConfidentBipolarOutrankingDigraph` class   provides such a construction.
+
+>>> g90 = ConfidentBipolarOutrankingDigraph(t,confidence=90)
+>>> g90
+*------- Object instance description ------*
+Instance class      : ConfidentBipolarOutrankingDigraph
+Instance name       : rel_randomperftab_CLT
+# Actions           : 7
+# Criteria          : 7
+Size                : 15
+Determinateness (%) : 62.07
+Valuation domain    : [-1.00;1.00]
+Attributes          : ['name', 'bipolarConfidenceLevel',
+                       'distribution', 'betaParameter', 'actions', 'order',
+                       'valuationdomain', 'criteria', 'evaluation', 'concordanceRelation',
+                       'vetos', 'negativeVetos', 'largePerformanceDifferencesCount',
+                       'likelihoods', 'confidenceCutLevel', 'relation', 'gamma', 'notGamma']
+
+>>> g90.showRelationTable(LikelihoodDenotation=True)
+* ---- Outranking Relation Table -----
+r/(lh) |  'a1'	 'a2'	 'a3'	 'a4'	 'a5'	 'a6'	 'a7'	 
+-------|------------------------------------------------------------
+  'a1' | +0.00   +0.71   +0.29   +0.29   +0.29   +0.29   +0.00  
+       | ( - )  (+1.00) (+0.95) (+0.95) (+0.95) (+0.95) (+0.65) 
+  'a2' | -0.71   +0.00   -0.29   +0.00   +0.00   +0.29   -0.57  
+       |(-1.00)  ( - )  (-0.95) (-0.65) (+0.73) (+0.95) (-1.00) 
+  'a3' | -0.29   +0.29   +0.00   -0.29   +0.00   +0.00   -0.29  
+       |(-0.95) (+0.95)  ( - )  (-0.95) (-0.73) (-0.00) (-0.95) 
+  'a4' | +0.00   +0.00   +0.57   +0.00   +0.29   +0.57   -0.43  
+       |(-0.00) (+0.65) (+1.00)  ( - )  (+0.95) (+1.00) (-0.99) 
+  'a5' | -0.29   +0.00   +0.00   +0.00   +0.00   +0.29   -0.29  
+       |(-0.95) (-0.00) (+0.73) (-0.00)  ( - )  (+0.99) (-0.95) 
+  'a6' | -0.29   +0.00   +0.00   -0.29   +0.00   +0.00   +0.00  
+       |(-0.95) (-0.00) (+0.73) (-0.95) (+0.73)  ( - )  (-0.00) 
+  'a7' | +0.00   +0.71   +0.57   +0.43   +0.29   +0.00   +0.00  
+       |(-0.65) (+1.00) (+1.00) (+0.99) (+0.95) (-0.00)  ( - )  
+Valuation domain : [-1.000; +1.000] 
+Uncertainty model: triangular(a=2.0,b=2.0) 
+Likelihood domain: [-1.0;+1.0] 
+Likelihood level : 0.80 (90%) 
+Determinateness  : 0.241 
+
+The resulting 90% confident outranking relation is shown above. The
+(lh) figures indicated in the table above correspond to bipolar
+likelihoods and the required bipolar confidence level equals abs(0.80).
+Action '*a1*' thus confidently outranks all other actions, except '*a7*'
+where the actual likelihood (+0.65) is lower than the required one
+(0.80) and we furthermore observe a considerable counter-performance on criterion
+'*g1*'.
+
+Notice also the lack of confidence in the outranking situations we
+observe between action '*a2*' and actions '*a4*' and '*a5*'. In the
+deterministic case we would have :math:`r(a2 \geq a4) \,=\, -0.14` and :math:`r(a2 \geq a5) \,=\, +0.14` .
+
+
+
+
+
+
+
 Back to :ref:`Content Table <Tutorial-label>`
 	   	  
 Bibliography
