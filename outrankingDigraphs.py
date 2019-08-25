@@ -8740,17 +8740,21 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                         print(' ( - ) ', end=' ')
                 print()
 
-        print('Valuation domain : [%+.3f; %+.3f] ' % (self.valuationdomain['min'],
+        print('Valuation domain   : [%+.3f; %+.3f] ' % (self.valuationdomain['min'],
                                                    self.valuationdomain['max']))
-        print('Uncertainty model: %s(a=%.1f,b=%.1f) ' % (self.distribution,
+        print('Uncertainty model  : %s(a=%.1f,b=%.1f) ' % (self.distribution,
                                                          self.betaParameter,
                                                          self.betaParameter)
                                                          )
-        print('Likelihood domain: [-1.0;+1.0] ')
-        print('Likelihood level : %.2f (%.2f%%) ' % (self.bipolarConfidenceLevel,
-                                                     (self.bipolarConfidenceLevel+1.0)/2.0))
-        
-        print('Determinateness  : %.3f ' % self.computeDeterminateness() )
+        print('Likelihood domain  : [-1.0;+1.0] ')
+        print('Confidence level   : %.2f (%.1f%%) ' % (self.bipolarConfidenceLevel,
+                                                     (self.bipolarConfidenceLevel+1.0)/2.0*100.0))
+
+        print('Confident majority : %.2f (%.1f%%) ' % (self.confidenceCutLevel,\
+                            (self.confidenceCutLevel+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0')))
+        deter = self.computeDeterminateness()
+        print('Determinateness    : %.2f (%.1f%%)' % (deter,\
+                            (deter+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0')))
         print('\n')
 
 

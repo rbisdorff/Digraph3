@@ -5666,20 +5666,11 @@ It is worthwhile noticing again the essential computational role, the logical **
 On confident outrankings
 ------------------------
 
-When modelling preferences following the outranking approach, the sign
-of the majority margins do sharply distribute validation and
-invalidation of pairwise outranking situations. How can we be
-confident in the resulting outranking digraph, when we acknowledge the
-usual imprecise knowledge of criteria significance weights and a small
-majority margin? To answer this question, we propose to model the
-significance weights as random variables following more less
-widespread distributions around an average weight value that
-corresponds to the given deterministic weight. As the bipolarly valued
-random credibility of an outranking statement results from a simple
-sum of positive or negative independent and similarly distributed
-random variables, we may apply the Central Limit Theorem (CLT) for
-computing the *bipolar likelihood* that the expected majority margin
-will indeed be positive, respectively negative.
+When modelling preferences following the outranking approach, the signs of the majority margins do sharply distribute validation and invalidation of pairwise outranking situations. How can we be confident in the resulting outranking digraph, when we acknowledge the
+usual imprecise knowledge of criteria significance weights coupled with a may be small
+majority margin?
+
+To answer this question, one usually requires qualified majority margins for confirming outranking situations. But how to choose such a qualifying majority: two third, three fourth of the significances ? In this turorial we propose link the qualifying significance majority with a required confidence level. We model therefore the significance weights as random variables following more or less widespread distributions around an average weight value that corresponds to the given deterministic weight. As the bipolarly valued random credibility of an outranking statement results from a simple sum of positive or negative independent and similarly distributed random variables, we may apply the Central Limit Theorem (CLT) for computing the *bipolar likelihood* that the expected majority margin will indeed be positive, respectively negative.
 
 Modelling uncertain criteria significances
 ..........................................
@@ -5689,7 +5680,7 @@ Let us consider the significance weights of a family *F* of *m* criteria to be *
 Choosing a specific stochastic model of uncertainty may be application specific. In the limited scope of this tutorial, we will illustrate the consequence of this design decision on the resulting outranking modelling with four slightly different models for taking into account the uncertainty with which we know the numerical significance weights: *uniform*, *triangular*, and two models of *Beta laws*, one more widespread and, the other, more concentrated. When considering that the potential range of a significance weight is distributed between 0 and two times its mean value, we obtain the following random variates:
 
       #. A continuous **uniform** distribution on the range 0 to
-	 2 x *E(Wj)*. Thus *Wj* ∼ U(0, 2 × *E(Wj)*) and *V(Wj)* = 1/3 *E(Wj)* ^2;
+	 2 × *E(Wj)*. Thus *Wj* ∼ U(0, 2 × *E(Wj)*) and *V(Wj)* = 1/3 *E(Wj)* ^2;
 
       #. A **symmetric beta** distribution with, for instance,
 	 parameters  *alpha* = 2 and *beta* = 2. Thus, *Wi* ∼
@@ -5717,7 +5708,7 @@ It is worthwhile noticing that these four uncertainty models all admit the same 
 Bipolar-valued likelihood of ''at least as good as " situations
 ...............................................................
 
-Let *A* = {*x*,*y*,*z*,...} be a finite set of *n* potential decision actions, evaluated on *F* = {1,...,*m*}, a finite and coherent family of *m* performance criteria. On each criterion *j* in *F*, the decision actions are evaluated on a real performance scale [0; *Mj* ], supporting an upper-closed indifference threshold *indj* and a lower-closed preference threshold *prj* such that 0 <= *indj* < prj <= *Mj*. The marginal performance of object *x* on criterion *j* is denoted *xj*. Each criterion *j* is thus characterizing a marginal double threshold order :math:`\geq_j` on *A* (see :numref:`rCharacteristic`):
+Let *A* = {*x*, *y*, *z*,...} be a finite set of *n* potential decision actions, evaluated on *F* = {1,..., *m*}, a finite and coherent family of *m* performance criteria. On each criterion *j* in *F*, the decision actions are evaluated on a real performance scale [0; *Mj* ], supporting an upper-closed indifference threshold *indj* and a lower-closed preference threshold *prj* such that 0 <= *indj* < prj <= *Mj*. The marginal performance of object *x* on criterion *j* is denoted *xj*. Each criterion *j* is thus characterizing a marginal double threshold order :math:`\geq_j` on *A* (see :numref:`rCharacteristic`):
 
 :math:`r(x \geq_j y) \; = \; \begin{cases} +1 \quad \text{if} \quad x_j - y_j \leq ind_j,\\  -1 \quad \text{if} \quad x_j - y_j \leq pr_j,\\ 0 \quad \text{otherwise}. \end{cases}`
 
@@ -5832,18 +5823,112 @@ r/(lh) |  'a1'	 'a2'	 'a3'	 'a4'	 'a5'	 'a6'	 'a7'
        |(-0.95) (-0.00) (+0.73) (-0.95) (+0.73)  ( - )  (-0.00) 
   'a7' | +0.00   +0.71   +0.57   +0.43   +0.29   +0.00   +0.00  
        |(-0.65) (+1.00) (+1.00) (+0.99) (+0.95) (-0.00)  ( - )  
-Valuation domain : [-1.000; +1.000] 
-Uncertainty model: triangular(range=[0,2Wj],mode=Wj) 
-Likelihood domain: [-1.0;+1.0] 
-Likelihood level : 0.80 (90%) 
-Determinateness  : 0.241
->>> g90.confidenceCutLevel
-Decimal('0.1428571428571428571428571429')
+Valuation domain   : [-1.000; +1.000] 
+Uncertainty model  : triangular(a=2.0,b=2.0) 
+Likelihood domain  : [-1.0;+1.0] 
+Confidence level   : 0.80 (90.0%) 
+Confident majority : 0.14 (57.1%) 
+Determinateness    : 0.24 (62.1%)
 
-The resulting 90% confident expected outranking relation is shown above. The (*lh*) figures, indicated in the table above, correspond to bipolar likelihoods and the required bipolar confidence level equals abs(0.80). Action '*a1*' thus confidently outranks all other actions, except '*a7*'
-where the actual likelihood (+0.65) is lower than the required one (0.80) and we furthermore observe a considerable counter-performance on criterion '*g1*'.
+The resulting 90% confident expected outranking relation is shown above. The (*lh*) figures, indicated in the table above, correspond to bipolar likelihoods and the required bipolar confidence level equals abs(0.80). Action '*a1*' thus confidently outranks all other actions, except '*a7*' where the actual likelihood (+0.65) is lower than the required one (0.80) and we furthermore observe a considerable counter-performance on criterion '*g1*'.
 
-Notice also the lack of confidence in the outranking situations we observe between action '*a2*' and actions '*a4*' and '*a5*'. In the deterministic case we would have :math:`r(a2 \geq a4) \,=\, -0.143` and :math:`r(a2 \geq a5) \,=\, +0.143` . All outranking situation with a  characteristic value lower or equal to abs(+-0.143), i.e. a majority support of 1.143/2 = 57.5% and less, appear indeed to be *not confident* at level 90% (see last Line above). 
+Notice also the lack of confidence in the outranking situations we observe between action '*a2*' and actions '*a4*' and '*a5*'. In the deterministic case we would have :math:`r(a2 \geq a4) \,=\, -0.143` and :math:`r(a2 \geq a5) \,=\, +0.143` . All outranking situation with a  characteristic value lower or equal to abs(+-0.143), i.e. a majority support of 1.143/2 = 57.1% and less, appear indeed to be *not confident* at level 90% (see last Line above).
+
+We may draw the corresponding strict 90%-confident outranking digraph, oriented by its initial and terminal prekernels.
+
+>>> gcd90 = ~ (-g90)
+>>> gcd90.showPreKernels()
+*--- Computing preKernels ---*
+Dominant preKernels :
+['a1', 'a7']
+   independence :  0.0
+   dominance    :  0.2857
+   absorbency   :  -0.7143
+   covering     :  0.800
+Absorbent preKernels :
+['a2', 'a5', 'a6']
+   independence :  0.0
+   dominance    :  -0.2857
+   absorbency   :  0.2857
+   covered      :  0.583
+>>> gcd90.exportGraphViz(fileName='confidentOutranking',
+...       bestChoice=['a1', 'a7'],worstChoice=['a2', 'a5', 'a6'])
+*---- exporting a dot file dor GraphViz tools ---------*
+worstChoice=['a2', 'a5', 'a6'])
+*---- exporting a dot file dor GraphViz tools ---------*
+Exporting to confidentOutranking.dot
+dot -Grankdir=BT -Tpng confidentOutranking.dot -o confidentOutranking.png
+
+.. Figure:: confidentOutranking.png
+   :name: confidentOutranking
+   :alt: 90%-confident strict outranking digraph
+   :width: 550 px
+   :align: center
+
+   90%-confident strict outranking digraph example
+
+What becomes this 90%-confident outranking digraph if we would require a more severe confidence level of, say 99% ?
+
+>>> g99 = ConfidentBipolarOutrankingDigraph(t,confidence=99)
+>>> g99.showRelationTable()
+* ---- Outranking Relation Table -----
+r/(lh) |  'a1'	 'a2'	 'a3'	 'a4'	 'a5'	 'a6'	 'a7'	 
+-------|------------------------------------------------------------
+ 'a1' |  +0.00   +0.71   +0.00   +0.00   +0.00   +0.00   +0.00  
+      |  ( - )  (+1.00) (+0.95) (+0.95) (+0.95) (+0.95) (+0.65) 
+ 'a2' |  -0.71   +0.00   +0.00   +0.00   +0.00   +0.00   -0.57  
+      | (-1.00)  ( - )  (-0.95) (-0.65) (+0.73) (+0.95) (-1.00) 
+ 'a3' |  +0.00   +0.00   +0.00   +0.00   +0.00   +0.00   +0.00  
+      | (-0.95) (+0.95)  ( - )  (-0.95) (-0.73) (-0.00) (-0.95) 
+ 'a4' |  +0.00   +0.00   +0.57   +0.00   +0.00   +0.57   -0.43  
+      | (-0.00) (+0.65) (+1.00)  ( - )  (+0.95) (+1.00) (-0.99) 
+ 'a5' |  +0.00   +0.00   +0.00   +0.00   +0.00   +0.29   +0.00  
+      | (-0.95) (-0.00) (+0.73) (-0.00)  ( - )  (+0.99) (-0.95) 
+ 'a6' |  +0.00   +0.00   +0.00   +0.00   +0.00   +0.00   +0.00  
+      | (-0.95) (-0.00) (+0.73) (-0.95) (+0.73)  ( - )  (-0.00) 
+ 'a7' |  +0.00   +0.71   +0.57   +0.43   +0.00   +0.00   +0.00  
+      | (-0.65) (+1.00) (+1.00) (+0.99) (+0.95) (-0.00)  ( - )  
+Valuation domain   : [-1.000; +1.000] 
+Uncertainty model  : triangular(a=2.0,b=2.0) 
+Likelihood domain  : [-1.0;+1.0] 
+Confidence level   : 0.98 (99.0%) 
+Confident majority : 0.29 (64.3%) 
+Determinateness    : 0.13 (56.6%)
+
+At 99% confidence, the minimal required significance majority support amounts to 64.3%. As a result, most outranking situations don't get anymore validated, like the outranking situations between action '*a1*' and actions '*a3*', '*a4*', '*a5*' and '*a6*' (see Line 5 above). The overall epistemic determination of the digraph consequently drops from 62.1% to 56.6%.
+
+Now, what becomes this 90%-confdent outranking digraph if the uncertainty concerning the criteria significance weights is modelled with a larger variance, like *uniform* variates.
+
+>>> gu90 = ConfidentBipolarOutrankingDigraph(t,confidence=90,distribution='uniform')
+>>> gu90.showRelationTable()
+* ---- Outranking Relation Table -----
+r/(lh) |  'a1'	 'a2'	 'a3'	 'a4'	 'a5'	 'a6'	 'a7'	 
+-------|------------------------------------------------------------
+ 'a1' |  +0.00   +0.71   +0.29   +0.29   +0.29   +0.29   +0.00  
+      |  ( - )  (+1.00) (+0.84) (+0.84) (+0.84) (+0.84) (+0.49) 
+ 'a2' |  -0.71   +0.00   -0.29   +0.00   +0.00   +0.29   -0.57  
+      | (-1.00)  ( - )  (-0.84) (-0.49) (+0.56) (+0.84) (-1.00) 
+ 'a3' |  -0.29   +0.29   +0.00   -0.29   +0.00   +0.00   -0.29  
+      | (-0.84) (+0.84)  ( - )  (-0.84) (-0.56) (-0.00) (-0.84) 
+ 'a4' |  +0.00   +0.00   +0.57   +0.00   +0.29   +0.57   -0.43  
+      | (-0.00) (+0.49) (+1.00)  ( - )  (+0.84) (+1.00) (-0.95) 
+ 'a5' |  -0.29   +0.00   +0.00   +0.00   +0.00   +0.29   -0.29  
+      | (-0.84) (-0.00) (+0.56) (-0.00)  ( - )  (+0.92) (-0.84) 
+ 'a6' |  -0.29   +0.00   +0.00   -0.29   +0.00   +0.00   +0.00  
+      | (-0.84) (-0.00) (+0.56) (-0.84) (+0.56)  ( - )  (-0.00) 
+ 'a7' |  +0.00   +0.71   +0.57   +0.43   +0.29   +0.00   +0.00  
+      | (-0.49) (+1.00) (+1.00) (+0.95) (+0.84) (-0.00)  ( - )  
+Valuation domain   : [-1.000; +1.000] 
+Uncertainty model  : uniform(a=2.0,b=2.0) 
+Likelihood domain  : [-1.0;+1.0] 
+Confidence level   : 0.80 (90.0%) 
+Confident majority : 0.14 (57.1%) 
+Determinateness    : 0.24 (62.1%)
+
+Despite lower likelihood values (see the *g90* relation table above), we keep the sameconfident majority level of 57.1% and hence the same 90%-confident outranking digraph.
+
+Finally, it is worthwhile noticing again that it is the *neutral* logical value of our bipolar-valued epistemic logic that allows us to easily handle the confidence or not of outranking situations. Remarkable furthermore is the usage the standard Gaussian error function provides by delivering *signed likelihood values* immediatley concerning either the positive relational statement or its logical negation. 
+
 
 Back to :ref:`Content Table <Tutorial-label>`
 	   	  
