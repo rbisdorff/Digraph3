@@ -5681,18 +5681,18 @@ Choosing a specific stochastic model of uncertainty is usually application speci
 
 When considering, for instance, that the potential range of a significance weight is distributed between 0 and two times its mean value, we obtain the following random variates:
 
-      #. A continuous **uniform** distribution on the range 0 to *2E(Wj)*. Thus *Wj* ∼ U(0, *2E(Wj)*) and *V(Wj)* = 1/3(*E(Wj)*)^2;
+      #. A continuous **uniform** distribution on the range 0 to *2E(Wj)*. Thus *Wj* ~ U(0, *2E(Wj)*) and *V(Wj)* = 1/3(*E(Wj)*)^2;
 
       #. A **symmetric beta** distribution with, for instance,
-	 parameters  *alpha* = 2 and *beta* = 2. Thus, *Wi* ∼
+	 parameters  *alpha* = 2 and *beta* = 2. Thus, *Wi* ~
 	 Beta(2,2) * *2E(Wj)* and *V(Wj)* = 1/5(*E(Wj)*)^2.
 
       #. A **symmetric triangular** distribution on the same range with
-	 mode *E(Wj)*. Thus *Wj* ∼ Tr(0, *2E(Wj)*, *E(Wj)*) with
+	 mode *E(Wj)*. Thus *Wj* ~ Tr(0, *2E(Wj)*, *E(Wj)*) with
 	 *V(Wj)* = 1/6(*E(Wj)*)^2;
 	 
       #. A **narrower beta** distribution with for instance
-	 parameters *alpha* = 4 and *beta* = 4. Thus *Wj* ∼ Beta(4,4) *
+	 parameters *alpha* = 4 and *beta* = 4. Thus *Wj* ~ Beta(4,4) *
 	 *2E(Wj)* , *V(Wj)* = 1/9(*E(Wj)*)^2.
 
 	 
@@ -5716,7 +5716,7 @@ Let *A* = {*x*, *y*, *z*,...} be a finite set of *n* potential decision actions,
 Semantics of the marginal bipolar-valued characteristic function:
       * +1 signifies *x* is performing at least as good as *y* on
 	criterion *j*,
-      * −1 signifies that *x* is not performing at least as good as *y* on
+      * -1 signifies that *x* is not performing at least as good as *y* on
 	criterion *j*,	
       * 0 signifies that it is
 	unclear whether, on criterion *j*, *x* is performing at least as good as *y*.
@@ -5728,7 +5728,7 @@ Semantics of the marginal bipolar-valued characteristic function:
    :width: 450 px
    :align: center
 
-   Bipolar characteristic function of *<=_j* situation
+   Bipolar characteristic function of :math:`(x \geq_j y)` situation
 
 Each criterion *j* in *F* contributes the random significance *Wj* of his '*at least as good as*' characteristic :math:`r(x \geq_j y)` to the global characteristic :math:`\tilde{r}(x \geq y)` in the following way:
 
@@ -5746,11 +5746,11 @@ And the **likelihood of validation**, respectively **invalidation** of an '*at l
 
 :math:`lh(x \geq y) \;=\; -\text{erf}\big(\frac{1}{\sqrt{2}}\frac{-E(Y)}{\sqrt{V(Y)}} \big)`
 
-The range of the bipolar-valued :math:`lh(x \geq y)` hence becomes [−1.0;+1.0], and :math:`-lh(x \geq y) \,=\, lh(x \not\geq y)` , i.e. a **negative likelihood** represents the likelihood of the correspondent **negated** '*at least as good as*' situtation. A likelihood of +1.0 (resp. −1.0) means the corresponding preferential situation appears **certainly validated** (resp. **invalidated**).
+The range of the bipolar-valued :math:`lh(x \geq y)` hence becomes [-1.0;+1.0], and :math:`-lh(x \geq y) \,=\, lh(x \not\geq y)` , i.e. a **negative likelihood** represents the likelihood of the correspondent **negated** '*at least as good as*' situtation. A likelihood of +1.0 (resp. -1.0) means the corresponding preferential situation appears **certainly validated** (resp. **invalidated**).
 
 **Example**
 
-Let *x* and *y* be evaluated wrt 7 equi-significant criteria; Four criteria positively support that *x* is *as least as good performing* than *y* and three criteria support that *x* is *not at least as good* performang than *y*. Suppose *E(Wj)* = *w* for *j* = 1,...,7 and *Wj* ∼ Tr(0, *2w*, *w*) for *j* = 1,...7. The expected value of the global '*at least as good as*' characteristic value becomes: :math:`E\big(\tilde{r}(x \geq y)\big)\, = \, 4w − 3w = w` with a variance :math:`V\big(\tilde{r}(x \geq y)\big)\,=\, 7\frac{1}{6}w^2`. 
+Let *x* and *y* be evaluated wrt 7 equi-significant criteria; Four criteria positively support that *x* is *as least as good performing* than *y* and three criteria support that *x* is *not at least as good* performang than *y*. Suppose *E(Wj)* = *w* for *j* = 1,...,7 and *Wj* ~ Tr(0, *2w*, *w*) for *j* = 1,...7. The expected value of the global '*at least as good as*' characteristic value becomes: :math:`E\big(\tilde{r}(x \geq y)\big)\, = \, 4w - 3w = w` with a variance :math:`V\big(\tilde{r}(x \geq y)\big)\,=\, 7\frac{1}{6}w^2`. 
 
 If *w* = 1, :math:`E\big(\tilde{r}(x \geq y)\big)\, = \, 1` and :math:`sd\big(\tilde{r}(x \geq y)\big)\,=\, 1.08`. By the CLT, the bipolar likelihood of the *at least as good* performing situation becomes: :math:`lh(x \geq y)\,=\, 0.66`, which corresponds to a global support of (0.66 + 1.0)/2 = 83% of the criteria significance weights.
 

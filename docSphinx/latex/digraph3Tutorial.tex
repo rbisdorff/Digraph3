@@ -53,10 +53,10 @@
 
 
 
-\usepackage[utf8x]{inputenc}
 \usepackage{newunicodechar}
 \newunicodechar{┬}{\scriptsize{\ensuremath{\top}}}
 \newunicodechar{┴}{\scriptsize{\ensuremath{\bot}}}
+
 
 
 \title{Tutorials for the Digraph3 Python software resources}
@@ -7507,21 +7507,21 @@ Choosing a specific stochastic model of uncertainty is usually application speci
 When considering, for instance, that the potential range of a significance weight is distributed between 0 and two times its mean value, we obtain the following random variates:
 \begin{enumerate}
 \item {} 
-A continuous \sphinxstylestrong{uniform} distribution on the range 0 to \sphinxstyleemphasis{2E(Wj)}. Thus \sphinxstyleemphasis{Wj} ∼ U(0, \sphinxstyleemphasis{2E(Wj)}) and \sphinxstyleemphasis{V(Wj)} = 1/3(\sphinxstyleemphasis{E(Wj)})\textasciicircum{}2;
+A continuous \sphinxstylestrong{uniform} distribution on the range 0 to \sphinxstyleemphasis{2E(Wj)}. Thus \sphinxstyleemphasis{Wj} \textasciitilde{} U(0, \sphinxstyleemphasis{2E(Wj)}) and \sphinxstyleemphasis{V(Wj)} = 1/3(\sphinxstyleemphasis{E(Wj)})\textasciicircum{}2;
 
 \item {} 
 A \sphinxstylestrong{symmetric beta} distribution with, for instance,
-parameters  \sphinxstyleemphasis{alpha} = 2 and \sphinxstyleemphasis{beta} = 2. Thus, \sphinxstyleemphasis{Wi} ∼
+parameters  \sphinxstyleemphasis{alpha} = 2 and \sphinxstyleemphasis{beta} = 2. Thus, \sphinxstyleemphasis{Wi} \textasciitilde{}
 Beta(2,2) * \sphinxstyleemphasis{2E(Wj)} and \sphinxstyleemphasis{V(Wj)} = 1/5(\sphinxstyleemphasis{E(Wj)})\textasciicircum{}2.
 
 \item {} 
 A \sphinxstylestrong{symmetric triangular} distribution on the same range with
-mode \sphinxstyleemphasis{E(Wj)}. Thus \sphinxstyleemphasis{Wj} ∼ Tr(0, \sphinxstyleemphasis{2E(Wj)}, \sphinxstyleemphasis{E(Wj)}) with
+mode \sphinxstyleemphasis{E(Wj)}. Thus \sphinxstyleemphasis{Wj} \textasciitilde{} Tr(0, \sphinxstyleemphasis{2E(Wj)}, \sphinxstyleemphasis{E(Wj)}) with
 \sphinxstyleemphasis{V(Wj)} = 1/6(\sphinxstyleemphasis{E(Wj)})\textasciicircum{}2;
 
 \item {} 
 A \sphinxstylestrong{narrower beta} distribution with for instance
-parameters \sphinxstyleemphasis{alpha} = 4 and \sphinxstyleemphasis{beta} = 4. Thus \sphinxstyleemphasis{Wj} ∼ Beta(4,4) *
+parameters \sphinxstyleemphasis{alpha} = 4 and \sphinxstyleemphasis{beta} = 4. Thus \sphinxstyleemphasis{Wj} \textasciitilde{} Beta(4,4) *
 \sphinxstyleemphasis{2E(Wj)} , \sphinxstyleemphasis{V(Wj)} = 1/9(\sphinxstyleemphasis{E(Wj)})\textasciicircum{}2.
 
 \end{enumerate}
@@ -7530,7 +7530,7 @@ parameters \sphinxstyleemphasis{alpha} = 4 and \sphinxstyleemphasis{beta} = 4. T
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{weightDistributions}.png}
+\noindent\sphinxincludegraphics[width=450\sphinxpxdimen]{{weightDistributions}.png}
 \caption{Four models of uncertain significance weights}\label{\detokenize{tutorial:weightdistributions}}\end{figure}
 
 It is worthwhile noticing that these four uncertainty models all admit the same expected value, \sphinxstyleemphasis{E(Wj)}, however, with a respective variance which goes decreasing from 1/3, to 1/9 of the square of \sphinxstyleemphasis{E(W)} (see \hyperref[\detokenize{tutorial:weightdistributions}]{Fig.\@ \ref{\detokenize{tutorial:weightdistributions}}}).
@@ -7548,7 +7548,7 @@ Let \sphinxstyleemphasis{A} = \{\sphinxstyleemphasis{x}, \sphinxstyleemphasis{y}
 criterion \sphinxstyleemphasis{j},
 
 \item {} 
-−1 signifies that \sphinxstyleemphasis{x} is not performing at least as good as \sphinxstyleemphasis{y} on
+-1 signifies that \sphinxstyleemphasis{x} is not performing at least as good as \sphinxstyleemphasis{y} on
 criterion \sphinxstyleemphasis{j},
 
 \item {} 
@@ -7563,8 +7563,8 @@ unclear whether, on criterion \sphinxstyleemphasis{j}, \sphinxstyleemphasis{x} i
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{rCharacteristic}.png}
-\caption{Bipolar characteristic function of \sphinxstyleemphasis{\textless{}=\_j} situation}\label{\detokenize{tutorial:rcharacteristic}}\end{figure}
+\noindent\sphinxincludegraphics[width=450\sphinxpxdimen]{{rCharacteristic}.png}
+\caption{Bipolar characteristic function of \((x \geq_j y)\) situation}\label{\detokenize{tutorial:rcharacteristic}}\end{figure}
 
 Each criterion \sphinxstyleemphasis{j} in \sphinxstyleemphasis{F} contributes the random significance \sphinxstyleemphasis{Wj} of his ‘\sphinxstyleemphasis{at least as good as}’ characteristic \(r(x \geq_j y)\) to the global characteristic \(\tilde{r}(x \geq y)\) in the following way:
 
@@ -7582,18 +7582,29 @@ And the \sphinxstylestrong{likelihood of validation}, respectively \sphinxstyles
 
 \(lh(x \geq y) \;=\; -\text{erf}\big(\frac{1}{\sqrt{2}}\frac{-E(Y)}{\sqrt{V(Y)}} \big)\)
 
-The range of the bipolar-valued \(lh(x \geq y)\) hence becomes {[}−1.0;+1.0{]}, and \(-lh(x \geq y) \,=\, lh(x \not\geq y)\) , i.e. a \sphinxstylestrong{negative likelihood} represents the likelihood of the correspondent \sphinxstylestrong{negated} ‘\sphinxstyleemphasis{at least as good as}’ situtation. A likelihood of +1.0 (resp. −1.0) means the corresponding preferential situation appears \sphinxstylestrong{certainly validated} (resp. \sphinxstylestrong{invalidated}).
+The range of the bipolar-valued \(lh(x \geq y)\) hence becomes {[}-1.0;+1.0{]}, and \(-lh(x \geq y) \,=\, lh(x \not\geq y)\) , i.e. a \sphinxstylestrong{negative likelihood} represents the likelihood of the correspondent \sphinxstylestrong{negated} ‘\sphinxstyleemphasis{at least as good as}’ situtation. A likelihood of +1.0 (resp. -1.0) means the corresponding preferential situation appears \sphinxstylestrong{certainly validated} (resp. \sphinxstylestrong{invalidated}).
 
 \sphinxstylestrong{Example}
 
-Let \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y} be evaluated wrt 7 equi-significant criteria; Four criteria positively support that \sphinxstyleemphasis{x} is \sphinxstyleemphasis{as least as good performing} than \sphinxstyleemphasis{y} and three criteria support that \sphinxstyleemphasis{x} is \sphinxstyleemphasis{not at least as good} performang than \sphinxstyleemphasis{y}. Suppose \sphinxstyleemphasis{E(Wj)} = \sphinxstyleemphasis{w} for \sphinxstyleemphasis{j} = 1,…,7 and \sphinxstyleemphasis{Wj} ∼ Tr(0, \sphinxstyleemphasis{2w}, \sphinxstyleemphasis{w}) for \sphinxstyleemphasis{j} = 1,…7. The expected value of the global ‘\sphinxstyleemphasis{at least as good as}’ characteristic value becomes: \(E\big(\tilde{r}(x \geq y)\big)\, = \, 4w − 3w = w\) with a variance \(V\big(\tilde{r}(x \geq y)\big)\,=\, 7\frac{1}{6}w^2\).
+Let \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y} be evaluated wrt 7 equi-significant criteria; Four criteria positively support that \sphinxstyleemphasis{x} is \sphinxstyleemphasis{as least as good performing} than \sphinxstyleemphasis{y} and three criteria support that \sphinxstyleemphasis{x} is \sphinxstyleemphasis{not at least as good} performang than \sphinxstyleemphasis{y}. Suppose \sphinxstyleemphasis{E(Wj)} = \sphinxstyleemphasis{w} for \sphinxstyleemphasis{j} = 1,…,7 and \sphinxstyleemphasis{Wj} \textasciitilde{} Tr(0, \sphinxstyleemphasis{2w}, \sphinxstyleemphasis{w}) for \sphinxstyleemphasis{j} = 1,…7. The expected value of the global ‘\sphinxstyleemphasis{at least as good as}’ characteristic value becomes: \(E\big(\tilde{r}(x \geq y)\big)\, = \, 4w - 3w = w\) with a variance \(V\big(\tilde{r}(x \geq y)\big)\,=\, 7\frac{1}{6}w^2\).
 
 If \sphinxstyleemphasis{w} = 1, \(E\big(\tilde{r}(x \geq y)\big)\, = \, 1\) and \(sd\big(\tilde{r}(x \geq y)\big)\,=\, 1.08\). By the CLT, the bipolar likelihood of the \sphinxstyleemphasis{at least as good} performing situation becomes: \(lh(x \geq y)\,=\, 0.66\), which corresponds to a global support of (0.66 + 1.0)/2 = 83\% of the criteria significance weights.
+
+A \sphinxstyleemphasis{Monte Carlo} simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see \hyperref[\detokenize{tutorial:simullikelihood}]{Fig.\@ \ref{\detokenize{tutorial:simullikelihood}}}).
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{simulLikelihood}.png}
+\caption{Distribution of 10 000 random outranking charactistic values}\label{\detokenize{tutorial:simullikelihood}}\end{figure}
+
+Indeed, \(\tilde{r}(x \geq y) \leadsto Y = \mathcal{N}(1.03,1.089)\), with an empirical probability of observing a negative majority margin of about 17\% (see \hyperref[\detokenize{tutorial:simullikelihood}]{Fig.\@ \ref{\detokenize{tutorial:simullikelihood}}}).
 
 
 \subsubsection{Confidence level of outranking situations}
 \label{\detokenize{tutorial:confidence-level-of-outranking-situations}}
-Following the classical outranking difinition (see \phantomsection\label{\detokenize{tutorial:id95}}{\hyperref[\detokenize{tutorial:bis-2013}]{\sphinxcrossref{{[}BIS-2013{]}}}} (\autopageref*{\detokenize{tutorial:bis-2013}}) ), we may say, from an epistemic perspective, that decision action \sphinxstyleemphasis{x} \sphinxstylestrong{outranks} decision action \sphinxstyleemphasis{y} at confidence level \sphinxstyleemphasis{alpha} \%, if
+Now, following the classical outranking approach (see \phantomsection\label{\detokenize{tutorial:id95}}{\hyperref[\detokenize{tutorial:bis-2013}]{\sphinxcrossref{{[}BIS-2013{]}}}} (\autopageref*{\detokenize{tutorial:bis-2013}}) ), we may say, from an epistemic perspective, that decision action \sphinxstyleemphasis{x} \sphinxstylestrong{outranks} decision action \sphinxstyleemphasis{y} at \sphinxstyleemphasis{confidence} level \sphinxstyleemphasis{alpha} \%, if
 \begin{enumerate}
 \item {} 
 an expected majority of criteria validates, at confidence level \sphinxstyleemphasis{alpha} \% or higher, a global ‘\sphinxstyleemphasis{at least as good as}’ situation between \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y}, and
@@ -7684,9 +7695,9 @@ For the corresponding confident outranking digraph, we require a confidence leve
 \PYG{g+go}{Determinateness    : 0.24 (62.1\PYGZpc{})}
 \end{sphinxVerbatim}
 
-The resulting 90\% confident expected outranking relation is shown above. The (\sphinxstyleemphasis{lh}) figures, indicated in the table above, correspond to bipolar likelihoods and the required bipolar confidence level equals (0.90+1.0)/2 = 0.80. Action ‘\sphinxstyleemphasis{a1}’ thus confidently outranks all other actions, except ‘\sphinxstyleemphasis{a7}’ where the actual likelihood (+0.65) is lower than the required one (0.80) and we furthermore observe a considerable counter-performance on criterion ‘\sphinxstyleemphasis{g1}’.
+The resulting 90\% confident expected outranking relation is shown above. The (\sphinxstyleemphasis{lh}) figures, indicated in the table above, correspond to bipolar likelihoods and the required bipolar confidence level equals (0.90+1.0)/2 = 0.80 (see Line 22 above). Action ‘\sphinxstyleemphasis{a1}’ thus confidently outranks all other actions, except ‘\sphinxstyleemphasis{a7}’ where the actual likelihood (+0.65) is lower than the required one (0.80) and we furthermore observe a considerable counter-performance on criterion ‘\sphinxstyleemphasis{g1}’.
 
-Notice also the lack of confidence in the outranking situations we observe between action ‘\sphinxstyleemphasis{a2}’ and actions ‘\sphinxstyleemphasis{a4}’ and ‘\sphinxstyleemphasis{a5}’. In the deterministic case we would have \(r(a2 \geq a4) \,=\, -0.143\) and \(r(a2 \geq a5) \,=\, +0.143\) . All outranking situation with a  characteristic value lower or equal to abs(+-0.143), i.e. a majority support of 1.143/2 = 57.1\% and less, appear indeed to be \sphinxstyleemphasis{not confident} at level 90\% (see last Line above).
+Notice also the lack of confidence in the outranking situations we observe between action ‘\sphinxstyleemphasis{a2}’ and actions ‘\sphinxstyleemphasis{a4}’ and ‘\sphinxstyleemphasis{a5}’. In the deterministic case we would have \(r(a2 \geq a4) \,=\, -0.143\) and \(r(a2 \geq a5) \,=\, +0.143\) . All outranking situations with a characteristic value lower or equal to abs(0.143), i.e. a majority support of 1.143/2 = 57.1\% and less, appear indeed to be \sphinxstyleemphasis{not confident} at level 90\% (see Line 23 above).
 
 We may draw the corresponding strict 90\%-confident outranking digraph, oriented by its initial and terminal prekernels (see \hyperref[\detokenize{tutorial:confidentoutranking}]{Fig.\@ \ref{\detokenize{tutorial:confidentoutranking}}}).
 
@@ -7710,8 +7721,6 @@ We may draw the corresponding strict 90\%-confident outranking digraph, oriented
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd90}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{confidentOutranking}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
 \PYG{g+gp}{... }      \PYG{n}{bestChoice}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a7}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}\PYG{n}{worstChoice}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a6}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file dor GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{worstChoice=[\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}])}
-\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file dor GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{Exporting to confidentOutranking.dot}
 \PYG{g+go}{dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng confidentOutranking.dot \PYGZhy{}o confidentOutranking.png}
 \end{sphinxVerbatim}
@@ -7720,10 +7729,10 @@ We may draw the corresponding strict 90\%-confident outranking digraph, oriented
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{confidentOutranking}.png}
-\caption{90\%-confident strict outranking digraph example}\label{\detokenize{tutorial:confidentoutranking}}\end{figure}
+\noindent\sphinxincludegraphics[width=350\sphinxpxdimen]{{confidentOutranking}.png}
+\caption{Strict 90\%-confident outranking digraph example with triangular significance weights}\label{\detokenize{tutorial:confidentoutranking}}\end{figure}
 
-Now, what becomes this 90\%-confident outranking digraph if we would require a more severe confidence level of, say 99\% ?
+Now, what becomes this 90\%-confident outranking digraph when we require a strnger confidence level of, say 99\% ?
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -7754,9 +7763,9 @@ Now, what becomes this 90\%-confident outranking digraph if we would require a m
 \PYG{g+go}{Determinateness    : 0.13 (56.6\PYGZpc{})}
 \end{sphinxVerbatim}
 
-At 99\% confidence, the minimal required significance majority support amounts to 64.3\%. As a result, most outranking situations don’t get anymore validated, like the outranking situations between action ‘\sphinxstyleemphasis{a1}’ and actions ‘\sphinxstyleemphasis{a3}’, ‘\sphinxstyleemphasis{a4}’, ‘\sphinxstyleemphasis{a5}’ and ‘\sphinxstyleemphasis{a6}’ (see Line 5 above). The overall epistemic determination of the digraph consequently drops from 62.1\% to 56.6\%.
+At 99\% confidence, the minimal required significance majority support amounts to 64.3\% (see Line 24 above). As a result, most outranking situations don’t get anymore validated, like the outranking situations between action ‘\sphinxstyleemphasis{a1}’ and actions ‘\sphinxstyleemphasis{a3}’, ‘\sphinxstyleemphasis{a4}’, ‘\sphinxstyleemphasis{a5}’ and ‘\sphinxstyleemphasis{a6}’ (see Line 5 above). The overall epistemic determination of the digraph consequently drops from 62.1\% to 56.6\% (see Line 25).
 
-Now, what becomes this 90\%-confdent outranking digraph if the uncertainty concerning the criteria significance weights is modelled with a larger variance, like \sphinxstyleemphasis{uniform} variates.
+Finally, what becomes the previous 90\%-confdent outranking digraph if the uncertainty concerning the criteria significance weights is modelled with a larger variance, like \sphinxstyleemphasis{uniform} variates.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -7787,9 +7796,9 @@ Now, what becomes this 90\%-confdent outranking digraph if the uncertainty conce
 \PYG{g+go}{Determinateness    : 0.24 (62.1\PYGZpc{})}
 \end{sphinxVerbatim}
 
-Despite lower likelihood values (see the \sphinxstyleemphasis{g90} relation table above), we keep the sameconfident majority level of 57.1\% and hence the same 90\%-confident outranking digraph.
+Despite lower likelihood values (see the \sphinxstyleemphasis{g90} relation table above), we keep the same confident majority level of 57.1\% (see Line 24 above)and, hence, also the same 90\%-confident outranking digraph.
 
-Finally, it is worthwhile noticing again that it is the \sphinxstyleemphasis{neutral} logical value of our bipolar-valued epistemic logic that allows us to easily handle the confidence or not of outranking situations. Remarkable furthermore is the usage the standard Gaussian error function provides by delivering \sphinxstyleemphasis{signed likelihood values} immediatley concerning either the positive relational statement or its logical negation.
+For concluding, it is worthwhile noticing again that it is the \sphinxstyleemphasis{neutral} value of our bipolar-valued epistemic logic that allows us to easily handle alpha\% confidence or not of outranking situations when confronted with uncertain criteria significances. Remarkable furthermore is the usage, the standard Gaussian error function provides by delivering \sphinxstyleemphasis{signed likelihood values} immediatley concerning either a \sphinxstyleemphasis{positive} relational statement, or when negative, its negated version.
 
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
 
