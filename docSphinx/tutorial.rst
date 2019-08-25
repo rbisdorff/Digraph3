@@ -5699,7 +5699,7 @@ When considering, for instance, that the potential range of a significance weigh
 .. Figure:: weightDistributions.png
    :name: weightDistributions
    :alt: Four models of uncertain significabce weights
-   :width: 650 px
+   :width: 450 px
    :align: center
 
    Four models of uncertain significance weights
@@ -5725,7 +5725,7 @@ Semantics of the marginal bipolar-valued characteristic function:
 .. Figure:: rCharacteristic.png
    :name: rCharacteristic
    :alt: Bipolar characteristic function of *<=_j* situation
-   :width: 550 px
+   :width: 450 px
    :align: center
 
    Bipolar characteristic function of *<=_j* situation
@@ -5831,9 +5831,9 @@ Confidence level   : 0.80 (90.0%)
 Confident majority : 0.14 (57.1%) 
 Determinateness    : 0.24 (62.1%)
 
-The resulting 90% confident expected outranking relation is shown above. The (*lh*) figures, indicated in the table above, correspond to bipolar likelihoods and the required bipolar confidence level equals (0.90+1.0)/2 = 0.80. Action '*a1*' thus confidently outranks all other actions, except '*a7*' where the actual likelihood (+0.65) is lower than the required one (0.80) and we furthermore observe a considerable counter-performance on criterion '*g1*'.
+The resulting 90% confident expected outranking relation is shown above. The (*lh*) figures, indicated in the table above, correspond to bipolar likelihoods and the required bipolar confidence level equals (0.90+1.0)/2 = 0.80 (see Line 22 above). Action '*a1*' thus confidently outranks all other actions, except '*a7*' where the actual likelihood (+0.65) is lower than the required one (0.80) and we furthermore observe a considerable counter-performance on criterion '*g1*'.
 
-Notice also the lack of confidence in the outranking situations we observe between action '*a2*' and actions '*a4*' and '*a5*'. In the deterministic case we would have :math:`r(a2 \geq a4) \,=\, -0.143` and :math:`r(a2 \geq a5) \,=\, +0.143` . All outranking situation with a  characteristic value lower or equal to abs(+-0.143), i.e. a majority support of 1.143/2 = 57.1% and less, appear indeed to be *not confident* at level 90% (see last Line above).
+Notice also the lack of confidence in the outranking situations we observe between action '*a2*' and actions '*a4*' and '*a5*'. In the deterministic case we would have :math:`r(a2 \geq a4) \,=\, -0.143` and :math:`r(a2 \geq a5) \,=\, +0.143` . All outranking situation with a characteristic value lower or equal to abs(+-0.143), i.e. a majority support of 1.143/2 = 57.1% and less, appear indeed to be *not confident* at level 90% (see Line 23 above).
 
 We may draw the corresponding strict 90%-confident outranking digraph, oriented by its initial and terminal prekernels (see :numref:`confidentOutranking`).
 
@@ -5855,20 +5855,18 @@ Absorbent preKernels :
 >>> gcd90.exportGraphViz(fileName='confidentOutranking',
 ...       bestChoice=['a1', 'a7'],worstChoice=['a2', 'a5', 'a6'])
 *---- exporting a dot file dor GraphViz tools ---------*
-worstChoice=['a2', 'a5', 'a6'])
-*---- exporting a dot file dor GraphViz tools ---------*
 Exporting to confidentOutranking.dot
 dot -Grankdir=BT -Tpng confidentOutranking.dot -o confidentOutranking.png
 
 .. Figure:: confidentOutranking.png
    :name: confidentOutranking
    :alt: 90%-confident strict outranking digraph
-   :width: 400 px
+   :width: 350 px
    :align: center
 
-   90%-confident strict outranking digraph example
+   Strict 90%-confident outranking digraph example with triangular significance weights
 
-Now, what becomes this 90%-confident outranking digraph if we would require a more severe confidence level of, say 99% ?
+Now, what becomes this 90%-confident outranking digraph when we require a strnger confidence level of, say 99% ?
 
 >>> g99 = ConfidentBipolarOutrankingDigraph(t,confidence=99)
 >>> g99.showRelationTable()
@@ -5896,9 +5894,9 @@ Confidence level   : 0.98 (99.0%)
 Confident majority : 0.29 (64.3%) 
 Determinateness    : 0.13 (56.6%)
 
-At 99% confidence, the minimal required significance majority support amounts to 64.3%. As a result, most outranking situations don't get anymore validated, like the outranking situations between action '*a1*' and actions '*a3*', '*a4*', '*a5*' and '*a6*' (see Line 5 above). The overall epistemic determination of the digraph consequently drops from 62.1% to 56.6%.
+At 99% confidence, the minimal required significance majority support amounts to 64.3% (see Line 24 above). As a result, most outranking situations don't get anymore validated, like the outranking situations between action '*a1*' and actions '*a3*', '*a4*', '*a5*' and '*a6*' (see Line 5 above). The overall epistemic determination of the digraph consequently drops from 62.1% to 56.6% (see Line 25).
 
-Now, what becomes this 90%-confdent outranking digraph if the uncertainty concerning the criteria significance weights is modelled with a larger variance, like *uniform* variates.
+Finally, what becomes the previous 90%-confdent outranking digraph if the uncertainty concerning the criteria significance weights is modelled with a larger variance, like *uniform* variates.
 
 >>> gu90 = ConfidentBipolarOutrankingDigraph(t,confidence=90,distribution='uniform')
 >>> gu90.showRelationTable()
@@ -5926,9 +5924,9 @@ Confidence level   : 0.80 (90.0%)
 Confident majority : 0.14 (57.1%) 
 Determinateness    : 0.24 (62.1%)
 
-Despite lower likelihood values (see the *g90* relation table above), we keep the sameconfident majority level of 57.1% and hence the same 90%-confident outranking digraph.
+Despite lower likelihood values (see the *g90* relation table above), we keep the same confident majority level of 57.1% (see Line 24 above)and, hence, also the same 90%-confident outranking digraph.
 
-Finally, it is worthwhile noticing again that it is the *neutral* logical value of our bipolar-valued epistemic logic that allows us to easily handle the confidence or not of outranking situations. Remarkable furthermore is the usage the standard Gaussian error function provides by delivering *signed likelihood values* immediatley concerning either the positive relational statement or its logical negation. 
+For concluding, it is worthwhile noticing again that it is the *neutral* value of our bipolar-valued epistemic logic that allows us to easily handle alpha% confidence or not of outranking situations when confronted with uncertain criteria significances. Remarkable furthermore is the usage, the standard Gaussian error function provides by delivering *signed likelihood values* immediatley concerning either a *positive* relational statement, or when negative, its negated version. 
 
 
 Back to :ref:`Content Table <Tutorial-label>`

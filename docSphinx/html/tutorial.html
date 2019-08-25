@@ -8535,7 +8535,7 @@ parameters <em>alpha</em> = 4 and <em>beta</em> = 4. Thus <em>Wj</em> ∼ Beta(4
 </ol>
 </div></blockquote>
 <div class="figure align-center" id="weightdistributions">
-<a class="reference internal image-reference" href="_images/weightDistributions.png"><img alt="Four models of uncertain significabce weights" src="_images/weightDistributions.png" style="width: 650px;" /></a>
+<a class="reference internal image-reference" href="_images/weightDistributions.png"><img alt="Four models of uncertain significabce weights" src="_images/weightDistributions.png" style="width: 450px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 72 </span><span class="caption-text">Four models of uncertain significance weights</span></p>
 </div>
 <p>It is worthwhile noticing that these four uncertainty models all admit the same expected value, <em>E(Wj)</em>, however, with a respective variance which goes decreasing from 1/3, to 1/9 of the square of <em>E(W)</em> (see <a class="reference internal" href="#weightdistributions"><span class="std std-numref">Fig. 72</span></a>).</p>
@@ -8557,7 +8557,7 @@ unclear whether, on criterion <em>j</em>, <em>x</em> is performing at least as g
 </dd>
 </dl>
 <div class="figure align-center" id="rcharacteristic">
-<a class="reference internal image-reference" href="_images/rCharacteristic.png"><img alt="Bipolar characteristic function of *&lt;=_j* situation" src="_images/rCharacteristic.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/rCharacteristic.png"><img alt="Bipolar characteristic function of *&lt;=_j* situation" src="_images/rCharacteristic.png" style="width: 450px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 73 </span><span class="caption-text">Bipolar characteristic function of <em>&lt;=_j</em> situation</span></p>
 </div>
 <p>Each criterion <em>j</em> in <em>F</em> contributes the random significance <em>Wj</em> of his ‘<em>at least as good as</em>’ characteristic <img class="math" src="_images/math/32d9b95491d571be421d262dcc4ec35cb88a0678.png" alt="r(x \geq_j y)"/> to the global characteristic <img class="math" src="_images/math/ced4452df8d52b143c2f5cf920ee4a99be3577d8.png" alt="\tilde{r}(x \geq y)"/> in the following way:</p>
@@ -8700,8 +8700,8 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">Determinateness    : 0.24 (62.1%)</span>
 </pre></div>
 </td></tr></table></div>
-<p>The resulting 90% confident expected outranking relation is shown above. The (<em>lh</em>) figures, indicated in the table above, correspond to bipolar likelihoods and the required bipolar confidence level equals (0.90+1.0)/2 = 0.80. Action ‘<em>a1</em>’ thus confidently outranks all other actions, except ‘<em>a7</em>’ where the actual likelihood (+0.65) is lower than the required one (0.80) and we furthermore observe a considerable counter-performance on criterion ‘<em>g1</em>’.</p>
-<p>Notice also the lack of confidence in the outranking situations we observe between action ‘<em>a2</em>’ and actions ‘<em>a4</em>’ and ‘<em>a5</em>’. In the deterministic case we would have <img class="math" src="_images/math/be91f86a2dfe6d7d9973a94ca078e59e68241b57.png" alt="r(a2 \geq a4) \,=\, -0.143"/> and <img class="math" src="_images/math/1896c43908673fb931b486c08e30b086e6103679.png" alt="r(a2 \geq a5) \,=\, +0.143"/> . All outranking situation with a  characteristic value lower or equal to abs(+-0.143), i.e. a majority support of 1.143/2 = 57.1% and less, appear indeed to be <em>not confident</em> at level 90% (see last Line above).</p>
+<p>The resulting 90% confident expected outranking relation is shown above. The (<em>lh</em>) figures, indicated in the table above, correspond to bipolar likelihoods and the required bipolar confidence level equals (0.90+1.0)/2 = 0.80 (see Line 22 above). Action ‘<em>a1</em>’ thus confidently outranks all other actions, except ‘<em>a7</em>’ where the actual likelihood (+0.65) is lower than the required one (0.80) and we furthermore observe a considerable counter-performance on criterion ‘<em>g1</em>’.</p>
+<p>Notice also the lack of confidence in the outranking situations we observe between action ‘<em>a2</em>’ and actions ‘<em>a4</em>’ and ‘<em>a5</em>’. In the deterministic case we would have <img class="math" src="_images/math/be91f86a2dfe6d7d9973a94ca078e59e68241b57.png" alt="r(a2 \geq a4) \,=\, -0.143"/> and <img class="math" src="_images/math/1896c43908673fb931b486c08e30b086e6103679.png" alt="r(a2 \geq a5) \,=\, +0.143"/> . All outranking situation with a characteristic value lower or equal to abs(+-0.143), i.e. a majority support of 1.143/2 = 57.1% and less, appear indeed to be <em>not confident</em> at level 90% (see Line 23 above).</p>
 <p>We may draw the corresponding strict 90%-confident outranking digraph, oriented by its initial and terminal prekernels (see <a class="reference internal" href="#confidentoutranking"><span class="std std-numref">Fig. 74</span></a>).</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -8722,9 +8722,7 @@ confidence level <em>alpha</em> %, if</p>
 17
 18
 19
-20
-21
-22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd90</span> <span class="o">=</span> <span class="o">~</span> <span class="p">(</span><span class="o">-</span><span class="n">g90</span><span class="p">)</span>
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd90</span> <span class="o">=</span> <span class="o">~</span> <span class="p">(</span><span class="o">-</span><span class="n">g90</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd90</span><span class="o">.</span><span class="n">showPreKernels</span><span class="p">()</span>
 <span class="go">*--- Computing preKernels ---*</span>
 <span class="go">Dominant preKernels :</span>
@@ -8742,17 +8740,15 @@ confidence level <em>alpha</em> %, if</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd90</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;confidentOutranking&#39;</span><span class="p">,</span>
 <span class="gp">... </span>      <span class="n">bestChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span> <span class="s1">&#39;a7&#39;</span><span class="p">],</span><span class="n">worstChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span> <span class="s1">&#39;a5&#39;</span><span class="p">,</span> <span class="s1">&#39;a6&#39;</span><span class="p">])</span>
 <span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
-<span class="go">worstChoice=[&#39;a2&#39;, &#39;a5&#39;, &#39;a6&#39;])</span>
-<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go">Exporting to confidentOutranking.dot</span>
 <span class="go">dot -Grankdir=BT -Tpng confidentOutranking.dot -o confidentOutranking.png</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="confidentoutranking">
-<a class="reference internal image-reference" href="_images/confidentOutranking.png"><img alt="90%-confident strict outranking digraph" src="_images/confidentOutranking.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 74 </span><span class="caption-text">90%-confident strict outranking digraph example</span></p>
+<a class="reference internal image-reference" href="_images/confidentOutranking.png"><img alt="90%-confident strict outranking digraph" src="_images/confidentOutranking.png" style="width: 350px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 74 </span><span class="caption-text">Strict 90%-confident outranking digraph example with triangular significance weights</span></p>
 </div>
-<p>Now, what becomes this 90%-confident outranking digraph if we would require a more severe confidence level of, say 99% ?</p>
+<p>Now, what becomes this 90%-confident outranking digraph when we require a strnger confidence level of, say 99% ?</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8804,8 +8800,8 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">Determinateness    : 0.13 (56.6%)</span>
 </pre></div>
 </td></tr></table></div>
-<p>At 99% confidence, the minimal required significance majority support amounts to 64.3%. As a result, most outranking situations don’t get anymore validated, like the outranking situations between action ‘<em>a1</em>’ and actions ‘<em>a3</em>’, ‘<em>a4</em>’, ‘<em>a5</em>’ and ‘<em>a6</em>’ (see Line 5 above). The overall epistemic determination of the digraph consequently drops from 62.1% to 56.6%.</p>
-<p>Now, what becomes this 90%-confdent outranking digraph if the uncertainty concerning the criteria significance weights is modelled with a larger variance, like <em>uniform</em> variates.</p>
+<p>At 99% confidence, the minimal required significance majority support amounts to 64.3% (see Line 24 above). As a result, most outranking situations don’t get anymore validated, like the outranking situations between action ‘<em>a1</em>’ and actions ‘<em>a3</em>’, ‘<em>a4</em>’, ‘<em>a5</em>’ and ‘<em>a6</em>’ (see Line 5 above). The overall epistemic determination of the digraph consequently drops from 62.1% to 56.6% (see Line 25).</p>
+<p>Finally, what becomes the previous 90%-confdent outranking digraph if the uncertainty concerning the criteria significance weights is modelled with a larger variance, like <em>uniform</em> variates.</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8857,8 +8853,8 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">Determinateness    : 0.24 (62.1%)</span>
 </pre></div>
 </td></tr></table></div>
-<p>Despite lower likelihood values (see the <em>g90</em> relation table above), we keep the sameconfident majority level of 57.1% and hence the same 90%-confident outranking digraph.</p>
-<p>Finally, it is worthwhile noticing again that it is the <em>neutral</em> logical value of our bipolar-valued epistemic logic that allows us to easily handle the confidence or not of outranking situations. Remarkable furthermore is the usage the standard Gaussian error function provides by delivering <em>signed likelihood values</em> immediatley concerning either the positive relational statement or its logical negation.</p>
+<p>Despite lower likelihood values (see the <em>g90</em> relation table above), we keep the same confident majority level of 57.1% (see Line 24 above)and, hence, also the same 90%-confident outranking digraph.</p>
+<p>For concluding, it is worthwhile noticing again that it is the <em>neutral</em> value of our bipolar-valued epistemic logic that allows us to easily handle alpha% confidence or not of outranking situations when confronted with uncertain criteria significances. Remarkable furthermore is the usage, the standard Gaussian error function provides by delivering <em>signed likelihood values</em> immediatley concerning either a <em>positive</em> relational statement, or when negative, its negated version.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 </div>
 </div>
