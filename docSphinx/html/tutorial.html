@@ -7700,7 +7700,7 @@ best covered terminal kernel</span></p>
 <li><a class="reference internal" href="#coping-with-missing-data-and-indeterminateness" id="id235">Coping with missing data and indeterminateness</a></li>
 <li><a class="reference internal" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" id="id236">Ordinal correlation equals bipolar-valued relational equivalence</a></li>
 <li><a class="reference internal" href="#bipolar-valued-kernel-membership-characteristic-vectors" id="id237">Bipolar-valued kernel membership characteristic vectors</a></li>
-<li><a class="reference internal" href="#on-confident-outrankings" id="id238">On confident outrankings</a></li>
+<li><a class="reference internal" href="#on-confident-outrankings-with-uncertain-criteria-significances" id="id238">On confident outrankings with uncertain criteria significances</a></li>
 </ul>
 </div>
 <div class="section" id="coping-with-missing-data-and-indeterminateness">
@@ -8510,29 +8510,28 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <p>It is worthwhile noticing again the essential computational role, the logical <strong>indeterminate value 0.0</strong> is playing in this dual fixpoint algorithm. To implement such kind of algorithms without a logical <strong>neutral term</strong> would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial <em>impossibility theorems</em> and <em>dubious logical results</em> come up.</p>
 </div>
 </div>
-<div class="section" id="on-confident-outrankings">
-<span id="bipolar-valued-likelihood-tutorial-label"></span><h3><a class="toc-backref" href="#id238">On confident outrankings</a><a class="headerlink" href="#on-confident-outrankings" title="Permalink to this headline">¶</a></h3>
-<p>When modelling preferences following the outranking approach, the signs of the majority margins do sharply distribute validation and invalidation of pairwise outranking situations. How can we be confident in the resulting outranking digraph, when we acknowledge the
-usual imprecise knowledge of criteria significance weights coupled with a may be small
-majority margin?</p>
-<p>To answer this question, one usually requires qualified majority margins for confirming outranking situations. But how to choose such a qualifying majority: two third, three fourth of the significances ? In this turorial we propose link the qualifying significance majority with a required confidence level. We model therefore the significance weights as random variables following more or less widespread distributions around an average weight value that corresponds to the given deterministic weight. As the bipolarly valued random credibility of an outranking statement results from a simple sum of positive or negative independent and similarly distributed random variables, we may apply the Central Limit Theorem (CLT) for computing the <em>bipolar likelihood</em> that the expected majority margin will indeed be positive, respectively negative.</p>
+<div class="section" id="on-confident-outrankings-with-uncertain-criteria-significances">
+<span id="bipolar-valued-likelihood-tutorial-label"></span><h3><a class="toc-backref" href="#id238">On confident outrankings with uncertain criteria significances</a><a class="headerlink" href="#on-confident-outrankings-with-uncertain-criteria-significances" title="Permalink to this headline">¶</a></h3>
+<p>When modelling preferences following the outranking approach, the signs of the majority margins do sharply distribute validation and invalidation of pairwise outranking situations. How can we be confident in the resulting outranking digraph, when we acknowledge the usual imprecise knowledge of criteria significance weights coupled with small majority margins?</p>
+<p>To answer this question, one usually requires <em>qualified</em> majority margins for confirming outranking situations. But how to choose such a qualifying majority level: two third, three fourth of the significances ?</p>
+<p>In this turorial we propose to link the qualifying significance majority with a required alpha%-confidence level. We model therefore the significance weights as random variables following more or less widespread distributions around an average significance value that corresponds to the given deterministic weight. As the bipolar-valued random credibility of an outranking statement hence results from the simple sum of positive or negative independent random variables, we may apply the Central Limit Theorem (CLT) for computing the <em>bipolar likelihood</em> that the expected majority margin will indeed be positive, respectively negative.</p>
 <div class="section" id="modelling-uncertain-criteria-significances">
 <h4>Modelling uncertain criteria significances<a class="headerlink" href="#modelling-uncertain-criteria-significances" title="Permalink to this headline">¶</a></h4>
 <p>Let us consider the significance weights of a family <em>F</em> of <em>m</em> criteria to be <strong>independent random variables</strong> <em>Wj</em>, distributing the potential significance weights of each criterion <em>j</em> = 1, …, <em>m</em> around a mean value <em>E(Wj)</em> with variance <em>V(Wj)</em>.</p>
-<p>Choosing a specific stochastic model of uncertainty may be application specific. In the limited scope of this tutorial, we will illustrate the consequence of this design decision on the resulting outranking modelling with four slightly different models for taking into account the uncertainty with which we know the numerical significance weights: <em>uniform</em>, <em>triangular</em>, and two models of <em>Beta laws</em>, one more widespread and, the other, more concentrated. When considering that the potential range of a significance weight is distributed between 0 and two times its mean value, we obtain the following random variates:</p>
+<p>Choosing a specific stochastic model of uncertainty is usually application specific. In the limited scope of this tutorial, we will illustrate the consequence of this design decision on the resulting outranking modelling with four slightly different models for taking into account the uncertainty with which we know the numerical significance weights: <em>uniform</em>, <em>triangular</em>, and two models of <em>Beta laws</em>, one more <em>widespread</em> and, the other, more <em>concentrated</em>.</p>
+<p>When considering, for instance, that the potential range of a significance weight is distributed between 0 and two times its mean value, we obtain the following random variates:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>A continuous <strong>uniform</strong> distribution on the range 0 to
-2 <em>E(Wj)</em>. Thus <em>Wj</em> ∼ U(0, <em>2E(Wj)</em>) and <em>V(Wj)</em> = 1/3 <em>E(Wj)</em> ^2;</li>
+<li>A continuous <strong>uniform</strong> distribution on the range 0 to <em>2E(Wj)</em>. Thus <em>Wj</em> ∼ U(0, <em>2E(Wj)</em>) and <em>V(Wj)</em> = 1/3(<em>E(Wj)</em>)^2;</li>
 <li>A <strong>symmetric beta</strong> distribution with, for instance,
 parameters  <em>alpha</em> = 2 and <em>beta</em> = 2. Thus, <em>Wi</em> ∼
-Beta(2,2) * <em>2E(Wj)</em> and <em>V(Wj)</em> = 1/5 <em>E(Wj)</em> ^2.</li>
+Beta(2,2) * <em>2E(Wj)</em> and <em>V(Wj)</em> = 1/5(<em>E(Wj)</em>)^2.</li>
 <li>A <strong>symmetric triangular</strong> distribution on the same range with
 mode <em>E(Wj)</em>. Thus <em>Wj</em> ∼ Tr(0, <em>2E(Wj)</em>, <em>E(Wj)</em>) with
-<em>V(Wj)</em> = 1/6 <em>E(Wj)</em> ^2;</li>
+<em>V(Wj)</em> = 1/6(<em>E(Wj)</em>)^2;</li>
 <li>A <strong>narrower beta</strong> distribution with for instance
 parameters <em>alpha</em> = 4 and <em>beta</em> = 4. Thus <em>Wj</em> ∼ Beta(4,4) *
-<em>2E(Wj)</em> , <em>V(Wj)</em> = 1/9 <em>E(Wj)</em> ^2.</li>
+<em>2E(Wj)</em> , <em>V(Wj)</em> = 1/9(<em>E(Wj)</em>)^2.</li>
 </ol>
 </div></blockquote>
 <div class="figure align-center" id="weightdistributions">
@@ -8543,7 +8542,7 @@ parameters <em>alpha</em> = 4 and <em>beta</em> = 4. Thus <em>Wj</em> ∼ Beta(4
 </div>
 <div class="section" id="bipolar-valued-likelihood-of-at-least-as-good-as-situations">
 <h4>Bipolar-valued likelihood of ‘’at least as good as ” situations<a class="headerlink" href="#bipolar-valued-likelihood-of-at-least-as-good-as-situations" title="Permalink to this headline">¶</a></h4>
-<p>Let <em>A</em> = {<em>x</em>, <em>y</em>, <em>z</em>,…} be a finite set of <em>n</em> potential decision actions, evaluated on <em>F</em> = {1,…, <em>m</em>}, a finite and coherent family of <em>m</em> performance criteria. On each criterion <em>j</em> in <em>F</em>, the decision actions are evaluated on a real performance scale [0; <em>Mj</em> ], supporting an upper-closed indifference threshold <em>indj</em> and a lower-closed preference threshold <em>prj</em> such that 0 &lt;= <em>indj</em> &lt; prj &lt;= <em>Mj</em>. The marginal performance of object <em>x</em> on criterion <em>j</em> is denoted <em>xj</em>. Each criterion <em>j</em> is thus characterizing a marginal double threshold order <img class="math" src="_images/math/7ea87d58693aa39847e806f1a19d49239fd2dd0d.png" alt="\geq_j"/> on <em>A</em> (see <a class="reference internal" href="#rcharacteristic"><span class="std std-numref">Fig. 73</span></a>):</p>
+<p>Let <em>A</em> = {<em>x</em>, <em>y</em>, <em>z</em>,…} be a finite set of <em>n</em> potential decision actions, evaluated on <em>F</em> = {1,…, <em>m</em>}, a <em>finite</em> and <em>coherent</em> family of <em>m</em> performance criteria. On each criterion <em>j</em> in <em>F</em>, the decision actions are evaluated on a real performance scale [0; <em>Mj</em> ], supporting an upper-closed indifference threshold <em>indj</em> and a lower-closed preference threshold <em>prj</em> such that 0 &lt;= <em>indj</em> &lt; <em>prj</em> &lt;= <em>Mj</em>. The marginal performance of object <em>x</em> on criterion <em>j</em> is denoted <em>xj</em>. Each criterion <em>j</em> is thus characterizing a marginal double threshold order <img class="math" src="_images/math/7ea87d58693aa39847e806f1a19d49239fd2dd0d.png" alt="\geq_j"/> on <em>A</em> (see <a class="reference internal" href="#rcharacteristic"><span class="std std-numref">Fig. 73</span></a>):</p>
 <p><img class="math" src="_images/math/89324506debff5727fefe1fed4f15593949e4483.png" alt="r(x \geq_j y) \; = \; \begin{cases} +1 \quad \text{if} \quad x_j - y_j \leq ind_j,\\  -1 \quad \text{if} \quad x_j - y_j \leq pr_j,\\ 0 \quad \text{otherwise}. \end{cases}"/></p>
 <dl class="docutils">
 <dt>Semantics of the marginal bipolar-valued characteristic function:</dt>
@@ -8567,7 +8566,7 @@ unclear whether, on criterion <em>j</em>, <em>x</em> is performing at least as g
 <p>From the <em>Central Limit Theorem</em> (CLT), we know that such a sum of random variables leads, with <em>m</em> getting large, to a Gaussian distribution <em>Y</em> with</p>
 <p><img class="math" src="_images/math/1210573aac603726a5b00028a4c78fd64d9a30ad.png" alt="E(Y ) = \sum_{j \in F} E(W_j) \times r(x \geq_j y)"/> and</p>
 <p><img class="math" src="_images/math/4a841560e708e005318342f04ecdb15027149a37.png" alt="V(Y) = \sum_{j \in F} V(W_j)\times |r(x \geq_j y)|"/>.</p>
-<p>And the <strong>likelihood of validation</strong>, respectively <strong>invalidation</strong> of an ‘<em>at least as good as</em>’ situation, denoted <img class="math" src="_images/math/083fac074d2e0bce6cb21eec3430466fd36b5cbc.png" alt="lh(x \geq y)"/>,  may hence be assessed by the probability <em>P(Y&gt;0)</em> = 1.0 - <em>P(Y&lt;=0)</em> that <em>Y</em> takes a positive, resp. <em>P(Y&lt;0)</em> takes a negative value. In the bipolar-valued case here, we can judiciously make usage of the standard <strong>error function</strong> , i.e. the bipolar 2*P(Z)* - 1.0 version of the standard Gaussian <em>Z</em> probabilty function:</p>
+<p>And the <strong>likelihood of validation</strong>, respectively <strong>invalidation</strong> of an ‘<em>at least as good as</em>’ situation, denoted <img class="math" src="_images/math/083fac074d2e0bce6cb21eec3430466fd36b5cbc.png" alt="lh(x \geq y)"/>,  may hence be assessed by the probability <em>P(Y&gt;0)</em> = 1.0 - <em>P(Y&lt;=0)</em> that <em>Y</em> takes a positive, resp. <em>P(Y&lt;0)</em> takes a negative value. In the bipolar-valued case here, we can judiciously make usage of the standard Gaussian <strong>error function</strong> , i.e. the bipolar <em>2P(Z)</em> - 1.0 version of the standard Gaussian <em>P(Z)</em> probabilty distribution function:</p>
 <p><img class="math" src="_images/math/322b8ffee0b99e343da0e3d139c204e1798a5ff9.png" alt="lh(x \geq y) \;=\; -\text{erf}\big(\frac{1}{\sqrt{2}}\frac{-E(Y)}{\sqrt{V(Y)}} \big)"/></p>
 <p>The range of the bipolar-valued <img class="math" src="_images/math/083fac074d2e0bce6cb21eec3430466fd36b5cbc.png" alt="lh(x \geq y)"/> hence becomes [−1.0;+1.0], and <img class="math" src="_images/math/77025768c1098780c66f0668c4e653c54bff2875.png" alt="-lh(x \geq y) \,=\, lh(x \not\geq y)"/> , i.e. a <strong>negative likelihood</strong> represents the likelihood of the correspondent <strong>negated</strong> ‘<em>at least as good as</em>’ situtation. A likelihood of +1.0 (resp. −1.0) means the corresponding preferential situation appears <strong>certainly validated</strong> (resp. <strong>invalidated</strong>).</p>
 <p><strong>Example</strong></p>
@@ -8576,7 +8575,7 @@ unclear whether, on criterion <em>j</em>, <em>x</em> is performing at least as g
 </div>
 <div class="section" id="confidence-level-of-outranking-situations">
 <h4>Confidence level of outranking situations<a class="headerlink" href="#confidence-level-of-outranking-situations" title="Permalink to this headline">¶</a></h4>
-<p>Following the classic outranking difinition (see <a class="reference internal" href="#bis-2013" id="id95">[BIS-2013]</a> ) , we may say from an epistemic point of view that decision action <em>x</em> <strong>outranks</strong> decision action <em>y</em> at confidence level <em>alpha</em> %, if</p>
+<p>Following the classical outranking difinition (see <a class="reference internal" href="#bis-2013" id="id95">[BIS-2013]</a> ), we may say, from an epistemic perspective, that decision action <em>x</em> <strong>outranks</strong> decision action <em>y</em> at confidence level <em>alpha</em> %, if</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li>an expected majority of criteria validates, at confidence level <em>alpha</em> % or higher, a global ‘<em>at least as good as</em>’ situation between <em>x</em> and <em>y</em>, and</li>
@@ -8701,9 +8700,9 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">Determinateness    : 0.24 (62.1%)</span>
 </pre></div>
 </td></tr></table></div>
-<p>The resulting 90% confident expected outranking relation is shown above. The (<em>lh</em>) figures, indicated in the table above, correspond to bipolar likelihoods and the required bipolar confidence level equals abs(0.80). Action ‘<em>a1</em>’ thus confidently outranks all other actions, except ‘<em>a7</em>’ where the actual likelihood (+0.65) is lower than the required one (0.80) and we furthermore observe a considerable counter-performance on criterion ‘<em>g1</em>’.</p>
+<p>The resulting 90% confident expected outranking relation is shown above. The (<em>lh</em>) figures, indicated in the table above, correspond to bipolar likelihoods and the required bipolar confidence level equals (0.90+1.0)/2 = 0.80. Action ‘<em>a1</em>’ thus confidently outranks all other actions, except ‘<em>a7</em>’ where the actual likelihood (+0.65) is lower than the required one (0.80) and we furthermore observe a considerable counter-performance on criterion ‘<em>g1</em>’.</p>
 <p>Notice also the lack of confidence in the outranking situations we observe between action ‘<em>a2</em>’ and actions ‘<em>a4</em>’ and ‘<em>a5</em>’. In the deterministic case we would have <img class="math" src="_images/math/be91f86a2dfe6d7d9973a94ca078e59e68241b57.png" alt="r(a2 \geq a4) \,=\, -0.143"/> and <img class="math" src="_images/math/1896c43908673fb931b486c08e30b086e6103679.png" alt="r(a2 \geq a5) \,=\, +0.143"/> . All outranking situation with a  characteristic value lower or equal to abs(+-0.143), i.e. a majority support of 1.143/2 = 57.1% and less, appear indeed to be <em>not confident</em> at level 90% (see last Line above).</p>
-<p>We may draw the corresponding strict 90%-confident outranking digraph, oriented by its initial and terminal prekernels.</p>
+<p>We may draw the corresponding strict 90%-confident outranking digraph, oriented by its initial and terminal prekernels (see <a class="reference internal" href="#confidentoutranking"><span class="std std-numref">Fig. 74</span></a>).</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8750,10 +8749,10 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="confidentoutranking">
-<a class="reference internal image-reference" href="_images/confidentOutranking.png"><img alt="90%-confident strict outranking digraph" src="_images/confidentOutranking.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/confidentOutranking.png"><img alt="90%-confident strict outranking digraph" src="_images/confidentOutranking.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 74 </span><span class="caption-text">90%-confident strict outranking digraph example</span></p>
 </div>
-<p>What becomes this 90%-confident outranking digraph if we would require a more severe confidence level of, say 99% ?</p>
+<p>Now, what becomes this 90%-confident outranking digraph if we would require a more severe confidence level of, say 99% ?</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -9227,7 +9226,7 @@ confidence level <em>alpha</em> %, if</p>
 <li><a class="reference internal" href="#solving-bipolar-valued-kernel-equation-systems">Solving bipolar-valued kernel equation systems</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#on-confident-outrankings">On confident outrankings</a><ul>
+<li><a class="reference internal" href="#on-confident-outrankings-with-uncertain-criteria-significances">On confident outrankings with uncertain criteria significances</a><ul>
 <li><a class="reference internal" href="#modelling-uncertain-criteria-significances">Modelling uncertain criteria significances</a></li>
 <li><a class="reference internal" href="#bipolar-valued-likelihood-of-at-least-as-good-as-situations">Bipolar-valued likelihood of ‘’at least as good as ” situations</a></li>
 <li><a class="reference internal" href="#confidence-level-of-outranking-situations">Confidence level of outranking situations</a></li>
