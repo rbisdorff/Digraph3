@@ -5752,12 +5752,25 @@ The range of the bipolar-valued :math:`lh(x \geq y)` hence becomes [−1.0;+1.0]
 
 Let *x* and *y* be evaluated wrt 7 equi-significant criteria; Four criteria positively support that *x* is *as least as good performing* than *y* and three criteria support that *x* is *not at least as good* performang than *y*. Suppose *E(Wj)* = *w* for *j* = 1,...,7 and *Wj* ∼ Tr(0, *2w*, *w*) for *j* = 1,...7. The expected value of the global '*at least as good as*' characteristic value becomes: :math:`E\big(\tilde{r}(x \geq y)\big)\, = \, 4w − 3w = w` with a variance :math:`V\big(\tilde{r}(x \geq y)\big)\,=\, 7\frac{1}{6}w^2`. 
 
-If *w* = 1, :math:`E\big(\tilde{r}(x \geq y)\big)\, = \, 1` and :math:`sd\big(\tilde{r}(x \geq y)\big)\,=\, 1.08`. By the CLT, the bipolar likelihood of the *at least as good* performing situation becomes: :math:`lh(x \geq y)\,=\, 0.66`, which corresponds to a global support of (0.66 + 1.0)/2 = 83% of the criteria significance weights.  
+If *w* = 1, :math:`E\big(\tilde{r}(x \geq y)\big)\, = \, 1` and :math:`sd\big(\tilde{r}(x \geq y)\big)\,=\, 1.08`. By the CLT, the bipolar likelihood of the *at least as good* performing situation becomes: :math:`lh(x \geq y)\,=\, 0.66`, which corresponds to a global support of (0.66 + 1.0)/2 = 83% of the criteria significance weights.
+
+A *Monte Carlo* simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see :numref:`simulLikelihood`).
+
+.. Figure:: simulLikelihood.png
+   :name: simulLikelihood
+   :alt: Distribution of random outranking characteristic value
+   :width: 650 px
+   :align: center
+
+   Distribution of 10 000 random outranking charactistic values
+
+Indeed, :math:`\tilde{r}(x \geq y) \leadsto Y = \mathcal{N}(1.03,1.089)`, with an empirical probability of observing a negative majority margin of about 17% (see :numref:`simulLikelihood`).
+
       
 Confidence level of outranking situations
 .........................................
 
-Following the classical outranking difinition (see [BIS-2013]_ ), we may say, from an epistemic perspective, that decision action *x* **outranks** decision action *y* at confidence level *alpha* %, if
+Now, following the classical outranking approach (see [BIS-2013]_ ), we may say, from an epistemic perspective, that decision action *x* **outranks** decision action *y* at *confidence* level *alpha* %, if
 
    #. an expected majority of criteria validates, at confidence level *alpha* % or higher, a global '*at least as good as*' situation between *x* and *y*, and
       

@@ -8572,10 +8572,16 @@ unclear whether, on criterion <em>j</em>, <em>x</em> is performing at least as g
 <p><strong>Example</strong></p>
 <p>Let <em>x</em> and <em>y</em> be evaluated wrt 7 equi-significant criteria; Four criteria positively support that <em>x</em> is <em>as least as good performing</em> than <em>y</em> and three criteria support that <em>x</em> is <em>not at least as good</em> performang than <em>y</em>. Suppose <em>E(Wj)</em> = <em>w</em> for <em>j</em> = 1,…,7 and <em>Wj</em> ∼ Tr(0, <em>2w</em>, <em>w</em>) for <em>j</em> = 1,…7. The expected value of the global ‘<em>at least as good as</em>’ characteristic value becomes: <img class="math" src="_images/math/f205b129853db62a03a260839859d9abaf357fd5.png" alt="E\big(\tilde{r}(x \geq y)\big)\, = \, 4w − 3w = w"/> with a variance <img class="math" src="_images/math/e8b079ae799af2186757d61e991a18e51063fac1.png" alt="V\big(\tilde{r}(x \geq y)\big)\,=\, 7\frac{1}{6}w^2"/>.</p>
 <p>If <em>w</em> = 1, <img class="math" src="_images/math/9baffa7cecedb77630f1a045c8fec1b500824298.png" alt="E\big(\tilde{r}(x \geq y)\big)\, = \, 1"/> and <img class="math" src="_images/math/e3710818179ebc75de21a569ea94b14f3fadffee.png" alt="sd\big(\tilde{r}(x \geq y)\big)\,=\, 1.08"/>. By the CLT, the bipolar likelihood of the <em>at least as good</em> performing situation becomes: <img class="math" src="_images/math/d01b737a0e97857bf9fbe4f3086943a0b7b41eba.png" alt="lh(x \geq y)\,=\, 0.66"/>, which corresponds to a global support of (0.66 + 1.0)/2 = 83% of the criteria significance weights.</p>
+<p>A <em>Monte Carlo</em> simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see <a class="reference internal" href="#simullikelihood"><span class="std std-numref">Fig. 74</span></a>).</p>
+<div class="figure align-center" id="simullikelihood">
+<a class="reference internal image-reference" href="_images/simulLikelihood.png"><img alt="Distribution of random outranking characteristic value" src="_images/simulLikelihood.png" style="width: 650px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 74 </span><span class="caption-text">Distribution of 10 000 random outranking charactistic values</span></p>
+</div>
+<p>Indeed, <img class="math" src="_images/math/b3994a5cebbf77c6a02d0445e92000d2245284fd.png" alt="\tilde{r}(x \geq y) \leadsto Y = \mathcal{N}(1.03,1.089)"/>, with an empirical probability of observing a negative majority margin of about 17% (see <a class="reference internal" href="#simullikelihood"><span class="std std-numref">Fig. 74</span></a>).</p>
 </div>
 <div class="section" id="confidence-level-of-outranking-situations">
 <h4>Confidence level of outranking situations<a class="headerlink" href="#confidence-level-of-outranking-situations" title="Permalink to this headline">¶</a></h4>
-<p>Following the classical outranking difinition (see <a class="reference internal" href="#bis-2013" id="id95">[BIS-2013]</a> ), we may say, from an epistemic perspective, that decision action <em>x</em> <strong>outranks</strong> decision action <em>y</em> at confidence level <em>alpha</em> %, if</p>
+<p>Now, following the classical outranking approach (see <a class="reference internal" href="#bis-2013" id="id95">[BIS-2013]</a> ), we may say, from an epistemic perspective, that decision action <em>x</em> <strong>outranks</strong> decision action <em>y</em> at <em>confidence</em> level <em>alpha</em> %, if</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li>an expected majority of criteria validates, at confidence level <em>alpha</em> % or higher, a global ‘<em>at least as good as</em>’ situation between <em>x</em> and <em>y</em>, and</li>
@@ -8702,7 +8708,7 @@ confidence level <em>alpha</em> %, if</p>
 </td></tr></table></div>
 <p>The resulting 90% confident expected outranking relation is shown above. The (<em>lh</em>) figures, indicated in the table above, correspond to bipolar likelihoods and the required bipolar confidence level equals (0.90+1.0)/2 = 0.80 (see Line 22 above). Action ‘<em>a1</em>’ thus confidently outranks all other actions, except ‘<em>a7</em>’ where the actual likelihood (+0.65) is lower than the required one (0.80) and we furthermore observe a considerable counter-performance on criterion ‘<em>g1</em>’.</p>
 <p>Notice also the lack of confidence in the outranking situations we observe between action ‘<em>a2</em>’ and actions ‘<em>a4</em>’ and ‘<em>a5</em>’. In the deterministic case we would have <img class="math" src="_images/math/be91f86a2dfe6d7d9973a94ca078e59e68241b57.png" alt="r(a2 \geq a4) \,=\, -0.143"/> and <img class="math" src="_images/math/1896c43908673fb931b486c08e30b086e6103679.png" alt="r(a2 \geq a5) \,=\, +0.143"/> . All outranking situation with a characteristic value lower or equal to abs(+-0.143), i.e. a majority support of 1.143/2 = 57.1% and less, appear indeed to be <em>not confident</em> at level 90% (see Line 23 above).</p>
-<p>We may draw the corresponding strict 90%-confident outranking digraph, oriented by its initial and terminal prekernels (see <a class="reference internal" href="#confidentoutranking"><span class="std std-numref">Fig. 74</span></a>).</p>
+<p>We may draw the corresponding strict 90%-confident outranking digraph, oriented by its initial and terminal prekernels (see <a class="reference internal" href="#confidentoutranking"><span class="std std-numref">Fig. 75</span></a>).</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8746,7 +8752,7 @@ confidence level <em>alpha</em> %, if</p>
 </td></tr></table></div>
 <div class="figure align-center" id="confidentoutranking">
 <a class="reference internal image-reference" href="_images/confidentOutranking.png"><img alt="90%-confident strict outranking digraph" src="_images/confidentOutranking.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 74 </span><span class="caption-text">Strict 90%-confident outranking digraph example with triangular significance weights</span></p>
+<p class="caption"><span class="caption-number">Fig. 75 </span><span class="caption-text">Strict 90%-confident outranking digraph example with triangular significance weights</span></p>
 </div>
 <p>Now, what becomes this 90%-confident outranking digraph when we require a strnger confidence level of, say 99% ?</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
