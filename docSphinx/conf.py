@@ -193,6 +193,7 @@ latex_elements = {
 
 # Additional stuff for the LaTeX preamble.
 'preamble': r'''
+\usepackage[utf8x]{inputenc}
 \usepackage{newunicodechar}
 \newunicodechar{┬}{\scriptsize{\ensuremath{\top}}}
 \newunicodechar{┴}{\scriptsize{\ensuremath{\bot}}}

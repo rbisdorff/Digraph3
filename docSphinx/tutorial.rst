@@ -5680,19 +5680,19 @@ Let us consider the significance weights of a family *F* of *m* criteria to be *
 Choosing a specific stochastic model of uncertainty may be application specific. In the limited scope of this tutorial, we will illustrate the consequence of this design decision on the resulting outranking modelling with four slightly different models for taking into account the uncertainty with which we know the numerical significance weights: *uniform*, *triangular*, and two models of *Beta laws*, one more widespread and, the other, more concentrated. When considering that the potential range of a significance weight is distributed between 0 and two times its mean value, we obtain the following random variates:
 
       #. A continuous **uniform** distribution on the range 0 to
-	 2 × *E(Wj)*. Thus *Wj* ∼ U(0, 2 × *E(Wj)*) and *V(Wj)* = 1/3 *E(Wj)* ^2;
+	 2 *E(Wj)*. Thus *Wj* ∼ U(0, *2E(Wj)*) and *V(Wj)* = 1/3 *E(Wj)* ^2;
 
       #. A **symmetric beta** distribution with, for instance,
 	 parameters  *alpha* = 2 and *beta* = 2. Thus, *Wi* ∼
-	 Beta(2,2) × 2 × *E(Wj)* and *V(Wj)* = 1/5 *E(Wj)* ^2.
+	 Beta(2,2) * *2E(Wj)* and *V(Wj)* = 1/5 *E(Wj)* ^2.
 
       #. A **symmetric triangular** distribution on the same range with
-	 mode *E(Wj)*. Thus *Wj* ∼ Tr(0, 2 × *E(Wj)*, *E(Wj)*) with
+	 mode *E(Wj)*. Thus *Wj* ∼ Tr(0, *2E(Wj)*, *E(Wj)*) with
 	 *V(Wj)* = 1/6 *E(Wj)* ^2;
 	 
       #. A **narrower beta** distribution with for instance
-	 parameters *alpha* = 4 and *beta* = 4. Thus *Wj* ∼ Beta(4,4) × 2
-	 *E(Wj)* , *V(Wj)* = 1/9 *E(Wj)* ^2.
+	 parameters *alpha* = 4 and *beta* = 4. Thus *Wj* ∼ Beta(4,4) *
+	 *2E(Wj)* , *V(Wj)* = 1/9 *E(Wj)* ^2.
 
 	 
 .. Figure:: weightDistributions.png
