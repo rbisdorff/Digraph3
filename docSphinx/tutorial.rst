@@ -5754,7 +5754,7 @@ Let *x* and *y* be evaluated wrt 7 equi-significant criteria; Four criteria posi
 
 If *w* = 1, :math:`E\big(\tilde{r}(x \geq y)\big)\, = \, 1` and :math:`sd\big(\tilde{r}(x \geq y)\big)\,=\, 1.08`. By the CLT, the bipolar likelihood of the *at least as good* performing situation becomes: :math:`lh(x \geq y)\,=\, 0.66`, which corresponds to a global support of (0.66 + 1.0)/2 = 83% of the criteria significance weights.
 
-A *Monte Carlo* simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see :numref:`simulLikelihood`).
+A *Monte Carlo* simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see :numref:`simulLikelihood` realized with *gretl* [12]_ ).
 
 .. Figure:: simulLikelihood.png
    :name: simulLikelihood
@@ -5764,9 +5764,9 @@ A *Monte Carlo* simulation with 10 000 runs empirically confirms the effective c
 
    Distribution of 10 000 random outranking charactistic values
 
-Indeed, :math:`\tilde{r}(x \geq y) \leadsto Y = \mathcal{N}(1.03,1.089)`, with an empirical probability of observing a negative majority margin of about 17% (see :numref:`simulLikelihood`).
+Indeed, :math:`\tilde{r}(x \geq y) \leadsto Y = \mathcal{N}(1.03,1.089)`, with an empirical probability of observing a negative majority margin of about 17%.
 
-      
+     
 Confidence level of outranking situations
 .........................................
 
@@ -5821,7 +5821,6 @@ Attributes          : ['name', 'bipolarConfidenceLevel',
 		       'largePerformanceDifferencesCount',
                        'likelihoods', 'confidenceCutLevel',
 		       'relation', 'gamma', 'notGamma']
-
 >>> g90.showRelationTable(LikelihoodDenotation=True)
 * ---- Outranking Relation Table -----
 r/(lh) |  'a1'	 'a2'	 'a3'	 'a4'	 'a5'	 'a6'	 'a7'	 
@@ -6046,6 +6045,8 @@ Bibliography
 .. [10] The 3D PCA plot method requires a running *R statistics software*  (https://www.r-project.org/) installation and the Calmat matrix calculator (see the calmat directory in the Digraph3 ressources)
 
 .. [11] A *kernel* in a digraph *g* is a *clique* in the dual digraph *-g*.
+
+.. [12] The Gnu Regression, Econometrics and Time-series Library http://gretl.sourceforge.net/ .
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
