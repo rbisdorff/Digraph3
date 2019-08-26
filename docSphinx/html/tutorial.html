@@ -8522,15 +8522,15 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <p>When considering, for instance, that the potential range of a significance weight is distributed between 0 and two times its mean value, we obtain the following random variates:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>A continuous <strong>uniform</strong> distribution on the range 0 to <em>2E(Wj)</em>. Thus <em>Wj</em> ∼ U(0, <em>2E(Wj)</em>) and <em>V(Wj)</em> = 1/3(<em>E(Wj)</em>)^2;</li>
+<li>A continuous <strong>uniform</strong> distribution on the range 0 to <em>2E(Wj)</em>. Thus <em>Wj</em> ~ U(0, <em>2E(Wj)</em>) and <em>V(Wj)</em> = 1/3(<em>E(Wj)</em>)^2;</li>
 <li>A <strong>symmetric beta</strong> distribution with, for instance,
-parameters  <em>alpha</em> = 2 and <em>beta</em> = 2. Thus, <em>Wi</em> ∼
+parameters  <em>alpha</em> = 2 and <em>beta</em> = 2. Thus, <em>Wi</em> ~
 Beta(2,2) * <em>2E(Wj)</em> and <em>V(Wj)</em> = 1/5(<em>E(Wj)</em>)^2.</li>
 <li>A <strong>symmetric triangular</strong> distribution on the same range with
-mode <em>E(Wj)</em>. Thus <em>Wj</em> ∼ Tr(0, <em>2E(Wj)</em>, <em>E(Wj)</em>) with
+mode <em>E(Wj)</em>. Thus <em>Wj</em> ~ Tr(0, <em>2E(Wj)</em>, <em>E(Wj)</em>) with
 <em>V(Wj)</em> = 1/6(<em>E(Wj)</em>)^2;</li>
 <li>A <strong>narrower beta</strong> distribution with for instance
-parameters <em>alpha</em> = 4 and <em>beta</em> = 4. Thus <em>Wj</em> ∼ Beta(4,4) *
+parameters <em>alpha</em> = 4 and <em>beta</em> = 4. Thus <em>Wj</em> ~ Beta(4,4) *
 <em>2E(Wj)</em> , <em>V(Wj)</em> = 1/9(<em>E(Wj)</em>)^2.</li>
 </ol>
 </div></blockquote>
@@ -8549,7 +8549,7 @@ parameters <em>alpha</em> = 4 and <em>beta</em> = 4. Thus <em>Wj</em> ∼ Beta(4
 <dd><ul class="first last simple">
 <li>+1 signifies <em>x</em> is performing at least as good as <em>y</em> on
 criterion <em>j</em>,</li>
-<li>−1 signifies that <em>x</em> is not performing at least as good as <em>y</em> on
+<li>-1 signifies that <em>x</em> is not performing at least as good as <em>y</em> on
 criterion <em>j</em>,</li>
 <li>0 signifies that it is
 unclear whether, on criterion <em>j</em>, <em>x</em> is performing at least as good as <em>y</em>.</li>
@@ -8558,7 +8558,7 @@ unclear whether, on criterion <em>j</em>, <em>x</em> is performing at least as g
 </dl>
 <div class="figure align-center" id="rcharacteristic">
 <a class="reference internal image-reference" href="_images/rCharacteristic.png"><img alt="Bipolar characteristic function of *&lt;=_j* situation" src="_images/rCharacteristic.png" style="width: 450px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 73 </span><span class="caption-text">Bipolar characteristic function of <img class="math" src="_images/math/a206d99d103349167be1600e3244b673f91e5027.png" alt="(x \geq_j y)"/> situation</span></p>
+<p class="caption"><span class="caption-number">Fig. 73 </span><span class="caption-text">Bipolar-valued outranking characteristic function</span></p>
 </div>
 <p>Each criterion <em>j</em> in <em>F</em> contributes the random significance <em>Wj</em> of his ‘<em>at least as good as</em>’ characteristic <img class="math" src="_images/math/32d9b95491d571be421d262dcc4ec35cb88a0678.png" alt="r(x \geq_j y)"/> to the global characteristic <img class="math" src="_images/math/ced4452df8d52b143c2f5cf920ee4a99be3577d8.png" alt="\tilde{r}(x \geq y)"/> in the following way:</p>
 <p><img class="math" src="_images/math/c25172b5f22cfbf5a4f0e61b388379a7773ed47f.png" alt="\tilde{r}(x \geq y) \; = \; \sum_{j \in F} W_j \times r(x \geq_j y) )"/></p>
@@ -8568,9 +8568,9 @@ unclear whether, on criterion <em>j</em>, <em>x</em> is performing at least as g
 <p><img class="math" src="_images/math/4a841560e708e005318342f04ecdb15027149a37.png" alt="V(Y) = \sum_{j \in F} V(W_j)\times |r(x \geq_j y)|"/>.</p>
 <p>And the <strong>likelihood of validation</strong>, respectively <strong>invalidation</strong> of an ‘<em>at least as good as</em>’ situation, denoted <img class="math" src="_images/math/083fac074d2e0bce6cb21eec3430466fd36b5cbc.png" alt="lh(x \geq y)"/>,  may hence be assessed by the probability <em>P(Y&gt;0)</em> = 1.0 - <em>P(Y&lt;=0)</em> that <em>Y</em> takes a positive, resp. <em>P(Y&lt;0)</em> takes a negative value. In the bipolar-valued case here, we can judiciously make usage of the standard Gaussian <strong>error function</strong> , i.e. the bipolar <em>2P(Z)</em> - 1.0 version of the standard Gaussian <em>P(Z)</em> probabilty distribution function:</p>
 <p><img class="math" src="_images/math/322b8ffee0b99e343da0e3d139c204e1798a5ff9.png" alt="lh(x \geq y) \;=\; -\text{erf}\big(\frac{1}{\sqrt{2}}\frac{-E(Y)}{\sqrt{V(Y)}} \big)"/></p>
-<p>The range of the bipolar-valued <img class="math" src="_images/math/083fac074d2e0bce6cb21eec3430466fd36b5cbc.png" alt="lh(x \geq y)"/> hence becomes [−1.0;+1.0], and <img class="math" src="_images/math/77025768c1098780c66f0668c4e653c54bff2875.png" alt="-lh(x \geq y) \,=\, lh(x \not\geq y)"/> , i.e. a <strong>negative likelihood</strong> represents the likelihood of the correspondent <strong>negated</strong> ‘<em>at least as good as</em>’ situtation. A likelihood of +1.0 (resp. −1.0) means the corresponding preferential situation appears <strong>certainly validated</strong> (resp. <strong>invalidated</strong>).</p>
+<p>The range of the bipolar-valued <img class="math" src="_images/math/083fac074d2e0bce6cb21eec3430466fd36b5cbc.png" alt="lh(x \geq y)"/> hence becomes [-1.0;+1.0], and <img class="math" src="_images/math/77025768c1098780c66f0668c4e653c54bff2875.png" alt="-lh(x \geq y) \,=\, lh(x \not\geq y)"/> , i.e. a <strong>negative likelihood</strong> represents the likelihood of the correspondent <strong>negated</strong> ‘<em>at least as good as</em>’ situtation. A likelihood of +1.0 (resp. -1.0) means the corresponding preferential situation appears <strong>certainly validated</strong> (resp. <strong>invalidated</strong>).</p>
 <p><strong>Example</strong></p>
-<p>Let <em>x</em> and <em>y</em> be evaluated wrt 7 equi-significant criteria; Four criteria positively support that <em>x</em> is <em>as least as good performing</em> than <em>y</em> and three criteria support that <em>x</em> is <em>not at least as good</em> performang than <em>y</em>. Suppose <em>E(Wj)</em> = <em>w</em> for <em>j</em> = 1,…,7 and <em>Wj</em> ∼ Tr(0, <em>2w</em>, <em>w</em>) for <em>j</em> = 1,…7. The expected value of the global ‘<em>at least as good as</em>’ characteristic value becomes: <img class="math" src="_images/math/f205b129853db62a03a260839859d9abaf357fd5.png" alt="E\big(\tilde{r}(x \geq y)\big)\, = \, 4w − 3w = w"/> with a variance <img class="math" src="_images/math/e8b079ae799af2186757d61e991a18e51063fac1.png" alt="V\big(\tilde{r}(x \geq y)\big)\,=\, 7\frac{1}{6}w^2"/>.</p>
+<p>Let <em>x</em> and <em>y</em> be evaluated wrt 7 equi-significant criteria; Four criteria positively support that <em>x</em> is <em>as least as good performing</em> than <em>y</em> and three criteria support that <em>x</em> is <em>not at least as good</em> performang than <em>y</em>. Suppose <em>E(Wj)</em> = <em>w</em> for <em>j</em> = 1,…,7 and <em>Wj</em> ~ Tr(0, <em>2w</em>, <em>w</em>) for <em>j</em> = 1,…7. The expected value of the global ‘<em>at least as good as</em>’ characteristic value becomes: <img class="math" src="_images/math/a3c04fa60c81a1cdf28692151b610a03bcbcc103.png" alt="E\big(\tilde{r}(x \geq y)\big)\, = \, 4w - 3w = w"/> with a variance <img class="math" src="_images/math/e8b079ae799af2186757d61e991a18e51063fac1.png" alt="V\big(\tilde{r}(x \geq y)\big)\,=\, 7\frac{1}{6}w^2"/>.</p>
 <p>If <em>w</em> = 1, <img class="math" src="_images/math/9baffa7cecedb77630f1a045c8fec1b500824298.png" alt="E\big(\tilde{r}(x \geq y)\big)\, = \, 1"/> and <img class="math" src="_images/math/e3710818179ebc75de21a569ea94b14f3fadffee.png" alt="sd\big(\tilde{r}(x \geq y)\big)\,=\, 1.08"/>. By the CLT, the bipolar likelihood of the <em>at least as good</em> performing situation becomes: <img class="math" src="_images/math/d01b737a0e97857bf9fbe4f3086943a0b7b41eba.png" alt="lh(x \geq y)\,=\, 0.66"/>, which corresponds to a global support of (0.66 + 1.0)/2 = 83% of the criteria significance weights.</p>
 <p>A <em>Monte Carlo</em> simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see <a class="reference internal" href="#simullikelihood"><span class="std std-numref">Fig. 74</span></a>).</p>
 <div class="figure align-center" id="simullikelihood">

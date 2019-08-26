@@ -5728,7 +5728,7 @@ Semantics of the marginal bipolar-valued characteristic function:
    :width: 450 px
    :align: center
 
-   Bipolar characteristic function of :math:`(x \geq_j y)` situation
+   Bipolar-valued outranking characteristic function
 
 Each criterion *j* in *F* contributes the random significance *Wj* of his '*at least as good as*' characteristic :math:`r(x \geq_j y)` to the global characteristic :math:`\tilde{r}(x \geq y)` in the following way:
 
