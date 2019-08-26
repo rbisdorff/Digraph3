@@ -8557,7 +8557,7 @@ unclear whether, on criterion <em>j</em>, <em>x</em> is performing at least as g
 </dd>
 </dl>
 <div class="figure align-center" id="rcharacteristic">
-<a class="reference internal image-reference" href="_images/rCharacteristic.png"><img alt="Bipolar characteristic function of *&lt;=_j* situation" src="_images/rCharacteristic.png" style="width: 450px;" /></a>
+<a class="reference internal image-reference" href="_images/rCharacteristic.png"><img alt="Bipolar-valued outranking characteristic function" src="_images/rCharacteristic.png" style="width: 450px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 73 </span><span class="caption-text">Bipolar-valued outranking characteristic function</span></p>
 </div>
 <p>Each criterion <em>j</em> in <em>F</em> contributes the random significance <em>Wj</em> of his ‘<em>at least as good as</em>’ characteristic <img class="math" src="_images/math/32d9b95491d571be421d262dcc4ec35cb88a0678.png" alt="r(x \geq_j y)"/> to the global characteristic <img class="math" src="_images/math/ced4452df8d52b143c2f5cf920ee4a99be3577d8.png" alt="\tilde{r}(x \geq y)"/> in the following way:</p>
@@ -8574,7 +8574,7 @@ unclear whether, on criterion <em>j</em>, <em>x</em> is performing at least as g
 <p>If <em>w</em> = 1, <img class="math" src="_images/math/9baffa7cecedb77630f1a045c8fec1b500824298.png" alt="E\big(\tilde{r}(x \geq y)\big)\, = \, 1"/> and <img class="math" src="_images/math/e3710818179ebc75de21a569ea94b14f3fadffee.png" alt="sd\big(\tilde{r}(x \geq y)\big)\,=\, 1.08"/>. By the CLT, the bipolar likelihood of the <em>at least as good</em> performing situation becomes: <img class="math" src="_images/math/d01b737a0e97857bf9fbe4f3086943a0b7b41eba.png" alt="lh(x \geq y)\,=\, 0.66"/>, which corresponds to a global support of (0.66 + 1.0)/2 = 83% of the criteria significance weights.</p>
 <p>A <em>Monte Carlo</em> simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see <a class="reference internal" href="#simullikelihood"><span class="std std-numref">Fig. 74</span></a>).</p>
 <div class="figure align-center" id="simullikelihood">
-<a class="reference internal image-reference" href="_images/simulLikelihood.png"><img alt="Distribution of random outranking characteristic value" src="_images/simulLikelihood.png" style="width: 650px;" /></a>
+<a class="reference internal image-reference" href="_images/simulLikelihood.png"><img alt="Distribution of random outranking characteristic value" src="_images/simulLikelihood.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 74 </span><span class="caption-text">Distribution of 10 000 random outranking charactistic values</span></p>
 </div>
 <p>Indeed, <img class="math" src="_images/math/b3994a5cebbf77c6a02d0445e92000d2245284fd.png" alt="\tilde{r}(x \geq y) \leadsto Y = \mathcal{N}(1.03,1.089)"/>, with an empirical probability of observing a negative majority margin of about 17% (see <a class="reference internal" href="#simullikelihood"><span class="std std-numref">Fig. 74</span></a>).</p>
@@ -8640,7 +8640,10 @@ confidence level <em>alpha</em> %, if</p>
 12
 13
 14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g90</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">confidence</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g90</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">confidence</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g90</span>
 <span class="go">*------- Object instance description ------*</span>
 <span class="go">Instance class      : ConfidentBipolarOutrankingDigraph</span>
@@ -8651,10 +8654,13 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">Determinateness (%) : 62.07</span>
 <span class="go">Valuation domain    : [-1.00;1.00]</span>
 <span class="go">Attributes          : [&#39;name&#39;, &#39;bipolarConfidenceLevel&#39;,</span>
-<span class="go">                       &#39;distribution&#39;, &#39;betaParameter&#39;, &#39;actions&#39;, &#39;order&#39;,</span>
-<span class="go">                       &#39;valuationdomain&#39;, &#39;criteria&#39;, &#39;evaluation&#39;, &#39;concordanceRelation&#39;,</span>
-<span class="go">                       &#39;vetos&#39;, &#39;negativeVetos&#39;, &#39;largePerformanceDifferencesCount&#39;,</span>
-<span class="go">                       &#39;likelihoods&#39;, &#39;confidenceCutLevel&#39;, &#39;relation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;]</span>
+<span class="go">                       &#39;distribution&#39;, &#39;betaParameter&#39;, &#39;actions&#39;,</span>
+<span class="go">                       &#39;order&#39;, &#39;valuationdomain&#39;, &#39;criteria&#39;,</span>
+<span class="go">                       &#39;evaluation&#39;, &#39;concordanceRelation&#39;,</span>
+<span class="go">                       &#39;vetos&#39;, &#39;negativeVetos&#39;,</span>
+<span class="go">                       &#39;largePerformanceDifferencesCount&#39;,</span>
+<span class="go">                       &#39;likelihoods&#39;, &#39;confidenceCutLevel&#39;,</span>
+<span class="go">                       &#39;relation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;]</span>
 </pre></div>
 </td></tr></table></div>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -8752,7 +8758,7 @@ confidence level <em>alpha</em> %, if</p>
 </td></tr></table></div>
 <div class="figure align-center" id="confidentoutranking">
 <a class="reference internal image-reference" href="_images/confidentOutranking.png"><img alt="90%-confident strict outranking digraph" src="_images/confidentOutranking.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 75 </span><span class="caption-text">Strict 90%-confident outranking digraph example with triangular significance weights</span></p>
+<p class="caption"><span class="caption-number">Fig. 75 </span><span class="caption-text">Strict 90%-confident outranking digraph oriented by its prekernels</span></p>
 </div>
 <p>Now, what becomes this 90%-confident outranking digraph when we require a strnger confidence level of, say 99% ?</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1

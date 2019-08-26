@@ -5724,7 +5724,7 @@ Semantics of the marginal bipolar-valued characteristic function:
 
 .. Figure:: rCharacteristic.png
    :name: rCharacteristic
-   :alt: Bipolar characteristic function of *<=_j* situation
+   :alt: Bipolar-valued outranking characteristic function
    :width: 450 px
    :align: center
 
@@ -5759,7 +5759,7 @@ A *Monte Carlo* simulation with 10 000 runs empirically confirms the effective c
 .. Figure:: simulLikelihood.png
    :name: simulLikelihood
    :alt: Distribution of random outranking characteristic value
-   :width: 650 px
+   :width: 550 px
    :align: center
 
    Distribution of 10 000 random outranking charactistic values
@@ -5814,10 +5814,13 @@ Size                : 15
 Determinateness (%) : 62.07
 Valuation domain    : [-1.00;1.00]
 Attributes          : ['name', 'bipolarConfidenceLevel',
-                       'distribution', 'betaParameter', 'actions', 'order',
-                       'valuationdomain', 'criteria', 'evaluation', 'concordanceRelation',
-                       'vetos', 'negativeVetos', 'largePerformanceDifferencesCount',
-                       'likelihoods', 'confidenceCutLevel', 'relation', 'gamma', 'notGamma']
+                       'distribution', 'betaParameter', 'actions',
+		       'order', 'valuationdomain', 'criteria',
+		       'evaluation', 'concordanceRelation',
+                       'vetos', 'negativeVetos',
+		       'largePerformanceDifferencesCount',
+                       'likelihoods', 'confidenceCutLevel',
+		       'relation', 'gamma', 'notGamma']
 
 >>> g90.showRelationTable(LikelihoodDenotation=True)
 * ---- Outranking Relation Table -----
@@ -5877,7 +5880,7 @@ dot -Grankdir=BT -Tpng confidentOutranking.dot -o confidentOutranking.png
    :width: 350 px
    :align: center
 
-   Strict 90%-confident outranking digraph example with triangular significance weights
+   Strict 90%-confident outranking digraph oriented by its prekernels
 
 Now, what becomes this 90%-confident outranking digraph when we require a strnger confidence level of, say 99% ?
 

@@ -7596,7 +7596,7 @@ A \sphinxstyleemphasis{Monte Carlo} simulation with 10 000 runs empirically conf
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{simulLikelihood}.png}
+\noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{simulLikelihood}.png}
 \caption{Distribution of 10 000 random outranking charactistic values}\label{\detokenize{tutorial:simullikelihood}}\end{figure}
 
 Indeed, \(\tilde{r}(x \geq y) \leadsto Y = \mathcal{N}(1.03,1.089)\), with an empirical probability of observing a negative majority margin of about 17\% (see \hyperref[\detokenize{tutorial:simullikelihood}]{Fig.\@ \ref{\detokenize{tutorial:simullikelihood}}}).
@@ -7661,10 +7661,13 @@ For the corresponding confident outranking digraph, we require a confidence leve
 \PYG{g+go}{Determinateness (\PYGZpc{}) : 62.07}
 \PYG{g+go}{Valuation domain    : [\PYGZhy{}1.00;1.00]}
 \PYG{g+go}{Attributes          : [\PYGZsq{}name\PYGZsq{}, \PYGZsq{}bipolarConfidenceLevel\PYGZsq{},}
-\PYG{g+go}{                       \PYGZsq{}distribution\PYGZsq{}, \PYGZsq{}betaParameter\PYGZsq{}, \PYGZsq{}actions\PYGZsq{}, \PYGZsq{}order\PYGZsq{},}
-\PYG{g+go}{                       \PYGZsq{}valuationdomain\PYGZsq{}, \PYGZsq{}criteria\PYGZsq{}, \PYGZsq{}evaluation\PYGZsq{}, \PYGZsq{}concordanceRelation\PYGZsq{},}
-\PYG{g+go}{                       \PYGZsq{}vetos\PYGZsq{}, \PYGZsq{}negativeVetos\PYGZsq{}, \PYGZsq{}largePerformanceDifferencesCount\PYGZsq{},}
-\PYG{g+go}{                       \PYGZsq{}likelihoods\PYGZsq{}, \PYGZsq{}confidenceCutLevel\PYGZsq{}, \PYGZsq{}relation\PYGZsq{}, \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
+\PYG{g+go}{                       \PYGZsq{}distribution\PYGZsq{}, \PYGZsq{}betaParameter\PYGZsq{}, \PYGZsq{}actions\PYGZsq{},}
+\PYG{g+go}{                       \PYGZsq{}order\PYGZsq{}, \PYGZsq{}valuationdomain\PYGZsq{}, \PYGZsq{}criteria\PYGZsq{},}
+\PYG{g+go}{                       \PYGZsq{}evaluation\PYGZsq{}, \PYGZsq{}concordanceRelation\PYGZsq{},}
+\PYG{g+go}{                       \PYGZsq{}vetos\PYGZsq{}, \PYGZsq{}negativeVetos\PYGZsq{},}
+\PYG{g+go}{                       \PYGZsq{}largePerformanceDifferencesCount\PYGZsq{},}
+\PYG{g+go}{                       \PYGZsq{}likelihoods\PYGZsq{}, \PYGZsq{}confidenceCutLevel\PYGZsq{},}
+\PYG{g+go}{                       \PYGZsq{}relation\PYGZsq{}, \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
 \end{sphinxVerbatim}
 
 \fvset{hllines={, ,}}%
@@ -7730,7 +7733,7 @@ We may draw the corresponding strict 90\%-confident outranking digraph, oriented
 \capstart
 
 \noindent\sphinxincludegraphics[width=350\sphinxpxdimen]{{confidentOutranking}.png}
-\caption{Strict 90\%-confident outranking digraph example with triangular significance weights}\label{\detokenize{tutorial:confidentoutranking}}\end{figure}
+\caption{Strict 90\%-confident outranking digraph oriented by its prekernels}\label{\detokenize{tutorial:confidentoutranking}}\end{figure}
 
 Now, what becomes this 90\%-confident outranking digraph when we require a strnger confidence level of, say 99\% ?
 
