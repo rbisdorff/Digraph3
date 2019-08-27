@@ -7495,7 +7495,7 @@ When modelling preferences following the outranking approach, the signs of the m
 
 To answer this question, one usually requires \sphinxstyleemphasis{qualified} majority margins for confirming outranking situations. But how to choose such a qualifying majority level: two third, three fourth of the significances ?
 
-In this turorial we propose to link the qualifying significance majority with a required alpha\%-confidence level. We model therefore the significance weights as random variables following more or less widespread distributions around an average significance value that corresponds to the given deterministic weight. As the bipolar-valued random credibility of an outranking statement hence results from the simple sum of positive or negative independent random variables, we may apply the Central Limit Theorem (CLT) for computing the \sphinxstyleemphasis{bipolar likelihood} that the expected majority margin will indeed be positive, respectively negative.
+In this tutorial we propose to link the qualifying significance majority with a required alpha\%-confidence level. We model therefore the significance weights as random variables following more or less widespread distributions around an average significance value that corresponds to the given deterministic weight. As the bipolar-valued random credibility of an outranking statement hence results from the simple sum of positive or negative independent random variables, we may apply the Central Limit Theorem (CLT) for computing the \sphinxstyleemphasis{bipolar likelihood} that the expected majority margin will indeed be positive, respectively negative.
 
 
 \subsubsection{Modelling uncertain criteria significances}
@@ -7538,7 +7538,7 @@ It is worthwhile noticing that these four uncertainty models all admit the same 
 
 \subsubsection{Bipolar-valued likelihood of ‘’at least as good as ” situations}
 \label{\detokenize{tutorial:bipolar-valued-likelihood-of-at-least-as-good-as-situations}}
-Let \sphinxstyleemphasis{A} = \{\sphinxstyleemphasis{x}, \sphinxstyleemphasis{y}, \sphinxstyleemphasis{z},…\} be a finite set of \sphinxstyleemphasis{n} potential decision actions, evaluated on \sphinxstyleemphasis{F} = \{1,…, \sphinxstyleemphasis{m}\}, a \sphinxstyleemphasis{finite} and \sphinxstyleemphasis{coherent} family of \sphinxstyleemphasis{m} performance criteria. On each criterion \sphinxstyleemphasis{j} in \sphinxstyleemphasis{F}, the decision actions are evaluated on a real performance scale {[}0; \sphinxstyleemphasis{Mj} {]}, supporting an upper-closed indifference threshold \sphinxstyleemphasis{indj} and a lower-closed preference threshold \sphinxstyleemphasis{prj} such that 0 \textless{}= \sphinxstyleemphasis{indj} \textless{} \sphinxstyleemphasis{prj} \textless{}= \sphinxstyleemphasis{Mj}. The marginal performance of object \sphinxstyleemphasis{x} on criterion \sphinxstyleemphasis{j} is denoted \sphinxstyleemphasis{xj}. Each criterion \sphinxstyleemphasis{j} is thus characterizing a marginal double threshold order \(\geq_j\) on \sphinxstyleemphasis{A} (see \hyperref[\detokenize{tutorial:rcharacteristic}]{Fig.\@ \ref{\detokenize{tutorial:rcharacteristic}}}):
+Let \sphinxstyleemphasis{A} = \{\sphinxstyleemphasis{x}, \sphinxstyleemphasis{y}, \sphinxstyleemphasis{z},…\} be a finite set of \sphinxstyleemphasis{n} potential decision actions, evaluated on \sphinxstyleemphasis{F} = \{1,…, \sphinxstyleemphasis{m}\}, a \sphinxstyleemphasis{finite} and \sphinxstyleemphasis{coherent} family of \sphinxstyleemphasis{m} performance criteria. On each criterion \sphinxstyleemphasis{j} in \sphinxstyleemphasis{F}, the decision actions are evaluated on a real performance scale {[}0; \sphinxstyleemphasis{Mj} {]}, supporting an upper-closed indifference threshold \sphinxstyleemphasis{indj} and a lower-closed preference threshold \sphinxstyleemphasis{prj} such that 0 \textless{}= \sphinxstyleemphasis{indj} \textless{} \sphinxstyleemphasis{prj} \textless{}= \sphinxstyleemphasis{Mj}. The marginal performance of object \sphinxstyleemphasis{x} on criterion \sphinxstyleemphasis{j} is denoted \sphinxstyleemphasis{xj}. Each criterion \sphinxstyleemphasis{j} is thus characterising a marginal double threshold order \(\geq_j\) on \sphinxstyleemphasis{A} (see \hyperref[\detokenize{tutorial:rcharacteristic}]{Fig.\@ \ref{\detokenize{tutorial:rcharacteristic}}}):
 
 \(r(x \geq_j y) \; = \; \begin{cases} +1 \quad \text{if} \quad x_j - y_j \leq ind_j,\\  -1 \quad \text{if} \quad x_j - y_j \leq pr_j,\\ 0 \quad \text{otherwise}. \end{cases}\)
 \begin{description}
@@ -7578,7 +7578,7 @@ From the \sphinxstyleemphasis{Central Limit Theorem} (CLT), we know that such a 
 
 \(V(Y) = \sum_{j \in F} V(W_j)\times |r(x \geq_j y)|\).
 
-And the \sphinxstylestrong{likelihood of validation}, respectively \sphinxstylestrong{invalidation} of an ‘\sphinxstyleemphasis{at least as good as}’ situation, denoted \(lh(x \geq y)\),  may hence be assessed by the probability \sphinxstyleemphasis{P(Y\textgreater{}0)} = 1.0 - \sphinxstyleemphasis{P(Y\textless{}=0)} that \sphinxstyleemphasis{Y} takes a positive, resp. \sphinxstyleemphasis{P(Y\textless{}0)} takes a negative value. In the bipolar-valued case here, we can judiciously make usage of the standard Gaussian \sphinxstylestrong{error function} , i.e. the bipolar \sphinxstyleemphasis{2P(Z)} - 1.0 version of the standard Gaussian \sphinxstyleemphasis{P(Z)} probabilty distribution function:
+And the \sphinxstylestrong{likelihood of validation}, respectively \sphinxstylestrong{invalidation} of an ‘\sphinxstyleemphasis{at least as good as}’ situation, denoted \(lh(x \geq y)\),  may hence be assessed by the probability \sphinxstyleemphasis{P(Y\textgreater{}0)} = 1.0 - \sphinxstyleemphasis{P(Y\textless{}=0)} that \sphinxstyleemphasis{Y} takes a positive, resp. \sphinxstyleemphasis{P(Y\textless{}0)} takes a negative value. In the bipolar-valued case here, we can judiciously make usage of the standard Gaussian \sphinxstylestrong{error function} , i.e. the bipolar \sphinxstyleemphasis{2P(Z)} - 1.0 version of the standard Gaussian \sphinxstyleemphasis{P(Z)} probability distribution function:
 
 \(lh(x \geq y) \;=\; -\text{erf}\big(\frac{1}{\sqrt{2}}\frac{-E(Y)}{\sqrt{V(Y)}} \big)\)
 
@@ -7586,11 +7586,11 @@ The range of the bipolar-valued \(lh(x \geq y)\) hence becomes {[}-1.0;+1.0{]}, 
 
 \sphinxstylestrong{Example}
 
-Let \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y} be evaluated wrt 7 equi-significant criteria; Four criteria positively support that \sphinxstyleemphasis{x} is \sphinxstyleemphasis{as least as good performing} than \sphinxstyleemphasis{y} and three criteria support that \sphinxstyleemphasis{x} is \sphinxstyleemphasis{not at least as good} performang than \sphinxstyleemphasis{y}. Suppose \sphinxstyleemphasis{E(Wj)} = \sphinxstyleemphasis{w} for \sphinxstyleemphasis{j} = 1,…,7 and \sphinxstyleemphasis{Wj} \textasciitilde{} Tr(0, \sphinxstyleemphasis{2w}, \sphinxstyleemphasis{w}) for \sphinxstyleemphasis{j} = 1,…7. The expected value of the global ‘\sphinxstyleemphasis{at least as good as}’ characteristic value becomes: \(E\big(\tilde{r}(x \geq y)\big)\, = \, 4w - 3w = w\) with a variance \(V\big(\tilde{r}(x \geq y)\big)\,=\, 7\frac{1}{6}w^2\).
+Let \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y} be evaluated wrt 7 equisignificant criteria; Four criteria positively support that \sphinxstyleemphasis{x} is \sphinxstyleemphasis{as least as good performing} than \sphinxstyleemphasis{y} and three criteria support that \sphinxstyleemphasis{x} is \sphinxstyleemphasis{not at least as good} performing than \sphinxstyleemphasis{y}. Suppose \sphinxstyleemphasis{E(Wj)} = \sphinxstyleemphasis{w} for \sphinxstyleemphasis{j} = 1,…,7 and \sphinxstyleemphasis{Wj} \textasciitilde{} Tr(0, \sphinxstyleemphasis{2w}, \sphinxstyleemphasis{w}) for \sphinxstyleemphasis{j} = 1,…7. The expected value of the global ‘\sphinxstyleemphasis{at least as good as}’ characteristic value becomes: \(E\big(\tilde{r}(x \geq y)\big)\, = \, 4w - 3w = w\) with a variance \(V\big(\tilde{r}(x \geq y)\big)\,=\, 7\frac{1}{6}w^2\).
 
 If \sphinxstyleemphasis{w} = 1, \(E\big(\tilde{r}(x \geq y)\big)\, = \, 1\) and \(sd\big(\tilde{r}(x \geq y)\big)\,=\, 1.08\). By the CLT, the bipolar likelihood of the \sphinxstyleemphasis{at least as good} performing situation becomes: \(lh(x \geq y)\,=\, 0.66\), which corresponds to a global support of (0.66 + 1.0)/2 = 83\% of the criteria significance weights.
 
-A \sphinxstyleemphasis{Monte Carlo} simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see \hyperref[\detokenize{tutorial:simullikelihood}]{Fig.\@ \ref{\detokenize{tutorial:simullikelihood}}} realized with \sphinxstyleemphasis{gretl} %
+A \sphinxstyleemphasis{Monte Carlo} simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see \hyperref[\detokenize{tutorial:simullikelihood}]{Fig.\@ \ref{\detokenize{tutorial:simullikelihood}}} realised with \sphinxstyleemphasis{gretl} %
 \begin{footnote}[12]\sphinxAtStartFootnote
 The Gnu Regression, Econometrics and Time-series Library \sphinxurl{http://gretl.sourceforge.net/} .
 %
@@ -7601,7 +7601,7 @@ The Gnu Regression, Econometrics and Time-series Library \sphinxurl{http://gretl
 \capstart
 
 \noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{simulLikelihood}.png}
-\caption{Distribution of 10 000 random outranking charactistic values}\label{\detokenize{tutorial:simullikelihood}}\end{figure}
+\caption{Distribution of 10 000 random outranking characteristic values}\label{\detokenize{tutorial:simullikelihood}}\end{figure}
 
 Indeed, \(\tilde{r}(x \geq y) \leadsto Y = \mathcal{N}(1.03,1.089)\), with an empirical probability of observing a negative majority margin of about 17\%.
 
@@ -7735,7 +7735,7 @@ We may draw the corresponding strict 90\%-confident outranking digraph, oriented
 \noindent\sphinxincludegraphics[width=350\sphinxpxdimen]{{confidentOutranking}.png}
 \caption{Strict 90\%-confident outranking digraph oriented by its prekernels}\label{\detokenize{tutorial:confidentoutranking}}\end{figure}
 
-Now, what becomes this 90\%-confident outranking digraph when we require a strnger confidence level of, say 99\% ?
+Now, what becomes this 90\%-confident outranking digraph when we require a stronger confidence level of, say 99\% ?
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -7765,8 +7765,6 @@ Now, what becomes this 90\%-confident outranking digraph when we require a strng
 \PYG{g+go}{Confident majority : 0.29 (64.3\PYGZpc{})}
 \PYG{g+go}{Determinateness    : 0.13 (56.6\PYGZpc{})}
 \end{sphinxVerbatim}
-
-At 99\% confidence, the minimal required significance majority support amounts to 64.3\% (see Line 24 above). As a result, most outranking situations don’t get anymore validated, like the outranking situations between action ‘\sphinxstyleemphasis{a1}’ and actions ‘\sphinxstyleemphasis{a3}’, ‘\sphinxstyleemphasis{a4}’, ‘\sphinxstyleemphasis{a5}’ and ‘\sphinxstyleemphasis{a6}’ (see Line 5 above). The overall epistemic determination of the digraph consequently drops from 62.1\% to 56.6\% (see Line 25).
 
 Finally, what becomes the previous 90\%-confident outranking digraph if the uncertainty concerning the criteria significance weights is modelled with a larger variance, like \sphinxstyleemphasis{uniform} variates.
 
@@ -7801,7 +7799,7 @@ Finally, what becomes the previous 90\%-confident outranking digraph if the unce
 
 Despite lower likelihood values (see the \sphinxstyleemphasis{g90} relation table above), we keep the same confident majority level of 57.1\% (see Line 24 above)and, hence, also the same 90\%-confident outranking digraph.
 
-For concluding, it is worthwhile noticing again that it is the \sphinxstyleemphasis{neutral} value of our bipolar-valued epistemic logic that allows us to easily handle alpha\% confidence or not of outranking situations when confronted with uncertain criteria significances. Remarkable furthermore is the usage, the standard Gaussian error function provides by delivering \sphinxstyleemphasis{signed likelihood values} immediatley concerning either a \sphinxstyleemphasis{positive} relational statement, or when negative, its negated version.
+For concluding, it is worthwhile noticing again that it is the \sphinxstyleemphasis{neutral} value of our bipolar-valued epistemic logic that allows us to easily handle alpha\% confidence or not of outranking situations when confronted with uncertain criteria significances. Remarkable furthermore is the usage, the standard Gaussian error function provides by delivering \sphinxstyleemphasis{signed likelihood values} immediately concerning either a \sphinxstyleemphasis{positive} relational statement, or when negative, its negated version.
 
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
 
