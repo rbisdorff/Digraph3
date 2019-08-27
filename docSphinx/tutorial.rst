@@ -1,22 +1,17 @@
 
-=====================================
+====================================
  Tutorials of the Digraph3 resources
-=====================================
+====================================
 
-.. only:: latex
+**Preface**
 
-   Preface
-   .......
+These pages contain a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources.
 
-   This PDF document contains a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources ( see html documentation here <https://digraph3.readthedocs.io/en/latest/index.html> for the corresponding HTML version).
+Some of the tutorials are problem oriented and show how to compute the potential winner(s) of an election, how to build a best choice recommendation, or how to rate or linearly rank with multiple incommensurable ranking criteria.
 
-   Some of the tutorials are problem oriented and show how to compute the potential winner(s) of an election, how to build a best choice recommendation, or how to rate or linearly rank with multiple incommensurable ranking criteria.
+More graph theoretical tutorials follow. One on working with undirected graphs, followed by a tutorial on how to compute non isomorphic maximal independent sets (kernels) in the n-cycle graph. Another tutorial is furthermore devoted on how to compute more generally kernels in graphs, digraphs and more specifically initial and terminal kernels in outranking digraphs. Special tutorials are devoted to perfect graphs, like split, interval or permutation graphs, and to tree-graphs and forests.
 
-   More graph theoretical tutorials follow. One on working with undirected graphs, followed by a tutorial on how to compute non isomorphic maximal independent sets (kernels) in the n-cycle graph. Another tutorial is furthermore devoted on how to compute more generally kernels in graphs, digraphs and more specifically initial and terminal kernels in outranking digraphs.
-
-   Special tutorials are devoted to perfect graphs, like split, interval or permutation graphs, and to tree-graphs and forests.
-
-   Finally, we provide an insight in computational enhancements one may get when working in a bipolar-valued epistemic logical framework, like easy coping with missing data and uncertain criteria significance weights, computing valued ordinal correlations between bipolar-valued outranking digraphs, and solving bipolar-valued Berge kernel equation systems.
+Finally, we provide an insight in computational enhancements one may get when working in a bipolar-valued epistemic logical framework, like easily coping with missing data and uncertain criterion significance weights, computing valued ordinal correlations between bipolar-valued outranking digraphs, and solving bipolar-valued Berge kernel equation systems.
    
 :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg FSTC/CSC
 :Version: Revision: Python 3.7
@@ -24,8 +19,10 @@
 
 .. _Tutorial-label:
 
-.. contents:: List of Digraph3 tutorials
-	:depth: 1
+.. only:: html
+
+    .. contents:: Content Table
+	:depth: 2
 	:local:
 
 .. highlight:: python
