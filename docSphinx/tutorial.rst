@@ -5660,7 +5660,6 @@ The adjacency matrix of a symmetric digraph staying *unchanged* by the transposi
 
 It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this dual fixpoint algorithm. To implement such kind of algorithms without a logical **neutral term** would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial *impossibility theorems* and *dubious logical results* come up. 
 
-
 .. _Bipolar-Valued-Likelihood-Tutorial-label:
 
 On confident outrankings with uncertain criteria significances
@@ -5911,7 +5910,7 @@ Determinateness    : 0.13 (56.6%)
 
 At 99% confidence, the minimal required significance majority support amounts to 64.3% (see Line 24 above). As a result, most outranking situations don't get anymore validated, like the outranking situations between action '*a1*' and actions '*a3*', '*a4*', '*a5*' and '*a6*' (see Line 5 above). The overall epistemic determination of the digraph consequently drops from 62.1% to 56.6% (see Line 25).
 
-Finally, what becomes the previous 90%-confdent outranking digraph if the uncertainty concerning the criteria significance weights is modelled with a larger variance, like *uniform* variates.
+Finally, what becomes the previous 90%-confident outranking digraph if the uncertainty concerning the criteria significance weights is modelled with a larger variance, like *uniform* variates.
 
 >>> gu90 = ConfidentBipolarOutrankingDigraph(t,confidence=90,distribution='uniform')
 >>> gu90.showRelationTable()
