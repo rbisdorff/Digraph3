@@ -60,7 +60,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{August 28, 2019}
+\date{August 30, 2019}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -7711,6 +7711,8 @@ Now, what becomes this 90\%-confident outranking digraph when we require a stron
 \PYG{g+go}{Confident majority : 0.29 (64.3\PYGZpc{})}
 \PYG{g+go}{Determinateness    : 0.13 (56.6\PYGZpc{})}
 \end{sphinxVerbatim}
+
+At 99\% confidence, the minimal required significance majority support amounts to 64.3\% (see Line 24 above). As a result, most outranking situations don’t get anymore validated, like the outranking situations between action ‘\sphinxstyleemphasis{a1}’ and actions ‘\sphinxstyleemphasis{a3}’, ‘\sphinxstyleemphasis{a4}’, ‘\sphinxstyleemphasis{a5}’ and ‘\sphinxstyleemphasis{a6}’ (see Line 5 above). The overall epistemic determination of the digraph consequently drops from 62.1\% to 56.6\% (see Line 25).
 
 Finally, what becomes the previous 90\%-confident outranking digraph if the uncertainty concerning the criteria significance weights is modelled with a larger variance, like \sphinxstyleemphasis{uniform} variates.
 
