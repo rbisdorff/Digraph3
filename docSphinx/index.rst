@@ -35,11 +35,14 @@ tableaux. There is also a tutorial provided on undirected graphs. Some
 tutorials are problem oriented and show how to compute the winner of
 an election, how to build a best choice recommendation, or how to
 linearly rank or rate with multiple incommensurable performance
-criteria. Other tutorials concern more specifically operational
+criteria.
+
+Other tutorials concern more specifically operational
 aspects of computing maximal independent sets (MISs) and kernels in
-graphs and digraphs. The tutorial about split, interval and permutation graphs
-is inspired by Martin Golumbic's book on *Algorithmic Graph Theory and Perfect Graphs* ([3]_). Finally, we provide a tutorial on
-tree graphs and spanning forests and three pearls of bipolar epistemic logic.
+graphs and digraphs. The tutorial about split, interval and permutation graphs is inspired by Martin Golumbic's book on *Algorithmic Graph Theory and Perfect Graphs* ([3]_). We also provide a tutorial on
+tree graphs and spanning forests.
+
+Finally we discuss four pearls of bipolar epistemic logic, namely coping with missing data and logical indeterminateness and computing ordinal bipolar-valued correlation indexes, bipolar-valued digraph kernel membership vectors, and bipolar-valued outranking likelihoods.
 
 .. toctree:: tutorial
    :maxdepth: 2

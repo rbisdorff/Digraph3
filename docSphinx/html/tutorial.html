@@ -7603,7 +7603,7 @@ best covered terminal kernel</span></p>
 <p>Yet, we still have to recover its corresponding <em>Prüfer</em> code. Therefore, we may use the <a class="reference internal" href="techDoc.html#graphs.RandomTree.tree2Pruefer" title="graphs.RandomTree.tree2Pruefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">graphs.RandomTree.tree2Pruefer()</span></code></a> method.</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
-3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">RandomGraph</span>
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">RandomTree</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">RandomTree</span><span class="o">.</span><span class="n">tree2Pruefer</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">[&#39;v6&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v5&#39;]</span>
 </pre></div>
@@ -8922,6 +8922,7 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">Determinateness    : 0.13 (56.6%)</span>
 </pre></div>
 </td></tr></table></div>
+<p>At 99% confidence, the minimal required significance majority support amounts to 64.3% (see Line 24 above). As a result, most outranking situations don’t get anymore validated, like the outranking situations between action ‘<em>a1</em>’ and actions ‘<em>a3</em>’, ‘<em>a4</em>’, ‘<em>a5</em>’ and ‘<em>a6</em>’ (see Line 5 above). The overall epistemic determination of the digraph consequently drops from 62.1% to 56.6% (see Line 25).</p>
 <p>Finally, what becomes the previous 90%-confident outranking digraph if the uncertainty concerning the criteria significance weights is modelled with a larger variance, like <em>uniform</em> variates.</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
