@@ -5,7 +5,7 @@
 
 **Preface**
 
-These pages contain a set of tutorials introducing the main objects like digraphs, outranking digraphs, performance tableaux and voting profiles available in the Digraph3 Python software resources.
+This document contains first a set of tutorials introducing the main objects available in the Digraph3 Python software resources, like digraphs, outranking digraphs, performance tableaux and voting profiles.
 
 Some of the tutorials are problem oriented and show how to compute the potential winner(s) of an election, how to build a best choice recommendation, or how to rate or linearly rank with multiple incommensurable ranking criteria.
 
