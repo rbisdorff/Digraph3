@@ -3886,6 +3886,7 @@ Initial and terminal kernels
 ----------------------------
 
 In an oriented graph context, the internal stability condition of the kernel concept remains untouched; however, the external stability condition gets indeed split up by the *orientation* into two lateral cases:
+
      1. A **dominant** stability condition, where each non selected node is *dominated* by at least one member of the kernel;
      2. An **absorbant** stability condition, where each non selected node is *absorbed* by at least one member of the kernel.
 
@@ -4751,12 +4752,13 @@ We may finally check that, for instance, the two permutations [2, 3, 4, 8, 6, 1,
 
 .. Figure:: isomorphicPerms.png
     :alt: Isomorphic permutation graphs
+    :name: isomorphicPermGraphs
     :width: 700 px
     :align: center
 
     Isomorphic permutation graphs
 
-And, we recover indeed two *isomorphic copies* of the original random graph (see :numref:`randomGraph4335`).
+And, we recover indeed two *isomorphic copies* of the original random graph (compare :numref:`isomorphicPermGraphs` with :numref:`randomGraph4335`).
 
 Back to :ref:`Content Table <Tutorial-label>`
 
