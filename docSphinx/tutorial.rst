@@ -22,11 +22,11 @@ Finally, we provide an insight in computational enhancements one may get when wo
 .. only:: html
 
     .. contents:: Content Table
-	:depth: 2
+	:depth: 1
 	:local:
 
 .. highlight:: python
-	:linenothreshold: 1
+	:linenothreshold: 2
 
 .. _Digraphs-Tutorial-label:
 
@@ -61,7 +61,7 @@ Using the Digraph3 modules is easy. You only need to have installed on your syst
 
 Several download options (easiest under Linux or Mac OS-X) are given.
 
-1. Either , by using a git client either, from github
+1. Either, by using a git client either, from github
 
      .. code-block:: bash
    
