@@ -12,105 +12,89 @@ center = function(x) {
   (x-colMeans(x))
 }
 ####
-pcacov = function(Xin) {
-X = as.matrix(Xin)
-# cov is working on the columns of t(X)
-A = cov(t(X))
+pcacov = function(Min,linewise=FALSE) {
+M = as.matrix(Min)
+# cov is by default working on the columns of M
+if (linewise)
+    { A = cov(t(M)) }
+else
+    { A = cov(M) } 
 # eigenvectors and values
 E = eigen(A, symmetric=TRUE)
 P = E$values * t(E$vectors)
 valprop = E$values/sum(E$values)
-pcaRes = list(x=X,eig=E,a=A,P=P,val=valprop,cr=0)
+pcaRes = list(x=M,eig=E,a=A,P=P,val=valprop,cr=0)
 pcaRes
 }
 ####
-pcacor = function(Xin) {
-X = as.matrix(Xin)
-# cor is working on the columns of t(X)
-A = cor(t(X))
-# eigenvectors and values
+pcac = function(Min,linewise=TRUE) {
+# center
+M = as.matrix(center(Min))
+# covariance of the columns
+if (linewise)
+    { A = M %*% t(M) }
+else
+    { A = t(M) %*% M }
+# eigen vectors and values
 E = eigen(A, symmetric=TRUE)
 P = E$values * t(E$vectors)
 valprop = E$values/sum(E$values)
-pcaRes = list(x=X,eig=E,a=A,P=P,val=valprop,cr=0)
+pcaRes = list(x=M,eig=E,a=A,P=P,val=valprop,cr=0)
 pcaRes
 }
 ####
-pcac = function(Xin) {
+pcacr = function(Min,linewise=TRUE) {
 # center and reduce 
-X = as.matrix(center(Xin))
-# covariance of the lines of X
-A = X %*% t(X)
+M = as.matrix(centerReduce(Min))
+# covariance
+if (linewise)
+   {A = M %*% t(M) }
+else
+   {A = t(M) %*% M}
 # eigenvectors and values
 E = eigen(A, symmetric=TRUE)
 P = E$values * t(E$vectors)
 valprop = E$values/sum(E$values)
-pcaRes = list(x=X,eig=E,a=A,P=P,val=valprop,cr=0)
+pcaRes = list(x=M,eig=E,a=A,P=P,val=valprop,cr=0)
 pcaRes
 }
 ####
-pcacr = function(Xin) {
-# center and reduce 
-X = as.matrix(centerReduce(Xin))
-# covariance of the lines
-A = X %*% t(X)
-# eigenvectors and values
+pca = function(Min,linewise=TRUE,covariance=TRUE) {
+# no transformation
+M = as.matrix(Min)
+# covariance on the columns
+if (linewise)
+  {if (covariance)
+    {A = M %*% t(M)}
+   else 
+    {A = M} }
+else
+  {if (covariance)
+    { A = t(M) %*% M }
+   else 
+    {A = t(M)} }
+# eigen vectors X and eigenvalues 
 E = eigen(A, symmetric=TRUE)
 P = E$values * t(E$vectors)
 valprop = E$values/sum(E$values)
-pcaRes = list(x=X,eig=E,a=A,P=P,val=valprop,cr=0)
+pcaRes = list(x=M,eig=E,a=A,P=P,val=valprop)
 pcaRes
 }
 ####
-pca = function(Xin) {
-# center and reduce 
-X = as.matrix(Xin)
-# covariance on the lines
-A = X %*% t(X)
-# eigenvectors and values
-E = eigen(A, symmetric=TRUE)
-P = E$values * t(E$vectors)
-valprop = E$values/sum(E$values)
-pcaRes = list(x=X,eig=E,a=A,P=P,val=valprop,cr=0)
-pcaRes
-}
-####
-pcachisq = function(Xin) {
-# center and reduce 
-X = chisq.test(as.matrix(Xin))$expected
-# covariance on the lines
-A = X %*% t(X)
-# eigenvectors and values
-E = eigen(A, symmetric=FALSE)
-P = E$values * t(E$vectors)
-valprop = E$values/sum(E$values)
-pcaRes = list(x=X,eig=E,a=A,P=P,val=valprop,cr=1)
-pcaRes
-}
-####
-pcaPlot = function(pcaRes) {
+pcaPlot = function(pcaRes,a1=1,a2=2,a3=3) {
 val = pcaRes$val
 nval = length(val)
 par(mfrow=c(2,2))
-if (pcaRes$cr == 0){ 
-a1 = 1
-a2 = 2
-a3 = 3}
-else {
-a1 = 2
-a2 = 3
-a3 = 4
-}
 plot(pcaRes$P[a1,],pcaRes$P[a2,],"n",xlab=paste("axis 1:",val[a1]*100,"%"),ylab=paste("axis 2:",val[a2]*100,"%"),asp=1)
-text(pcaRes$P[a1,],pcaRes$P[a2,],rownames(pcaRes$x))
+text(pcaRes$P[a1,],pcaRes$P[a2,],rownames(pcaRes$a))
 abline(h=0,lty=2,col="gray")
 abline(v=0,lty=2,col="gray")
 plot(pcaRes$P[a2,],pcaRes$P[a3,],"n",xlab=paste("axis 2:",val[a2]*100,"%"),ylab=paste("axis 3:",val[a3]*100,"%"),asp=1)
-text(pcaRes$P[a2,],pcaRes$P[a3,],rownames(pcaRes$x))
+text(pcaRes$P[a2,],pcaRes$P[a3,],rownames(pcaRes$a))
 abline(h=0,lty=2,col="gray")
 abline(v=0,lty=2,col="gray")
 plot(pcaRes$P[a1,],pcaRes$P[a3,],"n",xlab=paste("axis 1:",val[a1]*100,"%"),ylab=paste("axis 3:",val[a3]*100,"%"),asp=1)
-text(pcaRes$P[a1,],pcaRes$P[a3,],rownames(pcaRes$x))
+text(pcaRes$P[a1,],pcaRes$P[a3,],rownames(pcaRes$a))
 abline(h=0,v=0,lty=2,col="gray")
 barplot(val[a1:nval]*100,names.arg=a1:nval,main="Axis inertia (in %)",col="orangered")
 }
