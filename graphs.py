@@ -2245,8 +2245,8 @@ class IntervalIntersectionsGraph(Graph):
         self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
-class RandomIntervalIntersectionsGraph(Graph):
-    """ Random generator for LineIntersectionsGraph intances."""
+class RandomIntervalIntersectionsGraph(IntervalIntersectionsGraph):
+    """ Random generator for IntervalIntersectionsGraph intances."""
     def __init__(self,order=5,seed=None,m=0,M=10,Debug=False):
         import random
         random.seed(seed)
