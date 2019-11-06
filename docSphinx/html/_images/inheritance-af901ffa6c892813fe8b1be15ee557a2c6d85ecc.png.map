@@ -1,0 +1,28 @@
+<map id="inheritance2573f8af4a" name="inheritance2573f8af4a">
+<area shape="rect" id="node1" href="#graphs.BestDeterminedSpanningForest" target="_top" title="Constructing the most determined spanning tree (or forest if not connected)" alt="" coords="579,517,764,534"/>
+<area shape="rect" id="node2" href="#graphs.RandomSpanningForest" target="_top" title="Random instance of a spanning forest (one or more trees)" alt="" coords="372,517,522,534"/>
+<area shape="rect" id="node3" href="#graphs.CompleteGraph" target="_top" title="Instances of complete graphs bipolarly valuated in {&#45;1,0,+1}." alt="" coords="154,4,270,21"/>
+<area shape="rect" id="node4" href="#graphs.Graph" target="_top" title="In the `graphs` module, the root :py:class:`graphs.Graph` class provides a generic graph model. A given object consists in:" alt="" coords="4,302,77,319"/>
+<area shape="rect" id="node5" href="#graphs.CycleGraph" target="_top" title="Instances of cycle graph characterized in [&#45;1,1]." alt="" coords="163,37,261,54"/>
+<area shape="rect" id="node6" href="#graphs.DualGraph" target="_top" title="Instantiates the dual Graph object of a given other Graph instance." alt="" coords="166,70,259,87"/>
+<area shape="rect" id="node7" href="#graphs.EmptyGraph" target="_top" title="Intantiates graph of given order without any positively valued edge." alt="" coords="162,103,263,120"/>
+<area shape="rect" id="node8" href="#graphs.GridGraph" target="_top" title="Specialization of the general Graph class for generating" alt="" coords="166,136,258,153"/>
+<area shape="rect" id="node9" href="#graphs.IntervalIntersectionsGraph" target="_top" title="Inveral graph constructed from a list *n*" alt="" coords="131,169,294,186"/>
+<area shape="rect" id="node10" href="#graphs.IsingModel" target="_top" title="Specialisation of a Gibbs Sampler for the Ising model" alt="" coords="165,202,259,219"/>
+<area shape="rect" id="node11" href="#graphs.LineGraph" target="_top" title="Line graphs represent the **adjacencies between edges** of a graph instance." alt="" coords="166,235,258,252"/>
+<area shape="rect" id="node12" href="#graphs.MISModel" target="_top" title="Specialisation of a Gibbs Sampler for the hard code model," alt="" coords="168,269,256,286"/>
+<area shape="rect" id="node13" href="#graphs.MetropolisChain" target="_top" title="Specialisation of the graph class for implementing a generic" alt="" coords="154,302,271,319"/>
+<area shape="rect" id="node14" href="#graphs.PermutationGraph" target="_top" title="Martin Ch. Gulombic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed.," alt="" coords="149,335,276,352"/>
+<area shape="rect" id="node15" href="#graphs.Q_Coloring" target="_top" title="Generate a q&#45;coloring of a Graph instance via a Gibbs MCMC sampler in" alt="" coords="165,368,260,385"/>
+<area shape="rect" id="node16" href="#graphs.RandomFixedDegreeSequenceGraph" target="_top" title="Specialization of the general Graph class for generating" alt="" coords="109,401,315,418"/>
+<area shape="rect" id="node17" href="#graphs.RandomFixedSizeGraph" target="_top" title="Generates a random graph with a fixed size (number of edges), by instantiating a fixed numbers of arcs" alt="" coords="137,434,287,451"/>
+<area shape="rect" id="node18" href="#graphs.RandomGraph" target="_top" title="Random instances of the Graph class" alt="" coords="158,467,267,484"/>
+<area shape="rect" id="node21" href="#graphs.RandomRegularGraph" target="_top" title="Specialization of the general Graph class for generating" alt="" coords="141,500,283,517"/>
+<area shape="rect" id="node22" href="#graphs.RandomTree" target="_top" title="Instance of a tree generated from a random (or a given) Prüfer code." alt="" coords="162,533,263,550"/>
+<area shape="rect" id="node24" href="#graphs.RandomValuationGraph" target="_top" title="Specialization of the genuine Graph class for generating temporary" alt="" coords="137,567,287,584"/>
+<area shape="rect" id="node26" href="#graphs.TriangulatedGrid" target="_top" title="Specialization of the general Graph class for generating" alt="" coords="153,600,272,617"/>
+<area shape="rect" id="node25" href="#graphs.SnakeGraph" target="_top" title="Snake graphs S(p/q) are made up of all the integer grid squares between" alt="" coords="397,136,497,153"/>
+<area shape="rect" id="node19" href="#graphs.RandomIntervalIntersectionsGraph" target="_top" title="Random generator for IntervalIntersectionsGraph intances." alt="" coords="347,169,547,186"/>
+<area shape="rect" id="node20" href="#graphs.RandomPermutationGraph" target="_top" title="A generator for random permutation graphs." alt="" coords="366,335,529,352"/>
+<area shape="rect" id="node23" href="#graphs.RandomSpanningTree" target="_top" title="Uniform random instance of a spanning tree" alt="" coords="376,550,518,567"/>
+</map>
