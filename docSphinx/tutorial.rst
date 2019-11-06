@@ -4323,10 +4323,10 @@ A multipally *perfect* graph
 
 Following Martin Golumbic (see [GOL-2004]_ p. 149), we call a given graph *g*:
 
-    * **Comparability graph** when *g*  is *transitively orientable*.
-    * **Triangulated graph** when *g* does not contain any *chordless cycle* of length 4 and more.
-    * **Interval graph** when *g* is *triangulated* and its dual *-g* is a *comparability* graph.
-    * **Permutation graph** *g* and its dual *-g* are both *comparability* graphs.
+    * **Comparability graph** when *g*  is *transitively orientable*;
+    * **Triangulated graph** when *g* does not contain any *chordless cycle* of length 4 and more;
+    * **Interval graph** when *g* is *triangulated* and its dual *-g* is a *comparability* graph;
+    * **Permutation graph** when *g* and its dual *-g* are both *comparability* graphs;
     * **Split graph** when *g* and its dual *-g* are both *triangulated* graphs.
 
 To illustrate these *perfect* graph classes, we will generate from 8 intervals, randomly chosen in the default integer range [0,10], a :py:class:`RandomIntervalIntersectionsGraph` instance *g* (see Line 2 below). With seed = 100, we obtain an *interval* graph which is **conjointly** a *triangulated*, a *comparability*, a *split* and a *permutation* graph.
