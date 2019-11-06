@@ -2185,7 +2185,7 @@ class CycleGraph(Graph):
 
 class IntervalIntersectionsGraph(Graph):
     """
-    Inveral graph constructed from a list *n*
+    Inveral graph constructed from a list of *n*
     intervals, ie pairs (a,b) of integer numbers where a < b.
     """
     def __init__(self,intervals,Debug=False):
