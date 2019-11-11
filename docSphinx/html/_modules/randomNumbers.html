@@ -81,7 +81,7 @@
 <span class="sd">    and Brian P. Flannery, *Numerical Recipes : The Art of Scientific Computing,</span>
 <span class="sd">    Third Edition* (NR3), Cambridge University Press, Cambridge UK 2007.</span>
 
-<span class="sd">    Python reimplemtation from the C++/NR3 source code (RB).</span>
+<span class="sd">    Python reimplementation (RB) from the C++/NR3 source code.</span>
 <span class="sd"> </span>
 <span class="sd">    See Computational Statistics Course : http://hdl.handle.net/10993/37870</span>
 <span class="sd">    Lecture 5.</span>
@@ -92,20 +92,20 @@
 <span class="sd">        &gt;&gt;&gt; import random</span>
 <span class="sd">        &gt;&gt;&gt; random.seed(1)</span>
 <span class="sd">        &gt;&gt;&gt; iqAgent = IncrementalQuantileEstimator(nbuf=100)</span>
-<span class="sd">        &gt;&gt;&gt; # feeding the iqAgent with Gaussian(mu=20,sd=20) random numbers </span>
-<span class="sd">        &gt;&gt;&gt; for i in range(20):</span>
-<span class="sd">        ...     iqAgent.add(random.gauss(20,20))</span>
+<span class="sd">        &gt;&gt;&gt; # feeding the iqAgent with standard Gaussian random numbers </span>
+<span class="sd">        &gt;&gt;&gt; for i in range(1000):</span>
+<span class="sd">        ...     iqAgent.add(random.gauss(mu=0,sigma=1))</span>
 <span class="sd">        &gt;&gt;&gt; # reporting the estimated Gaussian quartiles</span>
 <span class="sd">        &gt;&gt;&gt; print(iqAgent.report(0.0))</span>
-<span class="sd">        -10.116580025214837</span>
+<span class="sd">        -2.961214270519158</span>
 <span class="sd">        &gt;&gt;&gt; print(iqAgent.report(0.25))</span>
-<span class="sd">        1.720581125293748</span>
-<span class="sd">        &gt;&gt;&gt; print(iqAgent.report(0.5))</span>
-<span class="sd">        20.626690336634336</span>
+<span class="sd">        -0.6832621550224423</span>
+<span class="sd">        &gt;&gt;&gt; print(iqAgent.report(0.50))</span>
+<span class="sd">        -0.014392849958746522</span>
 <span class="sd">        &gt;&gt;&gt; print(iqAgent.report(0.75))</span>
-<span class="sd">        26.414222019976965</span>
-<span class="sd">        &gt;&gt;&gt; print(iqAgent.report(1.0))</span>
-<span class="sd">        67.78224086481373</span>
+<span class="sd">        0.7029655732010196</span>
+<span class="sd">        &gt;&gt;&gt; print(iqAgent.report(1.00))</span>
+<span class="sd">        2.737259509189501</span>
 <span class="sd">        &gt;&gt;&gt; # saving the iqAgent&#39;s state</span>
 <span class="sd">        &gt;&gt;&gt; iqAgent.saveState(&#39;test.csv&#39;)</span>
 <span class="sd">  </span>

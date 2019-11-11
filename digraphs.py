@@ -2652,7 +2652,7 @@ class Digraph(object):
 
             Dependency: Uses the dreadnaut command from the nauty software package. See https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml
 
-            On Linux:
+            On Ubuntu Linux:
               ...$ sudo apt-get install nauty
         """
         import os
@@ -9951,8 +9951,8 @@ class ConverseDigraph(Digraph):
 
     Instantiates as other.__class__ !
 
-    Depp copies the case given the description, the criteria
-    and the evaluation dictionary into self.
+    Deep copies, the case given, the description, the criteria
+    and the evaluation dictionaries into self.
     """
 
     def __init__(self,other):

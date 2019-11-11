@@ -721,8 +721,8 @@ temporary complete graphs of order 5 in {-1,0,1} by default.</p>
 <p>Instantiates the associated converse or reciprocal version from
 a deep copy of a given Digraph called other.</p>
 <p>Instantiates as other.__class__ !</p>
-<p>Depp copies the case given the description, the criteria
-and the evaluation dictionary into self.</p>
+<p>Deep copies, the case given, the description, the criteria
+and the evaluation dictionaries into self.</p>
 </dd></dl>
 
 <dl class="class">
@@ -860,7 +860,7 @@ Renders the distribution of agglomeration coefficients.</p>
 <p class="first admonition-title">Note</p>
 <p>Dependency: Uses the dreadnaut command from the nauty software package. See <a class="reference external" href="https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml">https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml</a></p>
 <dl class="last docutils">
-<dt>On Linux:</dt>
+<dt>On Ubuntu Linux:</dt>
 <dd>…$ sudo apt-get install nauty</dd>
 </dl>
 </div>
@@ -8550,7 +8550,7 @@ with incremental Quantile estimation, <em>Statistical Science</em> 2006 (4):463-
 <p><em>Reference</em>: William H. Press, Saul A. Teukolsky, William T. Vetterling, 
 and Brian P. Flannery, <em>Numerical Recipes : The Art of Scientific Computing,
 Third Edition</em> (NR3), Cambridge University Press, Cambridge UK 2007.</p>
-<p>Python reimplemtation from the C++/NR3 source code (RB).</p>
+<p>Python reimplementation (RB) from the C++/NR3 source code.</p>
 <p>See Computational Statistics Course : <a class="reference external" href="http://hdl.handle.net/10993/37870">http://hdl.handle.net/10993/37870</a>
 Lecture 5.</p>
 <p>Example usage:</p>
@@ -8558,20 +8558,20 @@ Lecture 5.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iqAgent</span> <span class="o">=</span> <span class="n">IncrementalQuantileEstimator</span><span class="p">(</span><span class="n">nbuf</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># feeding the iqAgent with Gaussian(mu=20,sd=20) random numbers </span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">iqAgent</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># feeding the iqAgent with standard Gaussian random numbers </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">iqAgent</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># reporting the estimated Gaussian quartiles</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
-<span class="go">-10.116580025214837</span>
+<span class="go">-2.961214270519158</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
-<span class="go">1.720581125293748</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
-<span class="go">20.626690336634336</span>
+<span class="go">-0.6832621550224423</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.50</span><span class="p">))</span>
+<span class="go">-0.014392849958746522</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.75</span><span class="p">))</span>
-<span class="go">26.414222019976965</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span>
-<span class="go">67.78224086481373</span>
+<span class="go">0.7029655732010196</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">1.00</span><span class="p">))</span>
+<span class="go">2.737259509189501</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving the iqAgent&#39;s state</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iqAgent</span><span class="o">.</span><span class="n">saveState</span><span class="p">(</span><span class="s1">&#39;test.csv&#39;</span><span class="p">)</span>
 </pre></div>

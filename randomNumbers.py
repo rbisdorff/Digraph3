@@ -34,7 +34,7 @@ class IncrementalQuantileEstimator(object):
     and Brian P. Flannery, *Numerical Recipes : The Art of Scientific Computing,
     Third Edition* (NR3), Cambridge University Press, Cambridge UK 2007.
 
-    Python reimplemtation from the C++/NR3 source code (RB).
+    Python reimplementation (RB) from the C++/NR3 source code.
  
     See Computational Statistics Course : http://hdl.handle.net/10993/37870
     Lecture 5.
@@ -45,20 +45,20 @@ class IncrementalQuantileEstimator(object):
         >>> import random
         >>> random.seed(1)
         >>> iqAgent = IncrementalQuantileEstimator(nbuf=100)
-        >>> # feeding the iqAgent with Gaussian(mu=20,sd=20) random numbers 
-        >>> for i in range(20):
-        ...     iqAgent.add(random.gauss(20,20))
+        >>> # feeding the iqAgent with standard Gaussian random numbers 
+        >>> for i in range(1000):
+        ...     iqAgent.add(random.gauss(mu=0,sigma=1))
         >>> # reporting the estimated Gaussian quartiles
         >>> print(iqAgent.report(0.0))
-        -10.116580025214837
+        -2.961214270519158
         >>> print(iqAgent.report(0.25))
-        1.720581125293748
-        >>> print(iqAgent.report(0.5))
-        20.626690336634336
+        -0.6832621550224423
+        >>> print(iqAgent.report(0.50))
+        -0.014392849958746522
         >>> print(iqAgent.report(0.75))
-        26.414222019976965
-        >>> print(iqAgent.report(1.0))
-        67.78224086481373
+        0.7029655732010196
+        >>> print(iqAgent.report(1.00))
+        2.737259509189501
         >>> # saving the iqAgent's state
         >>> iqAgent.saveState('test.csv')
   
