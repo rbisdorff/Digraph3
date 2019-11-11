@@ -12,7 +12,7 @@ def testIqAgent():
     print('==>> Testing the iqagent')
     import random
     random.seed(1)
-    iqAgent = IncrementalQuantileEstimator(nbuf=100,Debug=True)
+    iqAgent = IncrementalQuantilesEstimator(nbuf=100,Debug=True)
     for i in range(200):
         iqAgent.add(random.gauss(20,20))
     print(iqAgent.report(0.0))

@@ -23,7 +23,7 @@ Copyright (C) 2014-2018  Raymond Bisdorff
 __version__ = "Branch: 3.6 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
-class IncrementalQuantileEstimator(object):
+class IncrementalQuantilesEstimator(object):
     """
     *References*: 
 
@@ -41,10 +41,10 @@ class IncrementalQuantileEstimator(object):
 
     Example usage:
 
-        >>> from randomNumbers import IncrementalQuantileEstimator
+        >>> from randomNumbers import IncrementalQuantilesEstimator
         >>> import random
         >>> random.seed(1)
-        >>> iqAgent = IncrementalQuantileEstimator(nbuf=100)
+        >>> iqAgent = IncrementalQuantilesEstimator(nbuf=100)
         >>> # feeding the iqAgent with standard Gaussian random numbers 
         >>> for i in range(1000):
         ...     iqAgent.add(random.gauss(mu=0,sigma=1))

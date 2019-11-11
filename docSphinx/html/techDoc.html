@@ -311,12 +311,12 @@ with main <a class="reference external" href="techDoc.html#votingProfiles.Linear
 <dt><a class="reference internal" href="#randomnumbers-label"><span class="std std-ref">randomNumbers module</span></a></dt>
 <dd><p class="first">Additional random number generators, not available in the
 standard python random.py library.</p>
-<img src="_images/inheritance-e06dfcf9c089af9af620f4ad33b71ea34f310177.png" alt="Inheritance diagram of randomNumbers" usemap="#inheritance0cafdcad1b" class="inheritance"/>
+<img src="_images/inheritance-fc036f928a3558014b02fd4a33308928a15e42ff.png" alt="Inheritance diagram of randomNumbers" usemap="#inheritance0cafdcad1b" class="inheritance"/>
 <map id="inheritance0cafdcad1b" name="inheritance0cafdcad1b">
 <area shape="rect" id="node1" href="#randomNumbers.CauchyRandomVariable" target="_top" title="Cauchy random variable generator." alt="" coords="43,252,334,277"/>
 <area shape="rect" id="node2" href="#randomNumbers.DiscreteRandomVariable" target="_top" title="Discrete random variable generator" alt="" coords="41,203,337,228"/>
 <area shape="rect" id="node3" href="#randomNumbers.ExtendedTriangularRandomVariable" target="_top" title="Extended triangular random variable generator" alt="" coords="5,153,372,179"/>
-<area shape="rect" id="node4" href="#randomNumbers.IncrementalQuantileEstimator" target="_top" title="*References*: " alt="" coords="23,104,354,129"/>
+<area shape="rect" id="node4" href="#randomNumbers.IncrementalQuantilesEstimator" target="_top" title="*References*: " alt="" coords="19,104,358,129"/>
 <area shape="rect" id="node5" href="#randomNumbers.QuasiRandomFareyPointSet" target="_top" title="Constructor for rendering a Farey point set of dimension *s* and max denominateor *n* which is *fully projection regular* in the $s$&#45;dimensional real&#45;valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.pointSet attribute and saved by default in a CSV formatted file." alt="" coords="429,5,744,31"/>
 <area shape="rect" id="node6" href="#randomNumbers.QuasiRandomPointSet" target="_top" title="Abstract class for generic quasi random point set methods and tools." alt="" coords="49,55,329,80"/>
 <area shape="rect" id="node7" href="#randomNumbers.QuasiRandomKorobovPointSet" target="_top" title="Constructor for rendering a Korobov point set of dimension *n* which is *fully projection regular* in the $s$&#45;dimensional real&#45;valued [0,1)^s hypercube. The constructor uses a MLCG generator with potentially a full period. The point set is stored in a self.sequence attribute and saved in a CSV formatted file." alt="" coords="420,55,753,80"/>
@@ -8541,8 +8541,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 </dd></dl>
 
 <dl class="class">
-<dt id="randomNumbers.IncrementalQuantileEstimator">
-<em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">IncrementalQuantileEstimator</code><span class="sig-paren">(</span><em>nbuf=1000</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator" title="Permalink to this definition">¶</a></dt>
+<dt id="randomNumbers.IncrementalQuantilesEstimator">
+<em class="property">class </em><code class="descclassname">randomNumbers.</code><code class="descname">IncrementalQuantilesEstimator</code><span class="sig-paren">(</span><em>nbuf=1000</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantilesEstimator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantilesEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.7/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p><em>References</em>:</p>
 <p>John M. Chambers (et al.), Monitoring Networked Applications 
@@ -8554,10 +8554,10 @@ Third Edition</em> (NR3), Cambridge University Press, Cambridge UK 2007.</p>
 <p>See Computational Statistics Course : <a class="reference external" href="http://hdl.handle.net/10993/37870">http://hdl.handle.net/10993/37870</a>
 Lecture 5.</p>
 <p>Example usage:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">IncrementalQuantileEstimator</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">IncrementalQuantilesEstimator</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">iqAgent</span> <span class="o">=</span> <span class="n">IncrementalQuantileEstimator</span><span class="p">(</span><span class="n">nbuf</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iqAgent</span> <span class="o">=</span> <span class="n">IncrementalQuantilesEstimator</span><span class="p">(</span><span class="n">nbuf</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># feeding the iqAgent with standard Gaussian random numbers </span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">iqAgent</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
@@ -8577,39 +8577,39 @@ Lecture 5.</p>
 </pre></div>
 </div>
 <dl class="method">
-<dt id="randomNumbers.IncrementalQuantileEstimator.add">
-<code class="descname">add</code><span class="sig-paren">(</span><em>datum</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator.add" title="Permalink to this definition">¶</a></dt>
+<dt id="randomNumbers.IncrementalQuantilesEstimator.add">
+<code class="descname">add</code><span class="sig-paren">(</span><em>datum</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantilesEstimator.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantilesEstimator.add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assimilate a new value from the stream</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="randomNumbers.IncrementalQuantileEstimator.cdf">
-<code class="descname">cdf</code><span class="sig-paren">(</span><em>x=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator.cdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator.cdf" title="Permalink to this definition">¶</a></dt>
+<dt id="randomNumbers.IncrementalQuantilesEstimator.cdf">
+<code class="descname">cdf</code><span class="sig-paren">(</span><em>x=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantilesEstimator.cdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantilesEstimator.cdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>return proportion of data lower or equal to value x</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="randomNumbers.IncrementalQuantileEstimator.loadState">
-<code class="descname">loadState</code><span class="sig-paren">(</span><em>FileName='state.csv'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator.loadState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator.loadState" title="Permalink to this definition">¶</a></dt>
+<dt id="randomNumbers.IncrementalQuantilesEstimator.loadState">
+<code class="descname">loadState</code><span class="sig-paren">(</span><em>FileName='state.csv'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantilesEstimator.loadState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantilesEstimator.loadState" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load a previously saved state of the estimator</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="randomNumbers.IncrementalQuantileEstimator.report">
-<code class="descname">report</code><span class="sig-paren">(</span><em>p=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator.report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator.report" title="Permalink to this definition">¶</a></dt>
+<dt id="randomNumbers.IncrementalQuantilesEstimator.report">
+<code class="descname">report</code><span class="sig-paren">(</span><em>p=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantilesEstimator.report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantilesEstimator.report" title="Permalink to this definition">¶</a></dt>
 <dd><p>return estimated p-quantile (default = median)
 for the data seen so far</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="randomNumbers.IncrementalQuantileEstimator.reset">
-<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator.reset" title="Permalink to this definition">¶</a></dt>
+<dt id="randomNumbers.IncrementalQuantilesEstimator.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantilesEstimator.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantilesEstimator.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>reset the content of the estimator to the initial state.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="randomNumbers.IncrementalQuantileEstimator.saveState">
-<code class="descname">saveState</code><span class="sig-paren">(</span><em>fileName='state.csv'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantileEstimator.saveState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantileEstimator.saveState" title="Permalink to this definition">¶</a></dt>
+<dt id="randomNumbers.IncrementalQuantilesEstimator.saveState">
+<code class="descname">saveState</code><span class="sig-paren">(</span><em>fileName='state.csv'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantilesEstimator.saveState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantilesEstimator.saveState" title="Permalink to this definition">¶</a></dt>
 <dd><p>save the state of the IncrementalQuantileEstimator self instance</p>
 </dd></dl>
 
