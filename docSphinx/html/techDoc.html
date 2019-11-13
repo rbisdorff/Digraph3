@@ -8583,6 +8583,15 @@ Lecture 5.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="randomNumbers.IncrementalQuantilesEstimator.addList">
+<code class="descname">addList</code><span class="sig-paren">(</span><em>listDatum</em>, <em>historyWeight=None</em>, <em>Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantilesEstimator.addList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantilesEstimator.addList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assimilate a list of new values 
+historyWeight: in [0.0;1.0[; 
+indicates a requested proportional weight of the history 
+wrt to the length of listDatum. Is ignored when None.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="randomNumbers.IncrementalQuantilesEstimator.cdf">
 <code class="descname">cdf</code><span class="sig-paren">(</span><em>x=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#IncrementalQuantilesEstimator.cdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomNumbers.IncrementalQuantilesEstimator.cdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>return proportion of data lower or equal to value x</p>

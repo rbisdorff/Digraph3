@@ -163,6 +163,26 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbuf</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_update</span><span class="p">()</span></div>
 
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.addList"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.addList">[docs]</a>    <span class="k">def</span> <span class="nf">addList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">listDatum</span><span class="p">,</span><span class="n">historyWeight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assimilate a list of new values </span>
+<span class="sd">        historyWeight: in [0.0;1.0[; </span>
+<span class="sd">        indicates a requested proportional weight of the history </span>
+<span class="sd">        wrt to the length of listDatum. Is ignored when None.</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">historyWeight</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">historyWeight</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">historyWeight</span> <span class="o">&gt;=</span> <span class="mf">1.0</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: historyWeight %.f must be in [0.0;1.0[&#39;</span> <span class="o">%</span> <span class="n">historyWeight</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">listDatum</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">m</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">nt</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">historyWeight</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">historyWeight</span><span class="p">)</span><span class="o">*</span><span class="n">m</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update</span><span class="p">()</span> <span class="c1"># clearing the income buffer</span>
+        <span class="k">for</span> <span class="n">datum</span> <span class="ow">in</span> <span class="n">listDatum</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">datum</span><span class="p">)</span></div>
+
     <span class="k">def</span> <span class="nf">_update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Batch update. For internal use only.</span>
@@ -1097,7 +1117,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">pointSetCardinality</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">nu</span> <span class="o">+</span> <span class="n">s</span> </div>
         
 <span class="c1">#----------testing the code ----------------</span>
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>    
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    
 <span class="c1"># #------------  Discrete number generator</span>
 <span class="c1">#     ## initialize the discrete random variable </span>
 <span class="c1">#     discreteLaw = {0:0.0478,</span>
@@ -1198,51 +1220,103 @@
 <span class="c1">#     print(&#39;# of Cauchy simulations = %d&#39; % Nsim)</span>
 
 <span class="c1">#-------------- testing quasi random Korobov sampling against Mersenne twister sampling</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quasi random Korobov sampling&#39;</span><span class="p">)</span>
-    <span class="n">seed</span><span class="o">=</span><span class="mi">101</span>
-    <span class="n">d</span><span class="o">=</span><span class="mi">3</span>
-    <span class="n">kor</span> <span class="o">=</span> <span class="n">QuasiRandomKorobovPointSet</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">997</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">d</span><span class="p">,</span><span class="n">a</span><span class="o">=</span><span class="mi">383</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="n">pointSet</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="n">pointSetCardinality</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="n">testFct</span><span class="p">(</span><span class="n">seq</span><span class="o">=</span><span class="n">kor</span><span class="o">.</span><span class="n">pointSet</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)))</span>
+    <span class="c1"># print(&#39;Quasi random Korobov sampling&#39;)</span>
+    <span class="c1"># seed=101</span>
+    <span class="c1"># d=3</span>
+    <span class="c1"># kor = QuasiRandomKorobovPointSet(n=997,s=d,a=383,Randomized=True,seed=seed,Debug=False)</span>
+    <span class="c1"># print(kor.__dict__.keys())</span>
+    <span class="c1"># print(kor.pointSet[:10])</span>
+    <span class="c1"># print(kor.pointSetCardinality)</span>
+    <span class="c1"># print(kor.testFct(seq=kor.pointSet,buggyRegionLimits=(0.45,0.55)))</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mersenne Twister random sampling&#39;</span><span class="p">)</span>
-    <span class="n">randSeq</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="kn">import</span> <span class="nn">random</span>
-    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">997</span><span class="p">):</span>
-        <span class="n">point</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-            <span class="n">point</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
-        <span class="n">randSeq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">kor</span><span class="o">.</span><span class="n">testFct</span><span class="p">(</span><span class="n">seq</span><span class="o">=</span><span class="n">randSeq</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)))</span>
+    <span class="c1"># print(&#39;Mersenne Twister random sampling&#39;)</span>
+    <span class="c1"># randSeq = []</span>
+    <span class="c1"># import random</span>
+    <span class="c1"># random.seed(seed)</span>
+    <span class="c1"># for i in range(997):</span>
+    <span class="c1">#     point = []</span>
+    <span class="c1">#     for j in range(d):</span>
+    <span class="c1">#         point.append(random.random())</span>
+    <span class="c1">#     randSeq.append(point)</span>
+    <span class="c1"># print(kor.testFct(seq=randSeq,buggyRegionLimits=(0.45,0.55)))</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quasi random Farey sampling&#39;</span><span class="p">)</span>
-    <span class="n">qrfs</span> <span class="o">=</span> <span class="n">QuasiRandomFareyPointSet</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">55</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">d</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">fareySeries</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">shuffledFareySeries</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">seriesLength</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">pointSet</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">pointSetCardinality</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="n">testFct</span><span class="p">(</span><span class="n">seq</span><span class="o">=</span><span class="n">qrfs</span><span class="o">.</span><span class="n">pointSet</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)))</span>
+    <span class="c1"># print(&#39;Quasi random Farey sampling&#39;)</span>
+    <span class="c1"># qrfs = QuasiRandomFareyPointSet(n=55,s=d,Randomized=True,seed=seed)</span>
+    <span class="c1"># print(qrfs.__dict__.keys())</span>
+    <span class="c1"># print(qrfs.fareySeries[:10])</span>
+    <span class="c1"># print(qrfs.shuffledFareySeries[:10])</span>
+    <span class="c1"># print(qrfs.seriesLength)</span>
+    <span class="c1"># print(qrfs.pointSet[:5])</span>
+    <span class="c1"># print(qrfs.pointSetCardinality)</span>
+    <span class="c1"># print(qrfs.testFct(seq=qrfs.pointSet,buggyRegionLimits=(0.45,0.55)))</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quasi random uniform sampling&#39;</span><span class="p">)</span>
-    <span class="n">qrus</span> <span class="o">=</span> <span class="n">QuasiRandomUniformPointSet</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">997</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">d</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrus</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrus</span><span class="o">.</span><span class="n">uniformSeries</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrus</span><span class="o">.</span><span class="n">shuffledUniformSeries</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrus</span><span class="o">.</span><span class="n">seriesLength</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrus</span><span class="o">.</span><span class="n">pointSet</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrus</span><span class="o">.</span><span class="n">pointSetCardinality</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">qrus</span><span class="o">.</span><span class="n">testFct</span><span class="p">(</span><span class="n">seq</span><span class="o">=</span><span class="n">qrfs</span><span class="o">.</span><span class="n">pointSet</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)))</span>
-    <span class="n">kor</span><span class="o">.</span><span class="n">testUniformityDiscrepancy</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;korobovTest&#39;</span><span class="p">)</span>
-    <span class="n">qrfs</span><span class="o">.</span><span class="n">testUniformityDiscrepancy</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;fareyTest&#39;</span><span class="p">)</span>
-    <span class="n">qrus</span><span class="o">.</span><span class="n">testUniformityDiscrepancy</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;uniformTest&#39;</span><span class="p">)</span>
-    <span class="n">qrfs</span><span class="o">.</span><span class="n">testUniformityDiscrepancy</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">pointSet</span><span class="o">=</span><span class="n">randSeq</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;randTest&#39;</span><span class="p">)</span>
+    <span class="c1"># print(&#39;Quasi random uniform sampling&#39;)</span>
+    <span class="c1"># qrus = QuasiRandomUniformPointSet(n=997,s=d,Randomized=False,seed=seed)</span>
+    <span class="c1"># print(qrus.__dict__.keys())</span>
+    <span class="c1"># print(qrus.uniformSeries[:10])</span>
+    <span class="c1"># print(qrus.shuffledUniformSeries[:10])</span>
+    <span class="c1"># print(qrus.seriesLength)</span>
+    <span class="c1"># print(qrus.pointSet[:5])</span>
+    <span class="c1"># print(qrus.pointSetCardinality)</span>
+    <span class="c1"># print(qrus.testFct(seq=qrfs.pointSet,buggyRegionLimits=(0.45,0.55)))</span>
+    <span class="c1"># kor.testUniformityDiscrepancy(k=3,fileName=&#39;korobovTest&#39;)</span>
+    <span class="c1"># qrfs.testUniformityDiscrepancy(k=3,fileName=&#39;fareyTest&#39;)</span>
+    <span class="c1"># qrus.testUniformityDiscrepancy(k=3,fileName=&#39;uniformTest&#39;)</span>
+    <span class="c1"># qrfs.testUniformityDiscrepancy(k=3,pointSet=randSeq,fileName=&#39;randTest&#39;)</span>
            
 
+    <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">IncrementalQuantilesEstimator</span>
+    <span class="kn">import</span> <span class="nn">random</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">iqAgent</span> <span class="o">=</span> <span class="n">IncrementalQuantilesEstimator</span><span class="p">(</span><span class="n">nbuf</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="c1"># feeding the iqAgent with standard Gaussian random numbers </span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">iqAgent</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="c1"># reporting the estimated Gaussian quartiles</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+    <span class="c1">#    -2.961214270519158</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+    <span class="c1">#    -0.6832621550224423</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.50</span><span class="p">))</span>
+    <span class="c1">#    -0.014392849958746522</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.75</span><span class="p">))</span>
+    <span class="c1">#    0.7029655732010196</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">1.00</span><span class="p">))</span>
+    <span class="c1">#    2.737259509189501</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1">#iqAgent = IncrementalQuantilesEstimator(nbuf=100)</span>
+    <span class="c1"># feeding the iqAgent with standard Gaussian random numbers</span>
+    <span class="n">listDatum</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">listDatum</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">iqAgent</span><span class="o">.</span><span class="n">addList</span><span class="p">(</span><span class="n">listDatum</span><span class="p">,</span><span class="n">historyWeight</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="c1"># reporting the estimated Gaussian quartiles</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+    <span class="c1">#    -2.961214270519158</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+    <span class="c1">#    -0.6832621550224423</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.50</span><span class="p">))</span>
+    <span class="c1">#    -0.014392849958746522</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.75</span><span class="p">))</span>
+    <span class="c1">#    0.7029655732010196</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">1.00</span><span class="p">))</span>
+    <span class="c1">#    2.737259509189501</span>
+    <span class="n">listDatum</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+        <span class="n">listDatum</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">iqAgent</span><span class="o">.</span><span class="n">addList</span><span class="p">(</span><span class="n">listDatum</span><span class="p">,</span><span class="n">historyWeight</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="c1"># reporting the estimated Gaussian quartiles</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.0</span><span class="p">))</span>
+    <span class="c1">#    -2.961214270519158</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.25</span><span class="p">))</span>
+    <span class="c1">#    -0.6832621550224423</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.50</span><span class="p">))</span>
+    <span class="c1">#    -0.014392849958746522</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">0.75</span><span class="p">))</span>
+    <span class="c1">#    0.7029655732010196</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">iqAgent</span><span class="o">.</span><span class="n">report</span><span class="p">(</span><span class="mf">1.00</span><span class="p">))</span>
+    <span class="c1">#    2.737259509189501</span>
+    
 </pre></div>
 
           </div>

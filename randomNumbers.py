@@ -119,9 +119,9 @@ class IncrementalQuantilesEstimator(object):
     def addList(self,listDatum,historyWeight=None,Debug=True):
         """
         Assimilate a list of new values 
-        historyWeight: in [0.0;1.0[, 
-          indicates a requested proportional weight of the history 
-          wrt to the length of listDatum. Is ignored when None.
+        historyWeight: in [0.0;1.0[; 
+        indicates a requested proportional weight of the history 
+        wrt to the length of listDatum. Is ignored when None.
         
         """
         if historyWeight != None:
