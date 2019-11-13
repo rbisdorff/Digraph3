@@ -163,12 +163,17 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbuf</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_update</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="IncrementalQuantilesEstimator.addList"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.addList">[docs]</a>    <span class="k">def</span> <span class="nf">addList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">listDatum</span><span class="p">,</span><span class="n">historyWeight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.addList"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.addList">[docs]</a>    <span class="k">def</span> <span class="nf">addList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">listDatum</span><span class="p">,</span><span class="n">historyWeight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Assimilate a list of new values </span>
-<span class="sd">        historyWeight: in [0.0;1.0[; </span>
+<span class="sd">        Assimilate a list of new values.</span>
+
+<span class="sd">        Parameter:</span>
+
+<span class="sd">        *historyWeight* takes decimal values in [0.0;1.0[ and  </span>
 <span class="sd">        indicates a requested proportional weight of the history </span>
-<span class="sd">        wrt to the length of listDatum. Is ignored when None.</span>
+<span class="sd">        wrt to the length of listDatum. </span>
+
+<span class="sd">        Is ignored when None (default).</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">historyWeight</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>

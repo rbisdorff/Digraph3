@@ -116,12 +116,17 @@ class IncrementalQuantilesEstimator(object):
         if len(self.dbuf) == self.nbuf:
             self._update()
 
-    def addList(self,listDatum,historyWeight=None,Debug=True):
+    def addList(self,listDatum,historyWeight=None):
         """
-        Assimilate a list of new values 
-        historyWeight: in [0.0;1.0[; 
+        Assimilate a list of new values.
+
+        Parameter:
+
+        *historyWeight* takes decimal values in [0.0;1.0[ and  
         indicates a requested proportional weight of the history 
-        wrt to the length of listDatum. Is ignored when None.
+        wrt to the length of listDatum. 
+
+        Is ignored when None (default).
         
         """
         if historyWeight != None:
