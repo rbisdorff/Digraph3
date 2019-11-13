@@ -116,6 +116,26 @@ class IncrementalQuantilesEstimator(object):
         if len(self.dbuf) == self.nbuf:
             self._update()
 
+    def addList(self,listDatum,historyWeight=None,Debug=True):
+        """
+        Assimilate a list of new values 
+        historyWeight: in [0.0;1.0[, 
+          indicates a requested proportional weight of the history 
+          wrt to the length of listDatum. Is ignored when None.
+        
+        """
+        if historyWeight != None:
+            if (historyWeight < 0.0) or (historyWeight >= 1.0):
+                print('Error: historyWeight %.f must be in [0.0;1.0[' % historyWeight)
+                return
+            m = len(listDatum)
+            if m > 0:
+                self.nt = round(historyWeight/(1.0 - historyWeight)*m)
+        if len(self.dbuf) > 0:
+            self._update() # clearing the income buffer
+        for datum in listDatum:
+            self.add(datum)
+
     def _update(self):
         """
         Batch update. For internal use only.
@@ -1050,7 +1070,9 @@ class QuasiRandomUniformPointSet(QuasiRandomPointSet):
         self.pointSetCardinality = 1 + nu + s 
         
 #----------testing the code ----------------
-if __name__ == "__main__":    
+if __name__ == "__main__":
+
+    
 # #------------  Discrete number generator
 #     ## initialize the discrete random variable 
 #     discreteLaw = {0:0.0478,
@@ -1151,48 +1173,100 @@ if __name__ == "__main__":
 #     print('# of Cauchy simulations = %d' % Nsim)
 
 #-------------- testing quasi random Korobov sampling against Mersenne twister sampling
-    print('Quasi random Korobov sampling')
-    seed=101
-    d=3
-    kor = QuasiRandomKorobovPointSet(n=997,s=d,a=383,Randomized=True,seed=seed,Debug=False)
-    print(kor.__dict__.keys())
-    print(kor.pointSet[:10])
-    print(kor.pointSetCardinality)
-    print(kor.testFct(seq=kor.pointSet,buggyRegionLimits=(0.45,0.55)))
+    # print('Quasi random Korobov sampling')
+    # seed=101
+    # d=3
+    # kor = QuasiRandomKorobovPointSet(n=997,s=d,a=383,Randomized=True,seed=seed,Debug=False)
+    # print(kor.__dict__.keys())
+    # print(kor.pointSet[:10])
+    # print(kor.pointSetCardinality)
+    # print(kor.testFct(seq=kor.pointSet,buggyRegionLimits=(0.45,0.55)))
 
-    print('Mersenne Twister random sampling')
-    randSeq = []
-    import random
-    random.seed(seed)
-    for i in range(997):
-        point = []
-        for j in range(d):
-            point.append(random.random())
-        randSeq.append(point)
-    print(kor.testFct(seq=randSeq,buggyRegionLimits=(0.45,0.55)))
+    # print('Mersenne Twister random sampling')
+    # randSeq = []
+    # import random
+    # random.seed(seed)
+    # for i in range(997):
+    #     point = []
+    #     for j in range(d):
+    #         point.append(random.random())
+    #     randSeq.append(point)
+    # print(kor.testFct(seq=randSeq,buggyRegionLimits=(0.45,0.55)))
 
-    print('Quasi random Farey sampling')
-    qrfs = QuasiRandomFareyPointSet(n=55,s=d,Randomized=True,seed=seed)
-    print(qrfs.__dict__.keys())
-    print(qrfs.fareySeries[:10])
-    print(qrfs.shuffledFareySeries[:10])
-    print(qrfs.seriesLength)
-    print(qrfs.pointSet[:5])
-    print(qrfs.pointSetCardinality)
-    print(qrfs.testFct(seq=qrfs.pointSet,buggyRegionLimits=(0.45,0.55)))
+    # print('Quasi random Farey sampling')
+    # qrfs = QuasiRandomFareyPointSet(n=55,s=d,Randomized=True,seed=seed)
+    # print(qrfs.__dict__.keys())
+    # print(qrfs.fareySeries[:10])
+    # print(qrfs.shuffledFareySeries[:10])
+    # print(qrfs.seriesLength)
+    # print(qrfs.pointSet[:5])
+    # print(qrfs.pointSetCardinality)
+    # print(qrfs.testFct(seq=qrfs.pointSet,buggyRegionLimits=(0.45,0.55)))
 
-    print('Quasi random uniform sampling')
-    qrus = QuasiRandomUniformPointSet(n=997,s=d,Randomized=False,seed=seed)
-    print(qrus.__dict__.keys())
-    print(qrus.uniformSeries[:10])
-    print(qrus.shuffledUniformSeries[:10])
-    print(qrus.seriesLength)
-    print(qrus.pointSet[:5])
-    print(qrus.pointSetCardinality)
-    print(qrus.testFct(seq=qrfs.pointSet,buggyRegionLimits=(0.45,0.55)))
-    kor.testUniformityDiscrepancy(k=3,fileName='korobovTest')
-    qrfs.testUniformityDiscrepancy(k=3,fileName='fareyTest')
-    qrus.testUniformityDiscrepancy(k=3,fileName='uniformTest')
-    qrfs.testUniformityDiscrepancy(k=3,pointSet=randSeq,fileName='randTest')
+    # print('Quasi random uniform sampling')
+    # qrus = QuasiRandomUniformPointSet(n=997,s=d,Randomized=False,seed=seed)
+    # print(qrus.__dict__.keys())
+    # print(qrus.uniformSeries[:10])
+    # print(qrus.shuffledUniformSeries[:10])
+    # print(qrus.seriesLength)
+    # print(qrus.pointSet[:5])
+    # print(qrus.pointSetCardinality)
+    # print(qrus.testFct(seq=qrfs.pointSet,buggyRegionLimits=(0.45,0.55)))
+    # kor.testUniformityDiscrepancy(k=3,fileName='korobovTest')
+    # qrfs.testUniformityDiscrepancy(k=3,fileName='fareyTest')
+    # qrus.testUniformityDiscrepancy(k=3,fileName='uniformTest')
+    # qrfs.testUniformityDiscrepancy(k=3,pointSet=randSeq,fileName='randTest')
            
 
+    from randomNumbers import IncrementalQuantilesEstimator
+    import random
+    random.seed(1)
+    iqAgent = IncrementalQuantilesEstimator(nbuf=100)
+    # feeding the iqAgent with standard Gaussian random numbers 
+    for i in range(1000):
+        iqAgent.add(random.gauss(mu=0,sigma=1))
+    # reporting the estimated Gaussian quartiles
+    print(iqAgent.report(0.0))
+    #    -2.961214270519158
+    print(iqAgent.report(0.25))
+    #    -0.6832621550224423
+    print(iqAgent.report(0.50))
+    #    -0.014392849958746522
+    print(iqAgent.report(0.75))
+    #    0.7029655732010196
+    print(iqAgent.report(1.00))
+    #    2.737259509189501
+    random.seed(1)
+    #iqAgent = IncrementalQuantilesEstimator(nbuf=100)
+    # feeding the iqAgent with standard Gaussian random numbers
+    listDatum = []
+    for i in range(1000):
+        listDatum.append(random.gauss(mu=0,sigma=1))
+    iqAgent.addList(listDatum,historyWeight=0.0)
+    # reporting the estimated Gaussian quartiles
+    print(iqAgent.report(0.0))
+    #    -2.961214270519158
+    print(iqAgent.report(0.25))
+    #    -0.6832621550224423
+    print(iqAgent.report(0.50))
+    #    -0.014392849958746522
+    print(iqAgent.report(0.75))
+    #    0.7029655732010196
+    print(iqAgent.report(1.00))
+    #    2.737259509189501
+    listDatum = []
+    for i in range(1000):
+        listDatum.append(random.gauss(mu=0,sigma=1))
+    iqAgent.addList(listDatum,historyWeight=0.5)
+    # reporting the estimated Gaussian quartiles
+    print(iqAgent.report(0.0))
+    #    -2.961214270519158
+    print(iqAgent.report(0.25))
+    #    -0.6832621550224423
+    print(iqAgent.report(0.50))
+    #    -0.014392849958746522
+    print(iqAgent.report(0.75))
+    #    0.7029655732010196
+    print(iqAgent.report(1.00))
+    #    2.737259509189501
+    

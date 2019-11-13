@@ -28,6 +28,61 @@ def testIqAgent():
     print(iqAgent.report(0.75))
     print(iqAgent.report(1.0))
 
+def testIqAgentHistoryWeight():
+    print('==>> Testing add listDatum with historyWeight')
+    from randomNumbers import IncrementalQuantilesEstimator
+    import random
+    random.seed(1)
+    iqAgent = IncrementalQuantilesEstimator(nbuf=100)
+    # feeding the iqAgent with standard Gaussian random numbers 
+    for i in range(1000):
+        iqAgent.add(random.gauss(mu=0,sigma=1))
+    # reporting the estimated Gaussian quartiles
+    print(iqAgent.report(0.0))
+    #    -2.961214270519158
+    print(iqAgent.report(0.25))
+    #    -0.6832621550224423
+    print(iqAgent.report(0.50))
+    #    -0.014392849958746522
+    print(iqAgent.report(0.75))
+    #    0.7029655732010196
+    print(iqAgent.report(1.00))
+    #    2.737259509189501
+    random.seed(1)
+    #iqAgent = IncrementalQuantilesEstimator(nbuf=100)
+    # feeding the iqAgent with standard Gaussian random numbers
+    listDatum = []
+    for i in range(1000):
+        listDatum.append(random.gauss(mu=0,sigma=1))
+    iqAgent.addList(listDatum,historyWeight=0.0)
+    # reporting the estimated Gaussian quartiles
+    print(iqAgent.report(0.0))
+    #    -2.961214270519158
+    print(iqAgent.report(0.25))
+    #    -0.6832621550224423
+    print(iqAgent.report(0.50))
+    #    -0.014392849958746522
+    print(iqAgent.report(0.75))
+    #    0.7029655732010196
+    print(iqAgent.report(1.00))
+    #    2.737259509189501
+    listDatum = []
+    for i in range(1000):
+        listDatum.append(random.gauss(mu=0,sigma=1))
+    iqAgent.addList(listDatum,historyWeight=0.5)
+    # reporting the estimated Gaussian quartiles
+    print(iqAgent.report(0.0))
+    #    -2.961214270519158
+    print(iqAgent.report(0.25))
+    #    -0.6832621550224423
+    print(iqAgent.report(0.50))
+    #    -0.014392849958746522
+    print(iqAgent.report(0.75))
+    #    0.7029655732010196
+    print(iqAgent.report(1.00))
+    #    2.737259509189501
+
+
 def testDiscreteRandomVariable():
     print('==>> Testing discrete random number generator')
     ## initialize the discrete random variable 
