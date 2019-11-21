@@ -19,7 +19,7 @@ Copyright (C) 2016-2019 Raymond Bisdorff
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 """
-__version__ = "Branch: 3.6 $"
+__version__ = "Branch: 3.7 $"
 # ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
 #from digraphs import *
@@ -85,6 +85,26 @@ _colorPalette2 = [
 colorPalettes = {1: _colorPalette1, 2: _colorPalette2, 3: _colorPalette0}
 
 #---------- general methods -----------------
+# Degfault quantile function from R
+def quantile(x,p):
+    """
+    R type=7 (default) quantile function.
+
+    *x* is a vector of statistical observations of length *n*.
+
+    *p* is an upper-closed cumulative probabilitiy.
+
+    Renders the quantile *q(p)*,
+    i.e. the observation such that the probability to be lower or equal is *p*.
+    """
+    import math
+    n = len(x)
+    j0 = math.floor((n-1) * p)
+    jf = (n-1)*p - j0
+    j1 = math.ceil((n-1) * p)
+    qp = x[j0] + jf*(x[j1]-x[j0])
+    return qp
+
 # from High Performance Python M Gorelick & I Ozswald
 # O'Reilly 2014 p.27
 from functools import wraps
@@ -412,234 +432,6 @@ def total_size(o, handlers={}, verbose=False):
 
     return sizeof(o)
 
-### see arithmetics module
-##class Arithmetics:
-##    """
-##
-##    Tools gathered from the internet for doing arithmetics.
-##
-##    """
-##    def primesbelow(N):
-##        """
-##
-##        http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
-##        Input N>=6, Returns a list of primes, 2 <= p < N
-##
-##        """
-##        correction = N % 6 > 1
-##        N = {0:N, 1:N-1, 2:N+4, 3:N+3, 4:N+2, 5:N+1}[N%6]
-##        sieve = [True] * (N // 3)
-##        sieve[0] = False
-##        for i in range(int(N ** .5) // 3 + 1):
-##            if sieve[i]:
-##                k = (3 * i + 1) | 1
-##                sieve[k*k // 3::2*k] = [False] * ((N//6 - (k*k)//6 - 1)//k + 1)
-##                sieve[(k*k + 4*k - 2*k*(i%2)) // 3::2*k] = [False] * ((N // 6 - (k*k + 4*k - 2*k*(i%2))//6 - 1) // k + 1)
-##        return [2, 3] + [(3 * i + 1) | 1 for i in range(1, N//3 - correction) if sieve[i]]
-##
-##    _smallprimeset = set(primesbelow(100000))
-##    _smallprimesetSize = 100000
-##    def isprime(n, precision=7):
-##        """
-##
-##        http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time
-##
-##        """
-##        if n == 1 or n % 2 == 0:
-##            return False
-##        elif n < 1:
-##            raise ValueError("Out of bounds, first argument must be > 0")
-##        elif n < Arithmetics._smallprimesetSize:
-##            return n in Arithmetics._smallprimeset
-##
-##
-##        d = n - 1
-##        s = 0
-##        while d % 2 == 0:
-##            d //= 2
-##            s += 1
-##
-##        for repeat in range(precision):
-##            a = random.randrange(2, n - 2)
-##            x = pow(a, d, n)
-##
-##            if x == 1 or x == n - 1: continue
-##
-##            for r in range(s - 1):
-##                x = pow(x, 2, n)
-##                if x == 1: return False
-##                if x == n - 1: break
-##            else: return False
-##
-##        return True
-##
-##    def pollard_brent(n):
-##        """
-##
-##        https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/
-##
-##        """
-##        if n % 2 == 0: return 2
-##        if n % 3 == 0: return 3
-##
-##        y, c, m = random.randint(1, n-1), random.randint(1, n-1), random.randint(1, n-1)
-##        g, r, q = 1, 1, 1
-##        while g == 1:
-##            x = y
-##            for i in range(r):
-##                y = (pow(y, 2, n) + c) % n
-##
-##            k = 0
-##            while k < r and g==1:
-##                ys = y
-##                for i in range(min(m, r-k)):
-##                    y = (pow(y, 2, n) + c) % n
-##                    q = q * abs(x-y) % n
-##                g = gcd(q, n)
-##                k += m
-##            r *= 2
-##        if g == n:
-##            while True:
-##                ys = (pow(ys, 2, n) + c) % n
-##                g = gcd(abs(x - ys), n)
-##                if g > 1:
-##                    break
-##
-##        return g
-##
-##    _smallprimes = primesbelow(1000) # might seem low, but 1000*1000 = 1000000, so this will fully factor every composite < 1000000
-##    def primefactors(n, sort=False):
-##        factors = []
-##
-##        limit = int(n ** .5) + 1
-##        for checker in Arithmetics._smallprimes:
-##            if checker > limit: break
-##            while n % checker == 0:
-##                factors.append(checker)
-##                n //= checker
-##                limit = int(n ** .5) + 1
-##                if checker > limit: break
-##
-##        if n < 2: return factors
-##
-##        while n > 1:
-##            if Arithmetics.isprime(n):
-##                factors.append(n)
-##                break
-##            factor = Arithmetics.pollard_brent(n) # trial division did not fully factor, switch to pollard-brent
-##            factors.extend(primefactors(factor)) # recurse to factor the not necessarily prime factor returned by pollard-brent
-##            n //= factor
-##
-##        if sort: factors.sort()
-##
-##        return factors
-##
-##    def factorization(n):
-##        factors = {}
-##        for p1 in Arithmetics.primefactors(n):
-##            try:
-##                factors[p1] += 1
-##            except KeyError:
-##                factors[p1] = 1
-##        return factors
-##
-##    _totients = {}
-##    def totient(n):
-##        """
-##        Implements the totient function rendering
-##        Euler's number of coprime elements a in Zn.
-##        """
-##        if n == 0: return 1
-##
-##        try: return Arithmetics._totients[n]
-##        except KeyError: pass
-##
-##        tot = 1
-##        for p, exp in Arithmetics.factorization(n).items():
-##            tot *= (p - 1)  *  p ** (exp - 1)
-##
-##        Arithmetics._totients[n] = tot
-##        return tot
-##
-##    def gcd(a, b):
-##        """
-##        Renders the greatest common divisor of a and b.
-##        """
-##        if a == b: return a
-##        while b > 0: a, b = b, a % b
-##        return a
-##
-##    def lcm(a, b):
-##        """
-##        Renders the least common multiple of a and b.
-##        """
-##        return abs(a * b) // Arithmetics.gcd(a, b)
-##
-##    def bezout(a,b):
-##        """
-##        Renders d = gcd(a,b) and the
-##        Bezout coefficient x, y such that
-##        d = ax + by.
-##        """
-##        
-##        x,y,u,v = 1,0,0,1
-##        print(a,0,x,y)
-##        print(a,b,u,v)
-##        while b != 0:
-##            r = a % b
-##            q = (a - r)/b
-##            x,y, u,v = u,v, x-(q*u),y-(q*v)
-##            print(a,b,q,r,u,v)
-##            a,b = b,r
-##        return a,x,y
-##
-##    def solPartEqnDioph(a,b,c):
-##        """
-##        renders a particular integer solution of the Diophantian equation
-##        ax + by = c.
-##        """
-##
-##        d = Arithmetics.gcd(a,b)
-##        if c % d != 0:
-##            return None,None,None,None # pas de solution
-##        
-##        A,B,C = a/d, b/d, c/d
-##
-##        D,x,y = Arithmetics.bezout(A,B)
-##
-##        return C*x, C*y , A, B # solution particulière plus coefficients
-##
-##    def zn_squareroots(n,Comments=False):
-##        """
-##        Renders the quadratic residues of Zn as a dictionary.
-##        """
-##        sqrt = {}
-##        units = Arithmetics.zn_units(n)
-##        if Comments:
-##            print(units)
-##        for i in units:
-##            sqi =  i*i % n
-##            if Comments:
-##                print(i,i*i,sqi)
-##            try:
-##                sqrt[sqi].append(i)
-##            except:
-##                sqrt[sqi] = [i]
-##        return sqrt
-##
-##    def zn_units(n,Comments=False):
-##        """
-##        Renders the set of units of Zn.
-##        """
-##        units = set()
-##        for i in range(1,n):
-##            for j in range(1,n):
-##                if (i * j) % n == 1:
-##                    units.add(i)
-##                    units.add(j)
-##        if Comments:
-##            print(units)
-##        return units
     
 
 ###############################
@@ -671,24 +463,5 @@ if __name__ == '__main__':
 ##    pr = PreRankedOutrankingDigraph(t)
 ##    print(total_size(pr))
 
-##  see arithmetics module
-##    a = 17
-##    b = 1
-##    m = 19
-##    
-##    print( ( "Congruence: %dx =  %d (mod %d)" % (a,b,m) ) )  # \equiv = \u2262
-##
-##    x,y,A,B = Arithmetics.solPartEqnDioph(a,m,b)
-##
-##    if x == None:
-##        print("Pas de solution")
-##    else:
-##        print("Solution générale: x = %d + %dn" % (x,B))
-##        h = Arithmetics.gcd(a,m)
-##        y = m / h
-##        print('m,h,y',m,h,y)
-##        print("Il y a %d solution(s) particulière(s):" % (h))
-##        for i in range(h):
-##            print("x_%d = %d + %d*%d (mod %d) = %d" % (i+1,x,i,y,m,(x + (i*y))%m ))
              
 
