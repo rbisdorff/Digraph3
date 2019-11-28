@@ -406,10 +406,35 @@ Here below, for illustration the source code of *relation* constructor of the :p
 			relationOut[a][b] = Med
 	    return relationOut
 
+
+Asymmetric and symmetric parts
+------------------------------
+
+We may also extract the border -i.e. the part of the digraph induced by the union of its initial and terminal prekernels-  as well as the inner part -i.e. the complement of the border- of digraph *dg* with the help of two corresponding classconstructors (see :numref:`graphBorderAndInner`).
+
+    >>> from digraphs import GraphBorder, GraphInner
+    >>> bg = GraphBorder(dg)
+    >>> bg.exportGraphViz()
+    >>> ig = GraphInner(dg)
+    >>> ig.exportGraphViz()
+
+.. figure:: graphBorderAndInner.png
+   :name: graphBorderAndInner
+   :width: 600 px
+   :align: center
+
+   Border and inner of the tutorial random valuation digraph
+   
+.. note::
+
+    Notice that the partial objects *bg* and *ig* put to the indeterminate characteristic value all *not border*, respectively *not inner* links between nodes (see :numref:`graphBorderAndInner`). 
+
+
+
 Fusion by epistemic disjunction
 -------------------------------
 
-We may recover object *dg* from both partial objects *asymDg* and *symDg* with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the :py:class:`digraphs.FusionDigraph` class.
+We may recover object *dg* from both partial objects *asymDg* and *symDg*, or as well from the border *bg* and the inner *ig*, with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the :py:class:`digraphs.FusionDigraph` class.
 
     >>> from digraphs import FusionDigraph
     >>> fusDg = FusionDigraph(asymDg,symDg,operator='o-max')
