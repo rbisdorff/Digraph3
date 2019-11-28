@@ -10093,6 +10093,96 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
 
+<span class="c1"># -------- Graph Border and Inner</span>
+
+<div class="viewcode-block" id="GraphBorder"><a class="viewcode-back" href="../techDoc.html#digraphs.GraphBorder">[docs]</a><span class="k">class</span> <span class="nc">GraphBorder</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Instantiates the partial digraph induced by its border,</span>
+<span class="sd">    i.e. be the union of its initial and terminal kernels.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="n">Digraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+        
+        <span class="n">other</span><span class="o">.</span><span class="n">computePreKernels</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;other.domprekernsls&#39;</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">dompreKernels</span><span class="p">)</span>
+        <span class="n">domBorderActions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">dompreKernels</span><span class="p">:</span>    
+            <span class="n">domBorderActions</span> <span class="o">|=</span> <span class="n">k</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;other.absprekernels&#39;</span><span class="p">,</span><span class="n">other</span><span class="o">.</span><span class="n">abspreKernels</span><span class="p">)</span>
+        <span class="n">absBorderActions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">abspreKernels</span><span class="p">:</span>    
+            <span class="n">absBorderActions</span> <span class="o">|=</span> <span class="n">k</span>
+
+        <span class="n">borderActions</span> <span class="o">=</span> <span class="n">domBorderActions</span> <span class="o">|</span> <span class="n">absBorderActions</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;border actions&#39;</span><span class="p">,</span> <span class="n">borderActions</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_border&#39;</span>
+
+        <span class="n">borderRelation</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
+            <span class="n">borderRelation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="c1">#innerRelation[x] = {}</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">borderActions</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">borderActions</span><span class="p">:</span>
+                    <span class="n">borderRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">borderRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>                                                            
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">borderRelation</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="n">Digraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;border&#39;</span><span class="p">,</span><span class="n">bestChoice</span><span class="o">=</span><span class="n">domBorderActions</span><span class="p">,</span><span class="n">worstChoice</span><span class="o">=</span><span class="n">absBorderActions</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GraphInner"><a class="viewcode-back" href="../techDoc.html#digraphs.GraphInner">[docs]</a><span class="k">class</span> <span class="nc">GraphInner</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Instantiates the partial digraph induced by the complement of its border,</span>
+<span class="sd">    i.e. the nodes not included in the union of its initial and terminal kernels.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="n">Digraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+
+        <span class="n">other</span><span class="o">.</span><span class="n">computePreKernels</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;other.domprekernsls&#39;</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">dompreKernels</span><span class="p">)</span>
+        <span class="n">domBorderActions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">dompreKernels</span><span class="p">:</span>    
+            <span class="n">domBorderActions</span> <span class="o">|=</span> <span class="n">k</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;other.absprekernels&#39;</span><span class="p">,</span><span class="n">other</span><span class="o">.</span><span class="n">abspreKernels</span><span class="p">)</span>
+        <span class="n">absBorderActions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">abspreKernels</span><span class="p">:</span>    
+            <span class="n">absBorderActions</span> <span class="o">|=</span> <span class="n">k</span>
+
+        <span class="n">borderActions</span> <span class="o">=</span> <span class="n">domBorderActions</span> <span class="o">|</span> <span class="n">absBorderActions</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;border actions&#39;</span><span class="p">,</span> <span class="n">borderActions</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_inner&#39;</span>
+        <span class="n">innerRelation</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
+            <span class="n">innerRelation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">borderActions</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">borderActions</span><span class="p">:</span>
+                    <span class="n">innerRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">innerRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
+                                                            
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">innerRelation</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="n">Digraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;inner&#39;</span><span class="p">,</span><span class="n">bestChoice</span><span class="o">=</span><span class="n">domBorderActions</span><span class="p">,</span><span class="n">worstChoice</span><span class="o">=</span><span class="n">absBorderActions</span><span class="p">)</span></div>
+
 
 <span class="c1"># ------ Preorder construction</span>
 

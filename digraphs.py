@@ -10046,6 +10046,96 @@ class FusionLDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
+# -------- Graph Border and Inner
+
+class GraphBorder(Digraph):
+    """
+    Instantiates the partial digraph induced by its border,
+    i.e. be the union of its initial and terminal kernels.
+    """
+    def __init__(self,other,Debug=False):
+        from copy import deepcopy
+        if Debug:
+            Digraph.exportGraphViz(other,other.name)
+
+        self.__dict__ = deepcopy(other.__dict__)
+        
+        other.computePreKernels()
+        if Debug:
+            print('other.domprekernsls', other.dompreKernels)
+        domBorderActions = set()
+        for k in other.dompreKernels:    
+            domBorderActions |= k
+        if Debug:
+            print('other.absprekernels',other.abspreKernels)
+        absBorderActions = set()
+        for k in other.abspreKernels:    
+            absBorderActions |= k
+
+        borderActions = domBorderActions | absBorderActions
+        if Debug:
+            print('border actions', borderActions)
+
+        self.name = other.name + '_border'
+
+        borderRelation = {}
+        for x in self.actions:
+            borderRelation[x] = {}
+            #innerRelation[x] = {}
+            for y in self.actions:
+                if x in borderActions or y in borderActions:
+                    borderRelation[x][y] = self.relation[x][y]
+                else:
+                    borderRelation[x][y] = self.valuationdomain['med']                                                            
+
+        self.relation = borderRelation
+        if Debug:
+            Digraph.exportGraphViz(self,'border',bestChoice=domBorderActions,worstChoice=absBorderActions)
+
+
+class GraphInner(Digraph):
+    """
+    Instantiates the partial digraph induced by the complement of its border,
+    i.e. the nodes not included in the union of its initial and terminal kernels.
+    """
+    def __init__(self,other,Debug=False):
+        from copy import deepcopy
+        if Debug:
+            Digraph.exportGraphViz(other,other.name)
+
+        self.__dict__ = deepcopy(other.__dict__)
+
+        other.computePreKernels()
+        if Debug:
+            print('other.domprekernsls', other.dompreKernels)
+        domBorderActions = set()
+        for k in other.dompreKernels:    
+            domBorderActions |= k
+        if Debug:
+            print('other.absprekernels',other.abspreKernels)
+        absBorderActions = set()
+        for k in other.abspreKernels:    
+            absBorderActions |= k
+
+        borderActions = domBorderActions | absBorderActions
+        if Debug:
+            print('border actions', borderActions)
+
+        self.name = other.name + '_inner'
+        innerRelation = {}
+        for x in self.actions:
+            innerRelation[x] = {}
+            for y in self.actions:
+                if x in borderActions or y in borderActions:
+                    innerRelation[x][y] = self.valuationdomain['med']
+                else:
+                    innerRelation[x][y] = self.relation[x][y]
+                                                            
+
+        self.relation = innerRelation
+        if Debug:
+            Digraph.exportGraphViz(self,'inner',bestChoice=domBorderActions,worstChoice=absBorderActions)
+
 
 # ------ Preorder construction
 

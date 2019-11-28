@@ -853,3 +853,11 @@ def testCompleteness():
     print('Relation %s is complete ? %s' % (gcd.name,str(gcd.isComplete(Debug=True))))
     print('Relation %s is weakly complete ? %s' % (gcd.name,str(gcd.isWeaklyComplete(Debug=True))))    
 
+def testGraphBorderInner():
+    print('*------- test graph border and inners ------*')
+    t = RandomCBPerformanceTableau(numberOfActions=10,weightDistribution="equiobjectives")
+    g = BipolarOutrankingDigraph(t)
+    bg = GraphBorder(g,Debug=True)
+    ig = GraphInner(g,Debug=True)
+    rg = FusionDigraph(bg,ig)
+    Digraph.exportGraphViz(rg,(g.name+'fused'))
