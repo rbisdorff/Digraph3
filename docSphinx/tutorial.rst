@@ -407,10 +407,10 @@ Here below, for illustration the source code of *relation* constructor of the :p
 	    return relationOut
 
 
-Asymmetric and symmetric parts
+Border and inner parts
 ------------------------------
 
-We may also extract the border -i.e. the part of the digraph induced by the union of its initial and terminal prekernels-  as well as the inner part -i.e. the complement of the border- of digraph *dg* with the help of two corresponding classconstructors (see :numref:`graphBorderAndInner`).
+We may also extract the border -i.e. the part of the digraph induced by the union of its initial and terminal prekernels-  as well as the inner part -i.e. the complement of the border part- of digraph *dg* with the help of two corresponding class constructors (see :numref:`graphBorderAndInner`).
 
     >>> from digraphs import GraphBorder, GraphInner
     >>> bg = GraphBorder(dg)
@@ -423,7 +423,7 @@ We may also extract the border -i.e. the part of the digraph induced by the unio
    :width: 600 px
    :align: center
 
-   Border and inner of the tutorial random valuation digraph
+   Border and inner part of the tutorial random valuation digraph
    
 .. note::
 
@@ -438,6 +438,7 @@ We may recover object *dg* from both partial objects *asymDg* and *symDg*, or as
 
     >>> from digraphs import FusionDigraph
     >>> fusDg = FusionDigraph(asymDg,symDg,operator='o-max')
+    >>> # fusDg = FusionDigraph(bg,ig,operator='o-max')
     >>> fusDg.showRelationTable()
     * ---- Relation Table -----
     r(xSy) |  '1'    '2'   '3'  '4'   '5'    '6'  '7'	  
