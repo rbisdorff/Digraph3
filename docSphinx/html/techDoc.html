@@ -413,18 +413,18 @@ class;</p>
 <dt><a class="reference internal" href="#weakorders-label"><span class="std std-ref">weakOrders module</span></a></dt>
 <dd><p class="first">Additional tools for solving pre-ranking problems with
 root <a class="reference external" href="techDoc.html#weakOrders.WeakOrder">WeakOrder</a> class.</p>
-<img src="_images/inheritance-4458425b19151a21601641d31c3e3c96a430a9b2.png" alt="Inheritance diagram of weakOrders" usemap="#inheritance43ca32dee1" class="inheritance"/>
+<img src="_images/inheritance-58cd938583e5a4ba7dcf78ef94a42b528942cee9.png" alt="Inheritance diagram of weakOrders" usemap="#inheritance43ca32dee1" class="inheritance"/>
 <map id="inheritance43ca32dee1" name="inheritance43ca32dee1">
 <area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="4,71,94,88"/>
 <area shape="rect" id="node3" href="#weakOrders.WeakOrder" target="_top" title="Abstract class for weak orderings&#39; specialized methods." alt="" coords="127,71,246,88"/>
 <area shape="rect" id="node2" href="#weakOrders.KemenyWeakOrder" target="_top" title="Specialization of the abstract WeakOrder class for " alt="" coords="314,4,470,21"/>
 <area shape="rect" id="node4" href="#weakOrders.KohlerArrowRaynaudFusionDigraph" target="_top" title="Specialization of the abstract WeakOrder class for " alt="" coords="279,37,504,54"/>
-<area shape="rect" id="node5" href="#weakOrders.PrincipalInOutDegreesOrdering" target="_top" title="Specialization of abstract WeakOrder class for ranking by fusion" alt="" coords="288,71,495,88"/>
-<area shape="rect" id="node7" href="#weakOrders.RankingByChoosingDigraph" target="_top" title="Specialization of the abstract WeakOrder class for " alt="" coords="295,104,489,121"/>
-<area shape="rect" id="node10" href="#weakOrders.WeakRankingOrder" target="_top" title="Specialization of the abstract WeakOrder class for " alt="" coords="314,138,470,155"/>
-<area shape="rect" id="node6" href="#weakOrders.RankingByBestChoosingDigraph" target="_top" title="Specialization of abstract WeakOrder class for computing a ranking by best&#45;choosing." alt="" coords="544,71,758,88"/>
-<area shape="rect" id="node8" href="#weakOrders.RankingByLastChoosingDigraph" target="_top" title="Specialization of abstract WeakOrder class for computing a ranking by rejecting." alt="" coords="545,104,757,121"/>
-<area shape="rect" id="node9" href="#weakOrders.RankingByPrudentChoosingDigraph" target="_top" title="Specialization for ranking&#45;by&#45;rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0)." alt="" coords="537,138,764,155"/>
+<area shape="rect" id="node5" href="#weakOrders.PartialRanking" target="_top" title="Specialization of the abstract WeakOrder class for " alt="" coords="324,71,459,88"/>
+<area shape="rect" id="node6" href="#weakOrders.PrincipalInOutDegreesOrdering" target="_top" title="Specialization of abstract WeakOrder class for ranking by fusion" alt="" coords="288,104,495,121"/>
+<area shape="rect" id="node8" href="#weakOrders.RankingByChoosingDigraph" target="_top" title="Specialization of the abstract WeakOrder class for " alt="" coords="295,138,489,155"/>
+<area shape="rect" id="node7" href="#weakOrders.RankingByBestChoosingDigraph" target="_top" title="Specialization of abstract WeakOrder class for computing a ranking by best&#45;choosing." alt="" coords="544,104,758,121"/>
+<area shape="rect" id="node9" href="#weakOrders.RankingByLastChoosingDigraph" target="_top" title="Specialization of abstract WeakOrder class for computing a ranking by rejecting." alt="" coords="545,138,757,155"/>
+<area shape="rect" id="node10" href="#weakOrders.RankingByPrudentChoosingDigraph" target="_top" title="Specialization for ranking&#45;by&#45;rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0)." alt="" coords="537,171,764,188"/>
 </map></dd>
 </dl>
 </li>
@@ -8194,6 +8194,29 @@ Kohler linear best ordering and an Arrow-Raynaud linear worst ordering.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="weakOrders.PartialRanking">
+<em class="property">class </em><code class="descclassname">weakOrders.</code><code class="descname">PartialRanking</code><span class="sig-paren">(</span><em>other</em>, <em>rankings</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/weakOrders.html#PartialRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#weakOrders.PartialRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#weakOrders.WeakOrder" title="weakOrders.WeakOrder"><code class="xref py py-class docutils literal"><span class="pre">weakOrders.WeakOrder</span></code></a></p>
+<p>Specialization of the abstract WeakOrder class for 
+weak orderings resulting from the epistemic
+disjunctive fusion (omax operator) of a list of rankings.</p>
+<p>Example application:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="k">import</span> <span class="n">PartialRanking</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="n">PreRankedOutrankingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pr</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r1</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">boostedRanking</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span> <span class="o">=</span> <span class="n">pro</span><span class="o">.</span><span class="n">boostedRanking</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prp</span> <span class="o">=</span> <span class="n">QuantilesRankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;pessimistic&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r3</span> <span class="o">=</span> <span class="n">prp</span><span class="o">.</span><span class="n">boostedRanking</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wqr</span> <span class="o">=</span> <span class="n">PartialRanking</span><span class="p">(</span><span class="n">pr</span><span class="p">,[</span><span class="n">r1</span><span class="p">,</span><span class="n">r2</span><span class="p">,</span><span class="n">r3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wqr</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;partialOrdering&#39;</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
 <dt id="weakOrders.PrincipalInOutDegreesOrdering">
 <em class="property">class </em><code class="descclassname">weakOrders.</code><code class="descname">PrincipalInOutDegreesOrdering</code><span class="sig-paren">(</span><em>other</em>, <em>fusionOperator='o-max'</em>, <em>imageType=None</em>, <em>plotFileName=None</em>, <em>Threading=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/weakOrders.html#PrincipalInOutDegreesOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#weakOrders.PrincipalInOutDegreesOrdering" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#weakOrders.WeakOrder" title="weakOrders.WeakOrder"><code class="xref py py-class docutils literal"><span class="pre">weakOrders.WeakOrder</span></code></a></p>
@@ -8405,29 +8428,6 @@ valued self relation.</p>
 <dd><p>A show method for self.rankinByChoosing result.</p>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="class">
-<dt id="weakOrders.WeakRankingOrder">
-<em class="property">class </em><code class="descclassname">weakOrders.</code><code class="descname">WeakRankingOrder</code><span class="sig-paren">(</span><em>other</em>, <em>rankings</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/weakOrders.html#WeakRankingOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#weakOrders.WeakRankingOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#weakOrders.WeakOrder" title="weakOrders.WeakOrder"><code class="xref py py-class docutils literal"><span class="pre">weakOrders.WeakOrder</span></code></a></p>
-<p>Specialization of the abstract WeakOrder class for 
-weak orderings resulting from the epistemic
-disjunctive fusion (omax operator) of a list of rankings.</p>
-<p>Example application:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="k">import</span> <span class="n">WeakRankingOrder</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="n">PreRankedOutrankingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pr</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">r1</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">boostedRanking</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">r2</span> <span class="o">=</span> <span class="n">pro</span><span class="o">.</span><span class="n">boostedRanking</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">prp</span> <span class="o">=</span> <span class="n">QuantilesRankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;pessimistic&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">r3</span> <span class="o">=</span> <span class="n">prp</span><span class="o">.</span><span class="n">boostedRanking</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wqr</span> <span class="o">=</span> <span class="n">WeakQuantilesRankingOrder</span><span class="p">(</span><span class="n">pr</span><span class="p">,[</span><span class="n">r1</span><span class="p">,</span><span class="n">r2</span><span class="p">,</span><span class="n">r3</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wqr</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;partialOrdering&#39;</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s2">&quot;pdf&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#technical-label"><span class="std std-ref">Installation</span></a></p>

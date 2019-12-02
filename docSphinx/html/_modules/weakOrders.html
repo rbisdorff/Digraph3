@@ -327,7 +327,7 @@
 <span class="c1">##</span>
 <span class="c1">##        Digraph.showRankingByChoosing(self,rankingByChoosing)</span>
 
-<div class="viewcode-block" id="WeakRankingOrder"><a class="viewcode-back" href="../techDoc.html#weakOrders.WeakRankingOrder">[docs]</a><span class="k">class</span> <span class="nc">WeakRankingOrder</span><span class="p">(</span><span class="n">WeakOrder</span><span class="p">):</span>
+<div class="viewcode-block" id="PartialRanking"><a class="viewcode-back" href="../techDoc.html#weakOrders.PartialRanking">[docs]</a><span class="k">class</span> <span class="nc">PartialRanking</span><span class="p">(</span><span class="n">WeakOrder</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the abstract WeakOrder class for </span>
 <span class="sd">    weak orderings resulting from the epistemic</span>
@@ -335,7 +335,7 @@
 
 <span class="sd">    Example application:</span>
 
-<span class="sd">    &gt;&gt;&gt; from weakOrders import WeakRankingOrder</span>
+<span class="sd">    &gt;&gt;&gt; from weakOrders import PartialRanking</span>
 <span class="sd">    &gt;&gt;&gt; from sparseOutrankingDigraphs import PreRankedOutrankingDigraph</span>
 <span class="sd">    &gt;&gt;&gt; t = RandomPerformanceTableau()</span>
 <span class="sd">    &gt;&gt;&gt; pr = PreRankedOutrankingDigraph(t,10,quantilesOrderingStrategy=&#39;average&#39;)</span>
@@ -344,7 +344,7 @@
 <span class="sd">    &gt;&gt;&gt; r2 = pro.boostedRanking</span>
 <span class="sd">    &gt;&gt;&gt; prp = QuantilesRankingDigraph(t,10,quantilesOrderingStrategy=&#39;pessimistic&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; r3 = prp.boostedRanking</span>
-<span class="sd">    &gt;&gt;&gt; wqr = WeakQuantilesRankingOrder(pr,[r1,r2,r3])</span>
+<span class="sd">    &gt;&gt;&gt; wqr = PartialRanking(pr,[r1,r2,r3])</span>
 <span class="sd">    &gt;&gt;&gt; wqr.exportGraphViz(&#39;partialOrdering&#39;,graphType=&quot;pdf&quot;)</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
