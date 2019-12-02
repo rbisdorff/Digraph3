@@ -611,7 +611,7 @@ the current working directory a <code class="code docutils literal"><span class=
 </div>
 <div class="section" id="border-and-inner-parts">
 <h3><a class="toc-backref" href="#id172">Border and inner parts</a><a class="headerlink" href="#border-and-inner-parts" title="Permalink to this headline">¶</a></h3>
-<p>We may also extract the border -i.e. the part of the digraph induced by the union of its initial and terminal prekernels-  as well as the inner part -i.e. the complement of the border part- of digraph <em>dg</em> with the help of two corresponding class constructors (see <a class="reference internal" href="#graphborderandinner"><span class="std std-numref">Fig. 5</span></a>).</p>
+<p>We may also extract the border -i.e. the part of the digraph induced by the union of its initial and terminal prekernels (see <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>) -  as well as the inner part -i.e. the complement of the border part- of digraph <em>dg</em> with the help of two corresponding class constructors (see <a class="reference internal" href="#graphborderandinner"><span class="std std-numref">Fig. 5</span></a>).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -647,8 +647,10 @@ the current working directory a <code class="code docutils literal"><span class=
 10
 11
 12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">FusionDigraph</span>
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">FusionDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fusDg</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">asymDg</span><span class="p">,</span><span class="n">symDg</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># fusDg = FusionDigraph(bg,ig,operator=&#39;o-max&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fusDg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
 <span class="go">* ---- Relation Table -----</span>
 <span class="go">r(xSy) |  &#39;1&#39;    &#39;2&#39;   &#39;3&#39;  &#39;4&#39;   &#39;5&#39;    &#39;6&#39;  &#39;7&#39;</span>

@@ -410,7 +410,7 @@ Here below, for illustration the source code of *relation* constructor of the :p
 Border and inner parts
 ------------------------------
 
-We may also extract the border -i.e. the part of the digraph induced by the union of its initial and terminal prekernels-  as well as the inner part -i.e. the complement of the border part- of digraph *dg* with the help of two corresponding class constructors (see :numref:`graphBorderAndInner`).
+We may also extract the border -i.e. the part of the digraph induced by the union of its initial and terminal prekernels (see :ref:`Kernel-Tutorial-label`) -  as well as the inner part -i.e. the complement of the border part- of digraph *dg* with the help of two corresponding class constructors (see :numref:`graphBorderAndInner`).
 
     >>> from digraphs import GraphBorder, GraphInner
     >>> bg = GraphBorder(dg)
