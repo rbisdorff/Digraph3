@@ -280,7 +280,7 @@ class WeakOrder(Digraph):
 ##
 ##        Digraph.showRankingByChoosing(self,rankingByChoosing)
 
-class WeakRankingOrder(WeakOrder):
+class PartialRanking(WeakOrder):
     """
     Specialization of the abstract WeakOrder class for 
     weak orderings resulting from the epistemic
@@ -288,7 +288,7 @@ class WeakRankingOrder(WeakOrder):
 
     Example application:
 
-    >>> from weakOrders import WeakRankingOrder
+    >>> from weakOrders import PartialRanking
     >>> from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
     >>> t = RandomPerformanceTableau()
     >>> pr = PreRankedOutrankingDigraph(t,10,quantilesOrderingStrategy='average')
@@ -297,7 +297,7 @@ class WeakRankingOrder(WeakOrder):
     >>> r2 = pro.boostedRanking
     >>> prp = QuantilesRankingDigraph(t,10,quantilesOrderingStrategy='pessimistic')
     >>> r3 = prp.boostedRanking
-    >>> wqr = WeakQuantilesRankingOrder(pr,[r1,r2,r3])
+    >>> wqr = PartialRanking(pr,[r1,r2,r3])
     >>> wqr.exportGraphViz('partialOrdering',graphType="pdf")
     
     """
