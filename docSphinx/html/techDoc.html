@@ -2802,13 +2802,13 @@ called dg1 and dg2.</p>
 
 <dl class="class">
 <dt id="digraphs.FusionLDigraph">
-<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">FusionLDigraph</code><span class="sig-paren">(</span><em>L</em>, <em>operator='o-min'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#FusionLDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.FusionLDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">digraphs.</code><code class="descname">FusionLDigraph</code><span class="sig-paren">(</span><em>L</em>, <em>operator='o-max'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#FusionLDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.FusionLDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
 <p>Instantiates the epistemic fusion a list L of Digraph instances.</p>
 <p>Parameter:</p>
 <blockquote>
 <div><ul class="simple">
-<li>operator = “o-min” | “o-max” (epistemic conjunctive or dijunctive fusion)</li>
+<li>operator = “o-max” (default) | “o-min” : epistemic disjunctive or conjunctive fusion)</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -8869,7 +8869,7 @@ and operate omax on the three assembled arguments.</p>
 <code class="descclassname">digraphsTools.</code><code class="descname">omin</code><span class="sig-paren">(</span><em>Med</em>, <em>L</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#omin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.omin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Epistemic <strong>conjunction</strong> of a list L of bipolar outranking characteristics.
 Med is the given valuation domain median.</p>
-<p>With <strong>positive</strong> arguments, omax operates a <strong>min</strong>,
+<p>With <strong>positive</strong> arguments, omin operates a <strong>min</strong>,
 with <strong>negative</strong> arguments, a <strong>max</strong>.</p>
 <p>The mixture of both <strong>positive and negative</strong> arguments results
 in an <strong>indeterminate</strong> value.</p>

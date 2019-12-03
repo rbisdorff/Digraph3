@@ -183,7 +183,7 @@ def omin(Med,L, Debug=False):
     Epistemic **conjunction** of a list L of bipolar outranking characteristics.
     Med is the given valuation domain median.
 
-    With **positive** arguments, omax operates a **min**,
+    With **positive** arguments, omin operates a **min**,
     with **negative** arguments, a **max**.
 
     The mixture of both **positive and negative** arguments results
@@ -199,9 +199,9 @@ def omin(Med,L, Debug=False):
     termsMinus = []
     termsNuls = []
     for i in range(len(terms)):
-        if terms[i] > Med:
+        if terms[i] >= Med:
             termsPlus.append(terms[i])
-        elif terms[i] < Med:
+        elif terms[i] <= Med:
             termsMinus.append(terms[i])
         else:
             termsNuls.append(terms[i])
@@ -438,9 +438,7 @@ def total_size(o, handlers={}, verbose=False):
 if __name__ == '__main__':
     ######  scratch pad for testing the module components
 
-    from digraphsTools import x11ColorNames
-    print(x11ColorNames)
-##    print(grayCode(4))
+    print(grayCode(4))
 ##    #print(list(generateBipolarGrayCode(4)))
 ##    print(list(generateGrayCode(4)))
 ##    print(list(generateLooplessGrayCode(4)))

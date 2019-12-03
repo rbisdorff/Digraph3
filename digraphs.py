@@ -9976,15 +9976,15 @@ class ConverseDigraph(Digraph):
 
 class FusionDigraph(Digraph):
     """
-    Instantiates the epistemic fusion of two given Digraph instances
-    called dg1 and dg2.
+    Instantiates the epistemic disjunctive (default) or conjunctive fusion of 
+    two given Digraph instances called dg1 and dg2.
 
     Parameter:
 
-        * operator = "o-min" | "o-max" (epistemic conjunctive or disjunctive fusion)
+        * operator = "o-max (default)" | "o-min" : epistemic disjunctive, resp. conjunctive fusion operator.
     """
 
-    def __init__(self,dg1,dg2,operator="o-min"):
+    def __init__(self,dg1,dg2,operator="o-max"):
         from copy import deepcopy
         from digraphsTools import omin, omax
         self.name = 'fusion-'+dg1.name+'-'+dg2.name
@@ -10017,10 +10017,10 @@ class FusionLDigraph(Digraph):
 
     Parameter:
 
-        * operator = "o-min" | "o-max" (epistemic conjunctive or dijunctive fusion)
+        * operator = "o-max" (default) | "o-min" : epistemic disjunctive or conjunctive fusion)
     """
 
-    def __init__(self,L,operator="o-min"):
+    def __init__(self,L,operator="o-max"):
         from copy import deepcopy
         self.name = 'fusion-'+L[0].name
         self.actions = deepcopy(L[0].actions)

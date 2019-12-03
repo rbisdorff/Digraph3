@@ -230,7 +230,7 @@
 <span class="sd">    Epistemic **conjunction** of a list L of bipolar outranking characteristics.</span>
 <span class="sd">    Med is the given valuation domain median.</span>
 
-<span class="sd">    With **positive** arguments, omax operates a **min**,</span>
+<span class="sd">    With **positive** arguments, omin operates a **min**,</span>
 <span class="sd">    with **negative** arguments, a **max**.</span>
 
 <span class="sd">    The mixture of both **positive and negative** arguments results</span>
@@ -246,9 +246,9 @@
     <span class="n">termsMinus</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">termsNuls</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Med</span><span class="p">:</span>
             <span class="n">termsPlus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="k">elif</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">Med</span><span class="p">:</span>
             <span class="n">termsMinus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">termsNuls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
@@ -485,9 +485,7 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1">######  scratch pad for testing the module components</span>
 
-    <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">x11ColorNames</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">x11ColorNames</span><span class="p">)</span>
-<span class="c1">##    print(grayCode(4))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">grayCode</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
 <span class="c1">##    #print(list(generateBipolarGrayCode(4)))</span>
 <span class="c1">##    print(list(generateGrayCode(4)))</span>
 <span class="c1">##    print(list(generateLooplessGrayCode(4)))</span>
