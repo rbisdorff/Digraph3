@@ -1340,6 +1340,7 @@ class Digraph(object):
         Renders the bipolar-valued relation obtained from
         the self.rankingByChoosing result.
         """
+        from digraphsTools import omax, omin
         from copy import copy, deepcopy
         if rankingByChoosing==None:
             try:
@@ -9180,91 +9181,91 @@ class Digraph(object):
         res = self.computeSingletonRanking(Comments,Debug)
         return res
 
-    def omax(self,L, Debug=False):
-        """
-        Epistemic **disjunction** for bipolar outranking characteristics
-        computation: Med is the valuation domain median and L is a list of
-        r-valued statement characteristics.
+    # def omax(self,L, Debug=False):
+    #     """
+    #     Epistemic **disjunction** for bipolar outranking characteristics
+    #     computation: Med is the valuation domain median and L is a list of
+    #     r-valued statement characteristics.
 
-        With **positive** arguments, omax operates a **max**,
-        with **negative** arguments, a **min**.
+    #     With **positive** arguments, omax operates a **max**,
+    #     with **negative** arguments, a **min**.
 
-        The mixture of **both positive and negative** arguments results in
-        an **indeterminate** value.
+    #     The mixture of **both positive and negative** arguments results in
+    #     an **indeterminate** value.
 
-        Likewise to a mean, the *omax* operator is not associative. We therefore first assemble all positive, negative and null terms
-        and operate omax on the three assembled arguments.
-        """
-        Med = self.valuationdomain['med']
-        terms = list(L)
-        termsPlus = []
-        termsMinus = []
-        termsNuls = []
-        for i in range(len(terms)):
-            if terms[i] > Med:
-                termsPlus.append(terms[i])
-            elif terms[i] < Med:
-                termsMinus.append(terms[i])
-            else:
-                termsNuls.append(terms[i])
-        if Debug:
-            print('terms', terms)
-            print('termsPlus',termsPlus)
-            print('termsMinus', termsMinus)
-            print('termsNuls', termsNuls)
-        np = len(termsPlus)
-        nm = len(termsMinus)
-        if np > 0 and nm == 0:
-            return max(termsPlus)
-        elif nm > 0 and np == 0:
-            return min(termsMinus)
-        else:
-            return Med
+    #     Likewise to a mean, the *omax* operator is not associative. We therefore first assemble all positive, negative and null terms
+    #     and operate omax on the three assembled arguments.
+    #     """
+    #     Med = self.valuationdomain['med']
+    #     terms = list(L)
+    #     termsPlus = []
+    #     termsMinus = []
+    #     termsNuls = []
+    #     for i in range(len(terms)):
+    #         if terms[i] > Med:
+    #             termsPlus.append(terms[i])
+    #         elif terms[i] < Med:
+    #             termsMinus.append(terms[i])
+    #         else:
+    #             termsNuls.append(terms[i])
+    #     if Debug:
+    #         print('terms', terms)
+    #         print('termsPlus',termsPlus)
+    #         print('termsMinus', termsMinus)
+    #         print('termsNuls', termsNuls)
+    #     np = len(termsPlus)
+    #     nm = len(termsMinus)
+    #     if np > 0 and nm == 0:
+    #         return max(termsPlus)
+    #     elif nm > 0 and np == 0:
+    #         return min(termsMinus)
+    #     else:
+    #         return Med
 
-    def omin(self,L, Debug=False):
-        """
-        Epistemic **conjunction** of a list L of bipolar outranking characteristics.
-        Med is the given valuation domain median.
+    # def omin(self,L, Debug=False):
+    #     """
+    #     Epistemic **conjunction** of a list L of bipolar outranking characteristics.
+    #     Med is the given valuation domain median.
 
-        With **positive** arguments, omax operates a **min**,
-        with **negative** arguments, a **max**.
+    #     With **positive** arguments, omax operates a **min**,
+    #     with **negative** arguments, a **max**.
 
-        The mixture of both **positive and negative** arguments results
-        in an **indeterminate** value.
+    #     The mixture of both **positive and negative** arguments results
+    #     in an **indeterminate** value.
 
-        Likewise to a mean, the *omin* operator is not associative. We therefore first assemble all positive, negative and null terms
-        and operate omin on the three assembled arguments. 
+    #     Likewise to a mean, the *omin* operator is not associative. We therefore first assemble all positive, negative and null terms
+    #     and operate omin on the three assembled arguments. 
 
-        """
-        Med = self.valuationdomain['med']
-        terms = list(L)
-        termsPlus = []
-        termsMinus = []
-        termsNuls = []
-        for i in range(len(terms)):
-            if terms[i] > Med:
-                termsPlus.append(terms[i])
-            elif terms[i] < Med:
-                termsMinus.append(terms[i])
-            else:
-                termsNuls.append(terms[i])
-        if Debug:
-            print('terms', terms)
-            print('termsPlus',termsPlus)
-            print('termsMinus', termsMinus)
-            print('termsNuls', termsNuls)
-        np = len(termsPlus)
-        nm = len(termsMinus)
-        if np > 0:
-            if nm > 0:
-                return Med
-            else:
-                return min(termsPlus)
-        else:
-            if nm > 0:
-                return max(termsMinus)
-            else:
-                return Med
+    #     """
+    #     Med = self.valuationdomain['med']
+    #     terms = list(L)
+    #     termsPlus = []
+    #     termsMinus = []
+    #     termsNuls = []
+    #     for i in range(len(terms)):
+    #         if terms[i] >= Med:
+    #             termsPlus.append(terms[i])
+    #         elif terms[i] <= Med:
+    #             termsMinus.append(terms[i])
+    #         else:
+    #             termsNuls.append(terms[i])
+    #     if Debug:
+    #         print('terms', terms)
+    #         print('termsPlus',termsPlus)
+    #         print('termsMinus', termsMinus)
+    #         print('termsNuls', termsNuls)
+    #     np = len(termsPlus)
+    #     nm = len(termsMinus)
+    #     if np > 0:
+    #         if nm > 0:
+    #             return Med
+    #         else:
+    #             return min(termsPlus)
+    #     else:
+    #         if nm > 0:
+    #             return max(termsMinus)
+    #         else:
+    #             return Med
 
     def _computeNetFlowsRankingDict(self,Stored=True,Debug=False):
         """

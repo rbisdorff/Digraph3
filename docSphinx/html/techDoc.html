@@ -413,14 +413,14 @@ class;</p>
 <dt><a class="reference internal" href="#transitivedigraphs-label"><span class="std std-ref">transitiveDigraphs module</span></a></dt>
 <dd><p class="first">Additional tools for solving pre-ranking problems with
 root <a class="reference external" href="techDoc.html#transitiveDigraphs.TransitiveDigraph">TransitiveDigraph</a> class.</p>
-<img src="_images/inheritance-efd8b4dc2180a0764ec967fe3c231f10311f325a.png" alt="Inheritance diagram of transitiveDigraphs" usemap="#inheritanceba1a0888c6" class="inheritance"/>
+<img src="_images/inheritance-778c733aacf410c1ca1ea4a7028aba4c1a73f973.png" alt="Inheritance diagram of transitiveDigraphs" usemap="#inheritanceba1a0888c6" class="inheritance"/>
 <map id="inheritanceba1a0888c6" name="inheritanceba1a0888c6">
 <area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="3,76,81,90"/>
 <area shape="rect" id="node3" href="#transitiveDigraphs.TransitiveDigraph" target="_top" title="Abstract class for specialized methods addressing transitive digraphs." alt="" coords="109,76,261,90"/>
-<area shape="rect" id="node2" href="#transitiveDigraphs.KemenyOrdersFusionDigraph" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="305,3,501,18"/>
+<area shape="rect" id="node2" href="#transitiveDigraphs.KemenyOrdersFusion" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="320,3,485,18"/>
 <area shape="rect" id="node4" href="#transitiveDigraphs.KemenyWeakOrder" target="_top" title="dummy class for backward compatibility." alt="" coords="575,3,734,18"/>
-<area shape="rect" id="node5" href="#transitiveDigraphs.KohlerArrowRaynaudFusionDigraph" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="293,32,512,47"/>
-<area shape="rect" id="node7" href="#transitiveDigraphs.RankingsFusionDigraph" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="315,61,490,76"/>
+<area shape="rect" id="node5" href="#transitiveDigraphs.KohlerArrowRaynaudFusion" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="308,32,497,47"/>
+<area shape="rect" id="node7" href="#transitiveDigraphs.RankingsFusion" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="331,61,475,76"/>
 <area shape="rect" id="node9" href="#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion" target="_top" title="Specialization of abstract TransitiveDigraph class for ranking by fusion" alt="" coords="289,90,516,104"/>
 <area shape="rect" id="node11" href="#transitiveDigraphs.RankingByChoosingDigraph" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="307,119,498,133"/>
 <area shape="rect" id="node14" href="#transitiveDigraphs.WeakOrder" target="_top" title="dummy class for backward compatibility." alt="" coords="339,147,467,162"/>
@@ -2118,33 +2118,6 @@ the not absorbed neighborhood.</p>
 <dt id="digraphs.Digraph.notdneighbors">
 <code class="descname">notdneighbors</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.notdneighbors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.notdneighbors" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the set of not dominated out-neighbors of a node.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.Digraph.omax">
-<code class="descname">omax</code><span class="sig-paren">(</span><em>L</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.omax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.omax" title="Permalink to this definition">¶</a></dt>
-<dd><p>Epistemic <strong>disjunction</strong> for bipolar outranking characteristics
-computation: Med is the valuation domain median and L is a list of
-r-valued statement characteristics.</p>
-<p>With <strong>positive</strong> arguments, omax operates a <strong>max</strong>,
-with <strong>negative</strong> arguments, a <strong>min</strong>.</p>
-<p>The mixture of <strong>both positive and negative</strong> arguments results in
-an <strong>indeterminate</strong> value.</p>
-<p>Likewise to a mean, the <em>omax</em> operator is not associative. We therefore first assemble all positive, negative and null terms
-and operate omax on the three assembled arguments.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="digraphs.Digraph.omin">
-<code class="descname">omin</code><span class="sig-paren">(</span><em>L</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.omin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.omin" title="Permalink to this definition">¶</a></dt>
-<dd><p>Epistemic <strong>conjunction</strong> of a list L of bipolar outranking characteristics.
-Med is the given valuation domain median.</p>
-<p>With <strong>positive</strong> arguments, omax operates a <strong>min</strong>,
-with <strong>negative</strong> arguments, a <strong>max</strong>.</p>
-<p>The mixture of both <strong>positive and negative</strong> arguments results
-in an <strong>indeterminate</strong> value.</p>
-<p>Likewise to a mean, the <em>omin</em> operator is not associative. We therefore first assemble all positive, negative and null terms
-and operate omin on the three assembled arguments.</p>
 </dd></dl>
 
 <dl class="method">
@@ -8177,8 +8150,8 @@ Copyright (C) 2006-2019  Raymond Bisdorff</p>
 <p>You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
 </div></blockquote>
 <dl class="class">
-<dt id="transitiveDigraphs.KemenyOrdersFusionDigraph">
-<em class="property">class </em><code class="descclassname">transitiveDigraphs.</code><code class="descname">KemenyOrdersFusionDigraph</code><span class="sig-paren">(</span><em>other</em>, <em>orderLimit=7</em>, <em>fusionOperator='o-max'</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#KemenyOrdersFusionDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.KemenyOrdersFusionDigraph" title="Permalink to this definition">¶</a></dt>
+<dt id="transitiveDigraphs.KemenyOrdersFusion">
+<em class="property">class </em><code class="descclassname">transitiveDigraphs.</code><code class="descname">KemenyOrdersFusion</code><span class="sig-paren">(</span><em>other</em>, <em>orderLimit=7</em>, <em>fusionOperator='o-max'</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#KemenyOrdersFusion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.KemenyOrdersFusion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph" title="transitiveDigraphs.TransitiveDigraph"><code class="xref py py-class docutils literal"><span class="pre">transitiveDigraphs.TransitiveDigraph</span></code></a></p>
 <p>Specialization of the abstract TransitiveDigraph class for 
 transitive digraphs resulting from the epistemic
@@ -8195,13 +8168,13 @@ all potential Kemeny linear orderings.</p>
 <dl class="class">
 <dt id="transitiveDigraphs.KemenyWeakOrder">
 <em class="property">class </em><code class="descclassname">transitiveDigraphs.</code><code class="descname">KemenyWeakOrder</code><span class="sig-paren">(</span><em>other</em>, <em>orderLimit=7</em>, <em>fusionOperator='o-max'</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#KemenyWeakOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.KemenyWeakOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#transitiveDigraphs.KemenyOrdersFusionDigraph" title="transitiveDigraphs.KemenyOrdersFusionDigraph"><code class="xref py py-class docutils literal"><span class="pre">transitiveDigraphs.KemenyOrdersFusionDigraph</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#transitiveDigraphs.KemenyOrdersFusion" title="transitiveDigraphs.KemenyOrdersFusion"><code class="xref py py-class docutils literal"><span class="pre">transitiveDigraphs.KemenyOrdersFusion</span></code></a></p>
 <p>dummy class for backward compatibility.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="transitiveDigraphs.KohlerArrowRaynaudFusionDigraph">
-<em class="property">class </em><code class="descclassname">transitiveDigraphs.</code><code class="descname">KohlerArrowRaynaudFusionDigraph</code><span class="sig-paren">(</span><em>outrankingDigraph</em>, <em>fusionOperator='o-max'</em>, <em>Threading=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#KohlerArrowRaynaudFusionDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.KohlerArrowRaynaudFusionDigraph" title="Permalink to this definition">¶</a></dt>
+<dt id="transitiveDigraphs.KohlerArrowRaynaudFusion">
+<em class="property">class </em><code class="descclassname">transitiveDigraphs.</code><code class="descname">KohlerArrowRaynaudFusion</code><span class="sig-paren">(</span><em>outrankingDigraph</em>, <em>fusionOperator='o-max'</em>, <em>Threading=True</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#KohlerArrowRaynaudFusion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.KohlerArrowRaynaudFusion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph" title="transitiveDigraphs.TransitiveDigraph"><code class="xref py py-class docutils literal"><span class="pre">transitiveDigraphs.TransitiveDigraph</span></code></a></p>
 <p>Specialization of the abstract TransitiveDigraph class for 
 ranking-by-choosing orderings resulting from the epistemic
@@ -8212,7 +8185,7 @@ Kohler linear best ordering and an Arrow-Raynaud linear worst ordering.</p>
 <dl class="class">
 <dt id="transitiveDigraphs.PartialRanking">
 <em class="property">class </em><code class="descclassname">transitiveDigraphs.</code><code class="descname">PartialRanking</code><span class="sig-paren">(</span><em>other</em>, <em>rankings</em>, <em>fusionOperator='o-max'</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#PartialRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.PartialRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#transitiveDigraphs.RankingsFusionDigraph" title="transitiveDigraphs.RankingsFusionDigraph"><code class="xref py py-class docutils literal"><span class="pre">transitiveDigraphs.RankingsFusionDigraph</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#transitiveDigraphs.RankingsFusion" title="transitiveDigraphs.RankingsFusion"><code class="xref py py-class docutils literal"><span class="pre">transitiveDigraphs.RankingsFusion</span></code></a></p>
 <p>dummy class for backward compatibility.</p>
 </dd></dl>
 
@@ -8401,8 +8374,8 @@ valued self relation.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="transitiveDigraphs.RankingsFusionDigraph">
-<em class="property">class </em><code class="descclassname">transitiveDigraphs.</code><code class="descname">RankingsFusionDigraph</code><span class="sig-paren">(</span><em>other</em>, <em>rankings</em>, <em>fusionOperator='o-max'</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#RankingsFusionDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.RankingsFusionDigraph" title="Permalink to this definition">¶</a></dt>
+<dt id="transitiveDigraphs.RankingsFusion">
+<em class="property">class </em><code class="descclassname">transitiveDigraphs.</code><code class="descname">RankingsFusion</code><span class="sig-paren">(</span><em>other</em>, <em>rankings</em>, <em>fusionOperator='o-max'</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#RankingsFusion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.RankingsFusion" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph" title="transitiveDigraphs.TransitiveDigraph"><code class="xref py py-class docutils literal"><span class="pre">transitiveDigraphs.TransitiveDigraph</span></code></a></p>
 <p>Specialization of the abstract TransitiveDigraph class for 
 digraphs resulting from the epistemic

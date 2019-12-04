@@ -273,19 +273,7 @@ class TransitiveDigraph(Digraph):
             if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
 
-##    def showTransitiveDigraph(self,rankingByChoosing=None):
-##        """
-##        specialisation for RankingByChoosing Digraphs.
-##        """
-##        if rankingByChoosing == None:
-##            try:
-##                rankingByChoosing = self.rankingByChoosing
-##            except:
-##                rankingByChoosing = self.computeRankingByChoosing(CoDual=self.CoDual,CppAgrum=self.CppAgrum)
-##
-##        Digraph.showRankingByChoosing(self,rankingByChoosing)
-
-class RankingsFusionDigraph(TransitiveDigraph):
+class RankingsFusion(TransitiveDigraph):
     """
     Specialization of the abstract TransitiveDigraph class for 
     digraphs resulting from the epistemic
@@ -355,7 +343,7 @@ class RankingsFusionDigraph(TransitiveDigraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-class KemenyOrdersFusionDigraph(TransitiveDigraph):
+class KemenyOrdersFusion(TransitiveDigraph):
     """
     Specialization of the abstract TransitiveDigraph class for 
     transitive digraphs resulting from the epistemic
@@ -421,7 +409,7 @@ class KemenyOrdersFusionDigraph(TransitiveDigraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-class KohlerArrowRaynaudFusionDigraph(TransitiveDigraph):
+class KohlerArrowRaynaudFusion(TransitiveDigraph):
     """
     Specialization of the abstract TransitiveDigraph class for 
     ranking-by-choosing orderings resulting from the epistemic
@@ -1331,12 +1319,12 @@ def _jobTaskKohlerFusion(categID):
 # compatibility with obsolete weakOrders module
 #######################
 
-class PartialRanking(RankingsFusionDigraph):
+class PartialRanking(RankingsFusion):
     """
     dummy class for backward compatibility.
     """
 
-class KemenyWeakOrder(KemenyOrdersFusionDigraph):
+class KemenyWeakOrder(KemenyOrdersFusion):
     """
     dummy class for backward compatibility.
     """
@@ -1371,11 +1359,12 @@ if __name__ == "__main__":
                                    numberOfActions=8,seed=105)
     g = BipolarOutrankingDigraph(t)
     g.exportGraphViz('testg')
-    wke = KemenyOrdersFusionDigraph(g,orderLimit=8)
+    wke = KemenyOrdersFusion(g,orderLimit=8)
+    print(wke.topologicalSort())
     wke.exportGraphViz(fileName='testwke')
     print(wke.relation)
 
-    from transitiveDigraphs import RankingsFusionDigraph
+    from transitiveDigraphs import RankingsFusion
     from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
     t = RandomCBPerformanceTableau(numberOfActions=50,seed=10)
     from outrankingDigraphs import *
@@ -1383,16 +1372,17 @@ if __name__ == "__main__":
     from linearOrders import *
     cop = CopelandOrder(g)
     nf = NetFlowsOrder(g)
-    wr = RankingsFusionDigraph(g,[cop.copelandRanking,nf.netFlowsRanking])
-    
-    pra = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='average')
-    r1 = pra.boostedRanking
-    pro = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='optimistic')
-    r2 = pro.boostedRanking
-    prp = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='pessimistic')
-    r3 = prp.boostedRanking
-    wqr = RankingsFusionDigraph(pra,[r1,r2,r3])
-    wqr.exportGraphViz(fileName='partialOrdering',graphType="pdf")
+    wr = RankingsFusion(g,[cop.copelandRanking,nf.netFlowsRanking])
+    print(wr.topologicalSort())
+ 
+    # pra = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='average')
+    # r1 = pra.boostedRanking
+    # pro = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='optimistic')
+    # r2 = pro.boostedRanking
+    # prp = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='pessimistic')
+    # r3 = prp.boostedRanking
+    # wqr = RankingsFusionDigraph(pra,[r1,r2,r3])
+    # wqr.exportGraphViz(fileName='partialOrdering',graphType="pdf")
  
    
     print('*------------------*')

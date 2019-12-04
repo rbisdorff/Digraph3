@@ -1387,6 +1387,7 @@
 <span class="sd">        Renders the bipolar-valued relation obtained from</span>
 <span class="sd">        the self.rankingByChoosing result.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">rankingByChoosing</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
@@ -9227,91 +9228,91 @@
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSingletonRanking</span><span class="p">(</span><span class="n">Comments</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">res</span></div>
 
-<div class="viewcode-block" id="Digraph.omax"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.omax">[docs]</a>    <span class="k">def</span> <span class="nf">omax</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Epistemic **disjunction** for bipolar outranking characteristics</span>
-<span class="sd">        computation: Med is the valuation domain median and L is a list of</span>
-<span class="sd">        r-valued statement characteristics.</span>
+    <span class="c1"># def omax(self,L, Debug=False):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Epistemic **disjunction** for bipolar outranking characteristics</span>
+    <span class="c1">#     computation: Med is the valuation domain median and L is a list of</span>
+    <span class="c1">#     r-valued statement characteristics.</span>
 
-<span class="sd">        With **positive** arguments, omax operates a **max**,</span>
-<span class="sd">        with **negative** arguments, a **min**.</span>
+    <span class="c1">#     With **positive** arguments, omax operates a **max**,</span>
+    <span class="c1">#     with **negative** arguments, a **min**.</span>
 
-<span class="sd">        The mixture of **both positive and negative** arguments results in</span>
-<span class="sd">        an **indeterminate** value.</span>
+    <span class="c1">#     The mixture of **both positive and negative** arguments results in</span>
+    <span class="c1">#     an **indeterminate** value.</span>
 
-<span class="sd">        Likewise to a mean, the *omax* operator is not associative. We therefore first assemble all positive, negative and null terms</span>
-<span class="sd">        and operate omax on the three assembled arguments.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
-        <span class="n">terms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-        <span class="n">termsPlus</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">termsMinus</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">termsNuls</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
-                <span class="n">termsPlus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="k">elif</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
-                <span class="n">termsMinus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">termsNuls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;terms&#39;</span><span class="p">,</span> <span class="n">terms</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;termsPlus&#39;</span><span class="p">,</span><span class="n">termsPlus</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;termsMinus&#39;</span><span class="p">,</span> <span class="n">termsMinus</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;termsNuls&#39;</span><span class="p">,</span> <span class="n">termsNuls</span><span class="p">)</span>
-        <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
-        <span class="n">nm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">np</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">np</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Med</span></div>
+    <span class="c1">#     Likewise to a mean, the *omax* operator is not associative. We therefore first assemble all positive, negative and null terms</span>
+    <span class="c1">#     and operate omax on the three assembled arguments.</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Med = self.valuationdomain[&#39;med&#39;]</span>
+    <span class="c1">#     terms = list(L)</span>
+    <span class="c1">#     termsPlus = []</span>
+    <span class="c1">#     termsMinus = []</span>
+    <span class="c1">#     termsNuls = []</span>
+    <span class="c1">#     for i in range(len(terms)):</span>
+    <span class="c1">#         if terms[i] &gt; Med:</span>
+    <span class="c1">#             termsPlus.append(terms[i])</span>
+    <span class="c1">#         elif terms[i] &lt; Med:</span>
+    <span class="c1">#             termsMinus.append(terms[i])</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             termsNuls.append(terms[i])</span>
+    <span class="c1">#     if Debug:</span>
+    <span class="c1">#         print(&#39;terms&#39;, terms)</span>
+    <span class="c1">#         print(&#39;termsPlus&#39;,termsPlus)</span>
+    <span class="c1">#         print(&#39;termsMinus&#39;, termsMinus)</span>
+    <span class="c1">#         print(&#39;termsNuls&#39;, termsNuls)</span>
+    <span class="c1">#     np = len(termsPlus)</span>
+    <span class="c1">#     nm = len(termsMinus)</span>
+    <span class="c1">#     if np &gt; 0 and nm == 0:</span>
+    <span class="c1">#         return max(termsPlus)</span>
+    <span class="c1">#     elif nm &gt; 0 and np == 0:</span>
+    <span class="c1">#         return min(termsMinus)</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         return Med</span>
 
-<div class="viewcode-block" id="Digraph.omin"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.omin">[docs]</a>    <span class="k">def</span> <span class="nf">omin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Epistemic **conjunction** of a list L of bipolar outranking characteristics.</span>
-<span class="sd">        Med is the given valuation domain median.</span>
+    <span class="c1"># def omin(self,L, Debug=False):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Epistemic **conjunction** of a list L of bipolar outranking characteristics.</span>
+    <span class="c1">#     Med is the given valuation domain median.</span>
 
-<span class="sd">        With **positive** arguments, omax operates a **min**,</span>
-<span class="sd">        with **negative** arguments, a **max**.</span>
+    <span class="c1">#     With **positive** arguments, omax operates a **min**,</span>
+    <span class="c1">#     with **negative** arguments, a **max**.</span>
 
-<span class="sd">        The mixture of both **positive and negative** arguments results</span>
-<span class="sd">        in an **indeterminate** value.</span>
+    <span class="c1">#     The mixture of both **positive and negative** arguments results</span>
+    <span class="c1">#     in an **indeterminate** value.</span>
 
-<span class="sd">        Likewise to a mean, the *omin* operator is not associative. We therefore first assemble all positive, negative and null terms</span>
-<span class="sd">        and operate omin on the three assembled arguments. </span>
+    <span class="c1">#     Likewise to a mean, the *omin* operator is not associative. We therefore first assemble all positive, negative and null terms</span>
+    <span class="c1">#     and operate omin on the three assembled arguments. </span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
-        <span class="n">terms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
-        <span class="n">termsPlus</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">termsMinus</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">termsNuls</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)):</span>
-            <span class="k">if</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
-                <span class="n">termsPlus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="k">elif</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
-                <span class="n">termsMinus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">termsNuls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;terms&#39;</span><span class="p">,</span> <span class="n">terms</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;termsPlus&#39;</span><span class="p">,</span><span class="n">termsPlus</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;termsMinus&#39;</span><span class="p">,</span> <span class="n">termsMinus</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;termsNuls&#39;</span><span class="p">,</span> <span class="n">termsNuls</span><span class="p">)</span>
-        <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
-        <span class="n">nm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">np</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">Med</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">Med</span></div>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     Med = self.valuationdomain[&#39;med&#39;]</span>
+    <span class="c1">#     terms = list(L)</span>
+    <span class="c1">#     termsPlus = []</span>
+    <span class="c1">#     termsMinus = []</span>
+    <span class="c1">#     termsNuls = []</span>
+    <span class="c1">#     for i in range(len(terms)):</span>
+    <span class="c1">#         if terms[i] &gt;= Med:</span>
+    <span class="c1">#             termsPlus.append(terms[i])</span>
+    <span class="c1">#         elif terms[i] &lt;= Med:</span>
+    <span class="c1">#             termsMinus.append(terms[i])</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             termsNuls.append(terms[i])</span>
+    <span class="c1">#     if Debug:</span>
+    <span class="c1">#         print(&#39;terms&#39;, terms)</span>
+    <span class="c1">#         print(&#39;termsPlus&#39;,termsPlus)</span>
+    <span class="c1">#         print(&#39;termsMinus&#39;, termsMinus)</span>
+    <span class="c1">#         print(&#39;termsNuls&#39;, termsNuls)</span>
+    <span class="c1">#     np = len(termsPlus)</span>
+    <span class="c1">#     nm = len(termsMinus)</span>
+    <span class="c1">#     if np &gt; 0:</span>
+    <span class="c1">#         if nm &gt; 0:</span>
+    <span class="c1">#             return Med</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             return min(termsPlus)</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         if nm &gt; 0:</span>
+    <span class="c1">#             return max(termsMinus)</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             return Med</span>
 
     <span class="k">def</span> <span class="nf">_computeNetFlowsRankingDict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Stored</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
