@@ -166,13 +166,13 @@ Sorting, rating and ranking tools
      root `LinearOrder <techDoc.html#linearOrders.LinearOrder>`_
      class;
 
-     .. inheritance-diagram:: linearOrders.LinearOrder
+     .. inheritance-diagram:: linearOrders
      
 * :ref:`transitiveDigraphs-label` 
      Additional tools for solving pre-ranking problems with
      root `TransitiveDigraph <techDoc.html#transitiveDigraphs.TransitiveDigraph>`_ class.
 
-     .. inheritance-diagram:: transitiveDigraphs.TransitiveDigraph
+     .. inheritance-diagram:: transitiveDigraphs
 
 Miscellaneous tools
 ...................
