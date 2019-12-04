@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Dugraph3 module for working with transitive digraphs. 
+Digraph3 module for working with transitive digraphs. 
 Copyright (C) 2006-2019  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
@@ -23,7 +23,7 @@ from transitiveDigraphs import *
 
 class TransitiveDigraph(Digraph):
     """
-    Abstract class for weak orderings' specialized methods.
+    Abstract class for specialized methods addressing transitive digraphs.
     """
     def showWeakOrder(self,rankingByChoosing=None):
         """
@@ -289,7 +289,7 @@ class RankingsFusionDigraph(TransitiveDigraph):
     """
     Specialization of the abstract TransitiveDigraph class for 
     digraphs resulting from the epistemic
-    disjunctive fusion (omax operator) of a list of rankings.
+    disjunctive or conjunctive fusion (omax|omin operator) of a list of rankings.
 
     *Parameter*:
 
@@ -358,7 +358,7 @@ class RankingsFusionDigraph(TransitiveDigraph):
 class KemenyOrdersFusionDigraph(TransitiveDigraph):
     """
     Specialization of the abstract TransitiveDigraph class for 
-    weak orderings resulting from the epistemic
+    transitive digraphs resulting from the epistemic
     disjunctive (default) or conjubctive fusion of
     all potential Kemeny linear orderings.
 
@@ -425,7 +425,7 @@ class KohlerArrowRaynaudFusionDigraph(TransitiveDigraph):
     """
     Specialization of the abstract TransitiveDigraph class for 
     ranking-by-choosing orderings resulting from the epistemic
-    disjunctive (o-max fusion) or conjunctive (o-min operator) fusion of a
+    disjunctive (o-max) or conjunctive (o-min) fusion of a
     Kohler linear best ordering and an Arrow-Raynaud linear worst ordering. 
     """
     def __init__(self,outrankingDigraph,
@@ -896,7 +896,7 @@ class PrincipalInOutDegreesOrderingFusion(TransitiveDigraph):
     Example Python3 session with same outranking digraph g as shown in the RankingByChoosingDigraph example session (see below). 
     
     
-    >>> from TransitiveDigraphs import PrincipalInOutDegreesOrdering
+    >>> from TransitiveDigraphs import PrincipalInOutDegreesOrderingFusion
     >>> pro = PrincipalInOutDegreesOrdering(g,imageType="png",\ 
                      plotFileName="proTransitiveDigraphing")
     >>> pro.showTransitiveDigraph()
@@ -1350,64 +1350,6 @@ class WeakOrder(TransitiveDigraph):
     """
     dummy class for backward compatibility.
     """
-##    def showWeakOrder(self,rankingByChoosing=None):
-##        """
-##        A show method for self.rankinByChoosing result.
-##        """
-##        if rankingByChoosing == None:
-##            try:
-##                rankingByChoosing = self.rankingByChoosing['result']
-##            except:
-##                print('Error: You must first run self.computeRankingByChoosing(CoDual=True(default)|False) !')
-##            #rankingByChoosing = self.computeRankingByChoosing(Debug,CoDual)
-##                return
-##        else:
-##            rankingByChoosing = rankingByChoosing['result']
-##        print('Ranking by Choosing and Rejecting')
-##        space = ''
-##        n = len(rankingByChoosing)
-##        for i in range(n):
-##            if i+1 == 1:
-##                nstr='st'
-##            elif i+1 == 2:
-##                nstr='nd'
-##            elif i+1 == 3:
-##                nstr='rd'
-##            else:
-##                nstr='th'
-##            ibch = set(rankingByChoosing[i][0][1])
-##            iwch = set(rankingByChoosing[i][1][1])
-##            iach = iwch & ibch
-##            #print 'ibch, iwch, iach', i, ibch,iwch,iach
-##            ch = list(ibch)
-##            ch.sort()
-##            print(' %s%s%s ranked %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0]))
-##            if len(iach) > 0 and i < n-1:
-##                print('  %s Ambiguous Choice %s' % (space,list(iach)))
-##                space += '  '
-##            space += '  '
-##        for i in range(n):
-##            if n-i == 1:
-##                nstr='st'
-##            elif n-i == 2:
-##                nstr='nd'
-##            elif n-i == 3:
-##                nstr='rd'
-##            else:
-##                nstr='th'
-##            space = space[:-2]
-##            ibch = set(rankingByChoosing[n-i-1][0][1])
-##            iwch = set(rankingByChoosing[n-i-1][1][1])
-##            iach = iwch & ibch
-##            #print 'ibch, iwch, iach', i, ibch,iwch,iach
-##            ch = list(iwch)
-##            ch.sort()
-##            if len(iach) > 0 and i > 0:
-##                space = space[:-2]
-##                print('  %s Ambiguous Choice %s' % (space,list(iach)))
-##            print(' %s%s%s last ranked %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))        
-
-
 
 ####################
 
@@ -1422,16 +1364,16 @@ if __name__ == "__main__":
     from time import time
     
     Threading=False
-##    t = PerformanceTableau('auditor2_2')
-##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,Debug=True)
-##    t = XMCDA2PerformanceTableau('uniSorting')
-##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-##                                   numberOfActions=8,seed=105)
-##    g = BipolarOutrankingDigraph(t)
-##    g.exportGraphViz('testg')
-##    wke = KemenyTransitiveDigraph(g,orderLimit=8)
-##    wke.exportGraphViz('testwke')
-##    print(wke.relation)
+    t = PerformanceTableau('auditor2_2')
+    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,Debug=False)
+    t = XMCDA2PerformanceTableau('uniSorting')
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                   numberOfActions=8,seed=105)
+    g = BipolarOutrankingDigraph(t)
+    g.exportGraphViz('testg')
+    wke = KemenyOrdersFusionDigraph(g,orderLimit=8)
+    wke.exportGraphViz(fileName='testwke')
+    print(wke.relation)
 
     from transitiveDigraphs import RankingsFusionDigraph
     from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
@@ -1443,28 +1385,16 @@ if __name__ == "__main__":
     nf = NetFlowsOrder(g)
     wr = RankingsFusionDigraph(g,[cop.copelandRanking,nf.netFlowsRanking])
     
-##    pra = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='average')
-##    r1 = pra.boostedRanking
-##    pro = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='optimistic')
-##    r2 = pro.boostedRanking
-##    prp = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='pessimistic')
-##    r3 = prp.boostedRanking
-##    wqr = WeakRankingOrder(pra,[r1,r2,r3])
-##    wqr.exportGraphViz('partialOrdering',graphType="pdf")
+    pra = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='average')
+    r1 = pra.boostedRanking
+    pro = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='optimistic')
+    r2 = pro.boostedRanking
+    prp = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='pessimistic')
+    r3 = prp.boostedRanking
+    wqr = RankingsFusionDigraph(pra,[r1,r2,r3])
+    wqr.exportGraphViz(fileName='partialOrdering',graphType="pdf")
  
-##    limitingQuantiles = 7
-##    qr = QuantilesRankingDigraph(t,limitingQuantiles,
-##                              strategy="average",
-##                              #rankingRule="RubisChoice",
-##                              LowerClosed=False,
-##                              Threading=Threading,
-##                              Debug=False,
-##                                 StoreSorting=True)
-##    qr.showSorting()
-##    qr.showRanking()
-##    qr.showSortingCharacteristics()
-##    qr.showQsRbcRanking()
-    
+   
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')

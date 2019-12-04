@@ -413,10 +413,10 @@ class;</p>
 <dt><a class="reference internal" href="#transitivedigraphs-label"><span class="std std-ref">transitiveDigraphs module</span></a></dt>
 <dd><p class="first">Additional tools for solving pre-ranking problems with
 root <a class="reference external" href="techDoc.html#transitiveDigraphs.TransitiveDigraph">TransitiveDigraph</a> class.</p>
-<img src="_images/inheritance-cb0a986830f6c1623f14428d5cf3b631514a33b1.png" alt="Inheritance diagram of transitiveDigraphs" usemap="#inheritanceba1a0888c6" class="inheritance"/>
+<img src="_images/inheritance-efd8b4dc2180a0764ec967fe3c231f10311f325a.png" alt="Inheritance diagram of transitiveDigraphs" usemap="#inheritanceba1a0888c6" class="inheritance"/>
 <map id="inheritanceba1a0888c6" name="inheritanceba1a0888c6">
 <area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="3,76,81,90"/>
-<area shape="rect" id="node3" href="#transitiveDigraphs.TransitiveDigraph" target="_top" title="Abstract class for weak orderings&#39; specialized methods." alt="" coords="109,76,261,90"/>
+<area shape="rect" id="node3" href="#transitiveDigraphs.TransitiveDigraph" target="_top" title="Abstract class for specialized methods addressing transitive digraphs." alt="" coords="109,76,261,90"/>
 <area shape="rect" id="node2" href="#transitiveDigraphs.KemenyOrdersFusionDigraph" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="305,3,501,18"/>
 <area shape="rect" id="node4" href="#transitiveDigraphs.KemenyWeakOrder" target="_top" title="dummy class for backward compatibility." alt="" coords="575,3,734,18"/>
 <area shape="rect" id="node5" href="#transitiveDigraphs.KohlerArrowRaynaudFusionDigraph" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="293,32,512,47"/>
@@ -8169,7 +8169,7 @@ a given bipolar-valued Digraph instance</p>
 </div>
 <div class="section" id="module-transitiveDigraphs">
 <span id="transitivedigraphs-module"></span><span id="transitivedigraphs-label"></span><h2><a class="toc-backref" href="#id23">transitiveDigraphs module</a><a class="headerlink" href="#module-transitiveDigraphs" title="Permalink to this headline">¶</a></h2>
-<p>Dugraph3 module for working with transitive digraphs. 
+<p>Digraph3 module for working with transitive digraphs. 
 Copyright (C) 2006-2019  Raymond Bisdorff</p>
 <blockquote>
 <div><p>This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.</p>
@@ -8181,7 +8181,7 @@ Copyright (C) 2006-2019  Raymond Bisdorff</p>
 <em class="property">class </em><code class="descclassname">transitiveDigraphs.</code><code class="descname">KemenyOrdersFusionDigraph</code><span class="sig-paren">(</span><em>other</em>, <em>orderLimit=7</em>, <em>fusionOperator='o-max'</em>, <em>Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#KemenyOrdersFusionDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.KemenyOrdersFusionDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph" title="transitiveDigraphs.TransitiveDigraph"><code class="xref py py-class docutils literal"><span class="pre">transitiveDigraphs.TransitiveDigraph</span></code></a></p>
 <p>Specialization of the abstract TransitiveDigraph class for 
-weak orderings resulting from the epistemic
+transitive digraphs resulting from the epistemic
 disjunctive (default) or conjubctive fusion of
 all potential Kemeny linear orderings.</p>
 <p><em>Parameter</em>:</p>
@@ -8205,7 +8205,7 @@ all potential Kemeny linear orderings.</p>
 <dd><p>Bases: <a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph" title="transitiveDigraphs.TransitiveDigraph"><code class="xref py py-class docutils literal"><span class="pre">transitiveDigraphs.TransitiveDigraph</span></code></a></p>
 <p>Specialization of the abstract TransitiveDigraph class for 
 ranking-by-choosing orderings resulting from the epistemic
-disjunctive (o-max fusion) or conjunctive (o-min operator) fusion of a
+disjunctive (o-max) or conjunctive (o-min) fusion of a
 Kohler linear best ordering and an Arrow-Raynaud linear worst ordering.</p>
 </dd></dl>
 
@@ -8231,7 +8231,7 @@ Kohler linear best ordering and an Arrow-Raynaud linear worst ordering.</p>
 of the principal orders of the variance-covariance of in- 
 (Colwise) and outdegrees (Rowwise).</p>
 <p>Example Python3 session with same outranking digraph g as shown in the RankingByChoosingDigraph example session (see below).</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">TransitiveDigraphs</span> <span class="k">import</span> <span class="n">PrincipalInOutDegreesOrdering</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">TransitiveDigraphs</span> <span class="k">import</span> <span class="n">PrincipalInOutDegreesOrderingFusion</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span> <span class="o">=</span> <span class="n">PrincipalInOutDegreesOrdering</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">,</span>\ 
 <span class="go">                 plotFileName=&quot;proTransitiveDigraphing&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">()</span>
@@ -8406,7 +8406,7 @@ valued self relation.</p>
 <dd><p>Bases: <a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph" title="transitiveDigraphs.TransitiveDigraph"><code class="xref py py-class docutils literal"><span class="pre">transitiveDigraphs.TransitiveDigraph</span></code></a></p>
 <p>Specialization of the abstract TransitiveDigraph class for 
 digraphs resulting from the epistemic
-disjunctive fusion (omax operator) of a list of rankings.</p>
+disjunctive or conjunctive fusion (omax|omin operator) of a list of rankings.</p>
 <p><em>Parameter</em>:</p>
 <blockquote>
 <div><ul class="simple">
@@ -8433,7 +8433,7 @@ disjunctive fusion (omax operator) of a list of rankings.</p>
 <dt id="transitiveDigraphs.TransitiveDigraph">
 <em class="property">class </em><code class="descclassname">transitiveDigraphs.</code><code class="descname">TransitiveDigraph</code><span class="sig-paren">(</span><em>file=None</em>, <em>order=7</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal"><span class="pre">digraphs.Digraph</span></code></a></p>
-<p>Abstract class for weak orderings’ specialized methods.</p>
+<p>Abstract class for specialized methods addressing transitive digraphs.</p>
 <dl class="method">
 <dt id="transitiveDigraphs.TransitiveDigraph.exportDigraphGraphViz">
 <code class="descname">exportDigraphGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>bestChoice=set()</em>, <em>worstChoice=set()</em>, <em>Comments=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.exportDigraphGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.exportDigraphGraphViz" title="Permalink to this definition">¶</a></dt>
