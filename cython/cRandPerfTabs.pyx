@@ -2172,8 +2172,8 @@ class cRandomCBPerformanceTableau(cPerformanceTableau):
             nbuf = n
         if n2 < samplingSize:
             samplingSize = n2
-        from randomNumbers import IncrementalQuantileEstimator
-        est = IncrementalQuantileEstimator(nbuf=nbuf)
+        from randomNumbers import IncrementalQuantilesEstimator
+        est = IncrementalQuantilesEstimator(nbuf=nbuf)
         if Debug:
             print('commonPercentiles=', commonPercentiles)
         if commonPercentiles == None:
