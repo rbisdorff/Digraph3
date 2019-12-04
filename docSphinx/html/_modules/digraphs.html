@@ -10023,15 +10023,15 @@
 
 <div class="viewcode-block" id="FusionDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.FusionDigraph">[docs]</a><span class="k">class</span> <span class="nc">FusionDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Instantiates the epistemic fusion of two given Digraph instances</span>
-<span class="sd">    called dg1 and dg2.</span>
+<span class="sd">    Instantiates the epistemic disjunctive (default) or conjunctive fusion of </span>
+<span class="sd">    two given Digraph instances called dg1 and dg2.</span>
 
 <span class="sd">    Parameter:</span>
 
-<span class="sd">        * operator = &quot;o-min&quot; | &quot;o-max&quot; (epistemic conjunctive or disjunctive fusion)</span>
+<span class="sd">        * operator = &quot;o-max (default)&quot; | &quot;o-min&quot; : epistemic disjunctive, resp. conjunctive fusion operator.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dg1</span><span class="p">,</span><span class="n">dg2</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s2">&quot;o-min&quot;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dg1</span><span class="p">,</span><span class="n">dg2</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s2">&quot;o-max&quot;</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">omin</span><span class="p">,</span> <span class="n">omax</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;fusion-&#39;</span><span class="o">+</span><span class="n">dg1</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">dg2</span><span class="o">.</span><span class="n">name</span>

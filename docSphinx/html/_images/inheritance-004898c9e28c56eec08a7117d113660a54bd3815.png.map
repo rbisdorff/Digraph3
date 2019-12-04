@@ -1,0 +1,16 @@
+<map id="inheritanceba1a0888c6" name="inheritanceba1a0888c6">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="3,76,81,90"/>
+<area shape="rect" id="node3" title="Abstract class for weak orderings&#39; specialized methods." alt="" coords="109,76,261,90"/>
+<area shape="rect" id="node2" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="305,3,501,18"/>
+<area shape="rect" id="node4" title="dummy class for backward compatibility." alt="" coords="575,3,734,18"/>
+<area shape="rect" id="node5" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="293,32,512,47"/>
+<area shape="rect" id="node7" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="315,61,490,76"/>
+<area shape="rect" id="node9" title="Specialization of abstract TransitiveDigraph class for ranking by fusion" alt="" coords="289,90,516,104"/>
+<area shape="rect" id="node11" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="307,119,498,133"/>
+<area shape="rect" id="node14" title="dummy class for backward compatibility." alt="" coords="339,147,467,162"/>
+<area shape="rect" id="node6" title="dummy class for backward compatibility." alt="" coords="584,61,725,76"/>
+<area shape="rect" id="node8" title="dummy class for backward compatibility." alt="" coords="553,90,756,104"/>
+<area shape="rect" id="node10" title="Specialization of abstract TransitiveDigraph class for computing a ranking by best&#45;choosing." alt="" coords="550,119,759,133"/>
+<area shape="rect" id="node12" title="Specialization of abstract TransitiveDigraph class for computing a ranking by rejecting." alt="" coords="551,147,758,162"/>
+<area shape="rect" id="node13" title="Specialization for ranking&#45;by&#45;rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0)." alt="" coords="544,176,765,191"/>
+</map>

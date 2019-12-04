@@ -552,7 +552,7 @@
       <li><a href="techDoc.html#digraphs.Digraph.computeRankingByBestChoosing">computeRankingByBestChoosing() (digraphs.Digraph method)</a>
 
       <ul>
-        <li><a href="techDoc.html#weakOrders.RankingByChoosingDigraph.computeRankingByBestChoosing">(weakOrders.RankingByChoosingDigraph method)</a>
+        <li><a href="techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.computeRankingByBestChoosing">(transitiveDigraphs.RankingByChoosingDigraph method)</a>
 </li>
       </ul></li>
       <li><a href="techDoc.html#digraphs.Digraph.computeRankingByBestChoosingRelation">computeRankingByBestChoosingRelation() (digraphs.Digraph method)</a>
@@ -564,7 +564,7 @@
       <li><a href="techDoc.html#digraphs.Digraph.computeRankingByLastChoosing">computeRankingByLastChoosing() (digraphs.Digraph method)</a>
 
       <ul>
-        <li><a href="techDoc.html#weakOrders.RankingByChoosingDigraph.computeRankingByLastChoosing">(weakOrders.RankingByChoosingDigraph method)</a>
+        <li><a href="techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.computeRankingByLastChoosing">(transitiveDigraphs.RankingByChoosingDigraph method)</a>
 </li>
       </ul></li>
       <li><a href="techDoc.html#digraphs.Digraph.computeRankingByLastChoosingRelation">computeRankingByLastChoosingRelation() (digraphs.Digraph method)</a>
@@ -633,6 +633,8 @@
 </li>
       <li><a href="techDoc.html#graphs.MetropolisChain.computeTransitionMatrix">computeTransitionMatrix() (graphs.MetropolisChain method)</a>
 </li>
+      <li><a href="techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.computeTransitiveDigraph">computeTransitiveDigraph() (transitiveDigraphs.PrincipalInOutDegreesOrderingFusion method)</a>
+</li>
       <li><a href="techDoc.html#graphs.Graph.computeTransitivelyOrientedDigraph">computeTransitivelyOrientedDigraph() (graphs.Graph method)</a>
 </li>
       <li><a href="techDoc.html#digraphs.Digraph.computeTransitivityDegree">computeTransitivityDegree() (digraphs.Digraph method)</a>
@@ -673,8 +675,6 @@
 
       <ul>
         <li><a href="techDoc.html#sortingDigraphs.SortingDigraph.computeWeakOrder">(sortingDigraphs.SortingDigraph method)</a>
-</li>
-        <li><a href="techDoc.html#weakOrders.PrincipalInOutDegreesOrdering.computeWeakOrder">(weakOrders.PrincipalInOutDegreesOrdering method)</a>
 </li>
       </ul></li>
       <li><a href="techDoc.html#perfTabs.PerformanceTableau.computeWeightedAveragePerformances">computeWeightedAveragePerformances() (perfTabs.PerformanceTableau method)</a>
@@ -882,7 +882,7 @@
       <ul>
         <li><a href="techDoc.html#sortingDigraphs.SortingDigraph.exportDigraphGraphViz">(sortingDigraphs.SortingDigraph method)</a>
 </li>
-        <li><a href="techDoc.html#weakOrders.WeakOrder.exportDigraphGraphViz">(weakOrders.WeakOrder method)</a>
+        <li><a href="techDoc.html#transitiveDigraphs.TransitiveDigraph.exportDigraphGraphViz">(transitiveDigraphs.TransitiveDigraph method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -906,9 +906,9 @@
 </li>
         <li><a href="techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.exportGraphViz">(sparseOutrankingDigraphs.SparseOutrankingDigraph method)</a>
 </li>
-        <li><a href="techDoc.html#weakOrders.PrincipalInOutDegreesOrdering.exportGraphViz">(weakOrders.PrincipalInOutDegreesOrdering method)</a>
+        <li><a href="techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.exportGraphViz">(transitiveDigraphs.PrincipalInOutDegreesOrderingFusion method)</a>
 </li>
-        <li><a href="techDoc.html#weakOrders.WeakOrder.exportGraphViz">(weakOrders.WeakOrder method)</a>
+        <li><a href="techDoc.html#transitiveDigraphs.TransitiveDigraph.exportGraphViz">(transitiveDigraphs.TransitiveDigraph method)</a>
 </li>
       </ul></li>
       <li><a href="techDoc.html#graphs.Graph.exportPermutationGraphViz">exportPermutationGraphViz() (graphs.Graph method)</a>
@@ -1101,13 +1101,15 @@
 </li>
       <li><a href="techDoc.html#linearOrders.KemenyOrder">KemenyOrder (class in linearOrders)</a>
 </li>
+      <li><a href="techDoc.html#transitiveDigraphs.KemenyOrdersFusionDigraph">KemenyOrdersFusionDigraph (class in transitiveDigraphs)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="techDoc.html#weakOrders.KemenyWeakOrder">KemenyWeakOrder (class in weakOrders)</a>
+      <li><a href="techDoc.html#transitiveDigraphs.KemenyWeakOrder">KemenyWeakOrder (class in transitiveDigraphs)</a>
 </li>
       <li><a href="techDoc.html#digraphs.KneserDigraph">KneserDigraph (class in digraphs)</a>
 </li>
-      <li><a href="techDoc.html#weakOrders.KohlerArrowRaynaudFusionDigraph">KohlerArrowRaynaudFusionDigraph (class in weakOrders)</a>
+      <li><a href="techDoc.html#transitiveDigraphs.KohlerArrowRaynaudFusionDigraph">KohlerArrowRaynaudFusionDigraph (class in transitiveDigraphs)</a>
 </li>
       <li><a href="techDoc.html#linearOrders.KohlerOrder">KohlerOrder (class in linearOrders)</a>
 </li>
@@ -1243,7 +1245,7 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="techDoc.html#perfTabs.PartialPerformanceTableau">PartialPerformanceTableau (class in perfTabs)</a>
 </li>
-      <li><a href="techDoc.html#weakOrders.PartialRanking">PartialRanking (class in weakOrders)</a>
+      <li><a href="techDoc.html#transitiveDigraphs.PartialRanking">PartialRanking (class in transitiveDigraphs)</a>
 </li>
       <li><a href="techDoc.html#performanceQuantiles.PerformanceQuantiles">PerformanceQuantiles (class in performanceQuantiles)</a>
 </li>
@@ -1259,10 +1261,10 @@
 </li>
       <li><a href="techDoc.html#digraphs.PolarisedDigraph">PolarisedDigraph (class in digraphs)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="techDoc.html#outrankingDigraphs.PolarisedOutrankingDigraph">PolarisedOutrankingDigraph (class in outrankingDigraphs)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="techDoc.html#arithmetics.pollard_brent">pollard_brent() (in module arithmetics)</a>
 </li>
       <li><a href="techDoc.html#digraphs.Digraph.powerset">powerset() (digraphs.Digraph method)</a>
@@ -1279,7 +1281,9 @@
 </li>
       <li><a href="techDoc.html#arithmetics.primesBelow">primesBelow() (in module arithmetics)</a>
 </li>
-      <li><a href="techDoc.html#weakOrders.PrincipalInOutDegreesOrdering">PrincipalInOutDegreesOrdering (class in weakOrders)</a>
+      <li><a href="techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrdering">PrincipalInOutDegreesOrdering (class in transitiveDigraphs)</a>
+</li>
+      <li><a href="techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion">PrincipalInOutDegreesOrderingFusion (class in transitiveDigraphs)</a>
 </li>
       <li><a href="techDoc.html#linearOrders.PrincipalOrder">PrincipalOrder (class in linearOrders)</a>
 </li>
@@ -1377,10 +1381,10 @@
 </li>
       <li><a href="techDoc.html#graphs.RandomRegularGraph">RandomRegularGraph (class in graphs)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="techDoc.html#graphs.RandomSpanningForest">RandomSpanningForest (class in graphs)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="techDoc.html#graphs.RandomSpanningTree">RandomSpanningTree (class in graphs)</a>
 </li>
       <li><a href="techDoc.html#randomDigraphs.RandomTournament">RandomTournament (class in randomDigraphs)</a>
@@ -1403,13 +1407,15 @@
 </li>
       <li><a href="techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.ranking2Preorder">ranking2Preorder() (sparseOutrankingDigraphs.SparseOutrankingDigraph method)</a>
 </li>
-      <li><a href="techDoc.html#weakOrders.RankingByBestChoosingDigraph">RankingByBestChoosingDigraph (class in weakOrders)</a>
+      <li><a href="techDoc.html#transitiveDigraphs.RankingByBestChoosingDigraph">RankingByBestChoosingDigraph (class in transitiveDigraphs)</a>
 </li>
-      <li><a href="techDoc.html#weakOrders.RankingByChoosingDigraph">RankingByChoosingDigraph (class in weakOrders)</a>
+      <li><a href="techDoc.html#transitiveDigraphs.RankingByChoosingDigraph">RankingByChoosingDigraph (class in transitiveDigraphs)</a>
 </li>
-      <li><a href="techDoc.html#weakOrders.RankingByLastChoosingDigraph">RankingByLastChoosingDigraph (class in weakOrders)</a>
+      <li><a href="techDoc.html#transitiveDigraphs.RankingByLastChoosingDigraph">RankingByLastChoosingDigraph (class in transitiveDigraphs)</a>
 </li>
-      <li><a href="techDoc.html#weakOrders.RankingByPrudentChoosingDigraph">RankingByPrudentChoosingDigraph (class in weakOrders)</a>
+      <li><a href="techDoc.html#transitiveDigraphs.RankingByPrudentChoosingDigraph">RankingByPrudentChoosingDigraph (class in transitiveDigraphs)</a>
+</li>
+      <li><a href="techDoc.html#transitiveDigraphs.RankingsFusionDigraph">RankingsFusionDigraph (class in transitiveDigraphs)</a>
 </li>
       <li><a href="techDoc.html#digraphs.Digraph.readabsvector">readabsvector() (digraphs.Digraph method)</a>
 </li>
@@ -1836,7 +1842,7 @@
 </li>
         <li><a href="techDoc.html#sortingDigraphs.SortingDigraph.showOrderedRelationTable">(sortingDigraphs.SortingDigraph method)</a>
 </li>
-        <li><a href="techDoc.html#weakOrders.WeakOrder.showOrderedRelationTable">(weakOrders.WeakOrder method)</a>
+        <li><a href="techDoc.html#transitiveDigraphs.TransitiveDigraph.showOrderedRelationTable">(transitiveDigraphs.TransitiveDigraph method)</a>
 </li>
       </ul></li>
       <li><a href="techDoc.html#linearOrders.LinearOrder.showOrdering">showOrdering() (linearOrders.LinearOrder method)</a>
@@ -1861,7 +1867,7 @@
       </ul></li>
       <li><a href="techDoc.html#digraphs.Digraph.showPreKernels">showPreKernels() (digraphs.Digraph method)</a>
 </li>
-      <li><a href="techDoc.html#weakOrders.PrincipalInOutDegreesOrdering.showPrincipalScores">showPrincipalScores() (weakOrders.PrincipalInOutDegreesOrdering method)</a>
+      <li><a href="techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.showPrincipalScores">showPrincipalScores() (transitiveDigraphs.PrincipalInOutDegreesOrderingFusion method)</a>
 </li>
       <li><a href="techDoc.html#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph.showQuantileOrdering">showQuantileOrdering (cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph attribute)</a>
 </li>
@@ -1882,9 +1888,9 @@
       <li><a href="techDoc.html#digraphs.Digraph.showRankingByChoosing">showRankingByChoosing() (digraphs.Digraph method)</a>
 
       <ul>
-        <li><a href="techDoc.html#weakOrders.RankingByChoosingDigraph.showRankingByChoosing">(weakOrders.RankingByChoosingDigraph method)</a>
+        <li><a href="techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.showRankingByChoosing">(transitiveDigraphs.RankingByChoosingDigraph method)</a>
 </li>
-        <li><a href="techDoc.html#weakOrders.WeakOrder.showRankingByChoosing">(weakOrders.WeakOrder method)</a>
+        <li><a href="techDoc.html#transitiveDigraphs.TransitiveDigraph.showRankingByChoosing">(transitiveDigraphs.TransitiveDigraph method)</a>
 </li>
       </ul></li>
       <li><a href="techDoc.html#digraphs.Digraph.showRankingByLastChoosing">showRankingByLastChoosing() (digraphs.Digraph method)</a>
@@ -2001,6 +2007,18 @@
       </ul></li>
       <li><a href="techDoc.html#graphs.MetropolisChain.showTransitionMatrix">showTransitionMatrix() (graphs.MetropolisChain method)</a>
 </li>
+      <li><a href="techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.showTransitiveDigraph">showTransitiveDigraph() (transitiveDigraphs.PrincipalInOutDegreesOrderingFusion method)</a>
+
+      <ul>
+        <li><a href="techDoc.html#transitiveDigraphs.RankingByBestChoosingDigraph.showTransitiveDigraph">(transitiveDigraphs.RankingByBestChoosingDigraph method)</a>
+</li>
+        <li><a href="techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.showTransitiveDigraph">(transitiveDigraphs.RankingByChoosingDigraph method)</a>
+</li>
+        <li><a href="techDoc.html#transitiveDigraphs.RankingByLastChoosingDigraph.showTransitiveDigraph">(transitiveDigraphs.RankingByLastChoosingDigraph method)</a>
+</li>
+        <li><a href="techDoc.html#transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph">(transitiveDigraphs.TransitiveDigraph method)</a>
+</li>
+      </ul></li>
       <li><a href="techDoc.html#outrankingDigraphs.Electre3OutrankingDigraph.showVetos">showVetos() (outrankingDigraphs.Electre3OutrankingDigraph method)</a>
 
       <ul>
@@ -2016,15 +2034,7 @@
       <ul>
         <li><a href="techDoc.html#sortingDigraphs.SortingDigraph.showWeakOrder">(sortingDigraphs.SortingDigraph method)</a>
 </li>
-        <li><a href="techDoc.html#weakOrders.PrincipalInOutDegreesOrdering.showWeakOrder">(weakOrders.PrincipalInOutDegreesOrdering method)</a>
-</li>
-        <li><a href="techDoc.html#weakOrders.RankingByBestChoosingDigraph.showWeakOrder">(weakOrders.RankingByBestChoosingDigraph method)</a>
-</li>
-        <li><a href="techDoc.html#weakOrders.RankingByChoosingDigraph.showWeakOrder">(weakOrders.RankingByChoosingDigraph method)</a>
-</li>
-        <li><a href="techDoc.html#weakOrders.RankingByLastChoosingDigraph.showWeakOrder">(weakOrders.RankingByLastChoosingDigraph method)</a>
-</li>
-        <li><a href="techDoc.html#weakOrders.WeakOrder.showWeakOrder">(weakOrders.WeakOrder method)</a>
+        <li><a href="techDoc.html#transitiveDigraphs.TransitiveDigraph.showWeakOrder">(transitiveDigraphs.TransitiveDigraph method)</a>
 </li>
       </ul></li>
       <li><a href="techDoc.html#xmcda.showXMCDARubisBestChoiceRecommendation">showXMCDARubisBestChoiceRecommendation() (in module xmcda)</a>
@@ -2079,11 +2089,15 @@
 </li>
       <li><a href="techDoc.html#digraphs.Digraph.topologicalSort">topologicalSort() (digraphs.Digraph method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="techDoc.html#digraphsTools.total_size">total_size() (in module digraphsTools)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="techDoc.html#arithmetics.totient">totient() (in module arithmetics)</a>
+</li>
+      <li><a href="techDoc.html#transitiveDigraphs.TransitiveDigraph">TransitiveDigraph (class in transitiveDigraphs)</a>
+</li>
+      <li><a href="techDoc.html#module-transitiveDigraphs">transitiveDigraphs (module)</a>
 </li>
       <li><a href="techDoc.html#graphs.PermutationGraph.transitiveOrientation">transitiveOrientation() (graphs.PermutationGraph method)</a>
 </li>
@@ -2135,9 +2149,7 @@
 </li>
       <li><a href="techDoc.html#digraphs.Digraph.weakGammaSets">weakGammaSets() (digraphs.Digraph method)</a>
 </li>
-      <li><a href="techDoc.html#weakOrders.WeakOrder">WeakOrder (class in weakOrders)</a>
-</li>
-      <li><a href="techDoc.html#module-weakOrders">weakOrders (module)</a>
+      <li><a href="techDoc.html#transitiveDigraphs.WeakOrder">WeakOrder (class in transitiveDigraphs)</a>
 </li>
   </ul></td>
 </tr></table>

@@ -1,0 +1,12 @@
+<map id="inheritance43ca32dee1" name="inheritance43ca32dee1">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="4,71,94,88"/>
+<area shape="rect" id="node3" href="#weakOrders.WeakOrder" target="_top" title="Abstract class for weak orderings&#39; specialized methods." alt="" coords="127,71,246,88"/>
+<area shape="rect" id="node2" href="#weakOrders.KemenyWeakOrder" target="_top" title="Specialization of the abstract WeakOrder class for " alt="" coords="314,4,470,21"/>
+<area shape="rect" id="node4" href="#weakOrders.KohlerArrowRaynaudFusionDigraph" target="_top" title="Specialization of the abstract WeakOrder class for " alt="" coords="279,37,504,54"/>
+<area shape="rect" id="node5" href="#weakOrders.PartialRanking" target="_top" title="Specialization of the abstract WeakOrder class for " alt="" coords="324,71,459,88"/>
+<area shape="rect" id="node6" href="#weakOrders.PrincipalInOutDegreesOrdering" target="_top" title="Specialization of abstract WeakOrder class for ranking by fusion" alt="" coords="288,104,495,121"/>
+<area shape="rect" id="node8" href="#weakOrders.RankingByChoosingDigraph" target="_top" title="Specialization of the abstract WeakOrder class for " alt="" coords="295,138,489,155"/>
+<area shape="rect" id="node7" href="#weakOrders.RankingByBestChoosingDigraph" target="_top" title="Specialization of abstract WeakOrder class for computing a ranking by best&#45;choosing." alt="" coords="544,104,758,121"/>
+<area shape="rect" id="node9" href="#weakOrders.RankingByLastChoosingDigraph" target="_top" title="Specialization of abstract WeakOrder class for computing a ranking by rejecting." alt="" coords="545,138,757,155"/>
+<area shape="rect" id="node10" href="#weakOrders.RankingByPrudentChoosingDigraph" target="_top" title="Specialization for ranking&#45;by&#45;rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0)." alt="" coords="537,171,764,188"/>
+</map>

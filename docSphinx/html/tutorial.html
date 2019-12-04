@@ -2539,7 +2539,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">Decimal(&#39;15.095&#39;)</span>
 </pre></div>
 </td></tr></table></div>
-<p>We may visualize the partial order defined by the epistemic disjunction of these seven Kemeny rankings (see <a class="reference external" href="techDoc.html#module-weakOrders">weakOrders module</a>) as follows.</p>
+<p>We may visualize the partial order defined by the epistemic disjunction of these seven Kemeny rankings (see <a class="reference external" href="techDoc.html#module-transitiveDigraphs">transitiveDigraphs module</a>) as follows.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2552,8 +2552,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 10
 11
 12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">KemenyWeakOrder</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wke</span> <span class="o">=</span> <span class="n">KemenyWeakOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tranditiveDigraphs</span> <span class="kn">import</span> <span class="n">KemenyOrdersFusionDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wke</span> <span class="o">=</span> <span class="n">KemenyOrdersFusionDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wke</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;tutorialKemeny&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to tutorialKemeny.dot</span>
@@ -2593,7 +2593,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">sl</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Fitness of Slater&#39;s ranking: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
 <span class="go">Fitness of Slater&#39;s ranking: 0.844</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">slw</span> <span class="o">=</span> <span class="n">KemenyWeakOrder</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">slw</span> <span class="o">=</span> <span class="n">KemenyOrdersFusionDigraph</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">slw</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;tutorialSlater&#39;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
@@ -4443,7 +4443,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <div class="section" id="weakly-ordering">
 <h3><a class="toc-backref" href="#id214">Weakly ordering</a><a class="headerlink" href="#weakly-ordering" title="Permalink to this headline">¶</a></h3>
-<p>To get a more complete insight in the overall strict outranking situations, we may use the <a class="reference internal" href="techDoc.html#weakOrders.RankingByChoosingDigraph" title="weakOrders.RankingByChoosingDigraph"><code class="xref py py-class docutils literal"><span class="pre">weakOrders.RankingByChoosingDigraph</span></code></a> constructor imported from the <a class="reference internal" href="techDoc.html#weakorders-label"><span class="std std-ref">weakOrders module</span></a>, for computing a <strong>ranking-by-choosing</strong> result from the strict outranking digraph instance <em>gcd</em>.</p>
+<p>To get a more complete insight in the overall strict outranking situations, we may use the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingByChoosingDigraph" title="transitiveDigraphs.RankingByChoosingDigraph"><code class="xref py py-class docutils literal"><span class="pre">transitiveDigraphs.RankingByChoosingDigraph</span></code></a> constructor imported from the <a class="reference internal" href="techDoc.html#transitivedigraphs-label"><span class="std std-ref">transitiveDigraphs module</span></a>, for computing a <strong>ranking-by-choosing</strong> result from the strict outranking digraph instance <em>gcd</em>.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -4462,7 +4462,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 16
 17
 18
-19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tranditiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">gcd</span><span class="p">)</span>
 <span class="go">Threading ...  ## multiprocessing if 2 cores are available</span>
@@ -4848,7 +4848,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <a class="reference internal image-reference" href="_images/heatMap1.png"><img alt="heatmap of Normed Quartiles Rating" src="_images/heatMap1.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 27 </span><span class="caption-text">Heatmap of normed quartiles ranking</span></p>
 </div>
-<p>Using furthermore a specialised version of the <a class="reference internal" href="techDoc.html#weakOrders.WeakOrder.exportGraphViz" title="weakOrders.WeakOrder.exportGraphViz"><code class="xref py py-meth docutils literal"><span class="pre">weakOrders.WeakOrder.exportGraphViz()</span></code></a> method allows drawing the same rating result in a Hasse diagram format (see <a class="reference internal" href="#normedratingdigraph"><span class="std std-numref">Fig. 28</span></a>).</p>
+<p>Using furthermore a specialised version of the <code class="xref py py-meth docutils literal"><span class="pre">weakOrders.WeakOrder.exportGraphViz()</span></code> method allows drawing the same rating result in a Hasse diagram format (see <a class="reference internal" href="#normedratingdigraph"><span class="std std-numref">Fig. 28</span></a>).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3

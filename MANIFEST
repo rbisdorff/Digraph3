@@ -9,7 +9,7 @@ outrankingDigraphs.py
 sortingDigraphs.py
 votingProfiles.py
 linearOrders.py
-weakOrders.py
+transitiveDigraphs.py
 graphs.py
 randomNumbers.py
 randomDigraphs.py
@@ -53,7 +53,7 @@ test/noseTestsSortingDigraph.py
 test/noseTestsPerfTab.py
 test/noseTestsVotingProfile.py
 test/noseTestsLinearOrder.py
-test/noseTestsWeakOrders.py
+test/noseTestsTransitiveDigraphs.py
 test/noseTestsRandomNumbers.py
 test/noseTestsRandomDigraph.py
 test/noseTestsRandomPerfTab.py

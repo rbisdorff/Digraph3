@@ -59,7 +59,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{December 02, 2019}
+\date{December 04, 2019}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -96,7 +96,7 @@ Revision: Python 3.7
 \phantomsection\label{\detokenize{tutorial:tutorial-label}}
 
 \section{Working with the \sphinxstyleemphasis{Digraph3} software resources}
-\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}\label{\detokenize{tutorial:digraphs-tutorial-label}}
+\label{\detokenize{tutorial:digraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -2219,12 +2219,12 @@ So, \sphinxstylestrong{+0.9175} is the highest possible ordinal correlation (fit
 \PYG{g+go}{Decimal(\PYGZsq{}15.095\PYGZsq{})}
 \end{sphinxVerbatim}
 
-We may visualize the partial order defined by the epistemic disjunction of these seven Kemeny rankings (see \sphinxhref{techDoc.html\#module-weakOrders}{weakOrders module}) as follows.
+We may visualize the partial order defined by the epistemic disjunction of these seven Kemeny rankings (see \sphinxhref{techDoc.html\#module-transitiveDigraphs}{transitiveDigraphs module}) as follows.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{weakOrders} \PYG{k+kn}{import} \PYG{n}{KemenyWeakOrder}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wke} \PYG{o}{=} \PYG{n}{KemenyWeakOrder}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{tranditiveDigraphs} \PYG{k+kn}{import} \PYG{n}{KemenyOrdersFusionDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wke} \PYG{o}{=} \PYG{n}{KemenyOrdersFusionDigraph}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wke}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tutorialKemeny}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{Exporting to tutorialKemeny.dot}
@@ -2262,7 +2262,7 @@ The \sphinxstylestrong{Slater} ranking rule is similar to Kemeny’s, but it is 
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{sl}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Fitness of Slater}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s ranking: }\PYG{l+s+si}{\PYGZpc{}.3f}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{\PYGZpc{}} \PYG{n}{corr}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+go}{Fitness of Slater\PYGZsq{}s ranking: 0.844}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{slw} \PYG{o}{=} \PYG{n}{KemenyWeakOrder}\PYG{p}{(}\PYG{n}{c}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{slw} \PYG{o}{=} \PYG{n}{KemenyOrdersFusionDigraph}\PYG{p}{(}\PYG{n}{c}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{slw}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tutorialSlater}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
@@ -2480,7 +2480,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{HPC ranking with big outranking digraphs}
-\label{\detokenize{tutorial:hpc-ranking-with-big-outranking-digraphs}}\label{\detokenize{tutorial:hpc-tutorial-label}}
+\label{\detokenize{tutorial:hpc-tutorial-label}}\label{\detokenize{tutorial:hpc-ranking-with-big-outranking-digraphs}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -3941,11 +3941,11 @@ We may also notice (see Line 17 and Line 21) that both alternatives \sphinxstyle
 
 \subsection{Weakly ordering}
 \label{\detokenize{tutorial:weakly-ordering}}
-To get a more complete insight in the overall strict outranking situations, we may use the \sphinxcode{weakOrders.RankingByChoosingDigraph} constructor imported from the \DUrole{xref,std,std-ref}{weakOrders-label}, for computing a \sphinxstylestrong{ranking-by-choosing} result from the strict outranking digraph instance \sphinxstyleemphasis{gcd}.
+To get a more complete insight in the overall strict outranking situations, we may use the \sphinxcode{transitiveDigraphs.RankingByChoosingDigraph} constructor imported from the \DUrole{xref,std,std-ref}{transitiveDigraphs-label}, for computing a \sphinxstylestrong{ranking-by-choosing} result from the strict outranking digraph instance \sphinxstyleemphasis{gcd}.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{weakOrders} \PYG{k+kn}{import} \PYG{n}{RankingByChoosingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{tranditiveDigraphs} \PYG{k+kn}{import} \PYG{n}{RankingByChoosingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd} \PYG{o}{=} \PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rbc} \PYG{o}{=} \PYG{n}{RankingByChoosingDigraph}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{)}
 \PYG{g+go}{Threading ...  \PYGZsh{}\PYGZsh{} multiprocessing if 2 cores are available}
@@ -3989,7 +3989,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Rating with learned quantile norms}
-\label{\detokenize{tutorial:rating-tutorial-label}}\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}
+\label{\detokenize{tutorial:rating-with-learned-quantile-norms}}\label{\detokenize{tutorial:rating-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4484,7 +4484,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Working with the \sphinxstyleliteralintitle{graphs} module}
-\label{\detokenize{tutorial:graphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-graphs-module}}
+\label{\detokenize{tutorial:working-with-the-graphs-module}}\label{\detokenize{tutorial:graphs-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -5137,7 +5137,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{On computing digraph kernels}
-\label{\detokenize{tutorial:on-computing-digraph-kernels}}\label{\detokenize{tutorial:kernel-tutorial-label}}
+\label{\detokenize{tutorial:kernel-tutorial-label}}\label{\detokenize{tutorial:on-computing-digraph-kernels}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -6697,7 +6697,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Pearls of bipolar-valued epistemic logic}
-\label{\detokenize{tutorial:pearls-of-bipolar-valued-epistemic-logic}}\label{\detokenize{tutorial:pearls-tutorial-label}}
+\label{\detokenize{tutorial:pearls-tutorial-label}}\label{\detokenize{tutorial:pearls-of-bipolar-valued-epistemic-logic}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -7145,7 +7145,7 @@ In the tutorial {\hyperref[\detokenize{tutorial:kernel-tutorial-label}]{\sphinxc
 
 
 \subsection{Bipolar-valued kernel membership characteristic vectors}
-\label{\detokenize{tutorial:bipolar-valued-kernel-membership-characteristic-vectors}}\label{\detokenize{tutorial:bipolar-valued-kernels-tutorial-label}}
+\label{\detokenize{tutorial:bipolar-valued-kernels-tutorial-label}}\label{\detokenize{tutorial:bipolar-valued-kernel-membership-characteristic-vectors}}
 
 \subsubsection{\sphinxstyleemphasis{Claude Berge}’s Kernel Equation Systems}
 \label{\detokenize{tutorial:claude-berge-s-kernel-equation-systems}}
@@ -7463,7 +7463,7 @@ It is worthwhile noticing again the essential computational role, the logical \s
 
 
 \subsection{On confident outrankings with uncertain criteria significances}
-\label{\detokenize{tutorial:bipolar-valued-likelihood-tutorial-label}}\label{\detokenize{tutorial:on-confident-outrankings-with-uncertain-criteria-significances}}
+\label{\detokenize{tutorial:on-confident-outrankings-with-uncertain-criteria-significances}}\label{\detokenize{tutorial:bipolar-valued-likelihood-tutorial-label}}
 When modelling preferences following the outranking approach, the signs of the majority margins do sharply distribute validation and invalidation of pairwise outranking situations. How can we be confident in the resulting outranking digraph, when we acknowledge the usual imprecise knowledge of criteria significance weights coupled with small majority margins?
 
 To answer this question, one usually requires \sphinxstyleemphasis{qualified} majority margins for confirming outranking situations. But how to choose such a qualifying majority level: two third, three fourth of the significances ?

@@ -168,11 +168,11 @@ Sorting, rating and ranking tools
 
      .. inheritance-diagram:: linearOrders
      
-* :ref:`weakOrders-label` 
+* :ref:`transitiveDigraphs-label` 
      Additional tools for solving pre-ranking problems with
-     root `WeakOrder <techDoc.html#weakOrders.WeakOrder>`_ class.
+     root `TransitiveDigraph <techDoc.html#transitiveDigraphs.TransitiveDigraph>`_ class.
 
-     .. inheritance-diagram:: weakOrders
+     .. inheritance-diagram:: transitiveDigraphs
 
 Miscellaneous tools
 ...................
@@ -350,12 +350,12 @@ A tutorial with coding examples is available here: :ref:`LinearVoting-Tutorial-l
 
 Back to the :ref:`Technical-label`
 
-.. _weakOrders-label:
+.. _transitiveDigraphs-label:
 
-weakOrders module
------------------
+transitiveDigraphs module
+-------------------------
 
-.. automodule:: weakOrders
+.. automodule:: transitiveDigraphs
    :member-order: alphabetical
    :no-inherited-members:
    :members:

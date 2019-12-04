@@ -9,7 +9,7 @@ INSTALLDIR=/usr/local/bin
 CC=gcc
 CFLAGS=-Wall -O3
 
-modules = arithmetics.py digraphs.py digraphsTools.py graphs.py linearOrders.py outrankingDigraphs.py performanceQuantiles.py perfTabs.py randomDigraphs.py randomNumbers.py randomPerfTabs.py sortingDigraphs.py sparseOutrankingDigraphs.py weakOrders.py votingProfiles.py weakOrders.py xmcda.py
+modules = arithmetics.py digraphs.py digraphsTools.py graphs.py linearOrders.py outrankingDigraphs.py performanceQuantiles.py perfTabs.py randomDigraphs.py randomNumbers.py randomPerfTabs.py sortingDigraphs.py sparseOutrankingDigraphs.py transitiveDigraphs.py votingProfiles.py xmcda.py
 
 readme:
 		echo -n " Digraph3 python3 modules' installer \n (c) R Bisdorff 2013-2014 University of Luxembourg\n Usage: \n ..> make install # installs in Python3, Python3.3 and Python3.4 (Linux, Mac OS)\n ..> make tests # runs the nose tests\n ..> make verbosetests # runs the verbose nose tests\n ..> make pTests # runs all available nose tests with GNU parallel\n\n Technical documentation available here:\n http://digraph3.readthedocs.io/en/latest/ or here:\n http://leopold-loewenheim.uni.lu/docDigraph3/ \n"
@@ -28,7 +28,7 @@ pydocs:
 		(cd pyDoc; pydoc3 -w ./)
 
 pTests:
-		parallel --gnu cp {}.py test/ ::: arithmetics digraphsTools digraphs outrankingDigraphs perfTabs performanceQuantiles sortingDigraphs votingProfiles linearOrders weakOrders graphs randomNumbers randomDigraphs randomPerfTabs sparseOutrankingDigraphs xmcda
+		parallel --gnu cp {}.py test/ ::: arithmetics digraphsTools digraphs outrankingDigraphs perfTabs performanceQuantiles sortingDigraphs votingProfiles linearOrders transitiveDigraphs graphs randomNumbers randomDigraphs randomPerfTabs sparseOutrankingDigraphs xmcda
 		(cd test; parallel --gnu -k ${NOSETESTS} -v ::: noseTests*.py )
 
 tests:
@@ -43,7 +43,7 @@ tests:
 		(cd test; ${NOSETESTS} -v noseTestsSortingDigraph.py)
 		(cd test; ${NOSETESTS} -v noseTestsVotingProfile.py)
 		(cd test; ${NOSETESTS} -v noseTestsLinearOrder.py)
-		(cd test; ${NOSETESTS} -v noseTestsWeakOrders.py)
+		(cd test; ${NOSETESTS} -v noseTestsTransitiveDigraphs.py)
 		(cd test; ${NOSETESTS} -v noseTestsGraph.py)
 		(cd test; ${NOSETESTS} -v noseTestsRandomNumbers.py)
 		(cd test; ${NOSETESTS} -v noseTestsRandomDigraph.py)
@@ -62,7 +62,7 @@ verboseTests:
 		(cd test; ${NOSETESTS} -vs noseTestsSortingDigraph.py)
 		(cd test; ${NOSETESTS} -vs noseTestsVotingProfile.py)
 		(cd test; ${NOSETESTS} -vs noseTestsLinearOrder.py)
-		(cd test; ${NOSETESTS} -vs noseTestsWeakOrders.py)
+		(cd test; ${NOSETESTS} -vs noseTestsTransitiveDigraphs.py)
 		(cd test; ${NOSETESTS} -vs noseTestsGraph.py)
 		(cd test; ${NOSETESTS} -vs noseTestsRandomNumbers.py)
 		(cd test; ${NOSETESTS} -vs noseTestsRandomDigraph.py)
@@ -91,18 +91,6 @@ verboseSparseOutrankingDigraphsTests:
 		    cp $$md test/; \
 		done
 		(cd test; ${NOSETESTS} -vs noseTestsSparseOutrankingDigraph.py)
-
-# bigOutrankingDigraphsTests:
-# 		for md in ${modules}; do \
-# 		    cp $$md test/; \
-# 		done
-# 		(cd test; ${NOSETESTS} -v noseTestsBigOutrankingDigraph.py)
-
-# verboseBigOutrankingDigraphsTests:
-# 		for md in ${modules}; do \
-# 		    cp $$md test/; \
-# 		done
-# 		(cd test; ${NOSETESTS} -vs noseTestsBigOutrankingDigraph.py)
 
 graphsTests:
 		for md in ${modules}; do \
@@ -188,17 +176,17 @@ verboseLinearOrdersTests:
 		done
 		(cd test; ${NOSETESTS} -vs noseTestsLinearOrder.py)
 
-weakOrdersTests:
+transitiveDigraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -v noseTestsWeakOrders.py)
+		(cd test; ${NOSETESTS} -v noseTestsTransitiveDigraphs.py)
 
-verboseWeakOrdersTests:
+verboseTransitiveDigraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -vs noseTestsWeakOrders.py)
+		(cd test; ${NOSETESTS} -vs noseTestsTransitiveDigraphs.py)
 
 randomDigraphsTests:
 		for md in ${modules}; do \
@@ -232,12 +220,13 @@ verboseArithmeticsTests:
 install:
 		sudo ${PYTHON} setup.py install
 		#sudo python3.7 setup.py install
-installPerrin:
-		(cd perrinMIS; ${CC} ${CFLAGS} -o perrinMIS perrinMIS.c)
-		sudo cp perrinMIS/perrinMIS ${INSTALLDIR}
 
 installVenv:
 		${PYTHON} setup.py install
+
+installPerrin:
+		(cd perrinMIS; ${CC} ${CFLAGS} -o perrinMIS perrinMIS.c)
+		sudo cp perrinMIS/perrinMIS ${INSTALLDIR}
 
 installPerrinUser:
 		(cd perrinMIS; ${CC} ${CFLAGS} -o perrinMIS perrinMIS.c)

@@ -1690,10 +1690,10 @@ So, **+0.9175** is the highest possible ordinal correlation (fitness) any potent
     >>> ke.maxKemenyIndex
     Decimal('15.095')
 
-We may visualize the partial order defined by the epistemic disjunction of these seven Kemeny rankings (see `weakOrders module <techDoc.html#module-weakOrders>`_) as follows.
+We may visualize the partial order defined by the epistemic disjunction of these seven Kemeny rankings (see `transitiveDigraphs module <techDoc.html#module-transitiveDigraphs>`_) as follows.
 
-    >>> from weakOrders import KemenyWeakOrder
-    >>> wke = KemenyWeakOrder(g,orderLimit=9)
+    >>> from tranditiveDigraphs import KemenyOrdersFusionDigraph
+    >>> wke = KemenyOrdersFusionDigraph(g,orderLimit=9)
     >>> wke.exportGraphViz('tutorialKemeny')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to tutorialKemeny.dot
@@ -1727,7 +1727,7 @@ The **Slater** ranking rule is similar to Kemeny's, but it is working, instead, 
     >>> corr = g.computeOrdinalCorrelation(sl)
     >>> print("Fitness of Slater's ranking: %.3f" % corr['correlation'])
     Fitness of Slater's ranking: 0.844
-    >>> slw = KemenyWeakOrder(c,orderLimit=9)
+    >>> slw = KemenyOrdersFusionDigraph(c,orderLimit=9)
     >>> slw.exportGraphViz('tutorialSlater')
 
 We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the follwowing partial ordering.
@@ -2825,9 +2825,9 @@ We may also notice (see Line 17 and Line 21) that both alternatives *A* and *F* 
 Weakly ordering
 ---------------
 
-To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`weakOrders.RankingByChoosingDigraph` constructor imported from the :ref:`weakOrders-label`, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*.
+To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor imported from the :ref:`transitiveDigraphs-label`, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*.
 
-    >>> from weakOrders import RankingByChoosingDigraph
+    >>> from tranditiveDigraphs import RankingByChoosingDigraph
     >>> gcd = ~(-g)
     >>> rbc = RankingByChoosingDigraph(gcd)
     Threading ...  ## multiprocessing if 2 cores are available

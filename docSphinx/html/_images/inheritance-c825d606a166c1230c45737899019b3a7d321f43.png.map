@@ -1,0 +1,30 @@
+<map id="inheritancec93c7841f3" name="inheritancec93c7841f3">
+<area shape="rect" id="node1" href="#digraphs.AsymmetricPartialDigraph" target="_top" title="Renders the asymmetric part of a Digraph instance." alt="" coords="193,5,414,27"/>
+<area shape="rect" id="node2" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="5,565,121,587"/>
+<area shape="rect" id="node3" href="#digraphs.BreakAddCocsDigraph" target="_top" title="Specialization of general Digraph class for instantiation" alt="" coords="204,48,402,70"/>
+<area shape="rect" id="node4" href="#digraphs.BrokenCocsDigraph" target="_top" title="Specialization of general Digraph class for instantiation" alt="" coords="211,91,395,113"/>
+<area shape="rect" id="node5" href="#digraphs.CSVDigraph" target="_top" title="Specialization of the general Digraph class for reading" alt="" coords="234,134,373,156"/>
+<area shape="rect" id="node6" href="#digraphs.CirculantDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="220,177,387,199"/>
+<area shape="rect" id="node7" href="#digraphs.CoDualDigraph" target="_top" title="Instantiates the associated codual &#45;converse of the negation&#45; from a deep copy of" alt="" coords="225,220,382,242"/>
+<area shape="rect" id="node8" href="#digraphs.CocaDigraph" target="_top" title="Old CocaDigraph class without circuit breakings; all circuits and circuits of circuits are added as hyper&#45;nodes." alt="" coords="231,263,376,285"/>
+<area shape="rect" id="node9" href="#digraphs.CompleteDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="218,306,389,328"/>
+<area shape="rect" id="node10" href="#digraphs.ConverseDigraph" target="_top" title="Instantiates the associated converse or reciprocal version from" alt="" coords="218,349,388,372"/>
+<area shape="rect" id="node11" href="#digraphs.CoverDigraph" target="_top" title="Instantiates the associated cover relation &#45;immediate neighbours&#45; from" alt="" coords="229,393,378,415"/>
+<area shape="rect" id="node12" href="#digraphs.DualDigraph" target="_top" title="Instantiates the dual ( = negated valuation) Digraph object from a deep copy of a given other Digraph instance." alt="" coords="232,436,374,458"/>
+<area shape="rect" id="node13" href="#digraphs.EmptyDigraph" target="_top" title="Parameters:" alt="" coords="227,479,380,501"/>
+<area shape="rect" id="node14" href="#digraphs.EquivalenceDigraph" target="_top" title="Instantiates the logical equivalence digraph of two bipolar" alt="" coords="211,522,396,544"/>
+<area shape="rect" id="node15" href="#digraphs.FusionDigraph" target="_top" title="Instantiates the epistemic disjunctive (default) or conjunctive fusion of " alt="" coords="227,565,380,587"/>
+<area shape="rect" id="node16" href="#digraphs.FusionLDigraph" target="_top" title="Instantiates the epistemic fusion a list L of Digraph instances." alt="" coords="224,608,383,630"/>
+<area shape="rect" id="node17" href="#digraphs.GraphBorder" target="_top" title="Instantiates the partial digraph induced by its border," alt="" coords="232,651,375,673"/>
+<area shape="rect" id="node18" href="#digraphs.GraphInner" target="_top" title="Instantiates the partial digraph induced by the complement of its border," alt="" coords="236,694,371,716"/>
+<area shape="rect" id="node19" href="#digraphs.GridDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="234,737,373,759"/>
+<area shape="rect" id="node20" href="#digraphs.IndeterminateDigraph" target="_top" title="Parameters: order &gt; 0; valuationdomain =(Min,Max)." alt="" coords="205,780,402,803"/>
+<area shape="rect" id="node21" href="#digraphs.KneserDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="225,824,381,846"/>
+<area shape="rect" id="node22" href="#digraphs.PolarisedDigraph" target="_top" title="Renders the polarised valuation of a Digraph class instance:" alt="" coords="219,867,388,889"/>
+<area shape="rect" id="node23" href="#digraphs.RedhefferDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="218,910,388,932"/>
+<area shape="rect" id="node24" href="#digraphs.StrongComponentsCollapsedDigraph" target="_top" title="Reduction of Digraph object to its strong components." alt="" coords="163,953,444,975"/>
+<area shape="rect" id="node25" href="#digraphs.SymmetricPartialDigraph" target="_top" title="Renders the symmetric part of a Digraph instance." alt="" coords="196,996,411,1018"/>
+<area shape="rect" id="node26" href="#digraphs.XMCDA2Digraph" target="_top" title="Specialization of the general Digraph class for reading" alt="" coords="221,1039,386,1061"/>
+<area shape="rect" id="node27" href="#digraphs.XORDigraph" target="_top" title="Instantiates the XOR digraph of two bipolar" alt="" coords="234,1082,373,1104"/>
+<area shape="rect" id="node28" href="#digraphs.kChoicesDigraph" target="_top" title="Specialization of general Digraph class for instantiation" alt="" coords="220,1125,387,1147"/>
+</map>

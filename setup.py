@@ -17,12 +17,12 @@ from the systems console.
 
 if CythonInstalled:
     setup(name='Digraph3',
-          version="Python3.6",
+          version="Python3.7",
           #version_command='svn info --show-item revision',
           py_modules=['arithmetics','digraphsTools','digraphs','perfTabs',
                       'outrankingDigraphs','performanceQuantiles',\
             'sortingDigraphs','votingProfiles',\
-            'linearOrders','weakOrders',\
+            'linearOrders','transitiveDigraphs',\
             'graphs','htmlmodel','randomNumbers','randomDigraphs',\
             'randomPerfTabs', 'sparseOutrankingDigraphs','xmcda'],
           ext_modules=cythonize("cython/*.pyx",language_level=3),
@@ -35,12 +35,12 @@ if CythonInstalled:
           )
 else:
     setup(name='Digraph3',
-          version="Python3.6",
+          version="Python3.7",
           #version_command='svn info --show-item revision',
           py_modules=['arithmetics','digraphsTools','digraphs','perfTabs',
                       'outrankingDigraphs','performanceQuantiles',\
             'sortingDigraphs','votingProfiles',\
-            'linearOrders','weakOrders','graphs','htmlmodel','randomNumbers',\
+            'linearOrders','transitiveDigraphs','graphs','htmlmodel','randomNumbers',\
             'randomDigraphs','randomPerfTabs','sparseOutrankingDigraphs',\
                       'xmcda'],
           license='http://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.html',

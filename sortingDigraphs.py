@@ -2109,7 +2109,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         Specialisation for QuantilesSortingDigraphs.
         """
         from decimal import Decimal
-        from weakOrders import WeakOrder
+        from transitiveDigraphs import TransitiveDigraph
         try:
             cC = self.categoryContent
         except:
@@ -2145,7 +2145,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         
         weakOrdering = {'result':ordering}
 
-        WeakOrder.showWeakOrder(self,weakOrdering)
+        TransitiveDigraph.showTransitiveDigraph(self,weakOrdering)
 
 ##        return orderingList
 
