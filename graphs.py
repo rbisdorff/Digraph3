@@ -859,7 +859,7 @@ class Graph(object):
         ...     print(og)
         ...     print('Transitivity degree: %.3f' % og.transitivityDegree)
         *------- Digraph instance description ------*
-        Instance class   : WeakOrder
+        Instance class   : TransitiveDigraph
         Instance name    : trans_oriented_randomGraph
         Digraph Order      : 6
         Digraph Size       : 7
@@ -874,7 +874,7 @@ class Graph(object):
         ...     print(odg)
         ...     print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
         *------- Digraph instance description ------*
-        Instance class   : WeakOrder
+        Instance class   : TransitiveOrder
         Instance name    : trans_oriented_dual_randomGraph
         Digraph Order      : 6
         Digraph Size       : 8
@@ -885,7 +885,7 @@ class Graph(object):
         Dual transitivity degree: 1.000
         """
         from digraphs import EmptyDigraph
-        from weakOrders import WeakOrder
+        from transitiveDigraphs import TransitiveDigraph
         from copy import deepcopy
 
         if not self.isComparabilityGraph():
@@ -895,7 +895,7 @@ class Graph(object):
                 for arc in self.edgeOrientations:
                     print(arc, self.edgeOrientations[arc])
             g = EmptyDigraph(order=self.order)
-            g.__class__ = WeakOrder
+            g.__class__ = TransitiveDigraph
             g.name = 'trans_oriented_'+self.name
             g.actions = deepcopy(self.vertices)
             g.valuationdomain = deepcopy(self.valuationDomain)
@@ -4276,7 +4276,7 @@ class PermutationGraph(Graph):
         >>> dg = g.transitiveOrientation()
         >>> dg
         *------- Digraph instance description ------*
-        Instance class   : WeakOrder
+        Instance class   : TransitiveDigraph
         Instance name    : oriented_permutationGraph
         Digraph Order      : 6
         Digraph Size       : 9
@@ -4299,11 +4299,11 @@ class PermutationGraph(Graph):
 
         """
         from digraphs import EmptyDigraph
-        from weakOrders import WeakOrder
+        from transitiveDigraphs import TransitiveDigraph
         from copy import deepcopy
         
         g = EmptyDigraph(order=self.order)
-        g.__class__ = WeakOrder
+        g.__class__ = TransitiveDigraph
         g.name = 'oriented_'+self.name
         g.actions = deepcopy(self.vertices)
         g.valuationdomain = deepcopy(self.valuationDomain)

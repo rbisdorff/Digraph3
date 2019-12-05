@@ -59,7 +59,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{December 04, 2019}
+\date{December 05, 2019}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -96,7 +96,7 @@ Revision: Python 3.7
 \phantomsection\label{\detokenize{tutorial:tutorial-label}}
 
 \section{Working with the \sphinxstyleemphasis{Digraph3} software resources}
-\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}\label{\detokenize{tutorial:digraphs-tutorial-label}}\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}
+\label{\detokenize{tutorial:working-with-the-digraph3-software-resources}}\label{\detokenize{tutorial:digraphs-tutorial-label}}\label{\detokenize{tutorial:tutorials-of-the-digraph3-resources}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -864,7 +864,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the winner of an election}
-\label{\detokenize{tutorial:linearvoting-tutorial-label}}\label{\detokenize{tutorial:computing-the-winner-of-an-election}}
+\label{\detokenize{tutorial:computing-the-winner-of-an-election}}\label{\detokenize{tutorial:linearvoting-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1442,7 +1442,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Generating random performance tableaux}
-\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}\label{\detokenize{tutorial:generating-random-performance-tableaux}}
+\label{\detokenize{tutorial:generating-random-performance-tableaux}}\label{\detokenize{tutorial:randomperformancetableau-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -1997,7 +1997,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Ranking with multiple incommensurable criteria}
-\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:ranking-tutorial-label}}
+\label{\detokenize{tutorial:ranking-tutorial-label}}\label{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4336,7 +4336,7 @@ The same result may even more conviently be consulted in a browser view via a sp
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{heatMap1}.png}
 \caption{Heatmap of normed quartiles ranking}\label{\detokenize{tutorial:heatmap1}}\end{figure}
 
-Using furthermore a specialised version of the \sphinxcode{weakOrders.WeakOrder.exportGraphViz()} method allows drawing the same rating result in a Hasse diagram format (see \hyperref[\detokenize{tutorial:normedratingdigraph}]{Fig.\@ \ref{\detokenize{tutorial:normedratingdigraph}}}).
+Using furthermore a specialised version of the \sphinxcode{transitiveDigraphs.TransitiveDigraph.exportGraphViz()} method allows drawing the same rating result in a Hasse diagram format (see \hyperref[\detokenize{tutorial:normedratingdigraph}]{Fig.\@ \ref{\detokenize{tutorial:normedratingdigraph}}}).
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4957,7 +4957,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{Computing the non isomorphic MISs of the n-cycle graph}
-\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}
+\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}
 Due to the public success of our common 2008 publication with Jean-Luc Marichal \phantomsection\label{\detokenize{tutorial:id53}}{\hyperref[\detokenize{tutorial:isomis-08}]{\sphinxcrossref{{[}ISOMIS-08{]}}}} (\autopageref*{\detokenize{tutorial:isomis-08}}) , we present in this tutorial an example Python session for computing the \sphinxstylestrong{non isomorphic maximal independent sets} (MISs) from the 12-cycle graph, i.e. a \sphinxcode{digraphs.CirculantDigraph} class instance of order 12 and symmetric circulants 1 and -1.
 
 \fvset{hllines={, ,}}%
@@ -5833,7 +5833,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{About split, interval and permutation graphs}
-\label{\detokenize{tutorial:permutation-tutorial-label}}\label{\detokenize{tutorial:about-split-interval-and-permutation-graphs}}
+\label{\detokenize{tutorial:about-split-interval-and-permutation-graphs}}\label{\detokenize{tutorial:permutation-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -6132,14 +6132,14 @@ The correspondingly colored \sphinxstylestrong{matching diagram} of the nine \sp
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{perm_permutationGraph}.png}
 \caption{Colored matching diagram of the permutation {[}4, 3, 6, 1, 5, 2{]}}\label{\detokenize{tutorial:perm-permutationgraph}}\end{figure}
 
-As mentioned before, a permutation graph and its dual are \sphinxstylestrong{transitively orientable}. The \sphinxcode{graphs.PermutationGraph.transitiveOrientation()} method constructs from a given permutation graph a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices’ keys (see \phantomsection\label{\detokenize{tutorial:id71}}{\hyperref[\detokenize{tutorial:gol-2004}]{\sphinxcrossref{{[}GOL-2004{]}}}} (\autopageref*{\detokenize{tutorial:gol-2004}})). This orientation of the edges of a permutation graph is always transitive and delivers a \sphinxstyleemphasis{weak ordering} of the vertices.
+As mentioned before, a permutation graph and its dual are \sphinxstylestrong{transitively orientable}. The \sphinxcode{graphs.PermutationGraph.transitiveOrientation()} method constructs from a given permutation graph a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices’ keys (see \phantomsection\label{\detokenize{tutorial:id71}}{\hyperref[\detokenize{tutorial:gol-2004}]{\sphinxcrossref{{[}GOL-2004{]}}}} (\autopageref*{\detokenize{tutorial:gol-2004}})). This orientation of the edges of a permutation graph is always transitive and delivers a \sphinxstyleemphasis{transitive ordering} of the vertices.
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{transitiveOrientation}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}
 \PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Digraph instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{Instance class   : WeakOrder}
+\PYG{g+go}{Instance class   : TransitiveDigraph}
 \PYG{g+go}{Instance name    : oriented\PYGZus{}permutationGraph}
 \PYG{g+go}{Digraph Order      : 6}
 \PYG{g+go}{Digraph Size       : 9}
@@ -6375,7 +6375,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \section{On tree graphs and graph forests}
-\label{\detokenize{tutorial:trees-tutorial-label}}\label{\detokenize{tutorial:on-tree-graphs-and-graph-forests}}
+\label{\detokenize{tutorial:on-tree-graphs-and-graph-forests}}\label{\detokenize{tutorial:trees-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -7126,7 +7126,7 @@ A \sphinxstyleemphasis{kernel} in a digraph \sphinxstyleemphasis{g} is a \sphinx
 
 \fvset{hllines={, ,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{weakOrders} \PYG{k+kn}{import} \PYG{n}{RankingByChoosingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{RankingByChoosingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rbc} \PYG{o}{=} \PYG{n}{RankingByChoosingDigraph}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{CoDual}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rbc}\PYG{o}{.}\PYG{n}{showRankingByChoosing}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{Ranking by Choosing and Rejecting}
@@ -7463,7 +7463,7 @@ It is worthwhile noticing again the essential computational role, the logical \s
 
 
 \subsection{On confident outrankings with uncertain criteria significances}
-\label{\detokenize{tutorial:on-confident-outrankings-with-uncertain-criteria-significances}}\label{\detokenize{tutorial:bipolar-valued-likelihood-tutorial-label}}
+\label{\detokenize{tutorial:bipolar-valued-likelihood-tutorial-label}}\label{\detokenize{tutorial:on-confident-outrankings-with-uncertain-criteria-significances}}
 When modelling preferences following the outranking approach, the signs of the majority margins do sharply distribute validation and invalidation of pairwise outranking situations. How can we be confident in the resulting outranking digraph, when we acknowledge the usual imprecise knowledge of criteria significance weights coupled with small majority margins?
 
 To answer this question, one usually requires \sphinxstyleemphasis{qualified} majority margins for confirming outranking situations. But how to choose such a qualifying majority level: two third, three fourth of the significances ?

@@ -825,7 +825,7 @@
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">dotName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;digraph G {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;graph [ bgcolor = cornsilk, ordering = out, fontname = &quot;Helvetica-Oblique&quot;,</span><span class="se">\n</span><span class="s1"> fontsize = 12,</span><span class="se">\n</span><span class="s1"> label = &quot;&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nweakOrders module (graphviz)</span><span class="se">\\</span><span class="s1">n R. Bisdorff, 2014&quot;, size=&quot;&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">transitiveDigraphs module (graphviz)</span><span class="se">\\</span><span class="s1">n R. Bisdorff, 2014&quot;, size=&quot;&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">graphSize</span><span class="p">),</span><span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;,fontsize=</span><span class="si">%d</span><span class="s1">];</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">fontSize</span><span class="p">)</span>
         <span class="c1"># nodes</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionKeys</span><span class="p">:</span>
@@ -2446,12 +2446,6 @@
             <span class="n">y</span> <span class="o">=</span> <span class="n">ordering</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">y</span> <span class="o">!=</span> <span class="p">[]:</span>
                 <span class="n">orderingList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="c1">##            </span>
-<span class="c1">##        </span>
-<span class="c1">##        weakOrdering = {&#39;result&#39;:ordering}</span>
-<span class="c1">##</span>
-<span class="c1">##        WeakOrder.showWeakOrder(self,weakOrdering)</span>
-
         <span class="k">return</span> <span class="n">orderingList</span></div>
 
 <div class="viewcode-block" id="QuantilesSortingDigraph.showOrderedRelationTable"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showOrderedRelationTable">[docs]</a>    <span class="k">def</span> <span class="nf">showOrderedRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">):</span>
@@ -3814,7 +3808,7 @@
                              <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>\
                              <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        The rating drawing is using the :py:func:`weakOrders.WeakOrder.exportGraphViz` method for</span>
+<span class="sd">        The rating drawing is using the :py:func:`transitiveDigraphs.TransitiveDigraph.exportGraphViz` method for</span>
 <span class="sd">        drawing oriented Hasse diagrams of weak orderings, ie the negation</span>
 <span class="sd">        of the corresponding preorder relation.</span>
 
@@ -3841,12 +3835,12 @@
 <span class="sd">             and may not contain special characters like &#39;-&#39; or &#39;_&#39;.</span>
 <span class="sd">             </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">weakOrders</span> <span class="k">import</span> <span class="n">WeakOrder</span>
+        <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="k">import</span> <span class="n">TransitiveDigraph</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="n">ratingRelation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeRatingRelation</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relationOrig</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">ratingRelation</span>
-        <span class="n">WeakOrder</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="n">fileName</span><span class="p">,</span>\
+        <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="n">fileName</span><span class="p">,</span>\
                              <span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
                              <span class="n">graphType</span><span class="o">=</span><span class="n">graphType</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">,</span>\
                              <span class="n">digraphClass</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span>\
@@ -4284,7 +4278,7 @@
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
     <span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">weakOrders</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="k">import</span> <span class="o">*</span>
     <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="o">*</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
@@ -4383,7 +4377,6 @@
 <span class="c1">##    qs0.showSorting()</span>
 <span class="c1">##    qs0.showActionsSortingResult(Debug=False)</span>
 <span class="c1">##    qs0.computeWeakOrder(Debug=True)</span>
-<span class="c1">##    from weakOrders import QuantilesRankingDigraph</span>
 <span class="c1">##    g = BipolarOutrankingDigraph(t,Normalized=True)</span>
 <span class="c1">##    print(g.computeOrdinalCorrelation(qs0))</span>
 <span class="c1">##    print(g.computeOrdinalCorrelation(qsrbc))</span>
@@ -4442,7 +4435,6 @@
 <span class="c1">##    ira.relation = ratingRelation</span>
 <span class="c1">##    #ira.closeTransitive(Irreflexive=True,Reverse=True)</span>
 <span class="c1">##    ira.showHTMLRelationTable(actionsList=ira.actionsRanking)</span>
-<span class="c1">##    from weakOrders import WeakOrder</span>
 <span class="c1">##    ira.exportRatingGraphViz(graphType=&#39;pdf&#39;)</span>
 <span class="c1">##    #ira.showSorting()</span>
 <span class="c1">##    #ira.showHTMLSorting()</span>

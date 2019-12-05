@@ -906,7 +906,7 @@
 <span class="sd">        ...     print(og)</span>
 <span class="sd">        ...     print(&#39;Transitivity degree: %.3f&#39; % og.transitivityDegree)</span>
 <span class="sd">        *------- Digraph instance description ------*</span>
-<span class="sd">        Instance class   : WeakOrder</span>
+<span class="sd">        Instance class   : TransitiveDigraph</span>
 <span class="sd">        Instance name    : trans_oriented_randomGraph</span>
 <span class="sd">        Digraph Order      : 6</span>
 <span class="sd">        Digraph Size       : 7</span>
@@ -921,7 +921,7 @@
 <span class="sd">        ...     print(odg)</span>
 <span class="sd">        ...     print(&#39;Dual transitivity degree: %.3f&#39; % ogd.transitivityDegree)</span>
 <span class="sd">        *------- Digraph instance description ------*</span>
-<span class="sd">        Instance class   : WeakOrder</span>
+<span class="sd">        Instance class   : TransitiveOrder</span>
 <span class="sd">        Instance name    : trans_oriented_dual_randomGraph</span>
 <span class="sd">        Digraph Order      : 6</span>
 <span class="sd">        Digraph Size       : 8</span>
@@ -932,7 +932,7 @@
 <span class="sd">        Dual transitivity degree: 1.000</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">EmptyDigraph</span>
-        <span class="kn">from</span> <span class="nn">weakOrders</span> <span class="k">import</span> <span class="n">WeakOrder</span>
+        <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="k">import</span> <span class="n">TransitiveDigraph</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isComparabilityGraph</span><span class="p">():</span>
@@ -942,7 +942,7 @@
                 <span class="k">for</span> <span class="n">arc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">edgeOrientations</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">arc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">edgeOrientations</span><span class="p">[</span><span class="n">arc</span><span class="p">])</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">EmptyDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
-            <span class="n">g</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">WeakOrder</span>
+            <span class="n">g</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">TransitiveDigraph</span>
             <span class="n">g</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;trans_oriented_&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span>
             <span class="n">g</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
             <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationDomain</span><span class="p">)</span>
@@ -4323,7 +4323,7 @@
 <span class="sd">        &gt;&gt;&gt; dg = g.transitiveOrientation()</span>
 <span class="sd">        &gt;&gt;&gt; dg</span>
 <span class="sd">        *------- Digraph instance description ------*</span>
-<span class="sd">        Instance class   : WeakOrder</span>
+<span class="sd">        Instance class   : TransitiveDigraph</span>
 <span class="sd">        Instance name    : oriented_permutationGraph</span>
 <span class="sd">        Digraph Order      : 6</span>
 <span class="sd">        Digraph Size       : 9</span>
@@ -4346,11 +4346,11 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">EmptyDigraph</span>
-        <span class="kn">from</span> <span class="nn">weakOrders</span> <span class="k">import</span> <span class="n">WeakOrder</span>
+        <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="k">import</span> <span class="n">TransitiveDigraph</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         
         <span class="n">g</span> <span class="o">=</span> <span class="n">EmptyDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">WeakOrder</span>
+        <span class="n">g</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">TransitiveDigraph</span>
         <span class="n">g</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;oriented_&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span>
         <span class="n">g</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationDomain</span><span class="p">)</span>

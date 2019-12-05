@@ -4848,7 +4848,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <a class="reference internal image-reference" href="_images/heatMap1.png"><img alt="heatmap of Normed Quartiles Rating" src="_images/heatMap1.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 27 </span><span class="caption-text">Heatmap of normed quartiles ranking</span></p>
 </div>
-<p>Using furthermore a specialised version of the <code class="xref py py-meth docutils literal"><span class="pre">weakOrders.WeakOrder.exportGraphViz()</span></code> method allows drawing the same rating result in a Hasse diagram format (see <a class="reference internal" href="#normedratingdigraph"><span class="std std-numref">Fig. 28</span></a>).</p>
+<p>Using furthermore a specialised version of the <a class="reference internal" href="techDoc.html#transitiveDigraphs.TransitiveDigraph.exportGraphViz" title="transitiveDigraphs.TransitiveDigraph.exportGraphViz"><code class="xref py py-meth docutils literal"><span class="pre">transitiveDigraphs.TransitiveDigraph.exportGraphViz()</span></code></a> method allows drawing the same rating result in a Hasse diagram format (see <a class="reference internal" href="#normedratingdigraph"><span class="std std-numref">Fig. 28</span></a>).</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -7094,7 +7094,7 @@ best covered terminal kernel</span></p>
 <a class="reference internal image-reference" href="_images/perm_permutationGraph.png"><img alt="The inversions of the permutation [4, 3, 6, 1, 5, 2]" src="_images/perm_permutationGraph.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 53 </span><span class="caption-text">Colored matching diagram of the permutation [4, 3, 6, 1, 5, 2]</span></p>
 </div>
-<p>As mentioned before, a permutation graph and its dual are <strong>transitively orientable</strong>. The <a class="reference internal" href="techDoc.html#graphs.PermutationGraph.transitiveOrientation" title="graphs.PermutationGraph.transitiveOrientation"><code class="xref py py-func docutils literal"><span class="pre">graphs.PermutationGraph.transitiveOrientation()</span></code></a> method constructs from a given permutation graph a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices’ keys (see <a class="reference internal" href="#gol-2004" id="id71">[GOL-2004]</a>). This orientation of the edges of a permutation graph is always transitive and delivers a <em>weak ordering</em> of the vertices.</p>
+<p>As mentioned before, a permutation graph and its dual are <strong>transitively orientable</strong>. The <a class="reference internal" href="techDoc.html#graphs.PermutationGraph.transitiveOrientation" title="graphs.PermutationGraph.transitiveOrientation"><code class="xref py py-func docutils literal"><span class="pre">graphs.PermutationGraph.transitiveOrientation()</span></code></a> method constructs from a given permutation graph a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices’ keys (see <a class="reference internal" href="#gol-2004" id="id71">[GOL-2004]</a>). This orientation of the edges of a permutation graph is always transitive and delivers a <em>transitive ordering</em> of the vertices.</p>
 <div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -7117,7 +7117,7 @@ best covered terminal kernel</span></p>
 20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">transitiveOrientation</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span>
 <span class="go">*------- Digraph instance description ------*</span>
-<span class="go">Instance class   : WeakOrder</span>
+<span class="go">Instance class   : TransitiveDigraph</span>
 <span class="go">Instance name    : oriented_permutationGraph</span>
 <span class="go">Digraph Order      : 6</span>
 <span class="go">Digraph Size       : 9</span>
@@ -8148,7 +8148,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 10
 11
 12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">weakOrders</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
 <span class="go">Ranking by Choosing and Rejecting</span>

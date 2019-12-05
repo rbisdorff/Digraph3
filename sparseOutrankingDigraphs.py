@@ -898,7 +898,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nweakOrders module (graphviz)\\n R. Bisdorff, 2014", size="')
+        fo.write('\\ntransitiveDigraphs module (graphviz)\\n R. Bisdorff, 2014", size="')
         fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
         # nodes
         for x in actionsKeys:

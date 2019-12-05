@@ -47,6 +47,7 @@ class _ExtendedPrudentDigraph(Digraph):
     """
 
     def __init__(self,other,prudentBetaLevel=None,CoDual=False,Debug=False):
+        from digraphsTools import omax, omin
         from copy import copy, deepcopy
         self.__class__ = other.__class__
         self.name = 'extprud-'+other.name
@@ -102,8 +103,8 @@ class _ExtendedPrudentDigraph(Digraph):
             relation[x] = {}
             for y in actionsList:
                 if Debug:
-                    print('omax([gp.relation[x][y],stRelation[x][y]])',x,y,[gp.relation[x][y],stRelation[x][y]])
-                relation[x][y] = self.omax([gp.relation[x][y],stRelation[x][y]])    
+                    print('omax(Med,[gp.relation[x][y],stRelation[x][y]])',x,y,[gp.relation[x][y],stRelation[x][y]])
+                relation[x][y] = omax(Med,[gp.relation[x][y],stRelation[x][y]])    
         self.relation = relation
         if Debug:
             self.showRelationTable()
@@ -1203,7 +1204,7 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     from sortingDigraphs import *
     from linearOrders import *
-    from weakOrders import *
+    from transitiveDigraphs import *
     from randomPerfTabs import *
 
     print("""

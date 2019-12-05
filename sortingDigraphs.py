@@ -778,7 +778,7 @@ class SortingDigraph(BipolarOutrankingDigraph):
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nweakOrders module (graphviz)\\n R. Bisdorff, 2014", size="')
+        fo.write('\\transitiveDigraphs module (graphviz)\\n R. Bisdorff, 2014", size="')
         fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
         # nodes
         for x in actionKeys:
@@ -2399,12 +2399,6 @@ class QuantilesSortingDigraph(SortingDigraph):
             y = ordering[n-i-1][1][1]
             if y != []:
                 orderingList.append(y)
-##            
-##        
-##        weakOrdering = {'result':ordering}
-##
-##        WeakOrder.showWeakOrder(self,weakOrdering)
-
         return orderingList
 
     def showOrderedRelationTable(self,direction="decreasing"):
@@ -3767,7 +3761,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                              graphType='png',graphSize='7,7',\
                              fontSize=10):
         """
-        The rating drawing is using the :py:func:`weakOrders.WeakOrder.exportGraphViz` method for
+        The rating drawing is using the :py:func:`transitiveDigraphs.TransitiveDigraph.exportGraphViz` method for
         drawing oriented Hasse diagrams of weak orderings, ie the negation
         of the corresponding preorder relation.
 
@@ -3794,12 +3788,12 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
              and may not contain special characters like '-' or '_'.
              
         """
-        from weakOrders import WeakOrder
+        from transitiveDigraphs import TransitiveDigraph
         from copy import deepcopy
         ratingRelation = self.computeRatingRelation()
         self.relationOrig = deepcopy(self.relation)
         self.relation = ratingRelation
-        WeakOrder.exportGraphViz(self,fileName=fileName,\
+        TransitiveDigraph.exportGraphViz(self,fileName=fileName,\
                              direction=direction,Comments=Comments,\
                              graphType=graphType,graphSize=graphSize,\
                              digraphClass=self.__class__,\
@@ -4237,7 +4231,7 @@ if __name__ == "__main__":
     from randomPerfTabs import *
     from outrankingDigraphs import *
     from sortingDigraphs import *
-    from weakOrders import *
+    from transitiveDigraphs import *
     from performanceQuantiles import *
     
     print("""
@@ -4336,7 +4330,6 @@ if __name__ == "__main__":
 ##    qs0.showSorting()
 ##    qs0.showActionsSortingResult(Debug=False)
 ##    qs0.computeWeakOrder(Debug=True)
-##    from weakOrders import QuantilesRankingDigraph
 ##    g = BipolarOutrankingDigraph(t,Normalized=True)
 ##    print(g.computeOrdinalCorrelation(qs0))
 ##    print(g.computeOrdinalCorrelation(qsrbc))
@@ -4395,7 +4388,6 @@ if __name__ == "__main__":
 ##    ira.relation = ratingRelation
 ##    #ira.closeTransitive(Irreflexive=True,Reverse=True)
 ##    ira.showHTMLRelationTable(actionsList=ira.actionsRanking)
-##    from weakOrders import WeakOrder
 ##    ira.exportRatingGraphViz(graphType='pdf')
 ##    #ira.showSorting()
 ##    #ira.showHTMLSorting()

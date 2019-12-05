@@ -3452,7 +3452,7 @@ Annals of Discrete Mathematics 57, Elsevier, p. 129-132.</p>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">og</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">og</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">)</span>
 <span class="go">*------- Digraph instance description ------*</span>
-<span class="go">Instance class   : WeakOrder</span>
+<span class="go">Instance class   : TransitiveDigraph</span>
 <span class="go">Instance name    : trans_oriented_randomGraph</span>
 <span class="go">Digraph Order      : 6</span>
 <span class="go">Digraph Size       : 7</span>
@@ -3467,7 +3467,7 @@ Annals of Discrete Mathematics 57, Elsevier, p. 129-132.</p>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">odg</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dual transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ogd</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">)</span>
 <span class="go">*------- Digraph instance description ------*</span>
-<span class="go">Instance class   : WeakOrder</span>
+<span class="go">Instance class   : TransitiveOrder</span>
 <span class="go">Instance name    : trans_oriented_dual_randomGraph</span>
 <span class="go">Digraph Order      : 6</span>
 <span class="go">Digraph Size       : 8</span>
@@ -4057,7 +4057,7 @@ This orientation is always transitive and delivers a weak ordering of the vertic
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">transitiveOrientation</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span>
 <span class="go">*------- Digraph instance description ------*</span>
-<span class="go">Instance class   : WeakOrder</span>
+<span class="go">Instance class   : TransitiveDigraph</span>
 <span class="go">Instance name    : oriented_permutationGraph</span>
 <span class="go">Digraph Order      : 6</span>
 <span class="go">Digraph Size       : 9</span>
@@ -7041,7 +7041,7 @@ low limit does not outrank x and the category high limit does outrank x.</p>
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.exportRatingGraphViz">
 <code class="descname">exportRatingGraphViz</code><span class="sig-paren">(</span><em>fileName=None</em>, <em>relation=None</em>, <em>direction='best'</em>, <em>Comments=True</em>, <em>graphType='png'</em>, <em>graphSize='7</em>, <em>7'</em>, <em>fontSize=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.exportRatingGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.exportRatingGraphViz" title="Permalink to this definition">¶</a></dt>
-<dd><p>The rating drawing is using the <code class="xref py py-func docutils literal"><span class="pre">weakOrders.WeakOrder.exportGraphViz()</span></code> method for
+<dd><p>The rating drawing is using the <a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.exportGraphViz" title="transitiveDigraphs.TransitiveDigraph.exportGraphViz"><code class="xref py py-func docutils literal"><span class="pre">transitiveDigraphs.TransitiveDigraph.exportGraphViz()</span></code></a> method for
 drawing oriented Hasse diagrams of weak orderings, ie the negation
 of the corresponding preorder relation.</p>
 <p>Continuing the previous Python session:</p>

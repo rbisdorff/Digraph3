@@ -9386,7 +9386,7 @@ if __name__ == "__main__":
     import copy
     from time import time, sleep
     from outrankingDigraphs import BipolarOutrankingDigraph
-    from weakOrders import RankingByChoosingDigraph
+    from transitiveDigraphs import RankingByChoosingDigraph
     
     print('*-------- Testing classes and methods -------')
 

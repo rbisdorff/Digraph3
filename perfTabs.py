@@ -2421,12 +2421,15 @@ The performance evaluations of each decision alternative on each criterion are g
         if Debug: print('/nSTART: Calculating action list')
 
         if Ranked and actionsList == None:
-            from weakOrders import QuantilesRankingDigraph
-            qsr = QuantilesRankingDigraph(self,LowerClosed=True,
-                                          Threading=Threading,
-                                          Debug=Debug)
-            actionsList = [x for x in flatten(qsr.computeQsRbcRanking())]
-            
+            # from weakOrders import QuantilesRankingDigraph
+            # qsr = QuantilesRankingDigraph(self,LowerClosed=True,
+            #                               Threading=Threading,
+            #                               Debug=Debug)
+            # actionsList = [x for x in flatten(qsr.computeQsRbcRanking())]
+            from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
+            prg = PreRankedOutrankingDigraph(self,LowerClosed=True,
+                                             Threading=Threading,Debug=Debug)
+            actionsList = prg.computeBoostedRanking()
         else:
             if actionsList == None:
                 actionsList = list(self.actions.keys())
@@ -7546,7 +7549,7 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     import sortingDigraphs
     import linearOrders
-    from weakOrders import *
+    from transitiveDigraphs import *
     from randomPerfTabs import *
     from time import time
     
@@ -7667,38 +7670,6 @@ if __name__ == "__main__":
 ##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
 ##    from weakOrders import *
 ##    print('TT')
-##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,PrefThresholds=True,Threading=False)
-##    qsrbc.showSorting()
-####    t1 = RandomCBPerformanceTableau(numberOfCriteria=13,
-####                                   numberOfActions=30,
-####                                   weightDistribution='equiobjectives',
-####                                   IntegerWeights=True,
-####                                   Debug=False,
-####                                   missingDataProbability=0.1,
-####                                   seed=100,Threading=False)
-##    print('TF')
-##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=True,PrefThresholds=False,Threading=False)
-##    qsrbc.showSorting()
-####    t2 = RandomCBPerformanceTableau(numberOfCriteria=13,
-####                                   numberOfActions=30,
-####                                   weightDistribution='equiobjectives',
-####                                   IntegerWeights=True,
-####                                   Debug=False,
-####                                   missingDataProbability=0.1,
-####                                   seed=100,Threading=False)
-##    print('FT')
-##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=True,Threading=False)
-##    qsrbc.showSorting()
-####    t = RandomCBPerformanceTableau(numberOfCriteria=13,
-####                                   numberOfActions=30,
-####                                   weightDistribution='equiobjectives',
-####                                   IntegerWeights=True,
-####                                   Debug=False,
-####                                   missingDataProbability=0.1,
-####                                   seed=100,Threading=False)
-##    print('FF')
-##    qsrbc = QuantilesRankingDigraph(t,LowerClosed=False,PrefThresholds=False,Threading=False)
-##    qsrbc.showSorting()
 ##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
 ##    t.showHTMLPerformanceHeatmap(quantiles=11,Threading=False,rankingRule=None,
 ##                                 Correlations=True,ndigits=0)

@@ -3596,7 +3596,6 @@ if __name__ == "__main__":
 
     from digraphs import *
     from outrankingDigraphs import BipolarOutrankingDigraph
-#    from weakOrders import QuantilesRankingDigraph
     from randomPerfTabs import *
 ##    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
 ##                                         commonMode=('uniform',None,None),

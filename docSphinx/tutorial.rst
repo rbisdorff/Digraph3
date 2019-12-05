@@ -3101,7 +3101,7 @@ The same result may even more conviently be consulted in a browser view via a sp
 
     Heatmap of normed quartiles ranking 
 	    
-Using furthermore a specialised version of the :py:meth:`weakOrders.WeakOrder.exportGraphViz` method allows drawing the same rating result in a Hasse diagram format (see :numref:`normedRatingDigraph`).
+Using furthermore a specialised version of the :py:meth:`transitiveDigraphs.TransitiveDigraph.exportGraphViz` method allows drawing the same rating result in a Hasse diagram format (see :numref:`normedRatingDigraph`).
 
    >>> nqr.exportRatingGraphViz('normedRatingDigraph')
     *---- exporting a dot file for GraphViz tools ---------*
@@ -4582,12 +4582,12 @@ neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png
 
     Colored matching diagram of the permutation [4, 3, 6, 1, 5, 2]
 
-As mentioned before, a permutation graph and its dual are **transitively orientable**. The :py:func:`graphs.PermutationGraph.transitiveOrientation` method constructs from a given permutation graph a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices' keys (see [GOL-2004]_). This orientation of the edges of a permutation graph is always transitive and delivers a *weak ordering* of the vertices.
+As mentioned before, a permutation graph and its dual are **transitively orientable**. The :py:func:`graphs.PermutationGraph.transitiveOrientation` method constructs from a given permutation graph a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices' keys (see [GOL-2004]_). This orientation of the edges of a permutation graph is always transitive and delivers a *transitive ordering* of the vertices.
     
 >>> dg = g.transitiveOrientation()
 >>> dg
 *------- Digraph instance description ------*
-Instance class   : WeakOrder
+Instance class   : TransitiveDigraph
 Instance name    : oriented_permutationGraph
 Digraph Order      : 6
 Digraph Size       : 9
@@ -5405,7 +5405,7 @@ We notice here that the *Net-Flows* ranking rule inverts in fact just three '*le
 
 Such a preordering of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -best remaining choices- and *absorbent kernels* -worst remaining choices- (see the tutorial :ref:`Kernel-Tutorial-label`). We operate herefore on the asymmetric '*better rated than*', i.e. the *codual* ([11]_) of the '*at least as well rated as*' opinions.
 
->>> from weakOrders import RankingByChoosingDigraph
+>>> from transitiveDigraphs import RankingByChoosingDigraph
 >>> rbc = RankingByChoosingDigraph(g,CoDual=True)
 >>> rbc.showRankingByChoosing()
 Ranking by Choosing and Rejecting
