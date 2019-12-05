@@ -77,260 +77,31 @@
 <span class="k">except</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;XML extension will not work with this Python version!&#39;</span><span class="p">)</span>
 
-<span class="c1">######################################################################################################################</span>
-<span class="c1">#####                                                MCSRDecimalEncoder                                         ######</span>
-<span class="c1">#####                                                         START                                             ######</span>
-<span class="c1">######################################################################################################################</span>
-
-<span class="c1">#extension of the json encoder to encode decimals added by Ian</span>
-<span class="k">class</span> <span class="nc">_DecimalJSONEncoder</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">JSONEncoder</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">obj</span><span class="p">):</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">):</span>
-            <span class="c1">#cast into float so that the native encoder can handle the rest</span>
-            <span class="c1">#since the result is a string only the string representation is used,</span>
-            <span class="c1"># which is still identical to the decimal value</span>
-            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="vm">__dict__</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONEncoder</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>
-
-<span class="c1">######################################################################################################################</span>
-<span class="c1">#####                                                MCSRDecimalEncoder                                         ######</span>
-<span class="c1">#####                                                         END                                               ######</span>
-<span class="c1">######################################################################################################################</span>
-
-
-<span class="c1"># class _XMLPerformanceTableauHandler(ContentHandler):</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-<span class="c1">#     A private handler to deal with performance tableaus stored in XML format.</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-
-<span class="c1">#     inName = 0</span>
-<span class="c1">#     performanceTableauName = &#39;&#39;</span>
-<span class="c1">#     inActions = 0</span>
-<span class="c1">#     inAction = 0</span>
-<span class="c1">#     actionName = &#39;&#39;</span>
-<span class="c1">#     actions = []</span>
-<span class="c1">#     inCriteria = 0</span>
-<span class="c1">#     inCriterion = 0</span>
-<span class="c1">#     criterionName = &#39;&#39;</span>
-<span class="c1">#     inWeight = 0</span>
-<span class="c1">#     weightValue = &#39;&#39;</span>
-<span class="c1">#     criteria = {}</span>
-<span class="c1">#     inScale = 0</span>
-<span class="c1">#     scaleValue = &#39;(&#39;</span>
-<span class="c1">#     inMin = 0</span>
-<span class="c1">#     minValue = &#39;&#39;</span>
-<span class="c1">#     inMax = 0</span>
-<span class="c1">#     maxValue = &#39;&#39;</span>
-<span class="c1">#     inValue = 0</span>
-<span class="c1">#     valueText = &#39;&#39;</span>
-<span class="c1">#     inThresholds = 0</span>
-<span class="c1">#     inIndifference = 0</span>
-<span class="c1">#     inPreference = 0</span>
-<span class="c1">#     inWeakveto = 0</span>
-<span class="c1">#     inVeto = 0</span>
-<span class="c1">#     inEvaluations = 0</span>
-<span class="c1">#     evaluation = {}</span>
-<span class="c1">#     inEvaluation = 0</span>
-<span class="c1">#     inEvalActions = 0</span>
-    
-    
-<span class="c1">#     def startElement(self,nodeName,attrs):</span>
-<span class="c1">#         if nodeName == &#39;performancetableau&#39;:          </span>
-<span class="c1">#             self.category = attrs.get(&quot;category&quot;, &quot;&quot;)</span>
-<span class="c1">#             self.subcategory = attrs.get(&quot;subcategory&quot;, &quot;&quot;)</span>
-            
-<span class="c1">#         if nodeName == &#39;name&#39;:</span>
-<span class="c1">#             self.inName = 1</span>
-            
-<span class="c1">#         if nodeName == &#39;actions&#39;:</span>
-<span class="c1">#             self.actions = []</span>
-<span class="c1">#             self.inActions = 1</span>
-
-<span class="c1">#         if nodeName == &#39;action&#39;:</span>
-<span class="c1">#             self.actionName = &#39;&#39;</span>
-<span class="c1">#             self.inAction = 1</span>
-
-<span class="c1">#         if nodeName == &#39;criteria&#39;:</span>
-<span class="c1">#             self.criteria = {}</span>
-<span class="c1">#             self.inCriteria = 1</span>
-
-<span class="c1">#         if nodeName == &#39;critname&#39;:</span>
-<span class="c1">#             self.criterionName = &#39;&#39;</span>
-<span class="c1">#             self.inCriterion = 1</span>
-
-<span class="c1">#         if nodeName == &#39;weight&#39;:</span>
-<span class="c1">#             self.weightValue = &#39;&#39;</span>
-<span class="c1">#             self.inWeight = 1</span>
-
-<span class="c1">#         if nodeName == &#39;scale&#39;:</span>
-<span class="c1">#             self.scaleValue = &#39;(&#39;</span>
-<span class="c1">#             self.inScale = 1</span>
-
-<span class="c1">#         if nodeName == &#39;min&#39;:</span>
-<span class="c1">#             self.minValue = &#39;&#39;</span>
-<span class="c1">#             self.inMin = 1</span>
-
-<span class="c1">#         if nodeName == &#39;max&#39;:</span>
-<span class="c1">#             self.maxValue = &#39;&#39;</span>
-<span class="c1">#             self.inMax = 1</span>
-
-<span class="c1">#         if nodeName == &#39;thresholds&#39;:</span>
-<span class="c1">#             self.thresholds = {}</span>
-<span class="c1">#             self.inThresholds = 1</span>
-
-<span class="c1">#         if nodeName == &#39;indifference&#39;:</span>
-<span class="c1">#             self.valueText = &#39;&#39;</span>
-<span class="c1">#             self.inIndifference = 1</span>
-
-<span class="c1">#         if nodeName == &#39;preference&#39;:</span>
-<span class="c1">#             self.valueText = &#39;&#39;</span>
-<span class="c1">#             self.inPreference = 1</span>
-
-<span class="c1">#         if nodeName == &#39;weakveto&#39;:</span>
-<span class="c1">#             self.valueText = &#39;&#39;</span>
-<span class="c1">#             self.inWeakveto = 1</span>
-
-<span class="c1">#         if nodeName == &#39;veto&#39;:</span>
-<span class="c1">#             self.valueText = &#39;&#39;</span>
-<span class="c1">#             self.inVeto = 1</span>
-
-<span class="c1">#         if nodeName == &#39;evaluations&#39;:</span>
-<span class="c1">#             self.evaluation = {}</span>
-<span class="c1">#             self.inEvaluations = 1</span>
-
-<span class="c1">#         if nodeName == &#39;evaluation&#39;:</span>
-<span class="c1">#             self.inEvaluation = 1</span>
-
-<span class="c1">#         if nodeName == &#39;evalactions&#39;:</span>
-<span class="c1">#             self.inEvalActions = 1</span>
-
-<span class="c1">#         if nodeName == &#39;value&#39;:</span>
-<span class="c1">#             self.inValue = 1</span>
-        
-
-<span class="c1">#     def endElement(self,nodeName):</span>
-
-<span class="c1">#         if nodeName == &#39;name&#39;:</span>
-<span class="c1">#             self.inName = 0</span>
-<span class="c1">#             self.name = str(self.performanceTableauName)</span>
-
-<span class="c1">#         if nodeName == &#39;action&#39; and self.inActions == 1:</span>
-<span class="c1">#             self.actions.append(str(self.actionName))</span>
-<span class="c1">#             self.inAction = 0</span>
-
-<span class="c1">#         if nodeName == &#39;action&#39; and self.inEvalActions == 1:</span>
-<span class="c1">#             self.inAction = 0</span>
-<span class="c1">#             self.valueText = &#39;&#39;</span>
-
-<span class="c1">#         if nodeName == &#39;critname&#39; and self.inCriteria == 1:</span>
-<span class="c1">#             self.criterion = str(self.criterionName)</span>
-<span class="c1">#             self.criteria[self.criterion]={}</span>
-<span class="c1">#             self.inCriterion = 0</span>
-
-<span class="c1">#         if nodeName == &#39;critname&#39; and self.inEvaluation == 1:</span>
-<span class="c1">#             self.criterion = str(self.criterionName)</span>
-<span class="c1">#             self.evaluation[self.criterion] = {}</span>
-
-<span class="c1">#         if nodeName == &#39;actions&#39;:</span>
-<span class="c1">#             self.inActions = 0</span>
-            
-<span class="c1">#         if nodeName == &#39;weight&#39;:</span>
-<span class="c1">#             self.criteria[self.criterion][&#39;weight&#39;] = Decimal(self.weightValue)</span>
-<span class="c1">#             self.weightValue = &#39;&#39;</span>
-<span class="c1">#             self.inWeight = 0</span>
-
-<span class="c1">#         if nodeName == &#39;thresholds&#39;:</span>
-<span class="c1">#             self.criteria[self.criterion][&#39;thresholds&#39;] = self.thresholds</span>
-<span class="c1">#             self.thresholds = {}</span>
-<span class="c1">#             self.inThresholds = 0</span>
-
-<span class="c1">#         if nodeName == &#39;scale&#39;:</span>
-<span class="c1">#             scaleString = str(self.scaleValue) +&#39;)&#39;</span>
-<span class="c1">#             self.criteria[self.criterion][&#39;scale&#39;] = eval(scaleString)</span>
-<span class="c1">#             self.scaleValue = &#39;(&#39;</span>
-<span class="c1">#             self.inScale = 0</span>
-
-<span class="c1">#         if nodeName == &#39;min&#39;:</span>
-<span class="c1">#             self.scaleValue += str(self.minValue)+&#39;,&#39;</span>
-<span class="c1">#             self.minValue = &#39;&#39;</span>
-<span class="c1">#             self.inMin = 0</span>
-
-<span class="c1">#         if nodeName == &#39;max&#39;:</span>
-<span class="c1">#             self.scaleValue += str(self.maxValue)</span>
-<span class="c1">#             self.maxValue = &#39;&#39;</span>
-<span class="c1">#             self.inMax = 0</span>
-
-<span class="c1">#         if nodeName == &#39;indifference&#39;:</span>
-<span class="c1">#             value = eval(self.valueText)</span>
-<span class="c1">#             self.thresholds[&#39;ind&#39;] = (Decimal(str(value[0])),Decimal(str(value[1])))</span>
-<span class="c1">#             self.valueText = &#39;&#39;</span>
-<span class="c1">#             self.inIndifference = 0</span>
-
-<span class="c1">#         if nodeName == &#39;preference&#39;:</span>
-<span class="c1">#             value = eval(self.valueText)</span>
-<span class="c1">#             self.thresholds[&#39;pref&#39;] = (Decimal(str(value[0])),Decimal(str(value[1])))</span>
-<span class="c1">#             self.valueText = &#39;&#39;</span>
-<span class="c1">#             self.inPreference = 0</span>
-
-<span class="c1">#         if nodeName == &#39;weakveto&#39;:</span>
-<span class="c1">#             value = eval(self.valueText)</span>
-<span class="c1">#             self.thresholds[&#39;weakveto&#39;] = (Decimal(str(value[0])),Decimal(str(value[1])))</span>
-<span class="c1">#             self.valueText = &#39;&#39;</span>
-<span class="c1">#             self.inWeakveto = 0</span>
-
-<span class="c1">#         if nodeName == &#39;veto&#39;:</span>
-<span class="c1">#             value = eval(self.valueText)</span>
-<span class="c1">#             self.thresholds[&#39;veto&#39;] = (Decimal(str(value[0])),Decimal(str(value[1])))</span>
-<span class="c1">#             self.valueText = &#39;&#39;</span>
-<span class="c1">#             self.inVeto = 0</span>
-            
-<span class="c1">#         if nodeName == &#39;criteria&#39;:</span>
-<span class="c1">#             self.inCriteria = 0</span>
-
-<span class="c1">#         if nodeName == &#39;evaluations&#39;:</span>
-<span class="c1">#             self.inEvaluations = 0</span>
-
-<span class="c1">#         if nodeName == &#39;evaluation&#39;:</span>
-<span class="c1">#             self.inEvaluation = 0</span>
-
-<span class="c1">#         if nodeName == &#39;evalactions&#39;:</span>
-<span class="c1">#             self.inEvalActions = 0</span>
-
-<span class="c1">#         if nodeName == &#39;value&#39;:</span>
-<span class="c1">#             self.evaluation[self.criterion][str(self.actionName)] = Decimal(self.valueText)</span>
-
-<span class="c1">#             self.inValue = 0</span>
+<span class="c1">########################################################################################################################</span>
+<span class="c1">#######                                                MCSRDecimalEncoder                                         ######</span>
+<span class="c1">#######                                                         START                                             ######</span>
+<span class="c1">########################################################################################################################</span>
+<span class="c1">##</span>
+<span class="c1">###extension of the json encoder to encode decimals added by Ian</span>
+<span class="c1">##class _DecimalJSONEncoder(json.JSONEncoder):</span>
+<span class="c1">##</span>
+<span class="c1">##    def default(self,obj):</span>
+<span class="c1">##</span>
+<span class="c1">##        if isinstance(obj,decimal.Decimal):</span>
+<span class="c1">##            #cast into float so that the native encoder can handle the rest</span>
+<span class="c1">##            #since the result is a string only the string representation is used,</span>
+<span class="c1">##            # which is still identical to the decimal value</span>
+<span class="c1">##            return float(obj)</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            return obj.__dict__</span>
+<span class="c1">##        return json.JSONEncoder.default(self, obj)</span>
+<span class="c1">##</span>
+<span class="c1">########################################################################################################################</span>
+<span class="c1">#######                                                MCSRDecimalEncoder                                         ######</span>
+<span class="c1">#######                                                         END                                               ######</span>
+<span class="c1">########################################################################################################################</span>
 
 
-<span class="c1">#     def characters(self, ch):</span>
-<span class="c1">#         if self.inName:</span>
-<span class="c1">#             self.performanceTableauName += ch</span>
-<span class="c1">#         if self.inAction: </span>
-<span class="c1">#             self.actionName += ch</span>
-<span class="c1">#         if self.inCriterion:</span>
-<span class="c1">#             self.criterionName += ch</span>
-<span class="c1">#         if self.inWeight:</span>
-<span class="c1">#             self.weightValue += ch</span>
-<span class="c1">#         if self.inMin:</span>
-<span class="c1">#             self.minValue += ch</span>
-<span class="c1">#         if self.inMax:</span>
-<span class="c1">#             self.maxValue += ch</span>
-<span class="c1">#         if self.inIndifference:</span>
-<span class="c1">#             self.valueText += ch</span>
-<span class="c1">#         if self.inPreference:</span>
-<span class="c1">#             self.valueText += ch</span>
-<span class="c1">#         if self.inWeakveto:</span>
-<span class="c1">#             self.valueText += ch</span>
-<span class="c1">#         if self.inVeto:</span>
-<span class="c1">#             self.valueText += ch</span>
-<span class="c1">#         if self.inValue:</span>
-<span class="c1">#             self.valueText += ch</span>
-        
-<span class="c1">##############################################################</span>
 
 
 <div class="viewcode-block" id="PerformanceTableau"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">PerformanceTableau</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -1813,14 +1584,6 @@
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
-<span class="c1">##        def flatten(iterable, ltypes=collections.Iterable):</span>
-<span class="c1">##            remainder = iter(iterable)</span>
-<span class="c1">##            while True:</span>
-<span class="c1">##                first = next(remainder)</span>
-<span class="c1">##                if isinstance(first, ltypes) and not isinstance(first, str):</span>
-<span class="c1">##                    remainder = IT.chain(first, remainder)</span>
-<span class="c1">##                else:</span>
-<span class="c1">##                    yield first</span>
         
         <span class="n">fileNameExt</span> <span class="o">=</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>        
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*Storing performance tableau in CSV format in file </span><span class="si">%s</span><span class="s1">&#39;</span>\
@@ -1999,13 +1762,6 @@
                 <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td&gt;&lt;/td&gt;&#39;</span>
 
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
-<span class="c1">##            &lt;td align=&quot;center&quot;&gt;%.2f&lt;/td&gt;</span>
-<span class="c1">##            &lt;td align=&quot;center&quot;&gt;%.2f&lt;/td&gt;</span>
-<span class="c1">##            &lt;td align=&quot;center&quot;&gt;%.2f&lt;/td&gt;</span>
-<span class="c1">##            &lt;td align=&quot;center&quot;&gt;%.2f&lt;/td&gt;</span>
-<span class="c1">##            &lt;td align=&quot;center&quot;&gt;%.2f&lt;/td&gt;</span>
-<span class="c1">##            &lt;td align=&quot;center&quot;&gt;%.2f&lt;/td&gt;</span>
-<span class="c1">##            &lt;td align=&quot;center&quot;&gt;%.2f&lt;/td&gt;</span>
             
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
         <span class="k">return</span> <span class="n">html</span>
@@ -2174,407 +1930,407 @@
 
 
 
-    <span class="c1"># MCSR serialization added by Ian</span>
-<div class="viewcode-block" id="PerformanceTableau.to_JSON"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.to_JSON">[docs]</a>    <span class="k">def</span> <span class="nf">to_JSON</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Convert the performance table .__dict__ into a JSON string</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span><span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">_DecimalJSONEncoder</span><span class="p">)</span></div>
-
-
-<span class="c1">######################################################################################################################</span>
-<span class="c1">#####                                                showHTMLMCSRPerformanceTableau                             ######</span>
-<span class="c1">#####                                                         START                                             ######</span>
-<span class="c1">######################################################################################################################</span>
-
-    <span class="k">def</span> <span class="nf">_showHTMLMCSRPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Min/Max Performance Tableau&#39;</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Ask the server for an HTML representation of the performance tableau.</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">gzip</span>
-        <span class="n">RESTurl</span> <span class="o">=</span> <span class="s2">&quot;http://leopold-loewenheim.uni.lu/MCSR_REST_Service/Master_Thesis/performance_Tableau&quot;</span>
-        <span class="n">params</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s1">&#39;typeDict&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">to_JSON</span><span class="p">(),</span><span class="s1">&#39;precision&#39;</span><span class="p">:</span><span class="n">ndigits</span><span class="p">,</span><span class="s1">&#39;title&#39;</span><span class="p">:</span><span class="n">title</span><span class="p">})</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-        <span class="n">jsonHeader</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;content-Type&#39;</span><span class="p">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">,</span><span class="s1">&#39;content-Encoding&#39;</span><span class="p">:</span> <span class="s1">&#39;gzip&#39;</span><span class="p">}</span>
-
-        <span class="c1">#urllib</span>
-        <span class="kn">import</span> <span class="nn">urllib.request</span>
-        <span class="n">req</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">RESTurl</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">jsonHeader</span><span class="p">)</span>
-        <span class="n">resp</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-        <span class="n">htmlResp</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-
-        <span class="kn">import</span> <span class="nn">tempfile</span>
-        <span class="n">temp</span><span class="o">=</span><span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w+t&#39;</span><span class="p">,</span><span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">temp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">htmlResp</span><span class="p">)</span>
-        <span class="n">temp</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-        <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="k">import</span> <span class="n">pathname2url</span>
-        <span class="kn">import</span> <span class="nn">os</span>
-        <span class="n">filePath</span> <span class="o">=</span> <span class="s1">&#39;file:</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pathname2url</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">name</span><span class="p">)))</span>
-
-        <span class="kn">import</span> <span class="nn">webbrowser</span>
-        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span>
-
-        <span class="n">temp</span><span class="o">.</span><span class="n">close</span>
-<span class="c1">#</span>
-<span class="c1">######################################################################################################################</span>
-<span class="c1">#####                                                showHTMLMCSRPerformanceTableau                              ######</span>
-<span class="c1">#####                                                         END                                             ######</span>
-<span class="c1">######################################################################################################################</span>
-
-
-    <span class="c1"># precision string needed to round decimals</span>
-    <span class="k">def</span> <span class="nf">_calcPrecision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ndigits</span><span class="p">):</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">ndigits</span><span class="o">!=</span><span class="mi">0</span><span class="p">):</span>
-            <span class="n">precision</span><span class="o">=</span><span class="s1">&#39;0.&#39;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">precision</span><span class="o">=</span><span class="s1">&#39;0&#39;</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndigits</span><span class="p">):</span>
-            <span class="n">precision</span><span class="o">+=</span><span class="s1">&#39;0&#39;</span>
-        <span class="k">return</span> <span class="n">precision</span>
-
-
-<span class="c1">######################################################################################################################</span>
-<span class="c1">#####                                                computeMCSRPerformanceTableau                              ######</span>
-<span class="c1">#####                                                         START                                             ######</span>
-<span class="c1">######################################################################################################################</span>
-    <span class="k">def</span> <span class="nf">_computeMCSRPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">isSorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                               <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Min/Max Performance Tableau&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes the performance table in a JSON compatible format with minima and maxima. Used by the Web API.</span>
-
-<span class="sd">        For a performance tableau with 5 criteria one obtains for instance</span>
-<span class="sd">        the following ordered dictionary in return::</span>
-
-<span class="sd">            OrderedDict([</span>
-<span class="sd">                (&#39;title&#39;, &#39;Min/Max Performance Tableau&#39;),</span>
-<span class="sd">                (&#39;precision&#39;, 2),</span>
-<span class="sd">                (&#39;criteriaList&#39;, OrderedDict([(&#39;0&#39;,&#39;g5&#39;), (&#39;1&#39;,&#39;g2&#39;), (&#39;2&#39;,&#39;g4&#39;), (&#39;3&#39;,&#39;g1&#39;), (&#39;4&#39;,&#39;g3&#39;)]),</span>
-<span class="sd">                (&#39;quantiles&#39;, OrderedDict([</span>
-<span class="sd">                                           (&#39;0&#39;,{&#39;a1&#39;:OrderedDict([</span>
-<span class="sd">                                                             (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;3&#39;), &#39;qantileClass&#39;:&#39;minimum&#39;}),</span>
-<span class="sd">                                                             (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;-17.92&#39;), &#39;qantileClass&#39;:&#39;default&#39;}),</span>
-<span class="sd">                                                             (&#39;2&#39;,{&#39;quantile&#39;:Decimal(&#39;26.68&#39;), &#39;qantileClass&#39;:&#39;maximum&#39;}),</span>
-<span class="sd">                                                             (&#39;3&#39;,{&#39;quantile&#39;:&#39;NaN, &#39;qantileClass&#39;:&#39;NaN&#39;}),</span>
-<span class="sd">                                                             (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;-33.99&#39;), &#39;qantileClass&#39;:&#39;default&#39;})</span>
-<span class="sd">                                           ])}),</span>
-<span class="sd">                                           (&#39;1&#39;,{&#39;a2&#39;:OrderedDict([</span>
-<span class="sd">                                                             (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;6&#39;), &#39;qantileClass&#39;:&#39;minimum&#39;}),</span>
-<span class="sd">                                                             (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;-30.71&#39;), &#39;qantileClass&#39;:&#39;default&#39;}),</span>
-<span class="sd">                                                             (&#39;2&#39;,{&#39;quantile&#39;:&#39;NaN&#39;, &#39;qantileClass&#39;:&#39;NaN&#39;}),</span>
-<span class="sd">                                                             (&#39;3&#39;,{&#39;quantile&#39;:Decimal(&#39;8&#39;), &#39;qantileClass&#39;:&#39;maximum&#39;}),</span>
-<span class="sd">                                                             (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;-77.77&#39;), &#39;qantileClass&#39;:&#39;default&#39;})</span>
-<span class="sd">                                           ])}),</span>
-<span class="sd">                                           (&#39;2&#39;, ...</span>
-<span class="sd">                ]))...</span>
-<span class="sd">            ]))</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/nSTART: computeMCSRPerformanceTableau&#39;</span><span class="p">)</span>
-
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">flatten</span>
-        <span class="n">performanceTableau</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">performanceTableau</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
-
-        <span class="nb">min</span><span class="o">=</span><span class="s2">&quot;minimum&quot;</span>
-        <span class="nb">max</span><span class="o">=</span><span class="s2">&quot;maximum&quot;</span>
-
-        <span class="n">minMaxEvaluations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeMinMaxEvaluations</span><span class="p">()</span>
-
-        <span class="n">performanceTableau</span><span class="p">[</span><span class="s2">&quot;precision&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ndigits</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/nSTART: Calculating criteria list&#39;</span><span class="p">)</span>
-
-        <span class="c1">#need a dict, but list(self.criteria) is not a dict</span>
-        <span class="c1">#therefore I need to construct criteriaList as a dict first</span>
-        <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">tempCriteria</span><span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">isSorted</span><span class="p">:</span>
-            <span class="n">tempCriteria</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tempCriteria</span><span class="p">):</span>
-            <span class="n">criteriaList</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)]</span> <span class="o">=</span> <span class="n">c</span>
-        <span class="n">criteriaList</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">criteriaList</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/nDONE: Calculating criteria list&#39;</span><span class="p">)</span>
-
-        <span class="n">performanceTableau</span><span class="p">[</span><span class="s2">&quot;criteriaList&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">criteriaList</span>
-
-        <span class="n">actionsList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">isSorted</span><span class="p">:</span>
-            <span class="n">actionsList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-
-        <span class="n">precision</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calcPrecision</span><span class="p">(</span><span class="n">ndigits</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/nSTART: Calculating quantiles&#39;</span><span class="p">)</span>
-
-        <span class="n">quantiles</span><span class="o">=</span><span class="n">OrderedDict</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">actionsList</span><span class="p">):</span>
-            <span class="n">quantiles</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
-            <span class="n">quantiles</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">gKey</span><span class="p">,</span><span class="n">gValue</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">quantilexg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeActionCriterionQuantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">gValue</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">quantilexg</span> <span class="o">!=</span> <span class="s1">&#39;NA&#39;</span><span class="p">:</span>
-                    <span class="n">quantile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">gValue</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
-                    <span class="n">constantQuantile</span> <span class="o">=</span> <span class="p">(</span><span class="n">minMaxEvaluations</span><span class="p">[</span><span class="n">gValue</span><span class="p">][</span><span class="s1">&#39;minimum&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">minMaxEvaluations</span><span class="p">[</span><span class="n">gValue</span><span class="p">][</span><span class="s1">&#39;maximum&#39;</span><span class="p">])</span>
-                    <span class="k">if</span> <span class="n">quantile</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;-999&quot;</span><span class="p">):</span>
-                        <span class="k">if</span> <span class="p">((</span><span class="n">quantile</span> <span class="o">==</span> <span class="n">minMaxEvaluations</span><span class="p">[</span><span class="n">gValue</span><span class="p">][</span><span class="s1">&#39;minimum&#39;</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">constantQuantile</span><span class="p">)):</span>
-                            <span class="n">quantiles</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)][</span><span class="n">x</span><span class="p">][</span><span class="n">gKey</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">quantile</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">precision</span><span class="p">),</span><span class="n">rounding</span><span class="o">=</span><span class="n">decimal</span><span class="o">.</span><span class="n">ROUND_DOWN</span><span class="p">),</span>
-                                                            <span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="nb">min</span><span class="p">}</span>
-                        <span class="k">elif</span> <span class="p">((</span><span class="n">quantile</span> <span class="o">==</span> <span class="n">minMaxEvaluations</span><span class="p">[</span><span class="n">gValue</span><span class="p">][</span><span class="s1">&#39;maximum&#39;</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">constantQuantile</span><span class="p">)):</span>
-                            <span class="n">quantiles</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)][</span><span class="n">x</span><span class="p">][</span><span class="n">gKey</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">quantile</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">precision</span><span class="p">),</span><span class="n">rounding</span><span class="o">=</span><span class="n">decimal</span><span class="o">.</span><span class="n">ROUND_DOWN</span><span class="p">),</span>
-                                                            <span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="nb">max</span><span class="p">}</span>
-                        <span class="k">else</span><span class="p">:</span>
-                            <span class="n">quantiles</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)][</span><span class="n">x</span><span class="p">][</span><span class="n">gKey</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">quantile</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">precision</span><span class="p">),</span><span class="n">rounding</span><span class="o">=</span><span class="n">decimal</span><span class="o">.</span><span class="n">ROUND_DOWN</span><span class="p">),</span>
-                                                            <span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s2">&quot;default&quot;</span><span class="p">}</span>
-
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">quantiles</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)][</span><span class="n">x</span><span class="p">][</span><span class="n">gKey</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="s2">&quot;NaN&quot;</span><span class="p">,</span>
-                                                            <span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s2">&quot;NaN&quot;</span><span class="p">}</span>
-                    <span class="c1"># break</span>
-            <span class="n">quantiles</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)]</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span><span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">quantiles</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)][</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])))}</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/nDONE: Calculating quantiles&#39;</span><span class="p">)</span>
-
-        <span class="n">quantiles</span><span class="o">=</span><span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">quantiles</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
-        <span class="n">performanceTableau</span><span class="p">[</span><span class="s1">&#39;quantiles&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">quantiles</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/nDONE: computeMCSRPerformanceTableau&#39;</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">performanceTableau</span>
-
-<span class="c1">######################################################################################################################</span>
-<span class="c1">#####                                                computeMCSRPerformanceTableau                            ######</span>
-<span class="c1">#####                                                         END                                             ######</span>
-<span class="c1">######################################################################################################################</span>
-
-
-<span class="c1">######################################################################################################################</span>
-<span class="c1">#####                                                computeMCSRPerformanceHeatmap                              ######</span>
-<span class="c1">#####                                                         START                                             ######</span>
-<span class="c1">######################################################################################################################</span>
-    <span class="k">def</span> <span class="nf">_computeMCSRPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                               <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
-                               <span class="n">Ranked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                               <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Performance Heatmap&#39;</span><span class="p">,</span>
-                               <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                               <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                               <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Computes the Brewer RdYlGn colored heatmap of the performance table</span>
-<span class="sd">        actions x criteria in ordered dictionary format. Three color levels (5,7 or 9)</span>
-<span class="sd">        are provided. Used by the Web API.</span>
-
-<span class="sd">        For a performance tableau with 5 criteria, colorLevels=5 and</span>
-<span class="sd">        Correlations = True, one obtains for instance</span>
-<span class="sd">        the following ordered dictionary in return::</span>
-
-<span class="sd">            OrderedDict([</span>
-<span class="sd">                (&#39;title&#39;, &#39;Performance Heatmap&#39;),</span>
-<span class="sd">                (&#39;precision&#39;, 2),</span>
-<span class="sd">                (&#39;colorPalette&#39;, OrderedDict([</span>
-<span class="sd">                                  (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;0.2&#39;),&#39;quantileClass&#39;:&#39;q5_1&#39;}),</span>
-<span class="sd">                                  (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;0.4&#39;),&#39;quantileClass&#39;:&#39;q5_2&#39;}),</span>
-<span class="sd">                                  (&#39;2&#39;,{&#39;quantile&#39;:Decimal(&#39;0.6&#39;),&#39;quantileClass&#39;:&#39;q5_3&#39;}),</span>
-<span class="sd">                                  (&#39;3&#39;,{&#39;quantile&#39;:Decimal(&#39;0.8&#39;),&#39;quantileClass&#39;:&#39;q5_4&#39;}),</span>
-<span class="sd">                                  (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;1.0&#39;),&#39;quantileClass&#39;:&#39;q5_5&#39;})</span>
-<span class="sd">                ])),</span>
-<span class="sd">                (&#39;criteriaList&#39;, OrderedDict([(&#39;0&#39;,&#39;g5&#39;), (&#39;1&#39;,&#39;g2&#39;), (&#39;2&#39;,&#39;g4&#39;), (&#39;3&#39;,&#39;g1&#39;), (&#39;4&#39;,&#39;g3&#39;)]),</span>
-<span class="sd">                (&#39;criteriaCorrelations&#39;, OrderedDict([</span>
-<span class="sd">                                                     (&#39;0&#39;,Decimal(&#39;0.71428&#39;)),</span>
-<span class="sd">                                                     (&#39;1&#39;,Decimal(&#39;0.48571&#39;)),</span>
-<span class="sd">                                                     (&#39;2&#39;,Decimal(&#39;0.40952&#39;)),</span>
-<span class="sd">                                                     (&#39;3&#39;,Decimal(&#39;0.35238&#39;)),</span>
-<span class="sd">                                                     (&#39;4&#39;,Decimal(&#39;0.16190&#39;))</span>
-<span class="sd">                ])),</span>
-<span class="sd">                (&#39;quantiles&#39;, OrderedDict([</span>
-<span class="sd">                                           (&#39;0&#39;,{&#39;a1&#39;:OrderedDict([</span>
-<span class="sd">                                                             (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;3&#39;), &#39;qantileClass&#39;:&#39;q5-2&#39;}),</span>
-<span class="sd">                                                             (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;-17.92&#39;), &#39;qantileClass&#39;:&#39;q5-5&#39;}),</span>
-<span class="sd">                                                             (&#39;2&#39;,{&#39;quantile&#39;:Decimal(&#39;26.68&#39;), &#39;qantileClass&#39;:&#39;q5-2&#39;}),</span>
-<span class="sd">                                                             (&#39;3&#39;,{&#39;quantile&#39;:Decimal(&#39;1&#39;), &#39;qantileClass&#39;:&#39;q5-1&#39;}),</span>
-<span class="sd">                                                             (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;-33.99&#39;), &#39;qantileClass&#39;:&#39;q5-3&#39;})</span>
-<span class="sd">                                           ])}),</span>
-<span class="sd">                                           (&#39;1&#39;,{&#39;a2&#39;:OrderedDict([</span>
-<span class="sd">                                                             (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;6&#39;), &#39;qantileClass&#39;:&#39;q5-3&#39;}),</span>
-<span class="sd">                                                             (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;-30.71&#39;), &#39;qantileClass&#39;:&#39;q5-5&#39;}),</span>
-<span class="sd">                                                             (&#39;2&#39;,{&#39;quantile&#39;:Decimal(&#39;66.35&#39;), &#39;qantileClass&#39;:&#39;q5-4&#39;}),</span>
-<span class="sd">                                                             (&#39;3&#39;,{&#39;quantile&#39;:Decimal(&#39;8&#39;), &#39;qantileClass&#39;:&#39;q5-5&#39;}),</span>
-<span class="sd">                                                             (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;-77.77&#39;), &#39;qantileClass&#39;:&#39;q5-3&#39;})</span>
-<span class="sd">                                           ])}),</span>
-<span class="sd">                                           (&#39;2&#39;, ...</span>
-<span class="sd">                ]))...</span>
-<span class="sd">            ]))</span>
-
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/nSTART: computeMCSRPerformanceHeatmap&#39;</span><span class="p">)</span>
-
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">flatten</span>
-        <span class="n">heatmap</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
-        <span class="n">heatmap</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title</span>
-
-        <span class="n">heatmap</span><span class="p">[</span><span class="s2">&quot;precision&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ndigits</span>
-
-        <span class="n">brewerRdYlGn9Colors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1111&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s2">&quot;q9_1&quot;</span><span class="p">},</span>
-                               <span class="s1">&#39;1&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2222&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s2">&quot;q9_2&quot;</span><span class="p">},</span>
-                               <span class="s1">&#39;2&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.3333&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s2">&quot;q9_3&quot;</span><span class="p">},</span>
-                               <span class="s1">&#39;3&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.4444&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s2">&quot;q9_4&quot;</span><span class="p">},</span>
-                               <span class="s1">&#39;4&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.5555&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s2">&quot;q9_5&quot;</span><span class="p">},</span>
-                               <span class="s1">&#39;5&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.6666&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s2">&quot;q9_6&quot;</span><span class="p">},</span>
-                               <span class="s1">&#39;6&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.7777&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s2">&quot;q9_7&quot;</span><span class="p">},</span>
-                               <span class="s1">&#39;7&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.8888&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s2">&quot;q9_8&quot;</span><span class="p">},</span>
-                               <span class="s1">&#39;8&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0000&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s2">&quot;q9_9&quot;</span><span class="p">}</span>
-                               <span class="p">}</span>
-
-        <span class="n">brewerRdYlGn7Colors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1429&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q7_1&#39;</span><span class="p">},</span>
-                               <span class="s1">&#39;1&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2857&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q7_2&#39;</span><span class="p">},</span>
-                               <span class="s1">&#39;2&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.4286&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q7_3&#39;</span><span class="p">},</span>
-                               <span class="s1">&#39;3&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.5714&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q7_4&#39;</span><span class="p">},</span>
-                               <span class="s1">&#39;4&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.7143&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q7_5&#39;</span><span class="p">},</span>
-                               <span class="s1">&#39;5&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.8571&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q7_6&#39;</span><span class="p">},</span>
-                               <span class="s1">&#39;6&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0000&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q7_7&#39;</span><span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="n">brewerRdYlGn5Colors</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5_1&#39;</span><span class="p">},</span>
-                               <span class="s1">&#39;1&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.4&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5_2&#39;</span><span class="p">},</span>
-                               <span class="s1">&#39;2&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.6&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5_3&#39;</span><span class="p">},</span>
-                               <span class="s1">&#39;3&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.8&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5_4&#39;</span><span class="p">},</span>
-                               <span class="s1">&#39;4&#39;</span><span class="p">:{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">),</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s1">&#39;q5_5&#39;</span><span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="k">if</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
-            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn7Colors</span>
-        <span class="k">elif</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
-            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn9Colors</span>
-        <span class="k">elif</span> <span class="n">colorLevels</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
-            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn5Colors</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">brewerRdYlGn7Colors</span>
-
-        <span class="n">colorPalette</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">colorPalette</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
-        <span class="n">heatmap</span><span class="p">[</span><span class="s1">&#39;colorPalette&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">colorPalette</span>
-
-        <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">colorPalette</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/nSTART: Calculating action list&#39;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">Ranked</span> <span class="ow">and</span> <span class="n">actionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># from weakOrders import QuantilesRankingDigraph</span>
-            <span class="c1"># qsr = QuantilesRankingDigraph(self,LowerClosed=True,</span>
-            <span class="c1">#                               Threading=Threading,</span>
-            <span class="c1">#                               Debug=Debug)</span>
-            <span class="c1"># actionsList = [x for x in flatten(qsr.computeQsRbcRanking())]</span>
-            <span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="n">PreRankedOutrankingDigraph</span>
-            <span class="n">prg</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                             <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-            <span class="n">actionsList</span> <span class="o">=</span> <span class="n">prg</span><span class="o">.</span><span class="n">computeBoostedRanking</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">actionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">actionsList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-                <span class="n">actionsList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/nDONE: Calculating action list&#39;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/nSTART: Calculating criteria list and correlations/weights&#39;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">criteriaList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">OutrankingDigraph</span>
-            <span class="k">if</span> <span class="n">Correlations</span><span class="p">:</span>
-                <span class="n">criteriaCorrelations</span> <span class="o">=</span> <span class="n">OutrankingDigraph</span><span class="o">.</span><span class="n">showMarginalVersusGlobalOutrankingCorrelation</span><span class="p">(</span>
-                    <span class="n">qsr</span><span class="p">,</span>
-                    <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
-                    <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-                <span class="n">criteriaList</span><span class="o">=</span><span class="p">{}</span>
-                <span class="n">correlations</span><span class="o">=</span><span class="p">{}</span>
-
-                <span class="n">criteriaWeightsList</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">],</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
-                <span class="n">criteriaWeightsList</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-                <span class="n">criteriaWeights</span><span class="o">=</span><span class="p">{}</span>
-                <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">criteriaCorrelations</span><span class="p">):</span>
-                    <span class="n">criteriaList</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)]</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                    <span class="n">correlations</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)]</span><span class="o">=</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                    <span class="k">for</span> <span class="n">indexW</span><span class="p">,</span><span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">criteriaWeightsList</span><span class="p">):</span>
-                     <span class="k">if</span> <span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-                         <span class="n">criteriaWeights</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)]</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                         <span class="k">break</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">criteriaWeightsList</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">],</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
-                <span class="n">criteriaWeightsList</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="n">criteriaList</span><span class="o">=</span><span class="p">{}</span>
-                <span class="n">criteriaWeights</span><span class="o">=</span><span class="p">{}</span>
-                <span class="k">for</span> <span class="n">index</span><span class="p">,</span><span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">criteriaWeightsList</span><span class="p">):</span>
-                    <span class="n">criteriaList</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)]</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                    <span class="n">criteriaWeights</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)]</span><span class="o">=</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-                <span class="n">criteriaCorrelations</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">criteriaCorrelations</span> <span class="o">=</span> <span class="kc">None</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/nDONE: Calculating criteria list and correlations/weights&#39;</span><span class="p">)</span>
-
-        <span class="n">criteriaList</span><span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">criteriaList</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
-        <span class="n">heatmap</span><span class="p">[</span><span class="s1">&#39;criteriaList&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">criteriaList</span>
-
-        <span class="k">if</span> <span class="n">criteriaCorrelations</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">correlations</span><span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">correlations</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
-            <span class="n">heatmap</span><span class="p">[</span><span class="s1">&#39;criteriaCorrelations&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">correlations</span>
-
-            <span class="n">criteriaWeights</span><span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">criteriaWeights</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
-            <span class="n">heatmap</span><span class="p">[</span><span class="s1">&#39;criteriaWeights&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">criteriaWeights</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">criteriaWeights</span><span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">criteriaWeights</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
-            <span class="n">heatmap</span><span class="p">[</span><span class="s1">&#39;criteriaWeights&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">criteriaWeights</span>
-
-        <span class="n">precision</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calcPrecision</span><span class="p">(</span><span class="n">ndigits</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/nSTART: Calculating quantiles&#39;</span><span class="p">)</span>
-
-        <span class="n">quantiles</span><span class="o">=</span><span class="n">OrderedDict</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">actionsList</span><span class="p">):</span>
-            <span class="n">quantiles</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
-            <span class="n">quantiles</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="k">for</span> <span class="n">gKey</span><span class="p">,</span><span class="n">gValue</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">quantilexg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeActionCriterionQuantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">gValue</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">gValue</span><span class="p">,</span><span class="n">quantilexg</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">quantilexg</span> <span class="o">!=</span> <span class="s1">&#39;NA&#39;</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
-                        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                            <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">colorPalette</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)][</span><span class="s1">&#39;quantile&#39;</span><span class="p">])</span>
-
-                        <span class="k">if</span> <span class="n">quantilexg</span> <span class="o">&lt;=</span> <span class="n">colorPalette</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)][</span><span class="s1">&#39;quantile&#39;</span><span class="p">]:</span>
-                            <span class="n">quantiles</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)][</span><span class="n">x</span><span class="p">][</span><span class="n">gKey</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">gValue</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="n">precision</span><span class="p">),</span><span class="n">rounding</span><span class="o">=</span><span class="n">decimal</span><span class="o">.</span><span class="n">ROUND_DOWN</span><span class="p">),</span>
-                                             <span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="n">colorPalette</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)][</span><span class="s1">&#39;quantileClass&#39;</span><span class="p">]}</span>
-                            <span class="k">break</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">quantiles</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)][</span><span class="n">x</span><span class="p">][</span><span class="n">gKey</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;quantile&#39;</span><span class="p">:</span><span class="s2">&quot;NaN&quot;</span><span class="p">,</span>
-                                             <span class="s1">&#39;quantileClass&#39;</span><span class="p">:</span><span class="s2">&quot;NaN&quot;</span><span class="p">}</span>
-                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">gValue</span><span class="p">,</span><span class="n">quantiles</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="n">x</span><span class="p">][</span><span class="n">gValue</span><span class="p">])</span>
-            <span class="n">quantiles</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)]</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span><span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">quantiles</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)][</span><span class="n">x</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])))}</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/nSTART: Calculating quantiles&#39;</span><span class="p">)</span>
-
-
-        <span class="n">heatmap</span><span class="p">[</span><span class="s1">&#39;quantiles&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">quantiles</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;/nDONE: computeMCSRPerformanceHeatmap&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">heatmap</span> 
-
-<span class="c1">######################################################################################################################</span>
-<span class="c1">#####                                                computeMCSRPerformanceHeatmap                            ######</span>
-<span class="c1">#####                                                         END                                             ######</span>
-<span class="c1">######################################################################################################################</span>
+<span class="c1">##    # MCSR serialization added by Ian</span>
+<span class="c1">##    def to_JSON(self):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Convert the performance table .__dict__ into a JSON string</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        return json.dumps(self.__dict__,sort_keys=True, indent=4, cls=_DecimalJSONEncoder)</span>
+<span class="c1">##</span>
+<span class="c1">##</span>
+<span class="c1">########################################################################################################################</span>
+<span class="c1">#######                                                showHTMLMCSRPerformanceTableau                             ######</span>
+<span class="c1">#######                                                         START                                             ######</span>
+<span class="c1">########################################################################################################################</span>
+<span class="c1">##</span>
+<span class="c1">##    def _showHTMLMCSRPerformanceTableau(self,ndigits=2,title=&#39;Min/Max Performance Tableau&#39;):</span>
+<span class="c1">##</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Ask the server for an HTML representation of the performance tableau.</span>
+<span class="c1">##</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        import gzip</span>
+<span class="c1">##        RESTurl = &quot;http://leopold-loewenheim.uni.lu/MCSR_REST_Service/Master_Thesis/performance_Tableau&quot;</span>
+<span class="c1">##        params = gzip.compress(json.dumps({&#39;typeDict&#39;:self.to_JSON(),&#39;precision&#39;:ndigits,&#39;title&#39;:title}).encode(&#39;utf-8&#39;))</span>
+<span class="c1">##        jsonHeader = {&#39;content-Type&#39;: &#39;application/json&#39;,&#39;content-Encoding&#39;: &#39;gzip&#39;}</span>
+<span class="c1">##</span>
+<span class="c1">##        #urllib</span>
+<span class="c1">##        import urllib.request</span>
+<span class="c1">##        req = urllib.request.Request(url=RESTurl, data=params, headers=jsonHeader)</span>
+<span class="c1">##        resp = urllib.request.urlopen(req)</span>
+<span class="c1">##        data = resp.read()</span>
+<span class="c1">##        htmlResp = data.decode(&#39;utf-8&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">##        import tempfile</span>
+<span class="c1">##        temp=tempfile.NamedTemporaryFile(mode=&#39;w+t&#39;,delete=False)</span>
+<span class="c1">##        temp.write(htmlResp)</span>
+<span class="c1">##        temp.seek(0)</span>
+<span class="c1">##</span>
+<span class="c1">##        from urllib.request import pathname2url</span>
+<span class="c1">##        import os</span>
+<span class="c1">##        filePath = &#39;file:{}&#39;.format(pathname2url(os.path.abspath(temp.name)))</span>
+<span class="c1">##</span>
+<span class="c1">##        import webbrowser</span>
+<span class="c1">##        webbrowser.open(filePath)</span>
+<span class="c1">##</span>
+<span class="c1">##        temp.close</span>
+<span class="c1">###</span>
+<span class="c1">########################################################################################################################</span>
+<span class="c1">#######                                                showHTMLMCSRPerformanceTableau                              ######</span>
+<span class="c1">#######                                                         END                                             ######</span>
+<span class="c1">########################################################################################################################</span>
+<span class="c1">##</span>
+<span class="c1">##</span>
+<span class="c1">##    # precision string needed to round decimals</span>
+<span class="c1">##    def _calcPrecision(self,ndigits):</span>
+<span class="c1">##        if(ndigits!=0):</span>
+<span class="c1">##            precision=&#39;0.&#39;</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            precision=&#39;0&#39;</span>
+<span class="c1">##        for x in range(ndigits):</span>
+<span class="c1">##            precision+=&#39;0&#39;</span>
+<span class="c1">##        return precision</span>
+<span class="c1">##</span>
+<span class="c1">##</span>
+<span class="c1">########################################################################################################################</span>
+<span class="c1">#######                                                computeMCSRPerformanceTableau                              ######</span>
+<span class="c1">#######                                                         START                                             ######</span>
+<span class="c1">########################################################################################################################</span>
+<span class="c1">##    def _computeMCSRPerformanceTableau(self,isSorted=True,</span>
+<span class="c1">##                               ndigits=2,title=&#39;Min/Max Performance Tableau&#39;,Debug=False):</span>
+<span class="c1">##</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Computes the performance table in a JSON compatible format with minima and maxima. Used by the Web API.</span>
+<span class="c1">##</span>
+<span class="c1">##        For a performance tableau with 5 criteria one obtains for instance</span>
+<span class="c1">##        the following ordered dictionary in return::</span>
+<span class="c1">##</span>
+<span class="c1">##            OrderedDict([</span>
+<span class="c1">##                (&#39;title&#39;, &#39;Min/Max Performance Tableau&#39;),</span>
+<span class="c1">##                (&#39;precision&#39;, 2),</span>
+<span class="c1">##                (&#39;criteriaList&#39;, OrderedDict([(&#39;0&#39;,&#39;g5&#39;), (&#39;1&#39;,&#39;g2&#39;), (&#39;2&#39;,&#39;g4&#39;), (&#39;3&#39;,&#39;g1&#39;), (&#39;4&#39;,&#39;g3&#39;)]),</span>
+<span class="c1">##                (&#39;quantiles&#39;, OrderedDict([</span>
+<span class="c1">##                                           (&#39;0&#39;,{&#39;a1&#39;:OrderedDict([</span>
+<span class="c1">##                                                             (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;3&#39;), &#39;qantileClass&#39;:&#39;minimum&#39;}),</span>
+<span class="c1">##                                                             (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;-17.92&#39;), &#39;qantileClass&#39;:&#39;default&#39;}),</span>
+<span class="c1">##                                                             (&#39;2&#39;,{&#39;quantile&#39;:Decimal(&#39;26.68&#39;), &#39;qantileClass&#39;:&#39;maximum&#39;}),</span>
+<span class="c1">##                                                             (&#39;3&#39;,{&#39;quantile&#39;:&#39;NaN, &#39;qantileClass&#39;:&#39;NaN&#39;}),</span>
+<span class="c1">##                                                             (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;-33.99&#39;), &#39;qantileClass&#39;:&#39;default&#39;})</span>
+<span class="c1">##                                           ])}),</span>
+<span class="c1">##                                           (&#39;1&#39;,{&#39;a2&#39;:OrderedDict([</span>
+<span class="c1">##                                                             (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;6&#39;), &#39;qantileClass&#39;:&#39;minimum&#39;}),</span>
+<span class="c1">##                                                             (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;-30.71&#39;), &#39;qantileClass&#39;:&#39;default&#39;}),</span>
+<span class="c1">##                                                             (&#39;2&#39;,{&#39;quantile&#39;:&#39;NaN&#39;, &#39;qantileClass&#39;:&#39;NaN&#39;}),</span>
+<span class="c1">##                                                             (&#39;3&#39;,{&#39;quantile&#39;:Decimal(&#39;8&#39;), &#39;qantileClass&#39;:&#39;maximum&#39;}),</span>
+<span class="c1">##                                                             (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;-77.77&#39;), &#39;qantileClass&#39;:&#39;default&#39;})</span>
+<span class="c1">##                                           ])}),</span>
+<span class="c1">##                                           (&#39;2&#39;, ...</span>
+<span class="c1">##                ]))...</span>
+<span class="c1">##            ]))</span>
+<span class="c1">##</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug: print(&#39;/nSTART: computeMCSRPerformanceTableau&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">##        from collections import OrderedDict</span>
+<span class="c1">##        from decimal import Decimal</span>
+<span class="c1">##        from digraphs import flatten</span>
+<span class="c1">##        performanceTableau = {}</span>
+<span class="c1">##        performanceTableau[&#39;title&#39;] = title</span>
+<span class="c1">##</span>
+<span class="c1">##        min=&quot;minimum&quot;</span>
+<span class="c1">##        max=&quot;maximum&quot;</span>
+<span class="c1">##</span>
+<span class="c1">##        minMaxEvaluations = self.computeMinMaxEvaluations()</span>
+<span class="c1">##</span>
+<span class="c1">##        performanceTableau[&quot;precision&quot;] = ndigits</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug: print(&#39;/nSTART: Calculating criteria list&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">##        #need a dict, but list(self.criteria) is not a dict</span>
+<span class="c1">##        #therefore I need to construct criteriaList as a dict first</span>
+<span class="c1">##        criteriaList = {}</span>
+<span class="c1">##        tempCriteria= list(self.criteria)</span>
+<span class="c1">##        if isSorted:</span>
+<span class="c1">##            tempCriteria.sort()</span>
+<span class="c1">##        for index,c in enumerate(tempCriteria):</span>
+<span class="c1">##            criteriaList[str(index)] = c</span>
+<span class="c1">##        criteriaList = OrderedDict(sorted(criteriaList.items(),key=lambda index: int(index[0])))</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug: print(&#39;/nDONE: Calculating criteria list&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">##        performanceTableau[&quot;criteriaList&quot;] = criteriaList</span>
+<span class="c1">##</span>
+<span class="c1">##        actionsList = list(self.actions)</span>
+<span class="c1">##        if isSorted:</span>
+<span class="c1">##            actionsList.sort()</span>
+<span class="c1">##</span>
+<span class="c1">##        precision = self._calcPrecision(ndigits)</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug: print(&#39;/nSTART: Calculating quantiles&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">##        quantiles=OrderedDict()</span>
+<span class="c1">##        for index, x in enumerate(actionsList):</span>
+<span class="c1">##            quantiles[str(index)] = OrderedDict()</span>
+<span class="c1">##            quantiles[str(index)][x] = {}</span>
+<span class="c1">##            for gKey,gValue in criteriaList.items():</span>
+<span class="c1">##                quantilexg = self.computeActionCriterionQuantile(x,gValue)</span>
+<span class="c1">##                if quantilexg != &#39;NA&#39;:</span>
+<span class="c1">##                    quantile=self.evaluation[gValue][x]</span>
+<span class="c1">##                    constantQuantile = (minMaxEvaluations[gValue][&#39;minimum&#39;] == minMaxEvaluations[gValue][&#39;maximum&#39;])</span>
+<span class="c1">##                    if quantile != Decimal(&quot;-999&quot;):</span>
+<span class="c1">##                        if ((quantile == minMaxEvaluations[gValue][&#39;minimum&#39;]) and (not constantQuantile)):</span>
+<span class="c1">##                            quantiles[str(index)][x][gKey]={&#39;quantile&#39;:quantile.quantize(Decimal(precision),rounding=decimal.ROUND_DOWN),</span>
+<span class="c1">##                                                            &#39;quantileClass&#39;:min}</span>
+<span class="c1">##                        elif ((quantile == minMaxEvaluations[gValue][&#39;maximum&#39;]) and (not constantQuantile)):</span>
+<span class="c1">##                            quantiles[str(index)][x][gKey]={&#39;quantile&#39;:quantile.quantize(Decimal(precision),rounding=decimal.ROUND_DOWN),</span>
+<span class="c1">##                                                            &#39;quantileClass&#39;:max}</span>
+<span class="c1">##                        else:</span>
+<span class="c1">##                            quantiles[str(index)][x][gKey]={&#39;quantile&#39;:quantile.quantize(Decimal(precision),rounding=decimal.ROUND_DOWN),</span>
+<span class="c1">##                                                            &#39;quantileClass&#39;:&quot;default&quot;}</span>
+<span class="c1">##</span>
+<span class="c1">##                else:</span>
+<span class="c1">##                    quantiles[str(index)][x][gKey]={&#39;quantile&#39;:&quot;NaN&quot;,</span>
+<span class="c1">##                                                            &#39;quantileClass&#39;:&quot;NaN&quot;}</span>
+<span class="c1">##                    # break</span>
+<span class="c1">##            quantiles[str(index)]={x:OrderedDict(sorted(quantiles[str(index)][x].items(),key=lambda index: int(index[0])))}</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug: print(&#39;/nDONE: Calculating quantiles&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">##        quantiles=OrderedDict(sorted(quantiles.items(),key=lambda index: int(index[0])))</span>
+<span class="c1">##        performanceTableau[&#39;quantiles&#39;] = quantiles</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug: print(&#39;/nDONE: computeMCSRPerformanceTableau&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">##        return performanceTableau</span>
+<span class="c1">##</span>
+<span class="c1">########################################################################################################################</span>
+<span class="c1">#######                                                computeMCSRPerformanceTableau                            ######</span>
+<span class="c1">#######                                                         END                                             ######</span>
+<span class="c1">########################################################################################################################</span>
+<span class="c1">##</span>
+<span class="c1">##</span>
+<span class="c1">########################################################################################################################</span>
+<span class="c1">#######                                                computeMCSRPerformanceHeatmap                              ######</span>
+<span class="c1">#######                                                         START                                             ######</span>
+<span class="c1">########################################################################################################################</span>
+<span class="c1">##    def _computeMCSRPerformanceHeatmap(self,criteriaList=None,</span>
+<span class="c1">##                               actionsList=None,</span>
+<span class="c1">##                               ndigits=2,</span>
+<span class="c1">##                               colorLevels=7,</span>
+<span class="c1">##                               Ranked=True,</span>
+<span class="c1">##                               title=&#39;Performance Heatmap&#39;,</span>
+<span class="c1">##                               Correlations=False,</span>
+<span class="c1">##                               Threading=False,</span>
+<span class="c1">##                               Debug=False):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Computes the Brewer RdYlGn colored heatmap of the performance table</span>
+<span class="c1">##        actions x criteria in ordered dictionary format. Three color levels (5,7 or 9)</span>
+<span class="c1">##        are provided. Used by the Web API.</span>
+<span class="c1">##</span>
+<span class="c1">##        For a performance tableau with 5 criteria, colorLevels=5 and</span>
+<span class="c1">##        Correlations = True, one obtains for instance</span>
+<span class="c1">##        the following ordered dictionary in return::</span>
+<span class="c1">##</span>
+<span class="c1">##            OrderedDict([</span>
+<span class="c1">##                (&#39;title&#39;, &#39;Performance Heatmap&#39;),</span>
+<span class="c1">##                (&#39;precision&#39;, 2),</span>
+<span class="c1">##                (&#39;colorPalette&#39;, OrderedDict([</span>
+<span class="c1">##                                  (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;0.2&#39;),&#39;quantileClass&#39;:&#39;q5_1&#39;}),</span>
+<span class="c1">##                                  (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;0.4&#39;),&#39;quantileClass&#39;:&#39;q5_2&#39;}),</span>
+<span class="c1">##                                  (&#39;2&#39;,{&#39;quantile&#39;:Decimal(&#39;0.6&#39;),&#39;quantileClass&#39;:&#39;q5_3&#39;}),</span>
+<span class="c1">##                                  (&#39;3&#39;,{&#39;quantile&#39;:Decimal(&#39;0.8&#39;),&#39;quantileClass&#39;:&#39;q5_4&#39;}),</span>
+<span class="c1">##                                  (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;1.0&#39;),&#39;quantileClass&#39;:&#39;q5_5&#39;})</span>
+<span class="c1">##                ])),</span>
+<span class="c1">##                (&#39;criteriaList&#39;, OrderedDict([(&#39;0&#39;,&#39;g5&#39;), (&#39;1&#39;,&#39;g2&#39;), (&#39;2&#39;,&#39;g4&#39;), (&#39;3&#39;,&#39;g1&#39;), (&#39;4&#39;,&#39;g3&#39;)]),</span>
+<span class="c1">##                (&#39;criteriaCorrelations&#39;, OrderedDict([</span>
+<span class="c1">##                                                     (&#39;0&#39;,Decimal(&#39;0.71428&#39;)),</span>
+<span class="c1">##                                                     (&#39;1&#39;,Decimal(&#39;0.48571&#39;)),</span>
+<span class="c1">##                                                     (&#39;2&#39;,Decimal(&#39;0.40952&#39;)),</span>
+<span class="c1">##                                                     (&#39;3&#39;,Decimal(&#39;0.35238&#39;)),</span>
+<span class="c1">##                                                     (&#39;4&#39;,Decimal(&#39;0.16190&#39;))</span>
+<span class="c1">##                ])),</span>
+<span class="c1">##                (&#39;quantiles&#39;, OrderedDict([</span>
+<span class="c1">##                                           (&#39;0&#39;,{&#39;a1&#39;:OrderedDict([</span>
+<span class="c1">##                                                             (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;3&#39;), &#39;qantileClass&#39;:&#39;q5-2&#39;}),</span>
+<span class="c1">##                                                             (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;-17.92&#39;), &#39;qantileClass&#39;:&#39;q5-5&#39;}),</span>
+<span class="c1">##                                                             (&#39;2&#39;,{&#39;quantile&#39;:Decimal(&#39;26.68&#39;), &#39;qantileClass&#39;:&#39;q5-2&#39;}),</span>
+<span class="c1">##                                                             (&#39;3&#39;,{&#39;quantile&#39;:Decimal(&#39;1&#39;), &#39;qantileClass&#39;:&#39;q5-1&#39;}),</span>
+<span class="c1">##                                                             (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;-33.99&#39;), &#39;qantileClass&#39;:&#39;q5-3&#39;})</span>
+<span class="c1">##                                           ])}),</span>
+<span class="c1">##                                           (&#39;1&#39;,{&#39;a2&#39;:OrderedDict([</span>
+<span class="c1">##                                                             (&#39;0&#39;,{&#39;quantile&#39;:Decimal(&#39;6&#39;), &#39;qantileClass&#39;:&#39;q5-3&#39;}),</span>
+<span class="c1">##                                                             (&#39;1&#39;,{&#39;quantile&#39;:Decimal(&#39;-30.71&#39;), &#39;qantileClass&#39;:&#39;q5-5&#39;}),</span>
+<span class="c1">##                                                             (&#39;2&#39;,{&#39;quantile&#39;:Decimal(&#39;66.35&#39;), &#39;qantileClass&#39;:&#39;q5-4&#39;}),</span>
+<span class="c1">##                                                             (&#39;3&#39;,{&#39;quantile&#39;:Decimal(&#39;8&#39;), &#39;qantileClass&#39;:&#39;q5-5&#39;}),</span>
+<span class="c1">##                                                             (&#39;4&#39;,{&#39;quantile&#39;:Decimal(&#39;-77.77&#39;), &#39;qantileClass&#39;:&#39;q5-3&#39;})</span>
+<span class="c1">##                                           ])}),</span>
+<span class="c1">##                                           (&#39;2&#39;, ...</span>
+<span class="c1">##                ]))...</span>
+<span class="c1">##            ]))</span>
+<span class="c1">##</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        if Debug: print(&#39;/nSTART: computeMCSRPerformanceHeatmap&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">##        from collections import OrderedDict</span>
+<span class="c1">##        from decimal import Decimal</span>
+<span class="c1">##        from digraphs import flatten</span>
+<span class="c1">##        heatmap = OrderedDict()</span>
+<span class="c1">##        heatmap[&#39;title&#39;] = title</span>
+<span class="c1">##</span>
+<span class="c1">##        heatmap[&quot;precision&quot;] = ndigits</span>
+<span class="c1">##</span>
+<span class="c1">##        brewerRdYlGn9Colors = {&#39;0&#39;:{&#39;quantile&#39;:Decimal(&#39;0.1111&#39;),&#39;quantileClass&#39;:&quot;q9_1&quot;},</span>
+<span class="c1">##                               &#39;1&#39;:{&#39;quantile&#39;:Decimal(&#39;0.2222&#39;),&#39;quantileClass&#39;:&quot;q9_2&quot;},</span>
+<span class="c1">##                               &#39;2&#39;:{&#39;quantile&#39;:Decimal(&#39;0.3333&#39;),&#39;quantileClass&#39;:&quot;q9_3&quot;},</span>
+<span class="c1">##                               &#39;3&#39;:{&#39;quantile&#39;:Decimal(&#39;0.4444&#39;),&#39;quantileClass&#39;:&quot;q9_4&quot;},</span>
+<span class="c1">##                               &#39;4&#39;:{&#39;quantile&#39;:Decimal(&#39;0.5555&#39;),&#39;quantileClass&#39;:&quot;q9_5&quot;},</span>
+<span class="c1">##                               &#39;5&#39;:{&#39;quantile&#39;:Decimal(&#39;0.6666&#39;),&#39;quantileClass&#39;:&quot;q9_6&quot;},</span>
+<span class="c1">##                               &#39;6&#39;:{&#39;quantile&#39;:Decimal(&#39;0.7777&#39;),&#39;quantileClass&#39;:&quot;q9_7&quot;},</span>
+<span class="c1">##                               &#39;7&#39;:{&#39;quantile&#39;:Decimal(&#39;0.8888&#39;),&#39;quantileClass&#39;:&quot;q9_8&quot;},</span>
+<span class="c1">##                               &#39;8&#39;:{&#39;quantile&#39;:Decimal(&#39;1.0000&#39;),&#39;quantileClass&#39;:&quot;q9_9&quot;}</span>
+<span class="c1">##                               }</span>
+<span class="c1">##</span>
+<span class="c1">##        brewerRdYlGn7Colors = {&#39;0&#39;:{&#39;quantile&#39;:Decimal(&#39;0.1429&#39;),&#39;quantileClass&#39;:&#39;q7_1&#39;},</span>
+<span class="c1">##                               &#39;1&#39;:{&#39;quantile&#39;:Decimal(&#39;0.2857&#39;),&#39;quantileClass&#39;:&#39;q7_2&#39;},</span>
+<span class="c1">##                               &#39;2&#39;:{&#39;quantile&#39;:Decimal(&#39;0.4286&#39;),&#39;quantileClass&#39;:&#39;q7_3&#39;},</span>
+<span class="c1">##                               &#39;3&#39;:{&#39;quantile&#39;:Decimal(&#39;0.5714&#39;),&#39;quantileClass&#39;:&#39;q7_4&#39;},</span>
+<span class="c1">##                               &#39;4&#39;:{&#39;quantile&#39;:Decimal(&#39;0.7143&#39;),&#39;quantileClass&#39;:&#39;q7_5&#39;},</span>
+<span class="c1">##                               &#39;5&#39;:{&#39;quantile&#39;:Decimal(&#39;0.8571&#39;),&#39;quantileClass&#39;:&#39;q7_6&#39;},</span>
+<span class="c1">##                               &#39;6&#39;:{&#39;quantile&#39;:Decimal(&#39;1.0000&#39;),&#39;quantileClass&#39;:&#39;q7_7&#39;}</span>
+<span class="c1">##        }</span>
+<span class="c1">##</span>
+<span class="c1">##        brewerRdYlGn5Colors = {&#39;0&#39;:{&#39;quantile&#39;:Decimal(&#39;0.2&#39;),&#39;quantileClass&#39;:&#39;q5_1&#39;},</span>
+<span class="c1">##                               &#39;1&#39;:{&#39;quantile&#39;:Decimal(&#39;0.4&#39;),&#39;quantileClass&#39;:&#39;q5_2&#39;},</span>
+<span class="c1">##                               &#39;2&#39;:{&#39;quantile&#39;:Decimal(&#39;0.6&#39;),&#39;quantileClass&#39;:&#39;q5_3&#39;},</span>
+<span class="c1">##                               &#39;3&#39;:{&#39;quantile&#39;:Decimal(&#39;0.8&#39;),&#39;quantileClass&#39;:&#39;q5_4&#39;},</span>
+<span class="c1">##                               &#39;4&#39;:{&#39;quantile&#39;:Decimal(&#39;1.0&#39;),&#39;quantileClass&#39;:&#39;q5_5&#39;}</span>
+<span class="c1">##        }</span>
+<span class="c1">##</span>
+<span class="c1">##        if colorLevels == 7:</span>
+<span class="c1">##            colorPalette = brewerRdYlGn7Colors</span>
+<span class="c1">##        elif colorLevels == 9:</span>
+<span class="c1">##            colorPalette = brewerRdYlGn9Colors</span>
+<span class="c1">##        elif colorLevels == 5:</span>
+<span class="c1">##            colorPalette = brewerRdYlGn5Colors</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            colorPalette = brewerRdYlGn7Colors</span>
+<span class="c1">##</span>
+<span class="c1">##        colorPalette = OrderedDict(sorted(colorPalette.items()))</span>
+<span class="c1">##        heatmap[&#39;colorPalette&#39;] = colorPalette</span>
+<span class="c1">##</span>
+<span class="c1">##        nc = len(colorPalette)</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug: print(&#39;/nSTART: Calculating action list&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">##        if Ranked and actionsList == None:</span>
+<span class="c1">##            # from weakOrders import QuantilesRankingDigraph</span>
+<span class="c1">##            # qsr = QuantilesRankingDigraph(self,LowerClosed=True,</span>
+<span class="c1">##            #                               Threading=Threading,</span>
+<span class="c1">##            #                               Debug=Debug)</span>
+<span class="c1">##            # actionsList = [x for x in flatten(qsr.computeQsRbcRanking())]</span>
+<span class="c1">##            from sparseOutrankingDigraphs import PreRankedOutrankingDigraph</span>
+<span class="c1">##            prg = PreRankedOutrankingDigraph(self,LowerClosed=True,</span>
+<span class="c1">##                                             Threading=Threading,Debug=Debug)</span>
+<span class="c1">##            actionsList = prg.computeBoostedRanking()</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            if actionsList == None:</span>
+<span class="c1">##                actionsList = list(self.actions.keys())</span>
+<span class="c1">##                actionsList.sort()</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug: print(&#39;/nDONE: Calculating action list&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug: print(&#39;/nSTART: Calculating criteria list and correlations/weights&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">##        if criteriaList == None:</span>
+<span class="c1">##            from outrankingDigraphs import OutrankingDigraph</span>
+<span class="c1">##            if Correlations:</span>
+<span class="c1">##                criteriaCorrelations = OutrankingDigraph.showMarginalVersusGlobalOutrankingCorrelation(</span>
+<span class="c1">##                    qsr,</span>
+<span class="c1">##                    Threading=Threading,</span>
+<span class="c1">##                    Comments=False)</span>
+<span class="c1">##                criteriaList={}</span>
+<span class="c1">##                correlations={}</span>
+<span class="c1">##</span>
+<span class="c1">##                criteriaWeightsList = [(self.criteria[g][&#39;weight&#39;],g) for g in self.criteria.keys()]</span>
+<span class="c1">##                criteriaWeightsList.sort(reverse=True)</span>
+<span class="c1">##</span>
+<span class="c1">##                criteriaWeights={}</span>
+<span class="c1">##                for index,c in enumerate(criteriaCorrelations):</span>
+<span class="c1">##                    criteriaList[str(index)]=c[1]</span>
+<span class="c1">##                    correlations[str(index)]=c[0]</span>
+<span class="c1">##                    for indexW,g in enumerate(criteriaWeightsList):</span>
+<span class="c1">##                     if (g[1]==c[1]):</span>
+<span class="c1">##                         criteriaWeights[str(index)]=g[0]</span>
+<span class="c1">##                         break</span>
+<span class="c1">##            else:</span>
+<span class="c1">##                criteriaWeightsList = [(self.criteria[g][&#39;weight&#39;],g) for g in self.criteria.keys()]</span>
+<span class="c1">##                criteriaWeightsList.sort(reverse=True)</span>
+<span class="c1">##                criteriaList={}</span>
+<span class="c1">##                criteriaWeights={}</span>
+<span class="c1">##                for index,g in enumerate(criteriaWeightsList):</span>
+<span class="c1">##                    criteriaList[str(index)]=g[1]</span>
+<span class="c1">##                    criteriaWeights[str(index)]=g[0]</span>
+<span class="c1">##</span>
+<span class="c1">##                criteriaCorrelations = None</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            criteriaCorrelations = None</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug: print(&#39;/nDONE: Calculating criteria list and correlations/weights&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">##        criteriaList= OrderedDict(sorted(criteriaList.items(),key=lambda index: int(index[0])))</span>
+<span class="c1">##        heatmap[&#39;criteriaList&#39;] = criteriaList</span>
+<span class="c1">##</span>
+<span class="c1">##        if criteriaCorrelations != None:</span>
+<span class="c1">##            correlations= OrderedDict(sorted(correlations.items(),key=lambda index: int(index[0])))</span>
+<span class="c1">##            heatmap[&#39;criteriaCorrelations&#39;] = correlations</span>
+<span class="c1">##</span>
+<span class="c1">##            criteriaWeights= OrderedDict(sorted(criteriaWeights.items(),key=lambda index: int(index[0])))</span>
+<span class="c1">##            heatmap[&#39;criteriaWeights&#39;] = criteriaWeights</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            criteriaWeights= OrderedDict(sorted(criteriaWeights.items(),key=lambda index: int(index[0])))</span>
+<span class="c1">##            heatmap[&#39;criteriaWeights&#39;] = criteriaWeights</span>
+<span class="c1">##</span>
+<span class="c1">##        precision = self._calcPrecision(ndigits)</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug: print(&#39;/nSTART: Calculating quantiles&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">##        quantiles=OrderedDict()</span>
+<span class="c1">##        for index, x in enumerate(actionsList):</span>
+<span class="c1">##            quantiles[str(index)] = OrderedDict()</span>
+<span class="c1">##            quantiles[str(index)][x] = {}</span>
+<span class="c1">##            for gKey,gValue in criteriaList.items():</span>
+<span class="c1">##                quantilexg = self.computeActionCriterionQuantile(x,gValue)</span>
+<span class="c1">##                if Debug:</span>
+<span class="c1">##                    print(x,gValue,quantilexg)</span>
+<span class="c1">##                if quantilexg != &#39;NA&#39;:</span>
+<span class="c1">##                    for i in range(nc):</span>
+<span class="c1">##                        if Debug:</span>
+<span class="c1">##                            print(i, colorPalette[str(i)][&#39;quantile&#39;])</span>
+<span class="c1">##</span>
+<span class="c1">##                        if quantilexg &lt;= colorPalette[str(i)][&#39;quantile&#39;]:</span>
+<span class="c1">##                            quantiles[str(index)][x][gKey]={&#39;quantile&#39;:self.evaluation[gValue][x].quantize(Decimal(precision),rounding=decimal.ROUND_DOWN),</span>
+<span class="c1">##                                             &#39;quantileClass&#39;:colorPalette[str(i)][&#39;quantileClass&#39;]}</span>
+<span class="c1">##                            break</span>
+<span class="c1">##                else:</span>
+<span class="c1">##                    quantiles[str(index)][x][gKey]={&#39;quantile&#39;:&quot;NaN&quot;,</span>
+<span class="c1">##                                             &#39;quantileClass&#39;:&quot;NaN&quot;}</span>
+<span class="c1">##                if Debug:</span>
+<span class="c1">##                    print(x,gValue,quantiles[index][x][gValue])</span>
+<span class="c1">##            quantiles[str(index)]={x:OrderedDict(sorted(quantiles[str(index)][x].items(),key=lambda index: int(index[0])))}</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug: print(&#39;/nSTART: Calculating quantiles&#39;)</span>
+<span class="c1">##</span>
+<span class="c1">##</span>
+<span class="c1">##        heatmap[&#39;quantiles&#39;] = OrderedDict(sorted(quantiles.items(),key=lambda index: int(index[0])))</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug: print(&#39;/nDONE: computeMCSRPerformanceHeatmap&#39;)</span>
+<span class="c1">##        return heatmap </span>
+<span class="c1">##</span>
+<span class="c1">########################################################################################################################</span>
+<span class="c1">#######                                                computeMCSRPerformanceHeatmap                            ######</span>
+<span class="c1">#######                                                         END                                             ######</span>
+<span class="c1">########################################################################################################################</span>
 
 <div class="viewcode-block" id="PerformanceTableau.showHTMLPerformanceHeatmap"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                                    <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
