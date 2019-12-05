@@ -1692,8 +1692,8 @@ So, **+0.9175** is the highest possible ordinal correlation (fitness) any potent
 
 We may visualize the partial order defined by the epistemic disjunction of these seven Kemeny rankings (see `transitiveDigraphs module <techDoc.html#module-transitiveDigraphs>`_) as follows.
 
-    >>> from tranditiveDigraphs import KemenyOrdersFusionDigraph
-    >>> wke = KemenyOrdersFusionDigraph(g,orderLimit=9)
+    >>> from tranditiveDigraphs import KemenyOrdersFusion
+    >>> wke = KemenyOrdersFusion(g,orderLimit=9)
     >>> wke.exportGraphViz('tutorialKemeny')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to tutorialKemeny.dot
@@ -1727,7 +1727,7 @@ The **Slater** ranking rule is similar to Kemeny's, but it is working, instead, 
     >>> corr = g.computeOrdinalCorrelation(sl)
     >>> print("Fitness of Slater's ranking: %.3f" % corr['correlation'])
     Fitness of Slater's ranking: 0.844
-    >>> slw = KemenyOrdersFusionDigraph(c,orderLimit=9)
+    >>> slw = KemenyOrdersFusion(c,orderLimit=9)
     >>> slw.exportGraphViz('tutorialSlater')
 
 We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the follwowing partial ordering.
