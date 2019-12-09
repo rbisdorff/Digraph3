@@ -2552,7 +2552,7 @@ We may inspect the performance tableau data with the computing resources provide
     'V'      |    1.00   |     60.00     80.00    70.00     50.00     60.00      0.00    100.00  
     'W'      |    1.00   |     75.00     30.00     0.00     55.00    100.00      0.00     50.00  
 
-We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the :py:func:`PerformanceTableau.showCriteria` method.
+We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the :py:func:`perfTabs.PerformanceTableau.showCriteria` method.
 
     >>> t.showCriteria()
     *----  criteria -----*
