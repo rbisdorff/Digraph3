@@ -666,16 +666,16 @@ def testXMCDARubisSolver():
                                    )
     t.saveXMCDA2('testXMCDA')
     import xmcda
-    xmcda.showXMCDARubisBestChoiceRecommendation(\
+    xmcda.saveXMCDARubisBestChoiceRecommendation(\
         problemFileName='testXMCDA',\
         valuationType=None)
-    xmcda.showXMCDARubisBestChoiceRecommendation(\
+    xmcda.saveXMCDARubisBestChoiceRecommendation(\
         problemFileName='testXMCDA',\
         valuationType='noVeto')
-    xmcda.showXMCDARubisBestChoiceRecommendation(\
+    xmcda.saveXMCDARubisBestChoiceRecommendation(\
         problemFileName='testXMCDA',\
         valuationType='confident')
-    xmcda.showXMCDARubisBestChoiceRecommendation(\
+    xmcda.saveXMCDARubisBestChoiceRecommendation(\
         problemFileName='testXMCDA',\
         valuationType='robust')
 
