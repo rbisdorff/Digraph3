@@ -1,30 +1,23 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>sortingDigraphs &#8212; Digraph3 3.7-3200+ documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '3.7-3200+',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
-  </head>
-  <body>
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -70,10 +63,10 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="c1">#######################</span>
-<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 
 <div class="viewcode-block" id="SortingDigraph"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph">[docs]</a><span class="k">class</span> <span class="nc">SortingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -155,7 +148,7 @@
 <span class="sd">    ] 40.0-20.0] : [&#39;a01&#39;]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">argProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">scaleSteps</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>\
                  <span class="n">minValuation</span><span class="o">=-</span><span class="mf">100.0</span><span class="p">,</span>\
@@ -173,17 +166,17 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
 
         <span class="c1"># import or generate a performance tableau</span>
         <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">argPerfTab</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! No valid performance tableau given!!&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Random standard performance tableau generated!!&#39;</span><span class="p">)</span>
-            <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
+            <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
             <span class="n">perfTab</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                                                <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
@@ -427,7 +420,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">tt</span>
 
 <span class="c1">#########</span>
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default presentation method for BipolarOutrankingDigraph instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -687,7 +680,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation for QuantilesSortingDigraphs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="n">cC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeCategoryContents</span><span class="p">()</span>
         
         <span class="k">if</span> <span class="n">Descending</span><span class="p">:</span>
@@ -784,7 +777,7 @@
 <span class="sd">        filtering from SortingDigraph instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
 
         <span class="k">def</span> <span class="nf">_safeName</span><span class="p">(</span><span class="n">t0</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
@@ -906,11 +899,11 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="n">LowerClosed</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="n">Threading</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">active_children</span>
-            <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
-            <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">cpu_count</span>
+            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">active_children</span>
+            <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
+            <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">cpu_count</span>
             <span class="k">class</span> <span class="nc">myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-                <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">catKeys</span><span class="p">,</span><span class="n">LowerClosed</span><span class="p">,</span><span class="n">Debug</span><span class="p">):</span>
+                <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">catKeys</span><span class="p">,</span><span class="n">LowerClosed</span><span class="p">,</span><span class="n">Debug</span><span class="p">):</span>
                     <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">tempDirName</span>
@@ -919,8 +912,8 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span> <span class="o">=</span> <span class="n">LowerClosed</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
                 <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                    <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
-                    <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">chdir</span>
+                    <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
+                    <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
                     <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting working in </span><span class="si">%s</span><span class="s2"> on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
@@ -965,7 +958,7 @@
                     <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">sorting</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
                     <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Threaded computing of sorting characteristics ...&#39;</span><span class="p">)</span>        
-            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">TemporaryDirectory</span><span class="p">,</span><span class="n">mkdtemp</span>
+            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span><span class="p">,</span><span class="n">mkdtemp</span>
             <span class="n">tempDirName</span> <span class="o">=</span> <span class="n">mkdtemp</span><span class="p">()</span>
             <span class="n">td</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
             <span class="n">selfFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpSelfRelation.py&#39;</span>
@@ -1405,7 +1398,7 @@
 <span class="sd">            Default values gives a normalized valuation domain</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="n">oldMax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
         <span class="n">oldMin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
         <span class="n">oldMed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
@@ -1489,7 +1482,7 @@
 <span class="sd">       :width: 400 px</span>
 <span class="sd">       :align: center</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">limitingQuantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
@@ -1509,13 +1502,13 @@
 <span class="sd">        Constructor for QuantilesSortingBigDigraph instances.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">CopyPerfTab</span><span class="p">:</span>
             <span class="n">copy2self</span> <span class="o">=</span> <span class="n">deepcopy</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">copy2self</span> <span class="o">=</span> <span class="n">copy</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
 
         <span class="c1"># import the performance tableau</span>
         <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -1756,7 +1749,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialization of the corresponding BipolarOutrankingDigraph method</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">cpu_count</span>
+        <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">cpu_count</span>
         
         <span class="n">LowerClosed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="s1">&#39;LowerClosed&#39;</span><span class="p">]</span>        
 
@@ -1839,14 +1832,14 @@
             
         <span class="c1">##</span>
         <span class="k">else</span><span class="p">:</span>  <span class="c1"># parallel computation</span>
-            <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-            <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span>
-            <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
-            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Lock</span><span class="p">,</span>\
+            <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+            <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+            <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
+            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Lock</span><span class="p">,</span>\
                                         <span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>
             <span class="c1">#Debug=True</span>
             <span class="k">class</span> <span class="nc">myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-                <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span>\
+                <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span>\
                              <span class="n">InitialSplit</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span>\
                              <span class="n">splitActions</span><span class="p">,</span>\
                              <span class="n">hasNoVeto</span><span class="p">,</span> <span class="n">hasBipolarVeto</span><span class="p">,</span>\
@@ -1861,10 +1854,10 @@
                     <span class="n">hasSymmetricThresholds</span> <span class="o">=</span> <span class="n">hasSymmetricThresholds</span><span class="p">,</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
                 <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                    <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span>
-                    <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
-                    <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">chdir</span>
-                    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
+                    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+                    <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
+                    <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
+                    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
                     <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
 <span class="c1">##                    if Debug:</span>
 <span class="c1">##                        print(&quot;Starting working in %s on thread %s&quot; % (self.workingDirectory, str(self.threadId)))</span>
@@ -1957,9 +1950,9 @@
              
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Threading ...&#39;</span><span class="p">)</span>
-            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">TemporaryDirectory</span>
+            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
             <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="n">tempDir</span><span class="p">)</span> <span class="k">as</span> <span class="n">tempDirName</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+                <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
 
                 <span class="c1">#selfDp = copy(self)</span>
                 <span class="n">selfFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpSelf.py&#39;</span>
@@ -2155,8 +2148,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation for QuantilesSortingDigraphs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
-        <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="k">import</span> <span class="n">TransitiveDigraph</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">TransitiveDigraph</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">cC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categoryContent</span>
         <span class="k">except</span><span class="p">:</span>
@@ -2262,7 +2255,7 @@
 <span class="sd">              in the uppest, the lowest or the average potential quantile.</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="k">if</span> <span class="n">strategy</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">strategy</span> <span class="o">=</span> <span class="s1">&#39;optimistic&#39;</span>
         <span class="k">if</span> <span class="n">HTML</span><span class="p">:</span>
@@ -2389,7 +2382,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation for QuantilesSortingDigraphs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">cC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categoryContent</span>
         <span class="k">except</span><span class="p">:</span>
@@ -2478,7 +2471,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the limiting quantiles</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">floor</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
             <span class="n">n</span> <span class="o">=</span> <span class="n">x</span>
         <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -2528,8 +2521,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the list of limiting quantiles on criteria g</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">floor</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="n">LowerClosed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="s1">&#39;LowerClosed&#39;</span><span class="p">]</span>
         <span class="n">gValues</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actionsOrig</span><span class="p">:</span>
@@ -2689,14 +2682,14 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="n">LowerClosed</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="n">Threading</span> <span class="ow">and</span> <span class="n">action</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">active_children</span>
-            <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
-            <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">cpu_count</span>
-            <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
+            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">active_children</span>
+            <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
+            <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+            <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
 <span class="c1">##            if Comments:</span>
 <span class="c1">##                self.Debug = True</span>
             <span class="k">class</span> <span class="nc">myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-                <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span>
+                <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span>
                              <span class="n">nq</span><span class="p">,</span> <span class="n">Min</span><span class="p">,</span> <span class="n">Max</span><span class="p">,</span> <span class="n">LowerClosed</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
                     <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
@@ -2708,8 +2701,8 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span> <span class="o">=</span> <span class="n">LowerClosed</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
                 <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                    <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
-                    <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">chdir</span>
+                    <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
+                    <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
                     <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
 <span class="c1">##                    if self.Debug:</span>
 <span class="c1">##                        print(&quot;Starting working in %s on %s&quot; % (self.workingDirectory, str(self.threadID)))</span>
@@ -2778,7 +2771,7 @@
                     <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Threaded computing of sorting characteristics ...&#39;</span><span class="p">)</span>        
-            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">TemporaryDirectory</span><span class="p">,</span><span class="n">mkdtemp</span>
+            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span><span class="p">,</span><span class="n">mkdtemp</span>
             <span class="n">tempDirName</span> <span class="o">=</span> <span class="n">mkdtemp</span><span class="p">()</span>
             <span class="n">td</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
             <span class="n">selfFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpSelfRelation.py&#39;</span>
@@ -3031,7 +3024,7 @@
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#from string import replace</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">categoryContent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categoryContent</span>
@@ -3111,7 +3104,7 @@
 
 <span class="c1">##############################################################333333</span>
 <span class="c1">#-------------</span>
-<span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="n">PerformanceQuantiles</span>  
+<span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="kn">import</span> <span class="n">PerformanceQuantiles</span>  
 <div class="viewcode-block" id="NormedQuantilesRatingDigraph"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph">[docs]</a><span class="k">class</span> <span class="nc">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">QuantilesSortingDigraph</span><span class="p">,</span><span class="n">PerformanceQuantiles</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class</span>
@@ -3156,7 +3149,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfQuantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">newData</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfQuantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">newData</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="c1">#PrefThresholds=False,\</span>
@@ -3170,9 +3163,9 @@
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         
         <span class="c1"># constructor for incremental rating agents</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>        
-        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>        
+        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
 
         <span class="c1"># set Debug status</span>
 <span class="c1">##        if Debug:</span>
@@ -3375,7 +3368,7 @@
         <span class="c1"># compute rating categories</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;best&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">NetFlowsOrder</span><span class="p">,</span><span class="n">CopelandOrder</span>
+            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">NetFlowsOrder</span><span class="p">,</span><span class="n">CopelandOrder</span>
             <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>           
             <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">corrnf</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsOrder</span><span class="p">)</span>
@@ -3393,13 +3386,13 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">rankingCorrelation</span> <span class="o">=</span> <span class="n">corrcop</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">copelandScores</span>
         <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;Copeland&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">CopelandOrder</span>
+            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">CopelandOrder</span>
             <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;Copeland&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">copelandScores</span>
         <span class="k">else</span><span class="p">:</span> <span class="c1"># net flows by default</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">NetFlowsOrder</span>
+            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">NetFlowsOrder</span>
             <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;NetFlows&#39;</span>
@@ -3433,7 +3426,7 @@
         <span class="c1"># end of the construction</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tt</span>
 
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default presentation method for BipolarOutrankingDigraph instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3835,8 +3828,8 @@
 <span class="sd">             and may not contain special characters like &#39;-&#39; or &#39;_&#39;.</span>
 <span class="sd">             </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="k">import</span> <span class="n">TransitiveDigraph</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">TransitiveDigraph</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="n">ratingRelation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeRatingRelation</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relationOrig</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">ratingRelation</span>
@@ -3865,7 +3858,7 @@
 <span class="sd">        See the corresponding :py:meth:`perfTabs.showHTMLPerformanceHeatMap` method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;see browser&#39;</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
                     
         <span class="n">brewerRdYlGn9Colors</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1111&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D53E4F&quot;&#39;</span><span class="p">),</span>
                                <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2222&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#F46D43&quot;&#39;</span><span class="p">),</span>
@@ -4273,13 +4266,13 @@
 <span class="c1">##########################################################3</span>
 <span class="c1">#----------test SortingDigraph class ----------------</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
-    <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="k">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="k">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+    <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="kn">import</span> <span class="o">*</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    ****************************************************</span>
@@ -4401,8 +4394,8 @@
 <span class="c1">##                                    numberOfCriteria=nbrCrit,\</span>
 <span class="c1">##                                    Threading=MP,seed=seed)</span>
 <span class="c1">##</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
     <span class="n">nbrActions</span><span class="o">=</span><span class="mi">100</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">21</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
@@ -4520,13 +4513,13 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -4548,7 +4541,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2019, Raymond Bisdorff.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
     </div>
   </body>
 </html>

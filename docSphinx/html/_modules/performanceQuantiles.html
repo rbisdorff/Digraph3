@@ -1,30 +1,23 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>performanceQuantiles &#8212; Digraph3 3.7-3200+ documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '../',
-        VERSION:     '3.7-3200+',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
-      };
-    </script>
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
-  </head>
-  <body>
+  </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -60,9 +53,9 @@
 <span class="sd">    You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
-<span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
-<span class="kn">from</span> <span class="nn">perfTabs</span> <span class="k">import</span> <span class="n">PerformanceTableau</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">PerformanceTableau</span>
 
 <div class="viewcode-block" id="PerformanceQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles">[docs]</a><span class="k">class</span> <span class="nc">PerformanceQuantiles</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -110,7 +103,7 @@
 <span class="sd">        :align: center</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default presentation method for PerformanceQuantiles instances</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -134,10 +127,10 @@
         <span class="k">return</span> <span class="n">reprString</span>
 
     
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">perfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">defaultdict</span>
-        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">perfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">defaultdict</span>
+        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span>\
                                    <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">,</span>\
                                    <span class="n">RandomPerformanceTableau</span>
         
@@ -274,7 +267,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the quantiles frequencies</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">floor</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
             <span class="n">n</span> <span class="o">=</span> <span class="n">x</span>
         <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;quartiles&#39;</span><span class="p">:</span>
@@ -311,8 +304,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the list of limiting quantiles *q(p)* on criteria *g* for *p* in *frequencies* </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">floor</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="n">critg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
         <span class="n">gValues</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
@@ -570,7 +563,7 @@
         <span class="c1">#Debug = True</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt;&#39;</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span><span class="n">newValues</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
         <span class="c1"># get present state of the quantiles</span>
         <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span>
         <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
@@ -706,8 +699,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the quantile *q(p)* on all the criteria.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         
         <span class="n">x</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">qFreq</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -1086,7 +1079,7 @@
 <span class="c1">#----------test classes and methods ----------------</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
-    <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="kn">import</span> <span class="o">*</span>
     <span class="n">seed</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="n">nbrActions</span> <span class="o">=</span> <span class="mi">20</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
@@ -1102,8 +1095,8 @@
 <span class="c1">##    nbrCrit = nbrCrit</span>
 <span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,</span>
 <span class="c1">##                                    numberOfCriteria=nbrCrit,seed=seed)</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
     <span class="n">nbrActions</span><span class="o">=</span><span class="n">nbrActions</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="n">nbrCrit</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
@@ -1128,7 +1121,7 @@
     <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
     <span class="n">pq1</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
     <span class="n">rg</span> <span class="o">=</span> <span class="n">RandomPerformanceGenerator</span><span class="p">(</span><span class="n">pq1</span><span class="p">)</span>
     <span class="n">newTab</span> <span class="o">=</span> <span class="n">rg</span><span class="o">.</span><span class="n">randomPerformanceTableau</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="c1">##    from sortingDigraphs import NormedQuantilesRatingDigraph</span>
@@ -1155,13 +1148,13 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
     </form>
+    </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -1183,7 +1176,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2019, Raymond Bisdorff.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.6.7.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
     </div>
   </body>
 </html>

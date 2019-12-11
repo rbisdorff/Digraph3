@@ -5437,7 +5437,7 @@ where for all *x* in *X*,
 
      :math:`(Y \circ R)(x) \; = \; \max_{y \in X, x \neq y} \big ( \min(Y(x), R(x,y))\big)\;.`
 
-than *Y* characterises an *initial kernel* ([BER-1958]_). Transposing the membership characteristic vector into a column vector :math:`Y^t`, makes *Berge*'s equation system similarly characterise a *terminal kernel*,
+then *Y* characterises an *initial kernel* ([BER-1958]_). Transposing the membership characteristic vector into a column vector :math:`Y^t`, makes *Berge*'s equation system similarly characterise a *terminal kernel*,
 
      :math:`R \circ Y^t \; = \; -Y^t\;.`
 
