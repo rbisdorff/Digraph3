@@ -12,7 +12,7 @@ from time import time
 
 ############# test sortingDigraphs ####################
 from sortingDigraphs import *
-from weakOrders import *
+from transitiveDigraphs import *
 
 def testDefaultSortingDigraph():
     print('*---- testing default instantiation of the SortingDigraph Class ---*')

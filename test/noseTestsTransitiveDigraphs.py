@@ -1,14 +1,14 @@
 #######################
 # R. Bisdorff 
-# weakOrders.py module tests for nose
+# transitiveDigraphs.py module tests for nose
 #
 # ..$ easyinstall nose   # installing the nose test environment
-# ..$ nosetests -vs noseTestsWeakOrders.py
+# ..$ nosetests -vs noseTestsTransitiveDigraphs.py
 # # Current $Revision: $
 ########################
 
 from outrankingDigraphs import *
-from weakOrders import *
+from transitiveDigraphs import *
 from time import time
 
 def testRankingByChoosingWithKernels():

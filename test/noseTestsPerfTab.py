@@ -10,7 +10,7 @@
 from digraphs import *
 from outrankingDigraphs import *
 from decimal import Decimal
-from weakOrders import *
+from transitiveDigraphs import *
 from randomPerfTabs import _RandomS3PerformanceTableau as\
      RandomS3PerformanceTableau
 from randomPerfTabs import _FullRandomPerformanceTableau as\

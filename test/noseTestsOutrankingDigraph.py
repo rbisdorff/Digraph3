@@ -496,7 +496,7 @@ def testIterateRankingByChoosing():
 def testStochasticOutrankingDigraphs():
     print('*------ test stochastic bipolar outranking digraphs ----*')
     from outrankingDigraphs import StochasticBipolarOutrankingDigraph
-    from weakOrders import RankingByChoosingDigraph
+    from transitiveDigraphs import RankingByChoosingDigraph
     t = RandomCBPerformanceTableau(numberOfActions=13,\
                                     numberOfCriteria=13,\
                                     weightDistribution='equiobjectives')

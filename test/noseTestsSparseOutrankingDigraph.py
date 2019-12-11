@@ -190,8 +190,8 @@ def testConfidentVersusStdPreRankedOutrankingDigraph():
                                  save2File='testbgstd')
     print(bg2)
     bg2.showComponents(direction='descending')
-    from weakOrders import PartialRanking
-    pr = PartialRanking(bg1,[bg1.boostedRanking,bg2.boostedRanking])
+    from transitiveDigraphs import RankingsFusion
+    pr = RankingsFusion(bg1,[bg1.boostedRanking,bg2.boostedRanking])
     pr.exportGraphViz('fusion-cpr-pr',graphType="pdf")
 
 def testEstimateRankingCorrelation():

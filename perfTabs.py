@@ -7424,7 +7424,6 @@ if __name__ == "__main__":
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('uniSorting')
 ##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
-##    from weakOrders import *
 ##    print('TT')
 ##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
 ##    t.showHTMLPerformanceHeatmap(quantiles=11,Threading=False,rankingRule=None,
