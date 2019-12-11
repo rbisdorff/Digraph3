@@ -103,7 +103,7 @@ def testKohlerArrowRaynaudFusionDigraph():
     print(time()-t0)
     ar.showRelationTable()
     t0 = time()
-    koar = KohlerArrowRaynaudFusionDigraph(g,Threading=Threading)
+    koar = KohlerArrowRaynaudFusion(g,Threading=Threading)
     print(time()-t0)
     koar.showRelationTable()
     print(g.computeOrdinalCorrelation(ko))
