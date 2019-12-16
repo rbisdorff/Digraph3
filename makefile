@@ -217,6 +217,9 @@ verboseArithmeticsTests:
 		cp arithmetics.py test/
 		(cd test; ${NOSETESTS} -vs noseTestsArithmetics.py)
 
+cythonTests:
+		(cd cython; make tests)
+
 install:
 		sudo ${PYTHON} setup.py install
 		#sudo python3.7 setup.py install
