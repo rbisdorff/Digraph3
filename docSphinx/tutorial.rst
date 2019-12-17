@@ -4582,7 +4582,8 @@ The underlying random performance tableau (see :numref:`randomOutranking`) shows
 All decision actions appear strictly better performing than action 'a7'. We call it a **Condorcet looser** and it is an evident terminal prekernel candidate. On the other side, three actions: 'a1', 'a2' and 'a4' are not dominated. They give together an initial prekernel candidate. 
 
 .. code-block:: pycon
-
+   :linenos:
+      
     >>> gcd.showPreKernels()
     *--- Computing preKernels ---*
     Dominant preKernels :
@@ -4800,6 +4801,9 @@ To illustrate these *perfect* graph classes, we will generate from 8 intervals, 
     [(2, 7), (2, 7), (5, 6), (6, 8), (1, 8), (1, 1), (4, 7), (0, 10)]
 
 With seed = 100, we obtain here an *interval* graph, in fact a **perfect graph**, which is **conjointly** a *triangulated*, a *comparability*, a *split* and a *permutation* graph.
+
+.. code-block:: pycon
+   :linenos:
       
     >>> print('Is a perfect graph ?', g.isPerfectGraph())
     Is a perfect graph ? True

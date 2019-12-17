@@ -94,7 +94,7 @@ pygments_style = 'sphinx'
 
 # sphinx autodoc flags
 #autodoc_default_flags = 'members', 'undoc-members', 'private-members', 'special-members', 'inherited-members','show-inheritance'
-autodoc_default_flags = ['members', 'undoc-members', 'inherited-members','show-inheritance']
+autodoc_default_option = ['members', 'undoc-members', 'inherited-members','show-inheritance']
 #autoclass_content = 'both'
 #autodoc_member_order = 'alphabetical'
 
