@@ -343,7 +343,7 @@ class Graph(object):
             Comments=True
         #self.visitedChordlessPathsNew = []
         self._degreeLabelling()
-        triplets,cycles3 = self._triplets(Comments=Comments)
+        triplets,cycles3 = self._triplets(Comments=Debug)
         if Comments:
             print('# of initial triplets:',len(triplets))
             print('# of 3-cycles        :',len(cycles3))
@@ -584,21 +584,23 @@ class Graph(object):
         vertices = set([x for x in self.vertices])
         self.cliques = [m[0] for m in dualSelf.generateIndependent(dualSelf._singletons()) if m[0] == m[2]]
         t1 = time.time()
-        if Comments:
-            n = len(vertices)
-            v = [0 for i in range(n+1)] 
-            cliqueList = [(len(clique),clique) for clique in self.cliques]
-            cliqueList.sort()
-            for clq in cliqueList:  # clq = (len(clique),clique)
-                clique = list(clq[1])
-                clique.sort()
-                print(clique)
-                v[clq[0]] += 1
-        
+        n = len(vertices)
+        v = [0 for i in range(n+1)] 
+        cliqueList = [(len(clique),clique) for clique in self.cliques]
+        cliqueList.sort()
+        for clq in cliqueList:  # clq = (len(clique),clique)
+            clique = list(clq[1])
+            clique.sort()
+            print(clique)
+            v[clq[0]] += 1
+            cliqueNumber = clq[0]
+        self.cliqueNumber= cliqueNumber
+        if Comments:  
             print('number of solutions: ', len(self.cliques))
             print('cardinality distribution')
             print('card.: ', list(range(n+1)))
             print('freq.: ', v)
+            print('clique Number: ', cliqueNumber)
             print('execution time: %.5f sec.' % (t1-t0))
             print('Results in self.cliques')
 
@@ -681,20 +683,24 @@ class Graph(object):
         vertices = set([x for x in self.vertices])
         self.misset = [m[0] for m in self.generateIndependent(self._singletons()) if m[0] == m[2]]
         t1 = time.time()
+        n = len(vertices)
+        v = [0 for i in range(n+1)] 
+        misList = [(len(mis),mis) for mis in self.misset]
+        misList.sort()
+        #print(misList)
+        for m in misList: # m = (len(mis),mis))
+            mis = list(m[1])
+            mis.sort()
+            print(mis)
+            v[m[0]] += 1
+            stabilityNumber = m[0]
+        self.stabilityNumber = stabilityNumber
         if Comments:
-            n = len(vertices)
-            v = [0 for i in range(n+1)] 
-            misList = [(len(mis),mis) for mis in self.misset]
-            misList.sort()
-            for m in misList: # m = (len(mis),mis))
-                mis = list(m[1])
-                mis.sort()
-                print(mis)
-                v[m[0]] += 1
             print('number of solutions: ', len(misList))
             print('cardinality distribution')
             print('card.: ', list(range(n+1)))
             print('freq.: ', v)
+            print('stability number : ', stabilityNumber)
             print('execution time: %.5f sec.' % (t1-t0))
             print('Results in self.misset')
 
@@ -1044,11 +1050,11 @@ class Graph(object):
                 bfs.sort()
                 self.bfs = [x[1] for x in bfs]
                 self.bfsDepth = bfsDepth
+                return self.bfs
             else:
                 if Warnings:
                     print('Warning: graph %s is not connected!' % self.name)
                     print('Not with %s connected vertices: %s' % (s,str(comp)) )
-        return self.bfs
                                 
     def depthFirstSearch(self,Debug=False):
         """
@@ -1817,7 +1823,22 @@ class Graph(object):
             if Comments:
                 print('Graph \%s\' is not triangulated' % self.name)
             return False
-        
+
+    def isPerfectGraph(self,Comments=False):
+        """
+        A graph *g* is perfect when neither *g*, nor *-g*, contain any chordless
+        cycle of odd length.
+        """
+        cycles = self.computeChordlessCycles(Comments=Comments)
+        for c in cycles:
+            if (len(c) % 2) != 0:
+                return False
+        cycles = (-self).computeChordlessCycles(Comments=Comments)
+        for c in cycles:
+            if (len(c) % 2) != 0:
+                return False
+        return True
+    
                   
     def randomDepthFirstSearch(self,seed=None,Debug=False):
         """
@@ -4441,13 +4462,13 @@ if __name__ == '__main__':
 ##    if rid.isComparabilityGraph():
 ##        rid.exportEdgeOrientationsGraphViz('testColors2',palette=2)
 
-    g = RandomGraph(order=8,edgeProbability=0.2)
+    g = RandomGraph(order=15,edgeProbability=0.5)
     #g = RandomTree(order=8)
     g.save('testbfs')
     g = Graph('testbfs')
     g.exportGraphViz()
-    print(g.breadthFirstSearch('v1',Debug=True))
-    
+    #print(g.breadthFirstSearch('v1',Debug=False))
+    print(g.isPerfectGraph(Comments=False))    
     
 ##    rg = RandomPermutationGraph(order=6,seed=None)
 ##    print(rg)

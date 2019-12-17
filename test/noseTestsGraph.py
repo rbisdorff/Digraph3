@@ -268,4 +268,11 @@ def testBreadthFirstSearch():
     g.exportGraphViz()
     print(g.breadthFirstSearch('v1',Debug=True))
 
+def testPerfectGraphDetection():
+    print('==>> Testing perfect graph property detection')
+    g = RandomGraph(order=15,edgeProbability=0.5)
+    g.save('testperf')
+    g.exportGraphViz('perfect')
+    print('Graph %s is perfect ? %s' %\
+          ('testperf',str(g.isPerfectGraph(Comments=False))) )    
 
