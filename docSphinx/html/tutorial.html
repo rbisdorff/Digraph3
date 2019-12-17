@@ -6833,52 +6833,31 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="go">[(2, 7), (2, 7), (5, 6), (6, 8), (1, 8), (1, 1), (4, 7), (0, 10)]</span>
 </pre></div>
 </td></tr></table></div>
-<p>With seed = 100, we obtain here an <em>interval</em> graph, in fact a <em>perfect graph</em>, which is <strong>conjointly</strong> a <em>triangulated</em>, a <em>comparability</em>, a <em>split</em> and a <em>permutation</em> graph.</p>
-<div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go"> &gt;&gt;&gt; print(&#39;Is a perfect graph ?&#39;, g.isPerfectGraph())</span>
-<span class="go"> Is a perfect graph ? True</span>
-<span class="go"> &gt;&gt;&gt; g.isIntervalGraph(Comments=True)</span>
-<span class="go"> Graph &#39;randIntervalIntersections&#39; is triangulated.</span>
-<span class="go"> Graph &#39;dual_randIntervalIntersections&#39; is transitively orientable.</span>
-<span class="go"> =&gt; Graph &#39;randIntervalIntersections&#39; is an interval graph.</span>
-<span class="go"> &gt;&gt;&gt; g.isSplitGraph(Comments=True)</span>
-<span class="go"> Graph &#39;randIntervalIntersections&#39; is triangulated.</span>
-<span class="go"> Graph &#39;dual_randIntervalIntersections&#39; is triangulated.</span>
-<span class="go"> =&gt; Graph &#39;randIntervalIntersections&#39; is a split graph.</span>
-<span class="go"> &gt;&gt;&gt; g.isPermutationGraph(Comments=True)</span>
-<span class="go"> Graph &#39;randIntervalIntersections&#39; is transitively orientable.</span>
-<span class="go"> Graph &#39;dual_randIntervalIntersections&#39; is transitively orientable.</span>
-<span class="go"> =&gt; Graph &#39;randIntervalIntersections&#39; is a permutation graph.</span>
-<span class="go"> &gt;&gt;&gt; print(g.computePermutation())</span>
-<span class="go"> [&#39;v5&#39;, &#39;v6&#39;, &#39;v4&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v3&#39;, &#39;v7&#39;, &#39;v8&#39;]</span>
-<span class="go"> [&#39;v8&#39;, &#39;v6&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v7&#39;, &#39;v5&#39;]</span>
-<span class="go"> [8, 2, 6, 5, 7, 4, 3, 1]</span>
-<span class="go"> &gt;&gt;&gt; g.exportGraphViz(&#39;randomSplitGraph&#39;)</span>
-<span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
-<span class="go"> Exporting to randomSplitGraph.dot</span>
-<span class="go"> fdp -Tpng randomSplitGraph.dot -o randomSplitGraph.png</span>
+<p>With seed = 100, we obtain here an <em>interval</em> graph, in fact a <strong>perfect graph</strong>, which is <strong>conjointly</strong> a <em>triangulated</em>, a <em>comparability</em>, a <em>split</em> and a <em>permutation</em> graph.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Is a perfect graph ?&#39;</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">isPerfectGraph</span><span class="p">())</span>
+<span class="go">Is a perfect graph ? True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">isIntervalGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">Graph &#39;randIntervalIntersections&#39; is triangulated.</span>
+<span class="go">Graph &#39;dual_randIntervalIntersections&#39; is transitively orientable.</span>
+<span class="go">=&gt; Graph &#39;randIntervalIntersections&#39; is an interval graph.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">isSplitGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">Graph &#39;randIntervalIntersections&#39; is triangulated.</span>
+<span class="go">Graph &#39;dual_randIntervalIntersections&#39; is triangulated.</span>
+<span class="go">=&gt; Graph &#39;randIntervalIntersections&#39; is a split graph.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">isPermutationGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">Graph &#39;randIntervalIntersections&#39; is transitively orientable.</span>
+<span class="go">Graph &#39;dual_randIntervalIntersections&#39; is transitively orientable.</span>
+<span class="go">=&gt; Graph &#39;randIntervalIntersections&#39; is a permutation graph.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computePermutation</span><span class="p">())</span>
+<span class="go">[&#39;v5&#39;, &#39;v6&#39;, &#39;v4&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v3&#39;, &#39;v7&#39;, &#39;v8&#39;]</span>
+<span class="go">[&#39;v8&#39;, &#39;v6&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v7&#39;, &#39;v5&#39;]</span>
+<span class="go">[8, 2, 6, 5, 7, 4, 3, 1]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;randomSplitGraph&#39;</span><span class="p">)</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go">Exporting to randomSplitGraph.dot</span>
+<span class="go">fdp -Tpng randomSplitGraph.dot -o randomSplitGraph.png</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <div class="figure align-center" id="randomsplitgraph">
 <a class="reference internal image-reference" href="_images/randomSplitGraph.png"><img alt="Ransdom split graph" src="_images/randomSplitGraph.png" style="width: 350px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 48 </span><span class="caption-text">A conjointly triangulated, comparability, interval, permutation and split graph</span><a class="headerlink" href="#randomsplitgraph" title="Permalink to this image">¶</a></p>
