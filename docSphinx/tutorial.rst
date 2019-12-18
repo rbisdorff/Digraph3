@@ -2993,32 +2993,10 @@ potential best choice recommendations, as well as the potential worst
 choice recommendation, are not positively validated as best,
 resp. worst choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see Lines 27 and 37) and seams hence not actually comparable to its competitors.
 
-The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in the default system browser, is provided by the :py:mod:`xmcda` module. In a python3 session working in the directory where the XMCDA encoded problem data is stored, we may proceed as follows.
+Computing *strict best* choice recommendations
+----------------------------------------------
 
-.. code-block:: pycon
-
-    >>> import xmcda
-    >>> xmcda.showXMCDARubisBestChoiveRecommendation(\
-                               prolemFileName='officeChoice',\
-                               valuationType='bipolar')
-
-And, in a system browser window, browse the `solution file`_.
-
-   .. _solution file: _static/officeChoice.xml1BYyGVwV866hSNZoSolution.html
-
-The :code:`valuationType` parameter allows to work:
-
-    - on the standard bipolar-valued outranking digraph (valuationType = 'bipolar', default),
-    - on the normalized --[-1,1] valued-- bipolar outranking digraph (valuationType = 'normalized'),
-    - on the robust --ordinal criteria weights-- bipolar outranking digraph (valuationType = 'robust'),
-    - on the confident outranking digraph (valuationType = 'confident'),
-    - ignoring considerable performances differences (valuationType = 'noVeto').
-
-
-Rubis *strict best* choice recommendation
------------------------------------------
-
-When comparing the performances of alternatives *D* and *G* on a
+When comparing now the performances of alternatives *D* and *G* on a
 pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100.0).
 
 .. code-block:: pycon
@@ -3065,8 +3043,8 @@ To model these *strict outranking* situations, we may compute the Rubis best cho
 .. code-block:: pycon
    :linenos:
 
-    >>> g.showRubisBestChoiceRecommendation(CoDual=True,ChoiceVector=True)
-    * --- Rubis best choice recommendation(s) ---*
+    >>> g.showBestChoiceRecommendation(CoDual=True,ChoiceVector=True)
+    * --- Best and worst choice recommendation(s) ---*
     (in decreasing order of determinateness)   
     Credibility domain:  {'min':-100.0, 'max': 100.0', 'med':0.0'}
     === >> potential best choice(s)
@@ -3096,8 +3074,8 @@ It is interesting to notice that the **strict best choice recommendation** consi
 
 We may also notice (see Line 17 and Line 21) that both alternatives *A* and *F* are reported as certainly outranked choices, hence a **potential worst choice recommendation** . This confirms again the global incomparability status of alternative *A*.
 
-Weakly ordering
----------------
+Weakly ordering the outranking digraph
+--------------------------------------
 
 To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor imported from the :ref:`transitiveDigraphs-label`, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*.
 

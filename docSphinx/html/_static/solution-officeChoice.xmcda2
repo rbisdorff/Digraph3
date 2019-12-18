@@ -3,11 +3,11 @@
 <xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://www.decision-deck.org/2009/XMCDA-2.0.0 http://www.decision-deck.org/xmcda/_downloads/XMCDA-2.0.0.xsd"
  xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0" instanceID="officeChoice">
-<projectReference id="/tmp/tmp1z82x9ni/solution-officeChoice" name="rel_officeChoice.xml">
+<projectReference id="docSphinx/_static/solution-officeChoice" name="rel_officeChoice.xml">
 <title>Rubis Best Choice Recommendation</title>
 <subTitle>Performance Tableau in XMCDA-2.0 format.</subTitle>
-<version>saved from Python session</version>
 <author>digraphs Module (RB)</author>
+<version>saved from Python session</version>
 </projectReference>
 <methodParameters id="Rubis" name="Rubis best choice method">
 <description>
@@ -553,37 +553,37 @@
 <pair>
 <initial><criterionID>C</criterionID></initial>
 <terminal><criterionID>Cf</criterionID></terminal>
-<value><real>-0.52</real></value>
+<value><real>-0.17</real></value>
 </pair>
 <pair>
 <initial><criterionID>C</criterionID></initial>
 <terminal><criterionID>P</criterionID></terminal>
-<value><real>-0.29</real></value>
+<value><real>0.27</real></value>
 </pair>
 <pair>
 <initial><criterionID>C</criterionID></initial>
 <terminal><criterionID>Pr</criterionID></terminal>
-<value><real>-0.10</real></value>
+<value><real>0.17</real></value>
 </pair>
 <pair>
 <initial><criterionID>C</criterionID></initial>
 <terminal><criterionID>St</criterionID></terminal>
-<value><real>-0.81</real></value>
+<value><real>-0.61</real></value>
 </pair>
 <pair>
 <initial><criterionID>C</criterionID></initial>
 <terminal><criterionID>V</criterionID></terminal>
-<value><real>-0.10</real></value>
+<value><real>0.32</real></value>
 </pair>
 <pair>
 <initial><criterionID>C</criterionID></initial>
 <terminal><criterionID>W</criterionID></terminal>
-<value><real>-0.62</real></value>
+<value><real>-0.41</real></value>
 </pair>
 <pair>
 <initial><criterionID>Cf</criterionID></initial>
 <terminal><criterionID>C</criterionID></terminal>
-<value><real>-0.52</real></value>
+<value><real>-0.17</real></value>
 </pair>
 <pair>
 <initial><criterionID>Cf</criterionID></initial>
@@ -593,197 +593,197 @@
 <pair>
 <initial><criterionID>Cf</criterionID></initial>
 <terminal><criterionID>P</criterionID></terminal>
+<value><real>-0.52</real></value>
+</pair>
+<pair>
+<initial><criterionID>Cf</criterionID></initial>
+<terminal><criterionID>Pr</criterionID></terminal>
 <value><real>-0.71</real></value>
 </pair>
 <pair>
 <initial><criterionID>Cf</criterionID></initial>
-<terminal><criterionID>Pr</criterionID></terminal>
-<value><real>-0.90</real></value>
-</pair>
-<pair>
-<initial><criterionID>Cf</criterionID></initial>
 <terminal><criterionID>St</criterionID></terminal>
-<value><real>-0.38</real></value>
+<value><real>-0.05</real></value>
 </pair>
 <pair>
 <initial><criterionID>Cf</criterionID></initial>
 <terminal><criterionID>V</criterionID></terminal>
-<value><real>-0.33</real></value>
+<value><real>0.05</real></value>
 </pair>
 <pair>
 <initial><criterionID>Cf</criterionID></initial>
 <terminal><criterionID>W</criterionID></terminal>
-<value><real>-0.43</real></value>
+<value><real>-0.14</real></value>
 </pair>
 <pair>
 <initial><criterionID>P</criterionID></initial>
 <terminal><criterionID>C</criterionID></terminal>
-<value><real>-0.29</real></value>
+<value><real>0.27</real></value>
 </pair>
 <pair>
 <initial><criterionID>P</criterionID></initial>
+<terminal><criterionID>Cf</criterionID></terminal>
+<value><real>-0.52</real></value>
+</pair>
+<pair>
+<initial><criterionID>P</criterionID></initial>
+<terminal><criterionID>P</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+<pair>
+<initial><criterionID>P</criterionID></initial>
+<terminal><criterionID>Pr</criterionID></terminal>
+<value><real>0.81</real></value>
+</pair>
+<pair>
+<initial><criterionID>P</criterionID></initial>
+<terminal><criterionID>St</criterionID></terminal>
+<value><real>-0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>P</criterionID></initial>
+<terminal><criterionID>V</criterionID></terminal>
+<value><real>0.24</real></value>
+</pair>
+<pair>
+<initial><criterionID>P</criterionID></initial>
+<terminal><criterionID>W</criterionID></terminal>
+<value><real>0.24</real></value>
+</pair>
+<pair>
+<initial><criterionID>Pr</criterionID></initial>
+<terminal><criterionID>C</criterionID></terminal>
+<value><real>0.17</real></value>
+</pair>
+<pair>
+<initial><criterionID>Pr</criterionID></initial>
 <terminal><criterionID>Cf</criterionID></terminal>
 <value><real>-0.71</real></value>
 </pair>
 <pair>
-<initial><criterionID>P</criterionID></initial>
+<initial><criterionID>Pr</criterionID></initial>
 <terminal><criterionID>P</criterionID></terminal>
+<value><real>0.81</real></value>
+</pair>
+<pair>
+<initial><criterionID>Pr</criterionID></initial>
+<terminal><criterionID>Pr</criterionID></terminal>
 <value><real>1.00</real></value>
 </pair>
 <pair>
-<initial><criterionID>P</criterionID></initial>
-<terminal><criterionID>Pr</criterionID></terminal>
-<value><real>0.48</real></value>
-</pair>
-<pair>
-<initial><criterionID>P</criterionID></initial>
+<initial><criterionID>Pr</criterionID></initial>
 <terminal><criterionID>St</criterionID></terminal>
-<value><real>-0.57</real></value>
+<value><real>0.05</real></value>
 </pair>
 <pair>
-<initial><criterionID>P</criterionID></initial>
+<initial><criterionID>Pr</criterionID></initial>
 <terminal><criterionID>V</criterionID></terminal>
-<value><real>-0.33</real></value>
+<value><real>0.14</real></value>
 </pair>
 <pair>
-<initial><criterionID>P</criterionID></initial>
+<initial><criterionID>Pr</criterionID></initial>
 <terminal><criterionID>W</criterionID></terminal>
+<value><real>0.33</real></value>
+</pair>
+<pair>
+<initial><criterionID>St</criterionID></initial>
+<terminal><criterionID>C</criterionID></terminal>
+<value><real>-0.61</real></value>
+</pair>
+<pair>
+<initial><criterionID>St</criterionID></initial>
+<terminal><criterionID>Cf</criterionID></terminal>
+<value><real>-0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>St</criterionID></initial>
+<terminal><criterionID>P</criterionID></terminal>
+<value><real>-0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>St</criterionID></initial>
+<terminal><criterionID>Pr</criterionID></terminal>
+<value><real>0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>St</criterionID></initial>
+<terminal><criterionID>St</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+<pair>
+<initial><criterionID>St</criterionID></initial>
+<terminal><criterionID>V</criterionID></terminal>
 <value><real>-0.24</real></value>
 </pair>
 <pair>
-<initial><criterionID>Pr</criterionID></initial>
-<terminal><criterionID>C</criterionID></terminal>
-<value><real>-0.10</real></value>
-</pair>
-<pair>
-<initial><criterionID>Pr</criterionID></initial>
-<terminal><criterionID>Cf</criterionID></terminal>
-<value><real>-0.90</real></value>
-</pair>
-<pair>
-<initial><criterionID>Pr</criterionID></initial>
-<terminal><criterionID>P</criterionID></terminal>
-<value><real>0.48</real></value>
-</pair>
-<pair>
-<initial><criterionID>Pr</criterionID></initial>
-<terminal><criterionID>Pr</criterionID></terminal>
-<value><real>1.00</real></value>
-</pair>
-<pair>
-<initial><criterionID>Pr</criterionID></initial>
-<terminal><criterionID>St</criterionID></terminal>
-<value><real>-0.33</real></value>
-</pair>
-<pair>
-<initial><criterionID>Pr</criterionID></initial>
-<terminal><criterionID>V</criterionID></terminal>
-<value><real>-0.43</real></value>
-</pair>
-<pair>
-<initial><criterionID>Pr</criterionID></initial>
-<terminal><criterionID>W</criterionID></terminal>
-<value><real>0.10</real></value>
-</pair>
-<pair>
-<initial><criterionID>St</criterionID></initial>
-<terminal><criterionID>C</criterionID></terminal>
-<value><real>-0.81</real></value>
-</pair>
-<pair>
-<initial><criterionID>St</criterionID></initial>
-<terminal><criterionID>Cf</criterionID></terminal>
-<value><real>-0.38</real></value>
-</pair>
-<pair>
-<initial><criterionID>St</criterionID></initial>
-<terminal><criterionID>P</criterionID></terminal>
-<value><real>-0.57</real></value>
-</pair>
-<pair>
-<initial><criterionID>St</criterionID></initial>
-<terminal><criterionID>Pr</criterionID></terminal>
-<value><real>-0.33</real></value>
-</pair>
-<pair>
-<initial><criterionID>St</criterionID></initial>
-<terminal><criterionID>St</criterionID></terminal>
-<value><real>1.00</real></value>
-</pair>
-<pair>
-<initial><criterionID>St</criterionID></initial>
-<terminal><criterionID>V</criterionID></terminal>
-<value><real>-0.52</real></value>
-</pair>
-<pair>
 <initial><criterionID>St</criterionID></initial>
 <terminal><criterionID>W</criterionID></terminal>
-<value><real>0.10</real></value>
+<value><real>0.52</real></value>
 </pair>
 <pair>
 <initial><criterionID>V</criterionID></initial>
 <terminal><criterionID>C</criterionID></terminal>
-<value><real>-0.10</real></value>
+<value><real>0.32</real></value>
 </pair>
 <pair>
 <initial><criterionID>V</criterionID></initial>
 <terminal><criterionID>Cf</criterionID></terminal>
-<value><real>-0.33</real></value>
+<value><real>0.05</real></value>
 </pair>
 <pair>
 <initial><criterionID>V</criterionID></initial>
 <terminal><criterionID>P</criterionID></terminal>
-<value><real>-0.33</real></value>
+<value><real>0.24</real></value>
 </pair>
 <pair>
 <initial><criterionID>V</criterionID></initial>
 <terminal><criterionID>Pr</criterionID></terminal>
-<value><real>-0.43</real></value>
+<value><real>0.14</real></value>
 </pair>
 <pair>
 <initial><criterionID>V</criterionID></initial>
 <terminal><criterionID>St</criterionID></terminal>
-<value><real>-0.52</real></value>
-</pair>
-<pair>
-<initial><criterionID>V</criterionID></initial>
-<terminal><criterionID>V</criterionID></terminal>
-<value><real>1.00</real></value>
-</pair>
-<pair>
-<initial><criterionID>V</criterionID></initial>
-<terminal><criterionID>W</criterionID></terminal>
-<value><real>-0.48</real></value>
-</pair>
-<pair>
-<initial><criterionID>W</criterionID></initial>
-<terminal><criterionID>C</criterionID></terminal>
-<value><real>-0.62</real></value>
-</pair>
-<pair>
-<initial><criterionID>W</criterionID></initial>
-<terminal><criterionID>Cf</criterionID></terminal>
-<value><real>-0.43</real></value>
-</pair>
-<pair>
-<initial><criterionID>W</criterionID></initial>
-<terminal><criterionID>P</criterionID></terminal>
 <value><real>-0.24</real></value>
 </pair>
 <pair>
+<initial><criterionID>V</criterionID></initial>
+<terminal><criterionID>V</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+<pair>
+<initial><criterionID>V</criterionID></initial>
+<terminal><criterionID>W</criterionID></terminal>
+<value><real>0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>W</criterionID></initial>
+<terminal><criterionID>C</criterionID></terminal>
+<value><real>-0.41</real></value>
+</pair>
+<pair>
+<initial><criterionID>W</criterionID></initial>
+<terminal><criterionID>Cf</criterionID></terminal>
+<value><real>-0.14</real></value>
+</pair>
+<pair>
+<initial><criterionID>W</criterionID></initial>
+<terminal><criterionID>P</criterionID></terminal>
+<value><real>0.24</real></value>
+</pair>
+<pair>
 <initial><criterionID>W</criterionID></initial>
 <terminal><criterionID>Pr</criterionID></terminal>
-<value><real>0.10</real></value>
+<value><real>0.33</real></value>
 </pair>
 <pair>
 <initial><criterionID>W</criterionID></initial>
 <terminal><criterionID>St</criterionID></terminal>
-<value><real>0.10</real></value>
+<value><real>0.52</real></value>
 </pair>
 <pair>
 <initial><criterionID>W</criterionID></initial>
 <terminal><criterionID>V</criterionID></terminal>
-<value><real>-0.48</real></value>
+<value><real>0.05</real></value>
 </pair>
 <pair>
 <initial><criterionID>W</criterionID></initial>
@@ -1093,145 +1093,6 @@
 <description>
 <comment>concordance degree:33.33</comment>
 </description>
-<initial><alternativeID>G</alternativeID></initial>
-<terminal><alternativeID>A</alternativeID></terminal>
-<values id="St">
-<description>
-<comment>effective veto</comment>
-</description>
-<value name="performanceDifference">
-<real>-80.00</real></value>
-<value name="vetoCharacteristic">
-<real>1.00</real></value>
-</values>
-</pair>
-<pair>
-<description>
-<comment>concordance degree:-11.11</comment>
-</description>
-<initial><alternativeID>F</alternativeID></initial>
-<terminal><alternativeID>A</alternativeID></terminal>
-<values id="P">
-<description>
-<comment>potential veto</comment>
-</description>
-<value name="performanceDifference">
-<real>-90.00</real></value>
-<value name="vetoCharacteristic">
-<real>1.00</real></value>
-</values>
-<values id="Pr">
-<description>
-<comment>potential veto</comment>
-</description>
-<value name="performanceDifference">
-<real>-100.00</real></value>
-<value name="vetoCharacteristic">
-<real>1.00</real></value>
-</values>
-</pair>
-<pair>
-<description>
-<comment>concordance degree:-55.56</comment>
-</description>
-<initial><alternativeID>F</alternativeID></initial>
-<terminal><alternativeID>D</alternativeID></terminal>
-<values id="P">
-<description>
-<comment>potential veto</comment>
-</description>
-<value name="performanceDifference">
-<real>-90.00</real></value>
-<value name="vetoCharacteristic">
-<real>1.00</real></value>
-</values>
-</pair>
-<pair>
-<description>
-<comment>concordance degree:-11.11</comment>
-</description>
-<initial><alternativeID>F</alternativeID></initial>
-<terminal><alternativeID>B</alternativeID></terminal>
-<values id="V">
-<description>
-<comment>potential veto</comment>
-</description>
-<value name="performanceDifference">
-<real>-80.00</real></value>
-<value name="vetoCharacteristic">
-<real>1.00</real></value>
-</values>
-</pair>
-<pair>
-<description>
-<comment>concordance degree:-55.56</comment>
-</description>
-<initial><alternativeID>F</alternativeID></initial>
-<terminal><alternativeID>G</alternativeID></terminal>
-<values id="P">
-<description>
-<comment>potential veto</comment>
-</description>
-<value name="performanceDifference">
-<real>-80.00</real></value>
-<value name="vetoCharacteristic">
-<real>1.00</real></value>
-</values>
-<values id="V">
-<description>
-<comment>potential veto</comment>
-</description>
-<value name="performanceDifference">
-<real>-100.00</real></value>
-<value name="vetoCharacteristic">
-<real>1.00</real></value>
-</values>
-</pair>
-<pair>
-<description>
-<comment>concordance degree:-33.33</comment>
-</description>
-<initial><alternativeID>F</alternativeID></initial>
-<terminal><alternativeID>C</alternativeID></terminal>
-<values id="P">
-<description>
-<comment>potential veto</comment>
-</description>
-<value name="performanceDifference">
-<real>-100.00</real></value>
-<value name="vetoCharacteristic">
-<real>1.00</real></value>
-</values>
-<values id="Pr">
-<description>
-<comment>potential veto</comment>
-</description>
-<value name="performanceDifference">
-<real>-80.00</real></value>
-<value name="vetoCharacteristic">
-<real>1.00</real></value>
-</values>
-</pair>
-<pair>
-<description>
-<comment>concordance degree:-11.11</comment>
-</description>
-<initial><alternativeID>F</alternativeID></initial>
-<terminal><alternativeID>E</alternativeID></terminal>
-<values id="W">
-<description>
-<comment>potential veto</comment>
-</description>
-<value name="performanceDifference">
-<real>-100.00</real></value>
-<value name="vetoCharacteristic">
-<real>1.00</real></value>
-</values>
-</pair>
-<pair>
-<description>
-<comment>concordance degree:33.33</comment>
-</description>
 <initial><alternativeID>C</alternativeID></initial>
 <terminal><alternativeID>A</alternativeID></terminal>
 <values id="St">
@@ -1285,6 +1146,145 @@
 <real>1.00</real></value>
 </values>
 </pair>
+<pair>
+<description>
+<comment>concordance degree:-11.11</comment>
+</description>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>A</alternativeID></terminal>
+<values id="P">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-90.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+<values id="Pr">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-100.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:-11.11</comment>
+</description>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>B</alternativeID></terminal>
+<values id="V">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-80.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:-33.33</comment>
+</description>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>C</alternativeID></terminal>
+<values id="P">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-100.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+<values id="Pr">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-80.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:-55.56</comment>
+</description>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>D</alternativeID></terminal>
+<values id="P">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-90.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:-11.11</comment>
+</description>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>E</alternativeID></terminal>
+<values id="W">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-100.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:-55.56</comment>
+</description>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>G</alternativeID></terminal>
+<values id="P">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-80.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+<values id="V">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-100.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:33.33</comment>
+</description>
+<initial><alternativeID>G</alternativeID></initial>
+<terminal><alternativeID>A</alternativeID></terminal>
+<values id="St">
+<description>
+<comment>effective veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-80.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
 </pairs>
 </alternativesComparisons>
 <alternativesSets mcdaConcept="goodChoices">
@@ -1328,13 +1328,13 @@
 <comment>Potential good choice</comment>
 </description>
 <element>
-<alternativeID>C</alternativeID>
-</element>
-<element>
 <alternativeID>B</alternativeID>
 </element>
 <element>
 <alternativeID>E</alternativeID>
+</element>
+<element>
+<alternativeID>C</alternativeID>
 </element>
 <values>
 <value name="choiceSet independence"><real>50.00</real></value>
@@ -1354,10 +1354,10 @@
 <comment>Bad choice</comment>
 </description>
 <element>
-<alternativeID>A</alternativeID>
+<alternativeID>F</alternativeID>
 </element>
 <element>
-<alternativeID>F</alternativeID>
+<alternativeID>A</alternativeID>
 </element>
 <values>
 <value name="choiceSet independence"><real>50.00</real></value>

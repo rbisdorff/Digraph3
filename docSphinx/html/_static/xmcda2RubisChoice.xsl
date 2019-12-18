@@ -40,7 +40,7 @@ Copyright (C) 2009 DECISION DECK Consortium
     <p>Bisdorff R., Meyer P., Roubens M., <b>Rubis</b>: A new methodology for the choice decision problem. 4OR, 
       <em>A Quarterly Journal of Operational Research</em>, Springer (2008), Vol 6 Number 2 pp. 143-165, DOI 10.1007/s10288-007-0045-5.
     <a href="http://sma.uni.lu/bisdorff/documents/HyperKernels.pdf">PDF preprint version</a>.</p>
-   <p>Online documentation: <a href="http://sma.uni.lu/d2cms">Decision Deck Project</a><br/>
+   <p>Online documentation: <a href="https://www.decision-deck.org">Decision Deck Project</a><br/>
      <b>Rubis XSL Transformation to HTML</b> R. Bisdorff, $Revision: 1.6 $<br/>
           <a href="http://www.decision-deck.org/xmcda">XMCDA 2.0 Schema</a> P. Meyer and Th. Veneziano 2009 <br/>
            Copyright © 2009 DECISION DECK Consortium</p>
@@ -477,7 +477,31 @@ Copyright (C) 2009 DECISION DECK Consortium
       </xsl:if>
     </xsl:if>
   </xsl:template>
-  
+
+<!-- presentation of the objectives-->
+<xsl:template match="objectives">
+  <a name="objectives"/>
+  <xsl:apply-templates  select="description"/>
+   <table border="1">
+     <tr bgcolor="#9acd32">
+        <th rowspan="1">#</th>
+        <th rowspan="1">Identifyer</th>
+        <th rowspan="1">Name</th>
+        <th rowspan="1">Comment</th>
+        <th rowspan="1">Criteria list</th>
+     </tr>
+     <xsl:for-each select="objective">
+       <tr>
+         <td align="center"><xsl:number format="1"/></td>
+         <th bgcolor="#FFF79B"><xsl:value-of select="@id"/></th>
+	   <td><xsl:value-of select="@name"/></td>
+	   <td><xsl:value-of select="description/comment"/></td>        
+         <td align="center"><xsl:value-of select="objectiveCriteria"/></td>
+       </tr>
+     </xsl:for-each>
+   </table>
+</xsl:template>
+
  <!-- presentation of the coalitions -->
   <xsl:template match="criteriaSets">
     <a name="coalitions"/>

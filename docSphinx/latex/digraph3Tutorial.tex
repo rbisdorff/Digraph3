@@ -3098,10 +3098,10 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \phantomsection\label{\detokenize{tutorial:id212}}{\hyperref[\detokenize{tutorial:rubis-best-choice-recommendations}]{\sphinxcrossref{\sphinxstyleemphasis{Rubis} best choice recommendations}}} (\autopageref*{\detokenize{tutorial:rubis-best-choice-recommendations}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id213}}{\hyperref[\detokenize{tutorial:rubis-strict-best-choice-recommendation}]{\sphinxcrossref{Rubis \sphinxstyleemphasis{strict best} choice recommendation}}} (\autopageref*{\detokenize{tutorial:rubis-strict-best-choice-recommendation}})
+\phantomsection\label{\detokenize{tutorial:id213}}{\hyperref[\detokenize{tutorial:computing-strict-best-choice-recommendations}]{\sphinxcrossref{Computing \sphinxstyleemphasis{strict best} choice recommendations}}} (\autopageref*{\detokenize{tutorial:computing-strict-best-choice-recommendations}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id214}}{\hyperref[\detokenize{tutorial:weakly-ordering}]{\sphinxcrossref{Weakly ordering}}} (\autopageref*{\detokenize{tutorial:weakly-ordering}})
+\phantomsection\label{\detokenize{tutorial:id214}}{\hyperref[\detokenize{tutorial:weakly-ordering-the-outranking-digraph}]{\sphinxcrossref{Weakly ordering the outranking digraph}}} (\autopageref*{\detokenize{tutorial:weakly-ordering-the-outranking-digraph}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -3737,42 +3737,10 @@ potential best choice recommendations, as well as the potential worst
 choice recommendation, are not positively validated as best,
 resp. worst choices. They may or may not be considered so. Alternative \sphinxstyleemphasis{A}, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see Lines 27 and 37) and seams hence not actually comparable to its competitors.
 
-The same Rubis best choice recommendation, encoded in XMCDA 2.0 and presented in the default system browser, is provided by the \sphinxcode{\sphinxupquote{xmcda}} module. In a python3 session working in the directory where the XMCDA encoded problem data is stored, we may proceed as follows.
 
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{import} \PYG{n+nn}{xmcda}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{xmcda}\PYG{o}{.}\PYG{n}{showXMCDARubisBestChoiveRecommendation}\PYG{p}{(}\PYGZbs{}
-\PYG{g+go}{                           prolemFileName=\PYGZsq{}officeChoice\PYGZsq{},\PYGZbs{}}
-\PYG{g+go}{                           valuationType=\PYGZsq{}bipolar\PYGZsq{})}
-\end{sphinxVerbatim}
-
-And, in a system browser window, browse the \sphinxhref{\_static/officeChoice.xml1BYyGVwV866hSNZoSolution.html}{solution file}.
-\begin{quote}
-\end{quote}
-
-The \sphinxcode{\sphinxupquote{valuationType}} parameter allows to work:
-\begin{itemize}
-\item {} 
-on the standard bipolar\sphinxhyphen{}valued outranking digraph (valuationType = ‘bipolar’, default),
-
-\item {} 
-on the normalized \textendash{}{[}\sphinxhyphen{}1,1{]} valued\textendash{} bipolar outranking digraph (valuationType = ‘normalized’),
-
-\item {} 
-on the robust \textendash{}ordinal criteria weights\textendash{} bipolar outranking digraph (valuationType = ‘robust’),
-
-\item {} 
-on the confident outranking digraph (valuationType = ‘confident’),
-
-\item {} 
-ignoring considerable performances differences (valuationType = ‘noVeto’).
-
-\end{itemize}
-
-
-\subsection{Rubis \sphinxstyleemphasis{strict best} choice recommendation}
-\label{\detokenize{tutorial:rubis-strict-best-choice-recommendation}}
-When comparing the performances of alternatives \sphinxstyleemphasis{D} and \sphinxstyleemphasis{G} on a
+\subsection{Computing \sphinxstyleemphasis{strict best} choice recommendations}
+\label{\detokenize{tutorial:computing-strict-best-choice-recommendations}}
+When comparing now the performances of alternatives \sphinxstyleemphasis{D} and \sphinxstyleemphasis{G} on a
 pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative \sphinxstyleemphasis{G} is actually \sphinxstylestrong{certainly} \sphinxstyleemphasis{at least as good as} alternative \sphinxstyleemphasis{D} ( r(\sphinxstyleemphasis{G} outranks \sphinxstyleemphasis{D}) = 100.0).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -3814,8 +3782,8 @@ However, we must as well notice that the cheapest alternative \sphinxstyleemphas
 To model these \sphinxstyleemphasis{strict outranking} situations, we may compute the Rubis best choice recommendation on the \sphinxstylestrong{codual}, the converse (\textasciitilde{}) of the dual (\sphinxhyphen{}), of the outranking digraph instance \sphinxstyleemphasis{g} (see \sphinxcite{tutorial:bis-2013}), as follows.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} g.showRubisBestChoiceRecommendation(CoDual=True,ChoiceVector=True)}
-\PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{} Rubis best choice recommendation(s) \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} g.showBestChoiceRecommendation(CoDual=True,ChoiceVector=True)}
+\PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{} Best and worst choice recommendation(s) \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ (in decreasing order of determinateness)}
 \PYG{g+go}{ Credibility domain:  \PYGZob{}\PYGZsq{}min\PYGZsq{}:\PYGZhy{}100.0, \PYGZsq{}max\PYGZsq{}: 100.0\PYGZsq{}, \PYGZsq{}med\PYGZsq{}:0.0\PYGZsq{}\PYGZcb{}}
 \PYG{g+go}{ === \PYGZgt{}\PYGZgt{} potential best choice(s)}
@@ -3847,8 +3815,8 @@ It is interesting to notice that the \sphinxstylestrong{strict best choice recom
 We may also notice (see Line 17 and Line 21) that both alternatives \sphinxstyleemphasis{A} and \sphinxstyleemphasis{F} are reported as certainly outranked choices, hence a \sphinxstylestrong{potential worst choice recommendation} . This confirms again the global incomparability status of alternative \sphinxstyleemphasis{A}.
 
 
-\subsection{Weakly ordering}
-\label{\detokenize{tutorial:weakly-ordering}}
+\subsection{Weakly ordering the outranking digraph}
+\label{\detokenize{tutorial:weakly-ordering-the-outranking-digraph}}
 To get a more complete insight in the overall strict outranking situations, we may use the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingByChoosingDigraph}} constructor imported from the \DUrole{xref,std,std-ref}{transitiveDigraphs\sphinxhyphen{}label}, for computing a \sphinxstylestrong{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} result from the strict outranking digraph instance \sphinxstyleemphasis{gcd}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
