@@ -1990,7 +1990,7 @@ a given number of decision actions.</p>
 </pre></div>
 </td></tr></table></div>
 <p>A (potentially ranked) colored heat map with 5 color levels is also provided.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Ranked</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Ranked</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-center" id="id117">
@@ -2384,7 +2384,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">The strict outranking digraph</span><a class="headerlink" href="#id119" title="Permalink to this image">¶</a></p>
 </div>
 <p>The shown strict outranking relation is apparently not transitive: for instance, alternative <em>a9</em> outranks alternative <em>a5</em> and alternative <em>a5</em> outranks <em>a2</em>, however <em>a9</em> does not outrank <em>a2</em>. We may compute the transitivity degree of the outranking digraph, ie the ratio of the number of outranking arcs over the number of arcs of the transitive closue of the digraph <em>gcd</em>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
 <span class="go">Decimal(&#39;0.508&#39;)</span>
 </pre></div>
 </div>
@@ -3198,7 +3198,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <p>A restricted outranking relation is stored for each component with more than one alternative. The resulting global relation map of the first ranked 75 alternatives looks as follows.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span><span class="o">.</span><span class="n">showRelationMap</span><span class="p">(</span><span class="n">toIndex</span><span class="o">=</span><span class="mi">75</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span><span class="o">.</span><span class="n">showRelationMap</span><span class="p">(</span><span class="n">toIndex</span><span class="o">=</span><span class="mi">75</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-center" id="id122">
@@ -3216,7 +3216,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </dd>
 </dl>
 <p>With a fill rate of 25%, the memory occupation of this sparse outranking digraph <em>sg</em> instance takes now only 769kB, compared to the 1.7MB required by a corresponding standard IntegerBipolarOutrankingDigraph instance.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.0f</span><span class="s1">kB&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">total_size</span><span class="p">(</span><span class="n">sg</span><span class="p">)</span><span class="o">/</span><span class="mi">1024</span><span class="p">)</span> <span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.0f</span><span class="s1">kB&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">total_size</span><span class="p">(</span><span class="n">sg</span><span class="p">)</span><span class="o">/</span><span class="mi">1024</span><span class="p">)</span> <span class="p">)</span>
 <span class="go">769kB</span>
 </pre></div>
 </div>
@@ -4075,7 +4075,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 <p>On the <em>Costs</em> criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative <em>Comfort</em> criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged <em>considerably large</em> (Line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria.</p>
 <p>A colorful comparison of all the performances is shown by the <strong>heat map</strong> statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-center" id="id124">
@@ -4147,7 +4147,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </div>
 <div class="section" id="rubis-best-choice-recommendations">
 <h3><a class="toc-backref" href="#id212"><em>Rubis</em> best choice recommendations</a><a class="headerlink" href="#rubis-best-choice-recommendations" title="Permalink to this headline">¶</a></h3>
-<p>Following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id39"><span>[BIS-2008]</span></a>), potential best choice recommendations are determined by the outranking prekernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the prekernels of <em>g</em> (see the tutorial <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>).</p>
+<p>Following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id39"><span>[BIS-2008]</span></a>), potential best choice recommendations are determined by the outranking prekernels (weakly independent and strictly outranking choices) of the outranking digraph, where, the case given, we previously break open all chordless circuits at their weakest link. As we observe no such chordless circuits here, we may directly compute the prekernels of <em>g</em> (see the tutorial <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -4306,7 +4306,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </pre></div>
 </td></tr></table></div>
 <p>We notice in Line 6 above that the most significantly supported best
-choice recommendation is indeed the Condorcet winner <em>D</em> with a
+choice recommendation is indeed the <em>Condorcet</em> winner <em>D</em> with a
 majority of 56% of the criteria significance (see Line 12). Both other
 potential best choice recommendations, as well as the potential worst
 choice recommendation, are not positively validated as best,
@@ -7565,7 +7565,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </pre></div>
 </td></tr></table></div>
 <p>The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its <em>graphviz</em> drawing in <a class="reference internal" href="#test62tree"><span class="std std-numref">Fig. 61</span></a> (see also the <a class="reference internal" href="techDoc.html#graphs.Graph.isTree" title="graphs.Graph.isTree"><code class="xref py py-func docutils literal notranslate"><span class="pre">graphs.Graph.isTree()</span></code></a> method for an implemented alternative test).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to test62.dot</span>
 <span class="go">fdp -Tpng test62.dot -o test62.png</span>
@@ -7576,7 +7576,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p class="caption"><span class="caption-number">Fig. 61 </span><span class="caption-text">Recognizing a tree instance</span><a class="headerlink" href="#test62tree" title="Permalink to this image">¶</a></p>
 </div>
 <p>Yet, we still have to recover its corresponding <em>Prüfer</em> code. Therefore, we may use the <a class="reference internal" href="techDoc.html#graphs.RandomTree.tree2Pruefer" title="graphs.RandomTree.tree2Pruefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">graphs.RandomTree.tree2Pruefer()</span></code></a> method.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">RandomTree</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">RandomTree</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">RandomTree</span><span class="o">.</span><span class="n">tree2Pruefer</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">[&#39;v6&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v5&#39;]</span>
 </pre></div>
@@ -7807,7 +7807,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>15 journalists and movie critics provide here their rating of 25 movies: 5 stars (<em>masterpiece</em>), 4 stars (<em>must be seen</em>), 3 stars (<em>excellent</em>), 2 stars (<em>good</em>), 1 star (<em>could be seen</em>), -1 star (<em>I do not like</em>), -2 (<em>I hate</em>), NA (<em>not seen</em>).</p>
 <p>To aggregate all the critics’ rating opinions, the <em>Graffiti</em> magazine provides for each movie a global score computed as an <em>average grade</em>, just ignoring the <em>not seen</em> data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic <em>SJ</em>, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?</p>
 <p>A better approach is to rank the movies on the basis of pairwise bipolar-valued  <em>at least as well rated as</em> opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> tutorial) of the 25 movies is provided, for instance, by the <strong>heat map</strong> view shown in <a class="reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 66</span></a>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span>                             <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                             <span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
@@ -7847,12 +7847,12 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <p class="caption"><span class="caption-number">Fig. 68 </span><span class="caption-text">Pairwise majority margins of ‘<em>at least as well rated as</em>’ rating opinions</span><a class="headerlink" href="#graffiti07-3" title="Permalink to this image">¶</a></p>
 </div>
 <p>Positive characteristic values, validating a global ‘<em>at least as well rated as</em>’ opinion are marked in light green (see <a class="reference internal" href="#graffiti07-3"><span class="std std-numref">Fig. 68</span></a>). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best-ranked movie <em>mv_QS</em> is indeed a <em>Condorcet</em> winner, i.e. <em>better rated than all the other movies</em> by a 65% majority of critics. This majority may be assessed from the average determinateness of the given bipolar-valued outranking digraph <em>g</em>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;</span><span class="si">%.0f%%</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">g</span><span class="o">.</span><span class="n">computeDeterminateness</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;</span><span class="si">%.0f%%</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">g</span><span class="o">.</span><span class="n">computeDeterminateness</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="p">)</span>
 <span class="go">65%</span>
 </pre></div>
 </div>
 <p>Notice also the <em>indeterminate</em> situation we observe, for instance, when comparing movie <em>mv_PE</em> with movie <em>mv_NP</em>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPairwiseComparison</span><span class="p">(</span><span class="s1">&#39;mv_PE&#39;</span><span class="p">,</span><span class="s1">&#39;mv_NP&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPairwiseComparison</span><span class="p">(</span><span class="s1">&#39;mv_PE&#39;</span><span class="p">,</span><span class="s1">&#39;mv_NP&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-center" id="id142">
@@ -8157,7 +8157,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <a class="reference internal image-reference" href="_images/correlationTable.png"><img alt="Pairwise valued correlation of movie critics" class="align-center" src="_images/correlationTable.png" style="width: 600px;" /></a>
 <p>It is remarquable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes <em>r(x&lt;=&gt;y)</em> appear to be of low value, except the <em>diagonal</em> ones. These reflexive indexes <em>s(x&lt;=&gt;x)</em> would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score <em>d</em>, i.e. the <em>proportion</em> of pairs of movies each critic did evaluate. Critic <em>JPT</em> (the editor of the Graffiti magazine), for instance, evaluated all but one (<em>d</em> = 24*23/600 = 0.92), whereas critic <em>FG</em> evaluated only 10 movies among the 25 in discussion (<em>d</em> = 10*9/600 = 0.15).</p>
 <p>To get a picture of the actual divergence of rating opinions concerning <strong>jointly seen</strong> pairs of movies, we may develop a <em>Principal Component Analysis</em> (<a class="footnote-reference brackets" href="#id108" id="id89">10</a>) of the corresponding <em>tau</em> correlation matrix. The 3D plot of the first 3 principal axes is shown below.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">export3DplotOfCriteriaCorrelation</span><span class="p">(</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">export3DplotOfCriteriaCorrelation</span><span class="p">(</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/correlationPCA.png"><img alt="3D plot of criteria correlation PCA" class="align-center" src="_images/correlationPCA.png" style="width: 400px;" /></a>
@@ -8167,13 +8167,13 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <h4>Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions<a class="headerlink" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions" title="Permalink to this headline">¶</a></h4>
 <p>In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of the ‘<em>at least as well rated as</em>’ opinions (see the tutorial <a class="reference internal" href="#digraphs-tutorial-label"><span class="std std-ref">Working with the Digraph3 software resources</span></a>).</p>
 <p>Let us first have a look at the pairwise asymmetric part, namely the ‘<em>better rated than</em>’ and ‘<em>less well rated than</em>’ opinions of the movie critics.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">(),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/asymmetricPart.png"><img alt="asymmetric part of graffiti07 digraph" class="align-center" src="_images/asymmetricPart.png" style="width: 600px;" /></a>
 <p>We notice here that the <em>Net-Flows</em> ranking rule inverts in fact just three ‘<em>less well ranked than</em>’ opinions and four ‘<em>better ranked than</em>’ ones. A similar look at the symmetric part, the pairwise ‘<em>as well rated as</em>’ opinions, suggests a preordered preference structure in several <em>equivalently rated</em> classes.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span> <span class="o">=</span> <span class="n">SymmetricPartialDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span> <span class="o">=</span> <span class="n">SymmetricPartialDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">(),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -9293,7 +9293,7 @@ confidence level <em>alpha</em> %, if</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2019, Raymond Bisdorff.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>

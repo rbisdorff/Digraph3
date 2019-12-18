@@ -638,7 +638,7 @@
                     <span class="k">pass</span>
                 <span class="nb">print</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="PerformanceTableau.showObjectives"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showObjectives">[docs]</a>    <span class="k">def</span> <span class="nf">showObjectives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showObjectives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="s1">&#39;objectives&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------ show objectives -------&quot;&#39;</span><span class="p">)</span>
             
@@ -652,7 +652,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  Total weight: </span><span class="si">%.2f</span><span class="s1"> (</span><span class="si">%d</span><span class="s1"> criteria)</span><span class="se">\n</span><span class="s1">&#39;</span>\
                       <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="n">obj</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">],</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="n">obj</span><span class="p">][</span><span class="s1">&#39;criteria&#39;</span><span class="p">])))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The performance tableau does not contain objectives.&#39;</span><span class="p">)</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The performance tableau does not contain objectives.&#39;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="PerformanceTableau.convertInsite2Standard"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertInsite2Standard">[docs]</a>    <span class="k">def</span> <span class="nf">convertInsite2Standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -731,22 +731,22 @@
                     <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span></div>
 
-<div class="viewcode-block" id="PerformanceTableau.convertDiscriminationThresholds2Float"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertDiscriminationThresholds2Float">[docs]</a>    <span class="k">def</span> <span class="nf">convertDiscriminationThresholds2Float</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">convertDiscriminationThresholds2Float</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">th</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">]:</span>
                 <span class="n">d</span> <span class="o">=</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="n">th</span><span class="p">]</span>
                 <span class="n">d1</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">float</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-                <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="n">th</span><span class="p">]</span> <span class="o">=</span> <span class="n">d1</span></div>
+                <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="n">th</span><span class="p">]</span> <span class="o">=</span> <span class="n">d1</span>
 
-<div class="viewcode-block" id="PerformanceTableau.convertDiscriminationThresholds2Decimal"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertDiscriminationThresholds2Decimal">[docs]</a>    <span class="k">def</span> <span class="nf">convertDiscriminationThresholds2Decimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">convertDiscriminationThresholds2Decimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">th</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">]:</span>
                 <span class="n">d</span> <span class="o">=</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="n">th</span><span class="p">]</span>
                 <span class="n">d1</span> <span class="o">=</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
-                <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="n">th</span><span class="p">]</span> <span class="o">=</span> <span class="n">d1</span></div>
+                <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="n">th</span><span class="p">]</span> <span class="o">=</span> <span class="n">d1</span>
 
  
 <div class="viewcode-block" id="PerformanceTableau.convertWeight2Decimal"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertWeight2Decimal">[docs]</a>    <span class="k">def</span> <span class="nf">convertWeight2Decimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -7560,7 +7560,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2019, Raymond Bisdorff.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>

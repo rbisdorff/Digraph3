@@ -446,7 +446,7 @@
         <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;Weak Ordering    : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;weakOrdering&#39;</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">String</span> 
 
-<div class="viewcode-block" id="SortingDigraph.saveCategories"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.saveCategories">[docs]</a>    <span class="k">def</span> <span class="nf">saveCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempCategories&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">saveCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempCategories&#39;</span><span class="p">):</span>
 
         <span class="n">fileName</span> <span class="o">+=</span> <span class="s1">&#39;.py&#39;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Saving sorting categories in file: &lt;</span><span class="si">%s</span><span class="s1">&gt; ---*&#39;</span> <span class="o">%</span> <span class="n">fileName</span><span class="p">)</span>
@@ -469,7 +469,7 @@
                     <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> :</span><span class="si">%s</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
                              <span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">c</span><span class="p">]))</span> <span class="p">)</span>
                 <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}),</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;])</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;])</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="c1"># close</span>
         
         
@@ -4202,7 +4202,7 @@
                                 <span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                                 <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
         
-<div class="viewcode-block" id="NormedQuantilesRatingDigraph.showQuantilesRating"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesRating">[docs]</a>    <span class="k">def</span> <span class="nf">showQuantilesRating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showQuantilesRating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">ratingCategories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ratingCategories</span>
         <span class="k">except</span><span class="p">:</span>
@@ -4225,7 +4225,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">cat</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">ratingCategories</span><span class="p">):</span>
                     <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">[</span><span class="n">cat</span><span class="p">][</span><span class="s1">&#39;category&#39;</span><span class="p">]</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">],</span><span class="n">ratingCategories</span><span class="p">[</span><span class="n">cat</span><span class="p">])</span></div>
+                    <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">],</span><span class="n">ratingCategories</span><span class="p">[</span><span class="n">cat</span><span class="p">])</span>
 
 <div class="viewcode-block" id="NormedQuantilesRatingDigraph.showQuantilesSorting"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showQuantilesSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showQuantilesSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -4541,7 +4541,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2019, Raymond Bisdorff.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>

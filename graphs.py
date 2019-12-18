@@ -1824,19 +1824,28 @@ class Graph(object):
                 print('Graph \%s\' is not triangulated' % self.name)
             return False
 
-    def isPerfectGraph(self,Comments=False):
+    def isPerfectGraph(self,Comments=False,Debug=False):
         """
         A graph *g* is perfect when neither *g*, nor *-g*, contain any chordless
         cycle of odd length.
         """
-        cycles = self.computeChordlessCycles(Comments=Comments)
+        cycles = self.computeChordlessCycles(Comments=Debug)
         for c in cycles:
             if (len(c) % 2) != 0:
+                if Comments:
+                    print('Graph %s contains an odd chordless circuit!' % self.name)
+                    print(c)
                 return False
-        cycles = (-self).computeChordlessCycles(Comments=Comments)
+        cycles = (-self).computeChordlessCycles(Comments=Debug)
         for c in cycles:
             if (len(c) % 2) != 0:
+                if Comments:
+                    print('The dual of graph %s contains an odd chordless circuit!' % self.name)
+                    print(c)
                 return False
+        if Comments:
+            print('Graph %s is perfect !' % self.name)
+       
         return True
     
                   
@@ -4462,13 +4471,12 @@ if __name__ == '__main__':
 ##    if rid.isComparabilityGraph():
 ##        rid.exportEdgeOrientationsGraphViz('testColors2',palette=2)
 
-    g = RandomGraph(order=15,edgeProbability=0.5)
-    #g = RandomTree(order=8)
-    g.save('testbfs')
-    g = Graph('testbfs')
+    g = RandomGraph(order=9,edgeProbability=0.5)
+    g.save('testPerfectGraph')
+    g.name = 'testPerfectGraph'
     g.exportGraphViz()
     #print(g.breadthFirstSearch('v1',Debug=False))
-    print(g.isPerfectGraph(Comments=False))    
+    print(g.isPerfectGraph(Comments=True))    
     
 ##    rg = RandomPermutationGraph(order=6,seed=None)
 ##    print(rg)

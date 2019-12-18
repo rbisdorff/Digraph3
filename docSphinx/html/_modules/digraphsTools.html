@@ -167,13 +167,13 @@
 <span class="c1"># generate all permutations from a string or a list</span>
 <span class="c1"># From Michael Davies&#39;s recipe:</span>
 <span class="c1"># http://snippets.dzone.com/posts/show/753</span>
-<div class="viewcode-block" id="all_perms"><a class="viewcode-back" href="../techDoc.html#digraphsTools.all_perms">[docs]</a><span class="k">def</span> <span class="nf">all_perms</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">all_perms</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span> <span class="o">&lt;=</span><span class="mi">1</span><span class="p">:</span>
         <span class="k">yield</span> <span class="nb">str</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">all_perms</span><span class="p">(</span><span class="nb">str</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">perm</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-                <span class="k">yield</span> <span class="n">perm</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">perm</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span></div>
+                <span class="k">yield</span> <span class="n">perm</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">perm</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
 
 <span class="c1">#epistemic or symmetric disjunction operator</span>
 <div class="viewcode-block" id="omax"><a class="viewcode-back" href="../techDoc.html#digraphsTools.omax">[docs]</a><span class="k">def</span> <span class="nf">omax</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -284,7 +284,7 @@
 
 <span class="c1"># generate the Gray code of length n by middle reflection</span>
 <span class="c1"># RB Feb 2017</span>
-<div class="viewcode-block" id="grayCode"><a class="viewcode-back" href="../techDoc.html#digraphsTools.grayCode">[docs]</a><span class="k">def</span> <span class="nf">grayCode</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">grayCode</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="c1"># generate a gray code step</span>
     <span class="k">def</span> <span class="nf">_grayReflection</span><span class="p">(</span><span class="n">G0</span><span class="p">):</span>
         <span class="n">G</span> <span class="o">=</span> <span class="p">[]</span>
@@ -299,7 +299,7 @@
     <span class="n">G</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="n">G</span> <span class="o">=</span> <span class="n">_grayReflection</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">G</span></div>
+    <span class="k">return</span> <span class="n">G</span>
 
 <span class="c1">#@timefn</span>
 <div class="viewcode-block" id="generateGrayCode"><a class="viewcode-back" href="../techDoc.html#digraphsTools.generateGrayCode">[docs]</a><span class="k">def</span> <span class="nf">generateGrayCode</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -375,12 +375,12 @@
         
 <span class="c1"># transforms a ranking (list from best to worst) into</span>
 <span class="c1"># a preorder ( a list of list from worst to best)</span>
-<div class="viewcode-block" id="ranking2preorder"><a class="viewcode-back" href="../techDoc.html#digraphsTools.ranking2preorder">[docs]</a><span class="k">def</span> <span class="nf">ranking2preorder</span><span class="p">(</span><span class="n">R</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">ranking2preorder</span><span class="p">(</span><span class="n">R</span><span class="p">):</span>
     <span class="n">preorder</span> <span class="o">=</span> <span class="p">[[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">R</span><span class="p">)]</span>
 <span class="c1">#    for x in R:</span>
 <span class="c1">#        preorder.append([x])</span>
 <span class="c1">#    preorder.reverse()</span>
-    <span class="k">return</span> <span class="n">preorder</span></div>
+    <span class="k">return</span> <span class="n">preorder</span>
 
 <span class="c1"># flattens a list of lists into a flat list</span>
 <span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">IT</span>
@@ -539,7 +539,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2019, Raymond Bisdorff.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>

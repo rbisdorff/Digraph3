@@ -2897,7 +2897,7 @@ One may check that the outranking digraph *g* does not admit in fact a cyclic st
 *Rubis* best choice recommendations
 -----------------------------------
 
-Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking prekernels (weakly independent and strictly outranking choices) of the chordless odd circuits augmented outranking digraph. As we observe no circuits here, we may directly compute the prekernels of *g* (see the tutorial :ref:`Kernel-Tutorial-label`).
+Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking prekernels (weakly independent and strictly outranking choices) of the outranking digraph, where, the case given, we previously break open all chordless circuits at their weakest link. As we observe no such chordless circuits here, we may directly compute the prekernels of *g* (see the tutorial :ref:`Kernel-Tutorial-label`).
 
 .. code-block:: pycon
    :linenos:
@@ -2987,7 +2987,7 @@ We notice three potential best choice recommendations: the Condorcet winner *D* 
     Execution time: 0.014 seconds
 
 We notice in Line 6 above that the most significantly supported best
-choice recommendation is indeed the Condorcet winner *D* with a
+choice recommendation is indeed the *Condorcet* winner *D* with a
 majority of 56% of the criteria significance (see Line 12). Both other
 potential best choice recommendations, as well as the potential worst
 choice recommendation, are not positively validated as best,

@@ -228,7 +228,7 @@
     <span class="k">return</span> <span class="n">g</span></div>
 
 <span class="n">_smallprimes</span> <span class="o">=</span> <span class="n">primesBelow</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># might seem low, but 1000*1000 = 1000000, so this will fully factor every composite &lt; 1000000</span>
-<div class="viewcode-block" id="primeFactors"><a class="viewcode-back" href="../techDoc.html#arithmetics.primeFactors">[docs]</a><span class="k">def</span> <span class="nf">primeFactors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">primeFactors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="n">factors</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="n">limit</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="o">.</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
@@ -252,16 +252,16 @@
 
     <span class="k">if</span> <span class="n">sort</span><span class="p">:</span> <span class="n">factors</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="n">factors</span></div>
+    <span class="k">return</span> <span class="n">factors</span>
 
-<div class="viewcode-block" id="factorization"><a class="viewcode-back" href="../techDoc.html#arithmetics.factorization">[docs]</a><span class="k">def</span> <span class="nf">factorization</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">factorization</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">factors</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">p1</span> <span class="ow">in</span> <span class="n">primeFactors</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">factors</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
             <span class="n">factors</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="n">factors</span></div>
+    <span class="k">return</span> <span class="n">factors</span>
 
 <div class="viewcode-block" id="moebius_mu"><a class="viewcode-back" href="../techDoc.html#arithmetics.moebius_mu">[docs]</a><span class="k">def</span> <span class="nf">moebius_mu</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -724,7 +724,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2019, Raymond Bisdorff.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
 </html>
