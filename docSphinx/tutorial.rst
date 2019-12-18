@@ -2897,7 +2897,7 @@ One may check that the outranking digraph *g* does not admit in fact a cyclic st
 *Rubis* best choice recommendations
 -----------------------------------
 
-Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking prekernels (weakly independent and strictly outranking choices) of the outranking digraph, where, the case given, we previously break open all chordless circuits at their weakest link. As we observe no such chordless circuits here, we may directly compute the prekernels of *g* (see the tutorial :ref:`Kernel-Tutorial-label`).
+Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking prekernels --weakly independent and strictly outranking choices-- of the outranking digraph (see the tutorial on :ref:`Kernel-Tutorial-label`). The case given, we previously need to break open all chordless circuits at their weakest link. As we observe no such chordless circuits here, we may directly compute the prekernels of *g*.
 
 .. code-block:: pycon
    :linenos:
