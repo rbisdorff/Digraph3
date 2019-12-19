@@ -828,7 +828,6 @@ We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysi
 The Borda **rank analysis table** may be printed out with a corresponding ``show`` command.
 
 .. code-block:: pycon
-   :linenos:
 
     >>> v.showRankAnalysisTable()
     *----  Borda rank analysis tableau -----*
