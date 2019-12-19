@@ -5,11 +5,19 @@
 
 **Preface**
 
-This document contains first a set of tutorials introducing the main objects available in the Digraph3 Python software resources, like digraphs, outranking digraphs, performance tableaux and voting profiles.
+The tutorials in this document describe the practical usage of our Digraph3 Python3 software resources in the field of *Algorithmic Decision Theory* (https://leopold-loewenheim.uni.lu/bisdorff/research.html) and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a |location_link4| at the University of Luxembourg.
 
-Some of the tutorials are problem oriented and show how to compute the potential winner(s) of an election, how to build a best choice recommendation, or how to rate or linearly rank with multiple incommensurable ranking criteria.
+.. |location_link4| raw:: html
 
-More graph theoretical tutorials follow. One on working with undirected graphs, followed by a tutorial on how to compute non isomorphic maximal independent sets (kernels) in the n-cycle graph. Another tutorial is furthermore devoted on how to compute more generally kernels in graphs, digraphs and more specifically initial and terminal kernels in outranking digraphs. Special tutorials are devoted to perfect graphs, like split, interval or permutation graphs, and to tree-graphs and forests.
+   <a href="http://hdl.handle.net/10993/37933" target="_blank">Master Course on Algorithmic Decision Theory</a>
+
+The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like digraphs, outranking digraphs, performance tableaux and voting profiles.
+
+Some of the tutorials are decision problem oriented and show how to compute the potential winner(s) of an election, how to build a best choice recommendation, or how to rate or linearly rank with multiple incommensurable ranking criteria.
+
+More graph theoretical tutorials follow. One on working with undirected graphs, followed by a tutorial on how to compute non isomorphic maximal independent sets (kernels) in the n-cycle graph.
+
+Another tutorial is furthermore devoted on how to generally compute kernels in graphs, digraphs and, more specifically, initial and terminal kernels in outranking digraphs. Special tutorials are devoted to perfect graphs, like split, interval or permutation graphs, and to tree-graphs and forests.
 
 Finally, we provide an insight in computational enhancements one may get when working in a bipolar-valued epistemic logical framework, like easily coping with missing data and uncertain criterion significance weights, computing valued ordinal correlations between bipolar-valued outranking digraphs, and solving bipolar-valued Berge kernel equation systems.
    
