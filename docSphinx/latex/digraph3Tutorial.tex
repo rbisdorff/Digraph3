@@ -903,32 +903,32 @@ The \sphinxcode{\sphinxupquote{votingProfiles}} module provides resources for ha
 The module provides a \sphinxcode{\sphinxupquote{votingProfiles.RandomLinearVotingProfile}} class for generating random instances of the \sphinxcode{\sphinxupquote{votingProfiles.LinearVotingProfile}} class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} from votingProfiles import RandomLinearVotingProfile}
-\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} v = RandomLinearVotingProfile(numberOfVoters=5,}
-\PYG{g+go}{ ...                               numberOfCandidates=3}
-\PYG{g+go}{ ...                               votersWeights=[2,3,1,5,4])}
-\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} v.candidates}
-\PYG{g+go}{ OrderedDict([\PYGZsq{}a1\PYGZsq{},\PYGZob{}\PYGZsq{}name\PYGZsq{}:\PYGZsq{}a1\PYGZcb{}), (\PYGZsq{}a2\PYGZsq{},\PYGZob{}\PYGZsq{}name\PYGZsq{}:\PYGZsq{}a2\PYGZsq{}\PYGZcb{}), (\PYGZsq{}a3\PYGZsq{}:\PYGZob{}\PYGZsq{}name\PYGZsq{}:\PYGZsq{}a3\PYGZsq{}\PYGZcb{})])}
-\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} v.voters}
-\PYG{g+go}{ OrderedDict([(\PYGZsq{}v1\PYGZsq{},\PYGZob{}\PYGZsq{}weight\PYGZsq{}: 2\PYGZcb{}), (\PYGZsq{}v2\PYGZsq{}:\PYGZob{}\PYGZsq{}weight\PYGZsq{}: 3\PYGZcb{}),}
-\PYG{g+go}{  (\PYGZsq{}v3\PYGZsq{},\PYGZob{}\PYGZsq{}weight\PYGZsq{}: 1\PYGZcb{}), (\PYGZsq{}v4\PYGZsq{}:\PYGZob{}\PYGZsq{}weight\PYGZsq{}: 5\PYGZcb{}),}
-\PYG{g+go}{  (\PYGZsq{}v5\PYGZsq{},\PYGZob{}\PYGZsq{}weight\PYGZsq{}: 4\PYGZcb{})])}
-\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} v.linearBallot}
-\PYG{g+go}{ \PYGZob{}\PYGZsq{}v4\PYGZsq{}: [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}], \PYGZsq{}v3\PYGZsq{}: [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}], \PYGZsq{}v1\PYGZsq{}: [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}],}
-\PYG{g+go}{  \PYGZsq{}v5\PYGZsq{}: [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}], \PYGZsq{}v2\PYGZsq{}: [\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]\PYGZcb{}}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{n}{RandomLinearVotingProfile}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v} \PYG{o}{=} \PYG{n}{RandomLinearVotingProfile}\PYG{p}{(}\PYG{n}{numberOfVoters}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}
+\PYG{g+gp}{... }                              \PYG{n}{numberOfCandidates}\PYG{o}{=}\PYG{l+m+mi}{3}
+\PYG{g+gp}{... }                              \PYG{n}{votersWeights}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v}\PYG{o}{.}\PYG{n}{candidates}
+\PYG{g+go}{OrderedDict([\PYGZsq{}a1\PYGZsq{},\PYGZob{}\PYGZsq{}name\PYGZsq{}:\PYGZsq{}a1\PYGZcb{}), (\PYGZsq{}a2\PYGZsq{},\PYGZob{}\PYGZsq{}name\PYGZsq{}:\PYGZsq{}a2\PYGZsq{}\PYGZcb{}), (\PYGZsq{}a3\PYGZsq{}:\PYGZob{}\PYGZsq{}name\PYGZsq{}:\PYGZsq{}a3\PYGZsq{}\PYGZcb{})])}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v}\PYG{o}{.}\PYG{n}{voters}
+\PYG{g+go}{OrderedDict([(\PYGZsq{}v1\PYGZsq{},\PYGZob{}\PYGZsq{}weight\PYGZsq{}: 2\PYGZcb{}), (\PYGZsq{}v2\PYGZsq{}:\PYGZob{}\PYGZsq{}weight\PYGZsq{}: 3\PYGZcb{}),}
+\PYG{g+go}{ (\PYGZsq{}v3\PYGZsq{},\PYGZob{}\PYGZsq{}weight\PYGZsq{}: 1\PYGZcb{}), (\PYGZsq{}v4\PYGZsq{}:\PYGZob{}\PYGZsq{}weight\PYGZsq{}: 5\PYGZcb{}),}
+\PYG{g+go}{ (\PYGZsq{}v5\PYGZsq{},\PYGZob{}\PYGZsq{}weight\PYGZsq{}: 4\PYGZcb{})])}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v}\PYG{o}{.}\PYG{n}{linearBallot}
+\PYG{g+go}{\PYGZob{}\PYGZsq{}v4\PYGZsq{}: [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}], \PYGZsq{}v3\PYGZsq{}: [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}], \PYGZsq{}v1\PYGZsq{}: [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}],}
+\PYG{g+go}{ \PYGZsq{}v5\PYGZsq{}: [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}], \PYGZsq{}v2\PYGZsq{}: [\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]\PYGZcb{}}
 \end{sphinxVerbatim}
 
 Notice that in this random example, the five voters are weighted (see Line 4). Their linear ballots can be viewed with the \sphinxcode{\sphinxupquote{showLinearBallots}} method.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} v.showLinearBallots()}
-\PYG{g+go}{ voters(weight)       candidates rankings}
-\PYG{g+go}{ v1(2):       [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}]}
-\PYG{g+go}{ v2(3):       [\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
-\PYG{g+go}{ v3(1):       [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
-\PYG{g+go}{ v4(5):       [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}]}
-\PYG{g+go}{ v5(4):       [\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
-\PYG{g+go}{ \PYGZsh{} voters: 15}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v}\PYG{o}{.}\PYG{n}{showLinearBallots}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{voters(weight)       candidates rankings}
+\PYG{g+go}{v1(2):       [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}]}
+\PYG{g+go}{v2(3):       [\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
+\PYG{g+go}{v3(1):       [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
+\PYG{g+go}{v4(5):       [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}]}
+\PYG{g+go}{v5(4):       [\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
+\PYG{g+go}{\PYGZsh{} voters: 15}
 \end{sphinxVerbatim}
 
 Editing of the linear voting profile may be achieved by storing the data in a file, edit it, and reload it again.
@@ -972,14 +972,14 @@ We may also follow the \sphinxstyleemphasis{Chevalier de Borda}’s advice and, 
 The Borda \sphinxstylestrong{rank analysis table} may be printed out with a corresponding \sphinxcode{\sphinxupquote{show}} command.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} v.showRankAnalysisTable()}
-\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Borda rank analysis tableau \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{ candi\PYGZhy{} | alternative\PYGZhy{}to\PYGZhy{}rank |      Borda}
-\PYG{g+go}{ dates  |   1     2     3     | score  average}
-\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{  \PYGZsq{}a1\PYGZsq{}  |   6     9     0     |  24     1.60}
-\PYG{g+go}{  \PYGZsq{}a3\PYGZsq{}  |   7     1     7     |  30     2.00}
-\PYG{g+go}{  \PYGZsq{}a2\PYGZsq{}  |   2     5     8     |  36     2.40}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v}\PYG{o}{.}\PYG{n}{showRankAnalysisTable}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Borda rank analysis tableau \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{candi\PYGZhy{} | alternative\PYGZhy{}to\PYGZhy{}rank |      Borda}
+\PYG{g+go}{dates  |   1     2     3     | score  average}
+\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{ \PYGZsq{}a1\PYGZsq{}  |   6     9     0     |  24     1.60}
+\PYG{g+go}{ \PYGZsq{}a3\PYGZsq{}  |   7     1     7     |  30     2.00}
+\PYG{g+go}{ \PYGZsq{}a2\PYGZsq{}  |   2     5     8     |  36     2.40}
 \end{sphinxVerbatim}
 
 
