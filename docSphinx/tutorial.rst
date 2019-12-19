@@ -203,7 +203,6 @@ We may reload a previously saved ``Digraph`` instance from the file named :code:
     'a3': in => {'a2'}, out => {'a2', 'a5'}
     'a4': in => {'a1', 'a5'}, out => {'a5'}
     'a5': in => {'a1', 'a4', 'a3'}, out => {'a4'}
-    >>> 
 
 The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in
 the current working directory a :code:`tutorial.dot` file and a
@@ -267,7 +266,6 @@ Some simple methods are easily applicable to this instantiated Digraph object *d
     a4 : 50.00
     a5 : 50.00
     agglomeration coefficient        : 45.00
-    >>> ...
 
 Special classes
 ---------------
@@ -603,7 +601,6 @@ As the original digraph *dg* was connected (see above the result of the ``dg.sho
     'frozenset({'7', '1', '2', '6', '5', '3', '4'})': in => set(), out => set()
       Not Gamma :
     'frozenset({'7', '1', '2', '6', '5', '3', '4'})': in => set(), out => set()
-    >>> ...
 
 CSV storage
 -----------
@@ -649,7 +646,6 @@ It is as well possible to show a colored version of the valued relation table in
    :linenos:
 
         >>> dgcsv.showHTMLRelationTable(tableTitle="Tutorial random digraph")
-	>>> ...
 
 .. figure:: htmlTutorialDigraph.png
    :name: htmlTutorialDigraph
@@ -778,7 +774,6 @@ The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class
     >>> v.linearBallot
     {'v4': ['a1', 'a3', 'a2'], 'v3': ['a1', 'a3', 'a2'], 'v1': ['a1', 'a2', 'a3'],
      'v5': ['a2', 'a3', 'a1'], 'v2': ['a3', 'a2', 'a1']}
-     >>> ...
 
 Notice that in this random example, the five voters are weighted (see Line 4). Their linear ballots can be viewed with the ``showLinearBallots`` method.
 
@@ -793,7 +788,6 @@ Notice that in this random example, the five voters are weighted (see Line 4). T
     v4(5): 	 ['a1', 'a2', 'a3']
     v5(4): 	 ['a3', 'a1', 'a2']
     # voters: 15
-    >>> ...
 
 Editing of the linear voting profile may be achieved by storing the data in a file, edit it, and reload it again.
 
@@ -814,7 +808,6 @@ We may easily compute **uni-nominal votes**, i.e. how many times a candidate was
     {'a2': 2, 'a1': 6, 'a3': 7}
     >>> v.computeSimpleMajorityWinner()
     ['a3']
-    >>> ...
 
 As we observe no absolute majority (8/15) of votes for any of the three candidate, we may look for the **instant runoff** winner instead (see [ADT-L2]_).
 
@@ -822,7 +815,6 @@ As we observe no absolute majority (8/15) of votes for any of the three candidat
 
     >>> v.computeInstantRunoffWinner()
     ['a1']
-    >>> ...
 
 We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** of each candidate and hence determine the **Borda winner(s)**.
 
@@ -848,7 +840,6 @@ The Borda **rank analysis table** may be printed out with a corresponding ``show
      'a1'  |   6     9     0     |  24     1.60
      'a3'  |   7     1     7     |  30     2.00
      'a2'  |   2     5     8     |  36     2.40
-    >>> ...
 
 The Condorcet winner
 --------------------
@@ -1000,7 +991,6 @@ With the help of the :py:class:`outrankingDigraphs.RandomBipolarOutrankingDigrap
        key:  a07
        name:       random decision action
        comment:    RandomPerformanceTableau() generated.
-       >>> ...
 
 In this example we consider furthermore a family of seven equisignificant cardinal criteria functions *g01*, *g02*, ..., *g07*, measuring the performance of each alternative on a rational scale from 0.0 to 100.00. In order to capture the evaluation's uncertainty and imprecision, each criterion function *g1* to *g7* admits three performance discrimination thresholds of 10, 20 and 80 pts for warranting respectively any indifference, preference and veto situations.
 
@@ -1046,7 +1036,6 @@ The performance evaluations of each decision alternative on each criterion are g
 	  'g05'  |  33.0    40.7    96.4    55.1    46.2    58.1    52.6  
 	  'g06'  |  47.6    19.0    92.7    55.3    51.7    26.6    40.4  
 	  'g07'  |  41.2    64.0    87.7    71.6    57.8    59.3    34.7
-	>>> ...
 
 Browsing the performances
 -------------------------
@@ -1069,7 +1058,7 @@ We may, furthermore, rank the alternatives on the basis of the weighted marginal
 
 .. code-block:: pycon
 
-        >>> odg.showHTMLPerformanceHeatmap(quantiles=5,colorLevels=5)
+    >>> odg.showHTMLPerformanceHeatmap(quantiles=5,colorLevels=5)
 
 .. figure:: tutorialHeatmap.png
    :width: 400 px
@@ -1150,7 +1139,6 @@ The outranking valuation characteristic appears as **majority margin** resulting
     g07   10.00  87.70  63.95  +23.75 	| 10.00  20.00  +10.00	| 
     -----------------------------------------------------------------------------------
      Valuation in range: -37.00 to +37.00; global concordance: +31.00
-    >>> ...
 
 This time, we observe a considerable out-performance of *a03* against *a02* on criterion g02 (see second row in the relation table above). We therefore notice a positively polarized *certainly confirmed* outranking situation in this case [BIS-2013]_. 
 
@@ -1178,7 +1166,6 @@ All outranking digraphs, being of root type :py:class:`digraphs.Digraph`, inheri
     'a07' |  +25	 +17	  -9	 +9	 +9	+17	  0	 
     Valuation domain:  {'hasIntegerValuation': True, 'min': Decimal('-37'), 
 			'max': Decimal('37'), 'med': Decimal('0.000')}
-    >>> ...
 
 .. note::
 
@@ -1197,7 +1184,6 @@ From the theory (see [BIS-2013]_, [ADT-L7]_ )  we know that a bipolar-valued out
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to codualOdg.dot
     dot -Grankdir=BT -Tpng codualOdg.dot -o codualOdg.png
-    >>> ...
 
 .. figure:: codualOdg.png
    :width: 300 px
@@ -1217,7 +1203,6 @@ As with all Digraph instances, it is possible to store permanently a copy of the
     >>> PerformanceTableau.saveXMCDA2(odg,'tutorialPerfTab')
     *----- saving performance tableau in XMCDA 2.0 format  -------------*
     File: tutorialPerfTab.xml saved !
-    >>> ...
 
 The resulting XML file may be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (`see here <_static/tutorialPerfTab.xml>`_). Hitting ``Ctrl U`` in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Reinstantiating again a corresponding updated *odg* object goes like follow.
 
@@ -1237,7 +1222,6 @@ The resulting XML file may be visualized in a browser window (other than Chrome 
     'a05' |   +51.35  +100.00  -70.27  +72.97  +0.00  +51.35  +32.43  
     'a06' |   +16.22  +72.97  -51.35  +35.14  +32.43   +0.00  +37.84  
     'a07' |   +67.57  +45.95  -24.32  +27.03  +27.03  +45.95   +0.00  
-    >>> ...
 
 We recover the original bipolar-valued outranking characteristics, and we may restart again the preference modelling process. 
 
@@ -1477,7 +1461,6 @@ Such a performance tableau may be stored and re-accessed in the XMCDA2 encoded f
     File: temp.xml saved !
     >>> from perfTabs import XMCDA2PerformanceTableau
     >>> t = XMCDA2PerformanceTableau('temp')
-    >>> ...
 
 If needed for instance in an R session, a CSV version of the performance tableau may be created as follows.
 
@@ -3535,7 +3518,6 @@ The stored graph can be recalled and plotted with the generic :py:func:`graphs.G
 	*---- exporting a dot file for GraphViz tools ---------*
 	Exporting to tutorialGraph.dot
 	fdp -Tpng tutorialGraph.dot -o tutorialGraph.png
-        >>> ...
 
 .. figure:: tutorialGraph.png
    :width: 400 px
@@ -3565,7 +3547,6 @@ Properties, like the gamma function and vertex degrees and neighbourhooddepths m
         distribution :  [0, 3, 1, 3, 0, 0, 0]
         nbh depths   :  [0, 1, 2, 3, 4, 5, 6, 'inf.']
         distribution :  [0, 0, 1, 4, 2, 0, 0, 0]
-        >>> ...
 
 A ``Graph`` instance corresponds bijectively to a symmetric ``Digraph`` instance and we may easily convert from one to the other with the :py:func:`graphs.Graph.graph2Digraph()`, and vice versa with the :py:func:`digraphs.Digraph.digraph2Graph()` method. Thus, all resources of the :py:class:`digraphs.Digraph` class, suitable for symmetric digraphs, become readily available, and vice versa.
 
@@ -3602,7 +3583,6 @@ A ``Graph`` instance corresponds bijectively to a symmetric ``Digraph`` instance
         distribution :  [0, 3, 1, 3, 0, 0, 0]
         nbh depths   :  [0, 1, 2, 3, 4, 5, 6, 'inf.']
         distribution :  [0, 0, 1, 4, 2, 0, 0, 0]
-	>>> ...
 
 q-coloring of a graph
 ---------------------
@@ -3713,8 +3693,6 @@ A MIS in the dual of a graph instance *g* (its negation *-g* ), corresponds to a
        frozenset({'v2', 'v4'}), frozenset({'v4', 'v5'}), 
        frozenset({'v1', 'v5'}), frozenset({'v6', 'v2'}), 
        frozenset({'v6', 'v5'})]
-      >>> ...
-
 
 Line graphs and maximal matchings
 ---------------------------------
