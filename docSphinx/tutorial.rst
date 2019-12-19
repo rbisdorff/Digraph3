@@ -759,7 +759,6 @@ The :py:mod:`votingProfiles` module provides resources for handling election res
 The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class for generating random instances of the :py:class:`votingProfiles.LinearVotingProfile` class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result.
 
 .. code-block:: pycon
-   :linenos:
 
     >>> from votingProfiles import RandomLinearVotingProfile
     >>> v = RandomLinearVotingProfile(numberOfVoters=5,
@@ -778,7 +777,6 @@ The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class
 Notice that in this random example, the five voters are weighted (see Line 4). Their linear ballots can be viewed with the ``showLinearBallots`` method.
 
 .. code-block:: pycon
-   :linenos:
 
     >>> v.showLinearBallots()
     voters(weight)	 candidates rankings
