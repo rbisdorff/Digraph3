@@ -307,7 +307,7 @@ Manipulating ``Digraph`` objects
 Random digraph
 --------------
 
-We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``Digraph3`` collection contains a ``randomDigraphs`` module providing a specific :py:class:`digraphs.RandomValuationDigraph` constructor.
+We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``Digraph3`` collection contains a ``randomDigraphs`` module providing a specific :py:class:`randomDigraphs.RandomValuationDigraph` constructor.
 
 .. code-block:: pycon
    :linenos:
@@ -996,13 +996,13 @@ In this example we consider furthermore a family of seven equisignificant cardin
 
         >>> odg.showCriteria()
 	*----  criteria -----*
-	g01 'digraphs.RandomPerformanceTableau() instance'
+	g01 'RandomPerformanceTableau() instance'
 	  Scale = [0.0, 100.0]
 	  Weight = 3.0
 	  Threshold pref : 20.00 + 0.00x ; percentile:  0.28
 	  Threshold ind : 10.00 + 0.00x ; percentile:  0.095
 	  Threshold veto : 80.00 + 0.00x ; percentile:  1.0
-	g02 'digraphs.RandomPerformanceTableau() instance'
+	g02 'RandomPerformanceTableau() instance'
 	  Scale = [0.0, 100.0]
 	  Weight = 3.0
 	  Threshold pref : 20.00 + 0.00x ; percentile:  0.33
@@ -1010,7 +1010,7 @@ In this example we consider furthermore a family of seven equisignificant cardin
 	  Threshold veto : 80.00 + 0.00x ; percentile:  0.95
 	...
 	...
-	g07 'digraphs.RandomPerformanceTableau() instance'
+	g07 'RandomPerformanceTableau() instance'
 	  Scale = [0.0, 100.0]
 	  Weight = 10.0
 	  Threshold pref : 20.00 + 0.00x ; percentile:  0.476

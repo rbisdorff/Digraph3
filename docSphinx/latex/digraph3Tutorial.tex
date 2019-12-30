@@ -77,7 +77,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{December 19, 2019}
+\date{December 30, 2019}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -456,7 +456,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 \subsection{Random digraph}
 \label{\detokenize{tutorial:random-digraph}}
-We are starting this tutorial with generating a randomly {[}\sphinxhyphen{}1;1{]}\sphinxhyphen{}valued (\sphinxstyleemphasis{Normalized=True}) digraph of order 7, denoted \sphinxstyleemphasis{dg} and modelling a binary relation (\sphinxstyleemphasis{x S y}) defined on the set of nodes of \sphinxstyleemphasis{dg}. For this purpose, the \sphinxcode{\sphinxupquote{Digraph3}} collection contains a \sphinxcode{\sphinxupquote{randomDigraphs}} module providing a specific \sphinxcode{\sphinxupquote{digraphs.RandomValuationDigraph}} constructor.
+We are starting this tutorial with generating a randomly {[}\sphinxhyphen{}1;1{]}\sphinxhyphen{}valued (\sphinxstyleemphasis{Normalized=True}) digraph of order 7, denoted \sphinxstyleemphasis{dg} and modelling a binary relation (\sphinxstyleemphasis{x S y}) defined on the set of nodes of \sphinxstyleemphasis{dg}. For this purpose, the \sphinxcode{\sphinxupquote{Digraph3}} collection contains a \sphinxcode{\sphinxupquote{randomDigraphs}} module providing a specific \sphinxcode{\sphinxupquote{randomDigraphs.RandomValuationDigraph}} constructor.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} from randomDigraphs import RandomValuationDigraph}
@@ -1169,13 +1169,13 @@ In this example we consider furthermore a family of seven equisignificant cardin
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+go}{     \PYGZgt{}\PYGZgt{}\PYGZgt{} odg.showCriteria()}
 \PYG{g+go}{     *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  criteria \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{     g01 \PYGZsq{}digraphs.RandomPerformanceTableau() instance\PYGZsq{}}
+\PYG{g+go}{     g01 \PYGZsq{}RandomPerformanceTableau() instance\PYGZsq{}}
 \PYG{g+go}{       Scale = [0.0, 100.0]}
 \PYG{g+go}{       Weight = 3.0}
 \PYG{g+go}{       Threshold pref : 20.00 + 0.00x ; percentile:  0.28}
 \PYG{g+go}{       Threshold ind : 10.00 + 0.00x ; percentile:  0.095}
 \PYG{g+go}{       Threshold veto : 80.00 + 0.00x ; percentile:  1.0}
-\PYG{g+go}{     g02 \PYGZsq{}digraphs.RandomPerformanceTableau() instance\PYGZsq{}}
+\PYG{g+go}{     g02 \PYGZsq{}RandomPerformanceTableau() instance\PYGZsq{}}
 \PYG{g+go}{       Scale = [0.0, 100.0]}
 \PYG{g+go}{       Weight = 3.0}
 \PYG{g+go}{       Threshold pref : 20.00 + 0.00x ; percentile:  0.33}
@@ -1183,7 +1183,7 @@ In this example we consider furthermore a family of seven equisignificant cardin
 \PYG{g+go}{       Threshold veto : 80.00 + 0.00x ; percentile:  0.95}
 \PYG{g+go}{     ...}
 \PYG{g+go}{     ...}
-\PYG{g+go}{     g07 \PYGZsq{}digraphs.RandomPerformanceTableau() instance\PYGZsq{}}
+\PYG{g+go}{     g07 \PYGZsq{}RandomPerformanceTableau() instance\PYGZsq{}}
 \PYG{g+go}{       Scale = [0.0, 100.0]}
 \PYG{g+go}{       Weight = 10.0}
 \PYG{g+go}{       Threshold pref : 20.00 + 0.00x ; percentile:  0.476}

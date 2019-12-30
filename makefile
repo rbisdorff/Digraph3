@@ -21,6 +21,10 @@ sphinxLatex:
 		(cd docSphinx; \
 		${SPHINX} -E -a -b latex . latex/ )
 
+sphinxLatexPDF:
+		(cd docSphinx; \
+		 make latexpdf )
+
 pydocs:
 		for md in ${modules}; do \
 		    cp $$md pyDoc/; \
