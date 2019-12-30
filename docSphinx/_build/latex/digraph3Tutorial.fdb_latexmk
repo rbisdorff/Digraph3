@@ -1,10 +1,10 @@
 # Fdb version 3
-["makeindex digraph3Tutorial.idx"] 1577700688 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1577701220
+["makeindex digraph3Tutorial.idx"] 1577700688 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1577701595
   "digraph3Tutorial.idx" 1577700694 0 d41d8cd98f00b204e9800998ecf8427e ""
   (generated)
-  "digraph3Tutorial.ind"
   "digraph3Tutorial.ilg"
-["pdflatex"] 1577700694 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1577701220
+  "digraph3Tutorial.ind"
+["pdflatex"] 1577700694 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1577701595
   "/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480098666 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/adobe/courier/pcrb8r.tfm" 1480098688 1292 3059476c50a24578715759f22652f3d0 ""
@@ -241,9 +241,9 @@
   "spanningForest.png" 1550005573 50782 a3bc0381daeccbc2812bcc4195a99052 ""
   "sparseRelationMap.png" 1562162196 13187 df51199ccfddd95f44d62a9338454774 ""
   "sphinx.sty" 1576765227 81878 44d14f90f8cb22a202794c148df60b64 ""
-  "sphinxhighlight.sty" 1577701211 8137 38a433148fcb7611515a989ff1750dd5 ""
+  "sphinxhighlight.sty" 1577701585 8137 38a433148fcb7611515a989ff1750dd5 ""
   "sphinxhowto.cls" 1576765227 3253 f1422f11047981f159e1ea718dbe2c47 ""
-  "sphinxmessages.sty" 1577701220 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1577701594 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxmulticell.sty" 1576765227 14606 0b6edc2b1a83546ed92026d1f6a311b5 ""
   "strongComponents.png" 1444817862 79190 bf10e090cef5309997c9efe66fbb33a5 ""
   "symmetricPart.png" 1562162197 74487 bef1531d29a633b766bb94b1dcbb02bb ""
@@ -266,9 +266,9 @@
   "tutorialSlater.png" 1522315375 36150 a573a04bb08b623257e9fc5c18aa0400 ""
   "weightDistributions.png" 1566480335 96093 6882246be0684c7dd44502a778cc71de ""
   (generated)
-  "digraph3Tutorial.pdf"
-  "digraph3Tutorial.log"
   "digraph3Tutorial.idx"
-  "digraph3Tutorial.aux"
   "digraph3Tutorial.out"
+  "digraph3Tutorial.aux"
+  "digraph3Tutorial.pdf"
   "digraph3Tutorial.toc"
+  "digraph3Tutorial.log"

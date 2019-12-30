@@ -23,7 +23,8 @@ sphinxLatex:
 
 sphinxLatexPDF:
 		(cd docSphinx; \
-		 make latexpdf )
+		 make latexpdf; \
+		cp _build/latex/*.pdf ./latex)
 
 pydocs:
 		for md in ${modules}; do \
