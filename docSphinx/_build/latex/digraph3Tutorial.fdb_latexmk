@@ -1,10 +1,10 @@
 # Fdb version 3
-["makeindex digraph3Tutorial.idx"] 1577700688 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1577701595
-  "digraph3Tutorial.idx" 1577700694 0 d41d8cd98f00b204e9800998ecf8427e ""
+["makeindex digraph3Tutorial.idx"] 1577700688 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1577871784
+  "digraph3Tutorial.idx" 1577871778 0 d41d8cd98f00b204e9800998ecf8427e ""
   (generated)
   "digraph3Tutorial.ilg"
   "digraph3Tutorial.ind"
-["pdflatex"] 1577700694 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1577701595
+["pdflatex"] 1577871778 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1577871784
   "/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480098666 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/adobe/courier/pcrb8r.tfm" 1480098688 1292 3059476c50a24578715759f22652f3d0 ""
@@ -190,11 +190,11 @@
   "correlationPCA.png" 1562162196 78215 c7f1b61ed10691fd34a9236a5544f860 ""
   "correlationTable.png" 1562162196 50102 7e60e3c38680cfc795a5a7bb6851b804 ""
   "cycles.png" 1444817862 38389 9515e841f4881dd2df51947edd07b3e9 ""
-  "digraph3Tutorial.aux" 1577700700 59501 34e38f0356f492a071e5d0dcfb297deb ""
+  "digraph3Tutorial.aux" 1577871784 59501 34e38f0356f492a071e5d0dcfb297deb ""
   "digraph3Tutorial.ind" 1577700688 0 d41d8cd98f00b204e9800998ecf8427e "makeindex digraph3Tutorial.idx"
-  "digraph3Tutorial.out" 1577700700 20322 0cba8453d48f6e352aebc16b971b9878 ""
-  "digraph3Tutorial.tex" 1577700680 648847 fe0cf975bcfbd99a8fa8ee8dba88d28a ""
-  "digraph3Tutorial.toc" 1577700700 10900 38de5014489b95d642dfdc2732fcbd9c ""
+  "digraph3Tutorial.out" 1577871784 20322 0cba8453d48f6e352aebc16b971b9878 ""
+  "digraph3Tutorial.tex" 1577871777 648844 80316798d748e07bb29afd2baee0457e ""
+  "digraph3Tutorial.toc" 1577871784 10900 38de5014489b95d642dfdc2732fcbd9c ""
   "dualChordlessCircuit.png" 1550005573 42179 2859130e8357d66ccd923f51dd2efd4b ""
   "examplePerfQuantiles.png" 1557824156 30034 de4be4a13314dc1ab56736b4dc6e1d3c ""
   "footnotehyper-sphinx.sty" 1576765227 8888 1bbd7bdeae8c8bed1d10d551bddb1cc9 ""
@@ -241,9 +241,9 @@
   "spanningForest.png" 1550005573 50782 a3bc0381daeccbc2812bcc4195a99052 ""
   "sparseRelationMap.png" 1562162196 13187 df51199ccfddd95f44d62a9338454774 ""
   "sphinx.sty" 1576765227 81878 44d14f90f8cb22a202794c148df60b64 ""
-  "sphinxhighlight.sty" 1577701585 8137 38a433148fcb7611515a989ff1750dd5 ""
+  "sphinxhighlight.sty" 1577871767 8137 38a433148fcb7611515a989ff1750dd5 ""
   "sphinxhowto.cls" 1576765227 3253 f1422f11047981f159e1ea718dbe2c47 ""
-  "sphinxmessages.sty" 1577701594 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1577871777 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxmulticell.sty" 1576765227 14606 0b6edc2b1a83546ed92026d1f6a311b5 ""
   "strongComponents.png" 1444817862 79190 bf10e090cef5309997c9efe66fbb33a5 ""
   "symmetricPart.png" 1562162197 74487 bef1531d29a633b766bb94b1dcbb02bb ""
@@ -266,9 +266,9 @@
   "tutorialSlater.png" 1522315375 36150 a573a04bb08b623257e9fc5c18aa0400 ""
   "weightDistributions.png" 1566480335 96093 6882246be0684c7dd44502a778cc71de ""
   (generated)
-  "digraph3Tutorial.idx"
-  "digraph3Tutorial.out"
+  "digraph3Tutorial.log"
+  "digraph3Tutorial.toc"
   "digraph3Tutorial.aux"
   "digraph3Tutorial.pdf"
-  "digraph3Tutorial.toc"
-  "digraph3Tutorial.log"
+  "digraph3Tutorial.out"
+  "digraph3Tutorial.idx"

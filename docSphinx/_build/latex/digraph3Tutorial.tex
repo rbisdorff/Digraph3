@@ -77,7 +77,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{December 30, 2019}
+\date{January 01, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -5604,7 +5604,7 @@ For more or less dense strict outranking digraphs of modest order, as facing usu
                  \PYG{k}{yield} \PYG{n}{Sx}
 \end{sphinxVerbatim}
 
-And, checking maximality of independent choices via the external stability conditions during their emuneration (see \sphinxcode{\sphinxupquote{digraphs.Digraph.computePreKernels()}} below).
+And, checking maximality of independent choices via the external stability conditions during their emuneration (see \sphinxcode{\sphinxupquote{digraphs.Digraph.computePreKernels()}} below) provides the effective advantage of computing all initial \sphinxstylestrong{and} terminal prekernels in a single loop (see Line 10 and \sphinxcite{tutorial:bis-2006b}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
  \PYG{k}{def} \PYG{n+nf}{computePreKernels}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
@@ -5625,8 +5625,6 @@ And, checking maximality of independent choices via the external stability condi
      \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{dompreKernels} \PYG{o}{=} \PYG{n}{dompreKernels}
      \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{abspreKernels} \PYG{o}{=} \PYG{n}{abspreKernels}
 \end{sphinxVerbatim}
-
-provides the effective advantage of computing all initial \sphinxstylestrong{and} terminal prekernels in a single loop (see Line 10 and \sphinxcite{tutorial:bis-2006b}).
 
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
 

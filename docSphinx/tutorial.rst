@@ -4695,7 +4695,7 @@ For more or less dense strict outranking digraphs of modest order, as facing usu
                     Sx = [(Sxchoice,Sxgamdom,Sxgamabs,Sxindep)]
                     yield Sx
 
-And, checking maximality of independent choices via the external stability conditions during their emuneration (see :py:func:`digraphs.Digraph.computePreKernels` below).
+And, checking maximality of independent choices via the external stability conditions during their emuneration (see :py:func:`digraphs.Digraph.computePreKernels` below) provides the effective advantage of computing all initial **and** terminal prekernels in a single loop (see Line 10 and [BIS-2006b]_).
 
 .. code-block:: python
    :linenos:
@@ -4718,7 +4718,6 @@ And, checking maximality of independent choices via the external stability condi
         self.dompreKernels = dompreKernels
         self.abspreKernels = abspreKernels
 
-provides the effective advantage of computing all initial **and** terminal prekernels in a single loop (see Line 10 and [BIS-2006b]_).
 
 Back to :ref:`Content Table <Tutorial-label>`
 
