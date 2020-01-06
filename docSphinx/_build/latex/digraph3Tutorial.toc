@@ -1,4 +1,4 @@
-\select@language {english}
+\babel@toc {english}{}
 \contentsline {section}{\numberline {1}Working with the \sphinxstyleemphasis {Digraph3} software resources}{4}{section.1}
 \contentsline {subsection}{\numberline {1.1}Purpose}{4}{subsection.1.1}
 \contentsline {subsection}{\numberline {1.2}Downloading of the Digraph3 resources}{4}{subsection.1.2}
