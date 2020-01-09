@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Digraph3'
-copyright = '2012-2019, Raymond Bisdorff'
+copyright = '2012-2012, Raymond Bisdorff'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

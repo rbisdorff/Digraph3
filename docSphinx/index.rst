@@ -1,8 +1,8 @@
 Documentation of the Digraph3 resources
 =======================================
-:Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg FSTC - CSC/ILIAS
+:Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
 :Version: Revision: Python 3.7
-:Copyright: `R. Bisdorff <https://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2019
+:Copyright: `R. Bisdorff <https://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2020
 
 .. _Documents:
 
@@ -12,6 +12,7 @@ Contents
 * `Introduction <index.html>`_
 * `Tutorials <tutorial.html>`_
 * `Reference manual <techDoc.html>`_
+* `About the author <author.html>`_
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
@@ -52,6 +53,12 @@ The second part concerns the reference manual of the collection of provided Pyth
 .. toctree:: techDoc
    :maxdepth: 2
 
+The third and last part concerns the author of the Digraph3 ressources.
+
+.. toctree:: author
+   :maxdepth: 1
+
+	      
 References
 ..........
 
@@ -71,11 +78,11 @@ For further scientific documentation of the Digraph3 resources, see |location_li
 
 .. |location_link2| raw:: html
 
-   <a href="https://sma.uni.lu/bisdorff/publications.html" target="_blank">https://leopold-loewenheim.uni.lu/bisdorff/publications.html</a>
+   <a href="https://83.217.129.148/bisdorff/publications.html" target="_blank">https://leopold-loewenheim.uni.lu/bisdorff/publications.html</a>
 
 .. |location_link3| raw:: html
 
-   <a href="https://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.html" target="_blank">Copyright</a>
+   <a href="https://83.217.129.148/Digraph3/digraph3_copyright.html" target="_blank">Copyright</a>
 
 .. |location_link4| raw:: html
 

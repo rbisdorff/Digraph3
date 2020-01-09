@@ -21,7 +21,7 @@ Another tutorial is furthermore devoted on how to generally compute kernels in g
 
 Finally, we provide an insight in computational enhancements one may get when working in a bipolar-valued epistemic logical framework, like easily coping with missing data and uncertain criterion significance weights, computing valued ordinal correlations between bipolar-valued outranking digraphs, and solving bipolar-valued Berge kernel equation systems.
    
-:Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg FSTC/CSC
+:Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
 :Version: Revision: Python 3.7
 :Copyright: `R. Bisdorff <https://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2019
 
@@ -5849,7 +5849,7 @@ The valued relational equivalence index gives us a further measure for studying 
    :width: 600 px
    :align: center
 
-It is remarquable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes *r(x<=>y)* appear to be of low value, except the *diagonal* ones. These reflexive indexes *s(x<=>x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. the *proportion* of pairs of movies each critic did evaluate. Critic *JPT* (the editor of the Graffiti magazine), for instance, evaluated all but one (*d* = 24*23/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion (*d* = 10*9/600 = 0.15).
+It is remarquable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes *r(x<=>y)* appear to be of low value, except the *diagonal* ones. These reflexive indexes *r(x<=>x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. the *proportion* of pairs of movies each critic did evaluate. Critic *JPT* (the editor of the Graffiti magazine), for instance, evaluated all but one (*d* = 24*23/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion (*d* = 10*9/600 = 0.15).
 
 To get a picture of the actual divergence of rating opinions concerning **jointly seen** pairs of movies, we may develop a *Principal Component Analysis* ([10]_) of the corresponding *tau* correlation matrix. The 3D plot of the first 3 principal axes is shown below.
 
