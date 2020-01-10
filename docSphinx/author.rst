@@ -71,5 +71,4 @@ Master level:
 
 .. raw:: html
 
-   <a href="_static/Report_Publications_and_communications_of_Raymond_Bisdorff_raymond_bisdorff_uni_lu.html" target="_blank">Report from the *Orbi.lu* repository of the University of Luxembourg</a>
-
+   <a href="http://orbilu.uni.lu/simple-search?query=%28%28uid%3A50000801%29%29&amp;title=List+of+Publications+by+R.Bisdorff&amp;sort_by0=1&amp;order0=DESC&amp;sort_by1=3&amp;order1=ASC&amp;sort_by2=2&amp;order2=ASC" target="_blank">List of published work by descending date</a>
