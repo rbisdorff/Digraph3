@@ -9,26 +9,15 @@
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>randomPerfTabs</strong></big></big> (version 1.01)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/randomPerfTabs.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/randomPerfTabs.py</a></font></td></tr></table>
-    <p><tt>#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
-#&nbsp;Python&nbsp;implementation&nbsp;of&nbsp;digraphs<br>
-#&nbsp;submodule&nbsp;randomPerfTabs.py&nbsp;&nbsp;for&nbsp;generating&nbsp;random&nbsp;performance&nbsp;tableaux&nbsp;&nbsp;<br>
-#&nbsp;Copyright&nbsp;(C)&nbsp;2015&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
-#<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
-#<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
-#<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.<br>
-#<br>
-#######################</tt></p>
+    <p><tt>Python&nbsp;implementation&nbsp;of&nbsp;digraphs<br>
+Module&nbsp;for&nbsp;generating&nbsp;random&nbsp;performance&nbsp;tableaux&nbsp;&nbsp;<br>
+Copyright&nbsp;(C)&nbsp;2015-2019&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
@@ -61,7 +50,9 @@
 <font color="#000000" face="helvetica, arial"><a name="Random3ObjectivesPerformanceTableau">class <strong>Random3ObjectivesPerformanceTableau</strong></a>(<a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Specialization&nbsp;of&nbsp;the&nbsp;:py:class:`perfTabs.<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>`&nbsp;class&nbsp;<br>
+<td colspan=2><tt><a href="#Random3ObjectivesPerformanceTableau">Random3ObjectivesPerformanceTableau</a>(numberOfActions=20,&nbsp;numberOfCriteria=13,&nbsp;weightDistribution='equiobjectives',&nbsp;weightScale=None,&nbsp;IntegerWeights=True,&nbsp;OrdinalScales=False,&nbsp;NegativeWeights=False,&nbsp;negativeWeightProbability=0.0,&nbsp;commonScale=None,&nbsp;commonThresholds=None,&nbsp;commonMode=None,&nbsp;valueDigits=2,&nbsp;vetoProbability=0.5,&nbsp;missingDataProbability=0.05,&nbsp;BigData=False,&nbsp;seed=None,&nbsp;Debug=False)<br>
+&nbsp;<br>
+Specialization&nbsp;of&nbsp;the&nbsp;:py:class:`perfTabs.<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>`&nbsp;class&nbsp;<br>
 for&nbsp;3&nbsp;objectives:&nbsp;*Eco*,&nbsp;*Soc*&nbsp;and&nbsp;*Env*.&nbsp;Each&nbsp;decision&nbsp;action<br>
 is&nbsp;qualified&nbsp;randomly&nbsp;as&nbsp;weak&nbsp;(-),&nbsp;fair&nbsp;(~)&nbsp;or&nbsp;good&nbsp;(+)<br>
 on&nbsp;each&nbsp;of&nbsp;the&nbsp;three&nbsp;objectives.<br>
@@ -342,14 +333,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="Random3ObjectivesPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="Random3ObjectivesPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="Random3ObjectivesPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="Random3ObjectivesPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#Random3ObjectivesPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#Random3ObjectivesPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="Random3ObjectivesPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="Random3ObjectivesPerformanceTableau-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>:<br>
@@ -366,7 +355,9 @@ Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfT
 <font color="#000000" face="helvetica, arial"><a name="RandomAcademicPerformanceTableau">class <strong>RandomAcademicPerformanceTableau</strong></a>(<a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Specialization&nbsp;of&nbsp;the&nbsp;<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>&nbsp;class&nbsp;for&nbsp;generating&nbsp;a&nbsp;temporary<br>
+<td colspan=2><tt><a href="#RandomAcademicPerformanceTableau">RandomAcademicPerformanceTableau</a>(numberOfStudents=10,&nbsp;numberOfCourses=5,&nbsp;weightDistribution='random',&nbsp;weightScale=(1,&nbsp;5),&nbsp;commonScale=(0,&nbsp;20),&nbsp;ndigits=0,&nbsp;WithTypes=False,&nbsp;commonMode=('triangular',&nbsp;12,&nbsp;0.25),&nbsp;commonThresholds=None,&nbsp;IntegerWeights=True,&nbsp;BigData=False,&nbsp;missingDataProbability=0.0,&nbsp;seed=None,&nbsp;Debug=False)<br>
+&nbsp;<br>
+Specialization&nbsp;of&nbsp;the&nbsp;<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>&nbsp;class&nbsp;for&nbsp;generating&nbsp;a&nbsp;temporary<br>
 academic&nbsp;performance&nbsp;tableau&nbsp;with&nbsp;random&nbsp;grading&nbsp;results&nbsp;performances<br>
 of&nbsp;a&nbsp;number&nbsp;of&nbsp;students&nbsp;in&nbsp;different&nbsp;academic&nbsp;courses&nbsp;(see&nbsp;Lecture&nbsp;4:&nbsp;Grading<br>
 of&nbsp;the&nbsp;Algorithmic&nbsp;decision&nbsp;Theory&nbsp;Course&nbsp;<a href="http://hdl.handle.net/10993/37933">http://hdl.handle.net/10993/37933</a>&nbsp;)<br>
@@ -569,14 +560,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="RandomAcademicPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="RandomAcademicPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="RandomAcademicPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="RandomAcademicPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#RandomAcademicPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#RandomAcademicPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="RandomAcademicPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="RandomAcademicPerformanceTableau-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>:<br>
@@ -593,7 +582,9 @@ Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfT
 <font color="#000000" face="helvetica, arial"><a name="RandomCBPerformanceTableau">class <strong>RandomCBPerformanceTableau</strong></a>(<a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Full&nbsp;automatic&nbsp;generation&nbsp;of&nbsp;random&nbsp;Costs&nbsp;versus&nbsp;Benefits<br>
+<td colspan=2><tt><a href="#RandomCBPerformanceTableau">RandomCBPerformanceTableau</a>(numberOfActions=13,&nbsp;numberOfCriteria=7,&nbsp;name='randomCBperftab',&nbsp;weightDistribution='equiobjectives',&nbsp;weightScale=None,&nbsp;IntegerWeights=True,&nbsp;NegativeWeights=False,&nbsp;commonPercentiles=None,&nbsp;samplingSize=100000,&nbsp;commonMode=None,&nbsp;valueDigits=2,&nbsp;missingDataProbability=0.01,&nbsp;BigData=False,&nbsp;seed=None,&nbsp;Threading=False,&nbsp;nbrCores=None,&nbsp;Debug=False,&nbsp;Comments=False)<br>
+&nbsp;<br>
+Full&nbsp;automatic&nbsp;generation&nbsp;of&nbsp;random&nbsp;Costs&nbsp;versus&nbsp;Benefits<br>
 oriented&nbsp;performance&nbsp;tableaux.<br>
 &nbsp;<br>
 Parameters:<br>
@@ -873,14 +864,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="RandomCBPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="RandomCBPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="RandomCBPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="RandomCBPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#RandomCBPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#RandomCBPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="RandomCBPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="RandomCBPerformanceTableau-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>:<br>
@@ -897,7 +886,9 @@ Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfT
 <font color="#000000" face="helvetica, arial"><a name="RandomPerformanceGenerator">class <strong>RandomPerformanceGenerator</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Generic&nbsp;wrapper&nbsp;for&nbsp;generating&nbsp;new&nbsp;decision&nbsp;actions&nbsp;or&nbsp;performance&nbsp;tableaux<br>
+<td colspan=2><tt><a href="#RandomPerformanceGenerator">RandomPerformanceGenerator</a>(argPerfTab,&nbsp;actionNamePrefix='a',&nbsp;instanceCounter=None,&nbsp;seed=None)<br>
+&nbsp;<br>
+Generic&nbsp;wrapper&nbsp;for&nbsp;generating&nbsp;new&nbsp;decision&nbsp;actions&nbsp;or&nbsp;performance&nbsp;tableaux<br>
 with&nbsp;random&nbsp;evaluations&nbsp;generated&nbsp;with&nbsp;a&nbsp;given&nbsp;performance&nbsp;tableau&nbsp;model&nbsp;of&nbsp;type:<br>
 <a href="#RandomPerformanceTableau">RandomPerformanceTableau</a>,&nbsp;<a href="#RandomCBPerformanceTableau">RandomCBPerformanceTableau</a>,<br>
 or&nbsp;<a href="#Random3ObjectivesPerformanceTableau">Random3ObjectivesPerformanceTableau</a>.<br>
@@ -971,7 +962,9 @@ Data descriptors defined here:<br>
 <font color="#000000" face="helvetica, arial"><a name="RandomPerformanceTableau">class <strong>RandomPerformanceTableau</strong></a>(<a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Specialization&nbsp;of&nbsp;the&nbsp;generic&nbsp;:py:class:`perftabs.<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>`&nbsp;class&nbsp;for&nbsp;generating&nbsp;a&nbsp;temporary&nbsp;random&nbsp;performance&nbsp;tableau.<br>
+<td colspan=2><tt><a href="#RandomPerformanceTableau">RandomPerformanceTableau</a>(numberOfActions=13,&nbsp;actionNamePrefix='a',&nbsp;numberOfCriteria=7,&nbsp;weightDistribution='equisignificant',&nbsp;weightScale=None,&nbsp;IntegerWeights=True,&nbsp;commonScale=(0.0,&nbsp;100.0),&nbsp;commonThresholds=((2.5,&nbsp;0.0),&nbsp;(5.0,&nbsp;0.0),&nbsp;(80.0,&nbsp;0.0)),&nbsp;commonMode=('beta',&nbsp;None,&nbsp;(2,&nbsp;2)),&nbsp;valueDigits=2,&nbsp;missingDataProbability=0.025,&nbsp;BigData=False,&nbsp;seed=None,&nbsp;Debug=False)<br>
+&nbsp;<br>
+Specialization&nbsp;of&nbsp;the&nbsp;generic&nbsp;:py:class:`perftabs.<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>`&nbsp;class&nbsp;for&nbsp;generating&nbsp;a&nbsp;temporary&nbsp;random&nbsp;performance&nbsp;tableau.<br>
 &nbsp;<br>
 Parameters:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;numberOfActions&nbsp;:=&nbsp;nbr&nbsp;of&nbsp;decision&nbsp;actions.<br>
@@ -985,17 +978,16 @@ Parameters:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;weightScale&nbsp;:=&nbsp;[Min,Max]&nbsp;(default&nbsp;=[1,numberOfCriteria].<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;IntegerWeights&nbsp;:=&nbsp;True&nbsp;(default)&nbsp;|&nbsp;False&nbsp;(normalized&nbsp;to&nbsp;proportions&nbsp;of&nbsp;1.0).<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;commonScale&nbsp;:=&nbsp;[Min;Max];&nbsp;common&nbsp;performance&nbsp;measuring&nbsp;scales&nbsp;(default&nbsp;=&nbsp;[0;100])<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;commonThresholds&nbsp;:=&nbsp;[(q0,q1),(p0,p1),(v0,v1)];&nbsp;common&nbsp;indifference(q),&nbsp;preference&nbsp;(p)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;considerable&nbsp;performance&nbsp;difference&nbsp;discrimination&nbsp;thresholds.&nbsp;q0,&nbsp;p0&nbsp;and&nbsp;v0&nbsp;are<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expressed&nbsp;in&nbsp;percentige&nbsp;of&nbsp;the&nbsp;common&nbsp;scale&nbsp;amplitude:&nbsp;Max&nbsp;-&nbsp;Min.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;commonMode&nbsp;:=&nbsp;common&nbsp;random&nbsp;distribution&nbsp;of&nbsp;random&nbsp;performance&nbsp;measurements:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;commonThresholds&nbsp;:=&nbsp;[(q0,q1),(p0,p1),(v0,v1)];&nbsp;common&nbsp;indifference(q),&nbsp;preference&nbsp;(p)&nbsp;and&nbsp;considerable&nbsp;performance&nbsp;difference&nbsp;discrimination&nbsp;thresholds.&nbsp;q0,&nbsp;p0&nbsp;and&nbsp;v0&nbsp;are&nbsp;expressed&nbsp;in&nbsp;percentige&nbsp;of&nbsp;the&nbsp;common&nbsp;scale&nbsp;amplitude:&nbsp;Max&nbsp;-&nbsp;Min.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;commonMode&nbsp;:=&nbsp;common&nbsp;random&nbsp;distribution&nbsp;of&nbsp;random&nbsp;performance&nbsp;measurements&nbsp;(default&nbsp;=&nbsp;('beta',None,(2,2))&nbsp;):<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;('uniform',None,None),&nbsp;uniformly&nbsp;distributed&nbsp;between&nbsp;min&nbsp;and&nbsp;max&nbsp;values.&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;('normal',mu,sigma),&nbsp;truncated&nbsp;Gaussion&nbsp;distribution.&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;('triangular',mode,repartition),&nbsp;generalized&nbsp;triangular&nbsp;distribution&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;('beta',mod,(alpha,beta)),&nbsp;mode&nbsp;in&nbsp;]0,1[.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;valueDigits&nbsp;:=&nbsp;&lt;integer&gt;,&nbsp;precision&nbsp;of&nbsp;performance&nbsp;measurements<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2&nbsp;decimal&nbsp;digits&nbsp;by&nbsp;default).<br>
-&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;missingDataProbability&nbsp;:=&nbsp;0&nbsp;&lt;=&nbsp;x&nbsp;&lt;=&nbsp;1.0;&nbsp;probability&nbsp;of&nbsp;missing&nbsp;performance&nbsp;evaluation&nbsp;on&nbsp;a&nbsp;criterion&nbsp;for&nbsp;an&nbsp;alternative&nbsp;(default&nbsp;0.025).&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;<br>
 Code&nbsp;example:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;<a href="#RandomPerformanceTableau">RandomPerformanceTableau</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;<a href="#RandomPerformanceTableau">RandomPerformanceTableau</a>(numberOfActions=3,numberOfCriteria=1,seed=100)<br>
@@ -1203,14 +1195,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="RandomPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="RandomPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="RandomPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="RandomPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#RandomPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#RandomPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="RandomPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="RandomPerformanceTableau-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>:<br>
@@ -1227,7 +1217,9 @@ Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfT
 <font color="#000000" face="helvetica, arial"><a name="RandomRankPerformanceTableau">class <strong>RandomRankPerformanceTableau</strong></a>(<a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Specialization&nbsp;of&nbsp;the&nbsp;<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>&nbsp;class&nbsp;for&nbsp;generating&nbsp;a&nbsp;temporary<br>
+<td colspan=2><tt><a href="#RandomRankPerformanceTableau">RandomRankPerformanceTableau</a>(numberOfActions=13,&nbsp;numberOfCriteria=7,&nbsp;weightDistribution='equisignificant',&nbsp;weightScale=None,&nbsp;commonThresholds=None,&nbsp;IntegerWeights=True,&nbsp;BigData=False,&nbsp;seed=None,&nbsp;Debug=False)<br>
+&nbsp;<br>
+Specialization&nbsp;of&nbsp;the&nbsp;<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>&nbsp;class&nbsp;for&nbsp;generating&nbsp;a&nbsp;temporary<br>
 random&nbsp;performance&nbsp;tableau&nbsp;with&nbsp;multiple&nbsp;criteria&nbsp;ranked&nbsp;(without&nbsp;ties)<br>
 performances&nbsp;of&nbsp;a&nbsp;given&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions.<br>
 On&nbsp;each&nbsp;criterion,&nbsp;all&nbsp;decision&nbsp;actions&nbsp;are&nbsp;hence&nbsp;lineraly&nbsp;ordered.<br>
@@ -1470,14 +1462,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="RandomRankPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="RandomRankPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="RandomRankPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="RandomRankPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#RandomRankPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#RandomRankPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="RandomRankPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="RandomRankPerformanceTableau-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>:<br>

@@ -9,27 +9,15 @@
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>linearOrders</strong></big></big> (version 1.18)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/linearOrders.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/linearOrders.py</a></font></td></tr></table>
-    <p><tt>#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
-#&nbsp;Python&nbsp;implementation&nbsp;of&nbsp;linear&nbsp;orders<br>
-#&nbsp;Dependancy:&nbsp;digraphs&nbsp;1.589+<br>
-#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;1.18&nbsp;$<br>
-#&nbsp;Copyright&nbsp;(C)&nbsp;2011&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
-#<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
-#<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
-#<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.<br>
-#<br>
-#######################</tt></p>
+    <p><tt>Python&nbsp;implementation&nbsp;of&nbsp;linear&nbsp;orders<br>
+Dependancy:&nbsp;digraphs&nbsp;module<br>
+Copyright&nbsp;(C)&nbsp;2011-2019&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -76,7 +64,9 @@
 <font color="#000000" face="helvetica, arial"><a name="CopelandOrder">class <strong>CopelandOrder</strong></a>(<a href="linearOrders.html#LinearOrder">LinearOrder</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>instantiates&nbsp;the&nbsp;Copèeland&nbsp;Order&nbsp;from<br>
+<td colspan=2><tt><a href="#CopelandOrder">CopelandOrder</a>(other,&nbsp;coDual=False,&nbsp;Debug=False)<br>
+&nbsp;<br>
+instantiates&nbsp;the&nbsp;Copèeland&nbsp;Order&nbsp;from<br>
 a&nbsp;given&nbsp;bipolar-valued&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -159,7 +149,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Ubuntu&nbsp;Linux:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
@@ -280,11 +270,50 @@ robust&nbsp;absence&nbsp;arc&nbsp;densitiy.</tt></dd></dl>
 renders&nbsp;the&nbsp;four&nbsp;densitiy&nbsp;parameters:<br>
 arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;density,&nbsp;absence&nbsp;arc&nbsp;density.</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;in&nbsp;%&nbsp;of&nbsp;self<br>
-with&nbsp;the&nbsp;all&nbsp;median&nbsp;valued&nbsp;(indeterminate)&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="CopelandOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self, InPercents=False)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;of&nbsp;self<br>
+with&nbsp;the&nbsp;all&nbsp;median-valued&nbsp;indeterminate&nbsp;digraph&nbsp;of&nbsp;order&nbsp;n.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;average&nbsp;determination&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;the&nbsp;digraph.<br>
+&nbsp;<br>
+*determination*&nbsp;=&nbsp;sum_(x,y)&nbsp;{&nbsp;abs[&nbsp;r(xRy)&nbsp;-&nbsp;Med&nbsp;]&nbsp;}&nbsp;/&nbsp;n(n-1)<br>
+&nbsp;<br>
+If&nbsp;*InPercents*&nbsp;is&nbsp;True,&nbsp;returns&nbsp;the&nbsp;average&nbsp;determination&nbsp;in&nbsp;percentage&nbsp;of<br>
+(Max&nbsp;-&nbsp;Med)&nbsp;difference.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;BipolarOutrankingDigraph<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;Random3ObjectivesPerformanceTableau<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t,Normalized=True)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[-1.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#CopelandOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.3134920634920634920634920638<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#CopelandOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#CopelandOrder-recodeValuation">recodeValuation</a>(0,1)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#CopelandOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.1567460317460317460317460318<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#CopelandOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</tt></dd></dl>
+<dl><dt><a name="CopelandOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-computeGoodChoices"><strong>computeGoodChoices</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
 &nbsp;<br>
@@ -305,6 +334,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 ..&nbsp;note::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
+
+<dl><dt><a name="CopelandOrder-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
@@ -613,7 +645,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>,copy().</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>.copy().</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-domirred"><strong>domirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
@@ -701,12 +733,6 @@ the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="CopelandOrder-generateAbsPreKernels"><strong>generateAbsPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;absorbent&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-generateDomPreKernels"><strong>generateDomPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;dominant&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
-
-<dl><dt><a name="CopelandOrder-graphDetermination"><strong>graphDetermination</strong></a>(self, Normalized=True)</dt><dd><tt>Output:&nbsp;average&nbsp;normalized&nbsp;(by&nbsp;default)&nbsp;arc&nbsp;determination:<br>
-&nbsp;<br>
-averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
-&nbsp;<br>
-where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-htmlBestChoiceRecommendation"><strong>htmlBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, ContentCentered=True, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
 &nbsp;<br>
@@ -811,31 +837,6 @@ the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="CopelandOrder-notaneighbors"><strong>notaneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;not&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="CopelandOrder-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
-r-valued&nbsp;statement&nbsp;characteristics.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
-an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
-
-<dl><dt><a name="CopelandOrder-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
-Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**min**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
-in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omin&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
@@ -962,7 +963,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="CopelandOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, relation=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#CopelandOrder-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -1187,7 +1188,9 @@ Data descriptors inherited from <a href="digraphs.html#Digraph">digraphs.Digraph
 <font color="#000000" face="helvetica, arial"><a name="KemenyOrder">class <strong>KemenyOrder</strong></a>(<a href="linearOrders.html#LinearOrder">LinearOrder</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>instantiates&nbsp;the&nbsp;exact&nbsp;Kemeny&nbsp;Order&nbsp;from<br>
+<td colspan=2><tt><a href="#KemenyOrder">KemenyOrder</a>(other,&nbsp;orderLimit=7,&nbsp;Debug=False)<br>
+&nbsp;<br>
+instantiates&nbsp;the&nbsp;exact&nbsp;Kemeny&nbsp;Order&nbsp;from<br>
 a&nbsp;given&nbsp;bipolar-valued&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance&nbsp;of&nbsp;small&nbsp;order<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -1268,7 +1271,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Ubuntu&nbsp;Linux:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
@@ -1389,11 +1392,50 @@ robust&nbsp;absence&nbsp;arc&nbsp;densitiy.</tt></dd></dl>
 renders&nbsp;the&nbsp;four&nbsp;densitiy&nbsp;parameters:<br>
 arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;density,&nbsp;absence&nbsp;arc&nbsp;density.</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;in&nbsp;%&nbsp;of&nbsp;self<br>
-with&nbsp;the&nbsp;all&nbsp;median&nbsp;valued&nbsp;(indeterminate)&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="KemenyOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self, InPercents=False)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;of&nbsp;self<br>
+with&nbsp;the&nbsp;all&nbsp;median-valued&nbsp;indeterminate&nbsp;digraph&nbsp;of&nbsp;order&nbsp;n.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;average&nbsp;determination&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;the&nbsp;digraph.<br>
+&nbsp;<br>
+*determination*&nbsp;=&nbsp;sum_(x,y)&nbsp;{&nbsp;abs[&nbsp;r(xRy)&nbsp;-&nbsp;Med&nbsp;]&nbsp;}&nbsp;/&nbsp;n(n-1)<br>
+&nbsp;<br>
+If&nbsp;*InPercents*&nbsp;is&nbsp;True,&nbsp;returns&nbsp;the&nbsp;average&nbsp;determination&nbsp;in&nbsp;percentage&nbsp;of<br>
+(Max&nbsp;-&nbsp;Med)&nbsp;difference.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;BipolarOutrankingDigraph<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;Random3ObjectivesPerformanceTableau<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t,Normalized=True)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[-1.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#KemenyOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.3134920634920634920634920638<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#KemenyOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#KemenyOrder-recodeValuation">recodeValuation</a>(0,1)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#KemenyOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.1567460317460317460317460318<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#KemenyOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</tt></dd></dl>
+<dl><dt><a name="KemenyOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-computeGoodChoices"><strong>computeGoodChoices</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
 &nbsp;<br>
@@ -1414,6 +1456,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 ..&nbsp;note::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
+
+<dl><dt><a name="KemenyOrder-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
@@ -1722,7 +1767,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>,copy().</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>.copy().</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-domirred"><strong>domirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
@@ -1810,12 +1855,6 @@ the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="KemenyOrder-generateAbsPreKernels"><strong>generateAbsPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;absorbent&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-generateDomPreKernels"><strong>generateDomPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;dominant&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
-
-<dl><dt><a name="KemenyOrder-graphDetermination"><strong>graphDetermination</strong></a>(self, Normalized=True)</dt><dd><tt>Output:&nbsp;average&nbsp;normalized&nbsp;(by&nbsp;default)&nbsp;arc&nbsp;determination:<br>
-&nbsp;<br>
-averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
-&nbsp;<br>
-where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-htmlBestChoiceRecommendation"><strong>htmlBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, ContentCentered=True, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
 &nbsp;<br>
@@ -1920,31 +1959,6 @@ the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="KemenyOrder-notaneighbors"><strong>notaneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;not&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="KemenyOrder-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
-r-valued&nbsp;statement&nbsp;characteristics.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
-an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
-
-<dl><dt><a name="KemenyOrder-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
-Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**min**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
-in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omin&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
@@ -2071,7 +2085,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="KemenyOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, relation=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#KemenyOrder-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -2296,7 +2310,9 @@ Data descriptors inherited from <a href="digraphs.html#Digraph">digraphs.Digraph
 <font color="#000000" face="helvetica, arial"><a name="KohlerOrder">class <strong>KohlerOrder</strong></a>(<a href="linearOrders.html#LinearOrder">LinearOrder</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>instantiates&nbsp;the&nbsp;Kohler&nbsp;Order&nbsp;from<br>
+<td colspan=2><tt><a href="#KohlerOrder">KohlerOrder</a>(other,&nbsp;coDual=False,&nbsp;Debug=False)<br>
+&nbsp;<br>
+instantiates&nbsp;the&nbsp;Kohler&nbsp;Order&nbsp;from<br>
 a&nbsp;given&nbsp;bipolar-valued&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -2377,7 +2393,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Ubuntu&nbsp;Linux:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
@@ -2498,11 +2514,50 @@ robust&nbsp;absence&nbsp;arc&nbsp;densitiy.</tt></dd></dl>
 renders&nbsp;the&nbsp;four&nbsp;densitiy&nbsp;parameters:<br>
 arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;density,&nbsp;absence&nbsp;arc&nbsp;density.</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;in&nbsp;%&nbsp;of&nbsp;self<br>
-with&nbsp;the&nbsp;all&nbsp;median&nbsp;valued&nbsp;(indeterminate)&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="KohlerOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self, InPercents=False)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;of&nbsp;self<br>
+with&nbsp;the&nbsp;all&nbsp;median-valued&nbsp;indeterminate&nbsp;digraph&nbsp;of&nbsp;order&nbsp;n.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;average&nbsp;determination&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;the&nbsp;digraph.<br>
+&nbsp;<br>
+*determination*&nbsp;=&nbsp;sum_(x,y)&nbsp;{&nbsp;abs[&nbsp;r(xRy)&nbsp;-&nbsp;Med&nbsp;]&nbsp;}&nbsp;/&nbsp;n(n-1)<br>
+&nbsp;<br>
+If&nbsp;*InPercents*&nbsp;is&nbsp;True,&nbsp;returns&nbsp;the&nbsp;average&nbsp;determination&nbsp;in&nbsp;percentage&nbsp;of<br>
+(Max&nbsp;-&nbsp;Med)&nbsp;difference.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;BipolarOutrankingDigraph<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;Random3ObjectivesPerformanceTableau<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t,Normalized=True)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[-1.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#KohlerOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.3134920634920634920634920638<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#KohlerOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#KohlerOrder-recodeValuation">recodeValuation</a>(0,1)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#KohlerOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.1567460317460317460317460318<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#KohlerOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</tt></dd></dl>
+<dl><dt><a name="KohlerOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-computeGoodChoices"><strong>computeGoodChoices</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
 &nbsp;<br>
@@ -2523,6 +2578,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 ..&nbsp;note::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
+
+<dl><dt><a name="KohlerOrder-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
@@ -2831,7 +2889,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>,copy().</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>.copy().</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-domirred"><strong>domirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
@@ -2919,12 +2977,6 @@ the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="KohlerOrder-generateAbsPreKernels"><strong>generateAbsPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;absorbent&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-generateDomPreKernels"><strong>generateDomPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;dominant&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
-
-<dl><dt><a name="KohlerOrder-graphDetermination"><strong>graphDetermination</strong></a>(self, Normalized=True)</dt><dd><tt>Output:&nbsp;average&nbsp;normalized&nbsp;(by&nbsp;default)&nbsp;arc&nbsp;determination:<br>
-&nbsp;<br>
-averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
-&nbsp;<br>
-where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-htmlBestChoiceRecommendation"><strong>htmlBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, ContentCentered=True, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
 &nbsp;<br>
@@ -3029,31 +3081,6 @@ the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="KohlerOrder-notaneighbors"><strong>notaneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;not&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="KohlerOrder-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
-r-valued&nbsp;statement&nbsp;characteristics.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
-an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
-
-<dl><dt><a name="KohlerOrder-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
-Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**min**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
-in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omin&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
@@ -3180,7 +3207,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="KohlerOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, relation=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#KohlerOrder-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -3405,7 +3432,9 @@ Data descriptors inherited from <a href="digraphs.html#Digraph">digraphs.Digraph
 <font color="#000000" face="helvetica, arial"><a name="LinearOrder">class <strong>LinearOrder</strong></a>(<a href="digraphs.html#Digraph">digraphs.Digraph</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>abstract&nbsp;class&nbsp;for&nbsp;digraphs&nbsp;which&nbsp;represent<br>
+<td colspan=2><tt><a href="#LinearOrder">LinearOrder</a>(file=None,&nbsp;order=7)<br>
+&nbsp;<br>
+abstract&nbsp;class&nbsp;for&nbsp;digraphs&nbsp;which&nbsp;represent<br>
 linear&nbsp;orders.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -3481,7 +3510,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Ubuntu&nbsp;Linux:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
@@ -3602,11 +3631,50 @@ robust&nbsp;absence&nbsp;arc&nbsp;densitiy.</tt></dd></dl>
 renders&nbsp;the&nbsp;four&nbsp;densitiy&nbsp;parameters:<br>
 arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;density,&nbsp;absence&nbsp;arc&nbsp;density.</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;in&nbsp;%&nbsp;of&nbsp;self<br>
-with&nbsp;the&nbsp;all&nbsp;median&nbsp;valued&nbsp;(indeterminate)&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="LinearOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self, InPercents=False)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;of&nbsp;self<br>
+with&nbsp;the&nbsp;all&nbsp;median-valued&nbsp;indeterminate&nbsp;digraph&nbsp;of&nbsp;order&nbsp;n.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;average&nbsp;determination&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;the&nbsp;digraph.<br>
+&nbsp;<br>
+*determination*&nbsp;=&nbsp;sum_(x,y)&nbsp;{&nbsp;abs[&nbsp;r(xRy)&nbsp;-&nbsp;Med&nbsp;]&nbsp;}&nbsp;/&nbsp;n(n-1)<br>
+&nbsp;<br>
+If&nbsp;*InPercents*&nbsp;is&nbsp;True,&nbsp;returns&nbsp;the&nbsp;average&nbsp;determination&nbsp;in&nbsp;percentage&nbsp;of<br>
+(Max&nbsp;-&nbsp;Med)&nbsp;difference.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;BipolarOutrankingDigraph<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;Random3ObjectivesPerformanceTableau<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t,Normalized=True)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[-1.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#LinearOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.3134920634920634920634920638<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#LinearOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#LinearOrder-recodeValuation">recodeValuation</a>(0,1)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#LinearOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.1567460317460317460317460318<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#LinearOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</tt></dd></dl>
+<dl><dt><a name="LinearOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-computeGoodChoices"><strong>computeGoodChoices</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
 &nbsp;<br>
@@ -3627,6 +3695,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 ..&nbsp;note::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
+
+<dl><dt><a name="LinearOrder-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
@@ -3935,7 +4006,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>,copy().</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>.copy().</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-domirred"><strong>domirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
@@ -4023,12 +4094,6 @@ the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="LinearOrder-generateAbsPreKernels"><strong>generateAbsPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;absorbent&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-generateDomPreKernels"><strong>generateDomPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;dominant&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
-
-<dl><dt><a name="LinearOrder-graphDetermination"><strong>graphDetermination</strong></a>(self, Normalized=True)</dt><dd><tt>Output:&nbsp;average&nbsp;normalized&nbsp;(by&nbsp;default)&nbsp;arc&nbsp;determination:<br>
-&nbsp;<br>
-averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
-&nbsp;<br>
-where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-htmlBestChoiceRecommendation"><strong>htmlBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, ContentCentered=True, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
 &nbsp;<br>
@@ -4133,31 +4198,6 @@ the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="LinearOrder-notaneighbors"><strong>notaneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;not&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="LinearOrder-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
-r-valued&nbsp;statement&nbsp;characteristics.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
-an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
-
-<dl><dt><a name="LinearOrder-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
-Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**min**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
-in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omin&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
@@ -4284,7 +4324,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="LinearOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, relation=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#LinearOrder-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -4509,7 +4549,9 @@ Data descriptors inherited from <a href="digraphs.html#Digraph">digraphs.Digraph
 <font color="#000000" face="helvetica, arial"><a name="NetFlowsOrder">class <strong>NetFlowsOrder</strong></a>(<a href="linearOrders.html#LinearOrder">LinearOrder</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>instantiates&nbsp;the&nbsp;net&nbsp;flows&nbsp;Order&nbsp;from<br>
+<td colspan=2><tt><a href="#NetFlowsOrder">NetFlowsOrder</a>(other,&nbsp;coDual=False,&nbsp;Debug=False)<br>
+&nbsp;<br>
+instantiates&nbsp;the&nbsp;net&nbsp;flows&nbsp;Order&nbsp;from<br>
 a&nbsp;given&nbsp;bipolar-valued&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -4592,7 +4634,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Ubuntu&nbsp;Linux:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
@@ -4713,11 +4755,50 @@ robust&nbsp;absence&nbsp;arc&nbsp;densitiy.</tt></dd></dl>
 renders&nbsp;the&nbsp;four&nbsp;densitiy&nbsp;parameters:<br>
 arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;density,&nbsp;absence&nbsp;arc&nbsp;density.</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;in&nbsp;%&nbsp;of&nbsp;self<br>
-with&nbsp;the&nbsp;all&nbsp;median&nbsp;valued&nbsp;(indeterminate)&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="NetFlowsOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self, InPercents=False)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;of&nbsp;self<br>
+with&nbsp;the&nbsp;all&nbsp;median-valued&nbsp;indeterminate&nbsp;digraph&nbsp;of&nbsp;order&nbsp;n.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;average&nbsp;determination&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;the&nbsp;digraph.<br>
+&nbsp;<br>
+*determination*&nbsp;=&nbsp;sum_(x,y)&nbsp;{&nbsp;abs[&nbsp;r(xRy)&nbsp;-&nbsp;Med&nbsp;]&nbsp;}&nbsp;/&nbsp;n(n-1)<br>
+&nbsp;<br>
+If&nbsp;*InPercents*&nbsp;is&nbsp;True,&nbsp;returns&nbsp;the&nbsp;average&nbsp;determination&nbsp;in&nbsp;percentage&nbsp;of<br>
+(Max&nbsp;-&nbsp;Med)&nbsp;difference.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;BipolarOutrankingDigraph<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;Random3ObjectivesPerformanceTableau<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t,Normalized=True)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[-1.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#NetFlowsOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.3134920634920634920634920638<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#NetFlowsOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#NetFlowsOrder-recodeValuation">recodeValuation</a>(0,1)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#NetFlowsOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.1567460317460317460317460318<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#NetFlowsOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</tt></dd></dl>
+<dl><dt><a name="NetFlowsOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-computeGoodChoices"><strong>computeGoodChoices</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
 &nbsp;<br>
@@ -4738,6 +4819,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 ..&nbsp;note::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
+
+<dl><dt><a name="NetFlowsOrder-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
@@ -5046,7 +5130,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>,copy().</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>.copy().</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-domirred"><strong>domirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
@@ -5134,12 +5218,6 @@ the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="NetFlowsOrder-generateAbsPreKernels"><strong>generateAbsPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;absorbent&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-generateDomPreKernels"><strong>generateDomPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;dominant&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
-
-<dl><dt><a name="NetFlowsOrder-graphDetermination"><strong>graphDetermination</strong></a>(self, Normalized=True)</dt><dd><tt>Output:&nbsp;average&nbsp;normalized&nbsp;(by&nbsp;default)&nbsp;arc&nbsp;determination:<br>
-&nbsp;<br>
-averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
-&nbsp;<br>
-where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-htmlBestChoiceRecommendation"><strong>htmlBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, ContentCentered=True, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
 &nbsp;<br>
@@ -5244,31 +5322,6 @@ the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="NetFlowsOrder-notaneighbors"><strong>notaneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;not&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="NetFlowsOrder-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
-r-valued&nbsp;statement&nbsp;characteristics.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
-an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
-
-<dl><dt><a name="NetFlowsOrder-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
-Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**min**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
-in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omin&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
@@ -5395,7 +5448,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="NetFlowsOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, relation=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#NetFlowsOrder-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -5620,7 +5673,9 @@ Data descriptors inherited from <a href="digraphs.html#Digraph">digraphs.Digraph
 <font color="#000000" face="helvetica, arial"><a name="PrincipalOrder">class <strong>PrincipalOrder</strong></a>(<a href="linearOrders.html#LinearOrder">LinearOrder</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>instantiates&nbsp;the&nbsp;order&nbsp;from&nbsp;the&nbsp;scores&nbsp;obtained&nbsp;by&nbsp;the&nbsp;first<br>
+<td colspan=2><tt><a href="#PrincipalOrder">PrincipalOrder</a>(other,&nbsp;Colwise=True,&nbsp;imageType=None,&nbsp;plotFileName='principalOrdering',&nbsp;tempDir=None,&nbsp;Debug=False)<br>
+&nbsp;<br>
+instantiates&nbsp;the&nbsp;order&nbsp;from&nbsp;the&nbsp;scores&nbsp;obtained&nbsp;by&nbsp;the&nbsp;first<br>
 princiapl&nbsp;axis&nbsp;of&nbsp;the&nbsp;eigen&nbsp;deomposition&nbsp;of&nbsp;the&nbsp;covariance&nbsp;of&nbsp;the<br>
 outdegrees&nbsp;of&nbsp;the&nbsp;valued&nbsp;digraph&nbsp;'other'.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
@@ -5709,7 +5764,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Ubuntu&nbsp;Linux:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
@@ -5830,11 +5885,50 @@ robust&nbsp;absence&nbsp;arc&nbsp;densitiy.</tt></dd></dl>
 renders&nbsp;the&nbsp;four&nbsp;densitiy&nbsp;parameters:<br>
 arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;density,&nbsp;absence&nbsp;arc&nbsp;density.</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;in&nbsp;%&nbsp;of&nbsp;self<br>
-with&nbsp;the&nbsp;all&nbsp;median&nbsp;valued&nbsp;(indeterminate)&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="PrincipalOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self, InPercents=False)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;of&nbsp;self<br>
+with&nbsp;the&nbsp;all&nbsp;median-valued&nbsp;indeterminate&nbsp;digraph&nbsp;of&nbsp;order&nbsp;n.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;average&nbsp;determination&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;the&nbsp;digraph.<br>
+&nbsp;<br>
+*determination*&nbsp;=&nbsp;sum_(x,y)&nbsp;{&nbsp;abs[&nbsp;r(xRy)&nbsp;-&nbsp;Med&nbsp;]&nbsp;}&nbsp;/&nbsp;n(n-1)<br>
+&nbsp;<br>
+If&nbsp;*InPercents*&nbsp;is&nbsp;True,&nbsp;returns&nbsp;the&nbsp;average&nbsp;determination&nbsp;in&nbsp;percentage&nbsp;of<br>
+(Max&nbsp;-&nbsp;Med)&nbsp;difference.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;BipolarOutrankingDigraph<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;Random3ObjectivesPerformanceTableau<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t,Normalized=True)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[-1.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#PrincipalOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.3134920634920634920634920638<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#PrincipalOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#PrincipalOrder-recodeValuation">recodeValuation</a>(0,1)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#PrincipalOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.1567460317460317460317460318<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#PrincipalOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</tt></dd></dl>
+<dl><dt><a name="PrincipalOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-computeGoodChoices"><strong>computeGoodChoices</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
 &nbsp;<br>
@@ -5855,6 +5949,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 ..&nbsp;note::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
+
+<dl><dt><a name="PrincipalOrder-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
@@ -6163,7 +6260,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>,copy().</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>.copy().</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-domirred"><strong>domirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
@@ -6251,12 +6348,6 @@ the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="PrincipalOrder-generateAbsPreKernels"><strong>generateAbsPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;absorbent&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-generateDomPreKernels"><strong>generateDomPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;dominant&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
-
-<dl><dt><a name="PrincipalOrder-graphDetermination"><strong>graphDetermination</strong></a>(self, Normalized=True)</dt><dd><tt>Output:&nbsp;average&nbsp;normalized&nbsp;(by&nbsp;default)&nbsp;arc&nbsp;determination:<br>
-&nbsp;<br>
-averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
-&nbsp;<br>
-where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-htmlBestChoiceRecommendation"><strong>htmlBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, ContentCentered=True, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
 &nbsp;<br>
@@ -6361,31 +6452,6 @@ the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="PrincipalOrder-notaneighbors"><strong>notaneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;not&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="PrincipalOrder-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
-r-valued&nbsp;statement&nbsp;characteristics.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
-an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
-
-<dl><dt><a name="PrincipalOrder-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
-Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**min**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
-in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omin&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
@@ -6512,7 +6578,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="PrincipalOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, relation=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#PrincipalOrder-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -6737,7 +6803,9 @@ Data descriptors inherited from <a href="digraphs.html#Digraph">digraphs.Digraph
 <font color="#000000" face="helvetica, arial"><a name="RandomLinearOrder">class <strong>RandomLinearOrder</strong></a>(<a href="linearOrders.html#LinearOrder">LinearOrder</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Instantiates&nbsp;random&nbsp;linear&nbsp;orders<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt><a href="#RandomLinearOrder">RandomLinearOrder</a>(numberOfActions=10,&nbsp;Debug=False,&nbsp;OutrankingModel=False,&nbsp;Valued=False,&nbsp;seed=None)<br>
+&nbsp;<br>
+Instantiates&nbsp;random&nbsp;linear&nbsp;orders<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="linearOrders.html#RandomLinearOrder">RandomLinearOrder</a></dd>
@@ -6815,7 +6883,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Ubuntu&nbsp;Linux:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
@@ -6936,11 +7004,50 @@ robust&nbsp;absence&nbsp;arc&nbsp;densitiy.</tt></dd></dl>
 renders&nbsp;the&nbsp;four&nbsp;densitiy&nbsp;parameters:<br>
 arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;density,&nbsp;absence&nbsp;arc&nbsp;density.</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;in&nbsp;%&nbsp;of&nbsp;self<br>
-with&nbsp;the&nbsp;all&nbsp;median&nbsp;valued&nbsp;(indeterminate)&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RandomLinearOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self, InPercents=False)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;of&nbsp;self<br>
+with&nbsp;the&nbsp;all&nbsp;median-valued&nbsp;indeterminate&nbsp;digraph&nbsp;of&nbsp;order&nbsp;n.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;average&nbsp;determination&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;the&nbsp;digraph.<br>
+&nbsp;<br>
+*determination*&nbsp;=&nbsp;sum_(x,y)&nbsp;{&nbsp;abs[&nbsp;r(xRy)&nbsp;-&nbsp;Med&nbsp;]&nbsp;}&nbsp;/&nbsp;n(n-1)<br>
+&nbsp;<br>
+If&nbsp;*InPercents*&nbsp;is&nbsp;True,&nbsp;returns&nbsp;the&nbsp;average&nbsp;determination&nbsp;in&nbsp;percentage&nbsp;of<br>
+(Max&nbsp;-&nbsp;Med)&nbsp;difference.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;BipolarOutrankingDigraph<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;Random3ObjectivesPerformanceTableau<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t,Normalized=True)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[-1.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#RandomLinearOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.3134920634920634920634920638<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#RandomLinearOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#RandomLinearOrder-recodeValuation">recodeValuation</a>(0,1)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#RandomLinearOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.1567460317460317460317460318<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#RandomLinearOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</tt></dd></dl>
+<dl><dt><a name="RandomLinearOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-computeGoodChoices"><strong>computeGoodChoices</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
 &nbsp;<br>
@@ -6961,6 +7068,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 ..&nbsp;note::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
+
+<dl><dt><a name="RandomLinearOrder-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
@@ -7269,7 +7379,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>,copy().</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>.copy().</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-domirred"><strong>domirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
@@ -7357,12 +7467,6 @@ the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="RandomLinearOrder-generateAbsPreKernels"><strong>generateAbsPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;absorbent&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-generateDomPreKernels"><strong>generateDomPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;dominant&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
-
-<dl><dt><a name="RandomLinearOrder-graphDetermination"><strong>graphDetermination</strong></a>(self, Normalized=True)</dt><dd><tt>Output:&nbsp;average&nbsp;normalized&nbsp;(by&nbsp;default)&nbsp;arc&nbsp;determination:<br>
-&nbsp;<br>
-averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
-&nbsp;<br>
-where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-htmlBestChoiceRecommendation"><strong>htmlBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, ContentCentered=True, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
 &nbsp;<br>
@@ -7467,31 +7571,6 @@ the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="RandomLinearOrder-notaneighbors"><strong>notaneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;not&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="RandomLinearOrder-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
-r-valued&nbsp;statement&nbsp;characteristics.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
-an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
-
-<dl><dt><a name="RandomLinearOrder-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
-Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**min**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
-in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omin&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
@@ -7618,7 +7697,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="RandomLinearOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, relation=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#RandomLinearOrder-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
@@ -7843,7 +7922,9 @@ Data descriptors inherited from <a href="digraphs.html#Digraph">digraphs.Digraph
 <font color="#000000" face="helvetica, arial"><a name="RankedPairsOrder">class <strong>RankedPairsOrder</strong></a>(<a href="linearOrders.html#LinearOrder">LinearOrder</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>instantiates&nbsp;the&nbsp;Extended&nbsp;Prudent&nbsp;Ranked&nbsp;Pairs&nbsp;Order&nbsp;from<br>
+<td colspan=2><tt><a href="#RankedPairsOrder">RankedPairsOrder</a>(other,&nbsp;coDual=False,&nbsp;Leximin=False,&nbsp;Cpp=False,&nbsp;isValued=False,&nbsp;isExtendedPrudent=False,&nbsp;Debug=False)<br>
+&nbsp;<br>
+instantiates&nbsp;the&nbsp;Extended&nbsp;Prudent&nbsp;Ranked&nbsp;Pairs&nbsp;Order&nbsp;from<br>
 a&nbsp;given&nbsp;bipolar-valued&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -7925,7 +8006,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Ubuntu&nbsp;Linux:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
@@ -8046,11 +8127,50 @@ robust&nbsp;absence&nbsp;arc&nbsp;densitiy.</tt></dd></dl>
 renders&nbsp;the&nbsp;four&nbsp;densitiy&nbsp;parameters:<br>
 arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;density,&nbsp;absence&nbsp;arc&nbsp;density.</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;in&nbsp;%&nbsp;of&nbsp;self<br>
-with&nbsp;the&nbsp;all&nbsp;median&nbsp;valued&nbsp;(indeterminate)&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RankedPairsOrder-computeDeterminateness"><strong>computeDeterminateness</strong></a>(self, InPercents=False)</dt><dd><tt>Computes&nbsp;the&nbsp;Kendalll&nbsp;distance&nbsp;of&nbsp;self<br>
+with&nbsp;the&nbsp;all&nbsp;median-valued&nbsp;indeterminate&nbsp;digraph&nbsp;of&nbsp;order&nbsp;n.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;average&nbsp;determination&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;the&nbsp;digraph.<br>
+&nbsp;<br>
+*determination*&nbsp;=&nbsp;sum_(x,y)&nbsp;{&nbsp;abs[&nbsp;r(xRy)&nbsp;-&nbsp;Med&nbsp;]&nbsp;}&nbsp;/&nbsp;n(n-1)<br>
+&nbsp;<br>
+If&nbsp;*InPercents*&nbsp;is&nbsp;True,&nbsp;returns&nbsp;the&nbsp;average&nbsp;determination&nbsp;in&nbsp;percentage&nbsp;of<br>
+(Max&nbsp;-&nbsp;Med)&nbsp;difference.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;BipolarOutrankingDigraph<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;Random3ObjectivesPerformanceTableau<br>
+&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)<br>
+&gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t,Normalized=True)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[-1.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#RankedPairsOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.3134920634920634920634920638<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#RankedPairsOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#RankedPairsOrder-recodeValuation">recodeValuation</a>(0,1)<br>
+&gt;&gt;&gt;&nbsp;g<br>
+*-------&nbsp;Object&nbsp;instance&nbsp;description&nbsp;------*<br>
+Instance&nbsp;class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;BipolarOutrankingDigraph<br>
+Instance&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;rel_random3ObjectivesPerfTab<br>
+#&nbsp;Actions&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+#&nbsp;Criteria&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;7<br>
+Size&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;27<br>
+Determinateness&nbsp;(%)&nbsp;:&nbsp;65.67<br>
+Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0.00;1.00]<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#RankedPairsOrder-computeDeterminateness">computeDeterminateness</a>())<br>
+0.1567460317460317460317460318<br>
+&gt;&gt;&gt;&nbsp;print(g.<a href="#RankedPairsOrder-computeDeterminateness">computeDeterminateness</a>(InPercents=True))<br>
+65.67460317460317460317460320</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</tt></dd></dl>
+<dl><dt><a name="RankedPairsOrder-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-computeGoodChoices"><strong>computeGoodChoices</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
 &nbsp;<br>
@@ -8071,6 +8191,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 ..&nbsp;note::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
+
+<dl><dt><a name="RankedPairsOrder-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
@@ -8379,7 +8502,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>,copy().</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>.copy().</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-domirred"><strong>domirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
@@ -8467,12 +8590,6 @@ the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="RankedPairsOrder-generateAbsPreKernels"><strong>generateAbsPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;absorbent&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-generateDomPreKernels"><strong>generateDomPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;dominant&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
-
-<dl><dt><a name="RankedPairsOrder-graphDetermination"><strong>graphDetermination</strong></a>(self, Normalized=True)</dt><dd><tt>Output:&nbsp;average&nbsp;normalized&nbsp;(by&nbsp;default)&nbsp;arc&nbsp;determination:<br>
-&nbsp;<br>
-averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
-&nbsp;<br>
-where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-htmlBestChoiceRecommendation"><strong>htmlBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, ContentCentered=True, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
 &nbsp;<br>
@@ -8577,31 +8694,6 @@ the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="RankedPairsOrder-notaneighbors"><strong>notaneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;not&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="RankedPairsOrder-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
-r-valued&nbsp;statement&nbsp;characteristics.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
-an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
-
-<dl><dt><a name="RankedPairsOrder-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
-Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**min**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
-in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omin&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
@@ -8728,7 +8820,7 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
+<dl><dt><a name="RankedPairsOrder-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, relation=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#RankedPairsOrder-exportD3">exportD3</a>()&nbsp;function.<br>
 For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>

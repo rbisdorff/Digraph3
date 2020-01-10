@@ -343,7 +343,7 @@ class Graph(object):
             Comments=True
         #self.visitedChordlessPathsNew = []
         self._degreeLabelling()
-        triplets,cycles3 = self._triplets(Comments=Comments)
+        triplets,cycles3 = self._triplets(Comments=Debug)
         if Comments:
             print('# of initial triplets:',len(triplets))
             print('# of 3-cycles        :',len(cycles3))
@@ -584,21 +584,23 @@ class Graph(object):
         vertices = set([x for x in self.vertices])
         self.cliques = [m[0] for m in dualSelf.generateIndependent(dualSelf._singletons()) if m[0] == m[2]]
         t1 = time.time()
-        if Comments:
-            n = len(vertices)
-            v = [0 for i in range(n+1)] 
-            cliqueList = [(len(clique),clique) for clique in self.cliques]
-            cliqueList.sort()
-            for clq in cliqueList:  # clq = (len(clique),clique)
-                clique = list(clq[1])
-                clique.sort()
-                print(clique)
-                v[clq[0]] += 1
-        
+        n = len(vertices)
+        v = [0 for i in range(n+1)] 
+        cliqueList = [(len(clique),clique) for clique in self.cliques]
+        cliqueList.sort()
+        for clq in cliqueList:  # clq = (len(clique),clique)
+            clique = list(clq[1])
+            clique.sort()
+            print(clique)
+            v[clq[0]] += 1
+            cliqueNumber = clq[0]
+        self.cliqueNumber= cliqueNumber
+        if Comments:  
             print('number of solutions: ', len(self.cliques))
             print('cardinality distribution')
             print('card.: ', list(range(n+1)))
             print('freq.: ', v)
+            print('clique Number: ', cliqueNumber)
             print('execution time: %.5f sec.' % (t1-t0))
             print('Results in self.cliques')
 
@@ -681,20 +683,24 @@ class Graph(object):
         vertices = set([x for x in self.vertices])
         self.misset = [m[0] for m in self.generateIndependent(self._singletons()) if m[0] == m[2]]
         t1 = time.time()
+        n = len(vertices)
+        v = [0 for i in range(n+1)] 
+        misList = [(len(mis),mis) for mis in self.misset]
+        misList.sort()
+        #print(misList)
+        for m in misList: # m = (len(mis),mis))
+            mis = list(m[1])
+            mis.sort()
+            print(mis)
+            v[m[0]] += 1
+            stabilityNumber = m[0]
+        self.stabilityNumber = stabilityNumber
         if Comments:
-            n = len(vertices)
-            v = [0 for i in range(n+1)] 
-            misList = [(len(mis),mis) for mis in self.misset]
-            misList.sort()
-            for m in misList: # m = (len(mis),mis))
-                mis = list(m[1])
-                mis.sort()
-                print(mis)
-                v[m[0]] += 1
             print('number of solutions: ', len(misList))
             print('cardinality distribution')
             print('card.: ', list(range(n+1)))
             print('freq.: ', v)
+            print('stability number : ', stabilityNumber)
             print('execution time: %.5f sec.' % (t1-t0))
             print('Results in self.misset')
 
@@ -859,7 +865,7 @@ class Graph(object):
         ...     print(og)
         ...     print('Transitivity degree: %.3f' % og.transitivityDegree)
         *------- Digraph instance description ------*
-        Instance class   : WeakOrder
+        Instance class   : TransitiveDigraph
         Instance name    : trans_oriented_randomGraph
         Digraph Order      : 6
         Digraph Size       : 7
@@ -874,7 +880,7 @@ class Graph(object):
         ...     print(odg)
         ...     print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
         *------- Digraph instance description ------*
-        Instance class   : WeakOrder
+        Instance class   : TransitiveOrder
         Instance name    : trans_oriented_dual_randomGraph
         Digraph Order      : 6
         Digraph Size       : 8
@@ -885,7 +891,7 @@ class Graph(object):
         Dual transitivity degree: 1.000
         """
         from digraphs import EmptyDigraph
-        from weakOrders import WeakOrder
+        from transitiveDigraphs import TransitiveDigraph
         from copy import deepcopy
 
         if not self.isComparabilityGraph():
@@ -895,7 +901,7 @@ class Graph(object):
                 for arc in self.edgeOrientations:
                     print(arc, self.edgeOrientations[arc])
             g = EmptyDigraph(order=self.order)
-            g.__class__ = WeakOrder
+            g.__class__ = TransitiveDigraph
             g.name = 'trans_oriented_'+self.name
             g.actions = deepcopy(self.vertices)
             g.valuationdomain = deepcopy(self.valuationDomain)
@@ -987,12 +993,75 @@ class Graph(object):
         self.size = size
         return size
 
+    def breadthFirstSearch(self,s,alphabeticOrder=True,Warnings=True,Debug=False):
+        """
+        Breadth first search through a graph in lexicographical order
+        of the vertex keys.
+
+        Renders a list of vertice keys in
+        increasing distance from the origin *s*. Ties in the distances
+        are resolved by alphabetic ordering of the vertice keys.
+
+        A warning is issued when the graph is not connected and the resulting
+        search does not cover the whole set of graph vertices. 
+
+        Source: Cormen, Leiserson, Rivest & Stein, *Introduction to Algorithms* 2d Ed., MIT Press 2001.
+        """
+        vertices = self.vertices
+        components = self.computeComponents()
+        if Debug:
+            print(components)
+        for comp in components:
+            if s in comp:
+                verticesKeys = [x for x in comp]
+                if alphabeticOrder:
+                    verticesKeys.sort()
+                nv = len(vertices)
+                verticesKeys.remove(s)
+                color = {}
+                bfsDepth = {}
+                parent = {}
+                for x in verticesKeys:
+                    color[x] = 0
+                    bfsDepth[x] = nv
+                    parent[x] = None
+                color[s] = 1
+                bfsDepth[s] = 0
+                parent[s] = None
+                if Debug:
+                    print(color,bfsDepth,parent)
+                F = [s]
+                while F != []:
+                    u = F.pop()
+                    F.append(u)
+                    for v in self.gamma[u]:
+                        if color[v] == 0:
+                            color[v] = 1
+                            bfsDepth[v] = bfsDepth[u] + 1
+                            parent[v] = u
+                            F.append(v)
+                        if Debug:
+                            print('u,v,F',u,v,F)
+                    F.remove(u)
+                    color[u] = 2
+                if Debug:
+                    print(color,bfsDepth,parent)
+                bfs = [(bfsDepth[v],v) for v in comp]
+                bfs.sort()
+                self.bfs = [x[1] for x in bfs]
+                self.bfsDepth = bfsDepth
+                return self.bfs
+            else:
+                if Warnings:
+                    print('Warning: graph %s is not connected!' % self.name)
+                    print('Not with %s connected vertices: %s' % (s,str(comp)) )
+                                
     def depthFirstSearch(self,Debug=False):
         """
         Depth first search through a graph in lexicographical order
         of the vertex keys.
         """
-        def visitVertex(self, x, Debug = False):
+        def _visitVertex(self, x, Debug = False):
             """
             Visits all followers of vertex x.
             """
@@ -1009,18 +1078,21 @@ class Graph(object):
             for y in nextVertices:
                 if self.vertices[y]['color'] == 0:
                     self.date += 1
-                    visitVertex(self,y, Debug = Debug)
+                    _visitVertex(self,y, Debug = Debug)
                     if self.vertices[x]['color'] == 1:
                         self._dfsx.append(x)
             self.vertices[x]['color'] = 2
             self.vertices[x]['endDate'] = self.date
             self.date += 1
 
-        def visitAllVertices(self, Debug=False):
+        def _visitAllVertices(self, Debug=False):
             """
             Mark the starting date for all vertices
             and controls the progress of the search with vertices colors:
             White (0), Grey (1), Black (2)
+
+            Stores the depth first search path in the *self.dfs* attribute
+            and returns it.
             """
             self.dfs = []
             for x in self.vertices:
@@ -1033,14 +1105,14 @@ class Graph(object):
                 if self.vertices[x]['color'] == 0:
                     if Debug:
                         print('==>> Starting from %s ' % x)
-                    visitVertex(self, x, Debug = Debug)
+                    _visitVertex(self, x, Debug = Debug)
                     self.dfs.append(self._dfsx)
                 #self.vertices[x]['color'] = 2
                 #self.vertices[x]['endDate'] = self.date
 
 
         # ---- main -----
-        visitAllVertices(self, Debug=Debug)
+        _visitAllVertices(self, Debug=Debug)
         return self.dfs
 
     def exportGraphViz(self,fileName=None,verticesSubset=None,
@@ -1751,7 +1823,31 @@ class Graph(object):
             if Comments:
                 print('Graph \%s\' is not triangulated' % self.name)
             return False
-        
+
+    def isPerfectGraph(self,Comments=False,Debug=False):
+        """
+        A graph *g* is perfect when neither *g*, nor *-g*, contain any chordless
+        cycle of odd length.
+        """
+        cycles = self.computeChordlessCycles(Comments=Debug)
+        for c in cycles:
+            if (len(c) % 2) != 0:
+                if Comments:
+                    print('Graph %s contains an odd chordless circuit!' % self.name)
+                    print(c)
+                return False
+        cycles = (-self).computeChordlessCycles(Comments=Debug)
+        for c in cycles:
+            if (len(c) % 2) != 0:
+                if Comments:
+                    print('The dual of graph %s contains an odd chordless circuit!' % self.name)
+                    print(c)
+                return False
+        if Comments:
+            print('Graph %s is perfect !' % self.name)
+       
+        return True
+    
                   
     def randomDepthFirstSearch(self,seed=None,Debug=False):
         """
@@ -2119,7 +2215,7 @@ class CycleGraph(Graph):
 
 class IntervalIntersectionsGraph(Graph):
     """
-    Inveral graph constructed from a list *n*
+    Inveral graph constructed from a list of *n*
     intervals, ie pairs (a,b) of integer numbers where a < b.
     """
     def __init__(self,intervals,Debug=False):
@@ -2179,8 +2275,8 @@ class IntervalIntersectionsGraph(Graph):
         self.size = self.computeSize()
         self.gamma = self.gammaSets()
 
-class RandomIntervalIntersectionsGraph(Graph):
-    """ Random generator for LineIntersectionsGraph intances."""
+class RandomIntervalIntersectionsGraph(IntervalIntersectionsGraph):
+    """ Random generator for IntervalIntersectionsGraph intances."""
     def __init__(self,order=5,seed=None,m=0,M=10,Debug=False):
         import random
         random.seed(seed)
@@ -4210,7 +4306,7 @@ class PermutationGraph(Graph):
         >>> dg = g.transitiveOrientation()
         >>> dg
         *------- Digraph instance description ------*
-        Instance class   : WeakOrder
+        Instance class   : TransitiveDigraph
         Instance name    : oriented_permutationGraph
         Digraph Order      : 6
         Digraph Size       : 9
@@ -4233,11 +4329,11 @@ class PermutationGraph(Graph):
 
         """
         from digraphs import EmptyDigraph
-        from weakOrders import WeakOrder
+        from transitiveDigraphs import TransitiveDigraph
         from copy import deepcopy
         
         g = EmptyDigraph(order=self.order)
-        g.__class__ = WeakOrder
+        g.__class__ = TransitiveDigraph
         g.name = 'oriented_'+self.name
         g.actions = deepcopy(self.vertices)
         g.valuationdomain = deepcopy(self.valuationDomain)
@@ -4359,22 +4455,28 @@ if __name__ == '__main__':
 ##    print(i.isTriangulated())
 ##    print((-i).isTriangulated())
 
-    ri = RandomGraph(order=8,seed=4335)
-    print(ri)
-    #print(ri.intervals)
-    #print(ri.isIntervalGraph(Comments=True))
-    #print(ri.isTriangulated())
-    #print((-ri).isTriangulated())
-    ri.exportGraphViz()
-    #ri.isSplitGraph(Comments=True)
-    #ri.isPermutationGraph(Comments=True)
-    #print(ri.computePermutation())
-    if ri.isComparabilityGraph():
-        ri.exportEdgeOrientationsGraphViz('testColors1')
-    rid = -ri
-    if rid.isComparabilityGraph():
-        rid.exportEdgeOrientationsGraphViz('testColors2',palette=2)
-    
+##    ri = RandomGraph(order=8,seed=4335)
+##    print(ri)
+##    #print(ri.intervals)
+##    #print(ri.isIntervalGraph(Comments=True))
+##    #print(ri.isTriangulated())
+##    #print((-ri).isTriangulated())
+##    ri.exportGraphViz()
+##    #ri.isSplitGraph(Comments=True)
+##    #ri.isPermutationGraph(Comments=True)
+##    #print(ri.computePermutation())
+##    if ri.isComparabilityGraph():
+##        ri.exportEdgeOrientationsGraphViz('testColors1')
+##    rid = -ri
+##    if rid.isComparabilityGraph():
+##        rid.exportEdgeOrientationsGraphViz('testColors2',palette=2)
+
+    g = RandomGraph(order=9,edgeProbability=0.5)
+    g.save('testPerfectGraph')
+    g.name = 'testPerfectGraph'
+    g.exportGraphViz()
+    #print(g.breadthFirstSearch('v1',Debug=False))
+    print(g.isPerfectGraph(Comments=True))    
     
 ##    rg = RandomPermutationGraph(order=6,seed=None)
 ##    print(rg)

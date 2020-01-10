@@ -3,21 +3,21 @@
 """
 Python3+ implementation of the digraphs module, root module of the Digraph3 resources.
 
-Copyright (C) 2006-2017  Raymond Bisdorff
+Copyright (C) 2006-2019  Raymond Bisdorff
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 3 of the License, or
-(at your option) any later version.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 3 of the License, or
+    (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 """
 
@@ -191,14 +191,14 @@ class Digraph(object):
         Default presentation method for Digraph instances.
         """
         reprString = '*------- Digraph instance description ------*\n'
-        reprString += 'Instance class   : %s\n' % self.__class__.__name__
-        reprString += 'Instance name    : %s\n' % self.name
-        reprString += 'Digraph Order      : %d\n' % self.order
-        reprString += 'Digraph Size       : %d\n' % self.computeSize()
-        reprString += 'Valuation domain : [%.2f - %.2f]\n'\
+        reprString += 'Instance class      : %s\n' % self.__class__.__name__
+        reprString += 'Instance name       : %s\n' % self.name
+        reprString += 'Digraph Order       : %d\n' % self.order
+        reprString += 'Digraph Size        : %d\n' % self.computeSize()
+        reprString += 'Valuation domain    : [%.2f;%.2f]\n'\
                       % (self.valuationdomain['min'],self.valuationdomain['max'])
-        reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()
-        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())
+        reprString += 'Determinateness (%%) : %.2f\n' % self.computeDeterminateness(InPercents=True)
+        reprString += 'Attributes          : %s\n' % list(self.__dict__.keys())
        
         return reprString
     
@@ -1340,6 +1340,7 @@ class Digraph(object):
         Renders the bipolar-valued relation obtained from
         the self.rankingByChoosing result.
         """
+        from digraphsTools import omax, omin
         from copy import copy, deepcopy
         if rankingByChoosing==None:
             try:
@@ -1558,9 +1559,9 @@ class Digraph(object):
                 print('  %s Ambiguous Choice %s' % (space,list(iach)))
             print(' %s%s%s Worst Choice %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
         corr1 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(rankingByChoosing))
-        print('Ordinal bipolar correlation with outranking relation: %.3f (%.1f%%)'% (corr1['correlation'],corr1['determination']*Decimal('100')))
+        print('Ordinal bipolar correlation with outranking relation: tau = %+.3f (D = %.1f)'% (corr1['correlation'],corr1['determination']))
         corr2 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(rankingByChoosing),MedianCut=True)
-        print('Ordinal bipolar correlation with median cut outranking relation: %.3f (%.1f%%)'% (corr2['correlation'],corr2['determination']*Decimal('100')))
+        print('Ordinal bipolar correlation with median cut outranking relation: tau = %+.3f (D = %.1f)'% (corr2['correlation'],corr2['determination']))
 
     def showRankingByLastChoosing(self,rankingByLastChoosing=None,Debug=None):
         """
@@ -2652,7 +2653,7 @@ class Digraph(object):
 
             Dependency: Uses the dreadnaut command from the nauty software package. See https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml
 
-            On Linux:
+            On Ubuntu Linux:
               ...$ sudo apt-get install nauty
         """
         import os
@@ -3456,6 +3457,7 @@ class Digraph(object):
 
 
     def showHTMLRelationTable(self,actionsList=None,\
+                              relation=None,
                               IntegerValues=False,\
                               ndigits=2,\
                               Colored=True,\
@@ -3469,6 +3471,7 @@ class Digraph(object):
         fileName = '/tmp/relationMap.html'
         fo = open(fileName,'w')
         fo.write(self._htmlRelationTable(actionsSubset=actionsList,
+                                         relation=relation,
                                         isColored=Colored,
                                         ndigits=ndigits,
                                         hasIntegerValues=IntegerValues,
@@ -3481,6 +3484,7 @@ class Digraph(object):
         
         
     def _htmlRelationTable(self,tableTitle='Valued Relation Table',
+                           relation=None,
                           relationName='r(x R y)',
                           ndigits=2,
                           hasIntegerValues=False,
@@ -3497,6 +3501,8 @@ class Digraph(object):
             actions = self.actions
         else:
             actions = actionsSubset
+        if relation == None:
+            relation = self.relation
         s = ''
         s += '<h1>%s</h1>' % tableTitle
         s += '<table border="1">'
@@ -3545,58 +3551,58 @@ class Digraph(object):
                     if ReflexiveTerms:
                         if hasIntegerValuation:
                             if isColored:
-                                if self.relation[x[1]][y[1]] > Med:
-                                    s += '<td bgcolor="#ddffdd" align="right">%d</td>' % (self.relation[x[1]][y[1]])
-                                elif self.relation[x[1]][y[1]] < Med:
-                                    s += '<td bgcolor="#ffddff"  align="right">%d</td>' % (self.relation[x[1]][y[1]])
+                                if relation[x[1]][y[1]] > Med:
+                                    s += '<td bgcolor="#ddffdd" align="right">%d</td>' % (relation[x[1]][y[1]])
+                                elif relation[x[1]][y[1]] < Med:
+                                    s += '<td bgcolor="#ffddff"  align="right">%d</td>' % (relation[x[1]][y[1]])
                                 else:
-                                    s += '<td bgcolor="#dddddd" align="right" >%d</td>' % (self.relation[x[1]][y[1]])
+                                    s += '<td bgcolor="#dddddd" align="right" >%d</td>' % (relation[x[1]][y[1]])
                             else:
-                                s += '<td>%d</td>' % (self.relation[x[1]][y[1]])
+                                s += '<td>%d</td>' % (relation[x[1]][y[1]])
                         else:
                             ndigitsFormat = '%%2.%df' % ndigits
                             if isColored:
-                                if self.relation[x[1]][y[1]] > Med:
+                                if relation[x[1]][y[1]] > Med:
                                     formatStr = '<td bgcolor="#ddffdd" align="right">%s</td>' % ndigitsFormat 
-                                    s += formatStr % (self.relation[x[1]][y[1]])
-                                elif self.relation[x[1]][y[1]] < Med:
+                                    s += formatStr % (relation[x[1]][y[1]])
+                                elif relation[x[1]][y[1]] < Med:
                                     formatStr = '<td  bgcolor="#ffddff" align="right">%s</td>' % ndigitsFormat
-                                    s +=  formatStr % (self.relation[x[1]][y[1]])
+                                    s +=  formatStr % (relation[x[1]][y[1]])
                                 else:
                                     formatStr = '<td  bgcolor="#dddddd" align="right">%s</td>' % ndigitsFormat
-                                    s += formatStr % (self.relation[x[1]][y[1]])
+                                    s += formatStr % (relation[x[1]][y[1]])
                             else:
                                 formatStr = '<td>%s</td>' % ndigitsFormat
-                                s += formatStr % (self.relation[x[1]][y[1]])
+                                s += formatStr % (relation[x[1]][y[1]])
                     else:
                         s += '<td bgcolor="#eeeeee" align="center"> &ndash; </td>'
                     
                 else:
                     if hasIntegerValuation:
                         if isColored:
-                            if self.relation[x[1]][y[1]] > Med:
-                                s += '<td bgcolor="#ddffdd" align="right">%d</td>' % (self.relation[x[1]][y[1]])
-                            elif self.relation[x[1]][y[1]] < Med:
-                                s += '<td bgcolor="#ffddff"  align="right">%d</td>' % (self.relation[x[1]][y[1]])
+                            if relation[x[1]][y[1]] > Med:
+                                s += '<td bgcolor="#ddffdd" align="right">%d</td>' % (relation[x[1]][y[1]])
+                            elif relation[x[1]][y[1]] < Med:
+                                s += '<td bgcolor="#ffddff"  align="right">%d</td>' % (relation[x[1]][y[1]])
                             else:
-                                s += '<td bgcolor="#dddddd" align="right" >%d</td>' % (self.relation[x[1]][y[1]])
+                                s += '<td bgcolor="#dddddd" align="right" >%d</td>' % (relation[x[1]][y[1]])
                         else:
-                            s += '<td>%d</td>' % (self.relation[x[1]][y[1]])
+                            s += '<td>%d</td>' % (relation[x[1]][y[1]])
                     else:
                         ndigitsFormat = '%%2.%df' % ndigits
                         if isColored:
-                            if self.relation[x[1]][y[1]] > Med:
+                            if relation[x[1]][y[1]] > Med:
                                 formatStr = '<td bgcolor="#ddffdd" align="right">%s</td>' % ndigitsFormat 
-                                s += formatStr % (self.relation[x[1]][y[1]])
-                            elif self.relation[x[1]][y[1]] < Med:
+                                s += formatStr % (relation[x[1]][y[1]])
+                            elif relation[x[1]][y[1]] < Med:
                                 formatStr = '<td  bgcolor="#ffddff" align="right">%s</td>' % ndigitsFormat
-                                s +=  formatStr % (self.relation[x[1]][y[1]])
+                                s +=  formatStr % (relation[x[1]][y[1]])
                             else:
                                 formatStr = '<td  bgcolor="#dddddd" align="right">%s</td>' % ndigitsFormat
-                                s += formatStr % (self.relation[x[1]][y[1]])
+                                s += formatStr % (relation[x[1]][y[1]])
                         else:
                             formatStr = '<td>%s</td>' % ndigitsFormat
-                            s += formatStr % (self.relation[x[1]][y[1]])
+                            s += formatStr % (relation[x[1]][y[1]])
             s += '</tr>'
         s += '</table>'
         if hasIntegerValuation:
@@ -4596,26 +4602,67 @@ class Digraph(object):
                         determined += abs(rxy)
         return averageValuation / determined
 
-    def computeDeterminateness(self):
+    def computeDeterminateness(self,InPercents=False):
         """
-        Computes the Kendalll distance in % of self
-        with the all median valued (indeterminate) digraph.
+        Computes the Kendalll distance of self
+        with the all median-valued indeterminate digraph of order n.
+
+        Return the average determination of the irreflexive part of the digraph.
+
+        *determination* = sum_(x,y) { abs[ r(xRy) - Med ] } / n(n-1)
+        
+        If *InPercents* is True, returns the average determination in percentage of
+        (Max - Med) difference.
+
+        >>> from outrankingDigraphs import BipolarOutrankingDigraph
+        >>> from randomPerfTabs import Random3ObjectivesPerformanceTableau
+        >>> t = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)
+        >>> g = BipolarOutrankingDigraph(t,Normalized=True)
+        >>> g
+        *------- Object instance description ------*
+        Instance class      : BipolarOutrankingDigraph
+        Instance name       : rel_random3ObjectivesPerfTab
+        # Actions           : 7
+        # Criteria          : 7
+        Size                : 27
+        Determinateness (%) : 65.67
+        Valuation domain    : [-1.00;1.00]
+        >>> print(g.computeDeterminateness())
+        0.3134920634920634920634920638
+        >>> print(g.computeDeterminateness(InPercents=True))
+        65.67460317460317460317460320
+        >>> g.recodeValuation(0,1)
+        >>> g
+        *------- Object instance description ------*
+        Instance class      : BipolarOutrankingDigraph
+        Instance name       : rel_random3ObjectivesPerfTab
+        # Actions           : 7
+        # Criteria          : 7
+        Size                : 27
+        Determinateness (%) : 65.67
+        Valuation domain    : [0.00;1.00]
+        >>> print(g.computeDeterminateness())
+        0.1567460317460317460317460318
+        >>> print(g.computeDeterminateness(InPercents=True))
+        65.67460317460317460317460320
+
         """
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
         relation = self.relation
         #actions = self.actions
         order = self.order
-        deter = Decimal('0.0')
+        D = Decimal('0.0')
         for x,rx in relation.items():
             for y,rxy in rx.items():
                 if x != y:
-                    #print(relation[x][y], Med, relation[x][y] - Med)
-                    deter += abs(rxy - Med)
-                    #print(deter)
-        #deter = (deter /Decimal(str((order * (order-1))))) * (Max - Med)
-        deter = deter / Decimal(str((order * (order-1))))
-        return deter/(Decimal(str(Max-Med)))*Decimal('100')
+                    D += abs(rxy - Med)
+        determination = D / Decimal(str((order * (order-1))))
+        if InPercents:
+            return (determination / (Max-Med) + Decimal('1')) / Decimal('2') * Decimal('100.0')
+        else:
+            return determination
 
     def showStatistics(self):
         """
@@ -4652,21 +4699,22 @@ class Digraph(object):
 
         self.agglomerationCoefficient,self.meanAgglomerationCoefficient = self.agglomerationDistribution()
         # Outranking determinateness
-        Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']
-        deter = Decimal('0.0')
-        for x,rx in relation.items():
-            for y,rxy in rx.items():
-                if x != y:
-                    # print(relation[x][y], Med)
-                    deter += abs(rxy - Med)
-        deter /= order * (order-1) * (Max - Med)
+##        Max = self.valuationdomain['max']
+##        Med = self.valuationdomain['med']
+##        deter = Decimal('0.0')
+##        for x,rx in relation.items():
+##            for y,rxy in rx.items():
+##                if x != y:
+##                    # print(relation[x][y], Med)
+##                    deter += abs(rxy - Med)
+##        deter /= order * (order-1) * (Max - Med)
+        deter = self.computeDeterminateness(InPercents=True)
         #  output results
         print('for digraph              : <' + str(self.name) + '.py>')
-        print('order                    : ', self.order, 'nodes')
-        print('size                     : ', self.size, 'arcs')
-        print('# undetermined           : ', self.undeterm, 'arcs')
-        print('determinateness          : %.2f' % (deter))
+        print('order                    :', self.order, 'nodes')
+        print('size                     :', self.size, 'arcs')
+        print('# undetermined           :', self.undeterm, 'arcs')
+        print('determinateness (in %%)   : %.2f' % (deter))
         print("arc density              : %.2f" % (density['arc']))
         print("double arc density       : %.2f" % (density['double']))
         print("single arc density       : %.2f" % (density['single']))
@@ -4677,35 +4725,35 @@ class Digraph(object):
         print('# strong components      : ', nbrstrcomp)
         print('transitivity degree      : %.2f' % (self.computeTransitivityDegree()))
 
-        print('                         : ', list(range(len(outDegrees))))
-        print('outdegrees distribution  : ', list(outDegrees))
-        print('indegrees distribution   : ', list(inDegrees))
+        print('                         :', list(range(len(outDegrees))))
+        print('outdegrees distribution  :', list(outDegrees))
+        print('indegrees distribution   :', list(inDegrees))
         print('mean outdegree           : %.2f' % (self.computeMeanOutDegree()))
         print('mean indegree            : %.2f' % (self.computeMeanInDegree()))
-        print('                         : ', list(range(len(symDegrees))))
-        print('symmetric degrees dist.  : ', list(symDegrees))
+        print('                         :', list(range(len(symDegrees))))
+        print('symmetric degrees dist.  :', list(symDegrees))
         print('mean symmetric degree    : %.2f' % (self.computeMeanSymDegree()))
 
         outgini = self.computeConcentrationIndex(list(range(len(outDegrees))),list(outDegrees))
         ingini = self.computeConcentrationIndex(list(range(len(inDegrees))),list(inDegrees))
         symgini = self.computeConcentrationIndex(list(range(len(symDegrees))),list(symDegrees))
-        print('outdegrees concentration index   : %.4f' % (outgini))
-        print('indegrees concentration index    : %.4f' % (ingini))
-        print('symdegrees concentration index   : %.4f' % (symgini))
+        print('outdegrees concentration index    : %.4f' % (outgini))
+        print('indegrees concentration index     : %.4f' % (ingini))
+        print('symdegrees concentration index    : %.4f' % (symgini))
         listindex = list(range(order))
         listindex.append('inf')
-        print('                                 : ', listindex)
-        print('neighbourhood depths distribution: ', list(nbDepths))
+        print('                                  :', listindex)
+        print('neighbourhood depths distribution :', list(nbDepths))
         if meanLength != 'infinity':
             print("mean neighbourhood depth         : %.2f " % (meanLength))
         else:
-            print('mean neighbourhood length        : ', meanLength)
-        print('digraph diameter                 : ', self.digraphDiameter)
-        print('agglomeration distribution       : ')
+            print('mean neighbourhood length         :', meanLength)
+        print('digraph diameter                  :', self.digraphDiameter)
+        print('agglomeration distribution        :')
         for i in range(order):
             print(actions[i], end=' ')
             print(": %.2f" % (self.agglomerationCoefficient[i]))
-        print("agglomeration coefficient        : %.2f" % (self.meanAgglomerationCoefficient))
+        print("agglomeration coefficient         : %.2f" % (self.meanAgglomerationCoefficient))
 
     def meanLength(self,Oriented=False):
         """
@@ -4858,7 +4906,7 @@ class Digraph(object):
                     break
         return diameter
 
-    def graphDetermination(self,Normalized=True):
+    def _graphDetermination(self,Normalized=True):
         """
         Output: average normalized (by default) arc determination:
 
@@ -5823,7 +5871,7 @@ class Digraph(object):
 
         .. note::
 
-             Initiate with S = self.actions,copy().
+             Initiate with S = self.actions.copy().
              
         """
         Med = self.valuationdomain['med']
@@ -7656,8 +7704,8 @@ class Digraph(object):
 
     def computeGoodChoiceVector(self,ker,Comments=False):
         """
-        | Characteristic values for potentially good choices.
-        | [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]
+        | Computing Characteristic values for dominant pre-kernels
+        | using the von Neumann dual fixoint equation
         """
         import copy
         from operator import itemgetter
@@ -7671,13 +7719,12 @@ class Digraph(object):
         if Comments:
             print('--> kernel:', ker)
         choice = [y for y in ker]
-        #choice.sort()
-        degi = temp.intstab(ker)
-        dega = temp.absorb(ker)
-        degd = temp.domin(ker)
-        degirred = temp.domirredval(ker,relation)
-        degmd = min(degi,degd)
-        cover = temp.averageCoveringIndex(ker)
+##        degi = temp.intstab(ker)
+##        dega = temp.absorb(ker)
+##        degd = temp.domin(ker)
+##        degirred = temp.domirredval(ker,relation)
+##        degmd = min(degi,degd)
+##        cover = temp.averageCoveringIndex(ker)
         relation_k = temp.domkernelrestrict(choice)
         n = len(actions)
         #vec1_a = array.array('f', [Max] * n)
@@ -7688,8 +7735,8 @@ class Digraph(object):
         veclowa = vec0_a
         vechigha = vec1_a
         if Comments:
-            print('initial veclowa',veclowa)
-            print('initial vechigha', vechigha)
+            print('initial low vector  :',veclowa)
+            print('initial high vector :', vechigha)
         it = 1
         while veclowa != vechigha and it < 2*n*n:
             veclowb = temp.matmult2(mat,veclowa)
@@ -7700,13 +7747,13 @@ class Digraph(object):
             veclowa = veclow
             vechigha = vechigh
             if Comments:
-                print(it, 'th veclowa  :',veclowa)
-                print(it, 'th vechigha :',vechigha)
+                print(it, 'th low vector  :',veclowa)
+                print(it, 'th high vector :',vechigha)
             it += 1
         if Comments:
-            print('final veclowa  :', veclowa)
-            print('final vechigha :', vechigha)
-            print('#iterations    :', it)
+            print('final low vector  :', veclowa)
+            print('final high vector :', vechigha)
+            print('#iterations       :', it)
         domvec = temp.sharpvec(veclowa,vechigha)
         determ = temp.determinateness(domvec)
         goodChoiceVector = []
@@ -7714,8 +7761,84 @@ class Digraph(object):
             goodChoiceVector.append((domvec[i],str(actions[i])))
         goodChoiceVector.sort(reverse=True)
         if Comments:
-            print(goodChoiceVector)
-        return goodChoiceVector        
+            print('Choice vector for dominant pre-kernel: %s' % str(ker))
+            for i,item in enumerate(goodChoiceVector):
+                print('%s: %+.2f' % (item[1],item[0]) )
+        else:
+            return goodChoiceVector        
+
+    def computeKernelVector(self,kernel,Initial=True,Comments=False):
+        """
+        | Computing Characteristic values for dominant pre-kernels
+        | using the von Neumann dual fixoint equation
+        """
+        import copy
+        from operator import itemgetter
+        temp = copy.deepcopy(self)
+        Max = Decimal(str(temp.valuationdomain['max']))
+        Min = Decimal(str(temp.valuationdomain['min']))
+        Med = Decimal(str(temp.valuationdomain['med']))
+        actions = [x for x in temp.actions]
+        #actions.sort()
+        relation = temp.relation
+        ker = set(kernel)
+        if Comments:
+            if Initial:
+                print('--> Initial kernel:', ker)
+            else:
+                print('--> Terminal kernel:', ker)
+        choice = [x for x in ker]
+        if Initial:
+            relation_k = temp.domkernelrestrict(choice)
+        else:
+            relation_k = temp.abskernelrestrict(choice)
+        n = len(actions)
+        #vec1_a = array.array('f', [Max] * n)
+        vec1_a = [Max for i in range(n)]
+        #vec0_a = array.array('f', [Min] * n)
+        vec0_a = [Min for i in range(n)]
+        if Initial:
+            mat = [temp.readdomvector(x,relation_k) for x in actions]
+        else:
+            mat = [temp.readabsvector(x,relation_k) for x in actions]
+        veclowa = vec0_a
+        vechigha = vec1_a
+        if Comments:
+            print('initial low vector  :',veclowa)
+            print('initial high vector :', vechigha)
+        it = 1
+        while veclowa != vechigha and it < 2*n*n:
+            veclowb = temp.matmult2(mat,veclowa)
+            vechighb = temp.matmult2(mat,vechigha)
+            veclow = temp.contra(vechighb)
+            vechigh = temp.contra(veclowb)
+            if veclow == veclowa and vechigh == vechigha : break
+            veclowa = veclow
+            vechigha = vechigh
+            if Comments:
+                print(it, 'th low vector  :',veclowa)
+                print(it, 'th high vector :',vechigha)
+            it += 1
+        if Comments:
+            print('final low vector  :', veclowa)
+            print('final high vector :', vechigha)
+            print('#iterations       :', it)
+        domvec = temp.sharpvec(veclowa,vechigha)
+        determ = temp.determinateness(domvec)
+        choiceVector = []
+        for i in range(n):
+            choiceVector.append((domvec[i],str(actions[i])))
+        choiceVector.sort(reverse=True)
+        if Comments:
+            if Initial:
+                print('Choice vector for initial pre-kernel: %s' % str(ker))
+            else:
+                print('Choice vector for terminal pre-kernel: %s' % str(ker))
+            for i,item in enumerate(choiceVector):
+                print('%s: %+.2f' % (item[1],item[0]) )
+        else:
+            return choiceVector        
+
                                 
     def computeGoodChoices(self,Comments=False):
         """
@@ -7763,8 +7886,8 @@ class Digraph(object):
             veclowa = vec0_a
             vechigha = vec1_a
             if Comments:
-                print('initial veclowa',veclowa)
-                print('initial vechigha', vechigha)
+                print('initial veclow',veclowa)
+                print('initial vechigh', vechigha)
             it = 1
             while veclowa != vechigha and it < 2*n*n:
                 veclowb = temp.matmult2(mat,veclowa)
@@ -7775,15 +7898,17 @@ class Digraph(object):
                 veclowa = veclow
                 vechigha = vechigh
                 if Comments:
-                    print(it, 'th veclowa  :',veclowa)
-                    print(it, 'th vechigha :',vechigha)
+                    print(it, 'th veclow  :',veclowa)
+                    print(it, 'th vechigh :',vechigha)
                 it += 1
             if Comments:
-                print('final veclowa  :', veclowa)
-                print('final vechigha :', vechigha)
+                print('final veclow  :', veclowa)
+                print('final vechigh :', vechigha)
                 print('#iterations    :', it)
             #domvec = temp.sharpvec(veclowa,vechigha)
             domvecsharp = temp.sharpvec(veclowa,vechigha)
+            if Comments:
+                print('final result   ;',domvecsharp)
             domvec = [(domvecsharp[i],str(actions[i])) for i in range(n)]
             domvec.sort(reverse=True)
             determ = temp.determinateness(domvec)
@@ -9056,91 +9181,91 @@ class Digraph(object):
         res = self.computeSingletonRanking(Comments,Debug)
         return res
 
-    def omax(self,L, Debug=False):
-        """
-        Epistemic **disjunction** for bipolar outranking characteristics
-        computation: Med is the valuation domain median and L is a list of
-        r-valued statement characteristics.
+    # def omax(self,L, Debug=False):
+    #     """
+    #     Epistemic **disjunction** for bipolar outranking characteristics
+    #     computation: Med is the valuation domain median and L is a list of
+    #     r-valued statement characteristics.
 
-        With **positive** arguments, omax operates a **max**,
-        with **negative** arguments, a **min**.
+    #     With **positive** arguments, omax operates a **max**,
+    #     with **negative** arguments, a **min**.
 
-        The mixture of **both positive and negative** arguments results in
-        an **indeterminate** value.
+    #     The mixture of **both positive and negative** arguments results in
+    #     an **indeterminate** value.
 
-        Likewise to a mean, the *omax* operator is not associative. We therefore first assemble all positive, negative and null terms
-        and operate omax on the three assembled arguments.
-        """
-        Med = self.valuationdomain['med']
-        terms = list(L)
-        termsPlus = []
-        termsMinus = []
-        termsNuls = []
-        for i in range(len(terms)):
-            if terms[i] > Med:
-                termsPlus.append(terms[i])
-            elif terms[i] < Med:
-                termsMinus.append(terms[i])
-            else:
-                termsNuls.append(terms[i])
-        if Debug:
-            print('terms', terms)
-            print('termsPlus',termsPlus)
-            print('termsMinus', termsMinus)
-            print('termsNuls', termsNuls)
-        np = len(termsPlus)
-        nm = len(termsMinus)
-        if np > 0 and nm == 0:
-            return max(termsPlus)
-        elif nm > 0 and np == 0:
-            return min(termsMinus)
-        else:
-            return Med
+    #     Likewise to a mean, the *omax* operator is not associative. We therefore first assemble all positive, negative and null terms
+    #     and operate omax on the three assembled arguments.
+    #     """
+    #     Med = self.valuationdomain['med']
+    #     terms = list(L)
+    #     termsPlus = []
+    #     termsMinus = []
+    #     termsNuls = []
+    #     for i in range(len(terms)):
+    #         if terms[i] > Med:
+    #             termsPlus.append(terms[i])
+    #         elif terms[i] < Med:
+    #             termsMinus.append(terms[i])
+    #         else:
+    #             termsNuls.append(terms[i])
+    #     if Debug:
+    #         print('terms', terms)
+    #         print('termsPlus',termsPlus)
+    #         print('termsMinus', termsMinus)
+    #         print('termsNuls', termsNuls)
+    #     np = len(termsPlus)
+    #     nm = len(termsMinus)
+    #     if np > 0 and nm == 0:
+    #         return max(termsPlus)
+    #     elif nm > 0 and np == 0:
+    #         return min(termsMinus)
+    #     else:
+    #         return Med
 
-    def omin(self,L, Debug=False):
-        """
-        Epistemic **conjunction** of a list L of bipolar outranking characteristics.
-        Med is the given valuation domain median.
+    # def omin(self,L, Debug=False):
+    #     """
+    #     Epistemic **conjunction** of a list L of bipolar outranking characteristics.
+    #     Med is the given valuation domain median.
 
-        With **positive** arguments, omax operates a **min**,
-        with **negative** arguments, a **max**.
+    #     With **positive** arguments, omax operates a **min**,
+    #     with **negative** arguments, a **max**.
 
-        The mixture of both **positive and negative** arguments results
-        in an **indeterminate** value.
+    #     The mixture of both **positive and negative** arguments results
+    #     in an **indeterminate** value.
 
-        Likewise to a mean, the *omin* operator is not associative. We therefore first assemble all positive, negative and null terms
-        and operate omin on the three assembled arguments. 
+    #     Likewise to a mean, the *omin* operator is not associative. We therefore first assemble all positive, negative and null terms
+    #     and operate omin on the three assembled arguments. 
 
-        """
-        Med = self.valuationdomain['med']
-        terms = list(L)
-        termsPlus = []
-        termsMinus = []
-        termsNuls = []
-        for i in range(len(terms)):
-            if terms[i] > Med:
-                termsPlus.append(terms[i])
-            elif terms[i] < Med:
-                termsMinus.append(terms[i])
-            else:
-                termsNuls.append(terms[i])
-        if Debug:
-            print('terms', terms)
-            print('termsPlus',termsPlus)
-            print('termsMinus', termsMinus)
-            print('termsNuls', termsNuls)
-        np = len(termsPlus)
-        nm = len(termsMinus)
-        if np > 0:
-            if nm > 0:
-                return Med
-            else:
-                return min(termsPlus)
-        else:
-            if nm > 0:
-                return max(termsMinus)
-            else:
-                return Med
+    #     """
+    #     Med = self.valuationdomain['med']
+    #     terms = list(L)
+    #     termsPlus = []
+    #     termsMinus = []
+    #     termsNuls = []
+    #     for i in range(len(terms)):
+    #         if terms[i] >= Med:
+    #             termsPlus.append(terms[i])
+    #         elif terms[i] <= Med:
+    #             termsMinus.append(terms[i])
+    #         else:
+    #             termsNuls.append(terms[i])
+    #     if Debug:
+    #         print('terms', terms)
+    #         print('termsPlus',termsPlus)
+    #         print('termsMinus', termsMinus)
+    #         print('termsNuls', termsNuls)
+    #     np = len(termsPlus)
+    #     nm = len(termsMinus)
+    #     if np > 0:
+    #         if nm > 0:
+    #             return Med
+    #         else:
+    #             return min(termsPlus)
+    #     else:
+    #         if nm > 0:
+    #             return max(termsMinus)
+    #         else:
+    #             return Med
 
     def _computeNetFlowsRankingDict(self,Stored=True,Debug=False):
         """
@@ -9827,8 +9952,8 @@ class ConverseDigraph(Digraph):
 
     Instantiates as other.__class__ !
 
-    Depp copies the case given the description, the criteria
-    and the evaluation dictionary into self.
+    Deep copies, the case given, the description, the criteria
+    and the evaluation dictionaries into self.
     """
 
     def __init__(self,other):
@@ -9852,15 +9977,15 @@ class ConverseDigraph(Digraph):
 
 class FusionDigraph(Digraph):
     """
-    Instantiates the epistemic fusion of two given Digraph instances
-    called dg1 and dg2.
+    Instantiates the epistemic disjunctive (default) or conjunctive fusion of 
+    two given Digraph instances called dg1 and dg2.
 
     Parameter:
 
-        * operator = "o-min" | "o-max" (epistemic conjunctive or disjunctive fusion)
+        * operator = "o-max (default)" | "o-min" : epistemic disjunctive, resp. conjunctive fusion operator.
     """
 
-    def __init__(self,dg1,dg2,operator="o-min"):
+    def __init__(self,dg1,dg2,operator="o-max"):
         from copy import deepcopy
         from digraphsTools import omin, omax
         self.name = 'fusion-'+dg1.name+'-'+dg2.name
@@ -9893,10 +10018,10 @@ class FusionLDigraph(Digraph):
 
     Parameter:
 
-        * operator = "o-min" | "o-max" (epistemic conjunctive or dijunctive fusion)
+        * operator = "o-max" (default) | "o-min" : epistemic disjunctive or conjunctive fusion)
     """
 
-    def __init__(self,L,operator="o-min"):
+    def __init__(self,L,operator="o-max"):
         from copy import deepcopy
         self.name = 'fusion-'+L[0].name
         self.actions = deepcopy(L[0].actions)
@@ -9921,6 +10046,96 @@ class FusionLDigraph(Digraph):
         self.relation = fusionRelation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+
+# -------- Graph Border and Inner
+
+class GraphBorder(Digraph):
+    """
+    Instantiates the partial digraph induced by its border,
+    i.e. be the union of its initial and terminal kernels.
+    """
+    def __init__(self,other,Debug=False):
+        from copy import deepcopy
+        if Debug:
+            Digraph.exportGraphViz(other,other.name)
+
+        self.__dict__ = deepcopy(other.__dict__)
+        
+        other.computePreKernels()
+        if Debug:
+            print('other.domprekernsls', other.dompreKernels)
+        domBorderActions = set()
+        for k in other.dompreKernels:    
+            domBorderActions |= k
+        if Debug:
+            print('other.absprekernels',other.abspreKernels)
+        absBorderActions = set()
+        for k in other.abspreKernels:    
+            absBorderActions |= k
+
+        borderActions = domBorderActions | absBorderActions
+        if Debug:
+            print('border actions', borderActions)
+
+        self.name = other.name + '_border'
+
+        borderRelation = {}
+        for x in self.actions:
+            borderRelation[x] = {}
+            #innerRelation[x] = {}
+            for y in self.actions:
+                if x in borderActions or y in borderActions:
+                    borderRelation[x][y] = self.relation[x][y]
+                else:
+                    borderRelation[x][y] = self.valuationdomain['med']                                                            
+
+        self.relation = borderRelation
+        if Debug:
+            Digraph.exportGraphViz(self,'border',bestChoice=domBorderActions,worstChoice=absBorderActions)
+
+
+class GraphInner(Digraph):
+    """
+    Instantiates the partial digraph induced by the complement of its border,
+    i.e. the nodes not included in the union of its initial and terminal kernels.
+    """
+    def __init__(self,other,Debug=False):
+        from copy import deepcopy
+        if Debug:
+            Digraph.exportGraphViz(other,other.name)
+
+        self.__dict__ = deepcopy(other.__dict__)
+
+        other.computePreKernels()
+        if Debug:
+            print('other.domprekernsls', other.dompreKernels)
+        domBorderActions = set()
+        for k in other.dompreKernels:    
+            domBorderActions |= k
+        if Debug:
+            print('other.absprekernels',other.abspreKernels)
+        absBorderActions = set()
+        for k in other.abspreKernels:    
+            absBorderActions |= k
+
+        borderActions = domBorderActions | absBorderActions
+        if Debug:
+            print('border actions', borderActions)
+
+        self.name = other.name + '_inner'
+        innerRelation = {}
+        for x in self.actions:
+            innerRelation[x] = {}
+            for y in self.actions:
+                if x in borderActions or y in borderActions:
+                    innerRelation[x][y] = self.valuationdomain['med']
+                else:
+                    innerRelation[x][y] = self.relation[x][y]
+                                                            
+
+        self.relation = innerRelation
+        if Debug:
+            Digraph.exportGraphViz(self,'inner',bestChoice=domBorderActions,worstChoice=absBorderActions)
 
 
 # ------ Preorder construction
@@ -12880,10 +13095,16 @@ if __name__ == "__main__":
         t1 = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)
         g = BipolarOutrankingDigraph(t1,Normalized=True)
         g.showRelationTable()
-        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
-        g.showPreKernels()
-        g.showRelationTable()
-        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
+        print(g.computeDeterminateness())
+        print(g.computeDeterminateness(InPercents=True))
+        g.recodeValuation(0,1)
+        print(g.computeDeterminateness())
+        print(g.computeDeterminateness(InPercents=True))
+      
+##        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
+##        g.showPreKernels()
+##        g.showRelationTable()
+##        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
 ##        gcd = ~(-g)
 ##        cocb = BrokenCocsDigraph(gcd,Comments=True)
 ##        print(cocb.brokenLinks)

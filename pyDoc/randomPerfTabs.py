@@ -1,24 +1,16 @@
 #!/usr/bin/env python3
-#
-# -*- coding: utf-8 -*-
-# Python implementation of digraphs
-# submodule randomPerfTabs.py  for generating random performance tableaux  
-# Copyright (C) 2015  Raymond Bisdorff
-#
-#    This program is free software; you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation; either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License along
-#    with this program; if not, write to the Free Software Foundation, Inc.,
-#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-#
+"""
+Python implementation of digraphs
+Module for generating random performance tableaux  
+Copyright (C) 2015-2019  Raymond Bisdorff
+
+    This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+"""
 #######################
 
 __version__ = "$Revision: 1.01 $"
@@ -47,17 +39,16 @@ class RandomPerformanceTableau(PerformanceTableau):
         * weightScale := [Min,Max] (default =[1,numberOfCriteria].
         * IntegerWeights := True (default) | False (normalized to proportions of 1.0).
         * commonScale := [Min;Max]; common performance measuring scales (default = [0;100])
-        * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p)
-          and considerable performance difference discrimination thresholds. q0, p0 and v0 are
-          expressed in percentige of the common scale amplitude: Max - Min.
-        * commonMode := common random distribution of random performance measurements:
+        * commonThresholds := [(q0,q1),(p0,p1),(v0,v1)]; common indifference(q), preference (p) and considerable performance difference discrimination thresholds. q0, p0 and v0 are expressed in percentige of the common scale amplitude: Max - Min.
+        * commonMode := common random distribution of random performance measurements (default = ('beta',None,(2,2)) ):
              | ('uniform',None,None), uniformly distributed between min and max values. 
              | ('normal',mu,sigma), truncated Gaussion distribution. 
              | ('triangular',mode,repartition), generalized triangular distribution 
              | ('beta',mod,(alpha,beta)), mode in ]0,1[.
         * valueDigits := <integer>, precision of performance measurements
           (2 decimal digits by default).
-        
+        * missingDataProbability := 0 <= x <= 1.0; probability of missing performance evaluation on a criterion for an alternative (default 0.025).        
+
     Code example:
         >>> from randomPerfTabs import RandomPerformanceTableau
         >>> t = RandomPerformanceTableau(numberOfActions=3,numberOfCriteria=1,seed=100)
@@ -113,14 +104,14 @@ class RandomPerformanceTableau(PerformanceTableau):
         # generate actions
         nd = len(str(numberOfActions))
         actions = OrderedDict()
-        for i in range(numberOfActions):
+        for i in range(1,numberOfActions+1):
             if BigData:
-                actionName = ('%s%%0%dd' % (actionNamePrefix,nd)) % (i+1)
+                actionName = ('%s%%0%dd' % (actionNamePrefix,nd)) % (i)
                 actions[i] = {'name': actionName}
             else:   
-                actionKey = ('%s%%0%dd' % (actionNamePrefix,nd)) % (i+1)
+                actionKey = ('%s%%0%dd' % (actionNamePrefix,nd)) % (i)
                 actions[actionKey] = {'shortName':actionKey,
-                        'name': 'random decision action',
+                        'name': 'action #%d' % i,
                         'comment': 'RandomPerformanceTableau() generated.' }
                 
 #        # generate weights
@@ -1952,13 +1943,13 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         # generate actions
         nd = len(str(numberOfActions))
         actions = OrderedDict()
-        for i in range(numberOfActions):
-            actionKey = ('a%%0%dd' % (nd)) % (i+1)
+        for i in range(1, numberOfActions+1):
+            actionKey = ('%%0%dd' % (nd)) % (i)
             if BigData:
                 actions[i] = {'name': actionKey,'generators': {}}
             else:      
-                actions[actionKey] = {'shortName':actionKey,
-                        'name': 'random decision action',
+                actions[actionKey] = {'shortName': actionKey,
+                        'name': 'action %s' % actionKey,
                         'comment': '3 Objectives',
                         'generators': {}}
 ##        self.actions = actions
@@ -2934,17 +2925,17 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         self.actionsTypesList = ['cheap','neutral','advantageous']        
         actions = OrderedDict()
         actionsTypesList = self.actionsTypesList
-        for i in range(numberOfActions):
+        for i in range(1,numberOfActions+1):
             actionType = random.choice(actionsTypesList)
             if BigData:
-                actionName = ('a%%0%dd' % (nd)) % (i+1)
+                actionName = ('%%0%dd' % (nd)) % (i)
                 actions[i] = {'shortName':actionName+actionType[0],
                               'name':actionName+actionType[0],
                               'type': actionType}
             else:   
-                actionKey = ('a%%0%dd' % (nd)) % (i+1)
+                actionKey = ('a%%0%dd' % (nd)) % (i)
                 actions[actionKey] = {'shortName':actionKey+actionType[0],
-                        'name': 'random %s decision action' % (actionType),
+                        'name': 'action %s' % (actionKey),
                         'comment': 'Cost-Benefit',
                         'type': actionType}
         # generate objectives
@@ -3290,8 +3281,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
             nbuf = n
         if n2 < samplingSize:
             samplingSize = n2
-        from randomNumbers import IncrementalQuantileEstimator
-        est = IncrementalQuantileEstimator(nbuf=nbuf)
+        from randomNumbers import IncrementalQuantilesEstimator
+        est = IncrementalQuantilesEstimator(nbuf=nbuf)
         if Debug:
             print('commonPercentiles=', commonPercentiles)
         if commonPercentiles == None:
@@ -3346,8 +3337,8 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         samplingSize = self.samplingSize
         if n2 < samplingSize:
             samplingSize = n2
-        from randomNumbers import IncrementalQuantileEstimator
-        est = IncrementalQuantileEstimator(nbuf=nbuf)
+        from randomNumbers import IncrementalQuantilesEstimator
+        est = IncrementalQuantilesEstimator(nbuf=nbuf)
         commonPercentiles = self.commonPercentiles
         if Debug:
             print('commonPercentiles=', commonPercentiles)
@@ -3605,7 +3596,6 @@ if __name__ == "__main__":
 
     from digraphs import *
     from outrankingDigraphs import BipolarOutrankingDigraph
-#    from weakOrders import QuantilesRankingDigraph
     from randomPerfTabs import *
 ##    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
 ##                                         commonMode=('uniform',None,None),

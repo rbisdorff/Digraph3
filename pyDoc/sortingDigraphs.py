@@ -5,21 +5,22 @@ Algorithmic Decision Theory applications.
 
 Module for sorting and rating applications.
 
-Copyright (C) 2016-2018  Raymond Bisdorff.
+Copyright (C) 2016-2019  Raymond Bisdorff.
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 3 of the License, or
-(at your option) any later version.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 3 of the License, or
+    (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR ANY PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR ANY PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
 """
 #######################
 from digraphsTools import *
@@ -394,10 +395,10 @@ class SortingDigraph(BipolarOutrankingDigraph):
         String += 'Determinateness     : %.3f\n' % self.computeDeterminateness()
         String += '*------  Constructor run times (in sec.) ------*\n'
         try:
-            String += '#Threads         : %d\n' % self.nbrThreads
+            String += '# Threads        : %d\n' % self.nbrThreads
         except:
             self.nbrThreads = 1
-            String += '#Threads         : %d\n' % self.nbrThreads
+            String += '# Threads        : %d\n' % self.nbrThreads
         String += 'Total time       : %.5f\n' % self.runTimes['totalTime']
         String += 'Data input       : %.5f\n' % self.runTimes['dataInput']
         String += 'Compute profiles : %.5f\n' % self.runTimes['computeProfiles']
@@ -777,7 +778,7 @@ class SortingDigraph(BipolarOutrankingDigraph):
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nweakOrders module (graphviz)\\n R. Bisdorff, 2014", size="')
+        fo.write('\\transitiveDigraphs module (graphviz)\\n R. Bisdorff, 2014", size="')
         fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
         # nodes
         for x in actionKeys:
@@ -2108,7 +2109,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         Specialisation for QuantilesSortingDigraphs.
         """
         from decimal import Decimal
-        from weakOrders import WeakOrder
+        from transitiveDigraphs import TransitiveDigraph
         try:
             cC = self.categoryContent
         except:
@@ -2144,7 +2145,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         
         weakOrdering = {'result':ordering}
 
-        WeakOrder.showWeakOrder(self,weakOrdering)
+        TransitiveDigraph.showTransitiveDigraph(self,weakOrdering)
 
 ##        return orderingList
 
@@ -2214,6 +2215,7 @@ class QuantilesSortingDigraph(SortingDigraph):
               in the uppest, the lowest or the average potential quantile.
         
         """
+        from operator import itemgetter
         if strategy == None:
             strategy = 'optimistic'
         if HTML:
@@ -2226,35 +2228,40 @@ class QuantilesSortingDigraph(SortingDigraph):
         for x in self.actions:
             a,lowCateg,highCateg,credibility =\
                      self.showActionCategories(x,Comments=Debug)
+            #print(a,lowCateg,highCateg,credibility)
             if strategy == "optimistic":
                 try:
-                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                    actionsCategories[(highCateg,lowCateg,lowCateg)].append(a)
                 except:
-                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]
+                    actionsCategories[(highCateg,lowCateg,lowCateg)] = [a]
             elif strategy == "pessimistic":
                 try:
-                    actionsCategories[(int(lowCateg),int(highCateg))].append(a)
+                    actionsCategories[(lowCateg,highCateg,lowCateg)].append(a)
                 except:
-                    actionsCategories[(int(lowCateg),int(highCateg))] = [a]
+                    actionsCategories[(lowCateg,highCateg,lowCateg)] = [a]
             elif strategy == "average":
                 lc = float(lowCateg)
                 hc = float(highCateg)
                 ac = (lc+hc)/2.0
                 try:
-                    actionsCategories[(ac,int(highCateg),int(lowCateg))].append(a)
+                    actionsCategories[(ac,highCateg,lowCateg)].append(a)
                 except:
-                    actionsCategories[(ac,int(highCateg),int(lowCateg))] = [a]
+                    actionsCategories[(ac,highCateg,lowCateg)] = [a]
             else:  # optimistic by default
                 try:
-                    actionsCategories[(int(highCateg),int(lowCateg))].append(a)
+                    actionsCategories[(highCateg,lowCateg,lowCateg)].append(a)
                 except:
-                    actionsCategories[(int(highCateg),int(lowCateg))] = [a]      
+                    actionsCategories[(highCateg,lowCateg,lowCateg)] = [a]      
                 
+        #actionsCategIntervals.sort(reverse=Descending)
+        actionsCategoriesKeys = [key for key in actionsCategories]
+        actionsCategoriesKeys = sorted(actionsCategoriesKeys,key=itemgetter(0,1,2), reverse=True)
+
         actionsCategIntervals = []
-        for interval in actionsCategories:
+        for interval in actionsCategoriesKeys:
             actionsCategIntervals.append([interval,\
                                           actionsCategories[interval]])
-        actionsCategIntervals.sort(reverse=Descending)
+        
         weakOrdering = []
         for item in actionsCategIntervals:
             #print(item)
@@ -2271,8 +2278,8 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                 str(item[1])) )
                     else:
                         if HTML:
-                            html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][1])]['lowLimit'],\
-                                                self.categories[str(item[0][0])]['highLimit'])
+                            html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][0])]['lowLimit'],\
+                                                self.categories[str(item[0][1])]['highLimit'])
                             html += '<td>%s</td></tr>' % str(item[1])                            
                         else:
                             print('%s-%s : %s' % (self.categories[str(item[0][1])]['lowLimit'],\
@@ -2311,7 +2318,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                     else:
                         if HTML:
                             html += '<tr><td bgcolor="#FFF79B">%s-%s</td>' % (self.categories[str(item[0][2])]['lowLimit'],\
-                                                self.categories[str(item[0][2])]['highLimit'])
+                                                self.categories[str(item[0][1])]['highLimit'])
                             html += '<td>%s</td></tr>' % str(item[1])
                         else:
                             print('%s-%s : %s' % (self.categories[str(item[0][2])]['lowLimit'],\
@@ -2392,12 +2399,6 @@ class QuantilesSortingDigraph(SortingDigraph):
             y = ordering[n-i-1][1][1]
             if y != []:
                 orderingList.append(y)
-##            
-##        
-##        weakOrdering = {'result':ordering}
-##
-##        WeakOrder.showWeakOrder(self,weakOrdering)
-
         return orderingList
 
     def showOrderedRelationTable(self,direction="decreasing"):
@@ -3400,10 +3401,10 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         String += 'Attributes: %s\n' % list(self.__dict__.keys())
         String += '*------  Constructor run times (in sec.) ------*\n'
         try:
-            String += '#Threads         : %d\n' % self.nbrThreads
+            String += '# Threads        : %d\n' % self.nbrThreads
         except:
             self.nbrThreads = 1
-            String += '#Threads         : %d\n' % self.nbrThreads
+            String += '# Threads        : %d\n' % self.nbrThreads
         String += 'Total time       : %.5f\n' % self.runTimes['totalTime']
         String += 'Data input       : %.5f\n' % self.runTimes['dataInput']
         String += 'Quantile classes : %.5f\n' % self.runTimes['categories']
@@ -3760,7 +3761,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                              graphType='png',graphSize='7,7',\
                              fontSize=10):
         """
-        The rating drawing is using the :py:func:`weakOrders.WeakOrder.exportGraphViz` method for
+        The rating drawing is using the :py:func:`transitiveDigraphs.TransitiveDigraph.exportGraphViz` method for
         drawing oriented Hasse diagrams of weak orderings, ie the negation
         of the corresponding preorder relation.
 
@@ -3787,12 +3788,12 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
              and may not contain special characters like '-' or '_'.
              
         """
-        from weakOrders import WeakOrder
+        from transitiveDigraphs import TransitiveDigraph
         from copy import deepcopy
         ratingRelation = self.computeRatingRelation()
         self.relationOrig = deepcopy(self.relation)
         self.relation = ratingRelation
-        WeakOrder.exportGraphViz(self,fileName=fileName,\
+        TransitiveDigraph.exportGraphViz(self,fileName=fileName,\
                              direction=direction,Comments=Comments,\
                              graphType=graphType,graphSize=graphSize,\
                              digraphClass=self.__class__,\
@@ -4230,14 +4231,14 @@ if __name__ == "__main__":
     from randomPerfTabs import *
     from outrankingDigraphs import *
     from sortingDigraphs import *
-    from weakOrders import *
+    from transitiveDigraphs import *
     from performanceQuantiles import *
     
     print("""
     ****************************************************
     * Python sortingDigraphs module                    *
     * depends on BipolarOutrankingDigraph and          *
-    * $Revision: 3124 $                                 *
+    * $Revision: 3336 $                                 *
     * Copyright (C) 2010 Raymond Bisdorff              *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
@@ -4254,15 +4255,15 @@ if __name__ == "__main__":
 ##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
 ##    t = XMCDA2PerformanceTableau('spiegel2004')
 ##    t = XMCDA2PerformanceTableau('ex1')
-    t = RandomCBPerformanceTableau(numberOfActions=25,
-                                    numberOfCriteria=13,
-                                             NegativeWeights=True,
-                                    weightDistribution='equiobjectives',
-                                    missingDataProbability=0.05,
-                                    seed=1)
-    #t.showHTMLPerformanceHeatmap(Correlations=True)
-    nt = NormalizedPerformanceTableau(t)
-    nt.showHTMLPerformanceHeatmap(Correlations=True)
+##    t = RandomCBPerformanceTableau(numberOfActions=25,
+##                                    numberOfCriteria=13,
+##                                             NegativeWeights=True,
+##                                    weightDistribution='equiobjectives',
+##                                    missingDataProbability=0.05,
+##                                    seed=1)
+##    #t.showHTMLPerformanceHeatmap(Correlations=True)
+##    nt = NormalizedPerformanceTableau(t)
+##    nt.showHTMLPerformanceHeatmap(Correlations=True)
     
 ##    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)
 ####    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
@@ -4301,15 +4302,15 @@ if __name__ == "__main__":
 ##    so2.showSorting()
     
 ##    t.saveXMCDA2('test',servingD3=False)
-    #t = XMCDA2PerformanceTableau('test')  
-    #t.showHTMLPerformanceHeatmap(colorLevels=5,ndigits=0,Correlations=True)
-    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
-                                     Threading=MP,tempDir='.',Comments=True,
-                                     Debug=False)
-    qs.showHTMLQuantileOrdering(strategy='average')
-    qs.showWeakOrder()
-    qs.showQuantileOrdering(strategy='average')
-    qs.showActionsSortingResult()
+##    #t = XMCDA2PerformanceTableau('test')  
+##    #t.showHTMLPerformanceHeatmap(colorLevels=5,ndigits=0,Correlations=True)
+##    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
+##                                     Threading=MP,tempDir='.',Comments=True,
+##                                     Debug=False)
+##    qs.showHTMLQuantileOrdering(strategy='average')
+##    qs.showWeakOrder()
+##    qs.showQuantileOrdering(strategy='average')
+##    qs.showActionsSortingResult()
 ##    qs0 = _QuantilesSortingDigraph(t,15,LowerClosed=False,
 ##                                     Threading=False,
 ##                                     Debug=False)
@@ -4329,15 +4330,14 @@ if __name__ == "__main__":
 ##    qs0.showSorting()
 ##    qs0.showActionsSortingResult(Debug=False)
 ##    qs0.computeWeakOrder(Debug=True)
-##    from weakOrders import QuantilesRankingDigraph
 ##    g = BipolarOutrankingDigraph(t,Normalized=True)
 ##    print(g.computeOrdinalCorrelation(qs0))
 ##    print(g.computeOrdinalCorrelation(qsrbc))
     
 ##    # test incremental rating agent
-##    MP = False
-##    seed = 105
-##    nbrOfCPUs = 4
+    MP = False
+    seed = 1000
+    nbrOfCPUs = 4
 
 ##    from randomPerfTabs import RandomPerformanceTableau
 ##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
@@ -4354,19 +4354,27 @@ if __name__ == "__main__":
 ##                                    numberOfCriteria=nbrCrit,\
 ##                                    Threading=MP,seed=seed)
 ##
-##    from randomPerfTabs import Random3ObjectivesPerformanceTableau
-##    from randomPerfTabs import Random3ObjectivesPerformanceGenerator as PerfTabGenerator
-##    nbrActions=1000
-##    nbrCrit = 21
-##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
-##                                    numberOfCriteria=nbrCrit,seed=seed)
+    from randomPerfTabs import Random3ObjectivesPerformanceTableau
+    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
+    nbrActions=100
+    nbrCrit = 21
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
+                                    numberOfCriteria=nbrCrit,seed=seed)
 
-##    pq = PerformanceQuantiles(tp,20,LowerClosed=False,Debug=False)
+    qs = QuantilesSortingDigraph(tp,7,LowerClosed=True)
+    #qs.showSorting()
+    print('==>> average')
+    qs.showHTMLQuantileOrdering(strategy='average')
+    print('==>> optimistic')
+    qs.showQuantileOrdering(strategy='optimistic')
+    print('==>> pessimistic')
+    qs.showQuantileOrdering(strategy='pessimistic')
+##    pq = PerformanceQuantiles(tp,20,LowerClosed=True,Debug=False)
 ##    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-##    newActions = tpg.randomActions(10)
+##    newActions = tpg.randomActions(100)
 ##    pq.updateQuantiles(newActions,historySize=None)
-##    ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=10,\
-##                                       PrefThresholds=False,\
+##    ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=20,\
+##                                       #PrefThresholds=False,\
 ##                                   WithSorting=True,Debug=False,\
 ##                                       Threading=MP,nbrOfCPUs=nbrOfCPUs)
 ##    print(ira)
@@ -4380,7 +4388,6 @@ if __name__ == "__main__":
 ##    ira.relation = ratingRelation
 ##    #ira.closeTransitive(Irreflexive=True,Reverse=True)
 ##    ira.showHTMLRelationTable(actionsList=ira.actionsRanking)
-##    from weakOrders import WeakOrder
 ##    ira.exportRatingGraphViz(graphType='pdf')
 ##    #ira.showSorting()
 ##    #ira.showHTMLSorting()
@@ -4451,7 +4458,7 @@ if __name__ == "__main__":
 
     print('*************************************')
     print('* R.B. december 2010                *')
-    print('* $Revision: 3124 $                  *')
+    print('* $Revision: 3336 $                  *')
     print('*************************************')
 
 #############################

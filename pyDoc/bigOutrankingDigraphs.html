@@ -239,7 +239,9 @@ Data descriptors defined here:<br>
 <font color="#000000" face="helvetica, arial"><a name="BigOutrankingDigraph">class <strong>BigOutrankingDigraph</strong></a>(<a href="bigOutrankingDigraphs.html#BigDigraph">BigDigraph</a>, <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>..&nbsp;warning::<br>
+<td colspan=2><tt><a href="#BigOutrankingDigraph">BigOutrankingDigraph</a>(argPerfTab,&nbsp;quantiles=None,&nbsp;quantilesOrderingStrategy='average',&nbsp;LowerClosed=True,&nbsp;componentRankingRule='Copeland',&nbsp;minimalComponentSize=None,&nbsp;Threading=False,&nbsp;tempDir=None,&nbsp;nbrOfCPUs=None,&nbsp;nbrOfThreads=None,&nbsp;save2File=None,&nbsp;CopyPerfTab=True,&nbsp;Comments=False,&nbsp;Debug=False)<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;Obsolete&nbsp;class!&nbsp;Use&nbsp;the&nbsp;equivalent&nbsp;sparseOutramkinDigraphs.PreRankedOutrankingDigraph&nbsp;class&nbsp;instead.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
@@ -635,14 +637,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="BigOutrankingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="BigOutrankingDigraph-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="BigOutrankingDigraph-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraph-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#BigOutrankingDigraph-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#BigOutrankingDigraph-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraph-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="BigOutrankingDigraph-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -651,7 +651,9 @@ on&nbsp;each&nbsp;criteria.</tt></dd></dl>
 <font color="#000000" face="helvetica, arial"><a name="BigOutrankingDigraphDev">class <strong>BigOutrankingDigraphDev</strong></a>(<a href="bigOutrankingDigraphs.html#BigOutrankingDigraph">BigOutrankingDigraph</a>, <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>..&nbsp;warning::<br>
+<td colspan=2><tt><a href="#BigOutrankingDigraphDev">BigOutrankingDigraphDev</a>(argPerfTab=None,&nbsp;quantiles=None,&nbsp;quantilesOrderingStrategy='average',&nbsp;LowerClosed=True,&nbsp;componentRankingRule='Copeland',&nbsp;minimalComponentSize=None,&nbsp;Threading=False,&nbsp;tempDir=None,&nbsp;nbrOfCPUs=None,&nbsp;nbrOfThreads=None,&nbsp;save2File=None,&nbsp;CopyPerfTab=True,&nbsp;Comments=False,&nbsp;Debug=False)<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;!!!&nbsp;In&nbsp;Development,&nbsp;only&nbsp;for&nbsp;testing&nbsp;purposes<br>
 &nbsp;<br>
@@ -1065,14 +1067,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="BigOutrankingDigraphDev-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="BigOutrankingDigraphDev-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="BigOutrankingDigraphDev-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraphDev-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#BigOutrankingDigraphDev-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#BigOutrankingDigraphDev-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraphDev-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="BigOutrankingDigraphDev-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -1081,7 +1081,9 @@ on&nbsp;each&nbsp;criteria.</tt></dd></dl>
 <font color="#000000" face="helvetica, arial"><a name="BigOutrankingDigraphMP">class <strong>BigOutrankingDigraphMP</strong></a>(<a href="bigOutrankingDigraphs.html#BigOutrankingDigraph">BigOutrankingDigraph</a>, <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>..&nbsp;warning::<br>
+<td colspan=2><tt><a href="#BigOutrankingDigraphMP">BigOutrankingDigraphMP</a>(argPerfTab=None,&nbsp;quantiles=None,&nbsp;quantilesOrderingStrategy='average',&nbsp;LowerClosed=True,&nbsp;componentRankingRule='Copeland',&nbsp;minimalComponentSize=None,&nbsp;Threading=False,&nbsp;tempDir=None,&nbsp;nbrOfCPUs=None,&nbsp;nbrOfThreads=None,&nbsp;save2File=None,&nbsp;CopyPerfTab=True,&nbsp;Comments=False,&nbsp;Debug=False)<br>
+&nbsp;<br>
+..&nbsp;warning::<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;!!!&nbsp;Development&nbsp;and&nbsp;testing&nbsp;implementation&nbsp;!!!<br>
 &nbsp;<br>
@@ -1495,14 +1497,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="BigOutrankingDigraphMP-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="BigOutrankingDigraphMP-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="BigOutrankingDigraphMP-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraphMP-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#BigOutrankingDigraphMP-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#BigOutrankingDigraphMP-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="BigOutrankingDigraphMP-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="BigOutrankingDigraphMP-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

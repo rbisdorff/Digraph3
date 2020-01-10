@@ -9,28 +9,15 @@
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>perfTabs</strong></big></big> (version 1.37)</font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/perfTabs.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/perfTabs.py</a></font></td></tr></table>
-    <p><tt>#&nbsp;testing&nbsp;commit&nbsp;-&nbsp;ian<br>
-#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
-#&nbsp;Python&nbsp;implementation&nbsp;of&nbsp;digraphs<br>
-#&nbsp;submodule&nbsp;perfTabs.py&nbsp;&nbsp;for&nbsp;performance&nbsp;tableaux&nbsp;&nbsp;<br>
-#&nbsp;Current&nbsp;revision&nbsp;$Revision:&nbsp;1.37&nbsp;$<br>
-#&nbsp;Copyright&nbsp;(C)&nbsp;2011&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
-#<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
-#<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
-#<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,<br>
-#&nbsp;&nbsp;&nbsp;&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.<br>
-#<br>
-#######################</tt></p>
+    <p><tt>Python&nbsp;implementation&nbsp;of&nbsp;digraphs<br>
+Module&nbsp;for&nbsp;working&nbsp;with&nbsp;performance&nbsp;tableaux&nbsp;&nbsp;<br>
+Copyright&nbsp;(C)&nbsp;2011-2019&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -76,7 +63,9 @@
 <font color="#000000" face="helvetica, arial"><a name="CSVPerformanceTableau">class <strong>CSVPerformanceTableau</strong></a>(<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Reading&nbsp;stored&nbsp;CSV&nbsp;encoded&nbsp;actions&nbsp;x&nbsp;criteria&nbsp;<a href="#PerformanceTableau">PerformanceTableau</a>&nbsp;instances,&nbsp;Using&nbsp;the&nbsp;inbuilt&nbsp;module&nbsp;csv.<br>
+<td colspan=2><tt><a href="#CSVPerformanceTableau">CSVPerformanceTableau</a>(fileName='temp',&nbsp;Debug=True)<br>
+&nbsp;<br>
+Reading&nbsp;stored&nbsp;CSV&nbsp;encoded&nbsp;actions&nbsp;x&nbsp;criteria&nbsp;<a href="#PerformanceTableau">PerformanceTableau</a>&nbsp;instances,&nbsp;Using&nbsp;the&nbsp;inbuilt&nbsp;module&nbsp;csv.<br>
 &nbsp;<br>
 Param:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;fileName&nbsp;(without&nbsp;the&nbsp;extension&nbsp;.csv).<br>&nbsp;</tt></td></tr>
@@ -265,14 +254,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="CSVPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="CSVPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="CSVPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="CSVPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#CSVPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#CSVPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="CSVPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="CSVPerformanceTableau-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>:<br>
@@ -289,7 +276,9 @@ Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">Perfo
 <font color="#000000" face="helvetica, arial"><a name="ConstantPerformanceTableau">class <strong>ConstantPerformanceTableau</strong></a>(<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Constructor&nbsp;for&nbsp;(partially)&nbsp;constant&nbsp;performance&nbsp;tableaux.<br>
+<td colspan=2><tt><a href="#ConstantPerformanceTableau">ConstantPerformanceTableau</a>(inPerfTab,&nbsp;actionsSubset=None,&nbsp;criteriaSubset=None,&nbsp;position=0.5)<br>
+&nbsp;<br>
+Constructor&nbsp;for&nbsp;(partially)&nbsp;constant&nbsp;performance&nbsp;tableaux.<br>
 &nbsp;<br>
 *Parameter*:<br>
 &nbsp;<br>
@@ -481,14 +470,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="ConstantPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="ConstantPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="ConstantPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="ConstantPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#ConstantPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#ConstantPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="ConstantPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="ConstantPerformanceTableau-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>:<br>
@@ -691,14 +678,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="EmptyPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="EmptyPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="EmptyPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="EmptyPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#EmptyPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#EmptyPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="EmptyPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="EmptyPerformanceTableau-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>:<br>
@@ -715,7 +700,9 @@ Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">Perfo
 <font color="#000000" face="helvetica, arial"><a name="NormalizedPerformanceTableau">class <strong>NormalizedPerformanceTableau</strong></a>(<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>specialsation&nbsp;of&nbsp;the&nbsp;<a href="#PerformanceTableau">PerformanceTableau</a>&nbsp;class&nbsp;for<br>
+<td colspan=2><tt><a href="#NormalizedPerformanceTableau">NormalizedPerformanceTableau</a>(argPerfTab=None,&nbsp;lowValue=0,&nbsp;highValue=100,&nbsp;coalition=None,&nbsp;Debug=False)<br>
+&nbsp;<br>
+specialsation&nbsp;of&nbsp;the&nbsp;<a href="#PerformanceTableau">PerformanceTableau</a>&nbsp;class&nbsp;for<br>
 constructing&nbsp;normalized,&nbsp;0&nbsp;-&nbsp;100,&nbsp;valued&nbsp;<a href="#PerformanceTableau">PerformanceTableau</a><br>
 instances&nbsp;from&nbsp;a&nbsp;given&nbsp;argPerfTab&nbsp;instance.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
@@ -903,14 +890,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="NormalizedPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="NormalizedPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="NormalizedPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="NormalizedPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#NormalizedPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#NormalizedPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="NormalizedPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="NormalizedPerformanceTableau-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>:<br>
@@ -927,7 +912,9 @@ Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">Perfo
 <font color="#000000" face="helvetica, arial"><a name="PartialPerformanceTableau">class <strong>PartialPerformanceTableau</strong></a>(<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Constructor&nbsp;for&nbsp;partial&nbsp;performance&nbsp;tableaux&nbsp;concerning&nbsp;a&nbsp;subset&nbsp;of&nbsp;actions&nbsp;and/or&nbsp;criteria&nbsp;and/or&nbsp;objectives<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt><a href="#PartialPerformanceTableau">PartialPerformanceTableau</a>(inPerfTab,&nbsp;actionsSubset=None,&nbsp;criteriaSubset=None,&nbsp;objectivesSubset=None)<br>
+&nbsp;<br>
+Constructor&nbsp;for&nbsp;partial&nbsp;performance&nbsp;tableaux&nbsp;concerning&nbsp;a&nbsp;subset&nbsp;of&nbsp;actions&nbsp;and/or&nbsp;criteria&nbsp;and/or&nbsp;objectives<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="perfTabs.html#PartialPerformanceTableau">PartialPerformanceTableau</a></dd>
@@ -1113,14 +1100,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="PartialPerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="PartialPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="PartialPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="PartialPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#PartialPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#PartialPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="PartialPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="PartialPerformanceTableau-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>:<br>
@@ -1137,7 +1122,9 @@ Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">Perfo
 <font color="#000000" face="helvetica, arial"><a name="PerformanceTableau">class <strong>PerformanceTableau</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>In&nbsp;this&nbsp;*Digraph3*&nbsp;module,&nbsp;the&nbsp;root&nbsp;:py:class:`perfTabs.<a href="#PerformanceTableau">PerformanceTableau</a>`&nbsp;class&nbsp;provides&nbsp;a&nbsp;generic&nbsp;**performance&nbsp;table&nbsp;model**.&nbsp;A&nbsp;given&nbsp;<a href="builtins.html#object">object</a>&nbsp;of&nbsp;this&nbsp;class&nbsp;consists&nbsp;in:<br>
+<td colspan=2><tt><a href="#PerformanceTableau">PerformanceTableau</a>(filePerfTab=None,&nbsp;isEmpty=False)<br>
+&nbsp;<br>
+In&nbsp;this&nbsp;*Digraph3*&nbsp;module,&nbsp;the&nbsp;root&nbsp;:py:class:`perfTabs.<a href="#PerformanceTableau">PerformanceTableau</a>`&nbsp;class&nbsp;provides&nbsp;a&nbsp;generic&nbsp;**performance&nbsp;table&nbsp;model**.&nbsp;A&nbsp;given&nbsp;<a href="builtins.html#object">object</a>&nbsp;of&nbsp;this&nbsp;class&nbsp;consists&nbsp;in:<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.&nbsp;a&nbsp;set&nbsp;of&nbsp;potential&nbsp;decision&nbsp;**actions**&nbsp;:&nbsp;an&nbsp;ordered&nbsp;dictionary&nbsp;describing&nbsp;the&nbsp;potential&nbsp;decision&nbsp;actions&nbsp;or&nbsp;alternatives&nbsp;with&nbsp;'name'&nbsp;and&nbsp;'comment'&nbsp;attributes,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;an&nbsp;optional&nbsp;set&nbsp;of&nbsp;decision&nbsp;**objectives**:&nbsp;an&nbsp;ordered&nbsp;dictionary&nbsp;with&nbsp;name,&nbsp;comment,&nbsp;weight&nbsp;and&nbsp;list&nbsp;of&nbsp;concerned&nbsp;criteria&nbsp;per&nbsp;objective,<br>
@@ -1418,14 +1405,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="PerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="PerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="PerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="PerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#PerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#PerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="PerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="PerformanceTableau-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>
@@ -1442,7 +1427,9 @@ Data descriptors defined here:<br>
 <font color="#000000" face="helvetica, arial"><a name="XMCDA2PerformanceTableau">class <strong>XMCDA2PerformanceTableau</strong></a>(<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Specialization&nbsp;of&nbsp;the&nbsp;general&nbsp;<a href="#PerformanceTableau">PerformanceTableau</a>&nbsp;class&nbsp;for&nbsp;reading<br>
+<td colspan=2><tt><a href="#XMCDA2PerformanceTableau">XMCDA2PerformanceTableau</a>(fileName='temp',&nbsp;HasSeparatedWeights=False,&nbsp;HasSeparatedThresholds=False,&nbsp;stringInput=None,&nbsp;Debug=False)<br>
+&nbsp;<br>
+Specialization&nbsp;of&nbsp;the&nbsp;general&nbsp;<a href="#PerformanceTableau">PerformanceTableau</a>&nbsp;class&nbsp;for&nbsp;reading<br>
 stored&nbsp;XMCDA&nbsp;2.0&nbsp;formatted&nbsp;instances&nbsp;with&nbsp;exact&nbsp;decimal&nbsp;numbers.<br>
 Using&nbsp;the&nbsp;inbuilt&nbsp;module&nbsp;xml.etree&nbsp;(for&nbsp;Python&nbsp;2.5+).<br>
 &nbsp;<br>
@@ -1636,14 +1623,12 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="XMCDA2PerformanceTableau-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2PerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+<dl><dt><a name="XMCDA2PerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2PerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#XMCDA2PerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#XMCDA2PerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2PerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
-
-<dl><dt><a name="XMCDA2PerformanceTableau-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>:<br>

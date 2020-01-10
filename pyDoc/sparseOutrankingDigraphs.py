@@ -1,24 +1,25 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Digraph3 collection of python3 modules for Algorithmic Decision Theory applications
 
 Module for sparse pre-ranked outranking digraphs
 
-Copyright (C) 2016  Raymond Bisdorff
+Copyright (C) 2016-19  Raymond Bisdorff
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 3 of the License, or
-(at your option) any later version.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 3 of the License, or
+    (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR ANY PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR ANY PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
 from outrankingDigraphs import *
 from sortingDigraphs import *
@@ -167,6 +168,25 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         else:
             return { 'correlation': 0.0,\
                      'determination': 0.0 }
+
+    def estimateRankingCorrelation(self,sampleSize=100,seed=1,Debug=False):
+        import random
+        random.seed(seed)
+        actionKeys = [x for x in self.actions]
+        sample = random.sample(actionKeys,sampleSize)
+        if Debug:
+            print(sample)
+        preRankedSample = []
+        for x in self.boostedRanking:
+            if x in sample:
+                preRankedSample.append(x)
+        if Debug:
+            print(preRankedSample)
+        ptp = PartialPerformanceTableau(self,sample)
+        from outrankingDigraphs import BipolarOutrankingDigraph
+        pg = BipolarOutrankingDigraph(ptp,Normalized=True)
+        corr = pg.computeRankingCorrelation(preRankedSample)
+        return corr
 
     def sortingRelation(self,x,y,Debug=False):
         """
@@ -629,6 +649,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         export GraphViz dot file  for graph drawing filtering.
         """
         import os
+        
         if Comments:
             print('*---- exporting a dot file dor GraphViz tools ---------*')
         if actionsSubset == None:
@@ -722,8 +743,8 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         fo.close()
         if type(self) == CirculantDigraph:
             commandString = 'circo -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
-        elif type(self) == RandomTree:
-            commandString = 'neato -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
+        # elif type(self) == RandomTree:
+        #     commandString = 'neato -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
         else:
             commandString = 'dot -Grankdir=BT -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
@@ -877,7 +898,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nweakOrders module (graphviz)\\n R. Bisdorff, 2014", size="')
+        fo.write('\\ntransitiveDigraphs module (graphviz)\\n R. Bisdorff, 2014", size="')
         fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
         # nodes
         for x in actionsKeys:
@@ -975,6 +996,8 @@ def _decompose(i, nc,tempDirName,componentRankingRule):
     fo.write(dumps(splitComponent,-1))
     fo.close()
     return '%d/%d (%d)' % (i,nc,pg.order)
+
+
 
 class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
     """
@@ -1225,9 +1248,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             self.showShort(fileName=save2File)
 
 
-    # ----- class methods ------------
-
-
+    # ----- PreRankedOutrankingDigraph class methods ------------
 
     def _computeQuantileOrdering(self,strategy=None,
                                 Descending=True,
@@ -1256,43 +1277,74 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                                                nbrOfCPUs = nbrOfCPUs)
             lowQtileLimit = self.categories[lowCateg]['lowLimit']
             highQtileLimit = self.categories[highCateg]['highLimit']
-            if strategy == "optimistic":
-                score1 = float(highCateg)
-                score2 = -float(notHighLimit)
-                score3 = float(lowCateg)
-                score4 = float(lowLimit)
+            lowQtileValue = self.categories[lowCateg]['quantile']
+            highQtileValue = self.categories[highCateg]['quantile']
+            if strategy == "average":
+                lc = int(lowCateg)
+                hc = int(highCateg)
+                score1 = (lc + hc)
+                score2 = hc
+                score3 = (lc + hc)
+                score4 = hc
+            elif strategy == "optimistic":
+                score1 = int(highCateg)
+                score2 = int(lowCateg)
+                score3 = int(highCateg)
+                score4 = int(lowCateg)
             elif strategy == "pessimistic":
-                score1 = float(lowCateg)
-                score2 = float(lowLimit)
-                score3 = float(highCateg)
-                score4 = -float(notHighLimit)
-            else:   #strategy == "average":
+                score1 = int(lowCateg)
+                score2 = int(highCateg)
+                score3 = int(lowCateg)
+                score4 = int(highCateg)
+            else:  #strategy == "optimal":
                 lc = float(lowCateg)
                 hc = float(highCateg)
                 score1 = (lc+hc)/2.0
-                score2 = float(highCateg)
+                score2 = hc
                 score3 = float(lowLimit) - float(notHighLimit)
                 score4 = -float(notHighLimit)
             #print(score1,highQtileLimit,lowQtileLimit,lowCateg,highCateg,score2,score3,score4)
+            #if Optimal:
             try:
-                actionsCategories[(score1,highQtileLimit,\
-                                   lowQtileLimit,lowCateg,highCateg,score2,score3,score4)].append(a)
+                actionsCategories[(score1,score2,score3,score4,highQtileValue,\
+                                   lowQtileValue,lowCateg,highCateg,highQtileLimit,lowQtileLimit)].append(a)
             except:
-                actionsCategories[(score1,highQtileLimit,\
-                                   lowQtileLimit,lowCateg,highCateg,score2,score3,score4)] = [a]
+                actionsCategories[(score1,score2,score3,score4,highQtileValue,\
+                                   lowQtileValue,lowCateg,highCateg,highQtileLimit,lowQtileLimit)] = [a]
+##            else:
+##                try:
+##                    actionsCategories[(score1,highQtileValue,\
+##                                       lowQtileValue,lowCateg,highCateg,highQtileLimit,lowQtileLimit)].append(a)
+##                except:
+##                    actionsCategories[(score1,highQtileValue,\
+##                                       lowQtileValue,lowCateg,highCateg,highQtileLimit,lowQtileLimit)] = [a]
+               
 
-        actionsCategIntervals = sorted(actionsCategories,key=itemgetter(0,5,6,7), reverse=True)
+        #if Optimal:
+        actionsCategIntervals = sorted(actionsCategories,key=itemgetter(0,1,2,3), reverse=True)
+##        else:
+##            actionsCategIntervals = sorted(actionsCategories,key=itemgetter(0), reverse=True)
+      
         if Debug:
             print(actionsCategIntervals)
         compSize = self.minimalComponentSize
 
-        if compSize == 1:
+        if compSize <= 1:
+            #if Optimal:
             if Descending:
-                componentsIntervals = [[(item[1],item[2]),actionsCategories[item],item[0],item[3],item[4]]\
+                componentsIntervals = [[(item[8],item[9]),actionsCategories[item],item[0],item[6],item[7]]\
                                    for item in actionsCategIntervals]
             else:
-                componentsIntervals = [[(item[2],item[1]),actionsCategories[item],item[0],item[3],item[4]]\
+                componentsIntervals = [[(item[9],item[8]),actionsCategories[item],item[0],item[6],item[7]]\
                                    for item in actionsCategIntervals]
+##            else:
+##                if Descending:
+##                    componentsIntervals = [[(item[5],item[6]),actionsCategories[item],item[0],item[3],item[4]]\
+##                                       for item in actionsCategIntervals]
+##                else:
+##                    componentsIntervals = [[(item[6],item[5]),actionsCategories[item],item[0],item[3],item[4]]\
+##                                       for item in actionsCategIntervals]
+                
 
         else:
             componentsIntervals = []
@@ -1302,18 +1354,28 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 currContLength = len(compContent)
                 comp = actionsCategIntervals[i]
                 #print(comp)
+                #if Optimal:
                 if currContLength == 0:
-                    lowQtileLimit = comp[2]
-                highQtileLimit = comp[1]
+                    lowQtileLimit = comp[9]
+                highQtileLimit = comp[8]
+##                else:
+##                    if currContLength == 0:
+##                        lowQtileLimit = comp[6]
+##                    highQtileLimit = comp[5]
+                    
                 compContent += actionsCategories[comp]
                 if len(compContent) >= compSize or i == nc-1:
                     score = comp[0]
-                    lowCateg = comp[3]
-                    highCateg = comp[4]
+                    lowCateg = comp[6]
+                    highCateg = comp[7]
                     if Descending:
+                        highQtileLimit = comp[8]
+                        lowQtileLimit = comp[9]
                         componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent,\
                                                     score,lowCateg,highCateg])
                     else:
+                        highQtileLimit = comp[8]
+                        lowQtileLimit = comp[9]
                         componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent,\
                                                     score,lowCateg,highCateg])
                     compContent = []
@@ -2699,112 +2761,41 @@ if __name__ == "__main__":
 ##    pre = PreRankedOutrankingDigraph(tenv,Debug=True)
 ##    print(pre.computeOrderCorrelation(pre.boostedOrder))
 ##    tenv.showHTMLPerformanceHeatmap()
-    MP  = True
-    nbrActions=500
+    MP  = False
+    nbrActions=1000
 ##    t0 = time()
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=105)
+    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=100)
 ##    tp = XMCDA2PerformanceTableau('the_cs_2016')
 
 ##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
 ##                                     seed=100)
-    bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
-                                 quantilesOrderingStrategy='average',
-                                 componentRankingRule='Copeland',
-                                 LowerClosed=False,
+    bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=4,
+                                 quantilesOrderingStrategy='optimal',
+                                 componentRankingRule='NetFlows',
+                                 LowerClosed=True,
                                  minimalComponentSize=1,
                                  Threading=MP,nbrOfCPUs=8,
                                  #tempDir='.',
                                  nbrOfThreads=8,
                                  Comments=True,Debug=False,
                                  save2File='testbgMP')
-    print(bg1)
-    bg1.showHTMLPrformanceHeatmap()
-##    bg1.showComponents(direction='descending')
-##    #bg1.showRelationTable()
-##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
-##                                 quantilesOrderingStrategy='average',
-##                                 componentRankingRule='Copeland',
-##                                 LowerClosed=False,
-##                                 minimalComponentSize=1,
-##                                 Threading=MP,nbrOfCPUs=8,
-##                                 #tempDir='.',
-##                                 nbrOfThreads=8,
-##                                 Comments=False,Debug=False,
-##                                 save2File='testbgMP')
-##    print(bg2)
-##    bg2.showComponents(direction='descending')
-##    from weakOrders import WeakRankingOrder
-##    wr = WeakRankingOrder(bg1,[bg1.boostedRanking,bg2.boostedRanking])
-##    wr.exportGraphViz('fusion-cpr-pr',graphType="pdf")
+    bg1.showDecomposition(direction='decreasing')
 
-##    rag = RandomCBPerformanceGenerator(bg1,actionNamePrefix='t')
-##    rag = Random3ObjectivesPerformanceGenerator(bg1,actionNamePrefix='t')
-##    rag.randomUpdate(2)
-##    newActions = [key for key in bg1.actions if key[0] == 't']
-##    print(newActions)
-##    if bg1.sortingParameters['LowerClosed']:
-##        newRelation = bg1._constructRelationSimple(bg1.criteria,bg1.evaluation,
-##                                               initial=newActions,terminal=bg1.profiles)
-##    else:
-##        newRelation = bg1._constructRelationSimple(bg1.criteria,bg1.evaluation,
-##                                               initial=bg1.profiles,terminal=newActions)
-##    print(newRelation)
-##    newSorting = bg1.computeNewSortingCharacteristics(newActions,newRelation)
-##    print(newSorting)
-##    for x in newActions:
-##        res = bg1.computeNewActionCategories(x,newSorting)
-##        print(res,bg1.categories[res[1]]['lowLimit'],bg1.categories[res[2]]['highLimit'])
-##        #compute score
-##        strategy = bg1.sortingParameters['strategy']
-##        if strategy == 'optimistic':
-##            score = float(res[1])
-##        elif strategy == 'pessimistic':
-##            score = float(res[2])
-##        else:
-##            score = (float(res[1])+float(res[2]))/2.0
-##
-##        bg1.showNewActionCategories(x,newSorting)
-##        for compKey in bg1.components:
-##            comp = bg1.components[compKey]
-##            #print(score,comp)
-##            if comp['lowQtileLimit'] == bg1.categories[res[1]]['lowLimit'] and\
-##               comp['highQtileLimit'] == bg1.categories[res[2]]['highLimit']:
-##                Found = True
-##                print('new Action \'%s\' joins component %s-%s: %s (%s)' % (res[0],comp['lowQtileLimit'],\
-##                                                comp['highQtileLimit'], list(comp['subGraph'].actions.keys()), str(comp['score']) ) )
-##                break
-##            if score > comp['score'][0]:
-##                print('New component: %s-%s : [\'%s\'] needs to be inserted!' %\
-##                  (bg1.categories[res[1]]['lowLimit'],bg1.categories[res[2]]['highLimit'],res[0]) )
-##                break
-##
-##    bg1.sorting.update(newSorting)
-##    bg1.showDecomposition(direction='increasing')
-##    bg1.showDecomposition(direction='decreasing')
-##    bg1.showSorting()
-##    bg1.showActionSortingResult('a001')
-
-##    bg1.sorting.update(newSorting)
-##    bg1.showActionsSortingResult()
-
-
-
-    #bg1.exportSortingGraphViz(actionsSubset=bg1.boostedRanking[:100])
-
-##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
-##                                      seed=100)
-##
-##    bg2 = PreRankedOutrankingDigraph(tp,CopyPerfTab=False,quantiles=10,
-##                                 quantilesOrderingStrategy='average',
-##                                 componentRankingRule='NetFlows',
-##                                 LowerClosed=True,
-##                                 minimalComponentSize=10,
-##                                 Threading=MP,nbrOfCPUs=8,
-##                                 #tempDir='.',
-##                                 nbrOfThreads=8,
-##                                 Comments=True,Debug=False,
-##                                 save2File='testbgDev')
-##    print(bg2)
-    #print(bg1.computeDecompositionSummaryStatistics())
-    #bg1.showDecomposition(direction='increasing')
-    #bg2.showHTMLRelationMap(0,100)
+    seed= 1
+    sampleSize = 100
+##    import random
+##    random.seed(seed)
+##    actionKeys = [x for x in bg1.actions]
+##    sample = random.sample(actionKeys,sampleSize)
+##    print(sample)
+##    print(bg1.boostedRanking)
+##    preRankedSample = []
+##    for x in bg1.boostedRanking:
+##        if x in sample:
+##            preRankedSample.append(x)
+##    print(preRankedSample)
+##    ptp = PartialPerformanceTableau(tp,sample)
+##    from outrankingDigraphs import BipolarOutrankingDigraph
+##    pg = BipolarOutrankingDigraph(ptp,Normalized=True)
+##    print(pg.computeRankingCorrelation(preRankedSample))
+    print(bg1.estimateRankingCorrelation(sampleSize,seed))

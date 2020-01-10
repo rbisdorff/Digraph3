@@ -2,21 +2,22 @@
 """
 Python implementation of outranking digraphs.
 
-Copyright (C) 2006-20017  Raymond Bisdorff
+Copyright (C) 2006-20019  Raymond Bisdorff
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 3 of the License, or
-(at your option) any later version.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 3 of the License, or
+    (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+    You should have received a copy of the GNU General Public License along
+    with this program; if not, write to the Free Software Foundation, Inc.,
+    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
 """
 
 __version__ = "Revision: Py35"
@@ -53,6 +54,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         Cannot be called directly ! No __init__(self,...) method defined.
         
     """
+
     def computeMarginalCorrelation(self,args,Threading=False,\
                                     nbrOfCPUs=None,Debug=False,
                                     Comments=False):
@@ -648,7 +650,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             
         return pairwiseComparison
 
-    def computeActionsCorrelations(self):
+    def computeActionsComparisonCorrelations(self):
         """
         renders the comparison correlations between the actions
         """
@@ -688,7 +690,41 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 actionsCorrelationIndex[a][b] = (Decimal('2.0') * actionsCorrelationIndex[a][b] - nPairs) / nPairs
         return actionsCorrelationIndex
 
-    def computeCriteriaCorrelations(self):
+    def computeCriteriaCorrelations(self,ValuedCorrelation=False):
+        """
+        renders the relation equivalence or correlation between the criteria
+        """
+        from digraphs import EquivalenceDigraph
+        criteriaList = [x for x in self.criteria]
+        actionsList = [x for x in self.actions]
+        nPairs = Decimal(str(len(actionsList)*((len(actionsList)-1))))
+
+        tau = {}
+        d = {}
+        
+        for gi in criteriaList:
+            tau[gi] = {}
+            d[gi] = {}
+            Pgi = BipolarOutrankingDigraph(self,coalition=[gi],Normalized=True)
+            for gj in criteriaList:
+                M = Decimal('0.0')
+                D = Decimal('0.0')
+                Pgj = BipolarOutrankingDigraph(self,coalition=[gj],Normalized=True)
+                EQ = EquivalenceDigraph(Pgi,Pgj)
+                #nPairs = 0.0
+                for x in actionsList:
+                    for y in actionsList:
+                        M += EQ.relation[x][y]
+                        D += abs(EQ.relation[x][y])
+                if ValuedCorrelation:
+                    tau[gi][gj] = M / nPairs
+                else:
+                    tau[gi][gj] = M / D
+                d[gi][gj] = D / nPairs                            
+                
+        return tau, d
+
+    def computeCriteriaComparisonCorrelations(self):
         """
         renders the comparison correlations between the criteria
         """
@@ -722,21 +758,28 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 criteriaCorrelationIndex[gi][gj] = (Decimal('2.0') * criteriaCorrelationIndex[gi][gj] - nPairs) / nPairs
         return criteriaCorrelationIndex
 
-    def showCriteriaCorrelationTable(self,isReturningHTML=False):
+
+    def showCriteriaCorrelationTable(self,ValuedCorrelation=False,isReturningHTML=False):
         """
-        prints the criteriaCorrelationIndex in table format
+        prints the ordinal correlation index tau between criteria in table format.
         """
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
         n = len(self.actions)
         nPairs = n*n
-        corr = self.computeCriteriaCorrelations()
+        corr,deter = self.computeCriteriaCorrelations(ValuedCorrelation=ValuedCorrelation)
         html = ''
         # title
         if isReturningHTML:
-            html += '<h1>Criteria ordinal correlation index</h1>'
+            if ValuedCorrelation:
+                html += '<h1>Criteria valued ordinal correlation index</h1>'
+            else:
+                html += '<h1>Criteria ordinal correlation index</h1>'
         else:
-            print('Criteria ordinal correlation index')
+            if ValuedCorrelation:
+                print('Criteria valued ordinal correlation index')
+            else:
+                print('Criteria ordinal correlation index')
         # header row
         if isReturningHTML:
             html += '<table border=1><tr bgcolor="#9acd32"><th>&tau;</th>'
@@ -790,16 +833,21 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         return html
                 
 
-    def computeCriteriaCorrelationDigraph(self):
+    def computeCriteriaCorrelationDigraph(self,ValuedCorrelation=False):
         """
         renders the ordinal criteria correlation digraph
         """
+        from digraphs import Digraph
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
-        corr = self.computeCriteriaCorrelations()
+        corr,d = self.computeCriteriaCorrelations(ValuedCorrelation=ValuedCorrelation)
         n = len(criteriaList)
-        g = RandomValuationDigraph(order=n)
-        g.name = 'corrGraph'
+        g = EmptyDigraph(order=n)
+        g.__class__ = Digraph
+        if ValuedCorrelation:
+            g.name = 'valCorrGraph'
+        else:
+            gname = 'corrGraph'
         g.valuationdomain = {'min':Decimal('-1.0'),'med':Decimal('0.0'),'max':Decimal('1.0')}
         Min = g.valuationdomain['min']
         Med = g.valuationdomain['med']
@@ -821,7 +869,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         """
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
-        corr = self.computeCriteriaCorrelations()
+        corr,d = self.computeCriteriaCorrelations()
         n = len(criteriaList)
         g = RandomValuationDigraph(order=n)
         g.name = 'corrGraph'
@@ -869,7 +917,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         actionsList.sort()
         n = len(actionsList)
         nd = Decimal(str(n))
-        corr = self.computeActionsCorrelations()
+        corr = self.computeActionsComparisonCorrelations()
         if not Bipolar:
             for i in range(n):
                 for j in range(n):
@@ -902,16 +950,20 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('Actions Correlation saved on file %s' % (fileName))
         
         
-    def saveCriteriaCorrelationTable(self,fileName='tempcorr.prn',delimiter=' ',Bipolar=True,Silent=False,Centered=False):
+    def saveCriteriaCorrelationTable(self,fileName='tempcorr.prn',delimiter=' ',
+                                     ValuedCorrelation=False,Bipolar=True,
+                                     Silent=False,Centered=False):
         """
         Delimited save of correlation table
         """
         import math
         criteriaList = [x for x in self.criteria]
         criteriaList.sort()
+        #print(criteriaList)
         n = len(criteriaList)
         nd = Decimal(str(n))
-        corr = self.computeCriteriaCorrelations()
+        corr,d = self.computeCriteriaCorrelations(ValuedCorrelation=ValuedCorrelation)
+        #print(corr)
         if not Bipolar:
             for i in range(n):
                 for j in range(n):
@@ -943,128 +995,158 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         if not Silent:
             print('Criteria Correlation saved on file %s' % (fileName))
 
-    def export3DplotOfCriteriaCorrelation(self,plotFileName="correlation",Type="pdf",Comments=False,bipolarFlag=False,dist=True,centeredFlag=False):
+    def export3DplotOfCriteriaCorrelation(self,plotFileName="correlation",
+                                          ValuedCorrelation=False,Type="pdf",
+                                          Comments=False,bipolarFlag=False,
+                                          dist=True,centeredFlag=False,
+                                          tempDir=None):
         """
         use Calmat and R for producing a plot of the principal components of
         the criteria ordinal correlation table.
+
+        *Parameters*;
+
+            * *plotFileName* := name of the created R plot image.
+            * *Type* := format of graphics file: pdf, png, jpeg, xfig 
+            * *ValuedCorrelation* := False (tau by default) | True (r(<=>) otherwise
+            * *tempDir* : if None the tempfile.gettempdir() is used to get the platform independent temporary directory.
+            * *bipolarFlag*: obsolete
+            * *dist*: internal Calmat flag
+            * *centeredFlag* : internal Calmat flag
+            
         """
         import time
-        
-        if Comments:
-            print('*----  export 3dplot of type %s -----' % (Type))
+        from tempfile import TemporaryDirectory, gettempdir
         import os
-        criteriaList = [x for x in self.criteria]
-        criteriaList.sort()
-        n = len(criteriaList)
-        fo = open('criteriaLabels.prn','w')
-        for key in criteriaList:
-            fo.write('%s ' % (key))
-        fo.close()
-        self.saveCriteriaCorrelationTable(fileName='tempcorr.prn',Silent=True,Bipolar=bipolarFlag,Centered=centeredFlag)
-        # create Calmat script and calmat execution (the prn extension is standard)
-        try:
+        currentDir = os.getcwd()
+        #print(currentDir)
+        plotFileName = '%s/%s' % (currentDir,plotFileName)
+        if Comments:
+            print('3DplotFileName: %s' % plotFileName)
+        if tempDir == None:
+            tempDir = gettempdir()
+        with TemporaryDirectory(dir=tempDir) as tempDirName:
             if Comments:
-                if dist:
-                    cmd = 'env defdist.sh tempcorr '+str(n)+' '+str(n)
-                else:
-                    cmd = 'env defdista.sh tempcorr '+str(n)+' '+str(n) 
-            else:
-                if dist:
-                    cmd = 'env defdist.sh tempcorr '+str(n)+' '+str(n)+' > /dev/null'
-                else:
-                    cmd = 'env defdista.sh tempcorr '+str(n)+' '+str(n)+' > /dev/null'
-            os.system(cmd)
-            if Comments:
-                os.system('env calmat tempcorr.prg')
-            else:
-                os.system('env calmat tempcorr.prg > /dev/null')
-        except:
-            print('Error: You need to install calmat !!!')
-            return
-        # create R 3d scatter plot script
-        if Type == "interactive":
-            fo = open('scatter.r','w')
-            fo.write('# 3d scatter plot RB April 2008\n')
-            fo.write('test.mat <- matrix(scan("compolg.prn"),ncol=%d,byrow=T)\n' % (n))
-##             fo.write('choose<-c(%d,%d,%d)\n' % (1,2,3))
-            fo.write('choose<-c(%d,%d,%d)\n' % (n,n-1,n-2))
-            fo.write('test.labels <- scan("criteriaLabels.prn",what="character")\n') 
-            fo.write('valprop <- matrix(scan("val_prlg.prn"),ncol=2,byrow=T)\n') 
-            fo.write('require(rgl)\n')
-            fo.write('open3d()\n')
-            fo.write('points3d(test.mat[,choose])\n')
-            fo.write('text3d(test.mat[,choose],text=test.labels,col="red3")\n')
-            fo.write('axes3d(edges=c("x","y","z"),pos=c(0,0,0),labels=F,ticks=F)\n')
-            fo.write('axes3d(edges=c("x","y","z"))\n')
-            fo.write('title3d(main="Criteria Ordinal Correlation",xlab=valprop[choose,2][1],ylab=valprop[choose,2][2],zlab=valprop[choose,2][3],col="blue",line=4)\n')
-            fo.write('rgl.viewpoint(1,1/4,interactive=T)\n')
-            fo.write('rgl.snapshot("%s.png")\n' % (plotFileName+'.png') )
+                print('*----  export 3dplot of type %s -----' % (Type))
+            os.chdir(tempDirName)
+            criteriaList = [x for x in self.criteria]
+            criteriaList.sort()
+            n = len(criteriaList)
+            fo = open('criteriaLabels.prn','w')
+            for key in criteriaList:
+                fo.write('%s ' % (key))
             fo.close()
-        else:
-            fo = open('scatter.r','w')
-            fo.write('# scatter plot RB April 2008\n')
-            fo.write('test.mat <- matrix(scan("compolg.prn"),ncol=%d,byrow=T)\n' % (n))
-            fo.write('lim1 <- max(test.mat)\n')
-            fo.write('lim2 <- min(test.mat)\n')
-            if centeredFlag:
-                fo.write('choose12<-c(%d,%d)\n' % (1,2))
-                fo.write('choose23<-c(%d,%d)\n' % (2,3))
-                fo.write('choose13<-c(%d,%d)\n' % (1,3))
-                fo.write('choose21<-c(%d,%d)\n' % (2,1))
+            self.saveCriteriaCorrelationTable(fileName='tempcorr.prn',Silent=True,
+                                              ValuedCorrelation=ValuedCorrelation,
+                                              Bipolar=bipolarFlag,Centered=centeredFlag)
+            # create Calmat script and calmat execution (the prn extension is standard)
+            try:
+                if Comments:
+                    if dist:
+                        cmd = 'env defdist.sh tempcorr '+str(n)+' '+str(n)
+                    else:
+                        cmd = 'env defdista.sh tempcorr '+str(n)+' '+str(n) 
+                else:
+                    if dist:
+                        cmd = 'env defdist.sh tempcorr '+str(n)+' '+str(n)+' > /dev/null'
+                    else:
+                        cmd = 'env defdista.sh tempcorr '+str(n)+' '+str(n)+' > /dev/null'
+                os.system(cmd)
+                if Comments:
+                    os.system('env calmat tempcorr.prg')
+                else:
+                    os.system('env calmat tempcorr.prg > /dev/null')
+            except:
+                print('Error: You need to install calmat !!!')
+                return
+            # create R 3d scatter plot script
+            if Type == "interactive":
+                fo = open('scatter.r','w')
+                fo.write('# 3d scatter plot RB April 2008\n')
+                fo.write('test.mat <- matrix(scan("compolg.prn"),ncol=%d,byrow=T)\n' % (n))
+    ##             fo.write('choose<-c(%d,%d,%d)\n' % (1,2,3))
+                fo.write('choose<-c(%d,%d,%d)\n' % (n,n-1,n-2))
+                fo.write('test.labels <- scan("criteriaLabels.prn",what="character")\n') 
+                fo.write('valprop <- matrix(scan("val_prlg.prn"),ncol=2,byrow=T)\n') 
+                fo.write('require(rgl)\n')
+                fo.write('open3d()\n')
+                fo.write('points3d(test.mat[,choose])\n')
+                fo.write('text3d(test.mat[,choose],text=test.labels,col="red3")\n')
+                fo.write('axes3d(edges=c("x","y","z"),pos=c(0,0,0),labels=F,ticks=F)\n')
+                fo.write('axes3d(edges=c("x","y","z"))\n')
+                fo.write('title3d(main="Criteria Ordinal Correlation",xlab=valprop[choose,2][1],ylab=valprop[choose,2][2],zlab=valprop[choose,2][3],col="blue",line=4)\n')
+                fo.write('rgl.viewpoint(1,1/4,interactive=T)\n')
+                fo.write('rgl.snapshot("%s.png")\n' % (plotFileName+'.png') )
+                fo.close()
             else:
-                fo.write('choose12<-c(%d,%d)\n' % (n,n-1))
-                fo.write('choose23<-c(%d,%d)\n' % (n-1,n-2))
-                fo.write('choose13<-c(%d,%d)\n' % (n,n-2))
-                fo.write('choose21<-c(%d,%d)\n' % (n-1,n))
-            fo.write('test.labels <- scan("criteriaLabels.prn",what="character")\n') 
-            fo.write('valprop <- matrix(scan("val_prlg.prn"),ncol=2,byrow=T)\n')
-            if Type == "png":
-                fo.write('png("%s.png",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
-            elif Type == "jpeg":
-                fo.write('jpeg("%s.jpg",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
-            elif Type == "xfig":
-                fo.write('xfig("%s.fig",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
-            elif Type == "pdf":
-                fo.write('pdf("%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of Criteria Correlation Index")\n' % (plotFileName) )
-            else:
-                print('Error: Plotting device %s not defined !' % (Type))
-                return     
-            fo.write('par(mfrow=c(2,2))\n')
-            fo.write('plot(test.mat[,choose12],xlab=paste("axis 1:",valprop[choose12,2][1]*100,"%"),ylab=paste("axis 2:",valprop[choose12,2][2]*100,"%"),type="n",asp=1)\n')
-            fo.write('abline(h=0,v=0,col="grey",lty="dotted")\n')            
-            fo.write('title(sub=paste("total inertia:",(valprop[choose12,2][1]+valprop[choose12,2][2])*100,"%"),main="factors 1 and 2",col="blue")\n')
-            fo.write('text(test.mat[,choose12],labels=test.labels,col="red3",cex=1.0)\n')
-##             fo.write('plot(test.mat[,choose12],xlab=paste("axis 1:",valprop[choose12,2][1]*100,"%"),ylab=paste("axis 2:",valprop[choose12,2][2]*100,"%"),type="n",asp=1)\n')
-            fo.write('plot(test.mat[,choose12],xlab=paste("axis 2:",valprop[choose23,2][1]*100,"%"),ylab=paste("axis 3:",valprop[choose23,2][2]*100,"%"),type="n",asp=1)\n')
-            fo.write('abline(h=0,v=0,col="grey",lty="dotted")\n')            
-            fo.write('title(sub=paste("total inertia:",(valprop[choose23,2][1]+valprop[choose23,2][2])*100,"%"),main="factors 2 and 3",col="blue")\n')
-            fo.write('text(test.mat[,choose23],labels=test.labels,col="red3",cex=1.0)\n')
-##             fo.write('plot(test.mat[,choose12],xlab=paste("axis 1:",valprop[choose12,2][1]*100,"%"),ylab=paste("axis 2:",valprop[choose12,2][2]*100,"%"),type="n",asp=1)\n')
-            fo.write('plot(test.mat[,choose12],xlab=paste("axis 1:",valprop[choose13,2][1]*100,"%"),ylab=paste("axis 3:",valprop[choose13,2][2]*100,"%"),type="n",asp=1)\n')
-            fo.write('abline(h=0,v=0,col="grey",lty="dotted")\n')            
-            fo.write('title(sub=paste("total inertia:",(valprop[choose13,2][1]+valprop[choose13,2][2])*100,"%"),main="factors 1 and 3",col="blue")\n')
-            fo.write('text(test.mat[,choose13],labels=test.labels,col="red3",cex=1.0)\n')
-            if centeredFlag:
-                fo.write('barplot(valprop[1:nrow(valprop)-1,2]*100,names.arg=c(1:%d),main="Axis inertia (in %%)",col="orangered")\n' % (n-1))
-            else:
-                fo.write('barplot(valprop[nrow(valprop):2,2]*100,names.arg=c(1:%d),main="Axis inertia (in %%)",col="orangered")\n' % (n-1))     
-            fo.write('dev.off()\n')           
-            fo.close()
-            
-        try:
-            ## if Comments:
-            ##     os.system('/usr/bin/R -q --vanilla --verbose < scatter.r 2>&1')
-            ## else:
-            ##     os.system('/usr/bin/R -q --vanilla < scatter.r > /dev/null 2> /dev/null')
-            if Comments:
-                os.system('env R -q --vanilla --verbose < scatter.r 2>&1')
-            else:
-                os.system('env R -q --vanilla < scatter.r > /dev/null 2> /dev/null')
-            time.sleep(3)     
-            if Comments:
-                print('See %s.%s ! ' % (plotFileName,Type))
-        except:
-            print('Error: You need to install R !!!')
+                fo = open('scatter.r','w')
+                fo.write('# scatter plot RB April 2008\n')
+                fo.write('test.mat <- matrix(scan("compolg.prn"),ncol=%d,byrow=T)\n' % (n))
+                fo.write('lim1 <- max(test.mat)\n')
+                fo.write('lim2 <- min(test.mat)\n')
+                if centeredFlag:
+                    fo.write('choose12<-c(%d,%d)\n' % (1,2))
+                    fo.write('choose23<-c(%d,%d)\n' % (2,3))
+                    fo.write('choose13<-c(%d,%d)\n' % (1,3))
+                    fo.write('choose21<-c(%d,%d)\n' % (2,1))
+                else:
+                    fo.write('choose12<-c(%d,%d)\n' % (n,n-1))
+                    fo.write('choose23<-c(%d,%d)\n' % (n-1,n-2))
+                    fo.write('choose13<-c(%d,%d)\n' % (n,n-2))
+                    fo.write('choose21<-c(%d,%d)\n' % (n-1,n))
+                fo.write('test.labels <- scan("criteriaLabels.prn",what="character")\n') 
+                fo.write('valprop <- matrix(scan("val_prlg.prn"),ncol=2,byrow=T)\n')
+                if Type == "png":
+                    fo.write('png("%s.png",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
+                elif Type == "jpeg":
+                    fo.write('jpeg("%s.jpg",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
+                elif Type == "xfig":
+                    fo.write('xfig("%s.fig",width=480,height=480,bg="cornsilk")\n' % (plotFileName) )
+                elif Type == "pdf":
+                    fo.write('pdf("%s.pdf",width=6,height=6,bg="cornsilk",title="PCA of Criteria Correlation Index")\n' % (plotFileName) )
+                else:
+                    print('Error: Plotting device %s not defined !' % (Type))
+                    return     
+                fo.write('par(mfrow=c(2,2))\n')
+                fo.write('plot(test.mat[,choose12],xlab=paste("axis 1:",valprop[choose12,2][1]*100,"%"),ylab=paste("axis 2:",valprop[choose12,2][2]*100,"%"),type="n",asp=1)\n')
+                fo.write('abline(h=0,v=0,col="grey",lty="dotted")\n')            
+                fo.write('title(sub=paste("total inertia:",(valprop[choose12,2][1]+valprop[choose12,2][2])*100,"%"),main="factors 1 and 2",col="blue")\n')
+                fo.write('text(test.mat[,choose12],labels=test.labels,col="red3",cex=1.0)\n')
+    ##             fo.write('plot(test.mat[,choose12],xlab=paste("axis 1:",valprop[choose12,2][1]*100,"%"),ylab=paste("axis 2:",valprop[choose12,2][2]*100,"%"),type="n",asp=1)\n')
+                fo.write('plot(test.mat[,choose12],xlab=paste("axis 2:",valprop[choose23,2][1]*100,"%"),ylab=paste("axis 3:",valprop[choose23,2][2]*100,"%"),type="n",asp=1)\n')
+                fo.write('abline(h=0,v=0,col="grey",lty="dotted")\n')            
+                fo.write('title(sub=paste("total inertia:",(valprop[choose23,2][1]+valprop[choose23,2][2])*100,"%"),main="factors 2 and 3",col="blue")\n')
+                fo.write('text(test.mat[,choose23],labels=test.labels,col="red3",cex=1.0)\n')
+    ##             fo.write('plot(test.mat[,choose12],xlab=paste("axis 1:",valprop[choose12,2][1]*100,"%"),ylab=paste("axis 2:",valprop[choose12,2][2]*100,"%"),type="n",asp=1)\n')
+                fo.write('plot(test.mat[,choose12],xlab=paste("axis 1:",valprop[choose13,2][1]*100,"%"),ylab=paste("axis 3:",valprop[choose13,2][2]*100,"%"),type="n",asp=1)\n')
+                fo.write('abline(h=0,v=0,col="grey",lty="dotted")\n')            
+                fo.write('title(sub=paste("total inertia:",(valprop[choose13,2][1]+valprop[choose13,2][2])*100,"%"),main="factors 1 and 3",col="blue")\n')
+                fo.write('text(test.mat[,choose13],labels=test.labels,col="red3",cex=1.0)\n')
+                if centeredFlag:
+                    fo.write('barplot(valprop[1:nrow(valprop)-1,2]*100,names.arg=c(1:%d),main="Axis inertia (in %%)",col="orangered")\n' % (n-1))
+                else:
+                    fo.write('barplot(valprop[nrow(valprop):2,2]*100,names.arg=c(1:%d),main="Axis inertia (in %%)",col="orangered")\n' % (n-1))     
+                fo.write('dev.off()\n')           
+                fo.close()
+                
+            try:
+                ## if Comments:
+                ##     os.system('/usr/bin/R -q --vanilla --verbose < scatter.r 2>&1')
+                ## else:
+                ##     os.system('/usr/bin/R -q --vanilla < scatter.r > /dev/null 2> /dev/null')
+                if Comments:
+                    os.system('env R -q --vanilla --verbose < scatter.r 2>&1')
+                else:
+                    os.system('env R -q --vanilla < scatter.r > /dev/null 2> /dev/null')
+                time.sleep(3)     
+                if Comments:
+                    print('See %s.%s ! ' % (plotFileName,Type))
+            except:
+                print('Error: You need to install R !!!')
+
+        # reset current working dir !!!
+        os.chdir(currentDir)
+        
 
     def export3DplotOfActionsCorrelation(self,plotFileName="correlation",Type="pdf",Comments=False,bipolarFlag=False,dist=True,centeredFlag=False):
         """
@@ -1072,7 +1154,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         the the actions ordinal correlation table.
         """
         import time
-        
+        #from tempfile import TemporaryDirectory
+        #with TemporaryDirectory(dir=tempDir) as tempDirName:
+    
         if Comments:
             print('*----  export 3dplot of type %s -----' % (Type))
         import os
@@ -1083,7 +1167,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         for key in actionsList:
             fo.write('%s ' % (key))
         fo.close()
-        self.saveActionsCorrelationTable(fileName='tempcorr.prn',Silent=True,Bipolar=bipolarFlag,Centered=centeredFlag)
+        self.saveActionsCorrelationTable(fileName='tempcorr.prn',Silent=True,
+                                         Bipolar=bipolarFlag,Centered=centeredFlag)
         # create Calmat script and calmat execution (the prn extension is standard)
         try:
             if Comments:
@@ -2344,7 +2429,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
         # criteria ordinal correlation analysis
         if category != 'Robust Rubis':
-            corr = selfOrig.computeCriteriaCorrelations()
+            corr,d = selfOrig.computeCriteriaCorrelations()
             criteriaList = [x for x in self.criteria]
             cn = len(criteriaList)
             criteriaList.sort()
@@ -3130,7 +3215,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
         # criteria ordinal correlation analysis
         if category != 'Robust Rubis':
-            corr = selfOrig.computeCriteriaCorrelations()
+            corr,d = selfOrig.computeCriteriaCorrelations()
             criteriaList = [x for x in self.criteria]
             cn = len(criteriaList)
             criteriaList.sort()
@@ -3785,13 +3870,16 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         Default presentation method for BipolarOutrankingDigraph instance.
         """
         reprString = '*------- Object instance description ------*\n'
-        reprString += 'Instance class   : %s\n' % self.__class__.__name__
-        reprString += 'Instance name    : %s\n' % self.name
-        reprString += '# Actions        : %d\n' % self.order
-        reprString += '# Criteria       : %d\n' % len(self.criteria)
-        reprString += 'Size             : %d\n' % self.computeSize()
-        reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()
-        reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
+        reprString += 'Instance class      : %s\n' % self.__class__.__name__
+        reprString += 'Instance name       : %s\n' % self.name
+        reprString += '# Actions           : %d\n' % self.order
+        reprString += '# Criteria          : %d\n' % len(self.criteria)
+        reprString += 'Size                : %d\n' % self.computeSize()
+        reprString += 'Determinateness (%%) : %.2f\n' % self.computeDeterminateness(InPercents=True)
+        reprString += 'Valuation domain    : [%.2f;%.2f]\n'\
+                      % (self.valuationdomain['min'],self.valuationdomain['max'])
+        #reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
+        reprString += 'Attributes          : %s\n' % list(self.__dict__.keys())
         try:
             val1 = self.runTimes['totalTime']
             val2 = self.runTimes['dataInput']
@@ -3803,10 +3891,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
             reprString += 'Compute relation : %.5f\n' % val3
             reprString += 'Gamma sets       : %.5f\n' % val4
             try:
-                reprString += '#Threads         : %d\n' % self.nbrThreads
+                reprString += '# Threads        : %d\n' % self.nbrThreads
             except:
                 self.nbrThreads = 1
-                reprString += '#Threads         : %d\n' % self.nbrThreads
+                reprString += '# Threads        : %d\n' % self.nbrThreads
         except:
             pass
         return reprString
@@ -8652,17 +8740,21 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                         print(' ( - ) ', end=' ')
                 print()
 
-        print('Valuation domain : [%+.3f; %+.3f] ' % (self.valuationdomain['min'],
+        print('Valuation domain   : [%+.3f; %+.3f] ' % (self.valuationdomain['min'],
                                                    self.valuationdomain['max']))
-        print('Uncertainty model: %s(a=%.1f,b=%.1f) ' % (self.distribution,
+        print('Uncertainty model  : %s(a=%.1f,b=%.1f) ' % (self.distribution,
                                                          self.betaParameter,
                                                          self.betaParameter)
                                                          )
-        print('Likelihood domain: [-1.0;+1.0] ')
-        print('Likelihood level : %.2f (%.2f%%) ' % (self.bipolarConfidenceLevel,
-                                                     (self.bipolarConfidenceLevel+1.0)/2.0))
-        
-        print('Determinateness  : %.3f ' % self.computeDeterminateness() )
+        print('Likelihood domain  : [-1.0;+1.0] ')
+        print('Confidence level   : %.2f (%.1f%%) ' % (self.bipolarConfidenceLevel,
+                                                     (self.bipolarConfidenceLevel+1.0)/2.0*100.0))
+
+        print('Confident majority : %.2f (%.1f%%) ' % (self.confidenceCutLevel,\
+                            (self.confidenceCutLevel+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0')))
+        deter = self.computeDeterminateness()
+        print('Determinateness    : %.2f (%.1f%%)' % (deter,\
+                            (deter+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0')))
         print('\n')
 
 
@@ -9101,7 +9193,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 
         print('\n')
 
-class RubisRestServer(ServerProxy):
+class _RubisRestServer(ServerProxy):
     """
     xmlrpc-cgi Proxy Server for accessing on-line
     a Rubis Rest Solver.
@@ -9131,11 +9223,11 @@ class RubisRestServer(ServerProxy):
         >>> ...
 
     """
-    def __init__(self,host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=False):
+    def __init__(self,host="https://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=False):
         """
         Rubis Rest Server connection.
         """
-        import sys,xmlrpc.client
+        import sys,xmlrpc.client,ssl
         self._server = xmlrpc.client.ServerProxy(host)
         
         if Debug:
@@ -9294,8 +9386,7 @@ if __name__ == "__main__":
     import copy
     from time import time, sleep
     from outrankingDigraphs import BipolarOutrankingDigraph
-    from weakOrders import RankingByChoosingDigraph
-    from outrankingDigraphs import RubisRestServer
+    from transitiveDigraphs import RankingByChoosingDigraph
     
     print('*-------- Testing classes and methods -------')
 
@@ -9303,7 +9394,7 @@ if __name__ == "__main__":
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
     Threading = False
     t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
-                                   numberOfCriteria=21,\
+                                   numberOfCriteria=5,\
                                    weightDistribution='equiobjectives',
                                              NegativeWeights=True,
                                     negativeWeightProbability=0.25,
@@ -9311,7 +9402,6 @@ if __name__ == "__main__":
     
     g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,
                                   tempDir=None,nbrCores=8,Comments=True,Debug=False)
-    g1.showHTMLPairwiseComparison('a01','a02')
     #print(g1)
     #g1.saveXMCDA2RubisChoiceRecommendation()
     #g1.showRelationTable()

@@ -13,21 +13,21 @@
 &nbsp;<br>
 Module&nbsp;for&nbsp;sparse&nbsp;pre-ranked&nbsp;outranking&nbsp;digraphs<br>
 &nbsp;<br>
-Copyright&nbsp;(C)&nbsp;2016&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
+Copyright&nbsp;(C)&nbsp;2016-19&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 &nbsp;<br>
-This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
-it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by<br>
-the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or<br>
-(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
+&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
 &nbsp;<br>
-This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,<br>
-but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of<br>
-MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;ANY&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the<br>
-GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;ANY&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
 &nbsp;<br>
-You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along<br>
-with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,<br>
-51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.</tt></p>
+&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along<br>
+&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -73,7 +73,9 @@ with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;
 <font color="#000000" face="helvetica, arial"><a name="PreRankedConfidentOutrankingDigraph">class <strong>PreRankedConfidentOutrankingDigraph</strong></a>(<a href="sparseOutrankingDigraphs.html#PreRankedOutrankingDigraph">PreRankedOutrankingDigraph</a>, <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Main&nbsp;class&nbsp;for&nbsp;the&nbsp;multiprocessing&nbsp;implementation&nbsp;of&nbsp;pre-ranked&nbsp;sparse&nbsp;confident&nbsp;outranking&nbsp;digraphs.<br>
+<td colspan=2><tt><a href="#PreRankedConfidentOutrankingDigraph">PreRankedConfidentOutrankingDigraph</a>(argPerfTab,&nbsp;quantiles=None,&nbsp;quantilesOrderingStrategy='average',&nbsp;LowerClosed=False,&nbsp;componentRankingRule='Copeland',&nbsp;minimalComponentSize=1,&nbsp;distribution='triangular',&nbsp;betaParameter=2,&nbsp;confidence=90.0,&nbsp;Threading=False,&nbsp;tempDir=None,&nbsp;nbrOfCPUs=1,&nbsp;nbrOfThreads=1,&nbsp;save2File=None,&nbsp;CopyPerfTab=True,&nbsp;Comments=False,&nbsp;Debug=False)<br>
+&nbsp;<br>
+Main&nbsp;class&nbsp;for&nbsp;the&nbsp;multiprocessing&nbsp;implementation&nbsp;of&nbsp;pre-ranked&nbsp;sparse&nbsp;confident&nbsp;outranking&nbsp;digraphs.<br>
 &nbsp;<br>
 The&nbsp;sparse&nbsp;outranking&nbsp;digraph&nbsp;instance&nbsp;is&nbsp;decomposed&nbsp;with&nbsp;a&nbsp;confident&nbsp;q-tiling&nbsp;sort&nbsp;into&nbsp;a&nbsp;partition<br>
 of&nbsp;quantile&nbsp;equivalence&nbsp;classes&nbsp;which&nbsp;are&nbsp;linearly&nbsp;ordered&nbsp;by&nbsp;average&nbsp;quantile&nbsp;limits&nbsp;(default).<br>
@@ -261,6 +263,8 @@ K&nbsp;/=&nbsp;sum_{x!=y}&nbsp;[&nbsp;min(abs(self.<a href="#PreRankedConfidentO
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;correlation&nbsp;index&nbsp;K&nbsp;with&nbsp;a&nbsp;completely&nbsp;indeterminate&nbsp;relation<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;by&nbsp;convention&nbsp;0.0&nbsp;at&nbsp;determination&nbsp;level&nbsp;0.0&nbsp;.</tt></dd></dl>
+
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-estimateRankingCorrelation"><strong>estimateRankingCorrelation</strong></a>(self, sampleSize=100, seed=1, Debug=False)</dt></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, actionsSubset=None, bestChoice=set(), worstChoice=set(), Comments=True, graphType='png', graphSize='7,7', relation=None)</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
 
@@ -468,11 +472,13 @@ on&nbsp;criterion&nbsp;c.</tt></dd></dl>
 Methods inherited from <a href="outrankingDigraphs.html#OutrankingDigraph">outrankingDigraphs.OutrankingDigraph</a>:<br>
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeAMPLData"><strong>computeAMPLData</strong></a>(self, OldValuation=False)</dt><dd><tt>renders&nbsp;the&nbsp;ampl&nbsp;data&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeActionsCorrelations"><strong>computeActionsCorrelations</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;comparison&nbsp;correlations&nbsp;between&nbsp;the&nbsp;actions</tt></dd></dl>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeActionsComparisonCorrelations"><strong>computeActionsComparisonCorrelations</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;comparison&nbsp;correlations&nbsp;between&nbsp;the&nbsp;actions</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeCriteriaCorrelationDigraph"><strong>computeCriteriaCorrelationDigraph</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;ordinal&nbsp;criteria&nbsp;correlation&nbsp;digraph</tt></dd></dl>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeCriteriaComparisonCorrelations"><strong>computeCriteriaComparisonCorrelations</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;comparison&nbsp;correlations&nbsp;between&nbsp;the&nbsp;criteria</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeCriteriaCorrelations"><strong>computeCriteriaCorrelations</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;comparison&nbsp;correlations&nbsp;between&nbsp;the&nbsp;criteria</tt></dd></dl>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeCriteriaCorrelationDigraph"><strong>computeCriteriaCorrelationDigraph</strong></a>(self, ValuedCorrelation=False)</dt><dd><tt>renders&nbsp;the&nbsp;ordinal&nbsp;criteria&nbsp;correlation&nbsp;digraph</tt></dd></dl>
+
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeCriteriaCorrelations"><strong>computeCriteriaCorrelations</strong></a>(self, ValuedCorrelation=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;equivalence&nbsp;or&nbsp;correlation&nbsp;between&nbsp;the&nbsp;criteria</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeCriterionCorrelation"><strong>computeCriterionCorrelation</strong></a>(self, criterion, Threading=False, nbrOfCPUs=None, Debug=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordinal&nbsp;correlation&nbsp;coefficient&nbsp;between<br>
 the&nbsp;global&nbsp;outranking&nbsp;and&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;relation.<br>
@@ -537,12 +543,22 @@ Parameters:<br>
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-export3DplotOfActionsCorrelation"><strong>export3DplotOfActionsCorrelation</strong></a>(self, plotFileName='correlation', Type='pdf', Comments=False, bipolarFlag=False, dist=True, centeredFlag=False)</dt><dd><tt>use&nbsp;Calmat&nbsp;and&nbsp;R&nbsp;for&nbsp;producing&nbsp;a&nbsp;png&nbsp;plot&nbsp;of&nbsp;the&nbsp;principal&nbsp;components&nbsp;of<br>
 the&nbsp;the&nbsp;actions&nbsp;ordinal&nbsp;correlation&nbsp;table.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-export3DplotOfCriteriaCorrelation"><strong>export3DplotOfCriteriaCorrelation</strong></a>(self, plotFileName='correlation', Type='pdf', Comments=False, bipolarFlag=False, dist=True, centeredFlag=False)</dt><dd><tt>use&nbsp;Calmat&nbsp;and&nbsp;R&nbsp;for&nbsp;producing&nbsp;a&nbsp;plot&nbsp;of&nbsp;the&nbsp;principal&nbsp;components&nbsp;of<br>
-the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.</tt></dd></dl>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-export3DplotOfCriteriaCorrelation"><strong>export3DplotOfCriteriaCorrelation</strong></a>(self, plotFileName='correlation', ValuedCorrelation=False, Type='pdf', Comments=False, bipolarFlag=False, dist=True, centeredFlag=False, tempDir=None)</dt><dd><tt>use&nbsp;Calmat&nbsp;and&nbsp;R&nbsp;for&nbsp;producing&nbsp;a&nbsp;plot&nbsp;of&nbsp;the&nbsp;principal&nbsp;components&nbsp;of<br>
+the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.<br>
+&nbsp;<br>
+*Parameters*;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*plotFileName*&nbsp;:=&nbsp;name&nbsp;of&nbsp;the&nbsp;created&nbsp;R&nbsp;plot&nbsp;image.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*Type*&nbsp;:=&nbsp;format&nbsp;of&nbsp;graphics&nbsp;file:&nbsp;pdf,&nbsp;png,&nbsp;jpeg,&nbsp;xfig&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*ValuedCorrelation*&nbsp;:=&nbsp;False&nbsp;(tau&nbsp;by&nbsp;default)&nbsp;|&nbsp;True&nbsp;(r(&lt;=&gt;)&nbsp;otherwise<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*tempDir*&nbsp;:&nbsp;if&nbsp;None&nbsp;the&nbsp;tempfile.gettempdir()&nbsp;is&nbsp;used&nbsp;to&nbsp;get&nbsp;the&nbsp;platform&nbsp;independent&nbsp;temporary&nbsp;directory.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*bipolarFlag*:&nbsp;obsolete<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*dist*:&nbsp;internal&nbsp;Calmat&nbsp;flag<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*centeredFlag*&nbsp;:&nbsp;internal&nbsp;Calmat&nbsp;flag</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-saveActionsCorrelationTable"><strong>saveActionsCorrelationTable</strong></a>(self, fileName='tempcorr.prn', delimiter=' ', Bipolar=True, Silent=False, Centered=False)</dt><dd><tt>Delimited&nbsp;save&nbsp;of&nbsp;correlation&nbsp;table</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-saveCriteriaCorrelationTable"><strong>saveCriteriaCorrelationTable</strong></a>(self, fileName='tempcorr.prn', delimiter=' ', Bipolar=True, Silent=False, Centered=False)</dt><dd><tt>Delimited&nbsp;save&nbsp;of&nbsp;correlation&nbsp;table</tt></dd></dl>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-saveCriteriaCorrelationTable"><strong>saveCriteriaCorrelationTable</strong></a>(self, fileName='tempcorr.prn', delimiter=' ', ValuedCorrelation=False, Bipolar=True, Silent=False, Centered=False)</dt><dd><tt>Delimited&nbsp;save&nbsp;of&nbsp;correlation&nbsp;table</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-saveXMCDA2RubisChoiceRecommendation"><strong>saveXMCDA2RubisChoiceRecommendation</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', graphValuationType='bipolar', variant='standard', instanceID='void', stringNA='NA', _OldCoca=True, Debug=False)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
@@ -553,7 +569,7 @@ the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.</tt></dd></dl>
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>specialize&nbsp;the&nbsp;general&nbsp;showAll&nbsp;method&nbsp;with&nbsp;criteria<br>
 and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showCriteriaCorrelationTable"><strong>showCriteriaCorrelationTable</strong></a>(self, isReturningHTML=False)</dt><dd><tt>prints&nbsp;the&nbsp;criteriaCorrelationIndex&nbsp;in&nbsp;table&nbsp;format</tt></dd></dl>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showCriteriaCorrelationTable"><strong>showCriteriaCorrelationTable</strong></a>(self, ValuedCorrelation=False, isReturningHTML=False)</dt><dd><tt>prints&nbsp;the&nbsp;ordinal&nbsp;correlation&nbsp;index&nbsp;tau&nbsp;between&nbsp;criteria&nbsp;in&nbsp;table&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showCriteriaHierarchy"><strong>showCriteriaHierarchy</strong></a>(self)</dt><dd><tt>shows&nbsp;the&nbsp;Rubis&nbsp;clustering&nbsp;of&nbsp;the&nbsp;ordinal&nbsp;criteria&nbsp;correlation&nbsp;table</tt></dd></dl>
 
@@ -622,7 +638,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Ubuntu&nbsp;Linux:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
@@ -743,8 +759,8 @@ robust&nbsp;absence&nbsp;arc&nbsp;densitiy.</tt></dd></dl>
 renders&nbsp;the&nbsp;four&nbsp;densitiy&nbsp;parameters:<br>
 arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;density,&nbsp;absence&nbsp;arc&nbsp;density.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</tt></dd></dl>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeGoodChoices"><strong>computeGoodChoices</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
 &nbsp;<br>
@@ -769,6 +785,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 ..&nbsp;note::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
+
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
@@ -1019,7 +1038,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>,copy().</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>.copy().</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-domirred"><strong>domirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
@@ -1107,12 +1126,6 @@ the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-generateAbsPreKernels"><strong>generateAbsPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;absorbent&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-generateDomPreKernels"><strong>generateDomPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;dominant&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
-
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-graphDetermination"><strong>graphDetermination</strong></a>(self, Normalized=True)</dt><dd><tt>Output:&nbsp;average&nbsp;normalized&nbsp;(by&nbsp;default)&nbsp;arc&nbsp;determination:<br>
-&nbsp;<br>
-averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
-&nbsp;<br>
-where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-htmlBestChoiceRecommendation"><strong>htmlBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, ContentCentered=True, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
 &nbsp;<br>
@@ -1217,31 +1230,6 @@ the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-notaneighbors"><strong>notaneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;not&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
-r-valued&nbsp;statement&nbsp;characteristics.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
-an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
-
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
-Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**min**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
-in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omin&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
@@ -1655,8 +1643,6 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#PreRankedConfidentOutrankingDigraph-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#PreRankedConfidentOutrankingDigraph-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
-
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -1664,7 +1650,9 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <font color="#000000" face="helvetica, arial"><a name="PreRankedOutrankingDigraph">class <strong>PreRankedOutrankingDigraph</strong></a>(<a href="sparseOutrankingDigraphs.html#SparseOutrankingDigraph">SparseOutrankingDigraph</a>, <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Main&nbsp;class&nbsp;for&nbsp;the&nbsp;multiprocessing&nbsp;implementation&nbsp;of&nbsp;pre-ranked&nbsp;sparse&nbsp;outranking&nbsp;digraphs.<br>
+<td colspan=2><tt><a href="#PreRankedOutrankingDigraph">PreRankedOutrankingDigraph</a>(argPerfTab,&nbsp;quantiles=None,&nbsp;quantilesOrderingStrategy='average',&nbsp;LowerClosed=False,&nbsp;componentRankingRule='Copeland',&nbsp;minimalComponentSize=1,&nbsp;Threading=False,&nbsp;tempDir=None,&nbsp;nbrOfCPUs=1,&nbsp;nbrOfThreads=1,&nbsp;save2File=None,&nbsp;CopyPerfTab=True,&nbsp;Comments=False,&nbsp;Debug=False)<br>
+&nbsp;<br>
+Main&nbsp;class&nbsp;for&nbsp;the&nbsp;multiprocessing&nbsp;implementation&nbsp;of&nbsp;pre-ranked&nbsp;sparse&nbsp;outranking&nbsp;digraphs.<br>
 &nbsp;<br>
 The&nbsp;sparse&nbsp;outranking&nbsp;digraph&nbsp;instance&nbsp;is&nbsp;decomposed&nbsp;with&nbsp;a&nbsp;q-tiling&nbsp;sort&nbsp;into&nbsp;a&nbsp;partition<br>
 of&nbsp;quantile&nbsp;equivalence&nbsp;classes&nbsp;which&nbsp;are&nbsp;linearly&nbsp;ordered&nbsp;by&nbsp;average&nbsp;quantile&nbsp;limits&nbsp;(default).<br>
@@ -1848,6 +1836,8 @@ K&nbsp;/=&nbsp;sum_{x!=y}&nbsp;[&nbsp;min(abs(self.<a href="#PreRankedOutranking
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;correlation&nbsp;index&nbsp;K&nbsp;with&nbsp;a&nbsp;completely&nbsp;indeterminate&nbsp;relation<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;by&nbsp;convention&nbsp;0.0&nbsp;at&nbsp;determination&nbsp;level&nbsp;0.0&nbsp;.</tt></dd></dl>
+
+<dl><dt><a name="PreRankedOutrankingDigraph-estimateRankingCorrelation"><strong>estimateRankingCorrelation</strong></a>(self, sampleSize=100, seed=1, Debug=False)</dt></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, actionsSubset=None, bestChoice=set(), worstChoice=set(), Comments=True, graphType='png', graphSize='7,7', relation=None)</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
 
@@ -2055,11 +2045,13 @@ on&nbsp;criterion&nbsp;c.</tt></dd></dl>
 Methods inherited from <a href="outrankingDigraphs.html#OutrankingDigraph">outrankingDigraphs.OutrankingDigraph</a>:<br>
 <dl><dt><a name="PreRankedOutrankingDigraph-computeAMPLData"><strong>computeAMPLData</strong></a>(self, OldValuation=False)</dt><dd><tt>renders&nbsp;the&nbsp;ampl&nbsp;data&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-computeActionsCorrelations"><strong>computeActionsCorrelations</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;comparison&nbsp;correlations&nbsp;between&nbsp;the&nbsp;actions</tt></dd></dl>
+<dl><dt><a name="PreRankedOutrankingDigraph-computeActionsComparisonCorrelations"><strong>computeActionsComparisonCorrelations</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;comparison&nbsp;correlations&nbsp;between&nbsp;the&nbsp;actions</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-computeCriteriaCorrelationDigraph"><strong>computeCriteriaCorrelationDigraph</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;ordinal&nbsp;criteria&nbsp;correlation&nbsp;digraph</tt></dd></dl>
+<dl><dt><a name="PreRankedOutrankingDigraph-computeCriteriaComparisonCorrelations"><strong>computeCriteriaComparisonCorrelations</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;comparison&nbsp;correlations&nbsp;between&nbsp;the&nbsp;criteria</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-computeCriteriaCorrelations"><strong>computeCriteriaCorrelations</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;comparison&nbsp;correlations&nbsp;between&nbsp;the&nbsp;criteria</tt></dd></dl>
+<dl><dt><a name="PreRankedOutrankingDigraph-computeCriteriaCorrelationDigraph"><strong>computeCriteriaCorrelationDigraph</strong></a>(self, ValuedCorrelation=False)</dt><dd><tt>renders&nbsp;the&nbsp;ordinal&nbsp;criteria&nbsp;correlation&nbsp;digraph</tt></dd></dl>
+
+<dl><dt><a name="PreRankedOutrankingDigraph-computeCriteriaCorrelations"><strong>computeCriteriaCorrelations</strong></a>(self, ValuedCorrelation=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;equivalence&nbsp;or&nbsp;correlation&nbsp;between&nbsp;the&nbsp;criteria</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-computeCriterionCorrelation"><strong>computeCriterionCorrelation</strong></a>(self, criterion, Threading=False, nbrOfCPUs=None, Debug=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordinal&nbsp;correlation&nbsp;coefficient&nbsp;between<br>
 the&nbsp;global&nbsp;outranking&nbsp;and&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;relation.<br>
@@ -2124,12 +2116,22 @@ Parameters:<br>
 <dl><dt><a name="PreRankedOutrankingDigraph-export3DplotOfActionsCorrelation"><strong>export3DplotOfActionsCorrelation</strong></a>(self, plotFileName='correlation', Type='pdf', Comments=False, bipolarFlag=False, dist=True, centeredFlag=False)</dt><dd><tt>use&nbsp;Calmat&nbsp;and&nbsp;R&nbsp;for&nbsp;producing&nbsp;a&nbsp;png&nbsp;plot&nbsp;of&nbsp;the&nbsp;principal&nbsp;components&nbsp;of<br>
 the&nbsp;the&nbsp;actions&nbsp;ordinal&nbsp;correlation&nbsp;table.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-export3DplotOfCriteriaCorrelation"><strong>export3DplotOfCriteriaCorrelation</strong></a>(self, plotFileName='correlation', Type='pdf', Comments=False, bipolarFlag=False, dist=True, centeredFlag=False)</dt><dd><tt>use&nbsp;Calmat&nbsp;and&nbsp;R&nbsp;for&nbsp;producing&nbsp;a&nbsp;plot&nbsp;of&nbsp;the&nbsp;principal&nbsp;components&nbsp;of<br>
-the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.</tt></dd></dl>
+<dl><dt><a name="PreRankedOutrankingDigraph-export3DplotOfCriteriaCorrelation"><strong>export3DplotOfCriteriaCorrelation</strong></a>(self, plotFileName='correlation', ValuedCorrelation=False, Type='pdf', Comments=False, bipolarFlag=False, dist=True, centeredFlag=False, tempDir=None)</dt><dd><tt>use&nbsp;Calmat&nbsp;and&nbsp;R&nbsp;for&nbsp;producing&nbsp;a&nbsp;plot&nbsp;of&nbsp;the&nbsp;principal&nbsp;components&nbsp;of<br>
+the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.<br>
+&nbsp;<br>
+*Parameters*;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*plotFileName*&nbsp;:=&nbsp;name&nbsp;of&nbsp;the&nbsp;created&nbsp;R&nbsp;plot&nbsp;image.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*Type*&nbsp;:=&nbsp;format&nbsp;of&nbsp;graphics&nbsp;file:&nbsp;pdf,&nbsp;png,&nbsp;jpeg,&nbsp;xfig&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*ValuedCorrelation*&nbsp;:=&nbsp;False&nbsp;(tau&nbsp;by&nbsp;default)&nbsp;|&nbsp;True&nbsp;(r(&lt;=&gt;)&nbsp;otherwise<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*tempDir*&nbsp;:&nbsp;if&nbsp;None&nbsp;the&nbsp;tempfile.gettempdir()&nbsp;is&nbsp;used&nbsp;to&nbsp;get&nbsp;the&nbsp;platform&nbsp;independent&nbsp;temporary&nbsp;directory.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*bipolarFlag*:&nbsp;obsolete<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*dist*:&nbsp;internal&nbsp;Calmat&nbsp;flag<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*centeredFlag*&nbsp;:&nbsp;internal&nbsp;Calmat&nbsp;flag</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-saveActionsCorrelationTable"><strong>saveActionsCorrelationTable</strong></a>(self, fileName='tempcorr.prn', delimiter=' ', Bipolar=True, Silent=False, Centered=False)</dt><dd><tt>Delimited&nbsp;save&nbsp;of&nbsp;correlation&nbsp;table</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-saveCriteriaCorrelationTable"><strong>saveCriteriaCorrelationTable</strong></a>(self, fileName='tempcorr.prn', delimiter=' ', Bipolar=True, Silent=False, Centered=False)</dt><dd><tt>Delimited&nbsp;save&nbsp;of&nbsp;correlation&nbsp;table</tt></dd></dl>
+<dl><dt><a name="PreRankedOutrankingDigraph-saveCriteriaCorrelationTable"><strong>saveCriteriaCorrelationTable</strong></a>(self, fileName='tempcorr.prn', delimiter=' ', ValuedCorrelation=False, Bipolar=True, Silent=False, Centered=False)</dt><dd><tt>Delimited&nbsp;save&nbsp;of&nbsp;correlation&nbsp;table</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-saveXMCDA2RubisChoiceRecommendation"><strong>saveXMCDA2RubisChoiceRecommendation</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', graphValuationType='bipolar', variant='standard', instanceID='void', stringNA='NA', _OldCoca=True, Debug=False)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
@@ -2140,7 +2142,7 @@ the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.</tt></dd></dl>
 <dl><dt><a name="PreRankedOutrankingDigraph-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>specialize&nbsp;the&nbsp;general&nbsp;showAll&nbsp;method&nbsp;with&nbsp;criteria<br>
 and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-showCriteriaCorrelationTable"><strong>showCriteriaCorrelationTable</strong></a>(self, isReturningHTML=False)</dt><dd><tt>prints&nbsp;the&nbsp;criteriaCorrelationIndex&nbsp;in&nbsp;table&nbsp;format</tt></dd></dl>
+<dl><dt><a name="PreRankedOutrankingDigraph-showCriteriaCorrelationTable"><strong>showCriteriaCorrelationTable</strong></a>(self, ValuedCorrelation=False, isReturningHTML=False)</dt><dd><tt>prints&nbsp;the&nbsp;ordinal&nbsp;correlation&nbsp;index&nbsp;tau&nbsp;between&nbsp;criteria&nbsp;in&nbsp;table&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-showCriteriaHierarchy"><strong>showCriteriaHierarchy</strong></a>(self)</dt><dd><tt>shows&nbsp;the&nbsp;Rubis&nbsp;clustering&nbsp;of&nbsp;the&nbsp;ordinal&nbsp;criteria&nbsp;correlation&nbsp;table</tt></dd></dl>
 
@@ -2209,7 +2211,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Ubuntu&nbsp;Linux:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
@@ -2330,8 +2332,8 @@ robust&nbsp;absence&nbsp;arc&nbsp;densitiy.</tt></dd></dl>
 renders&nbsp;the&nbsp;four&nbsp;densitiy&nbsp;parameters:<br>
 arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;density,&nbsp;absence&nbsp;arc&nbsp;density.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</tt></dd></dl>
+<dl><dt><a name="PreRankedOutrankingDigraph-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-computeGoodChoices"><strong>computeGoodChoices</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
 &nbsp;<br>
@@ -2356,6 +2358,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 ..&nbsp;note::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
+
+<dl><dt><a name="PreRankedOutrankingDigraph-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
@@ -2606,7 +2611,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>,copy().</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>.copy().</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-domirred"><strong>domirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
@@ -2694,12 +2699,6 @@ the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="PreRankedOutrankingDigraph-generateAbsPreKernels"><strong>generateAbsPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;absorbent&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-generateDomPreKernels"><strong>generateDomPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;dominant&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
-
-<dl><dt><a name="PreRankedOutrankingDigraph-graphDetermination"><strong>graphDetermination</strong></a>(self, Normalized=True)</dt><dd><tt>Output:&nbsp;average&nbsp;normalized&nbsp;(by&nbsp;default)&nbsp;arc&nbsp;determination:<br>
-&nbsp;<br>
-averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
-&nbsp;<br>
-where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-htmlBestChoiceRecommendation"><strong>htmlBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, ContentCentered=True, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
 &nbsp;<br>
@@ -2804,31 +2803,6 @@ the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="PreRankedOutrankingDigraph-notaneighbors"><strong>notaneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;not&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="PreRankedOutrankingDigraph-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
-r-valued&nbsp;statement&nbsp;characteristics.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
-an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
-
-<dl><dt><a name="PreRankedOutrankingDigraph-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
-Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**min**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
-in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omin&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
@@ -3242,8 +3216,6 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="PreRankedOutrankingDigraph-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#PreRankedOutrankingDigraph-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#PreRankedOutrankingDigraph-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
-
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
@@ -3251,7 +3223,9 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <font color="#000000" face="helvetica, arial"><a name="SparseOutrankingDigraph">class <strong>SparseOutrankingDigraph</strong></a>(<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">outrankingDigraphs.BipolarOutrankingDigraph</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>Abstract&nbsp;root&nbsp;class&nbsp;for&nbsp;linearly&nbsp;decomposed&nbsp;sparse&nbsp;digraphs.<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt><a href="#SparseOutrankingDigraph">SparseOutrankingDigraph</a>(argPerfTab=None,&nbsp;coalition=None,&nbsp;actionsSubset=None,&nbsp;hasNoVeto=False,&nbsp;hasBipolarVeto=True,&nbsp;Normalized=False,&nbsp;CopyPerfTab=True,&nbsp;BigData=False,&nbsp;Threading=False,&nbsp;tempDir=None,&nbsp;WithConcordanceRelation=True,&nbsp;WithVetoCounts=True,&nbsp;nbrCores=None,&nbsp;Debug=False,&nbsp;Comments=False)<br>
+&nbsp;<br>
+Abstract&nbsp;root&nbsp;class&nbsp;for&nbsp;linearly&nbsp;decomposed&nbsp;sparse&nbsp;digraphs.<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="sparseOutrankingDigraphs.html#SparseOutrankingDigraph">SparseOutrankingDigraph</a></dd>
@@ -3323,6 +3297,8 @@ K&nbsp;/=&nbsp;sum_{x!=y}&nbsp;[&nbsp;min(abs(self.<a href="#SparseOutrankingDig
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;correlation&nbsp;index&nbsp;K&nbsp;with&nbsp;a&nbsp;completely&nbsp;indeterminate&nbsp;relation<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is&nbsp;by&nbsp;convention&nbsp;0.0&nbsp;at&nbsp;determination&nbsp;level&nbsp;0.0&nbsp;.</tt></dd></dl>
+
+<dl><dt><a name="SparseOutrankingDigraph-estimateRankingCorrelation"><strong>estimateRankingCorrelation</strong></a>(self, sampleSize=100, seed=1, Debug=False)</dt></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, actionsSubset=None, bestChoice=set(), worstChoice=set(), Comments=True, graphType='png', graphSize='7,7', relation=None)</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
 
@@ -3535,11 +3511,13 @@ on&nbsp;criterion&nbsp;c.</tt></dd></dl>
 Methods inherited from <a href="outrankingDigraphs.html#OutrankingDigraph">outrankingDigraphs.OutrankingDigraph</a>:<br>
 <dl><dt><a name="SparseOutrankingDigraph-computeAMPLData"><strong>computeAMPLData</strong></a>(self, OldValuation=False)</dt><dd><tt>renders&nbsp;the&nbsp;ampl&nbsp;data&nbsp;list</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-computeActionsCorrelations"><strong>computeActionsCorrelations</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;comparison&nbsp;correlations&nbsp;between&nbsp;the&nbsp;actions</tt></dd></dl>
+<dl><dt><a name="SparseOutrankingDigraph-computeActionsComparisonCorrelations"><strong>computeActionsComparisonCorrelations</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;comparison&nbsp;correlations&nbsp;between&nbsp;the&nbsp;actions</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-computeCriteriaCorrelationDigraph"><strong>computeCriteriaCorrelationDigraph</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;ordinal&nbsp;criteria&nbsp;correlation&nbsp;digraph</tt></dd></dl>
+<dl><dt><a name="SparseOutrankingDigraph-computeCriteriaComparisonCorrelations"><strong>computeCriteriaComparisonCorrelations</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;comparison&nbsp;correlations&nbsp;between&nbsp;the&nbsp;criteria</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-computeCriteriaCorrelations"><strong>computeCriteriaCorrelations</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;comparison&nbsp;correlations&nbsp;between&nbsp;the&nbsp;criteria</tt></dd></dl>
+<dl><dt><a name="SparseOutrankingDigraph-computeCriteriaCorrelationDigraph"><strong>computeCriteriaCorrelationDigraph</strong></a>(self, ValuedCorrelation=False)</dt><dd><tt>renders&nbsp;the&nbsp;ordinal&nbsp;criteria&nbsp;correlation&nbsp;digraph</tt></dd></dl>
+
+<dl><dt><a name="SparseOutrankingDigraph-computeCriteriaCorrelations"><strong>computeCriteriaCorrelations</strong></a>(self, ValuedCorrelation=False)</dt><dd><tt>renders&nbsp;the&nbsp;relation&nbsp;equivalence&nbsp;or&nbsp;correlation&nbsp;between&nbsp;the&nbsp;criteria</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-computeCriterionCorrelation"><strong>computeCriterionCorrelation</strong></a>(self, criterion, Threading=False, nbrOfCPUs=None, Debug=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordinal&nbsp;correlation&nbsp;coefficient&nbsp;between<br>
 the&nbsp;global&nbsp;outranking&nbsp;and&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;relation.<br>
@@ -3614,12 +3592,22 @@ Parameters:<br>
 <dl><dt><a name="SparseOutrankingDigraph-export3DplotOfActionsCorrelation"><strong>export3DplotOfActionsCorrelation</strong></a>(self, plotFileName='correlation', Type='pdf', Comments=False, bipolarFlag=False, dist=True, centeredFlag=False)</dt><dd><tt>use&nbsp;Calmat&nbsp;and&nbsp;R&nbsp;for&nbsp;producing&nbsp;a&nbsp;png&nbsp;plot&nbsp;of&nbsp;the&nbsp;principal&nbsp;components&nbsp;of<br>
 the&nbsp;the&nbsp;actions&nbsp;ordinal&nbsp;correlation&nbsp;table.</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-export3DplotOfCriteriaCorrelation"><strong>export3DplotOfCriteriaCorrelation</strong></a>(self, plotFileName='correlation', Type='pdf', Comments=False, bipolarFlag=False, dist=True, centeredFlag=False)</dt><dd><tt>use&nbsp;Calmat&nbsp;and&nbsp;R&nbsp;for&nbsp;producing&nbsp;a&nbsp;plot&nbsp;of&nbsp;the&nbsp;principal&nbsp;components&nbsp;of<br>
-the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.</tt></dd></dl>
+<dl><dt><a name="SparseOutrankingDigraph-export3DplotOfCriteriaCorrelation"><strong>export3DplotOfCriteriaCorrelation</strong></a>(self, plotFileName='correlation', ValuedCorrelation=False, Type='pdf', Comments=False, bipolarFlag=False, dist=True, centeredFlag=False, tempDir=None)</dt><dd><tt>use&nbsp;Calmat&nbsp;and&nbsp;R&nbsp;for&nbsp;producing&nbsp;a&nbsp;plot&nbsp;of&nbsp;the&nbsp;principal&nbsp;components&nbsp;of<br>
+the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.<br>
+&nbsp;<br>
+*Parameters*;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*plotFileName*&nbsp;:=&nbsp;name&nbsp;of&nbsp;the&nbsp;created&nbsp;R&nbsp;plot&nbsp;image.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*Type*&nbsp;:=&nbsp;format&nbsp;of&nbsp;graphics&nbsp;file:&nbsp;pdf,&nbsp;png,&nbsp;jpeg,&nbsp;xfig&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*ValuedCorrelation*&nbsp;:=&nbsp;False&nbsp;(tau&nbsp;by&nbsp;default)&nbsp;|&nbsp;True&nbsp;(r(&lt;=&gt;)&nbsp;otherwise<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*tempDir*&nbsp;:&nbsp;if&nbsp;None&nbsp;the&nbsp;tempfile.gettempdir()&nbsp;is&nbsp;used&nbsp;to&nbsp;get&nbsp;the&nbsp;platform&nbsp;independent&nbsp;temporary&nbsp;directory.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*bipolarFlag*:&nbsp;obsolete<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*dist*:&nbsp;internal&nbsp;Calmat&nbsp;flag<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*centeredFlag*&nbsp;:&nbsp;internal&nbsp;Calmat&nbsp;flag</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-saveActionsCorrelationTable"><strong>saveActionsCorrelationTable</strong></a>(self, fileName='tempcorr.prn', delimiter=' ', Bipolar=True, Silent=False, Centered=False)</dt><dd><tt>Delimited&nbsp;save&nbsp;of&nbsp;correlation&nbsp;table</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-saveCriteriaCorrelationTable"><strong>saveCriteriaCorrelationTable</strong></a>(self, fileName='tempcorr.prn', delimiter=' ', Bipolar=True, Silent=False, Centered=False)</dt><dd><tt>Delimited&nbsp;save&nbsp;of&nbsp;correlation&nbsp;table</tt></dd></dl>
+<dl><dt><a name="SparseOutrankingDigraph-saveCriteriaCorrelationTable"><strong>saveCriteriaCorrelationTable</strong></a>(self, fileName='tempcorr.prn', delimiter=' ', ValuedCorrelation=False, Bipolar=True, Silent=False, Centered=False)</dt><dd><tt>Delimited&nbsp;save&nbsp;of&nbsp;correlation&nbsp;table</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-saveXMCDA2RubisChoiceRecommendation"><strong>saveXMCDA2RubisChoiceRecommendation</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', graphValuationType='bipolar', variant='standard', instanceID='void', stringNA='NA', _OldCoca=True, Debug=False)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
@@ -3630,7 +3618,7 @@ the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.</tt></dd></dl>
 <dl><dt><a name="SparseOutrankingDigraph-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>specialize&nbsp;the&nbsp;general&nbsp;showAll&nbsp;method&nbsp;with&nbsp;criteria<br>
 and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-showCriteriaCorrelationTable"><strong>showCriteriaCorrelationTable</strong></a>(self, isReturningHTML=False)</dt><dd><tt>prints&nbsp;the&nbsp;criteriaCorrelationIndex&nbsp;in&nbsp;table&nbsp;format</tt></dd></dl>
+<dl><dt><a name="SparseOutrankingDigraph-showCriteriaCorrelationTable"><strong>showCriteriaCorrelationTable</strong></a>(self, ValuedCorrelation=False, isReturningHTML=False)</dt><dd><tt>prints&nbsp;the&nbsp;ordinal&nbsp;correlation&nbsp;index&nbsp;tau&nbsp;between&nbsp;criteria&nbsp;in&nbsp;table&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-showCriteriaHierarchy"><strong>showCriteriaHierarchy</strong></a>(self)</dt><dd><tt>shows&nbsp;the&nbsp;Rubis&nbsp;clustering&nbsp;of&nbsp;the&nbsp;ordinal&nbsp;criteria&nbsp;correlation&nbsp;table</tt></dd></dl>
 
@@ -3703,7 +3691,7 @@ Renders&nbsp;the&nbsp;distribution&nbsp;of&nbsp;agglomeration&nbsp;coefficients.
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Dependency:&nbsp;Uses&nbsp;the&nbsp;dreadnaut&nbsp;command&nbsp;from&nbsp;the&nbsp;nauty&nbsp;software&nbsp;package.&nbsp;See&nbsp;https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Linux:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;On&nbsp;Ubuntu&nbsp;Linux:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...$&nbsp;sudo&nbsp;apt-get&nbsp;install&nbsp;nauty</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-averageCoveringIndex"><strong>averageCoveringIndex</strong></a>(self, choice, direction='out')</dt><dd><tt>Renders&nbsp;the&nbsp;average&nbsp;covering&nbsp;index&nbsp;of&nbsp;a&nbsp;given&nbsp;choice&nbsp;in&nbsp;a&nbsp;set&nbsp;of&nbsp;objects,<br>
@@ -3824,8 +3812,8 @@ robust&nbsp;absence&nbsp;arc&nbsp;densitiy.</tt></dd></dl>
 renders&nbsp;the&nbsp;four&nbsp;densitiy&nbsp;parameters:<br>
 arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;density,&nbsp;absence&nbsp;arc&nbsp;density.</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
-|&nbsp;[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec]</tt></dd></dl>
+<dl><dt><a name="SparseOutrankingDigraph-computeGoodChoiceVector"><strong>computeGoodChoiceVector</strong></a>(self, ker, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-computeGoodChoices"><strong>computeGoodChoices</strong></a>(self, Comments=False)</dt><dd><tt>Computes&nbsp;characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices.<br>
 &nbsp;<br>
@@ -3850,6 +3838,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 ..&nbsp;note::<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns&nbsp;a&nbsp;tuple:&nbsp;kemenyRanking&nbsp;(from&nbsp;best&nbsp;to&nbsp;worst),&nbsp;kemenyIndex.</tt></dd></dl>
+
+<dl><dt><a name="SparseOutrankingDigraph-computeKernelVector"><strong>computeKernelVector</strong></a>(self, kernel, Initial=True, Comments=False)</dt><dd><tt>|&nbsp;Computing&nbsp;Characteristic&nbsp;values&nbsp;for&nbsp;dominant&nbsp;pre-kernels<br>
+|&nbsp;using&nbsp;the&nbsp;von&nbsp;Neumann&nbsp;dual&nbsp;fixoint&nbsp;equation</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
@@ -4100,7 +4091,7 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>,copy().</tt></dd></dl>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Initiate&nbsp;with&nbsp;S&nbsp;=&nbsp;self.<strong>actions</strong>.copy().</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-domirred"><strong>domirred</strong></a>(self, choice)</dt><dd><tt>Renders&nbsp;the&nbsp;crips&nbsp;+irredundance&nbsp;degree&nbsp;of&nbsp;a&nbsp;choice.</tt></dd></dl>
 
@@ -4188,12 +4179,6 @@ the&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="SparseOutrankingDigraph-generateAbsPreKernels"><strong>generateAbsPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;absorbent&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-generateDomPreKernels"><strong>generateDomPreKernels</strong></a>(self)</dt><dd><tt>Generate&nbsp;all&nbsp;dominant&nbsp;prekernels&nbsp;from&nbsp;independent&nbsp;choices&nbsp;generator.</tt></dd></dl>
-
-<dl><dt><a name="SparseOutrankingDigraph-graphDetermination"><strong>graphDetermination</strong></a>(self, Normalized=True)</dt><dd><tt>Output:&nbsp;average&nbsp;normalized&nbsp;(by&nbsp;default)&nbsp;arc&nbsp;determination:<br>
-&nbsp;<br>
-averageDeterm&nbsp;=&nbsp;(&nbsp;sum_(x,y)&nbsp;[&nbsp;abs(&nbsp;relf-relation[x][y]&nbsp;-&nbsp;Med&nbsp;)]&nbsp;/&nbsp;n&nbsp;)&nbsp;/&nbsp;[(&nbsp;Max-Med&nbsp;)&nbsp;if&nbsp;Normalized],<br>
-&nbsp;<br>
-where&nbsp;Med&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['med']&nbsp;and&nbsp;Max&nbsp;=&nbsp;self.<strong>valuationdomain</strong>['max'].</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-htmlBestChoiceRecommendation"><strong>htmlBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, ContentCentered=True, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt><dd><tt>Renders&nbsp;the&nbsp;RuBis&nbsp;best&nbsp;choice&nbsp;recommendation&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.<br>
 &nbsp;<br>
@@ -4298,31 +4283,6 @@ the&nbsp;not&nbsp;absorbed&nbsp;neighborhood.</tt></dd></dl>
 <dl><dt><a name="SparseOutrankingDigraph-notaneighbors"><strong>notaneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;absorbed&nbsp;not&nbsp;in-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-notdneighbors"><strong>notdneighbors</strong></a>(self, node)</dt><dd><tt>Renders&nbsp;the&nbsp;set&nbsp;of&nbsp;not&nbsp;dominated&nbsp;out-neighbors&nbsp;of&nbsp;a&nbsp;node.</tt></dd></dl>
-
-<dl><dt><a name="SparseOutrankingDigraph-omax"><strong>omax</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
-computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
-r-valued&nbsp;statement&nbsp;characteristics.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
-an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
-
-<dl><dt><a name="SparseOutrankingDigraph-omin"><strong>omin</strong></a>(self, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
-Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
-&nbsp;<br>
-With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**min**,<br>
-with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
-&nbsp;<br>
-The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
-in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
-&nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omin&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-outDegrees"><strong>outDegrees</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;median&nbsp;cut&nbsp;outdegrees</tt></dd></dl>
 
@@ -4741,8 +4701,6 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="SparseOutrankingDigraph-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#SparseOutrankingDigraph-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#SparseOutrankingDigraph-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
-
-<dl><dt><a name="SparseOutrankingDigraph-to_JSON"><strong>to_JSON</strong></a>(self)</dt><dd><tt>Convert&nbsp;the&nbsp;performance&nbsp;table&nbsp;.__dict__&nbsp;into&nbsp;a&nbsp;JSON&nbsp;string</tt></dd></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

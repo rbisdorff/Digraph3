@@ -1,24 +1,16 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-# Python implementation of linear orders
-# Dependancy: digraphs 1.589+
-# Current revision $Revision: 1.18 $
-# Copyright (C) 2011  Raymond Bisdorff
-#
-#    This program is free software; you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation; either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License along
-#    with this program; if not, write to the Free Software Foundation, Inc.,
-#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-#
+"""
+Python implementation of linear orders
+Dependancy: digraphs module
+Copyright (C) 2011-2019  Raymond Bisdorff
+
+    This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+"""
 #######################
 
 __version__ = "$Revision: 1.18 $"
@@ -55,6 +47,7 @@ class _ExtendedPrudentDigraph(Digraph):
     """
 
     def __init__(self,other,prudentBetaLevel=None,CoDual=False,Debug=False):
+        from digraphsTools import omax, omin
         from copy import copy, deepcopy
         self.__class__ = other.__class__
         self.name = 'extprud-'+other.name
@@ -110,8 +103,8 @@ class _ExtendedPrudentDigraph(Digraph):
             relation[x] = {}
             for y in actionsList:
                 if Debug:
-                    print('omax([gp.relation[x][y],stRelation[x][y]])',x,y,[gp.relation[x][y],stRelation[x][y]])
-                relation[x][y] = self.omax([gp.relation[x][y],stRelation[x][y]])    
+                    print('omax(Med,[gp.relation[x][y],stRelation[x][y]])',x,y,[gp.relation[x][y],stRelation[x][y]])
+                relation[x][y] = omax(Med,[gp.relation[x][y],stRelation[x][y]])    
         self.relation = relation
         if Debug:
             self.showRelationTable()
@@ -1022,7 +1015,7 @@ class KemenyOrder(LinearOrder):
         of all permutations of actions.
         """
         if other.order > orderLimit:
-            print('Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.')
+            print('Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.' % (other.order) )
             return
                   
         from digraphs import all_perms
@@ -1211,7 +1204,7 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     from sortingDigraphs import *
     from linearOrders import *
-    from weakOrders import *
+    from transitiveDigraphs import *
     from randomPerfTabs import *
 
     print("""
