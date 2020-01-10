@@ -56,12 +56,12 @@
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;$Revision: 1.18 $&quot;</span>
 <span class="c1"># $Source: /home/cvsroot/Digraph/linearOrders.py,v $</span>
 
-<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="o">*</span>
 
 <span class="c1">#--------- Decimal precision --------------</span>
-<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
 
 <span class="c1">#---------- general methods -----------------</span>
 <span class="c1"># generate all permutations from a string or a list</span>
@@ -86,10 +86,10 @@
 <span class="sd">    and the evaluation dictionary into self.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">prudentBetaLevel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">prudentBetaLevel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">__class__</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;extprud-&#39;</span><span class="o">+</span><span class="n">other</span><span class="o">.</span><span class="n">name</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
@@ -308,7 +308,7 @@
 <span class="sd">        other digraph (same nodes or actions).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">copysign</span>
+            <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">copysign</span>
             <span class="n">CopySign</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">CopySign</span> <span class="o">=</span> <span class="kc">False</span>
@@ -335,17 +335,17 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instantiates random linear orders</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">OutrankingModel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">OutrankingModel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating random instances of linear orders with a given number of actions (default=10).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">OutrankingModel</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomOutrankingDigraph</span>
+            <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">RandomOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">RandomOutrankingDigraph</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">numberOfActions</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
+            <span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="k">import</span> <span class="n">RandomValuationDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">numberOfActions</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
@@ -379,7 +379,7 @@
 <span class="sd">    instantiates the Extended Prudent Ranked Pairs Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">coDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Leximin</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">coDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Leximin</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">isValued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">isExtendedPrudent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -388,7 +388,7 @@
 <span class="sd">        the ranked pairs (Lexmin Dias-Lamboray) rule</span>
 <span class="sd">        Parameter: isExtendedPrudent </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="c1"># construct ranked pairs</span>
 
         <span class="k">if</span> <span class="n">coDual</span><span class="p">:</span>
@@ -534,14 +534,14 @@
 <span class="sd">    instantiates the Kohler Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">coDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">coDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph following</span>
 <span class="sd">        the Kohler rule </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="c1"># construct ranked pairs</span>
         <span class="k">if</span> <span class="n">coDual</span><span class="p">:</span>
             <span class="n">otherCoDual</span> <span class="o">=</span> <span class="n">CoDualDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -636,7 +636,7 @@
 <span class="sd">    instantiates the net flows Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">coDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">coDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph following</span>
@@ -644,8 +644,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1">#from copy import deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
 
         <span class="c1">#timings</span>
         <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -751,7 +751,7 @@
 <span class="sd">    instantiates the out flows Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">coDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">coDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph following</span>
@@ -759,9 +759,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1">#from copy import deepcopy</span>
-        <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">_OutFlowsOrder</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">_OutFlowsOrder</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
 
         <span class="c1">#timings</span>
         <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -865,7 +865,7 @@
 <span class="sd">    instantiates the Copèeland Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">coDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">coDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph following</span>
@@ -873,8 +873,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1">#from copy import deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
 
         <span class="c1">#timings</span>
         <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -1048,7 +1048,7 @@
 <span class="sd">    instantiates the exact Kemeny Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance of small order </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph by exact enumeration</span>
@@ -1058,9 +1058,9 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Digraph order </span><span class="si">%d</span><span class="s1"> to high. The default limit (7) may be changed with the oderLimit argument.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">order</span><span class="p">)</span> <span class="p">)</span>
             <span class="k">return</span>
                   
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">all_perms</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">all_perms</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         
         <span class="n">Min</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
@@ -1131,7 +1131,7 @@
 <span class="sd">    princiapl axis of the eigen deomposition of the covariance of the</span>
 <span class="sd">    outdegrees of the valued digraph &#39;other&#39;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Colwise</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Colwise</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">plotFileName</span><span class="o">=</span><span class="s2">&quot;principalOrdering&quot;</span><span class="p">,</span><span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
@@ -1145,9 +1145,9 @@
 
 <span class="sd">        The plot file name only matters with a non None image type.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
-        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">TemporaryDirectory</span>
         
         <span class="n">Min</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
@@ -1237,15 +1237,15 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span></div>
 
 <span class="c1">#----------test  linearOrders module classes  ----------------</span>
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span>
-    <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
+    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    ****************************************************</span>

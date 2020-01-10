@@ -55,10 +55,10 @@
 
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="c1">#######################</span>
-<span class="kn">from</span> <span class="nn">arithmetics</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">Digraph</span>
-<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">arithmetics</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">Digraph</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;Branch: 3.5 $&quot;</span>
 <span class="c1"># ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3</span>
@@ -94,7 +94,7 @@
 <span class="sd">       :align: center</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">integers</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">]):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">integers</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">]):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        By default we consider only primes, but the Legendre symbol</span>
 <span class="sd">        works for any integer sequence not containing 0.</span>
@@ -359,7 +359,7 @@
 <span class="sd">    of the continued fraction cf = [a_0,a_1,a_2,...,a_n] and </span>
 <span class="sd">    where a_0 corresponds to its integer part.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+    <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cf</span><span class="p">[</span><span class="n">n</span><span class="p">]))</span>
     <span class="c1">#print(n,res)</span>
@@ -604,7 +604,7 @@
     <span class="k">return</span> <span class="n">f</span></div>
 
 <span class="c1">###############################</span>
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1">######  scratch pad for testing the module components</span>
 <span class="c1">##    from digraphs import *</span>
 <span class="c1">##    print(factorization(2224))</span>
@@ -678,7 +678,7 @@
 <span class="c1">##    print(m,n)</span>
 <span class="c1">##    print(computeFareySeries(n=10,AsFloats=False,Debug=True))</span>
 <span class="c1">##</span>
-    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+    <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span>
     <span class="n">p</span> <span class="o">=</span> <span class="mi">5</span>
     <span class="n">q</span> <span class="o">=</span> <span class="mi">8</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p =&#39;</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="s1">&#39;, q =&#39;</span><span class="p">,</span><span class="n">q</span><span class="p">)</span>

@@ -17,9 +17,9 @@ sphinx:
 		(cd docSphinx; \
 		${SPHINX} -Ea . html/ )
 
-sphinxLatex:
-		(cd docSphinx; \
-		${SPHINX} -E -a -b latex . latex/ )
+#sphinxLatex:
+#		(cd docSphinx; \
+#		${SPHINX} -E -a -b latex . latex/ )
 
 sphinxLatexPDF:
 		(cd docSphinx; \
@@ -227,7 +227,10 @@ cythonTests:
 
 install:
 		sudo ${PYTHON} setup.py install
-		#sudo python3.7 setup.py install
+		sudo python3.7 setup.py install
+		sudo python3.6 setup.py install
+		sudo python3.5 setup.py install
+
 
 installVenv:
 		${PYTHON} setup.py install

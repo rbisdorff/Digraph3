@@ -56,12 +56,12 @@
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;Branch: 3.3 $&quot;</span>
 <span class="c1"># ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3</span>
 
-<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
 
 <span class="c1">#---------- Random Digraph classes -----------------</span>
-<span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="o">*</span>
 
 <div class="viewcode-block" id="RandomDigraph"><a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomDigraph">[docs]</a><span class="k">class</span> <span class="nc">RandomDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -77,7 +77,7 @@
 
 <span class="sd">     &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">arcProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">arcProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
                  <span class="n">IntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">Bipolar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
@@ -89,7 +89,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">random</span>
             <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-            <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">EmptyDigraph</span>
+            <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">EmptyDigraph</span>
             <span class="k">if</span> <span class="n">Bipolar</span><span class="p">:</span>
                 <span class="n">domain</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -186,7 +186,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                  <span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">IntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
@@ -248,14 +248,14 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                  <span class="n">IntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">weaknessDegree</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomWeakTournament&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
@@ -358,13 +358,13 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                  <span class="n">Crisp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">valuationDomain</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomTournament&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
@@ -438,7 +438,7 @@
 <span class="sd">    Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers of arcs</span>
 <span class="sd">    from random choices in the set of potential oriented pairs of nodes numbered from 1 to order. </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="c1"># check feasability</span>
@@ -485,7 +485,7 @@
 <span class="sd">        The implementation is not guaranteeing a uniform choice among all potential valid graph instances.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degreeSequence</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degreeSequence</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="c1"># check feasability</span>
@@ -573,7 +573,7 @@
 <span class="sd">    Specialization of Digraph class for random regular symmetric instances.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="c1"># check feasability</span>
@@ -657,7 +657,7 @@
 <span class="sd">        * valuationdomain ={&#39;min&#39;:-1 (default),&#39;max&#39;: 1 (default)}.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
@@ -741,7 +741,7 @@
 <span class="c1">#############################################</span>
 
 <span class="c1">#----------test Random Digraph classes ----------------</span>
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;****************************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Python randomDigraphs module                     *&#39;</span><span class="p">)</span>

@@ -2,10 +2,10 @@
 <?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"?>
 <xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2009/XMCDA-2.0.0 http://www.decision-deck.org/xmcda/_downloads/XMCDA-2.0.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0" instanceID="void">
 <projectReference id="grafittiPerfTab" name="grafittiPerfTab.xml">
-<title>Starwars *</title>
-<author>Graffiti September 2007 page 30</author>
-<version>Feb 2019</version>
-<comment>produced by RB</comment>
+<title>Performance Tableau in XMCDA-2.0 format.</title>
+<author>digraphs Module (RB)</author>
+<version>saved from Python session</version>
+<comment>produced by saveXMCDA2()</comment>
 </projectReference>
 <methodParameters id="Rubis" name="Rubis best choice method" mcdaConcept="methodData">
 <description>
@@ -207,25 +207,12 @@
 </alternatives>
 <criteria mcdaConcept="criteria">
 <description>
-  <subTitle>Movie Critics</subTitle>
+<subTitle>Family of criteria.</subTitle>
 </description>
-<criterion id="AP" name="Albert Petesch" mcdaConcept="criterion">
+<criterion id="AP" name="AP" mcdaConcept="criterion">
 <description>
-<comment>Luxemburger Wort, Telecran</comment>
-</description>
-<active>true</active>
-<criterionValue><value><real>1.00</real></value></criterionValue>
-<scale>
-<quantitative>
-<preferenceDirection>max</preferenceDirection>
-<minimum><real>-2.00</real></minimum>
-<maximum><real>5.00</real></maximum>
-</quantitative>
-</scale>
-</criterion>
-<criterion id="AS" name="Alain Stevenart" mcdaConcept="criterion">
-<description>
-<comment>La Meuse</comment>
+<comment>performance on Luxemburger Wort, Telecran</comment>
+<version>performance</version>
 </description>
 <active>true</active>
 <criterionValue><value><real>1.00</real></value></criterionValue>
@@ -237,9 +224,10 @@
 </quantitative>
 </scale>
 </criterion>
-<criterion id="CF" name="Claude François" mcdaConcept="criterion">
+<criterion id="AS" name="AS" mcdaConcept="criterion">
 <description>
-<comment>Luxemburger Wort, Télécran</comment>
+<comment>performance on La Meuse</comment>
+<version>performance</version>
 </description>
 <active>true</active>
 <criterionValue><value><real>1.00</real></value></criterionValue>
@@ -251,9 +239,10 @@
 </quantitative>
 </scale>
 </criterion>
-<criterion id="CS" name="Christian Spielmann" mcdaConcept="criterion">
+<criterion id="CF" name="CF" mcdaConcept="criterion">
 <description>
-<comment>Lëtzebuerger Journal</comment>
+<comment>performance on Luxemburger Wort, Telecran</comment>
+<version>performance</version>
 </description>
 <active>true</active>
 <criterionValue><value><real>1.00</real></value></criterionValue>
@@ -265,9 +254,10 @@
 </quantitative>
 </scale>
 </criterion>
-<criterion id="DR" name="Duncan Roberts" mcdaConcept="criterion">
+<criterion id="CS" name="CS" mcdaConcept="criterion">
 <description>
-<comment>352 Magazine</comment>
+<comment>performance on Letzebuerger Journal</comment>
+<version>performance</version>
 </description>
 <active>true</active>
 <criterionValue><value><real>1.00</real></value></criterionValue>
@@ -279,9 +269,10 @@
 </quantitative>
 </scale>
 </criterion>
-<criterion id="FG" name="Frank Grotz" mcdaConcept="criterion">
+<criterion id="DR" name="DR" mcdaConcept="criterion">
 <description>
-<comment>Lëtzebuerger Land</comment>
+<comment>performance on 352 Magazine</comment>
+<version>performance</version>
 </description>
 <active>true</active>
 <criterionValue><value><real>1.00</real></value></criterionValue>
@@ -293,9 +284,10 @@
 </quantitative>
 </scale>
 </criterion>
-<criterion id="GS" name="Gabrielle Seil" mcdaConcept="criterion">
+<criterion id="FG" name="FG" mcdaConcept="criterion">
 <description>
-<comment>Revue</comment>
+<comment>performance on Letzebuerger Land</comment>
+<version>performance</version>
 </description>
 <active>true</active>
 <criterionValue><value><real>1.00</real></value></criterionValue>
@@ -307,9 +299,25 @@
 </quantitative>
 </scale>
 </criterion>
-<criterion id="JH" name="Joy Hoffmann" mcdaConcept="criterion">
+<criterion id="GS" name="GS" mcdaConcept="criterion">
 <description>
-<comment>Zinemag</comment>
+<comment>performance on Revue</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>1.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>-2.00</real></minimum>
+<maximum><real>5.00</real></maximum>
+</quantitative>
+</scale>
+</criterion>
+<criterion id="JH" name="JH" mcdaConcept="criterion">
+<description>
+<comment>performance on movie critic, Zinemag</comment>
+<version>performance</version>
 </description>
 <active>true</active>
 <criterionValue><value><real>3.00</real></value></criterionValue>
@@ -321,9 +329,10 @@
 </quantitative>
 </scale>
 </criterion>
-<criterion id="JPT" name="Jean-Pierre Thiltges" mcdaConcept="criterion">
+<criterion id="JPT" name="JPT" mcdaConcept="criterion">
 <description>
-<comment>Revue, Télé Revue, Hebdo Revue, Graffiti</comment>
+<comment>performance on Revue, Tele Revue, Hebdo Revue, Grafitti</comment>
+<version>performance</version>
 </description>
 <active>true</active>
 <criterionValue><value><real>1.00</real></value></criterionValue>
@@ -335,9 +344,10 @@
 </quantitative>
 </scale>
 </criterion>
-<criterion id="MR" name="Martine Reuter" mcdaConcept="criterion">
+<criterion id="MR" name="MR" mcdaConcept="criterion">
 <description>
-<comment>Tageblatt, Radio 100,7</comment>
+<comment>performance on Tageblatt, Radio 100,7</comment>
+<version>performance</version>
 </description>
 <active>true</active>
 <criterionValue><value><real>1.00</real></value></criterionValue>
@@ -349,9 +359,10 @@
 </quantitative>
 </scale>
 </criterion>
-<criterion id="RR" name="Raoul Reis" mcdaConcept="criterion">
+<criterion id="RR" name="RR" mcdaConcept="criterion">
 <description>
-<comment>Radio ARA, Radio Amizade, www.bondis.lu</comment>
+<comment>performance on Radio ARA, Radio Amizade, www.bondis.lu</comment>
+<version>performance</version>
 </description>
 <active>true</active>
 <criterionValue><value><real>1.00</real></value></criterionValue>
@@ -363,9 +374,10 @@
 </quantitative>
 </scale>
 </criterion>
-<criterion id="SF" name="Sylvie Flammang" mcdaConcept="criterion">
+<criterion id="SF" name="SF" mcdaConcept="criterion">
 <description>
-<comment>Radio 100,7</comment>
+<comment>performance on Sylvie Flammang</comment>
+<version>performance</version>
 </description>
 <active>true</active>
 <criterionValue><value><real>1.00</real></value></criterionValue>
@@ -377,9 +389,10 @@
 </quantitative>
 </scale>
 </criterion>
-<criterion id="SJ" name="Susanne Jaspers" mcdaConcept="criterion">
+<criterion id="SJ" name="SJ" mcdaConcept="criterion">
 <description>
-<comment>Radio 100,7</comment>
+<comment>performance on Radio 100,7</comment>
+<version>performance</version>
 </description>
 <active>true</active>
 <criterionValue><value><real>1.00</real></value></criterionValue>
@@ -391,9 +404,10 @@
 </quantitative>
 </scale>
 </criterion>
-<criterion id="TD" name="Thibaut Demeyer" mcdaConcept="criterion">
+<criterion id="TD" name="TD" mcdaConcept="criterion">
 <description>
-<comment>Woxx, La Voix du Luxembourg</comment>
+<comment>performance on Woxx, La Voix du Luxembourg</comment>
+<version>performance</version>
 </description>
 <active>true</active>
 <criterionValue><value><real>1.00</real></value></criterionValue>
@@ -405,9 +419,10 @@
 </quantitative>
 </scale>
 </criterion>
-<criterion id="VT" name="Vivianne Thill" mcdaConcept="criterion">
+<criterion id="VT" name="VT" mcdaConcept="criterion">
 <description>
-<comment>Movie critic, Le jeudi</comment>
+<comment>performance on movie critique, Le jeudi</comment>
+<version>performance</version>
 </description>
 <active>true</active>
 <criterionValue><value><real>3.00</real></value></criterionValue>
@@ -422,9 +437,7 @@
 </criteria>
 <performanceTable mcdaConcept="performanceTable">
 <description>
-  <subTitle>Evaluation of the movies</subTitle>
-    <comment> ***** (5, chef d'oeuvre), **** (4, à voir absolument), *** (3, excellent), ** (2, bien), * (1, à la rigueur), 0 (-1, je n'ai pas aimé), 00 (-2, je déteste), NA (pas vue).</comment>
-
+<subTitle>Rubis Performance Table.</subTitle>
 </description>
 <alternativePerformances>
 <alternativeID>mv_AL</alternativeID>
