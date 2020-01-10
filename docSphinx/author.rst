@@ -5,10 +5,7 @@ About the author
 :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
 :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2020
 
-Curriculum Vitae
-----------------
-
-**Professional Functions**
+**Past Professional Functions**
 
 * Full professor at the University of Luxembourg (UL) (2003 - 2017)
 * Founding Dean of the UL Faculty of Law, Economics and Finance (FDEF) (2003 - 2004)
