@@ -1,0 +1,520 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module randomNumbers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>randomNumbers</strong></big></big> (version Branch: 3.6 $)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/randomNumbers.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/randomNumbers.py</a></font></td></tr></table>
+    <p><tt>Python3+&nbsp;implementation&nbsp;of&nbsp;random&nbsp;number&nbsp;generators<br>
+Copyright&nbsp;(C)&nbsp;2014-2018&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
+&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along<br>
+&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="randomNumbers.html#CauchyRandomVariable">CauchyRandomVariable</a>
+</font></dt><dt><font face="helvetica, arial"><a href="randomNumbers.html#DiscreteRandomVariable">DiscreteRandomVariable</a>
+</font></dt><dt><font face="helvetica, arial"><a href="randomNumbers.html#ExtendedTriangularRandomVariable">ExtendedTriangularRandomVariable</a>
+</font></dt><dt><font face="helvetica, arial"><a href="randomNumbers.html#IncrementalQuantilesEstimator">IncrementalQuantilesEstimator</a>
+</font></dt><dt><font face="helvetica, arial"><a href="randomNumbers.html#QuasiRandomPointSet">QuasiRandomPointSet</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="randomNumbers.html#QuasiRandomFareyPointSet">QuasiRandomFareyPointSet</a>
+</font></dt><dt><font face="helvetica, arial"><a href="randomNumbers.html#QuasiRandomKorobovPointSet">QuasiRandomKorobovPointSet</a>
+</font></dt><dt><font face="helvetica, arial"><a href="randomNumbers.html#QuasiRandomUniformPointSet">QuasiRandomUniformPointSet</a>
+</font></dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="CauchyRandomVariable">class <strong>CauchyRandomVariable</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#CauchyRandomVariable">CauchyRandomVariable</a>(position=0.0,&nbsp;scale=1.0,&nbsp;seed=None,&nbsp;Debug=False)<br>
+&nbsp;<br>
+Cauchy&nbsp;random&nbsp;variable&nbsp;generator.<br>
+&nbsp;<br>
+Parameters:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;position&nbsp;:=&nbsp;median&nbsp;(default=0.0)&nbsp;of&nbsp;the&nbsp;Cauchy&nbsp;distribution<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;scale&nbsp;:=&nbsp;typical&nbsp;spread&nbsp;(default=1.0)&nbsp;with&nbsp;respect&nbsp;to&nbsp;median&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;seed&nbsp;:=&nbsp;integer&nbsp;(default=None)&nbsp;for&nbsp;fixing&nbsp;the&nbsp;sequence&nbsp;generation.<br>
+&nbsp;<br>
+Cauchy&nbsp;quantile&nbsp;(inverse&nbsp;cdf)&nbsp;function:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Q(x|position,scale)&nbsp;=&nbsp;position&nbsp;+&nbsp;scale*tan[pi(x-1/2)]<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;cauchyDistribution.png<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:alt:&nbsp;Cauchy&nbsp;Distribution<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;500&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="CauchyRandomVariable-__init__"><strong>__init__</strong></a>(self, position=0.0, scale=1.0, seed=None, Debug=False)</dt><dd><tt>constructor&nbsp;for&nbsp;Cauchy&nbsp;random&nbsp;variables.</tt></dd></dl>
+
+<dl><dt><a name="CauchyRandomVariable-random"><strong>random</strong></a>(self)</dt><dd><tt>generating&nbsp;a&nbsp;Cauchy&nbsp;random&nbsp;number.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="DiscreteRandomVariable">class <strong>DiscreteRandomVariable</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#DiscreteRandomVariable">DiscreteRandomVariable</a>(discreteLaw=None,&nbsp;seed=None,&nbsp;Debug=False)<br>
+&nbsp;<br>
+Discrete&nbsp;random&nbsp;variable&nbsp;generator<br>
+&nbsp;<br>
+Parameters:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;discreteLaw&nbsp;:=&nbsp;dictionary&nbsp;with&nbsp;integer&nbsp;values<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;as&nbsp;keys&nbsp;and&nbsp;probabilities&nbsp;as&nbsp;float&nbsp;values,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;seed&nbsp;:=&nbsp;integer&nbsp;for&nbsp;fixing&nbsp;the&nbsp;sequence&nbsp;generation.<br>
+&nbsp;<br>
+Example&nbsp;usage:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;randomNumbers&nbsp;import&nbsp;<a href="#DiscreteRandomVariable">DiscreteRandomVariable</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;discreteLaw&nbsp;=&nbsp;{0:0.0478,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1:0.3349,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2:0.2392,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3:0.1435,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4:0.0957,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5:0.0670,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6:0.0478,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7:0.0096,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;8:0.0096,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9:0.0048,}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;initialze&nbsp;the&nbsp;random&nbsp;generator<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;rdv&nbsp;=&nbsp;<a href="#DiscreteRandomVariable">DiscreteRandomVariable</a>(discreteLaw,seed=1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;sample&nbsp;discrete&nbsp;random&nbsp;variable&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;count&nbsp;frequencies&nbsp;of&nbsp;obtained&nbsp;values<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;sampleSize&nbsp;=&nbsp;1000<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;frequencies&nbsp;=&nbsp;{}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;for&nbsp;i&nbsp;in&nbsp;range(sampleSize):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;=&nbsp;rdv.<a href="#DiscreteRandomVariable-random">random</a>()&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frequencies[x]&nbsp;+=&nbsp;1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;except:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frequencies[x]&nbsp;=&nbsp;1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;##&nbsp;print&nbsp;results<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;results&nbsp;=&nbsp;[x&nbsp;for&nbsp;x&nbsp;in&nbsp;frequencies]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;results.sort()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;counts=&nbsp;0.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;for&nbsp;x&nbsp;in&nbsp;results:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;counts&nbsp;+=&nbsp;frequencies[x]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;&nbsp;('%s,&nbsp;%d,&nbsp;%.3f,&nbsp;%.3f'&nbsp;%&nbsp;(x,&nbsp;frequencies[x],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;float(frequencies[x])/float(sampleSize),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;discreteLaw[x]))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print&nbsp;('#&nbsp;of&nbsp;valid&nbsp;samples&nbsp;=&nbsp;%d'&nbsp;%&nbsp;counts)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="DiscreteRandomVariable-__init__"><strong>__init__</strong></a>(self, discreteLaw=None, seed=None, Debug=False)</dt><dd><tt>constructor&nbsp;for&nbsp;discrete&nbsp;random&nbsp;variables&nbsp;with</tt></dd></dl>
+
+<dl><dt><a name="DiscreteRandomVariable-random"><strong>random</strong></a>(self)</dt><dd><tt>generating&nbsp;discrete&nbsp;random&nbsp;values&nbsp;from&nbsp;a&nbsp;discrete&nbsp;random&nbsp;variable.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ExtendedTriangularRandomVariable">class <strong>ExtendedTriangularRandomVariable</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#ExtendedTriangularRandomVariable">ExtendedTriangularRandomVariable</a>(lowLimit=0.0,&nbsp;highLimit=1.0,&nbsp;mode=None,&nbsp;probRepart=0.5,&nbsp;seed=None,&nbsp;Debug=False)<br>
+&nbsp;<br>
+Extended&nbsp;triangular&nbsp;random&nbsp;variable&nbsp;generator<br>
+&nbsp;<br>
+Parameters:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;mode&nbsp;:=&nbsp;most&nbsp;frequently&nbsp;observed&nbsp;value<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;probRepart&nbsp;:=&nbsp;probability&nbsp;mass&nbsp;distributed&nbsp;until&nbsp;the&nbsp;mode<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;seed&nbsp;:=&nbsp;integer&nbsp;for&nbsp;fixing&nbsp;the&nbsp;sequence&nbsp;generation.<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;extTrDistribution.png<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:alt:&nbsp;Extended&nbsp;triangular&nbsp;distribution<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;500&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ExtendedTriangularRandomVariable-__init__"><strong>__init__</strong></a>(self, lowLimit=0.0, highLimit=1.0, mode=None, probRepart=0.5, seed=None, Debug=False)</dt><dd><tt>constructor&nbsp;for&nbsp;extended&nbsp;triangular&nbsp;random&nbsp;variables&nbsp;with</tt></dd></dl>
+
+<dl><dt><a name="ExtendedTriangularRandomVariable-random"><strong>random</strong></a>(self)</dt><dd><tt>generating&nbsp;an&nbsp;extended&nbsp;triangular&nbsp;random&nbsp;number.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="IncrementalQuantilesEstimator">class <strong>IncrementalQuantilesEstimator</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#IncrementalQuantilesEstimator">IncrementalQuantilesEstimator</a>(nbuf=1000,&nbsp;Debug=False)<br>
+&nbsp;<br>
+*References*:&nbsp;<br>
+&nbsp;<br>
+John&nbsp;M.&nbsp;Chambers&nbsp;(et&nbsp;al.),&nbsp;Monitoring&nbsp;Networked&nbsp;Applications&nbsp;<br>
+with&nbsp;incremental&nbsp;Quantile&nbsp;estimation,&nbsp;*Statistical&nbsp;Science*&nbsp;2006&nbsp;(4):463-475<br>
+&nbsp;<br>
+*Reference*:&nbsp;William&nbsp;H.&nbsp;Press,&nbsp;Saul&nbsp;A.&nbsp;Teukolsky,&nbsp;William&nbsp;T.&nbsp;Vetterling,&nbsp;<br>
+and&nbsp;Brian&nbsp;P.&nbsp;Flannery,&nbsp;*Numerical&nbsp;Recipes&nbsp;:&nbsp;The&nbsp;Art&nbsp;of&nbsp;Scientific&nbsp;Computing,<br>
+Third&nbsp;Edition*&nbsp;(NR3),&nbsp;Cambridge&nbsp;University&nbsp;Press,&nbsp;Cambridge&nbsp;UK&nbsp;2007.<br>
+&nbsp;<br>
+Python&nbsp;reimplementation&nbsp;(RB)&nbsp;from&nbsp;the&nbsp;C++/NR3&nbsp;source&nbsp;code.<br>
+&nbsp;<br>
+See&nbsp;Computational&nbsp;Statistics&nbsp;Course&nbsp;:&nbsp;<a href="http://hdl.handle.net/10993/37870">http://hdl.handle.net/10993/37870</a><br>
+Lecture&nbsp;5.<br>
+&nbsp;<br>
+Example&nbsp;usage:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;randomNumbers&nbsp;import&nbsp;<a href="#IncrementalQuantilesEstimator">IncrementalQuantilesEstimator</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;import&nbsp;random<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;random.seed(1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;iqAgent&nbsp;=&nbsp;<a href="#IncrementalQuantilesEstimator">IncrementalQuantilesEstimator</a>(nbuf=100)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;#&nbsp;feeding&nbsp;the&nbsp;iqAgent&nbsp;with&nbsp;standard&nbsp;Gaussian&nbsp;random&nbsp;numbers&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;for&nbsp;i&nbsp;in&nbsp;range(1000):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iqAgent.<a href="#IncrementalQuantilesEstimator-add">add</a>(random.gauss(mu=0,sigma=1))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;#&nbsp;reporting&nbsp;the&nbsp;estimated&nbsp;Gaussian&nbsp;quartiles<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print(iqAgent.<a href="#IncrementalQuantilesEstimator-report">report</a>(0.0))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-2.961214270519158<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print(iqAgent.<a href="#IncrementalQuantilesEstimator-report">report</a>(0.25))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-0.6832621550224423<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print(iqAgent.<a href="#IncrementalQuantilesEstimator-report">report</a>(0.50))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-0.014392849958746522<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print(iqAgent.<a href="#IncrementalQuantilesEstimator-report">report</a>(0.75))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0.7029655732010196<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print(iqAgent.<a href="#IncrementalQuantilesEstimator-report">report</a>(1.00))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2.737259509189501<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;#&nbsp;saving&nbsp;the&nbsp;iqAgent's&nbsp;state<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;iqAgent.<a href="#IncrementalQuantilesEstimator-saveState">saveState</a>('test.csv')<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="IncrementalQuantilesEstimator-__init__"><strong>__init__</strong></a>(self, nbuf=1000, Debug=False)</dt><dd><tt>contructor:&nbsp;nbuf&nbsp;:=&nbsp;buffersize&nbsp;(default&nbsp;=&nbsp;1000)<br>
+250&nbsp;quantiles&nbsp;containing&nbsp;all&nbsp;percentiles&nbsp;from&nbsp;0.10&nbsp;to&nbsp;0.90<br>
+and&nbsp;heavy&nbsp;tails.</tt></dd></dl>
+
+<dl><dt><a name="IncrementalQuantilesEstimator-add"><strong>add</strong></a>(self, datum)</dt><dd><tt>Assimilate&nbsp;a&nbsp;new&nbsp;value&nbsp;from&nbsp;the&nbsp;stream</tt></dd></dl>
+
+<dl><dt><a name="IncrementalQuantilesEstimator-addList"><strong>addList</strong></a>(self, listDatum, historyWeight=None)</dt><dd><tt>Assimilate&nbsp;a&nbsp;list&nbsp;of&nbsp;new&nbsp;values.<br>
+&nbsp;<br>
+Parameter:<br>
+&nbsp;<br>
+*historyWeight*&nbsp;takes&nbsp;decimal&nbsp;values&nbsp;in&nbsp;[0.0;1.0[&nbsp;and&nbsp;&nbsp;<br>
+indicates&nbsp;a&nbsp;requested&nbsp;proportional&nbsp;weight&nbsp;of&nbsp;the&nbsp;history&nbsp;<br>
+wrt&nbsp;to&nbsp;the&nbsp;length&nbsp;of&nbsp;listDatum.&nbsp;<br>
+&nbsp;<br>
+Is&nbsp;ignored&nbsp;when&nbsp;None&nbsp;(default).</tt></dd></dl>
+
+<dl><dt><a name="IncrementalQuantilesEstimator-cdf"><strong>cdf</strong></a>(self, x=0)</dt><dd><tt>return&nbsp;proportion&nbsp;of&nbsp;data&nbsp;lower&nbsp;or&nbsp;equal&nbsp;to&nbsp;value&nbsp;x</tt></dd></dl>
+
+<dl><dt><a name="IncrementalQuantilesEstimator-loadState"><strong>loadState</strong></a>(self, FileName='state.csv')</dt><dd><tt>Load&nbsp;a&nbsp;previously&nbsp;saved&nbsp;state&nbsp;of&nbsp;the&nbsp;estimator</tt></dd></dl>
+
+<dl><dt><a name="IncrementalQuantilesEstimator-report"><strong>report</strong></a>(self, p=0.5)</dt><dd><tt>return&nbsp;estimated&nbsp;p-quantile&nbsp;(default&nbsp;=&nbsp;median)<br>
+for&nbsp;the&nbsp;data&nbsp;seen&nbsp;so&nbsp;far</tt></dd></dl>
+
+<dl><dt><a name="IncrementalQuantilesEstimator-reset"><strong>reset</strong></a>(self)</dt><dd><tt>reset&nbsp;the&nbsp;content&nbsp;of&nbsp;the&nbsp;estimator&nbsp;to&nbsp;the&nbsp;initial&nbsp;state.</tt></dd></dl>
+
+<dl><dt><a name="IncrementalQuantilesEstimator-saveState"><strong>saveState</strong></a>(self, fileName='state.csv')</dt><dd><tt>save&nbsp;the&nbsp;state&nbsp;of&nbsp;the&nbsp;IncrementalQuantileEstimator&nbsp;self&nbsp;instance</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="QuasiRandomFareyPointSet">class <strong>QuasiRandomFareyPointSet</strong></a>(<a href="randomNumbers.html#QuasiRandomPointSet">QuasiRandomPointSet</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#QuasiRandomFareyPointSet">QuasiRandomFareyPointSet</a>(n=20,&nbsp;s=3,&nbsp;seed=None,&nbsp;Randomized=True,&nbsp;fileName='farey',&nbsp;Debug=False)<br>
+&nbsp;<br>
+Constructor&nbsp;for&nbsp;rendering&nbsp;a&nbsp;Farey&nbsp;point&nbsp;set&nbsp;of&nbsp;dimension&nbsp;*s*&nbsp;and&nbsp;max&nbsp;denominateor&nbsp;*n*&nbsp;which&nbsp;is&nbsp;*fully&nbsp;projection&nbsp;regular*&nbsp;in&nbsp;the&nbsp;$s$-dimensional&nbsp;real-valued&nbsp;[0,1]^s&nbsp;hypercube.&nbsp;The&nbsp;lattice&nbsp;constructor&nbsp;uses&nbsp;a&nbsp;randomly&nbsp;shuffled&nbsp;Farey&nbsp;series&nbsp;for&nbsp;the&nbsp;point&nbsp;construction.&nbsp;The&nbsp;resulting&nbsp;point&nbsp;set&nbsp;is&nbsp;stored&nbsp;in&nbsp;a&nbsp;self.<strong>pointSet</strong>&nbsp;attribute&nbsp;and&nbsp;saved&nbsp;by&nbsp;default&nbsp;in&nbsp;a&nbsp;CSV&nbsp;formatted&nbsp;file.<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*n*&nbsp;:&nbsp;(default=20)&nbsp;maximal&nbsp;denominator&nbsp;of&nbsp;the&nbsp;Farey&nbsp;series<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*s*&nbsp;:&nbsp;(default=3)&nbsp;dimension&nbsp;of&nbsp;the&nbsp;hypercube<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*seed*&nbsp;:&nbsp;for&nbsp;regenerating&nbsp;the&nbsp;same&nbsp;Farey&nbsp;point&nbsp;set&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*Randomized*&nbsp;:&nbsp;(default=True)&nbsp;On&nbsp;each&nbsp;dimension,&nbsp;the&nbsp;points&nbsp;are&nbsp;randomly&nbsp;shifted&nbsp;(mod&nbsp;1)&nbsp;to&nbsp;avoid&nbsp;constant&nbsp;projections&nbsp;for&nbsp;equal&nbsp;dimension&nbsp;index&nbsp;distances.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*fileName*:&nbsp;(default='farey')&nbsp;name&nbsp;-without&nbsp;the&nbsp;csv&nbsp;suffix-&nbsp;of&nbsp;the&nbsp;stored&nbsp;result&nbsp;file.&nbsp;<br>
+&nbsp;<br>
+Sample&nbsp;Python&nbsp;session:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;randomNumbers&nbsp;import&nbsp;<a href="#QuasiRandomFareyPointSet">QuasiRandomFareyPointSet</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;qrfs&nbsp;=&nbsp;<a href="#QuasiRandomFareyPointSet">QuasiRandomFareyPointSet</a>(n=20,s=5,Randomized=True,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fileName='testFarey')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print(qrfs.__dict__.keys())<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict_keys(['n',&nbsp;'s',&nbsp;'Randomized',&nbsp;'seed',&nbsp;'fileName',&nbsp;'Debug',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'fareySeries',&nbsp;'seriesLength',&nbsp;'shuffledFareySeries',&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'pointSet',&nbsp;'pointSetCardinality'])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print(qrfs.fareySeries)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[0.0,&nbsp;0.04,&nbsp;0.04166,&nbsp;0.0435,&nbsp;0.04545,&nbsp;0.0476,&nbsp;0.05,&nbsp;0.05263,&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0.0555,&nbsp;0.058823529411764705,&nbsp;...]&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print(qrfs.seriesLength)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;201<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print(qrfs.pointSet[)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;[(0.0,&nbsp;0.0,&nbsp;0.0,&nbsp;0.0,&nbsp;0.0),&nbsp;(0.5116,&nbsp;0.4660,&nbsp;0.6493,&nbsp;0.41757,&nbsp;0.3663),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0.9776,&nbsp;0.1153,&nbsp;0.0669,&nbsp;0.7839,&nbsp;0.5926),&nbsp;(0.6269,&nbsp;0.5329,&nbsp;0.4332,&nbsp;0.0102,&nbsp;0.6126),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(0.0445,&nbsp;0.8992,&nbsp;0.6595,&nbsp;0.0302,&nbsp;0.6704),&nbsp;...]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;print(qrfs.pointSetCaridinality)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;207<br>
+&nbsp;<br>
+The&nbsp;resulting&nbsp;point&nbsp;set&nbsp;may&nbsp;be&nbsp;inspected&nbsp;in&nbsp;an&nbsp;R&nbsp;session::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;x&nbsp;=&nbsp;read.csv('testFarey.csv')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;x[1:5,]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x5<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;0.000000&nbsp;0.000000&nbsp;0.000000&nbsp;0.000000&nbsp;0.000000<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;0.511597&nbsp;0.466016&nbsp;0.649321&nbsp;0.417573&nbsp;0.366316<br>
+&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;0.977613&nbsp;0.115336&nbsp;0.066893&nbsp;0.783889&nbsp;0.592632<br>
+&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;0.626933&nbsp;0.532909&nbsp;0.433209&nbsp;0.010205&nbsp;0.612632<br>
+&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;0.044506&nbsp;0.899225&nbsp;0.659525&nbsp;0.030205&nbsp;0.670410<br>
+&nbsp;&nbsp;&nbsp;&gt;&nbsp;library('lattice')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;cloud(x$x5&nbsp;~&nbsp;x$x1&nbsp;+&nbsp;x$x3)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;plot(x$x1,x$x3)&nbsp;<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;farey3D.png<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:alt:&nbsp;Checking&nbsp;hypercube&nbsp;filling<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;500&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;fareyx1x3.png<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:alt:&nbsp;Checking&nbsp;projection&nbsp;regularity<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="randomNumbers.html#QuasiRandomFareyPointSet">QuasiRandomFareyPointSet</a></dd>
+<dd><a href="randomNumbers.html#QuasiRandomPointSet">QuasiRandomPointSet</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="QuasiRandomFareyPointSet-__init__"><strong>__init__</strong></a>(self, n=20, s=3, seed=None, Randomized=True, fileName='farey', Debug=False)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="randomNumbers.html#QuasiRandomPointSet">QuasiRandomPointSet</a>:<br>
+<dl><dt><a name="QuasiRandomFareyPointSet-countHits"><strong>countHits</strong></a>(self, regionLimits, pointSet=None)</dt><dd><tt>Counting&nbsp;hits&nbsp;of&nbsp;a&nbsp;quasi&nbsp;random&nbsp;point&nbsp;set&nbsp;in&nbsp;given&nbsp;regionLimits.</tt></dd></dl>
+
+<dl><dt><a name="QuasiRandomFareyPointSet-testFct"><strong>testFct</strong></a>(self, seq=None, buggyRegionLimits=(0.45, 0.55))</dt><dd><tt>Tiny&nbsp;buggy&nbsp;hypercube&nbsp;for&nbsp;testing&nbsp;a&nbsp;quasi&nbsp;random&nbsp;Korobov&nbsp;3D&nbsp;sequence.</tt></dd></dl>
+
+<dl><dt><a name="QuasiRandomFareyPointSet-testUniformityDiscrepancy"><strong>testUniformityDiscrepancy</strong></a>(self, k=4, pointSet=None, fileName='testUniformity', Debug=True)</dt><dd><tt>Count&nbsp;the&nbsp;number&nbsp;of&nbsp;point&nbsp;in&nbsp;each&nbsp;partial&nbsp;hypercube&nbsp;[(x-1)/k,x/k]^d<br>
+where&nbsp;x&nbsp;integer&nbsp;ands&nbsp;0&nbsp;&lt;&nbsp;x&nbsp;&lt;=&nbsp;k.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="randomNumbers.html#QuasiRandomPointSet">QuasiRandomPointSet</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="QuasiRandomKorobovPointSet">class <strong>QuasiRandomKorobovPointSet</strong></a>(<a href="randomNumbers.html#QuasiRandomPointSet">QuasiRandomPointSet</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#QuasiRandomKorobovPointSet">QuasiRandomKorobovPointSet</a>(n=997,&nbsp;s=3,&nbsp;a=383,&nbsp;Randomized=False,&nbsp;seed=None,&nbsp;fileName='korobov',&nbsp;Debug=False)<br>
+&nbsp;<br>
+Constructor&nbsp;for&nbsp;rendering&nbsp;a&nbsp;Korobov&nbsp;point&nbsp;set&nbsp;of&nbsp;dimension&nbsp;*n*&nbsp;which&nbsp;is&nbsp;*fully&nbsp;projection&nbsp;regular*&nbsp;in&nbsp;the&nbsp;$s$-dimensional&nbsp;real-valued&nbsp;[0,1)^s&nbsp;hypercube.&nbsp;The&nbsp;constructor&nbsp;uses&nbsp;a&nbsp;MLCG&nbsp;generator&nbsp;with&nbsp;potentially&nbsp;a&nbsp;full&nbsp;period.&nbsp;The&nbsp;point&nbsp;set&nbsp;is&nbsp;stored&nbsp;in&nbsp;a&nbsp;self.<strong>sequence</strong>&nbsp;attribute&nbsp;and&nbsp;saved&nbsp;in&nbsp;a&nbsp;CSV&nbsp;formatted&nbsp;file.<br>
+&nbsp;<br>
+*Source*:&nbsp;Chr.&nbsp;Lemieux,&nbsp;Monte&nbsp;Carlo&nbsp;and&nbsp;quasi&nbsp;Monte&nbsp;Carlo&nbsp;Sampling&nbsp;Springer&nbsp;2009&nbsp;Fig.&nbsp;5.12&nbsp;p.&nbsp;176.<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*n*&nbsp;:&nbsp;(default=997)&nbsp;number&nbsp;of&nbsp;Korobov&nbsp;points&nbsp;and&nbsp;modulus&nbsp;of&nbsp;the&nbsp;underlying&nbsp;MLCG<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*s*&nbsp;:&nbsp;(default=3)&nbsp;dimension&nbsp;of&nbsp;the&nbsp;hypercube<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*Randomized*&nbsp;:&nbsp;(default=False)&nbsp;the&nbsp;sequence&nbsp;is&nbsp;randomly&nbsp;shifted&nbsp;(mod&nbsp;1)&nbsp;to&nbsp;avoid&nbsp;cycling&nbsp;when&nbsp;*s*&nbsp;&gt;&nbsp;*n*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*a*&nbsp;:&nbsp;(default=383)&nbsp;MLCG&nbsp;coefficient&nbsp;(0&nbsp;&lt;&nbsp;*a*&nbsp;&lt;&nbsp;*n*),&nbsp;primitive&nbsp;with&nbsp;*n*.&nbsp;The&nbsp;choice&nbsp;of&nbsp;*a*&nbsp;and&nbsp;*n*&nbsp;is&nbsp;crucial&nbsp;for&nbsp;getting&nbsp;an&nbsp;MLCG&nbsp;with&nbsp;full&nbsp;period&nbsp;and&nbsp;hence&nbsp;a&nbsp;fully&nbsp;projection-regular&nbsp;sequence.&nbsp;A&nbsp;second&nbsp;good&nbsp;pair&nbsp;is&nbsp;given&nbsp;with&nbsp;*n*&nbsp;=&nbsp;1021&nbsp;(prime)&nbsp;and&nbsp;*a*&nbsp;=&nbsp;76.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*fileName*:&nbsp;(default='korobov')&nbsp;name&nbsp;-without&nbsp;the&nbsp;csv&nbsp;suffix-&nbsp;of&nbsp;the&nbsp;stored&nbsp;result.&nbsp;<br>
+&nbsp;<br>
+Sample&nbsp;Python&nbsp;session:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;randomNumbers&nbsp;import&nbsp;<a href="#QuasiRandomKorobovPointSet">QuasiRandomKorobovPointSet</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;kor&nbsp;=&nbsp;<a href="#QuasiRandomKorobovPointSet">QuasiRandomKorobovPointSet</a>(Debug=True)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;[0.0,&nbsp;0.0,&nbsp;0.0]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;[0.13536725313948247,&nbsp;0.23158619430934912,&nbsp;0.8941657924971758]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;[0.36595043842175035,&nbsp;0.7415995294344084,&nbsp;0.7035940773517395]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;[0.8759637735468097,&nbsp;0.5510278142889722,&nbsp;0.714627176649633]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;[0.6853920584013734,&nbsp;0.5620609135868657,&nbsp;0.9403042077429129]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;[0.6964251576992669,&nbsp;0.7877379446801456,&nbsp;0.3746071164690914]<br>
+&nbsp;<br>
+The&nbsp;resulting&nbsp;Korobov&nbsp;sequence&nbsp;may&nbsp;be&nbsp;inspected&nbsp;in&nbsp;an&nbsp;R&nbsp;session::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;x&nbsp;=&nbsp;read.csv('korobov.csv')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;x[1:5,]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;x1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;0.000000&nbsp;0.000000&nbsp;0.000000<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;0.135367&nbsp;0.231586&nbsp;0.894166<br>
+&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;0.365950&nbsp;0.741600&nbsp;0.703594<br>
+&nbsp;&nbsp;&nbsp;&nbsp;4&nbsp;0.875964&nbsp;0.551028&nbsp;0.714627<br>
+&nbsp;&nbsp;&nbsp;&nbsp;5&nbsp;0.685392&nbsp;0.562061&nbsp;0.940304<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;library('lattice')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;cloud(x$x3&nbsp;~&nbsp;x$x1&nbsp;+&nbsp;x$x2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;plot(x$x1,x$x2,pch='°')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;plot(x$x1,x$x3,pch="°")<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;korobov3D.png<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:alt:&nbsp;Checking&nbsp;projection&nbsp;regularity<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;500&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;korobovProjection12.png<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:alt:&nbsp;Checking&nbsp;projection&nbsp;regularity<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;korobovProjection13.png<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:alt:&nbsp;Checking&nbsp;projection&nbsp;regularity<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="randomNumbers.html#QuasiRandomKorobovPointSet">QuasiRandomKorobovPointSet</a></dd>
+<dd><a href="randomNumbers.html#QuasiRandomPointSet">QuasiRandomPointSet</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="QuasiRandomKorobovPointSet-__init__"><strong>__init__</strong></a>(self, n=997, s=3, a=383, Randomized=False, seed=None, fileName='korobov', Debug=False)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="randomNumbers.html#QuasiRandomPointSet">QuasiRandomPointSet</a>:<br>
+<dl><dt><a name="QuasiRandomKorobovPointSet-countHits"><strong>countHits</strong></a>(self, regionLimits, pointSet=None)</dt><dd><tt>Counting&nbsp;hits&nbsp;of&nbsp;a&nbsp;quasi&nbsp;random&nbsp;point&nbsp;set&nbsp;in&nbsp;given&nbsp;regionLimits.</tt></dd></dl>
+
+<dl><dt><a name="QuasiRandomKorobovPointSet-testFct"><strong>testFct</strong></a>(self, seq=None, buggyRegionLimits=(0.45, 0.55))</dt><dd><tt>Tiny&nbsp;buggy&nbsp;hypercube&nbsp;for&nbsp;testing&nbsp;a&nbsp;quasi&nbsp;random&nbsp;Korobov&nbsp;3D&nbsp;sequence.</tt></dd></dl>
+
+<dl><dt><a name="QuasiRandomKorobovPointSet-testUniformityDiscrepancy"><strong>testUniformityDiscrepancy</strong></a>(self, k=4, pointSet=None, fileName='testUniformity', Debug=True)</dt><dd><tt>Count&nbsp;the&nbsp;number&nbsp;of&nbsp;point&nbsp;in&nbsp;each&nbsp;partial&nbsp;hypercube&nbsp;[(x-1)/k,x/k]^d<br>
+where&nbsp;x&nbsp;integer&nbsp;ands&nbsp;0&nbsp;&lt;&nbsp;x&nbsp;&lt;=&nbsp;k.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="randomNumbers.html#QuasiRandomPointSet">QuasiRandomPointSet</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="QuasiRandomPointSet">class <strong>QuasiRandomPointSet</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Abstract&nbsp;class&nbsp;for&nbsp;generic&nbsp;quasi&nbsp;random&nbsp;point&nbsp;set&nbsp;methods&nbsp;and&nbsp;tools.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="QuasiRandomPointSet-countHits"><strong>countHits</strong></a>(self, regionLimits, pointSet=None)</dt><dd><tt>Counting&nbsp;hits&nbsp;of&nbsp;a&nbsp;quasi&nbsp;random&nbsp;point&nbsp;set&nbsp;in&nbsp;given&nbsp;regionLimits.</tt></dd></dl>
+
+<dl><dt><a name="QuasiRandomPointSet-testFct"><strong>testFct</strong></a>(self, seq=None, buggyRegionLimits=(0.45, 0.55))</dt><dd><tt>Tiny&nbsp;buggy&nbsp;hypercube&nbsp;for&nbsp;testing&nbsp;a&nbsp;quasi&nbsp;random&nbsp;Korobov&nbsp;3D&nbsp;sequence.</tt></dd></dl>
+
+<dl><dt><a name="QuasiRandomPointSet-testUniformityDiscrepancy"><strong>testUniformityDiscrepancy</strong></a>(self, k=4, pointSet=None, fileName='testUniformity', Debug=True)</dt><dd><tt>Count&nbsp;the&nbsp;number&nbsp;of&nbsp;point&nbsp;in&nbsp;each&nbsp;partial&nbsp;hypercube&nbsp;[(x-1)/k,x/k]^d<br>
+where&nbsp;x&nbsp;integer&nbsp;ands&nbsp;0&nbsp;&lt;&nbsp;x&nbsp;&lt;=&nbsp;k.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="QuasiRandomUniformPointSet">class <strong>QuasiRandomUniformPointSet</strong></a>(<a href="randomNumbers.html#QuasiRandomPointSet">QuasiRandomPointSet</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#QuasiRandomUniformPointSet">QuasiRandomUniformPointSet</a>(n=100,&nbsp;s=3,&nbsp;seed=None,&nbsp;Randomized=True,&nbsp;fileName='uniform',&nbsp;Debug=False)<br>
+&nbsp;<br>
+Constructor&nbsp;for&nbsp;rendering&nbsp;a&nbsp;quai&nbsp;random&nbsp;point&nbsp;set&nbsp;of&nbsp;dimension&nbsp;*s*&nbsp;and&nbsp;max&nbsp;denominateor&nbsp;*n*&nbsp;which&nbsp;is&nbsp;*fully&nbsp;projection&nbsp;regular*&nbsp;in&nbsp;the&nbsp;$s$-dimensional&nbsp;real-valued&nbsp;[0,1]^s&nbsp;hypercube.&nbsp;The&nbsp;lattice&nbsp;constructor&nbsp;uses&nbsp;a&nbsp;randomly&nbsp;shuffled&nbsp;*uniform*&nbsp;series&nbsp;for&nbsp;the&nbsp;point&nbsp;construction.&nbsp;The&nbsp;resulting&nbsp;point&nbsp;set&nbsp;is&nbsp;stored&nbsp;in&nbsp;a&nbsp;self.<strong>pointSet</strong>&nbsp;attribute&nbsp;and&nbsp;saved&nbsp;by&nbsp;default&nbsp;in&nbsp;a&nbsp;CSV&nbsp;formatted&nbsp;file.<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*n*&nbsp;:&nbsp;(default=100)&nbsp;denominator&nbsp;of&nbsp;the&nbsp;uniform&nbsp;series&nbsp;x/n&nbsp;with&nbsp;0&nbsp;&lt;=&nbsp;x&nbsp;&lt;=&nbsp;n<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*s*&nbsp;:&nbsp;(default=3)&nbsp;dimension&nbsp;of&nbsp;the&nbsp;hypercube<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*seed*&nbsp;:&nbsp;for&nbsp;regenerating&nbsp;the&nbsp;same&nbsp;Farey&nbsp;point&nbsp;set&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*Randomized*&nbsp;:&nbsp;(default=True)&nbsp;On&nbsp;each&nbsp;dimension,&nbsp;the&nbsp;points&nbsp;are&nbsp;randomly&nbsp;shifted&nbsp;(mod&nbsp;1)&nbsp;to&nbsp;avoid&nbsp;constant&nbsp;projections&nbsp;for&nbsp;equal&nbsp;dimension&nbsp;index&nbsp;distances.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*fileName*:&nbsp;(default='uniform')&nbsp;name&nbsp;-without&nbsp;the&nbsp;csv&nbsp;suffix-&nbsp;of&nbsp;the&nbsp;stored&nbsp;result&nbsp;file.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="randomNumbers.html#QuasiRandomUniformPointSet">QuasiRandomUniformPointSet</a></dd>
+<dd><a href="randomNumbers.html#QuasiRandomPointSet">QuasiRandomPointSet</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="QuasiRandomUniformPointSet-__init__"><strong>__init__</strong></a>(self, n=100, s=3, seed=None, Randomized=True, fileName='uniform', Debug=False)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="randomNumbers.html#QuasiRandomPointSet">QuasiRandomPointSet</a>:<br>
+<dl><dt><a name="QuasiRandomUniformPointSet-countHits"><strong>countHits</strong></a>(self, regionLimits, pointSet=None)</dt><dd><tt>Counting&nbsp;hits&nbsp;of&nbsp;a&nbsp;quasi&nbsp;random&nbsp;point&nbsp;set&nbsp;in&nbsp;given&nbsp;regionLimits.</tt></dd></dl>
+
+<dl><dt><a name="QuasiRandomUniformPointSet-testFct"><strong>testFct</strong></a>(self, seq=None, buggyRegionLimits=(0.45, 0.55))</dt><dd><tt>Tiny&nbsp;buggy&nbsp;hypercube&nbsp;for&nbsp;testing&nbsp;a&nbsp;quasi&nbsp;random&nbsp;Korobov&nbsp;3D&nbsp;sequence.</tt></dd></dl>
+
+<dl><dt><a name="QuasiRandomUniformPointSet-testUniformityDiscrepancy"><strong>testUniformityDiscrepancy</strong></a>(self, k=4, pointSet=None, fileName='testUniformity', Debug=True)</dt><dd><tt>Count&nbsp;the&nbsp;number&nbsp;of&nbsp;point&nbsp;in&nbsp;each&nbsp;partial&nbsp;hypercube&nbsp;[(x-1)/k,x/k]^d<br>
+where&nbsp;x&nbsp;integer&nbsp;ands&nbsp;0&nbsp;&lt;&nbsp;x&nbsp;&lt;=&nbsp;k.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="randomNumbers.html#QuasiRandomPointSet">QuasiRandomPointSet</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

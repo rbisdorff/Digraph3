@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module digraphsTools</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>digraphsTools</strong></big></big> (version Branch: 3.7 $)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/digraphsTools.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/digraphsTools.py</a></font></td></tr></table>
+    <p><tt>Python3+&nbsp;implementation&nbsp;of&nbsp;Digraph3&nbsp;tools<br>
+&nbsp;<br>
+Copyright&nbsp;(C)&nbsp;2016-2019&nbsp;Raymond&nbsp;Bisdorff<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
+&nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by<br>
+&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along<br>
+&nbsp;&nbsp;&nbsp;&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="itertools.html">itertools</a><br>
+</td><td width="25%" valign=top><a href="collections.abc.html">collections.abc</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-all_perms"><strong>all_perms</strong></a>(str)</dt><dd><tt>#&nbsp;generate&nbsp;all&nbsp;permutations&nbsp;from&nbsp;a&nbsp;string&nbsp;or&nbsp;a&nbsp;list<br>
+#&nbsp;From&nbsp;Michael&nbsp;Davies's&nbsp;recipe:<br>
+#&nbsp;<a href="http://snippets.dzone.com/posts/show/753">http://snippets.dzone.com/posts/show/753</a></tt></dd></dl>
+ <dl><dt><a name="-flatten"><strong>flatten</strong></a>(iterable, ltypes=&lt;class 'collections.abc.Iterable'&gt;)</dt><dd><tt>Flattens&nbsp;a&nbsp;list&nbsp;of&nbsp;lists&nbsp;into&nbsp;a&nbsp;flat&nbsp;list.<br>
+&nbsp;<br>
+Main&nbsp;usage:<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;listOfLists&nbsp;=&nbsp;[[1,2],[3],[4]]<br>
+&gt;&gt;&gt;&nbsp;[x&nbsp;for&nbsp;x&nbsp;in&nbsp;<a href="#-flatten">flatten</a>(listOfLists)]<br>
+[1,2,3,4]</tt></dd></dl>
+ <dl><dt><a name="-generateBipolarGrayCode"><strong>generateBipolarGrayCode</strong></a>(n)</dt><dd><tt>Bipolar&nbsp;version&nbsp;of&nbsp;generateGrayCode.<br>
+X&nbsp;is&nbsp;a&nbsp;partially&nbsp;determined&nbsp;-1&nbsp;vector.</tt></dd></dl>
+ <dl><dt><a name="-generateGrayCode"><strong>generateGrayCode</strong></a>(n)</dt><dd><tt>Knuth&nbsp;ACP&nbsp;(4)&nbsp;7.2.1.1.&nbsp;p.6<br>
+Algorithm&nbsp;G</tt></dd></dl>
+ <dl><dt><a name="-generateLooplessGrayCode"><strong>generateLooplessGrayCode</strong></a>(n)</dt><dd><tt>Knuth&nbsp;ACP&nbsp;(4)&nbsp;7.2.1.1.&nbsp;p.7<br>
+Algorithm&nbsp;L</tt></dd></dl>
+ <dl><dt><a name="-grayCode"><strong>grayCode</strong></a>(n)</dt><dd><tt>#&nbsp;generate&nbsp;the&nbsp;Gray&nbsp;code&nbsp;of&nbsp;length&nbsp;n&nbsp;by&nbsp;middle&nbsp;reflection<br>
+#&nbsp;RB&nbsp;Feb&nbsp;2017</tt></dd></dl>
+ <dl><dt><a name="-omax"><strong>omax</strong></a>(Med, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**disjunction**&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
+computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
+r-valued&nbsp;statement&nbsp;characteristics.<br>
+&nbsp;<br>
+With&nbsp;**positive**&nbsp;arguments,&nbsp;omax&nbsp;operates&nbsp;a&nbsp;**max**,<br>
+with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
+&nbsp;<br>
+The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
+an&nbsp;**indeterminate**&nbsp;value.<br>
+&nbsp;<br>
+Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
+and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
+ <dl><dt><a name="-omin"><strong>omin</strong></a>(Med, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
+Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
+&nbsp;<br>
+With&nbsp;**positive**&nbsp;arguments,&nbsp;omin&nbsp;operates&nbsp;a&nbsp;**min**,<br>
+with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**max**.<br>
+&nbsp;<br>
+The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results<br>
+in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
+&nbsp;<br>
+Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.<br>
+We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
+and&nbsp;operate&nbsp;*omin*&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
+ <dl><dt><a name="-powerset"><strong>powerset</strong></a>(S)</dt><dd><tt>Power&nbsp;set&nbsp;generator&nbsp;iterator.<br>
+&nbsp;<br>
+Parameter&nbsp;S&nbsp;may&nbsp;be&nbsp;any&nbsp;object&nbsp;that&nbsp;is&nbsp;accepted&nbsp;as&nbsp;input&nbsp;by&nbsp;the&nbsp;set&nbsp;class&nbsp;constructor.</tt></dd></dl>
+ <dl><dt><a name="-quantile"><strong>quantile</strong></a>(x, p)</dt><dd><tt>R&nbsp;type=7&nbsp;(default)&nbsp;quantile&nbsp;function.<br>
+&nbsp;<br>
+*x*&nbsp;is&nbsp;a&nbsp;vector&nbsp;of&nbsp;statistical&nbsp;observations&nbsp;of&nbsp;length&nbsp;*n*.<br>
+&nbsp;<br>
+*p*&nbsp;is&nbsp;an&nbsp;upper-closed&nbsp;cumulative&nbsp;probabilitiy.<br>
+&nbsp;<br>
+Renders&nbsp;the&nbsp;quantile&nbsp;*q(p)*,<br>
+i.e.&nbsp;the&nbsp;observation&nbsp;such&nbsp;that&nbsp;the&nbsp;probability&nbsp;to&nbsp;be&nbsp;lower&nbsp;or&nbsp;equal&nbsp;is&nbsp;*p*.</tt></dd></dl>
+ <dl><dt><a name="-ranking2preorder"><strong>ranking2preorder</strong></a>(R)</dt><dd><tt>#&nbsp;transforms&nbsp;a&nbsp;ranking&nbsp;(list&nbsp;from&nbsp;best&nbsp;to&nbsp;worst)&nbsp;into<br>
+#&nbsp;a&nbsp;preorder&nbsp;(&nbsp;a&nbsp;list&nbsp;of&nbsp;list&nbsp;from&nbsp;worst&nbsp;to&nbsp;best)</tt></dd></dl>
+ <dl><dt><a name="-time"><strong>time</strong></a>(...)</dt><dd><tt><a href="#-time">time</a>()&nbsp;-&gt;&nbsp;floating&nbsp;point&nbsp;number<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;current&nbsp;time&nbsp;in&nbsp;seconds&nbsp;since&nbsp;the&nbsp;Epoch.<br>
+Fractions&nbsp;of&nbsp;a&nbsp;second&nbsp;may&nbsp;be&nbsp;present&nbsp;if&nbsp;the&nbsp;system&nbsp;clock&nbsp;provides&nbsp;them.</tt></dd></dl>
+ <dl><dt><a name="-timefn"><strong>timefn</strong></a>(fn)</dt><dd><tt>A&nbsp;decorator&nbsp;for&nbsp;automate&nbsp;run&nbsp;time&nbsp;measurements<br>
+from&nbsp;"High&nbsp;Performance&nbsp;Python"&nbsp;by&nbsp;&nbsp;M&nbsp;Gorelick&nbsp;&amp;&nbsp;I&nbsp;Ozswald<br>
+O'Reilly&nbsp;2014&nbsp;p.27</tt></dd></dl>
+ <dl><dt><a name="-total_size"><strong>total_size</strong></a>(o, handlers={}, verbose=False)</dt><dd><tt>Returns&nbsp;the&nbsp;approximate&nbsp;memory&nbsp;footprint&nbsp;of&nbsp;an&nbsp;object&nbsp;and&nbsp;all&nbsp;of&nbsp;its&nbsp;contents.<br>
+&nbsp;<br>
+Automatically&nbsp;finds&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;following&nbsp;containers&nbsp;and<br>
+their&nbsp;subclasses:&nbsp;&nbsp;tuple,&nbsp;list,&nbsp;deque,&nbsp;dict,&nbsp;set,&nbsp;frozenset,&nbsp;Digraph&nbsp;and&nbsp;BigDigraph.<br>
+To&nbsp;search&nbsp;other&nbsp;containers,&nbsp;add&nbsp;handlers&nbsp;to&nbsp;iterate&nbsp;over&nbsp;their&nbsp;contents:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;handlers&nbsp;=&nbsp;{SomeContainerClass:&nbsp;iter,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OtherContainerClass:&nbsp;OtherContainerClass.get_elements}<br>
+&nbsp;<br>
+See&nbsp;<a href="http://code.activestate.com/recipes/577504/">http://code.activestate.com/recipes/577504/</a></tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>colorPalettes</strong> = {1: ['none', '#EA2027', '#006266', '#1B1464', '#5758BB', '#6F1E51', '#EE5A24', '#009432', '#0652DD', '#9980FA', '#833471', '#F79F1F', '#A3CB38', '#1289A7', '#D980FA', '#B53471', '#FFC312', '#C4E538', '#12CBC4', '#FDA7DF', ...], 2: ['black', 'blue', 'coral', 'gold', 'gray', 'black', 'pink', 'green', 'orange', 'skyblue', 'wheat', 'salmon'], 3: ['none', 'black', 'red', 'cyan', 'green', 'brown', 'blue', 'gold', 'orange', 'grey', 'green2']}</td></tr></table>
+</body></html>

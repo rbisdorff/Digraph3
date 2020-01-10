@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module xmcda</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>xmcda</strong></big></big> (version Branch: 3.5 $)</font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/xmcda.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/xmcda.py</a></font></td></tr></table>
+    <p><tt>Python3+&nbsp;implementation&nbsp;of&nbsp;xmcda&nbsp;tools<br>
+Copyright&nbsp;(C)&nbsp;2016-2019&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="itertools.html">itertools</a><br>
+<a href="collections.abc.html">collections.abc</a><br>
+<a href="codecs.html">codecs</a><br>
+</td><td width="25%" valign=top><a href="copy.html">copy</a><br>
+<a href="decimal.html">decimal</a><br>
+<a href="xml.sax.handler.html">xml.sax.handler</a><br>
+</td><td width="25%" valign=top><a href="json.html">json</a><br>
+<a href="os.html">os</a><br>
+<a href="string.html">string</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<a href="tempfile.html">tempfile</a><br>
+<a href="xml.sax.xmlreader.html">xml.sax.xmlreader</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-saveRobustRubisChoiceXSL"><strong>saveRobustRubisChoiceXSL</strong></a>(fileName='xmcda2RubisRobustChoice.xsl')</dt><dd><tt>Save&nbsp;the&nbsp;robust&nbsp;version&nbsp;of&nbsp;the&nbsp;Rubis&nbsp;Best-Choice&nbsp;XMCDA&nbsp;2.0&nbsp;XSL&nbsp;style&nbsp;sheet&nbsp;in&nbsp;the&nbsp;current&nbsp;working&nbsp;directory<br>
+This&nbsp;style&nbsp;sheet&nbsp;allows&nbsp;to&nbsp;browse&nbsp;an&nbsp;XMCDA&nbsp;2.0&nbsp;encoded&nbsp;robust&nbsp;Rubis&nbsp;Best-Choice&nbsp;recommendation.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;When&nbsp;accessing&nbsp;an&nbsp;XMCDA&nbsp;encoded&nbsp;data&nbsp;file&nbsp;in&nbsp;a&nbsp;browser,&nbsp;for&nbsp;safety&nbsp;reasons,&nbsp;the&nbsp;corresponding&nbsp;XSL&nbsp;style&nbsp;sheet<br>
+&nbsp;&nbsp;&nbsp;&nbsp;must&nbsp;be&nbsp;present&nbsp;in&nbsp;the&nbsp;same&nbsp;working&nbsp;directory.</tt></dd></dl>
+ <dl><dt><a name="-saveRubisChoiceXSL"><strong>saveRubisChoiceXSL</strong></a>(fileName='xmcda2RubisChoice.xsl')</dt><dd><tt>Save&nbsp;the&nbsp;local&nbsp;Rubis&nbsp;Best-Choice&nbsp;XMCDA&nbsp;2.0&nbsp;XSL&nbsp;style&nbsp;sheet&nbsp;in&nbsp;the&nbsp;current&nbsp;working&nbsp;directory<br>
+This&nbsp;style&nbsp;sheet&nbsp;allows&nbsp;to&nbsp;browse&nbsp;an&nbsp;XMCDA&nbsp;2.0&nbsp;encoded&nbsp;Rubis&nbsp;Best-Choice&nbsp;recommendation.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;When&nbsp;accessing&nbsp;an&nbsp;XMCDA&nbsp;encoded&nbsp;data&nbsp;file&nbsp;in&nbsp;a&nbsp;browser,&nbsp;for&nbsp;safety&nbsp;reasons,&nbsp;the&nbsp;corresponding&nbsp;XSL&nbsp;style&nbsp;sheet<br>
+&nbsp;&nbsp;&nbsp;&nbsp;must&nbsp;be&nbsp;present&nbsp;in&nbsp;the&nbsp;same&nbsp;working&nbsp;directory.</tt></dd></dl>
+ <dl><dt><a name="-saveRubisXSL"><strong>saveRubisXSL</strong></a>(fileName='xmcda2Rubis.xsl', Extended=True)</dt><dd><tt>Save&nbsp;the&nbsp;standard&nbsp;Rubis&nbsp;XMCDA&nbsp;2.0&nbsp;XSL&nbsp;style&nbsp;sheet&nbsp;in&nbsp;the&nbsp;current&nbsp;working&nbsp;directory.<br>
+This&nbsp;style&nbsp;sheet&nbsp;allows&nbsp;to&nbsp;visualize&nbsp;an&nbsp;XMCDA&nbsp;2.0&nbsp;encoded&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;When&nbsp;accessing&nbsp;an&nbsp;XMCDA&nbsp;encoded&nbsp;data&nbsp;file&nbsp;in&nbsp;a&nbsp;browser,&nbsp;for&nbsp;safety&nbsp;reasons,&nbsp;the&nbsp;corresponding&nbsp;XSL&nbsp;style&nbsp;sheet<br>
+&nbsp;&nbsp;&nbsp;&nbsp;must&nbsp;be&nbsp;present&nbsp;in&nbsp;the&nbsp;same&nbsp;working&nbsp;directory.</tt></dd></dl>
+ <dl><dt><a name="-saveXMCDARubisBestChoiceRecommendation"><strong>saveXMCDARubisBestChoiceRecommendation</strong></a>(problemFileName=None, tempDir='.', valuationType=None)</dt><dd><tt>Store&nbsp;an&nbsp;XMCDA2&nbsp;encoded&nbsp;solution&nbsp;file&nbsp;of&nbsp;the&nbsp;Rubis&nbsp;best-choice&nbsp;recommendation.<br>
+&nbsp;<br>
+&nbsp;&nbsp;The&nbsp;valuationType&nbsp;parameter&nbsp;allows&nbsp;to&nbsp;work:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;on&nbsp;the&nbsp;standard&nbsp;bipolar&nbsp;outranking&nbsp;digraph&nbsp;(valuationType&nbsp;=&nbsp;'bipolar',&nbsp;default),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;on&nbsp;the&nbsp;normalized&nbsp;--[-1,1]&nbsp;valued--&nbsp;bipolar&nbsp;outranking&nbsp;digraph&nbsp;(valuationType&nbsp;=&nbsp;'normalized'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;on&nbsp;the&nbsp;robust&nbsp;--ordinal&nbsp;criteria&nbsp;weights--&nbsp;bipolar&nbsp;outranking&nbsp;digraph&nbsp;(valuationType&nbsp;=&nbsp;'robust'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;on&nbsp;the&nbsp;confident&nbsp;outranking&nbsp;digraph&nbsp;(valuationType&nbsp;=&nbsp;'confident'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;ignoring&nbsp;considerable&nbsp;performances&nbsp;differences&nbsp;(valuationType&nbsp;=&nbsp;'noVeto').&nbsp;&nbsp;<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;method&nbsp;requires&nbsp;an&nbsp;Unix&nbsp;like&nbsp;OS&nbsp;like&nbsp;Ubuntu&nbsp;or&nbsp;Mac&nbsp;OSX&nbsp;and&nbsp;depends&nbsp;on:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;the&nbsp;R&nbsp;statistics&nbsp;package&nbsp;for&nbsp;Principal&nbsp;Component&nbsp;Analysis&nbsp;graphic,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;the&nbsp;C&nbsp;calmat&nbsp;matrix&nbsp;interpreter&nbsp;(On&nbsp;<a href="http://leopold-loewenheim.uni.lu/svn/repos/Calmat/">http://leopold-loewenheim.uni.lu/svn/repos/Calmat/</a>&nbsp;&nbsp;see&nbsp;README)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;the&nbsp;xpdf&nbsp;ressources&nbsp;(&nbsp;...$&nbsp;apt-get&nbsp;install&nbsp;xpdf&nbsp;on&nbsp;Ubuntu)&nbsp;for&nbsp;converting&nbsp;pdf&nbsp;files&nbsp;to&nbsp;ppm&nbsp;format,&nbsp;and&nbsp;ppm&nbsp;files&nbsp;to&nbsp;png&nbsp;format.</tt></dd></dl>
+ <dl><dt><a name="-showXMCDARubisBestChoiceRecommendation"><strong>showXMCDARubisBestChoiceRecommendation</strong></a>(problemFileName=None, valuationType=None)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;XMCDA2&nbsp;solution&nbsp;of&nbsp;the<br>
+Rubis&nbsp;Solver&nbsp;computed&nbsp;from&nbsp;a&nbsp;stored&nbsp;XMCDA2&nbsp;encoded&nbsp;performance&nbsp;tableau.<br>
+&nbsp;<br>
+The&nbsp;valuationType&nbsp;parameter&nbsp;allows&nbsp;to&nbsp;work:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;on&nbsp;the&nbsp;standard&nbsp;bipolar&nbsp;outranking&nbsp;digraph&nbsp;(valuationType&nbsp;=&nbsp;'bipolar',&nbsp;default),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;on&nbsp;the&nbsp;normalized&nbsp;--[-1,1]&nbsp;valued--&nbsp;bipolar&nbsp;outranking&nbsp;digraph&nbsp;(valuationType&nbsp;=&nbsp;'normalized'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;on&nbsp;the&nbsp;robust&nbsp;--ordinal&nbsp;criteria&nbsp;weights--&nbsp;bipolar&nbsp;outranking&nbsp;digraph&nbsp;(valuationType&nbsp;=&nbsp;'robust'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;on&nbsp;the&nbsp;confident&nbsp;outranking&nbsp;digraph&nbsp;(valuationType&nbsp;=&nbsp;'confident'),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;ignoring&nbsp;considerable&nbsp;performances&nbsp;differences&nbsp;(valuationType&nbsp;=&nbsp;'noVeto').<br>
+&nbsp;<br>
+Example::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;import&nbsp;xmcda<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;RandomCBPerformanceTableau<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;RandomCBPerformanceTableau()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;t.saveXMCDA2('example')<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;xmcda.<a href="#-showXMCDARubisBestChoiceRecommendation">showXMCDARubisBestChoiceRecommendation</a>(problemFileName='example')</tt></dd></dl>
+ <dl><dt><a name="-time"><strong>time</strong></a>(...)</dt><dd><tt><a href="#-time">time</a>()&nbsp;-&gt;&nbsp;floating&nbsp;point&nbsp;number<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;current&nbsp;time&nbsp;in&nbsp;seconds&nbsp;since&nbsp;the&nbsp;Epoch.<br>
+Fractions&nbsp;of&nbsp;a&nbsp;second&nbsp;may&nbsp;be&nbsp;present&nbsp;if&nbsp;the&nbsp;system&nbsp;clock&nbsp;provides&nbsp;them.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>colorPalettes</strong> = {1: ['none', '#EA2027', '#006266', '#1B1464', '#5758BB', '#6F1E51', '#EE5A24', '#009432', '#0652DD', '#9980FA', '#833471', '#F79F1F', '#A3CB38', '#1289A7', '#D980FA', '#B53471', '#FFC312', '#C4E538', '#12CBC4', '#FDA7DF', ...], 2: ['black', 'blue', 'coral', 'gold', 'gray', 'black', 'pink', 'green', 'orange', 'skyblue', 'wheat', 'salmon'], 3: ['none', 'black', 'red', 'cyan', 'green', 'brown', 'blue', 'gold', 'orange', 'grey', 'green2']}<br>
+<strong>default_parser_list</strong> = ['xml.sax.expatreader']<br>
+<strong>robustRubisXSL</strong> = '&lt;?xml version="1.0" encoding="utf-8"?&gt;<font color="#c040c0">\n</font>&lt;xsl:styl...&lt;/table&gt;<font color="#c040c0">\n</font>&lt;/xsl:template&gt;<font color="#c040c0">\n</font> <font color="#c040c0">\n</font>&lt;/xsl:stylesheet&gt;<font color="#c040c0">\n</font>    '<br>
+<strong>rubisChoiceXSL</strong> = '&lt;?xml version="1.0" encoding="utf-8"?&gt;<font color="#c040c0">\n</font>&lt;xsl:styl...&lt;/table&gt;<font color="#c040c0">\n</font>&lt;/xsl:template&gt;<font color="#c040c0">\n</font> <font color="#c040c0">\n</font>&lt;/xsl:stylesheet&gt;<font color="#c040c0">\n</font>    '<br>
+<strong>rubisExtXSL</strong> = '&lt;?xml version="1.0" encoding="utf-8"?&gt;<font color="#c040c0">\n</font>&lt;xsl:styl...&lt;/table&gt;<font color="#c040c0">\n</font>&lt;/xsl:template&gt;<font color="#c040c0">\n</font> <font color="#c040c0">\n</font>&lt;/xsl:stylesheet&gt;<font color="#c040c0">\n</font>    '<br>
+<strong>rubisXSL</strong> = '&lt;?xml version="1.0" encoding="utf-8"?&gt;<font color="#c040c0">\n</font>&lt;xsl:styl...&lt;/table&gt;<font color="#c040c0">\n</font>&lt;/xsl:template&gt;<font color="#c040c0">\n</font> <font color="#c040c0">\n</font>&lt;/xsl:stylesheet&gt;<font color="#c040c0">\n</font>    '</td></tr></table>
+</body></html>
