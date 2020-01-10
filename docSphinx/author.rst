@@ -1,9 +1,9 @@
+
 ================
 About the author
 ================
 
-:Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
-:Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2020
+:Author: *Raymond BISDORFF*, Emeritus Professor of Computer Science and Applied Mathematics, University of Luxembourg [raymond.bisdorff@uni.lu]
 
 **Past Professional Functions**
 
@@ -11,10 +11,10 @@ About the author
 * Founding Dean of the UL *Faculty of Law, Economics and Finance* (FDEF) (2003 - 2004)
 * Founding Head of the *Applied Mathematics Research Unit*, FDEF, University of Luxembourg (2004 - 2007)
 * Active member of the *Interdisciplinary Laboratory for Intelligent and Adaptive Systems* (ILIAS), *Computer Science and Communications* Research Unit (CSC), *Faculty of Science, Technology and Communication* (FSTC) (2007-2017)
-* Elected representative of the academic staff in the *Governing Board* of the UL (2014 - 2017)
 * Elected FSTC's academic staff representative in the *University Council* -the Senate- of the UL (2011 - 2016)
 * Founding head of the UL *Doctoral School of Computer Science and Computer Engineering* (2011 - 2015)
 * Founding chair of the APUL - *The Association of Professors of the University of Luxembourg* (2011 - 2014)
+* Elected representative of the professors in the UL *Board of Gouvernance* (2014 - 2017)
 * President of the *Belgian Operational Research Society*, ORBEL a.k.a. Sogesci-B.V.W.B. (2008 - 2010)
 * Vice-president of the *Scientific Advisory Commission* of the UL (2005 - 2009)
 * Vice-president of the *International Federation of Operational Research Societies* (IFORS) representing EURO - the *Association of European Operational Research Societies* (2005 - 2007)
@@ -35,7 +35,7 @@ About the author
 * *Business Administration* (LBA), Université de Liège 1975
 * *Methods and Models of Scientific Management* (MScBA), Université Paris-Dauphine 1976
 * *Operations Research* (PhD, supervisor: *B. Roy*), Université Paris-Dauphine 1981
-* *Management Sciences* (PhD, promoters: *M. Roubens* and *Y. Crama*), Université de Liège April 2002
+* *Management Sciences* (PhD, promoters: *M. Roubens* and *Y. Crama*), Université de Liège 2002
 
 **Teaching**
 
