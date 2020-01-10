@@ -4251,7 +4251,7 @@ In an oriented graph context, the internal stability condition of the kernel con
      1. A **dominant** stability condition, where each non selected node is *dominated* by at least one member of the kernel;
      2. An **absorbant** stability condition, where each non selected node is *absorbed* by at least one member of the kernel.
 
-A both *internally* **and** *dominant*, resp. *absorbent stable* choice is called a *dominant* or **initial**, resp. an *absorbent* or **terminal** kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a *prefix* operand, and the terminal kernel is a *postfix* operand in the *Berge* kernel equation (see [BIS-2006a]_ )
+A both *internally* **and** *dominant*, resp. *absorbent stable* choice is called a *dominant* or **initial**, resp. an *absorbent* or **terminal** kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a *prefix* operand, and the terminal kernel is a *postfix* operand in the *Berge* kernel equation systems (see the tutorial on :ref:`Bipolar-Valued-Kernels-Tutorial-label`)
 
 Furthermore, as the kernel concept involves conjointly a **positive logical refutation** (the *internal stability*) and a **positive logical affirmation** (the *external stability*), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, modelling *negation* by change of numerical sign and including explicitely a third **median** logical value (0) expressing logical **indeterminateness** (neither positive, nor negative, see [BIS-2000]_ and [BIS-2004]_).
 
@@ -5925,11 +5925,15 @@ where for all *x* in *X*,
 
      :math:`(Y \circ R)(x) \; = \; \max_{y \in X, x \neq y} \big ( \min(Y(x), R(x,y))\big)\;.`
 
-then *Y* characterises an *initial kernel* ([BER-1958]_). Transposing the membership characteristic vector into a column vector :math:`Y^t`, makes *Berge*'s equation system similarly characterise a *terminal kernel*,
+then *Y* characterises an **initial** *kernel* ([BER-1958]_).
 
-     :math:`R \circ Y^t \; = \; -Y^t\;.`
+When transposing now the membership characteristic vector *Y* into a column vector :math:`Y^t`, the following equation system 
 
-Let us verify this result on a tiny example.
+     :math:`R \circ Y^t \; = \; -Y^t\;,`
+
+makes :math:`Y^t` similarly characterise a **terminal** *kernel*.
+
+Let us verify this result on a tiny random digraph.
 
 .. code-block:: pycon
    :linenos:
@@ -5958,7 +5962,7 @@ Let us verify this result on a tiny example.
        covered      :  1.000
     >>> 
 
-It is easy to verify that the characteristic vector [-1, -1, +1] satisfies the initial kernel equation system; *a3* gives an initial kernel. Similarly, the characteristic vector [-1, +1, -1] verifies indeed the terminal kernel equation system and hence *a2* gives a terminal kernel.
+It is easy to verify that the characteristic vector [-1, -1, +1] satisfies the initial kernel equation system; *a3* gives an *initial* kernel. Similarly, the characteristic vector [-1, +1, -1] verifies indeed the terminal kernel equation system and hence *a2* gives a *terminal* kernel.
 
 We succeeded now in generalizing *Berge*'s kernel equation systems to genuine bipolar-valued digraphs ([BIS-2006a]_). The constructive proof, found by M. Pirlot, is based on the following fixpoint equation that may be used for computing bipolar-valued kernel membership vectors,
 
