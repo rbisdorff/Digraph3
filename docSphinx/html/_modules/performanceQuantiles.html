@@ -53,9 +53,9 @@
 <span class="sd">    You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</span>
 
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
-<span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
-<span class="kn">from</span> <span class="nn">perfTabs</span> <span class="k">import</span> <span class="n">PerformanceTableau</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">PerformanceTableau</span>
 
 <div class="viewcode-block" id="PerformanceQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles">[docs]</a><span class="k">class</span> <span class="nc">PerformanceQuantiles</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -103,12 +103,12 @@
 <span class="sd">        :align: center</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default presentation method for PerformanceQuantiles instances</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">reprString</span> <span class="o">=</span> <span class="s1">&#39;*------- PerformanceQuantiles instance description ------*</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance class   : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance class   : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Seed             : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
@@ -123,19 +123,19 @@
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Quantiles      : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# History sizes  : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span>
    
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Attributes       : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>     
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Attributes       : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>     
         <span class="k">return</span> <span class="n">reprString</span>
 
     
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">perfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">defaultdict</span>
-        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">perfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span><span class="p">,</span> <span class="n">defaultdict</span>
+        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span>\
                                    <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">,</span>\
                                    <span class="n">RandomPerformanceTableau</span>
         
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">perfTab</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">str</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">valueDigits</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">valueDigits</span>
             <span class="k">except</span><span class="p">:</span>
@@ -267,7 +267,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the quantiles frequencies</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">floor</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
             <span class="n">n</span> <span class="o">=</span> <span class="n">x</span>
         <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;quartiles&#39;</span><span class="p">:</span>
@@ -304,8 +304,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the list of limiting quantiles *q(p)* on criteria *g* for *p* in *frequencies* </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">floor</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="n">critg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
         <span class="n">gValues</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
@@ -563,7 +563,7 @@
         <span class="c1">#Debug = True</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt;&#39;</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span><span class="n">newValues</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
         <span class="c1"># get present state of the quantiles</span>
         <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span>
         <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
@@ -699,8 +699,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the quantile *q(p)* on all the criteria.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         
         <span class="n">x</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">p</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">qFreq</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -1077,9 +1077,9 @@
 <span class="c1">#####################################################################</span>
 <span class="c1">#######################################################################</span>
 <span class="c1">#----------test classes and methods ----------------</span>
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
-    <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="kn">import</span> <span class="o">*</span>
     <span class="n">seed</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="n">nbrActions</span> <span class="o">=</span> <span class="mi">20</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
@@ -1095,8 +1095,8 @@
 <span class="c1">##    nbrCrit = nbrCrit</span>
 <span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,</span>
 <span class="c1">##                                    numberOfCriteria=nbrCrit,seed=seed)</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
     <span class="n">nbrActions</span><span class="o">=</span><span class="n">nbrActions</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="n">nbrCrit</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
@@ -1121,7 +1121,7 @@
     <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
     <span class="n">pq1</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
     <span class="n">rg</span> <span class="o">=</span> <span class="n">RandomPerformanceGenerator</span><span class="p">(</span><span class="n">pq1</span><span class="p">)</span>
     <span class="n">newTab</span> <span class="o">=</span> <span class="n">rg</span><span class="o">.</span><span class="n">randomPerformanceTableau</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="c1">##    from sortingDigraphs import NormedQuantilesRatingDigraph</span>

@@ -56,9 +56,9 @@
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;$Revision: 1.01 $&quot;</span>
 <span class="c1"># $Source: /home/cvsroot/Digraph/randomPerfTabs.py,v $</span>
 
-<span class="kn">from</span> <span class="nn">perfTabs</span> <span class="k">import</span> <span class="n">PerformanceTableau</span>
-<span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">PerformanceTableau</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 
 <span class="c1">#########################################</span>
 <span class="c1"># generators for random PerformanceTableaux</span>
@@ -113,7 +113,7 @@
 <span class="sd">            }</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>\
                  <span class="n">actionNamePrefix</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span>\
                  <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equisignificant&#39;</span><span class="p">,</span>\
@@ -129,13 +129,13 @@
                  <span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">time</span><span class="o">,</span><span class="nn">math</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
 
         <span class="c1"># fixing the seed (None by default)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNGTr</span>
+        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNGTr</span>
         
         <span class="c1"># seeting tableau name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomperftab&#39;</span>
@@ -405,41 +405,41 @@
 <span class="sd">       &#39;g7&#39;  |   1   |   57.31   41.66  </span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>\
                  <span class="n">instanceCounter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">_RandomStdPerformanceGenerator</span><span class="p">,</span>\
+        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">_RandomStdPerformanceGenerator</span><span class="p">,</span>\
                                   <span class="n">_RandomCBPerformanceGenerator</span><span class="p">,</span>\
                                   <span class="n">_Random3ObjectivesPerformanceGenerator</span>
-        <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="n">PerformanceQuantiles</span>
-        <span class="k">if</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">__class__</span> <span class="o">==</span> <span class="n">RandomPerformanceTableau</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="n">_RandomStdPerformanceGenerator</span>
-            <span class="k">return</span> <span class="n">_RandomStdPerformanceGenerator</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+        <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="kn">import</span> <span class="n">PerformanceQuantiles</span>
+        <span class="k">if</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">RandomPerformanceTableau</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">_RandomStdPerformanceGenerator</span>
+            <span class="k">return</span> <span class="n">_RandomStdPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                             <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
                             <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">__class__</span> <span class="o">==</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="n">_RandomCBPerformanceGenerator</span>
-            <span class="k">return</span> <span class="n">_RandomCBPerformanceGenerator</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+        <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">_RandomCBPerformanceGenerator</span>
+            <span class="k">return</span> <span class="n">_RandomCBPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                             <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
                             <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">__class__</span> <span class="o">==</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="n">_Random3ObjectivesPerformanceGenerator</span>
-            <span class="k">return</span> <span class="n">_Random3ObjectivesPerformanceGenerator</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+        <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">_Random3ObjectivesPerformanceGenerator</span>
+            <span class="k">return</span> <span class="n">_Random3ObjectivesPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                             <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
                             <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">__class__</span> <span class="o">==</span> <span class="n">PerformanceQuantiles</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">PerformanceQuantiles</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">==</span> <span class="s1">&#39;RandomPerformanceTableau&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="n">_RandomStdPerformanceGenerator</span>
-                <span class="k">return</span> <span class="n">_RandomStdPerformanceGenerator</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">_RandomStdPerformanceGenerator</span>
+                <span class="k">return</span> <span class="n">_RandomStdPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                             <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
                             <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">==</span> <span class="s1">&#39;RandomCBPerformanceTableau&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="n">_RandomCBPerformanceGenerator</span>
-                <span class="k">return</span> <span class="n">_RandomCBPerformanceGenerator</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">_RandomCBPerformanceGenerator</span>
+                <span class="k">return</span> <span class="n">_RandomCBPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                                 <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
                                 <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">==</span> <span class="s1">&#39;Random3ObjectivesPerformanceTableau&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="n">_Random3ObjectivesPerformanceGenerator</span>
-                <span class="k">return</span> <span class="n">_Random3ObjectivesPerformanceGenerator</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+                <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">_Random3ObjectivesPerformanceGenerator</span>
+                <span class="k">return</span> <span class="n">_Random3ObjectivesPerformanceGenerator</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                                 <span class="n">actionNamePrefix</span><span class="o">=</span><span class="n">actionNamePrefix</span><span class="p">,</span>\
                                 <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
             
@@ -448,7 +448,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates nbrOfRandomActions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+</span> <span class="n">nbrOfRandomActions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>  
@@ -468,25 +468,25 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates nbrOfRandomActions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="k">import</span> <span class="n">EmptyPerformanceTableau</span>
-        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span><span class="p">,</span>\
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">EmptyPerformanceTableau</span>
+        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span><span class="p">,</span>\
              <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span>\
              <span class="n">Random3ObjectivesPerformanceTableau</span>
         <span class="n">newPerfTab</span> <span class="o">=</span> <span class="n">EmptyPerformanceTableau</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">==</span> <span class="s1">&#39;PerformanceQuantiles&#39;</span><span class="p">:</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">!=</span> <span class="s1">&#39;RandomPerformanceTableau&#39;</span><span class="p">:</span>
-                    <span class="n">newPerfTab</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span>
+                    <span class="n">newPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span>
                 <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">!=</span> <span class="s1">&#39;RandomCBPerformanceTableau&#39;</span><span class="p">:</span>
-                    <span class="n">newPerfTab</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span>
+                    <span class="n">newPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span>
                 <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">perfTabType</span> <span class="o">!=</span> <span class="s1">&#39;Random3ObjectivesPerformanceTableau&#39;</span><span class="p">:</span>
-                    <span class="n">newPerfTab</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
+                    <span class="n">newPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">)</span>
                     <span class="k">return</span> <span class="kc">None</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="n">newPerfTab</span><span class="o">.</span><span class="n">__class__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">__class__</span>
+            <span class="n">newPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="vm">__class__</span>
         <span class="n">newPerfTab</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">name</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">newPerfTab</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">objectives</span>
@@ -516,7 +516,7 @@
 <span class="sd">    Generator for genrating new decision actions from a</span>
 <span class="sd">    given &lt;RandomPerformanceTableau&gt; model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
                  <span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the initial state of the random generator.</span>
@@ -535,7 +535,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">commonMode</span> <span class="o">=</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">commonMode</span>
         <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commonMode</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="s1">&#39;triangular&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNGTr</span>
+            <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNGTr</span>
             <span class="n">rdseed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rng</span> <span class="o">=</span> <span class="n">RNGTr</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="n">M</span><span class="p">,</span><span class="n">xm</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">rdseed</span><span class="p">)</span>
             
@@ -672,7 +672,7 @@
 <span class="sd">            | } (default)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfStudents</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">numberOfCourses</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfStudents</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">numberOfCourses</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="n">weightScale</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span>\
                  <span class="n">commonScale</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">),</span> <span class="n">ndigits</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>\
                  <span class="n">WithTypes</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>\
@@ -790,7 +790,7 @@
                     <span class="s1">&#39;excellent&#39;</span><span class="p">:(</span><span class="n">commonScale</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">commonScale</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mf">0.6</span><span class="p">,</span><span class="n">commonScale</span><span class="p">[</span><span class="mi">1</span><span class="p">])}</span>
         <span class="c1"># install the triangular RNG if necessary</span>
         <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">commonMode</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="s1">&#39;triangular&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNGTr</span>
+            <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNGTr</span>
         <span class="c1"># generate all individual random evaluations</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>       
@@ -1049,7 +1049,7 @@
 <span class="sd">       &#39;g2&#39;  |    -1   |   2    1    3  </span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equisignificant&#39;</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                  <span class="n">BigData</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
@@ -1164,7 +1164,7 @@
 <span class="sd">    Full automatic generation of random performance tableaux</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1176,7 +1176,7 @@
                  <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="c1"># import OrderedDict container</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
         <span class="c1"># set name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;fullrandomperftab&#39;</span>
 
@@ -1343,7 +1343,7 @@
                     <span class="n">randeval</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">commonScale</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">commonScale</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
                     <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">randeval</span><span class="p">,</span><span class="n">digits</span><span class="p">)))</span>
             <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="n">randomMode</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="s1">&#39;triangular&#39;</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNG</span>
+                <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNG</span>
                 <span class="n">m</span> <span class="o">=</span> <span class="n">commonScale</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">M</span> <span class="o">=</span> <span class="n">commonScale</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
                 <span class="k">try</span><span class="p">:</span>
@@ -1476,7 +1476,7 @@
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">IntegerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">commonScale</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonMode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
@@ -1496,8 +1496,8 @@
         <span class="k">if</span> <span class="n">RandomCoalitions</span><span class="p">:</span>
             <span class="n">Coalitions</span><span class="o">=</span><span class="kc">False</span>
 
-        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNGTr</span>            
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNGTr</span>            
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
             
         <span class="c1"># generate actions</span>
         <span class="k">if</span> <span class="n">numberOfActions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -1951,7 +1951,7 @@
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">IntegerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">OrdinalScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">NegativeWeights</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">negativeWeightProbability</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>\
@@ -1972,12 +1972,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">negativeWeightProbability</span> <span class="o">=</span> <span class="n">negativeWeightProbability</span>
         <span class="c1"># randomizer init</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span> <span class="o">=</span> <span class="n">seed</span>
-        <span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">Random</span>
+        <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">Random</span>
         <span class="n">_random</span> <span class="o">=</span> <span class="n">Random</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">_random1</span> <span class="o">=</span> <span class="n">Random</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">_random2</span> <span class="o">=</span> <span class="n">Random</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
 
-        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNGTr</span>            
+        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNGTr</span>            
 
             
         <span class="c1"># generate actions</span>
@@ -2390,7 +2390,7 @@
 <span class="sd">    Generator for new decision actions with random evaluation following a</span>
 <span class="sd">    given Random3ObjectivesPerformanceTableau model.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
                  <span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the initial state of the random generator.</span>
@@ -2398,7 +2398,7 @@
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">random</span> <span class="o">=</span> <span class="n">random</span>
-        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNGTr</span>
+        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">ExtendedTriangularRandomVariable</span> <span class="k">as</span> <span class="n">RNGTr</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">RNGTr</span> <span class="o">=</span> <span class="n">RNGTr</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span> <span class="o">=</span> <span class="n">argPerfTab</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actionNamePrefix</span> <span class="o">=</span> <span class="n">actionNamePrefix</span>
@@ -2648,7 +2648,7 @@
 <span class="sd">        are set at random for each coalition and action.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">IntegerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">commonScale</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">100.0</span><span class="p">),</span>\
                  <span class="n">commonThresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">60.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)],</span>\
@@ -2658,7 +2658,7 @@
                  <span class="n">BigData</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
                  <span class="n">seed</span><span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         
@@ -2684,7 +2684,7 @@
                                                <span class="n">BigData</span><span class="o">=</span><span class="n">BigData</span><span class="p">,</span>
                                                <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">__dict__</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="vm">__dict__</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;random criterion of coalition A&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random economic criterion&#39;</span>
@@ -2919,7 +2919,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>\
                  <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>\
                  <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomCBperftab&#39;</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>\
@@ -3321,7 +3321,7 @@
             <span class="n">nbuf</span> <span class="o">=</span> <span class="n">n</span>
         <span class="k">if</span> <span class="n">n2</span> <span class="o">&lt;</span> <span class="n">samplingSize</span><span class="p">:</span>
             <span class="n">samplingSize</span> <span class="o">=</span> <span class="n">n2</span>
-        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">IncrementalQuantilesEstimator</span>
+        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">IncrementalQuantilesEstimator</span>
         <span class="n">est</span> <span class="o">=</span> <span class="n">IncrementalQuantilesEstimator</span><span class="p">(</span><span class="n">nbuf</span><span class="o">=</span><span class="n">nbuf</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;commonPercentiles=&#39;</span><span class="p">,</span> <span class="n">commonPercentiles</span><span class="p">)</span>
@@ -3377,7 +3377,7 @@
         <span class="n">samplingSize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">samplingSize</span>
         <span class="k">if</span> <span class="n">n2</span> <span class="o">&lt;</span> <span class="n">samplingSize</span><span class="p">:</span>
             <span class="n">samplingSize</span> <span class="o">=</span> <span class="n">n2</span>
-        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">IncrementalQuantilesEstimator</span>
+        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">IncrementalQuantilesEstimator</span>
         <span class="n">est</span> <span class="o">=</span> <span class="n">IncrementalQuantilesEstimator</span><span class="p">(</span><span class="n">nbuf</span><span class="o">=</span><span class="n">nbuf</span><span class="p">)</span>
         <span class="n">commonPercentiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">commonPercentiles</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -3418,7 +3418,7 @@
 <span class="sd">    the model parameters provided by a given RandomCBPerformanceTableau instance.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
                  <span class="n">instanceCounter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the initial state of the random generator.</span>
@@ -3495,7 +3495,7 @@
                         <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="o">-</span><span class="nb">round</span><span class="p">(</span><span class="n">randeval</span><span class="p">,</span><span class="n">digits</span><span class="p">)))</span>
                     <span class="c1">#evaluation[g] = Decimal(str(-round(randeval,digits)))</span>
             <span class="k">elif</span> <span class="nb">str</span><span class="p">(</span><span class="n">randomMode</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="s1">&#39;triangular&#39;</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span>
+                <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
                 <span class="n">m</span> <span class="o">=</span> <span class="n">criterionScale</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">M</span> <span class="o">=</span> <span class="n">criterionScale</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
                 <span class="c1">#r  = randomMode[2]</span>
@@ -3630,13 +3630,13 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <span class="c1">#----------test Digraph class ----------------</span>
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing classes and methods -------&#39;</span><span class="p">)</span>
 
-    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="c1">##    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,</span>
 <span class="c1">##                                         commonMode=(&#39;uniform&#39;,None,None),</span>
 <span class="c1">##                                         missingDataProbability=0.01)</span>

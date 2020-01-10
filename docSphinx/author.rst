@@ -33,9 +33,9 @@ About the author
 **Education**
 
 * *Business Administration* (LBA), Université de Liège 1975
-* *Methods and Models of Scientific Management* (D.E.A./MScBA), Université Paris-Dauphine 1976
-* *Operations Research* (Ph.D. 3rd c., supervisor: *B. Roy*), Université Paris-Dauphine 1981
-* *Management Sciences* (Ph.D., promotors: *Y. Crama* and *M. Roubens*), Université de Liège April 2002 (PDF document 3.5Mb)
+* *Methods and Models of Scientific Management* (MScBA), Université Paris-Dauphine 1976
+* *Operations Research* (PhD, supervisor: *B. Roy*), Université Paris-Dauphine 1981
+* *Management Sciences* (PhD, promoters: *M. Roubens* and *Y. Crama*), Université de Liège April 2002
 
 **Teaching**
 
@@ -46,10 +46,10 @@ Master level:
 
 **Doctoral students (last)**
 
-* Alexandru-Liviu Olteanu, *On clustering in multiple criteria decision aid: Theory and applications* (2009 - 2013, in co-direction with Ass.-Prof Patrick Meyer, Telecom Bretagne, Brest, France).
-* Thomas Veneziano, *On the stability of outranking relations: Theoretical and practical aspects* (2008 - 2012, in co-direction with Ass.-Prof Patrick Meyer, Telecom Bretagne, Brest, France).
-* Claude Lamboray, *Prudent ranking rules: Theoretical contributions and applications* (2004-2007, co-directed with Prof Ph. Vincke, ULB)
-* Patrick Meyer, *Progressive methods in multiple criteria decision analysis* (2004-2007, co-directed with Prof M. Pirlot, FPMs).
+* Alexandru-Liviu Olteanu, *On clustering in multiple criteria decision aid: Theory and applications* (2009 - 2013, in co-direction with P. Meyer, IMTAtlantique).
+* Thomas Veneziano, *On the stability of outranking relations: Theoretical and practical aspects* (2008 - 2012, in co-direction with P. Meyer, IMTAtlantique).
+* Claude Lamboray, *Prudent ranking rules: Theoretical contributions and applications* (2004-2007, co-directed with Ph. Vincke, ULB)
+* Patrick Meyer, *Progressive methods in multiple criteria decision analysis* (2004-2007, co-directed with M. Pirlot, FPMs).
 
 **Expertise**
 

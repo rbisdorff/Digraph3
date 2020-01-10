@@ -138,8 +138,8 @@
 4
 5
 6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nv">$HOME</span>/.../Digraph3$ python3
-Python 3.6.7 <span class="o">(</span>default, Oct <span class="m">22</span> 2018, 11:32:17<span class="o">)</span>
-<span class="o">[</span>GCC 8.2.0<span class="o">]</span> on linux
+Python <span class="m">3</span>.6.7 <span class="o">(</span>default, Oct <span class="m">22</span> <span class="m">2018</span>, <span class="m">11</span>:32:17<span class="o">)</span>
+<span class="o">[</span>GCC <span class="m">8</span>.2.0<span class="o">]</span> on linux
 Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&quot;</span>, <span class="s2">&quot;credits&quot;</span> or
       <span class="s2">&quot;license&quot;</span> <span class="k">for</span> more information.
 &gt;&gt;&gt; ...
@@ -216,7 +216,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <span class="s1">&#39;a4&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span> <span class="s1">&#39;a4&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;random decision action&#39;</span><span class="p">},</span>
 <span class="s1">&#39;a5&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span> <span class="s1">&#39;a5&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;random decision action&#39;</span><span class="p">},</span>
 <span class="p">}</span>
-<span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+<span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                    <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;med&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">}</span>
 <span class="n">relation</span> <span class="o">=</span> <span class="p">{</span>
 <span class="s1">&#39;a1&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;a1&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;a2&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;a3&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;a4&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;a5&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,},</span>
@@ -2410,7 +2410,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Fitness of Copeland&#39;s ranking: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fitness of Copeland&#39;s ranking: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
 <span class="go">Fitness of Copeland&#39;s ranking: 0.906</span>
 </pre></div>
 </td></tr></table></div>
@@ -2632,7 +2632,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 21
 22
 23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">RankedPairsOrder</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rp</span> <span class="o">=</span> <span class="n">RankedPairsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rp</span> <span class="o">=</span> <span class="n">RankedPairsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">next pair:  (&#39;a3&#39;, &#39;a9&#39;) 1.00</span>
 <span class="go">added: (a3,a9) characteristic: 1.00 (1.0)</span>
 <span class="go">added: (a9,a3) characteristic: -1.00 (-1.0)</span>
@@ -2660,7 +2660,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">rp</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;Fitness of Tideman&#39;s ranking: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fitness of Tideman&#39;s ranking: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
 <span class="go">Fitness of Tideman&#39;s ranking: 0.918</span>
 </pre></div>
 </td></tr></table></div>
@@ -2693,9 +2693,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 21
 22
 23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">PreRankedOutrankingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">BigData</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">BigData</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
 <span class="go">*----- show short --------------*</span>
 <span class="go">Instance name     : randomCBperftab_mp</span>
 <span class="go"># Actions         : 100</span>
@@ -2792,7 +2792,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedOrder</span><span class="p">)</span>
 <span class="go">{&#39;correlation&#39;: 0.7485,</span>
 <span class="go"> &#39;determination&#39;: 0.4173}</span>
@@ -3020,8 +3020,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 18
 19
 20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span>
 <span class="go">  *------- Object instance description ------*</span>
 <span class="go">  Instance class   : BipolarOutrankingDigraph</span>
 <span class="go">  Instance name    : rel_std_cRandomperftab</span>
@@ -3461,8 +3461,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 3
 4
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">(</span>myPy365ICC<span class="o">)</span> <span class="o">[</span>rbisdorff@iris-126 Test<span class="o">]</span>$ python
-Python 3.6.5 <span class="o">(</span>default, May  <span class="m">9</span> 2018, 09:54:28<span class="o">)</span>
-<span class="o">[</span>GCC Intel<span class="o">(</span>R<span class="o">)</span> C++ gcc 6.3 mode<span class="o">]</span> on linux
+Python <span class="m">3</span>.6.5 <span class="o">(</span>default, May  <span class="m">9</span> <span class="m">2018</span>, <span class="m">09</span>:54:28<span class="o">)</span>
+<span class="o">[</span>GCC Intel<span class="o">(</span>R<span class="o">)</span> C++ gcc <span class="m">6</span>.3 mode<span class="o">]</span> on linux
 Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&quot;</span>, <span class="s2">&quot;credits&quot;</span> or <span class="s2">&quot;license&quot;</span> <span class="k">for</span> more information.
 &gt;&gt;&gt;
 </pre></div>
@@ -3512,16 +3512,16 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <span class="gp">... </span>         <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
 <span class="gp">... </span>         <span class="n">commonScale</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1000.0</span><span class="p">),</span>
 <span class="gp">... </span>         <span class="n">commonThresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">75.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)],</span>
-<span class="gp">... </span>         <span class="n">commonMode</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">,</span><span class="s1">&#39;variable&#39;</span><span class="p">,</span><span class="bp">None</span><span class="p">],</span>
+<span class="gp">... </span>         <span class="n">commonMode</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">,</span><span class="s1">&#39;variable&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span>
 <span class="gp">... </span>         <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
 <span class="gp">... </span>         <span class="n">seed</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cSparseIntegerOutrankingDigraphs</span> <span class="kn">as</span> <span class="nn">iBg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cSparseIntegerOutrankingDigraphs</span> <span class="k">as</span> <span class="nn">iBg</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span> <span class="o">=</span> <span class="n">iBg</span><span class="o">.</span><span class="n">cQuantilesRankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
 <span class="gp">... </span>           <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;optimal&#39;</span><span class="p">,</span>
 <span class="gp">... </span>           <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="gp">... </span>           <span class="n">componentRankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
-<span class="gp">... </span>           <span class="n">LowerClosed</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
-<span class="gp">... </span>           <span class="n">Threading</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span>           <span class="n">tempDir</span><span class="o">=</span><span class="s1">&#39;/tmp&#39;</span><span class="p">,</span>
 <span class="gp">... </span>           <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">28</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span>
@@ -4627,7 +4627,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <p>Parameter <em>historySize</em> (see Line 6) of the <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles" title="performanceQuantiles.PerformanceQuantiles.updateQuantiles"><code class="xref py py-meth docutils literal notranslate"><span class="pre">performanceQuantiles.PerformanceQuantiles.updateQuantiles()</span></code></a> method allows to <strong>balance</strong> the <strong>new</strong> evaluations against the <strong>historical</strong> ones. With <strong>historySize = None</strong> (the default setting), the balance in the example above is 900/1000 (90%, weight of historical data) against 100/1000 (10%, weight of the new incoming observations). Putting <strong>historySize = 0</strong>, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view (see <a class="reference internal" href="#exampleperfquantiles"><span class="std std-numref">Fig. 26</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># showing the updated quantile limits in a browser view</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="exampleperfquantiles">
@@ -4675,7 +4675,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="n">NormedQuantilesRatingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="n">rpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">nqr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">nqr</span><span class="p">)</span>
 <span class="go">*---- Object instance description</span>
 <span class="go">Instance class      : NormedQuantilesRatingDigraph</span>
 <span class="go">Instance name       : normedRatingDigraph</span>
@@ -4782,7 +4782,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Rating categories:&#39;</span><span class="p">,</span> <span class="n">nqr</span><span class="o">.</span><span class="n">ratingCategories</span><span class="p">)</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rating categories:&#39;</span><span class="p">,</span> <span class="n">nqr</span><span class="o">.</span><span class="n">ratingCategories</span><span class="p">)</span>
 <span class="go">Rating categories: OrderedDict([</span>
 <span class="go">(&#39;m2&#39;, [&#39;a1003&#39;, &#39;a1001&#39;, &#39;a1007&#39;, &#39;a1004&#39;, &#39;a1009&#39;]),</span>
 <span class="go">(&#39;m3&#39;, [&#39;a1005&#39;, &#39;a1010&#39;, &#39;a1008&#39;, &#39;a1002&#39;, &#39;a1006&#39;])])</span>
@@ -4801,7 +4801,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <p>The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see <code class="xref py py-meth docutils literal notranslate"><span class="pre">perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()</span></code> method (see <a class="reference internal" href="#heatmap1"><span class="std std-numref">Fig. 27</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quartiles Rating&#39;</span><span class="p">,</span>
-<span class="gp">... </span>              <span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">... </span>              <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="heatmap1">
@@ -4908,7 +4908,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <p>A browser view may again more conveniently illustrate this preciser <em>deciles</em> rating result (see <a class="reference internal" href="#heatmap2"><span class="std std-numref">Fig. 29</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of the deciles rating&#39;</span><span class="p">,</span>\
-<span class="gp">... </span>                           <span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">... </span>                           <span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="heatmap2">
@@ -5337,7 +5337,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 34
 35
 36</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">CycleGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">*------- Graph instance description ------*</span>
 <span class="go">Instance class   : CycleGraph</span>
 <span class="go">Instance name    : cycleGraph</span>
@@ -5347,7 +5347,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">Attributes       : [&#39;name&#39;, &#39;order&#39;, &#39;vertices&#39;, &#39;valuationDomain&#39;,</span>
 <span class="go">                    &#39;edges&#39;, &#39;size&#39;, &#39;gamma&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lg</span> <span class="o">=</span> <span class="n">LineGraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">lg</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">lg</span><span class="p">)</span>
 <span class="go">*------- Graph instance description ------*</span>
 <span class="go">Instance class   : LineGraph</span>
 <span class="go">Instance name    : line-cycleGraph</span>
@@ -5466,7 +5466,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go">n             :  6</span>
 <span class="go">m             :  6</span>
 <span class="go">order         :  36</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">IsingModel</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span><span class="n">nSim</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">im</span> <span class="o">=</span> <span class="n">IsingModel</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span><span class="n">nSim</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">Running a Gibbs Sampler for 100000 step !</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">im</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span><span class="s1">&#39;lightcoral&#39;</span><span class="p">])</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
@@ -5633,7 +5633,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 4
 5
 6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c12</span><span class="o">.</span><span class="n">showMIS</span><span class="p">(</span><span class="n">withListing</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c12</span><span class="o">.</span><span class="n">showMIS</span><span class="p">(</span><span class="n">withListing</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">  *---  Maximal independent choices ---*</span>
 <span class="go">  number of solutions:  29</span>
 <span class="go">  cardinality distribution</span>
@@ -5686,31 +5686,31 @@ play much a role, it would be perhaps better to decide to move to the most advan
      <span class="c1"># RB December 2006                       #</span>
      <span class="c1"># Current revision Dec 2018              #</span>
      <span class="c1"># -------------------------------------- #</span>
-     Input cycle order ? &lt;-- 12
-     mis <span class="m">1</span> : 100100100100
-     mis <span class="m">2</span> : 010010010010
-     mis <span class="m">3</span> : 001001001001
+     Input cycle order ? &lt;-- <span class="m">12</span>
+     mis <span class="m">1</span> : <span class="m">100100100100</span>
+     mis <span class="m">2</span> : <span class="m">010010010010</span>
+     mis <span class="m">3</span> : <span class="m">001001001001</span>
      ...
      ...
      ...
-     mis <span class="m">27</span> : 001001010101
-     mis <span class="m">28</span> : 101010101010
-     mis <span class="m">29</span> : 010101010101
+     mis <span class="m">27</span> : <span class="m">001001010101</span>
+     mis <span class="m">28</span> : <span class="m">101010101010</span>
+     mis <span class="m">29</span> : <span class="m">010101010101</span>
      Cardinalities:
-     <span class="m">0</span> : 0
-     <span class="m">1</span> : 0
-     <span class="m">2</span> : 0
-     <span class="m">3</span> : 0
-     <span class="m">4</span> : 3
-     <span class="m">5</span> : 24
-     <span class="m">6</span> : 2
-     <span class="m">7</span> : 0
-     <span class="m">8</span> : 0
-     <span class="m">9</span> : 0
-     <span class="m">10</span> : 0
-     <span class="m">11</span> : 0
-     <span class="m">12</span> : 0
-     Total: 29
+     <span class="m">0</span> : <span class="m">0</span>
+     <span class="m">1</span> : <span class="m">0</span>
+     <span class="m">2</span> : <span class="m">0</span>
+     <span class="m">3</span> : <span class="m">0</span>
+     <span class="m">4</span> : <span class="m">3</span>
+     <span class="m">5</span> : <span class="m">24</span>
+     <span class="m">6</span> : <span class="m">2</span>
+     <span class="m">7</span> : <span class="m">0</span>
+     <span class="m">8</span> : <span class="m">0</span>
+     <span class="m">9</span> : <span class="m">0</span>
+     <span class="m">10</span> : <span class="m">0</span>
+     <span class="m">11</span> : <span class="m">0</span>
+     <span class="m">12</span> : <span class="m">0</span>
+     Total: <span class="m">29</span>
      execution time: <span class="m">0</span> sec. and <span class="m">2</span> millisec.
 </pre></div>
 </td></tr></table></div>
@@ -6128,7 +6128,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 34
 35</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">CompleteDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">CompleteDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 <span class="go">*------- Digraph instance description ------*</span>
 <span class="go">Instance class   : CompleteDigraph</span>
 <span class="go">Instance name    : complete</span>
@@ -6401,7 +6401,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <span class="go"> ...</span>
 </pre></div>
 </td></tr></table></div>
-<p>Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showPreKernels" title="digraphs.Digraph.showPreKernels"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.showPreKernels()</span></code></a> method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph’s <em>laterality</em>. We may hence redraw the same digraph in <a class="reference internal" href="#orientedlaterality"><span class="std std-numref">Fig. 43</span></a> by looking into its interior via the <em>best covering</em> initial kernel candidate: the dominant choice {‘3’,‘4’} (coloured in yellow), and looking out of it via the <em>best covered</em> terminal kernel candidate: the absorbent choice {‘1’,‘6’} (coloured in blue).</p>
+<p>Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showPreKernels" title="digraphs.Digraph.showPreKernels"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.showPreKernels()</span></code></a> method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph’s <em>laterality</em>. We may hence redraw the same digraph in <a class="reference internal" href="#orientedlaterality"><span class="std std-numref">Fig. 43</span></a> by looking into its interior via the <em>best covering</em> initial kernel candidate: the dominant choice {‘3’,’4’} (coloured in yellow), and looking out of it via the <em>best covered</em> terminal kernel candidate: the absorbent choice {‘1’,’6’} (coloured in blue).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6568,7 +6568,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>The grey arrows in <a class="reference internal" href="#bestworstorientation"><span class="std std-numref">Fig. 46</span></a>, like the one between actions ‘a4’ and ‘a1’, represent indeterminate preferential situations. Action ‘a1’ appears hence to be rather incomparable to all the other, except action ‘a7’. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="gp">... </span>         <span class="n">Correlations</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">)</span>
+<span class="gp">... </span>         <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="outrankingresult">
@@ -6755,7 +6755,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 14
 15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">RandomIntervalIntersectionsGraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomIntervalIntersectionsGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">*------- Graph instance description ------*</span>
 <span class="go">Instance class   : RandomIntervalIntersectionsGraph</span>
 <span class="go">Instance name    : randIntervalIntersections</span>
@@ -6766,7 +6766,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="go">Attributes       : [&#39;seed&#39;, &#39;name&#39;, &#39;order&#39;, &#39;intervals&#39;,</span>
 <span class="go">                    &#39;vertices&#39;, &#39;valuationDomain&#39;,</span>
 <span class="go">                    &#39;edges&#39;, &#39;size&#39;, &#39;gamma&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">intervals</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">intervals</span><span class="p">)</span>
 <span class="go">[(2, 7), (2, 7), (5, 6), (6, 8), (1, 8), (1, 1), (4, 7), (0, 10)]</span>
 </pre></div>
 </td></tr></table></div>
@@ -7017,7 +7017,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 15
 16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">PermutationGraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">(</span><span class="n">permutation</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">*------- Graph instance description ------*</span>
 <span class="go">Instance class   : PermutationGraph</span>
 <span class="go">Instance name    : permutationGraph</span>
@@ -7071,7 +7071,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportPermutationGraphViz</span><span class="p">(</span><span class="n">WithEdgeColoring</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportPermutationGraphViz</span><span class="p">(</span><span class="n">WithEdgeColoring</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to perm_permutationGraph.dot</span>
 <span class="go">neato -n -Tpng perm_permutationGraph.dot -o perm_permutationGraph.png</span>
@@ -7102,7 +7102,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 18
 19
 20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">transitiveOrientation</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
 <span class="go">*------- Digraph instance description ------*</span>
 <span class="go">Instance class   : TransitiveDigraph</span>
 <span class="go">Instance name    : oriented_permutationGraph</span>
@@ -7112,7 +7112,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="go">Determinateness  : 100.000</span>
 <span class="go">Attributes       : [&#39;name&#39;, &#39;order&#39;, &#39;actions&#39;, &#39;valuationdomain&#39;,</span>
 <span class="go">                    &#39;relation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;, &#39;size&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">dg</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">dg</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span> <span class="p">)</span>
 <span class="go">Transitivity degree: 1.000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
@@ -7132,7 +7132,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dgd</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">transitiveOrientation</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Dual transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span>\
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dual transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span>\
 <span class="gp">... </span>            <span class="n">dgd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span> <span class="p">)</span>
 <span class="go">Dual transitivity degree: 1.000</span>
 </pre></div>
@@ -7157,7 +7157,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 13
 14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">4335</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">*------- Graph instance description ------*</span>
 <span class="go">Instance class   : RandomGraph</span>
 <span class="go">Instance name    : randomGraph</span>
@@ -7268,11 +7268,11 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 3
 4
 5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">og</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivelyOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">og</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">))</span>
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">og</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivelyOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">og</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">))</span>
 <span class="go">Transitivity degree: 1.000</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ogd</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">computeTransitivelyOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ogd</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ogd</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">computeTransitivelyOrientedDigraph</span><span class="p">(</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ogd</span><span class="o">.</span><span class="n">transitivityDegree</span><span class="p">))</span>
 <span class="go">Transitivity degree: 1.000</span>
 </pre></div>
 </td></tr></table></div>
@@ -7286,7 +7286,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">FusionDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f1</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">(</span><span class="n">og</span><span class="p">,</span><span class="n">ogd</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s1</span> <span class="o">=</span> <span class="n">f1</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
 <span class="go">[&#39;v5&#39;, &#39;v7&#39;, &#39;v1&#39;, &#39;v6&#39;, &#39;v8&#39;, &#39;v4&#39;, &#39;v3&#39;, &#39;v2&#39;]</span>
 </pre></div>
 </td></tr></table></div>
@@ -7297,7 +7297,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f2</span> <span class="o">=</span> <span class="n">FusionDigraph</span><span class="p">((</span><span class="o">-</span><span class="n">og</span><span class="p">),</span><span class="n">ogd</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s2</span> <span class="o">=</span> <span class="n">f2</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
 <span class="go">[&#39;v8&#39;, &#39;v7&#39;, &#39;v6&#39;, &#39;v5&#39;, &#39;v4&#39;, &#39;v3&#39;, &#39;v2&#39;, &#39;v1&#39;]</span>
 </pre></div>
 </td></tr></table></div>
@@ -7309,7 +7309,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">permutation</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">order</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">order</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">permutation</span><span class="p">[</span><span class="n">s2</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="n">j</span><span class="p">])]</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">permutation</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">permutation</span><span class="p">)</span>
 <span class="go">[5, 2, 4, 1, 6, 7, 8, 3]</span>
 </pre></div>
 </td></tr></table></div>
@@ -7337,7 +7337,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computePermutation</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computePermutation</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">[&#39;v1&#39;, &#39;v2&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v5&#39;, &#39;v6&#39;, &#39;v7&#39;, &#39;v8&#39;]</span>
 <span class="go">[&#39;v2&#39;, &#39;v3&#39;, &#39;v4&#39;, &#39;v8&#39;, &#39;v6&#39;, &#39;v1&#39;, &#39;v7&#39;, &#39;v5&#39;]</span>
 <span class="go">[2, 3, 4, 8, 6, 1, 7, 5]</span>
@@ -7390,7 +7390,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 14
 15
 16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomTree</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="go">*------- Graph instance description ------*</span>
 <span class="go">Instance class   : RandomTree</span>
 <span class="go">Instance name    : randomTree</span>
@@ -7446,7 +7446,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="gp">&gt;&gt;&gt; </span><span class="n">code</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span>
 <span class="gp">... </span>    <span class="n">code</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">choice</span><span class="p">(</span><span class="n">verticesList</span><span class="p">)</span> <span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
 <span class="go">[&#39;v5&#39;, &#39;v7&#39;, &#39;v2&#39;, &#39;v5&#39;, &#39;v3&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomTree</span><span class="p">(</span><span class="n">prueferCode</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;v5&#39;</span><span class="p">,</span> <span class="s1">&#39;v7&#39;</span><span class="p">,</span> <span class="s1">&#39;v2&#39;</span><span class="p">,</span> <span class="s1">&#39;v5&#39;</span><span class="p">,</span> <span class="s1">&#39;v3&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
@@ -7495,9 +7495,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">RandomGraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">62</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">order</span> <span class="o">==</span> <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">g</span><span class="o">.</span><span class="n">isConnected</span><span class="p">():</span>
-<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;The graph is a tree ?&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph is a tree ?&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 <span class="gp">... </span><span class="k">else</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;The graph is a tree ?&#39;</span><span class="p">,</span><span class="bp">False</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph is a tree ?&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
 <span class="go">The graph is a tree ? True</span>
 </pre></div>
 </td></tr></table></div>
@@ -7513,7 +7513,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p class="caption"><span class="caption-number">Fig. 61 </span><span class="caption-text">Recognizing a tree instance</span><a class="headerlink" href="#test62tree" title="Permalink to this image">¶</a></p>
 </div>
 <p>Yet, we still have to recover its corresponding <em>Prüfer</em> code. Therefore, we may use the <a class="reference internal" href="techDoc.html#graphs.RandomTree.tree2Pruefer" title="graphs.RandomTree.tree2Pruefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">graphs.RandomTree.tree2Pruefer()</span></code></a> method.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">RandomTree</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">RandomTree</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">RandomTree</span><span class="o">.</span><span class="n">tree2Pruefer</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">[&#39;v6&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v5&#39;]</span>
 </pre></div>
@@ -7550,7 +7550,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">spt</span> <span class="o">=</span> <span class="n">RandomSpanningTree</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">spt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">spt</span><span class="p">)</span>
 <span class="go">*------- Graph instance description ------*</span>
 <span class="go">Instance class   : RandomSpanningTree</span>
 <span class="go">Instance name    : randomGraph_randomSpanningTree</span>
@@ -7562,7 +7562,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="go">*---- RandomTree specific data ----*</span>
 <span class="go">Prüfer code  : [&#39;v7&#39;, &#39;v9&#39;, &#39;v5&#39;, &#39;v1&#39;, &#39;v8&#39;, &#39;v4&#39;, &#39;v9&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">spt</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;randomSpanningTree&#39;</span><span class="p">,</span>\
-<span class="gp">... </span>                   <span class="n">WithSpanningTree</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">... </span>                   <span class="n">WithSpanningTree</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to randomSpanningTree.dot</span>
 <span class="go">[[&#39;v1&#39;, &#39;v5&#39;, &#39;v6&#39;, &#39;v5&#39;, &#39;v1&#39;, &#39;v8&#39;, &#39;v9&#39;, &#39;v3&#39;, &#39;v9&#39;, &#39;v4&#39;,</span>
@@ -7627,7 +7627,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 10
 11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomValuationGraph</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">*------- Graph instance description ------*</span>
 <span class="go">Instance class   : RandomValuationGraph</span>
 <span class="go">Instance name    : randomGraph</span>
@@ -7677,7 +7677,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 12
 13
 14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">BestDeterminedSpanningForest</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">mt</span><span class="p">)</span>
 <span class="go">*------- Graph instance description ------*</span>
 <span class="go">Instance class   : BestDeterminedSpanningForest</span>
 <span class="go">Instance name    : randomGraph_randomSpanningForest</span>
@@ -8000,7 +8000,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 10
 11
 12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">*------- Object instance description ------*</span>
 <span class="go">Instance class   : BipolarOutrankingDigraph</span>
 <span class="go">Instance name    : rel_grafittiPerfTab.xml</span>
@@ -8262,8 +8262,8 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 12
 13
 14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">*------- Object instance description ------*</span>
 <span class="go">Instance class      : RandomBipolarOutrankingDigraph</span>
 <span class="go">Instance name       : rel_randomperftab</span>
@@ -8474,7 +8474,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 10
 11
 12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">circulants</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go">*------- Digraph instance description ------*</span>
 <span class="go">Instance class      : CirculantDigraph</span>
 <span class="go">Instance name       : c7</span>
@@ -8487,7 +8487,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="go">                       &#39;gamma&#39;, &#39;notGamma&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Digraph <em>c7</em> is a symmetric crisp digraph showing, among others, the maximal independent set {‘2’,‘5’,‘7’}, i.e. an initial as well as terminal kernel. We may  compute the corresponding initial kernel characteristic vector.</p>
+<p>Digraph <em>c7</em> is a symmetric crisp digraph showing, among others, the maximal independent set {‘2’,’5’,’7’}, i.e. an initial as well as terminal kernel. We may  compute the corresponding initial kernel characteristic vector.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8667,7 +8667,7 @@ confidence level <em>alpha</em> %, if</p>
 16
 17
 18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g90</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">confidence</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g90</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g90</span><span class="p">)</span>
 <span class="go">*------- Object instance description ------*</span>
 <span class="go">Instance class      : ConfidentBipolarOutrankingDigraph</span>
 <span class="go">Instance name       : rel_randomperftab_CLT</span>
