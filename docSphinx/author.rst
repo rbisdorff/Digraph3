@@ -34,8 +34,8 @@ About the author
 
 * *Business Administration* (LBA), Université de Liège 1975
 * *Methods and Models of Scientific Management* (D.E.A./MScBA), Université Paris-Dauphine 1976
-* *Operations Research* (Ph.D. 3rd c.), Université Paris-Dauphine 1981
-* *Management Sciences* (Ph.D.), Université de Liège April 2002 (PDF document 3.5Mb)
+* *Operations Research* (Ph.D. 3rd c., supervisor: *B. Roy*), Université Paris-Dauphine 1981
+* *Management Sciences* (Ph.D., promotors: *Y. Crama* and *M. Roubens*), Université de Liège April 2002 (PDF document 3.5Mb)
 
 **Teaching**
 
