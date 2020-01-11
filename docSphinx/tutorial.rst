@@ -2626,7 +2626,7 @@ We consider now a partial performance tableau *best10*, consisting only, for ins
     >>> best10 = cPartialPerformanceTableau(pt,qr.boostedRanking[:10])
     >>> from cIntegerOutrankingDigraphs import *   
     >>> g = IntegerBipolarOutrankingDigraph(best10)
-    >>> >>> g.valuationdomain
+    >>> g.valuationdomain
     {'min': -1008, 'med': 0, 'max': 1008, 'hasIntegerValuation': True}
     >>> g.showRelationTable(ReflexiveTerms=False)
     * ---- Relation Table -----
@@ -4767,8 +4767,8 @@ With seed = 100, we obtain here an *interval* graph, in fact a **perfect graph**
 .. code-block:: pycon
    :linenos:
       
-    >>> print('Is a perfect graph ?', g.isPerfectGraph())
-    Is a perfect graph ? True
+    >>> g.isPerfectGraph(Comments=True)
+    Graph randIntervalIntersections is perfect !
     >>> g.isIntervalGraph(Comments=True)
     Graph 'randIntervalIntersections' is triangulated.
     Graph 'dual_randIntervalIntersections' is transitively orientable.
@@ -4925,13 +4925,13 @@ And it is *D* ; if we put to doubt his testimony that he saw *A* (see Line 1 bel
 Generating permutation graphs
 -----------------------------
 
-A graph is called a **permutation** or *inversion* graph if there exists a permutation of its list of vertices such that the graph is isomorphic to the inversions operated by the permutation in this list (see [GOL-2004]_ Chapter 7, pp 157-170).
+A graph is called a **permutation** or *inversion* graph if there exists a permutation of its list of vertices such that the graph is isomorphic to the inversions operated by the permutation in this list (see [GOL-2004]_ Chapter 7, pp 157-170). This kind is also part of the class of perfect graphs.
 
 .. code-block:: pycon
 
     >>> from graphs import PermutationGraph
     >>> g = PermutationGraph(permutation = [4, 3, 6, 1, 5, 2])
-    >>> print(g)
+    >>> g
     *------- Graph instance description ------*
     Instance class   : PermutationGraph
     Instance name    : permutationGraph
@@ -4941,6 +4941,8 @@ A graph is called a **permutation** or *inversion* graph if there exists a permu
     Valuation domain : [-1.00; 1.00]
     Attributes       : ['name', 'vertices', 'order', 'permutation',
 			'valuationDomain', 'edges', 'size', 'gamma']
+    >>> g.isPerfectGraph()
+    True
     >>> g.exportGraphViz()
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to permutationGraph.dot
@@ -5047,7 +5049,7 @@ Let us consider, for instance, the following random graph of *order* 8 generated
 
     >>> from graphs import *
     >>> g = RandomGraph(order=8,edgeProbability=0.4,seed=4335)
-    >>> print(g)
+    >>> g
     *------- Graph instance description ------*
     Instance class   : RandomGraph
     Instance name    : randomGraph
@@ -5058,6 +5060,8 @@ Let us consider, for instance, the following random graph of *order* 8 generated
     Valuation domain : [-1.00; 1.00]
     Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
 			'edges', 'size', 'gamma', 'edgeProbability']
+    >>> g.isPerfectGraph()
+    True
     >>> g.exportGraphViz()
 		    
 .. Figure:: randomGraph4335.png
@@ -5068,7 +5072,7 @@ Let us consider, for instance, the following random graph of *order* 8 generated
 
     Random graph of order 8 generated with edge probability 0.4
 
-If the random graph instance *g* (see :numref:`randomGraph4335`) is a permutation graph, *g* and its dual *-g* must be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a transitive neighbourhood decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
+If the random perfect graph instance *g* (see :numref:`randomGraph4335`) is indeed a permutation graph, *g* and its dual *-g* should be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a transitive neighbourhood decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
 
 .. code-block:: pycon
    :linenos:
