@@ -4748,7 +4748,7 @@ To illustrate these *perfect* graph classes, we will generate from 8 intervals, 
 
     >>> from graphs import RandomIntervalIntersectionsGraph
     >>> g = RandomIntervalIntersectionsGraph(order=8,seed=100)
-    >>> print(g)
+    >>> g
     *------- Graph instance description ------*
     Instance class   : RandomIntervalIntersectionsGraph
     Instance name    : randIntervalIntersections
