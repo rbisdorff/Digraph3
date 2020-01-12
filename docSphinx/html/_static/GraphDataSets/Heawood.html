@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Digraph3 Data set</title>
+</head>
+<body>
+<h1>Digraph3 Data set</h1>
+<h2>Title</h2>
+<p>The Heawood graph</p>
+<h2>Data type</h2>
+<p>Symmetric cubic cage graph</p>
+<h2>Problematics</h2>
+<p>Kernel equation system solution space symmetries, conjecture on kernel numbers, clustering</p>
+<h2>Description</h2>
+
+<p>The Heawood graph is a famous cubic graph of order 14, size 42 (fill rate 23%) with girth 6. It is constructed on 14 nodes with alternating circulants {-1,1,5} and {-5, -1,1} .</p>
+<img src="heawood.png">
+
+<p>The Heawood graph supports 37 different labelled kernels, among them obviously the two maximal sets of either odd or even numbered nodes of cardinality 7. Indeed the chords in the 14 nodes cycle are all connecting an even node to an odd node.</p> 
+
+<p>Following the conjecture on the unlabelled kernel number of a symmetric (arc-transitive) graph, we should however find anough symmetry in the Heawood graph such that the symmetry congruence classes induced on the kernel equation system solution space is less or equal 14, i.e. the order of the graph.</p>
+
+<p>Indeed, the kernel number of the Heawood graph is <b>3.</b></p>
+<h3>Proof</h3>
+<p>The <a href="http://cs.anu.edu.au/~bdm/nauty/">nauty</a> program, a software package for computing the automorhism group of a graph, reveals us that the Heawood graph supports four automorphic actions (the nodes are enumerated from 0 to 13):
+<ol>
+<li>a lateral folding: (4, 8),(5, 7),(9, 1),(10, 12),
+<li>a lateral folding: (3, 11),(4, 10),(8, 12),(9, 13),
+<li>a lateral folding: (1, 13),(2, 4),(5, 11),(6, 12).
+<li>a rotational permutation: (0, 1, 2, 3, 4, 5, 10, 9),(6, 11, 8, 13),(7, 12).
+</ol>
+<p>The four generators of the Heawood automorphism group map on the kernel equation system solution space 3 disjoint orbits with the following representatively labelled choices:
+<table>
+<tr><th>#<th>Labelled choice<th>Choice cardinality<th>Orbit cardinality
+<tr><td>1<td>[0, 3, 6, 11]               <td>4  <td>21
+<tr><td>2<td>[1, 3, 7, 10, 13]           <td>5  <td>14
+<tr><td>3<td>[0, 2, 4, 6, 8, 10, 12]     <td>7  <td>2
+</table>
+</p>
+<img src="heawoodkernels.png">
+
+<H2>Files</H2>
+<ul>
+<li><a href="heawood.py">The Heawood graph (Python file format)</a>
+<li><a href="heawood.txt">All 37 kernel solutions of the Heawood graph (Text file format)</a>
+</ul>
+
+<h2>References</h2>
+<ul>
+<li>Weisstein, E. W., <em>From MathWorld--A Wolfram Web Resource</em>. <a href="http://mathworld.wolfram.com/HeawoodGraph.html">http://mathworld.wolfram.com/HeawoodGraph.html</a>
+<li>Godsil, Chr. and Royle, G., <em>Algebraic Graph Theory</em>. Springer-Verlag, 2001 [ISBN 0-387-95241-1] (p. 97). 
+</ul>
+
+<h2>Digraph3 Data Sets</h2>
+<p><a href="index.html">All Digraph3 data sets.</a>
+
+</body>

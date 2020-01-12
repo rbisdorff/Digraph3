@@ -1,0 +1,276 @@
+<html>
+<head>
+<meta name="description" content="Entry level to the RuBy decision support methodology pages">
+<meta name="author" content="Raymond Bisdorff">
+<meta name="keywords" content="University, Decision-Aid, RuBy decision support methodology, Operational Research, Graph Theory, Random Graphs, Graph Automorphism, Kernels, Bipolar Valued Logic">
+<title>Digraph3 Data set: Perny's car selection problem</title>
+<style type="text/css">
+<!--
+  BODY       { font-family:Verdana }
+  H1         { font-size:16pt; color:#339966 }
+  H2         { font-size:14pt; color:#AD2B2E }
+  P          { font-size:10pt }
+  P.tty { font-family:courier }
+  B.tty { font-family:courier }
+  B.sc  { font-variant:small-caps }
+  TD    { text-align:center }
+-->
+</style>
+</head>
+<body>
+<h1><b class="sc">Digraph3</b> Data set</h1>
+<h2>Perny's car selection problem</h2>
+<h3>Data type</h3>
+<p>[0-100]-valued outranking graph</p>
+<h3>Problematics</h3>
+<p>Best unique choice problematics</p>
+<h3>Description</h3>
+<p>The problem concerns the construction of a unique best choice recommendation on the bais of the following pairwise outranking index (in %) delivered on eight decision alternatives concerning popular cars.</p>
+<table border="1">
+<thead><tr>
+<th>S
+<th>a-vwgc
+<th>b-r9gt
+<th>c-gsax
+<th>d-p305 
+<th>e-tahg
+<th>f-audi
+<th>g-r18g
+<th>h-alfa 
+<tbody>
+<tr>
+<th>a-vwgc 
+<td>- 
+<td>  75 
+<td>  70
+<td>  62
+<td>  0
+<td>  0
+<td>  0
+<td>  0
+<tr>
+<th>b-r9gt
+<th>76
+<td>  -
+<th>  90
+<th>  100
+<th>  82
+<th>  82
+<th>  82
+<th>  80
+<tr>
+<th>c-gsax
+<td>70
+<td>  86
+<td>  -
+<td>  100
+<td>  100
+<td>  46
+<td>  80
+<td>  91
+<tr>
+<th>d-p305
+<td>64
+<td>  65
+<td>  94
+<td>  -
+<td>  88
+<td>  22
+<td>  94
+<td>  74
+<tr>
+<th>e-tahg
+<td>33
+<td>  57
+<td>  93
+<td>  100
+<td>  -
+<td>  0
+<td>  80
+<td>  86
+<tr>
+<th>f-audi
+<td>0
+<td>  73
+<td>  64
+<td>  92
+<td>  76
+<td>  -
+<td>  96
+<td>  80
+<tr>
+<th>g-r18g
+<td>0
+<td>  63
+<td>  73
+<td>  85
+<td>  82
+<td>  70
+<td>  -
+<td>  81
+<tr>
+<th>h-alfa
+<td>0
+<td>  60
+<td>  64
+<td>  60
+<td>  77
+<td>  0
+<td>  0
+<td>  -
+</tbody>
+</table>
+<p>The non trivial best choice decision problem is a classic example recurrently used for presenting the Electre decision aid methods.</p>
+
+<h3>The <b class="sc">RuBy</b> best choice recommendation</h3>
+
+<p>The valued outranking graph admits three outranking kernels: {b-r9gt}, {a-vwgc, f-audi} and {a-vwgc, g-r18g}, and five outranked kernels: {a-vwgc, h-alfa}, {a-vwgc, e-tahg}, {c-gsax}, {d-p305} and {b-r9gt}.</p>
+
+<p><img src="Perny.jpg"></p>
+
+<p>To make a <b class="sc">RuBy</b> recommendation, we must have a look at the <i>L</i>-qualifications of the outranking kernels.</p>
+
+<table border=1>
+<thead><tr>
+<th>Choice
+<th>a-vwgc
+<th>b-r9gt
+<th>c-gsax
+<th>d-p305
+<th>e-tahg
+<th>f-audi
+<th>g-r18g
+<th>h-alfa
+<th>Irred.
+<th>Ind.
+<th>Dom.
+<th>Abs.
+<tbody>
+<tr><th><font color="red">{b-r9gt}<br><b class="sc">RuBy</b> choice</font>
+<td>24
+<th>76
+<td>24
+<td>24
+<td>24
+<td>24
+<td>24
+<td>24
+<td>100
+<td>100
+<th><font color="red">76</font>
+<td>57
+<tr><th>{a-vwgc, f-audi}
+<th>70
+<td>30
+<td>30
+<td>30
+<td>30
+<th>70
+<td>30
+<td>30
+<td>100
+<td>100
+<th>70
+<td>0
+<tr><th>{a-vwgc, g-r18g}
+<th>70
+<td>30
+<td>30
+<td>30
+<td>30
+<td>30
+<th>70
+<td>30
+<td>100
+<td>100
+<th>70
+<td>0
+<tr><th>{a-vwgc, h-alfa}
+<th>74
+<td>26
+<td>26
+<td>26
+<td>26
+<td>26
+<td>26
+<th>74
+<td>100
+<td>100
+<td>0
+<th>74
+<tr><th>{a-vwgc, e-tahg}
+<th>67
+<td>33
+<td>33
+<td>33
+<th>67
+<td>33
+<td>33
+<td>33
+<td>82
+<th>67
+<td>0
+<th>76
+<tr><th>{c-gsax}
+<td>36
+<td>36
+<th>64
+<td>36
+<td>36
+<td>36
+<td>36
+<td>36
+<td>100
+<td>100
+<td>46
+<th>64
+<tr><th>{d-p305}
+<td>40
+<td>40
+<td>40
+<th>60
+<td>40
+<td>40
+<td>40
+<td>40
+<td>100
+<td>100
+<td>22
+<th>60
+<tr><th>{b-r9gt}
+<td>43
+<th>57
+<td>43
+<td>43
+<td>43
+<td>43
+<td>43
+<td>43
+<td>100
+<td>100
+<th>76
+<th>57
+</tbody>
+</table>
+
+<p>Despite the fact of being conjointly an outranking (76% credibility) and an outranked choice (57% credibility), decision action <b>b-r9gt</b> represents the most credible effective best choice. Indeed, it is the most robust recommandation in the sense that it is the only effective outranking choice with a concordance majority of more than 75%.</p> In case the decision maker would accept as satisfactory a global concordance of 70% and more, the <b class="sc">RuBy</b> best choice recommendation would become the quartet {<b>a-vwgc</b>, <b>b-r9gt</b>, <b>f-audi</b>, <b>g-r18g</b>}.
+
+<p> A thorough presentation and discussion of this example is given in Fodor & Roubens (1994). </p>
+
+<h3>Files</h3>
+<ul>
+<li><a href="fodorroubens215data.py">Performance tableau, Python data file</a>
+<li><a href="fodorroubens215.py">Outranking graph, Python data file</a>
+<li><a href="fodorroubens215.pl">Outranking grpah, Gnu-Prolog data file</a>
+</ul>
+<h3>References</h3>
+<ul>
+<li>Perny, P. <em>Mod&eacute;lisation, agr&eacute;gation et exploitation des pr&eacute;f&eacute;rences floues dans une probl&eacute;matique de rangement</em>. Ph.D. Thesis,  Paris-Dauphine University.
+<li>Skalka, J.M., Bouyssou, D. & Vall&eacute;e, D. Electre III et IV: Aspects m&eacute;thodologiques et guide d'utilisation. <em>Documents du LAMSADE</em>, Paris-Dauphine University, 25.
+<li>Fodor, J. and Roubens, M., <em>Fuzzy preference modelling and multicriteria decision support</em>. Kluwer Academic Publishers, 1994 p. 215.
+</ul>
+
+<hr>
+<p><a href="index.html">Return to main <b class="sc">Digraph3</b> Data Sets</a></p>
+</body>
+</html>

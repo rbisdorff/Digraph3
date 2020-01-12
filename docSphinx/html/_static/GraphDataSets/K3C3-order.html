@@ -1,0 +1,43 @@
+<html>
+<head>
+<meta name="description" content="Entry level to the RuBy decision support methodology pages">
+<meta name="author" content="Raymond Bisdorff">
+<meta name="keywords" content="University, Decision-Aid, RuBy decision support methodology, Operational Research, Graph Theory, Random Graphs, Graph Automorphism, Kernels, Bipolar Valued Logic">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<STYLE type="text/css">
+  BODY       { font-family:Verdana }
+  H1         { font-size:16pt; color:#339966 }
+  H2         { font-size:14pt; color:#AD2B2E }
+  P          { font-size:10pt }
+  P.tty { font-family:courier }
+  B.tty { font-family:courier }
+</STYLE>
+<title>Digraph3 Data set: Disqualifying the outranking kernel concept as best choice recommendation</title>
+</head>
+<body>
+<h1>Digraph3 Data set</h1>
+<h2>Title</h2>
+<p>K3-C3 headed ordering disqualifying the outranking kernel concept as best choice recommendation</p>
+<h2>Data type</h2>
+<p>{0,1}-valued digraph</p>
+<h2>Problematics</h2>
+<p>Hyperkernel approach motivation</p>
+<h2>Description</h2>
+<p><i>A</i> = {1,2,3,4,5,6,7,8,9,10}, <i>L</i> = {0,1}</p>
+<p><img src="k3c3-order.png"></p>
+<p>If the tricycle {4,5,6} is transitively closed , we are in the presence of a preorder with two initial equivalences classe: {1,2,3} aand {4,5,6}, which represent the evident and unique possible best choice recommendation.</p>
+<p>Due to the presence of the intransitive tricycle {4,5,6} at the beginning of the preorder, the given digraph does not accept any dominant kernel. This fact definitely eliminates the dominant kernel concept as a direct candidate for the best choice recommendation.</p>
+<p>To overcome this drawback, it is possible to enlarge the digraph with all possible minimal odd circuits. Here we may add the C3:'_4_5_6' to the set of minimal '<em>single</em>' choices. We thus obtain three equivalent dominant hyperkernels: {1,_4_5_6_}, {2,_4_5_6_}, and  {3,_4_5_6_}.</p>
+
+<H2>Files</H2>
+<ul>
+<li><a href="k3c3-order.py">Python data file</a>
+<li><a href="k3c3-orderh1.py">Hypergraph Python data file</a>
+</ul>
+<h2>References</h2>
+<ul>
+<li>Bisdorff, R., Meyer P. and Roubens, M., <em><b>Ruby</b>: a new best choice methodology</em>. SMA Working paper, University of Luxembourg, 2005.
+</ul>
+
+</body>

@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>Ruby Data set: Random digraphs</title>
+<STYLE type="text/css">
+  BODY       { font-family:Verdana }
+  H1         { font-size:16pt; color:#339966 }
+  H2         { font-size:14pt; color:#AD2B2E }
+  P          { font-size:10pt }
+  P.tty { font-family:courier }
+  B.tty { font-family:courier }
+</STYLE>
+</head>
+<body>
+<h1>Ruby Data Sets</h1>
+<h2>Random digraphs</h2>
+<p>Python tools for generating random graphs</p>
+<h2>Data type</h2>
+<p>Random digraphs</p>
+<h2>Problematics</h2>
+<p>Maximum independent sets computation, number of kernels</p>
+<h2>Description</h2>
+<p>The python implementation of digraphs is the following:</p>
+<p class="tty">
+###################################<br>
+# python digraph implementation&nbsp;&nbsp;&nbsp;#<br>
+# RB december 2005&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#<br>
+###################################<br>
+# list of nodes (decision actions) of the digraph<br>
+<b>actionset</b> = [<br>
+'1',<br>
+'2',<br>
+'3',<br>
+]<br>
+# logical bipolar characterisation domain of the underlying relation<br>
+<b>valuationdomain</b> = {'min':0.0, 'med':1.0, 'max':2.0}<br>
+# Characterisation of the digraph relation as a dictionnary matrix<br>
+# for all <i>x</i>,<i>y</i> in actionset, relation[<i>x</i>][<i>y</i>] renders <i>v</i> with<br>
+# <i>v</i> < <i>med</i> = 1.0 signifying the absence of the arc (<i>x</i>,<i>y</i>), and<br>
+# <i>v</i> > <i>med</i> = 1.0 signifying the presence of the arc (<i>x</i>,<i>y</i>).<br>
+<b>relation</b> = {<br>
+'1': {<br>
+'1':0.0,<br>
+'2':0.0,<br>
+'3':2.0,<br>
+},<br>
+'2': {<br>
+'1':0.0,<br>
+'2':0.0,<br>
+'3':2.0,<br>
+},<br>
+'3': {<br>
+'1':2.0,<br>
+'2':0.0,<br>
+'3':0.0,<br>
+},<br>
+}</p>
+
+</ul>
+<H2>Files</H2>
+<p>Python tools for computing maximum independent sets from random <i>G</i>( <i>n</i>, <i>P</i>(arc)) digraphs and from random <i>G</i>( <i>n</i>, <i>k</i>-reg) digraphs.</p>
+<ul>
+<li><a href="generateRandomGraphs.py"><i>G</i>(<i>n</i>,<i>P</i>(arc)) instance generator</a>, usage: <b class="tty">python generateRandomGraphs.py &lsaquo;order&rsaquo; &lsaquo;arc-probability(in %)&rsaquo;</b></li>
+<li><a href="genRandRegGraph.py"><i>G</i>(<i>n</i>,<i>r</i>-reg) instance generator</a>, usage: <b class="tty">python genRandRegGraph.py &lsaquo;order&rsaquo; &lsaquo;degree&rsaquo;</b></li>
+<li><a href="genRandDegreeSequenceGraph.py"><i>G</i>(<i>n</i>, degree sequence) instance generator</a>, usage: <b class="tty">python genRandDegreeSequenceGraph.py &lsaquo;order&rsaquo; [&lsaquo;degree-sequence&rsaquo;]</b></li>
+<li><a href="dimacs2py.py">Dimacs to Python converter</a>, usage: <b class="tty">python dimacs2py.py &lsaquo;File&rsaquo;</b> (in Dimacs graph format)</li>
+<li><a href="biggraphstatistics.py">Graph statistics</a>, usage: <b class="tty">python biggraphstatistics.py &lsaquo;File&rsaquo;</b> (without <b class="tty">.py</b> extension)</li>
+<li><a href="allkernelsnewgenerator.py">Kernel extraction</a>, usage: <b class="tty">python allkernelsnewgenerator.py &lsaquo;File&rsaquo;</b> (without <b class="tty">.py</b> extension)</li>
+<li><a href="randreg17-4.py">Random quartic graph of order 17</a>
+<li><a href="rand100-50.py"><i>G</i>(100,0.5)</a>
+</ul>
+<h2>References</h2>
+<ul>
+<li>B&eacute;la Bollob&aacute;s, <em>Random Graphs</em> (2nd Ed.), Cambridge University Press 2001. 
+</ul>
+
+</body>

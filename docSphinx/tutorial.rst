@@ -23,7 +23,7 @@ Finally, we provide an insight in computational enhancements one may get when wo
    
 :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
 :Version: Revision: Python 3.7
-:Copyright: `R. Bisdorff <https://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2019
+:Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2020
 
 .. _Tutorial-label:
 

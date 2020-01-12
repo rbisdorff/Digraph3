@@ -12,6 +12,7 @@ Contents
 * `Introduction <index.html>`_
 * `Tutorials <tutorial.html>`_
 * `Reference manual <techDoc.html>`_
+* `Graphs Data Archives <digraph3Archives.html>`_
 * `About the author <author.html>`_
 * :ref:`genindex`
 * :ref:`modindex`
@@ -53,7 +54,12 @@ The second part concerns the reference manual of the collection of provided Pyth
 .. toctree:: techDoc
    :maxdepth: 2
 
-The third and last part concerns the author of the Digraph3 ressources.
+The third part concerns case studies and examples concerning the active development of the Digraph3 collection of python3 modules for implementing tools and methods of the RuBis decision aiding approach. 
+
+.. toctree:: digraph3Archives
+   :maxdepth: 1
+	      
+The last part is about the author of the Digraph3 ressources.
 
 .. toctree:: author
    :maxdepth: 1

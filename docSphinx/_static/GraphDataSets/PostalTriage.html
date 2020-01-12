@@ -1,0 +1,228 @@
+<html>
+<head>
+<meta name="description" content="Entry level to the RuBy decision support methodology pages">
+<meta name="author" content="Raymond Bisdorff">
+<meta name="keywords" content="University, Decision-Aid, RuBy decision support methodology, Operational Research, Graph Theory, Random Graphs, Graph Automorphism, Kernels, Bipolar Valued Logic">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Digraph3 Data set: Postal parcels triage machine selection</title>
+<STYLE type="text/css">
+  BODY       { font-family:Verdana }
+  H1         { font-size:16pt; color:#339966 }
+  H2         { font-size:14pt; color:#AD2B2E }
+  P          { font-size:10pt }
+  P.tty { font-family:courier }
+  B.tty { font-family:courier }
+  B.sc  { font-variant:small-caps }
+</STYLE>
+</head>
+<body>
+<h1>Digraph3 Data set</h1>
+<h2>Postal parcels triage machine selection</h2>
+<h3>Data type</h3>
+<p>[0-1]-valued robustness index</p>
+<h3>Problematics</h3>
+<p>Best unique choice problematics</p>
+<h3>Description</h3>
+<p>The example concerns a triage machine selection problem for a postal parcels sorting center in Paris, thoroughly discussed in Roy and Bouyssou (1993).</p>
+<p><i>A</i> = {1,2,3,4,5,6,7,8,9}, <i>L</i> = [0,1] (rational 0-1 interval)
+<table border="1">
+<thead><tr>
+<th>S
+<th>1
+<th>2
+<th>3
+<th>4 
+<th>5
+<th>6
+<th>7
+<th>8
+<th>9
+<tbody>
+<tr>
+<th>1 
+<td>-
+<td>0.72
+<td>0.67
+<td>0.79
+<td><b>0.92</b>
+<td>0.74
+<td>0.69
+<td>0.25
+<td>0.05
+<tr>
+<th>2
+<td>0.69
+<td>-
+<td>0.97
+<td>0.72
+<td><b>0.92</b>
+<td>0.64
+<td>0.00
+<td>0.27
+<td>0.67
+<tr>
+<th>3
+<td><b>0.62</b>
+<td><b>0.92</b>
+<td>-
+<td><b>0.85</b>
+<td><b>0.92</b>
+<td><b>0.77</b>
+<td>0.21
+<td><b>0.79</b>
+<td><b>0.59</b>
+<tr>
+<th>4
+<td>0.69
+<td>0.85
+<td>0.79
+<td>-
+<td><b>1.00</b>
+<td>0.72
+<td>0.24
+<td>0.08
+<td>0.04
+<tr>
+<th>5
+<td>0.00
+<td>0.00
+<td>0.00
+<td>0.00
+<td>-
+<td>0.00
+<td>0.00
+<td>0.00
+<td>0.00
+<tr>
+<th>6
+<td>0.00
+<td>0.00
+<td>0.00
+<td>0.00
+<td><b>0.95</b>
+<td>-
+<td>0.42
+<td>0.00
+<td>0.00
+<tr>
+<th>7
+<td><b>0.77</b>
+<td><b>0.57</b>
+<td>0.30
+<td><b>0.59</b>
+<td><b>0.87</b>
+<td><b>0.92</b>
+<td>-
+<td><b>0.79</b>
+<td>0.09
+<tr>
+<th>8
+<td>0.45
+<td>0.21
+<td>0.16
+<td>0.21
+<td><b>0.67</b>
+<td>0.27
+<td>0.27
+<td>-
+<td>0.64
+<tr>
+<th>9
+<td>0.12
+<td>0.18
+<td>0.06
+<td>0.17
+<td><b>0.74</b>
+<td>0.00
+<td>0.00
+<td>0.48
+<td>-
+</tbody>
+</table>
+<small>Source: Roy & Bouyssou (1993) p. 383</small>
+
+<h3>The <b class="sc">RuBy</b> best choice recommendation</h3>
+
+<p>The valued outranking graph admits two dominant kernels: {3, 7} and {1, 8} and one absorbent kernel: {5}.</p>
+<p><img src="roybouy383.png"</p>
+
+<p>Both dominant kernels are super strict and we may have a look at their <i>L</i>-qualifications in order to select one of them.</p>
+<table border=1>
+<thead><tr>
+<th>Choice
+<th>1
+<th>2
+<th>3
+<th>4 
+<th>5
+<th>6
+<th>7
+<th>8
+<th>9
+<th>Irred.
+<th>Ind.
+<th>Dom.
+<th>Abs.
+<tbody>
+<tr><th>{3, 7}
+<td>0.24
+<td>0.30
+<th>0.70
+<td>0.30
+<td>0.24
+<td>0.24
+<th>0.76
+<td>0.24
+<td>0.41
+<td>0.70
+<th>0.70
+<th>0.59
+<td>0.00
+<tr><th>{1, 8}
+<th>0.55
+<td>0.45
+<td>0.45
+<td>0.45
+<td>0.45
+<td>0.45
+<td>0.45
+<th>0.55
+<td>0.45
+<td>0.75
+<th>0.55
+<th>0.64
+<td>0.00
+<tr><th>{5}
+<td>0.08
+<td>0.08
+<td>0.08
+<td>0.00
+<th>1.00
+<td>0.05
+<td>0.13
+<td>0.33
+<td>0.26
+<td>1.00
+<th>1.00
+<td>0.00
+<th>0.67
+</tbody>
+</table>
+
+<p>When compard with {1,8}, the first choice {3, 7} easily appears as unique most credible best choice recommendation. Whereas {5} definitely appears to be a credible worst choice.</p>
+
+<H3>Files</H3>
+<ul>
+<li><a href="roybouy383.py">Python data file</a></p>
+<li><a href="roybouy383.pl">Gnu-Prolog data file</a></p>
+</ul>
+<h3>References</h3>
+<ul>
+<li>Roy, B & Bouyssou, D., <em>Aide Multicrit&egrave;re à la D&eacute;cision: M&eacute;thodes et Cas</em>. Economica, Paris, 1993, p. 336
+<li>Bisdorff, R. et Roubens, M., Le temps de noyaux. Dans <em>Regards crois&eacute;ses sur les m&eacute;thodes quantitatives de gestion</em>. J. Bair et V. Henry (ed.), Les Editions de l'Universit&eacute; de Li&egrave;ge, 2004, 41-54.
+</ul>
+<hr>
+<p><a href="index.html">Return to main <b class="sc">RuBy</b> Data Sets page</a></p>
+</body>
+</html>
