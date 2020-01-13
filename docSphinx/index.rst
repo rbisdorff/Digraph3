@@ -12,7 +12,7 @@ Contents
 * `Introduction <index.html>`_
 * `Tutorials <tutorial.html>`_
 * `Reference manual <techDoc.html>`_
-* `Graphs Data Archives <digraph3Archives.html>`_
+* `Digraph3 Archives <digraph3Archives.html>`_
 * `About the author <author.html>`_
 * :ref:`genindex`
 * :ref:`modindex`
