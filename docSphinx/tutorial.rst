@@ -5,11 +5,11 @@
 
 **Preface**
 
-The tutorials in this document describe the practical usage of our Digraph3 Python3 software resources in the field of *Algorithmic Decision Theory* (https://leopold-loewenheim.uni.lu/bisdorff/research.html) and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a |location_link4| at the University of Luxembourg.
+The tutorials in this document describe the practical usage of our Digraph3 Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg.
 
 .. |location_link4| raw:: html
 
-   <a href="http://hdl.handle.net/10993/37933" target="_blank">Master Course on Algorithmic Decision Theory</a>
+   <a href="http://hdl.handle.net/10993/37933" target="_blank">on Algorithmic Decision Theory</a>
 
 The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like digraphs, outranking digraphs, performance tableaux and voting profiles.
 
@@ -81,13 +81,7 @@ Several download options (easiest under Linux or Mac OS-X) are given.
 
     ...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3 
 
-3. or a subversion client
-
-.. code-block:: bash
-
-    ...$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3 
-
-4. Or, with a browser access, download and extract the latest distribution zip archive either, from the `github link above <https://github.com/rbisdorff/Digraph3>`_  or, from the `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
+3. Or, with a browser access, download and extract the latest distribution zip archive either, from the `github link above <https://github.com/rbisdorff/Digraph3>`_  or, from the `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
 
 
 Starting a Python3 session
@@ -6517,19 +6511,19 @@ Bibliography
 
 .. [CPSTAT-L5] Bisdorff R. (2017) *Simulating from abitrary empirical random distributions*. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winter Semester 2017 (`PDF 2x2 reduced presentation slides 211kB downloadable here <_static/quantileEstimation-2x2.pdf>`_).
 
-.. [BIS-2016] Bisdorff R. (2016). *On linear ranking from trillions of pairwise outranking situations*. Research Note 16-1, FSTC/ILIAS Decision Systems Group, University of Luxembourg pp. 1-6 (dowloadable  `PDF file 625.3 kB <https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RB.pdf>`_).
-
-.. [BIS-2015] Bisdorff R. (2015). *The EURO 2004 Best Poster Award: Choosing the Best Poster in a Scientific Conference.* Chapter 5 in R. Bisdorff, L. Dias, P. Meyer, V. Mousseau, and M. Pirlot (Eds.), *Evaluation and Decision Models with Multiple Criteria: Case Studies.* Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, DOI 10.1007/978-3-662-46816-6_1, pp. 117-166 (downloadable `PDF file 754.7 kB <https://charles-sanders-peirce.uni.lu/bisdorff/documents/HandbookChapterRBisdorff.pdf>`_).
+.. [BIS-2016] R. Bisdorff (2016). *Computing linear rankings from trillions of pairwise outranking situations*. In Proceedings of DA2PL'2016 *From Multiple Criteria Decision Aid to Preference Learning*, R. Busa-Fekete, E. Hüllermeier, V. Mousseau and K. Pfannschmidt (Eds.), University of Paderborn (Germany), Nov. 7-8 2016: 1-6 (downloadable `PDF file 451.4 kB <_static/DAP2PL-RB-2016.pdf>`_)
+	      
+.. [BIS-2015] Bisdorff R. (2015). *The EURO 2004 Best Poster Award: Choosing the Best Poster in a Scientific Conference.* Chapter 5 in R. Bisdorff, L. Dias, P. Meyer, V. Mousseau, and M. Pirlot (Eds.), *Evaluation and Decision Models with Multiple Criteria: Case Studies.* Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, DOI 10.1007/978-3-662-46816-6_1, pp. 117-166 (downloadable `PDF file 754.7 kB <_static/HandbookChapterRBisdorff.pdf>`_).
 	      
 .. [ADT-L2] Bisdorff R. (2014)  *Who wins the election*? MICS Algorithmic Decision Theory course, Lecture 2. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 ( `PDF 2x2 reduced presentation slides 195 kB downloadable here <_static/adtVoting-2x2.pdf>`_).
 
-.. [ADT-L7] Bisdorff R.(2014)  *Best multiple criteria choice: the Rubis outranking method*. MICS Algorithmic Decision Theory course, Lecture 7. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 (`PDF 2x2 reduced slides 310kB downloadable here <_static/adtOutranking-2x2.pdf>`_).
+.. [ADT-L7] Bisdorff R.(2014)  *Best multiple criteria choice: the Rubis outranking method*. MICS Algorithmic Decision Theory course, Lecture 7. FSTC/ILIAS University of Luxembourg, Summer Semester 2014 (see http://hdl.handle.net/10993/37933).
 
-.. [BIS-2013] Bisdorff R. (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (downloadable preprint `PDF file 403.5 Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDA-10-0059-PrePeerReview.pdf>`_).
+.. [BIS-2013] Bisdorff R. (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (downloadable preprint `PDF file 403.5 Kb <_static/MCDA-10-0059-PrePeerReview.pdf>`_).
 
-.. [BIS-2012] Bisdorff R. (2012). "On measuring and testing the ordinal correlation between bipolar outranking relations". In Proceedings of DA2PL’2012 *From Multiple Criteria Decision Aid to Preference Learning*, University of Mons 91-100. (downloadable preliminary version `PDF file 408.5 kB <https://leopold-loewenheim.uni.lu/bisdorff/documents/DA2PL-RBisdorffMons.pdf>`_ ).
+.. [BIS-2012] Bisdorff R. (2012). "On measuring and testing the ordinal correlation between bipolar outranking relations". In Proceedings of DA2PL’2012 *From Multiple Criteria Decision Aid to Preference Learning*, University of Mons 91-100. (downloadable preliminary version `PDF file 408.5 kB <_static/DA2PL-RBisdorffMons.pdf>`_ ).
 
-.. [BIS-2008] Bisdorff R., Meyer P. and Roubens M.(2008) "RUBIS: a bipolar-valued outranking method for the choice problem". 4OR, *A Quarterly Journal of Operations Research* Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version `PDF file 271.5Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/HyperKernels.pdf>`_).
+.. [BIS-2008] Bisdorff R., Meyer P. and Roubens M.(2008) "RUBIS: a bipolar-valued outranking method for the choice problem". 4OR, *A Quarterly Journal of Operations Research* Springer-Verlag, Volume 6,  Number 2 pp. 143-165. (Online) Electronic version: DOI: 10.1007/s10288-007-0045-5 (downloadable preliminary version `PDF file 271.5Kb <_static/HyperKernels.pdf>`_).
 
 .. [ISOMIS-08] Bisdorff R. and Marichal J.-L. (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. *Journal of Integer Sequences*, Vol. 11 Article 08.5.7 (`openly accessible here <https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html>`_).
 
@@ -6537,9 +6531,9 @@ Bibliography
 
 .. [CHAM-2006] Chambers J.M., James D.A., Lambert D. and Vander Wiel S. (2006) "Monitoring Networked Applications with Incremental Quantile Estimation". *Statistical Science*, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.
 
-.. [BIS-2006a] Bisdorff R., Pirlot M. and Roubens M. (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <https://sma.uni.lu/bisdorff/documents/BisdorffPirlotRoubens05.pdf>`_).
+.. [BIS-2006a] Bisdorff R., Pirlot M. and Roubens M. (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <_static/BisdorffPirlotRoubens05.pdf>`_).
 
-.. [BIS-2006b] Bisdorff R. (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/EnumKernels.pdf>`_).
+.. [BIS-2006b] Bisdorff R. (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <_static/EnumKernels.pdf>`_).
 
 .. [BIS-2004] Bisdorff R. (2004) "On a natural fuzzification of Boolean logic". In Erich Peter Klement and Endre Pap (editors), Proceedings of the 25th Linz Seminar on *Fuzzy Set Theory, Mathematics of Fuzzy Systems*. Bildungszentrum St. Magdalena, Linz (Austria), February 2004. pp. 20-26 (PDF file (133.4 Kb) for `downloading <_static/Linz2004.pdf>`_)
 
@@ -6547,7 +6541,7 @@ Bibliography
 
 .. [FMCAA] Häggström O. (2002) *Finite Markov Chains and Algorithmic Applications*. Cambridge University Press.
 
-.. [BIS-2000] Bisdorff R. (2000), Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods, *Computers and Operations Research*, 27:673-687 (downloadable version `PDF file 159.1Kb <https://leopold-loewenheim.uni.lu/bisdorff/documents/foundationElectre.pdf>`_).
+.. [BIS-2000] Bisdorff R. (2000), Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods, *Computers and Operations Research*, 27:673-687 (downloadable version `PDF file 159.1Kb <_static/foundationElectre.pdf>`_).
 
 .. [WIL-1996] Wilson D.B. (1996), *Generating random spanning trees more quickly than the cover time*, Proceedings of the Twenty-eighth Annual ACM *Symposium on the Theory of Computing* (Philadelphia, PA, 1996), 296-303, ACM, New York, 1996.
 

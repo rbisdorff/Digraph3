@@ -1,13 +1,13 @@
  **************************************************************
  *    CALMAT interprète de calculs matriciels ver. 5.0 Linux  
  *          Université du Luxembourg                          
- *      (c) R. Bisdorff  2008 $Revision: 1.7 $               
+ *      (c) R. Bisdorff  2020 $Revision: 1.7 $               
  **************************************************************
 
-*Downloading and installing*:
+*Installing*:
 
-..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Calmat
-..$ cd Calmat
+
+..Digraph3$ cd calmat
 ..$ make   # needs a gcc running, otherwise edit the makefile
 ..$ sudo make install  # installs under /usr/local/bin, adapt the makefile for user installation 
 

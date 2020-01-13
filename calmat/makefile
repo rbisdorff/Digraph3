@@ -46,3 +46,4 @@ install :
 		sudo cp calmat /usr/local/bin
 		sudo cp defdist.sh /usr/local/bin
 		sudo cp defdista.sh /usr/local/bin
+

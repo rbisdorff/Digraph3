@@ -2,7 +2,7 @@ Documentation of the Digraph3 resources
 =======================================
 :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
 :Version: Revision: Python 3.7
-:Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2020
+:Copyright: R. Bisdorff Copyright 2013-2020
 
 .. _Documents:
 
@@ -23,7 +23,7 @@ Contents
 Introduction
 ------------
 
-This documentation, also available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a *bipolar-valued outranking* approach ([1]_, [2]_). These computing resources are useful in the field of `Algorithmic Decision Theory <https://www.lamsade.dauphine.fr/~projet_cost/ALGORITHMIC_DECISION_THEORY/ALGORITHMIC_DECISION_THEORY.html>`_ and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They provide the practical tools for a |location_link4| at the University of Luxembourg.
+This documentation, also available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a *bipolar-valued outranking* approach ([1]_, [2]_). These computing resources are useful in the field of `Algorithmic Decision Theory <https://www.lamsade.dauphine.fr/~projet_cost/ALGORITHMIC_DECISION_THEORY/ALGORITHMIC_DECISION_THEORY.html>`_ and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They provide the practical tools for a Master Course |location_link4| at the University of Luxembourg.
 
 .. image:: introDoc2.png
     :width: 500pt
@@ -68,7 +68,7 @@ The last part is about the author of the Digraph3 ressources.
 References
 ..........
 
-.. [1] R. Bisdorff, L.C. Dias, P. Meyer, V. Mousseau and M. Pirlot (Eds.) (2015). *Evaluation and decision models with multiple criteria: Case studies*. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, `ISBN 978-3-662-46815-9 <https://link.springer.com/book/10.1007/978-3-662-46816-6>`_, 643 pages (downloadable content extract `PDF file 401.4 kB <https://leopold-loewenheim.uni.lu/bisdorff/documents/MCDAApplicationsContent.pdf>`_).
+.. [1] R. Bisdorff, L.C. Dias, P. Meyer, V. Mousseau and M. Pirlot (Eds.) (2015). *Evaluation and decision models with multiple criteria: Case studies*. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, `ISBN 978-3-662-46815-9 <https://link.springer.com/book/10.1007/978-3-662-46816-6>`_, 643 pages (see http://hdl.handle.net/10993/23698).
 
 .. [2] R. Bisdorff (2000). "Logical foundation of fuzzy preferential systems with application to the electre decision aid methods", *Computers and Operations Research*, 27: 673-687 (downloadable `PDF file 159.1kB <http://hdl.handle.net/10993/23724>`_)
 
@@ -81,17 +81,13 @@ References
 
    <a href="https://digraph3.readthedocs.io/en/latest/" target="_blank">https://digraph3.readthedocs.io/en/latest/</a>
 
-.. |location_link2| raw:: html
-
-   <a href="https://83.217.129.148/bisdorff/publications.html" target="_blank">https://leopold-loewenheim.uni.lu/bisdorff/publications.html</a>
-
 .. |location_link3| raw:: html
 
    <a href="_static/digraph3_copyright.html" target="_blank">Copyright</a>
 
 .. |location_link4| raw:: html
 
-   <a href="http://hdl.handle.net/10993/37933" target="_blank">Master Course on Algorithmic Decision Theory</a>
+   <a href="http://hdl.handle.net/10993/37933" target="_blank">on Algorithmic Decision Theory</a>
 
 
 
