@@ -2,7 +2,7 @@ Documentation of the Digraph3 resources
 =======================================
 :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
 :Version: Revision: Python 3.7
-:Copyright: `R. Bisdorff <https://leopold-loewenheim.uni.lu/bisdorff/>`_ 2013-2020
+:Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2020
 
 .. _Documents:
 
@@ -23,7 +23,7 @@ Contents
 Introduction
 ------------
 
-This documentation, also available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a bipolarly-valued outranking approach ([1]_, [2]_). These computing resources are useful in the field of *Algorithmic Decision Theory* (https://leopold-loewenheim.uni.lu/bisdorff/research.html) and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They provide the practical tools for a |location_link4| at the University of Luxembourg.
+This documentation, also available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a *bipolar-valued outranking* approach ([1]_, [2]_). These computing resources are useful in the field of `Algorithmic Decision Theory <https://www.lamsade.dauphine.fr/~projet_cost/ALGORITHMIC_DECISION_THEORY/ALGORITHMIC_DECISION_THEORY.html>`_ and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They provide the practical tools for a |location_link4| at the University of Luxembourg.
 
 .. image:: introDoc2.png
     :width: 500pt
@@ -54,7 +54,7 @@ The second part concerns the reference manual of the collection of provided Pyth
 .. toctree:: techDoc
    :maxdepth: 2
 
-The third part concerns case studies and examples concerning the active development of the Digraph3 collection of python3 modules for implementing tools and methods of the RuBis decision aiding approach. 
+The third part gathers historical case studies and example digraphs compiled before 2006 and concerning the active development of the Digraph3 collection of python3 modules for implementing tools and methods of the *Rubis decision aiding* approach. 
 
 .. toctree:: digraph3Archives
    :maxdepth: 1
@@ -74,7 +74,6 @@ References
 
 .. [3] M. Ch. Golumbic (2004), *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier.
        
-For further scientific documentation of the Digraph3 resources, see |location_link2|.
 
 |location_link3|
 
@@ -88,7 +87,7 @@ For further scientific documentation of the Digraph3 resources, see |location_li
 
 .. |location_link3| raw:: html
 
-   <a href="https://83.217.129.148/Digraph3/digraph3_copyright.html" target="_blank">Copyright</a>
+   <a href="_static/digraph3_copyright.html" target="_blank">Copyright</a>
 
 .. |location_link4| raw:: html
 
