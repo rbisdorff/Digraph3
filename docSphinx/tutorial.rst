@@ -11,15 +11,15 @@ The tutorials in this document describe the practical usage of our Digraph3 Pyth
 
    <a href="http://hdl.handle.net/10993/37933" target="_blank">on Algorithmic Decision Theory</a>
 
-The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like digraphs, outranking digraphs, performance tableaux and voting profiles.
+The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like *digraphs*, *outranking digraphs*, *performance tableaux* and *voting profiles*.
 
-Some of the tutorials are decision problem oriented and show how to compute the potential winner(s) of an election, how to build a best choice recommendation, or how to rate or linearly rank with multiple incommensurable ranking criteria.
+Some of the tutorials are decision problem oriented and show how to compute the potential *winner(s)* of an election, how to build a *best choice recommendation*, or how to *rate* or *linearly rank* with multiple incommensurable ranking criteria.
 
-More graph theoretical tutorials follow. One on working with undirected graphs, followed by a tutorial on how to compute non isomorphic maximal independent sets (kernels) in the n-cycle graph.
+More graph theoretical tutorials follow. One on working with *undirected graphs*, followed by a tutorial on how to compute *non isomorphic maximal independent sets* (kernels) in the n-cycle graph.
 
-Another tutorial is furthermore devoted on how to generally compute kernels in graphs, digraphs and, more specifically, initial and terminal kernels in outranking digraphs. Special tutorials are devoted to perfect graphs, like split, interval or permutation graphs, and to tree-graphs and forests.
+Another tutorial is furthermore devoted on how to generally compute *kernels* in graphs, digraphs and, more specifically, *initial* and *terminal* kernels in outranking digraphs. Special tutorials are devoted to *perfect* graphs, like *split*, *interval* and *permutation* graphs, and to *tree-graphs* and *forests*.
 
-Finally, we provide an insight in computational enhancements one may get when working in a bipolar-valued epistemic logical framework, like easily coping with missing data and uncertain criterion significance weights, computing valued ordinal correlations between bipolar-valued outranking digraphs, and solving bipolar-valued Berge kernel equation systems.
+Finally, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logical framework*, like easily coping with *missing data* and uncertain criterion *significance weights*, computing valued *ordinal correlations* between bipolar-valued outranking digraphs, and solving bipolar-valued *Berge kernel equation systems*.
    
 :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
 :Version: Revision: Python 3.7
@@ -49,13 +49,13 @@ Working with the *Digraph3* software resources
 Purpose
 -------
 
-The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar-valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate the |location_linkHTML1| |location_linkLatex1| given at the University of Luxembourg in the context of its *Master in Information and Computer Science* (MICS). 
+The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar-valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate a Master |location_linkHTML1| |location_linkLatex1| given at the University of Luxembourg in the context of its *Master in Information and Computer Science* (MICS). 
 
 The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
 .. |location_linkHTML1| raw:: html
 
-   <a href="http://hdl.handle.net/10993/37933" target="_blank">Course on *Algorithmic Decision Theory*</a>
+   <a href="http://hdl.handle.net/10993/37933" target="_blank">Course on <i>Algorithmic Decision Theory</i></a>
 
 .. |location_linkLatex1| raw:: latex
 
