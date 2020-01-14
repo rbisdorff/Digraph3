@@ -1,25 +1,32 @@
-
 ================
 About the author
 ================
 
-:Author: *Raymond BISDORFF*, Emeritus Professor of Computer Science and Applied Mathematics, University of Luxembourg [raymond.bisdorff@uni.lu]
+:Author: **Raymond BISDORFF**, Emeritus Professor of *Computer Science* and *Applied Mathematics*, University of Luxembourg [raymond.bisdorff@uni.lu]
+:Address: 50, Bvd G-D Charlotte, L-1130 Luxembourg (Europe)
+:Phone: 00 352 45 64 46 (Home Office)
+
+Short CV
+........
 
 **Past Professional Functions**
 
+* Founding Head of Research Unit *Statistics and Decision* (STADE) Public Research Center - Centre Universitaire/Gabriel-Lippmann (1993-2000)
 * Full professor at the *University of Luxembourg* (UL) (2003 - 2017)
 * Founding Dean of the UL *Faculty of Law, Economics and Finance* (FDEF) (2003 - 2004)
 * Founding Head of the *Applied Mathematics Research Unit*, FDEF, University of Luxembourg (2004 - 2007)
+* Vice-president of the *Scientific Advisory Commission* of the UL (2005 - 2009)
 * Active member of the *Interdisciplinary Laboratory for Intelligent and Adaptive Systems* (ILIAS), *Computer Science and Communications* Research Unit (CSC), *Faculty of Science, Technology and Communication* (FSTC) (2007-2017)
-* Elected FSTC's academic staff representative in the *University Council* -the Senate- of the UL (2011 - 2016)
 * Founding head of the UL *Doctoral School of Computer Science and Computer Engineering* (2011 - 2015)
+* Elected FSTC's academic staff representative in the *University Council* -the Senate- of the UL (2011 - 2016)
 * Founding chair of the APUL - *The Association of Professors of the University of Luxembourg* (2011 - 2014)
 * Elected representative of the professors in the UL *Board of Gouvernance* (2014 - 2017)
+
+**Serving the international OR Community**
+
+* Vice-President of the *Association of European Operational Research Societies* EURO (1997 - 2000)
+* Vice-President of the *International Federation of Operational Research Societies* (IFORS) representing EURO - the *Association of European Operational Research Societies* (2005 - 2007)
 * President of the *Belgian Operational Research Society*, ORBEL a.k.a. Sogesci-B.V.W.B. (2008 - 2010)
-* Vice-president of the *Scientific Advisory Commission* of the UL (2005 - 2009)
-* Vice-president of the *International Federation of Operational Research Societies* (IFORS) representing EURO - the *Association of European Operational Research Societies* (2005 - 2007)
-* Vice-president of the *Association of European Operational Research Societies* EURO (1997 - 2000)
-* Founding Head of Research Unit *Statistics and Decision* (STADE) Public Research Center - Centre Universitaire/Gabriel-Lippmann (1993-2000)
 
 **International Honors and Awards**
 
@@ -39,10 +46,15 @@ About the author
 
 **Teaching**
 
-Master level:
+* *Bachelor* level:
+    * Discrete Mathematics for Computer Scientists
+    * Mathematical Methods for Decision Aid
+    * Descriptive Statistics
+    * Scientific Simulation Tools
 
-* *Algorithmic Decision Theory*
-* *Computational Statistics*
+* *Master* level:
+    * Algorithmic Decision Theory
+    * Computational Statistics
 
 **Doctoral students (last)**
 
@@ -61,7 +73,14 @@ Master level:
 * Rating with learned quantile norms
 * HPC algorithms for ranking from big data
 
-**Publications**
+**Software Development**
+
+The `Digraph3 Python3 resources <index.html>`_ for implementing decision aid algorithms in the context of a bipolar-valued outranking approach.
+
+
+
+Publications
+............
 
 .. raw:: html
 	 
