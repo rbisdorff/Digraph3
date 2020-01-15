@@ -1,7 +1,6 @@
 
-====================================
- Tutorials of the Digraph3 resources
-====================================
+Tutorials of the Digraph3 resources
+===================================
 
 **Preface**
 
