@@ -5,15 +5,19 @@
 
 **Preface**
 
-The tutorials in this document describe the practical usage of our Digraph3 Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg.
+The tutorials in this document describe the practical usage of our Digraph3 Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| |location_linkLatex4| at the University of Luxembourg.
 
 .. |location_link4| raw:: html
 
-   <a href="http://hdl.handle.net/10993/37933" target="_blank">on Algorithmic Decision Theory</a>
+   <a href="https://orbilu.uni.lu/handle/10993/37933" target="_blank">on Algorithmic Decision Theory</a>
+
+.. |location_linkLatex4| raw:: latex
+
+   on \emph{Algorithmic Decision Theory} (https://orbilu.uni.lu/handle/10993/37933)
 
 The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like *digraphs*, *outranking digraphs*, *performance tableaux* and *voting profiles*.
 
-Some of the tutorials are decision problem oriented and show how to compute the potential *winner(s)* of an election, how to build a *best choice recommendation*, or how to *rate* or *linearly rank* with multiple incommensurable ranking criteria.
+Some of the tutorials are decision problem oriented and show how to compute the potential *winner(s)* of an election, how to build a *best choice recommendation*, or how to *rate* or *linearly rank* with multiple incommensurable performance criteria.
 
 More graph theoretical tutorials follow. One on working with *undirected graphs*, followed by a tutorial on how to compute *non isomorphic maximal independent sets* (kernels) in the n-cycle graph.
 
@@ -49,17 +53,17 @@ Working with the *Digraph3* software resources
 Purpose
 -------
 
-The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar-valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate a Master |location_linkHTML1| |location_linkLatex1| given at the University of Luxembourg in the context of its *Master in Information and Computer Science* (MICS). 
+The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar-valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate a Master Course |location_linkHTML1| |location_linkLatex1| given at the University of Luxembourg in the context of its *Master in Information and Computer Science* (MICS). 
 
 The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
 .. |location_linkHTML1| raw:: html
 
-   <a href="http://hdl.handle.net/10993/37933" target="_blank">Course on <i>Algorithmic Decision Theory</i></a>
+   <a href="http://hdl.handle.net/10993/37933" target="_blank">on <i>Algorithmic Decision Theory</i></a>
 
 .. |location_linkLatex1| raw:: latex
 
-   Course on \emph{Algorithmic Decision Theory}
+   on \emph{Algorithmic Decision Theory}
 
 
 Downloading of the Digraph3 resources
