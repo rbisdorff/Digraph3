@@ -284,7 +284,7 @@ Some special classes of digraphs, like the :py:class:`digraphs.CompleteDigraph`,
    :width: 200 px
    :align: center
 
-   The 5x5 grid graph wmedian split oriented
+   The 5x5 grid graph median split oriented
 
 .. only:: html
 

@@ -690,6 +690,57 @@
                     <span class="n">diameter</span> <span class="o">=</span> <span class="n">order</span> <span class="o">-</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
                     <span class="k">break</span>
         <span class="k">return</span> <span class="n">diameter</span>                       </div>
+
+<div class="viewcode-block" id="Graph.computeGirth"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeGirth">[docs]</a>    <span class="k">def</span> <span class="nf">computeGirth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">girthType</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the *girth* of self, i.e. the length of the shortest chordless cycle in the graph.</span>
+
+<span class="sd">        *Parameter*:</span>
+<span class="sd">            * *graphType* = &quot;all&quot; (default) | &quot;odd&quot; | &quot;even&quot;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cycles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeChordlessCycles</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">cycles</span><span class="p">)</span>
+        <span class="n">girth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cycles</span><span class="p">:</span>
+            <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">girthType</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">nc</span> <span class="o">&lt;</span> <span class="n">girth</span><span class="p">:</span>
+                    <span class="n">girth</span> <span class="o">=</span> <span class="n">nc</span>
+            <span class="k">elif</span> <span class="n">girthType</span> <span class="o">==</span> <span class="s2">&quot;odd&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">nc</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">nc</span> <span class="o">&lt;</span> <span class="n">girth</span><span class="p">:</span>
+                    <span class="n">girth</span> <span class="o">=</span> <span class="n">nc</span>
+            <span class="k">elif</span> <span class="n">girthType</span> <span class="o">==</span> <span class="s2">&quot;even&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">nc</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nc</span> <span class="o">&lt;</span> <span class="n">girth</span><span class="p">:</span>
+                    <span class="n">girth</span> <span class="o">=</span> <span class="n">nc</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: wrong girthType = </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">girthType</span><span class="p">)</span>
+                <span class="k">return</span>
+        <span class="k">if</span> <span class="n">girth</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">girthType</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the graph </span><span class="si">%s</span><span class="s1"> has no cycles&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;the graph </span><span class="si">%s</span><span class="s1"> has no </span><span class="si">%s</span><span class="s1"> cycles&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">girthType</span><span class="p">))</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">girthType</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">girth</span> <span class="o">=</span> <span class="n">girth</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;girth = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">girth</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">girth</span>
+        <span class="k">elif</span> <span class="n">girthType</span> <span class="o">==</span> <span class="s2">&quot;odd&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">oddGirth</span> <span class="o">=</span> <span class="n">girth</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;odd girth = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">girth</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">girth</span>
+        <span class="k">elif</span> <span class="n">girthType</span> <span class="o">==</span> <span class="s2">&quot;even&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">evenGirth</span> <span class="o">=</span> <span class="n">girth</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;even girth = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">girth</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">girth</span></div>
                 
 <div class="viewcode-block" id="Graph.computeMaximumMatching"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeMaximumMatching">[docs]</a>    <span class="k">def</span> <span class="nf">computeMaximumMatching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -4516,7 +4567,10 @@
     <span class="n">g</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;testPerfectGraph&#39;</span>
     <span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
     <span class="c1">#print(g.breadthFirstSearch(&#39;v1&#39;,Debug=False))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">isPerfectGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>    
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">isPerfectGraph</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">computeGirth</span><span class="p">(</span><span class="n">girthType</span><span class="o">=</span><span class="s2">&quot;odd&quot;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">computeGirth</span><span class="p">(</span><span class="n">girthType</span><span class="o">=</span><span class="s2">&quot;even&quot;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">computeGirth</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
 <span class="c1">##    rg = RandomPermutationGraph(order=6,seed=None)</span>
 <span class="c1">##    print(rg)</span>

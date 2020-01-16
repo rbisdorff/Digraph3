@@ -276,3 +276,10 @@ def testPerfectGraphDetection():
     print('Graph %s is perfect ? %s' %\
           ('testperf',str(g.isPerfectGraph(Comments=False))) )    
 
+def testGraphGirthComputation():
+    print('==>> Testing graph (odd and even) girth computation')
+    g = RandomGraph(order=9,edgeProbability=0.5)
+    print(g.isPerfectGraph(Comments=True))
+    g.computeGirth(girthType="odd",Comments=True)
+    g.computeGirth(girthType="even",Comments=True)
+    g.computeGirth(Comments=True)
