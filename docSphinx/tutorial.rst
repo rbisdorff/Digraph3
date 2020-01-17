@@ -4,15 +4,7 @@ Tutorials of the Digraph3 resources
 
 **Preface**
 
-The tutorials in this document describe the practical usage of our Digraph3 Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| |location_linkLatex4| at the University of Luxembourg.
-
-.. |location_link4| raw:: html
-
-   <a href="https://orbilu.uni.lu/handle/10993/37933" target="_blank">on Algorithmic Decision Theory</a>
-
-.. |location_linkLatex4| raw:: latex
-
-   on \emph{Algorithmic Decision Theory} (https://orbilu.uni.lu/handle/10993/37933)
+The tutorials in this document describe the practical usage of our Digraph3 Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg.
 
 The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like *digraphs*, *outranking digraphs*, *performance tableaux* and *voting profiles*.
 
@@ -22,19 +14,18 @@ More graph theoretical tutorials follow. One on working with *undirected graphs*
 
 Another tutorial is furthermore devoted on how to generally compute *kernels* in graphs, digraphs and, more specifically, *initial* and *terminal* kernels in outranking digraphs. Special tutorials are devoted to *perfect* graphs, like *split*, *interval* and *permutation* graphs, and to *tree-graphs* and *forests*.
 
-Finally, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logical framework*, like easily coping with *missing data* and uncertain criterion *significance weights*, computing valued *ordinal correlations* between bipolar-valued outranking digraphs, and solving bipolar-valued *Berge kernel equation systems*.
+Finally, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logical framework*, like easily coping with *missing data* and uncertain criterion *significance weights*, computing valued *ordinal correlations* between bipolar-valued outranking digraphs, and solving bipolar-valued Berge kernel equation systems.
    
 :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
 :Version: Revision: Python 3.7
-:Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2020
+:Copyright: R. Bisdorff 2013-2020
 
 .. _Tutorial-label:
 
-.. only:: html
+.. only:: html 
 
     .. contents:: Content Table
-	:depth: 1
-	:local:
+        :depth: 1
 
 .. highlight:: python
 	:linenothreshold: 2
@@ -6558,7 +6549,15 @@ Bibliography
 	    
 .. [KEN-1938] Kendall M.G. (1938), *A New Measure of Rank Correlation*. Biometrica 30:81–93
 
+.. |location_link4| raw:: html
 
+   <a href="https://orbilu.uni.lu/handle/10993/37933" target="_blank">on Algorithmic Decision Theory</a>
+
+.. |location_linkLatex4| raw:: latex
+
+   on \emph{Algorithmic Decision Theory} (https://orbilu.uni.lu/handle/10993/37933)
+
+	      
 .. only:: html
 
     Appendices

@@ -47,7 +47,7 @@ tree graphs and spanning forests.
 Finally we discuss four pearls of bipolar epistemic logic, namely coping with missing data and logical indeterminateness and computing ordinal bipolar-valued correlation indexes, bipolar-valued digraph kernel membership vectors, and bipolar-valued outranking likelihoods.
 
 .. toctree:: tutorial
-   :maxdepth: 2
+   :maxdepth: 1
 
 The second part concerns the reference manual of the collection of provided Python3 modules, classes and methods. The main classes in this collection are the :py:class:`digraphs.Digraph` overall root class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. The technical documentation also provides insight into the complete source code of all modules, classes and methods.
 
