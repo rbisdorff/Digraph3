@@ -1,4 +1,4 @@
-
+===================================
 Tutorials of the Digraph3 resources
 ===================================
 
@@ -25,7 +25,7 @@ Finally, we provide an insight in computational enhancements one may get when wo
 .. only:: html 
 
     .. contents:: Content Table
-        :depth: 1
+       :depth: 2	
 
 .. highlight:: python
 	:linenothreshold: 2
