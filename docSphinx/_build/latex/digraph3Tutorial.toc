@@ -24,23 +24,23 @@
 \contentsline {subsection}{\numberline {3.3}The Condorcet winner}{20}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}Cyclic social preferences}{21}{subsection.3.4}
 \contentsline {section}{\numberline {4}Working with the \sphinxstyleliteralintitle {\sphinxupquote {outrankingDigraphs}} module}{23}{section.4}
-\contentsline {subsection}{\numberline {4.1}Outranking digraph}{23}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Browsing the performances}{24}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.1}Outranking digraph}{24}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Browsing the performances}{25}{subsection.4.2}
 \contentsline {subsection}{\numberline {4.3}Valuation semantics}{26}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Pairwise comparisons}{26}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.4}Pairwise comparisons}{27}{subsection.4.4}
 \contentsline {subsection}{\numberline {4.5}Recoding the valuation}{27}{subsection.4.5}
 \contentsline {subsection}{\numberline {4.6}Codual digraph}{28}{subsection.4.6}
-\contentsline {subsection}{\numberline {4.7}XMCDA 2.0}{28}{subsection.4.7}
+\contentsline {subsection}{\numberline {4.7}XMCDA 2.0}{29}{subsection.4.7}
 \contentsline {section}{\numberline {5}Generating random performance tableaux}{29}{section.5}
-\contentsline {subsection}{\numberline {5.1}Introduction}{29}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.1}Introduction}{30}{subsection.5.1}
 \contentsline {subsection}{\numberline {5.2}Generating standard random performance tableaux}{30}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Generating random Cost\sphinxhyphen {}Benefit tableaux}{32}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}Generating three objectives tableaux}{34}{subsection.5.4}
-\contentsline {subsection}{\numberline {5.5}Generating random linearly ranked performances}{37}{subsection.5.5}
-\contentsline {section}{\numberline {6}Ranking with multiple incommensurable criteria}{38}{section.6}
-\contentsline {subsection}{\numberline {6.1}The ranking problem}{38}{subsection.6.1}
+\contentsline {subsection}{\numberline {5.3}Generating random Cost\sphinxhyphen {}Benefit tableaux}{31}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Generating three objectives tableaux}{35}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Generating random linearly ranked performances}{38}{subsection.5.5}
+\contentsline {section}{\numberline {6}Ranking with multiple incommensurable criteria}{39}{section.6}
+\contentsline {subsection}{\numberline {6.1}The ranking problem}{39}{subsection.6.1}
 \contentsline {subsection}{\numberline {6.2}The Copeland ranking}{41}{subsection.6.2}
-\contentsline {subsection}{\numberline {6.3}The Net\sphinxhyphen {}Flows ranking}{41}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.3}The Net\sphinxhyphen {}Flows ranking}{42}{subsection.6.3}
 \contentsline {subsection}{\numberline {6.4}Kemeny rankings}{42}{subsection.6.4}
 \contentsline {subsection}{\numberline {6.5}Slater rankings}{44}{subsection.6.5}
 \contentsline {subsection}{\numberline {6.6}Kohler\IeC {\textquoteright }s ranking\sphinxhyphen {}by\sphinxhyphen {}choosing rule}{44}{subsection.6.6}
