@@ -928,9 +928,22 @@ But, there may be many cycles appearing in a digraph, and, we may detect and enu
      (['a2', 'a4', 'a5'], frozenset({'a2', 'a5', 'a4'})), 
      (['a2', 'a4', 'a1'], frozenset({'a2', 'a1', 'a4'}))]
 
-Condorcet's approach for determining the winner of an election is hence not decisive in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see [BIS-2008]_). 
+Condorcet's approach for determining the winner of an election is hence not decisive in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see the tutorial on :ref:`Ranking-Tutorial-label` and [BIS-2008]_). 
 
-Many more tools for exploiting voting results are available, see the technical documentation of the :ref:`votingProfiles-label`.
+Many more tools for exploiting voting results are available like the broswer heatmap view on voting profiles (see the technical documentation of the :ref:`votingProfiles-label`).
+
+.. code-block:: pycon
+
+    >>> v.showHTMLVotingHeatmap(rankingRule='NetFlows')
+
+.. figure:: votingHeatmap.png
+   :width: 550 px
+   :align: center
+   :name: cyclicVoting	   
+
+   Visualizing a linear voting profile in a heatmap format
+
+Notice that the importance weights of the voters are *negative*, which means that the preference direction of the criteria (in this case the individal voters) is *decreasing*, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise *NetFlows* ranking *[a4,a5,a2,a1,a3]*, shown in this heatmap (see :numref:`cyclicVoting`) results in an optimal *ordinal correlation* index of +0.778 with the pairwise majority voting margins (see tutorials :ref:`OrdinalCorrelation-Tutorial-label` and :ref:`Ranking-Tutorial-label`). 
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -1662,7 +1675,7 @@ The ranking problem
 -------------------
 We need to rank without ties a set *X* of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise valued outranking situation characteristics, i.e. r(*x* S *y*) for all *x*, *y* in *X* (see [BIS-2013]_).
 
-Unfortunately, the Condorcet digraph, associated with such a given outranking digraph, presents only exceptionally a linear ordering. Usually, pairwise majority comparisons do not render even a complete or, at least, a transitive partial outranking relation. 
+Unfortunately, the Condorcet digraph, associated with such a given outranking digraph, presents only exceptionally a linear ordering. Usually, pairwise majority comparisons do not render even a complete or, at least, a transitive partial outranking relation. There may even frequently appear cyclic outranking situations (see the tutorial on :ref:`LinearVoting-tutorial-label`)
 
 Let us consider a didactic outranking digraph generated from a random Cost-Benefit performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria.
 
@@ -5614,6 +5627,8 @@ It is fair, however, to eventually mention here that the *Graffiti* magazine's a
 Notice finally the ordinal correlation *tau* values in
 :numref:`graffiti07_2` 3rd row. How may we compute these ordinal correlation indexes ?
 
+.. _OrdinalCorrelation-Tutorial-label:
+	
 Ordinal correlation equals bipolar-valued relational equivalence
 ----------------------------------------------------------------
 
