@@ -1784,7 +1784,7 @@ Copeland's rule, the most intuitive one as it works well for any outranking rela
 
 Alternative *a3* has the best score (+7), followed by alternative *a1* (+3). Alternatives *a4* and *a9* have the same score (+1); following the lexicographic rule, *a4* is hence ranked before *a9*. Same situation is observed for *a5* and *a8* with a score of -1. 
 
-Notice by the way that Copeland scores, as computed in the associated Condorcet relation table or similarly in the codual digraph drawing above, are in fact invariant under a codual - converse of the negation ~(-g) - transform of the outranking digraph. 
+Notice by the way that Copeland scores, as computed in the associated Condorcet relation table or similarly in the codual digraph drawing above, are in fact invariant under a codual, i.e. the converse of the negation ( ~ ( - *g* ) )transform of the outranking digraph. 
 
 Copeland's rule actually renders a linear order which is indeed highly correlated, in the ordinal Kendall sense (see [BIS-2012]_), with the given pairwise outranking relation.
 
@@ -4425,7 +4425,7 @@ It is worth noticing that the *dual* version of a *weak* circuit corresponds to 
 
    Dual and converse of the weak 6-circuit
 
-It immediately follows that weak chordless circuits are in fact the class of digraphs that are **invariant** under the *codual* transform, *cn* = - (~ *cn* ) = ~ ( -*cn* ). In the case, now, of an *odd* weak chordless circuit, *neither* the weak chordless circuit, *nor* its dual, converse, or codual versions will admit *any* initial or terminal prekernels. 
+It immediately follows that weak chordless circuits are part of the class of digraphs that are **invariant** under the *codual* transform, *cn* = - (~ *cn* ) = ~ ( -*cn* ). In the case, now, of an *odd* weak chordless circuit, *neither* the weak chordless circuit, *nor* its dual, converse, or codual versions will admit *any* initial or terminal prekernels. 
 
 
 Kernels in lateralized digraphs
