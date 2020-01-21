@@ -76,32 +76,32 @@
 \contentsline {subsection}{\numberline {12.1}What is a graph kernel ?}{91}{subsection.12.1}
 \contentsline {subsection}{\numberline {12.2}Initial and terminal kernels}{94}{subsection.12.2}
 \contentsline {subsection}{\numberline {12.3}Kernels in lateralized digraphs}{98}{subsection.12.3}
-\contentsline {subsection}{\numberline {12.4}Computing good and bad choice recommendations}{100}{subsection.12.4}
-\contentsline {subsection}{\numberline {12.5}Tractability}{104}{subsection.12.5}
-\contentsline {section}{\numberline {13}About split, interval and permutation graphs}{105}{section.13}
-\contentsline {subsection}{\numberline {13.1}A multipally \sphinxstyleemphasis {perfect} graph}{105}{subsection.13.1}
-\contentsline {subsection}{\numberline {13.2}Who is the lier ?}{107}{subsection.13.2}
-\contentsline {subsection}{\numberline {13.3}Generating permutation graphs}{109}{subsection.13.3}
-\contentsline {subsection}{\numberline {13.4}Recognizing permutation graphs}{112}{subsection.13.4}
-\contentsline {section}{\numberline {14}On tree graphs and graph forests}{116}{section.14}
-\contentsline {subsection}{\numberline {14.1}Generating random tree graphs}{117}{subsection.14.1}
-\contentsline {subsection}{\numberline {14.2}Recognizing tree graphs}{119}{subsection.14.2}
-\contentsline {subsection}{\numberline {14.3}Spanning trees and forests}{120}{subsection.14.3}
-\contentsline {subsection}{\numberline {14.4}Maximum determined spanning forests}{121}{subsection.14.4}
-\contentsline {section}{\numberline {15}Pearls of bipolar\sphinxhyphen {}valued epistemic logic}{123}{section.15}
-\contentsline {subsection}{\numberline {15.1}Coping with missing data and indeterminateness}{123}{subsection.15.1}
-\contentsline {subsection}{\numberline {15.2}Ordinal correlation equals bipolar\sphinxhyphen {}valued relational equivalence}{128}{subsection.15.2}
-\contentsline {subsubsection}{Kendall\IeC {\textquoteright }s \sphinxstyleemphasis {tau} index}{128}{subsubsection*.82}
-\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued relational equivalence}{128}{subsubsection*.83}
-\contentsline {subsubsection}{Fitness of ranking heuristics}{130}{subsubsection*.84}
-\contentsline {subsubsection}{Illustrating preference divergences}{132}{subsubsection*.85}
-\contentsline {subsubsection}{Exploring the \sphinxstyleemphasis {better rated} and the \sphinxstyleemphasis {as well as rated} opinions}{133}{subsubsection*.86}
-\contentsline {subsection}{\numberline {15.3}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{135}{subsection.15.3}
-\contentsline {subsubsection}{\sphinxstyleemphasis {Claude Berge}\IeC {\textquoteright }s Kernel Equation Systems}{135}{subsubsection*.87}
-\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{136}{subsubsection*.88}
-\contentsline {subsection}{\numberline {15.4}On confident outrankings with uncertain criteria significances}{141}{subsection.15.4}
-\contentsline {subsubsection}{Modelling uncertain criteria significances}{141}{subsubsection*.89}
-\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued likelihood of \IeC {\textquoteleft }\IeC {\textquoteright }at least as good as \IeC {\textquotedblright } situations}{141}{subsubsection*.90}
-\contentsline {subsubsection}{Confidence level of outranking situations}{144}{subsubsection*.91}
-\contentsline {section}{\numberline {16}Bibliography}{147}{section.16}
-\contentsline {section}{References}{147}{section.16}
+\contentsline {subsection}{\numberline {12.4}Computing good and bad choice recommendations}{101}{subsection.12.4}
+\contentsline {subsection}{\numberline {12.5}Tractability}{105}{subsection.12.5}
+\contentsline {section}{\numberline {13}About split, interval and permutation graphs}{106}{section.13}
+\contentsline {subsection}{\numberline {13.1}A multipally \sphinxstyleemphasis {perfect} graph}{106}{subsection.13.1}
+\contentsline {subsection}{\numberline {13.2}Who is the lier ?}{108}{subsection.13.2}
+\contentsline {subsection}{\numberline {13.3}Generating permutation graphs}{110}{subsection.13.3}
+\contentsline {subsection}{\numberline {13.4}Recognizing permutation graphs}{113}{subsection.13.4}
+\contentsline {section}{\numberline {14}On tree graphs and graph forests}{117}{section.14}
+\contentsline {subsection}{\numberline {14.1}Generating random tree graphs}{118}{subsection.14.1}
+\contentsline {subsection}{\numberline {14.2}Recognizing tree graphs}{120}{subsection.14.2}
+\contentsline {subsection}{\numberline {14.3}Spanning trees and forests}{121}{subsection.14.3}
+\contentsline {subsection}{\numberline {14.4}Maximum determined spanning forests}{122}{subsection.14.4}
+\contentsline {section}{\numberline {15}Pearls of bipolar\sphinxhyphen {}valued epistemic logic}{124}{section.15}
+\contentsline {subsection}{\numberline {15.1}Coping with missing data and indeterminateness}{124}{subsection.15.1}
+\contentsline {subsection}{\numberline {15.2}Ordinal correlation equals bipolar\sphinxhyphen {}valued relational equivalence}{129}{subsection.15.2}
+\contentsline {subsubsection}{Kendall\IeC {\textquoteright }s \sphinxstyleemphasis {tau} index}{129}{subsubsection*.82}
+\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued relational equivalence}{129}{subsubsection*.83}
+\contentsline {subsubsection}{Fitness of ranking heuristics}{131}{subsubsection*.84}
+\contentsline {subsubsection}{Illustrating preference divergences}{133}{subsubsection*.85}
+\contentsline {subsubsection}{Exploring the \sphinxstyleemphasis {better rated} and the \sphinxstyleemphasis {as well as rated} opinions}{134}{subsubsection*.86}
+\contentsline {subsection}{\numberline {15.3}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{136}{subsection.15.3}
+\contentsline {subsubsection}{\sphinxstyleemphasis {Claude Berge}\IeC {\textquoteright }s Kernel Equation Systems}{136}{subsubsection*.87}
+\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{137}{subsubsection*.88}
+\contentsline {subsection}{\numberline {15.4}On confident outrankings with uncertain criteria significances}{142}{subsection.15.4}
+\contentsline {subsubsection}{Modelling uncertain criteria significances}{142}{subsubsection*.89}
+\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued likelihood of \IeC {\textquoteleft }\IeC {\textquoteright }at least as good as \IeC {\textquotedblright } situations}{142}{subsubsection*.90}
+\contentsline {subsubsection}{Confidence level of outranking situations}{145}{subsubsection*.91}
+\contentsline {section}{\numberline {16}Bibliography}{148}{section.16}
+\contentsline {section}{References}{148}{section.16}

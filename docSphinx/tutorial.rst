@@ -4394,6 +4394,40 @@ Chordless circuits of even length may thus be indifferently oriented along two o
 
    The dual of the chordless 6-circuit
 
+We call **weak**, a *chordless circuit* with *indeterminate inner part*. The :py:class:`digraphs.CirculantDigraph` class provides a parameter for constructing such king of weak chordless circuits. 
+
+.. code-block:: pycon
+   :linenos:
+
+    >>> c6 = CirculantDigraph(order=6, circulants=[1],
+    ...                        IndeterminateInnerPart=True)
+
+It is worth noticing that the *dual* version of a *weak* circuit corresponds to its *converse* version, i.e. *-c6* = *~c6* (see :numref:`weakChordlessCircuit`).
+
+.. code-block:: pycon
+   :linenos:
+
+    >>> (-c6).exportGraphViz()
+    *---- exporting a dot file dor GraphViz tools ---------*
+    Exporting to dual_c6.dot
+    circo -Tpng dual_c6.dot -o dual_c6.png
+    >>> (~c6).exportGraphViz()
+    *---- exporting a dot file dor GraphViz tools ---------*
+    Exporting to converse_c6.dot
+    circo -Tpng converse_c6.dot -o converse_c6.png
+    >>> 
+
+.. figure:: weakChordlessCircuit.png
+   :name: weakChordlessCircuit
+   :width: 550 px
+   :align: center
+   :alt: The chordless 6-circuit with indeterminate inner part
+
+   Dual and converse of the weak 6-circuit
+
+It immediately follows that weak chordless circuits are in fact the class of digraphs that are **invariant** under the *codual* transform, *cn* = - (~ *cn* ) = ~ ( -*cn* ). In the case, now, of an *odd* weak chordless circuit, *neither* the weak chordless circuit, *nor* its dual, converse, or codual versions will admit *any* initial or terminal prekernels. 
+
+
 Kernels in lateralized digraphs
 -------------------------------
 

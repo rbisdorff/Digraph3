@@ -77,7 +77,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{January 20, 2020}
+\date{January 21, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc2.png}\par}
@@ -5322,6 +5322,36 @@ Chordless circuits of even length may thus be indifferently oriented along two o
 
 \noindent\sphinxincludegraphics[width=350\sphinxpxdimen]{{dualChordlessCircuit}.png}
 \caption{The dual of the chordless 6\sphinxhyphen{}circuit}\label{\detokenize{tutorial:dualchordlesscircuit}}\end{figure}
+
+We call \sphinxstylestrong{weak}, a \sphinxstyleemphasis{chordless circuit} with \sphinxstyleemphasis{indeterminate inner part}. The \sphinxcode{\sphinxupquote{digraphs.CirculantDigraph}} class provides a parameter for constructing such king of weak chordless circuits.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} c6 = CirculantDigraph(order=6, circulants=[1],}
+\PYG{g+go}{ ...                        IndeterminateInnerPart=True)}
+\end{sphinxVerbatim}
+
+It is worth noticing that the \sphinxstyleemphasis{dual} version of a \sphinxstyleemphasis{weak} circuit corresponds to its \sphinxstyleemphasis{converse} version, i.e. \sphinxstyleemphasis{\sphinxhyphen{}c6} = \sphinxstyleemphasis{\textasciitilde{}c6} (see \hyperref[\detokenize{tutorial:weakchordlesscircuit}]{Fig.\@ \ref{\detokenize{tutorial:weakchordlesscircuit}}}).
+
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} (\PYGZhy{}c6).exportGraphViz()}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file dor GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{ Exporting to dual\PYGZus{}c6.dot}
+\PYG{g+go}{ circo \PYGZhy{}Tpng dual\PYGZus{}c6.dot \PYGZhy{}o dual\PYGZus{}c6.png}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} (\PYGZti{}c6).exportGraphViz()}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file dor GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{ Exporting to converse\PYGZus{}c6.dot}
+\PYG{g+go}{ circo \PYGZhy{}Tpng converse\PYGZus{}c6.dot \PYGZhy{}o converse\PYGZus{}c6.png}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{}}
+\end{sphinxVerbatim}
+
+\begin{figure}[htbp]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{weakChordlessCircuit}.png}
+\caption{Dual and converse of the weak 6\sphinxhyphen{}circuit}\label{\detokenize{tutorial:weakchordlesscircuit}}\end{figure}
+
+It immediately follows that weak chordless circuits are in fact the class of digraphs that are \sphinxstylestrong{invariant} under the \sphinxstyleemphasis{codual} transform, \sphinxstyleemphasis{cn} = \sphinxhyphen{} (\textasciitilde{} \sphinxstyleemphasis{cn} ) = \textasciitilde{} ( \sphinxhyphen{}\sphinxstyleemphasis{cn} ). In the case, now, of an \sphinxstyleemphasis{odd} weak chordless circuit, \sphinxstyleemphasis{neither} the weak chordless circuit, \sphinxstyleemphasis{nor} its dual, converse, or codual versions will admit \sphinxstyleemphasis{any} initial or terminal prekernels.
 
 
 \subsection{Kernels in lateralized digraphs}

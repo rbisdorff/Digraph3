@@ -11004,7 +11004,8 @@ class CirculantDigraph(Digraph):
         :align: center
 
     """
-    def __init__(self,order=7,valuationdomain = {'min':Decimal('-1.0'),'max':Decimal('1.0')},circulants = [-1,1]):
+    def __init__(self,order=7,valuationdomain = {'min':Decimal('-1.0'),'max':Decimal('1.0')},\
+                 circulants = [-1,1],IndeterminateInnerPart=False):
         import sys,array,copy
         from collections import OrderedDict
         self.name = 'c'+str(order)
@@ -11031,12 +11032,16 @@ class CirculantDigraph(Digraph):
         for x in actions:
             relation[x] = {}
             for y in actions:
-                if x == y:
-                    relation[x][y] = Min
-                elif (x,y) in arcs:
-                    relation[x][y] = Max
+                if IndeterminateInnerPart:
+                    relation[x][y] = Med
                 else:
-                    relation[x][y] = Min
+                    relation[x][y] = Min 
+        for x in actions:
+            for y in actions:
+                if (x,y) in arcs:
+                    relation[x][y] = Max
+                    if (y,x) not in arcs:
+                        relation[y][x] = Min
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -13088,19 +13093,20 @@ if __name__ == "__main__":
         #g = RandomTournament(order=5,seed=1)
         #g = RandomValuationDigraph(seed=1)
         #print(g)
+        g = CirculantDigraph(IndeterminateInnerPart=True)
         
-        from outrankingDigraphs import BipolarOutrankingDigraph
-        from randomPerfTabs import Random3ObjectivesPerformanceTableau
-##        from linearOrders import CopelandOrder
-        t1 = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)
-        g = BipolarOutrankingDigraph(t1,Normalized=True)
-        g.showRelationTable()
-        print(g.computeDeterminateness())
-        print(g.computeDeterminateness(InPercents=True))
-        g.recodeValuation(0,1)
-        print(g.computeDeterminateness())
-        print(g.computeDeterminateness(InPercents=True))
-      
+##        from outrankingDigraphs import BipolarOutrankingDigraph
+##        from randomPerfTabs import Random3ObjectivesPerformanceTableau
+####        from linearOrders import CopelandOrder
+##        t1 = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)
+##        g = BipolarOutrankingDigraph(t1,Normalized=True)
+##        g.showRelationTable()
+##        print(g.computeDeterminateness())
+##        print(g.computeDeterminateness(InPercents=True))
+##        g.recodeValuation(0,1)
+##        print(g.computeDeterminateness())
+##        print(g.computeDeterminateness(InPercents=True))
+##      
 ##        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
 ##        g.showPreKernels()
 ##        g.showRelationTable()

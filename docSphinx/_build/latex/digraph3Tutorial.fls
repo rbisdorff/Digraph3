@@ -547,6 +547,11 @@ INPUT ./dualChordlessCircuit.png
 INPUT ./dualChordlessCircuit.png
 INPUT dualChordlessCircuit.png
 INPUT ./dualChordlessCircuit.png
+INPUT weakChordlessCircuit.png
+INPUT ./weakChordlessCircuit.png
+INPUT ./weakChordlessCircuit.png
+INPUT weakChordlessCircuit.png
+INPUT ./weakChordlessCircuit.png
 INPUT randomLaterality.png
 INPUT ./randomLaterality.png
 INPUT ./randomLaterality.png
