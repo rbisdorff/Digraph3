@@ -1757,7 +1757,7 @@ There is one chordless circuit detected in the given strict outranking digraph *
 
 Several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.
 
-The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland* 's, *Kemeny* 's, *Slater* 's, *Kohler* and *Tideman* 's ranking rules.
+The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland* 's, *Kemeny* 's, *Slater* 's, *Kohler* 's or *Tideman* 's ranking rule.
 
 The Copeland ranking
 --------------------
@@ -2000,8 +2000,10 @@ In the coding example, we generate for instance, by using multiprocessing techni
 .. code-block:: pycon
 
     >>> from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
-    >>> tp = RandomCBPerformanceTableau(numberOfActions=100,BigData=True,Threading=MP,seed=100)
-    >>> bg = PreRankedOutrankingDigraph(tp,quantiles=20,LowerClosed=False,minimalComponentSize=1,Threading=True)
+    >>> tp = RandomCBPerformanceTableau(numberOfActions=100,
+    ...                                 BigData=True,Threading=MP,seed=100)
+    >>> bg = PreRankedOutrankingDigraph(tp,quantiles=20,LowerClosed=False,
+    ...                                 minimalComponentSize=1,Threading=True)
     >>> print(bg)
     *----- show short --------------*
     Instance name     : randomCBperftab_mp

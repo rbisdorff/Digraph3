@@ -2079,7 +2079,7 @@ There is one chordless circuit detected in the given strict outranking digraph \
 
 Several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.
 
-The Digraph3 resources provide some of the most common of these ranking rules, like \sphinxstyleemphasis{Copeland} ‘s, \sphinxstyleemphasis{Kemeny} ‘s, \sphinxstyleemphasis{Slater} ‘s, \sphinxstyleemphasis{Kohler} and \sphinxstyleemphasis{Tideman} ‘s ranking rules.
+The Digraph3 resources provide some of the most common of these ranking rules, like \sphinxstyleemphasis{Copeland} ‘s, \sphinxstyleemphasis{Kemeny} ‘s, \sphinxstyleemphasis{Slater} ‘s, \sphinxstyleemphasis{Kohler} ‘s or \sphinxstyleemphasis{Tideman} ‘s ranking rule.
 
 
 \subsection{The Copeland ranking}
@@ -2337,8 +2337,10 @@ In the coding example, we generate for instance, by using multiprocessing techni
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{sparseOutrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{PreRankedOutrankingDigraph}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{tp} \PYG{o}{=} \PYG{n}{RandomCBPerformanceTableau}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}\PYG{n}{BigData}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{Threading}\PYG{o}{=}\PYG{n}{MP}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bg} \PYG{o}{=} \PYG{n}{PreRankedOutrankingDigraph}\PYG{p}{(}\PYG{n}{tp}\PYG{p}{,}\PYG{n}{quantiles}\PYG{o}{=}\PYG{l+m+mi}{20}\PYG{p}{,}\PYG{n}{LowerClosed}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}\PYG{n}{minimalComponentSize}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{Threading}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{tp} \PYG{o}{=} \PYG{n}{RandomCBPerformanceTableau}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}
+\PYG{g+gp}{... }                                \PYG{n}{BigData}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{Threading}\PYG{o}{=}\PYG{n}{MP}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bg} \PYG{o}{=} \PYG{n}{PreRankedOutrankingDigraph}\PYG{p}{(}\PYG{n}{tp}\PYG{p}{,}\PYG{n}{quantiles}\PYG{o}{=}\PYG{l+m+mi}{20}\PYG{p}{,}\PYG{n}{LowerClosed}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}
+\PYG{g+gp}{... }                                \PYG{n}{minimalComponentSize}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{Threading}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{bg}\PYG{p}{)}
 \PYG{g+go}{*\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} show short \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{Instance name     : randomCBperftab\PYGZus{}mp}
