@@ -15,7 +15,7 @@
 \contentsline {subsection}{\numberline {2.5}Fusion by epistemic disjunction}{13}{subsection.2.5}
 \contentsline {subsection}{\numberline {2.6}Dual, converse and codual digraphs}{14}{subsection.2.6}
 \contentsline {subsection}{\numberline {2.7}Symmetric and transitive closures}{15}{subsection.2.7}
-\contentsline {subsection}{\numberline {2.8}Strong components}{15}{subsection.2.8}
+\contentsline {subsection}{\numberline {2.8}Strong components}{16}{subsection.2.8}
 \contentsline {subsection}{\numberline {2.9}CSV storage}{16}{subsection.2.9}
 \contentsline {subsection}{\numberline {2.10}Complete, empty and indeterminate digraphs}{17}{subsection.2.10}
 \contentsline {section}{\numberline {3}Computing the winner of an election}{18}{section.3}

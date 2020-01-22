@@ -481,7 +481,7 @@ We may recover object *dg* from both partial objects *asymDg* and *symDg*, or as
 Dual, converse and codual digraphs
 ----------------------------------
 
-We may as readily compute the **dual**, the **converse** and the **codual** (dual and converse) of *dg*.
+We may as readily compute the **dual** (strict negated relation [14]_), the **converse** (inverted relation) and the **codual** (dual and converse) of *dg*. 
 
 .. code-block:: pycon
    :linenos:
@@ -1172,7 +1172,7 @@ All outranking digraphs, being of root type :py:class:`digraphs.Digraph`, inheri
 Codual digraph
 --------------
 
-From the theory (see [BIS-2013]_, [ADT-L7]_ )  we know that a bipolar-valued outranking relation is **weakly complete**, i.e. if :math:`r(x\,S\,y) < 0.0` then :math:`r(y\,S\,x) >= 0.0` . From this property follows that a bipolar-valued outranking relation verifies the **coduality** principle: the dual (-) of the converse (~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_.
+From the theory (see [BIS-2013]_, [ADT-L7]_ )  we know that a bipolar-valued outranking relation is **weakly complete**, i.e. if :math:`r(x\,S\,y) < 0.0` then :math:`r(y\,S\,x) >= 0.0` . From this property follows that a bipolar-valued outranking relation verifies the **coduality** principle: the dual (strict negation - [14]_) of the converse (inverse ~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_.
 
 .. code-block:: pycon
    :linenos:
@@ -1784,7 +1784,7 @@ Copeland's rule, the most intuitive one as it works well for any outranking rela
 
 Alternative *a3* has the best score (+7), followed by alternative *a1* (+3). Alternatives *a4* and *a9* have the same score (+1); following the lexicographic rule, *a4* is hence ranked before *a9*. Same situation is observed for *a5* and *a8* with a score of -1. 
 
-Notice by the way that Copeland scores, as computed in the associated Condorcet relation table or similarly in the codual digraph drawing above, are in fact invariant under a codual, i.e. the converse of the negation ( ~ ( - *g* ) )transform of the outranking digraph. 
+Notice by the way that Copeland scores, as computed in the associated Condorcet relation table or similarly in the codual digraph drawing above, are in fact *invariant* under a *codual*, i.e. the negation of the converse ( - ( ~ *g* ) ) transform of the outranking digraph. 
 
 Copeland's rule actually renders a linear order which is indeed highly correlated, in the ordinal Kendall sense (see [BIS-2012]_), with the given pairwise outranking relation.
 
@@ -3027,7 +3027,7 @@ However, we must as well notice that the cheapest alternative *C* is in fact **s
     Valuation in range: -9.00 to +9.00; global concordance: +1.00/-1.00
 
 
-To model these *strict outranking* situations, we may compute the Rubis best choice recommendation on the **codual**, the converse (~) of the dual (-), of the outranking digraph instance *g* (see [BIS-2013]_), as follows.
+To model these *strict outranking* situations, we may compute the Rubis best choice recommendation on the **codual**, the converse (~) of the dual (-) [14]_, of the outranking digraph instance *g* (see [BIS-2013]_), as follows.
 
 .. code-block:: pycon
    :linenos:
@@ -3668,7 +3668,7 @@ MIS and clique enumeration
          frozenset({'v1', 'v6', 'v7', 'v3'}), 
          frozenset({'v1', 'v6', 'v4', 'v3'})]
 
-A MIS in the dual of a graph instance *g* (its negation *-g* ), corresponds to a maximal **clique**, ie a maximal complete subgraph in *g*. Maximal cliques may be directly enumerated with the `graphs.Graph.showCliques()` method.
+A MIS in the dual of a graph instance *g* (its negation *-g* [14]_), corresponds to a maximal **clique**, ie a maximal complete subgraph in *g*. Maximal cliques may be directly enumerated with the `graphs.Graph.showCliques()` method.
 
 .. code-block:: pycon
    :linenos:
@@ -4402,7 +4402,7 @@ We call **weak**, a *chordless circuit* with *indeterminate inner part*. The :py
     >>> c6 = CirculantDigraph(order=6, circulants=[1],
     ...                        IndeterminateInnerPart=True)
 
-It is worth noticing that the *dual* version of a *weak* circuit corresponds to its *converse* version, i.e. *-c6* = *~c6* (see :numref:`weakChordlessCircuit`).
+It is worth noticing that the *dual* version ([14]_) of a *weak* circuit corresponds to its *converse* version, i.e. *-c6* = *~c6* (see :numref:`weakChordlessCircuit`).
 
 .. code-block:: pycon
    :linenos:
@@ -6012,15 +6012,15 @@ We succeeded now in generalizing *Berge*'s kernel equation systems to genuine bi
 Solving bipolar-valued kernel equation systems
 ..............................................
 
-*John von Neumann* ([SCH-1985]_) showed indeed that, when a digraph *G(X,R)* is **acyclic** with a  **unique inital kernel** *K* characterised by its membership characteristics vector *Yk*, then the following dual bipolar-valued fixpoint equation
+*John von Neumann* ([SCH-1985]_) showed indeed that, when a digraph *G(X,R)* is **acyclic** with a  **unique inital kernel** *K* characterised by its membership characteristics vector *Yk*, then the following double bipolar-valued fixpoint equation
 
      :math:`T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;.`
 
 will admit a stable high and a stable low fixpoint solution that converge both to *Yk*.
 
-Inspired by this crisp dual fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its dominant or absorbent prekernels *Ki* in *X* determines an induced **partial graph** *G(X,R/Ki)* which is *acyclyc* and admits *Ki* as unique kernel (see [BIS-2006b]_).
+Inspired by this crisp double fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its dominant or absorbent prekernels *Ki* in *X* determines an induced **partial graph** *G(X,R/Ki)* which is *acyclyc* and admits *Ki* as unique kernel (see [BIS-2006b]_).
 
-Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extended dual fixpoint algorithm, applied to *G(X,R/Ki)*, allows to compute hence the associated bipolar-valued kernel characteristic vectors *Yi* in polynomial complexity.
+Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extended double fixpoint algorithm, applied to *G(X,R/Ki)*, allows to compute hence the associated bipolar-valued kernel characteristic vectors *Yi* in polynomial complexity.
 
 **Algorithm** 
 
@@ -6032,10 +6032,10 @@ Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extende
     #. for each crisp initial kernel *Ki*:
     
          a. construct a partially determined subgraph *G(X,R/Ki)* supporting exactly this unique initial kernel *Ki*;
-         #. Use the dual fixpoint equation *T2* with the partially determined adjacency matrix *R/Ki* for computing a stable low and a stable high fixpoint;
+         #. Use the double fixpoint equation *T2* with the partially determined adjacency matrix *R/Ki* for computing a stable low and a stable high fixpoint;
          #. Determine the bipolar-valued *Ki*-membership characteristic vector *Yi* with an epistemic disjunction of the previous low and high fixpoints;
 
-    #. repeat step (2) for each terminal kernel *Kj* by using the dual fixpoint equation with the transpose of the adjacency matrix *R/Kj*.
+    #. repeat step (2) for each terminal kernel *Kj* by using the double fixpoint equation *T2* with the transpose of the adjacency matrix *R/Kj*.
 
 Time for a practical illustration.
 
@@ -6244,7 +6244,7 @@ Notice that the stable low vector characterises the **negative membership** part
 
 The adjacency matrix of a symmetric digraph staying *unchanged* by the transposition operator, the previous computations, when qualifying the same kernel as a *terminal* instance, will hence produce exactly the same result.
 
-It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this dual fixpoint algorithm. To implement such kind of algorithms without a logical **neutral term** would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial *impossibility theorems* and *dubious logical results* come up. 
+It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this double fixpoint algorithm. To implement such kind of algorithms without a logical **neutral term** would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial *impossibility theorems* and *dubious logical results* come up. 
 
 .. _Bipolar-Valued-Likelihood-Tutorial-label:
 
@@ -6662,6 +6662,8 @@ Bibliography
 .. [12] The Gnu Regression, Econometrics and Time-series Library http://gretl.sourceforge.net/ .
 
 .. [13] The class of *self-codual* bipolar-valued digraphs consists of all *weakly asymmetric* digraphs, i.e. digraphs containing only *asymmetric* and/or *indeterminate* links. Limit cases consists of, on the one side, *full tournaments* with *indeterminate reflexive links*, and, on the other side, *fully indeterminate* digraphs. In this class, the *converse* (inverse ~ ) operator is indeed identical to the *dual* (negation - ) one.
+
+.. [14] Not to be confused with the *dual graph* definition that is used in geometry. Here we mean the *less than* (strict converse) relation corresponding to a *greater or equal* relation, or the *less than or equal* relation corresponding to a (strict) *better than* relation.   
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive

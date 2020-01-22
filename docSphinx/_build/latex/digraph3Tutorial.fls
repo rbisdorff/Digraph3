@@ -360,6 +360,9 @@ INPUT ./graphBorderAndInner.png
 INPUT ./graphBorderAndInner.png
 INPUT graphBorderAndInner.png
 INPUT ./graphBorderAndInner.png
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmri8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT strongComponents.png
 INPUT ./strongComponents.png
 INPUT ./strongComponents.png
@@ -552,9 +555,6 @@ INPUT ./weakChordlessCircuit.png
 INPUT ./weakChordlessCircuit.png
 INPUT weakChordlessCircuit.png
 INPUT ./weakChordlessCircuit.png
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmri8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT randomLaterality.png
 INPUT ./randomLaterality.png
 INPUT ./randomLaterality.png
