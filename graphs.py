@@ -651,12 +651,12 @@ class Graph(object):
                     break
         return diameter                       
 
-    def computeGirth(self,girthType="all",Comments=False):
+    def computeGirth(self,girthType="any",Comments=False):
         """
         Renders the *girth* of self, i.e. the length of the shortest chordless cycle in the graph.
 
         *Parameter*:
-            * *graphType* = "all" (default) | "odd" | "even"
+            * *girthType* = "any" (default) | "odd" | "even"
 
         """
         cycles = self.computeChordlessCycles()
@@ -667,40 +667,35 @@ class Graph(object):
             nc = len(c)
             if Comments:
                 print(nc,c)
-            if girthType == "all":
-                if nc < girth:
-                    girth = nc
-            elif girthType == "odd":
+            if girthType == "odd":
                 if nc % 2 == 1 and nc < girth:
                     girth = nc
             elif girthType == "even":
                 if nc % 2 == 0 and nc < girth:
                     girth = nc
             else:
-                print('Error: wrong girthType = %s' % girthType)
-                return
+                if nc < girth:
+                    girth = nc
         if girth == self.order + 1:
             if Comments:
-                if girthType == "all":
+                if girthType == "any":
                     print('the graph %s has no cycles' % (self.name))
                 else:
                     print('the graph %s has no %s cycles' % (self.name,girthType))
-            return
-        if girthType == "all":
-            self.girth = girth
-            if Comments:
-                print('girth = %d' % girth)
-            return girth
-        elif girthType == "odd":
+                return
+        if girthType == "odd":
             self.oddGirth = girth
             if Comments:
                 print('odd girth = %d' % girth)
-            return girth
         elif girthType == "even":
             self.evenGirth = girth
             if Comments:
                 print('even girth = %d' % girth)
-            return girth
+        else:
+            self.girth = girth
+            if Comments:
+                print('girth = %d' % girth)
+        return girth
                 
     def computeMaximumMatching(self,Comments=False):
         """

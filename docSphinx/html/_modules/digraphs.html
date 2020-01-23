@@ -542,6 +542,30 @@
           
 <span class="c1">#----------------------------------------</span>
 
+<div class="viewcode-block" id="Digraph.computeMaxHoleSize"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeMaxHoleSize">[docs]</a>    <span class="k">def</span> <span class="nf">computeMaxHoleSize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the length of the largest chordless cycle</span>
+<span class="sd">        in the corresponding disjunctive undirected graph.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">digraph2Graph</span><span class="p">(</span><span class="n">ConjunctiveConversion</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">cycles</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeChordlessCycles</span><span class="p">()</span>
+        <span class="n">nbrOfHoles</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cycles</span><span class="p">)</span>
+        <span class="n">maxHS</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cycles</span><span class="p">:</span>
+            <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">nc</span> <span class="o">&gt;</span> <span class="n">maxHS</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Cycle </span><span class="si">%s</span><span class="s1"> of length </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">),</span><span class="n">nc</span><span class="p">)</span> <span class="p">)</span>
+                <span class="n">maxHS</span> <span class="o">=</span> <span class="n">nc</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# holes           = </span><span class="si">%d</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="n">nbrOfHoles</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximal hole size = </span><span class="si">%d</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="n">maxHS</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nbrOfHoles</span> <span class="o">=</span> <span class="n">nbrOfHoles</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxHoleSize</span> <span class="o">=</span> <span class="n">maxHS</span>
+        <span class="k">return</span> <span class="n">maxHS</span></div>
+                
+<span class="c1">#----------------------------------------</span>
+
 <div class="viewcode-block" id="Digraph.relationFct"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.relationFct">[docs]</a>    <span class="k">def</span> <span class="nf">relationFct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        wrapper for self.relation dictionary access to ensure interoperability</span>
@@ -13130,10 +13154,11 @@
         <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
         <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="o">*</span>
         <span class="c1">##dg = RedhefferDigraph(order=113)</span>
-        <span class="c1">#g = RandomTournament(order=5,seed=1)</span>
-        <span class="c1">#g = RandomValuationDigraph(seed=1)</span>
+        <span class="c1">#g = RandomTournament(order=10,seed=1)</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
         <span class="c1">#print(g)</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">IndeterminateInnerPart</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1">#g = CirculantDigraph(IndeterminateInnerPart=True)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">computeMaxHoleSize</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         
 <span class="c1">##        from outrankingDigraphs import BipolarOutrankingDigraph</span>
 <span class="c1">##        from randomPerfTabs import Random3ObjectivesPerformanceTableau</span>

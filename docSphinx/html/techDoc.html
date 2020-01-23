@@ -1204,6 +1204,13 @@ Return a tuple: kemenyOrder (from worst to best), kemenyIndex</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.computeMaxHoleSize">
+<code class="sig-name descname">computeMaxHoleSize</code><span class="sig-paren">(</span><em class="sig-param">Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeMaxHoleSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeMaxHoleSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the length of the largest chordless cycle
+in the corresponding disjunctive undirected graph.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.computeMeanInDegree">
 <code class="sig-name descname">computeMeanInDegree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeMeanInDegree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeMeanInDegree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the mean indegree of self.
@@ -3282,11 +3289,11 @@ Returns a partition of the vertices as a list</p>
 
 <dl class="method">
 <dt id="graphs.Graph.computeGirth">
-<code class="sig-name descname">computeGirth</code><span class="sig-paren">(</span><em class="sig-param">girthType='all'</em>, <em class="sig-param">Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.computeGirth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.computeGirth" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">computeGirth</code><span class="sig-paren">(</span><em class="sig-param">girthType='any'</em>, <em class="sig-param">Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.computeGirth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.computeGirth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the <em>girth</em> of self, i.e. the length of the shortest chordless cycle in the graph.</p>
 <dl class="simple">
 <dt><em>Parameter</em>:</dt><dd><ul class="simple">
-<li><p><em>graphType</em> = “all” (default) | “odd” | “even”</p></li>
+<li><p><em>girthType</em> = “any” (default) | “odd” | “even”</p></li>
 </ul>
 </dd>
 </dl>

@@ -502,6 +502,30 @@ class Digraph(object):
           
 #----------------------------------------
 
+    def computeMaxHoleSize(self,Comments=False):
+        """
+        Renders the length of the largest chordless cycle
+        in the corresponding disjunctive undirected graph.
+        """
+        g = self.digraph2Graph(ConjunctiveConversion=False)
+        cycles = g.computeChordlessCycles()
+        nbrOfHoles = len(cycles)
+        maxHS = 0
+        for c in cycles:
+            nc = len(c)
+            if nc > maxHS:
+                if Comments:
+                    print('Cycle %s of length %d' %(str(c),nc) )
+                maxHS = nc
+        if Comments:
+            print('# holes           = %d ' % nbrOfHoles )
+            print('Maximal hole size = %d ' % maxHS )
+        self.nbrOfHoles = nbrOfHoles
+        self.maxHoleSize = maxHS
+        return maxHS
+                
+#----------------------------------------
+
     def relationFct(self,x,y):
         """
         wrapper for self.relation dictionary access to ensure interoperability
@@ -13090,10 +13114,11 @@ if __name__ == "__main__":
         from time import time
         from digraphsTools import *
         ##dg = RedhefferDigraph(order=113)
-        #g = RandomTournament(order=5,seed=1)
-        #g = RandomValuationDigraph(seed=1)
+        #g = RandomTournament(order=10,seed=1)
+        g = RandomValuationDigraph(order=20)
         #print(g)
-        g = CirculantDigraph(IndeterminateInnerPart=True)
+        #g = CirculantDigraph(IndeterminateInnerPart=True)
+        g.computeMaxHoleSize(Comments=True)
         
 ##        from outrankingDigraphs import BipolarOutrankingDigraph
 ##        from randomPerfTabs import Random3ObjectivesPerformanceTableau
