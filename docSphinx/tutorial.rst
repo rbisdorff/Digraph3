@@ -129,7 +129,10 @@ All :py:class:`digraphs.Digraph` objects contain at least the following attribut
 Permanent storage
 -----------------
 
-The :code:`dg.save('tutorialDigraph')` command (see Line 19 above) stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content::
+The :code:`dg.save('tutorialDigraph')` command (see Line 19 above) stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content.
+
+.. code-block:: python
+   :linenos:
 
     # Saved digraph instance
     actions = {
@@ -148,7 +151,6 @@ The :code:`dg.save('tutorialDigraph')` command (see Line 19 above) stores the di
     'a4': {'a1':1.0, 'a2':1.0, 'a3':1.0, 'a4':-1.0, 'a5':-1.0,},
     'a5': {'a1':1.0, 'a2':1.0, 'a3':1.0, 'a4':-1.0, 'a5':-1.0,},
     }
-
 
 Inspecting a ``Digraph`` object
 -------------------------------
@@ -351,7 +353,7 @@ With the ``save()`` method (see Line 3) we may keep a backup version for future 
     
 .. warning::
     
-    Notice that most Digraph class methods will ignore the reflexive couples by considering that the relation is **indeterminate**, i.e. the characteristic value :math:`r(x\,S\,x)` for all action *x* is put to the median, i.e. indeterminate, value in this case (see [BIS-2004]_).
+    Mind that most Digraph class methods will ignore the reflexive couples by considering that the ewflwxivw relation is **indeterminate**, i.e. the characteristic value :math:`r(x\,S\,x)` for all action *x* is put to the *median*, i.e. *indeterminate* value in this case (see [BIS-2004]_).
 
 Graphviz drawings
 -----------------
@@ -458,7 +460,12 @@ We may also extract the border -i.e. the part of the digraph induced by the unio
 Fusion by epistemic disjunction
 -------------------------------
 
-We may recover object *dg* from both partial objects *asymDg* and *symDg*, or as well from the border *bg* and the inner *ig*, with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the :py:class:`digraphs.FusionDigraph` class.
+We may recover object *dg* from both partial objects *asymDg* and *symDg*, or as well from the border *bg* and the inner *ig*, with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the :py:class:`digraphs.FusionDigraph` class. The epistemic disjunction operation **o-max** works as follows:
+
+Let *r* and *r'* characterise  two bipolar-valued epistemic situations.
+     * o-max(*r*, *r'* ) = max(*r*, *r'* ) when both *r* and *r'* are *validated* (positive);
+     * o-max(*r*, *r'* ) = min(*r*, *r'* ) when both *r* and *r'* are *invalidated* (negative);
+     * o-max(*r*, *r'* ) = *indeterminate* otherwise.
 
 .. code-block:: pycon
    :linenos:
@@ -481,7 +488,7 @@ We may recover object *dg* from both partial objects *asymDg* and *symDg*, or as
 Dual, converse and codual digraphs
 ----------------------------------
 
-We may as readily compute the **dual** (strict negated relation [14]_), the **converse** (inverted relation) and the **codual** (dual and converse) of *dg*. 
+We may as readily compute the **dual** (negated relation [14]_), the **converse** (transposed relation) and the **codual** (transposed and negated relation) of the digraph instance *dg*. 
 
 .. code-block:: pycon
    :linenos:
@@ -531,7 +538,7 @@ Computing the dual, respectively the converse, may also be done with prefixing t
     >>> ddg = -dg   # dual of dg
     >>> cdg = ~dg   # converse of dg
     >>> cddg = ~(-dg) # = -(~(dg) codual of dg
-    >>> cddg.showRelationTable()
+    >>> (-(~dg)).showRelationTable()
     * ---- Relation Table -----
     -r(ySx) |  '1'    '2'   '3'   '4'   '5'   '6'   '7'	    
     --------|------------------------------------------
@@ -642,7 +649,7 @@ It is as well possible to show a colored version of the valued relation table in
 
    The valued relation table shown in a browser window 
 
-Positive arcs are shown in green and negative in red. Indeterminate -zero-valued- links, like the reflexive diagonal ones or the link between node *6* and node *2*, are shown in gray.
+Positive arcs are shown in *green* and negative arcs in *red*. Indeterminate -zero-valued- links, like the reflexive diagonal ones or the link between node *6* and node *2*, are shown in *gray*.
 
 Complete, empty and indeterminate digraphs
 ------------------------------------------
@@ -716,7 +723,7 @@ Let us finally mention some special universal classes of digraphs that are readi
 
 .. note::
 
-   Notice the subtle difference between the neighborhoods of an *empty* and the neighborhoods of an *indeterminate* digraph instance. In the first kind, the neighborhoods are known to be completely *empty* whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar characteristic valuation domain, we need both a *gamma* **and** a *notGamma* function.
+   Mind the subtle difference between the neighborhoods of an *empty* and the neighborhoods of an *indeterminate* digraph instance. In the first kind, the neighborhoods are known to be completely *empty* whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar characteristic valuation domain, we need both a *gamma* **and** a *notGamma* function.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -6665,7 +6672,7 @@ Bibliography
 
 .. [13] The class of *self-codual* bipolar-valued digraphs consists of all *weakly asymmetric* digraphs, i.e. digraphs containing only *asymmetric* and/or *indeterminate* links. Limit cases consists of, on the one side, *full tournaments* with *indeterminate reflexive links*, and, on the other side, *fully indeterminate* digraphs. In this class, the *converse* (inverse ~ ) operator is indeed identical to the *dual* (negation - ) one.
 
-.. [14] Not to be confused with the *dual graph* definition that is used in geometry. Here we mean the *less than* (strict converse) relation corresponding to a *greater or equal* relation, or the *less than or equal* relation corresponding to a (strict) *better than* relation.   
+.. [14] Not to be confused with the *dual graph* of a plane graph *g* that has a vertex for each face of *g*. Here we mean the *less than* (strict converse) relation corresponding to a *greater or equal* relation, or the *less than or equal* relation corresponding to a (strict) *better than* relation.   
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
