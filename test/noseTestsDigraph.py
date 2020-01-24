@@ -861,3 +861,10 @@ def testGraphBorderInner():
     ig = GraphInner(g,Debug=True)
     rg = FusionDigraph(bg,ig)
     Digraph.exportGraphViz(rg,(g.name+'fused'))
+
+def testmaxHoleSize():
+    print('*------- test maximal hole size ------*')
+    g = RandomValuationDigraph(order=20)
+    g.computeMaxHoleSize(Comments=True)
+    print('Nbr of holes', g.nbrOfHoles)
+    print('Maximal hole size', g.maxHoleSize) 
