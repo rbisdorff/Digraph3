@@ -11,8 +11,8 @@ Contents
 
 * `Introduction <index.html>`_
 * `Tutorials <tutorial.html>`_
-* `Pearls of bipolar-valued epistemic logic <pearls.html>`_
 * `Reference manual <techDoc.html>`_
+* `Pearls of bipolar-valued epistemic logic <pearls.html>`_
 * `Archives <digraph3Archives.html>`_
 * `About the author <author.html>`_
 * :ref:`genindex`
@@ -38,9 +38,7 @@ tableaux. There is also a tutorial provided on undirected graphs. Some
 tutorials are problem oriented and show how to compute the winner of
 an election, how to build a best choice recommendation, or how to
 linearly rank or rate with multiple incommensurable performance
-criteria.
-
-Other tutorials concern more specifically operational
+criteria. Other tutorials concern more specifically operational
 aspects of computing maximal independent sets (MISs) and kernels in
 graphs and digraphs. The tutorial about split, interval and permutation graphs is inspired by Martin Golumbic's book on *Algorithmic Graph Theory and Perfect Graphs* ([3]_). We also provide a tutorial on
 tree graphs and spanning forests.
@@ -48,14 +46,14 @@ tree graphs and spanning forests.
 .. toctree:: tutorial
    :maxdepth: 2
 
-The second part of the Digraph3 documentation contains four pearls of bipolar epistemic logic. These short texts illustrate well the very computational benefit one may get when working in a bipolar-valued logical framework. Especially the essential part the logical *undeterminate* value is judiciously taking here.  
-
-.. toctree:: pearls
-   :maxdepth: 2
-
-The third part concerns the extensive reference manual of the collection of provided Python3 modules, classes and methods. The main classes in this collection are the :py:class:`digraphs.Digraph` overall root class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. The technical documentation also provides insight into the complete source code of all modules, classes and methods.
+The second part concerns the extensive reference manual of the collection of provided Python3 modules, classes and methods. The main classes in this collection are the :py:class:`digraphs.Digraph` overall root class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. The technical documentation also provides insight into the complete source code of all modules, classes and methods.
 
 .. toctree:: techDoc
+   :maxdepth: 2
+
+The third part of the Digraph3 documentation exhibits four *pearls of bipolar epistemic logic*. These short texts illustrate well the very computational benefit one may get when working in a bipolar-valued logical framework. And, more specifically, the essential part the logically neutral *undeterminate* value is judiciously playing here.  
+
+.. toctree:: pearls
    :maxdepth: 2
 
 The fourth part gathers historical case studies and example digraphs compiled before 2006 and concerning the active development of the Digraph3 collection of python3 modules for implementing tools and methods of the *Rubis decision aiding* approach. 
