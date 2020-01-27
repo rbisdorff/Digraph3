@@ -58,6 +58,7 @@
 <ul class="simple">
 <li><p><a class="reference external" href="index.html">Introduction</a></p></li>
 <li><p><a class="reference external" href="tutorial.html">Tutorials</a></p></li>
+<li><p><a class="reference external" href="pearls.html">Pearls of bipolar-valued epistemic logic</a></p></li>
 <li><p><a class="reference external" href="techDoc.html">Reference manual</a></p></li>
 <li><p><a class="reference external" href="digraph3Archives.html">Archives</a></p></li>
 <li><p><a class="reference external" href="author.html">About the author</a></p></li>
@@ -65,9 +66,8 @@
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-</div>
 <div class="section" id="introduction-label">
-<span id="id1"></span><h2>Introduction<a class="headerlink" href="#introduction-label" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h3>Introduction<a class="headerlink" href="#introduction-label" title="Permalink to this headline">¶</a></h3>
 <p>This documentation, also available on the <a class="reference external" href="https://readthedocs.org/">Read The Docs</a> site: <a href="https://digraph3.readthedocs.io/en/latest/" target="_blank">https://digraph3.readthedocs.io/en/latest/</a>, describes the Python3 resources for implementing decision aid algorithms in the context of a <em>bipolar-valued outranking</em> approach (<a class="footnote-reference brackets" href="#id5" id="id2">1</a>, <a class="footnote-reference brackets" href="#id6" id="id3">2</a>). These computing resources are useful in the field of <a class="reference external" href="https://www.lamsade.dauphine.fr/~projet_cost/ALGORITHMIC_DECISION_THEORY/ALGORITHMIC_DECISION_THEORY.html">Algorithmic Decision Theory</a> and more specifically in <strong>outranking</strong> based <em>Multiple Criteria Decision Aid</em> (MCDA). They provide the practical tools for a Master Course <a href="http://hdl.handle.net/10993/37933" target="_blank">on Algorithmic Decision Theory</a> at the University of Luxembourg.</p>
 <a class="reference internal image-reference" href="_images/introDoc2.png"><img alt="_images/introDoc2.png" class="align-center" src="_images/introDoc2.png" style="width: 500pt;" /></a>
 <p><strong>Parts of the documentation:</strong></p>
@@ -82,7 +82,6 @@ criteria.</p>
 aspects of computing maximal independent sets (MISs) and kernels in
 graphs and digraphs. The tutorial about split, interval and permutation graphs is inspired by Martin Golumbic’s book on <em>Algorithmic Graph Theory and Perfect Graphs</em> (<a class="footnote-reference brackets" href="#id7" id="id4">3</a>). We also provide a tutorial on
 tree graphs and spanning forests.</p>
-<p>Finally we discuss four pearls of bipolar epistemic logic, namely coping with missing data and logical indeterminateness and computing ordinal bipolar-valued correlation indexes, bipolar-valued digraph kernel membership vectors, and bipolar-valued outranking likelihoods.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorials of the Digraph3 resources</a><ul>
@@ -100,14 +99,26 @@ tree graphs and spanning forests.</p>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#on-computing-digraph-kernels">On computing digraph kernels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#about-split-interval-and-permutation-graphs">About split, interval and permutation graphs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#on-tree-graphs-and-graph-forests">On tree graphs and graph forests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#pearls-of-bipolar-valued-epistemic-logic">Pearls of bipolar-valued epistemic logic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#bibliography">Bibliography</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial.html#appendices">Appendices</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<p>The second part concerns the reference manual of the collection of provided Python3 modules, classes and methods. The main classes in this collection are the <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a> overall root class, the <a class="reference internal" href="techDoc.html#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class and the <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class. The technical documentation also provides insight into the complete source code of all modules, classes and methods.</p>
+<p>The second part of the Digraph3 documentation contains four pearls of bipolar epistemic logic. These short texts illustrate well the very computational benefit one may get when working in a bipolar-valued logical framework. Especially the essential part the logical <em>undeterminate</em> value is judiciously taking here.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pearls.html">Pearls of bipolar-valued epistemic logic</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pearls.html#coping-with-missing-data-and-indeterminateness">Coping with missing data and indeterminateness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pearls.html#ordinal-correlation-equals-bipolar-valued-relational-equivalence">Ordinal correlation equals bipolar-valued relational equivalence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pearls.html#bipolar-valued-kernel-membership-characteristic-vectors">Bipolar-valued kernel membership characteristic vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pearls.html#on-confident-outrankings-with-uncertain-criteria-significances">On confident outrankings with uncertain criteria significances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pearls.html#footnotes">Footnotes</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>The third part concerns the extensive reference manual of the collection of provided Python3 modules, classes and methods. The main classes in this collection are the <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a> overall root class, the <a class="reference internal" href="techDoc.html#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class and the <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class. The technical documentation also provides insight into the complete source code of all modules, classes and methods.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="techDoc.html">Technical Reference of the Digraph3 modules</a><ul>
@@ -136,7 +147,7 @@ tree graphs and spanning forests.</p>
 </li>
 </ul>
 </div>
-<p>The third part gathers historical case studies and example digraphs compiled before 2006 and concerning the active development of the Digraph3 collection of python3 modules for implementing tools and methods of the <em>Rubis decision aiding</em> approach.</p>
+<p>The fourth part gathers historical case studies and example digraphs compiled before 2006 and concerning the active development of the Digraph3 collection of python3 modules for implementing tools and methods of the <em>Rubis decision aiding</em> approach.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="digraph3Archives.html">Digraph3 Archives</a><ul>
@@ -154,6 +165,7 @@ tree graphs and spanning forests.</p>
 </ul>
 </li>
 </ul>
+</div>
 </div>
 <div class="section" id="references">
 <h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
@@ -188,8 +200,10 @@ tree graphs and spanning forests.</p>
   <h3><a href="#">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Documentation of the Digraph3 resources</a><ul>
-<li><a class="reference internal" href="#contents">Contents</a></li>
+<li><a class="reference internal" href="#contents">Contents</a><ul>
 <li><a class="reference internal" href="#introduction-label">Introduction</a><ul>
+</ul>
+</li>
 <li><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
@@ -237,7 +251,7 @@ tree graphs and spanning forests.</p>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2012-2012, Raymond Bisdorff.
+        &#169; Copyright 2012-2020, Raymond Bisdorff.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>

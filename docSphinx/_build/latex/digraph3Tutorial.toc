@@ -61,7 +61,7 @@
 \contentsline {subsection}{\numberline {8.5}Computing \sphinxstyleemphasis {strict best} choice recommendations}{66}{subsection.8.5}
 \contentsline {subsection}{\numberline {8.6}Weakly ordering the outranking digraph}{67}{subsection.8.6}
 \contentsline {section}{\numberline {9}Rating with learned quantile norms}{68}{section.9}
-\contentsline {subsection}{\numberline {9.1}Introduction}{69}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.1}Introduction}{68}{subsection.9.1}
 \contentsline {subsection}{\numberline {9.2}Incremental learning of historical performance quantiles}{69}{subsection.9.2}
 \contentsline {subsection}{\numberline {9.3}Rating new performances with quantile norms}{71}{subsection.9.3}
 \contentsline {section}{\numberline {10}Working with the \sphinxstyleliteralintitle {\sphinxupquote {graphs}} module}{76}{section.10}
@@ -88,20 +88,5 @@
 \contentsline {subsection}{\numberline {14.2}Recognizing tree graphs}{120}{subsection.14.2}
 \contentsline {subsection}{\numberline {14.3}Spanning trees and forests}{121}{subsection.14.3}
 \contentsline {subsection}{\numberline {14.4}Maximum determined spanning forests}{122}{subsection.14.4}
-\contentsline {section}{\numberline {15}Pearls of bipolar\sphinxhyphen {}valued epistemic logic}{124}{section.15}
-\contentsline {subsection}{\numberline {15.1}Coping with missing data and indeterminateness}{124}{subsection.15.1}
-\contentsline {subsection}{\numberline {15.2}Ordinal correlation equals bipolar\sphinxhyphen {}valued relational equivalence}{129}{subsection.15.2}
-\contentsline {subsubsection}{Kendall\IeC {\textquoteright }s \sphinxstyleemphasis {tau} index}{129}{subsubsection*.82}
-\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued relational equivalence}{129}{subsubsection*.83}
-\contentsline {subsubsection}{Fitness of ranking heuristics}{131}{subsubsection*.84}
-\contentsline {subsubsection}{Illustrating preference divergences}{133}{subsubsection*.85}
-\contentsline {subsubsection}{Exploring the \sphinxstyleemphasis {better rated} and the \sphinxstyleemphasis {as well as rated} opinions}{134}{subsubsection*.86}
-\contentsline {subsection}{\numberline {15.3}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{136}{subsection.15.3}
-\contentsline {subsubsection}{\sphinxstyleemphasis {Claude Berge}\IeC {\textquoteright }s Kernel Equation Systems}{136}{subsubsection*.87}
-\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{137}{subsubsection*.88}
-\contentsline {subsection}{\numberline {15.4}On confident outrankings with uncertain criteria significances}{142}{subsection.15.4}
-\contentsline {subsubsection}{Modelling uncertain criteria significances}{142}{subsubsection*.89}
-\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued likelihood of \IeC {\textquoteleft }\IeC {\textquoteright }at least as good as \IeC {\textquotedblright } situations}{142}{subsubsection*.90}
-\contentsline {subsubsection}{Confidence level of outranking situations}{145}{subsubsection*.91}
-\contentsline {section}{\numberline {16}Bibliography}{148}{section.16}
-\contentsline {section}{References}{148}{section.16}
+\contentsline {section}{\numberline {15}Bibliography}{124}{section.15}
+\contentsline {section}{References}{124}{section.15}
