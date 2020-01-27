@@ -1024,11 +1024,8 @@ Bibliography
 
 .. [KEN-1938p] Kendall M.G. (1938), *A New Measure of Rank Correlation*. Biometrica 30:81–93
 
-
-.. only:: html
-
-    Footnotes
-    ---------
+Footnotes
+---------
 
 .. [9] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file *graffiti07.xml* (XMCDA-2.0 Format) in the *examples/Graffiti* directory of the Digraph3 ressources.       
 
