@@ -1859,6 +1859,7 @@
 <span class="sd">    </span>
 <span class="sd">    Generator arguments:</span>
 <span class="sd">        * numberOf Actions := 20 (default)</span>
+<span class="sd">        * shortNamePrefix := &#39;a&#39; (default)</span>
 <span class="sd">        * number of Criteria := 13 (default)</span>
 <span class="sd">        * weightDistribution := &#39;equiobjectives&#39; (default)</span>
 <span class="sd">                              | &#39;equisignificant&#39; (weights set all to 1)</span>
@@ -1951,16 +1952,16 @@
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>\
-                 <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
-                 <span class="n">IntegerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">OrdinalScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
-                 <span class="n">NegativeWeights</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">negativeWeightProbability</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>\
-                 <span class="n">commonScale</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonMode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">shortNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>\
+                 <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span><span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                 <span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">OrdinalScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+                 <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">negativeWeightProbability</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>\
+                 <span class="n">commonScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">commonThresholds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">commonMode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>\
                  <span class="n">vetoProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>\
                  <span class="n">missingDataProbability</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>\
                  <span class="n">BigData</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
-                 <span class="n">seed</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
+                 <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         
         <span class="c1"># naming</span>
@@ -1988,7 +1989,7 @@
             <span class="k">if</span> <span class="n">BigData</span><span class="p">:</span>
                 <span class="n">actions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">actionKey</span><span class="p">,</span><span class="s1">&#39;generators&#39;</span><span class="p">:</span> <span class="p">{}}</span>
             <span class="k">else</span><span class="p">:</span>      
-                <span class="n">actions</span><span class="p">[</span><span class="n">actionKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span> <span class="n">actionKey</span><span class="p">,</span>
+                <span class="n">actions</span><span class="p">[</span><span class="n">actionKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">shortNamePrefix</span><span class="p">,</span> <span class="n">actionKey</span><span class="p">),</span>
                         <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;action </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">actionKey</span><span class="p">,</span>
                         <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="s1">&#39;3 Objectives&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;generators&#39;</span><span class="p">:</span> <span class="p">{}}</span>

@@ -4895,7 +4895,7 @@ Copyright (C) 2015-2019  Raymond Bisdorff</p>
 </div></blockquote>
 <dl class="class">
 <dt id="randomPerfTabs.Random3ObjectivesPerformanceTableau">
-<em class="property">class </em><code class="sig-prename descclassname">randomPerfTabs.</code><code class="sig-name descname">Random3ObjectivesPerformanceTableau</code><span class="sig-paren">(</span><em class="sig-param">numberOfActions=20</em>, <em class="sig-param">numberOfCriteria=13</em>, <em class="sig-param">weightDistribution='equiobjectives'</em>, <em class="sig-param">weightScale=None</em>, <em class="sig-param">IntegerWeights=True</em>, <em class="sig-param">OrdinalScales=False</em>, <em class="sig-param">NegativeWeights=False</em>, <em class="sig-param">negativeWeightProbability=0.0</em>, <em class="sig-param">commonScale=None</em>, <em class="sig-param">commonThresholds=None</em>, <em class="sig-param">commonMode=None</em>, <em class="sig-param">valueDigits=2</em>, <em class="sig-param">vetoProbability=0.5</em>, <em class="sig-param">missingDataProbability=0.05</em>, <em class="sig-param">BigData=False</em>, <em class="sig-param">seed=None</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#Random3ObjectivesPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">randomPerfTabs.</code><code class="sig-name descname">Random3ObjectivesPerformanceTableau</code><span class="sig-paren">(</span><em class="sig-param">numberOfActions=20</em>, <em class="sig-param">shortNamePrefix='a'</em>, <em class="sig-param">numberOfCriteria=13</em>, <em class="sig-param">weightDistribution='equiobjectives'</em>, <em class="sig-param">weightScale=None</em>, <em class="sig-param">IntegerWeights=True</em>, <em class="sig-param">OrdinalScales=False</em>, <em class="sig-param">NegativeWeights=False</em>, <em class="sig-param">negativeWeightProbability=0.0</em>, <em class="sig-param">commonScale=None</em>, <em class="sig-param">commonThresholds=None</em>, <em class="sig-param">commonMode=None</em>, <em class="sig-param">valueDigits=2</em>, <em class="sig-param">vetoProbability=0.5</em>, <em class="sig-param">missingDataProbability=0.05</em>, <em class="sig-param">BigData=False</em>, <em class="sig-param">seed=None</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#Random3ObjectivesPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specialization of the <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class 
 for 3 objectives: <em>Eco</em>, <em>Soc</em> and <em>Env</em>. Each decision action
 is qualified randomly as weak (-), fair (~) or good (+)
@@ -4903,6 +4903,7 @@ on each of the three objectives.</p>
 <dl>
 <dt>Generator arguments:</dt><dd><ul>
 <li><p>numberOf Actions := 20 (default)</p></li>
+<li><p>shortNamePrefix := ‘a’ (default)</p></li>
 <li><p>number of Criteria := 13 (default)</p></li>
 <li><dl>
 <dt>weightDistribution := ‘equiobjectives’ (default)</dt><dd><div class="line-block">
@@ -5557,14 +5558,32 @@ temporary multiple criteria based dissimilarity graphs.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="outrankingDigraphs.NewRobustOutrankingDigraph">
-<em class="property">class </em><code class="sig-prename descclassname">outrankingDigraphs.</code><code class="sig-name descname">NewRobustOutrankingDigraph</code><span class="sig-paren">(</span><em class="sig-param">filePerfTab=None</em>, <em class="sig-param">Debug=False</em>, <em class="sig-param">hasNoVeto=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#NewRobustOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.NewRobustOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<dt id="outrankingDigraphs.OldRobustOutrankingDigraph">
+<em class="property">class </em><code class="sig-prename descclassname">outrankingDigraphs.</code><code class="sig-name descname">OldRobustOutrankingDigraph</code><span class="sig-paren">(</span><em class="sig-param">filePerfTab=None</em>, <em class="sig-param">Debug=False</em>, <em class="sig-param">hasNoVeto=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OldRobustOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OldRobustOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Parameters:</dt><dd><p>performanceTableau (fileName of valid py code)</p>
 </dd>
 </dl>
 <p>Specialization of the general OutrankingDigraph class for 
-new robustness anaylsis.</p>
+robustness anaylsis.</p>
+<dl class="method">
+<dt id="outrankingDigraphs.OldRobustOutrankingDigraph.saveAMPLDataFile">
+<code class="sig-name descname">saveAMPLDataFile</code><span class="sig-paren">(</span><em class="sig-param">name='temp'</em>, <em class="sig-param">Unique=False</em>, <em class="sig-param">Comments=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OldRobustOutrankingDigraph.saveAMPLDataFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OldRobustOutrankingDigraph.saveAMPLDataFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>save the ampl reverse data for cplex</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="outrankingDigraphs.OldRobustOutrankingDigraph.saveXMLRubisOutrankingDigraph">
+<code class="sig-name descname">saveXMLRubisOutrankingDigraph</code><span class="sig-paren">(</span><em class="sig-param">name='temp'</em>, <em class="sig-param">category='Rubis outranking robustness digraph'</em>, <em class="sig-param">subcategory='Choice recommendation'</em>, <em class="sig-param">author='digraphs Module (RB)'</em>, <em class="sig-param">reference='saved from Python'</em>, <em class="sig-param">comment=True</em>, <em class="sig-param">servingD3=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OldRobustOutrankingDigraph.saveXMLRubisOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OldRobustOutrankingDigraph.saveXMLRubisOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>save complete robust Rubis problem and result in XML format with unicode encoding.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="outrankingDigraphs.OldRobustOutrankingDigraph.showRelationTable">
+<code class="sig-name descname">showRelationTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OldRobustOutrankingDigraph.showRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OldRobustOutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>specialisation for integer values</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -5870,7 +5889,7 @@ in html format</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.showRelationTable">
-<code class="sig-name descname">showRelationTable</code><span class="sig-paren">(</span><em class="sig-param">IntegerValues=False</em>, <em class="sig-param">actionsSubset=None</em>, <em class="sig-param">Sorted=True</em>, <em class="sig-param">hasLPDDenotation=False</em>, <em class="sig-param">hasLatexFormat=False</em>, <em class="sig-param">hasIntegerValuation=False</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">ReflexiveTerms=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.showRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showRelationTable</code><span class="sig-paren">(</span><em class="sig-param">IntegerValues=False</em>, <em class="sig-param">actionsSubset=None</em>, <em class="sig-param">Sorted=True</em>, <em class="sig-param">hasLPDDenotation=False</em>, <em class="sig-param">hasStabilityDenotation=False</em>, <em class="sig-param">hasLatexFormat=False</em>, <em class="sig-param">hasIntegerValuation=False</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">ReflexiveTerms=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.showRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>prints the relation valuation in actions X actions table format.</p>
 </dd></dl>
 
@@ -5935,25 +5954,7 @@ Digraphs from random performance tableaux.</p>
 </dd>
 </dl>
 <p>Specialization of the general OutrankingDigraph class for 
-robustness anaylsis.</p>
-<dl class="method">
-<dt id="outrankingDigraphs.RobustOutrankingDigraph.saveAMPLDataFile">
-<code class="sig-name descname">saveAMPLDataFile</code><span class="sig-paren">(</span><em class="sig-param">name='temp'</em>, <em class="sig-param">Unique=False</em>, <em class="sig-param">Comments=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#RobustOutrankingDigraph.saveAMPLDataFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.RobustOutrankingDigraph.saveAMPLDataFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>save the ampl reverse data for cplex</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.RobustOutrankingDigraph.saveXMLRubisOutrankingDigraph">
-<code class="sig-name descname">saveXMLRubisOutrankingDigraph</code><span class="sig-paren">(</span><em class="sig-param">name='temp'</em>, <em class="sig-param">category='Rubis outranking robustness digraph'</em>, <em class="sig-param">subcategory='Choice recommendation'</em>, <em class="sig-param">author='digraphs Module (RB)'</em>, <em class="sig-param">reference='saved from Python'</em>, <em class="sig-param">comment=True</em>, <em class="sig-param">servingD3=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#RobustOutrankingDigraph.saveXMLRubisOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.RobustOutrankingDigraph.saveXMLRubisOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>save complete robust Rubis problem and result in XML format with unicode encoding.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="outrankingDigraphs.RobustOutrankingDigraph.showRelationTable">
-<code class="sig-name descname">showRelationTable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#RobustOutrankingDigraph.showRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.RobustOutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
-<dd><p>specialisation for integer values</p>
-</dd></dl>
-
+new robustness anaylsis.</p>
 </dd></dl>
 
 <dl class="class">

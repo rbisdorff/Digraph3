@@ -532,7 +532,7 @@ def testCriterionRelationTable():
     g = Electre3OutrankingDigraph(t)
     for c in g.criteria:
         g.showCriterionRelationTable(c)
-    ## gr = RobustOutrankingDigraph(t)
+    ## gr = OldRobustOutrankingDigraph(t)
     ## gr.showRelationTable()
     ## go = BipolarOutrankingDigraph(t)
     for x in g.actions:
@@ -547,7 +547,7 @@ def testAMPLDataFileGeneration():
     t = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),IntegerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
     t.saveXMCDA('temp1',servingD3=False)
     #t = XMCDAPerformanceTableau('temp1')
-    gr = RobustOutrankingDigraph(t)
+    gr = OldRobustOutrankingDigraph(t)
     gr.saveAMPLDataFile(Unique=True,Comments=True)
     #gr.showCriteria()
     gr.showRelationTable()
@@ -666,7 +666,7 @@ def testEquiSignificanceMajorityOutrankingDigraph():
     g = EquiSignificanceMajorityOutrankingDigraph(t)
     print(g.computeWeightPreorder())
     g.showRelationTable()
-    gr = NewRobustOutrankingDigraph(t)
+    gr = RobustOutrankingDigraph(t)
     gr.showRelationTable()
 
 def testStringIOXMCDA2Encoding():

@@ -1007,6 +1007,95 @@ For concluding, it is worthwhile noticing again that it is the *neutral* value o
 
 Back to :ref:`Content Table <Pearls-Tutorial-label>`
 
+.. _Stable-Outranking-Tutorial-label:
+
+On stable outrankings with criteria of ordinal significance
+-----------------------------------------------------------
+
+Ordinal criteria significance
+.............................
+
+The required cardinal significance weights of the performance criteria represent the *Achilles*' heel of the outranking approach. Rarely will indeed a decision maker be cognitively competent for suggesting precise decimal-valued criteria significance weights. More often, the decision problem will involve equally import decision objectives with equi-significant criteria. A random example of such a decision problem may be generated with the :py:class:`randPerfTabs.Random3ObjectivesPerformanceTableau` class.
+
+.. code-block:: pycon
+   :linenos:
+
+>>> from outrankingDigraphs import *
+>>> t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
+...                                 numberOfCriteria=7,seed=102)
+>>> t
+*------- PerformanceTableau instance description ------*
+Instance class   : Random3ObjectivesPerformanceTableau
+Seed             : 102
+Instance name    : random3ObjectivesPerfTab
+# Actions        : 7
+# Objectives     : 3
+# Criteria       : 7
+Attributes       : ['name', 'valueDigits', 'BigData', 'OrdinalScales',
+                    'missingDataProbability', 'negativeWeightProbability',
+		    'randomSeed', 'sumWeights', 'valuationPrecision',
+		    'commonScale', 'objectiveSupportingTypes', 'actions',
+		    'objectives', 'criteriaWeightMode', 'criteria',
+		    'evaluation', 'weightPreorder']
+>>> t.showObjectives()
+*------ show objectives -------"
+Eco: Economical aspect
+   ec1 criterion of objective Eco 8
+   ec4 criterion of objective Eco 8
+   ec8 criterion of objective Eco 8
+  Total weight: 24.00 (3 criteria)
+Soc: Societal aspect
+   so2 criterion of objective Soc 12
+   so7 criterion of objective Soc 12
+  Total weight: 24.00 (2 criteria)
+Env: Environmental aspect
+   en3 criterion of objective Env 6
+   en5 criterion of objective Env 6
+   en6 criterion of objective Env 6
+   en9 criterion of objective Env 6
+  Total weight: 24.00 (4 criteria)
+
+We face seven decision alternatives that are assessed with respect to three equially important decision objectives concerning: first, an economical aspect with a coalition of three performance criteria of significance weight 8, secondly, a societal aspect with a coalition of two performance criteria of significance weight 12, and thirdly, an environmental aspect with a coalition four performance criteria of significance weight 6.
+
+The question we tackle is the following: How *dependent* on the actual values of the significance weights appears the corresponding bipolar-valued outranking digraph ? In the previous section, we assumed that the criteria significance weights were random variables. Here, we shall assume that we know for sure only the preordering of the significance weights. In our example we see indeed three increasing equivalence classes :
+
+>>> t.weightPreorder
+[['en3', 'en5', 'en6', 'en9'], ['ec1', 'ec4', 'ec8'], ['so2', 'so7']]
+
+Qualifying the stability of outranking situations
+.................................................
+
+Let us construct the corresponding bipolar outranking digraph.
+
+>>> g = BipolarOutrankingDigraph(t,Normalized=True,hasNoVeto=True)
+>>> g.showRelationTable()
+* ---- Relation Table -----
+  S   |  'a1'   'a2'   'a3'   'a4'   'a5'   'a6'   'a7'   
+------|------------------------------------------------
+ 'a1' | +1.00  -0.42  +0.00  -0.69  +0.39  +0.11  -0.06  
+ 'a2' | +0.58  +1.00  +0.83  +0.33  +0.58  +0.58  +0.58  
+ 'a3' | +0.25  -0.33  +1.00  +0.00  +0.50  +0.06  +0.25  
+ 'a4' | +0.78  +0.00  +0.61  +1.00  +1.00  +1.00  +0.67  
+ 'a5' | -0.11  -0.50  -0.25  -0.89  +1.00  +0.11  -0.14  
+ 'a6' | +0.22  -0.42  +0.00  -0.36  +0.17  +1.00  -0.11  
+ 'a7' | +0.22  -0.50  +0.17  -0.06  +0.78  +0.42  +1.00  
+
+Now, we know for sure that *unanimous* outranking situations are completely independent of the significance weights (code value: **4**). Similarly, all outranking situations that are supported by a *majority* significance in *each* criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition (code value: **3**). But we are also able to test (see [BIS-2014p]_) if an outrankiong situation is independent of all the potential significance weights that respect the given *preordering* of the weights (code value: **2**). Mind that there for sure are always outranking situatons that are dependent on the very values we allocate to the criteria significances (code value: **1**). Indeterminate situations will eventually be coded with value: **0**.
+
+We may qualify in such a way the above shown outranking situations.
+
+>>> nrg = RobustOutrankingDigraph(t)
+* ---- Relation Table -----
+  S   | 'a1' 'a2' 'a3' 'a4' 'a5' 'a6' 'a7'   
+------|-----------------------------------
+ 'a1' |   +4  -2    0   -3   +2   +2   -1  
+ 'a2' |   +2  +4   +3   +2   +2   +2   +2  
+ 'a3' |   +2  -2   +4   +0   +2   +2   +1  
+ 'a4' |   +3  -1   +3   +4   +4   +4   +2  
+ 'a5' |   -2  -2   -2   -3   +4   +2   -2  
+ 'a6' |   +2  -2   +1   -2   +2   +4   -2  
+ 'a7' |   +2  -2   +1   -1   +3   +2   +4  
+
 Footnotes
 ---------
 
@@ -1022,6 +1111,8 @@ Footnotes
 Bibliography
 ------------
 
+.. [BIS-2014p] Bisdorff R., Meyer P. and Veneziano Th. (2014). Elicitation of criteria weights maximising the stability of pairwise outranking statements. Journal of Multi-Criteria Decision Analysis (Wiley) 21: 113-124 (downloadable preprint `PDF file 431.4 Kb <_static/JMCDArticle.pdf>`_).
+   
 .. [BIS-2013p] Bisdorff R. (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (downloadable preprint `PDF file 403.5 Kb <_static/MCDA-10-0059-PrePeerReview.pdf>`_).
 
 .. [BIS-2012p] Bisdorff R. (2012). "On measuring and testing the ordinal correlation between bipolar outranking relations". In Proceedings of DA2PL’2012 *From Multiple Criteria Decision Aid to Preference Learning*, University of Mons 91-100. (downloadable preliminary version `PDF file 408.5 kB <_static/DA2PL-RBisdorffMons.pdf>`_ ).

@@ -48,12 +48,12 @@ def testUnanimousOutrankingDigraph():
 def testRobustOutrankingDigraph():
     print('==>> Testing Robust Outranking Digraph instantiation')
     t = RandomCBPerformanceTableau(NegativeWeights=False,seed=1)
-    g = RobustOutrankingDigraph(t)
+    g = OldRobustOutrankingDigraph(t)
     g.showPreKernels()
     g.showGoodChoices()
     g.showBadChoices()
     t1 = RandomCBPerformanceTableau(NegativeWeights=True,seed=1)
-    g1 = RobustOutrankingDigraph(t1)
+    g1 = OldRobustOutrankingDigraph(t1)
     g1.showPreKernels()
     g1.showGoodChoices()
     g1.showBadChoices()
@@ -167,7 +167,7 @@ def testRobustoutranking():
     gu.saveXMLRubisOutrankingDigraph('testu',servingD3=False)
     gc = BipolarOutrankingDigraph(t)
     gc.saveXMLRubisOutrankingDigraph('testc',servingD3=False)
-    gr = RobustOutrankingDigraph(t)
+    gr = OldRobustOutrankingDigraph(t)
     gr.saveXMLRubisOutrankingDigraph('testr',servingD3=False)
 
 def testPairwiseComparisons():
@@ -219,7 +219,7 @@ def testXMCDARubisRecommendation():
     #t = RandomPerformanceTableau(numberOfActions=10,numberOfCriteria=20,commonMode=('uniform',None,None))
     t.saveXMCDA(servingD3=False)
     #t.showAll()
-    #g = RobustOutrankingDigraph(t)
+    #g = OldRobustOutrankingDigraph(t)
     #g.saveXMCDAOutrankingDigraph('testXMCDAOutrankingDigraph',servingD3=False,variant='robustness',category='Robust Rubis',relationName='S_rob')
     g = BipolarOutrankingDigraph(t)
     g.saveXMCDAOutrankingDigraph('testXMCDAOutrankingDigraph',servingD3=False,variant='standard',category='Rubis',relationName='Stilde')
@@ -325,7 +325,7 @@ def testXMCDA2RobustChoiceRecommendation():
                                             IntegerWeights=True,
                                             commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],
                                             commonMode=['beta',0.5,None])
-    g = RobustOutrankingDigraph(t)
+    g = OldRobustOutrankingDigraph(t)
     g.saveXMCDA2RubisChoiceRecommendation()
 
 def testBipolarVetos():
@@ -364,7 +364,7 @@ def testEquiSignificanceMajorityOutrankingDigraph():
     g = EquiSignificanceMajorityOutrankingDigraph(t)
     print(g.computeWeightPreorder())
     g.showRelationTable()
-    gr = NewRobustOutrankingDigraph(t)
+    gr = RobustOutrankingDigraph(t)
     gr.showRelationTable()
     
 def testStringIOXMCDA2Encoding():

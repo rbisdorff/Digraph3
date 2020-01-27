@@ -1618,6 +1618,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                           actionsSubset= None,
                           Sorted=True,
                           hasLPDDenotation=False,
+                          hasStabilityDenotation=False,
                           hasLatexFormat=False,
                           hasIntegerValuation=False,
                           relation=None,
@@ -1632,6 +1633,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 gnv.recodeValuation(self.valuationdomain['min'],self.valuationdomain['max'])
             except:
                 hasLPDDenotation = False
+        if hasStabilityDenotation:
+            nrg = RobustOutrankingDigraph(self)
+            #except:
+            #    hasStabilityDenotation = False
             
         if actionsSubset == None:
             actions = self.actions
@@ -1642,7 +1647,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             relation = self.relation
             
         print('* ---- Relation Table -----\n', end=' ')
-        print(' S   | ', end=' ')
+        print(' S/()  | ', end=' ')
         #actions = [x for x in actions]
         actionsList = []
         for x in actions:
@@ -1652,7 +1657,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 except:
                     actionsList += [(actions[x]['name'],x)]
             else:
-                actionsList += [(str(x),x)]
+                try:
+                    actionsList += [(actions[x]['shortName'],x)]
+                except:
+                    actionsList += [(str(x),x)]
         if Sorted:
             actionsList.sort()
         #print actionsList
@@ -1664,7 +1672,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             hasIntegerValuation = IntegerValues
         
         for x in actionsList:
-            print("'"+x[0]+"',  ", end=' ')
+            print("'"+x[0]+"'  ", end=' ')
         print('\n-----|------------------------------------------------------------')
         for x in actionsList:
             if hasLatexFormat:
@@ -1672,13 +1680,21 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             else:
                 print("'"+x[0]+"' |  ", end=' ')
             for y in actionsList:
-                if x == y and not ReflexiveTerms:
-                    if hasLPDDenotation:
-                        print(' - ', end=' ')
-                    elif hasLatexFormat:
-                        print('$-$ &', end=' ')
+                if x == y:
+                    if not ReflexiveTerms:
+                        if hasLPDDenotation:
+                            print('  -  ', end=' ')
+                        elif hasLatexFormat:
+                            print('$-$ &', end=' ')
+                        else:
+                            print('  -  ', end=' ')
                     else:
-                        print(' - ', end=' ')
+                        if hasLPDDenotation:
+                            print(' +4 ', end=' ')
+                        elif hasLatexFormat:
+                            print('$+4$ &', end=' ')
+                        else:
+                            print(' 1.00 ', end=' ')
                 else:    
                     if hasIntegerValuation:
                         if hasLPDDenotation:
@@ -1704,6 +1720,14 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 for y in actionsList:
                     print('(%+d,%+d)' % (largePerformanceDifferencesCount[x[1]][y[1]]['positive'],\
                                           largePerformanceDifferencesCount[x[1]][y[1]]['negative']), end=' ')
+                print()
+            elif hasStabilityDenotation:
+                print("     | ", end=' ')
+                for y in actionsList:
+                    if x == y and hasStabilityDenotation:
+                        print(' (+4) ', end=' ')
+                    else:
+                        print('  (%+d) ' % int(nrg.relation[x[1]][y[1]]), end=' ')
                 print()
             
                 
@@ -7463,7 +7487,7 @@ class UnanimousOutrankingDigraph(OutrankingDigraph):
         else:
             return Decimal("1")
 
-class NewRobustOutrankingDigraph(BipolarOutrankingDigraph):
+class RobustOutrankingDigraph(BipolarOutrankingDigraph):
     """
     Parameters:
         performanceTableau (fileName of valid py code)
@@ -7575,7 +7599,7 @@ class NewRobustOutrankingDigraph(BipolarOutrankingDigraph):
                     
         return relation
 
-class RobustOutrankingDigraph(BipolarOutrankingDigraph):
+class OldRobustOutrankingDigraph(BipolarOutrankingDigraph):
     """
     Parameters:
         performanceTableau (fileName of valid py code)

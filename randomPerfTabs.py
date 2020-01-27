@@ -1819,6 +1819,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
     
     Generator arguments:
         * numberOf Actions := 20 (default)
+        * shortNamePrefix := 'a' (default)
         * number of Criteria := 13 (default)
         * weightDistribution := 'equiobjectives' (default)
                               | 'equisignificant' (weights set all to 1)
@@ -1911,16 +1912,16 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         
     """
 
-    def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\
-                 weightDistribution = 'equiobjectives', weightScale=None,\
-                 IntegerWeights = True, OrdinalScales=False,\
-                 NegativeWeights = False, negativeWeightProbability = 0.0,\
-                 commonScale = None, commonThresholds = None, commonMode = None,\
+    def __init__(self,numberOfActions=20,shortNamePrefix='a',numberOfCriteria=13,\
+                 weightDistribution='equiobjectives',weightScale=None,\
+                 IntegerWeights=True,OrdinalScales=False,\
+                 NegativeWeights=False,negativeWeightProbability=0.0,\
+                 commonScale=None,commonThresholds=None,commonMode=None,\
                  valueDigits=2,\
                  vetoProbability=0.5,\
                  missingDataProbability = 0.05,\
                  BigData=False,\
-                 seed= None,\
+                 seed=None,\
                  Debug=False):
         
         # naming
@@ -1948,7 +1949,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             if BigData:
                 actions[i] = {'name': actionKey,'generators': {}}
             else:      
-                actions[actionKey] = {'shortName': actionKey,
+                actions[actionKey] = {'shortName': '%s%s' % (shortNamePrefix, actionKey),
                         'name': 'action %s' % actionKey,
                         'comment': '3 Objectives',
                         'generators': {}}
