@@ -61,20 +61,20 @@
 </dl>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#coping-with-missing-data-and-indeterminateness" id="id21">Coping with missing data and indeterminateness</a></p></li>
-<li><p><a class="reference internal" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" id="id22">Ordinal correlation equals bipolar-valued relational equivalence</a></p></li>
-<li><p><a class="reference internal" href="#bipolar-valued-kernel-membership-characteristic-vectors" id="id23">Bipolar-valued kernel membership characteristic vectors</a></p></li>
-<li><p><a class="reference internal" href="#on-confident-outrankings-with-uncertain-criteria-significances" id="id24">On confident outrankings with uncertain criteria significances</a></p></li>
+<li><p><a class="reference internal" href="#coping-with-missing-data-and-indeterminateness" id="id20">Coping with missing data and indeterminateness</a></p></li>
+<li><p><a class="reference internal" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" id="id21">Ordinal correlation equals bipolar-valued relational equivalence</a></p></li>
+<li><p><a class="reference internal" href="#bipolar-valued-kernel-membership-characteristic-vectors" id="id22">Bipolar-valued kernel membership characteristic vectors</a></p></li>
+<li><p><a class="reference internal" href="#on-confident-outrankings-with-uncertain-criteria-significances" id="id23">On confident outrankings with uncertain criteria significances</a></p></li>
+<li><p><a class="reference internal" href="#footnotes" id="id24">Footnotes</a></p></li>
 <li><p><a class="reference internal" href="#bibliography" id="id25">Bibliography</a></p></li>
-<li><p><a class="reference internal" href="#footnotes" id="id26">Footnotes</a></p></li>
 </ul>
 </div>
 <div class="section" id="coping-with-missing-data-and-indeterminateness">
-<span id="pearls-tutorial-label"></span><h2><a class="toc-backref" href="#id21">Coping with missing data and indeterminateness</a><a class="headerlink" href="#coping-with-missing-data-and-indeterminateness" title="Permalink to this headline">¶</a></h2>
+<span id="pearls-tutorial-label"></span><h2><a class="toc-backref" href="#id20">Coping with missing data and indeterminateness</a><a class="headerlink" href="#coping-with-missing-data-and-indeterminateness" title="Permalink to this headline">¶</a></h2>
 <p>In a stubborn keeping with a two-valued logic, where every argument can only be true or false, there is no place for efficiently taking into account missing data or logical indeterminateness. These cases are seen as problematic and, at best are simply ignored. Worst, in modern data science, missing data get often replaced with <em>fictive</em> values, potentially falsifying hence all subsequent computations.</p>
 <p>In social choice problems like elections, <em>abstentions</em> are, however, frequently observed and represent a social expression that may be significant for revealing non represented social preferences.</p>
 <p>In marketing studies, interviewees will not always respond to all the submitted questions. Again, such abstentions do sometimes contain nevertheless valid information concerning consumer preferences.</p>
-<p>Let us take an example performance tableau from a Movie magazine’s evaluation of movies that could be seen in town <a class="footnote-reference brackets" href="#id13" id="id1">9</a> (see <a class="reference internal" href="#graffiti07-1"><span class="std std-numref">Fig. 67</span></a>).</p>
+<p>Let us take an example performance tableau from a Movie magazine’s evaluation of movies that could be seen in town <a class="reference internal" href="#p" id="id1"><span>[1p]</span></a> (see <a class="reference internal" href="#graffiti07-1"><span class="std std-numref">Fig. 67</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
@@ -137,9 +137,9 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPairwiseComparison</span><span class="p">(</span><span class="s1">&#39;mv_PE&#39;</span><span class="p">,</span><span class="s1">&#39;mv_NP&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure align-center" id="id17">
+<div class="figure align-center" id="id16">
 <a class="reference internal image-reference" href="_images/graffiti07_6.png"><img alt="Comparing mv_PE and mv_NP" src="_images/graffiti07_6.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 71 </span><span class="caption-text">Indeterminate pairwise comparison example</span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 71 </span><span class="caption-text">Indeterminate pairwise comparison example</span><a class="headerlink" href="#id16" title="Permalink to this image">¶</a></p>
 </div>
 <p>Only eight, out of the fifteen critics, have seen both movies and the positive opinions do neatly balance the negative ones. A global statement that <em>mv_PE</em> is ‘<em>at least as well rated as</em>’ <em>mv_NP</em>  may in this case hence <strong>neither be validated, nor invalidated</strong>; a preferential situation that cannot be modelled with any scoring approach.</p>
 <p>It is fair, however, to eventually mention here that the <em>Graffiti</em> magazine’s average scoring method is actually showing a very similar ranking. Indeed, average scores usually confirm well all evident pairwise comparisons, yet <em>enforce</em> comparability for all less evident ones.</p>
@@ -147,7 +147,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <a class="reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 68</span></a> 3rd row. How may we compute these ordinal correlation indexes ?</p>
 </div>
 <div class="section" id="ordinal-correlation-equals-bipolar-valued-relational-equivalence">
-<span id="ordinalcorrelation-tutorial-label"></span><h2><a class="toc-backref" href="#id22">Ordinal correlation equals bipolar-valued relational equivalence</a><a class="headerlink" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" title="Permalink to this headline">¶</a></h2>
+<span id="ordinalcorrelation-tutorial-label"></span><h2><a class="toc-backref" href="#id21">Ordinal correlation equals bipolar-valued relational equivalence</a><a class="headerlink" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="kendall-s-tau-index">
 <h3>Kendall’s <em>tau</em> index<a class="headerlink" href="#kendall-s-tau-index" title="Permalink to this headline">¶</a></h3>
 <p><em>M. G. Kendall</em> (<a class="reference internal" href="#ken-1938p" id="id2"><span>[KEN-1938p]</span></a>) defined his <em>ordinal correlation index</em> <strong>tau</strong> for linear orders of dimension <em>n</em> as a <em>balancing</em> of the number <em>#C</em> of correctly oriented pairs against the number <em>#I</em> of incorrectly oriented pairs. The total number of irreflexive pairs being <em>n(n-1)</em>, in the case of linear orders, <em>#C</em> + <em>#I</em> = <em>n(n-1)</em>.  Hence <em>tau</em> = (<em>#C</em> / <em>n(n-1)</em>) - (<em>#I</em> / <em>n(n-1)</em>). In case <em>#I</em> is zero, <em>tau</em> = +1 (all pairs are <em>equivalently oriented</em>); inversely, in case <em>C#</em> is zero, <em>tau</em> = -1 (all pairs are <em>differently oriented</em>).</p>
@@ -438,7 +438,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <p>The valued relational equivalence index gives us a further measure for studying how <strong>divergent</strong> appear the rating opinions expressed by the movie critics.</p>
 <a class="reference internal image-reference" href="_images/correlationTable.png"><img alt="Pairwise valued correlation of movie critics" class="align-center" src="_images/correlationTable.png" style="width: 600px;" /></a>
 <p>It is remarquable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes <em>r(x&lt;=&gt;y)</em> appear to be of low value, except the <em>diagonal</em> ones. These reflexive indexes <em>r(x&lt;=&gt;x)</em> would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score <em>d</em>, i.e. the <em>proportion</em> of pairs of movies each critic did evaluate. Critic <em>JPT</em> (the editor of the Graffiti magazine), for instance, evaluated all but one (<em>d</em> = 24*23/600 = 0.92), whereas critic <em>FG</em> evaluated only 10 movies among the 25 in discussion (<em>d</em> = 10*9/600 = 0.15).</p>
-<p>To get a picture of the actual divergence of rating opinions concerning <strong>jointly seen</strong> pairs of movies, we may develop a <em>Principal Component Analysis</em> (<a class="footnote-reference brackets" href="#id14" id="id5">10</a>) of the corresponding <em>tau</em> correlation matrix. The 3D plot of the first 3 principal axes is shown below.</p>
+<p>To get a picture of the actual divergence of rating opinions concerning <strong>jointly seen</strong> pairs of movies, we may develop a <em>Principal Component Analysis</em> (<a class="reference internal" href="#id13" id="id5"><span>[2p]</span></a>) of the corresponding <em>tau</em> correlation matrix. The 3D plot of the first 3 principal axes is shown below.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">export3DplotOfCriteriaCorrelation</span><span class="p">(</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -460,7 +460,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/symmetricPart.png"><img alt="symmetric part of graffiti07 digraph" class="align-center" src="_images/symmetricPart.png" style="width: 600px;" /></a>
-<p>Such a preordering of the movies may, for instance, be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeRankingByChoosing" title="digraphs.Digraph.computeRankingByChoosing"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.computeRankingByChoosing()</span></code></a> method, where we iteratively extract <em>dominant kernels</em> -best remaining choices- and <em>absorbent kernels</em> -worst remaining choices- (see the tutorial <a class="reference internal" href="tutorial.html#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>). We operate herefore on the asymmetric ‘<em>better rated than</em>’, i.e. the <em>codual</em> (<a class="footnote-reference brackets" href="#id15" id="id6">11</a>) of the ‘<em>at least as well rated as</em>’ opinions.</p>
+<p>Such a preordering of the movies may, for instance, be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeRankingByChoosing" title="digraphs.Digraph.computeRankingByChoosing"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.computeRankingByChoosing()</span></code></a> method, where we iteratively extract <em>dominant kernels</em> -best remaining choices- and <em>absorbent kernels</em> -worst remaining choices- (see the tutorial <a class="reference internal" href="tutorial.html#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>). We operate herefore on the asymmetric ‘<em>better rated than</em>’, i.e. the <em>codual</em> (<a class="reference internal" href="#id14" id="id6"><span>[3p]</span></a>) of the ‘<em>at least as well rated as</em>’ opinions.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -492,7 +492,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </div>
 </div>
 <div class="section" id="bipolar-valued-kernel-membership-characteristic-vectors">
-<span id="bipolar-valued-kernels-tutorial-label"></span><h2><a class="toc-backref" href="#id23">Bipolar-valued kernel membership characteristic vectors</a><a class="headerlink" href="#bipolar-valued-kernel-membership-characteristic-vectors" title="Permalink to this headline">¶</a></h2>
+<span id="bipolar-valued-kernels-tutorial-label"></span><h2><a class="toc-backref" href="#id22">Bipolar-valued kernel membership characteristic vectors</a><a class="headerlink" href="#bipolar-valued-kernel-membership-characteristic-vectors" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="claude-berge-s-kernel-equation-systems">
 <h3><em>Claude Berge</em>’s Kernel Equation Systems<a class="headerlink" href="#claude-berge-s-kernel-equation-systems" title="Permalink to this headline">¶</a></h3>
 <p>Let <em>G(X,R)</em> be a crisp irreflexive digraph defined on a finite set <em>X</em> of nodes and where <em>R</em> is the corresponding {-1,+1}-valued adjacency matrix. Let <em>Y</em> be the {-1,+1}-valued membership characteristic (row) vector of a choice in <em>X</em>. When <em>Y</em> satisfies the following equation system</p>
@@ -689,9 +689,9 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="go"> ...      tableTitle=&#39;K1 restricted adjacency table&#39;)</span>
 </pre></div>
 </td></tr></table></div>
-<div class="figure align-center" id="id18">
+<div class="figure align-center" id="id17">
 <a class="reference internal image-reference" href="_images/k1restricted.png"><img alt="Kernel restricted adjacency table" src="_images/k1restricted.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 72 </span><span class="caption-text">Initial kernel [<em>a1</em>, <em>a2</em>, <em>a4</em>] restricted adjacency table</span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 72 </span><span class="caption-text">Initial kernel [<em>a1</em>, <em>a2</em>, <em>a4</em>] restricted adjacency table</span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
 </div>
 <p>We first notice that this initial prekernel is indeed only <em>weakly independent</em>: The outranking situation between <em>a4</em> and <em>a1</em> appears <em>indeterminate</em>. The corresponding initial prekernel membership characteristic vector may be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeKernelVector" title="digraphs.Digraph.computeKernelVector"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.computeKernelVector()</span></code></a> method.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -753,9 +753,9 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="go"> ...      tableTitle=&#39;K2 restricted adjacency table&#39;)</span>
 </pre></div>
 </td></tr></table></div>
-<div class="figure align-center" id="id19">
+<div class="figure align-center" id="id18">
 <a class="reference internal image-reference" href="_images/k2restricted.png"><img alt="Kernel restricted adjacency table" src="_images/k2restricted.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 73 </span><span class="caption-text">Terminal kernel [‘a3’,’a7’] restricted adjacency table</span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 73 </span><span class="caption-text">Terminal kernel [‘a3’,’a7’] restricted adjacency table</span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
 </div>
 <p>Again, we notice that this terminal prekernel is indeed only weakly independent. The corresponding bipolar-valued characteristic vector <em>Y2</em> may be computed as follws.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -801,9 +801,9 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </td></tr></table></div>
 <p>A unique stable bipolar-valued high and low fixpoint is attained at the third iteration with <em>a7</em> positively confirmed (about 75% criteria significance majority) as member of this terminal prekernel, whereas the membership of <em>a3</em> in this prekernel appears indeterminate. All the remaining nodes have <em>negative</em> membership characteristic values and are hence positively excluded from this prekernel.</p>
 <p>When we reconsider the graphviz drawing of this outranking digraph (see <a class="reference internal" href="tutorial.html#bestworstorientation"><span class="std std-numref">Fig. 48</span></a> in the tutorial ‘<a class="reference internal" href="tutorial.html#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>’),</p>
-<div class="figure align-center" id="id20">
+<div class="figure align-center" id="id19">
 <a class="reference internal image-reference" href="_images/bestWorstOrientation.png"><img alt="The random outranking digraph oriented by its initial and terminal prekernels" src="_images/bestWorstOrientation.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 74 </span><span class="caption-text">The strict outranking digraph oriented by the positive members of its initial and terminal prekernels</span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 74 </span><span class="caption-text">The strict outranking digraph oriented by the positive members of its initial and terminal prekernels</span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
 </div>
 <p>it becomes obvious why alternative <em>a1</em> is <strong>neither included nor excluded</strong> from the initial prekernel. Same observation is applicable to alternative <em>a3</em> which can <strong>neither be included nor excluded</strong> from the terminal prekernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent prekernel; the corresponding bipolar-valued membership characteristic vector being completely indeterminate (see for instance the tutorial ‘<a class="reference internal" href="tutorial.html#rubis-tutorial-label"><span class="std std-ref">Computing a best choice recommendation</span></a>’).</p>
 <p>To illustrate finally why sometimes we need to operate an <em>epistemic disjunctive fusion</em> of <strong>unequal</strong> stable low and high membership characteristics vectors (see Step 2.c.), let us consider, for instance, the following crisp 7-<em>cycle</em> graph.</p>
@@ -880,7 +880,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </div>
 </div>
 <div class="section" id="on-confident-outrankings-with-uncertain-criteria-significances">
-<span id="bipolar-valued-likelihood-tutorial-label"></span><h2><a class="toc-backref" href="#id24">On confident outrankings with uncertain criteria significances</a><a class="headerlink" href="#on-confident-outrankings-with-uncertain-criteria-significances" title="Permalink to this headline">¶</a></h2>
+<span id="bipolar-valued-likelihood-tutorial-label"></span><h2><a class="toc-backref" href="#id23">On confident outrankings with uncertain criteria significances</a><a class="headerlink" href="#on-confident-outrankings-with-uncertain-criteria-significances" title="Permalink to this headline">¶</a></h2>
 <p>When modelling preferences following the outranking approach, the signs of the majority margins do sharply distribute validation and invalidation of pairwise outranking situations. How can we be confident in the resulting outranking digraph, when we acknowledge the usual imprecise knowledge of criteria significance weights coupled with small majority margins?</p>
 <p>To answer this question, one usually requires <em>qualified</em> majority margins for confirming outranking situations. But how to choose such a qualifying majority level: two third, three fourth of the significances ?</p>
 <p>In this tutorial we propose to link the qualifying significance majority with a required alpha%-confidence level. We model therefore the significance weights as random variables following more or less widespread distributions around an average significance value that corresponds to the given deterministic weight. As the bipolar-valued random credibility of an outranking statement hence results from the simple sum of positive or negative independent random variables, we may apply the Central Limit Theorem (CLT) for computing the <em>bipolar likelihood</em> that the expected majority margin will indeed be positive, respectively negative.</p>
@@ -940,7 +940,7 @@ unclear whether, on criterion <em>j</em>, <em>x</em> is performing at least as g
 <p><strong>Example</strong></p>
 <p>Let <em>x</em> and <em>y</em> be evaluated wrt 7 equisignificant criteria; Four criteria positively support that <em>x</em> is <em>as least as good performing</em> than <em>y</em> and three criteria support that <em>x</em> is <em>not at least as good</em> performing than <em>y</em>. Suppose <em>E(Wj)</em> = <em>w</em> for <em>j</em> = 1,…,7 and <em>Wj</em> ~ Tr(0, <em>2w</em>, <em>w</em>) for <em>j</em> = 1,…7. The expected value of the global ‘<em>at least as good as</em>’ characteristic value becomes: <img class="math" src="_images/math/838c06c82a94bec464aacaf35562d277e2e30061.png" alt="E\big(\tilde{r}(x \geq y)\big)\, = \, 4w - 3w = w"/> with a variance <img class="math" src="_images/math/c4b56254c78dc04e2aa037c9842fa3e61abcaebe.png" alt="V\big(\tilde{r}(x \geq y)\big)\,=\, 7\frac{1}{6}w^2"/>.</p>
 <p>If <em>w</em> = 1, <img class="math" src="_images/math/7be2e88a141ca0302cd505ba09396a668081701c.png" alt="E\big(\tilde{r}(x \geq y)\big)\, = \, 1"/> and <img class="math" src="_images/math/28a6471759e27184bf0d55fbc5a50f874a8d2c6e.png" alt="sd\big(\tilde{r}(x \geq y)\big)\,=\, 1.08"/>. By the CLT, the bipolar likelihood of the <em>at least as good</em> performing situation becomes: <img class="math" src="_images/math/18895b30c09f5bcba9e0d7cf95bdebe66b262db6.png" alt="lh(x \geq y)\,=\, 0.66"/>, which corresponds to a global support of (0.66 + 1.0)/2 = 83% of the criteria significance weights.</p>
-<p>A <em>Monte Carlo</em> simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see <a class="reference internal" href="#simullikelihood"><span class="std std-numref">Fig. 77</span></a> realised with <em>gretl</em> <a class="footnote-reference brackets" href="#id16" id="id11">12</a> ).</p>
+<p>A <em>Monte Carlo</em> simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see <a class="reference internal" href="#simullikelihood"><span class="std std-numref">Fig. 77</span></a> realised with <em>gretl</em> <a class="reference internal" href="#id15" id="id11"><span>[4p]</span></a> ).</p>
 <div class="figure align-center" id="simullikelihood">
 <a class="reference internal image-reference" href="_images/simulLikelihood.png"><img alt="Distribution of random outranking characteristic value" src="_images/simulLikelihood.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 77 </span><span class="caption-text">Distribution of 10 000 random outranking characteristic values</span><a class="headerlink" href="#simullikelihood" title="Permalink to this image">¶</a></p>
@@ -1238,6 +1238,23 @@ confidence level <em>alpha</em> %, if</p>
 <p>Back to <a class="reference internal" href="#pearls-tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 </div>
 </div>
+<div class="section" id="footnotes">
+<h2><a class="toc-backref" href="#id24">Footnotes</a><a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
+<dl class="citation">
+<dt class="label" id="p"><span class="brackets"><a class="fn-backref" href="#id1">1p</a></span></dt>
+<dd><p><em>Graffiti</em>, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file <em>graffiti07.xml</em> (XMCDA-2.0 Format) in the <em>examples/Graffiti</em> directory of the Digraph3 ressources.</p>
+</dd>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id5">2p</a></span></dt>
+<dd><p>The 3D PCA plot method requires a running <em>R statistics software</em>  (<a class="reference external" href="https://www.r-project.org/">https://www.r-project.org/</a>) installation and the Calmat matrix calculator (see the calmat directory in the Digraph3 ressources)</p>
+</dd>
+<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id6">3p</a></span></dt>
+<dd><p>A <em>kernel</em> in a digraph <em>g</em> is a <em>clique</em> in the dual digraph <em>-g</em>.</p>
+</dd>
+<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id11">4p</a></span></dt>
+<dd><p>The Gnu Regression, Econometrics and Time-series Library <a class="reference external" href="http://gretl.sourceforge.net/">http://gretl.sourceforge.net/</a> .</p>
+</dd>
+</dl>
+</div>
 <div class="section" id="bibliography">
 <h2><a class="toc-backref" href="#id25">Bibliography</a><a class="headerlink" href="#bibliography" title="Permalink to this headline">¶</a></h2>
 <dl class="citation">
@@ -1261,23 +1278,6 @@ confidence level <em>alpha</em> %, if</p>
 </dd>
 <dt class="label" id="ken-1938p"><span class="brackets"><a class="fn-backref" href="#id2">KEN-1938p</a></span></dt>
 <dd><p>Kendall M.G. (1938), <em>A New Measure of Rank Correlation</em>. Biometrica 30:81–93</p>
-</dd>
-</dl>
-</div>
-<div class="section" id="footnotes">
-<h2><a class="toc-backref" href="#id26">Footnotes</a><a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
-<dl class="footnote brackets">
-<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id1">9</a></span></dt>
-<dd><p><em>Graffiti</em>, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file <em>graffiti07.xml</em> (XMCDA-2.0 Format) in the <em>examples/Graffiti</em> directory of the Digraph3 ressources.</p>
-</dd>
-<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id5">10</a></span></dt>
-<dd><p>The 3D PCA plot method requires a running <em>R statistics software</em>  (<a class="reference external" href="https://www.r-project.org/">https://www.r-project.org/</a>) installation and the Calmat matrix calculator (see the calmat directory in the Digraph3 ressources)</p>
-</dd>
-<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id6">11</a></span></dt>
-<dd><p>A <em>kernel</em> in a digraph <em>g</em> is a <em>clique</em> in the dual digraph <em>-g</em>.</p>
-</dd>
-<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id11">12</a></span></dt>
-<dd><p>The Gnu Regression, Econometrics and Time-series Library <a class="reference external" href="http://gretl.sourceforge.net/">http://gretl.sourceforge.net/</a> .</p>
 </dd>
 </dl>
 </div>
@@ -1312,8 +1312,8 @@ confidence level <em>alpha</em> %, if</p>
 <li><a class="reference internal" href="#confidence-level-of-outranking-situations">Confidence level of outranking situations</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#bibliography">Bibliography</a></li>
 <li><a class="reference internal" href="#footnotes">Footnotes</a></li>
+<li><a class="reference internal" href="#bibliography">Bibliography</a></li>
 </ul>
 </li>
 </ul>
