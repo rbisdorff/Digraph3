@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  27 JAN 2020 11:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  27 JAN 2020 12:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1962,22 +1962,22 @@ Package pdftex.def Info: bestDeterminedSpanningTree.png  used on input line 652
 (pdftex.def)             Requested size: 263.48267pt x 185.17293pt.
  [123] [124 <./bestDeterminedSpanningTree.png>]
 (./digraph3Tutorial.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 6592.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 6586.
  [125]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 6592.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 6586.
  (./digraph3Tutorial.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 6592.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 6592.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 6586.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 6586.
 
 Package rerunfilecheck Info: File `digraph3Tutorial.out' has not changed.
 (rerunfilecheck)             Checksum: 1C5152DC09950CA9760B9FBFAD9E6B17;18630.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 6592.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 6586.
  ) 
 Here is how much of TeX's memory you used:
- 14805 strings out of 494244
- 210314 string characters out of 6161779
- 451951 words of memory out of 5000000
- 17371 multiletter control sequences out of 15000+600000
+ 14799 strings out of 494244
+ 210191 string characters out of 6161779
+ 451807 words of memory out of 5000000
+ 17368 multiletter control sequences out of 15000+600000
  73985 words of font info for 102 fonts, out of 8000000 for 9000
  396 hyphenation exceptions out of 8191
  37i,12n,45p,1273b,538s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1998,10 +1998,10 @@ rw/helvetic/uhvbo8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic
 sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/urw/times/utmri8a.pfb>
-Output written on digraph3Tutorial.pdf (125 pages, 3504351 bytes).
+Output written on digraph3Tutorial.pdf (125 pages, 3503853 bytes).
 PDF statistics:
- 1714 PDF objects out of 1728 (max. 8388607)
- 1446 compressed objects within 15 object streams
- 380 named destinations out of 1000 (max. 500000)
+ 1710 PDF objects out of 1728 (max. 8388607)
+ 1442 compressed objects within 15 object streams
+ 377 named destinations out of 1000 (max. 500000)
  1079 words of extra memory for PDF output out of 10000 (max. 10000000)
 

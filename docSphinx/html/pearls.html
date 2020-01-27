@@ -65,6 +65,7 @@
 <li><p><a class="reference internal" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" id="id22">Ordinal correlation equals bipolar-valued relational equivalence</a></p></li>
 <li><p><a class="reference internal" href="#bipolar-valued-kernel-membership-characteristic-vectors" id="id23">Bipolar-valued kernel membership characteristic vectors</a></p></li>
 <li><p><a class="reference internal" href="#on-confident-outrankings-with-uncertain-criteria-significances" id="id24">On confident outrankings with uncertain criteria significances</a></p></li>
+<li><p><a class="reference internal" href="#bibliography" id="id25">Bibliography</a></p></li>
 </ul>
 </div>
 <div class="section" id="coping-with-missing-data-and-indeterminateness">
@@ -148,7 +149,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span id="ordinalcorrelation-tutorial-label"></span><h2><a class="toc-backref" href="#id22">Ordinal correlation equals bipolar-valued relational equivalence</a><a class="headerlink" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="kendall-s-tau-index">
 <h3>Kendall’s <em>tau</em> index<a class="headerlink" href="#kendall-s-tau-index" title="Permalink to this headline">¶</a></h3>
-<p><em>M. G. Kendall</em> (<a class="reference internal" href="tutorial.html#ken-1938" id="id2"><span>[KEN-1938]</span></a>) defined his <em>ordinal correlation index</em> <strong>tau</strong> for linear orders of dimension <em>n</em> as a <em>balancing</em> of the number <em>#C</em> of correctly oriented pairs against the number <em>#I</em> of incorrectly oriented pairs. The total number of irreflexive pairs being <em>n(n-1)</em>, in the case of linear orders, <em>#C</em> + <em>#I</em> = <em>n(n-1)</em>.  Hence <em>tau</em> = (<em>#C</em> / <em>n(n-1)</em>) - (<em>#I</em> / <em>n(n-1)</em>). In case <em>#I</em> is zero, <em>tau</em> = +1 (all pairs are <em>equivalently oriented</em>); inversely, in case <em>C#</em> is zero, <em>tau</em> = -1 (all pairs are <em>differently oriented</em>).</p>
+<p><em>M. G. Kendall</em> (<a class="reference internal" href="#ken-1938p" id="id2"><span>[KEN-1938p]</span></a>) defined his <em>ordinal correlation index</em> <strong>tau</strong> for linear orders of dimension <em>n</em> as a <em>balancing</em> of the number <em>#C</em> of correctly oriented pairs against the number <em>#I</em> of incorrectly oriented pairs. The total number of irreflexive pairs being <em>n(n-1)</em>, in the case of linear orders, <em>#C</em> + <em>#I</em> = <em>n(n-1)</em>.  Hence <em>tau</em> = (<em>#C</em> / <em>n(n-1)</em>) - (<em>#I</em> / <em>n(n-1)</em>). In case <em>#I</em> is zero, <em>tau</em> = +1 (all pairs are <em>equivalently oriented</em>); inversely, in case <em>C#</em> is zero, <em>tau</em> = -1 (all pairs are <em>differently oriented</em>).</p>
 <p>Noticing that (<em>#C</em> / <em>n(n-1)</em>) = 1 - (<em>#I</em> / <em>n(n-1)</em>), and recalling that the bipolar-valued negation is operated by changing the sign of the characteristic value, <em>Kendall</em>’s original <em>tau</em> definition implemented in fact the bipolar-valued <strong>negation</strong> of the <strong>non equivalence</strong> of two linear orders:</p>
 <blockquote>
 <div><p><em>tau</em> = 1 - 2(<em>#I</em> / <em>n(n-1)</em>) = -[2(<em>#I</em> / <em>n(n-1)</em>) - 1] = 2(<em>#C</em> / <em>n(n-1)</em>) - 1,</p>
@@ -275,7 +276,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </div>
 </div>
 <p><em>M(R1&lt;=&gt;R2)</em> is thus given by the sum of the non reflexive terms of the relation table of <em>eq</em>, the relation equivalence digraph computed above.</p>
-<p>In the crisp case, <em>M(R1&lt;=&gt;R2)</em>  is now normalized with the maximum number of possible irreflexive pairs, namely <em>n(n-1)</em>. In a generalized <em>r</em>-valued case, the maximal possible equivalence majority margin <em>M</em> corresponds to the sum <em>D</em> of the <strong>conjoint determinations</strong> of <em>(x R1 y)</em> and <em>(x R2 y)</em> (see <a class="reference internal" href="tutorial.html#bis-2012" id="id3"><span>[BIS-2012]</span></a>).</p>
+<p>In the crisp case, <em>M(R1&lt;=&gt;R2)</em>  is now normalized with the maximum number of possible irreflexive pairs, namely <em>n(n-1)</em>. In a generalized <em>r</em>-valued case, the maximal possible equivalence majority margin <em>M</em> corresponds to the sum <em>D</em> of the <strong>conjoint determinations</strong> of <em>(x R1 y)</em> and <em>(x R2 y)</em> (see <a class="reference internal" href="#bis-2012p" id="id3"><span>[BIS-2012p]</span></a>).</p>
 <blockquote>
 <div><p><em>D</em> = sum _ <em>(x,y)</em> min [ abs(<em>r(x R1 y)</em>, abs(<em>r(x R2 y)</em>) ].</p>
 </div></blockquote>
@@ -291,7 +292,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <li><p><em>d</em> = <em>D</em> / <em>n(n-1)</em>: The normalized determination of the corresponding pairwise relational equivalence statements, in fact de determinateness of the relational equivalence digraph.</p></li>
 </ul>
 </div></blockquote>
-<p>We have thus successfully <strong>out-factored</strong> the <em>determination</em> effect from the <em>correlation</em> effect. With completely determined relations, <em>tau(R1,R2)</em> = <em>r(R1&lt;=&gt;R2)</em>. By convention, we set the ordinal correlation with a <em>completely indeterminate</em> relation, i.e. when <em>D = 0</em>, to the <em>indeterminate</em> correlation value 0.0. With <em>uniformly</em> chosen random <em>r</em>-valued relations, the <strong>expected</strong> <em>tau</em> index is <strong>0.0</strong>, denoting in fact an <strong>indeterminate</strong> correlation. The corresponding expected normalized determination <em>d</em> is about 0.333 (see <a class="reference internal" href="tutorial.html#bis-2012" id="id4"><span>[BIS-2012]</span></a>).</p>
+<p>We have thus successfully <strong>out-factored</strong> the <em>determination</em> effect from the <em>correlation</em> effect. With completely determined relations, <em>tau(R1,R2)</em> = <em>r(R1&lt;=&gt;R2)</em>. By convention, we set the ordinal correlation with a <em>completely indeterminate</em> relation, i.e. when <em>D = 0</em>, to the <em>indeterminate</em> correlation value 0.0. With <em>uniformly</em> chosen random <em>r</em>-valued relations, the <strong>expected</strong> <em>tau</em> index is <strong>0.0</strong>, denoting in fact an <strong>indeterminate</strong> correlation. The corresponding expected normalized determination <em>d</em> is about 0.333 (see <a class="reference internal" href="#bis-2012p" id="id4"><span>[BIS-2012p]</span></a>).</p>
 <p>We may verify these relations with help of the corresponding equivalence digraph <em>eq</em> (see above).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -501,7 +502,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <blockquote>
 <div><p><img class="math" src="_images/math/2cd5546c623451e84aaa0949e3087444783fc812.png" alt="(Y \circ R)(x) \; = \; \max_{y \in X, x \neq y} \big ( \min(Y(x), R(x,y))\big)\;."/></p>
 </div></blockquote>
-<p>then <em>Y</em> characterises an <strong>initial</strong> <em>kernel</em> (<a class="reference internal" href="tutorial.html#ber-1958" id="id7"><span>[BER-1958]</span></a>).</p>
+<p>then <em>Y</em> characterises an <strong>initial</strong> <em>kernel</em> (<a class="reference internal" href="#ber-1958p" id="id7"><span>[BER-1958p]</span></a>).</p>
 <p>When transposing now the membership characteristic vector <em>Y</em> into a column vector <img class="math" src="_images/math/8b1f01d650a9d1c70855dabda95e6cb648f46859.png" alt="Y^t"/>, the following equation system</p>
 <blockquote>
 <div><p><img class="math" src="_images/math/aebcf0848834f2d96fa1815a8bf08619c7870feb.png" alt="R \circ Y^t \; = \; -Y^t\;,"/></p>
@@ -556,19 +557,19 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </pre></div>
 </td></tr></table></div>
 <p>It is easy to verify that the characteristic vector [-1, -1, +1] satisfies the initial kernel equation system; <em>a3</em> gives an <em>initial</em> kernel. Similarly, the characteristic vector [-1, +1, -1] verifies indeed the terminal kernel equation system and hence <em>a2</em> gives a <em>terminal</em> kernel.</p>
-<p>We succeeded now in generalizing <em>Berge</em>’s kernel equation systems to genuine bipolar-valued digraphs (<a class="reference internal" href="tutorial.html#bis-2006a" id="id8"><span>[BIS-2006a]</span></a>). The constructive proof, found by M. Pirlot, is based on the following fixpoint equation that may be used for computing bipolar-valued kernel membership vectors,</p>
+<p>We succeeded now in generalizing <em>Berge</em>’s kernel equation systems to genuine bipolar-valued digraphs (<a class="reference internal" href="#bis-2006-1p" id="id8"><span>[BIS-2006_1p]</span></a>). The constructive proof, found by M. Pirlot, is based on the following fixpoint equation that may be used for computing bipolar-valued kernel membership vectors,</p>
 <blockquote>
 <div><p><img class="math" src="_images/math/19373e8627fb0e35a5bf7fc3456caf18af3b9cf7.png" alt="T(Y) \; := \; -(Y \circ R) = Y,"/></p>
 </div></blockquote>
 </div>
 <div class="section" id="solving-bipolar-valued-kernel-equation-systems">
 <h3>Solving bipolar-valued kernel equation systems<a class="headerlink" href="#solving-bipolar-valued-kernel-equation-systems" title="Permalink to this headline">¶</a></h3>
-<p><em>John von Neumann</em> (<a class="reference internal" href="tutorial.html#sch-1985" id="id9"><span>[SCH-1985]</span></a>) showed indeed that, when a digraph <em>G(X,R)</em> is <strong>acyclic</strong> with a  <strong>unique inital kernel</strong> <em>K</em> characterised by its membership characteristics vector <em>Yk</em>, then the following double bipolar-valued fixpoint equation</p>
+<p><em>John von Neumann</em> (<a class="reference internal" href="#sch-1985p" id="id9"><span>[SCH-1985p]</span></a>) showed indeed that, when a digraph <em>G(X,R)</em> is <strong>acyclic</strong> with a  <strong>unique inital kernel</strong> <em>K</em> characterised by its membership characteristics vector <em>Yk</em>, then the following double bipolar-valued fixpoint equation</p>
 <blockquote>
 <div><p><img class="math" src="_images/math/e8801a1214db64aa368aca3176b1032e9950d636.png" alt="T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;."/></p>
 </div></blockquote>
 <p>will admit a stable high and a stable low fixpoint solution that converge both to <em>Yk</em>.</p>
-<p>Inspired by this crisp double fixpoint equation, we observed that for a given bipolar-valued digraph <em>G(X,R)</em>, each of its dominant or absorbent prekernels <em>Ki</em> in <em>X</em> determines an induced <strong>partial graph</strong> <em>G(X,R/Ki)</em> which is <em>acyclyc</em> and admits <em>Ki</em> as unique kernel (see <a class="reference internal" href="tutorial.html#bis-2006b" id="id10"><span>[BIS-2006b]</span></a>).</p>
+<p>Inspired by this crisp double fixpoint equation, we observed that for a given bipolar-valued digraph <em>G(X,R)</em>, each of its dominant or absorbent prekernels <em>Ki</em> in <em>X</em> determines an induced <strong>partial graph</strong> <em>G(X,R/Ki)</em> which is <em>acyclyc</em> and admits <em>Ki</em> as unique kernel (see <a class="reference internal" href="#bis-2006-2p" id="id10"><span>[BIS-2006_2p]</span></a>).</p>
 <p>Following the <em>von Neumann</em> fixpoint algorithm, a similar bipolar-valued extended double fixpoint algorithm, applied to <em>G(X,R/Ki)</em>, allows to compute hence the associated bipolar-valued kernel characteristic vectors <em>Yi</em> in polynomial complexity.</p>
 <p><strong>Algorithm</strong></p>
 <blockquote>
@@ -947,7 +948,7 @@ unclear whether, on criterion <em>j</em>, <em>x</em> is performing at least as g
 </div>
 <div class="section" id="confidence-level-of-outranking-situations">
 <h3>Confidence level of outranking situations<a class="headerlink" href="#confidence-level-of-outranking-situations" title="Permalink to this headline">¶</a></h3>
-<p>Now, following the classical outranking approach (see <a class="reference internal" href="tutorial.html#bis-2013" id="id12"><span>[BIS-2013]</span></a> ), we may say, from an epistemic perspective, that decision action <em>x</em> <strong>outranks</strong> decision action <em>y</em> at <em>confidence</em> level <em>alpha</em> %, if</p>
+<p>Now, following the classical outranking approach (see <a class="reference internal" href="#bis-2013p" id="id12"><span>[BIS-2013p]</span></a> ), we may say, from an epistemic perspective, that decision action <em>x</em> <strong>outranks</strong> decision action <em>y</em> at <em>confidence</em> level <em>alpha</em> %, if</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>an expected majority of criteria validates, at confidence level <em>alpha</em> % or higher, a global ‘<em>at least as good as</em>’ situation between <em>x</em> and <em>y</em>, and</p></li>
@@ -1234,6 +1235,33 @@ confidence level <em>alpha</em> %, if</p>
 <p>Despite lower likelihood values (see the <em>g90</em> relation table above), we keep the same confident majority level of 57.1% (see Line 24 above)and, hence, also the same 90%-confident outranking digraph.</p>
 <p>For concluding, it is worthwhile noticing again that it is the <em>neutral</em> value of our bipolar-valued epistemic logic that allows us to easily handle alpha% confidence or not of outranking situations when confronted with uncertain criteria significances. Remarkable furthermore is the usage, the standard Gaussian error function provides by delivering <em>signed likelihood values</em> immediately concerning either a <em>positive</em> relational statement, or when negative, its negated version.</p>
 <p>Back to <a class="reference internal" href="#pearls-tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+</div>
+</div>
+<div class="section" id="bibliography">
+<h2><a class="toc-backref" href="#id25">Bibliography</a><a class="headerlink" href="#bibliography" title="Permalink to this headline">¶</a></h2>
+<dl class="citation">
+<dt class="label" id="bis-2013p"><span class="brackets"><a class="fn-backref" href="#id12">BIS-2013p</a></span></dt>
+<dd><p>Bisdorff R. (2013) “On Polarizing Outranking Relations with Large Performance Differences” <em>Journal of Multi-Criteria Decision Analysis</em> (Wiley) <strong>20</strong>:3-12 (downloadable preprint <a class="reference external" href="_static/MCDA-10-0059-PrePeerReview.pdf">PDF file 403.5 Kb</a>).</p>
+</dd>
+<dt class="label" id="bis-2012p"><span class="brackets">BIS-2012p</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id4">2</a>)</span></dt>
+<dd><p>Bisdorff R. (2012). “On measuring and testing the ordinal correlation between bipolar outranking relations”. In Proceedings of DA2PL’2012 <em>From Multiple Criteria Decision Aid to Preference Learning</em>, University of Mons 91-100. (downloadable preliminary version <a class="reference external" href="_static/DA2PL-RBisdorffMons.pdf">PDF file 408.5 kB</a> ).</p>
+</dd>
+<dt class="label" id="bis-2006-1p"><span class="brackets"><a class="fn-backref" href="#id8">BIS-2006_1p</a></span></dt>
+<dd><p>Bisdorff R., Pirlot M. and Roubens M. (2006). “Choices and kernels from bipolar valued digraphs”. <em>European Journal of Operational Research</em>, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version <a class="reference external" href="_static/BisdorffPirlotRoubens05.pdf">PDF file 257.3Kb</a>).</p>
+</dd>
+<dt class="label" id="bis-2006-2p"><span class="brackets"><a class="fn-backref" href="#id10">BIS-2006_2p</a></span></dt>
+<dd><p>Bisdorff R. (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version <a class="reference external" href="_static/EnumKernels.pdf">PDF file 532.2 Kb</a>).</p>
+</dd>
+<dt class="label" id="sch-1985p"><span class="brackets"><a class="fn-backref" href="#id9">SCH-1985p</a></span></dt>
+<dd><p>Schmidt G. and Ströhlein Th. (1985), <em>On kernels of graphs and solutions of games: a synopsis based on relations and fixpoints</em>. SIAM, J. Algebraic Discrete Methods, 6, 1985, 54–65.</p>
+</dd>
+<dt class="label" id="ber-1958p"><span class="brackets"><a class="fn-backref" href="#id7">BER-1958p</a></span></dt>
+<dd><p>Berge C. (2001), <em>The theory of graphs</em>. Dover Publications Inc. 2001. First published in English by Methuen &amp; Co Ltd., London 1962. Translated from a French edition by Dunod, Paris 1958.</p>
+</dd>
+<dt class="label" id="ken-1938p"><span class="brackets"><a class="fn-backref" href="#id2">KEN-1938p</a></span></dt>
+<dd><p>Kendall M.G. (1938), <em>A New Measure of Rank Correlation</em>. Biometrica 30:81–93</p>
+</dd>
+</dl>
 <dl class="footnote brackets">
 <dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id1">9</a></span></dt>
 <dd><p><em>Graffiti</em>, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file <em>graffiti07.xml</em> (XMCDA-2.0 Format) in the <em>examples/Graffiti</em> directory of the Digraph3 ressources.</p>
@@ -1248,7 +1276,6 @@ confidence level <em>alpha</em> %, if</p>
 <dd><p>The Gnu Regression, Econometrics and Time-series Library <a class="reference external" href="http://gretl.sourceforge.net/">http://gretl.sourceforge.net/</a> .</p>
 </dd>
 </dl>
-</div>
 </div>
 <div class="section" id="footnotes">
 <h2>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
@@ -1284,6 +1311,7 @@ confidence level <em>alpha</em> %, if</p>
 <li><a class="reference internal" href="#confidence-level-of-outranking-situations">Confidence level of outranking situations</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#bibliography">Bibliography</a></li>
 <li><a class="reference internal" href="#footnotes">Footnotes</a></li>
 </ul>
 </li>

@@ -127,7 +127,7 @@ Ordinal correlation equals bipolar-valued relational equivalence
 Kendall's *tau* index
 .....................
 
-*M. G. Kendall* ([KEN-1938]_) defined his *ordinal correlation index* **tau** for linear orders of dimension *n* as a *balancing* of the number *#C* of correctly oriented pairs against the number *#I* of incorrectly oriented pairs. The total number of irreflexive pairs being *n(n-1)*, in the case of linear orders, *#C* + *#I* = *n(n-1)*.  Hence *tau* = (*#C* / *n(n-1)*) - (*#I* / *n(n-1)*). In case *#I* is zero, *tau* = +1 (all pairs are *equivalently oriented*); inversely, in case *C#* is zero, *tau* = -1 (all pairs are *differently oriented*).
+*M. G. Kendall* ([KEN-1938p]_) defined his *ordinal correlation index* **tau** for linear orders of dimension *n* as a *balancing* of the number *#C* of correctly oriented pairs against the number *#I* of incorrectly oriented pairs. The total number of irreflexive pairs being *n(n-1)*, in the case of linear orders, *#C* + *#I* = *n(n-1)*.  Hence *tau* = (*#C* / *n(n-1)*) - (*#I* / *n(n-1)*). In case *#I* is zero, *tau* = +1 (all pairs are *equivalently oriented*); inversely, in case *C#* is zero, *tau* = -1 (all pairs are *differently oriented*).
 
 Noticing that (*#C* / *n(n-1)*) = 1 - (*#I* / *n(n-1)*), and recalling that the bipolar-valued negation is operated by changing the sign of the characteristic value, *Kendall*'s original *tau* definition implemented in fact the bipolar-valued **negation** of the **non equivalence** of two linear orders: 
 
@@ -219,7 +219,7 @@ If *r(x R1 y)* and *r(x R2 y)* denote the bipolar-valued characteristic values o
 
 *M(R1<=>R2)* is thus given by the sum of the non reflexive terms of the relation table of *eq*, the relation equivalence digraph computed above.
 
-In the crisp case, *M(R1<=>R2)*  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r*-valued case, the maximal possible equivalence majority margin *M* corresponds to the sum *D* of the **conjoint determinations** of *(x R1 y)* and *(x R2 y)* (see [BIS-2012]_). 
+In the crisp case, *M(R1<=>R2)*  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r*-valued case, the maximal possible equivalence majority margin *M* corresponds to the sum *D* of the **conjoint determinations** of *(x R1 y)* and *(x R2 y)* (see [BIS-2012p]_). 
 
     *D* = sum _ *(x,y)* min [ abs(*r(x R1 y)*, abs(*r(x R2 y)*) ].
 
@@ -234,7 +234,7 @@ It is worthwhile noticing that the ordinal correlation index *tau(R1,R2)* we obt
     * *r(R1<=>R2)* = *M(R1<=>R2)* / *n(n-1)*: The normalized majority margin of the pairwise relational equivalence statements, also called *valued ordinal correlation*, and 
     * *d* = *D* / *n(n-1)*: The normalized determination of the corresponding pairwise relational equivalence statements, in fact de determinateness of the relational equivalence digraph.
 
-We have thus successfully **out-factored** the *determination* effect from the *correlation* effect. With completely determined relations, *tau(R1,R2)* = *r(R1<=>R2)*. By convention, we set the ordinal correlation with a *completely indeterminate* relation, i.e. when *D = 0*, to the *indeterminate* correlation value 0.0. With *uniformly* chosen random *r*-valued relations, the **expected** *tau* index is **0.0**, denoting in fact an **indeterminate** correlation. The corresponding expected normalized determination *d* is about 0.333 (see [BIS-2012]_).
+We have thus successfully **out-factored** the *determination* effect from the *correlation* effect. With completely determined relations, *tau(R1,R2)* = *r(R1<=>R2)*. By convention, we set the ordinal correlation with a *completely indeterminate* relation, i.e. when *D = 0*, to the *indeterminate* correlation value 0.0. With *uniformly* chosen random *r*-valued relations, the **expected** *tau* index is **0.0**, denoting in fact an **indeterminate** correlation. The corresponding expected normalized determination *d* is about 0.333 (see [BIS-2012p]_).
 
 We may verify these relations with help of the corresponding equivalence digraph *eq* (see above).
 
@@ -425,7 +425,7 @@ where for all *x* in *X*,
 
      :math:`(Y \circ R)(x) \; = \; \max_{y \in X, x \neq y} \big ( \min(Y(x), R(x,y))\big)\;.`
 
-then *Y* characterises an **initial** *kernel* ([BER-1958]_).
+then *Y* characterises an **initial** *kernel* ([BER-1958p]_).
 
 When transposing now the membership characteristic vector *Y* into a column vector :math:`Y^t`, the following equation system 
 
@@ -464,20 +464,20 @@ Let us verify this result on a tiny random digraph.
 
 It is easy to verify that the characteristic vector [-1, -1, +1] satisfies the initial kernel equation system; *a3* gives an *initial* kernel. Similarly, the characteristic vector [-1, +1, -1] verifies indeed the terminal kernel equation system and hence *a2* gives a *terminal* kernel.
 
-We succeeded now in generalizing *Berge*'s kernel equation systems to genuine bipolar-valued digraphs ([BIS-2006a]_). The constructive proof, found by M. Pirlot, is based on the following fixpoint equation that may be used for computing bipolar-valued kernel membership vectors,
+We succeeded now in generalizing *Berge*'s kernel equation systems to genuine bipolar-valued digraphs ([BIS-2006_1p]_). The constructive proof, found by M. Pirlot, is based on the following fixpoint equation that may be used for computing bipolar-valued kernel membership vectors,
 
      :math:`T(Y) \; := \; -(Y \circ R) = Y,`
 
 Solving bipolar-valued kernel equation systems
 ..............................................
 
-*John von Neumann* ([SCH-1985]_) showed indeed that, when a digraph *G(X,R)* is **acyclic** with a  **unique inital kernel** *K* characterised by its membership characteristics vector *Yk*, then the following double bipolar-valued fixpoint equation
+*John von Neumann* ([SCH-1985p]_) showed indeed that, when a digraph *G(X,R)* is **acyclic** with a  **unique inital kernel** *K* characterised by its membership characteristics vector *Yk*, then the following double bipolar-valued fixpoint equation
 
      :math:`T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;.`
 
 will admit a stable high and a stable low fixpoint solution that converge both to *Yk*.
 
-Inspired by this crisp double fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its dominant or absorbent prekernels *Ki* in *X* determines an induced **partial graph** *G(X,R/Ki)* which is *acyclyc* and admits *Ki* as unique kernel (see [BIS-2006b]_).
+Inspired by this crisp double fixpoint equation, we observed that for a given bipolar-valued digraph *G(X,R)*, each of its dominant or absorbent prekernels *Ki* in *X* determines an induced **partial graph** *G(X,R/Ki)* which is *acyclyc* and admits *Ki* as unique kernel (see [BIS-2006_2p]_).
 
 Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extended double fixpoint algorithm, applied to *G(X,R/Ki)*, allows to compute hence the associated bipolar-valued kernel characteristic vectors *Yi* in polynomial complexity.
 
@@ -814,7 +814,7 @@ Indeed, :math:`\tilde{r}(x \geq y) \leadsto Y = \mathcal{N}(1.03,1.089)`, with a
 Confidence level of outranking situations
 .........................................
 
-Now, following the classical outranking approach (see [BIS-2013]_ ), we may say, from an epistemic perspective, that decision action *x* **outranks** decision action *y* at *confidence* level *alpha* %, if
+Now, following the classical outranking approach (see [BIS-2013p]_ ), we may say, from an epistemic perspective, that decision action *x* **outranks** decision action *y* at *confidence* level *alpha* %, if
 
    #. an expected majority of criteria validates, at confidence level *alpha* % or higher, a global '*at least as good as*' situation between *x* and *y*, and
       
@@ -1008,6 +1008,22 @@ For concluding, it is worthwhile noticing again that it is the *neutral* value o
 
 Back to :ref:`Content Table <Pearls-Tutorial-label>`
 	   	  
+Bibliography
+------------
+.. [BIS-2013p] Bisdorff R. (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (downloadable preprint `PDF file 403.5 Kb <_static/MCDA-10-0059-PrePeerReview.pdf>`_).
+
+.. [BIS-2012p] Bisdorff R. (2012). "On measuring and testing the ordinal correlation between bipolar outranking relations". In Proceedings of DA2PL’2012 *From Multiple Criteria Decision Aid to Preference Learning*, University of Mons 91-100. (downloadable preliminary version `PDF file 408.5 kB <_static/DA2PL-RBisdorffMons.pdf>`_ ).
+
+.. [BIS-2006_1p] Bisdorff R., Pirlot M. and Roubens M. (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <_static/BisdorffPirlotRoubens05.pdf>`_).
+
+.. [BIS-2006_2p] Bisdorff R. (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <_static/EnumKernels.pdf>`_).
+
+.. [SCH-1985p] Schmidt G. and Ströhlein Th. (1985), *On kernels of graphs and solutions of games: a synopsis based on relations and fixpoints*. SIAM, J. Algebraic Discrete Methods, 6, 1985, 54–65.
+
+.. [BER-1958p] Berge C. (2001), *The theory of graphs*. Dover Publications Inc. 2001. First published in English by Methuen & Co Ltd., London 1962. Translated from a French edition by Dunod, Paris 1958.
+
+.. [KEN-1938p] Kendall M.G. (1938), *A New Measure of Rank Correlation*. Biometrica 30:81–93
+
 
 .. only:: html
 

@@ -5597,13 +5597,10 @@ Bibliography
 
 .. [BAR-1991] Barthélemy J.-P. and Guenoche A. (1991), *Trees and Proximities Representations*, Wiley, ISBN: 978-0471922636.
 
-.. [SCH-1985] Schmidt G. and Ströhlein Th. (1985), *On kernels of graphs and solutions of games: a synopsis based on relations and fixpoints*. SIAM, J. Algebraic Discrete Methods, 6, 1985, 54–65.
 
-.. [BER-1958] Berge C. (2001), *The theory of graphs*. Dover Publications Inc. 2001. First published in English by Methuen & Co Ltd., London 1962. Translated from a French edition by Dunod, Paris 1958.
 
 .. [KRU-1956] Kruskal J.B. (1956), *On the shortest spanning subtree of a graph and the traveling salesman problem*, Proceedings of the American Mathematical Society. 7: 48–50.
 	    
-.. [KEN-1938] Kendall M.G. (1938), *A New Measure of Rank Correlation*. Biometrica 30:81–93
 
 .. |location_link4| raw:: html
 
