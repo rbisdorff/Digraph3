@@ -240,7 +240,7 @@ Thus, we obtain in the general *r* -valued case:
 It is worthwhile noticing that the ordinal correlation index *tau(R1,R2)* we obtain above corresponds to the ratio of
 
     * *r(R1<=>R2)* = *M(R1<=>R2)* / *n(n-1)*: The normalized majority margin of the pairwise relational equivalence statements, also called *valued ordinal correlation*, and 
-    * *d* = *D* / *n(n-1)*: The normalized determination of the corresponding pairwise relational equivalence statements, in fact de determinateness of the relational equivalence digraph.
+    * *d* = *D* / *n(n-1)*: The normalized determination of the corresponding pairwise relational equivalence statements, in fact the determinateness of the relational equivalence digraph.
 
 We have thus successfully **out-factored** the *determination* effect from the *correlation* effect. With completely determined relations, *tau(R1,R2)* = *r(R1<=>R2)*. By convention, we set the ordinal correlation with a *completely indeterminate* relation, i.e. when *D = 0*, to the *indeterminate* correlation value 0.0. With *uniformly* chosen random *r*-valued relations, the **expected** *tau* index is **0.0**, denoting in fact an **indeterminate** correlation. The corresponding expected normalized determination *d* is about 0.333 (see [BIS-2012p]_).
 
@@ -356,7 +356,7 @@ The valued relational equivalence index gives us a further measure for studying 
    :width: 600 px
    :align: center
 
-It is remarquable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes *r(x<=>y)* appear to be of low value, except the *diagonal* ones. These reflexive indexes *r(x<=>x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. the *proportion* of pairs of movies each critic did evaluate. Critic *JPT* (the editor of the Graffiti magazine), for instance, evaluated all but one (*d* = 24*23/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion (*d* = 10*9/600 = 0.15).
+It is remarkable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes *r(x<=>y)* appear to be of low value, except the *diagonal* ones. These reflexive indexes *r(x<=>x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. the *proportion* of pairs of movies each critic did evaluate. Critic *JPT* (the editor of the Graffiti magazine), for instance, evaluated all but one (*d* = 24*23/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion (*d* = 10*9/600 = 0.15).
 
 To get a picture of the actual divergence of rating opinions concerning **jointly seen** pairs of movies, we may develop a *Principal Component Analysis* ([2p]_) of the corresponding *tau* correlation matrix. The 3D plot of the first 3 principal axes is shown below.
 
@@ -367,13 +367,13 @@ To get a picture of the actual divergence of rating opinions concerning **jointl
    :width: 400 px
    :align: center
 
-The first 3 principal axes support together about 70% of the total inertia. Most *excentric* and *opposed* in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written media appear most opposed to the radio media.
+The first 3 principal axes support together about 70% of the total inertia. Most *eccentric* and *opposed* in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written media appear most opposed to the radio media.
 
 
 Exploring the *better rated*  and the *as well as rated* opinions
 .................................................................
 
-In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asysmmetric and symmetric parts of the '*at least as well rated as*' opinions (see the tutorial :ref:`Digraphs-Tutorial-label`).
+In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asymmetric and symmetric parts of the '*at least as well rated as*' opinions (see the tutorial :ref:`Digraphs-Tutorial-label`).
 
 Let us first have a look at the pairwise asymmetric part, namely the '*better rated than*' and '*less well rated than*' opinions of the movie critics. 
 
@@ -395,7 +395,7 @@ We notice here that the *Net-Flows* ranking rule inverts in fact just three '*le
    :width: 600 px
    :align: center
 
-Such a preordering of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -best remaining choices- and *absorbent kernels* -worst remaining choices- (see the tutorial :ref:`Kernel-Tutorial-label`). We operate herefore on the asymmetric '*better rated than*', i.e. the *codual* ([3p]_) of the '*at least as well rated as*' opinions.
+Such a preordering of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -best remaining choices- and *absorbent kernels* -worst remaining choices- (see the tutorial :ref:`Kernel-Tutorial-label`). We operate therefore on the asymmetric '*better rated than*', i.e. the *codual* ([3p]_) of the '*at least as well rated as*' opinions.
 
 .. code-block:: pycon
    :linenos:
@@ -478,7 +478,7 @@ We succeeded now in generalizing *Berge*'s kernel equation systems to genuine bi
 Solving bipolar-valued kernel equation systems
 ..............................................
 
-*John von Neumann* ([SCH-1985p]_) showed indeed that, when a digraph *G(X,R)* is **acyclic** with a  **unique inital kernel** *K* characterised by its membership characteristics vector *Yk*, then the following double bipolar-valued fixpoint equation
+*John von Neumann* ([SCH-1985p]_) showed indeed that, when a digraph *G(X,R)* is **acyclic** with a  **unique initial kernel** *K* characterised by its membership characteristics vector *Yk*, then the following double bipolar-valued fixpoint equation
 
      :math:`T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;.`
 
@@ -624,7 +624,7 @@ Let us now compute the restricted adjacency table for the outranked, i.e. the *t
 
    Terminal kernel ['a3','a7'] restricted adjacency table
 
-Again, we notice that this terminal prekernel is indeed only weakly independent. The corresponding bipolar-valued characteristic vector *Y2* may be computed as follws.
+Again, we notice that this terminal prekernel is indeed only weakly independent. The corresponding bipolar-valued characteristic vector *Y2* may be computed as follows.
 
 .. code-block:: pycon
    :linenos:
@@ -797,7 +797,7 @@ And the **likelihood of validation**, respectively **invalidation** of an '*at l
 
 :math:`lh(x \geq y) \;=\; -\text{erf}\big(\frac{1}{\sqrt{2}}\frac{-E(Y)}{\sqrt{V(Y)}} \big)`
 
-The range of the bipolar-valued :math:`lh(x \geq y)` hence becomes [-1.0;+1.0], and :math:`-lh(x \geq y) \,=\, lh(x \not\geq y)` , i.e. a **negative likelihood** represents the likelihood of the correspondent **negated** '*at least as good as*' situtation. A likelihood of +1.0 (resp. -1.0) means the corresponding preferential situation appears **certainly validated** (resp. **invalidated**).
+The range of the bipolar-valued :math:`lh(x \geq y)` hence becomes [-1.0;+1.0], and :math:`-lh(x \geq y) \,=\, lh(x \not\geq y)` , i.e. a **negative likelihood** represents the likelihood of the correspondent **negated** '*at least as good as*' situation. A likelihood of +1.0 (resp. -1.0) means the corresponding preferential situation appears **certainly validated** (resp. **invalidated**).
 
 **Example**
 
@@ -1093,12 +1093,12 @@ Let us construct, by neglecting for a moment potential vetoes and counter-vetoes
      'a6' | +0.22  -0.42  +0.00  -1.00  +0.17  +1.00  -0.11  
      'a7' | +0.22  -0.50  +0.17  -0.06  +0.78  +0.42  +1.00  
 
-We notice on the principal diagonal, the *certainly validated* reflexive terms (+1.00). Now, we know for sure that *unanimous* outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a *majority* significance in *each* criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see [BIS-2014p]_) if an outrankiong situation is independent of all the potential significance weights that respect the given *preordering* of the weights. Mind that there for sure are always outranking situatons that are dependent on the very values we allocate to the criteria significances.
+We notice on the principal diagonal, the *certainly validated* reflexive terms (+1.00). Now, we know for sure that *unanimous* outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a *majority* significance in *each* criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see [BIS-2014p]_) if an outranking situation is independent of all the potential significance weights that respect the given *preordering* of the weights. Mind that there for sure are always outranking situations that are dependent on the very values we allocate to the criteria significances.
 
 We may thus define the following stability levels:
     * **+4|-4** : *unanimous* outranking | outranked situation;
     * **+3|-3** : *validated* outranking | outranked situation in *each* coalition of equisignificant criteria;
-    * **+2|-2** : *validated* outranking | outranked situation with *all* potential siginifacance weights *compatible* with the given significance *preorder*;
+    * **+2|-2** : *validated* outranking | outranked situation with *all* potential significance weights *compatible* with the given significance *preorder*;
     * **+1|-1** : *validated* outranking | outranked situation with the given significance weights;
     * **0** : *indeterminate* relational situation
 
@@ -1251,7 +1251,7 @@ Let us finally inspect a comparison that is only qualified at stability level +1
 
 In these two cases, choosing significances that are just compatible with the given weights preorder will not always result in a positively validated  outranking situation.
 
-Let us finally mention that the stability denotation of outranking situations is readily availble with the common :py:meth:`OutrankingDigraph.showRelationTable` method.
+Let us finally mention that the stability denotation of outranking situations is readily available with the common :py:meth:`OutrankingDigraph.showRelationTable` method.
 
 .. code-block:: pycon
    :linenos:
