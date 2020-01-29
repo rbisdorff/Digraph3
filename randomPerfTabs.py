@@ -1945,11 +1945,11 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         nd = len(str(numberOfActions))
         actions = OrderedDict()
         for i in range(1, numberOfActions+1):
-            actionKey = ('%%0%dd' % (nd)) % (i)
+            actionKey = shortNamePrefix+('%%0%dd' % (nd)) % (i)
             if BigData:
                 actions[i] = {'name': actionKey,'generators': {}}
             else:      
-                actions[actionKey] = {'shortName': '%s%s' % (shortNamePrefix, actionKey),
+                actions[actionKey] = {'shortName': '%s' % (actionKey),
                         'name': 'action %s' % actionKey,
                         'comment': '3 Objectives',
                         'generators': {}}

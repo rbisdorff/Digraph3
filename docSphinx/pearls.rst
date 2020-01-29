@@ -1,3 +1,5 @@
+.. _Pearls-Tutorial-label:
+
 Pearls of bipolar-valued epistemic logic
 ========================================
 
@@ -9,10 +11,10 @@ Pearls of bipolar-valued epistemic logic
 	:depth: 1
 	:local:
 
-.. highlight:: python
+.. highlight:: pycon
 	:linenothreshold: 2
 
-.. _Pearls-Tutorial-label:
+.. _CopingMissing-Data-label:
 
 Coping with missing data and indeterminateness
 ----------------------------------------------
@@ -1009,20 +1011,20 @@ Back to :ref:`Content Table <Pearls-Tutorial-label>`
 
 .. _Stable-Outranking-Tutorial-label:
 
-On stable outrankings with criteria of ordinal significance
------------------------------------------------------------
+Robustness analysis of bipolar-valued outranking digraphs
+---------------------------------------------------------
 
-Ordinal criteria significance
-.............................
+Cardinal or Ordinal criteria significances
+..........................................
 
 The required cardinal significance weights of the performance criteria represent the *Achilles*' heel of the outranking approach. Rarely will indeed a decision maker be cognitively competent for suggesting precise decimal-valued criteria significance weights. More often, the decision problem will involve equally import decision objectives with equi-significant criteria. A random example of such a decision problem may be generated with the :py:class:`randPerfTabs.Random3ObjectivesPerformanceTableau` class.
 
 .. code-block:: pycon
    :linenos:
 
->>> from outrankingDigraphs import *
+>>> from randPerfTabs import Random3ObjectivesPerformanceTableau
 >>> t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
-...                                 numberOfCriteria=7,seed=102)
+...                                 numberOfCriteria=9,seed=102)
 >>> t
 *------- PerformanceTableau instance description ------*
 Instance class   : Random3ObjectivesPerformanceTableau
@@ -1030,7 +1032,7 @@ Seed             : 102
 Instance name    : random3ObjectivesPerfTab
 # Actions        : 7
 # Objectives     : 3
-# Criteria       : 7
+# Criteria       : 9
 Attributes       : ['name', 'valueDigits', 'BigData', 'OrdinalScales',
                     'missingDataProbability', 'negativeWeightProbability',
 		    'randomSeed', 'sumWeights', 'valuationPrecision',
@@ -1055,46 +1057,199 @@ Env: Environmental aspect
    en9 criterion of objective Env 6
   Total weight: 24.00 (4 criteria)
 
-We face seven decision alternatives that are assessed with respect to three equially important decision objectives concerning: first, an economical aspect with a coalition of three performance criteria of significance weight 8, secondly, a societal aspect with a coalition of two performance criteria of significance weight 12, and thirdly, an environmental aspect with a coalition four performance criteria of significance weight 6.
+In this example, we face seven decision alternatives that are assessed with respect to three *equally important* decision objectives concerning: first, an *economical* aspect with a coalition of three performance criteria of significance weight 8, secondly, a *societal* aspect with a coalition of two performance criteria of significance weight 12, and thirdly, an *environmental* aspect with a coalition four performance criteria of significance weight 6.
 
-The question we tackle is the following: How *dependent* on the actual values of the significance weights appears the corresponding bipolar-valued outranking digraph ? In the previous section, we assumed that the criteria significance weights were random variables. Here, we shall assume that we know for sure only the preordering of the significance weights. In our example we see indeed three increasing equivalence classes :
+The question we tackle is the following: How *dependent* on the actual values of the significance weights appears the corresponding bipolar-valued outranking digraph ? In the previous section, we assumed that the criteria significance weights were random variables. Here, we shall assume that we know for sure only the preordering of the significance weights. In our example we see indeed three increasing weight equivalence classes.
 
 >>> t.weightPreorder
 [['en3', 'en5', 'en6', 'en9'], ['ec1', 'ec4', 'ec8'], ['so2', 'so7']]
 
+How stable appear now the outranking situations when assuming imprecise significance weights?
+
 Qualifying the stability of outranking situations
 .................................................
 
-Let us construct the corresponding bipolar outranking digraph.
+Let us construct, by neglecting for a moment potential vetoes and counter-vetoes, the corresponding normalized bipolar-valued outranking digraph.
 
->>> g = BipolarOutrankingDigraph(t,Normalized=True,hasNoVeto=True)
+>>> from outrankingDigraphs import BipolarOutrankingDigraph
+>>> g = BipolarOutrankingDigraph(t,Normalized=True)
 >>> g.showRelationTable()
 * ---- Relation Table -----
-  S   |  'a1'   'a2'   'a3'   'a4'   'a5'   'a6'   'a7'   
+r(>=) |  'a1'   'a2'   'a3'   'a4'   'a5'   'a6'   'a7'   
 ------|------------------------------------------------
  'a1' | +1.00  -0.42  +0.00  -0.69  +0.39  +0.11  -0.06  
- 'a2' | +0.58  +1.00  +0.83  +0.33  +0.58  +0.58  +0.58  
- 'a3' | +0.25  -0.33  +1.00  +0.00  +0.50  +0.06  +0.25  
+ 'a2' | +0.58  +1.00  +0.83  +0.00  +0.58  +0.58  +0.58  
+ 'a3' | +0.25  -0.33  +1.00  +0.00  +0.50  +1.00  +0.25  
  'a4' | +0.78  +0.00  +0.61  +1.00  +1.00  +1.00  +0.67  
  'a5' | -0.11  -0.50  -0.25  -0.89  +1.00  +0.11  -0.14  
- 'a6' | +0.22  -0.42  +0.00  -0.36  +0.17  +1.00  -0.11  
+ 'a6' | +0.22  -0.42  +0.00  -1.00  +0.17  +1.00  -0.11  
  'a7' | +0.22  -0.50  +0.17  -0.06  +0.78  +0.42  +1.00  
 
-Now, we know for sure that *unanimous* outranking situations are completely independent of the significance weights (code value: **4**). Similarly, all outranking situations that are supported by a *majority* significance in *each* criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition (code value: **3**). But we are also able to test (see [BIS-2014p]_) if an outrankiong situation is independent of all the potential significance weights that respect the given *preordering* of the weights (code value: **2**). Mind that there for sure are always outranking situatons that are dependent on the very values we allocate to the criteria significances (code value: **1**). Indeterminate situations will eventually be coded with value: **0**.
+We notice on the principal diagonal, the *certainly validated* reflexive terms (+1.00). Now, we know for sure that *unanimous* outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a *majority* significance in *each* criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see [BIS-2014p]_) if an outrankiong situation is independent of all the potential significance weights that respect the given *preordering* of the weights. Mind that there for sure are always outranking situatons that are dependent on the very values we allocate to the criteria significances.
 
-We may qualify in such a way the above shown outranking situations.
+We may thus define the following stability levels:
+    * **+4|-4** : *unanimous* outranking | outranked situation;
+    * **+3|-3** : *validated* outranking | outranked situation in *each* coalition of equisignificant criteria;
+    * **+2|-2** : *validated* outranking | outranked situation with *all* potential siginifacance weights *compatible* with the given significance *preorder*;
+    * **+1|-1** : *validated* outranking | outranked situation with the given significance weights;
+    * **0** : *indeterminate* relational situation
 
->>> nrg = RobustOutrankingDigraph(t)
+To compute these stability qualification levels we provide the :py:class:`outrankingDigraphs.RobustOutrankingDigraph` class.
+
+>>> from outrankingDigraphs import RobustOutrankingDigraph
+>>> rg = RobustOutrankingDigraph(t)
+>>> rg
+*------- Object instance description ------*
+Instance class      : RobustOutrankingDigraph
+Instance name       : robust_random3ObjectivesPerfTab
+# Actions           : 7
+# Criteria          : 9
+Size                : 25
+Determinateness (%) : 78.87
+Valuation domain    : [-4.00;4.00]
+Attributes          : ['name', 'methodData', 'actions', 'order',
+                       'criteria', 'evaluation', 'vetos',
+		       'valuationdomain', 'cardinalRelation',
+		       'ordinalRelation', 'equisignificantRelation',
+		       'unanimousRelation', 'relation',
+		       'gamma', 'notGamma']
+>>> rg.showRelationTable
 * ---- Relation Table -----
-  S   | 'a1' 'a2' 'a3' 'a4' 'a5' 'a6' 'a7'   
-------|-----------------------------------
- 'a1' |   +4  -2    0   -3   +2   +2   -1  
- 'a2' |   +2  +4   +3   +2   +2   +2   +2  
- 'a3' |   +2  -2   +4   +0   +2   +2   +1  
- 'a4' |   +3  -1   +3   +4   +4   +4   +2  
- 'a5' |   -2  -2   -2   -3   +4   +2   -2  
- 'a6' |   +2  -2   +1   -2   +2   +4   -2  
- 'a7' |   +2  -2   +1   -1   +3   +2   +4  
+ stab. | 'a1' 'a2' 'a3' 'a4' 'a5' 'a6' 'a7'   
+-------|-----------------------------------
+ 'a1'  |   +4  -2    0   -3   +2   +2   -1  
+ 'a2'  |   +2  +4   +3   +2   +2   +2   +2  
+ 'a3'  |   +2  -2   +4    0   +2   +2   +1  
+ 'a4'  |   +3  -1   +3   +4   +4   +4   +2  
+ 'a5'  |   -2  -2   -2   -3   +4   +2   -2  
+ 'a6'  |   +2  -2   +1   -2   +2   +4   -2  
+ 'a7'  |   +2  -2   +1   -1   +3   +2   +4
+
+As expected, all reflexive comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially *as well performing as* themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative *a4* with alternatives *a5* and *a6*. We may for instance inspect the details of how alternatives *a4* and *a5* compare. 
+
+>>> g.showPairwiseComparison('a4','a5')
+*------------  pairwise comparison ----*
+Comparing actions : (a4, a5)
+crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	| 	
+ec1   8.00  85.19  46.75  +38.44 | 5.00  None  10.00   +8.00 	| 
+ec4   8.00  72.26   8.96  +63.30 | 5.00  None  10.00   +8.00 	| 
+ec8   8.00  44.62  35.91   +8.71 | 5.00  None  10.00   +8.00 	| 
+en3   6.00  80.81  31.05  +49.76 | 5.00  None  10.00   +6.00 	| 
+en5   6.00  49.69  29.52  +20.17 | 5.00  None  10.00   +6.00 	| 
+en6   6.00  66.21  31.22  +34.99 | 5.00  None  10.00   +6.00 	| 
+en9   6.00  50.92   9.83  +41.09 | 5.00  None  10.00   +6.00 	| 
+so2  12.00  49.05  12.36  +36.69 | 5.00  None  10.00  +12.00 	| 
+so7  12.00  55.57  44.92  +10.65 | 5.00  None  10.00  +12.00 	| 
+Valuation in range: -72.00 to +72.00; global concordance: +72.00
+
+Alternative *a4* is indeed performing unanimously *at least as well as* alternative *a5*. The converse comparison does however not deliver an unanimous outranked situation. The comparison only qualifies at stability level -3.
+
+>>> g.showPairwiseComparison('a5','a4')
+*------------  pairwise comparison ----*
+Comparing actions : (a5, a4)
+crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord
+ec1   8.00  46.75  85.19  -38.44 | 5.00  None  10.00   -8.00 	| 
+ec4   8.00   8.96  72.26  -63.30 | 5.00  None  10.00   -8.00 	| 
+ec8   8.00  35.91  44.62   -8.71 | 5.00  None  10.00   +0.00 	| 
+en3   6.00  31.05  80.81  -49.76 | 5.00  None  10.00   -6.00 	| 
+en5   6.00  29.52  49.69  -20.17 | 5.00  None  10.00   -6.00 	| 
+en6   6.00  31.22  66.21  -34.99 | 5.00  None  10.00   -6.00 	| 
+en9   6.00   9.83  50.92  -41.09 | 5.00  None  10.00   -6.00 	| 
+so2  12.00  12.36  49.05  -36.69 | 5.00  None  10.00  -12.00 	| 
+so7  12.00  44.92  55.57  -10.65 | 5.00  None  10.00  -12.00 	| 
+Valuation in range: -72.00 to +72.00; global concordance: -64.00
+
+Indeed, on criterion *ec8* we observe a negative performance difference of -8.71 which is effectively below the supposed *preference discrimination threshold* 0f 10.00. Yet, the outranked situation is supported by a majority of criteria in each decision objective. Hence, the reported preferential situation is completely independent of any chosen significance weights.
+
+Let us now consider a comparison, like the one between alternatives *a2* and *a1*, that is only qualified at stability level +2, resp. -2.
+
+>>> g.showPairwiseOutrankings('a2','a1')
+*------------  pairwise comparison ----*
+Comparing actions : (a2, a1)
+crit. wght.  g(x)  g(y)    diff  | ind    wp      p    concord 	|
+ec1   8.00  89.77  38.11  +51.66 | 5.00  None  10.00   +8.00 	| 
+ec4   8.00  86.00  22.65  +63.35 | 5.00  None  10.00   +8.00 	| 
+ec8   8.00  89.43  77.02  +12.41 | 5.00  None  10.00   +8.00 	| 
+en3   6.00  20.79  58.16  -37.37 | 5.00  None  10.00   -6.00 	| 
+en5   6.00  23.83  31.40   -7.57 | 5.00  None  10.00   +0.00 	| 
+en6   6.00  18.66  11.41   +7.25 | 5.00  None  10.00   +6.00 	| 
+en9   6.00  26.65  44.37  -17.72 | 5.00  None  10.00   -6.00 	| 
+so2  12.00  89.12  22.43  +66.69 | 5.00  None  10.00  +12.00 	| 
+so7  12.00  84.73  28.41  +56.32 | 5.00  None  10.00  +12.00 	| 
+Valuation in range: -72.00 to +72.00; global concordance: +42.00
+*------------  pairwise comparison ----*
+Comparing actions : (a1, a2)
+crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	|
+ec1   8.00  38.11  89.77  -51.66 | 5.00  None  10.00   -8.00 	| 
+ec4   8.00  22.65  86.00  -63.35 | 5.00  None  10.00   -8.00 	| 
+ec8   8.00  77.02  89.43  -12.41 | 5.00  None  10.00   -8.00 	| 
+en3   6.00  58.16  20.79  +37.37 | 5.00  None  10.00   +6.00 	| 
+en5   6.00  31.40  23.83   +7.57 | 5.00  None  10.00   +6.00 	| 
+en6   6.00  11.41  18.66   -7.25 | 5.00  None  10.00   +0.00 	| 
+en9   6.00  44.37  26.65  +17.72 | 5.00  None  10.00   +6.00 	| 
+so2  12.00  22.43  89.12  -66.69 | 5.00  None  10.00  -12.00 	| 
+so7  12.00  28.41  84.73  -56.32 | 5.00  None  10.00  -12.00 	| 
+Valuation in range: -72.00 to +72.00; global concordance: -30.00
+
+In both comparisons, the performances observed with respect to the environmental decision objective are not validating with a significant majority the otherwise unanimous outranking, resp. outranked situations. Hence, the stability of the reported preferential situations is in fact dependent on choosing significance weights that are compatible with the given significance weights preorder (see below).
+
+>>> t.weightPreorder
+[['en3', 'en5', 'en6', 'en9'], ['ec1', 'ec4', 'ec8'], ['so2', 'so7']]
+
+Let us finally inspect a comparison that is only qualified at stability level +1, like the one between alternatives *a7* and *a3*.
+
+>>> g.showPairwiseOutrankings('a7','a3')
+*------------  pairwise comparison ----*
+Comparing actions : (a7, a3)
+crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	| 
+ec1   8.00  15.33  80.19  -64.86 | 5.00  None  10.00   -8.00 	| 
+ec4   8.00  36.31  68.70  -32.39 | 5.00  None  10.00   -8.00 	| 
+ec8   8.00  38.31  91.94  -53.63 | 5.00  None  10.00   -8.00 	| 
+en3   6.00  30.70  46.78  -16.08 | 5.00  None  10.00   -6.00 	| 
+en5   6.00  35.52  27.25   +8.27 | 5.00  None  10.00   +6.00 	| 
+en6   6.00  69.71   1.65  +68.06 | 5.00  None  10.00   +6.00 	| 
+en9   6.00  13.10  14.85   -1.75 | 5.00  None  10.00   +6.00 	| 
+so2  12.00  68.06  58.85   +9.21 | 5.00  None  10.00  +12.00 	| 
+so7  12.00  58.45  15.49  +42.96 | 5.00  None  10.00  +12.00 	| 
+Valuation in range: -72.00 to +72.00; global concordance: +12.00
+*------------  pairwise comparison ----*
+Comparing actions : (a3, a7)
+crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	|
+ec1   8.00  80.19  15.33  +64.86 | 5.00  None  10.00   +8.00 	| 
+ec4   8.00  68.70  36.31  +32.39 | 5.00  None  10.00   +8.00 	| 
+ec8   8.00  91.94  38.31  +53.63 | 5.00  None  10.00   +8.00 	| 
+en3   6.00  46.78  30.70  +16.08 | 5.00  None  10.00   +6.00 	| 
+en5   6.00  27.25  35.52   -8.27 | 5.00  None  10.00   +0.00 	| 
+en6   6.00   1.65  69.71  -68.06 | 5.00  None  10.00   -6.00 	| 
+en9   6.00  14.85  13.10   +1.75 | 5.00  None  10.00   +6.00 	| 
+so2  12.00  58.85  68.06   -9.21 | 5.00  None  10.00   +0.00 	| 
+so7  12.00  15.49  58.45  -42.96 | 5.00  None  10.00  -12.00 	| 
+Valuation in range: -72.00 to +72.00; global concordance: +18.00
+
+In these two cases, choosing significances that are just compatible with the given weights preorder will not always result in a positove outranking situation.
+
+Let us finally mntion that the stability denotation of outranking situations is readily availble with the common :py:meth:`Digraph.showRelationTable` method.
+
+>>> g.showRelationTable(hasStabilityDenotation=True)
+* ---- Relation Table -----
+ r()/(stab) | 'a1'  'a2'  'a3'  'a4'  'a5'  'a6'  'a7'   
+------------|--------------------------------------------
+   'a1'     | +1.00 -0.42 +0.00 -0.69 +0.39 +0.11 -0.06  
+            |  (+4)  (-2)  (+0)  (-3)  (+2)  (+2)  (-1)  
+   'a2'     | +0.58 +1.00 +0.83  0.00 +0.58 +0.58 +0.58  
+            |  (+2)  (+4)  (+3)  (+2)  (+2)  (+2)  (+2)  
+   'a3'     | +0.25 -0.33 +1.00  0.00 +0.50 +1.00 +0.25  
+            |  (+2)  (-2)  (+4)   (0)  (+2)  (+2)  (+1)  
+   'a4'     | +0.78  0.00 +0.61 +1.00 +1.00 +1.00 +0.67  
+            |  (+3)  (-1)  (+3)  (+4)  (+4)  (+4)  (+2)  
+   'a5'     | -0.11 -0.50 -0.25 -0.89 +1.00 +0.11 -0.14  
+            |  (-2)  (-2)  (-2)  (-3)  (+4)  (+2)  (-2)  
+   'a6'     | +0.22 -0.42  0.00 -1.00 +0.17 +1.00 -0.11  
+            |  (+2)  (-2)  (+1)  (-2)  (+2)  (+4)  (-2)  
+   'a7'     | +0.22 -0.50 +0.17 -0.06 +0.78 +0.42 +1.00  
+            |  (+2)  (-2)  (+1)  (-1)  (+3)  (+2)  (+4)  
+
+Back to :ref:`Content Table <Pearls-Tutorial-label>`
 
 Footnotes
 ---------

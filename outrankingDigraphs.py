@@ -1694,7 +1694,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         elif hasLatexFormat:
                             print('$+4$ &', end=' ')
                         else:
-                            print(' 1.00 ', end=' ')
+                            print(' +1.00 ', end=' ')
                 else:    
                     if hasIntegerValuation:
                         if hasLPDDenotation:
@@ -1727,7 +1727,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     if x == y and hasStabilityDenotation:
                         print(' (+4) ', end=' ')
                     else:
-                        print('  (%+d) ' % int(nrg.relation[x[1]][y[1]]), end=' ')
+                        print(' (%+d) ' % int(nrg.relation[x[1]][y[1]]), end=' ')
                 print()
             
                 
