@@ -69,11 +69,11 @@
 \contentsline {subsection}{\numberline {10.2}q\sphinxhyphen {}coloring of a graph}{80}{subsection.10.2}
 \contentsline {subsection}{\numberline {10.3}MIS and clique enumeration}{81}{subsection.10.3}
 \contentsline {subsection}{\numberline {10.4}Line graphs and maximal matchings}{82}{subsection.10.4}
-\contentsline {subsection}{\numberline {10.5}Grids and the Ising model}{84}{subsection.10.5}
-\contentsline {subsection}{\numberline {10.6}Simulating Metropolis random walks}{86}{subsection.10.6}
-\contentsline {section}{\numberline {11}Computing the non isomorphic MISs of the n\sphinxhyphen {}cycle graph}{87}{section.11}
-\contentsline {section}{\numberline {12}On computing digraph kernels}{90}{section.12}
-\contentsline {subsection}{\numberline {12.1}What is a graph kernel ?}{91}{subsection.12.1}
+\contentsline {subsection}{\numberline {10.5}Grids and the Ising model}{83}{subsection.10.5}
+\contentsline {subsection}{\numberline {10.6}Simulating Metropolis random walks}{84}{subsection.10.6}
+\contentsline {section}{\numberline {11}Computing the non isomorphic MISs of the n\sphinxhyphen {}cycle graph}{86}{section.11}
+\contentsline {section}{\numberline {12}On computing digraph kernels}{89}{section.12}
+\contentsline {subsection}{\numberline {12.1}What is a graph kernel ?}{90}{subsection.12.1}
 \contentsline {subsection}{\numberline {12.2}Initial and terminal kernels}{94}{subsection.12.2}
 \contentsline {subsection}{\numberline {12.3}Kernels in lateralized digraphs}{98}{subsection.12.3}
 \contentsline {subsection}{\numberline {12.4}Computing good and bad choice recommendations}{101}{subsection.12.4}
