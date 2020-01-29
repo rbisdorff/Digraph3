@@ -11,7 +11,7 @@ Pearls of bipolar-valued epistemic logic
 	:depth: 1
 	:local:
 
-.. highlight:: pycon
+.. highlight:: python
 	:linenothreshold: 2
 
 .. _CopingMissing-Data-label:
@@ -29,9 +29,9 @@ Let us take an example performance tableau from a Movie magazine's evaluation of
 
 .. code-block:: pycon
 
-    >>> from outrankingDigraphs import *
-    >>> t = XMCDA2PerformanceTableau('graffiti07')
-    >>> t.showHTMLPerformanceTableau(ndigits=0)
+   >>> from outrankingDigraphs import *
+   >>> t = XMCDA2PerformanceTableau('graffiti07')
+   >>> t.showHTMLPerformanceTableau(ndigits=0)
 
 .. Figure:: graffiti07_1.png
    :name: graffiti07_1
@@ -65,9 +65,9 @@ Let us explicitly construct the corresponding bipolar-valued outranking digraph 
 
 .. code-block:: pycon
 
-    >>> g = BipolarOutrankingDigraph(t)
-    >>> g.recodeValuation(-19,19) # integer characteristic values
-    >>> g.showHTMLPairwiseOutrankings('mv_QS','mv_RR')
+   >>> g = BipolarOutrankingDigraph(t)
+   >>> g.recodeValuation(-19,19) # integer characteristic values
+   >>> g.showHTMLPairwiseOutrankings('mv_QS','mv_RR')
 
 .. Figure:: graffiti07_45.png
    :name: graffiti07_45
@@ -85,10 +85,10 @@ heat map above (see :numref:`graffiti07_2`), may be shown in :numref:`graffiti07
 
 .. code-block:: pycon
 
-    >>> ranking = g.computeNetFlowsRanking()
-    >>> g.showHTMLRelationTable(actionsList=ranking, ndigits=0,\
-    ... tableTitle='Bipolar characteristic values of\
-    ... "rated at least as good as" situations')
+   >>> ranking = g.computeNetFlowsRanking()
+   >>> g.showHTMLRelationTable(actionsList=ranking, ndigits=0,\
+   ... tableTitle='Bipolar characteristic values of\
+   ... "rated at least as good as" situations')
 
 .. Figure:: graffiti07_3.png
    :name: graffiti07_3
@@ -126,6 +126,12 @@ Notice finally the ordinal correlation *tau* values in
 Ordinal correlation equals bipolar-valued relational equivalence
 ----------------------------------------------------------------
 
+.. highlight:: python
+	:linenothreshold: 2
+
+.. highlight:: pycon
+	:linenothreshold: 2
+			  
 Kendall's *tau* index
 .....................
 
@@ -142,11 +148,11 @@ Let *R1* and *R2* be two random crisp relations defined on a same set of 5 alter
 .. code-block:: pycon
    :linenos:
 
-    >>> from digraphs import *
-    >>> R1 = RandomDigraph(order=5,Bipolar=True)
-    >>> R2 = RandomDigraph(order=5,Bipolar=True)
-    >>> E = EquivalenceDigraph(R1,R2)
-    >>> E.showRelationTable(ReflexiveTerms=False)
+   >>> from digraphs import *
+   >>> R1 = RandomDigraph(order=5,Bipolar=True)
+   >>> R2 = RandomDigraph(order=5,Bipolar=True)
+   >>> E = EquivalenceDigraph(R1,R2)
+   >>> E.showRelationTable(ReflexiveTerms=False)
     * ---- Relation Table -----
     r(<=>)|  'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
     ------|-------------------------------------------
@@ -156,7 +162,7 @@ Let *R1* and *R2* be two random crisp relations defined on a same set of 5 alter
      'a4' |  -1.00	  1.00	 -1.00	   - 	  1.00	 
      'a5' |  -1.00	  1.00	 -1.00	  1.00	   - 	 
     Valuation domain: [-1.00;1.00]
-    >>> E.correlation
+   >>> E.correlation
     {'correlation': -0.1, 'determination': 1.0}
 
 In the table of the equivalence relation *R1<=>R2* above, we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall's *tau* index in this plainly determined crisp case.
@@ -171,8 +177,8 @@ Let us now consider two randomly bipolar-valued digraphs *R1* and *R2* of order 
 .. code-block:: pycon
    :linenos:
 
-    >>> R1 = RandomValuationDigraph(order=5,seed=1)
-    >>> R1.showRelationTable(ReflexiveTerms=False)
+   >>> R1 = RandomValuationDigraph(order=5,seed=1)
+   >>> R1.showRelationTable(ReflexiveTerms=False)
     * ---- Relation Table -----
      r(R1)|   'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
     ------|-------------------------------------------
@@ -182,8 +188,8 @@ Let us now consider two randomly bipolar-valued digraphs *R1* and *R2* of order 
      'a4' |  -0.48	 -0.76	  0.24	   - 	 -0.94	 
      'a5' |  -0.02	  0.10	  0.54	  0.94	   - 	 
     Valuation domain: [-1.00;1.00]
-    >>> R2 = RandomValuationDigraph(order=5,seed=2)
-    >>> R2.showRelationTable(ReflexiveTerms=False)
+   >>> R2 = RandomValuationDigraph(order=5,seed=2)
+   >>> R2.showRelationTable(ReflexiveTerms=False)
     * ---- Relation Table -----
      r(R2)|   'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
     ------|-------------------------------------------
@@ -200,7 +206,7 @@ We may notice in the relation tables shown above that 9 pairs, like *(a1,a2)* or
    :linenos:
 
    >>> eq = EquivalenceDigraph(R1,R2)
-    >>> eq.showRelationTable(ReflexiveTerms=False)
+   >>> eq.showRelationTable(ReflexiveTerms=False)
     * ---- Relation Table -----
     r(<=>)|  'a1'	  'a2'	  'a3'	  'a4'	  'a5'	  
     ------|-------------------------------------------
@@ -243,14 +249,14 @@ We may verify these relations with help of the corresponding equivalence digraph
 .. code-block:: pycon
    :linenos:
 
-    >>> eq = EquivalenceDigraph(R1,R2)
-    >>> M = Decimal('0'); D = Decimal('0')
-    >>> n2 = eq.order*(eq.order - 1)
-    >>> for x in eq.actions:
-    ...     for y in eq.actions:
-    ...         M += eq.relation[x][y]
-    ...         D += abs(eq.relation[x][y])
-    >>> print('r(R1<=>R2) = %+.3f, d = %.3f, tau = %+.3f' % (M/n2,D/n2,M/D))
+   >>> eq = EquivalenceDigraph(R1,R2)
+   >>> M = Decimal('0'); D = Decimal('0')
+   >>> n2 = eq.order*(eq.order - 1)
+   >>> for x in eq.actions:
+   ...     for y in eq.actions:
+   ...         M += eq.relation[x][y]
+   ...         D += abs(eq.relation[x][y])
+   >>> print('r(R1<=>R2) = %+.3f, d = %.3f, tau = %+.3f' % (M/n2,D/n2,M/D))
     r(R1<=>R2) = +0.026, d = 0.356, tau = +0.073  
 
 In general we simply use the :py:func:`digraphs.Digraph.computeOrdinalCorrelation` method which renders a dictionary with a '*correlation*' (*tau*) and a '*determination*' (*d*) attribute. We may recover *r(<=>)* by multiplying *tau* with *d*. 
@@ -258,11 +264,11 @@ In general we simply use the :py:func:`digraphs.Digraph.computeOrdinalCorrelatio
 .. code-block:: pycon
    :linenos:
 
-    >>> corr = R1.computeOrdinalCorrelation(R2)
-    >>> tau = corr['correlation']
-    >>> d = corr['determination']
-    >>> r = tau * d
-    >>> print('tau(R1,R2) = %+.3f, d = %.3f, r(R1<=>R2) = %+.3f' % (tau, d, r))
+   >>> corr = R1.computeOrdinalCorrelation(R2)
+   >>> tau = corr['correlation']
+   >>> d = corr['determination']
+   >>> r = tau * d
+   >>> print('tau(R1,R2) = %+.3f, d = %.3f, r(R1<=>R2) = %+.3f' % (tau, d, r))
     tau(R1,R2) = +0.073, d = 0.356, r(R1<=>R2) = +0.026
 
 We may now illustrate the quality of the global ranking of the movies shown with the heat map in :numref:`graffiti07_2`. 
@@ -274,7 +280,7 @@ We reconsider the bipolar-valued outranking digraph *g* modelling the pairwise g
 
 .. code-block:: pycon
 
-    >>> g = BipolarOutrankingDigraph(t,Normalized=True)
+   >>> g = BipolarOutrankingDigraph(t,Normalized=True)
     *------- Object instance description ------*
     Instance class   : BipolarOutrankingDigraph
     Instance name    : rel_grafittiPerfTab.xml
@@ -285,7 +291,7 @@ We reconsider the bipolar-valued outranking digraph *g* modelling the pairwise g
     Valuation domain : {'min': Decimal('-1.0'),
 			'med': Decimal('0.0'),
 			'max': Decimal('1.0'),}
-    >>> g.computeCoSize()
+   >>> g.computeCoSize()
     188
 
 Out of the 25 x 24 = 600 irreflexive movie pairs, digraph *g* contains 390 positively validated, 188 positively invalidated outranking situations, and 22 *indeterminate* outranking situations (see the zero-valued cells in :numref:`graffiti07_3`).
@@ -295,17 +301,17 @@ Let us now compute the normalized majority margin *r(<=>)*  of the equivalence b
 .. code-block:: pycon
    :linenos:
 
-    >>> from linearOrders import NetFlowsOrder
-    >>> nf = NetFlowsOrder(g)
-    >>> nf.netFlowsRanking
+   >>> from linearOrders import NetFlowsOrder
+   >>> nf = NetFlowsOrder(g)
+   >>> nf.netFlowsRanking
     ['mv_QS', 'mv_RR', 'mv_DG', 'mv_NP', 'mv_HN', 'mv_HS', 'mv_SM',
      'mv_JB', 'mv_PE', 'mv_FC', 'mv_TP', 'mv_CM', 'mv_DF', 'mv_TM',
      'mv_DJ', 'mv_AL', 'mv_RG', 'mv_MB', 'mv_GH', 'mv_HP', 'mv_BI',
      'mv_DI', 'mv_FF', 'mv_GG', 'mv_TF']
-    >>> for i,item in enumerate(\
-    ... g.computeMarginalVersusGlobalRankingCorrelations(\
-    ... nf.netFlowsRanking,ValuedCorrelation=True)): 
-    ...    print('r(%s<=>nf) = %+.3f' % (item[1],item[0]) )
+   >>> for i,item in enumerate(\
+   ... g.computeMarginalVersusGlobalRankingCorrelations(\
+   ... nf.netFlowsRanking,ValuedCorrelation=True)): 
+   ...    print('r(%s<=>nf) = %+.3f' % (item[1],item[0]) )
     r(JH<=>nf) = +0.500
     r(JPT<=>nf)  = +0.430
     r(AP<=>nf) = +0.323
@@ -329,11 +335,11 @@ The ordinal correlation between the global *Net-Flows* ranking and the digraph *
 .. code-block:: pycon
    :linenos:
 
-    >>> corr = g.computeOrdinalCorrelatin(nf)
-    >>> tau = corr['correlation']
-    >>> d = corr['determination']
-    >>> r = tau * d
-    >>> print('Tau(g,nf) = %+.3f, d = %.3f, r(g<=>nf) = %+.3f' % (Tau,d,r))
+   >>> corr = g.computeOrdinalCorrelatin(nf)
+   >>> tau = corr['correlation']
+   >>> d = corr['determination']
+   >>> r = tau * d
+   >>> print('Tau(g,nf) = %+.3f, d = %.3f, r(g<=>nf) = %+.3f' % (Tau,d,r))
     tau(g,nf) = +0.780, D = 0.300, r(g<=>nf) = +0.234
 
 We notice that the correlation *tau* index between the *Net-Flows* ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence between the *nf* and the *g* digraph, with a characteristics value of *only* +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62% of the movie critics' rating opinions.
@@ -394,9 +400,9 @@ Such a preordering of the movies may, for instance, be computed with the :py:fun
 .. code-block:: pycon
    :linenos:
 
-    >>> from transitiveDigraphs import RankingByChoosingDigraph
-    >>> rbc = RankingByChoosingDigraph(g,CoDual=True)
-    >>> rbc.showRankingByChoosing()
+   >>> from transitiveDigraphs import RankingByChoosingDigraph
+   >>> rbc = RankingByChoosingDigraph(g,CoDual=True)
+   >>> rbc.showRankingByChoosing()
     Ranking by Choosing and Rejecting
      1st Best Choice ['mv_QS']
        2nd Best Choice ['mv_DG', 'mv_FC', 'mv_HN', 'mv_HS', 'mv_NP',
@@ -440,8 +446,8 @@ Let us verify this result on a tiny random digraph.
 .. code-block:: pycon
    :linenos:
 
-    >>> from digraphs import *
-    >>> g = RandomDigraph(order=3,seed=1)
+   >>> from digraphs import *
+   >>> g = RandomDigraph(order=3,seed=1)
     * ---- Relation Table -----
        R  | 'a1'	'a2'	'a3'	  
     ------|---------------------
@@ -462,7 +468,6 @@ Let us verify this result on a tiny random digraph.
        dominance    :  -1.0
        absorbency   :  1.0
        covered      :  1.000
-    >>> 
 
 It is easy to verify that the characteristic vector [-1, -1, +1] satisfies the initial kernel equation system; *a3* gives an *initial* kernel. Similarly, the characteristic vector [-1, +1, -1] verifies indeed the terminal kernel equation system and hence *a2* gives a *terminal* kernel.
 
@@ -502,9 +507,9 @@ Time for a practical illustration.
 
 .. code-block:: pycon
 
-    >>> from outrankingDigraphs import *
-    >>> g = RandomBipolarOutrankingDigraph(Normalized=True,seed=5)
-    >>> print(g)
+   >>> from outrankingDigraphs import *
+   >>> g = RandomBipolarOutrankingDigraph(Normalized=True,seed=5)
+   >>> print(g)
     *------- Object instance description ------*
     Instance class      : RandomBipolarOutrankingDigraph
     Instance name       : rel_randomperftab
@@ -522,9 +527,9 @@ The random outranking digraph *g*, we consider here for illustration, models the
 .. code-block:: pycon
    :linenos:
 
-    >>> gcd = ~(-g) # strict outranking digraph
-    >>> gcd
-    >>> gcd.showPreKernels()
+   >>> gcd = ~(-g) # strict outranking digraph
+   >>> gcd
+   >>> gcd.showPreKernels()
     *--- Computing preKernels ---*
     Dominant preKernels :
     ['a1', 'a4', 'a2']
@@ -556,11 +561,11 @@ Let us compute the *initial* prekernel restricted adjacency table with the :py:f
 .. code-block:: pycon
    :linenos:
 
-    >>> k1Relation = gcd.domkernelrestrict(['a1','a2','a4'])
-    >>> gcd.showHTMLRelationTable(
-    ...      actionsList=['a1','a2','a4','a3','a5','a6','a7'],
-    ...      relation=k1Relation,
-    ...      tableTitle='K1 restricted adjacency table')
+   >>> k1Relation = gcd.domkernelrestrict(['a1','a2','a4'])
+   >>> gcd.showHTMLRelationTable(
+   ...      actionsList=['a1','a2','a4','a3','a5','a6','a7'],
+   ...      relation=k1Relation,
+   ...      tableTitle='K1 restricted adjacency table')
 
 .. Figure:: k1restricted.png
    :alt: Kernel restricted adjacency table 
@@ -574,7 +579,7 @@ We first notice that this initial prekernel is indeed only *weakly independent*:
 .. code-block:: pycon
    :linenos:
 
-    >>> gcd.computeKernelVector(['a1','a2','a4'],Initial=True,Comments=True)
+   >>> gcd.computeKernelVector(['a1','a2','a4'],Initial=True,Comments=True)
     --> Initial prekernel: {'a1', 'a4', 'a2'}
     initial low vector : [-1.00, -1.00, -1.00, -1.00, -1.00, -1.00, -1.00]
     initial high vector: [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]
@@ -606,11 +611,11 @@ Let us now compute the restricted adjacency table for the outranked, i.e. the *t
 .. code-block:: pycon
    :linenos:
 
-    >>> k2Relation = gcd.abskernelrestrict(['a3','a7'])
-    >>> gcd.showHTMLRelationTable(
-    ...      actionsList=['a3','a7','a1','a2','a4','a5','a6'],
-    ...      relation=k2Relation,
-    ...      tableTitle='K2 restricted adjacency table')
+   >>> k2Relation = gcd.abskernelrestrict(['a3','a7'])
+   >>> gcd.showHTMLRelationTable(
+   ...      actionsList=['a3','a7','a1','a2','a4','a5','a6'],
+   ...      relation=k2Relation,
+   ...      tableTitle='K2 restricted adjacency table')
 
 .. Figure:: k2restricted.png
    :alt: Kernel restricted adjacency table 
@@ -624,7 +629,7 @@ Again, we notice that this terminal prekernel is indeed only weakly independent.
 .. code-block:: pycon
    :linenos:
 
-    >>> gcd.computeKernelVector(['a3','a7'],Initial=False,Comments=True)
+   >>> gcd.computeKernelVector(['a3','a7'],Initial=False,Comments=True)
     --> Terminal prekernel: {'a3', 'a7'}
     initial low vector  : [-1.00, -1.00, -1.00, -1.00, -1.00, -1.00, -1.00]
     initial high vector : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]
@@ -662,8 +667,8 @@ To illustrate finally why sometimes we need to operate an *epistemic disjunctive
 
 .. code-block:: pycon
 
-    >>> g = CirculantDigraph(order=7,circulants=[-1,1])			     
-    >>> print(g)			     
+   >>> g = CirculantDigraph(order=7,circulants=[-1,1])			     
+   >>> g			     
     *------- Digraph instance description ------*
     Instance class      : CirculantDigraph
     Instance name       : c7
@@ -680,7 +685,7 @@ Digraph *c7* is a symmetric crisp digraph showing, among others, the maximal ind
 .. code-block:: pycon
    :linenos:
 
-    >>> g.computeKernelVector(['2','5','7'],Initial=True,Comments=True)
+   >>> g.computeKernelVector(['2','5','7'],Initial=True,Comments=True)
     --> Initial kernel: {'2', '5', '7'}
     initial low vector  : [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0]
     initial high vector : [+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0]
@@ -836,9 +841,9 @@ Let us consider the following random performance tableau.
 .. code-block:: pycon
    :linenos:
 
-    >>> from outrankingDigraphs import *
-    >>> t = RandomPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=100)
-    >>> t.showPerformanceTableau(Transposed=True)
+   >>> from outrankingDigraphs import *
+   >>> t = RandomPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=100)
+   >>> t.showPerformanceTableau(Transposed=True)
     *----  performance tableau -----*
     criteria | weights |   'a1'   'a2'   'a3'   'a4'   'a5'   'a6'   'a7'   
     ---------|------------------------------------------------------------
@@ -854,8 +859,8 @@ For the corresponding confident outranking digraph, we require a confidence leve
 
 .. code-block:: pycon
 
-    >>> g90 = ConfidentBipolarOutrankingDigraph(t,confidence=90)
-    >>> print(g90)
+   >>> g90 = ConfidentBipolarOutrankingDigraph(t,confidence=90)
+   >>> print(g90)
     *------- Object instance description ------*
     Instance class      : ConfidentBipolarOutrankingDigraph
     Instance name       : rel_randomperftab_CLT
@@ -876,7 +881,7 @@ For the corresponding confident outranking digraph, we require a confidence leve
 .. code-block:: pycon
    :linenos:
 			   
-    >>> g90.showRelationTable(LikelihoodDenotation=True)
+   >>> g90.showRelationTable(LikelihoodDenotation=True)
     * ---- Outranking Relation Table -----
     r/(lh) |  'a1'	 'a2'	 'a3'	 'a4'	 'a5'	 'a6'	 'a7'	 
     -------|------------------------------------------------------------
@@ -910,8 +915,8 @@ We may draw the corresponding strict 90%-confident outranking digraph, oriented 
 .. code-block:: pycon
    :linenos:
 
-    >>> gcd90 = ~ (-g90)
-    >>> gcd90.showPreKernels()
+   >>> gcd90 = ~ (-g90)
+   >>> gcd90.showPreKernels()
     *--- Computing preKernels ---*
     Dominant preKernels :
     ['a1', 'a7']
@@ -925,8 +930,8 @@ We may draw the corresponding strict 90%-confident outranking digraph, oriented 
        dominance    :  -0.2857
        absorbency   :  0.2857
        covered      :  0.583
-    >>> gcd90.exportGraphViz(fileName='confidentOutranking',
-    ...       bestChoice=['a1', 'a7'],worstChoice=['a2', 'a5', 'a6'])
+   >>> gcd90.exportGraphViz(fileName='confidentOutranking',
+   ...       bestChoice=['a1', 'a7'],worstChoice=['a2', 'a5', 'a6'])
     *---- exporting a dot file dor GraphViz tools ---------*
     Exporting to confidentOutranking.dot
     dot -Grankdir=BT -Tpng confidentOutranking.dot -o confidentOutranking.png
@@ -944,8 +949,8 @@ Now, what becomes this 90%-confident outranking digraph when we require a strong
 .. code-block:: pycon
    :linenos:
 
-    >>> g99 = ConfidentBipolarOutrankingDigraph(t,confidence=99)
-    >>> g99.showRelationTable()
+   >>> g99 = ConfidentBipolarOutrankingDigraph(t,confidence=99)
+   >>> g99.showRelationTable()
     * ---- Outranking Relation Table -----
     r/(lh) |  'a1'	 'a2'	 'a3'	 'a4'	 'a5'	 'a6'	 'a7'	 
     -------|------------------------------------------------------------
@@ -977,8 +982,8 @@ Finally, what becomes the previous 90%-confident outranking digraph if the uncer
 .. code-block:: pycon
    :linenos:
 
-    >>> gu90 = ConfidentBipolarOutrankingDigraph(t,confidence=90,distribution='uniform')
-    >>> gu90.showRelationTable()
+   >>> gu90 = ConfidentBipolarOutrankingDigraph(t,confidence=90,distribution='uniform')
+   >>> gu90.showRelationTable()
     * ---- Outranking Relation Table -----
     r/(lh) |  'a1'	 'a2'	 'a3'	 'a4'	 'a5'	 'a6'	 'a7'	 
     -------|------------------------------------------------------------
@@ -1022,40 +1027,40 @@ The required cardinal significance weights of the performance criteria represent
 .. code-block:: pycon
    :linenos:
 
->>> from randPerfTabs import Random3ObjectivesPerformanceTableau
->>> t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
-...                                 numberOfCriteria=9,seed=102)
->>> t
-*------- PerformanceTableau instance description ------*
-Instance class   : Random3ObjectivesPerformanceTableau
-Seed             : 102
-Instance name    : random3ObjectivesPerfTab
-# Actions        : 7
-# Objectives     : 3
-# Criteria       : 9
-Attributes       : ['name', 'valueDigits', 'BigData', 'OrdinalScales',
-                    'missingDataProbability', 'negativeWeightProbability',
-		    'randomSeed', 'sumWeights', 'valuationPrecision',
-		    'commonScale', 'objectiveSupportingTypes', 'actions',
-		    'objectives', 'criteriaWeightMode', 'criteria',
-		    'evaluation', 'weightPreorder']
->>> t.showObjectives()
-*------ show objectives -------"
-Eco: Economical aspect
-   ec1 criterion of objective Eco 8
-   ec4 criterion of objective Eco 8
-   ec8 criterion of objective Eco 8
-  Total weight: 24.00 (3 criteria)
-Soc: Societal aspect
-   so2 criterion of objective Soc 12
-   so7 criterion of objective Soc 12
-  Total weight: 24.00 (2 criteria)
-Env: Environmental aspect
-   en3 criterion of objective Env 6
-   en5 criterion of objective Env 6
-   en6 criterion of objective Env 6
-   en9 criterion of objective Env 6
-  Total weight: 24.00 (4 criteria)
+   >>> from randPerfTabs import Random3ObjectivesPerformanceTableau
+   >>> t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
+   ...                                 numberOfCriteria=9,seed=102)
+   >>> t
+    *------- PerformanceTableau instance description ------*
+    Instance class   : Random3ObjectivesPerformanceTableau
+    Seed             : 102
+    Instance name    : random3ObjectivesPerfTab
+    # Actions        : 7
+    # Objectives     : 3
+    # Criteria       : 9
+    Attributes       : ['name', 'valueDigits', 'BigData', 'OrdinalScales',
+			'missingDataProbability', 'negativeWeightProbability',
+			'randomSeed', 'sumWeights', 'valuationPrecision',
+			'commonScale', 'objectiveSupportingTypes', 'actions',
+			'objectives', 'criteriaWeightMode', 'criteria',
+			'evaluation', 'weightPreorder']
+   >>> t.showObjectives()
+    *------ show objectives -------"
+    Eco: Economical aspect
+       ec1 criterion of objective Eco 8
+       ec4 criterion of objective Eco 8
+       ec8 criterion of objective Eco 8
+      Total weight: 24.00 (3 criteria)
+    Soc: Societal aspect
+       so2 criterion of objective Soc 12
+       so7 criterion of objective Soc 12
+      Total weight: 24.00 (2 criteria)
+    Env: Environmental aspect
+       en3 criterion of objective Env 6
+       en5 criterion of objective Env 6
+       en6 criterion of objective Env 6
+       en9 criterion of objective Env 6
+      Total weight: 24.00 (4 criteria)
 
 In this example, we face seven decision alternatives that are assessed with respect to three *equally important* decision objectives concerning: first, an *economical* aspect with a coalition of three performance criteria of significance weight 8, secondly, a *societal* aspect with a coalition of two performance criteria of significance weight 12, and thirdly, an *environmental* aspect with a coalition four performance criteria of significance weight 6.
 
@@ -1071,19 +1076,22 @@ Qualifying the stability of outranking situations
 
 Let us construct, by neglecting for a moment potential vetoes and counter-vetoes, the corresponding normalized bipolar-valued outranking digraph.
 
->>> from outrankingDigraphs import BipolarOutrankingDigraph
->>> g = BipolarOutrankingDigraph(t,Normalized=True)
->>> g.showRelationTable()
-* ---- Relation Table -----
-r(>=) |  'a1'   'a2'   'a3'   'a4'   'a5'   'a6'   'a7'   
-------|------------------------------------------------
- 'a1' | +1.00  -0.42  +0.00  -0.69  +0.39  +0.11  -0.06  
- 'a2' | +0.58  +1.00  +0.83  +0.00  +0.58  +0.58  +0.58  
- 'a3' | +0.25  -0.33  +1.00  +0.00  +0.50  +1.00  +0.25  
- 'a4' | +0.78  +0.00  +0.61  +1.00  +1.00  +1.00  +0.67  
- 'a5' | -0.11  -0.50  -0.25  -0.89  +1.00  +0.11  -0.14  
- 'a6' | +0.22  -0.42  +0.00  -1.00  +0.17  +1.00  -0.11  
- 'a7' | +0.22  -0.50  +0.17  -0.06  +0.78  +0.42  +1.00  
+.. code-block:: pycon
+   :linenos:
+
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
+   >>> g = BipolarOutrankingDigraph(t,Normalized=True)
+   >>> g.showRelationTable()
+    * ---- Relation Table -----
+    r(>=) |  'a1'   'a2'   'a3'   'a4'   'a5'   'a6'   'a7'   
+    ------|------------------------------------------------
+     'a1' | +1.00  -0.42  +0.00  -0.69  +0.39  +0.11  -0.06  
+     'a2' | +0.58  +1.00  +0.83  +0.00  +0.58  +0.58  +0.58  
+     'a3' | +0.25  -0.33  +1.00  +0.00  +0.50  +1.00  +0.25  
+     'a4' | +0.78  +0.00  +0.61  +1.00  +1.00  +1.00  +0.67  
+     'a5' | -0.11  -0.50  -0.25  -0.89  +1.00  +0.11  -0.14  
+     'a6' | +0.22  -0.42  +0.00  -1.00  +0.17  +1.00  -0.11  
+     'a7' | +0.22  -0.50  +0.17  -0.06  +0.78  +0.42  +1.00  
 
 We notice on the principal diagonal, the *certainly validated* reflexive terms (+1.00). Now, we know for sure that *unanimous* outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a *majority* significance in *each* criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see [BIS-2014p]_) if an outrankiong situation is independent of all the potential significance weights that respect the given *preordering* of the weights. Mind that there for sure are always outranking situatons that are dependent on the very values we allocate to the criteria significances.
 
@@ -1096,100 +1104,112 @@ We may thus define the following stability levels:
 
 To compute these stability qualification levels we provide the :py:class:`outrankingDigraphs.RobustOutrankingDigraph` class.
 
->>> from outrankingDigraphs import RobustOutrankingDigraph
->>> rg = RobustOutrankingDigraph(t)
->>> rg
-*------- Object instance description ------*
-Instance class      : RobustOutrankingDigraph
-Instance name       : robust_random3ObjectivesPerfTab
-# Actions           : 7
-# Criteria          : 9
-Size                : 25
-Determinateness (%) : 78.87
-Valuation domain    : [-4.00;4.00]
-Attributes          : ['name', 'methodData', 'actions', 'order',
-                       'criteria', 'evaluation', 'vetos',
-		       'valuationdomain', 'cardinalRelation',
-		       'ordinalRelation', 'equisignificantRelation',
-		       'unanimousRelation', 'relation',
-		       'gamma', 'notGamma']
->>> rg.showRelationTable
-* ---- Relation Table -----
- stab. | 'a1' 'a2' 'a3' 'a4' 'a5' 'a6' 'a7'   
--------|-----------------------------------
- 'a1'  |   +4  -2    0   -3   +2   +2   -1  
- 'a2'  |   +2  +4   +3   +2   +2   +2   +2  
- 'a3'  |   +2  -2   +4    0   +2   +2   +1  
- 'a4'  |   +3  -1   +3   +4   +4   +4   +2  
- 'a5'  |   -2  -2   -2   -3   +4   +2   -2  
- 'a6'  |   +2  -2   +1   -2   +2   +4   -2  
- 'a7'  |   +2  -2   +1   -1   +3   +2   +4
+.. code-block:: pycon
+   :linenos:
+
+   >>> from outrankingDigraphs import RobustOutrankingDigraph
+   >>> rg = RobustOutrankingDigraph(t)
+   >>> rg
+    *------- Object instance description ------*
+    Instance class      : RobustOutrankingDigraph
+    Instance name       : robust_random3ObjectivesPerfTab
+    # Actions           : 7
+    # Criteria          : 9
+    Size                : 25
+    Determinateness (%) : 78.87
+    Valuation domain    : [-4.00;4.00]
+    Attributes          : ['name', 'methodData', 'actions', 'order',
+			   'criteria', 'evaluation', 'vetos',
+			   'valuationdomain', 'cardinalRelation',
+			   'ordinalRelation', 'equisignificantRelation',
+			   'unanimousRelation', 'relation',
+			   'gamma', 'notGamma']
+   >>> rg.showRelationTable
+    * ---- Relation Table -----
+     stab. | 'a1' 'a2' 'a3' 'a4' 'a5' 'a6' 'a7'   
+    -------|-----------------------------------
+     'a1'  |   +4  -2    0   -3   +2   +2   -1  
+     'a2'  |   +2  +4   +3   +2   +2   +2   +2  
+     'a3'  |   +2  -2   +4    0   +2   +2   +1  
+     'a4'  |   +3  -1   +3   +4   +4   +4   +2  
+     'a5'  |   -2  -2   -2   -3   +4   +2   -2  
+     'a6'  |   +2  -2   +1   -2   +2   +4   -2  
+     'a7'  |   +2  -2   +1   -1   +3   +2   +4
 
 As expected, all reflexive comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially *as well performing as* themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative *a4* with alternatives *a5* and *a6*. We may for instance inspect the details of how alternatives *a4* and *a5* compare. 
 
->>> g.showPairwiseComparison('a4','a5')
-*------------  pairwise comparison ----*
-Comparing actions : (a4, a5)
-crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	| 	
-ec1   8.00  85.19  46.75  +38.44 | 5.00  None  10.00   +8.00 	| 
-ec4   8.00  72.26   8.96  +63.30 | 5.00  None  10.00   +8.00 	| 
-ec8   8.00  44.62  35.91   +8.71 | 5.00  None  10.00   +8.00 	| 
-en3   6.00  80.81  31.05  +49.76 | 5.00  None  10.00   +6.00 	| 
-en5   6.00  49.69  29.52  +20.17 | 5.00  None  10.00   +6.00 	| 
-en6   6.00  66.21  31.22  +34.99 | 5.00  None  10.00   +6.00 	| 
-en9   6.00  50.92   9.83  +41.09 | 5.00  None  10.00   +6.00 	| 
-so2  12.00  49.05  12.36  +36.69 | 5.00  None  10.00  +12.00 	| 
-so7  12.00  55.57  44.92  +10.65 | 5.00  None  10.00  +12.00 	| 
-Valuation in range: -72.00 to +72.00; global concordance: +72.00
+.. code-block:: pycon
+   :linenos:
+
+   >>> g.showPairwiseComparison('a4','a5')
+    *------------  pairwise comparison ----*
+    Comparing actions : (a4, a5)
+    crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	| 	
+    ec1   8.00  85.19  46.75  +38.44 | 5.00  None  10.00   +8.00 	| 
+    ec4   8.00  72.26   8.96  +63.30 | 5.00  None  10.00   +8.00 	| 
+    ec8   8.00  44.62  35.91   +8.71 | 5.00  None  10.00   +8.00 	| 
+    en3   6.00  80.81  31.05  +49.76 | 5.00  None  10.00   +6.00 	| 
+    en5   6.00  49.69  29.52  +20.17 | 5.00  None  10.00   +6.00 	| 
+    en6   6.00  66.21  31.22  +34.99 | 5.00  None  10.00   +6.00 	| 
+    en9   6.00  50.92   9.83  +41.09 | 5.00  None  10.00   +6.00 	| 
+    so2  12.00  49.05  12.36  +36.69 | 5.00  None  10.00  +12.00 	| 
+    so7  12.00  55.57  44.92  +10.65 | 5.00  None  10.00  +12.00 	| 
+    Valuation in range: -72.00 to +72.00; global concordance: +72.00
 
 Alternative *a4* is indeed performing unanimously *at least as well as* alternative *a5*. The converse comparison does however not deliver an unanimous outranked situation. The comparison only qualifies at stability level -3.
 
->>> g.showPairwiseComparison('a5','a4')
-*------------  pairwise comparison ----*
-Comparing actions : (a5, a4)
-crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord
-ec1   8.00  46.75  85.19  -38.44 | 5.00  None  10.00   -8.00 	| 
-ec4   8.00   8.96  72.26  -63.30 | 5.00  None  10.00   -8.00 	| 
-ec8   8.00  35.91  44.62   -8.71 | 5.00  None  10.00   +0.00 	| 
-en3   6.00  31.05  80.81  -49.76 | 5.00  None  10.00   -6.00 	| 
-en5   6.00  29.52  49.69  -20.17 | 5.00  None  10.00   -6.00 	| 
-en6   6.00  31.22  66.21  -34.99 | 5.00  None  10.00   -6.00 	| 
-en9   6.00   9.83  50.92  -41.09 | 5.00  None  10.00   -6.00 	| 
-so2  12.00  12.36  49.05  -36.69 | 5.00  None  10.00  -12.00 	| 
-so7  12.00  44.92  55.57  -10.65 | 5.00  None  10.00  -12.00 	| 
-Valuation in range: -72.00 to +72.00; global concordance: -64.00
+.. code-block:: pycon
+   :linenos:
+
+   >>> g.showPairwiseComparison('a5','a4')
+    *------------  pairwise comparison ----*
+    Comparing actions : (a5, a4)
+    crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord
+    ec1   8.00  46.75  85.19  -38.44 | 5.00  None  10.00   -8.00 	| 
+    ec4   8.00   8.96  72.26  -63.30 | 5.00  None  10.00   -8.00 	| 
+    ec8   8.00  35.91  44.62   -8.71 | 5.00  None  10.00   +0.00 	| 
+    en3   6.00  31.05  80.81  -49.76 | 5.00  None  10.00   -6.00 	| 
+    en5   6.00  29.52  49.69  -20.17 | 5.00  None  10.00   -6.00 	| 
+    en6   6.00  31.22  66.21  -34.99 | 5.00  None  10.00   -6.00 	| 
+    en9   6.00   9.83  50.92  -41.09 | 5.00  None  10.00   -6.00 	| 
+    so2  12.00  12.36  49.05  -36.69 | 5.00  None  10.00  -12.00 	| 
+    so7  12.00  44.92  55.57  -10.65 | 5.00  None  10.00  -12.00 	| 
+    Valuation in range: -72.00 to +72.00; global concordance: -64.00
 
 Indeed, on criterion *ec8* we observe a negative performance difference of -8.71 which is effectively below the supposed *preference discrimination threshold* 0f 10.00. Yet, the outranked situation is supported by a majority of criteria in each decision objective. Hence, the reported preferential situation is completely independent of any chosen significance weights.
 
 Let us now consider a comparison, like the one between alternatives *a2* and *a1*, that is only qualified at stability level +2, resp. -2.
 
->>> g.showPairwiseOutrankings('a2','a1')
-*------------  pairwise comparison ----*
-Comparing actions : (a2, a1)
-crit. wght.  g(x)  g(y)    diff  | ind    wp      p    concord 	|
-ec1   8.00  89.77  38.11  +51.66 | 5.00  None  10.00   +8.00 	| 
-ec4   8.00  86.00  22.65  +63.35 | 5.00  None  10.00   +8.00 	| 
-ec8   8.00  89.43  77.02  +12.41 | 5.00  None  10.00   +8.00 	| 
-en3   6.00  20.79  58.16  -37.37 | 5.00  None  10.00   -6.00 	| 
-en5   6.00  23.83  31.40   -7.57 | 5.00  None  10.00   +0.00 	| 
-en6   6.00  18.66  11.41   +7.25 | 5.00  None  10.00   +6.00 	| 
-en9   6.00  26.65  44.37  -17.72 | 5.00  None  10.00   -6.00 	| 
-so2  12.00  89.12  22.43  +66.69 | 5.00  None  10.00  +12.00 	| 
-so7  12.00  84.73  28.41  +56.32 | 5.00  None  10.00  +12.00 	| 
-Valuation in range: -72.00 to +72.00; global concordance: +42.00
-*------------  pairwise comparison ----*
-Comparing actions : (a1, a2)
-crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	|
-ec1   8.00  38.11  89.77  -51.66 | 5.00  None  10.00   -8.00 	| 
-ec4   8.00  22.65  86.00  -63.35 | 5.00  None  10.00   -8.00 	| 
-ec8   8.00  77.02  89.43  -12.41 | 5.00  None  10.00   -8.00 	| 
-en3   6.00  58.16  20.79  +37.37 | 5.00  None  10.00   +6.00 	| 
-en5   6.00  31.40  23.83   +7.57 | 5.00  None  10.00   +6.00 	| 
-en6   6.00  11.41  18.66   -7.25 | 5.00  None  10.00   +0.00 	| 
-en9   6.00  44.37  26.65  +17.72 | 5.00  None  10.00   +6.00 	| 
-so2  12.00  22.43  89.12  -66.69 | 5.00  None  10.00  -12.00 	| 
-so7  12.00  28.41  84.73  -56.32 | 5.00  None  10.00  -12.00 	| 
-Valuation in range: -72.00 to +72.00; global concordance: -30.00
+.. code-block:: pycon
+   :linenos:
+
+   >>> g.showPairwiseOutrankings('a2','a1')
+    *------------  pairwise comparison ----*
+    Comparing actions : (a2, a1)
+    crit. wght.  g(x)  g(y)    diff  | ind    wp      p    concord 	|
+    ec1   8.00  89.77  38.11  +51.66 | 5.00  None  10.00   +8.00 	| 
+    ec4   8.00  86.00  22.65  +63.35 | 5.00  None  10.00   +8.00 	| 
+    ec8   8.00  89.43  77.02  +12.41 | 5.00  None  10.00   +8.00 	| 
+    en3   6.00  20.79  58.16  -37.37 | 5.00  None  10.00   -6.00 	| 
+    en5   6.00  23.83  31.40   -7.57 | 5.00  None  10.00   +0.00 	| 
+    en6   6.00  18.66  11.41   +7.25 | 5.00  None  10.00   +6.00 	| 
+    en9   6.00  26.65  44.37  -17.72 | 5.00  None  10.00   -6.00 	| 
+    so2  12.00  89.12  22.43  +66.69 | 5.00  None  10.00  +12.00 	| 
+    so7  12.00  84.73  28.41  +56.32 | 5.00  None  10.00  +12.00 	| 
+    Valuation in range: -72.00 to +72.00; global concordance: +42.00
+    *------------  pairwise comparison ----*
+    Comparing actions : (a1, a2)
+    crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	|
+    ec1   8.00  38.11  89.77  -51.66 | 5.00  None  10.00   -8.00 	| 
+    ec4   8.00  22.65  86.00  -63.35 | 5.00  None  10.00   -8.00 	| 
+    ec8   8.00  77.02  89.43  -12.41 | 5.00  None  10.00   -8.00 	| 
+    en3   6.00  58.16  20.79  +37.37 | 5.00  None  10.00   +6.00 	| 
+    en5   6.00  31.40  23.83   +7.57 | 5.00  None  10.00   +6.00 	| 
+    en6   6.00  11.41  18.66   -7.25 | 5.00  None  10.00   +0.00 	| 
+    en9   6.00  44.37  26.65  +17.72 | 5.00  None  10.00   +6.00 	| 
+    so2  12.00  22.43  89.12  -66.69 | 5.00  None  10.00  -12.00 	| 
+    so7  12.00  28.41  84.73  -56.32 | 5.00  None  10.00  -12.00 	| 
+    Valuation in range: -72.00 to +72.00; global concordance: -30.00
 
 In both comparisons, the performances observed with respect to the environmental decision objective are not validating with a significant majority the otherwise unanimous outranking, resp. outranked situations. Hence, the stability of the reported preferential situations is in fact dependent on choosing significance weights that are compatible with the given significance weights preorder (see below).
 
@@ -1198,70 +1218,64 @@ In both comparisons, the performances observed with respect to the environmental
 
 Let us finally inspect a comparison that is only qualified at stability level +1, like the one between alternatives *a7* and *a3*.
 
->>> g.showPairwiseOutrankings('a7','a3')
-*------------  pairwise comparison ----*
-Comparing actions : (a7, a3)
-crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	| 
-ec1   8.00  15.33  80.19  -64.86 | 5.00  None  10.00   -8.00 	| 
-ec4   8.00  36.31  68.70  -32.39 | 5.00  None  10.00   -8.00 	| 
-ec8   8.00  38.31  91.94  -53.63 | 5.00  None  10.00   -8.00 	| 
-en3   6.00  30.70  46.78  -16.08 | 5.00  None  10.00   -6.00 	| 
-en5   6.00  35.52  27.25   +8.27 | 5.00  None  10.00   +6.00 	| 
-en6   6.00  69.71   1.65  +68.06 | 5.00  None  10.00   +6.00 	| 
-en9   6.00  13.10  14.85   -1.75 | 5.00  None  10.00   +6.00 	| 
-so2  12.00  68.06  58.85   +9.21 | 5.00  None  10.00  +12.00 	| 
-so7  12.00  58.45  15.49  +42.96 | 5.00  None  10.00  +12.00 	| 
-Valuation in range: -72.00 to +72.00; global concordance: +12.00
-*------------  pairwise comparison ----*
-Comparing actions : (a3, a7)
-crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	|
-ec1   8.00  80.19  15.33  +64.86 | 5.00  None  10.00   +8.00 	| 
-ec4   8.00  68.70  36.31  +32.39 | 5.00  None  10.00   +8.00 	| 
-ec8   8.00  91.94  38.31  +53.63 | 5.00  None  10.00   +8.00 	| 
-en3   6.00  46.78  30.70  +16.08 | 5.00  None  10.00   +6.00 	| 
-en5   6.00  27.25  35.52   -8.27 | 5.00  None  10.00   +0.00 	| 
-en6   6.00   1.65  69.71  -68.06 | 5.00  None  10.00   -6.00 	| 
-en9   6.00  14.85  13.10   +1.75 | 5.00  None  10.00   +6.00 	| 
-so2  12.00  58.85  68.06   -9.21 | 5.00  None  10.00   +0.00 	| 
-so7  12.00  15.49  58.45  -42.96 | 5.00  None  10.00  -12.00 	| 
-Valuation in range: -72.00 to +72.00; global concordance: +18.00
+.. code-block:: pycon
+   :linenos:
 
-In these two cases, choosing significances that are just compatible with the given weights preorder will not always result in a positove outranking situation.
+   >>> g.showPairwiseOutrankings('a7','a3')
+   *------------  pairwise comparison ----*
+   Comparing actions : (a7, a3)
+   crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	| 
+   ec1   8.00  15.33  80.19  -64.86 | 5.00  None  10.00   -8.00 	| 
+   ec4   8.00  36.31  68.70  -32.39 | 5.00  None  10.00   -8.00 	| 
+   ec8   8.00  38.31  91.94  -53.63 | 5.00  None  10.00   -8.00 	| 
+   en3   6.00  30.70  46.78  -16.08 | 5.00  None  10.00   -6.00 	| 
+   en5   6.00  35.52  27.25   +8.27 | 5.00  None  10.00   +6.00 	| 
+   en6   6.00  69.71   1.65  +68.06 | 5.00  None  10.00   +6.00 	| 
+   en9   6.00  13.10  14.85   -1.75 | 5.00  None  10.00   +6.00 	| 
+   so2  12.00  68.06  58.85   +9.21 | 5.00  None  10.00  +12.00 	| 
+   so7  12.00  58.45  15.49  +42.96 | 5.00  None  10.00  +12.00 	| 
+   Valuation in range: -72.00 to +72.00; global concordance: +12.00
+   *------------  pairwise comparison ----*
+   Comparing actions : (a3, a7)
+   crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	|
+   ec1   8.00  80.19  15.33  +64.86 | 5.00  None  10.00   +8.00 	| 
+   ec4   8.00  68.70  36.31  +32.39 | 5.00  None  10.00   +8.00 	| 
+   ec8   8.00  91.94  38.31  +53.63 | 5.00  None  10.00   +8.00 	| 
+   en3   6.00  46.78  30.70  +16.08 | 5.00  None  10.00   +6.00 	| 
+   en5   6.00  27.25  35.52   -8.27 | 5.00  None  10.00   +0.00 	| 
+   en6   6.00   1.65  69.71  -68.06 | 5.00  None  10.00   -6.00 	| 
+   en9   6.00  14.85  13.10   +1.75 | 5.00  None  10.00   +6.00 	| 
+   so2  12.00  58.85  68.06   -9.21 | 5.00  None  10.00   +0.00 	| 
+   so7  12.00  15.49  58.45  -42.96 | 5.00  None  10.00  -12.00 	| 
+   Valuation in range: -72.00 to +72.00; global concordance: +18.00
 
-Let us finally mntion that the stability denotation of outranking situations is readily availble with the common :py:meth:`Digraph.showRelationTable` method.
+In these two cases, choosing significances that are just compatible with the given weights preorder will not always result in a positively validated  outranking situation.
 
->>> g.showRelationTable(hasStabilityDenotation=True)
-* ---- Relation Table -----
- r()/(stab) | 'a1'  'a2'  'a3'  'a4'  'a5'  'a6'  'a7'   
-------------|--------------------------------------------
-   'a1'     | +1.00 -0.42 +0.00 -0.69 +0.39 +0.11 -0.06  
-            |  (+4)  (-2)  (+0)  (-3)  (+2)  (+2)  (-1)  
-   'a2'     | +0.58 +1.00 +0.83  0.00 +0.58 +0.58 +0.58  
-            |  (+2)  (+4)  (+3)  (+2)  (+2)  (+2)  (+2)  
-   'a3'     | +0.25 -0.33 +1.00  0.00 +0.50 +1.00 +0.25  
-            |  (+2)  (-2)  (+4)   (0)  (+2)  (+2)  (+1)  
-   'a4'     | +0.78  0.00 +0.61 +1.00 +1.00 +1.00 +0.67  
-            |  (+3)  (-1)  (+3)  (+4)  (+4)  (+4)  (+2)  
-   'a5'     | -0.11 -0.50 -0.25 -0.89 +1.00 +0.11 -0.14  
-            |  (-2)  (-2)  (-2)  (-3)  (+4)  (+2)  (-2)  
-   'a6'     | +0.22 -0.42  0.00 -1.00 +0.17 +1.00 -0.11  
-            |  (+2)  (-2)  (+1)  (-2)  (+2)  (+4)  (-2)  
-   'a7'     | +0.22 -0.50 +0.17 -0.06 +0.78 +0.42 +1.00  
-            |  (+2)  (-2)  (+1)  (-1)  (+3)  (+2)  (+4)  
+Let us finally mention that the stability denotation of outranking situations is readily availble with the common :py:meth:`OutrankingDigraph.showRelationTable` method.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> g.showRelationTable(hasStabilityDenotation=True)
+   * ---- Relation Table -----
+   r()/(stab)  | 'a1'  'a2'  'a3'  'a4'  'a5'  'a6'  'a7'   
+   ------------|--------------------------------------------
+       'a1'    | +1.00 -0.42 +0.00 -0.69 +0.39 +0.11 -0.06  
+               |  (+4)  (-2)  (+0)  (-3)  (+2)  (+2)  (-1)  
+       'a2'    | +0.58 +1.00 +0.83  0.00 +0.58 +0.58 +0.58  
+               |  (+2)  (+4)  (+3)  (+2)  (+2)  (+2)  (+2)  
+       'a3'    | +0.25 -0.33 +1.00  0.00 +0.50 +1.00 +0.25  
+	       |  (+2)  (-2)  (+4)   (0)  (+2)  (+2)  (+1)  
+       'a4'    | +0.78  0.00 +0.61 +1.00 +1.00 +1.00 +0.67  
+	       |  (+3)  (-1)  (+3)  (+4)  (+4)  (+4)  (+2)  
+       'a5'    | -0.11 -0.50 -0.25 -0.89 +1.00 +0.11 -0.14  
+	       |  (-2)  (-2)  (-2)  (-3)  (+4)  (+2)  (-2)  
+       'a6'    | +0.22 -0.42  0.00 -1.00 +0.17 +1.00 -0.11  
+	       |  (+2)  (-2)  (+1)  (-2)  (+2)  (+4)  (-2)  
+       'a7'    | +0.22 -0.50 +0.17 -0.06 +0.78 +0.42 +1.00  
+	       |  (+2)  (-2)  (+1)  (-1)  (+3)  (+2)  (+4)  
 
 Back to :ref:`Content Table <Pearls-Tutorial-label>`
-
-Footnotes
----------
-
-.. [1p] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file *graffiti07.xml* (XMCDA-2.0 Format) in the *examples/Graffiti* directory of the Digraph3 ressources.       
-
-.. [2p] The 3D PCA plot method requires a running *R statistics software*  (https://www.r-project.org/) installation and the Calmat matrix calculator (see the calmat directory in the Digraph3 ressources)
-
-.. [3p] A *kernel* in a digraph *g* is a *clique* in the dual digraph *-g*.
-
-.. [4p] The Gnu Regression, Econometrics and Time-series Library http://gretl.sourceforge.net/ .
-
 	   	  
 Bibliography
 ------------
@@ -1281,4 +1295,15 @@ Bibliography
 .. [BER-1958p] Berge C. (2001), *The theory of graphs*. Dover Publications Inc. 2001. First published in English by Methuen & Co Ltd., London 1962. Translated from a French edition by Dunod, Paris 1958.
 
 .. [KEN-1938p] Kendall M.G. (1938), *A New Measure of Rank Correlation*. Biometrica 30:81–93
+
+Footnotes
+---------
+
+.. [1p] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file *graffiti07.xml* (XMCDA-2.0 Format) in the *examples/Graffiti* directory of the Digraph3 ressources.       
+
+.. [2p] The 3D PCA plot method requires a running *R statistics software*  (https://www.r-project.org/) installation and the Calmat matrix calculator (see the calmat directory in the Digraph3 ressources)
+
+.. [3p] A *kernel* in a digraph *g* is a *clique* in the dual digraph *-g*.
+
+.. [4p] The Gnu Regression, Econometrics and Time-series Library http://gretl.sourceforge.net/ .
 
