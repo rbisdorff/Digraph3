@@ -1024,10 +1024,12 @@ Robustness analysis of bipolar-valued outranking digraphs
 Cardinal or Ordinal criteria significances
 ..........................................
 
-The required cardinal significance weights of the performance criteria represent the *Achilles*' heel of the outranking approach. Rarely will indeed a decision maker be cognitively competent for suggesting precise decimal-valued criteria significance weights. More often, the decision problem will involve equally import decision objectives with equi-significant criteria. A random example of such a decision problem may be generated with the :py:class:`randPerfTabs.Random3ObjectivesPerformanceTableau` class.
+The required cardinal significance weights of the performance criteria represent the *Achilles*' heel of the outranking approach. Rarely will indeed a decision maker be cognitively competent for suggesting precise decimal-valued criteria significance weights. More often, the decision problem will involve more or less equally important decision objectives with more or less equi-significant criteria. A random example of such a decision problem may be generated with the :py:class:`randPerfTabs.Random3ObjectivesPerformanceTableau` class.
 
 .. code-block:: pycon
    :linenos:
+   :caption: Random 3 Objectives Performance Tableau
+   :name: 3ObjExample
 
    >>> from randPerfTabs import Random3ObjectivesPerformanceTableau
    >>> t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
@@ -1064,9 +1066,9 @@ The required cardinal significance weights of the performance criteria represent
        en9 criterion of objective Env 6
       Total weight: 24.00 (4 criteria)
 
-In this example, we face seven decision alternatives that are assessed with respect to three *equally important* decision objectives concerning: first, an *economical* aspect with a coalition of three performance criteria of significance weight 8, secondly, a *societal* aspect with a coalition of two performance criteria of significance weight 12, and thirdly, an *environmental* aspect with a coalition four performance criteria of significance weight 6.
+In this example (see :numref:`3ObjExample`), we face seven decision alternatives that are assessed with respect to three *equally important* decision objectives concerning: first, an *economical* aspect with a coalition of three performance criteria of significance weight 8, secondly, a *societal* aspect with a coalition of two performance criteria of significance weight 12, and thirdly, an *environmental* aspect with a coalition four performance criteria of significance weight 6.
 
-The question we tackle is the following: How *dependent* on the actual values of the significance weights appears the corresponding bipolar-valued outranking digraph ? In the previous section, we assumed that the criteria significance weights were random variables. Here, we shall assume that we know for sure only the preordering of the significance weights. In our example we see indeed three increasing weight equivalence classes.
+The question we tackle is the following: How *dependent* on the actual values of the significance weights appears the corresponding bipolar-valued outranking digraph ? In the previous section, we assumed that the criteria significance weights were random variables. Here, we shall assume that we know for sure only the preordering of the significance weights. In our example we see indeed three increasing weight equivalence classes (:numref:`weightsPreorder`).
 
 .. code-block:: pycon
    :linenos:
@@ -1087,6 +1089,8 @@ Let us construct the normalized bipolar-valued outranking digraph corresponding 
 
 .. code-block:: pycon
    :linenos:
+   :caption: Example Bipolar Outranking Digraph
+   :name: exBG
 
    >>> from outrankingDigraphs import BipolarOutrankingDigraph
    >>> g = BipolarOutrankingDigraph(t,Normalized=True)
@@ -1102,7 +1106,7 @@ Let us construct the normalized bipolar-valued outranking digraph corresponding 
      'a6' | +0.22  -0.42  +0.00  -1.00  +0.17  +1.00  -0.11  
      'a7' | +0.22  -0.50  +0.17  -0.06  +0.78  +0.42  +1.00  
 
-We notice on the principal diagonal, the *certainly validated* reflexive terms (+1.00). Now, we know for sure that *unanimous* outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a *majority* significance in *each* criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see [BIS-2014p]_) if an outranking situation is independent of all the potential significance weights that respect the given *preordering* of the weights. Mind that there for sure are always outranking situations that are dependent on the very values we allocate to the criteria significances.
+We notice on the principal diagonal, the *certainly validated* reflexive terms +1.00 (see :numref:`exBG` Lines 7-13). Now, we know for sure that *unanimous* outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a *majority* significance in *each* criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see [BIS-2014p]_) if an outranking situation is independent of all the potential significance weights that respect the given *preordering* of the weights. Mind that there for sure are always outranking situations that are dependent on the very values we allocate to the criteria significances.
 
 We may thus distinguish the following bipolar-valued stability levels:
     * **+4 | -4** : *unanimous* outranking | outranked situation;
@@ -1115,6 +1119,8 @@ To compute these stability qualification levels we provide the :py:class:`outran
 
 .. code-block:: pycon
    :linenos:
+   :caption: Outranking Stability Levels
+   :name: exStab
 
    >>> from outrankingDigraphs import RobustOutrankingDigraph
    >>> rg = RobustOutrankingDigraph(t)
@@ -1145,10 +1151,14 @@ To compute these stability qualification levels we provide the :py:class:`outran
      'a6'  |   +2  -2   +1   -2   +2   +4   -2  
      'a7'  |   +2  -2   +1   -1   +3   +2   +4
 
-As expected, all *reflexive* comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially *as well performing as* themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative *a4* with alternatives *a5* and *a6*. We may for instance inspect the details of how alternatives *a4* and *a5* compare. 
+As expected, all *reflexive* comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially *as well performing as* themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative *a4* with alternatives *a5* and *a6* (see :numref:`exStab` Line 25).
+
+We may for instance inspect the details of how alternatives *a4* and *a5* compare. 
 
 .. code-block:: pycon
    :linenos:
+   :caption: Comparing Decision Alternatives *a4* and *a5*
+   :name: exComp45
 
    >>> g.showPairwiseComparison('a4','a5')
     *------------  pairwise comparison ----*
@@ -1165,10 +1175,14 @@ As expected, all *reflexive* comparisons confirm an unanimous outranking situati
     so7  12.00  55.57  44.92  +10.65 | 5.00  10.00  +12.00 	| 
     Valuation in range: -72.00 to +72.00; global concordance: +72.00
 
-Alternative *a4* is indeed performing unanimously *at least as well as* alternative *a5*. The converse comparison does however not deliver an unanimous outranked situation. The comparison only qualifies at stability level -3.
+Alternative *a4* is indeed performing unanimously *at least as well as* alternative *a5*: *r(a4 outranks a5) = +1.00* (see :numref:`exBG` Line 10).
+
+The converse comparison does not, however, deliver such an unanimous *outranked* situation. The comparison only qualifies at stability level -3 (see :numref:`exStab` Line 11 *r(a5 outranks a4) = 0.89*).
 
 .. code-block:: pycon
    :linenos:
+   :caption: Comparing Decision Alternatives *a5* and *a4*
+   :name: exComp54
 
    >>> g.showPairwiseComparison('a5','a4')
     *------------  pairwise comparison ----*
@@ -1185,12 +1199,14 @@ Alternative *a4* is indeed performing unanimously *at least as well as* alternat
     so7  12.00  44.92  55.57  -10.65 | 5.00  10.00  -12.00 	| 
     Valuation in range: -72.00 to +72.00; global concordance: -64.00
 
-Indeed, on criterion *ec8* we observe a negative performance difference of -8.71 which is effectively below the supposed *preference discrimination threshold* 0f 10.00. Yet, the outranked situation is supported by a majority of criteria in each decision objective. Hence, the reported preferential situation is completely independent of any chosen significance weights.
+Indeed, on criterion *ec8* we observe a negative performance difference of -8.71 (see :numref:`exComp54` Line 7) which is effectively below the supposed *preference discrimination threshold* of 10.00. Yet, the outranked situation is supported by a majority of criteria in each decision objective. Hence, the reported preferential situation is completely independent of any chosen significance weights.
 
 Let us now consider a comparison, like the one between alternatives *a2* and *a1*, that is only qualified at stability level +2, resp. -2.
 
 .. code-block:: pycon
    :linenos:
+   :caption: Comparing Decision Alternatives *a2* and *a1*
+   :name: exComp21
 
    >>> g.showPairwiseOutrankings('a2','a1')
     *------------  pairwise comparison ----*
@@ -1222,10 +1238,12 @@ Let us now consider a comparison, like the one between alternatives *a2* and *a1
 
 In both comparisons, the performances observed with respect to the environmental decision objective are not validating with a significant majority the otherwise unanimous outranking, resp. outranked situations. Hence, the stability of the reported preferential situations is in fact dependent on choosing significance weights that are compatible with the given significance weights preorder (see :ref:`weightsPreorder`).
 
-Let us finally inspect a comparison that is only qualified at stability level +1, like the one between alternatives *a7* and *a3*.
+Let us finally inspect a comparison that is only qualified at stability level +1, like the one between alternatives *a7* and *a3* (see :numref:`exComp73`).
 
 .. code-block:: pycon
    :linenos:
+   :caption: Comparing Decision Alternatives *a7* and *a3*
+   :name: exComp73
 
    >>> g.showPairwiseOutrankings('a7','a3')
    *------------  pairwise comparison ----*
@@ -1261,6 +1279,8 @@ The stability denotation of outranking situations is readily available with the 
 
 .. code-block:: pycon
    :linenos:
+   :caption: Relation Table with Stability Denotation
+   :name: stagDenot
 
    >>> g.showRelationTable(hasStabilityDenotation=True)
    * ---- Relation Table -----

@@ -1242,7 +1242,9 @@ confidence level <em>alpha</em> %, if</p>
 <span id="stable-outranking-tutorial-label"></span><h2><a class="toc-backref" href="#id27">Robustness analysis of bipolar-valued outranking digraphs</a><a class="headerlink" href="#robustness-analysis-of-bipolar-valued-outranking-digraphs" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="cardinal-or-ordinal-criteria-significances">
 <h3>Cardinal or Ordinal criteria significances<a class="headerlink" href="#cardinal-or-ordinal-criteria-significances" title="Permalink to this headline">¶</a></h3>
-<p>The required cardinal significance weights of the performance criteria represent the <em>Achilles</em>’ heel of the outranking approach. Rarely will indeed a decision maker be cognitively competent for suggesting precise decimal-valued criteria significance weights. More often, the decision problem will involve equally import decision objectives with equi-significant criteria. A random example of such a decision problem may be generated with the <code class="xref py py-class docutils literal notranslate"><span class="pre">randPerfTabs.Random3ObjectivesPerformanceTableau</span></code> class.</p>
+<p>The required cardinal significance weights of the performance criteria represent the <em>Achilles</em>’ heel of the outranking approach. Rarely will indeed a decision maker be cognitively competent for suggesting precise decimal-valued criteria significance weights. More often, the decision problem will involve more or less equally important decision objectives with more or less equi-significant criteria. A random example of such a decision problem may be generated with the <code class="xref py py-class docutils literal notranslate"><span class="pre">randPerfTabs.Random3ObjectivesPerformanceTableau</span></code> class.</p>
+<div class="literal-block-wrapper docutils container" id="objexample">
+<div class="code-block-caption"><span class="caption-number">Listing 1 </span><span class="caption-text">Random 3 Objectives Performance Tableau</span><a class="headerlink" href="#objexample" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1312,10 +1314,11 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">   Total weight: 24.00 (4 criteria)</span>
 </pre></div>
 </td></tr></table></div>
-<p>In this example, we face seven decision alternatives that are assessed with respect to three <em>equally important</em> decision objectives concerning: first, an <em>economical</em> aspect with a coalition of three performance criteria of significance weight 8, secondly, a <em>societal</em> aspect with a coalition of two performance criteria of significance weight 12, and thirdly, an <em>environmental</em> aspect with a coalition four performance criteria of significance weight 6.</p>
-<p>The question we tackle is the following: How <em>dependent</em> on the actual values of the significance weights appears the corresponding bipolar-valued outranking digraph ? In the previous section, we assumed that the criteria significance weights were random variables. Here, we shall assume that we know for sure only the preordering of the significance weights. In our example we see indeed three increasing weight equivalence classes.</p>
+</div>
+<p>In this example (see <a class="reference internal" href="#objexample"><span class="std std-numref">Listing 1</span></a>), we face seven decision alternatives that are assessed with respect to three <em>equally important</em> decision objectives concerning: first, an <em>economical</em> aspect with a coalition of three performance criteria of significance weight 8, secondly, a <em>societal</em> aspect with a coalition of two performance criteria of significance weight 12, and thirdly, an <em>environmental</em> aspect with a coalition four performance criteria of significance weight 6.</p>
+<p>The question we tackle is the following: How <em>dependent</em> on the actual values of the significance weights appears the corresponding bipolar-valued outranking digraph ? In the previous section, we assumed that the criteria significance weights were random variables. Here, we shall assume that we know for sure only the preordering of the significance weights. In our example we see indeed three increasing weight equivalence classes (<a class="reference internal" href="#weightspreorder"><span class="std std-numref">Listing 2</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="weightspreorder">
-<div class="code-block-caption"><span class="caption-number">Listing 1 </span><span class="caption-text">Significance weights preorder</span><a class="headerlink" href="#weightspreorder" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 2 </span><span class="caption-text">Significance weights preorder</span><a class="headerlink" href="#weightspreorder" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1331,6 +1334,8 @@ confidence level <em>alpha</em> %, if</p>
 <div class="section" id="qualifying-the-stability-of-outranking-situations">
 <h3>Qualifying the stability of outranking situations<a class="headerlink" href="#qualifying-the-stability-of-outranking-situations" title="Permalink to this headline">¶</a></h3>
 <p>Let us construct the normalized bipolar-valued outranking digraph corresponding with the previous 3 Objectives performance tableau <em>t</em>.</p>
+<div class="literal-block-wrapper docutils container" id="exbg">
+<div class="code-block-caption"><span class="caption-number">Listing 3 </span><span class="caption-text">Example Bipolar Outranking Digraph</span><a class="headerlink" href="#exbg" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1358,7 +1363,8 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">  &#39;a7&#39; | +0.22  -0.50  +0.17  -0.06  +0.78  +0.42  +1.00</span>
 </pre></div>
 </td></tr></table></div>
-<p>We notice on the principal diagonal, the <em>certainly validated</em> reflexive terms (+1.00). Now, we know for sure that <em>unanimous</em> outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a <em>majority</em> significance in <em>each</em> criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see <a class="reference internal" href="#bis-2014p" id="id13"><span>[BIS-2014p]</span></a>) if an outranking situation is independent of all the potential significance weights that respect the given <em>preordering</em> of the weights. Mind that there for sure are always outranking situations that are dependent on the very values we allocate to the criteria significances.</p>
+</div>
+<p>We notice on the principal diagonal, the <em>certainly validated</em> reflexive terms +1.00 (see <a class="reference internal" href="#exbg"><span class="std std-numref">Listing 3</span></a> Lines 7-13). Now, we know for sure that <em>unanimous</em> outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a <em>majority</em> significance in <em>each</em> criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see <a class="reference internal" href="#bis-2014p" id="id13"><span>[BIS-2014p]</span></a>) if an outranking situation is independent of all the potential significance weights that respect the given <em>preordering</em> of the weights. Mind that there for sure are always outranking situations that are dependent on the very values we allocate to the criteria significances.</p>
 <dl class="simple">
 <dt>We may thus distinguish the following bipolar-valued stability levels:</dt><dd><ul class="simple">
 <li><p><strong>+4 | -4</strong> : <em>unanimous</em> outranking | outranked situation;</p></li>
@@ -1370,6 +1376,8 @@ confidence level <em>alpha</em> %, if</p>
 </dd>
 </dl>
 <p>To compute these stability qualification levels we provide the <a class="reference internal" href="techDoc.html#outrankingDigraphs.RobustOutrankingDigraph" title="outrankingDigraphs.RobustOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.RobustOutrankingDigraph</span></code></a> class.</p>
+<div class="literal-block-wrapper docutils container" id="exstab">
+<div class="code-block-caption"><span class="caption-number">Listing 4 </span><span class="caption-text">Outranking Stability Levels</span><a class="headerlink" href="#exstab" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1427,7 +1435,11 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">  &#39;a7&#39;  |   +2  -2   +1   -1   +3   +2   +4</span>
 </pre></div>
 </td></tr></table></div>
-<p>As expected, all <em>reflexive</em> comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially <em>as well performing as</em> themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative <em>a4</em> with alternatives <em>a5</em> and <em>a6</em>. We may for instance inspect the details of how alternatives <em>a4</em> and <em>a5</em> compare.</p>
+</div>
+<p>As expected, all <em>reflexive</em> comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially <em>as well performing as</em> themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative <em>a4</em> with alternatives <em>a5</em> and <em>a6</em> (see <a class="reference internal" href="#exstab"><span class="std std-numref">Listing 4</span></a> Line 25).</p>
+<p>We may for instance inspect the details of how alternatives <em>a4</em> and <em>a5</em> compare.</p>
+<div class="literal-block-wrapper docutils container" id="excomp45">
+<div class="code-block-caption"><span class="caption-number">Listing 5 </span><span class="caption-text">Comparing Decision Alternatives <em>a4</em> and <em>a5</em></span><a class="headerlink" href="#excomp45" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1457,7 +1469,11 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go"> Valuation in range: -72.00 to +72.00; global concordance: +72.00</span>
 </pre></div>
 </td></tr></table></div>
-<p>Alternative <em>a4</em> is indeed performing unanimously <em>at least as well as</em> alternative <em>a5</em>. The converse comparison does however not deliver an unanimous outranked situation. The comparison only qualifies at stability level -3.</p>
+</div>
+<p>Alternative <em>a4</em> is indeed performing unanimously <em>at least as well as</em> alternative <em>a5</em>: <em>r(a4 outranks a5) = +1.00</em> (see <a class="reference internal" href="#exbg"><span class="std std-numref">Listing 3</span></a> Line 10).</p>
+<p>The converse comparison does not, however, deliver such an unanimous <em>outranked</em> situation. The comparison only qualifies at stability level -3 (see <a class="reference internal" href="#exstab"><span class="std std-numref">Listing 4</span></a> Line 11 <em>r(a5 outranks a4) = 0.89</em>).</p>
+<div class="literal-block-wrapper docutils container" id="excomp54">
+<div class="code-block-caption"><span class="caption-number">Listing 6 </span><span class="caption-text">Comparing Decision Alternatives <em>a5</em> and <em>a4</em></span><a class="headerlink" href="#excomp54" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1487,8 +1503,11 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go"> Valuation in range: -72.00 to +72.00; global concordance: -64.00</span>
 </pre></div>
 </td></tr></table></div>
-<p>Indeed, on criterion <em>ec8</em> we observe a negative performance difference of -8.71 which is effectively below the supposed <em>preference discrimination threshold</em> 0f 10.00. Yet, the outranked situation is supported by a majority of criteria in each decision objective. Hence, the reported preferential situation is completely independent of any chosen significance weights.</p>
+</div>
+<p>Indeed, on criterion <em>ec8</em> we observe a negative performance difference of -8.71 (see <a class="reference internal" href="#excomp54"><span class="std std-numref">Listing 6</span></a> Line 7) which is effectively below the supposed <em>preference discrimination threshold</em> of 10.00. Yet, the outranked situation is supported by a majority of criteria in each decision objective. Hence, the reported preferential situation is completely independent of any chosen significance weights.</p>
 <p>Let us now consider a comparison, like the one between alternatives <em>a2</em> and <em>a1</em>, that is only qualified at stability level +2, resp. -2.</p>
+<div class="literal-block-wrapper docutils container" id="excomp21">
+<div class="code-block-caption"><span class="caption-number">Listing 7 </span><span class="caption-text">Comparing Decision Alternatives <em>a2</em> and <em>a1</em></span><a class="headerlink" href="#excomp21" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1544,8 +1563,11 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go"> Valuation in range: -72.00 to +72.00; global concordance: -30.00</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 <p>In both comparisons, the performances observed with respect to the environmental decision objective are not validating with a significant majority the otherwise unanimous outranking, resp. outranked situations. Hence, the stability of the reported preferential situations is in fact dependent on choosing significance weights that are compatible with the given significance weights preorder (see <a class="reference internal" href="#weightspreorder"><span class="std std-ref">Significance weights preorder</span></a>).</p>
-<p>Let us finally inspect a comparison that is only qualified at stability level +1, like the one between alternatives <em>a7</em> and <em>a3</em>.</p>
+<p>Let us finally inspect a comparison that is only qualified at stability level +1, like the one between alternatives <em>a7</em> and <em>a3</em> (see <a class="reference internal" href="#excomp73"><span class="std std-numref">Listing 8</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="excomp73">
+<div class="code-block-caption"><span class="caption-number">Listing 8 </span><span class="caption-text">Comparing Decision Alternatives <em>a7</em> and <em>a3</em></span><a class="headerlink" href="#excomp73" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1601,8 +1623,11 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">Valuation in range: -72.00 to +72.00; global concordance: +18.00</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 <p>In these two cases, choosing significances that are just compatible with the given weights preorder will not always result in a positively validated  outranking situation.</p>
 <p>The stability denotation of outranking situations is readily available with the common <code class="xref py py-meth docutils literal notranslate"><span class="pre">OutrankingDigraph.showRelationTable()</span></code> method.</p>
+<div class="literal-block-wrapper docutils container" id="stagdenot">
+<div class="code-block-caption"><span class="caption-number">Listing 9 </span><span class="caption-text">Relation Table with Stability Denotation</span><a class="headerlink" href="#stagdenot" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1640,6 +1665,7 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">            |  (+2)  (-2)  (+1)  (-1)  (+3)  (+2)  (+4)</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 </div>
 <div class="section" id="testing-for-stable-outrankings-with-ordinal-significances">
 <h3>Testing for stable outrankings with ordinal significances<a class="headerlink" href="#testing-for-stable-outrankings-with-ordinal-significances" title="Permalink to this headline">¶</a></h3>
