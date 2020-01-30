@@ -169,7 +169,7 @@ Let *R1* and *R2* be two random crisp relations defined on a same set of 5 alter
    >>> E.correlation
     {'correlation': -0.1, 'determination': 1.0}
 
-In the table of the equivalence relation *R1<=>R2* above (see :numref:`relEqui1` Lines 9-13), we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall's *tau* index in this plainly determined crisp case (see :numref:`relEqui1` Line 13).
+In the table of the equivalence relation *R1<=>R2* above (see :numref:`relEqui1` Lines 9-13), we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall's *tau* index in this plainly determined crisp case (see :numref:`relEqui1` Line 16).
 
 What happens now with more or less determined and even partially indeterminate relations ? May we proceed in a similar way ?
 
@@ -256,7 +256,7 @@ We may verify these relations with help of the corresponding equivalence digraph
 
 .. code-block:: pycon
    :linenos:
-   :caption: 1. Computing the Ordinal Correlation Index
+   :caption: Computing the Ordinal Correlation Index from the Equivalence Digraph
    :name: ordInd1
 
    >>> eq = EquivalenceDigraph(R1,R2)
@@ -273,7 +273,7 @@ In general we simply use the :py:func:`digraphs.Digraph.computeOrdinalCorrelatio
 
 .. code-block:: pycon
    :linenos:
-   :caption: 2. Computing the Ordinal Correlation Index
+   :caption: Directly Computing the Ordinal Correlation Index
    :name: ordInd2
 
    >>> corr = R1.computeOrdinalCorrelation(R2)
@@ -345,7 +345,7 @@ Let us now compute the normalized majority margin *r(<=>)*  of the equivalence b
     r(AS<=>nf) = +0.080
     r(FG<=>nf) = +0.027
 
-We recover above in :numref:`margCorr` the relational equivalence characteristic values shown in the third row of the table in :numref:`graffiti07_2`. The global *Net-Flows* ranking represents obviously a rather balanced compromise with respect to all movie critics' opinions as there appears no valued negative correlation with anyone of them. The *Net-Flows* ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight (see :numref:`margCorr` Line 12).
+In :numref:`margCorr` (see Lines 12-26), we recover above the relational equivalence characteristic values shown in the third row of the table in :numref:`graffiti07_2`. The global *Net-Flows* ranking represents obviously a rather balanced compromise with respect to all movie critics' opinions as there appears no valued negative correlation with anyone of them. The *Net-Flows* ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight (see Line 12).
 
 The ordinal correlation between the global *Net-Flows* ranking and the digraph *g* may be furthermore computed as follows: 
 
@@ -358,10 +358,10 @@ The ordinal correlation between the global *Net-Flows* ranking and the digraph *
    >>> tau = corr['correlation']
    >>> d = corr['determination']
    >>> r = tau * d
-   >>> print('Tau(g,nf) = %+.3f, d = %.3f, r(g<=>nf) = %+.3f' % (Tau,d,r))
-    tau(g,nf) = +0.780, D = 0.300, r(g<=>nf) = +0.234
+   >>> print('tau(g,nf) = %+.3f, d = %.3f, r(g<=>nf) = %+.3f' % (tau,d,r))
+    tau(g,nf) = +0.780, d = 0.300, r(g<=>nf) = +0.234
 
-We notice in :numref:`globalCorr` Line 6 that the correlation *tau* index between the *Net-Flows* ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence between the *nf* and the *g* digraph, with a characteristics value of *only* +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62% of the movie critics' rating opinions.
+We notice in :numref:`globalCorr` Line 6 that the ordinal correlation *tau(g,nf)* index between the *Net-Flows* ranking *nf* and the determined part of the outranking digraph *g* is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence between the *nf* and the *g* digraph, with a characteristics value of *only* +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62% of the movie critics' rating opinions.
 
 It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the *Copeland* or the *Kohler* ranking rule.
 
@@ -414,10 +414,12 @@ We notice here that the *Net-Flows* ranking rule inverts in fact just three '*le
    :width: 600 px
    :align: center
 
-Such a preordering of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -best remaining choices- and *absorbent kernels* -worst remaining choices- (see the tutorial :ref:`Kernel-Tutorial-label`). We operate therefore on the asymmetric '*better rated than*', i.e. the *codual* ([3p]_) of the '*at least as well rated as*' opinions.
+Such a preordering of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -best remaining choices- and *absorbent kernels* -worst remaining choices- (see the tutorial :ref:`Kernel-Tutorial-label`). We operate therefore on the asymmetric '*better rated than*', i.e. the *codual* ([3p]_) of the '*at least as well rated as*' opinions (see :numref:`rankGraf` Line 2).
 
 .. code-block:: pycon
    :linenos:
+   :caption: Ranking by choosing the Grafitti movies
+   :name: rankGraf
 
    >>> from transitiveDigraphs import RankingByChoosingDigraph
    >>> rbc = RankingByChoosingDigraph(g,CoDual=True)
@@ -525,6 +527,8 @@ Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extende
 Time for a practical illustration.
 
 .. code-block:: pycon
+   :caption: Random Bipolar-valued Outranking Digraph
+   :name: exRandBG
 
    >>> from outrankingDigraphs import *
    >>> g = RandomBipolarOutrankingDigraph(Normalized=True,seed=5)
@@ -541,22 +545,24 @@ Time for a practical illustration.
 			   'relation', 'valuationdomain', 'order',
 			   'gamma', 'notGamma']
 
-The random outranking digraph *g*, we consider here for illustration, models the pairwise outranking situations between seven decision alternatives evaluated on seven incommensurable performance criteria. We compute its corresponding bipolar-valued prekernels on the associated codual digraph *gcd*.
+The random outranking digraph *g*, we consider here in :numref:`exRandBG` for illustration, models the pairwise outranking situations between seven decision alternatives evaluated on seven incommensurable performance criteria. We compute its corresponding bipolar-valued prekernels on the associated codual digraph *gcd*.
 
 .. code-block:: pycon
    :linenos:
+   :caption: Strict Prekernels
+   :name: strictPrekernels
 
    >>> gcd = ~(-g) # strict outranking digraph
    >>> gcd
    >>> gcd.showPreKernels()
-    *--- Computing preKernels ---*
-    Dominant preKernels :
+    *--- Computing prekernels ---*
+    Dominant prekernels :
     ['a1', 'a4', 'a2']
        independence :  +0.000
        dominance    :  +0.070
        absorbency   :  -0.488
        covering     :  +0.667
-    Absorbent preKernels :
+    Absorbent prekernels :
     ['a7', 'a3']
        independence :  +0.000
        dominance    :  -0.744
@@ -573,7 +579,7 @@ The random outranking digraph *g*, we consider here for illustration, models the
     absorbent kernel:  [0, 0, 1, 0, 0, 0, 0, 0]
     Execution time  : 0.00022 sec.
 
-The codual outranking digraph, modelling a *strict outranking* relation, admits an initial prekernel [*a1*, *a2*, *a4*] and a terminal one [*a3*, *a7*] (see above the *indeterminate independence* qualifications in Line 7 and 13).
+The codual outranking digraph, modelling a *strict outranking* relation, admits an initial prekernel [*a1*, *a2*, *a4*] and a terminal one [*a3*, *a7*] (see :numref:`strictPrekernels` Line 7 and 13).
 
 Let us compute the *initial* prekernel restricted adjacency table with the :py:func:`digraphs.Digraph.domkernelrestrict` method.
  
@@ -597,9 +603,11 @@ We first notice that this initial prekernel is indeed only *weakly independent*:
 
 .. code-block:: pycon
    :linenos:
+   :caption: Fixpoint iterations for initial prekernel ['a1', 'a2', 'a4']
+   :name:
 
    >>> gcd.computeKernelVector(['a1','a2','a4'],Initial=True,Comments=True)
-    --> Initial prekernel: {'a1', 'a4', 'a2'}
+    --> Initial prekernel: {'a1', 'a2', 'a4'}
     initial low vector : [-1.00, -1.00, -1.00, -1.00, -1.00, -1.00, -1.00]
     initial high vector: [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]
     1st low vector     : [ 0.00, +0.21, -0.21,  0.00, -0.44, -0.07, -0.58]
