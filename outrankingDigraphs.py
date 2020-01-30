@@ -1356,12 +1356,12 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[i],a[j],pc[a[i]][a[j]]['lt'],pc[a[i]][a[j]]['leq'],pc[a[i]][a[j]]['eq'],pc[a[i]][a[j]]['geq'],pc[a[i]][a[j]]['gt'],self.relation[a[i]][a[j]]))
                 print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[j],a[i],pc[a[j]][a[i]]['lt'],pc[a[j]][a[i]]['leq'],pc[a[j]][a[i]]['eq'],pc[a[j]][a[i]]['geq'],pc[a[j]][a[i]]['gt'],self.relation[a[j]][a[i]]))
 
-    def showPairwiseComparison(self,a,b,\
+    def showOldPairwiseComparison(self,a,b,\
                                Debug=False,isReturningHTML=False,\
                                hasSymmetricThresholds=True):
         """
-        Renders the pairwise comprison parameters on all criteria
-        in html format
+        Obsolete: Renders the pairwise comprison parameters on all criteria
+        with weak preference and weak veto thresholds.
         """
         evaluation = self.evaluation
         criteria = self.criteria
@@ -1543,6 +1543,187 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         if isReturningHTML:
             return html
 
+    def showPairwiseComparison(self,a,b,\
+                               Debug=False,isReturningHTML=False,\
+                               hasSymmetricThresholds=True):
+        """
+        Renders the pairwise comprison parameters on all criteria
+        in html format
+        """
+        evaluation = self.evaluation
+        criteria = self.criteria
+        if Debug:
+            print('a,b =', a, b)
+        if a != b:
+            if isReturningHTML:
+                html  = '<h1>Pairwise Comparison</h1>'
+                html += '<h2>Comparing actions : (%s,%s)</h2>' % (a,b)
+                html += '<table style="background-color:White" border="1">'
+                html += '<tr bgcolor="#9acd32">'
+                html += '<th>crit.</th><th>wght.</th> <th>g(x)</th> <th>g(y)</th> <th>diff</th> <th>ind</th> <th>pref</th> <th>concord</th> <th>v</th> <th>polarisation</th>'
+                html += '</tr>'
+            else:
+                print('*------------  pairwise comparison ----*')
+                print('Comparing actions : (%s, %s)' % (a,b))
+                print('crit. wght.  g(x)  g(y)    diff  \t| ind   pref    r() \t|   v  veto')
+                print('-------------------------------  \t ----------------------------- \t ----------------')                
+            concordance = 0
+            sumWeights = 0
+            criteriaList = [x for x in criteria]
+            criteriaList.sort()
+            for c in criteriaList:
+                sumWeights += abs(criteria[c]['weight'])
+                if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                    try:
+                        indx = criteria[c]['thresholds']['ind'][0]
+                        indy = criteria[c]['thresholds']['ind'][1]
+                        if hasSymmetricThresholds:
+                            ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                        else:
+                            ind = indx +indy * abs(evaluation[c][a])
+                    except:
+                        ind = None
+                    wp = None
+                    try:
+                        px = criteria[c]['thresholds']['pref'][0]
+                        py = criteria[c]['thresholds']['pref'][1]
+                        if hasSymmetricThresholds:
+                            p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                        else:
+                            p = px + py * abs(evaluation[c][a])
+                    except:
+                        p = None
+                    if self.criteria[c]['weight'] > Decimal('0.0'):
+                        d = evaluation[c][a] - evaluation[c][b]
+                    else:
+                        d = evaluation[c][b] - evaluation[c][a]
+                    lc0 = self._localConcordance(d,ind,wp,p)
+                    if ind != None:
+                        ind = round(ind,2)
+                    if wp != None:
+                        wp = round(wp,2)
+                    if p != None:
+                        p = round(p,2)
+                    if isReturningHTML:
+                        html += '<tr>'
+                        html += '<td bgcolor="#FFEEAA" align="center">%s</td> <td>%.2f</td> <td>%2.2f</td> <td>%+2.2f</td> <td>%s</td>  <td>%s</td>  <td>%s</td>   <td>%+.2f</td>' %\
+                                (c,criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(p),lc0*abs(criteria[c]['weight']))
+                    else:
+                         print(c, '  %.2f  %2.2f  %2.2f  %+2.2f \t| %s  %s   %+.2f \t|' %\
+                               (criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, \
+                                str(ind),str(p),lc0*abs(criteria[c]['weight'])), end=' ')
+                    concordance = concordance + (lc0 * abs(criteria[c]['weight']))
+##                    try:
+##                        wvx = criteria[c]['thresholds']['weakVeto'][0]
+##                        wvy = criteria[c]['thresholds']['weakVeto'][1]
+##                        if hasSymmetricThresholds:
+##                            wv = wvx + wvy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+##                        else:
+##                            wv = wvx + wvy * abs(evaluation[c][a])
+##                    except:
+                    wv = None
+                    try:
+                        vx = criteria[c]['thresholds']['veto'][0]
+                        vy = criteria[c]['thresholds']['veto'][1]
+                        if hasSymmetricThresholds:
+                            v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                        else:
+                            v = vx + vy * abs(evaluation[c][a])
+                    except:
+                        v = None
+                    veto = self._localVeto(d,wv,v)
+                    try:
+                        negativeVeto = self._localNegativeVeto(d,wv,v)
+                        hasBipolarVeto = True
+                    except:
+                        hasBipolarVeto = False
+                    if hasBipolarVeto:
+                        if v != None:
+                            if d >= v:
+                                if not isReturningHTML:
+                                    print('     %2.2f       %+2.2f' % (v, negativeVeto))
+                                else:
+                                    html += '<td></td> <td> %2.2f</td> <td bgcolor="#ddffdd">%+2.2f</td>' % (v, negativeVeto)
+                            elif d <= -v:
+                                if not isReturningHTML:
+                                    print('     %2.2f       %+2.2f' % (v, -veto))
+                                else:
+                                    html += '<td></td> <td> %2.2f</td> <td bgcolor="#ffddff">%+2.2f</td>' % (v, -veto)
+                            else:
+                                if not isReturningHTML:                                
+                                    print()
+                                else:
+                                    html += '</tr>'
+                        elif wv != None:
+                            if d >= wv:
+                                if not isReturningHTML:
+                                    print('%2.2f      %+2.2f' % (wv, negativeVeto))
+                                else:
+                                    html += '<td>%2.2f</td><td></td> <td bgcolor="#ddffdd">%+2.2f</td>' % (wv, negativeVeto)
+                            elif d <= -wv:
+                                if not isReturningHTML:
+                                    print('%2.2f      %+2.2f' % (wv, -veto))
+                                else:
+                                    html += '<td>%2.2f</td><td></td> <td bgcolor="#ffddff">%+2.2f</td>' % (wv, -veto)
+                            else:
+                                if not isReturningHTML:
+                                    print()
+                                else:
+                                    html += '</tr>'
+                        else:
+                            if not isReturningHTML:
+                                print()
+                            else:
+                                html += '</tr>'
+                    else:
+                        ## unipolar case  Electre III for instance
+                        if veto > Decimal("-1.0"):
+##                            if wv != None:
+##                                if v != None:
+##                                    if not isReturningHTML:
+##                                        print('%2.2f %+2.2f' % (v, veto))
+##                                    else:
+##                                        html += '<td> %2.2f</td> <td bgcolor="#ffddff">%+2.2f</td>' % (v, veto)
+##                                else:
+##                                    if not isReturningHTML:
+##                                        print(' %+2.2f' % (-veto))
+##                                    else:
+##                                        html += ' <td></td> <td bgcolor="#ffddff">%+2.2f</td>' % (wv,-veto)
+##                            else:
+                            if v != None:
+                                if not isReturningHTML:
+                                    print('       %2.2f %+2.2f' % (v, veto))
+                                else:
+                                    html += '<td></td> <td>%2.2f</td> <td bgcolor="#ffddff">%+2.2f</td>' % (v, -veto)
+                            else:
+                                if not isReturningHTML:
+                                    print()
+                                else:
+                                    html += '</tr>'
+                        
+                else:
+                    if evaluation[c][a] == Decimal("-999"):
+                        eval_c_a = 'NA'
+                    else:
+                        eval_c_a = '%2.2f' % evaluation[c][a]
+                    if evaluation[c][b] == Decimal("-999"):
+                        eval_c_b = 'NA'
+                    else:
+                        eval_c_b = '%2.2f' % evaluation[c][b]
+                    
+                    if not isReturningHTML:
+                        print(c,'    %s %s' % (eval_c_a,eval_c_b))
+                    else:
+                        html += '<tr><td bgcolor="#FFEEAA" align="center">%s</td> <td>%.2f</td><td>%s</td><td>%s</td><td></td><td></td><td></td><td></td><td>%.2f</td></tr>' %\
+                                (c, criteria[c]['weight'],eval_c_a,eval_c_b, self.valuationdomain['med']*criteria[c]['weight'])
+            if not isReturningHTML:
+                print('             ----------------------------------------')
+                print(' Valuation in range: %+.2f to %+.2f; global concordance: %+.2f' % (-sumWeights,sumWeights,concordance))
+            else:
+                html += '</tr></table>'
+                html += '<b>Valuation in range: %+.2f to %+.2f; global concordance: %+.2f </b>' % (-sumWeights,sumWeights,concordance)
+        if isReturningHTML:
+            return html
 
     def showHTMLPairwiseComparison(self,a,b,\
                                fileName=None):
@@ -7493,7 +7674,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph):
         performanceTableau (fileName of valid py code)
 
     Specialization of the general OutrankingDigraph class for 
-    new robustness anaylsis.
+    new robustness analysis distinguishing between four nested stability levels.
     """
     def __init__(self, filePerfTab = None,Debug=False,hasNoVeto=True):
         
@@ -7605,7 +7786,7 @@ class OldRobustOutrankingDigraph(BipolarOutrankingDigraph):
         performanceTableau (fileName of valid py code)
 
     Specialization of the general OutrankingDigraph class for 
-    robustness anaylsis.
+    robustness analysis distinguishing 3 levels of stability.
     """
     def __init__(self, filePerfTab = None,Debug=False,hasNoVeto=True):
         

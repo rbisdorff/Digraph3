@@ -27,8 +27,6 @@ Some of the tutorials are decision problem oriented and show how to compute the 
 More graph theoretical tutorials follow. One on working with *undirected graphs*, followed by a tutorial on how to compute *non isomorphic maximal independent sets* (kernels) in the n-cycle graph.
 
 Another tutorial is furthermore devoted on how to generally compute *kernels* in graphs, digraphs and, more specifically, *initial* and *terminal* kernels in outranking digraphs. Special tutorials are devoted to *perfect* graphs, like *split*, *interval* and *permutation* graphs, and to *tree-graphs* and *forests*.
-
-Finally, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logical framework*, like easily coping with *missing data* and uncertain criterion *significance weights*, computing valued *ordinal correlations* between bipolar-valued outranking digraphs, and solving bipolar-valued Berge kernel equation systems.
    
 .. _Digraphs-Tutorial-label:
 
@@ -38,7 +36,6 @@ Working with the *Digraph3* software resources
 .. contents:: 
 	:depth: 2
 	:local:
-
 
 Purpose
 -------

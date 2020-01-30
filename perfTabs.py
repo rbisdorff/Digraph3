@@ -600,7 +600,7 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def showObjectives(self):
         if 'objectives' in self.__dict__:
-            print('*------ show objectives -------"')
+            print('*------ decision objectives -------"')
             
             for obj in self.objectives:
                                                    
@@ -614,6 +614,17 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             print('The performance tableau does not contain objectives.')
 
+    def showWeightPreorder(self):
+        """
+        Renders a preordering of the the criteria signficance weights. 
+        """
+        print('*------- weights preordering --------*')
+        wpo = self.computeWeightPreorder()
+        n = len(wpo)
+        for i in range(0,n-1):
+            print(wpo[i], '(%s) <' % self.criteria[wpo[i][0]]['weight'])
+        print(wpo[-1], '(%s)' % self.criteria[wpo[-1][0]]['weight'])
+            
     def convertInsite2Standard(self):
         """
         Convert in site a bigData formated Performance tableau back into a standard formated PerformanceTableau instance.
@@ -7313,162 +7324,20 @@ if __name__ == "__main__":
 
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
-##    t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,
-##                                   numberOfActions=10,
-##                                   weightDistribution='equiobjectives',
-##                                   IntegerWeights=True,
-##                                   #NegativeWeights=False,
-##                                   Debug=False,
-##                                   missingDataProbability=0.1,
-##                                   seed=105,
-##                                            #Threading=False
-##                                            )
-    t = RandomCBPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=50,
+    t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,
+                                   numberOfActions=10,
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
-                                   NegativeWeights=True,
+                                   #NegativeWeights=False,
                                    Debug=False,
                                    missingDataProbability=0.1,
-                                   seed=102,
-                                   Threading=False,
+                                   seed=10,
+                                            #Threading=False
                                             )
-    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Copeland')
-    g = BipolarOutrankingDigraph(t)
-    ranking = g.computeCopelandRanking()
-    critCorr = g.computeMarginalVersusGlobalRankingCorrelations(ranking)
-    print('copSum',sum([x[0] for x in critCorr]))
-    n = len(critCorr)
-    nd = Decimal(n*(n-1)/2)
-    totDif = Decimal('0')
-    for i in range(n):
-        for j in range(i+1,n):
-            totDif += abs(critCorr[i][0] - critCorr[j][0])
-    print('difcop',totDif/nd)
-    ranking = g.computeNetFlowsRanking()
-    critCorr = g.computeMarginalVersusGlobalRankingCorrelations(ranking)
-    print('nfSum',sum([x[0] for x in critCorr]))
-    totDif = Decimal('0')
-    for i in range(n):
-        for j in range(i+1,n):
-            totDif += abs(critCorr[i][0] - critCorr[j][0])
-    print('difnf',totDif/nd)
-    t.showHTMLPerformanceHeatmap(Correlations=True,
-                                 rankingRule='NetFlows',
-                                 toIndex=10)
-
-       
-
+    t.showWeightPreorder()
+   
     
-##    t.showPerformanceTableau()
-##    nt = NormalizedPerformanceTableau(t)
-##    nt.showPerformanceTableau()
-##    #t.showHTMLPerformanceHeatmap(Correlations=True)
-##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
-##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
-##
-##    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='ArrowRaynaud')
-##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
-##    t1 = RandomCBPerformanceTableau(numberOfCriteria=13,
-##                                   numberOfActions=10,
-##                                   weightDistribution='equiobjectives',
-##                                   IntegerWeights=True,
-##                                   NegativeWeights=True,
-##                                   Debug=False,
-##                                   missingDataProbability=0.1,
-##                                   seed=101,Threading=False)
-##    t1.showPerformanceTableau()
-##
-##    g = BipolarOutrankingDigraph(t)
-##    g1 = BipolarOutrankingDigraph(t1)
-##    
-##    nt = NormalizedPerformanceTableau(t1)
-##    nt.showPerformanceTableau()
-##    #t.showHTMLPerformanceHeatmap(Correlations=True)
-##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
-##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='Kohler')
-##    t1.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='ArrowRaynaud')
-##   
-    #nt.showHTMLPerformanceHeatmap(Correlations=True)
-#     t.saveCSV('test')
-#     T = CSVPerformanceTableau('test',Debug=True)
-#     print(T.__dict__)
-#     T.showActions()
-#     T.showCriteria()
-# #    T.showHTMLPerformanceHeatmap(Correlations=True)
-#     from outrankingDigraphs import *
-#     g = BipolarOutrankingDigraph(t)
-#     gt = BipolarOutrankingDigraph(T)
-#     g.showRubisBestChoiceRecommendation()
-#     gt.showRubisBestChoiceRecommendation()
     
-##    for g in t.criteria:
-##        t._computeLimitingQuantiles(g,frequencies=[0.0,0.25,0.5,0.75,1.0],LowerClosed=False,Debug=False)
-    # t.saveXMCDA2('test')
-    # t1 = XMCDA2PerformanceTableau('test')
-    # t1.showObjectives()
-    # t1.showHTMLPerformanceHeatmap(Correlations=True,SparseModel=False)
-##    t = ConstantPerformanceTableau(t,
-##                                   actionsSubset=['a01','a02','a03'],
-##                                   criteriaSubset=['g01','g02','g03'],
-##                                   position=0.75)
-    #t.showPerformanceTableau()
-##    t = RandomCoalitionsPerformanceTableau(numberOfActions=20,
-##                                           numberOfCriteria=13,
-##                                           Coalitions=False,
-##                                           RandomCoalitions=True,
-##                                           weightDistribution="equicoalitions",
-##                                           Debug=True)
-##    t.showAll()
-##    t.saveXMCDA2('test')
-##    t = XMCDA2PerformanceTableau('spiegel2004')
-##    t = XMCDA2PerformanceTableau('uniSorting')
-##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
-##    print('TT')
-##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)
-##    t.showHTMLPerformanceHeatmap(quantiles=11,Threading=False,rankingRule=None,
-##                                 Correlations=True,ndigits=0)
-##    t.showHTMLPerformanceHeatmap(actionsList=list(t.actions),criteriaList=list(t.criteria.keys()),
-##                                 Threading=False,rankingRule=None,SparseModel=False,
-##                                Correlations=True,ndigits=0,
-##                                 Debug=False)
-##    t.showHTMLPerformanceQuantiles(Sorted=False)
-##    t.showHTMLPerformanceQuantiles(Sorted=True)
-##    t.showAllQuantiles(Sorted=True)
-####    actionsList = qsrbc.computeQsRbcRanking()
-####
-##
-####    g = BipolarOutrankingDigraph(t)
-####    print(g.computeMarginalVersusGlobalOutrankingCorrelations())
-####    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,Debug=False)
-##    
-##    
-####    #t.saveCSV('testCSV',Sorted=False,actionsList=actionsList,Debug=True)
-####    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))
-####    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=7,Ranked=True)
-####    t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,Threading=False)
-####    t.showHTMLPerformanceTableau(Transposed=True)
-####    t.showHTMLPerformanceHeatmap(colorLevels=7,Threading=False)
-####    t.showHTMLPerformanceHeatmap()
-####    pt1 = PartialPerformanceTableau(t)
-####    pt1.showAll()
-####    pt2 = PartialPerformanceTableau(t,actionsSubset=['a01','a02'],criteriaSubset=['g01','g03'])
-####    pt2.showAll()
-##    
-####    ## t = PerformanceTableau('test')
-####    t.saveXMCDA2('test',servingD3=False)
-####    t.showCriteria(IntegerWeights=True)
-    # print(t.computeQuantiles(Debug=False))
-    # t.showQuantileSort()
-    # g = BipolarOutrankingDigraph(t)
-    # s = sortingDigraphs.SortingDigraph(g)
-    # s.showSorting()
-    # g.computeRankingByChoosing(CoDual=False)
-    # g.showRankingByChoosing()
-####    prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
-####    prg.showWeakOrder()
-####    print(g.computeOrdinalCorrelation(prg))
-     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')

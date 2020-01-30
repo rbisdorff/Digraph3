@@ -14,6 +14,8 @@ Pearls of bipolar-valued epistemic logic
 .. highlight:: python
 	:linenothreshold: 2
 
+In this part of the Digraph3 documentation, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logical framework*, like easily coping with *missing data* and uncertain criterion *significance weights*, computing valued *ordinal correlations* between bipolar-valued outranking digraphs, solving bipolar-valued Berge kernel equation systems, and testing for stability of outranking statements when facing only ordinal criteria significance weights.
+
 .. _CopingMissing-Data-label:
 
 Coping with missing data and indeterminateness
@@ -1066,15 +1068,22 @@ In this example, we face seven decision alternatives that are assessed with resp
 
 The question we tackle is the following: How *dependent* on the actual values of the significance weights appears the corresponding bipolar-valued outranking digraph ? In the previous section, we assumed that the criteria significance weights were random variables. Here, we shall assume that we know for sure only the preordering of the significance weights. In our example we see indeed three increasing weight equivalence classes.
 
->>> t.weightPreorder
-[['en3', 'en5', 'en6', 'en9'], ['ec1', 'ec4', 'ec8'], ['so2', 'so7']]
+.. code-block:: pycon
+   :linenos:
+   :caption: Significance weights preorder
+   :name: weightsPreorder
+      
+   >>> t.showWeightPreorder()
+    ['en3', 'en5', 'en6', 'en9'] (6) <
+    ['ec1', 'ec4', 'ec8'] (8) <
+    ['so2', 'so7'] (12)
 
-How stable appear now the outranking situations when assuming imprecise significance weights?
+How stable appear now the outranking situations when assuming only ordinal significance weights?
 
 Qualifying the stability of outranking situations
 .................................................
 
-Let us construct, by neglecting for a moment potential vetoes and counter-vetoes, the corresponding normalized bipolar-valued outranking digraph.
+Let us construct the normalized bipolar-valued outranking digraph corresponding with the previous 3 Objectives performance tableau *t*.
 
 .. code-block:: pycon
    :linenos:
@@ -1095,11 +1104,11 @@ Let us construct, by neglecting for a moment potential vetoes and counter-vetoes
 
 We notice on the principal diagonal, the *certainly validated* reflexive terms (+1.00). Now, we know for sure that *unanimous* outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a *majority* significance in *each* criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see [BIS-2014p]_) if an outranking situation is independent of all the potential significance weights that respect the given *preordering* of the weights. Mind that there for sure are always outranking situations that are dependent on the very values we allocate to the criteria significances.
 
-We may thus define the following stability levels:
-    * **+4|-4** : *unanimous* outranking | outranked situation;
-    * **+3|-3** : *validated* outranking | outranked situation in *each* coalition of equisignificant criteria;
-    * **+2|-2** : *validated* outranking | outranked situation with *all* potential significance weights *compatible* with the given significance *preorder*;
-    * **+1|-1** : *validated* outranking | outranked situation with the given significance weights;
+We may thus distinguish the following stability levels:
+    * **+4 | -4** : *unanimous* outranking | outranked situation;
+    * **+3 | -3** : *validated* outranking | outranked situation in *each* coalition of equisignificant criteria;
+    * **+2 | -2** : *validated* outranking | outranked situation with *all* potential significance weights *compatible* with the given significance *preorder*;
+    * **+1 | -1** : *validated* outranking | outranked situation with the given significance weights;
     * **0** : *indeterminate* relational situation
 
 To compute these stability qualification levels we provide the :py:class:`outrankingDigraphs.RobustOutrankingDigraph` class.
@@ -1124,7 +1133,7 @@ To compute these stability qualification levels we provide the :py:class:`outran
 			   'ordinalRelation', 'equisignificantRelation',
 			   'unanimousRelation', 'relation',
 			   'gamma', 'notGamma']
-   >>> rg.showRelationTable
+   >>> rg.showRelationTable()
     * ---- Relation Table -----
      stab. | 'a1' 'a2' 'a3' 'a4' 'a5' 'a6' 'a7'   
     -------|-----------------------------------
@@ -1136,7 +1145,7 @@ To compute these stability qualification levels we provide the :py:class:`outran
      'a6'  |   +2  -2   +1   -2   +2   +4   -2  
      'a7'  |   +2  -2   +1   -1   +3   +2   +4
 
-As expected, all reflexive comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially *as well performing as* themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative *a4* with alternatives *a5* and *a6*. We may for instance inspect the details of how alternatives *a4* and *a5* compare. 
+As expected, all *reflexive* comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially *as well performing as* themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative *a4* with alternatives *a5* and *a6*. We may for instance inspect the details of how alternatives *a4* and *a5* compare. 
 
 .. code-block:: pycon
    :linenos:
@@ -1144,16 +1153,16 @@ As expected, all reflexive comparisons confirm an unanimous outranking situation
    >>> g.showPairwiseComparison('a4','a5')
     *------------  pairwise comparison ----*
     Comparing actions : (a4, a5)
-    crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	| 	
-    ec1   8.00  85.19  46.75  +38.44 | 5.00  None  10.00   +8.00 	| 
-    ec4   8.00  72.26   8.96  +63.30 | 5.00  None  10.00   +8.00 	| 
-    ec8   8.00  44.62  35.91   +8.71 | 5.00  None  10.00   +8.00 	| 
-    en3   6.00  80.81  31.05  +49.76 | 5.00  None  10.00   +6.00 	| 
-    en5   6.00  49.69  29.52  +20.17 | 5.00  None  10.00   +6.00 	| 
-    en6   6.00  66.21  31.22  +34.99 | 5.00  None  10.00   +6.00 	| 
-    en9   6.00  50.92   9.83  +41.09 | 5.00  None  10.00   +6.00 	| 
-    so2  12.00  49.05  12.36  +36.69 | 5.00  None  10.00  +12.00 	| 
-    so7  12.00  55.57  44.92  +10.65 | 5.00  None  10.00  +12.00 	| 
+    crit. wght.  g(x)  g(y)    diff  | ind   pref    r() 	| 	
+    ec1   8.00  85.19  46.75  +38.44 | 5.00  10.00   +8.00 	| 
+    ec4   8.00  72.26   8.96  +63.30 | 5.00  10.00   +8.00 	| 
+    ec8   8.00  44.62  35.91   +8.71 | 5.00  10.00   +8.00 	| 
+    en3   6.00  80.81  31.05  +49.76 | 5.00  10.00   +6.00 	| 
+    en5   6.00  49.69  29.52  +20.17 | 5.00  10.00   +6.00 	| 
+    en6   6.00  66.21  31.22  +34.99 | 5.00  10.00   +6.00 	| 
+    en9   6.00  50.92   9.83  +41.09 | 5.00  10.00   +6.00 	| 
+    so2  12.00  49.05  12.36  +36.69 | 5.00  10.00  +12.00 	| 
+    so7  12.00  55.57  44.92  +10.65 | 5.00  10.00  +12.00 	| 
     Valuation in range: -72.00 to +72.00; global concordance: +72.00
 
 Alternative *a4* is indeed performing unanimously *at least as well as* alternative *a5*. The converse comparison does however not deliver an unanimous outranked situation. The comparison only qualifies at stability level -3.
@@ -1164,16 +1173,16 @@ Alternative *a4* is indeed performing unanimously *at least as well as* alternat
    >>> g.showPairwiseComparison('a5','a4')
     *------------  pairwise comparison ----*
     Comparing actions : (a5, a4)
-    crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord
-    ec1   8.00  46.75  85.19  -38.44 | 5.00  None  10.00   -8.00 	| 
-    ec4   8.00   8.96  72.26  -63.30 | 5.00  None  10.00   -8.00 	| 
-    ec8   8.00  35.91  44.62   -8.71 | 5.00  None  10.00   +0.00 	| 
-    en3   6.00  31.05  80.81  -49.76 | 5.00  None  10.00   -6.00 	| 
-    en5   6.00  29.52  49.69  -20.17 | 5.00  None  10.00   -6.00 	| 
-    en6   6.00  31.22  66.21  -34.99 | 5.00  None  10.00   -6.00 	| 
-    en9   6.00   9.83  50.92  -41.09 | 5.00  None  10.00   -6.00 	| 
-    so2  12.00  12.36  49.05  -36.69 | 5.00  None  10.00  -12.00 	| 
-    so7  12.00  44.92  55.57  -10.65 | 5.00  None  10.00  -12.00 	| 
+    crit. wght.  g(x)  g(y)    diff  | ind   pref    r()        |
+    ec1   8.00  46.75  85.19  -38.44 | 5.00  10.00   -8.00 	| 
+    ec4   8.00   8.96  72.26  -63.30 | 5.00  10.00   -8.00 	| 
+    ec8   8.00  35.91  44.62   -8.71 | 5.00  10.00   +0.00 	| 
+    en3   6.00  31.05  80.81  -49.76 | 5.00  10.00   -6.00 	| 
+    en5   6.00  29.52  49.69  -20.17 | 5.00  10.00   -6.00 	| 
+    en6   6.00  31.22  66.21  -34.99 | 5.00  10.00   -6.00 	| 
+    en9   6.00   9.83  50.92  -41.09 | 5.00  10.00   -6.00 	| 
+    so2  12.00  12.36  49.05  -36.69 | 5.00  10.00  -12.00 	| 
+    so7  12.00  44.92  55.57  -10.65 | 5.00  10.00  -12.00 	| 
     Valuation in range: -72.00 to +72.00; global concordance: -64.00
 
 Indeed, on criterion *ec8* we observe a negative performance difference of -8.71 which is effectively below the supposed *preference discrimination threshold* 0f 10.00. Yet, the outranked situation is supported by a majority of criteria in each decision objective. Hence, the reported preferential situation is completely independent of any chosen significance weights.
@@ -1186,35 +1195,32 @@ Let us now consider a comparison, like the one between alternatives *a2* and *a1
    >>> g.showPairwiseOutrankings('a2','a1')
     *------------  pairwise comparison ----*
     Comparing actions : (a2, a1)
-    crit. wght.  g(x)  g(y)    diff  | ind    wp      p    concord 	|
-    ec1   8.00  89.77  38.11  +51.66 | 5.00  None  10.00   +8.00 	| 
-    ec4   8.00  86.00  22.65  +63.35 | 5.00  None  10.00   +8.00 	| 
-    ec8   8.00  89.43  77.02  +12.41 | 5.00  None  10.00   +8.00 	| 
-    en3   6.00  20.79  58.16  -37.37 | 5.00  None  10.00   -6.00 	| 
-    en5   6.00  23.83  31.40   -7.57 | 5.00  None  10.00   +0.00 	| 
-    en6   6.00  18.66  11.41   +7.25 | 5.00  None  10.00   +6.00 	| 
-    en9   6.00  26.65  44.37  -17.72 | 5.00  None  10.00   -6.00 	| 
-    so2  12.00  89.12  22.43  +66.69 | 5.00  None  10.00  +12.00 	| 
-    so7  12.00  84.73  28.41  +56.32 | 5.00  None  10.00  +12.00 	| 
+    crit. wght.  g(x)  g(y)    diff  | ind   pref     r() 	|
+    ec1   8.00  89.77  38.11  +51.66 | 5.00  10.00   +8.00 	| 
+    ec4   8.00  86.00  22.65  +63.35 | 5.00  10.00   +8.00 	| 
+    ec8   8.00  89.43  77.02  +12.41 | 5.00  10.00   +8.00 	| 
+    en3   6.00  20.79  58.16  -37.37 | 5.00  10.00   -6.00 	| 
+    en5   6.00  23.83  31.40   -7.57 | 5.00  10.00   +0.00 	| 
+    en6   6.00  18.66  11.41   +7.25 | 5.00  10.00   +6.00 	| 
+    en9   6.00  26.65  44.37  -17.72 | 5.00  10.00   -6.00 	| 
+    so2  12.00  89.12  22.43  +66.69 | 5.00  10.00  +12.00 	| 
+    so7  12.00  84.73  28.41  +56.32 | 5.00  10.00  +12.00 	| 
     Valuation in range: -72.00 to +72.00; global concordance: +42.00
     *------------  pairwise comparison ----*
     Comparing actions : (a1, a2)
-    crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	|
-    ec1   8.00  38.11  89.77  -51.66 | 5.00  None  10.00   -8.00 	| 
-    ec4   8.00  22.65  86.00  -63.35 | 5.00  None  10.00   -8.00 	| 
-    ec8   8.00  77.02  89.43  -12.41 | 5.00  None  10.00   -8.00 	| 
-    en3   6.00  58.16  20.79  +37.37 | 5.00  None  10.00   +6.00 	| 
-    en5   6.00  31.40  23.83   +7.57 | 5.00  None  10.00   +6.00 	| 
-    en6   6.00  11.41  18.66   -7.25 | 5.00  None  10.00   +0.00 	| 
-    en9   6.00  44.37  26.65  +17.72 | 5.00  None  10.00   +6.00 	| 
-    so2  12.00  22.43  89.12  -66.69 | 5.00  None  10.00  -12.00 	| 
-    so7  12.00  28.41  84.73  -56.32 | 5.00  None  10.00  -12.00 	| 
+    crit. wght.  g(x)  g(y)    diff  | ind   pref    r() 	|
+    ec1   8.00  38.11  89.77  -51.66 | 5.00  10.00   -8.00 	| 
+    ec4   8.00  22.65  86.00  -63.35 | 5.00  10.00   -8.00 	| 
+    ec8   8.00  77.02  89.43  -12.41 | 5.00  10.00   -8.00 	| 
+    en3   6.00  58.16  20.79  +37.37 | 5.00  10.00   +6.00 	| 
+    en5   6.00  31.40  23.83   +7.57 | 5.00  10.00   +6.00 	| 
+    en6   6.00  11.41  18.66   -7.25 | 5.00  10.00   +0.00 	| 
+    en9   6.00  44.37  26.65  +17.72 | 5.00  10.00   +6.00 	| 
+    so2  12.00  22.43  89.12  -66.69 | 5.00  10.00  -12.00 	| 
+    so7  12.00  28.41  84.73  -56.32 | 5.00  10.00  -12.00 	| 
     Valuation in range: -72.00 to +72.00; global concordance: -30.00
 
-In both comparisons, the performances observed with respect to the environmental decision objective are not validating with a significant majority the otherwise unanimous outranking, resp. outranked situations. Hence, the stability of the reported preferential situations is in fact dependent on choosing significance weights that are compatible with the given significance weights preorder (see below).
-
->>> t.weightPreorder
-[['en3', 'en5', 'en6', 'en9'], ['ec1', 'ec4', 'ec8'], ['so2', 'so7']]
+In both comparisons, the performances observed with respect to the environmental decision objective are not validating with a significant majority the otherwise unanimous outranking, resp. outranked situations. Hence, the stability of the reported preferential situations is in fact dependent on choosing significance weights that are compatible with the given significance weights preorder (see :ref:`weightsPreorder`).
 
 Let us finally inspect a comparison that is only qualified at stability level +1, like the one between alternatives *a7* and *a3*.
 
@@ -1224,34 +1230,34 @@ Let us finally inspect a comparison that is only qualified at stability level +1
    >>> g.showPairwiseOutrankings('a7','a3')
    *------------  pairwise comparison ----*
    Comparing actions : (a7, a3)
-   crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	| 
-   ec1   8.00  15.33  80.19  -64.86 | 5.00  None  10.00   -8.00 	| 
-   ec4   8.00  36.31  68.70  -32.39 | 5.00  None  10.00   -8.00 	| 
-   ec8   8.00  38.31  91.94  -53.63 | 5.00  None  10.00   -8.00 	| 
-   en3   6.00  30.70  46.78  -16.08 | 5.00  None  10.00   -6.00 	| 
-   en5   6.00  35.52  27.25   +8.27 | 5.00  None  10.00   +6.00 	| 
-   en6   6.00  69.71   1.65  +68.06 | 5.00  None  10.00   +6.00 	| 
-   en9   6.00  13.10  14.85   -1.75 | 5.00  None  10.00   +6.00 	| 
-   so2  12.00  68.06  58.85   +9.21 | 5.00  None  10.00  +12.00 	| 
-   so7  12.00  58.45  15.49  +42.96 | 5.00  None  10.00  +12.00 	| 
+   crit. wght.  g(x)  g(y)    diff  | ind   pref    r() 	| 
+   ec1   8.00  15.33  80.19  -64.86 | 5.00  10.00   -8.00 	| 
+   ec4   8.00  36.31  68.70  -32.39 | 5.00  10.00   -8.00 	| 
+   ec8   8.00  38.31  91.94  -53.63 | 5.00  10.00   -8.00 	| 
+   en3   6.00  30.70  46.78  -16.08 | 5.00  10.00   -6.00 	| 
+   en5   6.00  35.52  27.25   +8.27 | 5.00  10.00   +6.00 	| 
+   en6   6.00  69.71   1.65  +68.06 | 5.00  10.00   +6.00 	| 
+   en9   6.00  13.10  14.85   -1.75 | 5.00  10.00   +6.00 	| 
+   so2  12.00  68.06  58.85   +9.21 | 5.00  10.00  +12.00 	| 
+   so7  12.00  58.45  15.49  +42.96 | 5.00  10.00  +12.00 	| 
    Valuation in range: -72.00 to +72.00; global concordance: +12.00
    *------------  pairwise comparison ----*
    Comparing actions : (a3, a7)
-   crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord 	|
-   ec1   8.00  80.19  15.33  +64.86 | 5.00  None  10.00   +8.00 	| 
-   ec4   8.00  68.70  36.31  +32.39 | 5.00  None  10.00   +8.00 	| 
-   ec8   8.00  91.94  38.31  +53.63 | 5.00  None  10.00   +8.00 	| 
-   en3   6.00  46.78  30.70  +16.08 | 5.00  None  10.00   +6.00 	| 
-   en5   6.00  27.25  35.52   -8.27 | 5.00  None  10.00   +0.00 	| 
-   en6   6.00   1.65  69.71  -68.06 | 5.00  None  10.00   -6.00 	| 
-   en9   6.00  14.85  13.10   +1.75 | 5.00  None  10.00   +6.00 	| 
-   so2  12.00  58.85  68.06   -9.21 | 5.00  None  10.00   +0.00 	| 
-   so7  12.00  15.49  58.45  -42.96 | 5.00  None  10.00  -12.00 	| 
+   crit. wght.  g(x)  g(y)    diff  | ind   pref    r() 	|
+   ec1   8.00  80.19  15.33  +64.86 | 5.00  10.00   +8.00 	| 
+   ec4   8.00  68.70  36.31  +32.39 | 5.00  10.00   +8.00 	| 
+   ec8   8.00  91.94  38.31  +53.63 | 5.00  10.00   +8.00 	| 
+   en3   6.00  46.78  30.70  +16.08 | 5.00  10.00   +6.00 	| 
+   en5   6.00  27.25  35.52   -8.27 | 5.00  10.00   +0.00 	| 
+   en6   6.00   1.65  69.71  -68.06 | 5.00  10.00   -6.00 	| 
+   en9   6.00  14.85  13.10   +1.75 | 5.00  10.00   +6.00 	| 
+   so2  12.00  58.85  68.06   -9.21 | 5.00  10.00   +0.00 	| 
+   so7  12.00  15.49  58.45  -42.96 | 5.00  10.00  -12.00 	| 
    Valuation in range: -72.00 to +72.00; global concordance: +18.00
 
 In these two cases, choosing significances that are just compatible with the given weights preorder will not always result in a positively validated  outranking situation.
 
-Let us finally mention that the stability denotation of outranking situations is readily available with the common :py:meth:`OutrankingDigraph.showRelationTable` method.
+The stability denotation of outranking situations is readily available with the common :py:meth:`OutrankingDigraph.showRelationTable` method.
 
 .. code-block:: pycon
    :linenos:
@@ -1275,6 +1281,14 @@ Let us finally mention that the stability denotation of outranking situations is
        'a7'    | +0.22 -0.50 +0.17 -0.06 +0.78 +0.42 +1.00  
 	       |  (+2)  (-2)  (+1)  (-1)  (+3)  (+2)  (+4)  
 
+Testing for stable outrankings with ordinal significances
+.........................................................
+
+It is precisely again the bipolar-valued epistemic characteristic domain that will give us a way to test precisely for stability level 2 (see [BIS-2004_1p]_, [BIS-2004_2p]_).
+
+
+
+
 Back to :ref:`Content Table <Pearls-Tutorial-label>`
 	   	  
 Bibliography
@@ -1290,6 +1304,10 @@ Bibliography
 
 .. [BIS-2006_2p] Bisdorff R. (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <_static/EnumKernels.pdf>`_).
 
+.. [BIS-2004_1p] Bisdorff R. (2004). Concordant Outranking with multiple criteria of ordinal significance. 4OR, Quarterly Journal of the Belgian, French and Italian Operations Research Societies, Springer-Verlag, Issue: Volume 2, Number 4, December 2004, Pages: 293 - 308. [ISSN: 1619-4500 (Paper) 1614-2411 (Online)] Electronic version: DOI: 10.1007/s10288-004-0053-7 (downloadable preliminary version `PDF file 137.1Kb <_static/Bisdorff4ORFinal.pdf>`_)
+
+.. [BIS-2004_2p] Bisdorff R. (2004). Preference aggregation with multiple criteria of ordinal significance. In: D. Bouyssou, M. Janowitz, F. Roberts, and A. Tsouki´s (eds.), Annales du LAMSADE, 3, Octobre 2004, Université Paris-Dauphine, pp. 25-44 [ISSN 1762-455X] (downloadable `PDF file 167.6Kb <_static/BisdorffDimacsLamsadeFinal.pdf>`_).
+   
 .. [SCH-1985p] Schmidt G. and Ströhlein Th. (1985), *On kernels of graphs and solutions of games: a synopsis based on relations and fixpoints*. SIAM, J. Algebraic Discrete Methods, 6, 1985, 54–65.
 
 .. [BER-1958p] Berge C. (2001), *The theory of graphs*. Dover Publications Inc. 2001. First published in English by Methuen & Co Ltd., London 1962. Translated from a French edition by Dunod, Paris 1958.

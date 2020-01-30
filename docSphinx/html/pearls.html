@@ -61,17 +61,18 @@
 </dl>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#coping-with-missing-data-and-indeterminateness" id="id21">Coping with missing data and indeterminateness</a></p></li>
-<li><p><a class="reference internal" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" id="id22">Ordinal correlation equals bipolar-valued relational equivalence</a></p></li>
-<li><p><a class="reference internal" href="#bipolar-valued-kernel-membership-characteristic-vectors" id="id23">Bipolar-valued kernel membership characteristic vectors</a></p></li>
-<li><p><a class="reference internal" href="#on-confident-outrankings-with-uncertain-criteria-significances" id="id24">On confident outrankings with uncertain criteria significances</a></p></li>
-<li><p><a class="reference internal" href="#robustness-analysis-of-bipolar-valued-outranking-digraphs" id="id25">Robustness analysis of bipolar-valued outranking digraphs</a></p></li>
-<li><p><a class="reference internal" href="#bibliography" id="id26">Bibliography</a></p></li>
-<li><p><a class="reference internal" href="#footnotes" id="id27">Footnotes</a></p></li>
+<li><p><a class="reference internal" href="#coping-with-missing-data-and-indeterminateness" id="id23">Coping with missing data and indeterminateness</a></p></li>
+<li><p><a class="reference internal" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" id="id24">Ordinal correlation equals bipolar-valued relational equivalence</a></p></li>
+<li><p><a class="reference internal" href="#bipolar-valued-kernel-membership-characteristic-vectors" id="id25">Bipolar-valued kernel membership characteristic vectors</a></p></li>
+<li><p><a class="reference internal" href="#on-confident-outrankings-with-uncertain-criteria-significances" id="id26">On confident outrankings with uncertain criteria significances</a></p></li>
+<li><p><a class="reference internal" href="#robustness-analysis-of-bipolar-valued-outranking-digraphs" id="id27">Robustness analysis of bipolar-valued outranking digraphs</a></p></li>
+<li><p><a class="reference internal" href="#bibliography" id="id28">Bibliography</a></p></li>
+<li><p><a class="reference internal" href="#footnotes" id="id29">Footnotes</a></p></li>
 </ul>
 </div>
+<p>In this part of the Digraph3 documentation, we provide an insight in computational enhancements one may get when working in a <em>bipolar-valued epistemic logical framework</em>, like easily coping with <em>missing data</em> and uncertain criterion <em>significance weights</em>, computing valued <em>ordinal correlations</em> between bipolar-valued outranking digraphs, solving bipolar-valued Berge kernel equation systems, and testing for stability of outranking statements when facing only ordinal criteria significance weights.</p>
 <div class="section" id="coping-with-missing-data-and-indeterminateness">
-<span id="copingmissing-data-label"></span><h2><a class="toc-backref" href="#id21">Coping with missing data and indeterminateness</a><a class="headerlink" href="#coping-with-missing-data-and-indeterminateness" title="Permalink to this headline">¶</a></h2>
+<span id="copingmissing-data-label"></span><h2><a class="toc-backref" href="#id23">Coping with missing data and indeterminateness</a><a class="headerlink" href="#coping-with-missing-data-and-indeterminateness" title="Permalink to this headline">¶</a></h2>
 <p>In a stubborn keeping with a two-valued logic, where every argument can only be true or false, there is no place for efficiently taking into account missing data or logical indeterminateness. These cases are seen as problematic and, at best are simply ignored. Worst, in modern data science, missing data get often replaced with <em>fictive</em> values, potentially falsifying hence all subsequent computations.</p>
 <p>In social choice problems like elections, <em>abstentions</em> are, however, frequently observed and represent a social expression that may be significant for revealing non represented social preferences.</p>
 <p>In marketing studies, interviewees will not always respond to all the submitted questions. Again, such abstentions do sometimes contain nevertheless valid information concerning consumer preferences.</p>
@@ -138,9 +139,9 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPairwiseComparison</span><span class="p">(</span><span class="s1">&#39;mv_PE&#39;</span><span class="p">,</span><span class="s1">&#39;mv_NP&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="figure align-center" id="id17">
+<div class="figure align-center" id="id19">
 <a class="reference internal image-reference" href="_images/graffiti07_6.png"><img alt="Comparing mv_PE and mv_NP" src="_images/graffiti07_6.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 71 </span><span class="caption-text">Indeterminate pairwise comparison example</span><a class="headerlink" href="#id17" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 71 </span><span class="caption-text">Indeterminate pairwise comparison example</span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
 </div>
 <p>Only eight, out of the fifteen critics, have seen both movies and the positive opinions do neatly balance the negative ones. A global statement that <em>mv_PE</em> is ‘<em>at least as well rated as</em>’ <em>mv_NP</em>  may in this case hence <strong>neither be validated, nor invalidated</strong>; a preferential situation that cannot be modelled with any scoring approach.</p>
 <p>It is fair, however, to eventually mention here that the <em>Graffiti</em> magazine’s average scoring method is actually showing a very similar ranking. Indeed, average scores usually confirm well all evident pairwise comparisons, yet <em>enforce</em> comparability for all less evident ones.</p>
@@ -148,7 +149,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <a class="reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 68</span></a> 3rd row. How may we compute these ordinal correlation indexes ?</p>
 </div>
 <div class="section" id="ordinal-correlation-equals-bipolar-valued-relational-equivalence">
-<span id="ordinalcorrelation-tutorial-label"></span><h2><a class="toc-backref" href="#id22">Ordinal correlation equals bipolar-valued relational equivalence</a><a class="headerlink" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" title="Permalink to this headline">¶</a></h2>
+<span id="ordinalcorrelation-tutorial-label"></span><h2><a class="toc-backref" href="#id24">Ordinal correlation equals bipolar-valued relational equivalence</a><a class="headerlink" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="kendall-s-tau-index">
 <h3>Kendall’s <em>tau</em> index<a class="headerlink" href="#kendall-s-tau-index" title="Permalink to this headline">¶</a></h3>
 <p><em>M. G. Kendall</em> (<a class="reference internal" href="#ken-1938p" id="id2"><span>[KEN-1938p]</span></a>) defined his <em>ordinal correlation index</em> <strong>tau</strong> for linear orders of dimension <em>n</em> as a <em>balancing</em> of the number <em>#C</em> of correctly oriented pairs against the number <em>#I</em> of incorrectly oriented pairs. The total number of irreflexive pairs being <em>n(n-1)</em>, in the case of linear orders, <em>#C</em> + <em>#I</em> = <em>n(n-1)</em>.  Hence <em>tau</em> = (<em>#C</em> / <em>n(n-1)</em>) - (<em>#I</em> / <em>n(n-1)</em>). In case <em>#I</em> is zero, <em>tau</em> = +1 (all pairs are <em>equivalently oriented</em>); inversely, in case <em>C#</em> is zero, <em>tau</em> = -1 (all pairs are <em>differently oriented</em>).</p>
@@ -439,7 +440,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <p>The valued relational equivalence index gives us a further measure for studying how <strong>divergent</strong> appear the rating opinions expressed by the movie critics.</p>
 <a class="reference internal image-reference" href="_images/correlationTable.png"><img alt="Pairwise valued correlation of movie critics" class="align-center" src="_images/correlationTable.png" style="width: 600px;" /></a>
 <p>It is remarkable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes <em>r(x&lt;=&gt;y)</em> appear to be of low value, except the <em>diagonal</em> ones. These reflexive indexes <em>r(x&lt;=&gt;x)</em> would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score <em>d</em>, i.e. the <em>proportion</em> of pairs of movies each critic did evaluate. Critic <em>JPT</em> (the editor of the Graffiti magazine), for instance, evaluated all but one (<em>d</em> = 24*23/600 = 0.92), whereas critic <em>FG</em> evaluated only 10 movies among the 25 in discussion (<em>d</em> = 10*9/600 = 0.15).</p>
-<p>To get a picture of the actual divergence of rating opinions concerning <strong>jointly seen</strong> pairs of movies, we may develop a <em>Principal Component Analysis</em> (<a class="reference internal" href="#id14" id="id5"><span>[2p]</span></a>) of the corresponding <em>tau</em> correlation matrix. The 3D plot of the first 3 principal axes is shown below.</p>
+<p>To get a picture of the actual divergence of rating opinions concerning <strong>jointly seen</strong> pairs of movies, we may develop a <em>Principal Component Analysis</em> (<a class="reference internal" href="#id16" id="id5"><span>[2p]</span></a>) of the corresponding <em>tau</em> correlation matrix. The 3D plot of the first 3 principal axes is shown below.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">export3DplotOfCriteriaCorrelation</span><span class="p">(</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -461,7 +462,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/symmetricPart.png"><img alt="symmetric part of graffiti07 digraph" class="align-center" src="_images/symmetricPart.png" style="width: 600px;" /></a>
-<p>Such a preordering of the movies may, for instance, be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeRankingByChoosing" title="digraphs.Digraph.computeRankingByChoosing"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.computeRankingByChoosing()</span></code></a> method, where we iteratively extract <em>dominant kernels</em> -best remaining choices- and <em>absorbent kernels</em> -worst remaining choices- (see the tutorial <a class="reference internal" href="tutorial.html#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>). We operate therefore on the asymmetric ‘<em>better rated than</em>’, i.e. the <em>codual</em> (<a class="reference internal" href="#id15" id="id6"><span>[3p]</span></a>) of the ‘<em>at least as well rated as</em>’ opinions.</p>
+<p>Such a preordering of the movies may, for instance, be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeRankingByChoosing" title="digraphs.Digraph.computeRankingByChoosing"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.computeRankingByChoosing()</span></code></a> method, where we iteratively extract <em>dominant kernels</em> -best remaining choices- and <em>absorbent kernels</em> -worst remaining choices- (see the tutorial <a class="reference internal" href="tutorial.html#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>). We operate therefore on the asymmetric ‘<em>better rated than</em>’, i.e. the <em>codual</em> (<a class="reference internal" href="#id17" id="id6"><span>[3p]</span></a>) of the ‘<em>at least as well rated as</em>’ opinions.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -493,7 +494,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </div>
 </div>
 <div class="section" id="bipolar-valued-kernel-membership-characteristic-vectors">
-<span id="bipolar-valued-kernels-tutorial-label"></span><h2><a class="toc-backref" href="#id23">Bipolar-valued kernel membership characteristic vectors</a><a class="headerlink" href="#bipolar-valued-kernel-membership-characteristic-vectors" title="Permalink to this headline">¶</a></h2>
+<span id="bipolar-valued-kernels-tutorial-label"></span><h2><a class="toc-backref" href="#id25">Bipolar-valued kernel membership characteristic vectors</a><a class="headerlink" href="#bipolar-valued-kernel-membership-characteristic-vectors" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="claude-berge-s-kernel-equation-systems">
 <h3><em>Claude Berge</em>’s Kernel Equation Systems<a class="headerlink" href="#claude-berge-s-kernel-equation-systems" title="Permalink to this headline">¶</a></h3>
 <p>Let <em>G(X,R)</em> be a crisp irreflexive digraph defined on a finite set <em>X</em> of nodes and where <em>R</em> is the corresponding {-1,+1}-valued adjacency matrix. Let <em>Y</em> be the {-1,+1}-valued membership characteristic (row) vector of a choice in <em>X</em>. When <em>Y</em> satisfies the following equation system</p>
@@ -688,9 +689,9 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="gp">... </span>     <span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;K1 restricted adjacency table&#39;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<div class="figure align-center" id="id18">
+<div class="figure align-center" id="id20">
 <a class="reference internal image-reference" href="_images/k1restricted.png"><img alt="Kernel restricted adjacency table" src="_images/k1restricted.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 72 </span><span class="caption-text">Initial kernel [<em>a1</em>, <em>a2</em>, <em>a4</em>] restricted adjacency table</span><a class="headerlink" href="#id18" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 72 </span><span class="caption-text">Initial kernel [<em>a1</em>, <em>a2</em>, <em>a4</em>] restricted adjacency table</span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
 </div>
 <p>We first notice that this initial prekernel is indeed only <em>weakly independent</em>: The outranking situation between <em>a4</em> and <em>a1</em> appears <em>indeterminate</em>. The corresponding initial prekernel membership characteristic vector may be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeKernelVector" title="digraphs.Digraph.computeKernelVector"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.computeKernelVector()</span></code></a> method.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -752,9 +753,9 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="gp">... </span>     <span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;K2 restricted adjacency table&#39;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<div class="figure align-center" id="id19">
+<div class="figure align-center" id="id21">
 <a class="reference internal image-reference" href="_images/k2restricted.png"><img alt="Kernel restricted adjacency table" src="_images/k2restricted.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 73 </span><span class="caption-text">Terminal kernel [‘a3’,’a7’] restricted adjacency table</span><a class="headerlink" href="#id19" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 73 </span><span class="caption-text">Terminal kernel [‘a3’,’a7’] restricted adjacency table</span><a class="headerlink" href="#id21" title="Permalink to this image">¶</a></p>
 </div>
 <p>Again, we notice that this terminal prekernel is indeed only weakly independent. The corresponding bipolar-valued characteristic vector <em>Y2</em> may be computed as follows.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -800,9 +801,9 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </td></tr></table></div>
 <p>A unique stable bipolar-valued high and low fixpoint is attained at the third iteration with <em>a7</em> positively confirmed (about 75% criteria significance majority) as member of this terminal prekernel, whereas the membership of <em>a3</em> in this prekernel appears indeterminate. All the remaining nodes have <em>negative</em> membership characteristic values and are hence positively excluded from this prekernel.</p>
 <p>When we reconsider the graphviz drawing of this outranking digraph (see <a class="reference internal" href="tutorial.html#bestworstorientation"><span class="std std-numref">Fig. 48</span></a> in the tutorial ‘<a class="reference internal" href="tutorial.html#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>’),</p>
-<div class="figure align-center" id="id20">
+<div class="figure align-center" id="id22">
 <a class="reference internal image-reference" href="_images/bestWorstOrientation.png"><img alt="The random outranking digraph oriented by its initial and terminal prekernels" src="_images/bestWorstOrientation.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 74 </span><span class="caption-text">The strict outranking digraph oriented by the positive members of its initial and terminal prekernels</span><a class="headerlink" href="#id20" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 74 </span><span class="caption-text">The strict outranking digraph oriented by the positive members of its initial and terminal prekernels</span><a class="headerlink" href="#id22" title="Permalink to this image">¶</a></p>
 </div>
 <p>it becomes obvious why alternative <em>a1</em> is <strong>neither included nor excluded</strong> from the initial prekernel. Same observation is applicable to alternative <em>a3</em> which can <strong>neither be included nor excluded</strong> from the terminal prekernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent prekernel; the corresponding bipolar-valued membership characteristic vector being completely indeterminate (see for instance the tutorial ‘<a class="reference internal" href="tutorial.html#rubis-tutorial-label"><span class="std std-ref">Computing a best choice recommendation</span></a>’).</p>
 <p>To illustrate finally why sometimes we need to operate an <em>epistemic disjunctive fusion</em> of <strong>unequal</strong> stable low and high membership characteristics vectors (see Step 2.c.), let us consider, for instance, the following crisp 7-<em>cycle</em> graph.</p>
@@ -879,7 +880,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </div>
 </div>
 <div class="section" id="on-confident-outrankings-with-uncertain-criteria-significances">
-<span id="bipolar-valued-likelihood-tutorial-label"></span><h2><a class="toc-backref" href="#id24">On confident outrankings with uncertain criteria significances</a><a class="headerlink" href="#on-confident-outrankings-with-uncertain-criteria-significances" title="Permalink to this headline">¶</a></h2>
+<span id="bipolar-valued-likelihood-tutorial-label"></span><h2><a class="toc-backref" href="#id26">On confident outrankings with uncertain criteria significances</a><a class="headerlink" href="#on-confident-outrankings-with-uncertain-criteria-significances" title="Permalink to this headline">¶</a></h2>
 <p>When modelling preferences following the outranking approach, the signs of the majority margins do sharply distribute validation and invalidation of pairwise outranking situations. How can we be confident in the resulting outranking digraph, when we acknowledge the usual imprecise knowledge of criteria significance weights coupled with small majority margins?</p>
 <p>To answer this question, one usually requires <em>qualified</em> majority margins for confirming outranking situations. But how to choose such a qualifying majority level: two third, three fourth of the significances ?</p>
 <p>In this tutorial we propose to link the qualifying significance majority with a required alpha%-confidence level. We model therefore the significance weights as random variables following more or less widespread distributions around an average significance value that corresponds to the given deterministic weight. As the bipolar-valued random credibility of an outranking statement hence results from the simple sum of positive or negative independent random variables, we may apply the Central Limit Theorem (CLT) for computing the <em>bipolar likelihood</em> that the expected majority margin will indeed be positive, respectively negative.</p>
@@ -939,7 +940,7 @@ unclear whether, on criterion <em>j</em>, <em>x</em> is performing at least as g
 <p><strong>Example</strong></p>
 <p>Let <em>x</em> and <em>y</em> be evaluated wrt 7 equisignificant criteria; Four criteria positively support that <em>x</em> is <em>as least as good performing</em> than <em>y</em> and three criteria support that <em>x</em> is <em>not at least as good</em> performing than <em>y</em>. Suppose <em>E(Wj)</em> = <em>w</em> for <em>j</em> = 1,…,7 and <em>Wj</em> ~ Tr(0, <em>2w</em>, <em>w</em>) for <em>j</em> = 1,…7. The expected value of the global ‘<em>at least as good as</em>’ characteristic value becomes: <img class="math" src="_images/math/838c06c82a94bec464aacaf35562d277e2e30061.png" alt="E\big(\tilde{r}(x \geq y)\big)\, = \, 4w - 3w = w"/> with a variance <img class="math" src="_images/math/c4b56254c78dc04e2aa037c9842fa3e61abcaebe.png" alt="V\big(\tilde{r}(x \geq y)\big)\,=\, 7\frac{1}{6}w^2"/>.</p>
 <p>If <em>w</em> = 1, <img class="math" src="_images/math/7be2e88a141ca0302cd505ba09396a668081701c.png" alt="E\big(\tilde{r}(x \geq y)\big)\, = \, 1"/> and <img class="math" src="_images/math/28a6471759e27184bf0d55fbc5a50f874a8d2c6e.png" alt="sd\big(\tilde{r}(x \geq y)\big)\,=\, 1.08"/>. By the CLT, the bipolar likelihood of the <em>at least as good</em> performing situation becomes: <img class="math" src="_images/math/18895b30c09f5bcba9e0d7cf95bdebe66b262db6.png" alt="lh(x \geq y)\,=\, 0.66"/>, which corresponds to a global support of (0.66 + 1.0)/2 = 83% of the criteria significance weights.</p>
-<p>A <em>Monte Carlo</em> simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see <a class="reference internal" href="#simullikelihood"><span class="std std-numref">Fig. 77</span></a> realised with <em>gretl</em> <a class="reference internal" href="#id16" id="id11"><span>[4p]</span></a> ).</p>
+<p>A <em>Monte Carlo</em> simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see <a class="reference internal" href="#simullikelihood"><span class="std std-numref">Fig. 77</span></a> realised with <em>gretl</em> <a class="reference internal" href="#id18" id="id11"><span>[4p]</span></a> ).</p>
 <div class="figure align-center" id="simullikelihood">
 <a class="reference internal image-reference" href="_images/simulLikelihood.png"><img alt="Distribution of random outranking characteristic value" src="_images/simulLikelihood.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 77 </span><span class="caption-text">Distribution of 10 000 random outranking characteristic values</span><a class="headerlink" href="#simullikelihood" title="Permalink to this image">¶</a></p>
@@ -1238,7 +1239,7 @@ confidence level <em>alpha</em> %, if</p>
 </div>
 </div>
 <div class="section" id="robustness-analysis-of-bipolar-valued-outranking-digraphs">
-<span id="stable-outranking-tutorial-label"></span><h2><a class="toc-backref" href="#id25">Robustness analysis of bipolar-valued outranking digraphs</a><a class="headerlink" href="#robustness-analysis-of-bipolar-valued-outranking-digraphs" title="Permalink to this headline">¶</a></h2>
+<span id="stable-outranking-tutorial-label"></span><h2><a class="toc-backref" href="#id27">Robustness analysis of bipolar-valued outranking digraphs</a><a class="headerlink" href="#robustness-analysis-of-bipolar-valued-outranking-digraphs" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="cardinal-or-ordinal-criteria-significances">
 <h3>Cardinal or Ordinal criteria significances<a class="headerlink" href="#cardinal-or-ordinal-criteria-significances" title="Permalink to this headline">¶</a></h3>
 <p>The required cardinal significance weights of the performance criteria represent the <em>Achilles</em>’ heel of the outranking approach. Rarely will indeed a decision maker be cognitively competent for suggesting precise decimal-valued criteria significance weights. More often, the decision problem will involve equally import decision objectives with equi-significant criteria. A random example of such a decision problem may be generated with the <code class="xref py py-class docutils literal notranslate"><span class="pre">randPerfTabs.Random3ObjectivesPerformanceTableau</span></code> class.</p>
@@ -1313,15 +1314,23 @@ confidence level <em>alpha</em> %, if</p>
 </td></tr></table></div>
 <p>In this example, we face seven decision alternatives that are assessed with respect to three <em>equally important</em> decision objectives concerning: first, an <em>economical</em> aspect with a coalition of three performance criteria of significance weight 8, secondly, a <em>societal</em> aspect with a coalition of two performance criteria of significance weight 12, and thirdly, an <em>environmental</em> aspect with a coalition four performance criteria of significance weight 6.</p>
 <p>The question we tackle is the following: How <em>dependent</em> on the actual values of the significance weights appears the corresponding bipolar-valued outranking digraph ? In the previous section, we assumed that the criteria significance weights were random variables. Here, we shall assume that we know for sure only the preordering of the significance weights. In our example we see indeed three increasing weight equivalence classes.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">weightPreorder</span>
-<span class="go">[[&#39;en3&#39;, &#39;en5&#39;, &#39;en6&#39;, &#39;en9&#39;], [&#39;ec1&#39;, &#39;ec4&#39;, &#39;ec8&#39;], [&#39;so2&#39;, &#39;so7&#39;]]</span>
+<div class="literal-block-wrapper docutils container" id="weightspreorder">
+<div class="code-block-caption"><span class="caption-number">Listing 1 </span><span class="caption-text">Significance weights preorder</span><a class="headerlink" href="#weightspreorder" title="Permalink to this code">¶</a></div>
+<div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showWeightPreorder</span><span class="p">()</span>
+<span class="go"> [&#39;en3&#39;, &#39;en5&#39;, &#39;en6&#39;, &#39;en9&#39;] (6) &lt;</span>
+<span class="go"> [&#39;ec1&#39;, &#39;ec4&#39;, &#39;ec8&#39;] (8) &lt;</span>
+<span class="go"> [&#39;so2&#39;, &#39;so7&#39;] (12)</span>
 </pre></div>
+</td></tr></table></div>
 </div>
-<p>How stable appear now the outranking situations when assuming imprecise significance weights?</p>
+<p>How stable appear now the outranking situations when assuming only ordinal significance weights?</p>
 </div>
 <div class="section" id="qualifying-the-stability-of-outranking-situations">
 <h3>Qualifying the stability of outranking situations<a class="headerlink" href="#qualifying-the-stability-of-outranking-situations" title="Permalink to this headline">¶</a></h3>
-<p>Let us construct, by neglecting for a moment potential vetoes and counter-vetoes, the corresponding normalized bipolar-valued outranking digraph.</p>
+<p>Let us construct the normalized bipolar-valued outranking digraph corresponding with the previous 3 Objectives performance tableau <em>t</em>.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1351,11 +1360,11 @@ confidence level <em>alpha</em> %, if</p>
 </td></tr></table></div>
 <p>We notice on the principal diagonal, the <em>certainly validated</em> reflexive terms (+1.00). Now, we know for sure that <em>unanimous</em> outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a <em>majority</em> significance in <em>each</em> criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see <a class="reference internal" href="#bis-2014p" id="id13"><span>[BIS-2014p]</span></a>) if an outranking situation is independent of all the potential significance weights that respect the given <em>preordering</em> of the weights. Mind that there for sure are always outranking situations that are dependent on the very values we allocate to the criteria significances.</p>
 <dl class="simple">
-<dt>We may thus define the following stability levels:</dt><dd><ul class="simple">
-<li><p><strong>+4|-4</strong> : <em>unanimous</em> outranking | outranked situation;</p></li>
-<li><p><strong>+3|-3</strong> : <em>validated</em> outranking | outranked situation in <em>each</em> coalition of equisignificant criteria;</p></li>
-<li><p><strong>+2|-2</strong> : <em>validated</em> outranking | outranked situation with <em>all</em> potential significance weights <em>compatible</em> with the given significance <em>preorder</em>;</p></li>
-<li><p><strong>+1|-1</strong> : <em>validated</em> outranking | outranked situation with the given significance weights;</p></li>
+<dt>We may thus distinguish the following stability levels:</dt><dd><ul class="simple">
+<li><p><strong>+4 | -4</strong> : <em>unanimous</em> outranking | outranked situation;</p></li>
+<li><p><strong>+3 | -3</strong> : <em>validated</em> outranking | outranked situation in <em>each</em> coalition of equisignificant criteria;</p></li>
+<li><p><strong>+2 | -2</strong> : <em>validated</em> outranking | outranked situation with <em>all</em> potential significance weights <em>compatible</em> with the given significance <em>preorder</em>;</p></li>
+<li><p><strong>+1 | -1</strong> : <em>validated</em> outranking | outranked situation with the given significance weights;</p></li>
 <li><p><strong>0</strong> : <em>indeterminate</em> relational situation</p></li>
 </ul>
 </dd>
@@ -1405,7 +1414,7 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">                        &#39;ordinalRelation&#39;, &#39;equisignificantRelation&#39;,</span>
 <span class="go">                        &#39;unanimousRelation&#39;, &#39;relation&#39;,</span>
 <span class="go">                        &#39;gamma&#39;, &#39;notGamma&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rg</span><span class="o">.</span><span class="n">showRelationTable</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
 <span class="go"> * ---- Relation Table -----</span>
 <span class="go">  stab. | &#39;a1&#39; &#39;a2&#39; &#39;a3&#39; &#39;a4&#39; &#39;a5&#39; &#39;a6&#39; &#39;a7&#39;</span>
 <span class="go"> -------|-----------------------------------</span>
@@ -1418,7 +1427,7 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">  &#39;a7&#39;  |   +2  -2   +1   -1   +3   +2   +4</span>
 </pre></div>
 </td></tr></table></div>
-<p>As expected, all reflexive comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially <em>as well performing as</em> themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative <em>a4</em> with alternatives <em>a5</em> and <em>a6</em>. We may for instance inspect the details of how alternatives <em>a4</em> and <em>a5</em> compare.</p>
+<p>As expected, all <em>reflexive</em> comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially <em>as well performing as</em> themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative <em>a4</em> with alternatives <em>a5</em> and <em>a6</em>. We may for instance inspect the details of how alternatives <em>a4</em> and <em>a5</em> compare.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1435,16 +1444,16 @@ confidence level <em>alpha</em> %, if</p>
 14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s1">&#39;a4&#39;</span><span class="p">,</span><span class="s1">&#39;a5&#39;</span><span class="p">)</span>
 <span class="go"> *------------  pairwise comparison ----*</span>
 <span class="go"> Comparing actions : (a4, a5)</span>
-<span class="go"> crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord       |</span>
-<span class="go"> ec1   8.00  85.19  46.75  +38.44 | 5.00  None  10.00   +8.00        |</span>
-<span class="go"> ec4   8.00  72.26   8.96  +63.30 | 5.00  None  10.00   +8.00        |</span>
-<span class="go"> ec8   8.00  44.62  35.91   +8.71 | 5.00  None  10.00   +8.00        |</span>
-<span class="go"> en3   6.00  80.81  31.05  +49.76 | 5.00  None  10.00   +6.00        |</span>
-<span class="go"> en5   6.00  49.69  29.52  +20.17 | 5.00  None  10.00   +6.00        |</span>
-<span class="go"> en6   6.00  66.21  31.22  +34.99 | 5.00  None  10.00   +6.00        |</span>
-<span class="go"> en9   6.00  50.92   9.83  +41.09 | 5.00  None  10.00   +6.00        |</span>
-<span class="go"> so2  12.00  49.05  12.36  +36.69 | 5.00  None  10.00  +12.00        |</span>
-<span class="go"> so7  12.00  55.57  44.92  +10.65 | 5.00  None  10.00  +12.00        |</span>
+<span class="go"> crit. wght.  g(x)  g(y)    diff  | ind   pref    r()        |</span>
+<span class="go"> ec1   8.00  85.19  46.75  +38.44 | 5.00  10.00   +8.00      |</span>
+<span class="go"> ec4   8.00  72.26   8.96  +63.30 | 5.00  10.00   +8.00      |</span>
+<span class="go"> ec8   8.00  44.62  35.91   +8.71 | 5.00  10.00   +8.00      |</span>
+<span class="go"> en3   6.00  80.81  31.05  +49.76 | 5.00  10.00   +6.00      |</span>
+<span class="go"> en5   6.00  49.69  29.52  +20.17 | 5.00  10.00   +6.00      |</span>
+<span class="go"> en6   6.00  66.21  31.22  +34.99 | 5.00  10.00   +6.00      |</span>
+<span class="go"> en9   6.00  50.92   9.83  +41.09 | 5.00  10.00   +6.00      |</span>
+<span class="go"> so2  12.00  49.05  12.36  +36.69 | 5.00  10.00  +12.00      |</span>
+<span class="go"> so7  12.00  55.57  44.92  +10.65 | 5.00  10.00  +12.00      |</span>
 <span class="go"> Valuation in range: -72.00 to +72.00; global concordance: +72.00</span>
 </pre></div>
 </td></tr></table></div>
@@ -1465,16 +1474,16 @@ confidence level <em>alpha</em> %, if</p>
 14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s1">&#39;a5&#39;</span><span class="p">,</span><span class="s1">&#39;a4&#39;</span><span class="p">)</span>
 <span class="go"> *------------  pairwise comparison ----*</span>
 <span class="go"> Comparing actions : (a5, a4)</span>
-<span class="go"> crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord</span>
-<span class="go"> ec1   8.00  46.75  85.19  -38.44 | 5.00  None  10.00   -8.00        |</span>
-<span class="go"> ec4   8.00   8.96  72.26  -63.30 | 5.00  None  10.00   -8.00        |</span>
-<span class="go"> ec8   8.00  35.91  44.62   -8.71 | 5.00  None  10.00   +0.00        |</span>
-<span class="go"> en3   6.00  31.05  80.81  -49.76 | 5.00  None  10.00   -6.00        |</span>
-<span class="go"> en5   6.00  29.52  49.69  -20.17 | 5.00  None  10.00   -6.00        |</span>
-<span class="go"> en6   6.00  31.22  66.21  -34.99 | 5.00  None  10.00   -6.00        |</span>
-<span class="go"> en9   6.00   9.83  50.92  -41.09 | 5.00  None  10.00   -6.00        |</span>
-<span class="go"> so2  12.00  12.36  49.05  -36.69 | 5.00  None  10.00  -12.00        |</span>
-<span class="go"> so7  12.00  44.92  55.57  -10.65 | 5.00  None  10.00  -12.00        |</span>
+<span class="go"> crit. wght.  g(x)  g(y)    diff  | ind   pref    r()        |</span>
+<span class="go"> ec1   8.00  46.75  85.19  -38.44 | 5.00  10.00   -8.00      |</span>
+<span class="go"> ec4   8.00   8.96  72.26  -63.30 | 5.00  10.00   -8.00      |</span>
+<span class="go"> ec8   8.00  35.91  44.62   -8.71 | 5.00  10.00   +0.00      |</span>
+<span class="go"> en3   6.00  31.05  80.81  -49.76 | 5.00  10.00   -6.00      |</span>
+<span class="go"> en5   6.00  29.52  49.69  -20.17 | 5.00  10.00   -6.00      |</span>
+<span class="go"> en6   6.00  31.22  66.21  -34.99 | 5.00  10.00   -6.00      |</span>
+<span class="go"> en9   6.00   9.83  50.92  -41.09 | 5.00  10.00   -6.00      |</span>
+<span class="go"> so2  12.00  12.36  49.05  -36.69 | 5.00  10.00  -12.00      |</span>
+<span class="go"> so7  12.00  44.92  55.57  -10.65 | 5.00  10.00  -12.00      |</span>
 <span class="go"> Valuation in range: -72.00 to +72.00; global concordance: -64.00</span>
 </pre></div>
 </td></tr></table></div>
@@ -1509,37 +1518,33 @@ confidence level <em>alpha</em> %, if</p>
 27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseOutrankings</span><span class="p">(</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a1&#39;</span><span class="p">)</span>
 <span class="go"> *------------  pairwise comparison ----*</span>
 <span class="go"> Comparing actions : (a2, a1)</span>
-<span class="go"> crit. wght.  g(x)  g(y)    diff  | ind    wp      p    concord      |</span>
-<span class="go"> ec1   8.00  89.77  38.11  +51.66 | 5.00  None  10.00   +8.00        |</span>
-<span class="go"> ec4   8.00  86.00  22.65  +63.35 | 5.00  None  10.00   +8.00        |</span>
-<span class="go"> ec8   8.00  89.43  77.02  +12.41 | 5.00  None  10.00   +8.00        |</span>
-<span class="go"> en3   6.00  20.79  58.16  -37.37 | 5.00  None  10.00   -6.00        |</span>
-<span class="go"> en5   6.00  23.83  31.40   -7.57 | 5.00  None  10.00   +0.00        |</span>
-<span class="go"> en6   6.00  18.66  11.41   +7.25 | 5.00  None  10.00   +6.00        |</span>
-<span class="go"> en9   6.00  26.65  44.37  -17.72 | 5.00  None  10.00   -6.00        |</span>
-<span class="go"> so2  12.00  89.12  22.43  +66.69 | 5.00  None  10.00  +12.00        |</span>
-<span class="go"> so7  12.00  84.73  28.41  +56.32 | 5.00  None  10.00  +12.00        |</span>
+<span class="go"> crit. wght.  g(x)  g(y)    diff  | ind   pref     r()       |</span>
+<span class="go"> ec1   8.00  89.77  38.11  +51.66 | 5.00  10.00   +8.00      |</span>
+<span class="go"> ec4   8.00  86.00  22.65  +63.35 | 5.00  10.00   +8.00      |</span>
+<span class="go"> ec8   8.00  89.43  77.02  +12.41 | 5.00  10.00   +8.00      |</span>
+<span class="go"> en3   6.00  20.79  58.16  -37.37 | 5.00  10.00   -6.00      |</span>
+<span class="go"> en5   6.00  23.83  31.40   -7.57 | 5.00  10.00   +0.00      |</span>
+<span class="go"> en6   6.00  18.66  11.41   +7.25 | 5.00  10.00   +6.00      |</span>
+<span class="go"> en9   6.00  26.65  44.37  -17.72 | 5.00  10.00   -6.00      |</span>
+<span class="go"> so2  12.00  89.12  22.43  +66.69 | 5.00  10.00  +12.00      |</span>
+<span class="go"> so7  12.00  84.73  28.41  +56.32 | 5.00  10.00  +12.00      |</span>
 <span class="go"> Valuation in range: -72.00 to +72.00; global concordance: +42.00</span>
 <span class="go"> *------------  pairwise comparison ----*</span>
 <span class="go"> Comparing actions : (a1, a2)</span>
-<span class="go"> crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord       |</span>
-<span class="go"> ec1   8.00  38.11  89.77  -51.66 | 5.00  None  10.00   -8.00        |</span>
-<span class="go"> ec4   8.00  22.65  86.00  -63.35 | 5.00  None  10.00   -8.00        |</span>
-<span class="go"> ec8   8.00  77.02  89.43  -12.41 | 5.00  None  10.00   -8.00        |</span>
-<span class="go"> en3   6.00  58.16  20.79  +37.37 | 5.00  None  10.00   +6.00        |</span>
-<span class="go"> en5   6.00  31.40  23.83   +7.57 | 5.00  None  10.00   +6.00        |</span>
-<span class="go"> en6   6.00  11.41  18.66   -7.25 | 5.00  None  10.00   +0.00        |</span>
-<span class="go"> en9   6.00  44.37  26.65  +17.72 | 5.00  None  10.00   +6.00        |</span>
-<span class="go"> so2  12.00  22.43  89.12  -66.69 | 5.00  None  10.00  -12.00        |</span>
-<span class="go"> so7  12.00  28.41  84.73  -56.32 | 5.00  None  10.00  -12.00        |</span>
+<span class="go"> crit. wght.  g(x)  g(y)    diff  | ind   pref    r()        |</span>
+<span class="go"> ec1   8.00  38.11  89.77  -51.66 | 5.00  10.00   -8.00      |</span>
+<span class="go"> ec4   8.00  22.65  86.00  -63.35 | 5.00  10.00   -8.00      |</span>
+<span class="go"> ec8   8.00  77.02  89.43  -12.41 | 5.00  10.00   -8.00      |</span>
+<span class="go"> en3   6.00  58.16  20.79  +37.37 | 5.00  10.00   +6.00      |</span>
+<span class="go"> en5   6.00  31.40  23.83   +7.57 | 5.00  10.00   +6.00      |</span>
+<span class="go"> en6   6.00  11.41  18.66   -7.25 | 5.00  10.00   +0.00      |</span>
+<span class="go"> en9   6.00  44.37  26.65  +17.72 | 5.00  10.00   +6.00      |</span>
+<span class="go"> so2  12.00  22.43  89.12  -66.69 | 5.00  10.00  -12.00      |</span>
+<span class="go"> so7  12.00  28.41  84.73  -56.32 | 5.00  10.00  -12.00      |</span>
 <span class="go"> Valuation in range: -72.00 to +72.00; global concordance: -30.00</span>
 </pre></div>
 </td></tr></table></div>
-<p>In both comparisons, the performances observed with respect to the environmental decision objective are not validating with a significant majority the otherwise unanimous outranking, resp. outranked situations. Hence, the stability of the reported preferential situations is in fact dependent on choosing significance weights that are compatible with the given significance weights preorder (see below).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">weightPreorder</span>
-<span class="go">[[&#39;en3&#39;, &#39;en5&#39;, &#39;en6&#39;, &#39;en9&#39;], [&#39;ec1&#39;, &#39;ec4&#39;, &#39;ec8&#39;], [&#39;so2&#39;, &#39;so7&#39;]]</span>
-</pre></div>
-</div>
+<p>In both comparisons, the performances observed with respect to the environmental decision objective are not validating with a significant majority the otherwise unanimous outranking, resp. outranked situations. Hence, the stability of the reported preferential situations is in fact dependent on choosing significance weights that are compatible with the given significance weights preorder (see <a class="reference internal" href="#weightspreorder"><span class="std std-ref">Significance weights preorder</span></a>).</p>
 <p>Let us finally inspect a comparison that is only qualified at stability level +1, like the one between alternatives <em>a7</em> and <em>a3</em>.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -1570,34 +1575,34 @@ confidence level <em>alpha</em> %, if</p>
 27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseOutrankings</span><span class="p">(</span><span class="s1">&#39;a7&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">)</span>
 <span class="go">*------------  pairwise comparison ----*</span>
 <span class="go">Comparing actions : (a7, a3)</span>
-<span class="go">crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord        |</span>
-<span class="go">ec1   8.00  15.33  80.19  -64.86 | 5.00  None  10.00   -8.00         |</span>
-<span class="go">ec4   8.00  36.31  68.70  -32.39 | 5.00  None  10.00   -8.00         |</span>
-<span class="go">ec8   8.00  38.31  91.94  -53.63 | 5.00  None  10.00   -8.00         |</span>
-<span class="go">en3   6.00  30.70  46.78  -16.08 | 5.00  None  10.00   -6.00         |</span>
-<span class="go">en5   6.00  35.52  27.25   +8.27 | 5.00  None  10.00   +6.00         |</span>
-<span class="go">en6   6.00  69.71   1.65  +68.06 | 5.00  None  10.00   +6.00         |</span>
-<span class="go">en9   6.00  13.10  14.85   -1.75 | 5.00  None  10.00   +6.00         |</span>
-<span class="go">so2  12.00  68.06  58.85   +9.21 | 5.00  None  10.00  +12.00         |</span>
-<span class="go">so7  12.00  58.45  15.49  +42.96 | 5.00  None  10.00  +12.00         |</span>
+<span class="go">crit. wght.  g(x)  g(y)    diff  | ind   pref    r()         |</span>
+<span class="go">ec1   8.00  15.33  80.19  -64.86 | 5.00  10.00   -8.00       |</span>
+<span class="go">ec4   8.00  36.31  68.70  -32.39 | 5.00  10.00   -8.00       |</span>
+<span class="go">ec8   8.00  38.31  91.94  -53.63 | 5.00  10.00   -8.00       |</span>
+<span class="go">en3   6.00  30.70  46.78  -16.08 | 5.00  10.00   -6.00       |</span>
+<span class="go">en5   6.00  35.52  27.25   +8.27 | 5.00  10.00   +6.00       |</span>
+<span class="go">en6   6.00  69.71   1.65  +68.06 | 5.00  10.00   +6.00       |</span>
+<span class="go">en9   6.00  13.10  14.85   -1.75 | 5.00  10.00   +6.00       |</span>
+<span class="go">so2  12.00  68.06  58.85   +9.21 | 5.00  10.00  +12.00       |</span>
+<span class="go">so7  12.00  58.45  15.49  +42.96 | 5.00  10.00  +12.00       |</span>
 <span class="go">Valuation in range: -72.00 to +72.00; global concordance: +12.00</span>
 <span class="go">*------------  pairwise comparison ----*</span>
 <span class="go">Comparing actions : (a3, a7)</span>
-<span class="go">crit. wght.  g(x)  g(y)    diff  | ind    wp     p    concord        |</span>
-<span class="go">ec1   8.00  80.19  15.33  +64.86 | 5.00  None  10.00   +8.00         |</span>
-<span class="go">ec4   8.00  68.70  36.31  +32.39 | 5.00  None  10.00   +8.00         |</span>
-<span class="go">ec8   8.00  91.94  38.31  +53.63 | 5.00  None  10.00   +8.00         |</span>
-<span class="go">en3   6.00  46.78  30.70  +16.08 | 5.00  None  10.00   +6.00         |</span>
-<span class="go">en5   6.00  27.25  35.52   -8.27 | 5.00  None  10.00   +0.00         |</span>
-<span class="go">en6   6.00   1.65  69.71  -68.06 | 5.00  None  10.00   -6.00         |</span>
-<span class="go">en9   6.00  14.85  13.10   +1.75 | 5.00  None  10.00   +6.00         |</span>
-<span class="go">so2  12.00  58.85  68.06   -9.21 | 5.00  None  10.00   +0.00         |</span>
-<span class="go">so7  12.00  15.49  58.45  -42.96 | 5.00  None  10.00  -12.00         |</span>
+<span class="go">crit. wght.  g(x)  g(y)    diff  | ind   pref    r()         |</span>
+<span class="go">ec1   8.00  80.19  15.33  +64.86 | 5.00  10.00   +8.00       |</span>
+<span class="go">ec4   8.00  68.70  36.31  +32.39 | 5.00  10.00   +8.00       |</span>
+<span class="go">ec8   8.00  91.94  38.31  +53.63 | 5.00  10.00   +8.00       |</span>
+<span class="go">en3   6.00  46.78  30.70  +16.08 | 5.00  10.00   +6.00       |</span>
+<span class="go">en5   6.00  27.25  35.52   -8.27 | 5.00  10.00   +0.00       |</span>
+<span class="go">en6   6.00   1.65  69.71  -68.06 | 5.00  10.00   -6.00       |</span>
+<span class="go">en9   6.00  14.85  13.10   +1.75 | 5.00  10.00   +6.00       |</span>
+<span class="go">so2  12.00  58.85  68.06   -9.21 | 5.00  10.00   +0.00       |</span>
+<span class="go">so7  12.00  15.49  58.45  -42.96 | 5.00  10.00  -12.00       |</span>
 <span class="go">Valuation in range: -72.00 to +72.00; global concordance: +18.00</span>
 </pre></div>
 </td></tr></table></div>
 <p>In these two cases, choosing significances that are just compatible with the given weights preorder will not always result in a positively validated  outranking situation.</p>
-<p>Let us finally mention that the stability denotation of outranking situations is readily available with the common <code class="xref py py-meth docutils literal notranslate"><span class="pre">OutrankingDigraph.showRelationTable()</span></code> method.</p>
+<p>The stability denotation of outranking situations is readily available with the common <code class="xref py py-meth docutils literal notranslate"><span class="pre">OutrankingDigraph.showRelationTable()</span></code> method.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1635,11 +1640,15 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">            |  (+2)  (-2)  (+1)  (-1)  (+3)  (+2)  (+4)</span>
 </pre></div>
 </td></tr></table></div>
+</div>
+<div class="section" id="testing-for-stable-outrankings-with-ordinal-significances">
+<h3>Testing for stable outrankings with ordinal significances<a class="headerlink" href="#testing-for-stable-outrankings-with-ordinal-significances" title="Permalink to this headline">¶</a></h3>
+<p>It is precisely again the bipolar-valued epistemic characteristic domain that will give us a way to test precisely for stability level 2 (see <a class="reference internal" href="#bis-2004-1p" id="id14"><span>[BIS-2004_1p]</span></a>, <a class="reference internal" href="#bis-2004-2p" id="id15"><span>[BIS-2004_2p]</span></a>).</p>
 <p>Back to <a class="reference internal" href="#pearls-tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 </div>
 </div>
 <div class="section" id="bibliography">
-<h2><a class="toc-backref" href="#id26">Bibliography</a><a class="headerlink" href="#bibliography" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id28">Bibliography</a><a class="headerlink" href="#bibliography" title="Permalink to this headline">¶</a></h2>
 <dl class="citation">
 <dt class="label" id="bis-2014p"><span class="brackets"><a class="fn-backref" href="#id13">BIS-2014p</a></span></dt>
 <dd><p>Bisdorff R., Meyer P. and Veneziano Th. (2014). Elicitation of criteria weights maximising the stability of pairwise outranking statements. Journal of Multi-Criteria Decision Analysis (Wiley) 21: 113-124 (downloadable preprint <a class="reference external" href="_static/JMCDArticle.pdf">PDF file 431.4 Kb</a>).</p>
@@ -1656,6 +1665,12 @@ confidence level <em>alpha</em> %, if</p>
 <dt class="label" id="bis-2006-2p"><span class="brackets"><a class="fn-backref" href="#id10">BIS-2006_2p</a></span></dt>
 <dd><p>Bisdorff R. (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version <a class="reference external" href="_static/EnumKernels.pdf">PDF file 532.2 Kb</a>).</p>
 </dd>
+<dt class="label" id="bis-2004-1p"><span class="brackets"><a class="fn-backref" href="#id14">BIS-2004_1p</a></span></dt>
+<dd><p>Bisdorff R. (2004). Concordant Outranking with multiple criteria of ordinal significance. 4OR, Quarterly Journal of the Belgian, French and Italian Operations Research Societies, Springer-Verlag, Issue: Volume 2, Number 4, December 2004, Pages: 293 - 308. [ISSN: 1619-4500 (Paper) 1614-2411 (Online)] Electronic version: DOI: 10.1007/s10288-004-0053-7 (downloadable preliminary version <a class="reference external" href="_static/Bisdorff4ORFinal.pdf">PDF file 137.1Kb</a>)</p>
+</dd>
+<dt class="label" id="bis-2004-2p"><span class="brackets"><a class="fn-backref" href="#id15">BIS-2004_2p</a></span></dt>
+<dd><p>Bisdorff R. (2004). Preference aggregation with multiple criteria of ordinal significance. In: D. Bouyssou, M. Janowitz, F. Roberts, and A. Tsouki´s (eds.), Annales du LAMSADE, 3, Octobre 2004, Université Paris-Dauphine, pp. 25-44 [ISSN 1762-455X] (downloadable <a class="reference external" href="_static/BisdorffDimacsLamsadeFinal.pdf">PDF file 167.6Kb</a>).</p>
+</dd>
 <dt class="label" id="sch-1985p"><span class="brackets"><a class="fn-backref" href="#id9">SCH-1985p</a></span></dt>
 <dd><p>Schmidt G. and Ströhlein Th. (1985), <em>On kernels of graphs and solutions of games: a synopsis based on relations and fixpoints</em>. SIAM, J. Algebraic Discrete Methods, 6, 1985, 54–65.</p>
 </dd>
@@ -1668,18 +1683,18 @@ confidence level <em>alpha</em> %, if</p>
 </dl>
 </div>
 <div class="section" id="footnotes">
-<h2><a class="toc-backref" href="#id27">Footnotes</a><a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id29">Footnotes</a><a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
 <dl class="citation">
 <dt class="label" id="p"><span class="brackets"><a class="fn-backref" href="#id1">1p</a></span></dt>
 <dd><p><em>Graffiti</em>, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file <em>graffiti07.xml</em> (XMCDA-2.0 Format) in the <em>examples/Graffiti</em> directory of the Digraph3 ressources.</p>
 </dd>
-<dt class="label" id="id14"><span class="brackets"><a class="fn-backref" href="#id5">2p</a></span></dt>
+<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id5">2p</a></span></dt>
 <dd><p>The 3D PCA plot method requires a running <em>R statistics software</em>  (<a class="reference external" href="https://www.r-project.org/">https://www.r-project.org/</a>) installation and the Calmat matrix calculator (see the calmat directory in the Digraph3 ressources)</p>
 </dd>
-<dt class="label" id="id15"><span class="brackets"><a class="fn-backref" href="#id6">3p</a></span></dt>
+<dt class="label" id="id17"><span class="brackets"><a class="fn-backref" href="#id6">3p</a></span></dt>
 <dd><p>A <em>kernel</em> in a digraph <em>g</em> is a <em>clique</em> in the dual digraph <em>-g</em>.</p>
 </dd>
-<dt class="label" id="id16"><span class="brackets"><a class="fn-backref" href="#id11">4p</a></span></dt>
+<dt class="label" id="id18"><span class="brackets"><a class="fn-backref" href="#id11">4p</a></span></dt>
 <dd><p>The Gnu Regression, Econometrics and Time-series Library <a class="reference external" href="http://gretl.sourceforge.net/">http://gretl.sourceforge.net/</a> .</p>
 </dd>
 </dl>
@@ -1718,6 +1733,7 @@ confidence level <em>alpha</em> %, if</p>
 <li><a class="reference internal" href="#robustness-analysis-of-bipolar-valued-outranking-digraphs">Robustness analysis of bipolar-valued outranking digraphs</a><ul>
 <li><a class="reference internal" href="#cardinal-or-ordinal-criteria-significances">Cardinal or Ordinal criteria significances</a></li>
 <li><a class="reference internal" href="#qualifying-the-stability-of-outranking-situations">Qualifying the stability of outranking situations</a></li>
+<li><a class="reference internal" href="#testing-for-stable-outrankings-with-ordinal-significances">Testing for stable outrankings with ordinal significances</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#bibliography">Bibliography</a></li>

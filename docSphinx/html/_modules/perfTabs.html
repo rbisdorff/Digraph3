@@ -640,7 +640,7 @@
 
     <span class="k">def</span> <span class="nf">showObjectives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="s1">&#39;objectives&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------ show objectives -------&quot;&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------ decision objectives -------&quot;&#39;</span><span class="p">)</span>
             
             <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">:</span>
                                                    
@@ -654,6 +654,17 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The performance tableau does not contain objectives.&#39;</span><span class="p">)</span>
 
+<div class="viewcode-block" id="PerformanceTableau.showWeightPreorder"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showWeightPreorder">[docs]</a>    <span class="k">def</span> <span class="nf">showWeightPreorder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders a preordering of the the criteria signficance weights. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------- weights preordering --------*&#39;</span><span class="p">)</span>
+        <span class="n">wpo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wpo</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">wpo</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s1">&#39;(</span><span class="si">%s</span><span class="s1">) &lt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">wpo</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">wpo</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">wpo</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span></div>
+            
 <div class="viewcode-block" id="PerformanceTableau.convertInsite2Standard"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertInsite2Standard">[docs]</a>    <span class="k">def</span> <span class="nf">convertInsite2Standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert in site a bigData formated Performance tableau back into a standard formated PerformanceTableau instance.</span>
@@ -7353,162 +7364,20 @@
 
 <span class="c1">##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=(&#39;triangular&#39;,30.0,0.7))</span>
     <span class="c1">## t.showStatistics()</span>
-<span class="c1">##    t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,</span>
-<span class="c1">##                                   numberOfActions=10,</span>
-<span class="c1">##                                   weightDistribution=&#39;equiobjectives&#39;,</span>
-<span class="c1">##                                   IntegerWeights=True,</span>
-<span class="c1">##                                   #NegativeWeights=False,</span>
-<span class="c1">##                                   Debug=False,</span>
-<span class="c1">##                                   missingDataProbability=0.1,</span>
-<span class="c1">##                                   seed=105,</span>
-<span class="c1">##                                            #Threading=False</span>
-<span class="c1">##                                            )</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
-                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                                    <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
                                    <span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                   <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="c1">#NegativeWeights=False,</span>
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-                                   <span class="n">seed</span><span class="o">=</span><span class="mi">102</span><span class="p">,</span>
-                                   <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                   <span class="n">seed</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                            <span class="c1">#Threading=False</span>
                                             <span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">)</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="n">ranking</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
-    <span class="n">critCorr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;copSum&#39;</span><span class="p">,</span><span class="nb">sum</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">critCorr</span><span class="p">]))</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">critCorr</span><span class="p">)</span>
-    <span class="n">nd</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">totDif</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-            <span class="n">totDif</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">critCorr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">critCorr</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;difcop&#39;</span><span class="p">,</span><span class="n">totDif</span><span class="o">/</span><span class="n">nd</span><span class="p">)</span>
-    <span class="n">ranking</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
-    <span class="n">critCorr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nfSum&#39;</span><span class="p">,</span><span class="nb">sum</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">critCorr</span><span class="p">]))</span>
-    <span class="n">totDif</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-            <span class="n">totDif</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">critCorr</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">critCorr</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;difnf&#39;</span><span class="p">,</span><span class="n">totDif</span><span class="o">/</span><span class="n">nd</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                 <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
-                                 <span class="n">toIndex</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-
-       
-
+    <span class="n">t</span><span class="o">.</span><span class="n">showWeightPreorder</span><span class="p">()</span>
+   
     
-<span class="c1">##    t.showPerformanceTableau()</span>
-<span class="c1">##    nt = NormalizedPerformanceTableau(t)</span>
-<span class="c1">##    nt.showPerformanceTableau()</span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(Correlations=True)</span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule=&#39;NetFlows&#39;)</span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule=&#39;Kohler&#39;)</span>
-<span class="c1">##</span>
-<span class="c1">##    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule=&#39;ArrowRaynaud&#39;)</span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule=&#39;Kohler&#39;)</span>
-<span class="c1">##    t1 = RandomCBPerformanceTableau(numberOfCriteria=13,</span>
-<span class="c1">##                                   numberOfActions=10,</span>
-<span class="c1">##                                   weightDistribution=&#39;equiobjectives&#39;,</span>
-<span class="c1">##                                   IntegerWeights=True,</span>
-<span class="c1">##                                   NegativeWeights=True,</span>
-<span class="c1">##                                   Debug=False,</span>
-<span class="c1">##                                   missingDataProbability=0.1,</span>
-<span class="c1">##                                   seed=101,Threading=False)</span>
-<span class="c1">##    t1.showPerformanceTableau()</span>
-<span class="c1">##</span>
-<span class="c1">##    g = BipolarOutrankingDigraph(t)</span>
-<span class="c1">##    g1 = BipolarOutrankingDigraph(t1)</span>
-<span class="c1">##    </span>
-<span class="c1">##    nt = NormalizedPerformanceTableau(t1)</span>
-<span class="c1">##    nt.showPerformanceTableau()</span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(Correlations=True)</span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule=&#39;NetFlows&#39;)</span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule=&#39;Kohler&#39;)</span>
-<span class="c1">##    t1.showHTMLPerformanceHeatmap(Correlations=True,rankingRule=&#39;ArrowRaynaud&#39;)</span>
-<span class="c1">##   </span>
-    <span class="c1">#nt.showHTMLPerformanceHeatmap(Correlations=True)</span>
-<span class="c1">#     t.saveCSV(&#39;test&#39;)</span>
-<span class="c1">#     T = CSVPerformanceTableau(&#39;test&#39;,Debug=True)</span>
-<span class="c1">#     print(T.__dict__)</span>
-<span class="c1">#     T.showActions()</span>
-<span class="c1">#     T.showCriteria()</span>
-<span class="c1"># #    T.showHTMLPerformanceHeatmap(Correlations=True)</span>
-<span class="c1">#     from outrankingDigraphs import *</span>
-<span class="c1">#     g = BipolarOutrankingDigraph(t)</span>
-<span class="c1">#     gt = BipolarOutrankingDigraph(T)</span>
-<span class="c1">#     g.showRubisBestChoiceRecommendation()</span>
-<span class="c1">#     gt.showRubisBestChoiceRecommendation()</span>
     
-<span class="c1">##    for g in t.criteria:</span>
-<span class="c1">##        t._computeLimitingQuantiles(g,frequencies=[0.0,0.25,0.5,0.75,1.0],LowerClosed=False,Debug=False)</span>
-    <span class="c1"># t.saveXMCDA2(&#39;test&#39;)</span>
-    <span class="c1"># t1 = XMCDA2PerformanceTableau(&#39;test&#39;)</span>
-    <span class="c1"># t1.showObjectives()</span>
-    <span class="c1"># t1.showHTMLPerformanceHeatmap(Correlations=True,SparseModel=False)</span>
-<span class="c1">##    t = ConstantPerformanceTableau(t,</span>
-<span class="c1">##                                   actionsSubset=[&#39;a01&#39;,&#39;a02&#39;,&#39;a03&#39;],</span>
-<span class="c1">##                                   criteriaSubset=[&#39;g01&#39;,&#39;g02&#39;,&#39;g03&#39;],</span>
-<span class="c1">##                                   position=0.75)</span>
-    <span class="c1">#t.showPerformanceTableau()</span>
-<span class="c1">##    t = RandomCoalitionsPerformanceTableau(numberOfActions=20,</span>
-<span class="c1">##                                           numberOfCriteria=13,</span>
-<span class="c1">##                                           Coalitions=False,</span>
-<span class="c1">##                                           RandomCoalitions=True,</span>
-<span class="c1">##                                           weightDistribution=&quot;equicoalitions&quot;,</span>
-<span class="c1">##                                           Debug=True)</span>
-<span class="c1">##    t.showAll()</span>
-<span class="c1">##    t.saveXMCDA2(&#39;test&#39;)</span>
-<span class="c1">##    t = XMCDA2PerformanceTableau(&#39;spiegel2004&#39;)</span>
-<span class="c1">##    t = XMCDA2PerformanceTableau(&#39;uniSorting&#39;)</span>
-<span class="c1">##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)</span>
-<span class="c1">##    print(&#39;TT&#39;)</span>
-<span class="c1">##    t.showHTMLPerformanceHeatmap(Threading=False,Correlations=True,ndigits=0)</span>
-<span class="c1">##    t.showHTMLPerformanceHeatmap(quantiles=11,Threading=False,rankingRule=None,</span>
-<span class="c1">##                                 Correlations=True,ndigits=0)</span>
-<span class="c1">##    t.showHTMLPerformanceHeatmap(actionsList=list(t.actions),criteriaList=list(t.criteria.keys()),</span>
-<span class="c1">##                                 Threading=False,rankingRule=None,SparseModel=False,</span>
-<span class="c1">##                                Correlations=True,ndigits=0,</span>
-<span class="c1">##                                 Debug=False)</span>
-<span class="c1">##    t.showHTMLPerformanceQuantiles(Sorted=False)</span>
-<span class="c1">##    t.showHTMLPerformanceQuantiles(Sorted=True)</span>
-<span class="c1">##    t.showAllQuantiles(Sorted=True)</span>
-<span class="c1">####    actionsList = qsrbc.computeQsRbcRanking()</span>
-<span class="c1">####</span>
-<span class="c1">##</span>
-<span class="c1">####    g = BipolarOutrankingDigraph(t)</span>
-<span class="c1">####    print(g.computeMarginalVersusGlobalOutrankingCorrelations())</span>
-<span class="c1">####    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,Debug=False)</span>
-<span class="c1">##    </span>
-<span class="c1">##    </span>
-<span class="c1">####    #t.saveCSV(&#39;testCSV&#39;,Sorted=False,actionsList=actionsList,Debug=True)</span>
-<span class="c1">####    print(t.htmlPerformanceHeatmap(actionsList=actionsList,Debug=True))</span>
-<span class="c1">####    t.showHTMLPerformanceHeatmap(actionsList=actionsList,colorLevels=7,Ranked=True)</span>
-<span class="c1">####    t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,Threading=False)</span>
-<span class="c1">####    t.showHTMLPerformanceTableau(Transposed=True)</span>
-<span class="c1">####    t.showHTMLPerformanceHeatmap(colorLevels=7,Threading=False)</span>
-<span class="c1">####    t.showHTMLPerformanceHeatmap()</span>
-<span class="c1">####    pt1 = PartialPerformanceTableau(t)</span>
-<span class="c1">####    pt1.showAll()</span>
-<span class="c1">####    pt2 = PartialPerformanceTableau(t,actionsSubset=[&#39;a01&#39;,&#39;a02&#39;],criteriaSubset=[&#39;g01&#39;,&#39;g03&#39;])</span>
-<span class="c1">####    pt2.showAll()</span>
-<span class="c1">##    </span>
-<span class="c1">####    ## t = PerformanceTableau(&#39;test&#39;)</span>
-<span class="c1">####    t.saveXMCDA2(&#39;test&#39;,servingD3=False)</span>
-<span class="c1">####    t.showCriteria(IntegerWeights=True)</span>
-    <span class="c1"># print(t.computeQuantiles(Debug=False))</span>
-    <span class="c1"># t.showQuantileSort()</span>
-    <span class="c1"># g = BipolarOutrankingDigraph(t)</span>
-    <span class="c1"># s = sortingDigraphs.SortingDigraph(g)</span>
-    <span class="c1"># s.showSorting()</span>
-    <span class="c1"># g.computeRankingByChoosing(CoDual=False)</span>
-    <span class="c1"># g.showRankingByChoosing()</span>
-<span class="c1">####    prg = PrincipalInOutDegreesOrdering(g,imageType=&quot;pdf&quot;)</span>
-<span class="c1">####    prg.showWeakOrder()</span>
-<span class="c1">####    print(g.computeOrdinalCorrelation(prg))</span>
-     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
