@@ -159,6 +159,8 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </div></blockquote>
 <p>i.e. the <strong>normalized majority margin</strong> of <em>equivalently oriented</em> irreflexive pairs.</p>
 <p>Let <em>R1</em> and <em>R2</em> be two random crisp relations defined on a same set of 5 alternatives. We may compute Kendall’s <em>tau</em> index as follows.</p>
+<div class="literal-block-wrapper docutils container" id="relequi1">
+<div class="code-block-caption"><span class="caption-number">Listing 1 </span><span class="caption-text">Crisp Relational Equivalence Digraph</span><a class="headerlink" href="#relequi1" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -192,12 +194,15 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="go"> {&#39;correlation&#39;: -0.1, &#39;determination&#39;: 1.0}</span>
 </pre></div>
 </td></tr></table></div>
-<p>In the table of the equivalence relation <em>R1&lt;=&gt;R2</em> above, we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall’s <em>tau</em> index in this plainly determined crisp case.</p>
+</div>
+<p>In the table of the equivalence relation <em>R1&lt;=&gt;R2</em> above (see <a class="reference internal" href="#relequi1"><span class="std std-numref">Listing 1</span></a> Lines 9-13), we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall’s <em>tau</em> index in this plainly determined crisp case (see <a class="reference internal" href="#relequi1"><span class="std std-numref">Listing 1</span></a> Line 13).</p>
 <p>What happens now with more or less determined and even partially indeterminate relations ? May we proceed in a similar way ?</p>
 </div>
 <div class="section" id="bipolar-valued-relational-equivalence">
 <h3>Bipolar-valued relational equivalence<a class="headerlink" href="#bipolar-valued-relational-equivalence" title="Permalink to this headline">¶</a></h3>
 <p>Let us now consider two randomly bipolar-valued digraphs <em>R1</em> and <em>R2</em> of order five.</p>
+<div class="literal-block-wrapper docutils container" id="tworand">
+<div class="code-block-caption"><span class="caption-number">Listing 2 </span><span class="caption-text">Two Random Bipolar-valued Digraphs</span><a class="headerlink" href="#tworand" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -243,7 +248,10 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="go"> Valuation domain: [-1.00;1.00]</span>
 </pre></div>
 </td></tr></table></div>
-<p>We may notice in the relation tables shown above that 9 pairs, like <em>(a1,a2)</em> or <em>(a3,a2)</em> for instance, appear equivalently oriented. The <a class="reference internal" href="techDoc.html#digraphs.EquivalenceDigraph" title="digraphs.EquivalenceDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.EquivalenceDigraph</span></code></a> class implements this <em>relational equivalence</em> relation between digraphs <em>R1</em> and <em>R2</em>.</p>
+</div>
+<p>We may notice in the relation tables shown above that 9 pairs, like <em>(a1,a2)</em> or <em>(a3,a2)</em> for instance, appear equivalently oriented (see <a class="reference internal" href="#tworand"><span class="std std-numref">Listing 2</span></a> Lines 6 and 17). The <a class="reference internal" href="techDoc.html#digraphs.EquivalenceDigraph" title="digraphs.EquivalenceDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.EquivalenceDigraph</span></code></a> class implements this <em>relational equivalence</em> relation between digraphs <em>R1</em> and <em>R2</em> (see <a class="reference internal" href="#twoequi2"><span class="std std-numref">Listing 3</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="twoequi2">
+<div class="code-block-caption"><span class="caption-number">Listing 3 </span><span class="caption-text">Bipolar-valued Equivalence Digraph</span><a class="headerlink" href="#twoequi2" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -267,6 +275,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="go"> Valuation domain: [-1.00;1.00]</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 <p>In our bipolar-valued epistemic logic, logical disjunctions and conjunctions are implemented as <em>max</em>, respectively <em>min</em> operators. Notice also that the logical equivalence <em>(R1&lt;=&gt;R2)</em> corresponds to a double implication <em>(R1 =&gt; R2) and (R2 =&gt; R1)</em> and that the implication <em>(R1 =&gt; R2)</em> is logically equivalent to the disjunction <em>(not R1 or R2)</em>.</p>
 <p>If <em>r(x R1 y)</em> and <em>r(x R2 y)</em> denote the bipolar-valued characteristic values of relation <em>R1</em>, resp. <em>R2</em>, we may hence compute as follows a majority margin <em>M(R1&lt;=&gt;R2)</em> between equivalently and not equivalently oriented irreflexive pairs <em>(x,y)</em>.</p>
 <div class="line-block">
@@ -296,7 +305,10 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </ul>
 </div></blockquote>
 <p>We have thus successfully <strong>out-factored</strong> the <em>determination</em> effect from the <em>correlation</em> effect. With completely determined relations, <em>tau(R1,R2)</em> = <em>r(R1&lt;=&gt;R2)</em>. By convention, we set the ordinal correlation with a <em>completely indeterminate</em> relation, i.e. when <em>D = 0</em>, to the <em>indeterminate</em> correlation value 0.0. With <em>uniformly</em> chosen random <em>r</em>-valued relations, the <strong>expected</strong> <em>tau</em> index is <strong>0.0</strong>, denoting in fact an <strong>indeterminate</strong> correlation. The corresponding expected normalized determination <em>d</em> is about 0.333 (see <a class="reference internal" href="#bis-2012p" id="id4"><span>[BIS-2012p]</span></a>).</p>
-<p>We may verify these relations with help of the corresponding equivalence digraph <em>eq</em> (see above).</p>
+<p>We may verify these relations with help of the corresponding equivalence digraph <em>eq</em> (see <a class="reference internal" href="#ordind1"><span class="std std-numref">Listing 4</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="ordind1">
+<div class="code-block-caption"><span class="caption-number">Listing 4 </span><span class="caption-text"><li><p>Computing the Ordinal Correlation Index</p></li>
+</span><a class="headerlink" href="#ordind1" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -316,7 +328,11 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="go"> r(R1&lt;=&gt;R2) = +0.026, d = 0.356, tau = +0.073</span>
 </pre></div>
 </td></tr></table></div>
-<p>In general we simply use the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeOrdinalCorrelation" title="digraphs.Digraph.computeOrdinalCorrelation"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.computeOrdinalCorrelation()</span></code></a> method which renders a dictionary with a ‘<em>correlation</em>’ (<em>tau</em>) and a ‘<em>determination</em>’ (<em>d</em>) attribute. We may recover <em>r(&lt;=&gt;)</em> by multiplying <em>tau</em> with <em>d</em>.</p>
+</div>
+<p>In general we simply use the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeOrdinalCorrelation" title="digraphs.Digraph.computeOrdinalCorrelation"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.computeOrdinalCorrelation()</span></code></a> method which renders a dictionary with a ‘<em>correlation</em>’ (<em>tau</em>) and a ‘<em>determination</em>’ (<em>d</em>) attribute. We may recover <em>r(&lt;=&gt;)</em> by multiplying <em>tau</em> with <em>d</em> (see <a class="reference internal" href="#ordind2"><span class="std std-numref">Listing 5</span></a> Line 4).</p>
+<div class="literal-block-wrapper docutils container" id="ordind2">
+<div class="code-block-caption"><span class="caption-number">Listing 5 </span><span class="caption-text"><li><p>Computing the Ordinal Correlation Index</p></li>
+</span><a class="headerlink" href="#ordind2" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -330,11 +346,14 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="go"> tau(R1,R2) = +0.073, d = 0.356, r(R1&lt;=&gt;R2) = +0.026</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 <p>We may now illustrate the quality of the global ranking of the movies shown with the heat map in <a class="reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 68</span></a>.</p>
 </div>
 <div class="section" id="fitness-of-ranking-heuristics">
 <h3>Fitness of ranking heuristics<a class="headerlink" href="#fitness-of-ranking-heuristics" title="Permalink to this headline">¶</a></h3>
-<p>We reconsider the bipolar-valued outranking digraph <em>g</em> modelling the pairwise global ‘<em>at least as well rated as</em>’ relation among the 25 movies seen above.</p>
+<p>We reconsider the bipolar-valued outranking digraph <em>g</em> modelling the pairwise global ‘<em>at least as well rated as</em>’ relation among the 25 movies seen above (see <a class="reference internal" href="#exmoviesbg"><span class="std std-numref">Listing 6</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="exmoviesbg">
+<div class="code-block-caption"><span class="caption-number">Listing 6 </span><span class="caption-text">Global Movies Outranking Digraph</span><a class="headerlink" href="#exmoviesbg" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -362,8 +381,11 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="go"> 188</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 <p>Out of the 25 x 24 = 600 irreflexive movie pairs, digraph <em>g</em> contains 390 positively validated, 188 positively invalidated outranking situations, and 22 <em>indeterminate</em> outranking situations (see the zero-valued cells in <a class="reference internal" href="#graffiti07-3"><span class="std std-numref">Fig. 70</span></a>).</p>
 <p>Let us now compute the normalized majority margin <em>r(&lt;=&gt;)</em>  of the equivalence between the marginal critic’s pairwise ratings and the global <em>Net-Flows</em> ranking shown in the ordered heat map (see <a class="reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 68</span></a>).</p>
+<div class="literal-block-wrapper docutils container" id="margcorr">
+<div class="code-block-caption"><span class="caption-number">Listing 7 </span><span class="caption-text">Marginal Criterion Correlations with global <em>NetFlows</em> Ranking</span><a class="headerlink" href="#margcorr" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -417,8 +439,11 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="go"> r(FG&lt;=&gt;nf) = +0.027</span>
 </pre></div>
 </td></tr></table></div>
-<p>We recover above the relational equivalence characteristic values shown in the third row of the table in <a class="reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 68</span></a>. The global <em>Net-Flows</em> ranking represents obviously a rather balanced compromise with respect to all movie critics’opinions as there appears no valued negative correlation with anyone of them. The <em>Net-Flows</em> ranking apparently takes also correctly in account that the journalist <em>JH</em>, a locally renowned movie critic, shows a higher significance weight.</p>
+</div>
+<p>We recover above in <a class="reference internal" href="#margcorr"><span class="std std-numref">Listing 7</span></a> the relational equivalence characteristic values shown in the third row of the table in <a class="reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 68</span></a>. The global <em>Net-Flows</em> ranking represents obviously a rather balanced compromise with respect to all movie critics’ opinions as there appears no valued negative correlation with anyone of them. The <em>Net-Flows</em> ranking apparently takes also correctly in account that the journalist <em>JH</em>, a locally renowned movie critic, shows a higher significance weight (see <a class="reference internal" href="#margcorr"><span class="std std-numref">Listing 7</span></a> Line 12).</p>
 <p>The ordinal correlation between the global <em>Net-Flows</em> ranking and the digraph <em>g</em> may be furthermore computed as follows:</p>
+<div class="literal-block-wrapper docutils container" id="globalcorr">
+<div class="code-block-caption"><span class="caption-number">Listing 8 </span><span class="caption-text">Correlation between outrankings global <em>NetFlows</em> Ranking</span><a class="headerlink" href="#globalcorr" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -432,7 +457,8 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="go"> tau(g,nf) = +0.780, D = 0.300, r(g&lt;=&gt;nf) = +0.234</span>
 </pre></div>
 </td></tr></table></div>
-<p>We notice that the correlation <em>tau</em> index between the <em>Net-Flows</em> ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the <em>r</em> -valued relational equivalence between the <em>nf</em> and the <em>g</em> digraph, with a characteristics value of <em>only</em> +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62% of the movie critics’ rating opinions.</p>
+</div>
+<p>We notice in <a class="reference internal" href="#globalcorr"><span class="std std-numref">Listing 8</span></a> Line 6 that the correlation <em>tau</em> index between the <em>Net-Flows</em> ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the <em>r</em> -valued relational equivalence between the <em>nf</em> and the <em>g</em> digraph, with a characteristics value of <em>only</em> +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62% of the movie critics’ rating opinions.</p>
 <p>It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the <em>Copeland</em> or the <em>Kohler</em> ranking rule.</p>
 </div>
 <div class="section" id="illustrating-preference-divergences">
@@ -1244,7 +1270,7 @@ confidence level <em>alpha</em> %, if</p>
 <h3>Cardinal or Ordinal criteria significances<a class="headerlink" href="#cardinal-or-ordinal-criteria-significances" title="Permalink to this headline">¶</a></h3>
 <p>The required cardinal significance weights of the performance criteria represent the <em>Achilles</em>’ heel of the outranking approach. Rarely will indeed a decision maker be cognitively competent for suggesting precise decimal-valued criteria significance weights. More often, the decision problem will involve more or less equally important decision objectives with more or less equi-significant criteria. A random example of such a decision problem may be generated with the <code class="xref py py-class docutils literal notranslate"><span class="pre">randPerfTabs.Random3ObjectivesPerformanceTableau</span></code> class.</p>
 <div class="literal-block-wrapper docutils container" id="objexample">
-<div class="code-block-caption"><span class="caption-number">Listing 1 </span><span class="caption-text">Random 3 Objectives Performance Tableau</span><a class="headerlink" href="#objexample" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 9 </span><span class="caption-text">Random 3 Objectives Performance Tableau</span><a class="headerlink" href="#objexample" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1315,10 +1341,10 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>In this example (see <a class="reference internal" href="#objexample"><span class="std std-numref">Listing 1</span></a>), we face seven decision alternatives that are assessed with respect to three <em>equally important</em> decision objectives concerning: first, an <em>economical</em> aspect with a coalition of three performance criteria of significance weight 8, secondly, a <em>societal</em> aspect with a coalition of two performance criteria of significance weight 12, and thirdly, an <em>environmental</em> aspect with a coalition four performance criteria of significance weight 6.</p>
-<p>The question we tackle is the following: How <em>dependent</em> on the actual values of the significance weights appears the corresponding bipolar-valued outranking digraph ? In the previous section, we assumed that the criteria significance weights were random variables. Here, we shall assume that we know for sure only the preordering of the significance weights. In our example we see indeed three increasing weight equivalence classes (<a class="reference internal" href="#weightspreorder"><span class="std std-numref">Listing 2</span></a>).</p>
+<p>In this example (see <a class="reference internal" href="#objexample"><span class="std std-numref">Listing 9</span></a>), we face seven decision alternatives that are assessed with respect to three <em>equally important</em> decision objectives concerning: first, an <em>economical</em> aspect with a coalition of three performance criteria of significance weight 8, secondly, a <em>societal</em> aspect with a coalition of two performance criteria of significance weight 12, and thirdly, an <em>environmental</em> aspect with a coalition four performance criteria of significance weight 6.</p>
+<p>The question we tackle is the following: How <em>dependent</em> on the actual values of the significance weights appears the corresponding bipolar-valued outranking digraph ? In the previous section, we assumed that the criteria significance weights were random variables. Here, we shall assume that we know for sure only the preordering of the significance weights. In our example we see indeed three increasing weight equivalence classes (<a class="reference internal" href="#weightspreorder"><span class="std std-numref">Listing 10</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="weightspreorder">
-<div class="code-block-caption"><span class="caption-number">Listing 2 </span><span class="caption-text">Significance weights preorder</span><a class="headerlink" href="#weightspreorder" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10 </span><span class="caption-text">Significance weights preorder</span><a class="headerlink" href="#weightspreorder" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1335,7 +1361,7 @@ confidence level <em>alpha</em> %, if</p>
 <h3>Qualifying the stability of outranking situations<a class="headerlink" href="#qualifying-the-stability-of-outranking-situations" title="Permalink to this headline">¶</a></h3>
 <p>Let us construct the normalized bipolar-valued outranking digraph corresponding with the previous 3 Objectives performance tableau <em>t</em>.</p>
 <div class="literal-block-wrapper docutils container" id="exbg">
-<div class="code-block-caption"><span class="caption-number">Listing 3 </span><span class="caption-text">Example Bipolar Outranking Digraph</span><a class="headerlink" href="#exbg" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 11 </span><span class="caption-text">Example Bipolar Outranking Digraph</span><a class="headerlink" href="#exbg" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1364,7 +1390,7 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>We notice on the principal diagonal, the <em>certainly validated</em> reflexive terms +1.00 (see <a class="reference internal" href="#exbg"><span class="std std-numref">Listing 3</span></a> Lines 7-13). Now, we know for sure that <em>unanimous</em> outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a <em>majority</em> significance in <em>each</em> criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see <a class="reference internal" href="#bis-2014p" id="id13"><span>[BIS-2014p]</span></a>) if an outranking situation is independent of all the potential significance weights that respect the given <em>preordering</em> of the weights. Mind that there for sure are always outranking situations that are dependent on the very values we allocate to the criteria significances.</p>
+<p>We notice on the principal diagonal, the <em>certainly validated</em> reflexive terms +1.00 (see <a class="reference internal" href="#exbg"><span class="std std-numref">Listing 11</span></a> Lines 7-13). Now, we know for sure that <em>unanimous</em> outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a <em>majority</em> significance in <em>each</em> criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see <a class="reference internal" href="#bis-2014p" id="id13"><span>[BIS-2014p]</span></a>) if an outranking situation is independent of all the potential significance weights that respect the given <em>preordering</em> of the weights. Mind that there for sure are always outranking situations that are dependent on the very values we allocate to the criteria significances.</p>
 <dl class="simple">
 <dt>We may thus distinguish the following bipolar-valued stability levels:</dt><dd><ul class="simple">
 <li><p><strong>+4 | -4</strong> : <em>unanimous</em> outranking | outranked situation;</p></li>
@@ -1377,7 +1403,7 @@ confidence level <em>alpha</em> %, if</p>
 </dl>
 <p>To compute these stability qualification levels we provide the <a class="reference internal" href="techDoc.html#outrankingDigraphs.RobustOutrankingDigraph" title="outrankingDigraphs.RobustOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.RobustOutrankingDigraph</span></code></a> class.</p>
 <div class="literal-block-wrapper docutils container" id="exstab">
-<div class="code-block-caption"><span class="caption-number">Listing 4 </span><span class="caption-text">Outranking Stability Levels</span><a class="headerlink" href="#exstab" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 12 </span><span class="caption-text">Outranking Stability Levels</span><a class="headerlink" href="#exstab" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1436,10 +1462,10 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>As expected, all <em>reflexive</em> comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially <em>as well performing as</em> themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative <em>a4</em> with alternatives <em>a5</em> and <em>a6</em> (see <a class="reference internal" href="#exstab"><span class="std std-numref">Listing 4</span></a> Line 25).</p>
+<p>As expected, all <em>reflexive</em> comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially <em>as well performing as</em> themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative <em>a4</em> with alternatives <em>a5</em> and <em>a6</em> (see <a class="reference internal" href="#exstab"><span class="std std-numref">Listing 12</span></a> Line 25).</p>
 <p>We may for instance inspect the details of how alternatives <em>a4</em> and <em>a5</em> compare.</p>
 <div class="literal-block-wrapper docutils container" id="excomp45">
-<div class="code-block-caption"><span class="caption-number">Listing 5 </span><span class="caption-text">Comparing Decision Alternatives <em>a4</em> and <em>a5</em></span><a class="headerlink" href="#excomp45" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 13 </span><span class="caption-text">Comparing Decision Alternatives <em>a4</em> and <em>a5</em></span><a class="headerlink" href="#excomp45" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1470,10 +1496,10 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Alternative <em>a4</em> is indeed performing unanimously <em>at least as well as</em> alternative <em>a5</em>: <em>r(a4 outranks a5) = +1.00</em> (see <a class="reference internal" href="#exbg"><span class="std std-numref">Listing 3</span></a> Line 10).</p>
-<p>The converse comparison does not, however, deliver such an unanimous <em>outranked</em> situation. The comparison only qualifies at stability level -3 (see <a class="reference internal" href="#exstab"><span class="std std-numref">Listing 4</span></a> Line 11 <em>r(a5 outranks a4) = 0.89</em>).</p>
+<p>Alternative <em>a4</em> is indeed performing unanimously <em>at least as well as</em> alternative <em>a5</em>: <em>r(a4 outranks a5) = +1.00</em> (see <a class="reference internal" href="#exbg"><span class="std std-numref">Listing 11</span></a> Line 10).</p>
+<p>The converse comparison does not, however, deliver such an unanimous <em>outranked</em> situation. The comparison only qualifies at stability level -3 (see <a class="reference internal" href="#exbg"><span class="std std-numref">Listing 11</span></a> Line 11 <em>r(a5 outranks a4) = 0.89</em>).</p>
 <div class="literal-block-wrapper docutils container" id="excomp54">
-<div class="code-block-caption"><span class="caption-number">Listing 6 </span><span class="caption-text">Comparing Decision Alternatives <em>a5</em> and <em>a4</em></span><a class="headerlink" href="#excomp54" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 14 </span><span class="caption-text">Comparing Decision Alternatives <em>a5</em> and <em>a4</em></span><a class="headerlink" href="#excomp54" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1504,10 +1530,10 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Indeed, on criterion <em>ec8</em> we observe a negative performance difference of -8.71 (see <a class="reference internal" href="#excomp54"><span class="std std-numref">Listing 6</span></a> Line 7) which is effectively below the supposed <em>preference discrimination threshold</em> of 10.00. Yet, the outranked situation is supported by a majority of criteria in each decision objective. Hence, the reported preferential situation is completely independent of any chosen significance weights.</p>
+<p>Indeed, on criterion <em>ec8</em> we observe a negative performance difference of -8.71 (see <a class="reference internal" href="#excomp54"><span class="std std-numref">Listing 14</span></a> Line 7) which is effectively below the supposed <em>preference discrimination threshold</em> of 10.00. Yet, the outranked situation is supported by a majority of criteria in each decision objective. Hence, the reported preferential situation is completely independent of any chosen significance weights.</p>
 <p>Let us now consider a comparison, like the one between alternatives <em>a2</em> and <em>a1</em>, that is only qualified at stability level +2, resp. -2.</p>
 <div class="literal-block-wrapper docutils container" id="excomp21">
-<div class="code-block-caption"><span class="caption-number">Listing 7 </span><span class="caption-text">Comparing Decision Alternatives <em>a2</em> and <em>a1</em></span><a class="headerlink" href="#excomp21" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 15 </span><span class="caption-text">Comparing Decision Alternatives <em>a2</em> and <em>a1</em></span><a class="headerlink" href="#excomp21" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1565,9 +1591,9 @@ confidence level <em>alpha</em> %, if</p>
 </td></tr></table></div>
 </div>
 <p>In both comparisons, the performances observed with respect to the environmental decision objective are not validating with a significant majority the otherwise unanimous outranking, resp. outranked situations. Hence, the stability of the reported preferential situations is in fact dependent on choosing significance weights that are compatible with the given significance weights preorder (see <a class="reference internal" href="#weightspreorder"><span class="std std-ref">Significance weights preorder</span></a>).</p>
-<p>Let us finally inspect a comparison that is only qualified at stability level +1, like the one between alternatives <em>a7</em> and <em>a3</em> (see <a class="reference internal" href="#excomp73"><span class="std std-numref">Listing 8</span></a>).</p>
+<p>Let us finally inspect a comparison that is only qualified at stability level +1, like the one between alternatives <em>a7</em> and <em>a3</em> (see <a class="reference internal" href="#excomp73"><span class="std std-numref">Listing 16</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="excomp73">
-<div class="code-block-caption"><span class="caption-number">Listing 8 </span><span class="caption-text">Comparing Decision Alternatives <em>a7</em> and <em>a3</em></span><a class="headerlink" href="#excomp73" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 16 </span><span class="caption-text">Comparing Decision Alternatives <em>a7</em> and <em>a3</em></span><a class="headerlink" href="#excomp73" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1627,7 +1653,7 @@ confidence level <em>alpha</em> %, if</p>
 <p>In these two cases, choosing significances that are just compatible with the given weights preorder will not always result in a positively validated  outranking situation.</p>
 <p>The stability denotation of outranking situations is readily available with the common <code class="xref py py-meth docutils literal notranslate"><span class="pre">OutrankingDigraph.showRelationTable()</span></code> method.</p>
 <div class="literal-block-wrapper docutils container" id="stagdenot">
-<div class="code-block-caption"><span class="caption-number">Listing 9 </span><span class="caption-text">Relation Table with Stability Denotation</span><a class="headerlink" href="#stagdenot" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 17 </span><span class="caption-text">Relation Table with Stability Denotation</span><a class="headerlink" href="#stagdenot" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3

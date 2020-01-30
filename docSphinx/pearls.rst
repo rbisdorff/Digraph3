@@ -149,6 +149,8 @@ Let *R1* and *R2* be two random crisp relations defined on a same set of 5 alter
 
 .. code-block:: pycon
    :linenos:
+   :caption: Crisp Relational Equivalence Digraph
+   :name: relEqui1
 
    >>> from digraphs import *
    >>> R1 = RandomDigraph(order=5,Bipolar=True)
@@ -167,7 +169,7 @@ Let *R1* and *R2* be two random crisp relations defined on a same set of 5 alter
    >>> E.correlation
     {'correlation': -0.1, 'determination': 1.0}
 
-In the table of the equivalence relation *R1<=>R2* above, we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall's *tau* index in this plainly determined crisp case.
+In the table of the equivalence relation *R1<=>R2* above (see :numref:`relEqui1` Lines 9-13), we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall's *tau* index in this plainly determined crisp case (see :numref:`relEqui1` Line 13).
 
 What happens now with more or less determined and even partially indeterminate relations ? May we proceed in a similar way ?
 
@@ -178,6 +180,8 @@ Let us now consider two randomly bipolar-valued digraphs *R1* and *R2* of order 
 
 .. code-block:: pycon
    :linenos:
+   :caption: Two Random Bipolar-valued Digraphs 
+   :name: twoRand
 
    >>> R1 = RandomValuationDigraph(order=5,seed=1)
    >>> R1.showRelationTable(ReflexiveTerms=False)
@@ -202,10 +206,12 @@ Let us now consider two randomly bipolar-valued digraphs *R1* and *R2* of order 
      'a5' |   0.10	  0.62	  0.00	  0.84	   - 	 
     Valuation domain: [-1.00;1.00]
 
-We may notice in the relation tables shown above that 9 pairs, like *(a1,a2)* or *(a3,a2)* for instance, appear equivalently oriented. The :py:class:`digraphs.EquivalenceDigraph` class implements this *relational equivalence* relation between digraphs *R1* and *R2*.
+We may notice in the relation tables shown above that 9 pairs, like *(a1,a2)* or *(a3,a2)* for instance, appear equivalently oriented (see :numref:`twoRand` Lines 6 and 17). The :py:class:`digraphs.EquivalenceDigraph` class implements this *relational equivalence* relation between digraphs *R1* and *R2* (see :numref:`twoEqui2`).
 
 .. code-block:: pycon
    :linenos:
+   :caption: Bipolar-valued Equivalence Digraph
+   :name: twoEqui2
 
    >>> eq = EquivalenceDigraph(R1,R2)
    >>> eq.showRelationTable(ReflexiveTerms=False)
@@ -246,10 +252,12 @@ It is worthwhile noticing that the ordinal correlation index *tau(R1,R2)* we obt
 
 We have thus successfully **out-factored** the *determination* effect from the *correlation* effect. With completely determined relations, *tau(R1,R2)* = *r(R1<=>R2)*. By convention, we set the ordinal correlation with a *completely indeterminate* relation, i.e. when *D = 0*, to the *indeterminate* correlation value 0.0. With *uniformly* chosen random *r*-valued relations, the **expected** *tau* index is **0.0**, denoting in fact an **indeterminate** correlation. The corresponding expected normalized determination *d* is about 0.333 (see [BIS-2012p]_).
 
-We may verify these relations with help of the corresponding equivalence digraph *eq* (see above).
+We may verify these relations with help of the corresponding equivalence digraph *eq* (see :numref:`ordInd1`).
 
 .. code-block:: pycon
    :linenos:
+   :caption: 1. Computing the Ordinal Correlation Index
+   :name: ordInd1
 
    >>> eq = EquivalenceDigraph(R1,R2)
    >>> M = Decimal('0'); D = Decimal('0')
@@ -261,10 +269,12 @@ We may verify these relations with help of the corresponding equivalence digraph
    >>> print('r(R1<=>R2) = %+.3f, d = %.3f, tau = %+.3f' % (M/n2,D/n2,M/D))
     r(R1<=>R2) = +0.026, d = 0.356, tau = +0.073  
 
-In general we simply use the :py:func:`digraphs.Digraph.computeOrdinalCorrelation` method which renders a dictionary with a '*correlation*' (*tau*) and a '*determination*' (*d*) attribute. We may recover *r(<=>)* by multiplying *tau* with *d*. 
+In general we simply use the :py:func:`digraphs.Digraph.computeOrdinalCorrelation` method which renders a dictionary with a '*correlation*' (*tau*) and a '*determination*' (*d*) attribute. We may recover *r(<=>)* by multiplying *tau* with *d* (see :numref:`ordInd2` Line 4). 
 
 .. code-block:: pycon
    :linenos:
+   :caption: 2. Computing the Ordinal Correlation Index
+   :name: ordInd2
 
    >>> corr = R1.computeOrdinalCorrelation(R2)
    >>> tau = corr['correlation']
@@ -278,9 +288,12 @@ We may now illustrate the quality of the global ranking of the movies shown with
 Fitness of ranking heuristics
 .............................
 
-We reconsider the bipolar-valued outranking digraph *g* modelling the pairwise global '*at least as well rated as*' relation among the 25 movies seen above.
+We reconsider the bipolar-valued outranking digraph *g* modelling the pairwise global '*at least as well rated as*' relation among the 25 movies seen above (see :numref:`exMoviesBG`).
 
 .. code-block:: pycon
+   :linenos:
+   :caption: Global Movies Outranking Digraph
+   :name: exMoviesBG
 
    >>> g = BipolarOutrankingDigraph(t,Normalized=True)
     *------- Object instance description ------*
@@ -302,6 +315,8 @@ Let us now compute the normalized majority margin *r(<=>)*  of the equivalence b
 
 .. code-block:: pycon
    :linenos:
+   :caption: Marginal Criterion Correlations with global *NetFlows* Ranking
+   :name: margCorr
 
    >>> from linearOrders import NetFlowsOrder
    >>> nf = NetFlowsOrder(g)
@@ -330,12 +345,14 @@ Let us now compute the normalized majority margin *r(<=>)*  of the equivalence b
     r(AS<=>nf) = +0.080
     r(FG<=>nf) = +0.027
 
-We recover above the relational equivalence characteristic values shown in the third row of the table in :numref:`graffiti07_2`. The global *Net-Flows* ranking represents obviously a rather balanced compromise with respect to all movie critics'opinions as there appears no valued negative correlation with anyone of them. The *Net-Flows* ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight.
+We recover above in :numref:`margCorr` the relational equivalence characteristic values shown in the third row of the table in :numref:`graffiti07_2`. The global *Net-Flows* ranking represents obviously a rather balanced compromise with respect to all movie critics' opinions as there appears no valued negative correlation with anyone of them. The *Net-Flows* ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight (see :numref:`margCorr` Line 12).
 
 The ordinal correlation between the global *Net-Flows* ranking and the digraph *g* may be furthermore computed as follows: 
 
 .. code-block:: pycon
    :linenos:
+   :caption: Correlation between outrankings global *NetFlows* Ranking
+   :name: globalCorr
 
    >>> corr = g.computeOrdinalCorrelatin(nf)
    >>> tau = corr['correlation']
@@ -344,7 +361,7 @@ The ordinal correlation between the global *Net-Flows* ranking and the digraph *
    >>> print('Tau(g,nf) = %+.3f, d = %.3f, r(g<=>nf) = %+.3f' % (Tau,d,r))
     tau(g,nf) = +0.780, D = 0.300, r(g<=>nf) = +0.234
 
-We notice that the correlation *tau* index between the *Net-Flows* ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence between the *nf* and the *g* digraph, with a characteristics value of *only* +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62% of the movie critics' rating opinions.
+We notice in :numref:`globalCorr` Line 6 that the correlation *tau* index between the *Net-Flows* ranking and the determined part of the outranking digraph is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence between the *nf* and the *g* digraph, with a characteristics value of *only* +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62% of the movie critics' rating opinions.
 
 It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the *Copeland* or the *Kohler* ranking rule.
 
@@ -1177,7 +1194,7 @@ We may for instance inspect the details of how alternatives *a4* and *a5* compar
 
 Alternative *a4* is indeed performing unanimously *at least as well as* alternative *a5*: *r(a4 outranks a5) = +1.00* (see :numref:`exBG` Line 10).
 
-The converse comparison does not, however, deliver such an unanimous *outranked* situation. The comparison only qualifies at stability level -3 (see :numref:`exStab` Line 11 *r(a5 outranks a4) = 0.89*).
+The converse comparison does not, however, deliver such an unanimous *outranked* situation. The comparison only qualifies at stability level -3 (see :numref:`exBG` Line 11 *r(a5 outranks a4) = 0.89*).
 
 .. code-block:: pycon
    :linenos:
