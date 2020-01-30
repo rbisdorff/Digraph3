@@ -1104,7 +1104,7 @@ Let us construct the normalized bipolar-valued outranking digraph corresponding 
 
 We notice on the principal diagonal, the *certainly validated* reflexive terms (+1.00). Now, we know for sure that *unanimous* outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a *majority* significance in *each* criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see [BIS-2014p]_) if an outranking situation is independent of all the potential significance weights that respect the given *preordering* of the weights. Mind that there for sure are always outranking situations that are dependent on the very values we allocate to the criteria significances.
 
-We may thus distinguish the following stability levels:
+We may thus distinguish the following bipolar-valued stability levels:
     * **+4 | -4** : *unanimous* outranking | outranked situation;
     * **+3 | -3** : *validated* outranking | outranked situation in *each* coalition of equisignificant criteria;
     * **+2 | -2** : *validated* outranking | outranked situation with *all* potential significance weights *compatible* with the given significance *preorder*;
