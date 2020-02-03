@@ -1908,7 +1908,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     if x == y and hasStabilityDenotation:
                         print(' (+4) ', end=' ')
                     else:
-                        print(' (%+d) ' % int(nrg.relation[x[1]][y[1]]), end=' ')
+                        print(' (%+d) ' % int(nrg.stability[x[1]][y[1]]), end=' ')
                 print()
             
                 
@@ -7686,9 +7686,8 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph):
             t.save(filePerfTab)
             self.name='newrobust_randomPerf'
         else:
-            self.name = 'newrobust_' + filePerfTab.name
-        cardinal = BipolarOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
-        cardinal.recodeValuation(-1,1)
+            self.name = 'robust_' + filePerfTab.name
+        cardinal = BipolarOutrankingDigraph(filePerfTab,Normalized=True,WithConcordanceRelation=True,WithVetoCounts=True)
         ordinal  = OrdinalOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
         ordinal.recodeValuation(-1,1)
         equisignificant = EquiSignificanceMajorityOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
@@ -7708,7 +7707,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph):
             ordinal.showRelationTable()
             print('cardinal')
             print(cardinal.valuationdomain)
-            cardinal.showRelationTable()
+            cardinal.showRelationTable(hasLPDDenotation=True)
             
         try:
             self.description = copy.copy(cardinal.description)
@@ -7720,28 +7719,35 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph):
             pass
         self.actions = copy.copy(cardinal.actions)
         self.order = len(self.actions)
+        try:
+            self.objectives = copy.copy(cardinal.objectives)
+        except:
+            pass
         self.criteria = copy.copy(cardinal.criteria)
         self.evaluation = copy.copy(cardinal.evaluation)
         self.vetos = copy.copy(cardinal.vetos)
-        self.valuationdomain = {'hasIntegerValuation':True, 'min':Decimal("-4"), 'med':Decimal("0"), 'max':Decimal("4")}
-        self.cardinalRelation = copy.copy(cardinal.relation)
+        self.valuationdomain = copy.copy(cardinal.valuationdomain)
+        self.relation = copy.copy(cardinal.relation)
+        self.concordanceRelation = copy.copy(cardinal.concordanceRelation)
+        self.largePerformanceDifferencesCount = copy.copy(cardinal.largePerformanceDifferencesCount)
         self.ordinalRelation = copy.copy(ordinal.relation)
         self.equisignificantRelation = copy.copy(equisignificant.relation)
         self.unanimousRelation = copy.copy(unanimous.relation)
-        self.relation = self._constructRelation()
+        self.stability = self._constructRelation()
+        if Debug:
+            self.showRelationTable(hasStabilityDenotation=True)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
     def _constructRelation(self):
         """
-        Parameters: normal -, equisignificant - ordinal -, and unanimous outranking relation.
         Help method for constructing robust outranking relation.
         """
         Debug = False
         unanimousRelation = self.unanimousRelation
         equisignificantRelation = self.equisignificantRelation
         ordinalRelation = self.ordinalRelation
-        cardinalRelation = self.cardinalRelation
+        concordanceRelation = self.concordanceRelation
         
         if Debug:
             print(self.valuationdomain)
@@ -7752,33 +7758,46 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph):
         One = Decimal("1")
         MinusOne = Decimal("-1")
         actions = [x for x in self.actions]
+        stability = {}
         relation = {}
         for a in actions:
+            stability[a] = {}
             relation[a] = {}
             for b in actions:
                 if a != b:
                     if unanimousRelation[a][b] == One:
-                        relation[a][b] = Max
+                        stability[a][b] = 4
+                        relation[a][b] = self.relation[a][b]
                     elif unanimousRelation[a][b] == MinusOne:
-                        relation[a][b] = Min
+                        stability[a][b] = -4
+                        relation[a][b] = self.relation[a][b]
                     elif equisignificantRelation[a][b] == One:
-                        relation[a][b] = Decimal('3')
+                        stability[a][b] = 3
+                        relation[a][b] = self.relation[a][b]
                     elif equisignificantRelation[a][b] == MinusOne:
-                        relation[a][b] = Decimal('-3')
+                        stability[a][b] = -3
+                        relation[a][b] = self.relation[a][b]                        
                     elif ordinalRelation[a][b] == One:
-                        relation[a][b] = Decimal('2')
+                        stability[a][b] = 2
+                        relation[a][b] = self.relation[a][b]
                     elif ordinalRelation[a][b] == MinusOne:
-                        relation[a][b] = Decimal('-2')
-                    elif cardinalRelation[a][b] > Med:
-                        relation[a][b] = Decimal('1')
-                    elif cardinalRelation[a][b] < Med:
-                        relation[a][b] = Decimal('-1')
+                        stability[a][b] = -2
+                        relation[a][b] = self.relation[a][b]
+                    elif concordanceRelation[a][b] > Med:
+                        stability[a][b] = 1
+                        relation[a][b] = Med
+                    elif concordanceRelation[a][b] < Med:
+                        stability[a][b] = -1
+                        relation[a][b] = Med
                     else:
+                        stability[a][b] = 0
                         relation[a][b] = Med
                 else:
+                    stability[a][b] = 0
                     relation[a][b] = Med
-                    
-        return relation
+        self.relation = relation
+        return stability
+         
 
 class OldRobustOutrankingDigraph(BipolarOutrankingDigraph):
     """
@@ -9597,16 +9616,24 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    Threading = False
-    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
-                                   numberOfCriteria=5,\
-                                   weightDistribution='equiobjectives',
-                                             NegativeWeights=True,
-                                    negativeWeightProbability=0.25,
-                                   seed=101)
-    
-    g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,
+##    Threading = False
+##    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
+##                                   numberOfCriteria=9,\
+##                                   weightDistribution='equiobjectives',
+##                                    NegativeWeights=True,
+##                                    negativeWeightProbability=0.25,
+##                                   seed=102)
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
+                                   numberOfCriteria=9,\
+                                   seed=102)
+    g = BipolarOutrankingDigraph(t,Normalized=True,
                                   tempDir=None,nbrCores=8,Comments=True,Debug=False)
+    g.showRelationTable(hasStabilityDenotation=True)
+    rg = RobustOutrankingDigraph(t,Debug=False)
+    rg.showRelationTable(hasStabilityDenotation=True)
+    cg = ConfidentBipolarOutrankingDigraph(t)
+    cg.showRelationTable()
+    
     #print(g1)
     #g1.saveXMCDA2RubisChoiceRecommendation()
     #g1.showRelationTable()

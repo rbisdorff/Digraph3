@@ -1056,7 +1056,7 @@ The required cardinal significance weights of the performance criteria represent
    :caption: Random 3 Objectives Performance Tableau
    :name: 3ObjExample
 
-   >>> from randPerfTabs import Random3ObjectivesPerformanceTableau
+   >>> from randomPerfTabs import Random3ObjectivesPerformanceTableau
    >>> t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
    ...                                 numberOfCriteria=9,seed=102)
    >>> t
@@ -1131,54 +1131,49 @@ Let us construct the normalized bipolar-valued outranking digraph corresponding 
      'a6' | +0.22  -0.42  +0.00  -1.00  +0.17  +1.00  -0.11  
      'a7' | +0.22  -0.50  +0.17  -0.06  +0.78  +0.42  +1.00  
 
-We notice on the principal diagonal, the *certainly validated* reflexive terms +1.00 (see :numref:`exBG` Lines 7-13). Now, we know for sure that *unanimous* outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a *majority* significance in *each* criteria coalition are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see [BIS-2014p]_) if an outranking situation is independent of all the potential significance weights that respect the given *preordering* of the weights. Mind that there for sure are always outranking situations that are dependent on the very values we allocate to the criteria significances.
+We notice on the principal diagonal, the *certainly validated* reflexive terms +1.00 (see :numref:`exBG` Lines 7-13). Now, we know for sure that *unanimous* outranking situations are completely independent of the significance weights. Similarly, all outranking situations that are supported by a *majority* significance in *each* coalition of equi-significant criteria are also in fact independent of the actual importance we attach to each individual criteria coalition. But we are also able to test (see [BIS-2014p]_) if an outranking situation is independent of all the potential significance weights that respect the given *preordering* of the weights. Mind that there are, for sure, always outranking situations that are indeed *dependent* on the very values we allocate to the criteria significances.
 
-We may thus distinguish the following bipolar-valued stability levels:
-    * **+4 | -4** : *unanimous* outranking | outranked situation;
-    * **+3 | -3** : *validated* outranking | outranked situation in *each* coalition of equisignificant criteria;
-    * **+2 | -2** : *validated* outranking | outranked situation with *all* potential significance weights *compatible* with the given significance *preorder*;
-    * **+1 | -1** : *validated* outranking | outranked situation with the given significance weights;
-    * **0** : *indeterminate* relational situation
-
-To compute these stability qualification levels we provide the :py:class:`outrankingDigraphs.RobustOutrankingDigraph` class.
+Such a stability denotation of outranking situations is readily available with the common :py:meth:`showRelationTable` method.
 
 .. code-block:: pycon
    :linenos:
-   :caption: Outranking Stability Levels
-   :name: exStab
+   :caption: Relation Table with Stability Denotation
+   :name: stabDenot
 
-   >>> from outrankingDigraphs import RobustOutrankingDigraph
-   >>> rg = RobustOutrankingDigraph(t)
-   >>> rg
-    *------- Object instance description ------*
-    Instance class      : RobustOutrankingDigraph
-    Instance name       : robust_random3ObjectivesPerfTab
-    # Actions           : 7
-    # Criteria          : 9
-    Size                : 25
-    Determinateness (%) : 78.87
-    Valuation domain    : [-4.00;4.00]
-    Attributes          : ['name', 'methodData', 'actions', 'order',
-			   'criteria', 'evaluation', 'vetos',
-			   'valuationdomain', 'cardinalRelation',
-			   'ordinalRelation', 'equisignificantRelation',
-			   'unanimousRelation', 'relation',
-			   'gamma', 'notGamma']
-   >>> rg.showRelationTable()
-    * ---- Relation Table -----
-     stab. | 'a1' 'a2' 'a3' 'a4' 'a5' 'a6' 'a7'   
-    -------|-----------------------------------
-     'a1'  |   +4  -2    0   -3   +2   +2   -1  
-     'a2'  |   +2  +4   +3   +2   +2   +2   +2  
-     'a3'  |   +2  -2   +4    0   +2   +2   +1  
-     'a4'  |   +3  -1   +3   +4   +4   +4   +2  
-     'a5'  |   -2  -2   -2   -3   +4   +2   -2  
-     'a6'  |   +2  -2   +1   -2   +2   +4   -2  
-     'a7'  |   +2  -2   +1   -1   +3   +2   +4
+   >>> g.showRelationTable(hasStabilityDenotation=True)
+   * ---- Relation Table -----
+   r()/(stab)  | 'a1'  'a2'  'a3'  'a4'  'a5'  'a6'  'a7'   
+   ------------|--------------------------------------------
+       'a1'    | +1.00 -0.42 +0.00 -0.69 +0.39 +0.11 -0.06  
+               |  (+4)  (-2)  (+0)  (-3)  (+2)  (+2)  (-1)  
+       'a2'    | +0.58 +1.00 +0.83  0.00 +0.58 +0.58 +0.58  
+               |  (+2)  (+4)  (+3)  (+2)  (+2)  (+2)  (+2)  
+       'a3'    | +0.25 -0.33 +1.00  0.00 +0.50 +1.00 +0.25  
+	       |  (+2)  (-2)  (+4)   (0)  (+2)  (+2)  (+1)  
+       'a4'    | +0.78  0.00 +0.61 +1.00 +1.00 +1.00 +0.67  
+	       |  (+3)  (-1)  (+3)  (+4)  (+4)  (+4)  (+2)  
+       'a5'    | -0.11 -0.50 -0.25 -0.89 +1.00 +0.11 -0.14  
+	       |  (-2)  (-2)  (-2)  (-3)  (+4)  (+2)  (-2)  
+       'a6'    | +0.22 -0.42  0.00 -1.00 +0.17 +1.00 -0.11  
+	       |  (+2)  (-2)  (+1)  (-2)  (+2)  (+4)  (-2)  
+       'a7'    | +0.22 -0.50 +0.17 -0.06 +0.78 +0.42 +1.00  
+	       |  (+2)  (-2)  (+1)  (-1)  (+3)  (+2)  (+4)  
 
-As expected, all *reflexive* comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially *as well performing as* themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative *a4* with alternatives *a5* and *a6* (see :numref:`exStab` Line 25).
 
-We may for instance inspect the details of how alternatives *a4* and *a5* compare. 
+We may thus distinguish the following bipolar-valued stability levels:
+    * **+4 | -4** : *unanimous* outranking | outranked situation. The pairwise trivial reflexive outrankings, for instance, all show this stability level;
+    * **+3 | -3** : *validated* outranking | outranked situation in *each* coalition of equisignificant criteria. This for instance the case for the outranking situation we may observe between alternatives *a1* and *a4* (see :numref:`stabDenot` Lines 6 and 12);
+    * **+2 | -2** : outranking | outranked situation *validated with *all* potential significance weights that are *compatible* with the given significance *preorder* (see :numref:`weightsPreorder`. This is case for the comparison of alternatives *a1" and *a2*  (see :numref:`stabDenot` Lines 6 and 8);
+    * **+1 | -1** : *validated* outranking | outranked situation with the given significance weights, a situation we may observe between alternatives *a3* and *a7* (see :numref:`stabDenot` Lines 10 and 16);
+    * **0** : *indeterminate* relational situation, like the one between alternatives *a1* and *a3* (see :numref:`stabDenot` Lines 6 and 10).
+
+
+Computing the stability denotation of outranking situations
+...........................................................
+
+As mentioned above, all *reflexive* comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially *as well performing as* themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative *a4* with alternatives *a5* and *a6* (see :numref:`stabDenot` Lines 14 and 16).
+
+Let us inspect the details of how alternatives *a4* and *a5* compare. 
 
 .. code-block:: pycon
    :linenos:
@@ -1200,9 +1195,9 @@ We may for instance inspect the details of how alternatives *a4* and *a5* compar
     so7  12.00  55.57  44.92  +10.65 | 5.00  10.00  +12.00 	| 
     Valuation in range: -72.00 to +72.00; global concordance: +72.00
 
-Alternative *a4* is indeed performing unanimously *at least as well as* alternative *a5*: *r(a4 outranks a5) = +1.00* (see :numref:`exBG` Line 10).
+Alternative *a4* is indeed performing unanimously *at least as well as* alternative *a5*: *r(a4 outranks a5) = +1.00* (see :numref:`stabDenot` Line 11).
 
-The converse comparison does not, however, deliver such an unanimous *outranked* situation. The comparison only qualifies at stability level -3 (see :numref:`exBG` Line 11 *r(a5 outranks a4) = 0.89*).
+The converse comparison does not, however, deliver such an unanimous *outranked* situation. The comparison only qualifies at stability level -3 (see :numref:`stabDenot` Line 13 *r(a5 outranks a4) = 0.89*).
 
 .. code-block:: pycon
    :linenos:
@@ -1300,39 +1295,144 @@ Let us finally inspect a comparison that is only qualified at stability level +1
 
 In these two cases, choosing significances that are just compatible with the given weights preorder will not always result in a positively validated  outranking situation.
 
-The stability denotation of outranking situations is readily available with the common :py:meth:`OutrankingDigraph.showRelationTable` method.
+Now, it is precisely again the bipolar-valued epistemic characteristic domain that will give us a way to test precisely for stability level 2 (see [BIS-2004_1p]_, [BIS-2004_2p]_).
+
+Stability of outranking situation with criteria of ordinal significance
+.......................................................................
+
+Let us denote *W* the significance equivalence classes we observe in the wiven weights preorder. Here we observe three classes: 6, 8, and 12, in increasing order (see :numref:`weightsPreorder`). In the pairwise comparisons shown above these equivalence classes may appear positively or negatively, besides the indeterminate significance of value *0*. We thus get the follwoing list in increasing order: *W* = *[-12. -8. -6, 0, 6, 8, 12]*
+
+In the pairwise marginal comparisons above, we observe that all 9 criteria assign one precise item in this list. Let us denote *c[i]* the number of criteria assigning the item *W[i]*, and *C[i]* the cumulated sums of the *c[i]* counts, where *i* is the range of the length of list *W*.
+
+In the comparison of alternatives *a2* and *a1*, for instance (see :numref:`exComp21`), we observe the following counts:
+
+*------*--------*-------*-------*------*--------*-------*-------*
+| *W* |  -12   |  -8   |  -6   |  0   |   6    |   8   |   12  |
+*------*--------*-------*-------*------*--------*-------*-------*
+| *c* |    0   |   0   |   2   |  1   |   1    |   3   |    2  |
+*------*--------*-------*-------*------*--------*-------*-------*
+| *C* |    0   |   0   |   2   |  3   |   4    |   7   |    9  |
+*------*--------*-------*-------*------*--------*-------*-------*
+
+Let use denote *-c* and *-C* the reversed versions of the *c* and the *C* lists. We thus obtain the follwing result.
+
+*-------*--------*-------*-------*------*--------*-------*-------*
+| *W*  |  -12   |  -8   |  -6   |  0   |   6    |   8   |   12  |
+*-------*--------*-------*-------*------*--------*-------*-------*
+| *-c* |    2   |   3   |   1   |  1   |   2    |   0   |    0  |
+*-------*--------*-------*-------*------*--------*-------*-------*
+| *-C* |    2   |   5   |   5   |  7   |   9    |   9   |    9  |
+*------ *--------*-------*-------*------*--------*-------*-------*
+
+Now, a pairwise outranking situation will be qualified at least at stability level 2, i.e. positively validated with any significance weights that are compatible with the given weights preorder, when for all *i*, we observe *C[i]* <= *-C[i]* and there exists one *i* such that *C[i]* < *-C[i]* (see [BIS-2004_2p]_).
+
+We may verify that this is indeed the case for the outranking situation observed between *a2* and *a1*. Notice that stability levels 4 and 3, evidently also verify the stability level 2 *distributional dominance* test above. The outranking situation between alternatives *a7* and *a3* however does not verify this test.
+
+*------*--------*-------*-------*------*--------*-------*-------*
+| *W*  |  -12   |  -8   |  -6   |  0   |   6    |   8   |   12  |
+*------*--------*-------*-------*------*--------*-------*-------*
+| *c*  |    0   |   3   |   1   |  0   |   3    |   0   |    2  |
+*------*--------*-------*-------*------*--------*-------*-------*
+| *C*  |    0   |   3   |   4   |  4   |   7    |   7   |    9  |
+*------*--------*-------*-------*------*--------*-------*-------*
+| *-C* |    2   |   2   |   5   |  5   |   6    |   9   |    9  |
+*------*--------*-------*-------*------*--------*-------*-------*
+
+This time, not all the *-C[i]* are greater or equal than the corresponding *C[i]* terms. Hence the outranking situation betqeen *a7* and *a3* is not stable with all potential significance weights that are compatible with the gien weights preorder.
+
+We may hence define a **robust** version of the bipolar-valued outranking digraph.
+
+
+Robust Bipolar-valued Outranking Digraphs
+.........................................
+
+We say that decision alternative *x* **robustly outranks** decision alternative *y* when
+   * *x* positively outranks "y* at stability level *higher or equal to 2* and we may not observe any *considerable counterperformance* of *x* on a discordant criterion.
+
+Dually, we say that decision alternative *x* **does not robustly outrank** decision alternative *y* when
+   * *x* negatively outranks *y* at stability level *lower or equal to -2* and we may not observe any considerable *better performance* of *x* on a discordant criterion.
+     
+The corresponding robut bipolar-valued outranking digraph may be computed with the :py:class:`RobustOutrankingDigraph` class as follows.
 
 .. code-block:: pycon
    :linenos:
-   :caption: Relation Table with Stability Denotation
-   :name: stagDenot
+   :caption: Robust outranking digraph
+   :name: robG
 
-   >>> g.showRelationTable(hasStabilityDenotation=True)
-   * ---- Relation Table -----
-   r()/(stab)  | 'a1'  'a2'  'a3'  'a4'  'a5'  'a6'  'a7'   
-   ------------|--------------------------------------------
-       'a1'    | +1.00 -0.42 +0.00 -0.69 +0.39 +0.11 -0.06  
-               |  (+4)  (-2)  (+0)  (-3)  (+2)  (+2)  (-1)  
-       'a2'    | +0.58 +1.00 +0.83  0.00 +0.58 +0.58 +0.58  
-               |  (+2)  (+4)  (+3)  (+2)  (+2)  (+2)  (+2)  
-       'a3'    | +0.25 -0.33 +1.00  0.00 +0.50 +1.00 +0.25  
-	       |  (+2)  (-2)  (+4)   (0)  (+2)  (+2)  (+1)  
-       'a4'    | +0.78  0.00 +0.61 +1.00 +1.00 +1.00 +0.67  
-	       |  (+3)  (-1)  (+3)  (+4)  (+4)  (+4)  (+2)  
-       'a5'    | -0.11 -0.50 -0.25 -0.89 +1.00 +0.11 -0.14  
-	       |  (-2)  (-2)  (-2)  (-3)  (+4)  (+2)  (-2)  
-       'a6'    | +0.22 -0.42  0.00 -1.00 +0.17 +1.00 -0.11  
-	       |  (+2)  (-2)  (+1)  (-2)  (+2)  (+4)  (-2)  
-       'a7'    | +0.22 -0.50 +0.17 -0.06 +0.78 +0.42 +1.00  
-	       |  (+2)  (-2)  (+1)  (-1)  (+3)  (+2)  (+4)  
+   >>> from outrankingDigraphs import RobustOutrankingDigraph
+   >>> rg = RobustOutrankingDigraph(t)
+   >>> rg
+    *------- Object instance description ------*
+    Instance class      : RobustOutrankingDigraph
+    Instance name       : robust_random3ObjectivesPerfTab
+    # Actions           : 7
+    # Criteria          : 9
+    Size                : 22
+    Determinateness (%) : 68.45
+    Valuation domain    : [-1.00;1.00]
+    Attributes          : ['name', 'methodData', 'actions', 'order',
+			   'criteria', 'evaluation', 'vetos',
+			   'valuationdomain', 'cardinalRelation',
+			   'ordinalRelation', 'equisignificantRelation',
+			   'unanimousRelation', 'relation',
+			   'gamma', 'notGamma']
+   >>> rg.showRelationTable(hasStabilityDenotation=True)
+    * ---- Relation Table -----
+    r/(stab) |  'a1'   'a2'   'a3'   'a4'   'a5'   'a6'   'a7'   
+    ---------|------------------------------------------------------------
+      'a1'   | +1.00  -0.42  +0.00  -0.69  +0.39  +0.11  +0.00  
+	     |  (+4)   (-2)   (+0)   (-3)   (+2)   (+2)   (-1)  
+      'a2'   | +0.58  +1.00  +0.83  +0.00  +0.58  +0.58  +0.58  
+	     |  (+2)   (+4)   (+3)   (+2)   (+2)   (+2)   (+2)  
+      'a3'   | +0.25  -0.33  +1.00  +0.00  +0.50  +1.00  +0.00  
+             |  (+2)   (-2)   (+4)   (+0)   (+2)   (+2)   (+1)  
+      'a4'   | +0.78  +0.00  +0.61  +1.00  +1.00  +1.00  +0.67  
+	     |  (+3)   (-1)   (+3)   (+4)   (+4)   (+4)   (+2)  
+      'a5'   | -0.11  -0.50  -0.25  -0.89  +1.00  +0.11  -0.14  
+	     |  (-2)   (-2)   (-2)   (-3)   (+4)   (+2)   (-2)  
+      'a6'   | +0.22  -0.42  +0.00  -1.00  +0.17  +1.00  -0.11  
+	     |  (+2)   (-2)   (+1)   (-2)   (+2)   (+4)   (-2)  
+      'a7'   | +0.22  -0.50  +0.00  +0.00  +0.78  +0.42  +1.00  
+	     |  (+2)   (-2)   (+1)   (-1)   (+3)   (+2)   (+4)  
 
-Testing for stable outrankings with ordinal significances
-.........................................................
+We may notice (see :numref:`robG`) that all outranking situations, qualified at stability level +1 or -1, are now put to an indeterminate status. In this example here, the robust digraph actually drops three positive and outrankings: between *a3* and *a7*, between *a7* and *a3*, and between *a6* and *a3*, where the last outranking situatuation is actually already dropped by a veto situation (see :numref:`robG` Lines 22-35). The robust version as well drops three negative outrankings: between *a1* and *a7*, between *a4* and *a2*, and between *a7* and *a4* (see :numref:`robG` Lines 22-35).
 
-It is precisely again the bipolar-valued epistemic characteristic domain that will give us a way to test precisely for stability level 2 (see [BIS-2004_1p]_, [BIS-2004_2p]_).
+Notice by the way that a *stable* outranking situation, qualified at level 2|-2 or 3|-3, may nevertheless be put to doubt by a considerable performance difference. We observe such a situation when comparing alternatives *a2* and *a4* for instance (see :numref:`robG` Lines 24-25).
 
+.. code-block:: pycon
+   :linenos:
+   :caption: Comparing alternatives *a2* and *a4*
+   :name: exComp24
 
+   >>> rg.showPairwiseComparison('a2','a4')
+    *------------  pairwise comparison ----*
+    Comparing actions : (a2, a4)
+    crit. wght.  g(x)  g(y)    diff  	| ind   pref    r() 	|   v    veto
+    -------------------------------------------------------------------------
+    ec1   8.00  89.77  85.19  +4.58 	| 5.00  10.00   +8.00 	| 
+    ec4   8.00  86.00  72.26  +13.74 	| 5.00  10.00   +8.00 	| 
+    ec8   8.00  89.43  44.62  +44.81 	| 5.00  10.00   +8.00 	| 
+    en3   6.00  20.79  80.81  -60.02 	| 5.00  10.00   -6.00 	| 60.00 -1.00
+    en5   6.00  23.83  49.69  -25.86 	| 5.00  10.00   -6.00 	| 
+    en6   6.00  18.66  66.21  -47.55 	| 5.00  10.00   -6.00 	| 
+    en9   6.00  26.65  50.92  -24.27 	| 5.00  10.00   -6.00 	| 
+    so2   12.00  89.12  49.05  +40.07 	| 5.00  10.00  +12.00 	| 
+    so7   12.00  84.73  55.57  +29.16 	| 5.00  10.00  +12.00   |
+    Valuation in range: -72.00 to +72.00; global concordance: +24.00
 
+Despite being robust, the apparent positive outranking situation between alternatives *a2* and *a4*, for instance, is put to doubt by a considerable counterperformance (-60.02) of *a2* on criterion *en3*, aperformance which exceeds slightly the assumed veto discrimination threshold *v = 60.00* (see :numref:`exComp24` Line 9).
+
+We may readily compare the corresponding strict outranking digraphs.
+
+.. Figure:: robStdStrictOutranking.png
+   :name: robStdStrictOG
+   :alt: Standard versus Robust Strict Outranking Digraphs
+   :width: 600 px
+   :align: center
+
+   Standard versus robust strict outranking digraphs oriented by their initial and terminal prekernels
+   
+The robust version eventually drops two strict outrankings: between *a4* and *a7* and between *a7* and *a1*.The remaining 14 strict outranking situations qualify now for a robust stability level of +2, resp. -2 and more.
 
 Back to :ref:`Content Table <Pearls-Tutorial-label>`
 	   	  

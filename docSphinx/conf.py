@@ -208,6 +208,8 @@ latex_elements = {
 latex_documents = [
   ('tutorial', 'digraph3Tutorial.tex', u'Tutorials for the Digraph3 Python software resources',
    u'Raymond Bisdorff', 'howto'),
+  ('pearls','digraph3Pearls.tex', u'Tutorials for the Digraph3 Python software resources',
+   u'Raymond Bisdorff', 'howto'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  30 JAN 2020 12:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  3 FEB 2020 03:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1972,7 +1972,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 6586.
 Here is how much of TeX's memory you used:
  14802 strings out of 494244
  210226 string characters out of 6161779
- 449391 words of memory out of 5000000
+ 449392 words of memory out of 5000000
  17370 multiletter control sequences out of 15000+600000
  74297 words of font info for 103 fonts, out of 8000000 for 9000
  396 hyphenation exceptions out of 8191
@@ -1994,7 +1994,7 @@ rw/helvetic/uhvbo8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic
 sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/urw/times/utmri8a.pfb>
-Output written on digraph3Tutorial.pdf (125 pages, 3512194 bytes).
+Output written on digraph3Tutorial.pdf (125 pages, 3512107 bytes).
 PDF statistics:
  1710 PDF objects out of 1728 (max. 8388607)
  1442 compressed objects within 15 object streams
