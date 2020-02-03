@@ -1,5 +1,4 @@
-.. _Pearls-Tutorial-label:
-
+========================================
 Pearls of bipolar-valued epistemic logic
 ========================================
 
@@ -7,12 +6,16 @@ Pearls of bipolar-valued epistemic logic
 :Version: Revision: Python 3.7
 :Copyright: R. Bisdorff 2013-2020
 
-.. contents::
-	:depth: 1
-	:local:
+.. _Pearls-label:
+
+.. only:: html
+	    
+   .. contents::
+      :depth: 2
+      :local:
 
 .. highlight:: python
-	:linenothreshold: 2
+   :linenothreshold: 2	 
 
 In this part of the Digraph3 documentation, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logical framework*, like easily coping with *missing data* and uncertain criterion *significance weights*, computing valued *ordinal correlations* between bipolar-valued outranking digraphs, solving bipolar-valued Berge kernel equation systems, and testing for stability of outranking statements when facing only ordinal criteria significance weights.
 
@@ -122,6 +125,8 @@ It is fair, however, to eventually mention here that the *Graffiti* magazine's a
 
 Notice finally the ordinal correlation *tau* values in
 :numref:`graffiti07_2` 3rd row. How may we compute these ordinal correlation indexes ?
+
+Back to :ref:`Content Table <Pearls-label>`
 
 .. _OrdinalCorrelation-Tutorial-label:
 	
@@ -437,13 +442,14 @@ Such a preordering of the movies may, for instance, be computed with the :py:fun
 
 In the tutorial :ref:`Kernel-Tutorial-label`, we thouroughly discuss the computation of *kernels* in bipolar-valued digraphs. Yet, we do not tackle there the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors. This is the topic for the next pearl of bipolar-valued epistemic logic.
 
+Back to :ref:`Content Table <Pearls-label>`
 
 .. _Bipolar-Valued-Kernels-Tutorial-label:
 
 Bipolar-valued kernel membership characteristic vectors
 -------------------------------------------------------
 
-*Claude Berge*'s Kernel Equation Systems
+*Claude Berge*'s kernel equation systems
 ........................................
 
 Let *G(X,R)* be a crisp irreflexive digraph defined on a finite set *X* of nodes and where *R* is the corresponding {-1,+1}-valued adjacency matrix. Let *Y* be the {-1,+1}-valued membership characteristic (row) vector of a choice in *X*. When *Y* satisfies the following equation system
@@ -738,6 +744,8 @@ Notice that the stable low vector characterises the **negative membership** part
 The adjacency matrix of a symmetric digraph staying *unchanged* by the transposition operator, the previous computations, when qualifying the same kernel as a *terminal* instance, will hence produce exactly the same result.
 
 It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this double fixpoint algorithm. To implement such kind of algorithms without a logical **neutral term** would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial *impossibility theorems* and *dubious logical results* come up. 
+
+Back to :ref:`Content Table <Pearls-label>`
 
 .. _Bipolar-Valued-Likelihood-Tutorial-label:
 
@@ -1039,14 +1047,14 @@ Despite lower likelihood values (see the *g90* relation table above), we keep th
 
 For concluding, it is worthwhile noticing again that it is the *neutral* value of our bipolar-valued epistemic logic that allows us to easily handle alpha% confidence or not of outranking situations when confronted with uncertain criteria significances. Remarkable furthermore is the usage, the standard Gaussian error function provides by delivering *signed likelihood values* immediately concerning either a *positive* relational statement, or when negative, its negated version. 
 
-Back to :ref:`Content Table <Pearls-Tutorial-label>`
+Back to :ref:`Content Table <Pearls-label>`
 
 .. _Stable-Outranking-Tutorial-label:
 
 Robustness analysis of bipolar-valued outranking digraphs
 ---------------------------------------------------------
 
-Cardinal or Ordinal criteria significances
+Cardinal or ordinal criteria significances
 ..........................................
 
 The required cardinal significance weights of the performance criteria represent the *Achilles*' heel of the outranking approach. Rarely will indeed a decision maker be cognitively competent for suggesting precise decimal-valued criteria significance weights. More often, the decision problem will involve more or less equally important decision objectives with more or less equi-significant criteria. A random example of such a decision problem may be generated with the :py:class:`randPerfTabs.Random3ObjectivesPerformanceTableau` class.
@@ -1348,7 +1356,7 @@ This time, *not* all the *-C[i]* are *greater or equal* than the corresponding *
 Using this stability denotation, we may, hence, define a **robust** version of a bipolar-valued outranking digraph.
 
 
-Robust Bipolar-valued Outranking Digraphs
+Robust bipolar-valued outranking digraphs
 .........................................
 
 We say that decision alternative *x* **robustly outranks** decision alternative *y* when
@@ -1455,7 +1463,7 @@ Let us have a final look at the corresponding performance heat map.
 
 Recommending alternatives *a4* as well as *a2* as potential best choices appears well justified. Alternative *a4* is an overall compromise best choice, whereas alternative *a2* is unanimously strong on two out of three decision objectives.
 
-Back to :ref:`Content Table <Pearls-Tutorial-label>`
+Back to :ref:`Content Table <Pearls-label>`
 	   	  
 Bibliography
 ------------
@@ -1480,8 +1488,10 @@ Bibliography
 
 .. [KEN-1938p] Kendall M.G. (1938), *A New Measure of Rank Correlation*. Biometrica 30:81–93
 
-Footnotes
----------
+.. only:: html
+
+   Footnotes
+   ---------
 
 .. [1p] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file *graffiti07.xml* (XMCDA-2.0 Format) in the *examples/Graffiti* directory of the Digraph3 ressources.       
 

@@ -208,7 +208,7 @@ latex_elements = {
 latex_documents = [
   ('tutorial', 'digraph3Tutorial.tex', u'Tutorials for the Digraph3 Python software resources',
    u'Raymond Bisdorff', 'howto'),
-  ('pearls','digraph3Pearls.tex', u'Pearls of bipolar-valued epistemic logic',
+  ('pearls','digraph3Pearls.tex', u'Pearls of bipolar epistemic logic',
    u'Raymond Bisdorff', 'howto'),
 ]
 
