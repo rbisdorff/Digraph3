@@ -1057,7 +1057,7 @@ Robustness analysis of bipolar-valued outranking digraphs
 Cardinal or ordinal criteria significances
 ..........................................
 
-The required cardinal significance weights of the performance criteria represent the *Achilles*' heel of the outranking approach. Rarely will indeed a decision maker be cognitively competent for suggesting precise decimal-valued criteria significance weights. More often, the decision problem will involve more or less equally important decision objectives with more or less equi-significant criteria. A random example of such a decision problem may be generated with the :py:class:`randPerfTabs.Random3ObjectivesPerformanceTableau` class.
+The required cardinal significance weights of the performance criteria represent the *Achilles*' heel of the outranking approach. Rarely will indeed a decision maker be cognitively competent for suggesting precise decimal-valued criteria significance weights. More often, the decision problem will involve more or less equally important decision objectives with more or less equi-significant criteria. A random example of such a decision problem may be generated with the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` class.
 
 .. code-block:: pycon
    :linenos:
@@ -1170,8 +1170,8 @@ Such a stability denotation of outranking situations is readily available with t
 
 We may thus distinguish the following bipolar-valued stability levels:
     * **+4 | -4** : *unanimous* outranking | outranked situation. The pairwise trivial reflexive outrankings, for instance, all show this stability level;
-    * **+3 | -3** : *validated* outranking | outranked situation in *each* coalition of equisignificant criteria. This for instance the case for the outranking situation we may observe between alternatives *a1* and *a4* (see :numref:`stabDenot` Lines 6 and 12);
-    * **+2 | -2** : outranking | outranked situation *validated with *all* potential significance weights that are *compatible* with the given significance *preorder* (see :numref:`weightsPreorder`. This is case for the comparison of alternatives *a1" and *a2*  (see :numref:`stabDenot` Lines 6 and 8);
+    * **+3 | -3** : *validated* outranking | outranked situation in *each* coalition of equisignificant criteria. This is, for instance, the case for the outranking situation observed between alternatives *a1* and *a4* (see :numref:`stabDenot` Lines 6 and 12);
+    * **+2 | -2** : outranking | outranked situation *validated* with *all* potential significance weights that are *compatible* with the given significance *preorder* (see :numref:`weightsPreorder`. This is case for the comparison of alternatives *a1* and *a2*  (see :numref:`stabDenot` Lines 6 and 8);
     * **+1 | -1** : *validated* outranking | outranked situation with the given significance weights, a situation we may observe between alternatives *a3* and *a7* (see :numref:`stabDenot` Lines 10 and 16);
     * **0** : *indeterminate* relational situation, like the one between alternatives *a1* and *a3* (see :numref:`stabDenot` Lines 6 and 10).
 
@@ -1179,7 +1179,7 @@ We may thus distinguish the following bipolar-valued stability levels:
 Computing the stability denotation of outranking situations
 ...........................................................
 
-As mentioned above, all *reflexive* comparisons confirm an unanimous outranking situations: all decision alternatives are indeed trivially *as well performing as* themselves. But there appear also two non reflexive unanimous outranking situations: when comparing alternative *a4* with alternatives *a5* and *a6* (see :numref:`stabDenot` Lines 14 and 16).
+As mentioned above, all *reflexive* comparisons confirm an unanimous outranking situation: all decision alternatives are indeed trivially *as well performing as* themselves. But there appear also two non reflexive unanimous outranking situations: when comparing, for instance, alternative *a4* with alternatives *a5* and *a6* (see :numref:`stabDenot` Lines 14 and 16).
 
 Let us inspect the details of how alternatives *a4* and *a5* compare. 
 
@@ -1205,7 +1205,7 @@ Let us inspect the details of how alternatives *a4* and *a5* compare.
 
 Alternative *a4* is indeed performing unanimously *at least as well as* alternative *a5*: *r(a4 outranks a5) = +1.00* (see :numref:`stabDenot` Line 11).
 
-The converse comparison does not, however, deliver such an unanimous *outranked* situation. The comparison only qualifies at stability level -3 (see :numref:`stabDenot` Line 13 *r(a5 outranks a4) = 0.89*).
+The converse comparison does not, however, deliver such an unanimous *outranked* situation. This comparison only qualifies at stability level -3 (see :numref:`stabDenot` Line 13 *r(a5 outranks a4) = 0.89*).
 
 .. code-block:: pycon
    :linenos:
@@ -1227,7 +1227,7 @@ The converse comparison does not, however, deliver such an unanimous *outranked*
     so7  12.00  44.92  55.57  -10.65 | 5.00  10.00  -12.00 	| 
     Valuation in range: -72.00 to +72.00; global concordance: -64.00
 
-Indeed, on criterion *ec8* we observe a negative performance difference of -8.71 (see :numref:`exComp54` Line 7) which is effectively below the supposed *preference discrimination threshold* of 10.00. Yet, the outranked situation is supported by a majority of criteria in each decision objective. Hence, the reported preferential situation is completely independent of any chosen significance weights.
+Indeed, on criterion *ec8* we observe a small negative performance difference of -8.71 (see :numref:`exComp54` Line 7) which is effectively below the supposed *preference discrimination threshold* of 10.00. Yet, the outranked situation is supported by a majority of criteria in each decision objective. Hence, the reported preferential situation is completely independent of any chosen significance weights.
 
 Let us now consider a comparison, like the one between alternatives *a2* and *a1*, that is only qualified at stability level +2, resp. -2.
 
@@ -1301,59 +1301,59 @@ Let us finally inspect a comparison that is only qualified at stability level +1
    so7  12.00  15.49  58.45  -42.96 | 5.00  10.00  -12.00 	| 
    Valuation in range: -72.00 to +72.00; global concordance: +18.00
 
-In these two cases, choosing significances that are just compatible with the given weights preorder will not always result in a positively validated  outranking situation.
+In both cases, choosing significances that are just compatible with the given weights preorder will not always result in positively validated  outranking situations.
 
 Now, it is precisely again the bipolar-valued epistemic characteristic domain that will give us a way to test precisely for stability level 2 (see [BIS-2004_1p]_, [BIS-2004_2p]_).
 
 Stability of outranking situation with criteria of ordinal significance
 .......................................................................
 
-Let us denote *W* the significance equivalence classes we observe in the given weights preorder. Here we observe three classes: 6, 8, and 12, in increasing order (see :numref:`weightsPreorder`). In the pairwise comparisons shown above these equivalence classes may appear positively or negatively, besides the indeterminate significance of value *0*. We thus get the following list in increasing order: *W* = *[-12. -8. -6, 0, 6, 8, 12]*
+Let us consider the significance equivalence classes we observe in the given weights preorder. Here we observe three classes: 6, 8, and 12, in increasing order (see :numref:`weightsPreorder`). In the pairwise comparisons shown above these equivalence classes may appear positively or negatively, besides the indeterminate significance of value *0*. We thus get the following ordered bipolar list of significance weights: *W* = [-12. -8. -6, 0, 6, 8, 12].
 
-In the pairwise marginal comparisons above, we observe that all 9 criteria assign one precise item in this list. Let us denote *c[i]* the number of criteria assigning the item *W[i]*, and *C[i]* the cumulative sums of the *c[i]* counts, where *i* is the range of the length of list *W*.
+In all the pairwise marginal comparisons shown in the previous Section, we may observe that each one of the nine criteria assign one precise item out of this list *W*. Let us denote *c[i]* the number of criteria assigning item *W[i]*, and *C[i]* the cumulative sums of the *c[i]* counts, where *i* is an index in the range of the length of list *W*.
 
 In the comparison of alternatives *a2* and *a1*, for instance (see :numref:`exComp21`), we observe the following counts:
 
 ======     ===  ==  ==  ==  ==  ==  ==  
-*W*        -12  -8  -6   0   6  8   12  
+*W[i]*     -12  -8  -6   0   6  8   12  
 ======     ===  ==  ==  ==  ==  ==  == 
-*c*         0    0   2   1   1   3   2 
-*C*         0    0   2   3   4   7   9
+*c[i]*      0    0   2   1   1   3   2 
+*C[i]*      0    0   2   3   4   7   9
 ======     ===  ==  ==  ==  ==  ==  == 
 
 Let use denote *-c* and *-C* the reversed versions of the *c* and the *C* lists. We thus obtain the following result.
 
-====  ===  ==  ==  ==  ==  ==  ==  
-*W*   -12  -8  -6   0   6  8   12  
-====  ===  ==  ==  ==  ==  ==  == 
-*-c*   2   3   1   1   2   0   0 
-*-C*   2   5   6   7   9   9   9
-====  ===  ==  ==  ==  ==  ==  == 
+=======  ===  ==  ==  ==  ==  ==  ==  
+*W[i]*   -12  -8  -6   0   6  8   12  
+=======  ===  ==  ==  ==  ==  ==  == 
+*-c[i]*   2   3   1   1   2   0   0 
+*-C[i]*   2   5   6   7   9   9   9
+=======  ===  ==  ==  ==  ==  ==  == 
 
-Now, a pairwise outranking situation will be qualified at least at stability level 2, i.e. positively validated with any significance weights that are compatible with the given weights preorder, when for all *i*, we observe *C[i]* <= *-C[i]* and there exists one *i* such that *C[i]* < *-C[i]*. Similarly, a pairwise outranking situation will be qualified at least at stability level -2, when for all *i*, we observe *C[i]* >= *-C[i]* and there exists one *i* such that *C[i]* > *-C[i]* (see [BIS-2004_2p]_).
+Now, a pairwise outranking situation will be qualified at stability level 2, i.e. positively validated with any significance weights that are compatible with the given weights preorder, when for all *i*, we observe *C[i]* <= *-C[i]* and there exists one *i* such that *C[i]* < *-C[i]*. Similarly, a pairwise outranking situation will be qualified at stability level -2, when for all *i*, we observe *C[i]* >= *-C[i]* and there exists one *i* such that *C[i]* > *-C[i]* (see [BIS-2004_2p]_).
 
 We may verify that the outranking situation observed between *a2* and *a1* does indeed verify this *distributional dominance* condition.
 
-====  ===  ==  ==  ==  ==  ==  ==  
-*W*   -12  -8  -6   0   6  8   12  
-====  ===  ==  ==  ==  ==  ==  == 
-*C*    0   0   2   3   4   7   9 
-*-C*   2   5   6   7   9   9   9
-====  ===  ==  ==  ==  ==  ==  == 
+=======  ===  ==  ==  ==  ==  ==  ==  
+*W[i]*   -12  -8  -6   0   6  8   12  
+=======  ===  ==  ==  ==  ==  ==  == 
+*C[i]*    0   0   2   3   4   7   9 
+*-C[i]*   2   5   6   7   9   9   9
+=======  ===  ==  ==  ==  ==  ==  == 
 
-Notice that outranking situations qualified at stability levels 4 and 3, evidently also verify the stability level 2 test above. The outranking situation between alternatives *a7* and *a3* however does not verify this test (see :numref:`exComp73`).
+Notice that outranking situations qualified at stability levels 4 and 3, evidently also verify the stability level 2 test above. The outranking situation between alternatives *a7* and *a3* does not,however, verify this test (see :numref:`exComp73`).
 
-====  ===  ==  ==  ==  ==  ==  ==  
-*W*   -12  -8  -6   0   6  8   12  
-====  ===  ==  ==  ==  ==  ==  == 
-*c*    0   3   1   0   3   0   2 
-*C*    0   3   4   4   7   7   9
-*-C*   2   2   5   5   6   9   9
-====  ===  ==  ==  ==  ==  ==  == 
+=======  ===  ==  ==  ==  ==  ==  ==  
+*W[i]*   -12  -8  -6   0   6  8   12  
+=======  ===  ==  ==  ==  ==  ==  == 
+*c[i]*    0   3   1   0   3   0   2 
+*C[i]*    0   3   4   4   7   7   9
+*-C[i]*   2   2   5   5   6   9   9
+=======  ===  ==  ==  ==  ==  ==  == 
 
-This time, *not* all the *-C[i]* are *greater or equal* than the corresponding *C[i]* terms. Hence the outranking situation between *a7* and *a3* is not stable with all potential significance weights that are compatible with the given weights preorder.
+This time, *not* all the *C[i]* are *lower or equal* than the corresponding *-C[i]* terms. Hence the outranking situation between *a7* and *a3* appears not positive with all potential significance weights that are compatible with the given weights preorder.
 
-Using this stability denotation, we may, hence, define a **robust** version of a bipolar-valued outranking digraph.
+Using this stability denotation, we may, hence, define the following **robust** version of a bipolar-valued outranking digraph.
 
 
 Robust bipolar-valued outranking digraphs
@@ -1367,7 +1367,7 @@ Dually, we say that decision alternative *x* **does not robustly outrank** decis
 
    * *x* negatively outranks *y* at stability level *lower or equal to -2* and we may not observe any considerable *better performance* of *x* on a discordant criterion.
      
-The corresponding robust bipolar-valued outranking digraph may be computed with the :py:class:`RobustOutrankingDigraph` class as follows.
+The corresponding robust bipolar-valued outranking digraph may be computed with the :py:class:`outrankingDigraphs.RobustOutrankingDigraph` class as follows.
 
 .. code-block:: pycon
    :linenos:
@@ -1410,9 +1410,9 @@ The corresponding robust bipolar-valued outranking digraph may be computed with 
       'a7'   | +0.22  -0.50  +0.00  +0.00  +0.78  +0.42  +1.00  
 	     |  (+2)   (-2)   (+1)   (-1)   (+3)   (+2)   (+4)  
 
-We may notice (see :numref:`robG`) that all outranking situations, qualified at stability level +1 or -1, are now put to an indeterminate status. In this example here, we actually drop three positive outrankings: between *a3* and *a7*, between *a7* and *a3*, and between *a6* and *a3*, where the last situation is actually already put to doubt by a veto situation (see :numref:`robG` Lines 22-35). We drop as well three negative outrankings: between *a1* and *a7*, between *a4* and *a2*, and between *a7* and *a4* (see :numref:`robG` Lines 22-35).
+We may notice (see :numref:`robG`) that all outranking situations, qualified at stability level +1 or -1, are now put to an *indeterminate* status. In the example here, we actually drop three positive outrankings: between *a3* and *a7*, between *a7* and *a3*, and between *a6* and *a3*, where the last situation is actually already put to doubt by a veto situation (see :numref:`robG` Lines 22-35). We drop as well three negative outrankings: between *a1* and *a7*, between *a4* and *a2*, and between *a7* and *a4* (see :numref:`robG` Lines 22-35).
 
-Notice by the way that a *stable* outranking situation, qualified at level 2|-2 or 3|-3, may nevertheless be put to doubt by a considerable performance difference. We observe such a situation when comparing alternatives *a2* and *a4* for instance (see :numref:`robG` Lines 24-25).
+Notice by the way that outranking situations, although qualified at level 2|-2 or 3|-3, may nevertheless be put to doubt by considerable performance differences. We observe such am outranking situation when comparing, for instance, alternatives *a2* and *a4* (see :numref:`robG` Lines 24-25).
 
 .. code-block:: pycon
    :linenos:
@@ -1435,9 +1435,9 @@ Notice by the way that a *stable* outranking situation, qualified at level 2|-2 
     so7   12.00  84.73  55.57  +29.16 	| 5.00  10.00  +12.00   |
     Valuation in range: -72.00 to +72.00; global concordance: +24.00
 
-Despite being robust, the apparent positive outranking situation between alternatives *a2* and *a4*, for instance, is put to doubt by a considerable counter-performance (-60.02) of *a2* on criterion *en3*, performance which exceeds slightly the assumed veto discrimination threshold *v = 60.00* (see :numref:`exComp24` Line 9).
+Despite being robust, the apparent positive outranking situation between alternatives *a2* and *a4* is indeed put to doubt by a considerable counter-performance (-60.02) of *a2* on criterion *en3*, a negative difference which exceeds slightly the assumed veto discrimination threshold *v = 60.00* (see :numref:`exComp24` Line 9).
 
-We may now readily compare in :numref:`robStdStrictOG` the corresponding standard and robust strict outranking digraphs, both oriented by their respective identical initial and terminal prekernels.
+We may finally visually compare in :numref:`robStdStrictOG` the standard and robust version of the corresponding strict outranking digraphs, both oriented by their respective identical initial and terminal prekernels.
 
 .. Figure:: robStdStrictOutranking.png
    :name: robStdStrictOG
@@ -1447,7 +1447,7 @@ We may now readily compare in :numref:`robStdStrictOG` the corresponding standar
 
    Standard versus robust strict outranking digraphs oriented by their initial and terminal prekernels
    
-The robust version eventually drops two strict outrankings: between *a4* and *a7* and between *a7* and *a1*. The remaining 14 strict outranking situations qualify now all with stability level of +2, resp. -2 and more.
+The robust version drops two strict outrankings: between *a4* and *a7* and between *a7* and *a1*. The remaining 14 strict outranking situations qualify now all with stability level of +2, resp. -2 and more.
 
 Let us have a final look at the corresponding performance heat map.
 
@@ -1461,24 +1461,30 @@ Let us have a final look at the corresponding performance heat map.
 
    Heat map of the random 3 Objectives performance tableau ordered by the *NetFlows* ranking rule
 
-Recommending alternatives *a4* as well as *a2* as potential best choices appears well justified. Alternative *a4* is an overall compromise best choice, whereas alternative *a2* is unanimously strong on two out of three decision objectives.
+Recommending alternatives *a4* as well as *a2* as potential best choices appears well justified. Alternative *a4* represents indeed an overall best compromise choice, whereas alternative *a2* gives an unanimous best choice wrt two out of the three equi-important decision objectives.
+
+Let us again mention For concluding that is precisely our bipolar-valued logical characteristic framework that provides us here with a **distributional dominance test** for effectively qualifying the *robustness* of an outranking digraphs when facing a performance tableau with criteria of ordinal significance only. A real world application with this kind of performance tableau may be consulted in [BIS-2015p]_.
 
 Back to :ref:`Content Table <Pearls-label>`
-	   	  
-Bibliography
-------------
 
-.. [BIS-2014p] Bisdorff R., Meyer P. and Veneziano Th. (2014). Elicitation of criteria weights maximising the stability of pairwise outranking statements. Journal of Multi-Criteria Decision Analysis (Wiley) 21: 113-124 (downloadable preprint `PDF file 431.4 Kb <_static/JMCDArticle.pdf>`_).
+.. only:: html
+
+   Bibliography
+   ------------
    
-.. [BIS-2013p] Bisdorff R. (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (downloadable preprint `PDF file 403.5 Kb <_static/MCDA-10-0059-PrePeerReview.pdf>`_).
+.. [BIS-2015p] Bisdorff R. (2015). *The EURO 2004 Best Poster Award: Choosing the Best Poster in a Scientific Conference*. Chapter 5 in R. Bisdorff, L. Dias, P. Meyer, V. Mousseau, and M. Pirlot (Eds.), *Evaluation and Decision Models with Multiple Criteria: Case Studies*. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, DOI 10.1007/978-3-662-46816-6_1, pp. 117-166 (downloadable `PDF file 754.7 kB <http://hdl.handle.net/10993/23714>`_).
+	       
+.. [BIS-2014p] Bisdorff R., Meyer P. and Veneziano Th. (2014). Elicitation of criteria weights maximising the stability of pairwise outranking statements. Journal of Multi-Criteria Decision Analysis (Wiley) 21: 113-124 (downloadable preprint `PDF file 431.4 Kb <http://hdl.handle.net/10993/23701>`_).
+   
+.. [BIS-2013p] Bisdorff R. (2013) "On Polarizing Outranking Relations with Large Performance Differences" *Journal of Multi-Criteria Decision Analysis* (Wiley) **20**:3-12 (downloadable preprint `PDF file 403.5 Kb <http://hdl.handle.net/10993/245>`_).
 
-.. [BIS-2012p] Bisdorff R. (2012). "On measuring and testing the ordinal correlation between bipolar outranking relations". In Proceedings of DA2PL’2012 *From Multiple Criteria Decision Aid to Preference Learning*, University of Mons 91-100. (downloadable preliminary version `PDF file 408.5 kB <_static/DA2PL-RBisdorffMons.pdf>`_ ).
+.. [BIS-2012p] Bisdorff R. (2012). "On measuring and testing the ordinal correlation between bipolar outranking relations". In Proceedings of DA2PL’2012 *From Multiple Criteria Decision Aid to Preference Learning*, University of Mons 91-100. (downloadable preliminary version `PDF file 408.5 kB <http://hdl.handle.net/10993/23909>`_ ).
 
-.. [BIS-2006_1p] Bisdorff R., Pirlot M. and Roubens M. (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <_static/BisdorffPirlotRoubens05.pdf>`_).
+.. [BIS-2006_1p] Bisdorff R., Pirlot M. and Roubens M. (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <http://hdl.handle.net/10993/23720>`_).
 
-.. [BIS-2006_2p] Bisdorff R. (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <_static/EnumKernels.pdf>`_).
+.. [BIS-2006_2p] Bisdorff R. (2006). On enumerating the kernels in a bipolar-valued digraph. Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <http://hdl.handle.net/10993/38741>`_).
 
-.. [BIS-2004_1p] Bisdorff R. (2004). Concordant Outranking with multiple criteria of ordinal significance. 4OR, Quarterly Journal of the Belgian, French and Italian Operations Research Societies, Springer-Verlag, Issue: Volume 2, Number 4, December 2004, Pages: 293 - 308. [ISSN: 1619-4500 (Paper) 1614-2411 (Online)] Electronic version: DOI: 10.1007/s10288-004-0053-7 (downloadable preliminary version `PDF file 137.1Kb <_static/Bisdorff4ORFinal.pdf>`_)
+.. [BIS-2004_1p] Bisdorff R. (2004). Concordant Outranking with multiple criteria of ordinal significance. 4OR, Quarterly Journal of the Belgian, French and Italian Operations Research Societies, Springer-Verlag, Issue: Volume 2, Number 4, December 2004, Pages: 293 - 308. [ISSN: 1619-4500 (Paper) 1614-2411 (Online)] Electronic version: DOI: 10.1007/s10288-004-0053-7 (downloadable preliminary version `PDF file 137.1Kb <http://hdl.handle.net/10993/23721>`_)
 
 .. [BIS-2004_2p] Bisdorff R. (2004). Preference aggregation with multiple criteria of ordinal significance. In: D. Bouyssou, M. Janowitz, F. Roberts, and A. Tsouki´s (eds.), Annales du LAMSADE, 3, Octobre 2004, Université Paris-Dauphine, pp. 25-44 [ISSN 1762-455X] (downloadable `PDF file 167.6Kb <_static/BisdorffDimacsLamsadeFinal.pdf>`_).
    
