@@ -1,10 +1,10 @@
 # Fdb version 3
-["makeindex digraph3Tutorial.idx"] 1577700688 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1580706371
+["makeindex digraph3Tutorial.idx"] 1577700688 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1580706786
   "digraph3Tutorial.idx" 1580695691 0 d41d8cd98f00b204e9800998ecf8427e ""
   (generated)
-  "digraph3Tutorial.ind"
   "digraph3Tutorial.ilg"
-["pdflatex"] 1580695691 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1580706371
+  "digraph3Tutorial.ind"
+["pdflatex"] 1580695691 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1580706786
   "/etc/texmf/web2c/texmf.cnf" 1528969954 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1480098666 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
@@ -231,9 +231,9 @@
   "spanningForest.png" 1578307168 50782 a3bc0381daeccbc2812bcc4195a99052 ""
   "sparseRelationMap.png" 1578307191 13187 df51199ccfddd95f44d62a9338454774 ""
   "sphinx.sty" 1578307191 81878 44d14f90f8cb22a202794c148df60b64 ""
-  "sphinxhighlight.sty" 1580706361 8137 38a433148fcb7611515a989ff1750dd5 ""
+  "sphinxhighlight.sty" 1580706778 8137 38a433148fcb7611515a989ff1750dd5 ""
   "sphinxhowto.cls" 1578307191 3253 f1422f11047981f159e1ea718dbe2c47 ""
-  "sphinxmessages.sty" 1580706368 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1580706784 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxmulticell.sty" 1578307191 14606 0b6edc2b1a83546ed92026d1f6a311b5 ""
   "strongComponents.png" 1578307191 79190 bf10e090cef5309997c9efe66fbb33a5 ""
   "test62.png" 1578307191 29015 19c1cd8671e48efcd2958695a01f10c1 ""
@@ -256,9 +256,9 @@
   "votingHeatmap.png" 1579525047 78263 0cb11bc819865b43d16f066cc3f62ef9 ""
   "weakChordlessCircuit.png" 1579608332 65619 d9ee17dd6ac35e83e1cbbd889663c392 ""
   (generated)
-  "digraph3Tutorial.aux"
+  "digraph3Tutorial.pdf"
   "digraph3Tutorial.out"
   "digraph3Tutorial.log"
+  "digraph3Tutorial.aux"
   "digraph3Tutorial.idx"
   "digraph3Tutorial.toc"
-  "digraph3Tutorial.pdf"
