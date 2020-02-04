@@ -1,7 +1,7 @@
 \babel@toc {english}{}
 \contentsline {section}{\numberline {1}Coping with missing data and indeterminateness}{2}{section.1}
 \contentsline {subsection}{\numberline {1.1}A motivating data set}{2}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}Modelling pairwise bipolar\sphinxhyphen {}valued rating opinions}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.2}Modelling pairwise bipolar\sphinxhyphen {}valued rating opinions}{5}{subsection.1.2}
 \contentsline {section}{\numberline {2}Ordinal correlation equals bipolar\sphinxhyphen {}valued relational equivalence}{7}{section.2}
 \contentsline {subsection}{\numberline {2.1}Kendall\IeC {\textquoteright }s \sphinxstyleemphasis {tau} index}{8}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Bipolar\sphinxhyphen {}valued relational equivalence}{9}{subsection.2.2}

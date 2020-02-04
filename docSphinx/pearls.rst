@@ -32,8 +32,12 @@ Pearls of bipolar-valued epistemic logic
       :depth: 1
       :local:
 
+ 
 .. highlight:: python
-   :linenothreshold: 2	 
+   :linenothreshold: 2
+
+.. highlight:: pycon
+   :linenothreshold: 2
 
 .. only:: latex
 
@@ -45,7 +49,7 @@ Pearls of bipolar-valued epistemic logic
 
    **Preface**
    
-In this part of the Digraph3 documentation, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logical framework*, like easily coping with *missing data* and uncertain criterion *significance weights*, computing valued *ordinal correlations* between bipolar-valued outranking digraphs, solving bipolar-valued Berge kernel equation systems, and testing for stability of outranking statements when facing only ordinal criteria significance weights.
+In this part of the **Digraph3** *documentation*, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logical framework*, like easily coping with *missing data* and uncertain criterion *significance weights*, computing valued *ordinal correlations* between bipolar-valued outranking digraphs, solving bipolar-valued Berge kernel equation systems, and testing for stability of outranking statements when facing only ordinal criteria significance weights.
 
 .. _CopingMissing-Data-label:
 
@@ -56,16 +60,17 @@ Coping with missing data and indeterminateness
    :depth: 1
    :local:
 
-A motivating data set
-.....................
-
 In a stubborn keeping with a two-valued logic, where every argument can only be true or false, there is no place for efficiently taking into account missing data or logical indeterminateness. These cases are seen as problematic and, at best are simply ignored. Worst, in modern data science, missing data get often replaced with *fictive* values, potentially falsifying hence all subsequent computations.
 
 In social choice problems like elections, *abstentions* are, however, frequently observed and represent a social expression that may be significant for revealing non represented social preferences.
 
 In marketing studies, interviewees will not always respond to all the submitted questions. Again, such abstentions do sometimes contain nevertheless valid information concerning consumer preferences.
 
-Let us take an example performance tableau from a Movie magazine's evaluation of movies that could be seen in town [1]_ (see :numref:`graffiti07_1`).
+
+A motivating data set
+.....................
+
+Let us consider such a performance tableau gathering a *Movie Magazine* 's rating of some movies that could actually be seen in town [1]_ (see :numref:`graffiti07_1`).
 
 .. code-block:: pycon
 
@@ -85,9 +90,6 @@ Let us take an example performance tableau from a Movie magazine's evaluation of
 
 To aggregate all the critics' rating opinions, the *Graffiti* magazine provides for each movie a global score computed as an *average grade*, just ignoring the *not seen* data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic *SJ*, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
 
-Modelling pairwise bipolar-valued rating opinions
-.................................................
-
 A better approach is to rank the movies on the basis of pairwise bipolar-valued  *at least as well rated as* opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the :ref:`Ranking-Tutorial-label` tutorial) of the 25 movies is provided, for instance, by the **heat map** view shown in :numref:`graffiti07_2`.
 
 >>> t.showHTMLPerformanceHeatmap(Correlations=True,
@@ -104,7 +106,10 @@ A better approach is to rank the movies on the basis of pairwise bipolar-valued 
 
 There is no doubt that movie *mv_QS*, with 6 '*must be seen*' marks, is correctly best-ranked and the movie *mv_TV* is worst-ranked with five '*don't like*' marks.
 
-Let us explicitly construct the corresponding bipolar-valued outranking digraph and consult in :numref:`graffiti07_45` the pairwise characteristic values we observe between the two best-ranked movies, namely *mv_QS* and *mv_RR*.
+Modelling pairwise bipolar-valued rating opinions
+.................................................
+
+Let us explicitly construct the underlying bipolar-valued outranking digraph and consult in :numref:`graffiti07_45` the pairwise characteristic values we observe between the two best-ranked movies, namely *mv_QS* and *mv_RR*.
 
 .. code-block:: pycon
 
@@ -174,12 +179,6 @@ Ordinal correlation equals bipolar-valued relational equivalence
 .. contents:: 
 	:depth: 1
 	:local:
-
-.. highlight:: python
-	:linenothreshold: 2
-
-.. highlight:: pycon
-	:linenothreshold: 2
 			  
 Kendall's *tau* index
 .....................

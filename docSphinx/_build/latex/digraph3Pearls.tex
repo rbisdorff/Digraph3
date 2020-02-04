@@ -137,16 +137,16 @@ In this part of the Digraph3 documentation, we provide an insight in computation
 \end{itemize}
 \end{sphinxShadowBox}
 
-
-\subsection{A motivating data set}
-\label{\detokenize{pearls:a-motivating-data-set}}
 In a stubborn keeping with a two\sphinxhyphen{}valued logic, where every argument can only be true or false, there is no place for efficiently taking into account missing data or logical indeterminateness. These cases are seen as problematic and, at best are simply ignored. Worst, in modern data science, missing data get often replaced with \sphinxstyleemphasis{fictive} values, potentially falsifying hence all subsequent computations.
 
 In social choice problems like elections, \sphinxstyleemphasis{abstentions} are, however, frequently observed and represent a social expression that may be significant for revealing non represented social preferences.
 
 In marketing studies, interviewees will not always respond to all the submitted questions. Again, such abstentions do sometimes contain nevertheless valid information concerning consumer preferences.
 
-Let us take an example performance tableau from a Movie magazine’s evaluation of movies that could be seen in town %
+
+\subsection{A motivating data set}
+\label{\detokenize{pearls:a-motivating-data-set}}
+Let us consider such a performance tableau gathering a \sphinxstyleemphasis{Movie Magazine} ‘s rating of some movies that could actually be seen in town %
 \begin{footnote}[1]\sphinxAtStartFootnote
 \sphinxstyleemphasis{Graffiti}, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file \sphinxstyleemphasis{graffiti07.xml} (XMCDA\sphinxhyphen{}2.0 Format) in the \sphinxstyleemphasis{examples/Graffiti} directory of the Digraph3 ressources.
 %
@@ -169,9 +169,6 @@ Let us take an example performance tableau from a Movie magazine’s evaluation 
 
 To aggregate all the critics’ rating opinions, the \sphinxstyleemphasis{Graffiti} magazine provides for each movie a global score computed as an \sphinxstyleemphasis{average grade}, just ignoring the \sphinxstyleemphasis{not seen} data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic \sphinxstyleemphasis{SJ}, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
 
-
-\subsection{Modelling pairwise bipolar\sphinxhyphen{}valued rating opinions}
-\label{\detokenize{pearls:modelling-pairwise-bipolar-valued-rating-opinions}}
 A better approach is to rank the movies on the basis of pairwise bipolar\sphinxhyphen{}valued  \sphinxstyleemphasis{at least as well rated as} opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the \DUrole{xref,std,std-ref}{Ranking\sphinxhyphen{}Tutorial\sphinxhyphen{}label} tutorial) of the 25 movies is provided, for instance, by the \sphinxstylestrong{heat map} view shown in \hyperref[\detokenize{pearls:graffiti07-2}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-2}}}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
@@ -189,7 +186,10 @@ A better approach is to rank the movies on the basis of pairwise bipolar\sphinxh
 
 There is no doubt that movie \sphinxstyleemphasis{mv\_QS}, with 6 ‘\sphinxstyleemphasis{must be seen}’ marks, is correctly best\sphinxhyphen{}ranked and the movie \sphinxstyleemphasis{mv\_TV} is worst\sphinxhyphen{}ranked with five ‘\sphinxstyleemphasis{don’t like}’ marks.
 
-Let us explicitly construct the corresponding bipolar\sphinxhyphen{}valued outranking digraph and consult in \hyperref[\detokenize{pearls:graffiti07-45}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-45}}} the pairwise characteristic values we observe between the two best\sphinxhyphen{}ranked movies, namely \sphinxstyleemphasis{mv\_QS} and \sphinxstyleemphasis{mv\_RR}.
+
+\subsection{Modelling pairwise bipolar\sphinxhyphen{}valued rating opinions}
+\label{\detokenize{pearls:modelling-pairwise-bipolar-valued-rating-opinions}}
+Let us explicitly construct the underlying bipolar\sphinxhyphen{}valued outranking digraph and consult in \hyperref[\detokenize{pearls:graffiti07-45}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-45}}} the pairwise characteristic values we observe between the two best\sphinxhyphen{}ranked movies, namely \sphinxstyleemphasis{mv\_QS} and \sphinxstyleemphasis{mv\_RR}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}

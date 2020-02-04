@@ -79,12 +79,12 @@
 <li><p><a class="reference internal" href="#modelling-pairwise-bipolar-valued-rating-opinions" id="id39">Modelling pairwise bipolar-valued rating opinions</a></p></li>
 </ul>
 </div>
-<div class="section" id="a-motivating-data-set">
-<h3><a class="toc-backref" href="#id38">A motivating data set</a><a class="headerlink" href="#a-motivating-data-set" title="Permalink to this headline">¶</a></h3>
 <p>In a stubborn keeping with a two-valued logic, where every argument can only be true or false, there is no place for efficiently taking into account missing data or logical indeterminateness. These cases are seen as problematic and, at best are simply ignored. Worst, in modern data science, missing data get often replaced with <em>fictive</em> values, potentially falsifying hence all subsequent computations.</p>
 <p>In social choice problems like elections, <em>abstentions</em> are, however, frequently observed and represent a social expression that may be significant for revealing non represented social preferences.</p>
 <p>In marketing studies, interviewees will not always respond to all the submitted questions. Again, such abstentions do sometimes contain nevertheless valid information concerning consumer preferences.</p>
-<p>Let us take an example performance tableau from a Movie magazine’s evaluation of movies that could be seen in town <a class="footnote-reference brackets" href="#id24" id="id2">1</a> (see <a class="reference internal" href="#graffiti07-1"><span class="std std-numref">Fig. 67</span></a>).</p>
+<div class="section" id="a-motivating-data-set">
+<h3><a class="toc-backref" href="#id38">A motivating data set</a><a class="headerlink" href="#a-motivating-data-set" title="Permalink to this headline">¶</a></h3>
+<p>Let us consider such a performance tableau gathering a <em>Movie Magazine</em> ‘s rating of some movies that could actually be seen in town <a class="footnote-reference brackets" href="#id24" id="id2">1</a> (see <a class="reference internal" href="#graffiti07-1"><span class="std std-numref">Fig. 67</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
@@ -98,9 +98,6 @@
 </div>
 <p>15 journalists and movie critics provide here their rating of 25 movies: 5 stars (<em>masterpiece</em>), 4 stars (<em>must be seen</em>), 3 stars (<em>excellent</em>), 2 stars (<em>good</em>), 1 star (<em>could be seen</em>), -1 star (<em>I do not like</em>), -2 (<em>I hate</em>), NA (<em>not seen</em>).</p>
 <p>To aggregate all the critics’ rating opinions, the <em>Graffiti</em> magazine provides for each movie a global score computed as an <em>average grade</em>, just ignoring the <em>not seen</em> data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic <em>SJ</em>, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?</p>
-</div>
-<div class="section" id="modelling-pairwise-bipolar-valued-rating-opinions">
-<h3><a class="toc-backref" href="#id39">Modelling pairwise bipolar-valued rating opinions</a><a class="headerlink" href="#modelling-pairwise-bipolar-valued-rating-opinions" title="Permalink to this headline">¶</a></h3>
 <p>A better approach is to rank the movies on the basis of pairwise bipolar-valued  <em>at least as well rated as</em> opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the <a class="reference internal" href="tutorial.html#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> tutorial) of the 25 movies is provided, for instance, by the <strong>heat map</strong> view shown in <a class="reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 68</span></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="gp">... </span>                             <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
@@ -112,7 +109,10 @@
 <p class="caption"><span class="caption-number">Fig. 68 </span><span class="caption-text"><em>Graffiti</em> magazine’s ordered movie ratings from September 2007</span><a class="headerlink" href="#graffiti07-2" title="Permalink to this image">¶</a></p>
 </div>
 <p>There is no doubt that movie <em>mv_QS</em>, with 6 ‘<em>must be seen</em>’ marks, is correctly best-ranked and the movie <em>mv_TV</em> is worst-ranked with five ‘<em>don’t like</em>’ marks.</p>
-<p>Let us explicitly construct the corresponding bipolar-valued outranking digraph and consult in <a class="reference internal" href="#graffiti07-45"><span class="std std-numref">Fig. 69</span></a> the pairwise characteristic values we observe between the two best-ranked movies, namely <em>mv_QS</em> and <em>mv_RR</em>.</p>
+</div>
+<div class="section" id="modelling-pairwise-bipolar-valued-rating-opinions">
+<h3><a class="toc-backref" href="#id39">Modelling pairwise bipolar-valued rating opinions</a><a class="headerlink" href="#modelling-pairwise-bipolar-valued-rating-opinions" title="Permalink to this headline">¶</a></h3>
+<p>Let us explicitly construct the underlying bipolar-valued outranking digraph and consult in <a class="reference internal" href="#graffiti07-45"><span class="std std-numref">Fig. 69</span></a> the pairwise characteristic values we observe between the two best-ranked movies, namely <em>mv_QS</em> and <em>mv_RR</em>.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
