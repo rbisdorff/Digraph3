@@ -183,24 +183,60 @@ htmlhelp_basename = 'Digraph3doc'
 
 # -- Options for LaTeX output --------------------------------------------------
 
+latex_engine = 'pdflatex'
 latex_elements = {
 # The paper size ('letterpaper' or 'a4paper').
 # 'papersize': 'letterpaper',
 'papersize': 'a4paper',
-
+'fontpkg': '\\usepackage{amsmath,amsfonts,amssymb,amsthm}',
 'passoptionstopackages': r'\PassOptionsToPackage{svgnames}{xcolor}',
 
 # The font size ('10pt', '11pt' or '12pt').
-'pointsize': '10pt',
+'pointsize': '12pt',
 
 # Additional stuff for the LaTeX preamble.
 'preamble': r'''
-\usepackage{newunicodechar}
-\newunicodechar{┬}{\scriptsize{\ensuremath{\top}}}
-\newunicodechar{┴}{\scriptsize{\ensuremath{\bot}}}
+    \usepackage{newunicodechar}
+    \newunicodechar{┬}{\scriptsize{\ensuremath{\top}}}
+    \newunicodechar{┴}{\scriptsize{\ensuremath{\bot}}}
 
 ''',
+'maketitle': r'''
+    \pagenumbering{Roman} %%% to avoid page 1 conflict with actual page 1
 
+    \begin{titlepage}
+        \centering
+
+        \vspace*{20mm} %%% * is used to give space from top
+        \textbf{\Huge {Documentation of the Digraph3 software collection}}
+
+        \vspace{0mm}
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[scale=0.5]{introDoc3.png}
+        \end{figure}
+
+        \vspace{10mm}
+        \Large {\textbf{Tutorials and pearls of bipolar epistemic logic}}
+
+        \vspace{5mm}
+        \textbf{Raymond BISDORFF}
+
+        \small {Created on : January 2010}
+
+        \vspace*{0mm}
+        \small  Last updated : \today
+
+
+        %% \vfill adds at the bottom
+        \vfill
+        \textit{More documents are freely available }{\href{https://digraph3.readthedocs.io/en/latest}{here}}
+    \end{titlepage}
+
+    \clearpage
+    \pagenumbering{arabic}
+
+    ''',
 # Latex figure (float) alignment
 #'figure_align': 'htbp',
 'figure_align': 'H',
@@ -217,17 +253,17 @@ latex_documents = [
 
 # The name of an image file (relative to this directory) to place at the top of
 # the title page.
-latex_logo = 'introDoc2.png'
+latex_logo = 'introDoc3.png'
 
 # For "manual" documents, if this is true, then toplevel headings are parts,
 # not chapters.
 #latex_use_parts = False
 
 # If true, show page references after internal links.
-latex_show_pagerefs = True
+latex_show_pagerefs =  False
 
 # If true, show URL addresses after external links.
-latex_show_urls = 'True'
+latex_show_urls =  'True'
 
 # Documents to append as an appendix to all manuals.
 #latex_appendices = []

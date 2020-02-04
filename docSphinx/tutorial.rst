@@ -18,9 +18,11 @@
 Tutorials of the Digraph3 resources
 ===================================
 
-:Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
-:Version: Revision: Python 3.7
-:Copyright: R. Bisdorff 2013-2020
+.. only:: html
+
+   :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
+   :Version: Revision: Python 3.7
+   :Copyright: R. Bisdorff 2013-2020
 
 .. _Tutorial-label:
 
@@ -32,7 +34,15 @@ Tutorials of the Digraph3 resources
 .. highlight:: python
 	:linenothreshold: 2
 
-**Preface**
+.. only:: latex
+
+   .. raw:: latex
+
+      \textbf{\Large{Tutorials of the Digraph3 Resources}}
+
+.. only:: html
+
+   **Preface**
 
 The tutorials in this document describe the practical usage of our Digraph3 Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg.
 

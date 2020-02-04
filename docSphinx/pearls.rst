@@ -18,9 +18,11 @@
 Pearls of bipolar-valued epistemic logic
 ========================================
 
-:Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
-:Version: Revision: Python 3.7
-:Copyright: R. Bisdorff 2013-2020
+.. only:: html
+
+   :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
+   :Version: Revision: Python 3.7
+   :Copyright: R. Bisdorff 2013-2020
 
 .. _Pearls-label:
 
@@ -33,6 +35,16 @@ Pearls of bipolar-valued epistemic logic
 .. highlight:: python
    :linenothreshold: 2	 
 
+.. only:: latex
+
+   .. raw:: latex
+
+      \textbf{\Large{Pearls of Bipolar-valued Epistemic Logic}}
+
+.. only:: html
+
+   **Preface**
+   
 In this part of the Digraph3 documentation, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logical framework*, like easily coping with *missing data* and uncertain criterion *significance weights*, computing valued *ordinal correlations* between bipolar-valued outranking digraphs, solving bipolar-valued Berge kernel equation systems, and testing for stability of outranking statements when facing only ordinal criteria significance weights.
 
 .. _CopingMissing-Data-label:
@@ -40,13 +52,20 @@ In this part of the Digraph3 documentation, we provide an insight in computation
 Coping with missing data and indeterminateness
 ----------------------------------------------
 
+.. contents::
+   :depth: 1
+   :local:
+
+A motivating data set
+.....................
+
 In a stubborn keeping with a two-valued logic, where every argument can only be true or false, there is no place for efficiently taking into account missing data or logical indeterminateness. These cases are seen as problematic and, at best are simply ignored. Worst, in modern data science, missing data get often replaced with *fictive* values, potentially falsifying hence all subsequent computations.
 
 In social choice problems like elections, *abstentions* are, however, frequently observed and represent a social expression that may be significant for revealing non represented social preferences.
 
 In marketing studies, interviewees will not always respond to all the submitted questions. Again, such abstentions do sometimes contain nevertheless valid information concerning consumer preferences.
 
-Let us take an example performance tableau from a Movie magazine's evaluation of movies that could be seen in town [1p]_ (see :numref:`graffiti07_1`).
+Let us take an example performance tableau from a Movie magazine's evaluation of movies that could be seen in town [1]_ (see :numref:`graffiti07_1`).
 
 .. code-block:: pycon
 
@@ -65,6 +84,9 @@ Let us take an example performance tableau from a Movie magazine's evaluation of
 15 journalists and movie critics provide here their rating of 25 movies: 5 stars (*masterpiece*), 4 stars (*must be seen*), 3 stars (*excellent*), 2 stars (*good*), 1 star (*could be seen*), -1 star (*I do not like*), -2 (*I hate*), NA (*not seen*).
 
 To aggregate all the critics' rating opinions, the *Graffiti* magazine provides for each movie a global score computed as an *average grade*, just ignoring the *not seen* data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic *SJ*, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
+
+Modelling pairwise bipolar-valued rating opinions
+.................................................
 
 A better approach is to rank the movies on the basis of pairwise bipolar-valued  *at least as well rated as* opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the :ref:`Ranking-Tutorial-label` tutorial) of the 25 movies is provided, for instance, by the **heat map** view shown in :numref:`graffiti07_2`.
 
@@ -148,6 +170,10 @@ Back to :ref:`Content Table <Pearls-label>`
 	
 Ordinal correlation equals bipolar-valued relational equivalence
 ----------------------------------------------------------------
+
+.. contents:: 
+	:depth: 1
+	:local:
 
 .. highlight:: python
 	:linenothreshold: 2
@@ -399,7 +425,7 @@ The valued relational equivalence index gives us a further measure for studying 
 
 It is remarkable to notice in the criteria correlation matrix (see :numref:`correlationTable`) that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes *r(x<=>y)* appear to be of low value, except the *diagonal* ones. These reflexive indexes *r(x<=>x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. the *proportion* of pairs of movies each critic did evaluate. Critic *JPT* (the editor of the Graffiti magazine), for instance, evaluated all but one (*d* = 24*23/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion (*d* = 10*9/600 = 0.15).
 
-To get a picture of the actual *divergence of rating opinions* concerning **jointly seen** pairs of movies, we may develop a *Principal Component Analysis* ([2p]_) of the corresponding *tau* correlation matrix. The 3D plot of the first 3 principal axes is shown in :numref:`correlationPCA`.
+To get a picture of the actual *divergence of rating opinions* concerning **jointly seen** pairs of movies, we may develop a *Principal Component Analysis* ([2]_) of the corresponding *tau* correlation matrix. The 3D plot of the first 3 principal axes is shown in :numref:`correlationPCA`.
 
    >>> g.export3DplotOfCriteriaCorrelation(ValuedCorrelation=False)
 
@@ -439,7 +465,7 @@ We notice here that the *Net-Flows* ranking rule inverts in fact just three '*le
    :width: 600 px
    :align: center
 
-Such a preordering of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -best remaining choices- and *absorbent kernels* -worst remaining choices- (see the tutorial :ref:`Kernel-Tutorial-label`). We operate therefore on the asymmetric '*better rated than*', i.e. the *codual* ([3p]_) of the '*at least as well rated as*' opinions (see :numref:`rankGraf` Line 2).
+Such a preordering of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -best remaining choices- and *absorbent kernels* -worst remaining choices- (see the tutorial :ref:`Kernel-Tutorial-label`). We operate therefore on the asymmetric '*better rated than*', i.e. the *codual* ([3]_) of the '*at least as well rated as*' opinions (see :numref:`rankGraf` Line 2).
 
 .. code-block:: pycon
    :linenos:
@@ -468,6 +494,10 @@ Back to :ref:`Content Table <Pearls-label>`
 
 Bipolar-valued kernel membership characteristic vectors
 -------------------------------------------------------
+
+.. contents:: 
+	:depth: 1
+	:local:
 
 *Claude Berge*'s kernel equation systems
 ........................................
@@ -772,6 +802,10 @@ Back to :ref:`Content Table <Pearls-label>`
 On confident outrankings with uncertain criteria significances
 --------------------------------------------------------------
 
+.. contents:: 
+	:depth: 1
+	:local:
+
 When modelling preferences following the outranking approach, the signs of the majority margins do sharply distribute validation and invalidation of pairwise outranking situations. How can we be confident in the resulting outranking digraph, when we acknowledge the usual imprecise knowledge of criteria significance weights coupled with small majority margins?
 
 To answer this question, one usually requires *qualified* majority margins for confirming outranking situations. But how to choose such a qualifying majority level: two third, three fourth of the significances ?
@@ -860,7 +894,7 @@ Let *x* and *y* be evaluated wrt 7 equisignificant criteria; Four criteria posit
 
 If *w* = 1, :math:`E\big(\tilde{r}(x \geq y)\big)\, = \, 1` and :math:`sd\big(\tilde{r}(x \geq y)\big)\,=\, 1.08`. By the CLT, the bipolar likelihood of the *at least as good* performing situation becomes: :math:`lh(x \geq y)\,=\, 0.66`, which corresponds to a global support of (0.66 + 1.0)/2 = 83% of the criteria significance weights.
 
-A *Monte Carlo* simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see :numref:`simulLikelihood` realised with *gretl* [4p]_ ).
+A *Monte Carlo* simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see :numref:`simulLikelihood` realised with *gretl* [4]_ ).
 
 .. Figure:: simulLikelihood.png
    :name: simulLikelihood
@@ -1073,6 +1107,10 @@ Back to :ref:`Content Table <Pearls-label>`
 
 Robustness analysis of bipolar-valued outranking digraphs
 ---------------------------------------------------------
+
+.. contents:: 
+	:depth: 1
+	:local:
 
 Cardinal or ordinal criteria significances
 ..........................................
@@ -1491,8 +1529,8 @@ For concluding, let us again mention that it is precisely our bipolar-valued *lo
 
 Back to :ref:`Content Table <Pearls-label>`
 
-Bibliograqphy
--------------
+Bibliography
+------------
 	  
 .. [BIS-2015p] Bisdorff R. (2015). *The EURO 2004 Best Poster Award: Choosing the Best Poster in a Scientific Conference*. Chapter 5 in R. Bisdorff, L. Dias, P. Meyer, V. Mousseau, and M. Pirlot (Eds.), *Evaluation and Decision Models with Multiple Criteria: Case Studies*. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, DOI 10.1007/978-3-662-46816-6_1, pp. 117-166 (downloadable `PDF file 754.7 kB <http://hdl.handle.net/10993/23714>`_).
 	       
@@ -1517,17 +1555,26 @@ Bibliograqphy
 .. [KEN-1938p] Kendall M.G. (1938), *A New Measure of Rank Correlation*. Biometrica 30:81–93
 
 .. only:: html
+	  
+    Documents
+    .........
+     
+    * `Introduction <index.html>`_
+    * `Reference manual <techDoc.html>`_
+    * `Tutorial <tutorial.html>`_
+
+.. only:: html
 
     Footnotes
-    ---------
-	  
-.. [1p] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file *graffiti07.xml* (XMCDA-2.0 Format) in the *examples/Graffiti* directory of the Digraph3 ressources.       
+    .........
 
-.. [2p] The 3D PCA plot method requires a running *R statistics software*  (https://www.r-project.org/) installation and the Calmat matrix calculator (see the calmat directory in the Digraph3 ressources)
+.. [1] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file *graffiti07.xml* (XMCDA-2.0 Format) in the *examples/Graffiti* directory of the Digraph3 ressources.       
 
-.. [3p] A *kernel* in a digraph *g* is a *clique* in the dual digraph *-g*.
+.. [2] The 3D PCA plot method requires a running *R statistics software*  (https://www.r-project.org/) installation and the Calmat matrix calculator (see the calmat directory in the Digraph3 ressources)
 
-.. [4p] The Gnu Regression, Econometrics and Time-series Library http://gretl.sourceforge.net/ .
+.. [3] A *kernel* in a digraph *g* is a *clique* in the dual digraph *-g*.
+
+.. [4] The Gnu Regression, Econometrics and Time-series Library http://gretl.sourceforge.net/ .
 
 .. raw:: latex
 
