@@ -4,7 +4,7 @@
 \ifdefined\pdfpxdimen
    \let\sphinxpxdimen\pdfpxdimen\else\newdimen\sphinxpxdimen
 \fi \sphinxpxdimen=.75bp\relax
-
+\PassOptionsToPackage{svgnames}{xcolor}
 \PassOptionsToPackage{warn}{textcomp}
 \usepackage[utf8]{inputenc}
 \ifdefined\DeclareUnicodeCharacter
@@ -91,6 +91,20 @@
 \sphinxtableofcontents
 \pagestyle{normal}
 \phantomsection\label{\detokenize{tutorial::doc}}
+\begingroup
+\sphinxsetup{%
+      verbatimwithframe=false,
+      VerbatimColor={named}{OldLace},
+      hintBorderColor={named}{LightCoral},
+      attentionborder=3pt,
+      attentionBorderColor={named}{Crimson},
+      attentionBgColor={named}{FloralWhite},
+      noteborder=2pt,
+      noteBorderColor={named}{Olive},
+      cautionborder=3pt,
+      cautionBorderColor={named}{Cyan},
+      cautionBgColor={named}{LightCyan}}
+
 
 \begin{quote}\begin{description}
 \item[{Author}] \leavevmode
@@ -334,7 +348,7 @@ The \sphinxcode{\sphinxupquote{exportGraphViz}} method is depending on drawing t
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng tutorialDigraph.dot \PYGZhy{}o tutorialDigraph.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -398,7 +412,7 @@ Some special classes of digraphs, like the \sphinxcode{\sphinxupquote{digraphs.C
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng TutorialGrid.dot \PYGZhy{}o tutorialGrid.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -516,7 +530,7 @@ We may have an even better insight into the \sphinxcode{\sphinxupquote{Digraph}}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng tutRandValDigraph.dot \PYGZhy{}o tutRandValDigraph.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -539,7 +553,7 @@ We may now extract both this symmetric as well as this asymmetric part of digrap
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{symDg}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -588,7 +602,7 @@ We may also extract the border \sphinxhyphen{}i.e. the part of the digraph induc
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ig}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -714,7 +728,7 @@ Symmetric and transitive closure in\sphinxhyphen{}site constructors are also ava
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{strongComponents}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -789,7 +803,7 @@ It is as well possible to show a colored version of the valued relation table in
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dgcsv}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{n}{tableTitle}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Tutorial random digraph}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -1033,7 +1047,7 @@ By seeing the majority margins like a bipolar\sphinxhyphen{}valued characteristi
 \PYG{g+go}{dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng tutorialLinearBallots.dot \PYGZhy{}o tutorialLinearBallots.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -1078,7 +1092,7 @@ Now, we cannot find any completely positive row in the relation table. No one of
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng cycles.dot \PYGZhy{}o cycles.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -1102,7 +1116,7 @@ Many more tools for exploiting voting results are available like the broswer hea
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v}\PYG{o}{.}\PYG{n}{showHTMLVotingHeatmap}\PYG{p}{(}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NetFlows}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -1239,7 +1253,7 @@ We may visualize the same performance tableau in a two\sphinxhyphen{}colors sett
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{odg}\PYG{o}{.}\PYG{n}{showHTMLPerformanceTableau}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -1254,7 +1268,7 @@ We may, furthermore, rank the alternatives on the basis of the weighted marginal
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{odg}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{quantiles}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -1383,7 +1397,7 @@ From the theory (see \sphinxcite{tutorial:bis-2013}, \sphinxcite{tutorial:adt-l7
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng codualOdg.dot \PYGZhy{}o codualOdg.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -1574,7 +1588,7 @@ Code example.
 \PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} t.showHTMLPerformanceTableau()}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -1715,7 +1729,7 @@ A (potentially ranked) colored heat map with 5 color levels is also provided.
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{Ranked}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -1922,7 +1936,7 @@ A graphviz drawing illustrates the apparent preferential links between the stron
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng scFusionObjectives.dot \PYGZhy{}o scFusionObjectives.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -2063,7 +2077,7 @@ To estimate how difficult this ranking problem may be, we can have a look at the
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng rankingTutorial.dot \PYGZhy{}o rankingTutorial.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -2204,7 +2218,7 @@ We may visualize the partial order defined by the epistemic disjunction of these
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng tutorialKemeny.dot \PYGZhy{}o tutorialKemeny.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -2233,7 +2247,7 @@ The \sphinxstylestrong{Slater} ranking rule is similar to Kemeny’s, but it is 
 
 We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the Net\sphinxhyphen{}Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the follwowing partial ordering.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -2699,7 +2713,7 @@ A restricted outranking relation is stored for each component with more than one
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sg}\PYG{o}{.}\PYG{n}{showRelationMap}\PYG{p}{(}\PYG{n}{toIndex}\PYG{o}{=}\PYG{l+m+mi}{75}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -2914,7 +2928,7 @@ See \sphinxurl{https://hpc.uni.lu/systems/gaia/}
 
 by running the cythonized python modules in an Intel compiled virtual Python 3.6.5 environment {[}GCC Intel(R) 17.0.1 \textendash{}enable\sphinxhyphen{}optimizations c++ gcc 6.3 mode{]} on Debian 8 Linux.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -3066,7 +3080,7 @@ Three alternatives \sphinxhyphen{}\#155874, \#426464 and \#567308\sphinxhyphen{}
 \PYG{g+go}{ dot \PYGZhy{}Tpng converse\PYGZhy{}dual\PYGZus{}rel\PYGZus{}best10.dot \PYGZhy{}o converse\PYGZhy{}dual\PYGZus{}rel\PYGZus{}best10.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -3576,7 +3590,7 @@ A colorful comparison of all the performances is shown by the \sphinxstylestrong
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -3601,7 +3615,7 @@ a \sphinxstylestrong{significant majority} of criteria concordantly supporting t
 
 The credibility of each pairwise outranking situation (see \sphinxcite{tutorial:bis-2013}), denoted r(\sphinxstyleemphasis{x} S \sphinxstyleemphasis{y}), is measured in a bipolar significance valuation {[}\sphinxhyphen{}100.00, 100.00{]}, where \sphinxstylestrong{positive} terms r(\sphinxstyleemphasis{x} S \sphinxstyleemphasis{y}) \textgreater{} 0.0 indicate a \sphinxstylestrong{validated}, and \sphinxstylestrong{negative} terms r(\sphinxstyleemphasis{x} S \sphinxstyleemphasis{y}) \textless{} 0.0 indicate a \sphinxstylestrong{non\sphinxhyphen{}validated} outrankings; whereas the \sphinxstylestrong{median} value r(\sphinxstyleemphasis{x} S \sphinxstyleemphasis{y}) = 0.0 represents an \sphinxstylestrong{indeterminate} situation (see \sphinxcite{tutorial:bis-2004}).
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -3634,7 +3648,7 @@ We may get even more insight in the apparent outranking situations when looking 
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng officeChoice.dot \PYGZhy{}o officeChoice.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -3853,7 +3867,7 @@ To get a more complete insight in the overall strict outranking situations, we m
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng officeChoiceRanking.dot \PYGZhy{}o officeChoiceRanking.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -4073,7 +4087,7 @@ Parameter \sphinxstyleemphasis{historySize} (see Line 6) of the \sphinxcode{\sph
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq}\PYG{o}{.}\PYG{n}{showHTMLLimitingQuantiles}\PYG{p}{(}\PYG{n}{Transposed}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -4207,7 +4221,7 @@ The same result may even more conviently be consulted in a browser view via a sp
 \PYG{g+go}{ ...               Correlations=True,colorLevels=5)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -4223,7 +4237,7 @@ Using furthermore a specialised version of the \sphinxcode{\sphinxupquote{transi
 \PYG{g+go}{  dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng normedRatingDigraph.dot \PYGZhy{}o normedRatingDigraph.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -4343,7 +4357,7 @@ A browser view may again more conveniently illustrate this preciser \sphinxstyle
 \PYG{g+gp}{... }                           \PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -4467,7 +4481,7 @@ The stored graph can be recalled and plotted with the generic \sphinxcode{\sphin
 \PYG{g+go}{ fdp \PYGZhy{}Tpng tutorialGraph.dot \PYGZhy{}o tutorialGraph.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -4555,7 +4569,7 @@ A 3\sphinxhyphen{}coloring of the tutorial graph \sphinxstyleemphasis{g} may for
 \PYG{g+go}{ fdp \PYGZhy{}Tpng tutorial\PYGZhy{}3\PYGZhy{}coloring.dot \PYGZhy{}o tutorial\PYGZhy{}3\PYGZhy{}coloring.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -4581,7 +4595,7 @@ Actually, with the given tutorial graph instance, a 2\sphinxhyphen{}coloring is 
 \PYG{g+go}{ fdp \PYGZhy{}Tpng tutorial\PYGZhy{}2\PYGZhy{}coloring.dot \PYGZhy{}o tutorial\PYGZhy{}2\PYGZhy{}coloring.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -4726,7 +4740,7 @@ The two last MISs of cardinality 4 (see Lines 13\sphinxhyphen{}16 above) give \s
 \PYG{g+go}{ circo \PYGZhy{}Tpng maxMatchingcyleGraph.dot \PYGZhy{}o maxMatchingcyleGraph.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -4755,7 +4769,7 @@ Special classes of graphs, like \sphinxstyleemphasis{n} x \sphinxstyleemphasis{m
 \PYG{g+go}{ fdp \PYGZhy{}Tpng grid\PYGZhy{}15\PYGZhy{}15\PYGZhy{}ising.dot \PYGZhy{}o grid\PYGZhy{}15\PYGZhy{}15\PYGZhy{}ising.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -4853,7 +4867,7 @@ Such \sphinxstyleemphasis{n}\sphinxhyphen{}cycle graphs are also provided as und
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cg12}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{cg12}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -4975,7 +4989,7 @@ The command \sphinxcode{\sphinxupquote{digraphs.Digraph.showOrbits()}} renders n
 
 The corresponding group stabilizers’ sizes and frequencies \textendash{} orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11\sphinxhyphen{}13), are illustrated in the corresponding unlabelled graphs of \hyperref[\detokenize{tutorial:misc12}]{Fig.\@ \ref{\detokenize{tutorial:misc12}}} below.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5031,7 +5045,7 @@ instance (see \hyperref[\detokenize{tutorial:random3regulargraph}]{Fig.\@ \ref{\
 \PYG{g+go}{ fdp \PYGZhy{}Tpng random3RegularGraph.dot \PYGZhy{}o random3RegularGraph.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5052,7 +5066,7 @@ A random MIS in this graph may be computed for instance by using the \sphinxcode
 \PYG{g+go}{ fdp \PYGZhy{}Tpng random3RegularGraph\PYGZhy{}mis.dot \PYGZhy{}o random3RegularGraph\PYGZhy{}mis.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5161,7 +5175,7 @@ We cannot resist in looking in this 3\sphinxhyphen{}regular graph for non isomor
 
 In our random 3\sphinxhyphen{}regular graph instance (see \hyperref[\detokenize{tutorial:random3regulargraph}]{Fig.\@ \ref{\detokenize{tutorial:random3regulargraph}}}), we may thus find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in \hyperref[\detokenize{tutorial:random3regulargraphmis}]{Fig.\@ \ref{\detokenize{tutorial:random3regulargraphmis}}} .
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5185,7 +5199,7 @@ It is worthwhile noticing that the \sphinxstylestrong{maximal matchings} of a gr
 \PYG{g+go}{ circo \PYGZhy{}Tpng maxMatchingcyleGraph.dot \PYGZhy{}o maxMatchingcyleGraph.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5337,7 +5351,7 @@ Chordless circuits of even length may thus be indifferently oriented along two o
 \PYG{g+go}{ circo \PYGZhy{}Tpng dualChordlessCircuit.dot \PYGZhy{}o dualChordlessCircuit.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5364,7 +5378,7 @@ It is worth noticing that the \sphinxstyleemphasis{dual} version (\sphinxfootnot
 \PYG{g+go}{ circo \PYGZhy{}Tpng converse\PYGZus{}c6.dot \PYGZhy{}o converse\PYGZus{}c6.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5393,7 +5407,7 @@ In genuine random digraphs, however, we may need to check for each of its MISs, 
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng randomLaterality.dot \PYGZhy{}o randomLaterality.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5465,7 +5479,7 @@ Among the six MISs contained in this random digraph (see above Lines 3\sphinxhyp
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng orientedLaterality.dot \PYGZhy{}o orientedLaterality.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5495,7 +5509,7 @@ To illustrate this idea, let us finally compute good and bad choice recommendati
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLPerformanceTableau}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5512,7 +5526,7 @@ The underlying random performance tableau (see \hyperref[\detokenize{tutorial:ra
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng tutOutranking.dot \PYGZhy{}o tutOutranking.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5578,7 +5592,7 @@ In \hyperref[\detokenize{tutorial:bestworstorientation}]{Fig.\@ \ref{\detokenize
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng bestWorstOrientation.dot \PYGZhy{}o bestWorstOrientation.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5592,7 +5606,7 @@ The grey arrows in \hyperref[\detokenize{tutorial:bestworstorientation}]{Fig.\@ 
 \PYG{g+gp}{... }         \PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Copeland}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5778,7 +5792,7 @@ With seed = 100, we obtain here an \sphinxstyleemphasis{interval} graph, in fact
 \PYG{g+go}{ fdp \PYGZhy{}Tpng randomSplitGraph.dot \PYGZhy{}o randomSplitGraph.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5865,7 +5879,7 @@ Six professors (labeled \sphinxstyleemphasis{A}, \sphinxstyleemphasis{B}, \sphin
 \PYG{g+go}{ fdp \PYGZhy{}Tpng berge1.dot \PYGZhy{}o berge1.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5912,7 +5926,7 @@ And it is \sphinxstyleemphasis{D} ; if we put to doubt his testimony that he saw
 \PYG{g+go}{ fdp \PYGZhy{}Tpng berge2.dot \PYGZhy{}o berge2.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5945,7 +5959,7 @@ A graph is called a \sphinxstylestrong{permutation} or \sphinxstyleemphasis{inve
 \PYG{g+go}{ fdp \PYGZhy{}Tpng permutationGraph.dot \PYGZhy{}o permutationGraph.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5969,7 +5983,7 @@ By using color sorting queues, the minimal vertex coloring for a permutation gra
 \PYG{g+go}{ fdp \PYGZhy{}Tpng coloredPermutationGraph.dot \PYGZhy{}o coloredPermutationGraph.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -5985,7 +5999,7 @@ The correspondingly colored \sphinxstylestrong{matching diagram} of the nine \sp
 \PYG{g+go}{ neato \PYGZhy{}n \PYGZhy{}Tpng perm\PYGZus{}permutationGraph.dot \PYGZhy{}o perm\PYGZus{}permutationGraph.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -6017,7 +6031,7 @@ As mentioned before, a permutation graph and its dual are \sphinxstylestrong{tra
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng oriented\PYGZus{}permutationGraph.dot \PYGZhy{}o oriented\PYGZus{}permutationGraph.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -6059,7 +6073,7 @@ Let us consider, for instance, the following random graph of \sphinxstyleemphasi
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -6089,7 +6103,7 @@ If the random perfect graph instance \sphinxstyleemphasis{g} (see \hyperref[\det
 \PYG{g+go}{  (\PYGZsq{}v7\PYGZsq{}, \PYGZsq{}v7\PYGZsq{}): 0, (\PYGZsq{}v7\PYGZsq{}, \PYGZsq{}v8\PYGZsq{}): 1, (\PYGZsq{}v8\PYGZsq{}, \PYGZsq{}v7\PYGZsq{}): \PYGZhy{}1, (\PYGZsq{}v8\PYGZsq{}, \PYGZsq{}v8\PYGZsq{}): 0\PYGZcb{}}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -6120,7 +6134,7 @@ The resulting orientation of the edges of \sphinxstyleemphasis{g} (see \hyperref
 \PYG{g+go}{  (\PYGZsq{}v7\PYGZsq{}, \PYGZsq{}v7\PYGZsq{}): 0, (\PYGZsq{}v7\PYGZsq{}, \PYGZsq{}v8\PYGZsq{}): 0, (\PYGZsq{}v8\PYGZsq{}, \PYGZsq{}v7\PYGZsq{}): 0, (\PYGZsq{}v8\PYGZsq{}, \PYGZsq{}v8\PYGZsq{}): 0\PYGZcb{}}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -6211,7 +6225,7 @@ We may finally check that, for instance, the two permutations {[}2, 3, 4, 8, 6, 
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gtestb}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{gtestb}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -6266,7 +6280,7 @@ Using the \sphinxcode{\sphinxupquote{graphs.RandomTree}} class, we may, for inst
 \PYG{g+go}{ neato \PYGZhy{}Tpng tutRandomTree.dot \PYGZhy{}o tutRandomTree.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -6309,7 +6323,7 @@ It is as well possible to first, generate a random \sphinxstyleemphasis{Prüfer}
 \PYG{g+go}{ neato \PYGZhy{}Tpng tutPruefTree.dot \PYGZhy{}o tutPruefTree.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -6363,7 +6377,7 @@ The random graph of order 6 and edge probability 30\%, generated with seed 62, i
 \PYG{g+go}{fdp \PYGZhy{}Tpng test62.dot \PYGZhy{}o test62.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -6417,7 +6431,7 @@ Wilson’s algorithm \sphinxstyleemphasis{only} works for connected graphs %
 \PYG{g+go}{ neato \PYGZhy{}Tpng randomSpanningTree.dot \PYGZhy{}o randomSpanningTree.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -6444,7 +6458,7 @@ More general, and in case of a not connected graph, we may generate with the \sp
 \PYG{g+go}{ neato \PYGZhy{}Tpng spanningForest.dot \PYGZhy{}o spanningForest.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -6522,7 +6536,7 @@ The given graph is connected and, hence, admids a single spanning tree (see \hyp
 \PYG{g+go}{ neato \PYGZhy{}Tpng bestDeterminedSpanningTree.dot \PYGZhy{}o bestDeterminedSpanningTree.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -6536,6 +6550,8 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 \section{Bibliography}
 \label{\detokenize{tutorial:bibliography}}
+\endgroup
+
 \begin{sphinxthebibliography}{CPSTAT\sphinxhyphen{}L}
 \bibitem[CPSTAT\sphinxhyphen{}L5]{tutorial:cpstat-l5}
 Bisdorff R. (2017) \sphinxstyleemphasis{Simulating from abitrary empirical random distributions}. MICS Computational Statistics course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winter Semester 2017 (\sphinxhref{\_static/quantileEstimation-2x2.pdf}{PDF 2x2 reduced presentation slides 211kB downloadable here}).

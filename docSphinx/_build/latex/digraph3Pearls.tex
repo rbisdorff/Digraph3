@@ -4,7 +4,7 @@
 \ifdefined\pdfpxdimen
    \let\sphinxpxdimen\pdfpxdimen\else\newdimen\sphinxpxdimen
 \fi \sphinxpxdimen=.75bp\relax
-
+\PassOptionsToPackage{svgnames}{xcolor}
 \PassOptionsToPackage{warn}{textcomp}
 \usepackage[utf8]{inputenc}
 \ifdefined\DeclareUnicodeCharacter
@@ -91,6 +91,20 @@
 \sphinxtableofcontents
 \pagestyle{normal}
 \phantomsection\label{\detokenize{pearls::doc}}
+\begingroup
+\sphinxsetup{%
+      verbatimwithframe=false,
+      VerbatimColor={named}{OldLace},
+      hintBorderColor={named}{LightCoral},
+      attentionborder=3pt,
+      attentionBorderColor={named}{Crimson},
+      attentionBgColor={named}{FloralWhite},
+      noteborder=2pt,
+      noteBorderColor={named}{Olive},
+      cautionborder=3pt,
+      cautionBorderColor={named}{Cyan},
+      cautionBgColor={named}{LightCyan}}
+
 
 \begin{quote}\begin{description}
 \item[{Author}] \leavevmode
@@ -128,7 +142,7 @@ Let us take an example performance tableau from a Movie magazine’s evaluation 
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceTableau}\PYG{p}{(}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -147,7 +161,7 @@ A better approach is to rank the movies on the basis of pairwise bipolar\sphinxh
 \PYG{g+gp}{... }                             \PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -164,7 +178,7 @@ Let us explicitly construct the corresponding bipolar\sphinxhyphen{}valued outra
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLPairwiseOutrankings}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mv\PYGZus{}QS}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mv\PYGZus{}RR}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -184,7 +198,7 @@ heat map above (see \hyperref[\detokenize{pearls:graffiti07-2}]{Fig.\@ \ref{\det
 \PYG{g+gp}{... }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{rated at least as good as}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{ situations}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -204,7 +218,7 @@ Notice also the \sphinxstyleemphasis{indeterminate} situation we observe, for in
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLPairwiseComparison}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mv\PYGZus{}PE}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mv\PYGZus{}NP}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -462,7 +476,7 @@ It would be interesting to compare similarly the correlations one may obtain wit
 \label{\detokenize{pearls:illustrating-preference-divergences}}
 The valued relational equivalence index gives us a further measure for studying how \sphinxstylestrong{divergent} appear the rating opinions expressed by the movie critics.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{correlationTable}.png}
@@ -476,7 +490,7 @@ To get a picture of the actual \sphinxstyleemphasis{divergence of rating opinion
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{export3DplotOfCriteriaCorrelation}\PYG{p}{(}\PYG{n}{ValuedCorrelation}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -706,7 +720,7 @@ Let us compute the \sphinxstyleemphasis{initial} prekernel restricted adjacency 
 \PYG{g+gp}{... }     \PYG{n}{tableTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{K1 restricted adjacency table}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -755,7 +769,7 @@ Let us now compute the restricted adjacency table for the outranked, i.e. the \s
 \PYG{g+gp}{... }     \PYG{n}{tableTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{K2 restricted adjacency table}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -791,7 +805,7 @@ A unique stable bipolar\sphinxhyphen{}valued high and low fixpoint is attained a
 
 When we reconsider the graphviz drawing of this outranking digraph (see \sphinxcode{\sphinxupquote{bestWorstOrientation}} in the tutorial ‘\DUrole{xref,std,std-ref}{Kernel\sphinxhyphen{}Tutorial\sphinxhyphen{}label}’),
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -889,7 +903,7 @@ parameters \sphinxstyleemphasis{alpha} = 4 and \sphinxstyleemphasis{beta} = 4. T
 
 \end{enumerate}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -922,7 +936,7 @@ unclear whether, on criterion \sphinxstyleemphasis{j}, \sphinxstyleemphasis{x} i
 
 \end{description}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -955,7 +969,7 @@ If \sphinxstyleemphasis{w} = 1, \(E\big(\tilde{r}(x \geq y)\big)\, = \, 1\) and 
 
 A \sphinxstyleemphasis{Monte Carlo} simulation with 10 000 runs empirically confirms the effective convergence to a Gaussian (see \hyperref[\detokenize{pearls:simullikelihood}]{Fig.\@ \ref{\detokenize{pearls:simullikelihood}}} realised with \sphinxstyleemphasis{gretl} \sphinxcite{pearls:id21} ).
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -1089,7 +1103,7 @@ We may draw the corresponding strict 90\%\sphinxhyphen{}confident outranking dig
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng confidentOutranking.dot \PYGZhy{}o confidentOutranking.png}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -1784,7 +1798,7 @@ Despite being robust, the apparent positive outranking situation between alterna
 
 We may finally visually compare in \hyperref[\detokenize{pearls:robstdstrictog}]{Fig.\@ \ref{\detokenize{pearls:robstdstrictog}}} the standard and robust version of the corresponding strict outranking digraphs, both oriented by their respective identical initial and terminal prekernels.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -1799,7 +1813,7 @@ To appreciate the apparent orientation of the standard and robust strict outrank
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NetFlows}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centering
 \capstart
 
@@ -1811,6 +1825,11 @@ As the inital prekernel is here validated at stability level +2, recommending al
 For concluding, let us again mention that it is precisely our bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{logical characteristic framework} that provides us here with a \sphinxstylestrong{first order distributional dominance} test for effectively qualifying the stability level 2 \sphinxstyleemphasis{robustness} of an outranking digraph when facing performance tableaux with criteria of only ordinal\sphinxhyphen{}valued significances. A real world application of our stability analysis with such a kind of performance tableau may be consulted in \sphinxcite{pearls:bis-2015p}.
 
 Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}} (\autopageref*{\detokenize{pearls:pearls-label}})
+
+
+\section{Bibliograqphy}
+\label{\detokenize{pearls:bibliograqphy}}
+\endgroup
 
 \begin{sphinxthebibliography}{BIS\sphinxhyphen{}2006}
 \bibitem[BIS\sphinxhyphen{}2015p]{pearls:bis-2015p}

@@ -1,3 +1,19 @@
+.. raw:: latex
+
+   \begingroup
+   \sphinxsetup{%
+         verbatimwithframe=false,
+         VerbatimColor={named}{OldLace},
+         hintBorderColor={named}{LightCoral},
+         attentionborder=3pt,
+         attentionBorderColor={named}{Crimson},
+         attentionBgColor={named}{FloralWhite},
+         noteborder=2pt,
+         noteBorderColor={named}{Olive},
+         cautionborder=3pt,
+         cautionBorderColor={named}{Cyan},
+         cautionBgColor={named}{LightCyan}}
+
 ========================================
 Pearls of bipolar-valued epistemic logic
 ========================================
@@ -1475,9 +1491,8 @@ For concluding, let us again mention that it is precisely our bipolar-valued *lo
 
 Back to :ref:`Content Table <Pearls-label>`
 
-.. only:: html
-
-   **References**
+Bibliograqphy
+-------------
 	  
 .. [BIS-2015p] Bisdorff R. (2015). *The EURO 2004 Best Poster Award: Choosing the Best Poster in a Scientific Conference*. Chapter 5 in R. Bisdorff, L. Dias, P. Meyer, V. Mousseau, and M. Pirlot (Eds.), *Evaluation and Decision Models with Multiple Criteria: Case Studies*. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, DOI 10.1007/978-3-662-46816-6_1, pp. 117-166 (downloadable `PDF file 754.7 kB <http://hdl.handle.net/10993/23714>`_).
 	       
@@ -1501,6 +1516,11 @@ Back to :ref:`Content Table <Pearls-label>`
 
 .. [KEN-1938p] Kendall M.G. (1938), *A New Measure of Rank Correlation*. Biometrica 30:81–93
 
+.. only:: html
+
+    Footnotes
+    ---------
+	  
 .. [1p] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file *graffiti07.xml* (XMCDA-2.0 Format) in the *examples/Graffiti* directory of the Digraph3 ressources.       
 
 .. [2p] The 3D PCA plot method requires a running *R statistics software*  (https://www.r-project.org/) installation and the Calmat matrix calculator (see the calmat directory in the Digraph3 ressources)
@@ -1508,4 +1528,8 @@ Back to :ref:`Content Table <Pearls-label>`
 .. [3p] A *kernel* in a digraph *g* is a *clique* in the dual digraph *-g*.
 
 .. [4p] The Gnu Regression, Econometrics and Time-series Library http://gretl.sourceforge.net/ .
+
+.. raw:: latex
+
+   \endgroup
 

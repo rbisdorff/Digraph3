@@ -1,3 +1,19 @@
+.. raw:: latex
+
+   \begingroup
+   \sphinxsetup{%
+         verbatimwithframe=false,
+         VerbatimColor={named}{OldLace},
+         hintBorderColor={named}{LightCoral},
+         attentionborder=3pt,
+         attentionBorderColor={named}{Crimson},
+         attentionBgColor={named}{FloralWhite},
+         noteborder=2pt,
+         noteBorderColor={named}{Olive},
+         cautionborder=3pt,
+         cautionBorderColor={named}{Cyan},
+         cautionBgColor={named}{LightCyan}}
+
 ===================================
 Tutorials of the Digraph3 resources
 ===================================
@@ -5690,3 +5706,8 @@ Bibliography
 ..  LocalWords:  showHTMLPerformanceTableau disfavour Recoding
 ..  LocalWords:  recoded coduality PerformanceTableau quantile
 ..  LocalWords:  showHTMLPerformanceHeatmap randomCBHeatmap saveXMCDA
+
+.. raw:: latex
+
+   \endgroup
+

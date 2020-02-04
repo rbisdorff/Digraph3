@@ -188,6 +188,8 @@ latex_elements = {
 # 'papersize': 'letterpaper',
 'papersize': 'a4paper',
 
+'passoptionstopackages': r'\PassOptionsToPackage{svgnames}{xcolor}',
+
 # The font size ('10pt', '11pt' or '12pt').
 'pointsize': '10pt',
 
@@ -200,7 +202,8 @@ latex_elements = {
 ''',
 
 # Latex figure (float) alignment
-'figure_align': 'htbp',
+#'figure_align': 'htbp',
+'figure_align': 'H',
 }
 
 # Grouping the document tree into LaTeX files. List of tuples
