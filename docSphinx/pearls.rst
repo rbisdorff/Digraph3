@@ -1168,24 +1168,24 @@ Such a stability denotation of outranking situations is readily available with t
    :caption: Relation Table with Stability Denotation
    :name: stabDenot
 
-   >>> g.showRelationTable(hasStabilityDenotation=True)
+   >>> g.showRelationTable(StabilityDenotation=True)
    * ---- Relation Table -----
-   r()/(stab)  | 'a1'  'a2'  'a3'  'a4'  'a5'  'a6'  'a7'   
-   ------------|--------------------------------------------
-       'a1'    | +1.00 -0.42 +0.00 -0.69 +0.39 +0.11 -0.06  
-               |  (+4)  (-2)  (+0)  (-3)  (+2)  (+2)  (-1)  
-       'a2'    | +0.58 +1.00 +0.83  0.00 +0.58 +0.58 +0.58  
-               |  (+2)  (+4)  (+3)  (+2)  (+2)  (+2)  (+2)  
-       'a3'    | +0.25 -0.33 +1.00  0.00 +0.50 +1.00 +0.25  
-	       |  (+2)  (-2)  (+4)   (0)  (+2)  (+2)  (+1)  
-       'a4'    | +0.78  0.00 +0.61 +1.00 +1.00 +1.00 +0.67  
-	       |  (+3)  (-1)  (+3)  (+4)  (+4)  (+4)  (+2)  
-       'a5'    | -0.11 -0.50 -0.25 -0.89 +1.00 +0.11 -0.14  
-	       |  (-2)  (-2)  (-2)  (-3)  (+4)  (+2)  (-2)  
-       'a6'    | +0.22 -0.42  0.00 -1.00 +0.17 +1.00 -0.11  
-	       |  (+2)  (-2)  (+1)  (-2)  (+2)  (+4)  (-2)  
-       'a7'    | +0.22 -0.50 +0.17 -0.06 +0.78 +0.42 +1.00  
-	       |  (+2)  (-2)  (+1)  (-1)  (+3)  (+2)  (+4)  
+   r/(stab)  |  'a1'  'a2'  'a3'  'a4'  'a5'  'a6'  'a7'   
+   ----------|------------------------------------------
+     'a1'    | +1.00 -0.42 +0.00 -0.69 +0.39 +0.11 -0.06  
+             |  (+4)  (-2)  (+0)  (-3)  (+2)  (+2)  (-1)  
+     'a2'    | +0.58 +1.00 +0.83  0.00 +0.58 +0.58 +0.58  
+             |  (+2)  (+4)  (+3)  (+2)  (+2)  (+2)  (+2)  
+     'a3'    | +0.25 -0.33 +1.00  0.00 +0.50 +1.00 +0.25  
+             |  (+2)  (-2)  (+4)   (0)  (+2)  (+2)  (+1)  
+     'a4'    | +0.78  0.00 +0.61 +1.00 +1.00 +1.00 +0.67  
+             |  (+3)  (-1)  (+3)  (+4)  (+4)  (+4)  (+2)  
+     'a5'    | -0.11 -0.50 -0.25 -0.89 +1.00 +0.11 -0.14  
+             |  (-2)  (-2)  (-2)  (-3)  (+4)  (+2)  (-2)  
+     'a6'    | +0.22 -0.42  0.00 -1.00 +0.17 +1.00 -0.11
+             |  (+2)  (-2)  (+1)  (-2)  (+2)  (+4)  (-2)  
+     'a7'    | +0.22 -0.50 +0.17 -0.06 +0.78 +0.42 +1.00  
+             |  (+2)  (-2)  (+1)  (-1)  (+3)  (+2)  (+4)  
 
 
 We may thus distinguish the following bipolar-valued stability levels:
@@ -1415,7 +1415,7 @@ The corresponding robust bipolar-valued outranking digraph may be computed with 
 			   'ordinalRelation', 'equisignificantRelation',
 			   'unanimousRelation', 'relation',
 			   'gamma', 'notGamma']
-   >>> rg.showRelationTable(hasStabilityDenotation=True)
+   >>> rg.showRelationTable(StabilityDenotation=True)
     * ---- Relation Table -----
     r/(stab) |  'a1'   'a2'   'a3'   'a4'   'a5'   'a6'   'a7'   
     ---------|------------------------------------------------------------

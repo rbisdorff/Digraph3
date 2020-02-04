@@ -1799,7 +1799,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                           actionsSubset= None,
                           Sorted=True,
                           hasLPDDenotation=False,
-                          hasStabilityDenotation=False,
+                          StabilityDenotation=False,
                           hasLatexFormat=False,
                           hasIntegerValuation=False,
                           relation=None,
@@ -1814,8 +1814,12 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 gnv.recodeValuation(self.valuationdomain['min'],self.valuationdomain['max'])
             except:
                 hasLPDDenotation = False
-        if hasStabilityDenotation:
-            nrg = RobustOutrankingDigraph(self)
+        if StabilityDenotation:
+            try:
+                stability = self.stability
+            except AttributeError:
+                robustg = RobustOutrankingDigraph(self)
+                stability = robustg.stability
             #except:
             #    hasStabilityDenotation = False
             
@@ -1828,7 +1832,12 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             relation = self.relation
             
         print('* ---- Relation Table -----\n', end=' ')
-        print(' S/()  | ', end=' ')
+        if StabilityDenotation:
+            print('r/(stab)| ', end=' ')
+        elif hasLPDDenotation:
+            print('r/(lh)| ', end=' ')
+        else:
+            print('  r   | ', end=' ')
         #actions = [x for x in actions]
         actionsList = []
         for x in actions:
@@ -1902,13 +1911,13 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     print('(%+d,%+d)' % (largePerformanceDifferencesCount[x[1]][y[1]]['positive'],\
                                           largePerformanceDifferencesCount[x[1]][y[1]]['negative']), end=' ')
                 print()
-            elif hasStabilityDenotation:
+            elif StabilityDenotation:
                 print("     | ", end=' ')
                 for y in actionsList:
-                    if x == y and hasStabilityDenotation:
+                    if x == y and StabilityDenotation:
                         print(' (+4) ', end=' ')
                     else:
-                        print(' (%+d) ' % int(nrg.stability[x[1]][y[1]]), end=' ')
+                        print(' (%+d) ' % stability[x[1]][y[1]], end=' ')
                 print()
             
                 
@@ -7670,11 +7679,91 @@ class UnanimousOutrankingDigraph(OutrankingDigraph):
 
 class RobustOutrankingDigraph(BipolarOutrankingDigraph):
     """
-    Parameters:
-        performanceTableau (fileName of valid py code)
+    *Parameters*:
+        performanceTableau (fileName or valid py code)
 
     Specialization of the general OutrankingDigraph class for 
-    new robustness analysis distinguishing between four nested stability levels.
+    new robustness analysis distinguishing between three nested stability levels:
+    
+        * +4 (resp. -4) : unanimous outranking (resp. outranked;
+        * +3 (resp. -3) : majority outranking (resp. outranked) situation
+          in all coalitions of equi-ignificant citeria;
+        * +2 (resp. -2) : validated outranking (resp. outranked) situation
+          with all potential weights compatible with the criteria significance preorder;
+        * +1 (resp. -1) : validated outranking (resp. outranked) situation with
+          the given criteria significances;
+        * 0 : indeterminate preferential situation-
+
+    *Sematics*:
+    
+        * alternative *x* robustly outranks alternative *y* when the
+          outranking situation is qualified greater or equal to level +2
+          and there is no considerable counter-performance
+          observed on a discordant criteria;
+        * alternative *x* robustly does not outrank alternative *y* when the
+          outranking situation is qualified lower or equal to level -2
+          and there is no considerable performance
+          observed on a discordant criteria.
+
+    *Usage example*:
+
+    >>> from outrankingDigraphs import *
+    >>> t = RandomPerformanceTableau(numberOfActions=7,weightDistribution='random',seed=100)
+    >>> t.showPerformanceTableau()
+     *----  performance tableau -----*
+     Criteria |  'g1'    'g2'    'g3'    'g4'    'g5'    'g6'    'g7'   
+     Actions  |    4       6       2       7       4       4       2    
+     ---------|-------------------------------------------------------
+       'a1'   | 44.51   43.90   19.10   16.22   14.81   45.49   41.66  
+       'a2'   |   NA    38.75   27.73   21.53   79.70   22.03   12.82  
+       'a3'   | 58.00   35.84   41.46   51.16   67.48   33.83   21.92  
+       'a4'   | 24.22   29.12   22.41     NA    13.97   31.83   75.74  
+       'a5'   | 29.10   34.79   21.52   39.35     NA    69.98   15.45  
+       'a6'   | 96.58   62.22   56.90   32.06   80.16   48.80    6.05  
+       'a7'   | 82.29   44.23   46.37   47.67   69.62   82.88    9.96  
+    >>> t.showWeightPreorder()
+     *------- weights preordering --------*
+     ['g3', 'g7'] (2) <
+     ['g1', 'g5', 'g6'] (4) <
+     ['g2'] (6) <
+     ['g4'] (7)
+    >>> g = RobustOutrankingDigraph(t)
+    >>> g
+     *------- Object instance description ------*
+     Instance class      : RobustOutrankingDigraph
+     Instance name       : robust_randomperftab
+     # Actions           : 7
+     # Criteria          : 7
+     Size                : 19
+     Determinateness (%) : 67.53
+     Valuation domain    : [-1.00;1.00]
+     Attributes          : ['name', 'methodData', 'actions',
+                            'order', 'criteria', 'evaluation',
+                            'vetos', 'valuationdomain', 'relation',
+                            'concordanceRelation',
+                            'largePerformanceDifferencesCount',
+                            'ordinalRelation', 'equisignificantRelation',
+                            'unanimousRelation', 'stability',
+                            'gamma', 'notGamma']
+    >>> g.showRelationTable(StabilityDenotation=True)
+     * ---- Relation Table -----
+     r/(stab) |  'a1'   'a2'   'a3'   'a4'   'a5'   'a6'   'a7'   
+     ---------|------------------------------------------------------------
+       'a1'   |    +1.00  -0.03  -0.17  +0.55  +0.00  -0.72  -0.45  
+              |   (+4)   (-2)   (-2)   (+2)   (+1)   (-2)   (-2)  
+       'a2'   |   +0.03   +1.00  -0.17  +0.21  -0.10  -0.45  -0.45  
+              |   (+2)   (+4)   (-2)   (+2)   (-2)   (-2)   (-2)  
+       'a3'   |   +0.17  +0.38   +1.00  +0.62  +0.59  +0.00  +0.00  
+              |   (+2)   (+2)   (+4)   (+2)   (+2)   (-1)   (-1)  
+       'a4'   |   -0.21  -0.21  -0.34   +1.00  -0.21  -0.62  -0.62  
+              |   (-2)   (-2)   (-2)   (+4)   (-2)   (-2)   (-2)  
+       'a5'   |   +0.03  +0.38  -0.17  +0.48   +1.00  +0.03  -0.72  
+              |   (+2)   (+2)   (-2)   (+2)   (+4)   (+2)   (-2)  
+       'a6'   |   +0.86  +0.72  +0.00  +0.62  -0.03   +1.00  +0.00  
+              |   (+2)   (+2)   (+1)   (+2)   (-2)   (+4)   (+1)  
+       'a7'   |   +0.86  +0.52  +0.62  +0.62  +0.72  +0.00   +1.00  
+              |   (+2)   (+2)   (+2)   (+2)   (+2)   (-1)   (+4)  
+    
     """
     def __init__(self, filePerfTab = None,Debug=False,hasNoVeto=True):
         
@@ -9628,9 +9717,9 @@ if __name__ == "__main__":
                                    seed=102)
     g = BipolarOutrankingDigraph(t,Normalized=True,
                                   tempDir=None,nbrCores=8,Comments=True,Debug=False)
-    g.showRelationTable(hasStabilityDenotation=True)
+    g.showRelationTable(StabilityDenotation=True)
     rg = RobustOutrankingDigraph(t,Debug=False)
-    rg.showRelationTable(hasStabilityDenotation=True)
+    rg.showRelationTable(StabilityDenotation=True)
     cg = ConfidentBipolarOutrankingDigraph(t)
     cg.showRelationTable()
     

@@ -66,6 +66,7 @@
 <li><p><a class="reference internal" href="#bipolar-valued-kernel-membership-characteristic-vectors" id="id28">Bipolar-valued kernel membership characteristic vectors</a></p></li>
 <li><p><a class="reference internal" href="#on-confident-outrankings-with-uncertain-criteria-significances" id="id29">On confident outrankings with uncertain criteria significances</a></p></li>
 <li><p><a class="reference internal" href="#robustness-analysis-of-bipolar-valued-outranking-digraphs" id="id30">Robustness analysis of bipolar-valued outranking digraphs</a></p></li>
+<li><p><a class="reference internal" href="#bibliograqphy" id="id31">Bibliograqphy</a></p></li>
 </ul>
 </div>
 <p>In this part of the Digraph3 documentation, we provide an insight in computational enhancements one may get when working in a <em>bipolar-valued epistemic logical framework</em>, like easily coping with <em>missing data</em> and uncertain criterion <em>significance weights</em>, computing valued <em>ordinal correlations</em> between bipolar-valued outranking digraphs, solving bipolar-valued Berge kernel equation systems, and testing for stability of outranking statements when facing only ordinal criteria significance weights.</p>
@@ -1427,24 +1428,24 @@ confidence level <em>alpha</em> %, if</p>
 15
 16
 17
-18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">hasStabilityDenotation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">StabilityDenotation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">* ---- Relation Table -----</span>
-<span class="go">r()/(stab)  | &#39;a1&#39;  &#39;a2&#39;  &#39;a3&#39;  &#39;a4&#39;  &#39;a5&#39;  &#39;a6&#39;  &#39;a7&#39;</span>
-<span class="go">------------|--------------------------------------------</span>
-<span class="go">    &#39;a1&#39;    | +1.00 -0.42 +0.00 -0.69 +0.39 +0.11 -0.06</span>
-<span class="go">            |  (+4)  (-2)  (+0)  (-3)  (+2)  (+2)  (-1)</span>
-<span class="go">    &#39;a2&#39;    | +0.58 +1.00 +0.83  0.00 +0.58 +0.58 +0.58</span>
-<span class="go">            |  (+2)  (+4)  (+3)  (+2)  (+2)  (+2)  (+2)</span>
-<span class="go">    &#39;a3&#39;    | +0.25 -0.33 +1.00  0.00 +0.50 +1.00 +0.25</span>
-<span class="go">            |  (+2)  (-2)  (+4)   (0)  (+2)  (+2)  (+1)</span>
-<span class="go">    &#39;a4&#39;    | +0.78  0.00 +0.61 +1.00 +1.00 +1.00 +0.67</span>
-<span class="go">            |  (+3)  (-1)  (+3)  (+4)  (+4)  (+4)  (+2)</span>
-<span class="go">    &#39;a5&#39;    | -0.11 -0.50 -0.25 -0.89 +1.00 +0.11 -0.14</span>
-<span class="go">            |  (-2)  (-2)  (-2)  (-3)  (+4)  (+2)  (-2)</span>
-<span class="go">    &#39;a6&#39;    | +0.22 -0.42  0.00 -1.00 +0.17 +1.00 -0.11</span>
-<span class="go">            |  (+2)  (-2)  (+1)  (-2)  (+2)  (+4)  (-2)</span>
-<span class="go">    &#39;a7&#39;    | +0.22 -0.50 +0.17 -0.06 +0.78 +0.42 +1.00</span>
-<span class="go">            |  (+2)  (-2)  (+1)  (-1)  (+3)  (+2)  (+4)</span>
+<span class="go">r/(stab)  |  &#39;a1&#39;  &#39;a2&#39;  &#39;a3&#39;  &#39;a4&#39;  &#39;a5&#39;  &#39;a6&#39;  &#39;a7&#39;</span>
+<span class="go">----------|------------------------------------------</span>
+<span class="go">  &#39;a1&#39;    | +1.00 -0.42 +0.00 -0.69 +0.39 +0.11 -0.06</span>
+<span class="go">          |  (+4)  (-2)  (+0)  (-3)  (+2)  (+2)  (-1)</span>
+<span class="go">  &#39;a2&#39;    | +0.58 +1.00 +0.83  0.00 +0.58 +0.58 +0.58</span>
+<span class="go">          |  (+2)  (+4)  (+3)  (+2)  (+2)  (+2)  (+2)</span>
+<span class="go">  &#39;a3&#39;    | +0.25 -0.33 +1.00  0.00 +0.50 +1.00 +0.25</span>
+<span class="go">          |  (+2)  (-2)  (+4)   (0)  (+2)  (+2)  (+1)</span>
+<span class="go">  &#39;a4&#39;    | +0.78  0.00 +0.61 +1.00 +1.00 +1.00 +0.67</span>
+<span class="go">          |  (+3)  (-1)  (+3)  (+4)  (+4)  (+4)  (+2)</span>
+<span class="go">  &#39;a5&#39;    | -0.11 -0.50 -0.25 -0.89 +1.00 +0.11 -0.14</span>
+<span class="go">          |  (-2)  (-2)  (-2)  (-3)  (+4)  (+2)  (-2)</span>
+<span class="go">  &#39;a6&#39;    | +0.22 -0.42  0.00 -1.00 +0.17 +1.00 -0.11</span>
+<span class="go">          |  (+2)  (-2)  (+1)  (-2)  (+2)  (+4)  (-2)</span>
+<span class="go">  &#39;a7&#39;    | +0.22 -0.50 +0.17 -0.06 +0.78 +0.42 +1.00</span>
+<span class="go">          |  (+2)  (-2)  (+1)  (-1)  (+3)  (+2)  (+4)</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -1915,7 +1916,7 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">                        &#39;ordinalRelation&#39;, &#39;equisignificantRelation&#39;,</span>
 <span class="go">                        &#39;unanimousRelation&#39;, &#39;relation&#39;,</span>
 <span class="go">                        &#39;gamma&#39;, &#39;notGamma&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">hasStabilityDenotation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">StabilityDenotation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> * ---- Relation Table -----</span>
 <span class="go"> r/(stab) |  &#39;a1&#39;   &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;   &#39;a5&#39;   &#39;a6&#39;   &#39;a7&#39;</span>
 <span class="go"> ---------|------------------------------------------------------------</span>
@@ -1990,7 +1991,10 @@ confidence level <em>alpha</em> %, if</p>
 <p>As the inital prekernel is here validated at stability level +2, recommending alternatives <em>a4</em>, as well as <em>a2</em>, as potential best choices, appears well justified. Alternative <em>a4</em> represents indeed an overall <em>best compromise choice</em> between all decision objectives, whereas alternative <em>a2</em> gives an unanimous best choice with respect to two out of three decision objectives. Up to the decision maker to make his final choice.</p>
 <p>For concluding, let us again mention that it is precisely our bipolar-valued <em>logical characteristic framework</em> that provides us here with a <strong>first order distributional dominance</strong> test for effectively qualifying the stability level 2 <em>robustness</em> of an outranking digraph when facing performance tableaux with criteria of only ordinal-valued significances. A real world application of our stability analysis with such a kind of performance tableau may be consulted in <a class="reference internal" href="#bis-2015p" id="id18"><span>[BIS-2015p]</span></a>.</p>
 <p>Back to <a class="reference internal" href="#pearls-label"><span class="std std-ref">Content Table</span></a></p>
-<p><strong>References</strong></p>
+</div>
+</div>
+<div class="section" id="bibliograqphy">
+<h2><a class="toc-backref" href="#id31">Bibliograqphy</a><a class="headerlink" href="#bibliograqphy" title="Permalink to this headline">¶</a></h2>
 <dl class="citation">
 <dt class="label" id="bis-2015p"><span class="brackets"><a class="fn-backref" href="#id18">BIS-2015p</a></span></dt>
 <dd><p>Bisdorff R. (2015). <em>The EURO 2004 Best Poster Award: Choosing the Best Poster in a Scientific Conference</em>. Chapter 5 in R. Bisdorff, L. Dias, P. Meyer, V. Mousseau, and M. Pirlot (Eds.), <em>Evaluation and Decision Models with Multiple Criteria: Case Studies</em>. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, DOI 10.1007/978-3-662-46816-6_1, pp. 117-166 (downloadable <a class="reference external" href="http://hdl.handle.net/10993/23714">PDF file 754.7 kB</a>).</p>
@@ -2039,6 +2043,8 @@ confidence level <em>alpha</em> %, if</p>
 </dd>
 </dl>
 </div>
+<div class="section" id="footnotes">
+<h2>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -2079,6 +2085,8 @@ confidence level <em>alpha</em> %, if</p>
 <li><a class="reference internal" href="#robust-bipolar-valued-outranking-digraphs">Robust bipolar-valued outranking digraphs</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#bibliograqphy">Bibliograqphy</a></li>
+<li><a class="reference internal" href="#footnotes">Footnotes</a></li>
 </ul>
 </li>
 </ul>

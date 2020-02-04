@@ -5902,7 +5902,7 @@ in html format</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.showRelationTable">
-<code class="sig-name descname">showRelationTable</code><span class="sig-paren">(</span><em class="sig-param">IntegerValues=False</em>, <em class="sig-param">actionsSubset=None</em>, <em class="sig-param">Sorted=True</em>, <em class="sig-param">hasLPDDenotation=False</em>, <em class="sig-param">hasStabilityDenotation=False</em>, <em class="sig-param">hasLatexFormat=False</em>, <em class="sig-param">hasIntegerValuation=False</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">ReflexiveTerms=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.showRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showRelationTable</code><span class="sig-paren">(</span><em class="sig-param">IntegerValues=False</em>, <em class="sig-param">actionsSubset=None</em>, <em class="sig-param">Sorted=True</em>, <em class="sig-param">hasLPDDenotation=False</em>, <em class="sig-param">StabilityDenotation=False</em>, <em class="sig-param">hasLatexFormat=False</em>, <em class="sig-param">hasIntegerValuation=False</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">ReflexiveTerms=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.showRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>prints the relation valuation in actions X actions table format.</p>
 </dd></dl>
 
@@ -5963,11 +5963,95 @@ Digraphs from random performance tableaux.</p>
 <dt id="outrankingDigraphs.RobustOutrankingDigraph">
 <em class="property">class </em><code class="sig-prename descclassname">outrankingDigraphs.</code><code class="sig-name descname">RobustOutrankingDigraph</code><span class="sig-paren">(</span><em class="sig-param">filePerfTab=None</em>, <em class="sig-param">Debug=False</em>, <em class="sig-param">hasNoVeto=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#RobustOutrankingDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.RobustOutrankingDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
-<dt>Parameters:</dt><dd><p>performanceTableau (fileName of valid py code)</p>
+<dt><em>Parameters</em>:</dt><dd><p>performanceTableau (fileName or valid py code)</p>
 </dd>
 </dl>
 <p>Specialization of the general OutrankingDigraph class for 
-new robustness analysis distinguishing between four nested stability levels.</p>
+new robustness analysis distinguishing between three nested stability levels:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>+4 (resp. -4) : unanimous outranking (resp. outranked;</p></li>
+<li><p>+3 (resp. -3) : majority outranking (resp. outranked) situation
+in all coalitions of equi-ignificant citeria;</p></li>
+<li><p>+2 (resp. -2) : validated outranking (resp. outranked) situation
+with all potential weights compatible with the criteria significance preorder;</p></li>
+<li><p>+1 (resp. -1) : validated outranking (resp. outranked) situation with
+the given criteria significances;</p></li>
+<li><p>0 : indeterminate preferential situation-</p></li>
+</ul>
+</div></blockquote>
+<p><em>Sematics</em>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>alternative <em>x</em> robustly outranks alternative <em>y</em> when the
+outranking situation is qualified greater or equal to level +2
+and there is no considerable counter-performance
+observed on a discordant criteria;</p></li>
+<li><p>alternative <em>x</em> robustly does not outrank alternative <em>y</em> when the
+outranking situation is qualified lower or equal to level -2
+and there is no considerable performance
+observed on a discordant criteria.</p></li>
+</ul>
+</div></blockquote>
+<p><em>Usage example</em>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
+<span class="go"> *----  performance tableau -----*</span>
+<span class="go"> Criteria |  &#39;g1&#39;    &#39;g2&#39;    &#39;g3&#39;    &#39;g4&#39;    &#39;g5&#39;    &#39;g6&#39;    &#39;g7&#39;   </span>
+<span class="go"> Actions  |    4       6       2       7       4       4       2    </span>
+<span class="go"> ---------|-------------------------------------------------------</span>
+<span class="go">   &#39;a1&#39;   | 44.51   43.90   19.10   16.22   14.81   45.49   41.66  </span>
+<span class="go">   &#39;a2&#39;   |   NA    38.75   27.73   21.53   79.70   22.03   12.82  </span>
+<span class="go">   &#39;a3&#39;   | 58.00   35.84   41.46   51.16   67.48   33.83   21.92  </span>
+<span class="go">   &#39;a4&#39;   | 24.22   29.12   22.41     NA    13.97   31.83   75.74  </span>
+<span class="go">   &#39;a5&#39;   | 29.10   34.79   21.52   39.35     NA    69.98   15.45  </span>
+<span class="go">   &#39;a6&#39;   | 96.58   62.22   56.90   32.06   80.16   48.80    6.05  </span>
+<span class="go">   &#39;a7&#39;   | 82.29   44.23   46.37   47.67   69.62   82.88    9.96  </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showWeightPreorder</span><span class="p">()</span>
+<span class="go"> *------- weights preordering --------*</span>
+<span class="go"> [&#39;g3&#39;, &#39;g7&#39;] (2) &lt;</span>
+<span class="go"> [&#39;g1&#39;, &#39;g5&#39;, &#39;g6&#39;] (4) &lt;</span>
+<span class="go"> [&#39;g2&#39;] (6) &lt;</span>
+<span class="go"> [&#39;g4&#39;] (7)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
+<span class="go"> *------- Object instance description ------*</span>
+<span class="go"> Instance class      : RobustOutrankingDigraph</span>
+<span class="go"> Instance name       : robust_randomperftab</span>
+<span class="go"> # Actions           : 7</span>
+<span class="go"> # Criteria          : 7</span>
+<span class="go"> Size                : 19</span>
+<span class="go"> Determinateness (%) : 67.53</span>
+<span class="go"> Valuation domain    : [-1.00;1.00]</span>
+<span class="go"> Attributes          : [&#39;name&#39;, &#39;methodData&#39;, &#39;actions&#39;,</span>
+<span class="go">                        &#39;order&#39;, &#39;criteria&#39;, &#39;evaluation&#39;,</span>
+<span class="go">                        &#39;vetos&#39;, &#39;valuationdomain&#39;, &#39;relation&#39;,</span>
+<span class="go">                        &#39;concordanceRelation&#39;,</span>
+<span class="go">                        &#39;largePerformanceDifferencesCount&#39;,</span>
+<span class="go">                        &#39;ordinalRelation&#39;, &#39;equisignificantRelation&#39;,</span>
+<span class="go">                        &#39;unanimousRelation&#39;, &#39;stability&#39;,</span>
+<span class="go">                        &#39;gamma&#39;, &#39;notGamma&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">StabilityDenotation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go"> * ---- Relation Table -----</span>
+<span class="go"> r/(stab) |  &#39;a1&#39;   &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;   &#39;a5&#39;   &#39;a6&#39;   &#39;a7&#39;   </span>
+<span class="go"> ---------|------------------------------------------------------------</span>
+<span class="go">   &#39;a1&#39;   |    +1.00  -0.03  -0.17  +0.55  +0.00  -0.72  -0.45  </span>
+<span class="go">          |   (+4)   (-2)   (-2)   (+2)   (+1)   (-2)   (-2)  </span>
+<span class="go">   &#39;a2&#39;   |   +0.03   +1.00  -0.17  +0.21  -0.10  -0.45  -0.45  </span>
+<span class="go">          |   (+2)   (+4)   (-2)   (+2)   (-2)   (-2)   (-2)  </span>
+<span class="go">   &#39;a3&#39;   |   +0.17  +0.38   +1.00  +0.62  +0.59  +0.00  +0.00  </span>
+<span class="go">          |   (+2)   (+2)   (+4)   (+2)   (+2)   (-1)   (-1)  </span>
+<span class="go">   &#39;a4&#39;   |   -0.21  -0.21  -0.34   +1.00  -0.21  -0.62  -0.62  </span>
+<span class="go">          |   (-2)   (-2)   (-2)   (+4)   (-2)   (-2)   (-2)  </span>
+<span class="go">   &#39;a5&#39;   |   +0.03  +0.38  -0.17  +0.48   +1.00  +0.03  -0.72  </span>
+<span class="go">          |   (+2)   (+2)   (-2)   (+2)   (+4)   (+2)   (-2)  </span>
+<span class="go">   &#39;a6&#39;   |   +0.86  +0.72  +0.00  +0.62  -0.03   +1.00  +0.00  </span>
+<span class="go">          |   (+2)   (+2)   (+1)   (+2)   (-2)   (+4)   (+1)  </span>
+<span class="go">   &#39;a7&#39;   |   +0.86  +0.52  +0.62  +0.62  +0.72  +0.00   +1.00  </span>
+<span class="go">          |   (+2)   (+2)   (+2)   (+2)   (+2)   (-1)   (+4)  </span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="class">

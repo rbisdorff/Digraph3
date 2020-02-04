@@ -1266,24 +1266,24 @@ Such a stability denotation of outranking situations is readily available with t
 \sphinxSetupCaptionForVerbatim{Relation Table with Stability Denotation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:stabdenot}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{hasStabilityDenotation}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{StabilityDenotation}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{* \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{r()/(stab)  | \PYGZsq{}a1\PYGZsq{}  \PYGZsq{}a2\PYGZsq{}  \PYGZsq{}a3\PYGZsq{}  \PYGZsq{}a4\PYGZsq{}  \PYGZsq{}a5\PYGZsq{}  \PYGZsq{}a6\PYGZsq{}  \PYGZsq{}a7\PYGZsq{}}
-\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{    \PYGZsq{}a1\PYGZsq{}    | +1.00 \PYGZhy{}0.42 +0.00 \PYGZhy{}0.69 +0.39 +0.11 \PYGZhy{}0.06}
-\PYG{g+go}{            |  (+4)  (\PYGZhy{}2)  (+0)  (\PYGZhy{}3)  (+2)  (+2)  (\PYGZhy{}1)}
-\PYG{g+go}{    \PYGZsq{}a2\PYGZsq{}    | +0.58 +1.00 +0.83  0.00 +0.58 +0.58 +0.58}
-\PYG{g+go}{            |  (+2)  (+4)  (+3)  (+2)  (+2)  (+2)  (+2)}
-\PYG{g+go}{    \PYGZsq{}a3\PYGZsq{}    | +0.25 \PYGZhy{}0.33 +1.00  0.00 +0.50 +1.00 +0.25}
-\PYG{g+go}{            |  (+2)  (\PYGZhy{}2)  (+4)   (0)  (+2)  (+2)  (+1)}
-\PYG{g+go}{    \PYGZsq{}a4\PYGZsq{}    | +0.78  0.00 +0.61 +1.00 +1.00 +1.00 +0.67}
-\PYG{g+go}{            |  (+3)  (\PYGZhy{}1)  (+3)  (+4)  (+4)  (+4)  (+2)}
-\PYG{g+go}{    \PYGZsq{}a5\PYGZsq{}    | \PYGZhy{}0.11 \PYGZhy{}0.50 \PYGZhy{}0.25 \PYGZhy{}0.89 +1.00 +0.11 \PYGZhy{}0.14}
-\PYG{g+go}{            |  (\PYGZhy{}2)  (\PYGZhy{}2)  (\PYGZhy{}2)  (\PYGZhy{}3)  (+4)  (+2)  (\PYGZhy{}2)}
-\PYG{g+go}{    \PYGZsq{}a6\PYGZsq{}    | +0.22 \PYGZhy{}0.42  0.00 \PYGZhy{}1.00 +0.17 +1.00 \PYGZhy{}0.11}
-\PYG{g+go}{            |  (+2)  (\PYGZhy{}2)  (+1)  (\PYGZhy{}2)  (+2)  (+4)  (\PYGZhy{}2)}
-\PYG{g+go}{    \PYGZsq{}a7\PYGZsq{}    | +0.22 \PYGZhy{}0.50 +0.17 \PYGZhy{}0.06 +0.78 +0.42 +1.00}
-\PYG{g+go}{            |  (+2)  (\PYGZhy{}2)  (+1)  (\PYGZhy{}1)  (+3)  (+2)  (+4)}
+\PYG{g+go}{r/(stab)  |  \PYGZsq{}a1\PYGZsq{}  \PYGZsq{}a2\PYGZsq{}  \PYGZsq{}a3\PYGZsq{}  \PYGZsq{}a4\PYGZsq{}  \PYGZsq{}a5\PYGZsq{}  \PYGZsq{}a6\PYGZsq{}  \PYGZsq{}a7\PYGZsq{}}
+\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{  \PYGZsq{}a1\PYGZsq{}    | +1.00 \PYGZhy{}0.42 +0.00 \PYGZhy{}0.69 +0.39 +0.11 \PYGZhy{}0.06}
+\PYG{g+go}{          |  (+4)  (\PYGZhy{}2)  (+0)  (\PYGZhy{}3)  (+2)  (+2)  (\PYGZhy{}1)}
+\PYG{g+go}{  \PYGZsq{}a2\PYGZsq{}    | +0.58 +1.00 +0.83  0.00 +0.58 +0.58 +0.58}
+\PYG{g+go}{          |  (+2)  (+4)  (+3)  (+2)  (+2)  (+2)  (+2)}
+\PYG{g+go}{  \PYGZsq{}a3\PYGZsq{}    | +0.25 \PYGZhy{}0.33 +1.00  0.00 +0.50 +1.00 +0.25}
+\PYG{g+go}{          |  (+2)  (\PYGZhy{}2)  (+4)   (0)  (+2)  (+2)  (+1)}
+\PYG{g+go}{  \PYGZsq{}a4\PYGZsq{}    | +0.78  0.00 +0.61 +1.00 +1.00 +1.00 +0.67}
+\PYG{g+go}{          |  (+3)  (\PYGZhy{}1)  (+3)  (+4)  (+4)  (+4)  (+2)}
+\PYG{g+go}{  \PYGZsq{}a5\PYGZsq{}    | \PYGZhy{}0.11 \PYGZhy{}0.50 \PYGZhy{}0.25 \PYGZhy{}0.89 +1.00 +0.11 \PYGZhy{}0.14}
+\PYG{g+go}{          |  (\PYGZhy{}2)  (\PYGZhy{}2)  (\PYGZhy{}2)  (\PYGZhy{}3)  (+4)  (+2)  (\PYGZhy{}2)}
+\PYG{g+go}{  \PYGZsq{}a6\PYGZsq{}    | +0.22 \PYGZhy{}0.42  0.00 \PYGZhy{}1.00 +0.17 +1.00 \PYGZhy{}0.11}
+\PYG{g+go}{          |  (+2)  (\PYGZhy{}2)  (+1)  (\PYGZhy{}2)  (+2)  (+4)  (\PYGZhy{}2)}
+\PYG{g+go}{  \PYGZsq{}a7\PYGZsq{}    | +0.22 \PYGZhy{}0.50 +0.17 \PYGZhy{}0.06 +0.78 +0.42 +1.00}
+\PYG{g+go}{          |  (+2)  (\PYGZhy{}2)  (+1)  (\PYGZhy{}1)  (+3)  (+2)  (+4)}
 \end{sphinxVerbatim}
 \begin{description}
 \item[{We may thus distinguish the following bipolar\sphinxhyphen{}valued stability levels:}] \leavevmode\begin{itemize}
@@ -1751,7 +1751,7 @@ The corresponding robust bipolar\sphinxhyphen{}valued outranking digraph may be 
 \PYG{g+go}{                        \PYGZsq{}ordinalRelation\PYGZsq{}, \PYGZsq{}equisignificantRelation\PYGZsq{},}
 \PYG{g+go}{                        \PYGZsq{}unanimousRelation\PYGZsq{}, \PYGZsq{}relation\PYGZsq{},}
 \PYG{g+go}{                        \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{hasStabilityDenotation}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{StabilityDenotation}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{ r/(stab) |  \PYGZsq{}a1\PYGZsq{}   \PYGZsq{}a2\PYGZsq{}   \PYGZsq{}a3\PYGZsq{}   \PYGZsq{}a4\PYGZsq{}   \PYGZsq{}a5\PYGZsq{}   \PYGZsq{}a6\PYGZsq{}   \PYGZsq{}a7\PYGZsq{}}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
