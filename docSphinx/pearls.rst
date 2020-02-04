@@ -11,7 +11,7 @@ Pearls of bipolar-valued epistemic logic
 .. only:: html
 	    
    .. contents::
-      :depth: 2
+      :depth: 1
       :local:
 
 .. highlight:: python
@@ -375,22 +375,26 @@ Illustrating preference divergences
 
 The valued relational equivalence index gives us a further measure for studying how **divergent** appear the rating opinions expressed by the movie critics.
 
-.. image:: correlationTable.png
-   :alt: Pairwise valued correlation of movie critics 
+.. Figure:: correlationTable.png
+   :alt: Pairwise valued correlation of movie critics
+   :name: correlationTable
    :width: 600 px
    :align: center
 
-It is remarkable that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes *r(x<=>y)* appear to be of low value, except the *diagonal* ones. These reflexive indexes *r(x<=>x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. the *proportion* of pairs of movies each critic did evaluate. Critic *JPT* (the editor of the Graffiti magazine), for instance, evaluated all but one (*d* = 24*23/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion (*d* = 10*9/600 = 0.15).
+It is remarkable to notice in the criteria correlation matrix (see :numref:`correlationTable`) that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes *r(x<=>y)* appear to be of low value, except the *diagonal* ones. These reflexive indexes *r(x<=>x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. the *proportion* of pairs of movies each critic did evaluate. Critic *JPT* (the editor of the Graffiti magazine), for instance, evaluated all but one (*d* = 24*23/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion (*d* = 10*9/600 = 0.15).
 
-To get a picture of the actual divergence of rating opinions concerning **jointly seen** pairs of movies, we may develop a *Principal Component Analysis* ([2p]_) of the corresponding *tau* correlation matrix. The 3D plot of the first 3 principal axes is shown below.
+To get a picture of the actual *divergence of rating opinions* concerning **jointly seen** pairs of movies, we may develop a *Principal Component Analysis* ([2p]_) of the corresponding *tau* correlation matrix. The 3D plot of the first 3 principal axes is shown in :numref:`correlationPCA`.
 
->>> g.export3DplotOfCriteriaCorrelation(ValuedCorrelation=False)
+   >>> g.export3DplotOfCriteriaCorrelation(ValuedCorrelation=False)
 
-.. image:: correlationPCA.png
+.. Figure:: correlationPCA.png
    :alt: 3D plot of criteria correlation PCA
+   :name: correlationPCA	 
    :width: 400 px
    :align: center
 
+   3D PCA plot of the criteria ordinal correlation matrix
+   
 The first 3 principal axes support together about 70% of the total inertia. Most *eccentric* and *opposed* in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written media appear most opposed to the radio media.
 
 
@@ -401,8 +405,8 @@ In order to furthermore study the quality of a ranking result, it may be interes
 
 Let us first have a look at the pairwise asymmetric part, namely the '*better rated than*' and '*less well rated than*' opinions of the movie critics. 
 
->>> ag = AsymmetricPartialDigraph(g)
->>> ag.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
+   >>> ag = AsymmetricPartialDigraph(g)
+   >>> ag.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
 
 .. image:: asymmetricPart.png
    :alt: asymmetric part of graffiti07 digraph
@@ -411,8 +415,8 @@ Let us first have a look at the pairwise asymmetric part, namely the '*better ra
 
 We notice here that the *Net-Flows* ranking rule inverts in fact just three '*less well ranked than*' opinions and four '*better ranked than*' ones. A similar look at the symmetric part, the pairwise '*as well rated as*' opinions, suggests a preordered preference structure in several *equivalently rated* classes.
 
->>> sg = SymmetricPartialDigraph(g)
->>> sg.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
+   >>> sg = SymmetricPartialDigraph(g)
+   >>> sg.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
 
 .. image:: symmetricPart.png
    :alt: symmetric part of graffiti07 digraph
@@ -1175,6 +1179,10 @@ We may thus distinguish the following bipolar-valued stability levels:
     * **+1 | -1** : *validated* outranking | outranked situation with the given significance weights, a situation we may observe between alternatives *a3* and *a7* (see :numref:`stabDenot` Lines 10 and 16);
     * **0** : *indeterminate* relational situation, like the one between alternatives *a1* and *a3* (see :numref:`stabDenot` Lines 6 and 10).
 
+It is worthwhile noticing that in the one limit case where all performance criteria appear equi-significant, i.e. there is given a single equivalence class containing all the performance criteria, we may only distinguish stability levels +4 and +3 (rep. -4 and -3). Furthermore, when in such a case an outranking (resp. outranked) situation is validated at level +3 (resp. -3), no potential preordering of the criteria significances exists that could qualify the same situation as outranked (resp. outranking) at level -2 (resp. +2).
+
+In the other limit case, when all performance criteria admit different significances, i.e. the significance weights may be linearly ordered, no stability level +3 or -3 may be observed.
+
 
 Computing the stability denotation of outranking situations
 ...........................................................
@@ -1310,48 +1318,48 @@ Stability of outranking situation with criteria of ordinal significance
 
 Let us consider the significance equivalence classes we observe in the given weights preorder. Here we observe three classes: 6, 8, and 12, in increasing order (see :numref:`weightsPreorder`). In the pairwise comparisons shown above these equivalence classes may appear positively or negatively, besides the indeterminate significance of value *0*. We thus get the following ordered bipolar list of significance weights: *W* = [-12. -8. -6, 0, 6, 8, 12].
 
-In all the pairwise marginal comparisons shown in the previous Section, we may observe that each one of the nine criteria assign one precise item out of this list *W*. Let us denote *c[i]* the number of criteria assigning item *W[i]*, and *C[i]* the cumulative sums of the *c[i]* counts, where *i* is an index in the range of the length of list *W*.
+In all the pairwise marginal comparisons shown in the previous Section, we may observe that each one of the nine criteria assigns one precise item out of this list *W*. Let us denote *q[i]* the number of criteria assigning item *W[i]*, and *Q[i]* the cumulative sums of these *q[i]* counts, where *i* is an index in the range of the length of list *W*.
 
 In the comparison of alternatives *a2* and *a1*, for instance (see :numref:`exComp21`), we observe the following counts:
 
-======     ===  ==  ==  ==  ==  ==  ==  
-*W[i]*     -12  -8  -6   0   6  8   12  
-======     ===  ==  ==  ==  ==  ==  == 
-*c[i]*      0    0   2   1   1   3   2 
-*C[i]*      0    0   2   3   4   7   9
-======     ===  ==  ==  ==  ==  ==  == 
+======  ===  ===  ===  ===  ===  ===  ===  
+*W[i]*  -12  -8   -6    0    6    8   12  
+======  ===  ===  ===  ===  ===  ===  ===  
+*q[i]*    0   0    2    1    1    3    2 
+*Q[i]*    0   0    2    3    4    7    9
+======  ===  ===  ===  ===  ===  ===  ===   
 
-Let use denote *-c* and *-C* the reversed versions of the *c* and the *C* lists. We thus obtain the following result.
+Let use denote *-q* and *-Q* the reversed versions of the *q* and the *Q* lists. We thus obtain the following result.
 
 =======  ===  ==  ==  ==  ==  ==  ==  
 *W[i]*   -12  -8  -6   0   6  8   12  
 =======  ===  ==  ==  ==  ==  ==  == 
-*-c[i]*   2   3   1   1   2   0   0 
-*-C[i]*   2   5   6   7   9   9   9
+*-q[i]*   2   3   1   1   2   0   0 
+*-Q[i]*   2   5   6   7   9   9   9
 =======  ===  ==  ==  ==  ==  ==  == 
 
-Now, a pairwise outranking situation will be qualified at stability level 2, i.e. positively validated with any significance weights that are compatible with the given weights preorder, when for all *i*, we observe *C[i]* <= *-C[i]* and there exists one *i* such that *C[i]* < *-C[i]*. Similarly, a pairwise outranking situation will be qualified at stability level -2, when for all *i*, we observe *C[i]* >= *-C[i]* and there exists one *i* such that *C[i]* > *-C[i]* (see [BIS-2004_2p]_).
+Now, a pairwise outranking situation will be qualified at stability level 2, i.e. positively validated with any significance weights that are compatible with the given weights preorder, when for all *i*, we observe *Q[i]* <= *-Q[i]* and there exists one *i* such that *Q[i]* < *-Q[i]*. Similarly, a pairwise outranked situation will be qualified at stability level -2, when for all *i*, we observe *Q[i]* >= *-Q[i]* and there exists one *i* such that *Q[i]* > *-Q[i]* (see [BIS-2004_2p]_).
 
 We may verify that the outranking situation observed between *a2* and *a1* does indeed verify this *distributional dominance* condition.
 
 =======  ===  ==  ==  ==  ==  ==  ==  
 *W[i]*   -12  -8  -6   0   6  8   12  
 =======  ===  ==  ==  ==  ==  ==  == 
-*C[i]*    0   0   2   3   4   7   9 
-*-C[i]*   2   5   6   7   9   9   9
+*Q[i]*    0   0   2   3   4   7   9 
+*-Q[i]*   2   5   6   7   9   9   9
 =======  ===  ==  ==  ==  ==  ==  == 
 
-Notice that outranking situations qualified at stability levels 4 and 3, evidently also verify the stability level 2 test above. The outranking situation between alternatives *a7* and *a3* does not,however, verify this test (see :numref:`exComp73`).
+Notice that outranking situations qualified at stability levels +4 and +3, evidently also verify the stability level +2 test above. The outranking situation between alternatives *a7* and *a3* does not, however, verify this test (see :numref:`exComp73`).
 
 =======  ===  ==  ==  ==  ==  ==  ==  
 *W[i]*   -12  -8  -6   0   6  8   12  
 =======  ===  ==  ==  ==  ==  ==  == 
-*c[i]*    0   3   1   0   3   0   2 
-*C[i]*    0   3   4   4   7   7   9
-*-C[i]*   2   2   5   5   6   9   9
+*q[i]*    0   3   1   0   3   0   2 
+*Q[i]*    0   3   4   4   7   7   9
+*-Q[i]*   2   2   5   5   6   9   9
 =======  ===  ==  ==  ==  ==  ==  == 
 
-This time, *not* all the *C[i]* are *lower or equal* than the corresponding *-C[i]* terms. Hence the outranking situation between *a7* and *a3* appears not positive with all potential significance weights that are compatible with the given weights preorder.
+This time, *not* all the *Q[i]* are *lower or equal* than the corresponding *-Q[i]* terms. Hence the outranking situation between *a7* and *a3* is not positively validated with all potential significance weights that are compatible with the given weights preorder.
 
 Using this stability denotation, we may, hence, define the following **robust** version of a bipolar-valued outranking digraph.
 
@@ -1361,7 +1369,7 @@ Robust bipolar-valued outranking digraphs
 
 We say that decision alternative *x* **robustly outranks** decision alternative *y* when
 
-   * *x* positively outranks "y* at stability level *higher or equal to 2* and we may not observe any *considerable counter-performance* of *x* on a discordant criterion.
+   * *x* positively outranks *y* at stability level *higher or equal to 2* and we may not observe any *considerable counter-performance* of *x* on a discordant criterion.
 
 Dually, we say that decision alternative *x* **does not robustly outrank** decision alternative *y* when
 
@@ -1410,9 +1418,9 @@ The corresponding robust bipolar-valued outranking digraph may be computed with 
       'a7'   | +0.22  -0.50  +0.00  +0.00  +0.78  +0.42  +1.00  
 	     |  (+2)   (-2)   (+1)   (-1)   (+3)   (+2)   (+4)  
 
-We may notice (see :numref:`robG`) that all outranking situations, qualified at stability level +1 or -1, are now put to an *indeterminate* status. In the example here, we actually drop three positive outrankings: between *a3* and *a7*, between *a7* and *a3*, and between *a6* and *a3*, where the last situation is actually already put to doubt by a veto situation (see :numref:`robG` Lines 22-35). We drop as well three negative outrankings: between *a1* and *a7*, between *a4* and *a2*, and between *a7* and *a4* (see :numref:`robG` Lines 22-35).
+We may notice that all outranking situations, qualified at stability level +1 or -1, are now put to an *indeterminate* status. In the example here, we actually drop three positive outrankings: between *a3* and *a7*, between *a7* and *a3*, and between *a6* and *a3*, where the last situation is actually already put to doubt by a veto situation (see :numref:`robG` Lines 22-35). We drop as well three negative outrankings: between *a1* and *a7*, between *a4* and *a2*, and between *a7* and *a4* (see :numref:`robG` Lines 22-35).
 
-Notice by the way that outranking situations, although qualified at level 2|-2 or 3|-3, may nevertheless be put to doubt by considerable performance differences. We observe such am outranking situation when comparing, for instance, alternatives *a2* and *a4* (see :numref:`robG` Lines 24-25).
+Notice by the way that outranking (resp. outranked) situations, although qualified at level 2 or 3 (resp. -2 or -3) may nevertheless be put to doubt by considerable performance differences. We may observe such an outranking situation when comparing, for instance, alternatives *a2* and *a4* (see :numref:`robG` Lines 24-25).
 
 .. code-block:: pycon
    :linenos:
@@ -1447,31 +1455,30 @@ We may finally visually compare in :numref:`robStdStrictOG` the standard and rob
 
    Standard versus robust strict outranking digraphs oriented by their initial and terminal prekernels
    
-The robust version drops two strict outrankings: between *a4* and *a7* and between *a7* and *a1*. The remaining 14 strict outranking situations qualify now all with stability level of +2, resp. -2 and more.
+The robust version drops two strict outrankings: between *a4* and *a7* and between *a7* and *a1*. The remaining 14 strict outranking (resp. outranked) situations all verify stability level of +2 and more (resp. -2 and less).
 
-Let us have a final look at the corresponding performance heat map.
+To appreciate the apparent orientation of the standard and robust strict outranking digraphs shown in :numref:`robStdStrictOG`, let us have a final heat map view on the underlying performance tableau ordered by the *NetFlows* ranking rule.
 
->>> t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
+   >>> t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows')
 
 .. Figure:: robustHeatmap.png
    :name: robustHeatmap
-   :alt: Heat map of the random 3 Objectives performance tableau
+   :alt: Heat map of the random 3 objectives performance tableau
    :width: 600 px
    :align: center
 
-   Heat map of the random 3 Objectives performance tableau ordered by the *NetFlows* ranking rule
+   Heat map of the random 3 objectives performance tableau ordered by the *NetFlows* ranking rule
 
-Recommending alternatives *a4* as well as *a2* as potential best choices appears well justified. Alternative *a4* represents indeed an overall best compromise choice, whereas alternative *a2* gives an unanimous best choice wrt two out of the three equi-important decision objectives.
+As the inital prekernel is here validated at stability level +2, recommending alternatives *a4*, as well as *a2*, as potential best choices, appears well justified. Alternative *a4* represents indeed an overall *best compromise choice* between all decision objectives, whereas alternative *a2* gives an unanimous best choice with respect to two out of three decision objectives. Up to the decision maker to make his final choice.
 
-Let us again mention For concluding that is precisely our bipolar-valued logical characteristic framework that provides us here with a **distributional dominance test** for effectively qualifying the *robustness* of an outranking digraphs when facing a performance tableau with criteria of ordinal significance only. A real world application with this kind of performance tableau may be consulted in [BIS-2015p]_.
+For concluding, let us again mention that it is precisely our bipolar-valued *logical characteristic framework* that provides us here with a **first order distributional dominance** test for effectively qualifying the stability level 2 *robustness* of an outranking digraph when facing performance tableaux with criteria of only ordinal-valued significances. A real world application of our stability analysis with such a kind of performance tableau may be consulted in [BIS-2015p]_.
 
 Back to :ref:`Content Table <Pearls-label>`
 
 .. only:: html
 
-   Bibliography
-   ------------
-   
+   **References**
+	  
 .. [BIS-2015p] Bisdorff R. (2015). *The EURO 2004 Best Poster Award: Choosing the Best Poster in a Scientific Conference*. Chapter 5 in R. Bisdorff, L. Dias, P. Meyer, V. Mousseau, and M. Pirlot (Eds.), *Evaluation and Decision Models with Multiple Criteria: Case Studies*. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, DOI 10.1007/978-3-662-46816-6_1, pp. 117-166 (downloadable `PDF file 754.7 kB <http://hdl.handle.net/10993/23714>`_).
 	       
 .. [BIS-2014p] Bisdorff R., Meyer P. and Veneziano Th. (2014). Elicitation of criteria weights maximising the stability of pairwise outranking statements. Journal of Multi-Criteria Decision Analysis (Wiley) 21: 113-124 (downloadable preprint `PDF file 431.4 Kb <http://hdl.handle.net/10993/23701>`_).
@@ -1493,11 +1500,6 @@ Back to :ref:`Content Table <Pearls-label>`
 .. [BER-1958p] Berge C. (2001), *The theory of graphs*. Dover Publications Inc. 2001. First published in English by Methuen & Co Ltd., London 1962. Translated from a French edition by Dunod, Paris 1958.
 
 .. [KEN-1938p] Kendall M.G. (1938), *A New Measure of Rank Correlation*. Biometrica 30:81–93
-
-.. only:: html
-
-   Footnotes
-   ---------
 
 .. [1p] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file *graffiti07.xml* (XMCDA-2.0 Format) in the *examples/Graffiti* directory of the Digraph3 ressources.       
 
