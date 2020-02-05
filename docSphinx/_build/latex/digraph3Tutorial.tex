@@ -69,26 +69,26 @@
     \begin{titlepage}
         \centering
 
-        \vspace*{20mm} %%% * is used to give space from top
-        \textbf{\Huge {Documentation of the Digraph3 software collection}}
+        \vspace*{10mm} %%% * is used to give space from top
+        \textbf{\Large {Documentation of the \textsc{Digraph3} software collection}}
 
-        \vspace{0mm}
+        \vspace{5mm}
         \begin{figure}[!h]
             \centering
             \includegraphics[scale=0.5]{introDoc3.png}
         \end{figure}
 
         \vspace{10mm}
-        \Large {\textbf{Tutorials and Pearls}}
+        \textbf{\Huge {Tutorials and Pearls}}
 
-        \vspace{5mm}
         \textbf{Raymond BISDORFF}
 
-        \small {Created on : February 2020}
+        \small Luxembourg,  February 2020
 
-        \vspace*{0mm}
         \small  Last updated : \today
-
+        
+        \vspace{10mm}
+        \emph{This documentation is dedicated to late Marc ROUBENS who, through his expertise in fuzzy sets and systems, greatly stimulated our research in bipolar-valued epistemic logic.} 
 
         %% \vfill adds at the bottom
         \vfill
@@ -119,9 +119,10 @@
 
 
 \phantomsection\label{\detokenize{tutorial:tutorial-label}}
-\textbf{\Large{Tutorials of the Digraph3 Resources}}
+\textbf{\Large{Tutorials of the \textsc{Digraph3} Resources}}
+\vspace{5mm}
 
-The tutorials in this document describe the practical usage of our Digraph3 Python3 software resources in the field of \sphinxstyleemphasis{Algorithmic Decision Theory} and more specifically in \sphinxstylestrong{outranking} based \sphinxstyleemphasis{Multiple Criteria Decision Aid} (MCDA). They mainly illustrate practical tools for a Master Course  at the University of Luxembourg.
+The tutorials in this document describe the practical usage of our \sphinxstyleemphasis{Digraph3} Python3 software resources in the field of \sphinxstyleemphasis{Algorithmic Decision Theory} and more specifically in \sphinxstylestrong{outranking} based \sphinxstyleemphasis{Multiple Criteria Decision Aid} (MCDA). They mainly illustrate practical tools for a Master Course  at the University of Luxembourg.
 
 The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like \sphinxstyleemphasis{digraphs}, \sphinxstyleemphasis{outranking digraphs}, \sphinxstyleemphasis{performance tableaux} and \sphinxstyleemphasis{voting profiles}.
 
@@ -5464,12 +5465,12 @@ Now, we know that its potential prekernels must be among its set of maximal inde
 \PYG{g+go}{ ...}
 \end{sphinxVerbatim}
 
-Among the six MISs contained in this random digraph (see above Lines 3\sphinxhyphen{}8) we discover two initial and two terminal kernels (Lines 12\sphinxhyphen{}34). Notice by the way the covering values (between 0.0 and 1.0) shown by the \sphinxcode{\sphinxupquote{digraphs.Digraph.showPreKernels()}} method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph’s \sphinxstyleemphasis{laterality}. We may hence redraw the same digraph in \hyperref[\detokenize{tutorial:orientedlaterality}]{Fig.\@ \ref{\detokenize{tutorial:orientedlaterality}}} by looking into its interior via the \sphinxstyleemphasis{best covering} initial kernel candidate: the dominant choice \{‘3’,’4’\} (coloured in yellow), and looking out of it via the \sphinxstyleemphasis{best covered} terminal kernel candidate: the absorbent choice \{‘1’,’6’\} (coloured in blue).
+Among the six MISs contained in this random digraph (see above Lines 3\sphinxhyphen{}8) we discover two initial and two terminal kernels (Lines 12\sphinxhyphen{}34). Notice by the way the covering values (between 0.0 and 1.0) shown by the \sphinxcode{\sphinxupquote{digraphs.Digraph.showPreKernels()}} method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph’s \sphinxstyleemphasis{laterality}. We may hence redraw the same digraph in \hyperref[\detokenize{tutorial:orientedlaterality}]{Fig.\@ \ref{\detokenize{tutorial:orientedlaterality}}} by looking into its interior via the \sphinxstyleemphasis{best covering} initial kernel candidate: the dominant choice \{‘a3’,’4a’\} (coloured in yellow), and looking out of it via the \sphinxstyleemphasis{best covered} terminal kernel candidate: the absorbent choice \{‘a1’,’a6’\} (coloured in blue).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rd}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{orientedLaterality}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }                  \PYG{n}{bestChoice}\PYG{o}{=}\PYG{n+nb}{set}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }                  \PYG{n}{worstChoice}\PYG{o}{=}\PYG{n+nb}{set}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a6}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}
+\PYG{g+gp}{... }                  \PYG{n}{bestChoice}\PYG{o}{=}\PYG{n+nb}{set}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
+\PYG{g+gp}{... }                  \PYG{n}{worstChoice}\PYG{o}{=}\PYG{n+nb}{set}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a6}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file dor GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to orientedLaterality.dot}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng orientedLaterality.dot \PYGZhy{}o orientedLaterality.png}

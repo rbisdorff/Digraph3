@@ -207,26 +207,26 @@ latex_elements = {
     \begin{titlepage}
         \centering
 
-        \vspace*{20mm} %%% * is used to give space from top
-        \textbf{\Huge {Documentation of the Digraph3 software collection}}
+        \vspace*{10mm} %%% * is used to give space from top
+        \textbf{\Large {Documentation of the \textsc{Digraph3} software collection}}
 
-        \vspace{0mm}
+        \vspace{5mm}
         \begin{figure}[!h]
             \centering
             \includegraphics[scale=0.5]{introDoc3.png}
         \end{figure}
 
         \vspace{10mm}
-        \Large {\textbf{Tutorials and Pearls}}
+        \textbf{\Huge {Tutorials and Pearls}}
 
-        \vspace{5mm}
         \textbf{Raymond BISDORFF}
 
-        \small {Created on : February 2020}
+        \small Luxembourg,  February 2020
 
-        \vspace*{0mm}
         \small  Last updated : \today
-
+        
+        \vspace{10mm}
+        \emph{This documentation is dedicated to late Marc ROUBENS who, through his expertise in fuzzy sets and systems, greatly stimulated our research in bipolar-valued epistemic logic.} 
 
         %% \vfill adds at the bottom
         \vfill

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  5 FEB 2020 12:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  5 FEB 2020 14:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1145,87 +1145,87 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  [1
 
 ]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 155.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 156.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 156.
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 157
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 157.
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 158
 .
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-<graffiti07_1.png, id=152, 768.8725pt x 779.91376pt>
+<graffiti07_1.png, id=153, 768.8725pt x 779.91376pt>
 File: graffiti07_1.png Graphic file (type png)
 <use graffiti07_1.png>
-Package pdftex.def Info: graffiti07_1.png  used on input line 165.
+Package pdftex.def Info: graffiti07_1.png  used on input line 166.
 (pdftex.def)             Requested size: 451.68457pt x 458.18155pt.
  [2] [3 <./graffiti07_1.png>]
-<graffiti07_2.png, id=177, 907.39pt x 915.42pt>
+<graffiti07_2.png, id=178, 907.39pt x 915.42pt>
 File: graffiti07_2.png Graphic file (type png)
 <use graffiti07_2.png>
-Package pdftex.def Info: graffiti07_2.png  used on input line 184.
+Package pdftex.def Info: graffiti07_2.png  used on input line 185.
 (pdftex.def)             Requested size: 451.68457pt x 455.68349pt.
  [4 <./graffiti07_2.png>]
-<graffiti07_45.png, id=187, 981.6675pt x 420.57124pt>
+<graffiti07_45.png, id=188, 981.6675pt x 420.57124pt>
 File: graffiti07_45.png Graphic file (type png)
 <use graffiti07_45.png>
-Package pdftex.def Info: graffiti07_45.png  used on input line 204.
+Package pdftex.def Info: graffiti07_45.png  used on input line 205.
 (pdftex.def)             Requested size: 451.68457pt x 193.51004pt.
-<graffiti07_3.png, id=192, 1204.5pt x 600.2425pt>
+<graffiti07_3.png, id=193, 1204.5pt x 600.2425pt>
 File: graffiti07_3.png Graphic file (type png)
 <use graffiti07_3.png>
-Package pdftex.def Info: graffiti07_3.png  used on input line 224.
+Package pdftex.def Info: graffiti07_3.png  used on input line 225.
 (pdftex.def)             Requested size: 452.97293pt x 225.7315pt.
  [5 <./graffiti07_45.png>]
-<graffiti07_6.png, id=203, 651.43375pt x 553.06625pt>
+<graffiti07_6.png, id=204, 651.43375pt x 553.06625pt>
 File: graffiti07_6.png Graphic file (type png)
 <use graffiti07_6.png>
-Package pdftex.def Info: graffiti07_6.png  used on input line 244.
+Package pdftex.def Info: graffiti07_6.png  used on input line 245.
 (pdftex.def)             Requested size: 301.12305pt x 255.66255pt.
  [6 <./graffiti07_3.png>] [7 <./graffiti07_6.png>]
 Package hyperref Info: bookmark level for unknown literalblock defaults to 0 on
- input line 295.
+ input line 296.
  [8] [9] [10] [11] [12]
-<correlationTable.png, id=290, 847.165pt x 355.3275pt>
+<correlationTable.png, id=291, 847.165pt x 355.3275pt>
 File: correlationTable.png Graphic file (type png)
 <use correlationTable.png>
-Package pdftex.def Info: correlationTable.png  used on input line 521.
+Package pdftex.def Info: correlationTable.png  used on input line 522.
 (pdftex.def)             Requested size: 451.68457pt x 189.45041pt.
 
 
 LaTeX Warning: Hyper reference `pearls:correlationtable' on page 13 undefined o
-n input line 524.
+n input line 525.
 
 
 LaTeX Warning: Reference `pearls:correlationtable' on page 13 undefined on inpu
-t line 524.
+t line 525.
 
 [13 <./correlationTable.png>]pdfTeX warning (ext4): destination with the same i
 dentifier (name{figure.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.538 \capstart
+l.539 \capstart
                
-<correlationPCA.png, id=301, 766.865pt x 771.88374pt>
+<correlationPCA.png, id=302, 766.865pt x 771.88374pt>
 File: correlationPCA.png Graphic file (type png)
 <use correlationPCA.png>
-Package pdftex.def Info: correlationPCA.png  used on input line 540.
+Package pdftex.def Info: correlationPCA.png  used on input line 541.
 (pdftex.def)             Requested size: 301.12305pt x 303.09459pt.
  [14 <./correlationPCA.png>]
-<asymmetricPart.png, id=309, 1210.5225pt x 600.2425pt>
+<asymmetricPart.png, id=310, 1210.5225pt x 600.2425pt>
 File: asymmetricPart.png Graphic file (type png)
 <use asymmetricPart.png>
-Package pdftex.def Info: asymmetricPart.png  used on input line 557.
+Package pdftex.def Info: asymmetricPart.png  used on input line 558.
 (pdftex.def)             Requested size: 451.68457pt x 223.97299pt.
-<symmetricPart.png, id=310, 1209.51875pt x 602.25pt>
+<symmetricPart.png, id=311, 1209.51875pt x 602.25pt>
 File: symmetricPart.png Graphic file (type png)
 <use symmetricPart.png>
-Package pdftex.def Info: symmetricPart.png  used on input line 566.
+Package pdftex.def Info: symmetricPart.png  used on input line 567.
 (pdftex.def)             Requested size: 451.68457pt x 224.90585pt.
  [15 <./asymmetricPart.png>]
 [16 <./symmetricPart.png>] [17] [18] [19]pdfTeX warning (ext4): destination wit
@@ -1233,26 +1233,26 @@ h the same identifier (name{figure.1}) has been already used, duplicate ignored
 
 <to be read again> 
                    \relax 
-l.783 \capstart
+l.784 \capstart
                
-<k1restricted.png, id=371, 644.4075pt x 375.4025pt>
+<k1restricted.png, id=372, 644.4075pt x 375.4025pt>
 File: k1restricted.png Graphic file (type png)
 <use k1restricted.png>
-Package pdftex.def Info: k1restricted.png  used on input line 785.
+Package pdftex.def Info: k1restricted.png  used on input line 786.
 (pdftex.def)             Requested size: 301.12305pt x 175.42531pt.
  [20 <./k1restricted.png>]pdfTeX warning (ext4): destination with the same iden
 tifier (name{figure.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.832 \capstart
+l.833 \capstart
                
-<k2restricted.png, id=378, 648.4225pt x 372.39125pt>
+<k2restricted.png, id=379, 648.4225pt x 372.39125pt>
 File: k2restricted.png Graphic file (type png)
 <use k2restricted.png>
-Package pdftex.def Info: k2restricted.png  used on input line 834.
+Package pdftex.def Info: k2restricted.png  used on input line 835.
 (pdftex.def)             Requested size: 301.12305pt x 172.93852pt.
  [21]
-Underfull \hbox (badness 5519) in paragraph at lines 864--865
+Underfull \hbox (badness 5519) in paragraph at lines 865--866
 []\T1/cmr/m/n/12 When we re-con-sider the graphviz draw-ing of this out-rank-in
 g di-graph (see
  []
@@ -1261,65 +1261,65 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
 s been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.868 \capstart
+l.869 \capstart
                
-<bestWorstOrientation.png, id=383, 384.43625pt x 403.5075pt>
+<bestWorstOrientation.png, id=384, 384.43625pt x 403.5075pt>
 File: bestWorstOrientation.png Graphic file (type png)
 <use bestWorstOrientation.png>
-Package pdftex.def Info: bestWorstOrientation.png  used on input line 870.
+Package pdftex.def Info: bestWorstOrientation.png  used on input line 871.
 (pdftex.def)             Requested size: 225.84229pt x 237.05145pt.
  [22 <./k2restricted.png>] [23 <./bestWorstOrientation.png>]
 [24]pdfTeX warning (ext4): destination with the same identifier (name{figure.1}
 ) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.980 \capstart
+l.981 \capstart
                
-<weightDistributions.png, id=406, 738.76pt x 669.50125pt>
+<weightDistributions.png, id=407, 738.76pt x 669.50125pt>
 File: weightDistributions.png Graphic file (type png)
 <use weightDistributions.png>
-Package pdftex.def Info: weightDistributions.png  used on input line 982.
+Package pdftex.def Info: weightDistributions.png  used on input line 983.
 (pdftex.def)             Requested size: 338.76343pt x 307.00381pt.
  [25] [26 <./weightDistributions.png>]pdfTeX warning (ext4): destination with t
 he same identifier (name{figure.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1013 \capstart
+l.1014 \capstart
                 
-<rCharacteristic.png, id=424, 764.8575pt x 411.5375pt>
+<rCharacteristic.png, id=425, 764.8575pt x 411.5375pt>
 File: rCharacteristic.png Graphic file (type png)
 <use rCharacteristic.png>
-Package pdftex.def Info: rCharacteristic.png  used on input line 1015.
+Package pdftex.def Info: rCharacteristic.png  used on input line 1016.
 (pdftex.def)             Requested size: 338.76343pt x 182.27644pt.
  [27 <./rCharacteristic.png>]pdfTeX warning (ext4): destination with the same i
 dentifier (name{figure.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1050 \capstart
+l.1051 \capstart
                 
-<simulLikelihood.png, id=434, 361.35pt x 252.945pt>
+<simulLikelihood.png, id=435, 361.35pt x 252.945pt>
 File: simulLikelihood.png Graphic file (type png)
 <use simulLikelihood.png>
-Package pdftex.def Info: simulLikelihood.png  used on input line 1052.
+Package pdftex.def Info: simulLikelihood.png  used on input line 1053.
 (pdftex.def)             Requested size: 414.04419pt x 289.83467pt.
  [28 <./simulLikelihood.png>] [29] [30]pdfTeX warning (ext4): destination with 
 the same identifier (name{figure.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1184 \capstart
+l.1185 \capstart
                 
-<confidentOutranking.png, id=460, 383.4325pt x 428.60126pt>
+<confidentOutranking.png, id=461, 383.4325pt x 428.60126pt>
 File: confidentOutranking.png Graphic file (type png)
 <use confidentOutranking.png>
-Package pdftex.def Info: confidentOutranking.png  used on input line 1186.
+Package pdftex.def Info: confidentOutranking.png  used on input line 1187.
 (pdftex.def)             Requested size: 263.48267pt x 294.53838pt.
  [31 <./confidentOutranking.png>] [32] [33] [34] [35] [36]
 [37]
-Overfull \vbox (1.24075pt too high) detected at line 1518
+Overfull \vbox (1.24075pt too high) detected at line 1519
  []
 
 [38] [39] [40]
-Underfull \hbox (badness 8038) in paragraph at lines 1825--1826
+Underfull \hbox (badness 8038) in paragraph at lines 1826--1827
 []\T1/cmr/m/n/12 The cor-re-spond-ing \T1/cmr/m/it/12 ro-bust \T1/cmr/m/n/12 ou
 t-rank-ing di-graph may be com-puted with the
  []
@@ -1328,55 +1328,55 @@ t-rank-ing di-graph may be com-puted with the
 ) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1895 \capstart
+l.1896 \capstart
                 
-<robStdStrictOutranking.png, id=581, 1010.77625pt x 569.12625pt>
+<robStdStrictOutranking.png, id=582, 1010.77625pt x 569.12625pt>
 File: robStdStrictOutranking.png Graphic file (type png)
 <use robStdStrictOutranking.png>
-Package pdftex.def Info: robStdStrictOutranking.png  used on input line 1897.
+Package pdftex.def Info: robStdStrictOutranking.png  used on input line 1898.
 (pdftex.def)             Requested size: 451.68457pt x 254.32419pt.
  [42]pdfTeX warning (ext4): destination with the same identifier (name{figure.2
 }) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1910 \capstart
+l.1911 \capstart
                 
-<robustHeatmap.png, id=592, 1026.83624pt x 525.965pt>
+<robustHeatmap.png, id=593, 1026.83624pt x 525.965pt>
 File: robustHeatmap.png Graphic file (type png)
 <use robustHeatmap.png>
-Package pdftex.def Info: robustHeatmap.png  used on input line 1912.
+Package pdftex.def Info: robustHeatmap.png  used on input line 1913.
 (pdftex.def)             Requested size: 451.68457pt x 231.3611pt.
  [43 <./robStdStrictOutranking.png>] [44 <./robustHeatmap.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1932--1933
+Underfull \hbox (badness 10000) in paragraph at lines 1933--1934
 \T1/cmr/m/n/12 Per-for-mance Dif-fer-ences^^Q \T1/cmr/m/it/12 Jour-nal of Multi
 -Criteria De-ci-sion Anal-
  []
 
 
-Underfull \hbox (badness 8113) in paragraph at lines 1932--1933
+Underfull \hbox (badness 8113) in paragraph at lines 1933--1934
 \T1/cmr/m/it/12 y-sis \T1/cmr/m/n/12 (Wi-ley) \T1/cmr/bx/n/12 20\T1/cmr/m/n/12 
 :3-12 (down-load-able preprint [][]PDF file 403.5 Kb[][]
  []
 
 
-Underfull \hbox (badness 5460) in paragraph at lines 1936--1937
+Underfull \hbox (badness 5460) in paragraph at lines 1937--1938
 \T1/cmr/m/n/12 ker-nels from bipo-lar val-ued di-graphs^^Q. \T1/cmr/m/it/12 Eu-
 ro-pean Jour-nal of Op-er-
  []
 
 
-Underfull \hbox (badness 6559) in paragraph at lines 1936--1937
+Underfull \hbox (badness 6559) in paragraph at lines 1937--1938
 \T1/cmr/m/it/12 a-tional Re-search\T1/cmr/m/n/12 , 175 (2006) 155-170. (On-line
 ) Elec-tronic ver-sion:
  []
 
 (./digraph3Pearls.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1955.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1956.
  [45]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1955.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1956.
  (./digraph3Pearls.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1955.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1955.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1956.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1956.
 
 Package rerunfilecheck Info: File `digraph3Pearls.out' has not changed.
 (rerunfilecheck)             Checksum: 9F7831D7CCB48AAC270EC236B4021869;6406.
@@ -1384,16 +1384,16 @@ Package rerunfilecheck Info: File `digraph3Pearls.out' has not changed.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1955.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1956.
  ) 
 Here is how much of TeX's memory you used:
- 14155 strings out of 494244
- 198753 string characters out of 6161779
+ 14158 strings out of 494244
+ 198795 string characters out of 6161779
  426261 words of memory out of 5000000
- 17024 multiletter control sequences out of 15000+600000
- 28657 words of font info for 68 fonts, out of 8000000 for 9000
+ 17025 multiletter control sequences out of 15000+600000
+ 29347 words of font info for 69 fonts, out of 8000000 for 9000
  396 hyphenation exceptions out of 8191
- 37i,12n,45p,1265b,823s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,12n,45p,1265b,827s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecss1200.
 600pk> </home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsi1
 200.600pk> </home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/e
@@ -1412,26 +1412,27 @@ mf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/bisdorff/.texlive2017
 live2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </home/bisdorff/
 .texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/bisdo
 rff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/b
-isdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </ho
-me/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1728.600pk> 
-</home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600
-pk> </home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095
+isdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1728.600pk> </ho
+me/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> 
+</home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600
+pk> </home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200
 .600pk> </home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx
-1728.600pk> </home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/
-ecbx2488.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-ex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/symbols/msam10.pfb>
-Output written on digraph3Pearls.pdf (46 pages, 1733737 bytes).
+2488.600pk> </home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/
+ecxc1728.600pk> </home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen
+/ec/ecbx1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
+12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/symbols/msam10.pfb>
+Output written on digraph3Pearls.pdf (46 pages, 1738055 bytes).
 PDF statistics:
- 1436 PDF objects out of 1440 (max. 8388607)
- 648 compressed objects within 7 object streams
+ 1457 PDF objects out of 1728 (max. 8388607)
+ 652 compressed objects within 7 object streams
  143 named destinations out of 1000 (max. 500000)
  300 words of extra memory for PDF output out of 10000 (max. 10000000)
 

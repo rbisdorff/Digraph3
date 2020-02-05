@@ -38,13 +38,14 @@ Tutorials of the Digraph3 resources
 
    .. raw:: latex
 
-      \textbf{\Large{Tutorials of the Digraph3 Resources}}
+      \textbf{\Large{Tutorials of the \textsc{Digraph3} Resources}}
+      \vspace{5mm}
 
 .. only:: html
 
    **Preface**
 
-The tutorials in this document describe the practical usage of our Digraph3 Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg.
+The tutorials in this document describe the practical usage of our *Digraph3* Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg.
 
 The document contains first a set of tutorials introducing the main objects available in the Digraph3 collection of Python3 modules, like *digraphs*, *outranking digraphs*, *performance tableaux* and *voting profiles*.
 
@@ -4540,13 +4541,13 @@ Now, we know that its potential prekernels must be among its set of maximal inde
        covering     :  0.600  # <<==
     ...
 
-Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph's *laterality*. We may hence redraw the same digraph in :numref:`orientedLaterality` by looking into its interior via the *best covering* initial kernel candidate: the dominant choice {'3','4'} (coloured in yellow), and looking out of it via the *best covered* terminal kernel candidate: the absorbent choice {'1','6'} (coloured in blue).
+Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the :py:func:`digraphs.Digraph.showPreKernels` method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph's *laterality*. We may hence redraw the same digraph in :numref:`orientedLaterality` by looking into its interior via the *best covering* initial kernel candidate: the dominant choice {'a3','4a'} (coloured in yellow), and looking out of it via the *best covered* terminal kernel candidate: the absorbent choice {'a1','a6'} (coloured in blue).
 
 .. code-block:: pycon
 
    >>> rd.exportGraphViz(fileName='orientedLaterality',\
-   ...                   bestChoice=set(['a4', 'a3']),\
-   ...                   worstChoice=set(['a6', 'a1']))
+   ...                   bestChoice=set(['a3', 'a4']),\
+   ...                   worstChoice=set(['a1', 'a6']))
     *---- exporting a dot file dor GraphViz tools ---------*
     Exporting to orientedLaterality.dot
     dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png

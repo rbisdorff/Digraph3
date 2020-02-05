@@ -44,6 +44,7 @@ Pearls of bipolar-valued epistemic logic
    .. raw:: latex
 
       \textbf{\Large{Pearls of Bipolar-valued Epistemic Logic}}
+      \vspace{5mm}
 
 .. only:: html
 
