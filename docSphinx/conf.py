@@ -217,12 +217,12 @@ latex_elements = {
         \end{figure}
 
         \vspace{10mm}
-        \Large {\textbf{Tutorials and pearls of bipolar epistemic logic}}
+        \Large {\textbf{Tutorials and Pearls}}
 
         \vspace{5mm}
         \textbf{Raymond BISDORFF}
 
-        \small {Created on : January 2010}
+        \small {Created on : February 2020}
 
         \vspace*{0mm}
         \small  Last updated : \today
@@ -247,7 +247,7 @@ latex_elements = {
 latex_documents = [
   ('tutorial', 'digraph3Tutorial.tex', u'Tutorials for the Digraph3 Python software resources',
    u'Raymond Bisdorff', 'howto'),
-  ('pearls','digraph3Pearls.tex', u'Pearls of bipolar epistemic logic',
+  ('pearls','digraph3Pearls.tex', u'Pearls of bipolar-valued logic',
    u'Raymond Bisdorff', 'howto'),
 ]
 

@@ -53,8 +53,8 @@
 
 
 
-\title{Pearls of bipolar epistemic logic}
-\date{February 04, 2020}
+\title{Pearls of bipolar-valued logic}
+\date{February 05, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -79,12 +79,12 @@
         \end{figure}
 
         \vspace{10mm}
-        \Large {\textbf{Tutorials and pearls of bipolar epistemic logic}}
+        \Large {\textbf{Tutorials and Pearls}}
 
         \vspace{5mm}
         \textbf{Raymond BISDORFF}
 
-        \small {Created on : January 2010}
+        \small {Created on : February 2020}
 
         \vspace*{0mm}
         \small  Last updated : \today
@@ -121,7 +121,7 @@
 \phantomsection\label{\detokenize{pearls:pearls-label}}
 \textbf{\Large{Pearls of Bipolar-valued Epistemic Logic}}
 
-In this part of the Digraph3 documentation, we provide an insight in computational enhancements one may get when working in a \sphinxstyleemphasis{bipolar\sphinxhyphen{}valued epistemic logical framework}, like easily coping with \sphinxstyleemphasis{missing data} and uncertain criterion \sphinxstyleemphasis{significance weights}, computing valued \sphinxstyleemphasis{ordinal correlations} between bipolar\sphinxhyphen{}valued outranking digraphs, solving bipolar\sphinxhyphen{}valued Berge kernel equation systems, and testing for stability of outranking statements when facing only ordinal criteria significance weights.
+In this part of the \sphinxstylestrong{Digraph3} \sphinxstyleemphasis{documentation}, we provide an insight in computational enhancements one may get when working in a \sphinxstyleemphasis{bipolar\sphinxhyphen{}valued logical framework}, like easily coping with \sphinxstyleemphasis{missing data} and uncertain criterion \sphinxstyleemphasis{significance weights}, computing valued \sphinxstyleemphasis{ordinal correlations} between bipolar\sphinxhyphen{}valued outranking digraphs, solving bipolar\sphinxhyphen{}valued Berge kernel equation systems, and testing for stability of outranking statements when facing only ordinal criteria significance weights.
 
 
 \section{Coping with missing data and indeterminateness}
@@ -1269,10 +1269,7 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \phantomsection\label{\detokenize{pearls:id52}}{\hyperref[\detokenize{pearls:computing-the-stability-denotation-of-outranking-situations}]{\sphinxcrossref{Computing the stability denotation of outranking situations}}}
 
 \item {} 
-\phantomsection\label{\detokenize{pearls:id53}}{\hyperref[\detokenize{pearls:stability-of-outranking-situation-with-criteria-of-ordinal-significance}]{\sphinxcrossref{Stability of outranking situation with criteria of ordinal significance}}}
-
-\item {} 
-\phantomsection\label{\detokenize{pearls:id54}}{\hyperref[\detokenize{pearls:robust-bipolar-valued-outranking-digraphs}]{\sphinxcrossref{Robust bipolar\sphinxhyphen{}valued outranking digraphs}}}
+\phantomsection\label{\detokenize{pearls:id53}}{\hyperref[\detokenize{pearls:robust-bipolar-valued-outranking-digraphs}]{\sphinxcrossref{Robust bipolar\sphinxhyphen{}valued outranking digraphs}}}
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -1406,9 +1403,6 @@ It is worthwhile noticing that in the one limit case where all performance crite
 
 In the other limit case, when all performance criteria admit different significances, i.e. the significance weights may be linearly ordered, no stability level +3 or \sphinxhyphen{}3 may be observed.
 
-
-\subsection{Computing the stability denotation of outranking situations}
-\label{\detokenize{pearls:computing-the-stability-denotation-of-outranking-situations}}
 As mentioned above, all \sphinxstyleemphasis{reflexive} comparisons confirm an unanimous outranking situation: all decision alternatives are indeed trivially \sphinxstyleemphasis{as well performing as} themselves. But there appear also two non reflexive unanimous outranking situations: when comparing, for instance, alternative \sphinxstyleemphasis{a4} with alternatives \sphinxstyleemphasis{a5} and \sphinxstyleemphasis{a6} (see \hyperref[\detokenize{pearls:stabdenot}]{Listing \ref{\detokenize{pearls:stabdenot}}} Lines 14 and 16).
 
 Let us inspect the details of how alternatives \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a5} compare.
@@ -1525,12 +1519,14 @@ Let us finally inspect a comparison that is only qualified at stability level +1
 
 In both cases, choosing significances that are just compatible with the given weights preorder will not always result in positively validated  outranking situations.
 
-Now, it is precisely again the bipolar\sphinxhyphen{}valued epistemic characteristic domain that will give us a way to test precisely for stability level 2 (see \sphinxcite{pearls:bis-2004-1p}, \sphinxcite{pearls:bis-2004-2p}).
 
+\subsection{Computing the stability denotation of outranking situations}
+\label{\detokenize{pearls:computing-the-stability-denotation-of-outranking-situations}}
+Stability levels 4 and 3 are easy to detect, the case given. Detecting a stability level 2 is far less obvious.  Now, it is precisely again the bipolar\sphinxhyphen{}valued epistemic characteristic domain that will give us a way to implement an effective test for stability level +2 and \sphinxhyphen{}2 (see \sphinxcite{pearls:bis-2004-1p}, \sphinxcite{pearls:bis-2004-2p}).
 
-\subsection{Stability of outranking situation with criteria of ordinal significance}
-\label{\detokenize{pearls:stability-of-outranking-situation-with-criteria-of-ordinal-significance}}
-Let us consider the significance equivalence classes we observe in the given weights preorder. Here we observe three classes: 6, 8, and 12, in increasing order (see \hyperref[\detokenize{pearls:weightspreorder}]{Listing \ref{\detokenize{pearls:weightspreorder}}}). In the pairwise comparisons shown above these equivalence classes may appear positively or negatively, besides the indeterminate significance of value \sphinxstyleemphasis{0}. We thus get the following ordered bipolar list of significance weights: \sphinxstyleemphasis{W} = {[}\sphinxhyphen{}12. \sphinxhyphen{}8. \sphinxhyphen{}6, 0, 6, 8, 12{]}.
+Let us consider the significance equivalence classes we observe in the given weights preorder. Here we observe three classes: 6, 8, and 12, in increasing order (see \hyperref[\detokenize{pearls:weightspreorder}]{Listing \ref{\detokenize{pearls:weightspreorder}}}). In the pairwise comparisons shown above these equivalence classes may appear positively or negatively, besides the indeterminate significance of value \sphinxstyleemphasis{0}. We thus get the following ordered bipolar list of significance weights:
+
+\sphinxstyleemphasis{W} = {[}\sphinxhyphen{}12. \sphinxhyphen{}8. \sphinxhyphen{}6, 0, 6, 8, 12{]}.
 
 In all the pairwise marginal comparisons shown in the previous Section, we may observe that each one of the nine criteria assigns one precise item out of this list \sphinxstyleemphasis{W}. Let us denote \sphinxstyleemphasis{q{[}i{]}} the number of criteria assigning item \sphinxstyleemphasis{W{[}i{]}}, and \sphinxstyleemphasis{Q{[}i{]}} the cumulative sums of these \sphinxstyleemphasis{q{[}i{]}} counts, where \sphinxstyleemphasis{i} is an index in the range of the length of list \sphinxstyleemphasis{W}.
 
@@ -1660,9 +1656,9 @@ Let use denote \sphinxstyleemphasis{\sphinxhyphen{}q} and \sphinxstyleemphasis{\
 \par
 \sphinxattableend\end{savenotes}
 
-Now, a pairwise outranking situation will be qualified at stability level 2, i.e. positively validated with any significance weights that are compatible with the given weights preorder, when for all \sphinxstyleemphasis{i}, we observe \sphinxstyleemphasis{Q{[}i{]}} \textless{}= \sphinxstyleemphasis{\sphinxhyphen{}Q{[}i{]}} and there exists one \sphinxstyleemphasis{i} such that \sphinxstyleemphasis{Q{[}i{]}} \textless{} \sphinxstyleemphasis{\sphinxhyphen{}Q{[}i{]}}. Similarly, a pairwise outranked situation will be qualified at stability level \sphinxhyphen{}2, when for all \sphinxstyleemphasis{i}, we observe \sphinxstyleemphasis{Q{[}i{]}} \textgreater{}= \sphinxstyleemphasis{\sphinxhyphen{}Q{[}i{]}} and there exists one \sphinxstyleemphasis{i} such that \sphinxstyleemphasis{Q{[}i{]}} \textgreater{} \sphinxstyleemphasis{\sphinxhyphen{}Q{[}i{]}} (see \sphinxcite{pearls:bis-2004-2p}).
+Now, a pairwise outranking situation will be qualified at stability level +2, i.e. positively validated with any significance weights that are compatible with the given weights preorder, when for all \sphinxstyleemphasis{i}, we observe \sphinxstyleemphasis{Q{[}i{]}} \textless{}= \sphinxstyleemphasis{\sphinxhyphen{}Q{[}i{]}} and there exists one \sphinxstyleemphasis{i} such that \sphinxstyleemphasis{Q{[}i{]}} \textless{} \sphinxstyleemphasis{\sphinxhyphen{}Q{[}i{]}}. Similarly, a pairwise outranked situation will be qualified at stability level \sphinxhyphen{}2, when for all \sphinxstyleemphasis{i}, we observe \sphinxstyleemphasis{Q{[}i{]}} \textgreater{}= \sphinxstyleemphasis{\sphinxhyphen{}Q{[}i{]}} and there exists one \sphinxstyleemphasis{i} such that \sphinxstyleemphasis{Q{[}i{]}} \textgreater{} \sphinxstyleemphasis{\sphinxhyphen{}Q{[}i{]}} (see \sphinxcite{pearls:bis-2004-2p}).
 
-We may verify that the outranking situation observed between \sphinxstyleemphasis{a2} and \sphinxstyleemphasis{a1} does indeed verify this \sphinxstyleemphasis{distributional dominance} condition.
+We may verify, for instance, that the outranking situation observed between \sphinxstyleemphasis{a2} and \sphinxstyleemphasis{a1} does indeed verify this \sphinxstyleemphasis{first order distributional dominance} condition.
 
 
 \begin{savenotes}\sphinxattablestart
@@ -1725,7 +1721,7 @@ We may verify that the outranking situation observed between \sphinxstyleemphasi
 \par
 \sphinxattableend\end{savenotes}
 
-Notice that outranking situations qualified at stability levels +4 and +3, evidently also verify the stability level +2 test above. The outranking situation between alternatives \sphinxstyleemphasis{a7} and \sphinxstyleemphasis{a3} does not, however, verify this test (see \hyperref[\detokenize{pearls:excomp73}]{Listing \ref{\detokenize{pearls:excomp73}}}).
+Notice that outranking situations qualified at stability levels 4 and 3, evidently also verify the stability level 2 test above. The outranking situation between alternatives \sphinxstyleemphasis{a7} and \sphinxstyleemphasis{a3} does not, however, verify this test (see \hyperref[\detokenize{pearls:excomp73}]{Listing \ref{\detokenize{pearls:excomp73}}}).
 
 
 \begin{savenotes}\sphinxattablestart
@@ -1826,7 +1822,7 @@ Dually, we say that decision alternative \sphinxstyleemphasis{x} \sphinxstylestr
 
 \end{itemize}
 
-The corresponding robust bipolar\sphinxhyphen{}valued outranking digraph may be computed with the \sphinxcode{\sphinxupquote{outrankingDigraphs.RobustOutrankingDigraph}} class as follows.
+The corresponding \sphinxstyleemphasis{robust} outranking digraph may be computed with the \sphinxcode{\sphinxupquote{outrankingDigraphs.RobustOutrankingDigraph}} class as follows.
 \sphinxSetupCaptionForVerbatim{Robust outranking digraph}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:robg}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -1869,7 +1865,7 @@ The corresponding robust bipolar\sphinxhyphen{}valued outranking digraph may be 
 
 We may notice that all outranking situations, qualified at stability level +1 or \sphinxhyphen{}1, are now put to an \sphinxstyleemphasis{indeterminate} status. In the example here, we actually drop three positive outrankings: between \sphinxstyleemphasis{a3} and \sphinxstyleemphasis{a7}, between \sphinxstyleemphasis{a7} and \sphinxstyleemphasis{a3}, and between \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a3}, where the last situation is actually already put to doubt by a veto situation (see \hyperref[\detokenize{pearls:robg}]{Listing \ref{\detokenize{pearls:robg}}} Lines 22\sphinxhyphen{}35). We drop as well three negative outrankings: between \sphinxstyleemphasis{a1} and \sphinxstyleemphasis{a7}, between \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a2}, and between \sphinxstyleemphasis{a7} and \sphinxstyleemphasis{a4} (see \hyperref[\detokenize{pearls:robg}]{Listing \ref{\detokenize{pearls:robg}}} Lines 22\sphinxhyphen{}35).
 
-Notice by the way that outranking (resp. outranked) situations, although qualified at level 2 or 3 (resp. \sphinxhyphen{}2 or \sphinxhyphen{}3) may nevertheless be put to doubt by considerable performance differences. We may observe such an outranking situation when comparing, for instance, alternatives \sphinxstyleemphasis{a2} and \sphinxstyleemphasis{a4} (see \hyperref[\detokenize{pearls:robg}]{Listing \ref{\detokenize{pearls:robg}}} Lines 24\sphinxhyphen{}25).
+Notice by the way that outranking (resp. outranked) situations, although qualified at level +2 or +3 (resp. \sphinxhyphen{}2 or \sphinxhyphen{}3) may nevertheless be put to doubt by considerable performance differences. We may observe such an outranking situation when comparing, for instance, alternatives \sphinxstyleemphasis{a2} and \sphinxstyleemphasis{a4} (see \hyperref[\detokenize{pearls:robg}]{Listing \ref{\detokenize{pearls:robg}}} Lines 24\sphinxhyphen{}25).
 \sphinxSetupCaptionForVerbatim{Comparing alternatives \sphinxstyleemphasis{a2} and \sphinxstyleemphasis{a4}}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:excomp24}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -1892,7 +1888,7 @@ Notice by the way that outranking (resp. outranked) situations, although qualifi
 
 Despite being robust, the apparent positive outranking situation between alternatives \sphinxstyleemphasis{a2} and \sphinxstyleemphasis{a4} is indeed put to doubt by a considerable counter\sphinxhyphen{}performance (\sphinxhyphen{}60.02) of \sphinxstyleemphasis{a2} on criterion \sphinxstyleemphasis{en3}, a negative difference which exceeds slightly the assumed veto discrimination threshold \sphinxstyleemphasis{v = 60.00} (see \hyperref[\detokenize{pearls:excomp24}]{Listing \ref{\detokenize{pearls:excomp24}}} Line 9).
 
-We may finally visually compare in \hyperref[\detokenize{pearls:robstdstrictog}]{Fig.\@ \ref{\detokenize{pearls:robstdstrictog}}} the standard and robust version of the corresponding strict outranking digraphs, both oriented by their respective identical initial and terminal prekernels.
+We may finally compare in \hyperref[\detokenize{pearls:robstdstrictog}]{Fig.\@ \ref{\detokenize{pearls:robstdstrictog}}} the \sphinxstyleemphasis{standard} and the \sphinxstyleemphasis{robust} version of the corresponding strict outranking digraphs, both oriented by their respective identical initial and terminal prekernels.
 
 \begin{figure}[H]
 \centering
@@ -1901,7 +1897,7 @@ We may finally visually compare in \hyperref[\detokenize{pearls:robstdstrictog}]
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{robStdStrictOutranking}.png}
 \caption{Standard versus robust strict outranking digraphs oriented by their initial and terminal prekernels}\label{\detokenize{pearls:robstdstrictog}}\end{figure}
 
-The robust version drops two strict outrankings: between \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a7} and between \sphinxstyleemphasis{a7} and \sphinxstyleemphasis{a1}. The remaining 14 strict outranking (resp. outranked) situations all verify stability level of +2 and more (resp. \sphinxhyphen{}2 and less).
+The robust version drops two strict outranking situations: between \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a7} and between \sphinxstyleemphasis{a7} and \sphinxstyleemphasis{a1}. The remaining 14 strict outranking (resp. outranked) situations are now all verified at a stability level of +2 and more (resp. \sphinxhyphen{}2 and less). They are, hence, only depending on potential significance weights that must respect the given significance preorder (see \hyperref[\detokenize{pearls:weightspreorder}]{Listing \ref{\detokenize{pearls:weightspreorder}}}).
 
 To appreciate the apparent orientation of the standard and robust strict outranking digraphs shown in \hyperref[\detokenize{pearls:robstdstrictog}]{Fig.\@ \ref{\detokenize{pearls:robstdstrictog}}}, let us have a final heat map view on the underlying performance tableau ordered by the \sphinxstyleemphasis{NetFlows} ranking rule.
 
@@ -1918,7 +1914,7 @@ To appreciate the apparent orientation of the standard and robust strict outrank
 
 As the inital prekernel is here validated at stability level +2, recommending alternatives \sphinxstyleemphasis{a4}, as well as \sphinxstyleemphasis{a2}, as potential best choices, appears well justified. Alternative \sphinxstyleemphasis{a4} represents indeed an overall \sphinxstyleemphasis{best compromise choice} between all decision objectives, whereas alternative \sphinxstyleemphasis{a2} gives an unanimous best choice with respect to two out of three decision objectives. Up to the decision maker to make his final choice.
 
-For concluding, let us again mention that it is precisely our bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{logical characteristic framework} that provides us here with a \sphinxstylestrong{first order distributional dominance} test for effectively qualifying the stability level 2 \sphinxstyleemphasis{robustness} of an outranking digraph when facing performance tableaux with criteria of only ordinal\sphinxhyphen{}valued significances. A real world application of our stability analysis with such a kind of performance tableau may be consulted in \sphinxcite{pearls:bis-2015p}.
+For concluding, let us mention that it is precisely again our bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{logical characteristic framework} that provides us here with a \sphinxstylestrong{first order distributional dominance} test for effectively qualifying the stability level 2 \sphinxstyleemphasis{robustness} of an outranking digraph when facing performance tableaux with criteria of only ordinal\sphinxhyphen{}valued significances. A real world application of our stability analysis with such a kind of performance tableau may be consulted in \sphinxcite{pearls:bis-2015p}.
 
 Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}}
 

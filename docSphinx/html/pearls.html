@@ -70,7 +70,7 @@
 </ul>
 </div>
 <p><strong>Preface</strong></p>
-<p>In this part of the Digraph3 documentation, we provide an insight in computational enhancements one may get when working in a <em>bipolar-valued epistemic logical framework</em>, like easily coping with <em>missing data</em> and uncertain criterion <em>significance weights</em>, computing valued <em>ordinal correlations</em> between bipolar-valued outranking digraphs, solving bipolar-valued Berge kernel equation systems, and testing for stability of outranking statements when facing only ordinal criteria significance weights.</p>
+<p>In this part of the <strong>Digraph3</strong> <em>documentation</em>, we provide an insight in computational enhancements one may get when working in a <em>bipolar-valued logical framework</em>, like easily coping with <em>missing data</em> and uncertain criterion <em>significance weights</em>, computing valued <em>ordinal correlations</em> between bipolar-valued outranking digraphs, solving bipolar-valued Berge kernel equation systems, and testing for stability of outranking statements when facing only ordinal criteria significance weights.</p>
 <div class="section" id="coping-with-missing-data-and-indeterminateness">
 <span id="copingmissing-data-label"></span><h2><a class="toc-backref" href="#id32">Coping with missing data and indeterminateness</a><a class="headerlink" href="#coping-with-missing-data-and-indeterminateness" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id1">
@@ -1323,8 +1323,7 @@ confidence level <em>alpha</em> %, if</p>
 <li><p><a class="reference internal" href="#cardinal-or-ordinal-criteria-significances" id="id50">Cardinal or ordinal criteria significances</a></p></li>
 <li><p><a class="reference internal" href="#qualifying-the-stability-of-outranking-situations" id="id51">Qualifying the stability of outranking situations</a></p></li>
 <li><p><a class="reference internal" href="#computing-the-stability-denotation-of-outranking-situations" id="id52">Computing the stability denotation of outranking situations</a></p></li>
-<li><p><a class="reference internal" href="#stability-of-outranking-situation-with-criteria-of-ordinal-significance" id="id53">Stability of outranking situation with criteria of ordinal significance</a></p></li>
-<li><p><a class="reference internal" href="#robust-bipolar-valued-outranking-digraphs" id="id54">Robust bipolar-valued outranking digraphs</a></p></li>
+<li><p><a class="reference internal" href="#robust-bipolar-valued-outranking-digraphs" id="id53">Robust bipolar-valued outranking digraphs</a></p></li>
 </ul>
 </div>
 <div class="section" id="cardinal-or-ordinal-criteria-significances">
@@ -1505,9 +1504,6 @@ confidence level <em>alpha</em> %, if</p>
 </dl>
 <p>It is worthwhile noticing that in the one limit case where all performance criteria appear equi-significant, i.e. there is given a single equivalence class containing all the performance criteria, we may only distinguish stability levels +4 and +3 (rep. -4 and -3). Furthermore, when in such a case an outranking (resp. outranked) situation is validated at level +3 (resp. -3), no potential preordering of the criteria significances exists that could qualify the same situation as outranked (resp. outranking) at level -2 (resp. +2).</p>
 <p>In the other limit case, when all performance criteria admit different significances, i.e. the significance weights may be linearly ordered, no stability level +3 or -3 may be observed.</p>
-</div>
-<div class="section" id="computing-the-stability-denotation-of-outranking-situations">
-<h3><a class="toc-backref" href="#id52">Computing the stability denotation of outranking situations</a><a class="headerlink" href="#computing-the-stability-denotation-of-outranking-situations" title="Permalink to this headline">¶</a></h3>
 <p>As mentioned above, all <em>reflexive</em> comparisons confirm an unanimous outranking situation: all decision alternatives are indeed trivially <em>as well performing as</em> themselves. But there appear also two non reflexive unanimous outranking situations: when comparing, for instance, alternative <em>a4</em> with alternatives <em>a5</em> and <em>a6</em> (see <a class="reference internal" href="#stabdenot"><span class="std std-numref">Listing 16</span></a> Lines 14 and 16).</p>
 <p>Let us inspect the details of how alternatives <em>a4</em> and <em>a5</em> compare.</p>
 <div class="literal-block-wrapper docutils container" id="excomp45">
@@ -1697,11 +1693,12 @@ confidence level <em>alpha</em> %, if</p>
 </td></tr></table></div>
 </div>
 <p>In both cases, choosing significances that are just compatible with the given weights preorder will not always result in positively validated  outranking situations.</p>
-<p>Now, it is precisely again the bipolar-valued epistemic characteristic domain that will give us a way to test precisely for stability level 2 (see <a class="reference internal" href="#bis-2004-1p" id="id20"><span>[BIS-2004_1p]</span></a>, <a class="reference internal" href="#bis-2004-2p" id="id21"><span>[BIS-2004_2p]</span></a>).</p>
 </div>
-<div class="section" id="stability-of-outranking-situation-with-criteria-of-ordinal-significance">
-<h3><a class="toc-backref" href="#id53">Stability of outranking situation with criteria of ordinal significance</a><a class="headerlink" href="#stability-of-outranking-situation-with-criteria-of-ordinal-significance" title="Permalink to this headline">¶</a></h3>
-<p>Let us consider the significance equivalence classes we observe in the given weights preorder. Here we observe three classes: 6, 8, and 12, in increasing order (see <a class="reference internal" href="#weightspreorder"><span class="std std-numref">Listing 14</span></a>). In the pairwise comparisons shown above these equivalence classes may appear positively or negatively, besides the indeterminate significance of value <em>0</em>. We thus get the following ordered bipolar list of significance weights: <em>W</em> = [-12. -8. -6, 0, 6, 8, 12].</p>
+<div class="section" id="computing-the-stability-denotation-of-outranking-situations">
+<h3><a class="toc-backref" href="#id52">Computing the stability denotation of outranking situations</a><a class="headerlink" href="#computing-the-stability-denotation-of-outranking-situations" title="Permalink to this headline">¶</a></h3>
+<p>Stability levels 4 and 3 are easy to detect, the case given. Detecting a stability level 2 is far less obvious.  Now, it is precisely again the bipolar-valued epistemic characteristic domain that will give us a way to implement an effective test for stability level +2 and -2 (see <a class="reference internal" href="#bis-2004-1p" id="id20"><span>[BIS-2004_1p]</span></a>, <a class="reference internal" href="#bis-2004-2p" id="id21"><span>[BIS-2004_2p]</span></a>).</p>
+<p>Let us consider the significance equivalence classes we observe in the given weights preorder. Here we observe three classes: 6, 8, and 12, in increasing order (see <a class="reference internal" href="#weightspreorder"><span class="std std-numref">Listing 14</span></a>). In the pairwise comparisons shown above these equivalence classes may appear positively or negatively, besides the indeterminate significance of value <em>0</em>. We thus get the following ordered bipolar list of significance weights:</p>
+<p><em>W</em> = [-12. -8. -6, 0, 6, 8, 12].</p>
 <p>In all the pairwise marginal comparisons shown in the previous Section, we may observe that each one of the nine criteria assigns one precise item out of this list <em>W</em>. Let us denote <em>q[i]</em> the number of criteria assigning item <em>W[i]</em>, and <em>Q[i]</em> the cumulative sums of these <em>q[i]</em> counts, where <em>i</em> is an index in the range of the length of list <em>W</em>.</p>
 <p>In the comparison of alternatives <em>a2</em> and <em>a1</em>, for instance (see <a class="reference internal" href="#excomp21"><span class="std std-numref">Listing 19</span></a>), we observe the following counts:</p>
 <table class="docutils align-default">
@@ -1791,8 +1788,8 @@ confidence level <em>alpha</em> %, if</p>
 </tr>
 </tbody>
 </table>
-<p>Now, a pairwise outranking situation will be qualified at stability level 2, i.e. positively validated with any significance weights that are compatible with the given weights preorder, when for all <em>i</em>, we observe <em>Q[i]</em> &lt;= <em>-Q[i]</em> and there exists one <em>i</em> such that <em>Q[i]</em> &lt; <em>-Q[i]</em>. Similarly, a pairwise outranked situation will be qualified at stability level -2, when for all <em>i</em>, we observe <em>Q[i]</em> &gt;= <em>-Q[i]</em> and there exists one <em>i</em> such that <em>Q[i]</em> &gt; <em>-Q[i]</em> (see <a class="reference internal" href="#bis-2004-2p" id="id22"><span>[BIS-2004_2p]</span></a>).</p>
-<p>We may verify that the outranking situation observed between <em>a2</em> and <em>a1</em> does indeed verify this <em>distributional dominance</em> condition.</p>
+<p>Now, a pairwise outranking situation will be qualified at stability level +2, i.e. positively validated with any significance weights that are compatible with the given weights preorder, when for all <em>i</em>, we observe <em>Q[i]</em> &lt;= <em>-Q[i]</em> and there exists one <em>i</em> such that <em>Q[i]</em> &lt; <em>-Q[i]</em>. Similarly, a pairwise outranked situation will be qualified at stability level -2, when for all <em>i</em>, we observe <em>Q[i]</em> &gt;= <em>-Q[i]</em> and there exists one <em>i</em> such that <em>Q[i]</em> &gt; <em>-Q[i]</em> (see <a class="reference internal" href="#bis-2004-2p" id="id22"><span>[BIS-2004_2p]</span></a>).</p>
+<p>We may verify, for instance, that the outranking situation observed between <em>a2</em> and <em>a1</em> does indeed verify this <em>first order distributional dominance</em> condition.</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 32%" />
@@ -1836,7 +1833,7 @@ confidence level <em>alpha</em> %, if</p>
 </tr>
 </tbody>
 </table>
-<p>Notice that outranking situations qualified at stability levels +4 and +3, evidently also verify the stability level +2 test above. The outranking situation between alternatives <em>a7</em> and <em>a3</em> does not, however, verify this test (see <a class="reference internal" href="#excomp73"><span class="std std-numref">Listing 20</span></a>).</p>
+<p>Notice that outranking situations qualified at stability levels 4 and 3, evidently also verify the stability level 2 test above. The outranking situation between alternatives <em>a7</em> and <em>a3</em> does not, however, verify this test (see <a class="reference internal" href="#excomp73"><span class="std std-numref">Listing 20</span></a>).</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 32%" />
@@ -1893,7 +1890,7 @@ confidence level <em>alpha</em> %, if</p>
 <p>Using this stability denotation, we may, hence, define the following <strong>robust</strong> version of a bipolar-valued outranking digraph.</p>
 </div>
 <div class="section" id="robust-bipolar-valued-outranking-digraphs">
-<h3><a class="toc-backref" href="#id54">Robust bipolar-valued outranking digraphs</a><a class="headerlink" href="#robust-bipolar-valued-outranking-digraphs" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id53">Robust bipolar-valued outranking digraphs</a><a class="headerlink" href="#robust-bipolar-valued-outranking-digraphs" title="Permalink to this headline">¶</a></h3>
 <p>We say that decision alternative <em>x</em> <strong>robustly outranks</strong> decision alternative <em>y</em> when</p>
 <blockquote>
 <div><ul class="simple">
@@ -1906,7 +1903,7 @@ confidence level <em>alpha</em> %, if</p>
 <li><p><em>x</em> negatively outranks <em>y</em> at stability level <em>lower or equal to -2</em> and we may not observe any considerable <em>better performance</em> of <em>x</em> on a discordant criterion.</p></li>
 </ul>
 </div></blockquote>
-<p>The corresponding robust bipolar-valued outranking digraph may be computed with the <a class="reference internal" href="techDoc.html#outrankingDigraphs.RobustOutrankingDigraph" title="outrankingDigraphs.RobustOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.RobustOutrankingDigraph</span></code></a> class as follows.</p>
+<p>The corresponding <em>robust</em> outranking digraph may be computed with the <a class="reference internal" href="techDoc.html#outrankingDigraphs.RobustOutrankingDigraph" title="outrankingDigraphs.RobustOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.RobustOutrankingDigraph</span></code></a> class as follows.</p>
 <div class="literal-block-wrapper docutils container" id="robg">
 <div class="code-block-caption"><span class="caption-number">Listing 21 </span><span class="caption-text">Robust outranking digraph</span><a class="headerlink" href="#robg" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -1982,7 +1979,7 @@ confidence level <em>alpha</em> %, if</p>
 </td></tr></table></div>
 </div>
 <p>We may notice that all outranking situations, qualified at stability level +1 or -1, are now put to an <em>indeterminate</em> status. In the example here, we actually drop three positive outrankings: between <em>a3</em> and <em>a7</em>, between <em>a7</em> and <em>a3</em>, and between <em>a6</em> and <em>a3</em>, where the last situation is actually already put to doubt by a veto situation (see <a class="reference internal" href="#robg"><span class="std std-numref">Listing 21</span></a> Lines 22-35). We drop as well three negative outrankings: between <em>a1</em> and <em>a7</em>, between <em>a4</em> and <em>a2</em>, and between <em>a7</em> and <em>a4</em> (see <a class="reference internal" href="#robg"><span class="std std-numref">Listing 21</span></a> Lines 22-35).</p>
-<p>Notice by the way that outranking (resp. outranked) situations, although qualified at level 2 or 3 (resp. -2 or -3) may nevertheless be put to doubt by considerable performance differences. We may observe such an outranking situation when comparing, for instance, alternatives <em>a2</em> and <em>a4</em> (see <a class="reference internal" href="#robg"><span class="std std-numref">Listing 21</span></a> Lines 24-25).</p>
+<p>Notice by the way that outranking (resp. outranked) situations, although qualified at level +2 or +3 (resp. -2 or -3) may nevertheless be put to doubt by considerable performance differences. We may observe such an outranking situation when comparing, for instance, alternatives <em>a2</em> and <em>a4</em> (see <a class="reference internal" href="#robg"><span class="std std-numref">Listing 21</span></a> Lines 24-25).</p>
 <div class="literal-block-wrapper docutils container" id="excomp24">
 <div class="code-block-caption"><span class="caption-number">Listing 22 </span><span class="caption-text">Comparing alternatives <em>a2</em> and <em>a4</em></span><a class="headerlink" href="#excomp24" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2018,12 +2015,12 @@ confidence level <em>alpha</em> %, if</p>
 </td></tr></table></div>
 </div>
 <p>Despite being robust, the apparent positive outranking situation between alternatives <em>a2</em> and <em>a4</em> is indeed put to doubt by a considerable counter-performance (-60.02) of <em>a2</em> on criterion <em>en3</em>, a negative difference which exceeds slightly the assumed veto discrimination threshold <em>v = 60.00</em> (see <a class="reference internal" href="#excomp24"><span class="std std-numref">Listing 22</span></a> Line 9).</p>
-<p>We may finally visually compare in <a class="reference internal" href="#robstdstrictog"><span class="std std-numref">Fig. 81</span></a> the standard and robust version of the corresponding strict outranking digraphs, both oriented by their respective identical initial and terminal prekernels.</p>
+<p>We may finally compare in <a class="reference internal" href="#robstdstrictog"><span class="std std-numref">Fig. 81</span></a> the <em>standard</em> and the <em>robust</em> version of the corresponding strict outranking digraphs, both oriented by their respective identical initial and terminal prekernels.</p>
 <div class="figure align-center" id="robstdstrictog">
 <a class="reference internal image-reference" href="_images/robStdStrictOutranking.png"><img alt="Standard versus Robust Strict Outranking Digraphs" src="_images/robStdStrictOutranking.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 81 </span><span class="caption-text">Standard versus robust strict outranking digraphs oriented by their initial and terminal prekernels</span><a class="headerlink" href="#robstdstrictog" title="Permalink to this image">¶</a></p>
 </div>
-<p>The robust version drops two strict outrankings: between <em>a4</em> and <em>a7</em> and between <em>a7</em> and <em>a1</em>. The remaining 14 strict outranking (resp. outranked) situations all verify stability level of +2 and more (resp. -2 and less).</p>
+<p>The robust version drops two strict outranking situations: between <em>a4</em> and <em>a7</em> and between <em>a7</em> and <em>a1</em>. The remaining 14 strict outranking (resp. outranked) situations are now all verified at a stability level of +2 and more (resp. -2 and less). They are, hence, only depending on potential significance weights that must respect the given significance preorder (see <a class="reference internal" href="#weightspreorder"><span class="std std-numref">Listing 14</span></a>).</p>
 <p>To appreciate the apparent orientation of the standard and robust strict outranking digraphs shown in <a class="reference internal" href="#robstdstrictog"><span class="std std-numref">Fig. 81</span></a>, let us have a final heat map view on the underlying performance tableau ordered by the <em>NetFlows</em> ranking rule.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">)</span>
 </pre></div>
@@ -2033,7 +2030,7 @@ confidence level <em>alpha</em> %, if</p>
 <p class="caption"><span class="caption-number">Fig. 82 </span><span class="caption-text">Heat map of the random 3 objectives performance tableau ordered by the <em>NetFlows</em> ranking rule</span><a class="headerlink" href="#robustheatmap" title="Permalink to this image">¶</a></p>
 </div>
 <p>As the inital prekernel is here validated at stability level +2, recommending alternatives <em>a4</em>, as well as <em>a2</em>, as potential best choices, appears well justified. Alternative <em>a4</em> represents indeed an overall <em>best compromise choice</em> between all decision objectives, whereas alternative <em>a2</em> gives an unanimous best choice with respect to two out of three decision objectives. Up to the decision maker to make his final choice.</p>
-<p>For concluding, let us again mention that it is precisely our bipolar-valued <em>logical characteristic framework</em> that provides us here with a <strong>first order distributional dominance</strong> test for effectively qualifying the stability level 2 <em>robustness</em> of an outranking digraph when facing performance tableaux with criteria of only ordinal-valued significances. A real world application of our stability analysis with such a kind of performance tableau may be consulted in <a class="reference internal" href="#bis-2015p" id="id23"><span>[BIS-2015p]</span></a>.</p>
+<p>For concluding, let us mention that it is precisely again our bipolar-valued <em>logical characteristic framework</em> that provides us here with a <strong>first order distributional dominance</strong> test for effectively qualifying the stability level 2 <em>robustness</em> of an outranking digraph when facing performance tableaux with criteria of only ordinal-valued significances. A real world application of our stability analysis with such a kind of performance tableau may be consulted in <a class="reference internal" href="#bis-2015p" id="id23"><span>[BIS-2015p]</span></a>.</p>
 <p>Back to <a class="reference internal" href="#pearls-label"><span class="std std-ref">Content Table</span></a></p>
 </div>
 </div>
@@ -2139,7 +2136,6 @@ confidence level <em>alpha</em> %, if</p>
 <li><a class="reference internal" href="#cardinal-or-ordinal-criteria-significances">Cardinal or ordinal criteria significances</a></li>
 <li><a class="reference internal" href="#qualifying-the-stability-of-outranking-situations">Qualifying the stability of outranking situations</a></li>
 <li><a class="reference internal" href="#computing-the-stability-denotation-of-outranking-situations">Computing the stability denotation of outranking situations</a></li>
-<li><a class="reference internal" href="#stability-of-outranking-situation-with-criteria-of-ordinal-significance">Stability of outranking situation with criteria of ordinal significance</a></li>
 <li><a class="reference internal" href="#robust-bipolar-valued-outranking-digraphs">Robust bipolar-valued outranking digraphs</a></li>
 </ul>
 </li>

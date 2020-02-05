@@ -18,8 +18,7 @@
 \contentsline {section}{\numberline {5}Robustness analysis of bipolar\sphinxhyphen {}valued outranking digraphs}{33}{section.5}
 \contentsline {subsection}{\numberline {5.1}Cardinal or ordinal criteria significances}{34}{subsection.5.1}
 \contentsline {subsection}{\numberline {5.2}Qualifying the stability of outranking situations}{35}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Computing the stability denotation of outranking situations}{37}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}Stability of outranking situation with criteria of ordinal significance}{39}{subsection.5.4}
-\contentsline {subsection}{\numberline {5.5}Robust bipolar\sphinxhyphen {}valued outranking digraphs}{41}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.3}Computing the stability denotation of outranking situations}{39}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Robust bipolar\sphinxhyphen {}valued outranking digraphs}{41}{subsection.5.4}
 \contentsline {section}{\numberline {6}Bibliography}{44}{section.6}
 \contentsline {section}{References}{44}{section.6}
