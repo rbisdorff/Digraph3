@@ -164,7 +164,7 @@ Another tutorial is furthermore devoted on how to generally compute \sphinxstyle
 
 \subsection{Purpose}
 \label{\detokenize{tutorial:purpose}}
-The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar\sphinxhyphen{}valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate a Master Course  on \emph{Algorithmic Decision Theory} given at the University of Luxembourg in the context of its \sphinxstyleemphasis{Master in Information and Computer Science} (MICS).
+The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar\sphinxhyphen{}valued digraph or graph. These include such features as maximal independent, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate a Master Course  on \emph{Algorithmic Decision Theory} given at the University of Luxembourg in the context of its \sphinxstyleemphasis{Master in Information and Computer Science} (MICS).
 
 The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
@@ -3716,7 +3716,6 @@ We notice three potential best choice recommendations: the Condorcet winner \sph
 \PYG{g+go}{ Credibility domain: [\PYGZhy{}100.00,100.00]}
 \PYG{g+go}{ === \PYGZgt{}\PYGZgt{} potential best choice(s)}
 \PYG{g+go}{ * choice              : [\PYGZsq{}D\PYGZsq{}]}
-\PYG{g+go}{   +\PYGZhy{}irredundancy      : 100.00}
 \PYG{g+go}{   independence        : 100.00}
 \PYG{g+go}{   dominance           : 11.11}
 \PYG{g+go}{   absorbency          : \PYGZhy{}100.00}
@@ -3725,7 +3724,6 @@ We notice three potential best choice recommendations: the Condorcet winner \sph
 \PYG{g+go}{   \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZsq{}D\PYGZsq{}: 2.07, \PYGZcb{}}
 \PYG{g+go}{ === \PYGZgt{}\PYGZgt{} potential best choice(s)}
 \PYG{g+go}{ * choice              : [\PYGZsq{}A\PYGZsq{}, \PYGZsq{}G\PYGZsq{}]}
-\PYG{g+go}{   +\PYGZhy{}irredundancy      : 0.00}
 \PYG{g+go}{   independence        : 0.00}
 \PYG{g+go}{   dominance           : 55.56}
 \PYG{g+go}{   absorbency          : 0.00}
@@ -3734,7 +3732,6 @@ We notice three potential best choice recommendations: the Condorcet winner \sph
 \PYG{g+go}{   \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZcb{}}
 \PYG{g+go}{ === \PYGZgt{}\PYGZgt{} potential best choice(s)}
 \PYG{g+go}{ * choice              : [\PYGZsq{}B\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}E\PYGZsq{}]}
-\PYG{g+go}{   +\PYGZhy{}irredundancy      : 0.00}
 \PYG{g+go}{   independence        : 0.00}
 \PYG{g+go}{   dominance           : 11.11}
 \PYG{g+go}{   absorbency          : \PYGZhy{}100.00}
@@ -3743,7 +3740,6 @@ We notice three potential best choice recommendations: the Condorcet winner \sph
 \PYG{g+go}{   \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZcb{}}
 \PYG{g+go}{ === \PYGZgt{}\PYGZgt{} potential worst choice(s)}
 \PYG{g+go}{ * choice              : [\PYGZsq{}A\PYGZsq{}, \PYGZsq{}F\PYGZsq{}]}
-\PYG{g+go}{   +\PYGZhy{}irredundancy      : 0.00}
 \PYG{g+go}{   independence        : 0.00}
 \PYG{g+go}{   dominance           : 0.00}
 \PYG{g+go}{   absorbency          : 100.00}
@@ -3811,7 +3807,6 @@ To model these \sphinxstyleemphasis{strict outranking} situations, we may comput
 \PYG{g+go}{ Credibility domain:  \PYGZob{}\PYGZsq{}min\PYGZsq{}:\PYGZhy{}100.0, \PYGZsq{}max\PYGZsq{}: 100.0\PYGZsq{}, \PYGZsq{}med\PYGZsq{}:0.0\PYGZsq{}\PYGZcb{}}
 \PYG{g+go}{ === \PYGZgt{}\PYGZgt{} potential best choice(s)}
 \PYG{g+go}{ * choice                : [\PYGZsq{}A\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}D\PYGZsq{}]}
-\PYG{g+go}{   +\PYGZhy{}irredundancy        : 0.00}
 \PYG{g+go}{   independence          : 0.00}
 \PYG{g+go}{   dominance             : 11.11}
 \PYG{g+go}{   absorbency            : 0.00}
@@ -3822,7 +3817,6 @@ To model these \sphinxstyleemphasis{strict outranking} situations, we may comput
 \PYG{g+go}{        \PYGZsq{}B\PYGZsq{}: \PYGZhy{}11.11, \PYGZsq{}E\PYGZsq{}: \PYGZhy{}11.11, \PYGZsq{}F\PYGZsq{}: \PYGZhy{}11.11 \PYGZcb{}}
 \PYG{g+go}{ === \PYGZgt{}\PYGZgt{} potential worst choice(s)}
 \PYG{g+go}{ * choice                : [\PYGZsq{}A\PYGZsq{}, \PYGZsq{}F\PYGZsq{}]}
-\PYG{g+go}{   +\PYGZhy{}irredundancy        : 0.00}
 \PYG{g+go}{   independence          : 0.00}
 \PYG{g+go}{   dominance             : \PYGZhy{}55.56}
 \PYG{g+go}{   absorbency            : 100.00}
@@ -5552,14 +5546,13 @@ All decision actions appear strictly better performing than action ‘a7’. We 
 With such unique disjoint initial and terminal prekernels (see Line 4 and 10), the given digraph instance is hence clearly \sphinxstyleemphasis{lateralized}. Indeed, these initial and terminal prekernels of the codual outranking digraph reveal best, resp. worst, choice recommendations one may formulate on the basis of a given outranking digraph instance.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showRubisBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ ***********************}
 \PYG{g+go}{ Rubis best choice recommendation(s) (BCR)}
 \PYG{g+go}{  (in decreasing order of determinateness)}
 \PYG{g+go}{ Credibility domain: [\PYGZhy{}100.00,100.00]}
 \PYG{g+go}{  === \PYGZgt{}\PYGZgt{} potential best choice(s)}
 \PYG{g+go}{ * choice              : [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}]}
-\PYG{g+go}{   +\PYGZhy{}irredundancy      : 0.00}
 \PYG{g+go}{   independence        : 0.00}
 \PYG{g+go}{   dominance           : 6.98}
 \PYG{g+go}{   absorbency          : \PYGZhy{}48.84}
@@ -5568,7 +5561,6 @@ With such unique disjoint initial and terminal prekernels (see Line 4 and 10), t
 \PYG{g+go}{   \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZsq{}a4\PYGZsq{}: 20.93, \PYGZsq{}a2\PYGZsq{}: 20.93, \PYGZcb{}}
 \PYG{g+go}{  === \PYGZgt{}\PYGZgt{} potential worst choice(s)}
 \PYG{g+go}{ * choice              : [\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}]}
-\PYG{g+go}{   +\PYGZhy{}irredundancy      : 0.00}
 \PYG{g+go}{   independence        : 0.00}
 \PYG{g+go}{   dominance           : \PYGZhy{}74.42}
 \PYG{g+go}{   absorbency          : 16.28}
@@ -6063,8 +6055,9 @@ Let us consider, for instance, the following random graph of \sphinxstyleemphasi
 \PYG{g+go}{ Graph Order      : 8}
 \PYG{g+go}{ Graph Size       : 10}
 \PYG{g+go}{ Valuation domain : [\PYGZhy{}1.00; 1.00]}
-\PYG{g+go}{ Attributes       : [\PYGZsq{}name\PYGZsq{}, \PYGZsq{}order\PYGZsq{}, \PYGZsq{}vertices\PYGZsq{}, \PYGZsq{}valuationDomain\PYGZsq{}, \PYGZsq{}seed\PYGZsq{},}
-\PYG{g+go}{                     \PYGZsq{}edges\PYGZsq{}, \PYGZsq{}size\PYGZsq{}, \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}edgeProbability\PYGZsq{}]}
+\PYG{g+go}{ Attributes       : [\PYGZsq{}name\PYGZsq{}, \PYGZsq{}order\PYGZsq{}, \PYGZsq{}vertices\PYGZsq{}, \PYGZsq{}valuationDomain\PYGZsq{},}
+\PYG{g+go}{                     \PYGZsq{}seed\PYGZsq{}, \PYGZsq{}edges\PYGZsq{}, \PYGZsq{}size\PYGZsq{},}
+\PYG{g+go}{                     \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}edgeProbability\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{isPerfectGraph}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ True}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{p}{)}
@@ -6415,8 +6408,9 @@ Wilson’s algorithm \sphinxstyleemphasis{only} works for connected graphs %
 \PYG{g+go}{ Graph Order      : 9}
 \PYG{g+go}{ Graph Size       : 8}
 \PYG{g+go}{ Valuation domain : [\PYGZhy{}1.00; 1.00]}
-\PYG{g+go}{ Attributes       : [\PYGZsq{}name\PYGZsq{},\PYGZsq{}vertices\PYGZsq{},\PYGZsq{}order\PYGZsq{},\PYGZsq{}valuationDomain\PYGZsq{},\PYGZsq{}edges\PYGZsq{},}
-\PYG{g+go}{                     \PYGZsq{}size\PYGZsq{},\PYGZsq{}gamma\PYGZsq{},\PYGZsq{}dfs\PYGZsq{},\PYGZsq{}date\PYGZsq{},\PYGZsq{}dfsx\PYGZsq{},\PYGZsq{}prueferCode\PYGZsq{}]}
+\PYG{g+go}{ Attributes       : [\PYGZsq{}name\PYGZsq{},\PYGZsq{}vertices\PYGZsq{},\PYGZsq{}order\PYGZsq{},\PYGZsq{}valuationDomain\PYGZsq{},}
+\PYG{g+go}{                     \PYGZsq{}edges\PYGZsq{},\PYGZsq{}size\PYGZsq{},\PYGZsq{}gamma\PYGZsq{},\PYGZsq{}dfs\PYGZsq{},\PYGZsq{}date\PYGZsq{},}
+\PYG{g+go}{                     \PYGZsq{}dfsx\PYGZsq{},\PYGZsq{}prueferCode\PYGZsq{}]}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} RandomTree specific data \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Prüfer code  : [\PYGZsq{}v7\PYGZsq{}, \PYGZsq{}v9\PYGZsq{}, \PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v8\PYGZsq{}, \PYGZsq{}v4\PYGZsq{}, \PYGZsq{}v9\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{spt}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{randomSpanningTree}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
@@ -6514,8 +6508,9 @@ To compute the most determined spanning tree or forest, we may use the \sphinxco
 \PYG{g+go}{ Graph Order      : 5}
 \PYG{g+go}{ Graph Size       : 4}
 \PYG{g+go}{ Valuation domain : [\PYGZhy{}1.00; 1.00]}
-\PYG{g+go}{ Attributes       : [\PYGZsq{}name\PYGZsq{}, \PYGZsq{}vertices\PYGZsq{}, \PYGZsq{}order\PYGZsq{}, \PYGZsq{}valuationDomain\PYGZsq{}, \PYGZsq{}edges\PYGZsq{},}
-\PYG{g+go}{                     \PYGZsq{}size\PYGZsq{}, \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}dfs\PYGZsq{}, \PYGZsq{}date\PYGZsq{}, \PYGZsq{}averageTreeDetermination\PYGZsq{}]}
+\PYG{g+go}{ Attributes       : [\PYGZsq{}name\PYGZsq{},\PYGZsq{}vertices\PYGZsq{},\PYGZsq{}order\PYGZsq{},\PYGZsq{}valuationDomain\PYGZsq{},}
+\PYG{g+go}{                     \PYGZsq{}edges\PYGZsq{},\PYGZsq{}size\PYGZsq{},\PYGZsq{}gamma\PYGZsq{},\PYGZsq{}dfs\PYGZsq{},}
+\PYG{g+go}{                     \PYGZsq{}date\PYGZsq{}, \PYGZsq{}averageTreeDetermination\PYGZsq{}]}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} best determined spanning tree specific data \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Depth first search path(s) :}
 \PYG{g+go}{ [[\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v2\PYGZsq{}, \PYGZsq{}v4\PYGZsq{}, \PYGZsq{}v2\PYGZsq{}, \PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v2\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v3\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}]]}

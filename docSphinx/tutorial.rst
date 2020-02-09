@@ -67,7 +67,7 @@ Working with the *Digraph3* software resources
 Purpose
 -------
 
-The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar-valued digraph or graph. These include such features as maximal independent or irredundant choices, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate a Master Course |location_linkHTML1| |location_linkLatex1| given at the University of Luxembourg in the context of its *Master in Information and Computer Science* (MICS). 
+The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar-valued digraph or graph. These include such features as maximal independent, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate a Master Course |location_linkHTML1| |location_linkLatex1| given at the University of Luxembourg in the context of its *Master in Information and Computer Science* (MICS). 
 
 The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.
 
@@ -2972,7 +2972,6 @@ We notice three potential best choice recommendations: the Condorcet winner *D* 
     Credibility domain: [-100.00,100.00]
     === >> potential best choice(s)
     * choice              : ['D']
-      +-irredundancy      : 100.00
       independence        : 100.00
       dominance           : 11.11
       absorbency          : -100.00
@@ -2981,7 +2980,6 @@ We notice three potential best choice recommendations: the Condorcet winner *D* 
       - most credible action(s) = { 'D': 2.07, }
     === >> potential best choice(s)
     * choice              : ['A', 'G']
-      +-irredundancy      : 0.00
       independence        : 0.00
       dominance           : 55.56
       absorbency          : 0.00
@@ -2990,7 +2988,6 @@ We notice three potential best choice recommendations: the Condorcet winner *D* 
       - most credible action(s) = { }
     === >> potential best choice(s)
     * choice              : ['B', 'C', 'E']
-      +-irredundancy      : 0.00
       independence        : 0.00
       dominance           : 11.11
       absorbency          : -100.00
@@ -2999,7 +2996,6 @@ We notice three potential best choice recommendations: the Condorcet winner *D* 
       - most credible action(s) = { }
     === >> potential worst choice(s) 
     * choice              : ['A', 'F']
-      +-irredundancy      : 0.00
       independence        : 0.00
       dominance           : 0.00
       absorbency          : 100.00
@@ -3071,7 +3067,6 @@ To model these *strict outranking* situations, we may compute the Rubis best cho
     Credibility domain:  {'min':-100.0, 'max': 100.0', 'med':0.0'}
     === >> potential best choice(s)
     * choice                : ['A', 'C', 'D']
-      +-irredundancy        : 0.00
       independence          : 0.00
       dominance             : 11.11
       absorbency            : 0.00
@@ -3082,7 +3077,6 @@ To model these *strict outranking* situations, we may compute the Rubis best cho
 	   'B': -11.11, 'E': -11.11, 'F': -11.11 }
     === >> potential worst choice(s)
     * choice                : ['A', 'F']
-      +-irredundancy        : 0.00
       independence          : 0.00
       dominance             : -55.56
       absorbency            : 100.00
@@ -4635,14 +4629,13 @@ With such unique disjoint initial and terminal prekernels (see Line 4 and 10), t
 .. code-block:: pycon
    :linenos:
 
-   >>> g.showRubisBestChoiceRecommendation()
+   >>> g.showBestChoiceRecommendation()
     ***********************
     Rubis best choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   
     Credibility domain: [-100.00,100.00]
      === >> potential best choice(s)
     * choice              : ['a1', 'a2', 'a4']
-      +-irredundancy      : 0.00
       independence        : 0.00
       dominance           : 6.98
       absorbency          : -48.84
@@ -4651,7 +4644,6 @@ With such unique disjoint initial and terminal prekernels (see Line 4 and 10), t
       - most credible action(s) = { 'a4': 20.93, 'a2': 20.93, }
      === >> potential worst choice(s) 
     * choice              : ['a3', 'a7']
-      +-irredundancy      : 0.00
       independence        : 0.00
       dominance           : -74.42
       absorbency          : 16.28
@@ -5126,8 +5118,9 @@ Let us consider, for instance, the following random graph of *order* 8 generated
     Graph Order      : 8
     Graph Size       : 10
     Valuation domain : [-1.00; 1.00]
-    Attributes       : ['name', 'order', 'vertices', 'valuationDomain', 'seed',
-			'edges', 'size', 'gamma', 'edgeProbability']
+    Attributes       : ['name', 'order', 'vertices', 'valuationDomain',
+                        'seed', 'edges', 'size',
+			'gamma', 'edgeProbability']
    >>> g.isPerfectGraph()
     True
    >>> g.exportGraphViz()
@@ -5451,8 +5444,9 @@ With the :py:class:`graphs.RandomSpanningTree` class we may generate, from a giv
     Graph Order      : 9
     Graph Size       : 8
     Valuation domain : [-1.00; 1.00]
-    Attributes       : ['name','vertices','order','valuationDomain','edges',
-			'size','gamma','dfs','date','dfsx','prueferCode']
+    Attributes       : ['name','vertices','order','valuationDomain',
+                        'edges','size','gamma','dfs','date',
+			'dfsx','prueferCode']
     *---- RandomTree specific data ----*
     Prüfer code  : ['v7', 'v9', 'v5', 'v1', 'v8', 'v4', 'v9']
    >>> spt.exportGraphViz(fileName='randomSpanningTree',\
@@ -5549,8 +5543,9 @@ To compute the most determined spanning tree or forest, we may use the :py:class
     Graph Order      : 5
     Graph Size       : 4
     Valuation domain : [-1.00; 1.00]
-    Attributes       : ['name', 'vertices', 'order', 'valuationDomain', 'edges',
-			'size', 'gamma', 'dfs', 'date', 'averageTreeDetermination']
+    Attributes       : ['name','vertices','order','valuationDomain',
+                        'edges','size','gamma','dfs',
+			'date', 'averageTreeDetermination']
     *---- best determined spanning tree specific data ----*
     Depth first search path(s) :
     [['v1', 'v2', 'v4', 'v2', 'v5', 'v2', 'v1', 'v3', 'v1']]

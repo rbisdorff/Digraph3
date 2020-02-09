@@ -2246,14 +2246,13 @@ we brake the circuits on their weakest arc.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRubisBestChoiceRecommendation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">()</span>
 <span class="go">***********************</span>
 <span class="go">RuBis Best Choice Recommendation (BCR)</span>
 <span class="go">(in decreasing order of determinateness)   </span>
 <span class="go">Credibility domain:  [-100.0, 100.0]</span>
 <span class="go">=== &gt;&gt; potential vest choices</span>
 <span class="go">* choice              : [&#39;a04&#39;, &#39;a14&#39;, &#39;a19&#39;, &#39;a20&#39;]</span>
-<span class="go">   +-irredundancy      : 1.19</span>
 <span class="go">   independence        : 1.19</span>
 <span class="go">   dominance           : 4.76</span>
 <span class="go">   absorbency          : -59.52</span>
@@ -2262,7 +2261,6 @@ we brake the circuits on their weakest arc.</p>
 <span class="go">   - most credible action(s) = { &#39;a14&#39;: 23.81, &#39;a19&#39;: 11.90, &#39;a04&#39;: 2.38, &#39;a20&#39;: 1.19, }  </span>
 <span class="go">=== &gt;&gt; potential worst choices </span>
 <span class="go">* choice              : [&#39;a03&#39;, &#39;a12&#39;, &#39;a17&#39;]</span>
-<span class="go">   +-irredundancy      : 4.76</span>
 <span class="go">  independence        : 4.76</span>
 <span class="go">  dominance           : -76.19</span>
 <span class="go">  absorbency          : 4.76</span>

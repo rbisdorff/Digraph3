@@ -7131,14 +7131,13 @@ class Digraph(object):
         >>> from outrankingDigraphs import *
         >>> t = Random3ObjectivesPerformanceTableau(seed=5)
         >>> g = BipolarOutrankingDigraph(t)
-        >>> g.showRubisBestChoiceRecommendation()
+        >>> g.showBestChoiceRecommendation()
         ***********************
         RuBis Best Choice Recommendation (BCR)
         (in decreasing order of determinateness)   
         Credibility domain:  [-100.0, 100.0]
         === >> potential vest choices
         * choice              : ['a04', 'a14', 'a19', 'a20']
-           +-irredundancy      : 1.19
            independence        : 1.19
            dominance           : 4.76
            absorbency          : -59.52
@@ -7147,7 +7146,6 @@ class Digraph(object):
            - most credible action(s) = { 'a14': 23.81, 'a19': 11.90, 'a04': 2.38, 'a20': 1.19, }  
         === >> potential worst choices 
         * choice              : ['a03', 'a12', 'a17']
-           +-irredundancy      : 4.76
           independence        : 4.76
           dominance           : -76.19
           absorbency          : 4.76
@@ -8199,7 +8197,7 @@ class Digraph(object):
         vec = ch[6]
         vec.sort(reverse=True)
         html  = '<p>Choice              : <b>%s</b><br/>\n ' % str(choice)
-        html += '  +-irredundancy      : %.2f<br/>\n' % (degirred)
+        #html += '  +-irredundancy      : %.2f<br/>\n' % (degirred)
         html += '  independence        : %.2f<br/>\n' % (degi)
         html += '  dominance           : %.2f<br/>\n' % (degd)
         html += '  absorbency          : %.2f<br/>\n' % (dega)
@@ -8255,7 +8253,7 @@ class Digraph(object):
         vec = ch[6]
         vec.sort(reverse=True)
         print('* choice              : ' + str(choice))
-        print('  +-irredundancy      : %.2f' % (degirred))
+        #print('  +-irredundancy      : %.2f' % (degirred))
         print('  independence        : %.2f' % (degi))
         print('  dominance           : %.2f' % (degd))
         print('  absorbency          : %.2f' % (dega))
@@ -8336,7 +8334,7 @@ class Digraph(object):
             degd = ch[3]
             dega = -ch[4]
             print('* choice           : ' + str(choice))
-            print('  +irredundance    : %.2f' % (degirred))
+            #print('  +irredundance    : %.2f' % (degirred))
             print('  independence     : %.2f' % (degi))
             print('  dominance        : %.2f' % (degd))
             print('  absorbency       : %.2f' % (dega))
@@ -8412,7 +8410,7 @@ class Digraph(object):
             degd = -ch[3]
             dega = ch[4]
             print('* choice           : ' + str(choice))
-            print('  -irredundance    : %.2f' % (degirred))
+            #print('  -irredundance    : %.2f' % (degirred))
             print('  independence     : %.2f' % (degi))
             print('  dominance        : %.2f' % (degd))
             print('  absorbency       : %.2f' % (dega))
