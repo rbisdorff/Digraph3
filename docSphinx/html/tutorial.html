@@ -523,7 +523,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </td></tr></table></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Mind that most Digraph class methods will ignore the reflexive couples by considering that the ewflwxivw relation is <strong>indeterminate</strong>, i.e. the characteristic value <img class="math" src="_images/math/9457c394c6a4d0d7d0c273d85cfb105b3139ab67.png" alt="r(x\,S\,x)"/> for all action <em>x</em> is put to the <em>median</em>, i.e. <em>indeterminate</em> value in this case (see <a class="reference internal" href="#bis-2004" id="id3"><span>[BIS-2004]</span></a>).</p>
+<p>Mind that most Digraph class methods will ignore the reflexive couples by considering that the reflexive relations are <strong>indeterminate</strong>, i.e. the characteristic value <img class="math" src="_images/math/9457c394c6a4d0d7d0c273d85cfb105b3139ab67.png" alt="r(x\,S\,x)"/> for all action <em>x</em> is put to the <em>median</em>, i.e. <em>indeterminate</em> value 0 in this case (see <a class="reference internal" href="#bis-2004" id="id3"><span>[BIS-2004]</span></a>).</p>
 </div>
 </div>
 <div class="section" id="graphviz-drawings">
@@ -6276,7 +6276,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <a class="reference internal image-reference" href="_images/dualChordlessCircuit.png"><img alt="The dual of the chordless 6-circuit" src="_images/dualChordlessCircuit.png" style="width: 350px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 42 </span><span class="caption-text">The dual of the chordless 6-circuit</span><a class="headerlink" href="#dualchordlesscircuit" title="Permalink to this image">¶</a></p>
 </div>
-<p>We call <strong>weak</strong>, a <em>chordless circuit</em> with <em>indeterminate inner part</em>. The <a class="reference internal" href="techDoc.html#digraphs.CirculantDigraph" title="digraphs.CirculantDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.CirculantDigraph</span></code></a> class provides a parameter for constructing such king of weak chordless circuits.</p>
+<p>We call <strong>weak</strong>, a <em>chordless circuit</em> with <em>indeterminate inner part</em>. The <a class="reference internal" href="techDoc.html#digraphs.CirculantDigraph" title="digraphs.CirculantDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.CirculantDigraph</span></code></a> class provides a parameter for constructing such a kind of <em>weak chordless</em> circuits.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c6</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">circulants</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
 <span class="gp">... </span>                       <span class="n">IndeterminateInnerPart</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

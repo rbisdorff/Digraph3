@@ -377,7 +377,7 @@ With the ``save()`` method (see Line 3) we may keep a backup version for future 
     
 .. warning::
     
-    Mind that most Digraph class methods will ignore the reflexive couples by considering that the ewflwxivw relation is **indeterminate**, i.e. the characteristic value :math:`r(x\,S\,x)` for all action *x* is put to the *median*, i.e. *indeterminate* value in this case (see [BIS-2004]_).
+    Mind that most Digraph class methods will ignore the reflexive couples by considering that the reflexive relations are **indeterminate**, i.e. the characteristic value :math:`r(x\,S\,x)` for all action *x* is put to the *median*, i.e. *indeterminate* value 0 in this case (see [BIS-2004]_).
 
 Graphviz drawings
 -----------------
@@ -4428,7 +4428,7 @@ Chordless circuits of even length may thus be indifferently oriented along two o
 
    The dual of the chordless 6-circuit
 
-We call **weak**, a *chordless circuit* with *indeterminate inner part*. The :py:class:`digraphs.CirculantDigraph` class provides a parameter for constructing such king of weak chordless circuits. 
+We call **weak**, a *chordless circuit* with *indeterminate inner part*. The :py:class:`digraphs.CirculantDigraph` class provides a parameter for constructing such a kind of *weak chordless* circuits. 
 
 .. code-block:: pycon
    :linenos:

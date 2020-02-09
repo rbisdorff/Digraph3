@@ -9,12 +9,12 @@ Documentation of the Digraph3 resources
 Contents
 --------
 
-* `Introduction <index.html>`_
-* `Tutorials <tutorial.html>`_
-* `Reference manual <techDoc.html>`_
-* `Pearls of bipolar-valued epistemic logic <pearls.html>`_
-* `Archives <digraph3Archives.html>`_
-* `About the author <author.html>`_
+1. `Tutorials <tutorial.html>`_
+2. `Reference manual <techDoc.html>`_
+3. `Pearls of bipolar-valued epistemic logic <pearls.html>`_
+4. `Archives <digraph3Archives.html>`_
+5. `About the author <author.html>`_
+
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
@@ -46,22 +46,22 @@ tree graphs and spanning forests.
 .. toctree:: tutorial
    :maxdepth: 2
 
-The second part concerns the extensive reference manual of the collection of provided Python3 modules, classes and methods. The main classes in this collection are the :py:class:`digraphs.Digraph` overall root class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. The technical documentation also provides insight into the complete source code of all modules, classes and methods.
+The second section concerns the extensive reference manual of the collection of provided Python3 modules, classes and methods. The main classes in this collection are the :py:class:`digraphs.Digraph` overall root class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. The technical documentation also provides insight into the complete source code of all modules, classes and methods.
 
 .. toctree:: techDoc
    :maxdepth: 2
 
-The third part of the Digraph3 documentation exhibits four *pearls of bipolar epistemic logic*. These short texts illustrate well the very computational benefit one may get when working in a bipolar-valued logical framework. And, more specifically, the essential part the logically neutral *undeterminate* value is judiciously playing here.  
+The third section exhibits some *pearls of bipolar epistemic logic*. These short texts illustrate well the very computational benefit one may get when working in a bipolar-valued logical framework. And, more specifically, the essential part the logically neutral *undeterminate* value is judiciously playing therein.  
 
 .. toctree:: pearls
    :maxdepth: 2
 
-The fourth part gathers historical case studies and example digraphs compiled before 2006 and concerning the active development of the Digraph3 collection of python3 modules for implementing tools and methods of the *Rubis decision aiding* approach. 
+The fourth section gathers historical case studies and example digraphs compiled before 2006 and concerning the active development of the Digraph3 collection of python3 modules for implementing tools and methods of the *Rubis decision aiding* approach. 
 
 .. toctree:: digraph3Archives
-   :maxdepth: 2
-	      
-The last part is about the author of the Digraph3 ressources.
+   :maxdepth: 2	     
+
+And, a last section
 
 .. toctree:: author
    :maxdepth: 2
@@ -71,7 +71,7 @@ References
 
 .. [1] R. Bisdorff, L.C. Dias, P. Meyer, V. Mousseau and M. Pirlot (Eds.) (2015). *Evaluation and decision models with multiple criteria: Case studies*. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, `ISBN 978-3-662-46815-9 <https://link.springer.com/book/10.1007/978-3-662-46816-6>`_, 643 pages (see http://hdl.handle.net/10993/23698).
 
-.. [2] R. Bisdorff (2000). "Logical foundation of fuzzy preferential systems with application to the electre decision aid methods", *Computers and Operations Research*, 27: 673-687 (downloadable `PDF file 159.1kB <http://hdl.handle.net/10993/23724>`_)
+.. [2] R. Bisdorff (2000). "Logical foundation of fuzzy preferential systems with application to the Electre decision aid methods", *Computers and Operations Research*, 27: 673-687 (downloadable `PDF file 159.1kB <http://hdl.handle.net/10993/23724>`_)
 
 .. [3] M. Ch. Golumbic (2004), *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier.
        
