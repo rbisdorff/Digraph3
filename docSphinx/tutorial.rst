@@ -961,7 +961,7 @@ But, there may be many cycles appearing in a digraph, and, we may detect and enu
 
 Condorcet's approach for determining the winner of an election is hence not decisive in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see the tutorial on :ref:`Ranking-Tutorial-label` and [BIS-2008]_). 
 
-Many more tools for exploiting voting results are available like the broswer heatmap view on voting profiles (see the technical documentation of the :ref:`votingProfiles-label`).
+Many more tools for exploiting voting results are available like the browser heat map view on voting profiles (see the technical documentation of the :ref:`votingProfiles-label`).
 
 .. code-block:: pycon
 
@@ -972,9 +972,9 @@ Many more tools for exploiting voting results are available like the broswer hea
    :align: center
    :name: cyclicVoting	   
 
-   Visualizing a linear voting profile in a heatmap format
+   Visualizing a linear voting profile in a heat map format
 
-Notice that the importance weights of the voters are *negative*, which means that the preference direction of the criteria (in this case the individal voters) is *decreasing*, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise *NetFlows* ranking *[a4,a5,a2,a1,a3]*, shown in this heatmap (see :numref:`cyclicVoting`) results in an optimal *ordinal correlation* index of +0.778 with the pairwise majority voting margins (see tutorials :ref:`OrdinalCorrelation-Tutorial-label` and :ref:`Ranking-Tutorial-label`). 
+Notice that the importance weights of the voters are *negative*, which means that the preference direction of the criteria (in this case the individual voters) is *decreasing*, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise *NetFlows* ranking *[a4,a5,a2,a1,a3]*, shown in this heat map (see :numref:`cyclicVoting`) results in an optimal *ordinal correlation* index of +0.778 with the pairwise majority voting margins (see tutorials :ref:`OrdinalCorrelation-Tutorial-label` and :ref:`Ranking-Tutorial-label`). 
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -1233,7 +1233,7 @@ As with all Digraph instances, it is possible to store permanently a copy of the
     *----- saving performance tableau in XMCDA 2.0 format  -------------*
     File: tutorialPerfTab.xml saved !
 
-The resulting XML file may be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (`see here <_static/tutorialPerfTab.xml>`_). Hitting ``Ctrl U`` in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Reinstantiating again a corresponding updated *odg* object goes like follow.
+The resulting XML file may be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (`see here <_static/tutorialPerfTab.xml>`_). Hitting ``Ctrl U`` in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Re-instantiating again a corresponding updated *odg* object goes like follow.
 
 .. code-block:: pycon
    :linenos:
@@ -1302,7 +1302,7 @@ The :py:mod:`randomPerfTabs` module provides several constructors for random per
 Generating standard random performance tableaux
 -----------------------------------------------
     
-The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of the kind, specializes the generic :py:class:`refTabs.PerformanceTableau` class, and takes the following parameters.
+The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of the kind, specializes the generic :py:class:`prefTabs.PerformanceTableau` class, and takes the following parameters.
 
     * numberOfActions := nbr of decision actions.
     * numberOfCriteria := number performance criteria.
@@ -1525,7 +1525,7 @@ Generator directives are the following:
     * numberOfCriteria = 13 (default),
     * weightDistribution = 'equiobjectives' (default) | 'random' | 'equisignificant', 
     * weightScale = (1,numberOfCriteria): only used when random criterion weights are requested,
-    * integerWeights = True (default): False gives normlized rational weights, 
+    * integerWeights = True (default): False gives normalized rational weights, 
     * commonScale = (0.0,100.0),
     * commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)]: Performance discrimination thresholds may be set for 'ind', 'pref' and 'veto',  
     * commonMode = ['triangular','variable',0.5]: random number generators of various other types ('uniform','beta') are available,
@@ -1597,7 +1597,7 @@ In the example code above, we notice that 5 *equisignificant* criteria (g06, g07
 
 Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. Action *a01* , for instance, will probably show *good* performances wrt the *economical*  and environmental aspects, and *weak* performances wrt the *societal* aspect.
 
-For testing purposes we provifde a special :py:class:`perfTabs.PartialPerformanceTableau` class for extracting a **partial performance tableau** from a given tableau instance. In the example blow, we construct the partial performance tableaux corresponding to each on of the three decision objectives.
+For testing purposes we provide a special :py:class:`perfTabs.PartialPerformanceTableau` class for extracting a **partial performance tableau** from a given tableau instance. In the example blow, we construct the partial performance tableaux corresponding to each on of the three decision objectives.
 
 .. code-block:: pycon
    :linenos:
@@ -1674,9 +1674,9 @@ Decision action *a26* (Eco+ Soc+ Env-) appears dominating the other decision alt
 Generating random linearly ranked performances
 ----------------------------------------------
 
-Finally, we provide the :py:class:`randomPerfTabs.RandomRankPerformanceTableau` class for generating multiple criteria ranked performances, ie on each criterion, all decision actions appear linearly ordered without ties.
+Finally, we provide the :py:class:`randomPerfTabs.RandomRankPerformanceTableau` class for generating multiple criteria ranked performances, i.e. on each criterion, all decision actions appear linearly ordered without ties.
 
-This type of random performance tabeau is matching the :py:class:`votingDigraphs.RandomLinearVotingProfile` class provided by the :py:mod:`votingProfiles` module.  
+This type of random performance tableau is matching the :py:class:`votingDigraphs.RandomLinearVotingProfile` class provided by the :py:mod:`votingProfiles` module.  
         
 *Parameters*:
     * number of actions,
@@ -1768,7 +1768,7 @@ To estimate how difficult this ranking problem may be, we can have a look at the
 
    The strict outranking digraph	   
 
-The shown strict outranking relation is apparently not transitive: for instance, alternative *a9* outranks alternative *a5* and alternative *a5* outranks *a2*, however *a9* does not outrank *a2*. We may compute the transitivity degree of the outranking digraph, ie the ratio of the number of outranking arcs over the number of arcs of the transitive closue of the digraph *gcd*.
+The shown strict outranking relation is apparently not transitive: for instance, alternative *a9* outranks alternative *a5* and alternative *a5* outranks *a2*, however *a9* does not outrank *a2*. We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph *gcd*.
 
     >>> gcd.computeTransitivityDegree()
      Decimal('0.508')
@@ -1933,7 +1933,7 @@ The **Slater** ranking rule is similar to Kemeny's, but it is working, instead, 
    >>> slw = KemenyOrdersFusion(c,orderLimit=9)
    >>> slw.exportGraphViz('tutorialSlater')
 
-We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the follwowing partial ordering.
+We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the following partial ordering.
 
 .. figure:: tutorialSlater.png
     :width: 150pt
@@ -2026,7 +2026,7 @@ Ranking big performance tableaux
 
 None of the previous ranking heuristics, using essentially only the information given by the outranking relation, are scalable for big outranking digraphs gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into ordered quantiles equivalence classes. This decomposition will lead to a pre-ranked sparse outranking digraph.
 
-In the coding example, we generate for instance, by using multiprocessing techniques, first, a cost benefit performance tableau of 100 decision alternatives and, secondly, we construct a **pre-ranked sparse outranking digraph** instance called *bg*. Notice bwt the *BigData* flag used here for generating a parcimonous performance tableau.
+In the coding example, we generate for instance, by using multiprocessing techniques, first, a cost benefit performance tableau of 100 decision alternatives and, secondly, we construct a **pre-ranked sparse outranking digraph** instance called *bg*. Notice BTW the *BigData* flag used here for generating a parsimonious performance tableau.
 
 .. code-block:: pycon
 
@@ -2684,7 +2684,7 @@ We consider now a partial performance tableau *best10*, consisting only, for ins
    >>> g.computeTransitivityDegree()
     Decimal('0.78')
 
-Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each **positively outrank** all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking digraph (ie the codual ~(-*g*) of *g*) shown in :numref:`converse-dual_rel_best10`.
+Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each **positively outrank** all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking digraph (i.e. the codual ~(-*g*) of *g*) shown in :numref:`converse-dual_rel_best10`.
   
 .. code-block:: pycon
 
@@ -2851,7 +2851,7 @@ A colorful comparison of all the performances is shown by the **heat map** stati
    :width: 500 px
    :align: center
 
-   Heatmap of the office choice performance tableau
+   Heat map of the office choice performance tableau
 	   
 Site *A* shows extreme and contradictory performances: highest *Costs* and no *Working Comfort* on one hand, and total satisfaction with respect to *Standing*, *Proximity* and *Parking facilities* on the other hand. Similar, but opposite, situation is given for site *C*: unsatisfactory *Working Space*, no *Standing* and no *Working Comfort* on the one hand, and lowest *Costs*, best *Proximity* and *Parking facilities* on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites *D* and *G*. Finally, site *F* is clearly the less satisfactory alternative of all.
 
@@ -3161,7 +3161,7 @@ Rating with learned quantile norms
 Introduction
 ------------
 	  
-In this tutorial we address the problem of **rating multiple criteria performances** of a set of potential decision alternatives with respect to empirical order statistics, ie performance quantiles learned from historical performance data gathered from similar decision alternatives observed in the past (see [CPSTAT-L5]_).
+In this tutorial we address the problem of **rating multiple criteria performances** of a set of potential decision alternatives with respect to empirical order statistics, i.e. performance quantiles learned from historical performance data gathered from similar decision alternatives observed in the past (see [CPSTAT-L5]_).
 
 To illustrate the decision problem we face, consider for a moment that, in a given decision aid study, we observe, for instance in the Table below, the multi-criteria performances of two potential decision alternatives, named *a1001* and *a1010*, marked on 7 **incommensurable** preference criteria: 2 **costs** criteria *c1* and *c2* (to **minimize**) and 6 **benefits** criteria *b1* to *b5* (to **maximize**). 
 
@@ -3238,7 +3238,7 @@ The :py:class:`performanceQuantiles.PerformanceQuantiles` class parameter *numbe
        'b4'  |    2    |  3.27    30.10    50.82     70.89    98.05  
        'b5'  |    2    |  0.85    29.08    48.55     69.98    97.56  
 
-Both objectives are **equi-important**; the sum of weights (10) of the *costs* criteria balance the sum of weights (10) of the *benefits* criteria (see column 2). The preference direction of the *costs* criteria *c1* and *c2* is **negative**; the lesser the costs the better it is, whereas all the *benefits* criteria *b1* to *b5* show **positive** preference directions, ie the higher the benefits the better it is. The columns entitled '0.0', resp. '1.0' show the *quartile* *Q0*, resp. *Q4*, ie the **worst**, resp. **best** performance observed so far on each criterion. Column '0.5' shows the **median** (*Q2*) observed on the criteria.  
+Both objectives are **equi-important**; the sum of weights (10) of the *costs* criteria balance the sum of weights (10) of the *benefits* criteria (see column 2). The preference direction of the *costs* criteria *c1* and *c2* is **negative**; the lesser the costs the better it is, whereas all the *benefits* criteria *b1* to *b5* show **positive** preference directions, i.e. the higher the benefits the better it is. The columns entitled '0.0', resp. '1.0' show the *quartile* *Q0*, resp. *Q4*, i.e. the **worst**, resp. **best** performance observed so far on each criterion. Column '0.5' shows the **median** (*Q2*) observed on the criteria.  
 
 New  decision alternatives with random multiple criteria performance vectors from the same random performance tableau model may now be generated with ad hoc random performance generators. We provide for experimental purpose, in the :py:mod:`randomPerfTabs` module, three such generators: one for the standard :py:class:`randomPerfTabs.RandomPerformanceTableau` model, one the for the two objectives :py:class:`randomPerfTabs.RandomCBPerformanceTableau` Cost-Benefit model, and one for the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` model with three objectives concerning respectively  economic, environmental or social aspects.
 
@@ -3254,7 +3254,7 @@ Given a new Performance Tableau with 100 new decision alternatives, the so far e
    >>> # Updating the quartile norms shown above 
    >>> pq.updateQuantiles(newTab,historySize=None)
 
-Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance** the **new** evaluations against the **historical** ones. With **historySize = None** (the default setting), the balance in the example above is 900/1000 (90%, weight of historical data) against 100/1000 (10%, weight of the new incoming observations). Putting **historySize = 0**, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view (see :numref:`examplePerfQuantiles`).
+Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance** the **new** evaluations against the **historical** ones. With **historySize = None** (the default setting), the balance in the example above is 900/1000 (90%, weight of historical data) against 100/1000 (10%, weight of the new incoming observations). Putting **historySize = 0**, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incoming data. The updated quantile limits may be shown in a browser view (see :numref:`examplePerfQuantiles`).
 
 .. code-block:: pycon
 
@@ -3279,7 +3279,7 @@ The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuan
 
 .. note::
 
-   It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, contrary to the generic :py:class:`outrankingDigraphs.OutrankingDigraph` class, does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. The **actions** in such a :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance contain not only the newly given decision alternatives, but also the historical quantile profiles obtained from a given :py:class:`performanceQuantiles.PerformanceQuantiles` class instance, ie estimated quantile bins' performance limits from historical performance data.
+   It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, contrary to the generic :py:class:`outrankingDigraphs.OutrankingDigraph` class, does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. The **actions** in such a :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance contain not only the newly given decision alternatives, but also the historical quantile profiles obtained from a given :py:class:`performanceQuantiles.PerformanceQuantiles` class instance, i.e. estimated quantile bins' performance limits from historical performance data.
 
 We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed in the previous section. Let *newActions* be a list of 10 new decision alternatives generated with the same random performance tableau model and including the two decision alternatives *a1001* and *a1010* mentioned at the beginning.
 
@@ -3353,7 +3353,7 @@ The :py:class:`NormedQuantilesRatingDigraphdigraph` instance's *actions* diction
        'c1'  |  -10.0   -7.4   -5.4   -3.4  
        'c2'  |  -96.4  -72.2  -52.3  -34.0  
 
-The main run time (see Lines 23-29 of the object description above) is spent by the class constructor in computing a bipolar-valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, ie many new decision alternatives and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
+The main run time (see Lines 23-29 of the object description above) is spent by the class constructor in computing a bipolar-valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, i.e. many new decision alternatives and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
 
 The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar-valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
 
@@ -3373,7 +3373,7 @@ In this rating example, the *NetFlows* rule appears to be the more appropriate r
     ...         (nqr.rankingCorrelation['correlation']) )
     Ranking correlation : +0.938
 
-We achieve here a linear ranking without ties (from best to worst) of the digraph's actions, ie including the new decision alternatives as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense (*tau* = 0.94) to the underlying valued outranking relation.
+We achieve here a linear ranking without ties (from best to worst) of the digraph's actions, i.e. including the new decision alternatives as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense (*tau* = 0.94) to the underlying valued outranking relation.
 
 The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes' contents in increasing order of the *quartiles* ' lower limits.
 
@@ -3393,7 +3393,7 @@ We notice above that no new decision alternative is rated in the lowest [0.0-0.2
     [0.50 - 0.75[ ['a1005', 'a1010', 'a1008', 'a1002', 'a1006']
     [0.25 - 0.50[ ['a1003', 'a1001', 'a1007', 'a1004', 'a1009']
     
-The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method (see :numref:`heatMap1`).
+The same result may even more conveniently be consulted in a browser view via a specialised rating heat map format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method (see :numref:`heatMap1`).
 
 .. code-block:: pycon
 
@@ -3406,7 +3406,7 @@ The same result may even more conviently be consulted in a browser view via a sp
     :width: 400 px
     :align: center
 
-    Heatmap of normed quartiles ranking 
+    Heat map of normed quartiles ranking 
 	    
 Using furthermore a specialised version of the :py:meth:`transitiveDigraphs.TransitiveDigraph.exportGraphViz` method allows drawing the same rating result in a Hasse diagram format (see :numref:`normedRatingDigraph`).
 
@@ -3465,7 +3465,7 @@ A browser view may again more conveniently illustrate this preciser *deciles* ra
     :width: 400 px
     :align: center
 
-    Heatmap of mormed deciles rating 
+    Heat map of mormed deciles rating 
 
 In this preciser *deciles* rating, decision alternatives *a1001* and *a1010* are now rated in the *6th* decile (D6), respectively in the *7th* decile (D7).
     
@@ -3489,10 +3489,10 @@ Structure of a ``Graph`` object
 
 In the :py:mod:`graphs` module, the root :py:class:`graphs.Graph` class provides a generic **simple graph model**, without loops and multiple links. A given object of this class consists in:
 
-1. the graph **vertices** : a dictionary of vertices with 'name' and 'shortname' attributes,
+1. the graph **vertices** : a dictionary of vertices with 'name' and 'shortName' attributes,
 2. the graph **valuationDomain** , a dictionary with three entries: the minimum (-1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),
 3. the graph **edges** : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,
-4. and its associated **gamma function** : a dictionary containing the direct neighbors of each vertice, automatically added by the object constructor.
+4. and its associated **gamma function** : a dictionary containing the direct neighbors of each vertex, automatically added by the object constructor.
 
 See the technical documentation of the :ref:`graphs-label`.
 
@@ -3559,7 +3559,7 @@ The stored graph can be recalled and plotted with the generic :py:func:`graphs.G
 
    Tutorial graph instance
 
-Properties, like the gamma function and vertex degrees and neighbourhooddepths may be shown with a `graphs.Graph.showShort()` method.
+Properties, like the gamma function and vertex degrees and neighbourhood depths may be shown with a `graphs.Graph.showShort()` method.
 
 .. code-block:: pycon
    :linenos:
@@ -3702,7 +3702,7 @@ MIS and clique enumeration
      frozenset({'v1', 'v6', 'v7', 'v3'}), 
      frozenset({'v1', 'v6', 'v4', 'v3'})]
 
-A MIS in the dual of a graph instance *g* (its negation *-g* [14]_), corresponds to a maximal **clique**, ie a maximal complete subgraph in *g*. Maximal cliques may be directly enumerated with the `graphs.Graph.showCliques()` method.
+A MIS in the dual of a graph instance *g* (its negation *-g* [14]_), corresponds to a maximal **clique**, i.e. a maximal complete subgraph in *g*. Maximal cliques may be directly enumerated with the `graphs.Graph.showCliques()` method.
 
 .. code-block:: pycon
    :linenos:
@@ -3801,7 +3801,7 @@ Notice that the MISs in the line graph provide **maximal matchings** - *maximal 
     freq.:  [0, 0, 0, 8, 2, 0, 0, 0, 0]
     execution time: 0.00029 sec.
 
-The two last MISs of cardinality 4 (see Lines 13-16 above) give **isomorphic perfect maximum matchings** of the 8-cycle graph. Every vertex of the cycle is adjacent to a matching edge. Odd cyle graphs do not admid any perfect matching.
+The two last MISs of cardinality 4 (see Lines 13-16 above) give **isomorphic perfect maximum matchings** of the 8-cycle graph. Every vertex of the cycle is adjacent to a matching edge. Odd cycle graphs do not admit any perfect matching.
 
 .. code-block:: pycon
 
@@ -4091,7 +4091,7 @@ What is a graph kernel ?
 
 We call **choice** in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice *Y* is called **internally stable** or **independent** when there exist **no links** (edges) or relations (arcs) between its members. Furthermore, a choice *Y* is called **externally stable** when for each vertex, node or action *x* not in *Y*, there exists at least a member *y* of *Y* such that *x* is linked or related to *y*. Now, an internally **and** externally stable choice is called a **kernel**.  
 
-A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see :ref:`IsomorphicMIS-Tutorial-label`). Indeed, each MIS in the n-cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in :numref:`MISc12`. 
+A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see :ref:`IsomorphicMIS-Tutorial-label`). Indeed, each MIS in the n-cycle graph is by definition independent, i.e. internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in :numref:`MISc12`. 
 
 In all graph or symmetric digraph, the *maximality condition* imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal **holes** in the given graph.
 
@@ -4250,7 +4250,7 @@ In our random 3-regular graph instance (see :numref:`random3RegularGraph`), we m
 
    Two isomorphic kernels of the random 3-regular graph instance
 
-All graphs and symmetric digraphs admid MISs, hence also kernels.
+All graphs and symmetric digraphs admit MISs, hence also kernels.
 
 It is worthwhile noticing that the **maximal matchings** of a graph correspond bijectively to its line graph's **kernels** (see the :py:class:`graphs.LineGraph` class).
 
@@ -4276,7 +4276,7 @@ It is worthwhile noticing that the **maximal matchings** of a graph correspond b
 
    Perfect maximum matching in the 8-cycle graph
 
-In the context of digraphs, ie *oriented* graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.  
+In the context of digraphs, i.e. *oriented* graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.  
 
 Initial and terminal kernels
 ----------------------------
@@ -4284,11 +4284,11 @@ Initial and terminal kernels
 In an oriented graph context, the internal stability condition of the kernel concept remains untouched; however, the external stability condition gets indeed split up by the *orientation* into two lateral cases:
 
      1. A **dominant** stability condition, where each non selected node is *dominated* by at least one member of the kernel;
-     2. An **absorbant** stability condition, where each non selected node is *absorbed* by at least one member of the kernel.
+     2. An **absorbent** stability condition, where each non selected node is *absorbed* by at least one member of the kernel.
 
 A both *internally* **and** *dominant*, resp. *absorbent stable* choice is called a *dominant* or **initial**, resp. an *absorbent* or **terminal** kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a *prefix* operand, and the terminal kernel is a *postfix* operand in the *Berge* kernel equation systems.
 
-Furthermore, as the kernel concept involves conjointly a **positive logical refutation** (the *internal stability*) and a **positive logical affirmation** (the *external stability*), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, modelling *negation* by change of numerical sign and including explicitely a third **median** logical value (0) expressing logical **indeterminateness** (neither positive, nor negative, see [BIS-2000]_ and [BIS-2004]_).
+Furthermore, as the kernel concept involves conjointly a **positive logical refutation** (the *internal stability*) and a **positive logical affirmation** (the *external stability*), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic [-1,1] valuation domain, modelling *negation* by change of numerical sign and including explicitly a third **median** logical value (0) expressing logical **indeterminateness** (neither positive, nor negative, see [BIS-2000]_ and [BIS-2004]_).
 
 In such a  bipolar-valued context, we call **prekernel** a choice which is **externally stable** and for which the **internal stability** condition is **valid or indeterminate**. We say that the independence condition is in this case only **weakly** validated. Notice that all kernels are hence prekernels, but not vice-versa.
 
@@ -4374,7 +4374,7 @@ In the empty digraph, the whole set of nodes gives indeed at the same time the *
 
 Both these results make sense, as in a completely empty or indeterminate digraph, there is no *interior* of the digraph defined, only a *border* which is hence at the same time an initial and terminal kernel.  Notice however, that in the latter indeterminate case, the complete set of nodes verifies only weakly the internal stability condition (see above).
 
-Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like **odd chordless circuits**, ie *holes* surrounded by an *oriented cycle* -a circuit- of odd length. They do not admit in fact any initial or terminal kernel.
+Other common digraph models, although being clearly oriented, may show nevertheless no apparent laterality, like **odd chordless circuits**, i.e. *holes* surrounded by an *oriented cycle* -a circuit- of odd length. They do not admit in fact any initial or terminal kernel.
 
 .. code-block:: pycon
    :linenos:
@@ -4403,7 +4403,7 @@ Chordless circuits of **even** length 2 x *k*, with *k* > 1, contain however two
     ['1', '3', '5'] independence: 1.0, dominance: 1.0, absorbency: 1.0
     ['2', '4', '6'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 
-Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of **all** chordless circuits of *odd* **or** *even* length, ie *filled* circuits also called **anti-holes** (see :numref:`dualChordlessCircuit`), never contain any potential kernel candidates.
+Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of **all** chordless circuits of *odd* **or** *even* length, i.e. *filled* circuits also called **anti-holes** (see :numref:`dualChordlessCircuit`), never contain any potential kernel candidates.
 
 .. code-block:: pycon
    :linenos:
@@ -4464,7 +4464,7 @@ It immediately follows that weak chordless circuits are part of the class of dig
 Kernels in lateralized digraphs
 -------------------------------
 
-Humans do live in an apparent physical space of plain transitive **lateral orientation**, fully empowered in finite geometrical 3D models with **linear orders**, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite **preorders**, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite **partial orders**, ie asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
+Humans do live in an apparent physical space of plain transitive **lateral orientation**, fully empowered in finite geometrical 3D models with **linear orders**, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite **preorders**, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite **partial orders**, i.e. asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
 
 In genuine random digraphs, however, we may need to check for each of its MISs, whether *one*, *both*, or *none* of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30%. 
 
@@ -4592,7 +4592,7 @@ To illustrate this idea, let us finally compute good and bad choice recommendati
 
    The performance tableau of a random outranking digraph instance
 
-The underlying random performance tableau (see :numref:`randomOutranking`) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions 'a2' and 'a5'. The resulting **strict outranking** - ie a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in :numref:`tutOutranking` below.
+The underlying random performance tableau (see :numref:`randomOutranking`) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions 'a2' and 'a5'. The resulting **strict outranking** - i.e. a weighted majority supported - *better than without considerable counter-performance* - digraph is shown in :numref:`tutOutranking` below.
 
 .. code-block:: pycon
 
@@ -4630,7 +4630,7 @@ All decision actions appear strictly better performing than action 'a7'. We call
        absorbency   :  16.28
        covered      :  0.800
 
-With such unique disjoint initial and terminal prekernels (see Line 4 and 10), the given digraph instance is hence clearly *lateralized*. Indeed, these initial and terminal prekernels of the codual outranking digraph reveal best, resp. worst, choice recomendations one may formulate on the basis of a given outranking digraph instance.
+With such unique disjoint initial and terminal prekernels (see Line 4 and 10), the given digraph instance is hence clearly *lateralized*. Indeed, these initial and terminal prekernels of the codual outranking digraph reveal best, resp. worst, choice recommendations one may formulate on the basis of a given outranking digraph instance.
 
 .. code-block:: pycon
    :linenos:
@@ -4679,7 +4679,7 @@ In :numref:`bestWorstOrientation` below, we orient the drawing of the strict out
 
    The strict outranking digraph oriented by its best and worst choice recommendations
 
-The grey arrows in :numref:`bestWorstOrientation`, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-Tutorial-label`).
+The gray arrows in :numref:`bestWorstOrientation`, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-Tutorial-label`).
 
 .. code-block:: pycon
 
@@ -4692,7 +4692,7 @@ The grey arrows in :numref:`bestWorstOrientation`, like the one between actions 
    :align: center
    :alt: Copeland ranking of the random outranking digraph instance
 
-   Heatmap with Copeland ranking of the performance tableau
+   Heat map with Copeland ranking of the performance tableau
 
 In the resulting linear ranking (see :numref:`outrankingResult`), action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile. Both decision actions, hence, don't show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in :numref:`outrankingResult` above.
 
@@ -4763,7 +4763,7 @@ For more or less dense strict outranking digraphs of modest order, as facing usu
                     Sx = [(Sxchoice,Sxgamdom,Sxgamabs,Sxindep)]
                     yield Sx
 
-And, checking maximality of independent choices via the external stability conditions during their emuneration (see :py:func:`digraphs.Digraph.computePreKernels` below) provides the effective advantage of computing all initial **and** terminal prekernels in a single loop (see Line 10 and [BIS-2006b]_).
+And, checking maximality of independent choices via the external stability conditions during their enumeration (see :py:func:`digraphs.Digraph.computePreKernels` below) provides the effective advantage of computing all initial **and** terminal prekernels in a single loop (see Line 10 and [BIS-2006b]_).
 
 .. code-block:: python
    :linenos:
@@ -4799,7 +4799,7 @@ About split, interval and permutation graphs
 	:local:
 
 
-A multipally *perfect* graph
+A multiply *perfect* graph
 ----------------------------
 
 Following Martin Golumbic (see [GOL-2004]_ p. 149), we call a given graph *g*:
@@ -4860,25 +4860,25 @@ With seed = 100, we obtain here an *interval* graph, in fact a **perfect graph**
 
 .. Figure:: randomSplitGraph.png
     :name: randomSplitGraph
-    :alt: Ransdom split graph
+    :alt: Random split graph
     :width: 350 px
     :align: center
 
     A conjointly triangulated, comparability, interval, permutation and split graph
 
-In :numref:`randomSplitGraph` we may readily recognize the essential characteristic of **split graphs**, namely being always splitable into two disjoint sub-graphs: an *independentt choice* (*v6*) and a *clique* (*v1*, *v2*, *v3*, *v4*, *v5*, *v7*, *v8*); which explains their name.
+In :numref:`randomSplitGraph` we may readily recognize the essential characteristic of **split graphs**, namely being always splitable into two disjoint sub-graphs: an *independent choice* (*v6*) and a *clique* (*v1*, *v2*, *v3*, *v4*, *v5*, *v7*, *v8*); which explains their name.
 
 Notice however that the four properties:
 
     #. *g* is a *comparability* graph;
-    #. *g* is a *cocomparability* graph, ie *-g* is a *comparability* graph;
+    #. *g* is a *cocomparability* graph, i.e. *-g* is a *comparability* graph;
     #. *g* is a *triangulated* graph;
-    #. *g* is a *cotriangulated* graph, ie *-g* is a *comparability* graph;
+    #. *g* is a *cotriangulated* graph, i.e. *-g* is a *comparability* graph;
 
 are *independent* of one another (see [GOL-2004]_ p. 275).
 
 
-Who is the lier ?
+Who is the liar ?
 -----------------
 
 *Claude Berge* 's famous mystery story (see [GOL-2004]_ p.20) may well illustrate the importance of being an **interval graph**.
@@ -4942,7 +4942,7 @@ Six professors (labeled *A*, *B*, *C*, *D*, *E* and *I*) had been to the library
 
    Graph representation of the testimonies of the professors	   
 
-From graph theory we know that time interval intersections graphs must in fact be interval graphs, ie *triangulated* and *co-comparative* graphs. The testimonies graph should therefore not contain any chordless cycle of four and more vertices. Now, the presence or not of such chordless cycles in the testimonies graph may be checked as follows.
+From graph theory we know that time interval intersections graphs must in fact be interval graphs, i.e. *triangulated* and *co-comparative* graphs. The testimonies graph should therefore not contain any chordless cycle of four and more vertices. Now, the presence or not of such chordless cycles in the testimonies graph may be checked as follows.
 
 .. code-block:: pycon
    :linenos:
@@ -5048,7 +5048,7 @@ By using color sorting queues, the minimal vertex coloring for a permutation gra
 	    
     Minimal vertex coloring of the permutation graph
 
-The correspondingly colored **matching diagram** of the nine **inversions** -the actual *edges* of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz *neato* layout and explicitely positioned horizontal lists of vertices (see :numref:`perm_permutationGraph`).
+The correspondingly colored **matching diagram** of the nine **inversions** -the actual *edges* of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz *neato* layout and explicitly positioned horizontal lists of vertices (see :numref:`perm_permutationGraph`).
 
 .. code-block:: pycon
 
@@ -5140,7 +5140,7 @@ Let us consider, for instance, the following random graph of *order* 8 generated
 
     Random graph of order 8 generated with edge probability 0.4
 
-If the random perfect graph instance *g* (see :numref:`randomGraph4335`) is indeed a permutation graph, *g* and its dual *-g* should be *transitively orientable*, ie **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a transitive neighbourhood decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
+If the random perfect graph instance *g* (see :numref:`randomGraph4335`) is indeed a permutation graph, *g* and its dual *-g* should be *transitively orientable*, i.e. **comparability graphs** (see [GOL-2004]_). With the :py:func:`graphs.Graph.isComparabilityGraph` test, we may easily check this fact. This method proceeds indeed by trying to construct a transitive neighbourhood decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a *self.edgeOrientations* attribute (see [GOL-2004]_ p.129-132).
 
 .. code-block:: pycon
    :linenos:
@@ -5207,7 +5207,7 @@ The resulting orientation of the edges of *g* (see :numref:`transOrientGraph`) i
  
 It is worthwhile noticing that the orientation of *g* is achieved with a *single neighbourhood* decomposition, covering all the vertices. Whereas, the orientation of the dual *-g* needs a decomposition into *three subsequent neighbourhoods* marked in black, red and blue (see :numref:`transOrientDualGraph`).
 
-Let us recheck these facts by explicitely constructing transitively oriented digraph instances with the :py:func:`graphs.Graph.computeTransitivelyOrientedDigraph` method. 
+Let us recheck these facts by explicitly constructing transitively oriented digraph instances with the :py:func:`graphs.Graph.computeTransitivelyOrientedDigraph` method. 
 
 .. code-block:: pycon
 
@@ -5339,7 +5339,7 @@ Using the :py:class:`graphs.RandomTree` class, we may, for instance, generate a 
 
 A tree graph of order *n* contains *n-1* edges (see Line 8 and 9) and we may distinguish vertices like *v1*, *v2*, *v4*, *v5* or *v9*  of degree 1, called the **leaves** of the tree, and vertices like *v3*, *v6*, *v7* or *v8* of degree 2 or more, called the **nodes** of the tree.
 
-The structure of a tree of order :math:`n > 2` is entirely characterised by a corresponding *Prüfer* **code** -ie a *list of vertices keys*- of length *n-2*. See, for instance in Line 12 the code ['v3', 'v8', 'v8', 'v3', 'v7', 'v6', 'v7'] corresponding to our sample tree graph *t*.
+The structure of a tree of order :math:`n > 2` is entirely characterised by a corresponding *Prüfer* **code** -i.e. a *list of vertices keys*- of length *n-2*. See, for instance in Line 12 the code ['v3', 'v8', 'v8', 'v3', 'v7', 'v6', 'v7'] corresponding to our sample tree graph *t*.
 
 Each position of the code indicates the parent of the remaining leaf with the smallest vertex label. Vertex *v3* is thus the parent of *v1* and we drop leaf *v1*, *v8* is now the parent of leaf *v2* and we drop *v2*, vertex *v8* is again the parent of leaf *v4* and we drop *v4*, vertex *v3* is the parent of leaf *v5* and we drop *v5*, *v7* is now the parent of leaf *v3* and we may drop *v3*, *v6* becomes the parent of leaf *v8* and we drop *v8*, *v7* becomes now the parent of leaf *v6* and we may drop *v6*. The two eventually remaining vertices, *v7* and *v9*, give the last link in the reconstructed tree (see [BAR-1991]_).  
 
@@ -5556,7 +5556,7 @@ To compute the most determined spanning tree or forest, we may use the :py:class
     [['v1', 'v2', 'v4', 'v2', 'v5', 'v2', 'v1', 'v3', 'v1']]
     Average determination(s) : [Decimal('0.655')]
 
-The given graph is connected and, hence, admids a single spanning tree (see :numref:`bestDeterminedSpanningTree`) of **maximum mean determination** = (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655** (see Lines 9, 6 and 10 in the relation table above).
+The given graph is connected and, hence, admits a single spanning tree (see :numref:`bestDeterminedSpanningTree`) of **maximum mean determination** = (0.47 + 0.91 + 0.90 + 0.34)/4 = **0.655** (see Lines 9, 6 and 10 in the relation table above).
 
 .. code-block:: pycon
    :linenos:

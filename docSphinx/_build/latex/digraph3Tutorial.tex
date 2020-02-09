@@ -1107,7 +1107,7 @@ But, there may be many cycles appearing in a digraph, and, we may detect and enu
 
 Condorcet’s approach for determining the winner of an election is hence not decisive in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see the tutorial on {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}} and \sphinxcite{tutorial:bis-2008}).
 
-Many more tools for exploiting voting results are available like the broswer heatmap view on voting profiles (see the technical documentation of the \DUrole{xref,std,std-ref}{votingProfiles\sphinxhyphen{}label}).
+Many more tools for exploiting voting results are available like the browser heat map view on voting profiles (see the technical documentation of the \DUrole{xref,std,std-ref}{votingProfiles\sphinxhyphen{}label}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v}\PYG{o}{.}\PYG{n}{showHTMLVotingHeatmap}\PYG{p}{(}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NetFlows}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -1118,9 +1118,9 @@ Many more tools for exploiting voting results are available like the broswer hea
 \capstart
 
 \noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{votingHeatmap}.png}
-\caption{Visualizing a linear voting profile in a heatmap format}\label{\detokenize{tutorial:cyclicvoting}}\end{figure}
+\caption{Visualizing a linear voting profile in a heat map format}\label{\detokenize{tutorial:cyclicvoting}}\end{figure}
 
-Notice that the importance weights of the voters are \sphinxstyleemphasis{negative}, which means that the preference direction of the criteria (in this case the individal voters) is \sphinxstyleemphasis{decreasing}, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise \sphinxstyleemphasis{NetFlows} ranking \sphinxstyleemphasis{{[}a4,a5,a2,a1,a3{]}}, shown in this heatmap (see \hyperref[\detokenize{tutorial:cyclicvoting}]{Fig.\@ \ref{\detokenize{tutorial:cyclicvoting}}}) results in an optimal \sphinxstyleemphasis{ordinal correlation} index of +0.778 with the pairwise majority voting margins (see tutorials \DUrole{xref,std,std-ref}{OrdinalCorrelation\sphinxhyphen{}Tutorial\sphinxhyphen{}label} and {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}}).
+Notice that the importance weights of the voters are \sphinxstyleemphasis{negative}, which means that the preference direction of the criteria (in this case the individual voters) is \sphinxstyleemphasis{decreasing}, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise \sphinxstyleemphasis{NetFlows} ranking \sphinxstyleemphasis{{[}a4,a5,a2,a1,a3{]}}, shown in this heat map (see \hyperref[\detokenize{tutorial:cyclicvoting}]{Fig.\@ \ref{\detokenize{tutorial:cyclicvoting}}}) results in an optimal \sphinxstyleemphasis{ordinal correlation} index of +0.778 with the pairwise majority voting margins (see tutorials \DUrole{xref,std,std-ref}{OrdinalCorrelation\sphinxhyphen{}Tutorial\sphinxhyphen{}label} and {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}}).
 
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}}
 
@@ -1414,7 +1414,7 @@ As with all Digraph instances, it is possible to store permanently a copy of the
 \PYG{g+go}{ File: tutorialPerfTab.xml saved !}
 \end{sphinxVerbatim}
 
-The resulting XML file may be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (\sphinxhref{\_static/tutorialPerfTab.xml}{see here}). Hitting \sphinxcode{\sphinxupquote{Ctrl U}} in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Reinstantiating again a corresponding updated \sphinxstyleemphasis{odg} object goes like follow.
+The resulting XML file may be visualized in a browser window (other than Chrome or Chromium)  with a corresponding XMCDA style sheet (\sphinxhref{\_static/tutorialPerfTab.xml}{see here}). Hitting \sphinxcode{\sphinxupquote{Ctrl U}} in Firefox will open a browser window showing the underlying xml encoded raw text. It is thus possible to easily edit and update as needed a given performance tableau instance. Re\sphinxhyphen{}instantiating again a corresponding updated \sphinxstyleemphasis{odg} object goes like follow.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pt} \PYG{o}{=} \PYG{n}{XMCDA2PerformanceTableau}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tutorialPerfTab}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -1498,7 +1498,7 @@ a given number of decision actions.
 
 \subsection{Generating standard random performance tableaux}
 \label{\detokenize{tutorial:generating-standard-random-performance-tableaux}}
-The \sphinxcode{\sphinxupquote{randomPerfTabs.RandomPerformanceTableau}} class, the simplest of the kind, specializes the generic \sphinxcode{\sphinxupquote{refTabs.PerformanceTableau}} class, and takes the following parameters.
+The \sphinxcode{\sphinxupquote{randomPerfTabs.RandomPerformanceTableau}} class, the simplest of the kind, specializes the generic \sphinxcode{\sphinxupquote{prefTabs.PerformanceTableau}} class, and takes the following parameters.
 \begin{itemize}
 \item {} 
 numberOfActions := nbr of decision actions.
@@ -1786,7 +1786,7 @@ weightDistribution = ‘equiobjectives’ (default) | ‘random’ | ‘equisign
 weightScale = (1,numberOfCriteria): only used when random criterion weights are requested,
 
 \item {} 
-integerWeights = True (default): False gives normlized rational weights,
+integerWeights = True (default): False gives normalized rational weights,
 
 \item {} 
 commonScale = (0.0,100.0),
@@ -1870,7 +1870,7 @@ In the example code above, we notice that 5 \sphinxstyleemphasis{equisignificant
 
 Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. Action \sphinxstyleemphasis{a01} , for instance, will probably show \sphinxstyleemphasis{good} performances wrt the \sphinxstyleemphasis{economical}  and environmental aspects, and \sphinxstyleemphasis{weak} performances wrt the \sphinxstyleemphasis{societal} aspect.
 
-For testing purposes we provifde a special \sphinxcode{\sphinxupquote{perfTabs.PartialPerformanceTableau}} class for extracting a \sphinxstylestrong{partial performance tableau} from a given tableau instance. In the example blow, we construct the partial performance tableaux corresponding to each on of the three decision objectives.
+For testing purposes we provide a special \sphinxcode{\sphinxupquote{perfTabs.PartialPerformanceTableau}} class for extracting a \sphinxstylestrong{partial performance tableau} from a given tableau instance. In the example blow, we construct the partial performance tableaux corresponding to each on of the three decision objectives.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{perfTabs} \PYG{k+kn}{import} \PYG{n}{PartialPerformanceTableau}
@@ -1945,9 +1945,9 @@ Decision action \sphinxstyleemphasis{a26} (Eco+ Soc+ Env\sphinxhyphen{}) appears
 
 \subsection{Generating random linearly ranked performances}
 \label{\detokenize{tutorial:generating-random-linearly-ranked-performances}}
-Finally, we provide the \sphinxcode{\sphinxupquote{randomPerfTabs.RandomRankPerformanceTableau}} class for generating multiple criteria ranked performances, ie on each criterion, all decision actions appear linearly ordered without ties.
+Finally, we provide the \sphinxcode{\sphinxupquote{randomPerfTabs.RandomRankPerformanceTableau}} class for generating multiple criteria ranked performances, i.e. on each criterion, all decision actions appear linearly ordered without ties.
 
-This type of random performance tabeau is matching the \sphinxcode{\sphinxupquote{votingDigraphs.RandomLinearVotingProfile}} class provided by the \sphinxcode{\sphinxupquote{votingProfiles}} module.
+This type of random performance tableau is matching the \sphinxcode{\sphinxupquote{votingDigraphs.RandomLinearVotingProfile}} class provided by the \sphinxcode{\sphinxupquote{votingProfiles}} module.
 \begin{description}
 \item[{\sphinxstyleemphasis{Parameters}:}] \leavevmode\begin{itemize}
 \item {} 
@@ -2081,7 +2081,7 @@ To estimate how difficult this ranking problem may be, we can have a look at the
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{rankingTutorial}.png}
 \caption{The strict outranking digraph}\label{\detokenize{tutorial:id109}}\end{figure}
 
-The shown strict outranking relation is apparently not transitive: for instance, alternative \sphinxstyleemphasis{a9} outranks alternative \sphinxstyleemphasis{a5} and alternative \sphinxstyleemphasis{a5} outranks \sphinxstyleemphasis{a2}, however \sphinxstyleemphasis{a9} does not outrank \sphinxstyleemphasis{a2}. We may compute the transitivity degree of the outranking digraph, ie the ratio of the number of outranking arcs over the number of arcs of the transitive closue of the digraph \sphinxstyleemphasis{gcd}.
+The shown strict outranking relation is apparently not transitive: for instance, alternative \sphinxstyleemphasis{a9} outranks alternative \sphinxstyleemphasis{a5} and alternative \sphinxstyleemphasis{a5} outranks \sphinxstyleemphasis{a2}, however \sphinxstyleemphasis{a9} does not outrank \sphinxstyleemphasis{a2}. We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph \sphinxstyleemphasis{gcd}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeTransitivityDegree}\PYG{p}{(}\PYG{p}{)}
@@ -2242,7 +2242,7 @@ The \sphinxstylestrong{Slater} ranking rule is similar to Kemeny’s, but it is 
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{slw}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tutorialSlater}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the Net\sphinxhyphen{}Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the follwowing partial ordering.
+We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the Net\sphinxhyphen{}Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the following partial ordering.
 
 \begin{figure}[H]
 \centering
@@ -2356,7 +2356,7 @@ Unfortunately, the Ranked\sphinxhyphen{}Pairs ranking rule is again not efficien
 \label{\detokenize{tutorial:ranking-big-performance-tableaux}}
 None of the previous ranking heuristics, using essentially only the information given by the outranking relation, are scalable for big outranking digraphs gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph \sphinxhyphen{}the association of a set of decision alternatives and an outranking relation\sphinxhyphen{} is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into ordered quantiles equivalence classes. This decomposition will lead to a pre\sphinxhyphen{}ranked sparse outranking digraph.
 
-In the coding example, we generate for instance, by using multiprocessing techniques, first, a cost benefit performance tableau of 100 decision alternatives and, secondly, we construct a \sphinxstylestrong{pre\sphinxhyphen{}ranked sparse outranking digraph} instance called \sphinxstyleemphasis{bg}. Notice bwt the \sphinxstyleemphasis{BigData} flag used here for generating a parcimonous performance tableau.
+In the coding example, we generate for instance, by using multiprocessing techniques, first, a cost benefit performance tableau of 100 decision alternatives and, secondly, we construct a \sphinxstylestrong{pre\sphinxhyphen{}ranked sparse outranking digraph} instance called \sphinxstyleemphasis{bg}. Notice BTW the \sphinxstyleemphasis{BigData} flag used here for generating a parsimonious performance tableau.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{sparseOutrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{PreRankedOutrankingDigraph}
@@ -3068,7 +3068,7 @@ We consider now a partial performance tableau \sphinxstyleemphasis{best10}, cons
 \PYG{g+go}{ Decimal(\PYGZsq{}0.78\PYGZsq{})}
 \end{sphinxVerbatim}
 
-Three alternatives \sphinxhyphen{}\#155874, \#426464 and \#567308\sphinxhyphen{} qualify as Condorcet winners, i.e. they each \sphinxstylestrong{positively outrank} all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the \sphinxstyleemphasis{strict} outranking digraph (ie the codual \textasciitilde{}(\sphinxhyphen{}\sphinxstyleemphasis{g}) of \sphinxstyleemphasis{g}) shown in \hyperref[\detokenize{tutorial:converse-dual-rel-best10}]{Fig.\@ \ref{\detokenize{tutorial:converse-dual-rel-best10}}}.
+Three alternatives \sphinxhyphen{}\#155874, \#426464 and \#567308\sphinxhyphen{} qualify as Condorcet winners, i.e. they each \sphinxstylestrong{positively outrank} all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the \sphinxstyleemphasis{strict} outranking digraph (i.e. the codual \textasciitilde{}(\sphinxhyphen{}\sphinxstyleemphasis{g}) of \sphinxstyleemphasis{g}) shown in \hyperref[\detokenize{tutorial:converse-dual-rel-best10}]{Fig.\@ \ref{\detokenize{tutorial:converse-dual-rel-best10}}}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{g}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{p}{)}
@@ -3592,7 +3592,7 @@ A colorful comparison of all the performances is shown by the \sphinxstylestrong
 \capstart
 
 \noindent\sphinxincludegraphics[width=500\sphinxpxdimen]{{officeChoiceHeatmap}.png}
-\caption{Heatmap of the office choice performance tableau}\label{\detokenize{tutorial:id114}}\end{figure}
+\caption{Heat map of the office choice performance tableau}\label{\detokenize{tutorial:id114}}\end{figure}
 
 Site \sphinxstyleemphasis{A} shows extreme and contradictory performances: highest \sphinxstyleemphasis{Costs} and no \sphinxstyleemphasis{Working Comfort} on one hand, and total satisfaction with respect to \sphinxstyleemphasis{Standing}, \sphinxstyleemphasis{Proximity} and \sphinxstyleemphasis{Parking facilities} on the other hand. Similar, but opposite, situation is given for site \sphinxstyleemphasis{C}: unsatisfactory \sphinxstyleemphasis{Working Space}, no \sphinxstyleemphasis{Standing} and no \sphinxstyleemphasis{Working Comfort} on the one hand, and lowest \sphinxstyleemphasis{Costs}, best \sphinxstyleemphasis{Proximity} and \sphinxstyleemphasis{Parking facilities} on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites \sphinxstyleemphasis{D} and \sphinxstyleemphasis{G}. Finally, site \sphinxstyleemphasis{F} is clearly the less satisfactory alternative of all.
 
@@ -3907,7 +3907,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 \subsection{Introduction}
 \label{\detokenize{tutorial:id48}}
-In this tutorial we address the problem of \sphinxstylestrong{rating multiple criteria performances} of a set of potential decision alternatives with respect to empirical order statistics, ie performance quantiles learned from historical performance data gathered from similar decision alternatives observed in the past (see \sphinxcite{tutorial:cpstat-l5}).
+In this tutorial we address the problem of \sphinxstylestrong{rating multiple criteria performances} of a set of potential decision alternatives with respect to empirical order statistics, i.e. performance quantiles learned from historical performance data gathered from similar decision alternatives observed in the past (see \sphinxcite{tutorial:cpstat-l5}).
 
 To illustrate the decision problem we face, consider for a moment that, in a given decision aid study, we observe, for instance in the Table below, the multi\sphinxhyphen{}criteria performances of two potential decision alternatives, named \sphinxstyleemphasis{a1001} and \sphinxstyleemphasis{a1010}, marked on 7 \sphinxstylestrong{incommensurable} preference criteria: 2 \sphinxstylestrong{costs} criteria \sphinxstyleemphasis{c1} and \sphinxstyleemphasis{c2} (to \sphinxstylestrong{minimize}) and 6 \sphinxstylestrong{benefits} criteria \sphinxstyleemphasis{b1} to \sphinxstyleemphasis{b5} (to \sphinxstylestrong{maximize}).
 \begin{quote}
@@ -4062,7 +4062,7 @@ The \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles}} class
 \PYG{g+go}{    \PYGZsq{}b5\PYGZsq{}  |    2    |  0.85    29.08    48.55     69.98    97.56}
 \end{sphinxVerbatim}
 
-Both objectives are \sphinxstylestrong{equi\sphinxhyphen{}important}; the sum of weights (10) of the \sphinxstyleemphasis{costs} criteria balance the sum of weights (10) of the \sphinxstyleemphasis{benefits} criteria (see column 2). The preference direction of the \sphinxstyleemphasis{costs} criteria \sphinxstyleemphasis{c1} and \sphinxstyleemphasis{c2} is \sphinxstylestrong{negative}; the lesser the costs the better it is, whereas all the \sphinxstyleemphasis{benefits} criteria \sphinxstyleemphasis{b1} to \sphinxstyleemphasis{b5} show \sphinxstylestrong{positive} preference directions, ie the higher the benefits the better it is. The columns entitled ‘0.0’, resp. ‘1.0’ show the \sphinxstyleemphasis{quartile} \sphinxstyleemphasis{Q0}, resp. \sphinxstyleemphasis{Q4}, ie the \sphinxstylestrong{worst}, resp. \sphinxstylestrong{best} performance observed so far on each criterion. Column ‘0.5’ shows the \sphinxstylestrong{median} (\sphinxstyleemphasis{Q2}) observed on the criteria.
+Both objectives are \sphinxstylestrong{equi\sphinxhyphen{}important}; the sum of weights (10) of the \sphinxstyleemphasis{costs} criteria balance the sum of weights (10) of the \sphinxstyleemphasis{benefits} criteria (see column 2). The preference direction of the \sphinxstyleemphasis{costs} criteria \sphinxstyleemphasis{c1} and \sphinxstyleemphasis{c2} is \sphinxstylestrong{negative}; the lesser the costs the better it is, whereas all the \sphinxstyleemphasis{benefits} criteria \sphinxstyleemphasis{b1} to \sphinxstyleemphasis{b5} show \sphinxstylestrong{positive} preference directions, i.e. the higher the benefits the better it is. The columns entitled ‘0.0’, resp. ‘1.0’ show the \sphinxstyleemphasis{quartile} \sphinxstyleemphasis{Q0}, resp. \sphinxstyleemphasis{Q4}, i.e. the \sphinxstylestrong{worst}, resp. \sphinxstylestrong{best} performance observed so far on each criterion. Column ‘0.5’ shows the \sphinxstylestrong{median} (\sphinxstyleemphasis{Q2}) observed on the criteria.
 
 New  decision alternatives with random multiple criteria performance vectors from the same random performance tableau model may now be generated with ad hoc random performance generators. We provide for experimental purpose, in the \sphinxcode{\sphinxupquote{randomPerfTabs}} module, three such generators: one for the standard \sphinxcode{\sphinxupquote{randomPerfTabs.RandomPerformanceTableau}} model, one the for the two objectives \sphinxcode{\sphinxupquote{randomPerfTabs.RandomCBPerformanceTableau}} Cost\sphinxhyphen{}Benefit model, and one for the \sphinxcode{\sphinxupquote{randomPerfTabs.Random3ObjectivesPerformanceTableau}} model with three objectives concerning respectively  economic, environmental or social aspects.
 
@@ -4077,7 +4077,7 @@ Given a new Performance Tableau with 100 new decision alternatives, the so far e
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq}\PYG{o}{.}\PYG{n}{updateQuantiles}\PYG{p}{(}\PYG{n}{newTab}\PYG{p}{,}\PYG{n}{historySize}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-Parameter \sphinxstyleemphasis{historySize} (see Line 6) of the \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles.updateQuantiles()}} method allows to \sphinxstylestrong{balance} the \sphinxstylestrong{new} evaluations against the \sphinxstylestrong{historical} ones. With \sphinxstylestrong{historySize = None} (the default setting), the balance in the example above is 900/1000 (90\%, weight of historical data) against 100/1000 (10\%, weight of the new incoming observations). Putting \sphinxstylestrong{historySize = 0}, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incomping data. The updated quantile limits may be shown in a browser view (see \hyperref[\detokenize{tutorial:exampleperfquantiles}]{Fig.\@ \ref{\detokenize{tutorial:exampleperfquantiles}}}).
+Parameter \sphinxstyleemphasis{historySize} (see Line 6) of the \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles.updateQuantiles()}} method allows to \sphinxstylestrong{balance} the \sphinxstylestrong{new} evaluations against the \sphinxstylestrong{historical} ones. With \sphinxstylestrong{historySize = None} (the default setting), the balance in the example above is 900/1000 (90\%, weight of historical data) against 100/1000 (10\%, weight of the new incoming observations). Putting \sphinxstylestrong{historySize = 0}, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incoming data. The updated quantile limits may be shown in a browser view (see \hyperref[\detokenize{tutorial:exampleperfquantiles}]{Fig.\@ \ref{\detokenize{tutorial:exampleperfquantiles}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{} showing the updated quantile limits in a browser view}
@@ -4099,7 +4099,7 @@ For \sphinxstyleemphasis{absolute rating} of a newly given set of decision alter
 The constructor requires a valid \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles}} instance.
 
 \begin{sphinxadmonition}{note}{Note:}
-It is important to notice that the \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class, contrary to the generic \sphinxcode{\sphinxupquote{outrankingDigraphs.OutrankingDigraph}} class, does not inherit from the generic \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau}} class, but instead from the \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles}} class. The \sphinxstylestrong{actions} in such a \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class instance contain not only the newly given decision alternatives, but also the historical quantile profiles obtained from a given \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles}} class instance, ie estimated quantile bins’ performance limits from historical performance data.
+It is important to notice that the \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class, contrary to the generic \sphinxcode{\sphinxupquote{outrankingDigraphs.OutrankingDigraph}} class, does not inherit from the generic \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau}} class, but instead from the \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles}} class. The \sphinxstylestrong{actions} in such a \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class instance contain not only the newly given decision alternatives, but also the historical quantile profiles obtained from a given \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles}} class instance, i.e. estimated quantile bins’ performance limits from historical performance data.
 \end{sphinxadmonition}
 
 We reconsider the \sphinxcode{\sphinxupquote{PerformanceQuantiles}} object instance \sphinxstyleemphasis{pq} as computed in the previous section. Let \sphinxstyleemphasis{newActions} be a list of 10 new decision alternatives generated with the same random performance tableau model and including the two decision alternatives \sphinxstyleemphasis{a1001} and \sphinxstyleemphasis{a1010} mentioned at the beginning.
@@ -4172,7 +4172,7 @@ The \sphinxcode{\sphinxupquote{NormedQuantilesRatingDigraphdigraph}} instance’
 \PYG{g+go}{    \PYGZsq{}c2\PYGZsq{}  |  \PYGZhy{}96.4  \PYGZhy{}72.2  \PYGZhy{}52.3  \PYGZhy{}34.0}
 \end{sphinxVerbatim}
 
-The main run time (see Lines 23\sphinxhyphen{}29 of the object description above) is spent by the class constructor in computing a bipolar\sphinxhyphen{}valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, ie many new decision alternatives and centile classes for instance, a multi\sphinxhyphen{}threading version may be used when multiple processing cores are available (see the technical description of the \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class).
+The main run time (see Lines 23\sphinxhyphen{}29 of the object description above) is spent by the class constructor in computing a bipolar\sphinxhyphen{}valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, i.e. many new decision alternatives and centile classes for instance, a multi\sphinxhyphen{}threading version may be used when multiple processing cores are available (see the technical description of the \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class).
 
 The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar\sphinxhyphen{}valued outranking digraph. Two efficient and scalable ranking rules, the \sphinxstylestrong{Copeland} and its valued version, the \sphinxstylestrong{Netflows} rule may be used for this purpose. The \sphinxstyleemphasis{rankingRule} parameter allows to choose one of both. With \sphinxstyleemphasis{rankingRule=’best’} (see Line 2 above) the \sphinxcode{\sphinxupquote{NormedQuantilesRatingDigraph}} constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see \sphinxcite{tutorial:bis-2012}).
 
@@ -4191,7 +4191,7 @@ In this rating example, the \sphinxstyleemphasis{NetFlows} rule appears to be th
 \PYG{g+go}{ Ranking correlation : +0.938}
 \end{sphinxVerbatim}
 
-We achieve here a linear ranking without ties (from best to worst) of the digraph’s actions, ie including the new decision alternatives as well as the quartile limits \sphinxstyleemphasis{m1} to \sphinxstyleemphasis{m4}, which is very close in an ordinal sense (\sphinxstyleemphasis{tau} = 0.94) to the underlying valued outranking relation.
+We achieve here a linear ranking without ties (from best to worst) of the digraph’s actions, i.e. including the new decision alternatives as well as the quartile limits \sphinxstyleemphasis{m1} to \sphinxstyleemphasis{m4}, which is very close in an ordinal sense (\sphinxstyleemphasis{tau} = 0.94) to the underlying valued outranking relation.
 
 The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes’ contents in increasing order of the \sphinxstyleemphasis{quartiles} ‘ lower limits.
 
@@ -4211,7 +4211,7 @@ We notice above that no new decision alternative is rated in the lowest {[}0.0\s
 \PYG{g+go}{ [0.25 \PYGZhy{} 0.50[ [\PYGZsq{}a1003\PYGZsq{}, \PYGZsq{}a1001\PYGZsq{}, \PYGZsq{}a1007\PYGZsq{}, \PYGZsq{}a1004\PYGZsq{}, \PYGZsq{}a1009\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-The same result may even more conviently be consulted in a browser view via a specialised rating heatmap format ( see \sphinxcode{\sphinxupquote{perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()}} method (see \hyperref[\detokenize{tutorial:heatmap1}]{Fig.\@ \ref{\detokenize{tutorial:heatmap1}}}).
+The same result may even more conveniently be consulted in a browser view via a specialised rating heat map format ( see \sphinxcode{\sphinxupquote{perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()}} method (see \hyperref[\detokenize{tutorial:heatmap1}]{Fig.\@ \ref{\detokenize{tutorial:heatmap1}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showHTMLRatingHeatmap}\PYG{p}{(}\PYG{n}{pageTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Heatmap of Quartiles Rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
@@ -4223,7 +4223,7 @@ The same result may even more conviently be consulted in a browser view via a sp
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{heatMap1}.png}
-\caption{Heatmap of normed quartiles ranking}\label{\detokenize{tutorial:heatmap1}}\end{figure}
+\caption{Heat map of normed quartiles ranking}\label{\detokenize{tutorial:heatmap1}}\end{figure}
 
 Using furthermore a specialised version of the \sphinxcode{\sphinxupquote{transitiveDigraphs.TransitiveDigraph.exportGraphViz()}} method allows drawing the same rating result in a Hasse diagram format (see \hyperref[\detokenize{tutorial:normedratingdigraph}]{Fig.\@ \ref{\detokenize{tutorial:normedratingdigraph}}}).
 
@@ -4359,7 +4359,7 @@ A browser view may again more conveniently illustrate this preciser \sphinxstyle
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{heatMap2}.png}
-\caption{Heatmap of mormed deciles rating}\label{\detokenize{tutorial:heatmap2}}\end{figure}
+\caption{Heat map of mormed deciles rating}\label{\detokenize{tutorial:heatmap2}}\end{figure}
 
 In this preciser \sphinxstyleemphasis{deciles} rating, decision alternatives \sphinxstyleemphasis{a1001} and \sphinxstyleemphasis{a1010} are now rated in the \sphinxstyleemphasis{6th} decile (D6), respectively in the \sphinxstyleemphasis{7th} decile (D7).
 
@@ -4402,7 +4402,7 @@ In the \sphinxcode{\sphinxupquote{graphs}} module, the root \sphinxcode{\sphinxu
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
-the graph \sphinxstylestrong{vertices} : a dictionary of vertices with ‘name’ and ‘shortname’ attributes,
+the graph \sphinxstylestrong{vertices} : a dictionary of vertices with ‘name’ and ‘shortName’ attributes,
 
 \item {} 
 the graph \sphinxstylestrong{valuationDomain} , a dictionary with three entries: the minimum (\sphinxhyphen{}1, means certainly no link), the median (0, means missing information) and the maximum characteristic value (+1, means certainly a link),
@@ -4411,7 +4411,7 @@ the graph \sphinxstylestrong{valuationDomain} , a dictionary with three entries:
 the graph \sphinxstylestrong{edges} : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,
 
 \item {} 
-and its associated \sphinxstylestrong{gamma function} : a dictionary containing the direct neighbors of each vertice, automatically added by the object constructor.
+and its associated \sphinxstylestrong{gamma function} : a dictionary containing the direct neighbors of each vertex, automatically added by the object constructor.
 
 \end{enumerate}
 
@@ -4485,7 +4485,7 @@ The stored graph can be recalled and plotted with the generic \sphinxcode{\sphin
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{tutorialGraph}.png}
 \caption{Tutorial graph instance}\label{\detokenize{tutorial:id116}}\end{figure}
 
-Properties, like the gamma function and vertex degrees and neighbourhooddepths may be shown with a \sphinxtitleref{graphs.Graph.showShort()} method.
+Properties, like the gamma function and vertex degrees and neighbourhood depths may be shown with a \sphinxtitleref{graphs.Graph.showShort()} method.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showShort}\PYG{p}{(}\PYG{p}{)}
@@ -4627,7 +4627,7 @@ Actually, with the given tutorial graph instance, a 2\sphinxhyphen{}coloring is 
 \PYG{g+go}{  frozenset(\PYGZob{}\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v6\PYGZsq{}, \PYGZsq{}v4\PYGZsq{}, \PYGZsq{}v3\PYGZsq{}\PYGZcb{})]}
 \end{sphinxVerbatim}
 
-A MIS in the dual of a graph instance \sphinxstyleemphasis{g} (its negation \sphinxstyleemphasis{\sphinxhyphen{}g} \sphinxfootnotemark[14]), corresponds to a maximal \sphinxstylestrong{clique}, ie a maximal complete subgraph in \sphinxstyleemphasis{g}. Maximal cliques may be directly enumerated with the \sphinxtitleref{graphs.Graph.showCliques()} method.
+A MIS in the dual of a graph instance \sphinxstyleemphasis{g} (its negation \sphinxstyleemphasis{\sphinxhyphen{}g} \sphinxfootnotemark[14]), corresponds to a maximal \sphinxstylestrong{clique}, i.e. a maximal complete subgraph in \sphinxstyleemphasis{g}. Maximal cliques may be directly enumerated with the \sphinxtitleref{graphs.Graph.showCliques()} method.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showCliques}\PYG{p}{(}\PYG{p}{)}
@@ -4724,7 +4724,7 @@ Notice that the MISs in the line graph provide \sphinxstylestrong{maximal matchi
 \PYG{g+go}{ execution time: 0.00029 sec.}
 \end{sphinxVerbatim}
 
-The two last MISs of cardinality 4 (see Lines 13\sphinxhyphen{}16 above) give \sphinxstylestrong{isomorphic perfect maximum matchings} of the 8\sphinxhyphen{}cycle graph. Every vertex of the cycle is adjacent to a matching edge. Odd cyle graphs do not admid any perfect matching.
+The two last MISs of cardinality 4 (see Lines 13\sphinxhyphen{}16 above) give \sphinxstylestrong{isomorphic perfect maximum matchings} of the 8\sphinxhyphen{}cycle graph. Every vertex of the cycle is adjacent to a matching edge. Odd cycle graphs do not admit any perfect matching.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{maxMatching} \PYG{o}{=} \PYG{n}{c8}\PYG{o}{.}\PYG{n}{computeMaximumMatching}\PYG{p}{(}\PYG{p}{)}
@@ -5025,7 +5025,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \label{\detokenize{tutorial:what-is-a-graph-kernel}}
 We call \sphinxstylestrong{choice} in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice \sphinxstyleemphasis{Y} is called \sphinxstylestrong{internally stable} or \sphinxstylestrong{independent} when there exist \sphinxstylestrong{no links} (edges) or relations (arcs) between its members. Furthermore, a choice \sphinxstyleemphasis{Y} is called \sphinxstylestrong{externally stable} when for each vertex, node or action \sphinxstyleemphasis{x} not in \sphinxstyleemphasis{Y}, there exists at least a member \sphinxstyleemphasis{y} of \sphinxstyleemphasis{Y} such that \sphinxstyleemphasis{x} is linked or related to \sphinxstyleemphasis{y}. Now, an internally \sphinxstylestrong{and} externally stable choice is called a \sphinxstylestrong{kernel}.
 
-A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n\sphinxhyphen{}cycle graph (see {\hyperref[\detokenize{tutorial:isomorphicmis-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing the non isomorphic MISs of the n\sphinxhyphen{}cycle graph}}}}). Indeed, each MIS in the n\sphinxhyphen{}cycle graph is by definition independent, ie internally stable, and each non selected vertex in the n\sphinxhyphen{}cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12\sphinxhyphen{}cycle graph as shown in \hyperref[\detokenize{tutorial:misc12}]{Fig.\@ \ref{\detokenize{tutorial:misc12}}}.
+A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n\sphinxhyphen{}cycle graph (see {\hyperref[\detokenize{tutorial:isomorphicmis-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing the non isomorphic MISs of the n\sphinxhyphen{}cycle graph}}}}). Indeed, each MIS in the n\sphinxhyphen{}cycle graph is by definition independent, i.e. internally stable, and each non selected vertex in the n\sphinxhyphen{}cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12\sphinxhyphen{}cycle graph as shown in \hyperref[\detokenize{tutorial:misc12}]{Fig.\@ \ref{\detokenize{tutorial:misc12}}}.
 
 In all graph or symmetric digraph, the \sphinxstyleemphasis{maximality condition} imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal \sphinxstylestrong{holes} in the given graph.
 
@@ -5179,7 +5179,7 @@ In our random 3\sphinxhyphen{}regular graph instance (see \hyperref[\detokenize{
 \noindent\sphinxincludegraphics[width=700\sphinxpxdimen]{{random3RegularGraphKernelOrbit}.png}
 \caption{Two isomorphic kernels of the random 3\sphinxhyphen{}regular graph instance}\label{\detokenize{tutorial:random3regulargraphkernelorbit}}\end{figure}
 
-All graphs and symmetric digraphs admid MISs, hence also kernels.
+All graphs and symmetric digraphs admit MISs, hence also kernels.
 
 It is worthwhile noticing that the \sphinxstylestrong{maximal matchings} of a graph correspond bijectively to its line graph’s \sphinxstylestrong{kernels} (see the \sphinxcode{\sphinxupquote{graphs.LineGraph}} class).
 
@@ -5203,7 +5203,7 @@ It is worthwhile noticing that the \sphinxstylestrong{maximal matchings} of a gr
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{maxMatchingcycleGraph}.png}
 \caption{Perfect maximum matching in the 8\sphinxhyphen{}cycle graph}\label{\detokenize{tutorial:id122}}\end{figure}
 
-In the context of digraphs, ie \sphinxstyleemphasis{oriented} graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.
+In the context of digraphs, i.e. \sphinxstyleemphasis{oriented} graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.
 
 
 \subsection{Initial and terminal kernels}
@@ -5215,13 +5215,13 @@ In an oriented graph context, the internal stability condition of the kernel con
 A \sphinxstylestrong{dominant} stability condition, where each non selected node is \sphinxstyleemphasis{dominated} by at least one member of the kernel;
 
 \item {} 
-An \sphinxstylestrong{absorbant} stability condition, where each non selected node is \sphinxstyleemphasis{absorbed} by at least one member of the kernel.
+An \sphinxstylestrong{absorbent} stability condition, where each non selected node is \sphinxstyleemphasis{absorbed} by at least one member of the kernel.
 
 \end{enumerate}
 
 A both \sphinxstyleemphasis{internally} \sphinxstylestrong{and} \sphinxstyleemphasis{dominant}, resp. \sphinxstyleemphasis{absorbent stable} choice is called a \sphinxstyleemphasis{dominant} or \sphinxstylestrong{initial}, resp. an \sphinxstyleemphasis{absorbent} or \sphinxstylestrong{terminal} kernel. From a topological perspective, the initial kernel concept looks from the outside of the digraph into its interior, whereas the terminal kernel looks from the interior of a digraph toward its outside. From an algebraic perspective, the initial kernel is a \sphinxstyleemphasis{prefix} operand, and the terminal kernel is a \sphinxstyleemphasis{postfix} operand in the \sphinxstyleemphasis{Berge} kernel equation systems.
 
-Furthermore, as the kernel concept involves conjointly a \sphinxstylestrong{positive logical refutation} (the \sphinxstyleemphasis{internal stability}) and a \sphinxstylestrong{positive logical affirmation} (the \sphinxstyleemphasis{external stability}), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic {[}\sphinxhyphen{}1,1{]} valuation domain, modelling \sphinxstyleemphasis{negation} by change of numerical sign and including explicitely a third \sphinxstylestrong{median} logical value (0) expressing logical \sphinxstylestrong{indeterminateness} (neither positive, nor negative, see \sphinxcite{tutorial:bis-2000} and \sphinxcite{tutorial:bis-2004}).
+Furthermore, as the kernel concept involves conjointly a \sphinxstylestrong{positive logical refutation} (the \sphinxstyleemphasis{internal stability}) and a \sphinxstylestrong{positive logical affirmation} (the \sphinxstyleemphasis{external stability}), it appeared rather quickly necessary in our operational developments to adopt a bipolar characteristic {[}\sphinxhyphen{}1,1{]} valuation domain, modelling \sphinxstyleemphasis{negation} by change of numerical sign and including explicitly a third \sphinxstylestrong{median} logical value (0) expressing logical \sphinxstylestrong{indeterminateness} (neither positive, nor negative, see \sphinxcite{tutorial:bis-2000} and \sphinxcite{tutorial:bis-2004}).
 
 In such a  bipolar\sphinxhyphen{}valued context, we call \sphinxstylestrong{prekernel} a choice which is \sphinxstylestrong{externally stable} and for which the \sphinxstylestrong{internal stability} condition is \sphinxstylestrong{valid or indeterminate}. We say that the independence condition is in this case only \sphinxstylestrong{weakly} validated. Notice that all kernels are hence prekernels, but not vice\sphinxhyphen{}versa.
 
@@ -5305,7 +5305,7 @@ In the empty digraph, the whole set of nodes gives indeed at the same time the \
 
 Both these results make sense, as in a completely empty or indeterminate digraph, there is no \sphinxstyleemphasis{interior} of the digraph defined, only a \sphinxstyleemphasis{border} which is hence at the same time an initial and terminal kernel.  Notice however, that in the latter indeterminate case, the complete set of nodes verifies only weakly the internal stability condition (see above).
 
-Other common digraph models, allthough being clearly oriented, may show nevertheless no apparent laterality, like \sphinxstylestrong{odd chordless circuits}, ie \sphinxstyleemphasis{holes} surrounded by an \sphinxstyleemphasis{oriented cycle} \sphinxhyphen{}a circuit\sphinxhyphen{} of odd length. They do not admit in fact any initial or terminal kernel.
+Other common digraph models, although being clearly oriented, may show nevertheless no apparent laterality, like \sphinxstylestrong{odd chordless circuits}, i.e. \sphinxstyleemphasis{holes} surrounded by an \sphinxstyleemphasis{oriented cycle} \sphinxhyphen{}a circuit\sphinxhyphen{} of odd length. They do not admit in fact any initial or terminal kernel.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{CirculantDigraph}
@@ -5332,7 +5332,7 @@ Chordless circuits of \sphinxstylestrong{even} length 2 x \sphinxstyleemphasis{k
 \PYG{g+go}{ [\PYGZsq{}2\PYGZsq{}, \PYGZsq{}4\PYGZsq{}, \PYGZsq{}6\PYGZsq{}] independence: 1.0, dominance: 1.0, absorbency: 1.0}
 \end{sphinxVerbatim}
 
-Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of \sphinxstylestrong{all} chordless circuits of \sphinxstyleemphasis{odd} \sphinxstylestrong{or} \sphinxstyleemphasis{even} length, ie \sphinxstyleemphasis{filled} circuits also called \sphinxstylestrong{anti\sphinxhyphen{}holes} (see \hyperref[\detokenize{tutorial:dualchordlesscircuit}]{Fig.\@ \ref{\detokenize{tutorial:dualchordlesscircuit}}}), never contain any potential kernel candidates.
+Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of \sphinxstylestrong{all} chordless circuits of \sphinxstyleemphasis{odd} \sphinxstylestrong{or} \sphinxstyleemphasis{even} length, i.e. \sphinxstyleemphasis{filled} circuits also called \sphinxstylestrong{anti\sphinxhyphen{}holes} (see \hyperref[\detokenize{tutorial:dualchordlesscircuit}]{Fig.\@ \ref{\detokenize{tutorial:dualchordlesscircuit}}}), never contain any potential kernel candidates.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dc6} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{n}{c6}   \PYG{c+c1}{\PYGZsh{} dc6 = DualDigraph(c6)}
@@ -5391,7 +5391,7 @@ The class of \sphinxstyleemphasis{self\sphinxhyphen{}codual} bipolar\sphinxhyphe
 
 \subsection{Kernels in lateralized digraphs}
 \label{\detokenize{tutorial:kernels-in-lateralized-digraphs}}
-Humans do live in an apparent physical space of plain transitive \sphinxstylestrong{lateral orientation}, fully empowered in finite geometrical 3D models with \sphinxstylestrong{linear orders}, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite \sphinxstylestrong{preorders}, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite \sphinxstylestrong{partial orders}, ie asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
+Humans do live in an apparent physical space of plain transitive \sphinxstylestrong{lateral orientation}, fully empowered in finite geometrical 3D models with \sphinxstylestrong{linear orders}, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite \sphinxstylestrong{preorders}, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite \sphinxstylestrong{partial orders}, i.e. asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.
 
 In genuine random digraphs, however, we may need to check for each of its MISs, whether \sphinxstyleemphasis{one}, \sphinxstyleemphasis{both}, or \sphinxstyleemphasis{none} of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30\%.
 
@@ -5513,7 +5513,7 @@ To illustrate this idea, let us finally compute good and bad choice recommendati
 \noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{randomOutranking}.png}
 \caption{The performance tableau of a random outranking digraph instance}\label{\detokenize{tutorial:randomoutranking}}\end{figure}
 
-The underlying random performance tableau (see \hyperref[\detokenize{tutorial:randomoutranking}]{Fig.\@ \ref{\detokenize{tutorial:randomoutranking}}}) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions ‘a2’ and ‘a5’. The resulting \sphinxstylestrong{strict outranking} \sphinxhyphen{} ie a weighted majority supported \sphinxhyphen{} \sphinxstyleemphasis{better than without considerable counter\sphinxhyphen{}performance} \sphinxhyphen{} digraph is shown in \hyperref[\detokenize{tutorial:tutoutranking}]{Fig.\@ \ref{\detokenize{tutorial:tutoutranking}}} below.
+The underlying random performance tableau (see \hyperref[\detokenize{tutorial:randomoutranking}]{Fig.\@ \ref{\detokenize{tutorial:randomoutranking}}}) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions ‘a2’ and ‘a5’. The resulting \sphinxstylestrong{strict outranking} \sphinxhyphen{} i.e. a weighted majority supported \sphinxhyphen{} \sphinxstyleemphasis{better than without considerable counter\sphinxhyphen{}performance} \sphinxhyphen{} digraph is shown in \hyperref[\detokenize{tutorial:tutoutranking}]{Fig.\@ \ref{\detokenize{tutorial:tutoutranking}}} below.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd} \PYG{o}{=} \PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{g}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Codual: the converse of the negation}
@@ -5549,7 +5549,7 @@ All decision actions appear strictly better performing than action ‘a7’. We 
 \PYG{g+go}{    covered      :  0.800}
 \end{sphinxVerbatim}
 
-With such unique disjoint initial and terminal prekernels (see Line 4 and 10), the given digraph instance is hence clearly \sphinxstyleemphasis{lateralized}. Indeed, these initial and terminal prekernels of the codual outranking digraph reveal best, resp. worst, choice recomendations one may formulate on the basis of a given outranking digraph instance.
+With such unique disjoint initial and terminal prekernels (see Line 4 and 10), the given digraph instance is hence clearly \sphinxstyleemphasis{lateralized}. Indeed, these initial and terminal prekernels of the codual outranking digraph reveal best, resp. worst, choice recommendations one may formulate on the basis of a given outranking digraph instance.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showRubisBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
@@ -5596,7 +5596,7 @@ In \hyperref[\detokenize{tutorial:bestworstorientation}]{Fig.\@ \ref{\detokenize
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{bestWorstOrientation}.png}
 \caption{The strict outranking digraph oriented by its best and worst choice recommendations}\label{\detokenize{tutorial:bestworstorientation}}\end{figure}
 
-The grey arrows in \hyperref[\detokenize{tutorial:bestworstorientation}]{Fig.\@ \ref{\detokenize{tutorial:bestworstorientation}}}, like the one between actions ‘a4’ and ‘a1’, represent indeterminate preferential situations. Action ‘a1’ appears hence to be rather incomparable to all the other, except action ‘a7’. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}}).
+The gray arrows in \hyperref[\detokenize{tutorial:bestworstorientation}]{Fig.\@ \ref{\detokenize{tutorial:bestworstorientation}}}, like the one between actions ‘a4’ and ‘a1’, represent indeterminate preferential situations. Action ‘a1’ appears hence to be rather incomparable to all the other, except action ‘a7’. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,}
@@ -5608,7 +5608,7 @@ The grey arrows in \hyperref[\detokenize{tutorial:bestworstorientation}]{Fig.\@ 
 \capstart
 
 \noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{outrankingResult}.png}
-\caption{Heatmap with Copeland ranking of the performance tableau}\label{\detokenize{tutorial:outrankingresult}}\end{figure}
+\caption{Heat map with Copeland ranking of the performance tableau}\label{\detokenize{tutorial:outrankingresult}}\end{figure}
 
 In the resulting linear ranking (see \hyperref[\detokenize{tutorial:outrankingresult}]{Fig.\@ \ref{\detokenize{tutorial:outrankingresult}}}), action ‘a4’ is set at first rank, followed by action ‘a2’. This makes sense as ‘a4’ shows three performances in the first quintile, whereas ‘a2’ is only partially evaluated and shows only two such excellent performances. But ‘a4’ also shows a very weak performance in the first quintile. Both decision actions, hence, don’t show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any ‘forced’ linear ranking result as shown in \hyperref[\detokenize{tutorial:outrankingresult}]{Fig.\@ \ref{\detokenize{tutorial:outrankingresult}}} above.
 
@@ -5676,7 +5676,7 @@ For more or less dense strict outranking digraphs of modest order, as facing usu
                  \PYG{k}{yield} \PYG{n}{Sx}
 \end{sphinxVerbatim}
 
-And, checking maximality of independent choices via the external stability conditions during their emuneration (see \sphinxcode{\sphinxupquote{digraphs.Digraph.computePreKernels()}} below) provides the effective advantage of computing all initial \sphinxstylestrong{and} terminal prekernels in a single loop (see Line 10 and \sphinxcite{tutorial:bis-2006b}).
+And, checking maximality of independent choices via the external stability conditions during their enumeration (see \sphinxcode{\sphinxupquote{digraphs.Digraph.computePreKernels()}} below) provides the effective advantage of computing all initial \sphinxstylestrong{and} terminal prekernels in a single loop (see Line 10 and \sphinxcite{tutorial:bis-2006b}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
  \PYG{k}{def} \PYG{n+nf}{computePreKernels}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
@@ -5706,10 +5706,10 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id215}}{\hyperref[\detokenize{tutorial:a-multipally-perfect-graph}]{\sphinxcrossref{A multipally \sphinxstyleemphasis{perfect} graph}}}
+\phantomsection\label{\detokenize{tutorial:id215}}{\hyperref[\detokenize{tutorial:a-multiply-perfect-graph}]{\sphinxcrossref{A multiply \sphinxstyleemphasis{perfect} graph}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id216}}{\hyperref[\detokenize{tutorial:who-is-the-lier}]{\sphinxcrossref{Who is the lier ?}}}
+\phantomsection\label{\detokenize{tutorial:id216}}{\hyperref[\detokenize{tutorial:who-is-the-liar}]{\sphinxcrossref{Who is the liar ?}}}
 
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id217}}{\hyperref[\detokenize{tutorial:generating-permutation-graphs}]{\sphinxcrossref{Generating permutation graphs}}}
@@ -5721,8 +5721,8 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \end{sphinxShadowBox}
 
 
-\subsection{A multipally \sphinxstyleemphasis{perfect} graph}
-\label{\detokenize{tutorial:a-multipally-perfect-graph}}
+\subsection{A multiply \sphinxstyleemphasis{perfect} graph}
+\label{\detokenize{tutorial:a-multiply-perfect-graph}}
 Following Martin Golumbic (see \sphinxcite{tutorial:gol-2004} p. 149), we call a given graph \sphinxstyleemphasis{g}:
 \begin{itemize}
 \item {} 
@@ -5796,7 +5796,7 @@ With seed = 100, we obtain here an \sphinxstyleemphasis{interval} graph, in fact
 \noindent\sphinxincludegraphics[width=350\sphinxpxdimen]{{randomSplitGraph}.png}
 \caption{A conjointly triangulated, comparability, interval, permutation and split graph}\label{\detokenize{tutorial:randomsplitgraph}}\end{figure}
 
-In \hyperref[\detokenize{tutorial:randomsplitgraph}]{Fig.\@ \ref{\detokenize{tutorial:randomsplitgraph}}} we may readily recognize the essential characteristic of \sphinxstylestrong{split graphs}, namely being always splitable into two disjoint sub\sphinxhyphen{}graphs: an \sphinxstyleemphasis{independentt choice} (\sphinxstyleemphasis{v6}) and a \sphinxstyleemphasis{clique} (\sphinxstyleemphasis{v1}, \sphinxstyleemphasis{v2}, \sphinxstyleemphasis{v3}, \sphinxstyleemphasis{v4}, \sphinxstyleemphasis{v5}, \sphinxstyleemphasis{v7}, \sphinxstyleemphasis{v8}); which explains their name.
+In \hyperref[\detokenize{tutorial:randomsplitgraph}]{Fig.\@ \ref{\detokenize{tutorial:randomsplitgraph}}} we may readily recognize the essential characteristic of \sphinxstylestrong{split graphs}, namely being always splitable into two disjoint sub\sphinxhyphen{}graphs: an \sphinxstyleemphasis{independent choice} (\sphinxstyleemphasis{v6}) and a \sphinxstyleemphasis{clique} (\sphinxstyleemphasis{v1}, \sphinxstyleemphasis{v2}, \sphinxstyleemphasis{v3}, \sphinxstyleemphasis{v4}, \sphinxstyleemphasis{v5}, \sphinxstyleemphasis{v7}, \sphinxstyleemphasis{v8}); which explains their name.
 
 Notice however that the four properties:
 \begin{enumerate}
@@ -5805,21 +5805,21 @@ Notice however that the four properties:
 \sphinxstyleemphasis{g} is a \sphinxstyleemphasis{comparability} graph;
 
 \item {} 
-\sphinxstyleemphasis{g} is a \sphinxstyleemphasis{cocomparability} graph, ie \sphinxstyleemphasis{\sphinxhyphen{}g} is a \sphinxstyleemphasis{comparability} graph;
+\sphinxstyleemphasis{g} is a \sphinxstyleemphasis{cocomparability} graph, i.e. \sphinxstyleemphasis{\sphinxhyphen{}g} is a \sphinxstyleemphasis{comparability} graph;
 
 \item {} 
 \sphinxstyleemphasis{g} is a \sphinxstyleemphasis{triangulated} graph;
 
 \item {} 
-\sphinxstyleemphasis{g} is a \sphinxstyleemphasis{cotriangulated} graph, ie \sphinxstyleemphasis{\sphinxhyphen{}g} is a \sphinxstyleemphasis{comparability} graph;
+\sphinxstyleemphasis{g} is a \sphinxstyleemphasis{cotriangulated} graph, i.e. \sphinxstyleemphasis{\sphinxhyphen{}g} is a \sphinxstyleemphasis{comparability} graph;
 
 \end{enumerate}
 
 are \sphinxstyleemphasis{independent} of one another (see \sphinxcite{tutorial:gol-2004} p. 275).
 
 
-\subsection{Who is the lier ?}
-\label{\detokenize{tutorial:who-is-the-lier}}
+\subsection{Who is the liar ?}
+\label{\detokenize{tutorial:who-is-the-liar}}
 \sphinxstyleemphasis{Claude Berge} ‘s famous mystery story (see \sphinxcite{tutorial:gol-2004} p.20) may well illustrate the importance of being an \sphinxstylestrong{interval graph}.
 
 Suppose that the file \sphinxcode{\sphinxupquote{berge.py}} contains the following \sphinxcode{\sphinxupquote{graphs.Graph}} instance data:
@@ -5883,7 +5883,7 @@ Six professors (labeled \sphinxstyleemphasis{A}, \sphinxstyleemphasis{B}, \sphin
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{berge1}.png}
 \caption{Graph representation of the testimonies of the professors}\label{\detokenize{tutorial:id123}}\end{figure}
 
-From graph theory we know that time interval intersections graphs must in fact be interval graphs, ie \sphinxstyleemphasis{triangulated} and \sphinxstyleemphasis{co\sphinxhyphen{}comparative} graphs. The testimonies graph should therefore not contain any chordless cycle of four and more vertices. Now, the presence or not of such chordless cycles in the testimonies graph may be checked as follows.
+From graph theory we know that time interval intersections graphs must in fact be interval graphs, i.e. \sphinxstyleemphasis{triangulated} and \sphinxstyleemphasis{co\sphinxhyphen{}comparative} graphs. The testimonies graph should therefore not contain any chordless cycle of four and more vertices. Now, the presence or not of such chordless cycles in the testimonies graph may be checked as follows.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeChordlessCycles}\PYG{p}{(}\PYG{p}{)}
@@ -5987,7 +5987,7 @@ By using color sorting queues, the minimal vertex coloring for a permutation gra
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{coloredPermutationGraph}.png}
 \caption{Minimal vertex coloring of the permutation graph}\label{\detokenize{tutorial:id126}}\end{figure}
 
-The correspondingly colored \sphinxstylestrong{matching diagram} of the nine \sphinxstylestrong{inversions} \sphinxhyphen{}the actual \sphinxstyleemphasis{edges} of the permutation graph\sphinxhyphen{}, which are induced by the given permutation {[}4, 3, 6, 1, 5, 2{]}, may as well be drawn with the graphviz \sphinxstyleemphasis{neato} layout and explicitely positioned horizontal lists of vertices (see \hyperref[\detokenize{tutorial:perm-permutationgraph}]{Fig.\@ \ref{\detokenize{tutorial:perm-permutationgraph}}}).
+The correspondingly colored \sphinxstylestrong{matching diagram} of the nine \sphinxstylestrong{inversions} \sphinxhyphen{}the actual \sphinxstyleemphasis{edges} of the permutation graph\sphinxhyphen{}, which are induced by the given permutation {[}4, 3, 6, 1, 5, 2{]}, may as well be drawn with the graphviz \sphinxstyleemphasis{neato} layout and explicitly positioned horizontal lists of vertices (see \hyperref[\detokenize{tutorial:perm-permutationgraph}]{Fig.\@ \ref{\detokenize{tutorial:perm-permutationgraph}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{exportPermutationGraphViz}\PYG{p}{(}\PYG{n}{WithEdgeColoring}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
@@ -6077,7 +6077,7 @@ Let us consider, for instance, the following random graph of \sphinxstyleemphasi
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{randomGraph4335}.png}
 \caption{Random graph of order 8 generated with edge probability 0.4}\label{\detokenize{tutorial:randomgraph4335}}\end{figure}
 
-If the random perfect graph instance \sphinxstyleemphasis{g} (see \hyperref[\detokenize{tutorial:randomgraph4335}]{Fig.\@ \ref{\detokenize{tutorial:randomgraph4335}}}) is indeed a permutation graph, \sphinxstyleemphasis{g} and its dual \sphinxstyleemphasis{\sphinxhyphen{}g} should be \sphinxstyleemphasis{transitively orientable}, ie \sphinxstylestrong{comparability graphs} (see \sphinxcite{tutorial:gol-2004}). With the \sphinxcode{\sphinxupquote{graphs.Graph.isComparabilityGraph()}} test, we may easily check this fact. This method proceeds indeed by trying to construct a transitive neighbourhood decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a \sphinxstyleemphasis{self.edgeOrientations} attribute (see \sphinxcite{tutorial:gol-2004} p.129\sphinxhyphen{}132).
+If the random perfect graph instance \sphinxstyleemphasis{g} (see \hyperref[\detokenize{tutorial:randomgraph4335}]{Fig.\@ \ref{\detokenize{tutorial:randomgraph4335}}}) is indeed a permutation graph, \sphinxstyleemphasis{g} and its dual \sphinxstyleemphasis{\sphinxhyphen{}g} should be \sphinxstyleemphasis{transitively orientable}, i.e. \sphinxstylestrong{comparability graphs} (see \sphinxcite{tutorial:gol-2004}). With the \sphinxcode{\sphinxupquote{graphs.Graph.isComparabilityGraph()}} test, we may easily check this fact. This method proceeds indeed by trying to construct a transitive neighbourhood decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a \sphinxstyleemphasis{self.edgeOrientations} attribute (see \sphinxcite{tutorial:gol-2004} p.129\sphinxhyphen{}132).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{if} \PYG{n}{g}\PYG{o}{.}\PYG{n}{isComparabilityGraph}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
@@ -6140,7 +6140,7 @@ The resulting orientation of the edges of \sphinxstyleemphasis{g} (see \hyperref
 
 It is worthwhile noticing that the orientation of \sphinxstyleemphasis{g} is achieved with a \sphinxstyleemphasis{single neighbourhood} decomposition, covering all the vertices. Whereas, the orientation of the dual \sphinxstyleemphasis{\sphinxhyphen{}g} needs a decomposition into \sphinxstyleemphasis{three subsequent neighbourhoods} marked in black, red and blue (see \hyperref[\detokenize{tutorial:transorientdualgraph}]{Fig.\@ \ref{\detokenize{tutorial:transorientdualgraph}}}).
 
-Let us recheck these facts by explicitely constructing transitively oriented digraph instances with the \sphinxcode{\sphinxupquote{graphs.Graph.computeTransitivelyOrientedDigraph()}} method.
+Let us recheck these facts by explicitly constructing transitively oriented digraph instances with the \sphinxcode{\sphinxupquote{graphs.Graph.computeTransitivelyOrientedDigraph()}} method.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{og} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeTransitivelyOrientedDigraph}\PYG{p}{(}\PYG{n}{PartiallyDetermined}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
@@ -6286,7 +6286,7 @@ Using the \sphinxcode{\sphinxupquote{graphs.RandomTree}} class, we may, for inst
 
 A tree graph of order \sphinxstyleemphasis{n} contains \sphinxstyleemphasis{n\sphinxhyphen{}1} edges (see Line 8 and 9) and we may distinguish vertices like \sphinxstyleemphasis{v1}, \sphinxstyleemphasis{v2}, \sphinxstyleemphasis{v4}, \sphinxstyleemphasis{v5} or \sphinxstyleemphasis{v9}  of degree 1, called the \sphinxstylestrong{leaves} of the tree, and vertices like \sphinxstyleemphasis{v3}, \sphinxstyleemphasis{v6}, \sphinxstyleemphasis{v7} or \sphinxstyleemphasis{v8} of degree 2 or more, called the \sphinxstylestrong{nodes} of the tree.
 
-The structure of a tree of order \(n > 2\) is entirely characterised by a corresponding \sphinxstyleemphasis{Prüfer} \sphinxstylestrong{code} \sphinxhyphen{}ie a \sphinxstyleemphasis{list of vertices keys}\sphinxhyphen{} of length \sphinxstyleemphasis{n\sphinxhyphen{}2}. See, for instance in Line 12 the code {[}‘v3’, ‘v8’, ‘v8’, ‘v3’, ‘v7’, ‘v6’, ‘v7’{]} corresponding to our sample tree graph \sphinxstyleemphasis{t}.
+The structure of a tree of order \(n > 2\) is entirely characterised by a corresponding \sphinxstyleemphasis{Prüfer} \sphinxstylestrong{code} \sphinxhyphen{}i.e. a \sphinxstyleemphasis{list of vertices keys}\sphinxhyphen{} of length \sphinxstyleemphasis{n\sphinxhyphen{}2}. See, for instance in Line 12 the code {[}‘v3’, ‘v8’, ‘v8’, ‘v3’, ‘v7’, ‘v6’, ‘v7’{]} corresponding to our sample tree graph \sphinxstyleemphasis{t}.
 
 Each position of the code indicates the parent of the remaining leaf with the smallest vertex label. Vertex \sphinxstyleemphasis{v3} is thus the parent of \sphinxstyleemphasis{v1} and we drop leaf \sphinxstyleemphasis{v1}, \sphinxstyleemphasis{v8} is now the parent of leaf \sphinxstyleemphasis{v2} and we drop \sphinxstyleemphasis{v2}, vertex \sphinxstyleemphasis{v8} is again the parent of leaf \sphinxstyleemphasis{v4} and we drop \sphinxstyleemphasis{v4}, vertex \sphinxstyleemphasis{v3} is the parent of leaf \sphinxstyleemphasis{v5} and we drop \sphinxstyleemphasis{v5}, \sphinxstyleemphasis{v7} is now the parent of leaf \sphinxstyleemphasis{v3} and we may drop \sphinxstyleemphasis{v3}, \sphinxstyleemphasis{v6} becomes the parent of leaf \sphinxstyleemphasis{v8} and we drop \sphinxstyleemphasis{v8}, \sphinxstyleemphasis{v7} becomes now the parent of leaf \sphinxstyleemphasis{v6} and we may drop \sphinxstyleemphasis{v6}. The two eventually remaining vertices, \sphinxstyleemphasis{v7} and \sphinxstyleemphasis{v9}, give the last link in the reconstructed tree (see \sphinxcite{tutorial:bar-1991}).
 
@@ -6522,7 +6522,7 @@ To compute the most determined spanning tree or forest, we may use the \sphinxco
 \PYG{g+go}{ Average determination(s) : [Decimal(\PYGZsq{}0.655\PYGZsq{})]}
 \end{sphinxVerbatim}
 
-The given graph is connected and, hence, admids a single spanning tree (see \hyperref[\detokenize{tutorial:bestdeterminedspanningtree}]{Fig.\@ \ref{\detokenize{tutorial:bestdeterminedspanningtree}}}) of \sphinxstylestrong{maximum mean determination} = (0.47 + 0.91 + 0.90 + 0.34)/4 = \sphinxstylestrong{0.655} (see Lines 9, 6 and 10 in the relation table above).
+The given graph is connected and, hence, admits a single spanning tree (see \hyperref[\detokenize{tutorial:bestdeterminedspanningtree}]{Fig.\@ \ref{\detokenize{tutorial:bestdeterminedspanningtree}}}) of \sphinxstylestrong{maximum mean determination} = (0.47 + 0.91 + 0.90 + 0.34)/4 = \sphinxstylestrong{0.655} (see Lines 9, 6 and 10 in the relation table above).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{mt}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bestDeterminedspanningTree}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}

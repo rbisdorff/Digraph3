@@ -79,8 +79,8 @@
 \contentsline {subsection}{\numberline {12.4}Computing good and bad choice recommendations}{125}{subsection.12.4}
 \contentsline {subsection}{\numberline {12.5}Tractability}{129}{subsection.12.5}
 \contentsline {section}{\numberline {13}About split, interval and permutation graphs}{131}{section.13}
-\contentsline {subsection}{\numberline {13.1}A multipally \sphinxstyleemphasis {perfect} graph}{131}{subsection.13.1}
-\contentsline {subsection}{\numberline {13.2}Who is the lier ?}{133}{subsection.13.2}
+\contentsline {subsection}{\numberline {13.1}A multiply \sphinxstyleemphasis {perfect} graph}{131}{subsection.13.1}
+\contentsline {subsection}{\numberline {13.2}Who is the liar ?}{133}{subsection.13.2}
 \contentsline {subsection}{\numberline {13.3}Generating permutation graphs}{136}{subsection.13.3}
 \contentsline {subsection}{\numberline {13.4}Recognizing permutation graphs}{139}{subsection.13.4}
 \contentsline {section}{\numberline {14}On tree graphs and graph forests}{144}{section.14}

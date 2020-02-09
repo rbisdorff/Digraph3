@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  9 FEB 2020 10:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  9 FEB 2020 11:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2038,13 +2038,13 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 6599.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 6599.
 
 Package rerunfilecheck Info: File `digraph3Tutorial.out' has not changed.
-(rerunfilecheck)             Checksum: 1C5152DC09950CA9760B9FBFAD9E6B17;18630.
+(rerunfilecheck)             Checksum: 28AC1E7B479950A20204B47F660E8B41;18620.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 6599.
  ) 
 Here is how much of TeX's memory you used:
  14925 strings out of 494244
- 213064 string characters out of 6161779
- 462600 words of memory out of 5000000
+ 213062 string characters out of 6161779
+ 462606 words of memory out of 5000000
  17467 multiletter control sequences out of 15000+600000
  32665 words of font info for 77 fonts, out of 8000000 for 9000
  396 hyphenation exceptions out of 8191
@@ -2089,7 +2089,7 @@ sfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on digraph3Tutorial.pdf (155 pages, 3234505 bytes).
+Output written on digraph3Tutorial.pdf (155 pages, 3234627 bytes).
 PDF statistics:
  2871 PDF objects out of 2984 (max. 8388607)
  1643 compressed objects within 17 object streams
