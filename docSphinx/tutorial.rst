@@ -3912,7 +3912,7 @@ Computing the non isomorphic MISs of the 12-cycle graph
 	:depth: 1
 	:local:
 
-Intorduction
+Introduction
 ............
 
 Due to the public success of our common 2008 publication with Jean-Luc Marichal [ISOMIS-08]_ , we present in this tutorial an example Python session for computing the **non isomorphic maximal independent sets** (MISs) from the 12-cycle graph, i.e. a :py:class:`digraphs.CirculantDigraph` class instance of order 12 and symmetric circulants 1 and -1.
