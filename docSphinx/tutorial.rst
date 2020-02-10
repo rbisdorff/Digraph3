@@ -14,7 +14,7 @@
          cautionBorderColor={named}{Cyan},
          cautionBgColor={named}{LightCyan}}
 
-===================================
+
 Tutorials of the Digraph3 resources
 ===================================
 
@@ -29,7 +29,7 @@ Tutorials of the Digraph3 resources
 .. only:: html 
 
     .. contents:: Content Table
-       :depth: 2	
+       :depth: 1	
 
 .. highlight:: python
 	:linenothreshold: 2
