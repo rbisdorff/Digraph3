@@ -101,7 +101,11 @@ Several download options (easiest under Linux or Mac OS-X) are given.
 
 3. Or, with a browser access, download and extract the latest distribution zip archive either, from the `github link above <https://github.com/rbisdorff/Digraph3>`_  or, from the `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
 
+.. only:: html
 
+	  See the `Installation section <techDoc.html#installation>`_ in the Technical Reference.
+
+	  
 Starting a Python3 session
 --------------------------
 
@@ -404,7 +408,7 @@ Double links are drawn in bold black with an arrowhead at each end, whereas sing
 Asymmetric and symmetric parts
 ------------------------------
 
-We may now extract both this symmetric as well as this asymmetric part of digraph *dg* with the help of two corresponding constructors (see :numref:`asymSymParts`).
+We may now extract both the *symmetric* as well as the *asymmetric* part of digraph *dg* with the help of two corresponding constructors (see :numref:`asymSymParts`).
 
 .. code-block:: pycon
    :linenos:
@@ -457,7 +461,7 @@ Here below, for illustration the source code of *relation* constructor of the :p
 Border and inner parts
 ------------------------------
 
-We may also extract the border -i.e. the part of the digraph induced by the union of its initial and terminal prekernels (see :ref:`Kernel-Tutorial-label`) -  as well as the inner part -i.e. the complement of the border part- of digraph *dg* with the help of two corresponding class constructors (see :numref:`graphBorderAndInner`).
+We may also extract the border -i.e. the part of the digraph induced by the union of its initial and terminal prekernels (see :ref:`Kernel-Tutorial-label`)-  as well as the inner part -i.e. the complement of the border part- of digraph *dg* with the help of two corresponding class constructors (see :numref:`graphBorderAndInner`).
 
 .. code-block:: pycon
    :linenos:

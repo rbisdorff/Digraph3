@@ -5,7 +5,7 @@ Technical Reference of the Digraph3 modules
 :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2020
 
 .. contents:: Table of Contents
-	:depth: 2
+	:depth: 1
 	:local:	    
 
 .. _Technical-label:
@@ -37,7 +37,7 @@ installs (with sudo !!) the Digraph3 modules in the current running python envir
           
 installs the Digraph3 modules in an activated virtual python environment.
      
-If the cyton C-compiled modules for Big Data applications are required, it is necessary to previously install the Cython package in the running Python environment::
+If the **cython** (https://cython.org/) C-compiled modules for Big Data applications are required, it is necessary to previously install the Cython package in the running Python environment::
 
      ...$ pip3.5+ install cython
 
