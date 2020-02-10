@@ -73,7 +73,7 @@
 <li><p><a class="reference internal" href="#computing-a-best-choice-recommendation" id="id140">Computing a best choice recommendation</a></p></li>
 <li><p><a class="reference internal" href="#rating-with-learned-quantile-norms" id="id141">Rating with learned quantile norms</a></p></li>
 <li><p><a class="reference internal" href="#working-with-the-graphs-module" id="id142">Working with the <code class="code docutils literal notranslate"><span class="pre">graphs</span></code> module</a></p></li>
-<li><p><a class="reference internal" href="#computing-the-non-isomorphic-miss-of-the-n-cycle-graph" id="id143">Computing the non isomorphic MISs of the n-cycle graph</a></p></li>
+<li><p><a class="reference internal" href="#computing-the-non-isomorphic-miss-of-the-12-cycle-graph" id="id143">Computing the non isomorphic MISs of the 12-cycle graph</a></p></li>
 <li><p><a class="reference internal" href="#on-computing-digraph-kernels" id="id144">On computing digraph kernels</a></p></li>
 <li><p><a class="reference internal" href="#about-split-interval-and-permutation-graphs" id="id145">About split, interval and permutation graphs</a></p></li>
 <li><p><a class="reference internal" href="#on-tree-graphs-and-graph-forests" id="id146">On tree graphs and graph forests</a></p></li>
@@ -2268,7 +2268,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <ul class="simple">
 <li><p><a class="reference internal" href="#the-ranking-problem" id="id181">The ranking problem</a></p></li>
 <li><p><a class="reference internal" href="#the-copeland-ranking" id="id182">The Copeland ranking</a></p></li>
-<li><p><a class="reference internal" href="#the-net-flows-ranking" id="id183">The Net-Flows ranking</a></p></li>
+<li><p><a class="reference internal" href="#the-netflows-ranking" id="id183">The <em>NetFlows</em> ranking</a></p></li>
 <li><p><a class="reference internal" href="#kemeny-rankings" id="id184">Kemeny rankings</a></p></li>
 <li><p><a class="reference internal" href="#slater-rankings" id="id185">Slater rankings</a></p></li>
 <li><p><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule" id="id186">Kohler’s ranking-by-choosing rule</a></p></li>
@@ -2428,9 +2428,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<div class="section" id="the-net-flows-ranking">
-<h2><a class="toc-backref" href="#id183">The Net-Flows ranking</a><a class="headerlink" href="#the-net-flows-ranking" title="Permalink to this headline">¶</a></h2>
-<p>The valued version of the Copeland rule, called <strong>Net-Flows</strong> rule, is working directly on the given valued outranking digraph <em>g</em>. For each alternative <em>x</em> we compute a net flow score that is the sum of the differences between the <strong>outranking</strong> characteristics <img class="math" src="_images/math/6c2e22ef23bafc04fe512d491f14d5ee085715c1.png" alt="r(x\,S\,y)"/> and the <strong>outranked</strong> characteristics r(<em>y</em> S <em>x</em>) for all pairs of alternatives where <em>y</em> is different from <em>x</em>.</p>
+<div class="section" id="the-netflows-ranking">
+<h2><a class="toc-backref" href="#id183">The <em>NetFlows</em> ranking</a><a class="headerlink" href="#the-netflows-ranking" title="Permalink to this headline">¶</a></h2>
+<p>The valued version of the Copeland rule, called <strong>NetFlows</strong> rule, is working directly on the given valued outranking digraph <em>g</em>. For each alternative <em>x</em> we compute a net flow score that is the sum of the differences between the <strong>outranking</strong> characteristics <img class="math" src="_images/math/6c2e22ef23bafc04fe512d491f14d5ee085715c1.png" alt="r(x\,S\,y)"/> and the <strong>outranked</strong> characteristics r(<em>y</em> S <em>x</em>) for all pairs of alternatives where <em>y</em> is different from <em>x</em>.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2466,7 +2466,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> Fitness of net flows ranking: 0.828</span>
 </pre></div>
 </td></tr></table></div>
-<p>The <strong>Net-Flows</strong> ranking is here, in this didactic example, not as much correlated with the given outranking relation as its crisp cousin ranking.</p>
+<p>The <strong>NetFlows</strong> ranking is here, in this didactic example, not as much correlated with the given outranking relation as its crisp cousin ranking.</p>
 <p>To appreciate the effective quality of both the Copeland and the Net-Flows rankings, it is useful to consider Kemeny’s and Slater’s optimal ranking rules.</p>
 </div>
 <div class="section" id="kemeny-rankings">
@@ -5539,8 +5539,18 @@ frozenset([‘v6’,’v7’]) : -1,
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 </div>
 </div>
-<div class="section" id="computing-the-non-isomorphic-miss-of-the-n-cycle-graph">
-<span id="isomorphicmis-tutorial-label"></span><h1><a class="toc-backref" href="#id143">Computing the non isomorphic MISs of the n-cycle graph</a><a class="headerlink" href="#computing-the-non-isomorphic-miss-of-the-n-cycle-graph" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="computing-the-non-isomorphic-miss-of-the-12-cycle-graph">
+<span id="isomorphicmis-tutorial-label"></span><h1><a class="toc-backref" href="#id143">Computing the non isomorphic MISs of the 12-cycle graph</a><a class="headerlink" href="#computing-the-non-isomorphic-miss-of-the-12-cycle-graph" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="id57">
+<ul class="simple">
+<li><p><a class="reference internal" href="#intorduction" id="id210">Intorduction</a></p></li>
+<li><p><a class="reference internal" href="#computing-the-maximal-independent-sets-miss" id="id211">Computing the maximal independent sets (MISs)</a></p></li>
+<li><p><a class="reference internal" href="#computing-the-automorphism-group" id="id212">Computing the automorphism group</a></p></li>
+<li><p><a class="reference internal" href="#computing-the-isomorphic-miss" id="id213">Computing the isomorphic MISs</a></p></li>
+</ul>
+</div>
+<div class="section" id="intorduction">
+<h2><a class="toc-backref" href="#id210">Intorduction</a><a class="headerlink" href="#intorduction" title="Permalink to this headline">¶</a></h2>
 <p>Due to the public success of our common 2008 publication with Jean-Luc Marichal <a class="reference internal" href="#isomis-08" id="id58"><span>[ISOMIS-08]</span></a> , we present in this tutorial an example Python session for computing the <strong>non isomorphic maximal independent sets</strong> (MISs) from the 12-cycle graph, i.e. a <a class="reference internal" href="techDoc.html#digraphs.CirculantDigraph" title="digraphs.CirculantDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.CirculantDigraph</span></code></a> class instance of order 12 and symmetric circulants 1 and -1.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -5599,6 +5609,9 @@ frozenset([‘v6’,’v7’]) : -1,
 <a class="reference internal image-reference" href="_images/cg12.png"><img alt="The 12-cycle graph" src="_images/cg12.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 36 </span><span class="caption-text">The 12-cycle graph</span><a class="headerlink" href="#id121" title="Permalink to this image">¶</a></p>
 </div>
+</div>
+<div class="section" id="computing-the-maximal-independent-sets-miss">
+<h2><a class="toc-backref" href="#id211">Computing the maximal independent sets (MISs)</a><a class="headerlink" href="#computing-the-maximal-independent-sets-miss" title="Permalink to this headline">¶</a></h2>
 <p>A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an orbit of MISs under the automorphism group of the 12-cycle graph. We are now first computing all maximal independent sets that are detectable in the 12-cycle digraph with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showMIS" title="digraphs.Digraph.showMIS"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.showMIS()</span></code></a> method.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -5713,6 +5726,9 @@ frozenset([‘v6’,’v7’]) : -1,
 <span class="go"> }</span>
 </pre></div>
 </td></tr></table></div>
+</div>
+<div class="section" id="computing-the-automorphism-group">
+<h2><a class="toc-backref" href="#id212">Computing the automorphism group</a><a class="headerlink" href="#computing-the-automorphism-group" title="Permalink to this headline">¶</a></h2>
 <p>For computing the corresponding non isomorphic MISs, we actually need the automorphism group of the c12-cycle graph. The <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a> class therefore provides the <a class="reference internal" href="techDoc.html#digraphs.Digraph.automorphismGenerators" title="digraphs.Digraph.automorphismGenerators"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.automorphismGenerators()</span></code></a> method which adds automorphism group generators to a <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a> class instance with the help of the external shell &lt;<code class="code docutils literal notranslate"><span class="pre">dreadnaut</span></code>&gt; command from the <strong>nauty</strong> software package <a class="footnote-reference brackets" href="#id92" id="id60">2</a>.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -5738,6 +5754,9 @@ frozenset([‘v6’,’v7’]) : -1,
 </pre></div>
 </td></tr></table></div>
 <p>The 12-cycle graph automorphism group is generated with both the permutations above and has group size 24.</p>
+</div>
+<div class="section" id="computing-the-isomorphic-miss">
+<h2><a class="toc-backref" href="#id213">Computing the isomorphic MISs</a><a class="headerlink" href="#computing-the-isomorphic-miss" title="Permalink to this headline">¶</a></h2>
 <p>The command <a class="reference internal" href="techDoc.html#digraphs.Digraph.showOrbits" title="digraphs.Digraph.showOrbits"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.showOrbits()</span></code></a> renders now the labelled representatives of each of the four orbits of isomorphic MISs observed in the 12-cycle graph (see Lines 7-10).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -5774,21 +5793,22 @@ frozenset([‘v6’,’v7’]) : -1,
 <p>The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of ‘2’s and ‘3’s without distinguishing opposite directions of writing. The first orbit corresponds to writing six times a ‘2’; the second orbit corresponds to writing four times a ‘3’. The third and fourth orbit correspond to writing two times a ‘3’ and three times a ‘2’. There are two non isomorphic ways to do this latter circular sum. Either separating the ‘3’s by one and two ‘2’s, or by zero and three ‘2’s (see Bisdorff &amp; Marichal <a class="reference internal" href="#isomis-08" id="id61"><span>[ISOMIS-08]</span></a> ).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 </div>
+</div>
 <div class="section" id="on-computing-digraph-kernels">
 <span id="kernel-tutorial-label"></span><h1><a class="toc-backref" href="#id144">On computing digraph kernels</a><a class="headerlink" href="#on-computing-digraph-kernels" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="id62">
 <ul class="simple">
-<li><p><a class="reference internal" href="#what-is-a-graph-kernel" id="id210">What is a graph kernel ?</a></p></li>
-<li><p><a class="reference internal" href="#initial-and-terminal-kernels" id="id211">Initial and terminal kernels</a></p></li>
-<li><p><a class="reference internal" href="#kernels-in-lateralized-digraphs" id="id212">Kernels in lateralized digraphs</a></p></li>
-<li><p><a class="reference internal" href="#computing-good-and-bad-choice-recommendations" id="id213">Computing good and bad choice recommendations</a></p></li>
-<li><p><a class="reference internal" href="#tractability" id="id214">Tractability</a></p></li>
+<li><p><a class="reference internal" href="#what-is-a-graph-kernel" id="id214">What is a graph kernel ?</a></p></li>
+<li><p><a class="reference internal" href="#initial-and-terminal-kernels" id="id215">Initial and terminal kernels</a></p></li>
+<li><p><a class="reference internal" href="#kernels-in-lateralized-digraphs" id="id216">Kernels in lateralized digraphs</a></p></li>
+<li><p><a class="reference internal" href="#computing-good-and-bad-choice-recommendations" id="id217">Computing good and bad choice recommendations</a></p></li>
+<li><p><a class="reference internal" href="#tractability" id="id218">Tractability</a></p></li>
 </ul>
 </div>
 <div class="section" id="what-is-a-graph-kernel">
-<h2><a class="toc-backref" href="#id210">What is a graph kernel ?</a><a class="headerlink" href="#what-is-a-graph-kernel" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id214">What is a graph kernel ?</a><a class="headerlink" href="#what-is-a-graph-kernel" title="Permalink to this headline">¶</a></h2>
 <p>We call <strong>choice</strong> in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice <em>Y</em> is called <strong>internally stable</strong> or <strong>independent</strong> when there exist <strong>no links</strong> (edges) or relations (arcs) between its members. Furthermore, a choice <em>Y</em> is called <strong>externally stable</strong> when for each vertex, node or action <em>x</em> not in <em>Y</em>, there exists at least a member <em>y</em> of <em>Y</em> such that <em>x</em> is linked or related to <em>y</em>. Now, an internally <strong>and</strong> externally stable choice is called a <strong>kernel</strong>.</p>
-<p>A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see <a class="reference internal" href="#isomorphicmis-tutorial-label"><span class="std std-ref">Computing the non isomorphic MISs of the n-cycle graph</span></a>). Indeed, each MIS in the n-cycle graph is by definition independent, i.e. internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in <a class="reference internal" href="#misc12"><span class="std std-numref">Fig. 37</span></a>.</p>
+<p>A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see <a class="reference internal" href="#isomorphicmis-tutorial-label"><span class="std std-ref">Computing the non isomorphic MISs of the 12-cycle graph</span></a>). Indeed, each MIS in the n-cycle graph is by definition independent, i.e. internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in <a class="reference internal" href="#misc12"><span class="std std-numref">Fig. 37</span></a>.</p>
 <p>In all graph or symmetric digraph, the <em>maximality condition</em> imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal <strong>holes</strong> in the given graph.</p>
 <p>We may illustrate this coincidence between MISs and kernels in graphs
 and symmetric digraphs with the following random 3-regular graph
@@ -6053,7 +6073,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <p>In the context of digraphs, i.e. <em>oriented</em> graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.</p>
 </div>
 <div class="section" id="initial-and-terminal-kernels">
-<h2><a class="toc-backref" href="#id211">Initial and terminal kernels</a><a class="headerlink" href="#initial-and-terminal-kernels" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id215">Initial and terminal kernels</a><a class="headerlink" href="#initial-and-terminal-kernels" title="Permalink to this headline">¶</a></h2>
 <p>In an oriented graph context, the internal stability condition of the kernel concept remains untouched; however, the external stability condition gets indeed split up by the <em>orientation</em> into two lateral cases:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -6294,7 +6314,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <p>It immediately follows that weak chordless circuits are part of the class of digraphs that are <strong>invariant</strong> under the <em>codual</em> transform, <em>cn</em> = - (~ <em>cn</em> ) = ~ ( -<em>cn</em> ) <a class="footnote-reference brackets" href="#id99" id="id66">13</a>. In the case, now, of an <em>odd</em> weak chordless circuit, <em>neither</em> the weak chordless circuit, <em>nor</em> its dual, converse, or codual versions will admit <em>any</em> initial or terminal prekernels.</p>
 </div>
 <div class="section" id="kernels-in-lateralized-digraphs">
-<h2><a class="toc-backref" href="#id212">Kernels in lateralized digraphs</a><a class="headerlink" href="#kernels-in-lateralized-digraphs" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id216">Kernels in lateralized digraphs</a><a class="headerlink" href="#kernels-in-lateralized-digraphs" title="Permalink to this headline">¶</a></h2>
 <p>Humans do live in an apparent physical space of plain transitive <strong>lateral orientation</strong>, fully empowered in finite geometrical 3D models with <strong>linear orders</strong>, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite <strong>preorders</strong>, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite <strong>partial orders</strong>, i.e. asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.</p>
 <p>In genuine random digraphs, however, we may need to check for each of its MISs, whether <em>one</em>, <em>both</em>, or <em>none</em> of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30%.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -6425,7 +6445,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see <a class="reference internal" href="#rubis-tutorial-label"><span class="std std-ref">Computing a best choice recommendation</span></a>).</p>
 </div>
 <div class="section" id="computing-good-and-bad-choice-recommendations">
-<h2><a class="toc-backref" href="#id213">Computing good and bad choice recommendations</a><a class="headerlink" href="#computing-good-and-bad-choice-recommendations" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id217">Computing good and bad choice recommendations</a><a class="headerlink" href="#computing-good-and-bad-choice-recommendations" title="Permalink to this headline">¶</a></h2>
 <p>To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolar-valued <strong>outranking</strong> digraph.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -6576,7 +6596,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>In the resulting linear ranking (see <a class="reference internal" href="#outrankingresult"><span class="std std-numref">Fig. 49</span></a>), action ‘a4’ is set at first rank, followed by action ‘a2’. This makes sense as ‘a4’ shows three performances in the first quintile, whereas ‘a2’ is only partially evaluated and shows only two such excellent performances. But ‘a4’ also shows a very weak performance in the first quintile. Both decision actions, hence, don’t show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any ‘forced’ linear ranking result as shown in <a class="reference internal" href="#outrankingresult"><span class="std std-numref">Fig. 49</span></a> above.</p>
 </div>
 <div class="section" id="tractability">
-<h2><a class="toc-backref" href="#id214">Tractability</a><a class="headerlink" href="#tractability" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id218">Tractability</a><a class="headerlink" href="#tractability" title="Permalink to this headline">¶</a></h2>
 <p>Finally, let us give some hints on the <strong>tractability</strong> of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraph may get hard already for tiny sparse digraphs of order <em>n</em> &gt; 20 (see <a class="reference internal" href="#bis-2006b" id="id67"><span>[BIS-2006b]</span></a>). Indeed, the worst case is given by an empty or indeterminate digraph where the set of all potential independent choices to check is in fact the power set of the vertices.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -6718,14 +6738,14 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span id="permutation-tutorial-label"></span><h1><a class="toc-backref" href="#id145">About split, interval and permutation graphs</a><a class="headerlink" href="#about-split-interval-and-permutation-graphs" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="id70">
 <ul class="simple">
-<li><p><a class="reference internal" href="#a-multiply-perfect-graph" id="id215">A multiply <em>perfect</em> graph</a></p></li>
-<li><p><a class="reference internal" href="#who-is-the-liar" id="id216">Who is the liar ?</a></p></li>
-<li><p><a class="reference internal" href="#generating-permutation-graphs" id="id217">Generating permutation graphs</a></p></li>
-<li><p><a class="reference internal" href="#recognizing-permutation-graphs" id="id218">Recognizing permutation graphs</a></p></li>
+<li><p><a class="reference internal" href="#a-multiply-perfect-graph" id="id219">A multiply <em>perfect</em> graph</a></p></li>
+<li><p><a class="reference internal" href="#who-is-the-liar" id="id220">Who is the liar ?</a></p></li>
+<li><p><a class="reference internal" href="#generating-permutation-graphs" id="id221">Generating permutation graphs</a></p></li>
+<li><p><a class="reference internal" href="#recognizing-permutation-graphs" id="id222">Recognizing permutation graphs</a></p></li>
 </ul>
 </div>
 <div class="section" id="a-multiply-perfect-graph">
-<h2><a class="toc-backref" href="#id215">A multiply <em>perfect</em> graph</a><a class="headerlink" href="#a-multiply-perfect-graph" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id219">A multiply <em>perfect</em> graph</a><a class="headerlink" href="#a-multiply-perfect-graph" title="Permalink to this headline">¶</a></h2>
 <p>Following Martin Golumbic (see <a class="reference internal" href="#gol-2004" id="id71"><span>[GOL-2004]</span></a> p. 149), we call a given graph <em>g</em>:</p>
 <blockquote>
 <div><ul class="simple">
@@ -6831,7 +6851,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>are <em>independent</em> of one another (see <a class="reference internal" href="#gol-2004" id="id72"><span>[GOL-2004]</span></a> p. 275).</p>
 </div>
 <div class="section" id="who-is-the-liar">
-<h2><a class="toc-backref" href="#id216">Who is the liar ?</a><a class="headerlink" href="#who-is-the-liar" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id220">Who is the liar ?</a><a class="headerlink" href="#who-is-the-liar" title="Permalink to this headline">¶</a></h2>
 <p><em>Claude Berge</em> ‘s famous mystery story (see <a class="reference internal" href="#gol-2004" id="id73"><span>[GOL-2004]</span></a> p.20) may well illustrate the importance of being an <strong>interval graph</strong>.</p>
 <p>Suppose that the file <code class="docutils literal notranslate"><span class="pre">berge.py</span></code> contains the following <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.Graph</span></code></a> instance data:</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -6996,7 +7016,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 </div>
 <div class="section" id="generating-permutation-graphs">
-<h2><a class="toc-backref" href="#id217">Generating permutation graphs</a><a class="headerlink" href="#generating-permutation-graphs" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id221">Generating permutation graphs</a><a class="headerlink" href="#generating-permutation-graphs" title="Permalink to this headline">¶</a></h2>
 <p>A graph is called a <strong>permutation</strong> or <em>inversion</em> graph if there exists a permutation of its list of vertices such that the graph is isomorphic to the inversions operated by the permutation in this list (see <a class="reference internal" href="#gol-2004" id="id74"><span>[GOL-2004]</span></a> Chapter 7, pp 157-170). This kind is also part of the class of perfect graphs.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -7141,7 +7161,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 </div>
 <div class="section" id="recognizing-permutation-graphs">
-<h2><a class="toc-backref" href="#id218">Recognizing permutation graphs</a><a class="headerlink" href="#recognizing-permutation-graphs" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id222">Recognizing permutation graphs</a><a class="headerlink" href="#recognizing-permutation-graphs" title="Permalink to this headline">¶</a></h2>
 <p>Now, a given graph <em>g</em> is a <strong>permutation</strong> graph <strong>if and only if</strong> both <em>g</em> <strong>and</strong> <em>-g</em> are <em>transitively orientable</em>. This  property gives a polynomial test procedure (in <img class="math" src="_images/math/174aef04544e022a085aab16ddeae821c5667e2b.png" alt="O(n^3)"/> due to the transitivity check) for recognizing permutation graphs.</p>
 <p>Let us consider, for instance, the following random graph of <em>order</em> 8 generated with an <em>edge probability</em> of 40% and a <em>random seed</em> equal to 4335.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -7373,14 +7393,14 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span id="trees-tutorial-label"></span><h1><a class="toc-backref" href="#id146">On tree graphs and graph forests</a><a class="headerlink" href="#on-tree-graphs-and-graph-forests" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="id81">
 <ul class="simple">
-<li><p><a class="reference internal" href="#generating-random-tree-graphs" id="id219">Generating random tree graphs</a></p></li>
-<li><p><a class="reference internal" href="#recognizing-tree-graphs" id="id220">Recognizing tree graphs</a></p></li>
-<li><p><a class="reference internal" href="#spanning-trees-and-forests" id="id221">Spanning trees and forests</a></p></li>
-<li><p><a class="reference internal" href="#maximum-determined-spanning-forests" id="id222">Maximum determined spanning forests</a></p></li>
+<li><p><a class="reference internal" href="#generating-random-tree-graphs" id="id223">Generating random tree graphs</a></p></li>
+<li><p><a class="reference internal" href="#recognizing-tree-graphs" id="id224">Recognizing tree graphs</a></p></li>
+<li><p><a class="reference internal" href="#spanning-trees-and-forests" id="id225">Spanning trees and forests</a></p></li>
+<li><p><a class="reference internal" href="#maximum-determined-spanning-forests" id="id226">Maximum determined spanning forests</a></p></li>
 </ul>
 </div>
 <div class="section" id="generating-random-tree-graphs">
-<h2><a class="toc-backref" href="#id219">Generating random tree graphs</a><a class="headerlink" href="#generating-random-tree-graphs" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id223">Generating random tree graphs</a><a class="headerlink" href="#generating-random-tree-graphs" title="Permalink to this headline">¶</a></h2>
 <p>Using the <a class="reference internal" href="techDoc.html#graphs.RandomTree" title="graphs.RandomTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.RandomTree</span></code></a> class, we may, for instance, generate a random tree graph with 9 vertices.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -7482,7 +7502,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>Given a genuine graph, how can we recognize that it is in fact a tree instance ?</p>
 </div>
 <div class="section" id="recognizing-tree-graphs">
-<h2><a class="toc-backref" href="#id220">Recognizing tree graphs</a><a class="headerlink" href="#recognizing-tree-graphs" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id224">Recognizing tree graphs</a><a class="headerlink" href="#recognizing-tree-graphs" title="Permalink to this headline">¶</a></h2>
 <p>Given a graph <em>g</em> of order <em>n</em> and size <em>s</em>, the following 5 assertions <em>A1</em>, <em>A2</em>, <em>A3</em>, <em>A4</em> and <em>A5</em> are all equivalent (see <a class="reference internal" href="#bar-1991" id="id84"><span>[BAR-1991]</span></a>):</p>
 <blockquote>
 <div><ul class="simple">
@@ -7529,7 +7549,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>Let us now turn toward a major application of tree graphs, namely <em>spanning trees</em> and <em>forests</em> related to graph traversals.</p>
 </div>
 <div class="section" id="spanning-trees-and-forests">
-<h2><a class="toc-backref" href="#id221">Spanning trees and forests</a><a class="headerlink" href="#spanning-trees-and-forests" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id225">Spanning trees and forests</a><a class="headerlink" href="#spanning-trees-and-forests" title="Permalink to this headline">¶</a></h2>
 <p>With the <a class="reference internal" href="techDoc.html#graphs.RandomSpanningTree" title="graphs.RandomSpanningTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.RandomSpanningTree</span></code></a> class we may generate, from a given <strong>connected</strong> graph <em>g</em> instance, <strong>uniform random</strong> instances of a <strong>spanning tree</strong> by using <em>Wilson</em> ‘s algorithm <a class="reference internal" href="#wil-1996" id="id85"><span>[WIL-1996]</span></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -7622,7 +7642,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 </div>
 <div class="section" id="maximum-determined-spanning-forests">
-<h2><a class="toc-backref" href="#id222">Maximum determined spanning forests</a><a class="headerlink" href="#maximum-determined-spanning-forests" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id226">Maximum determined spanning forests</a><a class="headerlink" href="#maximum-determined-spanning-forests" title="Permalink to this headline">¶</a></h2>
 <p>In case of valued graphs supporting weighted edges, we may finally construct a <strong>most determined</strong> spanning tree (or forest if not connected) using <em>Kruskal</em> ‘s <em>greedy</em> <strong>minimum-spanning-tree algorithm</strong> <a class="footnote-reference brackets" href="#id95" id="id87">5</a> on the <em>dual</em> valuation of the graph <a class="reference internal" href="#kru-1956" id="id88"><span>[KRU-1956]</span></a>.</p>
 <p>We consider, for instance, a randomly valued graph with five vertices and seven edges bipolar-valued in [-1.0; 1.0].</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -7906,7 +7926,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <li><a class="reference internal" href="#ranking-with-multiple-incommensurable-criteria">Ranking with multiple incommensurable criteria</a><ul>
 <li><a class="reference internal" href="#the-ranking-problem">The ranking problem</a></li>
 <li><a class="reference internal" href="#the-copeland-ranking">The Copeland ranking</a></li>
-<li><a class="reference internal" href="#the-net-flows-ranking">The Net-Flows ranking</a></li>
+<li><a class="reference internal" href="#the-netflows-ranking">The <em>NetFlows</em> ranking</a></li>
 <li><a class="reference internal" href="#kemeny-rankings">Kemeny rankings</a></li>
 <li><a class="reference internal" href="#slater-rankings">Slater rankings</a></li>
 <li><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule">Kohler’s ranking-by-choosing rule</a></li>
@@ -7947,7 +7967,13 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <li><a class="reference internal" href="#simulating-metropolis-random-walks">Simulating Metropolis random walks</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#computing-the-non-isomorphic-miss-of-the-n-cycle-graph">Computing the non isomorphic MISs of the n-cycle graph</a></li>
+<li><a class="reference internal" href="#computing-the-non-isomorphic-miss-of-the-12-cycle-graph">Computing the non isomorphic MISs of the 12-cycle graph</a><ul>
+<li><a class="reference internal" href="#intorduction">Intorduction</a></li>
+<li><a class="reference internal" href="#computing-the-maximal-independent-sets-miss">Computing the maximal independent sets (MISs)</a></li>
+<li><a class="reference internal" href="#computing-the-automorphism-group">Computing the automorphism group</a></li>
+<li><a class="reference internal" href="#computing-the-isomorphic-miss">Computing the isomorphic MISs</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#on-computing-digraph-kernels">On computing digraph kernels</a><ul>
 <li><a class="reference internal" href="#what-is-a-graph-kernel">What is a graph kernel ?</a></li>
 <li><a class="reference internal" href="#initial-and-terminal-kernels">Initial and terminal kernels</a></li>

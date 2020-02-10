@@ -1995,7 +1995,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \phantomsection\label{\detokenize{tutorial:id182}}{\hyperref[\detokenize{tutorial:the-copeland-ranking}]{\sphinxcrossref{The Copeland ranking}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id183}}{\hyperref[\detokenize{tutorial:the-net-flows-ranking}]{\sphinxcrossref{The Net\sphinxhyphen{}Flows ranking}}}
+\phantomsection\label{\detokenize{tutorial:id183}}{\hyperref[\detokenize{tutorial:the-netflows-ranking}]{\sphinxcrossref{The \sphinxstyleemphasis{NetFlows} ranking}}}
 
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id184}}{\hyperref[\detokenize{tutorial:kemeny-rankings}]{\sphinxcrossref{Kemeny rankings}}}
@@ -2139,9 +2139,9 @@ Copeland’s rule actually renders a linear order which is indeed highly correla
 \end{sphinxVerbatim}
 
 
-\subsection{The Net\sphinxhyphen{}Flows ranking}
-\label{\detokenize{tutorial:the-net-flows-ranking}}
-The valued version of the Copeland rule, called \sphinxstylestrong{Net\sphinxhyphen{}Flows} rule, is working directly on the given valued outranking digraph \sphinxstyleemphasis{g}. For each alternative \sphinxstyleemphasis{x} we compute a net flow score that is the sum of the differences between the \sphinxstylestrong{outranking} characteristics \(r(x\,S\,y)\) and the \sphinxstylestrong{outranked} characteristics r(\sphinxstyleemphasis{y} S \sphinxstyleemphasis{x}) for all pairs of alternatives where \sphinxstyleemphasis{y} is different from \sphinxstyleemphasis{x}.
+\subsection{The \sphinxstyleemphasis{NetFlows} ranking}
+\label{\detokenize{tutorial:the-netflows-ranking}}
+The valued version of the Copeland rule, called \sphinxstylestrong{NetFlows} rule, is working directly on the given valued outranking digraph \sphinxstyleemphasis{g}. For each alternative \sphinxstyleemphasis{x} we compute a net flow score that is the sum of the differences between the \sphinxstylestrong{outranking} characteristics \(r(x\,S\,y)\) and the \sphinxstylestrong{outranked} characteristics r(\sphinxstyleemphasis{y} S \sphinxstyleemphasis{x}) for all pairs of alternatives where \sphinxstyleemphasis{y} is different from \sphinxstyleemphasis{x}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{NetFlowsOrder}
@@ -2163,7 +2163,7 @@ The valued version of the Copeland rule, called \sphinxstylestrong{Net\sphinxhyp
 \PYG{g+go}{ Fitness of net flows ranking: 0.828}
 \end{sphinxVerbatim}
 
-The \sphinxstylestrong{Net\sphinxhyphen{}Flows} ranking is here, in this didactic example, not as much correlated with the given outranking relation as its crisp cousin ranking.
+The \sphinxstylestrong{NetFlows} ranking is here, in this didactic example, not as much correlated with the given outranking relation as its crisp cousin ranking.
 
 To appreciate the effective quality of both the Copeland and the Net\sphinxhyphen{}Flows rankings, it is useful to consider Kemeny’s and Slater’s optimal ranking rules.
 
@@ -4821,8 +4821,28 @@ For more technical information and more code examples, look into the technical d
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}}
 
 
-\section{Computing the non isomorphic MISs of the n\sphinxhyphen{}cycle graph}
-\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-n-cycle-graph}}\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}
+\section{Computing the non isomorphic MISs of the 12\sphinxhyphen{}cycle graph}
+\label{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-12-cycle-graph}}\label{\detokenize{tutorial:isomorphicmis-tutorial-label}}
+\begin{sphinxShadowBox}
+\begin{itemize}
+\item {} 
+\phantomsection\label{\detokenize{tutorial:id210}}{\hyperref[\detokenize{tutorial:intorduction}]{\sphinxcrossref{Intorduction}}}
+
+\item {} 
+\phantomsection\label{\detokenize{tutorial:id211}}{\hyperref[\detokenize{tutorial:computing-the-maximal-independent-sets-miss}]{\sphinxcrossref{Computing the maximal independent sets (MISs)}}}
+
+\item {} 
+\phantomsection\label{\detokenize{tutorial:id212}}{\hyperref[\detokenize{tutorial:computing-the-automorphism-group}]{\sphinxcrossref{Computing the automorphism group}}}
+
+\item {} 
+\phantomsection\label{\detokenize{tutorial:id213}}{\hyperref[\detokenize{tutorial:computing-the-isomorphic-miss}]{\sphinxcrossref{Computing the isomorphic MISs}}}
+
+\end{itemize}
+\end{sphinxShadowBox}
+
+
+\subsection{Intorduction}
+\label{\detokenize{tutorial:intorduction}}
 Due to the public success of our common 2008 publication with Jean\sphinxhyphen{}Luc Marichal \sphinxcite{tutorial:isomis-08} , we present in this tutorial an example Python session for computing the \sphinxstylestrong{non isomorphic maximal independent sets} (MISs) from the 12\sphinxhyphen{}cycle graph, i.e. a \sphinxcode{\sphinxupquote{digraphs.CirculantDigraph}} class instance of order 12 and symmetric circulants 1 and \sphinxhyphen{}1.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4865,6 +4885,9 @@ Such \sphinxstyleemphasis{n}\sphinxhyphen{}cycle graphs are also provided as und
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{cg12}.png}
 \caption{The 12\sphinxhyphen{}cycle graph}\label{\detokenize{tutorial:id121}}\end{figure}
 
+
+\subsection{Computing the maximal independent sets (MISs)}
+\label{\detokenize{tutorial:computing-the-maximal-independent-sets-miss}}
 A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an orbit of MISs under the automorphism group of the 12\sphinxhyphen{}cycle graph. We are now first computing all maximal independent sets that are detectable in the 12\sphinxhyphen{}cycle digraph with the \sphinxcode{\sphinxupquote{digraphs.Digraph.showMIS()}} method.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4938,6 +4961,9 @@ Reading in the result of the \sphinxcode{\sphinxupquote{perrinMIS}} shell comman
 \PYG{g+go}{ \PYGZcb{}}
 \end{sphinxVerbatim}
 
+
+\subsection{Computing the automorphism group}
+\label{\detokenize{tutorial:computing-the-automorphism-group}}
 For computing the corresponding non isomorphic MISs, we actually need the automorphism group of the c12\sphinxhyphen{}cycle graph. The \sphinxcode{\sphinxupquote{digraphs.Digraph}} class therefore provides the \sphinxcode{\sphinxupquote{digraphs.Digraph.automorphismGenerators()}} method which adds automorphism group generators to a \sphinxcode{\sphinxupquote{digraphs.Digraph}} class instance with the help of the external shell \textless{}\sphinxcode{\sphinxupquote{dreadnaut}}\textgreater{} command from the \sphinxstylestrong{nauty} software package %
 \begin{footnote}[2]\sphinxAtStartFootnote
 Dependency: The \sphinxcode{\sphinxupquote{digraphs.Digraph.automorphismGenerators()}} method uses the shell \sphinxcode{\sphinxupquote{dreadnaut}} command from the nauty software package. See \sphinxurl{https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml} . On Mac OS there exist dmg installers and on Ubuntu Linux or Debian, one may easily install it with \sphinxcode{\sphinxupquote{...\$ sudo apt\sphinxhyphen{}get install nauty}}.
@@ -4960,6 +4986,9 @@ Dependency: The \sphinxcode{\sphinxupquote{digraphs.Digraph.automorphismGenerato
 
 The 12\sphinxhyphen{}cycle graph automorphism group is generated with both the permutations above and has group size 24.
 
+
+\subsection{Computing the isomorphic MISs}
+\label{\detokenize{tutorial:computing-the-isomorphic-miss}}
 The command \sphinxcode{\sphinxupquote{digraphs.Digraph.showOrbits()}} renders now the labelled representatives of each of the four orbits of isomorphic MISs observed in the 12\sphinxhyphen{}cycle graph (see Lines 7\sphinxhyphen{}10).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4997,19 +5026,19 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id210}}{\hyperref[\detokenize{tutorial:what-is-a-graph-kernel}]{\sphinxcrossref{What is a graph kernel ?}}}
+\phantomsection\label{\detokenize{tutorial:id214}}{\hyperref[\detokenize{tutorial:what-is-a-graph-kernel}]{\sphinxcrossref{What is a graph kernel ?}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id211}}{\hyperref[\detokenize{tutorial:initial-and-terminal-kernels}]{\sphinxcrossref{Initial and terminal kernels}}}
+\phantomsection\label{\detokenize{tutorial:id215}}{\hyperref[\detokenize{tutorial:initial-and-terminal-kernels}]{\sphinxcrossref{Initial and terminal kernels}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id212}}{\hyperref[\detokenize{tutorial:kernels-in-lateralized-digraphs}]{\sphinxcrossref{Kernels in lateralized digraphs}}}
+\phantomsection\label{\detokenize{tutorial:id216}}{\hyperref[\detokenize{tutorial:kernels-in-lateralized-digraphs}]{\sphinxcrossref{Kernels in lateralized digraphs}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id213}}{\hyperref[\detokenize{tutorial:computing-good-and-bad-choice-recommendations}]{\sphinxcrossref{Computing good and bad choice recommendations}}}
+\phantomsection\label{\detokenize{tutorial:id217}}{\hyperref[\detokenize{tutorial:computing-good-and-bad-choice-recommendations}]{\sphinxcrossref{Computing good and bad choice recommendations}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id214}}{\hyperref[\detokenize{tutorial:tractability}]{\sphinxcrossref{Tractability}}}
+\phantomsection\label{\detokenize{tutorial:id218}}{\hyperref[\detokenize{tutorial:tractability}]{\sphinxcrossref{Tractability}}}
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -5019,7 +5048,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \label{\detokenize{tutorial:what-is-a-graph-kernel}}
 We call \sphinxstylestrong{choice} in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice \sphinxstyleemphasis{Y} is called \sphinxstylestrong{internally stable} or \sphinxstylestrong{independent} when there exist \sphinxstylestrong{no links} (edges) or relations (arcs) between its members. Furthermore, a choice \sphinxstyleemphasis{Y} is called \sphinxstylestrong{externally stable} when for each vertex, node or action \sphinxstyleemphasis{x} not in \sphinxstyleemphasis{Y}, there exists at least a member \sphinxstyleemphasis{y} of \sphinxstyleemphasis{Y} such that \sphinxstyleemphasis{x} is linked or related to \sphinxstyleemphasis{y}. Now, an internally \sphinxstylestrong{and} externally stable choice is called a \sphinxstylestrong{kernel}.
 
-A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n\sphinxhyphen{}cycle graph (see {\hyperref[\detokenize{tutorial:isomorphicmis-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing the non isomorphic MISs of the n\sphinxhyphen{}cycle graph}}}}). Indeed, each MIS in the n\sphinxhyphen{}cycle graph is by definition independent, i.e. internally stable, and each non selected vertex in the n\sphinxhyphen{}cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12\sphinxhyphen{}cycle graph as shown in \hyperref[\detokenize{tutorial:misc12}]{Fig.\@ \ref{\detokenize{tutorial:misc12}}}.
+A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n\sphinxhyphen{}cycle graph (see {\hyperref[\detokenize{tutorial:isomorphicmis-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing the non isomorphic MISs of the 12\sphinxhyphen{}cycle graph}}}}). Indeed, each MIS in the n\sphinxhyphen{}cycle graph is by definition independent, i.e. internally stable, and each non selected vertex in the n\sphinxhyphen{}cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12\sphinxhyphen{}cycle graph as shown in \hyperref[\detokenize{tutorial:misc12}]{Fig.\@ \ref{\detokenize{tutorial:misc12}}}.
 
 In all graph or symmetric digraph, the \sphinxstyleemphasis{maximality condition} imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal \sphinxstylestrong{holes} in the given graph.
 
@@ -5698,16 +5727,16 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id215}}{\hyperref[\detokenize{tutorial:a-multiply-perfect-graph}]{\sphinxcrossref{A multiply \sphinxstyleemphasis{perfect} graph}}}
+\phantomsection\label{\detokenize{tutorial:id219}}{\hyperref[\detokenize{tutorial:a-multiply-perfect-graph}]{\sphinxcrossref{A multiply \sphinxstyleemphasis{perfect} graph}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id216}}{\hyperref[\detokenize{tutorial:who-is-the-liar}]{\sphinxcrossref{Who is the liar ?}}}
+\phantomsection\label{\detokenize{tutorial:id220}}{\hyperref[\detokenize{tutorial:who-is-the-liar}]{\sphinxcrossref{Who is the liar ?}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id217}}{\hyperref[\detokenize{tutorial:generating-permutation-graphs}]{\sphinxcrossref{Generating permutation graphs}}}
+\phantomsection\label{\detokenize{tutorial:id221}}{\hyperref[\detokenize{tutorial:generating-permutation-graphs}]{\sphinxcrossref{Generating permutation graphs}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id218}}{\hyperref[\detokenize{tutorial:recognizing-permutation-graphs}]{\sphinxcrossref{Recognizing permutation graphs}}}
+\phantomsection\label{\detokenize{tutorial:id222}}{\hyperref[\detokenize{tutorial:recognizing-permutation-graphs}]{\sphinxcrossref{Recognizing permutation graphs}}}
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -6232,16 +6261,16 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id219}}{\hyperref[\detokenize{tutorial:generating-random-tree-graphs}]{\sphinxcrossref{Generating random tree graphs}}}
+\phantomsection\label{\detokenize{tutorial:id223}}{\hyperref[\detokenize{tutorial:generating-random-tree-graphs}]{\sphinxcrossref{Generating random tree graphs}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id220}}{\hyperref[\detokenize{tutorial:recognizing-tree-graphs}]{\sphinxcrossref{Recognizing tree graphs}}}
+\phantomsection\label{\detokenize{tutorial:id224}}{\hyperref[\detokenize{tutorial:recognizing-tree-graphs}]{\sphinxcrossref{Recognizing tree graphs}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id221}}{\hyperref[\detokenize{tutorial:spanning-trees-and-forests}]{\sphinxcrossref{Spanning trees and forests}}}
+\phantomsection\label{\detokenize{tutorial:id225}}{\hyperref[\detokenize{tutorial:spanning-trees-and-forests}]{\sphinxcrossref{Spanning trees and forests}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id222}}{\hyperref[\detokenize{tutorial:maximum-determined-spanning-forests}]{\sphinxcrossref{Maximum determined spanning forests}}}
+\phantomsection\label{\detokenize{tutorial:id226}}{\hyperref[\detokenize{tutorial:maximum-determined-spanning-forests}]{\sphinxcrossref{Maximum determined spanning forests}}}
 
 \end{itemize}
 \end{sphinxShadowBox}
