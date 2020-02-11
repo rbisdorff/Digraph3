@@ -1418,6 +1418,107 @@ class WeakCopelandOrder(TransitiveDigraph):
             for x in reversed(self.copelandScores):
                 print('%s \t %.2f' %(x[1],x[0]))
 
+class WeakNetFlowsOrder(TransitiveDigraph):
+    """
+    instantiates the Weak NetFlows Order from
+    a given bipolar-valued Digraph instance
+    """
+    def __init__(self,other,coDual=False,Debug=False):
+        """
+        constructor for generating a weak order
+        from a given other digraph following
+        the NetFlows ordering rule
+        """
+
+        #from copy import deepcopy
+        from collections import OrderedDict
+        from time import time
+
+        #timings
+        tt = time()
+        runTimes = OrderedDict()
+        # prepare local variables
+        if coDual:
+            otherCoDual = CoDualDigraph(other)
+            otherRelation = otherCoDual.relation
+##            if Debug:
+##                otherCoDual.showRelationTable()
+##                print(otherCoDual.valuationdomain)
+        else:
+            otherRelation = other.relation
+        n = len(other.actions)
+        actions = other.actions
+        gamma = other.gamma
+        selfRelation = {}
+        Min = Decimal('-1.0')
+        Med = Decimal('0.0')
+        Max = Decimal('1.0')
+        valuationdomain = {'min': Min,\
+                           'med': Med,\
+                           'max': Max}
+        runTimes['prepareLocals'] = time()-tt
+        
+        # compute net flows
+        tnf = time()
+        netFlowScores = []
+        for x in actions:
+            netFlowScore = Decimal('0')
+            for y in actions:
+                netFlowScore += otherRelation[x][y] - otherRelation[y][x]
+                if Debug:
+                    print(x,y,otherRelation[x][y],otherRelation[y][x],netFlowScore)
+            actions[x]['score'] = netFlowScore
+            netFlowScores.append((netFlowScore,x))
+        # reversed sorting with keeping the actions initial ordering
+        # in case of ties
+        netFlowScores.sort(reverse=True)
+        
+        self.netFlowScores = netFlowScores
+
+        netFlowsRanking = [x[1] for x in netFlowScores]
+        self.netFlowsRanking = netFlowsRanking
+        netFlowsOrder = list(reversed(netFlowsRanking))
+        self.netFlowsOrder = netFlowsOrder
+        runTimes['netFlows'] = time() - tnf
+
+        # init relation
+        tr = time()
+        for x in actions:
+            selfRelation[x] = {}
+            for y in actions:
+                if x == y:
+                    selfRelation[x][y] = Min
+                sx = actions[x]['score']
+                sy = actions[y]['score']
+                if sx > sy:
+                    selfRelation[x][y] = Max
+                elif sx == sy:
+                    selfRelation[x][y] = Med
+                else:
+                    selfRelation[x][y] = Min
+        runTimes['relation'] = time() - tr      
+        if Debug:
+            print(selfRelation) 
+        self.name = other.name + '_ranked'        
+        self.actions = actions
+        self.order = n
+        self.valuationdomain = valuationdomain
+        self.relation = selfRelation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        runTimes['totalTime'] = time() - tt
+        self.runTimes = runTimes
+
+    def showScores(self,direction='descending'):
+        print('NetFlows scores in %s order' % direction)
+        print('action \t score')
+        if direction == 'descending':
+            for x in self.netFlowScores:
+                print('%s \t %.2f' %(x[1],x[0]))
+        else:
+            for x in reversed(self.netFlowScores):
+                print('%s \t %.2f' %(x[1],x[0]))
+
 #########
 # compatibility with obsolete weakOrders module
 #######################
@@ -1460,7 +1561,15 @@ if __name__ == "__main__":
     wc = WeakCopelandOrder(g,Debug=True)
     wc.showRelationTable()
     wc.showScores()
-    
+    wnf = WeakNetFlowsOrder(g,Debug=True)
+    wnf.showRelationTable()
+    wnf.showScores()
+    g.showRelationTable()
+    print(wc.copelandOrder)
+    print(wnf.netFlowsOrder)
+    wc.showTransitiveDigraph()
+    wnf.showTransitiveDigraph()
+
 ##    Threading=False
 ##    t = PerformanceTableau('auditor2_2')
 ##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,Debug=False)

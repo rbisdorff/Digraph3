@@ -133,3 +133,22 @@ def testPartialRanking():
     r3 = prp.boostedRanking
     wqr = PartialRanking(pra,[r1,r2,r3])
     wqr.exportGraphViz('partialRanking',graphType="pdf")
+
+def testWeakOrders():
+    print('*====>>>> test weak orders ---------')
+    from votingProfiles import RandomLinearVotingProfile, CondorcetDigraph
+    v = RandomLinearVotingProfile()
+    g = CondorcetDigraph(v)
+    wc = WeakCopelandOrder(g,Debug=True)
+    wc.showRelationTable()
+    wc.showScores()
+    wnf = WeakNetFlowsOrder(g,Debug=True)
+    wnf.showRelationTable()
+    wnf.showScores()
+    g.showRelationTable()
+    print(wc.copelandOrder)
+    print(wnf.netFlowsOrder)
+    wc.showTransitiveDigraph()
+    wnf.showTransitiveDigraph()
+          
+
