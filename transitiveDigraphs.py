@@ -1325,8 +1325,14 @@ class WeakCopelandOrder(TransitiveDigraph):
     """
     instantiates the Weak Copeland Order from
     a given bipolar-valued Digraph instance
+
+    If *SelfCoDual* == *True*, strict incomparabilities are coded
+    as *indeterminate* situations. Only the asymmetric part of the preorder is
+    instantiated. Otherwise, the classic definition of the weak order as complement of
+    the preorder is instantiated.
+
     """
-    def __init__(self,other,coDual=False,Debug=False):
+    def __init__(self,other,SelfCoDual=True,Debug=False):
         """
         constructor for generating a weak order
         from a given other digraph following
@@ -1341,14 +1347,7 @@ class WeakCopelandOrder(TransitiveDigraph):
         tt = time()
         runTimes = OrderedDict()
         # prepare local variables
-        if coDual:
-            otherCoDual = CoDualDigraph(other)
-            otherRelation = otherCoDual.relation
-##            if Debug:
-##                otherCoDual.showRelationTable()
-##                print(otherCoDual.valuationdomain)
-        else:
-            otherRelation = other.relation
+        otherRelation = other.relation
         n = len(other.actions)
         actions = other.actions
         gamma = other.gamma
@@ -1385,13 +1384,15 @@ class WeakCopelandOrder(TransitiveDigraph):
         for x in actions:
             selfRelation[x] = {}
             for y in actions:
-                if x == y:
+                if SelfCoDual and x == y:
+                    selfRelation[x][y] = Med
+                else:
                     selfRelation[x][y] = Min
                 sx = actions[x]['score']
                 sy = actions[y]['score']
                 if sx > sy:
                     selfRelation[x][y] = Max
-                elif sx == sy:
+                elif SelfCoDual and sx == sy:
                     selfRelation[x][y] = Med
                 else:
                     selfRelation[x][y] = Min
@@ -1420,12 +1421,18 @@ class WeakCopelandOrder(TransitiveDigraph):
 
 class WeakNetFlowsOrder(TransitiveDigraph):
     """
-    instantiates the Weak NetFlows Order from
-    a given bipolar-valued Digraph instance
+    Instantiates the Weak NetFlows Order from
+    a given bipolar-valued Digraph instance.
+
+    If *SelfCoDual* == *True*, strict incomparabilities are coded as
+    *indeterminate* situations. Only the asymmetric part of the preorder is
+    instantiated. Otherwise, the classic definition of the weak order as
+    complement of the preorder is instantiated.
+    
     """
-    def __init__(self,other,coDual=False,Debug=False):
+    def __init__(self,other,SelfCoDual=True,Debug=False):
         """
-        constructor for generating a weak order
+        Constructor for generating a weak order
         from a given other digraph following
         the NetFlows ordering rule
         """
@@ -1438,14 +1445,7 @@ class WeakNetFlowsOrder(TransitiveDigraph):
         tt = time()
         runTimes = OrderedDict()
         # prepare local variables
-        if coDual:
-            otherCoDual = CoDualDigraph(other)
-            otherRelation = otherCoDual.relation
-##            if Debug:
-##                otherCoDual.showRelationTable()
-##                print(otherCoDual.valuationdomain)
-        else:
-            otherRelation = other.relation
+        otherRelation = other.relation
         n = len(other.actions)
         actions = other.actions
         gamma = other.gamma
@@ -1486,13 +1486,15 @@ class WeakNetFlowsOrder(TransitiveDigraph):
         for x in actions:
             selfRelation[x] = {}
             for y in actions:
-                if x == y:
+                if SelfCoDual and x == y:
+                    selfRelation[x][y] = Med
+                else:
                     selfRelation[x][y] = Min
                 sx = actions[x]['score']
                 sy = actions[y]['score']
                 if sx > sy:
                     selfRelation[x][y] = Max
-                elif sx == sy:
+                elif SelfCoDual and sx == sy:
                     selfRelation[x][y] = Med
                 else:
                     selfRelation[x][y] = Min
@@ -1556,12 +1558,13 @@ if __name__ == "__main__":
     from votingProfiles import *
     from time import time
 
-    v = RandomLinearVotingProfile()
+    v = RandomLinearVotingProfile(numberOfVoters=99,\
+                                  numberOfCandidates=9,seed=201)
     g = CondorcetDigraph(v)
-    wc = WeakCopelandOrder(g,Debug=True)
+    wc = WeakCopelandOrder(g,SelfCoDual=False,Debug=False)
     wc.showRelationTable()
     wc.showScores()
-    wnf = WeakNetFlowsOrder(g,Debug=True)
+    wnf = WeakNetFlowsOrder(g,SelfCoDual=False,Debug=False)
     wnf.showRelationTable()
     wnf.showScores()
     g.showRelationTable()
@@ -1569,6 +1572,8 @@ if __name__ == "__main__":
     print(wnf.netFlowsOrder)
     wc.showTransitiveDigraph()
     wnf.showTransitiveDigraph()
+    print(g.computeOrdinalCorrelation(wc))
+    print(g.computeOrdinalCorrelation(wnf))
 
 ##    Threading=False
 ##    t = PerformanceTableau('auditor2_2')
