@@ -2467,7 +2467,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <p>The <strong>NetFlows</strong> ranking is here, in this didactic example, not as much correlated with the given outranking relation as its crisp cousin ranking.</p>
-<p>To appreciate the effective quality of both the Copeland and the Net-Flows rankings, it is useful to consider Kemeny’s and Slater’s optimal ranking rules.</p>
+<p>To appreciate the effective quality of both the Copeland and the <em>NetFlows</em> rankings, it is useful to consider Kemeny’s and Slater’s optimal ranking rules.</p>
 </div>
 <div class="section" id="kemeny-rankings">
 <h2><a class="toc-backref" href="#id185">Kemeny rankings</a><a class="headerlink" href="#kemeny-rankings" title="Permalink to this headline">¶</a></h2>
@@ -2567,14 +2567,14 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">slw</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;tutorialSlater&#39;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<p>We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the following partial ordering.</p>
+<p>We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the <em>NetFlows</em> ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the following partial ordering.</p>
 <div class="figure align-center" id="id112">
 <a class="reference internal image-reference" href="_images/tutorialSlater.png"><img alt="_images/tutorialSlater.png" src="_images/tutorialSlater.png" style="width: 150pt;" /></a>
 <p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">Epistemic disjunction of Slater rankings</span><a class="headerlink" href="#id112" title="Permalink to this image">¶</a></p>
 </div>
 <p>What precise ranking result should we hence adopt ?</p>
 <p><em>Kemeny</em> ‘s as well as <em>Slater</em> ‘s ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (&lt; 15 objects).</p>
-<p>More efficient ranking heuristics, like the Copeland and the Net-Flows rules, are therefore needed in practice.</p>
+<p>More efficient ranking heuristics, like the Copeland and the <em>NetFlows</em> rules, are therefore needed in practice.</p>
 </div>
 <div class="section" id="kohler-s-ranking-by-choosing-rule">
 <h2><a class="toc-backref" href="#id187">Kohler’s ranking-by-choosing rule</a><a class="headerlink" href="#kohler-s-ranking-by-choosing-rule" title="Permalink to this headline">¶</a></h2>
@@ -2603,7 +2603,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> Fitness of Kohler&#39;s ranking: 0.868</span>
 </pre></div>
 </td></tr></table></div>
-<p>Here, we find a better fitness (0.868) when compared with Slater’s (0.844) or the Net-Flows result (0.828), but not as good as Copeland crisp rule’s result (+0.906).</p>
+<p>Here, we find a better fitness (0.868) when compared with Slater’s (0.844) or the <em>NetFlows</em> result (0.828), but not as good as Copeland crisp rule’s result (+0.906).</p>
 </div>
 <div class="section" id="tideman-s-ranked-pairs-rule">
 <h2><a class="toc-backref" href="#id188">Tideman’s Ranked-Pairs rule</a><a class="headerlink" href="#tideman-s-ranked-pairs-rule" title="Permalink to this headline">¶</a></h2>
@@ -2677,7 +2677,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> Fitness of Tideman&#39;s ranking: 0.918</span>
 </pre></div>
 </td></tr></table></div>
-<p>Unfortunately, the Ranked-Pairs ranking rule is again not efficiently scalable to outranking digraphs of larger orders (&gt; 100). For such outranking digraphs, with several hundred of alternatives, only the Copeland and the Net-Flows ranking rules, with a polynomial complexity of <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/> where <em>n</em> is the order of the outranking digraph, remain in fact computationally efficient.</p>
+<p>Unfortunately, the Ranked-Pairs ranking rule is again not efficiently scalable to outranking digraphs of larger orders (&gt; 100). For such outranking digraphs, with several hundred of alternatives, only the Copeland and the <em>NetFlows</em> ranking rules, with a polynomial complexity of <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/> where <em>n</em> is the order of the outranking digraph, remain in fact computationally efficient.</p>
 </div>
 <div class="section" id="ranking-big-performance-tableaux">
 <h2><a class="toc-backref" href="#id189">Ranking big performance tableaux</a><a class="headerlink" href="#ranking-big-performance-tableaux" title="Permalink to this headline">¶</a></h2>
@@ -2785,7 +2785,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <p>The best decile (]80%-90%]) gathers decision alternatives <em>49</em>, <em>10</em>, and <em>52</em>. Worst decile (]10%-20%]) gathers alternatives <em>9</em>, <em>59</em>, and <em>23</em>.</p>
-<p>Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the Copeland and the NetFlows rules. The eventually obtained linear ordering (from the worst to best) is the following.</p>
+<p>Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the Copeland and the <em>NetFlows</em> rules. The eventually obtained linear ordering (from the worst to best) is the following.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3

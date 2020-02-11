@@ -1858,7 +1858,7 @@ The valued version of the Copeland rule, called **NetFlows** rule, is working di
 
 The **NetFlows** ranking is here, in this didactic example, not as much correlated with the given outranking relation as its crisp cousin ranking. 
 
-To appreciate the effective quality of both the Copeland and the Net-Flows rankings, it is useful to consider Kemeny's and Slater's optimal ranking rules.
+To appreciate the effective quality of both the Copeland and the *NetFlows* rankings, it is useful to consider Kemeny's and Slater's optimal ranking rules.
 
 Kemeny rankings
 ...............
@@ -1938,7 +1938,7 @@ The **Slater** ranking rule is similar to Kemeny's, but it is working, instead, 
    >>> slw = KemenyOrdersFusion(c,orderLimit=9)
    >>> slw.exportGraphViz('tutorialSlater')
 
-We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the Net-Flows ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the following partial ordering.
+We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the *NetFlows* ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the following partial ordering.
 
 .. figure:: tutorialSlater.png
     :width: 150pt
@@ -1950,7 +1950,7 @@ What precise ranking result should we hence adopt ?
 
 *Kemeny* 's as well as *Slater* 's ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 15 objects). 
 
-More efficient ranking heuristics, like the Copeland and the Net-Flows rules, are therefore needed in practice. 
+More efficient ranking heuristics, like the Copeland and the *NetFlows* rules, are therefore needed in practice. 
 
 Kohler's ranking-by-choosing rule
 .................................
@@ -1975,7 +1975,7 @@ At step *r* (*r* goes from 1 to *n*) do the following:
    >>> print("Fitness of Kohler's ranking: %.3f" % corr['correlation'])
     Fitness of Kohler's ranking: 0.868
 
-Here, we find a better fitness (0.868) when compared with Slater's (0.844) or the Net-Flows result (0.828), but not as good as Copeland crisp rule's result (+0.906). 
+Here, we find a better fitness (0.868) when compared with Slater's (0.844) or the *NetFlows* result (0.828), but not as good as Copeland crisp rule's result (+0.906). 
 
 Tideman's Ranked-Pairs rule
 ...........................
@@ -2024,7 +2024,7 @@ The Ranked-Pairs rule actually renders one of the seven optimal Kemeny rankings 
    >>> print("Fitness of Tideman's ranking: %.3f" % corr['correlation'])
     Fitness of Tideman's ranking: 0.918
 
-Unfortunately, the Ranked-Pairs ranking rule is again not efficiently scalable to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only the Copeland and the Net-Flows ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the outranking digraph, remain in fact computationally efficient.
+Unfortunately, the Ranked-Pairs ranking rule is again not efficiently scalable to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only the Copeland and the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the outranking digraph, remain in fact computationally efficient.
  
 Ranking big performance tableaux
 ................................
@@ -2093,7 +2093,7 @@ The total run time of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankin
 
 The best decile (]80%-90%]) gathers decision alternatives *49*, *10*, and *52*. Worst decile (]10%-20%]) gathers alternatives *9*, *59*, and *23*.
 
-Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the Copeland and the NetFlows rules. The eventually obtained linear ordering (from the worst to best) is the following.
+Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the Copeland and the *NetFlows* rules. The eventually obtained linear ordering (from the worst to best) is the following.
   
 .. code-block:: pycon
    :linenos:

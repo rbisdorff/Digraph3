@@ -385,17 +385,18 @@ class;</p>
 <li><dl>
 <dt><a class="reference internal" href="#transitivedigraphs-label"><span class="std std-ref">transitiveDigraphs module</span></a></dt><dd><p>Additional tools for solving pre-ranking problems with
 root <a class="reference external" href="techDoc.html#transitiveDigraphs.TransitiveDigraph">TransitiveDigraph</a> class.</p>
-<div class="graphviz"><img src="_images/inheritance-778c733aacf410c1ca1ea4a7028aba4c1a73f973.png" alt="Inheritance diagram of transitiveDigraphs" usemap="#inheritanceba1a0888c6" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="_images/inheritance-84e57a9ae54bcaa9991e7c2cf04033884198ff51.png" alt="Inheritance diagram of transitiveDigraphs" usemap="#inheritanceba1a0888c6" class="inheritance graphviz" /></div>
 <map id="inheritanceba1a0888c6" name="inheritanceba1a0888c6">
-<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="3,76,81,90"/>
-<area shape="rect" id="node3" href="#transitiveDigraphs.TransitiveDigraph" target="_top" title="Abstract class for specialized methods addressing transitive digraphs." alt="" coords="109,76,261,90"/>
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="3,90,81,104"/>
+<area shape="rect" id="node3" href="#transitiveDigraphs.TransitiveDigraph" target="_top" title="Abstract class for specialized methods addressing transitive digraphs." alt="" coords="109,90,261,104"/>
 <area shape="rect" id="node2" href="#transitiveDigraphs.KemenyOrdersFusion" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="320,3,485,18"/>
 <area shape="rect" id="node4" href="#transitiveDigraphs.KemenyWeakOrder" target="_top" title="dummy class for backward compatibility." alt="" coords="575,3,734,18"/>
 <area shape="rect" id="node5" href="#transitiveDigraphs.KohlerArrowRaynaudFusion" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="308,32,497,47"/>
 <area shape="rect" id="node7" href="#transitiveDigraphs.RankingsFusion" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="331,61,475,76"/>
 <area shape="rect" id="node9" href="#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion" target="_top" title="Specialization of abstract TransitiveDigraph class for ranking by fusion" alt="" coords="289,90,516,104"/>
 <area shape="rect" id="node11" href="#transitiveDigraphs.RankingByChoosingDigraph" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="307,119,498,133"/>
-<area shape="rect" id="node14" href="#transitiveDigraphs.WeakOrder" target="_top" title="dummy class for backward compatibility." alt="" coords="339,147,467,162"/>
+<area shape="rect" id="node14" href="#transitiveDigraphs.WeakCopelandOrder" target="_top" title="instantiates the Weak Copeland Order from" alt="" coords="321,147,484,162"/>
+<area shape="rect" id="node15" href="#transitiveDigraphs.WeakOrder" target="_top" title="dummy class for backward compatibility." alt="" coords="339,176,467,191"/>
 <area shape="rect" id="node6" href="#transitiveDigraphs.PartialRanking" target="_top" title="dummy class for backward compatibility." alt="" coords="584,61,725,76"/>
 <area shape="rect" id="node8" href="#transitiveDigraphs.PrincipalInOutDegreesOrdering" target="_top" title="dummy class for backward compatibility." alt="" coords="553,90,756,104"/>
 <area shape="rect" id="node10" href="#transitiveDigraphs.RankingByBestChoosingDigraph" target="_top" title="Specialization of abstract TransitiveDigraph class for computing a ranking by best&#45;choosing." alt="" coords="550,119,759,133"/>
@@ -8214,6 +8215,13 @@ disjunctive or conjunctive fusion (omax|omin operator) of a list of rankings.</p
 <dd><p>A dummy for the showTransitiveDigraph() method.</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="transitiveDigraphs.WeakCopelandOrder">
+<em class="property">class </em><code class="sig-prename descclassname">transitiveDigraphs.</code><code class="sig-name descname">WeakCopelandOrder</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">coDual=False</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#WeakCopelandOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.WeakCopelandOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>instantiates the Weak Copeland Order from
+a given bipolar-valued Digraph instance</p>
 </dd></dl>
 
 <dl class="class">

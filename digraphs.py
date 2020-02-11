@@ -1534,7 +1534,7 @@ class Digraph(object):
             try:
                 rankingByChoosing = self.rankingByChoosing['result']
             except:
-                print('Error: You must first run self.computeRankingByChoosing(CoDual=True(default)|False) !')
+                print('Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !')
             #rankingByChoosing = self.computeRankingByChoosing(Debug,CoDual)
                 return
         else:
@@ -1599,7 +1599,7 @@ class Digraph(object):
             try:
                 rankingByLastChoosing = self.rankingByLastChoosing['result']
             except:
-                print('Error: You must first run self.computeRankingByLastChoosing(CoDual=True(default)|False) !')
+                print('Error: You must first run self.computeRankingByLastChoosing(CoDual=False(default)|True) !')
                 return
         else:
             rankingByLastChoosing = rankingByLastChoosing['result']
@@ -1640,7 +1640,7 @@ class Digraph(object):
             try:
                 rankingByBestChoosing = self.rankingByBestChoosing['result']
             except:
-                print('Error: You must first run self.computeRankingByBestChoosing(CoDual=True(default)|False) !')
+                print('Error: You must first run self.computeRankingByBestChoosing(CoDual=False(default)|True) !')
                 return
         else:
             rankingByBestChoosing = rankingByBestChoosing['result']

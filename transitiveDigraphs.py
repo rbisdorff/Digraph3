@@ -39,9 +39,10 @@ class TransitiveDigraph(Digraph):
             try:
                 rankingByChoosing = self.rankingByChoosing['result']
             except:
-                print('Error: You must first run self.computeRankingByChoosing(CoDual=True(default)|False) !')
-            #rankingByChoosing = self.computeRankingByChoosing(Debug,CoDual)
-                return
+                #print('Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !')
+                self.computeRankingByChoosing()
+                rankingByChoosing = self.rankingByChoosing['result']
+                #return
         else:
             rankingByChoosing = rankingByChoosing['result']
         print('Ranking by Choosing and Rejecting')
@@ -1314,7 +1315,109 @@ def _jobTaskKohlerFusion(categID):
     fo.close()
     writestr = 'Finished category %d %d' % (categID,nc)
     return writestr
+
+
+
+
 #####
+
+class WeakCopelandOrder(TransitiveDigraph):
+    """
+    instantiates the Weak Copeland Order from
+    a given bipolar-valued Digraph instance
+    """
+    def __init__(self,other,coDual=False,Debug=False):
+        """
+        constructor for generating a weak order
+        from a given other digraph following
+        the Copeland ordering rule
+        """
+
+        #from copy import deepcopy
+        from collections import OrderedDict
+        from time import time
+
+        #timings
+        tt = time()
+        runTimes = OrderedDict()
+        # prepare local variables
+        if coDual:
+            otherCoDual = CoDualDigraph(other)
+            otherRelation = otherCoDual.relation
+##            if Debug:
+##                otherCoDual.showRelationTable()
+##                print(otherCoDual.valuationdomain)
+        else:
+            otherRelation = other.relation
+        n = len(other.actions)
+        actions = other.actions
+        gamma = other.gamma
+        selfRelation = {}
+        Min = Decimal('-1.0')
+        Med = Decimal('0.0')
+        Max = Decimal('1.0')
+        valuationdomain = {'min': Min,\
+                           'med': Med,\
+                           'max': Max}
+        runTimes['prepareLocals'] = time()-tt
+        
+        # compute net flows
+        tnf = time()
+        copelandScores = []
+        for x in actions:
+            copelandScore = len(gamma[x][0]) - len(gamma[x][1])
+            actions[x]['score'] = copelandScore
+            copelandScores.append((copelandScore,x))
+        # reversed sorting with keeping the actions initial ordering
+        # in case of ties
+        copelandScores.sort(reverse=True)
+        
+        self.copelandScores = copelandScores
+
+        copelandRanking = [x[1] for x in copelandScores]
+        self.copelandRanking = copelandRanking
+        copelandOrder = list(reversed(copelandRanking))
+        self.copelandOrder = copelandOrder
+        runTimes['copeland'] = time() - tnf
+
+        # init relation
+        tr = time()
+        for x in actions:
+            selfRelation[x] = {}
+            for y in actions:
+                if x == y:
+                    selfRelation[x][y] = Min
+                sx = actions[x]['score']
+                sy = actions[y]['score']
+                if sx > sy:
+                    selfRelation[x][y] = Max
+                elif sx == sy:
+                    selfRelation[x][y] = Med
+                else:
+                    selfRelation[x][y] = Min
+        runTimes['relation'] = time() - tr      
+        if Debug:
+            print(selfRelation) 
+        self.name = other.name + '_ranked'        
+        self.actions = actions
+        self.order = n
+        self.valuationdomain = valuationdomain
+        self.relation = selfRelation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        runTimes['totalTime'] = time() - tt
+        self.runTimes = runTimes
+
+    def showScores(self,direction='descending'):
+        print('Copeland scores in %s order' % direction)
+        print('action \t score')
+        if direction == 'descending':
+            for x in self.copelandScores:
+                print('%s \t %.2f' %(x[1],x[0]))
+        else:
+            for x in reversed(self.copelandScores):
+                print('%s \t %.2f' %(x[1],x[0]))
+
 #########
 # compatibility with obsolete weakOrders module
 #######################
@@ -1349,32 +1452,39 @@ if __name__ == "__main__":
     from sortingDigraphs import *
     from transitiveDigraphs import *
     from linearOrders import *
+    from votingProfiles import *
     from time import time
-    
-    Threading=False
-    t = PerformanceTableau('auditor2_2')
-    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,Debug=False)
-    t = XMCDA2PerformanceTableau('uniSorting')
-    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=8,seed=105)
-    g = BipolarOutrankingDigraph(t)
-    g.exportGraphViz('testg')
-    wke = KemenyOrdersFusion(g,orderLimit=8)
-    print(wke.topologicalSort())
-    wke.exportGraphViz(fileName='testwke')
-    print(wke.relation)
 
-    from transitiveDigraphs import RankingsFusion
-    from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
-    t = RandomCBPerformanceTableau(numberOfActions=50,seed=10)
-    from outrankingDigraphs import *
-    g = BipolarOutrankingDigraph(t,Normalized=True)
-    from linearOrders import *
-    cop = CopelandOrder(g)
-    nf = NetFlowsOrder(g)
-    wr = RankingsFusion(g,[cop.copelandRanking,nf.netFlowsRanking])
-    print(wr.topologicalSort())
- 
+    v = RandomLinearVotingProfile()
+    g = CondorcetDigraph(v)
+    wc = WeakCopelandOrder(g,Debug=True)
+    wc.showRelationTable()
+    wc.showScores()
+    
+##    Threading=False
+##    t = PerformanceTableau('auditor2_2')
+##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,Debug=False)
+##    t = XMCDA2PerformanceTableau('uniSorting')
+##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+##                                   numberOfActions=8,seed=105)
+##    g = BipolarOutrankingDigraph(t)
+##    g.exportGraphViz('testg')
+##    wke = KemenyOrdersFusion(g,orderLimit=8)
+##    print(wke.topologicalSort())
+##    wke.exportGraphViz(fileName='testwke')
+##    print(wke.relation)
+##
+##    from transitiveDigraphs import RankingsFusion
+##    from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
+##    t = RandomCBPerformanceTableau(numberOfActions=50,seed=10)
+##    from outrankingDigraphs import *
+##    g = BipolarOutrankingDigraph(t,Normalized=True)
+##    from linearOrders import *
+##    cop = CopelandOrder(g)
+##    nf = NetFlowsOrder(g)
+##    wr = RankingsFusion(g,[cop.copelandRanking,nf.netFlowsRanking])
+##    print(wr.topologicalSort())
+## 
     # pra = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='average')
     # r1 = pra.boostedRanking
     # pro = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='optimistic')
