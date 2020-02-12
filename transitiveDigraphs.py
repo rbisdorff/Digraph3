@@ -1339,7 +1339,7 @@ class WeakCopelandOrder(TransitiveDigraph):
         the Copeland ordering rule
         """
 
-        #from copy import deepcopy
+        from copy import deepcopy
         from collections import OrderedDict
         from time import time
 
@@ -1349,7 +1349,7 @@ class WeakCopelandOrder(TransitiveDigraph):
         # prepare local variables
         otherRelation = other.relation
         n = len(other.actions)
-        actions = other.actions
+        actions = deepcopy(other.actions)
         gamma = other.gamma
         selfRelation = {}
         Min = Decimal('-1.0')
