@@ -1356,12 +1356,12 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[i],a[j],pc[a[i]][a[j]]['lt'],pc[a[i]][a[j]]['leq'],pc[a[i]][a[j]]['eq'],pc[a[i]][a[j]]['geq'],pc[a[i]][a[j]]['gt'],self.relation[a[i]][a[j]]))
                 print(' %s  %s | %.2f %.2f %.2f %.2f %.2f | %.2f' % (a[j],a[i],pc[a[j]][a[i]]['lt'],pc[a[j]][a[i]]['leq'],pc[a[j]][a[i]]['eq'],pc[a[j]][a[i]]['geq'],pc[a[j]][a[i]]['gt'],self.relation[a[j]][a[i]]))
 
-    def showPairwiseComparison(self,a,b,\
+    def showOldPairwiseComparison(self,a,b,\
                                Debug=False,isReturningHTML=False,\
                                hasSymmetricThresholds=True):
         """
-        Renders the pairwise comprison parameters on all criteria
-        in html format
+        Obsolete: Renders the pairwise comprison parameters on all criteria
+        with weak preference and weak veto thresholds.
         """
         evaluation = self.evaluation
         criteria = self.criteria
@@ -1543,6 +1543,187 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         if isReturningHTML:
             return html
 
+    def showPairwiseComparison(self,a,b,\
+                               Debug=False,isReturningHTML=False,\
+                               hasSymmetricThresholds=True):
+        """
+        Renders the pairwise comprison parameters on all criteria
+        in html format
+        """
+        evaluation = self.evaluation
+        criteria = self.criteria
+        if Debug:
+            print('a,b =', a, b)
+        if a != b:
+            if isReturningHTML:
+                html  = '<h1>Pairwise Comparison</h1>'
+                html += '<h2>Comparing actions : (%s,%s)</h2>' % (a,b)
+                html += '<table style="background-color:White" border="1">'
+                html += '<tr bgcolor="#9acd32">'
+                html += '<th>crit.</th><th>wght.</th> <th>g(x)</th> <th>g(y)</th> <th>diff</th> <th>ind</th> <th>pref</th> <th>concord</th> <th>v</th> <th>polarisation</th>'
+                html += '</tr>'
+            else:
+                print('*------------  pairwise comparison ----*')
+                print('Comparing actions : (%s, %s)' % (a,b))
+                print('crit. wght.  g(x)  g(y)    diff  \t| ind   pref    r() \t|   v  veto')
+                print('-------------------------------  \t ----------------------------- \t ----------------')                
+            concordance = 0
+            sumWeights = 0
+            criteriaList = [x for x in criteria]
+            criteriaList.sort()
+            for c in criteriaList:
+                sumWeights += abs(criteria[c]['weight'])
+                if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                    try:
+                        indx = criteria[c]['thresholds']['ind'][0]
+                        indy = criteria[c]['thresholds']['ind'][1]
+                        if hasSymmetricThresholds:
+                            ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                        else:
+                            ind = indx +indy * abs(evaluation[c][a])
+                    except:
+                        ind = None
+                    wp = None
+                    try:
+                        px = criteria[c]['thresholds']['pref'][0]
+                        py = criteria[c]['thresholds']['pref'][1]
+                        if hasSymmetricThresholds:
+                            p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                        else:
+                            p = px + py * abs(evaluation[c][a])
+                    except:
+                        p = None
+                    if self.criteria[c]['weight'] > Decimal('0.0'):
+                        d = evaluation[c][a] - evaluation[c][b]
+                    else:
+                        d = evaluation[c][b] - evaluation[c][a]
+                    lc0 = self._localConcordance(d,ind,wp,p)
+                    if ind != None:
+                        ind = round(ind,2)
+                    if wp != None:
+                        wp = round(wp,2)
+                    if p != None:
+                        p = round(p,2)
+                    if isReturningHTML:
+                        html += '<tr>'
+                        html += '<td bgcolor="#FFEEAA" align="center">%s</td> <td>%.2f</td> <td>%2.2f</td> <td>%+2.2f</td> <td>%s</td>  <td>%s</td>  <td>%s</td>   <td>%+.2f</td>' %\
+                                (c,criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, str(ind),str(p),lc0*abs(criteria[c]['weight']))
+                    else:
+                         print(c, '  %.2f  %2.2f  %2.2f  %+2.2f \t| %s  %s   %+.2f \t|' %\
+                               (criteria[c]['weight'],evaluation[c][a],evaluation[c][b],d, \
+                                str(ind),str(p),lc0*abs(criteria[c]['weight'])), end=' ')
+                    concordance = concordance + (lc0 * abs(criteria[c]['weight']))
+##                    try:
+##                        wvx = criteria[c]['thresholds']['weakVeto'][0]
+##                        wvy = criteria[c]['thresholds']['weakVeto'][1]
+##                        if hasSymmetricThresholds:
+##                            wv = wvx + wvy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+##                        else:
+##                            wv = wvx + wvy * abs(evaluation[c][a])
+##                    except:
+                    wv = None
+                    try:
+                        vx = criteria[c]['thresholds']['veto'][0]
+                        vy = criteria[c]['thresholds']['veto'][1]
+                        if hasSymmetricThresholds:
+                            v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
+                        else:
+                            v = vx + vy * abs(evaluation[c][a])
+                    except:
+                        v = None
+                    veto = self._localVeto(d,wv,v)
+                    try:
+                        negativeVeto = self._localNegativeVeto(d,wv,v)
+                        hasBipolarVeto = True
+                    except:
+                        hasBipolarVeto = False
+                    if hasBipolarVeto:
+                        if v != None:
+                            if d >= v:
+                                if not isReturningHTML:
+                                    print('     %2.2f       %+2.2f' % (v, negativeVeto))
+                                else:
+                                    html += '<td></td> <td> %2.2f</td> <td bgcolor="#ddffdd">%+2.2f</td>' % (v, negativeVeto)
+                            elif d <= -v:
+                                if not isReturningHTML:
+                                    print('     %2.2f       %+2.2f' % (v, -veto))
+                                else:
+                                    html += '<td></td> <td> %2.2f</td> <td bgcolor="#ffddff">%+2.2f</td>' % (v, -veto)
+                            else:
+                                if not isReturningHTML:                                
+                                    print()
+                                else:
+                                    html += '</tr>'
+                        elif wv != None:
+                            if d >= wv:
+                                if not isReturningHTML:
+                                    print('%2.2f      %+2.2f' % (wv, negativeVeto))
+                                else:
+                                    html += '<td>%2.2f</td><td></td> <td bgcolor="#ddffdd">%+2.2f</td>' % (wv, negativeVeto)
+                            elif d <= -wv:
+                                if not isReturningHTML:
+                                    print('%2.2f      %+2.2f' % (wv, -veto))
+                                else:
+                                    html += '<td>%2.2f</td><td></td> <td bgcolor="#ffddff">%+2.2f</td>' % (wv, -veto)
+                            else:
+                                if not isReturningHTML:
+                                    print()
+                                else:
+                                    html += '</tr>'
+                        else:
+                            if not isReturningHTML:
+                                print()
+                            else:
+                                html += '</tr>'
+                    else:
+                        ## unipolar case  Electre III for instance
+                        if veto > Decimal("-1.0"):
+##                            if wv != None:
+##                                if v != None:
+##                                    if not isReturningHTML:
+##                                        print('%2.2f %+2.2f' % (v, veto))
+##                                    else:
+##                                        html += '<td> %2.2f</td> <td bgcolor="#ffddff">%+2.2f</td>' % (v, veto)
+##                                else:
+##                                    if not isReturningHTML:
+##                                        print(' %+2.2f' % (-veto))
+##                                    else:
+##                                        html += ' <td></td> <td bgcolor="#ffddff">%+2.2f</td>' % (wv,-veto)
+##                            else:
+                            if v != None:
+                                if not isReturningHTML:
+                                    print('       %2.2f %+2.2f' % (v, veto))
+                                else:
+                                    html += '<td></td> <td>%2.2f</td> <td bgcolor="#ffddff">%+2.2f</td>' % (v, -veto)
+                            else:
+                                if not isReturningHTML:
+                                    print()
+                                else:
+                                    html += '</tr>'
+                        
+                else:
+                    if evaluation[c][a] == Decimal("-999"):
+                        eval_c_a = 'NA'
+                    else:
+                        eval_c_a = '%2.2f' % evaluation[c][a]
+                    if evaluation[c][b] == Decimal("-999"):
+                        eval_c_b = 'NA'
+                    else:
+                        eval_c_b = '%2.2f' % evaluation[c][b]
+                    
+                    if not isReturningHTML:
+                        print(c,'    %s %s' % (eval_c_a,eval_c_b))
+                    else:
+                        html += '<tr><td bgcolor="#FFEEAA" align="center">%s</td> <td>%.2f</td><td>%s</td><td>%s</td><td></td><td></td><td></td><td></td><td>%.2f</td></tr>' %\
+                                (c, criteria[c]['weight'],eval_c_a,eval_c_b, self.valuationdomain['med']*criteria[c]['weight'])
+            if not isReturningHTML:
+                print('             ----------------------------------------')
+                print(' Valuation in range: %+.2f to %+.2f; global concordance: %+.2f' % (-sumWeights,sumWeights,concordance))
+            else:
+                html += '</tr></table>'
+                html += '<b>Valuation in range: %+.2f to %+.2f; global concordance: %+.2f </b>' % (-sumWeights,sumWeights,concordance)
+        if isReturningHTML:
+            return html
 
     def showHTMLPairwiseComparison(self,a,b,\
                                fileName=None):
@@ -1618,6 +1799,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                           actionsSubset= None,
                           Sorted=True,
                           hasLPDDenotation=False,
+                          StabilityDenotation=False,
                           hasLatexFormat=False,
                           hasIntegerValuation=False,
                           relation=None,
@@ -1632,6 +1814,14 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 gnv.recodeValuation(self.valuationdomain['min'],self.valuationdomain['max'])
             except:
                 hasLPDDenotation = False
+        if StabilityDenotation:
+            try:
+                stability = self.stability
+            except AttributeError:
+                robustg = RobustOutrankingDigraph(self)
+                stability = robustg.stability
+            #except:
+            #    hasStabilityDenotation = False
             
         if actionsSubset == None:
             actions = self.actions
@@ -1642,7 +1832,12 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             relation = self.relation
             
         print('* ---- Relation Table -----\n', end=' ')
-        print(' S   | ', end=' ')
+        if StabilityDenotation:
+            print('r/(stab)| ', end=' ')
+        elif hasLPDDenotation:
+            print('r/(lh)| ', end=' ')
+        else:
+            print('  r   | ', end=' ')
         #actions = [x for x in actions]
         actionsList = []
         for x in actions:
@@ -1652,7 +1847,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 except:
                     actionsList += [(actions[x]['name'],x)]
             else:
-                actionsList += [(str(x),x)]
+                try:
+                    actionsList += [(actions[x]['shortName'],x)]
+                except:
+                    actionsList += [(str(x),x)]
         if Sorted:
             actionsList.sort()
         #print actionsList
@@ -1664,7 +1862,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             hasIntegerValuation = IntegerValues
         
         for x in actionsList:
-            print("'"+x[0]+"',  ", end=' ')
+            print("'"+x[0]+"'  ", end=' ')
         print('\n-----|------------------------------------------------------------')
         for x in actionsList:
             if hasLatexFormat:
@@ -1672,13 +1870,21 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             else:
                 print("'"+x[0]+"' |  ", end=' ')
             for y in actionsList:
-                if x == y and not ReflexiveTerms:
-                    if hasLPDDenotation:
-                        print(' - ', end=' ')
-                    elif hasLatexFormat:
-                        print('$-$ &', end=' ')
+                if x == y:
+                    if not ReflexiveTerms:
+                        if hasLPDDenotation:
+                            print('  -  ', end=' ')
+                        elif hasLatexFormat:
+                            print('$-$ &', end=' ')
+                        else:
+                            print('  -  ', end=' ')
                     else:
-                        print(' - ', end=' ')
+                        if hasLPDDenotation:
+                            print(' +4 ', end=' ')
+                        elif hasLatexFormat:
+                            print('$+4$ &', end=' ')
+                        else:
+                            print(' +1.00 ', end=' ')
                 else:    
                     if hasIntegerValuation:
                         if hasLPDDenotation:
@@ -1704,6 +1910,14 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 for y in actionsList:
                     print('(%+d,%+d)' % (largePerformanceDifferencesCount[x[1]][y[1]]['positive'],\
                                           largePerformanceDifferencesCount[x[1]][y[1]]['negative']), end=' ')
+                print()
+            elif StabilityDenotation:
+                print("     | ", end=' ')
+                for y in actionsList:
+                    if x == y and StabilityDenotation:
+                        print(' (+4) ', end=' ')
+                    else:
+                        print(' (%+d) ' % stability[x[1]][y[1]], end=' ')
                 print()
             
                 
@@ -7463,13 +7677,93 @@ class UnanimousOutrankingDigraph(OutrankingDigraph):
         else:
             return Decimal("1")
 
-class NewRobustOutrankingDigraph(BipolarOutrankingDigraph):
+class RobustOutrankingDigraph(BipolarOutrankingDigraph):
     """
-    Parameters:
-        performanceTableau (fileName of valid py code)
+    *Parameters*:
+        performanceTableau (fileName or valid py code)
 
     Specialization of the general OutrankingDigraph class for 
-    new robustness anaylsis.
+    new robustness analysis distinguishing between three nested stability levels:
+    
+        * +4 (resp. -4) : unanimous outranking (resp. outranked;
+        * +3 (resp. -3) : majority outranking (resp. outranked) situation
+          in all coalitions of equi-ignificant citeria;
+        * +2 (resp. -2) : validated outranking (resp. outranked) situation
+          with all potential weights compatible with the criteria significance preorder;
+        * +1 (resp. -1) : validated outranking (resp. outranked) situation with
+          the given criteria significances;
+        * 0 : indeterminate preferential situation-
+
+    *Sematics*:
+    
+        * alternative *x* robustly outranks alternative *y* when the
+          outranking situation is qualified greater or equal to level +2
+          and there is no considerable counter-performance
+          observed on a discordant criteria;
+        * alternative *x* robustly does not outrank alternative *y* when the
+          outranking situation is qualified lower or equal to level -2
+          and there is no considerable performance
+          observed on a discordant criteria.
+
+    *Usage example*:
+
+    >>> from outrankingDigraphs import *
+    >>> t = RandomPerformanceTableau(numberOfActions=7,weightDistribution='random',seed=100)
+    >>> t.showPerformanceTableau()
+     *----  performance tableau -----*
+     Criteria |  'g1'    'g2'    'g3'    'g4'    'g5'    'g6'    'g7'   
+     Actions  |    4       6       2       7       4       4       2    
+     ---------|-------------------------------------------------------
+       'a1'   | 44.51   43.90   19.10   16.22   14.81   45.49   41.66  
+       'a2'   |   NA    38.75   27.73   21.53   79.70   22.03   12.82  
+       'a3'   | 58.00   35.84   41.46   51.16   67.48   33.83   21.92  
+       'a4'   | 24.22   29.12   22.41     NA    13.97   31.83   75.74  
+       'a5'   | 29.10   34.79   21.52   39.35     NA    69.98   15.45  
+       'a6'   | 96.58   62.22   56.90   32.06   80.16   48.80    6.05  
+       'a7'   | 82.29   44.23   46.37   47.67   69.62   82.88    9.96  
+    >>> t.showWeightPreorder()
+     *------- weights preordering --------*
+     ['g3', 'g7'] (2) <
+     ['g1', 'g5', 'g6'] (4) <
+     ['g2'] (6) <
+     ['g4'] (7)
+    >>> g = RobustOutrankingDigraph(t)
+    >>> g
+     *------- Object instance description ------*
+     Instance class      : RobustOutrankingDigraph
+     Instance name       : robust_randomperftab
+     # Actions           : 7
+     # Criteria          : 7
+     Size                : 19
+     Determinateness (%) : 67.53
+     Valuation domain    : [-1.00;1.00]
+     Attributes          : ['name', 'methodData', 'actions',
+                            'order', 'criteria', 'evaluation',
+                            'vetos', 'valuationdomain', 'relation',
+                            'concordanceRelation',
+                            'largePerformanceDifferencesCount',
+                            'ordinalRelation', 'equisignificantRelation',
+                            'unanimousRelation', 'stability',
+                            'gamma', 'notGamma']
+    >>> g.showRelationTable(StabilityDenotation=True)
+     * ---- Relation Table -----
+     r/(stab) |  'a1'   'a2'   'a3'   'a4'   'a5'   'a6'   'a7'   
+     ---------|------------------------------------------------------------
+       'a1'   |    +1.00  -0.03  -0.17  +0.55  +0.00  -0.72  -0.45  
+              |   (+4)   (-2)   (-2)   (+2)   (+1)   (-2)   (-2)  
+       'a2'   |   +0.03   +1.00  -0.17  +0.21  -0.10  -0.45  -0.45  
+              |   (+2)   (+4)   (-2)   (+2)   (-2)   (-2)   (-2)  
+       'a3'   |   +0.17  +0.38   +1.00  +0.62  +0.59  +0.00  +0.00  
+              |   (+2)   (+2)   (+4)   (+2)   (+2)   (-1)   (-1)  
+       'a4'   |   -0.21  -0.21  -0.34   +1.00  -0.21  -0.62  -0.62  
+              |   (-2)   (-2)   (-2)   (+4)   (-2)   (-2)   (-2)  
+       'a5'   |   +0.03  +0.38  -0.17  +0.48   +1.00  +0.03  -0.72  
+              |   (+2)   (+2)   (-2)   (+2)   (+4)   (+2)   (-2)  
+       'a6'   |   +0.86  +0.72  +0.00  +0.62  -0.03   +1.00  +0.00  
+              |   (+2)   (+2)   (+1)   (+2)   (-2)   (+4)   (+1)  
+       'a7'   |   +0.86  +0.52  +0.62  +0.62  +0.72  +0.00   +1.00  
+              |   (+2)   (+2)   (+2)   (+2)   (+2)   (-1)   (+4)  
+    
     """
     def __init__(self, filePerfTab = None,Debug=False,hasNoVeto=True):
         
@@ -7481,9 +7775,8 @@ class NewRobustOutrankingDigraph(BipolarOutrankingDigraph):
             t.save(filePerfTab)
             self.name='newrobust_randomPerf'
         else:
-            self.name = 'newrobust_' + filePerfTab.name
-        cardinal = BipolarOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
-        cardinal.recodeValuation(-1,1)
+            self.name = 'robust_' + filePerfTab.name
+        cardinal = BipolarOutrankingDigraph(filePerfTab,Normalized=True,WithConcordanceRelation=True,WithVetoCounts=True)
         ordinal  = OrdinalOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
         ordinal.recodeValuation(-1,1)
         equisignificant = EquiSignificanceMajorityOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
@@ -7503,7 +7796,7 @@ class NewRobustOutrankingDigraph(BipolarOutrankingDigraph):
             ordinal.showRelationTable()
             print('cardinal')
             print(cardinal.valuationdomain)
-            cardinal.showRelationTable()
+            cardinal.showRelationTable(hasLPDDenotation=True)
             
         try:
             self.description = copy.copy(cardinal.description)
@@ -7515,28 +7808,35 @@ class NewRobustOutrankingDigraph(BipolarOutrankingDigraph):
             pass
         self.actions = copy.copy(cardinal.actions)
         self.order = len(self.actions)
+        try:
+            self.objectives = copy.copy(cardinal.objectives)
+        except:
+            pass
         self.criteria = copy.copy(cardinal.criteria)
         self.evaluation = copy.copy(cardinal.evaluation)
         self.vetos = copy.copy(cardinal.vetos)
-        self.valuationdomain = {'hasIntegerValuation':True, 'min':Decimal("-4"), 'med':Decimal("0"), 'max':Decimal("4")}
-        self.cardinalRelation = copy.copy(cardinal.relation)
+        self.valuationdomain = copy.copy(cardinal.valuationdomain)
+        self.relation = copy.copy(cardinal.relation)
+        self.concordanceRelation = copy.copy(cardinal.concordanceRelation)
+        self.largePerformanceDifferencesCount = copy.copy(cardinal.largePerformanceDifferencesCount)
         self.ordinalRelation = copy.copy(ordinal.relation)
         self.equisignificantRelation = copy.copy(equisignificant.relation)
         self.unanimousRelation = copy.copy(unanimous.relation)
-        self.relation = self._constructRelation()
+        self.stability = self._constructRelation()
+        if Debug:
+            self.showRelationTable(hasStabilityDenotation=True)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
     def _constructRelation(self):
         """
-        Parameters: normal -, equisignificant - ordinal -, and unanimous outranking relation.
         Help method for constructing robust outranking relation.
         """
         Debug = False
         unanimousRelation = self.unanimousRelation
         equisignificantRelation = self.equisignificantRelation
         ordinalRelation = self.ordinalRelation
-        cardinalRelation = self.cardinalRelation
+        concordanceRelation = self.concordanceRelation
         
         if Debug:
             print(self.valuationdomain)
@@ -7547,41 +7847,54 @@ class NewRobustOutrankingDigraph(BipolarOutrankingDigraph):
         One = Decimal("1")
         MinusOne = Decimal("-1")
         actions = [x for x in self.actions]
+        stability = {}
         relation = {}
         for a in actions:
+            stability[a] = {}
             relation[a] = {}
             for b in actions:
                 if a != b:
                     if unanimousRelation[a][b] == One:
-                        relation[a][b] = Max
+                        stability[a][b] = 4
+                        relation[a][b] = self.relation[a][b]
                     elif unanimousRelation[a][b] == MinusOne:
-                        relation[a][b] = Min
+                        stability[a][b] = -4
+                        relation[a][b] = self.relation[a][b]
                     elif equisignificantRelation[a][b] == One:
-                        relation[a][b] = Decimal('3')
+                        stability[a][b] = 3
+                        relation[a][b] = self.relation[a][b]
                     elif equisignificantRelation[a][b] == MinusOne:
-                        relation[a][b] = Decimal('-3')
+                        stability[a][b] = -3
+                        relation[a][b] = self.relation[a][b]                        
                     elif ordinalRelation[a][b] == One:
-                        relation[a][b] = Decimal('2')
+                        stability[a][b] = 2
+                        relation[a][b] = self.relation[a][b]
                     elif ordinalRelation[a][b] == MinusOne:
-                        relation[a][b] = Decimal('-2')
-                    elif cardinalRelation[a][b] > Med:
-                        relation[a][b] = Decimal('1')
-                    elif cardinalRelation[a][b] < Med:
-                        relation[a][b] = Decimal('-1')
+                        stability[a][b] = -2
+                        relation[a][b] = self.relation[a][b]
+                    elif concordanceRelation[a][b] > Med:
+                        stability[a][b] = 1
+                        relation[a][b] = Med
+                    elif concordanceRelation[a][b] < Med:
+                        stability[a][b] = -1
+                        relation[a][b] = Med
                     else:
+                        stability[a][b] = 0
                         relation[a][b] = Med
                 else:
+                    stability[a][b] = 0
                     relation[a][b] = Med
-                    
-        return relation
+        self.relation = relation
+        return stability
+         
 
-class RobustOutrankingDigraph(BipolarOutrankingDigraph):
+class OldRobustOutrankingDigraph(BipolarOutrankingDigraph):
     """
     Parameters:
         performanceTableau (fileName of valid py code)
 
     Specialization of the general OutrankingDigraph class for 
-    robustness anaylsis.
+    robustness analysis distinguishing 3 levels of stability.
     """
     def __init__(self, filePerfTab = None,Debug=False,hasNoVeto=True):
         
@@ -9392,16 +9705,24 @@ if __name__ == "__main__":
 
 
     ## t = RandomCoalitionsPerformanceTableau(numberOfActions=50,weightDistribution='random')
-    Threading = False
-    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=10,\
-                                   numberOfCriteria=5,\
-                                   weightDistribution='equiobjectives',
-                                             NegativeWeights=True,
-                                    negativeWeightProbability=0.25,
-                                   seed=101)
-    
-    g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=Threading,
+##    Threading = False
+##    t1 = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
+##                                   numberOfCriteria=9,\
+##                                   weightDistribution='equiobjectives',
+##                                    NegativeWeights=True,
+##                                    negativeWeightProbability=0.25,
+##                                   seed=102)
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
+                                   numberOfCriteria=9,\
+                                   seed=102)
+    g = BipolarOutrankingDigraph(t,Normalized=True,
                                   tempDir=None,nbrCores=8,Comments=True,Debug=False)
+    g.showRelationTable(StabilityDenotation=True)
+    rg = RobustOutrankingDigraph(t,Debug=False)
+    rg.showRelationTable(StabilityDenotation=True)
+    cg = ConfidentBipolarOutrankingDigraph(t)
+    cg.showRelationTable()
+    
     #print(g1)
     #g1.saveXMCDA2RubisChoiceRecommendation()
     #g1.showRelationTable()

@@ -66,7 +66,7 @@ Copyright&nbsp;(C)&nbsp;2011-2019&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
 <td colspan=2><tt><a href="#CopelandOrder">CopelandOrder</a>(other,&nbsp;coDual=False,&nbsp;Debug=False)<br>
 &nbsp;<br>
-instantiates&nbsp;the&nbsp;Copèeland&nbsp;Order&nbsp;from<br>
+instantiates&nbsp;the&nbsp;Copeland&nbsp;Order&nbsp;from<br>
 a&nbsp;given&nbsp;bipolar-valued&nbsp;<a href="digraphs.html#Digraph">Digraph</a>&nbsp;instance<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -341,6 +341,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 <dl><dt><a name="CopelandOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="CopelandOrder-computeMaxHoleSize"><strong>computeMaxHoleSize</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;largest&nbsp;chordless&nbsp;cycle<br>
+in&nbsp;the&nbsp;corresponding&nbsp;disjunctive&nbsp;undirected&nbsp;graph.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -908,14 +911,13 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
 &gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#CopelandOrder-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#CopelandOrder-showBestChoiceRecommendation">showBestChoiceRecommendation</a>()<br>
 ***********************<br>
 RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
@@ -924,7 +926,6 @@ Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 &nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
 &nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
@@ -1463,6 +1464,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 <dl><dt><a name="KemenyOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="KemenyOrder-computeMaxHoleSize"><strong>computeMaxHoleSize</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;largest&nbsp;chordless&nbsp;cycle<br>
+in&nbsp;the&nbsp;corresponding&nbsp;disjunctive&nbsp;undirected&nbsp;graph.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -2030,14 +2034,13 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
 &gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#KemenyOrder-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#KemenyOrder-showBestChoiceRecommendation">showBestChoiceRecommendation</a>()<br>
 ***********************<br>
 RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
@@ -2046,7 +2049,6 @@ Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 &nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
 &nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
@@ -2585,6 +2587,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 <dl><dt><a name="KohlerOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="KohlerOrder-computeMaxHoleSize"><strong>computeMaxHoleSize</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;largest&nbsp;chordless&nbsp;cycle<br>
+in&nbsp;the&nbsp;corresponding&nbsp;disjunctive&nbsp;undirected&nbsp;graph.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -3152,14 +3157,13 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
 &gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#KohlerOrder-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#KohlerOrder-showBestChoiceRecommendation">showBestChoiceRecommendation</a>()<br>
 ***********************<br>
 RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
@@ -3168,7 +3172,6 @@ Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 &nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
 &nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
@@ -3702,6 +3705,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 <dl><dt><a name="LinearOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="LinearOrder-computeMaxHoleSize"><strong>computeMaxHoleSize</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;largest&nbsp;chordless&nbsp;cycle<br>
+in&nbsp;the&nbsp;corresponding&nbsp;disjunctive&nbsp;undirected&nbsp;graph.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -4269,14 +4275,13 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
 &gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#LinearOrder-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#LinearOrder-showBestChoiceRecommendation">showBestChoiceRecommendation</a>()<br>
 ***********************<br>
 RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
@@ -4285,7 +4290,6 @@ Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 &nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
 &nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
@@ -4826,6 +4830,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 <dl><dt><a name="NetFlowsOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="NetFlowsOrder-computeMaxHoleSize"><strong>computeMaxHoleSize</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;largest&nbsp;chordless&nbsp;cycle<br>
+in&nbsp;the&nbsp;corresponding&nbsp;disjunctive&nbsp;undirected&nbsp;graph.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -5393,14 +5400,13 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
 &gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#NetFlowsOrder-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#NetFlowsOrder-showBestChoiceRecommendation">showBestChoiceRecommendation</a>()<br>
 ***********************<br>
 RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
@@ -5409,7 +5415,6 @@ Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 &nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
 &nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
@@ -5956,6 +5961,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 <dl><dt><a name="PrincipalOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="PrincipalOrder-computeMaxHoleSize"><strong>computeMaxHoleSize</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;largest&nbsp;chordless&nbsp;cycle<br>
+in&nbsp;the&nbsp;corresponding&nbsp;disjunctive&nbsp;undirected&nbsp;graph.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -6523,14 +6531,13 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
 &gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#PrincipalOrder-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#PrincipalOrder-showBestChoiceRecommendation">showBestChoiceRecommendation</a>()<br>
 ***********************<br>
 RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
@@ -6539,7 +6546,6 @@ Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 &nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
 &nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
@@ -7075,6 +7081,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 <dl><dt><a name="RandomLinearOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="RandomLinearOrder-computeMaxHoleSize"><strong>computeMaxHoleSize</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;largest&nbsp;chordless&nbsp;cycle<br>
+in&nbsp;the&nbsp;corresponding&nbsp;disjunctive&nbsp;undirected&nbsp;graph.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -7642,14 +7651,13 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
 &gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#RandomLinearOrder-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#RandomLinearOrder-showBestChoiceRecommendation">showBestChoiceRecommendation</a>()<br>
 ***********************<br>
 RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
@@ -7658,7 +7666,6 @@ Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 &nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
 &nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
@@ -8198,6 +8205,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 <dl><dt><a name="RankedPairsOrder-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="RankedPairsOrder-computeMaxHoleSize"><strong>computeMaxHoleSize</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;largest&nbsp;chordless&nbsp;cycle<br>
+in&nbsp;the&nbsp;corresponding&nbsp;disjunctive&nbsp;undirected&nbsp;graph.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -8765,14 +8775,13 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
 &gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;BipolarOutrankingDigraph(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#RankedPairsOrder-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#RankedPairsOrder-showBestChoiceRecommendation">showBestChoiceRecommendation</a>()<br>
 ***********************<br>
 RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
@@ -8781,7 +8790,6 @@ Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 &nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
 &nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>

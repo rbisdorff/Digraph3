@@ -582,6 +582,9 @@ in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;fil
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showMarginalVersusGlobalOutrankingCorrelation"><strong>showMarginalVersusGlobalOutrankingCorrelation</strong></a>(self, Sorted=True, Threading=False, nbrOfCPUs=None, Comments=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;computeCriterionCorrelation&nbsp;results.</tt></dd></dl>
 
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showOldPairwiseComparison"><strong>showOldPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Obsolete:&nbsp;Renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+with&nbsp;weak&nbsp;preference&nbsp;and&nbsp;weak&nbsp;veto&nbsp;thresholds.</tt></dd></dl>
+
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
@@ -792,6 +795,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeMaxHoleSize"><strong>computeMaxHoleSize</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;largest&nbsp;chordless&nbsp;cycle<br>
+in&nbsp;the&nbsp;corresponding&nbsp;disjunctive&nbsp;undirected&nbsp;graph.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -1290,14 +1296,13 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
 &gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#PreRankedConfidentOutrankingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#PreRankedConfidentOutrankingDigraph-showBestChoiceRecommendation">showBestChoiceRecommendation</a>()<br>
 ***********************<br>
 RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
@@ -1306,7 +1311,6 @@ Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 &nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
 &nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
@@ -1642,6 +1646,8 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#PreRankedConfidentOutrankingDigraph-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#PreRankedConfidentOutrankingDigraph-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showWeightPreorder"><strong>showWeightPreorder</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;preordering&nbsp;of&nbsp;the&nbsp;the&nbsp;criteria&nbsp;signficance&nbsp;weights.</tt></dd></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -2155,6 +2161,9 @@ in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;fil
 
 <dl><dt><a name="PreRankedOutrankingDigraph-showMarginalVersusGlobalOutrankingCorrelation"><strong>showMarginalVersusGlobalOutrankingCorrelation</strong></a>(self, Sorted=True, Threading=False, nbrOfCPUs=None, Comments=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;computeCriterionCorrelation&nbsp;results.</tt></dd></dl>
 
+<dl><dt><a name="PreRankedOutrankingDigraph-showOldPairwiseComparison"><strong>showOldPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Obsolete:&nbsp;Renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+with&nbsp;weak&nbsp;preference&nbsp;and&nbsp;weak&nbsp;veto&nbsp;thresholds.</tt></dd></dl>
+
 <dl><dt><a name="PreRankedOutrankingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
@@ -2365,6 +2374,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 <dl><dt><a name="PreRankedOutrankingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="PreRankedOutrankingDigraph-computeMaxHoleSize"><strong>computeMaxHoleSize</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;largest&nbsp;chordless&nbsp;cycle<br>
+in&nbsp;the&nbsp;corresponding&nbsp;disjunctive&nbsp;undirected&nbsp;graph.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -2863,14 +2875,13 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
 &gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#PreRankedOutrankingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#PreRankedOutrankingDigraph-showBestChoiceRecommendation">showBestChoiceRecommendation</a>()<br>
 ***********************<br>
 RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
@@ -2879,7 +2890,6 @@ Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 &nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
 &nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
@@ -3215,6 +3225,8 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="PreRankedOutrankingDigraph-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#PreRankedOutrankingDigraph-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#PreRankedOutrankingDigraph-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="PreRankedOutrankingDigraph-showWeightPreorder"><strong>showWeightPreorder</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;preordering&nbsp;of&nbsp;the&nbsp;the&nbsp;criteria&nbsp;signficance&nbsp;weights.</tt></dd></dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -3631,6 +3643,9 @@ in&nbsp;the&nbsp;default&nbsp;system&nbsp;browser.&nbsp;A&nbsp;specific&nbsp;fil
 
 <dl><dt><a name="SparseOutrankingDigraph-showMarginalVersusGlobalOutrankingCorrelation"><strong>showMarginalVersusGlobalOutrankingCorrelation</strong></a>(self, Sorted=True, Threading=False, nbrOfCPUs=None, Comments=True)</dt><dd><tt>Show&nbsp;method&nbsp;for&nbsp;computeCriterionCorrelation&nbsp;results.</tt></dd></dl>
 
+<dl><dt><a name="SparseOutrankingDigraph-showOldPairwiseComparison"><strong>showOldPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Obsolete:&nbsp;Renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+with&nbsp;weak&nbsp;preference&nbsp;and&nbsp;weak&nbsp;veto&nbsp;thresholds.</tt></dd></dl>
+
 <dl><dt><a name="SparseOutrankingDigraph-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>Renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
 in&nbsp;html&nbsp;format</tt></dd></dl>
 
@@ -3640,7 +3655,7 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, actionsSubset=None)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-showRelationTable"><strong>showRelationTable</strong></a>(self, IntegerValues=False, actionsSubset=None, Sorted=True, hasLPDDenotation=False, hasLatexFormat=False, hasIntegerValuation=False, relation=None, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
+<dl><dt><a name="SparseOutrankingDigraph-showRelationTable"><strong>showRelationTable</strong></a>(self, IntegerValues=False, actionsSubset=None, Sorted=True, hasLPDDenotation=False, StabilityDenotation=False, hasLatexFormat=False, hasIntegerValuation=False, relation=None, ReflexiveTerms=True)</dt><dd><tt>prints&nbsp;the&nbsp;relation&nbsp;valuation&nbsp;in&nbsp;actions&nbsp;X&nbsp;actions&nbsp;table&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-showShort"><strong>showShort</strong></a>(self)</dt><dd><tt>specialize&nbsp;the&nbsp;general&nbsp;showShort&nbsp;method&nbsp;with&nbsp;the&nbsp;criteria.</tt></dd></dl>
 
@@ -3845,6 +3860,9 @@ Return&nbsp;a&nbsp;tuple:&nbsp;kemenyOrder&nbsp;(from&nbsp;worst&nbsp;to&nbsp;be
 <dl><dt><a name="SparseOutrankingDigraph-computeKohlerOrder"><strong>computeKohlerOrder</strong></a>(self)</dt><dd><tt>Renders&nbsp;an&nbsp;ordering&nbsp;(worst&nbsp;to&nbsp;best)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-computeKohlerRanking"><strong>computeKohlerRanking</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;(best&nbsp;to&nbsp;worst)&nbsp;of&nbsp;the&nbsp;actions&nbsp;following&nbsp;Kohler's&nbsp;rule.</tt></dd></dl>
+
+<dl><dt><a name="SparseOutrankingDigraph-computeMaxHoleSize"><strong>computeMaxHoleSize</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;largest&nbsp;chordless&nbsp;cycle<br>
+in&nbsp;the&nbsp;corresponding&nbsp;disjunctive&nbsp;undirected&nbsp;graph.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-computeMeanInDegree"><strong>computeMeanInDegree</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;mean&nbsp;indegree&nbsp;of&nbsp;self.<br>
 !!!&nbsp;self.<strong>size</strong>&nbsp;must&nbsp;be&nbsp;set&nbsp;previously&nbsp;!!!</tt></dd></dl>
@@ -4345,14 +4363,13 @@ Usage&nbsp;example:<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;outrankingDigraphs&nbsp;import&nbsp;*<br>
 &gt;&gt;&gt;&nbsp;t&nbsp;=&nbsp;Random3ObjectivesPerformanceTableau(seed=5)<br>
 &gt;&gt;&gt;&nbsp;g&nbsp;=&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>(t)<br>
-&gt;&gt;&gt;&nbsp;g.<a href="#SparseOutrankingDigraph-showRubisBestChoiceRecommendation">showRubisBestChoiceRecommendation</a>()<br>
+&gt;&gt;&gt;&nbsp;g.<a href="#SparseOutrankingDigraph-showBestChoiceRecommendation">showBestChoiceRecommendation</a>()<br>
 ***********************<br>
 RuBis&nbsp;Best&nbsp;Choice&nbsp;Recommendation&nbsp;(BCR)<br>
 (in&nbsp;decreasing&nbsp;order&nbsp;of&nbsp;determinateness)&nbsp;&nbsp;&nbsp;<br>
 Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;vest&nbsp;choices<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a04',&nbsp;'a14',&nbsp;'a19',&nbsp;'a20']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;1.19<br>
 &nbsp;&nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-59.52<br>
@@ -4361,7 +4378,6 @@ Credibility&nbsp;domain:&nbsp;&nbsp;[-100.0,&nbsp;100.0]<br>
 &nbsp;&nbsp;&nbsp;-&nbsp;most&nbsp;credible&nbsp;action(s)&nbsp;=&nbsp;{&nbsp;'a14':&nbsp;23.81,&nbsp;'a19':&nbsp;11.90,&nbsp;'a04':&nbsp;2.38,&nbsp;'a20':&nbsp;1.19,&nbsp;}&nbsp;&nbsp;<br>
 ===&nbsp;&gt;&gt;&nbsp;potential&nbsp;worst&nbsp;choices&nbsp;<br>
 *&nbsp;choice&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;['a03',&nbsp;'a12',&nbsp;'a17']<br>
-&nbsp;&nbsp;&nbsp;+-irredundancy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;independence&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
 &nbsp;&nbsp;dominance&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;-76.19<br>
 &nbsp;&nbsp;absorbency&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;4.76<br>
@@ -4701,6 +4717,8 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 <dl><dt><a name="SparseOutrankingDigraph-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#SparseOutrankingDigraph-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#SparseOutrankingDigraph-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="SparseOutrankingDigraph-showWeightPreorder"><strong>showWeightPreorder</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;preordering&nbsp;of&nbsp;the&nbsp;the&nbsp;criteria&nbsp;signficance&nbsp;weights.</tt></dd></dl>
 
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">

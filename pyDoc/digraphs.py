@@ -502,6 +502,30 @@ class Digraph(object):
           
 #----------------------------------------
 
+    def computeMaxHoleSize(self,Comments=False):
+        """
+        Renders the length of the largest chordless cycle
+        in the corresponding disjunctive undirected graph.
+        """
+        g = self.digraph2Graph(ConjunctiveConversion=False)
+        cycles = g.computeChordlessCycles()
+        nbrOfHoles = len(cycles)
+        maxHS = 0
+        for c in cycles:
+            nc = len(c)
+            if nc > maxHS:
+                if Comments:
+                    print('Cycle %s of length %d' %(str(c),nc) )
+                maxHS = nc
+        if Comments:
+            print('# holes           = %d ' % nbrOfHoles )
+            print('Maximal hole size = %d ' % maxHS )
+        self.nbrOfHoles = nbrOfHoles
+        self.maxHoleSize = maxHS
+        return maxHS
+                
+#----------------------------------------
+
     def relationFct(self,x,y):
         """
         wrapper for self.relation dictionary access to ensure interoperability
@@ -1510,7 +1534,7 @@ class Digraph(object):
             try:
                 rankingByChoosing = self.rankingByChoosing['result']
             except:
-                print('Error: You must first run self.computeRankingByChoosing(CoDual=True(default)|False) !')
+                print('Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !')
             #rankingByChoosing = self.computeRankingByChoosing(Debug,CoDual)
                 return
         else:
@@ -1575,7 +1599,7 @@ class Digraph(object):
             try:
                 rankingByLastChoosing = self.rankingByLastChoosing['result']
             except:
-                print('Error: You must first run self.computeRankingByLastChoosing(CoDual=True(default)|False) !')
+                print('Error: You must first run self.computeRankingByLastChoosing(CoDual=False(default)|True) !')
                 return
         else:
             rankingByLastChoosing = rankingByLastChoosing['result']
@@ -1616,7 +1640,7 @@ class Digraph(object):
             try:
                 rankingByBestChoosing = self.rankingByBestChoosing['result']
             except:
-                print('Error: You must first run self.computeRankingByBestChoosing(CoDual=True(default)|False) !')
+                print('Error: You must first run self.computeRankingByBestChoosing(CoDual=False(default)|True) !')
                 return
         else:
             rankingByBestChoosing = rankingByBestChoosing['result']
@@ -4658,7 +4682,10 @@ class Digraph(object):
             for y,rxy in rx.items():
                 if x != y:
                     D += abs(rxy - Med)
-        determination = D / Decimal(str((order * (order-1))))
+        if order > 1:
+            determination = D / Decimal(str((order * (order-1))))
+        else:
+            determination = D
         if InPercents:
             return (determination / (Max-Med) + Decimal('1')) / Decimal('2') * Decimal('100.0')
         else:
@@ -7107,14 +7134,13 @@ class Digraph(object):
         >>> from outrankingDigraphs import *
         >>> t = Random3ObjectivesPerformanceTableau(seed=5)
         >>> g = BipolarOutrankingDigraph(t)
-        >>> g.showRubisBestChoiceRecommendation()
+        >>> g.showBestChoiceRecommendation()
         ***********************
         RuBis Best Choice Recommendation (BCR)
         (in decreasing order of determinateness)   
         Credibility domain:  [-100.0, 100.0]
         === >> potential vest choices
         * choice              : ['a04', 'a14', 'a19', 'a20']
-           +-irredundancy      : 1.19
            independence        : 1.19
            dominance           : 4.76
            absorbency          : -59.52
@@ -7123,7 +7149,6 @@ class Digraph(object):
            - most credible action(s) = { 'a14': 23.81, 'a19': 11.90, 'a04': 2.38, 'a20': 1.19, }  
         === >> potential worst choices 
         * choice              : ['a03', 'a12', 'a17']
-           +-irredundancy      : 4.76
           independence        : 4.76
           dominance           : -76.19
           absorbency          : 4.76
@@ -8175,7 +8200,7 @@ class Digraph(object):
         vec = ch[6]
         vec.sort(reverse=True)
         html  = '<p>Choice              : <b>%s</b><br/>\n ' % str(choice)
-        html += '  +-irredundancy      : %.2f<br/>\n' % (degirred)
+        #html += '  +-irredundancy      : %.2f<br/>\n' % (degirred)
         html += '  independence        : %.2f<br/>\n' % (degi)
         html += '  dominance           : %.2f<br/>\n' % (degd)
         html += '  absorbency          : %.2f<br/>\n' % (dega)
@@ -8231,7 +8256,7 @@ class Digraph(object):
         vec = ch[6]
         vec.sort(reverse=True)
         print('* choice              : ' + str(choice))
-        print('  +-irredundancy      : %.2f' % (degirred))
+        #print('  +-irredundancy      : %.2f' % (degirred))
         print('  independence        : %.2f' % (degi))
         print('  dominance           : %.2f' % (degd))
         print('  absorbency          : %.2f' % (dega))
@@ -8312,7 +8337,7 @@ class Digraph(object):
             degd = ch[3]
             dega = -ch[4]
             print('* choice           : ' + str(choice))
-            print('  +irredundance    : %.2f' % (degirred))
+            #print('  +irredundance    : %.2f' % (degirred))
             print('  independence     : %.2f' % (degi))
             print('  dominance        : %.2f' % (degd))
             print('  absorbency       : %.2f' % (dega))
@@ -8388,7 +8413,7 @@ class Digraph(object):
             degd = -ch[3]
             dega = ch[4]
             print('* choice           : ' + str(choice))
-            print('  -irredundance    : %.2f' % (degirred))
+            #print('  -irredundance    : %.2f' % (degirred))
             print('  independence     : %.2f' % (degi))
             print('  dominance        : %.2f' % (degd))
             print('  absorbency       : %.2f' % (dega))
@@ -11004,7 +11029,8 @@ class CirculantDigraph(Digraph):
         :align: center
 
     """
-    def __init__(self,order=7,valuationdomain = {'min':Decimal('-1.0'),'max':Decimal('1.0')},circulants = [-1,1]):
+    def __init__(self,order=7,valuationdomain = {'min':Decimal('-1.0'),'max':Decimal('1.0')},\
+                 circulants = [-1,1],IndeterminateInnerPart=False):
         import sys,array,copy
         from collections import OrderedDict
         self.name = 'c'+str(order)
@@ -11031,12 +11057,16 @@ class CirculantDigraph(Digraph):
         for x in actions:
             relation[x] = {}
             for y in actions:
-                if x == y:
-                    relation[x][y] = Min
-                elif (x,y) in arcs:
-                    relation[x][y] = Max
+                if IndeterminateInnerPart:
+                    relation[x][y] = Med
                 else:
-                    relation[x][y] = Min
+                    relation[x][y] = Min 
+        for x in actions:
+            for y in actions:
+                if (x,y) in arcs:
+                    relation[x][y] = Max
+                    if (y,x) not in arcs:
+                        relation[y][x] = Min
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -11349,8 +11379,8 @@ class PolarisedDigraph(Digraph):
     Renders the polarised valuation of a Digraph class instance:
 
     *Parameters*:
-         * If level = None, a default 75% cut level (0.5 in a normalized [-1,+1] valuation domain) is used.
-         * If KeepValues = False, the polarisation results in  a three valued crisp result.
+         * If level = None, a default strict 50% cut level (0 in a normalized [-1,+1] valuation domain) is used.
+         * If KeepValues = False, the polarisation results in a crisp {-1,0,1}-valued result.
          * If AlphaCut = True a genuine one-sided True-oriented cut is operated.
          * If StrictCut = True, the cut level value is excluded resulting in an open polarised valuation domain.
            By default the polarised valuation domain is closed and the complementary indeterminate domain is open.
@@ -11364,7 +11394,10 @@ class PolarisedDigraph(Digraph):
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         if level == None:
-            level = Max - (Max - Med)*Decimal('0.5')
+            #level = Max - (Max - Med)*Decimal('0.5')
+            level = Med
+            StrictCut = True
+            KeepValues = False
         else:
             level = Decimal(str(level))
         self.name = 'cut_' + str(level)+ '_' + str(digraph.name)
@@ -11393,7 +11426,7 @@ class PolarisedDigraph(Digraph):
         Debug = False
         if Debug:
             print('Level, KeepValues,AlphaCut', level, KeepValues,AlphaCut)
-        actions = self.actions
+        # determine the cut level
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
@@ -11409,37 +11442,46 @@ class PolarisedDigraph(Digraph):
             print(self.valuationdomain)
             print('Original relation not changed !!!')
             return relationin
-        else:
-            relationout = {}
-            for a in actions:
-                relationout[a] = {}
-                for b in actions:
-                    if StrictCut:
-                        if relationin[a][b] > level:
-                            if KeepValues:
-                                relationout[a][b] = relationin[a][b]
-                            else:
-                                relationout[a][b] = Max
-                        elif relationin[a][b] < compLevel:
-                            if KeepValues:
-                                relationout[a][b] = relationin[a][b]
-                            else:
-                                relationout[a][b] = Min
+        # change to a normalized [-1,0,1] valuation domain
+        if KeepValues == False:
+            Min = Decimal('-1')
+            Max = Decimal('1')
+            Med = Decimal('0')
+            self.valuationdomain['min'] = Min
+            self.valuationdomain['max'] = Max
+            self.valuationdomain['med'] = Med
+        # construct polarised relation
+        actions = self.actions
+        relationout = {}
+        for a in actions:
+            relationout[a] = {}
+            for b in actions:
+                if StrictCut:
+                    if relationin[a][b] > level:
+                        if KeepValues:
+                            relationout[a][b] = relationin[a][b]
                         else:
-                            relationout[a][b] = Med
+                            relationout[a][b] = Max
+                    elif relationin[a][b] < compLevel:
+                        if KeepValues:
+                            relationout[a][b] = relationin[a][b]
+                        else:
+                            relationout[a][b] = Min
                     else:
-                        if relationin[a][b] >= level:
-                            if KeepValues:
-                                relationout[a][b] = relationin[a][b]
-                            else:
-                                relationout[a][b] = Max
-                        elif relationin[a][b] <= compLevel:
-                            if KeepValues:
-                                relationout[a][b] = relationin[a][b]
-                            else:
-                                relationout[a][b] = Min
+                        relationout[a][b] = Med
+                else:
+                    if relationin[a][b] >= level:
+                        if KeepValues:
+                            relationout[a][b] = relationin[a][b]
                         else:
-                            relationout[a][b] = Med
+                            relationout[a][b] = Max
+                    elif relationin[a][b] <= compLevel:
+                        if KeepValues:
+                            relationout[a][b] = relationin[a][b]
+                        else:
+                            relationout[a][b] = Min
+                    else:
+                        relationout[a][b] = Med
         return relationout
 
     def _constructAlphaCutRelation(self,relationin, level, KeepValues=True,AlphaCut=False,StrictCut=False):
@@ -13085,22 +13127,24 @@ if __name__ == "__main__":
         from time import time
         from digraphsTools import *
         ##dg = RedhefferDigraph(order=113)
-        #g = RandomTournament(order=5,seed=1)
-        #g = RandomValuationDigraph(seed=1)
+        #g = RandomTournament(order=10,seed=1)
+        g = RandomValuationDigraph(order=20)
         #print(g)
+        #g = CirculantDigraph(IndeterminateInnerPart=True)
+        g.computeMaxHoleSize(Comments=True)
         
-        from outrankingDigraphs import BipolarOutrankingDigraph
-        from randomPerfTabs import Random3ObjectivesPerformanceTableau
-##        from linearOrders import CopelandOrder
-        t1 = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)
-        g = BipolarOutrankingDigraph(t1,Normalized=True)
-        g.showRelationTable()
-        print(g.computeDeterminateness())
-        print(g.computeDeterminateness(InPercents=True))
-        g.recodeValuation(0,1)
-        print(g.computeDeterminateness())
-        print(g.computeDeterminateness(InPercents=True))
-      
+##        from outrankingDigraphs import BipolarOutrankingDigraph
+##        from randomPerfTabs import Random3ObjectivesPerformanceTableau
+####        from linearOrders import CopelandOrder
+##        t1 = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)
+##        g = BipolarOutrankingDigraph(t1,Normalized=True)
+##        g.showRelationTable()
+##        print(g.computeDeterminateness())
+##        print(g.computeDeterminateness(InPercents=True))
+##        g.recodeValuation(0,1)
+##        print(g.computeDeterminateness())
+##        print(g.computeDeterminateness(InPercents=True))
+##      
 ##        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
 ##        g.showPreKernels()
 ##        g.showRelationTable()

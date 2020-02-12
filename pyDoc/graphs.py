@@ -650,6 +650,52 @@ class Graph(object):
                     diameter = order - (i+1)
                     break
         return diameter                       
+
+    def computeGirth(self,girthType="any",Comments=False):
+        """
+        Renders the *girth* of self, i.e. the length of the shortest chordless cycle in the graph.
+
+        *Parameter*:
+            * *girthType* = "any" (default) | "odd" | "even"
+
+        """
+        cycles = self.computeChordlessCycles()
+        if Comments:
+            print(cycles)
+        girth = self.order + 1
+        for c in cycles:
+            nc = len(c)
+            if Comments:
+                print(nc,c)
+            if girthType == "odd":
+                if nc % 2 == 1 and nc < girth:
+                    girth = nc
+            elif girthType == "even":
+                if nc % 2 == 0 and nc < girth:
+                    girth = nc
+            else:
+                if nc < girth:
+                    girth = nc
+        if girth == self.order + 1:
+            if Comments:
+                if girthType == "any":
+                    print('the graph %s has no cycles' % (self.name))
+                else:
+                    print('the graph %s has no %s cycles' % (self.name,girthType))
+                return
+        if girthType == "odd":
+            self.oddGirth = girth
+            if Comments:
+                print('odd girth = %d' % girth)
+        elif girthType == "even":
+            self.evenGirth = girth
+            if Comments:
+                print('even girth = %d' % girth)
+        else:
+            self.girth = girth
+            if Comments:
+                print('girth = %d' % girth)
+        return girth
                 
     def computeMaximumMatching(self,Comments=False):
         """
@@ -4476,7 +4522,10 @@ if __name__ == '__main__':
     g.name = 'testPerfectGraph'
     g.exportGraphViz()
     #print(g.breadthFirstSearch('v1',Debug=False))
-    print(g.isPerfectGraph(Comments=True))    
+    print(g.isPerfectGraph(Comments=True))
+    g.computeGirth(girthType="odd",Comments=True)
+    g.computeGirth(girthType="even",Comments=True)
+    g.computeGirth(Comments=True)
     
 ##    rg = RandomPermutationGraph(order=6,seed=None)
 ##    print(rg)

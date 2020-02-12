@@ -50,7 +50,7 @@ Copyright&nbsp;(C)&nbsp;2015-2019&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 <font color="#000000" face="helvetica, arial"><a name="Random3ObjectivesPerformanceTableau">class <strong>Random3ObjectivesPerformanceTableau</strong></a>(<a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#Random3ObjectivesPerformanceTableau">Random3ObjectivesPerformanceTableau</a>(numberOfActions=20,&nbsp;numberOfCriteria=13,&nbsp;weightDistribution='equiobjectives',&nbsp;weightScale=None,&nbsp;IntegerWeights=True,&nbsp;OrdinalScales=False,&nbsp;NegativeWeights=False,&nbsp;negativeWeightProbability=0.0,&nbsp;commonScale=None,&nbsp;commonThresholds=None,&nbsp;commonMode=None,&nbsp;valueDigits=2,&nbsp;vetoProbability=0.5,&nbsp;missingDataProbability=0.05,&nbsp;BigData=False,&nbsp;seed=None,&nbsp;Debug=False)<br>
+<td colspan=2><tt><a href="#Random3ObjectivesPerformanceTableau">Random3ObjectivesPerformanceTableau</a>(numberOfActions=20,&nbsp;shortNamePrefix='a',&nbsp;numberOfCriteria=13,&nbsp;weightDistribution='equiobjectives',&nbsp;weightScale=None,&nbsp;IntegerWeights=True,&nbsp;OrdinalScales=False,&nbsp;NegativeWeights=False,&nbsp;negativeWeightProbability=0.0,&nbsp;commonScale=None,&nbsp;commonThresholds=None,&nbsp;commonMode=None,&nbsp;valueDigits=2,&nbsp;vetoProbability=0.5,&nbsp;missingDataProbability=0.05,&nbsp;BigData=False,&nbsp;seed=None,&nbsp;Debug=False)<br>
 &nbsp;<br>
 Specialization&nbsp;of&nbsp;the&nbsp;:py:class:`perfTabs.<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>`&nbsp;class&nbsp;<br>
 for&nbsp;3&nbsp;objectives:&nbsp;*Eco*,&nbsp;*Soc*&nbsp;and&nbsp;*Env*.&nbsp;Each&nbsp;decision&nbsp;action<br>
@@ -59,6 +59,7 @@ on&nbsp;each&nbsp;of&nbsp;the&nbsp;three&nbsp;objectives.<br>
 &nbsp;<br>
 Generator&nbsp;arguments:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;numberOf&nbsp;Actions&nbsp;:=&nbsp;20&nbsp;(default)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;shortNamePrefix&nbsp;:=&nbsp;'a'&nbsp;(default)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;number&nbsp;of&nbsp;Criteria&nbsp;:=&nbsp;13&nbsp;(default)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;weightDistribution&nbsp;:=&nbsp;'equiobjectives'&nbsp;(default)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;'equisignificant'&nbsp;(weights&nbsp;set&nbsp;all&nbsp;to&nbsp;1)<br>
@@ -156,7 +157,7 @@ criteria&nbsp;|&nbsp;weights&nbsp;|&nbsp;&nbsp;'a1'&nbsp;&nbsp;&nbsp;'a2'&nbsp;&
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="Random3ObjectivesPerformanceTableau-__init__"><strong>__init__</strong></a>(self, numberOfActions=20, numberOfCriteria=13, weightDistribution='equiobjectives', weightScale=None, IntegerWeights=True, OrdinalScales=False, NegativeWeights=False, negativeWeightProbability=0.0, commonScale=None, commonThresholds=None, commonMode=None, valueDigits=2, vetoProbability=0.5, missingDataProbability=0.05, BigData=False, seed=None, Debug=False)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+<dl><dt><a name="Random3ObjectivesPerformanceTableau-__init__"><strong>__init__</strong></a>(self, numberOfActions=20, shortNamePrefix='a', numberOfCriteria=13, weightDistribution='equiobjectives', weightScale=None, IntegerWeights=True, OrdinalScales=False, NegativeWeights=False, negativeWeightProbability=0.0, commonScale=None, commonThresholds=None, commonMode=None, valueDigits=2, vetoProbability=0.5, missingDataProbability=0.05, BigData=False, seed=None, Debug=False)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
 
 <dl><dt><a name="Random3ObjectivesPerformanceTableau-showActions"><strong>showActions</strong></a>(self, Alphabetic=False)</dt><dd><tt>presentation&nbsp;methods&nbsp;for&nbsp;decision&nbsp;actions&nbsp;or&nbsp;alternatives</tt></dd></dl>
 
@@ -339,6 +340,8 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="Random3ObjectivesPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
+
+<dl><dt><a name="Random3ObjectivesPerformanceTableau-showWeightPreorder"><strong>showWeightPreorder</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;preordering&nbsp;of&nbsp;the&nbsp;the&nbsp;criteria&nbsp;signficance&nbsp;weights.</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>:<br>
@@ -566,6 +569,8 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="RandomAcademicPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
+
+<dl><dt><a name="RandomAcademicPerformanceTableau-showWeightPreorder"><strong>showWeightPreorder</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;preordering&nbsp;of&nbsp;the&nbsp;the&nbsp;criteria&nbsp;signficance&nbsp;weights.</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>:<br>
@@ -870,6 +875,8 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="RandomCBPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
+
+<dl><dt><a name="RandomCBPerformanceTableau-showWeightPreorder"><strong>showWeightPreorder</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;preordering&nbsp;of&nbsp;the&nbsp;the&nbsp;criteria&nbsp;signficance&nbsp;weights.</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>:<br>
@@ -1202,6 +1209,8 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 <dl><dt><a name="RandomPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
 
+<dl><dt><a name="RandomPerformanceTableau-showWeightPreorder"><strong>showWeightPreorder</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;preordering&nbsp;of&nbsp;the&nbsp;the&nbsp;criteria&nbsp;signficance&nbsp;weights.</tt></dd></dl>
+
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>:<br>
 <dl><dt><strong>__dict__</strong></dt>
@@ -1468,6 +1477,8 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 
 <dl><dt><a name="RandomRankPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
+
+<dl><dt><a name="RandomRankPerformanceTableau-showWeightPreorder"><strong>showWeightPreorder</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;preordering&nbsp;of&nbsp;the&nbsp;the&nbsp;criteria&nbsp;signficance&nbsp;weights.</tt></dd></dl>
 
 <hr>
 Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>:<br>
