@@ -822,7 +822,7 @@ class _OutFlowsOrder(LinearOrder):
 
 class CopelandOrder(LinearOrder):
     """
-    instantiates the Copèeland Order from
+    instantiates the Copeland Order from
     a given bipolar-valued Digraph instance
     """
     def __init__(self,other,coDual=False,Debug=False):
@@ -863,8 +863,17 @@ class CopelandOrder(LinearOrder):
         # compute net flows
         tnf = time()
         copelandScores = []
+        c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
+                             StrictCut=True,KeepValues=False)
+        print(c)
+        c.recodeValuation()
+        cRelation = c.relation
         for x in actions:
-            copelandScore = len(gamma[x][0]) - len(gamma[x][1])
+            copelandScore = Decimal('0')
+            for y in actions:
+                copelandScore += cRelation[x][y] - cRelation[y][x]
+##        for x in actions:
+##            copelandScore = len(gamma[x][0]) - len(gamma[x][1])
             copelandScores.append((copelandScore,x))
         # reversed sorting with keeping the actions initial ordering
         # in case of ties

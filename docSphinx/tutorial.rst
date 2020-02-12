@@ -1711,9 +1711,9 @@ The ranking problem
 
 We need to rank without ties a set *X* of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise valued outranking situation characteristics, i.e. r(*x* S *y*) for all *x*, *y* in *X* (see [BIS-2013]_).
 
-Unfortunately, the Condorcet digraph, associated with such a given outranking digraph, presents only exceptionally a linear ordering. Usually, pairwise majority comparisons do not render even a complete or, at least, a transitive partial outranking relation. There may even frequently appear cyclic outranking situations (see the tutorial on :ref:`LinearVoting-tutorial-label`)
+Unfortunately, the crisp *Condorcet* digraph, associated with such a given outranking digraph, presents only exceptionally a linear ordering. Usually, pairwise majority comparisons do not render even a complete or, at least, a transitive partial outranking relation. There may even frequently appear cyclic outranking situations (see the tutorial on :ref:`LinearVoting-tutorial-label`)
 
-Let us consider a didactic outranking digraph generated from a random Cost-Benefit performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria.
+Let us consider a didactic outranking digraph generated from a random *Cost-Benefit* performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria.
 
 .. code-block:: pycon
    :linenos:
@@ -1736,7 +1736,7 @@ Let us consider a didactic outranking digraph generated from a random Cost-Benef
     'a8' |   -0.07  +0.33  -0.24  +0.10  +0.05  +0.29  +0.00   -     -0.02  
     'a9' |   +0.00  +0.00  -1.00  -0.10  +1.00  +0.33  +1.00  +0.02   -  
 
-Some ranking rules will work on the associated Condorcet digraph, i.e. the strict median cut polarised digraph.
+Some ranking rules will work on the associated *Condorcet* digraph, i.e. the strict median cut polarised digraph.
 
 .. code-block:: pycon
    :linenos:
@@ -1778,7 +1778,7 @@ The shown strict outranking relation is apparently not transitive: for instance,
     >>> gcd.computeTransitivityDegree()
      Decimal('0.508')
     
-The outranking relation is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
+The strict outranking relation is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
     
 .. code-block:: pycon
 
@@ -1798,7 +1798,7 @@ The Digraph3 resources provide some of the most common of these ranking rules, l
 The *Copeland* ranking
 ......................
 
-*Copeland* 's rule, the most intuitive one as it works well for any outranking relation which models in fact a linear order, computes for each alternative a score  resulting from the difference between its crisp out-degree (number of validated (+1) crisp outranking situations) and its crisp in-degree (number of validated crisp (+1) outranked situations).
+*Copeland* 's rule, the most intuitive one as it works well for any outranking relation which models in fact a linear order, computes for each alternative a score  resulting from the difference between its crisp *out-degree* (number of validated (+1) crisp outranking situations) and its crisp *in-degree* (number of validated crisp (+1) outranked situations).
 
 .. code-block:: pycon
    :linenos:

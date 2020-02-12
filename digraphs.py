@@ -4682,7 +4682,10 @@ class Digraph(object):
             for y,rxy in rx.items():
                 if x != y:
                     D += abs(rxy - Med)
-        determination = D / Decimal(str((order * (order-1))))
+        if order > 1:
+            determination = D / Decimal(str((order * (order-1))))
+        else:
+            determination = D
         if InPercents:
             return (determination / (Max-Med) + Decimal('1')) / Decimal('2') * Decimal('100.0')
         else:
@@ -11376,8 +11379,8 @@ class PolarisedDigraph(Digraph):
     Renders the polarised valuation of a Digraph class instance:
 
     *Parameters*:
-         * If level = None, a default 75% cut level (0.5 in a normalized [-1,+1] valuation domain) is used.
-         * If KeepValues = False, the polarisation results in  a three valued crisp result.
+         * If level = None, a default strict 50% cut level (0 in a normalized [-1,+1] valuation domain) is used.
+         * If KeepValues = False, the polarisation results in a crisp {-1,0,1}-valued result.
          * If AlphaCut = True a genuine one-sided True-oriented cut is operated.
          * If StrictCut = True, the cut level value is excluded resulting in an open polarised valuation domain.
            By default the polarised valuation domain is closed and the complementary indeterminate domain is open.
@@ -11391,7 +11394,10 @@ class PolarisedDigraph(Digraph):
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         if level == None:
-            level = Max - (Max - Med)*Decimal('0.5')
+            #level = Max - (Max - Med)*Decimal('0.5')
+            level = Med
+            StrictCut = True
+            KeepValues = False
         else:
             level = Decimal(str(level))
         self.name = 'cut_' + str(level)+ '_' + str(digraph.name)
@@ -11420,7 +11426,7 @@ class PolarisedDigraph(Digraph):
         Debug = False
         if Debug:
             print('Level, KeepValues,AlphaCut', level, KeepValues,AlphaCut)
-        actions = self.actions
+        # determine the cut level
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
@@ -11436,37 +11442,46 @@ class PolarisedDigraph(Digraph):
             print(self.valuationdomain)
             print('Original relation not changed !!!')
             return relationin
-        else:
-            relationout = {}
-            for a in actions:
-                relationout[a] = {}
-                for b in actions:
-                    if StrictCut:
-                        if relationin[a][b] > level:
-                            if KeepValues:
-                                relationout[a][b] = relationin[a][b]
-                            else:
-                                relationout[a][b] = Max
-                        elif relationin[a][b] < compLevel:
-                            if KeepValues:
-                                relationout[a][b] = relationin[a][b]
-                            else:
-                                relationout[a][b] = Min
+        # change to a normalized [-1,0,1] valuation domain
+        if KeepValues == False:
+            Min = Decimal('-1')
+            Max = Decimal('1')
+            Med = Decimal('0')
+            self.valuationdomain['min'] = Min
+            self.valuationdomain['max'] = Max
+            self.valuationdomain['med'] = Med
+        # construct polarised relation
+        actions = self.actions
+        relationout = {}
+        for a in actions:
+            relationout[a] = {}
+            for b in actions:
+                if StrictCut:
+                    if relationin[a][b] > level:
+                        if KeepValues:
+                            relationout[a][b] = relationin[a][b]
                         else:
-                            relationout[a][b] = Med
+                            relationout[a][b] = Max
+                    elif relationin[a][b] < compLevel:
+                        if KeepValues:
+                            relationout[a][b] = relationin[a][b]
+                        else:
+                            relationout[a][b] = Min
                     else:
-                        if relationin[a][b] >= level:
-                            if KeepValues:
-                                relationout[a][b] = relationin[a][b]
-                            else:
-                                relationout[a][b] = Max
-                        elif relationin[a][b] <= compLevel:
-                            if KeepValues:
-                                relationout[a][b] = relationin[a][b]
-                            else:
-                                relationout[a][b] = Min
+                        relationout[a][b] = Med
+                else:
+                    if relationin[a][b] >= level:
+                        if KeepValues:
+                            relationout[a][b] = relationin[a][b]
                         else:
-                            relationout[a][b] = Med
+                            relationout[a][b] = Max
+                    elif relationin[a][b] <= compLevel:
+                        if KeepValues:
+                            relationout[a][b] = relationin[a][b]
+                        else:
+                            relationout[a][b] = Min
+                    else:
+                        relationout[a][b] = Med
         return relationout
 
     def _constructAlphaCutRelation(self,relationin, level, KeepValues=True,AlphaCut=False,StrictCut=False):

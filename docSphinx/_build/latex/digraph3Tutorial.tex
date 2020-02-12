@@ -2020,9 +2020,9 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \label{\detokenize{tutorial:the-ranking-problem}}
 We need to rank without ties a set \sphinxstyleemphasis{X} of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise valued outranking situation characteristics, i.e. r(\sphinxstyleemphasis{x} S \sphinxstyleemphasis{y}) for all \sphinxstyleemphasis{x}, \sphinxstyleemphasis{y} in \sphinxstyleemphasis{X} (see \sphinxcite{tutorial:bis-2013}).
 
-Unfortunately, the Condorcet digraph, associated with such a given outranking digraph, presents only exceptionally a linear ordering. Usually, pairwise majority comparisons do not render even a complete or, at least, a transitive partial outranking relation. There may even frequently appear cyclic outranking situations (see the tutorial on {\hyperref[\detokenize{tutorial:linearvoting-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing the winner of an election}}}})
+Unfortunately, the crisp \sphinxstyleemphasis{Condorcet} digraph, associated with such a given outranking digraph, presents only exceptionally a linear ordering. Usually, pairwise majority comparisons do not render even a complete or, at least, a transitive partial outranking relation. There may even frequently appear cyclic outranking situations (see the tutorial on {\hyperref[\detokenize{tutorial:linearvoting-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing the winner of an election}}}})
 
-Let us consider a didactic outranking digraph generated from a random Cost\sphinxhyphen{}Benefit performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria.
+Let us consider a didactic outranking digraph generated from a random \sphinxstyleemphasis{Cost\sphinxhyphen{}Benefit} performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
@@ -2044,7 +2044,7 @@ Let us consider a didactic outranking digraph generated from a random Cost\sphin
 \PYG{g+go}{ \PYGZsq{}a9\PYGZsq{} |   +0.00  +0.00  \PYGZhy{}1.00  \PYGZhy{}0.10  +1.00  +0.33  +1.00  +0.02   \PYGZhy{}}
 \end{sphinxVerbatim}
 
-Some ranking rules will work on the associated Condorcet digraph, i.e. the strict median cut polarised digraph.
+Some ranking rules will work on the associated \sphinxstyleemphasis{Condorcet} digraph, i.e. the strict median cut polarised digraph.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c} \PYG{o}{=} \PYG{n}{PolarisedOutrankingDigraph}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{level}\PYG{o}{=}\PYG{n}{g}\PYG{o}{.}\PYG{n}{valuationdomain}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{med}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}
@@ -2088,7 +2088,7 @@ The shown strict outranking relation is apparently not transitive: for instance,
 \PYG{g+go}{ Decimal(\PYGZsq{}0.508\PYGZsq{})}
 \end{sphinxVerbatim}
 
-The outranking relation is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
+The strict outranking relation is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeChordlessCircuits}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}
@@ -2107,7 +2107,7 @@ The Digraph3 resources provide some of the most common of these ranking rules, l
 
 \subsection{The \sphinxstyleemphasis{Copeland} ranking}
 \label{\detokenize{tutorial:the-copeland-ranking}}
-\sphinxstyleemphasis{Copeland} ‘s rule, the most intuitive one as it works well for any outranking relation which models in fact a linear order, computes for each alternative a score  resulting from the difference between its crisp out\sphinxhyphen{}degree (number of validated (+1) crisp outranking situations) and its crisp in\sphinxhyphen{}degree (number of validated crisp (+1) outranked situations).
+\sphinxstyleemphasis{Copeland} ‘s rule, the most intuitive one as it works well for any outranking relation which models in fact a linear order, computes for each alternative a score  resulting from the difference between its crisp \sphinxstyleemphasis{out\sphinxhyphen{}degree} (number of validated (+1) crisp outranking situations) and its crisp \sphinxstyleemphasis{in\sphinxhyphen{}degree} (number of validated crisp (+1) outranked situations).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{CopelandOrder}

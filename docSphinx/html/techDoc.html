@@ -368,11 +368,11 @@ class;</p>
 <dt><a class="reference internal" href="#linearorders-label"><span class="std std-ref">linearOrders module</span></a></dt><dd><p>Additional tools for solving linearly ranking problems with the
 root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a>
 class;</p>
-<div class="graphviz"><img src="_images/inheritance-b7e050015bf20259aeb74a0dd11968cec5935eee.png" alt="Inheritance diagram of linearOrders" usemap="#inheritance6ca036f5b8" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="_images/inheritance-0f3ab880b4d151592aa4fe5ef6435f97f9f37ecc.png" alt="Inheritance diagram of linearOrders" usemap="#inheritance6ca036f5b8" class="inheritance graphviz" /></div>
 <map id="inheritance6ca036f5b8" name="inheritance6ca036f5b8">
 <area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="5,153,139,179"/>
 <area shape="rect" id="node3" href="#linearOrders.LinearOrder" target="_top" title="abstract class for digraphs which represent" alt="" coords="187,153,369,179"/>
-<area shape="rect" id="node2" href="#linearOrders.CopelandOrder" target="_top" title="instantiates the Copèeland Order from" alt="" coords="434,5,637,31"/>
+<area shape="rect" id="node2" href="#linearOrders.CopelandOrder" target="_top" title="instantiates the Copeland Order from" alt="" coords="434,5,637,31"/>
 <area shape="rect" id="node4" href="#linearOrders.KemenyOrder" target="_top" title="instantiates the exact Kemeny Order from" alt="" coords="438,55,633,80"/>
 <area shape="rect" id="node5" href="#linearOrders.KohlerOrder" target="_top" title="instantiates the Kohler Order from" alt="" coords="444,104,627,129"/>
 <area shape="rect" id="node6" href="#linearOrders.NetFlowsOrder" target="_top" title="instantiates the net flows Order from" alt="" coords="434,153,637,179"/>
@@ -2806,8 +2806,8 @@ temporary Kneser digraphs</p>
 <dd><p>Renders the polarised valuation of a Digraph class instance:</p>
 <dl class="simple">
 <dt><em>Parameters</em>:</dt><dd><ul class="simple">
-<li><p>If level = None, a default 75% cut level (0.5 in a normalized [-1,+1] valuation domain) is used.</p></li>
-<li><p>If KeepValues = False, the polarisation results in  a three valued crisp result.</p></li>
+<li><p>If level = None, a default strict 50% cut level (0 in a normalized [-1,+1] valuation domain) is used.</p></li>
+<li><p>If KeepValues = False, the polarisation results in a crisp {-1,0,1}-valued result.</p></li>
 <li><p>If AlphaCut = True a genuine one-sided True-oriented cut is operated.</p></li>
 <li><p>If StrictCut = True, the cut level value is excluded resulting in an open polarised valuation domain.
 By default the polarised valuation domain is closed and the complementary indeterminate domain is open.</p></li>
@@ -7812,7 +7812,7 @@ Copyright (C) 2011-2019  Raymond Bisdorff</p>
 <dl class="class">
 <dt id="linearOrders.CopelandOrder">
 <em class="property">class </em><code class="sig-prename descclassname">linearOrders.</code><code class="sig-name descname">CopelandOrder</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">coDual=False</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#CopelandOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linearOrders.CopelandOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>instantiates the Copèeland Order from
+<dd><p>instantiates the Copeland Order from
 a given bipolar-valued Digraph instance</p>
 </dd></dl>
 

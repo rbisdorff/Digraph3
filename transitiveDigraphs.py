@@ -1558,22 +1558,26 @@ if __name__ == "__main__":
     from votingProfiles import *
     from time import time
 
-    v = RandomLinearVotingProfile(numberOfVoters=99,\
-                                  numberOfCandidates=9,seed=201)
-    g = CondorcetDigraph(v)
-    wc = WeakCopelandOrder(g,SelfCoDual=False,Debug=False)
+##    v = RandomLinearVotingProfile(numberOfVoters=99,\
+##                                  numberOfCandidates=9,seed=201)
+##    g = CondorcetDigraph(v)
+    g = RandomBipolarOutrankingDigraph()
+    wc = WeakCopelandOrder(g,SelfCoDual=True,Debug=False)
     wc.showRelationTable()
+    cop = CopelandOrder(g)
+    cop.showRelationTable()
     wc.showScores()
-    wnf = WeakNetFlowsOrder(g,SelfCoDual=False,Debug=False)
-    wnf.showRelationTable()
-    wnf.showScores()
-    g.showRelationTable()
-    print(wc.copelandOrder)
-    print(wnf.netFlowsOrder)
-    wc.showTransitiveDigraph()
-    wnf.showTransitiveDigraph()
-    print(g.computeOrdinalCorrelation(wc))
-    print(g.computeOrdinalCorrelation(wnf))
+    cop.showScores()
+##    wnf = WeakNetFlowsOrder(g,SelfCoDual=False,Debug=False)
+##    wnf.showRelationTable()
+##    wnf.showScores()
+##    g.showRelationTable()
+##    print(wc.copelandOrder)
+##    print(wnf.netFlowsOrder)
+##    wc.showTransitiveDigraph()
+##    wnf.showTransitiveDigraph()
+##    print(g.computeOrdinalCorrelation(wc))
+##    print(g.computeOrdinalCorrelation(wnf))
 
 ##    Threading=False
 ##    t = PerformanceTableau('auditor2_2')
