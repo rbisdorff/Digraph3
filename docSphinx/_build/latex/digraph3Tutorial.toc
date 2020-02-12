@@ -39,12 +39,12 @@
 \contentsline {subsection}{\numberline {5.5}Generating random linearly ranked performances}{47}{subsection.5.5}
 \contentsline {section}{\numberline {6}Ranking with multiple incommensurable criteria}{47}{section.6}
 \contentsline {subsection}{\numberline {6.1}The ranking problem}{48}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}The Copeland ranking}{50}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.2}The \sphinxstyleemphasis {Copeland} ranking}{50}{subsection.6.2}
 \contentsline {subsection}{\numberline {6.3}The \sphinxstyleemphasis {NetFlows} ranking}{51}{subsection.6.3}
-\contentsline {subsection}{\numberline {6.4}Kemeny rankings}{51}{subsection.6.4}
-\contentsline {subsection}{\numberline {6.5}Slater rankings}{53}{subsection.6.5}
-\contentsline {subsection}{\numberline {6.6}Kohler\IeC {\textquoteright }s ranking\sphinxhyphen {}by\sphinxhyphen {}choosing rule}{54}{subsection.6.6}
-\contentsline {subsection}{\numberline {6.7}Tideman\IeC {\textquoteright }s Ranked\sphinxhyphen {}Pairs rule}{55}{subsection.6.7}
+\contentsline {subsection}{\numberline {6.4}\sphinxstyleemphasis {Kemeny} rankings}{52}{subsection.6.4}
+\contentsline {subsection}{\numberline {6.5}\sphinxstyleemphasis {Slater} rankings}{53}{subsection.6.5}
+\contentsline {subsection}{\numberline {6.6}\sphinxstyleemphasis {Kohler} \IeC {\textquoteleft }s ranking\sphinxhyphen {}by\sphinxhyphen {}choosing rule}{54}{subsection.6.6}
+\contentsline {subsection}{\numberline {6.7}\sphinxstyleemphasis {Tideman} \IeC {\textquoteleft }s ranked\sphinxhyphen {}pairs rule}{55}{subsection.6.7}
 \contentsline {subsection}{\numberline {6.8}Ranking big performance tableaux}{56}{subsection.6.8}
 \contentsline {section}{\numberline {7}HPC ranking with big outranking digraphs}{58}{section.7}
 \contentsline {subsection}{\numberline {7.1}C\sphinxhyphen {}compiled Python modules}{58}{subsection.7.1}

@@ -1720,7 +1720,7 @@ Let us consider a didactic outranking digraph generated from a random Cost-Benef
 
    >>> from outrankingDigraphs import *
    >>> t = RandomCBPerformanceTableau(numberOfActions=9,
-   ...                                numberOfCriteria=13,seed=2)    
+   ...                                numberOfCriteria=13)    
    >>> g = BipolarOutrankingDigraph(t,Normalized=True)
    >>> g.showRelationTable(ReflexiveTerms=False)
     * ---- Relation Table -----
@@ -1741,8 +1741,8 @@ Some ranking rules will work on the associated Condorcet digraph, i.e. the stric
 .. code-block:: pycon
    :linenos:
 
-   >>> c = PolarisedOutrankingDigraph(g,level=0,KeepValues=False,
-   ...                                StrictCut=True)
+   >>> c = PolarisedOutrankingDigraph(g,level=g.valuationdomain['med'],
+   ...                                KeepValues=False,StrictCut=True)
    >>> c.showRelationTable(ReflexiveTerms=False,IntegerValues=True)
     * ---- Relation Table -----
      S   |  'a1' 'a2' 'a3' 'a4' 'a5' 'a6' 'a7' 'a8' 'a9',   
@@ -1795,10 +1795,10 @@ Several heuristic ranking rules have been proposed for constructing a linear ord
 
 The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland* 's, *Kemeny* 's, *Slater* 's, *Kohler* 's or *Tideman* 's ranking rule.
 
-The Copeland ranking
-....................
+The *Copeland* ranking
+......................
 
-Copeland's rule, the most intuitive one as it works well for any outranking relation which models in fact a linear order, computes for each alternative a score  resulting from the difference between its crisp out-degree (number of validated (+1) crisp outranking situations) and its crisp in-degree (number of validated crisp (+1) outranked situations).
+*Copeland* 's rule, the most intuitive one as it works well for any outranking relation which models in fact a linear order, computes for each alternative a score  resulting from the difference between its crisp out-degree (number of validated (+1) crisp outranking situations) and its crisp in-degree (number of validated crisp (+1) outranked situations).
 
 .. code-block:: pycon
    :linenos:
@@ -1818,11 +1818,11 @@ Copeland's rule, the most intuitive one as it works well for any outranking rela
    >>> cop.showRanking()
     ['a3', 'a1', 'a4', 'a9', 'a5', 'a8', 'a6', 'a2', 'a7']
 
-Alternative *a3* has the best score (+7), followed by alternative *a1* (+3). Alternatives *a4* and *a9* have the same score (+1); following the lexicographic rule, *a4* is hence ranked before *a9*. Same situation is observed for *a5* and *a8* with a score of -1. 
+Alternative *a3* has the best score (+7), followed by alternative *a1* (+3). Alternatives *a4* and *a9* have the same score (+1); following the lexicographic rule, *a4* is hence ranked before *a9*. Same situation is observed for *a5* and *a8* with a score of -1. The *Copeland* scores deliver actually only a unique *weak order*, i.e. a ranking with potential ties. This weak order may be constructed with the :py:class:`transitiveDigraphs.WeakCopelandOrder` class.  
 
-Notice by the way that Copeland scores, as computed in the associated Condorcet relation table or similarly in the codual digraph drawing above, are in fact *invariant* under a *codual*, i.e. the negation of the converse ( - ( ~ *g* ) ) transform of the outranking digraph. 
+Notice by the way that *Copeland* scores, as computed in the associated *Condorcet* relation table or similarly in the codual digraph drawing above, are in fact *invariant* under a *codual*, i.e. the negation of the converse ( - ( ~ *g* ) ) transform of the outranking digraph. 
 
-Copeland's rule actually renders a linear order which is indeed highly correlated, in the ordinal Kendall sense (see [BIS-2012]_), with the given pairwise outranking relation.
+*Copeland* 's rule actually renders a linear order which is indeed highly correlated, in the ordinal *Kendall* sense (see [BIS-2012]_), with the given pairwise outranking relation.
 
 .. code-block:: pycon
 
@@ -1833,7 +1833,7 @@ Copeland's rule actually renders a linear order which is indeed highly correlate
 The *NetFlows* ranking
 ......................
 
-The valued version of the Copeland rule, called **NetFlows** rule, is working directly on the given valued outranking digraph *g*. For each alternative *x* we compute a net flow score that is the sum of the differences between the **outranking** characteristics :math:`r(x\,S\,y)` and the **outranked** characteristics r(*y* S *x*) for all pairs of alternatives where *y* is different from *x*.
+The valued version of the *Copeland* rule, called **NetFlows** rule, is working directly on the given valued outranking digraph *g*. For each alternative *x* we compute a *net flow* score,  i.e. the sum of the differences between the **outranking** characteristics :math:`r(x\,S\,y)` and the **outranked** characteristics r(*y* S *x*) for all pairs of alternatives where *y* is different from *x*.
   
 .. code-block:: pycon
    :linenos:
@@ -1852,18 +1852,25 @@ The valued version of the Copeland rule, called **NetFlows** rule, is working di
      (Decimal('-4.143'), 'a7')]
    >>> nf.showRanking()
     ['a3', 'a9', 'a1', 'a4', 'a8', 'a6', 'a5', 'a2', 'a7']
+
+The *net flow* scores deliver in this example a ranking without ties. It may easily happen however, that we obtain, as with the *Copeland* scores above, only a ranking with ties, which will be resolved by following again the lexicographic rule. In case of ties, it is possible to construct again the corresponding *weak order* with the :py:class:`transitiveDigraphs.WeakNetFlowsOrder` class.
+
+The **NetFlows** ranking is here, in this didactic example, not as much correlated with the given outranking relation as its crisp cousin ranking. 
+
+.. code-block:: pycon
+   :linenos:
+    
    >>> corr = g.computeOrdinalCorrelation(nf)
    >>> print("Fitness of net flows ranking: %.3f" % corr['correlation'])
     Fitness of net flows ranking: 0.828
 
-The **NetFlows** ranking is here, in this didactic example, not as much correlated with the given outranking relation as its crisp cousin ranking. 
 
-To appreciate the effective quality of both the Copeland and the *NetFlows* rankings, it is useful to consider Kemeny's and Slater's optimal ranking rules.
+To appreciate the effective quality of both the *Copeland* and the *NetFlows* rankings, it is useful to consider *Kemeny* 's and *Slater* 's optimal ranking rules.
 
-Kemeny rankings
-...............
+*Kemeny* rankings
+.................
 
-A **Kemeny** ranking is a linear order which is closest, in the sense of the ordinal Kendall distance (see [BIS-2012]_), to the given valued outranking digraph *g*.
+A **Kemeny** ranking is a linear order which is closest, in the sense of the ordinal *Kendall* distance (see [BIS-2012]_), to the given valued outranking digraph *g*.
 
 .. code-block:: pycon
    :linenos:
@@ -1876,7 +1883,7 @@ A **Kemeny** ranking is a linear order which is closest, in the sense of the ord
    >>> print("Fitness of Kemeny's ranking: %.3f" % corr['correlation'])
     Fitness of Kemeny's ranking: 0.9175
 
-So, **+0.9175** is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A Kemeny ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example we hence obtain seven optimal Kemeny rankings with a same maximal Kemeny index of 15.095.
+So, **+0.9175** is the highest possible ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking relation. A *Kemeny* ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example we hence obtain seven optimal *Kemeny* rankings with a same maximal *Kemeny* index of 15.095.
 
 .. code-block:: pycon
    :linenos:
@@ -1892,7 +1899,7 @@ So, **+0.9175** is the highest possible ordinal correlation (fitness) any potent
    >>> ke.maxKemenyIndex
     Decimal('15.095')
 
-We may visualize the partial order defined by the epistemic disjunction of these seven Kemeny rankings (see `transitiveDigraphs module <techDoc.html#module-transitiveDigraphs>`_) as follows.
+We may visualize the partial order defined by the epistemic disjunction of these seven *Kemeny* rankings (see `transitiveDigraphs module <techDoc.html#module-transitiveDigraphs>`_) as follows.
 
 .. code-block:: pycon
    :linenos:
@@ -1917,12 +1924,12 @@ We may visualize the partial order defined by the epistemic disjunction of these
 
    Epistemic disjunction of Kemeny rankings	   
 
-It is interesting to notice that all seven Kemeny rankings place alternative *a1* at rank 1 before alternative *a3*. This is precisely the only inversion that separates the Copeland ranking (see above) from being optimal in the Kemeny sense.
+It is interesting to notice that all seven *Kemeny* rankings place alternative *a1* at rank 1 before alternative *a3*. This is precisely the only inversion that separates the *Copeland* ranking (see above) from being optimal in the *Kemeny* sense.
 
-Slater rankings
-...............
+*Slater* rankings
+.................
 
-The **Slater** ranking rule is similar to Kemeny's, but it is working, instead,  on the associated crisp Condorcet digraph *c*. It renders here the following results.
+The **Slater** ranking rule is similar to *Kemeny* 's, but it is working, instead,  on the associated crisp Condorcet digraph *c*. It renders here the following results.
 
 .. code-block:: pycon
    :linenos:
@@ -1938,7 +1945,7 @@ The **Slater** ranking rule is similar to Kemeny's, but it is working, instead, 
    >>> slw = KemenyOrdersFusion(c,orderLimit=9)
    >>> slw.exportGraphViz('tutorialSlater')
 
-We notice that the first crisp Slater ranking is a rather good fit (+0.844), better apparently than the *NetFlows* ranking. However, there are in fact 174 such potentially optimal Slater rankings. The corresponding epistemic disjunction gives the following partial ordering.
+We notice that the first crisp *Slater* ranking is a rather good fit (+0.844), better apparently than the *NetFlows* ranking. However, there are in fact 174 such potentially optimal *Slater* rankings. The corresponding epistemic disjunction gives the following partial ordering.
 
 .. figure:: tutorialSlater.png
     :width: 150pt
@@ -1950,12 +1957,12 @@ What precise ranking result should we hence adopt ?
 
 *Kemeny* 's as well as *Slater* 's ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 15 objects). 
 
-More efficient ranking heuristics, like the Copeland and the *NetFlows* rules, are therefore needed in practice. 
+More efficient ranking heuristics, like the *Copeland* and the *NetFlows* rules, are therefore needed in practice. 
 
-Kohler's ranking-by-choosing rule
-.................................
+*Kohler* 's ranking-by-choosing rule
+....................................
 
-Kohler's **ranking-by-choosing** rule can be formulated like this. 
+*Kohler* 's **ranking-by-choosing** rule can be formulated like this. 
 
 At step *r* (*r* goes from 1 to *n*) do the following:
 
@@ -1975,12 +1982,12 @@ At step *r* (*r* goes from 1 to *n*) do the following:
    >>> print("Fitness of Kohler's ranking: %.3f" % corr['correlation'])
     Fitness of Kohler's ranking: 0.868
 
-Here, we find a better fitness (0.868) when compared with Slater's (0.844) or the *NetFlows* result (0.828), but not as good as Copeland crisp rule's result (+0.906). 
+Here, we find a better fitness (0.868) when compared with *Slater* 's (0.844) or the *NetFlows* result (0.828), but not as good as *Copeland* crisp rule's result (+0.906). 
 
-Tideman's Ranked-Pairs rule
-...........................
+*Tideman* 's ranked-pairs rule
+..............................
 
-A further ranking heuristic, the **Ranked-Pairs** rule, is based on a prudent incremental construction of linear orders that avoids on the fly any cycling outrankings. The ranking procedure may be formulated as follows:
+A further ranking heuristic, the **RankedPairs** rule, is based on a prudent incremental construction of linear orders that avoids on the fly any cycling outrankings. The ranking procedure may be formulated as follows:
 
     1. Rank the ordered pairs :math:`(x,y)` of alternatives in decreasing order of the outranking characteristic values :math:`r(x\,S\,y)`;
     2. Consider the pairs in that order (ties are resolved by a lexicographic rule):
@@ -2016,7 +2023,7 @@ In our didactic outranking example, we get the following result.
    >>> rp.showRanking()
     ['a1', 'a3', 'a4', 'a9', 'a5', 'a8', 'a2', 'a6', 'a7']
 
-The Ranked-Pairs rule actually renders one of the seven optimal Kemeny rankings as we may verify below.
+The *RankedPairs* rule actually renders one of the seven optimal *Kemeny* rankings as we may verify below.
  
 .. code-block:: pycon
 
@@ -2024,7 +2031,7 @@ The Ranked-Pairs rule actually renders one of the seven optimal Kemeny rankings 
    >>> print("Fitness of Tideman's ranking: %.3f" % corr['correlation'])
     Fitness of Tideman's ranking: 0.918
 
-Unfortunately, the Ranked-Pairs ranking rule is again not efficiently scalable to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only the Copeland and the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the outranking digraph, remain in fact computationally efficient.
+Unfortunately, the *RankedPairs* ranking rule is again *not efficiently scalable* to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only the *Copeland* and the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the outranking digraph, remain in fact computationally efficient.
  
 Ranking big performance tableaux
 ................................
@@ -2093,7 +2100,7 @@ The total run time of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankin
 
 The best decile (]80%-90%]) gathers decision alternatives *49*, *10*, and *52*. Worst decile (]10%-20%]) gathers alternatives *9*, *59*, and *23*.
 
-Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the Copeland and the *NetFlows* rules. The eventually obtained linear ordering (from the worst to best) is the following.
+Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the *Copeland* and the *NetFlows* rules. The eventually obtained linear ordering (from the worst to best) is the following.
   
 .. code-block:: pycon
    :linenos:
@@ -2511,7 +2518,7 @@ With this *optimised* quantile ordering strategy, we obtain now 47 performance e
    >>> print('%.0fkB' % (total_size(qr)/1024) )
     208kB
 
-We observe an even more considerably less voluminous memory occupation: 208kB compared to the 769kB of the SparseIntegerOutrankingDigraph instance. It is opportune, however, to measure the loss of quality of the resulting Copeland ranking when working with sparse outranking digraphs.
+We observe an even more considerably less voluminous memory occupation: 208kB compared to the 769kB of the SparseIntegerOutrankingDigraph instance. It is opportune, however, to measure the loss of quality of the resulting *Copeland* ranking when working with sparse outranking digraphs.
 
 .. code-block:: pycon
    :linenos:
@@ -4689,7 +4696,7 @@ In :numref:`bestWorstOrientation` below, we orient the drawing of the strict out
 
    The strict outranking digraph oriented by its best and worst choice recommendations
 
-The gray arrows in :numref:`bestWorstOrientation`, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a Copeland ranking of the underlying performance tableau (see :ref:`Ranking-Tutorial-label`).
+The gray arrows in :numref:`bestWorstOrientation`, like the one between actions 'a4' and 'a1', represent indeterminate preferential situations. Action 'a1' appears hence to be rather incomparable to all the other, except action 'a7'. It may be interesting to compare this result with a *Copeland* ranking of the underlying performance tableau (see :ref:`Ranking-Tutorial-label`).
 
 .. code-block:: pycon
 

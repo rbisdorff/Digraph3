@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  11 FEB 2020 10:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  12 FEB 2020 09:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1381,35 +1381,34 @@ Package pdftex.def Info: rankingTutorial.png  used on input line 2081.
 the same identifier (name{figure.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.2220 \capstart
+l.2225 \capstart
                 
 <tutorialKemeny.png, id=943, 202.7575pt x 674.52pt>
 File: tutorialKemeny.png Graphic file (type png)
 <use tutorialKemeny.png>
-Package pdftex.def Info: tutorialKemeny.png  used on input line 2222.
+Package pdftex.def Info: tutorialKemeny.png  used on input line 2227.
 (pdftex.def)             Requested size: 100.375pt x 333.92445pt.
- [52]pdfTeX warning (ext4): destination with the same identifier (name{figure.3
-}) has been already used, duplicate ignored
+ [52] [53 <./tutorialKemeny.png>]pdfTeX warning (ext4): destination with the sa
+me identifier (name{figure.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.2249 \capstart
+l.2254 \capstart
                 
-<tutorialSlater.png, id=948, 272.01625pt x 406.51875pt>
+<tutorialSlater.png, id=952, 272.01625pt x 406.51875pt>
 File: tutorialSlater.png Graphic file (type png)
 <use tutorialSlater.png>
-Package pdftex.def Info: tutorialSlater.png  used on input line 2251.
+Package pdftex.def Info: tutorialSlater.png  used on input line 2256.
 (pdftex.def)             Requested size: 150.5625pt x 225.01888pt.
- [53 <./tutorialKemeny.png>] [54 <./tutorialSlater.png>]
-[55] [56] [57] [58]
-Overfull \vbox (0.85008pt too high) detected at line 2551
+ [54 <./tutorialSlater.png>] [55] [56] [57] [58]
+Overfull \vbox (0.85008pt too high) detected at line 2556
  []
 
 [59]
-Overfull \vbox (3.24768pt too high) detected at line 2599
+Overfull \vbox (3.24768pt too high) detected at line 2604
  []
 
 [60]
-Underfull \hbox (badness 8151) in paragraph at lines 2601--2602
+Underfull \hbox (badness 8151) in paragraph at lines 2606--2607
 []\T1/cmr/m/n/12 On a clas-sic intel-i7 equipped PC with four sin-gle threaded 
 cores, the
  []
@@ -1418,15 +1417,15 @@ cores, the
 re.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.2715 \capstart
+l.2720 \capstart
                 
 <sparseRelationMap.png, id=1018, 453.695pt x 865.2325pt>
 File: sparseRelationMap.png Graphic file (type png)
 <use sparseRelationMap.png>
-Package pdftex.def Info: sparseRelationMap.png  used on input line 2717.
+Package pdftex.def Info: sparseRelationMap.png  used on input line 2722.
 (pdftex.def)             Requested size: 338.76343pt x 646.05788pt.
  [63] [64 <./sparseRelationMap.png>] [65]
-Underfull \hbox (badness 10000) in paragraph at lines 2812--2813
+Underfull \hbox (badness 10000) in paragraph at lines 2817--2818
 []\T1/cmr/m/n/12 We pro-vide there-fore the \T1/cmtt/m/n/12 cSparseIntegerOutra
 nkingDigraphs.
  []
@@ -1435,75 +1434,75 @@ nkingDigraphs.
 re.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.2930 \capstart
+l.2935 \capstart
                 
 <rankingRecords.png, id=1049, 748.7975pt x 351.3125pt>
 File: rankingRecords.png Graphic file (type png)
 <use rankingRecords.png>
-Package pdftex.def Info: rankingRecords.png  used on input line 2932.
+Package pdftex.def Info: rankingRecords.png  used on input line 2937.
 (pdftex.def)             Requested size: 263.48267pt x 123.6152pt.
  [68]
-Overfull \vbox (2.55533pt too high) detected at line 2985
+Overfull \vbox (2.55533pt too high) detected at line 2990
  []
 
 [69 <./rankingRecords.png>] [70]
-Underfull \vbox (badness 1590) detected at line 3069
+Underfull \vbox (badness 1590) detected at line 3074
  []
 
 [71]pdfTeX warning (ext4): destination with the same identifier (name{figure.3}
 ) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3082 \capstart
+l.3087 \capstart
                 
 <converse-dual_rel_best10.png, id=1072, 626.34pt x 647.41875pt>
 File: converse-dual_rel_best10.png Graphic file (type png)
 <use converse-dual_rel_best10.png>
-Package pdftex.def Info: converse-dual_rel_best10.png  used on input line 3084.
+Package pdftex.def Info: converse-dual_rel_best10.png  used on input line 3089.
 
 (pdftex.def)             Requested size: 301.12305pt x 311.26128pt.
  [72] [73 <./converse-dual_rel_best10.png>] [74]
-Underfull \hbox (badness 10000) in paragraph at lines 3524--3524
+Underfull \hbox (badness 10000) in paragraph at lines 3529--3529
 []\T1/cmss/m/n/12 Cri-te-
  []
 
 
-Overfull \hbox (5.6132pt too wide) in paragraph at lines 3524--3524
+Overfull \hbox (5.6132pt too wide) in paragraph at lines 3529--3529
 []\T1/cmss/m/n/12 weight| 
  []
 
 
-Overfull \hbox (6.91461pt too wide) in paragraph at lines 3524--3524
+Overfull \hbox (6.91461pt too wide) in paragraph at lines 3529--3529
 []\T1/cmr/m/n/12 35.0K\TS1/cmr/m/n/12 ¿| 
  []
 
 
-Overfull \hbox (6.91461pt too wide) in paragraph at lines 3524--3524
+Overfull \hbox (6.91461pt too wide) in paragraph at lines 3529--3529
 []\T1/cmr/m/n/12 17.8K\TS1/cmr/m/n/12 ¿| 
  []
 
 
-Overfull \hbox (5.8773pt too wide) in paragraph at lines 3524--3524
+Overfull \hbox (5.8773pt too wide) in paragraph at lines 3529--3529
 []\T1/cmr/m/n/12 6.7K\TS1/cmr/m/n/12 ¿| 
  []
 
 
-Overfull \hbox (6.91461pt too wide) in paragraph at lines 3524--3524
+Overfull \hbox (6.91461pt too wide) in paragraph at lines 3529--3529
 []\T1/cmr/m/n/12 14.1K\TS1/cmr/m/n/12 ¿| 
  []
 
 
-Overfull \hbox (6.91461pt too wide) in paragraph at lines 3524--3524
+Overfull \hbox (6.91461pt too wide) in paragraph at lines 3529--3529
 []\T1/cmr/m/n/12 34.8K\TS1/cmr/m/n/12 ¿| 
  []
 
 
-Overfull \hbox (6.91461pt too wide) in paragraph at lines 3524--3524
+Overfull \hbox (6.91461pt too wide) in paragraph at lines 3529--3529
 []\T1/cmr/m/n/12 18.6K\TS1/cmr/m/n/12 ¿| 
  []
 
 
-Overfull \hbox (6.91461pt too wide) in paragraph at lines 3524--3524
+Overfull \hbox (6.91461pt too wide) in paragraph at lines 3529--3529
 []\T1/cmr/m/n/12 12.0K\TS1/cmr/m/n/12 ¿| 
  []
 
@@ -1511,49 +1510,49 @@ Overfull \hbox (6.91461pt too wide) in paragraph at lines 3524--3524
 re.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3592 \capstart
+l.3597 \capstart
                 
 <officeChoiceHeatmap.png, id=1115, 700.6175pt x 354.32375pt>
 File: officeChoiceHeatmap.png Graphic file (type png)
 <use officeChoiceHeatmap.png>
-Package pdftex.def Info: officeChoiceHeatmap.png  used on input line 3594.
+Package pdftex.def Info: officeChoiceHeatmap.png  used on input line 3599.
 (pdftex.def)             Requested size: 376.40381pt x 190.3642pt.
  [77 <./officeChoiceHeatmap.png>]pdfTeX warning (ext4): destination with the sa
 me identifier (name{figure.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3617 \capstart
+l.3622 \capstart
                 
 <officeChoiceOutranking.png, id=1123, 437.635pt x 247.92625pt>
 File: officeChoiceOutranking.png Graphic file (type png)
 <use officeChoiceOutranking.png>
-Package pdftex.def Info: officeChoiceOutranking.png  used on input line 3619.
+Package pdftex.def Info: officeChoiceOutranking.png  used on input line 3624.
 (pdftex.def)             Requested size: 301.12305pt x 170.59262pt.
  [78 <./officeChoiceOutranking.png>]pdfTeX warning (ext4): destination with the
  same identifier (name{figure.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.3650 \capstart
+l.3655 \capstart
                 
 <officeChoice.png, id=1135, 511.9125pt x 674.52pt>
 File: officeChoice.png Graphic file (type png)
 <use officeChoice.png>
-Package pdftex.def Info: officeChoice.png  used on input line 3652.
+Package pdftex.def Info: officeChoice.png  used on input line 3657.
 (pdftex.def)             Requested size: 225.84229pt x 297.58223pt.
  [79 <./officeChoice.png>] [80] [81] [82] [83]pdfTeX warning (ext4): destinatio
 n with the same identifier (name{figure.4}) has been already used, duplicate ig
 nored
 <to be read again> 
                    \relax 
-l.3863 \capstart
+l.3868 \capstart
                 
 <officeChoiceRanking.png, id=1164, 233.87375pt x 404.51125pt>
 File: officeChoiceRanking.png Graphic file (type png)
 <use officeChoiceRanking.png>
-Package pdftex.def Info: officeChoiceRanking.png  used on input line 3865.
+Package pdftex.def Info: officeChoiceRanking.png  used on input line 3870.
 (pdftex.def)             Requested size: 150.56152pt x 260.42322pt.
  [84 <./officeChoiceRanking.png>] [85] [86] [87]
-Underfull \hbox (badness 10000) in paragraph at lines 4074--4075
+Underfull \hbox (badness 10000) in paragraph at lines 4079--4080
 []\T1/cmr/m/n/12 Parameter \T1/cmr/m/it/12 his-to-ry-Size \T1/cmr/m/n/12 (see L
 ine 6) of the \T1/cmtt/m/n/12 performanceQuantiles.
  []
@@ -1562,33 +1561,33 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
 s been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.4083 \capstart
+l.4088 \capstart
                 
 <examplePerfQuantiles.png, id=1200, 426.59375pt x 331.2375pt>
 File: examplePerfQuantiles.png Graphic file (type png)
 <use examplePerfQuantiles.png>
-Package pdftex.def Info: examplePerfQuantiles.png  used on input line 4085.
+Package pdftex.def Info: examplePerfQuantiles.png  used on input line 4090.
 (pdftex.def)             Requested size: 301.12305pt x 233.82571pt.
  [88 <./examplePerfQuantiles.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 4095--4097
+Underfull \hbox (badness 10000) in paragraph at lines 4100--4102
 \T1/cmr/bx/n/12 Note:  \T1/cmr/m/n/12 It is im-por-tant to no-tice that the \T1
 /cmtt/m/n/12 sortingDigraphs.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4095--4097
+Underfull \hbox (badness 10000) in paragraph at lines 4100--4102
 \T1/cmtt/m/n/12 OutrankingDigraph \T1/cmr/m/n/12 class, does not in-herit from 
 the generic \T1/cmtt/m/n/12 perfTabs.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4095--4097
+Underfull \hbox (badness 10000) in paragraph at lines 4100--4102
 \T1/cmtt/m/n/12 PerformanceTableau \T1/cmr/m/n/12 class, but in-stead from the 
 \T1/cmtt/m/n/12 performanceQuantiles.
  []
 
 
-Underfull \hbox (badness 7851) in paragraph at lines 4095--4097
+Underfull \hbox (badness 7851) in paragraph at lines 4100--4102
 \T1/cmtt/m/n/12 PerformanceQuantiles \T1/cmr/m/n/12 class. The \T1/cmr/bx/n/12 
 ac-tions \T1/cmr/m/n/12 in such a \T1/cmtt/m/n/12 sortingDigraphs.
  []
@@ -1597,15 +1596,15 @@ ac-tions \T1/cmr/m/n/12 in such a \T1/cmtt/m/n/12 sortingDigraphs.
 re.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.4217 \capstart
+l.4222 \capstart
                 
 <heatMap1.png, id=1218, 470.75874pt x 625.33624pt>
 File: heatMap1.png Graphic file (type png)
 <use heatMap1.png>
-Package pdftex.def Info: heatMap1.png  used on input line 4219.
+Package pdftex.def Info: heatMap1.png  used on input line 4224.
 (pdftex.def)             Requested size: 301.12305pt x 400.0039pt.
  [91]
-Underfull \hbox (badness 10000) in paragraph at lines 4222--4223
+Underfull \hbox (badness 10000) in paragraph at lines 4227--4228
 []\T1/cmr/m/n/12 Using fur-ther-more a spe-cialised ver-sion of the \T1/cmtt/m/
 n/12 transitiveDigraphs.
  []
@@ -1614,83 +1613,83 @@ pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
 s been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.4233 \capstart
+l.4238 \capstart
                 
 <normedRatingDigraph.png, id=1225, 475.7775pt x 648.4225pt>
 File: normedRatingDigraph.png Graphic file (type png)
 <use normedRatingDigraph.png>
-Package pdftex.def Info: normedRatingDigraph.png  used on input line 4235.
+Package pdftex.def Info: normedRatingDigraph.png  used on input line 4240.
 (pdftex.def)             Requested size: 376.40381pt x 513.01001pt.
  [92 <./heatMap1.png>] [93 <./normedRatingDigraph.png>]pdfTeX warning (ext4): d
 estination with the same identifier (name{figure.4}) has been already used, dup
 licate ignored
 <to be read again> 
                    \relax 
-l.4353 \capstart
+l.4358 \capstart
                 
 <heatMap2.png, id=1238, 482.80376pt x 793.96625pt>
 File: heatMap2.png Graphic file (type png)
 <use heatMap2.png>
-Package pdftex.def Info: heatMap2.png  used on input line 4355.
+Package pdftex.def Info: heatMap2.png  used on input line 4360.
 (pdftex.def)             Requested size: 301.12305pt x 495.21004pt.
  [94] [95 <./heatMap2.png>] [96]pdfTeX warning (ext4): destination with the sam
 e identifier (name{figure.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.4477 \capstart
+l.4482 \capstart
                 
 <tutorialGraph.png, id=1271, 398.48875pt x 260.975pt>
 File: tutorialGraph.png Graphic file (type png)
 <use tutorialGraph.png>
-Package pdftex.def Info: tutorialGraph.png  used on input line 4479.
+Package pdftex.def Info: tutorialGraph.png  used on input line 4484.
 (pdftex.def)             Requested size: 301.12305pt x 197.21611pt.
  [97 <./tutorialGraph.png>] [98]pdfTeX warning (ext4): destination with the sam
 e identifier (name{figure.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.4565 \capstart
+l.4570 \capstart
                 
 <tutorial-3-coloring.png, id=1280, 398.48875pt x 276.03125pt>
 File: tutorial-3-coloring.png Graphic file (type png)
 <use tutorial-3-coloring.png>
-Package pdftex.def Info: tutorial-3-coloring.png  used on input line 4567.
+Package pdftex.def Info: tutorial-3-coloring.png  used on input line 4572.
 (pdftex.def)             Requested size: 301.12305pt x 208.59395pt.
  [99 <./tutorial-3-coloring.png>]pdfTeX warning (ext4): destination with the sa
 me identifier (name{figure.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.4591 \capstart
+l.4596 \capstart
                 
 <tutorial-2-coloring.png, id=1286, 398.48875pt x 276.03125pt>
 File: tutorial-2-coloring.png Graphic file (type png)
 <use tutorial-2-coloring.png>
-Package pdftex.def Info: tutorial-2-coloring.png  used on input line 4593.
+Package pdftex.def Info: tutorial-2-coloring.png  used on input line 4598.
 (pdftex.def)             Requested size: 301.12305pt x 208.59395pt.
  [100 <./tutorial-2-coloring.png>] [101] [102]pdfTeX warning (ext4): destinatio
 n with the same identifier (name{figure.4}) has been already used, duplicate ig
 nored
 <to be read again> 
                    \relax 
-l.4736 \capstart
+l.4741 \capstart
                 
 <maxMatchingcycleGraph.png, id=1301, 441.65pt x 487.8225pt>
 File: maxMatchingcycleGraph.png Graphic file (type png)
 <use maxMatchingcycleGraph.png>
-Package pdftex.def Info: maxMatchingcycleGraph.png  used on input line 4738.
+Package pdftex.def Info: maxMatchingcycleGraph.png  used on input line 4743.
 (pdftex.def)             Requested size: 225.84229pt x 249.4561pt.
  [103 <./maxMatchingcycleGraph.png>]pdfTeX warning (ext4): destination with the
  same identifier (name{figure.5}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.4765 \capstart
+l.4770 \capstart
                 
 <grid-15-15-ising.png, id=1307, 674.52pt x 595.22375pt>
 File: grid-15-15-ising.png Graphic file (type png)
 <use grid-15-15-ising.png>
-Package pdftex.def Info: grid-15-15-ising.png  used on input line 4767.
+Package pdftex.def Info: grid-15-15-ising.png  used on input line 4772.
 (pdftex.def)             Requested size: 451.68457pt x 398.58896pt.
  [104]
-Overfull \vbox (1.8217pt too high) detected at line 4815
+Overfull \vbox (1.8217pt too high) detected at line 4820
  []
 
 [105 <./grid-15-15-ising.png>] [106] [107]pdfTeX warning (ext4): destination wi
@@ -1698,365 +1697,365 @@ th the same identifier (name{figure.1}) has been already used, duplicate ignore
 d
 <to be read again> 
                    \relax 
-l.4883 \capstart
+l.4888 \capstart
                 
 <cg12.png, id=1337, 631.35875pt x 674.52pt>
 File: cg12.png Graphic file (type png)
 <use cg12.png>
-Package pdftex.def Info: cg12.png  used on input line 4885.
+Package pdftex.def Info: cg12.png  used on input line 4890.
 (pdftex.def)             Requested size: 301.12305pt x 321.70746pt.
  [108 <./cg12.png>] [109]
-Overfull \vbox (0.55684pt too high) detected at line 5008
+Overfull \vbox (0.55684pt too high) detected at line 5013
  []
 
 [110]pdfTeX warning (ext4): destination with the same identifier (name{figure.2
 }) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.5014 \capstart
+l.5019 \capstart
                 
 <c12.png, id=1359, 372.1905pt x 341.47575pt>
 File: c12.png Graphic file (type png)
 <use c12.png>
-Package pdftex.def Info: c12.png  used on input line 5016.
+Package pdftex.def Info: c12.png  used on input line 5021.
 (pdftex.def)             Requested size: 301.12305pt x 276.27078pt.
  [111 <./c12.png (PNG copy)>]pdfTeX warning (ext4): destination with the same i
 dentifier (name{figure.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.5070 \capstart
+l.5075 \capstart
                 
 <random3RegularGraph.png, id=1376, 493.845pt x 386.44376pt>
 File: random3RegularGraph.png Graphic file (type png)
 <use random3RegularGraph.png>
-Package pdftex.def Info: random3RegularGraph.png  used on input line 5072.
+Package pdftex.def Info: random3RegularGraph.png  used on input line 5077.
 (pdftex.def)             Requested size: 263.48267pt x 206.17633pt.
  [112]pdfTeX warning (ext4): destination with the same identifier (name{figure.
 2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.5091 \capstart
+l.5096 \capstart
                 
 <random3RegularGraph-mis.png, id=1388, 493.845pt x 386.44376pt>
 File: random3RegularGraph-mis.png Graphic file (type png)
 <use random3RegularGraph-mis.png>
-Package pdftex.def Info: random3RegularGraph-mis.png  used on input line 5093.
+Package pdftex.def Info: random3RegularGraph-mis.png  used on input line 5098.
 (pdftex.def)             Requested size: 263.48267pt x 206.17633pt.
  [113 <./random3RegularGraph.png> <./random3RegularGraph-mis.png>]
-Underfull \vbox (badness 1675) detected at line 5194
+Underfull \vbox (badness 1675) detected at line 5199
  []
 
 [114]
-Underfull \vbox (badness 10000) detected at line 5194
+Underfull \vbox (badness 10000) detected at line 5199
  []
 
 
-Underfull \vbox (badness 10000) detected at line 5194
+Underfull \vbox (badness 10000) detected at line 5199
  []
 
 [115]pdfTeX warning (ext4): destination with the same identifier (name{figure.3
 }) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.5200 \capstart
+l.5205 \capstart
                 
 <random3RegularGraphKernelOrbit.png, id=1408, 989.6975pt x 386.44376pt>
 File: random3RegularGraphKernelOrbit.png Graphic file (type png)
 <use random3RegularGraphKernelOrbit.png>
 Package pdftex.def Info: random3RegularGraphKernelOrbit.png  used on input line
- 5202.
+ 5207.
 (pdftex.def)             Requested size: 452.97095pt x 176.87pt.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
 s been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.5224 \capstart
+l.5229 \capstart
                 
 File: maxMatchingcycleGraph.png Graphic file (type png)
 <use maxMatchingcycleGraph.png>
-Package pdftex.def Info: maxMatchingcycleGraph.png  used on input line 5226.
+Package pdftex.def Info: maxMatchingcycleGraph.png  used on input line 5231.
 (pdftex.def)             Requested size: 225.84229pt x 249.4561pt.
  [116 <./random3RegularGraphKernelOrbit.png>] [117] [118]
 [119]pdfTeX warning (ext4): destination with the same identifier (name{figure.5
 }) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.5376 \capstart
+l.5381 \capstart
                 
 <dualChordlessCircuit.png, id=1433, 382.42876pt x 345.29pt>
 File: dualChordlessCircuit.png Graphic file (type png)
 <use dualChordlessCircuit.png>
-Package pdftex.def Info: dualChordlessCircuit.png  used on input line 5378.
+Package pdftex.def Info: dualChordlessCircuit.png  used on input line 5383.
 (pdftex.def)             Requested size: 263.48267pt x 237.90788pt.
  [120 <./dualChordlessCircuit.png>]
 <weakChordlessCircuit.png, id=1442, 791.95876pt x 404.51125pt>
 File: weakChordlessCircuit.png Graphic file (type png)
 <use weakChordlessCircuit.png>
-Package pdftex.def Info: weakChordlessCircuit.png  used on input line 5405.
+Package pdftex.def Info: weakChordlessCircuit.png  used on input line 5410.
 (pdftex.def)             Requested size: 414.04419pt x 211.48276pt.
  [121 <./weakChordlessCircuit.png>]
 <randomLaterality.png, id=1451, 382.42876pt x 601.24625pt>
 File: randomLaterality.png Graphic file (type png)
 <use randomLaterality.png>
-Package pdftex.def Info: randomLaterality.png  used on input line 5434.
+Package pdftex.def Info: randomLaterality.png  used on input line 5439.
 (pdftex.def)             Requested size: 225.84229pt x 355.06247pt.
  [122 <./randomLaterality.png>]
-Overfull \vbox (1.2909pt too high) detected at line 5489
+Overfull \vbox (1.2909pt too high) detected at line 5494
  []
 
 [123]
 <orientedLaterality.png, id=1466, 382.42876pt x 502.87875pt>
 File: orientedLaterality.png Graphic file (type png)
 <use orientedLaterality.png>
-Package pdftex.def Info: orientedLaterality.png  used on input line 5506.
+Package pdftex.def Info: orientedLaterality.png  used on input line 5511.
 (pdftex.def)             Requested size: 225.84229pt x 296.97212pt.
  [124 <./orientedLaterality.png>]
 <randomOutranking.png, id=1475, 945.5325pt x 389.455pt>
 File: randomOutranking.png Graphic file (type png)
 <use randomOutranking.png>
-Package pdftex.def Info: randomOutranking.png  used on input line 5536.
+Package pdftex.def Info: randomOutranking.png  used on input line 5541.
 (pdftex.def)             Requested size: 414.04419pt x 170.54065pt.
 <tutOutranking.png, id=1480, 427.5975pt x 601.24625pt>
 File: tutOutranking.png Graphic file (type png)
 <use tutOutranking.png>
-Package pdftex.def Info: tutOutranking.png  used on input line 5553.
+Package pdftex.def Info: tutOutranking.png  used on input line 5558.
 (pdftex.def)             Requested size: 225.84229pt x 317.55807pt.
  [125 <./randomOutranking.png>] [126 <./tutOutranking.png>]
 <bestWorstOrientation.png, id=1496, 384.43625pt x 403.5075pt>
 File: bestWorstOrientation.png Graphic file (type png)
 <use bestWorstOrientation.png>
-Package pdftex.def Info: bestWorstOrientation.png  used on input line 5617.
+Package pdftex.def Info: bestWorstOrientation.png  used on input line 5622.
 (pdftex.def)             Requested size: 225.84229pt x 237.05145pt.
  [127]
 <outrankingResult.png, id=1506, 850.17625pt x 486.81876pt>
 File: outrankingResult.png Graphic file (type png)
 <use outrankingResult.png>
-Package pdftex.def Info: outrankingResult.png  used on input line 5631.
+Package pdftex.def Info: outrankingResult.png  used on input line 5636.
 (pdftex.def)             Requested size: 414.04419pt x 237.08734pt.
  [128 <./bestWorstOrientation.png> <./outrankingResult.png>] [129] [130] [131]p
 dfTeX warning (ext4): destination with the same identifier (name{figure.1}) has
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.5815 \capstart
+l.5820 \capstart
                 
 <randomSplitGraph.png, id=1545, 398.48875pt x 381.425pt>
 File: randomSplitGraph.png Graphic file (type png)
 <use randomSplitGraph.png>
-Package pdftex.def Info: randomSplitGraph.png  used on input line 5817.
+Package pdftex.def Info: randomSplitGraph.png  used on input line 5822.
 (pdftex.def)             Requested size: 263.48267pt x 252.20688pt.
  [132] [133 <./randomSplitGraph.png>]pdfTeX warning (ext4): destination with th
 e same identifier (name{figure.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.5902 \capstart
+l.5907 \capstart
                 
 <berge1.png, id=1563, 398.48875pt x 237.88875pt>
 File: berge1.png Graphic file (type png)
 <use berge1.png>
-Package pdftex.def Info: berge1.png  used on input line 5904.
+Package pdftex.def Info: berge1.png  used on input line 5909.
 (pdftex.def)             Requested size: 301.12305pt x 179.77005pt.
  [134] [135 <./berge1.png>]pdfTeX warning (ext4): destination with the same ide
 ntifier (name{figure.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.5949 \capstart
+l.5954 \capstart
                 
 <berge2.png, id=1573, 398.48875pt x 247.92625pt>
 File: berge2.png Graphic file (type png)
 <use berge2.png>
-Package pdftex.def Info: berge2.png  used on input line 5951.
+Package pdftex.def Info: berge2.png  used on input line 5956.
 (pdftex.def)             Requested size: 301.12305pt x 187.3553pt.
  [136 <./berge2.png>]pdfTeX warning (ext4): destination with the same identifie
 r (name{figure.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.5982 \capstart
+l.5987 \capstart
                 
 <permutationGraph.png, id=1580, 398.48875pt x 259.97125pt>
 File: permutationGraph.png Graphic file (type png)
 <use permutationGraph.png>
-Package pdftex.def Info: permutationGraph.png  used on input line 5984.
+Package pdftex.def Info: permutationGraph.png  used on input line 5989.
 (pdftex.def)             Requested size: 225.84229pt x 147.33624pt.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
 s been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.6006 \capstart
+l.6011 \capstart
                 
 <coloredPermutationGraph.png, id=1582, 398.48875pt x 259.97125pt>
 File: coloredPermutationGraph.png Graphic file (type png)
 <use coloredPermutationGraph.png>
-Package pdftex.def Info: coloredPermutationGraph.png  used on input line 6008.
+Package pdftex.def Info: coloredPermutationGraph.png  used on input line 6013.
 (pdftex.def)             Requested size: 225.84229pt x 147.33624pt.
  [137 <./permutationGraph.png> <./coloredPermutationGraph.png>]pdfTeX warning (
 ext4): destination with the same identifier (name{figure.6}) has been already u
 sed, duplicate ignored
 <to be read again> 
                    \relax 
-l.6022 \capstart
+l.6027 \capstart
                 
 <perm_permutationGraph.png, id=1591, 460.72125pt x 239.89626pt>
 File: perm_permutationGraph.png Graphic file (type png)
 <use perm_permutationGraph.png>
-Package pdftex.def Info: perm_permutationGraph.png  used on input line 6024.
+Package pdftex.def Info: perm_permutationGraph.png  used on input line 6029.
 (pdftex.def)             Requested size: 301.12305pt x 156.79092pt.
 
-Overfull \vbox (10.53098pt too high) detected at line 6050
+Overfull \vbox (10.53098pt too high) detected at line 6055
  []
 
 [138 <./perm_permutationGraph.png>]pdfTeX warning (ext4): destination with the 
 same identifier (name{figure.7}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.6054 \capstart
+l.6059 \capstart
                 
 <oriented_permutationGraph.png, id=1599, 209.78375pt x 308.15125pt>
 File: oriented_permutationGraph.png Graphic file (type png)
 <use oriented_permutationGraph.png>
-Package pdftex.def Info: oriented_permutationGraph.png  used on input line 6056
+Package pdftex.def Info: oriented_permutationGraph.png  used on input line 6061
 .
 (pdftex.def)             Requested size: 150.56152pt x 221.1587pt.
  [139 <./oriented_permutationGraph.png>]pdfTeX warning (ext4): destination with
  the same identifier (name{figure.8}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.6097 \capstart
+l.6102 \capstart
                 
 <randomGraph4335.png, id=1605, 398.48875pt x 329.23pt>
 File: randomGraph4335.png Graphic file (type png)
 <use randomGraph4335.png>
-Package pdftex.def Info: randomGraph4335.png  used on input line 6099.
+Package pdftex.def Info: randomGraph4335.png  used on input line 6104.
 (pdftex.def)             Requested size: 301.12305pt x 248.7957pt.
  [140 <./randomGraph4335.png>]pdfTeX warning (ext4): destination with the same 
 identifier (name{figure.9}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.6127 \capstart
+l.6132 \capstart
                 
 <transOrientGraph.png, id=1614, 398.48875pt x 329.23pt>
 File: transOrientGraph.png Graphic file (type png)
 <use transOrientGraph.png>
-Package pdftex.def Info: transOrientGraph.png  used on input line 6129.
+Package pdftex.def Info: transOrientGraph.png  used on input line 6134.
 (pdftex.def)             Requested size: 301.12305pt x 248.7957pt.
  [141 <./transOrientGraph.png>]pdfTeX warning (ext4): destination with the same
  identifier (name{figure.10}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.6158 \capstart
+l.6163 \capstart
                 
 <transOrientDualGraph.png, id=1621, 441.65pt x 277.035pt>
 File: transOrientDualGraph.png Graphic file (type png)
 <use transOrientDualGraph.png>
-Package pdftex.def Info: transOrientDualGraph.png  used on input line 6160.
+Package pdftex.def Info: transOrientDualGraph.png  used on input line 6165.
 (pdftex.def)             Requested size: 301.12305pt x 188.89279pt.
  [142 <./transOrientDualGraph.png>] [143]pdfTeX warning (ext4): destination wit
 h the same identifier (name{figure.11}) has been already used, duplicate ignore
 d
 <to be read again> 
                    \relax 
-l.6249 \capstart
+l.6254 \capstart
                 
 <isomorphicPerms.png, id=1637, 921.4425pt x 396.48125pt>
 File: isomorphicPerms.png Graphic file (type png)
 <use isomorphicPerms.png>
-Package pdftex.def Info: isomorphicPerms.png  used on input line 6251.
+Package pdftex.def Info: isomorphicPerms.png  used on input line 6256.
 (pdftex.def)             Requested size: 452.95897pt x 194.90668pt.
  [144 <./isomorphicPerms.png>]pdfTeX warning (ext4): destination with the same 
 identifier (name{figure.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.6304 \capstart
+l.6309 \capstart
                 
 <tutRandomTree.png, id=1657, 398.48875pt x 578.16pt>
 File: tutRandomTree.png Graphic file (type png)
 <use tutRandomTree.png>
-Package pdftex.def Info: tutRandomTree.png  used on input line 6306.
+Package pdftex.def Info: tutRandomTree.png  used on input line 6311.
 (pdftex.def)             Requested size: 225.84229pt x 327.66672pt.
  [145 <./tutRandomTree.png>]pdfTeX warning (ext4): destination with the same id
 entifier (name{figure.2}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.6347 \capstart
+l.6352 \capstart
                 
 <tutPruefTree.png, id=1665, 478.78876pt x 421.575pt>
 File: tutPruefTree.png Graphic file (type png)
 <use tutPruefTree.png>
-Package pdftex.def Info: tutPruefTree.png  used on input line 6349.
+Package pdftex.def Info: tutPruefTree.png  used on input line 6354.
 (pdftex.def)             Requested size: 263.48267pt x 231.9956pt.
  [146] [147 <./tutPruefTree.png>]pdfTeX warning (ext4): destination with the sa
 me identifier (name{figure.3}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.6401 \capstart
+l.6406 \capstart
                 
 <test62.png, id=1680, 398.48875pt x 368.37625pt>
 File: test62.png Graphic file (type png)
 <use test62.png>
-Package pdftex.def Info: test62.png  used on input line 6403.
+Package pdftex.def Info: test62.png  used on input line 6408.
 (pdftex.def)             Requested size: 263.48267pt x 243.57874pt.
  [148 <./test62.png>]pdfTeX warning (ext4): destination with the same identifie
 r (name{figure.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.6456 \capstart
+l.6461 \capstart
                 
 <randomSpanningTree.png, id=1690, 398.48875pt x 333.245pt>
 File: randomSpanningTree.png Graphic file (type png)
 <use randomSpanningTree.png>
-Package pdftex.def Info: randomSpanningTree.png  used on input line 6458.
+Package pdftex.def Info: randomSpanningTree.png  used on input line 6463.
 (pdftex.def)             Requested size: 225.84229pt x 188.86345pt.
  [149 <./randomSpanningTree.png>]pdfTeX warning (ext4): destination with the sa
 me identifier (name{figure.5}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.6483 \capstart
+l.6488 \capstart
                 
 <spanningForest.png, id=1698, 587.19376pt x 499.8675pt>
 File: spanningForest.png Graphic file (type png)
 <use spanningForest.png>
-Package pdftex.def Info: spanningForest.png  used on input line 6485.
+Package pdftex.def Info: spanningForest.png  used on input line 6490.
 (pdftex.def)             Requested size: 263.48267pt x 224.29759pt.
  [150 <./spanningForest.png>] [151]pdfTeX warning (ext4): destination with the 
 same identifier (name{figure.6}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.6562 \capstart
+l.6567 \capstart
                 
 <bestDeterminedSpanningTree.png, id=1716, 398.48875pt x 280.04625pt>
 File: bestDeterminedSpanningTree.png Graphic file (type png)
 <use bestDeterminedSpanningTree.png>
 Package pdftex.def Info: bestDeterminedSpanningTree.png  used on input line 656
-4.
+9.
 (pdftex.def)             Requested size: 263.48267pt x 185.17293pt.
  [152 <./bestDeterminedSpanningTree.png>]
-Underfull \hbox (badness 7362) in paragraph at lines 6594--6595
+Underfull \hbox (badness 7362) in paragraph at lines 6599--6600
 \T1/cmr/m/it/12 te-ger Se-quences\T1/cmr/m/n/12 , Vol. 11 Ar-ti-cle 08.5.7 ([][
 ]openly ac-ces-si-ble here[][]
  []
 
 
-Underfull \hbox (badness 5105) in paragraph at lines 6600--6601
+Underfull \hbox (badness 5105) in paragraph at lines 6605--6606
 \T1/cmr/m/n/12 nels from bipo-lar val-ued di-graphs^^Q. \T1/cmr/m/it/12 Eu-ro-p
 ean Jour-nal of Op-er-a-
  []
 
 [153] (./digraph3Tutorial.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 6623.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 6628.
  [154]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 6623.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 6628.
  (./digraph3Tutorial.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 6623.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 6623.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 6628.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 6628.
 
 Package rerunfilecheck Info: File `digraph3Tutorial.out' has not changed.
-(rerunfilecheck)             Checksum: F37684231E5D552AACEA0AAF5B53E3AB;19489.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 6623.
+(rerunfilecheck)             Checksum: B94FB701724CEBCF5B9657905BD8F189;19505.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 6628.
  ) 
 Here is how much of TeX's memory you used:
  14945 strings out of 494244
  213450 string characters out of 6161779
- 463523 words of memory out of 5000000
+ 463540 words of memory out of 5000000
  17479 multiletter control sequences out of 15000+600000
  32665 words of font info for 77 fonts, out of 8000000 for 9000
  396 hyphenation exceptions out of 8191
@@ -2081,8 +2080,8 @@ live2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> </home/bisdorff/
 rff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit1200.600pk> </home/b
 isdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </ho
 me/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecso1728.600pk> 
-</home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600
-pk> </home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200
+</home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600
+pk> </home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200
 .600pk> </home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt
 1200.600pk> </home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/
 ecrm1200.600pk> </home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen
@@ -2101,9 +2100,9 @@ sfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on digraph3Tutorial.pdf (155 pages, 3238588 bytes).
+Output written on digraph3Tutorial.pdf (155 pages, 3244890 bytes).
 PDF statistics:
- 2906 PDF objects out of 2984 (max. 8388607)
+ 2919 PDF objects out of 2984 (max. 8388607)
  1672 compressed objects within 17 object streams
  414 named destinations out of 1000 (max. 500000)
  1111 words of extra memory for PDF output out of 10000 (max. 10000000)

@@ -843,9 +843,9 @@ class CopelandOrder(LinearOrder):
         if coDual:
             otherCoDual = CoDualDigraph(other)
             otherRelation = otherCoDual.relation
-##            if Debug:
-##                otherCoDual.showRelationTable()
-##                print(otherCoDual.valuationdomain)
+            if Debug:
+                otherCoDual.showRelationTable()
+                print(otherCoDual.valuationdomain)
         else:
             otherRelation = other.relation
         n = len(other.actions)
@@ -890,8 +890,8 @@ class CopelandOrder(LinearOrder):
                 else:
                     srx[y] = Min
         runTimes['relation'] = time() - tr      
-##        if Debug:
-##            print(selfRelation) 
+        if Debug:
+            print(selfRelation) 
         self.name = other.name + '_ranked'        
         self.actions = actions
         self.order = n
