@@ -9454,14 +9454,27 @@ class Digraph(object):
         Renders a linear ranking from best to worst of the actions
         following Copelands's rule.
         """
-        gamma = self.gamma
+        c = PolarisedDigraph(self)
+        cRelation = c.relation
+        actions = self.actions
         copelandScores = []
-        for x in self.actions:
-            copelandScore = len(gamma[x][1]) - len(gamma[x][0])
+        for x in actions:
+            copelandScore = Decimal('0')
+            for y in actions:
+                copelandScore += cRelation[x][y] - cRelation[y][x]
+            #actions[x]['score'] = copelandScore
             copelandScores.append((copelandScore,x))
         # reversed sorting with keeping the actions initial ordering
         # in case of ties
-        copelandScores.sort()
+        copelandScores.sort(reverse=True)
+##        gamma = self.gamma
+##        copelandScores = []
+##        for x in self.actions:
+##            copelandScore = len(gamma[x][1]) - len(gamma[x][0])
+##            copelandScores.append((copelandScore,x))
+##        # reversed sorting with keeping the actions initial ordering
+##        # in case of ties
+##        copelandScores.sort()
         copelandRanking = [x[1] for x in copelandScores]
         self.copelandRanking = copelandRanking
         return copelandRanking
