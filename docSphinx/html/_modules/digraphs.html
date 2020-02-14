@@ -2543,7 +2543,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Digraph.computeTransitivityDegree"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeTransitivityDegree">[docs]</a>    <span class="k">def</span> <span class="nf">computeTransitivityDegree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Digraph.computeTransitivityDegree"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeTransitivityDegree">[docs]</a>    <span class="k">def</span> <span class="nf">computeTransitivityDegree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the transitivity degree of a digraph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2568,9 +2568,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">n1</span> <span class="o">&gt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">n0</span><span class="o">/</span><span class="n">n1</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">n0</span><span class="o">/</span><span class="n">n1</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span></div>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree of graph &lt;</span><span class="si">%s</span><span class="s1">&gt; : </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">res</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">res</span></div>
 
 <div class="viewcode-block" id="Digraph.computeSizeTransitiveClosure"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeSizeTransitiveClosure">[docs]</a>    <span class="k">def</span> <span class="nf">computeSizeTransitiveClosure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -6741,7 +6744,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> circuits.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span><span class="p">)))</span>
                 <span class="k">for</span> <span class="n">i</span><span class="p">,(</span><span class="n">circList</span><span class="p">,</span><span class="n">circSet</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span><span class="p">):</span>
                     <span class="n">deg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuitMinCredibility</span><span class="p">(</span><span class="n">circList</span><span class="p">)</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">: &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">circList</span><span class="p">,</span> <span class="s1">&#39;, credibility :&#39;</span><span class="p">,</span> <span class="n">deg</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">: &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">circList</span><span class="p">,</span> <span class="s1">&#39;, credibility : </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">deg</span><span class="p">))</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No circuits yet computed. Run computeChordlessCircuits()!&#39;</span><span class="p">)</span></div>
 

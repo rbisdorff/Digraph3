@@ -596,7 +596,7 @@ class NetFlowsOrder(LinearOrder):
     instantiates the net flows Order from
     a given bipolar-valued Digraph instance
     """
-    def __init__(self,other,coDual=False,Debug=False):
+    def __init__(self,other,coDual=False,Comments=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph following
@@ -607,6 +607,8 @@ class NetFlowsOrder(LinearOrder):
         from collections import OrderedDict
         from time import time
 
+        if Debug:
+            Comments=True
         #timings
         tt = time()
         runTimes = OrderedDict()
@@ -657,8 +659,10 @@ class NetFlowsOrder(LinearOrder):
         # in case of ties
         netFlows.sort(reverse=True)
         self.netFlows = netFlows
-##        if Debug:
-##            print(netFlows)
+        if Comments:
+            print('Net Flows :')
+            for x in netFlows:
+                print( '%s : %.3f' % (x[1],x[0]) )
 
         netFlowsRanking = [x[1] for x in netFlows]
         self.netFlowsRanking = netFlowsRanking
@@ -667,6 +671,9 @@ class NetFlowsOrder(LinearOrder):
         if Debug:
             print(self.netFlowsRanking)
             print(self.netFlowsOrder)
+        if Comments:
+            print('NetFlows Ranking:')
+            print(netFlowsRanking)
         runTimes['netFlows'] = time() - tnf
 
         # init relation
@@ -825,7 +832,7 @@ class CopelandOrder(LinearOrder):
     instantiates the Copeland Order from
     a given bipolar-valued Digraph instance
     """
-    def __init__(self,other,coDual=False,Debug=False):
+    def __init__(self,other,coDual=False,Comments=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph following
@@ -835,7 +842,8 @@ class CopelandOrder(LinearOrder):
         #from copy import deepcopy
         from collections import OrderedDict
         from time import time
-
+        if Debug:
+            Comments=True
         #timings
         tt = time()
         runTimes = OrderedDict()
@@ -865,7 +873,8 @@ class CopelandOrder(LinearOrder):
         copelandScores = []
         c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
                              StrictCut=True,KeepValues=False)
-        print(c)
+        if Debug:
+            print(c)
         c.recodeValuation()
         cRelation = c.relation
         for x in actions:
@@ -880,10 +889,20 @@ class CopelandOrder(LinearOrder):
         copelandScores.sort(reverse=True)
         self.copelandScores = copelandScores
 
+        if Comments:
+            print('Copeland scores')
+            for x in copelandScores:
+                print( '%s : %d' %( x[1],int(x[0]) ) )
+
         copelandRanking = [x[1] for x in copelandScores]
         self.copelandRanking = copelandRanking
         copelandOrder = list(reversed(copelandRanking))
         self.copelandOrder = copelandOrder
+
+        if Comments:
+            print('Copeland Ranking:')
+            print(copelandRanking)
+            
         runTimes['copeland'] = time() - tnf
 
         # init relation
@@ -1277,7 +1296,7 @@ if __name__ == "__main__":
     # print()
     print('==>> Copeland ordering:')
     t0 = time()
-    cop = CopelandOrder(g)
+    cop = CopelandOrder(g,Comments=True)
     g.showRelationTable(actionsSubset=cop.copelandRanking)
     print(cop.copelandRanking)
     print(cop.copelandOrder)

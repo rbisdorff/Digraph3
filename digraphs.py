@@ -2503,7 +2503,7 @@ class Digraph(object):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def computeTransitivityDegree(self):
+    def computeTransitivityDegree(self,Comments=False):
         """
         Renders the transitivity degree of a digraph.
         """
@@ -2528,9 +2528,12 @@ class Digraph(object):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         if n1 > Decimal('0'):
-            return n0/n1
+            res = n0/n1
         else:
-            return Decimal('0')
+            res = Decimal('0')
+        if Comments:
+            print('Transitivity degree of graph <%s> : %.2f' %(self.name,res))
+        return res
 
     def computeSizeTransitiveClosure(self):
         """
@@ -6701,7 +6704,7 @@ class Digraph(object):
                 print('%d circuits.' % (len(self.circuitsList)))
                 for i,(circList,circSet) in enumerate(self.circuitsList):
                     deg = self.circuitMinCredibility(circList)
-                    print('%d: ' % (i+1), circList, ', credibility :', deg)
+                    print('%d: ' % (i+1), circList, ', credibility : %.3f' % (deg))
         except:
             print('No circuits yet computed. Run computeChordlessCircuits()!')
 
