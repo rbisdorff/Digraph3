@@ -3384,13 +3384,13 @@
                 <span class="n">actionsList</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;Copeland&#39;</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rankingCorrelation</span> <span class="o">=</span> <span class="n">corrcop</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">copelandScores</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">decCopelandScores</span>
         <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;Copeland&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">CopelandOrder</span>
             <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;Copeland&#39;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">copelandScores</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">decCopelandScores</span>
         <span class="k">else</span><span class="p">:</span> <span class="c1"># net flows by default</span>
             <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">NetFlowsOrder</span>
             <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>

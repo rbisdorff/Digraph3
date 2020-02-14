@@ -1769,7 +1769,7 @@ To estimate how difficult this ranking problem may be, we can have a look at the
 
 .. Figure:: rankingTutorial.png
    :name: rankingTutorial
-   :width: 300 px
+   :width: 400 px
    :align: center
 
    The strict outranking digraph	   
@@ -1825,13 +1825,13 @@ The *Copeland* scores deliver actually only a unique *weak order*, i.e. a rankin
 
 Notice by the way that *Copeland* scores, as computed in the associated *Condorcet* relation table or similarly in the codual digraph drawing above, are in fact *invariant* under a *codual*, i.e. the negation of the converse ( - ( ~ *g* ) ) transform of the outranking digraph. 
 
-*Copeland* 's ranking rule actually renders a linear order which is well correlated, in the ordinal *Kendall* sense (see [BIS-2012]_), with the given pairwise outranking relation.
+*Copeland* 's ranking rule actually renders a linear order which is rather correlated, in the ordinal *Kendall* sense (see [BIS-2012]_), with the given pairwise outranking relation.
 
 .. code-block:: pycon
 
    >>> corr = g.computeOrdinalCorrelation(cop)
    >>> print("Fitness of Copeland's ranking: %.3f" % corr['correlation'])
-    Fitness of Copeland's ranking: +0.524
+    Fitness of Copeland's ranking: +0.463
 
 The *NetFlows* ranking
 ......................
@@ -1859,7 +1859,7 @@ The valued version of the *Copeland* rule, called **NetFlows** rule, is working 
 
 The *net-flow* scores deliver in this example a ranking without ties. It may easily happen however, that we obtain, as with the *Copeland* scores above, only a ranking with ties, which will then be resolved by following again the lexicographic rule. In case of ties, it is possible to construct again the corresponding *weak order* with the :py:class:`transitiveDigraphs.WeakNetFlowsOrder` class.
 
-The resulting **NetFlows** ranking is here, in this didactic example, slightly better correlated with the given outranking relation as its crisp cousin, the *Copeland* ranking. 
+The resulting **NetFlows** ranking is here, in this didactic example, much better correlated with the given outranking relation as its crisp cousin, the *Copeland* ranking. 
 
 .. code-block:: pycon
    :linenos:
@@ -1922,7 +1922,7 @@ We may visualize the partial order defined by the epistemic disjunction of these
 
 .. Figure:: tutorialKemeny.png
    :name: tutorialKemeny
-   :width: 100pt
+   :width: 150pt
    :align: center
 
    Epistemic disjunction of Kemeny rankings	   
@@ -1986,7 +1986,7 @@ At step *r* (*r* goes from 1 to *n*) do the following:
    >>> print("Fitness of Kohler's ranking: %+.3f" % corr['correlation'])
     Fitness of Kohler's ranking: +0.483
 
-Here, we find a result that is not as good as *Copeland* crisp rule's result (+0.524). 
+Here, we find a result (+0.483) that is slightly better than the *Copeland* rule's result (+0.463). 
 
 *Tideman* 's ranked-pairs rule
 ..............................
@@ -2037,7 +2037,7 @@ The *RankedPairs* ranking rule actually renders one of the two optimal *Kemeny* 
    >>> print("Fitness of Tideman's ranking: %+.3f" % corr['correlation'])
     Fitness of Tideman's ranking: 0.779
 
-Unfortunately, the *RankedPairs* rule is again *not efficiently scalable* to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only the *Copeland* and the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the outranking digraph, remain in fact computationally efficient.
+Unfortunately, the *RankedPairs* rule is again *not efficiently scalable* to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only the *Copeland* and, more accurate, the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the outranking digraph, remain in fact computationally efficient.
  
 Ranking big performance tableaux
 ................................

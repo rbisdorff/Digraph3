@@ -2078,7 +2078,7 @@ To estimate how difficult this ranking problem may be, we can have a look at the
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{rankingTutorial}.png}
+\noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{rankingTutorial}.png}
 \caption{The strict outranking digraph}\label{\detokenize{tutorial:rankingtutorial}}\end{figure}
 
 The shown strict outranking relation is apparently not transitive: for instance, alternative \sphinxstyleemphasis{a8n} outranks alternative \sphinxstyleemphasis{a6c} and alternative \sphinxstyleemphasis{a6c} outranks \sphinxstyleemphasis{a4a}, however \sphinxstyleemphasis{a8n} does not outrank \sphinxstyleemphasis{a4a} (see \hyperref[\detokenize{tutorial:rankingtutorial}]{Fig.\@ \ref{\detokenize{tutorial:rankingtutorial}}}). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph \sphinxstyleemphasis{gcd}.
@@ -2133,12 +2133,12 @@ The \sphinxstyleemphasis{Copeland} scores deliver actually only a unique \sphinx
 
 Notice by the way that \sphinxstyleemphasis{Copeland} scores, as computed in the associated \sphinxstyleemphasis{Condorcet} relation table or similarly in the codual digraph drawing above, are in fact \sphinxstyleemphasis{invariant} under a \sphinxstyleemphasis{codual}, i.e. the negation of the converse ( \sphinxhyphen{} ( \textasciitilde{} \sphinxstyleemphasis{g} ) ) transform of the outranking digraph.
 
-\sphinxstyleemphasis{Copeland} ‘s ranking rule actually renders a linear order which is well correlated, in the ordinal \sphinxstyleemphasis{Kendall} sense (see \sphinxcite{tutorial:bis-2012}), with the given pairwise outranking relation.
+\sphinxstyleemphasis{Copeland} ‘s ranking rule actually renders a linear order which is rather correlated, in the ordinal \sphinxstyleemphasis{Kendall} sense (see \sphinxcite{tutorial:bis-2012}), with the given pairwise outranking relation.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{cop}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Fitness of Copeland}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s ranking: }\PYG{l+s+si}{\PYGZpc{}.3f}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{\PYGZpc{}} \PYG{n}{corr}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
-\PYG{g+go}{ Fitness of Copeland\PYGZsq{}s ranking: +0.524}
+\PYG{g+go}{ Fitness of Copeland\PYGZsq{}s ranking: +0.463}
 \end{sphinxVerbatim}
 
 
@@ -2166,7 +2166,7 @@ The valued version of the \sphinxstyleemphasis{Copeland} rule, called \sphinxsty
 
 The \sphinxstyleemphasis{net\sphinxhyphen{}flow} scores deliver in this example a ranking without ties. It may easily happen however, that we obtain, as with the \sphinxstyleemphasis{Copeland} scores above, only a ranking with ties, which will then be resolved by following again the lexicographic rule. In case of ties, it is possible to construct again the corresponding \sphinxstyleemphasis{weak order} with the \sphinxcode{\sphinxupquote{transitiveDigraphs.WeakNetFlowsOrder}} class.
 
-The resulting \sphinxstylestrong{NetFlows} ranking is here, in this didactic example, slightly better correlated with the given outranking relation as its crisp cousin, the \sphinxstyleemphasis{Copeland} ranking.
+The resulting \sphinxstylestrong{NetFlows} ranking is here, in this didactic example, much better correlated with the given outranking relation as its crisp cousin, the \sphinxstyleemphasis{Copeland} ranking.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{nf}\PYG{p}{)}
@@ -2225,7 +2225,7 @@ We may visualize the partial order defined by the epistemic disjunction of these
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=100bp]{{tutorialKemeny}.png}
+\noindent\sphinxincludegraphics[width=150bp]{{tutorialKemeny}.png}
 \caption{Epistemic disjunction of Kemeny rankings}\label{\detokenize{tutorial:tutorialkemeny}}\end{figure}
 
 It is interesting to notice in \hyperref[\detokenize{tutorial:optimalkemeny}]{Listing \ref{\detokenize{tutorial:optimalkemeny}}}, that both \sphinxstyleemphasis{Kemeny} rankings only differ in their respective ranking of alternative \sphinxstyleemphasis{a8}, before or after alternatives \sphinxstyleemphasis{a9}, \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a1}.
@@ -2295,7 +2295,7 @@ Delete the corresponding row and column from the relation table and restart unti
 \PYG{g+go}{ Fitness of Kohler\PYGZsq{}s ranking: +0.483}
 \end{sphinxVerbatim}
 
-Here, we find a result that is not as good as \sphinxstyleemphasis{Copeland} crisp rule’s result (+0.524).
+Here, we find a result (+0.483) that is slightly better than the \sphinxstyleemphasis{Copeland} rule’s result (+0.463).
 
 
 \subsection{\sphinxstyleemphasis{Tideman} ‘s ranked\sphinxhyphen{}pairs rule}
@@ -2357,7 +2357,7 @@ The \sphinxstyleemphasis{RankedPairs} ranking rule actually renders one of the t
 \PYG{g+go}{ Fitness of Tideman\PYGZsq{}s ranking: 0.779}
 \end{sphinxVerbatim}
 
-Unfortunately, the \sphinxstyleemphasis{RankedPairs} rule is again \sphinxstyleemphasis{not efficiently scalable} to outranking digraphs of larger orders (\textgreater{} 100). For such outranking digraphs, with several hundred of alternatives, only the \sphinxstyleemphasis{Copeland} and the \sphinxstyleemphasis{NetFlows} ranking rules, with a polynomial complexity of \(O(n^2)\) where \sphinxstyleemphasis{n} is the order of the outranking digraph, remain in fact computationally efficient.
+Unfortunately, the \sphinxstyleemphasis{RankedPairs} rule is again \sphinxstyleemphasis{not efficiently scalable} to outranking digraphs of larger orders (\textgreater{} 100). For such outranking digraphs, with several hundred of alternatives, only the \sphinxstyleemphasis{Copeland} and, more accurate, the \sphinxstyleemphasis{NetFlows} ranking rules, with a polynomial complexity of \(O(n^2)\) where \sphinxstyleemphasis{n} is the order of the outranking digraph, remain in fact computationally efficient.
 
 
 \subsection{Ranking big performance tableaux}

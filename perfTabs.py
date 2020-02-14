@@ -2305,7 +2305,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                    ndigits=2,\
                                    SparseModel=False,\
                                    minimalComponentSize=1,\
-                                   rankingRule='Copeland',\
+                                   rankingRule='NetFlows',\
                                    quantiles=None,\
                                    strategy='average',\
                                    Correlations=False,\
@@ -2384,7 +2384,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                toIndex=None,
                                SparseModel=False,
                                minimalComponentSize=1,
-                               rankingRule='Copeland',
+                               rankingRule=None,
                                quantiles=None,
                                strategy='average',
                                ndigits=2,
@@ -2461,9 +2461,10 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             criteriaList = argCriteriaList
 
+##        if rankingRule == None:
+##            rankingRule = 'NetFlows'
+
         if argActionsList == None: # actions ranking is needed
-            if rankingRule == None:
-                rankingRule = 'Copeland'
             
             na = len(self.actions)
             if SparseModel:
@@ -2486,6 +2487,8 @@ The performance evaluations of each decision alternative on each criterion are g
                 g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
                 if rankingRule == 'NetFlows':
                     actionsList = g.computeNetFlowsRanking()
+                if rankingRule == 'Copeland':
+                    actionsList = g.computeCopelandRanking()
                 elif rankingRule == 'Kohler':
                     actionsList = g.computeKohlerRanking()
                 elif rankingRule == 'RankedPairs':
@@ -2495,19 +2498,24 @@ The performance evaluations of each decision alternative on each criterion are g
                 elif rankingRule == 'ArrowRaynaud':
                     actionsList = g.computeArrowRaynaudRanking()
                 else: # default ranking rule
-                    actionsList = g.computeCopelandRanking()
+                    actionsList = g.computeNetFlowsRanking()
+                    rankingRule='NetFlows'
+                rankCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
 
+        else:  # actions list given
+            actionsList = argActionsList
+            rankingRule = None
+            #Correlations = False
+            rankCorrelation = None
             if SparseModel:
                 rankCorrelation = None
             else:
+                from outrankingDigraphs import BipolarOutrankingDigraph
+                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
                 rankCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
-            if Debug:
-                print('1',actionsList)
-                print('2',rankCorrelation)
-        else:  # actions list given
-            actionsList = argActionsList
-            Correlations = False
-            rankCorrelation = None
+        if Debug:
+            print('1',actionsList)
+            print('2',rankCorrelation)
             
         ##########
         criteria = self.criteria

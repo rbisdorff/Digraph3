@@ -870,7 +870,8 @@ class CopelandOrder(LinearOrder):
         
         # compute net flows
         tnf = time()
-        copelandScores = []
+        incCopelandScores = []
+        decCopelandScores = []
         c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
                              StrictCut=True,KeepValues=False)
         if Debug:
@@ -883,20 +884,26 @@ class CopelandOrder(LinearOrder):
                 copelandScore += cRelation[x][y] - cRelation[y][x]
 ##        for x in actions:
 ##            copelandScore = len(gamma[x][0]) - len(gamma[x][1])
-            copelandScores.append((copelandScore,x))
+            incCopelandScores.append((copelandScore,x))
+            decCopelandScores.append((-copelandScore,x))
         # reversed sorting with keeping the actions initial ordering
         # in case of ties
-        copelandScores.sort(reverse=True)
-        self.copelandScores = copelandScores
-
+        incCopelandScores.sort()
+        decCopelandScores.sort()
+        self.decCopelandScores = decCopelandScores
+        self.incCopelandScores = incCopelandScores
+    
         if Comments:
-            print('Copeland scores')
-            for x in copelandScores:
+            print('Copeland decreasing scores')
+            for x in decCopelandScores:
+                print( '%s : %d' %( x[1],int(-x[0]) ) )
+            print('Copeland increasing scores')
+            for x in incCopelandScores:
                 print( '%s : %d' %( x[1],int(x[0]) ) )
 
-        copelandRanking = [x[1] for x in copelandScores]
+        copelandRanking = [x[1] for x in decCopelandScores]
         self.copelandRanking = copelandRanking
-        copelandOrder = list(reversed(copelandRanking))
+        copelandOrder = [x[1] for x in incCopelandScores]
         self.copelandOrder = copelandOrder
 
         if Comments:
@@ -915,6 +922,8 @@ class CopelandOrder(LinearOrder):
                 y = copelandRanking[j]
                 if i < j:
                     srx[y] = Max
+                elif i == j:
+                    srx[y] = Med
                 else:
                     srx[y] = Min
         runTimes['relation'] = time() - tr      
@@ -934,10 +943,10 @@ class CopelandOrder(LinearOrder):
         print('Copeland scores in %s order' % direction)
         print('action \t score')
         if direction == 'descending':
-            for x in self.copelandScores:
-                print('%s \t %.2f' %(x[1],x[0]))
+            for x in self.decCopelandScores:
+                print('%s \t %.2f' %(x[1],-x[0]))
         else:
-            for x in reversed(self.copelandScores):
+            for x in reversed(self.incCopelandScores):
                 print('%s \t %.2f' %(x[1],x[0]))
          
 

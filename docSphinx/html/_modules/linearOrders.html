@@ -910,7 +910,8 @@
         
         <span class="c1"># compute net flows</span>
         <span class="n">tnf</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-        <span class="n">copelandScores</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">incCopelandScores</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">decCopelandScores</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">PolarisedDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">],</span>\
                              <span class="n">StrictCut</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">KeepValues</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -923,20 +924,26 @@
                 <span class="n">copelandScore</span> <span class="o">+=</span> <span class="n">cRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">-</span> <span class="n">cRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
 <span class="c1">##        for x in actions:</span>
 <span class="c1">##            copelandScore = len(gamma[x][0]) - len(gamma[x][1])</span>
-            <span class="n">copelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">incCopelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">decCopelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
         <span class="c1"># reversed sorting with keeping the actions initial ordering</span>
         <span class="c1"># in case of ties</span>
-        <span class="n">copelandScores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">copelandScores</span> <span class="o">=</span> <span class="n">copelandScores</span>
-
+        <span class="n">incCopelandScores</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">decCopelandScores</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decCopelandScores</span> <span class="o">=</span> <span class="n">decCopelandScores</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">incCopelandScores</span> <span class="o">=</span> <span class="n">incCopelandScores</span>
+    
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Copeland scores&#39;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">copelandScores</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Copeland decreasing scores&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">decCopelandScores</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> : </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Copeland increasing scores&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">incCopelandScores</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> : </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span> <span class="p">)</span>
 
-        <span class="n">copelandRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">copelandScores</span><span class="p">]</span>
+        <span class="n">copelandRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">decCopelandScores</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">copelandRanking</span> <span class="o">=</span> <span class="n">copelandRanking</span>
-        <span class="n">copelandOrder</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">copelandRanking</span><span class="p">))</span>
+        <span class="n">copelandOrder</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">incCopelandScores</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">copelandOrder</span> <span class="o">=</span> <span class="n">copelandOrder</span>
 
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
@@ -955,6 +962,8 @@
                 <span class="n">y</span> <span class="o">=</span> <span class="n">copelandRanking</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">:</span>
                     <span class="n">srx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                    <span class="n">srx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">srx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;relation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tr</span>      
@@ -974,10 +983,10 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Copeland scores in </span><span class="si">%s</span><span class="s1"> order&#39;</span> <span class="o">%</span> <span class="n">direction</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;action </span><span class="se">\t</span><span class="s1"> score&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;descending&#39;</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">copelandScores</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">decCopelandScores</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">copelandScores</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">incCopelandScores</span><span class="p">):</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div>
          
 
@@ -1336,7 +1345,7 @@
     <span class="c1"># print()</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Copeland ordering:&#39;</span><span class="p">)</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandOrder</span><span class="p">)</span>

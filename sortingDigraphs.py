@@ -3344,13 +3344,13 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 actionsList = cop.copelandRanking
                 self.rankingRule = 'Copeland'
                 self.rankingCorrelation = corrcop
-                self.rankingScores = cop.copelandScores
+                self.rankingScores = cop.decCopelandScores
         elif rankingRule == 'Copeland':
             from linearOrders import CopelandOrder
             cop = CopelandOrder(g)
             actionsList = cop.copelandRanking
             self.rankingRule = 'Copeland'
-            self.rankingScores = cop.copelandScores
+            self.rankingScores = cop.decCopelandScores
         else: # net flows by default
             from linearOrders import NetFlowsOrder
             nf = NetFlowsOrder(g)

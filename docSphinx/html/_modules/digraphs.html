@@ -9500,16 +9500,22 @@
         <span class="n">c</span> <span class="o">=</span> <span class="n">PolarisedDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">cRelation</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">relation</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
-        <span class="n">copelandScores</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">incCopelandScores</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">decCopelandScores</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
             <span class="n">copelandScore</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
                 <span class="n">copelandScore</span> <span class="o">+=</span> <span class="n">cRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">-</span> <span class="n">cRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
             <span class="c1">#actions[x][&#39;score&#39;] = copelandScore</span>
-            <span class="n">copelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">incCopelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+            <span class="n">decCopelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+
         <span class="c1"># reversed sorting with keeping the actions initial ordering</span>
         <span class="c1"># in case of ties</span>
-        <span class="n">copelandScores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">incCopelandScores</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">decCopelandScores</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">incCopelandScores</span> <span class="o">=</span> <span class="n">incCopelandScores</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decCopelandScores</span> <span class="o">=</span> <span class="n">decCopelandScores</span>
 <span class="c1">##        gamma = self.gamma</span>
 <span class="c1">##        copelandScores = []</span>
 <span class="c1">##        for x in self.actions:</span>
@@ -9518,23 +9524,32 @@
 <span class="c1">##        # reversed sorting with keeping the actions initial ordering</span>
 <span class="c1">##        # in case of ties</span>
 <span class="c1">##        copelandScores.sort()</span>
-        <span class="n">copelandRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">copelandScores</span><span class="p">]</span>
+        <span class="n">copelandRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">decCopelandScores</span><span class="p">]</span>
+        <span class="n">copelandOrder</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">incCopelandScores</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">copelandRanking</span> <span class="o">=</span> <span class="n">copelandRanking</span>
-        <span class="k">return</span> <span class="n">copelandRanking</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">copelandOrder</span> <span class="o">=</span> <span class="n">copelandOrder</span>
 
 <div class="viewcode-block" id="Digraph.computeCopelandRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeCopelandRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeCopelandRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders a linear ranking from best to worst of the actions following Arrow&amp;Raynaud&#39;s rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeCopelandRanking</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copelandRanking</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_computeCopelandRanking</span><span class="p">()</span>
+            <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copelandRanking</span>
         <span class="k">return</span> <span class="n">ranking</span></div>
 
 <div class="viewcode-block" id="Digraph.computeCopelandOrder"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeCopelandOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computeCopelandOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders a linear ranking from best to worst of the actions following Arrow&amp;Raynaud&#39;s rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeCopelandRanking</span><span class="p">()</span>
-        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">ranking</span><span class="p">))</span></div>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ordering</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copelandOrder</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_computeCopelandRanking</span><span class="p">()</span>
+            <span class="n">ordering</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copelandOrder</span>
+        <span class="k">return</span> <span class="n">ordering</span></div>
 
 <span class="c1">##    def _computeRankedPairsOrder(self,Cpp=False,Debug=False):</span>
 <span class="c1">##        &quot;&quot;&quot;</span>

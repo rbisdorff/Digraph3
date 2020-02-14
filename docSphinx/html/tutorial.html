@@ -2361,7 +2361,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="rankingtutorial">
-<a class="reference internal image-reference" href="_images/rankingTutorial.png"><img alt="_images/rankingTutorial.png" src="_images/rankingTutorial.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/rankingTutorial.png"><img alt="_images/rankingTutorial.png" src="_images/rankingTutorial.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 17 </span><span class="caption-text">The strict outranking digraph</span><a class="headerlink" href="#rankingtutorial" title="Permalink to this image">¶</a></p>
 </div>
 <p>The shown strict outranking relation is apparently not transitive: for instance, alternative <em>a8n</em> outranks alternative <em>a6c</em> and alternative <em>a6c</em> outranks <em>a4a</em>, however <em>a8n</em> does not outrank <em>a4a</em> (see <a class="reference internal" href="#rankingtutorial"><span class="std std-numref">Fig. 17</span></a>). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph <em>gcd</em>.</p>
@@ -2422,12 +2422,12 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Alternative <em>a5</em> obtains the best <em>Copeland</em> score (+12), followed by alternatives <em>a1</em>, <em>a6</em> and <em>a7</em> with same score (+2); following the lexicographic rule, <em>a1</em> is hence ranked before <em>a6</em> and <em>a6</em> before <em>a7</em>. Same situation is observed for <em>a4</em> and <em>a9</em> with a score of -3.</p>
 <p>The <em>Copeland</em> scores deliver actually only a unique <em>weak order</em>, i.e. a ranking with potential ties. This weak order may be constructed with the <a class="reference internal" href="techDoc.html#transitiveDigraphs.WeakCopelandOrder" title="transitiveDigraphs.WeakCopelandOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.WeakCopelandOrder</span></code></a> class.</p>
 <p>Notice by the way that <em>Copeland</em> scores, as computed in the associated <em>Condorcet</em> relation table or similarly in the codual digraph drawing above, are in fact <em>invariant</em> under a <em>codual</em>, i.e. the negation of the converse ( - ( ~ <em>g</em> ) ) transform of the outranking digraph.</p>
-<p><em>Copeland</em> ‘s ranking rule actually renders a linear order which is well correlated, in the ordinal <em>Kendall</em> sense (see <a class="reference internal" href="#bis-2012" id="id23"><span>[BIS-2012]</span></a>), with the given pairwise outranking relation.</p>
+<p><em>Copeland</em> ‘s ranking rule actually renders a linear order which is rather correlated, in the ordinal <em>Kendall</em> sense (see <a class="reference internal" href="#bis-2012" id="id23"><span>[BIS-2012]</span></a>), with the given pairwise outranking relation.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fitness of Copeland&#39;s ranking: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
-<span class="go"> Fitness of Copeland&#39;s ranking: +0.524</span>
+<span class="go"> Fitness of Copeland&#39;s ranking: +0.463</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -2466,7 +2466,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <p>The <em>net-flow</em> scores deliver in this example a ranking without ties. It may easily happen however, that we obtain, as with the <em>Copeland</em> scores above, only a ranking with ties, which will then be resolved by following again the lexicographic rule. In case of ties, it is possible to construct again the corresponding <em>weak order</em> with the <a class="reference internal" href="techDoc.html#transitiveDigraphs.WeakNetFlowsOrder" title="transitiveDigraphs.WeakNetFlowsOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.WeakNetFlowsOrder</span></code></a> class.</p>
-<p>The resulting <strong>NetFlows</strong> ranking is here, in this didactic example, slightly better correlated with the given outranking relation as its crisp cousin, the <em>Copeland</em> ranking.</p>
+<p>The resulting <strong>NetFlows</strong> ranking is here, in this didactic example, much better correlated with the given outranking relation as its crisp cousin, the <em>Copeland</em> ranking.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">nf</span><span class="p">)</span>
@@ -2540,7 +2540,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="tutorialkemeny">
-<a class="reference internal image-reference" href="_images/tutorialKemeny.png"><img alt="_images/tutorialKemeny.png" src="_images/tutorialKemeny.png" style="width: 100pt;" /></a>
+<a class="reference internal image-reference" href="_images/tutorialKemeny.png"><img alt="_images/tutorialKemeny.png" src="_images/tutorialKemeny.png" style="width: 150pt;" /></a>
 <p class="caption"><span class="caption-number">Fig. 18 </span><span class="caption-text">Epistemic disjunction of Kemeny rankings</span><a class="headerlink" href="#tutorialkemeny" title="Permalink to this image">¶</a></p>
 </div>
 <p>It is interesting to notice in <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 1</span></a>, that both <em>Kemeny</em> rankings only differ in their respective ranking of alternative <em>a8</em>, before or after alternatives <em>a9</em>, <em>a4</em> and <em>a1</em>.</p>
@@ -2605,7 +2605,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> Fitness of Kohler&#39;s ranking: +0.483</span>
 </pre></div>
 </td></tr></table></div>
-<p>Here, we find a result that is not as good as <em>Copeland</em> crisp rule’s result (+0.524).</p>
+<p>Here, we find a result (+0.483) that is slightly better than the <em>Copeland</em> rule’s result (+0.463).</p>
 </div>
 <div class="section" id="tideman-s-ranked-pairs-rule">
 <h2><a class="toc-backref" href="#id185"><em>Tideman</em> ‘s ranked-pairs rule</a><a class="headerlink" href="#tideman-s-ranked-pairs-rule" title="Permalink to this headline">¶</a></h2>
@@ -2683,7 +2683,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> Fitness of Tideman&#39;s ranking: 0.779</span>
 </pre></div>
 </td></tr></table></div>
-<p>Unfortunately, the <em>RankedPairs</em> rule is again <em>not efficiently scalable</em> to outranking digraphs of larger orders (&gt; 100). For such outranking digraphs, with several hundred of alternatives, only the <em>Copeland</em> and the <em>NetFlows</em> ranking rules, with a polynomial complexity of <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/> where <em>n</em> is the order of the outranking digraph, remain in fact computationally efficient.</p>
+<p>Unfortunately, the <em>RankedPairs</em> rule is again <em>not efficiently scalable</em> to outranking digraphs of larger orders (&gt; 100). For such outranking digraphs, with several hundred of alternatives, only the <em>Copeland</em> and, more accurate, the <em>NetFlows</em> ranking rules, with a polynomial complexity of <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/> where <em>n</em> is the order of the outranking digraph, remain in fact computationally efficient.</p>
 </div>
 <div class="section" id="ranking-big-performance-tableaux">
 <h2><a class="toc-backref" href="#id186">Ranking big performance tableaux</a><a class="headerlink" href="#ranking-big-performance-tableaux" title="Permalink to this headline">¶</a></h2>

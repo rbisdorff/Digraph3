@@ -9460,16 +9460,22 @@ class Digraph(object):
         c = PolarisedDigraph(self)
         cRelation = c.relation
         actions = self.actions
-        copelandScores = []
+        incCopelandScores = []
+        decCopelandScores = []
         for x in actions:
             copelandScore = Decimal('0')
             for y in actions:
                 copelandScore += cRelation[x][y] - cRelation[y][x]
             #actions[x]['score'] = copelandScore
-            copelandScores.append((copelandScore,x))
+            incCopelandScores.append((copelandScore,x))
+            decCopelandScores.append((-copelandScore,x))
+
         # reversed sorting with keeping the actions initial ordering
         # in case of ties
-        copelandScores.sort(reverse=True)
+        incCopelandScores.sort()
+        decCopelandScores.sort()
+        self.incCopelandScores = incCopelandScores
+        self.decCopelandScores = decCopelandScores
 ##        gamma = self.gamma
 ##        copelandScores = []
 ##        for x in self.actions:
@@ -9478,23 +9484,32 @@ class Digraph(object):
 ##        # reversed sorting with keeping the actions initial ordering
 ##        # in case of ties
 ##        copelandScores.sort()
-        copelandRanking = [x[1] for x in copelandScores]
+        copelandRanking = [x[1] for x in decCopelandScores]
+        copelandOrder = [x[1] for x in incCopelandScores]
         self.copelandRanking = copelandRanking
-        return copelandRanking
+        self.copelandOrder = copelandOrder
 
     def computeCopelandRanking(self):
         """
         renders a linear ranking from best to worst of the actions following Arrow&Raynaud's rule.
         """
-        ranking = self._computeCopelandRanking()
+        try:
+            ranking = self.copelandRanking
+        except:
+            self._computeCopelandRanking()
+            ranking = self.copelandRanking
         return ranking
 
     def computeCopelandOrder(self):
         """
         renders a linear ranking from best to worst of the actions following Arrow&Raynaud's rule.
         """
-        ranking = self._computeCopelandRanking()
-        return list(reversed(ranking))
+        try:
+            ordering = self.copelandOrder
+        except:
+            self._computeCopelandRanking()
+            ordering = self.copelandOrder
+        return ordering
 
 ##    def _computeRankedPairsOrder(self,Cpp=False,Debug=False):
 ##        """
