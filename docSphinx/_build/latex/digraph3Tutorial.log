@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  14 FEB 2020 20:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  14 FEB 2020 20:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1387,7 +1387,7 @@ l.2226 \capstart
 File: tutorialKemeny.png Graphic file (type png)
 <use tutorialKemeny.png>
 Package pdftex.def Info: tutorialKemeny.png  used on input line 2228.
-(pdftex.def)             Requested size: 200.75pt x 639.38033pt.
+(pdftex.def)             Requested size: 175.65625pt x 559.46036pt.
  [53] [54 <./tutorialKemeny.png>]pdfTeX warning (ext4): destination with the sa
 me identifier (name{figure.3}) has been already used, duplicate ignored
 <to be read again> 
@@ -1398,16 +1398,20 @@ l.2255 \capstart
 File: tutorialSlater.png Graphic file (type png)
 <use tutorialSlater.png>
 Package pdftex.def Info: tutorialSlater.png  used on input line 2257.
-(pdftex.def)             Requested size: 200.75pt x 562.11578pt.
+(pdftex.def)             Requested size: 175.65625pt x 491.85002pt.
  [55] [56 <./tutorialSlater.png>]
-Overfull \vbox (1.1592pt too high) detected at line 2350
+Overfull \vbox (1.34804pt too high) detected at line 2350
  []
 
 [57] [58]
-Underfull \vbox (badness 1270) detected at line 2424
+Overfull \vbox (1.84093pt too high) detected at line 2424
  []
 
-[59] [60] [61] [62]
+[59] [60] [61]
+Underfull \vbox (badness 1132) detected at line 2576
+ []
+
+[62]
 Underfull \hbox (badness 8151) in paragraph at lines 2609--2610
 []\T1/cmr/m/n/12 On a clas-sic intel-i7 equipped PC with four sin-gle threaded 
 cores, the
@@ -2100,7 +2104,7 @@ sfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on digraph3Tutorial.pdf (158 pages, 3212128 bytes).
+Output written on digraph3Tutorial.pdf (158 pages, 3212290 bytes).
 PDF statistics:
  2943 PDF objects out of 2984 (max. 8388607)
  1693 compressed objects within 17 object streams

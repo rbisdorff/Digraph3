@@ -1922,7 +1922,7 @@ We may visualize the partial order defined by the epistemic disjunction of these
 
 .. Figure:: tutorialKemeny.png
    :name: tutorialKemeny
-   :width: 200pt
+   :width: 175pt
    :align: center
 
    Epistemic disjunction of Kemeny rankings	   
@@ -1952,7 +1952,7 @@ We notice that the first crisp *Slater* ranking is a rather good fit (+0.676), s
 
 .. Figure:: tutorialSlater.png
     :name: tutorialSlater
-    :width: 200pt
+    :width: 175pt
     :align: center
 
     Epistemic disjunction of Slater rankings
