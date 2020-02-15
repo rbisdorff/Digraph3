@@ -1362,18 +1362,20 @@ class WeakCopelandOrder(TransitiveDigraph):
         
         # compute net flows
         tnf = time()
-        c = PolarisedDigraph(other)
-        cRelation = c.relation
+##        c = PolarisedDigraph(other)
+##        cRelation = c.relation
         copelandScores = []
         for x in actions:
-            copelandScore = Decimal('0')
-            for y in actions:
-                copelandScore += cRelation[x][y] - cRelation[y][x]
+            gx = gamma[x]
+####            copelandScore = Decimal('0')
+##            for y in actions:
+##                copelandScore += cRelation[x][y] - cRelation[y][x]
+            copelandScore = len(gx[0]) - len(gx[1])
             actions[x]['score'] = copelandScore
-            copelandScores.append((copelandScore,x))
+            copelandScores.append((-copelandScore,x))
         # reversed sorting with keeping the actions initial ordering
         # in case of ties
-        copelandScores.sort(reverse=True)
+        copelandScores.sort()
         
         self.copelandScores = copelandScores
 
@@ -1418,10 +1420,10 @@ class WeakCopelandOrder(TransitiveDigraph):
         print('action \t score')
         if direction == 'descending':
             for x in self.copelandScores:
-                print('%s \t %.2f' %(x[1],x[0]))
+                print('%s \t %.2f' %(x[1],-x[0]))
         else:
             for x in reversed(self.copelandScores):
-                print('%s \t %.2f' %(x[1],x[0]))
+                print('%s \t %.2f' %(x[1],-x[0]))
 
 class WeakNetFlowsOrder(TransitiveDigraph):
     """

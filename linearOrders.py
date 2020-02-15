@@ -842,12 +842,11 @@ class CopelandOrder(LinearOrder):
         When Gamma == True, the Copeland scores
         are computed with the help of the gama functions as
         the difference between outdegrees and indegrees.
-
-        If False, the scores are computed as the sum of the differences
+        If False, they are computed as the sum of the differences
         between the polarised outranking characteristics.
 
-        When RankingRelation, copeland scores equivalent classes are ordered
-        in decreasing lexicographic order. Otherwise, they are ordered in incrasing
+        When RankingRelation == True, *Copeland* scores equivalent classes are ordered
+        in decreasing lexicographic order. Otherwise, they are ordered in increasing
         lexicographic order.
         
         """
