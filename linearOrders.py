@@ -832,11 +832,24 @@ class CopelandOrder(LinearOrder):
     instantiates the Copeland Order from
     a given bipolar-valued Digraph instance
     """
-    def __init__(self,other,coDual=False,Comments=False,Debug=False):
+    def __init__(self,other,coDual=False,Gamma=True,\
+                 RankingRelation=True,Comments=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph following
         the Copeland ordering rule
+
+        When Gamma == True, the Copeland scores
+        are computed with the help of the gama functions as
+        the difference between outdegrees and indegrees.
+
+        If False, the scores are computed as the sum of the differences
+        between the polarised outranking characteristics.
+
+        When RankingRelation, copeland scores equivalent classes are ordered
+        in decreasing lexicographic order. Otherwise, they are ordered in incrasing
+        lexicographic order.
+        
         """
 
         #from copy import deepcopy
@@ -872,20 +885,25 @@ class CopelandOrder(LinearOrder):
         tnf = time()
         incCopelandScores = []
         decCopelandScores = []
-        c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
+        # with gamma functions
+        if Gamma:
+            for x in actions:
+                copelandScore = len(gamma[x][0]) - len(gamma[x][1])
+                incCopelandScores.append((copelandScore,x))
+                decCopelandScores.append((-copelandScore,x))
+        else: # with Condorcet Digraph valuation
+            c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
                              StrictCut=True,KeepValues=False)
-        if Debug:
-            print(c)
-        c.recodeValuation()
-        cRelation = c.relation
-        for x in actions:
-            copelandScore = Decimal('0')
-            for y in actions:
-                copelandScore += cRelation[x][y] - cRelation[y][x]
-##        for x in actions:
-##            copelandScore = len(gamma[x][0]) - len(gamma[x][1])
-            incCopelandScores.append((copelandScore,x))
-            decCopelandScores.append((-copelandScore,x))
+            if Debug:
+                print(c)
+            c.recodeValuation()
+            cRelation = c.relation
+            for x in actions:
+                copelandScore = Decimal('0')
+                for y in actions:
+                    copelandScore += cRelation[x][y] - cRelation[y][x]
+                incCopelandScores.append((copelandScore,x))
+                decCopelandScores.append((-copelandScore,x))
         # reversed sorting with keeping the actions initial ordering
         # in case of ties
         incCopelandScores.sort()
@@ -913,13 +931,17 @@ class CopelandOrder(LinearOrder):
         runTimes['copeland'] = time() - tnf
 
         # init relation
+        if RankingRelation:
+            relOrdering = copelandRanking
+        else:
+            relOrdering = list(reversed(copelandOrder))
         tr = time()
         for i in range(n):
-            x = copelandRanking[i]
+            x = relOrdering[i]
             selfRelation[x] = {}
             srx = selfRelation[x]
             for j in range(n):
-                y = copelandRanking[j]
+                y = relOrdering[j]
                 if i < j:
                     srx[y] = Max
                 elif i == j:
