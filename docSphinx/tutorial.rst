@@ -1844,7 +1844,7 @@ The *Copeland* scores deliver actually only a unique *weak order*, i.e. a rankin
     Epistemic determination level :  0.230
     Bipolar-valued equivalalence  : +0.107
 
-With an epistemic determination level of 0.230, the *extended Kendall tau* index is in fact computed on 61.50% of the pairwise strict outranking comparisons. Furthermore, the bipolar-valued *relational equivalence* characteristics between the strict outranking relation and the *Copeland* ranking equals +0.107, i.e. a *majority* of 55.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding *Copeland* ranking.
+With an epistemic determination level of 0.230, the *extended Kendall tau* index is in fact computed on 61.50% of the pairwise strict outranking comparisons. Furthermore, the bipolar-valued *relational equivalence* characteristics between the strict outranking relation and the *Copeland* ranking equals +0.107, i.e. a *majority* of 55.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding *Copeland* ranking (see [BIS-2012]_).
 
 Let us now consider a similar ranking rule, but working directly on the bipolar-valued strict outranking digraph.
 
@@ -1871,7 +1871,7 @@ The valued version of the *Copeland* rule, called **NetFlows** rule, computes fo
     NetFlows Ranking:
     ['a5', 'a7', 'a6', 'a3', 'a1', 'a8', 'a4', 'a9', 'a2']
 
-The *net-flow* scores deliver in this example a ranking *without ties*. It may happen, however, that we obtain, as with the *Copeland* scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In case of ties, it is possible to construct again the corresponding *weak order* with the :py:class:`transitiveDigraphs.WeakNetFlowsOrder` class.
+The *net-flow* scores deliver in this example a ranking *without ties*. It may happen often, however, that we obtain, as with the *Copeland* scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again the corresponding *weak order* with the :py:class:`transitiveDigraphs.WeakNetFlowsOrder` class.
 
 The resulting **NetFlows** ranking is here, in this didactic example, slightly better correlated (+0.638) with the given outranking relation as its crisp cousin, the *Copeland* ranking. 
 
@@ -1887,7 +1887,7 @@ The resulting **NetFlows** ranking is here, in this didactic example, slightly b
 
 Indeed, the extended Kenall tau index of  +0.638 leads to a bipolar-valued equivalence characteristics of 0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding *Copeland* ranking.
 
-To appreciate the respective quality of both the *Copeland* and the *NetFlows* rankings, it is useful to consider *Kemeny* 's and *Slater* 's optimal ranking rules.
+To appreciate the respective quality of both the *Copeland* and the *NetFlows* rankings, it is useful to consider *Kemeny* 's and *Slater* 's **optimal** ranking rules.
 
 *Kemeny* rankings
 .................
@@ -2003,7 +2003,7 @@ More efficient ranking heuristics, like the *Copeland* and the *NetFlows* rules,
 *Kohler* 's ranking-by-choosing rule
 ....................................
 
-*Kohler* 's **ranking-by-choosing** rule can be formulated like this. 
+**Kohler** 's *ranking-by-choosing* rule can be formulated like this. 
 
 At step *i* (*i* goes from 1 to *n*) do the following:
 
@@ -2029,12 +2029,12 @@ At step *i* (*i* goes from 1 to *n*) do the following:
 
 With this *min-max* ranking-by-choosing strategy, we find a correlation result (+0.747) that is clearly the nearest to an optimal Kemeny ranking (see :numref:`optimalKemeny`). Only two adjacent pairs: ('a6','a7') and ('a8','a9') are actually inverted here.
 
-Kohler's ranking has a dual version, the *Arrow-Raynaud* **ordering-by-choosing**, where a corresponding *max-min* strategy is used on the non-strict outranking digraph for ordering the from the lowset to the best (see [DIA-2010]_). 
+Kohler's ranking has a dual version, the **Arrow-Raynaud** *ordering-by-choosing*, where a corresponding *max-min* strategy is used on the non-strict outranking digraph for ordering the from the *worst* to the *best* (see [DIA-2010]_). 
 
 *Tideman* 's ranked-pairs rule
 ..............................
 
-Working on the non strict outranking digraph *g*, a further *ranking-by-choosing* heuristic, the **RankedPairs** rule, is based on a *prudent incremental* construction of linear orders that avoids on the fly any cycling outrankings (see [LAM-2009]_). The ranking rule may be formulated as follows:
+Working on the *non strict* outranking digraph *g*, a further *ranking-by-choosing* heuristic, the **RankedPairs** rule, is based on a *prudent incremental* construction of linear orders that avoids on the fly any cycling outrankings (see [LAM-2009]_). The ranking rule may be formulated as follows:
 
     1. Rank the ordered pairs :math:`(x,y)` of alternatives in decreasing order of the outranking characteristic values :math:`r(x\, \geq \,y)`;
     2. Consider the pairs in that order (ties are resolved by a lexicographic rule):
@@ -2069,12 +2069,12 @@ The *RankedPairs* ranking rule actually renders in fact an optimal *Kemeny* rank
 
 Similar to Kohler's rule, the RankedPairs rule has also a *codual* version, the **Dias-Lamboray** *ordering-by-choosing* rule; working this time on the codual strict outranking digraph (see [LAM-2009]_).
 
-Unfortunately, the *RankedPairs* ranking rule, as well as *Kohler* 's ranking rule, are *not efficiently scalable* to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only the *Copeland* and, more accurate, the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the strict outranking digraph, remain in fact computationally efficient.
+Unfortunately, the *ranking-by-choosing*, as well as their codual *ordering-by-choosing* rules, are *not efficiently scalable* to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only the *Copeland* and, more accuratly, the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the strict outranking digraph, remain in fact computationally efficient.
  
 Ranking big performance tableaux
 ................................
 
-None of the previous ranking heuristics, using essentially only the information given by the outranking relation, are scalable for big outranking digraphs gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into ordered quantiles equivalence classes. This decomposition will lead to a pre-ranked sparse outranking digraph.
+None of the previous ranking heuristics, using essentially only the information given by the outranking relation, are scalable for **big outranking digraphs** gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into ordered quantiles equivalence classes. This decomposition will lead to a pre-ranked sparse outranking digraph.
 
 In the coding example, we generate for instance, by using multiprocessing techniques, first, a cost benefit performance tableau of 100 decision alternatives and, secondly, we construct a **pre-ranked sparse outranking digraph** instance called *bg*. Notice BTW the *BigData* flag used here for generating a parsimonious performance tableau.
 
