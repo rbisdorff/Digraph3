@@ -2029,7 +2029,7 @@ At step *i* (*i* goes from 1 to *n*) do the following:
 
 With this *min-max* ranking-by-choosing strategy, we find a correlation result (+0.747) that is clearly the nearest to an optimal Kemeny ranking (see :numref:`optimalKemeny`). Only two adjacent pairs: ('a6','a7') and ('a8','a9') are actually inverted here.
 
-Kohler's ranking has a dual version, the **Arrow-Raynaud** *ordering-by-choosing*, where a corresponding *max-min* strategy is used on the non-strict outranking digraph for ordering the from the *worst* to the *best* (see [DIA-2010]_). 
+Kohler's ranking has a *dual* version, the prudent **Arrow-Raynaud** *ordering-by-choosing* rule, where a corresponding *max-min* strategy, when used on the *non-strict* outranking digraph, for ordering the from the *worst* to the *best* produces the same eventual ranking result (see [DIA-2010]_). 
 
 *Tideman* 's ranked-pairs rule
 ..............................
@@ -2067,14 +2067,14 @@ The *RankedPairs* ranking rule actually renders in fact an optimal *Kemeny* rank
     Bipolar-valued equivalalence : +0.179
     Epistemic determination      :  0.230
 
-Similar to Kohler's rule, the RankedPairs rule has also a *codual* version, the **Dias-Lamboray** *ordering-by-choosing* rule; working this time on the codual strict outranking digraph (see [LAM-2009]_).
+Similar to *Kohler* 's rule, the *RankedPairs* rule has also a prudent *dual* version, the **Dias-Lamboray** *ordering-by-choosing* rule, which produces, when working this time on the codual strict outranking digraph, the same ranking result (see [LAM-2009]_).
 
-Unfortunately, the *ranking-by-choosing*, as well as their codual *ordering-by-choosing* rules, are *not efficiently scalable* to outranking digraphs of larger orders (> 100). For such outranking digraphs, with several hundred of alternatives, only the *Copeland* and, more accuratly, the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the strict outranking digraph, remain in fact computationally efficient.
+Unfortunately, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* ones, are *not efficiently scalable* to outranking digraphs of larger orders (> 1000). For such outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland* and, more accuratly, the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the strict outranking digraph, remain in fact computationally efficient.
  
 Ranking big performance tableaux
 ................................
 
-None of the previous ranking heuristics, using essentially only the information given by the outranking relation, are scalable for **big outranking digraphs** gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into ordered quantiles equivalence classes. This decomposition will lead to a pre-ranked sparse outranking digraph.
+None of the previous ranking heuristics, using essentially only the information given by the outranking relation, are scalable for **big outranking digraphs** gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into **ordered quantiles equivalence classes**. This decomposition will lead to a *pre-ranked sparse* outranking digraph.
 
 In the coding example, we generate for instance, by using multiprocessing techniques, first, a cost benefit performance tableau of 100 decision alternatives and, secondly, we construct a **pre-ranked sparse outranking digraph** instance called *bg*. Notice BTW the *BigData* flag used here for generating a parsimonious performance tableau.
 
