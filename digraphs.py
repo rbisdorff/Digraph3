@@ -2047,7 +2047,7 @@ class Digraph(object):
         else:
             return {'correlation': Decimal('0.0'),\
                     'determination': determination}
-
+        
     def computeOrdinalCorrelation(self, other, MedianCut=False, filterRelation=None, Debug=False):
         """
         Renders the bipolar correlation K of a
@@ -2160,6 +2160,18 @@ class Digraph(object):
         """
         return self.computeOrdinalCorrelation(other= other,MedianCut=MedianCut,\
                                               filterRelation=filterRelation,Debug=Debug)
+
+    def showCorrelation(self,corr=None,ndigits=3):
+        """
+        Renders the valued ordinal correlation index, the crisp Kendall tau index and their epistemic determination degree.
+        """
+        if corr != None:
+            print('Correlation indexes:')
+            print( ('Crisp ordinal correlation : %%+.%df' % ndigits) % corr['correlation'])
+            print( ('Valued equivalalence      : %%+.%df' % ndigits) % (corr['correlation']*corr['determination']) )
+            print( ('Epistemic determination   :  %%.%df' % ndigits) % corr['determination'])
+        else:
+            print('Error: a computed correlation result is required !!!')  
 
     def computeKemenyIndex(self, otherRelation):
         """

@@ -2087,7 +2087,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;correlation&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">),</span>\
                     <span class="s1">&#39;determination&#39;</span><span class="p">:</span> <span class="n">determination</span><span class="p">}</span></div>
-
+        
 <div class="viewcode-block" id="Digraph.computeOrdinalCorrelation"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeOrdinalCorrelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeOrdinalCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">MedianCut</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">filterRelation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the bipolar correlation K of a</span>
@@ -2200,6 +2200,18 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">other</span><span class="o">=</span> <span class="n">other</span><span class="p">,</span><span class="n">MedianCut</span><span class="o">=</span><span class="n">MedianCut</span><span class="p">,</span>\
                                               <span class="n">filterRelation</span><span class="o">=</span><span class="n">filterRelation</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Digraph.showCorrelation"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showCorrelation">[docs]</a>    <span class="k">def</span> <span class="nf">showCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">corr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the valued ordinal correlation index, the crisp Kendall tau index and their epistemic determination degree.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">corr</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Correlation indexes:&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span> <span class="p">(</span><span class="s1">&#39;Crisp ordinal correlation : </span><span class="si">%%</span><span class="s1">+.</span><span class="si">%d</span><span class="s1">f&#39;</span> <span class="o">%</span> <span class="n">ndigits</span><span class="p">)</span> <span class="o">%</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span> <span class="p">(</span><span class="s1">&#39;Valued equivalalence      : </span><span class="si">%%</span><span class="s1">+.</span><span class="si">%d</span><span class="s1">f&#39;</span> <span class="o">%</span> <span class="n">ndigits</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">corr</span><span class="p">[</span><span class="s1">&#39;determination&#39;</span><span class="p">])</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span> <span class="p">(</span><span class="s1">&#39;Epistemic determination   :  </span><span class="si">%%</span><span class="s1">.</span><span class="si">%d</span><span class="s1">f&#39;</span> <span class="o">%</span> <span class="n">ndigits</span><span class="p">)</span> <span class="o">%</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;determination&#39;</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: a computed correlation result is required !!!&#39;</span><span class="p">)</span>  </div>
 
 <div class="viewcode-block" id="Digraph.computeKemenyIndex"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeKemenyIndex">[docs]</a>    <span class="k">def</span> <span class="nf">computeKemenyIndex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">otherRelation</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

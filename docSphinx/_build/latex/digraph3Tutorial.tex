@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{February 14, 2020}
+\date{February 17, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1383,7 +1383,7 @@ Notice that the reflexive self comparison characteristic \(r(x S x)\) is set by 
 
 
 \subsection{Codual digraph}
-\label{\detokenize{tutorial:codual-digraph}}
+\label{\detokenize{tutorial:codual-digraph}}\label{\detokenize{tutorial:codual-digraph-label}}
 From the theory (see \sphinxcite{tutorial:bis-2013}, \sphinxcite{tutorial:adt-l7} )  we know that a bipolar\sphinxhyphen{}valued outranking relation is \sphinxstylestrong{weakly complete}, i.e. if \(r(x\,S\,y) < 0.0\) then \(r(y\,S\,x) >= 0.0\) . From this property follows that a bipolar\sphinxhyphen{}valued outranking relation verifies the \sphinxstylestrong{coduality} principle: the dual (strict negation \sphinxhyphen{} \sphinxfootnotemark[14]) of the converse (inverse \textasciitilde{}) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing \sphinxfootnotemark[1].
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -2018,56 +2018,58 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 \subsection{The ranking problem}
 \label{\detokenize{tutorial:the-ranking-problem}}
-We need to rank without ties a set \sphinxstyleemphasis{X} of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar\sphinxhyphen{}valued outranking situation characteristics, i.e. \(r(x\, \geq \, y)\) for all \sphinxstyleemphasis{x}, \sphinxstyleemphasis{y} in \sphinxstyleemphasis{X} (see \sphinxcite{tutorial:bis-2013}).
+We need to rank without ties a set \sphinxstyleemphasis{X} of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{strict outranking} characteristics, i.e. \(r(x\, > \, y)\) for all \sphinxstyleemphasis{x}, \sphinxstyleemphasis{y} in \sphinxstyleemphasis{X} (see Section {\hyperref[\detokenize{tutorial:codual-digraph-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Codual digraph}}}} and \sphinxcite{tutorial:bis-2013}).
 
-Let us consider a didactic outranking digraph generated from a random \sphinxstyleemphasis{Cost\sphinxhyphen{}Benefit} performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria.
-
+Let us consider a didactic outranking digraph generated from a random \sphinxstyleemphasis{Cost\sphinxhyphen{}Benefit} performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding \sphinxstyleemphasis{strict outranking digraph} as follows.
+\sphinxSetupCaptionForVerbatim{Random bipolar\sphinxhyphen{}valued strict outranking relation characteristics}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:strictoutranking}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{RandomCBPerformanceTableau}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{,}
 \PYG{g+gp}{... }                               \PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{13}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{Normalized}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd} \PYG{o}{=} \PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{g}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} codual digraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{   r   | \PYGZsq{}a1c\PYGZsq{}  \PYGZsq{}a2c\PYGZsq{}  \PYGZsq{}a3a\PYGZsq{}  \PYGZsq{}a4a\PYGZsq{}  \PYGZsq{}a5c\PYGZsq{}  \PYGZsq{}a6c\PYGZsq{}  \PYGZsq{}a7a\PYGZsq{}  \PYGZsq{}a8n\PYGZsq{}  \PYGZsq{}a9c\PYGZsq{}}
-\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{ \PYGZsq{}a1c\PYGZsq{} |   \PYGZhy{}    +1.00  +0.10   0.00  \PYGZhy{}0.13  +0.07  +0.20  +0.10   0.00}
-\PYG{g+go}{ \PYGZsq{}a2c\PYGZsq{} |  0.00    \PYGZhy{}     0.00   0.00  \PYGZhy{}0.22  +0.22  \PYGZhy{}0.28  +0.02  \PYGZhy{}0.12}
-\PYG{g+go}{ \PYGZsq{}a3a\PYGZsq{} | \PYGZhy{}0.10   0.00    \PYGZhy{}    +0.42  \PYGZhy{}0.10  \PYGZhy{}0.20  +0.03  +0.23  +1.00}
-\PYG{g+go}{ \PYGZsq{}a4a\PYGZsq{} | +1.00   0.00  +0.17    \PYGZhy{}    \PYGZhy{}0.40  \PYGZhy{}0.20  +0.07  +0.13  +0.13}
-\PYG{g+go}{ \PYGZsq{}a5c\PYGZsq{} | +0.13  +0.37  +0.35  +0.40    \PYGZhy{}    +0.37  +0.40  +0.37  +0.03}
-\PYG{g+go}{ \PYGZsq{}a6c\PYGZsq{} | +0.57  +0.42  +0.30  +0.20  \PYGZhy{}0.03    \PYGZhy{}    +0.10  \PYGZhy{}0.03  +0.03}
-\PYG{g+go}{ \PYGZsq{}a7a\PYGZsq{} | +0.23  +0.28  +0.17  +0.60  \PYGZhy{}0.40  \PYGZhy{}0.10    \PYGZhy{}    +0.27  +1.00}
-\PYG{g+go}{ \PYGZsq{}a8n\PYGZsq{} | \PYGZhy{}0.10  +0.32  +0.17  +0.27  +0.03  +0.03  \PYGZhy{}0.27    \PYGZhy{}    +0.03}
-\PYG{g+go}{ \PYGZsq{}a9c\PYGZsq{} |  0.00  +0.12   0.00  +0.30  +0.07  +0.07  \PYGZhy{}1.00  \PYGZhy{}0.03    \PYGZhy{}}
+\PYG{g+go}{ r(\PYGZgt{}) |  \PYGZsq{}a1\PYGZsq{}  \PYGZsq{}a2\PYGZsq{}  \PYGZsq{}a3\PYGZsq{}  \PYGZsq{}a4\PYGZsq{}  \PYGZsq{}a5\PYGZsq{}  \PYGZsq{}a6\PYGZsq{}  \PYGZsq{}a7\PYGZsq{}  \PYGZsq{}a8\PYGZsq{}  \PYGZsq{}a9\PYGZsq{}}
+\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{ \PYGZsq{}a1\PYGZsq{} |    \PYGZhy{}   0.00 +0.10 \PYGZhy{}1.00 \PYGZhy{}0.13 \PYGZhy{}0.57 \PYGZhy{}0.23 +0.10 +0.00}
+\PYG{g+go}{ \PYGZsq{}a2\PYGZsq{} | \PYGZhy{}1.00   \PYGZhy{}    0.00 +0.00 \PYGZhy{}0.37 \PYGZhy{}0.42 \PYGZhy{}0.28 \PYGZhy{}0.32 \PYGZhy{}0.12}
+\PYG{g+go}{ \PYGZsq{}a3\PYGZsq{} | \PYGZhy{}0.10  0.00   \PYGZhy{}   \PYGZhy{}0.17 \PYGZhy{}0.35 \PYGZhy{}0.30 \PYGZhy{}0.17 \PYGZhy{}0.17 +0.00}
+\PYG{g+go}{ \PYGZsq{}a4\PYGZsq{} |  0.00  0.00 \PYGZhy{}0.42   \PYGZhy{}   \PYGZhy{}0.40 \PYGZhy{}0.20 \PYGZhy{}0.60 \PYGZhy{}0.27 \PYGZhy{}0.30}
+\PYG{g+go}{ \PYGZsq{}a5\PYGZsq{} | +0.13 +0.22 +0.10 +0.40   \PYGZhy{}   +0.03 +0.40 \PYGZhy{}0.03 \PYGZhy{}0.07}
+\PYG{g+go}{ \PYGZsq{}a6\PYGZsq{} | \PYGZhy{}0.07 \PYGZhy{}0.22 +0.20 +0.20 \PYGZhy{}0.37   \PYGZhy{}   +0.10 \PYGZhy{}0.03 \PYGZhy{}0.07}
+\PYG{g+go}{ \PYGZsq{}a7\PYGZsq{} | \PYGZhy{}0.20 +0.28 \PYGZhy{}0.03 \PYGZhy{}0.07 \PYGZhy{}0.40 \PYGZhy{}0.10   \PYGZhy{}   +0.27 +1.00}
+\PYG{g+go}{ \PYGZsq{}a8\PYGZsq{} | \PYGZhy{}0.10 \PYGZhy{}0.02 \PYGZhy{}0.23 \PYGZhy{}0.13 \PYGZhy{}0.37 +0.03 \PYGZhy{}0.27   \PYGZhy{}   +0.03}
+\PYG{g+go}{ \PYGZsq{}a9\PYGZsq{} |  0.00 +0.12 \PYGZhy{}1.00 \PYGZhy{}0.13 \PYGZhy{}0.03 \PYGZhy{}0.03 \PYGZhy{}1.00 \PYGZhy{}0.03   \PYGZhy{}}
 \end{sphinxVerbatim}
 
 Some ranking rules will work on the associated \sphinxstyleemphasis{Condorcet} digraph, i.e. the strict median cut polarised digraph.
-
+\sphinxSetupCaptionForVerbatim{Median cut polarised strict outranking relation characteristics}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:polarisedastrictoutranking}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c} \PYG{o}{=} \PYG{n}{PolarisedOutrankingDigraph}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{level}\PYG{o}{=}\PYG{n}{g}\PYG{o}{.}\PYG{n}{valuationdomain}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{med}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ccd} \PYG{o}{=} \PYG{n}{PolarisedOutrankingDigraph}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{level}\PYG{o}{=}\PYG{n}{g}\PYG{o}{.}\PYG{n}{valuationdomain}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{med}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}
 \PYG{g+gp}{... }                               \PYG{n}{KeepValues}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}\PYG{n}{StrictCut}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}\PYG{n}{IntegerValues}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{ r\PYGZgt{}0.0 | \PYGZsq{}a1c\PYGZsq{}  \PYGZsq{}a2c\PYGZsq{}  \PYGZsq{}a3a\PYGZsq{}  \PYGZsq{}a4a\PYGZsq{}  \PYGZsq{}a5c\PYGZsq{}  \PYGZsq{}a6c\PYGZsq{}  \PYGZsq{}a7a\PYGZsq{}  \PYGZsq{}a8n\PYGZsq{}  \PYGZsq{}a9c\PYGZsq{}}
-\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{ \PYGZsq{}a1c\PYGZsq{} |   \PYGZhy{}      +1     +1     0      \PYGZhy{}1     +1     +1     +1     0}
-\PYG{g+go}{ \PYGZsq{}a2c\PYGZsq{} |   0      \PYGZhy{}      0      0      \PYGZhy{}1     +1     \PYGZhy{}1     +1     \PYGZhy{}1}
-\PYG{g+go}{ \PYGZsq{}a3a\PYGZsq{} |  \PYGZhy{}1      0      \PYGZhy{}      +1     \PYGZhy{}1     \PYGZhy{}1     +1     +1     +1}
-\PYG{g+go}{ \PYGZsq{}a4a\PYGZsq{} |  +1      0      +1     \PYGZhy{}      \PYGZhy{}1     \PYGZhy{}1     +1     +1     +1}
-\PYG{g+go}{ \PYGZsq{}a5c\PYGZsq{} |  +1      +1     +1     +1     \PYGZhy{}      +1     +1     +1     +1}
-\PYG{g+go}{ \PYGZsq{}a6c\PYGZsq{} |  +1      +1     +1     +1     \PYGZhy{}1     \PYGZhy{}      +1     \PYGZhy{}1     +1}
-\PYG{g+go}{ \PYGZsq{}a7a\PYGZsq{} |  +1      +1     +1     +1     \PYGZhy{}1     \PYGZhy{}1     \PYGZhy{}      +1     +1}
-\PYG{g+go}{ \PYGZsq{}a8n\PYGZsq{} |  \PYGZhy{}1      +1     +1     +1     +1     +1     \PYGZhy{}1     \PYGZhy{}      +1}
-\PYG{g+go}{ \PYGZsq{}a9c\PYGZsq{} |  0       +1     0      +1     +1     +1     \PYGZhy{}1     \PYGZhy{}1     \PYGZhy{}}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ccd}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}\PYG{n}{IntegerValues}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{  r(\PYGZgt{}) | \PYGZsq{}a1\PYGZsq{} \PYGZsq{}a2\PYGZsq{} \PYGZsq{}a3\PYGZsq{} \PYGZsq{}a4\PYGZsq{} \PYGZsq{}a5\PYGZsq{} \PYGZsq{}a6\PYGZsq{} \PYGZsq{}a7\PYGZsq{} \PYGZsq{}a8\PYGZsq{} \PYGZsq{}a9\PYGZsq{}}
+\PYG{g+go}{  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{  \PYGZsq{}a1\PYGZsq{} |   \PYGZhy{}    0   +1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   +1    0}
+\PYG{g+go}{  \PYGZsq{}a2\PYGZsq{} |  \PYGZhy{}1    \PYGZhy{}   +0    0   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1}
+\PYG{g+go}{  \PYGZsq{}a3\PYGZsq{} |  \PYGZhy{}1    0    \PYGZhy{}   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1    0}
+\PYG{g+go}{  \PYGZsq{}a4\PYGZsq{} |   0    0   \PYGZhy{}1    \PYGZhy{}   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1}
+\PYG{g+go}{  \PYGZsq{}a5\PYGZsq{} |  +1   +1   +1   +1    \PYGZhy{}   +1   +1   \PYGZhy{}1   \PYGZhy{}1}
+\PYG{g+go}{  \PYGZsq{}a6\PYGZsq{} |  \PYGZhy{}1   \PYGZhy{}1   +1   +1   \PYGZhy{}1    \PYGZhy{}   +1   \PYGZhy{}1   \PYGZhy{}1}
+\PYG{g+go}{  \PYGZsq{}a7\PYGZsq{} |  \PYGZhy{}1   +1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1    \PYGZhy{}   +1   +1}
+\PYG{g+go}{  \PYGZsq{}a8\PYGZsq{} |  \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   +1   \PYGZhy{}1    \PYGZhy{}   +1}
+\PYG{g+go}{  \PYGZsq{}a9\PYGZsq{} |   0   +1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1    \PYGZhy{}}
 \end{sphinxVerbatim}
 
-Unfortunately, the crisp \sphinxstyleemphasis{Condorcet} digraph, associated with such a given outranking digraph, presents only exceptionally a linear ordering. Usually, pairwise majority comparisons do not render even a complete or, at least, a transitive partial outranking relation. There may even frequently appear cyclic outranking situations (see the tutorial on {\hyperref[\detokenize{tutorial:linearvoting-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing the winner of an election}}}})
+Unfortunately, such  crisp median\sphinxhyphen{}cut \sphinxstyleemphasis{Condorcet} digraphs, associated with a given outranking digraph, present only exceptionally a linear ordering. Usually, pairwise majority comparisons do not render even a complete or, at least, a transitive partial outranking relation. There may even frequently appear cyclic outranking situations (see the tutorial on {\hyperref[\detokenize{tutorial:linearvoting-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing the winner of an election}}}}).
 
-To estimate how difficult this ranking problem may be, we can have a look at the corresponding \sphinxstyleemphasis{strict} outranking digraph graphviz drawing.
+To estimate how \sphinxstyleemphasis{difficult} this ranking problem here may be, we can have a look at the corresponding \sphinxstyleemphasis{strict} outranking digraph graphviz drawing.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd} \PYG{o}{=} \PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{g}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} converse of the negation of g}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rankingTutorial}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to rankingTutorial.dot}
@@ -2079,9 +2081,9 @@ To estimate how difficult this ranking problem may be, we can have a look at the
 \capstart
 
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{rankingTutorial}.png}
-\caption{The strict outranking digraph}\label{\detokenize{tutorial:rankingtutorial}}\end{figure}
+\caption{The \sphinxstyleemphasis{strict outranking} digraph}\label{\detokenize{tutorial:rankingtutorial}}\end{figure}
 
-The shown strict outranking relation is apparently not transitive: for instance, alternative \sphinxstyleemphasis{a8n} outranks alternative \sphinxstyleemphasis{a6c} and alternative \sphinxstyleemphasis{a6c} outranks \sphinxstyleemphasis{a4a}, however \sphinxstyleemphasis{a8n} does not outrank \sphinxstyleemphasis{a4a} (see \hyperref[\detokenize{tutorial:rankingtutorial}]{Fig.\@ \ref{\detokenize{tutorial:rankingtutorial}}}). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph \sphinxstyleemphasis{gcd}.
+The shown strict outranking relation is apparently \sphinxstyleemphasis{not transitive}: for instance, alternative \sphinxstyleemphasis{a8} outranks alternative \sphinxstyleemphasis{a6} and alternative \sphinxstyleemphasis{a6} outranks \sphinxstyleemphasis{a4}, however \sphinxstyleemphasis{a8} does not outrank \sphinxstyleemphasis{a4} (see \hyperref[\detokenize{tutorial:rankingtutorial}]{Fig.\@ \ref{\detokenize{tutorial:rankingtutorial}}}). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph \sphinxstyleemphasis{gcd}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeTransitivityDegree}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
@@ -2098,7 +2100,7 @@ The strict outranking relation is hence very far from being transitive; a seriou
 \PYG{g+go}{ 1: [\PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}] , credibility : 0.033}
 \end{sphinxVerbatim}
 
-There is one chordless circuit detected in the given strict outranking digraph \sphinxstyleemphasis{gcd}, namely \sphinxstyleemphasis{a6c} outranks \sphinxstyleemphasis{a7a}, the latter outranks \sphinxstyleemphasis{a8n}, and \sphinxstyleemphasis{a8n} outranks again \sphinxstyleemphasis{a6c} (see \hyperref[\detokenize{tutorial:rankingtutorial}]{Fig.\@ \ref{\detokenize{tutorial:rankingtutorial}}}). Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.
+There is one chordless circuit detected in the given strict outranking digraph \sphinxstyleemphasis{gcd}, namely \sphinxstyleemphasis{a6} outranks \sphinxstyleemphasis{a7}, the latter outranks \sphinxstyleemphasis{a8}, and \sphinxstyleemphasis{a8} outranks again \sphinxstyleemphasis{a6} (see \hyperref[\detokenize{tutorial:rankingtutorial}]{Fig.\@ \ref{\detokenize{tutorial:rankingtutorial}}}). Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.
 
 Several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.
 
@@ -2107,11 +2109,12 @@ The Digraph3 resources provide some of the most common of these ranking rules, l
 
 \subsection{The \sphinxstyleemphasis{Copeland} ranking}
 \label{\detokenize{tutorial:the-copeland-ranking}}
-\sphinxstyleemphasis{Copeland} ‘s rule, the most intuitive one as it works well for any outranking relation which models in fact a linear order, computes for each alternative a score resulting from the sum of the differences between the crisp \sphinxstylestrong{outranking} characteristics \(r_{>0.0}(x\, \geq \,y)\) and the crisp \sphinxstylestrong{outranked} characteristics \(r_{>0.0}(y\, \geq \, x)\)  for all pairs of alternatives where \sphinxstyleemphasis{y} is different from \sphinxstyleemphasis{x}. The alternatives are ranked in decreasing order of these \sphinxstyleemphasis{Copeland} scores; ties, the case given, being resolved by a lexicographical rule.
-
+\sphinxstyleemphasis{Copeland} ‘s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, computes for each alternative a score resulting from the sum of the differences between the crisp \sphinxstylestrong{strict outranking} characteristics \(r_{>0.0}(x\, > \,y)\) and the crisp \sphinxstylestrong{strict outranked} characteristics \(r_{>0.0}(y\, > \, x)\)  for all pairs of alternatives where \sphinxstyleemphasis{y} is different from \sphinxstyleemphasis{x}. The alternatives are ranked in decreasing order of these \sphinxstyleemphasis{Copeland} scores; ties, the case given, being resolved by a lexicographical rule.
+\sphinxSetupCaptionForVerbatim{Computing a \sphinxstyleemphasis{Copeland} Ranking}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:copelandranking}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{CopelandOrder}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cop} \PYG{o}{=} \PYG{n}{CopelandOrder}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cop} \PYG{o}{=} \PYG{n}{CopelandOrder}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ Copeland scores}
 \PYG{g+go}{ a5 : 12}
 \PYG{g+go}{ a1 :  2}
@@ -2122,34 +2125,38 @@ The Digraph3 resources provide some of the most common of these ranking rules, l
 \PYG{g+go}{ a9 : \PYGZhy{}3}
 \PYG{g+go}{ a3 : \PYGZhy{}5}
 \PYG{g+go}{ a2 : \PYGZhy{}7}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cop}\PYG{o}{.}\PYG{n}{showRanking}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Copeland Ranking:}
 \PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-Alternative \sphinxstyleemphasis{a5} obtains the best \sphinxstyleemphasis{Copeland} score (+12), followed by alternatives \sphinxstyleemphasis{a1}, \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a7} with same score (+2); following the lexicographic rule, \sphinxstyleemphasis{a1} is hence ranked before \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a6} before \sphinxstyleemphasis{a7}. Same situation is observed for \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a9} with a score of \sphinxhyphen{}3.
+Alternative \sphinxstyleemphasis{a5} obtains the best \sphinxstyleemphasis{Copeland} score (+12), followed by alternatives \sphinxstyleemphasis{a1}, \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a7} with same score (+2); following the lexicographic rule, \sphinxstyleemphasis{a1} is hence ranked before \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a6} before \sphinxstyleemphasis{a7}. Same situation is observed for \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a9} with a score of \sphinxhyphen{}3 (see \hyperref[\detokenize{tutorial:copelandranking}]{Listing \ref{\detokenize{tutorial:copelandranking}}}).
 
-The \sphinxstyleemphasis{Copeland} scores deliver actually only a unique \sphinxstyleemphasis{weak order}, i.e. a ranking with potential ties. This weak order may be constructed with the \sphinxcode{\sphinxupquote{transitiveDigraphs.WeakCopelandOrder}} class.
+The \sphinxstyleemphasis{Copeland} scores deliver actually only a unique \sphinxstyleemphasis{weak order}, i.e. a ranking with potential ties. This weak order may be constructed with the \sphinxcode{\sphinxupquote{transitiveDigraphs.WeakCopelandOrder}} class. Notice by the way that \sphinxstyleemphasis{Copeland} scores here are in fact \sphinxstyleemphasis{invariant} under a \sphinxstyleemphasis{codual}, i.e. the negation of the converse ( \sphinxhyphen{} ( \textasciitilde{} \sphinxstyleemphasis{g} ) ) transform of the outranking digraph.
 
-Notice by the way that \sphinxstyleemphasis{Copeland} scores, as computed in the associated \sphinxstyleemphasis{Condorcet} relation table or similarly in the codual digraph drawing above, are in fact \sphinxstyleemphasis{invariant} under a \sphinxstyleemphasis{codual}, i.e. the negation of the converse ( \sphinxhyphen{} ( \textasciitilde{} \sphinxstyleemphasis{g} ) ) transform of the outranking digraph.
-
-\sphinxstyleemphasis{Copeland} ‘s ranking rule actually renders a linear order which is rather correlated, in the ordinal \sphinxstyleemphasis{Kendall} sense (see \sphinxcite{tutorial:bis-2012}), with the given pairwise outranking relation.
-
+\sphinxstyleemphasis{Copeland} ‘s ranking rule actually renders a linear order which is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal \sphinxstyleemphasis{Kendall} sense (see \hyperref[\detokenize{tutorial:correlationindexes}]{Listing \ref{\detokenize{tutorial:correlationindexes}}} and \sphinxcite{tutorial:bis-2012}).
+\sphinxSetupCaptionForVerbatim{Checking the quality of the \sphinxstyleemphasis{Copeland} Ranking}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:correlationindexes}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{cop}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Fitness of Copeland}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s ranking: }\PYG{l+s+si}{\PYGZpc{}.3f}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{\PYGZpc{}} \PYG{n}{corr}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
-\PYG{g+go}{ Fitness of Copeland\PYGZsq{}s ranking: +0.463}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeRankingCorrelation}\PYG{p}{(}\PYG{n}{cop}\PYG{o}{.}\PYG{n}{copelandRanking}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
+\PYG{g+go}{ Correlation indexes:}
+\PYG{g+go}{ Extended Kendall tau index    : +0.463}
+\PYG{g+go}{ Epistemic determination level :  0.230}
+\PYG{g+go}{ Bipolar\PYGZhy{}valued equivalalence  : +0.107}
 \end{sphinxVerbatim}
+
+With an epistemic determination level of 0.230, the \sphinxstyleemphasis{extended Kendall tau} index is in fact computed on 61.50\% of the pairwise strict outranking comparisons. Furthermore, the bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{relational equivalence} characteristics between the strict outranking relation and the \sphinxstyleemphasis{Copeland} ranking equals +0.107, i.e. a \sphinxstyleemphasis{majority} of 55.35\% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding \sphinxstyleemphasis{Copeland} ranking.
+
+Let us now consider a similar ranking rule, but working directly on the bipolar\sphinxhyphen{}valued strict outranking digraph.
 
 
 \subsection{The \sphinxstyleemphasis{NetFlows} ranking}
 \label{\detokenize{tutorial:the-netflows-ranking}}
-The valued version of the \sphinxstyleemphasis{Copeland} rule, called \sphinxstylestrong{NetFlows} rule, is working directly on the given bipolar\sphinxhyphen{}valued outranking digraph \sphinxstyleemphasis{g}. For each alternative \sphinxstyleemphasis{x} we compute a \sphinxstyleemphasis{net\sphinxhyphen{}flow} score,  i.e. the sum of the differences between the \sphinxstylestrong{outranking} characteristics \(r(x\, \geq \,y)\) and the \sphinxstylestrong{outranked} characteristics \(r(y\, \geq \,x)\) for all pairs of alternatives where \sphinxstyleemphasis{y} is different from \sphinxstyleemphasis{x}.
+The valued version of the \sphinxstyleemphasis{Copeland} rule, called \sphinxstylestrong{NetFlows} rule, is working directly on the given bipolar\sphinxhyphen{}valued strict outranking digraph \sphinxstyleemphasis{gcd}. For each alternative \sphinxstyleemphasis{x} we compute a \sphinxstyleemphasis{net\sphinxhyphen{}flow} score,  i.e. the sum of the differences between the \sphinxstylestrong{strict outranking} characteristics \(r(x\, > \,y)\) and the \sphinxstylestrong{strict outranked} characteristics \(r(y\, > \,x)\) for all pairs of alternatives where \sphinxstyleemphasis{y} is different from \sphinxstyleemphasis{x}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{NetFlowsOrder}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nf} \PYG{o}{=} \PYG{n}{NetFlowsOrder}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nf}\PYG{o}{.}\PYG{n}{netFlows}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nf} \PYG{o}{=} \PYG{n}{NetFlowsOrder}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ Net Flows :}
 \PYG{g+go}{ a5 : 3.600}
 \PYG{g+go}{ a7 : 2.800}
@@ -2164,34 +2171,42 @@ The valued version of the \sphinxstyleemphasis{Copeland} rule, called \sphinxsty
 \PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-The \sphinxstyleemphasis{net\sphinxhyphen{}flow} scores deliver in this example a ranking without ties. It may easily happen however, that we obtain, as with the \sphinxstyleemphasis{Copeland} scores above, only a ranking with ties, which will then be resolved by following again the lexicographic rule. In case of ties, it is possible to construct again the corresponding \sphinxstyleemphasis{weak order} with the \sphinxcode{\sphinxupquote{transitiveDigraphs.WeakNetFlowsOrder}} class.
+The \sphinxstyleemphasis{net\sphinxhyphen{}flow} scores deliver in this example a ranking \sphinxstyleemphasis{without ties}. It may easily happen however, that we obtain, as with the \sphinxstyleemphasis{Copeland} scores above, only a ranking with ties, which will then be resolved by following again the lexicographic rule. In case of ties, it is possible to construct again the corresponding \sphinxstyleemphasis{weak order} with the \sphinxcode{\sphinxupquote{transitiveDigraphs.WeakNetFlowsOrder}} class.
 
-The resulting \sphinxstylestrong{NetFlows} ranking is here, in this didactic example, much better correlated with the given outranking relation as its crisp cousin, the \sphinxstyleemphasis{Copeland} ranking.
+The resulting \sphinxstylestrong{NetFlows} ranking is here, in this didactic example, better correlated (+0.638) with the given outranking relation as its crisp cousin, the \sphinxstyleemphasis{Copeland} ranking.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{nf}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Fitness of net flows ranking: }\PYG{l+s+si}{\PYGZpc{}.3f}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{\PYGZpc{}} \PYG{n}{corr}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
-\PYG{g+go}{ Fitness of net\PYGZhy{}flows ranking: 0.638}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{nf}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
+\PYG{g+go}{ Correlation indexes:}
+\PYG{g+go}{ Extended Kendall tau         : +0.638}
+\PYG{g+go}{ Epistemic determination      :  0.230}
+\PYG{g+go}{ Bipolar\PYGZhy{}valued equivalalence : +0.147}
 \end{sphinxVerbatim}
 
-To appreciate the effective quality of both the \sphinxstyleemphasis{Copeland} and the \sphinxstyleemphasis{NetFlows} rankings, it is useful to consider \sphinxstyleemphasis{Kemeny} ‘s and \sphinxstyleemphasis{Slater} ‘s optimal ranking rules.
+Indeed, the extended Kenall tau index of  +0.638 leads to a bipolar\sphinxhyphen{}valued equivalence characteristics of 0.147, i.e. a \sphinxstyleemphasis{majority} of 57.35\% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding \sphinxstyleemphasis{Copeland} ranking.
+
+To appreciate the respective quality of both the \sphinxstyleemphasis{Copeland} and the \sphinxstyleemphasis{NetFlows} rankings, it is useful to consider \sphinxstyleemphasis{Kemeny} ‘s and \sphinxstyleemphasis{Slater} ‘s optimal ranking rules.
 
 
 \subsection{\sphinxstyleemphasis{Kemeny} rankings}
 \label{\detokenize{tutorial:kemeny-rankings}}
-A \sphinxstylestrong{Kemeny} ranking is a linear order which is closest, in the sense of the ordinal \sphinxstyleemphasis{Kendall} distance (see \sphinxcite{tutorial:bis-2012}), to the given valued outranking digraph \sphinxstyleemphasis{g}.
+A \sphinxstylestrong{Kemeny} ranking is a linear order which is \sphinxstyleemphasis{closest}, in the sense of the ordinal \sphinxstyleemphasis{Kendall} distance (see \sphinxcite{tutorial:bis-2012}), to the given valued outranking digraph \sphinxstyleemphasis{g}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{KemenyOrder}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ke} \PYG{o}{=} \PYG{n}{KemenyOrder}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} default orderLimit is 7}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ke} \PYG{o}{=} \PYG{n}{KemenyOrder}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} default orderLimit is 7}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ke}\PYG{o}{.}\PYG{n}{showRanking}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{ke}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Fitness of Kemeny}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s ranking: }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{\PYGZpc{}} \PYG{n}{corr}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
-\PYG{g+go}{ Fitness of Kemeny\PYGZsq{}s ranking: +0.779}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{ke}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
+\PYG{g+go}{ Correlation indexes:}
+\PYG{g+go}{ Extended Kendall tau         : +0.779}
+\PYG{g+go}{ Epistemic determination      :  0.230}
+\PYG{g+go}{ Bipolar\PYGZhy{}valued equivalalence : +0.179}
 \end{sphinxVerbatim}
 
-So, \sphinxstylestrong{+0.779} is the highest possible ordinal correlation (fitness) any potential ranking one can achieve with the given pairwise outranking relation. A \sphinxstyleemphasis{Kemeny} ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example here, we obtain in fact two optimal \sphinxstyleemphasis{Kemeny} rankings with a same maximal \sphinxstyleemphasis{Kemeny} index of 12.92.
+So, \sphinxstylestrong{+0.779} is the highest possible ordinal correlation (fitness) any potential ranking one can achieve with the given pairwise strict outranking relation. A \sphinxstyleemphasis{Kemeny} ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example here, we obtain in fact two optimal \sphinxstyleemphasis{Kemeny} rankings with a same maximal \sphinxstyleemphasis{Kemeny} index of 12.92.
 \sphinxSetupCaptionForVerbatim{Optimal Kemeny rankings}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:optimalkemeny}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -2202,11 +2217,11 @@ So, \sphinxstylestrong{+0.779} is the highest possible ordinal correlation (fitn
 \PYG{g+go}{ Decimal(\PYGZsq{}12.9166667\PYGZsq{})}
 \end{sphinxVerbatim}
 
-We may visualize the partial order defined by the epistemic disjunction of these seven \sphinxstyleemphasis{Kemeny} rankings (see \sphinxhref{techDoc.html\#module-transitiveDigraphs}{transitiveDigraphs module} and \hyperref[\detokenize{tutorial:tutorialkemeny}]{Fig.\@ \ref{\detokenize{tutorial:tutorialkemeny}}}) as follows.
+We may visualize the partial order defined by the \sphinxstyleemphasis{epistemic disjunction} of both \sphinxstyleemphasis{Kemeny} rankings (see \sphinxhref{techDoc.html\#module-transitiveDigraphs}{transitiveDigraphs module} and \hyperref[\detokenize{tutorial:tutorialkemeny}]{Fig.\@ \ref{\detokenize{tutorial:tutorialkemeny}}}) as follows.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{tranditiveDigraphs} \PYG{k+kn}{import} \PYG{n}{KemenyOrdersFusion}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wke} \PYG{o}{=} \PYG{n}{KemenyOrdersFusion}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wke} \PYG{o}{=} \PYG{n}{KemenyOrdersFusion}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wke}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tutorialKemeny}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to tutorialKemeny.dot}
@@ -2233,19 +2248,31 @@ It is interesting to notice in \hyperref[\detokenize{tutorial:optimalkemeny}]{Li
 
 \subsection{\sphinxstyleemphasis{Slater} rankings}
 \label{\detokenize{tutorial:slater-rankings}}
-The \sphinxstylestrong{Slater} ranking rule is similar to \sphinxstyleemphasis{Kemeny} ‘s, but it is working, instead,  on the associated crisp Condorcet digraph \sphinxstyleemphasis{c}. It renders here the following results.
+The \sphinxstylestrong{Slater} ranking rule is similar to \sphinxstyleemphasis{Kemeny} ‘s, but it is working, instead,  on the associated crisp Condorcet digraph \sphinxstyleemphasis{ccd}. It renders here the following results.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sl} \PYG{o}{=} \PYG{n}{KemenyOrder}\PYG{p}{(}\PYG{n}{c}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sl} \PYG{o}{=} \PYG{n}{KemenyOrder}\PYG{p}{(}\PYG{n}{ccd}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{sl}\PYG{o}{.}\PYG{n}{maximalRankings}\PYG{p}{)}
 \PYG{g+go}{ 7}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sl}\PYG{o}{.}\PYG{n}{showRanking}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{sl}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Fitness of Slater}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s ranking: }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{\PYGZpc{}} \PYG{n}{corr}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
-\PYG{g+go}{ Fitness of Slater\PYGZsq{}s ranking: +0.676}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{slw} \PYG{o}{=} \PYG{n}{KemenyOrdersFusion}\PYG{p}{(}\PYG{n}{c}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
+\PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{sl}\PYG{p}{)}
+\PYG{g+go}{ Correlation indexes:}
+\PYG{g+go}{ Extended Kendall tau         : +0.676}
+\PYG{g+go}{ Epistemic determination      :  0.230}
+\PYG{g+go}{ Bipolar\PYGZhy{}valued equivalalence : +0.156}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{slw} \PYG{o}{=} \PYG{n}{KemenyOrdersFusion}\PYG{p}{(}\PYG{n}{ccd}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{slw}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tutorialSlater}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{ Exporting to tutorialSlater.dot}
+\PYG{g+go}{ 0 \PYGZob{} rank = same; a5; \PYGZcb{}}
+\PYG{g+go}{ 1 \PYGZob{} rank = same; a6; \PYGZcb{}}
+\PYG{g+go}{ 2 \PYGZob{} rank = same; a7; a4; \PYGZcb{}}
+\PYG{g+go}{ 3 \PYGZob{} rank = same; a1; \PYGZcb{}}
+\PYG{g+go}{ 4 \PYGZob{} rank = same; a8; a3; \PYGZcb{}}
+\PYG{g+go}{ 5 \PYGZob{} rank = same; a9; \PYGZcb{}}
+\PYG{g+go}{ 6 \PYGZob{} rank = same; a2; \PYGZcb{}}
+\PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng tutorialSlater.dot \PYGZhy{}o tutorialSlater.png}
 \end{sphinxVerbatim}
 
 We notice that the first crisp \sphinxstyleemphasis{Slater} ranking is a rather good fit (+0.676), slightly better apparently than the \sphinxstyleemphasis{NetFlows} ranking (+638). However, there are in fact 7 such potentially optimal \sphinxstyleemphasis{Slater} rankings. The corresponding epistemic disjunction gives the following partial ordering (see \hyperref[\detokenize{tutorial:tutorialslater}]{Fig.\@ \ref{\detokenize{tutorial:tutorialslater}}}).
@@ -2272,7 +2299,7 @@ At step \sphinxstyleemphasis{r} (\sphinxstyleemphasis{r} goes from 1 to \sphinxs
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
-Compute for each row of the valued outranking relation table (see above) the smallest value;
+Compute for each row of the bipolar valued strict outranking relation table (see \hyperref[\detokenize{tutorial:strictoutranking}]{Listing \ref{\detokenize{tutorial:strictoutranking}}}) the smallest value;
 
 \item {} 
 Select the row where this minimum is maximal. Ties are resolved in lexicographic order;
@@ -2287,24 +2314,28 @@ Delete the corresponding row and column from the relation table and restart unti
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{KohlerOrder}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ko} \PYG{o}{=} \PYG{n}{KohlerOrder}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ko} \PYG{o}{=} \PYG{n}{KohlerOrder}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ko}\PYG{o}{.}\PYG{n}{showRanking}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{ko}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Fitness of Kohler}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s ranking: }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{\PYGZpc{}} \PYG{n}{corr}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
-\PYG{g+go}{ Fitness of Kohler\PYGZsq{}s ranking: +0.483}
+\PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
+\PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{ko}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
+\PYG{g+go}{ Correlation indexes:}
+\PYG{g+go}{ Extended Kendall tau         : +0.747}
+\PYG{g+go}{ Epistemic determination      :  0.230}
+\PYG{g+go}{ Bipolar\PYGZhy{}valued equivalalence : +0.172}
 \end{sphinxVerbatim}
 
-Here, we find a result (+0.483) that is slightly better than the \sphinxstyleemphasis{Copeland} rule’s result (+0.463).
+With this \sphinxstyleemphasis{min\sphinxhyphen{}max} ranking\sphinxhyphen{}by\sphinxhyphen{}choosing strategy, we find a correlation result (+0.747) that is clearly the nearest to an optimal Kemeny ranking (see \hyperref[\detokenize{tutorial:optimalkemeny}]{Listing \ref{\detokenize{tutorial:optimalkemeny}}}). Only two adjacent pairs: (‘a6’,’a7’) and (‘a8’,’a9’) are actually inverted here.
 
 
 \subsection{\sphinxstyleemphasis{Tideman} ‘s ranked\sphinxhyphen{}pairs rule}
 \label{\detokenize{tutorial:tideman-s-ranked-pairs-rule}}
-A further ranking heuristic, the \sphinxstylestrong{RankedPairs} rule, is based on a prudent incremental construction of linear orders that avoids on the fly any cycling outrankings. The ranking procedure may be formulated as follows:
+Working on the non strict outranking digraph \sphinxstyleemphasis{g}, a further \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} heuristic, the \sphinxstylestrong{RankedPairs} rule, is based on a \sphinxstyleemphasis{prudent incremental} construction of linear orders that avoids on the fly any cycling outrankings. The ranking rule may be formulated as follows:
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
-Rank the ordered pairs \((x,y)\) of alternatives in decreasing order of the outranking characteristic values \(r(x\,S\,y)\);
+Rank the ordered pairs \((x,y)\) of alternatives in decreasing order of the outranking characteristic values \(r(x\, \geq \,y)\);
 
 \item {} 
 Consider the pairs in that order (ties are resolved by a lexicographic rule):
@@ -2323,41 +2354,26 @@ In our didactic outranking example, we get the following result.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{RankedPairsOrder}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rp} \PYG{o}{=} \PYG{n}{RankedPairsOrder}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Debug}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+go}{ next pair:  (\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}) 1.00}
-\PYG{g+go}{ added: (a1,a2) characteristic: 1.00 (1.0)}
-\PYG{g+go}{ added: (a2,a1) characteristic: 0.00 (\PYGZhy{}1.0)}
-\PYG{g+go}{ ...}
-\PYG{g+go}{ ...}
-\PYG{g+go}{ next pair:  (\PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}) 0.09523809523809523809523809524}
-\PYG{g+go}{ Circuit detected !!}
-\PYG{g+go}{ next pair:  (\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}) 0.07142857142857142857142857143}
-\PYG{g+go}{ added: (a1,a8) characteristic: 0.07 (1.0)}
-\PYG{g+go}{ added: (a8,a1) characteristic: \PYGZhy{}0.07 (\PYGZhy{}1.0)}
-\PYG{g+go}{ ...}
-\PYG{g+go}{ ...}
-\PYG{g+go}{ next pair:  (\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}) 0.10}
-\PYG{g+go}{ Circuit detected !!}
-\PYG{g+go}{ next pair:  (\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}) 0.10}
-\PYG{g+go}{ Circuit detected !!}
-\PYG{g+go}{ next pair:  (\PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}) 0.10}
-\PYG{g+go}{ added: (a6,a7) characteristic: 0.10 (1.0)}
-\PYG{g+go}{ added: (a7,a6) characteristic: \PYGZhy{}0.10 (\PYGZhy{}1.0)}
-\PYG{g+go}{ ...}
-\PYG{g+go}{ ...}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rp} \PYG{o}{=} \PYG{n}{RankedPairsOrder}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rp}\PYG{o}{.}\PYG{n}{showRanking}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-The \sphinxstyleemphasis{RankedPairs} ranking rule actually renders one of the two optimal \sphinxstyleemphasis{Kemeny} rankings as we may verify below.
+The \sphinxstyleemphasis{RankedPairs} ranking rule actually renders in fact an optimal \sphinxstyleemphasis{Kemeny} rankings as we may verify below.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ke}\PYG{o}{.}\PYG{n}{maximalRankings}
+\PYG{g+go}{ [[\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}],}
+\PYG{g+go}{  [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{rp}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{Fitness of Tideman}\PYG{l+s+s2}{\PYGZsq{}}\PYG{l+s+s2}{s ranking: }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{\PYGZpc{}} \PYG{n}{corr}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
-\PYG{g+go}{ Fitness of Tideman\PYGZsq{}s ranking: 0.779}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
+\PYG{g+go}{ Correlation indexes:}
+\PYG{g+go}{ Extended Kendall tau         : +0.779}
+\PYG{g+go}{ Bipolar\PYGZhy{}valued equivalalence : +0.179}
+\PYG{g+go}{ Epistemic determination      :  0.230}
 \end{sphinxVerbatim}
 
-Unfortunately, the \sphinxstyleemphasis{RankedPairs} rule is again \sphinxstyleemphasis{not efficiently scalable} to outranking digraphs of larger orders (\textgreater{} 100). For such outranking digraphs, with several hundred of alternatives, only the \sphinxstyleemphasis{Copeland} and, more accurate, the \sphinxstyleemphasis{NetFlows} ranking rules, with a polynomial complexity of \(O(n^2)\) where \sphinxstyleemphasis{n} is the order of the outranking digraph, remain in fact computationally efficient.
+Unfortunately, the \sphinxstyleemphasis{RankedPairs} rule, similar to \sphinxstyleemphasis{Kohler} ‘s rule, is again \sphinxstyleemphasis{not efficiently scalable} to outranking digraphs of larger orders (\textgreater{} 100). For such outranking digraphs, with several hundred of alternatives, only the \sphinxstyleemphasis{Copeland} and, more accurate, the \sphinxstyleemphasis{NetFlows} ranking rules, with a polynomial complexity of \(O(n^2)\) where \sphinxstyleemphasis{n} is the order of the strict outranking digraph, remain in fact computationally efficient.
 
 
 \subsection{Ranking big performance tableaux}
