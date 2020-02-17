@@ -1,10 +1,10 @@
 # Fdb version 3
-["makeindex digraph3Pearls.idx"] 1580825225 "digraph3Pearls.idx" "digraph3Pearls.ind" "digraph3Pearls" 1581946631
+["makeindex digraph3Pearls.idx"] 1580825225 "digraph3Pearls.idx" "digraph3Pearls.ind" "digraph3Pearls" 1581951593
   "digraph3Pearls.idx" 1581946630 0 d41d8cd98f00b204e9800998ecf8427e ""
   (generated)
-  "digraph3Pearls.ilg"
   "digraph3Pearls.ind"
-["pdflatex"] 1581946629 "digraph3Pearls.tex" "digraph3Pearls.pdf" "digraph3Pearls" 1581946631
+  "digraph3Pearls.ilg"
+["pdflatex"] 1581946629 "digraph3Pearls.tex" "digraph3Pearls.pdf" "digraph3Pearls" 1581951593
   "/etc/texmf/web2c/texmf.cnf" 1528969954 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1537261298 31928 0c7a2cf70fe4774d91459e9b58671fd8 ""
   "/home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk" 1580830214 49076 1866c16bc468aa7c492268905232dd51 ""
@@ -208,16 +208,16 @@
   "robustHeatmap.png" 1580704985 154058 8ede85365a1f8ca8940cef240e931fa3 ""
   "simulLikelihood.png" 1568211321 22562 cf4b77dc733a465112a7dad344b7c667 ""
   "sphinx.sty" 1576588962 81878 44d14f90f8cb22a202794c148df60b64 ""
-  "sphinxhighlight.sty" 1581946619 8137 38a433148fcb7611515a989ff1750dd5 ""
+  "sphinxhighlight.sty" 1581951585 8137 38a433148fcb7611515a989ff1750dd5 ""
   "sphinxhowto.cls" 1576588962 3253 f1422f11047981f159e1ea718dbe2c47 ""
-  "sphinxmessages.sty" 1581946629 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1581951593 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxmulticell.sty" 1576588962 14606 0b6edc2b1a83546ed92026d1f6a311b5 ""
   "symmetricPart.png" 1561456833 74487 bef1531d29a633b766bb94b1dcbb02bb ""
   "weightDistributions.png" 1568211349 96093 6882246be0684c7dd44502a778cc71de ""
   (generated)
   "digraph3Pearls.toc"
+  "digraph3Pearls.aux"
+  "digraph3Pearls.log"
+  "digraph3Pearls.idx"
   "digraph3Pearls.pdf"
   "digraph3Pearls.out"
-  "digraph3Pearls.idx"
-  "digraph3Pearls.log"
-  "digraph3Pearls.aux"

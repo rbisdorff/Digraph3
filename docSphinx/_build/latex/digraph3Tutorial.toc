@@ -43,7 +43,7 @@
 \contentsline {subsection}{\numberline {6.3}The \sphinxstyleemphasis {NetFlows} ranking}{52}{subsection.6.3}
 \contentsline {subsection}{\numberline {6.4}\sphinxstyleemphasis {Kemeny} rankings}{53}{subsection.6.4}
 \contentsline {subsection}{\numberline {6.5}\sphinxstyleemphasis {Slater} rankings}{56}{subsection.6.5}
-\contentsline {subsection}{\numberline {6.6}\sphinxstyleemphasis {Kohler} \IeC {\textquoteleft }s ranking\sphinxhyphen {}by\sphinxhyphen {}choosing}{58}{subsection.6.6}
+\contentsline {subsection}{\numberline {6.6}\sphinxstyleemphasis {Kohler} \IeC {\textquoteleft }s ranking\sphinxhyphen {}by\sphinxhyphen {}choosing rule}{58}{subsection.6.6}
 \contentsline {subsection}{\numberline {6.7}\sphinxstyleemphasis {Tideman} \IeC {\textquoteleft }s ranked\sphinxhyphen {}pairs rule}{58}{subsection.6.7}
 \contentsline {subsection}{\numberline {6.8}Ranking big performance tableaux}{59}{subsection.6.8}
 \contentsline {section}{\numberline {7}HPC ranking with big outranking digraphs}{61}{section.7}
