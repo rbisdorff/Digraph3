@@ -2981,14 +2981,15 @@
             <span class="nb">print</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.showHTMLQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showHTMLQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quantiles Preordering&#39;</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantilesSortingDigraph.showHTMLQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showHTMLQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quantiles Preordering&#39;</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows the html version of the quantile preordering in a browser window.</span>
 
 <span class="sd">        The ordring strategy is either:</span>
+<span class="sd">            * **average** (default), following the averag of the upper and lower quantile limits,</span>
 <span class="sd">            * **optimistic**, following the upper quantile limits (default),</span>
-<span class="sd">            * **pessimistic**, following the lower quantile limits,</span>
-<span class="sd">            * **average**, following the averag of the upper and lower quantile limits.</span>
+<span class="sd">            * **pessimistic**, following the lower quantile limits.</span>
+<span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">webbrowser</span>
         <span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;/tmp/preOrdering.html&#39;</span>

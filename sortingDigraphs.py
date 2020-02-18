@@ -2941,14 +2941,15 @@ class QuantilesSortingDigraph(SortingDigraph):
             print()
 
 
-    def showHTMLQuantileOrdering(self,title='Quantiles Preordering',Descending=True,strategy='optimistic'):
+    def showHTMLQuantileOrdering(self,title='Quantiles Preordering',Descending=True,strategy='average'):
         """
         Shows the html version of the quantile preordering in a browser window.
 
         The ordring strategy is either:
+            * **average** (default), following the averag of the upper and lower quantile limits,
             * **optimistic**, following the upper quantile limits (default),
-            * **pessimistic**, following the lower quantile limits,
-            * **average**, following the averag of the upper and lower quantile limits.
+            * **pessimistic**, following the lower quantile limits.
+            
         """
         import webbrowser
         fileName = '/tmp/preOrdering.html'

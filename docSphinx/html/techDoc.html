@@ -7083,13 +7083,13 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 
 <dl class="method">
 <dt id="sortingDigraphs.QuantilesSortingDigraph.showHTMLQuantileOrdering">
-<code class="sig-name descname">showHTMLQuantileOrdering</code><span class="sig-paren">(</span><em class="sig-param">title='Quantiles Preordering'</em>, <em class="sig-param">Descending=True</em>, <em class="sig-param">strategy='optimistic'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#QuantilesSortingDigraph.showHTMLQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.showHTMLQuantileOrdering" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showHTMLQuantileOrdering</code><span class="sig-paren">(</span><em class="sig-param">title='Quantiles Preordering'</em>, <em class="sig-param">Descending=True</em>, <em class="sig-param">strategy='average'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#QuantilesSortingDigraph.showHTMLQuantileOrdering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.showHTMLQuantileOrdering" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shows the html version of the quantile preordering in a browser window.</p>
 <dl class="simple">
 <dt>The ordring strategy is either:</dt><dd><ul class="simple">
+<li><p><strong>average</strong> (default), following the averag of the upper and lower quantile limits,</p></li>
 <li><p><strong>optimistic</strong>, following the upper quantile limits (default),</p></li>
-<li><p><strong>pessimistic</strong>, following the lower quantile limits,</p></li>
-<li><p><strong>average</strong>, following the averag of the upper and lower quantile limits.</p></li>
+<li><p><strong>pessimistic</strong>, following the lower quantile limits.</p></li>
 </ul>
 </dd>
 </dl>
