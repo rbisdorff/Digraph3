@@ -926,8 +926,8 @@ The module provides a \sphinxcode{\sphinxupquote{votingProfiles.RandomLinearVoti
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{n}{RandomLinearVotingProfile}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v} \PYG{o}{=} \PYG{n}{RandomLinearVotingProfile}\PYG{p}{(}\PYG{n}{numberOfVoters}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}
-\PYG{g+gp}{... }                              \PYG{n}{numberOfCandidates}\PYG{o}{=}\PYG{l+m+mi}{3}
-\PYG{g+gp}{... }                              \PYG{n}{votersWeights}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+gp}{... }                              \PYG{n}{numberOfCandidates}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,}
+\PYG{g+gp}{... }                              \PYG{n}{RandomWeights}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v}\PYG{o}{.}\PYG{n}{candidates}
 \PYG{g+go}{ OrderedDict([\PYGZsq{}a1\PYGZsq{},\PYGZob{}\PYGZsq{}name\PYGZsq{}:\PYGZsq{}a1\PYGZcb{}), (\PYGZsq{}a2\PYGZsq{},\PYGZob{}\PYGZsq{}name\PYGZsq{}:\PYGZsq{}a2\PYGZsq{}\PYGZcb{}), (\PYGZsq{}a3\PYGZsq{}:\PYGZob{}\PYGZsq{}name\PYGZsq{}:\PYGZsq{}a3\PYGZsq{}\PYGZcb{})])}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v}\PYG{o}{.}\PYG{n}{voters}
@@ -939,7 +939,7 @@ The module provides a \sphinxcode{\sphinxupquote{votingProfiles.RandomLinearVoti
 \PYG{g+go}{  \PYGZsq{}v5\PYGZsq{}: [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}], \PYGZsq{}v2\PYGZsq{}: [\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]\PYGZcb{}}
 \end{sphinxVerbatim}
 
-Notice that in this random example, the five voters are weighted (see Line 4). Their linear ballots can be viewed with the \sphinxcode{\sphinxupquote{showLinearBallots}} method.
+Notice that in this random example, the five voters are weighted (see Line 4). Their linear ballots can be viewed with the \sphinxcode{\sphinxupquote{votingProfiles.VotingLinearProfiles.showLinearBallots()}} method.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v}\PYG{o}{.}\PYG{n}{showLinearBallots}\PYG{p}{(}\PYG{p}{)}
