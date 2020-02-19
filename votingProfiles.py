@@ -227,7 +227,7 @@ class LinearVotingProfile(VotingProfile):
         else:
             print('!!! Error: The name of a stored linear voting profile is required !!!')
             return
-        self.sumWeights = Decimal('0')
+        self.sumWeights = 0.0
         for v in self.voters:
             self.sumWeights += self.voters[v]['weight']
 
@@ -481,12 +481,13 @@ class LinearVotingProfile(VotingProfile):
                         return [x]
         return remainingCandidates
 
-    def save2PerfTab(self,fileName='votingPerfTab',isDecimal=True,valueDigits=2):
+    def save2PerfTab(self,fileName='votingPerfTab',isDecimal=True,valueDigits=2,_NegativeWeights=True):
         """
         Persistant storage of a linear voting profile in the format of a rank performance Tableau.
         For each voter *v*, the rank performance of candidate *x* corresponds to:
 
         number of candidates - linearProfile[v].index(x)
+        
         """
         from copy import deepcopy
         print('*--- Saving as performance tableau in file: <' + str(fileName) + '.py> ---*')
@@ -513,9 +514,12 @@ class LinearVotingProfile(VotingProfile):
             fo.write('(\'%s\', {\n' % str(g))
             for it in self.voters[g].keys():
                 if it == 'weight':
-                    fo.write('\'%s\': Decimal(\'%s\'),\n' % (it,repr(-self.voters[g][it])))
+                    if _NegativeWeights:
+                        fo.write('\'%s\': %s,\n' % (it,repr(-self.voters[g][it])))
+                    else:
+                        fo.write('\'%s\': %s,\n' % (it,repr(self.voters[g][it])))
                 else:
-                    fo.write('\'%s\': Decimal(\'%s\'),\n' % (it,repr(self.voters[g][it])))
+                    fo.write('\'%s\': %s,\n' % (it,repr(self.voters[g][it])))
             fo.write("\'scale\':(Decimal(1),Decimal(%d)),\n" % nc)
             fo.write("\'preferenceDirection\': \'%s\'" % 'min')
             fo.write('}),\n')
@@ -532,9 +536,12 @@ class LinearVotingProfile(VotingProfile):
                         xval = (self.linearBallot[g].index(x) + 1)
                     except:
                         xval = -999
-                    fo.write(evaluationString % (x,Decimal(str(xval))))
+                    if _NegativeWeights:
+                        fo.write(evaluationString % (x,Decimal(str(xval))))
+                    else:
+                        fo.write(evaluationString % (x,Decimal(str(-xval))))
                 else:
-                    fo.write('\'' + str(x) + '\':' + str(evaluation[g][x]) + ',\n')
+                    fo.write('\'' + str(x) + '\':' + str(-evaluation[g][x]) + ',\n')
                     
             fo.write('},\n')
         fo.write( '}\n')
@@ -563,14 +570,17 @@ class LinearVotingProfile(VotingProfile):
         from tempfile import mkdtemp
         tempDir = mkdtemp()
         perfTabFileName = '%s/votingPerfTab' % tempDir
-        self.save2PerfTab(perfTabFileName)
+        if SparseModel:
+            self.save2PerfTab(perfTabFileName,_NegativeWeights=False)
+        else:
+            self.save2PerfTab(perfTabFileName)
         t = PerformanceTableau(perfTabFileName)
         t.showHTMLPerformanceHeatmap(criteriaList=criteriaList, actionsList=actionsList,\
                               SparseModel=SparseModel, minimalComponentSize=minimalComponentSize, \
                               rankingRule=rankingRule, quantiles=quantiles, strategy=strategy, \
                               ndigits=ndigits, colorLevels=colorLevels, \
-                              pageTitle=pageTitle, \
-                              Correlations=True, Threading=Threading, nbrOfCPUs=nbrOfCPUs, Debug=Debug)
+                              pageTitle=pageTitle, Correlations=Correlations,\
+                              Threading=Threading, nbrOfCPUs=nbrOfCPUs, Debug=Debug)
     
 
 
@@ -972,14 +982,15 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         votersWeights = optional list of positive integers for instance [2,3,4,1,5].
         
     """
-    def __init__(self,numberOfVoters=9,numberOfCandidates=5,votersWeights=None,seed=None):
+    def __init__(self,numberOfVoters=10,numberOfCandidates=15,votersWeights=None,seed=None):
         """
         """
         from collections import OrderedDict
         votersList = [x for x in range(1,numberOfVoters + 1)]
         voters = OrderedDict()
+        nd = len(str(numberOfVoters))
         for v in votersList:
-            voterID = 'v%d' % v
+            voterID = ('v%%0%dd' % nd) % (v)
             if votersWeights != None:
                 try:
                     weight = votersWeights[v-1]
@@ -990,8 +1001,9 @@ class RandomLinearVotingProfile(LinearVotingProfile):
             voters[voterID] = {'weight':Decimal('%d' % weight)}
         candidatesList = [x for x in range(1,numberOfCandidates + 1)]
         candidates = OrderedDict()
+        na = len(str(numberOfCandidates))
         for c in candidatesList:
-            candidateID = 'a%d' % c
+            candidateID =('a%%0%dd' % na) % (c)
             candidates[candidateID] = {'name': candidateID}
         self.name = str('randLinearProfile')
         self.candidates = candidates

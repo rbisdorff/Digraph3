@@ -2481,6 +2481,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                            componentRankingRule=rankingRule,Threading=Threading,
                                            nbrOfCPUs=nbrOfCPUs)
                 actionsList = g.boostedRanking
+                rankCorrelation = None
                 
             else: # standard outranking model
                 from outrankingDigraphs import BipolarOutrankingDigraph

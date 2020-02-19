@@ -7669,7 +7669,7 @@ and restricted linear ballots</p>
 
 <dl class="method">
 <dt id="votingProfiles.LinearVotingProfile.save2PerfTab">
-<code class="sig-name descname">save2PerfTab</code><span class="sig-paren">(</span><em class="sig-param">fileName='votingPerfTab'</em>, <em class="sig-param">isDecimal=True</em>, <em class="sig-param">valueDigits=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.save2PerfTab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.save2PerfTab" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save2PerfTab</code><span class="sig-paren">(</span><em class="sig-param">fileName='votingPerfTab'</em>, <em class="sig-param">isDecimal=True</em>, <em class="sig-param">valueDigits=2</em>, <em class="sig-param">_NegativeWeights=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.save2PerfTab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.save2PerfTab" title="Permalink to this definition">¶</a></dt>
 <dd><p>Persistant storage of a linear voting profile in the format of a rank performance Tableau.
 For each voter <em>v</em>, the rank performance of candidate <em>x</em> corresponds to:</p>
 <p>number of candidates - linearProfile[v].index(x)</p>
@@ -7727,7 +7727,7 @@ to format the decimal precision of the numerical output.</p>
 
 <dl class="class">
 <dt id="votingProfiles.RandomLinearVotingProfile">
-<em class="property">class </em><code class="sig-prename descclassname">votingProfiles.</code><code class="sig-name descname">RandomLinearVotingProfile</code><span class="sig-paren">(</span><em class="sig-param">numberOfVoters=9</em>, <em class="sig-param">numberOfCandidates=5</em>, <em class="sig-param">votersWeights=None</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomLinearVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomLinearVotingProfile" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">votingProfiles.</code><code class="sig-name descname">RandomLinearVotingProfile</code><span class="sig-paren">(</span><em class="sig-param">numberOfVoters=10</em>, <em class="sig-param">numberOfCandidates=15</em>, <em class="sig-param">votersWeights=None</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomLinearVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomLinearVotingProfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>A specialized class for random linwear voting profiles.
 Random reation parameters:</p>
 <blockquote>
