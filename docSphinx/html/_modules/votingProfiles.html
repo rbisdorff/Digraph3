@@ -1022,10 +1022,12 @@
 <span class="sd">        votersWeights = optional list of positive integers for instance [2,3,4,1,5].</span>
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">votersWeights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">votersWeights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">RandomWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">votersList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">numberOfVoters</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
         <span class="n">voters</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="p">))</span>
@@ -1037,7 +1039,10 @@
                 <span class="k">except</span><span class="p">:</span>
                     <span class="n">weight</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">weight</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">RandomWeights</span><span class="p">:</span>
+                    <span class="n">weight</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">weight</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="n">voters</span><span class="p">[</span><span class="n">voterID</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;weight&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">weight</span><span class="p">)}</span>
         <span class="n">candidatesList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">numberOfCandidates</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
         <span class="n">candidates</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>

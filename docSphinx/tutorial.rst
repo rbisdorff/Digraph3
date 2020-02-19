@@ -785,8 +785,8 @@ The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class
 
    >>> from votingProfiles import RandomLinearVotingProfile
    >>> v = RandomLinearVotingProfile(numberOfVoters=5,
-   ...                               numberOfCandidates=3
-   ...                               votersWeights=[2,3,1,5,4])
+   ...                               numberOfCandidates=3,
+   ...                               RandomWeights=True)
    >>> v.candidates
     OrderedDict(['a1',{'name':'a1}), ('a2',{'name':'a2'}), ('a3':{'name':'a3'})])
    >>> v.voters
@@ -797,7 +797,7 @@ The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class
     {'v4': ['a1', 'a3', 'a2'], 'v3': ['a1', 'a3', 'a2'], 'v1': ['a1', 'a2', 'a3'],
      'v5': ['a2', 'a3', 'a1'], 'v2': ['a3', 'a2', 'a1']}
 
-Notice that in this random example, the five voters are weighted (see Line 4). Their linear ballots can be viewed with the ``showLinearBallots`` method.
+Notice that in this random example, the five voters are weighted (see Line 4). Their linear ballots can be viewed with the :py:func:`votingProfiles.VotingLinearProfiles.showLinearBallots` method.
 
 .. code-block:: pycon
 

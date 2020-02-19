@@ -982,10 +982,12 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         votersWeights = optional list of positive integers for instance [2,3,4,1,5].
         
     """
-    def __init__(self,numberOfVoters=10,numberOfCandidates=15,votersWeights=None,seed=None):
+    def __init__(self,numberOfVoters=10,numberOfCandidates=15,votersWeights=None,RandomWeights=False,seed=None):
         """
         """
         from collections import OrderedDict
+        import random
+        random.seed(seed)
         votersList = [x for x in range(1,numberOfVoters + 1)]
         voters = OrderedDict()
         nd = len(str(numberOfVoters))
@@ -997,7 +999,10 @@ class RandomLinearVotingProfile(LinearVotingProfile):
                 except:
                     weight = 1
             else:
-                weight = 1
+                if RandomWeights:
+                    weight = random.randint(1,numberOfVoters)
+                else:
+                    weight = 1
             voters[voterID] = {'weight':Decimal('%d' % weight)}
         candidatesList = [x for x in range(1,numberOfCandidates + 1)]
         candidates = OrderedDict()
