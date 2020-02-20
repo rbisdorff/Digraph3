@@ -549,6 +549,9 @@ class LinearVotingProfile(VotingProfile):
 
     def showHTMLVotingHeatmap(self,criteriaList=None, \
                               actionsList=None,\
+                              fromIndex=None,\
+                              toIndex=None,\
+                              Transposed=True,\
                               SparseModel=False,\
                               minimalComponentSize=1, \
                               rankingRule='Copeland',\
@@ -575,7 +578,8 @@ class LinearVotingProfile(VotingProfile):
         else:
             self.save2PerfTab(perfTabFileName)
         t = PerformanceTableau(perfTabFileName)
-        t.showHTMLPerformanceHeatmap(criteriaList=criteriaList, actionsList=actionsList,\
+        t.showHTMLPerformanceHeatmap(criteriaList=criteriaList, actionsList=actionsList, \
+                               fromIndex=fromIndex,toIndex=toIndex,Transposed=Transposed,\
                               SparseModel=SparseModel, minimalComponentSize=minimalComponentSize, \
                               rankingRule=rankingRule, quantiles=quantiles, strategy=strategy, \
                               ndigits=ndigits, colorLevels=colorLevels, \
@@ -1525,7 +1529,8 @@ if __name__ == "__main__":
     lvp1.computeBordaWinners()
     lvp1.save2PerfTab('votingPerfTab')
     t = PerformanceTableau('votingPerfTab')
-    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
+    t.showHTMLPerformanceHeatmap(Transposed=True,Correlations=False,ndigits=0)
+    lvp1.showHTMLVotingHeatmap(Correlations=False)
     c = CondorcetDigraph(lvp1)
     #c.recodeValuation()
     c.showRelationTable()

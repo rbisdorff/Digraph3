@@ -589,6 +589,9 @@
 
 <div class="viewcode-block" id="LinearVotingProfile.showHTMLVotingHeatmap"><a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.showHTMLVotingHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLVotingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> \
                               <span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                              <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                              <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                              <span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                               <span class="n">SparseModel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                               <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> \
                               <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>\
@@ -615,7 +618,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">save2PerfTab</span><span class="p">(</span><span class="n">perfTabFileName</span><span class="p">)</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="n">perfTabFileName</span><span class="p">)</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">criteriaList</span><span class="o">=</span><span class="n">criteriaList</span><span class="p">,</span> <span class="n">actionsList</span><span class="o">=</span><span class="n">actionsList</span><span class="p">,</span>\
+        <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">criteriaList</span><span class="o">=</span><span class="n">criteriaList</span><span class="p">,</span> <span class="n">actionsList</span><span class="o">=</span><span class="n">actionsList</span><span class="p">,</span> \
+                               <span class="n">fromIndex</span><span class="o">=</span><span class="n">fromIndex</span><span class="p">,</span><span class="n">toIndex</span><span class="o">=</span><span class="n">toIndex</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="n">Transposed</span><span class="p">,</span>\
                               <span class="n">SparseModel</span><span class="o">=</span><span class="n">SparseModel</span><span class="p">,</span> <span class="n">minimalComponentSize</span><span class="o">=</span><span class="n">minimalComponentSize</span><span class="p">,</span> \
                               <span class="n">rankingRule</span><span class="o">=</span><span class="n">rankingRule</span><span class="p">,</span> <span class="n">quantiles</span><span class="o">=</span><span class="n">quantiles</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span> \
                               <span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">,</span> <span class="n">colorLevels</span><span class="o">=</span><span class="n">colorLevels</span><span class="p">,</span> \
@@ -1565,7 +1569,8 @@
     <span class="n">lvp1</span><span class="o">.</span><span class="n">computeBordaWinners</span><span class="p">()</span>
     <span class="n">lvp1</span><span class="o">.</span><span class="n">save2PerfTab</span><span class="p">(</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">)</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">lvp1</span><span class="o">.</span><span class="n">showHTMLVotingHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">lvp1</span><span class="p">)</span>
     <span class="c1">#c.recodeValuation()</span>
     <span class="n">c</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>

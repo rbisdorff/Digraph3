@@ -2299,6 +2299,7 @@ The performance evaluations of each decision alternative on each criterion are g
     def showHTMLPerformanceHeatmap(self,actionsList=None,\
                                    fromIndex=None,\
                                    toIndex=None,\
+                                   Transposed=False,\
                                    criteriaList=None,\
                                    colorLevels=7,\
                                    pageTitle=None,\
@@ -2361,6 +2362,7 @@ The performance evaluations of each decision alternative on each criterion are g
         fo.write(self._htmlPerformanceHeatmap(argCriteriaList=criteriaList,
                                              argActionsList=actionsList,
                                              fromIndex=fromIndex,
+                                             Transposed=Transposed,
                                              toIndex=toIndex,
                                              SparseModel=SparseModel,
                                              minimalComponentSize=minimalComponentSize,
@@ -2382,6 +2384,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                argActionsList=None,
                                fromIndex=None,
                                toIndex=None,
+                                Transposed=False,
                                SparseModel=False,
                                minimalComponentSize=1,
                                rankingRule=None,
@@ -2581,48 +2584,107 @@ The performance evaluations of each decision alternative on each criterion are g
 ##            html += '<td bgcolor=%s>%s</td>' % (colorPalette[col][1],str(colorPalette[col][0]))
 ##        html += '</tr>\n'
 ##        html += '</table>\n'
-        # heatmap
-        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
-        html += '<tr bgcolor=%s><th>criteria</th>' % (columnHeaderColor)
-        for g in criteriaList:
-            try:
-                gName = self.criteria[g]['shortName']
-            except:
-                gName = str(g)
-            html += '<th>%s</th>' % (gName)
-        html += '</tr>\n'
-        html += '<tr><th bgcolor=%s>weights</th>' % (columnHeaderColor)
-        for g in criteriaList:
-            html += '<td align="center">%+.2f</td>' % (self.criteria[g]['weight'])
-        html += '</tr>\n'
-        if criteriaCorrelation != None:
-            html += '<tr><th bgcolor=%s>tau<sup>(*)</sup></th>' % (columnHeaderColor)
-            for cg in criteriaCorrelation:
-                html += '<td align="center">%+.2f</td>' % (cg[0])
+        # heatmap with transposed criteria x actions layout
+        if Transposed:
+            html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+            html += '<tr bgcolor=%s><th>criteria</th>' % (columnHeaderColor)
+            html += '<th>weight</th>'
+            if Correlations:
+                html += '<th>tau*</th>'
+            if fromIndex == None:
+                fromIndex = 0
+            if toIndex == None:
+                toIndex = len(actionsList)
+            for i in range(fromIndex,toIndex):
+                x = actionsList[i]
+                try:
+                    xName = actions[x]['shortName']
+                except:
+                    xName = str(x)
+                html += '<th bgcolor="#FFF79B">%s</th>' % (xName)
             html += '</tr>\n'
-        if Debug:
-            print(html)
-        if fromIndex == None:
-            fromIndex=0
-        if toIndex == None:
-            toIndex = len(actionsList)
-        for i in range(fromIndex,toIndex):
-            x = actionsList[i]
-            try:
-                xName = self.actions[x]['shortName']
-            except:
-                xName = str(x)
-            html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)
-            for g in criteriaList:
-                if self.evaluation[g][x] != Decimal("-999"):
-                    formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
-                    html += formatString % (self.evaluation[g][x])
-                else:
-                    html += '<td bgcolor=%s class="na">NA</td>' % naColor
+            gn = len(criteriaList)
+            for i in range(gn):
+                g = criteriaList[i]
+                try:
+                    gName = self.criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (gName)
+                html += '<td align="center">%+.2f</td>' % (self.criteria[g]['weight'])
+                if criteriaCorrelation != None:
+                    cg = criteriaCorrelation[i]
+                    html += '<td align="center">%+.2f</td>' % (cg[0])
                 if Debug:
                     print(html)
+                if fromIndex == None:
+                    fromIndex = 0
+                if toIndex == None:
+                    toIndex = len(actionsList)
+                for j in range(fromIndex,toIndex):
+                    x = actionsList[j]
+                    try:
+                        xName = self.actions[x]['shortName']
+                    except:
+                        xName = str(x)
+                    if self.evaluation[g][x] != Decimal("-999"):
+                        formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
+                        html += formatString % (self.evaluation[g][x])
+                    else:
+                        html += '<td bgcolor=%s class="na">NA</td>' % naColor
+                html += '</tr>'
+                if Debug:
+                    print(html)
+            html += '</table>\n'
+##            if criteriaCorrelation != None:
+##                html += '<b>(*) tau:</b> <i>Ordinal (Kendall) correlation between marginal criterion and global ranking relation</i><br/>\n'
+##            if rankCorrelation != None:
+##                html += '<i>Ranking rule</i>: <b>%s</b><br/>\n' % rankingRule
+##                html += '<i>Ordinal (Kendall) correlation between global ranking and global outranking relation:</i> <b>%+.3f</b><br/>\n' % (rankCorrelation['correlation'])
+##                html += '</body></html>'
+##            return html
+        else: # standard actions x criteria layout
+            html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+            html += '<tr bgcolor=%s><th>criteria</th>' % (columnHeaderColor)
+            for g in criteriaList:
+                try:
+                    gName = self.criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<th>%s</th>' % (gName)
             html += '</tr>\n'
-        html += '</table>\n'
+            html += '<tr><th bgcolor=%s>weights</th>' % (columnHeaderColor)
+            for g in criteriaList:
+                html += '<td align="center">%+.2f</td>' % (self.criteria[g]['weight'])
+            html += '</tr>\n'
+            if criteriaCorrelation != None:
+                html += '<tr><th bgcolor=%s>tau<sup>(*)</sup></th>' % (columnHeaderColor)
+                for cg in criteriaCorrelation:
+                    html += '<td align="center">%+.2f</td>' % (cg[0])
+                html += '</tr>\n'
+            if Debug:
+                print(html)
+            if fromIndex == None:
+                fromIndex=0
+            if toIndex == None:
+                toIndex = len(actionsList)
+            for i in range(fromIndex,toIndex):
+                x = actionsList[i]
+                try:
+                    xName = self.actions[x]['shortName']
+                except:
+                    xName = str(x)
+                html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)
+                for g in criteriaList:
+                    if self.evaluation[g][x] != Decimal("-999"):
+                        formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
+                        html += formatString % (self.evaluation[g][x])
+                    else:
+                        html += '<td bgcolor=%s class="na">NA</td>' % naColor
+                    if Debug:
+                        print(html)
+                html += '</tr>\n'
+            html += '</table>\n'
         # legend
         html += '<i>Color legend: </i>\n'
         html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
@@ -7334,7 +7396,7 @@ if __name__ == "__main__":
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
     t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=10,
+                                   numberOfActions=7,
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
                                    #NegativeWeights=False,
@@ -7344,6 +7406,7 @@ if __name__ == "__main__":
                                             #Threading=False
                                             )
     t.showWeightPreorder()
+    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows',Transposed=False)
    
     
     
