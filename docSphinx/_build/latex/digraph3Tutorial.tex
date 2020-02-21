@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{February 20, 2020}
+\date{February 21, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -716,7 +716,7 @@ Computing the dual, respectively the converse, may also be done with prefixing t
 
 \subsection{Symmetric and transitive closures}
 \label{\detokenize{tutorial:symmetric-and-transitive-closures}}
-Symmetric and transitive closure in\sphinxhyphen{}site constructors are also available (see \hyperref[\detokenize{tutorial:strongcomponents}]{Fig.\@ \ref{\detokenize{tutorial:strongcomponents}}}). Note that it is a good idea, before going ahead with these in\sphinxhyphen{}site operations who irreversibly modify the original \sphinxstyleemphasis{dg} object, to previously make a backup version of \sphinxstyleemphasis{dg}. The simplest storage method, always provided by the generic \sphinxcode{\sphinxupquote{diggraphs.Digraph.save()}}, writes out in a named file the python content of the Digraph object in string representation.
+Symmetric and transitive closure in\sphinxhyphen{}site constructors are also available (see \hyperref[\detokenize{tutorial:strongcomponents}]{Fig.\@ \ref{\detokenize{tutorial:strongcomponents}}}). Note that it is a good idea, before going ahead with these in\sphinxhyphen{}site operations who irreversibly modify the original \sphinxstyleemphasis{dg} object, to previously make a backup version of \sphinxstyleemphasis{dg}. The simplest storage method, always provided by the generic \sphinxcode{\sphinxupquote{digraphs.Digraph.save()}}, writes out in a named file the python content of the Digraph object in string representation.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{save}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tutRandValDigraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -1801,7 +1801,7 @@ commonMode = {[}‘triangular’,’variable’,0.5{]}: random number generators
 valueDigits = 2 (default): evaluations are encoded as Decimals,
 
 \item {} 
-missingProbability = 0.05 (default): random insertion of missing values with given probability,
+missingDataProbability = 0.05 (default): random insertion of missing values with given probability,
 
 \item {} 
 seed= None.

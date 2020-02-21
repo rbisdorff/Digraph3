@@ -783,7 +783,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </div>
 <div class="section" id="symmetric-and-transitive-closures">
 <h2><a class="toc-backref" href="#id163">Symmetric and transitive closures</a><a class="headerlink" href="#symmetric-and-transitive-closures" title="Permalink to this headline">¶</a></h2>
-<p>Symmetric and transitive closure in-site constructors are also available (see <a class="reference internal" href="#strongcomponents"><span class="std std-numref">Fig. 6</span></a>). Note that it is a good idea, before going ahead with these in-site operations who irreversibly modify the original <em>dg</em> object, to previously make a backup version of <em>dg</em>. The simplest storage method, always provided by the generic <code class="xref py py-func docutils literal notranslate"><span class="pre">diggraphs.Digraph.save()</span></code>, writes out in a named file the python content of the Digraph object in string representation.</p>
+<p>Symmetric and transitive closure in-site constructors are also available (see <a class="reference internal" href="#strongcomponents"><span class="std std-numref">Fig. 6</span></a>). Note that it is a good idea, before going ahead with these in-site operations who irreversibly modify the original <em>dg</em> object, to previously make a backup version of <em>dg</em>. The simplest storage method, always provided by the generic <a class="reference internal" href="techDoc.html#digraphs.Digraph.save" title="digraphs.Digraph.save"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.save()</span></code></a>, writes out in a named file the python content of the Digraph object in string representation.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -2035,7 +2035,7 @@ a given number of decision actions.</p>
 <li><p>commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)]: Performance discrimination thresholds may be set for ‘ind’, ‘pref’ and ‘veto’,</p></li>
 <li><p>commonMode = [‘triangular’,’variable’,0.5]: random number generators of various other types (‘uniform’,’beta’) are available,</p></li>
 <li><p>valueDigits = 2 (default): evaluations are encoded as Decimals,</p></li>
-<li><p>missingProbability = 0.05 (default): random insertion of missing values with given probability,</p></li>
+<li><p>missingDataProbability = 0.05 (default): random insertion of missing values with given probability,</p></li>
 <li><p>seed= None.</p></li>
 </ul>
 </div></blockquote>

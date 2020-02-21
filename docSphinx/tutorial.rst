@@ -581,7 +581,7 @@ Computing the dual, respectively the converse, may also be done with prefixing t
 Symmetric and transitive closures
 .................................
 
-Symmetric and transitive closure in-site constructors are also available (see :numref:`strongComponents`). Note that it is a good idea, before going ahead with these in-site operations who irreversibly modify the original *dg* object, to previously make a backup version of *dg*. The simplest storage method, always provided by the generic :py:func:`diggraphs.Digraph.save()`, writes out in a named file the python content of the Digraph object in string representation.
+Symmetric and transitive closure in-site constructors are also available (see :numref:`strongComponents`). Note that it is a good idea, before going ahead with these in-site operations who irreversibly modify the original *dg* object, to previously make a backup version of *dg*. The simplest storage method, always provided by the generic :py:func:`digraphs.Digraph.save()`, writes out in a named file the python content of the Digraph object in string representation.
 
 .. code-block:: pycon
    :linenos:
@@ -1536,7 +1536,7 @@ Generator directives are the following:
     * commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)]: Performance discrimination thresholds may be set for 'ind', 'pref' and 'veto',  
     * commonMode = ['triangular','variable',0.5]: random number generators of various other types ('uniform','beta') are available,
     * valueDigits = 2 (default): evaluations are encoded as Decimals,
-    * missingProbability = 0.05 (default): random insertion of missing values with given probability,  
+    * missingDataProbability = 0.05 (default): random insertion of missing values with given probability,  
     * seed= None. 
 
 .. note::
