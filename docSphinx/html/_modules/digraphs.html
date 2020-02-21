@@ -6674,10 +6674,13 @@
 <div class="viewcode-block" id="Digraph.computeChordlessCircuits"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeChordlessCircuits">[docs]</a>    <span class="k">def</span> <span class="nf">computeChordlessCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the set of all chordless odd circuits detected in a digraph.</span>
-<span class="sd">        Result (possible empty list) stored in &lt;self.circuitsList&gt;</span>
-<span class="sd">        holding a possibly empty list tuples with at position 0 the</span>
+<span class="sd">        Result is stored in &lt;self.circuitsList&gt;</span>
+<span class="sd">        holding a possibly empty list of tuples with at position 0 the</span>
 <span class="sd">        list of adjacent actions of the circuit and at position 1</span>
 <span class="sd">        the set of actions in the stored circuit.</span>
+
+<span class="sd">        When &quot;Odd* is True, only cchordless ircuits with an odd length are collected.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#import copy</span>
         <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">flatten</span>

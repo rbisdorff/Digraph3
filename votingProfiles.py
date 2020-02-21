@@ -444,7 +444,7 @@ class LinearVotingProfile(VotingProfile):
         while len(remainingCandidates) > 1:
             uninominalVotes = self.computeUninominalVotes(remainingCandidates,remainingLinearBallot)
             if Comments:
-                print('>>> stage = ', stage)
+                print(' ==> stage = ', stage)
                 print('    remaining candidates', remainingCandidates)
                 print('    uninominal votes', uninominalVotes)
             minVotes = totalWeight

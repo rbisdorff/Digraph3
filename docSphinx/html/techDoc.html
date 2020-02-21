@@ -973,10 +973,11 @@ using the Pirlot’s fixpoint algorithm.</p>
 <dt id="digraphs.Digraph.computeChordlessCircuits">
 <code class="sig-name descname">computeChordlessCircuits</code><span class="sig-paren">(</span><em class="sig-param">Odd=False</em>, <em class="sig-param">Comments=False</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeChordlessCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeChordlessCircuits" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the set of all chordless odd circuits detected in a digraph.
-Result (possible empty list) stored in &lt;self.circuitsList&gt;
-holding a possibly empty list tuples with at position 0 the
+Result is stored in &lt;self.circuitsList&gt;
+holding a possibly empty list of tuples with at position 0 the
 list of adjacent actions of the circuit and at position 1
 the set of actions in the stored circuit.</p>
+<p>When “Odd* is True, only cchordless ircuits with an odd length are collected.</p>
 </dd></dl>
 
 <dl class="method">

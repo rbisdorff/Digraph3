@@ -767,7 +767,10 @@ Computing the winner of an election
 Linear voting profiles
 ......................
 
-The :py:mod:`votingProfiles` module provides resources for handling election results [ADT-L2]_, like the :py:class:`votingProfiles.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary::
+The :py:mod:`votingProfiles` module provides resources for handling election results [ADT-L2]_, like the :py:class:`votingProfiles.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary.
+
+.. code-block:: python
+   :linenos:
 
     candidates = OrderedDict([('a1',...), ('a2',...), ('a3', ...), ...}
     voters = OrderedDict([('v1',{'weight':10}), ('v2',{'weight':3}), ...}
@@ -782,24 +785,32 @@ The :py:mod:`votingProfiles` module provides resources for handling election res
 The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class for generating random instances of the :py:class:`votingProfiles.LinearVotingProfile` class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result.
 
 .. code-block:: pycon
+   :name: randomProfile1
+   :caption: Example of random linear voting profile 
+   :linenos:
 
    >>> from votingProfiles import RandomLinearVotingProfile
    >>> v = RandomLinearVotingProfile(numberOfVoters=5,
    ...                               numberOfCandidates=3,
    ...                               RandomWeights=True)
    >>> v.candidates
-    OrderedDict(['a1',{'name':'a1}), ('a2',{'name':'a2'}), ('a3':{'name':'a3'})])
+    OrderedDict([ ('a1',{'name':'a1}), ('a2',{'name':'a2'}),
+                  ('a3',{'name':'a3'}) ])
    >>> v.voters
     OrderedDict([('v1',{'weight': 2}), ('v2':{'weight': 3}), 
      ('v3',{'weight': 1}), ('v4':{'weight': 5}), 
      ('v5',{'weight': 4})])
    >>> v.linearBallot
-    {'v4': ['a1', 'a3', 'a2'], 'v3': ['a1', 'a3', 'a2'], 'v1': ['a1', 'a2', 'a3'],
-     'v5': ['a2', 'a3', 'a1'], 'v2': ['a3', 'a2', 'a1']}
+    {'v1': ['a1', 'a2', 'a3',],
+     'v2': ['a3', 'a2', 'a1',],
+     'v3': ['a1', 'a3', 'a2',],
+     'v4': ['a1', 'a3', 'a2',],
+     'v5': ['a2', 'a3', 'a1',]} 
 
-Notice that in this random example, the five voters are weighted (see Line 4). Their linear ballots can be viewed with the :py:func:`votingProfiles.VotingLinearProfiles.showLinearBallots` method.
+Notice that in this random example, the five voters are weighted (see :numref:`randomProfile1` Line 6-7). Their linear ballots can be viewed with the :py:func:`votingProfiles.VotingLinearProfile.showLinearBallots` method.
 
 .. code-block:: pycon
+   :linenos:
 
    >>> v.showLinearBallots()
     voters(weight)	 candidates rankings
@@ -814,9 +825,9 @@ Editing of the linear voting profile may be achieved by storing the data in a fi
 
 .. code-block:: pycon
 
-   >>> v.save('tutorialLinearVotingProfile')
-    *--- Saving linear profile in file: <tutorialLinearVotingProfile.py> ---*
-   >>> v = LinearVotingProfile('tutorialLinearVotingProfile')
+   >>> v.save(name='tutorialLinearVotingProfile1')
+    *--- Saving linear profile in file: <tutorialLinearVotingProfile1.py> ---*
+   >>> v = LinearVotingProfile('tutorialLinearVotingProfile1')
 
 Computing the winner
 ....................
@@ -833,47 +844,90 @@ We may easily compute **uni-nominal votes**, i.e. how many times a candidate was
 As we observe no absolute majority (8/15) of votes for any of the three candidate, we may look for the **instant runoff** winner instead (see [ADT-L2]_).
 
 .. code-block:: pycon
+   :name: instantRunOff
+   :caption: Example Instant Run Off Winner
 
-   >>> v.computeInstantRunoffWinner()
-    ['a1']
+   >>> v.computeInstantRunoffWinner(Comments=True)
+    Half of the Votes =  7.50
+    ==> stage =  1
+	remaining candidates ['a1', 'a2', 'a3']
+	uninominal votes {'a1': 6, 'a2': 2, 'a3': 7}
+	minimal number of votes =  2
+	maximal number of votes =  7
+	candidate to remove =  a2
+	remaining candidates =  ['a1', 'a3']
+    ==> stage =  2
+	remaining candidates ['a1', 'a3']
+	uninominal votes {'a1': 8, 'a3': 7}
+	minimal number of votes =  7
+	maximal number of votes =  8
+	candidate a1 obtains an absolute majority
+    Instant run off winner: ['a1']
 
-We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** of each candidate and hence determine the **Borda winner(s)**.
+In stage 1, no candidate obtains an absolute majority of votes. Candidate *a2* obtains the minimal number of votes (2/15) and is, hence, eliminated. In stage 2, candidate *a1* obtains an absolute majority of the votes (8/15) and is eventually elected (see :numref:`instantRunOff`).
+
+We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** (the average rank) of each candidate and hence determine the *Borda* **winner(s)**.
 
 .. code-block:: pycon
+   :name: BordaScores
+   :caption: Example of *Borda* rank scores
+   :linenos:
 
    >>> v.computeRankAnalysis()
     {'a2': [2, 5, 8], 'a1': [6, 9, 0], 'a3': [7, 1, 7]}
    >>> v.computeBordaScores()
-    {'a2': 36, 'a1': 24, 'a3': 30}
+    OrderedDict([
+      ('a1', {'BordaScore': 24, 'averageBordaScore': 1.6}),
+      ('a3', {'BordaScore': 30, 'averageBordaScore': 2.0}),
+      ('a2', {'BordaScore': 36, 'averageBordaScore': 2.4}) ])
    >>> v.computeBordaWinners()
     ['a1']
 
-The Borda **rank analysis table** may be printed out with a corresponding ``show`` command.
+Candidate *a1* obtains the minimal *Borda* score, followed by candidate *a3* and finally candidate *a2* (see :numref:`BordaScores`). The corresponding *Borda* **rank analysis table** may be printed out with a corresponding ``show`` command.
 
 .. code-block:: pycon
+   :name: rankAnalysis
+   :caption: Rank analysis example
+   :linenos:
 
    >>> v.showRankAnalysisTable()
     *----  Borda rank analysis tableau -----*
-    candi- | alternative-to-rank |      Borda
+    candi- | alternative-to-rank |     Borda
     dates  |   1     2     3     | score  average
     -------|-------------------------------------
-     'a1'  |   6     9     0     |  24     1.60
-     'a3'  |   7     1     7     |  30     2.00
-     'a2'  |   2     5     8     |  36     2.40
+     'a1'  |   6     9     0     | 24/15   1.60
+     'a3'  |   7     1     7     | 30/15   2.00
+     'a2'  |   2     5     8     | 36/15   2.40
+
+In our randomly generated election results, we are lucky: The instant runoff winner and the *Borda* winner both are candidate *a1* (see :numref:`instantRunOff` and :numref:`rankAnalysis`). However, we could also follow the *Marquis de Condorcet*'s advice, and compute the **majority margins** obtained by voting for each individual pair of candidates.
 
 The Condorcet winner
 ....................
 
-In our randomly generated election results, we are lucky: The instant runoff winner and the Borda winner both are candidate *a1*. However, we could also follow the *Marquis de Condorcet*'s advice, and compute the **majority margins** obtained by voting for each individual pair of candidates. For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the majority margin *M(a1,a2)* is 4 - 1 = +3. These majority margins define on the set of candidates what we call the **Condorcet digraph**. The :py:class:`votingProfiles.CondorcetDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such pairwise majority margins.
+ For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the corresponding **majority margin** *M(a1,a2)* is 4 - 1 = +3. These *majority margins* define on the set of candidates what we call the **Condorcet digraph**. The :py:class:`votingProfiles.CondorcetDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such kind of digraphs.
 
 .. code-block:: pycon
+   :name: condorcetDigraph
+   :caption: Example of *Condorcet* digraph
    :linenos:
 
    >>> from votingProfiles import CondorcetDigraph
    >>> cdg = CondorcetDigraph(v,hasIntegerValuation=True)
+   >>> cdg
+    *------- Digraph instance description ------*
+    Instance class      : CondorcetDigraph
+    Instance name       : rel_randomLinearVotingProfile1
+    Digraph Order       : 3
+    Digraph Size        : 3
+    Valuation domain    : [-15.00;15.00]
+    Determinateness (%) : 64.44
+    Attributes          : ['name', 'actions', 'voters',
+                           'ballot', 'valuationdomain',
+			   'relation', 'order',
+			   'gamma', 'notGamma']
    >>> cdg.showAll()
     *----- show detail -------------*
-    Digraph          : rel_randLinearProfile
+    Digraph          : rel_randLinearVotingProfile1
     *---- Actions ----*
     ['a1', 'a2', 'a3']
     *---- Characteristic valuation domain ----*
@@ -881,40 +935,45 @@ In our randomly generated election results, we are lucky: The instant runoff win
      'min': Decimal('-15.0'), 'hasIntegerValuation': True}
     * ---- majority margins -----
        M(x,y)   |  'a1'	  'a2'  'a3'	  
-      ----------|-------------------------------------------
+      ----------|-------------------
         'a1'    |    0     11     1	 
         'a2'    |  -11      0    -1	 
         'a3'    |   -1      1     0	 
     Valuation domain: [-15;+15]
 
-A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the Condorcet digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner**-
+A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the *Condorcet* digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner** (see :numref:`condorcetDigraph` Line 26).
 
 .. code-block:: pycon
 
    >>> cdg.computeCondorcetWinner()
     ['a1']  
     
-By seeing the majority margins like a bipolar-valued characteristic function for a global preference relation defined on the set of candidates, we may use all operational resources of the generic ``Digraph`` class (see :ref:`Digraphs-Tutorial-label`), and especially its ``exportGraphViz`` method [1]_, for visualizing an election result.
+By seeing the majority margins like a *bipolar-valued characteristic function* of a global preference relation defined on the set of candidates, we may use all operational resources of the generic ``Digraph`` class (see :ref:`Digraphs-Tutorial-label`), and especially its ``exportGraphViz`` method [1]_, for visualizing an election result.
 
 .. code-block:: pycon
 
-   >>> cdg.exportGraphViz('tutorialLinearBallots')
+   >>> cdg.exportGraphViz(fileName='tutorialLinearBallots')
    *---- exporting a dot file for GraphViz tools ---------*
    Exporting to tutorialLinearBallots.dot
    dot -Grankdir=BT -Tpng tutorialLinearBallots.dot -o tutorialLinearBallots.png
 
-.. figure:: tutorialLinearBallots.png
+.. Figure:: tutorialLinearBallots.png
+   :name: tutorialLinearBallots
    :width: 300 px
    :align: center
 
    Visualizing an election result
 
+In :numref:`tutorialLinearBallots` we notice that the *Condorcet* digraph from our example linear voting profile gives a linear order of the candidiates: ['a1', 'a3', 'a2], the same as given by the *Borda* scores (see :numref:`BordaScores`). Usually, when aggregating linear ballots, there appear cyclic social preferences.
+
 Cyclic social preferences
 .........................
 
-Usually, when aggregating linear ballots, there appear cyclic social preferences. Let us consider for instance the following linear voting profile and construct the corresponding Condorcet digraph.
+Let us consider for instance the following linear voting profile and construct the corresponding Condorcet digraph.
 
 .. code-block:: pycon
+   :name: linearVotingProfile2
+   :caption: Example of cyclic soicial preferences 	  
    :linenos:
 
    >>> v.showLinearBallots()
@@ -939,7 +998,7 @@ Usually, when aggregating linear ballots, there appear cyclic social preferences
     'a4'  |  0.56  -0.11   0.33	   -	  0.11	 
     'a5'  |  0.33   0.11   0.11	 -0.11	   -	 
     
-Now, we cannot find any completely positive row in the relation table. No one of the five candidates is beating all the others with an absolute majority of votes. There is no Condorcet winner anymore. In fact, when looking at a graphviz drawing of this Condorcet digraph, we may observe cyclic preferences, like (*a1* > *a2* > *a3* > *a1*) for instance.
+Now, we cannot find any completely positive row in the relation table (see :numref:`linearVotingProfile2` Lines 17 - ). No one of the five candidates is beating all the others with an absolute majority of votes. There is no *Condorcet* winner anymore. In fact, when looking at a graphviz drawing of this *Condorcet* digraph, we may observe *cyclic* preferences, like (*a1* > *a2* > *a3* > *a1*) for instance (see :numref:`cyclicSocialPreferences`).
 
 .. code-block:: pycon
 
@@ -948,13 +1007,14 @@ Now, we cannot find any completely positive row in the relation table. No one of
     Exporting to cycles.dot
     dot -Grankdir=BT -Tpng cycles.dot -o cycles.png
 
-.. figure:: cycles.png
+.. Figure:: cycles.png
+   :name: cyclicSocialPreferences	    
    :width: 200 px
    :align: center
 
    Cyclic social preferences
 	   
-But, there may be many cycles appearing in a digraph, and, we may detect and enumerate all minimal chordless circuits in a Digraph instance with the ``computeChordlessCircuits()`` method.
+But, there may be many cycles appearing in a *Condorcet* digraph, and, we may detect and enumerate all minimal chordless circuits in a Digraph instance with the :py:func:`digraphs.Digraph.computeChordlessCircuits` method.
 
 .. code-block:: pycon
 
@@ -963,13 +1023,17 @@ But, there may be many cycles appearing in a digraph, and, we may detect and enu
      (['a2', 'a4', 'a5'], frozenset({'a2', 'a5', 'a4'})), 
      (['a2', 'a4', 'a1'], frozenset({'a2', 'a1', 'a4'}))]
 
-Condorcet's approach for determining the winner of an election is hence not decisive in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see the tutorial on :ref:`Ranking-Tutorial-label` and [BIS-2008]_). 
+*Condorcet*'s approach for determining the winner of an election is hence *not decisive* in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see the tutorial on :ref:`Ranking-Tutorial-label` and [BIS-2008]_). 
 
 Many more tools for exploiting voting results are available like the browser heat map view on voting profiles (see the technical documentation of the :ref:`votingProfiles-label`).
 
 .. code-block:: pycon
+   :name: votingHeatmap
+   :caption: Example linear voting heatmap
+   :linenos:
 
-   >>> v.showHTMLVotingHeatmap(rankingRule='NetFlows')
+   >>> v.showHTMLVotingHeatmap(rankingRule='NetFlows',
+   ...                         Transposed=False)
 
 .. figure:: votingHeatmap.png
    :width: 550 px
@@ -978,7 +1042,7 @@ Many more tools for exploiting voting results are available like the browser hea
 
    Visualizing a linear voting profile in a heat map format
 
-Notice that the importance weights of the voters are *negative*, which means that the preference direction of the criteria (in this case the individual voters) is *decreasing*, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise *NetFlows* ranking *[a4,a5,a2,a1,a3]*, shown in this heat map (see :numref:`cyclicVoting`) results in an optimal *ordinal correlation* index of +0.778 with the pairwise majority voting margins (see tutorials :ref:`OrdinalCorrelation-Tutorial-label` and :ref:`Ranking-Tutorial-label`). 
+Notice that the importance weights of the voters are *negative*, which means that the preference direction of the criteria (in this case the individual voters) is *decreasing*, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise *NetFlows* ranking *[a4,a5,a2,a1,a3]*, shown in this heat map (see :numref:`cyclicVoting`) results in an optimal *ordinal correlation* index of +0.778 with the pairwise majority voting margins (see tutorials :ref:`OrdinalCorrelation-Tutorial-label` and :ref:`Ranking-Tutorial-label`). The number of voters is usually much larger than the number of candidates. In that case, it is better to generate a transposed *voters X candidates* view (see :numref:`votingHeatmap` Line 2) 
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -1799,12 +1863,12 @@ There is one chordless circuit detected in the given strict outranking digraph *
 
 Several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.
 
-The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland* 's, *Kemeny* 's, *Slater* 's, *Kohler* 's or *Tideman* 's ranking rule.
+The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland*'s, *Kemeny*'s, *Slater*'s, *Kohler*'s or *Tideman*'s ranking rule.
 
 The *Copeland* ranking
 ......................
 
-*Copeland* 's rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, computes for each alternative a score resulting from the sum of the differences between the crisp **strict outranking** characteristics :math:`r(x\, > \,y)_{>0}` and the crisp **strict outranked** characteristics :math:`r(y\, > \, x)_{>0}`  for all pairs of alternatives where *y* is different from *x*. The alternatives are ranked in decreasing order of these *Copeland* scores; ties, the case given, being resolved by a lexicographical rule. 
+*Copeland*'s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, computes for each alternative a score resulting from the sum of the differences between the crisp **strict outranking** characteristics :math:`r(x\, > \,y)_{>0}` and the crisp **strict outranked** characteristics :math:`r(y\, > \, x)_{>0}`  for all pairs of alternatives where *y* is different from *x*. The alternatives are ranked in decreasing order of these *Copeland* scores; ties, the case given, being resolved by a lexicographical rule. 
 
 .. code-block:: pycon
    :name: CopelandRanking
@@ -1830,7 +1894,7 @@ Alternative *a5* obtains the best *Copeland* score (+12), followed by alternativ
 
 The *Copeland* scores deliver actually only a unique *weak order*, i.e. a ranking with potential ties. This weak order may be constructed with the :py:class:`transitiveDigraphs.WeakCopelandOrder` class. Notice by the way that *Copeland* scores here are in fact *invariant* under a *codual*, i.e. the negation of the converse ( - ( ~ *g* ) ) transform of the outranking digraph. 
 
-*Copeland* 's ranking rule actually renders a linear order which is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal *Kendall* sense (see :numref:`correlationIndexes` and [BIS-2012]_).
+*Copeland*'s ranking rule actually renders a linear order which is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal *Kendall* sense (see :numref:`correlationIndexes` and [BIS-2012]_).
 
 .. code-block:: pycon
    :name: correlationIndexes
@@ -1887,7 +1951,7 @@ The resulting **NetFlows** ranking is here, in this didactic example, slightly b
 
 Indeed, the extended Kenall tau index of  +0.638 leads to a bipolar-valued equivalence characteristics of 0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding *Copeland* ranking.
 
-To appreciate the respective quality of both the *Copeland* and the *NetFlows* rankings, it is useful to consider *Kemeny* 's and *Slater* 's **optimal** ranking rules.
+To appreciate the respective quality of both the *Copeland* and the *NetFlows* rankings, it is useful to consider *Kemeny*'s and *Slater*'s **optimal** ranking rules.
 
 *Kemeny* rankings
 .................
@@ -1953,7 +2017,7 @@ It is interesting to notice in :numref:`optimalKemeny`, that both *Kemeny* ranki
 *Slater* rankings
 .................
 
-The **Slater** ranking rule is similar to *Kemeny* 's, but it is working, instead,  on the associated median cut strict outranking digraph *ccd*. It renders here the following results.
+The **Slater** ranking rule is similar to *Kemeny*'s, but it is working, instead,  on the associated median cut strict outranking digraph *ccd*. It renders here the following results.
 
 .. code-block:: pycon
    :linenos:
@@ -1996,14 +2060,14 @@ We notice that the first crisp *Slater* ranking is a rather good fit (+0.676), s
        
 What precise ranking result should we hence adopt ? 
 
-*Kemeny* 's as well as *Slater* 's ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). 
+*Kemeny*'s as well as *Slater*'s ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). 
 
 More efficient ranking heuristics, like the *Copeland* and the *NetFlows* rules, are therefore needed in practice. 
 
-*Kohler* 's ranking-by-choosing rule
-....................................
+*Kohler*'s ranking-by-choosing rule
+...................................
 
-**Kohler** 's *ranking-by-choosing* rule can be formulated like this. 
+**Kohler**'s *ranking-by-choosing* rule can be formulated like this. 
 
 At step *i* (*i* goes from 1 to *n*) do the following:
 
@@ -2031,8 +2095,8 @@ With this *min-max* ranking-by-choosing strategy, we find a correlation result (
 
 Kohler's ranking has a *dual* version, the prudent **Arrow-Raynaud** *ordering-by-choosing* rule, where a corresponding *max-min* strategy, when used on the *non-strict* outranking digraph, for ordering the from the *worst* to the *best* produces the same eventual ranking result (see [DIA-2010]_). 
 
-*Tideman* 's ranked-pairs rule
-..............................
+*Tideman*'s ranked-pairs rule
+.............................
 
 Working on the *non strict* outranking digraph *g*, a further *ranking-by-choosing* heuristic, the **RankedPairs** rule, is based on a *prudent incremental* construction of linear orders that avoids on the fly any cycling outrankings (see [LAM-2009]_). The ranking rule may be formulated as follows:
 
@@ -2067,7 +2131,7 @@ The *RankedPairs* ranking rule actually renders in fact an optimal *Kemeny* rank
     Bipolar-valued equivalalence : +0.179
     Epistemic determination      :  0.230
 
-Similar to *Kohler* 's rule, the *RankedPairs* rule has also a prudent *dual* version, the **Dias-Lamboray** *ordering-by-choosing* rule, which produces, when working this time on the codual strict outranking digraph, the same ranking result (see [LAM-2009]_).
+Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* version, the **Dias-Lamboray** *ordering-by-choosing* rule, which produces, when working this time on the codual strict outranking digraph, the same ranking result (see [LAM-2009]_).
 
 Unfortunately, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* ones, are *not efficiently scalable* to outranking digraphs of larger orders (> 1000). For such outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland* and, more accuratly, the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the strict outranking digraph, remain in fact computationally efficient.
  
@@ -2767,7 +2831,7 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
 
 .. note::
 
-   It is therefore *important* to always keep in mind that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking**; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimised quantile ordering strategy, all this will indeed produce, sometimes even substantially, different global ranking results. 
+   It is therefore *important* to always keep in mind that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking**; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimised quantile ordering strategy, all this will indeed produce, sometimes even substantially, diverse global ranking results. 
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -3420,7 +3484,7 @@ In this rating example, the *NetFlows* rule appears to be the more appropriate r
 
 We achieve here a linear ranking without ties (from best to worst) of the digraph's actions, i.e. including the new decision alternatives as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense (*tau* = 0.94) to the underlying valued outranking relation.
 
-The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes' contents in increasing order of the *quartiles* ' lower limits.
+The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes' contents in increasing order of the *quartiles* lower limits.
 
 .. code-block:: pycon
 
@@ -4936,7 +5000,7 @@ are *independent* of one another (see [GOL-2004]_ p. 275).
 Who is the liar ?
 .................
 
-*Claude Berge* 's famous mystery story (see [GOL-2004]_ p.20) may well illustrate the importance of being an **interval graph**.
+*Claude Berge*'s famous mystery story (see [GOL-2004]_ p.20) may well illustrate the importance of being an **interval graph**.
 
 Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Graph` instance data::
 
@@ -5489,7 +5553,7 @@ Let us now turn toward a major application of tree graphs, namely *spanning tree
 Spanning trees and forests
 ..........................
 
-With the :py:class:`graphs.RandomSpanningTree` class we may generate, from a given **connected** graph *g* instance, **uniform random** instances of a **spanning tree** by using *Wilson* 's algorithm [WIL-1996]_  
+With the :py:class:`graphs.RandomSpanningTree` class we may generate, from a given **connected** graph *g* instance, **uniform random** instances of a **spanning tree** by using *Wilson*'s algorithm [WIL-1996]_  
 
 .. Note::
 
@@ -5559,7 +5623,7 @@ More general, and in case of a not connected graph, we may generate with the :py
 Maximum determined spanning forests
 ...................................
 
-In case of valued graphs supporting weighted edges, we may finally construct a **most determined** spanning tree (or forest if not connected) using *Kruskal* 's *greedy* **minimum-spanning-tree algorithm** [5]_ on the *dual* valuation of the graph [KRU-1956]_.
+In case of valued graphs supporting weighted edges, we may finally construct a **most determined** spanning tree (or forest if not connected) using *Kruskal*'s *greedy* **minimum-spanning-tree algorithm** [5]_ on the *dual* valuation of the graph [KRU-1956]_.
 
 We consider, for instance, a randomly valued graph with five vertices and seven edges bipolar-valued in [-1.0; 1.0]. 
 
@@ -5733,9 +5797,9 @@ Bibliography
 
 .. [3] The :code:`perrinMIS` shell command may be installed system wide with the command :code:`.../Digraph3$ make installPerrin` from the main Digraph3 directory. It is stored by default into :code:`</usr/local/bin/>`. This may be changed with the :code:`INSTALLDIR` flag. The command :code:`.../Digraph3$ make installPerrinUser` installs it instead without sudo into the user's private :code:`<$Home/.bin>` directory.
 
-.. [4] *Wilson* 's algorithm uses *loop-erased random walks*. See https://en.wikipedia.org/wiki/Loop-erased_random_walk .
+.. [4] *Wilson*'s algorithm uses *loop-erased random walks*. See https://en.wikipedia.org/wiki/Loop-erased_random_walk .
 
-.. [5] *Kruskal* 's algorithm is a *minimum-spanning-tree* algorithm which finds an edge of the least possible weight that connects any two trees in the forest.  See https://en.wikipedia.org/wiki/Kruskal%27s_algorithm .
+.. [5] *Kruskal*'s algorithm is a *minimum-spanning-tree* algorithm which finds an edge of the least possible weight that connects any two trees in the forest.  See https://en.wikipedia.org/wiki/Kruskal%27s_algorithm .
 
 .. [6] See https://cython.org/
 
