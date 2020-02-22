@@ -254,18 +254,18 @@ class LinearVotingProfile(VotingProfile):
         self.ballot = ballot
         return ballot
 
-    def save(self,name='templinearprofile'):
+    def save(self,fileName='templinearprofile'):
         """
         Persistant storage of a linear voting profile.
 
         Parameter:
             name of file (without <.py> extension!).
         """
-        print('*--- Saving linear profile in file: <' + str(name) + '.py> ---*')
+        print('*--- Saving linear profile in file: <' + str(fileName) + '.py> ---*')
         candidates = self.candidates
         voters = self.voters
         linearBallot = self.linearBallot
-        saveFileName = str(name)+str('.py')
+        saveFileName = str(fileName)+str('.py')
         fo = open(saveFileName, 'w')
         fo.write('# Saved linear voting profile: \n')
         fo.write('from collections import OrderedDict \n')

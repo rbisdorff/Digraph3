@@ -825,7 +825,7 @@ Editing of the linear voting profile may be achieved by storing the data in a fi
 
 .. code-block:: pycon
 
-   >>> v.save(name='tutorialLinearVotingProfile1')
+   >>> v.save(fileName='tutorialLinearVotingProfile1')
     *--- Saving linear profile in file: <tutorialLinearVotingProfile1.py> ---*
    >>> v = LinearVotingProfile('tutorialLinearVotingProfile1')
 

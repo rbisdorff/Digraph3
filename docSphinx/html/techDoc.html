@@ -972,12 +972,13 @@ using the Pirlot’s fixpoint algorithm.</p>
 <dl class="method">
 <dt id="digraphs.Digraph.computeChordlessCircuits">
 <code class="sig-name descname">computeChordlessCircuits</code><span class="sig-paren">(</span><em class="sig-param">Odd=False</em>, <em class="sig-param">Comments=False</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeChordlessCircuits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeChordlessCircuits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the set of all chordless odd circuits detected in a digraph.
+<dd><p>Renders the set of all chordless circuits detected in a digraph.
 Result is stored in &lt;self.circuitsList&gt;
 holding a possibly empty list of tuples with at position 0 the
 list of adjacent actions of the circuit and at position 1
 the set of actions in the stored circuit.</p>
-<p>When “Odd* is True, only cchordless ircuits with an odd length are collected.</p>
+<p>When <em>Odd</em> is True, only chordless circuits with an odd length
+are collected.</p>
 </dd></dl>
 
 <dl class="method">
@@ -7660,7 +7661,7 @@ and restricted linear ballots</p>
 
 <dl class="method">
 <dt id="votingProfiles.LinearVotingProfile.save">
-<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">name='templinearprofile'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.save" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save</code><span class="sig-paren">(</span><em class="sig-param">fileName='templinearprofile'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.save" title="Permalink to this definition">¶</a></dt>
 <dd><p>Persistant storage of a linear voting profile.</p>
 <dl class="simple">
 <dt>Parameter:</dt><dd><p>name of file (without &lt;.py&gt; extension!).</p>

@@ -6633,13 +6633,14 @@ class Digraph(object):
     #@timefn
     def computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
         """
-        Renders the set of all chordless odd circuits detected in a digraph.
+        Renders the set of all chordless circuits detected in a digraph.
         Result is stored in <self.circuitsList>
         holding a possibly empty list of tuples with at position 0 the
         list of adjacent actions of the circuit and at position 1
         the set of actions in the stored circuit.
 
-        When "Odd* is True, only cchordless ircuits with an odd length are collected.
+        When *Odd* is True, only chordless circuits with an odd length
+        are collected.
 
         """
         #import copy
