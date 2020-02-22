@@ -4065,13 +4065,13 @@ class Digraph(object):
         webbrowser.open(url,new=newTab)
     
             
-    def savedre(self,name='temp'):
+    def savedre(self,fileName='temp'):
         """
         save digraph in nauty format.
         """
         print('*----- saving digraph in nauty dre format  -------------*')
         actions = [x for x in self.actions]
-        Name = name+'.dre'
+        Name = fileName+'.dre'
         aindex = {}
         i = 1
         print('Actions index:')
@@ -4094,13 +4094,13 @@ class Digraph(object):
         fo.close()
         self.aindex = aindex.copy()
 
-    def saveXML(self,name='temp',category='general',subcategory='general',author='digraphs Module (RB)',reference='saved from Python'):
+    def saveXML(self,fileName='temp',category='general',subcategory='general',author='digraphs Module (RB)',reference='saved from Python'):
         """
         save digraph in XML format.
         """
         print('*----- saving digraph in XML format  -------------*')
         actions = [x for x in self.actions]
-        nameExt = name+'.xml'
+        nameExt = fileName+'.xml'
         fo = open(nameExt,'w')
         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         fo.write('<?xml-stylesheet type="text/xsl" href="digraphs.xsl"?>\n')

@@ -4105,13 +4105,13 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="n">newTab</span><span class="p">)</span></div>
     
             
-<div class="viewcode-block" id="Digraph.savedre"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.savedre">[docs]</a>    <span class="k">def</span> <span class="nf">savedre</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="Digraph.savedre"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.savedre">[docs]</a>    <span class="k">def</span> <span class="nf">savedre</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        save digraph in nauty format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----- saving digraph in nauty dre format  -------------*&#39;</span><span class="p">)</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-        <span class="n">Name</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.dre&#39;</span>
+        <span class="n">Name</span> <span class="o">=</span> <span class="n">fileName</span><span class="o">+</span><span class="s1">&#39;.dre&#39;</span>
         <span class="n">aindex</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Actions index:&#39;</span><span class="p">)</span>
@@ -4134,13 +4134,13 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">aindex</span> <span class="o">=</span> <span class="n">aindex</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Digraph.saveXML"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.saveXML">[docs]</a>    <span class="k">def</span> <span class="nf">saveXML</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;general&#39;</span><span class="p">,</span><span class="n">subcategory</span><span class="o">=</span><span class="s1">&#39;general&#39;</span><span class="p">,</span><span class="n">author</span><span class="o">=</span><span class="s1">&#39;digraphs Module (RB)&#39;</span><span class="p">,</span><span class="n">reference</span><span class="o">=</span><span class="s1">&#39;saved from Python&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="Digraph.saveXML"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.saveXML">[docs]</a>    <span class="k">def</span> <span class="nf">saveXML</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;general&#39;</span><span class="p">,</span><span class="n">subcategory</span><span class="o">=</span><span class="s1">&#39;general&#39;</span><span class="p">,</span><span class="n">author</span><span class="o">=</span><span class="s1">&#39;digraphs Module (RB)&#39;</span><span class="p">,</span><span class="n">reference</span><span class="o">=</span><span class="s1">&#39;saved from Python&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        save digraph in XML format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----- saving digraph in XML format  -------------*&#39;</span><span class="p">)</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-        <span class="n">nameExt</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.xml&#39;</span>
+        <span class="n">nameExt</span> <span class="o">=</span> <span class="n">fileName</span><span class="o">+</span><span class="s1">&#39;.xml&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">nameExt</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;digraphs.xsl&quot;?&gt;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>

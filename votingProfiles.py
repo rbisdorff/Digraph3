@@ -124,15 +124,15 @@ class VotingProfile(object):
             print()
         print('\n')
 
-    def save(self,name='tempVprofile'):
+    def save(self,fileName='tempVprofile'):
         """
         Persistant storage of an approval voting profile.
         """
-        print('*--- Saving voting profile in file: <' + str(name) + '.py> ---*')
+        print('*--- Saving voting profile in file: <' + str(fileName) + '.py> ---*')
         candidates = self.candidates
         voters = self.voters
         ballot = self.ballot
-        saveFileName = str(name)+str('.py')
+        saveFileName = str(fileName)+str('.py')
         fo = open(saveFileName, 'w')
         fo.write('# Saved voting profile: \n')
         fo.write('from collections import OrderedDict \n')
@@ -801,18 +801,18 @@ class ApprovalVotingProfile(VotingProfile):
 ##        self.ballot = ballot
 ##        return ballot
 
-    def save(self,name='tempAVprofile'):
+    def save(self,fileName='tempAVprofile'):
         """
         Persistant storage of an approval voting profile.
 
         Parameter:
             name of file (without <.py> extension!).
         """
-        print('*--- Saving AV profile in file: <' + str(name) + '.py> ---*')
+        print('*--- Saving AV profile in file: <' + str(fileName) + '.py> ---*')
         candidates = self.candidates
         voters = self.voters
         approvalBallot = self.approvalBallot
-        saveFileName = str(name)+str('.py')
+        saveFileName = str(fileName)+str('.py')
         fo = open(saveFileName, 'w')
         fo.write('# Saved approval voting profile: \n')
         fo.write('from collections import OrderedDict \n')
