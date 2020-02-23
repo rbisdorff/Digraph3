@@ -123,7 +123,11 @@ def testNonPrudentRankings():
 
 def testLinearVotingBallots():
     print("*==>> testing linear voting profiles ----*")
-    lvp = RandomLinearVotingProfile(votersWeights=[5,3,2])
+    lvp = RandomLinearVotingProfile(numberOfVoters=100,
+                                    numberOfCandidates=10,
+                                    WithPolls=True,
+                                    bipartisan=0.5,
+                                    seed=None)
     lvp.save()
     lvp = LinearVotingProfile('templinearprofile')
     lvp.showLinearBallots()

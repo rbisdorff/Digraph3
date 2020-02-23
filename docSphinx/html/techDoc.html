@@ -7671,7 +7671,7 @@ and restricted linear ballots</p>
 
 <dl class="method">
 <dt id="votingProfiles.LinearVotingProfile.save2PerfTab">
-<code class="sig-name descname">save2PerfTab</code><span class="sig-paren">(</span><em class="sig-param">fileName='votingPerfTab'</em>, <em class="sig-param">isDecimal=True</em>, <em class="sig-param">valueDigits=2</em>, <em class="sig-param">_NegativeWeights=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.save2PerfTab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.save2PerfTab" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save2PerfTab</code><span class="sig-paren">(</span><em class="sig-param">fileName='votingPerfTab'</em>, <em class="sig-param">isDecimal=True</em>, <em class="sig-param">valueDigits=2</em>, <em class="sig-param">_NegativeWeights=True</em>, <em class="sig-param">Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile.save2PerfTab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile.save2PerfTab" title="Permalink to this definition">¶</a></dt>
 <dd><p>Persistant storage of a linear voting profile in the format of a rank performance Tableau.
 For each voter <em>v</em>, the rank performance of candidate <em>x</em> corresponds to:</p>
 <p>number of candidates - linearProfile[v].index(x)</p>
@@ -7712,7 +7712,7 @@ to format the decimal precision of the numerical output.</p>
 <dl class="class">
 <dt id="votingProfiles.RandomApprovalVotingProfile">
 <em class="property">class </em><code class="sig-prename descclassname">votingProfiles.</code><code class="sig-name descname">RandomApprovalVotingProfile</code><span class="sig-paren">(</span><em class="sig-param">numberOfVoters=9</em>, <em class="sig-param">numberOfCandidates=5</em>, <em class="sig-param">minSizeOfBallot=1</em>, <em class="sig-param">maxSizeOfBallot=2</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomApprovalVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomApprovalVotingProfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>A specialized class for approval voting profiles.</p>
+<dd><p>A specialized class for generating random approval voting profiles.</p>
 <dl class="method">
 <dt id="votingProfiles.RandomApprovalVotingProfile.generateRandomApprovalBallot">
 <code class="sig-name descname">generateRandomApprovalBallot</code><span class="sig-paren">(</span><em class="sig-param">minSizeOfBallot</em>, <em class="sig-param">maxSizeOfBallot</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomApprovalVotingProfile.generateRandomApprovalBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomApprovalVotingProfile.generateRandomApprovalBallot" title="Permalink to this definition">¶</a></dt>
@@ -7722,24 +7722,43 @@ to format the decimal precision of the numerical output.</p>
 <dl class="method">
 <dt id="votingProfiles.RandomApprovalVotingProfile.generateRandomDisApprovalBallot">
 <code class="sig-name descname">generateRandomDisApprovalBallot</code><span class="sig-paren">(</span><em class="sig-param">minSizeOfBallot</em>, <em class="sig-param">maxSizeOfBallot</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomApprovalVotingProfile.generateRandomDisApprovalBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomApprovalVotingProfile.generateRandomDisApprovalBallot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a randomly generated approval ballot.</p>
+<dd><p>Renders a randomly generated disapproval ballot.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="votingProfiles.RandomLinearVotingProfile">
-<em class="property">class </em><code class="sig-prename descclassname">votingProfiles.</code><code class="sig-name descname">RandomLinearVotingProfile</code><span class="sig-paren">(</span><em class="sig-param">numberOfVoters=10</em>, <em class="sig-param">numberOfCandidates=15</em>, <em class="sig-param">votersWeights=None</em>, <em class="sig-param">RandomWeights=False</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomLinearVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomLinearVotingProfile" title="Permalink to this definition">¶</a></dt>
-<dd><p>A specialized class for random linwear voting profiles.
-Random reation parameters:</p>
-<blockquote>
-<div><p>numberOfVoters=5, numberOfCandidates=5,
-votersWeights = optional list of positive integers for instance [2,3,4,1,5].</p>
-</div></blockquote>
+<em class="property">class </em><code class="sig-prename descclassname">votingProfiles.</code><code class="sig-name descname">RandomLinearVotingProfile</code><span class="sig-paren">(</span><em class="sig-param">numberOfVoters=10</em>, <em class="sig-param">numberOfCandidates=5</em>, <em class="sig-param">WithPolls=False</em>, <em class="sig-param">bipartisan=0.5</em>, <em class="sig-param">votersWeights=None</em>, <em class="sig-param">RandomWeights=False</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomLinearVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomLinearVotingProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>A specialized class for generating random linwear voting profiles.</p>
+<dl class="simple">
+<dt><em>Parameters</em>   </dt><dd><ul class="simple">
+<li><p>When <em>WithPolls</em> is True, each voter’s linear ballot is randomly oriented
+by one of two random exponential poll results. The corresponding polls are stored
+in self.poll1, respectively self.poll2.</p></li>
+<li><p>The <em>bipartisan</em> proportion randomly distributes the two polls over the
+set of voters. If put to 0.0 or 1.0, only self.poll2, resp. self.poll1, will orient
+all the voters.</p></li>
+<li><p>The <em>votersWeights</em> parameter may be a list of positive integers in order to
+deterministically attribute weights to the voters.
+Is ignored when <em>RandomWeights</em> is True.</p></li>
+<li><p>When <em>voterWeights</em> are None and <em>RandomWeights</em> is False, each voter
+obtains a single vote (default setting).</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="votingProfiles.RandomLinearVotingProfile.generateRandomLinearBallot">
 <code class="sig-name descname">generateRandomLinearBallot</code><span class="sig-paren">(</span><em class="sig-param">seed</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomLinearVotingProfile.generateRandomLinearBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomLinearVotingProfile.generateRandomLinearBallot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders a randomly generated linear ballot.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="votingProfiles.RandomLinearVotingProfile.generateRandomLinearBallotWithPoll">
+<code class="sig-name descname">generateRandomLinearBallotWithPoll</code><span class="sig-paren">(</span><em class="sig-param">bipartisan</em>, <em class="sig-param">seed</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomLinearVotingProfile.generateRandomLinearBallotWithPoll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomLinearVotingProfile.generateRandomLinearBallotWithPoll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a random linear ballot in accordance with the given polls:
+self.poll1 and self.poll2.</p>
+<p>Polls are distributed in the <em>bipartisan</em> proportion.</p>
 </dd></dl>
 
 </dd></dl>
