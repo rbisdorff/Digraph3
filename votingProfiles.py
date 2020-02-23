@@ -1086,10 +1086,29 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         if Debug:
             print(candidatesList)
         nc = len(candidatesList)
+
+##        # inverse polls
+##        poll = []
+##        sumPoll = 0.0
+##        for c in candidatesList:
+##            valc = random.expovariate(1)
+##            poll.append( (valc,c) )
+##            sumPoll += valc
+##        poll.sort(reverse=True)
+##        poll1 = {}
+##        poll2 = {}
+##        for i in range(nc):
+##            ci1 = poll[i][1]
+##            ci2 = poll[-1-i][1]
+##            xci = poll[i][0]/sumPoll
+##            poll1[ci1] = xci
+##            poll2[ci2] = xci
+           
+        # independent polls
         poll1 = {}
         sumPoll = 0.0
         for c in candidatesList:
-            poll1[c] = random.expovariate(2)
+            poll1[c] = random.expovariate(1)
             sumPoll += poll1[c]
         for c in poll1:
             poll1[c] /= sumPoll
@@ -1097,20 +1116,28 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         poll2 = {}
         sumPoll = 0.0
         for c in candidatesList:
-            poll2[c] = random.expovariate(2)
+            poll2[c] = random.expovariate(1)
             sumPoll += poll2[c]
         for c in poll2:
             poll2[c] /= sumPoll
-        self.poll2 = poll2
+
+        # storing polls    
+        self.poll1 = poll1
+        self.poll2 = poll2            
+        self.bipartisan = bipartisan
         if Debug:
             print(poll1,poll2)
+
+        # generating random linear ballots
         linearBallot = {}
         j = 1
         for v in voters:
+            # each voter is attached to one of the polls
             if bipartisan < random.random():
                 pollv = poll1
             else:
                 pollv = poll2
+            # generating a random linear ranking    
             shuffledCandidatesList = []
             for i in range(nc-1):
                 NotShuffled = True
@@ -1133,7 +1160,31 @@ class RandomLinearVotingProfile(LinearVotingProfile):
                 print('==>>', v,shuffledCandidatesList)           
             j += 1
             linearBallot[v] = shuffledCandidatesList
+            
         return linearBallot
+
+    def showRandomPolls(self):
+        """
+        Shows the random polls, the case given.
+        """
+        try:
+            poll1 = [(self.poll1[x],x) for x in self.poll1]
+        except:
+            poll1 = []
+        nc = len(poll1)
+        if nc > 1:
+            poll1.sort(reverse=True)
+            poll2 = [(self.poll2[x],x) for x in self.poll2]
+            poll2.sort(reverse=True)
+            print('*--------- random polls ---------')
+            print('   poll1 (%.2f)\t|  poll2 (%.2f)         '%\
+                   (self.bipartisan, (1.0-self.bipartisan) ) )
+            print('----------------------------------------')
+            for i in range(nc):
+                print('   %s : %.2f%%\t|  %s : %.2f%% ' %\
+                  (poll1[i][1],poll1[i][0],poll2[i][1],poll2[i][0]))
+        else:
+            print('No polls defined !')
         
 class RandomVotingProfile(VotingProfile):
     """
@@ -1608,11 +1659,12 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-    lvp = RandomLinearVotingProfile(numberOfCandidates=20,
+    lvp = RandomLinearVotingProfile(numberOfCandidates=10,
                               numberOfVoters=200,
                                     WithPolls=True,
                                     bipartisan=0.5,
                                     seed=None)
+    lvp.showRandomPolls()
 ##    ## lvp = LinearVotingProfile('templinearprofile')
 ##    lvp.save()
 ##    lvp1 = LinearVotingProfile('templinearprofile')
@@ -1629,12 +1681,12 @@ if __name__ == "__main__":
 ##    lvp1.computeBordaWinners()
 ##    lvp1.save2PerfTab('votingPerfTab')
 ##    t = PerformanceTableau('votingPerfTab')
-    #t.showHTMLPerformanceHeatmap(Transposed=True,Correlations=True,ndigits=0)
-    lvp.showHTMLVotingHeatmap(Correlations=True)
+##    #t.showHTMLPerformanceHeatmap(Transposed=True,Correlations=True,ndigits=0)
+##    #lvp.showHTMLVotingHeatmap(Correlations=True)
     c = CondorcetDigraph(lvp)
     #c.recodeValuation()
     c.showRelationTable()
-    (~(-c)).showRelationTable()
+##    (~(-c)).showRelationTable()
     print(c.computeCopelandRanking(Debug=False))
     print(c.computeNetFlowsRanking(Debug=False))
     print(c.computeTransitivityDegree())
