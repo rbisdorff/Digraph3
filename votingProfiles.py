@@ -1455,8 +1455,12 @@ class CondorcetDigraph(Digraph):
             for y in actions:
                 if relation[x][y] > Med:
                     scores[x] += 1
+                if relation[x][y] < Med:
+                    scores[x] -= 1
                 if relation[y][x] > Med:
                     scores[x] -= 1
+                if relation[y][x] < Med:
+                    scores[x] += 1
         scoresRanking = [(x,scores[x]) for x in scores]
         scoresRanking = sorted(scoresRanking,key = itemgetter(1),reverse=True)
         ranking = [x[0] for x in scoresRanking]
@@ -1486,7 +1490,7 @@ class CondorcetDigraph(Digraph):
             scores[x] = 0
         for x in actions:
             for y in actions:
-                scores[x] += relation[x][y]
+                scores[x] += relation[x][y] - relation[y][x]
         scoresRanking = [(x,scores[x]) for x in scores]
         scoresRanking = sorted(scoresRanking,key = itemgetter(1),reverse=True)
         ranking = [x[0] for x in scoresRanking]
