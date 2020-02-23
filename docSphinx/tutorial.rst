@@ -904,7 +904,7 @@ In our randomly generated election results, we are lucky: The instant runoff win
 The Condorcet winner
 ....................
 
- For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the corresponding **majority margin** *M(a1,a2)* is 4 - 1 = +3. These *majority margins* define on the set of candidates what we call the **Condorcet digraph**. The :py:class:`votingProfiles.CondorcetDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such kind of digraphs.
+For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the corresponding **majority margin** *M(a1,a2)* is 4 - 1 = +3. These *majority margins* define on the set of candidates what we call the **Condorcet digraph**. The :py:class:`votingProfiles.CondorcetDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such kind of digraphs.
 
 .. code-block:: pycon
    :name: condorcetDigraph
