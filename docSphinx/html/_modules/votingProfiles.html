@@ -252,7 +252,8 @@
 <span class="sd">    [&#39;a1&#39;]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                 <span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fileVotingProfile</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">fileVotingProfile</span> <span class="o">+</span> <span class="s1">&#39;.py&#39;</span>
         <span class="c1">## else:</span>
@@ -949,8 +950,16 @@
 <div class="viewcode-block" id="RandomApprovalVotingProfile"><a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomApprovalVotingProfile">[docs]</a><span class="k">class</span> <span class="nc">RandomApprovalVotingProfile</span><span class="p">(</span><span class="n">ApprovalVotingProfile</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialized class for generating random approval voting profiles.</span>
+
+<span class="sd">    *Parameters*</span>
+<span class="sd">        * *minSizeBallot* : integer, determines the minimum of</span>
+<span class="sd">           candidates that must be approved.</span>
+<span class="sd">        * *maxSizeBallot* : integer, determines the maximum of</span>
+<span class="sd">          candidates that may be approved.</span>
+<span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">minSizeOfBallot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                 <span class="n">minSizeOfBallot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">maxSizeOfBallot</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Random profile creation parameters:</span>
 <span class="sd">            | numberOfVoters=9, numberOfCandidates=5,</span>

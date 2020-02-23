@@ -807,7 +807,7 @@ The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class
      'v4': ['a1', 'a3', 'a2',],
      'v5': ['a2', 'a3', 'a1',]} 
 
-Notice that in this random example, the five voters are weighted (see :numref:`randomProfile1` Line 6-7). Their linear ballots can be viewed with the :py:func:`votingProfiles.VotingLinearProfile.showLinearBallots` method.
+Notice that in this random example, the five voters are weighted (see :numref:`randomProfile1` Line 6-7). Their linear ballots can be viewed with the :py:func:`votingProfiles.LinearVotingProfile.showLinearBallots` method.
 
 .. code-block:: pycon
    :linenos:
@@ -866,7 +866,7 @@ As we observe no absolute majority (8/15) of votes for any of the three candidat
 
 In stage 1, no candidate obtains an absolute majority of votes. Candidate *a2* obtains the minimal number of votes (2/15) and is, hence, eliminated. In stage 2, candidate *a1* obtains an absolute majority of the votes (8/15) and is eventually elected (see :numref:`instantRunOff`).
 
-We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** (the average rank) of each candidate and hence determine the *Borda* **winner(s)**.
+We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** -the average rank- of each candidate and hence determine the *Borda* **winner(s)**.
 
 .. code-block:: pycon
    :name: BordaScores
@@ -941,7 +941,9 @@ The Condorcet winner
         'a3'    |   -1      1     0	 
     Valuation domain: [-15;+15]
 
-A candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the *Condorcet* digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner** (see :numref:`condorcetDigraph` Line 26).
+Notice that in the case of linear voting profiles, majority margins always verify a zero sum property: *M(x,y)* + *M(y,x)* = 0 for all candiates *x* and *y* (see :numref:`condorcetDigraph` Lines 26-28). This is not true in general for abitrary voting profiles. The *Condorcet* digraph of linear voting profiles defines infact a *weak tournament* and belongs, hence, to the class of *self-codual* bipolar-valued digraphs ([13]_).
+    
+Now, a candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the *Condorcet* digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner** (see :numref:`condorcetDigraph` Line 26).
 
 .. code-block:: pycon
 
@@ -964,7 +966,7 @@ By seeing the majority margins like a *bipolar-valued characteristic function* o
 
    Visualizing an election result
 
-In :numref:`tutorialLinearBallots` we notice that the *Condorcet* digraph from our example linear voting profile gives a linear order of the candidiates: ['a1', 'a3', 'a2], the same as given by the *Borda* scores (see :numref:`BordaScores`). Usually, when aggregating linear ballots, there appear cyclic social preferences.
+In :numref:`tutorialLinearBallots` we notice that the *Condorcet* digraph from our example linear voting profile gives a linear order of the candidiates: ['a1', 'a3', 'a2], the same actually as given by the *Borda* scores (see :numref:`BordaScores`). This is by far not given in general. Usually, when aggregating linear ballots, there appear cyclic social preferences.
 
 Cyclic social preferences
 .........................
@@ -1023,9 +1025,9 @@ But, there may be many cycles appearing in a *Condorcet* digraph, and, we may de
      (['a2', 'a4', 'a5'], frozenset({'a2', 'a5', 'a4'})), 
      (['a2', 'a4', 'a1'], frozenset({'a2', 'a1', 'a4'}))]
 
-*Condorcet*'s approach for determining the winner of an election is hence *not decisive* in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see the tutorial on :ref:`Ranking-Tutorial-label` and [BIS-2008]_). 
+*Condorcet* 's approach for determining the winner of an election is hence *not decisive* in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see the tutorial on :ref:`Ranking-Tutorial-label` and [BIS-2008]_). 
 
-Many more tools for exploiting voting results are available like the browser heat map view on voting profiles (see the technical documentation of the :ref:`votingProfiles-label`).
+Many more tools for exploiting voting results are available like the browser heat map view on voting profiles (see the technical documentation of the :py:mod:`votingProfiles` module).
 
 .. code-block:: pycon
    :name: votingHeatmap

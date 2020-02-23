@@ -7568,7 +7568,7 @@ ReflexiveTerms=True)</p>
 
 <dl class="class">
 <dt id="votingProfiles.LinearVotingProfile">
-<em class="property">class </em><code class="sig-prename descclassname">votingProfiles.</code><code class="sig-name descname">LinearVotingProfile</code><span class="sig-paren">(</span><em class="sig-param">fileVotingProfile=None</em>, <em class="sig-param">numberOfCandidates=5</em>, <em class="sig-param">numberOfVoters=9</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">votingProfiles.</code><code class="sig-name descname">LinearVotingProfile</code><span class="sig-paren">(</span><em class="sig-param">fileVotingProfile=None</em>, <em class="sig-param">numberOfCandidates=5</em>, <em class="sig-param">numberOfVoters=9</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#LinearVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.LinearVotingProfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>A specialised class for linear voting profiles</p>
 <p>Structure:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">candidates</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span> <span class="p">,(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">),(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">),</span> <span class="o">...</span><span class="p">])</span>
@@ -7713,6 +7713,18 @@ to format the decimal precision of the numerical output.</p>
 <dt id="votingProfiles.RandomApprovalVotingProfile">
 <em class="property">class </em><code class="sig-prename descclassname">votingProfiles.</code><code class="sig-name descname">RandomApprovalVotingProfile</code><span class="sig-paren">(</span><em class="sig-param">numberOfVoters=9</em>, <em class="sig-param">numberOfCandidates=5</em>, <em class="sig-param">minSizeOfBallot=1</em>, <em class="sig-param">maxSizeOfBallot=2</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomApprovalVotingProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomApprovalVotingProfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>A specialized class for generating random approval voting profiles.</p>
+<dl class="simple">
+<dt><em>Parameters</em></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt><em>minSizeBallot</em><span class="classifier">integer, determines the minimum of</span></dt><dd><p>candidates that must be approved.</p>
+</dd>
+</dl>
+</li>
+<li><p><em>maxSizeBallot</em> : integer, determines the maximum of
+candidates that may be approved.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="votingProfiles.RandomApprovalVotingProfile.generateRandomApprovalBallot">
 <code class="sig-name descname">generateRandomApprovalBallot</code><span class="sig-paren">(</span><em class="sig-param">minSizeOfBallot</em>, <em class="sig-param">maxSizeOfBallot</em>, <em class="sig-param">seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#RandomApprovalVotingProfile.generateRandomApprovalBallot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.RandomApprovalVotingProfile.generateRandomApprovalBallot" title="Permalink to this definition">¶</a></dt>

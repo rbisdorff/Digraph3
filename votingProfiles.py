@@ -212,7 +212,8 @@ class LinearVotingProfile(VotingProfile):
     ['a1']
 
     """
-    def __init__(self,fileVotingProfile=None,numberOfCandidates=5,numberOfVoters=9,seed=None):
+    def __init__(self,fileVotingProfile=None,numberOfCandidates=5,
+                 numberOfVoters=9):
         if fileVotingProfile != None:
             fileName = fileVotingProfile + '.py'
         ## else:
@@ -909,8 +910,16 @@ class ApprovalVotingProfile(VotingProfile):
 class RandomApprovalVotingProfile(ApprovalVotingProfile):
     """
     A specialized class for generating random approval voting profiles.
+
+    *Parameters*
+        * *minSizeBallot* : integer, determines the minimum of
+           candidates that must be approved.
+        * *maxSizeBallot* : integer, determines the maximum of
+          candidates that may be approved.
+        
     """
-    def __init__(self,numberOfVoters=9,numberOfCandidates=5,minSizeOfBallot=1,maxSizeOfBallot=2,seed=None):
+    def __init__(self,numberOfVoters=9,numberOfCandidates=5,
+                 minSizeOfBallot=1,maxSizeOfBallot=2,seed=None):
         """
         Random profile creation parameters:
             | numberOfVoters=9, numberOfCandidates=5,
