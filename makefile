@@ -227,9 +227,10 @@ cythonTests:
 
 install:
 		sudo ${PYTHON} setup.py install
-		sudo python3.7 setup.py install
-		sudo python3.8 setup.py install
-		sudo python3.6 setup.py install
+		# uncomment or adapt for multiple versions
+		#sudo python3.7 setup.py install
+		#sudo python3.8 setup.py install
+		#sudo python3.6 setup.py install
 
 installVenv:
 		${PYTHON} setup.py install
