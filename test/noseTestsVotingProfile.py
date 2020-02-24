@@ -155,3 +155,32 @@ def testInstantRunoffVoting():
     print(lvp.computeBordaWinners())
     print(lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot))
     print(lvp.computeInstantRunoffWinner(Comments=True))
+
+def testWeakRankings():
+    print('*==> test weak Copeland and NetFlows rankings ---*')
+    lvp = RandomLinearVotingProfile(numberOfCandidates=20,
+                              numberOfVoters=1000,
+                                    WithPolls=True,
+                                    bipartisan=0.5,
+                                    seed=None)
+    lvp.showRandomPolls()
+    c = CondorcetDigraph(lvp)
+    #c.recodeValuation()
+    c.showRelationTable()
+    print(c.computeCopelandRanking(Debug=False))
+    print(c.computeNetFlowsRanking(Debug=False))
+    print(c.computeTransitivityDegree())
+    c.computeChordlessCircuits()
+    c.showChordlessCircuits()
+    c.recodeValuation()
+    from transitiveDigraphs import WeakCopelandOrder, WeakNetFlowsOrder
+    wc = WeakCopelandOrder(c)
+    print('Weak Copeland ranking')
+    wc.showRankingByChoosing()
+    corr = c.computeRankingCorrelation(wc.copelandRanking)
+    wc.showCorrelation(corr)
+    wn = WeakNetFlowsOrder(c)
+    print('Weak NetFloes ranking')
+    wn.showRankingByChoosing()
+    corr = c.computeRankingCorrelation(wc.copelandRanking)
+    wn.showCorrelation(corr)

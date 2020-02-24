@@ -1628,7 +1628,7 @@ class CondorcetDigraph(Digraph):
 
 #----------test voting Digraph class ----------------
 if __name__ == "__main__":
-    import sys,array
+    from transitiveDigraphs import *
 
     print('****************************************************')
     print('* Python voting digraphs module                    *')
@@ -1659,8 +1659,8 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-    lvp = RandomLinearVotingProfile(numberOfCandidates=10,
-                              numberOfVoters=200,
+    lvp = RandomLinearVotingProfile(numberOfCandidates=20,
+                              numberOfVoters=1000,
                                     WithPolls=True,
                                     bipartisan=0.5,
                                     seed=None)
@@ -1692,6 +1692,19 @@ if __name__ == "__main__":
     print(c.computeTransitivityDegree())
     c.computeChordlessCircuits()
     c.showChordlessCircuits()
+    if c.chordlessCircuits != []:
+        #MP = True
+        c.recodeValuation()
+        wc = WeakCopelandOrder(c)
+        print('Weak Copeland ranking')
+        wc.showRankingByChoosing()
+        corr = c.computeRankingCorrelation(wc.copelandRanking)
+        wc.showCorrelation(corr)
+        wn = WeakNetFlowsOrder(c)
+        print('Weak NetFloes ranking')
+        wn.showRankingByChoosing()
+        corr = c.computeRankingCorrelation(wc.copelandRanking)
+        wn.showCorrelation(corr)
 ##    from linearOrders import NetFlowsOrder
 ##    nf = NetFlowsOrder(c,Debug=True)
 ##    from outrankingDigraphs import *
