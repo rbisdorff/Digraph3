@@ -1016,6 +1016,8 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         """
         from collections import OrderedDict
         import random
+        if seed == None:
+            seed = random.random()
         random.seed(seed)
         votersList = [x for x in range(1,numberOfVoters + 1)]
         voters = OrderedDict()
@@ -1039,9 +1041,12 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         for c in candidatesList:
             candidateID =('a%%0%dd' % na) % (c)
             candidates[candidateID] = {'name': candidateID}
+        # store instance attributes
         self.name = str('randLinearProfile')
+        self.seed = seed
         self.candidates = candidates
         self.voters = voters
+        self.RandomWeights = RandomWeights
         self.sumWeights = Decimal('0')
         for v in self.voters:
             self.sumWeights += self.voters[v]['weight']
@@ -1050,7 +1055,6 @@ class RandomLinearVotingProfile(LinearVotingProfile):
                                                                         seed)
         else:
             self.linearBallot = self.generateRandomLinearBallot(seed)
-        #print self.linearBallot
         self.ballot = self.computeBallot()
 
 
@@ -1176,13 +1180,21 @@ class RandomLinearVotingProfile(LinearVotingProfile):
             poll1.sort(reverse=True)
             poll2 = [(self.poll2[x],x) for x in self.poll2]
             poll2.sort(reverse=True)
-            print('*--------- random polls ---------')
-            print('   poll1 (%.2f)\t|  poll2 (%.2f)         '%\
-                   (self.bipartisan, (1.0-self.bipartisan) ) )
-            print('----------------------------------------')
+            poll = []
+            for x in self.candidates:
+                res = (self.bipartisan)*self.poll1[x] +\
+                      (1.0-self.bipartisan)*self.poll2[x]
+                poll.append( (res,x) )
+            poll.sort(reverse=True)
+            print('*---------------- random polls ---------------')
+            print('  party1(%.2f)\t|  party2(%.2f)\t| result   '%\
+                   (self.bipartisan, 1.0-self.bipartisan) )
+            print('-----------------------------------------------')
             for i in range(nc):
-                print('   %s : %.2f%%\t|  %s : %.2f%% ' %\
-                  (poll1[i][1],poll1[i][0],poll2[i][1],poll2[i][0]))
+                print('  %s : %.2f%% \t|  %s : %.2f%%\t| %s : %.2f%%' %\
+                  (poll1[i][1],poll1[i][0]*100.0,
+                   poll2[i][1],poll2[i][0]*100.0,
+                    poll[i][1], poll[i][0]*100.0) )
         else:
             print('No polls defined !')
         
@@ -1659,12 +1671,13 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-    lvp = RandomLinearVotingProfile(numberOfCandidates=20,
-                              numberOfVoters=1000,
-                                    WithPolls=True,
-                                    bipartisan=0.5,
-                                    seed=None)
-    lvp.showRandomPolls()
+    lvp = RandomLinearVotingProfile(numberOfCandidates=15,
+                            numberOfVoters=1000,
+                            WithPolls=True,
+                            bipartisan=0.5,
+                            #seed=0.20990710811162194) # 1 circuit
+                            seed=0.8077233289616987)  # 2 circuits !
+                            #seed = None)
 ##    ## lvp = LinearVotingProfile('templinearprofile')
 ##    lvp.save()
 ##    lvp1 = LinearVotingProfile('templinearprofile')
@@ -1689,6 +1702,7 @@ if __name__ == "__main__":
 ##    (~(-c)).showRelationTable()
     print(c.computeCopelandRanking(Debug=False))
     print(c.computeNetFlowsRanking(Debug=False))
+    lvp.showRandomPolls()
     print(c.computeTransitivityDegree())
     c.computeChordlessCircuits()
     c.showChordlessCircuits()
@@ -1703,8 +1717,10 @@ if __name__ == "__main__":
         wn = WeakNetFlowsOrder(c)
         print('Weak NetFloes ranking')
         wn.showRankingByChoosing()
-        corr = c.computeRankingCorrelation(wc.copelandRanking)
+        corr = c.computeRankingCorrelation(wn.netFlowsRanking)
         wn.showCorrelation(corr)
+        lvp.showRandomPolls()
+
 ##    from linearOrders import NetFlowsOrder
 ##    nf = NetFlowsOrder(c,Debug=True)
 ##    from outrankingDigraphs import *
