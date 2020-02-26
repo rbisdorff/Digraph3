@@ -1139,8 +1139,10 @@ class RandomLinearVotingProfile(LinearVotingProfile):
             # each voter is attached to one of the polls
             if bipartisan < random.random():
                 pollv = poll1
+                voters[v]['party'] = 1
             else:
                 pollv = poll2
+                voters[v]['party'] = 2
             # generating a random linear ranking    
             shuffledCandidatesList = []
             for i in range(nc-1):
@@ -1167,7 +1169,7 @@ class RandomLinearVotingProfile(LinearVotingProfile):
             
         return linearBallot
 
-    def showRandomPolls(self):
+    def showRandomPolls(self,Debug=True):
         """
         Shows the random polls, the case given.
         """
@@ -1177,21 +1179,31 @@ class RandomLinearVotingProfile(LinearVotingProfile):
             poll1 = []
         nc = len(poll1)
         if nc > 1:
+            voters = self.voters
+            nv = len(voters)
+            supportersParty1 = [x for x in voters if voters[x]['party'] == 1]
+            supportersParty2 = [x for x in voters if voters[x]['party'] == 2]
+            n1 = len(supportersParty1)
+            p1 = float(n1)/float(nv)
+            n2 = len(supportersParty2)
+            p2 = float(n2)/float(nv)
+            if Debug:
+                print(n1,p1,n2,p2)
             poll1.sort(reverse=True)
             poll2 = [(self.poll2[x],x) for x in self.poll2]
             poll2.sort(reverse=True)
             poll = []
             for x in self.candidates:
-                res = (self.bipartisan)*self.poll1[x] +\
-                      (1.0-self.bipartisan)*self.poll2[x]
+                res = p1 * self.poll1[x] +\
+                      p2 * self.poll2[x]
                 poll.append( (res,x) )
             poll.sort(reverse=True)
             print('*---------------- random polls ---------------')
-            print('  party1(%.2f)\t|  party2(%.2f)\t| result   '%\
-                   (self.bipartisan, 1.0-self.bipartisan) )
+            print(' Party_1(%05.2f) | Party_2(%05.2f)| result   '%\
+                   (p1, p2) )
             print('-----------------------------------------------')
             for i in range(nc):
-                print('  %s : %.2f%% \t|  %s : %.2f%%\t| %s : %.2f%%' %\
+                print('  %s : %05.2f%%  | %s : %05.2f%%  | %s : %05.2f%%' %\
                   (poll1[i][1],poll1[i][0]*100.0,
                    poll2[i][1],poll2[i][0]*100.0,
                     poll[i][1], poll[i][0]*100.0) )
@@ -1676,8 +1688,8 @@ if __name__ == "__main__":
                             WithPolls=True,
                             bipartisan=0.5,
                             #seed=0.20990710811162194) # 1 circuit
-                            seed=0.8077233289616987)  # 2 circuits !
-                            #seed = None)
+                            #seed=0.8077233289616987)  # 2 circuits !
+                            seed = None)
 ##    ## lvp = LinearVotingProfile('templinearprofile')
 ##    lvp.save()
 ##    lvp1 = LinearVotingProfile('templinearprofile')
@@ -1720,6 +1732,7 @@ if __name__ == "__main__":
         corr = c.computeRankingCorrelation(wn.netFlowsRanking)
         wn.showCorrelation(corr)
         lvp.showRandomPolls()
+        print(lvp.seed)
 
 ##    from linearOrders import NetFlowsOrder
 ##    nf = NetFlowsOrder(c,Debug=True)

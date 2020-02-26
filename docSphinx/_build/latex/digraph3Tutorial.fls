@@ -332,6 +332,11 @@ INPUT ./votingHeatmap.png
 INPUT ./votingHeatmap.png
 INPUT votingHeatmap.png
 INPUT ./votingHeatmap.png
+INPUT majorityMargins.png
+INPUT ./majorityMargins.png
+INPUT ./majorityMargins.png
+INPUT majorityMargins.png
+INPUT ./majorityMargins.png
 INPUT tutorialPerfTab.png
 INPUT ./tutorialPerfTab.png
 INPUT ./tutorialPerfTab.png
@@ -637,8 +642,8 @@ INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440
 INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecit1200.600pk
 INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk
 INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecso1728.600pk
-INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk
 INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk
+INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk
 INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1200.600pk
 INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk
 INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk

@@ -941,7 +941,7 @@ For instance, candidate *a1* is ranked four times before and once behind candida
         'a3'    |   -1      1     0	 
     Valuation domain: [-15;+15]
 
-Notice that in the case of linear voting profiles, majority margins always verify a zero sum property: *M(x,y)* + *M(y,x)* = 0 for all candiates *x* and *y* (see :numref:`condorcetDigraph` Lines 26-28). This is not true in general for abitrary voting profiles. The *Condorcet* digraph of linear voting profiles defines infact a *weak tournament* and belongs, hence, to the class of *self-codual* bipolar-valued digraphs ([13]_).
+Notice that in the case of linear voting profiles, majority margins always verify a zero sum property: *M(x,y)* + *M(y,x)* = 0 for all candidates *x* and *y* (see :numref:`condorcetDigraph` Lines 26-28). This is not true in general for arbitrary voting profiles. The *Condorcet* digraph of linear voting profiles defines in fact a *weak tournament* and belongs, hence, to the class of *self-codual* bipolar-valued digraphs ([13]_).
     
 Now, a candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the *Condorcet* digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner** (see :numref:`condorcetDigraph` Line 26).
 
@@ -966,7 +966,7 @@ By seeing the majority margins like a *bipolar-valued characteristic function* o
 
    Visualizing an election result
 
-In :numref:`tutorialLinearBallots` we notice that the *Condorcet* digraph from our example linear voting profile gives a linear order of the candidiates: ['a1', 'a3', 'a2], the same actually as given by the *Borda* scores (see :numref:`BordaScores`). This is by far not given in general. Usually, when aggregating linear ballots, there appear cyclic social preferences.
+In :numref:`tutorialLinearBallots` we notice that the *Condorcet* digraph from our example linear voting profile gives a linear order of the candidates: ['a1', 'a3', 'a2], the same actually as given by the *Borda* scores (see :numref:`BordaScores`). This is by far not given in general. Usually, when aggregating linear ballots, there appear cyclic social preferences.
 
 Cyclic social preferences
 .........................
@@ -975,7 +975,7 @@ Let us consider for instance the following linear voting profile and construct t
 
 .. code-block:: pycon
    :name: linearVotingProfile2
-   :caption: Example of cyclic soicial preferences 	  
+   :caption: Example of cyclic social preferences 	  
    :linenos:
 
    >>> v.showLinearBallots()
@@ -1042,9 +1042,170 @@ Many more tools for exploiting voting results are available like the browser hea
    :align: center
    :name: cyclicVoting	   
 
-   Visualizing a linear voting profile in a heat map format
+   Visualizing a linear voting profile in a heatmap format
 
-Notice that the importance weights of the voters are *negative*, which means that the preference direction of the criteria (in this case the individual voters) is *decreasing*, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise *NetFlows* ranking *[a4,a5,a2,a1,a3]*, shown in this heat map (see :numref:`cyclicVoting`) results in an optimal *ordinal correlation* index of +0.778 with the pairwise majority voting margins (see tutorials :ref:`OrdinalCorrelation-Tutorial-label` and :ref:`Ranking-Tutorial-label`). The number of voters is usually much larger than the number of candidates. In that case, it is better to generate a transposed *voters X candidates* view (see :numref:`votingHeatmap` Line 2) 
+Notice that the importance weights of the voters are *negative*, which means that the preference direction of the criteria (in this case the individual voters) is *decreasing*, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise *NetFlows* ranking *[a4,a5,a2,a1,a3]*, shown in this heatmap (see :numref:`cyclicVoting`) results in an optimal *ordinal correlation* index of +0.778 with the pairwise majority voting margins (see tutorials :ref:`OrdinalCorrelation-Tutorial-label` and :ref:`Ranking-Tutorial-label`). The number of voters is usually much larger than the number of candidates. In that case, it is better to generate a transposed *voters X candidates* view (see :numref:`votingHeatmap` Line 2) 
+
+On generating random linear voting profiles
+...........................................
+
+By default, the :py:class:`votingProfiles.RandomLinearVotingProfile` class generates random linear voting profiles where every candidates has the same uniform probabilities to be ranked at a certain position by all the voters. The random linear ballots are indeed generating for each voter via a uniform shuffling of the list of candidates.
+
+In reality, political election data appear quite different. There will usually be different favorite and marginal candidates for each political party. To simulate these aspects into our random generator, we are using two random exponentially distributed polls of the candidates and consider a bipartisan political landscape with a certain balance (default proportion = 0.5) between the two sets of potential party supporters (see :py:class:`votingProfiles.LinearVotingProfile` class).
+
+Let us generate such a linear voting profile for an election with 1000 voters and 15 candidates.
+
+.. code-block:: pycon
+   :name: linearVotingProfileWithPolls
+   :caption: Generating a linear voting profile with random polls 	  
+   :linenos:
+
+   >>> from votingProfiles import RandomLinearVotingProfile
+   >>> lvp = RandomLinearVotingProfile(numberOfCandidates=15,
+   ...                         numberOfVoters=1000,
+   ...                         WithPolls=True,
+   ...                         bipartisan=0.5,
+   ...                         seed=0.9189670954954139)
+   >>> lvp
+    *------- VotingProfile instance description ------*
+    Instance class   : RandomLinearVotingProfile
+    Instance name    : randLinearProfile
+    # Candidates     : 15
+    # Voters         : 1000
+    Attributes       : ['name', 'seed', 'candidates',
+                        'voters', 'RandomWeights',
+			'sumWeights', 'poll1', 'poll2',
+			'bipartisan', 'linearBallot', 'ballot']
+   >>> lvp.showRandomPolls()
+    *---------------- random polls ---------------
+     Party_1(00.47) | Party_2(00.53)| result   
+    -----------------------------------------------
+      a06 : 19.91%  | a11 : 22.94%  | a06 : 16.47%
+      a07 : 14.27%  | a08 : 15.65%  | a11 : 15.29%
+      a03 : 10.02%  | a04 : 15.07%  | a08 : 10.52%
+      a13 : 08.39%  | a06 : 13.40%  | a07 : 09.42%
+      a15 : 08.39%  | a03 : 06.49%  | a04 : 08.53%
+      a11 : 06.70%  | a09 : 05.63%  | a03 : 08.15%
+      a01 : 06.17%  | a07 : 05.10%  | a01 : 05.60%
+      a12 : 04.81%  | a01 : 05.09%  | a13 : 05.39%
+      a08 : 04.75%  | a12 : 03.43%  | a15 : 04.40%
+      a10 : 04.66%  | a13 : 02.71%  | a12 : 04.08%
+      a14 : 04.42%  | a14 : 02.70%  | a09 : 03.64%
+      a05 : 04.01%  | a15 : 00.86%  | a14 : 03.51%
+      a09 : 01.40%  | a10 : 00.44%  | a10 : 02.43%
+      a04 : 01.18%  | a05 : 00.29%  | a05 : 02.04%
+      a02 : 00.90%  | a02 : 00.21%  | a02 : 00.53%
+
+In this example (see :numref:`linearVotingProfileWithPolls`), favorite candidates of *Party_1* supporters, with more than 10%, appear to be *a06* (19.91%), *a07* (14.27%) and *a03* (10.02%). Whereas for *Party_2* supporters, favorite candidates appear to be *a11* (22.94%), followed by *a08* (15.65%), *a04* (15.07%) and *a06* (13.4%). Being *first* choice for *Party_1* supporters and *fourth* choice for *Party_2* supporters, this candidate *a06* is a natural candidate for clearly winning this election game (see :numref:`uninominalWinner`).
+
+.. code-block:: pycon
+   :name: uninominalWinner
+   :caption: The uninominal election winner 	  
+   :linenos:
+
+   >>> lvp.computeSimpleMajorityWinner()
+    ['a06']
+   >>> lvp.computeInstantRunoffWinner()
+    ['a06']  
+   >>> lvp.computeBordaWinners()
+    ['a06']
+
+Is it also a *Condorcet* winner ? To verify, we start by creating the corresponding *Condorcet* digraph *cdg* with the help of the :py:class:`votingProfiles.CondorcetDigraph` class. The created digraph instance contains 15 *actions* -the candidates- and 105 *oriented arcs*- the positive majority margins (see :numref:`CondorcetWinner` Lines 6-7).
+
+.. code-block:: pycon
+   :name: CondorcetWinner
+   :caption: A Condorcet digraph constructed from a linear voting profile 
+   :linenos:
+
+   >>> from votingProfiles import CondorcetDigraph
+   >>> cdg = CondorcetDigraph(lvp)
+    *------- Digraph instance description ------*
+    Instance class      : CondorcetDigraph
+    Instance name       : rel_randLinearProfile
+    Digraph Order       : 15
+    Digraph Size        : 105
+    Valuation domain    : [-1000.00;1000.00]
+    Determinateness (%) : 69.29
+    Attributes          : ['name', 'actions', 'voters',
+                           'ballot', 'valuationdomain',
+			   'relation', 'order',
+			   'gamma', 'notGamma']
+
+We may visualize the resulting pairwise majority margins by showing the HTML formated version of the *cdg* relation table in a browser view.
+
+   >>> cdg.showHTMLRelationTable()
+
+.. figure:: majorityMargins.png
+   :width: 450 px
+   :align: center
+   :name: majorityMargins	   
+
+   Browsing the majority margins of a *Condorcet* digraph
+
+In :numref:`majorityMargins`, *light green* cells contain the positive majority margins, whereas *light red* cells contain the negative majority margins. A complete *light green* row reveals hence a *Condorcet* **winner**, whereas a complete *light green* column reveals a *Condorcet* **looser**. We recover again candidate *a06* as *Condorcet* winner ([15]_), whereas the obvious *Condorcet* looser is here candidate *a02*, the candidate with the lowest support in both parties (see :numref:`linearVotingProfileWithPolls` Line 35).
+
+With the same *bipolar* -*best* and *worst* candidate- selection procedure, we may *weakly rank* the candidates (with possible ties) by iterating these *best* and *worst* choices among the remaining candidates.
+
+.. code-block:: pycon
+   :name: rankingByChoosing
+   :caption: Ranking by iterating choosing the best and worst remaining candidates  
+   :linenos:
+
+    >>> cdg.showRankingByChoosing()
+     Error: You must first run
+      self.computeRankingByChoosing(CoDual=False(default)|True) !
+    >>> cdg.computeRankingByChoosing()
+     {'CoDual': False,
+      'result': [
+      ( (Decimal('528.2857142857142857142857143'), ['a06']),
+        (Decimal('740.8571428571428571428571429'), ['a02']) ),
+      ( (Decimal('400.6666666666666666666666667'), ['a11']),
+        (Decimal('470.5'), ['a05']) ),
+      ( (Decimal('276.8'), ['a08']), (Decimal('458.6'), ['a10']) ),
+      ( (Decimal('286.0'), ['a07']), (Decimal('209.25'), ['a15']) ),
+      ( (Decimal('291.3333333333333333333333333'), ['a03']),
+        (Decimal('185.6666666666666666666666667'), ['a09']) ),
+      ( (Decimal('146.5'), ['a01']), (Decimal('151.0'), ['a14']) ),
+      ( (Decimal('-8.0'), ['a04', 'a12']),
+        (Decimal('8.0'), ['a04', 'a12']) ),
+      ( (Decimal('1000.0'), ['a13']), (Decimal('1000.0'), ['a13']) )
+     ]}
+    >>> cdg.showRankingByChoosing()
+     Ranking by Choosing and Rejecting
+     1st Best Choice ['a06'] (528.29)
+       2nd Best Choice ['a11'] (400.67)
+	 3rd Best Choice ['a08'] (276.80)
+	   4th Best Choice ['a07'] (286.00)
+	     5th Best Choice ['a03'] (291.33)
+	       6th Best Choice ['a01'] (146.50)
+		 7th Best Choice ['a04', 'a12'] (-8.00)
+		   Ambiguous Choice ['a04', 'a12']
+		     8th Best Choice ['a13'] (1000.00)
+		     8th Worst Choice ['a13'] (1000.00)
+		   Ambiguous Choice ['a04', 'a12']
+		 7th Worst Choice ['a04', 'a12'] (8.00)
+	       6th Worst Choice ['a14'] (151.00)
+	     5th Worst Choice ['a09'] (185.67)
+	   4th Worst Choice ['a15'] (209.25)
+	 3rd Worst Choice ['a10'] (458.60)
+       2nd Worst Choice ['a05'] (470.50)
+     1st Worst Choice ['a02'] (740.86)
+     Ordinal bipolar correlation with outranking relation:
+      tau = +1.000 (D = 0.4)
+     Ordinal bipolar correlation with median cut outranking relation:
+      tau = +0.990 (D = 1.0)
+
+Before showing the *ranking-by-choosing* result, we have to compute the iterated bipolar selection procedure (see :numref:`rankingByChoosing` Line 2). The first selection concerns *a06* (best) and *a02* (worst), followed by *a11* (best) opposed to *a05* (worst), and so on, until there remains at iteration step 8 a single a final candidate *a08*. The bracketed numbers indicate the majority margin with which the *i*-th *best* choice is beating the corresponding *i*-th *worst* choice amongst the remaining candidates at step *i*.    
+
+Notice the selection operated at iteration step 7 (see :numref:`` Lines 28 and 33), namely the pair [*a04* ,*a12*]. Both candidates represent indeed at the same time a *best*, as well as a *worst* choice. Their position in the eventual ranking - before or after candidate *a13* appears to be therefore *ambiguous* (see :numref:`rankingByChoosing` Lines 29 and 32). Being the only remaining candidate in step 8, candidate *a13* trivially represents for all 1000 voters the only possible unanimous *best*, as well as *worst* choice (see :numref:`rankingByChoosing` Lines 30-31).
+
+Notice that the *instant-run-off* procedure, with Comments=True parameter setting (see :numref:`uninominalWinner`), will deliver a very similar reversed linear *ordering-by-rejecting* result, namely [*a02*, *a05*, *a10*, *a09*, *a14*, *a12*, *a15*, *a13*, *a01*, *a04*, *a07*, *a03*, *a08*, *a11*, *a06*].
+
+Remarkable about these *ranking-by-choosing* or *ordering-by-rejecting* results is the fact that the random voting behavior, simulated here with the help of two discrete random variables ([16]_), defined respectively by the two party polls, is rendering near perfectly the simulated balance of the polls: -Party_1 supporters : 471;  Party_2 supporters: 529 (see :numref:`rankingByChoosing` Lines 19-35 third column). Despite a simulated random behavior, the given polls show indeed a *very strong incidence* on the election result. In some countries, public media are therefore not allowed to publish polls during the last weeks before a general election, in order to avoid any manipulation of the eventual election outcome.
+
+.. note::
+
+   Mind that the *ranking-by-choosing* procedure, we use here on the *Condorcet* digraph, operates the selection procedure by extracting at each step *initial* and *terminal* kernels, i.e. NP-hard operational problems (see tutorial :ref:`Kernel-Tutorial-label`); A technique that does not allow in general to tackle voting profiles with much more than 20 candidates. The tutorial on :ref:`Ranking-Tutorial-label` provides more adequate and efficient techniques for ranking from pairwise majority margins when a large number of potential candidates is given.  
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -1163,7 +1324,7 @@ We may, furthermore, rank the alternatives on the basis of the weighted marginal
    :width: 400 px
    :align: center
 
-   Ranked heat map of the performance table 
+   Ranked heatmap of the performance table 
 
 There is no doubt that action *a03*, with a performance in the highest quintile in five out of seven criteria, appears definitely to be best performing. Action *a05* shows a more or less average performance on most criteria, whereas action *a02* appears to be the weakest alternative.
 
@@ -1543,7 +1704,7 @@ In the example above, we may notice the three types of decision actions (Lines 1
       standard difference deviation : 39.02
     ...
 
-A (potentially ranked) colored heat map with 5 color levels is also provided.
+A (potentially ranked) colored heatmap with 5 color levels is also provided.
     
 >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Ranked=False)
 
@@ -1551,7 +1712,7 @@ A (potentially ranked) colored heat map with 5 color levels is also provided.
    :width: 400 px
    :align: center
 
-   Unranked heat map of a random Cost-Benefit performance tableau
+   Unranked heatmap of a random Cost-Benefit performance tableau
    
 Such a performance tableau may be stored and re-accessed in the XMCDA2 encoded format.
 
@@ -2960,7 +3121,7 @@ We thus recover all the input data. To measure the actual preference discriminat
 
 On the *Costs* criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative *Comfort* criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged *considerably large* (Line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria. 
  
-A colorful comparison of all the performances is shown by the **heat map** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.
+A colorful comparison of all the performances is shown by the **heatmap** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.
 
    >>> t.showHTMLPerformanceHeatmap(colorLevels=5)
 
@@ -2968,7 +3129,7 @@ A colorful comparison of all the performances is shown by the **heat map** stati
    :width: 500 px
    :align: center
 
-   Heat map of the office choice performance tableau
+   heatmap of the office choice performance tableau
 	   
 Site *A* shows extreme and contradictory performances: highest *Costs* and no *Working Comfort* on one hand, and total satisfaction with respect to *Standing*, *Proximity* and *Parking facilities* on the other hand. Similar, but opposite, situation is given for site *C*: unsatisfactory *Working Space*, no *Standing* and no *Working Comfort* on the one hand, and lowest *Costs*, best *Proximity* and *Parking facilities* on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites *D* and *G*. Finally, site *F* is clearly the less satisfactory alternative of all.
 
@@ -3504,7 +3665,7 @@ We notice above that no new decision alternative is rated in the lowest [0.0-0.2
     [0.50 - 0.75[ ['a1005', 'a1010', 'a1008', 'a1002', 'a1006']
     [0.25 - 0.50[ ['a1003', 'a1001', 'a1007', 'a1004', 'a1009']
     
-The same result may even more conveniently be consulted in a browser view via a specialised rating heat map format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method (see :numref:`heatMap1`).
+The same result may even more conveniently be consulted in a browser view via a specialised rating heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method (see :numref:`heatMap1`).
 
 .. code-block:: pycon
 
@@ -3517,7 +3678,7 @@ The same result may even more conveniently be consulted in a browser view via a 
     :width: 400 px
     :align: center
 
-    Heat map of normed quartiles ranking 
+    heatmap of normed quartiles ranking 
 	    
 Using furthermore a specialised version of the :py:meth:`transitiveDigraphs.TransitiveDigraph.exportGraphViz` method allows drawing the same rating result in a Hasse diagram format (see :numref:`normedRatingDigraph`).
 
@@ -3576,7 +3737,7 @@ A browser view may again more conveniently illustrate this preciser *deciles* ra
     :width: 400 px
     :align: center
 
-    Heat map of mormed deciles rating 
+    heatmap of mormed deciles rating 
 
 In this preciser *deciles* rating, decision alternatives *a1001* and *a1010* are now rated in the *6th* decile (D6), respectively in the *7th* decile (D7).
     
@@ -4813,7 +4974,7 @@ The gray arrows in :numref:`bestWorstOrientation`, like the one between actions 
    :align: center
    :alt: Copeland ranking of the random outranking digraph instance
 
-   Heat map with Copeland ranking of the performance tableau
+   heatmap with Copeland ranking of the performance tableau
 
 In the resulting linear ranking (see :numref:`outrankingResult`), action 'a4' is set at first rank, followed by action 'a2'. This makes sense as 'a4' shows three performances in the first quintile, whereas 'a2' is only partially evaluated and shows only two such excellent performances. But 'a4' also shows a very weak performance in the first quintile. Both decision actions, hence, don't show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any 'forced' linear ranking result as shown in :numref:`outrankingResult` above.
 
@@ -5812,6 +5973,9 @@ Bibliography
 .. [13] The class of *self-codual* bipolar-valued digraphs consists of all *weakly asymmetric* digraphs, i.e. digraphs containing only *asymmetric* and/or *indeterminate* links. Limit cases consists of, on the one side, *full tournaments* with *indeterminate reflexive links*, and, on the other side, *fully indeterminate* digraphs. In this class, the *converse* (inverse ~ ) operator is indeed identical to the *dual* (negation - ) one.
 
 .. [14] Not to be confused with the *dual graph* of a plane graph *g* that has a vertex for each face of *g*. Here we mean the *less than* (strict converse) relation corresponding to a *greater or equal* relation, or the *less than or equal* relation corresponding to a (strict) *better than* relation.
+
+.. [15] The concept of *Condorcet* winner -a generalization of absolute majority winners- proposed by *Condorcet* in 1785, is an early historical example of *initial* digraph kernels (see the tutorial :ref:`Kernel-Tutorial-label`).                
+.. [16] Discrete random variables with a given empirical probability law (here the polls) are provided in the :py:mod:`randomNumbers` module by the :py:class:`randomNumbers.DiscreteRandomVariable` class.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
