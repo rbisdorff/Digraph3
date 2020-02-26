@@ -1051,7 +1051,7 @@ On generating random linear voting profiles
 
 By default, the :py:class:`votingProfiles.RandomLinearVotingProfile` class generates random linear voting profiles where every candidates has the same uniform probabilities to be ranked at a certain position by all the voters. The random linear ballots are indeed generating for each voter via a uniform shuffling of the list of candidates.
 
-In reality, political election data appear quite different. There will usually be different favorite and marginal candidates for each political party. To simulate these aspects into our random generator, we are using two random exponentially distributed polls of the candidates and consider a bipartisan political landscape with a certain balance (default proportion = 0.5) between the two sets of potential party supporters (see :py:class:`votingProfiles.LinearVotingProfile` class).
+In reality, political election data appear quite different. There will usually be different favorite and marginal candidates for each political party. To simulate these aspects into our random generator, we are using two random exponentially distributed polls of the candidates and consider a bipartisan political landscape with a certain random balance (default theoretical proportion = 0.50) between the two sets of potential party supporters (see :py:class:`votingProfiles.LinearVotingProfile` class).
 
 Let us generate such a linear voting profile for an election with 1000 voters and 15 candidates.
 
@@ -1077,24 +1077,24 @@ Let us generate such a linear voting profile for an election with 1000 voters an
 			'sumWeights', 'poll1', 'poll2',
 			'bipartisan', 'linearBallot', 'ballot']
    >>> lvp.showRandomPolls()
-    *---------------- random polls ---------------
-     Party_1(00.47) | Party_2(00.53)| result   
-    -----------------------------------------------
-      a06 : 19.91%  | a11 : 22.94%  | a06 : 16.47%
-      a07 : 14.27%  | a08 : 15.65%  | a11 : 15.29%
-      a03 : 10.02%  | a04 : 15.07%  | a08 : 10.52%
-      a13 : 08.39%  | a06 : 13.40%  | a07 : 09.42%
-      a15 : 08.39%  | a03 : 06.49%  | a04 : 08.53%
-      a11 : 06.70%  | a09 : 05.63%  | a03 : 08.15%
-      a01 : 06.17%  | a07 : 05.10%  | a01 : 05.60%
-      a12 : 04.81%  | a01 : 05.09%  | a13 : 05.39%
-      a08 : 04.75%  | a12 : 03.43%  | a15 : 04.40%
-      a10 : 04.66%  | a13 : 02.71%  | a12 : 04.08%
-      a14 : 04.42%  | a14 : 02.70%  | a09 : 03.64%
-      a05 : 04.01%  | a15 : 00.86%  | a14 : 03.51%
-      a09 : 01.40%  | a10 : 00.44%  | a10 : 02.43%
-      a04 : 01.18%  | a05 : 00.29%  | a05 : 02.04%
-      a02 : 00.90%  | a02 : 00.21%  | a02 : 00.53%
+    *---------------- random polls -----------------
+     Party_1 (0.47) | Party_2 (0.53) |    result   
+    ------------------------------------------------
+      a06 : 19.91%  |  a11 : 22.94%  |  a06 : 16.47%
+      a07 : 14.27%  |  a08 : 15.65%  |  a11 : 15.29%
+      a03 : 10.02%  |  a04 : 15.07%  |  a08 : 10.52%
+      a13 : 08.39%  |  a06 : 13.40%  |  a07 : 09.42%
+      a15 : 08.39%  |  a03 : 06.49%  |  a04 : 08.53%
+      a11 : 06.70%  |  a09 : 05.63%  |  a03 : 08.15%
+      a01 : 06.17%  |  a07 : 05.10%  |  a01 : 05.60%
+      a12 : 04.81%  |  a01 : 05.09%  |  a13 : 05.39%
+      a08 : 04.75%  |  a12 : 03.43%  |  a15 : 04.40%
+      a10 : 04.66%  |  a13 : 02.71%  |  a12 : 04.08%
+      a14 : 04.42%  |  a14 : 02.70%  |  a09 : 03.64%
+      a05 : 04.01%  |  a15 : 00.86%  |  a14 : 03.51%
+      a09 : 01.40%  |  a10 : 00.44%  |  a10 : 02.43%
+      a04 : 01.18%  |  a05 : 00.29%  |  a05 : 02.04%
+      a02 : 00.90%  |  a02 : 00.21%  |  a02 : 00.53%
 
 In this example (see :numref:`linearVotingProfileWithPolls`), favorite candidates of *Party_1* supporters, with more than 10%, appear to be *a06* (19.91%), *a07* (14.27%) and *a03* (10.02%). Whereas for *Party_2* supporters, favorite candidates appear to be *a11* (22.94%), followed by *a08* (15.65%), *a04* (15.07%) and *a06* (13.4%). Being *first* choice for *Party_1* supporters and *fourth* choice for *Party_2* supporters, this candidate *a06* is a natural candidate for clearly winning this election game (see :numref:`uninominalWinner`).
 
@@ -1190,22 +1190,22 @@ With the same *bipolar* -*best* and *worst* candidate- selection procedure, we m
 	 3rd Worst Choice ['a10'] (458.60)
        2nd Worst Choice ['a05'] (470.50)
      1st Worst Choice ['a02'] (740.86)
-     Ordinal bipolar correlation with outranking relation:
-      tau = +1.000 (D = 0.4)
-     Ordinal bipolar correlation with median cut outranking relation:
-      tau = +0.990 (D = 1.0)
+     Ordinal bipolar correlation with Condorcet digraph:
+      tau = +0.990
 
-Before showing the *ranking-by-choosing* result, we have to compute the iterated bipolar selection procedure (see :numref:`rankingByChoosing` Line 2). The first selection concerns *a06* (best) and *a02* (worst), followed by *a11* (best) opposed to *a05* (worst), and so on, until there remains at iteration step 8 a single a final candidate *a08*. The bracketed numbers indicate the majority margin with which the *i*-th *best* choice is beating the corresponding *i*-th *worst* choice amongst the remaining candidates at step *i*.    
+Before showing the *ranking-by-choosing* result, we have to compute the iterated bipolar selection procedure (see :numref:`rankingByChoosing` Line 2). The first selection concerns *a06* (best) and *a02* (worst), followed by *a11* (best) opposed to *a05* (worst), and so on, until there remains at iteration step 8 a single a final candidate *a08*. The bracketed numbers indicate the majority margin with which the *i*-th *best* choice is beating the corresponding *i*-th *worst* choice amongst the remaining candidates at step *i*. This *ranking-by-choosing* result here is highly correlated in the ordinal *Kendall* sense (+0.99) with the underlying majority margins ((see :numref:`rankingByChoosing` Line 40-41)    
 
-Notice the selection operated at iteration step 7 (see :numref:`` Lines 28 and 33), namely the pair [*a04* ,*a12*]. Both candidates represent indeed at the same time a *best*, as well as a *worst* choice. Their position in the eventual ranking - before or after candidate *a13* appears to be therefore *ambiguous* (see :numref:`rankingByChoosing` Lines 29 and 32). Being the only remaining candidate in step 8, candidate *a13* trivially represents for all 1000 voters the only possible unanimous *best*, as well as *worst* choice (see :numref:`rankingByChoosing` Lines 30-31).
+Notice furthermore the selection operated at iteration step 7 (see :numref:`rankingByChoosing` Lines 28 and 33), namely the pair *[a04, a12]*. Both candidates represent indeed at the same time a *best*, as well as, a *worst* choice. Their position in the eventual ranking -before or after candidate *a13*-  appears to be therefore *ambiguous* (see :numref:`rankingByChoosing` Lines 29 and 32).
 
-Notice that the *instant-run-off* procedure, with Comments=True parameter setting (see :numref:`uninominalWinner`), will deliver a very similar reversed linear *ordering-by-rejecting* result, namely [*a02*, *a05*, *a10*, *a09*, *a14*, *a12*, *a15*, *a13*, *a01*, *a04*, *a07*, *a03*, *a08*, *a11*, *a06*].
+Being the only remaining candidate in step 8, candidate *a13* trivially represents for all 1000 voters the only possible unanimous *best*, as well as *worst* choice (see :numref:`rankingByChoosing` Lines 30-31).
 
-Remarkable about these *ranking-by-choosing* or *ordering-by-rejecting* results is the fact that the random voting behavior, simulated here with the help of two discrete random variables ([16]_), defined respectively by the two party polls, is rendering near perfectly the simulated balance of the polls: -Party_1 supporters : 471;  Party_2 supporters: 529 (see :numref:`rankingByChoosing` Lines 19-35 third column). Despite a simulated random behavior, the given polls show indeed a *very strong incidence* on the election result. In some countries, public media are therefore not allowed to publish polls during the last weeks before a general election, in order to avoid any manipulation of the eventual election outcome.
+It is worthwhile noticing that the *instant-run-off* procedure (see :numref:`uninominalWinner`), with *Comments=True* parameter setting , will deliver a very similar reversed linear *ordering-by-rejecting* result, namely [*a02*, *a05*, *a10*, *a09*, *a14*, *a12*, *a15*, *a13*, *a01*, *a04*, *a07*, *a03*, *a08*, *a11*, *a06*] ordered from the *worst* to the *best* choice.
+
+Remarkable about these very similar *ranking-by-choosing* or *ordering-by-rejecting* results is the fact that the random voting behaviour, simulated here with the help of two discrete random variables ([16]_), defined respectively by the two party polls, is rendering near perfectly the simulated balance of the polls: -*Party_1* supporters : 471;  *Party_2* supporters: 529 (see :numref:`rankingByChoosing` Lines 19-35 third column). Despite a random voting behaviour per voter, the given polls show a *very strong incidence* on the election result. In some countries, public media are therefore not allowed to publish polls during the last weeks before a general election, in order to avoid any manipulation of the eventual election outcome.
 
 .. note::
 
-   Mind that the *ranking-by-choosing* procedure, we use here on the *Condorcet* digraph, operates the selection procedure by extracting at each step *initial* and *terminal* kernels, i.e. NP-hard operational problems (see tutorial :ref:`Kernel-Tutorial-label`); A technique that does not allow in general to tackle voting profiles with much more than 20 candidates. The tutorial on :ref:`Ranking-Tutorial-label` provides more adequate and efficient techniques for ranking from pairwise majority margins when a large number of potential candidates is given.  
+   Mind that the specific *ranking-by-choosing* procedure, we use here on the *Condorcet* digraph, operates the selection procedure by extracting at each step *initial* and *terminal* kernels, i.e. NP-hard operational problems (see tutorial :ref:`Kernel-Tutorial-label` and [BIS-1999]_); A technique that does not allow in general to tackle voting profiles with much more than 20 candidates. The tutorial on :ref:`Ranking-Tutorial-label` provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.  
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -5905,6 +5905,8 @@ Bibliography
 .. [FMCAA] Häggström O. (2002) *Finite Markov Chains and Algorithmic Applications*. Cambridge University Press.
 
 .. [BIS-2000] Bisdorff R. (2000), "Logical foundation of fuzzy preferential systems with application to the ELECTRE decision aid methods", *Computers and Operations Research*, 27:673-687 (downloadable version `PDF file 159.1Kb <http://hdl.handle.net/10993/23724>`_).
+
+.. [BIS-1999] Bisdorff R. (1999), "Bipolar ranking from pairwise fuzzy outrankings", JORBEL *Belgian Journal of Operations Research, Statistics and Computer Science*, Vol. 37 (4) 97 379-387. (PDF file (351.7 Kb) `for downloading <http://hdl.handle.net/10993/38738>`_)
 
 .. [WIL-1996] Wilson D.B. (1996), *Generating random spanning trees more quickly than the cover time*, Proceedings of the Twenty-eighth Annual ACM *Symposium on the Theory of Computing* (Philadelphia, PA, 1996), 296-303, ACM, New York, 1996.
 

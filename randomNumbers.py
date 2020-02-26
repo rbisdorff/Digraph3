@@ -326,8 +326,9 @@ class DiscreteRandomVariable():
     Discrete random variable generator
 
     Parameters:
-        | discreteLaw := dictionary with integer values
-        |                as keys and probabilities as float values,
+        | discreteLaw := dictionary with discrete variable states
+        |                as keys and corresponding probabilities
+        |                as float values,
         | seed := integer for fixing the sequence generation.
 
     Example usage:
