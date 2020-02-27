@@ -3037,10 +3037,10 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
  8
  9
 10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">KohlerOrder</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ko</span> <span class="o">=</span> <span class="n">KohlerOrder</span><span class="p">(</span><span class="n">gcd</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ko</span><span class="o">.</span><span class="n">showRanking</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kocd</span> <span class="o">=</span> <span class="n">KohlerOrder</span><span class="p">(</span><span class="n">gcd</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kocd</span><span class="o">.</span><span class="n">showRanking</span><span class="p">()</span>
 <span class="go"> [&#39;a5&#39;, &#39;a7&#39;, &#39;a6&#39;, &#39;a3&#39;, &#39;a9&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a2&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">ko</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">kocd</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
 <span class="go"> Extended Kendall tau         : +0.747</span>
@@ -3048,14 +3048,16 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> Bipolar-valued equivalalence : +0.172</span>
 </pre></div>
 </td></tr></table></div>
-<p>With this <em>min-max</em> lexicographic <em>ranking-by-choosing</em> strategy, we find a correlation result (+0.747) that is until now clearly the nearest to an optimal <em>Kemeny</em> ranking (see <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 18</span></a>). Only two adjacent pairs: <em>[a6, a7]</em> and <em>[a8, a9]</em> are actually inverted here. Notice that “Kohler*’s ranking rule, contrary to the previously mentioned rules, is <strong>not</strong> <em>invariant</em> under the <em>codual</em> transform and requires to work on the strict outranking digraph for a better correlation index</p>
+<p>With this <em>min-max</em> lexicographic <em>ranking-by-choosing</em> strategy, we find a correlation result (+0.747) that is until now clearly the nearest to an optimal <em>Kemeny</em> ranking (see <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 18</span></a>). Only two adjacent pairs: <em>[a6, a7]</em> and <em>[a8, a9]</em> are actually inverted here. Notice that “Kohler*’s ranking rule, contrary to the previously mentioned rules, is <strong>not</strong> <em>invariant</em> under the <em>codual</em> transform and requires to work on the <em>strict outranking</em> digraph <em>gcd</em> for a better correlation result.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
 5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go"> &gt;&gt;&gt; corr = g.computeOrdinalCorrelation(ko)</span>
-<span class="go"> &gt;&gt;&gt; gcd.showCorrelation(corr)</span>
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go"> &gt;&gt;&gt; ko = KohlerOrder(g)</span>
+<span class="go"> &gt;&gt;&gt; corr = g.computeOrdinalCorrelation(ko)</span>
+<span class="go"> &gt;&gt;&gt; g.showCorrelation(corr)</span>
 <span class="go">  Correlation indexes:</span>
 <span class="go">  Crisp ordinal correlation : +0.483</span>
 <span class="go">  Valued equivalalence      : +0.111</span>

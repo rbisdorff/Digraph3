@@ -2284,23 +2284,24 @@ At step *i* (*i* goes from 1 to *n*) do the following:
    :linenos:
 
    >>> from linearOrders import KohlerOrder
-   >>> ko = KohlerOrder(gcd)
-   >>> ko.showRanking()
+   >>> kocd = KohlerOrder(gcd)
+   >>> kocd.showRanking()
     ['a5', 'a7', 'a6', 'a3', 'a9', 'a8', 'a4', 'a1', 'a2']
-   >>> corr = gcd.computeOrdinalCorrelation(ko)
+   >>> corr = gcd.computeOrdinalCorrelation(kocd)
    >>> gcd.showCorrelation(corr)
     Correlation indexes:
     Extended Kendall tau         : +0.747
     Epistemic determination      :  0.230
     Bipolar-valued equivalalence : +0.172
 
-With this *min-max* lexicographic *ranking-by-choosing* strategy, we find a correlation result (+0.747) that is until now clearly the nearest to an optimal *Kemeny* ranking (see :numref:`optimalKemeny`). Only two adjacent pairs: *[a6, a7]* and *[a8, a9]* are actually inverted here. Notice that "Kohler*'s ranking rule, contrary to the previously mentioned rules, is **not** *invariant* under the *codual* transform and requires to work on the strict outranking digraph for a better correlation index
+With this *min-max* lexicographic *ranking-by-choosing* strategy, we find a correlation result (+0.747) that is until now clearly the nearest to an optimal *Kemeny* ranking (see :numref:`optimalKemeny`). Only two adjacent pairs: *[a6, a7]* and *[a8, a9]* are actually inverted here. Notice that "Kohler*'s ranking rule, contrary to the previously mentioned rules, is **not** *invariant* under the *codual* transform and requires to work on the *strict outranking* digraph *gcd* for a better correlation result.
 
 .. code-block:: pycon
    :linenos:
 
+    >>> ko = KohlerOrder(g)  
     >>> corr = g.computeOrdinalCorrelation(ko)
-    >>> gcd.showCorrelation(corr)
+    >>> g.showCorrelation(corr)
      Correlation indexes:
      Crisp ordinal correlation : +0.483
      Valued equivalalence      : +0.111
