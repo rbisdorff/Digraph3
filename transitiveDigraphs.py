@@ -1362,15 +1362,15 @@ class WeakCopelandOrder(TransitiveDigraph):
         
         # compute net flows
         tnf = time()
-##        c = PolarisedDigraph(other)
-##        cRelation = c.relation
+        c = PolarisedDigraph(other)
+        cRelation = c.relation
         copelandScores = []
         for x in actions:
-            gx = gamma[x]
-####            copelandScore = Decimal('0')
-##            for y in actions:
-##                copelandScore += cRelation[x][y] - cRelation[y][x]
-            copelandScore = len(gx[0]) - len(gx[1])
+##            gx = gamma[x]
+            copelandScore = Decimal('0')
+            for y in actions:
+                copelandScore += cRelation[x][y] - cRelation[y][x]
+##            copelandScore = len(gx[0]) - len(gx[1])
             actions[x]['score'] = copelandScore
             copelandScores.append((-copelandScore,x))
         # reversed sorting with keeping the actions initial ordering

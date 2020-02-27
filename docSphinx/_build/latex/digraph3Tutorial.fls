@@ -373,6 +373,11 @@ INPUT ./rankingTutorial.png
 INPUT rankingTutorial.png
 INPUT ./rankingTutorial.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecso1440.tfm
+INPUT weakCopelandRanking.png
+INPUT ./weakCopelandRanking.png
+INPUT ./weakCopelandRanking.png
+INPUT weakCopelandRanking.png
+INPUT ./weakCopelandRanking.png
 INPUT tutorialKemeny.png
 INPUT ./tutorialKemeny.png
 INPUT ./tutorialKemeny.png

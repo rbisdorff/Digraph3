@@ -832,7 +832,7 @@ class CopelandOrder(LinearOrder):
     instantiates the Copeland Order from
     a given bipolar-valued Digraph instance
     """
-    def __init__(self,other,coDual=False,Gamma=True,\
+    def __init__(self,other,coDual=False,Gamma=False,\
                  RankingRelation=True,Comments=False,Debug=False):
         """
         constructor for generating a linear order
