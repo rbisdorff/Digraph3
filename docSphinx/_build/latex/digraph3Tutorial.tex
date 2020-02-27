@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{February 26, 2020}
+\date{February 27, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1183,7 +1183,7 @@ Notice that the importance weights of the voters are \sphinxstyleemphasis{negati
 \label{\detokenize{tutorial:on-generating-random-linear-voting-profiles}}
 By default, the \sphinxcode{\sphinxupquote{votingProfiles.RandomLinearVotingProfile}} class generates random linear voting profiles where every candidates has the same uniform probabilities to be ranked at a certain position by all the voters. The random linear ballots are indeed generating for each voter via a uniform shuffling of the list of candidates.
 
-In reality, political election data appear quite different. There will usually be different favorite and marginal candidates for each political party. To simulate these aspects into our random generator, we are using two random exponentially distributed polls of the candidates and consider a bipartisan political landscape with a certain random balance (default theoretical proportion = 0.50) between the two sets of potential party supporters (see \sphinxcode{\sphinxupquote{votingProfiles.LinearVotingProfile}} class).
+In reality, political election data appear quite different. There will usually be different favorite and marginal candidates for each political party. To simulate these aspects into our random generator, we are using two random exponentially distributed polls of the candidates and consider a bipartisan political landscape with a certain random balance (default theoretical party repartition = 0.50) between the two sets of potential party supporters (see \sphinxcode{\sphinxupquote{votingProfiles.LinearVotingProfile}} class). A certain theoretical proportion (default = 0.1) will not support any party.
 
 Let us generate such a linear voting profile for an election with 1000 voters and 15 candidates.
 \sphinxSetupCaptionForVerbatim{Generating a linear voting profile with random polls}
@@ -1193,7 +1193,8 @@ Let us generate such a linear voting profile for an election with 1000 voters an
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp} \PYG{o}{=} \PYG{n}{RandomLinearVotingProfile}\PYG{p}{(}\PYG{n}{numberOfCandidates}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{,}
 \PYG{g+gp}{... }                        \PYG{n}{numberOfVoters}\PYG{o}{=}\PYG{l+m+mi}{1000}\PYG{p}{,}
 \PYG{g+gp}{... }                        \PYG{n}{WithPolls}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}
-\PYG{g+gp}{... }                        \PYG{n}{bipartisan}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,}
+\PYG{g+gp}{... }                        \PYG{n}{partyRepartition}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,}
+\PYG{g+gp}{... }                        \PYG{n}{other}\PYG{o}{=}\PYG{l+m+mf}{0.1}\PYG{p}{,}
 \PYG{g+gp}{... }                        \PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mf}{0.9189670954954139}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} VotingProfile instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -1206,27 +1207,31 @@ Let us generate such a linear voting profile for an election with 1000 voters an
 \PYG{g+go}{                     \PYGZsq{}sumWeights\PYGZsq{}, \PYGZsq{}poll1\PYGZsq{}, \PYGZsq{}poll2\PYGZsq{},}
 \PYG{g+go}{                     \PYGZsq{}bipartisan\PYGZsq{}, \PYGZsq{}linearBallot\PYGZsq{}, \PYGZsq{}ballot\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp}\PYG{o}{.}\PYG{n}{showRandomPolls}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} random polls \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{  Party\PYGZus{}1 (0.47) | Party\PYGZus{}2 (0.53) |    result}
-\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{   a06 : 19.91\PYGZpc{}  |  a11 : 22.94\PYGZpc{}  |  a06 : 16.47\PYGZpc{}}
-\PYG{g+go}{   a07 : 14.27\PYGZpc{}  |  a08 : 15.65\PYGZpc{}  |  a11 : 15.29\PYGZpc{}}
-\PYG{g+go}{   a03 : 10.02\PYGZpc{}  |  a04 : 15.07\PYGZpc{}  |  a08 : 10.52\PYGZpc{}}
-\PYG{g+go}{   a13 : 08.39\PYGZpc{}  |  a06 : 13.40\PYGZpc{}  |  a07 : 09.42\PYGZpc{}}
-\PYG{g+go}{   a15 : 08.39\PYGZpc{}  |  a03 : 06.49\PYGZpc{}  |  a04 : 08.53\PYGZpc{}}
-\PYG{g+go}{   a11 : 06.70\PYGZpc{}  |  a09 : 05.63\PYGZpc{}  |  a03 : 08.15\PYGZpc{}}
-\PYG{g+go}{   a01 : 06.17\PYGZpc{}  |  a07 : 05.10\PYGZpc{}  |  a01 : 05.60\PYGZpc{}}
-\PYG{g+go}{   a12 : 04.81\PYGZpc{}  |  a01 : 05.09\PYGZpc{}  |  a13 : 05.39\PYGZpc{}}
-\PYG{g+go}{   a08 : 04.75\PYGZpc{}  |  a12 : 03.43\PYGZpc{}  |  a15 : 04.40\PYGZpc{}}
-\PYG{g+go}{   a10 : 04.66\PYGZpc{}  |  a13 : 02.71\PYGZpc{}  |  a12 : 04.08\PYGZpc{}}
-\PYG{g+go}{   a14 : 04.42\PYGZpc{}  |  a14 : 02.70\PYGZpc{}  |  a09 : 03.64\PYGZpc{}}
-\PYG{g+go}{   a05 : 04.01\PYGZpc{}  |  a15 : 00.86\PYGZpc{}  |  a14 : 03.51\PYGZpc{}}
-\PYG{g+go}{   a09 : 01.40\PYGZpc{}  |  a10 : 00.44\PYGZpc{}  |  a10 : 02.43\PYGZpc{}}
-\PYG{g+go}{   a04 : 01.18\PYGZpc{}  |  a05 : 00.29\PYGZpc{}  |  a05 : 02.04\PYGZpc{}}
-\PYG{g+go}{   a02 : 00.90\PYGZpc{}  |  a02 : 00.21\PYGZpc{}  |  a02 : 00.53\PYGZpc{}}
+\PYG{g+go}{ Random repartition of voters}
+\PYG{g+go}{  Party\PYGZus{}1 supporters : 460 (46.0\PYGZpc{})}
+\PYG{g+go}{  Party\PYGZus{}2 supporters : 436 (43.6\PYGZpc{})}
+\PYG{g+go}{  Other voters       : 104 (10.4\PYGZpc{})}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} random polls \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{  Party\PYGZus{}1(46.0\PYGZpc{}) | Party\PYGZus{}2(43.6\PYGZpc{})|  expected}
+\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{   a06 : 19.91\PYGZpc{}  | a11 : 22.94\PYGZpc{}  | a06 : 15.00\PYGZpc{}}
+\PYG{g+go}{   a07 : 14.27\PYGZpc{}  | a08 : 15.65\PYGZpc{}  | a11 : 13.08\PYGZpc{}}
+\PYG{g+go}{   a03 : 10.02\PYGZpc{}  | a04 : 15.07\PYGZpc{}  | a08 : 09.01\PYGZpc{}}
+\PYG{g+go}{   a13 : 08.39\PYGZpc{}  | a06 : 13.40\PYGZpc{}  | a07 : 08.79\PYGZpc{}}
+\PYG{g+go}{   a15 : 08.39\PYGZpc{}  | a03 : 06.49\PYGZpc{}  | a03 : 07.44\PYGZpc{}}
+\PYG{g+go}{   a11 : 06.70\PYGZpc{}  | a09 : 05.63\PYGZpc{}  | a04 : 07.11\PYGZpc{}}
+\PYG{g+go}{   a01 : 06.17\PYGZpc{}  | a07 : 05.10\PYGZpc{}  | a01 : 05.06\PYGZpc{}}
+\PYG{g+go}{   a12 : 04.81\PYGZpc{}  | a01 : 05.09\PYGZpc{}  | a13 : 05.04\PYGZpc{}}
+\PYG{g+go}{   a08 : 04.75\PYGZpc{}  | a12 : 03.43\PYGZpc{}  | a15 : 04.23\PYGZpc{}}
+\PYG{g+go}{   a10 : 04.66\PYGZpc{}  | a13 : 02.71\PYGZpc{}  | a12 : 03.71\PYGZpc{}}
+\PYG{g+go}{   a14 : 04.42\PYGZpc{}  | a14 : 02.70\PYGZpc{}  | a14 : 03.21\PYGZpc{}}
+\PYG{g+go}{   a05 : 04.01\PYGZpc{}  | a15 : 00.86\PYGZpc{}  | a09 : 03.10\PYGZpc{}}
+\PYG{g+go}{   a09 : 01.40\PYGZpc{}  | a10 : 00.44\PYGZpc{}  | a10 : 02.34\PYGZpc{}}
+\PYG{g+go}{   a04 : 01.18\PYGZpc{}  | a05 : 00.29\PYGZpc{}  | a05 : 01.97\PYGZpc{}}
+\PYG{g+go}{   a02 : 00.90\PYGZpc{}  | a02 : 00.21\PYGZpc{}  | a02 : 00.51\PYGZpc{}}
 \end{sphinxVerbatim}
 
-In this example (see \hyperref[\detokenize{tutorial:linearvotingprofilewithpolls}]{Listing \ref{\detokenize{tutorial:linearvotingprofilewithpolls}}}), favorite candidates of \sphinxstyleemphasis{Party\_1} supporters, with more than 10\%, appear to be \sphinxstyleemphasis{a06} (19.91\%), \sphinxstyleemphasis{a07} (14.27\%) and \sphinxstyleemphasis{a03} (10.02\%). Whereas for \sphinxstyleemphasis{Party\_2} supporters, favorite candidates appear to be \sphinxstyleemphasis{a11} (22.94\%), followed by \sphinxstyleemphasis{a08} (15.65\%), \sphinxstyleemphasis{a04} (15.07\%) and \sphinxstyleemphasis{a06} (13.4\%). Being \sphinxstyleemphasis{first} choice for \sphinxstyleemphasis{Party\_1} supporters and \sphinxstyleemphasis{fourth} choice for \sphinxstyleemphasis{Party\_2} supporters, this candidate \sphinxstyleemphasis{a06} is a natural candidate for clearly winning this election game (see \hyperref[\detokenize{tutorial:uninominalwinner}]{Listing \ref{\detokenize{tutorial:uninominalwinner}}}).
+In this example (see \hyperref[\detokenize{tutorial:linearvotingprofilewithpolls}]{Listing \ref{\detokenize{tutorial:linearvotingprofilewithpolls}}} Lines 18\sphinxhyphen{}), we obtain 460 Party\_1 supporters (46\%), 436 Party\_2 supporters (43.6\%) and 104 other voters (10.4\%). Favorite candidates of \sphinxstyleemphasis{Party\_1} supporters, with more than 10\%, appear to be \sphinxstyleemphasis{a06} (19.91\%), \sphinxstyleemphasis{a07} (14.27\%) and \sphinxstyleemphasis{a03} (10.02\%). Whereas for \sphinxstyleemphasis{Party\_2} supporters, favorite candidates appear to be \sphinxstyleemphasis{a11} (22.94\%), followed by \sphinxstyleemphasis{a08} (15.65\%), \sphinxstyleemphasis{a04} (15.07\%) and \sphinxstyleemphasis{a06} (13.4\%). Being \sphinxstyleemphasis{first} choice for \sphinxstyleemphasis{Party\_1} supporters and \sphinxstyleemphasis{fourth} choice for \sphinxstyleemphasis{Party\_2} supporters, this candidate \sphinxstyleemphasis{a06} is a natural candidate for clearly winning this election game (see \hyperref[\detokenize{tutorial:uninominalwinner}]{Listing \ref{\detokenize{tutorial:uninominalwinner}}}).
 \sphinxSetupCaptionForVerbatim{The uninominal election winner}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:uninominalwinner}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -1248,9 +1253,9 @@ Is it also a \sphinxstyleemphasis{Condorcet} winner ? To verify, we start by cre
 \PYG{g+go}{ Instance class      : CondorcetDigraph}
 \PYG{g+go}{ Instance name       : rel\PYGZus{}randLinearProfile}
 \PYG{g+go}{ Digraph Order       : 15}
-\PYG{g+go}{ Digraph Size        : 105}
+\PYG{g+go}{ Digraph Size        : 104}
 \PYG{g+go}{ Valuation domain    : [\PYGZhy{}1000.00;1000.00]}
-\PYG{g+go}{ Determinateness (\PYGZpc{}) : 69.29}
+\PYG{g+go}{ Determinateness (\PYGZpc{}) : 67.08}
 \PYG{g+go}{ Attributes          : [\PYGZsq{}name\PYGZsq{}, \PYGZsq{}actions\PYGZsq{}, \PYGZsq{}voters\PYGZsq{},}
 \PYG{g+go}{                        \PYGZsq{}ballot\PYGZsq{}, \PYGZsq{}valuationdomain\PYGZsq{},}
 \PYG{g+go}{                        \PYGZsq{}relation\PYGZsq{}, \PYGZsq{}order\PYGZsq{},}
@@ -1260,7 +1265,8 @@ Is it also a \sphinxstyleemphasis{Condorcet} winner ? To verify, we start by cre
 We may visualize the resulting pairwise majority margins by showing the HTML formated version of the \sphinxstyleemphasis{cdg} relation table in a browser view.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cdg}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cdg}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{n}{tableTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Pairwise majority margins}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{g+gp}{... }                          \PYG{n}{relationName}\PYG{o}{=}\PYG{n}{M}\PYG{p}{(}\PYG{n}{x}\PYG{o}{\PYGZgt{}}\PYG{n}{y}\PYG{p}{)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{)}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -1274,10 +1280,10 @@ In \hyperref[\detokenize{tutorial:majoritymargins}]{Fig.\@ \ref{\detokenize{tuto
 \begin{footnote}[15]\sphinxAtStartFootnote
 The concept of \sphinxstyleemphasis{Condorcet} winner \sphinxhyphen{}a generalization of absolute majority winners\sphinxhyphen{} proposed by \sphinxstyleemphasis{Condorcet} in 1785, is an early historical example of \sphinxstyleemphasis{initial} digraph kernel (see the tutorial {\hyperref[\detokenize{tutorial:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{On computing digraph kernels}}}}).
 %
-\end{footnote}), whereas the obvious \sphinxstyleemphasis{Condorcet} looser is here candidate \sphinxstyleemphasis{a02}, the candidate with the lowest support in both parties (see \hyperref[\detokenize{tutorial:linearvotingprofilewithpolls}]{Listing \ref{\detokenize{tutorial:linearvotingprofilewithpolls}}} Line 35).
+\end{footnote}), whereas the obvious \sphinxstyleemphasis{Condorcet} looser is here candidate \sphinxstyleemphasis{a02}, the candidate with the lowest support in both parties (see \hyperref[\detokenize{tutorial:linearvotingprofilewithpolls}]{Listing \ref{\detokenize{tutorial:linearvotingprofilewithpolls}}} Line 40).
 
-With the same \sphinxstyleemphasis{bipolar} \sphinxhyphen{}\sphinxstyleemphasis{best} and \sphinxstyleemphasis{worst} candidate\sphinxhyphen{} selection procedure, we may \sphinxstyleemphasis{weakly rank} the candidates (with possible ties) by iterating these \sphinxstyleemphasis{best} and \sphinxstyleemphasis{worst} choices among the remaining candidates (\sphinxcite{tutorial:bis-1999}).
-\sphinxSetupCaptionForVerbatim{Ranking by iterating choosing the best and worst remaining candidates}
+With the same \sphinxstyleemphasis{bipolar} \sphinxhyphen{}\sphinxstyleemphasis{first ranked} and \sphinxstyleemphasis{last ranked} candidate\sphinxhyphen{} selection procedure, we may \sphinxstyleemphasis{weakly rank} the candidates (with possible ties) by iterating these \sphinxstyleemphasis{first ranked} and \sphinxstyleemphasis{last ranked} choices among the remaining candidates (\sphinxcite{tutorial:bis-1999}).
+\sphinxSetupCaptionForVerbatim{Ranking by iterating choosing the \sphinxstyleemphasis{first} and \sphinxstyleemphasis{last} remaining candidates}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:rankingbychoosing}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} cdg.showRankingByChoosing()}
@@ -1286,56 +1292,49 @@ With the same \sphinxstyleemphasis{bipolar} \sphinxhyphen{}\sphinxstyleemphasis{
 \PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} cdg.computeRankingByChoosing()}
 \PYG{g+go}{  \PYGZob{}\PYGZsq{}CoDual\PYGZsq{}: False,}
 \PYG{g+go}{   \PYGZsq{}result\PYGZsq{}: [}
-\PYG{g+go}{   ( (Decimal(\PYGZsq{}528.2857142857142857142857143\PYGZsq{}), [\PYGZsq{}a06\PYGZsq{}]),}
-\PYG{g+go}{     (Decimal(\PYGZsq{}740.8571428571428571428571429\PYGZsq{}), [\PYGZsq{}a02\PYGZsq{}]) ),}
-\PYG{g+go}{   ( (Decimal(\PYGZsq{}400.6666666666666666666666667\PYGZsq{}), [\PYGZsq{}a11\PYGZsq{}]),}
-\PYG{g+go}{     (Decimal(\PYGZsq{}470.5\PYGZsq{}), [\PYGZsq{}a05\PYGZsq{}]) ),}
-\PYG{g+go}{   ( (Decimal(\PYGZsq{}276.8\PYGZsq{}), [\PYGZsq{}a08\PYGZsq{}]), (Decimal(\PYGZsq{}458.6\PYGZsq{}), [\PYGZsq{}a10\PYGZsq{}]) ),}
-\PYG{g+go}{   ( (Decimal(\PYGZsq{}286.0\PYGZsq{}), [\PYGZsq{}a07\PYGZsq{}]), (Decimal(\PYGZsq{}209.25\PYGZsq{}), [\PYGZsq{}a15\PYGZsq{}]) ),}
-\PYG{g+go}{   ( (Decimal(\PYGZsq{}291.3333333333333333333333333\PYGZsq{}), [\PYGZsq{}a03\PYGZsq{}]),}
-\PYG{g+go}{     (Decimal(\PYGZsq{}185.6666666666666666666666667\PYGZsq{}), [\PYGZsq{}a09\PYGZsq{}]) ),}
-\PYG{g+go}{   ( (Decimal(\PYGZsq{}146.5\PYGZsq{}), [\PYGZsq{}a01\PYGZsq{}]), (Decimal(\PYGZsq{}151.0\PYGZsq{}), [\PYGZsq{}a14\PYGZsq{}]) ),}
-\PYG{g+go}{   ( (Decimal(\PYGZsq{}\PYGZhy{}8.0\PYGZsq{}), [\PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}]),}
-\PYG{g+go}{     (Decimal(\PYGZsq{}8.0\PYGZsq{}), [\PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}]) ),}
-\PYG{g+go}{   ( (Decimal(\PYGZsq{}1000.0\PYGZsq{}), [\PYGZsq{}a13\PYGZsq{}]), (Decimal(\PYGZsq{}1000.0\PYGZsq{}), [\PYGZsq{}a13\PYGZsq{}]) )}
-\PYG{g+go}{  ]\PYGZcb{}}
+\PYG{g+go}{   ((Decimal(\PYGZsq{}475.2857142857142857142857143\PYGZsq{}), [\PYGZsq{}a06\PYGZsq{}]),}
+\PYG{g+go}{    (Decimal(\PYGZsq{}682.8571428571428571428571429\PYGZsq{}), [\PYGZsq{}a02\PYGZsq{}])),}
+\PYG{g+go}{   ((Decimal(\PYGZsq{}349.3333333333333333333333333\PYGZsq{}), [\PYGZsq{}a11\PYGZsq{}]),}
+\PYG{g+go}{    (Decimal(\PYGZsq{}415.8333333333333333333333333\PYGZsq{}), [\PYGZsq{}a05\PYGZsq{}])),}
+\PYG{g+go}{   ((Decimal(\PYGZsq{}278.4444444444444444444444444\PYGZsq{}), [\PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}]),}
+\PYG{g+go}{    (Decimal(\PYGZsq{}353.4\PYGZsq{}), [\PYGZsq{}a10\PYGZsq{}])),}
+\PYG{g+go}{   ((Decimal(\PYGZsq{}265.4285714285714285714285714\PYGZsq{}), [\PYGZsq{}a03\PYGZsq{}]),}
+\PYG{g+go}{    (Decimal(\PYGZsq{}170.5714285714285714285714286\PYGZsq{}), [\PYGZsq{}a09\PYGZsq{}])),}
+\PYG{g+go}{   ((Decimal(\PYGZsq{}145.2\PYGZsq{}), [\PYGZsq{}a01\PYGZsq{}]),}
+\PYG{g+go}{    (Decimal(\PYGZsq{}130.0\PYGZsq{}), [\PYGZsq{}a15\PYGZsq{}])),}
+\PYG{g+go}{   ((Decimal(\PYGZsq{}104.0\PYGZsq{}), [\PYGZsq{}a13\PYGZsq{}]),}
+\PYG{g+go}{    (Decimal(\PYGZsq{}104.6666666666666666666666667\PYGZsq{}), [\PYGZsq{}a14\PYGZsq{}])),}
+\PYG{g+go}{   ((Decimal(\PYGZsq{}16.0\PYGZsq{}), [\PYGZsq{}a04\PYGZsq{}]),}
+\PYG{g+go}{    (Decimal(\PYGZsq{}16.0\PYGZsq{}), [\PYGZsq{}a12\PYGZsq{}]))]\PYGZcb{}}
 \PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} cdg.showRankingByChoosing()}
 \PYG{g+go}{  Ranking by Choosing and Rejecting}
-\PYG{g+go}{  1st Best Choice [\PYGZsq{}a06\PYGZsq{}] (528.29)}
-\PYG{g+go}{    2nd Best Choice [\PYGZsq{}a11\PYGZsq{}] (400.67)}
-\PYG{g+go}{      3rd Best Choice [\PYGZsq{}a08\PYGZsq{}] (276.80)}
-\PYG{g+go}{        4th Best Choice [\PYGZsq{}a07\PYGZsq{}] (286.00)}
-\PYG{g+go}{          5th Best Choice [\PYGZsq{}a03\PYGZsq{}] (291.33)}
-\PYG{g+go}{            6th Best Choice [\PYGZsq{}a01\PYGZsq{}] (146.50)}
-\PYG{g+go}{              7th Best Choice [\PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}] (\PYGZhy{}8.00)}
-\PYG{g+go}{                Ambiguous Choice [\PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}]}
-\PYG{g+go}{                  8th Best Choice [\PYGZsq{}a13\PYGZsq{}] (1000.00)}
-\PYG{g+go}{                  8th Worst Choice [\PYGZsq{}a13\PYGZsq{}] (1000.00)}
-\PYG{g+go}{                Ambiguous Choice [\PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}]}
-\PYG{g+go}{              7th Worst Choice [\PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}] (8.00)}
-\PYG{g+go}{            6th Worst Choice [\PYGZsq{}a14\PYGZsq{}] (151.00)}
-\PYG{g+go}{          5th Worst Choice [\PYGZsq{}a09\PYGZsq{}] (185.67)}
-\PYG{g+go}{        4th Worst Choice [\PYGZsq{}a15\PYGZsq{}] (209.25)}
-\PYG{g+go}{      3rd Worst Choice [\PYGZsq{}a10\PYGZsq{}] (458.60)}
-\PYG{g+go}{    2nd Worst Choice [\PYGZsq{}a05\PYGZsq{}] (470.50)}
-\PYG{g+go}{  1st Worst Choice [\PYGZsq{}a02\PYGZsq{}] (740.86)}
-\PYG{g+go}{  Ordinal bipolar correlation with Condorcet digraph:}
-\PYG{g+go}{   tau = +0.990}
+\PYG{g+go}{   1st first ranked [\PYGZsq{}a06\PYGZsq{}] (475.29)}
+\PYG{g+go}{     2nd first ranked [\PYGZsq{}a11\PYGZsq{}] (349.33)}
+\PYG{g+go}{       3rd first ranked [\PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}] (278.44)}
+\PYG{g+go}{         4th first ranked [\PYGZsq{}a03\PYGZsq{}] (265.43)}
+\PYG{g+go}{           5th first ranked [\PYGZsq{}a01\PYGZsq{}] (145.20)}
+\PYG{g+go}{             6th first ranked [\PYGZsq{}a13\PYGZsq{}] (104.00)}
+\PYG{g+go}{               7th first ranked [\PYGZsq{}a04\PYGZsq{}] (16.00)}
+\PYG{g+go}{               7th last ranked [\PYGZsq{}a12\PYGZsq{}] (16.00)}
+\PYG{g+go}{             6th last ranked [\PYGZsq{}a14\PYGZsq{}] (104.67)}
+\PYG{g+go}{           5th last ranked [\PYGZsq{}a15\PYGZsq{}] (130.00)}
+\PYG{g+go}{         4th last ranked [\PYGZsq{}a09\PYGZsq{}] (170.57)}
+\PYG{g+go}{       3rd last ranked [\PYGZsq{}a10\PYGZsq{}] (353.40)}
+\PYG{g+go}{     2nd last ranked [\PYGZsq{}a05\PYGZsq{}] (415.83)}
+\PYG{g+go}{   1st last ranked [\PYGZsq{}a02\PYGZsq{}] (682.86)}
 \end{sphinxVerbatim}
 
-Before showing the \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} result, we have to compute the iterated bipolar selection procedure (see \hyperref[\detokenize{tutorial:rankingbychoosing}]{Listing \ref{\detokenize{tutorial:rankingbychoosing}}} Line 2). The first selection concerns \sphinxstyleemphasis{a06} (best) and \sphinxstyleemphasis{a02} (worst), followed by \sphinxstyleemphasis{a11} (best) opposed to \sphinxstyleemphasis{a05} (worst), and so on, until there remains at iteration step 8 a single a final candidate \sphinxstyleemphasis{a08}. The bracketed numbers indicate the majority margin with which the \sphinxstyleemphasis{i}\sphinxhyphen{}th \sphinxstyleemphasis{best} choice is beating the corresponding \sphinxstyleemphasis{i}\sphinxhyphen{}th \sphinxstyleemphasis{worst} choice amongst the remaining candidates at step \sphinxstyleemphasis{i}. This \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} result here is highly correlated in the ordinal \sphinxstyleemphasis{Kendall} sense (+0.99) with the underlying majority margins (see \hyperref[\detokenize{tutorial:rankingbychoosing}]{Listing \ref{\detokenize{tutorial:rankingbychoosing}}} Line 40\sphinxhyphen{}41).
+Before showing the \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} result, we have to compute the iterated bipolar selection procedure (see \hyperref[\detokenize{tutorial:rankingbychoosing}]{Listing \ref{\detokenize{tutorial:rankingbychoosing}}} Line 2). The first selection concerns \sphinxstyleemphasis{a06} (first) and \sphinxstyleemphasis{a02} (last), followed by \sphinxstyleemphasis{a11} (first) opposed to \sphinxstyleemphasis{a05} (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely \sphinxstyleemphasis{{[}a04, a12{]}} (see Lines 29\sphinxhyphen{}30). The bracketed numbers, following the reiterated \sphinxstyleemphasis{first ranked} and \sphinxstyleemphasis{last ranked} candidates, indicate the average majority margin with which the \sphinxstyleemphasis{i}\sphinxhyphen{}th \sphinxstyleemphasis{first ranked} candidate(s), respectively the \sphinxstyleemphasis{i}\sphinxhyphen{}th \sphinxstyleemphasis{last ranked} candidate, is beating, resp. is beaten by, the remaining candidates at step \sphinxstyleemphasis{i}.
 
-Notice furthermore the selection operated at iteration step 7 (see \hyperref[\detokenize{tutorial:rankingbychoosing}]{Listing \ref{\detokenize{tutorial:rankingbychoosing}}} Lines 28 and 33), namely the pair \sphinxstyleemphasis{{[}a04, a12{]}}. Both candidates represent indeed at the same time a \sphinxstyleemphasis{best}, as well as, a \sphinxstyleemphasis{worst} choice. Their position in the eventual ranking \sphinxhyphen{}before or after candidate \sphinxstyleemphasis{a13}\sphinxhyphen{}  appears to be therefore \sphinxstyleemphasis{ambiguous} (see \hyperref[\detokenize{tutorial:rankingbychoosing}]{Listing \ref{\detokenize{tutorial:rankingbychoosing}}} Lines 29 and 32).
+Notice furthermore the first ranked candidates at iteration step 3 (see \hyperref[\detokenize{tutorial:rankingbychoosing}]{Listing \ref{\detokenize{tutorial:rankingbychoosing}}} Line 25), namely the pair \sphinxstyleemphasis{{[}a07, a08{]}}. Both candidates represent indeed conjointly the \sphinxstyleemphasis{first ranked} choice. We obtain here hence a \sphinxstyleemphasis{weak ranking}, i.e. a ranking with a tie.
 
-Finally, being the only remaining candidate in step 8, candidate \sphinxstyleemphasis{a13} trivially represents for all 1000 voters the only possible unanimous \sphinxstyleemphasis{best}, as well as \sphinxstyleemphasis{worst} choice (see \hyperref[\detokenize{tutorial:rankingbychoosing}]{Listing \ref{\detokenize{tutorial:rankingbychoosing}}} Lines 30\sphinxhyphen{}31).
+Let us mention that the \sphinxstyleemphasis{instant\sphinxhyphen{}run\sphinxhyphen{}off} procedure, we used before (see \hyperref[\detokenize{tutorial:uninominalwinner}]{Listing \ref{\detokenize{tutorial:uninominalwinner}}} Line 3), when operated with a \sphinxstyleemphasis{Comments=True} parameter setting, will deliver a more or less similar \sphinxstyleemphasis{reversed} linear \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}rejecting} result, namely {[}\sphinxstyleemphasis{a02}, \sphinxstyleemphasis{a10}, \sphinxstyleemphasis{a14}, \sphinxstyleemphasis{a05}, \sphinxstyleemphasis{a09}, \sphinxstyleemphasis{a13}, \sphinxstyleemphasis{a12}, \sphinxstyleemphasis{a15}, \sphinxstyleemphasis{a04}, \sphinxstyleemphasis{a01}, \sphinxstyleemphasis{a08}, \sphinxstyleemphasis{a03}, \sphinxstyleemphasis{a07}, \sphinxstyleemphasis{a11}, \sphinxstyleemphasis{a06}{]}, ordered from the \sphinxstyleemphasis{last} to the \sphinxstyleemphasis{first} choice.
 
-It is worthwhile noticing that the \sphinxstyleemphasis{instant\sphinxhyphen{}run\sphinxhyphen{}off} procedure (see \hyperref[\detokenize{tutorial:uninominalwinner}]{Listing \ref{\detokenize{tutorial:uninominalwinner}}}), with \sphinxstyleemphasis{Comments=True} parameter setting, will deliver a very similar \sphinxstyleemphasis{reversed} linear \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}rejecting} result, namely {[}\sphinxstyleemphasis{a02}, \sphinxstyleemphasis{a05}, \sphinxstyleemphasis{a10}, \sphinxstyleemphasis{a09}, \sphinxstyleemphasis{a14}, \sphinxstyleemphasis{a12}, \sphinxstyleemphasis{a15}, \sphinxstyleemphasis{a13}, \sphinxstyleemphasis{a01}, \sphinxstyleemphasis{a04}, \sphinxstyleemphasis{a07}, \sphinxstyleemphasis{a03}, \sphinxstyleemphasis{a08}, \sphinxstyleemphasis{a11}, \sphinxstyleemphasis{a06}{]}, ordered from the \sphinxstyleemphasis{worst} to the \sphinxstyleemphasis{best} choice.
-
-Remarkable about these very similar \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} or \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}rejecting} results is the fact that the random voting behaviour, simulated here with the help of two discrete random variables (%
+Remarkable about both these \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} or \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}rejecting} results is the fact that the random voting behaviour, simulated here with the help of two discrete random variables (%
 \begin{footnote}[16]\sphinxAtStartFootnote
 Discrete random variables with a given empirical probability law (here the polls) are provided in the \sphinxcode{\sphinxupquote{randomNumbers}} module by the \sphinxcode{\sphinxupquote{randomNumbers.DiscreteRandomVariable}} class.
 %
-\end{footnote}), defined respectively by the two party polls, is rendering a ranking that is more or less in accordance the simulated balance of the polls: \sphinxhyphen{}\sphinxstyleemphasis{Party\_1} supporters : 471;  \sphinxstyleemphasis{Party\_2} supporters: 529 (see \hyperref[\detokenize{tutorial:rankingbychoosing}]{Listing \ref{\detokenize{tutorial:rankingbychoosing}}} Lines 19\sphinxhyphen{}35 third column). Despite a random voting behaviour per voter, the given polls apparently show a \sphinxstyleemphasis{very strong incidence} on the eventual election result. In order to avoid any manipulation of the election outcome, public media are therefore in some countries not allowed to publish polls during the last weeks before a general election.
+\end{footnote}), defined respectively by the two party polls, is rendering a ranking that is more or less in accordance with the simulated balance of the polls: \sphinxhyphen{}\sphinxstyleemphasis{Party\_1} supporters : 460;  \sphinxstyleemphasis{Party\_2} supporters: 436 (see \hyperref[\detokenize{tutorial:rankingbychoosing}]{Listing \ref{\detokenize{tutorial:rankingbychoosing}}} Lines 26\sphinxhyphen{}40 third column). Despite a random voting behaviour per voter, the given polls apparently show a \sphinxstyleemphasis{very strong incidence} on the eventual election result. In order to avoid any manipulation of the election outcome, public media are therefore in some countries not allowed to publish polls during the last weeks before a general election.
 
 \begin{sphinxadmonition}{note}{Note:}
 Mind that the specific \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} procedure, we use here on the \sphinxstyleemphasis{Condorcet} digraph, operates the selection procedure by extracting at each step \sphinxstyleemphasis{initial} and \sphinxstyleemphasis{terminal} kernels, i.e. NP\sphinxhyphen{}hard operational problems (see tutorial {\hyperref[\detokenize{tutorial:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{On computing digraph kernels}}}} and \sphinxcite{tutorial:bis-1999}); A technique that does not allow in general to tackle voting profiles with much more than 20 candidates. The tutorial on {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}} provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.

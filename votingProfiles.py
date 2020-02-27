@@ -993,12 +993,13 @@ class RandomLinearVotingProfile(LinearVotingProfile):
     A specialized class for generating random linwear voting profiles.
 
     *Parameters*   
-        * When *WithPolls* is True, each voter's linear ballot is randomly oriented
+        * When *WithPolls* is True, each party supporting voter's linear ballot is randomly oriented
           by one of two random exponential poll results. The corresponding polls are stored
           in self.poll1, respectively self.poll2.
-        * The *bipartisan* proportion randomly distributes the two polls over the
-          set of voters. If put to 0.0 or 1.0, only self.poll2, resp. self.poll1, will orient
-          all the voters.
+        * The *partyRepartition* sets the theoretical distribution of the two polls over the
+          set of voters. If set to 0.0 or 1.0, only self.poll2, resp. self.poll1, will orient
+          the respective party supporters.
+        * The *other* paraemter sets the theoretical proportion of non party supporters.
         * The *votersWeights* parameter may be a list of positive integers in order to
           deterministically attribute weights to the voters.
           Is ignored when *RandomWeights* is True.
@@ -1009,7 +1010,8 @@ class RandomLinearVotingProfile(LinearVotingProfile):
     def __init__(self,numberOfVoters=10,
                  numberOfCandidates=5,
                  WithPolls=False,
-                 bipartisan=0.5,
+                 partyRepartition=0.5,
+                 other=0.05,
                  votersWeights=None,
                  RandomWeights=False,seed=None):
         """
@@ -1051,8 +1053,9 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         for v in self.voters:
             self.sumWeights += self.voters[v]['weight']
         if WithPolls:
-            self.linearBallot = self.generateRandomLinearBallotWithPoll(bipartisan,
-                                                                        seed)
+            self.linearBallot =\
+                self.generateRandomLinearBallotWithPoll(partyRepartition=partyRepartition,
+                                                        other=other,seed=seed)
         else:
             self.linearBallot = self.generateRandomLinearBallot(seed)
         self.ballot = self.computeBallot()
@@ -1074,7 +1077,7 @@ class RandomLinearVotingProfile(LinearVotingProfile):
             linearBallot[v] = candidatesList.copy()
         return linearBallot
 
-    def generateRandomLinearBallotWithPoll(self,bipartisan,seed,Debug=False):
+    def generateRandomLinearBallotWithPoll(self,partyRepartition=0.5,other=0.05,seed=None,Debug=False):
         """
         Renders a random linear ballot in accordance with the given polls:
         self.poll1 and self.poll2.
@@ -1127,49 +1130,58 @@ class RandomLinearVotingProfile(LinearVotingProfile):
 
         # storing polls    
         self.poll1 = poll1
-        self.poll2 = poll2            
-        self.bipartisan = bipartisan
+        self.poll2 = poll2
+        self.other = other
+        self.partyRepartition = partyRepartition
         if Debug:
-            print(poll1,poll2)
+            print(poll1,poll2,other,partyRepartition)
 
         # generating random linear ballots
         linearBallot = {}
         j = 1
         for v in voters:
             # each voter is attached to one of the polls
-            if bipartisan < random.random():
-                pollv = poll1
-                voters[v]['party'] = 1
-            else:
-                pollv = poll2
-                voters[v]['party'] = 2
-            # generating a random linear ranking    
-            shuffledCandidatesList = []
-            for i in range(nc-1):
-                NotShuffled = True
-                currPoll = pollv.copy()
-                rdv = DiscreteRandomVariable(currPoll,seed=j)
-                while NotShuffled:
-                    xc = rdv.random()
-                    if xc not in shuffledCandidatesList:
-                        NotShuffled = False
+            u = random.random()
+            if u < other: # random voting
+                otherCandidatesList = list(candidatesList)
+                random.shuffle(otherCandidatesList)
+                voters[v]['party'] = 0
+                linearBallot[v] = otherCandidatesList
+            else:  # poll driven random
+                
+                if partyRepartition < random.random():
+                    pollv = poll1
+                    voters[v]['party'] = 1
+                else:
+                    pollv = poll2
+                    voters[v]['party'] = 2
+                # generating a random linear ranking    
+                shuffledCandidatesList = []
+                for i in range(nc-1):
+                    NotShuffled = True
+                    currPoll = pollv.copy()
+                    rdv = DiscreteRandomVariable(currPoll,seed=j)
+                    while NotShuffled:
+                        xc = rdv.random()
+                        if xc not in shuffledCandidatesList:
+                            NotShuffled = False
+                    shuffledCandidatesList.append(xc)
+                    currPoll.pop(xc)
+                    if Debug:
+                        print(i,shuffledCandidatesList)
+                            
+                shc = set(shuffledCandidatesList)
+                sc = set(candidatesList)
+                xc = (sc-shc).pop()
                 shuffledCandidatesList.append(xc)
-                currPoll.pop(xc)
                 if Debug:
-                    print(i,shuffledCandidatesList)
-                        
-            shc = set(shuffledCandidatesList)
-            sc = set(candidatesList)
-            xc = (sc-shc).pop()
-            shuffledCandidatesList.append(xc)
-            if Debug:
-                print('==>>', v,shuffledCandidatesList)           
-            j += 1
-            linearBallot[v] = shuffledCandidatesList
+                    print('==>>', v,shuffledCandidatesList)           
+                j += 1
+                linearBallot[v] = shuffledCandidatesList
             
         return linearBallot
 
-    def showRandomPolls(self,Debug=True):
+    def showRandomPolls(self,Debug=False):
         """
         Shows the random polls, the case given.
         """
@@ -1183,12 +1195,15 @@ class RandomLinearVotingProfile(LinearVotingProfile):
             nv = len(voters)
             supportersParty1 = [x for x in voters if voters[x]['party'] == 1]
             supportersParty2 = [x for x in voters if voters[x]['party'] == 2]
+            otherSupporters = [x for x in voters if voters[x]['party'] == 0]
+            n0 = len(otherSupporters)
+            p0 = float(n0)/float(nv)
             n1 = len(supportersParty1)
             p1 = float(n1)/float(nv)
             n2 = len(supportersParty2)
             p2 = float(n2)/float(nv)
             if Debug:
-                print(n1,p1,n2,p2)
+                print(n1,p1,n2,p2,n0,p0)
             poll1.sort(reverse=True)
             poll2 = [(self.poll2[x],x) for x in self.poll2]
             poll2.sort(reverse=True)
@@ -1198,12 +1213,17 @@ class RandomLinearVotingProfile(LinearVotingProfile):
                       p2 * self.poll2[x]
                 poll.append( (res,x) )
             poll.sort(reverse=True)
+            # print polls
+            print('Random repartition of voters')
+            print(' Party_1 supporters : %d (%05.2f%%)' % (n1,p1*100))
+            print(' Party_2 supporters : %d (%05.2f%%)' % (n2,p2*100))
+            print(' Other voters       : %d (%05.2f%%)' % (n0,p0*100))
             print('*---------------- random polls ---------------')
-            print(' Party_1(%05.2f) | Party_2(%05.2f)| result   '%\
-                   (p1, p2) )
+            print(' Party_1(%04.1f%%) | Party_2(%04.1f%%)|   expected  '%\
+                   (p1*100, p2*100) )
             print('-----------------------------------------------')
             for i in range(nc):
-                print('  %s : %05.2f%%  | %s : %05.2f%%  | %s : %05.2f%%' %\
+                print("  %s : %05.2f%%  |  %s : %05.2f%%  |  %s : %05.2f%%" %\
                   (poll1[i][1],poll1[i][0]*100.0,
                    poll2[i][1],poll2[i][0]*100.0,
                     poll[i][1], poll[i][0]*100.0) )
@@ -1650,6 +1670,75 @@ class CondorcetDigraph(Digraph):
             print(rank)
         return rank
 
+    def showRankingByChoosing(self,rankingByChoosing=None):
+        """
+        A specialized show method for self.rankinByChoosing result from CondorcetDigraphs.
+
+        The bracketed numbers  following the reiterated *first* and *last* choices,
+        indicate the average majority margin with which the *i*-th *first* choice,
+        respectively the *i*-th *last* choice, is beating, resp. is beaten by,
+        the remaining candidates at step *i*.
+
+        .. warning::
+
+           The self.computeRankingByChoosing(CoDual=False/True) method instantiating
+           the self.rankingByChoosing slot is pre-required !
+             
+        """
+        if rankingByChoosing == None:
+            try:
+                rankingByChoosing = self.rankingByChoosing['result']
+            except:
+                print('Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !')
+            #rankingByChoosing = self.computeRankingByChoosing(Debug,CoDual)
+                return
+        else:
+            rankingByChoosing = rankingByChoosing['result']
+        print('Ranking by Choosing and Rejecting')
+        print('---------------------------------')
+        space = ''
+        n = len(rankingByChoosing)
+        for i in range(n):
+            if i+1 == 1:
+                nstr='st'
+            elif i+1 == 2:
+                nstr='nd'
+            elif i+1 == 3:
+                nstr='rd'
+            else:
+                nstr='th'
+            ibch = set(rankingByChoosing[i][0][1])
+            iwch = set(rankingByChoosing[i][1][1])
+            iach = iwch & ibch
+            #print 'ibch, iwch, iach', i, ibch,iwch,iach
+            ch = list(ibch)
+            ch.sort()
+            print(' %s%s%s first ranked: %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0]))
+            if len(iach) > 0 and i < n-1:
+                print('  %s Ambiguous ranking %s' % (space,list(iach)))
+                space += '  '
+            space += '  '
+        for i in range(n):
+            if n-i == 1:
+                nstr='st'
+            elif n-i == 2:
+                nstr='nd'
+            elif n-i == 3:
+                nstr='rd'
+            else:
+                nstr='th'
+            space = space[:-2]
+            ibch = set(rankingByChoosing[n-i-1][0][1])
+            iwch = set(rankingByChoosing[n-i-1][1][1])
+            iach = iwch & ibch
+            #print 'ibch, iwch, iach', i, ibch,iwch,iach
+            ch = list(iwch)
+            ch.sort()
+            if len(iach) > 0 and i > 0:
+                space = space[:-2]
+                print('  %s Ambiguous ranking %s' % (space,list(iach)))
+            print(' %s%s%s last ranked: %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
+
 #----------test voting Digraph class ----------------
 if __name__ == "__main__":
     from transitiveDigraphs import *
@@ -1686,7 +1775,8 @@ if __name__ == "__main__":
     lvp = RandomLinearVotingProfile(numberOfCandidates=15,
                             numberOfVoters=1000,
                             WithPolls=True,
-                            bipartisan=0.5,
+                            partyRepartition=0.5,
+                            other=0.1,
                             #seed=0.20990710811162194) # 1 circuit
                             #seed=0.8077233289616987)  # 2 circuits !
                             seed = None)
@@ -1727,7 +1817,7 @@ if __name__ == "__main__":
         corr = c.computeRankingCorrelation(wc.copelandRanking)
         wc.showCorrelation(corr)
         wn = WeakNetFlowsOrder(c)
-        print('Weak NetFloes ranking')
+        print('Weak NetFlows ranking')
         wn.showRankingByChoosing()
         corr = c.computeRankingCorrelation(wn.netFlowsRanking)
         wn.showCorrelation(corr)

@@ -1051,7 +1051,7 @@ On generating random linear voting profiles
 
 By default, the :py:class:`votingProfiles.RandomLinearVotingProfile` class generates random linear voting profiles where every candidates has the same uniform probabilities to be ranked at a certain position by all the voters. The random linear ballots are indeed generating for each voter via a uniform shuffling of the list of candidates.
 
-In reality, political election data appear quite different. There will usually be different favorite and marginal candidates for each political party. To simulate these aspects into our random generator, we are using two random exponentially distributed polls of the candidates and consider a bipartisan political landscape with a certain random balance (default theoretical proportion = 0.50) between the two sets of potential party supporters (see :py:class:`votingProfiles.LinearVotingProfile` class).
+In reality, political election data appear quite different. There will usually be different favorite and marginal candidates for each political party. To simulate these aspects into our random generator, we are using two random exponentially distributed polls of the candidates and consider a bipartisan political landscape with a certain random balance (default theoretical party repartition = 0.50) between the two sets of potential party supporters (see :py:class:`votingProfiles.LinearVotingProfile` class). A certain theoretical proportion (default = 0.1) will not support any party.
 
 Let us generate such a linear voting profile for an election with 1000 voters and 15 candidates.
 
@@ -1064,7 +1064,8 @@ Let us generate such a linear voting profile for an election with 1000 voters an
    >>> lvp = RandomLinearVotingProfile(numberOfCandidates=15,
    ...                         numberOfVoters=1000,
    ...                         WithPolls=True,
-   ...                         bipartisan=0.5,
+   ...                         partyRepartition=0.5,
+   ...                         other=0.1,
    ...                         seed=0.9189670954954139)
    >>> lvp
     *------- VotingProfile instance description ------*
@@ -1077,26 +1078,30 @@ Let us generate such a linear voting profile for an election with 1000 voters an
 			'sumWeights', 'poll1', 'poll2',
 			'bipartisan', 'linearBallot', 'ballot']
    >>> lvp.showRandomPolls()
-    *---------------- random polls -----------------
-     Party_1 (0.47) | Party_2 (0.53) |    result   
-    ------------------------------------------------
-      a06 : 19.91%  |  a11 : 22.94%  |  a06 : 16.47%
-      a07 : 14.27%  |  a08 : 15.65%  |  a11 : 15.29%
-      a03 : 10.02%  |  a04 : 15.07%  |  a08 : 10.52%
-      a13 : 08.39%  |  a06 : 13.40%  |  a07 : 09.42%
-      a15 : 08.39%  |  a03 : 06.49%  |  a04 : 08.53%
-      a11 : 06.70%  |  a09 : 05.63%  |  a03 : 08.15%
-      a01 : 06.17%  |  a07 : 05.10%  |  a01 : 05.60%
-      a12 : 04.81%  |  a01 : 05.09%  |  a13 : 05.39%
-      a08 : 04.75%  |  a12 : 03.43%  |  a15 : 04.40%
-      a10 : 04.66%  |  a13 : 02.71%  |  a12 : 04.08%
-      a14 : 04.42%  |  a14 : 02.70%  |  a09 : 03.64%
-      a05 : 04.01%  |  a15 : 00.86%  |  a14 : 03.51%
-      a09 : 01.40%  |  a10 : 00.44%  |  a10 : 02.43%
-      a04 : 01.18%  |  a05 : 00.29%  |  a05 : 02.04%
-      a02 : 00.90%  |  a02 : 00.21%  |  a02 : 00.53%
+    Random repartition of voters
+     Party_1 supporters : 460 (46.0%)
+     Party_2 supporters : 436 (43.6%)
+     Other voters       : 104 (10.4%)
+    *---------------- random polls ---------------
+     Party_1(46.0%) | Party_2(43.6%)|  expected  
+    -----------------------------------------------
+      a06 : 19.91%  | a11 : 22.94%  | a06 : 15.00%
+      a07 : 14.27%  | a08 : 15.65%  | a11 : 13.08%
+      a03 : 10.02%  | a04 : 15.07%  | a08 : 09.01%
+      a13 : 08.39%  | a06 : 13.40%  | a07 : 08.79%
+      a15 : 08.39%  | a03 : 06.49%  | a03 : 07.44%
+      a11 : 06.70%  | a09 : 05.63%  | a04 : 07.11%
+      a01 : 06.17%  | a07 : 05.10%  | a01 : 05.06%
+      a12 : 04.81%  | a01 : 05.09%  | a13 : 05.04%
+      a08 : 04.75%  | a12 : 03.43%  | a15 : 04.23%
+      a10 : 04.66%  | a13 : 02.71%  | a12 : 03.71%
+      a14 : 04.42%  | a14 : 02.70%  | a14 : 03.21%
+      a05 : 04.01%  | a15 : 00.86%  | a09 : 03.10%
+      a09 : 01.40%  | a10 : 00.44%  | a10 : 02.34%
+      a04 : 01.18%  | a05 : 00.29%  | a05 : 01.97%
+      a02 : 00.90%  | a02 : 00.21%  | a02 : 00.51%
 
-In this example (see :numref:`linearVotingProfileWithPolls`), favorite candidates of *Party_1* supporters, with more than 10%, appear to be *a06* (19.91%), *a07* (14.27%) and *a03* (10.02%). Whereas for *Party_2* supporters, favorite candidates appear to be *a11* (22.94%), followed by *a08* (15.65%), *a04* (15.07%) and *a06* (13.4%). Being *first* choice for *Party_1* supporters and *fourth* choice for *Party_2* supporters, this candidate *a06* is a natural candidate for clearly winning this election game (see :numref:`uninominalWinner`).
+In this example (see :numref:`linearVotingProfileWithPolls` Lines 18-), we obtain 460 Party_1 supporters (46%), 436 Party_2 supporters (43.6%) and 104 other voters (10.4%). Favorite candidates of *Party_1* supporters, with more than 10%, appear to be *a06* (19.91%), *a07* (14.27%) and *a03* (10.02%). Whereas for *Party_2* supporters, favorite candidates appear to be *a11* (22.94%), followed by *a08* (15.65%), *a04* (15.07%) and *a06* (13.4%). Being *first* choice for *Party_1* supporters and *fourth* choice for *Party_2* supporters, this candidate *a06* is a natural candidate for clearly winning this election game (see :numref:`uninominalWinner`).
 
 .. code-block:: pycon
    :name: uninominalWinner
@@ -1123,9 +1128,9 @@ Is it also a *Condorcet* winner ? To verify, we start by creating the correspond
     Instance class      : CondorcetDigraph
     Instance name       : rel_randLinearProfile
     Digraph Order       : 15
-    Digraph Size        : 105
+    Digraph Size        : 104
     Valuation domain    : [-1000.00;1000.00]
-    Determinateness (%) : 69.29
+    Determinateness (%) : 67.08
     Attributes          : ['name', 'actions', 'voters',
                            'ballot', 'valuationdomain',
 			   'relation', 'order',
@@ -1133,7 +1138,8 @@ Is it also a *Condorcet* winner ? To verify, we start by creating the correspond
 
 We may visualize the resulting pairwise majority margins by showing the HTML formated version of the *cdg* relation table in a browser view.
 
-   >>> cdg.showHTMLRelationTable()
+   >>> cdg.showHTMLRelationTable(tableTitle='Pairwise majority margins',
+   ...                           relationName=M(x>y)')
 
 .. figure:: majorityMargins.png
    :width: 450 px
@@ -1142,13 +1148,13 @@ We may visualize the resulting pairwise majority margins by showing the HTML for
 
    Browsing the majority margins of a *Condorcet* digraph
 
-In :numref:`majorityMargins`, *light green* cells contain the positive majority margins, whereas *light red* cells contain the negative majority margins. A complete *light green* row reveals hence a *Condorcet* **winner**, whereas a complete *light green* column reveals a *Condorcet* **looser**. We recover again candidate *a06* as *Condorcet* winner ([15]_), whereas the obvious *Condorcet* looser is here candidate *a02*, the candidate with the lowest support in both parties (see :numref:`linearVotingProfileWithPolls` Line 35).
+In :numref:`majorityMargins`, *light green* cells contain the positive majority margins, whereas *light red* cells contain the negative majority margins. A complete *light green* row reveals hence a *Condorcet* **winner**, whereas a complete *light green* column reveals a *Condorcet* **looser**. We recover again candidate *a06* as *Condorcet* winner ([15]_), whereas the obvious *Condorcet* looser is here candidate *a02*, the candidate with the lowest support in both parties (see :numref:`linearVotingProfileWithPolls` Line 40).
 
-With the same *bipolar* -*best* and *worst* candidate- selection procedure, we may *weakly rank* the candidates (with possible ties) by iterating these *best* and *worst* choices among the remaining candidates ([BIS-1999]_).
+With the same *bipolar* -*first ranked* and *last ranked* candidate- selection procedure, we may *weakly rank* the candidates (with possible ties) by iterating these *first ranked* and *last ranked* choices among the remaining candidates ([BIS-1999]_).
 
 .. code-block:: pycon
    :name: rankingByChoosing
-   :caption: Ranking by iterating choosing the best and worst remaining candidates  
+   :caption: Ranking by iterating choosing the *first* and *last* remaining candidates  
    :linenos:
 
     >>> cdg.showRankingByChoosing()
@@ -1157,51 +1163,44 @@ With the same *bipolar* -*best* and *worst* candidate- selection procedure, we m
     >>> cdg.computeRankingByChoosing()
      {'CoDual': False,
       'result': [
-      ( (Decimal('528.2857142857142857142857143'), ['a06']),
-        (Decimal('740.8571428571428571428571429'), ['a02']) ),
-      ( (Decimal('400.6666666666666666666666667'), ['a11']),
-        (Decimal('470.5'), ['a05']) ),
-      ( (Decimal('276.8'), ['a08']), (Decimal('458.6'), ['a10']) ),
-      ( (Decimal('286.0'), ['a07']), (Decimal('209.25'), ['a15']) ),
-      ( (Decimal('291.3333333333333333333333333'), ['a03']),
-        (Decimal('185.6666666666666666666666667'), ['a09']) ),
-      ( (Decimal('146.5'), ['a01']), (Decimal('151.0'), ['a14']) ),
-      ( (Decimal('-8.0'), ['a04', 'a12']),
-        (Decimal('8.0'), ['a04', 'a12']) ),
-      ( (Decimal('1000.0'), ['a13']), (Decimal('1000.0'), ['a13']) )
-     ]}
+      ((Decimal('475.2857142857142857142857143'), ['a06']),
+       (Decimal('682.8571428571428571428571429'), ['a02'])),
+      ((Decimal('349.3333333333333333333333333'), ['a11']),
+       (Decimal('415.8333333333333333333333333'), ['a05'])),
+      ((Decimal('278.4444444444444444444444444'), ['a07', 'a08']),
+       (Decimal('353.4'), ['a10'])),
+      ((Decimal('265.4285714285714285714285714'), ['a03']),
+       (Decimal('170.5714285714285714285714286'), ['a09'])),
+      ((Decimal('145.2'), ['a01']),
+       (Decimal('130.0'), ['a15'])),
+      ((Decimal('104.0'), ['a13']),
+       (Decimal('104.6666666666666666666666667'), ['a14'])),
+      ((Decimal('16.0'), ['a04']),
+       (Decimal('16.0'), ['a12']))]} 
     >>> cdg.showRankingByChoosing()
      Ranking by Choosing and Rejecting
-     1st Best Choice ['a06'] (528.29)
-       2nd Best Choice ['a11'] (400.67)
-	 3rd Best Choice ['a08'] (276.80)
-	   4th Best Choice ['a07'] (286.00)
-	     5th Best Choice ['a03'] (291.33)
-	       6th Best Choice ['a01'] (146.50)
-		 7th Best Choice ['a04', 'a12'] (-8.00)
-		   Ambiguous Choice ['a04', 'a12']
-		     8th Best Choice ['a13'] (1000.00)
-		     8th Worst Choice ['a13'] (1000.00)
-		   Ambiguous Choice ['a04', 'a12']
-		 7th Worst Choice ['a04', 'a12'] (8.00)
-	       6th Worst Choice ['a14'] (151.00)
-	     5th Worst Choice ['a09'] (185.67)
-	   4th Worst Choice ['a15'] (209.25)
-	 3rd Worst Choice ['a10'] (458.60)
-       2nd Worst Choice ['a05'] (470.50)
-     1st Worst Choice ['a02'] (740.86)
-     Ordinal bipolar correlation with Condorcet digraph:
-      tau = +0.990
+      1st first ranked ['a06'] (475.29)
+        2nd first ranked ['a11'] (349.33)
+	  3rd first ranked ['a07', 'a08'] (278.44)
+	    4th first ranked ['a03'] (265.43)
+	      5th first ranked ['a01'] (145.20)
+	        6th first ranked ['a13'] (104.00)
+		  7th first ranked ['a04'] (16.00)
+		  7th last ranked ['a12'] (16.00)
+	        6th last ranked ['a14'] (104.67)
+	      5th last ranked ['a15'] (130.00)
+	    4th last ranked ['a09'] (170.57)
+	  3rd last ranked ['a10'] (353.40)
+        2nd last ranked ['a05'] (415.83)
+      1st last ranked ['a02'] (682.86)
 
-Before showing the *ranking-by-choosing* result, we have to compute the iterated bipolar selection procedure (see :numref:`rankingByChoosing` Line 2). The first selection concerns *a06* (best) and *a02* (worst), followed by *a11* (best) opposed to *a05* (worst), and so on, until there remains at iteration step 8 a single a final candidate *a08*. The bracketed numbers indicate the majority margin with which the *i*-th *best* choice is beating the corresponding *i*-th *worst* choice amongst the remaining candidates at step *i*. This *ranking-by-choosing* result here is highly correlated in the ordinal *Kendall* sense (+0.99) with the underlying majority margins (see :numref:`rankingByChoosing` Line 40-41).    
+Before showing the *ranking-by-choosing* result, we have to compute the iterated bipolar selection procedure (see :numref:`rankingByChoosing` Line 2). The first selection concerns *a06* (first) and *a02* (last), followed by *a11* (first) opposed to *a05* (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely *[a04, a12]* (see Lines 29-30). The bracketed numbers, following the reiterated *first ranked* and *last ranked* candidates, indicate the average majority margin with which the *i*-th *first ranked* candidate(s), respectively the *i*-th *last ranked* candidate, is beating, resp. is beaten by, the remaining candidates at step *i*.
 
-Notice furthermore the selection operated at iteration step 7 (see :numref:`rankingByChoosing` Lines 28 and 33), namely the pair *[a04, a12]*. Both candidates represent indeed at the same time a *best*, as well as, a *worst* choice. Their position in the eventual ranking -before or after candidate *a13*-  appears to be therefore *ambiguous* (see :numref:`rankingByChoosing` Lines 29 and 32).
+Notice furthermore the first ranked candidates at iteration step 3 (see :numref:`rankingByChoosing` Line 25), namely the pair *[a07, a08]*. Both candidates represent indeed conjointly the *first ranked* choice. We obtain here hence a *weak ranking*, i.e. a ranking with a tie.
 
-Finally, being the only remaining candidate in step 8, candidate *a13* trivially represents for all 1000 voters the only possible unanimous *best*, as well as *worst* choice (see :numref:`rankingByChoosing` Lines 30-31).
+Let us mention that the *instant-run-off* procedure, we used before (see :numref:`uninominalWinner` Line 3), when operated with a *Comments=True* parameter setting, will deliver a more or less similar *reversed* linear *ordering-by-rejecting* result, namely [*a02*, *a10*, *a14*, *a05*, *a09*, *a13*, *a12*, *a15*, *a04*, *a01*, *a08*, *a03*, *a07*, *a11*, *a06*], ordered from the *last* to the *first* choice.
 
-It is worthwhile noticing that the *instant-run-off* procedure (see :numref:`uninominalWinner`), with *Comments=True* parameter setting, will deliver a very similar *reversed* linear *ordering-by-rejecting* result, namely [*a02*, *a05*, *a10*, *a09*, *a14*, *a12*, *a15*, *a13*, *a01*, *a04*, *a07*, *a03*, *a08*, *a11*, *a06*], ordered from the *worst* to the *best* choice.
-
-Remarkable about these very similar *ranking-by-choosing* or *ordering-by-rejecting* results is the fact that the random voting behaviour, simulated here with the help of two discrete random variables ([16]_), defined respectively by the two party polls, is rendering a ranking that is more or less in accordance the simulated balance of the polls: -*Party_1* supporters : 471;  *Party_2* supporters: 529 (see :numref:`rankingByChoosing` Lines 19-35 third column). Despite a random voting behaviour per voter, the given polls apparently show a *very strong incidence* on the eventual election result. In order to avoid any manipulation of the election outcome, public media are therefore in some countries not allowed to publish polls during the last weeks before a general election.
+Remarkable about both these *ranking-by-choosing* or *ordering-by-rejecting* results is the fact that the random voting behaviour, simulated here with the help of two discrete random variables ([16]_), defined respectively by the two party polls, is rendering a ranking that is more or less in accordance with the simulated balance of the polls: -*Party_1* supporters : 460;  *Party_2* supporters: 436 (see :numref:`rankingByChoosing` Lines 26-40 third column). Despite a random voting behaviour per voter, the given polls apparently show a *very strong incidence* on the eventual election result. In order to avoid any manipulation of the election outcome, public media are therefore in some countries not allowed to publish polls during the last weeks before a general election.
 
 .. note::
 

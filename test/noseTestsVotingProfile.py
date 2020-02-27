@@ -126,7 +126,8 @@ def testLinearVotingBallots():
     lvp = RandomLinearVotingProfile(numberOfVoters=100,
                                     numberOfCandidates=10,
                                     WithPolls=True,
-                                    bipartisan=0.5,
+                                    partyRepartition=0.6,
+                                    other=0.1,
                                     seed=None)
     lvp.save()
     lvp = LinearVotingProfile('templinearprofile')
@@ -161,7 +162,8 @@ def testWeakRankings():
     lvp = RandomLinearVotingProfile(numberOfCandidates=20,
                               numberOfVoters=1000,
                                     WithPolls=True,
-                                    bipartisan=0.5,
+                                    partyRepartition=0.5,
+                                    other=0.1,
                                     seed=None)
     lvp.showRandomPolls()
     c = CondorcetDigraph(lvp)

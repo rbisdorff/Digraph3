@@ -25,11 +25,11 @@
 \contentsline {subsection}{\numberline {3.4}Cyclic social preferences}{27}{subsection.3.4}
 \contentsline {subsection}{\numberline {3.5}On generating random linear voting profiles}{29}{subsection.3.5}
 \contentsline {section}{\numberline {4}Working with the \sphinxstyleliteralintitle {\sphinxupquote {outrankingDigraphs}} module}{34}{section.4}
-\contentsline {subsection}{\numberline {4.1}Outranking digraph}{35}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.1}Outranking digraph}{34}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}Browsing the performances}{36}{subsection.4.2}
 \contentsline {subsection}{\numberline {4.3}Valuation semantics}{38}{subsection.4.3}
 \contentsline {subsection}{\numberline {4.4}Pairwise comparisons}{38}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}Recoding the valuation}{40}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.5}Recoding the valuation}{39}{subsection.4.5}
 \contentsline {subsection}{\numberline {4.6}Codual digraph}{40}{subsection.4.6}
 \contentsline {subsection}{\numberline {4.7}XMCDA 2.0}{41}{subsection.4.7}
 \contentsline {section}{\numberline {5}Generating random performance tableaux}{42}{section.5}

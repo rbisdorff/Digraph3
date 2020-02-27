@@ -1033,12 +1033,13 @@
 <span class="sd">    A specialized class for generating random linwear voting profiles.</span>
 
 <span class="sd">    *Parameters*   </span>
-<span class="sd">        * When *WithPolls* is True, each voter&#39;s linear ballot is randomly oriented</span>
+<span class="sd">        * When *WithPolls* is True, each party supporting voter&#39;s linear ballot is randomly oriented</span>
 <span class="sd">          by one of two random exponential poll results. The corresponding polls are stored</span>
 <span class="sd">          in self.poll1, respectively self.poll2.</span>
-<span class="sd">        * The *bipartisan* proportion randomly distributes the two polls over the</span>
-<span class="sd">          set of voters. If put to 0.0 or 1.0, only self.poll2, resp. self.poll1, will orient</span>
-<span class="sd">          all the voters.</span>
+<span class="sd">        * The *partyRepartition* sets the theoretical distribution of the two polls over the</span>
+<span class="sd">          set of voters. If set to 0.0 or 1.0, only self.poll2, resp. self.poll1, will orient</span>
+<span class="sd">          the respective party supporters.</span>
+<span class="sd">        * The *other* paraemter sets the theoretical proportion of non party supporters.</span>
 <span class="sd">        * The *votersWeights* parameter may be a list of positive integers in order to</span>
 <span class="sd">          deterministically attribute weights to the voters.</span>
 <span class="sd">          Is ignored when *RandomWeights* is True.</span>
@@ -1049,7 +1050,8 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                  <span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                  <span class="n">WithPolls</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">bipartisan</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                 <span class="n">partyRepartition</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                 <span class="n">other</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
                  <span class="n">votersWeights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">RandomWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1091,8 +1093,9 @@
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">WithPolls</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generateRandomLinearBallotWithPoll</span><span class="p">(</span><span class="n">bipartisan</span><span class="p">,</span>
-                                                                        <span class="n">seed</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span> <span class="o">=</span>\
+                <span class="bp">self</span><span class="o">.</span><span class="n">generateRandomLinearBallotWithPoll</span><span class="p">(</span><span class="n">partyRepartition</span><span class="o">=</span><span class="n">partyRepartition</span><span class="p">,</span>
+                                                        <span class="n">other</span><span class="o">=</span><span class="n">other</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generateRandomLinearBallot</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
@@ -1114,7 +1117,7 @@
             <span class="n">linearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">candidatesList</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">linearBallot</span></div>
 
-<div class="viewcode-block" id="RandomLinearVotingProfile.generateRandomLinearBallotWithPoll"><a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomLinearVotingProfile.generateRandomLinearBallotWithPoll">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomLinearBallotWithPoll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">bipartisan</span><span class="p">,</span><span class="n">seed</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomLinearVotingProfile.generateRandomLinearBallotWithPoll"><a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomLinearVotingProfile.generateRandomLinearBallotWithPoll">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomLinearBallotWithPoll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">partyRepartition</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">other</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a random linear ballot in accordance with the given polls:</span>
 <span class="sd">        self.poll1 and self.poll2.</span>
@@ -1167,49 +1170,58 @@
 
         <span class="c1"># storing polls    </span>
         <span class="bp">self</span><span class="o">.</span><span class="n">poll1</span> <span class="o">=</span> <span class="n">poll1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">poll2</span> <span class="o">=</span> <span class="n">poll2</span>            
-        <span class="bp">self</span><span class="o">.</span><span class="n">bipartisan</span> <span class="o">=</span> <span class="n">bipartisan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poll2</span> <span class="o">=</span> <span class="n">poll2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">other</span> <span class="o">=</span> <span class="n">other</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">partyRepartition</span> <span class="o">=</span> <span class="n">partyRepartition</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">poll1</span><span class="p">,</span><span class="n">poll2</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">poll1</span><span class="p">,</span><span class="n">poll2</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">partyRepartition</span><span class="p">)</span>
 
         <span class="c1"># generating random linear ballots</span>
         <span class="n">linearBallot</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">voters</span><span class="p">:</span>
             <span class="c1"># each voter is attached to one of the polls</span>
-            <span class="k">if</span> <span class="n">bipartisan</span> <span class="o">&lt;</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">():</span>
-                <span class="n">pollv</span> <span class="o">=</span> <span class="n">poll1</span>
-                <span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;party&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">pollv</span> <span class="o">=</span> <span class="n">poll2</span>
-                <span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;party&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
-            <span class="c1"># generating a random linear ranking    </span>
-            <span class="n">shuffledCandidatesList</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-                <span class="n">NotShuffled</span> <span class="o">=</span> <span class="kc">True</span>
-                <span class="n">currPoll</span> <span class="o">=</span> <span class="n">pollv</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-                <span class="n">rdv</span> <span class="o">=</span> <span class="n">DiscreteRandomVariable</span><span class="p">(</span><span class="n">currPoll</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">j</span><span class="p">)</span>
-                <span class="k">while</span> <span class="n">NotShuffled</span><span class="p">:</span>
-                    <span class="n">xc</span> <span class="o">=</span> <span class="n">rdv</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
-                    <span class="k">if</span> <span class="n">xc</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">shuffledCandidatesList</span><span class="p">:</span>
-                        <span class="n">NotShuffled</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="n">other</span><span class="p">:</span> <span class="c1"># random voting</span>
+                <span class="n">otherCandidatesList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">candidatesList</span><span class="p">)</span>
+                <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">otherCandidatesList</span><span class="p">)</span>
+                <span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;party&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">linearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">otherCandidatesList</span>
+            <span class="k">else</span><span class="p">:</span>  <span class="c1"># poll driven random</span>
+                
+                <span class="k">if</span> <span class="n">partyRepartition</span> <span class="o">&lt;</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">():</span>
+                    <span class="n">pollv</span> <span class="o">=</span> <span class="n">poll1</span>
+                    <span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;party&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pollv</span> <span class="o">=</span> <span class="n">poll2</span>
+                    <span class="n">voters</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;party&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+                <span class="c1"># generating a random linear ranking    </span>
+                <span class="n">shuffledCandidatesList</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">NotShuffled</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">currPoll</span> <span class="o">=</span> <span class="n">pollv</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                    <span class="n">rdv</span> <span class="o">=</span> <span class="n">DiscreteRandomVariable</span><span class="p">(</span><span class="n">currPoll</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">j</span><span class="p">)</span>
+                    <span class="k">while</span> <span class="n">NotShuffled</span><span class="p">:</span>
+                        <span class="n">xc</span> <span class="o">=</span> <span class="n">rdv</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="n">xc</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">shuffledCandidatesList</span><span class="p">:</span>
+                            <span class="n">NotShuffled</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="n">shuffledCandidatesList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xc</span><span class="p">)</span>
+                    <span class="n">currPoll</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">xc</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">shuffledCandidatesList</span><span class="p">)</span>
+                            
+                <span class="n">shc</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">shuffledCandidatesList</span><span class="p">)</span>
+                <span class="n">sc</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">candidatesList</span><span class="p">)</span>
+                <span class="n">xc</span> <span class="o">=</span> <span class="p">(</span><span class="n">sc</span><span class="o">-</span><span class="n">shc</span><span class="p">)</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
                 <span class="n">shuffledCandidatesList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xc</span><span class="p">)</span>
-                <span class="n">currPoll</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">xc</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">shuffledCandidatesList</span><span class="p">)</span>
-                        
-            <span class="n">shc</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">shuffledCandidatesList</span><span class="p">)</span>
-            <span class="n">sc</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">candidatesList</span><span class="p">)</span>
-            <span class="n">xc</span> <span class="o">=</span> <span class="p">(</span><span class="n">sc</span><span class="o">-</span><span class="n">shc</span><span class="p">)</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-            <span class="n">shuffledCandidatesList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xc</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt;&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span><span class="n">shuffledCandidatesList</span><span class="p">)</span>           
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">linearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">shuffledCandidatesList</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt;&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span><span class="n">shuffledCandidatesList</span><span class="p">)</span>           
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">linearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">shuffledCandidatesList</span>
             
         <span class="k">return</span> <span class="n">linearBallot</span></div>
 
-<div class="viewcode-block" id="RandomLinearVotingProfile.showRandomPolls"><a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomLinearVotingProfile.showRandomPolls">[docs]</a>    <span class="k">def</span> <span class="nf">showRandomPolls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomLinearVotingProfile.showRandomPolls"><a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomLinearVotingProfile.showRandomPolls">[docs]</a>    <span class="k">def</span> <span class="nf">showRandomPolls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows the random polls, the case given.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1223,12 +1235,15 @@
             <span class="n">nv</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">voters</span><span class="p">)</span>
             <span class="n">supportersParty1</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">voters</span> <span class="k">if</span> <span class="n">voters</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;party&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
             <span class="n">supportersParty2</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">voters</span> <span class="k">if</span> <span class="n">voters</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;party&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+            <span class="n">otherSupporters</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">voters</span> <span class="k">if</span> <span class="n">voters</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;party&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="n">n0</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">otherSupporters</span><span class="p">)</span>
+            <span class="n">p0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n0</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">nv</span><span class="p">)</span>
             <span class="n">n1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">supportersParty1</span><span class="p">)</span>
             <span class="n">p1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">nv</span><span class="p">)</span>
             <span class="n">n2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">supportersParty2</span><span class="p">)</span>
             <span class="n">p2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n2</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">nv</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span><span class="n">p1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">p2</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span><span class="n">p1</span><span class="p">,</span><span class="n">n2</span><span class="p">,</span><span class="n">p2</span><span class="p">,</span><span class="n">n0</span><span class="p">,</span><span class="n">p0</span><span class="p">)</span>
             <span class="n">poll1</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">poll2</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">poll2</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">poll2</span><span class="p">]</span>
             <span class="n">poll2</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1238,12 +1253,17 @@
                       <span class="n">p2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">poll2</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
                 <span class="n">poll</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">res</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="p">)</span>
             <span class="n">poll</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># print polls</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Random repartition of voters&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Party_1 supporters : </span><span class="si">%d</span><span class="s1"> (</span><span class="si">%05.2f%%</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span><span class="n">p1</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Party_2 supporters : </span><span class="si">%d</span><span class="s1"> (</span><span class="si">%05.2f%%</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n2</span><span class="p">,</span><span class="n">p2</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Other voters       : </span><span class="si">%d</span><span class="s1"> (</span><span class="si">%05.2f%%</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n0</span><span class="p">,</span><span class="n">p0</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---------------- random polls ---------------&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Party_1(</span><span class="si">%05.2f</span><span class="s1">) | Party_2(</span><span class="si">%05.2f</span><span class="s1">)| result   &#39;</span><span class="o">%</span>\
-                   <span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Party_1(</span><span class="si">%04.1f%%</span><span class="s1">) | Party_2(</span><span class="si">%04.1f%%</span><span class="s1">)|   expected  &#39;</span><span class="o">%</span>\
+                   <span class="p">(</span><span class="n">p1</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">p2</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span> <span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-----------------------------------------------&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  </span><span class="si">%s</span><span class="s1"> : </span><span class="si">%05.2f%%</span><span class="s1">  | </span><span class="si">%s</span><span class="s1"> : </span><span class="si">%05.2f%%</span><span class="s1">  | </span><span class="si">%s</span><span class="s1"> : </span><span class="si">%05.2f%%</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  </span><span class="si">%s</span><span class="s2"> : </span><span class="si">%05.2f%%</span><span class="s2">  |  </span><span class="si">%s</span><span class="s2"> : </span><span class="si">%05.2f%%</span><span class="s2">  |  </span><span class="si">%s</span><span class="s2"> : </span><span class="si">%05.2f%%</span><span class="s2">&quot;</span> <span class="o">%</span>\
                   <span class="p">(</span><span class="n">poll1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">poll1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">100.0</span><span class="p">,</span>
                    <span class="n">poll2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">poll2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">100.0</span><span class="p">,</span>
                     <span class="n">poll</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">poll</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mf">100.0</span><span class="p">)</span> <span class="p">)</span>
@@ -1688,7 +1708,76 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;actionsList&#39;</span><span class="p">,</span> <span class="n">actionsList</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">rank</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">rank</span></div></div>
+        <span class="k">return</span> <span class="n">rank</span></div>
+
+<div class="viewcode-block" id="CondorcetDigraph.showRankingByChoosing"><a class="viewcode-back" href="../techDoc.html#votingProfiles.CondorcetDigraph.showRankingByChoosing">[docs]</a>    <span class="k">def</span> <span class="nf">showRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A specialized show method for self.rankinByChoosing result from CondorcetDigraphs.</span>
+
+<span class="sd">        The bracketed numbers  following the reiterated *first* and *last* choices,</span>
+<span class="sd">        indicate the average majority margin with which the *i*-th *first* choice,</span>
+<span class="sd">        respectively the *i*-th *last* choice, is beating, resp. is beaten by,</span>
+<span class="sd">        the remaining candidates at step *i*.</span>
+
+<span class="sd">        .. warning::</span>
+
+<span class="sd">           The self.computeRankingByChoosing(CoDual=False/True) method instantiating</span>
+<span class="sd">           the self.rankingByChoosing slot is pre-required !</span>
+<span class="sd">             </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">rankingByChoosing</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !&#39;</span><span class="p">)</span>
+            <span class="c1">#rankingByChoosing = self.computeRankingByChoosing(Debug,CoDual)</span>
+                <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="n">rankingByChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ranking by Choosing and Rejecting&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;---------------------------------&#39;</span><span class="p">)</span>
+        <span class="n">space</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">nstr</span><span class="o">=</span><span class="s1">&#39;st&#39;</span>
+            <span class="k">elif</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">nstr</span><span class="o">=</span><span class="s1">&#39;nd&#39;</span>
+            <span class="k">elif</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">nstr</span><span class="o">=</span><span class="s1">&#39;rd&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">nstr</span><span class="o">=</span><span class="s1">&#39;th&#39;</span>
+            <span class="n">ibch</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">iwch</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">iach</span> <span class="o">=</span> <span class="n">iwch</span> <span class="o">&amp;</span> <span class="n">ibch</span>
+            <span class="c1">#print &#39;ibch, iwch, iach&#39;, i, ibch,iwch,iach</span>
+            <span class="n">ch</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ibch</span><span class="p">)</span>
+            <span class="n">ch</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%s%s%s</span><span class="s1"> first ranked: </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">space</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nstr</span><span class="p">,</span><span class="n">ch</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">iach</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  </span><span class="si">%s</span><span class="s1"> Ambiguous ranking </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">space</span><span class="p">,</span><span class="nb">list</span><span class="p">(</span><span class="n">iach</span><span class="p">)))</span>
+                <span class="n">space</span> <span class="o">+=</span> <span class="s1">&#39;  &#39;</span>
+            <span class="n">space</span> <span class="o">+=</span> <span class="s1">&#39;  &#39;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">n</span><span class="o">-</span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">nstr</span><span class="o">=</span><span class="s1">&#39;st&#39;</span>
+            <span class="k">elif</span> <span class="n">n</span><span class="o">-</span><span class="n">i</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">nstr</span><span class="o">=</span><span class="s1">&#39;nd&#39;</span>
+            <span class="k">elif</span> <span class="n">n</span><span class="o">-</span><span class="n">i</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">nstr</span><span class="o">=</span><span class="s1">&#39;rd&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">nstr</span><span class="o">=</span><span class="s1">&#39;th&#39;</span>
+            <span class="n">space</span> <span class="o">=</span> <span class="n">space</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">ibch</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">iwch</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">iach</span> <span class="o">=</span> <span class="n">iwch</span> <span class="o">&amp;</span> <span class="n">ibch</span>
+            <span class="c1">#print &#39;ibch, iwch, iach&#39;, i, ibch,iwch,iach</span>
+            <span class="n">ch</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">iwch</span><span class="p">)</span>
+            <span class="n">ch</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">iach</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">space</span> <span class="o">=</span> <span class="n">space</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  </span><span class="si">%s</span><span class="s1"> Ambiguous ranking </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">space</span><span class="p">,</span><span class="nb">list</span><span class="p">(</span><span class="n">iach</span><span class="p">)))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%s%s%s</span><span class="s1"> last ranked: </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">space</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">,</span><span class="n">nstr</span><span class="p">,</span><span class="n">ch</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span></div></div>
 
 <span class="c1">#----------test voting Digraph class ----------------</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -1726,7 +1815,8 @@
     <span class="n">lvp</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
                             <span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
                             <span class="n">WithPolls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                            <span class="n">bipartisan</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                            <span class="n">partyRepartition</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                            <span class="n">other</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
                             <span class="c1">#seed=0.20990710811162194) # 1 circuit</span>
                             <span class="c1">#seed=0.8077233289616987)  # 2 circuits !</span>
                             <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
@@ -1767,7 +1857,7 @@
         <span class="n">corr</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">wc</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
         <span class="n">wc</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
         <span class="n">wn</span> <span class="o">=</span> <span class="n">WeakNetFlowsOrder</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Weak NetFloes ranking&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Weak NetFlows ranking&#39;</span><span class="p">)</span>
         <span class="n">wn</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
         <span class="n">corr</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">wn</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">)</span>
         <span class="n">wn</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
