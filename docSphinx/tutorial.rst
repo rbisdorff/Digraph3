@@ -2030,7 +2030,7 @@ The Digraph3 resources provide some of the most common of these ranking rules, l
 The *Copeland* ranking
 ......................
 
-*Copeland*'s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, computes for each alternative a score resulting from the sum of the differences between the crisp **strict outranking** characteristics :math:`r(x\, > \,y)_{>0}` and the crisp **strict outranked** characteristics :math:`r(y\, > \, x)_{>0}`  for all pairs of alternatives where *y* is different from *x*. The alternatives are ranked in decreasing order of these *Copeland* scores; ties, the case given, being resolved by a lexicographical rule. 
+*Copeland*'s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the median cut strict outranking digraph *ccd*. The rule computes for each alternative a score resulting from the sum of the differences between the crisp **strict outranking** characteristics :math:`r(x\, > \,y)_{>0}` and the crisp **strict outranked** characteristics :math:`r(y\, > \, x)_{>0}`  for all pairs of alternatives where *y* is different from *x*. The alternatives are ranked in decreasing order of these *Copeland* scores; ties, the case given, being resolved by a lexicographical rule. 
 
 .. code-block:: pycon
    :name: CopelandRanking
@@ -2052,7 +2052,9 @@ The *Copeland* ranking
     Copeland Ranking:
     ['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2']
 
-Alternative *a5* obtains the best *Copeland* score (+12), followed by alternatives *a1*, *a6* and *a7* with same score (+2); following the lexicographic rule, *a1* is hence ranked before *a6* and *a6* before *a7*. Same situation is observed for *a4* and *a9* with a score of -3 (see :numref:`CopelandRanking`). Notice that *Copeland*'s ranking rule is invariant under the *codual* transform and renders a linear order which is rather correlated (+0.483) with the given pairwise outranking relation in the ordinal *Kendall* sense (see :numref:`CopelandCorrelationIndexes` and [BIS-2012]_).
+Alternative *a5* obtains the best *Copeland* score (+12), followed by alternatives *a1*, *a6* and *a7* with same score (+2); following the lexicographic rule, *a1* is hence ranked before *a6* and *a6* before *a7*. Same situation is observed for *a4* and *a9* with a score of -3 (see :numref:`CopelandRanking`).
+
+Notice that *Copeland*'s ranking rule is invariant under the *codual* transform and renders a linear order which is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal *Kendall* sense (see :numref:`CopelandCorrelationIndexes` and [BIS-2012]_).
 
 .. code-block:: pycon
    :name: CopelandCorrelationIndexes
@@ -2086,7 +2088,7 @@ The *Copeland* scores deliver actually only a unique *weak order*, i.e. a rankin
        2nd last ranked ['a3'] (1.00)
      1st last ranked ['a2'] (1.00)
 
-We recover above the ranking with ties delivered by the *Copeland* scores (see :numref:`CopelandRanking`). The bracketed numbers indicate that this weak ranking is certainly valid. We may draw the corresponding graph.
+We recover in :numref:`weakCopelandRanking` above, the ranking with ties delivered by the *Copeland* scores (see :numref:`CopelandRanking`). The bracketed numbers indicate that this weak ranking is certainly valid. We may draw its corresponding *Hasse skeleton*.
 
 .. code-block:: pycon
    :name: weakCopelandRankingDrawing
@@ -2112,14 +2114,16 @@ We recover above the ranking with ties delivered by the *Copeland* scores (see :
 
    A weak Copeland ranking 	   
 
-Let us now consider a similar ranking rule, but working directly on the bipolar-valued strict outranking digraph.
+Let us now consider a similar ranking rule, but working directly on the *valued* outranking digraph.
 
 The *NetFlows* ranking
 ......................
 
-The valued version of the *Copeland* rule, called **NetFlows** rule, computes for each alternative *x* a *net-flow* score,  i.e. the sum of the differences between the **strict outranking** characteristics :math:`r(x\, > \,y)` and the **strict outranked** characteristics :math:`r(y\, > \,x)` for all pairs of alternatives where *y* is different from *x*. It is worthwhile noticing here, that similar to the *Copeland* ranking rule seen before, the *NetFlows* ranking rule is as well *invariant* under the *codual* transform.
+The valued version of the *Copeland* rule, called **NetFlows** rule, computes for each alternative *x* a *net flow* score,  i.e. the sum of the differences between the **strict outranking** characteristics :math:`r(x\, > \,y)` and the **strict outranked** characteristics :math:`r(y\, > \,x)` for all pairs of alternatives where *y* is different from *x*. It is worthwhile noticing again, that similar to the *Copeland* ranking rule seen before, the *NetFlows* ranking rule is also *invariant* under the *codual* transform.
   
 .. code-block:: pycon
+   :name: NetFlowsRanking
+   :caption: Computing a *NetFlows* ranking 
    :linenos:
 
    >>> from linearOrders import NetFlowsOrder
@@ -2137,11 +2141,13 @@ The valued version of the *Copeland* rule, called **NetFlows** rule, computes fo
     NetFlows Ranking:
     ['a5', 'a7', 'a6', 'a3', 'a1', 'a8', 'a4', 'a9', 'a2']
 
-The *NetFlows* scores deliver in this example a ranking *without ties*. It may happen, however, that we obtain, as with the *Copeland* scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a *weak ranking* with the corresponding :py:class:`transitiveDigraphs.WeakNetFlowsOrder` class.
+The *NetFlows* scores deliver in this example a ranking *without ties* (see :numref:`NetFlowsRanking`). It may happen, however, that we obtain, as with the *Copeland* scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a *weak ranking* with the corresponding :py:class:`transitiveDigraphs.WeakNetFlowsOrder` class.
 
-The resulting **NetFlows** ranking is here, in this didactic example, slightly better correlated (+0.638) with the given outranking relation as its crisp cousin, the *Copeland* ranking (see :numref:`CopelandCorrelationIndexes`). 
+The **NetFlows** ranking we obtain in this didactic example (Line 14), appears to be slightly better correlated (+0.638) with the given outranking relation than its crisp cousin, the *Copeland* ranking (see :numref:`CopelandCorrelationIndexes` Lines 4-6). 
 
 .. code-block:: pycon
+   :name: NetFlowsCorrelationIndexes
+   :caption: Checking the quality of the *NetFlows* Ranking
    :linenos:
     
    >>> corr = gcd.computeOrdinalCorrelation(nf)
@@ -2151,33 +2157,37 @@ The resulting **NetFlows** ranking is here, in this didactic example, slightly b
     Epistemic determination      :  0.230
     Bipolar-valued equivalalence : +0.147
 
-Indeed, the extended Kenall tau index of  +0.638 leads to a bipolar-valued relational equivalence characteristics of 0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given strictoutranking digraph *gcd*  and the corresponding *NetFlows* ranking.
+Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *relational equivalence* characteristics of +0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs *g* or *gcd*  and the corresponding *NetFlows* ranking.
 
 To appreciate now the respective quality of both the *Copeland* and the *NetFlows* rankings, it is useful to consider *Kemeny*'s and *Slater*'s **optimal** ranking rules.
 
 *Kemeny* rankings
 .................
 
-A **Kemeny** ranking is a linear order which is *closest*, in the sense of the ordinal *Kendall* distance (see [BIS-2012]_), to the given valued strict outranking digraph *gcd*.
+A **Kemeny** ranking is a linear order which is *closest*, in the sense of the ordinal *Kendall* distance (see [BIS-2012]_), to the given valued outranking digraphs *g* or *gcd*. The rule is indeed again *invariant* under the codual transform. As the *Kemeny*'s rule proceeds by inspecting all possible permutations of the decision alternatives, it is unfortunately only computable for tiny outranking digraphs and the class constructor assumes by default that the order of the digraph does not exceed 7 (see :numref:`KemenyRanking` Line 2). 
 
 .. code-block:: pycon
+   :name: KemenyRanking
+   :caption: Computing a *Kemeny* ranking
    :linenos:
 
    >>> from linearOrders import KemenyOrder
-   >>> ke = KemenyOrder(gcd,orderLimit=9) # default orderLimit is 7
+   >>> ke = KemenyOrder(g,orderLimit=9) # default orderLimit is 7
    >>> ke.showRanking()
     ['a5', 'a6', 'a7', 'a3', 'a8', 'a9', 'a4', 'a1', 'a2']
-   >>> corr = gcd.computeOrdinalCorrelation(ke)
-   >>> gcd.showCorrelation(corr)
+   >>> corr = g.computeOrdinalCorrelation(ke)
+   >>> g.showCorrelation(corr)
     Correlation indexes:
     Extended Kendall tau         : +0.779
     Epistemic determination      :  0.230
     Bipolar-valued equivalalence : +0.179
     
-So, **+0.779** is the *highest possible* ordinal correlation (fitness) any potential ranking one can achieve with the given pairwise strict outranking relation. A *Kemeny* ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example here, we obtain in fact two optimal *Kemeny* rankings with a same **maximal** *Kemeny* index of 12.92.
+So, **+0.779** represents the *highest possible* ordinal correlation (fitness) any potential ranking one can achieve with the given pairwise outranking digraph (see :numref:`KemenyRanking` Lines 7-10).
+
+A *Kemeny* ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example here, we obtain in fact two optimal *Kemeny* rankings with a same **maximal** *Kemeny* index of 12.92.
 
 .. code-block:: pycon
-   :caption: Optimal Kemeny rankings
+   :caption: Optimal *Kemeny* rankings
    :name: optimalKemeny
    :linenos:
 
@@ -2187,9 +2197,11 @@ So, **+0.779** is the *highest possible* ordinal correlation (fitness) any poten
    >>> ke.maxKemenyIndex
     Decimal('12.9166667')
 
-We may visualize the partial order defined by the *epistemic disjunction* of both *Kemeny* rankings (see `transitiveDigraphs module <techDoc.html#module-transitiveDigraphs>`_ and :numref:`tutorialKemeny`) as follows.
+We may visualize the partial order defined by the *epistemic disjunction* of both optimal *Kemeny* rankings (see `transitiveDigraphs module <techDoc.html#module-transitiveDigraphs>`_ and :numref:`tutorialKemeny`) as follows.
 
 .. code-block:: pycon
+   :name: KemenyOrdersFusion
+   :caption: Computing the epistemic disjunction of all optimal *Kemeny* rankings
    :linenos:
 
    >>> from transitiveDigraphs import KemenyOrdersFusion
@@ -2219,14 +2231,14 @@ It is interesting to notice in :numref:`optimalKemeny`, that both *Kemeny* ranki
 *Slater* rankings
 .................
 
-The **Slater** ranking rule is similar to *Kemeny*'s, but it is working, instead,  on the associated median cut strict outranking digraph *ccd*. Again, similar to *Kemeny*'s, *Slater*'s ranking rule is also *invariant* under the *codual* transform. The *Slater* rule renders here the following results.
+The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, instead,  on the associated median cut digraphs *c* or *ccd*. Again *Slater*'s ranking rule is indeed *invariant* under the *codual* transform. The *Slater* rule renders here the following results.
 
 .. code-block:: pycon
    :name: SlaterRanking
-   :caption: Computing the *Slater* ranking 
+   :caption: Computing a *Slater* ranking 
    :linenos:
 
-   >>> sl = KemenyOrder(ccd,orderLimit=9)
+   >>> sl = KemenyOrder(c,orderLimit=9)
    >>> sl.showRanking()
     ['a5', 'a6', 'a4', 'a1', 'a3', 'a7', 'a8', 'a9', 'a2']
    >>> corr = gcd.computeOrdinalCorrelation(sl)
@@ -2237,12 +2249,14 @@ The **Slater** ranking rule is similar to *Kemeny*'s, but it is working, instead
    >>> len(sl.maximalRankings)
     7
 
-We notice that the first *Slater* ranking is a rather good fit (+0.676), slightly better apparently than the *NetFlows* ranking (+638). However, there are aparently 7 such potentially optimal *Slater* rankings (see :numref:`` Line 10). The corresponding epistemic disjunction gives the following partial ordering.
+We notice in :numref:`SlaterRanking` Line 6 that the first *Slater* ranking is a rather good fit (+0.676), slightly better apparently than the *NetFlows* ranking result (+638). However, there are aparently 7 such potentially optimal *Slater* rankings (see :numref:`SlaterRanking` Line 10). The corresponding epistemic disjunction gives the following partial ordering.
 
 .. code-block:: pycon
+   :name: SlaterOrdersFusion
+   :caption: Computing the epistemic disjunction of optimal *Slater* rankings 
    :linenos:
 
-   >>> slw = KemenyOrdersFusion(ccd,orderLimit=9)
+   >>> slw = KemenyOrdersFusion(c,orderLimit=9)
    >>> slw.exportGraphViz(fileName='tutorialSlater')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to tutorialSlater.dot
@@ -2262,9 +2276,7 @@ We notice that the first *Slater* ranking is a rather good fit (+0.676), slightl
 
     Epistemic disjunction of optimal *Slater* rankings
        
-What precise ranking result should we hence adopt ? 
-
-*Kemeny*'s as well as *Slater*'s ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). 
+What precise ranking result should we hence adopt ? *Kemeny*'s as well as *Slater*'s ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). 
 
 More efficient ranking heuristics, like the *Copeland* and the *NetFlows* rules, are therefore needed in practice. 
 
@@ -2275,12 +2287,14 @@ More efficient ranking heuristics, like the *Copeland* and the *NetFlows* rules,
 
 At step *i* (*i* goes from 1 to *n*) do the following:
 
-    1. Compute for each row of the bipolar valued *strict* outranking relation table (see :numref:`strictOutranking`) the smallest value;
-    2. Select the row where this minimum is maximal. Ties are resolved in lexicographic order;
-    3. Put the selected decision alternative at rank *i*;
-    4. Delete the corresponding row and column from the relation table and restart until the table is empty.
+1. Compute for each row of the bipolar valued *strict* outranking relation table (see :numref:`strictOutranking`) the smallest value;
+2. Select the row where this minimum is maximal. Ties are resolved in lexicographic order;
+3. Put the selected decision alternative at rank *i*;
+4. Delete the corresponding row and column from the relation table and restart until the table is empty.
     
 .. code-block:: pycon
+   :name: KohlerRanking
+   :caption: Computing a *Kohler* ranking 
    :linenos:
 
    >>> from linearOrders import KohlerOrder
@@ -2314,15 +2328,17 @@ But *Kohler*'s ranking has a *dual* version, the prudent **Arrow-Raynaud** *orde
 
 A further *ranking-by-choosing* heuristic working best this time on the non strict outranking digraph *g*, the **RankedPairs** rule, is based on a *prudent incremental* construction of linear orders that avoids on the fly any cycling outrankings (see [LAM-2009]_). The ranking rule may be formulated as follows:
 
-    1. Rank the ordered pairs :math:`(x,y)` of alternatives in decreasing order of the outranking characteristic values :math:`r(x\, \geq \,y)`;
-    2. Consider the pairs in that order (ties are resolved by a lexicographic rule):
+1. Rank the ordered pairs :math:`(x,y)` of alternatives in decreasing order of the outranking characteristic values :math:`r(x\, \geq \,y)`;
+2. Consider the pairs in that order (ties are resolved by a lexicographic rule):
 
-         - if the next pair does not create a cycle with the pairs already blocked, block this pair;
-         - if the next pair creates a cycle with the already blocked pairs, skip it.
+   - if the next pair does not create a cycle with the pairs already blocked, block this pair;
+   - if the next pair creates a cycle with the already blocked pairs, skip it.
 
-In our didactic outranking example, we get the following result.
+With our didactic outranking digraph *g*, we get the following result.
 
 .. code-block:: pycon
+   :name: rankedPairsRanking
+   :caption: Computing a *RankedPairs* ranking 
    :linenos:
 
    >>> from linearOrders import RankedPairsOrder
@@ -2347,23 +2363,26 @@ The *RankedPairs* ranking rule actually renders in fact an optimal *Kemeny* rank
 
 Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* version, the **Dias-Lamboray** *ordering-by-choosing* rule, which produces, when working this time on the codual *strict outranking* digraph *gcd*, the same ranking result (see [LAM-2009]_).
 
-Unfortunately, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* ones, are *not efficiently scalable* to outranking digraphs of larger orders (> 1000). For such outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland* and, more accuratly, the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the strict outranking digraph, remain in fact computationally efficient.
+Unfortunately, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are *not scalable* to outranking digraphs of larger orders (> 1000). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland* and the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the outranking digraph, remain in fact computationally tractable.
  
 Ranking big performance tableaux
 ................................
 
-None of the previous ranking heuristics, using essentially only the information given by the outranking relation, are scalable for **big outranking digraphs** gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into **ordered quantiles equivalence classes**. This decomposition will lead to a *pre-ranked sparse* outranking digraph.
+None of the previous ranking heuristics, using essentially only the information given by the pairwise outranking characteristics, are scalable for **big outranking digraphs** gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into **ordered quantiles equivalence classes**. This decomposition will lead to a *pre-ranked sparse* outranking digraph.
 
-In the coding example, we generate for instance, by using multiprocessing techniques, first, a cost benefit performance tableau of 100 decision alternatives and, secondly, we construct a **pre-ranked sparse outranking digraph** instance called *bg*. Notice BTW the *BigData* flag used here for generating a parsimonious performance tableau.
+In the coding example in :numref:`PreRankedOutrankingDigraph`, we generate for instance, by using multiprocessing techniques, first (Lines 2-3), a cost benefit performance tableau of 100 decision alternatives and, secondly (Lines 4-5), we construct a **pre-ranked sparse outranking digraph** instance called *bg*. Notice by the way the *BigData* flag (Line 3) used here for generating a parsimonious performance tableau.
 
 .. code-block:: pycon
+   :name: PreRankedOutrankingDigraph
+   :caption: Computing a *pre-ranked* outranking digraph 
+   :linenos:
 
    >>> from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
    >>> tp = RandomCBPerformanceTableau(numberOfActions=100,
-   ...                                 BigData=True,Threading=MP,seed=100)
-   >>> bg = PreRankedOutrankingDigraph(tp,quantiles=20,LowerClosed=False,
-   ...                                 minimalComponentSize=1,Threading=True)
-   >>> print(bg)
+   ...                                 BigData=True,seed=100)
+   >>> bg = PreRankedOutrankingDigraph(tp,quantiles=10,LowerClosed=False,
+   ...                                 minimalComponentSize=1)
+   >>> bg
     *----- show short --------------*
     Instance name     : randomCBperftab_mp
     # Actions         : 100
@@ -2387,6 +2406,8 @@ In the coding example, we generate for instance, by using multiprocessing techni
 The total run time of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankingDigraph` constructor is less than a fifth of a second. The corresponding multiple criteria deciles sorting leads to 20 quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows.
 
 .. code-block:: pycon
+   :name: quantilesDecomposition
+   :caption: Showing the quantiles decomposiion of a pre-ranked outranking digraph 
    :linenos:
 
    >>> bg.showDecomposition()
@@ -2414,7 +2435,7 @@ The total run time of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankin
     18. ]0.10-0.30] : [17, 98, 11]
     19. ]0.10-0.20] : [9, 59, 23]
 
-The best decile (]80%-90%]) gathers decision alternatives *49*, *10*, and *52*. Worst decile (]10%-20%]) gathers alternatives *9*, *59*, and *23*.
+The best decile (]80%-90%]) gathers decision alternatives *49*, *10*, and *52*. Worst decile (]10%-20%]) gathers alternatives *9*, *59*, and *23* (see :numref:`quantilesDecomposition` Lines 3 and 24).
 
 Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the *Copeland* and the *NetFlows* rules. The eventually obtained linear ordering (from the worst to best) is the following.
   

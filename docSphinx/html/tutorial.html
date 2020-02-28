@@ -2720,7 +2720,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <div class="section" id="the-copeland-ranking">
 <h2><a class="toc-backref" href="#id190">The <em>Copeland</em> ranking</a><a class="headerlink" href="#the-copeland-ranking" title="Permalink to this headline">¶</a></h2>
-<p><em>Copeland</em>’s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, computes for each alternative a score resulting from the sum of the differences between the crisp <strong>strict outranking</strong> characteristics <img class="math" src="_images/math/81f6903323c7dd650c516d24868431936ec3972d.png" alt="r(x\, &gt; \,y)_{&gt;0}"/> and the crisp <strong>strict outranked</strong> characteristics <img class="math" src="_images/math/962a674d6063ab93e929b0fd3b991ea40ace270c.png" alt="r(y\, &gt; \, x)_{&gt;0}"/>  for all pairs of alternatives where <em>y</em> is different from <em>x</em>. The alternatives are ranked in decreasing order of these <em>Copeland</em> scores; ties, the case given, being resolved by a lexicographical rule.</p>
+<p><em>Copeland</em>’s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the median cut strict outranking digraph <em>ccd</em>. The rule computes for each alternative a score resulting from the sum of the differences between the crisp <strong>strict outranking</strong> characteristics <img class="math" src="_images/math/81f6903323c7dd650c516d24868431936ec3972d.png" alt="r(x\, &gt; \,y)_{&gt;0}"/> and the crisp <strong>strict outranked</strong> characteristics <img class="math" src="_images/math/962a674d6063ab93e929b0fd3b991ea40ace270c.png" alt="r(y\, &gt; \, x)_{&gt;0}"/>  for all pairs of alternatives where <em>y</em> is different from <em>x</em>. The alternatives are ranked in decreasing order of these <em>Copeland</em> scores; ties, the case given, being resolved by a lexicographical rule.</p>
 <div class="literal-block-wrapper docutils container" id="copelandranking">
 <div class="code-block-caption"><span class="caption-number">Listing 14 </span><span class="caption-text">Computing a <em>Copeland</em> Ranking</span><a class="headerlink" href="#copelandranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2753,7 +2753,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Alternative <em>a5</em> obtains the best <em>Copeland</em> score (+12), followed by alternatives <em>a1</em>, <em>a6</em> and <em>a7</em> with same score (+2); following the lexicographic rule, <em>a1</em> is hence ranked before <em>a6</em> and <em>a6</em> before <em>a7</em>. Same situation is observed for <em>a4</em> and <em>a9</em> with a score of -3 (see <a class="reference internal" href="#copelandranking"><span class="std std-numref">Listing 14</span></a>). Notice that <em>Copeland</em>’s ranking rule is invariant under the <em>codual</em> transform and renders a linear order which is rather correlated (+0.483) with the given pairwise outranking relation in the ordinal <em>Kendall</em> sense (see <a class="reference internal" href="#copelandcorrelationindexes"><span class="std std-numref">Listing 15</span></a> and <a class="reference internal" href="#bis-2012" id="id28"><span>[BIS-2012]</span></a>).</p>
+<p>Alternative <em>a5</em> obtains the best <em>Copeland</em> score (+12), followed by alternatives <em>a1</em>, <em>a6</em> and <em>a7</em> with same score (+2); following the lexicographic rule, <em>a1</em> is hence ranked before <em>a6</em> and <em>a6</em> before <em>a7</em>. Same situation is observed for <em>a4</em> and <em>a9</em> with a score of -3 (see <a class="reference internal" href="#copelandranking"><span class="std std-numref">Listing 14</span></a>).</p>
+<p>Notice that <em>Copeland</em>’s ranking rule is invariant under the <em>codual</em> transform and renders a linear order which is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal <em>Kendall</em> sense (see <a class="reference internal" href="#copelandcorrelationindexes"><span class="std std-numref">Listing 15</span></a> and <a class="reference internal" href="#bis-2012" id="id28"><span>[BIS-2012]</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="copelandcorrelationindexes">
 <div class="code-block-caption"><span class="caption-number">Listing 15 </span><span class="caption-text">Checking the quality of the <em>Copeland</em> Ranking</span><a class="headerlink" href="#copelandcorrelationindexes" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -2796,7 +2797,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>We recover above the ranking with ties delivered by the <em>Copeland</em> scores (see <a class="reference internal" href="#copelandranking"><span class="std std-numref">Listing 14</span></a>). The bracketed numbers indicate that this weak ranking is certainly valid. We may draw the corresponding graph.</p>
+<p>We recover in <a class="reference internal" href="#weakcopelandranking"><span class="std std-numref">Listing 16</span></a> above, the ranking with ties delivered by the <em>Copeland</em> scores (see <a class="reference internal" href="#copelandranking"><span class="std std-numref">Listing 14</span></a>). The bracketed numbers indicate that this weak ranking is certainly valid. We may draw its corresponding <em>Hasse skeleton</em>.</p>
 <div class="literal-block-wrapper docutils container" id="weakcopelandrankingdrawing">
 <div class="code-block-caption"><span class="caption-number">Listing 17 </span><span class="caption-text">Drawing a weak <em>Copeland</em> ranking</span><a class="headerlink" href="#weakcopelandrankingdrawing" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2827,11 +2828,13 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <a class="reference internal image-reference" href="_images/weakCopelandRanking.png"><img alt="_images/weakCopelandRanking.png" src="_images/weakCopelandRanking.png" style="width: 200px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 19 </span><span class="caption-text">A weak Copeland ranking</span><a class="headerlink" href="#weakrankingdrawing" title="Permalink to this image">¶</a></p>
 </div>
-<p>Let us now consider a similar ranking rule, but working directly on the bipolar-valued strict outranking digraph.</p>
+<p>Let us now consider a similar ranking rule, but working directly on the <em>valued</em> outranking digraph.</p>
 </div>
 <div class="section" id="the-netflows-ranking">
 <h2><a class="toc-backref" href="#id191">The <em>NetFlows</em> ranking</a><a class="headerlink" href="#the-netflows-ranking" title="Permalink to this headline">¶</a></h2>
-<p>The valued version of the <em>Copeland</em> rule, called <strong>NetFlows</strong> rule, computes for each alternative <em>x</em> a <em>net-flow</em> score,  i.e. the sum of the differences between the <strong>strict outranking</strong> characteristics <img class="math" src="_images/math/1a41461c251febdacb2b5d91ea15066b982188bf.png" alt="r(x\, &gt; \,y)"/> and the <strong>strict outranked</strong> characteristics <img class="math" src="_images/math/dad233e2d3a93c797174c851923036e3421d1ddf.png" alt="r(y\, &gt; \,x)"/> for all pairs of alternatives where <em>y</em> is different from <em>x</em>. It is worthwhile noticing here, that similar to the <em>Copeland</em> ranking rule seen before, the <em>NetFlows</em> ranking rule is as well <em>invariant</em> under the <em>codual</em> transform.</p>
+<p>The valued version of the <em>Copeland</em> rule, called <strong>NetFlows</strong> rule, computes for each alternative <em>x</em> a <em>net flow</em> score,  i.e. the sum of the differences between the <strong>strict outranking</strong> characteristics <img class="math" src="_images/math/1a41461c251febdacb2b5d91ea15066b982188bf.png" alt="r(x\, &gt; \,y)"/> and the <strong>strict outranked</strong> characteristics <img class="math" src="_images/math/dad233e2d3a93c797174c851923036e3421d1ddf.png" alt="r(y\, &gt; \,x)"/> for all pairs of alternatives where <em>y</em> is different from <em>x</em>. It is worthwhile noticing again, that similar to the <em>Copeland</em> ranking rule seen before, the <em>NetFlows</em> ranking rule is also <em>invariant</em> under the <em>codual</em> transform.</p>
+<div class="literal-block-wrapper docutils container" id="netflowsranking">
+<div class="code-block-caption"><span class="caption-number">Listing 18 </span><span class="caption-text">Computing a <em>NetFlows</em> ranking</span><a class="headerlink" href="#netflowsranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2861,8 +2864,11 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> [&#39;a5&#39;, &#39;a7&#39;, &#39;a6&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a2&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>The <em>NetFlows</em> scores deliver in this example a ranking <em>without ties</em>. It may happen, however, that we obtain, as with the <em>Copeland</em> scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a <em>weak ranking</em> with the corresponding <a class="reference internal" href="techDoc.html#transitiveDigraphs.WeakNetFlowsOrder" title="transitiveDigraphs.WeakNetFlowsOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.WeakNetFlowsOrder</span></code></a> class.</p>
-<p>The resulting <strong>NetFlows</strong> ranking is here, in this didactic example, slightly better correlated (+0.638) with the given outranking relation as its crisp cousin, the <em>Copeland</em> ranking (see <a class="reference internal" href="#copelandcorrelationindexes"><span class="std std-numref">Listing 15</span></a>).</p>
+</div>
+<p>The <em>NetFlows</em> scores deliver in this example a ranking <em>without ties</em> (see <a class="reference internal" href="#netflowsranking"><span class="std std-numref">Listing 18</span></a>). It may happen, however, that we obtain, as with the <em>Copeland</em> scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a <em>weak ranking</em> with the corresponding <a class="reference internal" href="techDoc.html#transitiveDigraphs.WeakNetFlowsOrder" title="transitiveDigraphs.WeakNetFlowsOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.WeakNetFlowsOrder</span></code></a> class.</p>
+<p>The <strong>NetFlows</strong> ranking we obtain in this didactic example (Line 14), appears to be slightly better correlated (+0.638) with the given outranking relation than its crisp cousin, the <em>Copeland</em> ranking (see <a class="reference internal" href="#copelandcorrelationindexes"><span class="std std-numref">Listing 15</span></a> Lines 4-6).</p>
+<div class="literal-block-wrapper docutils container" id="netflowscorrelationindexes">
+<div class="code-block-caption"><span class="caption-number">Listing 19 </span><span class="caption-text">Checking the quality of the <em>NetFlows</em> Ranking</span><a class="headerlink" href="#netflowscorrelationindexes" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -2876,12 +2882,15 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> Bipolar-valued equivalalence : +0.147</span>
 </pre></div>
 </td></tr></table></div>
-<p>Indeed, the extended Kenall tau index of  +0.638 leads to a bipolar-valued relational equivalence characteristics of 0.147, i.e. a <em>majority</em> of 57.35% of the criteria significance supports the relational equivalence between the given strictoutranking digraph <em>gcd</em>  and the corresponding <em>NetFlows</em> ranking.</p>
+</div>
+<p>Indeed, the extended <em>Kendall</em> tau index of +0.638 leads to a bipolar-valued <em>relational equivalence</em> characteristics of +0.147, i.e. a <em>majority</em> of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs <em>g</em> or <em>gcd</em>  and the corresponding <em>NetFlows</em> ranking.</p>
 <p>To appreciate now the respective quality of both the <em>Copeland</em> and the <em>NetFlows</em> rankings, it is useful to consider <em>Kemeny</em>’s and <em>Slater</em>’s <strong>optimal</strong> ranking rules.</p>
 </div>
 <div class="section" id="kemeny-rankings">
 <h2><a class="toc-backref" href="#id192"><em>Kemeny</em> rankings</a><a class="headerlink" href="#kemeny-rankings" title="Permalink to this headline">¶</a></h2>
-<p>A <strong>Kemeny</strong> ranking is a linear order which is <em>closest</em>, in the sense of the ordinal <em>Kendall</em> distance (see <a class="reference internal" href="#bis-2012" id="id30"><span>[BIS-2012]</span></a>), to the given valued strict outranking digraph <em>gcd</em>.</p>
+<p>A <strong>Kemeny</strong> ranking is a linear order which is <em>closest</em>, in the sense of the ordinal <em>Kendall</em> distance (see <a class="reference internal" href="#bis-2012" id="id30"><span>[BIS-2012]</span></a>), to the given valued outranking digraphs <em>g</em> or <em>gcd</em>. The rule is indeed again <em>invariant</em> under the codual transform. As the <em>Kemeny</em>’s rule proceeds by inspecting all possible permutations of the decision alternatives, it is unfortunately only computable for tiny outranking digraphs and the class constructor assumes by default that the order of the digraph does not exceed 7 (see <a class="reference internal" href="#kemenyranking"><span class="std std-numref">Listing 20</span></a> Line 2).</p>
+<div class="literal-block-wrapper docutils container" id="kemenyranking">
+<div class="code-block-caption"><span class="caption-number">Listing 20 </span><span class="caption-text">Computing a <em>Kemeny</em> ranking</span><a class="headerlink" href="#kemenyranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2892,20 +2901,22 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
  8
  9
 10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">KemenyOrder</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span> <span class="o">=</span> <span class="n">KemenyOrder</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span> <span class="c1"># default orderLimit is 7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span> <span class="o">=</span> <span class="n">KemenyOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span> <span class="c1"># default orderLimit is 7</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span><span class="o">.</span><span class="n">showRanking</span><span class="p">()</span>
 <span class="go"> [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a2&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">ke</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">ke</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
 <span class="go"> Extended Kendall tau         : +0.779</span>
 <span class="go"> Epistemic determination      :  0.230</span>
 <span class="go"> Bipolar-valued equivalalence : +0.179</span>
 </pre></div>
 </td></tr></table></div>
-<p>So, <strong>+0.779</strong> is the <em>highest possible</em> ordinal correlation (fitness) any potential ranking one can achieve with the given pairwise strict outranking relation. A <em>Kemeny</em> ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example here, we obtain in fact two optimal <em>Kemeny</em> rankings with a same <strong>maximal</strong> <em>Kemeny</em> index of 12.92.</p>
+</div>
+<p>So, <strong>+0.779</strong> represents the <em>highest possible</em> ordinal correlation (fitness) any potential ranking one can achieve with the given pairwise outranking digraph (see <a class="reference internal" href="#kemenyranking"><span class="std std-numref">Listing 20</span></a> Lines 7-10).</p>
+<p>A <em>Kemeny</em> ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example here, we obtain in fact two optimal <em>Kemeny</em> rankings with a same <strong>maximal</strong> <em>Kemeny</em> index of 12.92.</p>
 <div class="literal-block-wrapper docutils container" id="optimalkemeny">
-<div class="code-block-caption"><span class="caption-number">Listing 18 </span><span class="caption-text">Optimal Kemeny rankings</span><a class="headerlink" href="#optimalkemeny" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 21 </span><span class="caption-text">Optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#optimalkemeny" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -2918,7 +2929,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>We may visualize the partial order defined by the <em>epistemic disjunction</em> of both <em>Kemeny</em> rankings (see <a class="reference external" href="techDoc.html#module-transitiveDigraphs">transitiveDigraphs module</a> and <a class="reference internal" href="#tutorialkemeny"><span class="std std-numref">Fig. 20</span></a>) as follows.</p>
+<p>We may visualize the partial order defined by the <em>epistemic disjunction</em> of both optimal <em>Kemeny</em> rankings (see <a class="reference external" href="techDoc.html#module-transitiveDigraphs">transitiveDigraphs module</a> and <a class="reference internal" href="#tutorialkemeny"><span class="std std-numref">Fig. 20</span></a>) as follows.</p>
+<div class="literal-block-wrapper docutils container" id="kemenyordersfusion">
+<div class="code-block-caption"><span class="caption-number">Listing 22 </span><span class="caption-text">Computing the epistemic disjunction of all optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#kemenyordersfusion" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2948,17 +2961,18 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> dot -Grankdir=TB -Tpng tutorialKemeny.dot -o tutorialKemeny.png</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 <div class="figure align-center" id="tutorialkemeny">
 <a class="reference internal image-reference" href="_images/tutorialKemeny.png"><img alt="_images/tutorialKemeny.png" src="_images/tutorialKemeny.png" style="width: 175pt;" /></a>
 <p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">Epistemic disjunction of optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#tutorialkemeny" title="Permalink to this image">¶</a></p>
 </div>
-<p>It is interesting to notice in <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 18</span></a>, that both <em>Kemeny</em> rankings only differ in their respective ranking of alternative <em>a8</em>; either before or after alternatives <em>a9</em>, <em>a4</em> and <em>a1</em>.</p>
+<p>It is interesting to notice in <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 21</span></a>, that both <em>Kemeny</em> rankings only differ in their respective ranking of alternative <em>a8</em>; either before or after alternatives <em>a9</em>, <em>a4</em> and <em>a1</em>.</p>
 </div>
 <div class="section" id="slater-rankings">
 <h2><a class="toc-backref" href="#id193"><em>Slater</em> rankings</a><a class="headerlink" href="#slater-rankings" title="Permalink to this headline">¶</a></h2>
-<p>The <strong>Slater</strong> ranking rule is similar to <em>Kemeny</em>’s, but it is working, instead,  on the associated median cut strict outranking digraph <em>ccd</em>. Again, similar to <em>Kemeny</em>’s, <em>Slater</em>’s ranking rule is also <em>invariant</em> under the <em>codual</em> transform. The <em>Slater</em> rule renders here the following results.</p>
+<p>The <strong>Slater</strong> ranking rule is identical to <em>Kemeny</em>’s, but it is working, instead,  on the associated median cut digraphs <em>c</em> or <em>ccd</em>. Again <em>Slater</em>’s ranking rule is indeed <em>invariant</em> under the <em>codual</em> transform. The <em>Slater</em> rule renders here the following results.</p>
 <div class="literal-block-wrapper docutils container" id="slaterranking">
-<div class="code-block-caption"><span class="caption-number">Listing 19 </span><span class="caption-text">Computing the <em>Slater</em> ranking</span><a class="headerlink" href="#slaterranking" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 23 </span><span class="caption-text">Computing a <em>Slater</em> ranking</span><a class="headerlink" href="#slaterranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2968,7 +2982,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
  7
  8
  9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span> <span class="o">=</span> <span class="n">KemenyOrder</span><span class="p">(</span><span class="n">ccd</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span> <span class="o">=</span> <span class="n">KemenyOrder</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">showRanking</span><span class="p">()</span>
 <span class="go"> [&#39;a5&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a2&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">sl</span><span class="p">)</span>
@@ -2981,7 +2995,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>We notice that the first <em>Slater</em> ranking is a rather good fit (+0.676), slightly better apparently than the <em>NetFlows</em> ranking (+638). However, there are aparently 7 such potentially optimal <em>Slater</em> rankings (see :numref:`` Line 10). The corresponding epistemic disjunction gives the following partial ordering.</p>
+<p>We notice in <a class="reference internal" href="#slaterranking"><span class="std std-numref">Listing 23</span></a> Line 6 that the first <em>Slater</em> ranking is a rather good fit (+0.676), slightly better apparently than the <em>NetFlows</em> ranking result (+638). However, there are aparently 7 such potentially optimal <em>Slater</em> rankings (see <a class="reference internal" href="#slaterranking"><span class="std std-numref">Listing 23</span></a> Line 10). The corresponding epistemic disjunction gives the following partial ordering.</p>
+<div class="literal-block-wrapper docutils container" id="slaterordersfusion">
+<div class="code-block-caption"><span class="caption-number">Listing 24 </span><span class="caption-text">Computing the epistemic disjunction of optimal <em>Slater</em> rankings</span><a class="headerlink" href="#slaterordersfusion" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2993,7 +3009,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
  9
 10
 11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">slw</span> <span class="o">=</span> <span class="n">KemenyOrdersFusion</span><span class="p">(</span><span class="n">ccd</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">slw</span> <span class="o">=</span> <span class="n">KemenyOrdersFusion</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">slw</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tutorialSlater&#39;</span><span class="p">)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to tutorialSlater.dot</span>
@@ -3007,26 +3023,26 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> dot -Grankdir=TB -Tpng tutorialSlater.dot -o tutorialSlater.png</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 <div class="figure align-center" id="tutorialslater">
 <a class="reference internal image-reference" href="_images/tutorialSlater.png"><img alt="_images/tutorialSlater.png" src="_images/tutorialSlater.png" style="width: 175pt;" /></a>
 <p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">Epistemic disjunction of optimal <em>Slater</em> rankings</span><a class="headerlink" href="#tutorialslater" title="Permalink to this image">¶</a></p>
 </div>
-<p>What precise ranking result should we hence adopt ?</p>
-<p><em>Kemeny</em>’s as well as <em>Slater</em>’s ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (&lt; 20 objects).</p>
+<p>What precise ranking result should we hence adopt ? <em>Kemeny</em>’s as well as <em>Slater</em>’s ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (&lt; 20 objects).</p>
 <p>More efficient ranking heuristics, like the <em>Copeland</em> and the <em>NetFlows</em> rules, are therefore needed in practice.</p>
 </div>
 <div class="section" id="kohler-s-ranking-by-choosing-rule">
 <h2><a class="toc-backref" href="#id194"><em>Kohler</em>’s ranking-by-choosing rule</a><a class="headerlink" href="#kohler-s-ranking-by-choosing-rule" title="Permalink to this headline">¶</a></h2>
 <p><strong>Kohler</strong>’s <em>ranking-by-choosing</em> rule can be formulated like this.</p>
 <p>At step <em>i</em> (<em>i</em> goes from 1 to <em>n</em>) do the following:</p>
-<blockquote>
-<div><ol class="arabic simple">
+<ol class="arabic simple">
 <li><p>Compute for each row of the bipolar valued <em>strict</em> outranking relation table (see <a class="reference internal" href="#strictoutranking"><span class="std std-numref">Listing 12</span></a>) the smallest value;</p></li>
 <li><p>Select the row where this minimum is maximal. Ties are resolved in lexicographic order;</p></li>
 <li><p>Put the selected decision alternative at rank <em>i</em>;</p></li>
 <li><p>Delete the corresponding row and column from the relation table and restart until the table is empty.</p></li>
 </ol>
-</div></blockquote>
+<div class="literal-block-wrapper docutils container" id="kohlerranking">
+<div class="code-block-caption"><span class="caption-number">Listing 25 </span><span class="caption-text">Computing a <em>Kohler</em> ranking</span><a class="headerlink" href="#kohlerranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3048,7 +3064,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> Bipolar-valued equivalalence : +0.172</span>
 </pre></div>
 </td></tr></table></div>
-<p>With this <em>min-max</em> lexicographic <em>ranking-by-choosing</em> strategy, we find a correlation result (+0.747) that is until now clearly the nearest to an optimal <em>Kemeny</em> ranking (see <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 18</span></a>). Only two adjacent pairs: <em>[a6, a7]</em> and <em>[a8, a9]</em> are actually inverted here. Notice that “Kohler*’s ranking rule, contrary to the previously mentioned rules, is <strong>not</strong> <em>invariant</em> under the <em>codual</em> transform and requires to work on the <em>strict outranking</em> digraph <em>gcd</em> for a better correlation result.</p>
+</div>
+<p>With this <em>min-max</em> lexicographic <em>ranking-by-choosing</em> strategy, we find a correlation result (+0.747) that is until now clearly the nearest to an optimal <em>Kemeny</em> ranking (see <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 21</span></a>). Only two adjacent pairs: <em>[a6, a7]</em> and <em>[a8, a9]</em> are actually inverted here. Notice that “Kohler*’s ranking rule, contrary to the previously mentioned rules, is <strong>not</strong> <em>invariant</em> under the <em>codual</em> transform and requires to work on the <em>strict outranking</em> digraph <em>gcd</em> for a better correlation result.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -3069,20 +3086,18 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="section" id="tideman-s-ranked-pairs-rule">
 <h2><a class="toc-backref" href="#id195"><em>Tideman</em>’s ranked-pairs rule</a><a class="headerlink" href="#tideman-s-ranked-pairs-rule" title="Permalink to this headline">¶</a></h2>
 <p>A further <em>ranking-by-choosing</em> heuristic working best this time on the non strict outranking digraph <em>g</em>, the <strong>RankedPairs</strong> rule, is based on a <em>prudent incremental</em> construction of linear orders that avoids on the fly any cycling outrankings (see <a class="reference internal" href="#lam-2009" id="id32"><span>[LAM-2009]</span></a>). The ranking rule may be formulated as follows:</p>
-<blockquote>
-<div><ol class="arabic">
+<ol class="arabic simple">
 <li><p>Rank the ordered pairs <img class="math" src="_images/math/349c0e2dbdade2e90e54c3fdf0342401c320c56e.png" alt="(x,y)"/> of alternatives in decreasing order of the outranking characteristic values <img class="math" src="_images/math/dcfba86ef069adff1592eaad3c40e0b2f498575d.png" alt="r(x\, \geq \,y)"/>;</p></li>
 <li><p>Consider the pairs in that order (ties are resolved by a lexicographic rule):</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
 <li><p>if the next pair does not create a cycle with the pairs already blocked, block this pair;</p></li>
 <li><p>if the next pair creates a cycle with the already blocked pairs, skip it.</p></li>
 </ul>
-</div></blockquote>
 </li>
 </ol>
-</div></blockquote>
-<p>In our didactic outranking example, we get the following result.</p>
+<p>With our didactic outranking digraph <em>g</em>, we get the following result.</p>
+<div class="literal-block-wrapper docutils container" id="rankedpairsranking">
+<div class="code-block-caption"><span class="caption-number">Listing 26 </span><span class="caption-text">Computing a <em>RankedPairs</em> ranking</span><a class="headerlink" href="#rankedpairsranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -3092,6 +3107,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a2&#39;]</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 <p>The <em>RankedPairs</em> ranking rule actually renders in fact an optimal <em>Kemeny</em> rankings as we may verify below.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -3113,12 +3129,14 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 <p>Similar to <em>Kohler</em>’s rule, the <em>RankedPairs</em> rule has also a prudent <em>dual</em> version, the <strong>Dias-Lamboray</strong> <em>ordering-by-choosing</em> rule, which produces, when working this time on the codual <em>strict outranking</em> digraph <em>gcd</em>, the same ranking result (see <a class="reference internal" href="#lam-2009" id="id33"><span>[LAM-2009]</span></a>).</p>
-<p>Unfortunately, the <em>ranking-by-choosing</em> rules, as well as their dual <em>ordering-by-choosing</em> ones, are <em>not efficiently scalable</em> to outranking digraphs of larger orders (&gt; 1000). For such outranking digraphs, with several hundred or thousands of alternatives, only the <em>Copeland</em> and, more accuratly, the <em>NetFlows</em> ranking rules, with a polynomial complexity of <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/> where <em>n</em> is the order of the strict outranking digraph, remain in fact computationally efficient.</p>
+<p>Unfortunately, the <em>ranking-by-choosing</em> rules, as well as their dual <em>ordering-by-choosing</em> rules, are <em>not scalable</em> to outranking digraphs of larger orders (&gt; 1000). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the <em>Copeland</em> and the <em>NetFlows</em> ranking rules, with a polynomial complexity of <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/> where <em>n</em> is the order of the outranking digraph, remain in fact computationally tractable.</p>
 </div>
 <div class="section" id="ranking-big-performance-tableaux">
 <h2><a class="toc-backref" href="#id196">Ranking big performance tableaux</a><a class="headerlink" href="#ranking-big-performance-tableaux" title="Permalink to this headline">¶</a></h2>
-<p>None of the previous ranking heuristics, using essentially only the information given by the outranking relation, are scalable for <strong>big outranking digraphs</strong> gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into <strong>ordered quantiles equivalence classes</strong>. This decomposition will lead to a <em>pre-ranked sparse</em> outranking digraph.</p>
-<p>In the coding example, we generate for instance, by using multiprocessing techniques, first, a cost benefit performance tableau of 100 decision alternatives and, secondly, we construct a <strong>pre-ranked sparse outranking digraph</strong> instance called <em>bg</em>. Notice BTW the <em>BigData</em> flag used here for generating a parsimonious performance tableau.</p>
+<p>None of the previous ranking heuristics, using essentially only the information given by the pairwise outranking characteristics, are scalable for <strong>big outranking digraphs</strong> gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into <strong>ordered quantiles equivalence classes</strong>. This decomposition will lead to a <em>pre-ranked sparse</em> outranking digraph.</p>
+<p>In the coding example in <a class="reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 27</span></a>, we generate for instance, by using multiprocessing techniques, first (Lines 2-3), a cost benefit performance tableau of 100 decision alternatives and, secondly (Lines 4-5), we construct a <strong>pre-ranked sparse outranking digraph</strong> instance called <em>bg</em>. Notice by the way the <em>BigData</em> flag (Line 3) used here for generating a parsimonious performance tableau.</p>
+<div class="literal-block-wrapper docutils container" id="prerankedoutrankingdigraph">
+<div class="code-block-caption"><span class="caption-number">Listing 27 </span><span class="caption-text">Computing a <em>pre-ranked</em> outranking digraph</span><a class="headerlink" href="#prerankedoutrankingdigraph" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3145,10 +3163,10 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 24
 25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">PreRankedOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-<span class="gp">... </span>                                <span class="n">BigData</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="gp">... </span>                                <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
+<span class="gp">... </span>                                <span class="n">BigData</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="gp">... </span>                                <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span>
 <span class="go"> *----- show short --------------*</span>
 <span class="go"> Instance name     : randomCBperftab_mp</span>
 <span class="go"> # Actions         : 100</span>
@@ -3170,7 +3188,10 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> &lt;class &#39;sparseOutrankingDigraphs.PreRankedOutrankingDigraph&#39;&gt; instance</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 <p>The total run time of the <a class="reference internal" href="techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="sparseOutrankingDigraphs.PreRankedOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sparseOutrankingDigraphs.PreRankedOutrankingDigraph</span></code></a> constructor is less than a fifth of a second. The corresponding multiple criteria deciles sorting leads to 20 quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows.</p>
+<div class="literal-block-wrapper docutils container" id="quantilesdecomposition">
+<div class="code-block-caption"><span class="caption-number">Listing 28 </span><span class="caption-text">Showing the quantiles decomposiion of a pre-ranked outranking digraph</span><a class="headerlink" href="#quantilesdecomposition" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3220,7 +3241,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> 19. ]0.10-0.20] : [9, 59, 23]</span>
 </pre></div>
 </td></tr></table></div>
-<p>The best decile (]80%-90%]) gathers decision alternatives <em>49</em>, <em>10</em>, and <em>52</em>. Worst decile (]10%-20%]) gathers alternatives <em>9</em>, <em>59</em>, and <em>23</em>.</p>
+</div>
+<p>The best decile (]80%-90%]) gathers decision alternatives <em>49</em>, <em>10</em>, and <em>52</em>. Worst decile (]10%-20%]) gathers alternatives <em>9</em>, <em>59</em>, and <em>23</em> (see <a class="reference internal" href="#quantilesdecomposition"><span class="std std-numref">Listing 28</span></a> Lines 3 and 24).</p>
 <p>Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the <em>Copeland</em> and the <em>NetFlows</em> rules. The eventually obtained linear ordering (from the worst to best) is the following.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
