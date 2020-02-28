@@ -2802,16 +2802,16 @@
 <span class="c1">##    print(pre.computeOrderCorrelation(pre.boostedOrder))</span>
 <span class="c1">##    tenv.showHTMLPerformanceHeatmap()</span>
     <span class="n">MP</span>  <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
+    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">100</span>
 <span class="c1">##    t0 = time()</span>
-    <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1">##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=100)</span>
 <span class="c1">##    tp = XMCDA2PerformanceTableau(&#39;the_cs_2016&#39;)</span>
 
-<span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,</span>
-<span class="c1">##                                     seed=100)</span>
-    <span class="n">bg1</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-                                 <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;optimal&#39;</span><span class="p">,</span>
-                                 <span class="n">componentRankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span>
+                                     <span class="n">BigData</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">bg1</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                 <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
+                                 <span class="n">componentRankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>
                                  <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                  <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                                  <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
@@ -2819,7 +2819,7 @@
                                  <span class="n">nbrOfThreads</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
                                  <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                  <span class="n">save2File</span><span class="o">=</span><span class="s1">&#39;testbgMP&#39;</span><span class="p">)</span>
-    <span class="n">bg1</span><span class="o">.</span><span class="n">showDecomposition</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">)</span>
+    <span class="n">bg1</span><span class="o">.</span><span class="n">showDecomposition</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;increasing&#39;</span><span class="p">)</span>
 
     <span class="n">seed</span><span class="o">=</span> <span class="mi">1</span>
     <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">100</span>

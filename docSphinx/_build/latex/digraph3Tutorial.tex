@@ -2437,9 +2437,9 @@ The \sphinxstylestrong{NetFlows} ranking we obtain in this didactic example (Lin
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{nf}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
-\PYG{g+go}{ Extended Kendall tau         : +0.638}
-\PYG{g+go}{ Epistemic determination      :  0.230}
-\PYG{g+go}{ Bipolar\PYGZhy{}valued equivalalence : +0.147}
+\PYG{g+go}{  Extended Kendall tau         : +0.638}
+\PYG{g+go}{  Bipolar\PYGZhy{}valued equivalalence : +0.147}
+\PYG{g+go}{  Epistemic determination      :  0.230}
 \end{sphinxVerbatim}
 
 Indeed, the extended \sphinxstyleemphasis{Kendall} tau index of +0.638 leads to a bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{relational equivalence} characteristics of +0.147, i.e. a \sphinxstyleemphasis{majority} of 57.35\% of the criteria significance supports the relational equivalence between the given outranking digraphs \sphinxstyleemphasis{g} or \sphinxstyleemphasis{gcd}  and the corresponding \sphinxstyleemphasis{NetFlows} ranking.
@@ -2460,12 +2460,12 @@ A \sphinxstylestrong{Kemeny} ranking is a linear order which is \sphinxstyleemph
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{ke}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
-\PYG{g+go}{ Extended Kendall tau         : +0.779}
-\PYG{g+go}{ Epistemic determination      :  0.230}
-\PYG{g+go}{ Bipolar\PYGZhy{}valued equivalalence : +0.179}
+\PYG{g+go}{  Extended Kendall tau         : +0.779}
+\PYG{g+go}{  Bipolar\PYGZhy{}valued equivalalence : +0.179}
+\PYG{g+go}{  Epistemic determination      :  0.230}
 \end{sphinxVerbatim}
 
-So, \sphinxstylestrong{+0.779} represents the \sphinxstyleemphasis{highest possible} ordinal correlation (fitness) any potential ranking one can achieve with the given pairwise outranking digraph (see \hyperref[\detokenize{tutorial:kemenyranking}]{Listing \ref{\detokenize{tutorial:kemenyranking}}} Lines 7\sphinxhyphen{}10).
+So, \sphinxstylestrong{+0.779} represents the \sphinxstyleemphasis{highest possible} ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking digraph (see \hyperref[\detokenize{tutorial:kemenyranking}]{Listing \ref{\detokenize{tutorial:kemenyranking}}} Lines 7\sphinxhyphen{}10).
 
 A \sphinxstyleemphasis{Kemeny} ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example here, we obtain in fact two optimal \sphinxstyleemphasis{Kemeny} rankings with a same \sphinxstylestrong{maximal} \sphinxstyleemphasis{Kemeny} index of 12.92.
 \sphinxSetupCaptionForVerbatim{Optimal \sphinxstyleemphasis{Kemeny} rankings}
@@ -2637,7 +2637,7 @@ With our didactic outranking digraph \sphinxstyleemphasis{g}, we get the followi
 \PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-The \sphinxstyleemphasis{RankedPairs} ranking rule actually renders in fact an optimal \sphinxstyleemphasis{Kemeny} rankings as we may verify below.
+The \sphinxstyleemphasis{RankedPairs} ranking rule renders in fact one of the two optimal \sphinxstyleemphasis{Kemeny} ranking, as we may verify below.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ke}\PYG{o}{.}\PYG{n}{maximalRankings}
@@ -2646,9 +2646,9 @@ The \sphinxstyleemphasis{RankedPairs} ranking rule actually renders in fact an o
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{rp}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
-\PYG{g+go}{ Extended Kendall tau         : +0.779}
-\PYG{g+go}{ Bipolar\PYGZhy{}valued equivalalence : +0.179}
-\PYG{g+go}{ Epistemic determination      :  0.230}
+\PYG{g+go}{  Extended Kendall tau         : +0.779}
+\PYG{g+go}{  Bipolar\PYGZhy{}valued equivalalence : +0.179}
+\PYG{g+go}{  Epistemic determination      :  0.230}
 \end{sphinxVerbatim}
 
 Similar to \sphinxstyleemphasis{Kohler}’s rule, the \sphinxstyleemphasis{RankedPairs} rule has also a prudent \sphinxstyleemphasis{dual} version, the \sphinxstylestrong{Dias\sphinxhyphen{}Lamboray} \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}choosing} rule, which produces, when working this time on the codual \sphinxstyleemphasis{strict outranking} digraph \sphinxstyleemphasis{gcd}, the same ranking result (see \sphinxcite{tutorial:lam-2009}).
@@ -2724,9 +2724,10 @@ The total run time of the \sphinxcode{\sphinxupquote{sparseOutrankingDigraphs.Pr
 The best decile ({]}80\%\sphinxhyphen{}90\%{]}) gathers decision alternatives \sphinxstyleemphasis{49}, \sphinxstyleemphasis{10}, and \sphinxstyleemphasis{52}. Worst decile ({]}10\%\sphinxhyphen{}20\%{]}) gathers alternatives \sphinxstyleemphasis{9}, \sphinxstyleemphasis{59}, and \sphinxstyleemphasis{23} (see \hyperref[\detokenize{tutorial:quantilesdecomposition}]{Listing \ref{\detokenize{tutorial:quantilesdecomposition}}} Lines 3 and 24).
 
 Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the \sphinxstyleemphasis{Copeland} and the \sphinxstyleemphasis{NetFlows} rules. The eventually obtained linear ordering (from the worst to best) is the following.
-
+\sphinxSetupCaptionForVerbatim{Showing the componentwise \sphinxstyleemphasis{Copeland} ranking}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:boostedorder}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{bg}\PYG{o}{.}\PYG{n}{boostedOrder}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bg}\PYG{o}{.}\PYG{n}{boostedOrder}
 \PYG{g+go}{ [59, 9, 23, 17, 11, 98, 26, 81, 40, 64, 3, 74,}
 \PYG{g+go}{ 28, 53, 24, 58, 65, 62, 46, 20, 93, 89, 97, 61,}
 \PYG{g+go}{ 99, 6, 36, 43, 4, 50, 39, 92, 94, 60, 14, 76, 63,}
@@ -2737,16 +2738,20 @@ Each one of these 20 ordered components may now be locally ranked by using a sui
 \PYG{g+go}{ 41, 70, 79, 86, 84, 18, 45, 49, 10, 52]}
 \end{sphinxVerbatim}
 
-Alternative \sphinxstyleemphasis{52} appears first ranked, whereas alternative \sphinxstyleemphasis{59} is last ranked. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking relation.
-
+Alternative \sphinxstyleemphasis{52} appears \sphinxstyleemphasis{first ranked}, whereas alternative \sphinxstyleemphasis{59} is \sphinxstyleemphasis{last ranked}. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking relation.
+\sphinxSetupCaptionForVerbatim{Quality of \sphinxstyleemphasis{Copeland}’s ranking rule for pre\sphinxhyphen{}ranked digraphs}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:prerankeddigrapgcorrelationindexes}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{tp}\PYG{p}{,}\PYG{n}{Normalized}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{Threading}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrderCorrelation}\PYG{p}{(}\PYG{n}{bg}\PYG{o}{.}\PYG{n}{boostedOrder}\PYG{p}{)}
-\PYG{g+go}{ \PYGZob{}\PYGZsq{}correlation\PYGZsq{}: 0.7485,}
-\PYG{g+go}{  \PYGZsq{}determination\PYGZsq{}: 0.4173\PYGZcb{}}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrderCorrelation}\PYG{p}{(}\PYG{n}{bg}\PYG{o}{.}\PYG{n}{boostedOrder}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
+\PYG{g+go}{ Correlation indexes:}
+\PYG{g+go}{  Extended Kendall tau         : +0.749}
+\PYG{g+go}{  Bipolar\PYGZhy{}valued equivalalence : +0.312}
+\PYG{g+go}{  Epistemic determination      :  0.417}
 \end{sphinxVerbatim}
 
-This ranking heuristic is readily scalable with ad hoc HPC tuning to several millions of decision alternatives (see \sphinxcite{tutorial:bis-2016}).
+The Copeland as well as the NetFlows ranking heuristics are readily scalable with ad hoc HPC tuning to several millions of decision alternatives (see \sphinxcite{tutorial:bis-2016}).
 
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}}
 

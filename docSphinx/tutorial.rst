@@ -2153,9 +2153,9 @@ The **NetFlows** ranking we obtain in this didactic example (Line 14), appears t
    >>> corr = gcd.computeOrdinalCorrelation(nf)
    >>> gcd.showCorrelation(corr)
     Correlation indexes:
-    Extended Kendall tau         : +0.638
-    Epistemic determination      :  0.230
-    Bipolar-valued equivalalence : +0.147
+     Extended Kendall tau         : +0.638
+     Bipolar-valued equivalalence : +0.147
+     Epistemic determination      :  0.230
 
 Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *relational equivalence* characteristics of +0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs *g* or *gcd*  and the corresponding *NetFlows* ranking.
 
@@ -2178,11 +2178,11 @@ A **Kemeny** ranking is a linear order which is *closest*, in the sense of the o
    >>> corr = g.computeOrdinalCorrelation(ke)
    >>> g.showCorrelation(corr)
     Correlation indexes:
-    Extended Kendall tau         : +0.779
-    Epistemic determination      :  0.230
-    Bipolar-valued equivalalence : +0.179
+     Extended Kendall tau         : +0.779
+     Bipolar-valued equivalalence : +0.179
+     Epistemic determination      :  0.230
     
-So, **+0.779** represents the *highest possible* ordinal correlation (fitness) any potential ranking one can achieve with the given pairwise outranking digraph (see :numref:`KemenyRanking` Lines 7-10).
+So, **+0.779** represents the *highest possible* ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking digraph (see :numref:`KemenyRanking` Lines 7-10).
 
 A *Kemeny* ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example here, we obtain in fact two optimal *Kemeny* rankings with a same **maximal** *Kemeny* index of 12.92.
 
@@ -2346,7 +2346,7 @@ With our didactic outranking digraph *g*, we get the following result.
    >>> rp.showRanking()
     ['a5', 'a6', 'a7', 'a3', 'a8', 'a9', 'a4', 'a1', 'a2']
 
-The *RankedPairs* ranking rule actually renders in fact an optimal *Kemeny* rankings as we may verify below.
+The *RankedPairs* ranking rule renders in fact one of the two optimal *Kemeny* ranking, as we may verify below.
  
 .. code-block:: pycon
    :linenos:
@@ -2357,9 +2357,9 @@ The *RankedPairs* ranking rule actually renders in fact an optimal *Kemeny* rank
    >>> corr = g.computeOrdinalCorrelation(rp)
    >>> g.computeCorrelation(corr)
     Correlation indexes:
-    Extended Kendall tau         : +0.779
-    Bipolar-valued equivalalence : +0.179
-    Epistemic determination      :  0.230
+     Extended Kendall tau         : +0.779
+     Bipolar-valued equivalalence : +0.179
+     Epistemic determination      :  0.230
 
 Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* version, the **Dias-Lamboray** *ordering-by-choosing* rule, which produces, when working this time on the codual *strict outranking* digraph *gcd*, the same ranking result (see [LAM-2009]_).
 
@@ -2440,9 +2440,11 @@ The best decile (]80%-90%]) gathers decision alternatives *49*, *10*, and *52*. 
 Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the *Copeland* and the *NetFlows* rules. The eventually obtained linear ordering (from the worst to best) is the following.
   
 .. code-block:: pycon
+   :name: boostedOrder
+   :caption: Showing the componentwise *Copeland* ranking
    :linenos:
 
-   >>> print(bg.boostedOrder)
+   >>> bg.boostedOrder
     [59, 9, 23, 17, 11, 98, 26, 81, 40, 64, 3, 74,
     28, 53, 24, 58, 65, 62, 46, 20, 93, 89, 97, 61,
     99, 6, 36, 43, 4, 50, 39, 92, 94, 60, 14, 76, 63,
@@ -2452,16 +2454,21 @@ Each one of these 20 ordered components may now be locally ranked by using a sui
     95, 35, 80, 37, 7, 12, 68, 2, 90, 55, 30, 75, 8, 44,
     41, 70, 79, 86, 84, 18, 45, 49, 10, 52]
 
-Alternative *52* appears first ranked, whereas alternative *59* is last ranked. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking relation.
+Alternative *52* appears *first ranked*, whereas alternative *59* is *last ranked*. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking relation.
 
 .. code-block:: pycon
+   :name: preRankedDigrapgCorrelationIndexes
+   :caption: Quality of *Copeland*'s ranking rule for pre-ranked digraphs 
 
    >>> g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=True)
-   >>> g.computeOrderCorrelation(bg.boostedOrder)
-    {'correlation': 0.7485,
-     'determination': 0.4173}
+   >>> corr = g.computeOrderCorrelation(bg.boostedOrder)
+   >>> g.showCorrelation(corr)
+    Correlation indexes:
+     Extended Kendall tau         : +0.749
+     Bipolar-valued equivalalence : +0.312
+     Epistemic determination      :  0.417
 
-This ranking heuristic is readily scalable with ad hoc HPC tuning to several millions of decision alternatives (see [BIS-2016]_).
+The Copeland as well as the NetFlows ranking heuristics are readily scalable with ad hoc HPC tuning to several millions of decision alternatives (see [BIS-2016]_).
 
 Back to :ref:`Content Table <Tutorial-label>`
 

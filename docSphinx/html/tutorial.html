@@ -2877,9 +2877,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">nf</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
-<span class="go"> Extended Kendall tau         : +0.638</span>
-<span class="go"> Epistemic determination      :  0.230</span>
-<span class="go"> Bipolar-valued equivalalence : +0.147</span>
+<span class="go">  Extended Kendall tau         : +0.638</span>
+<span class="go">  Bipolar-valued equivalalence : +0.147</span>
+<span class="go">  Epistemic determination      :  0.230</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -2907,13 +2907,13 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">ke</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
-<span class="go"> Extended Kendall tau         : +0.779</span>
-<span class="go"> Epistemic determination      :  0.230</span>
-<span class="go"> Bipolar-valued equivalalence : +0.179</span>
+<span class="go">  Extended Kendall tau         : +0.779</span>
+<span class="go">  Bipolar-valued equivalalence : +0.179</span>
+<span class="go">  Epistemic determination      :  0.230</span>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>So, <strong>+0.779</strong> represents the <em>highest possible</em> ordinal correlation (fitness) any potential ranking one can achieve with the given pairwise outranking digraph (see <a class="reference internal" href="#kemenyranking"><span class="std std-numref">Listing 20</span></a> Lines 7-10).</p>
+<p>So, <strong>+0.779</strong> represents the <em>highest possible</em> ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking digraph (see <a class="reference internal" href="#kemenyranking"><span class="std std-numref">Listing 20</span></a> Lines 7-10).</p>
 <p>A <em>Kemeny</em> ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example here, we obtain in fact two optimal <em>Kemeny</em> rankings with a same <strong>maximal</strong> <em>Kemeny</em> index of 12.92.</p>
 <div class="literal-block-wrapper docutils container" id="optimalkemeny">
 <div class="code-block-caption"><span class="caption-number">Listing 21 </span><span class="caption-text">Optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#optimalkemeny" title="Permalink to this code">¶</a></div>
@@ -3108,7 +3108,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>The <em>RankedPairs</em> ranking rule actually renders in fact an optimal <em>Kemeny</em> rankings as we may verify below.</p>
+<p>The <em>RankedPairs</em> ranking rule renders in fact one of the two optimal <em>Kemeny</em> ranking, as we may verify below.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -3123,9 +3123,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">rp</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
-<span class="go"> Extended Kendall tau         : +0.779</span>
-<span class="go"> Bipolar-valued equivalalence : +0.179</span>
-<span class="go"> Epistemic determination      :  0.230</span>
+<span class="go">  Extended Kendall tau         : +0.779</span>
+<span class="go">  Bipolar-valued equivalalence : +0.179</span>
+<span class="go">  Epistemic determination      :  0.230</span>
 </pre></div>
 </td></tr></table></div>
 <p>Similar to <em>Kohler</em>’s rule, the <em>RankedPairs</em> rule has also a prudent <em>dual</em> version, the <strong>Dias-Lamboray</strong> <em>ordering-by-choosing</em> rule, which produces, when working this time on the codual <em>strict outranking</em> digraph <em>gcd</em>, the same ranking result (see <a class="reference internal" href="#lam-2009" id="id33"><span>[LAM-2009]</span></a>).</p>
@@ -3244,6 +3244,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <p>The best decile (]80%-90%]) gathers decision alternatives <em>49</em>, <em>10</em>, and <em>52</em>. Worst decile (]10%-20%]) gathers alternatives <em>9</em>, <em>59</em>, and <em>23</em> (see <a class="reference internal" href="#quantilesdecomposition"><span class="std std-numref">Listing 28</span></a> Lines 3 and 24).</p>
 <p>Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the <em>Copeland</em> and the <em>NetFlows</em> rules. The eventually obtained linear ordering (from the worst to best) is the following.</p>
+<div class="literal-block-wrapper docutils container" id="boostedorder">
+<div class="code-block-caption"><span class="caption-number">Listing 29 </span><span class="caption-text">Showing the componentwise <em>Copeland</em> ranking</span><a class="headerlink" href="#boostedorder" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -3252,7 +3254,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 6
 7
 8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedOrder</span><span class="p">)</span>
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span><span class="o">.</span><span class="n">boostedOrder</span>
 <span class="go"> [59, 9, 23, 17, 11, 98, 26, 81, 40, 64, 3, 74,</span>
 <span class="go"> 28, 53, 24, 58, 65, 62, 46, 20, 93, 89, 97, 61,</span>
 <span class="go"> 99, 6, 36, 43, 4, 50, 39, 92, 94, 60, 14, 76, 63,</span>
@@ -3263,17 +3265,27 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> 41, 70, 79, 86, 84, 18, 45, 49, 10, 52]</span>
 </pre></div>
 </td></tr></table></div>
-<p>Alternative <em>52</em> appears first ranked, whereas alternative <em>59</em> is last ranked. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking relation.</p>
+</div>
+<p>Alternative <em>52</em> appears <em>first ranked</em>, whereas alternative <em>59</em> is <em>last ranked</em>. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking relation.</p>
+<div class="literal-block-wrapper docutils container" id="prerankeddigrapgcorrelationindexes">
+<div class="code-block-caption"><span class="caption-number">Listing 30 </span><span class="caption-text">Quality of <em>Copeland</em>’s ranking rule for pre-ranked digraphs</span><a class="headerlink" href="#prerankeddigrapgcorrelationindexes" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedOrder</span><span class="p">)</span>
-<span class="go"> {&#39;correlation&#39;: 0.7485,</span>
-<span class="go">  &#39;determination&#39;: 0.4173}</span>
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedOrder</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+<span class="go"> Correlation indexes:</span>
+<span class="go">  Extended Kendall tau         : +0.749</span>
+<span class="go">  Bipolar-valued equivalalence : +0.312</span>
+<span class="go">  Epistemic determination      :  0.417</span>
 </pre></div>
 </td></tr></table></div>
-<p>This ranking heuristic is readily scalable with ad hoc HPC tuning to several millions of decision alternatives (see <a class="reference internal" href="#bis-2016" id="id34"><span>[BIS-2016]</span></a>).</p>
+</div>
+<p>The Copeland as well as the NetFlows ranking heuristics are readily scalable with ad hoc HPC tuning to several millions of decision alternatives (see <a class="reference internal" href="#bis-2016" id="id34"><span>[BIS-2016]</span></a>).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 </div>
 </div>
