@@ -2762,16 +2762,16 @@ if __name__ == "__main__":
 ##    print(pre.computeOrderCorrelation(pre.boostedOrder))
 ##    tenv.showHTMLPerformanceHeatmap()
     MP  = False
-    nbrActions=1000
+    nbrActions=100
 ##    t0 = time()
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=100)
+##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=100)
 ##    tp = XMCDA2PerformanceTableau('the_cs_2016')
 
-##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
-##                                     seed=100)
-    bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=4,
-                                 quantilesOrderingStrategy='optimal',
-                                 componentRankingRule='NetFlows',
+    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
+                                     BigData=True,seed=100)
+    bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=10,
+                                 quantilesOrderingStrategy='average',
+                                 componentRankingRule='Copeland',
                                  LowerClosed=True,
                                  minimalComponentSize=1,
                                  Threading=MP,nbrOfCPUs=8,
@@ -2779,7 +2779,7 @@ if __name__ == "__main__":
                                  nbrOfThreads=8,
                                  Comments=True,Debug=False,
                                  save2File='testbgMP')
-    bg1.showDecomposition(direction='decreasing')
+    bg1.showDecomposition(direction='increasing')
 
     seed= 1
     sampleSize = 100
