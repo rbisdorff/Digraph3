@@ -2065,7 +2065,7 @@ The *Copeland* ranking
    :linenos:
 
    >>> from linearOrders import CopelandOrder
-   >>> cop = CopelandOrder(gcd,Comments=True)
+   >>> cop = CopelandOrder(g,Comments=True)
     Copeland decreasing scores
      a5 : 12
      a1 : 2
@@ -2079,9 +2079,9 @@ The *Copeland* ranking
     Copeland Ranking:
     ['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2']
 
-Alternative *a5* obtains the best *Copeland* score (+12), followed by alternatives *a1*, *a6* and *a7* with same score (+2); following the lexicographic rule, *a1* is hence ranked before *a6* and *a6* before *a7*. Same situation is observed for *a4* and *a9* with a score of -3 (see :numref:`CopelandRanking`).
+Alternative *a5* obtains the best *Copeland* score (+12), followed by alternatives *a1*, *a6* and *a7* with same score (+2); following the lexicographic rule, *a1* is hence ranked before *a6* and *a6* before *a7*. Same situation is observed for *a4* and *a9* with a score of -3 (see :numref:`CopelandRanking` Lines 4-12).
 
-Notice that *Copeland*'s ranking rule is invariant under the *codual* transform and renders a linear order which is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal *Kendall* sense (see :numref:`CopelandCorrelationIndexes` and [BIS-2012]_).
+*Copeland*'s ranking rule appears in fact **invariant** under the *codual* transform and renders a same linear order indifferently from digraphs *g* or *gcd* . The resulting ranking (see :numref:`CopelandRanking` Line 14) is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal *Kendall* sense (see :numref:`CopelandCorrelationIndexes`).
 
 .. code-block:: pycon
    :name: CopelandCorrelationIndexes
@@ -2095,9 +2095,9 @@ Notice that *Copeland*'s ranking rule is invariant under the *codual* transform 
      Valued equivalalence      : +0.107
      Epistemic determination   :  0.230
 
-With an epistemic determination level of 0.230, the *extended Kendall tau* index is in fact computed on 74.15% of the pairwise strict outranking comparisons. Furthermore, the bipolar-valued *relational equivalence* characteristics between the strict outranking relation and the *Copeland* ranking equals +0.107, i.e. a *majority* of 55.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding *Copeland* ranking (see [BIS-2012]_).
+With an epistemic determination level of 0.230, the *extended Kendall tau* index (see [BIS-2012]_) is in fact computed on 74.15% of the pairwise strict outranking comparisons. Furthermore, the bipolar-valued *relational equivalence* characteristics between the strict outranking relation and the *Copeland* ranking equals +0.107, i.e. a *majority* of 55.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding *Copeland* ranking.
 
-The *Copeland* scores deliver actually only a unique *weak order*, i.e. a ranking with potential ties. This weak order may be constructed with the :py:class:`transitiveDigraphs.WeakCopelandOrder` class.
+The *Copeland* scores deliver actually only a unique *weak ranking*, i.e. a ranking with potential ties. This weak ranking may be constructed with the :py:class:`transitiveDigraphs.WeakCopelandOrder` class.
 
 .. code-block:: pycon
    :name: weakCopelandRanking
@@ -2115,7 +2115,7 @@ The *Copeland* scores deliver actually only a unique *weak order*, i.e. a rankin
        2nd last ranked ['a3'] (1.00)
      1st last ranked ['a2'] (1.00)
 
-We recover in :numref:`weakCopelandRanking` above, the ranking with ties delivered by the *Copeland* scores (see :numref:`CopelandRanking`). The bracketed numbers indicate that this weak ranking is certainly valid. We may draw its corresponding *Hasse skeleton*.
+We recover in :numref:`weakCopelandRanking` above, the ranking with ties delivered by the *Copeland* scores (see :numref:`CopelandRanking`). The bracketed numbers indicate that this weak ranking is certainly valid. We may draw its corresponding *Hasse* diagram.
 
 .. code-block:: pycon
    :name: weakCopelandRankingDrawing
@@ -2146,7 +2146,7 @@ Let us now consider a similar ranking rule, but working directly on the *valued*
 The *NetFlows* ranking
 ......................
 
-The valued version of the *Copeland* rule, called **NetFlows** rule, computes for each alternative *x* a *net flow* score,  i.e. the sum of the differences between the **strict outranking** characteristics :math:`r(x\, > \,y)` and the **strict outranked** characteristics :math:`r(y\, > \,x)` for all pairs of alternatives where *y* is different from *x*. It is worthwhile noticing again, that similar to the *Copeland* ranking rule seen before, the *NetFlows* ranking rule is also *invariant* under the *codual* transform.
+The valued version of the *Copeland* rule, called **NetFlows** rule, computes for each alternative *x* a *net flow* score,  i.e. the sum of the differences between the **strict outranking** characteristics :math:`r(x\, > \,y)` and the **strict outranked** characteristics :math:`r(y\, > \,x)` for all pairs of alternatives where *y* is different from *x*.
   
 .. code-block:: pycon
    :name: NetFlowsRanking
@@ -2154,7 +2154,7 @@ The valued version of the *Copeland* rule, called **NetFlows** rule, computes fo
    :linenos:
 
    >>> from linearOrders import NetFlowsOrder
-   >>> nf = NetFlowsOrder(g,Comments=True)
+   >>> nf = NetFlowsOrder(gcd,Comments=True)
     Net Flows :
     a5 : 3.600
     a7 : 2.800
@@ -2167,10 +2167,14 @@ The valued version of the *Copeland* rule, called **NetFlows** rule, computes fo
     a2 : -2.883
     NetFlows Ranking:
     ['a5', 'a7', 'a6', 'a3', 'a1', 'a8', 'a4', 'a9', 'a2']
+   >>> cop.copelandRanking
+    ['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2']
 
-The *NetFlows* scores deliver in this example a ranking *without ties* (see :numref:`NetFlowsRanking`). It may happen, however, that we obtain, as with the *Copeland* scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a *weak ranking* with the corresponding :py:class:`transitiveDigraphs.WeakNetFlowsOrder` class.
+It is worthwhile noticing again, that similar to the *Copeland* ranking rule seen before, the *NetFlows* ranking rule is also **invariant** under the *codual* transform and delivers the same ranking result indifferently from digraphs *g* or *gcd* (see :numref:`NetFlowsRanking` Line 14). 
 
-The **NetFlows** ranking we obtain in this didactic example (Line 14), appears to be slightly better correlated (+0.638) with the given outranking relation than its crisp cousin, the *Copeland* ranking (see :numref:`CopelandCorrelationIndexes` Lines 4-6). 
+The *NetFlows* scores deliver in this example a ranking *without ties* which is rather different from the one delivered by *Copeland*'s rule (see :numref:`NetFlowsRanking` Line 16). It may happen, however, that we obtain, as with the *Copeland* scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a *weak ranking* with the corresponding :py:class:`transitiveDigraphs.WeakNetFlowsOrder` class.
+
+The **NetFlows** ranking we obtain in this didactic example (Line 14), appears to be slightly better correlated (+0.638) with the given outranking relation than its crisp cousin, the *Copeland* ranking (see :numref:`CopelandCorrelationIndexes` Lines 4-6).
 
 .. code-block:: pycon
    :name: NetFlowsCorrelationIndexes
@@ -2184,14 +2188,14 @@ The **NetFlows** ranking we obtain in this didactic example (Line 14), appears t
      Bipolar-valued equivalalence : +0.147
      Epistemic determination      :  0.230
 
-Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *relational equivalence* characteristics of +0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs *g* or *gcd*  and the corresponding *NetFlows* ranking.
+Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *relational equivalence* characteristics of +0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs *g* or *gcd*  and the corresponding *NetFlows* ranking. This lower correlation of the *Copeland* ranking appears to be due essentially to its *weakness* and our subsequent *artirary* lexicographic resolution of the ties given by the *Copeland* scores (see :numref:`weakRankingDrawing`).
 
-To appreciate now the respective quality of both the *Copeland* and the *NetFlows* rankings, it is useful to consider *Kemeny*'s and *Slater*'s **optimal** ranking rules.
+To appreciate now the absolute quality of both the *Copeland* and the *NetFlows* rankings, it is useful to consider *Kemeny*'s and *Slater*'s **optimal** ranking rules.
 
 *Kemeny* rankings
 .................
 
-A **Kemeny** ranking is a linear order which is *closest*, in the sense of the ordinal *Kendall* distance (see [BIS-2012]_), to the given valued outranking digraphs *g* or *gcd*. The rule is indeed again *invariant* under the codual transform. As the *Kemeny*'s rule proceeds by inspecting all possible permutations of the decision alternatives, it is unfortunately only computable for tiny outranking digraphs and the class constructor assumes by default that the order of the digraph does not exceed 7 (see :numref:`KemenyRanking` Line 2). 
+A **Kemeny** ranking is a linear order which is *closest*, in the sense of the ordinal *Kendall* distance (see [BIS-2012]_), to the given valued outranking digraphs *g* or *gcd*. The rule is indeed again *invariant* under the *codual* transform. As *Kemeny*'s rule proceeds by inspecting all possible permutations of the decision alternatives, it is unfortunately only computable for tiny outranking digraphs and the class constructor assumes by default that the order of the digraph does not exceed 7 (7! = 5040 permutations to inspect, see :numref:`KemenyRanking` Line 2). 
 
 .. code-block:: pycon
    :name: KemenyRanking
@@ -2211,7 +2215,7 @@ A **Kemeny** ranking is a linear order which is *closest*, in the sense of the o
     
 So, **+0.779** represents the *highest possible* ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking digraph (see :numref:`KemenyRanking` Lines 7-10).
 
-A *Kemeny* ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example here, we obtain in fact two optimal *Kemeny* rankings with a same **maximal** *Kemeny* index of 12.92.
+A *Kemeny* ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example here, we obtain in fact two optimal *Kemeny* rankings with a same **maximal** *Kemeny* index of 12.967 .
 
 .. code-block:: pycon
    :caption: Optimal *Kemeny* rankings
@@ -2258,7 +2262,7 @@ It is interesting to notice in :numref:`optimalKemeny`, that both *Kemeny* ranki
 *Slater* rankings
 .................
 
-The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, instead,  on the associated median cut digraphs *c* or *ccd*. Again *Slater*'s ranking rule is indeed *invariant* under the *codual* transform. The *Slater* rule renders here the following results.
+The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, instead, indifferently on the associated median cut digraphs *c* or *ccd*. Again *Slater*'s ranking rule is indeed *invariant* under the *codual* transform. The *Slater* rule renders here the following results.
 
 .. code-block:: pycon
    :name: SlaterRanking
