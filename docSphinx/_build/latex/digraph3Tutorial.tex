@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{February 28, 2020}
+\date{February 29, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -270,7 +270,6 @@ Its associated \sphinxstylestrong{notGamma function} : a dictionary containing t
 The \sphinxcode{\sphinxupquote{dg.save(\textquotesingle{}tutorialDigraph\textquotesingle{})}} command (see Line 19 above) stores the digraph \sphinxstyleemphasis{dg} in a file named \sphinxcode{\sphinxupquote{tutorialDigraph.py}} with the following content.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{c+c1}{\PYGZsh{} Saved digraph instance}
 \PYG{n}{actions} \PYG{o}{=} \PYG{p}{\PYGZob{}}
  \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{shortName}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{random decision action}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
  \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{shortName}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{random decision action}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
@@ -292,8 +291,9 @@ The \sphinxcode{\sphinxupquote{dg.save(\textquotesingle{}tutorialDigraph\textquo
 
 \subsection{Inspecting a \sphinxstyleliteralintitle{\sphinxupquote{Digraph}} object}
 \label{\detokenize{tutorial:inspecting-a-digraph-object}}
-We may reload a previously saved \sphinxcode{\sphinxupquote{Digraph}} instance from the file named \sphinxcode{\sphinxupquote{tutorialDigraph.py}} with the \sphinxcode{\sphinxupquote{Digraph}} class constructor and the \sphinxcode{\sphinxupquote{digraphs.Digraph.showAll()}} method output reveals us that \sphinxstyleemphasis{dg} is a connected irreflexive digraph of order five evaluated in a valuation domain from \sphinxhyphen{}1 to 1.
-
+We may reload a previously saved \sphinxcode{\sphinxupquote{Digraph}} instance from the file named \sphinxcode{\sphinxupquote{tutorialDigraph.py}} with the \sphinxcode{\sphinxupquote{Digraph}} class constructor and the \sphinxcode{\sphinxupquote{digraphs.Digraph.showAll()}} method output reveals us that \sphinxstyleemphasis{dg} is a \sphinxstyleemphasis{connected} and \sphinxstyleemphasis{irreflexive} digraph of \sphinxstyleemphasis{order} five, evaluated in an integer \sphinxstyleemphasis{valuation domain} {[}\sphinxhyphen{}1,0,+1\} (see \hyperref[\detokenize{tutorial:tutorialdigraph}]{Listing \ref{\detokenize{tutorial:tutorialdigraph}}}).
+\sphinxSetupCaptionForVerbatim{Random crisp digraph example}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:tutorialdigraph}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg} \PYG{o}{=} \PYG{n}{Digraph}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tutorialDigraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{showAll}\PYG{p}{(}\PYG{p}{)}
@@ -302,8 +302,8 @@ We may reload a previously saved \sphinxcode{\sphinxupquote{Digraph}} instance f
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Actions \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}]}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Characteristic valuation domain \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{ \PYGZob{}\PYGZsq{}hasIntegerValuation\PYGZsq{}: True, \PYGZsq{}min\PYGZsq{}: Decimal(\PYGZsq{}\PYGZhy{}1.0\PYGZsq{}),}
-\PYG{g+go}{  \PYGZsq{}med\PYGZsq{}: Decimal(\PYGZsq{}0.0\PYGZsq{}), \PYGZsq{}max\PYGZsq{}: Decimal(\PYGZsq{}1.0\PYGZsq{})\PYGZcb{}}
+\PYG{g+go}{ \PYGZob{}\PYGZsq{}hasIntegerValuation\PYGZsq{}: True,}
+\PYG{g+go}{   \PYGZsq{}min\PYGZsq{}: \PYGZhy{}1, \PYGZsq{}med\PYGZsq{}: 0, \PYGZsq{}max\PYGZsq{}: 1\PYGZsq{}\PYGZcb{}}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{   S   |  \PYGZsq{}a1\PYGZsq{}  \PYGZsq{}a2\PYGZsq{}  \PYGZsq{}a3\PYGZsq{}  \PYGZsq{}a4\PYGZsq{}  \PYGZsq{}a5\PYGZsq{}}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -332,7 +332,7 @@ We may reload a previously saved \sphinxcode{\sphinxupquote{Digraph}} instance f
 
 The \sphinxcode{\sphinxupquote{digraphs.Digraph.exportGraphViz()}} method generates in
 the current working directory a \sphinxcode{\sphinxupquote{tutorial.dot}} file and a
-\sphinxcode{\sphinxupquote{tutorialdigraph.png}} picture of the tutorial digraph \sphinxstyleemphasis{g} (see \hyperref[\detokenize{tutorial:tutorialdigraph}]{Fig.\@ \ref{\detokenize{tutorial:tutorialdigraph}}}) , if the \sphinxhref{https://graphviz.org/}{graphviz} (https://graphviz.org/) tools are installed on your system %
+\sphinxcode{\sphinxupquote{tutorialdigraph.png}} picture of the tutorial digraph \sphinxstyleemphasis{g} (see \hyperref[\detokenize{tutorial:tutorialdigraphfig}]{Fig.\@ \ref{\detokenize{tutorial:tutorialdigraphfig}}}) , if the \sphinxhref{https://graphviz.org/}{graphviz} (https://graphviz.org/) tools are installed on your system %
 \begin{footnote}[1]\sphinxAtStartFootnote
 The \sphinxcode{\sphinxupquote{exportGraphViz}} method is depending on drawing tools from \sphinxhref{https://graphviz.org/}{graphviz} (https://graphviz.org/). On Linux Ubuntu or Debian you may try \sphinxcode{\sphinxupquote{sudo apt\sphinxhyphen{}get install graphviz}} to install them. There are ready \sphinxcode{\sphinxupquote{dmg}} installers for Mac OSX.
 %
@@ -350,7 +350,7 @@ The \sphinxcode{\sphinxupquote{exportGraphViz}} method is depending on drawing t
 \capstart
 
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{tutorialDigraph}.png}
-\caption{The tutorial digraph}\label{\detokenize{tutorial:tutorialdigraph}}\end{figure}
+\caption{The tutorial digraph}\label{\detokenize{tutorial:tutorialdigraphfig}}\end{figure}
 
 Some simple methods are easily applicable to this instantiated Digraph object \sphinxstyleemphasis{dg} , like the following \sphinxcode{\sphinxupquote{digraphs.Digraph.showStatistics()}} method.
 
@@ -468,7 +468,8 @@ We are starting this tutorial with generating a randomly {[}\sphinxhyphen{}1;1{]
 \end{sphinxVerbatim}
 
 With the \sphinxcode{\sphinxupquote{save()}} method (see Line 3) we may keep a backup version for future use of \sphinxstyleemphasis{dg} which will be stored in a file called \sphinxstyleemphasis{tutRandValDigraph.py} in the current working directory. The \sphinxcode{\sphinxupquote{Digraph}} class now provides some generic methods for exploring a given \sphinxcode{\sphinxupquote{Digraph}} object, like the \sphinxcode{\sphinxupquote{showShort()}}, \sphinxcode{\sphinxupquote{showAll()}}, \sphinxcode{\sphinxupquote{showRelationTable()}} and the \sphinxcode{\sphinxupquote{showNeighborhoods()}} methods.
-
+\sphinxSetupCaptionForVerbatim{Example of random valuation digraph}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:tutrandvaldigraph}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{showShort}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} show summary \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -558,7 +559,7 @@ We may now extract both the \sphinxstyleemphasis{symmetric} as well as the \sphi
 \caption{Asymmetric and symmetric part of the tutorial random valuation digraph}\label{\detokenize{tutorial:asymsymparts}}\end{figure}
 
 \begin{sphinxadmonition}{note}{Note:}
-Notice that the partial objects \sphinxstyleemphasis{asymDg} and \sphinxstyleemphasis{symDg} put to the indeterminate characteristic value all \sphinxstyleemphasis{not\sphinxhyphen{}asymmetric}, respectively \sphinxstyleemphasis{not\sphinxhyphen{}symmetric} links between nodes (see \hyperref[\detokenize{tutorial:asymsymparts}]{Fig.\@ \ref{\detokenize{tutorial:asymsymparts}}}).
+The constructor of the partial objects \sphinxstyleemphasis{asymDg} and \sphinxstyleemphasis{symDg} puts to the indeterminate characteristic value all \sphinxstyleemphasis{not\sphinxhyphen{}asymmetric}, respectively \sphinxstyleemphasis{not\sphinxhyphen{}symmetric} links between nodes (see \hyperref[\detokenize{tutorial:asymsymparts}]{Fig.\@ \ref{\detokenize{tutorial:asymsymparts}}}).
 \end{sphinxadmonition}
 
 Here below, for illustration the source code of \sphinxstyleemphasis{relation} constructor of the \sphinxcode{\sphinxupquote{digraphs.AsymmetricPartialDigraph}} class.
@@ -589,46 +590,53 @@ Here below, for illustration the source code of \sphinxstyleemphasis{relation} c
 
 \subsection{Border and inner parts}
 \label{\detokenize{tutorial:border-and-inner-parts}}
-We may also extract the border \sphinxhyphen{}i.e. the part of the digraph induced by the union of its initial and terminal prekernels (see {\hyperref[\detokenize{tutorial:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{On computing digraph kernels}}}})\sphinxhyphen{}  as well as the inner part \sphinxhyphen{}i.e. the complement of the border part\sphinxhyphen{} of digraph \sphinxstyleemphasis{dg} with the help of two corresponding class constructors (see \hyperref[\detokenize{tutorial:graphborderandinner}]{Fig.\@ \ref{\detokenize{tutorial:graphborderandinner}}}).
+We may also extract the border \sphinxhyphen{}the part of a digraph induced by the union of its initial and terminal prekernels (see tutorial {\hyperref[\detokenize{tutorial:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{On computing digraph kernels}}}})\sphinxhyphen{}  as well as, the inner part \sphinxhyphen{}the \sphinxstyleemphasis{complement} of the border\sphinxhyphen{} with the help of two corresponding class constructors: \sphinxcode{\sphinxupquote{digraphs.GraphBorder}} and \sphinxcode{\sphinxupquote{digraphs.GraphInner}} (see \hyperref[\detokenize{tutorial:borderinnerpart}]{Listing \ref{\detokenize{tutorial:borderinnerpart}}}  Line 1).
 
+Let us illustrate these parts on a linear ordering obtained from the tutorial random valuation digraph \sphinxstyleemphasis{dg} (see \hyperref[\detokenize{tutorial:borderinnerpart}]{Listing \ref{\detokenize{tutorial:borderinnerpart}}} Line 2\sphinxhyphen{}3) with the \sphinxstyleemphasis{NetFlows} ranking rule (see tutorial on {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}}).
+\sphinxSetupCaptionForVerbatim{Border and inner part of a linear order}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:borderinnerpart}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{GraphBorder}\PYG{p}{,} \PYG{n}{GraphInner}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bg} \PYG{o}{=} \PYG{n}{GraphBorder}\PYG{p}{(}\PYG{n}{dg}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bg}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ig} \PYG{o}{=} \PYG{n}{GraphInner}\PYG{p}{(}\PYG{n}{dg}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ig}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{NetFlowsOrder}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nf} \PYG{o}{=} \PYG{n}{NetFlowsOrder}\PYG{p}{(}\PYG{n}{dg}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nf}\PYG{o}{.}\PYG{n}{netFlowsOrder}
+\PYG{g+go}{ [\PYGZsq{}6\PYGZsq{}, \PYGZsq{}4\PYGZsq{}, \PYGZsq{}5\PYGZsq{}, \PYGZsq{}3\PYGZsq{}, \PYGZsq{}2\PYGZsq{}, \PYGZsq{}1\PYGZsq{}, \PYGZsq{}7\PYGZsq{}]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bnf} \PYG{o}{=} \PYG{n}{GraphBorder}\PYG{p}{(}\PYG{n}{nf}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bnf}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{worstChoice}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{6}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}\PYG{n}{bestChoice}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{7}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{inf} \PYG{o}{=} \PYG{n}{GraphInner}\PYG{p}{(}\PYG{n}{nf}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{inf}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{worstChoice}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{6}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}\PYG{n}{bestChoice}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{7}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{graphBorderAndInner}.png}
-\caption{Border and inner part of the tutorial random valuation digraph}\label{\detokenize{tutorial:graphborderandinner}}\end{figure}
+\noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{graphBorderAndInner1}.png}
+\caption{\sphinxstyleemphasis{Border} and \sphinxstyleemphasis{inner} part of a linear order oriented by \sphinxstyleemphasis{terminal} and \sphinxstyleemphasis{inital} kernels}\label{\detokenize{tutorial:graphborderandinner1}}\end{figure}
+
+We may orient the graphviz drawings in \hyperref[\detokenize{tutorial:graphborderandinner1}]{Fig.\@ \ref{\detokenize{tutorial:graphborderandinner1}}} with the terminal node 6 (\sphinxstyleemphasis{worstChoice} parameter) and initial node 7 (\sphinxstyleemphasis{bestChoice} parameter), see \hyperref[\detokenize{tutorial:borderinnerpart}]{Listing \ref{\detokenize{tutorial:borderinnerpart}}} Lines 7 and 9).
 
 \begin{sphinxadmonition}{note}{Note:}
-Notice that the partial objects \sphinxstyleemphasis{bg} and \sphinxstyleemphasis{ig} put to the indeterminate characteristic value all \sphinxstyleemphasis{not border}, respectively \sphinxstyleemphasis{not inner} links between nodes (see \hyperref[\detokenize{tutorial:graphborderandinner}]{Fig.\@ \ref{\detokenize{tutorial:graphborderandinner}}}).
+The constructor of the partial digraphs \sphinxstyleemphasis{bnf} and \sphinxstyleemphasis{inf}  (see \hyperref[\detokenize{tutorial:borderinnerpart}]{Listing \ref{\detokenize{tutorial:borderinnerpart}}} Lines 3 and 6) puts to the \sphinxstyleemphasis{indeterminate} characteristic value all links \sphinxstyleemphasis{not} in the \sphinxstyleemphasis{border}, respectively \sphinxstyleemphasis{not} in the \sphinxstyleemphasis{inner} part (see \hyperref[\detokenize{tutorial:graphborderandinner}]{Fig.\@ \ref{\detokenize{tutorial:graphborderandinner}}}).
 \end{sphinxadmonition}
+
+Being much \sphinxstyleemphasis{denser} than a linear order, the actual inner part of our tutorial random valuation digraph \sphinxstyleemphasis{dg} is reduced to a single arc between nodes 3 and 4 (see \hyperref[\detokenize{tutorial:graphborderandinner}]{Fig.\@ \ref{\detokenize{tutorial:graphborderandinner}}}).
+
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{graphBorderAndInner}.png}
+\caption{Border and inner part of the tutorial random valuation digraph \sphinxstyleemphasis{dg}}\label{\detokenize{tutorial:graphborderandinner}}\end{figure}
+
+Indeed, a \sphinxstyleemphasis{complete} digraph on the limit has no inner part (privacy!) at all, whereas \sphinxstyleemphasis{empty} and \sphinxstyleemphasis{indeterminate} digraphs admit both, an empty border and an empty inner part.
 
 
 \subsection{Fusion by epistemic disjunction}
 \label{\detokenize{tutorial:fusion-by-epistemic-disjunction}}
-We may recover object \sphinxstyleemphasis{dg} from both partial objects \sphinxstyleemphasis{asymDg} and \sphinxstyleemphasis{symDg}, or as well from the border \sphinxstyleemphasis{bg} and the inner \sphinxstyleemphasis{ig}, with a \sphinxstylestrong{bipolar fusion} constructor, also called \sphinxstylestrong{epistemic disjunction}, available via the \sphinxcode{\sphinxupquote{digraphs.FusionDigraph}} class. The epistemic disjunction operation \sphinxstylestrong{o\sphinxhyphen{}max} works as follows:
-\begin{description}
-\item[{Let \sphinxstyleemphasis{r} and \sphinxstyleemphasis{r’} characterise  two bipolar\sphinxhyphen{}valued epistemic situations.}] \leavevmode\begin{itemize}
-\item {} 
-o\sphinxhyphen{}max(\sphinxstyleemphasis{r}, \sphinxstyleemphasis{r’} ) = max(\sphinxstyleemphasis{r}, \sphinxstyleemphasis{r’} ) when both \sphinxstyleemphasis{r} and \sphinxstyleemphasis{r’} are \sphinxstyleemphasis{validated} (positive);
-
-\item {} 
-o\sphinxhyphen{}max(\sphinxstyleemphasis{r}, \sphinxstyleemphasis{r’} ) = min(\sphinxstyleemphasis{r}, \sphinxstyleemphasis{r’} ) when both \sphinxstyleemphasis{r} and \sphinxstyleemphasis{r’} are \sphinxstyleemphasis{invalidated} (negative);
-
-\item {} 
-o\sphinxhyphen{}max(\sphinxstyleemphasis{r}, \sphinxstyleemphasis{r’} ) = \sphinxstyleemphasis{indeterminate} otherwise.
-
-\end{itemize}
-
-\end{description}
-
+We may recover object \sphinxstyleemphasis{dg} from both partial objects \sphinxstyleemphasis{asymDg} and \sphinxstyleemphasis{symDg}, or as well from the border \sphinxstyleemphasis{bg} and the inner part \sphinxstyleemphasis{ig}, with a \sphinxstylestrong{bipolar fusion} constructor, also called \sphinxstylestrong{epistemic disjunction}, available via the \sphinxcode{\sphinxupquote{digraphs.FusionDigraph}} class (see \hyperref[\detokenize{tutorial:tutrandvaldigraph}]{Listing \ref{\detokenize{tutorial:tutrandvaldigraph}}} Lines 12\sphinxhyphen{} 21).
+\sphinxSetupCaptionForVerbatim{Epistemic fusion of partial diagraphs}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:epistemicfusion}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{FusionDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fusDg} \PYG{o}{=} \PYG{n}{FusionDigraph}\PYG{p}{(}\PYG{n}{asymDg}\PYG{p}{,}\PYG{n}{symDg}\PYG{p}{,}\PYG{n}{operator}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{o\PYGZhy{}max}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -645,6 +653,21 @@ o\sphinxhyphen{}max(\sphinxstyleemphasis{r}, \sphinxstyleemphasis{r’} ) = \sph
 \PYG{g+go}{ \PYGZsq{}6\PYGZsq{}    | \PYGZhy{}0.84  0.00 \PYGZhy{}0.40 \PYGZhy{}0.96 \PYGZhy{}0.18  0.00 \PYGZhy{}0.22}
 \PYG{g+go}{ \PYGZsq{}7\PYGZsq{}    |  0.88  0.72  0.82  0.52 \PYGZhy{}0.84  0.04  0.00}
 \end{sphinxVerbatim}
+
+The epistemic disjunction operation \sphinxstylestrong{o\sphinxhyphen{}max} (see \hyperref[\detokenize{tutorial:epistemicfusion}]{Listing \ref{\detokenize{tutorial:epistemicfusion}}} Line 2) works as follows.
+
+Let \sphinxstyleemphasis{r} and \sphinxstyleemphasis{r’} characterise two bipolar\sphinxhyphen{}valued epistemic situations.
+\begin{itemize}
+\item {} 
+o\sphinxhyphen{}max(\sphinxstyleemphasis{r}, \sphinxstyleemphasis{r’} ) = max(\sphinxstyleemphasis{r}, \sphinxstyleemphasis{r’} ) when both \sphinxstyleemphasis{r} and \sphinxstyleemphasis{r’} are \sphinxstyleemphasis{validated} (positive);
+
+\item {} 
+o\sphinxhyphen{}max(\sphinxstyleemphasis{r}, \sphinxstyleemphasis{r’} ) = min(\sphinxstyleemphasis{r}, \sphinxstyleemphasis{r’} ) when both \sphinxstyleemphasis{r} and \sphinxstyleemphasis{r’} are \sphinxstyleemphasis{invalidated} (negative);
+
+\item {} 
+o\sphinxhyphen{}max(\sphinxstyleemphasis{r}, \sphinxstyleemphasis{r’} ) = \sphinxstyleemphasis{indeterminate} otherwise.
+
+\end{itemize}
 
 
 \subsection{Dual, converse and codual digraphs}

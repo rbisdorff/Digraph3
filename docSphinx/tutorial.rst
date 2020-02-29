@@ -162,7 +162,6 @@ The :code:`dg.save('tutorialDigraph')` command (see Line 19 above) stores the di
 .. code-block:: python
    :linenos:
 
-   # Saved digraph instance
    actions = {
     'a1': {'shortName': 'a1', 'name': 'random decision action'},
     'a2': {'shortName': 'a2', 'name': 'random decision action'},
@@ -183,9 +182,11 @@ The :code:`dg.save('tutorialDigraph')` command (see Line 19 above) stores the di
 Inspecting a ``Digraph`` object
 ...............................
 
-We may reload a previously saved ``Digraph`` instance from the file named :code:`tutorialDigraph.py` with the ``Digraph`` class constructor and the :py:func:`digraphs.Digraph.showAll()` method output reveals us that *dg* is a connected irreflexive digraph of order five evaluated in a valuation domain from -1 to 1.
+We may reload a previously saved ``Digraph`` instance from the file named :code:`tutorialDigraph.py` with the ``Digraph`` class constructor and the :py:func:`digraphs.Digraph.showAll()` method output reveals us that *dg* is a *connected* and *irreflexive* digraph of *order* five, evaluated in an integer *valuation domain* [-1,0,+1} (see :numref:`tutorialDigraph`).
 
 .. code-block:: pycon
+   :name: tutorialDigraph
+   :caption: Random crisp digraph example
    :linenos:
 
    >>> dg = Digraph('tutorialDigraph')
@@ -195,8 +196,8 @@ We may reload a previously saved ``Digraph`` instance from the file named :code:
     *---- Actions ----*
     ['a1', 'a2', 'a3', 'a4', 'a5']
     *---- Characteristic valuation domain ----*
-    {'hasIntegerValuation': True, 'min': Decimal('-1.0'),
-     'med': Decimal('0.0'), 'max': Decimal('1.0')}
+    {'hasIntegerValuation': True,
+      'min': -1, 'med': 0, 'max': 1'}
     * ---- Relation Table -----
       S   |  'a1'  'a2'  'a3'  'a4'  'a5'	  
     ------|-------------------------------
@@ -224,7 +225,7 @@ We may reload a previously saved ``Digraph`` instance from the file named :code:
 
 The :py:func:`digraphs.Digraph.exportGraphViz()` method generates in
 the current working directory a :code:`tutorial.dot` file and a
-:code:`tutorialdigraph.png` picture of the tutorial digraph *g* (see :numref:`tutorialDigraph`) , if the `graphviz <https://graphviz.org/>`_ tools are installed on your system [1]_.
+:code:`tutorialdigraph.png` picture of the tutorial digraph *g* (see :numref:`tutorialDigraphFig`) , if the `graphviz <https://graphviz.org/>`_ tools are installed on your system [1]_.
 
 .. code-block:: pycon
    :linenos:
@@ -235,7 +236,7 @@ the current working directory a :code:`tutorial.dot` file and a
     dot -Grankdir=BT -Tpng tutorialDigraph.dot -o tutorialDigraph.png
 
 .. figure:: tutorialDigraph.png
-   :name: tutorialDigraph 	    
+   :name: tutorialDigraphFig 	    
    :width: 300 px
    :align: center
 
@@ -337,6 +338,8 @@ We are starting this tutorial with generating a randomly [-1;1]-valued (*Normali
 With the ``save()`` method (see Line 3) we may keep a backup version for future use of *dg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The ``Digraph`` class now provides some generic methods for exploring a given ``Digraph`` object, like the ``showShort()``, ``showAll()``, ``showRelationTable()`` and the ``showNeighborhoods()`` methods.
 
 .. code-block:: pycon
+   :name: tutRandValDigraph
+   :caption: Example of random valuation digraph
    :linenos:
 
    >>> dg.showShort()
@@ -429,7 +432,7 @@ We may now extract both the *symmetric* as well as the *asymmetric* part of digr
    
 .. note::
 
-    Notice that the partial objects *asymDg* and *symDg* put to the indeterminate characteristic value all *not-asymmetric*, respectively *not-symmetric* links between nodes (see :numref:`asymSymParts`). 
+    The constructor of the partial objects *asymDg* and *symDg* puts to the indeterminate characteristic value all *not-asymmetric*, respectively *not-symmetric* links between nodes (see :numref:`asymSymParts`). 
 
 Here below, for illustration the source code of *relation* constructor of the :py:class:`digraphs.AsymmetricPartialDigraph` class.
 
@@ -461,41 +464,57 @@ Here below, for illustration the source code of *relation* constructor of the :p
 Border and inner parts
 ......................
 
-We may also extract the border -i.e. the part of the digraph induced by the union of its initial and terminal prekernels (see :ref:`Kernel-Tutorial-label`)-  as well as the inner part -i.e. the complement of the border part- of digraph *dg* with the help of two corresponding class constructors (see :numref:`graphBorderAndInner`).
+We may also extract the border -the part of a digraph induced by the union of its initial and terminal prekernels (see tutorial :ref:`Kernel-Tutorial-label`)-  as well as, the inner part -the *complement* of the border- with the help of two corresponding class constructors: :py:class:`digraphs.GraphBorder` and :py:class:`digraphs.GraphInner` (see :numref:`BorderInnerPart`  Line 1).
+
+Let us illustrate these parts on a linear ordering obtained from the tutorial random valuation digraph *dg* (see :numref:`BorderInnerPart` Line 2-3) with the *NetFlows* ranking rule (see tutorial on :ref:`Ranking-Tutorial-label`).  
 
 .. code-block:: pycon
+   :name: BorderInnerPart
+   :caption: Border and inner part of a linear order
    :linenos:
 
    >>> from digraphs import GraphBorder, GraphInner
-   >>> bg = GraphBorder(dg)
-   >>> bg.exportGraphViz()
-   >>> ig = GraphInner(dg)
-   >>> ig.exportGraphViz()
+   >>> from linearOrders import NetFlowsOrder
+   >>> nf = NetFlowsOrder(dg)
+   >>> nf.netFlowsOrder
+    ['6', '4', '5', '3', '2', '1', '7']
+   >>> bnf = GraphBorder(nf)
+   >>> bnf.exportGraphViz(worstChoice=['6'],bestChoice=['7'])
+   >>> inf = GraphInner(nf)
+   >>> inf.exportGraphViz(worstChoice=['6'],bestChoice=['7'])
+
+.. figure:: graphBorderAndInner1.png
+   :name: graphBorderAndInner1
+   :width: 600 px
+   :align: center
+
+   *Border* and *inner* part of a linear order oriented by *terminal* and *inital* kernels
+
+We may orient the graphviz drawings in :numref:`graphBorderAndInner1` with the terminal node 6 (*worstChoice* parameter) and initial node 7 (*bestChoice* parameter), see :numref:`BorderInnerPart` Lines 7 and 9).
+
+.. note::
+
+   The constructor of the partial digraphs *bnf* and *inf*  (see :numref:`BorderInnerPart` Lines 3 and 6) puts to the *indeterminate* characteristic value all links *not* in the *border*, respectively *not* in the *inner* part (see :numref:`graphBorderAndInner`).
+
+Being much *denser* than a linear order, the actual inner part of our tutorial random valuation digraph *dg* is reduced to a single arc between nodes 3 and 4 (see :numref:`graphBorderAndInner`).
 
 .. figure:: graphBorderAndInner.png
    :name: graphBorderAndInner
    :width: 600 px
    :align: center
 
-   Border and inner part of the tutorial random valuation digraph
-   
-.. note::
+   Border and inner part of the tutorial random valuation digraph *dg*
 
-    Notice that the partial objects *bg* and *ig* put to the indeterminate characteristic value all *not border*, respectively *not inner* links between nodes (see :numref:`graphBorderAndInner`). 
-
-
+Indeed, a *complete* digraph on the limit has no inner part (privacy!) at all, whereas *empty* and *indeterminate* digraphs admit both, an empty border and an empty inner part.
 
 Fusion by epistemic disjunction
 ...............................
 
-We may recover object *dg* from both partial objects *asymDg* and *symDg*, or as well from the border *bg* and the inner *ig*, with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the :py:class:`digraphs.FusionDigraph` class. The epistemic disjunction operation **o-max** works as follows:
-
-Let *r* and *r'* characterise  two bipolar-valued epistemic situations.
-     * o-max(*r*, *r'* ) = max(*r*, *r'* ) when both *r* and *r'* are *validated* (positive);
-     * o-max(*r*, *r'* ) = min(*r*, *r'* ) when both *r* and *r'* are *invalidated* (negative);
-     * o-max(*r*, *r'* ) = *indeterminate* otherwise.
+We may recover object *dg* from both partial objects *asymDg* and *symDg*, or as well from the border *bg* and the inner part *ig*, with a **bipolar fusion** constructor, also called **epistemic disjunction**, available via the :py:class:`digraphs.FusionDigraph` class (see :numref:`tutRandValDigraph` Lines 12- 21). 
 
 .. code-block:: pycon
+   :name: epistemicFusion
+   :caption: Epistemic fusion of partial diagraphs
    :linenos:
 
    >>> from digraphs import FusionDigraph
@@ -511,7 +530,15 @@ Let *r* and *r'* characterise  two bipolar-valued epistemic situations.
     '4'    |  0.44 -0.40 -0.62  0.00  0.04  0.66  0.76	 
     '5'    |  0.32 -0.48 -0.46  0.64  0.00 -0.22 -0.52	 
     '6'    | -0.84  0.00 -0.40 -0.96 -0.18  0.00 -0.22	 
-    '7'    |  0.88  0.72  0.82  0.52 -0.84  0.04  0.00	 
+    '7'    |  0.88  0.72  0.82  0.52 -0.84  0.04  0.00
+
+The epistemic disjunction operation **o-max** (see :numref:`epistemicFusion` Line 2) works as follows.
+
+Let *r* and *r'* characterise two bipolar-valued epistemic situations.
+
+   * o-max(*r*, *r'* ) = max(*r*, *r'* ) when both *r* and *r'* are *validated* (positive);
+   * o-max(*r*, *r'* ) = min(*r*, *r'* ) when both *r* and *r'* are *invalidated* (negative);
+   * o-max(*r*, *r'* ) = *indeterminate* otherwise.
 
 Dual, converse and codual digraphs
 ..................................
