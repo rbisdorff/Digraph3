@@ -2915,7 +2915,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Indeed, the extended <em>Kendall</em> tau index of +0.638 leads to a bipolar-valued <em>relational equivalence</em> characteristics of +0.147, i.e. a <em>majority</em> of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs <em>g</em> or <em>gcd</em>  and the corresponding <em>NetFlows</em> ranking. This lower correlation of the <em>Copeland</em> ranking appears to be due essentially to its <em>weakness</em> and our subsequent <em>artirary</em> lexicographic resolution of the ties given by the <em>Copeland</em> scores (see <a class="reference internal" href="#weakrankingdrawing"><span class="std std-numref">Fig. 20</span></a>).</p>
+<p>Indeed, the extended <em>Kendall</em> tau index of +0.638 leads to a bipolar-valued <em>relational equivalence</em> characteristics of +0.147, i.e. a <em>majority</em> of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs <em>g</em> or <em>gcd</em>  and the corresponding <em>NetFlows</em> ranking. This lesser ranking performance of the <em>Copeland</em> rule stems in this example essentially from the <em>weakness</em> of the actual ranking result and our subsequent <em>arbitrary</em> lexicographic resolution of the many ties given by the <em>Copeland</em> scores (see <a class="reference internal" href="#weakrankingdrawing"><span class="std std-numref">Fig. 20</span></a>).</p>
 <p>To appreciate now the absolute quality of both the <em>Copeland</em> and the <em>NetFlows</em> rankings, it is useful to consider <em>Kemeny</em>’s and <em>Slater</em>’s <strong>optimal</strong> ranking rules.</p>
 </div>
 <div class="section" id="kemeny-rankings">
@@ -3122,8 +3122,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <li><p>Rank the ordered pairs <img class="math" src="_images/math/349c0e2dbdade2e90e54c3fdf0342401c320c56e.png" alt="(x,y)"/> of alternatives in decreasing order of the outranking characteristic values <img class="math" src="_images/math/dcfba86ef069adff1592eaad3c40e0b2f498575d.png" alt="r(x\, \geq \,y)"/>;</p></li>
 <li><p>Consider the pairs in that order (ties are resolved by a lexicographic rule):</p>
 <ul class="simple">
-<li><p>if the next pair does not create a cycle with the pairs already blocked, block this pair;</p></li>
-<li><p>if the next pair creates a cycle with the already blocked pairs, skip it.</p></li>
+<li><p>if the next pair does not create a <em>circuit</em> with the pairs already blocked, block this pair;</p></li>
+<li><p>if the next pair creates a <em>circuit</em> with the already blocked pairs, skip it.</p></li>
 </ul>
 </li>
 </ol>

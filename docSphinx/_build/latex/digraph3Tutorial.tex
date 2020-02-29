@@ -2469,7 +2469,7 @@ The \sphinxstylestrong{NetFlows} ranking we obtain in this didactic example (Lin
 \PYG{g+go}{  Epistemic determination      :  0.230}
 \end{sphinxVerbatim}
 
-Indeed, the extended \sphinxstyleemphasis{Kendall} tau index of +0.638 leads to a bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{relational equivalence} characteristics of +0.147, i.e. a \sphinxstyleemphasis{majority} of 57.35\% of the criteria significance supports the relational equivalence between the given outranking digraphs \sphinxstyleemphasis{g} or \sphinxstyleemphasis{gcd}  and the corresponding \sphinxstyleemphasis{NetFlows} ranking. This lower correlation of the \sphinxstyleemphasis{Copeland} ranking appears to be due essentially to its \sphinxstyleemphasis{weakness} and our subsequent \sphinxstyleemphasis{artirary} lexicographic resolution of the ties given by the \sphinxstyleemphasis{Copeland} scores (see \hyperref[\detokenize{tutorial:weakrankingdrawing}]{Fig.\@ \ref{\detokenize{tutorial:weakrankingdrawing}}}).
+Indeed, the extended \sphinxstyleemphasis{Kendall} tau index of +0.638 leads to a bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{relational equivalence} characteristics of +0.147, i.e. a \sphinxstyleemphasis{majority} of 57.35\% of the criteria significance supports the relational equivalence between the given outranking digraphs \sphinxstyleemphasis{g} or \sphinxstyleemphasis{gcd}  and the corresponding \sphinxstyleemphasis{NetFlows} ranking. This lesser ranking performance of the \sphinxstyleemphasis{Copeland} rule stems in this example essentially from the \sphinxstyleemphasis{weakness} of the actual ranking result and our subsequent \sphinxstyleemphasis{arbitrary} lexicographic resolution of the many ties given by the \sphinxstyleemphasis{Copeland} scores (see \hyperref[\detokenize{tutorial:weakrankingdrawing}]{Fig.\@ \ref{\detokenize{tutorial:weakrankingdrawing}}}).
 
 To appreciate now the absolute quality of both the \sphinxstyleemphasis{Copeland} and the \sphinxstyleemphasis{NetFlows} rankings, it is useful to consider \sphinxstyleemphasis{Kemeny}’s and \sphinxstyleemphasis{Slater}’s \sphinxstylestrong{optimal} ranking rules.
 
@@ -2645,10 +2645,10 @@ Rank the ordered pairs \((x,y)\) of alternatives in decreasing order of the outr
 Consider the pairs in that order (ties are resolved by a lexicographic rule):
 \begin{itemize}
 \item {} 
-if the next pair does not create a cycle with the pairs already blocked, block this pair;
+if the next pair does not create a \sphinxstyleemphasis{circuit} with the pairs already blocked, block this pair;
 
 \item {} 
-if the next pair creates a cycle with the already blocked pairs, skip it.
+if the next pair creates a \sphinxstyleemphasis{circuit} with the already blocked pairs, skip it.
 
 \end{itemize}
 

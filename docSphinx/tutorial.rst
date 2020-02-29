@@ -2188,7 +2188,7 @@ The **NetFlows** ranking we obtain in this didactic example (Line 14), appears t
      Bipolar-valued equivalalence : +0.147
      Epistemic determination      :  0.230
 
-Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *relational equivalence* characteristics of +0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs *g* or *gcd*  and the corresponding *NetFlows* ranking. This lower correlation of the *Copeland* ranking appears to be due essentially to its *weakness* and our subsequent *artirary* lexicographic resolution of the ties given by the *Copeland* scores (see :numref:`weakRankingDrawing`).
+Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *relational equivalence* characteristics of +0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs *g* or *gcd*  and the corresponding *NetFlows* ranking. This lesser ranking performance of the *Copeland* rule stems in this example essentially from the *weakness* of the actual ranking result and our subsequent *arbitrary* lexicographic resolution of the many ties given by the *Copeland* scores (see :numref:`weakRankingDrawing`).
 
 To appreciate now the absolute quality of both the *Copeland* and the *NetFlows* rankings, it is useful to consider *Kemeny*'s and *Slater*'s **optimal** ranking rules.
 
@@ -2362,8 +2362,8 @@ A further *ranking-by-choosing* heuristic working best this time on the non stri
 1. Rank the ordered pairs :math:`(x,y)` of alternatives in decreasing order of the outranking characteristic values :math:`r(x\, \geq \,y)`;
 2. Consider the pairs in that order (ties are resolved by a lexicographic rule):
 
-   - if the next pair does not create a cycle with the pairs already blocked, block this pair;
-   - if the next pair creates a cycle with the already blocked pairs, skip it.
+   - if the next pair does not create a *circuit* with the pairs already blocked, block this pair;
+   - if the next pair creates a *circuit* with the already blocked pairs, skip it.
 
 With our didactic outranking digraph *g*, we get the following result.
 
