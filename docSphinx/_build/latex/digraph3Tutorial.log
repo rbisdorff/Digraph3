@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  1 MAR 2020 18:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  1 MAR 2020 21:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1387,7 +1387,7 @@ ed
                    \relax 
 l.2323 \capstart
                 
-<rankingTutorial.png, id=1068, 350.30875pt x 674.52pt>
+<rankingTutorial.png, id=1067, 350.30875pt x 674.52pt>
 File: rankingTutorial.png Graphic file (type png)
 <use rankingTutorial.png>
 Package pdftex.def Info: rankingTutorial.png  used on input line 2325.
@@ -1402,7 +1402,7 @@ Overfull \vbox (2.94064pt too high) detected at line 2421
                    \relax 
 l.2425 \capstart
                 
-<weakCopelandRanking.png, id=1110, 249.93375pt x 597.23125pt>
+<weakCopelandRanking.png, id=1112, 249.93375pt x 597.23125pt>
 File: weakCopelandRanking.png Graphic file (type png)
 <use weakCopelandRanking.png>
 Package pdftex.def Info: weakCopelandRanking.png  used on input line 2427.
@@ -1414,7 +1414,7 @@ ed
                    \relax 
 l.2531 \capstart
                 
-<tutorialKemeny.png, id=1144, 213.79875pt x 674.52pt>
+<tutorialKemeny.png, id=1146, 213.79875pt x 674.52pt>
 File: tutorialKemeny.png Graphic file (type png)
 <use tutorialKemeny.png>
 Package pdftex.def Info: tutorialKemeny.png  used on input line 2533.
@@ -1425,7 +1425,7 @@ me identifier (name{figure.4}) has been already used, duplicate ignored
                    \relax 
 l.2578 \capstart
                 
-<tutorialSlater.png, id=1163, 243.91125pt x 674.52pt>
+<tutorialSlater.png, id=1165, 243.91125pt x 674.52pt>
 File: tutorialSlater.png Graphic file (type png)
 <use tutorialSlater.png>
 Package pdftex.def Info: tutorialSlater.png  used on input line 2580.
@@ -1447,7 +1447,7 @@ re.1}) has been already used, duplicate ignored
                    \relax 
 l.3055 \capstart
                 
-<sparseRelationMap.png, id=1258, 453.695pt x 865.2325pt>
+<sparseRelationMap.png, id=1261, 453.695pt x 865.2325pt>
 File: sparseRelationMap.png Graphic file (type png)
 <use sparseRelationMap.png>
 Package pdftex.def Info: sparseRelationMap.png  used on input line 3057.
@@ -1464,7 +1464,7 @@ re.2}) has been already used, duplicate ignored
                    \relax 
 l.3270 \capstart
                 
-<rankingRecords.png, id=1289, 748.7975pt x 351.3125pt>
+<rankingRecords.png, id=1292, 748.7975pt x 351.3125pt>
 File: rankingRecords.png Graphic file (type png)
 <use rankingRecords.png>
 Package pdftex.def Info: rankingRecords.png  used on input line 3272.
@@ -1483,7 +1483,7 @@ Underfull \vbox (badness 1590) detected at line 3409
                    \relax 
 l.3422 \capstart
                 
-<converse-dual_rel_best10.png, id=1313, 626.34pt x 647.41875pt>
+<converse-dual_rel_best10.png, id=1316, 626.34pt x 647.41875pt>
 File: converse-dual_rel_best10.png Graphic file (type png)
 <use converse-dual_rel_best10.png>
 Package pdftex.def Info: converse-dual_rel_best10.png  used on input line 3424.
@@ -1540,7 +1540,7 @@ re.1}) has been already used, duplicate ignored
                    \relax 
 l.3932 \capstart
                 
-<officeChoiceHeatmap.png, id=1356, 700.6175pt x 354.32375pt>
+<officeChoiceHeatmap.png, id=1359, 700.6175pt x 354.32375pt>
 File: officeChoiceHeatmap.png Graphic file (type png)
 <use officeChoiceHeatmap.png>
 Package pdftex.def Info: officeChoiceHeatmap.png  used on input line 3934.
@@ -1551,7 +1551,7 @@ me identifier (name{figure.2}) has been already used, duplicate ignored
                    \relax 
 l.3957 \capstart
                 
-<officeChoiceOutranking.png, id=1364, 437.635pt x 247.92625pt>
+<officeChoiceOutranking.png, id=1367, 437.635pt x 247.92625pt>
 File: officeChoiceOutranking.png Graphic file (type png)
 <use officeChoiceOutranking.png>
 Package pdftex.def Info: officeChoiceOutranking.png  used on input line 3959.
@@ -1562,7 +1562,7 @@ Package pdftex.def Info: officeChoiceOutranking.png  used on input line 3959.
                    \relax 
 l.3990 \capstart
                 
-<officeChoice.png, id=1375, 511.9125pt x 674.52pt>
+<officeChoice.png, id=1378, 511.9125pt x 674.52pt>
 File: officeChoice.png Graphic file (type png)
 <use officeChoice.png>
 Package pdftex.def Info: officeChoice.png  used on input line 3992.
@@ -1574,7 +1574,7 @@ nored
                    \relax 
 l.4203 \capstart
                 
-<officeChoiceRanking.png, id=1405, 233.87375pt x 404.51125pt>
+<officeChoiceRanking.png, id=1408, 233.87375pt x 404.51125pt>
 File: officeChoiceRanking.png Graphic file (type png)
 <use officeChoiceRanking.png>
 Package pdftex.def Info: officeChoiceRanking.png  used on input line 4205.
@@ -1591,7 +1591,7 @@ s been already used, duplicate ignored
                    \relax 
 l.4423 \capstart
                 
-<examplePerfQuantiles.png, id=1440, 426.59375pt x 331.2375pt>
+<examplePerfQuantiles.png, id=1443, 426.59375pt x 331.2375pt>
 File: examplePerfQuantiles.png Graphic file (type png)
 <use examplePerfQuantiles.png>
 Package pdftex.def Info: examplePerfQuantiles.png  used on input line 4425.
@@ -1626,7 +1626,7 @@ gure.2}) has been already used, duplicate ignored
                    \relax 
 l.4557 \capstart
                 
-<heatMap1.png, id=1458, 470.75874pt x 625.33624pt>
+<heatMap1.png, id=1461, 470.75874pt x 625.33624pt>
 File: heatMap1.png Graphic file (type png)
 <use heatMap1.png>
 Package pdftex.def Info: heatMap1.png  used on input line 4559.
@@ -1643,7 +1643,7 @@ s been already used, duplicate ignored
                    \relax 
 l.4573 \capstart
                 
-<normedRatingDigraph.png, id=1465, 475.7775pt x 648.4225pt>
+<normedRatingDigraph.png, id=1468, 475.7775pt x 648.4225pt>
 File: normedRatingDigraph.png Graphic file (type png)
 <use normedRatingDigraph.png>
 Package pdftex.def Info: normedRatingDigraph.png  used on input line 4575.
@@ -1655,7 +1655,7 @@ uplicate ignored
                    \relax 
 l.4693 \capstart
                 
-<heatMap2.png, id=1479, 482.80376pt x 793.96625pt>
+<heatMap2.png, id=1482, 482.80376pt x 793.96625pt>
 File: heatMap2.png Graphic file (type png)
 <use heatMap2.png>
 Package pdftex.def Info: heatMap2.png  used on input line 4695.
@@ -1666,7 +1666,7 @@ same identifier (name{figure.1}) has been already used, duplicate ignored
                    \relax 
 l.4817 \capstart
                 
-<tutorialGraph.png, id=1511, 398.48875pt x 260.975pt>
+<tutorialGraph.png, id=1514, 398.48875pt x 260.975pt>
 File: tutorialGraph.png Graphic file (type png)
 <use tutorialGraph.png>
 Package pdftex.def Info: tutorialGraph.png  used on input line 4819.
@@ -1677,7 +1677,7 @@ ame identifier (name{figure.2}) has been already used, duplicate ignored
                    \relax 
 l.4905 \capstart
                 
-<tutorial-3-coloring.png, id=1520, 398.48875pt x 276.03125pt>
+<tutorial-3-coloring.png, id=1523, 398.48875pt x 276.03125pt>
 File: tutorial-3-coloring.png Graphic file (type png)
 <use tutorial-3-coloring.png>
 Package pdftex.def Info: tutorial-3-coloring.png  used on input line 4907.
@@ -1688,7 +1688,7 @@ ame identifier (name{figure.3}) has been already used, duplicate ignored
                    \relax 
 l.4931 \capstart
                 
-<tutorial-2-coloring.png, id=1526, 398.48875pt x 276.03125pt>
+<tutorial-2-coloring.png, id=1529, 398.48875pt x 276.03125pt>
 File: tutorial-2-coloring.png Graphic file (type png)
 <use tutorial-2-coloring.png>
 Package pdftex.def Info: tutorial-2-coloring.png  used on input line 4933.
@@ -1700,7 +1700,7 @@ nored
                    \relax 
 l.5076 \capstart
                 
-<maxMatchingcycleGraph.png, id=1541, 441.65pt x 487.8225pt>
+<maxMatchingcycleGraph.png, id=1544, 441.65pt x 487.8225pt>
 File: maxMatchingcycleGraph.png Graphic file (type png)
 <use maxMatchingcycleGraph.png>
 Package pdftex.def Info: maxMatchingcycleGraph.png  used on input line 5078.
@@ -1711,7 +1711,7 @@ Package pdftex.def Info: maxMatchingcycleGraph.png  used on input line 5078.
                    \relax 
 l.5105 \capstart
                 
-<grid-15-15-ising.png, id=1547, 674.52pt x 595.22375pt>
+<grid-15-15-ising.png, id=1550, 674.52pt x 595.22375pt>
 File: grid-15-15-ising.png Graphic file (type png)
 <use grid-15-15-ising.png>
 Package pdftex.def Info: grid-15-15-ising.png  used on input line 5107.
@@ -1727,7 +1727,7 @@ d
                    \relax 
 l.5223 \capstart
                 
-<cg12.png, id=1578, 631.35875pt x 674.52pt>
+<cg12.png, id=1581, 631.35875pt x 674.52pt>
 File: cg12.png Graphic file (type png)
 <use cg12.png>
 Package pdftex.def Info: cg12.png  used on input line 5225.
@@ -1742,7 +1742,7 @@ Overfull \vbox (0.55684pt too high) detected at line 5348
                    \relax 
 l.5354 \capstart
                 
-<c12.png, id=1600, 372.1905pt x 341.47575pt>
+<c12.png, id=1603, 372.1905pt x 341.47575pt>
 File: c12.png Graphic file (type png)
 <use c12.png>
 Package pdftex.def Info: c12.png  used on input line 5356.
@@ -1753,7 +1753,7 @@ dentifier (name{figure.1}) has been already used, duplicate ignored
                    \relax 
 l.5410 \capstart
                 
-<random3RegularGraph.png, id=1617, 493.845pt x 386.44376pt>
+<random3RegularGraph.png, id=1620, 493.845pt x 386.44376pt>
 File: random3RegularGraph.png Graphic file (type png)
 <use random3RegularGraph.png>
 Package pdftex.def Info: random3RegularGraph.png  used on input line 5412.
@@ -1764,7 +1764,7 @@ Package pdftex.def Info: random3RegularGraph.png  used on input line 5412.
                    \relax 
 l.5431 \capstart
                 
-<random3RegularGraph-mis.png, id=1629, 493.845pt x 386.44376pt>
+<random3RegularGraph-mis.png, id=1632, 493.845pt x 386.44376pt>
 File: random3RegularGraph-mis.png Graphic file (type png)
 <use random3RegularGraph-mis.png>
 Package pdftex.def Info: random3RegularGraph-mis.png  used on input line 5433.
@@ -1787,7 +1787,7 @@ Underfull \vbox (badness 10000) detected at line 5534
                    \relax 
 l.5540 \capstart
                 
-<random3RegularGraphKernelOrbit.png, id=1648, 989.6975pt x 386.44376pt>
+<random3RegularGraphKernelOrbit.png, id=1651, 989.6975pt x 386.44376pt>
 File: random3RegularGraphKernelOrbit.png Graphic file (type png)
 <use random3RegularGraphKernelOrbit.png>
 Package pdftex.def Info: random3RegularGraphKernelOrbit.png  used on input line
@@ -1810,7 +1810,7 @@ Package pdftex.def Info: maxMatchingcycleGraph.png  used on input line 5566.
                    \relax 
 l.5716 \capstart
                 
-<dualChordlessCircuit.png, id=1674, 382.42876pt x 345.29pt>
+<dualChordlessCircuit.png, id=1677, 382.42876pt x 345.29pt>
 File: dualChordlessCircuit.png Graphic file (type png)
 <use dualChordlessCircuit.png>
 Package pdftex.def Info: dualChordlessCircuit.png  used on input line 5718.
@@ -1821,13 +1821,13 @@ same identifier (name{figure.6}) has been already used, duplicate ignored
                    \relax 
 l.5743 \capstart
                 
-<weakChordlessCircuit.png, id=1682, 791.95876pt x 404.51125pt>
+<weakChordlessCircuit.png, id=1685, 791.95876pt x 404.51125pt>
 File: weakChordlessCircuit.png Graphic file (type png)
 <use weakChordlessCircuit.png>
 Package pdftex.def Info: weakChordlessCircuit.png  used on input line 5745.
 (pdftex.def)             Requested size: 414.04419pt x 211.48276pt.
  [135 <./weakChordlessCircuit.png>]
-<randomLaterality.png, id=1688, 382.42876pt x 601.24625pt>
+<randomLaterality.png, id=1691, 382.42876pt x 601.24625pt>
 File: randomLaterality.png Graphic file (type png)
 <use randomLaterality.png>
 Package pdftex.def Info: randomLaterality.png  used on input line 5770.
@@ -1837,30 +1837,30 @@ Overfull \vbox (1.2909pt too high) detected at line 5825
  []
 
 [137]
-<orientedLaterality.png, id=1703, 382.42876pt x 502.87875pt>
+<orientedLaterality.png, id=1706, 382.42876pt x 502.87875pt>
 File: orientedLaterality.png Graphic file (type png)
 <use orientedLaterality.png>
 Package pdftex.def Info: orientedLaterality.png  used on input line 5842.
 (pdftex.def)             Requested size: 225.84229pt x 296.97212pt.
  [138 <./orientedLaterality.png>]
-<randomOutranking.png, id=1713, 945.5325pt x 389.455pt>
+<randomOutranking.png, id=1716, 945.5325pt x 389.455pt>
 File: randomOutranking.png Graphic file (type png)
 <use randomOutranking.png>
 Package pdftex.def Info: randomOutranking.png  used on input line 5872.
 (pdftex.def)             Requested size: 414.04419pt x 170.54065pt.
-<tutOutranking.png, id=1718, 427.5975pt x 601.24625pt>
+<tutOutranking.png, id=1721, 427.5975pt x 601.24625pt>
 File: tutOutranking.png Graphic file (type png)
 <use tutOutranking.png>
 Package pdftex.def Info: tutOutranking.png  used on input line 5889.
 (pdftex.def)             Requested size: 225.84229pt x 317.55807pt.
  [139 <./randomOutranking.png>] [140 <./tutOutranking.png>]
-<bestWorstOrientation.png, id=1734, 384.43625pt x 403.5075pt>
+<bestWorstOrientation.png, id=1737, 384.43625pt x 403.5075pt>
 File: bestWorstOrientation.png Graphic file (type png)
 <use bestWorstOrientation.png>
 Package pdftex.def Info: bestWorstOrientation.png  used on input line 5953.
 (pdftex.def)             Requested size: 225.84229pt x 237.05145pt.
  [141]
-<outrankingResult.png, id=1743, 850.17625pt x 486.81876pt>
+<outrankingResult.png, id=1746, 850.17625pt x 486.81876pt>
 File: outrankingResult.png Graphic file (type png)
 <use outrankingResult.png>
 Package pdftex.def Info: outrankingResult.png  used on input line 5967.
@@ -1872,7 +1872,7 @@ dfTeX warning (ext4): destination with the same identifier (name{figure.1}) has
                    \relax 
 l.6151 \capstart
                 
-<randomSplitGraph.png, id=1783, 398.48875pt x 381.425pt>
+<randomSplitGraph.png, id=1786, 398.48875pt x 381.425pt>
 File: randomSplitGraph.png Graphic file (type png)
 <use randomSplitGraph.png>
 Package pdftex.def Info: randomSplitGraph.png  used on input line 6153.
@@ -1883,7 +1883,7 @@ e same identifier (name{figure.2}) has been already used, duplicate ignored
                    \relax 
 l.6238 \capstart
                 
-<berge1.png, id=1800, 398.48875pt x 237.88875pt>
+<berge1.png, id=1803, 398.48875pt x 237.88875pt>
 File: berge1.png Graphic file (type png)
 <use berge1.png>
 Package pdftex.def Info: berge1.png  used on input line 6240.
@@ -1894,7 +1894,7 @@ ntifier (name{figure.3}) has been already used, duplicate ignored
                    \relax 
 l.6285 \capstart
                 
-<berge2.png, id=1809, 398.48875pt x 247.92625pt>
+<berge2.png, id=1812, 398.48875pt x 247.92625pt>
 File: berge2.png Graphic file (type png)
 <use berge2.png>
 Package pdftex.def Info: berge2.png  used on input line 6287.
@@ -1905,7 +1905,7 @@ r (name{figure.4}) has been already used, duplicate ignored
                    \relax 
 l.6318 \capstart
                 
-<permutationGraph.png, id=1817, 398.48875pt x 259.97125pt>
+<permutationGraph.png, id=1820, 398.48875pt x 259.97125pt>
 File: permutationGraph.png Graphic file (type png)
 <use permutationGraph.png>
 Package pdftex.def Info: permutationGraph.png  used on input line 6320.
@@ -1916,7 +1916,7 @@ s been already used, duplicate ignored
                    \relax 
 l.6342 \capstart
                 
-<coloredPermutationGraph.png, id=1819, 398.48875pt x 259.97125pt>
+<coloredPermutationGraph.png, id=1822, 398.48875pt x 259.97125pt>
 File: coloredPermutationGraph.png Graphic file (type png)
 <use coloredPermutationGraph.png>
 Package pdftex.def Info: coloredPermutationGraph.png  used on input line 6344.
@@ -1928,7 +1928,7 @@ sed, duplicate ignored
                    \relax 
 l.6358 \capstart
                 
-<perm_permutationGraph.png, id=1828, 460.72125pt x 239.89626pt>
+<perm_permutationGraph.png, id=1831, 460.72125pt x 239.89626pt>
 File: perm_permutationGraph.png Graphic file (type png)
 <use perm_permutationGraph.png>
 Package pdftex.def Info: perm_permutationGraph.png  used on input line 6360.
@@ -1943,7 +1943,7 @@ same identifier (name{figure.7}) has been already used, duplicate ignored
                    \relax 
 l.6390 \capstart
                 
-<oriented_permutationGraph.png, id=1835, 209.78375pt x 308.15125pt>
+<oriented_permutationGraph.png, id=1838, 209.78375pt x 308.15125pt>
 File: oriented_permutationGraph.png Graphic file (type png)
 <use oriented_permutationGraph.png>
 Package pdftex.def Info: oriented_permutationGraph.png  used on input line 6392
@@ -1955,7 +1955,7 @@ Package pdftex.def Info: oriented_permutationGraph.png  used on input line 6392
                    \relax 
 l.6433 \capstart
                 
-<randomGraph4335.png, id=1841, 398.48875pt x 329.23pt>
+<randomGraph4335.png, id=1844, 398.48875pt x 329.23pt>
 File: randomGraph4335.png Graphic file (type png)
 <use randomGraph4335.png>
 Package pdftex.def Info: randomGraph4335.png  used on input line 6435.
@@ -1966,7 +1966,7 @@ identifier (name{figure.9}) has been already used, duplicate ignored
                    \relax 
 l.6463 \capstart
                 
-<transOrientGraph.png, id=1850, 398.48875pt x 329.23pt>
+<transOrientGraph.png, id=1853, 398.48875pt x 329.23pt>
 File: transOrientGraph.png Graphic file (type png)
 <use transOrientGraph.png>
 Package pdftex.def Info: transOrientGraph.png  used on input line 6465.
@@ -1977,7 +1977,7 @@ Package pdftex.def Info: transOrientGraph.png  used on input line 6465.
                    \relax 
 l.6494 \capstart
                 
-<transOrientDualGraph.png, id=1857, 441.65pt x 277.035pt>
+<transOrientDualGraph.png, id=1861, 441.65pt x 277.035pt>
 File: transOrientDualGraph.png Graphic file (type png)
 <use transOrientDualGraph.png>
 Package pdftex.def Info: transOrientDualGraph.png  used on input line 6496.
@@ -1989,7 +1989,7 @@ d
                    \relax 
 l.6585 \capstart
                 
-<isomorphicPerms.png, id=1874, 921.4425pt x 396.48125pt>
+<isomorphicPerms.png, id=1877, 921.4425pt x 396.48125pt>
 File: isomorphicPerms.png Graphic file (type png)
 <use isomorphicPerms.png>
 Package pdftex.def Info: isomorphicPerms.png  used on input line 6587.
@@ -2000,7 +2000,7 @@ identifier (name{figure.1}) has been already used, duplicate ignored
                    \relax 
 l.6640 \capstart
                 
-<tutRandomTree.png, id=1893, 398.48875pt x 578.16pt>
+<tutRandomTree.png, id=1896, 398.48875pt x 578.16pt>
 File: tutRandomTree.png Graphic file (type png)
 <use tutRandomTree.png>
 Package pdftex.def Info: tutRandomTree.png  used on input line 6642.
@@ -2011,7 +2011,7 @@ entifier (name{figure.2}) has been already used, duplicate ignored
                    \relax 
 l.6683 \capstart
                 
-<tutPruefTree.png, id=1901, 478.78876pt x 421.575pt>
+<tutPruefTree.png, id=1904, 478.78876pt x 421.575pt>
 File: tutPruefTree.png Graphic file (type png)
 <use tutPruefTree.png>
 Package pdftex.def Info: tutPruefTree.png  used on input line 6685.
@@ -2022,7 +2022,7 @@ me identifier (name{figure.3}) has been already used, duplicate ignored
                    \relax 
 l.6737 \capstart
                 
-<test62.png, id=1915, 398.48875pt x 368.37625pt>
+<test62.png, id=1918, 398.48875pt x 368.37625pt>
 File: test62.png Graphic file (type png)
 <use test62.png>
 Package pdftex.def Info: test62.png  used on input line 6739.
@@ -2033,7 +2033,7 @@ r (name{figure.4}) has been already used, duplicate ignored
                    \relax 
 l.6792 \capstart
                 
-<randomSpanningTree.png, id=1926, 398.48875pt x 333.245pt>
+<randomSpanningTree.png, id=1929, 398.48875pt x 333.245pt>
 File: randomSpanningTree.png Graphic file (type png)
 <use randomSpanningTree.png>
 Package pdftex.def Info: randomSpanningTree.png  used on input line 6794.
@@ -2044,7 +2044,7 @@ me identifier (name{figure.5}) has been already used, duplicate ignored
                    \relax 
 l.6819 \capstart
                 
-<spanningForest.png, id=1934, 587.19376pt x 499.8675pt>
+<spanningForest.png, id=1937, 587.19376pt x 499.8675pt>
 File: spanningForest.png Graphic file (type png)
 <use spanningForest.png>
 Package pdftex.def Info: spanningForest.png  used on input line 6821.
@@ -2055,7 +2055,7 @@ same identifier (name{figure.6}) has been already used, duplicate ignored
                    \relax 
 l.6898 \capstart
                 
-<bestDeterminedSpanningTree.png, id=1951, 398.48875pt x 280.04625pt>
+<bestDeterminedSpanningTree.png, id=1954, 398.48875pt x 280.04625pt>
 File: bestDeterminedSpanningTree.png Graphic file (type png)
 <use bestDeterminedSpanningTree.png>
 Package pdftex.def Info: bestDeterminedSpanningTree.png  used on input line 690
@@ -2088,7 +2088,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 6965.
 Here is how much of TeX's memory you used:
  15067 strings out of 494244
  216113 string characters out of 6161779
- 451624 words of memory out of 5000000
+ 451670 words of memory out of 5000000
  17542 multiletter control sequences out of 15000+600000
  32665 words of font info for 77 fonts, out of 8000000 for 9000
  396 hyphenation exceptions out of 8191
@@ -2133,10 +2133,10 @@ sfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
 cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on digraph3Tutorial.pdf (169 pages, 3501126 bytes).
+Output written on digraph3Tutorial.pdf (169 pages, 3501525 bytes).
 PDF statistics:
- 3179 PDF objects out of 3580 (max. 8388607)
- 1900 compressed objects within 19 object streams
+ 3183 PDF objects out of 3580 (max. 8388607)
+ 1903 compressed objects within 20 object streams
  470 named destinations out of 1000 (max. 500000)
  1134 words of extra memory for PDF output out of 10000 (max. 10000000)
 

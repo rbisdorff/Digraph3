@@ -1970,7 +1970,7 @@ Ranking with multiple incommensurable criteria
 The ranking problem
 ...................
 
-We need to rank without ties a set *X* of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued *outranking* characteristics, i.e. :math:`r(x\, \geq \, y)` for all *x*, *y* in *X* (see :ref:`CoDual-Digraph-label` and [BIS-2013]_).
+We need to rank without ties a set *X* of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued *strict outranking* characteristics, i.e. :math:`r(x\, > \, y)` for all *x*, *y* in *X* (see :ref:`CoDual-Digraph-label` and [BIS-2013]_).
 
 Let us consider a didactic outranking digraph *g* generated from a random *Cost-Benefit* performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding *strict outranking digraph* with the a :ref:`codual transform <Codual-Transform-label>` as follows.
 
@@ -1998,7 +1998,7 @@ Let us consider a didactic outranking digraph *g* generated from a random *Cost-
     'a8' | -0.10 -0.02 -0.23 -0.13 -0.37 +0.03 -0.27   -   +0.03  
     'a9' |  0.00 +0.12 -1.00 -0.13 -0.03 -0.03 -1.00 -0.03   -   
 
-Some ranking rules will work on the associated *Condorcet* digraph, i.e. the strict median cut polarised digraph.
+Some ranking rules will work on the associated **Condorcet Digraph**, i.e. the corresponding *strict median cut* polarised digraph.
 
 .. code-block:: pycon
    :name: polarisedAStrictOutranking
@@ -2021,9 +2021,9 @@ Some ranking rules will work on the associated *Condorcet* digraph, i.e. the str
         'a8'  |  -1   -1   -1   -1   -1   +1   -1    -   +1  
         'a9'  |   0   +1   -1   -1   -1   -1   -1   -1    -   
 
-Unfortunately, such  crisp median-cut *Condorcet* digraphs, associated with a given outranking digraph, present only exceptionally a linear ordering. Usually, pairwise majority comparisons do not render even a complete or, at least, a transitive partial outranking relation. There may even frequently appear cyclic outranking situations (see the tutorial on :ref:`LinearVoting-tutorial-label`).
+Unfortunately, such crisp median-cut *Condorcet* digraphs, associated with a given strict outranking digraph, present only exceptionally a linear ordering. Usually, pairwise majority comparisons do not render even a complete or, at least, a transitive partial order. There may even frequently appear *cyclic* outranking situations (see the tutorial on :ref:`LinearVoting-tutorial-label`).
 
-To estimate how *difficult* this ranking problem here may be, we can have a look at the corresponding *strict* outranking digraph graphviz drawing.
+To estimate how *difficult* this ranking problem here may be, we can have a look at the corresponding strict outranking digraph *graphviz* drawing ([1]_).
 
 .. code-block:: pycon
 
@@ -2121,7 +2121,7 @@ The *Copeland* scores deliver actually only a unique *weak ranking*, i.e. a rank
        2nd last ranked ['a3'] (1.00)
      1st last ranked ['a2'] (1.00)
 
-We recover in :numref:`weakCopelandRanking` above, the ranking with ties delivered by the *Copeland* scores (see :numref:`CopelandRanking`). The bracketed numbers indicate that this weak ranking is certainly valid. We may draw its corresponding *Hasse* diagram.
+We recover in :numref:`weakCopelandRanking` above, the ranking with ties delivered by the *Copeland* scores (see :numref:`CopelandRanking`). The bracketed numbers indicate that this weak ranking is certainly valid. We may draw its corresponding *Hasse* diagram (see :numref:`weakCopelandRankingDrawing`).
 
 .. code-block:: pycon
    :name: weakCopelandRankingDrawing
@@ -2178,9 +2178,9 @@ The valued version of the *Copeland* rule, called **NetFlows** rule, computes fo
 
 It is worthwhile noticing again, that similar to the *Copeland* ranking rule seen before, the *NetFlows* ranking rule is also **invariant** under the :ref:`codual transform <Codual-Transform-label>` and delivers the same ranking result indifferently from digraphs *g* or *gcd* (see :numref:`NetFlowsRanking` Line 14). 
 
-The *NetFlows* scores deliver in this example a ranking *without ties* which is rather different from the one delivered by *Copeland*'s rule (see :numref:`NetFlowsRanking` Line 16). It may happen, however, that we obtain, as with the *Copeland* scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a *weak ranking* with the corresponding :py:class:`transitiveDigraphs.WeakNetFlowsOrder` class.
+In our example here, the *NetFlows* scores deliver  a ranking *without ties* which is rather different from the one delivered by *Copeland*'s rule (see :numref:`NetFlowsRanking` Line 16). It may happen, however, that we obtain, as with the *Copeland* scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a *weak ranking* with the corresponding :py:class:`transitiveDigraphs.WeakNetFlowsOrder` class.
 
-The **NetFlows** ranking we obtain in this didactic example (Line 14), appears to be slightly better correlated (+0.638) with the given outranking relation than its crisp cousin, the *Copeland* ranking (see :numref:`CopelandCorrelationIndexes` Lines 4-6).
+The **NetFlows** ranking result appears to be slightly better correlated (+0.638) with the given outranking relation than its crisp cousin, the *Copeland* ranking (see :numref:`CopelandCorrelationIndexes` Lines 4-6).
 
 .. code-block:: pycon
    :name: NetFlowsCorrelationIndexes
@@ -2316,7 +2316,7 @@ We notice in :numref:`SlaterRanking` Line 7 that the first *Slater* ranking is a
        
 What precise ranking result should we hence adopt ? *Kemeny*'s and *Slater*'s ranking rules are furthermore computationally *difficult* problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). 
 
-More efficient ranking heuristics, like the *Copeland* and the *NetFlows* rules, are therefore needed in practice. 
+More efficient ranking heuristics, like the *Copeland* and the *NetFlows* rules, are therefore needed in practice. Let us finally, after these *ranking-by-scoring* strategies, also present two popular *ranking-by-choosing* strategies.
 
 *Kohler*'s ranking-by-choosing rule
 ...................................
@@ -2364,7 +2364,7 @@ But *Kohler*'s ranking has a *dual* version, the prudent **Arrow-Raynaud** *orde
 *Tideman*'s ranked-pairs rule
 .............................
 
-A further *ranking-by-choosing* heuristic working best this time on the non strict outranking digraph *g*, the **RankedPairs** rule, is based on a *prudent incremental* construction of linear orders that avoids on the fly any cycling outrankings (see [LAM-2009]_). The ranking rule may be formulated as follows:
+A further *ranking-by-choosing* heuristic, the **RankedPairs** rule working best this time on the non strict outranking digraph *g*, is based on a *prudent incremental* construction of linear orders that avoids on the fly any cycling outrankings (see [LAM-2009]_). The ranking rule may be formulated as follows:
 
 1. Rank the ordered pairs :math:`(x,y)` of alternatives in decreasing order of the outranking characteristic values :math:`r(x\, \geq \,y)`;
 2. Consider the pairs in that order (ties are resolved by a lexicographic rule):
@@ -2384,7 +2384,7 @@ With our didactic outranking digraph *g*, we get the following result.
    >>> rp.showRanking()
     ['a5', 'a6', 'a7', 'a3', 'a8', 'a9', 'a4', 'a1', 'a2']
 
-The *RankedPairs* ranking rule renders in fact one of the two optimal *Kemeny* ranking, as we may verify below.
+The *RankedPairs* ranking rule renders in our example here in fact one of the two optimal *Kemeny* ranking, as we may verify below.
  
 .. code-block:: pycon
    :linenos:
