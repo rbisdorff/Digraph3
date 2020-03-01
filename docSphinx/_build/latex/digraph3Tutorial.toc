@@ -30,7 +30,7 @@
 \contentsline {subsection}{\numberline {4.3}Valuation semantics}{40}{subsection.4.3}
 \contentsline {subsection}{\numberline {4.4}Pairwise comparisons}{40}{subsection.4.4}
 \contentsline {subsection}{\numberline {4.5}Recoding the valuation}{41}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}Codual digraph}{42}{subsection.4.6}
+\contentsline {subsection}{\numberline {4.6}The strict outranking digraph}{42}{subsection.4.6}
 \contentsline {subsection}{\numberline {4.7}XMCDA 2.0}{43}{subsection.4.7}
 \contentsline {section}{\numberline {5}Generating random performance tableaux}{44}{section.5}
 \contentsline {subsection}{\numberline {5.1}Introduction}{44}{subsection.5.1}

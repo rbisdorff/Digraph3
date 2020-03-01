@@ -73,7 +73,7 @@ The Python development of these computing resources offers the advantage of an e
 
 .. |location_linkHTML1| raw:: html
 
-   <a href="http://hdl.handle.net/10993/37933" target="_blank">on <i>Algorithmic Decision Theory</i></a>
+   <a href="http://hdl.handle.net/10993/37933" target="_blank"> on Algorithmic Decision Theory</i></a>
 
 .. |location_linkLatex1| raw:: latex
 
@@ -507,6 +507,8 @@ Being much *denser* than a linear order, the actual inner part of our tutorial r
 
 Indeed, a *complete* digraph on the limit has no inner part (privacy!) at all, whereas *empty* and *indeterminate* digraphs admit both, an empty border and an empty inner part.
 
+.. _Epistemic-Fusion-label:
+
 Fusion by epistemic disjunction
 ...............................
 
@@ -539,6 +541,8 @@ Let *r* and *r'* characterise two bipolar-valued epistemic situations.
    * o-max(*r*, *r'* ) = max(*r*, *r'* ) when both *r* and *r'* are *validated* (positive);
    * o-max(*r*, *r'* ) = min(*r*, *r'* ) when both *r* and *r'* are *invalidated* (negative);
    * o-max(*r*, *r'* ) = *indeterminate* otherwise.
+
+.. _Codual-Transform-label:    
 
 Dual, converse and codual digraphs
 ..................................
@@ -585,9 +589,11 @@ We may as readily compute the **dual** (negated relation [14]_), the **converse*
     '6'     | -0.38  0.54 -0.84 -0.66  0.22  0.00 -0.04	 
     '7'     | -0.44 -0.02  1.00 -0.76  0.52  0.22  0.00	 
 
-Computing the dual, respectively the converse, may also be done with prefixing the ``__neg__ (-)`` or the ``__invert__`` (~) operator. The codual of a Digraph object may, hence, as well be computed with a **composition** (in either order) of both operations.
+Computing the *dual*, respectively the *converse*, may also be done with prefixing the ``__neg__ (-)`` or the ``__invert__`` (~) operator. The *codual* of a Digraph object may, hence, as well be computed with a **composition** (in either order) of both operations.
 
 .. code-block:: pycon
+   :name: infixOperators
+   :caption: Computing the *dual*, the *converse* and the *codual* of a digraph
    :linenos:
 
    >>> ddg = -dg   # dual of dg
@@ -1459,10 +1465,10 @@ All outranking digraphs, being of root type :py:class:`digraphs.Digraph`, inheri
 
 .. _CoDual-Digraph-label:
  
-Codual digraph
-..............
+The strict outranking digraph
+.............................
 
-From the theory (see [BIS-2013]_, [ADT-L7]_ )  we know that a bipolar-valued outranking relation is **weakly complete**, i.e. if :math:`r(x\,S\,y) < 0.0` then :math:`r(y\,S\,x) >= 0.0` . From this property follows that a bipolar-valued outranking relation verifies the **coduality** principle: the dual (strict negation - [14]_) of the converse (inverse ~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_.
+From the theory (see [BIS-2013]_, [ADT-L7]_ )  we know that a bipolar-valued outranking digraph is **weakly complete**, i.e. if :math:`r(x\,S\,y) < 0.0` then :math:`r(y\,S\,x) >= 0.0` . From this property follows that a bipolar-valued outranking relation verifies the **coduality** principle: the dual (strict negation - [14]_) of the converse (inverse ~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing [1]_.
 
 .. code-block:: pycon
    :linenos:
@@ -1964,9 +1970,9 @@ Ranking with multiple incommensurable criteria
 The ranking problem
 ...................
 
-We need to rank without ties a set *X* of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued *strict outranking* characteristics, i.e. :math:`r(x\, > \, y)` for all *x*, *y* in *X* (see Section :ref:`CoDual-Digraph-label` and [BIS-2013]_).
+We need to rank without ties a set *X* of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued *outranking* characteristics, i.e. :math:`r(x\, \geq \, y)` for all *x*, *y* in *X* (see :ref:`CoDual-Digraph-label` and [BIS-2013]_).
 
-Let us consider a didactic outranking digraph generated from a random *Cost-Benefit* performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding *strict outranking digraph* as follows.
+Let us consider a didactic outranking digraph *g* generated from a random *Cost-Benefit* performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding *strict outranking digraph* with the a :ref:`codual transform <Codual-Transform-label>`)as follows.
 
 .. code-block:: pycon
    :name: strictOutranking
@@ -2033,7 +2039,7 @@ To estimate how *difficult* this ranking problem here may be, we can have a look
 
    The *strict outranking* digraph	   
 
-The shown strict outranking relation is apparently *not transitive*: for instance, alternative *a8* outranks alternative *a6* and alternative *a6* outranks *a4*, however *a8* does not outrank *a4* (see :numref:`rankingTutorial`). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph *gcd*.
+The shown strict outranking digraph is apparently *not transitive*: for instance, alternative *a8* outranks alternative *a6* and alternative *a6* outranks *a4*, however *a8* does not outrank *a4* (see :numref:`rankingTutorial`). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph *gcd*.
 
     >>> gcd.computeTransitivityDegree(Comments=True)
      Transitivity degree of graph <converse-dual_rel_randomCBperftab> : 0.46
@@ -2052,7 +2058,7 @@ There is one chordless circuit detected in the given strict outranking digraph *
 
 Several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.
 
-The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland*'s, *Kemeny*'s, *Slater*'s, *Kohler*'s or *Tideman*'s ranking rule.
+The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland*'s, *Kemeny*'s, *Slater*'s, *Kohler*'s, *Arrow-Raynaud*'s or *Tideman*'s ranking rule.
 
 The *Copeland* ranking
 ......................
@@ -2081,7 +2087,7 @@ The *Copeland* ranking
 
 Alternative *a5* obtains the best *Copeland* score (+12), followed by alternatives *a1*, *a6* and *a7* with same score (+2); following the lexicographic rule, *a1* is hence ranked before *a6* and *a6* before *a7*. Same situation is observed for *a4* and *a9* with a score of -3 (see :numref:`CopelandRanking` Lines 4-12).
 
-*Copeland*'s ranking rule appears in fact **invariant** under the *codual* transform and renders a same linear order indifferently from digraphs *g* or *gcd* . The resulting ranking (see :numref:`CopelandRanking` Line 14) is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal *Kendall* sense (see :numref:`CopelandCorrelationIndexes`).
+*Copeland*'s ranking rule appears in fact **invariant** under the :ref:`codual transform <Codual-Transform-label>` and renders a same linear order indifferently from digraphs *g* or *gcd* . The resulting ranking (see :numref:`CopelandRanking` Line 14) is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal *Kendall* sense (see :numref:`CopelandCorrelationIndexes`).
 
 .. code-block:: pycon
    :name: CopelandCorrelationIndexes
@@ -2170,7 +2176,7 @@ The valued version of the *Copeland* rule, called **NetFlows** rule, computes fo
    >>> cop.copelandRanking
     ['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2']
 
-It is worthwhile noticing again, that similar to the *Copeland* ranking rule seen before, the *NetFlows* ranking rule is also **invariant** under the *codual* transform and delivers the same ranking result indifferently from digraphs *g* or *gcd* (see :numref:`NetFlowsRanking` Line 14). 
+It is worthwhile noticing again, that similar to the *Copeland* ranking rule seen before, the *NetFlows* ranking rule is also **invariant** under the :ref:`codual transform <Codual-Transform-label>` and delivers the same ranking result indifferently from digraphs *g* or *gcd* (see :numref:`NetFlowsRanking` Line 14). 
 
 The *NetFlows* scores deliver in this example a ranking *without ties* which is rather different from the one delivered by *Copeland*'s rule (see :numref:`NetFlowsRanking` Line 16). It may happen, however, that we obtain, as with the *Copeland* scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a *weak ranking* with the corresponding :py:class:`transitiveDigraphs.WeakNetFlowsOrder` class.
 
@@ -2228,7 +2234,7 @@ A *Kemeny* ranking may not be unique, and the first one discovered in a brute pe
    >>> ke.maxKemenyIndex
     Decimal('12.9166667')
 
-We may visualize the partial order defined by the *epistemic disjunction* of both optimal *Kemeny* rankings by using the :py:class:`transitiveDigraphs.RankingsFusion` class as follows.
+We may visualize the partial order defined by the :ref:`epistemic disjunction <Epistemic-Fusion-label>` of both optimal *Kemeny* rankings by using the :py:class:`transitiveDigraphs.RankingsFusion` class as follows.
 
 .. code-block:: pycon
    :name: KemenyOrdersFusion
@@ -2281,7 +2287,7 @@ The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, inste
    >>> len(sl.maximalRankings)
     7
 
-We notice in :numref:`SlaterRanking` Line 7 that the first *Slater* ranking is a rather good fit (+0.676), slightly better apparently than the *NetFlows* ranking result (+638). However, there are aparently 7 such potentially optimal *Slater* rankings (see :numref:`SlaterRanking` Line 11). The corresponding epistemic disjunction gives the following partial ordering.
+We notice in :numref:`SlaterRanking` Line 7 that the first *Slater* ranking is a rather good fit (+0.676), slightly better apparently than the *NetFlows* ranking result (+638). However, there are aparently 7 such potentially optimal *Slater* rankings (see :numref:`SlaterRanking` Line 11). The corresponding :ref:`epistemic disjunction <Epistemic-Fusion-label>` gives the following partial ordering.
 
 .. code-block:: pycon
    :name: SlaterRankingsFusion
@@ -2340,7 +2346,7 @@ At step *i* (*i* goes from 1 to *n*) do the following:
     Epistemic determination      :  0.230
     Bipolar-valued equivalalence : +0.172
 
-With this *min-max* lexicographic *ranking-by-choosing* strategy, we find a correlation result (+0.747) that is until now clearly the nearest to an optimal *Kemeny* ranking (see :numref:`optimalKemeny`). Only two adjacent pairs: *[a6, a7]* and *[a8, a9]* are actually inverted here. Notice that "Kohler*'s ranking rule, contrary to the previously mentioned rules, is **not** *invariant* under the *codual* transform and requires to work on the *strict outranking* digraph *gcd* for a better correlation result.
+With this *min-max* lexicographic *ranking-by-choosing* strategy, we find a correlation result (+0.747) that is until now clearly the nearest to an optimal *Kemeny* ranking (see :numref:`optimalKemeny`). Only two adjacent pairs: *[a6, a7]* and *[a8, a9]* are actually inverted here. Notice that *Kohler*'s ranking rule, contrary to the previously mentioned rules, is **not** *invariant* under the *codual* transform and requires to work on the *strict outranking* digraph *gcd* for a better correlation result.
 
 .. code-block:: pycon
    :linenos:
