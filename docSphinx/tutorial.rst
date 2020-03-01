@@ -1972,7 +1972,7 @@ The ranking problem
 
 We need to rank without ties a set *X* of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued *outranking* characteristics, i.e. :math:`r(x\, \geq \, y)` for all *x*, *y* in *X* (see :ref:`CoDual-Digraph-label` and [BIS-2013]_).
 
-Let us consider a didactic outranking digraph *g* generated from a random *Cost-Benefit* performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding *strict outranking digraph* with the a :ref:`codual transform <Codual-Transform-label>`)as follows.
+Let us consider a didactic outranking digraph *g* generated from a random *Cost-Benefit* performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding *strict outranking digraph* with the a :ref:`codual transform <Codual-Transform-label>` as follows.
 
 .. code-block:: pycon
    :name: strictOutranking
@@ -2401,7 +2401,7 @@ The *RankedPairs* ranking rule renders in fact one of the two optimal *Kemeny* r
 
 Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* version, the **Dias-Lamboray** *ordering-by-choosing* rule, which produces, when working this time on the codual *strict outranking* digraph *gcd*, the same ranking result (see [LAM-2009]_).
 
-Unfortunately, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are *not scalable* to outranking digraphs of larger orders (> 1000). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland* and the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the outranking digraph, remain in fact computationally tractable.
+Unfortunately, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are *not scalable* to outranking digraphs of larger orders (> 50). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland* and the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the outranking digraph, remain in fact computationally tractable.
  
 Ranking big performance tableaux
 ................................
