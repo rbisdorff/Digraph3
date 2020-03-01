@@ -1183,6 +1183,34 @@
 
 <span class="c1">########  instantiates principal scores&#39; ordering</span>
 
+<div class="viewcode-block" id="SlaterOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.SlaterOrder">[docs]</a><span class="k">class</span> <span class="nc">SlaterOrder</span><span class="p">(</span><span class="n">KemenyOrder</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Instantiates a SlaterOrder by instantiating a *KemenyOrder* from the Condorcet Digraph -the median cut polarised digraph</span>
+<span class="sd">    given bipolarised digraph- of a given bipolar-valued Digraph instance. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A constructor for generating a linear order</span>
+<span class="sd">        from a given other digraph by exact enumeration</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">PolarisedDigraph</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">PolarisedDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="n">sl</span> <span class="o">=</span> <span class="n">KemenyOrder</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_ranked&#39;</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slaterOrder</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">kemenyOrder</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slaterRanking</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">kemenyRanking</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">slaterIndex</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">maxKemenyIndex</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maximalRankings</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
+        
+<span class="c1">########  instantiates principal scores&#39; ordering</span>
+
 <div class="viewcode-block" id="PrincipalOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.PrincipalOrder">[docs]</a><span class="k">class</span> <span class="nc">PrincipalOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the order from the scores obtained by the first</span>
@@ -1332,65 +1360,81 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">ke</span><span class="o">.</span><span class="n">kemenyRanking</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">ke</span><span class="o">.</span><span class="n">kemenyOrder</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">ke</span><span class="p">))</span>
+        <span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">ke</span><span class="p">)</span>
+        <span class="n">ke</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ke</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="k">pass</span>
     <span class="nb">print</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; principal ordering:&#39;</span><span class="p">)</span>
-    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>    
-    <span class="n">pri</span> <span class="o">=</span> <span class="n">PrincipalOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">pri</span><span class="o">.</span><span class="n">principalRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">pri</span><span class="o">.</span><span class="n">principalRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">pri</span><span class="o">.</span><span class="n">principalOrder</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">pri</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; slater ordering:&#39;</span><span class="p">)</span>
+    <span class="n">sl</span> <span class="o">=</span> <span class="n">SlaterOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="c1">#g.showRelationTable()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">slaterRanking</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">slaterOrder</span><span class="p">)</span>
+        <span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">sl</span><span class="p">)</span>
+        <span class="n">sl</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
     <span class="nb">print</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; net flows ordering:&#39;</span><span class="p">)</span>
-    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsOrder</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">nf</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">()</span>
-    <span class="c1"># print(&#39;==&gt;&gt; out flows ordering:&#39;)</span>
-    <span class="c1"># t0 = time()</span>
-    <span class="c1"># of = OutFlowsOrder(g)</span>
-    <span class="c1"># g.showRelationTable(actionsSubset=of.outFlowsRanking)</span>
-    <span class="c1"># print(of.outFlowsRanking)</span>
-    <span class="c1"># print(of.outFlowsOrder)</span>
-    <span class="c1"># print(g.computeOrdinalCorrelation(of))</span>
-    <span class="c1"># print(time()-t0)</span>
-    <span class="c1"># print()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Copeland ordering:&#39;</span><span class="p">)</span>
-    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandOrder</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Kohler ordering:&#39;</span><span class="p">)</span>
-    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="n">ko</span> <span class="o">=</span> <span class="n">KohlerOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">ko</span><span class="o">.</span><span class="n">kohlerRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">ko</span><span class="o">.</span><span class="n">kohlerRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">ko</span><span class="o">.</span><span class="n">kohlerOrder</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">ko</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; ranked pairs ordering:&#39;</span><span class="p">)</span>
-    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="n">rp</span> <span class="o">=</span> <span class="n">RankedPairsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">rp</span><span class="o">.</span><span class="n">rankedPairsRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">rp</span><span class="o">.</span><span class="n">rankedPairsRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">rp</span><span class="o">.</span><span class="n">rankedPairsOrder</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">rp</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">()</span>
+     
+<span class="c1">##    print(&#39;==&gt;&gt; principal ordering:&#39;)</span>
+<span class="c1">##    t0 = time()    </span>
+<span class="c1">##    pri = PrincipalOrder(g,tempDir=None)</span>
+<span class="c1">##    g.showRelationTable(actionsSubset=pri.principalRanking)</span>
+<span class="c1">##    print(pri.principalRanking)</span>
+<span class="c1">##    print(pri.principalOrder)</span>
+<span class="c1">##    print(g.computeOrdinalCorrelation(pri))</span>
+<span class="c1">##    print(time()-t0)</span>
+<span class="c1">##    print()</span>
+<span class="c1">##    print(&#39;==&gt;&gt; net flows ordering:&#39;)</span>
+<span class="c1">##    t0 = time()</span>
+<span class="c1">##    nf = NetFlowsOrder(g)</span>
+<span class="c1">##    g.showRelationTable(actionsSubset=nf.netFlowsRanking)</span>
+<span class="c1">##    print(nf.netFlowsRanking)</span>
+<span class="c1">##    print(nf.netFlowsOrder)</span>
+<span class="c1">##    print(g.computeOrdinalCorrelation(nf))</span>
+<span class="c1">##    print(time()-t0)</span>
+<span class="c1">##    print()</span>
+<span class="c1">##    # print(&#39;==&gt;&gt; out flows ordering:&#39;)</span>
+<span class="c1">##    # t0 = time()</span>
+<span class="c1">##    # of = OutFlowsOrder(g)</span>
+<span class="c1">##    # g.showRelationTable(actionsSubset=of.outFlowsRanking)</span>
+<span class="c1">##    # print(of.outFlowsRanking)</span>
+<span class="c1">##    # print(of.outFlowsOrder)</span>
+<span class="c1">##    # print(g.computeOrdinalCorrelation(of))</span>
+<span class="c1">##    # print(time()-t0)</span>
+<span class="c1">##    # print()</span>
+<span class="c1">##    print(&#39;==&gt;&gt; Copeland ordering:&#39;)</span>
+<span class="c1">##    t0 = time()</span>
+<span class="c1">##    cop = CopelandOrder(g,Comments=True)</span>
+<span class="c1">##    g.showRelationTable(actionsSubset=cop.copelandRanking)</span>
+<span class="c1">##    print(cop.copelandRanking)</span>
+<span class="c1">##    print(cop.copelandOrder)</span>
+<span class="c1">##    print(g.computeOrdinalCorrelation(cop))</span>
+<span class="c1">##    print(time()-t0)</span>
+<span class="c1">##    print()</span>
+<span class="c1">##    print(&#39;==&gt;&gt; Kohler ordering:&#39;)</span>
+<span class="c1">##    t0 = time()</span>
+<span class="c1">##    ko = KohlerOrder(g)</span>
+<span class="c1">##    g.showRelationTable(actionsSubset=ko.kohlerRanking)</span>
+<span class="c1">##    print(ko.kohlerRanking)</span>
+<span class="c1">##    print(ko.kohlerOrder)</span>
+<span class="c1">##    print(g.computeOrdinalCorrelation(ko))</span>
+<span class="c1">##    print(time()-t0)</span>
+<span class="c1">##    print()</span>
+<span class="c1">##    print(&#39;==&gt;&gt; ranked pairs ordering:&#39;)</span>
+<span class="c1">##    t0 = time()</span>
+<span class="c1">##    rp = RankedPairsOrder(g)</span>
+<span class="c1">##    g.showRelationTable(actionsSubset=rp.rankedPairsRanking)</span>
+<span class="c1">##    print(rp.rankedPairsRanking)</span>
+<span class="c1">##    print(rp.rankedPairsOrder)</span>
+<span class="c1">##    print(g.computeOrdinalCorrelation(rp))</span>
+<span class="c1">##    print(time()-t0)</span>
+<span class="c1">##    print()</span>
 <span class="c1">##    print(&#39;==&gt;&gt; Leximin ordering:&#39;)</span>
 <span class="c1">##    le = RankedPairsOrder((-g),Leximin=True)</span>
 <span class="c1">##    g.showRelationTable()</span>

@@ -2961,7 +2961,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>We may visualize the partial order defined by the <em>epistemic disjunction</em> of both optimal <em>Kemeny</em> rankings (see <a class="reference external" href="techDoc.html#module-transitiveDigraphs">transitiveDigraphs module</a> and <a class="reference internal" href="#tutorialkemeny"><span class="std std-numref">Fig. 21</span></a>) as follows.</p>
+<p>We may visualize the partial order defined by the <em>epistemic disjunction</em> of both optimal <em>Kemeny</em> rankings by using the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingsFusion" title="transitiveDigraphs.RankingsFusion"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.RankingsFusion</span></code></a> class as follows.</p>
 <div class="literal-block-wrapper docutils container" id="kemenyordersfusion">
 <div class="code-block-caption"><span class="caption-number">Listing 26 </span><span class="caption-text">Computing the epistemic disjunction of all optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#kemenyordersfusion" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2977,8 +2977,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 11
 12
 13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">KemenyOrdersFusion</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wke</span> <span class="o">=</span> <span class="n">KemenyOrdersFusion</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingsFusion</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wke</span> <span class="o">=</span> <span class="n">RankingsFusion</span><span class="p">(</span><span class="n">ke</span><span class="p">,</span><span class="n">ke</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wke</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tutorialKemeny&#39;</span><span class="p">)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to tutorialKemeny.dot</span>
@@ -2998,11 +2998,11 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <a class="reference internal image-reference" href="_images/tutorialKemeny.png"><img alt="_images/tutorialKemeny.png" src="_images/tutorialKemeny.png" style="width: 175pt;" /></a>
 <p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">Epistemic disjunction of optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#tutorialkemeny" title="Permalink to this image">¶</a></p>
 </div>
-<p>It is interesting to notice in <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 25</span></a>, that both <em>Kemeny</em> rankings only differ in their respective ranking of alternative <em>a8</em>; either before or after alternatives <em>a9</em>, <em>a4</em> and <em>a1</em>.</p>
+<p>It is interesting to notice in <a class="reference internal" href="#tutorialkemeny"><span class="std std-numref">Fig. 21</span></a> and <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 25</span></a>, that both <em>Kemeny</em> rankings only differ in their respective positioning of alternative <em>a8</em>; either before or after alternatives <em>a9</em>, <em>a4</em> and <em>a1</em>.</p>
 </div>
 <div class="section" id="slater-rankings">
 <h2><a class="toc-backref" href="#id192"><em>Slater</em> rankings</a><a class="headerlink" href="#slater-rankings" title="Permalink to this headline">¶</a></h2>
-<p>The <strong>Slater</strong> ranking rule is identical to <em>Kemeny</em>’s, but it is working, instead, indifferently on the associated median cut digraphs <em>c</em> or <em>ccd</em>. Again <em>Slater</em>’s ranking rule is indeed <em>invariant</em> under the <em>codual</em> transform. The <em>Slater</em> rule renders here the following results.</p>
+<p>The <strong>Slater</strong> ranking rule is identical to <em>Kemeny</em>’s, but it is working, instead, on the median cut polarised digraph. <em>Slater</em>’s ranking rule is also <em>invariant</em> under the <em>codual</em> transform and delivers again indifferently on <em>g</em> or <em>gcd</em> the following results.</p>
 <div class="literal-block-wrapper docutils container" id="slaterranking">
 <div class="code-block-caption"><span class="caption-number">Listing 27 </span><span class="caption-text">Computing a <em>Slater</em> ranking</span><a class="headerlink" href="#slaterranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -3014,10 +3014,12 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
  7
  8
  9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span> <span class="o">=</span> <span class="n">KemenyOrder</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">showRanking</span><span class="p">()</span>
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span> <span class="o">=</span> <span class="n">SlaterOrder</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">slaterRanking</span>
 <span class="go"> [&#39;a5&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a2&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">sl</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">slaterRanking</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
 <span class="go"> Extended Kendall tau         : +0.676</span>
 <span class="go"> Epistemic determination      :  0.230</span>
@@ -3027,9 +3029,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>We notice in <a class="reference internal" href="#slaterranking"><span class="std std-numref">Listing 27</span></a> Line 6 that the first <em>Slater</em> ranking is a rather good fit (+0.676), slightly better apparently than the <em>NetFlows</em> ranking result (+638). However, there are aparently 7 such potentially optimal <em>Slater</em> rankings (see <a class="reference internal" href="#slaterranking"><span class="std std-numref">Listing 27</span></a> Line 10). The corresponding epistemic disjunction gives the following partial ordering.</p>
-<div class="literal-block-wrapper docutils container" id="slaterordersfusion">
-<div class="code-block-caption"><span class="caption-number">Listing 28 </span><span class="caption-text">Computing the epistemic disjunction of optimal <em>Slater</em> rankings</span><a class="headerlink" href="#slaterordersfusion" title="Permalink to this code">¶</a></div>
+<p>We notice in <a class="reference internal" href="#slaterranking"><span class="std std-numref">Listing 27</span></a> Line 7 that the first <em>Slater</em> ranking is a rather good fit (+0.676), slightly better apparently than the <em>NetFlows</em> ranking result (+638). However, there are aparently 7 such potentially optimal <em>Slater</em> rankings (see <a class="reference internal" href="#slaterranking"><span class="std std-numref">Listing 27</span></a> Line 11). The corresponding epistemic disjunction gives the following partial ordering.</p>
+<div class="literal-block-wrapper docutils container" id="slaterrankingsfusion">
+<div class="code-block-caption"><span class="caption-number">Listing 28 </span><span class="caption-text">Computing the epistemic disjunction of optimal <em>Slater</em> rankings</span><a class="headerlink" href="#slaterrankingsfusion" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3041,7 +3043,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
  9
 10
 11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">slw</span> <span class="o">=</span> <span class="n">KemenyOrdersFusion</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">slw</span> <span class="o">=</span> <span class="n">RankingsFusion</span><span class="p">(</span><span class="n">sl</span><span class="p">,</span><span class="n">sl</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">slw</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tutorialSlater&#39;</span><span class="p">)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to tutorialSlater.dot</span>
@@ -3060,7 +3062,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <a class="reference internal image-reference" href="_images/tutorialSlater.png"><img alt="_images/tutorialSlater.png" src="_images/tutorialSlater.png" style="width: 175pt;" /></a>
 <p class="caption"><span class="caption-number">Fig. 22 </span><span class="caption-text">Epistemic disjunction of optimal <em>Slater</em> rankings</span><a class="headerlink" href="#tutorialslater" title="Permalink to this image">¶</a></p>
 </div>
-<p>What precise ranking result should we hence adopt ? <em>Kemeny</em>’s as well as <em>Slater</em>’s ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (&lt; 20 objects).</p>
+<p>What precise ranking result should we hence adopt ? <em>Kemeny</em>’s and <em>Slater</em>’s ranking rules are furthermore computationally <em>difficult</em> problems and effective ranking results are only computable for tiny outranking digraphs (&lt; 20 objects).</p>
 <p>More efficient ranking heuristics, like the <em>Copeland</em> and the <em>NetFlows</em> rules, are therefore needed in practice.</p>
 </div>
 <div class="section" id="kohler-s-ranking-by-choosing-rule">

@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{February 29, 2020}
+\date{March 01, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -2505,12 +2505,12 @@ A \sphinxstyleemphasis{Kemeny} ranking may not be unique, and the first one disc
 \PYG{g+go}{ Decimal(\PYGZsq{}12.9166667\PYGZsq{})}
 \end{sphinxVerbatim}
 
-We may visualize the partial order defined by the \sphinxstyleemphasis{epistemic disjunction} of both optimal \sphinxstyleemphasis{Kemeny} rankings (see \sphinxhref{techDoc.html\#module-transitiveDigraphs}{transitiveDigraphs module} and \hyperref[\detokenize{tutorial:tutorialkemeny}]{Fig.\@ \ref{\detokenize{tutorial:tutorialkemeny}}}) as follows.
+We may visualize the partial order defined by the \sphinxstyleemphasis{epistemic disjunction} of both optimal \sphinxstyleemphasis{Kemeny} rankings by using the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingsFusion}} class as follows.
 \sphinxSetupCaptionForVerbatim{Computing the epistemic disjunction of all optimal \sphinxstyleemphasis{Kemeny} rankings}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:kemenyordersfusion}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{KemenyOrdersFusion}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wke} \PYG{o}{=} \PYG{n}{KemenyOrdersFusion}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{RankingsFusion}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wke} \PYG{o}{=} \PYG{n}{RankingsFusion}\PYG{p}{(}\PYG{n}{ke}\PYG{p}{,}\PYG{n}{ke}\PYG{o}{.}\PYG{n}{maximalRankings}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wke}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tutorialKemeny}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to tutorialKemeny.dot}
@@ -2532,19 +2532,20 @@ We may visualize the partial order defined by the \sphinxstyleemphasis{epistemic
 \noindent\sphinxincludegraphics[width=175bp]{{tutorialKemeny}.png}
 \caption{Epistemic disjunction of optimal \sphinxstyleemphasis{Kemeny} rankings}\label{\detokenize{tutorial:tutorialkemeny}}\end{figure}
 
-It is interesting to notice in \hyperref[\detokenize{tutorial:optimalkemeny}]{Listing \ref{\detokenize{tutorial:optimalkemeny}}}, that both \sphinxstyleemphasis{Kemeny} rankings only differ in their respective ranking of alternative \sphinxstyleemphasis{a8}; either before or after alternatives \sphinxstyleemphasis{a9}, \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a1}.
+It is interesting to notice in \hyperref[\detokenize{tutorial:tutorialkemeny}]{Fig.\@ \ref{\detokenize{tutorial:tutorialkemeny}}} and \hyperref[\detokenize{tutorial:optimalkemeny}]{Listing \ref{\detokenize{tutorial:optimalkemeny}}}, that both \sphinxstyleemphasis{Kemeny} rankings only differ in their respective positioning of alternative \sphinxstyleemphasis{a8}; either before or after alternatives \sphinxstyleemphasis{a9}, \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a1}.
 
 
 \subsection{\sphinxstyleemphasis{Slater} rankings}
 \label{\detokenize{tutorial:slater-rankings}}
-The \sphinxstylestrong{Slater} ranking rule is identical to \sphinxstyleemphasis{Kemeny}’s, but it is working, instead, indifferently on the associated median cut digraphs \sphinxstyleemphasis{c} or \sphinxstyleemphasis{ccd}. Again \sphinxstyleemphasis{Slater}’s ranking rule is indeed \sphinxstyleemphasis{invariant} under the \sphinxstyleemphasis{codual} transform. The \sphinxstyleemphasis{Slater} rule renders here the following results.
+The \sphinxstylestrong{Slater} ranking rule is identical to \sphinxstyleemphasis{Kemeny}’s, but it is working, instead, on the median cut polarised digraph. \sphinxstyleemphasis{Slater}’s ranking rule is also \sphinxstyleemphasis{invariant} under the \sphinxstyleemphasis{codual} transform and delivers again indifferently on \sphinxstyleemphasis{g} or \sphinxstyleemphasis{gcd} the following results.
 \sphinxSetupCaptionForVerbatim{Computing a \sphinxstyleemphasis{Slater} ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:slaterranking}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sl} \PYG{o}{=} \PYG{n}{KemenyOrder}\PYG{p}{(}\PYG{n}{c}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sl}\PYG{o}{.}\PYG{n}{showRanking}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sl} \PYG{o}{=} \PYG{n}{SlaterOrder}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sl}\PYG{o}{.}\PYG{n}{slaterRanking}
 \PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{sl}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeOrderCorrelation}\PYG{p}{(}\PYG{n}{sl}\PYG{o}{.}\PYG{n}{slaterRanking}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sl}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
 \PYG{g+go}{ Extended Kendall tau         : +0.676}
 \PYG{g+go}{ Epistemic determination      :  0.230}
@@ -2553,11 +2554,11 @@ The \sphinxstylestrong{Slater} ranking rule is identical to \sphinxstyleemphasis
 \PYG{g+go}{ 7}
 \end{sphinxVerbatim}
 
-We notice in \hyperref[\detokenize{tutorial:slaterranking}]{Listing \ref{\detokenize{tutorial:slaterranking}}} Line 6 that the first \sphinxstyleemphasis{Slater} ranking is a rather good fit (+0.676), slightly better apparently than the \sphinxstyleemphasis{NetFlows} ranking result (+638). However, there are aparently 7 such potentially optimal \sphinxstyleemphasis{Slater} rankings (see \hyperref[\detokenize{tutorial:slaterranking}]{Listing \ref{\detokenize{tutorial:slaterranking}}} Line 10). The corresponding epistemic disjunction gives the following partial ordering.
+We notice in \hyperref[\detokenize{tutorial:slaterranking}]{Listing \ref{\detokenize{tutorial:slaterranking}}} Line 7 that the first \sphinxstyleemphasis{Slater} ranking is a rather good fit (+0.676), slightly better apparently than the \sphinxstyleemphasis{NetFlows} ranking result (+638). However, there are aparently 7 such potentially optimal \sphinxstyleemphasis{Slater} rankings (see \hyperref[\detokenize{tutorial:slaterranking}]{Listing \ref{\detokenize{tutorial:slaterranking}}} Line 11). The corresponding epistemic disjunction gives the following partial ordering.
 \sphinxSetupCaptionForVerbatim{Computing the epistemic disjunction of optimal \sphinxstyleemphasis{Slater} rankings}
-\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:slaterordersfusion}}}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:slaterrankingsfusion}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{slw} \PYG{o}{=} \PYG{n}{KemenyOrdersFusion}\PYG{p}{(}\PYG{n}{c}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{slw} \PYG{o}{=} \PYG{n}{RankingsFusion}\PYG{p}{(}\PYG{n}{sl}\PYG{p}{,}\PYG{n}{sl}\PYG{o}{.}\PYG{n}{maximalRankings}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{slw}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tutorialSlater}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to tutorialSlater.dot}
@@ -2578,7 +2579,7 @@ We notice in \hyperref[\detokenize{tutorial:slaterranking}]{Listing \ref{\detoke
 \noindent\sphinxincludegraphics[width=175bp]{{tutorialSlater}.png}
 \caption{Epistemic disjunction of optimal \sphinxstyleemphasis{Slater} rankings}\label{\detokenize{tutorial:tutorialslater}}\end{figure}
 
-What precise ranking result should we hence adopt ? \sphinxstyleemphasis{Kemeny}’s as well as \sphinxstyleemphasis{Slater}’s ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (\textless{} 20 objects).
+What precise ranking result should we hence adopt ? \sphinxstyleemphasis{Kemeny}’s and \sphinxstyleemphasis{Slater}’s ranking rules are furthermore computationally \sphinxstyleemphasis{difficult} problems and effective ranking results are only computable for tiny outranking digraphs (\textless{} 20 objects).
 
 More efficient ranking heuristics, like the \sphinxstyleemphasis{Copeland} and the \sphinxstyleemphasis{NetFlows} rules, are therefore needed in practice.
 

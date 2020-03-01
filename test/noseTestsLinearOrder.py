@@ -29,6 +29,13 @@ def testKemenyOrdering():
     g = BipolarOutrankingDigraph(t)
     ke = KemenyOrder(g,Debug=True)
 
+def testSlaterOrdering():
+    print('*-------- Testing KemenyOrder class -------')
+    t = RandomCBPerformanceTableau(numberOfActions=5)
+    t.save('testKemeny')
+    g = BipolarOutrankingDigraph(t)
+    sl = SlaterOrder(g,Debug=True)
+
 def testRankedPairsOrdering():
     print('*-------- Testing RankedPairsOrder class -------')
     t = RandomPerformanceTableau(numberOfActions=5)
@@ -96,6 +103,14 @@ def testRankingCorrelations():
     print(ke.kemenyRanking)
     print(ke.kemenyOrder)
     print(g.computeOrdinalCorrelation(ke))
+    print()
+    print('==>> Slater ordering:')
+    sl = SlaterOrder(g,Debug=False)
+    #g.showRelationTable()
+    print(sl.slaterRanking)
+    print(sl.slaterOrder)
+    corr = g.computeOrdinalCorrelation(sl)
+    sl.showCorrelation(corr)
     print()
     print('==>> principal ordering:')
     pri = PrincipalOrder(g)

@@ -2228,15 +2228,15 @@ A *Kemeny* ranking may not be unique, and the first one discovered in a brute pe
    >>> ke.maxKemenyIndex
     Decimal('12.9166667')
 
-We may visualize the partial order defined by the *epistemic disjunction* of both optimal *Kemeny* rankings (see `transitiveDigraphs module <techDoc.html#module-transitiveDigraphs>`_ and :numref:`tutorialKemeny`) as follows.
+We may visualize the partial order defined by the *epistemic disjunction* of both optimal *Kemeny* rankings by using the :py:class:`transitiveDigraphs.RankingsFusion` class as follows.
 
 .. code-block:: pycon
    :name: KemenyOrdersFusion
    :caption: Computing the epistemic disjunction of all optimal *Kemeny* rankings
    :linenos:
 
-   >>> from transitiveDigraphs import KemenyOrdersFusion
-   >>> wke = KemenyOrdersFusion(gcd,orderLimit=9)
+   >>> from transitiveDigraphs import RankingsFusion
+   >>> wke = RankingsFusion(ke,ke.maximalRankings)
    >>> wke.exportGraphViz(fileName='tutorialKemeny')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to tutorialKemeny.dot
@@ -2257,22 +2257,23 @@ We may visualize the partial order defined by the *epistemic disjunction* of bot
 
    Epistemic disjunction of optimal *Kemeny* rankings	   
 
-It is interesting to notice in :numref:`optimalKemeny`, that both *Kemeny* rankings only differ in their respective ranking of alternative *a8*; either before or after alternatives *a9*, *a4* and *a1*.
+It is interesting to notice in :numref:`tutorialKemeny` and :numref:`optimalKemeny`, that both *Kemeny* rankings only differ in their respective positioning of alternative *a8*; either before or after alternatives *a9*, *a4* and *a1*.
 
 *Slater* rankings
 .................
 
-The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, instead, indifferently on the associated median cut digraphs *c* or *ccd*. Again *Slater*'s ranking rule is indeed *invariant* under the *codual* transform. The *Slater* rule renders here the following results.
+The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, instead, on the median cut polarised digraph. *Slater*'s ranking rule is also *invariant* under the *codual* transform and delivers again indifferently on *g* or *gcd* the following results.
 
 .. code-block:: pycon
    :name: SlaterRanking
    :caption: Computing a *Slater* ranking 
    :linenos:
 
-   >>> sl = KemenyOrder(c,orderLimit=9)
-   >>> sl.showRanking()
+   >>> sl = SlaterOrder(gcd,orderLimit=9)
+   >>> sl.slaterRanking
     ['a5', 'a6', 'a4', 'a1', 'a3', 'a7', 'a8', 'a9', 'a2']
-   >>> corr = gcd.computeOrdinalCorrelation(sl)
+   >>> corr = gcd.computeOrderCorrelation(sl.slaterRanking)
+   >>> sl.showCorrelation(corr)
     Correlation indexes:
     Extended Kendall tau         : +0.676
     Epistemic determination      :  0.230
@@ -2280,14 +2281,14 @@ The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, inste
    >>> len(sl.maximalRankings)
     7
 
-We notice in :numref:`SlaterRanking` Line 6 that the first *Slater* ranking is a rather good fit (+0.676), slightly better apparently than the *NetFlows* ranking result (+638). However, there are aparently 7 such potentially optimal *Slater* rankings (see :numref:`SlaterRanking` Line 10). The corresponding epistemic disjunction gives the following partial ordering.
+We notice in :numref:`SlaterRanking` Line 7 that the first *Slater* ranking is a rather good fit (+0.676), slightly better apparently than the *NetFlows* ranking result (+638). However, there are aparently 7 such potentially optimal *Slater* rankings (see :numref:`SlaterRanking` Line 11). The corresponding epistemic disjunction gives the following partial ordering.
 
 .. code-block:: pycon
-   :name: SlaterOrdersFusion
+   :name: SlaterRankingsFusion
    :caption: Computing the epistemic disjunction of optimal *Slater* rankings 
    :linenos:
 
-   >>> slw = KemenyOrdersFusion(c,orderLimit=9)
+   >>> slw = RankingsFusion(sl,sl.maximalRankings)
    >>> slw.exportGraphViz(fileName='tutorialSlater')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to tutorialSlater.dot
@@ -2307,7 +2308,7 @@ We notice in :numref:`SlaterRanking` Line 6 that the first *Slater* ranking is a
 
     Epistemic disjunction of optimal *Slater* rankings
        
-What precise ranking result should we hence adopt ? *Kemeny*'s as well as *Slater*'s ranking rules are furthermore computationally difficult problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). 
+What precise ranking result should we hence adopt ? *Kemeny*'s and *Slater*'s ranking rules are furthermore computationally *difficult* problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). 
 
 More efficient ranking heuristics, like the *Copeland* and the *NetFlows* rules, are therefore needed in practice. 
 
