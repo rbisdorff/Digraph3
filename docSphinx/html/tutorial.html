@@ -2174,7 +2174,7 @@ a given number of decision actions.</p>
 </div>
 </div>
 <div class="section" id="generating-random-cost-benefit-tableaux">
-<h2><a class="toc-backref" href="#id186">Generating random Cost-Benefit tableaux</a><a class="headerlink" href="#generating-random-cost-benefit-tableaux" title="Permalink to this headline">¶</a></h2>
+<span id="cost-benefit-performance-tableau-label"></span><h2><a class="toc-backref" href="#id186">Generating random Cost-Benefit tableaux</a><a class="headerlink" href="#generating-random-cost-benefit-tableaux" title="Permalink to this headline">¶</a></h2>
 <p>We provide the <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomCBPerformanceTableau" title="randomPerfTabs.RandomCBPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomPerfTabs.RandomCBPerformanceTableau</span></code></a> class for generating random <em>Cost</em> versus <em>Benefit</em> organized performance tableaux following the directives below:</p>
 <blockquote>
 <div><ul class="simple">
@@ -2636,7 +2636,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="section" id="the-ranking-problem">
 <h2><a class="toc-backref" href="#id189">The ranking problem</a><a class="headerlink" href="#the-ranking-problem" title="Permalink to this headline">¶</a></h2>
 <p>We need to rank without ties a set <em>X</em> of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued <em>strict outranking</em> characteristics, i.e. <img class="math" src="_images/math/8b67fdd1fec2d221cdc78aa20ee647a5f54a2b20.png" alt="r(x\, &gt; \, y)"/> for all <em>x</em>, <em>y</em> in <em>X</em> (see <a class="reference internal" href="#codual-digraph-label"><span class="std std-ref">The strict outranking digraph</span></a> and <a class="reference internal" href="#bis-2013" id="id27"><span>[BIS-2013]</span></a>).</p>
-<p>Let us consider a didactic outranking digraph <em>g</em> generated from a random <em>Cost-Benefit</em> performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding <em>strict outranking digraph</em> with the a <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> as follows.</p>
+<p>Let us consider a didactic outranking digraph <em>g</em> generated from a random <a class="reference internal" href="#cost-benefit-performance-tableau-label"><span class="std std-ref">Cost-Benefit performance tableau</span></a> concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding <em>strict outranking digraph</em> with the a <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> as follows.</p>
 <div class="literal-block-wrapper docutils container" id="strictoutranking">
 <div class="code-block-caption"><span class="caption-number">Listing 17 </span><span class="caption-text">Random bipolar-valued strict outranking relation characteristics</span><a class="headerlink" href="#strictoutranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1

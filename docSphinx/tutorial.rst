@@ -1636,7 +1636,9 @@ Code example.
 
 .. note::
 
-   Missing (NA) evaluation are registered in a performance tableau as *Decimal('-999')* value (see Line 24). Best and worst performance on each criterion are marked in *light green*, respectively in *light red*. 
+   Missing (NA) evaluation are registered in a performance tableau as *Decimal('-999')* value (see Line 24). Best and worst performance on each criterion are marked in *light green*, respectively in *light red*.
+
+.. _Cost-Benefit-Performance-Tableau-label:
 	    
 Generating random Cost-Benefit tableaux
 .......................................
@@ -1972,7 +1974,7 @@ The ranking problem
 
 We need to rank without ties a set *X* of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued *strict outranking* characteristics, i.e. :math:`r(x\, > \, y)` for all *x*, *y* in *X* (see :ref:`CoDual-Digraph-label` and [BIS-2013]_).
 
-Let us consider a didactic outranking digraph *g* generated from a random *Cost-Benefit* performance tableau concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding *strict outranking digraph* with the a :ref:`codual transform <Codual-Transform-label>` as follows.
+Let us consider a didactic outranking digraph *g* generated from a random :ref:`Cost-Benefit performance tableau <Cost-Benefit-Performance-Tableau-label>` concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding *strict outranking digraph* with the a :ref:`codual transform <Codual-Transform-label>` as follows.
 
 .. code-block:: pycon
    :name: strictOutranking
