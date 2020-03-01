@@ -2262,7 +2262,7 @@ It is interesting to notice in :numref:`tutorialKemeny` and :numref:`optimalKeme
 *Slater* rankings
 .................
 
-The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, instead, on the median cut polarised digraph. *Slater*'s ranking rule is also *invariant* under the *codual* transform and delivers again indifferently on *g* or *gcd* the following results.
+The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, instead, on the *median cut polarised* digraph. *Slater*'s ranking rule is also *invariant* under the *codual* transform and delivers again indifferently on *g* or *gcd* the following results.
 
 .. code-block:: pycon
    :name: SlaterRanking
