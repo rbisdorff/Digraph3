@@ -2151,6 +2151,8 @@ We recover in :numref:`weakCopelandRanking` above, the ranking with ties deliver
 
 Let us now consider a similar ranking rule, but working directly on the *valued* outranking digraph.
 
+.. _NetFlows-Ranking-label:
+
 The *NetFlows* ranking
 ......................
 
@@ -2367,9 +2369,9 @@ Noticing that the *NetFlows* score of an alternative *x* represents in fact a bi
 
 For a ranking (resp. an ordering) result, at step *i* (*i* goes from 1 to *n*) do the following:
 
-1. Compute for each row of the bipolar-valued outranking relation table (see :numref:`strictOutranking`) compute the corresponding *netFlows* score;
+1. Compute for each row of the bipolar-valued outranking relation table (see :numref:`strictOutranking`) compute the corresponding :ref:`net flow score <NetFlows-Ranking-label>` ;
 2. Select the row where this score is maximal (resp. minimal). Ties are resolved in lexicographic order;
-3. Put the selected decision alternative at rank (resp. order) *i*;
+3. Put the corresponding decision alternative at rank (resp. order) *i*;
 4. Delete the corresponding row and column from the relation table and restart until the table is empty.
 
 A first advantage is that the so modified *ranking-by-choosing* and  *ordering-by-choosing* rules become again **invariant** under the *codual* transform. And we may get both the ranking-by-choosing as well as the ordering-by-choosing results with the :py:class:`linearOrders.IteratedNetFlowsRanking` class constructor (see :numref:`iteratedNetFlowsRanking` Lines 12-13).
@@ -2412,7 +2414,7 @@ A first advantage is that the so modified *ranking-by-choosing* and  *ordering-b
       Valued equivalalence      : +0.171
       Epistemic determination   :  0.230
 
-The iterated *NetFlows* ranking and its *dual*, the iterated *NetFlows* ordering, do not usually deliver both the same result (:numref:`iteratedNetFlowsRanking` Lines 18 and 26). With our example outranking digraph *g* for instance, it is the *ordering-by-choosing* result that obtains a slightly better correlation with the given outranking digraph *g* (+0.751), a result that is also slightly better than *Kohler*'s result (+0.747, see :numref:`KohlerRanking` Line 8). 
+The iterated *NetFlows* ranking and its *dual*, the iterated *NetFlows* ordering, do not usually deliver both the same result (:numref:`iteratedNetFlowsRanking` Lines 18 and 26). With our example outranking digraph *g* for instance, it is the *ordering-by-choosing* result that obtains a slightly better correlation with the given outranking digraph *g* (+0.751), a result that is also slightly better than *Kohler*'s original result (+0.747, see :numref:`KohlerRanking` Line 8). 
 
 Let us finally mention a further interesting *ranking-by-choosing* approach.
 

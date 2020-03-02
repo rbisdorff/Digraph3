@@ -2431,7 +2431,7 @@ Let us now consider a similar ranking rule, but working directly on the \sphinxs
 
 
 \subsection{The \sphinxstyleemphasis{NetFlows} ranking}
-\label{\detokenize{tutorial:the-netflows-ranking}}
+\label{\detokenize{tutorial:the-netflows-ranking}}\label{\detokenize{tutorial:netflows-ranking-label}}
 The valued version of the \sphinxstyleemphasis{Copeland} rule, called \sphinxstylestrong{NetFlows} rule, computes for each alternative \sphinxstyleemphasis{x} a \sphinxstyleemphasis{net flow} score,  i.e. the sum of the differences between the \sphinxstylestrong{strict outranking} characteristics \(r(x\, > \,y)\) and the \sphinxstylestrong{strict outranked} characteristics \(r(y\, > \,x)\) for all pairs of alternatives where \sphinxstyleemphasis{y} is different from \sphinxstyleemphasis{x}.
 \sphinxSetupCaptionForVerbatim{Computing a \sphinxstyleemphasis{NetFlows} ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:netflowsranking}}}
@@ -2640,13 +2640,13 @@ For a ranking (resp. an ordering) result, at step \sphinxstyleemphasis{i} (\sphi
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
-Compute for each row of the bipolar\sphinxhyphen{}valued outranking relation table (see \hyperref[\detokenize{tutorial:strictoutranking}]{Listing \ref{\detokenize{tutorial:strictoutranking}}}) compute the corresponding \sphinxstyleemphasis{netFlows} score;
+Compute for each row of the bipolar\sphinxhyphen{}valued outranking relation table (see \hyperref[\detokenize{tutorial:strictoutranking}]{Listing \ref{\detokenize{tutorial:strictoutranking}}}) compute the corresponding {\hyperref[\detokenize{tutorial:netflows-ranking-label}]{\sphinxcrossref{\DUrole{std,std-ref}{net flow score}}}} ;
 
 \item {} 
 Select the row where this score is maximal (resp. minimal). Ties are resolved in lexicographic order;
 
 \item {} 
-Put the selected decision alternative at rank (resp. order) \sphinxstyleemphasis{i};
+Put the corresponding decision alternative at rank (resp. order) \sphinxstyleemphasis{i};
 
 \item {} 
 Delete the corresponding row and column from the relation table and restart until the table is empty.
@@ -2691,7 +2691,7 @@ A first advantage is that the so modified \sphinxstyleemphasis{ranking\sphinxhyp
 \PYG{g+go}{   Epistemic determination   :  0.230}
 \end{sphinxVerbatim}
 
-The iterated \sphinxstyleemphasis{NetFlows} ranking and its \sphinxstyleemphasis{dual}, the iterated \sphinxstyleemphasis{NetFlows} ordering, do not usually deliver both the same result (\hyperref[\detokenize{tutorial:iteratednetflowsranking}]{Listing \ref{\detokenize{tutorial:iteratednetflowsranking}}} Lines 18 and 26). With our example outranking digraph \sphinxstyleemphasis{g} for instance, it is the \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}choosing} result that obtains a slightly better correlation with the given outranking digraph \sphinxstyleemphasis{g} (+0.751), a result that is also slightly better than \sphinxstyleemphasis{Kohler}’s result (+0.747, see \hyperref[\detokenize{tutorial:kohlerranking}]{Listing \ref{\detokenize{tutorial:kohlerranking}}} Line 8).
+The iterated \sphinxstyleemphasis{NetFlows} ranking and its \sphinxstyleemphasis{dual}, the iterated \sphinxstyleemphasis{NetFlows} ordering, do not usually deliver both the same result (\hyperref[\detokenize{tutorial:iteratednetflowsranking}]{Listing \ref{\detokenize{tutorial:iteratednetflowsranking}}} Lines 18 and 26). With our example outranking digraph \sphinxstyleemphasis{g} for instance, it is the \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}choosing} result that obtains a slightly better correlation with the given outranking digraph \sphinxstyleemphasis{g} (+0.751), a result that is also slightly better than \sphinxstyleemphasis{Kohler}’s original result (+0.747, see \hyperref[\detokenize{tutorial:kohlerranking}]{Listing \ref{\detokenize{tutorial:kohlerranking}}} Line 8).
 
 Let us finally mention a further interesting \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} approach.
 

@@ -2861,7 +2861,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Let us now consider a similar ranking rule, but working directly on the <em>valued</em> outranking digraph.</p>
 </div>
 <div class="section" id="the-netflows-ranking">
-<h2><a class="toc-backref" href="#id193">The <em>NetFlows</em> ranking</a><a class="headerlink" href="#the-netflows-ranking" title="Permalink to this headline">¶</a></h2>
+<span id="netflows-ranking-label"></span><h2><a class="toc-backref" href="#id193">The <em>NetFlows</em> ranking</a><a class="headerlink" href="#the-netflows-ranking" title="Permalink to this headline">¶</a></h2>
 <p>The valued version of the <em>Copeland</em> rule, called <strong>NetFlows</strong> rule, computes for each alternative <em>x</em> a <em>net flow</em> score,  i.e. the sum of the differences between the <strong>strict outranking</strong> characteristics <img class="math" src="_images/math/1a41461c251febdacb2b5d91ea15066b982188bf.png" alt="r(x\, &gt; \,y)"/> and the <strong>strict outranked</strong> characteristics <img class="math" src="_images/math/dad233e2d3a93c797174c851923036e3421d1ddf.png" alt="r(y\, &gt; \,x)"/> for all pairs of alternatives where <em>y</em> is different from <em>x</em>.</p>
 <div class="literal-block-wrapper docutils container" id="netflowsranking">
 <div class="code-block-caption"><span class="caption-number">Listing 23 </span><span class="caption-text">Computing a <em>NetFlows</em> ranking</span><a class="headerlink" href="#netflowsranking" title="Permalink to this code">¶</a></div>
@@ -3122,9 +3122,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Noticing that the <em>NetFlows</em> score of an alternative <em>x</em> represents in fact a bipolar-valued characteristic of the assertion ‘<strong>alternative x is ranked first</strong>’, we may enhance <em>Kohler</em>’s or <em>Arrow-Raynaud</em>’s rules by replacing the <em>min-max</em>, respectively the <em>max-min</em>, strategy with an <strong>iterated</strong> maximal, respectively its <em>dual</em> minimal, <em>Netflows</em> score selection.</p>
 <p>For a ranking (resp. an ordering) result, at step <em>i</em> (<em>i</em> goes from 1 to <em>n</em>) do the following:</p>
 <ol class="arabic simple">
-<li><p>Compute for each row of the bipolar-valued outranking relation table (see <a class="reference internal" href="#strictoutranking"><span class="std std-numref">Listing 17</span></a>) compute the corresponding <em>netFlows</em> score;</p></li>
+<li><p>Compute for each row of the bipolar-valued outranking relation table (see <a class="reference internal" href="#strictoutranking"><span class="std std-numref">Listing 17</span></a>) compute the corresponding <a class="reference internal" href="#netflows-ranking-label"><span class="std std-ref">net flow score</span></a> ;</p></li>
 <li><p>Select the row where this score is maximal (resp. minimal). Ties are resolved in lexicographic order;</p></li>
-<li><p>Put the selected decision alternative at rank (resp. order) <em>i</em>;</p></li>
+<li><p>Put the corresponding decision alternative at rank (resp. order) <em>i</em>;</p></li>
 <li><p>Delete the corresponding row and column from the relation table and restart until the table is empty.</p></li>
 </ol>
 <p>A first advantage is that the so modified <em>ranking-by-choosing</em> and  <em>ordering-by-choosing</em> rules become again <strong>invariant</strong> under the <em>codual</em> transform. And we may get both the ranking-by-choosing as well as the ordering-by-choosing results with the <a class="reference internal" href="techDoc.html#linearOrders.IteratedNetFlowsRanking" title="linearOrders.IteratedNetFlowsRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.IteratedNetFlowsRanking</span></code></a> class constructor (see <a class="reference internal" href="#iteratednetflowsranking"><span class="std std-numref">Listing 31</span></a> Lines 12-13).</p>
@@ -3196,7 +3196,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>The iterated <em>NetFlows</em> ranking and its <em>dual</em>, the iterated <em>NetFlows</em> ordering, do not usually deliver both the same result (<a class="reference internal" href="#iteratednetflowsranking"><span class="std std-numref">Listing 31</span></a> Lines 18 and 26). With our example outranking digraph <em>g</em> for instance, it is the <em>ordering-by-choosing</em> result that obtains a slightly better correlation with the given outranking digraph <em>g</em> (+0.751), a result that is also slightly better than <em>Kohler</em>’s result (+0.747, see <a class="reference internal" href="#kohlerranking"><span class="std std-numref">Listing 30</span></a> Line 8).</p>
+<p>The iterated <em>NetFlows</em> ranking and its <em>dual</em>, the iterated <em>NetFlows</em> ordering, do not usually deliver both the same result (<a class="reference internal" href="#iteratednetflowsranking"><span class="std std-numref">Listing 31</span></a> Lines 18 and 26). With our example outranking digraph <em>g</em> for instance, it is the <em>ordering-by-choosing</em> result that obtains a slightly better correlation with the given outranking digraph <em>g</em> (+0.751), a result that is also slightly better than <em>Kohler</em>’s original result (+0.747, see <a class="reference internal" href="#kohlerranking"><span class="std std-numref">Listing 30</span></a> Line 8).</p>
 <p>Let us finally mention a further interesting <em>ranking-by-choosing</em> approach.</p>
 </div>
 <div class="section" id="tideman-s-ranked-pairs-rule">
