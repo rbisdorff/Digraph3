@@ -2241,7 +2241,7 @@ A *Kemeny* ranking may not be unique, and the first one discovered in a brute pe
 We may visualize the partial order defined by the :ref:`epistemic disjunction <Epistemic-Fusion-label>` of both optimal *Kemeny* rankings by using the :py:class:`transitiveDigraphs.RankingsFusion` class as follows.
 
 .. code-block:: pycon
-   :name: KemenyOrdersFusion
+   :name: KemenyRankingsFusion
    :caption: Computing the epistemic disjunction of all optimal *Kemeny* rankings
    :linenos:
 
@@ -2369,12 +2369,12 @@ Noticing that the *NetFlows* score of an alternative *x* represents in fact a bi
 
 For a ranking (resp. an ordering) result, at step *i* (*i* goes from 1 to *n*) do the following:
 
-1. Compute for each row of the bipolar-valued outranking relation table (see :numref:`strictOutranking`) compute the corresponding :ref:`net flow score <NetFlows-Ranking-label>` ;
-2. Select the row where this score is maximal (resp. minimal). Ties are resolved in lexicographic order;
+1. Compute for each row of the bipolar-valued outranking relation table (see :numref:`strictOutranking`) the corresponding :ref:`net flow score <NetFlows-Ranking-label>` ;
+2. Select the row where this score is maximal (resp. minimal); ties being resolved by lexicographic order;
 3. Put the corresponding decision alternative at rank (resp. order) *i*;
 4. Delete the corresponding row and column from the relation table and restart until the table is empty.
 
-A first advantage is that the so modified *ranking-by-choosing* and  *ordering-by-choosing* rules become again **invariant** under the *codual* transform. And we may get both the ranking-by-choosing as well as the ordering-by-choosing results with the :py:class:`linearOrders.IteratedNetFlowsRanking` class constructor (see :numref:`iteratedNetFlowsRanking` Lines 12-13).
+A first *advantage* is that the so modified *Kohler*'s and  *Arrow-Raynaud*'s rules become **invariant** under the *codual* transform. And we may get both the *ranking-by-choosing* as well as the *ordering-by-choosing* results with the :py:class:`linearOrders.IteratedNetFlowsRanking` class constructor (see :numref:`iteratedNetFlowsRanking` Lines 12-13).
 
 .. code-block:: pycon
    :name: iteratedNetFlowsRanking
@@ -2414,14 +2414,16 @@ A first advantage is that the so modified *ranking-by-choosing* and  *ordering-b
       Valued equivalalence      : +0.171
       Epistemic determination   :  0.230
 
-The iterated *NetFlows* ranking and its *dual*, the iterated *NetFlows* ordering, do not usually deliver both the same result (:numref:`iteratedNetFlowsRanking` Lines 18 and 26). With our example outranking digraph *g* for instance, it is the *ordering-by-choosing* result that obtains a slightly better correlation with the given outranking digraph *g* (+0.751), a result that is also slightly better than *Kohler*'s original result (+0.747, see :numref:`KohlerRanking` Line 8). 
+The iterated *NetFlows* ranking and its *dual*, the iterated *NetFlows* ordering, do not usually deliver both the same result (:numref:`iteratedNetFlowsRanking` Lines 18 and 26). With our example outranking digraph *g* for instance, it is the *ordering-by-choosing* result that obtains a slightly better correlation with the given outranking digraph *g* (+0.751), a result that is also slightly better than *Kohler*'s original result (+0.747, see :numref:`KohlerRanking` Line 8).
 
-Let us finally mention a further interesting *ranking-by-choosing* approach.
+With different *ranking-by-choosing* and *ordering-by-choosing* results, it may be useful to *fuse* now, similar to what we have done before with *Kemeny*'s and *Slaters*'s optimal rankings (see :numref:`KemenyRankingsFusion` and :numref:`SlaterRankingsFusion`), both, the iterated *NetFlows* ranking and ordering into a partial ranking. But we are hence back to the practical problem of what linear ranking should we eventually adaopt ? 
+
+Let us finally mention a Last interesting *ranking-by-choosing* approach.
 
 *Tideman*'s ranked-pairs rule
 .............................
 
-A further *ranking-by-choosing* heuristic, the **RankedPairs** rule working best this time on the non strict outranking digraph *g*, is based on a *prudent incremental* construction of linear orders that avoids on the fly any cycling outrankings (see [LAM-2009]_). The ranking rule may be formulated as follows:
+A further *ranking-by-choosing* heuristic, the **RankedPairs** rule, working best this time on the non strict outranking digraph *g*, is based on a *prudent incremental* construction of linear orders that avoids on the fly any cycling outrankings (see [LAM-2009]_). The ranking rule may be formulated as follows:
 
 1. Rank the ordered pairs :math:`(x,y)` of alternatives in decreasing order of the outranking characteristic values :math:`r(x\, \geq \,y)`;
 2. Consider the pairs in that order (ties are resolved by a lexicographic rule):
@@ -2441,7 +2443,7 @@ With our didactic outranking digraph *g*, we get the following result.
    >>> rp.showRanking()
     ['a5', 'a6', 'a7', 'a3', 'a8', 'a9', 'a4', 'a1', 'a2']
 
-The *RankedPairs* ranking rule renders in our example here in fact one of the two optimal *Kemeny* ranking, as we may verify below.
+The *RankedPairs* ranking rule renders in our example here luckily one of the two optimal *Kemeny* ranking, as we may verify below.
  
 .. code-block:: pycon
    :linenos:
@@ -2458,7 +2460,7 @@ The *RankedPairs* ranking rule renders in our example here in fact one of the tw
 
 Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* version, the **Dias-Lamboray** *ordering-by-choosing* rule, which produces, when working this time on the codual *strict outranking* digraph *gcd*, the same ranking result (see [LAM-2009]_, [DIA-2010]_).
 
-Unfortunately, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are *not scalable* to outranking digraphs of larger orders (> 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland*, the *NetFlows* ranking-by-scoring rules, and the iterated *NetFlows* ranking- or ordering-by-choosing rules, with a polynomial complexity of :math:`O(n^2)`, where *n* is the order of the outranking digraph, remain in fact computationally tractable.
+Besides of not proidong a unique linear ranking, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are unfortunately *not scalable* to outranking digraphs of larger orders (> 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland*, the *NetFlows* ranking-by-scoring rules, with a polynomial complexity of :math:`O(n^2)`, where *n* is the order of the outranking digraph, remain in fact computationally tractable.
  
 Ranking big performance tableaux
 ................................
