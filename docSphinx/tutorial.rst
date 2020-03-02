@@ -466,7 +466,7 @@ Border and inner parts
 
 We may also extract the border -the part of a digraph induced by the union of its initial and terminal prekernels (see tutorial :ref:`Kernel-Tutorial-label`)-  as well as, the inner part -the *complement* of the border- with the help of two corresponding class constructors: :py:class:`digraphs.GraphBorder` and :py:class:`digraphs.GraphInner` (see :numref:`BorderInnerPart`  Line 1).
 
-Let us illustrate these parts on a linear ordering obtained from the tutorial random valuation digraph *dg* (see :numref:`BorderInnerPart` Line 2-3) with the *NetFlows* ranking rule (see tutorial on :ref:`Ranking-Tutorial-label`).  
+Let us illustrate these parts on a linear ordering obtained from the tutorial random valuation digraph *dg* (see :numref:`BorderInnerPart` Line 2-3) with the :ref:`NetFlows ranking rule <Ranking-Tutorial-label>`).  
 
 .. code-block:: pycon
    :name: BorderInnerPart
@@ -2327,7 +2327,7 @@ More efficient ranking heuristics, like the *Copeland* and the *NetFlows* rules,
 
 At step *i* (*i* goes from 1 to *n*) do the following:
 
-1. Compute for each row of the bipolar valued *strict* outranking relation table (see :numref:`strictOutranking`) the smallest value;
+1. Compute for each row of the bipolar-valued *strict* outranking relation table (see :numref:`strictOutranking`) the smallest value;
 2. Select the row where this minimum is maximal. Ties are resolved in lexicographic order;
 3. Put the selected decision alternative at rank *i*;
 4. Delete the corresponding row and column from the relation table and restart until the table is empty.
@@ -2361,7 +2361,60 @@ With this *min-max* lexicographic *ranking-by-choosing* strategy, we find a corr
      Valued equivalalence      : +0.111
      Epistemic determination   :  0.230
 
-But *Kohler*'s ranking has a *dual* version, the prudent **Arrow-Raynaud** *ordering-by-choosing* rule, where a corresponding *max-min* strategy, when used on the *non-strict* outranking digraph *g*, for ordering the from *last* to *first* produces the same eventual ranking result (see [DIA-2010]_). 
+But *Kohler*'s ranking has a *dual* version, the prudent **Arrow-Raynaud** *ordering-by-choosing* rule, where a corresponding *max-min* strategy, when used on the *non-strict* outranking digraph *g*, for ordering the from *last* to *first* produces the same eventual ranking result (see [LAM-2009]_, [DIA-2010]_).
+
+Noticing that the *NetFlows* score of an alternative *x* represents in fact a bipolar-valued characteristic of the assertion '**alternative x is ranked first**', we may enhance *Kohler*'s or *Arrow-Raynaud*'s rules by replacing the *min-max*, respectively the *max-min*, strategy with an **iterated** maximal, respectively its *dual* minimal, *Netflows* score selection.
+
+For a ranking (resp. an ordering) result, at step *i* (*i* goes from 1 to *n*) do the following:
+
+1. Compute for each row of the bipolar-valued outranking relation table (see :numref:`strictOutranking`) compute the corresponding *netFlows* score;
+2. Select the row where this score is maximal (resp. minimal). Ties are resolved in lexicographic order;
+3. Put the selected decision alternative at rank (resp. order) *i*;
+4. Delete the corresponding row and column from the relation table and restart until the table is empty.
+
+A first advantage is that the so modified *ranking-by-choosing* and  *ordering-by-choosing* rules become again **invariant** under the *codual* transform. And we may get both the ranking-by-choosing as well as the ordering-by-choosing results with the :py:class:`linearOrders.IteratedNetFlowsRanking` class constructor (see :numref:`iteratedNetFlowsRanking` Lines 12-13).
+
+.. code-block:: pycon
+   :name: iteratedNetFlowsRanking
+   :caption: Ordering-by-choosing with iterated minimal *NetFlows* scores 
+   :linenos:
+
+    >>> from linearOrders import IteratedNetFlowsRanking  
+    >>> inf = IteratedNetFlowsRanking(g)
+    >>> inf
+     *------- Digraph instance description ------*
+     Instance class      : IteratedNetFlowsRanking
+     Instance name       : rel_randomCBperftab_ranked
+     Digraph Order       : 9
+     Digraph Size        : 36
+     Valuation domain    : [-1.00;1.00]
+     Determinateness (%) : 100.00
+     Attributes          : ['valuedRanks', 'valuedOrdering',
+                            'iteratedNetFlowsRanking',
+			    'iteratedNetFlowsOrdering',
+			    'name', 'actions', 'order',
+			    'valuationdomain', 'relation',
+			    'gamma', 'notGamma']
+    >>> inf.iteratedNetFlowsOrdering
+     ['a2', 'a9', 'a1', 'a4', 'a3', 'a8', 'a7', 'a6', 'a5']
+    >>> corr = g.computeOrderCorrelation(inf.iteratedNetFlowsOrdering)
+    >>> g.showCorrelation(corr)
+     Correlation indexes:
+     Crisp ordinal correlation : +0.751
+     Valued equivalalence      : +0.173    
+     Epistemic determination   :  0.230
+    >>> inf.iteratedNetFlowsRanking
+     ['a5', 'a7', 'a6', 'a3', 'a4', 'a1', 'a8', 'a9', 'a2']
+    >>> corr = g.computeRankingCorrelation(inf.iteratedNetFlowsRanking)
+    >>> g.showCorrelation(corr)
+     Correlation indexes:
+      Crisp ordinal correlation : +0.743
+      Valued equivalalence      : +0.171
+      Epistemic determination   :  0.230
+
+The iterated *NetFlows* ranking and its *dual*, the iterated *NetFlows* ordering, do not usually deliver both the same result (:numref:`iteratedNetFlowsRanking` Lines 18 and 26). With our example outranking digraph *g* for instance, it is the *ordering-by-choosing* result that obtains a slightly better correlation with the given outranking digraph *g* (+0.751), a result that is also slightly better than *Kohler*'s result (+0.747, see :numref:`KohlerRanking` Line 8). 
+
+Let us finally mention a further interesting *ranking-by-choosing* approach.
 
 *Tideman*'s ranked-pairs rule
 .............................
@@ -2401,14 +2454,14 @@ The *RankedPairs* ranking rule renders in our example here in fact one of the tw
      Bipolar-valued equivalalence : +0.179
      Epistemic determination      :  0.230
 
-Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* version, the **Dias-Lamboray** *ordering-by-choosing* rule, which produces, when working this time on the codual *strict outranking* digraph *gcd*, the same ranking result (see [LAM-2009]_).
+Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* version, the **Dias-Lamboray** *ordering-by-choosing* rule, which produces, when working this time on the codual *strict outranking* digraph *gcd*, the same ranking result (see [LAM-2009]_, [DIA-2010]_).
 
-Unfortunately, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are *not scalable* to outranking digraphs of larger orders (> 50). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland* and the *NetFlows* ranking rules, with a polynomial complexity of :math:`O(n^2)` where *n* is the order of the outranking digraph, remain in fact computationally tractable.
+Unfortunately, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are *not scalable* to outranking digraphs of larger orders (> 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland*, the *NetFlows* ranking-by-scoring rules, and the iterated *NetFlows* ranking- or ordering-by-choosing rules, with a polynomial complexity of :math:`O(n^2)`, where *n* is the order of the outranking digraph, remain in fact computationally tractable.
  
 Ranking big performance tableaux
 ................................
 
-None of the previous ranking heuristics, using essentially only the information given by the pairwise outranking characteristics, are scalable for **big outranking digraphs** gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into **ordered quantiles equivalence classes**. This decomposition will lead to a *pre-ranked sparse* outranking digraph.
+However, none of the previous ranking heuristics, using essentially only the information given by the pairwise outranking characteristics, are scalable for **big outranking digraphs** gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into **ordered quantiles equivalence classes**. This decomposition will lead to a *pre-ranked sparse* outranking digraph.
 
 In the coding example in :numref:`PreRankedOutrankingDigraph`, we generate for instance, by using multiprocessing techniques, first (Lines 2-3), a cost benefit performance tableau of 100 decision alternatives and, secondly (Lines 4-5), we construct a **pre-ranked sparse outranking digraph** instance called *bg*. Notice by the way the *BigData* flag (Line 3) used here for generating a parsimonious performance tableau.
 
