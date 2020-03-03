@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Digraph3 module for working with transitive digraphs. 
-Copyright (C) 2006-2019  Raymond Bisdorff
+Copyright (C) 2006-2020  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Python3+ implementation of random number generators
-Copyright (C) 2014-2018  Raymond Bisdorff
+Copyright (C) 2014-2020  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

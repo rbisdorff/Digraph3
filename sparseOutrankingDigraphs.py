@@ -5,7 +5,7 @@ Digraph3 collection of python3 modules for Algorithmic Decision Theory applicati
 
 Module for sparse pre-ranked outranking digraphs
 
-Copyright (C) 2016-19  Raymond Bisdorff
+Copyright (C) 2016-20  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

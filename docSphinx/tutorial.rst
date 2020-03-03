@@ -1974,7 +1974,7 @@ The ranking problem
 
 We need to rank without ties a set *X* of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued *strict outranking* characteristics, i.e. :math:`r(x\, > \, y)` for all *x*, *y* in *X* (see :ref:`CoDual-Digraph-label` and [BIS-2013]_).
 
-Let us consider a didactic outranking digraph *g* generated from a random :ref:`Cost-Benefit performance tableau <Cost-Benefit-Performance-Tableau-label>` concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding *strict outranking digraph* with the a :ref:`codual transform <Codual-Transform-label>` as follows.
+Let us consider a didactic outranking digraph *g* generated from a random :ref:`Cost-Benefit performance tableau <Cost-Benefit-Performance-Tableau-label>` concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding *strict outranking digraph* with a :ref:`codual transform <Codual-Transform-label>` as follows.
 
 .. code-block:: pycon
    :name: strictOutranking
@@ -2220,7 +2220,7 @@ A **Kemeny** ranking is a linear order which is *closest*, in the sense of the o
    >>> g.showCorrelation(corr)
     Correlation indexes:
      Extended Kendall tau         : +0.779
-     Bipolar-valued equivalalence : +0.179
+     Bipolar-valued equivalence : +0.179
      Epistemic determination      :  0.230
     
 So, **+0.779** represents the *highest possible* ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking digraph (see :numref:`KemenyRanking` Lines 7-10).
@@ -2348,7 +2348,7 @@ At step *i* (*i* goes from 1 to *n*) do the following:
     Correlation indexes:
     Extended Kendall tau         : +0.747
     Epistemic determination      :  0.230
-    Bipolar-valued equivalalence : +0.172
+    Bipolar-valued equivalence : +0.172
 
 With this *min-max* lexicographic *ranking-by-choosing* strategy, we find a correlation result (+0.747) that is until now clearly the nearest to an optimal *Kemeny* ranking (see :numref:`optimalKemeny`). Only two adjacent pairs: *[a6, a7]* and *[a8, a9]* are actually inverted here. Notice that *Kohler*'s ranking rule, contrary to the previously mentioned rules, is **not** *invariant* under the *codual* transform and requires to work on the *strict outranking* digraph *gcd* for a better correlation result.
 
@@ -2360,7 +2360,7 @@ With this *min-max* lexicographic *ranking-by-choosing* strategy, we find a corr
     >>> g.showCorrelation(corr)
      Correlation indexes:
      Crisp ordinal correlation : +0.483
-     Valued equivalalence      : +0.111
+     Valued equivalence      : +0.111
      Epistemic determination   :  0.230
 
 But *Kohler*'s ranking has a *dual* version, the prudent **Arrow-Raynaud** *ordering-by-choosing* rule, where a corresponding *max-min* strategy, when used on the *non-strict* outranking digraph *g*, for ordering the from *last* to *first* produces the same eventual ranking result (see [LAM-2009]_, [DIA-2010]_).
@@ -2403,7 +2403,7 @@ A first *advantage* is that the so modified *Kohler*'s and  *Arrow-Raynaud*'s ru
     >>> g.showCorrelation(corr)
      Correlation indexes:
      Crisp ordinal correlation : +0.751
-     Valued equivalalence      : +0.173    
+     Valued equivalence      : +0.173    
      Epistemic determination   :  0.230
     >>> inf.iteratedNetFlowsRanking
      ['a5', 'a7', 'a6', 'a3', 'a4', 'a1', 'a8', 'a9', 'a2']
@@ -2411,7 +2411,7 @@ A first *advantage* is that the so modified *Kohler*'s and  *Arrow-Raynaud*'s ru
     >>> g.showCorrelation(corr)
      Correlation indexes:
       Crisp ordinal correlation : +0.743
-      Valued equivalalence      : +0.171
+      Valued equivalence      : +0.171
       Epistemic determination   :  0.230
 
 The iterated *NetFlows* ranking and its *dual*, the iterated *NetFlows* ordering, do not usually deliver both the same result (:numref:`iteratedNetFlowsRanking` Lines 18 and 26). With our example outranking digraph *g* for instance, it is the *ordering-by-choosing* result that obtains a slightly better correlation with the given outranking digraph *g* (+0.751), a result that is also slightly better than *Kohler*'s original result (+0.747, see :numref:`KohlerRanking` Line 8).
@@ -2455,12 +2455,12 @@ The *RankedPairs* ranking rule renders in our example here luckily one of the tw
    >>> g.computeCorrelation(corr)
     Correlation indexes:
      Extended Kendall tau         : +0.779
-     Bipolar-valued equivalalence : +0.179
+     Bipolar-valued equivalence : +0.179
      Epistemic determination      :  0.230
 
 Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* version, the **Dias-Lamboray** *ordering-by-choosing* rule, which produces, when working this time on the codual *strict outranking* digraph *gcd*, the same ranking result (see [LAM-2009]_, [DIA-2010]_).
 
-Besides of not proidong a unique linear ranking, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are unfortunately *not scalable* to outranking digraphs of larger orders (> 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland*, the *NetFlows* ranking-by-scoring rules, with a polynomial complexity of :math:`O(n^2)`, where *n* is the order of the outranking digraph, remain in fact computationally tractable.
+Besides of not providing a unique linear ranking, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are unfortunately *not scalable* to outranking digraphs of larger orders (> 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland*, the *NetFlows* ranking-by-scoring rules, with a polynomial complexity of :math:`O(n^2)`, where *n* is the order of the outranking digraph, remain in fact computationally tractable.
  
 Ranking big performance tableaux
 ................................
@@ -2562,7 +2562,7 @@ Alternative *52* appears *first ranked*, whereas alternative *59* is *last ranke
    >>> g.showCorrelation(corr)
     Correlation indexes:
      Extended Kendall tau         : +0.749
-     Bipolar-valued equivalalence : +0.312
+     Bipolar-valued equivalence : +0.312
      Epistemic determination      :  0.417
 
 The Copeland as well as the NetFlows ranking heuristics are readily scalable with ad hoc HPC tuning to several millions of decision alternatives (see [BIS-2016]_).

@@ -2,7 +2,7 @@
 """
 Python implementation of outranking digraphs.
 
-Copyright (C) 2006-20019  Raymond Bisdorff
+Copyright (C) 2006-2020  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

@@ -2,8 +2,7 @@
 """
 Python 3 implementation of voting digraphs
 Refactored from revision 1.549 of the digraphs module
-Current revision $Revision: 2484 $
-Copyright (C) 2011-2019 Raymond Bisdorff
+Copyright (C) 2011-2020 Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

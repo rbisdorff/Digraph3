@@ -1,7 +1,7 @@
 #!/Usr/bin/env python3
 """
 Python3+ implementation of arithmetics tools
-Copyright (C) 2016-2019  Raymond Bisdorff
+Copyright (C) 2016-2020  Raymond Bisdorff
 Tools gathered for doing arithmetics.
 Mainly inspired from G.A. Jones & J.M. Jones
 Elementary Number Theroy

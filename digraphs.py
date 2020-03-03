@@ -2168,7 +2168,7 @@ class Digraph(object):
         if corr != None:
             print('Correlation indexes:')
             print( ('Crisp ordinal correlation : %%+.%df' % ndigits) % corr['correlation'])
-            print( ('Valued equivalalence      : %%+.%df' % ndigits) % (corr['correlation']*corr['determination']) )
+            print( ('Valued equivalence        : %%+.%df' % ndigits) % (corr['correlation']*corr['determination']) )
             print( ('Epistemic determination   :  %%.%df' % ndigits) % corr['determination'])
         else:
             print('Error: a computed correlation result is required !!!')  

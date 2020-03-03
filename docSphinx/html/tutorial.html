@@ -2636,7 +2636,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="section" id="the-ranking-problem">
 <h2><a class="toc-backref" href="#id191">The ranking problem</a><a class="headerlink" href="#the-ranking-problem" title="Permalink to this headline">¶</a></h2>
 <p>We need to rank without ties a set <em>X</em> of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued <em>strict outranking</em> characteristics, i.e. <img class="math" src="_images/math/8b67fdd1fec2d221cdc78aa20ee647a5f54a2b20.png" alt="r(x\, &gt; \, y)"/> for all <em>x</em>, <em>y</em> in <em>X</em> (see <a class="reference internal" href="#codual-digraph-label"><span class="std std-ref">The strict outranking digraph</span></a> and <a class="reference internal" href="#bis-2013" id="id27"><span>[BIS-2013]</span></a>).</p>
-<p>Let us consider a didactic outranking digraph <em>g</em> generated from a random <a class="reference internal" href="#cost-benefit-performance-tableau-label"><span class="std std-ref">Cost-Benefit performance tableau</span></a> concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding <em>strict outranking digraph</em> with the a <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> as follows.</p>
+<p>Let us consider a didactic outranking digraph <em>g</em> generated from a random <a class="reference internal" href="#cost-benefit-performance-tableau-label"><span class="std std-ref">Cost-Benefit performance tableau</span></a> concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding <em>strict outranking digraph</em> with a <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> as follows.</p>
 <div class="literal-block-wrapper docutils container" id="strictoutranking">
 <div class="code-block-caption"><span class="caption-number">Listing 17 </span><span class="caption-text">Random bipolar-valued strict outranking relation characteristics</span><a class="headerlink" href="#strictoutranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2943,7 +2943,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
 <span class="go">  Extended Kendall tau         : +0.779</span>
-<span class="go">  Bipolar-valued equivalalence : +0.179</span>
+<span class="go">  Bipolar-valued equivalence : +0.179</span>
 <span class="go">  Epistemic determination      :  0.230</span>
 </pre></div>
 </td></tr></table></div>
@@ -3098,7 +3098,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> Correlation indexes:</span>
 <span class="go"> Extended Kendall tau         : +0.747</span>
 <span class="go"> Epistemic determination      :  0.230</span>
-<span class="go"> Bipolar-valued equivalalence : +0.172</span>
+<span class="go"> Bipolar-valued equivalence : +0.172</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -3114,7 +3114,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> &gt;&gt;&gt; g.showCorrelation(corr)</span>
 <span class="go">  Correlation indexes:</span>
 <span class="go">  Crisp ordinal correlation : +0.483</span>
-<span class="go">  Valued equivalalence      : +0.111</span>
+<span class="go">  Valued equivalence      : +0.111</span>
 <span class="go">  Epistemic determination   :  0.230</span>
 </pre></div>
 </td></tr></table></div>
@@ -3183,7 +3183,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> &gt;&gt;&gt; g.showCorrelation(corr)</span>
 <span class="go">  Correlation indexes:</span>
 <span class="go">  Crisp ordinal correlation : +0.751</span>
-<span class="go">  Valued equivalalence      : +0.173</span>
+<span class="go">  Valued equivalence      : +0.173</span>
 <span class="go">  Epistemic determination   :  0.230</span>
 <span class="go"> &gt;&gt;&gt; inf.iteratedNetFlowsRanking</span>
 <span class="go">  [&#39;a5&#39;, &#39;a7&#39;, &#39;a6&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a2&#39;]</span>
@@ -3191,7 +3191,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> &gt;&gt;&gt; g.showCorrelation(corr)</span>
 <span class="go">  Correlation indexes:</span>
 <span class="go">   Crisp ordinal correlation : +0.743</span>
-<span class="go">   Valued equivalalence      : +0.171</span>
+<span class="go">   Valued equivalence      : +0.171</span>
 <span class="go">   Epistemic determination   :  0.230</span>
 </pre></div>
 </td></tr></table></div>
@@ -3241,12 +3241,12 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
 <span class="go">  Extended Kendall tau         : +0.779</span>
-<span class="go">  Bipolar-valued equivalalence : +0.179</span>
+<span class="go">  Bipolar-valued equivalence : +0.179</span>
 <span class="go">  Epistemic determination      :  0.230</span>
 </pre></div>
 </td></tr></table></div>
 <p>Similar to <em>Kohler</em>’s rule, the <em>RankedPairs</em> rule has also a prudent <em>dual</em> version, the <strong>Dias-Lamboray</strong> <em>ordering-by-choosing</em> rule, which produces, when working this time on the codual <em>strict outranking</em> digraph <em>gcd</em>, the same ranking result (see <a class="reference internal" href="#lam-2009" id="id34"><span>[LAM-2009]</span></a>, <a class="reference internal" href="#dia-2010" id="id35"><span>[DIA-2010]</span></a>).</p>
-<p>Besides of not proidong a unique linear ranking, the <em>ranking-by-choosing</em> rules, as well as their dual <em>ordering-by-choosing</em> rules, are unfortunately <em>not scalable</em> to outranking digraphs of larger orders (&gt; 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the <em>Copeland</em>, the <em>NetFlows</em> ranking-by-scoring rules, with a polynomial complexity of <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/>, where <em>n</em> is the order of the outranking digraph, remain in fact computationally tractable.</p>
+<p>Besides of not providing a unique linear ranking, the <em>ranking-by-choosing</em> rules, as well as their dual <em>ordering-by-choosing</em> rules, are unfortunately <em>not scalable</em> to outranking digraphs of larger orders (&gt; 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the <em>Copeland</em>, the <em>NetFlows</em> ranking-by-scoring rules, with a polynomial complexity of <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/>, where <em>n</em> is the order of the outranking digraph, remain in fact computationally tractable.</p>
 </div>
 <div class="section" id="ranking-big-performance-tableaux">
 <h2><a class="toc-backref" href="#id198">Ranking big performance tableaux</a><a class="headerlink" href="#ranking-big-performance-tableaux" title="Permalink to this headline">¶</a></h2>
@@ -3397,7 +3397,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
 <span class="go">  Extended Kendall tau         : +0.749</span>
-<span class="go">  Bipolar-valued equivalalence : +0.312</span>
+<span class="go">  Bipolar-valued equivalence : +0.312</span>
 <span class="go">  Epistemic determination      :  0.417</span>
 </pre></div>
 </td></tr></table></div>
