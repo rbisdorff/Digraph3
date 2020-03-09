@@ -637,7 +637,18 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
     >>> from randomPerfTabs import RandomAcademicPerformanceTableau
     >>> t = RandomAcademicPerformanceTableau(numberOfStudents=7,
     ...              numberOfCourses=5, WithTypes=True, seed=100)
-    
+    >>> t.showPerformanceTableau(ndigits=0)
+     *----  performance tableau -----*
+      Courses |  'g1' 'g2' 'g3' 'g4' 'g5' 
+        ECTS  |   5    1    5    4    3   
+     ---------|-----------------------------------------
+        's1f' |  12   10   14   14   13  
+        's2g' |  14   12   16   12   14  
+        's3g' |  13   10   15   12   17  
+        's4f' |  10   13   6   13   12  
+        's5e' |  17   12   16   17   12  
+        's6g' |  17   17   12   16   14  
+        's7e' |  12   13   13   16   14  
 
     """
     def __init__(self,numberOfStudents = 10, numberOfCourses = 5,\
@@ -853,7 +864,8 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         if Transposed:
             print(' Courses | ETCS |', end=' ')
             for x in actionsList:
-                print('\''+str(x)+'\'', end=' ')
+                xName = self.actions[x]['shortName']
+                print('\''+xName+'\'', end=' ')
             print('\n---------|-----------------------------------------')
             formatString = '%% .%df ' % ndigits
             for g in criteriaList:

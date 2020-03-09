@@ -677,7 +677,18 @@
 <span class="sd">    &gt;&gt;&gt; from randomPerfTabs import RandomAcademicPerformanceTableau</span>
 <span class="sd">    &gt;&gt;&gt; t = RandomAcademicPerformanceTableau(numberOfStudents=7,</span>
 <span class="sd">    ...              numberOfCourses=5, WithTypes=True, seed=100)</span>
-<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; t.showPerformanceTableau(ndigits=0)</span>
+<span class="sd">     *----  performance tableau -----*</span>
+<span class="sd">      Courses |  &#39;g1&#39; &#39;g2&#39; &#39;g3&#39; &#39;g4&#39; &#39;g5&#39; </span>
+<span class="sd">        ECTS  |   5    1    5    4    3   </span>
+<span class="sd">     ---------|-----------------------------------------</span>
+<span class="sd">        &#39;s1f&#39; |  12   10   14   14   13  </span>
+<span class="sd">        &#39;s2g&#39; |  14   12   16   12   14  </span>
+<span class="sd">        &#39;s3g&#39; |  13   10   15   12   17  </span>
+<span class="sd">        &#39;s4f&#39; |  10   13   6   13   12  </span>
+<span class="sd">        &#39;s5e&#39; |  17   12   16   17   12  </span>
+<span class="sd">        &#39;s6g&#39; |  17   17   12   16   14  </span>
+<span class="sd">        &#39;s7e&#39; |  12   13   13   16   14  </span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfStudents</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">numberOfCourses</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>\
@@ -893,7 +904,8 @@
         <span class="k">if</span> <span class="n">Transposed</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Courses | ETCS |&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="n">xName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">xName</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">---------|-----------------------------------------&#39;</span><span class="p">)</span>
             <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f &#39;</span> <span class="o">%</span> <span class="n">ndigits</span>
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
