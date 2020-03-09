@@ -625,11 +625,19 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         * IntegerWeights := Boolean (True = default)
         * commonScale := (0,20) (default)
         * ndigits := 0
+        * WithTypes := Boolean (False = default)
         * commonMode := ('triangular',xm=14,r=0.25)
         * commonThresholds (default) := {
             | 'ind':(0,0),
             | 'pref':(1,0),
             | } (default)
+        
+    When parameter *WithTypes* is set to *True*, the students are randomly allocated to one of the four categories: *weak* (1/6), *fair* (1/3), *good* (1/3), and *excellent* (1/3), in the bracketed proportions. In a default 0-20 grading range, the random range of a weak student is 0-10, of a fair student 4-16, of a good student 8-20, and of an excellent student 12-20. The random grading generator follows a double triangular probablity law with *mode* equal to the middle of the random range and *median repartition* of probability each side of the mode.
+
+    >>> from randomPerfTabs import RandomAcademicPerformanceTableau
+    >>> t = RandomAcademicPerformanceTableau(numberOfStudents=7,
+    ...              numberOfCourses=5, WithTypes=True, seed=100)
+    
 
     """
     def __init__(self,numberOfStudents = 10, numberOfCourses = 5,\
@@ -671,13 +679,15 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                 
             else:   
                 actionKey = ('s%%0%dd' % (nd)) % (i+1)
-                actions[actionKey] = {'shortName':actionKey,
-                        'name': 'student',
-                        'comment': 'RandomAcademicPerformanceTableau() generated.' }
                 if WithTypes:
-                    actions[actionKey]['type'] = types[ri]
-                    actions[actionKey]['shortName'] = '%s%s' %\
-                                        (actionKey,actions[actionKey]['type'][0])
+                    actions[actionKey]= {'type': types[ri],
+                        'shortName': '%s%s' % (actionKey,types[ri][0]),
+                        'name': 'student %s%s' % (actionKey,types[ri][0]),
+                        'comment': 'RandomAcademicPerformanceTableau() generated.'}
+                else:
+                    actions[actionKey] = {'shortName':actionKey,
+                        'name': 'student %s' % actionKey,
+                        'comment': 'RandomAcademicPerformanceTableau() generated.' }
             
         # generate the criteria weights
         numberOfCriteria = numberOfCourses 
@@ -818,6 +828,65 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         self.criteria = criteria
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
+
+    def showPerformanceTableau(self,Transposed=False,studentsSubset=None,\
+                               fromIndex=None,toIndex=None,Sorted=True,ndigits=2):
+        """
+        Print the performance Tableau.
+        """
+        from decimal import Decimal
+        print('*----  performance tableau -----*')
+        criteriaList = list(self.criteria)
+        if Sorted:
+            criteriaList.sort()
+        if studentsSubset == None:
+            actionsList = list(self.actions)
+            if Sorted:
+                actionsList.sort()
+        else:
+            actionsList = list(studentsSubset)
+        if fromIndex == None:
+            fromIndex = 0
+        if toIndex == None:
+            toIndex=len(actionsList)
+        # view criteria x actions
+        if Transposed:
+            print(' Courses | ETCS |', end=' ')
+            for x in actionsList:
+                print('\''+str(x)+'\'', end=' ')
+            print('\n---------|-----------------------------------------')
+            formatString = '%% .%df ' % ndigits
+            for g in criteriaList:
+                print('   \'' +str(g)+'\'  |  '+str(self.criteria[g]['weight'])+'   |', end=' ')
+                for i in range(fromIndex,toIndex):
+                    x = actionsList[i]
+                    evalgx = self.evaluation[g][x]
+                    if evalgx == Decimal('-999'):
+                        print(' NA ', end=' ')
+                    else:                    
+                        print(formatString % (evalgx), end=' ')
+                print()
+        # view actions x criteria
+        else:
+            print(' Courses | ', end=' ')
+            for g in criteriaList:
+                print('\''+str(g)+'\'', end=' ')
+            print('\n   ECTS  | ', end=' ')
+            for g in criteriaList:
+                print(' %s  ' % str(self.criteria[g]['weight'] ), end=' ')          
+            print('\n---------|-----------------------------------------')
+            formatString = '%% .%df ' % ndigits
+            for i in range(fromIndex,toIndex):
+                x = actionsList[i]
+                print('   \''+str(self.actions[x]['shortName'])+'\' |' , end=' ')
+                for g in criteriaList:
+                    evalgx = self.evaluation[g][x]
+                    if evalgx == Decimal('-999'):
+                        print('  NA  ', end=' ')
+                    else:                    
+                        print(formatString % (evalgx), end=' ')
+                print()
+
 
     def showHTMLPerformanceTableau(self,studentsSubset=None,isSorted=True,\
                                    Transposed=False,ndigits=0,\
