@@ -5060,15 +5060,15 @@ of the Algorithmic decision Theory Course <a class="reference external" href="ht
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomAcademicPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomAcademicPerformanceTableau</span><span class="p">(</span><span class="n">numberOfStudents</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
 <span class="gp">... </span>             <span class="n">numberOfCourses</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">WithTypes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
 <span class="go"> *----  performance tableau -----*</span>
 <span class="go">  Courses |  &#39;g1&#39; &#39;g2&#39; &#39;g3&#39; &#39;g4&#39; &#39;g5&#39; </span>
 <span class="go">    ECTS  |   5    1    5    4    3   </span>
-<span class="go"> ---------|-----------------------------------------</span>
+<span class="go"> ---------|--------------------------</span>
 <span class="go">    &#39;s1f&#39; |  12   10   14   14   13  </span>
 <span class="go">    &#39;s2g&#39; |  14   12   16   12   14  </span>
 <span class="go">    &#39;s3g&#39; |  13   10   15   12   17  </span>
-<span class="go">    &#39;s4f&#39; |  10   13   6   13   12  </span>
+<span class="go">    &#39;s4f&#39; |  10   13   06   13   12  </span>
 <span class="go">    &#39;s5e&#39; |  17   12   16   17   12  </span>
 <span class="go">    &#39;s6g&#39; |  17   17   12   16   14  </span>
 <span class="go">    &#39;s7e&#39; |  12   13   13   16   14  </span>
@@ -5082,7 +5082,7 @@ of the Algorithmic decision Theory Course <a class="reference external" href="ht
 
 <dl class="method">
 <dt id="randomPerfTabs.RandomAcademicPerformanceTableau.showPerformanceTableau">
-<code class="sig-name descname">showPerformanceTableau</code><span class="sig-paren">(</span><em class="sig-param">Transposed=False</em>, <em class="sig-param">studentsSubset=None</em>, <em class="sig-param">fromIndex=None</em>, <em class="sig-param">toIndex=None</em>, <em class="sig-param">Sorted=True</em>, <em class="sig-param">ndigits=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomAcademicPerformanceTableau.showPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomAcademicPerformanceTableau.showPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showPerformanceTableau</code><span class="sig-paren">(</span><em class="sig-param">Transposed=False</em>, <em class="sig-param">studentsSubset=None</em>, <em class="sig-param">fromIndex=None</em>, <em class="sig-param">toIndex=None</em>, <em class="sig-param">Sorted=True</em>, <em class="sig-param">ndigits=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#RandomAcademicPerformanceTableau.showPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.RandomAcademicPerformanceTableau.showPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the performance Tableau.</p>
 </dd></dl>
 

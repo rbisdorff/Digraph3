@@ -677,15 +677,15 @@
 <span class="sd">    &gt;&gt;&gt; from randomPerfTabs import RandomAcademicPerformanceTableau</span>
 <span class="sd">    &gt;&gt;&gt; t = RandomAcademicPerformanceTableau(numberOfStudents=7,</span>
 <span class="sd">    ...              numberOfCourses=5, WithTypes=True, seed=100)</span>
-<span class="sd">    &gt;&gt;&gt; t.showPerformanceTableau(ndigits=0)</span>
+<span class="sd">    &gt;&gt;&gt; t.showPerformanceTableau()</span>
 <span class="sd">     *----  performance tableau -----*</span>
 <span class="sd">      Courses |  &#39;g1&#39; &#39;g2&#39; &#39;g3&#39; &#39;g4&#39; &#39;g5&#39; </span>
 <span class="sd">        ECTS  |   5    1    5    4    3   </span>
-<span class="sd">     ---------|-----------------------------------------</span>
+<span class="sd">     ---------|--------------------------</span>
 <span class="sd">        &#39;s1f&#39; |  12   10   14   14   13  </span>
 <span class="sd">        &#39;s2g&#39; |  14   12   16   12   14  </span>
 <span class="sd">        &#39;s3g&#39; |  13   10   15   12   17  </span>
-<span class="sd">        &#39;s4f&#39; |  10   13   6   13   12  </span>
+<span class="sd">        &#39;s4f&#39; |  10   13   06   13   12  </span>
 <span class="sd">        &#39;s5e&#39; |  17   12   16   17   12  </span>
 <span class="sd">        &#39;s6g&#39; |  17   17   12   16   14  </span>
 <span class="sd">        &#39;s7e&#39; |  12   13   13   16   14  </span>
@@ -881,7 +881,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span>
 
 <div class="viewcode-block" id="RandomAcademicPerformanceTableau.showPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau.showPerformanceTableau">[docs]</a>    <span class="k">def</span> <span class="nf">showPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">studentsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
-                               <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+                               <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print the performance Tableau.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -907,36 +907,36 @@
                 <span class="n">xName</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">xName</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">---------|-----------------------------------------&#39;</span><span class="p">)</span>
-            <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f &#39;</span> <span class="o">%</span> <span class="n">ndigits</span>
+            <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39; </span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">.</span><span class="si">%d</span><span class="s1">f &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   </span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">  |  &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;   |&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  </span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">  |  &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;   |&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fromIndex</span><span class="p">,</span><span class="n">toIndex</span><span class="p">):</span>
                     <span class="n">x</span> <span class="o">=</span> <span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                     <span class="n">evalgx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
                     <span class="k">if</span> <span class="n">evalgx</span> <span class="o">==</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; NA &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; NA &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>                    
-                        <span class="nb">print</span><span class="p">(</span><span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">evalgx</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">evalgx</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">()</span>
         <span class="c1"># view actions x criteria</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Courses | &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">   ECTS  | &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">   ECTS  | &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%s</span><span class="s1">  &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>          
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%s</span><span class="s1">  &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>          
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">---------|-----------------------------------------&#39;</span><span class="p">)</span>
-            <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f &#39;</span> <span class="o">%</span> <span class="n">ndigits</span>
+            <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39; </span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">.</span><span class="si">%d</span><span class="s1">f &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fromIndex</span><span class="p">,</span><span class="n">toIndex</span><span class="p">):</span>
                 <span class="n">x</span> <span class="o">=</span> <span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   </span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1"> |&#39;</span> <span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  </span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1"> |&#39;</span> <span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;   &#39;</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
                     <span class="n">evalgx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
                     <span class="k">if</span> <span class="n">evalgx</span> <span class="o">==</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  NA  &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; NA &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>                    
-                        <span class="nb">print</span><span class="p">(</span><span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">evalgx</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">evalgx</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">()</span></div>
 
 
@@ -989,7 +989,7 @@
             <span class="n">alignFormat</span> <span class="o">=</span> <span class="s1">&#39;right&#39;</span>
         <span class="k">if</span> <span class="n">Transposed</span><span class="p">:</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;table style=&quot;background-color:White;&quot; border=&quot;1&quot;&gt;&#39;</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=&quot;#9acd32&quot;&gt;&lt;th&gt;Courses&lt;/th&gt;&#39;</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=&quot;#9acd32&quot;&gt;&lt;th&gt;Courses&lt;br/&gt;(ECTS)&lt;/th&gt;&#39;</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsKeys</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">xName</span> <span class="o">=</span> <span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
@@ -1032,7 +1032,7 @@
                     <span class="n">gName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
                 <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;th bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gName</span><span class="p">)</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span>
-            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=&quot;#9acd32&quot; &gt;Students&lt;/th&gt;&#39;</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=&quot;#9acd32&quot; &gt;ECTS&lt;/th&gt;&#39;</span>
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaKeys</span><span class="p">:</span>
                 <span class="n">gweight</span> <span class="o">=</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
                 <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td  align=&quot;center&quot; bgcolor=&quot;#FFF79B&quot; &gt;&lt;i&gt;</span><span class="si">%d</span><span class="s1">&lt;/i&gt;&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">gweight</span><span class="p">))</span>
@@ -3722,14 +3722,17 @@
 <span class="c1">##    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,</span>
 <span class="c1">##                                         commonMode=(&#39;uniform&#39;,None,None),</span>
 <span class="c1">##                                         missingDataProbability=0.01)</span>
-<span class="c1">##    t = RandomAcademicPerformanceTableau(numberOfStudents=20,numberOfCourses=10,</span>
-<span class="c1">##                                         commonMode=(&#39;triangular&#39;,14,0.4),</span>
-<span class="c1">##                                         missingDataProbability=0.01,</span>
-<span class="c1">##                                         WithTypes=True,</span>
-<span class="c1">##                                         seed=1)</span>
-<span class="c1">##    print(t)</span>
-<span class="c1">##    t.showHTMLPerformanceTableau(Transposed=True)</span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomAcademicPerformanceTableau</span><span class="p">(</span><span class="n">numberOfStudents</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">numberOfCourses</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                <span class="n">commonMode</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;triangular&#39;</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mf">0.4</span><span class="p">),</span>
+                                <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+                                <span class="n">WithTypes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;transposed&#39;</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;not transposed&#39;</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1">#t.showHTMLPerformanceTableau(Transposed=True)</span>
+    <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)</span>
                                              
 
 
@@ -3744,24 +3747,24 @@
 <span class="c1">##    print(time()-t0)</span>
 <span class="c1">##    t.saveXMCDA2(&#39;test2&#39;)</span>
 <span class="c1">##    t.showCriteria()</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-                                            <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
-                                            <span class="n">OrdinalScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                            <span class="n">commonScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                            <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
-     <span class="c1">#weightScale=(1,5),</span>
-                                            <span class="n">commonMode</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;triangular&#39;</span><span class="p">,</span><span class="s1">&#39;variable&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">),</span>
-                                            <span class="n">vetoProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-                                            <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                            <span class="n">negativeWeightProbability</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
-                                            <span class="n">seed</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># t = Random3ObjectivesPerformanceTableau(numberOfActions=10,</span>
+    <span class="c1">#                                         numberOfCriteria=13,</span>
+    <span class="c1">#                                         OrdinalScales=False,</span>
+    <span class="c1">#                                         commonScale=None,</span>
+    <span class="c1">#                                         weightDistribution=&#39;equiobjectives&#39;,</span>
+    <span class="c1">#  #weightScale=(1,5),</span>
+    <span class="c1">#                                         commonMode=(&#39;triangular&#39;,&#39;variable&#39;,None),</span>
+    <span class="c1">#                                         vetoProbability=0.5,</span>
+    <span class="c1">#                                         NegativeWeights=False,</span>
+    <span class="c1">#                                         negativeWeightProbability=0.25,</span>
+    <span class="c1">#                                         seed=120,Debug=False)</span>
 
-    <span class="n">t</span><span class="o">.</span><span class="n">showObjectives</span><span class="p">()</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">csvAllQuantiles</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showAllQuantiles</span><span class="p">()</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showStatistics</span><span class="p">()</span>
+    <span class="c1"># t.showObjectives()</span>
+    <span class="c1"># t.showCriteria()</span>
+    <span class="c1"># t.showPerformanceTableau()</span>
+    <span class="c1"># t.csvAllQuantiles(&#39;q&#39;)</span>
+    <span class="c1"># t.showAllQuantiles()</span>
+    <span class="c1"># t.showStatistics()</span>
     
 <span class="c1">##    #t.showActions(Debug=True)</span>
 <span class="c1">##    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives[&#39;Eco&#39;][&#39;criteria&#39;])</span>

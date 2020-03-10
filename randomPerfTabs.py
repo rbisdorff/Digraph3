@@ -637,15 +637,15 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
     >>> from randomPerfTabs import RandomAcademicPerformanceTableau
     >>> t = RandomAcademicPerformanceTableau(numberOfStudents=7,
     ...              numberOfCourses=5, WithTypes=True, seed=100)
-    >>> t.showPerformanceTableau(ndigits=0)
+    >>> t.showPerformanceTableau()
      *----  performance tableau -----*
       Courses |  'g1' 'g2' 'g3' 'g4' 'g5' 
         ECTS  |   5    1    5    4    3   
-     ---------|-----------------------------------------
+     ---------|--------------------------
         's1f' |  12   10   14   14   13  
         's2g' |  14   12   16   12   14  
         's3g' |  13   10   15   12   17  
-        's4f' |  10   13   6   13   12  
+        's4f' |  10   13   06   13   12  
         's5e' |  17   12   16   17   12  
         's6g' |  17   17   12   16   14  
         's7e' |  12   13   13   16   14  
@@ -841,7 +841,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         self.weightPreorder = self.computeWeightPreorder()
 
     def showPerformanceTableau(self,Transposed=False,studentsSubset=None,\
-                               fromIndex=None,toIndex=None,Sorted=True,ndigits=2):
+                               fromIndex=None,toIndex=None,Sorted=True,ndigits=0):
         """
         Print the performance Tableau.
         """
@@ -867,36 +867,36 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                 xName = self.actions[x]['shortName']
                 print('\''+xName+'\'', end=' ')
             print('\n---------|-----------------------------------------')
-            formatString = '%% .%df ' % ndigits
+            formatString = ' %%0%d.%df ' % (2,ndigits)
             for g in criteriaList:
-                print('   \'' +str(g)+'\'  |  '+str(self.criteria[g]['weight'])+'   |', end=' ')
+                print('  \'' +str(g)+'\'  |  '+str(self.criteria[g]['weight'])+'   |', end='  ')
                 for i in range(fromIndex,toIndex):
                     x = actionsList[i]
                     evalgx = self.evaluation[g][x]
                     if evalgx == Decimal('-999'):
-                        print(' NA ', end=' ')
+                        print(' NA ', end='  ')
                     else:                    
-                        print(formatString % (evalgx), end=' ')
+                        print(formatString % (evalgx), end='  ')
                 print()
         # view actions x criteria
         else:
             print(' Courses | ', end=' ')
             for g in criteriaList:
                 print('\''+str(g)+'\'', end=' ')
-            print('\n   ECTS  | ', end=' ')
+            print('\n   ECTS  | ', end='  ')
             for g in criteriaList:
-                print(' %s  ' % str(self.criteria[g]['weight'] ), end=' ')          
+                print(' %s  ' % str(self.criteria[g]['weight'] ), end='  ')          
             print('\n---------|-----------------------------------------')
-            formatString = '%% .%df ' % ndigits
+            formatString = ' %%0%d.%df ' % (2,ndigits)
             for i in range(fromIndex,toIndex):
                 x = actionsList[i]
-                print('   \''+str(self.actions[x]['shortName'])+'\' |' , end=' ')
+                print('  \''+str(self.actions[x]['shortName'])+'\' |' , end='   ')
                 for g in criteriaList:
                     evalgx = self.evaluation[g][x]
                     if evalgx == Decimal('-999'):
-                        print('  NA  ', end=' ')
+                        print(' NA ', end='  ')
                     else:                    
-                        print(formatString % (evalgx), end=' ')
+                        print(formatString % (evalgx), end='  ')
                 print()
 
 
@@ -949,7 +949,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
             alignFormat = 'right'
         if Transposed:
             html += '<table style="background-color:White;" border="1">'
-            html += '<tr bgcolor="#9acd32"><th>Courses</th>'
+            html += '<tr bgcolor="#9acd32"><th>Courses<br/>(ECTS)</th>'
             for x in actionsKeys:
                 try:
                     xName = actions[x]['shortName']
@@ -992,7 +992,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                     gName = str(g)
                 html += '<th bgcolor="#FFF79B">%s</th>' % (gName)
             html += '</tr>'
-            html += '<tr><th bgcolor="#9acd32" >Students</th>'
+            html += '<tr><th bgcolor="#9acd32" >ECTS</th>'
             for g in criteriaKeys:
                 gweight = criteria[g]['weight']
                 html += '<td  align="center" bgcolor="#FFF79B" ><i>%d</i></td>' % (int(gweight))
@@ -3682,14 +3682,17 @@ if __name__ == "__main__":
 ##    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
 ##                                         commonMode=('uniform',None,None),
 ##                                         missingDataProbability=0.01)
-##    t = RandomAcademicPerformanceTableau(numberOfStudents=20,numberOfCourses=10,
-##                                         commonMode=('triangular',14,0.4),
-##                                         missingDataProbability=0.01,
-##                                         WithTypes=True,
-##                                         seed=1)
-##    print(t)
-##    t.showHTMLPerformanceTableau(Transposed=True)
-##    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
+    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=10,
+                                commonMode=('triangular',14,0.4),
+                                missingDataProbability=0.01,
+                                WithTypes=True,
+                                seed=1)
+    print('transposed')
+    t.showPerformanceTableau(Transposed=True)
+    print('not transposed')
+    t.showPerformanceTableau(Transposed=False)
+    #t.showHTMLPerformanceTableau(Transposed=True)
+    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
                                              
 
 
@@ -3704,24 +3707,24 @@ if __name__ == "__main__":
 ##    print(time()-t0)
 ##    t.saveXMCDA2('test2')
 ##    t.showCriteria()
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,
-                                            numberOfCriteria=13,
-                                            OrdinalScales=False,
-                                            commonScale=None,
-                                            weightDistribution='equiobjectives',
-     #weightScale=(1,5),
-                                            commonMode=('triangular','variable',None),
-                                            vetoProbability=0.5,
-                                            NegativeWeights=False,
-                                            negativeWeightProbability=0.25,
-                                            seed=120,Debug=False)
+    # t = Random3ObjectivesPerformanceTableau(numberOfActions=10,
+    #                                         numberOfCriteria=13,
+    #                                         OrdinalScales=False,
+    #                                         commonScale=None,
+    #                                         weightDistribution='equiobjectives',
+    #  #weightScale=(1,5),
+    #                                         commonMode=('triangular','variable',None),
+    #                                         vetoProbability=0.5,
+    #                                         NegativeWeights=False,
+    #                                         negativeWeightProbability=0.25,
+    #                                         seed=120,Debug=False)
 
-    t.showObjectives()
-    t.showCriteria()
-    t.showPerformanceTableau()
-    t.csvAllQuantiles('q')
-    t.showAllQuantiles()
-    t.showStatistics()
+    # t.showObjectives()
+    # t.showCriteria()
+    # t.showPerformanceTableau()
+    # t.csvAllQuantiles('q')
+    # t.showAllQuantiles()
+    # t.showStatistics()
     
 ##    #t.showActions(Debug=True)
 ##    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Eco']['criteria'])
