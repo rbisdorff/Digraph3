@@ -2790,7 +2790,8 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         Persistant storage of Performance Tableaux.
         """
-        print('*--- Saving performance tableau in file: <' + str(fileName) + '.py> ---*')
+        print('*--- Saving performance tableau in file: <' +\
+              str(fileName) + '.py> ---*')
         actions = self.actions
         try:
             objectives = self.objectives

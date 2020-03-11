@@ -5056,10 +5056,27 @@ of the Algorithmic decision Theory Course <a class="reference external" href="ht
 </ul>
 </dd>
 </dl>
-<p>When parameter <em>WithTypes</em> is set to <em>True</em>, the students are randomly allocated to one of the four categories: <em>weak</em> (1/6), <em>fair</em> (1/3), <em>good</em> (1/3), and <em>excellent</em> (1/3), in the bracketed proportions. In a default 0-20 grading range, the random range of a weak student is 0-10, of a fair student 4-16, of a good student 8-20, and of an excellent student 12-20. The random grading generator follows a double triangular probablity law with <em>mode</em> equal to the middle of the random range and <em>median repartition</em> of probability each side of the mode.</p>
+<p>When parameter <em>WithTypes</em> is set to <em>True</em>, the students are randomly allocated
+to one of the four categories: <em>weak</em> (1/6), <em>fair</em> (1/3), <em>good</em> (1/3),
+and <em>excellent</em> (1/3), in the bracketed proportions.
+In a default 0-20 grading range, the random range of a weak student is 0-10,
+of a fair student 4-16, of a good student 8-20, and of an excellent student 12-20.
+The random grading generator follows a double triangular probablity law
+with <em>mode</em> equal to the middle of the random range and <em>median repartition</em> of
+probability each side of the mode.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomAcademicPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomAcademicPerformanceTableau</span><span class="p">(</span><span class="n">numberOfStudents</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
-<span class="gp">... </span>             <span class="n">numberOfCourses</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">WithTypes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">... </span>             <span class="n">numberOfCourses</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="n">WithTypes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
+<span class="go"> *------- PerformanceTableau instance description ------*</span>
+<span class="go"> Instance class   : RandomAcademicPerformanceTableau</span>
+<span class="go"> Seed             : 100</span>
+<span class="go"> Instance name    : randstudPerf</span>
+<span class="go"> # Actions        : 7</span>
+<span class="go"> # Criteria       : 5</span>
+<span class="go"> Attributes       : [&#39;randomSeed&#39;, &#39;name&#39;, &#39;actions&#39;,</span>
+<span class="go">                     &#39;criteria&#39;, &#39;evaluation&#39;, &#39;weightPreorder&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
 <span class="go"> *----  performance tableau -----*</span>
 <span class="go">  Courses |  &#39;g1&#39; &#39;g2&#39; &#39;g3&#39; &#39;g4&#39; &#39;g5&#39; </span>
@@ -5067,11 +5084,80 @@ of the Algorithmic decision Theory Course <a class="reference external" href="ht
 <span class="go"> ---------|--------------------------</span>
 <span class="go">    &#39;s1f&#39; |  12   10   14   14   13  </span>
 <span class="go">    &#39;s2g&#39; |  14   12   16   12   14  </span>
-<span class="go">    &#39;s3g&#39; |  13   10   15   12   17  </span>
-<span class="go">    &#39;s4f&#39; |  10   13   06   13   12  </span>
+<span class="go">    &#39;s3g&#39; |  13   10   NA   12   17  </span>
+<span class="go">    &#39;s4f&#39; |  10   13   NA   13   12  </span>
 <span class="go">    &#39;s5e&#39; |  17   12   16   17   12  </span>
 <span class="go">    &#39;s6g&#39; |  17   17   12   16   14  </span>
-<span class="go">    &#39;s7e&#39; |  12   13   13   16   14  </span>
+<span class="go">    &#39;s7e&#39; |  12   13   13   16   NA  </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">weightPreorder</span>
+<span class="go"> [[&#39;g2&#39;], [&#39;g5&#39;], [&#39;g4&#39;], [&#39;g1&#39;, &#39;g3&#39;]]</span>
+</pre></div>
+</div>
+<p>The random instance generated here with seed = 100 results in a set of only
+excellent (2), good (3) and fair (2) student performances. We observe 3 missing grades (NA).
+We may show a statistical summary per course (performance criterion) with more than 5 grades.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showStatistics</span><span class="p">()</span>
+<span class="go"> *-------- Performance tableau summary statistics -------*</span>
+<span class="go"> Instance name      : randstudPerf</span>
+<span class="go"> #Actions           : 7</span>
+<span class="go"> #Criteria          : 5</span>
+<span class="go"> *Statistics per Criterion*</span>
+<span class="go"> Criterion name       : g1</span>
+<span class="go"> Criterion weight     : 5</span>
+<span class="go">  criterion scale      : 0.00 - 20.00</span>
+<span class="go">  # missing evaluations : 0</span>
+<span class="go">  mean evaluation       : 13.57</span>
+<span class="go">  standard deviation    : 2.44</span>
+<span class="go">  maximal evaluation    : 17.00</span>
+<span class="go">  quantile Q3 (x_75)    : 17.00</span>
+<span class="go">  median evaluation     : 13.50</span>
+<span class="go">  quantile Q1 (x_25)    : 12.00</span>
+<span class="go">  minimal evaluation    : 10.00</span>
+<span class="go">  mean absolute difference      : 2.69</span>
+<span class="go">  standard difference deviation : 3.45</span>
+<span class="go"> Criterion name       : g2</span>
+<span class="go"> Criterion weight     : 1</span>
+<span class="go">  criterion scale      : 0.00 - 20.00</span>
+<span class="go">  # missing evaluations : 0</span>
+<span class="go">  mean evaluation       : 12.43</span>
+<span class="go">  standard deviation    : 2.19</span>
+<span class="go">  maximal evaluation    : 17.00</span>
+<span class="go">  quantile Q3 (x_75)    : 14.00</span>
+<span class="go">  median evaluation     : 12.50</span>
+<span class="go">  quantile Q1 (x_25)    : 11.50</span>
+<span class="go">  minimal evaluation    : 10.00</span>
+<span class="go">  mean absolute difference      : 2.29</span>
+<span class="go">  standard difference deviation : 3.10</span>
+<span class="go"> Criterion name       : g3</span>
+<span class="go"> Criterion weight     : 5</span>
+<span class="go">  criterion scale      : 0.00 - 20.00</span>
+<span class="go">  # missing evaluations : 2</span>
+<span class="go"> Criterion name       : g4</span>
+<span class="go"> Criterion weight     : 4</span>
+<span class="go">  criterion scale      : 0.00 - 20.00</span>
+<span class="go">  # missing evaluations : 0</span>
+<span class="go">  mean evaluation       : 14.29</span>
+<span class="go">  standard deviation    : 1.91</span>
+<span class="go">  maximal evaluation    : 17.00</span>
+<span class="go">  quantile Q3 (x_75)    : 16.25</span>
+<span class="go">  median evaluation     : 15.00</span>
+<span class="go">  quantile Q1 (x_25)    : 12.75</span>
+<span class="go">  minimal evaluation    : 12.00</span>
+<span class="go">  mean absolute difference      : 2.12</span>
+<span class="go">  standard difference deviation : 2.70</span>
+<span class="go"> Criterion name       : g5</span>
+<span class="go"> Criterion weight     : 3</span>
+<span class="go">  criterion scale      : 0.00 - 20.00</span>
+<span class="go">  # missing evaluations : 1</span>
+<span class="go">  mean evaluation       : 13.67</span>
+<span class="go">  standard deviation    : 1.70</span>
+<span class="go">  maximal evaluation    : 17.00</span>
+<span class="go">  quantile Q3 (x_75)    : 15.50</span>
+<span class="go">  median evaluation     : 14.00</span>
+<span class="go">  quantile Q1 (x_25)    : 12.50</span>
+<span class="go">  minimal evaluation    : 12.00</span>
+<span class="go">  mean absolute difference      : 1.78</span>
+<span class="go">  standard difference deviation : 2.40</span>
 </pre></div>
 </div>
 <dl class="method">
