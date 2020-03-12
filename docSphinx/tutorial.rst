@@ -2044,7 +2044,8 @@ To estimate how *difficult* this ranking problem here may be, we can have a look
 The shown strict outranking digraph is apparently *not transitive*: for instance, alternative *a8* outranks alternative *a6* and alternative *a6* outranks *a4*, however *a8* does not outrank *a4* (see :numref:`rankingTutorial`). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph *gcd*.
 
     >>> gcd.computeTransitivityDegree(Comments=True)
-     Transitivity degree of graph <converse-dual_rel_randomCBperftab> : 0.46
+     Transitivity degree of graph
+     <converse-dual_rel_randomCBperftab>: 0.46
     
 The strict outranking relation is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
     
@@ -2103,7 +2104,7 @@ Alternative *a5* obtains the best *Copeland* score (+12), followed by alternativ
      Valued equivalalence      : +0.107
      Epistemic determination   :  0.230
 
-With an epistemic determination level of 0.230, the *extended Kendall tau* index (see [BIS-2012]_) is in fact computed on 61.5% of the pairwise strict outranking comparisons. Furthermore, the bipolar-valued *relational equivalence* characteristics between the strict outranking relation and the *Copeland* ranking equals +0.107, i.e. a *majority* of 55.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding *Copeland* ranking.
+With an epistemic determination level of 0.230, the *extended Kendall tau* index (see [BIS-2012]_) is in fact computed on 61.5% (100.0 x (1.0 + 0.23)/2) of the pairwise strict outranking comparisons. Furthermore, the bipolar-valued *relational equivalence* characteristics between the strict outranking relation and the *Copeland* ranking equals +0.107, i.e. a *majority* of 55.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding *Copeland* ranking.
 
 The *Copeland* scores deliver actually only a unique *weak ranking*, i.e. a ranking with potential ties. This weak ranking may be constructed with the :py:class:`transitiveDigraphs.WeakCopelandOrder` class.
 
@@ -2149,7 +2150,7 @@ We recover in :numref:`weakCopelandRanking` above, the ranking with ties deliver
 
    A weak Copeland ranking 	   
 
-Let us now consider a similar ranking rule, but working directly on the *valued* outranking digraph.
+Let us now consider a similar ranking rule, but working directly on the *bipolar-valued* outranking digraph.
 
 .. _NetFlows-Ranking-label:
 
@@ -2279,7 +2280,9 @@ The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, inste
    :caption: Computing a *Slater* ranking 
    :linenos:
 
+   >>> from linearOrders import SlaterOrder
    >>> sl = SlaterOrder(gcd,orderLimit=9)
+   #  sl = KemenyOrder(ccd,orderLimit=9)
    >>> sl.slaterRanking
     ['a5', 'a6', 'a4', 'a1', 'a3', 'a7', 'a8', 'a9', 'a2']
    >>> corr = gcd.computeOrderCorrelation(sl.slaterRanking)
@@ -2291,7 +2294,7 @@ The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, inste
    >>> len(sl.maximalRankings)
     7
 
-We notice in :numref:`SlaterRanking` Line 7 that the first *Slater* ranking is a rather good fit (+0.676), slightly better apparently than the *NetFlows* ranking result (+638). However, there are aparently 7 such potentially optimal *Slater* rankings (see :numref:`SlaterRanking` Line 11). The corresponding :ref:`epistemic disjunction <Epistemic-Fusion-label>` gives the following partial ordering.
+We notice in :numref:`SlaterRanking` Line 7 that the first *Slater* ranking is a rather good fit (+0.676), slightly better apparently than the *NetFlows* ranking result (+638). However, there are in fact 7 such potentially optimal *Slater* rankings (see :numref:`SlaterRanking` Line 11). The corresponding :ref:`epistemic disjunction <Epistemic-Fusion-label>` gives the following partial ordering.
 
 .. code-block:: pycon
    :name: SlaterRankingsFusion

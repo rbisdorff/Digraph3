@@ -2729,7 +2729,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <p>The shown strict outranking digraph is apparently <em>not transitive</em>: for instance, alternative <em>a8</em> outranks alternative <em>a6</em> and alternative <em>a6</em> outranks <em>a4</em>, however <em>a8</em> does not outrank <em>a4</em> (see <a class="reference internal" href="#rankingtutorial"><span class="std std-numref">Fig. 19</span></a>). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph <em>gcd</em>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go"> Transitivity degree of graph &lt;converse-dual_rel_randomCBperftab&gt; : 0.46</span>
+<span class="go"> Transitivity degree of graph</span>
+<span class="go"> &lt;converse-dual_rel_randomCBperftab&gt;: 0.46</span>
 </pre></div>
 </div>
 <p>The strict outranking relation is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.</p>
@@ -2801,7 +2802,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>With an epistemic determination level of 0.230, the <em>extended Kendall tau</em> index (see <a class="reference internal" href="#bis-2012" id="id29"><span>[BIS-2012]</span></a>) is in fact computed on 61.5% of the pairwise strict outranking comparisons. Furthermore, the bipolar-valued <em>relational equivalence</em> characteristics between the strict outranking relation and the <em>Copeland</em> ranking equals +0.107, i.e. a <em>majority</em> of 55.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding <em>Copeland</em> ranking.</p>
+<p>With an epistemic determination level of 0.230, the <em>extended Kendall tau</em> index (see <a class="reference internal" href="#bis-2012" id="id29"><span>[BIS-2012]</span></a>) is in fact computed on 61.5% (100.0 x (1.0 + 0.23)/2) of the pairwise strict outranking comparisons. Furthermore, the bipolar-valued <em>relational equivalence</em> characteristics between the strict outranking relation and the <em>Copeland</em> ranking equals +0.107, i.e. a <em>majority</em> of 55.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding <em>Copeland</em> ranking.</p>
 <p>The <em>Copeland</em> scores deliver actually only a unique <em>weak ranking</em>, i.e. a ranking with potential ties. This weak ranking may be constructed with the <a class="reference internal" href="techDoc.html#transitiveDigraphs.WeakCopelandOrder" title="transitiveDigraphs.WeakCopelandOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.WeakCopelandOrder</span></code></a> class.</p>
 <div class="literal-block-wrapper docutils container" id="weakcopelandranking">
 <div class="code-block-caption"><span class="caption-number">Listing 21 </span><span class="caption-text">Computing a weak <em>Copeland</em> ranking</span><a class="headerlink" href="#weakcopelandranking" title="Permalink to this code">¶</a></div>
@@ -2858,7 +2859,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <a class="reference internal image-reference" href="_images/weakCopelandRanking.png"><img alt="_images/weakCopelandRanking.png" src="_images/weakCopelandRanking.png" style="width: 200px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">A weak Copeland ranking</span><a class="headerlink" href="#weakrankingdrawing" title="Permalink to this image">¶</a></p>
 </div>
-<p>Let us now consider a similar ranking rule, but working directly on the <em>valued</em> outranking digraph.</p>
+<p>Let us now consider a similar ranking rule, but working directly on the <em>bipolar-valued</em> outranking digraph.</p>
 </div>
 <div class="section" id="the-netflows-ranking">
 <span id="netflows-ranking-label"></span><h2><a class="toc-backref" href="#id193">The <em>NetFlows</em> ranking</a><a class="headerlink" href="#the-netflows-ranking" title="Permalink to this headline">¶</a></h2>
@@ -3018,7 +3019,11 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
  8
  9
 10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span> <span class="o">=</span> <span class="n">SlaterOrder</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">SlaterOrder</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span> <span class="o">=</span> <span class="n">SlaterOrder</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="go">#  sl = KemenyOrder(ccd,orderLimit=9)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">slaterRanking</span>
 <span class="go"> [&#39;a5&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a2&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">slaterRanking</span><span class="p">)</span>
@@ -3032,7 +3037,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>We notice in <a class="reference internal" href="#slaterranking"><span class="std std-numref">Listing 28</span></a> Line 7 that the first <em>Slater</em> ranking is a rather good fit (+0.676), slightly better apparently than the <em>NetFlows</em> ranking result (+638). However, there are aparently 7 such potentially optimal <em>Slater</em> rankings (see <a class="reference internal" href="#slaterranking"><span class="std std-numref">Listing 28</span></a> Line 11). The corresponding <a class="reference internal" href="#epistemic-fusion-label"><span class="std std-ref">epistemic disjunction</span></a> gives the following partial ordering.</p>
+<p>We notice in <a class="reference internal" href="#slaterranking"><span class="std std-numref">Listing 28</span></a> Line 7 that the first <em>Slater</em> ranking is a rather good fit (+0.676), slightly better apparently than the <em>NetFlows</em> ranking result (+638). However, there are in fact 7 such potentially optimal <em>Slater</em> rankings (see <a class="reference internal" href="#slaterranking"><span class="std std-numref">Listing 28</span></a> Line 11). The corresponding <a class="reference internal" href="#epistemic-fusion-label"><span class="std std-ref">epistemic disjunction</span></a> gives the following partial ordering.</p>
 <div class="literal-block-wrapper docutils container" id="slaterrankingsfusion">
 <div class="code-block-caption"><span class="caption-number">Listing 29 </span><span class="caption-text">Computing the epistemic disjunction of optimal <em>Slater</em> rankings</span><a class="headerlink" href="#slaterrankingsfusion" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
