@@ -358,14 +358,23 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 3
 4
 5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">R1</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">R2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;determination&#39;</span><span class="p">]</span>
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corrR1R2</span> <span class="o">=</span> <span class="n">R1</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">R2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span> <span class="o">=</span> <span class="n">corrR1R2</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">corrR1R2</span><span class="p">[</span><span class="s1">&#39;determination&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">d</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;tau(R1,R2) = </span><span class="si">%+.3f</span><span class="s1">, d = </span><span class="si">%.3f</span><span class="s1">, r(R1&lt;=&gt;R2) = </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
 <span class="go"> tau(R1,R2) = +0.073, d = 0.356, r(R1&lt;=&gt;R2) = +0.026</span>
 </pre></div>
 </td></tr></table></div>
+</div>
+<p>We provide for convenience a direct <code class="xref py py-meth docutils literal notranslate"><span class="pre">digraphs.showCorrelation()</span></code> method:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corrR1R2</span> <span class="o">=</span> <span class="n">R1</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">R2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">R1</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corrR1R2</span><span class="p">)</span>
+<span class="go"> Correlation indexes:</span>
+<span class="go">  Extended Kendall tau       : +0.073</span>
+<span class="go">  Epistemic determination    :  0.356</span>
+<span class="go">  Bipolar-valued equivalence : +0.026</span>
+</pre></div>
 </div>
 <p>We may now illustrate the quality of the global ranking of the movies shown with the heat map in <a class="reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 71</span></a>.</p>
 </div>
@@ -469,12 +478,12 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 3
 4
 5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelatin</span><span class="p">(</span><span class="n">nf</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;determination&#39;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">d</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;tau(g,nf) = </span><span class="si">%+.3f</span><span class="s1">, d = </span><span class="si">%.3f</span><span class="s1">, r(g&lt;=&gt;nf) = </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">tau</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">r</span><span class="p">))</span>
-<span class="go"> tau(g,nf) = +0.780, d = 0.300, r(g&lt;=&gt;nf) = +0.234</span>
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corrgnf</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelatin</span><span class="p">(</span><span class="n">nf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corrgnf</span><span class="p">)</span>
+<span class="go"> Correlation indexes:</span>
+<span class="go">  Extended Kendall tau       : +0.780</span>
+<span class="go">  Epistemic determination    :  0.300</span>
+<span class="go">  Bipolar-valued equivalence : +0.234</span>
 </pre></div>
 </td></tr></table></div>
 </div>

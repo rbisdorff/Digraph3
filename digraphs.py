@@ -2167,9 +2167,9 @@ class Digraph(object):
         """
         if corr != None:
             print('Correlation indexes:')
-            print( ('Crisp ordinal correlation : %%+.%df' % ndigits) % corr['correlation'])
-            print( ('Valued equivalence        : %%+.%df' % ndigits) % (corr['correlation']*corr['determination']) )
-            print( ('Epistemic determination   :  %%.%df' % ndigits) % corr['determination'])
+            print( (' Crisp ordinal correlation  : %%+.%df' % ndigits) % corr['correlation'])
+            print( (' Epistemic determination    :  %%.%df' % ndigits) % corr['determination'])
+            print( (' Bipolar-valued equivalence : %%+.%df' % ndigits) % (corr['correlation']*corr['determination']) )
         else:
             print('Error: a computed correlation result is required !!!')  
 

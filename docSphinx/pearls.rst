@@ -323,12 +323,21 @@ In general we simply use the :py:func:`digraphs.Digraph.computeOrdinalCorrelatio
    :caption: Directly Computing the Ordinal Correlation Index
    :name: ordInd2
 
-   >>> corr = R1.computeOrdinalCorrelation(R2)
-   >>> tau = corr['correlation']
-   >>> d = corr['determination']
+   >>> corrR1R2 = R1.computeOrdinalCorrelation(R2)
+   >>> tau = corrR1R2['correlation']
+   >>> d = corrR1R2['determination']
    >>> r = tau * d
    >>> print('tau(R1,R2) = %+.3f, d = %.3f, r(R1<=>R2) = %+.3f' % (tau, d, r))
     tau(R1,R2) = +0.073, d = 0.356, r(R1<=>R2) = +0.026
+
+We provide for convenience a direct :py:meth:`digraphs.showCorrelation` method:
+
+   >>> corrR1R2 = R1.computeOrdinalCorrelation(R2)
+   >>> R1.showCorrelation(corrR1R2)
+    Correlation indexes:
+     Extended Kendall tau       : +0.073
+     Epistemic determination    :  0.356
+     Bipolar-valued equivalence : +0.026
 
 We may now illustrate the quality of the global ranking of the movies shown with the heat map in :numref:`graffiti07_2`. 
 
@@ -401,12 +410,12 @@ The ordinal correlation between the global *Net-Flows* ranking and the digraph *
    :caption: Correlation between outrankings global *NetFlows* Ranking
    :name: globalCorr
 
-   >>> corr = g.computeOrdinalCorrelatin(nf)
-   >>> tau = corr['correlation']
-   >>> d = corr['determination']
-   >>> r = tau * d
-   >>> print('tau(g,nf) = %+.3f, d = %.3f, r(g<=>nf) = %+.3f' % (tau,d,r))
-    tau(g,nf) = +0.780, d = 0.300, r(g<=>nf) = +0.234
+   >>> corrgnf = g.computeOrdinalCorrelatin(nf)
+   >>> g.showCorrelation(corrgnf)
+    Correlation indexes:
+     Extended Kendall tau       : +0.780
+     Epistemic determination    :  0.300
+     Bipolar-valued equivalence : +0.234
 
 We notice in :numref:`globalCorr` Line 6 that the ordinal correlation *tau(g,nf)* index between the *Net-Flows* ranking *nf* and the determined part of the outranking digraph *g* is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence between the *nf* and the *g* digraph, with a characteristics value of *only* +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62% of the movie critics' rating opinions.
 

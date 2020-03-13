@@ -2913,9 +2913,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">nf</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
-<span class="go">  Extended Kendall tau         : +0.638</span>
-<span class="go">  Bipolar-valued equivalalence : +0.147</span>
-<span class="go">  Epistemic determination      :  0.230</span>
+<span class="go">  Extended Kendall tau       : +0.638</span>
+<span class="go">  Epistemic determination    :  0.230</span>
+<span class="go">  Bipolar-valued equivalence : +0.147</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -2943,9 +2943,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">ke</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
-<span class="go">  Extended Kendall tau         : +0.779</span>
+<span class="go">  Extended Kendall tau       : +0.779</span>
+<span class="go">  Epistemic determination    :  0.230</span>
 <span class="go">  Bipolar-valued equivalence : +0.179</span>
-<span class="go">  Epistemic determination      :  0.230</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -3029,9 +3029,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">slaterRanking</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
-<span class="go"> Extended Kendall tau         : +0.676</span>
-<span class="go"> Epistemic determination      :  0.230</span>
-<span class="go"> Bipolar-valued equivalalence : +0.156</span>
+<span class="go">  Extended Kendall tau       : +0.676</span>
+<span class="go">  Epistemic determination    :  0.230</span>
+<span class="go">  Bipolar-valued equivalence : +0.156</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">)</span>
 <span class="go"> 7</span>
 </pre></div>
@@ -3101,9 +3101,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">kocd</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
-<span class="go"> Extended Kendall tau         : +0.747</span>
-<span class="go"> Epistemic determination      :  0.230</span>
-<span class="go"> Bipolar-valued equivalence : +0.172</span>
+<span class="go">  Extended Kendall tau       : +0.747</span>
+<span class="go">  Epistemic determination    :  0.230</span>
+<span class="go">  Bipolar-valued equivalence : +0.172</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -3118,9 +3118,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> &gt;&gt;&gt; corr = g.computeOrdinalCorrelation(ko)</span>
 <span class="go"> &gt;&gt;&gt; g.showCorrelation(corr)</span>
 <span class="go">  Correlation indexes:</span>
-<span class="go">  Crisp ordinal correlation : +0.483</span>
-<span class="go">  Valued equivalence      : +0.111</span>
-<span class="go">  Epistemic determination   :  0.230</span>
+<span class="go">   Crisp ordinal correlation  : +0.483</span>
+<span class="go">   Epistemic determination    :  0.230</span>
+<span class="go">   Bipolar-valued equivalence : +0.111</span>
 </pre></div>
 </td></tr></table></div>
 <p>But <em>Kohler</em>’s ranking has a <em>dual</em> version, the prudent <strong>Arrow-Raynaud</strong> <em>ordering-by-choosing</em> rule, where a corresponding <em>max-min</em> strategy, when used on the <em>non-strict</em> outranking digraph <em>g</em>, for ordering the from <em>last</em> to <em>first</em> produces the same eventual ranking result (see <a class="reference internal" href="#lam-2009" id="id31"><span>[LAM-2009]</span></a>, <a class="reference internal" href="#dia-2010" id="id32"><span>[DIA-2010]</span></a>).</p>
@@ -3187,17 +3187,17 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go"> &gt;&gt;&gt; corr = g.computeOrderCorrelation(inf.iteratedNetFlowsOrdering)</span>
 <span class="go"> &gt;&gt;&gt; g.showCorrelation(corr)</span>
 <span class="go">  Correlation indexes:</span>
-<span class="go">  Crisp ordinal correlation : +0.751</span>
-<span class="go">  Valued equivalence      : +0.173</span>
-<span class="go">  Epistemic determination   :  0.230</span>
+<span class="go">   Crisp ordinal correlation  : +0.751</span>
+<span class="go">   Epistemic determination    :  0.230</span>
+<span class="go">   Bipolar-valued equivalence : +0.173</span>
 <span class="go"> &gt;&gt;&gt; inf.iteratedNetFlowsRanking</span>
 <span class="go">  [&#39;a5&#39;, &#39;a7&#39;, &#39;a6&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a2&#39;]</span>
 <span class="go"> &gt;&gt;&gt; corr = g.computeRankingCorrelation(inf.iteratedNetFlowsRanking)</span>
 <span class="go"> &gt;&gt;&gt; g.showCorrelation(corr)</span>
 <span class="go">  Correlation indexes:</span>
-<span class="go">   Crisp ordinal correlation : +0.743</span>
-<span class="go">   Valued equivalence      : +0.171</span>
-<span class="go">   Epistemic determination   :  0.230</span>
+<span class="go">   Crisp ordinal correlation  : +0.743</span>
+<span class="go">   Epistemic determination    :  0.230</span>
+<span class="go">   Bipolar-valued equivalence : +0.171</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -3245,9 +3245,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">rp</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
-<span class="go">  Extended Kendall tau         : +0.779</span>
+<span class="go">  Extended Kendall tau       : +0.779</span>
+<span class="go">  Epistemic determination    :  0.230</span>
 <span class="go">  Bipolar-valued equivalence : +0.179</span>
-<span class="go">  Epistemic determination      :  0.230</span>
 </pre></div>
 </td></tr></table></div>
 <p>Similar to <em>Kohler</em>’s rule, the <em>RankedPairs</em> rule has also a prudent <em>dual</em> version, the <strong>Dias-Lamboray</strong> <em>ordering-by-choosing</em> rule, which produces, when working this time on the codual <em>strict outranking</em> digraph <em>gcd</em>, the same ranking result (see <a class="reference internal" href="#lam-2009" id="id34"><span>[LAM-2009]</span></a>, <a class="reference internal" href="#dia-2010" id="id35"><span>[DIA-2010]</span></a>).</p>
@@ -3401,9 +3401,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedOrder</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
-<span class="go">  Extended Kendall tau         : +0.749</span>
+<span class="go">  Extended Kendall tau       : +0.749</span>
+<span class="go">  Epistemic determination    :  0.417</span>
 <span class="go">  Bipolar-valued equivalence : +0.312</span>
-<span class="go">  Epistemic determination      :  0.417</span>
 </pre></div>
 </td></tr></table></div>
 </div>

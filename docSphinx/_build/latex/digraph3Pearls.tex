@@ -54,7 +54,7 @@
 
 
 \title{Pearls of bipolar-valued logic}
-\date{March 12, 2020}
+\date{March 13, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -427,12 +427,23 @@ In general we simply use the \sphinxcode{\sphinxupquote{digraphs.Digraph.compute
 \sphinxSetupCaptionForVerbatim{Directly Computing the Ordinal Correlation Index}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:ordind2}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{R1}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{R2}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{tau} \PYG{o}{=} \PYG{n}{corr}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{d} \PYG{o}{=} \PYG{n}{corr}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{determination}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corrR1R2} \PYG{o}{=} \PYG{n}{R1}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{R2}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{tau} \PYG{o}{=} \PYG{n}{corrR1R2}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{d} \PYG{o}{=} \PYG{n}{corrR1R2}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{determination}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{r} \PYG{o}{=} \PYG{n}{tau} \PYG{o}{*} \PYG{n}{d}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tau(R1,R2) = }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s1}{, d = }\PYG{l+s+si}{\PYGZpc{}.3f}\PYG{l+s+s1}{, r(R1\PYGZlt{}=\PYGZgt{}R2) = }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{tau}\PYG{p}{,} \PYG{n}{d}\PYG{p}{,} \PYG{n}{r}\PYG{p}{)}\PYG{p}{)}
 \PYG{g+go}{ tau(R1,R2) = +0.073, d = 0.356, r(R1\PYGZlt{}=\PYGZgt{}R2) = +0.026}
+\end{sphinxVerbatim}
+
+We provide for convenience a direct \sphinxcode{\sphinxupquote{digraphs.showCorrelation()}} method:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corrR1R2} \PYG{o}{=} \PYG{n}{R1}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{R2}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{R1}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corrR1R2}\PYG{p}{)}
+\PYG{g+go}{ Correlation indexes:}
+\PYG{g+go}{  Extended Kendall tau       : +0.073}
+\PYG{g+go}{  Epistemic determination    :  0.356}
+\PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.026}
 \end{sphinxVerbatim}
 
 We may now illustrate the quality of the global ranking of the movies shown with the heat map in \hyperref[\detokenize{pearls:graffiti07-2}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-2}}}.
@@ -499,12 +510,12 @@ The ordinal correlation between the global \sphinxstyleemphasis{Net\sphinxhyphen
 \sphinxSetupCaptionForVerbatim{Correlation between outrankings global \sphinxstyleemphasis{NetFlows} Ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:globalcorr}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelatin}\PYG{p}{(}\PYG{n}{nf}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{tau} \PYG{o}{=} \PYG{n}{corr}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{d} \PYG{o}{=} \PYG{n}{corr}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{determination}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{r} \PYG{o}{=} \PYG{n}{tau} \PYG{o}{*} \PYG{n}{d}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tau(g,nf) = }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s1}{, d = }\PYG{l+s+si}{\PYGZpc{}.3f}\PYG{l+s+s1}{, r(g\PYGZlt{}=\PYGZgt{}nf) = }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{tau}\PYG{p}{,}\PYG{n}{d}\PYG{p}{,}\PYG{n}{r}\PYG{p}{)}\PYG{p}{)}
-\PYG{g+go}{ tau(g,nf) = +0.780, d = 0.300, r(g\PYGZlt{}=\PYGZgt{}nf) = +0.234}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corrgnf} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelatin}\PYG{p}{(}\PYG{n}{nf}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corrgnf}\PYG{p}{)}
+\PYG{g+go}{ Correlation indexes:}
+\PYG{g+go}{  Extended Kendall tau       : +0.780}
+\PYG{g+go}{  Epistemic determination    :  0.300}
+\PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.234}
 \end{sphinxVerbatim}
 
 We notice in \hyperref[\detokenize{pearls:globalcorr}]{Listing \ref{\detokenize{pearls:globalcorr}}} Line 6 that the ordinal correlation \sphinxstyleemphasis{tau(g,nf)} index between the \sphinxstyleemphasis{Net\sphinxhyphen{}Flows} ranking \sphinxstyleemphasis{nf} and the determined part of the outranking digraph \sphinxstyleemphasis{g} is quite high (+0.78). Due to the rather high number of missing data, the \sphinxstyleemphasis{r} \sphinxhyphen{}valued relational equivalence between the \sphinxstyleemphasis{nf} and the \sphinxstyleemphasis{g} digraph, with a characteristics value of \sphinxstyleemphasis{only} +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62\% of the movie critics’ rating opinions.
