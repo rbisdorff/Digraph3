@@ -2038,7 +2038,7 @@ Some ranking rules will work on the associated **Condorcet Digraph**, i.e. the c
 
 Unfortunately, such crisp median-cut *Condorcet* digraphs, associated with a given strict outranking digraph, present only exceptionally a linear ordering. Usually, pairwise majority comparisons do not render even a complete or, at least, a transitive partial order. There may even frequently appear *cyclic* outranking situations (see the tutorial on :ref:`LinearVoting-tutorial-label`).
 
-To estimate how *difficult* this ranking problem here may be, we can have a look at the corresponding strict outranking digraph *graphviz* drawing ([1]_).
+To estimate how *difficult* this ranking problem here may be, we may have a look at the corresponding strict outranking digraph *graphviz* drawing ([1]_).
 
 .. code-block:: pycon
 
