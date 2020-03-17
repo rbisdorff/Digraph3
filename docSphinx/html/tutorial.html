@@ -142,6 +142,8 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 &gt;&gt;&gt; ...
 </pre></div>
 </td></tr></table></div>
+<div class="literal-block-wrapper docutils container" id="digraphs">
+<div class="code-block-caption"><span class="caption-number">Listing 1 </span><span class="caption-text">Generating a random digraph instance</span><a class="headerlink" href="#digraphs" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -172,9 +174,12 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </pre></div>
 </td></tr></table></div>
 </div>
+<p>From the <a class="reference internal" href="techDoc.html#module-randomDigraphs" title="randomDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">randomDigraphs</span></code></a> module we import the <a class="reference internal" href="techDoc.html#randomDigraphs.RandomDigraph" title="randomDigraphs.RandomDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomDigraphs.RandomDigraph</span></code></a> class in order to  generate a <em>digraph</em> instance of order 5 - number of nodes or (decision) <em>actions</em> - and size 12 - number of directed <em>arcs</em> (see <a class="reference internal" href="#digraphs"><span class="std std-numref">Listing 1</span></a> Lines 1-2).</p>
+<p>We may directly inspect the content of  python object <em>dg</em> (Line 3)</p>
+</div>
 <div class="section" id="digraph-object-structure">
 <h2><a class="toc-backref" href="#id160"><code class="docutils literal notranslate"><span class="pre">Digraph</span></code> object structure</a><a class="headerlink" href="#digraph-object-structure" title="Permalink to this headline">¶</a></h2>
-<p>All <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a> objects contain at least the following attributes:</p>
+<p>All <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a> objects contain at least the following attributes (see <a class="reference internal" href="#digraphs"><span class="std std-numref">Listing 1</span></a> Lines 11-12):</p>
 <ol class="arabic simple" start="0">
 <li><p>A <strong>name</strong> attribute, holding usually the actual name of the stored instance that was used to create the instance;</p></li>
 <li><p>A collection of digraph nodes called <strong>actions</strong> (decision actions): an ordered dictionary of nodes with at least a ‘name’ attribute;</p></li>
@@ -188,7 +193,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </div>
 <div class="section" id="permanent-storage">
 <h2><a class="toc-backref" href="#id161">Permanent storage</a><a class="headerlink" href="#permanent-storage" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="code docutils literal notranslate"><span class="pre">dg.save('tutorialDigraph')</span></code> command (see Line 19 above) stores the digraph <em>dg</em> in a file named <code class="code docutils literal notranslate"><span class="pre">tutorialDigraph.py</span></code> with the following content.</p>
+<p>The <code class="code docutils literal notranslate"><span class="pre">dg.save('tutorialDigraph')</span></code> command (see <a class="reference internal" href="#digraphs"><span class="std std-numref">Listing 1</span></a> Line 13 above) stores the digraph <em>dg</em> in a file named <code class="code docutils literal notranslate"><span class="pre">tutorialDigraph.py</span></code> with the following content.</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -225,9 +230,9 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </div>
 <div class="section" id="inspecting-a-digraph-object">
 <h2><a class="toc-backref" href="#id162">Inspecting a <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> object</a><a class="headerlink" href="#inspecting-a-digraph-object" title="Permalink to this headline">¶</a></h2>
-<p>We may reload a previously saved <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> instance from the file named <code class="code docutils literal notranslate"><span class="pre">tutorialDigraph.py</span></code> with the <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> class constructor and the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showAll" title="digraphs.Digraph.showAll"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.showAll()</span></code></a> method output reveals us that <em>dg</em> is a <em>connected</em> and <em>irreflexive</em> digraph of <em>order</em> five, evaluated in an integer <em>valuation domain</em> [-1,0,+1} (see <a class="reference internal" href="#tutorialdigraph"><span class="std std-numref">Listing 1</span></a>).</p>
+<p>We may reload a previously saved <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> instance from the file named <code class="code docutils literal notranslate"><span class="pre">tutorialDigraph.py</span></code> with the <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> class constructor and the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showAll" title="digraphs.Digraph.showAll"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.showAll()</span></code></a> method output reveals us that <em>dg</em> is a <em>connected</em> and <em>irreflexive</em> digraph of <em>order</em> five, evaluated in an integer <em>valuation domain</em> [-1,0,+1} (see <a class="reference internal" href="#tutorialdigraph"><span class="std std-numref">Listing 2</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="tutorialdigraph">
-<div class="code-block-caption"><span class="caption-number">Listing 1 </span><span class="caption-text">Random crisp digraph example</span><a class="headerlink" href="#tutorialdigraph" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 2 </span><span class="caption-text">Random crisp digraph example</span><a class="headerlink" href="#tutorialdigraph" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -443,7 +448,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </td></tr></table></div>
 <p>With the <code class="docutils literal notranslate"><span class="pre">save()</span></code> method (see Line 3) we may keep a backup version for future use of <em>dg</em> which will be stored in a file called <em>tutRandValDigraph.py</em> in the current working directory. The <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> class now provides some generic methods for exploring a given <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> object, like the <code class="docutils literal notranslate"><span class="pre">showShort()</span></code>, <code class="docutils literal notranslate"><span class="pre">showAll()</span></code>, <code class="docutils literal notranslate"><span class="pre">showRelationTable()</span></code> and the <code class="docutils literal notranslate"><span class="pre">showNeighborhoods()</span></code> methods.</p>
 <div class="literal-block-wrapper docutils container" id="tutrandvaldigraph">
-<div class="code-block-caption"><span class="caption-number">Listing 2 </span><span class="caption-text">Example of random valuation digraph</span><a class="headerlink" href="#tutrandvaldigraph" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3 </span><span class="caption-text">Example of random valuation digraph</span><a class="headerlink" href="#tutrandvaldigraph" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -616,10 +621,10 @@ the current working directory a <code class="code docutils literal notranslate">
 </div>
 <div class="section" id="border-and-inner-parts">
 <h2><a class="toc-backref" href="#id167">Border and inner parts</a><a class="headerlink" href="#border-and-inner-parts" title="Permalink to this headline">¶</a></h2>
-<p>We may also extract the border -the part of a digraph induced by the union of its initial and terminal prekernels (see tutorial <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>)-  as well as, the inner part -the <em>complement</em> of the border- with the help of two corresponding class constructors: <a class="reference internal" href="techDoc.html#digraphs.GraphBorder" title="digraphs.GraphBorder"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.GraphBorder</span></code></a> and <a class="reference internal" href="techDoc.html#digraphs.GraphInner" title="digraphs.GraphInner"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.GraphInner</span></code></a> (see <a class="reference internal" href="#borderinnerpart"><span class="std std-numref">Listing 3</span></a>  Line 1).</p>
-<p>Let us illustrate these parts on a linear ordering obtained from the tutorial random valuation digraph <em>dg</em> (see <a class="reference internal" href="#borderinnerpart"><span class="std std-numref">Listing 3</span></a> Line 2-3) with the <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">NetFlows ranking rule</span></a>).</p>
+<p>We may also extract the border -the part of a digraph induced by the union of its initial and terminal prekernels (see tutorial <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>)-  as well as, the inner part -the <em>complement</em> of the border- with the help of two corresponding class constructors: <a class="reference internal" href="techDoc.html#digraphs.GraphBorder" title="digraphs.GraphBorder"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.GraphBorder</span></code></a> and <a class="reference internal" href="techDoc.html#digraphs.GraphInner" title="digraphs.GraphInner"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.GraphInner</span></code></a> (see <a class="reference internal" href="#borderinnerpart"><span class="std std-numref">Listing 4</span></a>  Line 1).</p>
+<p>Let us illustrate these parts on a linear ordering obtained from the tutorial random valuation digraph <em>dg</em> (see <a class="reference internal" href="#borderinnerpart"><span class="std std-numref">Listing 4</span></a> Line 2-3) with the <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">NetFlows ranking rule</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="borderinnerpart">
-<div class="code-block-caption"><span class="caption-number">Listing 3 </span><span class="caption-text">Border and inner part of a linear order</span><a class="headerlink" href="#borderinnerpart" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 4 </span><span class="caption-text">Border and inner part of a linear order</span><a class="headerlink" href="#borderinnerpart" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -644,10 +649,10 @@ the current working directory a <code class="code docutils literal notranslate">
 <a class="reference internal image-reference" href="_images/graphBorderAndInner1.png"><img alt="_images/graphBorderAndInner1.png" src="_images/graphBorderAndInner1.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text"><em>Border</em> and <em>inner</em> part of a linear order oriented by <em>terminal</em> and <em>inital</em> kernels</span><a class="headerlink" href="#graphborderandinner1" title="Permalink to this image">¶</a></p>
 </div>
-<p>We may orient the graphviz drawings in <a class="reference internal" href="#graphborderandinner1"><span class="std std-numref">Fig. 5</span></a> with the terminal node 6 (<em>worstChoice</em> parameter) and initial node 7 (<em>bestChoice</em> parameter), see <a class="reference internal" href="#borderinnerpart"><span class="std std-numref">Listing 3</span></a> Lines 7 and 9).</p>
+<p>We may orient the graphviz drawings in <a class="reference internal" href="#graphborderandinner1"><span class="std std-numref">Fig. 5</span></a> with the terminal node 6 (<em>worstChoice</em> parameter) and initial node 7 (<em>bestChoice</em> parameter), see <a class="reference internal" href="#borderinnerpart"><span class="std std-numref">Listing 4</span></a> Lines 7 and 9).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The constructor of the partial digraphs <em>bnf</em> and <em>inf</em>  (see <a class="reference internal" href="#borderinnerpart"><span class="std std-numref">Listing 3</span></a> Lines 3 and 6) puts to the <em>indeterminate</em> characteristic value all links <em>not</em> in the <em>border</em>, respectively <em>not</em> in the <em>inner</em> part (see <a class="reference internal" href="#graphborderandinner"><span class="std std-numref">Fig. 6</span></a>).</p>
+<p>The constructor of the partial digraphs <em>bnf</em> and <em>inf</em>  (see <a class="reference internal" href="#borderinnerpart"><span class="std std-numref">Listing 4</span></a> Lines 3 and 6) puts to the <em>indeterminate</em> characteristic value all links <em>not</em> in the <em>border</em>, respectively <em>not</em> in the <em>inner</em> part (see <a class="reference internal" href="#graphborderandinner"><span class="std std-numref">Fig. 6</span></a>).</p>
 </div>
 <p>Being much <em>denser</em> than a linear order, the actual inner part of our tutorial random valuation digraph <em>dg</em> is reduced to a single arc between nodes 3 and 4 (see <a class="reference internal" href="#graphborderandinner"><span class="std std-numref">Fig. 6</span></a>).</p>
 <div class="figure align-center" id="graphborderandinner">
@@ -658,9 +663,9 @@ the current working directory a <code class="code docutils literal notranslate">
 </div>
 <div class="section" id="fusion-by-epistemic-disjunction">
 <span id="epistemic-fusion-label"></span><h2><a class="toc-backref" href="#id168">Fusion by epistemic disjunction</a><a class="headerlink" href="#fusion-by-epistemic-disjunction" title="Permalink to this headline">¶</a></h2>
-<p>We may recover object <em>dg</em> from both partial objects <em>asymDg</em> and <em>symDg</em>, or as well from the border <em>bg</em> and the inner part <em>ig</em>, with a <strong>bipolar fusion</strong> constructor, also called <strong>epistemic disjunction</strong>, available via the <a class="reference internal" href="techDoc.html#digraphs.FusionDigraph" title="digraphs.FusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.FusionDigraph</span></code></a> class (see <a class="reference internal" href="#tutrandvaldigraph"><span class="std std-numref">Listing 2</span></a> Lines 12- 21).</p>
+<p>We may recover object <em>dg</em> from both partial objects <em>asymDg</em> and <em>symDg</em>, or as well from the border <em>bg</em> and the inner part <em>ig</em>, with a <strong>bipolar fusion</strong> constructor, also called <strong>epistemic disjunction</strong>, available via the <a class="reference internal" href="techDoc.html#digraphs.FusionDigraph" title="digraphs.FusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.FusionDigraph</span></code></a> class (see <a class="reference internal" href="#tutrandvaldigraph"><span class="std std-numref">Listing 3</span></a> Lines 12- 21).</p>
 <div class="literal-block-wrapper docutils container" id="epistemicfusion">
-<div class="code-block-caption"><span class="caption-number">Listing 4 </span><span class="caption-text">Epistemic fusion of partial diagraphs</span><a class="headerlink" href="#epistemicfusion" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 5 </span><span class="caption-text">Epistemic fusion of partial diagraphs</span><a class="headerlink" href="#epistemicfusion" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -691,7 +696,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>The epistemic disjunction operation <strong>o-max</strong> (see <a class="reference internal" href="#epistemicfusion"><span class="std std-numref">Listing 4</span></a> Line 2) works as follows.</p>
+<p>The epistemic disjunction operation <strong>o-max</strong> (see <a class="reference internal" href="#epistemicfusion"><span class="std std-numref">Listing 5</span></a> Line 2) works as follows.</p>
 <p>Let <em>r</em> and <em>r’</em> characterise two bipolar-valued epistemic situations.</p>
 <blockquote>
 <div><ul class="simple">
@@ -779,7 +784,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </td></tr></table></div>
 <p>Computing the <em>dual</em>, respectively the <em>converse</em>, may also be done with prefixing the <code class="docutils literal notranslate"><span class="pre">__neg__</span> <span class="pre">(-)</span></code> or the <code class="docutils literal notranslate"><span class="pre">__invert__</span></code> (~) operator. The <em>codual</em> of a Digraph object may, hence, as well be computed with a <strong>composition</strong> (in either order) of both operations.</p>
 <div class="literal-block-wrapper docutils container" id="infixoperators">
-<div class="code-block-caption"><span class="caption-number">Listing 5 </span><span class="caption-text">Computing the <em>dual</em>, the <em>converse</em> and the <em>codual</em> of a digraph</span><a class="headerlink" href="#infixoperators" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 6 </span><span class="caption-text">Computing the <em>dual</em>, the <em>converse</em> and the <em>codual</em> of a digraph</span><a class="headerlink" href="#infixoperators" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1099,7 +1104,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </td></tr></table></div>
 <p>The module provides a <a class="reference internal" href="techDoc.html#votingProfiles.RandomLinearVotingProfile" title="votingProfiles.RandomLinearVotingProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">votingProfiles.RandomLinearVotingProfile</span></code></a> class for generating random instances of the <a class="reference internal" href="techDoc.html#votingProfiles.LinearVotingProfile" title="votingProfiles.LinearVotingProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">votingProfiles.LinearVotingProfile</span></code></a> class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result.</p>
 <div class="literal-block-wrapper docutils container" id="randomprofile1">
-<div class="code-block-caption"><span class="caption-number">Listing 6 </span><span class="caption-text">Example of random linear voting profile</span><a class="headerlink" href="#randomprofile1" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 7 </span><span class="caption-text">Example of random linear voting profile</span><a class="headerlink" href="#randomprofile1" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1136,7 +1141,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Notice that in this random example, the five voters are weighted (see <a class="reference internal" href="#randomprofile1"><span class="std std-numref">Listing 6</span></a> Line 6-7). Their linear ballots can be viewed with the <a class="reference internal" href="techDoc.html#votingProfiles.LinearVotingProfile.showLinearBallots" title="votingProfiles.LinearVotingProfile.showLinearBallots"><code class="xref py py-func docutils literal notranslate"><span class="pre">votingProfiles.LinearVotingProfile.showLinearBallots()</span></code></a> method.</p>
+<p>Notice that in this random example, the five voters are weighted (see <a class="reference internal" href="#randomprofile1"><span class="std std-numref">Listing 7</span></a> Line 6-7). Their linear ballots can be viewed with the <a class="reference internal" href="techDoc.html#votingProfiles.LinearVotingProfile.showLinearBallots" title="votingProfiles.LinearVotingProfile.showLinearBallots"><code class="xref py py-func docutils literal notranslate"><span class="pre">votingProfiles.LinearVotingProfile.showLinearBallots()</span></code></a> method.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1177,7 +1182,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </td></tr></table></div>
 <p>As we observe no absolute majority (8/15) of votes for any of the three candidate, we may look for the <strong>instant runoff</strong> winner instead (see <a class="reference internal" href="#adt-l2" id="id9"><span>[ADT-L2]</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="instantrunoff">
-<div class="code-block-caption"><span class="caption-number">Listing 7 </span><span class="caption-text">Example Instant Run Off Winner</span><a class="headerlink" href="#instantrunoff" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 8 </span><span class="caption-text">Example Instant Run Off Winner</span><a class="headerlink" href="#instantrunoff" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1212,10 +1217,10 @@ the current working directory a <code class="code docutils literal notranslate">
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>In stage 1, no candidate obtains an absolute majority of votes. Candidate <em>a2</em> obtains the minimal number of votes (2/15) and is, hence, eliminated. In stage 2, candidate <em>a1</em> obtains an absolute majority of the votes (8/15) and is eventually elected (see <a class="reference internal" href="#instantrunoff"><span class="std std-numref">Listing 7</span></a>).</p>
+<p>In stage 1, no candidate obtains an absolute majority of votes. Candidate <em>a2</em> obtains the minimal number of votes (2/15) and is, hence, eliminated. In stage 2, candidate <em>a1</em> obtains an absolute majority of the votes (8/15) and is eventually elected (see <a class="reference internal" href="#instantrunoff"><span class="std std-numref">Listing 8</span></a>).</p>
 <p>We may also follow the <em>Chevalier de Borda</em>’s advice and, after a <strong>rank analysis</strong> of the linear ballots, compute the <strong>Borda score</strong> -the average rank- of each candidate and hence determine the <em>Borda</em> <strong>winner(s)</strong>.</p>
 <div class="literal-block-wrapper docutils container" id="bordascores">
-<div class="code-block-caption"><span class="caption-number">Listing 8 </span><span class="caption-text">Example of <em>Borda</em> rank scores</span><a class="headerlink" href="#bordascores" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 9 </span><span class="caption-text">Example of <em>Borda</em> rank scores</span><a class="headerlink" href="#bordascores" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1236,9 +1241,9 @@ the current working directory a <code class="code docutils literal notranslate">
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Candidate <em>a1</em> obtains the minimal <em>Borda</em> score, followed by candidate <em>a3</em> and finally candidate <em>a2</em> (see <a class="reference internal" href="#bordascores"><span class="std std-numref">Listing 8</span></a>). The corresponding <em>Borda</em> <strong>rank analysis table</strong> may be printed out with a corresponding <code class="docutils literal notranslate"><span class="pre">show</span></code> command.</p>
+<p>Candidate <em>a1</em> obtains the minimal <em>Borda</em> score, followed by candidate <em>a3</em> and finally candidate <em>a2</em> (see <a class="reference internal" href="#bordascores"><span class="std std-numref">Listing 9</span></a>). The corresponding <em>Borda</em> <strong>rank analysis table</strong> may be printed out with a corresponding <code class="docutils literal notranslate"><span class="pre">show</span></code> command.</p>
 <div class="literal-block-wrapper docutils container" id="rankanalysis">
-<div class="code-block-caption"><span class="caption-number">Listing 9 </span><span class="caption-text">Rank analysis example</span><a class="headerlink" href="#rankanalysis" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 10 </span><span class="caption-text">Rank analysis example</span><a class="headerlink" href="#rankanalysis" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1257,13 +1262,13 @@ the current working directory a <code class="code docutils literal notranslate">
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>In our randomly generated election results, we are lucky: The instant runoff winner and the <em>Borda</em> winner both are candidate <em>a1</em> (see <a class="reference internal" href="#instantrunoff"><span class="std std-numref">Listing 7</span></a> and <a class="reference internal" href="#rankanalysis"><span class="std std-numref">Listing 9</span></a>). However, we could also follow the <em>Marquis de Condorcet</em>’s advice, and compute the <strong>majority margins</strong> obtained by voting for each individual pair of candidates.</p>
+<p>In our randomly generated election results, we are lucky: The instant runoff winner and the <em>Borda</em> winner both are candidate <em>a1</em> (see <a class="reference internal" href="#instantrunoff"><span class="std std-numref">Listing 8</span></a> and <a class="reference internal" href="#rankanalysis"><span class="std std-numref">Listing 10</span></a>). However, we could also follow the <em>Marquis de Condorcet</em>’s advice, and compute the <strong>majority margins</strong> obtained by voting for each individual pair of candidates.</p>
 </div>
 <div class="section" id="the-condorcet-winner">
 <h2><a class="toc-backref" href="#id176">The Condorcet winner</a><a class="headerlink" href="#the-condorcet-winner" title="Permalink to this headline">¶</a></h2>
 <p>For instance, candidate <em>a1</em> is ranked four times before and once behind candidate <em>a2</em>. Hence the corresponding <strong>majority margin</strong> <em>M(a1,a2)</em> is 4 - 1 = +3. These <em>majority margins</em> define on the set of candidates what we call the <strong>Condorcet digraph</strong>. The <a class="reference internal" href="techDoc.html#votingProfiles.CondorcetDigraph" title="votingProfiles.CondorcetDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">votingProfiles.CondorcetDigraph</span></code></a> class (a specialization of the <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a> class) is available for handling such kind of digraphs.</p>
 <div class="literal-block-wrapper docutils container" id="condorcetdigraph">
-<div class="code-block-caption"><span class="caption-number">Listing 10 </span><span class="caption-text">Example of <em>Condorcet</em> digraph</span><a class="headerlink" href="#condorcetdigraph" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 11 </span><span class="caption-text">Example of <em>Condorcet</em> digraph</span><a class="headerlink" href="#condorcetdigraph" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1324,8 +1329,8 @@ the current working directory a <code class="code docutils literal notranslate">
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Notice that in the case of linear voting profiles, majority margins always verify a zero sum property: <em>M(x,y)</em> + <em>M(y,x)</em> = 0 for all candidates <em>x</em> and <em>y</em> (see <a class="reference internal" href="#condorcetdigraph"><span class="std std-numref">Listing 10</span></a> Lines 26-28). This is not true in general for arbitrary voting profiles. The <em>Condorcet</em> digraph of linear voting profiles defines in fact a <em>weak tournament</em> and belongs, hence, to the class of <em>self-codual</em> bipolar-valued digraphs (<a class="footnote-reference brackets" href="#id111" id="id10">13</a>).</p>
-<p>Now, a candidate <em>x</em>, showing a positive majority margin <em>M(x,y)</em>, is beating candidate <em>y</em>  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the <em>Condorcet</em> digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate <em>a1</em> who is hence the <strong>Condorcet winner</strong> (see <a class="reference internal" href="#condorcetdigraph"><span class="std std-numref">Listing 10</span></a> Line 26).</p>
+<p>Notice that in the case of linear voting profiles, majority margins always verify a zero sum property: <em>M(x,y)</em> + <em>M(y,x)</em> = 0 for all candidates <em>x</em> and <em>y</em> (see <a class="reference internal" href="#condorcetdigraph"><span class="std std-numref">Listing 11</span></a> Lines 26-28). This is not true in general for arbitrary voting profiles. The <em>Condorcet</em> digraph of linear voting profiles defines in fact a <em>weak tournament</em> and belongs, hence, to the class of <em>self-codual</em> bipolar-valued digraphs (<a class="footnote-reference brackets" href="#id111" id="id10">13</a>).</p>
+<p>Now, a candidate <em>x</em>, showing a positive majority margin <em>M(x,y)</em>, is beating candidate <em>y</em>  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the <em>Condorcet</em> digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate <em>a1</em> who is hence the <strong>Condorcet winner</strong> (see <a class="reference internal" href="#condorcetdigraph"><span class="std std-numref">Listing 11</span></a> Line 26).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">computeCondorcetWinner</span><span class="p">()</span>
 <span class="go"> [&#39;a1&#39;]</span>
@@ -1345,13 +1350,13 @@ the current working directory a <code class="code docutils literal notranslate">
 <a class="reference internal image-reference" href="_images/tutorialLinearBallots.png"><img alt="_images/tutorialLinearBallots.png" src="_images/tutorialLinearBallots.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Visualizing an election result</span><a class="headerlink" href="#tutoriallinearballots" title="Permalink to this image">¶</a></p>
 </div>
-<p>In <a class="reference internal" href="#tutoriallinearballots"><span class="std std-numref">Fig. 9</span></a> we notice that the <em>Condorcet</em> digraph from our example linear voting profile gives a linear order of the candidates: [‘a1’, ‘a3’, ‘a2], the same actually as given by the <em>Borda</em> scores (see <a class="reference internal" href="#bordascores"><span class="std std-numref">Listing 8</span></a>). This is by far not given in general. Usually, when aggregating linear ballots, there appear cyclic social preferences.</p>
+<p>In <a class="reference internal" href="#tutoriallinearballots"><span class="std std-numref">Fig. 9</span></a> we notice that the <em>Condorcet</em> digraph from our example linear voting profile gives a linear order of the candidates: [‘a1’, ‘a3’, ‘a2], the same actually as given by the <em>Borda</em> scores (see <a class="reference internal" href="#bordascores"><span class="std std-numref">Listing 9</span></a>). This is by far not given in general. Usually, when aggregating linear ballots, there appear cyclic social preferences.</p>
 </div>
 <div class="section" id="cyclic-social-preferences">
 <h2><a class="toc-backref" href="#id177">Cyclic social preferences</a><a class="headerlink" href="#cyclic-social-preferences" title="Permalink to this headline">¶</a></h2>
 <p>Let us consider for instance the following linear voting profile and construct the corresponding Condorcet digraph.</p>
 <div class="literal-block-wrapper docutils container" id="linearvotingprofile2">
-<div class="code-block-caption"><span class="caption-number">Listing 11 </span><span class="caption-text">Example of cyclic social preferences</span><a class="headerlink" href="#linearvotingprofile2" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 12 </span><span class="caption-text">Example of cyclic social preferences</span><a class="headerlink" href="#linearvotingprofile2" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1396,7 +1401,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Now, we cannot find any completely positive row in the relation table (see <a class="reference internal" href="#linearvotingprofile2"><span class="std std-numref">Listing 11</span></a> Lines 17 - ). No one of the five candidates is beating all the others with an absolute majority of votes. There is no <em>Condorcet</em> winner anymore. In fact, when looking at a graphviz drawing of this <em>Condorcet</em> digraph, we may observe <em>cyclic</em> preferences, like (<em>a1</em> &gt; <em>a2</em> &gt; <em>a3</em> &gt; <em>a1</em>) for instance (see <a class="reference internal" href="#cyclicsocialpreferences"><span class="std std-numref">Fig. 10</span></a>).</p>
+<p>Now, we cannot find any completely positive row in the relation table (see <a class="reference internal" href="#linearvotingprofile2"><span class="std std-numref">Listing 12</span></a> Lines 17 - ). No one of the five candidates is beating all the others with an absolute majority of votes. There is no <em>Condorcet</em> winner anymore. In fact, when looking at a graphviz drawing of this <em>Condorcet</em> digraph, we may observe <em>cyclic</em> preferences, like (<em>a1</em> &gt; <em>a2</em> &gt; <em>a3</em> &gt; <em>a1</em>) for instance (see <a class="reference internal" href="#cyclicsocialpreferences"><span class="std std-numref">Fig. 10</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1423,7 +1428,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <p><em>Condorcet</em> ‘s approach for determining the winner of an election is hence <em>not decisive</em> in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see the tutorial on <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> and <a class="reference internal" href="#bis-2008" id="id12"><span>[BIS-2008]</span></a>).</p>
 <p>Many more tools for exploiting voting results are available like the browser heat map view on voting profiles (see the technical documentation of the <a class="reference internal" href="techDoc.html#module-votingProfiles" title="votingProfiles"><code class="xref py py-mod docutils literal notranslate"><span class="pre">votingProfiles</span></code></a> module).</p>
 <div class="literal-block-wrapper docutils container" id="votingheatmap">
-<div class="code-block-caption"><span class="caption-number">Listing 12 </span><span class="caption-text">Example linear voting heatmap</span><a class="headerlink" href="#votingheatmap" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 13 </span><span class="caption-text">Example linear voting heatmap</span><a class="headerlink" href="#votingheatmap" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">showHTMLVotingHeatmap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                        <span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1434,15 +1439,15 @@ the current working directory a <code class="code docutils literal notranslate">
 <a class="reference internal image-reference" href="_images/votingHeatmap.png"><img alt="_images/votingHeatmap.png" src="_images/votingHeatmap.png" style="width: 550px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Visualizing a linear voting profile in a heatmap format</span><a class="headerlink" href="#cyclicvoting" title="Permalink to this image">¶</a></p>
 </div>
-<p>Notice that the importance weights of the voters are <em>negative</em>, which means that the preference direction of the criteria (in this case the individual voters) is <em>decreasing</em>, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise <em>NetFlows</em> ranking <em>[a4,a5,a2,a1,a3]</em>, shown in this heatmap (see <a class="reference internal" href="#cyclicvoting"><span class="std std-numref">Fig. 11</span></a>) results in an optimal <em>ordinal correlation</em> index of +0.778 with the pairwise majority voting margins (see tutorials <a class="reference internal" href="pearls.html#ordinalcorrelation-tutorial-label"><span class="std std-ref">Ordinal correlation equals bipolar-valued relational equivalence</span></a> and <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a>). The number of voters is usually much larger than the number of candidates. In that case, it is better to generate a transposed <em>voters X candidates</em> view (see <a class="reference internal" href="#votingheatmap"><span class="std std-numref">Listing 12</span></a> Line 2)</p>
+<p>Notice that the importance weights of the voters are <em>negative</em>, which means that the preference direction of the criteria (in this case the individual voters) is <em>decreasing</em>, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise <em>NetFlows</em> ranking <em>[a4,a5,a2,a1,a3]</em>, shown in this heatmap (see <a class="reference internal" href="#cyclicvoting"><span class="std std-numref">Fig. 11</span></a>) results in an optimal <em>ordinal correlation</em> index of +0.778 with the pairwise majority voting margins (see tutorials <a class="reference internal" href="pearls.html#ordinalcorrelation-tutorial-label"><span class="std std-ref">Ordinal correlation equals bipolar-valued relational equivalence</span></a> and <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a>). The number of voters is usually much larger than the number of candidates. In that case, it is better to generate a transposed <em>voters X candidates</em> view (see <a class="reference internal" href="#votingheatmap"><span class="std std-numref">Listing 13</span></a> Line 2)</p>
 </div>
 <div class="section" id="on-generating-random-linear-voting-profiles">
 <h2><a class="toc-backref" href="#id178">On generating random linear voting profiles</a><a class="headerlink" href="#on-generating-random-linear-voting-profiles" title="Permalink to this headline">¶</a></h2>
-<p>By default, the <a class="reference internal" href="techDoc.html#votingProfiles.RandomLinearVotingProfile" title="votingProfiles.RandomLinearVotingProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">votingProfiles.RandomLinearVotingProfile</span></code></a> class generates random linear voting profiles where every candidates has the same uniform probabilities to be ranked at a certain position by all the voters. The random linear ballots are indeed generating for each voter via a uniform shuffling of the list of candidates.</p>
+<p>By default, the <a class="reference internal" href="techDoc.html#votingProfiles.RandomLinearVotingProfile" title="votingProfiles.RandomLinearVotingProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">votingProfiles.RandomLinearVotingProfile</span></code></a> class generates random linear voting profiles where every candidates has the same uniform probabilities to be ranked at a certain position by all the voters. For each voter’s random linear ballot is indeed generated  via a uniform shuffling of the list of candidates.</p>
 <p>In reality, political election data appear quite different. There will usually be different favorite and marginal candidates for each political party. To simulate these aspects into our random generator, we are using two random exponentially distributed polls of the candidates and consider a bipartisan political landscape with a certain random balance (default theoretical party repartition = 0.50) between the two sets of potential party supporters (see <a class="reference internal" href="techDoc.html#votingProfiles.LinearVotingProfile" title="votingProfiles.LinearVotingProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">votingProfiles.LinearVotingProfile</span></code></a> class). A certain theoretical proportion (default = 0.1) will not support any party.</p>
 <p>Let us generate such a linear voting profile for an election with 1000 voters and 15 candidates.</p>
 <div class="literal-block-wrapper docutils container" id="linearvotingprofilewithpolls">
-<div class="code-block-caption"><span class="caption-number">Listing 13 </span><span class="caption-text">Generating a linear voting profile with random polls</span><a class="headerlink" href="#linearvotingprofilewithpolls" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 14 </span><span class="caption-text">Generating a linear voting profile with random polls</span><a class="headerlink" href="#linearvotingprofilewithpolls" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1525,9 +1530,9 @@ the current working directory a <code class="code docutils literal notranslate">
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>In this example (see <a class="reference internal" href="#linearvotingprofilewithpolls"><span class="std std-numref">Listing 13</span></a> Lines 18-), we obtain 460 Party_1 supporters (46%), 436 Party_2 supporters (43.6%) and 104 other voters (10.4%). Favorite candidates of <em>Party_1</em> supporters, with more than 10%, appear to be <em>a06</em> (19.91%), <em>a07</em> (14.27%) and <em>a03</em> (10.02%). Whereas for <em>Party_2</em> supporters, favorite candidates appear to be <em>a11</em> (22.94%), followed by <em>a08</em> (15.65%), <em>a04</em> (15.07%) and <em>a06</em> (13.4%). Being <em>first</em> choice for <em>Party_1</em> supporters and <em>fourth</em> choice for <em>Party_2</em> supporters, this candidate <em>a06</em> is a natural candidate for clearly winning this election game (see <a class="reference internal" href="#uninominalwinner"><span class="std std-numref">Listing 14</span></a>).</p>
+<p>In this example (see <a class="reference internal" href="#linearvotingprofilewithpolls"><span class="std std-numref">Listing 14</span></a> Lines 18-), we obtain 460 Party_1 supporters (46%), 436 Party_2 supporters (43.6%) and 104 other voters (10.4%). Favorite candidates of <em>Party_1</em> supporters, with more than 10%, appear to be <em>a06</em> (19.91%), <em>a07</em> (14.27%) and <em>a03</em> (10.02%). Whereas for <em>Party_2</em> supporters, favorite candidates appear to be <em>a11</em> (22.94%), followed by <em>a08</em> (15.65%), <em>a04</em> (15.07%) and <em>a06</em> (13.4%). Being <em>first</em> choice for <em>Party_1</em> supporters and <em>fourth</em> choice for <em>Party_2</em> supporters, this candidate <em>a06</em> is a natural candidate for clearly winning this election game (see <a class="reference internal" href="#uninominalwinner"><span class="std std-numref">Listing 15</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="uninominalwinner">
-<div class="code-block-caption"><span class="caption-number">Listing 14 </span><span class="caption-text">The uninominal election winner</span><a class="headerlink" href="#uninominalwinner" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 15 </span><span class="caption-text">The uninominal election winner</span><a class="headerlink" href="#uninominalwinner" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -1542,9 +1547,9 @@ the current working directory a <code class="code docutils literal notranslate">
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Is it also a <em>Condorcet</em> winner ? To verify, we start by creating the corresponding <em>Condorcet</em> digraph <em>cdg</em> with the help of the <a class="reference internal" href="techDoc.html#votingProfiles.CondorcetDigraph" title="votingProfiles.CondorcetDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">votingProfiles.CondorcetDigraph</span></code></a> class. The created digraph instance contains 15 <em>actions</em> -the candidates- and 105 <em>oriented</em> arcs -the <em>positive</em> majority margins- (see <a class="reference internal" href="#condorcetwinner"><span class="std std-numref">Listing 15</span></a> Lines 6-7).</p>
+<p>Is it also a <em>Condorcet</em> winner ? To verify, we start by creating the corresponding <em>Condorcet</em> digraph <em>cdg</em> with the help of the <a class="reference internal" href="techDoc.html#votingProfiles.CondorcetDigraph" title="votingProfiles.CondorcetDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">votingProfiles.CondorcetDigraph</span></code></a> class. The created digraph instance contains 15 <em>actions</em> -the candidates- and 105 <em>oriented</em> arcs -the <em>positive</em> majority margins- (see <a class="reference internal" href="#condorcetwinner"><span class="std std-numref">Listing 16</span></a> Lines 6-7).</p>
 <div class="literal-block-wrapper docutils container" id="condorcetwinner">
-<div class="code-block-caption"><span class="caption-number">Listing 15 </span><span class="caption-text">A Condorcet digraph constructed from a linear voting profile</span><a class="headerlink" href="#condorcetwinner" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 16 </span><span class="caption-text">A Condorcet digraph constructed from a linear voting profile</span><a class="headerlink" href="#condorcetwinner" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1582,10 +1587,10 @@ the current working directory a <code class="code docutils literal notranslate">
 <a class="reference internal image-reference" href="_images/majorityMargins.png"><img alt="_images/majorityMargins.png" src="_images/majorityMargins.png" style="width: 450px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">Browsing the majority margins of a <em>Condorcet</em> digraph</span><a class="headerlink" href="#majoritymargins" title="Permalink to this image">¶</a></p>
 </div>
-<p>In <a class="reference internal" href="#majoritymargins"><span class="std std-numref">Fig. 12</span></a>, <em>light green</em> cells contain the positive majority margins, whereas <em>light red</em> cells contain the negative majority margins. A complete <em>light green</em> row reveals hence a <em>Condorcet</em> <strong>winner</strong>, whereas a complete <em>light green</em> column reveals a <em>Condorcet</em> <strong>looser</strong>. We recover again candidate <em>a06</em> as <em>Condorcet</em> winner (<a class="footnote-reference brackets" href="#id113" id="id13">15</a>), whereas the obvious <em>Condorcet</em> looser is here candidate <em>a02</em>, the candidate with the lowest support in both parties (see <a class="reference internal" href="#linearvotingprofilewithpolls"><span class="std std-numref">Listing 13</span></a> Line 40).</p>
+<p>In <a class="reference internal" href="#majoritymargins"><span class="std std-numref">Fig. 12</span></a>, <em>light green</em> cells contain the positive majority margins, whereas <em>light red</em> cells contain the negative majority margins. A complete <em>light green</em> row reveals hence a <em>Condorcet</em> <strong>winner</strong>, whereas a complete <em>light green</em> column reveals a <em>Condorcet</em> <strong>looser</strong>. We recover again candidate <em>a06</em> as <em>Condorcet</em> winner (<a class="footnote-reference brackets" href="#id113" id="id13">15</a>), whereas the obvious <em>Condorcet</em> looser is here candidate <em>a02</em>, the candidate with the lowest support in both parties (see <a class="reference internal" href="#linearvotingprofilewithpolls"><span class="std std-numref">Listing 14</span></a> Line 40).</p>
 <p>With the same <em>bipolar</em> -<em>first ranked</em> and <em>last ranked</em> candidate- selection procedure, we may <em>weakly rank</em> the candidates (with possible ties) by iterating these <em>first ranked</em> and <em>last ranked</em> choices among the remaining candidates (<a class="reference internal" href="#bis-1999" id="id14"><span>[BIS-1999]</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="rankingbychoosing">
-<div class="code-block-caption"><span class="caption-number">Listing 16 </span><span class="caption-text">Ranking by iterating choosing the <em>first</em> and <em>last</em> remaining candidates</span><a class="headerlink" href="#rankingbychoosing" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 17 </span><span class="caption-text">Ranking by iterating choosing the <em>first</em> and <em>last</em> remaining candidates</span><a class="headerlink" href="#rankingbychoosing" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -1660,10 +1665,10 @@ the current working directory a <code class="code docutils literal notranslate">
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Before showing the <em>ranking-by-choosing</em> result, we have to compute the iterated bipolar selection procedure (see <a class="reference internal" href="#rankingbychoosing"><span class="std std-numref">Listing 16</span></a> Line 2). The first selection concerns <em>a06</em> (first) and <em>a02</em> (last), followed by <em>a11</em> (first) opposed to <em>a05</em> (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely <em>[a04, a12]</em> (see Lines 29-30). The bracketed numbers, following the reiterated <em>first ranked</em> and <em>last ranked</em> candidates, indicate the average majority margin with which the <em>i</em>-th <em>first ranked</em> candidate(s), respectively the <em>i</em>-th <em>last ranked</em> candidate, is beating, resp. is beaten by, the remaining candidates at step <em>i</em>.</p>
-<p>Notice furthermore the first ranked candidates at iteration step 3 (see <a class="reference internal" href="#rankingbychoosing"><span class="std std-numref">Listing 16</span></a> Line 25), namely the pair <em>[a07, a08]</em>. Both candidates represent indeed conjointly the <em>first ranked</em> choice. We obtain here hence a <em>weak ranking</em>, i.e. a ranking with a tie.</p>
-<p>Let us mention that the <em>instant-run-off</em> procedure, we used before (see <a class="reference internal" href="#uninominalwinner"><span class="std std-numref">Listing 14</span></a> Line 3), when operated with a <em>Comments=True</em> parameter setting, will deliver a more or less similar <em>reversed</em> linear <em>ordering-by-rejecting</em> result, namely [<em>a02</em>, <em>a10</em>, <em>a14</em>, <em>a05</em>, <em>a09</em>, <em>a13</em>, <em>a12</em>, <em>a15</em>, <em>a04</em>, <em>a01</em>, <em>a08</em>, <em>a03</em>, <em>a07</em>, <em>a11</em>, <em>a06</em>], ordered from the <em>last</em> to the <em>first</em> choice.</p>
-<p>Remarkable about both these <em>ranking-by-choosing</em> or <em>ordering-by-rejecting</em> results is the fact that the random voting behaviour, simulated here with the help of two discrete random variables (<a class="footnote-reference brackets" href="#id114" id="id15">16</a>), defined respectively by the two party polls, is rendering a ranking that is more or less in accordance with the simulated balance of the polls: -<em>Party_1</em> supporters : 460;  <em>Party_2</em> supporters: 436 (see <a class="reference internal" href="#rankingbychoosing"><span class="std std-numref">Listing 16</span></a> Lines 26-40 third column). Despite a random voting behaviour per voter, the given polls apparently show a <em>very strong incidence</em> on the eventual election result. In order to avoid any manipulation of the election outcome, public media are therefore in some countries not allowed to publish polls during the last weeks before a general election.</p>
+<p>Before showing the <em>ranking-by-choosing</em> result, we have to compute the iterated bipolar selection procedure (see <a class="reference internal" href="#rankingbychoosing"><span class="std std-numref">Listing 17</span></a> Line 2). The first selection concerns <em>a06</em> (first) and <em>a02</em> (last), followed by <em>a11</em> (first) opposed to <em>a05</em> (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely <em>[a04, a12]</em> (see Lines 29-30). The bracketed numbers, following the reiterated <em>first ranked</em> and <em>last ranked</em> candidates, indicate the average majority margin with which the <em>i</em>-th <em>first ranked</em> candidate(s), respectively the <em>i</em>-th <em>last ranked</em> candidate, is beating, resp. is beaten by, the remaining candidates at step <em>i</em>.</p>
+<p>Notice furthermore the first ranked candidates at iteration step 3 (see <a class="reference internal" href="#rankingbychoosing"><span class="std std-numref">Listing 17</span></a> Line 25), namely the pair <em>[a07, a08]</em>. Both candidates represent indeed conjointly the <em>first ranked</em> choice. We obtain here hence a <em>weak ranking</em>, i.e. a ranking with a tie.</p>
+<p>Let us mention that the <em>instant-run-off</em> procedure, we used before (see <a class="reference internal" href="#uninominalwinner"><span class="std std-numref">Listing 15</span></a> Line 3), when operated with a <em>Comments=True</em> parameter setting, will deliver a more or less similar <em>reversed</em> linear <em>ordering-by-rejecting</em> result, namely [<em>a02</em>, <em>a10</em>, <em>a14</em>, <em>a05</em>, <em>a09</em>, <em>a13</em>, <em>a12</em>, <em>a15</em>, <em>a04</em>, <em>a01</em>, <em>a08</em>, <em>a03</em>, <em>a07</em>, <em>a11</em>, <em>a06</em>], ordered from the <em>last</em> to the <em>first</em> choice.</p>
+<p>Remarkable about both these <em>ranking-by-choosing</em> or <em>ordering-by-rejecting</em> results is the fact that the random voting behaviour, simulated here with the help of two discrete random variables (<a class="footnote-reference brackets" href="#id114" id="id15">16</a>), defined respectively by the two party polls, is rendering a ranking that is more or less in accordance with the simulated balance of the polls: -<em>Party_1</em> supporters : 460;  <em>Party_2</em> supporters: 436 (see <a class="reference internal" href="#rankingbychoosing"><span class="std std-numref">Listing 17</span></a> Lines 26-40 third column). Despite a random voting behaviour per voter, the given polls apparently show a <em>very strong incidence</em> on the eventual election result. In order to avoid any manipulation of the election outcome, public media are therefore in some countries not allowed to publish polls during the last weeks before a general election.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Mind that the specific <em>ranking-by-choosing</em> procedure, we use here on the <em>Condorcet</em> digraph, operates the selection procedure by extracting at each step <em>initial</em> and <em>terminal</em> kernels, i.e. NP-hard operational problems (see tutorial <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a> and <a class="reference internal" href="#bis-1999" id="id16"><span>[BIS-1999]</span></a>); A technique that does not allow in general to tackle voting profiles with much more than 20 candidates. The tutorial on <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.</p>
@@ -2034,9 +2039,9 @@ the current working directory a <code class="code docutils literal notranslate">
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id186">Introduction</a></p></li>
 <li><p><a class="reference internal" href="#generating-standard-random-performance-tableaux" id="id187">Generating standard random performance tableaux</a></p></li>
-<li><p><a class="reference internal" href="#generating-random-cost-benefit-tableaux" id="id188">Generating random Cost-Benefit tableaux</a></p></li>
-<li><p><a class="reference internal" href="#generating-three-objectives-tableaux" id="id189">Generating three objectives tableaux</a></p></li>
-<li><p><a class="reference internal" href="#generating-random-linearly-ranked-performances" id="id190">Generating random linearly ranked performances</a></p></li>
+<li><p><a class="reference internal" href="#generating-random-cost-benefit-performance-tableaux" id="id188">Generating random Cost-Benefit performance tableaux</a></p></li>
+<li><p><a class="reference internal" href="#generating-random-three-objectives-performance-tableaux" id="id189">Generating random three objectives performance tableaux</a></p></li>
+<li><p><a class="reference internal" href="#generating-random-linearly-ranked-performance-tableaux" id="id190">Generating random linearly ranked performance tableaux</a></p></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -2105,6 +2110,8 @@ a given number of decision actions.</p>
 </ul>
 </div></blockquote>
 <p>Code example.</p>
+<div class="literal-block-wrapper docutils container" id="randomperformancetableau">
+<div class="code-block-caption"><span class="caption-number">Listing 18 </span><span class="caption-text">Generating a random performance tableau</span><a class="headerlink" href="#randomperformancetableau" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2164,17 +2171,18 @@ a given number of decision actions.</p>
 <span class="go"> &gt;&gt;&gt; t.showHTMLPerformanceTableau()</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 <div class="figure align-center" id="id118">
 <a class="reference internal image-reference" href="_images/randomPerfTab1.png"><img alt="_images/randomPerfTab1.png" src="_images/randomPerfTab1.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 16 </span><span class="caption-text">Browser view on random performance tableau instance</span><a class="headerlink" href="#id118" title="Permalink to this image">¶</a></p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Missing (NA) evaluation are registered in a performance tableau as <em>Decimal(‘-999’)</em> value (see Line 24). Best and worst performance on each criterion are marked in <em>light green</em>, respectively in <em>light red</em>.</p>
+<p>Missing (NA) evaluation are registered in a performance tableau as <em>Decimal(‘-999’)</em> value (see <a class="reference internal" href="#randomperformancetableau"><span class="std std-numref">Listing 18</span></a> Line 24). Best and worst performance on each criterion are marked in <em>light green</em>, respectively in <em>light red</em>.</p>
 </div>
 </div>
-<div class="section" id="generating-random-cost-benefit-tableaux">
-<span id="cost-benefit-performance-tableau-label"></span><h2><a class="toc-backref" href="#id188">Generating random Cost-Benefit tableaux</a><a class="headerlink" href="#generating-random-cost-benefit-tableaux" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="generating-random-cost-benefit-performance-tableaux">
+<span id="cost-benefit-performance-tableau-label"></span><h2><a class="toc-backref" href="#id188">Generating random Cost-Benefit performance tableaux</a><a class="headerlink" href="#generating-random-cost-benefit-performance-tableaux" title="Permalink to this headline">¶</a></h2>
 <p>We provide the <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomCBPerformanceTableau" title="randomPerfTabs.RandomCBPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomPerfTabs.RandomCBPerformanceTableau</span></code></a> class for generating random <em>Cost</em> versus <em>Benefit</em> organized performance tableaux following the directives below:</p>
 <blockquote>
 <div><ul class="simple">
@@ -2202,6 +2210,8 @@ a given number of decision actions.</p>
 <p>Minimal number of decision actions required is 3 !</p>
 </div>
 <p>Example Python session</p>
+<div class="literal-block-wrapper docutils container" id="randomcbperformancetableau">
+<div class="code-block-caption"><span class="caption-number">Listing 19 </span><span class="caption-text">Generating a random Cost-Benefit performance tableau</span><a class="headerlink" href="#randomcbperformancetableau" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2265,7 +2275,8 @@ a given number of decision actions.</p>
 <span class="go"> ...</span>
 </pre></div>
 </td></tr></table></div>
-<p>In the example above, we may notice the three types of decision actions (Lines 10-19), as well as the two types (Lines 22-25) of criteria with either an <strong>ordinal</strong> or a <strong>cardinal</strong> performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the <strong>indifference</strong> and 10% below the <strong>preference discriminating threshold</strong>. About 5% will be considered as <strong>considerably large</strong>. More statistics about the generated performances is available as follows.</p>
+</div>
+<p>In the example above, we may notice the three types of decision actions (<a class="reference internal" href="#randomcbperformancetableau"><span class="std std-numref">Listing 19</span></a> Lines 10-19), as well as the two types (Lines 22-25) of criteria with either an <strong>ordinal</strong> or a <strong>cardinal</strong> performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the <strong>indifference</strong> and 10% below the <strong>preference discriminating threshold</strong>. About 5% will be considered as <strong>considerably large</strong>. More statistics about the generated performances is available as follows.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2376,8 +2387,8 @@ a given number of decision actions.</p>
 </td></tr></table></div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 </div>
-<div class="section" id="generating-three-objectives-tableaux">
-<h2><a class="toc-backref" href="#id189">Generating three objectives tableaux</a><a class="headerlink" href="#generating-three-objectives-tableaux" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="generating-random-three-objectives-performance-tableaux">
+<h2><a class="toc-backref" href="#id189">Generating random three objectives performance tableaux</a><a class="headerlink" href="#generating-random-three-objectives-performance-tableaux" title="Permalink to this headline">¶</a></h2>
 <p>We provide the <a class="reference internal" href="techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="randomPerfTabs.Random3ObjectivesPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomPerfTabs.Random3ObjectivesPerformanceTableau</span></code></a> class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account <em>economical</em>, <em>societal</em> as well as <em>environmental</em> aspects.</p>
 <p>Each decision action is qualified randomly as performing <strong>weak</strong> (-), <strong>fair</strong> (~) or <strong>good</strong> (+) on each of the three objectives.</p>
 <p>Generator directives are the following:</p>
@@ -2406,6 +2417,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Minimal number of decision actions required is 3 !</p>
 </div>
 <p>Example Python session</p>
+<div class="literal-block-wrapper docutils container" id="random3objectivesperformancetableau">
+<div class="code-block-caption"><span class="caption-number">Listing 20 </span><span class="caption-text">Generating a random 3 Objectives performance tableau</span><a class="headerlink" href="#random3objectivesperformancetableau" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2461,7 +2474,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">   Total weight: 80.00 (4 criteria)</span>
 </pre></div>
 </td></tr></table></div>
-<p>In the example code above, we notice that 5 <em>equisignificant</em> criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the decision actions from the <strong>societal</strong> point of view. 4 <em>equisignificant</em> criteria do the same from the <strong>economical</strong>, respectively the <strong>environmental</strong> point of view. The <em>equiobjectives</em> directive results hence in a balanced total weight (80.00) for each decision objective.</p>
+</div>
+<p>In <a class="reference internal" href="#random3objectivesperformancetableau"><span class="std std-numref">Listing 20</span></a> above, we notice that 5 <em>equisignificant</em> criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the decision actions from the <strong>societal</strong> point of view (Lines 16-21). 4 <em>equisignificant</em> criteria do the same from the <strong>economical</strong> (Lines 10-14), respectively the <strong>environmental</strong> point of view (Lines 21-27). The <em>equiobjectives</em> directive results hence in a balanced total weight (80.00) for each decision objective.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2592,10 +2606,10 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <p>Decision action <em>a26</em> (Eco+ Soc+ Env-) appears dominating the other decision alternatives, whereas decision action <em>a30</em> (Eco- Soc- Env-) appears to be dominated by all the others.</p>
 </div>
-<div class="section" id="generating-random-linearly-ranked-performances">
-<h2><a class="toc-backref" href="#id190">Generating random linearly ranked performances</a><a class="headerlink" href="#generating-random-linearly-ranked-performances" title="Permalink to this headline">¶</a></h2>
-<p>Finally, we provide the <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomRankPerformanceTableau" title="randomPerfTabs.RandomRankPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomPerfTabs.RandomRankPerformanceTableau</span></code></a> class for generating multiple criteria ranked performances, i.e. on each criterion, all decision actions appear linearly ordered without ties.</p>
-<p>This type of random performance tableau is matching the <code class="xref py py-class docutils literal notranslate"><span class="pre">votingDigraphs.RandomLinearVotingProfile</span></code> class provided by the <a class="reference internal" href="techDoc.html#module-votingProfiles" title="votingProfiles"><code class="xref py py-mod docutils literal notranslate"><span class="pre">votingProfiles</span></code></a> module.</p>
+<div class="section" id="generating-random-linearly-ranked-performance-tableaux">
+<h2><a class="toc-backref" href="#id190">Generating random linearly ranked performance tableaux</a><a class="headerlink" href="#generating-random-linearly-ranked-performance-tableaux" title="Permalink to this headline">¶</a></h2>
+<p>Finally, we provide the <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomRankPerformanceTableau" title="randomPerfTabs.RandomRankPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomPerfTabs.RandomRankPerformanceTableau</span></code></a> class for generating multiple criteria ranked performance tableaux, i.e. on each criterion, all decision action’s evaluations appear linearly ordered without ties.</p>
+<p>This type of random performance tableau is matching the <a class="reference internal" href="techDoc.html#votingProfiles.RandomLinearVotingProfile" title="votingProfiles.RandomLinearVotingProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">votingProfiles.RandomLinearVotingProfile</span></code></a> class provided by the <a class="reference internal" href="techDoc.html#module-votingProfiles" title="votingProfiles"><code class="xref py py-mod docutils literal notranslate"><span class="pre">votingProfiles</span></code></a> module.</p>
 <dl>
 <dt><em>Parameters</em>:</dt><dd><ul>
 <li><p>number of actions,</p></li>
@@ -2638,7 +2652,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>We need to rank without ties a set <em>X</em> of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued <em>strict outranking</em> characteristics, i.e. <img class="math" src="_images/math/8b67fdd1fec2d221cdc78aa20ee647a5f54a2b20.png" alt="r(x\, &gt; \, y)"/> for all <em>x</em>, <em>y</em> in <em>X</em> (see <a class="reference internal" href="#codual-digraph-label"><span class="std std-ref">The strict outranking digraph</span></a> and <a class="reference internal" href="#bis-2013" id="id27"><span>[BIS-2013]</span></a>).</p>
 <p>Let us consider a didactic outranking digraph <em>g</em> generated from a random <a class="reference internal" href="#cost-benefit-performance-tableau-label"><span class="std std-ref">Cost-Benefit performance tableau</span></a> concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding <em>strict outranking digraph</em> with a <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> as follows.</p>
 <div class="literal-block-wrapper docutils container" id="strictoutranking">
-<div class="code-block-caption"><span class="caption-number">Listing 17 </span><span class="caption-text">Random bipolar-valued strict outranking relation characteristics</span><a class="headerlink" href="#strictoutranking" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 21 </span><span class="caption-text">Random bipolar-valued strict outranking relation characteristics</span><a class="headerlink" href="#strictoutranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2679,7 +2693,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <p>Some ranking rules will work on the associated <strong>Condorcet Digraph</strong>, i.e. the corresponding <em>strict median cut</em> polarised digraph.</p>
 <div class="literal-block-wrapper docutils container" id="polarisedastrictoutranking">
-<div class="code-block-caption"><span class="caption-number">Listing 18 </span><span class="caption-text">Median cut polarised strict outranking relation characteristics</span><a class="headerlink" href="#polarisedastrictoutranking" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 22 </span><span class="caption-text">Median cut polarised strict outranking relation characteristics</span><a class="headerlink" href="#polarisedastrictoutranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2753,7 +2767,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <h2><a class="toc-backref" href="#id192">The <em>Copeland</em> ranking</a><a class="headerlink" href="#the-copeland-ranking" title="Permalink to this headline">¶</a></h2>
 <p><em>Copeland</em>’s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the median cut strict outranking digraph <em>ccd</em>. The rule computes for each alternative a score resulting from the sum of the differences between the crisp <strong>strict outranking</strong> characteristics <img class="math" src="_images/math/81f6903323c7dd650c516d24868431936ec3972d.png" alt="r(x\, &gt; \,y)_{&gt;0}"/> and the crisp <strong>strict outranked</strong> characteristics <img class="math" src="_images/math/962a674d6063ab93e929b0fd3b991ea40ace270c.png" alt="r(y\, &gt; \, x)_{&gt;0}"/>  for all pairs of alternatives where <em>y</em> is different from <em>x</em>. The alternatives are ranked in decreasing order of these <em>Copeland</em> scores; ties, the case given, being resolved by a lexicographical rule.</p>
 <div class="literal-block-wrapper docutils container" id="copelandranking">
-<div class="code-block-caption"><span class="caption-number">Listing 19 </span><span class="caption-text">Computing a <em>Copeland</em> Ranking</span><a class="headerlink" href="#copelandranking" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 23 </span><span class="caption-text">Computing a <em>Copeland</em> Ranking</span><a class="headerlink" href="#copelandranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2784,10 +2798,10 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Alternative <em>a5</em> obtains the best <em>Copeland</em> score (+12), followed by alternatives <em>a1</em>, <em>a6</em> and <em>a7</em> with same score (+2); following the lexicographic rule, <em>a1</em> is hence ranked before <em>a6</em> and <em>a6</em> before <em>a7</em>. Same situation is observed for <em>a4</em> and <em>a9</em> with a score of -3 (see <a class="reference internal" href="#copelandranking"><span class="std std-numref">Listing 19</span></a> Lines 4-12).</p>
-<p><em>Copeland</em>’s ranking rule appears in fact <strong>invariant</strong> under the <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> and renders a same linear order indifferently from digraphs <em>g</em> or <em>gcd</em> . The resulting ranking (see <a class="reference internal" href="#copelandranking"><span class="std std-numref">Listing 19</span></a> Line 14) is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal <em>Kendall</em> sense (see <a class="reference internal" href="#copelandcorrelationindexes"><span class="std std-numref">Listing 20</span></a>).</p>
+<p>Alternative <em>a5</em> obtains the best <em>Copeland</em> score (+12), followed by alternatives <em>a1</em>, <em>a6</em> and <em>a7</em> with same score (+2); following the lexicographic rule, <em>a1</em> is hence ranked before <em>a6</em> and <em>a6</em> before <em>a7</em>. Same situation is observed for <em>a4</em> and <em>a9</em> with a score of -3 (see <a class="reference internal" href="#copelandranking"><span class="std std-numref">Listing 23</span></a> Lines 4-12).</p>
+<p><em>Copeland</em>’s ranking rule appears in fact <strong>invariant</strong> under the <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> and renders a same linear order indifferently from digraphs <em>g</em> or <em>gcd</em> . The resulting ranking (see <a class="reference internal" href="#copelandranking"><span class="std std-numref">Listing 23</span></a> Line 14) is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal <em>Kendall</em> sense (see <a class="reference internal" href="#copelandcorrelationindexes"><span class="std std-numref">Listing 24</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="copelandcorrelationindexes">
-<div class="code-block-caption"><span class="caption-number">Listing 20 </span><span class="caption-text">Checking the quality of the <em>Copeland</em> Ranking</span><a class="headerlink" href="#copelandcorrelationindexes" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 24 </span><span class="caption-text">Checking the quality of the <em>Copeland</em> Ranking</span><a class="headerlink" href="#copelandcorrelationindexes" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -2805,7 +2819,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>With an epistemic determination level of 0.230, the <em>extended Kendall tau</em> index (see <a class="reference internal" href="#bis-2012" id="id29"><span>[BIS-2012]</span></a>) is in fact computed on 61.5% (100.0 x (1.0 + 0.23)/2) of the pairwise strict outranking comparisons. Furthermore, the bipolar-valued <em>relational equivalence</em> characteristics between the strict outranking relation and the <em>Copeland</em> ranking equals +0.107, i.e. a <em>majority</em> of 55.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding <em>Copeland</em> ranking.</p>
 <p>The <em>Copeland</em> scores deliver actually only a unique <em>weak ranking</em>, i.e. a ranking with potential ties. This weak ranking may be constructed with the <a class="reference internal" href="techDoc.html#transitiveDigraphs.WeakCopelandOrder" title="transitiveDigraphs.WeakCopelandOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.WeakCopelandOrder</span></code></a> class.</p>
 <div class="literal-block-wrapper docutils container" id="weakcopelandranking">
-<div class="code-block-caption"><span class="caption-number">Listing 21 </span><span class="caption-text">Computing a weak <em>Copeland</em> ranking</span><a class="headerlink" href="#weakcopelandranking" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 25 </span><span class="caption-text">Computing a weak <em>Copeland</em> ranking</span><a class="headerlink" href="#weakcopelandranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2828,9 +2842,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>We recover in <a class="reference internal" href="#weakcopelandranking"><span class="std std-numref">Listing 21</span></a> above, the ranking with ties delivered by the <em>Copeland</em> scores (see <a class="reference internal" href="#copelandranking"><span class="std std-numref">Listing 19</span></a>). The bracketed numbers indicate that this weak ranking is certainly valid. We may draw its corresponding <em>Hasse</em> diagram (see <a class="reference internal" href="#weakcopelandrankingdrawing"><span class="std std-numref">Listing 22</span></a>).</p>
+<p>We recover in <a class="reference internal" href="#weakcopelandranking"><span class="std std-numref">Listing 25</span></a> above, the ranking with ties delivered by the <em>Copeland</em> scores (see <a class="reference internal" href="#copelandranking"><span class="std std-numref">Listing 23</span></a>). The bracketed numbers indicate that this weak ranking is certainly valid. We may draw its corresponding <em>Hasse</em> diagram (see <a class="reference internal" href="#weakcopelandrankingdrawing"><span class="std std-numref">Listing 26</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="weakcopelandrankingdrawing">
-<div class="code-block-caption"><span class="caption-number">Listing 22 </span><span class="caption-text">Drawing a weak <em>Copeland</em> ranking</span><a class="headerlink" href="#weakcopelandrankingdrawing" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 26 </span><span class="caption-text">Drawing a weak <em>Copeland</em> ranking</span><a class="headerlink" href="#weakcopelandrankingdrawing" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2865,7 +2879,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span id="netflows-ranking-label"></span><h2><a class="toc-backref" href="#id193">The <em>NetFlows</em> ranking</a><a class="headerlink" href="#the-netflows-ranking" title="Permalink to this headline">¶</a></h2>
 <p>The valued version of the <em>Copeland</em> rule, called <strong>NetFlows</strong> rule, computes for each alternative <em>x</em> a <em>net flow</em> score,  i.e. the sum of the differences between the <strong>strict outranking</strong> characteristics <img class="math" src="_images/math/1a41461c251febdacb2b5d91ea15066b982188bf.png" alt="r(x\, &gt; \,y)"/> and the <strong>strict outranked</strong> characteristics <img class="math" src="_images/math/dad233e2d3a93c797174c851923036e3421d1ddf.png" alt="r(y\, &gt; \,x)"/> for all pairs of alternatives where <em>y</em> is different from <em>x</em>.</p>
 <div class="literal-block-wrapper docutils container" id="netflowsranking">
-<div class="code-block-caption"><span class="caption-number">Listing 23 </span><span class="caption-text">Computing a <em>NetFlows</em> ranking</span><a class="headerlink" href="#netflowsranking" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 27 </span><span class="caption-text">Computing a <em>NetFlows</em> ranking</span><a class="headerlink" href="#netflowsranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2900,11 +2914,11 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>It is worthwhile noticing again, that similar to the <em>Copeland</em> ranking rule seen before, the <em>NetFlows</em> ranking rule is also <strong>invariant</strong> under the <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> and delivers the same ranking result indifferently from digraphs <em>g</em> or <em>gcd</em> (see <a class="reference internal" href="#netflowsranking"><span class="std std-numref">Listing 23</span></a> Line 14).</p>
-<p>In our example here, the <em>NetFlows</em> scores deliver  a ranking <em>without ties</em> which is rather different from the one delivered by <em>Copeland</em>’s rule (see <a class="reference internal" href="#netflowsranking"><span class="std std-numref">Listing 23</span></a> Line 16). It may happen, however, that we obtain, as with the <em>Copeland</em> scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a <em>weak ranking</em> with the corresponding <a class="reference internal" href="techDoc.html#transitiveDigraphs.WeakNetFlowsOrder" title="transitiveDigraphs.WeakNetFlowsOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.WeakNetFlowsOrder</span></code></a> class.</p>
-<p>The <strong>NetFlows</strong> ranking result appears to be slightly better correlated (+0.638) with the given outranking relation than its crisp cousin, the <em>Copeland</em> ranking (see <a class="reference internal" href="#copelandcorrelationindexes"><span class="std std-numref">Listing 20</span></a> Lines 4-6).</p>
+<p>It is worthwhile noticing again, that similar to the <em>Copeland</em> ranking rule seen before, the <em>NetFlows</em> ranking rule is also <strong>invariant</strong> under the <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> and delivers the same ranking result indifferently from digraphs <em>g</em> or <em>gcd</em> (see <a class="reference internal" href="#netflowsranking"><span class="std std-numref">Listing 27</span></a> Line 14).</p>
+<p>In our example here, the <em>NetFlows</em> scores deliver  a ranking <em>without ties</em> which is rather different from the one delivered by <em>Copeland</em>’s rule (see <a class="reference internal" href="#netflowsranking"><span class="std std-numref">Listing 27</span></a> Line 16). It may happen, however, that we obtain, as with the <em>Copeland</em> scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a <em>weak ranking</em> with the corresponding <a class="reference internal" href="techDoc.html#transitiveDigraphs.WeakNetFlowsOrder" title="transitiveDigraphs.WeakNetFlowsOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.WeakNetFlowsOrder</span></code></a> class.</p>
+<p>The <strong>NetFlows</strong> ranking result appears to be slightly better correlated (+0.638) with the given outranking relation than its crisp cousin, the <em>Copeland</em> ranking (see <a class="reference internal" href="#copelandcorrelationindexes"><span class="std std-numref">Listing 24</span></a> Lines 4-6).</p>
 <div class="literal-block-wrapper docutils container" id="netflowscorrelationindexes">
-<div class="code-block-caption"><span class="caption-number">Listing 24 </span><span class="caption-text">Checking the quality of the <em>NetFlows</em> Ranking</span><a class="headerlink" href="#netflowscorrelationindexes" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 28 </span><span class="caption-text">Checking the quality of the <em>NetFlows</em> Ranking</span><a class="headerlink" href="#netflowscorrelationindexes" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -2924,9 +2938,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <div class="section" id="kemeny-rankings">
 <h2><a class="toc-backref" href="#id194"><em>Kemeny</em> rankings</a><a class="headerlink" href="#kemeny-rankings" title="Permalink to this headline">¶</a></h2>
-<p>A <strong>Kemeny</strong> ranking is a linear order which is <em>closest</em>, in the sense of the ordinal <em>Kendall</em> distance (see <a class="reference internal" href="#bis-2012" id="id30"><span>[BIS-2012]</span></a>), to the given valued outranking digraphs <em>g</em> or <em>gcd</em>. The rule is indeed again <em>invariant</em> under the <em>codual</em> transform. As <em>Kemeny</em>’s rule proceeds by inspecting all possible permutations of the decision alternatives, it is unfortunately only computable for tiny outranking digraphs and the class constructor assumes by default that the order of the digraph does not exceed 7 (7! = 5040 permutations to inspect, see <a class="reference internal" href="#kemenyranking"><span class="std std-numref">Listing 25</span></a> Line 2).</p>
+<p>A <strong>Kemeny</strong> ranking is a linear order which is <em>closest</em>, in the sense of the ordinal <em>Kendall</em> distance (see <a class="reference internal" href="#bis-2012" id="id30"><span>[BIS-2012]</span></a>), to the given valued outranking digraphs <em>g</em> or <em>gcd</em>. The rule is indeed again <em>invariant</em> under the <em>codual</em> transform. As <em>Kemeny</em>’s rule proceeds by inspecting all possible permutations of the decision alternatives, it is unfortunately only computable for tiny outranking digraphs and the class constructor assumes by default that the order of the digraph does not exceed 7 (7! = 5040 permutations to inspect, see <a class="reference internal" href="#kemenyranking"><span class="std std-numref">Listing 29</span></a> Line 2).</p>
 <div class="literal-block-wrapper docutils container" id="kemenyranking">
-<div class="code-block-caption"><span class="caption-number">Listing 25 </span><span class="caption-text">Computing a <em>Kemeny</em> ranking</span><a class="headerlink" href="#kemenyranking" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 29 </span><span class="caption-text">Computing a <em>Kemeny</em> ranking</span><a class="headerlink" href="#kemenyranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2949,10 +2963,10 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>So, <strong>+0.779</strong> represents the <em>highest possible</em> ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking digraph (see <a class="reference internal" href="#kemenyranking"><span class="std std-numref">Listing 25</span></a> Lines 7-10).</p>
+<p>So, <strong>+0.779</strong> represents the <em>highest possible</em> ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking digraph (see <a class="reference internal" href="#kemenyranking"><span class="std std-numref">Listing 29</span></a> Lines 7-10).</p>
 <p>A <em>Kemeny</em> ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example here, we obtain in fact two optimal <em>Kemeny</em> rankings with a same <strong>maximal</strong> <em>Kemeny</em> index of 12.967 .</p>
 <div class="literal-block-wrapper docutils container" id="optimalkemeny">
-<div class="code-block-caption"><span class="caption-number">Listing 26 </span><span class="caption-text">Optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#optimalkemeny" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 30 </span><span class="caption-text">Optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#optimalkemeny" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -2967,7 +2981,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <p>We may visualize the partial order defined by the <a class="reference internal" href="#epistemic-fusion-label"><span class="std std-ref">epistemic disjunction</span></a> of both optimal <em>Kemeny</em> rankings by using the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingsFusion" title="transitiveDigraphs.RankingsFusion"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.RankingsFusion</span></code></a> class as follows.</p>
 <div class="literal-block-wrapper docutils container" id="kemenyrankingsfusion">
-<div class="code-block-caption"><span class="caption-number">Listing 27 </span><span class="caption-text">Computing the epistemic disjunction of all optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#kemenyrankingsfusion" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 31 </span><span class="caption-text">Computing the epistemic disjunction of all optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#kemenyrankingsfusion" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3002,13 +3016,13 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <a class="reference internal image-reference" href="_images/tutorialKemeny.png"><img alt="_images/tutorialKemeny.png" src="_images/tutorialKemeny.png" style="width: 175pt;" /></a>
 <p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">Epistemic disjunction of optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#tutorialkemeny" title="Permalink to this image">¶</a></p>
 </div>
-<p>It is interesting to notice in <a class="reference internal" href="#tutorialkemeny"><span class="std std-numref">Fig. 21</span></a> and <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 26</span></a>, that both <em>Kemeny</em> rankings only differ in their respective positioning of alternative <em>a8</em>; either before or after alternatives <em>a9</em>, <em>a4</em> and <em>a1</em>.</p>
+<p>It is interesting to notice in <a class="reference internal" href="#tutorialkemeny"><span class="std std-numref">Fig. 21</span></a> and <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 30</span></a>, that both <em>Kemeny</em> rankings only differ in their respective positioning of alternative <em>a8</em>; either before or after alternatives <em>a9</em>, <em>a4</em> and <em>a1</em>.</p>
 </div>
 <div class="section" id="slater-rankings">
 <h2><a class="toc-backref" href="#id195"><em>Slater</em> rankings</a><a class="headerlink" href="#slater-rankings" title="Permalink to this headline">¶</a></h2>
 <p>The <strong>Slater</strong> ranking rule is identical to <em>Kemeny</em>’s, but it is working, instead, on the <em>median cut polarised</em> digraph. <em>Slater</em>’s ranking rule is also <em>invariant</em> under the <em>codual</em> transform and delivers again indifferently on <em>g</em> or <em>gcd</em> the following results.</p>
 <div class="literal-block-wrapper docutils container" id="slaterranking">
-<div class="code-block-caption"><span class="caption-number">Listing 28 </span><span class="caption-text">Computing a <em>Slater</em> ranking</span><a class="headerlink" href="#slaterranking" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 32 </span><span class="caption-text">Computing a <em>Slater</em> ranking</span><a class="headerlink" href="#slaterranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3037,9 +3051,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>We notice in <a class="reference internal" href="#slaterranking"><span class="std std-numref">Listing 28</span></a> Line 7 that the first <em>Slater</em> ranking is a rather good fit (+0.676), slightly better apparently than the <em>NetFlows</em> ranking result (+638). However, there are in fact 7 such potentially optimal <em>Slater</em> rankings (see <a class="reference internal" href="#slaterranking"><span class="std std-numref">Listing 28</span></a> Line 11). The corresponding <a class="reference internal" href="#epistemic-fusion-label"><span class="std std-ref">epistemic disjunction</span></a> gives the following partial ordering.</p>
+<p>We notice in <a class="reference internal" href="#slaterranking"><span class="std std-numref">Listing 32</span></a> Line 7 that the first <em>Slater</em> ranking is a rather good fit (+0.676), slightly better apparently than the <em>NetFlows</em> ranking result (+638). However, there are in fact 7 such potentially optimal <em>Slater</em> rankings (see <a class="reference internal" href="#slaterranking"><span class="std std-numref">Listing 32</span></a> Line 11). The corresponding <a class="reference internal" href="#epistemic-fusion-label"><span class="std std-ref">epistemic disjunction</span></a> gives the following partial ordering.</p>
 <div class="literal-block-wrapper docutils container" id="slaterrankingsfusion">
-<div class="code-block-caption"><span class="caption-number">Listing 29 </span><span class="caption-text">Computing the epistemic disjunction of optimal <em>Slater</em> rankings</span><a class="headerlink" href="#slaterrankingsfusion" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 33 </span><span class="caption-text">Computing the epistemic disjunction of optimal <em>Slater</em> rankings</span><a class="headerlink" href="#slaterrankingsfusion" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3078,13 +3092,13 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p><strong>Kohler</strong>’s <em>ranking-by-choosing</em> rule can be formulated like this.</p>
 <p>At step <em>i</em> (<em>i</em> goes from 1 to <em>n</em>) do the following:</p>
 <ol class="arabic simple">
-<li><p>Compute for each row of the bipolar-valued <em>strict</em> outranking relation table (see <a class="reference internal" href="#strictoutranking"><span class="std std-numref">Listing 17</span></a>) the smallest value;</p></li>
+<li><p>Compute for each row of the bipolar-valued <em>strict</em> outranking relation table (see <a class="reference internal" href="#strictoutranking"><span class="std std-numref">Listing 21</span></a>) the smallest value;</p></li>
 <li><p>Select the row where this minimum is maximal. Ties are resolved in lexicographic order;</p></li>
 <li><p>Put the selected decision alternative at rank <em>i</em>;</p></li>
 <li><p>Delete the corresponding row and column from the relation table and restart until the table is empty.</p></li>
 </ol>
 <div class="literal-block-wrapper docutils container" id="kohlerranking">
-<div class="code-block-caption"><span class="caption-number">Listing 30 </span><span class="caption-text">Computing a <em>Kohler</em> ranking</span><a class="headerlink" href="#kohlerranking" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 34 </span><span class="caption-text">Computing a <em>Kohler</em> ranking</span><a class="headerlink" href="#kohlerranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3107,7 +3121,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>With this <em>min-max</em> lexicographic <em>ranking-by-choosing</em> strategy, we find a correlation result (+0.747) that is until now clearly the nearest to an optimal <em>Kemeny</em> ranking (see <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 26</span></a>). Only two adjacent pairs: <em>[a6, a7]</em> and <em>[a8, a9]</em> are actually inverted here. Notice that <em>Kohler</em>’s ranking rule, contrary to the previously mentioned rules, is <strong>not</strong> <em>invariant</em> under the <em>codual</em> transform and requires to work on the <em>strict outranking</em> digraph <em>gcd</em> for a better correlation result.</p>
+<p>With this <em>min-max</em> lexicographic <em>ranking-by-choosing</em> strategy, we find a correlation result (+0.747) that is until now clearly the nearest to an optimal <em>Kemeny</em> ranking (see <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 30</span></a>). Only two adjacent pairs: <em>[a6, a7]</em> and <em>[a8, a9]</em> are actually inverted here. Notice that <em>Kohler</em>’s ranking rule, contrary to the previously mentioned rules, is <strong>not</strong> <em>invariant</em> under the <em>codual</em> transform and requires to work on the <em>strict outranking</em> digraph <em>gcd</em> for a better correlation result.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -3127,14 +3141,14 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Noticing that the <em>NetFlows</em> score of an alternative <em>x</em> represents in fact a bipolar-valued characteristic of the assertion ‘<strong>alternative x is ranked first</strong>’, we may enhance <em>Kohler</em>’s or <em>Arrow-Raynaud</em>’s rules by replacing the <em>min-max</em>, respectively the <em>max-min</em>, strategy with an <strong>iterated</strong> maximal, respectively its <em>dual</em> minimal, <em>Netflows</em> score selection.</p>
 <p>For a ranking (resp. an ordering) result, at step <em>i</em> (<em>i</em> goes from 1 to <em>n</em>) do the following:</p>
 <ol class="arabic simple">
-<li><p>Compute for each row of the bipolar-valued outranking relation table (see <a class="reference internal" href="#strictoutranking"><span class="std std-numref">Listing 17</span></a>) the corresponding <a class="reference internal" href="#netflows-ranking-label"><span class="std std-ref">net flow score</span></a> ;</p></li>
+<li><p>Compute for each row of the bipolar-valued outranking relation table (see <a class="reference internal" href="#strictoutranking"><span class="std std-numref">Listing 21</span></a>) the corresponding <a class="reference internal" href="#netflows-ranking-label"><span class="std std-ref">net flow score</span></a> ;</p></li>
 <li><p>Select the row where this score is maximal (resp. minimal); ties being resolved by lexicographic order;</p></li>
 <li><p>Put the corresponding decision alternative at rank (resp. order) <em>i</em>;</p></li>
 <li><p>Delete the corresponding row and column from the relation table and restart until the table is empty.</p></li>
 </ol>
-<p>A first <em>advantage</em> is that the so modified <em>Kohler</em>’s and  <em>Arrow-Raynaud</em>’s rules become <strong>invariant</strong> under the <em>codual</em> transform. And we may get both the <em>ranking-by-choosing</em> as well as the <em>ordering-by-choosing</em> results with the <a class="reference internal" href="techDoc.html#linearOrders.IteratedNetFlowsRanking" title="linearOrders.IteratedNetFlowsRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.IteratedNetFlowsRanking</span></code></a> class constructor (see <a class="reference internal" href="#iteratednetflowsranking"><span class="std std-numref">Listing 31</span></a> Lines 12-13).</p>
+<p>A first <em>advantage</em> is that the so modified <em>Kohler</em>’s and  <em>Arrow-Raynaud</em>’s rules become <strong>invariant</strong> under the <em>codual</em> transform. And we may get both the <em>ranking-by-choosing</em> as well as the <em>ordering-by-choosing</em> results with the <a class="reference internal" href="techDoc.html#linearOrders.IteratedNetFlowsRanking" title="linearOrders.IteratedNetFlowsRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.IteratedNetFlowsRanking</span></code></a> class constructor (see <a class="reference internal" href="#iteratednetflowsranking"><span class="std std-numref">Listing 35</span></a> Lines 12-13).</p>
 <div class="literal-block-wrapper docutils container" id="iteratednetflowsranking">
-<div class="code-block-caption"><span class="caption-number">Listing 31 </span><span class="caption-text">Ordering-by-choosing with iterated minimal <em>NetFlows</em> scores</span><a class="headerlink" href="#iteratednetflowsranking" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 35 </span><span class="caption-text">Ordering-by-choosing with iterated minimal <em>NetFlows</em> scores</span><a class="headerlink" href="#iteratednetflowsranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3201,8 +3215,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>The iterated <em>NetFlows</em> ranking and its <em>dual</em>, the iterated <em>NetFlows</em> ordering, do not usually deliver both the same result (<a class="reference internal" href="#iteratednetflowsranking"><span class="std std-numref">Listing 31</span></a> Lines 18 and 26). With our example outranking digraph <em>g</em> for instance, it is the <em>ordering-by-choosing</em> result that obtains a slightly better correlation with the given outranking digraph <em>g</em> (+0.751), a result that is also slightly better than <em>Kohler</em>’s original result (+0.747, see <a class="reference internal" href="#kohlerranking"><span class="std std-numref">Listing 30</span></a> Line 8).</p>
-<p>With different <em>ranking-by-choosing</em> and <em>ordering-by-choosing</em> results, it may be useful to <em>fuse</em> now, similar to what we have done before with <em>Kemeny</em>’s and <em>Slaters</em>’s optimal rankings (see <a class="reference internal" href="#kemenyrankingsfusion"><span class="std std-numref">Listing 27</span></a> and <a class="reference internal" href="#slaterrankingsfusion"><span class="std std-numref">Listing 29</span></a>), both, the iterated <em>NetFlows</em> ranking and ordering into a partial ranking. But we are hence back to the practical problem of what linear ranking should we eventually adaopt ?</p>
+<p>The iterated <em>NetFlows</em> ranking and its <em>dual</em>, the iterated <em>NetFlows</em> ordering, do not usually deliver both the same result (<a class="reference internal" href="#iteratednetflowsranking"><span class="std std-numref">Listing 35</span></a> Lines 18 and 26). With our example outranking digraph <em>g</em> for instance, it is the <em>ordering-by-choosing</em> result that obtains a slightly better correlation with the given outranking digraph <em>g</em> (+0.751), a result that is also slightly better than <em>Kohler</em>’s original result (+0.747, see <a class="reference internal" href="#kohlerranking"><span class="std std-numref">Listing 34</span></a> Line 8).</p>
+<p>With different <em>ranking-by-choosing</em> and <em>ordering-by-choosing</em> results, it may be useful to <em>fuse</em> now, similar to what we have done before with <em>Kemeny</em>’s and <em>Slaters</em>’s optimal rankings (see <a class="reference internal" href="#kemenyrankingsfusion"><span class="std std-numref">Listing 31</span></a> and <a class="reference internal" href="#slaterrankingsfusion"><span class="std std-numref">Listing 33</span></a>), both, the iterated <em>NetFlows</em> ranking and ordering into a partial ranking. But we are hence back to the practical problem of what linear ranking should we eventually adaopt ?</p>
 <p>Let us finally mention a Last interesting <em>ranking-by-choosing</em> approach.</p>
 </div>
 <div class="section" id="tideman-s-ranked-pairs-rule">
@@ -3219,7 +3233,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </ol>
 <p>With our didactic outranking digraph <em>g</em>, we get the following result.</p>
 <div class="literal-block-wrapper docutils container" id="rankedpairsranking">
-<div class="code-block-caption"><span class="caption-number">Listing 32 </span><span class="caption-text">Computing a <em>RankedPairs</em> ranking</span><a class="headerlink" href="#rankedpairsranking" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 36 </span><span class="caption-text">Computing a <em>RankedPairs</em> ranking</span><a class="headerlink" href="#rankedpairsranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -3256,9 +3270,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="section" id="ranking-big-performance-tableaux">
 <h2><a class="toc-backref" href="#id198">Ranking big performance tableaux</a><a class="headerlink" href="#ranking-big-performance-tableaux" title="Permalink to this headline">¶</a></h2>
 <p>However, none of the previous ranking heuristics, using essentially only the information given by the pairwise outranking characteristics, are scalable for <strong>big outranking digraphs</strong> gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into <strong>ordered quantiles equivalence classes</strong>. This decomposition will lead to a <em>pre-ranked sparse</em> outranking digraph.</p>
-<p>In the coding example in <a class="reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 33</span></a>, we generate for instance, by using multiprocessing techniques, first (Lines 2-3), a cost benefit performance tableau of 100 decision alternatives and, secondly (Lines 4-5), we construct a <strong>pre-ranked sparse outranking digraph</strong> instance called <em>bg</em>. Notice by the way the <em>BigData</em> flag (Line 3) used here for generating a parsimonious performance tableau.</p>
+<p>In the coding example in <a class="reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 37</span></a>, we generate for instance, by using multiprocessing techniques, first (Lines 2-3), a cost benefit performance tableau of 100 decision alternatives and, secondly (Lines 4-5), we construct a <strong>pre-ranked sparse outranking digraph</strong> instance called <em>bg</em>. Notice by the way the <em>BigData</em> flag (Line 3) used here for generating a parsimonious performance tableau.</p>
 <div class="literal-block-wrapper docutils container" id="prerankedoutrankingdigraph">
-<div class="code-block-caption"><span class="caption-number">Listing 33 </span><span class="caption-text">Computing a <em>pre-ranked</em> outranking digraph</span><a class="headerlink" href="#prerankedoutrankingdigraph" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 37 </span><span class="caption-text">Computing a <em>pre-ranked</em> outranking digraph</span><a class="headerlink" href="#prerankedoutrankingdigraph" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3313,7 +3327,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <p>The total run time of the <a class="reference internal" href="techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="sparseOutrankingDigraphs.PreRankedOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sparseOutrankingDigraphs.PreRankedOutrankingDigraph</span></code></a> constructor is less than a fifth of a second. The corresponding multiple criteria deciles sorting leads to 20 quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows.</p>
 <div class="literal-block-wrapper docutils container" id="quantilesdecomposition">
-<div class="code-block-caption"><span class="caption-number">Listing 34 </span><span class="caption-text">Showing the quantiles decomposiion of a pre-ranked outranking digraph</span><a class="headerlink" href="#quantilesdecomposition" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 38 </span><span class="caption-text">Showing the quantiles decomposiion of a pre-ranked outranking digraph</span><a class="headerlink" href="#quantilesdecomposition" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -3364,10 +3378,10 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>The best decile (]80%-90%]) gathers decision alternatives <em>49</em>, <em>10</em>, and <em>52</em>. Worst decile (]10%-20%]) gathers alternatives <em>9</em>, <em>59</em>, and <em>23</em> (see <a class="reference internal" href="#quantilesdecomposition"><span class="std std-numref">Listing 34</span></a> Lines 3 and 24).</p>
+<p>The best decile (]80%-90%]) gathers decision alternatives <em>49</em>, <em>10</em>, and <em>52</em>. Worst decile (]10%-20%]) gathers alternatives <em>9</em>, <em>59</em>, and <em>23</em> (see <a class="reference internal" href="#quantilesdecomposition"><span class="std std-numref">Listing 38</span></a> Lines 3 and 24).</p>
 <p>Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the <em>Copeland</em> and the <em>NetFlows</em> rules. The eventually obtained linear ordering (from the worst to best) is the following.</p>
 <div class="literal-block-wrapper docutils container" id="boostedorder">
-<div class="code-block-caption"><span class="caption-number">Listing 35 </span><span class="caption-text">Showing the componentwise <em>Copeland</em> ranking</span><a class="headerlink" href="#boostedorder" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 39 </span><span class="caption-text">Showing the componentwise <em>Copeland</em> ranking</span><a class="headerlink" href="#boostedorder" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -3390,7 +3404,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <p>Alternative <em>52</em> appears <em>first ranked</em>, whereas alternative <em>59</em> is <em>last ranked</em>. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking relation.</p>
 <div class="literal-block-wrapper docutils container" id="prerankeddigrapgcorrelationindexes">
-<div class="code-block-caption"><span class="caption-number">Listing 36 </span><span class="caption-text">Quality of <em>Copeland</em>’s ranking rule for pre-ranked digraphs</span><a class="headerlink" href="#prerankeddigrapgcorrelationindexes" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 40 </span><span class="caption-text">Quality of <em>Copeland</em>’s ranking rule for pre-ranked digraphs</span><a class="headerlink" href="#prerankeddigrapgcorrelationindexes" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -8526,9 +8540,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <li><a class="reference internal" href="#generating-random-performance-tableaux">Generating random performance tableaux</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#generating-standard-random-performance-tableaux">Generating standard random performance tableaux</a></li>
-<li><a class="reference internal" href="#generating-random-cost-benefit-tableaux">Generating random Cost-Benefit tableaux</a></li>
-<li><a class="reference internal" href="#generating-three-objectives-tableaux">Generating three objectives tableaux</a></li>
-<li><a class="reference internal" href="#generating-random-linearly-ranked-performances">Generating random linearly ranked performances</a></li>
+<li><a class="reference internal" href="#generating-random-cost-benefit-performance-tableaux">Generating random Cost-Benefit performance tableaux</a></li>
+<li><a class="reference internal" href="#generating-random-three-objectives-performance-tableaux">Generating random three objectives performance tableaux</a></li>
+<li><a class="reference internal" href="#generating-random-linearly-ranked-performance-tableaux">Generating random linearly ranked performance tableaux</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#ranking-with-multiple-incommensurable-criteria">Ranking with multiple incommensurable criteria</a><ul>

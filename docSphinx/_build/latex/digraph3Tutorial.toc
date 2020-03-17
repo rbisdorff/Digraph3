@@ -3,9 +3,9 @@
 \contentsline {subsection}{\numberline {1.1}Purpose}{4}{subsection.1.1}
 \contentsline {subsection}{\numberline {1.2}Downloading of the Digraph3 resources}{4}{subsection.1.2}
 \contentsline {subsection}{\numberline {1.3}Starting a Python3 session}{5}{subsection.1.3}
-\contentsline {subsection}{\numberline {1.4}\sphinxstyleliteralintitle {\sphinxupquote {Digraph}} object structure}{5}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.4}\sphinxstyleliteralintitle {\sphinxupquote {Digraph}} object structure}{6}{subsection.1.4}
 \contentsline {subsection}{\numberline {1.5}Permanent storage}{6}{subsection.1.5}
-\contentsline {subsection}{\numberline {1.6}Inspecting a \sphinxstyleliteralintitle {\sphinxupquote {Digraph}} object}{6}{subsection.1.6}
+\contentsline {subsection}{\numberline {1.6}Inspecting a \sphinxstyleliteralintitle {\sphinxupquote {Digraph}} object}{7}{subsection.1.6}
 \contentsline {subsection}{\numberline {1.7}Special classes}{9}{subsection.1.7}
 \contentsline {section}{\numberline {2}Manipulating \sphinxstyleliteralintitle {\sphinxupquote {Digraph}} objects}{10}{section.2}
 \contentsline {subsection}{\numberline {2.1}Random digraph}{11}{subsection.2.1}
@@ -35,10 +35,10 @@
 \contentsline {section}{\numberline {5}Generating random performance tableaux}{44}{section.5}
 \contentsline {subsection}{\numberline {5.1}Introduction}{44}{subsection.5.1}
 \contentsline {subsection}{\numberline {5.2}Generating standard random performance tableaux}{45}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Generating random Cost\sphinxhyphen {}Benefit tableaux}{47}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}Generating three objectives tableaux}{51}{subsection.5.4}
-\contentsline {subsection}{\numberline {5.5}Generating random linearly ranked performances}{55}{subsection.5.5}
-\contentsline {section}{\numberline {6}Ranking with multiple incommensurable criteria}{55}{section.6}
+\contentsline {subsection}{\numberline {5.3}Generating random Cost\sphinxhyphen {}Benefit performance tableaux}{47}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Generating random three objectives performance tableaux}{51}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Generating random linearly ranked performance tableaux}{55}{subsection.5.5}
+\contentsline {section}{\numberline {6}Ranking with multiple incommensurable criteria}{56}{section.6}
 \contentsline {subsection}{\numberline {6.1}The ranking problem}{56}{subsection.6.1}
 \contentsline {subsection}{\numberline {6.2}The \sphinxstyleemphasis {Copeland} ranking}{59}{subsection.6.2}
 \contentsline {subsection}{\numberline {6.3}The \sphinxstyleemphasis {NetFlows} ranking}{61}{subsection.6.3}

@@ -121,6 +121,9 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
    >>> ...
 
 .. code-block:: pycon
+   :name: digraphs
+   :caption: Generating a random digraph instance
+   :linenos:
 
    >>> from randomDigraphs import RandomDigraph
    >>> dg = RandomDigraph(order=5,arcProbability=0.5,seed=101)
@@ -137,10 +140,14 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
     >>> dg.save('tutorialDigraph')
     *--- Saving digraph in file: <tutorialDigraph.py> ---*
 
+From the :py:mod:`randomDigraphs` module we import the :py:class:`randomDigraphs.RandomDigraph` class in order to  generate a *digraph* instance of order 5 - number of nodes or (decision) *actions* - and size 12 - number of directed *arcs* (see :numref:`digraphs` Lines 1-2).
+
+We may directly inspect the content of  python object *dg* (Line 3) 
+
 ``Digraph`` object structure
 ............................
 
-All :py:class:`digraphs.Digraph` objects contain at least the following attributes:
+All :py:class:`digraphs.Digraph` objects contain at least the following attributes (see :numref:`digraphs` Lines 11-12):
 
 0. A **name** attribute, holding usually the actual name of the stored instance that was used to create the instance; 
 1. A collection of digraph nodes called **actions** (decision actions): an ordered dictionary of nodes with at least a 'name' attribute;
@@ -157,7 +164,7 @@ All :py:class:`digraphs.Digraph` objects contain at least the following attribut
 Permanent storage
 .................
 
-The :code:`dg.save('tutorialDigraph')` command (see Line 19 above) stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content.
+The :code:`dg.save('tutorialDigraph')` command (see :numref:`digraphs` Line 13 above) stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content.
 
 .. code-block:: python
    :linenos:
@@ -1082,7 +1089,7 @@ Notice that the importance weights of the voters are *negative*, which means tha
 On generating random linear voting profiles
 ...........................................
 
-By default, the :py:class:`votingProfiles.RandomLinearVotingProfile` class generates random linear voting profiles where every candidates has the same uniform probabilities to be ranked at a certain position by all the voters. The random linear ballots are indeed generating for each voter via a uniform shuffling of the list of candidates.
+By default, the :py:class:`votingProfiles.RandomLinearVotingProfile` class generates random linear voting profiles where every candidates has the same uniform probabilities to be ranked at a certain position by all the voters. For each voter's random linear ballot is indeed generated  via a uniform shuffling of the list of candidates.
 
 In reality, political election data appear quite different. There will usually be different favorite and marginal candidates for each political party. To simulate these aspects into our random generator, we are using two random exponentially distributed polls of the candidates and consider a bipartisan political landscape with a certain random balance (default theoretical party repartition = 0.50) between the two sets of potential party supporters (see :py:class:`votingProfiles.LinearVotingProfile` class). A certain theoretical proportion (default = 0.1) will not support any party.
 
@@ -1596,6 +1603,8 @@ The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of t
 Code example.
 
 .. code-block:: pycon
+   :name: randomPerformanceTableau
+   :caption: Generating a random performance tableau
    :linenos:
 
    >>> from randomPerfTabs import RandomPerformanceTableau
@@ -1636,12 +1645,12 @@ Code example.
 
 .. note::
 
-   Missing (NA) evaluation are registered in a performance tableau as *Decimal('-999')* value (see Line 24). Best and worst performance on each criterion are marked in *light green*, respectively in *light red*.
+   Missing (NA) evaluation are registered in a performance tableau as *Decimal('-999')* value (see :numref:`randomPerformanceTableau` Line 24). Best and worst performance on each criterion are marked in *light green*, respectively in *light red*.
 
 .. _Cost-Benefit-Performance-Tableau-label:
 	    
-Generating random Cost-Benefit tableaux
-.......................................
+Generating random Cost-Benefit performance tableaux
+...................................................
 
 We provide the :py:class:`randomPerfTabs.RandomCBPerformanceTableau` class for generating random *Cost* versus *Benefit* organized performance tableaux following the directives below:
 
@@ -1667,6 +1676,8 @@ We provide the :py:class:`randomPerfTabs.RandomCBPerformanceTableau` class for g
 Example Python session
 
 .. code-block:: pycon
+   :name: randomCBPerformanceTableau
+   :caption: Generating a random Cost-Benefit performance tableau
    :linenos:
 
    >>> from randomPerfTabs import RandomCBPerformanceTableau
@@ -1701,7 +1712,7 @@ Example Python session
       Threshold veto : 73.19 + 0.00x ; percentile:  0.952
     ...
 
-In the example above, we may notice the three types of decision actions (Lines 10-19), as well as the two types (Lines 22-25) of criteria with either an **ordinal** or a **cardinal** performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the **indifference** and 10% below the **preference discriminating threshold**. About 5% will be considered as **considerably large**. More statistics about the generated performances is available as follows.
+In the example above, we may notice the three types of decision actions (:numref:`randomCBPerformanceTableau` Lines 10-19), as well as the two types (Lines 22-25) of criteria with either an **ordinal** or a **cardinal** performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the **indifference** and 10% below the **preference discriminating threshold**. About 5% will be considered as **considerably large**. More statistics about the generated performances is available as follows.
 
 .. code-block:: pycon
    :linenos:
@@ -1779,8 +1790,8 @@ If needed for instance in an R session, a CSV version of the performance tableau
 
 Back to :ref:`Content Table <Tutorial-label>`
 
-Generating three objectives tableaux
-....................................
+Generating random three objectives performance tableaux
+.......................................................
 
 We provide the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account *economical*, *societal* as well as *environmental* aspects.
 
@@ -1812,6 +1823,8 @@ Generator directives are the following:
 Example Python session
 
 .. code-block:: pycon
+   :name: random3ObjectivesPerformanceTableau
+   :caption: Generating a random 3 Objectives performance tableau
    :linenos:
 		     
    >>> from randomPerfTabs import Random3ObjectivesPerformanceTableau
@@ -1842,7 +1855,7 @@ Example Python session
        g12 criterion of objective Env 20
       Total weight: 80.00 (4 criteria)
 
-In the example code above, we notice that 5 *equisignificant* criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the decision actions from the **societal** point of view. 4 *equisignificant* criteria do the same from the **economical**, respectively the **environmental** point of view. The *equiobjectives* directive results hence in a balanced total weight (80.00) for each decision objective. 
+In :numref:`random3ObjectivesPerformanceTableau` above, we notice that 5 *equisignificant* criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the decision actions from the **societal** point of view (Lines 16-21). 4 *equisignificant* criteria do the same from the **economical** (Lines 10-14), respectively the **environmental** point of view (Lines 21-27). The *equiobjectives* directive results hence in a balanced total weight (80.00) for each decision objective. 
 
 .. code-block:: pycon
    :linenos:
@@ -1938,12 +1951,12 @@ A graphviz drawing illustrates the apparent preferential links between the stron
 	   
 Decision action *a26* (Eco+ Soc+ Env-) appears dominating the other decision alternatives, whereas decision action *a30* (Eco- Soc- Env-) appears to be dominated by all the others.
 
-Generating random linearly ranked performances
-..............................................
+Generating random linearly ranked performance tableaux
+......................................................
 
-Finally, we provide the :py:class:`randomPerfTabs.RandomRankPerformanceTableau` class for generating multiple criteria ranked performances, i.e. on each criterion, all decision actions appear linearly ordered without ties.
+Finally, we provide the :py:class:`randomPerfTabs.RandomRankPerformanceTableau` class for generating multiple criteria ranked performance tableaux, i.e. on each criterion, all decision action's evaluations appear linearly ordered without ties.
 
-This type of random performance tableau is matching the :py:class:`votingDigraphs.RandomLinearVotingProfile` class provided by the :py:mod:`votingProfiles` module.  
+This type of random performance tableau is matching the :py:class:`votingProfiles.RandomLinearVotingProfile` class provided by the :py:mod:`votingProfiles` module.  
         
 *Parameters*:
     * number of actions,

@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{March 13, 2020}
+\date{March 17, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -216,7 +216,8 @@ Type \PYG{l+s+s2}{\PYGZdq{}help\PYGZdq{}}, \PYG{l+s+s2}{\PYGZdq{}copyright\PYGZd
        \PYG{l+s+s2}{\PYGZdq{}license\PYGZdq{}} \PYG{k}{for} more information.
 \PYGZgt{}\PYGZgt{}\PYGZgt{} ...
 \end{sphinxVerbatim}
-
+\sphinxSetupCaptionForVerbatim{Generating a random digraph instance}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:digraphs}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg} \PYG{o}{=} \PYG{n}{RandomDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{arcProbability}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{101}\PYG{p}{)}
@@ -234,10 +235,14 @@ Type \PYG{l+s+s2}{\PYGZdq{}help\PYGZdq{}}, \PYG{l+s+s2}{\PYGZdq{}copyright\PYGZd
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{} Saving digraph in file: \PYGZlt{}tutorialDigraph.py\PYGZgt{} \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \end{sphinxVerbatim}
 
+From the \sphinxcode{\sphinxupquote{randomDigraphs}} module we import the \sphinxcode{\sphinxupquote{randomDigraphs.RandomDigraph}} class in order to  generate a \sphinxstyleemphasis{digraph} instance of order 5 \sphinxhyphen{} number of nodes or (decision) \sphinxstyleemphasis{actions} \sphinxhyphen{} and size 12 \sphinxhyphen{} number of directed \sphinxstyleemphasis{arcs} (see \hyperref[\detokenize{tutorial:digraphs}]{Listing \ref{\detokenize{tutorial:digraphs}}} Lines 1\sphinxhyphen{}2).
+
+We may directly inspect the content of  python object \sphinxstyleemphasis{dg} (Line 3)
+
 
 \subsection{\sphinxstyleliteralintitle{\sphinxupquote{Digraph}} object structure}
 \label{\detokenize{tutorial:digraph-object-structure}}
-All \sphinxcode{\sphinxupquote{digraphs.Digraph}} objects contain at least the following attributes:
+All \sphinxcode{\sphinxupquote{digraphs.Digraph}} objects contain at least the following attributes (see \hyperref[\detokenize{tutorial:digraphs}]{Listing \ref{\detokenize{tutorial:digraphs}}} Lines 11\sphinxhyphen{}12):
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \setcounter{enumi}{-1}
@@ -267,7 +272,7 @@ Its associated \sphinxstylestrong{notGamma function} : a dictionary containing t
 
 \subsection{Permanent storage}
 \label{\detokenize{tutorial:permanent-storage}}
-The \sphinxcode{\sphinxupquote{dg.save(\textquotesingle{}tutorialDigraph\textquotesingle{})}} command (see Line 19 above) stores the digraph \sphinxstyleemphasis{dg} in a file named \sphinxcode{\sphinxupquote{tutorialDigraph.py}} with the following content.
+The \sphinxcode{\sphinxupquote{dg.save(\textquotesingle{}tutorialDigraph\textquotesingle{})}} command (see \hyperref[\detokenize{tutorial:digraphs}]{Listing \ref{\detokenize{tutorial:digraphs}}} Line 13 above) stores the digraph \sphinxstyleemphasis{dg} in a file named \sphinxcode{\sphinxupquote{tutorialDigraph.py}} with the following content.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{n}{actions} \PYG{o}{=} \PYG{p}{\PYGZob{}}
@@ -1205,7 +1210,7 @@ Notice that the importance weights of the voters are \sphinxstyleemphasis{negati
 
 \subsection{On generating random linear voting profiles}
 \label{\detokenize{tutorial:on-generating-random-linear-voting-profiles}}
-By default, the \sphinxcode{\sphinxupquote{votingProfiles.RandomLinearVotingProfile}} class generates random linear voting profiles where every candidates has the same uniform probabilities to be ranked at a certain position by all the voters. The random linear ballots are indeed generating for each voter via a uniform shuffling of the list of candidates.
+By default, the \sphinxcode{\sphinxupquote{votingProfiles.RandomLinearVotingProfile}} class generates random linear voting profiles where every candidates has the same uniform probabilities to be ranked at a certain position by all the voters. For each voter’s random linear ballot is indeed generated  via a uniform shuffling of the list of candidates.
 
 In reality, political election data appear quite different. There will usually be different favorite and marginal candidates for each political party. To simulate these aspects into our random generator, we are using two random exponentially distributed polls of the candidates and consider a bipartisan political landscape with a certain random balance (default theoretical party repartition = 0.50) between the two sets of potential party supporters (see \sphinxcode{\sphinxupquote{votingProfiles.LinearVotingProfile}} class). A certain theoretical proportion (default = 0.1) will not support any party.
 
@@ -1692,13 +1697,13 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \phantomsection\label{\detokenize{tutorial:id187}}{\hyperref[\detokenize{tutorial:generating-standard-random-performance-tableaux}]{\sphinxcrossref{Generating standard random performance tableaux}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id188}}{\hyperref[\detokenize{tutorial:generating-random-cost-benefit-tableaux}]{\sphinxcrossref{Generating random Cost\sphinxhyphen{}Benefit tableaux}}}
+\phantomsection\label{\detokenize{tutorial:id188}}{\hyperref[\detokenize{tutorial:generating-random-cost-benefit-performance-tableaux}]{\sphinxcrossref{Generating random Cost\sphinxhyphen{}Benefit performance tableaux}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id189}}{\hyperref[\detokenize{tutorial:generating-three-objectives-tableaux}]{\sphinxcrossref{Generating three objectives tableaux}}}
+\phantomsection\label{\detokenize{tutorial:id189}}{\hyperref[\detokenize{tutorial:generating-random-three-objectives-performance-tableaux}]{\sphinxcrossref{Generating random three objectives performance tableaux}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id190}}{\hyperref[\detokenize{tutorial:generating-random-linearly-ranked-performances}]{\sphinxcrossref{Generating random linearly ranked performances}}}
+\phantomsection\label{\detokenize{tutorial:id190}}{\hyperref[\detokenize{tutorial:generating-random-linearly-ranked-performance-tableaux}]{\sphinxcrossref{Generating random linearly ranked performance tableaux}}}
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -1794,7 +1799,8 @@ missingDataProbability := 0 \textless{}= float \textless{}= 1.0 ; probability of
 \end{itemize}
 
 Code example.
-
+\sphinxSetupCaptionForVerbatim{Generating a random performance tableau}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:randomperformancetableau}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import} \PYG{n}{RandomPerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{RandomPerformanceTableau}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{21}\PYG{p}{,}\PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{13}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
@@ -1835,12 +1841,12 @@ Code example.
 \caption{Browser view on random performance tableau instance}\label{\detokenize{tutorial:id118}}\end{figure}
 
 \begin{sphinxadmonition}{note}{Note:}
-Missing (NA) evaluation are registered in a performance tableau as \sphinxstyleemphasis{Decimal(‘\sphinxhyphen{}999’)} value (see Line 24). Best and worst performance on each criterion are marked in \sphinxstyleemphasis{light green}, respectively in \sphinxstyleemphasis{light red}.
+Missing (NA) evaluation are registered in a performance tableau as \sphinxstyleemphasis{Decimal(‘\sphinxhyphen{}999’)} value (see \hyperref[\detokenize{tutorial:randomperformancetableau}]{Listing \ref{\detokenize{tutorial:randomperformancetableau}}} Line 24). Best and worst performance on each criterion are marked in \sphinxstyleemphasis{light green}, respectively in \sphinxstyleemphasis{light red}.
 \end{sphinxadmonition}
 
 
-\subsection{Generating random Cost\sphinxhyphen{}Benefit tableaux}
-\label{\detokenize{tutorial:generating-random-cost-benefit-tableaux}}\label{\detokenize{tutorial:cost-benefit-performance-tableau-label}}
+\subsection{Generating random Cost\sphinxhyphen{}Benefit performance tableaux}
+\label{\detokenize{tutorial:generating-random-cost-benefit-performance-tableaux}}\label{\detokenize{tutorial:cost-benefit-performance-tableau-label}}
 We provide the \sphinxcode{\sphinxupquote{randomPerfTabs.RandomCBPerformanceTableau}} class for generating random \sphinxstyleemphasis{Cost} versus \sphinxstyleemphasis{Benefit} organized performance tableaux following the directives below:
 \begin{itemize}
 \item {} 
@@ -1891,7 +1897,8 @@ Minimal number of decision actions required is 3 !
 \end{sphinxadmonition}
 
 Example Python session
-
+\sphinxSetupCaptionForVerbatim{Generating a random Cost\sphinxhyphen{}Benefit performance tableau}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:randomcbperformancetableau}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import} \PYG{n}{RandomCBPerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{RandomCBPerformanceTableau}\PYG{p}{(}
@@ -1926,7 +1933,7 @@ Example Python session
 \PYG{g+go}{ ...}
 \end{sphinxVerbatim}
 
-In the example above, we may notice the three types of decision actions (Lines 10\sphinxhyphen{}19), as well as the two types (Lines 22\sphinxhyphen{}25) of criteria with either an \sphinxstylestrong{ordinal} or a \sphinxstylestrong{cardinal} performance measuring scale. In the latter case, by default about 5\% of the random performance differences will be below the \sphinxstylestrong{indifference} and 10\% below the \sphinxstylestrong{preference discriminating threshold}. About 5\% will be considered as \sphinxstylestrong{considerably large}. More statistics about the generated performances is available as follows.
+In the example above, we may notice the three types of decision actions (\hyperref[\detokenize{tutorial:randomcbperformancetableau}]{Listing \ref{\detokenize{tutorial:randomcbperformancetableau}}} Lines 10\sphinxhyphen{}19), as well as the two types (Lines 22\sphinxhyphen{}25) of criteria with either an \sphinxstylestrong{ordinal} or a \sphinxstylestrong{cardinal} performance measuring scale. In the latter case, by default about 5\% of the random performance differences will be below the \sphinxstylestrong{indifference} and 10\% below the \sphinxstylestrong{preference discriminating threshold}. About 5\% will be considered as \sphinxstylestrong{considerably large}. More statistics about the generated performances is available as follows.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showStatistics}\PYG{p}{(}\PYG{p}{)}
@@ -2007,8 +2014,8 @@ If needed for instance in an R session, a CSV version of the performance tableau
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}}
 
 
-\subsection{Generating three objectives tableaux}
-\label{\detokenize{tutorial:generating-three-objectives-tableaux}}
+\subsection{Generating random three objectives performance tableaux}
+\label{\detokenize{tutorial:generating-random-three-objectives-performance-tableaux}}
 We provide the \sphinxcode{\sphinxupquote{randomPerfTabs.Random3ObjectivesPerformanceTableau}} class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account \sphinxstyleemphasis{economical}, \sphinxstyleemphasis{societal} as well as \sphinxstyleemphasis{environmental} aspects.
 
 Each decision action is qualified randomly as performing \sphinxstylestrong{weak} (\sphinxhyphen{}), \sphinxstylestrong{fair} (\textasciitilde{}) or \sphinxstylestrong{good} (+) on each of the three objectives.
@@ -2060,7 +2067,8 @@ Minimal number of decision actions required is 3 !
 \end{sphinxadmonition}
 
 Example Python session
-
+\sphinxSetupCaptionForVerbatim{Generating a random 3 Objectives performance tableau}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:random3objectivesperformancetableau}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import} \PYG{n}{Random3ObjectivesPerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{Random3ObjectivesPerformanceTableau}\PYG{p}{(}
@@ -2091,7 +2099,7 @@ Example Python session
 \PYG{g+go}{   Total weight: 80.00 (4 criteria)}
 \end{sphinxVerbatim}
 
-In the example code above, we notice that 5 \sphinxstyleemphasis{equisignificant} criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the decision actions from the \sphinxstylestrong{societal} point of view. 4 \sphinxstyleemphasis{equisignificant} criteria do the same from the \sphinxstylestrong{economical}, respectively the \sphinxstylestrong{environmental} point of view. The \sphinxstyleemphasis{equiobjectives} directive results hence in a balanced total weight (80.00) for each decision objective.
+In \hyperref[\detokenize{tutorial:random3objectivesperformancetableau}]{Listing \ref{\detokenize{tutorial:random3objectivesperformancetableau}}} above, we notice that 5 \sphinxstyleemphasis{equisignificant} criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the decision actions from the \sphinxstylestrong{societal} point of view (Lines 16\sphinxhyphen{}21). 4 \sphinxstyleemphasis{equisignificant} criteria do the same from the \sphinxstylestrong{economical} (Lines 10\sphinxhyphen{}14), respectively the \sphinxstylestrong{environmental} point of view (Lines 21\sphinxhyphen{}27). The \sphinxstyleemphasis{equiobjectives} directive results hence in a balanced total weight (80.00) for each decision objective.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showActions}\PYG{p}{(}\PYG{p}{)}
@@ -2185,11 +2193,11 @@ A graphviz drawing illustrates the apparent preferential links between the stron
 Decision action \sphinxstyleemphasis{a26} (Eco+ Soc+ Env\sphinxhyphen{}) appears dominating the other decision alternatives, whereas decision action \sphinxstyleemphasis{a30} (Eco\sphinxhyphen{} Soc\sphinxhyphen{} Env\sphinxhyphen{}) appears to be dominated by all the others.
 
 
-\subsection{Generating random linearly ranked performances}
-\label{\detokenize{tutorial:generating-random-linearly-ranked-performances}}
-Finally, we provide the \sphinxcode{\sphinxupquote{randomPerfTabs.RandomRankPerformanceTableau}} class for generating multiple criteria ranked performances, i.e. on each criterion, all decision actions appear linearly ordered without ties.
+\subsection{Generating random linearly ranked performance tableaux}
+\label{\detokenize{tutorial:generating-random-linearly-ranked-performance-tableaux}}
+Finally, we provide the \sphinxcode{\sphinxupquote{randomPerfTabs.RandomRankPerformanceTableau}} class for generating multiple criteria ranked performance tableaux, i.e. on each criterion, all decision action’s evaluations appear linearly ordered without ties.
 
-This type of random performance tableau is matching the \sphinxcode{\sphinxupquote{votingDigraphs.RandomLinearVotingProfile}} class provided by the \sphinxcode{\sphinxupquote{votingProfiles}} module.
+This type of random performance tableau is matching the \sphinxcode{\sphinxupquote{votingProfiles.RandomLinearVotingProfile}} class provided by the \sphinxcode{\sphinxupquote{votingProfiles}} module.
 \begin{description}
 \item[{\sphinxstyleemphasis{Parameters}:}] \leavevmode\begin{itemize}
 \item {} 
