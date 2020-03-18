@@ -330,10 +330,10 @@ Manipulating ``Digraph`` objects
 	:depth: 2
 	:local:
 
-Random digraph
-..............
+Random digraphs
+...............
 
-We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``Digraph3`` collection contains a ``randomDigraphs`` module providing a specific :py:class:`randomDigraphs.RandomValuationDigraph` constructor.
+We are starting this tutorial with generating a randomly [-1;1]-valued (*Normalized=True*) digraph of order 7, denoted *dg* and modelling a binary relation (*x S y*) defined on the set of nodes of *dg*. For this purpose, the ``Digraph3`` collection contains a :py:mod:`randomDigraphs` module providing a specific :py:class:`randomDigraphs.RandomValuationDigraph` constructor.
 
 .. code-block:: pycon
    :linenos:
@@ -342,7 +342,7 @@ We are starting this tutorial with generating a randomly [-1;1]-valued (*Normali
    >>> dg = RandomValuationDigraph(order=7,Normalized=True)
    >>> dg.save('tutRandValDigraph')
 
-With the ``save()`` method (see Line 3) we may keep a backup version for future use of *dg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The ``Digraph`` class now provides some generic methods for exploring a given ``Digraph`` object, like the ``showShort()``, ``showAll()``, ``showRelationTable()`` and the ``showNeighborhoods()`` methods.
+With the ``save()`` method (see Line 3) we may keep a backup version for future use of *dg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The :py:class:`Digraph` class now provides some generic methods for exploring a given ``Digraph`` object, like the ``showShort()``, ``showAll()``, ``showRelationTable()`` and the ``showNeighborhoods()`` methods.
 
 .. code-block:: pycon
    :name: tutRandValDigraph
@@ -495,7 +495,7 @@ Let us illustrate these parts on a linear ordering obtained from the tutorial ra
    :width: 600 px
    :align: center
 
-   *Border* and *inner* part of a linear order oriented by *terminal* and *inital* kernels
+   *Border* and *inner* part of a linear order oriented by *terminal* and *initial* kernels
 
 We may orient the graphviz drawings in :numref:`graphBorderAndInner1` with the terminal node 6 (*worstChoice* parameter) and initial node 7 (*bestChoice* parameter), see :numref:`BorderInnerPart` Lines 7 and 9).
 

@@ -424,7 +424,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <span id="digraph-tools-label"></span><h1><a class="toc-backref" href="#id143">Manipulating <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> objects</a><a class="headerlink" href="#manipulating-digraph-objects" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="id2">
 <ul class="simple">
-<li><p><a class="reference internal" href="#random-digraph" id="id164">Random digraph</a></p></li>
+<li><p><a class="reference internal" href="#random-digraphs" id="id164">Random digraphs</a></p></li>
 <li><p><a class="reference internal" href="#graphviz-drawings" id="id165">Graphviz drawings</a></p></li>
 <li><p><a class="reference internal" href="#asymmetric-and-symmetric-parts" id="id166">Asymmetric and symmetric parts</a></p></li>
 <li><p><a class="reference internal" href="#border-and-inner-parts" id="id167">Border and inner parts</a></p></li>
@@ -436,9 +436,9 @@ the current working directory a <code class="code docutils literal notranslate">
 <li><p><a class="reference internal" href="#complete-empty-and-indeterminate-digraphs" id="id173">Complete, empty and indeterminate digraphs</a></p></li>
 </ul>
 </div>
-<div class="section" id="random-digraph">
-<h2><a class="toc-backref" href="#id164">Random digraph</a><a class="headerlink" href="#random-digraph" title="Permalink to this headline">¶</a></h2>
-<p>We are starting this tutorial with generating a randomly [-1;1]-valued (<em>Normalized=True</em>) digraph of order 7, denoted <em>dg</em> and modelling a binary relation (<em>x S y</em>) defined on the set of nodes of <em>dg</em>. For this purpose, the <code class="docutils literal notranslate"><span class="pre">Digraph3</span></code> collection contains a <code class="docutils literal notranslate"><span class="pre">randomDigraphs</span></code> module providing a specific <a class="reference internal" href="techDoc.html#randomDigraphs.RandomValuationDigraph" title="randomDigraphs.RandomValuationDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomDigraphs.RandomValuationDigraph</span></code></a> constructor.</p>
+<div class="section" id="random-digraphs">
+<h2><a class="toc-backref" href="#id164">Random digraphs</a><a class="headerlink" href="#random-digraphs" title="Permalink to this headline">¶</a></h2>
+<p>We are starting this tutorial with generating a randomly [-1;1]-valued (<em>Normalized=True</em>) digraph of order 7, denoted <em>dg</em> and modelling a binary relation (<em>x S y</em>) defined on the set of nodes of <em>dg</em>. For this purpose, the <code class="docutils literal notranslate"><span class="pre">Digraph3</span></code> collection contains a <a class="reference internal" href="techDoc.html#module-randomDigraphs" title="randomDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">randomDigraphs</span></code></a> module providing a specific <a class="reference internal" href="techDoc.html#randomDigraphs.RandomValuationDigraph" title="randomDigraphs.RandomValuationDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomDigraphs.RandomValuationDigraph</span></code></a> constructor.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
@@ -446,7 +446,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;tutRandValDigraph&#39;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<p>With the <code class="docutils literal notranslate"><span class="pre">save()</span></code> method (see Line 3) we may keep a backup version for future use of <em>dg</em> which will be stored in a file called <em>tutRandValDigraph.py</em> in the current working directory. The <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> class now provides some generic methods for exploring a given <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> object, like the <code class="docutils literal notranslate"><span class="pre">showShort()</span></code>, <code class="docutils literal notranslate"><span class="pre">showAll()</span></code>, <code class="docutils literal notranslate"><span class="pre">showRelationTable()</span></code> and the <code class="docutils literal notranslate"><span class="pre">showNeighborhoods()</span></code> methods.</p>
+<p>With the <code class="docutils literal notranslate"><span class="pre">save()</span></code> method (see Line 3) we may keep a backup version for future use of <em>dg</em> which will be stored in a file called <em>tutRandValDigraph.py</em> in the current working directory. The <code class="xref py py-class docutils literal notranslate"><span class="pre">Digraph</span></code> class now provides some generic methods for exploring a given <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> object, like the <code class="docutils literal notranslate"><span class="pre">showShort()</span></code>, <code class="docutils literal notranslate"><span class="pre">showAll()</span></code>, <code class="docutils literal notranslate"><span class="pre">showRelationTable()</span></code> and the <code class="docutils literal notranslate"><span class="pre">showNeighborhoods()</span></code> methods.</p>
 <div class="literal-block-wrapper docutils container" id="tutrandvaldigraph">
 <div class="code-block-caption"><span class="caption-number">Listing 3 </span><span class="caption-text">Example of random valuation digraph</span><a class="headerlink" href="#tutrandvaldigraph" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -647,7 +647,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </div>
 <div class="figure align-center" id="graphborderandinner1">
 <a class="reference internal image-reference" href="_images/graphBorderAndInner1.png"><img alt="_images/graphBorderAndInner1.png" src="_images/graphBorderAndInner1.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text"><em>Border</em> and <em>inner</em> part of a linear order oriented by <em>terminal</em> and <em>inital</em> kernels</span><a class="headerlink" href="#graphborderandinner1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text"><em>Border</em> and <em>inner</em> part of a linear order oriented by <em>terminal</em> and <em>initial</em> kernels</span><a class="headerlink" href="#graphborderandinner1" title="Permalink to this image">¶</a></p>
 </div>
 <p>We may orient the graphviz drawings in <a class="reference internal" href="#graphborderandinner1"><span class="std std-numref">Fig. 5</span></a> with the terminal node 6 (<em>worstChoice</em> parameter) and initial node 7 (<em>bestChoice</em> parameter), see <a class="reference internal" href="#borderinnerpart"><span class="std std-numref">Listing 4</span></a> Lines 7 and 9).</p>
 <div class="admonition note">
@@ -8507,7 +8507,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </ul>
 </li>
 <li><a class="reference internal" href="#manipulating-digraph-objects">Manipulating <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> objects</a><ul>
-<li><a class="reference internal" href="#random-digraph">Random digraph</a></li>
+<li><a class="reference internal" href="#random-digraphs">Random digraphs</a></li>
 <li><a class="reference internal" href="#graphviz-drawings">Graphviz drawings</a></li>
 <li><a class="reference internal" href="#asymmetric-and-symmetric-parts">Asymmetric and symmetric parts</a></li>
 <li><a class="reference internal" href="#border-and-inner-parts">Border and inner parts</a></li>

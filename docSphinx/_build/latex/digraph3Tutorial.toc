@@ -8,7 +8,7 @@
 \contentsline {subsection}{\numberline {1.6}Inspecting a \sphinxstyleliteralintitle {\sphinxupquote {Digraph}} object}{7}{subsection.1.6}
 \contentsline {subsection}{\numberline {1.7}Special classes}{9}{subsection.1.7}
 \contentsline {section}{\numberline {2}Manipulating \sphinxstyleliteralintitle {\sphinxupquote {Digraph}} objects}{10}{section.2}
-\contentsline {subsection}{\numberline {2.1}Random digraph}{11}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.1}Random digraphs}{11}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Graphviz drawings}{12}{subsection.2.2}
 \contentsline {subsection}{\numberline {2.3}Asymmetric and symmetric parts}{13}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Border and inner parts}{15}{subsection.2.4}
