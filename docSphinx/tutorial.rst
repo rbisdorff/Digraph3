@@ -1259,10 +1259,10 @@ Working with the ``outrankingDigraphs`` module
 
 See also the technical documentation of the :ref:`outrankingDigraphs-label`.
 
-Outranking digraph
-..................
+Outranking digraph model
+........................
 
-In this *Digraph3* module, the main :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class provides a generic **bipolar-valued outranking digraph model**. A given object of this class consists in
+In this *Digraph3* module, the main :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class provides a generic **bipolar-valued outranking digraph** model. A given object of this class consists in
 
 1. a potential set of decision **actions** : a dictionary describing the potential decision actions or alternatives with 'name' and 'comment' attributes,
 2. a coherent family of **criteria**: a dictionary of criteria functions used for measuring the performance of each potential decision action with respect to the preference dimension captured by each criterion,
@@ -1441,8 +1441,8 @@ The outranking valuation characteristic appears as **majority margin** resulting
 
 This time, we observe a considerable out-performance of *a03* against *a02* on criterion g02 (see second row in the relation table above). We therefore notice a positively polarized *certainly confirmed* outranking situation in this case [BIS-2013]_. 
 
-Recoding the valuation
-......................
+Recoding the digraph valuation
+..............................
 
 All outranking digraphs, being of root type :py:class:`digraphs.Digraph`, inherit the methods available under this class. The characteristic valuation domain of an outranking digraph may be recoded with the :py:func:`digraphs.Digraph.recodeValutaion()` method below to the integer range [-37,+37], i.e. plus or minus the global significance of the family of criteria considered in this example instance.
 
@@ -1571,8 +1571,8 @@ The :py:mod:`randomPerfTabs` module provides several constructors for random per
     ordered performances without ties on multiple criteria for
     a given number of decision actions.
  
-Generating standard random performance tableaux
-...............................................
+Random standard performance tableaux
+....................................
     
 The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of the kind, specializes the generic :py:class:`prefTabs.PerformanceTableau` class, and takes the following parameters.
 
@@ -1649,8 +1649,8 @@ Code example.
 
 .. _Cost-Benefit-Performance-Tableau-label:
 	    
-Generating random Cost-Benefit performance tableaux
-...................................................
+Random Cost-Benefit performance tableaux
+........................................
 
 We provide the :py:class:`randomPerfTabs.RandomCBPerformanceTableau` class for generating random *Cost* versus *Benefit* organized performance tableaux following the directives below:
 
@@ -1790,8 +1790,8 @@ If needed for instance in an R session, a CSV version of the performance tableau
 
 Back to :ref:`Content Table <Tutorial-label>`
 
-Generating random three objectives performance tableaux
-.......................................................
+Random three objectives performance tableaux
+............................................
 
 We provide the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account *economical*, *societal* as well as *environmental* aspects.
 
@@ -1951,8 +1951,8 @@ A graphviz drawing illustrates the apparent preferential links between the stron
 	   
 Decision action *a26* (Eco+ Soc+ Env-) appears dominating the other decision alternatives, whereas decision action *a30* (Eco- Soc- Env-) appears to be dominated by all the others.
 
-Generating random linearly ranked performance tableaux
-......................................................
+Random linearly ranked performance tableaux
+...........................................
 
 Finally, we provide the :py:class:`randomPerfTabs.RandomRankPerformanceTableau` class for generating multiple criteria ranked performance tableaux, i.e. on each criterion, all decision action's evaluations appear linearly ordered without ties.
 

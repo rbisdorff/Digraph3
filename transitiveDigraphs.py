@@ -280,9 +280,10 @@ class RankingsFusion(TransitiveDigraph):
     digraphs resulting from the epistemic
     disjunctive or conjunctive fusion (omax|omin operator) of a list of rankings.
 
-    *Parameter*:
-
-         * fusionOperator = 'o-max' (default) | 'o-min' : Disjunctive, resp. conjuntive epistemic fusion.
+    *Parameters*:
+    
+        * other = either a Digraph or a PerformanceTableau object;
+        * fusionOperator = 'o-max' (default) | 'o-min' : Disjunctive, resp. conjuntive epistemic fusion.
 
     Example application:
 
@@ -311,6 +312,7 @@ class RankingsFusion(TransitiveDigraph):
             return
         self.__dict__ = deepcopy(other.__dict__)
         self.name = other.name + '_wk'
+        self.valuationdomain = {}
         self.valuationdomain['min'] = Decimal('-1')
         self.valuationdomain['max'] = Decimal('1')
         self.valuationdomain['med'] = Decimal('0')
