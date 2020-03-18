@@ -2367,7 +2367,8 @@
 <span class="sd">              - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.</span>
 <span class="sd">                If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be</span>
 <span class="sd">                in fact equivalent to the standard model.</span>
-<span class="sd">              - It may interesting in some cases to use *rankingRule* = &#39;NetFlows&#39;.</span>
+<span class="sd">              - *rankingRule* = &#39;NetFlows&#39; (default) | &#39;Copeland&#39; | &#39;Kohler&#39; | &#39;RankedPairs&#39; | &#39;ArrowRaymond&#39; | &#39;IteratedNetFlows&#39;</span>
+<span class="sd">                see tutorial on ranking mith multiple incommensurable criteria. The corresponding ranking result is stored in self.</span>
 <span class="sd">              - Quantiles used for the pre-ranked decomposition are put by default to *n*</span>
 <span class="sd">                (the number of decision alternatives) for *n* &lt; 50. For larger cardinalities up to 1000, quantiles = *n* /10.</span>
 <span class="sd">                For bigger performance tableaux the *quantiles* parameter may be set to a much lower value</span>
@@ -2531,19 +2532,30 @@
                 <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">argActionsList</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;NetFlows&#39;</span><span class="p">:</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">netFlowsRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
                 <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;Copeland&#39;</span><span class="p">:</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">copelandRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
                 <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;Kohler&#39;</span><span class="p">:</span>
-                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeKohlerRanking</span><span class="p">()</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">))</span><span class="o">.</span><span class="n">computeKohlerRanking</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">kohlerRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
                 <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;RankedPairs&#39;</span><span class="p">:</span>
                     <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">RankedPairsOrder</span>
                     <span class="n">rp</span> <span class="o">=</span> <span class="n">RankedPairsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">computeRanking</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">rankedPairsRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
                 <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;ArrowRaynaud&#39;</span><span class="p">:</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeArrowRaynaudRanking</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">arrowRaynaudRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
+                <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;IteratedNetFlows&#39;</span><span class="p">:</span>
+                    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">IteratedNetFlowsRanking</span>
+                    <span class="n">inf</span> <span class="o">=</span> <span class="n">IteratedNetFlowsRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">inf</span><span class="o">.</span><span class="n">iteratedNetFlowsRanking</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">iteratedNetFlowsRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
                 <span class="k">else</span><span class="p">:</span> <span class="c1"># default ranking rule</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
                     <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">netFlowsRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
                 <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)))</span>
 
         <span class="k">else</span><span class="p">:</span>  <span class="c1"># actions list given</span>

@@ -2327,7 +2327,8 @@ The performance evaluations of each decision alternative on each criterion are g
               - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
                 If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
                 in fact equivalent to the standard model.
-              - It may interesting in some cases to use *rankingRule* = 'NetFlows'.
+              - *rankingRule* = 'NetFlows' (default) | 'Copeland' | 'Kohler' | 'RankedPairs' | 'ArrowRaymond' | 'IteratedNetFlows'
+                see tutorial on ranking mith multiple incommensurable criteria. The corresponding ranking result is stored in self.
               - Quantiles used for the pre-ranked decomposition are put by default to *n*
                 (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10.
                 For bigger performance tableaux the *quantiles* parameter may be set to a much lower value
@@ -2491,19 +2492,30 @@ The performance evaluations of each decision alternative on each criterion are g
                 g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
                 if rankingRule == 'NetFlows':
                     actionsList = g.computeNetFlowsRanking()
+                    self.netFlowsRanking = actionsList
                 if rankingRule == 'Copeland':
                     actionsList = g.computeCopelandRanking()
+                    self.copelandRanking = actionsList
                 elif rankingRule == 'Kohler':
-                    actionsList = g.computeKohlerRanking()
+                    actionsList = (~(-g)).computeKohlerRanking()
+                    self.kohlerRanking = actionsList
                 elif rankingRule == 'RankedPairs':
                     from linearOrders import RankedPairsOrder
                     rp = RankedPairsOrder(g)
                     actionsList = rp.computeRanking()
+                    self.rankedPairsRanking = actionsList
                 elif rankingRule == 'ArrowRaynaud':
                     actionsList = g.computeArrowRaynaudRanking()
+                    self.arrowRaynaudRanking = actionsList
+                elif rankingRule == 'IteratedNetFlows':
+                    from linearOrders import IteratedNetFlowsRanking
+                    inf = IteratedNetFlowsRanking(g)
+                    actionsList = inf.iteratedNetFlowsRanking
+                    self.iteratedNetFlowsRanking = actionsList
                 else: # default ranking rule
                     actionsList = g.computeNetFlowsRanking()
                     rankingRule='NetFlows'
+                    self.netFlowsRanking = actionsList
                 rankCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
 
         else:  # actions list given

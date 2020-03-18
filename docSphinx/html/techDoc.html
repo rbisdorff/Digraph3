@@ -4680,7 +4680,8 @@ When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRank
 <li><p>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
 If <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
 in fact equivalent to the standard model.</p></li>
-<li><p>It may interesting in some cases to use <em>rankingRule</em> = ‘NetFlows’.</p></li>
+<li><p><em>rankingRule</em> = ‘NetFlows’ (default) | ‘Copeland’ | ‘Kohler’ | ‘RankedPairs’ | ‘ArrowRaymond’ | ‘IteratedNetFlows’
+see tutorial on ranking mith multiple incommensurable criteria. The corresponding ranking result is stored in self.</p></li>
 <li><p>Quantiles used for the pre-ranked decomposition are put by default to <em>n</em>
 (the number of decision alternatives) for <em>n</em> &lt; 50. For larger cardinalities up to 1000, quantiles = <em>n</em> /10.
 For bigger performance tableaux the <em>quantiles</em> parameter may be set to a much lower value
