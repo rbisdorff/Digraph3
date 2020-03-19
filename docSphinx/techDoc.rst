@@ -341,7 +341,7 @@ Back to the :ref:`Technical-label`
 linearOrders module
 -------------------
 
-A tutorial with coding examples is available here: :ref:`LinearVoting-Tutorial-label`
+A tutorial with coding examples is available here: :ref:`Ranking-Tutorial-label`
 
 .. automodule:: linearOrders
    :member-order: alphabetical
