@@ -268,7 +268,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tctt1095.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1440.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tctt1200.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
@@ -643,7 +642,6 @@ INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000
 INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk
 INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk
 INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk
-INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1200.600pk
 INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1440.600pk
 INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1095.600pk
 INPUT /home/bisdorff/.texlive2017/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk

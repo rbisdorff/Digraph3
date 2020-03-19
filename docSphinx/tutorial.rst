@@ -109,7 +109,7 @@ Several download options (easiest under Linux or Mac OS-X) are given.
 Starting a Python3 session
 ..........................
 
-You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`digraphs` module. To do so, enter the ``python3`` commands following the session prompts marked with >>>. The lines without the prompt are output from the Python interpreter.
+You may start an interactive Python3 session in the :code:`Digraph3` directory for exploring the classes and methods provided by the :code:`Digraph3` modules (see the `Reference manual <techDoc.html>`_). To do so, enter the ``python3`` commands following the session prompts marked with >>>. The lines without the prompt are output from the Python interpreter.
 
 .. code-block:: bash 
 
@@ -140,9 +140,9 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
     >>> dg.save('tutorialDigraph')
     *--- Saving digraph in file: <tutorialDigraph.py> ---*
 
-From the :py:mod:`randomDigraphs` module we import the :py:class:`randomDigraphs.RandomDigraph` class in order to  generate a *digraph* instance of order 5 - number of nodes or (decision) *actions* - and size 12 - number of directed *arcs* (see :numref:`digraphs` Lines 1-2).
+From the :py:mod:`randomDigraphs` module we import the :py:class:`randomDigraphs.RandomDigraph` class in order to generate, for instance, a crisp *digraph* object *dg* of order 5 - number of nodes or (decision) *actions* - and size 12 - number of directed *arcs* (see :numref:`digraphs` Lines 1-2).
 
-We may directly inspect the content of  python object *dg* (Line 3) 
+We may directly inspect the content of python object *dg* (Line 3) 
 
 ``Digraph`` object structure
 ............................
@@ -159,12 +159,12 @@ All :py:class:`digraphs.Digraph` objects contain at least the following attribut
 
 .. only:: html
 
-    See the reference manual of the :ref:`digraphs-label`.
+    See the technical documentation of root the :py:class:`digraphs.Digraph` class.
 
 Permanent storage
 .................
 
-The :code:`dg.save('tutorialDigraph')` command (see :numref:`digraphs` Line 13 above) stores the digraph *dg* in a file named :code:`tutorialDigraph.py` with the following content.
+The :py:func:`digraphs.Digraph.save` method (see :numref:`digraphs` Line 13 above) stores the digraph object *dg* in a file named :code:`tutorialDigraph.py` with the following content.
 
 .. code-block:: python
    :linenos:
@@ -189,7 +189,7 @@ The :code:`dg.save('tutorialDigraph')` command (see :numref:`digraphs` Line 13 a
 Inspecting a ``Digraph`` object
 ...............................
 
-We may reload a previously saved ``Digraph`` instance from the file named :code:`tutorialDigraph.py` with the ``Digraph`` class constructor and the :py:func:`digraphs.Digraph.showAll()` method output reveals us that *dg* is a *connected* and *irreflexive* digraph of *order* five, evaluated in an integer *valuation domain* [-1,0,+1} (see :numref:`tutorialDigraph`).
+We may reload the previously saved digraph object from the file named :code:`tutorialDigraph.py` with the :py:class:`digraphs.Digraph` class constructor and the :py:func:`digraphs.Digraph.showAll()` method output reveals us that *dg* is a *connected* and *irreflexive* digraph of *order* five, evaluated in an integer *valuation domain* [-1,0,+1} (see :numref:`tutorialDigraph`).
 
 .. code-block:: pycon
    :name: tutorialDigraph
@@ -247,9 +247,9 @@ the current working directory a :code:`tutorial.dot` file and a
    :width: 300 px
    :align: center
 
-   The tutorial digraph
+   The tutorial crisp digraph
    
-Some simple methods are easily applicable to this instantiated Digraph object *dg* , like the following :py:func:`digraphs.Digraph.showStatistics()` method.
+Some simple methods are readly applicable to this instantiated Digraph object *dg* , like the following :py:func:`digraphs.Digraph.showStatistics()` method.
 
 .. code-block:: pycon
    :linenos:

@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{March 18, 2020}
+\date{March 19, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -206,7 +206,7 @@ Or, with a browser access, download and extract the latest distribution zip arch
 
 \subsection{Starting a Python3 session}
 \label{\detokenize{tutorial:starting-a-python3-session}}
-You may start an interactive Python3 session in the \sphinxcode{\sphinxupquote{Digraph3}} directory for exploring the classes and methods provided by the \sphinxcode{\sphinxupquote{digraphs}} module. To do so, enter the \sphinxcode{\sphinxupquote{python3}} commands following the session prompts marked with \textgreater{}\textgreater{}\textgreater{}. The lines without the prompt are output from the Python interpreter.
+You may start an interactive Python3 session in the \sphinxcode{\sphinxupquote{Digraph3}} directory for exploring the classes and methods provided by the \sphinxcode{\sphinxupquote{Digraph3}} modules (see the \sphinxhref{techDoc.html}{Reference manual}). To do so, enter the \sphinxcode{\sphinxupquote{python3}} commands following the session prompts marked with \textgreater{}\textgreater{}\textgreater{}. The lines without the prompt are output from the Python interpreter.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{n+nv}{\PYGZdl{}HOME}/.../Digraph3\PYGZdl{} python3
@@ -235,9 +235,9 @@ Type \PYG{l+s+s2}{\PYGZdq{}help\PYGZdq{}}, \PYG{l+s+s2}{\PYGZdq{}copyright\PYGZd
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{} Saving digraph in file: \PYGZlt{}tutorialDigraph.py\PYGZgt{} \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \end{sphinxVerbatim}
 
-From the \sphinxcode{\sphinxupquote{randomDigraphs}} module we import the \sphinxcode{\sphinxupquote{randomDigraphs.RandomDigraph}} class in order to  generate a \sphinxstyleemphasis{digraph} instance of order 5 \sphinxhyphen{} number of nodes or (decision) \sphinxstyleemphasis{actions} \sphinxhyphen{} and size 12 \sphinxhyphen{} number of directed \sphinxstyleemphasis{arcs} (see \hyperref[\detokenize{tutorial:digraphs}]{Listing \ref{\detokenize{tutorial:digraphs}}} Lines 1\sphinxhyphen{}2).
+From the \sphinxcode{\sphinxupquote{randomDigraphs}} module we import the \sphinxcode{\sphinxupquote{randomDigraphs.RandomDigraph}} class in order to generate, for instance, a crisp \sphinxstyleemphasis{digraph} object \sphinxstyleemphasis{dg} of order 5 \sphinxhyphen{} number of nodes or (decision) \sphinxstyleemphasis{actions} \sphinxhyphen{} and size 12 \sphinxhyphen{} number of directed \sphinxstyleemphasis{arcs} (see \hyperref[\detokenize{tutorial:digraphs}]{Listing \ref{\detokenize{tutorial:digraphs}}} Lines 1\sphinxhyphen{}2).
 
-We may directly inspect the content of  python object \sphinxstyleemphasis{dg} (Line 3)
+We may directly inspect the content of python object \sphinxstyleemphasis{dg} (Line 3)
 
 
 \subsection{\sphinxstyleliteralintitle{\sphinxupquote{Digraph}} object structure}
@@ -272,7 +272,7 @@ Its associated \sphinxstylestrong{notGamma function} : a dictionary containing t
 
 \subsection{Permanent storage}
 \label{\detokenize{tutorial:permanent-storage}}
-The \sphinxcode{\sphinxupquote{dg.save(\textquotesingle{}tutorialDigraph\textquotesingle{})}} command (see \hyperref[\detokenize{tutorial:digraphs}]{Listing \ref{\detokenize{tutorial:digraphs}}} Line 13 above) stores the digraph \sphinxstyleemphasis{dg} in a file named \sphinxcode{\sphinxupquote{tutorialDigraph.py}} with the following content.
+The \sphinxcode{\sphinxupquote{digraphs.Digraph.save()}} method (see \hyperref[\detokenize{tutorial:digraphs}]{Listing \ref{\detokenize{tutorial:digraphs}}} Line 13 above) stores the digraph object \sphinxstyleemphasis{dg} in a file named \sphinxcode{\sphinxupquote{tutorialDigraph.py}} with the following content.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{n}{actions} \PYG{o}{=} \PYG{p}{\PYGZob{}}
@@ -296,7 +296,7 @@ The \sphinxcode{\sphinxupquote{dg.save(\textquotesingle{}tutorialDigraph\textquo
 
 \subsection{Inspecting a \sphinxstyleliteralintitle{\sphinxupquote{Digraph}} object}
 \label{\detokenize{tutorial:inspecting-a-digraph-object}}
-We may reload a previously saved \sphinxcode{\sphinxupquote{Digraph}} instance from the file named \sphinxcode{\sphinxupquote{tutorialDigraph.py}} with the \sphinxcode{\sphinxupquote{Digraph}} class constructor and the \sphinxcode{\sphinxupquote{digraphs.Digraph.showAll()}} method output reveals us that \sphinxstyleemphasis{dg} is a \sphinxstyleemphasis{connected} and \sphinxstyleemphasis{irreflexive} digraph of \sphinxstyleemphasis{order} five, evaluated in an integer \sphinxstyleemphasis{valuation domain} {[}\sphinxhyphen{}1,0,+1\} (see \hyperref[\detokenize{tutorial:tutorialdigraph}]{Listing \ref{\detokenize{tutorial:tutorialdigraph}}}).
+We may reload the previously saved digraph object from the file named \sphinxcode{\sphinxupquote{tutorialDigraph.py}} with the \sphinxcode{\sphinxupquote{digraphs.Digraph}} class constructor and the \sphinxcode{\sphinxupquote{digraphs.Digraph.showAll()}} method output reveals us that \sphinxstyleemphasis{dg} is a \sphinxstyleemphasis{connected} and \sphinxstyleemphasis{irreflexive} digraph of \sphinxstyleemphasis{order} five, evaluated in an integer \sphinxstyleemphasis{valuation domain} {[}\sphinxhyphen{}1,0,+1\} (see \hyperref[\detokenize{tutorial:tutorialdigraph}]{Listing \ref{\detokenize{tutorial:tutorialdigraph}}}).
 \sphinxSetupCaptionForVerbatim{Random crisp digraph example}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:tutorialdigraph}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -355,9 +355,9 @@ The \sphinxcode{\sphinxupquote{exportGraphViz}} method is depending on drawing t
 \capstart
 
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{tutorialDigraph}.png}
-\caption{The tutorial digraph}\label{\detokenize{tutorial:tutorialdigraphfig}}\end{figure}
+\caption{The tutorial crisp digraph}\label{\detokenize{tutorial:tutorialdigraphfig}}\end{figure}
 
-Some simple methods are easily applicable to this instantiated Digraph object \sphinxstyleemphasis{dg} , like the following \sphinxcode{\sphinxupquote{digraphs.Digraph.showStatistics()}} method.
+Some simple methods are readly applicable to this instantiated Digraph object \sphinxstyleemphasis{dg} , like the following \sphinxcode{\sphinxupquote{digraphs.Digraph.showStatistics()}} method.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{showStatistics}\PYG{p}{(}\PYG{p}{)}
@@ -1377,7 +1377,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id179}}{\hyperref[\detokenize{tutorial:outranking-digraph}]{\sphinxcrossref{Outranking digraph}}}
+\phantomsection\label{\detokenize{tutorial:id179}}{\hyperref[\detokenize{tutorial:outranking-digraph-model}]{\sphinxcrossref{Outranking digraph model}}}
 
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id180}}{\hyperref[\detokenize{tutorial:browsing-the-performances}]{\sphinxcrossref{Browsing the performances}}}
@@ -1389,7 +1389,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \phantomsection\label{\detokenize{tutorial:id182}}{\hyperref[\detokenize{tutorial:pairwise-comparisons}]{\sphinxcrossref{Pairwise comparisons}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id183}}{\hyperref[\detokenize{tutorial:recoding-the-valuation}]{\sphinxcrossref{Recoding the valuation}}}
+\phantomsection\label{\detokenize{tutorial:id183}}{\hyperref[\detokenize{tutorial:recoding-the-digraph-valuation}]{\sphinxcrossref{Recoding the digraph valuation}}}
 
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id184}}{\hyperref[\detokenize{tutorial:the-strict-outranking-digraph}]{\sphinxcrossref{The strict outranking digraph}}}
@@ -1403,9 +1403,9 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 See also the technical documentation of the \DUrole{xref,std,std-ref}{outrankingDigraphs\sphinxhyphen{}label}.
 
 
-\subsection{Outranking digraph}
-\label{\detokenize{tutorial:outranking-digraph}}
-In this \sphinxstyleemphasis{Digraph3} module, the main \sphinxcode{\sphinxupquote{outrankingDigraphs.BipolarOutrankingDigraph}} class provides a generic \sphinxstylestrong{bipolar\sphinxhyphen{}valued outranking digraph model}. A given object of this class consists in
+\subsection{Outranking digraph model}
+\label{\detokenize{tutorial:outranking-digraph-model}}
+In this \sphinxstyleemphasis{Digraph3} module, the main \sphinxcode{\sphinxupquote{outrankingDigraphs.BipolarOutrankingDigraph}} class provides a generic \sphinxstylestrong{bipolar\sphinxhyphen{}valued outranking digraph} model. A given object of this class consists in
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
@@ -1601,8 +1601,8 @@ The outranking valuation characteristic appears as \sphinxstylestrong{majority m
 This time, we observe a considerable out\sphinxhyphen{}performance of \sphinxstyleemphasis{a03} against \sphinxstyleemphasis{a02} on criterion g02 (see second row in the relation table above). We therefore notice a positively polarized \sphinxstyleemphasis{certainly confirmed} outranking situation in this case \sphinxcite{tutorial:bis-2013}.
 
 
-\subsection{Recoding the valuation}
-\label{\detokenize{tutorial:recoding-the-valuation}}
+\subsection{Recoding the digraph valuation}
+\label{\detokenize{tutorial:recoding-the-digraph-valuation}}
 All outranking digraphs, being of root type \sphinxcode{\sphinxupquote{digraphs.Digraph}}, inherit the methods available under this class. The characteristic valuation domain of an outranking digraph may be recoded with the \sphinxcode{\sphinxupquote{digraphs.Digraph.recodeValutaion()}} method below to the integer range {[}\sphinxhyphen{}37,+37{]}, i.e. plus or minus the global significance of the family of criteria considered in this example instance.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -1694,16 +1694,16 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \phantomsection\label{\detokenize{tutorial:id186}}{\hyperref[\detokenize{tutorial:introduction}]{\sphinxcrossref{Introduction}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id187}}{\hyperref[\detokenize{tutorial:generating-standard-random-performance-tableaux}]{\sphinxcrossref{Generating standard random performance tableaux}}}
+\phantomsection\label{\detokenize{tutorial:id187}}{\hyperref[\detokenize{tutorial:random-standard-performance-tableaux}]{\sphinxcrossref{Random standard performance tableaux}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id188}}{\hyperref[\detokenize{tutorial:generating-random-cost-benefit-performance-tableaux}]{\sphinxcrossref{Generating random Cost\sphinxhyphen{}Benefit performance tableaux}}}
+\phantomsection\label{\detokenize{tutorial:id188}}{\hyperref[\detokenize{tutorial:random-cost-benefit-performance-tableaux}]{\sphinxcrossref{Random Cost\sphinxhyphen{}Benefit performance tableaux}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id189}}{\hyperref[\detokenize{tutorial:generating-random-three-objectives-performance-tableaux}]{\sphinxcrossref{Generating random three objectives performance tableaux}}}
+\phantomsection\label{\detokenize{tutorial:id189}}{\hyperref[\detokenize{tutorial:random-three-objectives-performance-tableaux}]{\sphinxcrossref{Random three objectives performance tableaux}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id190}}{\hyperref[\detokenize{tutorial:generating-random-linearly-ranked-performance-tableaux}]{\sphinxcrossref{Generating random linearly ranked performance tableaux}}}
+\phantomsection\label{\detokenize{tutorial:id190}}{\hyperref[\detokenize{tutorial:random-linearly-ranked-performance-tableaux}]{\sphinxcrossref{Random linearly ranked performance tableaux}}}
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -1743,8 +1743,8 @@ a given number of decision actions.
 \end{quote}
 
 
-\subsection{Generating standard random performance tableaux}
-\label{\detokenize{tutorial:generating-standard-random-performance-tableaux}}
+\subsection{Random standard performance tableaux}
+\label{\detokenize{tutorial:random-standard-performance-tableaux}}
 The \sphinxcode{\sphinxupquote{randomPerfTabs.RandomPerformanceTableau}} class, the simplest of the kind, specializes the generic \sphinxcode{\sphinxupquote{prefTabs.PerformanceTableau}} class, and takes the following parameters.
 \begin{itemize}
 \item {} 
@@ -1845,8 +1845,8 @@ Missing (NA) evaluation are registered in a performance tableau as \sphinxstylee
 \end{sphinxadmonition}
 
 
-\subsection{Generating random Cost\sphinxhyphen{}Benefit performance tableaux}
-\label{\detokenize{tutorial:generating-random-cost-benefit-performance-tableaux}}\label{\detokenize{tutorial:cost-benefit-performance-tableau-label}}
+\subsection{Random Cost\sphinxhyphen{}Benefit performance tableaux}
+\label{\detokenize{tutorial:random-cost-benefit-performance-tableaux}}\label{\detokenize{tutorial:cost-benefit-performance-tableau-label}}
 We provide the \sphinxcode{\sphinxupquote{randomPerfTabs.RandomCBPerformanceTableau}} class for generating random \sphinxstyleemphasis{Cost} versus \sphinxstyleemphasis{Benefit} organized performance tableaux following the directives below:
 \begin{itemize}
 \item {} 
@@ -2014,8 +2014,8 @@ If needed for instance in an R session, a CSV version of the performance tableau
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}}
 
 
-\subsection{Generating random three objectives performance tableaux}
-\label{\detokenize{tutorial:generating-random-three-objectives-performance-tableaux}}
+\subsection{Random three objectives performance tableaux}
+\label{\detokenize{tutorial:random-three-objectives-performance-tableaux}}
 We provide the \sphinxcode{\sphinxupquote{randomPerfTabs.Random3ObjectivesPerformanceTableau}} class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account \sphinxstyleemphasis{economical}, \sphinxstyleemphasis{societal} as well as \sphinxstyleemphasis{environmental} aspects.
 
 Each decision action is qualified randomly as performing \sphinxstylestrong{weak} (\sphinxhyphen{}), \sphinxstylestrong{fair} (\textasciitilde{}) or \sphinxstylestrong{good} (+) on each of the three objectives.
@@ -2193,8 +2193,8 @@ A graphviz drawing illustrates the apparent preferential links between the stron
 Decision action \sphinxstyleemphasis{a26} (Eco+ Soc+ Env\sphinxhyphen{}) appears dominating the other decision alternatives, whereas decision action \sphinxstyleemphasis{a30} (Eco\sphinxhyphen{} Soc\sphinxhyphen{} Env\sphinxhyphen{}) appears to be dominated by all the others.
 
 
-\subsection{Generating random linearly ranked performance tableaux}
-\label{\detokenize{tutorial:generating-random-linearly-ranked-performance-tableaux}}
+\subsection{Random linearly ranked performance tableaux}
+\label{\detokenize{tutorial:random-linearly-ranked-performance-tableaux}}
 Finally, we provide the \sphinxcode{\sphinxupquote{randomPerfTabs.RandomRankPerformanceTableau}} class for generating multiple criteria ranked performance tableaux, i.e. on each criterion, all decision action’s evaluations appear linearly ordered without ties.
 
 This type of random performance tableau is matching the \sphinxcode{\sphinxupquote{votingProfiles.RandomLinearVotingProfile}} class provided by the \sphinxcode{\sphinxupquote{votingProfiles}} module.
@@ -2704,7 +2704,7 @@ A first \sphinxstyleemphasis{advantage} is that the so modified \sphinxstyleemph
 
 The iterated \sphinxstyleemphasis{NetFlows} ranking and its \sphinxstyleemphasis{dual}, the iterated \sphinxstyleemphasis{NetFlows} ordering, do not usually deliver both the same result (\hyperref[\detokenize{tutorial:iteratednetflowsranking}]{Listing \ref{\detokenize{tutorial:iteratednetflowsranking}}} Lines 18 and 26). With our example outranking digraph \sphinxstyleemphasis{g} for instance, it is the \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}choosing} result that obtains a slightly better correlation with the given outranking digraph \sphinxstyleemphasis{g} (+0.751), a result that is also slightly better than \sphinxstyleemphasis{Kohler}’s original result (+0.747, see \hyperref[\detokenize{tutorial:kohlerranking}]{Listing \ref{\detokenize{tutorial:kohlerranking}}} Line 8).
 
-With different \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} and \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}choosing} results, it may be useful to \sphinxstyleemphasis{fuse} now, similar to what we have done before with \sphinxstyleemphasis{Kemeny}’s and \sphinxstyleemphasis{Slaters}’s optimal rankings (see \hyperref[\detokenize{tutorial:kemenyrankingsfusion}]{Listing \ref{\detokenize{tutorial:kemenyrankingsfusion}}} and \hyperref[\detokenize{tutorial:slaterrankingsfusion}]{Listing \ref{\detokenize{tutorial:slaterrankingsfusion}}}), both, the iterated \sphinxstyleemphasis{NetFlows} ranking and ordering into a partial ranking. But we are hence back to the practical problem of what linear ranking should we eventually adaopt ?
+With different \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} and \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}choosing} results, it may be useful to \sphinxstyleemphasis{fuse} now, similar to what we have done before with \sphinxstyleemphasis{Kemeny}’s and \sphinxstyleemphasis{Slaters}’s optimal rankings (see \hyperref[\detokenize{tutorial:kemenyrankingsfusion}]{Listing \ref{\detokenize{tutorial:kemenyrankingsfusion}}} and \hyperref[\detokenize{tutorial:slaterrankingsfusion}]{Listing \ref{\detokenize{tutorial:slaterrankingsfusion}}}), both, the iterated \sphinxstyleemphasis{NetFlows} ranking and ordering into a partial ranking. But we are hence back to the practical problem of what linear ranking should we eventually retain ?
 
 Let us finally mention a Last interesting \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} approach.
 
@@ -3529,7 +3529,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \phantomsection\label{\detokenize{tutorial:id206}}{\hyperref[\detokenize{tutorial:performance-tableau}]{\sphinxcrossref{Performance tableau}}}
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id207}}{\hyperref[\detokenize{tutorial:id48}]{\sphinxcrossref{Outranking digraph}}}
+\phantomsection\label{\detokenize{tutorial:id207}}{\hyperref[\detokenize{tutorial:outranking-digraph}]{\sphinxcrossref{Outranking digraph}}}
 
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id208}}{\hyperref[\detokenize{tutorial:rubis-best-choice-recommendations}]{\sphinxcrossref{\sphinxstyleemphasis{Rubis} best choice recommendations}}}
@@ -4012,7 +4012,7 @@ Site \sphinxstyleemphasis{A} shows extreme and contradictory performances: highe
 
 
 \subsection{Outranking digraph}
-\label{\detokenize{tutorial:id48}}
+\label{\detokenize{tutorial:outranking-digraph}}
 To help now the CEO choosing the best site, we are going to compute pairwise outrankings (see \sphinxcite{tutorial:bis-2013}) on the set of potential sites. For two sites \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y}, the situation “\sphinxstyleemphasis{x} outranks \sphinxstyleemphasis{y}”, denoted (\sphinxstyleemphasis{x} S \sphinxstyleemphasis{y}), is given if there is:
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
@@ -4301,7 +4301,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id211}}{\hyperref[\detokenize{tutorial:id59}]{\sphinxcrossref{Introduction}}}
+\phantomsection\label{\detokenize{tutorial:id211}}{\hyperref[\detokenize{tutorial:id58}]{\sphinxcrossref{Introduction}}}
 
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id212}}{\hyperref[\detokenize{tutorial:incremental-learning-of-historical-performance-quantiles}]{\sphinxcrossref{Incremental learning of historical performance quantiles}}}
@@ -4314,7 +4314,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \subsection{Introduction}
-\label{\detokenize{tutorial:id59}}
+\label{\detokenize{tutorial:id58}}
 In this tutorial we address the problem of \sphinxstylestrong{rating multiple criteria performances} of a set of potential decision alternatives with respect to empirical order statistics, i.e. performance quantiles learned from historical performance data gathered from similar decision alternatives observed in the past (see \sphinxcite{tutorial:cpstat-l5}).
 
 To illustrate the decision problem we face, consider for a moment that, in a given decision aid study, we observe, for instance in the Table below, the multi\sphinxhyphen{}criteria performances of two potential decision alternatives, named \sphinxstyleemphasis{a1001} and \sphinxstyleemphasis{a1010}, marked on 7 \sphinxstylestrong{incommensurable} preference criteria: 2 \sphinxstylestrong{costs} criteria \sphinxstyleemphasis{c1} and \sphinxstyleemphasis{c2} (to \sphinxstylestrong{minimize}) and 6 \sphinxstylestrong{benefits} criteria \sphinxstyleemphasis{b1} to \sphinxstyleemphasis{b5} (to \sphinxstylestrong{maximize}).
@@ -5240,7 +5240,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id220}}{\hyperref[\detokenize{tutorial:id69}]{\sphinxcrossref{Introduction}}}
+\phantomsection\label{\detokenize{tutorial:id220}}{\hyperref[\detokenize{tutorial:id68}]{\sphinxcrossref{Introduction}}}
 
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id221}}{\hyperref[\detokenize{tutorial:computing-the-maximal-independent-sets-miss}]{\sphinxcrossref{Computing the maximal independent sets (MISs)}}}
@@ -5256,7 +5256,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 \subsection{Introduction}
-\label{\detokenize{tutorial:id69}}
+\label{\detokenize{tutorial:id68}}
 Due to the public success of our common 2008 publication with Jean\sphinxhyphen{}Luc Marichal \sphinxcite{tutorial:isomis-08} , we present in this tutorial an example Python session for computing the \sphinxstylestrong{non isomorphic maximal independent sets} (MISs) from the 12\sphinxhyphen{}cycle graph, i.e. a \sphinxcode{\sphinxupquote{digraphs.CirculantDigraph}} class instance of order 12 and symmetric circulants 1 and \sphinxhyphen{}1.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
