@@ -368,19 +368,20 @@ class;</p>
 <dt><a class="reference internal" href="#linearorders-label"><span class="std std-ref">linearOrders module</span></a></dt><dd><p>Additional tools for solving linearly ranking problems with the
 root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a>
 class;</p>
-<div class="graphviz"><img src="_images/inheritance-c2b984b34a79a0914f1934dfe29da6a4cb50e629.png" alt="Inheritance diagram of linearOrders" usemap="#inheritance6ca036f5b8" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="_images/inheritance-27c32a92f6528bbf33efd96b0ccd15cfd536488a.png" alt="Inheritance diagram of linearOrders" usemap="#inheritance6ca036f5b8" class="inheritance graphviz" /></div>
 <map id="inheritance6ca036f5b8" name="inheritance6ca036f5b8">
-<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="4,149,116,170"/>
-<area shape="rect" id="node3" href="#linearOrders.LinearOrder" target="_top" title="abstract class for digraphs which represent" alt="" coords="156,149,308,170"/>
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="4,169,116,190"/>
+<area shape="rect" id="node3" href="#linearOrders.LinearOrder" target="_top" title="abstract class for digraphs which represent" alt="" coords="156,169,308,190"/>
 <area shape="rect" id="node2" href="#linearOrders.CopelandOrder" target="_top" title="instantiates the Copeland Order from" alt="" coords="376,4,545,26"/>
-<area shape="rect" id="node4" href="#linearOrders.IteratedNetFlowsRanking" target="_top" title="instantiates the iterated NetFlows order from" alt="" coords="348,46,573,67"/>
-<area shape="rect" id="node5" href="#linearOrders.KemenyOrder" target="_top" title="instantiates the exact Kemeny Order from" alt="" coords="380,87,542,108"/>
-<area shape="rect" id="node6" href="#linearOrders.KohlerOrder" target="_top" title="instantiates the Kohler Order from" alt="" coords="385,128,537,149"/>
-<area shape="rect" id="node7" href="#linearOrders.NetFlowsOrder" target="_top" title="instantiates the net flows Order from" alt="" coords="376,169,545,190"/>
-<area shape="rect" id="node8" href="#linearOrders.PrincipalOrder" target="_top" title="instantiates the order from the scores obtained by the first" alt="" coords="378,210,543,231"/>
-<area shape="rect" id="node9" href="#linearOrders.RandomLinearOrder" target="_top" title="Instantiates random linear orders" alt="" coords="362,251,559,272"/>
-<area shape="rect" id="node10" href="#linearOrders.RankedPairsOrder" target="_top" title="instantiates the Extended Prudent Ranked Pairs Order from" alt="" coords="368,292,553,313"/>
-<area shape="rect" id="node11" href="#linearOrders.SlaterOrder" target="_top" title="Instantiates a SlaterOrder by instantiating a *KemenyOrder* from the Condorcet Digraph &#45;the median cut polarised digraph" alt="" coords="614,87,764,108"/>
+<area shape="rect" id="node4" href="#linearOrders.IteratedCopelandRanking" target="_top" title="instantiates the iterated Copeland ranking from" alt="" coords="348,46,573,67"/>
+<area shape="rect" id="node5" href="#linearOrders.IteratedNetFlowsRanking" target="_top" title="instantiates the iterated NetFlows order from" alt="" coords="348,87,573,108"/>
+<area shape="rect" id="node6" href="#linearOrders.KemenyOrder" target="_top" title="instantiates the exact Kemeny Order from" alt="" coords="380,128,542,149"/>
+<area shape="rect" id="node7" href="#linearOrders.KohlerOrder" target="_top" title="instantiates the Kohler Order from" alt="" coords="385,169,537,190"/>
+<area shape="rect" id="node8" href="#linearOrders.NetFlowsOrder" target="_top" title="instantiates the net flows Order from" alt="" coords="376,210,545,231"/>
+<area shape="rect" id="node9" href="#linearOrders.PrincipalOrder" target="_top" title="instantiates the order from the scores obtained by the first" alt="" coords="378,251,543,272"/>
+<area shape="rect" id="node10" href="#linearOrders.RandomLinearOrder" target="_top" title="Instantiates random linear orders" alt="" coords="362,292,559,313"/>
+<area shape="rect" id="node11" href="#linearOrders.RankedPairsOrder" target="_top" title="instantiates the Extended Prudent Ranked Pairs Order from" alt="" coords="368,333,553,355"/>
+<area shape="rect" id="node12" href="#linearOrders.SlaterOrder" target="_top" title="Instantiates a SlaterOrder by instantiating a *KemenyOrder* from the Condorcet Digraph &#45;the median cut polarised digraph" alt="" coords="614,128,764,149"/>
 </map></dd>
 </dl>
 </li>
@@ -4680,7 +4681,7 @@ When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRank
 <li><p>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
 If <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
 in fact equivalent to the standard model.</p></li>
-<li><p><em>rankingRule</em> = ‘NetFlows’ (default) | ‘Copeland’ | ‘Kohler’ | ‘RankedPairs’ | ‘ArrowRaymond’ | ‘IteratedNetFlows’
+<li><p><em>rankingRule</em> = ‘NetFlows’ (default) | ‘Copeland’ | ‘Kohler’ | ‘RankedPairs’ | ‘ArrowRaymond’ | ‘IteratedNetFlows’ | ‘IteraredCopeland’
 see tutorial on ranking mith multiple incommensurable criteria. The corresponding ranking result is stored in self.</p></li>
 <li><p>Quantiles used for the pre-ranked decomposition are put by default to <em>n</em>
 (the number of decision alternatives) for <em>n</em> &lt; 50. For larger cardinalities up to 1000, quantiles = <em>n</em> /10.
@@ -7988,6 +7989,13 @@ Copyright (C) 2011-2020  Raymond Bisdorff</p>
 <dt id="linearOrders.CopelandOrder">
 <em class="property">class </em><code class="sig-prename descclassname">linearOrders.</code><code class="sig-name descname">CopelandOrder</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">coDual=False</em>, <em class="sig-param">Gamma=False</em>, <em class="sig-param">RankingRelation=True</em>, <em class="sig-param">Comments=False</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#CopelandOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linearOrders.CopelandOrder" title="Permalink to this definition">¶</a></dt>
 <dd><p>instantiates the Copeland Order from
+a given bipolar-valued Digraph instance</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="linearOrders.IteratedCopelandRanking">
+<em class="property">class </em><code class="sig-prename descclassname">linearOrders.</code><code class="sig-name descname">IteratedCopelandRanking</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">coDual=False</em>, <em class="sig-param">Valued=False</em>, <em class="sig-param">Comments=False</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#IteratedCopelandRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linearOrders.IteratedCopelandRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>instantiates the iterated Copeland ranking from
 a given bipolar-valued Digraph instance</p>
 </dd></dl>
 

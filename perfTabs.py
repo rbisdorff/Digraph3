@@ -2327,7 +2327,7 @@ The performance evaluations of each decision alternative on each criterion are g
               - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
                 If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
                 in fact equivalent to the standard model.
-              - *rankingRule* = 'NetFlows' (default) | 'Copeland' | 'Kohler' | 'RankedPairs' | 'ArrowRaymond' | 'IteratedNetFlows'
+              - *rankingRule* = 'NetFlows' (default) | 'Copeland' | 'Kohler' | 'RankedPairs' | 'ArrowRaymond' | 'IteratedNetFlows' | 'IteraredCopeland'
                 see tutorial on ranking mith multiple incommensurable criteria. The corresponding ranking result is stored in self.
               - Quantiles used for the pre-ranked decomposition are put by default to *n*
                 (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10.
@@ -2512,6 +2512,11 @@ The performance evaluations of each decision alternative on each criterion are g
                     inf = IteratedNetFlowsRanking(g)
                     actionsList = inf.iteratedNetFlowsRanking
                     self.iteratedNetFlowsRanking = actionsList
+                elif rankingRule == 'IteratedCopeland':
+                    from linearOrders import IteratedCopelandRanking
+                    icop = IteratedCopelandRanking(g)
+                    actionsList = icop.iteratedCopelandRanking
+                    self.iteratedCopelandRanking = actionsList
                 else: # default ranking rule
                     actionsList = g.computeNetFlowsRanking()
                     rankingRule='NetFlows'
@@ -2541,6 +2546,10 @@ The performance evaluations of each decision alternative on each criterion are g
                         g.computeMarginalVersusGlobalRankingCorrelations(\
                                 actionsList,ValuedCorrelation=True,Threading=Threading,
                                 nbrCores=nbrOfCPUs)
+                meanCriteriaCorrelation = Decimal('0.0')
+                for cg in criteriaCorrelation:
+                    meanCriteriaCorrelation += cg[0]
+                meanCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
                 criteriaList = [c[1] for c in criteriaCorrelation]
             else:
                 criteriaList = list(criteria.keys())
@@ -2713,6 +2722,7 @@ The performance evaluations of each decision alternative on each criterion are g
         if rankCorrelation != None:
             html += '<i>Ranking rule</i>: <b>%s</b><br/>\n' % rankingRule
             html += '<i>Ordinal (Kendall) correlation between global ranking and global outranking relation:</i> <b>%+.3f</b><br/>\n' % (rankCorrelation['correlation'])
+            html += '<i>Mean marginal correlation:</i> <b>%+.3f</b><br/>\n' % (meanCriteriaCorrelation)
             html += '</body></html>'
         return html
 

@@ -2367,7 +2367,7 @@
 <span class="sd">              - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.</span>
 <span class="sd">                If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be</span>
 <span class="sd">                in fact equivalent to the standard model.</span>
-<span class="sd">              - *rankingRule* = &#39;NetFlows&#39; (default) | &#39;Copeland&#39; | &#39;Kohler&#39; | &#39;RankedPairs&#39; | &#39;ArrowRaymond&#39; | &#39;IteratedNetFlows&#39;</span>
+<span class="sd">              - *rankingRule* = &#39;NetFlows&#39; (default) | &#39;Copeland&#39; | &#39;Kohler&#39; | &#39;RankedPairs&#39; | &#39;ArrowRaymond&#39; | &#39;IteratedNetFlows&#39; | &#39;IteraredCopeland&#39;</span>
 <span class="sd">                see tutorial on ranking mith multiple incommensurable criteria. The corresponding ranking result is stored in self.</span>
 <span class="sd">              - Quantiles used for the pre-ranked decomposition are put by default to *n*</span>
 <span class="sd">                (the number of decision alternatives) for *n* &lt; 50. For larger cardinalities up to 1000, quantiles = *n* /10.</span>
@@ -2552,6 +2552,11 @@
                     <span class="n">inf</span> <span class="o">=</span> <span class="n">IteratedNetFlowsRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">inf</span><span class="o">.</span><span class="n">iteratedNetFlowsRanking</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">iteratedNetFlowsRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
+                <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;IteratedCopeland&#39;</span><span class="p">:</span>
+                    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">IteratedCopelandRanking</span>
+                    <span class="n">icop</span> <span class="o">=</span> <span class="n">IteratedCopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">icop</span><span class="o">.</span><span class="n">iteratedCopelandRanking</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">iteratedCopelandRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
                 <span class="k">else</span><span class="p">:</span> <span class="c1"># default ranking rule</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
                     <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span>
@@ -2581,6 +2586,10 @@
                         <span class="n">g</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span>\
                                 <span class="n">actionsList</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
                                 <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
+                <span class="n">meanCriteriaCorrelation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">criteriaCorrelation</span><span class="p">:</span>
+                    <span class="n">meanCriteriaCorrelation</span> <span class="o">+=</span> <span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">meanCriteriaCorrelation</span> <span class="o">/=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">criteriaCorrelation</span><span class="p">)))</span>
                 <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">criteriaCorrelation</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
@@ -2753,6 +2762,7 @@
         <span class="k">if</span> <span class="n">rankCorrelation</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Ranking rule&lt;/i&gt;: &lt;b&gt;</span><span class="si">%s</span><span class="s1">&lt;/b&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">rankingRule</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Ordinal (Kendall) correlation between global ranking and global outranking relation:&lt;/i&gt; &lt;b&gt;</span><span class="si">%+.3f</span><span class="s1">&lt;/b&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">rankCorrelation</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>
+            <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;i&gt;Mean marginal correlation:&lt;/i&gt; &lt;b&gt;</span><span class="si">%+.3f</span><span class="s1">&lt;/b&gt;&lt;br/&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">meanCriteriaCorrelation</span><span class="p">)</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
         <span class="k">return</span> <span class="n">html</span>
 

@@ -872,6 +872,163 @@ class IteratedNetFlowsRanking(LinearOrder):
             self.showRelationTable()
             print('Iterated NetFlows ranking: ', self.iteratedNetFlowsRanking)
 
+class IteratedCopelandRanking(LinearOrder):
+    """
+    instantiates the iterated Copeland ranking from
+    a given bipolar-valued Digraph instance
+    """
+    def __init__(self,other,coDual=False,Valued=False,Comments=False,Debug=False):
+        """
+        constructor for generating a linear order
+        from a given other digraph following
+        the iterated Copeland rules
+        """
+        from copy import copy, deepcopy
+        from collections import OrderedDict
+        # construct ranked pairs
+        if coDual:
+            otherCoDual = CoDualDigraph(other)
+            relation = otherCoDual.relation
+            Max = otherCoDual.valuationdomain['max']
+            if Debug:
+                otherCoDual.showRelationTable()
+                print(otherCoDual.valuationdomain)
+        else:
+            relation = other.relation
+            Max = other.valuationdomain['max']
+            if Debug:
+                other.showRelationTable()
+                print(other.valuationdomain)
+                
+            
+        actions = [x for x in other.actions]
+        actions.sort()
+        n = len(actions)
+        
+        # instatiates a Digraph template
+        g = IndeterminateDigraph(order=n)
+        g.actions = actions
+        g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
+        g.relation = {}
+        for x in g.actions:
+            g.relation[x] = {}
+            for y in g.actions:
+                g.relation[x][y] = g.valuationdomain['med']
+
+        # construct ranking
+        actionsList = [x for x in g.actions]
+        c = PolarisedDigraph(other)
+
+        rank = OrderedDict()
+        order = OrderedDict()
+        k = 1
+        while actionsList != []:
+            knetFlows = []
+            for x in actionsList:
+                ca = 0
+                kxnetFlows = Decimal('0')
+                for y in actionsList:
+                    if x != y:
+                        kxnetFlows += c.relation[x][y] - c.relation[y][x]
+                        ca += 2
+                if Debug:
+                    print('k,ca,kxnetFlows', k,ca, kxnetFlows)                        
+                if ca > 0:
+                    kxnetFlows = kxnetFlows / Decimal(str(ca))
+                if Debug:
+                    print('k,x,kxnetFlows', k,x, kxnetFlows)
+                knetFlows.append((kxnetFlows,x))
+            knetFlows.sort()
+            if Comments:
+                print('k,knetFlows, knetFlows[-1][1]',k,knetFlows, knetFlows[-1][1])
+            rank[knetFlows[-1][1]] = {'rank':k,'netFlows':knetFlows[-1][0]}
+            order[knetFlows[0][1]] = {'order':k,'netFlows':knetFlows[0][0]}
+            
+            actionsList.remove(knetFlows[-1][1])
+            k += 1
+            if Debug:
+                print('actionsList', actionsList)
+        self.valuedRanks = rank
+        # construct ordering
+        actionsList = [x for x in g.actions]
+        order = OrderedDict()
+        k = 1
+        while actionsList != []:
+            knetFlows = []
+            for x in actionsList:
+                ca = 0
+                kxnetFlows = Decimal('0')
+                for y in actionsList:
+                    if x != y:
+                        kxnetFlows += c.relation[x][y] - c.relation[y][x]
+                        ca += 2
+                if Debug:
+                    print('k,ca,kxnetFlows', k,ca, kxnetFlows)                        
+                if ca > 0:
+                    kxnetFlows = kxnetFlows / Decimal(str(ca))
+                if Debug:
+                    print('k,x,kxnetFlows', k,x, kxnetFlows)
+                knetFlows.append((kxnetFlows,x))
+            knetFlows.sort()
+            if Comments:
+                print('k,knetFlows, knetFlows[-1][1]',k,knetFlows, knetFlows[-1][1])
+            order[knetFlows[0][1]] = {'order':k,'netFlows':knetFlows[0][0]}
+            
+            actionsList.remove(knetFlows[0][1])
+            k += 1
+            if Debug:
+                print('actionsList', actionsList)
+        self.valuedOrdering = order 
+        if Debug:
+            print(rank)
+            print(order)
+
+##        iteratedNetFlowsRanking = []
+##        for x in rank:
+##            iteratedNetFlowsRanking.append((rank[x]['rank'],x))
+        #iteratedNetFlowsOrder.sort()
+        iteratedCopelandRanking = [x for x in rank]
+        #kohlerRanking.reverse()
+        self.iteratedCopelandRanking = iteratedCopelandRanking
+##        for x in rank:
+        #    iteratedNetFlowsOrder.append((order[x]['rank'],x))
+        #iteratedNetFlowsOrder.sort()
+        iteratedCopelandOrdering = [x for x in order]
+        #kohlerRanking.reverse()
+        self.iteratedCopelandOrdering = iteratedCopelandOrdering
+        
+        if Debug:
+            print('Iterated Copeland ranks: ', iteratedCopelandRanking)
+            print('Iterated Copeland ordering: ', iteratedCopelandOrdering)
+
+        if Valued:
+            n = len(g.actions)
+            for i in range(n):
+                for j in range(i+1,n):
+                    x = iteratedCopelandRanking[i]
+                    y = iteratedCopelandRanking[j]
+                    g.relation[x][y] = rank[x]['Copeland']
+                    g.relation[y][x] = -rank[x]['Copeland']
+        else:
+            n = len(g.actions)
+            for i in range(n):
+                for j in range(i+1,n):
+                    x = iteratedCopelandRanking[i]
+                    y = iteratedCopelandRanking[j]
+                    g.relation[x][y] = g.valuationdomain['max']
+                    g.relation[y][x] = g.valuationdomain['min']
+
+            
+        self.name = other.name + '_ranked'        
+        self.actions = copy(other.actions)
+        self.order = len(self.actions)
+        self.valuationdomain = copy(g.valuationdomain)
+        self.relation = copy(g.relation)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        if Debug:
+            self.showRelationTable()
+            print('Iterated Copelans ranking: ', self.iteratedCopelandRanking)
 
 class _OutFlowsOrder(LinearOrder):
     """
@@ -1468,7 +1625,7 @@ if __name__ == "__main__":
 
     Threading = False
     print('*-------- Testing KemenyOrder class -------')
-    t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=13,seed=5)
+    t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=13,seed=None)
     #t = PerformanceTableau('testLin')    
     g = BipolarOutrankingDigraph(t,Normalized=True)
     g.showRelationTable()
@@ -1485,9 +1642,9 @@ if __name__ == "__main__":
     #t.showHTMLPerformanceHeatmap(actionsList=nf.netFlowsRanking,Correlations=True)
     print()
     print('==>> iterated net flows ordering:')
-    from linearOrders import IteratedNetFlowsOrder
+    from linearOrders import IteratedNetFlowsRanking
     t0 = time()
-    inf = IteratedNetFlowsOrder(g,Comments=True,Valued=False,Debug=False)
+    inf = IteratedNetFlowsRanking(g,Comments=True,Valued=False,Debug=False)
     inf.showRelationTable(actionsSubset=inf.iteratedNetFlowsRanking,Sorted=False)
     print(inf.iteratedNetFlowsRanking)
     print(inf.iteratedNetFlowsOrdering)
@@ -1496,9 +1653,28 @@ if __name__ == "__main__":
     g.showCorrelation(corr)
     print(time()-t0)
     print('iterated netflows')
-    corr = g.computeOrderCorrelation(inf.iteratedNetFlowsRanking)
+    corr = g.computeRankingCorrelation(inf.iteratedNetFlowsRanking)
     g.showCorrelation(corr)
     corr = g.computeOrderCorrelation(inf.iteratedNetFlowsOrdering)
+    g.showCorrelation(corr)
+    
+    print('==>> iterated Copeland ordering:')
+    from linearOrders import _IteratedCopelandRanking
+    t0 = time()
+    icop = IteratedCopelandRanking(g,Comments=True,Valued=False,Debug=False)
+    icop.showRelationTable(actionsSubset=icop.iteratedCopelandRanking,Sorted=False)
+    print(icop.iteratedCopelandRanking)
+    print(icop.iteratedCopelandOrdering)
+    print('Copeland')
+    from linearOrders import CopelandOrder
+    cop = CopelandOrder(g)
+    corr = g.computeOrdinalCorrelation(cop)
+    g.showCorrelation(corr)
+    print(time()-t0)
+    print('iterated Copeland')
+    corr = g.computeRankingCorrelation(icop.iteratedCopelandRanking)
+    g.showCorrelation(corr)
+    corr = g.computeOrderCorrelation(icop.iteratedCopelandOrdering)
     g.showCorrelation(corr)
 
     #t.showHTMLPerformanceHeatmap(actionsList=inf.iteratedNetFlowsRanking,Correlations=True)
