@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{March 19, 2020}
+\date{March 21, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -6173,8 +6173,9 @@ Following Martin Golumbic (see \sphinxcite{tutorial:gol-2004} p. 149), we call a
 
 \end{itemize}
 
-To illustrate these \sphinxstyleemphasis{perfect} graph classes, we will generate from 8 intervals, randomly chosen in the default integer range {[}0,10{]}, a \sphinxcode{\sphinxupquote{graphs.RandomIntervalIntersectionsGraph}} instance \sphinxstyleemphasis{g} (see Line 2 below).
-
+To illustrate these \sphinxstyleemphasis{perfect} graph classes, we will generate from 8 intervals, randomly chosen in the default integer range {[}0,10{]}, a \sphinxcode{\sphinxupquote{graphs.RandomIntervalIntersectionsGraph}} instance \sphinxstyleemphasis{g} (see \hyperref[\detokenize{tutorial:multiplyperfectgraph}]{Listing \ref{\detokenize{tutorial:multiplyperfectgraph}}} Line 2 below).
+\sphinxSetupCaptionForVerbatim{A multiply perfect random interval intersection graph}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:multiplyperfectgraph}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{graphs} \PYG{k+kn}{import} \PYG{n}{RandomIntervalIntersectionsGraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomIntervalIntersectionsGraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{8}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
@@ -6194,7 +6195,8 @@ To illustrate these \sphinxstyleemphasis{perfect} graph classes, we will generat
 \end{sphinxVerbatim}
 
 With seed = 100, we obtain here an \sphinxstyleemphasis{interval} graph, in fact a \sphinxstylestrong{perfect graph}, which is \sphinxstylestrong{conjointly} a \sphinxstyleemphasis{triangulated}, a \sphinxstyleemphasis{comparability}, a \sphinxstyleemphasis{split} and a \sphinxstyleemphasis{permutation} graph.
-
+\sphinxSetupCaptionForVerbatim{testing perfect graph categories}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:testingperfectgraph}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{isPerfectGraph}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ Graph randIntervalIntersections is perfect !}
@@ -6588,7 +6590,8 @@ The \sphinxcode{\sphinxupquote{PartiallyDetermined=True}} flag (see Lines 1 and 
 As both graphs are indeed \sphinxstyleemphasis{transitively orientable} (see Lines 3 and 6 above), we may conclude that the given random graph \sphinxstyleemphasis{g} is actually a \sphinxstyleemphasis{permutation graph} instance. Yet, we still need to find now its corresponding \sphinxstyleemphasis{permutation}. We therefore implement a recipee given by Martin Golumbic \sphinxcite{tutorial:gol-2004} p.159.
 
 We will first \sphinxstylestrong{fuse} both \sphinxstyleemphasis{og} and \sphinxstyleemphasis{ogd} orientations above with an \sphinxstylestrong{epistemic disjunction} (see the \sphinxcode{\sphinxupquote{digraphsTools.omax()}} operator), hence, the partially determined orientations requested above.
-
+\sphinxSetupCaptionForVerbatim{Fusing graph orientations}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:fusingorientations}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{FusionDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{f1} \PYG{o}{=} \PYG{n}{FusionDigraph}\PYG{p}{(}\PYG{n}{og}\PYG{p}{,}\PYG{n}{ogd}\PYG{p}{,}\PYG{n}{operator}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{o\PYGZhy{}max}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -6597,7 +6600,7 @@ We will first \sphinxstylestrong{fuse} both \sphinxstyleemphasis{og} and \sphinx
 \PYG{g+go}{ [\PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v7\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v6\PYGZsq{}, \PYGZsq{}v8\PYGZsq{}, \PYGZsq{}v4\PYGZsq{}, \PYGZsq{}v3\PYGZsq{}, \PYGZsq{}v2\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-We obtain by the \sphinxstyleemphasis{Copeland} ranking rule (see {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}} and the \sphinxcode{\sphinxupquote{digraphs.Digraph.computeCopelandRanking()}} method) a linear ordering of the vertices (see Line 5 above).
+We obtain by the \sphinxstyleemphasis{Copeland} ranking rule (see {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}} and the \sphinxcode{\sphinxupquote{digraphs.Digraph.computeCopelandRanking()}} method) a linear ordering of the vertices (see \hyperref[\detokenize{tutorial:fusingorientations}]{Listing \ref{\detokenize{tutorial:fusingorientations}}} Line 5 above).
 
 We reverse now the orientation of the edges in \sphinxstyleemphasis{og} (see \sphinxstyleemphasis{\sphinxhyphen{}og} in Line 1 below) in order to generate, again by \sphinxstyleemphasis{disjunctive fusion}, the \sphinxstyleemphasis{inversions} that are produced by the permutation we are looking for. Computing again a ranking with the \sphinxstyleemphasis{Copeland} rule, will show the correspondingly permuted list of vertices (see Line 4 below).
 

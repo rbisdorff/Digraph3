@@ -7362,7 +7362,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <li><p><strong>Split graph</strong> when <em>g</em> and its dual <em>-g</em> are both <em>triangulated</em> graphs.</p></li>
 </ul>
 </div></blockquote>
-<p>To illustrate these <em>perfect</em> graph classes, we will generate from 8 intervals, randomly chosen in the default integer range [0,10], a <a class="reference internal" href="techDoc.html#graphs.RandomIntervalIntersectionsGraph" title="graphs.RandomIntervalIntersectionsGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.RandomIntervalIntersectionsGraph</span></code></a> instance <em>g</em> (see Line 2 below).</p>
+<p>To illustrate these <em>perfect</em> graph classes, we will generate from 8 intervals, randomly chosen in the default integer range [0,10], a <a class="reference internal" href="techDoc.html#graphs.RandomIntervalIntersectionsGraph" title="graphs.RandomIntervalIntersectionsGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.RandomIntervalIntersectionsGraph</span></code></a> instance <em>g</em> (see <a class="reference internal" href="#multiplyperfectgraph"><span class="std std-numref">Listing 41</span></a> Line 2 below).</p>
+<div class="literal-block-wrapper docutils container" id="multiplyperfectgraph">
+<div class="code-block-caption"><span class="caption-number">Listing 41 </span><span class="caption-text">A multiply perfect random interval intersection graph</span><a class="headerlink" href="#multiplyperfectgraph" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -7394,7 +7396,10 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="go"> [(2, 7), (2, 7), (5, 6), (6, 8), (1, 8), (1, 1), (4, 7), (0, 10)]</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 <p>With seed = 100, we obtain here an <em>interval</em> graph, in fact a <strong>perfect graph</strong>, which is <strong>conjointly</strong> a <em>triangulated</em>, a <em>comparability</em>, a <em>split</em> and a <em>permutation</em> graph.</p>
+<div class="literal-block-wrapper docutils container" id="testingperfectgraph">
+<div class="code-block-caption"><span class="caption-number">Listing 42 </span><span class="caption-text">testing perfect graph categories</span><a class="headerlink" href="#testingperfectgraph" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -7440,6 +7445,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="go"> fdp -Tpng randomSplitGraph.dot -o randomSplitGraph.png</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 <div class="figure align-center" id="randomsplitgraph">
 <a class="reference internal image-reference" href="_images/randomSplitGraph.png"><img alt="Random split graph" src="_images/randomSplitGraph.png" style="width: 350px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 53 </span><span class="caption-text">A conjointly triangulated, comparability, interval, permutation and split graph</span><a class="headerlink" href="#randomsplitgraph" title="Permalink to this image">¶</a></p>
@@ -7913,6 +7919,8 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>The <code class="code docutils literal notranslate"><span class="pre">PartiallyDetermined=True</span></code> flag (see Lines 1 and 5) is required here in order to orient <em>only</em> the actual edges of the graphs. Relations between vertices not linked by an edge will be put to the <em>indeterminate</em> characteristic value 0. This will allow us to compute, later on, convenient <em>disjunctive digraph fusions</em>.</p>
 <p>As both graphs are indeed <em>transitively orientable</em> (see Lines 3 and 6 above), we may conclude that the given random graph <em>g</em> is actually a <em>permutation graph</em> instance. Yet, we still need to find now its corresponding <em>permutation</em>. We therefore implement a recipee given by Martin Golumbic <a class="reference internal" href="#gol-2004" id="id90"><span>[GOL-2004]</span></a> p.159.</p>
 <p>We will first <strong>fuse</strong> both <em>og</em> and <em>ogd</em> orientations above with an <strong>epistemic disjunction</strong> (see the <a class="reference internal" href="techDoc.html#digraphsTools.omax" title="digraphsTools.omax"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphsTools.omax()</span></code></a> operator), hence, the partially determined orientations requested above.</p>
+<div class="literal-block-wrapper docutils container" id="fusingorientations">
+<div class="code-block-caption"><span class="caption-number">Listing 43 </span><span class="caption-text">Fusing graph orientations</span><a class="headerlink" href="#fusingorientations" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -7924,7 +7932,8 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="go"> [&#39;v5&#39;, &#39;v7&#39;, &#39;v1&#39;, &#39;v6&#39;, &#39;v8&#39;, &#39;v4&#39;, &#39;v3&#39;, &#39;v2&#39;]</span>
 </pre></div>
 </td></tr></table></div>
-<p>We obtain by the <em>Copeland</em> ranking rule (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> and the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeCopelandRanking" title="digraphs.Digraph.computeCopelandRanking"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.computeCopelandRanking()</span></code></a> method) a linear ordering of the vertices (see Line 5 above).</p>
+</div>
+<p>We obtain by the <em>Copeland</em> ranking rule (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> and the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeCopelandRanking" title="digraphs.Digraph.computeCopelandRanking"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.computeCopelandRanking()</span></code></a> method) a linear ordering of the vertices (see <a class="reference internal" href="#fusingorientations"><span class="std std-numref">Listing 43</span></a> Line 5 above).</p>
 <p>We reverse now the orientation of the edges in <em>og</em> (see <em>-og</em> in Line 1 below) in order to generate, again by <em>disjunctive fusion</em>, the <em>inversions</em> that are produced by the permutation we are looking for. Computing again a ranking with the <em>Copeland</em> rule, will show the correspondingly permuted list of vertices (see Line 4 below).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2

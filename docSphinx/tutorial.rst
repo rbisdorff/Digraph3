@@ -5284,9 +5284,12 @@ Following Martin Golumbic (see [GOL-2004]_ p. 149), we call a given graph *g*:
     * **Permutation graph** when *g* and its dual *-g* are both *comparability* graphs;
     * **Split graph** when *g* and its dual *-g* are both *triangulated* graphs.
 
-To illustrate these *perfect* graph classes, we will generate from 8 intervals, randomly chosen in the default integer range [0,10], a :py:class:`graphs.RandomIntervalIntersectionsGraph` instance *g* (see Line 2 below). 
+To illustrate these *perfect* graph classes, we will generate from 8 intervals, randomly chosen in the default integer range [0,10], a :py:class:`graphs.RandomIntervalIntersectionsGraph` instance *g* (see :numref:`multiplyPerfectGraph` Line 2 below). 
 
 .. code-block:: pycon
+   :name: multiplyPerfectGraph
+   :caption: A multiply perfect random interval intersection graph
+   :linenos:
 
    >>> from graphs import RandomIntervalIntersectionsGraph
    >>> g = RandomIntervalIntersectionsGraph(order=8,seed=100)
@@ -5307,6 +5310,8 @@ To illustrate these *perfect* graph classes, we will generate from 8 intervals, 
 With seed = 100, we obtain here an *interval* graph, in fact a **perfect graph**, which is **conjointly** a *triangulated*, a *comparability*, a *split* and a *permutation* graph.
 
 .. code-block:: pycon
+   :name: testingPerfectGraph
+   :caption: testing perfect graph categories
    :linenos:
       
    >>> g.isPerfectGraph(Comments=True)
@@ -5700,6 +5705,8 @@ As both graphs are indeed *transitively orientable* (see Lines 3 and 6 above), w
 We will first **fuse** both *og* and *ogd* orientations above with an **epistemic disjunction** (see the :py:func:`digraphsTools.omax` operator), hence, the partially determined orientations requested above.
 
 .. code-block:: pycon
+   :name: fusingOrientations
+   :caption: Fusing graph orientations
 
    >>> from digraphs import FusionDigraph
    >>> f1 = FusionDigraph(og,ogd,operator='o-max')
@@ -5707,7 +5714,7 @@ We will first **fuse** both *og* and *ogd* orientations above with an **epistemi
    >>> print(s1)
     ['v5', 'v7', 'v1', 'v6', 'v8', 'v4', 'v3', 'v2']
 
-We obtain by the *Copeland* ranking rule (see :ref:`Ranking-Tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a linear ordering of the vertices (see Line 5 above).
+We obtain by the *Copeland* ranking rule (see :ref:`Ranking-Tutorial-label` and the :py:func:`digraphs.Digraph.computeCopelandRanking` method) a linear ordering of the vertices (see :numref:`fusingOrientations` Line 5 above).
 
 We reverse now the orientation of the edges in *og* (see *-og* in Line 1 below) in order to generate, again by *disjunctive fusion*, the *inversions* that are produced by the permutation we are looking for. Computing again a ranking with the *Copeland* rule, will show the correspondingly permuted list of vertices (see Line 4 below).
 

@@ -311,6 +311,7 @@ class RankingsFusion(TransitiveDigraph):
             print('Error: several rankings have to be provided!')
             return
         self.__dict__ = deepcopy(other.__dict__)
+        self.order = len(self.actions)
         self.name = other.name + '_wk'
         self.valuationdomain = {}
         self.valuationdomain['min'] = Decimal('-1')
