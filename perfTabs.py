@@ -2547,9 +2547,13 @@ The performance evaluations of each decision alternative on each criterion are g
                                 actionsList,ValuedCorrelation=True,Threading=Threading,
                                 nbrCores=nbrOfCPUs)
                 meanCriteriaCorrelation = Decimal('0.0')
+                sdCriteriaCorrelation = Decimal('0.0')
                 for cg in criteriaCorrelation:
                     meanCriteriaCorrelation += cg[0]
+                    sdCriteriaCorrelation += cg[0]*cg[0]
                 meanCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
+                sdCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
+                sdCriteriaCorrelation -= meanCriteriaCorrelation*meanCriteriaCorrelation
                 criteriaList = [c[1] for c in criteriaCorrelation]
             else:
                 criteriaList = list(criteria.keys())
@@ -2722,7 +2726,8 @@ The performance evaluations of each decision alternative on each criterion are g
         if rankCorrelation != None:
             html += '<i>Ranking rule</i>: <b>%s</b><br/>\n' % rankingRule
             html += '<i>Ordinal (Kendall) correlation between global ranking and global outranking relation:</i> <b>%+.3f</b><br/>\n' % (rankCorrelation['correlation'])
-            html += '<i>Mean marginal correlation:</i> <b>%+.3f</b><br/>\n' % (meanCriteriaCorrelation)
+            html += '<i>Mean marginal correlation               :</i> <b>%+.3f</b><br/>\n' % (meanCriteriaCorrelation)
+            html += '<i>Standard marginal correlation deviation :</i> <b>%+.3f</b><br/>\n' % (sdCriteriaCorrelation)
             html += '</body></html>'
         return html
 
@@ -7419,7 +7424,7 @@ if __name__ == "__main__":
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
     t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=7,
+                                   numberOfActions=20,
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
                                    #NegativeWeights=False,
