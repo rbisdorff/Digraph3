@@ -2546,14 +2546,14 @@ The performance evaluations of each decision alternative on each criterion are g
                         g.computeMarginalVersusGlobalRankingCorrelations(\
                                 actionsList,ValuedCorrelation=True,Threading=Threading,
                                 nbrCores=nbrOfCPUs)
-                meanCriteriaCorrelation = Decimal('0.0')
-                sdCriteriaCorrelation = Decimal('0.0')
+                meanMarginalCriteriaCorrelation = Decimal('0.0')
+                sdMarginalCriteriaCorrelation = Decimal('0.0')
                 for cg in criteriaCorrelation:
-                    meanCriteriaCorrelation += cg[0]
-                    sdCriteriaCorrelation += cg[0]*cg[0]
-                meanCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
-                sdCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
-                sdCriteriaCorrelation -= meanCriteriaCorrelation*meanCriteriaCorrelation
+                    meanMarginalCriteriaCorrelation += cg[0]
+                    sdMarginalCriteriaCorrelation += cg[0]*cg[0]
+                meanMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
+                sdMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
+                sdMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation
                 criteriaList = [c[1] for c in criteriaCorrelation]
             else:
                 criteriaList = list(criteria.keys())
@@ -2726,11 +2726,42 @@ The performance evaluations of each decision alternative on each criterion are g
         if rankCorrelation != None:
             html += '<i>Ranking rule</i>: <b>%s</b><br/>\n' % rankingRule
             html += '<i>Ordinal (Kendall) correlation between global ranking and global outranking relation:</i> <b>%+.3f</b><br/>\n' % (rankCorrelation['correlation'])
-            html += '<i>Mean marginal correlation               :</i> <b>%+.3f</b><br/>\n' % (meanCriteriaCorrelation)
-            html += '<i>Standard marginal correlation deviation :</i> <b>%+.3f</b><br/>\n' % (sdCriteriaCorrelation)
+            html += '<i>Mean marginal correlation               :</i> <b>%+.3f</b><br/>\n' % (meanMarginalCriteriaCorrelation)
+            html += '<i>Standard marginal correlation deviation :</i> <b>%+.3f</b><br/>\n' % (sdMarginalCriteriaCorrelation)
             html += '</body></html>'
         return html
 
+    def showRankingConsensusQuality(self,ranking,Threading=False,nbrOfCPUs=1):
+        """
+        shows the marginal criteria correlations with a given ranking with summary.
+        """
+        from outrankingDigraphs import BipolarOutrankingDigraph
+        g = BipolarOutrankingDigraph(self,Normalized=True)
+        marginalCriteriaCorrelations =\
+                        g.computeMarginalVersusGlobalRankingCorrelations(\
+                                ranking,ValuedCorrelation=True,Threading=Threading,
+                                nbrCores=nbrOfCPUs)
+        ncrit = Decimal(str(len(marginalCriteriaCorrelations)))
+        meanMarginalCriteriaCorrelation = Decimal('0.0')
+        sdMarginalCriteriaCorrelation = Decimal('0.0')
+        for cg in marginalCriteriaCorrelations:
+            meanMarginalCriteriaCorrelation += cg[0]
+            sdMarginalCriteriaCorrelation += cg[0]*cg[0]
+        meanMarginalCriteriaCorrelation /= ncrit
+        sdMarginalCriteriaCorrelation /= ncrit
+        sdMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation
+        # showing the results
+        print('Consensus quality of ranking:')
+        print(ranking)
+        print('criterion: correlation')
+        print('----------------------')
+        for cg in marginalCriteriaCorrelations:
+            print('%s: %+.3f' % (cg[1],cg[0]) )
+        print('Summary:')
+        print('Mean marginal correlation               : %+.3f' % meanMarginalCriteriaCorrelation)
+        print('Standard marginal correlation deviation : %+.3f' % sdMarginalCriteriaCorrelation)
+        
+        
     def computeWeightPreorder(self):
         """
         renders the weight preorder following from the given
@@ -7430,12 +7461,12 @@ if __name__ == "__main__":
                                    #NegativeWeights=False,
                                    Debug=False,
                                    missingDataProbability=0.1,
-                                   seed=10,
+                                   seed=100,
                                             #Threading=False
                                             )
     t.showWeightPreorder()
-    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows',Transposed=False)
-   
+    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='RankedPairs',Transposed=False)
+    t.showRankingConsensusQuality(t.rankedPairsRanking)
     
     
     print('*------------------*')
