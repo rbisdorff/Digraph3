@@ -2542,6 +2542,7 @@ The performance evaluations of each decision alternative on each criterion are g
         criteria = self.criteria
         if criteriaList == None:
             if Correlations:
+                from math import sqrt
                 criteriaCorrelation =\
                         g.computeMarginalVersusGlobalRankingCorrelations(\
                                 actionsList,ValuedCorrelation=True,Threading=Threading,
@@ -2554,6 +2555,7 @@ The performance evaluations of each decision alternative on each criterion are g
                 meanMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
                 sdMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
                 sdMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation
+                sdMarginalCriteriaCorrelation = sqrt(sdMarginalCriteriaCorrelation)
                 criteriaList = [c[1] for c in criteriaCorrelation]
             else:
                 criteriaList = list(criteria.keys())
@@ -2736,20 +2738,23 @@ The performance evaluations of each decision alternative on each criterion are g
         shows the marginal criteria correlations with a given ranking with summary.
         """
         from outrankingDigraphs import BipolarOutrankingDigraph
+        from math import sqrt
         g = BipolarOutrankingDigraph(self,Normalized=True)
+        criteria = self.criteria
         marginalCriteriaCorrelations =\
                         g.computeMarginalVersusGlobalRankingCorrelations(\
                                 ranking,ValuedCorrelation=True,Threading=Threading,
                                 nbrCores=nbrOfCPUs)
         ncrit = Decimal(str(len(marginalCriteriaCorrelations)))
         meanMarginalCriteriaCorrelation = Decimal('0.0')
-        sdMarginalCriteriaCorrelation = Decimal('0.0')
+        varMarginalCriteriaCorrelation = Decimal('0.0')
         for cg in marginalCriteriaCorrelations:
             meanMarginalCriteriaCorrelation += cg[0]
-            sdMarginalCriteriaCorrelation += cg[0]*cg[0]
+            varMarginalCriteriaCorrelation += cg[0]*cg[0]
         meanMarginalCriteriaCorrelation /= ncrit
-        sdMarginalCriteriaCorrelation /= ncrit
-        sdMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation
+        varMarginalCriteriaCorrelation /= ncrit
+        varMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation
+        sdMarginalCriteriaCorrelation = sqrt(varMarginalCriteriaCorrelation) 
         # showing the results
         print('Consensus quality of ranking:')
         print(ranking)
@@ -7461,12 +7466,12 @@ if __name__ == "__main__":
                                    #NegativeWeights=False,
                                    Debug=False,
                                    missingDataProbability=0.1,
-                                   seed=100,
+                                   seed=101,
                                             #Threading=False
                                             )
     t.showWeightPreorder()
-    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='RankedPairs',Transposed=False)
-    t.showRankingConsensusQuality(t.rankedPairsRanking)
+    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows',Transposed=False)
+    t.showRankingConsensusQuality(t.netFlowsRanking)
     
     
     print('*------------------*')
