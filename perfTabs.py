@@ -2566,13 +2566,23 @@ The performance evaluations of each decision alternative on each criterion are g
                 criteriaCorrelation = None
         else:
             criteriaList = list(criteria.keys())
-            if argActionsList != None:
-                Correlations = False
+##            if argActionsList != None:
+##                Correlations = False
             if Correlations:
+                from math import sqrt
                 criteriaCorrelation =\
                         g.computeMarginalVersusGlobalRankingCorrelations(\
                                 actionsList,ValuedCorrelation=True,Threading=Threading,
                                 nbrCores=nbrOfCPUs)
+                meanMarginalCriteriaCorrelation = Decimal('0.0')
+                sdMarginalCriteriaCorrelation = Decimal('0.0')
+                for cg in criteriaCorrelation:
+                    meanMarginalCriteriaCorrelation += cg[0]
+                    sdMarginalCriteriaCorrelation += cg[0]*cg[0]
+                meanMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
+                sdMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
+                sdMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation
+                sdMarginalCriteriaCorrelation = sqrt(sdMarginalCriteriaCorrelation)
             else:
                 criteriaCorrelation = None
         quantileColor={}
@@ -7460,19 +7470,34 @@ if __name__ == "__main__":
 
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
-    t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=20,
+##    t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,
+##                                   numberOfActions=20,
+##                                   weightDistribution='equiobjectives',
+##                                   IntegerWeights=True,
+##                                   #NegativeWeights=False,
+##                                   Debug=False,
+##                                   missingDataProbability=0.1,
+##                                   seed=101,
+##                                            #Threading=False
+##                                            )
+##    t.showWeightPreorder()
+##    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows',Transposed=False)
+##    t.computeRankingConsensusQuality(t.netFlowsRanking)
+##    print('*------ test performance heatmap -----*')
+    t = RandomCBPerformanceTableau(numberOfCriteria=5,
+                                   numberOfActions=7,
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
-                                   #NegativeWeights=False,
-                                   Debug=False,
-                                   missingDataProbability=0.1,
-                                   seed=101,
-                                            #Threading=False
-                                            )
-    t.showWeightPreorder()
-    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows',Transposed=False)
-    t.computeRankingConsensusQuality(t.netFlowsRanking)
+                                   NegativeWeights=True,
+                                   Debug=False)
+    actionsList = [x for x in t.actions.keys()]
+    criteriaList = [g for g in t.criteria.keys()]
+    print(t._htmlPerformanceHeatmap(argActionsList=actionsList,
+                                   argCriteriaList=criteriaList,
+                                   colorLevels=9,
+                                   Correlations=True,
+                                   ndigits=4,
+                                   Debug=False))
     
     
     print('*------------------*')

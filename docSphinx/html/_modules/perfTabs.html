@@ -2606,13 +2606,23 @@
                 <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-            <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">Correlations</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="c1">##            if argActionsList != None:</span>
+<span class="c1">##                Correlations = False</span>
             <span class="k">if</span> <span class="n">Correlations</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
                 <span class="n">criteriaCorrelation</span> <span class="o">=</span>\
                         <span class="n">g</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span>\
                                 <span class="n">actionsList</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
                                 <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
+                <span class="n">meanMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
+                <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">criteriaCorrelation</span><span class="p">:</span>
+                    <span class="n">meanMarginalCriteriaCorrelation</span> <span class="o">+=</span> <span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">+=</span> <span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">meanMarginalCriteriaCorrelation</span> <span class="o">/=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">criteriaCorrelation</span><span class="p">)))</span>
+                <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">/=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">criteriaCorrelation</span><span class="p">)))</span>
+                <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">-=</span> <span class="n">meanMarginalCriteriaCorrelation</span><span class="o">*</span><span class="n">meanMarginalCriteriaCorrelation</span>
+                <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sdMarginalCriteriaCorrelation</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">quantileColor</span><span class="o">=</span><span class="p">{}</span>
@@ -7500,19 +7510,34 @@
 
 <span class="c1">##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=(&#39;triangular&#39;,30.0,0.7))</span>
     <span class="c1">## t.showStatistics()</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
-                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="c1">##    t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,</span>
+<span class="c1">##                                   numberOfActions=20,</span>
+<span class="c1">##                                   weightDistribution=&#39;equiobjectives&#39;,</span>
+<span class="c1">##                                   IntegerWeights=True,</span>
+<span class="c1">##                                   #NegativeWeights=False,</span>
+<span class="c1">##                                   Debug=False,</span>
+<span class="c1">##                                   missingDataProbability=0.1,</span>
+<span class="c1">##                                   seed=101,</span>
+<span class="c1">##                                            #Threading=False</span>
+<span class="c1">##                                            )</span>
+<span class="c1">##    t.showWeightPreorder()</span>
+<span class="c1">##    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule=&#39;NetFlows&#39;,Transposed=False)</span>
+<span class="c1">##    t.computeRankingConsensusQuality(t.netFlowsRanking)</span>
+<span class="c1">##    print(&#39;*------ test performance heatmap -----*&#39;)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
                                    <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
                                    <span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                   <span class="c1">#NegativeWeights=False,</span>
-                                   <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                   <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-                                   <span class="n">seed</span><span class="o">=</span><span class="mi">101</span><span class="p">,</span>
-                                            <span class="c1">#Threading=False</span>
-                                            <span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showWeightPreorder</span><span class="p">()</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">)</span>
+                                   <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+    <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">_htmlPerformanceHeatmap</span><span class="p">(</span><span class="n">argActionsList</span><span class="o">=</span><span class="n">actionsList</span><span class="p">,</span>
+                                   <span class="n">argCriteriaList</span><span class="o">=</span><span class="n">criteriaList</span><span class="p">,</span>
+                                   <span class="n">colorLevels</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+                                   <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">ndigits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                   <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
     
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
