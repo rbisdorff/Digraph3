@@ -2086,8 +2086,8 @@ The *Copeland* ranking
    :caption: Computing a *Copeland* Ranking
    :linenos:
 
-   >>> from linearOrders import CopelandOrder
-   >>> cop = CopelandOrder(g,Comments=True)
+   >>> from linearOrders import CopelandRanking
+   >>> cop = CopelandRanking(g,Comments=True)
     Copeland decreasing scores
      a5 : 12
      a1 : 2
@@ -2177,8 +2177,8 @@ The valued version of the *Copeland* rule, called **NetFlows** rule, computes fo
    :caption: Computing a *NetFlows* ranking 
    :linenos:
 
-   >>> from linearOrders import NetFlowsOrder
-   >>> nf = NetFlowsOrder(gcd,Comments=True)
+   >>> from linearOrders import NetFlowsRanking
+   >>> nf = NetFlowsRanking(gcd,Comments=True)
     Net Flows :
     a5 : 3.600
     a7 : 2.800
@@ -2226,8 +2226,8 @@ A **Kemeny** ranking is a linear order which is *closest*, in the sense of the o
    :caption: Computing a *Kemeny* ranking
    :linenos:
 
-   >>> from linearOrders import KemenyOrder
-   >>> ke = KemenyOrder(g,orderLimit=9) # default orderLimit is 7
+   >>> from linearOrders import KemenyRanking
+   >>> ke = KemenyRanking(g,orderLimit=9) # default orderLimit is 7
    >>> ke.showRanking()
     ['a5', 'a6', 'a7', 'a3', 'a8', 'a9', 'a4', 'a1', 'a2']
    >>> corr = g.computeOrdinalCorrelation(ke)
@@ -2293,8 +2293,8 @@ The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, inste
    :caption: Computing a *Slater* ranking 
    :linenos:
 
-   >>> from linearOrders import SlaterOrder
-   >>> sl = SlaterOrder(gcd,orderLimit=9)
+   >>> from linearOrders import SlaterRanking
+   >>> sl = SlaterRanking(gcd,orderLimit=9)
    #  sl = KemenyOrder(ccd,orderLimit=9)
    >>> sl.slaterRanking
     ['a5', 'a6', 'a4', 'a1', 'a3', 'a7', 'a8', 'a9', 'a2']
@@ -2355,8 +2355,8 @@ At step *i* (*i* goes from 1 to *n*) do the following:
    :caption: Computing a *Kohler* ranking 
    :linenos:
 
-   >>> from linearOrders import KohlerOrder
-   >>> kocd = KohlerOrder(gcd)
+   >>> from linearOrders import KohlerRanking
+   >>> kocd = KohlerRanking(gcd)
    >>> kocd.showRanking()
     ['a5', 'a7', 'a6', 'a3', 'a9', 'a8', 'a4', 'a1', 'a2']
    >>> corr = gcd.computeOrdinalCorrelation(kocd)
@@ -2371,7 +2371,7 @@ With this *min-max* lexicographic *ranking-by-choosing* strategy, we find a corr
 .. code-block:: pycon
    :linenos:
 
-    >>> ko = KohlerOrder(g)  
+    >>> ko = KohlerRanking(g)  
     >>> corr = g.computeOrdinalCorrelation(ko)
     >>> g.showCorrelation(corr)
      Correlation indexes:
@@ -2454,8 +2454,8 @@ With our didactic outranking digraph *g*, we get the following result.
    :caption: Computing a *RankedPairs* ranking 
    :linenos:
 
-   >>> from linearOrders import RankedPairsOrder
-   >>> rp = RankedPairsOrder(g)
+   >>> from linearOrders import RankedPairsRanking
+   >>> rp = RankedPairsRanking(g)
    >>> rp.showRanking()
     ['a5', 'a6', 'a7', 'a3', 'a8', 'a9', 'a4', 'a1', 'a2']
 
