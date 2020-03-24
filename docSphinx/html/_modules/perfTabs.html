@@ -2773,7 +2773,7 @@
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
         <span class="k">return</span> <span class="n">html</span>
 
-<div class="viewcode-block" id="PerformanceTableau.showRankingConsensusQuality"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showRankingConsensusQuality">[docs]</a>    <span class="k">def</span> <span class="nf">showRankingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ranking</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="PerformanceTableau.computeRankingConsensusQuality"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeRankingConsensusQuality">[docs]</a>    <span class="k">def</span> <span class="nf">computeRankingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ranking</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the marginal criteria correlations with a given ranking with summary.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2796,16 +2796,17 @@
         <span class="n">varMarginalCriteriaCorrelation</span> <span class="o">-=</span> <span class="n">meanMarginalCriteriaCorrelation</span><span class="o">*</span><span class="n">meanMarginalCriteriaCorrelation</span>
         <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">varMarginalCriteriaCorrelation</span><span class="p">)</span> 
         <span class="c1"># showing the results</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Consensus quality of ranking:&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;criterion: correlation&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;----------------------&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">marginalCriteriaCorrelations</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Summary:&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean marginal correlation               : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">meanMarginalCriteriaCorrelation</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Standard marginal correlation deviation : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">sdMarginalCriteriaCorrelation</span><span class="p">)</span></div>
-        
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Consensus quality of ranking:&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;criterion: correlation&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;----------------------&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">marginalCriteriaCorrelations</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Summary:&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean marginal correlation               : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">meanMarginalCriteriaCorrelation</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Standard marginal correlation deviation : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">sdMarginalCriteriaCorrelation</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">marginalCriteriaCorrelations</span><span class="p">,</span><span class="n">meanMarginalCriteriaCorrelation</span><span class="p">,</span><span class="n">sdMarginalCriteriaCorrelation</span><span class="p">)</span></div>
         
 <div class="viewcode-block" id="PerformanceTableau.computeWeightPreorder"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeWeightPreorder">[docs]</a>    <span class="k">def</span> <span class="nf">computeWeightPreorder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -7511,7 +7512,7 @@
                                             <span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showWeightPreorder</span><span class="p">()</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showRankingConsensusQuality</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">)</span>
     
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>

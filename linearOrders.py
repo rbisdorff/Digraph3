@@ -334,7 +334,7 @@ class RandomLinearOrder(LinearOrder):
             print(self.computeOrder())
         
 ######   instantiable class of linear orders
-class RankedPairsOrder(LinearOrder):
+class RankedPairsRanking(LinearOrder):
     """
     instantiates the Extended Prudent Ranked Pairs Order from
     a given bipolar-valued Digraph instance
@@ -488,8 +488,12 @@ class RankedPairsOrder(LinearOrder):
         if Debug:
             print('Ranked Pairs Order = ', self.rankedPairsRanking)
 
-    
-class KohlerOrder(LinearOrder):
+class RankedPairsOrder(RankedPairsRanking):
+    """
+    Dummy for RankedPairsRanking class
+    """
+#----------------  
+class KohlerRanking(LinearOrder):
     """
     instantiates the Kohler Order from
     a given bipolar-valued Digraph instance
@@ -591,9 +595,14 @@ class KohlerOrder(LinearOrder):
             self.showRelationTable()
             print('Kohler ranking: ', self.kohlerRanking)
 
-class NetFlowsOrder(LinearOrder):
+class KohlerOrder(KohlerRanking):
     """
-    instantiates the net flows Order from
+    Dummay for KohlerRanking class
+    """
+
+class NetFlowsRanking(LinearOrder):
+    """
+    instantiates the net flows ranking from
     a given bipolar-valued Digraph instance
     """
     def __init__(self,other,coDual=False,Comments=False,Debug=False):
@@ -714,6 +723,11 @@ class NetFlowsOrder(LinearOrder):
         else:
             for x in reversed(self.netFlows):
                 print('%s \t %.2f' %(x[1],x[0]))
+
+class NetFlowsOrder(NetFlowsRanking):
+    """
+    Dummy for NetFlowsRanking class
+    """
 
 class IteratedNetFlowsRanking(LinearOrder):
     """
@@ -1144,7 +1158,7 @@ class _OutFlowsOrder(LinearOrder):
             for x in reversed(self.outFlows):
                 print('%s \t %.2f' %(x[1],x[0]))
 
-class CopelandOrder(LinearOrder):
+class CopelandRanking(LinearOrder):
     """
     instantiates the Copeland Order from
     a given bipolar-valued Digraph instance
@@ -1287,7 +1301,10 @@ class CopelandOrder(LinearOrder):
             for x in reversed(self.incCopelandScores):
                 print('%s \t %.2f' %(x[1],x[0]))
          
-
+class CopelandOrder(CopelandRanking):
+    """
+    Dummy for CopelandRanking class
+    """
 
 ##class _CopelandOrder(LinearOrder):
 ##    """
@@ -1378,7 +1395,7 @@ class CopelandOrder(LinearOrder):
 
 ########  instantiates optimal linear orderings
 
-class KemenyOrder(LinearOrder):
+class KemenyRanking(LinearOrder):
     """
     instantiates the exact Kemeny Order from
     a given bipolar-valued Digraph instance of small order 
@@ -1458,11 +1475,15 @@ class KemenyOrder(LinearOrder):
             self.showRelationTable()
             print('Kemeny Ranking = ', self.kemenyRanking)
 
-########  instantiates principal scores' ordering
 
-class SlaterOrder(KemenyOrder):
+class KemenyOrder(KemenyRanking):
     """
-    Instantiates a SlaterOrder by instantiating a *KemenyOrder* from the Condorcet Digraph -the median cut polarised digraph
+    Dummy class
+    """
+
+class SlaterRanking(KemenyRanking):
+    """
+    Instantiates a Slater ranking by instantiating a *KemenyRanking* from the Condorcet Digraph -the median cut polarised digraph
     given bipolarised digraph- of a given bipolar-valued Digraph instance. 
     """
     def __init__(self,other,orderLimit=7,Debug=False):
@@ -1485,6 +1506,11 @@ class SlaterOrder(KemenyOrder):
         self.maximalRankings = copy(sl.maximalRankings)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+
+class SlaterOrder(SlaterRanking):
+    """
+    Dummy class
+    """
         
 ########  instantiates principal scores' ordering
 
@@ -1632,25 +1658,27 @@ if __name__ == "__main__":
     print()
     print('==>> net flows ordering:')
     t0 = time()
-    nf = NetFlowsOrder(g,Debug=True)
-    g.showRelationTable(actionsSubset=nf.netFlowsRanking,Sorted=False)
-    print(nf.netFlowsRanking)
-    print(nf.netFlowsOrder)
-    corr = g.computeOrdinalCorrelation(nf)
-    g.showCorrelation(corr)
-    print(time()-t0)
+    nf = NetFlowsOrder(g,Debug=False)
+    #g.showRelationTable(actionsSubset=nf.netFlowsRanking,Sorted=False)
+    #print(nf.netFlowsRanking)
+    #print(nf.netFlowsOrder)
+    #corr = g.computeOrdinalCorrelation(nf)
+    #g.showCorrelation(corr)
+    #print(time()-t0)
     #t.showHTMLPerformanceHeatmap(actionsList=nf.netFlowsRanking,Correlations=True)
     print()
     print('==>> iterated net flows ordering:')
     from linearOrders import IteratedNetFlowsRanking
     t0 = time()
-    inf = IteratedNetFlowsRanking(g,Comments=True,Valued=False,Debug=False)
+    inf = IteratedNetFlowsRanking(g,Comments=False,Valued=False,Debug=False)
     inf.showRelationTable(actionsSubset=inf.iteratedNetFlowsRanking,Sorted=False)
     print(inf.iteratedNetFlowsRanking)
     print(inf.iteratedNetFlowsOrdering)
     print('netfloes')
     corr = g.computeOrdinalCorrelation(nf)
     g.showCorrelation(corr)
+    g.computeRankingConsensusQuality(inf.iteratedNetFlowsRanking,
+                                     Comments=True)
     print(time()-t0)
     print('iterated netflows')
     corr = g.computeRankingCorrelation(inf.iteratedNetFlowsRanking)
@@ -1659,17 +1687,20 @@ if __name__ == "__main__":
     g.showCorrelation(corr)
     
     print('==>> iterated Copeland ordering:')
-    from linearOrders import _IteratedCopelandRanking
+    from linearOrders import IteratedCopelandRanking
     t0 = time()
-    icop = IteratedCopelandRanking(g,Comments=True,Valued=False,Debug=False)
+    icop = IteratedCopelandRanking(g,Comments=False,Valued=False,Debug=False)
     icop.showRelationTable(actionsSubset=icop.iteratedCopelandRanking,Sorted=False)
     print(icop.iteratedCopelandRanking)
     print(icop.iteratedCopelandOrdering)
     print('Copeland')
     from linearOrders import CopelandOrder
     cop = CopelandOrder(g)
+    print(cop.copelandRanking)
     corr = g.computeOrdinalCorrelation(cop)
     g.showCorrelation(corr)
+    g.computeRankingConsensusQuality(icop.iteratedCopelandRanking,
+                                     Comments=True)
     print(time()-t0)
     print('iterated Copeland')
     corr = g.computeRankingCorrelation(icop.iteratedCopelandRanking)

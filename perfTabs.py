@@ -2733,7 +2733,7 @@ The performance evaluations of each decision alternative on each criterion are g
             html += '</body></html>'
         return html
 
-    def showRankingConsensusQuality(self,ranking,Threading=False,nbrOfCPUs=1):
+    def computeRankingConsensusQuality(self,ranking,Comments=False,Threading=False,nbrOfCPUs=1):
         """
         shows the marginal criteria correlations with a given ranking with summary.
         """
@@ -2756,16 +2756,17 @@ The performance evaluations of each decision alternative on each criterion are g
         varMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation
         sdMarginalCriteriaCorrelation = sqrt(varMarginalCriteriaCorrelation) 
         # showing the results
-        print('Consensus quality of ranking:')
-        print(ranking)
-        print('criterion: correlation')
-        print('----------------------')
-        for cg in marginalCriteriaCorrelations:
-            print('%s: %+.3f' % (cg[1],cg[0]) )
-        print('Summary:')
-        print('Mean marginal correlation               : %+.3f' % meanMarginalCriteriaCorrelation)
-        print('Standard marginal correlation deviation : %+.3f' % sdMarginalCriteriaCorrelation)
-        
+        if Comments:
+            print('Consensus quality of ranking:')
+            print(ranking)
+            print('criterion: correlation')
+            print('----------------------')
+            for cg in marginalCriteriaCorrelations:
+                print('%s: %+.3f' % (cg[1],cg[0]) )
+            print('Summary:')
+            print('Mean marginal correlation               : %+.3f' % meanMarginalCriteriaCorrelation)
+            print('Standard marginal correlation deviation : %+.3f' % sdMarginalCriteriaCorrelation)
+        return (marginalCriteriaCorrelations,meanMarginalCriteriaCorrelation,sdMarginalCriteriaCorrelation)
         
     def computeWeightPreorder(self):
         """
@@ -7471,7 +7472,7 @@ if __name__ == "__main__":
                                             )
     t.showWeightPreorder()
     t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows',Transposed=False)
-    t.showRankingConsensusQuality(t.netFlowsRanking)
+    t.computeRankingConsensusQuality(t.netFlowsRanking)
     
     
     print('*------------------*')
