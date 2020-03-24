@@ -1,0 +1,20 @@
+<map id="inheritance6ca036f5b8" name="inheritance6ca036f5b8">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="3,131,89,147"/>
+<area shape="rect" id="node4" href="#linearOrders.LinearOrder" target="_top" title="abstract class for digraphs which represent" alt="" coords="120,131,238,147"/>
+<area shape="rect" id="node2" href="#linearOrders.CopelandOrder" target="_top" title="Dummy for CopelandRanking class" alt="" coords="481,3,611,20"/>
+<area shape="rect" id="node3" href="#linearOrders.CopelandRanking" target="_top" title="instantiates the Copeland Order from" alt="" coords="285,3,427,20"/>
+<area shape="rect" id="node5" href="#linearOrders.IteratedCopelandRanking" target="_top" title="instantiates the iterated Copeland ranking from" alt="" coords="269,35,443,52"/>
+<area shape="rect" id="node6" href="#linearOrders.IteratedNetFlowsRanking" target="_top" title="instantiates the iterated NetFlows order from" alt="" coords="269,67,443,83"/>
+<area shape="rect" id="node8" href="#linearOrders.KemenyRanking" target="_top" title="instantiates the exact Kemeny Order from" alt="" coords="288,99,424,115"/>
+<area shape="rect" id="node10" href="#linearOrders.KohlerRanking" target="_top" title="instantiates the Kohler Order from" alt="" coords="292,131,421,147"/>
+<area shape="rect" id="node12" href="#linearOrders.NetFlowsRanking" target="_top" title="instantiates the net flows ranking from" alt="" coords="286,162,427,179"/>
+<area shape="rect" id="node13" href="#linearOrders.PrincipalOrder" target="_top" title="instantiates the order from the scores obtained by the first" alt="" coords="292,194,420,210"/>
+<area shape="rect" id="node14" href="#linearOrders.RandomLinearOrder" target="_top" title="Instantiates random linear orders" alt="" coords="280,226,432,242"/>
+<area shape="rect" id="node16" href="#linearOrders.RankedPairsRanking" target="_top" title="instantiates the Extended Prudent Ranked Pairs Order from" alt="" coords="279,258,433,274"/>
+<area shape="rect" id="node7" href="#linearOrders.KemenyOrder" target="_top" title="Dummy class" alt="" coords="483,67,609,83"/>
+<area shape="rect" id="node18" href="#linearOrders.SlaterRanking" target="_top" title="Instantiates a Slater ranking by instantiating a *KemenyRanking* from the Condorcet Digraph &#45;the median cut polarised digraph" alt="" coords="482,99,610,115"/>
+<area shape="rect" id="node9" href="#linearOrders.KohlerOrder" target="_top" title="Dummay for KohlerRanking class" alt="" coords="487,131,605,147"/>
+<area shape="rect" id="node11" href="#linearOrders.NetFlowsOrder" target="_top" title="Dummy for NetFlowsRanking class" alt="" coords="481,162,611,179"/>
+<area shape="rect" id="node15" href="#linearOrders.RankedPairsOrder" target="_top" title="Dummy for RankedPairsRanking class" alt="" coords="474,258,618,274"/>
+<area shape="rect" id="node17" href="#linearOrders.SlaterOrder" target="_top" title="Dummy class" alt="" coords="649,99,765,115"/>
+</map>

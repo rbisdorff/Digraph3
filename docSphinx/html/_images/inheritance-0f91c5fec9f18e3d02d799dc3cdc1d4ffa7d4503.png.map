@@ -1,0 +1,4 @@
+<map id="inheritancedd51be6259" name="inheritancedd51be6259">
+<area shape="rect" id="node1" href="#votingProfiles.LinearVotingProfile" target="_top" title="A specialised class for linear voting profiles" alt="" coords="251,5,488,31"/>
+<area shape="rect" id="node2" href="#votingProfiles.VotingProfile" target="_top" title="A generic class for storing voting profiles." alt="" coords="5,5,203,31"/>
+</map>

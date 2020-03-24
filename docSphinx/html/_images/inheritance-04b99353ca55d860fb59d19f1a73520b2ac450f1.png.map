@@ -1,0 +1,12 @@
+<map id="inheritance6ca036f5b8" name="inheritance6ca036f5b8">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="5,133,120,155"/>
+<area shape="rect" id="node3" href="#linearOrders.LinearOrder" target="_top" title="abstract class for digraphs which represent" alt="" coords="162,133,320,155"/>
+<area shape="rect" id="node2" href="#linearOrders.CopelandOrder" target="_top" title="instantiates the Copeland Order from" alt="" coords="376,5,551,27"/>
+<area shape="rect" id="node4" href="#linearOrders.KemenyOrder" target="_top" title="instantiates the exact Kemeny Order from" alt="" coords="379,47,548,69"/>
+<area shape="rect" id="node5" href="#linearOrders.KohlerOrder" target="_top" title="instantiates the Kohler Order from" alt="" coords="385,90,543,112"/>
+<area shape="rect" id="node6" href="#linearOrders.NetFlowsOrder" target="_top" title="instantiates the net flows Order from" alt="" coords="376,133,551,155"/>
+<area shape="rect" id="node7" href="#linearOrders.PrincipalOrder" target="_top" title="instantiates the order from the scores obtained by the first" alt="" coords="378,176,550,197"/>
+<area shape="rect" id="node8" href="#linearOrders.RandomLinearOrder" target="_top" title="Instantiates random linear orders" alt="" coords="361,218,566,240"/>
+<area shape="rect" id="node9" href="#linearOrders.RankedPairsOrder" target="_top" title="instantiates the Extended Prudent Ranked Pairs Order from" alt="" coords="367,261,560,283"/>
+<area shape="rect" id="node10" href="#linearOrders.SlaterOrder" target="_top" title="Instantiates a SlaterOrder by instantiating a *KemenyOrder* from the Condorcet Digraph &#45;the median cut polarised digraph" alt="" coords="607,47,763,69"/>
+</map>

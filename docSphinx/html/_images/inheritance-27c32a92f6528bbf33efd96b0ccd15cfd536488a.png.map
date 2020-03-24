@@ -1,0 +1,14 @@
+<map id="inheritance6ca036f5b8" name="inheritance6ca036f5b8">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="4,169,116,190"/>
+<area shape="rect" id="node3" href="#linearOrders.LinearOrder" target="_top" title="abstract class for digraphs which represent" alt="" coords="156,169,308,190"/>
+<area shape="rect" id="node2" href="#linearOrders.CopelandOrder" target="_top" title="instantiates the Copeland Order from" alt="" coords="376,4,545,26"/>
+<area shape="rect" id="node4" href="#linearOrders.IteratedCopelandRanking" target="_top" title="instantiates the iterated Copeland ranking from" alt="" coords="348,46,573,67"/>
+<area shape="rect" id="node5" href="#linearOrders.IteratedNetFlowsRanking" target="_top" title="instantiates the iterated NetFlows order from" alt="" coords="348,87,573,108"/>
+<area shape="rect" id="node6" href="#linearOrders.KemenyOrder" target="_top" title="instantiates the exact Kemeny Order from" alt="" coords="380,128,542,149"/>
+<area shape="rect" id="node7" href="#linearOrders.KohlerOrder" target="_top" title="instantiates the Kohler Order from" alt="" coords="385,169,537,190"/>
+<area shape="rect" id="node8" href="#linearOrders.NetFlowsOrder" target="_top" title="instantiates the net flows Order from" alt="" coords="376,210,545,231"/>
+<area shape="rect" id="node9" href="#linearOrders.PrincipalOrder" target="_top" title="instantiates the order from the scores obtained by the first" alt="" coords="378,251,543,272"/>
+<area shape="rect" id="node10" href="#linearOrders.RandomLinearOrder" target="_top" title="Instantiates random linear orders" alt="" coords="362,292,559,313"/>
+<area shape="rect" id="node11" href="#linearOrders.RankedPairsOrder" target="_top" title="instantiates the Extended Prudent Ranked Pairs Order from" alt="" coords="368,333,553,355"/>
+<area shape="rect" id="node12" href="#linearOrders.SlaterOrder" target="_top" title="Instantiates a SlaterOrder by instantiating a *KemenyOrder* from the Condorcet Digraph &#45;the median cut polarised digraph" alt="" coords="614,128,764,149"/>
+</map>
