@@ -8229,7 +8229,7 @@ of the principal orders of the variance-covariance of in-
 (Colwise) and outdegrees (Rowwise).</p>
 <p>Example Python3 session with same outranking digraph g as shown in the RankingByChoosingDigraph example session (see below).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">TransitiveDigraphs</span> <span class="kn">import</span> <span class="n">PrincipalInOutDegreesOrderingFusion</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span> <span class="o">=</span> <span class="n">PrincipalInOutDegreesOrdering</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">,</span>\ 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span> <span class="o">=</span> <span class="n">PrincipalInOutDegreesOrdering</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">,</span> 
 <span class="go">                 plotFileName=&quot;proTransitiveDigraphing&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">()</span>
 <span class="go">Ranking by Choosing and Rejecting</span>
@@ -8301,25 +8301,25 @@ of the principal orders of the variance-covariance of in-
 ranking-by-Rubis-choosing orderings.</p>
 <p>Example python3 session:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>\ 
-<span class="go">            numberOfCriteria=5,\ </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+<span class="go">            numberOfCriteria=5,</span>
 <span class="go">            weightDistribution=&#39;equiobjectives&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
-<span class="go">* ---- Relation Table -----</span>
-<span class="go">  S   |   &#39;a01&#39;  &#39;a02&#39;  &#39;a03&#39;  &#39;a04&#39;  &#39;a05&#39;  &#39;a06&#39;  &#39;a07&#39;   </span>
-<span class="go"> -----|------------------------------------------------------------</span>
-<span class="go">&#39;a01&#39; |   +0.00  -1.00  -1.00  -0.33  +0.00  +0.00  +0.00  </span>
-<span class="go">&#39;a02&#39; |   +1.00  +0.00  -0.17  +0.33  +1.00  +0.33  +0.67  </span>
-<span class="go">&#39;a03&#39; |   +1.00  +0.67  +0.00  +0.33  +0.67  +0.67  +0.67  </span>
-<span class="go">&#39;a04&#39; |   +0.33  +0.17  -0.33  +0.00  +1.00  +0.67  +0.67  </span>
-<span class="go">&#39;a05&#39; |   +0.00  -0.67  -0.67  -1.00  +0.00  -0.17  +0.33  </span>
-<span class="go">&#39;a06&#39; |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.00  +1.00  </span>
-<span class="go">&#39;a07&#39; |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.17  +0.00  </span>
+<span class="go"> * ---- Relation Table -----</span>
+<span class="go">   S   |   &#39;a01&#39;  &#39;a02&#39;  &#39;a03&#39;  &#39;a04&#39;  &#39;a05&#39;  &#39;a06&#39;  &#39;a07&#39;   </span>
+<span class="go">  -----|------------------------------------------------------------</span>
+<span class="go"> &#39;a01&#39; |   +0.00  -1.00  -1.00  -0.33  +0.00  +0.00  +0.00  </span>
+<span class="go"> &#39;a02&#39; |   +1.00  +0.00  -0.17  +0.33  +1.00  +0.33  +0.67  </span>
+<span class="go"> &#39;a03&#39; |   +1.00  +0.67  +0.00  +0.33  +0.67  +0.67  +0.67  </span>
+<span class="go"> &#39;a04&#39; |   +0.33  +0.17  -0.33  +0.00  +1.00  +0.67  +0.67  </span>
+<span class="go"> &#39;a05&#39; |   +0.00  -0.67  -0.67  -1.00  +0.00  -0.17  +0.33  </span>
+<span class="go"> &#39;a06&#39; |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.00  +1.00  </span>
+<span class="go"> &#39;a07&#39; |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.17  +0.00  </span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">TransitiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">()</span>
-<span class="go">Ranking by Choosing and Rejecting</span>
+<span class="go"> Ranking by Choosing and Rejecting</span>
 <span class="go">  1st ranked [&#39;a03&#39;] (0.47)</span>
 <span class="go">   2nd ranked [&#39;a02&#39;, &#39;a04&#39;] (0.58)</span>
 <span class="go">    3rd ranked [&#39;a06&#39;] (1.00)</span>
@@ -8327,24 +8327,24 @@ ranking-by-Rubis-choosing orderings.</p>
 <span class="go">   2nd last ranked [&#39;a07&#39;] (0.50)</span>
 <span class="go">  1st last ranked [&#39;a01&#39;, &#39;a05&#39;] (0.58)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;TransitiveDigraphing&#39;</span><span class="p">)</span>
-<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
-<span class="go">Exporting to converse-dual_rel_randomCBperftab.dot</span>
-<span class="go">dot -Grankdir=BT -Tpng converse-dual_rel_randomCBperftab.dot </span>
-<span class="go">   -o TransitiveDigraphing.png </span>
+<span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go"> Exporting to converse-dual_rel_randomCBperftab.dot</span>
+<span class="go"> dot -Grankdir=BT -Tpng converse-dual_rel_randomCBperftab.dot</span>
+<span class="go"> -o TransitiveDigraphing.png </span>
 </pre></div>
 </div>
 <img alt="_images/weakOrdering.png" src="_images/weakOrdering.png" />
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showOrderedRelationTable</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">)</span>
-<span class="go">* ---- Relation Table -----</span>
-<span class="go">  S   |  &#39;a03&#39;  &#39;a04&#39;  &#39;a02&#39;  &#39;a06&#39;  &#39;a07&#39;  &#39;a01&#39;  &#39;a05&#39;      </span>
-<span class="go"> -----|------------------------------------------------------------</span>
-<span class="go">&#39;a03&#39; |   -      0.33   0.17   0.33   0.33   1.00   0.67     </span>
-<span class="go">&#39;a04&#39; |  -0.33    -     0.00   0.67   0.67   0.33   1.00     </span>
-<span class="go">&#39;a02&#39; |  -0.17   0.00    -     0.33   0.67   1.00   0.67     </span>
-<span class="go">&#39;a06&#39; |  -0.33  -0.67  -0.33    -     0.17   0.33   0.17     </span>
-<span class="go">&#39;a07&#39; |  -0.33  -0.67  -0.67  -0.17    -     0.33   0.33     </span>
-<span class="go">&#39;a01&#39; |  -1.00  -0.33  -1.00  -0.33  -0.33    -     0.00     </span>
-<span class="go">&#39;a05&#39; |  -0.67  -1.00  -0.67  -0.17  -0.33   0.00    -       </span>
+<span class="go"> * ---- Relation Table -----</span>
+<span class="go">  S    |  &#39;a03&#39;  &#39;a04&#39;  &#39;a02&#39;  &#39;a06&#39;  &#39;a07&#39;  &#39;a01&#39;  &#39;a05&#39;     </span>
+<span class="go">  -----|------------------------------------------------------------</span>
+<span class="go"> &#39;a03&#39; |   -      0.33   0.17   0.33   0.33   1.00   0.67    </span>
+<span class="go"> &#39;a04&#39; |  -0.33    -     0.00   0.67   0.67   0.33   1.00    </span>
+<span class="go"> &#39;a02&#39; |  -0.17   0.00    -     0.33   0.67   1.00   0.67    </span>
+<span class="go"> &#39;a06&#39; |  -0.33  -0.67  -0.33    -     0.17   0.33   0.17    </span>
+<span class="go"> &#39;a07&#39; |  -0.33  -0.67  -0.67  -0.17    -     0.33   0.33    </span>
+<span class="go"> &#39;a01&#39; |  -1.00  -0.33  -1.00  -0.33  -0.33    -     0.00    </span>
+<span class="go"> &#39;a05&#39; |  -0.67  -1.00  -0.67  -0.17  -0.33   0.00    -</span>
 </pre></div>
 </div>
 <dl class="method">

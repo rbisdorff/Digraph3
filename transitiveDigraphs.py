@@ -540,25 +540,25 @@ class RankingByChoosingDigraph(TransitiveDigraph):
     Example python3 session:
     
     >>> from outrankingDigraphs import *
-    >>> t = RandomCBPerformanceTableau(numberOfActions=7,\ 
-                numberOfCriteria=5,\ 
+    >>> t = RandomCBPerformanceTableau(numberOfActions=7,
+                numberOfCriteria=5,
                 weightDistribution='equiobjectives')
     >>> g = BipolarOutrankingDigraph(t,Normalized=True)
     >>> g.showRelationTable()
-    * ---- Relation Table -----
-      S   |   'a01'  'a02'  'a03'  'a04'  'a05'  'a06'  'a07'   
-     -----|------------------------------------------------------------
-    'a01' |   +0.00  -1.00  -1.00  -0.33  +0.00  +0.00  +0.00  
-    'a02' |   +1.00  +0.00  -0.17  +0.33  +1.00  +0.33  +0.67  
-    'a03' |   +1.00  +0.67  +0.00  +0.33  +0.67  +0.67  +0.67  
-    'a04' |   +0.33  +0.17  -0.33  +0.00  +1.00  +0.67  +0.67  
-    'a05' |   +0.00  -0.67  -0.67  -1.00  +0.00  -0.17  +0.33  
-    'a06' |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.00  +1.00  
-    'a07' |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.17  +0.00  
+     * ---- Relation Table -----
+       S   |   'a01'  'a02'  'a03'  'a04'  'a05'  'a06'  'a07'   
+      -----|------------------------------------------------------------
+     'a01' |   +0.00  -1.00  -1.00  -0.33  +0.00  +0.00  +0.00  
+     'a02' |   +1.00  +0.00  -0.17  +0.33  +1.00  +0.33  +0.67  
+     'a03' |   +1.00  +0.67  +0.00  +0.33  +0.67  +0.67  +0.67  
+     'a04' |   +0.33  +0.17  -0.33  +0.00  +1.00  +0.67  +0.67  
+     'a05' |   +0.00  -0.67  -0.67  -1.00  +0.00  -0.17  +0.33  
+     'a06' |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.00  +1.00  
+     'a07' |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.17  +0.00  
     >>> from TransitiveDigraphs import RankingByChoosingDigraph
     >>> rbc = RankingByChoosingDigraph(g)
     >>> rbc.showTransitiveDigraph()
-    Ranking by Choosing and Rejecting
+     Ranking by Choosing and Rejecting
       1st ranked ['a03'] (0.47)
        2nd ranked ['a02', 'a04'] (0.58)
         3rd ranked ['a06'] (1.00)
@@ -566,24 +566,24 @@ class RankingByChoosingDigraph(TransitiveDigraph):
        2nd last ranked ['a07'] (0.50)
       1st last ranked ['a01', 'a05'] (0.58)
     >>> rbc.exportGraphViz('TransitiveDigraphing')
-    *---- exporting a dot file for GraphViz tools ---------*
-    Exporting to converse-dual_rel_randomCBperftab.dot
-    dot -Grankdir=BT -Tpng converse-dual_rel_randomCBperftab.dot 
-       -o TransitiveDigraphing.png 
+     *---- exporting a dot file for GraphViz tools ---------*
+     Exporting to converse-dual_rel_randomCBperftab.dot
+     dot -Grankdir=BT -Tpng converse-dual_rel_randomCBperftab.dot
+     -o TransitiveDigraphing.png 
         
     .. image:: weakOrdering.png
         
     >>> rbc.showOrderedRelationTable(direction="decreasing")
-    * ---- Relation Table -----
-      S   |  'a03'  'a04'  'a02'  'a06'  'a07'  'a01'  'a05'	  
-     -----|------------------------------------------------------------
-    'a03' |   -      0.33   0.17   0.33   0.33   1.00   0.67	 
-    'a04' |  -0.33    -     0.00   0.67   0.67   0.33   1.00	 
-    'a02' |  -0.17   0.00    -     0.33   0.67   1.00   0.67	 
-    'a06' |  -0.33  -0.67  -0.33    -     0.17   0.33   0.17	 
-    'a07' |  -0.33  -0.67  -0.67  -0.17	   -     0.33   0.33	 
-    'a01' |  -1.00  -0.33  -1.00  -0.33  -0.33    -     0.00	 
-    'a05' |  -0.67  -1.00  -0.67  -0.17  -0.33   0.00    - 	 
+     * ---- Relation Table -----
+      S    |  'a03'  'a04'  'a02'  'a06'  'a07'  'a01'  'a05'	  
+      -----|------------------------------------------------------------
+     'a03' |   -      0.33   0.17   0.33   0.33   1.00   0.67	 
+     'a04' |  -0.33    -     0.00   0.67   0.67   0.33   1.00	 
+     'a02' |  -0.17   0.00    -     0.33   0.67   1.00   0.67	 
+     'a06' |  -0.33  -0.67  -0.33    -     0.17   0.33   0.17	 
+     'a07' |  -0.33  -0.67  -0.67  -0.17    -     0.33   0.33	 
+     'a01' |  -1.00  -0.33  -1.00  -0.33  -0.33    -     0.00	 
+     'a05' |  -0.67  -1.00  -0.67  -0.17  -0.33   0.00    -
     """
     def __init__(self,other,
                  fusionOperator = "o-max",
@@ -889,7 +889,7 @@ class PrincipalInOutDegreesOrderingFusion(TransitiveDigraph):
     
     
     >>> from TransitiveDigraphs import PrincipalInOutDegreesOrderingFusion
-    >>> pro = PrincipalInOutDegreesOrdering(g,imageType="png",\ 
+    >>> pro = PrincipalInOutDegreesOrdering(g,imageType="png", 
                      plotFileName="proTransitiveDigraphing")
     >>> pro.showTransitiveDigraph()
     Ranking by Choosing and Rejecting

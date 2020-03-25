@@ -168,7 +168,9 @@ class PerformanceQuantiles(PerformanceTableau):
             print(perfTab)
             fileName = perfTab + '.py'
             argDict = {}
-            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            fi = open(fileName,'r')
+            exec(compile(fi.read(), fileName, 'exec'),argDict)
+            fi.close()
             self.name = str(perfTab)
             try:
                 self.objectives = argDict['objectives']
@@ -627,7 +629,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
             for i in range(len(newq)):
                 newp[i] /= newp[-1]
             if Debug:
-                print('p \t q \ (t+1)*q')
+                print('p  q  (t+1)*q')
                 for i in range(len(newq)):
                     print('%.3f \t %.2f \t %.2f' % (newp[i],newq[i],newp[i]*(t)) )
                 print('t = %d' % t)
@@ -682,75 +684,74 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         valueString = 'Decimal("%%.%df"),\n' % (valueDigits)
         objectives = self.objectives
         fileNameExt = str(fileName)+str('.py')
-        with open(fileNameExt, 'w') as fo:
-            fo.write('# Saved performance quantiles: \n')
-            fo.write('from decimal import Decimal\n')
-            fo.write('from collections import OrderedDict\n')
-            # perfTabType
-            fo.write('perfTabType = \'%s\'\n' % self.perfTabType)
-            # objectives
-            try:
-                fo.write('objectiveSupportingTypes = %s\n' % str(self.objectiveSupportingTypes) )
-            except:
-                pass
-            fo.write('objectives = OrderedDict([\n')
-            if objectives != None:
-                for obj in objectives:
-                    fo.write('(\'%s\', {\n' % str(obj))
-                    for it in self.objectives[obj].keys():
-                        fo.write('\'%s\': %s,\n' % (it,repr(self.objectives[obj][it])))
-                    fo.write('}),\n')
-            fo.write('])\n')            
-            # criteria
-            try:
-                fo.write('OrdinalScales = %s\n' % str(self.OrdinalScales))
-            except:
-                pass
-            try:
-                fo.write('BigData = %s\n' % str(self.BigData))
-            except:
-                pass
-            try:
-                fo.write('missingDataProbability = %s\n' % str(self.missingDataProbability))
-            except:
-                pass
-            try:
-                fo.write('commonScale = %s\n' % str(self.commonScale))
-            except:
-                pass
-            criteria = self.criteria
-            fo.write('criteria = OrderedDict([\n') 
-            for g in criteria:
-                fo.write('(\'%s\', {\n' % str(g))
-                for it in self.criteria[g].keys():
-                    fo.write('\'%s\': %s,\n' % (it,repr(self.criteria[g][it])))
+        fo = open(fileNameExt, 'w')
+        fo.write('# Saved performance quantiles: \n')
+        fo.write('from decimal import Decimal\n')
+        fo.write('from collections import OrderedDict\n')
+        # perfTabType
+        fo.write('perfTabType = \'%s\'\n' % self.perfTabType)
+        # objectives
+        try:
+            fo.write('objectiveSupportingTypes = %s\n' % str(self.objectiveSupportingTypes) )
+        except:
+            pass
+        fo.write('objectives = OrderedDict([\n')
+        if objectives != None:
+            for obj in objectives:
+                fo.write('(\'%s\', {\n' % str(obj))
+                for it in self.objectives[obj].keys():
+                    fo.write('\'%s\': %s,\n' % (it,repr(self.objectives[obj][it])))
                 fo.write('}),\n')
-            fo.write('])\n')
-            # quanties frequencies
-            quantilesFrequencies = self.quantilesFrequencies
-            np = len(quantilesFrequencies)
-            fo.write('quantilesFrequencies = [\n')
+        fo.write('])\n')            
+        # criteria
+        try:
+            fo.write('OrdinalScales = %s\n' % str(self.OrdinalScales))
+        except:
+            pass
+        try:
+            fo.write('BigData = %s\n' % str(self.BigData))
+        except:
+            pass
+        try:
+            fo.write('missingDataProbability = %s\n' % str(self.missingDataProbability))
+        except:
+            pass
+        try:
+            fo.write('commonScale = %s\n' % str(self.commonScale))
+        except:
+            pass
+        criteria = self.criteria
+        fo.write('criteria = OrderedDict([\n') 
+        for g in criteria:
+            fo.write('(\'%s\', {\n' % str(g))
+            for it in self.criteria[g].keys():
+                fo.write('\'%s\': %s,\n' % (it,repr(self.criteria[g][it])))
+            fo.write('}),\n')
+        fo.write('])\n')
+        # quanties frequencies
+        quantilesFrequencies = self.quantilesFrequencies
+        np = len(quantilesFrequencies)
+        fo.write('quantilesFrequencies = [\n')
+        for i in range(np):
+            fo.write(valueString % quantilesFrequencies[i] )
+        fo.write( ']\n')
+        # history sizes
+        historySizes = self.historySizes
+        fo.write('historySizes = {\n')
+        for g in criteria:
+            fo.write('\'%s\': %d,' % (g,historySizes[g]) )
+        fo.write( '}\n')
+        # quantile limits
+        fo.write('LowerClosed = %s\n' % repr(self.LowerClosed))
+        limitingQuantiles = self.limitingQuantiles
+        fo.write('limitingQuantiles = {\n')
+        for g in criteria:
+            fo.write('\'%s\': [\n' % g )
             for i in range(np):
-                fo.write(valueString % quantilesFrequencies[i] )
-            fo.write( ']\n')
-            # history sizes
-            historySizes = self.historySizes
-            fo.write('historySizes = {\n')
-            for g in criteria:
-                fo.write('\'%s\': %d,' % (g,historySizes[g]) )
-            fo.write( '}\n')
-            # quantile limits
-            fo.write('LowerClosed = %s\n' % repr(self.LowerClosed))
-            limitingQuantiles = self.limitingQuantiles
-            fo.write('limitingQuantiles = {\n')
-            for g in criteria:
-                fo.write('\'%s\': [\n' % g )
-                for i in range(np):
-                    fo.write(valueString % limitingQuantiles[g][i] )
-                fo.write('],\n')
-            fo.write( '}\n')       
-
-        # fo.close() automatic
+                fo.write(valueString % limitingQuantiles[g][i] )
+            fo.write('],\n')
+        fo.write( '}\n')       
+        fo.close()
         
     def showActions(self):
         print("""No decision actions are actually being stored!

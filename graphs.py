@@ -1783,7 +1783,7 @@ class Graph(object):
                 return False        
         else:
             if Comments:
-                print('Graph \%s\' is not triangulated' % self.name)
+                print('Graph \'%s\' is not triangulated' % self.name)
             return False
 
     def isPermutationGraph(self,Comments=False):
@@ -1810,7 +1810,7 @@ class Graph(object):
                 return False        
         else:
             if Comments:
-                print('Graph \%s\' is not transitively orientable' % self.name)
+                print('Graph \'%s\' is not transitively orientable' % self.name)
             return False
          
     def isTree(self):
@@ -1867,7 +1867,7 @@ class Graph(object):
                 return False        
         else:
             if Comments:
-                print('Graph \%s\' is not triangulated' % self.name)
+                print('Graph \'%s\' is not triangulated' % self.name)
             return False
 
     def isPerfectGraph(self,Comments=False,Debug=False):

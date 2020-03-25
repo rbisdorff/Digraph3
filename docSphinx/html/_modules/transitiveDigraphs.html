@@ -580,25 +580,25 @@
 <span class="sd">    Example python3 session:</span>
 <span class="sd">    </span>
 <span class="sd">    &gt;&gt;&gt; from outrankingDigraphs import *</span>
-<span class="sd">    &gt;&gt;&gt; t = RandomCBPerformanceTableau(numberOfActions=7,\ </span>
-<span class="sd">                numberOfCriteria=5,\ </span>
+<span class="sd">    &gt;&gt;&gt; t = RandomCBPerformanceTableau(numberOfActions=7,</span>
+<span class="sd">                numberOfCriteria=5,</span>
 <span class="sd">                weightDistribution=&#39;equiobjectives&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; g = BipolarOutrankingDigraph(t,Normalized=True)</span>
 <span class="sd">    &gt;&gt;&gt; g.showRelationTable()</span>
-<span class="sd">    * ---- Relation Table -----</span>
-<span class="sd">      S   |   &#39;a01&#39;  &#39;a02&#39;  &#39;a03&#39;  &#39;a04&#39;  &#39;a05&#39;  &#39;a06&#39;  &#39;a07&#39;   </span>
-<span class="sd">     -----|------------------------------------------------------------</span>
-<span class="sd">    &#39;a01&#39; |   +0.00  -1.00  -1.00  -0.33  +0.00  +0.00  +0.00  </span>
-<span class="sd">    &#39;a02&#39; |   +1.00  +0.00  -0.17  +0.33  +1.00  +0.33  +0.67  </span>
-<span class="sd">    &#39;a03&#39; |   +1.00  +0.67  +0.00  +0.33  +0.67  +0.67  +0.67  </span>
-<span class="sd">    &#39;a04&#39; |   +0.33  +0.17  -0.33  +0.00  +1.00  +0.67  +0.67  </span>
-<span class="sd">    &#39;a05&#39; |   +0.00  -0.67  -0.67  -1.00  +0.00  -0.17  +0.33  </span>
-<span class="sd">    &#39;a06&#39; |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.00  +1.00  </span>
-<span class="sd">    &#39;a07&#39; |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.17  +0.00  </span>
+<span class="sd">     * ---- Relation Table -----</span>
+<span class="sd">       S   |   &#39;a01&#39;  &#39;a02&#39;  &#39;a03&#39;  &#39;a04&#39;  &#39;a05&#39;  &#39;a06&#39;  &#39;a07&#39;   </span>
+<span class="sd">      -----|------------------------------------------------------------</span>
+<span class="sd">     &#39;a01&#39; |   +0.00  -1.00  -1.00  -0.33  +0.00  +0.00  +0.00  </span>
+<span class="sd">     &#39;a02&#39; |   +1.00  +0.00  -0.17  +0.33  +1.00  +0.33  +0.67  </span>
+<span class="sd">     &#39;a03&#39; |   +1.00  +0.67  +0.00  +0.33  +0.67  +0.67  +0.67  </span>
+<span class="sd">     &#39;a04&#39; |   +0.33  +0.17  -0.33  +0.00  +1.00  +0.67  +0.67  </span>
+<span class="sd">     &#39;a05&#39; |   +0.00  -0.67  -0.67  -1.00  +0.00  -0.17  +0.33  </span>
+<span class="sd">     &#39;a06&#39; |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.00  +1.00  </span>
+<span class="sd">     &#39;a07&#39; |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.17  +0.00  </span>
 <span class="sd">    &gt;&gt;&gt; from TransitiveDigraphs import RankingByChoosingDigraph</span>
 <span class="sd">    &gt;&gt;&gt; rbc = RankingByChoosingDigraph(g)</span>
 <span class="sd">    &gt;&gt;&gt; rbc.showTransitiveDigraph()</span>
-<span class="sd">    Ranking by Choosing and Rejecting</span>
+<span class="sd">     Ranking by Choosing and Rejecting</span>
 <span class="sd">      1st ranked [&#39;a03&#39;] (0.47)</span>
 <span class="sd">       2nd ranked [&#39;a02&#39;, &#39;a04&#39;] (0.58)</span>
 <span class="sd">        3rd ranked [&#39;a06&#39;] (1.00)</span>
@@ -606,24 +606,24 @@
 <span class="sd">       2nd last ranked [&#39;a07&#39;] (0.50)</span>
 <span class="sd">      1st last ranked [&#39;a01&#39;, &#39;a05&#39;] (0.58)</span>
 <span class="sd">    &gt;&gt;&gt; rbc.exportGraphViz(&#39;TransitiveDigraphing&#39;)</span>
-<span class="sd">    *---- exporting a dot file for GraphViz tools ---------*</span>
-<span class="sd">    Exporting to converse-dual_rel_randomCBperftab.dot</span>
-<span class="sd">    dot -Grankdir=BT -Tpng converse-dual_rel_randomCBperftab.dot </span>
-<span class="sd">       -o TransitiveDigraphing.png </span>
+<span class="sd">     *---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="sd">     Exporting to converse-dual_rel_randomCBperftab.dot</span>
+<span class="sd">     dot -Grankdir=BT -Tpng converse-dual_rel_randomCBperftab.dot</span>
+<span class="sd">     -o TransitiveDigraphing.png </span>
 <span class="sd">        </span>
 <span class="sd">    .. image:: weakOrdering.png</span>
 <span class="sd">        </span>
 <span class="sd">    &gt;&gt;&gt; rbc.showOrderedRelationTable(direction=&quot;decreasing&quot;)</span>
-<span class="sd">    * ---- Relation Table -----</span>
-<span class="sd">      S   |  &#39;a03&#39;  &#39;a04&#39;  &#39;a02&#39;  &#39;a06&#39;  &#39;a07&#39;  &#39;a01&#39;  &#39;a05&#39;	  </span>
-<span class="sd">     -----|------------------------------------------------------------</span>
-<span class="sd">    &#39;a03&#39; |   -      0.33   0.17   0.33   0.33   1.00   0.67	 </span>
-<span class="sd">    &#39;a04&#39; |  -0.33    -     0.00   0.67   0.67   0.33   1.00	 </span>
-<span class="sd">    &#39;a02&#39; |  -0.17   0.00    -     0.33   0.67   1.00   0.67	 </span>
-<span class="sd">    &#39;a06&#39; |  -0.33  -0.67  -0.33    -     0.17   0.33   0.17	 </span>
-<span class="sd">    &#39;a07&#39; |  -0.33  -0.67  -0.67  -0.17	   -     0.33   0.33	 </span>
-<span class="sd">    &#39;a01&#39; |  -1.00  -0.33  -1.00  -0.33  -0.33    -     0.00	 </span>
-<span class="sd">    &#39;a05&#39; |  -0.67  -1.00  -0.67  -0.17  -0.33   0.00    - 	 </span>
+<span class="sd">     * ---- Relation Table -----</span>
+<span class="sd">      S    |  &#39;a03&#39;  &#39;a04&#39;  &#39;a02&#39;  &#39;a06&#39;  &#39;a07&#39;  &#39;a01&#39;  &#39;a05&#39;	  </span>
+<span class="sd">      -----|------------------------------------------------------------</span>
+<span class="sd">     &#39;a03&#39; |   -      0.33   0.17   0.33   0.33   1.00   0.67	 </span>
+<span class="sd">     &#39;a04&#39; |  -0.33    -     0.00   0.67   0.67   0.33   1.00	 </span>
+<span class="sd">     &#39;a02&#39; |  -0.17   0.00    -     0.33   0.67   1.00   0.67	 </span>
+<span class="sd">     &#39;a06&#39; |  -0.33  -0.67  -0.33    -     0.17   0.33   0.17	 </span>
+<span class="sd">     &#39;a07&#39; |  -0.33  -0.67  -0.67  -0.17    -     0.33   0.33	 </span>
+<span class="sd">     &#39;a01&#39; |  -1.00  -0.33  -1.00  -0.33  -0.33    -     0.00	 </span>
+<span class="sd">     &#39;a05&#39; |  -0.67  -1.00  -0.67  -0.17  -0.33   0.00    -</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span>
                  <span class="n">fusionOperator</span> <span class="o">=</span> <span class="s2">&quot;o-max&quot;</span><span class="p">,</span>
@@ -929,7 +929,7 @@
 <span class="sd">    </span>
 <span class="sd">    </span>
 <span class="sd">    &gt;&gt;&gt; from TransitiveDigraphs import PrincipalInOutDegreesOrderingFusion</span>
-<span class="sd">    &gt;&gt;&gt; pro = PrincipalInOutDegreesOrdering(g,imageType=&quot;png&quot;,\ </span>
+<span class="sd">    &gt;&gt;&gt; pro = PrincipalInOutDegreesOrdering(g,imageType=&quot;png&quot;, </span>
 <span class="sd">                     plotFileName=&quot;proTransitiveDigraphing&quot;)</span>
 <span class="sd">    &gt;&gt;&gt; pro.showTransitiveDigraph()</span>
 <span class="sd">    Ranking by Choosing and Rejecting</span>
