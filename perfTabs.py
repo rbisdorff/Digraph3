@@ -2307,6 +2307,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                    SparseModel=False,\
                                    minimalComponentSize=1,\
                                    rankingRule='NetFlows',\
+                                   StoreRanking=True,\
                                    quantiles=None,\
                                    strategy='average',\
                                    Correlations=False,\
@@ -2318,30 +2319,32 @@ The performance evaluations of each decision alternative on each criterion are g
         (see perfTabs.htmlPerformanceHeatMap() method ).
 
         **Parameters**:
-
-              - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.
-              - *ndigits* = 0 may be used to show integer evaluation values.
-              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
-                ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.
-                When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                
-              - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
-                If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
-                in fact equivalent to the standard model.
-              - *rankingRule* = 'NetFlows' (default) | 'Copeland' | 'Kohler' | 'RankedPairs' | 'ArrowRaymond' | 'IteratedNetFlows' | 'IteraredCopeland'
-                see tutorial on ranking mith multiple incommensurable criteria. The corresponding ranking result is stored in self.
-              - Quantiles used for the pre-ranked decomposition are put by default to *n*
-                (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10.
-                For bigger performance tableaux the *quantiles* parameter may be set to a much lower value
-                not exceeding usually 1000.
-              - The pre-ranking may be obtained with three ordering strategies for the
-                quantiles equivalence classes: 'average' (default), 'optimistic' or  'pessimistic'.
-              - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing
-                order of the correlations between the marginal criterion based ranking and the global ranking used for
-                presenting the decision alternatives.
-              - For large performance Tableaux, *multiprocessing* techniques may be used by setting
-                *Threading* = *True* in order to speed up the computations; especially when *Correlations* = *True*.
-              - By default, the number of cores available, will be detected. It may be efficient in a HPC context
-                to indicate the exact number of singled threaded cores in fact allocated to the job.
+        
+        * *actionsList* and *criteriaList*, if provided,  give the possibility to show
+          the decision alternatives, resp. criteria, in a given ordering.
+        * *ndigits* = 0 may be used to show integer evaluation values.
+        * When no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
+          ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.
+        * When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                
+        * The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
+          When *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
+          in fact equivalent to the standard model.
+        * *rankingRule* = 'NetFlows' (default) | 'Copeland' | 'Kohler' | 'RankedPairs' | 'ArrowRaymond'
+          | 'IteratedNetFlows' | 'IteraredCopeland'. See tutorial on ranking mith multiple incommensurable criteria.
+        * when tghe *StoreRanking* flag is set to *True*, the ranking result is storted in *self*.
+        * Quantiles used for the pre-ranked decomposition are put by default to *n*
+          (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10.
+          For bigger performance tableaux the *quantiles* parameter may be set to a much lower value
+          not exceeding usually 1000.
+        * The pre-ranking may be obtained with three ordering strategies for the
+          quantiles equivalence classes: 'average' (default), 'optimistic' or  'pessimistic'.
+        * With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing
+          order of the correlations between the marginal criterion based ranking and the global ranking used for
+          presenting the decision alternatives.
+        * For large performance Tableaux, *multiprocessing* techniques may be used by setting
+          *Threading* = *True* in order to speed up the computations; especially when *Correlations* = *True*.
+        * By default, the number of cores available, will be detected. It may be efficient in a HPC context
+          to indicate the exact number of singled threaded cores in fact allocated to the job.
 
 
         >>> from randomPerfTabs import RandomPerformanceTableau
@@ -2368,6 +2371,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                              SparseModel=SparseModel,
                                              minimalComponentSize=minimalComponentSize,
                                              rankingRule=rankingRule,
+                                             StoreRanking=StoreRanking,
                                              quantiles=quantiles,
                                              strategy=strategy,
                                              ndigits=ndigits,
@@ -2382,23 +2386,24 @@ The performance evaluations of each decision alternative on each criterion are g
         webbrowser.open_new(url)
 
     def _htmlPerformanceHeatmap(self,argCriteriaList=None,
-                               argActionsList=None,
-                               fromIndex=None,
-                               toIndex=None,
+                                argActionsList=None,
+                                fromIndex=None,
+                                toIndex=None,
                                 Transposed=False,
-                               SparseModel=False,
-                               minimalComponentSize=1,
-                               rankingRule=None,
-                               quantiles=None,
-                               strategy='average',
-                               ndigits=2,
-                               ContentCentered=True,
-                               colorLevels=None,
-                               pageTitle='Performance Heatmap',
-                               Correlations=False,
-                               Threading=False,
-                               nbrOfCPUs=1,
-                               Debug=False):
+                                SparseModel=False,
+                                minimalComponentSize=1,
+                                rankingRule=None,
+                                StoreRanking=False,
+                                quantiles=None,
+                                strategy='average',
+                                ndigits=2,
+                                ContentCentered=True,
+                                colorLevels=None,
+                                pageTitle='Performance Heatmap',
+                                Correlations=False,
+                                Threading=False,
+                                nbrOfCPUs=1,
+                                Debug=False):
         """       
         Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
         actions x criteria in html format.
@@ -2492,35 +2497,43 @@ The performance evaluations of each decision alternative on each criterion are g
                 g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
                 if rankingRule == 'NetFlows':
                     actionsList = g.computeNetFlowsRanking()
-                    self.netFlowsRanking = actionsList
+                    if StoreRanking:
+                        self.netFlowsRanking = actionsList
                 if rankingRule == 'Copeland':
                     actionsList = g.computeCopelandRanking()
-                    self.copelandRanking = actionsList
+                    if StoreRanking:
+                        self.copelandRanking = actionsList
                 elif rankingRule == 'Kohler':
                     actionsList = (~(-g)).computeKohlerRanking()
-                    self.kohlerRanking = actionsList
+                    if StoreRanking:
+                        self.kohlerRanking = actionsList
                 elif rankingRule == 'RankedPairs':
                     from linearOrders import RankedPairsOrder
                     rp = RankedPairsOrder(g)
                     actionsList = rp.computeRanking()
-                    self.rankedPairsRanking = actionsList
+                    if StoreRanking:
+                        self.rankedPairsRanking = actionsList
                 elif rankingRule == 'ArrowRaynaud':
                     actionsList = g.computeArrowRaynaudRanking()
-                    self.arrowRaynaudRanking = actionsList
+                    if StoreRanking:
+                        self.arrowRaynaudRanking = actionsList
                 elif rankingRule == 'IteratedNetFlows':
                     from linearOrders import IteratedNetFlowsRanking
                     inf = IteratedNetFlowsRanking(g)
                     actionsList = inf.iteratedNetFlowsRanking
-                    self.iteratedNetFlowsRanking = actionsList
+                    if StoreRanking:
+                        self.iteratedNetFlowsRanking = actionsList
                 elif rankingRule == 'IteratedCopeland':
                     from linearOrders import IteratedCopelandRanking
                     icop = IteratedCopelandRanking(g)
                     actionsList = icop.iteratedCopelandRanking
-                    self.iteratedCopelandRanking = actionsList
+                    if StoreRanking:
+                        self.iteratedCopelandRanking = actionsList
                 else: # default ranking rule
                     actionsList = g.computeNetFlowsRanking()
                     rankingRule='NetFlows'
-                    self.netFlowsRanking = actionsList
+                    if StoreRanking:
+                        self.netFlowsRanking = actionsList
                 rankCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
 
         else:  # actions list given
@@ -7498,6 +7511,8 @@ if __name__ == "__main__":
                                    Correlations=True,
                                    ndigits=4,
                                    Debug=False))
+    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows',Transposed=False)
+    t.computeRankingConsensusQuality(t.netFlowsRanking)
     
     
     print('*------------------*')

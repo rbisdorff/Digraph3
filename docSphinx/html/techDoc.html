@@ -4679,22 +4679,23 @@ the values observed in the performance Tableau.</p>
 
 <dl class="method">
 <dt id="perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap">
-<code class="sig-name descname">showHTMLPerformanceHeatmap</code><span class="sig-paren">(</span><em class="sig-param">actionsList=None</em>, <em class="sig-param">fromIndex=None</em>, <em class="sig-param">toIndex=None</em>, <em class="sig-param">Transposed=False</em>, <em class="sig-param">criteriaList=None</em>, <em class="sig-param">colorLevels=7</em>, <em class="sig-param">pageTitle=None</em>, <em class="sig-param">ndigits=2</em>, <em class="sig-param">SparseModel=False</em>, <em class="sig-param">minimalComponentSize=1</em>, <em class="sig-param">rankingRule='NetFlows'</em>, <em class="sig-param">quantiles=None</em>, <em class="sig-param">strategy='average'</em>, <em class="sig-param">Correlations=False</em>, <em class="sig-param">Threading=False</em>, <em class="sig-param">nbrOfCPUs=None</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.showHTMLPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showHTMLPerformanceHeatmap</code><span class="sig-paren">(</span><em class="sig-param">actionsList=None</em>, <em class="sig-param">fromIndex=None</em>, <em class="sig-param">toIndex=None</em>, <em class="sig-param">Transposed=False</em>, <em class="sig-param">criteriaList=None</em>, <em class="sig-param">colorLevels=7</em>, <em class="sig-param">pageTitle=None</em>, <em class="sig-param">ndigits=2</em>, <em class="sig-param">SparseModel=False</em>, <em class="sig-param">minimalComponentSize=1</em>, <em class="sig-param">rankingRule='NetFlows'</em>, <em class="sig-param">StoreRanking=True</em>, <em class="sig-param">quantiles=None</em>, <em class="sig-param">strategy='average'</em>, <em class="sig-param">Correlations=False</em>, <em class="sig-param">Threading=False</em>, <em class="sig-param">nbrOfCPUs=None</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.showHTMLPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>shows the html heatmap version of the performance tableau in a browser window
 (see perfTabs.htmlPerformanceHeatMap() method ).</p>
 <p><strong>Parameters</strong>:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.</p></li>
+<ul class="simple">
+<li><p><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show
+the decision alternatives, resp. criteria, in a given ordering.</p></li>
 <li><p><em>ndigits</em> = 0 may be used to show integer evaluation values.</p></li>
-<li><p>If no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
-ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>.
-When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</p></li>
+<li><p>When no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
+ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>.</p></li>
+<li><p>When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</p></li>
 <li><p>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
-If <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
+When <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
 in fact equivalent to the standard model.</p></li>
-<li><p><em>rankingRule</em> = ‘NetFlows’ (default) | ‘Copeland’ | ‘Kohler’ | ‘RankedPairs’ | ‘ArrowRaymond’ | ‘IteratedNetFlows’ | ‘IteraredCopeland’
-see tutorial on ranking mith multiple incommensurable criteria. The corresponding ranking result is stored in self.</p></li>
+<li><p><em>rankingRule</em> = ‘NetFlows’ (default) | ‘Copeland’ | ‘Kohler’ | ‘RankedPairs’ | ‘ArrowRaymond’
+| ‘IteratedNetFlows’ | ‘IteraredCopeland’. See tutorial on ranking mith multiple incommensurable criteria.</p></li>
+<li><p>when tghe <em>StoreRanking</em> flag is set to <em>True</em>, the ranking result is storted in <em>self</em>.</p></li>
 <li><p>Quantiles used for the pre-ranked decomposition are put by default to <em>n</em>
 (the number of decision alternatives) for <em>n</em> &lt; 50. For larger cardinalities up to 1000, quantiles = <em>n</em> /10.
 For bigger performance tableaux the <em>quantiles</em> parameter may be set to a much lower value
@@ -4709,7 +4710,6 @@ presenting the decision alternatives.</p></li>
 <li><p>By default, the number of cores available, will be detected. It may be efficient in a HPC context
 to indicate the exact number of singled threaded cores in fact allocated to the job.</p></li>
 </ul>
-</div></blockquote>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
