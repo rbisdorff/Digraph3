@@ -1395,6 +1395,93 @@ class CopelandOrder(CopelandRanking):
 
 ########  instantiates optimal linear orderings
 
+class MedianRanking(LinearOrder):
+    """
+    instantiates the ranking of highest mean marginal correlation and lowest amplitude from
+    a given bipolar-valued Digraph instance of small order 
+    """
+    def __init__(self,other,orderLimit=7,Threading=False,nbrOfCPUs=1,Comments=False,Debug=False):
+        """
+        constructor for generating a linear order
+        from a given other digraph by exact enumeration
+        of all permutations of actions.
+        """
+        if other.order > orderLimit:
+            print('Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.' % (other.order) )
+            return
+                  
+        from digraphs import all_perms
+        from copy import copy,deepcopy
+        from decimal import Decimal
+        
+        Min = other.valuationdomain['min']
+        Max = other.valuationdomain['max']
+        Med = other.valuationdomain['med']
+        #relation = copy(other.relation)
+        medianRankings = other.computeMedianRanking(orderLimit=orderLimit,
+                                                    Threading=Threading,
+                                                    nbrOfCPUs=nbrOfCPUs,
+                                                    Comments=Comments,
+                                                    Debug=Debug)
+        # [0] = ordered actions list, [1] = maximal marginal corrleation index,
+        # [2] = minimal marginal correlation amplitude,
+        
+        medianRanking = medianRankings[0]
+        maxMarginalCorrelation = medianRankings[1]
+        minMarginalCorrelationAmplitude = medianRanking[2]
+        maximalRankings = deepcopy(other.maximalRankings)
+        
+        if medianRankings == None:
+            print('Intantiation error: unable to compute a median ranking !!!')
+            print('Digraph order %d is required to be lower than 8!' % n)
+            return
+        if Debug:
+            print(medianRankings,other.maximalRankings)
+        
+        # instatiates a Digraph template
+        actions = deepcopy(other.actions)
+        Min = Decimal('-1.0')
+        Max = Decimal('1.0')
+        Med = Decimal('0.0')
+        valuationdomain = {'min': Min, 'med': Med, 'max': Max}
+        relation = {}
+        n = len(actions)
+        self.order = n
+        for i in range(n):
+            x = medianRanking[i]
+            relation[x] = {}
+            for j in range(n):
+                y = medianRanking[j]
+                relation[x][y] = Med
+                if i < j:
+                    relation[x][y] = Max
+                    try:
+                        relation[y][x] = Min
+                    except:
+                        relation[y] = {x: Min}
+                elif i > j:
+                    relation[x][y] = Min
+                    try:
+                        relation[y][x] = Max
+                    except:
+                        relation[y] = {y: Max}
+
+        self.name = other.name + '_ranked'        
+        self.actions = actions
+        self.order = n
+        self.valuationdomain = valuationdomain
+        self.relation = relation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        self.medianRanking = medianRanking
+        self.maxMarginalCorrelation = maxMarginalCorrelation
+        self.minMarginalCorrelationAmplitude = minMarginalCorrelationAmplitude
+        self.maximalRankings = maximalRankings
+        self.medianOrder = list(reversed(list(medianRanking)))
+        if Debug:
+            self.showRelationTable()
+            print('Median Ranking = ', self.medianRanking)
+
 class KemenyRanking(LinearOrder):
     """
     instantiates the exact Kemeny Order from
@@ -1646,70 +1733,84 @@ if __name__ == "__main__":
     * redistribute it if it remains free software.     *
     ****************************************************
     """)
-
+    import random
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    print('*-------- Testing KemenyOrder class -------')
-    t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=13,seed=None)
+    seed = random.randint(1,1000)
+    print('*-------- Testing MedianRanking class -------')
+    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=13,
+                                   NegativeWeights=False,
+                                   seed=seed)
+    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
     #t = PerformanceTableau('testLin')    
     g = BipolarOutrankingDigraph(t,Normalized=True)
-    g.showRelationTable()
-    print()
-    print('==>> net flows ordering:')
-    t0 = time()
-    nf = NetFlowsOrder(g,Debug=False)
-    #g.showRelationTable(actionsSubset=nf.netFlowsRanking,Sorted=False)
-    #print(nf.netFlowsRanking)
-    #print(nf.netFlowsOrder)
-    #corr = g.computeOrdinalCorrelation(nf)
-    #g.showCorrelation(corr)
-    #print(time()-t0)
-    #t.showHTMLPerformanceHeatmap(actionsList=nf.netFlowsRanking,Correlations=True)
-    print()
-    print('==>> iterated net flows ordering:')
-    from linearOrders import IteratedNetFlowsRanking
-    t0 = time()
-    inf = IteratedNetFlowsRanking(g,Comments=False,Valued=False,Debug=False)
-    inf.showRelationTable(actionsSubset=inf.iteratedNetFlowsRanking,Sorted=False)
-    print(inf.iteratedNetFlowsRanking)
-    print(inf.iteratedNetFlowsOrdering)
-    print('netfloes')
-    corr = g.computeOrdinalCorrelation(nf)
-    g.showCorrelation(corr)
-    g.computeRankingConsensusQuality(inf.iteratedNetFlowsRanking,
-                                     Comments=True)
-    print(time()-t0)
-    print('iterated netflows')
-    corr = g.computeRankingCorrelation(inf.iteratedNetFlowsRanking)
-    g.showCorrelation(corr)
-    corr = g.computeOrderCorrelation(inf.iteratedNetFlowsOrdering)
-    g.showCorrelation(corr)
-    
-    print('==>> iterated Copeland ordering:')
-    from linearOrders import IteratedCopelandRanking
-    t0 = time()
-    icop = IteratedCopelandRanking(g,Comments=False,Valued=False,Debug=False)
-    icop.showRelationTable(actionsSubset=icop.iteratedCopelandRanking,Sorted=False)
-    print(icop.iteratedCopelandRanking)
-    print(icop.iteratedCopelandOrdering)
-    print('Copeland')
-    from linearOrders import CopelandOrder
-    cop = CopelandOrder(g)
-    print(cop.copelandRanking)
-    corr = g.computeOrdinalCorrelation(cop)
-    g.showCorrelation(corr)
-    g.computeRankingConsensusQuality(icop.iteratedCopelandRanking,
-                                     Comments=True)
-    print(time()-t0)
-    print('iterated Copeland')
-    corr = g.computeRankingCorrelation(icop.iteratedCopelandRanking)
-    g.showCorrelation(corr)
-    corr = g.computeOrderCorrelation(icop.iteratedCopelandOrdering)
-    g.showCorrelation(corr)
-
-    #t.showHTMLPerformanceHeatmap(actionsList=inf.iteratedNetFlowsRanking,Correlations=True)
-    print()
+    #g.showRelationTable()
+    mr = MedianRanking(g,Threading=False,nbrOfCPUs=8,Debug=False)
+    t.showHTMLPerformanceHeatmap(actionsList=mr.medianRanking,
+                                 Correlations=True,colorLevels=5)
+    ke = KemenyRanking(g)
+    print('median')
+    for r in mr.maximalRankings:
+        print(r,g.computeRankingConsensusQuality(r)[1])
+    print('Kemeny')
+    for r in ke.maximalRankings:
+        print(r,g.computeRankingConsensusQuality(r)[1])
+##    print()
+##    print('==>> net flows ordering:')
+##    t0 = time()
+##    nf = NetFlowsOrder(g,Debug=False)
+##    #g.showRelationTable(actionsSubset=nf.netFlowsRanking,Sorted=False)
+##    #print(nf.netFlowsRanking)
+##    #print(nf.netFlowsOrder)
+##    #corr = g.computeOrdinalCorrelation(nf)
+##    #g.showCorrelation(corr)
+##    #print(time()-t0)
+##    #t.showHTMLPerformanceHeatmap(actionsList=nf.netFlowsRanking,Correlations=True)
+##    print()
+##    print('==>> iterated net flows ordering:')
+##    from linearOrders import IteratedNetFlowsRanking
+##    t0 = time()
+##    inf = IteratedNetFlowsRanking(g,Comments=False,Valued=False,Debug=False)
+##    inf.showRelationTable(actionsSubset=inf.iteratedNetFlowsRanking,Sorted=False)
+##    print(inf.iteratedNetFlowsRanking)
+##    print(inf.iteratedNetFlowsOrdering)
+##    print('netfloes')
+##    corr = g.computeOrdinalCorrelation(nf)
+##    g.showCorrelation(corr)
+##    g.computeRankingConsensusQuality(inf.iteratedNetFlowsRanking,
+##                                     Comments=True)
+##    print(time()-t0)
+##    print('iterated netflows')
+##    corr = g.computeRankingCorrelation(inf.iteratedNetFlowsRanking)
+##    g.showCorrelation(corr)
+##    corr = g.computeOrderCorrelation(inf.iteratedNetFlowsOrdering)
+##    g.showCorrelation(corr)
+##    
+##    print('==>> iterated Copeland ordering:')
+##    from linearOrders import IteratedCopelandRanking
+##    t0 = time()
+##    icop = IteratedCopelandRanking(g,Comments=False,Valued=False,Debug=False)
+##    icop.showRelationTable(actionsSubset=icop.iteratedCopelandRanking,Sorted=False)
+##    print(icop.iteratedCopelandRanking)
+##    print(icop.iteratedCopelandOrdering)
+##    print('Copeland')
+##    from linearOrders import CopelandOrder
+##    cop = CopelandOrder(g)
+##    print(cop.copelandRanking)
+##    corr = g.computeOrdinalCorrelation(cop)
+##    g.showCorrelation(corr)
+##    g.computeRankingConsensusQuality(icop.iteratedCopelandRanking,
+##                                     Comments=True)
+##    print(time()-t0)
+##    print('iterated Copeland')
+##    corr = g.computeRankingCorrelation(icop.iteratedCopelandRanking)
+##    g.showCorrelation(corr)
+##    corr = g.computeOrderCorrelation(icop.iteratedCopelandOrdering)
+##    g.showCorrelation(corr)
+##
+##    #t.showHTMLPerformanceHeatmap(actionsList=inf.iteratedNetFlowsRanking,Correlations=True)
+##    print()
 ##    print('==>> Kemeny ordering:')
 ##    t0 = time()
 ##    ke = KemenyOrder(g,Debug=False,orderLimit=9)

@@ -2555,20 +2555,24 @@ The performance evaluations of each decision alternative on each criterion are g
         criteria = self.criteria
         if criteriaList == None:
             if Correlations:
-                from math import sqrt
-                criteriaCorrelation =\
-                        g.computeMarginalVersusGlobalRankingCorrelations(\
-                                actionsList,ValuedCorrelation=True,Threading=Threading,
-                                nbrCores=nbrOfCPUs)
-                meanMarginalCriteriaCorrelation = Decimal('0.0')
-                sdMarginalCriteriaCorrelation = Decimal('0.0')
-                for cg in criteriaCorrelation:
-                    meanMarginalCriteriaCorrelation += cg[0]
-                    sdMarginalCriteriaCorrelation += cg[0]*cg[0]
-                meanMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
-                sdMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
-                sdMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation
-                sdMarginalCriteriaCorrelation = sqrt(sdMarginalCriteriaCorrelation)
+                marginalCorrelations = g.computeRankingConsensusQuality(actionsList)
+                criteriaCorrelation = marginalCorrelations[0]
+                meanMarginalCriteriaCorrelation = marginalCorrelations[1]
+                sdMarginalCriteriaCorrelation = marginalCorrelations[2]             
+##                from math import sqrt
+##                criteriaCorrelation =\
+##                        g.computeMarginalVersusGlobalRankingCorrelations(\
+##                                actionsList,ValuedCorrelation=True,Threading=Threading,
+##                                nbrCores=nbrOfCPUs)
+##                meanMarginalCriteriaCorrelation = Decimal('0.0')
+##                sdMarginalCriteriaCorrelation = Decimal('0.0')
+##                for cg in criteriaCorrelation:
+##                    meanMarginalCriteriaCorrelation += cg[0]
+##                    sdMarginalCriteriaCorrelation += cg[0]*cg[0]
+##                meanMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
+##                sdMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
+##                sdMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation
+##                sdMarginalCriteriaCorrelation = sqrt(sdMarginalCriteriaCorrelation)
                 criteriaList = [c[1] for c in criteriaCorrelation]
             else:
                 criteriaList = list(criteria.keys())
@@ -2582,20 +2586,24 @@ The performance evaluations of each decision alternative on each criterion are g
 ##            if argActionsList != None:
 ##                Correlations = False
             if Correlations:
-                from math import sqrt
-                criteriaCorrelation =\
-                        g.computeMarginalVersusGlobalRankingCorrelations(\
-                                actionsList,ValuedCorrelation=True,Threading=Threading,
-                                nbrCores=nbrOfCPUs)
-                meanMarginalCriteriaCorrelation = Decimal('0.0')
-                sdMarginalCriteriaCorrelation = Decimal('0.0')
-                for cg in criteriaCorrelation:
-                    meanMarginalCriteriaCorrelation += cg[0]
-                    sdMarginalCriteriaCorrelation += cg[0]*cg[0]
-                meanMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
-                sdMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
-                sdMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation
-                sdMarginalCriteriaCorrelation = sqrt(sdMarginalCriteriaCorrelation)
+                marginalCorrelations = g.computeRankingConsensusQuality(actionsList)
+                criteriaCorrelation = marginalCorrelations[0]
+                meanMarginalCriteriaCorrelation = marginalCorrelations[1]
+                sdMarginalCriteriaCorrelation = marginalCorrelations[2]             
+##                from math import sqrt
+##                criteriaCorrelation =\
+##                        g.computeMarginalVersusGlobalRankingCorrelations(\
+##                                actionsList,ValuedCorrelation=True,Threading=Threading,
+##                                nbrCores=nbrOfCPUs)
+##                meanMarginalCriteriaCorrelation = Decimal('0.0')
+##                sdMarginalCriteriaCorrelation = Decimal('0.0')
+##                for cg in criteriaCorrelation:
+##                    meanMarginalCriteriaCorrelation += cg[0]
+##                    sdMarginalCriteriaCorrelation += cg[0]*cg[0]
+##                meanMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
+##                sdMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
+##                sdMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation
+##                sdMarginalCriteriaCorrelation = sqrt(sdMarginalCriteriaCorrelation)
             else:
                 criteriaCorrelation = None
         quantileColor={}
@@ -2764,32 +2772,41 @@ The performance evaluations of each decision alternative on each criterion are g
         from math import sqrt
         g = BipolarOutrankingDigraph(self,Normalized=True)
         criteria = self.criteria
-        marginalCriteriaCorrelations =\
+        marginalCorrelations =\
                         g.computeMarginalVersusGlobalRankingCorrelations(\
                                 ranking,ValuedCorrelation=True,Threading=Threading,
                                 nbrCores=nbrOfCPUs)
-        ncrit = Decimal(str(len(marginalCriteriaCorrelations)))
-        meanMarginalCriteriaCorrelation = Decimal('0.0')
-        varMarginalCriteriaCorrelation = Decimal('0.0')
-        for cg in marginalCriteriaCorrelations:
-            meanMarginalCriteriaCorrelation += cg[0]
-            varMarginalCriteriaCorrelation += cg[0]*cg[0]
-        meanMarginalCriteriaCorrelation /= ncrit
-        varMarginalCriteriaCorrelation /= ncrit
-        varMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation
-        sdMarginalCriteriaCorrelation = sqrt(varMarginalCriteriaCorrelation) 
+        ncrit = Decimal(str(len(marginalCorrelations)))
+        meanMarginalCorrelation = Decimal('0.0')
+        varMarginalCorrelation = Decimal('0.0')
+        sumWeights = Decimal('0.0')
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            sumWeights += abs(criteria[cg[1]]['weight'])
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            cgw = abs(criteria[cg[1]]['weight'])/sumWeights
+            meanMarginalCorrelation += cg[0]*cgw
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            cgw = abs(criteria[cg[1]]['weight'])/sumWeights
+            varMarginalCorrelation += ((cg[0]-meanMarginalCorrelation)**2)*cgw
+        #meanMarginalCriteriaCorrelation /= ncrit
+        #varMarginalCriteriaCorrelation /= ncrit
+        #varMarginalCorrelation -= meanMarginalCorrelation*meanMarginalCriteriaCorrelation
+        sdMarginalCorrelation = sqrt(varMarginalCorrelation) 
         # showing the results
         if Comments:
             print('Consensus quality of ranking:')
             print(ranking)
             print('criterion: correlation')
             print('----------------------')
-            for cg in marginalCriteriaCorrelations:
+            for cg in marginalCorrelations:
                 print('%s: %+.3f' % (cg[1],cg[0]) )
             print('Summary:')
-            print('Mean marginal correlation               : %+.3f' % meanMarginalCriteriaCorrelation)
-            print('Standard marginal correlation deviation : %+.3f' % sdMarginalCriteriaCorrelation)
-        return (marginalCriteriaCorrelations,meanMarginalCriteriaCorrelation,sdMarginalCriteriaCorrelation)
+            print('Mean marginal correlation               : %+.3f' % meanMarginalCorrelation)
+            print('Standard marginal correlation deviation : %+.3f' % sdMarginalCorrelation)
+        return (marginalCorrelations,meanMarginalCorrelation,sdMarginalCorrelation)
         
     def computeWeightPreorder(self):
         """

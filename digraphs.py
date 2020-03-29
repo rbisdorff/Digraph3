@@ -9608,6 +9608,84 @@ class Digraph(object):
 ##        ordering = self.computeRankedPairsOrder()
 ##        return list(reversed(ordering))
 
+    def computeMedianRanking(self,
+                           orderLimit=7,Threading=False,nbrOfCPUs=1,
+                           Comments=False,Debug=False):
+        """
+        Renders a ordering from worst to best of the actions with maximal marginal correlation
+        and minimal marginal correlation amplitude.
+
+        .. note::
+        
+             Returns a triple: (medianRanking (from best to worst),
+             maxMarginalCorrelation, minMarginalCorrelationAmplitude)
+             
+        """
+        from digraphsTools import all_perms
+        from math import factorial
+
+
+        Min = self.valuationdomain['min']
+        relation = self.relation
+        actions = [x for x in self.actions]
+        n = len(actions)
+
+        if n > orderLimit:
+            return None
+        maxMarginalCorrelation = Decimal('-1.0')
+        minMarginalCorrelationAmplitude = Decimal('2.0')
+        s = 1
+        maxs = factorial(n)
+        maximalRankings = []
+        for a in all_perms(list(actions)):
+            s += 1
+            #if Comments:
+            print('%d/%d' % (s,maxs))
+            kcurr = self.computeRankingConsensusQuality(a,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+##            kcurr = sum((relation[a[i]][a[j]] - relation[a[j]][a[i]])\
+##                        for i in range(n) for j in range(i+1,n))
+##                for i in range(n):
+##                    for j in range(i+1,n):
+##                        kcurr += relation[a[i]][a[j]] - relation[a[j]][a[i]]
+            if Debug:
+                print(kcurr)
+            kcurrAmp = kcurr[0][0][0] - kcurr[0][-1][0]
+            if Debug:
+                print(s, a, kcurrAmp)
+            if kcurr[1] > maxMarginalCorrelation:
+                maxMarginalCorrelation = kcurr[1]
+                minMarginalCorrelationAmplitude = kcurrAmp
+                medianRanking = list(a)
+                maximalRankings = [medianRanking]
+                if Debug:
+                    print(maximalRankings)
+            elif kcurr[1] == maxMarginalCorrelation:
+                if kcurrAmp < minMarginalCorrelationAmplitude:
+                    maxMarginalCorrelation = kcurr[1]
+                    minMarginalCorrelationAmplitude = kcurrAmp
+                    medianRanking = list(a)
+                    maximalRankings = [medianRanking]
+                    if Debug:
+                        print(maximalRankings)
+                elif kcurrAmp == minMarginalCorrelationAmplitude:              
+                    minMarginalCorrelationAmplitude = kcurrAmp
+                    maximalRankings.append(list(a))
+                    if Debug:
+                        print(maximalRankings)
+                    
+            self.maximalRankings = maximalRankings
+            self.maxMarginalCorrelation = maxMarginalCorrelation
+            self.minMarginalCorrelationAmplitude = minMarginalCorrelationAmplitude
+            if Debug:
+                print('First optimal median ranking = ', maximalRankings[0])
+                print('Optimal maxMarginalCorrelation = ', maxMarginalCorrelation)
+                print('Optimal minMarginalCorrelationAmplitude = ', minMarginalCorrelationAmplitude)
+                print('# of permutations  = ', s)
+
+        #kemenyOrder.reverse()
+        return maximalRankings[0], maxMarginalCorrelation, minMarginalCorrelationAmplitude
+
+
     def computeKemenyRanking(self,isProbabilistic=False,
                            orderLimit=7, seed=None,
                            sampleSize=1000, Debug=False):
