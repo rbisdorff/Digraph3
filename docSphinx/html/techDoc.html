@@ -368,26 +368,27 @@ class;</p>
 <dt><a class="reference internal" href="#linearorders-label"><span class="std std-ref">linearOrders module</span></a></dt><dd><p>Additional tools for solving linearly ranking problems with the
 root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a>
 class;</p>
-<div class="graphviz"><img src="_images/inheritance-7eb5d0eec859be8289aa29d200dc133d64b6e26f.png" alt="Inheritance diagram of linearOrders" usemap="#inheritance6ca036f5b8" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="_images/inheritance-2de2136f67b314714f8052ede978bcef93595b99.png" alt="Inheritance diagram of linearOrders" usemap="#inheritance6ca036f5b8" class="inheritance graphviz" /></div>
 <map id="inheritance6ca036f5b8" name="inheritance6ca036f5b8">
-<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="3,131,89,147"/>
-<area shape="rect" id="node4" href="#linearOrders.LinearOrder" target="_top" title="abstract class for digraphs which represent" alt="" coords="120,131,238,147"/>
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="3,147,89,163"/>
+<area shape="rect" id="node4" href="#linearOrders.LinearOrder" target="_top" title="abstract class for digraphs which represent" alt="" coords="120,147,238,163"/>
 <area shape="rect" id="node2" href="#linearOrders.CopelandOrder" target="_top" title="Dummy for CopelandRanking class" alt="" coords="481,3,611,20"/>
 <area shape="rect" id="node3" href="#linearOrders.CopelandRanking" target="_top" title="instantiates the Copeland Order from" alt="" coords="285,3,427,20"/>
 <area shape="rect" id="node5" href="#linearOrders.IteratedCopelandRanking" target="_top" title="instantiates the iterated Copeland ranking from" alt="" coords="269,35,443,52"/>
 <area shape="rect" id="node6" href="#linearOrders.IteratedNetFlowsRanking" target="_top" title="instantiates the iterated NetFlows order from" alt="" coords="269,67,443,83"/>
 <area shape="rect" id="node8" href="#linearOrders.KemenyRanking" target="_top" title="instantiates the exact Kemeny Order from" alt="" coords="288,99,424,115"/>
 <area shape="rect" id="node10" href="#linearOrders.KohlerRanking" target="_top" title="instantiates the Kohler Order from" alt="" coords="292,131,421,147"/>
-<area shape="rect" id="node12" href="#linearOrders.NetFlowsRanking" target="_top" title="instantiates the net flows ranking from" alt="" coords="286,162,427,179"/>
-<area shape="rect" id="node13" href="#linearOrders.PrincipalOrder" target="_top" title="instantiates the order from the scores obtained by the first" alt="" coords="292,194,420,210"/>
-<area shape="rect" id="node14" href="#linearOrders.RandomLinearOrder" target="_top" title="Instantiates random linear orders" alt="" coords="280,226,432,242"/>
-<area shape="rect" id="node16" href="#linearOrders.RankedPairsRanking" target="_top" title="instantiates the Extended Prudent Ranked Pairs Order from" alt="" coords="279,258,433,274"/>
+<area shape="rect" id="node11" href="#linearOrders.MedianRanking" target="_top" title="instantiates the ranking of highest mean marginal correlation and lowest amplitude from" alt="" coords="290,162,423,179"/>
+<area shape="rect" id="node13" href="#linearOrders.NetFlowsRanking" target="_top" title="instantiates the net flows ranking from" alt="" coords="286,194,427,210"/>
+<area shape="rect" id="node14" href="#linearOrders.PrincipalOrder" target="_top" title="instantiates the order from the scores obtained by the first" alt="" coords="292,226,420,242"/>
+<area shape="rect" id="node15" href="#linearOrders.RandomLinearOrder" target="_top" title="Instantiates random linear orders" alt="" coords="280,258,432,274"/>
+<area shape="rect" id="node17" href="#linearOrders.RankedPairsRanking" target="_top" title="instantiates the Extended Prudent Ranked Pairs Order from" alt="" coords="279,290,433,306"/>
 <area shape="rect" id="node7" href="#linearOrders.KemenyOrder" target="_top" title="Dummy class" alt="" coords="483,67,609,83"/>
-<area shape="rect" id="node18" href="#linearOrders.SlaterRanking" target="_top" title="Instantiates a Slater ranking by instantiating a *KemenyRanking* from the Condorcet Digraph &#45;the median cut polarised digraph" alt="" coords="482,99,610,115"/>
+<area shape="rect" id="node19" href="#linearOrders.SlaterRanking" target="_top" title="Instantiates a Slater ranking by instantiating a *KemenyRanking* from the Condorcet Digraph &#45;the median cut polarised digraph" alt="" coords="482,99,610,115"/>
 <area shape="rect" id="node9" href="#linearOrders.KohlerOrder" target="_top" title="Dummay for KohlerRanking class" alt="" coords="487,131,605,147"/>
-<area shape="rect" id="node11" href="#linearOrders.NetFlowsOrder" target="_top" title="Dummy for NetFlowsRanking class" alt="" coords="481,162,611,179"/>
-<area shape="rect" id="node15" href="#linearOrders.RankedPairsOrder" target="_top" title="Dummy for RankedPairsRanking class" alt="" coords="474,258,618,274"/>
-<area shape="rect" id="node17" href="#linearOrders.SlaterOrder" target="_top" title="Dummy class" alt="" coords="649,99,765,115"/>
+<area shape="rect" id="node12" href="#linearOrders.NetFlowsOrder" target="_top" title="Dummy for NetFlowsRanking class" alt="" coords="481,194,611,210"/>
+<area shape="rect" id="node16" href="#linearOrders.RankedPairsOrder" target="_top" title="Dummy for RankedPairsRanking class" alt="" coords="474,290,618,306"/>
+<area shape="rect" id="node18" href="#linearOrders.SlaterOrder" target="_top" title="Dummy class" alt="" coords="649,99,765,115"/>
 </map></dd>
 </dl>
 </li>
@@ -1233,6 +1234,18 @@ in the corresponding disjunctive undirected graph.</p>
 <code class="sig-name descname">computeMedianOutDegree</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeMedianOutDegree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeMedianOutDegree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the median outdegree of self.
 !!! self.size must be set previously !!!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="digraphs.Digraph.computeMedianRanking">
+<code class="sig-name descname">computeMedianRanking</code><span class="sig-paren">(</span><em class="sig-param">orderLimit=7</em>, <em class="sig-param">Threading=False</em>, <em class="sig-param">nbrOfCPUs=1</em>, <em class="sig-param">Comments=False</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeMedianRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeMedianRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a ordering from worst to best of the actions with maximal marginal correlation
+and minimal marginal correlation amplitude.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Returns a triple: (medianRanking (from best to worst),
+maxMarginalCorrelation, minMarginalCorrelationAmplitude)</p>
+</div>
 </dd></dl>
 
 <dl class="method">
@@ -8113,6 +8126,13 @@ of an instance of the LinearOrcer class by sorting by outdegrees (gamma[x][0]).<
 <dd><p>shows the linearly ordered actions in list format.</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="linearOrders.MedianRanking">
+<em class="property">class </em><code class="sig-prename descclassname">linearOrders.</code><code class="sig-name descname">MedianRanking</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">orderLimit=7</em>, <em class="sig-param">Threading=False</em>, <em class="sig-param">nbrOfCPUs=1</em>, <em class="sig-param">Comments=False</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#MedianRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linearOrders.MedianRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>instantiates the ranking of highest mean marginal correlation and lowest amplitude from
+a given bipolar-valued Digraph instance of small order</p>
 </dd></dl>
 
 <dl class="class">

@@ -2595,20 +2595,24 @@
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="k">if</span> <span class="n">criteriaList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Correlations</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
-                <span class="n">criteriaCorrelation</span> <span class="o">=</span>\
-                        <span class="n">g</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span>\
-                                <span class="n">actionsList</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
-                                <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
-                <span class="n">meanMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
-                <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">criteriaCorrelation</span><span class="p">:</span>
-                    <span class="n">meanMarginalCriteriaCorrelation</span> <span class="o">+=</span> <span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                    <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">+=</span> <span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="n">meanMarginalCriteriaCorrelation</span> <span class="o">/=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">criteriaCorrelation</span><span class="p">)))</span>
-                <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">/=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">criteriaCorrelation</span><span class="p">)))</span>
-                <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">-=</span> <span class="n">meanMarginalCriteriaCorrelation</span><span class="o">*</span><span class="n">meanMarginalCriteriaCorrelation</span>
-                <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sdMarginalCriteriaCorrelation</span><span class="p">)</span>
+                <span class="n">marginalCorrelations</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
+                <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="n">marginalCorrelations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">meanMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">marginalCorrelations</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">marginalCorrelations</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>             
+<span class="c1">##                from math import sqrt</span>
+<span class="c1">##                criteriaCorrelation =\</span>
+<span class="c1">##                        g.computeMarginalVersusGlobalRankingCorrelations(\</span>
+<span class="c1">##                                actionsList,ValuedCorrelation=True,Threading=Threading,</span>
+<span class="c1">##                                nbrCores=nbrOfCPUs)</span>
+<span class="c1">##                meanMarginalCriteriaCorrelation = Decimal(&#39;0.0&#39;)</span>
+<span class="c1">##                sdMarginalCriteriaCorrelation = Decimal(&#39;0.0&#39;)</span>
+<span class="c1">##                for cg in criteriaCorrelation:</span>
+<span class="c1">##                    meanMarginalCriteriaCorrelation += cg[0]</span>
+<span class="c1">##                    sdMarginalCriteriaCorrelation += cg[0]*cg[0]</span>
+<span class="c1">##                meanMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))</span>
+<span class="c1">##                sdMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))</span>
+<span class="c1">##                sdMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation</span>
+<span class="c1">##                sdMarginalCriteriaCorrelation = sqrt(sdMarginalCriteriaCorrelation)</span>
                 <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">criteriaCorrelation</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
@@ -2622,20 +2626,24 @@
 <span class="c1">##            if argActionsList != None:</span>
 <span class="c1">##                Correlations = False</span>
             <span class="k">if</span> <span class="n">Correlations</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
-                <span class="n">criteriaCorrelation</span> <span class="o">=</span>\
-                        <span class="n">g</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span>\
-                                <span class="n">actionsList</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
-                                <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
-                <span class="n">meanMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
-                <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">criteriaCorrelation</span><span class="p">:</span>
-                    <span class="n">meanMarginalCriteriaCorrelation</span> <span class="o">+=</span> <span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                    <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">+=</span> <span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="n">meanMarginalCriteriaCorrelation</span> <span class="o">/=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">criteriaCorrelation</span><span class="p">)))</span>
-                <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">/=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">criteriaCorrelation</span><span class="p">)))</span>
-                <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">-=</span> <span class="n">meanMarginalCriteriaCorrelation</span><span class="o">*</span><span class="n">meanMarginalCriteriaCorrelation</span>
-                <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">sdMarginalCriteriaCorrelation</span><span class="p">)</span>
+                <span class="n">marginalCorrelations</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
+                <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="n">marginalCorrelations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">meanMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">marginalCorrelations</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">marginalCorrelations</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>             
+<span class="c1">##                from math import sqrt</span>
+<span class="c1">##                criteriaCorrelation =\</span>
+<span class="c1">##                        g.computeMarginalVersusGlobalRankingCorrelations(\</span>
+<span class="c1">##                                actionsList,ValuedCorrelation=True,Threading=Threading,</span>
+<span class="c1">##                                nbrCores=nbrOfCPUs)</span>
+<span class="c1">##                meanMarginalCriteriaCorrelation = Decimal(&#39;0.0&#39;)</span>
+<span class="c1">##                sdMarginalCriteriaCorrelation = Decimal(&#39;0.0&#39;)</span>
+<span class="c1">##                for cg in criteriaCorrelation:</span>
+<span class="c1">##                    meanMarginalCriteriaCorrelation += cg[0]</span>
+<span class="c1">##                    sdMarginalCriteriaCorrelation += cg[0]*cg[0]</span>
+<span class="c1">##                meanMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))</span>
+<span class="c1">##                sdMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))</span>
+<span class="c1">##                sdMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation</span>
+<span class="c1">##                sdMarginalCriteriaCorrelation = sqrt(sdMarginalCriteriaCorrelation)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">quantileColor</span><span class="o">=</span><span class="p">{}</span>
@@ -2804,32 +2812,41 @@
         <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
-        <span class="n">marginalCriteriaCorrelations</span> <span class="o">=</span>\
+        <span class="n">marginalCorrelations</span> <span class="o">=</span>\
                         <span class="n">g</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span>\
                                 <span class="n">ranking</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
                                 <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
-        <span class="n">ncrit</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">marginalCriteriaCorrelations</span><span class="p">)))</span>
-        <span class="n">meanMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
-        <span class="n">varMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">marginalCriteriaCorrelations</span><span class="p">:</span>
-            <span class="n">meanMarginalCriteriaCorrelation</span> <span class="o">+=</span> <span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">varMarginalCriteriaCorrelation</span> <span class="o">+=</span> <span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">meanMarginalCriteriaCorrelation</span> <span class="o">/=</span> <span class="n">ncrit</span>
-        <span class="n">varMarginalCriteriaCorrelation</span> <span class="o">/=</span> <span class="n">ncrit</span>
-        <span class="n">varMarginalCriteriaCorrelation</span> <span class="o">-=</span> <span class="n">meanMarginalCriteriaCorrelation</span><span class="o">*</span><span class="n">meanMarginalCriteriaCorrelation</span>
-        <span class="n">sdMarginalCriteriaCorrelation</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">varMarginalCriteriaCorrelation</span><span class="p">)</span> 
+        <span class="n">ncrit</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">marginalCorrelations</span><span class="p">)))</span>
+        <span class="n">meanMarginalCorrelation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
+        <span class="n">varMarginalCorrelation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
+        <span class="n">sumWeights</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">marginalCorrelations</span><span class="p">:</span>
+            <span class="c1">#if cg[0] &lt; Decimal(&#39;0&#39;):</span>
+            <span class="n">sumWeights</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">cg</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">marginalCorrelations</span><span class="p">:</span>
+            <span class="c1">#if cg[0] &lt; Decimal(&#39;0&#39;):</span>
+            <span class="n">cgw</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">cg</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">sumWeights</span>
+            <span class="n">meanMarginalCorrelation</span> <span class="o">+=</span> <span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">cgw</span>
+        <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">marginalCorrelations</span><span class="p">:</span>
+            <span class="c1">#if cg[0] &lt; Decimal(&#39;0&#39;):</span>
+            <span class="n">cgw</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">cg</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">sumWeights</span>
+            <span class="n">varMarginalCorrelation</span> <span class="o">+=</span> <span class="p">((</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">meanMarginalCorrelation</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">cgw</span>
+        <span class="c1">#meanMarginalCriteriaCorrelation /= ncrit</span>
+        <span class="c1">#varMarginalCriteriaCorrelation /= ncrit</span>
+        <span class="c1">#varMarginalCorrelation -= meanMarginalCorrelation*meanMarginalCriteriaCorrelation</span>
+        <span class="n">sdMarginalCorrelation</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">varMarginalCorrelation</span><span class="p">)</span> 
         <span class="c1"># showing the results</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Consensus quality of ranking:&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;criterion: correlation&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;----------------------&#39;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">marginalCriteriaCorrelations</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">marginalCorrelations</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Summary:&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean marginal correlation               : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">meanMarginalCriteriaCorrelation</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Standard marginal correlation deviation : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">sdMarginalCriteriaCorrelation</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">marginalCriteriaCorrelations</span><span class="p">,</span><span class="n">meanMarginalCriteriaCorrelation</span><span class="p">,</span><span class="n">sdMarginalCriteriaCorrelation</span><span class="p">)</span></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean marginal correlation               : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">meanMarginalCorrelation</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Standard marginal correlation deviation : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">sdMarginalCorrelation</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">marginalCorrelations</span><span class="p">,</span><span class="n">meanMarginalCorrelation</span><span class="p">,</span><span class="n">sdMarginalCorrelation</span><span class="p">)</span></div>
         
 <div class="viewcode-block" id="PerformanceTableau.computeWeightPreorder"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeWeightPreorder">[docs]</a>    <span class="k">def</span> <span class="nf">computeWeightPreorder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

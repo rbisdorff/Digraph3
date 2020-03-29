@@ -9648,6 +9648,84 @@
 <span class="c1">##        ordering = self.computeRankedPairsOrder()</span>
 <span class="c1">##        return list(reversed(ordering))</span>
 
+<div class="viewcode-block" id="Digraph.computeMedianRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeMedianRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeMedianRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                           <span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                           <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders a ordering from worst to best of the actions with maximal marginal correlation</span>
+<span class="sd">        and minimal marginal correlation amplitude.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">        </span>
+<span class="sd">             Returns a triple: (medianRanking (from best to worst),</span>
+<span class="sd">             maxMarginalCorrelation, minMarginalCorrelationAmplitude)</span>
+<span class="sd">             </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">all_perms</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span>
+
+
+        <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="n">orderLimit</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">maxMarginalCorrelation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1.0&#39;</span><span class="p">)</span>
+        <span class="n">minMarginalCorrelationAmplitude</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2.0&#39;</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">maxs</span> <span class="o">=</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">maximalRankings</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">all_perms</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">actions</span><span class="p">)):</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c1">#if Comments:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">maxs</span><span class="p">))</span>
+            <span class="n">kcurr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
+<span class="c1">##            kcurr = sum((relation[a[i]][a[j]] - relation[a[j]][a[i]])\</span>
+<span class="c1">##                        for i in range(n) for j in range(i+1,n))</span>
+<span class="c1">##                for i in range(n):</span>
+<span class="c1">##                    for j in range(i+1,n):</span>
+<span class="c1">##                        kcurr += relation[a[i]][a[j]] - relation[a[j]][a[i]]</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">kcurr</span><span class="p">)</span>
+            <span class="n">kcurrAmp</span> <span class="o">=</span> <span class="n">kcurr</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">kcurr</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">kcurrAmp</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">kcurr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">maxMarginalCorrelation</span><span class="p">:</span>
+                <span class="n">maxMarginalCorrelation</span> <span class="o">=</span> <span class="n">kcurr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">minMarginalCorrelationAmplitude</span> <span class="o">=</span> <span class="n">kcurrAmp</span>
+                <span class="n">medianRanking</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+                <span class="n">maximalRankings</span> <span class="o">=</span> <span class="p">[</span><span class="n">medianRanking</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">maximalRankings</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">kcurr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">maxMarginalCorrelation</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">kcurrAmp</span> <span class="o">&lt;</span> <span class="n">minMarginalCorrelationAmplitude</span><span class="p">:</span>
+                    <span class="n">maxMarginalCorrelation</span> <span class="o">=</span> <span class="n">kcurr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">minMarginalCorrelationAmplitude</span> <span class="o">=</span> <span class="n">kcurrAmp</span>
+                    <span class="n">medianRanking</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+                    <span class="n">maximalRankings</span> <span class="o">=</span> <span class="p">[</span><span class="n">medianRanking</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">maximalRankings</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">kcurrAmp</span> <span class="o">==</span> <span class="n">minMarginalCorrelationAmplitude</span><span class="p">:</span>              
+                    <span class="n">minMarginalCorrelationAmplitude</span> <span class="o">=</span> <span class="n">kcurrAmp</span>
+                    <span class="n">maximalRankings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">maximalRankings</span><span class="p">)</span>
+                    
+            <span class="bp">self</span><span class="o">.</span><span class="n">maximalRankings</span> <span class="o">=</span> <span class="n">maximalRankings</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">maxMarginalCorrelation</span> <span class="o">=</span> <span class="n">maxMarginalCorrelation</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">minMarginalCorrelationAmplitude</span> <span class="o">=</span> <span class="n">minMarginalCorrelationAmplitude</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First optimal median ranking = &#39;</span><span class="p">,</span> <span class="n">maximalRankings</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Optimal maxMarginalCorrelation = &#39;</span><span class="p">,</span> <span class="n">maxMarginalCorrelation</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Optimal minMarginalCorrelationAmplitude = &#39;</span><span class="p">,</span> <span class="n">minMarginalCorrelationAmplitude</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;# of permutations  = &#39;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+        <span class="c1">#kemenyOrder.reverse()</span>
+        <span class="k">return</span> <span class="n">maximalRankings</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">maxMarginalCorrelation</span><span class="p">,</span> <span class="n">minMarginalCorrelationAmplitude</span></div>
+
+
 <div class="viewcode-block" id="Digraph.computeKemenyRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeKemenyRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeKemenyRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">isProbabilistic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                            <span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                            <span class="n">sampleSize</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
