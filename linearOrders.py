@@ -1505,19 +1505,42 @@ class KemenyRanking(LinearOrder):
         Max = other.valuationdomain['max']
         Med = other.valuationdomain['med']
         #relation = copy(other.relation)
+##        kemenyRankings = other.computeKemenyRanking(orderLimit=orderLimit,Debug=False)
+##        # [0] = ordered actions list, [1] = maximal Kemeny index
+##        
+##        kemenyRanking = kemenyRankings[0]
+##        maxKemenyIndex = kemenyRankings[1]
+##        maximalRankings = deepcopy(other.maximalRankings)
         kemenyRankings = other.computeKemenyRanking(orderLimit=orderLimit,Debug=False)
-        # [0] = ordered actions list, [1] = maximal Kemeny index
-        
-        kemenyRanking = kemenyRankings[0]
-        maxKemenyIndex = kemenyRankings[1]
-        maximalRankings = deepcopy(other.maximalRankings)
-        
         if kemenyRankings == None:
             print('Intantiation error: unable to compute the Kemeny Order !!!')
             print('Digraph order %d is required to be lower than 8!' % n)
             return
+##        elif len(other.maximalRankings) == 1:
+##            kemenyRanking = kemenyRankings[0]
+##            maxKemenyIndex = kemenyRankings[1]
+##            maximalRankings = list(other.maximalRankings)
+        else:
+            orderedMaximalRankings = []
+            for r in other.maximalRankings:
+                try:
+                    margCorr = other.computeRankingConsensusQuality(r)
+                except:
+                    kemenyRanking = kemenyRankings[0]
+                    maxKemenyIndex = kemenyRankings[1]
+                    maximalRankings = list(other.maximalRankings)
+                    break
+                orderedMaximalRankings.append((margCorr[1],margCorr[2],r))
+            if len(orderedMaximalRankings) > 1:
+                orderedMaximalRankings.sort(reverse=True)
+                kemenyRanking = orderedMaximalRankings[0][2]
+            else:
+                kemenyRanking = kemenyRankings[0]
+            maxKemenyIndex = kemenyRankings[1]
+            maximalRankings = list(other.maximalRankings)
+            
         if Debug:
-            print(kemenyRankings,other.maximalRankings)
+            print(kemenyRankings,maximalRankings,orderedMaximalRankings)
         
         # instatiates a Digraph template
         actions = deepcopy(other.actions)
@@ -1557,6 +1580,7 @@ class KemenyRanking(LinearOrder):
         self.kemenyRanking = kemenyRanking
         self.maxKemenyIndex = maxKemenyIndex
         self.maximalRankings = maximalRankings
+        self.orderedMaximalRankings = orderedMaximalRankings
         self.kemenyOrder = list(reversed(list(kemenyRanking)))
         if Debug:
             self.showRelationTable()
@@ -1739,7 +1763,7 @@ if __name__ == "__main__":
     Threading = False
     seed = random.randint(1,1000)
     print('*-------- Testing MedianRanking class -------')
-    t = RandomCBPerformanceTableau(numberOfActions=7,numberOfCriteria=13,
+    t = RandomCBPerformanceTableau(numberOfActions=6,numberOfCriteria=13,
                                    NegativeWeights=False,
                                    seed=seed)
     t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
@@ -1756,6 +1780,8 @@ if __name__ == "__main__":
     print('Kemeny')
     for r in ke.maximalRankings:
         print(r,g.computeRankingConsensusQuality(r)[1])
+    t.showHTMLPerformanceHeatmap(actionsList=ke.kemenyRanking,
+                                 Correlations=True,colorLevels=5)
 ##    print()
 ##    print('==>> net flows ordering:')
 ##    t0 = time()

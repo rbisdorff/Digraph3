@@ -1545,19 +1545,42 @@
         <span class="n">Max</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="c1">#relation = copy(other.relation)</span>
+<span class="c1">##        kemenyRankings = other.computeKemenyRanking(orderLimit=orderLimit,Debug=False)</span>
+<span class="c1">##        # [0] = ordered actions list, [1] = maximal Kemeny index</span>
+<span class="c1">##        </span>
+<span class="c1">##        kemenyRanking = kemenyRankings[0]</span>
+<span class="c1">##        maxKemenyIndex = kemenyRankings[1]</span>
+<span class="c1">##        maximalRankings = deepcopy(other.maximalRankings)</span>
         <span class="n">kemenyRankings</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeKemenyRanking</span><span class="p">(</span><span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="c1"># [0] = ordered actions list, [1] = maximal Kemeny index</span>
-        
-        <span class="n">kemenyRanking</span> <span class="o">=</span> <span class="n">kemenyRankings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">maxKemenyIndex</span> <span class="o">=</span> <span class="n">kemenyRankings</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">maximalRankings</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">)</span>
-        
         <span class="k">if</span> <span class="n">kemenyRankings</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Intantiation error: unable to compute the Kemeny Order !!!&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Digraph order </span><span class="si">%d</span><span class="s1"> is required to be lower than 8!&#39;</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
             <span class="k">return</span>
+<span class="c1">##        elif len(other.maximalRankings) == 1:</span>
+<span class="c1">##            kemenyRanking = kemenyRankings[0]</span>
+<span class="c1">##            maxKemenyIndex = kemenyRankings[1]</span>
+<span class="c1">##            maximalRankings = list(other.maximalRankings)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">orderedMaximalRankings</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">margCorr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">kemenyRanking</span> <span class="o">=</span> <span class="n">kemenyRankings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">maxKemenyIndex</span> <span class="o">=</span> <span class="n">kemenyRankings</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">maximalRankings</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">)</span>
+                    <span class="k">break</span>
+                <span class="n">orderedMaximalRankings</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">margCorr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">margCorr</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">orderedMaximalRankings</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">orderedMaximalRankings</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">kemenyRanking</span> <span class="o">=</span> <span class="n">orderedMaximalRankings</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">kemenyRanking</span> <span class="o">=</span> <span class="n">kemenyRankings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">maxKemenyIndex</span> <span class="o">=</span> <span class="n">kemenyRankings</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">maximalRankings</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">)</span>
+            
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">kemenyRankings</span><span class="p">,</span><span class="n">other</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">kemenyRankings</span><span class="p">,</span><span class="n">maximalRankings</span><span class="p">,</span><span class="n">orderedMaximalRankings</span><span class="p">)</span>
         
         <span class="c1"># instatiates a Digraph template</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -1597,6 +1620,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">kemenyRanking</span> <span class="o">=</span> <span class="n">kemenyRanking</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">maxKemenyIndex</span> <span class="o">=</span> <span class="n">maxKemenyIndex</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">maximalRankings</span> <span class="o">=</span> <span class="n">maximalRankings</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">orderedMaximalRankings</span> <span class="o">=</span> <span class="n">orderedMaximalRankings</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">kemenyOrder</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">kemenyRanking</span><span class="p">)))</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
@@ -1779,7 +1803,7 @@
     <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">seed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing MedianRanking class -------&#39;</span><span class="p">)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
                                    <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -1796,6 +1820,8 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kemeny&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ke</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">r</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">ke</span><span class="o">.</span><span class="n">kemenyRanking</span><span class="p">,</span>
+                                 <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="c1">##    print()</span>
 <span class="c1">##    print(&#39;==&gt;&gt; net flows ordering:&#39;)</span>
 <span class="c1">##    t0 = time()</span>
