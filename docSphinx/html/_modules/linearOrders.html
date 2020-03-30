@@ -1809,41 +1809,43 @@
     <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">seed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing MedianRanking class -------&#39;</span><span class="p">)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
                                    <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)</span>
     <span class="c1">#t = PerformanceTableau(&#39;testLin&#39;)    </span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="c1">#g.showRelationTable()</span>
     <span class="n">mr</span> <span class="o">=</span> <span class="n">MedianRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">mr</span><span class="o">.</span><span class="n">medianRanking</span><span class="p">,</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Median Ranking&#39;</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">mr</span><span class="o">.</span><span class="n">medianRanking</span><span class="p">,</span>
                                  <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
     <span class="n">ke</span> <span class="o">=</span> <span class="n">KemenyRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;median&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">mr</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">r</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="s1">&#39;</span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">corr</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="s1">&#39;</span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">corr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kemeny&#39;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ke</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">:</span>
-        <span class="n">cons</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">cons</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">cons</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="c1">##    for r in ke.maximalRankings:</span>
+<span class="c1">##        cons = g.computeRankingConsensusQuality(r)</span>
+<span class="c1">##        print(r,cons[1],cons[2])</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ke</span><span class="o">.</span><span class="n">orderedMaximalRankings</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">ke</span><span class="o">.</span><span class="n">kemenyRanking</span><span class="p">,</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Kemeny Ranking&#39;</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">ke</span><span class="o">.</span><span class="n">kemenyRanking</span><span class="p">,</span>
                                  <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="c1">##    print()</span>
 <span class="c1">##    print(&#39;==&gt;&gt; net flows ordering:&#39;)</span>
 <span class="c1">##    t0 = time()</span>
-<span class="c1">##    nf = NetFlowsOrder(g,Debug=False)</span>
+    <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="c1">##    #g.showRelationTable(actionsSubset=nf.netFlowsRanking,Sorted=False)</span>
 <span class="c1">##    #print(nf.netFlowsRanking)</span>
 <span class="c1">##    #print(nf.netFlowsOrder)</span>
 <span class="c1">##    #corr = g.computeOrdinalCorrelation(nf)</span>
 <span class="c1">##    #g.showCorrelation(corr)</span>
 <span class="c1">##    #print(time()-t0)</span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(actionsList=nf.netFlowsRanking,Correlations=True)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;NetFlows Ranking&#39;</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">,</span>
+                                 <span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="c1">##    print()</span>
 <span class="c1">##    print(&#39;==&gt;&gt; iterated net flows ordering:&#39;)</span>
 <span class="c1">##    from linearOrders import IteratedNetFlowsRanking</span>

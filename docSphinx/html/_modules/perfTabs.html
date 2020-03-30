@@ -2833,6 +2833,7 @@
             <span class="c1">#if cg[0] &lt; Decimal(&#39;0&#39;):</span>
             <span class="n">cgw</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">cg</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">sumWeights</span>
             <span class="n">varMarginalCorrelation</span> <span class="o">+=</span> <span class="p">((</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">meanMarginalCorrelation</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">cgw</span>
+            <span class="c1">#varMarginalCorrelation += (cg[0]**2)*cgw</span>
         <span class="c1">#meanMarginalCriteriaCorrelation /= ncrit</span>
         <span class="c1">#varMarginalCriteriaCorrelation /= ncrit</span>
         <span class="c1">#varMarginalCorrelation -= meanMarginalCorrelation*meanMarginalCriteriaCorrelation</span>

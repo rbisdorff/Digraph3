@@ -1769,41 +1769,43 @@ if __name__ == "__main__":
     Threading = False
     seed = random.randint(1,1000)
     print('*-------- Testing MedianRanking class -------')
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=6,numberOfCriteria=13,
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=13,
                                    NegativeWeights=False,
                                    seed=seed)
-    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
+    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
     #t = PerformanceTableau('testLin')    
     g = BipolarOutrankingDigraph(t,Normalized=True)
     #g.showRelationTable()
     mr = MedianRanking(g,Threading=False,nbrOfCPUs=8,Debug=False)
-    t.showHTMLPerformanceHeatmap(actionsList=mr.medianRanking,
+    t.showHTMLPerformanceHeatmap(pageTitle='Median Ranking',actionsList=mr.medianRanking,
                                  Correlations=True,colorLevels=5)
     ke = KemenyRanking(g)
     print('median')
     for r in mr.maximalRankings:
-        print(r,g.computeRankingConsensusQuality(r)[1])
+        corr = g.computeRankingConsensusQuality(r)
+        print(r,'%.4f' % (corr[1]), '%.4f' % (corr[2]) )
     print('Kemeny')
-    for r in ke.maximalRankings:
-        cons = g.computeRankingConsensusQuality(r)
-        print(r,cons[1],cons[2])
+##    for r in ke.maximalRankings:
+##        cons = g.computeRankingConsensusQuality(r)
+##        print(r,cons[1],cons[2])
     for r in ke.orderedMaximalRankings:
         print(r[2],r[0],r[1])
 
     time.sleep(3)
-    t.showHTMLPerformanceHeatmap(actionsList=ke.kemenyRanking,
+    t.showHTMLPerformanceHeatmap(pageTitle='Kemeny Ranking',actionsList=ke.kemenyRanking,
                                  Correlations=True,colorLevels=5)
 ##    print()
 ##    print('==>> net flows ordering:')
 ##    t0 = time()
-##    nf = NetFlowsOrder(g,Debug=False)
+    nf = NetFlowsOrder(g,Debug=False)
 ##    #g.showRelationTable(actionsSubset=nf.netFlowsRanking,Sorted=False)
 ##    #print(nf.netFlowsRanking)
 ##    #print(nf.netFlowsOrder)
 ##    #corr = g.computeOrdinalCorrelation(nf)
 ##    #g.showCorrelation(corr)
 ##    #print(time()-t0)
-##    #t.showHTMLPerformanceHeatmap(actionsList=nf.netFlowsRanking,Correlations=True)
+    t.showHTMLPerformanceHeatmap(pageTitle='NetFlows Ranking',actionsList=nf.netFlowsRanking,
+                                 colorLevels=5,Correlations=True)
 ##    print()
 ##    print('==>> iterated net flows ordering:')
 ##    from linearOrders import IteratedNetFlowsRanking

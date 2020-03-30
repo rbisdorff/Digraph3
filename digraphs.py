@@ -9639,8 +9639,8 @@ class Digraph(object):
         maximalRankings = []
         for a in all_perms(list(actions)):
             s += 1
-            #if Comments:
-            print('%d/%d' % (s,maxs))
+            if Comments:
+                print('%d/%d' % (s,maxs))
             kcurr = self.computeRankingConsensusQuality(a,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
 ##            kcurr = sum((relation[a[i]][a[j]] - relation[a[j]][a[i]])\
 ##                        for i in range(n) for j in range(i+1,n))

@@ -2793,6 +2793,7 @@ The performance evaluations of each decision alternative on each criterion are g
             #if cg[0] < Decimal('0'):
             cgw = abs(criteria[cg[1]]['weight'])/sumWeights
             varMarginalCorrelation += ((cg[0]-meanMarginalCorrelation)**2)*cgw
+            #varMarginalCorrelation += (cg[0]**2)*cgw
         #meanMarginalCriteriaCorrelation /= ncrit
         #varMarginalCriteriaCorrelation /= ncrit
         #varMarginalCorrelation -= meanMarginalCorrelation*meanMarginalCriteriaCorrelation
