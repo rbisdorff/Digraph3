@@ -2358,7 +2358,9 @@ The performance evaluations of each decision alternative on each criterion are g
         
         """
         import webbrowser
-        fileName = '/tmp/performanceHeatmap.html'
+        from tempfile import NamedTemporaryFile
+        fileName = (NamedTemporaryFile(suffix='.html',delete=False)).name
+        #fileName = '/tmp/performanceHeatmap.html'
         fo = open(fileName,'w')
         if pageTitle == None:
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name

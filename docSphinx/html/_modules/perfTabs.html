@@ -2398,7 +2398,9 @@
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">webbrowser</span>
-        <span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;/tmp/performanceHeatmap.html&#39;</span>
+        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
+        <span class="n">fileName</span> <span class="o">=</span> <span class="p">(</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.html&#39;</span><span class="p">,</span><span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span><span class="o">.</span><span class="n">name</span>
+        <span class="c1">#fileName = &#39;/tmp/performanceHeatmap.html&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">pageTitle</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">pageTitle</span> <span class="o">=</span> <span class="s1">&#39;Heatmap of Performance Tableau </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>

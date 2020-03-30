@@ -368,7 +368,7 @@ class;</p>
 <dt><a class="reference internal" href="#linearorders-label"><span class="std std-ref">linearOrders module</span></a></dt><dd><p>Additional tools for solving linearly ranking problems with the
 root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a>
 class;</p>
-<div class="graphviz"><img src="_images/inheritance-2de2136f67b314714f8052ede978bcef93595b99.png" alt="Inheritance diagram of linearOrders" usemap="#inheritance6ca036f5b8" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="_images/inheritance-53af0f69316498f24178108b60b2bd9f55aca962.png" alt="Inheritance diagram of linearOrders" usemap="#inheritance6ca036f5b8" class="inheritance graphviz" /></div>
 <map id="inheritance6ca036f5b8" name="inheritance6ca036f5b8">
 <area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="3,147,89,163"/>
 <area shape="rect" id="node4" href="#linearOrders.LinearOrder" target="_top" title="abstract class for digraphs which represent" alt="" coords="120,147,238,163"/>
@@ -376,7 +376,7 @@ class;</p>
 <area shape="rect" id="node3" href="#linearOrders.CopelandRanking" target="_top" title="instantiates the Copeland Order from" alt="" coords="285,3,427,20"/>
 <area shape="rect" id="node5" href="#linearOrders.IteratedCopelandRanking" target="_top" title="instantiates the iterated Copeland ranking from" alt="" coords="269,35,443,52"/>
 <area shape="rect" id="node6" href="#linearOrders.IteratedNetFlowsRanking" target="_top" title="instantiates the iterated NetFlows order from" alt="" coords="269,67,443,83"/>
-<area shape="rect" id="node8" href="#linearOrders.KemenyRanking" target="_top" title="instantiates the exact Kemeny Order from" alt="" coords="288,99,424,115"/>
+<area shape="rect" id="node8" href="#linearOrders.KemenyRanking" target="_top" title="Instantiates the Kemeny Ranking wrt the outranking relation from" alt="" coords="288,99,424,115"/>
 <area shape="rect" id="node10" href="#linearOrders.KohlerRanking" target="_top" title="instantiates the Kohler Order from" alt="" coords="292,131,421,147"/>
 <area shape="rect" id="node11" href="#linearOrders.MedianRanking" target="_top" title="instantiates the ranking of highest mean marginal correlation and lowest amplitude from" alt="" coords="290,162,423,179"/>
 <area shape="rect" id="node13" href="#linearOrders.NetFlowsRanking" target="_top" title="instantiates the net flows ranking from" alt="" coords="286,194,427,210"/>
@@ -8046,8 +8046,10 @@ a given bipolar-valued Digraph instance</p>
 <dl class="class">
 <dt id="linearOrders.KemenyRanking">
 <em class="property">class </em><code class="sig-prename descclassname">linearOrders.</code><code class="sig-name descname">KemenyRanking</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">orderLimit=7</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#KemenyRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#linearOrders.KemenyRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>instantiates the exact Kemeny Order from
-a given bipolar-valued Digraph instance of small order</p>
+<dd><p>Instantiates the Kemeny Ranking wrt the outranking relation from
+a given bipolar-valued Digraph instance of small order.
+Multiple Kemeny rankings are sorted in decreasing order of their mean marginal correlations
+and the resulting Kemeny ranking is the first one in this list.</p>
 </dd></dl>
 
 <dl class="class">

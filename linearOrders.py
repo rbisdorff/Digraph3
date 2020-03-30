@@ -1484,8 +1484,10 @@ class MedianRanking(LinearOrder):
 
 class KemenyRanking(LinearOrder):
     """
-    instantiates the exact Kemeny Order from
-    a given bipolar-valued Digraph instance of small order 
+    Instantiates the Kemeny Ranking wrt the outranking relation from
+    a given bipolar-valued Digraph instance of small order.
+    Multiple Kemeny rankings are sorted in decreasing order of their mean marginal correlations
+    and the resulting Kemeny ranking is the first one in this list.
     """
     def __init__(self,other,orderLimit=7,Debug=False):
         """
@@ -1521,6 +1523,7 @@ class KemenyRanking(LinearOrder):
 ##            maxKemenyIndex = kemenyRankings[1]
 ##            maximalRankings = list(other.maximalRankings)
         else:
+            from operator import itemgetter
             orderedMaximalRankings = []
             for r in other.maximalRankings:
                 try:
@@ -1530,9 +1533,11 @@ class KemenyRanking(LinearOrder):
                     maxKemenyIndex = kemenyRankings[1]
                     maximalRankings = list(other.maximalRankings)
                     break
-                orderedMaximalRankings.append((margCorr[1],margCorr[2],r))
+                orderedMaximalRankings.append(('%.4f' % (margCorr[1]), '%.4f' % (margCorr[2]),r))
             if len(orderedMaximalRankings) > 1:
-                orderedMaximalRankings.sort(reverse=True)
+                s = sorted(orderedMaximalRankings,key=itemgetter(1))
+                s = sorted(s,key=itemgetter(0),reverse=True)
+                orderedMaximalRankings = s
                 kemenyRanking = orderedMaximalRankings[0][2]
             else:
                 kemenyRanking = kemenyRankings[0]
@@ -1758,12 +1763,13 @@ if __name__ == "__main__":
     ****************************************************
     """)
     import random
+    import time
     print('*-------- Testing class and methods -------')
 
     Threading = False
     seed = random.randint(1,1000)
     print('*-------- Testing MedianRanking class -------')
-    t = RandomCBPerformanceTableau(numberOfActions=6,numberOfCriteria=13,
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=6,numberOfCriteria=13,
                                    NegativeWeights=False,
                                    seed=seed)
     t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
@@ -1779,7 +1785,12 @@ if __name__ == "__main__":
         print(r,g.computeRankingConsensusQuality(r)[1])
     print('Kemeny')
     for r in ke.maximalRankings:
-        print(r,g.computeRankingConsensusQuality(r)[1])
+        cons = g.computeRankingConsensusQuality(r)
+        print(r,cons[1],cons[2])
+    for r in ke.orderedMaximalRankings:
+        print(r[2],r[0],r[1])
+
+    time.sleep(3)
     t.showHTMLPerformanceHeatmap(actionsList=ke.kemenyRanking,
                                  Correlations=True,colorLevels=5)
 ##    print()

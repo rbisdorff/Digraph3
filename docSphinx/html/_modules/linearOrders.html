@@ -1524,8 +1524,10 @@
 
 <div class="viewcode-block" id="KemenyRanking"><a class="viewcode-back" href="../techDoc.html#linearOrders.KemenyRanking">[docs]</a><span class="k">class</span> <span class="nc">KemenyRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    instantiates the exact Kemeny Order from</span>
-<span class="sd">    a given bipolar-valued Digraph instance of small order </span>
+<span class="sd">    Instantiates the Kemeny Ranking wrt the outranking relation from</span>
+<span class="sd">    a given bipolar-valued Digraph instance of small order.</span>
+<span class="sd">    Multiple Kemeny rankings are sorted in decreasing order of their mean marginal correlations</span>
+<span class="sd">    and the resulting Kemeny ranking is the first one in this list.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1561,6 +1563,7 @@
 <span class="c1">##            maxKemenyIndex = kemenyRankings[1]</span>
 <span class="c1">##            maximalRankings = list(other.maximalRankings)</span>
         <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
             <span class="n">orderedMaximalRankings</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
@@ -1570,9 +1573,11 @@
                     <span class="n">maxKemenyIndex</span> <span class="o">=</span> <span class="n">kemenyRankings</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
                     <span class="n">maximalRankings</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">)</span>
                     <span class="k">break</span>
-                <span class="n">orderedMaximalRankings</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">margCorr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">margCorr</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">))</span>
+                <span class="n">orderedMaximalRankings</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s1">&#39;</span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">margCorr</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="s1">&#39;</span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">margCorr</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span><span class="n">r</span><span class="p">))</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">orderedMaximalRankings</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">orderedMaximalRankings</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">orderedMaximalRankings</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">orderedMaximalRankings</span> <span class="o">=</span> <span class="n">s</span>
                 <span class="n">kemenyRanking</span> <span class="o">=</span> <span class="n">orderedMaximalRankings</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">kemenyRanking</span> <span class="o">=</span> <span class="n">kemenyRankings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1798,12 +1803,13 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
     <span class="kn">import</span> <span class="nn">random</span>
+    <span class="kn">import</span> <span class="nn">time</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing class and methods -------&#39;</span><span class="p">)</span>
 
     <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">seed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing MedianRanking class -------&#39;</span><span class="p">)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
                                    <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -1819,7 +1825,12 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">r</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kemeny&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ke</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">r</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">cons</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">cons</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">cons</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ke</span><span class="o">.</span><span class="n">orderedMaximalRankings</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">ke</span><span class="o">.</span><span class="n">kemenyRanking</span><span class="p">,</span>
                                  <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="c1">##    print()</span>
