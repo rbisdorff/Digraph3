@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{March 24, 2020}
+\date{March 31, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -2493,7 +2493,7 @@ A \sphinxstylestrong{Kemeny} ranking is a linear order which is \sphinxstyleemph
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{KemenyRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ke} \PYG{o}{=} \PYG{n}{KemenyRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} default orderLimit is 7}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ke}\PYG{o}{.}\PYG{n}{showRanking}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
+\PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{ke}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
@@ -2504,7 +2504,7 @@ A \sphinxstylestrong{Kemeny} ranking is a linear order which is \sphinxstyleemph
 
 So, \sphinxstylestrong{+0.779} represents the \sphinxstyleemphasis{highest possible} ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking digraph (see \hyperref[\detokenize{tutorial:kemenyranking}]{Listing \ref{\detokenize{tutorial:kemenyranking}}} Lines 7\sphinxhyphen{}10).
 
-A \sphinxstyleemphasis{Kemeny} ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example here, we obtain in fact two optimal \sphinxstyleemphasis{Kemeny} rankings with a same \sphinxstylestrong{maximal} \sphinxstyleemphasis{Kemeny} index of 12.967 .
+A \sphinxstyleemphasis{Kemeny} ranking may not be unique. In our example here, we obtain in fact two optimal \sphinxstyleemphasis{Kemeny} rankings with a same \sphinxstylestrong{maximal} \sphinxstyleemphasis{Kemeny} index.
 \sphinxSetupCaptionForVerbatim{Optimal \sphinxstyleemphasis{Kemeny} rankings}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:optimalkemeny}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -2543,6 +2543,58 @@ We may visualize the partial order defined by the {\hyperref[\detokenize{tutoria
 \caption{Epistemic disjunction of optimal \sphinxstyleemphasis{Kemeny} rankings}\label{\detokenize{tutorial:tutorialkemeny}}\end{figure}
 
 It is interesting to notice in \hyperref[\detokenize{tutorial:tutorialkemeny}]{Fig.\@ \ref{\detokenize{tutorial:tutorialkemeny}}} and \hyperref[\detokenize{tutorial:optimalkemeny}]{Listing \ref{\detokenize{tutorial:optimalkemeny}}}, that both \sphinxstyleemphasis{Kemeny} rankings only differ in their respective positioning of alternative \sphinxstyleemphasis{a8}; either before or after alternatives \sphinxstyleemphasis{a9}, \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a1}.
+
+To choose now a specific representative among all the potential rankings with maximal Kemeny index, we will choose, with the help of the \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau.computeRankingConsensusQuality()}} method, the \sphinxstyleemphasis{most consensual} one.
+\sphinxSetupCaptionForVerbatim{Computing Consensus Quality of Rankings}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:consensualkemeny}}}
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} g.computeRankingConsensusQuality(ke.maximalRankings[0],Comments=True)}
+\PYG{g+go}{  Consensus quality of ranking:}
+\PYG{g+go}{   [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
+\PYG{g+go}{  criterion (weight): correlation}
+\PYG{g+go}{  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{   b09 (0.050): +0.361}
+\PYG{g+go}{   b04 (0.050): +0.333}
+\PYG{g+go}{   b08 (0.050): +0.292}
+\PYG{g+go}{   b01 (0.050): +0.264}
+\PYG{g+go}{   c01 (0.167): +0.250}
+\PYG{g+go}{   b03 (0.050): +0.222}
+\PYG{g+go}{   b07 (0.050): +0.194}
+\PYG{g+go}{   b05 (0.050): +0.167}
+\PYG{g+go}{   c02 (0.167): +0.000}
+\PYG{g+go}{   b10 (0.050): +0.000}
+\PYG{g+go}{   b02 (0.050): \PYGZhy{}0.042}
+\PYG{g+go}{   b06 (0.050): \PYGZhy{}0.097}
+\PYG{g+go}{   c03 (0.167): \PYGZhy{}0.167}
+\PYG{g+go}{  Summary:}
+\PYG{g+go}{   Weighted mean marginal correlation : +0.099}
+\PYG{g+go}{   Standard deviation                 : +0.177}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} g.computeRankingConsensusQuality(ke.maximalRankings[1],Comments=True)}
+\PYG{g+go}{  Consensus quality of ranking:}
+\PYG{g+go}{   [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
+\PYG{g+go}{  criterion (weight): correlation}
+\PYG{g+go}{  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{   b09 (0.050): +0.306}
+\PYG{g+go}{   b08 (0.050): +0.236}
+\PYG{g+go}{   c01 (0.167): +0.194}
+\PYG{g+go}{   b07 (0.050): +0.194}
+\PYG{g+go}{   c02 (0.167): +0.167}
+\PYG{g+go}{   b04 (0.050): +0.167}
+\PYG{g+go}{   b03 (0.050): +0.167}
+\PYG{g+go}{   b01 (0.050): +0.153}
+\PYG{g+go}{   b05 (0.050): +0.056}
+\PYG{g+go}{   b02 (0.050): +0.014}
+\PYG{g+go}{   b06 (0.050): \PYGZhy{}0.042}
+\PYG{g+go}{   c03 (0.167): \PYGZhy{}0.111}
+\PYG{g+go}{   b10 (0.050): \PYGZhy{}0.111}
+\PYG{g+go}{  Summary:}
+\PYG{g+go}{   Weighted mean marginal correlation : +0.099}
+\PYG{g+go}{   Standard deviation                 : 0.132}
+\end{sphinxVerbatim}
+
+Both Kemeny rankings show the same \sphinxstyleemphasis{weighted mean marginal correlation} (+0.099, see \hyperref[\detokenize{tutorial:consensualkemeny}]{Listing \ref{\detokenize{tutorial:consensualkemeny}}} Lines 19\sphinxhyphen{}21, 40\sphinxhyphen{}42) with all thirteen performance criteria. However, the second ranking shows a slightly lower \sphinxstyleemphasis{standard deviation} (+0.132 vs +0.177).
+
+When several rankings with maximal Kemeny index are given, the \sphinxcode{\sphinxupquote{linearOrders.KemenyRanking}} class constructor instantiates a \sphinxstyleemphasis{most consensual} one, i.e. a ranking with \sphinxstyleemphasis{highest} mean marginal correlation and, in case of ties, with \sphinxstyleemphasis{lowest} weighted standard deviation. Here we obtain ranking: {[}‘a5’, ‘a6’, ‘a7’, ‘a3’, ‘a9’, ‘a4’, ‘a1’, ‘a8’, ‘a2’{]} (see \hyperref[\detokenize{tutorial:kemenyranking}]{Listing \ref{\detokenize{tutorial:kemenyranking}}} Line 4).
 
 
 \subsection{\sphinxstyleemphasis{Slater} rankings}

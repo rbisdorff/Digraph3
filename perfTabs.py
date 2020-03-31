@@ -2802,14 +2802,15 @@ The performance evaluations of each decision alternative on each criterion are g
         if Comments:
             print('Consensus quality of ranking:')
             print(ranking)
-            print('criterion: correlation')
-            print('----------------------')
+            print('criterion (weight): correlation')
+            print('-------------------------------')
             for cg in marginalCorrelations:
-                print('%s: %+.3f' % (cg[1],cg[0]) )
+                print('%s (%.3f): %+.3f' % (cg[1],criteria[cg[1]]['weight']/sumWeights,cg[0]) )
             print('Summary:')
             print('Mean marginal correlation               : %+.3f' % meanMarginalCorrelation)
             print('Standard marginal correlation deviation : %+.3f' % sdMarginalCorrelation)
-        return (marginalCorrelations,meanMarginalCorrelation,sdMarginalCorrelation)
+        else:
+            return (marginalCorrelations,meanMarginalCorrelation,sdMarginalCorrelation)
         
     def computeWeightPreorder(self):
         """

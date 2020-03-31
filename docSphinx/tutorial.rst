@@ -2229,7 +2229,7 @@ A **Kemeny** ranking is a linear order which is *closest*, in the sense of the o
    >>> from linearOrders import KemenyRanking
    >>> ke = KemenyRanking(g,orderLimit=9) # default orderLimit is 7
    >>> ke.showRanking()
-    ['a5', 'a6', 'a7', 'a3', 'a8', 'a9', 'a4', 'a1', 'a2']
+    ['a5', 'a6', 'a7', 'a3', 'a9', 'a4', 'a1', 'a8', 'a2']
    >>> corr = g.computeOrdinalCorrelation(ke)
    >>> g.showCorrelation(corr)
     Correlation indexes:
@@ -2239,7 +2239,7 @@ A **Kemeny** ranking is a linear order which is *closest*, in the sense of the o
     
 So, **+0.779** represents the *highest possible* ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking digraph (see :numref:`KemenyRanking` Lines 7-10).
 
-A *Kemeny* ranking may not be unique, and the first one discovered in a brute permutation trying computation, is retained. In our example here, we obtain in fact two optimal *Kemeny* rankings with a same **maximal** *Kemeny* index of 12.967 .
+A *Kemeny* ranking may not be unique. In our example here, we obtain in fact two optimal *Kemeny* rankings with a same **maximal** *Kemeny* index. 
 
 .. code-block:: pycon
    :caption: Optimal *Kemeny* rankings
@@ -2282,6 +2282,60 @@ We may visualize the partial order defined by the :ref:`epistemic disjunction <E
    Epistemic disjunction of optimal *Kemeny* rankings	   
 
 It is interesting to notice in :numref:`tutorialKemeny` and :numref:`optimalKemeny`, that both *Kemeny* rankings only differ in their respective positioning of alternative *a8*; either before or after alternatives *a9*, *a4* and *a1*.
+
+To choose now a specific representative among all the potential rankings with maximal Kemeny index, we will choose, with the help of the :py:func:`perfTabs.PerformanceTableau.computeRankingConsensusQuality` method, the *most consensual* one.
+
+.. code-block:: pycon
+   :caption: Computing Consensus Quality of Rankings
+   :name: consensualKemeny
+   :linenos:
+
+    >>> g.computeRankingConsensusQuality(ke.maximalRankings[0],Comments=True)
+     Consensus quality of ranking:
+      ['a5', 'a6', 'a7', 'a3', 'a8', 'a9', 'a4', 'a1', 'a2']
+     criterion (weight): correlation
+     -------------------------------
+      b09 (0.050): +0.361
+      b04 (0.050): +0.333
+      b08 (0.050): +0.292
+      b01 (0.050): +0.264
+      c01 (0.167): +0.250
+      b03 (0.050): +0.222
+      b07 (0.050): +0.194
+      b05 (0.050): +0.167
+      c02 (0.167): +0.000
+      b10 (0.050): +0.000
+      b02 (0.050): -0.042
+      b06 (0.050): -0.097
+      c03 (0.167): -0.167
+     Summary:
+      Weighted mean marginal correlation : +0.099
+      Standard deviation                 : +0.177
+    >>> g.computeRankingConsensusQuality(ke.maximalRankings[1],Comments=True)
+     Consensus quality of ranking:
+      ['a5', 'a6', 'a7', 'a3', 'a9', 'a4', 'a1', 'a8', 'a2']
+     criterion (weight): correlation
+     -------------------------------
+      b09 (0.050): +0.306
+      b08 (0.050): +0.236
+      c01 (0.167): +0.194
+      b07 (0.050): +0.194
+      c02 (0.167): +0.167
+      b04 (0.050): +0.167
+      b03 (0.050): +0.167
+      b01 (0.050): +0.153
+      b05 (0.050): +0.056
+      b02 (0.050): +0.014
+      b06 (0.050): -0.042
+      c03 (0.167): -0.111
+      b10 (0.050): -0.111
+     Summary:
+      Weighted mean marginal correlation : +0.099
+      Standard deviation                 : 0.132
+
+Both Kemeny rankings show the same *weighted mean marginal correlation* (+0.099, see :numref:`consensualKemeny` Lines 19-21, 40-42) with all thirteen performance criteria. However, the second ranking shows a slightly lower *standard deviation* (+0.132 vs +0.177).
+
+When several rankings with maximal Kemeny index are given, the :py:class:`linearOrders.KemenyRanking` class constructor instantiates a *most consensual* one, i.e. a ranking with *highest* mean marginal correlation and, in case of ties, with *lowest* weighted standard deviation. Here we obtain ranking: ['a5', 'a6', 'a7', 'a3', 'a9', 'a4', 'a1', 'a8', 'a2'] (see :numref:`KemenyRanking` Line 4).
 
 *Slater* rankings
 .................
