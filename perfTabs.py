@@ -2807,8 +2807,8 @@ The performance evaluations of each decision alternative on each criterion are g
             for cg in marginalCorrelations:
                 print('%s (%.3f): %+.3f' % (cg[1],criteria[cg[1]]['weight']/sumWeights,cg[0]) )
             print('Summary:')
-            print('Mean marginal correlation               : %+.3f' % meanMarginalCorrelation)
-            print('Standard marginal correlation deviation : %+.3f' % sdMarginalCorrelation)
+            print('Weighted mean marginal correlation : %+.3f' % meanMarginalCorrelation)
+            print('Standard deviation                 : %+.3f' % sdMarginalCorrelation)
         else:
             return (marginalCorrelations,meanMarginalCorrelation,sdMarginalCorrelation)
         
