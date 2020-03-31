@@ -3125,10 +3125,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
  9
 10
 11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">SlaterRanking</span>
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">SlaterRanking</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span> <span class="o">=</span> <span class="n">SlaterRanking</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
-<span class="go">#  sl = KemenyOrder(ccd,orderLimit=9)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sl</span><span class="o">.</span><span class="n">slaterRanking</span>
 <span class="go"> [&#39;a5&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a2&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">sl</span><span class="o">.</span><span class="n">slaterRanking</span><span class="p">)</span>
@@ -3228,7 +3226,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">   Bipolar-valued equivalence : +0.111</span>
 </pre></div>
 </td></tr></table></div>
-<p>But <em>Kohler</em>’s ranking has a <em>dual</em> version, the prudent <strong>Arrow-Raynaud</strong> <em>ordering-by-choosing</em> rule, where a corresponding <em>max-min</em> strategy, when used on the <em>non-strict</em> outranking digraph <em>g</em>, for ordering the from <em>last</em> to <em>first</em> produces the same eventual ranking result (see <a class="reference internal" href="#lam-2009" id="id31"><span>[LAM-2009]</span></a>, <a class="reference internal" href="#dia-2010" id="id32"><span>[DIA-2010]</span></a>).</p>
+<p>But <em>Kohler</em>’s ranking has a <em>dual</em> version, the prudent <strong>Arrow-Raynaud</strong> <em>ordering-by-choosing</em> rule, where a corresponding <em>max-min</em> strategy, when used on the <em>non-strict</em> outranking digraph <em>g</em>, for ordering the from <em>last</em> to <em>first</em> produces a similar ranking result (see <a class="reference internal" href="#lam-2009" id="id31"><span>[LAM-2009]</span></a>, <a class="reference internal" href="#dia-2010" id="id32"><span>[DIA-2010]</span></a>).</p>
 <p>Noticing that the <em>NetFlows</em> score of an alternative <em>x</em> represents in fact a bipolar-valued characteristic of the assertion ‘<strong>alternative x is ranked first</strong>’, we may enhance <em>Kohler</em>’s or <em>Arrow-Raynaud</em>’s rules by replacing the <em>min-max</em>, respectively the <em>max-min</em>, strategy with an <strong>iterated</strong> maximal, respectively its <em>dual</em> minimal, <em>Netflows</em> score selection.</p>
 <p>For a ranking (resp. an ordering) result, at step <em>i</em> (<em>i</em> goes from 1 to <em>n</em>) do the following:</p>
 <ol class="arabic simple">
@@ -3355,7 +3353,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">  Bipolar-valued equivalence : +0.179</span>
 </pre></div>
 </td></tr></table></div>
-<p>Similar to <em>Kohler</em>’s rule, the <em>RankedPairs</em> rule has also a prudent <em>dual</em> version, the <strong>Dias-Lamboray</strong> <em>ordering-by-choosing</em> rule, which produces, when working this time on the codual <em>strict outranking</em> digraph <em>gcd</em>, the same ranking result (see <a class="reference internal" href="#lam-2009" id="id34"><span>[LAM-2009]</span></a>, <a class="reference internal" href="#dia-2010" id="id35"><span>[DIA-2010]</span></a>).</p>
+<p>Similar to <em>Kohler</em>’s rule, the <em>RankedPairs</em> rule has also a prudent <em>dual</em> version, the <strong>Dias-Lamboray</strong> <em>ordering-by-choosing</em> rule, which produces, when working this time on the codual <em>strict outranking</em> digraph <em>gcd</em>, a similar ranking result (see <a class="reference internal" href="#lam-2009" id="id34"><span>[LAM-2009]</span></a>, <a class="reference internal" href="#dia-2010" id="id35"><span>[DIA-2010]</span></a>).</p>
 <p>Besides of not providing a unique linear ranking, the <em>ranking-by-choosing</em> rules, as well as their dual <em>ordering-by-choosing</em> rules, are unfortunately <em>not scalable</em> to outranking digraphs of larger orders (&gt; 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the <em>Copeland</em>, the <em>NetFlows</em> ranking-by-scoring rules, with a polynomial complexity of <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/>, where <em>n</em> is the order of the outranking digraph, remain in fact computationally tractable.</p>
 </div>
 <div class="section" id="ranking-big-performance-tableaux">

@@ -2349,7 +2349,6 @@ The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, inste
 
    >>> from linearOrders import SlaterRanking
    >>> sl = SlaterRanking(gcd,orderLimit=9)
-   #  sl = KemenyOrder(ccd,orderLimit=9)
    >>> sl.slaterRanking
     ['a5', 'a6', 'a4', 'a1', 'a3', 'a7', 'a8', 'a9', 'a2']
    >>> corr = gcd.computeOrderCorrelation(sl.slaterRanking)
@@ -2433,7 +2432,7 @@ With this *min-max* lexicographic *ranking-by-choosing* strategy, we find a corr
       Epistemic determination    :  0.230
       Bipolar-valued equivalence : +0.111
 
-But *Kohler*'s ranking has a *dual* version, the prudent **Arrow-Raynaud** *ordering-by-choosing* rule, where a corresponding *max-min* strategy, when used on the *non-strict* outranking digraph *g*, for ordering the from *last* to *first* produces the same eventual ranking result (see [LAM-2009]_, [DIA-2010]_).
+But *Kohler*'s ranking has a *dual* version, the prudent **Arrow-Raynaud** *ordering-by-choosing* rule, where a corresponding *max-min* strategy, when used on the *non-strict* outranking digraph *g*, for ordering the from *last* to *first* produces a similar ranking result (see [LAM-2009]_, [DIA-2010]_).
 
 Noticing that the *NetFlows* score of an alternative *x* represents in fact a bipolar-valued characteristic of the assertion '**alternative x is ranked first**', we may enhance *Kohler*'s or *Arrow-Raynaud*'s rules by replacing the *min-max*, respectively the *max-min*, strategy with an **iterated** maximal, respectively its *dual* minimal, *Netflows* score selection.
 
@@ -2528,7 +2527,7 @@ The *RankedPairs* ranking rule renders in our example here luckily one of the tw
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.179
 
-Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* version, the **Dias-Lamboray** *ordering-by-choosing* rule, which produces, when working this time on the codual *strict outranking* digraph *gcd*, the same ranking result (see [LAM-2009]_, [DIA-2010]_).
+Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* version, the **Dias-Lamboray** *ordering-by-choosing* rule, which produces, when working this time on the codual *strict outranking* digraph *gcd*, a similar ranking result (see [LAM-2009]_, [DIA-2010]_).
 
 Besides of not providing a unique linear ranking, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are unfortunately *not scalable* to outranking digraphs of larger orders (> 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland*, the *NetFlows* ranking-by-scoring rules, with a polynomial complexity of :math:`O(n^2)`, where *n* is the order of the outranking digraph, remain in fact computationally tractable.
  
