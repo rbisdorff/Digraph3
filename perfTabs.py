@@ -2770,7 +2770,7 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def computeRankingConsensusQuality(self,ranking,Comments=False,Threading=False,nbrOfCPUs=1):
         """
-        shows the marginal criteria correlations with a given ranking with summary.
+        Renders the marginal criteria correlations with a given ranking with summary.
         """
         from outrankingDigraphs import BipolarOutrankingDigraph
         from math import sqrt
@@ -2816,6 +2816,12 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             return (marginalCorrelations,meanMarginalCorrelation,sdMarginalCorrelation)
         
+    def showRankingConsensusQuality(self,ranking):
+        """
+        shows the marginal criteria correlations with a given ranking with summary.
+        """
+        self.computeRankingConsensusQuality(ranking,Comments=True)
+
     def computeWeightPreorder(self):
         """
         renders the weight preorder following from the given
@@ -7541,10 +7547,10 @@ if __name__ == "__main__":
 ##                                   Debug=False))
     t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
                                  rankingRule='NetFlows',Transposed=False)
-    t.computeRankingConsensusQuality(t.netFlowsRanking,Comments=True)
+    t.showRankingConsensusQuality(t.netFlowsRanking)
     t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
                                  rankingRule='Copeland',Transposed=False)
-    t.computeRankingConsensusQuality(t.copelandRanking,Comments=True)
+    t.showRankingConsensusQuality(t.copelandRanking)
 
     
     print('*------------------*')

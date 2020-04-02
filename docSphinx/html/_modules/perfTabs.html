@@ -2810,7 +2810,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.computeRankingConsensusQuality"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeRankingConsensusQuality">[docs]</a>    <span class="k">def</span> <span class="nf">computeRankingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ranking</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        shows the marginal criteria correlations with a given ranking with summary.</span>
+<span class="sd">        Renders the marginal criteria correlations with a given ranking with summary.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
         <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
@@ -2856,6 +2856,12 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">(</span><span class="n">marginalCorrelations</span><span class="p">,</span><span class="n">meanMarginalCorrelation</span><span class="p">,</span><span class="n">sdMarginalCorrelation</span><span class="p">)</span></div>
         
+<div class="viewcode-block" id="PerformanceTableau.showRankingConsensusQuality"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showRankingConsensusQuality">[docs]</a>    <span class="k">def</span> <span class="nf">showRankingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ranking</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        shows the marginal criteria correlations with a given ranking with summary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">ranking</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="PerformanceTableau.computeWeightPreorder"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeWeightPreorder">[docs]</a>    <span class="k">def</span> <span class="nf">computeWeightPreorder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the weight preorder following from the given</span>
@@ -7581,10 +7587,10 @@
 <span class="c1">##                                   Debug=False))</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                                  <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showRankingConsensusQuality</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                                  <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showRankingConsensusQuality</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
 
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>

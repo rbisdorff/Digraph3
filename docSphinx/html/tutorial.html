@@ -3017,7 +3017,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p class="caption"><span class="caption-number">Fig. 21 </span><span class="caption-text">Epistemic disjunction of optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#tutorialkemeny" title="Permalink to this image">¶</a></p>
 </div>
 <p>It is interesting to notice in <a class="reference internal" href="#tutorialkemeny"><span class="std std-numref">Fig. 21</span></a> and <a class="reference internal" href="#optimalkemeny"><span class="std std-numref">Listing 30</span></a>, that both <em>Kemeny</em> rankings only differ in their respective positioning of alternative <em>a8</em>; either before or after alternatives <em>a9</em>, <em>a4</em> and <em>a1</em>.</p>
-<p>To choose now a specific representative among all the potential rankings with maximal Kemeny index, we will choose, with the help of the <a class="reference internal" href="techDoc.html#perfTabs.PerformanceTableau.computeRankingConsensusQuality" title="perfTabs.PerformanceTableau.computeRankingConsensusQuality"><code class="xref py py-func docutils literal notranslate"><span class="pre">perfTabs.PerformanceTableau.computeRankingConsensusQuality()</span></code></a> method, the <em>most consensual</em> one.</p>
+<p>To choose now a specific representative among all the potential rankings with maximal Kemeny index, we will choose, with the help of the <a class="reference internal" href="techDoc.html#perfTabs.PerformanceTableau.showRankingConsensusQuality" title="perfTabs.PerformanceTableau.showRankingConsensusQuality"><code class="xref py py-func docutils literal notranslate"><span class="pre">perfTabs.PerformanceTableau.showRankingConsensusQuality()</span></code></a> method, the <em>most consensual</em> one.</p>
 <div class="literal-block-wrapper docutils container" id="consensualkemeny">
 <div class="code-block-caption"><span class="caption-number">Listing 32 </span><span class="caption-text">Computing Consensus Quality of Rankings</span><a class="headerlink" href="#consensualkemeny" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -3061,7 +3061,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 39
 40
 41
-42</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go"> &gt;&gt;&gt; g.computeRankingConsensusQuality(ke.maximalRankings[0],Comments=True)</span>
+42</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go"> &gt;&gt;&gt; g.showRankingConsensusQuality(ke.maximalRankings[0])</span>
 <span class="go">  Consensus quality of ranking:</span>
 <span class="go">   [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a2&#39;]</span>
 <span class="go">  criterion (weight): correlation</span>
@@ -3082,7 +3082,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="go">  Summary:</span>
 <span class="go">   Weighted mean marginal correlation : +0.099</span>
 <span class="go">   Standard deviation                 : +0.177</span>
-<span class="go"> &gt;&gt;&gt; g.computeRankingConsensusQuality(ke.maximalRankings[1],Comments=True)</span>
+<span class="go"> &gt;&gt;&gt; g.showRankingConsensusQuality(ke.maximalRankings[1])</span>
 <span class="go">  Consensus quality of ranking:</span>
 <span class="go">   [&#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a9&#39;, &#39;a4&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a2&#39;]</span>
 <span class="go">  criterion (weight): correlation</span>

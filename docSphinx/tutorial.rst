@@ -2283,14 +2283,14 @@ We may visualize the partial order defined by the :ref:`epistemic disjunction <E
 
 It is interesting to notice in :numref:`tutorialKemeny` and :numref:`optimalKemeny`, that both *Kemeny* rankings only differ in their respective positioning of alternative *a8*; either before or after alternatives *a9*, *a4* and *a1*.
 
-To choose now a specific representative among all the potential rankings with maximal Kemeny index, we will choose, with the help of the :py:func:`perfTabs.PerformanceTableau.computeRankingConsensusQuality` method, the *most consensual* one.
+To choose now a specific representative among all the potential rankings with maximal Kemeny index, we will choose, with the help of the :py:func:`perfTabs.PerformanceTableau.showRankingConsensusQuality` method, the *most consensual* one.
 
 .. code-block:: pycon
    :caption: Computing Consensus Quality of Rankings
    :name: consensualKemeny
    :linenos:
 
-    >>> g.computeRankingConsensusQuality(ke.maximalRankings[0],Comments=True)
+    >>> g.showRankingConsensusQuality(ke.maximalRankings[0])
      Consensus quality of ranking:
       ['a5', 'a6', 'a7', 'a3', 'a8', 'a9', 'a4', 'a1', 'a2']
      criterion (weight): correlation
@@ -2311,7 +2311,7 @@ To choose now a specific representative among all the potential rankings with ma
      Summary:
       Weighted mean marginal correlation : +0.099
       Standard deviation                 : +0.177
-    >>> g.computeRankingConsensusQuality(ke.maximalRankings[1],Comments=True)
+    >>> g.showRankingConsensusQuality(ke.maximalRankings[1])
      Consensus quality of ranking:
       ['a5', 'a6', 'a7', 'a3', 'a9', 'a4', 'a1', 'a8', 'a2']
      criterion (weight): correlation

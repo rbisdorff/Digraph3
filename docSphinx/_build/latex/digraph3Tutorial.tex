@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{March 31, 2020}
+\date{April 02, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -2544,11 +2544,11 @@ We may visualize the partial order defined by the {\hyperref[\detokenize{tutoria
 
 It is interesting to notice in \hyperref[\detokenize{tutorial:tutorialkemeny}]{Fig.\@ \ref{\detokenize{tutorial:tutorialkemeny}}} and \hyperref[\detokenize{tutorial:optimalkemeny}]{Listing \ref{\detokenize{tutorial:optimalkemeny}}}, that both \sphinxstyleemphasis{Kemeny} rankings only differ in their respective positioning of alternative \sphinxstyleemphasis{a8}; either before or after alternatives \sphinxstyleemphasis{a9}, \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a1}.
 
-To choose now a specific representative among all the potential rankings with maximal Kemeny index, we will choose, with the help of the \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau.computeRankingConsensusQuality()}} method, the \sphinxstyleemphasis{most consensual} one.
+To choose now a specific representative among all the potential rankings with maximal Kemeny index, we will choose, with the help of the \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau.showRankingConsensusQuality()}} method, the \sphinxstyleemphasis{most consensual} one.
 \sphinxSetupCaptionForVerbatim{Computing Consensus Quality of Rankings}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:consensualkemeny}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} g.computeRankingConsensusQuality(ke.maximalRankings[0],Comments=True)}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} g.showRankingConsensusQuality(ke.maximalRankings[0])}
 \PYG{g+go}{  Consensus quality of ranking:}
 \PYG{g+go}{   [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
 \PYG{g+go}{  criterion (weight): correlation}
@@ -2569,7 +2569,7 @@ To choose now a specific representative among all the potential rankings with ma
 \PYG{g+go}{  Summary:}
 \PYG{g+go}{   Weighted mean marginal correlation : +0.099}
 \PYG{g+go}{   Standard deviation                 : +0.177}
-\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} g.computeRankingConsensusQuality(ke.maximalRankings[1],Comments=True)}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} g.showRankingConsensusQuality(ke.maximalRankings[1])}
 \PYG{g+go}{  Consensus quality of ranking:}
 \PYG{g+go}{   [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
 \PYG{g+go}{  criterion (weight): correlation}
@@ -2605,7 +2605,6 @@ The \sphinxstylestrong{Slater} ranking rule is identical to \sphinxstyleemphasis
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{SlaterRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sl} \PYG{o}{=} \PYG{n}{SlaterRanking}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
-\PYG{g+go}{\PYGZsh{}  sl = KemenyOrder(ccd,orderLimit=9)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sl}\PYG{o}{.}\PYG{n}{slaterRanking}
 \PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeOrderCorrelation}\PYG{p}{(}\PYG{n}{sl}\PYG{o}{.}\PYG{n}{slaterRanking}\PYG{p}{)}
@@ -2695,7 +2694,7 @@ With this \sphinxstyleemphasis{min\sphinxhyphen{}max} lexicographic \sphinxstyle
 \PYG{g+go}{   Bipolar\PYGZhy{}valued equivalence : +0.111}
 \end{sphinxVerbatim}
 
-But \sphinxstyleemphasis{Kohler}’s ranking has a \sphinxstyleemphasis{dual} version, the prudent \sphinxstylestrong{Arrow\sphinxhyphen{}Raynaud} \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}choosing} rule, where a corresponding \sphinxstyleemphasis{max\sphinxhyphen{}min} strategy, when used on the \sphinxstyleemphasis{non\sphinxhyphen{}strict} outranking digraph \sphinxstyleemphasis{g}, for ordering the from \sphinxstyleemphasis{last} to \sphinxstyleemphasis{first} produces the same eventual ranking result (see \sphinxcite{tutorial:lam-2009}, \sphinxcite{tutorial:dia-2010}).
+But \sphinxstyleemphasis{Kohler}’s ranking has a \sphinxstyleemphasis{dual} version, the prudent \sphinxstylestrong{Arrow\sphinxhyphen{}Raynaud} \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}choosing} rule, where a corresponding \sphinxstyleemphasis{max\sphinxhyphen{}min} strategy, when used on the \sphinxstyleemphasis{non\sphinxhyphen{}strict} outranking digraph \sphinxstyleemphasis{g}, for ordering the from \sphinxstyleemphasis{last} to \sphinxstyleemphasis{first} produces a similar ranking result (see \sphinxcite{tutorial:lam-2009}, \sphinxcite{tutorial:dia-2010}).
 
 Noticing that the \sphinxstyleemphasis{NetFlows} score of an alternative \sphinxstyleemphasis{x} represents in fact a bipolar\sphinxhyphen{}valued characteristic of the assertion ‘\sphinxstylestrong{alternative x is ranked first}’, we may enhance \sphinxstyleemphasis{Kohler}’s or \sphinxstyleemphasis{Arrow\sphinxhyphen{}Raynaud}’s rules by replacing the \sphinxstyleemphasis{min\sphinxhyphen{}max}, respectively the \sphinxstyleemphasis{max\sphinxhyphen{}min}, strategy with an \sphinxstylestrong{iterated} maximal, respectively its \sphinxstyleemphasis{dual} minimal, \sphinxstyleemphasis{Netflows} score selection.
 
@@ -2806,7 +2805,7 @@ The \sphinxstyleemphasis{RankedPairs} ranking rule renders in our example here l
 \PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.179}
 \end{sphinxVerbatim}
 
-Similar to \sphinxstyleemphasis{Kohler}’s rule, the \sphinxstyleemphasis{RankedPairs} rule has also a prudent \sphinxstyleemphasis{dual} version, the \sphinxstylestrong{Dias\sphinxhyphen{}Lamboray} \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}choosing} rule, which produces, when working this time on the codual \sphinxstyleemphasis{strict outranking} digraph \sphinxstyleemphasis{gcd}, the same ranking result (see \sphinxcite{tutorial:lam-2009}, \sphinxcite{tutorial:dia-2010}).
+Similar to \sphinxstyleemphasis{Kohler}’s rule, the \sphinxstyleemphasis{RankedPairs} rule has also a prudent \sphinxstyleemphasis{dual} version, the \sphinxstylestrong{Dias\sphinxhyphen{}Lamboray} \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}choosing} rule, which produces, when working this time on the codual \sphinxstyleemphasis{strict outranking} digraph \sphinxstyleemphasis{gcd}, a similar ranking result (see \sphinxcite{tutorial:lam-2009}, \sphinxcite{tutorial:dia-2010}).
 
 Besides of not providing a unique linear ranking, the \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} rules, as well as their dual \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}choosing} rules, are unfortunately \sphinxstyleemphasis{not scalable} to outranking digraphs of larger orders (\textgreater{} 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the \sphinxstyleemphasis{Copeland}, the \sphinxstyleemphasis{NetFlows} ranking\sphinxhyphen{}by\sphinxhyphen{}scoring rules, with a polynomial complexity of \(O(n^2)\), where \sphinxstyleemphasis{n} is the order of the outranking digraph, remain in fact computationally tractable.
 
