@@ -2761,8 +2761,10 @@ The performance evaluations of each decision alternative on each criterion are g
         if rankCorrelation != None:
             html += '<i>Ranking rule</i>: <b>%s</b><br/>\n' % rankingRule
             html += '<i>Ordinal (Kendall) correlation between global ranking and global outranking relation:</i> <b>%+.3f</b><br/>\n' % (rankCorrelation['correlation'])
-            html += '<i>Mean marginal correlation               :</i> <b>%+.3f</b><br/>\n' % (meanMarginalCriteriaCorrelation)
-            html += '<i>Standard marginal correlation deviation :</i> <b>%+.3f</b><br/>\n' % (sdMarginalCriteriaCorrelation)
+            html += '<i>Mean marginal correlation (a)               :</i> <b>%+.3f</b><br/>\n' % (meanMarginalCriteriaCorrelation)
+            html += '<i>Standard marginal correlation deviation (b) :</i> <b>%+.3f</b><br/>\n' % (sdMarginalCriteriaCorrelation)
+            html += '<i>Ranking fairness (a) - (b)                  :</i> <b>%+.3f</b><br/>\n' %\
+                             (float(meanMarginalCriteriaCorrelation) - sdMarginalCriteriaCorrelation)
             html += '</body></html>'
         return html
 
@@ -2805,10 +2807,12 @@ The performance evaluations of each decision alternative on each criterion are g
             print('criterion (weight): correlation')
             print('-------------------------------')
             for cg in marginalCorrelations:
-                print('%s (%.3f): %+.3f' % (cg[1],criteria[cg[1]]['weight']/sumWeights,cg[0]) )
+                print('%s (%.3f): %+.3f' % (cg[1],abs(criteria[cg[1]]['weight'])/sumWeights,cg[0]) )
             print('Summary:')
-            print('Weighted mean marginal correlation : %+.3f' % meanMarginalCorrelation)
-            print('Standard deviation                 : %+.3f' % sdMarginalCorrelation)
+            print('Weighted mean marginal correlation (a): %+.3f' % meanMarginalCorrelation)
+            print('Standard deviation (b)                : %+.3f' % sdMarginalCorrelation)
+            print('Ranking fairness (a)-(b)              : %+.3f' %\
+                  (float(meanMarginalCorrelation) - sdMarginalCorrelation) )
         else:
             return (marginalCorrelations,meanMarginalCorrelation,sdMarginalCorrelation)
         
@@ -7499,6 +7503,7 @@ if __name__ == "__main__":
     from transitiveDigraphs import *
     from randomPerfTabs import *
     from time import time
+    import random
     
     print('*-------- Testing classes and methods -------')
 
@@ -7518,23 +7523,29 @@ if __name__ == "__main__":
 ##    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows',Transposed=False)
 ##    t.computeRankingConsensusQuality(t.netFlowsRanking)
 ##    print('*------ test performance heatmap -----*')
+    randomSeed = random.randint(1,1000)
     t = RandomCBPerformanceTableau(numberOfCriteria=5,
                                    numberOfActions=7,
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
                                    NegativeWeights=True,
+                                   seed=randomSeed,
                                    Debug=False)
     actionsList = [x for x in t.actions.keys()]
     criteriaList = [g for g in t.criteria.keys()]
-    print(t._htmlPerformanceHeatmap(argActionsList=actionsList,
-                                   argCriteriaList=criteriaList,
-                                   colorLevels=9,
-                                   Correlations=True,
-                                   ndigits=4,
-                                   Debug=False))
-    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows',Transposed=False)
-    t.computeRankingConsensusQuality(t.netFlowsRanking)
-    
+##    print(t._htmlPerformanceHeatmap(argActionsList=actionsList,
+##                                   argCriteriaList=criteriaList,
+##                                   colorLevels=9,
+##                                   Correlations=True,
+##                                   ndigits=4,
+##                                   Debug=False))
+    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
+                                 rankingRule='NetFlows',Transposed=False)
+    t.computeRankingConsensusQuality(t.netFlowsRanking,Comments=True)
+    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
+                                 rankingRule='Copeland',Transposed=False)
+    t.computeRankingConsensusQuality(t.copelandRanking,Comments=True)
+
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
