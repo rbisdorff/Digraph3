@@ -1793,9 +1793,9 @@ Back to :ref:`Content Table <Tutorial-label>`
 Random three objectives performance tableaux
 ............................................
 
-We provide the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account *economical*, *societal* as well as *environmental* aspects.
+We provide the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` class for generating random performance tableaux concerning potential public policies evaluated with respect to three preferential decision objectives taking respectively into account *economical*, *societal* as well as *environmental* aspects.
 
-Each decision action is qualified randomly as performing **weak** (-), **fair** (~) or **good** (+) on each of the three objectives. 
+Each public policy is qualified randomly as performing **weak** (-), **fair** (~) or **good** (+) on each of the three objectives. 
 
 Generator directives are the following:
 
@@ -1855,29 +1855,29 @@ Example Python session
        g12 criterion of objective Env 20
       Total weight: 80.00 (4 criteria)
 
-In :numref:`random3ObjectivesPerformanceTableau` above, we notice that 5 *equisignificant* criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the decision actions from the **societal** point of view (Lines 16-21). 4 *equisignificant* criteria do the same from the **economical** (Lines 10-14), respectively the **environmental** point of view (Lines 21-27). The *equiobjectives* directive results hence in a balanced total weight (80.00) for each decision objective. 
+In :numref:`random3ObjectivesPerformanceTableau` above, we notice that 5 *equisignificant* criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the public policies from a **societal** point of view (Lines 16-21). 4 *equisignificant* criteria do the same from an **economical** (Lines 10-14), respectively an **environmental** point of view (Lines 21-27). The *equiobjectives* directive results hence in a balanced total weight (80.00) for each decision objective. 
 
 .. code-block:: pycon
    :linenos:
 
    >>> t.showActions()
-    key:  a01
-      name:       random decision action Eco+ Soc- Env+
+    key:  p01
+      name:       random public policy Eco+ Soc- Env+
       profile:    {'Eco': 'good', 'Soc': 'weak', 'Env': 'good'}
-    key:  a02
+    key:  p02
     ...
-    key:  a26
-      name:       random decision action Eco+ Soc+ Env-
+    key:  p26
+      name:       random public policy Eco+ Soc+ Env-
       profile:    {'Eco': 'good', 'Soc': 'good', 'Env': 'weak'}
     ...
-    key:  a30
-      name:       random decision action Eco- Soc- Env-
+    key:  p30
+      name:       random public policy Eco- Soc- Env-
       profile:    {'Eco': 'weak', 'Soc': 'weak', 'Env': 'weak'}
     ...
 
-Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. Action *a01* , for instance, will probably show *good* performances wrt the *economical*  and environmental aspects, and *weak* performances wrt the *societal* aspect.
+Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each public policy with respect to the three objectives. Policy *p01*, for instance, will probably show *good* performances wrt the *economical*  and environmental aspects, and *weak* performances wrt the *societal* aspect.
 
-For testing purposes we provide a special :py:class:`perfTabs.PartialPerformanceTableau` class for extracting a **partial performance tableau** from a given tableau instance. In the example blow, we construct the partial performance tableaux corresponding to each on of the three decision objectives.
+For testing purposes we provide a special :py:class:`perfTabs.PartialPerformanceTableau` class for extracting a **partial performance tableau** from a given tableau instance. In the example blow, we may construct the partial performance tableaux corresponding to each one of the three decision objectives.
 
 .. code-block:: pycon
    :linenos:
@@ -1908,30 +1908,30 @@ The three partial digraphs: *geco*, *gsoc* and *genv*,  hence model the preferen
    >>> from digraphs import FusionLDigraph
    >>> gfus = FusionLDigraph([geco,gsoc,genv])
    >>> gfus.strongComponents()
-    {frozenset({'a30'}), 
-     frozenset({'a10', 'a03', 'a19', 'a08', 'a07', 'a04', 'a21', 'a20', 
-                'a13', 'a23', 'a16', 'a12', 'a24', 'a02', 'a31', 'a29', 
-                'a05', 'a09', 'a28', 'a25', 'a17', 'a14', 'a15', 'a06', 
-                'a01', 'a27', 'a11', 'a18', 'a22'}), 
-     frozenset({'a26'})}
+    {frozenset({'p30'}), 
+     frozenset({'p10', 'p03', 'p19', 'p08', 'p07', 'p04', 'p21', 'p20', 
+                'p13', 'p23', 'p16', 'p12', 'p24', 'p02', 'p31', 'p29', 
+                'p05', 'p09', 'p28', 'p25', 'p17', 'p14', 'p15', 'p06', 
+                'p01', 'p27', 'p11', 'p18', 'p22'}), 
+     frozenset({'p26'})}
    >>> from digraphs import StrongComponentsCollapsedDigraph
    >>> scc = StrongComponentsCollapsedDigraph(gfus)
    >>> scc.showActions()
     *----- show digraphs actions --------------*
-    key:  frozenset({'a30'})
+    key:  frozenset({'p30'})
       short name: Scc_1
-      name:       _a30_
+      name:       _p30_
       comment:    collapsed strong component
-    key:  frozenset({'a10', 'a03', 'a19', 'a08', 'a07', 'a04', 'a21', 'a20', 'a13', 
-                     'a23', 'a16', 'a12', 'a24', 'a02', 'a31', 'a29', 'a05', 'a09', 'a28', 'a25', 
-                     'a17', 'a14', 'a15', 'a06', 'a01', 'a27', 'a11', 'a18', 'a22'})
+    key:  frozenset({'p10', 'p03', 'p19', 'p08', 'p07', 'p04', 'p21', 'p20', 'p13', 
+                     'p23', 'p16', 'p12', 'p24', 'p02', 'p31', 'p29', 'p05', 'p09', 'p28', 'p25', 
+                     'p17', 'p14', 'p15', 'p06', 'p01', 'p27', 'p11', 'p18', 'p22'})
       short name: Scc_2
-      name:       _a10_a03_a19_a08_a07_a04_a21_a20_a13_a23_a16_a12_a24_a02_a31_\
-                   a29_a05_a09_a28_a25_a17_a14_a15_a06_a01_a27_a11_a18_a22_
+      name:       _p10_p03_p19_p08_p07_p04_p21_p20_p13_p23_p16_p12_p24_p02_p31_\
+                   p29_p05_p09_p28_p25_p17_p14_p15_p06_p01_p27_p11_p18_p22_
       comment:    collapsed strong component
-    key:  frozenset({'a26'})
+    key:  frozenset({'p26'})
       short name: Scc_3
-      name:       _a26_
+      name:       _p26_
       comment:    collapsed strong component
 
 A graphviz drawing illustrates the apparent preferential links between the strong components.
@@ -1949,7 +1949,7 @@ A graphviz drawing illustrates the apparent preferential links between the stron
 
    Strong components digraph
 	   
-Decision action *a26* (Eco+ Soc+ Env-) appears dominating the other decision alternatives, whereas decision action *a30* (Eco- Soc- Env-) appears to be dominated by all the others.
+Public policy *p26* (Eco+ Soc+ Env-) appears dominating the other policies, whereas policy *p30* (Eco- Soc- Env-) appears to be dominated by all the others.
 
 Random linearly ranked performance tableaux
 ...........................................

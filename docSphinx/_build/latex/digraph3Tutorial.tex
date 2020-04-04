@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{April 02, 2020}
+\date{April 04, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -2016,9 +2016,9 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 \subsection{Random three objectives performance tableaux}
 \label{\detokenize{tutorial:random-three-objectives-performance-tableaux}}
-We provide the \sphinxcode{\sphinxupquote{randomPerfTabs.Random3ObjectivesPerformanceTableau}} class for generating random performance tableaux concerning three preferential decision objectives which take respectively into account \sphinxstyleemphasis{economical}, \sphinxstyleemphasis{societal} as well as \sphinxstyleemphasis{environmental} aspects.
+We provide the \sphinxcode{\sphinxupquote{randomPerfTabs.Random3ObjectivesPerformanceTableau}} class for generating random performance tableaux concerning potential public policies evaluated with respect to three preferential decision objectives taking respectively into account \sphinxstyleemphasis{economical}, \sphinxstyleemphasis{societal} as well as \sphinxstyleemphasis{environmental} aspects.
 
-Each decision action is qualified randomly as performing \sphinxstylestrong{weak} (\sphinxhyphen{}), \sphinxstylestrong{fair} (\textasciitilde{}) or \sphinxstylestrong{good} (+) on each of the three objectives.
+Each public policy is qualified randomly as performing \sphinxstylestrong{weak} (\sphinxhyphen{}), \sphinxstylestrong{fair} (\textasciitilde{}) or \sphinxstylestrong{good} (+) on each of the three objectives.
 
 Generator directives are the following:
 \begin{itemize}
@@ -2099,28 +2099,28 @@ Example Python session
 \PYG{g+go}{   Total weight: 80.00 (4 criteria)}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{tutorial:random3objectivesperformancetableau}]{Listing \ref{\detokenize{tutorial:random3objectivesperformancetableau}}} above, we notice that 5 \sphinxstyleemphasis{equisignificant} criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the decision actions from the \sphinxstylestrong{societal} point of view (Lines 16\sphinxhyphen{}21). 4 \sphinxstyleemphasis{equisignificant} criteria do the same from the \sphinxstylestrong{economical} (Lines 10\sphinxhyphen{}14), respectively the \sphinxstylestrong{environmental} point of view (Lines 21\sphinxhyphen{}27). The \sphinxstyleemphasis{equiobjectives} directive results hence in a balanced total weight (80.00) for each decision objective.
+In \hyperref[\detokenize{tutorial:random3objectivesperformancetableau}]{Listing \ref{\detokenize{tutorial:random3objectivesperformancetableau}}} above, we notice that 5 \sphinxstyleemphasis{equisignificant} criteria (g06, g07, g09, g10, g13) evaluate for instance the performance of the public policies from a \sphinxstylestrong{societal} point of view (Lines 16\sphinxhyphen{}21). 4 \sphinxstyleemphasis{equisignificant} criteria do the same from an \sphinxstylestrong{economical} (Lines 10\sphinxhyphen{}14), respectively an \sphinxstylestrong{environmental} point of view (Lines 21\sphinxhyphen{}27). The \sphinxstyleemphasis{equiobjectives} directive results hence in a balanced total weight (80.00) for each decision objective.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showActions}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ key:  a01}
-\PYG{g+go}{   name:       random decision action Eco+ Soc\PYGZhy{} Env+}
+\PYG{g+go}{ key:  p01}
+\PYG{g+go}{   name:       random public policy Eco+ Soc\PYGZhy{} Env+}
 \PYG{g+go}{   profile:    \PYGZob{}\PYGZsq{}Eco\PYGZsq{}: \PYGZsq{}good\PYGZsq{}, \PYGZsq{}Soc\PYGZsq{}: \PYGZsq{}weak\PYGZsq{}, \PYGZsq{}Env\PYGZsq{}: \PYGZsq{}good\PYGZsq{}\PYGZcb{}}
-\PYG{g+go}{ key:  a02}
+\PYG{g+go}{ key:  p02}
 \PYG{g+go}{ ...}
-\PYG{g+go}{ key:  a26}
-\PYG{g+go}{   name:       random decision action Eco+ Soc+ Env\PYGZhy{}}
+\PYG{g+go}{ key:  p26}
+\PYG{g+go}{   name:       random public policy Eco+ Soc+ Env\PYGZhy{}}
 \PYG{g+go}{   profile:    \PYGZob{}\PYGZsq{}Eco\PYGZsq{}: \PYGZsq{}good\PYGZsq{}, \PYGZsq{}Soc\PYGZsq{}: \PYGZsq{}good\PYGZsq{}, \PYGZsq{}Env\PYGZsq{}: \PYGZsq{}weak\PYGZsq{}\PYGZcb{}}
 \PYG{g+go}{ ...}
-\PYG{g+go}{ key:  a30}
-\PYG{g+go}{   name:       random decision action Eco\PYGZhy{} Soc\PYGZhy{} Env\PYGZhy{}}
+\PYG{g+go}{ key:  p30}
+\PYG{g+go}{   name:       random public policy Eco\PYGZhy{} Soc\PYGZhy{} Env\PYGZhy{}}
 \PYG{g+go}{   profile:    \PYGZob{}\PYGZsq{}Eco\PYGZsq{}: \PYGZsq{}weak\PYGZsq{}, \PYGZsq{}Soc\PYGZsq{}: \PYGZsq{}weak\PYGZsq{}, \PYGZsq{}Env\PYGZsq{}: \PYGZsq{}weak\PYGZsq{}\PYGZcb{}}
 \PYG{g+go}{ ...}
 \end{sphinxVerbatim}
 
-Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each decision action with respect to the three objectives. Action \sphinxstyleemphasis{a01} , for instance, will probably show \sphinxstyleemphasis{good} performances wrt the \sphinxstyleemphasis{economical}  and environmental aspects, and \sphinxstyleemphasis{weak} performances wrt the \sphinxstyleemphasis{societal} aspect.
+Variable triangular modes (0.3, 0.5 or 0.7 of the span of the measure scale) for each objective result in different performance status for each public policy with respect to the three objectives. Policy \sphinxstyleemphasis{p01}, for instance, will probably show \sphinxstyleemphasis{good} performances wrt the \sphinxstyleemphasis{economical}  and environmental aspects, and \sphinxstyleemphasis{weak} performances wrt the \sphinxstyleemphasis{societal} aspect.
 
-For testing purposes we provide a special \sphinxcode{\sphinxupquote{perfTabs.PartialPerformanceTableau}} class for extracting a \sphinxstylestrong{partial performance tableau} from a given tableau instance. In the example blow, we construct the partial performance tableaux corresponding to each on of the three decision objectives.
+For testing purposes we provide a special \sphinxcode{\sphinxupquote{perfTabs.PartialPerformanceTableau}} class for extracting a \sphinxstylestrong{partial performance tableau} from a given tableau instance. In the example blow, we may construct the partial performance tableaux corresponding to each one of the three decision objectives.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{perfTabs} \PYG{k+kn}{import} \PYG{n}{PartialPerformanceTableau}
@@ -2147,30 +2147,30 @@ The three partial digraphs: \sphinxstyleemphasis{geco}, \sphinxstyleemphasis{gso
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{FusionLDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gfus} \PYG{o}{=} \PYG{n}{FusionLDigraph}\PYG{p}{(}\PYG{p}{[}\PYG{n}{geco}\PYG{p}{,}\PYG{n}{gsoc}\PYG{p}{,}\PYG{n}{genv}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gfus}\PYG{o}{.}\PYG{n}{strongComponents}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ \PYGZob{}frozenset(\PYGZob{}\PYGZsq{}a30\PYGZsq{}\PYGZcb{}),}
-\PYG{g+go}{  frozenset(\PYGZob{}\PYGZsq{}a10\PYGZsq{}, \PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a19\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a21\PYGZsq{}, \PYGZsq{}a20\PYGZsq{},}
-\PYG{g+go}{             \PYGZsq{}a13\PYGZsq{}, \PYGZsq{}a23\PYGZsq{}, \PYGZsq{}a16\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}, \PYGZsq{}a24\PYGZsq{}, \PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a31\PYGZsq{}, \PYGZsq{}a29\PYGZsq{},}
-\PYG{g+go}{             \PYGZsq{}a05\PYGZsq{}, \PYGZsq{}a09\PYGZsq{}, \PYGZsq{}a28\PYGZsq{}, \PYGZsq{}a25\PYGZsq{}, \PYGZsq{}a17\PYGZsq{}, \PYGZsq{}a14\PYGZsq{}, \PYGZsq{}a15\PYGZsq{}, \PYGZsq{}a06\PYGZsq{},}
-\PYG{g+go}{             \PYGZsq{}a01\PYGZsq{}, \PYGZsq{}a27\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a18\PYGZsq{}, \PYGZsq{}a22\PYGZsq{}\PYGZcb{}),}
-\PYG{g+go}{  frozenset(\PYGZob{}\PYGZsq{}a26\PYGZsq{}\PYGZcb{})\PYGZcb{}}
+\PYG{g+go}{ \PYGZob{}frozenset(\PYGZob{}\PYGZsq{}p30\PYGZsq{}\PYGZcb{}),}
+\PYG{g+go}{  frozenset(\PYGZob{}\PYGZsq{}p10\PYGZsq{}, \PYGZsq{}p03\PYGZsq{}, \PYGZsq{}p19\PYGZsq{}, \PYGZsq{}p08\PYGZsq{}, \PYGZsq{}p07\PYGZsq{}, \PYGZsq{}p04\PYGZsq{}, \PYGZsq{}p21\PYGZsq{}, \PYGZsq{}p20\PYGZsq{},}
+\PYG{g+go}{             \PYGZsq{}p13\PYGZsq{}, \PYGZsq{}p23\PYGZsq{}, \PYGZsq{}p16\PYGZsq{}, \PYGZsq{}p12\PYGZsq{}, \PYGZsq{}p24\PYGZsq{}, \PYGZsq{}p02\PYGZsq{}, \PYGZsq{}p31\PYGZsq{}, \PYGZsq{}p29\PYGZsq{},}
+\PYG{g+go}{             \PYGZsq{}p05\PYGZsq{}, \PYGZsq{}p09\PYGZsq{}, \PYGZsq{}p28\PYGZsq{}, \PYGZsq{}p25\PYGZsq{}, \PYGZsq{}p17\PYGZsq{}, \PYGZsq{}p14\PYGZsq{}, \PYGZsq{}p15\PYGZsq{}, \PYGZsq{}p06\PYGZsq{},}
+\PYG{g+go}{             \PYGZsq{}p01\PYGZsq{}, \PYGZsq{}p27\PYGZsq{}, \PYGZsq{}p11\PYGZsq{}, \PYGZsq{}p18\PYGZsq{}, \PYGZsq{}p22\PYGZsq{}\PYGZcb{}),}
+\PYG{g+go}{  frozenset(\PYGZob{}\PYGZsq{}p26\PYGZsq{}\PYGZcb{})\PYGZcb{}}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{StrongComponentsCollapsedDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{scc} \PYG{o}{=} \PYG{n}{StrongComponentsCollapsedDigraph}\PYG{p}{(}\PYG{n}{gfus}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{scc}\PYG{o}{.}\PYG{n}{showActions}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} show digraphs actions \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{ key:  frozenset(\PYGZob{}\PYGZsq{}a30\PYGZsq{}\PYGZcb{})}
+\PYG{g+go}{ key:  frozenset(\PYGZob{}\PYGZsq{}p30\PYGZsq{}\PYGZcb{})}
 \PYG{g+go}{   short name: Scc\PYGZus{}1}
-\PYG{g+go}{   name:       \PYGZus{}a30\PYGZus{}}
+\PYG{g+go}{   name:       \PYGZus{}p30\PYGZus{}}
 \PYG{g+go}{   comment:    collapsed strong component}
-\PYG{g+go}{ key:  frozenset(\PYGZob{}\PYGZsq{}a10\PYGZsq{}, \PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a19\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a21\PYGZsq{}, \PYGZsq{}a20\PYGZsq{}, \PYGZsq{}a13\PYGZsq{},}
-\PYG{g+go}{                  \PYGZsq{}a23\PYGZsq{}, \PYGZsq{}a16\PYGZsq{}, \PYGZsq{}a12\PYGZsq{}, \PYGZsq{}a24\PYGZsq{}, \PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a31\PYGZsq{}, \PYGZsq{}a29\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}, \PYGZsq{}a09\PYGZsq{}, \PYGZsq{}a28\PYGZsq{}, \PYGZsq{}a25\PYGZsq{},}
-\PYG{g+go}{                  \PYGZsq{}a17\PYGZsq{}, \PYGZsq{}a14\PYGZsq{}, \PYGZsq{}a15\PYGZsq{}, \PYGZsq{}a06\PYGZsq{}, \PYGZsq{}a01\PYGZsq{}, \PYGZsq{}a27\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a18\PYGZsq{}, \PYGZsq{}a22\PYGZsq{}\PYGZcb{})}
+\PYG{g+go}{ key:  frozenset(\PYGZob{}\PYGZsq{}p10\PYGZsq{}, \PYGZsq{}p03\PYGZsq{}, \PYGZsq{}p19\PYGZsq{}, \PYGZsq{}p08\PYGZsq{}, \PYGZsq{}p07\PYGZsq{}, \PYGZsq{}p04\PYGZsq{}, \PYGZsq{}p21\PYGZsq{}, \PYGZsq{}p20\PYGZsq{}, \PYGZsq{}p13\PYGZsq{},}
+\PYG{g+go}{                  \PYGZsq{}p23\PYGZsq{}, \PYGZsq{}p16\PYGZsq{}, \PYGZsq{}p12\PYGZsq{}, \PYGZsq{}p24\PYGZsq{}, \PYGZsq{}p02\PYGZsq{}, \PYGZsq{}p31\PYGZsq{}, \PYGZsq{}p29\PYGZsq{}, \PYGZsq{}p05\PYGZsq{}, \PYGZsq{}p09\PYGZsq{}, \PYGZsq{}p28\PYGZsq{}, \PYGZsq{}p25\PYGZsq{},}
+\PYG{g+go}{                  \PYGZsq{}p17\PYGZsq{}, \PYGZsq{}p14\PYGZsq{}, \PYGZsq{}p15\PYGZsq{}, \PYGZsq{}p06\PYGZsq{}, \PYGZsq{}p01\PYGZsq{}, \PYGZsq{}p27\PYGZsq{}, \PYGZsq{}p11\PYGZsq{}, \PYGZsq{}p18\PYGZsq{}, \PYGZsq{}p22\PYGZsq{}\PYGZcb{})}
 \PYG{g+go}{   short name: Scc\PYGZus{}2}
-\PYG{g+go}{   name:       \PYGZus{}a10\PYGZus{}a03\PYGZus{}a19\PYGZus{}a08\PYGZus{}a07\PYGZus{}a04\PYGZus{}a21\PYGZus{}a20\PYGZus{}a13\PYGZus{}a23\PYGZus{}a16\PYGZus{}a12\PYGZus{}a24\PYGZus{}a02\PYGZus{}a31\PYGZus{}\PYGZbs{}}
-\PYG{g+go}{                a29\PYGZus{}a05\PYGZus{}a09\PYGZus{}a28\PYGZus{}a25\PYGZus{}a17\PYGZus{}a14\PYGZus{}a15\PYGZus{}a06\PYGZus{}a01\PYGZus{}a27\PYGZus{}a11\PYGZus{}a18\PYGZus{}a22\PYGZus{}}
+\PYG{g+go}{   name:       \PYGZus{}p10\PYGZus{}p03\PYGZus{}p19\PYGZus{}p08\PYGZus{}p07\PYGZus{}p04\PYGZus{}p21\PYGZus{}p20\PYGZus{}p13\PYGZus{}p23\PYGZus{}p16\PYGZus{}p12\PYGZus{}p24\PYGZus{}p02\PYGZus{}p31\PYGZus{}\PYGZbs{}}
+\PYG{g+go}{                p29\PYGZus{}p05\PYGZus{}p09\PYGZus{}p28\PYGZus{}p25\PYGZus{}p17\PYGZus{}p14\PYGZus{}p15\PYGZus{}p06\PYGZus{}p01\PYGZus{}p27\PYGZus{}p11\PYGZus{}p18\PYGZus{}p22\PYGZus{}}
 \PYG{g+go}{   comment:    collapsed strong component}
-\PYG{g+go}{ key:  frozenset(\PYGZob{}\PYGZsq{}a26\PYGZsq{}\PYGZcb{})}
+\PYG{g+go}{ key:  frozenset(\PYGZob{}\PYGZsq{}p26\PYGZsq{}\PYGZcb{})}
 \PYG{g+go}{   short name: Scc\PYGZus{}3}
-\PYG{g+go}{   name:       \PYGZus{}a26\PYGZus{}}
+\PYG{g+go}{   name:       \PYGZus{}p26\PYGZus{}}
 \PYG{g+go}{   comment:    collapsed strong component}
 \end{sphinxVerbatim}
 
@@ -2190,7 +2190,7 @@ A graphviz drawing illustrates the apparent preferential links between the stron
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{sccFusionObjectives}.png}
 \caption{Strong components digraph}\label{\detokenize{tutorial:id120}}\end{figure}
 
-Decision action \sphinxstyleemphasis{a26} (Eco+ Soc+ Env\sphinxhyphen{}) appears dominating the other decision alternatives, whereas decision action \sphinxstyleemphasis{a30} (Eco\sphinxhyphen{} Soc\sphinxhyphen{} Env\sphinxhyphen{}) appears to be dominated by all the others.
+Public policy \sphinxstyleemphasis{p26} (Eco+ Soc+ Env\sphinxhyphen{}) appears dominating the other policies, whereas policy \sphinxstyleemphasis{p30} (Eco\sphinxhyphen{} Soc\sphinxhyphen{} Env\sphinxhyphen{}) appears to be dominated by all the others.
 
 
 \subsection{Random linearly ranked performance tableaux}

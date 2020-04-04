@@ -4929,7 +4929,7 @@ Copyright (C) 2015-2020  Raymond Bisdorff</p>
 </div></blockquote>
 <dl class="class">
 <dt id="randomPerfTabs.Random3ObjectivesPerformanceTableau">
-<em class="property">class </em><code class="sig-prename descclassname">randomPerfTabs.</code><code class="sig-name descname">Random3ObjectivesPerformanceTableau</code><span class="sig-paren">(</span><em class="sig-param">numberOfActions=20</em>, <em class="sig-param">shortNamePrefix='a'</em>, <em class="sig-param">numberOfCriteria=13</em>, <em class="sig-param">weightDistribution='equiobjectives'</em>, <em class="sig-param">weightScale=None</em>, <em class="sig-param">IntegerWeights=True</em>, <em class="sig-param">OrdinalScales=False</em>, <em class="sig-param">NegativeWeights=False</em>, <em class="sig-param">negativeWeightProbability=0.0</em>, <em class="sig-param">commonScale=None</em>, <em class="sig-param">commonThresholds=None</em>, <em class="sig-param">commonMode=None</em>, <em class="sig-param">valueDigits=2</em>, <em class="sig-param">vetoProbability=0.5</em>, <em class="sig-param">missingDataProbability=0.05</em>, <em class="sig-param">BigData=False</em>, <em class="sig-param">seed=None</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#Random3ObjectivesPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">randomPerfTabs.</code><code class="sig-name descname">Random3ObjectivesPerformanceTableau</code><span class="sig-paren">(</span><em class="sig-param">numberOfActions=20</em>, <em class="sig-param">shortNamePrefix='p'</em>, <em class="sig-param">numberOfCriteria=13</em>, <em class="sig-param">weightDistribution='equiobjectives'</em>, <em class="sig-param">weightScale=None</em>, <em class="sig-param">IntegerWeights=True</em>, <em class="sig-param">OrdinalScales=False</em>, <em class="sig-param">NegativeWeights=False</em>, <em class="sig-param">negativeWeightProbability=0.0</em>, <em class="sig-param">commonScale=None</em>, <em class="sig-param">commonThresholds=None</em>, <em class="sig-param">commonMode=None</em>, <em class="sig-param">valueDigits=2</em>, <em class="sig-param">vetoProbability=0.5</em>, <em class="sig-param">missingDataProbability=0.05</em>, <em class="sig-param">BigData=False</em>, <em class="sig-param">seed=None</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomPerfTabs.html#Random3ObjectivesPerformanceTableau"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specialization of the <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">perfTabs.PerformanceTableau</span></code></a> class 
 for 3 objectives: <em>Eco</em>, <em>Soc</em> and <em>Env</em>. Each decision action
 is qualified randomly as weak (-), fair (~) or good (+)
@@ -5022,28 +5022,28 @@ on each of the three objectives.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
 <span class="go">*----- show decision action --------------*</span>
 <span class="go">key:  a1</span>
-<span class="go">  short name:  a1</span>
-<span class="go">  name:       random decision action Eco+ Soc- Env+</span>
+<span class="go">  short name:  p1</span>
+<span class="go">  name:       random public plicy Eco+ Soc- Env+</span>
 <span class="go">  profile:    {&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;weak&#39;, &#39;Env&#39;: &#39;good&#39;}</span>
 <span class="go">key:  a2</span>
-<span class="go">  short name:  a2</span>
-<span class="go">  name:       random decision action Eco~ Soc+ Env~</span>
+<span class="go">  short name:  p2</span>
+<span class="go">  name:       random public policy Eco~ Soc+ Env~</span>
 <span class="go">  profile:    {&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;good&#39;, &#39;Env&#39;: &#39;fair&#39;}</span>
 <span class="go">key:  a3</span>
-<span class="go">  short name:  a3</span>
-<span class="go">  name:       random decision action Eco~ Soc~ Env-</span>
+<span class="go">  short name:  p3</span>
+<span class="go">  name:       random public policy Eco~ Soc~ Env-</span>
 <span class="go">  profile:    {&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;fair&#39;, &#39;Env&#39;: &#39;weak&#39;}</span>
 <span class="go">key:  a4</span>
-<span class="go">  short name:  a4</span>
-<span class="go">  name:       random decision action Eco~ Soc+ Env+</span>
+<span class="go">  short name:  p4</span>
+<span class="go">  name:       random public policy Eco~ Soc+ Env+</span>
 <span class="go">  profile:    {&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;good&#39;, &#39;Env&#39;: &#39;good&#39;}</span>
 <span class="go">key:  a5</span>
-<span class="go">  short name:  a5</span>
-<span class="go">  name:       random decision action Eco~ Soc+ Env~</span>
+<span class="go">  short name:  p5</span>
+<span class="go">  name:       random public policy Eco~ Soc+ Env~</span>
 <span class="go">  profile:    {&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;good&#39;, &#39;Env&#39;: &#39;fair&#39;}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
 <span class="go">*----  performance tableau -----*</span>
-<span class="go">criteria | weights |  &#39;a1&#39;   &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;   &#39;a5&#39;   </span>
+<span class="go">criteria | weights |  &#39;p1&#39;   &#39;p2&#39;   &#39;p3&#39;   &#39;p4&#39;   &#39;p5&#39;   </span>
 <span class="go">---------|---------------------------------------------</span>
 <span class="go">&#39;g1Eco&#39;  |    1    | 36.29  85.17  34.49    NA   56.58  </span>
 <span class="go">&#39;g2Soc&#39;  |    1    | 55.00  56.33    NA   67.36  72.22  </span>

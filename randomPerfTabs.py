@@ -2054,28 +2054,28 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
     >>> t.showActions()
     *----- show decision action --------------*
     key:  a1
-      short name:  a1
-      name:       random decision action Eco+ Soc- Env+
+      short name:  p1
+      name:       random public plicy Eco+ Soc- Env+
       profile:    {'Eco': 'good', 'Soc': 'weak', 'Env': 'good'}
     key:  a2
-      short name:  a2
-      name:       random decision action Eco~ Soc+ Env~
+      short name:  p2
+      name:       random public policy Eco~ Soc+ Env~
       profile:    {'Eco': 'fair', 'Soc': 'good', 'Env': 'fair'}
     key:  a3
-      short name:  a3
-      name:       random decision action Eco~ Soc~ Env-
+      short name:  p3
+      name:       random public policy Eco~ Soc~ Env-
       profile:    {'Eco': 'fair', 'Soc': 'fair', 'Env': 'weak'}
     key:  a4
-      short name:  a4
-      name:       random decision action Eco~ Soc+ Env+
+      short name:  p4
+      name:       random public policy Eco~ Soc+ Env+
       profile:    {'Eco': 'fair', 'Soc': 'good', 'Env': 'good'}
     key:  a5
-      short name:  a5
-      name:       random decision action Eco~ Soc+ Env~
+      short name:  p5
+      name:       random public policy Eco~ Soc+ Env~
       profile:    {'Eco': 'fair', 'Soc': 'good', 'Env': 'fair'}
     >>> t.showPerformanceTableau()
     *----  performance tableau -----*
-    criteria | weights |  'a1'   'a2'   'a3'   'a4'   'a5'   
+    criteria | weights |  'p1'   'p2'   'p3'   'p4'   'p5'   
     ---------|---------------------------------------------
     'g1Eco'  |    1    | 36.29  85.17  34.49    NA   56.58  
     'g2Soc'  |    1    | 55.00  56.33    NA   67.36  72.22  
@@ -2084,7 +2084,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         
     """
 
-    def __init__(self,numberOfActions=20,shortNamePrefix='a',numberOfCriteria=13,\
+    def __init__(self,numberOfActions=20,shortNamePrefix='p',numberOfCriteria=13,\
                  weightDistribution='equiobjectives',weightScale=None,\
                  IntegerWeights=True,OrdinalScales=False,\
                  NegativeWeights=False,negativeWeightProbability=0.0,\
@@ -2123,7 +2123,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             else:      
                 actions[actionKey] = {'shortName': '%s' % (actionKey),
                         'name': 'action %s' % actionKey,
-                        'comment': '3 Objectives',
+                        'comment': 'random public polivy',
                         'generators': {}}
 ##        self.actions = actions
 ##        actionsList = [x for x in self.actions]

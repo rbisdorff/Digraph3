@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  2 APR 2020 15:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.10.12)  4 APR 2020 10:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2128,9 +2128,9 @@ ts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on digraph3Tutorial.pdf (173 pages, 3510831 bytes).
+Output written on digraph3Tutorial.pdf (173 pages, 3511101 bytes).
 PDF statistics:
- 3249 PDF objects out of 3580 (max. 8388607)
+ 3250 PDF objects out of 3580 (max. 8388607)
  1966 compressed objects within 20 object streams
  487 named destinations out of 1000 (max. 500000)
  1134 words of extra memory for PDF output out of 10000 (max. 10000000)

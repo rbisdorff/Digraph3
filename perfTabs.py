@@ -7537,8 +7537,8 @@ if __name__ == "__main__":
                                    NegativeWeights=True,
                                    seed=randomSeed,
                                    Debug=False)
-    actionsList = [x for x in t.actions.keys()]
-    criteriaList = [g for g in t.criteria.keys()]
+##    actionsList = [x for x in t.actions.keys()]
+##    criteriaList = [g for g in t.criteria.keys()]
 ##    print(t._htmlPerformanceHeatmap(argActionsList=actionsList,
 ##                                   argCriteriaList=criteriaList,
 ##                                   colorLevels=9,

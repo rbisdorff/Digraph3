@@ -2094,28 +2094,28 @@
 <span class="sd">    &gt;&gt;&gt; t.showActions()</span>
 <span class="sd">    *----- show decision action --------------*</span>
 <span class="sd">    key:  a1</span>
-<span class="sd">      short name:  a1</span>
-<span class="sd">      name:       random decision action Eco+ Soc- Env+</span>
+<span class="sd">      short name:  p1</span>
+<span class="sd">      name:       random public plicy Eco+ Soc- Env+</span>
 <span class="sd">      profile:    {&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;weak&#39;, &#39;Env&#39;: &#39;good&#39;}</span>
 <span class="sd">    key:  a2</span>
-<span class="sd">      short name:  a2</span>
-<span class="sd">      name:       random decision action Eco~ Soc+ Env~</span>
+<span class="sd">      short name:  p2</span>
+<span class="sd">      name:       random public policy Eco~ Soc+ Env~</span>
 <span class="sd">      profile:    {&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;good&#39;, &#39;Env&#39;: &#39;fair&#39;}</span>
 <span class="sd">    key:  a3</span>
-<span class="sd">      short name:  a3</span>
-<span class="sd">      name:       random decision action Eco~ Soc~ Env-</span>
+<span class="sd">      short name:  p3</span>
+<span class="sd">      name:       random public policy Eco~ Soc~ Env-</span>
 <span class="sd">      profile:    {&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;fair&#39;, &#39;Env&#39;: &#39;weak&#39;}</span>
 <span class="sd">    key:  a4</span>
-<span class="sd">      short name:  a4</span>
-<span class="sd">      name:       random decision action Eco~ Soc+ Env+</span>
+<span class="sd">      short name:  p4</span>
+<span class="sd">      name:       random public policy Eco~ Soc+ Env+</span>
 <span class="sd">      profile:    {&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;good&#39;, &#39;Env&#39;: &#39;good&#39;}</span>
 <span class="sd">    key:  a5</span>
-<span class="sd">      short name:  a5</span>
-<span class="sd">      name:       random decision action Eco~ Soc+ Env~</span>
+<span class="sd">      short name:  p5</span>
+<span class="sd">      name:       random public policy Eco~ Soc+ Env~</span>
 <span class="sd">      profile:    {&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;good&#39;, &#39;Env&#39;: &#39;fair&#39;}</span>
 <span class="sd">    &gt;&gt;&gt; t.showPerformanceTableau()</span>
 <span class="sd">    *----  performance tableau -----*</span>
-<span class="sd">    criteria | weights |  &#39;a1&#39;   &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;   &#39;a5&#39;   </span>
+<span class="sd">    criteria | weights |  &#39;p1&#39;   &#39;p2&#39;   &#39;p3&#39;   &#39;p4&#39;   &#39;p5&#39;   </span>
 <span class="sd">    ---------|---------------------------------------------</span>
 <span class="sd">    &#39;g1Eco&#39;  |    1    | 36.29  85.17  34.49    NA   56.58  </span>
 <span class="sd">    &#39;g2Soc&#39;  |    1    | 55.00  56.33    NA   67.36  72.22  </span>
@@ -2124,7 +2124,7 @@
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">shortNamePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">shortNamePrefix</span><span class="o">=</span><span class="s1">&#39;p&#39;</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span><span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">OrdinalScales</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">negativeWeightProbability</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>\
@@ -2163,7 +2163,7 @@
             <span class="k">else</span><span class="p">:</span>      
                 <span class="n">actions</span><span class="p">[</span><span class="n">actionKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">actionKey</span><span class="p">),</span>
                         <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;action </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">actionKey</span><span class="p">,</span>
-                        <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="s1">&#39;3 Objectives&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="s1">&#39;random public polivy&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;generators&#39;</span><span class="p">:</span> <span class="p">{}}</span>
 <span class="c1">##        self.actions = actions</span>
 <span class="c1">##        actionsList = [x for x in self.actions]</span>
