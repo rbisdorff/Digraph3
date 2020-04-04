@@ -2272,7 +2272,7 @@ When parameter \sphinxstyleemphasis{WithTypes} is set to \sphinxstyleemphasis{Tr
 
 The example tableau, generated for instance above with \sphinxstyleemphasis{missingDataProbability} = 0.03, \sphinxstyleemphasis{WithTypes} = True and \sphinxstyleemphasis{seed} = 100 (see \hyperref[\detokenize{tutorial:academicperformancetableau}]{Listing \ref{\detokenize{tutorial:academicperformancetableau}}} Lines 2\sphinxhyphen{}4), results in a set of two excellent (\sphinxstyleemphasis{s5}, \sphinxstyleemphasis{s7}), three good (\sphinxstyleemphasis{s2}, \sphinxstyleemphasis{s3}, \sphinxstyleemphasis{s6}) and two fair (\sphinxstyleemphasis{s1}, \sphinxstyleemphasis{s4}) student performances. Notice that no student gets a grade below the course validating threshold 10. We observe however 3 missing grades (NA), two in course \sphinxstyleemphasis{g3} and one in course \sphinxstyleemphasis{g5} (see Lines 19\sphinxhyphen{}25).
 
-We may show a statistical summary of the students’ grades per course (criterion).
+We may show a statistical summary of the students’ grades per course.
 \sphinxSetupCaptionForVerbatim{Student performance summary statistics per course}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:academicstatistics}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -2281,10 +2281,10 @@ We may show a statistical summary of the students’ grades per course (criterio
 \PYG{g+go}{  Instance name      : randstudPerf}
 \PYG{g+go}{  \PYGZsh{}Actions           : 7}
 \PYG{g+go}{  \PYGZsh{}Criteria          : 5}
-\PYG{g+go}{  *Statistics per Criterion*}
-\PYG{g+go}{  Criterion name       : g1}
-\PYG{g+go}{  Criterion weight     : 5}
-\PYG{g+go}{   criterion scale      : 0.00 \PYGZhy{} 20.00}
+\PYG{g+go}{  *Statistics per Course*}
+\PYG{g+go}{  Course name       : g1}
+\PYG{g+go}{  Course weight     : 5}
+\PYG{g+go}{   grading scale      : 0.00 \PYGZhy{} 20.00}
 \PYG{g+go}{   \PYGZsh{} missing evaluations : 0}
 \PYG{g+go}{   mean evaluation       : 13.57}
 \PYG{g+go}{   standard deviation    : 2.44}
@@ -2295,19 +2295,20 @@ We may show a statistical summary of the students’ grades per course (criterio
 \PYG{g+go}{   minimal evaluation    : 10.00}
 \PYG{g+go}{   mean absolute difference      : 2.69}
 \PYG{g+go}{   standard difference deviation : 3.45}
-\PYG{g+go}{  Criterion name       : g2}
+\PYG{g+go}{  Course name       : g2}
 \PYG{g+go}{   ...}
 \PYG{g+go}{   ...}
-\PYG{g+go}{  Criterion name       : g3}
-\PYG{g+go}{  Criterion weight     : 5}
-\PYG{g+go}{   criterion scale      : 0.00 \PYGZhy{} 20.00}
+\PYG{g+go}{  Course name       : g3}
+\PYG{g+go}{  Course weight     : 5}
+\PYG{g+go}{   grading scale      : 0.00 \PYGZhy{} 20.00}
 \PYG{g+go}{   \PYGZsh{} missing evaluations : 2}
-\PYG{g+go}{  Criterion name       : g4}
+\PYG{g+go}{   !! not enough evaluations !!}
+\PYG{g+go}{  Course name       : g4}
 \PYG{g+go}{   ...}
 \PYG{g+go}{   ...}
-\PYG{g+go}{  Criterion name       : g5}
-\PYG{g+go}{  Criterion weight     : 3}
-\PYG{g+go}{   criterion scale      : 0.00 \PYGZhy{} 20.00}
+\PYG{g+go}{  Course name       : g5}
+\PYG{g+go}{  Course weight     : 3}
+\PYG{g+go}{   grading scale      : 0.00 \PYGZhy{} 20.00}
 \PYG{g+go}{   \PYGZsh{} missing evaluations : 1}
 \PYG{g+go}{   mean evaluation       : 13.67}
 \PYG{g+go}{   standard deviation    : 1.70}
@@ -2320,7 +2321,7 @@ We may show a statistical summary of the students’ grades per course (criterio
 \PYG{g+go}{   standard difference deviation : 2.40}
 \end{sphinxVerbatim}
 
-Notice the summary missing for course \sphinxstyleemphasis{g3} (see \hyperref[\detokenize{tutorial:academicstatistics}]{Listing \ref{\detokenize{tutorial:academicstatistics}}} Lines 23\sphinxhyphen{}26) because of two missing evaluations, inducing here an insufficient number of remaining evaluations.
+Notice the summary missing for course \sphinxstyleemphasis{g3} (see \hyperref[\detokenize{tutorial:academicstatistics}]{Listing \ref{\detokenize{tutorial:academicstatistics}}} Lines 23\sphinxhyphen{}27) because of two missing evaluations, inducing here an insufficient number of remaining evaluations.
 
 
 \subsection{Random linearly ranked performance tableaux}

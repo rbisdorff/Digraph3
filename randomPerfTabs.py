@@ -1116,6 +1116,103 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
             html += '</table>'
             
         return html
+
+    def showStatistics(self,Debug=False):
+        """
+        show statistics concerning the grades' distributions pm each course.
+        """
+        import math
+        criteriaKeys = [x for x in self.criteria]
+        criteriaKeys.sort()
+        nc = len(self.criteria)
+        evaluation = self.evaluation
+        actions = self.actions
+        n = len(actions)
+        print('*-------- Performance tableau summary statistics -------*')
+        print('Instance name      :', self.name)
+        print('#Actions           :', n)
+        print('#Criteria          :', nc)
+        print('*Statistics per Course*')
+        for g in criteriaKeys:
+            print('Course name       :', g)
+            print('Course weight     :', self.criteria[g]['weight'])
+            averageEvaluation = Decimal('0.0')
+            varianceEvaluation = Decimal('0.0')
+            Max = Decimal(str(self.criteria[g]['scale'][1]))
+            Min = Decimal(str(self.criteria[g]['scale'][0]))
+            minEvaluation = Max
+            maxEvaluation = Min
+            evaluationList = []
+            for x in actions:
+                if evaluation[g][x] != Decimal('-999'):
+                    evaluationList.append(evaluation[g][x])
+                    averageEvaluation += evaluation[g][x]
+                    varianceEvaluation += evaluation[g][x]**Decimal('2')
+                    if evaluation[g][x] < minEvaluation:
+                        minEvaluation = evaluation[g][x]
+                    if evaluation[g][x] > maxEvaluation:
+                        maxEvaluation = evaluation[g][x]
+            evaluationList.sort()
+            na = len(evaluationList)
+            if Debug:
+                print(evaluationList)
+            try:
+                if self.criteria[g]['preferenceDirection'] == 'max':
+                    print('  grading scale      : %.2f - %.2f' % (Min, Max))
+                else:
+                    print('  grading scale      : %.2f - %.2f' % (-Max, Min))
+            except:
+                print('  grading scale    : %.2f - %.2f' % (Min, Max))
+            print('  # missing evaluations : %d'   % (n-na))
+            # !! index on evaluation List goes from 0 to na -1 !!
+            if na > 5:
+                rankQ1 = na / 4.0
+                lowRankQ1 = int(math.floor(rankQ1))
+                proportQ1 = Decimal(str(rankQ1 - lowRankQ1))
+                quantileQ1 = evaluationList[lowRankQ1] + (proportQ1 * (evaluationList[lowRankQ1+1]-evaluationList[lowRankQ1]) )
+                #print rankQ1, lowRankQ1, proportQ1
+
+                rankQ2 = na / 2.0
+                lowRankQ2 = int(math.floor(rankQ2))
+                proportQ2 = Decimal(str(rankQ2 - lowRankQ2))
+                
+                quantileQ2 = evaluationList[lowRankQ2] + (proportQ2 * ( evaluationList[lowRankQ2+1] - evaluationList[lowRankQ2]) )
+
+                rankQ3 = (na * 3.0) / 4.0
+                lowRankQ3 = int(math.floor(rankQ3))
+                proportQ3 = Decimal(str(rankQ3 - lowRankQ3))
+                              
+                quantileQ3 = evaluationList[lowRankQ3] + ( proportQ3 * (evaluationList[lowRankQ3+1]-evaluationList[lowRankQ3]) )
+                    
+                averageEvaluation /= Decimal(str(na))
+                varianceEvaluation = varianceEvaluation/na - averageEvaluation**Decimal('2')
+                stdDevEvaluation = math.sqrt(varianceEvaluation)
+                print('  mean evaluation       : %.2f' % (averageEvaluation))
+                print('  standard deviation    : %.2f' % (stdDevEvaluation))
+                print('  maximal evaluation    : %.2f' % (maxEvaluation))
+                print('  quantile Q3 (x_75)    : %.2f' % (quantileQ3))
+                print('  median evaluation     : %.2f' % (quantileQ2))
+                print('  quantile Q1 (x_25)    : %.2f' % (quantileQ1))
+                print('  minimal evaluation    : %.2f' % (minEvaluation))
+                averageAbsDiffEvaluation = Decimal('0.0')
+                varianceDiffEvaluation = Decimal('0.0')
+                nd = 0
+                for x in actions:
+                    for y in actions:
+                        if evaluation[g][x] != Decimal('-999') and evaluation[g][y] != Decimal('-999'):
+                            diffxy = (evaluation[g][x] - evaluation[g][y])
+                            averageAbsDiffEvaluation += abs(diffxy)
+                            varianceDiffEvaluation += diffxy**Decimal('2')
+                            nd += 1
+    #            print '  Sum of evaluation differences = ', averageAbsDiffEvaluation
+                averageAbsDiffEvaluation /= Decimal(str(nd))
+                ## averageDiffEvaluation == 0 per construction  
+                varianceDiffEvaluation = varianceDiffEvaluation/Decimal(str(nd))
+                stdDevDiffEvaluation = math.sqrt(varianceDiffEvaluation)
+                print('  mean absolute difference      : %.2f' % (averageAbsDiffEvaluation))
+                print('  standard difference deviation : %.2f' % (stdDevDiffEvaluation))
+            else:
+                print('  !! not enough evaluations !!')
                                             
     
 #-----------------

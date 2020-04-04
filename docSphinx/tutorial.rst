@@ -2007,7 +2007,7 @@ When parameter *WithTypes* is set to *True*, the students are randomly allocated
 
 The example tableau, generated for instance above with *missingDataProbability* = 0.03, *WithTypes* = True and *seed* = 100 (see :numref:`academicPerformanceTableau` Lines 2-4), results in a set of two excellent (*s5*, *s7*), three good (*s2*, *s3*, *s6*) and two fair (*s1*, *s4*) student performances. Notice that no student gets a grade below the course validating threshold 10. We observe however 3 missing grades (NA), two in course *g3* and one in course *g5* (see Lines 19-25).
 
-We may show a statistical summary of the students' grades per course (criterion).
+We may show a statistical summary of the students' grades per course.
 
 .. code-block:: pycon
    :name: academicStatistics
@@ -2019,10 +2019,10 @@ We may show a statistical summary of the students' grades per course (criterion)
      Instance name      : randstudPerf
      #Actions           : 7
      #Criteria          : 5
-     *Statistics per Criterion*
-     Criterion name       : g1
-     Criterion weight     : 5
-      criterion scale      : 0.00 - 20.00
+     *Statistics per Course*
+     Course name       : g1
+     Course weight     : 5
+      grading scale      : 0.00 - 20.00
       # missing evaluations : 0
       mean evaluation       : 13.57
       standard deviation    : 2.44
@@ -2033,19 +2033,20 @@ We may show a statistical summary of the students' grades per course (criterion)
       minimal evaluation    : 10.00
       mean absolute difference      : 2.69
       standard difference deviation : 3.45
-     Criterion name       : g2
+     Course name       : g2
       ...
       ...
-     Criterion name       : g3
-     Criterion weight     : 5
-      criterion scale      : 0.00 - 20.00
+     Course name       : g3
+     Course weight     : 5
+      grading scale      : 0.00 - 20.00
       # missing evaluations : 2
-     Criterion name       : g4
+      !! not enough evaluations !!
+     Course name       : g4
       ...
       ...
-     Criterion name       : g5
-     Criterion weight     : 3
-      criterion scale      : 0.00 - 20.00
+     Course name       : g5
+     Course weight     : 3
+      grading scale      : 0.00 - 20.00
       # missing evaluations : 1
       mean evaluation       : 13.67
       standard deviation    : 1.70
@@ -2057,7 +2058,7 @@ We may show a statistical summary of the students' grades per course (criterion)
       mean absolute difference      : 1.78
       standard difference deviation : 2.40
 
-Notice the summary missing for course *g3* (see :numref:`academicStatistics` Lines 23-26) because of two missing evaluations, inducing here an insufficient number of remaining evaluations.
+Notice the summary missing for course *g3* (see :numref:`academicStatistics` Lines 23-27) because of two missing evaluations, inducing here an insufficient number of remaining evaluations.
 
 Random linearly ranked performance tableaux
 ...........................................
