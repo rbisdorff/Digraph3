@@ -1951,6 +1951,114 @@ A graphviz drawing illustrates the apparent preferential links between the stron
 	   
 Public policy *p26* (Eco+ Soc+ Env-) appears dominating the other policies, whereas policy *p30* (Eco- Soc- Env-) appears to be dominated by all the others.
 
+Random academic performance tableaux
+....................................
+
+The :py:class:`randomPerfTabs.RandomAcademicPerformanceTableau` class generates temporary performance tableaux with random grades for a given number of students in different courses (see Lecture 4: *Grading*, Algorithmic decision Theory Course http://hdl.handle.net/10993/37933)
+    
+*Parameters*:
+
+    * number of students,
+    * number of courses,
+    * weightDistribution := equisignificant | random (default)
+    * weightScale := (1, 1 | numberOfCourses (default when random))
+    * IntegerWeights := Boolean (True = default)
+    * commonScale := (0,20) (default)
+    * ndigits := 0
+    * WithTypes := Boolean (False = default)
+    * commonMode := ('triangular',xm=14,r=0.25) (default)
+    * commonThresholds := {'ind':(0,0), 'pref':(1,0)} (default)
+    * missingDataProbability := 0.0 (default)
+        
+When parameter *WithTypes* is set to *True*, the students are randomly allocated to one of the four categories: *weak* (1/6), *fair* (1/3), *good* (1/3), and *excellent* (1/3), in the bracketed proportions. In a default 0-20 grading range, the random range of a weak student is 0-10, of a fair student 4-16, of a good student 8-20, and of an excellent student 12-20. The random grading generator follows in this case a double triangular probablity law with *mode* (*xm*) equal to the middle of the random range and *median repartition* (*r* = 0.5) of probability each side of the mode.
+
+.. code-block:: pycon
+   :name: academicPerformanceTableau
+   :caption: Generating a random academic performance tableau	  
+   :linenos:
+
+   >>> from randomPerfTabs import RandomAcademicPerformanceTableau
+   >>> t = RandomAcademicPerformanceTableau(numberOfStudents=7,
+   ...              numberOfCourses=5, missingDataProbability=0.03,
+   ...              WithTypes=True, seed=100)
+   >>> t
+    *------- PerformanceTableau instance description ------*
+    Instance class   : RandomAcademicPerformanceTableau
+    Seed             : 100
+    Instance name    : randstudPerf
+    # Actions        : 7
+    # Criteria       : 5
+    Attributes       : ['randomSeed', 'name', 'actions',
+                        'criteria', 'evaluation', 'weightPreorder']
+   >>> t.showPerformanceTableau()
+    *----  performance tableau -----*
+     Courses |  'g1' 'g2' 'g3' 'g4' 'g5' 
+       ECTS  |   5    1    5    4    3   
+    ---------|--------------------------
+       's1f' |  12   10   14   14   13  
+       's2g' |  14   12   16   12   14  
+       's3g' |  13   10   NA   12   17  
+       's4f' |  10   13   NA   13   12  
+       's5e' |  17   12   16   17   12  
+       's6g' |  17   17   12   16   14  
+       's7e' |  12   13   13   16   NA  
+   >>> t.weightPreorder
+    [['g2'], ['g5'], ['g4'], ['g1', 'g3']]
+
+The example tableau, generated for instance above with *missingDataProbability* = 0.03, *WithTypes* = True and *seed* = 100 (see :numref:`academicPerformanceTableau` Lines 2-4), results in a set of two excellent (*s5*, *s7*), three good (*s2*, *s3*, *s6*) and two fair (*s1*, *s4*) student performances. Notice that no student gets a grade below the course validating threshold 10. We observe however 3 missing grades (NA), two in course *g3* and one in course *g5* (see Lines 19-25).
+
+We may show a statistical summary of the students' grades per course (criterion).
+
+.. code-block:: pycon
+   :name: academicStatistics
+   :caption: Student performance summary statistics per course	  
+   :linenos:
+    
+   >>> t.showStatistics()
+    *-------- Performance tableau summary statistics -------*
+     Instance name      : randstudPerf
+     #Actions           : 7
+     #Criteria          : 5
+     *Statistics per Criterion*
+     Criterion name       : g1
+     Criterion weight     : 5
+      criterion scale      : 0.00 - 20.00
+      # missing evaluations : 0
+      mean evaluation       : 13.57
+      standard deviation    : 2.44
+      maximal evaluation    : 17.00
+      quantile Q3 (x_75)    : 17.00
+      median evaluation     : 13.50
+      quantile Q1 (x_25)    : 12.00
+      minimal evaluation    : 10.00
+      mean absolute difference      : 2.69
+      standard difference deviation : 3.45
+     Criterion name       : g2
+      ...
+      ...
+     Criterion name       : g3
+     Criterion weight     : 5
+      criterion scale      : 0.00 - 20.00
+      # missing evaluations : 2
+     Criterion name       : g4
+      ...
+      ...
+     Criterion name       : g5
+     Criterion weight     : 3
+      criterion scale      : 0.00 - 20.00
+      # missing evaluations : 1
+      mean evaluation       : 13.67
+      standard deviation    : 1.70
+      maximal evaluation    : 17.00
+      quantile Q3 (x_75)    : 15.50
+      median evaluation     : 14.00
+      quantile Q1 (x_25)    : 12.50
+      minimal evaluation    : 12.00
+      mean absolute difference      : 1.78
+      standard difference deviation : 2.40
+
+Notice the summary missing for course *g3* (see :numref:`academicStatistics` Lines 23-26) because of two missing evaluations, inducing here an insufficient number of remaining evaluations.
+
 Random linearly ranked performance tableaux
 ...........................................
 
