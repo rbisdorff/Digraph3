@@ -2307,7 +2307,8 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             else:
                 criteria[g]['preferenceDirection'] = 'min'
             criteria[g]['name'] = 'criterion of objective %s' % (criterionObjective)
-            criteria[g]['shortName'] = g + criterionObjective[0:2]
+            criteria[g]['shortName'] = g
+            #criteria[g]['shortName'] = g + criterionObjective[0:2]
             span = commonScale[1] - commonScale[0]
             if commonThresholds == None:                    
                 if OrdinalScales:
@@ -3880,7 +3881,7 @@ if __name__ == "__main__":
     print('not transposed')
     t.showPerformanceTableau(Transposed=False)
     #t.showHTMLPerformanceTableau(Transposed=True)
-    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
+    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
                                              
 
 

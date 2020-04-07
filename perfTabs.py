@@ -2583,6 +2583,7 @@ The performance evaluations of each decision alternative on each criterion are g
                 criteriaWeightsList.sort(reverse=False)
                 criteriaList = [g[1] for g in criteriaWeightsList]
                 criteriaCorrelation = None
+                rankCorrelation = None
         else:
             criteriaList = list(criteria.keys())
 ##            if argActionsList != None:
@@ -2608,6 +2609,7 @@ The performance evaluations of each decision alternative on each criterion are g
 ##                sdMarginalCriteriaCorrelation = sqrt(sdMarginalCriteriaCorrelation)
             else:
                 criteriaCorrelation = None
+                rankCorrelation = None
         quantileColor={}
         for x in actionsList:
             quantileColor[x] = {}

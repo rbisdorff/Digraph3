@@ -2347,7 +2347,8 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;min&#39;</span>
             <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;criterion of objective </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">criterionObjective</span><span class="p">)</span>
-            <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span> <span class="o">+</span> <span class="n">criterionObjective</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span>
+            <span class="c1">#criteria[g][&#39;shortName&#39;] = g + criterionObjective[0:2]</span>
             <span class="n">span</span> <span class="o">=</span> <span class="n">commonScale</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">commonScale</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">commonThresholds</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>                    
                 <span class="k">if</span> <span class="n">OrdinalScales</span><span class="p">:</span>
@@ -3920,7 +3921,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;not transposed&#39;</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="c1">#t.showHTMLPerformanceTableau(Transposed=True)</span>
-    <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
                                              
 
 
