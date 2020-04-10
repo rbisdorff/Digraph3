@@ -2655,7 +2655,8 @@ We apply order statistics for sorting a set *X* of *n* potential deicison action
 K-sorting on a single criterion
 ...............................
 
-A single criterion sorting category *K* is a (usually) lower-closed interval :math:`[m_k ; M_k[` on a real-valued performance measurement scale, with :math:`m_k \leq M_k`. If *x* is a measured performance on this scale, we may distinguish three sorting situations:
+A single criterion sorting category *K* is a (usually) lower-closed interval :math:`[m_k ; M_k[` on a real-valued performance measurement scale, with :math:`m_k \leq M_k`. If *x* is a measured performance on this scale, we may distinguish three sorting situations.
+
     #. :math:`x < m_k` and (:math:`x < M_k`): The performance *x* is lower than category *K*.
     #. :math:`x \geqslant m_k` and :math:`x < M_k`: The performance *x* belongs to category *K*.
     #. :math:`x > m_k` and :math:`x \geqslant M_k`: The performance *x* is lower than category *K*.
@@ -2664,7 +2665,7 @@ As the relation :math:`<` is the dual of :math:`\geqslant` (:math:`\not\geqslant
 
 Upper-closed categories (in a more mathematical integration style) may as well be be considered. In this case it is sufficient to check that :math:`m_k \not\geqslant x` as well as :math:`M_k \geq x` are true for *x* to be considered a member of category *K*. It is worthwhile noticing that a category *K* such that :math:`m_k = M_k` is hence always empty by definition. In order to be able to properly sort over the complete range of values to be sorted, we will need to use a special, two-sided closed last, respectively first, category.
 
-Let :math:`K = {K_1 , ..., K_q}` be a non trivial partition of the criterion’s performance measurement scale into :math:`c \geq 2` ordered categories :math:`K_k` – i.e. lower-closed intervals :math:`[m_k ; M_k[` – such that :math:`m_k < M_k`, :math:`M_k = m_{k+1}` for *k* = 0, ..., *q* − 1 and :math:`M_c = \infty`. And, let :math:`A=\{a_1 , a_2 , a_3 , ...\}` be a finite set of not all equal performance measures observed on the scale in question.
+Let :math:`K = {K_1 , ..., K_q}` be a non trivial partition of the criterion’s performance measurement scale into :math:`c \geq 2` ordered categories :math:`K_k` – i.e. lower-closed intervals :math:`[m_k ; M_k[` – such that :math:`m_k < M_k`, :math:`M_k = m_{k+1}` for *k* = 0, ..., *q* - 1 and :math:`M_c = \infty`. And, let :math:`A=\{a_1 , a_2 , a_3 , ...\}` be a finite set of not all equal performance measures observed on the scale in question.
 
 **Property**: For all performance measure :math:`x \in A` there exists now a unique *k* such that :math:`x \in K_k`. If we assimilate, like in descriptive statistics, all the measures gathered in a category :math:`K_k` to the central value of the category – i.e. :math:`(m_k + M_k)/2` – the sorting result will hence define a weak order (complete preorder) on A.
 
@@ -2679,7 +2680,7 @@ Let us now suppose that we are given a performance tableau with a set *X* of *n*
 
 Suppose furthermore that we want to sort the decision alternatives into *q* upperclosed quantile equivalence classe. We therefore consider a series : :math:`k = k/q` for *k* = 0, ..., *q* of *q+1* equally spaced quantiles, like quartiles: 0, 0.25, 0.5, 0.75, 1; quintiles: 0, 0.2, 0.4, 0.6, 0.8, 1: or deciles: 0, 0.1, 0.2, ..., 0.9, 1, for instance.
 
-The upperclosed :math:`\mathbf{q}^k` class corresponds to the $m$ quantile intervals :math:`]q_j(p_{k-1});q_j(p_k)]` observed on each criterion *j*, and for *k* = 2, ..., *q* with :math:`q_j(p_q)=\max_X(x_j)` and the first class gathers all performances below or equal to :math:`Q_j(p_1)`.
+The upperclosed :math:`\mathbf{q}^k` class corresponds to the *m* quantile intervals :math:`]q_j(p_{k-1});q_j(p_k)]` observed on each criterion *j*, and for *k* = 2, ..., *q* with :math:`q_j(p_q)=\max_X(x_j)` and the first class gathers all performances below or equal to :math:`Q_j(p_1)`.
 
 The lowerclosed :math:`\mathbf{q}_k` class corresponds to the $m$ quantile intervals :math:`[q_j(p_{k-1});q_j(p_k)[` observed on each criterion *j*, and for *k* = 1, ..., *q*-1 with :math:`q_j(p_0)=\min_X(x_j)` and the last class gathers all performances above or equal to :math:`Q_j(p_{q-1})`.
 
@@ -2687,11 +2688,13 @@ We call **q-tiles** a complete series of *k* = 1, ..., *q* upper-closed :math:`\
 
 **Property**: With the help of the bipolar-valued characteristic of the outranking relation :math:`r(\succsim)` we may compute the bipolar-valued characteristic of the assertion: *x* belongs tu upper-closed *q*-tiles class :math:`\mathbf{q}^k` class, resp. lower-closed class :math:`\mathbf{q}_k`, as follows.
 
-:math:`r(x \in \mathbf{q}^k \; = \; \min \big[ -r(\mathbf{q}(p_{q-1} \succsim x), r(\mathbf{q}(p_{q} \succsim x)\big]`
+   :math:`r(x \in \mathbf{q}^k) \; = \; \min \big[ -r\big(\mathbf{q}(p_{q-1}\big) \succsim x), \,r\big(\mathbf{q}(p_{q}\big) \succsim x)\big]`
 
-:math:`r(x \in \mathbf{q}_k \; = \; \min \big[ r(x \succsim \mathbf{q}(p_{q-1}), -r(x \succsim\mathbf{q}(p_{q})\big]`
+   :math:`r(x \in \mathbf{q}_k) \; = \; \min \big[ r\big(x \succsim \mathbf{q}(p_{q-1}\big),\, -r\big(x \succsim\mathbf{q}(p_{q}\big)\big]`
 
-The outranking relation :math:`\succsim` verifying the coduality principle, :math:`-r(\mathbf{q}(p_{q-1} \succsim x) = r(\mathbf{q}(p_{q-1}) \prec x)`, resp. :math:`-r(x \succsim \mathbf{q}(p_{q}) = r(x \prec \mathbf{q}(p_{q})`.
+The outranking relation :math:`\succsim` verifying the coduality principle, :math:`-r\big(\mathbf{q}(p_{q-1}) \succsim x\big) \,=\, r\big(\mathbf{q}(p_{q-1}) \prec x\big)`, resp. :math:`-r\big(x \succsim \mathbf{q}(p_{q}) \,=\, r\big(x \prec \mathbf{q}(p_{q}\big)`.
+
+We may compute, for instance, a quintiling of a given random performance tableau with the help of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
 
 .. code-block:: pycon
    :name: quantilesSorting
@@ -2702,6 +2705,23 @@ The outranking relation :math:`\succsim` verifying the coduality principle, :mat
    >>> t = RandomPerformanceTableau(numberOfActions=50,seed =5)
    >>> from sortingDigraphs import QuantilesSortingDigraph
    >>> qs = QuantilesSortingDigraph(t,limitingQuantiles=5)
+   >>> qs
+    *-----  Object instance description -----------*
+     Instance class  : QuantilesSortingDigraph
+     Instance name   : sorting_with_5-tile_limits
+     # Actions       : 50
+     # Criteria      : 7
+     # Categories    : 5
+     Lowerclosed     : False
+     Size            : 841
+     Determinateness : 62.776
+    *------  Constructor run times (in sec.) ------*
+     # Threads        : 1
+     Total time       : 0.02386
+     Data input       : 0.00342
+     Compute profiles : 0.00082
+     Compute relation : 0.01823
+     Weak Ordering    : 0.00047
    >>> qs.showSorting()
     *--- Sorting results in descending order ---*
      ]0.80 - 1.00]: ['a22']
@@ -2718,25 +2738,57 @@ The outranking relation :math:`\succsim` verifying the coduality principle, :mat
 		     'a45', 'a49']
      ]   < - 0.20]: ['a44']
 
-**Properties**:
-   #. **Coherence**: Each object is always sorted into a non-empty subset of adjacent q-tiles classes. Alternative *a22* is, for instance, solely sorted into the highest quintile class :math:`]0.80 - 1.00]`, whereas alternative *a44* is sorted into the first and the second quintile class :math:`]< - 0.40]`.
-   #. **Uniqueness**: If :math:`r(x \in \mathbf{q}^k) \neq 0`  for *k* = 1, ..., *q*, then performance *x* is sorted into exactly one single q-tiled class.
+Quantiles sorting results always verfy the following **Properties**.
+
+   #. **Coherence**: Each object is sorted into a non-empty subset of *adjacent* q-tiles classes. Alternative *a22* is, for instance, solely sorted into the highest quintile class :math:`]0.80 - 1.00]`, whereas alternative *a44* is sorted into the first and the second quintile class :math:`]< - 0.40]` (see :numref:`quantilesSorting` Lines 24 and 34-36). An alternative that would *miss* evaluations on all the criteria will be sorted conjointly in all q-tiled classes. 
+   #. **Uniqueness**: If :math:`r(x \in \mathbf{q}^k) \neq 0`  for *k* = 1, ..., *q*, then performance *x* is sorted into *exactly one single* q-tiled class. 
    #. **Separability**: Computing the sorting result for performance *x* is independent from the computing of the other performances’ sorting results. This property gives access to efficient parallel processing of class membership characteristics.
 
-Pre-ranked sparse outranking digraphs
-.....................................
+.. code-block:: pycon
+   :name: sortingCharacteristics
+   :caption: Bipolar-valued sorting characteristics (extract) 
+   :linenos:
 
-The q-tiles sorting result leaves us with more or less overlapping ordered quantile equivalence classes. For constructing now a linearly ranked q-tiles partition of *X* , we may apply three strategies:
+   >>> qs.valuationdomain
+    {'min': Decimal('-100.0'), 'med': Decimal('0'),
+     'max': Decimal('100.0')}
+   >>> qs.showSortingCharacteristics()
+    x  in  q^k          r(q^k-1 < x)  r(q^k >= x)  r(x in q^k)
+    a22 in ]< - 0.20]	   100.00       -85.71       -85.71
+    a22 in ]0.20 - 0.40]    85.71	-71.43	     -71.43
+    a22 in ]0.40 - 0.60]    71.43	-71.43	     -71.43
+    a22 in ]0.60 - 0.80]    71.43	-14.29	     -14.29
+    a22 in ]0.80 - 1.00]    14.29	100.00	      14.29
+    ...
+    ...
+    a44 in ]< - 0.20]      100.00	  0.00	       0.00
+    a44 in ]0.20 - 0.40]     0.00	 57.14	       0.00
+    a44 in ]0.40 - 0.60]   -57.14	 85.71	     -57.14
+    a44 in ]0.60 - 0.80]   -85.71	 85.71	     -85.71
+    a44 in ]0.80 - 1.00]   -85.71	 85.71	     -85.71
+    ...
+    ...
+    a49 in ]< - 0.20]      100.00	-42.86	     -42.86
+    a49 in ]0.20 - 0.40]    42.86	  0.00	       0.00
+    a49 in ]0.40 - 0.60]     0.00	  0.00	       0.00
+    a49 in ]0.60 - 0.80]     0.00	 57.14	       0.00
+    a49 in ]0.80 - 1.00]   -57.14	 85.71	     -57.14
+
+
+Alternative *a22* verifies both conditions for being sorted into a quintiles class only for class [0.80 - 1.00] (see :numref:`sortingCharacteristics` Lines 10). Whereas alternatives *a44* and *a49*, for instance, weakly verify both conditions each one for two, resp. three, adjacent quintiles classes (see Lines 13-14 and 21-23).  
+
+The q-tiles sorting result leaves us hence with more or less overlapping ordered quantile equivalence classes. For constructing now a linearly ranked q-tiles partition of *X* , we may apply three strategies:
+
+   #. **Average** (default): In decreasing lexicographic order of the average of the lower and upper quantile limits and the upper quantile class limit.
    #. **Optimistic**: In decreasing lexicographic order of the upper and lower quantile class limits;
    #. **Pessimistic**: In decreasing lexicographic order of the lower and upper quantile class limits;
-   #. **Average** (default): In decreasing numeric order of the average of the lower and upper quantile limits.
 
 .. code-block:: pycon
-   :name: quantilesOredering
-   :caption: Weakly ranking the quintiles sorting resulus 
+   :name: quantilesOrdering
+   :caption: Weakly ranking the quintiles sorting result
    :linenos:
       
-   >>> qs.showQuantileOrdering()
+   >>> qs.showQuantileOrdering(strategy='average')
     ]0.80-1.00] : ['a22']
     ]0.60-0.80] : ['a03', 'a07', 'a11', 'a14', 'a20', 'a29',
                    'a32', 'a33', 'a37', 'a39', 'a41', 'a42']
@@ -2751,111 +2803,132 @@ The q-tiles sorting result leaves us with more or less overlapping ordered quant
                     'a26', 'a34', 'a38', 'a45']
     ]  < -0.40] : ['a44']
 
- 
+We find confirmed in this weak ranking, following the *average* ranking startegy, that alternative *a49* , for instance, is indeed sorted into three adjacent quintiles classes, namely :math:`]0.20-0.80]` (see :numref:`quantilesOrdering` Line 6) and precedes the :math:`]0.40-0.60]` class, of same average of lower and upper limits.
+
+Noticing the computational efficiency of the quantiles sorting construction, coupled with the separability property of the quantile class membership characteristics computation, we will make usage of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class for ranking big performance tableaux.
+
 Ranking big performance tableaux
 ................................
 
-None of the usual ranking heuristics (see previous tutorial), using essentially only the information given by the pairwise outranking characteristics, are scalable for **big outranking digraphs** gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into **ordered quantiles equivalence classes** using the Quantiles sorting technique seen in the previous Section. This decomposition will lead to a *pre-ranked sparse* outranking digraph model.
+Indeed, none of the usual ranking heuristics (see previous tutorial), using essentially only the information given by the pairwise outranking characteristics, are scalable for **big outranking digraphs** gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into **ordered quantiles equivalence classes** using the quantiles sorting technique seen in the previous Section. This decomposition will lead to a *pre-ranked sparse* outranking digraph model.
 
-In the coding example in :numref:`PreRankedOutrankingDigraph`, we generate for instance, by using multiprocessing techniques, first (Lines 2-3), a cost benefit performance tableau of 100 decision alternatives and, secondly (Lines 4-5), we construct a **pre-ranked sparse outranking digraph** instance called *bg*. Notice by the way the *BigData* flag (Line 3) used here for generating a parsimonious performance tableau.
+In the coding example in :numref:`PreRankedOutrankingDigraph`, we generate for instance, first (Lines 2-4), a cost benefit performance tableau of 100 decision alternatives and, secondly (Lines 5-6), we construct a :py:class:`sparseOutrankingDigraphs.PreRankedOutrankingDigraph` instance called *bg*. Notice by the way the *BigData* flag (Line 4) used here for generating a parsimoniously commented performance tableau.
 
 .. code-block:: pycon
    :name: PreRankedOutrankingDigraph
    :caption: Computing a *pre-ranked* outranking digraph 
    :linenos:
 
-   >>> from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
-   >>> tp = RandomCBPerformanceTableau(numberOfActions=100,
-   ...                                 BigData=True,seed=100)
-   >>> bg = PreRankedOutrankingDigraph(tp,quantiles=10,LowerClosed=False,
-   ...                                 minimalComponentSize=1)
+   >>> from sparseOutrankingDigraphs import\
+                                 PreRankedOutrankingDigraph
+   >>> tp = RandomCBPerformanceTableau(numberOfActions=100,\
+                                 BigData=True,seed=100)
+   >>> bg = PreRankedOutrankingDigraph(tp,quantiles=10,LowerClosed=False,\
+                                 componentRankingRule='NetFlows')
    >>> bg
-    *----- show short --------------*
-    Instance name     : randomCBperftab_mp
+    *----- Object instance description ------*
+    Instance class    : PreRankedOutrankingDigraph
+    Instance name     : randomCBperftab_pr
     # Actions         : 100
     # Criteria        : 7
     Sorting by        : 10-Tiling
     Ordering strategy : average
-    Ranking rule      : Copeland
+    Ranking rule      : NetFlows
     # Components      : 20
     Minimal order     : 1
     Maximal order     : 20
     Average order     : 5.0
-    fill rate         : 10.061%
-    *----  Constructor run times (in sec.) ----*
-    Total time        : 0.17790
-    QuantilesSorting  : 0.09019
-    Preordering       : 0.00043
-    Decomposing       : 0.08522
-    Ordering          : 0.00000
-    <class 'sparseOutrankingDigraphs.PreRankedOutrankingDigraph'> instance
+    fill rate         : 11.475%
+    ----  Constructor run times (in sec.) ----
+    #Threads          : 1
+    Total time        : 0.14232
+    Data imput        : 0.00230
+    QuantilesSorting  : 0.06648
+    Preordering       : 0.00032
+    Decomposing       : 0.06890
+    Ordering          : 0.00603
 
-The total run time of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankingDigraph` constructor is less than a fifth of a second. The corresponding multiple criteria deciles sorting leads to 20 quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows.
+The total run time of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankingDigraph` constructor is about 0.14 sec (see :numref:`` Line 23). The deciles sorting, preordering and decomposing leads to 20 linearly ordered quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows.
 
 .. code-block:: pycon
    :name: quantilesDecomposition
-   :caption: Showing the quantiles decomposiion of a pre-ranked outranking digraph 
+   :caption: The quantiles decomposition of a pre-ranked outranking digraph 
    :linenos:
 
    >>> bg.showDecomposition()
     *--- quantiles decomposition in decreasing order---*
-    0. ]0.80-0.90] : [49, 10, 52]
-    1. ]0.70-0.90] : [45]
-    2. ]0.70-0.80] : [18, 84, 86, 79]
-    3. ]0.60-0.80] : [41, 70]
-    4. ]0.50-0.80] : [44]
-    5. ]0.60-0.70] : [2, 35, 68, 37, 7, 8, 75, 12, 80, 21, 55, 90, 30, 95]
-    6. ]0.50-0.70] : [19]
-    7. ]0.40-0.70] : [69]
-    8. ]0.50-0.60] : [96, 1, 66, 67, 38, 33, 72, 73, 71, 13, 77, 16, 82,
-		      85, 22, 25, 88, 57, 87, 91]
-    9. ]0.30-0.70] : [42]
-    10. ]0.40-0.60] : [47]
-    11. ]0.30-0.60] : [0, 32, 48]
-    12. ]0.40-0.50] : [34, 5, 31, 83, 76, 78, 15, 51, 14, 54, 56, 27, 60,
-		       29, 94, 63]
-    13. ]0.30-0.50] : [4, 50, 92, 39]
-    14. ]0.20-0.50] : [43]
-    15. ]0.30-0.40] : [97, 99, 36, 6, 89, 61, 93]
-    16. ]0.20-0.40] : [65, 20, 46, 62]
-    17. ]0.20-0.30] : [64, 81, 3, 53, 24, 40, 74, 28, 26, 58]
-    18. ]0.10-0.30] : [17, 98, 11]
-    19. ]0.10-0.20] : [9, 59, 23]
+    c01. ]0.70-0.90] : [46, 67, 100]
+    c02. ]0.70-0.80] : [16, 19, 42, 56, 66, 79, 86, 87]
+    c03. ]0.50-0.80] : [39]
+    c04. ]0.60-0.70] : [13, 36, 41, 68, 69, 80, 85, 94]
+    c05. ]0.40-0.80] : [49]
+    c06. ]0.50-0.70] : [14, 20, 45]
+    c07. ]0.40-0.70] : [43]
+    c08. ]0.50-0.60] : [3, 9, 21, 23, 27, 35, 37, 38, 50, 54, 55,
+                        60, 72, 73, 74, 78, 82, 88, 92, 97]
+    c09. ]0.30-0.70] : [70]
+    c10. ]0.40-0.60] : [24]
+    c11. ]0.20-0.70] : [6]
+    c12. ]0.30-0.60] : [33]
+    c13. ]0.40-0.50] : [7, 8, 15, 25, 30, 32, 44, 48, 52, 57,
+                        58, 61, 64, 71, 77, 81, 84, 89, 91, 98]
+    c14. ]0.20-0.60] : [1]
+    c15. ]0.30-0.50] : [2, 17, 62, 93]
+    c16. ]0.30-0.40] : [5, 18, 22, 26, 28, 29, 31, 34, 47, 51,
+                        76, 83, 90, 95]
+    c17. ]0.20-0.40] : [63, 96]
+    c18. ]0.20-0.30] : [11, 12, 40, 53, 59, 65, 75, 99]
+    c19. ]0.10-0.30] : [10]
+    c20. ]0.10-0.20] : [4]
 
-The best decile (]80%-90%]) gathers decision alternatives *49*, *10*, and *52*. Worst decile (]10%-20%]) gathers alternatives *9*, *59*, and *23* (see :numref:`quantilesDecomposition` Lines 3 and 24).
+The best deciles class (]70%-90%]) gathers decision alternatives *46*, *67*, and *100*. Worst decile (]10%-20%]) gathers alternative *4* (see :numref:`quantilesDecomposition` Lines 3 and 25).
 
-Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the *Copeland* and the *NetFlows* rules. The eventually obtained linear ordering (from the worst to best) is the following.
+Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the *Copeland* and the *NetFlows* rules. The eventually obtained linear ordering (from the worst to best) is stored in a *bg.boostedOrder* attribute. A reversed linear ranking (from the best to the worst) is stored in a *bg.boostedRanking* attribute.
   
 .. code-block:: pycon
    :name: boostedOrder
-   :caption: Showing the componentwise *Copeland* ranking
+   :caption: Showing the componentwise *NetFlows* ranking
    :linenos:
 
    >>> bg.boostedOrder
-    [59, 9, 23, 17, 11, 98, 26, 81, 40, 64, 3, 74,
-    28, 53, 24, 58, 65, 62, 46, 20, 93, 89, 97, 61,
-    99, 6, 36, 43, 4, 50, 39, 92, 94, 60, 14, 76, 63,
-    51, 56, 34, 5, 54, 27, 78, 15, 29, 31, 83, 32, 0,
-    48, 47, 42, 16, 1, 66, 72, 71, 38, 57, 33, 73, 88,
-    85, 82, 22, 96, 91, 67, 87, 13, 77, 25, 69, 19, 21,
-    95, 35, 80, 37, 7, 12, 68, 2, 90, 55, 30, 75, 8, 44,
-    41, 70, 79, 86, 84, 18, 45, 49, 10, 52]
+    [4, 10, 12, 53, 11, 99, 75, 65, 40, 59, 96, 63, 5, 34,
+     51, 95, 76, 22, 29, 18, 31, 47, 90, 28, 26, 83, 17, 62,
+     93, 2, 1, 8, 44, 84, 64, 91, 81, 71, 57, 61, 98, 32, 7,
+     52, 77, 89, 30, 48, 15, 25, 58, 33, 6, 24, 70, 72, 73,
+     60, 37, 27, 3, 82, 88, 38, 9, 35, 78, 74, 21, 54, 97,
+     23, 92, 50, 55, 43, 20, 45, 14, 49, 41, 68, 36, 80, 69,
+     85, 94, 13, 39, 19, 66, 42, 56, 86, 87, 79, 16, 46, 67,
+     100]
 
-Alternative *52* appears *first ranked*, whereas alternative *59* is *last ranked*. The quality of this ranking result may be assessed by computing its ordinal correlation with the corresponding standard outranking relation.
+Alternative *100* appears *first ranked*, whereas alternative *4* is *last ranked* (see :numref:`boostedOrder` Lines 9 and 2). The quality of this ranking result may be assessed by first, computing its ordinal correlation with the corresponding standard outranking relation; And, secondly, by showing the fairness of the ranking consensus.  
 
 .. code-block:: pycon
    :name: preRankedDigrapgCorrelationIndexes
-   :caption: Quality of *Copeland*'s ranking rule for pre-ranked digraphs 
+   :caption: Quality of the componentwise *NetFlows*'s ranking result
 
-   >>> g = BipolarOutrankingDigraph(tp,Normalized=True,Threading=True)
+   >>> g = BipolarOutrankingDigraph(tp,Normalized=True)
    >>> corr = g.computeOrderCorrelation(bg.boostedOrder)
    >>> g.showCorrelation(corr)
     Correlation indexes:
-     Extended Kendall tau       : +0.749
-     Epistemic determination    :  0.417
-     Bipolar-valued equivalence : +0.312
+     Extended Kendall tau       : +0.685
+     Epistemic determination    :  0.344
+     Bipolar-valued equivalence : +0.235
+   >>> g.showRankingConsensusQuality(bg.boostedRanking)
+    criterion (weight): correlation
+    -------------------------------
+     c1 (0.167): +0.238
+     c3 (0.167): +0.227
+     b2 (0.125): +0.221
+     b4 (0.125): +0.181
+     c2 (0.167): +0.160
+     b1 (0.125): +0.145
+     b3 (0.125): +0.139
+    Summary:
+     Weighted mean marginal correlation (a): +0.190
+     Standard deviation (b)                : +0.039
+     Ranking fairness (a)-(b)              : +0.152
 
-The Copeland as well as the NetFlows ranking heuristics are readily scalable with ad hoc HPC tuning to several millions of decision alternatives (see [BIS-2016]_).
+The *NetFlows* as well as the *Copeland* ranking heuristics are readily scalable with ad hoc HPC tuning to several millions of decision alternatives (see [BIS-2016]_).
 
 Back to :ref:`Content Table <Tutorial-label>`
 
