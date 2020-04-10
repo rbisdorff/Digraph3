@@ -2665,11 +2665,11 @@ As the relation :math:`<` is the dual of :math:`\geqslant` (:math:`\not\geqslant
 
 Upper-closed categories (in a more mathematical integration style) may as well be be considered. In this case it is sufficient to check that :math:`m_k \not\geqslant x` as well as :math:`M_k \geq x` are true for *x* to be considered a member of category *K*. It is worthwhile noticing that a category *K* such that :math:`m_k = M_k` is hence always empty by definition. In order to be able to properly sort over the complete range of values to be sorted, we will need to use a special, two-sided closed last, respectively first, category.
 
-Let :math:`K = {K_1 , ..., K_q}` be a non trivial partition of the criterion’s performance measurement scale into :math:`c \geq 2` ordered categories :math:`K_k` – i.e. lower-closed intervals :math:`[m_k ; M_k[` – such that :math:`m_k < M_k`, :math:`M_k = m_{k+1}` for *k* = 0, ..., *q* - 1 and :math:`M_c = \infty`. And, let :math:`A=\{a_1 , a_2 , a_3 , ...\}` be a finite set of not all equal performance measures observed on the scale in question.
+Let :math:`K = {K_1 , ..., K_q}` be a non trivial partition of the criterion’s performance measurement scale into :math:`q \geq 2` ordered categories :math:`K_k` – i.e. lower-closed intervals :math:`[m_k ; M_k[` – such that :math:`m_k < M_k`, :math:`M_k = m_{k+1}` for *k* = 0, ..., *q* - 1 and :math:`M_q = \infty`. And, let :math:`A=\{a_1 , a_2 , a_3 , ...\}` be a finite set of not all equal performance measures observed on the scale in question.
 
 **Property**: For all performance measure :math:`x \in A` there exists now a unique *k* such that :math:`x \in K_k`. If we assimilate, like in descriptive statistics, all the measures gathered in a category :math:`K_k` to the central value of the category – i.e. :math:`(m_k + M_k)/2` – the sorting result will hence define a weak order (complete preorder) on A.
 
-Let :math:`Q=\{Q_0 , Q_1 , ..., Q_q\}` denote the set of *q* + 1 increasing order-statistical quantiles –like quartiles or deciles– we may compute from the ordered set *A* of performance measures observed on a performance scale. If :math:`Q_0 = \min(X)`, we may, with the following intervals: :math:`[Q_0 ; Q_1 [`, :math:`[Q_1 ; Q_2 [`, ..., :math:`[Q_{q-1}; \infty[`, hence define a set of *q* lower-clased sorting categories. And, in the case of upper-closed categories, if :math:`Q_q = \max(X)`, we would obtain the intervals :math:`] -\infty; Q_1]`, :math:`]Q_1 ; Q_2]`, ..., :math:`]Q_{q-1} ; Q_c]`. The corresponding sorting of *A* will result, in both cases, in a repartition of all measures *x* into the *c* quantile categories :math:`K_k` for *k* = 1, ..., *q*.
+Let :math:`Q=\{Q_0 , Q_1 , ..., Q_q\}` denote the set of *q* + 1 increasing order-statistical quantiles –like quartiles or deciles– we may compute from the ordered set *A* of performance measures observed on a performance scale. If :math:`Q_0 = \min(X)`, we may, with the following intervals: :math:`[Q_0 ; Q_1 [`, :math:`[Q_1 ; Q_2 [`, ..., :math:`[Q_{q-1}; \infty[`, hence define a set of *q* lower-clased sorting categories. And, in the case of upper-closed categories, if :math:`Q_q = \max(X)`, we would obtain the intervals :math:`] -\infty; Q_1]`, :math:`]Q_1 ; Q_2]`, ..., :math:`]Q_{q-1} ; Q_q]`. The corresponding sorting of *A* will result, in both cases, in a repartition of all measures *x* into the *c* quantile categories :math:`K_k` for *k* = 1, ..., *q*.
 
 **Example**: Let *A* = { :math:`a_7 = 7.03`, :math:`a_{15}=9.45`, :math:`a_{11}= 20.35`, :math:`a_{16}= 25.94`, :math:`a_{10}= 31.44`, :math:`a_9= 34.48`, :math:`a_{12}= 34.50`, :math:`a_{13}= 35.61`, :math:`a_{14}= 36.54`, :math:`a_{19}= 42.83`, :math:`a_5= 50.04`, :math:`a_2= 59.85`, :math:`a_{17}= 61.35`, :math:`a_{18}= 61.61`, :math:`a_3= 76.91`, :math:`a_6= 91.39`, :math:`a_1= 91.79`, :math:`a_4= 96.52`, :math:`a_8= 96.56`, :math:`a_{20}= 98.42` } be a set of 20 increasing performance measures observed on a given criterion. The lower-closed category limits we obtain with quartiles (*q* = 4) are: :math:`Q_0 = 7.03` = :math:`a_7`, :math:`Q_1= 34.485`, :math:`Q_2= 54.945` (median performance), and :math:`Q_3= 91.69`. And the sorting into these four categories defines on *A* a complete preorder with the following four equivalence classes: :math:`K_1=\{a_7,a_{10},a_{11},a_{10},a_{15},a_{16}\}`, :math:`K_2=\{a_5,a_9,a_{13},a_{14},a_{19}\}`, :math:`K_3=\{a_2,a_3,a_6,a_{17},a_{18}\}`, and :math:`K_4=\{a_1,a_4,a_8,a_{20}\}`.
 
@@ -2682,11 +2682,11 @@ Suppose furthermore that we want to sort the decision alternatives into *q* uppe
 
 The upperclosed :math:`\mathbf{q}^k` class corresponds to the *m* quantile intervals :math:`]q_j(p_{k-1});q_j(p_k)]` observed on each criterion *j*, and for *k* = 2, ..., *q* with :math:`q_j(p_q)=\max_X(x_j)` and the first class gathers all performances below or equal to :math:`Q_j(p_1)`.
 
-The lowerclosed :math:`\mathbf{q}_k` class corresponds to the $m$ quantile intervals :math:`[q_j(p_{k-1});q_j(p_k)[` observed on each criterion *j*, and for *k* = 1, ..., *q*-1 with :math:`q_j(p_0)=\min_X(x_j)` and the last class gathers all performances above or equal to :math:`Q_j(p_{q-1})`.
+The lowerclosed :math:`\mathbf{q}_k` class corresponds to the *m* quantile intervals :math:`[q_j(p_{k-1});q_j(p_k)[` observed on each criterion *j*, and for *k* = 1, ..., *q*-1 with :math:`q_j(p_0)=\min_X(x_j)` and the last class gathers all performances above or equal to :math:`Q_j(p_{q-1})`.
 
 We call **q-tiles** a complete series of *k* = 1, ..., *q* upper-closed :math:`\mathbf{q}^k`, respectively lower-closed :math:`\mathbf{q}_k`, multiple criteria quantile classes.
 
-**Property**: With the help of the bipolar-valued characteristic of the outranking relation :math:`r(\succsim)` we may compute the bipolar-valued characteristic of the assertion: *x* belongs tu upper-closed *q*-tiles class :math:`\mathbf{q}^k` class, resp. lower-closed class :math:`\mathbf{q}_k`, as follows.
+**Property**: With the help of the bipolar-valued characteristic of the outranking relation :math:`r(\succsim)` we may compute the bipolar-valued characteristic of the assertion: *x* belongs to upper-closed *q*-tiles class :math:`\mathbf{q}^k` class, resp. lower-closed class :math:`\mathbf{q}_k`, as follows.
 
    :math:`r(x \in \mathbf{q}^k) \; = \; \min \big[ -r\big(\mathbf{q}(p_{q-1}\big) \succsim x), \,r\big(\mathbf{q}(p_{q}\big) \succsim x)\big]`
 
@@ -2848,7 +2848,7 @@ In the coding example in :numref:`PreRankedOutrankingDigraph`, we generate for i
     Decomposing       : 0.06890
     Ordering          : 0.00603
 
-The total run time of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankingDigraph` constructor is about 0.14 sec (see :numref:`` Line 23). The deciles sorting, preordering and decomposing leads to 20 linearly ordered quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows.
+The total run time of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankingDigraph` constructor is about 0.14 sec (see :numref:`PreRankedOutrankingDigraph` Line 23). The deciles sorting, preordering and decomposing leads to 20 linearly ordered quantiles equivalence classes. The corresponding pre-ranked decomposition may be visualized as follows.
 
 .. code-block:: pycon
    :name: quantilesDecomposition
