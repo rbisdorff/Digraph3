@@ -2682,9 +2682,9 @@ Let us now suppose that we are given a performance tableau with a set *X* of *n*
 
 Suppose furthermore that we want to sort the decision alternatives into *q* upper-closed quantile equivalence classes. We therefore consider a series : :math:`k = k/q` for *k* = 0, ..., *q* of *q+1* equally spaced quantiles, like quartiles: 0, 0.25, 0.5, 0.75, 1; quintiles: 0, 0.2, 0.4, 0.6, 0.8, 1: or deciles: 0, 0.1, 0.2, ..., 0.9, 1, for instance.
 
-The upper-closed :math:`\mathbf{q}^k` class corresponds to the *m* quantile intervals :math:`]q_j(p_{k-1});q_j(p_k)]` observed on each criterion *j*,  where *k* = 2, ..., *q* , :math:`q_j(p_q)\,=\,\max_X(x_j)`, and the first class gathers all performances below or equal to :math:`Q_j(p_1)`.
+The upper-closed :math:`\mathbf{q}^k` class corresponds to the *m* quantile intervals :math:`]q_j(p_{k-1});q_j(p_k)]` observed on each criterion *j*,  where *k* = 2, ..., *q* , :math:`q_j(p_q) \, = \, \max_X(x_j)`, and the first class gathers all performances below or equal to :math:`Q_j(p_1)`.
 
-The lower-closed :math:`\mathbf{q}_k` class corresponds to the *m* quantile intervals :math:`[q_j(p_{k-1});q_j(p_k)[` observed on each criterion *j*, where *k* = 1, ..., *q*-1, :math:`q_j(p_0)\,=\,\min_X(x_j)`, and the last class gathers all performances above or equal to :math:`Q_j(p_{q-1})`.
+The lower-closed :math:`\mathbf{q}_k` class corresponds to the *m* quantile intervals :math:`[q_j(p_{k-1});q_j(p_k)[` observed on each criterion *j*, where *k* = 1, ..., *q*-1, :math:`q_j(p_0) \, =\, \min_X(x_j)`, and the last class gathers all performances above or equal to :math:`Q_j(p_{q-1})`.
 
 We call **q-tiles** a complete series of *k* = 1, ..., *q* upper-closed :math:`\mathbf{q}^k`, respectively lower-closed :math:`\mathbf{q}_k`, multiple criteria quantile classes.
 
