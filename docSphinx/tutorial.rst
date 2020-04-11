@@ -2651,7 +2651,7 @@ Rating with multiple incommensurable criteria
 	:depth: 2
 	:local:
 
-We apply order statistics for sorting a set *X* of *n* potential deicison actions, evaluated on *m* incommensurable performance criteria, into *q* quantile equivalence classes, based on pairwise outranking characteristics involving the quantile class limits observed on each criterion. Thus we may implement a weak ordering algorithm of complexity *O(nmq)*.
+We apply order statistics for sorting a set *X* of *n* potential decision actions, evaluated on *m* incommensurable performance criteria, into *q* quantile equivalence classes, based on pairwise outranking characteristics involving the quantile class limits observed on each criterion. Thus we may implement a weak ordering algorithm of complexity *O(nmq)*.
 
 
 K-sorting on a single criterion
@@ -2671,7 +2671,7 @@ Let :math:`K = {K_1 , ..., K_q}` be a non trivial partition of the criterion’s
 
 **Property**: For all performance measure :math:`x \in A` there exists now a unique *k* such that :math:`x \in K_k`. If we assimilate, like in descriptive statistics, all the measures gathered in a category :math:`K_k` to the central value of the category – i.e. :math:`(m_k + M_k)/2` – the sorting result will hence define a weak order (complete preorder) on A.
 
-Let :math:`Q=\{Q_0 , Q_1 , ..., Q_q\}` denote the set of *q* + 1 increasing order-statistical quantiles –like quartiles or deciles– we may compute from the ordered set *A* of performance measures observed on a performance scale. If :math:`Q_0 = \min(X)`, we may, with the following intervals: :math:`[Q_0 ; Q_1 [`, :math:`[Q_1 ; Q_2 [`, ..., :math:`[Q_{q-1}; \infty[`, hence define a set of *q* lower-clased sorting categories. And, in the case of upper-closed categories, if :math:`Q_q = \max(X)`, we would obtain the intervals :math:`] -\infty; Q_1]`, :math:`]Q_1 ; Q_2]`, ..., :math:`]Q_{q-1} ; Q_q]`. The corresponding sorting of *A* will result, in both cases, in a repartition of all measures *x* into the *q* quantile categories :math:`K_k` for *k* = 1, ..., *q*.
+Let :math:`Q=\{Q_0 , Q_1 , ..., Q_q\}` denote the set of *q* + 1 increasing order-statistical quantiles –like quartiles or deciles– we may compute from the ordered set *A* of performance measures observed on a performance scale. If :math:`Q_0 = \min(X)`, we may, with the following intervals: :math:`[Q_0 ; Q_1 [`, :math:`[Q_1 ; Q_2 [`, ..., :math:`[Q_{q-1}; \infty[`, hence define a set of *q* lower-closed sorting categories. And, in the case of upper-closed categories, if :math:`Q_q = \max(X)`, we would obtain the intervals :math:`] -\infty; Q_1]`, :math:`]Q_1 ; Q_2]`, ..., :math:`]Q_{q-1} ; Q_q]`. The corresponding sorting of *A* will result, in both cases, in a repartition of all measures *x* into the *q* quantile categories :math:`K_k` for *k* = 1, ..., *q*.
 
 **Example**: Let *A* = { :math:`a_7 = 7.03`, :math:`a_{15}=9.45`, :math:`a_{11}= 20.35`, :math:`a_{16}= 25.94`, :math:`a_{10}= 31.44`, :math:`a_9= 34.48`, :math:`a_{12}= 34.50`, :math:`a_{13}= 35.61`, :math:`a_{14}= 36.54`, :math:`a_{19}= 42.83`, :math:`a_5= 50.04`, :math:`a_2= 59.85`, :math:`a_{17}= 61.35`, :math:`a_{18}= 61.61`, :math:`a_3= 76.91`, :math:`a_6= 91.39`, :math:`a_1= 91.79`, :math:`a_4= 96.52`, :math:`a_8= 96.56`, :math:`a_{20}= 98.42` } be a set of 20 increasing performance measures observed on a given criterion. The lower-closed category limits we obtain with quartiles (*q* = 4) are: :math:`Q_0 = 7.03` = :math:`a_7`, :math:`Q_1= 34.485`, :math:`Q_2= 54.945` (median performance), and :math:`Q_3= 91.69`. And the sorting into these four categories defines on *A* a complete preorder with the following four equivalence classes: :math:`K_1=\{a_7,a_{10},a_{11},a_{10},a_{15},a_{16}\}`, :math:`K_2=\{a_5,a_9,a_{13},a_{14},a_{19}\}`, :math:`K_3=\{a_2,a_3,a_6,a_{17},a_{18}\}`, and :math:`K_4=\{a_1,a_4,a_8,a_{20}\}`.
 
@@ -2680,11 +2680,11 @@ Quantiles sorting with multiple criteria
 
 Let us now suppose that we are given a performance tableau with a set *X* of *n* decision alternatives evaluated on a coherent family of *m* performance criteria associated with the corresponding outranking relation :math:`\succsim` defined on *X*. We denote :math:`x_j` the performance of alternative *x* observed on criterion *j*.
 
-Suppose furthermore that we want to sort the decision alternatives into *q* upperclosed quantile equivalence classe. We therefore consider a series : :math:`k = k/q` for *k* = 0, ..., *q* of *q+1* equally spaced quantiles, like quartiles: 0, 0.25, 0.5, 0.75, 1; quintiles: 0, 0.2, 0.4, 0.6, 0.8, 1: or deciles: 0, 0.1, 0.2, ..., 0.9, 1, for instance.
+Suppose furthermore that we want to sort the decision alternatives into *q* upper-closed quantile equivalence classes. We therefore consider a series : :math:`k = k/q` for *k* = 0, ..., *q* of *q+1* equally spaced quantiles, like quartiles: 0, 0.25, 0.5, 0.75, 1; quintiles: 0, 0.2, 0.4, 0.6, 0.8, 1: or deciles: 0, 0.1, 0.2, ..., 0.9, 1, for instance.
 
-The upperclosed :math:`\mathbf{q}^k` class corresponds to the *m* quantile intervals :math:`]q_j(p_{k-1});q_j(p_k)]` observed on each criterion *j*,  where *k* = 2, ..., *q* , :math:`q_j(p_q)\,=\,\max_X(x_j)`, and the first class gathers all performances below or equal to :math:`Q_j(p_1)`.
+The upper-closed :math:`\mathbf{q}^k` class corresponds to the *m* quantile intervals :math:`]q_j(p_{k-1});q_j(p_k)]` observed on each criterion *j*,  where *k* = 2, ..., *q* , :math:`q_j(p_q)\,=\,\max_X(x_j)`, and the first class gathers all performances below or equal to :math:`Q_j(p_1)`.
 
-The lowerclosed :math:`\mathbf{q}_k` class corresponds to the *m* quantile intervals :math:`[q_j(p_{k-1});q_j(p_k)[` observed on each criterion *j*, where *k* = 1, ..., *q*-1, :math:`q_j(p_0)\,=\,\min_X(x_j)`, and the last class gathers all performances above or equal to :math:`Q_j(p_{q-1})`.
+The lower-closed :math:`\mathbf{q}_k` class corresponds to the *m* quantile intervals :math:`[q_j(p_{k-1});q_j(p_k)[` observed on each criterion *j*, where *k* = 1, ..., *q*-1, :math:`q_j(p_0)\,=\,\min_X(x_j)`, and the last class gathers all performances above or equal to :math:`Q_j(p_{q-1})`.
 
 We call **q-tiles** a complete series of *k* = 1, ..., *q* upper-closed :math:`\mathbf{q}^k`, respectively lower-closed :math:`\mathbf{q}_k`, multiple criteria quantile classes.
 
@@ -2696,7 +2696,7 @@ We call **q-tiles** a complete series of *k* = 1, ..., *q* upper-closed :math:`\
 
 The outranking relation :math:`\succsim` verifying the coduality principle, :math:`-r\big(\mathbf{q}(p_{q-1}) \succsim x\big) \,=\, r\big(\mathbf{q}(p_{q-1}) \prec x\big)`, resp. :math:`-r\big(x \succsim \mathbf{q}(p_{q}) \,=\, r\big(x \prec \mathbf{q}(p_{q}\big)`.
 
-We may compute, for instance, a quintiling of a given random performance tableau with the help of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
+We may compute, for instance, a five-tiling of a given random performance tableau with the help of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
 
 .. code-block:: pycon
    :name: quantilesSorting
