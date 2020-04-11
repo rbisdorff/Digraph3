@@ -51,11 +51,11 @@
 \contentsline {subsection}{\numberline {7.1}K\sphinxhyphen {}sorting on a single criterion}{76}{subsection.7.1}
 \contentsline {subsection}{\numberline {7.2}Quantiles sorting with multiple criteria}{77}{subsection.7.2}
 \contentsline {subsection}{\numberline {7.3}Ranking big performance tableaux}{81}{subsection.7.3}
-\contentsline {section}{\numberline {8}HPC ranking with big outranking digraphs}{83}{section.8}
+\contentsline {section}{\numberline {8}HPC ranking with big outranking digraphs}{84}{section.8}
 \contentsline {subsection}{\numberline {8.1}C\sphinxhyphen {}compiled Python modules}{84}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}Big Data performance tableaux}{84}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.2}Big Data performance tableaux}{85}{subsection.8.2}
 \contentsline {subsection}{\numberline {8.3}C\sphinxhyphen {}implemented integer\sphinxhyphen {}valued outranking digraphs}{86}{subsection.8.3}
-\contentsline {subsection}{\numberline {8.4}The sparse outranking digraph implementation}{87}{subsection.8.4}
+\contentsline {subsection}{\numberline {8.4}The sparse outranking digraph implementation}{88}{subsection.8.4}
 \contentsline {subsection}{\numberline {8.5}Ranking big sets of decision alternatives}{92}{subsection.8.5}
 \contentsline {subsection}{\numberline {8.6}HPC quantiles ranking records}{94}{subsection.8.6}
 \contentsline {section}{\numberline {9}Computing a best choice recommendation}{100}{section.9}

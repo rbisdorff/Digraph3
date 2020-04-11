@@ -392,7 +392,10 @@ class SortingDigraph(BipolarOutrankingDigraph):
         String += '# Categories        : %d\n' % len(self.categories)
         String += 'Lowerclosed         : %s\n' % str(self.criteriaCategoryLimits['LowerClosed'])
         String += 'Size                : %d\n' % self.computeSize()
-        String += 'Determinateness     : %.3f\n' % self.computeDeterminateness()
+        String += 'Valuation domain    : [%.2f;%.2f]\n'\
+                      % (self.valuationdomain['min'],self.valuationdomain['max'])
+        String += 'Determinateness (%%) : %.2f\n' % self.computeDeterminateness(InPercents=True)
+        String += 'Attributes          : %s\n' % list(self.__dict__.keys())
         String += '*------  Constructor run times (in sec.) ------*\n'
         try:
             String += '# Threads        : %d\n' % self.nbrThreads
@@ -2047,6 +2050,54 @@ class QuantilesSortingDigraph(SortingDigraph):
                     self.sorting = sorting
                 if WithSortingRelation:
                     return relation
+
+    def showCriteriaCategoryLimits(self,ByCriterion=False):
+        """
+        Shows category minimum and maximum limits for each criterion.
+        """
+        catLimits = self.criteriaCategoryLimits
+        try:
+            LowerClosed = catLimits['LowerClosed']
+        except:
+            LowerClosed = True
+        criteria = self.criteria
+        categories = self.categories
+        print('Quantile Class Limits (q = %d)' % len(self.categories))
+        if LowerClosed:
+            print('Lower-closed classes')
+        else:
+            print('Upper-closed classes')
+        
+        if ByCriterion:
+            for g in criteria:
+                print(g)
+                catg = catLimits[g]
+                for c in categories:
+                    nc = categories[c]['order']
+                    #print(nc,catg[nc])
+                    if LowerClosed:
+                        print('\t%.2f [%.2f; %.2f[' % (categories[c]['quantile'], catg[nc-1], catg[nc]) )
+                    else:
+                        print('\t%.2f ]%.2f; %.2f]' % (categories[c]['quantile'], catg[nc-1], catg[nc]) )
+        else:
+            nc = len(categories)
+            print('crit.', end='\t ')
+            for c in categories:
+                print('%.2f' % (categories[c]['quantile']), end='\t ')
+            print('\n*----------------------------------------------')
+            for g in criteria:
+                print(g, end='\t ')
+                catg = catLimits[g]
+                for c in range(1,nc+1):
+                    if LowerClosed:
+                        print('%.2f' % (catg[c-1]), end='\t ')
+                    else:
+                        print('%.2f' % (catg[c]), end='\t ')
+                print()
+
+                        
+                    
+
 
     def showActionCategories(self,action,Debug=False,Comments=True,\
                              Threading=False,nbrOfCPUs=None):
@@ -4362,14 +4413,15 @@ if __name__ == "__main__":
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
                                     numberOfCriteria=nbrCrit,seed=seed)
 
-    qs = QuantilesSortingDigraph(tp,7,LowerClosed=True)
-    #qs.showSorting()
-    print('==>> average')
-    qs.showHTMLQuantileOrdering(strategy='average')
-    print('==>> optimistic')
-    qs.showQuantileOrdering(strategy='optimistic')
-    print('==>> pessimistic')
-    qs.showQuantileOrdering(strategy='pessimistic')
+    qs = QuantilesSortingDigraph(tp,4,LowerClosed=False)
+    qs.showCriteriaCategoryLimits()
+##    #qs.showSorting()
+##    print('==>> average')
+##    qs.showHTMLQuantileOrdering(strategy='average')
+##    print('==>> optimistic')
+##    qs.showQuantileOrdering(strategy='optimistic')
+##    print('==>> pessimistic')
+##    qs.showQuantileOrdering(strategy='pessimistic')
 ##    pq = PerformanceQuantiles(tp,20,LowerClosed=True,Debug=False)
 ##    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
 ##    newActions = tpg.randomActions(100)

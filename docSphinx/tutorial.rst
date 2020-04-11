@@ -2640,6 +2640,8 @@ Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* ver
 
 Besides of not providing a unique linear ranking, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are unfortunately *not scalable* to outranking digraphs of larger orders (> 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland*, the *NetFlows* ranking-by-scoring rules, with a polynomial complexity of :math:`O(n^2)`, where *n* is the order of the outranking digraph, remain in fact computationally tractable.
 
+Back to :ref:`Content Table <Tutorial-label>`
+
 .. _QuantilesRating-Tutorial-label:
 
 Rating with multiple incommensurable criteria
@@ -2680,9 +2682,9 @@ Let us now suppose that we are given a performance tableau with a set *X* of *n*
 
 Suppose furthermore that we want to sort the decision alternatives into *q* upperclosed quantile equivalence classe. We therefore consider a series : :math:`k = k/q` for *k* = 0, ..., *q* of *q+1* equally spaced quantiles, like quartiles: 0, 0.25, 0.5, 0.75, 1; quintiles: 0, 0.2, 0.4, 0.6, 0.8, 1: or deciles: 0, 0.1, 0.2, ..., 0.9, 1, for instance.
 
-The upperclosed :math:`\mathbf{q}^k` class corresponds to the *m* quantile intervals :math:`]q_j(p_{k-1});q_j(p_k)]` observed on each criterion *j*, and for *k* = 2, ..., *q* with :math:`q_j(p_q)=\max_X(x_j)` and the first class gathers all performances below or equal to :math:`Q_j(p_1)`.
+The upperclosed :math:`\mathbf{q}^k` class corresponds to the *m* quantile intervals :math:`]q_j(p_{k-1});q_j(p_k)]` observed on each criterion *j*,  where *k* = 2, ..., *q* , :math:`q_j(p_q)\,=\,\max_X(x_j)`, and the first class gathers all performances below or equal to :math:`Q_j(p_1)`.
 
-The lowerclosed :math:`\mathbf{q}_k` class corresponds to the *m* quantile intervals :math:`[q_j(p_{k-1});q_j(p_k)[` observed on each criterion *j*, and for *k* = 1, ..., *q*-1 with :math:`q_j(p_0)=\min_X(x_j)` and the last class gathers all performances above or equal to :math:`Q_j(p_{q-1})`.
+The lowerclosed :math:`\mathbf{q}_k` class corresponds to the *m* quantile intervals :math:`[q_j(p_{k-1});q_j(p_k)[` observed on each criterion *j*, where *k* = 1, ..., *q*-1, :math:`q_j(p_0)\,=\,\min_X(x_j)`, and the last class gathers all performances above or equal to :math:`Q_j(p_{q-1})`.
 
 We call **q-tiles** a complete series of *k* = 1, ..., *q* upper-closed :math:`\mathbf{q}^k`, respectively lower-closed :math:`\mathbf{q}_k`, multiple criteria quantile classes.
 
@@ -2702,7 +2704,7 @@ We may compute, for instance, a quintiling of a given random performance tableau
    :linenos:
 
    >>> from randomPerfTabs import *
-   >>> t = RandomPerformanceTableau(numberOfActions=50,seed =5)
+   >>> t = RandomPerformanceTableau(numberOfActions=50,seed=5)
    >>> from sortingDigraphs import QuantilesSortingDigraph
    >>> qs = QuantilesSortingDigraph(t,limitingQuantiles=5)
    >>> qs
@@ -2714,7 +2716,15 @@ We may compute, for instance, a quintiling of a given random performance tableau
      # Categories    : 5
      Lowerclosed     : False
      Size            : 841
-     Determinateness : 62.776
+     Valuation domain  : [-100.00;100.00]
+     Determinateness (%) : 81.39
+     Attributes          : ['actions', 'actionsOrig',
+          'criteria', 'evaluation', 'runTimes', 'name',
+	  'limitingQuantiles', 'LowerClosed',
+	  'categories', 'criteriaCategoryLimits',
+	  'profiles', 'profileLimits', 'hasNoVeto',
+	  'valuationdomain', 'nbrThreads', 'relation',
+	  'categoryContent', 'order', 'gamma', 'notGamma']
     *------  Constructor run times (in sec.) ------*
      # Threads        : 1
      Total time       : 0.02386
@@ -2738,11 +2748,8 @@ We may compute, for instance, a quintiling of a given random performance tableau
 		     'a45', 'a49']
      ]   < - 0.20]: ['a44']
 
-Quantiles sorting results always verfy the following **Properties**.
 
-   #. **Coherence**: Each object is sorted into a non-empty subset of *adjacent* q-tiles classes. Alternative *a22* is, for instance, solely sorted into the highest quintile class :math:`]0.80 - 1.00]`, whereas alternative *a44* is sorted into the first and the second quintile class :math:`]< - 0.40]` (see :numref:`quantilesSorting` Lines 24 and 34-36). An alternative that would *miss* evaluations on all the criteria will be sorted conjointly in all q-tiled classes. 
-   #. **Uniqueness**: If :math:`r(x \in \mathbf{q}^k) \neq 0`  for *k* = 1, ..., *q*, then performance *x* is sorted into *exactly one single* q-tiled class. 
-   #. **Separability**: Computing the sorting result for performance *x* is independent from the computing of the other performances’ sorting results. This property gives access to efficient parallel processing of class membership characteristics.
+We may inspect the sorting characteristics as follows.
 
 .. code-block:: pycon
    :name: sortingCharacteristics
@@ -2775,7 +2782,13 @@ Quantiles sorting results always verfy the following **Properties**.
     a49 in ]0.80 - 1.00]   -57.14	 85.71	     -57.14
 
 
-Alternative *a22* verifies both conditions for being sorted into a quintiles class only for class [0.80 - 1.00] (see :numref:`sortingCharacteristics` Lines 10). Whereas alternatives *a44* and *a49*, for instance, weakly verify both conditions each one for two, resp. three, adjacent quintiles classes (see Lines 13-14 and 21-23).  
+Alternative *a22* verifies positively both conditions for being sorted into a quintiles class only for class [0.80 - 1.00] (see :numref:`sortingCharacteristics` Lines 10). Whereas alternatives *a44* and *a49*, for instance, weakly verify both conditions each one for two, resp. three, adjacent quintiles classes (see Lines 13-14 and 21-23).  
+
+Quantiles sorting results indeed always verify the following **Properties**.
+
+   #. **Coherence**: Each object is sorted into a non-empty subset of *adjacent* q-tiles classes. Alternative *a22* is, for instance, solely sorted into the highest quintile class :math:`]0.80 - 1.00]`, whereas alternative *a44* is sorted into the first and the second quintile class :math:`]< - 0.40]` (see :numref:`quantilesSorting` Lines 24 and 34-36). An alternative that would *miss* evaluations on all the criteria will be sorted conjointly in all q-tiled classes. 
+   #. **Uniqueness**: If :math:`r(x \in \mathbf{q}^k) \neq 0`  for *k* = 1, ..., *q*, then performance *x* is sorted into *exactly one single* q-tiled class. 
+   #. **Separability**: Computing the sorting result for performance *x* is independent from the computing of the other performances’ sorting results. This property gives access to efficient parallel processing of class membership characteristics.
 
 The q-tiles sorting result leaves us hence with more or less overlapping ordered quantile equivalence classes. For constructing now a linearly ranked q-tiles partition of *X* , we may apply three strategies:
 
@@ -2803,7 +2816,7 @@ The q-tiles sorting result leaves us hence with more or less overlapping ordered
                     'a26', 'a34', 'a38', 'a45']
     ]  < -0.40] : ['a44']
 
-We find confirmed in this weak ranking, following the *average* ranking startegy, that alternative *a49* , for instance, is indeed sorted into three adjacent quintiles classes, namely :math:`]0.20-0.80]` (see :numref:`quantilesOrdering` Line 6) and precedes the :math:`]0.40-0.60]` class, of same average of lower and upper limits.
+We find confirmed in this weak ranking, following the *average* ranking strategy, that alternative *a49* , for instance, is indeed sorted into three adjacent quintiles classes, namely :math:`]0.20-0.80]` (see :numref:`quantilesOrdering` Line 6) and precedes the :math:`]0.40-0.60]` class, of same average of lower and upper limits.
 
 Noticing the computational efficiency of the quantiles sorting construction, coupled with the separability property of the quantile class membership characteristics computation, we will make usage of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class for ranking big performance tableaux.
 

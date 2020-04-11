@@ -2937,6 +2937,8 @@ Similar to \sphinxstyleemphasis{Kohler}’s rule, the \sphinxstyleemphasis{Ranke
 
 Besides of not providing a unique linear ranking, the \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} rules, as well as their dual \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}choosing} rules, are unfortunately \sphinxstyleemphasis{not scalable} to outranking digraphs of larger orders (\textgreater{} 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the \sphinxstyleemphasis{Copeland}, the \sphinxstyleemphasis{NetFlows} ranking\sphinxhyphen{}by\sphinxhyphen{}scoring rules, with a polynomial complexity of \(O(n^2)\), where \sphinxstyleemphasis{n} is the order of the outranking digraph, remain in fact computationally tractable.
 
+Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}}
+
 
 \section{Rating with multiple incommensurable criteria}
 \label{\detokenize{tutorial:rating-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:quantilesrating-tutorial-label}}
@@ -2992,9 +2994,9 @@ Let us now suppose that we are given a performance tableau with a set \sphinxsty
 
 Suppose furthermore that we want to sort the decision alternatives into \sphinxstyleemphasis{q} upperclosed quantile equivalence classe. We therefore consider a series : \(k = k/q\) for \sphinxstyleemphasis{k} = 0, …, \sphinxstyleemphasis{q} of \sphinxstyleemphasis{q+1} equally spaced quantiles, like quartiles: 0, 0.25, 0.5, 0.75, 1; quintiles: 0, 0.2, 0.4, 0.6, 0.8, 1: or deciles: 0, 0.1, 0.2, …, 0.9, 1, for instance.
 
-The upperclosed \(\mathbf{q}^k\) class corresponds to the \sphinxstyleemphasis{m} quantile intervals \(]q_j(p_{k-1});q_j(p_k)]\) observed on each criterion \sphinxstyleemphasis{j}, and for \sphinxstyleemphasis{k} = 2, …, \sphinxstyleemphasis{q} with \(q_j(p_q)=\max_X(x_j)\) and the first class gathers all performances below or equal to \(Q_j(p_1)\).
+The upperclosed \(\mathbf{q}^k\) class corresponds to the \sphinxstyleemphasis{m} quantile intervals \(]q_j(p_{k-1});q_j(p_k)]\) observed on each criterion \sphinxstyleemphasis{j},  where \sphinxstyleemphasis{k} = 2, …, \sphinxstyleemphasis{q} , \(q_j(p_q)\,=\,\max_X(x_j)\), and the first class gathers all performances below or equal to \(Q_j(p_1)\).
 
-The lowerclosed \(\mathbf{q}_k\) class corresponds to the \sphinxstyleemphasis{m} quantile intervals \([q_j(p_{k-1});q_j(p_k)[\) observed on each criterion \sphinxstyleemphasis{j}, and for \sphinxstyleemphasis{k} = 1, …, \sphinxstyleemphasis{q}\sphinxhyphen{}1 with \(q_j(p_0)=\min_X(x_j)\) and the last class gathers all performances above or equal to \(Q_j(p_{q-1})\).
+The lowerclosed \(\mathbf{q}_k\) class corresponds to the \sphinxstyleemphasis{m} quantile intervals \([q_j(p_{k-1});q_j(p_k)[\) observed on each criterion \sphinxstyleemphasis{j}, where \sphinxstyleemphasis{k} = 1, …, \sphinxstyleemphasis{q}\sphinxhyphen{}1, \(q_j(p_0)\,=\,\min_X(x_j)\), and the last class gathers all performances above or equal to \(Q_j(p_{q-1})\).
 
 We call \sphinxstylestrong{q\sphinxhyphen{}tiles} a complete series of \sphinxstyleemphasis{k} = 1, …, \sphinxstyleemphasis{q} upper\sphinxhyphen{}closed \(\mathbf{q}^k\), respectively lower\sphinxhyphen{}closed \(\mathbf{q}_k\), multiple criteria quantile classes.
 
@@ -3013,7 +3015,7 @@ We may compute, for instance, a quintiling of a given random performance tableau
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:quantilessorting}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import} \PYG{o}{*}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{RandomPerformanceTableau}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{,}\PYG{n}{seed} \PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{RandomPerformanceTableau}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{50}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{sortingDigraphs} \PYG{k+kn}{import} \PYG{n}{QuantilesSortingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qs} \PYG{o}{=} \PYG{n}{QuantilesSortingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{limitingQuantiles}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qs}
@@ -3025,7 +3027,15 @@ We may compute, for instance, a quintiling of a given random performance tableau
 \PYG{g+go}{  \PYGZsh{} Categories    : 5}
 \PYG{g+go}{  Lowerclosed     : False}
 \PYG{g+go}{  Size            : 841}
-\PYG{g+go}{  Determinateness : 62.776}
+\PYG{g+go}{  Valuation domain  : [\PYGZhy{}100.00;100.00]}
+\PYG{g+go}{  Determinateness (\PYGZpc{}) : 81.39}
+\PYG{g+go}{  Attributes          : [\PYGZsq{}actions\PYGZsq{}, \PYGZsq{}actionsOrig\PYGZsq{},}
+\PYG{g+go}{       \PYGZsq{}criteria\PYGZsq{}, \PYGZsq{}evaluation\PYGZsq{}, \PYGZsq{}runTimes\PYGZsq{}, \PYGZsq{}name\PYGZsq{},}
+\PYG{g+go}{       \PYGZsq{}limitingQuantiles\PYGZsq{}, \PYGZsq{}LowerClosed\PYGZsq{},}
+\PYG{g+go}{       \PYGZsq{}categories\PYGZsq{}, \PYGZsq{}criteriaCategoryLimits\PYGZsq{},}
+\PYG{g+go}{       \PYGZsq{}profiles\PYGZsq{}, \PYGZsq{}profileLimits\PYGZsq{}, \PYGZsq{}hasNoVeto\PYGZsq{},}
+\PYG{g+go}{       \PYGZsq{}valuationdomain\PYGZsq{}, \PYGZsq{}nbrThreads\PYGZsq{}, \PYGZsq{}relation\PYGZsq{},}
+\PYG{g+go}{       \PYGZsq{}categoryContent\PYGZsq{}, \PYGZsq{}order\PYGZsq{}, \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Constructor run times (in sec.) \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  \PYGZsh{} Threads        : 1}
 \PYG{g+go}{  Total time       : 0.02386}
@@ -3050,19 +3060,7 @@ We may compute, for instance, a quintiling of a given random performance tableau
 \PYG{g+go}{  ]   \PYGZlt{} \PYGZhy{} 0.20]: [\PYGZsq{}a44\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-Quantiles sorting results always verfy the following \sphinxstylestrong{Properties}.
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\item {} 
-\sphinxstylestrong{Coherence}: Each object is sorted into a non\sphinxhyphen{}empty subset of \sphinxstyleemphasis{adjacent} q\sphinxhyphen{}tiles classes. Alternative \sphinxstyleemphasis{a22} is, for instance, solely sorted into the highest quintile class \(]0.80 - 1.00]\), whereas alternative \sphinxstyleemphasis{a44} is sorted into the first and the second quintile class \(]< - 0.40]\) (see \hyperref[\detokenize{tutorial:quantilessorting}]{Listing \ref{\detokenize{tutorial:quantilessorting}}} Lines 24 and 34\sphinxhyphen{}36). An alternative that would \sphinxstyleemphasis{miss} evaluations on all the criteria will be sorted conjointly in all q\sphinxhyphen{}tiled classes.
-
-\item {} 
-\sphinxstylestrong{Uniqueness}: If \(r(x \in \mathbf{q}^k) \neq 0\)  for \sphinxstyleemphasis{k} = 1, …, \sphinxstyleemphasis{q}, then performance \sphinxstyleemphasis{x} is sorted into \sphinxstyleemphasis{exactly one single} q\sphinxhyphen{}tiled class.
-
-\item {} 
-\sphinxstylestrong{Separability}: Computing the sorting result for performance \sphinxstyleemphasis{x} is independent from the computing of the other performances’ sorting results. This property gives access to efficient parallel processing of class membership characteristics.
-
-\end{enumerate}
+We may inspect the sorting characteristics as follows.
 \sphinxSetupCaptionForVerbatim{Bipolar\sphinxhyphen{}valued sorting characteristics (extract)}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:sortingcharacteristics}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -3092,7 +3090,21 @@ Quantiles sorting results always verfy the following \sphinxstylestrong{Properti
 \PYG{g+go}{ a49 in ]0.80 \PYGZhy{} 1.00]   \PYGZhy{}57.14        85.71       \PYGZhy{}57.14}
 \end{sphinxVerbatim}
 
-Alternative \sphinxstyleemphasis{a22} verifies both conditions for being sorted into a quintiles class only for class {[}0.80 \sphinxhyphen{} 1.00{]} (see \hyperref[\detokenize{tutorial:sortingcharacteristics}]{Listing \ref{\detokenize{tutorial:sortingcharacteristics}}} Lines 10). Whereas alternatives \sphinxstyleemphasis{a44} and \sphinxstyleemphasis{a49}, for instance, weakly verify both conditions each one for two, resp. three, adjacent quintiles classes (see Lines 13\sphinxhyphen{}14 and 21\sphinxhyphen{}23).
+Alternative \sphinxstyleemphasis{a22} verifies positively both conditions for being sorted into a quintiles class only for class {[}0.80 \sphinxhyphen{} 1.00{]} (see \hyperref[\detokenize{tutorial:sortingcharacteristics}]{Listing \ref{\detokenize{tutorial:sortingcharacteristics}}} Lines 10). Whereas alternatives \sphinxstyleemphasis{a44} and \sphinxstyleemphasis{a49}, for instance, weakly verify both conditions each one for two, resp. three, adjacent quintiles classes (see Lines 13\sphinxhyphen{}14 and 21\sphinxhyphen{}23).
+
+Quantiles sorting results indeed always verify the following \sphinxstylestrong{Properties}.
+\begin{enumerate}
+\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
+\item {} 
+\sphinxstylestrong{Coherence}: Each object is sorted into a non\sphinxhyphen{}empty subset of \sphinxstyleemphasis{adjacent} q\sphinxhyphen{}tiles classes. Alternative \sphinxstyleemphasis{a22} is, for instance, solely sorted into the highest quintile class \(]0.80 - 1.00]\), whereas alternative \sphinxstyleemphasis{a44} is sorted into the first and the second quintile class \(]< - 0.40]\) (see \hyperref[\detokenize{tutorial:quantilessorting}]{Listing \ref{\detokenize{tutorial:quantilessorting}}} Lines 24 and 34\sphinxhyphen{}36). An alternative that would \sphinxstyleemphasis{miss} evaluations on all the criteria will be sorted conjointly in all q\sphinxhyphen{}tiled classes.
+
+\item {} 
+\sphinxstylestrong{Uniqueness}: If \(r(x \in \mathbf{q}^k) \neq 0\)  for \sphinxstyleemphasis{k} = 1, …, \sphinxstyleemphasis{q}, then performance \sphinxstyleemphasis{x} is sorted into \sphinxstyleemphasis{exactly one single} q\sphinxhyphen{}tiled class.
+
+\item {} 
+\sphinxstylestrong{Separability}: Computing the sorting result for performance \sphinxstyleemphasis{x} is independent from the computing of the other performances’ sorting results. This property gives access to efficient parallel processing of class membership characteristics.
+
+\end{enumerate}
 
 The q\sphinxhyphen{}tiles sorting result leaves us hence with more or less overlapping ordered quantile equivalence classes. For constructing now a linearly ranked q\sphinxhyphen{}tiles partition of \sphinxstyleemphasis{X} , we may apply three strategies:
 \begin{enumerate}
@@ -3126,7 +3138,7 @@ The q\sphinxhyphen{}tiles sorting result leaves us hence with more or less overl
 \PYG{g+go}{ ]  \PYGZlt{} \PYGZhy{}0.40] : [\PYGZsq{}a44\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-We find confirmed in this weak ranking, following the \sphinxstyleemphasis{average} ranking startegy, that alternative \sphinxstyleemphasis{a49} , for instance, is indeed sorted into three adjacent quintiles classes, namely \(]0.20-0.80]\) (see \hyperref[\detokenize{tutorial:quantilesordering}]{Listing \ref{\detokenize{tutorial:quantilesordering}}} Line 6) and precedes the \(]0.40-0.60]\) class, of same average of lower and upper limits.
+We find confirmed in this weak ranking, following the \sphinxstyleemphasis{average} ranking strategy, that alternative \sphinxstyleemphasis{a49} , for instance, is indeed sorted into three adjacent quintiles classes, namely \(]0.20-0.80]\) (see \hyperref[\detokenize{tutorial:quantilesordering}]{Listing \ref{\detokenize{tutorial:quantilesordering}}} Line 6) and precedes the \(]0.40-0.60]\) class, of same average of lower and upper limits.
 
 Noticing the computational efficiency of the quantiles sorting construction, coupled with the separability property of the quantile class membership characteristics computation, we will make usage of the \sphinxcode{\sphinxupquote{sortingDigraphs.QuantilesSortingDigraph}} class for ranking big performance tableaux.
 
