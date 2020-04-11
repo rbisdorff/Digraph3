@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{April 10, 2020}
+\date{April 11, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -2885,12 +2885,12 @@ The iterated \sphinxstyleemphasis{NetFlows} ranking and its \sphinxstyleemphasis
 
 With different \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} and \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}choosing} results, it may be useful to \sphinxstyleemphasis{fuse} now, similar to what we have done before with \sphinxstyleemphasis{Kemeny}’s and \sphinxstyleemphasis{Slaters}’s optimal rankings (see \hyperref[\detokenize{tutorial:kemenyrankingsfusion}]{Listing \ref{\detokenize{tutorial:kemenyrankingsfusion}}} and \hyperref[\detokenize{tutorial:slaterrankingsfusion}]{Listing \ref{\detokenize{tutorial:slaterrankingsfusion}}}), both, the iterated \sphinxstyleemphasis{NetFlows} ranking and ordering into a partial ranking. But we are hence back to the practical problem of what linear ranking should we eventually retain ?
 
-Let us finally mention a Last interesting \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} approach.
+Let us finally mention another interesting \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} approach.
 
 
 \subsection{\sphinxstyleemphasis{Tideman}’s ranked\sphinxhyphen{}pairs rule}
 \label{\detokenize{tutorial:tideman-s-ranked-pairs-rule}}
-A further \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} heuristic, the \sphinxstylestrong{RankedPairs} rule, working best this time on the non strict outranking digraph \sphinxstyleemphasis{g}, is based on a \sphinxstyleemphasis{prudent incremental} construction of linear orders that avoids on the fly any cycling outrankings (see \sphinxcite{tutorial:lam-2009}). The ranking rule may be formulated as follows:
+\sphinxstyleemphasis{Tideman}’s \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} heuristic, the \sphinxstylestrong{RankedPairs} rule, working best this time on the non strict outranking digraph \sphinxstyleemphasis{g}, is based on a \sphinxstyleemphasis{prudent incremental} construction of linear orders that avoids on the fly any cycling outrankings (see \sphinxcite{tutorial:lam-2009}). The ranking rule may be formulated as follows:
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 

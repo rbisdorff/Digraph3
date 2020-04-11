@@ -2596,12 +2596,12 @@ The iterated *NetFlows* ranking and its *dual*, the iterated *NetFlows* ordering
 
 With different *ranking-by-choosing* and *ordering-by-choosing* results, it may be useful to *fuse* now, similar to what we have done before with *Kemeny*'s and *Slaters*'s optimal rankings (see :numref:`KemenyRankingsFusion` and :numref:`SlaterRankingsFusion`), both, the iterated *NetFlows* ranking and ordering into a partial ranking. But we are hence back to the practical problem of what linear ranking should we eventually retain ? 
 
-Let us finally mention a Last interesting *ranking-by-choosing* approach.
+Let us finally mention another interesting *ranking-by-choosing* approach.
 
 *Tideman*'s ranked-pairs rule
 .............................
 
-A further *ranking-by-choosing* heuristic, the **RankedPairs** rule, working best this time on the non strict outranking digraph *g*, is based on a *prudent incremental* construction of linear orders that avoids on the fly any cycling outrankings (see [LAM-2009]_). The ranking rule may be formulated as follows:
+*Tideman*'s *ranking-by-choosing* heuristic, the **RankedPairs** rule, working best this time on the non strict outranking digraph *g*, is based on a *prudent incremental* construction of linear orders that avoids on the fly any cycling outrankings (see [LAM-2009]_). The ranking rule may be formulated as follows:
 
 1. Rank the ordered pairs :math:`(x,y)` of alternatives in decreasing order of the outranking characteristic values :math:`r(x\, \geq \,y)`;
 2. Consider the pairs in that order (ties are resolved by a lexicographic rule):
