@@ -2829,7 +2829,7 @@ The *q-tiles* sorting result leaves us hence with more or less *overlapping* ord
                     'a26', 'a34', 'a38', 'a45']
     ]  < -0.40] : ['a44']
 
-following, for instance, the *average* ranking strategy, we find confirmed in thw weak ranking shown in :numref:`quantilesOrdering`,  that alternative *a49*  is indeed sorted into three adjacent quintiles classes, namely :math:`]0.20-0.80]` (see Line 6) and precedes the :math:`]0.40-0.60]` class, of same average of lower and upper limits.
+following, for instance, the *average* ranking strategy, we find confirmed in the weak ranking shown in :numref:`quantilesOrdering`,  that alternative *a49*  is indeed sorted into three adjacent quintiles classes, namely :math:`]0.20-0.80]` (see Line 6) and precedes the :math:`]0.40-0.60]` class, of same average of lower and upper limits.
 
 Noticing the computational efficiency of the quantiles sorting construction (see :numref:`quantilesSorting` Lines 23-29), coupled with the separability property of the quantile class membership characteristics computation, we will make usage of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class for ranking big performance tableaux.
 
