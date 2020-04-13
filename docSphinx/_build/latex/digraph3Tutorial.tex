@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{April 11, 2020}
+\date{April 13, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -2977,7 +2977,7 @@ A single criterion sorting category \sphinxstyleemphasis{K} is a (usually) lower
 
 As the relation \(<\) is the dual of \(\geqslant\) (\(\not\geqslant\)), it will be sufficient to check that \(x \geqslant m_k\) as well as \(x \not\geqslant M_k\) are true for \sphinxstyleemphasis{x} to be considered a member of category \sphinxstyleemphasis{K}.
 
-Upper\sphinxhyphen{}closed categories (in a more mathematical integration style) may as well be be considered. In this case it is sufficient to check that \(m_k \not\geqslant x\) as well as \(M_k \geq x\) are true for \sphinxstyleemphasis{x} to be considered a member of category \sphinxstyleemphasis{K}. It is worthwhile noticing that a category \sphinxstyleemphasis{K} such that \(m_k = M_k\) is hence always empty by definition. In order to be able to properly sort over the complete range of values to be sorted, we will need to use a special, two\sphinxhyphen{}sided closed last, respectively first, category.
+Upper\sphinxhyphen{}closed categories (in a more mathematical integration style) may as well be considered. In this case it is sufficient to check that \(m_k \not\geqslant x\) as well as \(M_k \geq x\) are true for \sphinxstyleemphasis{x} to be considered a member of category \sphinxstyleemphasis{K}. It is worthwhile noticing that a category \sphinxstyleemphasis{K} such that \(m_k = M_k\) is hence always empty by definition. In order to be able to properly sort over the complete range of values to be sorted, we will need to use a special, two\sphinxhyphen{}sided closed last, respectively first, category.
 
 Let \(K = {K_1 , ..., K_q}\) be a non trivial partition of the criterion’s performance measurement scale into \(q \geq 2\) ordered categories \(K_k\) \textendash{} i.e. lower\sphinxhyphen{}closed intervals \([m_k ; M_k[\) \textendash{} such that \(m_k < M_k\), \(M_k = m_{k+1}\) for \sphinxstyleemphasis{k} = 0, …, \sphinxstyleemphasis{q} \sphinxhyphen{} 1 and \(M_q = \infty\). And, let \(A=\{a_1 , a_2 , a_3 , ...\}\) be a finite set of not all equal performance measures observed on the scale in question.
 
@@ -2994,9 +2994,9 @@ Let us now suppose that we are given a performance tableau with a set \sphinxsty
 
 Suppose furthermore that we want to sort the decision alternatives into \sphinxstyleemphasis{q} upper\sphinxhyphen{}closed quantile equivalence classes. We therefore consider a series : \(k = k/q\) for \sphinxstyleemphasis{k} = 0, …, \sphinxstyleemphasis{q} of \sphinxstyleemphasis{q+1} equally spaced quantiles, like quartiles: 0, 0.25, 0.5, 0.75, 1; quintiles: 0, 0.2, 0.4, 0.6, 0.8, 1: or deciles: 0, 0.1, 0.2, …, 0.9, 1, for instance.
 
-The upper\sphinxhyphen{}closed \(\mathbf{q}^k\) class corresponds to the \sphinxstyleemphasis{m} quantile intervals \(]q_j(p_{k-1});q_j(p_k)]\) observed on each criterion \sphinxstyleemphasis{j},  where \sphinxstyleemphasis{k} = 2, …, \sphinxstyleemphasis{q} , \(q_j(p_q)\,=\,\max_X(x_j)\), and the first class gathers all performances below or equal to \(Q_j(p_1)\).
+The upper\sphinxhyphen{}closed \(\mathbf{q}^k\) class corresponds to the \sphinxstyleemphasis{m} quantile intervals \(]q_j(p_{k-1});q_j(p_k)]\) observed on each criterion \sphinxstyleemphasis{j},  where \sphinxstyleemphasis{k} = 2, …, \sphinxstyleemphasis{q} , \(q_j(p_q) =  \max_X(x_j)\), and the first class gathers all performances below or equal to \(Q_j(p_1)\).
 
-The lower\sphinxhyphen{}closed \(\mathbf{q}_k\) class corresponds to the \sphinxstyleemphasis{m} quantile intervals \([q_j(p_{k-1});q_j(p_k)[\) observed on each criterion \sphinxstyleemphasis{j}, where \sphinxstyleemphasis{k} = 1, …, \sphinxstyleemphasis{q}\sphinxhyphen{}1, \(q_j(p_0)\,=\,\min_X(x_j)\), and the last class gathers all performances above or equal to \(Q_j(p_{q-1})\).
+The lower\sphinxhyphen{}closed \(\mathbf{q}_k\) class corresponds to the \sphinxstyleemphasis{m} quantile intervals \([q_j(p_{k-1});q_j(p_k)[\) observed on each criterion \sphinxstyleemphasis{j}, where \sphinxstyleemphasis{k} = 1, …, \sphinxstyleemphasis{q}\sphinxhyphen{}1, \(q_j(p_0) = \min_X(x_j)\), and the last class gathers all performances above or equal to \(Q_j(p_{q-1})\).
 
 We call \sphinxstylestrong{q\sphinxhyphen{}tiles} a complete series of \sphinxstyleemphasis{k} = 1, …, \sphinxstyleemphasis{q} upper\sphinxhyphen{}closed \(\mathbf{q}^k\), respectively lower\sphinxhyphen{}closed \(\mathbf{q}_k\), multiple criteria quantile classes.
 
@@ -3036,14 +3036,26 @@ We may compute, for instance, a five\sphinxhyphen{}tiling of a given random perf
 \PYG{g+go}{       \PYGZsq{}profiles\PYGZsq{}, \PYGZsq{}profileLimits\PYGZsq{}, \PYGZsq{}hasNoVeto\PYGZsq{},}
 \PYG{g+go}{       \PYGZsq{}valuationdomain\PYGZsq{}, \PYGZsq{}nbrThreads\PYGZsq{}, \PYGZsq{}relation\PYGZsq{},}
 \PYG{g+go}{       \PYGZsq{}categoryContent\PYGZsq{}, \PYGZsq{}order\PYGZsq{}, \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
-\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Constructor run times (in sec.) \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{  *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Constructor run times (in sec.) \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  \PYGZsh{} Threads        : 1}
-\PYG{g+go}{  Total time       : 0.02386}
-\PYG{g+go}{  Data input       : 0.00342}
-\PYG{g+go}{  Compute profiles : 0.00082}
-\PYG{g+go}{  Compute relation : 0.01823}
-\PYG{g+go}{  Weak Ordering    : 0.00047}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qs}\PYG{o}{.}\PYG{n}{showSorting}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{  Total time       : 0.03120}
+\PYG{g+go}{  Data input       : 0.00300}
+\PYG{g+go}{  Compute profiles : 0.00075}
+\PYG{g+go}{  Compute relation : 0.02581}
+\PYG{g+go}{  Weak Ordering    : 0.00052}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} qs.showCriteriaCategoryLimits()}
+\PYG{g+go}{  Quantile Class Limits (q = 5)}
+\PYG{g+go}{  Upper\PYGZhy{}closed classes}
+\PYG{g+go}{  crit.       0.20    0.40    0.60    0.80    1.00}
+\PYG{g+go}{  *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{   g1         31.35   41.09   58.53   71.91   98.08}
+\PYG{g+go}{   g2         27.81   39.19   49.87   61.66   96.18}
+\PYG{g+go}{   g3         25.10   34.78   49.45   63.97   92.59}
+\PYG{g+go}{   g4         24.61   37.91   53.91   71.02   89.84}
+\PYG{g+go}{   g5         26.94   36.43   52.16   72.52   96.25}
+\PYG{g+go}{   g6         23.94   44.06   54.92   67.34   95.97}
+\PYG{g+go}{   g7         30.94   47.40   55.46   69.04   97.10}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} qs.showSorting()}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{} Sorting results in descending order \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  ]0.80 \PYGZhy{} 1.00]: [\PYGZsq{}a22\PYGZsq{}]}
 \PYG{g+go}{  ]0.60 \PYGZhy{} 0.80]: [\PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}, \PYGZsq{}a11\PYGZsq{}, \PYGZsq{}a14\PYGZsq{}, \PYGZsq{}a17\PYGZsq{},}
@@ -3060,7 +3072,9 @@ We may compute, for instance, a five\sphinxhyphen{}tiling of a given random perf
 \PYG{g+go}{  ]   \PYGZlt{} \PYGZhy{} 0.20]: [\PYGZsq{}a44\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-We may inspect the sorting characteristics as follows.
+Most of the decision actions (26) are gathered in the median quintile \(!0.40 - 0.60]\) class, whereas the highest quintile \(]0.80-1.00]\) and the lowest quintile \(]< - 0.20]\) classes gather each one a unique decision alternative (\sphinxstyleemphasis{a22}, resp. \sphinxstyleemphasis{a44}) (see \hyperref[\detokenize{tutorial:quantilessorting}]{Listing \ref{\detokenize{tutorial:quantilessorting}}} Lines 43\sphinxhyphen{}).
+
+We may inspect as follows the details of the corresponding sorting characteristics.
 \sphinxSetupCaptionForVerbatim{Bipolar\sphinxhyphen{}valued sorting characteristics (extract)}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:sortingcharacteristics}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -3090,13 +3104,13 @@ We may inspect the sorting characteristics as follows.
 \PYG{g+go}{ a49 in ]0.80 \PYGZhy{} 1.00]   \PYGZhy{}57.14        85.71       \PYGZhy{}57.14}
 \end{sphinxVerbatim}
 
-Alternative \sphinxstyleemphasis{a22} verifies positively both conditions for being sorted into a quintiles class only for class {[}0.80 \sphinxhyphen{} 1.00{]} (see \hyperref[\detokenize{tutorial:sortingcharacteristics}]{Listing \ref{\detokenize{tutorial:sortingcharacteristics}}} Lines 10). Whereas alternatives \sphinxstyleemphasis{a44} and \sphinxstyleemphasis{a49}, for instance, weakly verify both conditions each one for two, resp. three, adjacent quintiles classes (see Lines 13\sphinxhyphen{}14 and 21\sphinxhyphen{}23).
+Alternative \sphinxstyleemphasis{a22} verifies indeed positively both sorting conditions only for the highest quintile \([0.80 - 1.00]\) class (see \hyperref[\detokenize{tutorial:sortingcharacteristics}]{Listing \ref{\detokenize{tutorial:sortingcharacteristics}}} Lines 10). Whereas alternatives \sphinxstyleemphasis{a44} and \sphinxstyleemphasis{a49}, for instance, weakly verify both sorting conditions each one for two, resp. three, adjacent quintile classes (see Lines 13\sphinxhyphen{}14 and 21\sphinxhyphen{}23).
 
 Quantiles sorting results indeed always verify the following \sphinxstylestrong{Properties}.
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
-\sphinxstylestrong{Coherence}: Each object is sorted into a non\sphinxhyphen{}empty subset of \sphinxstyleemphasis{adjacent} q\sphinxhyphen{}tiles classes. Alternative \sphinxstyleemphasis{a22} is, for instance, solely sorted into the highest quintile class \(]0.80 - 1.00]\), whereas alternative \sphinxstyleemphasis{a44} is sorted into the first and the second quintile class \(]< - 0.40]\) (see \hyperref[\detokenize{tutorial:quantilessorting}]{Listing \ref{\detokenize{tutorial:quantilessorting}}} Lines 24 and 34\sphinxhyphen{}36). An alternative that would \sphinxstyleemphasis{miss} evaluations on all the criteria will be sorted conjointly in all q\sphinxhyphen{}tiled classes.
+\sphinxstylestrong{Coherence}: Each object is sorted into a non\sphinxhyphen{}empty subset of \sphinxstyleemphasis{adjacent} q\sphinxhyphen{}tiles classes. An alternative that would \sphinxstyleemphasis{miss} evaluations on all the criteria will be sorted conjointly in all q\sphinxhyphen{}tiled classes.
 
 \item {} 
 \sphinxstylestrong{Uniqueness}: If \(r(x \in \mathbf{q}^k) \neq 0\)  for \sphinxstyleemphasis{k} = 1, …, \sphinxstyleemphasis{q}, then performance \sphinxstyleemphasis{x} is sorted into \sphinxstyleemphasis{exactly one single} q\sphinxhyphen{}tiled class.
@@ -3106,7 +3120,7 @@ Quantiles sorting results indeed always verify the following \sphinxstylestrong{
 
 \end{enumerate}
 
-The q\sphinxhyphen{}tiles sorting result leaves us hence with more or less overlapping ordered quantile equivalence classes. For constructing now a linearly ranked q\sphinxhyphen{}tiles partition of \sphinxstyleemphasis{X} , we may apply three strategies:
+The \sphinxstyleemphasis{q\sphinxhyphen{}tiles} sorting result leaves us hence with more or less \sphinxstyleemphasis{overlapping} ordered quantile equivalence classes. For constructing now a linearly ranked q\sphinxhyphen{}tiles partition of \sphinxstyleemphasis{X} , we may apply three strategies:
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
@@ -3138,9 +3152,9 @@ The q\sphinxhyphen{}tiles sorting result leaves us hence with more or less overl
 \PYG{g+go}{ ]  \PYGZlt{} \PYGZhy{}0.40] : [\PYGZsq{}a44\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-We find confirmed in this weak ranking, following the \sphinxstyleemphasis{average} ranking strategy, that alternative \sphinxstyleemphasis{a49} , for instance, is indeed sorted into three adjacent quintiles classes, namely \(]0.20-0.80]\) (see \hyperref[\detokenize{tutorial:quantilesordering}]{Listing \ref{\detokenize{tutorial:quantilesordering}}} Line 6) and precedes the \(]0.40-0.60]\) class, of same average of lower and upper limits.
+following, for instance, the \sphinxstyleemphasis{average} ranking strategy, we find confirmed in thw weak ranking shown in \hyperref[\detokenize{tutorial:quantilesordering}]{Listing \ref{\detokenize{tutorial:quantilesordering}}},  that alternative \sphinxstyleemphasis{a49}  is indeed sorted into three adjacent quintiles classes, namely \(]0.20-0.80]\) (see Line 6) and precedes the \(]0.40-0.60]\) class, of same average of lower and upper limits.
 
-Noticing the computational efficiency of the quantiles sorting construction, coupled with the separability property of the quantile class membership characteristics computation, we will make usage of the \sphinxcode{\sphinxupquote{sortingDigraphs.QuantilesSortingDigraph}} class for ranking big performance tableaux.
+Noticing the computational efficiency of the quantiles sorting construction (see \hyperref[\detokenize{tutorial:quantilessorting}]{Listing \ref{\detokenize{tutorial:quantilessorting}}} Lines 23\sphinxhyphen{}29), coupled with the separability property of the quantile class membership characteristics computation, we will make usage of the \sphinxcode{\sphinxupquote{sortingDigraphs.QuantilesSortingDigraph}} class for ranking big performance tableaux.
 
 
 \subsection{Ranking big performance tableaux}
@@ -3152,11 +3166,12 @@ In the coding example in \hyperref[\detokenize{tutorial:prerankedoutrankingdigra
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:prerankedoutrankingdigraph}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{sparseOutrankingDigraphs} \PYG{k+kn}{import}\PYGZbs{}
-\PYG{g+go}{                              PreRankedOutrankingDigraph}
+\PYG{g+go}{                  PreRankedOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{tp} \PYG{o}{=} \PYG{n}{RandomCBPerformanceTableau}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}\PYGZbs{}
-\PYG{g+go}{                              BigData=True,seed=100)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bg} \PYG{o}{=} \PYG{n}{PreRankedOutrankingDigraph}\PYG{p}{(}\PYG{n}{tp}\PYG{p}{,}\PYG{n}{quantiles}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{LowerClosed}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}\PYGZbs{}
-\PYG{g+go}{                              componentRankingRule=\PYGZsq{}NetFlows\PYGZsq{})}
+\PYG{g+go}{                  BigData=True,seed=100)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bg} \PYG{o}{=} \PYG{n}{PreRankedOutrankingDigraph}\PYG{p}{(}\PYG{n}{tp}\PYG{p}{,}\PYG{n}{quantiles}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,}\PYGZbs{}
+\PYG{g+go}{                  LowerClosed=False,\PYGZbs{}}
+\PYG{g+go}{                  componentRankingRule=\PYGZsq{}NetFlows\PYGZsq{})}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bg}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Instance class    : PreRankedOutrankingDigraph}
@@ -3181,7 +3196,7 @@ In the coding example in \hyperref[\detokenize{tutorial:prerankedoutrankingdigra
 \PYG{g+go}{ Ordering          : 0.00603}
 \end{sphinxVerbatim}
 
-The total run time of the \sphinxcode{\sphinxupquote{sparseOutrankingDigraphs.PreRankedOutrankingDigraph}} constructor is about 0.14 sec (see \hyperref[\detokenize{tutorial:prerankedoutrankingdigraph}]{Listing \ref{\detokenize{tutorial:prerankedoutrankingdigraph}}} Line 23). The deciles sorting, preordering and decomposing leads to 20 linearly ordered quantiles equivalence classes. The corresponding pre\sphinxhyphen{}ranked decomposition may be visualized as follows.
+The total run time of the \sphinxcode{\sphinxupquote{sparseOutrankingDigraphs.PreRankedOutrankingDigraph}} constructor is about 0.14 sec (see \hyperref[\detokenize{tutorial:prerankedoutrankingdigraph}]{Listing \ref{\detokenize{tutorial:prerankedoutrankingdigraph}}} Line 24). The deciles sorting, preordering and decomposing leads to 20 linearly ordered quantiles equivalence classes. The corresponding pre\sphinxhyphen{}ranked decomposition may be visualized as follows.
 \sphinxSetupCaptionForVerbatim{The quantiles decomposition of a pre\sphinxhyphen{}ranked outranking digraph}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:quantilesdecomposition}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -3216,25 +3231,24 @@ The best deciles class ({]}70\%\sphinxhyphen{}90\%{]}) gathers decision alternat
 
 Each one of these 20 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the \sphinxstyleemphasis{Copeland} and the \sphinxstyleemphasis{NetFlows} rules. The eventually obtained linear ordering (from the worst to best) is stored in a \sphinxstyleemphasis{bg.boostedOrder} attribute. A reversed linear ranking (from the best to the worst) is stored in a \sphinxstyleemphasis{bg.boostedRanking} attribute.
 \sphinxSetupCaptionForVerbatim{Showing the componentwise \sphinxstyleemphasis{NetFlows} ranking}
-\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:boostedorder}}}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:boostedranking}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bg}\PYG{o}{.}\PYG{n}{boostedOrder}
-\PYG{g+go}{ [4, 10, 12, 53, 11, 99, 75, 65, 40, 59, 96, 63, 5, 34,}
-\PYG{g+go}{  51, 95, 76, 22, 29, 18, 31, 47, 90, 28, 26, 83, 17, 62,}
-\PYG{g+go}{  93, 2, 1, 8, 44, 84, 64, 91, 81, 71, 57, 61, 98, 32, 7,}
-\PYG{g+go}{  52, 77, 89, 30, 48, 15, 25, 58, 33, 6, 24, 70, 72, 73,}
-\PYG{g+go}{  60, 37, 27, 3, 82, 88, 38, 9, 35, 78, 74, 21, 54, 97,}
-\PYG{g+go}{  23, 92, 50, 55, 43, 20, 45, 14, 49, 41, 68, 36, 80, 69,}
-\PYG{g+go}{  85, 94, 13, 39, 19, 66, 42, 56, 86, 87, 79, 16, 46, 67,}
-\PYG{g+go}{  100]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bg}\PYG{o}{.}\PYG{n}{boostedRanking}
+\PYG{g+go}{ [100, 67, 46, 16, 79, 87, 86, 56, 42, 66, 19, 39, 13, 94,}
+\PYG{g+go}{   85, 69, 80, 36, 68, 41, 49, 14, 45, 20, 43, 55, 50, 92,}
+\PYG{g+go}{   23, 97, 54, 21, 74, 78, 35, 9, 38, 88, 82, 3, 27, 37,}
+\PYG{g+go}{   60, 73, 72, 70, 24, 6, 33, 58, 25, 15, 48, 30, 89, 77,}
+\PYG{g+go}{   52, 7, 32, 98, 61, 57, 71, 81, 91, 64, 84, 44, 8, 1, 2,}
+\PYG{g+go}{   93, 62, 17, 83, 26, 28, 90, 47, 31, 18, 29, 22, 76, 95,}
+\PYG{g+go}{   51, 34, 5, 63, 96, 59, 40, 65, 75, 99, 11, 53, 12, 10, 4]}
 \end{sphinxVerbatim}
 
-Alternative \sphinxstyleemphasis{100} appears \sphinxstyleemphasis{first ranked}, whereas alternative \sphinxstyleemphasis{4} is \sphinxstyleemphasis{last ranked} (see \hyperref[\detokenize{tutorial:boostedorder}]{Listing \ref{\detokenize{tutorial:boostedorder}}} Lines 9 and 2). The quality of this ranking result may be assessed by first, computing its ordinal correlation with the corresponding standard outranking relation; And, secondly, by showing the fairness of the ranking consensus.
+Alternative \sphinxstyleemphasis{100} appears \sphinxstyleemphasis{first ranked}, whereas alternative \sphinxstyleemphasis{4} is \sphinxstyleemphasis{last ranked} (see \hyperref[\detokenize{tutorial:boostedranking}]{Listing \ref{\detokenize{tutorial:boostedranking}}} Line 2 and 8). The quality of this ranking result may be assessed by first, computing its ordinal correlation with the corresponding standard outranking relation; And, secondly, by showing the fairness of the ranking consensus.
 \sphinxSetupCaptionForVerbatim{Quality of the componentwise \sphinxstyleemphasis{NetFlows}’s ranking result}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:prerankeddigrapgcorrelationindexes}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{tp}\PYG{p}{,}\PYG{n}{Normalized}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrderCorrelation}\PYG{p}{(}\PYG{n}{bg}\PYG{o}{.}\PYG{n}{boostedOrder}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeRankingCorrelation}\PYG{p}{(}\PYG{n}{bg}\PYG{o}{.}\PYG{n}{boostedRanking}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
 \PYG{g+go}{  Extended Kendall tau       : +0.685}

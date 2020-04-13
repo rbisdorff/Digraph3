@@ -2050,8 +2050,13 @@ class QuantilesSortingDigraph(SortingDigraph):
                     self.sorting = sorting
                 if WithSortingRelation:
                     return relation
-
     def showCriteriaCategoryLimits(self,ByCriterion=False):
+        """
+        Dummy for showCriteriaQuantileLimits()
+        """
+        self.showCriteriaQuantileLimits(ByCriterion=ByCriterion)
+        
+    def showCriteriaQuantileLimits(self,ByCriterion=False):
         """
         Shows category minimum and maximum limits for each criterion.
         """
@@ -4413,7 +4418,7 @@ if __name__ == "__main__":
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
                                     numberOfCriteria=nbrCrit,seed=seed)
 
-    qs = QuantilesSortingDigraph(tp,4,LowerClosed=False)
+    qs = QuantilesSortingDigraph(tp,4,LowerClosed=True)
     qs.showCriteriaCategoryLimits()
 ##    #qs.showSorting()
 ##    print('==>> average')
