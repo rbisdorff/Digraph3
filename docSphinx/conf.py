@@ -217,7 +217,7 @@ latex_elements = {
         \end{figure}
 
         \vspace{10mm}
-        \textbf{\Huge {Tutorials and Pearls}}
+        \textbf{\Huge {Tutorials and advanced topics}}
 
         \textbf{Raymond BISDORFF}
 
@@ -247,7 +247,7 @@ latex_elements = {
 latex_documents = [
   ('tutorial', 'digraph3Tutorial.tex', u'Tutorials for the Digraph3 Python software resources',
    u'Raymond Bisdorff', 'howto'),
-  ('pearls','digraph3Pearls.tex', u'Pearls of bipolar-valued logic',
+  ('pearls','digraph3Pearls.tex', u'Digraph3 Advanced Topics',
    u'Raymond Bisdorff', 'howto'),
 ]
 

@@ -1061,10 +1061,14 @@ if __name__ == "__main__":
     from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
     nbrActions=nbrActions
     nbrCrit = nbrCrit
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,
-                                             NegativeWeights=False,
-                                             negativeWeightProbability=0.1,
-                                    numberOfCriteria=nbrCrit,seed=seed)
+##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,
+##                                             NegativeWeights=False,
+##                                             negativeWeightProbability=0.1,
+##                                    numberOfCriteria=nbrCrit,seed=seed)
+    from randomPerfTabs import RandomAcademicPerformanceTableau
+    tp = RandomAcademicPerformanceTableau(numberOfStudents=100,
+                                          numberOfCourses=11,
+                                          WithTypes=True)
     pq = PerformanceQuantiles(tp,5,LowerClosed=True,Debug=False)
     #print(pq.actionsTypeStatistics)
     #pq.showHTMLLimitingQuantiles(Transposed=True)
@@ -1073,13 +1077,13 @@ if __name__ == "__main__":
     #pq.showHTMLLimitingQuantiles(Transposed=True)
     #pq.showActions()
     #pq.showCriteria(ByObjectives=True)
-    tpg = PerfTabGenerator(tp,seed=None)
-    newActions = tpg.randomActions(10)
-    pq.updateQuantiles(newActions,historySize=0)
+    #tpg = PerfTabGenerator(tp,seed=None)
+    #newActions = tpg.randomActions(10)
+    #pq.updateQuantiles(newActions,historySize=0)
     #pq.showHTMLLimitingQuantiles(Transposed=True)
     #tpg = PerfTabGenerator(tp,seed=None)
-    newActions = tpg.randomActions(10)
-    pq.updateQuantiles(newActions,historySize=0)
+    #newActions = tpg.randomActions(10)
+    #pq.updateQuantiles(newActions,historySize=0)
     #pq.showHTMLLimitingQuantiles(Transposed=True)
     pq.save('test')
     pq1 = PerformanceQuantiles('test')

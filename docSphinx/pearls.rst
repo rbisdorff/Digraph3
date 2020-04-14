@@ -14,9 +14,9 @@
          cautionBorderColor={named}{Cyan},
          cautionBgColor={named}{LightCyan}}
 
-========================================
-Pearls of bipolar-valued epistemic logic
-========================================
+========================
+Digraph3 Advanced Topics
+========================
 
 .. only:: html
 
@@ -43,7 +43,7 @@ Pearls of bipolar-valued epistemic logic
 
    .. raw:: latex
 
-      \textbf{\Large{Pearls of Bipolar-valued Epistemic Logic}}
+      \textbf{\Large{Digraph3 Advanced Topics}}
       \vspace{5mm}
 
 .. only:: html

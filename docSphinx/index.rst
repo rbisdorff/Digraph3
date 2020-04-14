@@ -11,7 +11,7 @@ Contents
 
 1. `Tutorials <tutorial.html>`_
 2. `Reference manual <techDoc.html>`_
-3. `Pearls of bipolar-valued epistemic logic <pearls.html>`_
+3. `Advanced topics <pearls.html>`_
 4. `Archives <digraph3Archives.html>`_
 5. `About the author <author.html>`_
 
@@ -51,7 +51,7 @@ The second section concerns the extensive reference manual of the collection of 
 .. toctree:: techDoc
    :maxdepth: 2
 
-The third section exhibits some *pearls of bipolar epistemic logic*. These short texts illustrate well the very computational benefit one may get when working in a bipolar-valued logical framework. And, more specifically, the essential part the logically neutral *undeterminate* value is judiciously playing therein.  
+The third section exhibits some pearls of *bipolar-valued epistemic logic* that enrich the Digraph3 resources. These short texts illustrate well the very computational benefit one may get when working in a bipolar-valued logical framework. And, more specifically, the essential part the logically neutral *undeterminate* value is judiciously playing therein.  
 
 .. toctree:: pearls
    :maxdepth: 2

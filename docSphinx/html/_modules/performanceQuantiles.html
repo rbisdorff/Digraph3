@@ -1101,10 +1101,14 @@
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
     <span class="n">nbrActions</span><span class="o">=</span><span class="n">nbrActions</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="n">nbrCrit</span>
-    <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
-                                             <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                             <span class="n">negativeWeightProbability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+<span class="c1">##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,</span>
+<span class="c1">##                                             NegativeWeights=False,</span>
+<span class="c1">##                                             negativeWeightProbability=0.1,</span>
+<span class="c1">##                                    numberOfCriteria=nbrCrit,seed=seed)</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomAcademicPerformanceTableau</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomAcademicPerformanceTableau</span><span class="p">(</span><span class="n">numberOfStudents</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                                          <span class="n">numberOfCourses</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
+                                          <span class="n">WithTypes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="c1">#print(pq.actionsTypeStatistics)</span>
     <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
@@ -1113,13 +1117,13 @@
     <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
     <span class="c1">#pq.showActions()</span>
     <span class="c1">#pq.showCriteria(ByObjectives=True)</span>
-    <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1">#tpg = PerfTabGenerator(tp,seed=None)</span>
+    <span class="c1">#newActions = tpg.randomActions(10)</span>
+    <span class="c1">#pq.updateQuantiles(newActions,historySize=0)</span>
     <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
     <span class="c1">#tpg = PerfTabGenerator(tp,seed=None)</span>
-    <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1">#newActions = tpg.randomActions(10)</span>
+    <span class="c1">#pq.updateQuantiles(newActions,historySize=0)</span>
     <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
     <span class="n">pq1</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
