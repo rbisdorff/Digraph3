@@ -3813,6 +3813,19 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
         return sorting
 
+    def exportGraphViz(self,fileName=None,relation=None,\
+                             Comments=True,\
+                             graphType='png',graphSize='7,7',\
+                             fontSize=10):
+        """
+        Dummy for self.exportRatingGraphViz()
+        """
+        self.exportRatingGraphViz(fileName=fileName,relation=relation,\
+                                   Comments=Comments,\
+                                   graphType=graphType,\
+                                   graphSize=graphSize,
+                                   fontSize=fontSize)
+
     def exportRatingGraphViz(self,fileName=None,relation=None,\
                              direction='best',Comments=True,\
                              graphType='png',graphSize='7,7',\

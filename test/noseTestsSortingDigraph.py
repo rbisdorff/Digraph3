@@ -191,5 +191,35 @@ def testNormedQuantilesRatingDigraph():
                                        Debug=False)
     nrq1.showQuantilesRating()
 
+def testStudentNormedRating():   
+    print('*-------- Testing students normed rating -------')
+    # generating performance quintile norms
+    from randomPerfTabs import RandomAcademicPerformanceTableau
+    ta = RandomAcademicPerformanceTableau(numberOfStudents=1000,
+                                          numberOfCourses=11,
+                                          WithTypes=True,
+                                          missingDataProbability=0.03,
+                                          seed=100)
+    ta.save(fileName='testPerfTab')
+    from performanceQuantiles import PerformanceQuantiles
+    pqn = PerformanceQuantiles(ta,numberOfBins=5,LowerClosed=True)
+    pqn.showLimitingQuantiles()
+    pqn.save(fileName='acadPerformanceNorms')
 
+    # collecting norms from file
+    pqn1 = PerformanceQuantiles('acadPerformanceNorms')
+
+    # selecting students to rate
+    from random import sample
+    from perfTabs import PartialPerformanceTableau
+    studKeys = sample(list(ta.actions.keys()),10)
+    tap = PartialPerformanceTableau(ta,actionsSubset=studKeys)
+    tap.showPerformanceTableau()
+
+    # computing and showing the normed rating result
+    from sortingDigraphs import NormedQuantilesRatingDigraph
+    nqr = NormedQuantilesRatingDigraph(pqn1,tap)
+    nqr.showQuantilesRating()
+    nqr.showHTMLRatingHeatmap(Correlations=True,colorLevels=5,ndigits=0)
+    nqr.exportGraphViz()
 
