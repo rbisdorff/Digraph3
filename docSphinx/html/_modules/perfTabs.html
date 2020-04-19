@@ -2571,6 +2571,8 @@
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">icop</span><span class="o">.</span><span class="n">iteratedCopelandRanking</span>
                     <span class="k">if</span> <span class="n">StoreRanking</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">iteratedCopelandRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
+                <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
                 <span class="k">else</span><span class="p">:</span> <span class="c1"># default ranking rule</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
                     <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span>
@@ -7587,6 +7589,8 @@
 <span class="c1">##                                   Correlations=True,</span>
 <span class="c1">##                                   ndigits=4,</span>
 <span class="c1">##                                   Debug=False))</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                                 <span class="n">rankingRule</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                                  <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showRankingConsensusQuality</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">)</span>

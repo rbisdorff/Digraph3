@@ -414,7 +414,7 @@ class cPerformanceTableau(PerformanceTableau):
                                    ndigits=2,
                                    SparseModel=False,
                                    minimalComponentSize=1,
-                                   rankingRule='Copeland',
+                                   rankingRule='NetFlows',
                                    quantiles=None,
                                    strategy='average',
                                    Correlations=False,

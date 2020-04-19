@@ -2531,6 +2531,8 @@ The performance evaluations of each decision alternative on each criterion are g
                     actionsList = icop.iteratedCopelandRanking
                     if StoreRanking:
                         self.iteratedCopelandRanking = actionsList
+                elif rankingRule == None:
+                    actionsList = list(self.actions.keys())
                 else: # default ranking rule
                     actionsList = g.computeNetFlowsRanking()
                     rankingRule='NetFlows'
@@ -7547,6 +7549,8 @@ if __name__ == "__main__":
 ##                                   Correlations=True,
 ##                                   ndigits=4,
 ##                                   Debug=False))
+    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
+                                 rankingRule=None,Transposed=False)
     t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
                                  rankingRule='NetFlows',Transposed=False)
     t.showRankingConsensusQuality(t.netFlowsRanking)
