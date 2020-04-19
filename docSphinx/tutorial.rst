@@ -1542,34 +1542,45 @@ Generating random performance tableaux
 Introduction
 ............
 
-The :py:mod:`randomPerfTabs` module provides several constructors for random performance tableaux generators of different kind, mainly for the purpose of testing implemented methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the four most useful generators.
+The :py:mod:`randomPerfTabs` module provides several constructors for random performance tableaux models of different kind, mainly for the purpose of testing implemented methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the most useful models.
 
-    1. The simplest model, called **RandomPerformanceTableau**, generates
-    a set of *n* decision actions, a set of *m* real-valued
-    performance criteria, ranging by default from 0.0 to 100.0,
-    associated with default discrimination thresholds: 2.5 (ind.),
-    5.0 (pref.) and 60.0 (veto). The generated performances are
-    Beta(2.2) distributed on each measurement scale.
-       
-    2. One of the most useful random generator, called
-    **RandomCBPerformanceTableau**, proposes two decision objectives,
-    named *Costs* (to be minimized) respectively *Benefits* (to be
-    maximized) model; its purpose being to generate more or less
-    contradictory performances on these two, usually opposed,
-    objectives. *Low costs* will randomly be coupled with *low
-    benefits*, whereas *high costs* will randomly be coupled
-    with high benefits.
-       
-    3. Many multiple criteria decision problems concern three decision
-    objectives which take into account *economical*, *societal* as well
-    as *environmental* aspects. For this type of performance tableau model,
-    we provide a specific generator,
-    called **Random3ObjectivesPerformanceTableau**.
-       
-    4. In order to study aggregation of linear orders, we provide a model
-    called **RandomRankPerformanceTableau** which provides linearly
-    ordered performances without ties on multiple criteria for
-    a given number of decision actions.
+The simplest model, called **RandomPerformanceTableau**, generates
+a set of *n* decision actions, a set of *m* real-valued
+performance criteria, ranging by default from 0.0 to 100.0,
+associated with default discrimination thresholds: 2.5 (ind.),
+5.0 (pref.) and 60.0 (veto). The generated performances are
+Beta(2.2) distributed on each measurement scale.
+
+One of the most useful models, called
+**RandomCBPerformanceTableau**, proposes a performance tableau
+involving two decision objectives,
+named *Costs* (to be minimized) respectively *Benefits* (to be
+maximized) model; its purpose being to generate more or less
+contradictory performances on these two, usually conflicting,
+objectives. *Low costs* will randomly be coupled with *low
+benefits*, whereas *high costs* will randomly be coupled
+with high benefits.
+
+Many public policy decision problems involve three often
+conflicting decision objectives taking into account *economical*,
+*societal* as well as *environmental* aspects. For this type of
+performance tableau model, we provide a specific model,
+called **Random3ObjectivesPerformanceTableau**.
+
+Deciding which students, based on the grades obtained in a
+number of examinations, validate or not their academic studies,
+is the genuine decision practice of universities and academies.
+To thouroughly study these kind of decision problems,
+we provide a performance tableau model, called
+**RandomAacademicPerformanceTableau**, which gathers grades
+obtained by a given number of students in a given number of
+weighted courses.    
+
+In order to study aggregation of election results (see the tutorial on
+:ref:`LinearVoting-Tutorial-label`) in the context
+of bipolar-valued outranking digraphs, we provide furthermore a
+specific performance tableau model called **RandomRankPerformanceTableau**
+which provides ranks (linearly ordered performances without ties) of a given number of election candidates (decision actions) for a given number of weighted voters (performance criteria).
  
 Random standard performance tableaux
 ....................................
