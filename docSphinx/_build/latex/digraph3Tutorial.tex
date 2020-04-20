@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{April 19, 2020}
+\date{April 20, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1914,11 +1914,11 @@ Example Python session
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import} \PYG{n}{RandomCBPerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{RandomCBPerformanceTableau}\PYG{p}{(}
-\PYG{g+gp}{... }         \PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}
-\PYG{g+gp}{... }         \PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}
-\PYG{g+gp}{... }         \PYG{n}{weightDistribution}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{equiobjectives}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }         \PYG{n}{commonPercentiles}\PYG{o}{=}\PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ind}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{pref}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{veto}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{95}\PYG{p}{\PYGZcb{}}\PYG{p}{,}
-\PYG{g+gp}{... }         \PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
+\PYG{g+go}{          numberOfActions=7,\PYGZbs{}}
+\PYG{g+go}{          numberOfCriteria=5,\PYGZbs{}}
+\PYG{g+go}{          weightDistribution=\PYGZsq{}equiobjectives\PYGZsq{},\PYGZbs{}}
+\PYG{g+go}{          commonPercentiles=\PYGZob{}\PYGZsq{}ind\PYGZsq{}:5,\PYGZsq{}pref\PYGZsq{}:10,\PYGZsq{}veto\PYGZsq{}:95\PYGZcb{},\PYGZbs{}}
+\PYG{g+go}{          seed=100)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showActions}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} show decision action \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ key:  a1}
@@ -1984,7 +1984,7 @@ In the example above, we may notice the three types of decision actions (\hyperr
 A (potentially ranked) colored heatmap with 5 color levels is also provided.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{Ranked}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -2251,86 +2251,70 @@ When parameter \sphinxstyleemphasis{WithTypes} is set to \sphinxstyleemphasis{Tr
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:academicperformancetableau}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import} \PYG{n}{RandomAcademicPerformanceTableau}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{RandomAcademicPerformanceTableau}\PYG{p}{(}\PYG{n}{numberOfStudents}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}
-\PYG{g+gp}{... }             \PYG{n}{numberOfCourses}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{n}{missingDataProbability}\PYG{o}{=}\PYG{l+m+mf}{0.03}\PYG{p}{,}
-\PYG{g+gp}{... }             \PYG{n}{WithTypes}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{RandomAcademicPerformanceTableau}\PYG{p}{(}\PYG{n}{numberOfStudents}\PYG{o}{=}\PYG{l+m+mi}{11}\PYG{p}{,}
+\PYG{g+go}{              numberOfCourses=7, missingDataProbability=0.03,}
+\PYG{g+go}{              WithTypes=True, seed=100)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} PerformanceTableau instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Instance class   : RandomAcademicPerformanceTableau}
 \PYG{g+go}{ Seed             : 100}
 \PYG{g+go}{ Instance name    : randstudPerf}
-\PYG{g+go}{ \PYGZsh{} Actions        : 7}
-\PYG{g+go}{ \PYGZsh{} Criteria       : 5}
+\PYG{g+go}{ \PYGZsh{} Actions        : 11}
+\PYG{g+go}{ \PYGZsh{} Criteria       : 7}
 \PYG{g+go}{ Attributes       : [\PYGZsq{}randomSeed\PYGZsq{}, \PYGZsq{}name\PYGZsq{}, \PYGZsq{}actions\PYGZsq{},}
 \PYG{g+go}{                     \PYGZsq{}criteria\PYGZsq{}, \PYGZsq{}evaluation\PYGZsq{}, \PYGZsq{}weightPreorder\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showPerformanceTableau}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  performance tableau \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{  Courses |  \PYGZsq{}g1\PYGZsq{} \PYGZsq{}g2\PYGZsq{} \PYGZsq{}g3\PYGZsq{} \PYGZsq{}g4\PYGZsq{} \PYGZsq{}g5\PYGZsq{}}
-\PYG{g+go}{    ECTS  |   5    1    5    4    3}
-\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{    \PYGZsq{}s1f\PYGZsq{} |  12   10   14   14   13}
-\PYG{g+go}{    \PYGZsq{}s2g\PYGZsq{} |  14   12   16   12   14}
-\PYG{g+go}{    \PYGZsq{}s3g\PYGZsq{} |  13   10   NA   12   17}
-\PYG{g+go}{    \PYGZsq{}s4f\PYGZsq{} |  10   13   NA   13   12}
-\PYG{g+go}{    \PYGZsq{}s5e\PYGZsq{} |  17   12   16   17   12}
-\PYG{g+go}{    \PYGZsq{}s6g\PYGZsq{} |  17   17   12   16   14}
-\PYG{g+go}{    \PYGZsq{}s7e\PYGZsq{} |  12   13   13   16   NA}
+\PYG{g+go}{  Courses |   \PYGZsq{}g1\PYGZsq{}  \PYGZsq{}g2\PYGZsq{}  \PYGZsq{}g3\PYGZsq{}  \PYGZsq{}g4\PYGZsq{}  \PYGZsq{}g5\PYGZsq{}  \PYGZsq{}g6\PYGZsq{}  \PYGZsq{}g7\PYGZsq{}}
+\PYG{g+go}{    ECTS  |    2     1     3     4     1     1     5}
+\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{   \PYGZsq{}s01f\PYGZsq{} |    12    13    15    08    16    06    15}
+\PYG{g+go}{   \PYGZsq{}s02g\PYGZsq{} |    10    15    20    11    14    15    18}
+\PYG{g+go}{   \PYGZsq{}s03g\PYGZsq{} |    14    12    19    11    15    13    11}
+\PYG{g+go}{   \PYGZsq{}s04f\PYGZsq{} |    13    15    12    13    13    10    06}
+\PYG{g+go}{   \PYGZsq{}s05e\PYGZsq{} |    12    14    13    16    15    12    16}
+\PYG{g+go}{   \PYGZsq{}s06g\PYGZsq{} |    17    13    10    14    NA    15    13}
+\PYG{g+go}{   \PYGZsq{}s07e\PYGZsq{} |    12    12    12    18    NA    13    17}
+\PYG{g+go}{   \PYGZsq{}s08f\PYGZsq{} |    14    12    09    13    13    15    12}
+\PYG{g+go}{   \PYGZsq{}s09g\PYGZsq{} |    19    14    15    13    09    13    16}
+\PYG{g+go}{   \PYGZsq{}s10g\PYGZsq{} |    10    12    14    17    12    16    09}
+\PYG{g+go}{   \PYGZsq{}s11w\PYGZsq{} |    10    10    NA    10    10    NA    08}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{weightPreorder}
-\PYG{g+go}{ [[\PYGZsq{}g2\PYGZsq{}], [\PYGZsq{}g5\PYGZsq{}], [\PYGZsq{}g4\PYGZsq{}], [\PYGZsq{}g1\PYGZsq{}, \PYGZsq{}g3\PYGZsq{}]]}
+\PYG{g+go}{ [[\PYGZsq{}g2\PYGZsq{}, \PYGZsq{}g5\PYGZsq{}, \PYGZsq{}g6\PYGZsq{}], [\PYGZsq{}g1\PYGZsq{}], [\PYGZsq{}g3\PYGZsq{}], [\PYGZsq{}g4\PYGZsq{}], [\PYGZsq{}g7\PYGZsq{}]]}
 \end{sphinxVerbatim}
 
-The example tableau, generated for instance above with \sphinxstyleemphasis{missingDataProbability} = 0.03, \sphinxstyleemphasis{WithTypes} = True and \sphinxstyleemphasis{seed} = 100 (see \hyperref[\detokenize{tutorial:academicperformancetableau}]{Listing \ref{\detokenize{tutorial:academicperformancetableau}}} Lines 2\sphinxhyphen{}4), results in a set of two excellent (\sphinxstyleemphasis{s5}, \sphinxstyleemphasis{s7}), three good (\sphinxstyleemphasis{s2}, \sphinxstyleemphasis{s3}, \sphinxstyleemphasis{s6}) and two fair (\sphinxstyleemphasis{s1}, \sphinxstyleemphasis{s4}) student performances. Notice that no student gets a grade below the course validating threshold 10. We observe however 3 missing grades (NA), two in course \sphinxstyleemphasis{g3} and one in course \sphinxstyleemphasis{g5} (see Lines 19\sphinxhyphen{}25).
+The example tableau, generated for instance above with \sphinxstyleemphasis{missingDataProbability} = 0.03, \sphinxstyleemphasis{WithTypes} = True and \sphinxstyleemphasis{seed} = 100 (see \hyperref[\detokenize{tutorial:academicperformancetableau}]{Listing \ref{\detokenize{tutorial:academicperformancetableau}}} Lines 2\sphinxhyphen{}4), results in a set of two excellent (\sphinxstyleemphasis{s05}, \sphinxstyleemphasis{s07}), five good (\sphinxstyleemphasis{s02}, \sphinxstyleemphasis{s03}, \sphinxstyleemphasis{s06}, \sphinxstyleemphasis{s09}, \sphinxstyleemphasis{s10}), three fair (\sphinxstyleemphasis{s01}, \sphinxstyleemphasis{s04}, \sphinxstyleemphasis{s08}) and one weak (\sphinxstyleemphasis{s11}) student performances. Notice that six students get a grade below the course validating threshold 10 and we observe four missing grades (NA), two in course \sphinxstyleemphasis{g6} and one in course \sphinxstyleemphasis{g3} and course \sphinxstyleemphasis{g7} (see Lines 19\sphinxhyphen{}29).
 
-We may show a statistical summary of the students’ grades per course.
+We may show a statistical summary of the students’ grades obtained in the heighest weighted course, namely \sphinxstyleemphasis{g7}, followed by a linear ranking of the students’ performances shown with a performance heatmap view.
 \sphinxSetupCaptionForVerbatim{Student performance summary statistics per course}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:academicstatistics}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showStatistics}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Performance tableau summary statistics \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{  Instance name      : randstudPerf}
-\PYG{g+go}{  \PYGZsh{}Actions           : 7}
-\PYG{g+go}{  \PYGZsh{}Criteria          : 5}
-\PYG{g+go}{  *Statistics per Course*}
-\PYG{g+go}{  Course name       : g1}
-\PYG{g+go}{  Course weight     : 5}
-\PYG{g+go}{   grading scale      : 0.00 \PYGZhy{} 20.00}
-\PYG{g+go}{   \PYGZsh{} missing evaluations : 0}
-\PYG{g+go}{   mean evaluation       : 13.57}
-\PYG{g+go}{   standard deviation    : 2.44}
-\PYG{g+go}{   maximal evaluation    : 17.00}
-\PYG{g+go}{   quantile Q3 (x\PYGZus{}75)    : 17.00}
-\PYG{g+go}{   median evaluation     : 13.50}
-\PYG{g+go}{   quantile Q1 (x\PYGZus{}25)    : 12.00}
-\PYG{g+go}{   minimal evaluation    : 10.00}
-\PYG{g+go}{   mean absolute difference      : 2.69}
-\PYG{g+go}{   standard difference deviation : 3.45}
-\PYG{g+go}{  Course name       : g2}
-\PYG{g+go}{   ...}
-\PYG{g+go}{   ...}
-\PYG{g+go}{  Course name       : g3}
-\PYG{g+go}{  Course weight     : 5}
-\PYG{g+go}{   grading scale      : 0.00 \PYGZhy{} 20.00}
-\PYG{g+go}{   \PYGZsh{} missing evaluations : 2}
-\PYG{g+go}{   !! not enough evaluations !!}
-\PYG{g+go}{  Course name       : g4}
-\PYG{g+go}{   ...}
-\PYG{g+go}{   ...}
-\PYG{g+go}{  Course name       : g5}
-\PYG{g+go}{  Course weight     : 3}
-\PYG{g+go}{   grading scale      : 0.00 \PYGZhy{} 20.00}
-\PYG{g+go}{   \PYGZsh{} missing evaluations : 1}
-\PYG{g+go}{   mean evaluation       : 13.67}
-\PYG{g+go}{   standard deviation    : 1.70}
-\PYG{g+go}{   maximal evaluation    : 17.00}
-\PYG{g+go}{   quantile Q3 (x\PYGZus{}75)    : 15.50}
-\PYG{g+go}{   median evaluation     : 14.00}
-\PYG{g+go}{   quantile Q1 (x\PYGZus{}25)    : 12.50}
-\PYG{g+go}{   minimal evaluation    : 12.00}
-\PYG{g+go}{   mean absolute difference      : 1.78}
-\PYG{g+go}{   standard difference deviation : 2.40}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showCourseStatistics}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{g7}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Summary performance statistics \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{  Course name    : g7}
+\PYG{g+go}{  Course weight  : 2}
+\PYG{g+go}{  \PYGZsh{} Students     : 11}
+\PYG{g+go}{  grading scale  : 0.00 \PYGZhy{} 20.00}
+\PYG{g+go}{  \PYGZsh{} missing evaluations : 0}
+\PYG{g+go}{  mean evaluation       : 12.82}
+\PYG{g+go}{  standard deviation    : 3.79}
+\PYG{g+go}{  maximal evaluation    : 18.00}
+\PYG{g+go}{  quantile Q3 (x\PYGZus{}75)    : 16.25}
+\PYG{g+go}{  median evaluation     : 14.00}
+\PYG{g+go}{  quantile Q1 (x\PYGZus{}25)    : 10.50}
+\PYG{g+go}{  minimal evaluation    : 6.00}
+\PYG{g+go}{  mean absolute difference      : 4.30}
+\PYG{g+go}{  standard difference deviation : 5.35}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYGZbs{}
+\PYG{g+go}{                pageTitle=\PYGZsq{}Ranking the students\PYGZsq{})}
 \end{sphinxVerbatim}
 
-Notice the summary missing for course \sphinxstyleemphasis{g3} (see \hyperref[\detokenize{tutorial:academicstatistics}]{Listing \ref{\detokenize{tutorial:academicstatistics}}} Lines 23\sphinxhyphen{}27) because of two missing evaluations, inducing here an insufficient number of remaining evaluations.
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{rankingStudents}.png}
+\caption{Ranking the students with a performance heatmap}\label{\detokenize{tutorial:rankingstudents}}\end{figure}
 
 
 \subsection{Random linearly ranked performance tableaux}
