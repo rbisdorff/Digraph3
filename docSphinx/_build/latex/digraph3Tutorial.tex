@@ -2285,14 +2285,14 @@ When parameter \sphinxstyleemphasis{WithTypes} is set to \sphinxstyleemphasis{Tr
 
 The example tableau, generated for instance above with \sphinxstyleemphasis{missingDataProbability} = 0.03, \sphinxstyleemphasis{WithTypes} = True and \sphinxstyleemphasis{seed} = 100 (see \hyperref[\detokenize{tutorial:academicperformancetableau}]{Listing \ref{\detokenize{tutorial:academicperformancetableau}}} Lines 2\sphinxhyphen{}4), results in a set of two excellent (\sphinxstyleemphasis{s05}, \sphinxstyleemphasis{s07}), five good (\sphinxstyleemphasis{s02}, \sphinxstyleemphasis{s03}, \sphinxstyleemphasis{s06}, \sphinxstyleemphasis{s09}, \sphinxstyleemphasis{s10}), three fair (\sphinxstyleemphasis{s01}, \sphinxstyleemphasis{s04}, \sphinxstyleemphasis{s08}) and one weak (\sphinxstyleemphasis{s11}) student performances. Notice that six students get a grade below the course validating threshold 10 and we observe four missing grades (NA), two in course \sphinxstyleemphasis{g5} and one in course \sphinxstyleemphasis{g3} and course \sphinxstyleemphasis{g6} (see Lines 19\sphinxhyphen{}29).
 
-We may show a statistical summary of the students’ grades obtained in the heighest weighted course, namely \sphinxstyleemphasis{g7}, followed by a linear ranking of the students’ performances shown with a performance heatmap view.
+We may show a statistical summary of the students’ grades obtained in the heighest weighted course, namely \sphinxstyleemphasis{g7}, followed by a performance heatmap browser view showing a global ranking of the students’ performances from best to weakest.
 \sphinxSetupCaptionForVerbatim{Student performance summary statistics per course}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:academicstatistics}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showCourseStatistics}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{g7}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Summary performance statistics \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Course name    : g7}
-\PYG{g+go}{  Course weight  : 2}
+\PYG{g+go}{  Course weight  : 5}
 \PYG{g+go}{  \PYGZsh{} Students     : 11}
 \PYG{g+go}{  grading scale  : 0.00 \PYGZhy{} 20.00}
 \PYG{g+go}{  \PYGZsh{} missing evaluations : 0}
@@ -2305,7 +2305,7 @@ We may show a statistical summary of the students’ grades obtained in the heig
 \PYG{g+go}{  minimal evaluation    : 6.00}
 \PYG{g+go}{  mean absolute difference      : 4.30}
 \PYG{g+go}{  standard difference deviation : 5.35}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}
 \PYG{g+go}{                pageTitle=\PYGZsq{}Ranking the students\PYGZsq{})}
 \end{sphinxVerbatim}
 
@@ -2314,7 +2314,30 @@ We may show a statistical summary of the students’ grades obtained in the heig
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{rankingStudents}.png}
-\caption{Ranking the students with a performance heatmap}\label{\detokenize{tutorial:rankingstudents}}\end{figure}
+\caption{Ranking the students with a performance heatmap view}\label{\detokenize{tutorial:rankingstudents}}\end{figure}
+
+The ranking shown here in \hyperref[\detokenize{tutorial:rankingstudents}]{Fig.\@ \ref{\detokenize{tutorial:rankingstudents}}} is produced with the default \sphinxstyleemphasis{NetFlows} rule (see tutorial {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}}). With a mean marginal correlation of +0.361 (see \hyperref[\detokenize{tutorial:rankingquality}]{Listing \ref{\detokenize{tutorial:rankingquality}}} Lines 15\sphinxhyphen{}) associated with a low standard deviation (0.248), the result represents a rather \sphinxstyleemphasis{fair weighted consensus} made between the individual courses’ marginal rankings.
+\sphinxSetupCaptionForVerbatim{Consensus quality of the students’s ranking}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:rankingquality}}}
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showRankingConsensusQuality}\PYG{p}{(}\PYG{n}{t}\PYG{o}{.}\PYG{n}{netFlowsRanking}\PYG{p}{)}
+\PYG{g+go}{ Consensus quality of ranking:}
+\PYG{g+go}{  [\PYGZsq{}s07\PYGZsq{}, \PYGZsq{}s02\PYGZsq{}, \PYGZsq{}s09\PYGZsq{}, \PYGZsq{}s05\PYGZsq{}, \PYGZsq{}s06\PYGZsq{}, \PYGZsq{}s03\PYGZsq{}, \PYGZsq{}s10\PYGZsq{},}
+\PYG{g+go}{   \PYGZsq{}s01\PYGZsq{}, \PYGZsq{}s08\PYGZsq{}, \PYGZsq{}s04\PYGZsq{}, \PYGZsq{}s11\PYGZsq{}]}
+\PYG{g+go}{ criterion (weight): correlation}
+\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{  g7 (0.294): +0.727}
+\PYG{g+go}{  g4 (0.235): +0.309}
+\PYG{g+go}{  g2 (0.059): +0.291}
+\PYG{g+go}{  g3 (0.176): +0.200}
+\PYG{g+go}{  g1 (0.118): +0.109}
+\PYG{g+go}{  g6 (0.059): +0.091}
+\PYG{g+go}{  g5 (0.059): +0.073}
+\PYG{g+go}{ Summary:}
+\PYG{g+go}{  Weighted mean marginal correlation (a): +0.361}
+\PYG{g+go}{  Standard deviation (b)                : +0.248}
+\PYG{g+go}{  Ranking fairness (a)\PYGZhy{}(b)              : +0.113}
+\end{sphinxVerbatim}
 
 
 \subsection{Random linearly ranked performance tableaux}
