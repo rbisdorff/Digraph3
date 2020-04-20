@@ -16,7 +16,7 @@
 
 
 Tutorials of the Digraph3 resources
------------------------------------
+===================================
 
 .. only:: html
 
@@ -29,7 +29,7 @@ Tutorials of the Digraph3 resources
 .. only:: html 
 
     .. contents:: Content Table
-       :depth: 1	
+       :depth: 2	
 
 .. highlight:: python
 	:linenothreshold: 2
@@ -2021,9 +2021,9 @@ When parameter *WithTypes* is set to *True*, the students are randomly allocated
     [['g2', 'g5', 'g6'], ['g1'], ['g3'], ['g4'], ['g7']]
 
 
-The example tableau, generated for instance above with *missingDataProbability* = 0.03, *WithTypes* = True and *seed* = 100 (see :numref:`academicPerformanceTableau` Lines 2-4), results in a set of two excellent (*s05*, *s07*), five good (*s02*, *s03*, *s06*, *s09*, *s10*), three fair (*s01*, *s04*, *s08*) and one weak (*s11*) student performances. Notice that six students get a grade below the course validating threshold 10 and we observe four missing grades (NA), two in course *g6* and one in course *g3* and course *g7* (see Lines 19-29).
+The example tableau, generated for instance above with *missingDataProbability* = 0.03, *WithTypes* = True and *seed* = 100 (see :numref:`academicPerformanceTableau` Lines 2-4), results in a set of two excellent (*s05*, *s07*), five good (*s02*, *s03*, *s06*, *s09*, *s10*), three fair (*s01*, *s04*, *s08*) and one weak (*s11*) student performances. Notice that six students get a grade below the course validating threshold 10 and we observe four missing grades (NA), two in course *g5* and one in course *g3* and course *g6* (see Lines 19-29).
 
-We may show a statistical summary of the students' grades obtained in the heighest weighted course, namely *g7*, followed by a linear ranking of the students' performances shown with a performance heatmap view.
+We may show a statistical summary of the students' grades obtained in the heighest weighted course, namely *g7*, followed by a performance heatmap browser view showing a global ranking of the students' performances from best to weakest.
 
 .. code-block:: pycon
    :name: academicStatistics
@@ -2033,7 +2033,7 @@ We may show a statistical summary of the students' grades obtained in the heighe
    >>> t.showCourseStatistics('g7')
     *----- Summary performance statistics ------*
      Course name    : g7
-     Course weight  : 2
+     Course weight  : 5
      # Students     : 11
      grading scale  : 0.00 - 20.00
      # missing evaluations : 0
@@ -2046,7 +2046,7 @@ We may show a statistical summary of the students' grades obtained in the heighe
      minimal evaluation    : 6.00
      mean absolute difference      : 4.30
      standard difference deviation : 5.35
-   >>> showHTMLPerformanceHeatmap(colorLevels=5,\
+   >>> t.showHTMLPerformanceHeatmap(colorLevels=5,
                    pageTitle='Ranking the students')
 
 .. figure:: rankingStudents.png
@@ -2054,7 +2054,32 @@ We may show a statistical summary of the students' grades obtained in the heighe
    :width: 400 px
    :align: center
 
-   Ranking the students with a performance heatmap
+   Ranking the students with a performance heatmap view
+
+The ranking shown here in :numref:`rankingStudents` is produced with the default *NetFlows* rule (see tutorial :ref:`Ranking-Tutorial-label`). With a mean marginal correlation of +0.361 (see :numref:`rankingQuality` Lines 15-) associated with a low standard deviation (0.248), the result represents a rather *fair weighted consensus* made between the individual courses' marginal rankings.
+
+.. code-block:: pycon
+   :name: rankingQuality
+   :caption: Consensus quality of the students's ranking 	  
+   :linenos:
+
+   >>> t.showRankingConsensusQuality(t.netFlowsRanking)
+    Consensus quality of ranking:
+     ['s07', 's02', 's09', 's05', 's06', 's03', 's10',
+      's01', 's08', 's04', 's11']
+    criterion (weight): correlation
+    -------------------------------
+     g7 (0.294): +0.727
+     g4 (0.235): +0.309
+     g2 (0.059): +0.291
+     g3 (0.176): +0.200
+     g1 (0.118): +0.109
+     g6 (0.059): +0.091
+     g5 (0.059): +0.073
+    Summary:
+     Weighted mean marginal correlation (a): +0.361
+     Standard deviation (b)                : +0.248
+     Ranking fairness (a)-(b)              : +0.113
 
 
 Random linearly ranked performance tableaux
