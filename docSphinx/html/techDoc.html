@@ -4954,8 +4954,7 @@ on each of the three objectives.</p>
 <li><p>negativeWeightProbability := [0,1] (default 0.10), ‘min’ preference direction probability</p></li>
 <li><dl>
 <dt>commonScale := (Min, Max)</dt><dd><div class="line-block">
-<div class="line">when common Scale = False, (0.0,10.0) by default if OrdinalScales == True and CommonScale=None,</div>
-<div class="line">and (0.0,100.0) by default otherwise </div>
+<div class="line">when commonScale == None, (Min=0.0,Max=10.0) by default if OrdinalScales == True and (Min=0.0,Max=100.0) by default otherwise</div>
 </div>
 </dd>
 </dl>
@@ -4982,7 +4981,7 @@ on each of the three objectives.</p>
 </dd>
 </dl>
 </li>
-<li><p>valueDigits := 2 (default, for cardinal scales only)</p></li>
+<li><p>valueDigits := 2 (default)</p></li>
 <li><p>vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.</p></li>
 <li><p>Debug := True / False (default)</p></li>
 </ul>

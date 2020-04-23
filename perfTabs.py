@@ -2772,6 +2772,55 @@ The performance evaluations of each decision alternative on each criterion are g
             html += '</body></html>'
         return html
 
+    def _computeRankingConsensusQuality(self,ranking,Comments=False,Threading=False,nbrOfCPUs=1):
+        """
+        Renders the marginal criteria correlations with a given ranking with summary.
+        """
+        from outrankingDigraphs import BipolarOutrankingDigraph
+        from math import sqrt
+        g = BipolarOutrankingDigraph(self,Normalized=True)
+        criteria = self.criteria
+        marginalCorrelations =\
+                        g.computeMarginalVersusGlobalRankingCorrelations(\
+                                ranking,ValuedCorrelation=True,Threading=Threading,
+                                nbrCores=nbrOfCPUs)
+        ncrit = Decimal(str(len(marginalCorrelations)))
+        meanMarginalCorrelation = Decimal('0.0')
+        varMarginalCorrelation = Decimal('0.0')
+        moment4 = Decimal('0.0')
+        sumWeights = Decimal('0.0')
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            sumWeights += abs(criteria[cg[1]]['weight'])
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            cgw = abs(criteria[cg[1]]['weight'])/sumWeights
+            meanMarginalCorrelation += cg[0]*cgw
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            cgw = abs(criteria[cg[1]]['weight'])/sumWeights
+            varMarginalCorrelation += ((cg[0]-meanMarginalCorrelation)**2)*cgw
+            moment4 += ((cg[0]-meanMarginalCorrelation)**4)*cgw
+            #varMarginalCorrelation += (cg[0]**2)*cgw
+        #meanMarginalCriteriaCorrelation /= ncrit
+        #varMarginalCriteriaCorrelation /= ncrit
+        #varMarginalCorrelation -= meanMarginalCorrelation*meanMarginalCriteriaCorrelation
+        sdMarginalCorrelation = sqrt(varMarginalCorrelation)
+        kurtosis = moment4 -3
+        # showing the results
+        if Comments:
+            print('Consensus quality of ranking:')
+            print(ranking)
+            print('criterion (weight): correlation')
+            print('-------------------------------')
+            for cg in marginalCorrelations:
+                print('%s (%.3f): %+.3f' % (cg[1],abs(criteria[cg[1]]['weight'])/sumWeights,cg[0]) )
+            print('Summary:')
+            print('Weighted mean marginal correlation (a): %+.3f' % meanMarginalCorrelation)
+            print('Standard deviation (b)                : %+.3f' % sdMarginalCorrelation)
+            print('Ranking fairness (Kurtosis a^4/b^4)   : %+.3f' % kurtosis)
+        return (marginalCorrelations,meanMarginalCorrelation,sdMarginalCorrelation)
+
     def computeRankingConsensusQuality(self,ranking,Comments=False,Threading=False,nbrOfCPUs=1):
         """
         Renders the marginal criteria correlations with a given ranking with summary.
@@ -2817,8 +2866,7 @@ The performance evaluations of each decision alternative on each criterion are g
             print('Standard deviation (b)                : %+.3f' % sdMarginalCorrelation)
             print('Ranking fairness (a)-(b)              : %+.3f' %\
                   (float(meanMarginalCorrelation) - sdMarginalCorrelation) )
-        else:
-            return (marginalCorrelations,meanMarginalCorrelation,sdMarginalCorrelation)
+        return (marginalCorrelations,meanMarginalCorrelation,sdMarginalCorrelation)
         
     def showRankingConsensusQuality(self,ranking):
         """
@@ -7509,7 +7557,7 @@ if __name__ == "__main__":
     from digraphs import *
     from outrankingDigraphs import *
     import sortingDigraphs
-    import linearOrders
+    from linearOrders import *
     from transitiveDigraphs import *
     from randomPerfTabs import *
     from time import time
@@ -7534,11 +7582,11 @@ if __name__ == "__main__":
 ##    t.computeRankingConsensusQuality(t.netFlowsRanking)
 ##    print('*------ test performance heatmap -----*')
     randomSeed = random.randint(1,1000)
-    t = RandomCBPerformanceTableau(numberOfCriteria=5,
-                                   numberOfActions=7,
+    t = RandomCBPerformanceTableau(numberOfCriteria=21,
+                                   numberOfActions=13,
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
-                                   NegativeWeights=True,
+                                   NegativeWeights=False,
                                    seed=randomSeed,
                                    Debug=False)
 ##    actionsList = [x for x in t.actions.keys()]
@@ -7549,14 +7597,17 @@ if __name__ == "__main__":
 ##                                   Correlations=True,
 ##                                   ndigits=4,
 ##                                   Debug=False))
-    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
-                                 rankingRule=None,Transposed=False)
-    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
-                                 rankingRule='NetFlows',Transposed=False)
-    t.showRankingConsensusQuality(t.netFlowsRanking)
-    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
-                                 rankingRule='Copeland',Transposed=False)
-    t.showRankingConsensusQuality(t.copelandRanking)
+##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
+##                                 rankingRule=None,Transposed=False)
+##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
+##                                 rankingRule='NetFlows',Transposed=False)
+    g = BipolarOutrankingDigraph(t,Normalized=True)
+    nf = NetFlowsRanking(g)
+    t.showRankingConsensusQuality(nf.netFlowsRanking)
+##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
+##                                 rankingRule='Copeland',Transposed=False)
+    cop = CopelandRanking(g)
+    t.showRankingConsensusQuality(cop.copelandRanking)
 
     
     print('*------------------*')

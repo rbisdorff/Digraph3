@@ -2093,16 +2093,15 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         * shortNamePrefix := 'a' (default)
         * number of Criteria := 13 (default)
         * weightDistribution := 'equiobjectives' (default)
-                              | 'equisignificant' (weights set all to 1)
-                              | 'random' (in the range 1 to numberOfCriteria)
+                | 'equisignificant' (weights set all to 1)
+                | 'random' (in the range 1 to numberOfCriteria)
         * weightScale := [1,numerOfCriteria] (random default)
         * IntegerWeights := True (default) / False
         * OrdinalScales := True / False (default), if True commonScale is set to (0,10)
         * NegativeWeights := True (default) / False. If False, evaluations to be minimized are negative.
         * negativeWeightProbability := [0,1] (default 0.10), 'min' preference direction probability  
         * commonScale := (Min, Max)
-                | when common Scale = False, (0.0,10.0) by default if OrdinalScales == True and CommonScale=None,
-                | and (0.0,100.0) by default otherwise 
+                | when commonScale == None, (Min=0.0,Max=10.0) by default if OrdinalScales == True and (Min=0.0,Max=100.0) by default otherwise
         * commonThresholds := ((Ind,Ind_slope),(Pref,Pref_slope),(Veto,Veto_slope)) with
                 | Ind < Pref < Veto in [0.0,100.0] such that 
                 | (Ind/100.0*span + Ind_slope*x) < (Pref/100.0*span + Pref_slope*x) < (Pref/100.0*span + Pref_slope*x)
@@ -2115,7 +2114,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 | (5.8661,2.62203),(5.05556,5.05556) and (2.62203, 5.8661)
                 | chosen by default for 'good', 'fair' and 'weak' evaluations. 
                 | Constant parameters may be provided.
-        * valueDigits := 2 (default, for cardinal scales only)
+        * valueDigits := 2 (default)
         * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.
         * Debug := True / False (default)
 

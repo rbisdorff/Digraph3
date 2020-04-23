@@ -2133,16 +2133,15 @@
 <span class="sd">        * shortNamePrefix := &#39;a&#39; (default)</span>
 <span class="sd">        * number of Criteria := 13 (default)</span>
 <span class="sd">        * weightDistribution := &#39;equiobjectives&#39; (default)</span>
-<span class="sd">                              | &#39;equisignificant&#39; (weights set all to 1)</span>
-<span class="sd">                              | &#39;random&#39; (in the range 1 to numberOfCriteria)</span>
+<span class="sd">                | &#39;equisignificant&#39; (weights set all to 1)</span>
+<span class="sd">                | &#39;random&#39; (in the range 1 to numberOfCriteria)</span>
 <span class="sd">        * weightScale := [1,numerOfCriteria] (random default)</span>
 <span class="sd">        * IntegerWeights := True (default) / False</span>
 <span class="sd">        * OrdinalScales := True / False (default), if True commonScale is set to (0,10)</span>
 <span class="sd">        * NegativeWeights := True (default) / False. If False, evaluations to be minimized are negative.</span>
 <span class="sd">        * negativeWeightProbability := [0,1] (default 0.10), &#39;min&#39; preference direction probability  </span>
 <span class="sd">        * commonScale := (Min, Max)</span>
-<span class="sd">                | when common Scale = False, (0.0,10.0) by default if OrdinalScales == True and CommonScale=None,</span>
-<span class="sd">                | and (0.0,100.0) by default otherwise </span>
+<span class="sd">                | when commonScale == None, (Min=0.0,Max=10.0) by default if OrdinalScales == True and (Min=0.0,Max=100.0) by default otherwise</span>
 <span class="sd">        * commonThresholds := ((Ind,Ind_slope),(Pref,Pref_slope),(Veto,Veto_slope)) with</span>
 <span class="sd">                | Ind &lt; Pref &lt; Veto in [0.0,100.0] such that </span>
 <span class="sd">                | (Ind/100.0*span + Ind_slope*x) &lt; (Pref/100.0*span + Pref_slope*x) &lt; (Pref/100.0*span + Pref_slope*x)</span>
@@ -2155,7 +2154,7 @@
 <span class="sd">                | (5.8661,2.62203),(5.05556,5.05556) and (2.62203, 5.8661)</span>
 <span class="sd">                | chosen by default for &#39;good&#39;, &#39;fair&#39; and &#39;weak&#39; evaluations. </span>
 <span class="sd">                | Constant parameters may be provided.</span>
-<span class="sd">        * valueDigits := 2 (default, for cardinal scales only)</span>
+<span class="sd">        * valueDigits := 2 (default)</span>
 <span class="sd">        * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.</span>
 <span class="sd">        * Debug := True / False (default)</span>
 
