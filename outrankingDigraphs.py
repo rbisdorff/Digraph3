@@ -1918,11 +1918,22 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         print(' (+4) ', end=' ')
                     else:
                         print(' (%+d) ' % stability[x[1]][y[1]], end=' ')
-                print()
+                print('')
+        print('Valuation domain: [%.3f; %.3f]' %\
+                  (self.valuationdomain['min'],self.valuationdomain['max']) )
+        if StabilityDenotation:
+            print('Stability denotation semantics:')
+            print(' +4|-4 : unanimous outranking | outranked situation;')
+            print(' +3|-3 : validated outranking | outranked situation')
+            print('         in each coalition of equisignificant criteria;')
+            print(' +2|-2 : outranking | outranked situation validated')
+            print('         with all potential significance weights that are')
+            print('         compatible with the given significance preorder;')
+            print(' +1|-1 : validated outranking | outranked situation with')
+            print('         the given significance weights;')
+            print('   0   : indeterminate relational situation.')
+            print()
             
-                
-        print('\n')
-
     def showPerformanceTableau(self,actionsSubset=None):
         """
         Print the performance Tableau.
@@ -7886,7 +7897,43 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph):
                     relation[a][b] = Med
         self.relation = relation
         return stability
-         
+
+    def showRelationTable(self,IntegerValues=False,
+                          actionsSubset= None,
+                          Sorted=True,
+                          hasLPDDenotation=False,
+                          StabilityDenotation=True,
+                          hasLatexFormat=False,
+                          hasIntegerValuation=False,
+                          relation=None,
+                          ReflexiveTerms=True):
+        """
+        prints the relation valuation in actions X actions table format by default with
+        the stability denotation in brackets:
+
+        +4 | -4 : unanimous outranking | outranked situation;
+
+        +3 | -3 : validated outranking | outranked situation in each coalition
+        of equisignificant criteria;
+
+        +2 | -2 : outranking | outranked situation validated with all potential significance weights
+        that are compatible with the given significance preorder;
+
+        +1 | -1 : validated outranking | outranked situation with the given significance weights;
+
+        0 : indeterminate relational situation.
+
+        """
+        OutrankingDigraph.showRelationTable(self,
+                          IntegerValues=IntegerValues,
+                          actionsSubset= actionsSubset,
+                          Sorted=Sorted,
+                          hasLPDDenotation=hasLPDDenotation,
+                          StabilityDenotation=StabilityDenotation,
+                          hasLatexFormat=hasLatexFormat,
+                          hasIntegerValuation=hasIntegerValuation,
+                          relation=relation,
+                          ReflexiveTerms=ReflexiveTerms)
 
 class OldRobustOutrankingDigraph(BipolarOutrankingDigraph):
     """
@@ -9719,7 +9766,7 @@ if __name__ == "__main__":
                                   tempDir=None,nbrCores=8,Comments=True,Debug=False)
     g.showRelationTable(StabilityDenotation=True)
     rg = RobustOutrankingDigraph(t,Debug=False)
-    rg.showRelationTable(StabilityDenotation=True)
+    rg.showRelationTable()
     cg = ConfidentBipolarOutrankingDigraph(t)
     cg.showRelationTable()
     
