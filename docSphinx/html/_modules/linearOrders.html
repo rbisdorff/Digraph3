@@ -405,7 +405,8 @@
         <span class="n">listPairs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="p">(</span><span class="n">z</span> <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">actions</span> <span class="k">if</span> <span class="n">z</span> <span class="o">!=</span> <span class="n">x</span><span class="p">):</span>
-                <span class="n">listPairs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+                <span class="n">linkCharacteristic</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span><span class="o">-</span><span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
+                <span class="n">listPairs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">linkCharacteristic</span><span class="p">,(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">),</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
         <span class="n">listPairs</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="n">Leximin</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">listPairs</span><span class="p">)</span>
@@ -1803,7 +1804,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
     <span class="kn">import</span> <span class="nn">random</span>
-    <span class="kn">import</span> <span class="nn">time</span>
+    <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing class and methods -------&#39;</span><span class="p">)</span>
 
     <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1812,40 +1813,40 @@
     <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
                                    <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-    <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
     <span class="c1">#t = PerformanceTableau(&#39;testLin&#39;)    </span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="c1">#g.showRelationTable()</span>
-    <span class="n">mr</span> <span class="o">=</span> <span class="n">MedianRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Median Ranking&#39;</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">mr</span><span class="o">.</span><span class="n">medianRanking</span><span class="p">,</span>
-                                 <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-    <span class="n">ke</span> <span class="o">=</span> <span class="n">KemenyRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;median&#39;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">mr</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">:</span>
-        <span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingConsensusQuality</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="s1">&#39;</span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">corr</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="s1">&#39;</span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">corr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kemeny&#39;</span><span class="p">)</span>
+<span class="c1">##    #mr = MedianRanking(g,Threading=False,nbrOfCPUs=8,Debug=False)</span>
+<span class="c1">##    t.showHTMLPerformanceHeatmap(pageTitle=&#39;Median Ranking&#39;,actionsList=mr.medianRanking,</span>
+<span class="c1">##                                 Correlations=True,colorLevels=5)</span>
+<span class="c1">##    #ke = KemenyRanking(g)</span>
+<span class="c1">##    print(&#39;median&#39;)</span>
+<span class="c1">##    for r in mr.maximalRankings:</span>
+<span class="c1">##        corr = g.computeRankingConsensusQuality(r)</span>
+<span class="c1">##        print(r,&#39;%.4f&#39; % (corr[1]), &#39;%.4f&#39; % (corr[2]) )</span>
+<span class="c1">##    print(&#39;Kemeny&#39;)</span>
 <span class="c1">##    for r in ke.maximalRankings:</span>
 <span class="c1">##        cons = g.computeRankingConsensusQuality(r)</span>
 <span class="c1">##        print(r,cons[1],cons[2])</span>
-    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ke</span><span class="o">.</span><span class="n">orderedMaximalRankings</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Kemeny Ranking&#39;</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">ke</span><span class="o">.</span><span class="n">kemenyRanking</span><span class="p">,</span>
-                                 <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1">##    for r in ke.orderedMaximalRankings:</span>
+<span class="c1">##        print(r[2],r[0],r[1])</span>
+<span class="c1">##</span>
+<span class="c1">##    time.sleep(3)</span>
+<span class="c1">##    t.showHTMLPerformanceHeatmap(pageTitle=&#39;Kemeny Ranking&#39;,actionsList=ke.kemenyRanking,</span>
+<span class="c1">##                                 Correlations=True,colorLevels=5)</span>
 <span class="c1">##    print()</span>
 <span class="c1">##    print(&#39;==&gt;&gt; net flows ordering:&#39;)</span>
 <span class="c1">##    t0 = time()</span>
-    <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">##    nf = NetFlowsOrder(g,Debug=False)</span>
 <span class="c1">##    #g.showRelationTable(actionsSubset=nf.netFlowsRanking,Sorted=False)</span>
 <span class="c1">##    #print(nf.netFlowsRanking)</span>
 <span class="c1">##    #print(nf.netFlowsOrder)</span>
 <span class="c1">##    #corr = g.computeOrdinalCorrelation(nf)</span>
 <span class="c1">##    #g.showCorrelation(corr)</span>
 <span class="c1">##    #print(time()-t0)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;NetFlows Ranking&#39;</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">,</span>
-                                 <span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">##    t.showHTMLPerformanceHeatmap(pageTitle=&#39;NetFlows Ranking&#39;,actionsList=nf.netFlowsRanking,</span>
+<span class="c1">##                                 colorLevels=5,Correlations=True)</span>
 <span class="c1">##    print()</span>
 <span class="c1">##    print(&#39;==&gt;&gt; iterated net flows ordering:&#39;)</span>
 <span class="c1">##    from linearOrders import IteratedNetFlowsRanking</span>
@@ -1936,38 +1937,38 @@
 <span class="c1">##    # print(g.computeOrdinalCorrelation(of))</span>
 <span class="c1">##    # print(time()-t0)</span>
 <span class="c1">##    # print()</span>
-<span class="c1">##    print(&#39;==&gt;&gt; Copeland ordering:&#39;)</span>
-<span class="c1">##    t0 = time()</span>
-<span class="c1">##    cop = CopelandOrder(g,Comments=True)</span>
-<span class="c1">##    g.showRelationTable(actionsSubset=cop.copelandRanking)</span>
-<span class="c1">##    print(cop.copelandRanking)</span>
-<span class="c1">##    print(cop.copelandOrder)</span>
-<span class="c1">##    print(g.computeOrdinalCorrelation(cop))</span>
-<span class="c1">##    print(time()-t0)</span>
-<span class="c1">##    print()</span>
-<span class="c1">##    print(&#39;==&gt;&gt; Kohler ordering:&#39;)</span>
-<span class="c1">##    t0 = time()</span>
-<span class="c1">##    ko = KohlerOrder(g)</span>
-<span class="c1">##    g.showRelationTable(actionsSubset=ko.kohlerRanking)</span>
-<span class="c1">##    print(ko.kohlerRanking)</span>
-<span class="c1">##    print(ko.kohlerOrder)</span>
-<span class="c1">##    print(g.computeOrdinalCorrelation(ko))</span>
-<span class="c1">##    print(time()-t0)</span>
-<span class="c1">##    print()</span>
-<span class="c1">##    print(&#39;==&gt;&gt; ranked pairs ordering:&#39;)</span>
-<span class="c1">##    t0 = time()</span>
-<span class="c1">##    rp = RankedPairsOrder(g)</span>
-<span class="c1">##    g.showRelationTable(actionsSubset=rp.rankedPairsRanking)</span>
-<span class="c1">##    print(rp.rankedPairsRanking)</span>
-<span class="c1">##    print(rp.rankedPairsOrder)</span>
-<span class="c1">##    print(g.computeOrdinalCorrelation(rp))</span>
-<span class="c1">##    print(time()-t0)</span>
-<span class="c1">##    print()</span>
-<span class="c1">##    print(&#39;==&gt;&gt; Leximin ordering:&#39;)</span>
-<span class="c1">##    le = RankedPairsOrder((-g),Leximin=True)</span>
-<span class="c1">##    g.showRelationTable()</span>
-<span class="c1">##    print(le.rankedPairsOrder)</span>
-<span class="c1">##    print((-g).computeOrdinalCorrelation(le))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Copeland ordering:&#39;</span><span class="p">)</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandOrder</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Kohler ordering:&#39;</span><span class="p">)</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">ko</span> <span class="o">=</span> <span class="n">KohlerOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">ko</span><span class="o">.</span><span class="n">kohlerRanking</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ko</span><span class="o">.</span><span class="n">kohlerRanking</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ko</span><span class="o">.</span><span class="n">kohlerOrder</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">ko</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; ranked pairs ordering:&#39;</span><span class="p">)</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">rp</span> <span class="o">=</span> <span class="n">RankedPairsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">rp</span><span class="o">.</span><span class="n">rankedPairsRanking</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">rp</span><span class="o">.</span><span class="n">rankedPairsRanking</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">rp</span><span class="o">.</span><span class="n">rankedPairsOrder</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">rp</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Leximin ordering:&#39;</span><span class="p">)</span>
+    <span class="n">le</span> <span class="o">=</span> <span class="n">RankedPairsOrder</span><span class="p">((</span><span class="o">-</span><span class="n">g</span><span class="p">),</span><span class="n">Leximin</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">rankedPairsOrder</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">((</span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">le</span><span class="p">))</span>
 
     
 <span class="c1">##    t = RandomCBPerformanceTableau(weightDistribution=&quot;equiobjectives&quot;,</span>

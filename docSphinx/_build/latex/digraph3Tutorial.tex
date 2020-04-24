@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{April 20, 2020}
+\date{April 24, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -549,7 +549,7 @@ We may now extract both the \sphinxstyleemphasis{symmetric} as well as the \sphi
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{AsymmetricPartialDigraph}\PYG{p}{,}
-\PYG{g+gp}{... }                     \PYG{n}{SymmetricPartialDigraph}
+\PYG{g+go}{                         SymmetricPartialDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{asymDg} \PYG{o}{=} \PYG{n}{AsymmetricPartialDigraph}\PYG{p}{(}\PYG{n}{dg}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{asymDg}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{symDG} \PYG{o}{=} \PYG{n}{SymmetricPartialDigraph}\PYG{p}{(}\PYG{n}{dg}\PYG{p}{)}
@@ -845,7 +845,7 @@ Let us finally mention some special universal classes of digraphs that are readi
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{CompleteDigraph}\PYG{p}{,}\PYG{n}{EmptyDigraph}\PYG{p}{,}
-\PYG{g+gp}{... }                  \PYG{n}{IndeterminateDigraph}
+\PYG{g+go}{                      IndeterminateDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{help}\PYG{p}{(}\PYG{n}{CompleteDigraph}\PYG{p}{)}
 \PYG{g+go}{ Help on class CompleteDigraph in module digraphs:}
 \PYG{g+go}{ class CompleteDigraph(Digraph)}
@@ -959,8 +959,8 @@ The module provides a \sphinxcode{\sphinxupquote{votingProfiles.RandomLinearVoti
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{n}{RandomLinearVotingProfile}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v} \PYG{o}{=} \PYG{n}{RandomLinearVotingProfile}\PYG{p}{(}\PYG{n}{numberOfVoters}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}
-\PYG{g+gp}{... }                              \PYG{n}{numberOfCandidates}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,}
-\PYG{g+gp}{... }                              \PYG{n}{RandomWeights}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{                                  numberOfCandidates=3,}
+\PYG{g+go}{                                  RandomWeights=True)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v}\PYG{o}{.}\PYG{n}{candidates}
 \PYG{g+go}{ OrderedDict([ (\PYGZsq{}a1\PYGZsq{},\PYGZob{}\PYGZsq{}name\PYGZsq{}:\PYGZsq{}a1\PYGZcb{}), (\PYGZsq{}a2\PYGZsq{},\PYGZob{}\PYGZsq{}name\PYGZsq{}:\PYGZsq{}a2\PYGZsq{}\PYGZcb{}),}
 \PYG{g+go}{               (\PYGZsq{}a3\PYGZsq{},\PYGZob{}\PYGZsq{}name\PYGZsq{}:\PYGZsq{}a3\PYGZsq{}\PYGZcb{}) ])}
@@ -1195,7 +1195,7 @@ Many more tools for exploiting voting results are available like the browser hea
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:votingheatmap}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v}\PYG{o}{.}\PYG{n}{showHTMLVotingHeatmap}\PYG{p}{(}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NetFlows}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }                        \PYG{n}{Transposed}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{                            Transposed=False)}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -1220,11 +1220,11 @@ Let us generate such a linear voting profile for an election with 1000 voters an
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{n}{RandomLinearVotingProfile}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp} \PYG{o}{=} \PYG{n}{RandomLinearVotingProfile}\PYG{p}{(}\PYG{n}{numberOfCandidates}\PYG{o}{=}\PYG{l+m+mi}{15}\PYG{p}{,}
-\PYG{g+gp}{... }                        \PYG{n}{numberOfVoters}\PYG{o}{=}\PYG{l+m+mi}{1000}\PYG{p}{,}
-\PYG{g+gp}{... }                        \PYG{n}{WithPolls}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}
-\PYG{g+gp}{... }                        \PYG{n}{partyRepartition}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{,}
-\PYG{g+gp}{... }                        \PYG{n}{other}\PYG{o}{=}\PYG{l+m+mf}{0.1}\PYG{p}{,}
-\PYG{g+gp}{... }                        \PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mf}{0.9189670954954139}\PYG{p}{)}
+\PYG{g+go}{                            numberOfVoters=1000,}
+\PYG{g+go}{                            WithPolls=True,}
+\PYG{g+go}{                            partyRepartition=0.5,}
+\PYG{g+go}{                            other=0.1,}
+\PYG{g+go}{                            seed=0.9189670954954139)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} VotingProfile instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Instance class   : RandomLinearVotingProfile}
@@ -1295,7 +1295,7 @@ We may visualize the resulting pairwise majority margins by showing the HTML for
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cdg}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{n}{tableTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Pairwise majority margins}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }                          \PYG{n}{relationName}\PYG{o}{=}\PYG{n}{M}\PYG{p}{(}\PYG{n}{x}\PYG{o}{\PYGZgt{}}\PYG{n}{y}\PYG{p}{)}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{)}
+\PYG{g+go}{                              relationName=M(x\PYGZgt{}y)\PYGZsq{})}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -2084,10 +2084,10 @@ Example Python session
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import} \PYG{n}{Random3ObjectivesPerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{Random3ObjectivesPerformanceTableau}\PYG{p}{(}
-\PYG{g+gp}{... }          \PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{31}\PYG{p}{,}
-\PYG{g+gp}{... }          \PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{13}\PYG{p}{,}
-\PYG{g+gp}{... }          \PYG{n}{weightDistribution}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{equiobjectives}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }          \PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{120}\PYG{p}{)}
+\PYG{g+go}{              numberOfActions=31,}
+\PYG{g+go}{              numberOfCriteria=13,}
+\PYG{g+go}{              weightDistribution=\PYGZsq{}equiobjectives\PYGZsq{},}
+\PYG{g+go}{              seed=120)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showObjectives}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} show objectives \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZdq{}}
 \PYG{g+go}{ Eco: Economical aspect}
@@ -2137,11 +2137,11 @@ For testing purposes we provide a special \sphinxcode{\sphinxupquote{perfTabs.Pa
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{perfTabs} \PYG{k+kn}{import} \PYG{n}{PartialPerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{teco} \PYG{o}{=} \PYG{n}{PartialPerformanceTableau}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{criteriaSubset}\PYG{o}{=}\PYGZbs{}
-\PYG{g+gp}{... }                          \PYG{n}{t}\PYG{o}{.}\PYG{n}{objectives}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Eco}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{criteria}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+go}{                              t.objectives[\PYGZsq{}Eco\PYGZsq{}][\PYGZsq{}criteria\PYGZsq{}])}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{tsoc} \PYG{o}{=} \PYG{n}{PartialPerformanceTableau}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{criteriaSubset}\PYG{o}{=}\PYGZbs{}
-\PYG{g+gp}{... }                          \PYG{n}{t}\PYG{o}{.}\PYG{n}{objectives}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Soc}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{criteria}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+go}{                              t.objectives[\PYGZsq{}Soc\PYGZsq{}][\PYGZsq{}criteria\PYGZsq{}])}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{tenv} \PYG{o}{=} \PYG{n}{PartialPerformanceTableau}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{criteriaSubset}\PYG{o}{=}\PYGZbs{}
-\PYG{g+gp}{... }                          \PYG{n}{t}\PYG{o}{.}\PYG{n}{objectives}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Env}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{criteria}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+go}{                              t.objectives[\PYGZsq{}Env\PYGZsq{}][\PYGZsq{}criteria\PYGZsq{}])}
 \end{sphinxVerbatim}
 
 One may thus compute a partial bipolar\sphinxhyphen{}valued outranking digraph for each individual objective.
@@ -2412,7 +2412,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 \subsection{The ranking problem}
 \label{\detokenize{tutorial:the-ranking-problem}}
-We need to rank without ties a set \sphinxstyleemphasis{X} of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{strict outranking} characteristics, i.e. \(r(x\, > \, y)\) for all \sphinxstyleemphasis{x}, \sphinxstyleemphasis{y} in \sphinxstyleemphasis{X} (see {\hyperref[\detokenize{tutorial:codual-digraph-label}]{\sphinxcrossref{\DUrole{std,std-ref}{The strict outranking digraph}}}} and \sphinxcite{tutorial:bis-2013}).
+We need to rank without ties a set \sphinxstyleemphasis{X} of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{strict outranking} characteristics, i.e. \(r(x\, \succnsim \, y)\) for all \sphinxstyleemphasis{x}, \sphinxstyleemphasis{y} in \sphinxstyleemphasis{X} (see {\hyperref[\detokenize{tutorial:codual-digraph-label}]{\sphinxcrossref{\DUrole{std,std-ref}{The strict outranking digraph}}}} and \sphinxcite{tutorial:bis-2013}).
 
 Let us consider a didactic outranking digraph \sphinxstyleemphasis{g} generated from a random {\hyperref[\detokenize{tutorial:cost-benefit-performance-tableau-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Cost\sphinxhyphen{}Benefit performance tableau}}}} concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding \sphinxstyleemphasis{strict outranking digraph} with a {\hyperref[\detokenize{tutorial:codual-transform-label}]{\sphinxcrossref{\DUrole{std,std-ref}{codual transform}}}} as follows.
 \sphinxSetupCaptionForVerbatim{Random bipolar\sphinxhyphen{}valued strict outranking relation characteristics}
@@ -2420,7 +2420,7 @@ Let us consider a didactic outranking digraph \sphinxstyleemphasis{g} generated 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{RandomCBPerformanceTableau}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{,}
-\PYG{g+gp}{... }                               \PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{13}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{)}
+\PYG{g+go}{                                   numberOfCriteria=13,seed=200)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{Normalized}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd} \PYG{o}{=} \PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{g}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} codual digraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
@@ -2443,7 +2443,7 @@ Some ranking rules will work on the associated \sphinxstylestrong{Condorcet Digr
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:polarisedastrictoutranking}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ccd} \PYG{o}{=} \PYG{n}{PolarisedOutrankingDigraph}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{level}\PYG{o}{=}\PYG{n}{g}\PYG{o}{.}\PYG{n}{valuationdomain}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{med}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}
-\PYG{g+gp}{... }                               \PYG{n}{KeepValues}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}\PYG{n}{StrictCut}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{                                   KeepValues=False,StrictCut=True)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ccd}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}\PYG{n}{IntegerValues}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{  r(\PYGZgt{})\PYGZus{}med | \PYGZsq{}a1\PYGZsq{} \PYGZsq{}a2\PYGZsq{} \PYGZsq{}a3\PYGZsq{} \PYGZsq{}a4\PYGZsq{} \PYGZsq{}a5\PYGZsq{} \PYGZsq{}a6\PYGZsq{} \PYGZsq{}a7\PYGZsq{} \PYGZsq{}a8\PYGZsq{} \PYGZsq{}a9\PYGZsq{}}
@@ -2504,7 +2504,7 @@ The Digraph3 resources provide some of the most common of these ranking rules, l
 
 \subsection{The \sphinxstyleemphasis{Copeland} ranking}
 \label{\detokenize{tutorial:the-copeland-ranking}}
-\sphinxstyleemphasis{Copeland}’s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the median cut strict outranking digraph \sphinxstyleemphasis{ccd}. The rule computes for each alternative a score resulting from the sum of the differences between the crisp \sphinxstylestrong{strict outranking} characteristics \(r(x\, > \,y)_{>0}\) and the crisp \sphinxstylestrong{strict outranked} characteristics \(r(y\, > \, x)_{>0}\)  for all pairs of alternatives where \sphinxstyleemphasis{y} is different from \sphinxstyleemphasis{x}. The alternatives are ranked in decreasing order of these \sphinxstyleemphasis{Copeland} scores; ties, the case given, being resolved by a lexicographical rule.
+\sphinxstyleemphasis{Copeland}’s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the median cut strict outranking digraph \sphinxstyleemphasis{ccd}. The rule computes for each alternative a score resulting from the sum of the differences between the crisp \sphinxstylestrong{strict outranking} characteristics \(r(x\, \succnsim \,y)_{>0}\) and the crisp \sphinxstylestrong{strict outranked} characteristics \(r(y\, \succnsim \, x)_{>0}\)  for all pairs of alternatives where \sphinxstyleemphasis{y} is different from \sphinxstyleemphasis{x}. The alternatives are ranked in decreasing order of these \sphinxstyleemphasis{Copeland} scores; ties, the case given, being resolved by a lexicographical rule.
 \sphinxSetupCaptionForVerbatim{Computing a \sphinxstyleemphasis{Copeland} Ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:copelandranking}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -2585,7 +2585,7 @@ Let us now consider a similar ranking rule, but working directly on the \sphinxs
 
 \subsection{The \sphinxstyleemphasis{NetFlows} ranking}
 \label{\detokenize{tutorial:the-netflows-ranking}}\label{\detokenize{tutorial:netflows-ranking-label}}
-The valued version of the \sphinxstyleemphasis{Copeland} rule, called \sphinxstylestrong{NetFlows} rule, computes for each alternative \sphinxstyleemphasis{x} a \sphinxstyleemphasis{net flow} score,  i.e. the sum of the differences between the \sphinxstylestrong{strict outranking} characteristics \(r(x\, > \,y)\) and the \sphinxstylestrong{strict outranked} characteristics \(r(y\, > \,x)\) for all pairs of alternatives where \sphinxstyleemphasis{y} is different from \sphinxstyleemphasis{x}.
+The valued version of the \sphinxstyleemphasis{Copeland} rule, called \sphinxstylestrong{NetFlows} rule, computes for each alternative \sphinxstyleemphasis{x} a \sphinxstyleemphasis{net flow} score,  i.e. the sum of the differences between the \sphinxstylestrong{strict outranking} characteristics \(r(x\, \succnsim \,y)\) and the \sphinxstylestrong{strict outranked} characteristics \(r(y\, \succnsim \,x)\) for all pairs of alternatives where \sphinxstyleemphasis{y} is different from \sphinxstyleemphasis{x}.
 \sphinxSetupCaptionForVerbatim{Computing a \sphinxstyleemphasis{NetFlows} ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:netflowsranking}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -2910,7 +2910,7 @@ Let us finally mention another interesting \sphinxstyleemphasis{ranking\sphinxhy
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
-Rank the ordered pairs \((x,y)\) of alternatives in decreasing order of the outranking characteristic values \(r(x\, \geq \,y)\);
+Rank the ordered pairs \((x,y)\) of alternatives in decreasing order of \(r(x\, \succsim \,y) \,+\, r(y\, \not\succsim \,x)\);
 
 \item {} 
 Consider the pairs in that order (ties are resolved by a lexicographic rule):
@@ -3493,7 +3493,7 @@ The idea is to first decompose the complete outranking relation into an ordered 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{cRandPerfTabs} \PYG{k+kn}{import} \PYG{o}{*}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{cRandomPerformanceTableau}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}
-\PYG{g+gp}{... }                              \PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
+\PYG{g+go}{                                  numberOfCriteria=7,seed=100)}
 \end{sphinxVerbatim}
 
 We sort the 100 decision alternatives into overlapping quartile classes and rank with respect to the average quantile limits.
@@ -3731,16 +3731,16 @@ We observe an even more considerably less voluminous memory occupation: 208kB co
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{cIntegerOutrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ig} \PYG{o}{=} \PYG{n}{IntegerBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Complete outranking : }\PYG{l+s+si}{\PYGZpc{}+.4f}\PYG{l+s+s1}{\PYGZsq{}}\PYGZbs{}
-\PYG{g+gp}{... }    \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{ig}\PYG{o}{.}\PYG{n}{computeOrderCorrelation}\PYG{p}{(}\PYG{n}{ig}\PYG{o}{.}\PYG{n}{computeCopelandOrder}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYGZbs{}
-\PYG{g+gp}{... }       \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}
+\PYG{g+go}{        \PYGZpc{} (ig.computeOrderCorrelation(ig.computeCopelandOrder())\PYGZbs{}}
+\PYG{g+go}{           [\PYGZsq{}correlation\PYGZsq{}]))}
 \PYG{g+go}{ Complete outranking : +0.7474}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Sparse 4\PYGZhy{}tiling : }\PYG{l+s+si}{\PYGZpc{}+.4f}\PYG{l+s+s1}{\PYGZsq{}}\PYGZbs{}
-\PYG{g+gp}{... }    \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{ig}\PYG{o}{.}\PYG{n}{computeOrderCorrelation}\PYG{p}{(}\PYGZbs{}
-\PYG{g+gp}{... }       \PYG{n+nb}{list}\PYG{p}{(}\PYG{n+nb}{reversed}\PYG{p}{(}\PYG{n}{sg}\PYG{o}{.}\PYG{n}{boostedRanking}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}
+\PYG{g+go}{        \PYGZpc{} (ig.computeOrderCorrelation(\PYGZbs{}}
+\PYG{g+go}{           list(reversed(sg.boostedRanking)))[\PYGZsq{}correlation\PYGZsq{}]))}
 \PYG{g+go}{ Sparse 4\PYGZhy{}tiling          : +0.7172}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Optimzed sparse 4\PYGZhy{}tiling: }\PYG{l+s+si}{\PYGZpc{}+.4f}\PYG{l+s+s1}{\PYGZsq{}}\PYGZbs{}
-\PYG{g+go}{ ...     \PYGZpc{} (ig.computeOrderCorrelation(\PYGZbs{}}
-\PYG{g+go}{ ...        list(reversed(qr.boostedRanking)))[\PYGZsq{}correlation\PYGZsq{}]))}
+\PYG{g+go}{         \PYGZpc{} (ig.computeOrderCorrelation(\PYGZbs{}}
+\PYG{g+go}{            list(reversed(qr.boostedRanking)))[\PYGZsq{}correlation\PYGZsq{}]))}
 \PYG{g+go}{ Optimzed sparse 4\PYGZhy{}tiling: +0.7051}
 \end{sphinxVerbatim}
 
@@ -3790,24 +3790,24 @@ Type \PYG{l+s+s2}{\PYGZdq{}help\PYGZdq{}}, \PYG{l+s+s2}{\PYGZdq{}copyright\PYGZd
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{cRandPerfTabs} \PYG{k+kn}{import}\PYGZbs{}
-\PYG{g+gp}{... }         \PYG{n}{cRandom3ObjectivesPerformanceTableau} \PYG{k}{as} \PYG{n}{cR3ObjPT}
+\PYG{g+go}{             cRandom3ObjectivesPerformanceTableau as cR3ObjPT}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pt} \PYG{o}{=} \PYG{n}{cR3ObjPT}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{1000000}\PYG{p}{,}
-\PYG{g+gp}{... }         \PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{21}\PYG{p}{,}
-\PYG{g+gp}{... }         \PYG{n}{weightDistribution}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{equiobjectives}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }         \PYG{n}{commonScale} \PYG{o}{=} \PYG{p}{(}\PYG{l+m+mf}{0.0}\PYG{p}{,}\PYG{l+m+mf}{1000.0}\PYG{p}{)}\PYG{p}{,}
-\PYG{g+gp}{... }         \PYG{n}{commonThresholds} \PYG{o}{=} \PYG{p}{[}\PYG{p}{(}\PYG{l+m+mf}{2.5}\PYG{p}{,}\PYG{l+m+mf}{0.0}\PYG{p}{)}\PYG{p}{,}\PYG{p}{(}\PYG{l+m+mf}{5.0}\PYG{p}{,}\PYG{l+m+mf}{0.0}\PYG{p}{)}\PYG{p}{,}\PYG{p}{(}\PYG{l+m+mf}{75.0}\PYG{p}{,}\PYG{l+m+mf}{0.0}\PYG{p}{)}\PYG{p}{]}\PYG{p}{,}
-\PYG{g+gp}{... }         \PYG{n}{commonMode} \PYG{o}{=} \PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{beta}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{variable}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{k+kc}{None}\PYG{p}{]}\PYG{p}{,}
-\PYG{g+gp}{... }         \PYG{n}{missingDataProbability}\PYG{o}{=}\PYG{l+m+mf}{0.05}\PYG{p}{,}
-\PYG{g+gp}{... }         \PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{16}\PYG{p}{)}
+\PYG{g+go}{             numberOfCriteria=21,}
+\PYG{g+go}{             weightDistribution=\PYGZsq{}equiobjectives\PYGZsq{},}
+\PYG{g+go}{             commonScale = (0.0,1000.0),}
+\PYG{g+go}{             commonThresholds = [(2.5,0.0),(5.0,0.0),(75.0,0.0)],}
+\PYG{g+go}{             commonMode = [\PYGZsq{}beta\PYGZsq{},\PYGZsq{}variable\PYGZsq{},None],}
+\PYG{g+go}{             missingDataProbability=0.05,}
+\PYG{g+go}{             seed=16)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{import} \PYG{n+nn}{cSparseIntegerOutrankingDigraphs} \PYG{k}{as} \PYG{n+nn}{iBg}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qr} \PYG{o}{=} \PYG{n}{iBg}\PYG{o}{.}\PYG{n}{cQuantilesRankingDigraph}\PYG{p}{(}\PYG{n}{pt}\PYG{p}{,}\PYG{n}{quantiles}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,}
-\PYG{g+gp}{... }           \PYG{n}{quantilesOrderingStrategy}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{optimal}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }           \PYG{n}{minimalComponentSize}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}
-\PYG{g+gp}{... }           \PYG{n}{componentRankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NetFlows}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }           \PYG{n}{LowerClosed}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}
-\PYG{g+gp}{... }           \PYG{n}{Threading}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}
-\PYG{g+gp}{... }           \PYG{n}{tempDir}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{/tmp}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }           \PYG{n}{nbrOfCPUs}\PYG{o}{=}\PYG{l+m+mi}{28}\PYG{p}{)}
+\PYG{g+go}{               quantilesOrderingStrategy=\PYGZsq{}optimal\PYGZsq{},}
+\PYG{g+go}{               minimalComponentSize=1,}
+\PYG{g+go}{               componentRankingRule=\PYGZsq{}NetFlows\PYGZsq{},}
+\PYG{g+go}{               LowerClosed=False,}
+\PYG{g+go}{               Threading=True,}
+\PYG{g+go}{               tempDir=\PYGZsq{}/tmp\PYGZsq{},}
+\PYG{g+go}{               nbrOfCPUs=28)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qr}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Instance class    : cQuantilesRankingDigraph}
@@ -3840,8 +3840,8 @@ Let us inspect the 21 marginal performances of the five best\sphinxhyphen{}ranke
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pt}\PYG{o}{.}\PYG{n}{showPerformanceTableau}\PYG{p}{(}\PYGZbs{}
-\PYG{g+gp}{... }              \PYG{n}{actionsSubset}\PYG{o}{=}\PYG{n}{qr}\PYG{o}{.}\PYG{n}{boostedRanking}\PYG{p}{[}\PYG{p}{:}\PYG{l+m+mi}{5}\PYG{p}{]}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }              \PYG{n}{Transposed}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{                  actionsSubset=qr.boostedRanking[:5],\PYGZbs{}}
+\PYG{g+go}{                  Transposed=True)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  performance tableau \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ criteria | weights |  \PYGZsh{}773909  \PYGZsh{}668947  \PYGZsh{}567308  \PYGZsh{}578560  \PYGZsh{}426464}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -3874,8 +3874,8 @@ Their random performance evaluations were obviously drawn on all criteria with a
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n}{qr}\PYG{o}{.}\PYG{n}{boostedRanking}\PYG{p}{[}\PYG{p}{:}\PYG{l+m+mi}{5}\PYG{p}{]}\PYG{p}{:}
-\PYG{g+gp}{... }    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{pt}\PYG{o}{.}\PYG{n}{actions}\PYG{p}{[}\PYG{n}{x}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }          \PYG{n}{pt}\PYG{o}{.}\PYG{n}{actions}\PYG{p}{[}\PYG{n}{x}\PYG{p}{]}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{profile}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+go}{        print(pt.actions[x][\PYGZsq{}name\PYGZsq{}],\PYGZbs{}}
+\PYG{g+go}{              pt.actions[x][\PYGZsq{}profile\PYGZsq{}])}
 \PYG{g+go}{ \PYGZsh{}773909 \PYGZob{}\PYGZsq{}Eco\PYGZsq{}: \PYGZsq{}+\PYGZsq{}, \PYGZsq{}Soc\PYGZsq{}: \PYGZsq{}+\PYGZsq{}, \PYGZsq{}Env\PYGZsq{}: \PYGZsq{}+\PYGZsq{}\PYGZcb{}}
 \PYG{g+go}{ \PYGZsh{}668947 \PYGZob{}\PYGZsq{}Eco\PYGZsq{}: \PYGZsq{}+\PYGZsq{}, \PYGZsq{}Soc\PYGZsq{}: \PYGZsq{}+\PYGZsq{}, \PYGZsq{}Env\PYGZsq{}: \PYGZsq{}+\PYGZsq{}\PYGZcb{}}
 \PYG{g+go}{ \PYGZsh{}567308 \PYGZob{}\PYGZsq{}Eco\PYGZsq{}: \PYGZsq{}+\PYGZsq{}, \PYGZsq{}Soc\PYGZsq{}: \PYGZsq{}+\PYGZsq{}, \PYGZsq{}Env\PYGZsq{}: \PYGZsq{}+\PYGZsq{}\PYGZcb{}}
@@ -4871,10 +4871,10 @@ Below, an example Python session concerning 900 decision alternatives randomly g
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nbrCrit} \PYG{o}{=} \PYG{l+m+mi}{7}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{seed} \PYG{o}{=} \PYG{l+m+mi}{100}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{tp} \PYG{o}{=} \PYG{n}{RandomCBPerformanceTableau}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{n}{nbrActions}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }              \PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{n}{nbrCrit}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{n}{seed}\PYG{p}{)}
+\PYG{g+go}{                  numberOfCriteria=nbrCrit,seed=seed)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq} \PYG{o}{=} \PYG{n}{PerformanceQuantiles}\PYG{p}{(}\PYG{n}{tp}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }              \PYG{n}{numberOfBins} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{quartiles}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }              \PYG{n}{LowerClosed}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{                  numberOfBins = \PYGZsq{}quartiles\PYGZsq{},\PYGZbs{}}
+\PYG{g+go}{                  LowerClosed=True)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq}\PYG{o}{.}\PYG{n+nv+vm}{\PYGZus{}\PYGZus{}dict\PYGZus{}\PYGZus{}}\PYG{o}{.}\PYG{n}{keys}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ dict\PYGZus{}keys([\PYGZsq{}objectives\PYGZsq{}, \PYGZsq{}LowerClosed\PYGZsq{}, \PYGZsq{}name\PYGZsq{},}
 \PYG{g+go}{ \PYGZsq{}quantilesFrequencies\PYGZsq{}, \PYGZsq{}criteria\PYGZsq{}, \PYGZsq{}historySizes\PYGZsq{},}
@@ -5027,7 +5027,7 @@ In this rating example, the \sphinxstyleemphasis{NetFlows} rule appears to be th
 \PYG{g+go}{ \PYGZsq{}m3\PYGZsq{}, \PYGZsq{}a1003\PYGZsq{}, \PYGZsq{}a1001\PYGZsq{}, \PYGZsq{}a1007\PYGZsq{}, \PYGZsq{}a1004\PYGZsq{}, \PYGZsq{}a1009\PYGZsq{},}
 \PYG{g+go}{ \PYGZsq{}m2\PYGZsq{}, \PYGZsq{}m1\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Ranking correlation : }\PYG{l+s+si}{\PYGZpc{}+.2f}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}}\PYGZbs{}
-\PYG{g+go}{ ...         (nqr.rankingCorrelation[\PYGZsq{}correlation\PYGZsq{}]) )}
+\PYG{g+go}{             (nqr.rankingCorrelation[\PYGZsq{}correlation\PYGZsq{}]) )}
 \PYG{g+go}{ Ranking correlation : +0.938}
 \end{sphinxVerbatim}
 
@@ -5055,7 +5055,7 @@ The same result may even more conveniently be consulted in a browser view via a 
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showHTMLRatingHeatmap}\PYG{p}{(}\PYG{n}{pageTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Heatmap of Quartiles Rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+go}{ ...               Correlations=True,colorLevels=5)}
+\PYG{g+go}{                   Correlations=True,colorLevels=5)}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -5175,7 +5175,7 @@ A more precise rating result may be achieved when we use \sphinxstylestrong{deci
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq1} \PYG{o}{=} \PYG{n}{PerformanceQuantiles}\PYG{p}{(}\PYG{n}{tp}\PYG{p}{,} \PYG{n}{numberOfBins} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{deciles}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }             \PYG{n}{LowerClosed}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{                 LowerClosed=True)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr1} \PYG{o}{=} \PYG{n}{NormedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq1}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{best}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr1}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Deciles rating result \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -5191,7 +5191,7 @@ A browser view may again more conveniently illustrate this preciser \sphinxstyle
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr1}\PYG{o}{.}\PYG{n}{showHTMLRatingHeatmap}\PYG{p}{(}\PYG{n}{pageTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Heatmap of the deciles rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }                           \PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{                               colorLevels=5,Correlations=True)}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -5569,7 +5569,7 @@ The two last MISs of cardinality 4 (see Lines 13\sphinxhyphen{}16 above) give \s
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{maxMatching} \PYG{o}{=} \PYG{n}{c8}\PYG{o}{.}\PYG{n}{computeMaximumMatching}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c8}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{maxMatchingcycleGraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }               \PYG{n}{matching}\PYG{o}{=}\PYG{n}{maxMatching}\PYG{p}{)}
+\PYG{g+go}{                   matching=maxMatching)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to maxMatchingcyleGraph.dot}
 \PYG{g+go}{ Matching:  \PYGZob{}frozenset(\PYGZob{}\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v2\PYGZsq{}\PYGZcb{}), frozenset(\PYGZob{}\PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v6\PYGZsq{}\PYGZcb{}),}
@@ -5638,12 +5638,12 @@ Finally, we provide the \sphinxcode{\sphinxupquote{graphs.MetropolisChain}} clas
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{verticesList} \PYG{o}{=} \PYG{p}{[}\PYG{n}{x} \PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n}{g}\PYG{o}{.}\PYG{n}{vertices}\PYG{p}{]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{verticesList}\PYG{o}{.}\PYG{n}{sort}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{v} \PYG{o+ow}{in} \PYG{n}{verticesList}\PYG{p}{:}
-\PYG{g+gp}{... }    \PYG{n}{probs}\PYG{p}{[}\PYG{n}{v}\PYG{p}{]} \PYG{o}{=} \PYG{p}{(}\PYG{n}{n} \PYG{o}{\PYGZhy{}} \PYG{n}{i}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{n}{n}\PYG{o}{*}\PYG{p}{(}\PYG{n}{n}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)}\PYG{o}{/}\PYG{l+m+mi}{2}\PYG{p}{)}
-\PYG{g+gp}{... }    \PYG{n}{i} \PYG{o}{+}\PYG{o}{=} \PYG{l+m+mi}{1}
+\PYG{g+go}{        probs[v] = (n \PYGZhy{} i)/(n*(n+1)/2)}
+\PYG{g+go}{        i += 1}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{met} \PYG{o}{=} \PYG{n}{MetropolisChain}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{probs}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{frequency} \PYG{o}{=} \PYG{n}{met}\PYG{o}{.}\PYG{n}{checkSampling}\PYG{p}{(}\PYG{n}{verticesList}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{,}\PYG{n}{nSim}\PYG{o}{=}\PYG{l+m+mi}{30000}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{v} \PYG{o+ow}{in} \PYG{n}{verticesList}\PYG{p}{:}
-\PYG{g+gp}{... }    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{v}\PYG{p}{,}\PYG{n}{probs}\PYG{p}{[}\PYG{n}{v}\PYG{p}{]}\PYG{p}{,}\PYG{n}{frequency}\PYG{p}{[}\PYG{n}{v}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+go}{        print(v,probs[v],frequency[v])}
 \PYG{g+go}{ v1 0.3333 0.3343}
 \PYG{g+go}{ v2 0.2666 0.2680}
 \PYG{g+go}{ v3 0.2    0.2030}
@@ -6057,7 +6057,7 @@ It is worthwhile noticing that the \sphinxstylestrong{maximal matchings} of a gr
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c8} \PYG{o}{=} \PYG{n}{CycleGraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{8}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{maxMatching} \PYG{o}{=} \PYG{n}{c8}\PYG{o}{.}\PYG{n}{computeMaximumMatching}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c8}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{maxMatchingcycleGraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }                         \PYG{n}{matching}\PYG{o}{=}\PYG{n}{maxMatching}\PYG{p}{)}
+\PYG{g+go}{                             matching=maxMatching)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to maxMatchingcyleGraph.dot}
 \PYG{g+go}{ Matching:  \PYGZob{}frozenset(\PYGZob{}\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v2\PYGZsq{}\PYGZcb{}), frozenset(\PYGZob{}\PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v6\PYGZsq{}\PYGZcb{}),}
@@ -6228,7 +6228,7 @@ We call \sphinxstylestrong{weak}, a \sphinxstyleemphasis{chordless circuit} with
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{c6} \PYG{o}{=} \PYG{n}{CirculantDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{6}\PYG{p}{,} \PYG{n}{circulants}\PYG{o}{=}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
-\PYG{g+gp}{... }                       \PYG{n}{IndeterminateInnerPart}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{                           IndeterminateInnerPart=True)}
 \end{sphinxVerbatim}
 
 It is worth noticing that the \sphinxstyleemphasis{dual} version (\sphinxfootnotemark[14]) of a \sphinxstyleemphasis{weak} circuit corresponds to its \sphinxstyleemphasis{converse} version, i.e. \sphinxstyleemphasis{\sphinxhyphen{}c6} = \sphinxstyleemphasis{\textasciitilde{}c6} (see \hyperref[\detokenize{tutorial:weakchordlesscircuit}]{Fig.\@ \ref{\detokenize{tutorial:weakchordlesscircuit}}}).
@@ -6285,7 +6285,7 @@ The random digraph shown in \hyperref[\detokenize{tutorial:randomlaterality}]{Fi
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rd}\PYG{o}{.}\PYG{n}{computeChordlessCircuits}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ []                 \PYGZsh{} no chordless circuits detected}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Transitivity degree: }\PYG{l+s+si}{\PYGZpc{}.2f}\PYG{l+s+si}{\PYGZpc{}\PYGZpc{}}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}}\PYGZbs{}
-\PYG{g+gp}{... }              \PYG{p}{(}\PYG{n}{rd}\PYG{o}{.}\PYG{n}{computeTransitivityDegree}\PYG{p}{(}\PYG{p}{)}\PYG{o}{*}\PYG{l+m+mi}{100}\PYG{p}{)}\PYG{p}{)}
+\PYG{g+go}{                  (rd.computeTransitivityDegree()*100))}
 \PYG{g+go}{ Transitivity degree: 48.39\PYGZpc{}}
 \end{sphinxVerbatim}
 
@@ -6334,8 +6334,8 @@ Among the six MISs contained in this random digraph (see above Lines 3\sphinxhyp
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rd}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{orientedLaterality}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }                  \PYG{n}{bestChoice}\PYG{o}{=}\PYG{n+nb}{set}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }                  \PYG{n}{worstChoice}\PYG{o}{=}\PYG{n+nb}{set}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a6}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}
+\PYG{g+go}{                      bestChoice=set([\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}]),\PYGZbs{}}
+\PYG{g+go}{                      worstChoice=set([\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}]))}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file dor GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to orientedLaterality.dot}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng orientedLaterality.dot \PYGZhy{}o orientedLaterality.png}
@@ -6446,7 +6446,7 @@ In \hyperref[\detokenize{tutorial:bestworstorientation}]{Fig.\@ \ref{\detokenize
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bestWorstOrientation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }      \PYG{n}{bestChoice}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,} \PYG{n}{worstChoice}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a7}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+go}{          bestChoice=[\PYGZsq{}a2\PYGZsq{},\PYGZsq{}a4\PYGZsq{}], worstChoice=[\PYGZsq{}a7\PYGZsq{}])}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file dor GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to bestWorstOrientation.dot}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng bestWorstOrientation.dot \PYGZhy{}o bestWorstOrientation.png}
@@ -6463,7 +6463,7 @@ The gray arrows in \hyperref[\detokenize{tutorial:bestworstorientation}]{Fig.\@ 
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,}
-\PYG{g+gp}{... }         \PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Copeland}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{             Correlations=True, rankingRule=\PYGZsq{}Copeland\PYGZsq{})}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -6839,7 +6839,7 @@ By using color sorting queues, the minimal vertex coloring for a permutation gra
 \PYG{g+go}{ vertex 5: lightblue}
 \PYG{g+go}{ vertex 6: gold}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{coloredPermutationGraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }                 \PYG{n}{WithVertexColoring}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{                     WithVertexColoring=True)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to coloredPermutationGraph.dot}
 \PYG{g+go}{ fdp \PYGZhy{}Tpng coloredPermutationGraph.dot \PYGZhy{}o coloredPermutationGraph.png}
@@ -6905,7 +6905,7 @@ The dual of a permutation graph is \sphinxstyleemphasis{again} a permutation gra
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dgd} \PYG{o}{=} \PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{g}\PYG{p}{)}\PYG{o}{.}\PYG{n}{transitiveOrientation}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Dual transitivity degree: }\PYG{l+s+si}{\PYGZpc{}.3f}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}}\PYGZbs{}
-\PYG{g+gp}{... }            \PYG{n}{dgd}\PYG{o}{.}\PYG{n}{computeTransitivityDegree}\PYG{p}{(}\PYG{p}{)} \PYG{p}{)}
+\PYG{g+go}{                dgd.computeTransitivityDegree() )}
 \PYG{g+go}{ Dual transitivity degree: 1.000}
 \end{sphinxVerbatim}
 
@@ -6947,7 +6947,7 @@ If the random perfect graph instance \sphinxstyleemphasis{g} (see \hyperref[\det
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{if} \PYG{n}{g}\PYG{o}{.}\PYG{n}{isComparabilityGraph}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-\PYG{g+gp}{... }    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{edgeOrientations}\PYG{p}{)}
+\PYG{g+go}{        print(g.edgeOrientations)}
 \PYG{g+go}{ \PYGZob{}(\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}): 0, (\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v2\PYGZsq{}): 1, (\PYGZsq{}v2\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}): \PYGZhy{}1, (\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v3\PYGZsq{}): 1,}
 \PYG{g+go}{  (\PYGZsq{}v3\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}): \PYGZhy{}1, (\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v4\PYGZsq{}): 1, (\PYGZsq{}v4\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}): \PYGZhy{}1, (\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v5\PYGZsq{}): 0,}
 \PYG{g+go}{  (\PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}): 0, (\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v6\PYGZsq{}): 1, (\PYGZsq{}v6\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}): \PYGZhy{}1, (\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v7\PYGZsq{}): 0,}
@@ -6978,7 +6978,7 @@ The resulting orientation of the edges of \sphinxstyleemphasis{g} (see \hyperref
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gd} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{n}{g}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{if} \PYG{n}{gd}\PYG{o}{.}\PYG{n}{isComparabilityGraph}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-\PYG{g+gp}{... }    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{gd}\PYG{o}{.}\PYG{n}{edgeOrientations}\PYG{p}{)}
+\PYG{g+go}{        print(gd.edgeOrientations)}
 \PYG{g+go}{ \PYGZob{}(\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}): 0, (\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v2\PYGZsq{}): 0, (\PYGZsq{}v2\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}): 0, (\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v3\PYGZsq{}): 0,}
 \PYG{g+go}{  (\PYGZsq{}v3\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}): 0, (\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v4\PYGZsq{}): 0, (\PYGZsq{}v4\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}): 0, (\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v5\PYGZsq{}): 1,}
 \PYG{g+go}{  (\PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}): \PYGZhy{}1, (\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v6\PYGZsq{}): 0, (\PYGZsq{}v6\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}): 0, (\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v7\PYGZsq{}): 1,}
@@ -7048,7 +7048,7 @@ Vertex \sphinxstyleemphasis{v8} is put from position 5 to position 1, vertex \sp
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{permutation} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{0} \PYG{k}{for} \PYG{n}{j} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{order}\PYG{p}{)}\PYG{p}{]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{j} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{order}\PYG{p}{)}\PYG{p}{:}
-\PYG{g+gp}{... }    \PYG{n}{permutation}\PYG{p}{[}\PYG{n}{s2}\PYG{o}{.}\PYG{n}{index}\PYG{p}{(}\PYG{n}{s1}\PYG{p}{[}\PYG{n}{j}\PYG{p}{]}\PYG{p}{)}\PYG{p}{]} \PYG{o}{=} \PYG{n}{j}\PYG{o}{+}\PYG{l+m+mi}{1}
+\PYG{g+go}{        permutation[s2.index(s1[j])] = j+1}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{permutation}\PYG{p}{)}
 \PYG{g+go}{ [5, 2, 4, 1, 6, 7, 8, 3]}
 \end{sphinxVerbatim}
@@ -7166,7 +7166,7 @@ It is as well possible to first, generate a random \sphinxstyleemphasis{Prüfer}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{seed}\PYG{p}{(}\PYG{l+m+mi}{101}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{code} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{k} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{)}\PYG{p}{:}
-\PYG{g+gp}{... }    \PYG{n}{code}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(} \PYG{n}{choice}\PYG{p}{(}\PYG{n}{verticesList}\PYG{p}{)} \PYG{p}{)}
+\PYG{g+go}{        code.append( choice(verticesList) )}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{code}\PYG{p}{)}
 \PYG{g+go}{ [\PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v7\PYGZsq{}, \PYGZsq{}v2\PYGZsq{}, \PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v3\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{RandomTree}\PYG{p}{(}\PYG{n}{prueferCode}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{v5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{v7}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{v2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{v5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{v3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
@@ -7226,9 +7226,9 @@ Assertion \sphinxstyleemphasis{A3}, for instance, gives a simple test for recogn
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{graphs} \PYG{k+kn}{import} \PYG{n}{RandomGraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomGraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{n}{edgeProbability}\PYG{o}{=}\PYG{l+m+mf}{0.3}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{62}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{if} \PYG{n}{g}\PYG{o}{.}\PYG{n}{order} \PYG{o}{==} \PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{size} \PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{o+ow}{and} \PYG{n}{g}\PYG{o}{.}\PYG{n}{isConnected}\PYG{p}{(}\PYG{p}{)}\PYG{p}{:}
-\PYG{g+gp}{... }    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{The graph is a tree ?}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{k+kc}{True}\PYG{p}{)}
-\PYG{g+gp}{... }\PYG{k}{else}\PYG{p}{:}
-\PYG{g+gp}{... }    \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{The graph is a tree ?}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{        print(\PYGZsq{}The graph is a tree ?\PYGZsq{}, True)}
+\PYG{g+go}{    else:}
+\PYG{g+go}{        print(\PYGZsq{}The graph is a tree ?\PYGZsq{},False)}
 \PYG{g+go}{ The graph is a tree ? True}
 \end{sphinxVerbatim}
 
@@ -7288,7 +7288,7 @@ Wilson’s algorithm \sphinxstyleemphasis{only} works for connected graphs %
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} RandomTree specific data \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Prüfer code  : [\PYGZsq{}v7\PYGZsq{}, \PYGZsq{}v9\PYGZsq{}, \PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v8\PYGZsq{}, \PYGZsq{}v4\PYGZsq{}, \PYGZsq{}v9\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{spt}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{randomSpanningTree}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-\PYG{g+go}{ ...                    WithSpanningTree=True)}
+\PYG{g+go}{                        WithSpanningTree=True)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to randomSpanningTree.dot}
 \PYG{g+go}{ [[\PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v6\PYGZsq{}, \PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v8\PYGZsq{}, \PYGZsq{}v9\PYGZsq{}, \PYGZsq{}v3\PYGZsq{}, \PYGZsq{}v9\PYGZsq{}, \PYGZsq{}v4\PYGZsq{},}
@@ -7395,7 +7395,7 @@ The given graph is connected and, hence, admits a single spanning tree (see \hyp
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{mt}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bestDeterminedspanningTree}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }                  \PYG{n}{WithSpanningTree}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{                      WithSpanningTree=True)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to spanningTree.dot}
 \PYG{g+go}{ [[\PYGZsq{}v4\PYGZsq{}, \PYGZsq{}v2\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v3\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v2\PYGZsq{}, \PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v2\PYGZsq{}, \PYGZsq{}v4\PYGZsq{}]]}

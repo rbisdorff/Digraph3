@@ -94,8 +94,8 @@ To aggregate all the critics' rating opinions, the *Graffiti* magazine provides 
 A better approach is to rank the movies on the basis of pairwise bipolar-valued  *at least as well rated as* opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the :ref:`Ranking-Tutorial-label` tutorial) of the 25 movies is provided, for instance, by the **heat map** view shown in :numref:`graffiti07_2`.
 
 >>> t.showHTMLPerformanceHeatmap(Correlations=True,
-...                              rankingRule='NetFlows',
-...                              ndigits=0)
+                                 rankingRule='NetFlows',
+                                 ndigits=0)
 
 .. Figure:: graffiti07_2.png
    :name: graffiti07_2
@@ -136,8 +136,8 @@ heat map above (see :numref:`graffiti07_2`), may be shown in :numref:`graffiti07
 
    >>> ranking = g.computeNetFlowsRanking()
    >>> g.showHTMLRelationTable(actionsList=ranking, ndigits=0,\
-   ... tableTitle='Bipolar characteristic values of\
-   ... "rated at least as good as" situations')
+       tableTitle='Bipolar characteristic values of\
+       "rated at least as good as" situations')
 
 .. Figure:: graffiti07_3.png
    :name: graffiti07_3
@@ -310,9 +310,9 @@ We may verify these relations with help of the corresponding equivalence digraph
    >>> M = Decimal('0'); D = Decimal('0')
    >>> n2 = eq.order*(eq.order - 1)
    >>> for x in eq.actions:
-   ...     for y in eq.actions:
-   ...         M += eq.relation[x][y]
-   ...         D += abs(eq.relation[x][y])
+           for y in eq.actions:
+               M += eq.relation[x][y]
+               D += abs(eq.relation[x][y])
    >>> print('r(R1<=>R2) = %+.3f, d = %.3f, tau = %+.3f' % (M/n2,D/n2,M/D))
     r(R1<=>R2) = +0.026, d = 0.356, tau = +0.073  
 
@@ -382,9 +382,9 @@ Let us now compute the normalized majority margin *r(<=>)*  of the equivalence b
      'mv_DJ', 'mv_AL', 'mv_RG', 'mv_MB', 'mv_GH', 'mv_HP', 'mv_BI',
      'mv_DI', 'mv_FF', 'mv_GG', 'mv_TF']
    >>> for i,item in enumerate(\
-   ... g.computeMarginalVersusGlobalRankingCorrelations(\
-   ... nf.netFlowsRanking,ValuedCorrelation=True)): 
-   ...    print('r(%s<=>nf) = %+.3f' % (item[1],item[0]) )
+       g.computeMarginalVersusGlobalRankingCorrelations(\
+       nf.netFlowsRanking,ValuedCorrelation=True)): 
+          print('r(%s<=>nf) = %+.3f' % (item[1],item[0]) )
     r(JH<=>nf) = +0.500
     r(JPT<=>nf)  = +0.430
     r(AP<=>nf) = +0.323
@@ -653,9 +653,9 @@ Let us compute the *initial* prekernel restricted adjacency table with the :py:f
 
    >>> k1Relation = gcd.domkernelrestrict(['a1','a2','a4'])
    >>> gcd.showHTMLRelationTable(
-   ...      actionsList=['a1','a2','a4','a3','a5','a6','a7'],
-   ...      relation=k1Relation,
-   ...      tableTitle='K1 restricted adjacency table')
+            actionsList=['a1','a2','a4','a3','a5','a6','a7'],
+            relation=k1Relation,
+            tableTitle='K1 restricted adjacency table')
 
 .. Figure:: k1restricted.png
    :alt: Kernel restricted adjacency table 
@@ -705,9 +705,9 @@ Let us now compute the restricted adjacency table for the outranked, i.e. the *t
 
    >>> k2Relation = gcd.abskernelrestrict(['a3','a7'])
    >>> gcd.showHTMLRelationTable(
-   ...      actionsList=['a3','a7','a1','a2','a4','a5','a6'],
-   ...      relation=k2Relation,
-   ...      tableTitle='K2 restricted adjacency table')
+            actionsList=['a3','a7','a1','a2','a4','a5','a6'],
+            relation=k2Relation,
+            tableTitle='K2 restricted adjacency table')
 
 .. Figure:: k2restricted.png
    :alt: Kernel restricted adjacency table 
@@ -1031,7 +1031,7 @@ We may draw the corresponding strict 90%-confident outranking digraph, oriented 
        absorbency   :  0.2857
        covered      :  0.583
    >>> gcd90.exportGraphViz(fileName='confidentOutranking',
-   ...       bestChoice=['a1', 'a7'],worstChoice=['a2', 'a5', 'a6'])
+             bestChoice=['a1', 'a7'],worstChoice=['a2', 'a5', 'a6'])
     *---- exporting a dot file dor GraphViz tools ---------*
     Exporting to confidentOutranking.dot
     dot -Grankdir=BT -Tpng confidentOutranking.dot -o confidentOutranking.png
@@ -1135,7 +1135,7 @@ The required cardinal significance weights of the performance criteria represent
 
    >>> from randomPerfTabs import Random3ObjectivesPerformanceTableau
    >>> t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
-   ...                                 numberOfCriteria=9,seed=102)
+                                       numberOfCriteria=9,seed=102)
    >>> t
     *------- PerformanceTableau instance description ------*
     Instance class   : Random3ObjectivesPerformanceTableau

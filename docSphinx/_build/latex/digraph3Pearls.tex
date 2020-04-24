@@ -54,7 +54,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{April 20, 2020}
+\date{April 24, 2020}
 \release{3.7-3200+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -174,8 +174,8 @@ A better approach is to rank the movies on the basis of pairwise bipolar\sphinxh
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}
-\PYG{g+gp}{... }                             \PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NetFlows}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }                             \PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{g+go}{                                 rankingRule=\PYGZsq{}NetFlows\PYGZsq{},}
+\PYG{g+go}{                                 ndigits=0)}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -214,8 +214,8 @@ heat map above (see \hyperref[\detokenize{pearls:graffiti07-2}]{Fig.\@ \ref{\det
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ranking} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeNetFlowsRanking}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{ranking}\PYG{p}{,} \PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }\PYG{n}{tableTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Bipolar characteristic values of}\PYG{l+s+se}{\PYGZbs{}}
-\PYG{g+gp}{... }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{rated at least as good as}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{ situations}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{    tableTitle=\PYGZsq{}Bipolar characteristic values of\PYGZbs{}}
+\PYG{g+go}{    \PYGZdq{}rated at least as good as\PYGZdq{} situations\PYGZsq{})}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -416,9 +416,9 @@ We may verify these relations with help of the corresponding equivalence digraph
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{M} \PYG{o}{=} \PYG{n}{Decimal}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{0}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}\PYG{p}{;} \PYG{n}{D} \PYG{o}{=} \PYG{n}{Decimal}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{0}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n2} \PYG{o}{=} \PYG{n}{eq}\PYG{o}{.}\PYG{n}{order}\PYG{o}{*}\PYG{p}{(}\PYG{n}{eq}\PYG{o}{.}\PYG{n}{order} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n}{eq}\PYG{o}{.}\PYG{n}{actions}\PYG{p}{:}
-\PYG{g+gp}{... }    \PYG{k}{for} \PYG{n}{y} \PYG{o+ow}{in} \PYG{n}{eq}\PYG{o}{.}\PYG{n}{actions}\PYG{p}{:}
-\PYG{g+gp}{... }        \PYG{n}{M} \PYG{o}{+}\PYG{o}{=} \PYG{n}{eq}\PYG{o}{.}\PYG{n}{relation}\PYG{p}{[}\PYG{n}{x}\PYG{p}{]}\PYG{p}{[}\PYG{n}{y}\PYG{p}{]}
-\PYG{g+gp}{... }        \PYG{n}{D} \PYG{o}{+}\PYG{o}{=} \PYG{n+nb}{abs}\PYG{p}{(}\PYG{n}{eq}\PYG{o}{.}\PYG{n}{relation}\PYG{p}{[}\PYG{n}{x}\PYG{p}{]}\PYG{p}{[}\PYG{n}{y}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+go}{        for y in eq.actions:}
+\PYG{g+go}{            M += eq.relation[x][y]}
+\PYG{g+go}{            D += abs(eq.relation[x][y])}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{r(R1\PYGZlt{}=\PYGZgt{}R2) = }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s1}{, d = }\PYG{l+s+si}{\PYGZpc{}.3f}\PYG{l+s+s1}{, tau = }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{M}\PYG{o}{/}\PYG{n}{n2}\PYG{p}{,}\PYG{n}{D}\PYG{o}{/}\PYG{n}{n2}\PYG{p}{,}\PYG{n}{M}\PYG{o}{/}\PYG{n}{D}\PYG{p}{)}\PYG{p}{)}
 \PYG{g+go}{ r(R1\PYGZlt{}=\PYGZgt{}R2) = +0.026, d = 0.356, tau = +0.073}
 \end{sphinxVerbatim}
@@ -484,9 +484,9 @@ Let us now compute the normalized majority margin \sphinxstyleemphasis{r(\textle
 \PYG{g+go}{  \PYGZsq{}mv\PYGZus{}DJ\PYGZsq{}, \PYGZsq{}mv\PYGZus{}AL\PYGZsq{}, \PYGZsq{}mv\PYGZus{}RG\PYGZsq{}, \PYGZsq{}mv\PYGZus{}MB\PYGZsq{}, \PYGZsq{}mv\PYGZus{}GH\PYGZsq{}, \PYGZsq{}mv\PYGZus{}HP\PYGZsq{}, \PYGZsq{}mv\PYGZus{}BI\PYGZsq{},}
 \PYG{g+go}{  \PYGZsq{}mv\PYGZus{}DI\PYGZsq{}, \PYGZsq{}mv\PYGZus{}FF\PYGZsq{}, \PYGZsq{}mv\PYGZus{}GG\PYGZsq{}, \PYGZsq{}mv\PYGZus{}TF\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{i}\PYG{p}{,}\PYG{n}{item} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYGZbs{}
-\PYG{g+gp}{... }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeMarginalVersusGlobalRankingCorrelations}\PYG{p}{(}\PYGZbs{}
-\PYG{g+gp}{... }\PYG{n}{nf}\PYG{o}{.}\PYG{n}{netFlowsRanking}\PYG{p}{,}\PYG{n}{ValuedCorrelation}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}\PYG{p}{)}\PYG{p}{:}
-\PYG{g+gp}{... }   \PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{r(}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+s1}{\PYGZlt{}=\PYGZgt{}nf) = }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{item}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}\PYG{n}{item}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{)} \PYG{p}{)}
+\PYG{g+go}{    g.computeMarginalVersusGlobalRankingCorrelations(\PYGZbs{}}
+\PYG{g+go}{    nf.netFlowsRanking,ValuedCorrelation=True)):}
+\PYG{g+go}{       print(\PYGZsq{}r(\PYGZpc{}s\PYGZlt{}=\PYGZgt{}nf) = \PYGZpc{}+.3f\PYGZsq{} \PYGZpc{} (item[1],item[0]) )}
 \PYG{g+go}{ r(JH\PYGZlt{}=\PYGZgt{}nf) = +0.500}
 \PYG{g+go}{ r(JPT\PYGZlt{}=\PYGZgt{}nf)  = +0.430}
 \PYG{g+go}{ r(AP\PYGZlt{}=\PYGZgt{}nf) = +0.323}
@@ -785,9 +785,9 @@ Let us compute the \sphinxstyleemphasis{initial} prekernel restricted adjacency 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{k1Relation} \PYG{o}{=} \PYG{n}{gcd}\PYG{o}{.}\PYG{n}{domkernelrestrict}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}
-\PYG{g+gp}{... }     \PYG{n}{actionsList}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a6}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a7}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}
-\PYG{g+gp}{... }     \PYG{n}{relation}\PYG{o}{=}\PYG{n}{k1Relation}\PYG{p}{,}
-\PYG{g+gp}{... }     \PYG{n}{tableTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{K1 restricted adjacency table}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{         actionsList=[\PYGZsq{}a1\PYGZsq{},\PYGZsq{}a2\PYGZsq{},\PYGZsq{}a4\PYGZsq{},\PYGZsq{}a3\PYGZsq{},\PYGZsq{}a5\PYGZsq{},\PYGZsq{}a6\PYGZsq{},\PYGZsq{}a7\PYGZsq{}],}
+\PYG{g+go}{         relation=k1Relation,}
+\PYG{g+go}{         tableTitle=\PYGZsq{}K1 restricted adjacency table\PYGZsq{})}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -834,9 +834,9 @@ Let us now compute the restricted adjacency table for the outranked, i.e. the \s
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{k2Relation} \PYG{o}{=} \PYG{n}{gcd}\PYG{o}{.}\PYG{n}{abskernelrestrict}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a7}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}
-\PYG{g+gp}{... }     \PYG{n}{actionsList}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a7}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a6}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}
-\PYG{g+gp}{... }     \PYG{n}{relation}\PYG{o}{=}\PYG{n}{k2Relation}\PYG{p}{,}
-\PYG{g+gp}{... }     \PYG{n}{tableTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{K2 restricted adjacency table}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{         actionsList=[\PYGZsq{}a3\PYGZsq{},\PYGZsq{}a7\PYGZsq{},\PYGZsq{}a1\PYGZsq{},\PYGZsq{}a2\PYGZsq{},\PYGZsq{}a4\PYGZsq{},\PYGZsq{}a5\PYGZsq{},\PYGZsq{}a6\PYGZsq{}],}
+\PYG{g+go}{         relation=k2Relation,}
+\PYG{g+go}{         tableTitle=\PYGZsq{}K2 restricted adjacency table\PYGZsq{})}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -1187,7 +1187,7 @@ We may draw the corresponding strict 90\%\sphinxhyphen{}confident outranking dig
 \PYG{g+go}{    absorbency   :  0.2857}
 \PYG{g+go}{    covered      :  0.583}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd90}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{confidentOutranking}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }      \PYG{n}{bestChoice}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a7}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}\PYG{n}{worstChoice}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a6}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+go}{          bestChoice=[\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}],worstChoice=[\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}])}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file dor GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to confidentOutranking.dot}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng confidentOutranking.dot \PYGZhy{}o confidentOutranking.png}
@@ -1297,7 +1297,7 @@ The required cardinal significance weights of the performance criteria represent
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import} \PYG{n}{Random3ObjectivesPerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{Random3ObjectivesPerformanceTableau}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}\PYGZbs{}
-\PYG{g+gp}{... }                                \PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{102}\PYG{p}{)}
+\PYG{g+go}{                                    numberOfCriteria=9,seed=102)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} PerformanceTableau instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Instance class   : Random3ObjectivesPerformanceTableau}

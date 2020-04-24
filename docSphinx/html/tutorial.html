@@ -564,7 +564,7 @@ the current working directory a <code class="code docutils literal notranslate">
 4
 5
 6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">,</span>
-<span class="gp">... </span>                     <span class="n">SymmetricPartialDigraph</span>
+<span class="go">                         SymmetricPartialDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">asymDg</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">asymDg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">symDG</span> <span class="o">=</span> <span class="n">SymmetricPartialDigraph</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
@@ -1003,7 +1003,7 @@ the current working directory a <code class="code docutils literal notranslate">
 59
 60
 61</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">CompleteDigraph</span><span class="p">,</span><span class="n">EmptyDigraph</span><span class="p">,</span>
-<span class="gp">... </span>                  <span class="n">IndeterminateDigraph</span>
+<span class="go">                      IndeterminateDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">CompleteDigraph</span><span class="p">)</span>
 <span class="go"> Help on class CompleteDigraph in module digraphs:</span>
 <span class="go"> class CompleteDigraph(Digraph)</span>
@@ -1126,8 +1126,8 @@ the current working directory a <code class="code docutils literal notranslate">
 16
 17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingProfiles</span> <span class="kn">import</span> <span class="n">RandomLinearVotingProfile</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-<span class="gp">... </span>                              <span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-<span class="gp">... </span>                              <span class="n">RandomWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">                                  numberOfCandidates=3,</span>
+<span class="go">                                  RandomWeights=True)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">candidates</span>
 <span class="go"> OrderedDict([ (&#39;a1&#39;,{&#39;name&#39;:&#39;a1}), (&#39;a2&#39;,{&#39;name&#39;:&#39;a2&#39;}),</span>
 <span class="go">               (&#39;a3&#39;,{&#39;name&#39;:&#39;a3&#39;}) ])</span>
@@ -1434,7 +1434,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <div class="code-block-caption"><span class="caption-number">Listing 13 </span><span class="caption-text">Example linear voting heatmap</span><a class="headerlink" href="#votingheatmap" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">showHTMLVotingHeatmap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                        <span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">                            Transposed=False)</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -1492,11 +1492,11 @@ the current working directory a <code class="code docutils literal notranslate">
 39
 40</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingProfiles</span> <span class="kn">import</span> <span class="n">RandomLinearVotingProfile</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lvp</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
-<span class="gp">... </span>                        <span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
-<span class="gp">... </span>                        <span class="n">WithPolls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>                        <span class="n">partyRepartition</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-<span class="gp">... </span>                        <span class="n">other</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-<span class="gp">... </span>                        <span class="n">seed</span><span class="o">=</span><span class="mf">0.9189670954954139</span><span class="p">)</span>
+<span class="go">                            numberOfVoters=1000,</span>
+<span class="go">                            WithPolls=True,</span>
+<span class="go">                            partyRepartition=0.5,</span>
+<span class="go">                            other=0.1,</span>
+<span class="go">                            seed=0.9189670954954139)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lvp</span>
 <span class="go"> *------- VotingProfile instance description ------*</span>
 <span class="go"> Instance class   : RandomLinearVotingProfile</span>
@@ -1583,7 +1583,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </div>
 <p>We may visualize the resulting pairwise majority margins by showing the HTML formated version of the <em>cdg</em> relation table in a browser view.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;Pairwise majority margins&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                          <span class="n">relationName</span><span class="o">=</span><span class="n">M</span><span class="p">(</span><span class="n">x</span><span class="o">&gt;</span><span class="n">y</span><span class="p">)</span><span class="s1">&#39;)</span>
+<span class="go">                              relationName=M(x&gt;y)&#39;)</span>
 </pre></div>
 </div>
 <div class="figure align-center" id="majoritymargins">
@@ -2459,10 +2459,10 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 26
 27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span>
-<span class="gp">... </span>          <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span>
-<span class="gp">... </span>          <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
-<span class="gp">... </span>          <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
-<span class="gp">... </span>          <span class="n">seed</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span>
+<span class="go">              numberOfActions=31,</span>
+<span class="go">              numberOfCriteria=13,</span>
+<span class="go">              weightDistribution=&#39;equiobjectives&#39;,</span>
+<span class="go">              seed=120)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showObjectives</span><span class="p">()</span>
 <span class="go"> *------ show objectives -------&quot;</span>
 <span class="go"> Eco: Economical aspect</span>
@@ -2527,11 +2527,11 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 6
 7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">PartialPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">teco</span> <span class="o">=</span> <span class="n">PartialPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span>\
-<span class="gp">... </span>                          <span class="n">t</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="s1">&#39;Eco&#39;</span><span class="p">][</span><span class="s1">&#39;criteria&#39;</span><span class="p">])</span>
+<span class="go">                              t.objectives[&#39;Eco&#39;][&#39;criteria&#39;])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tsoc</span> <span class="o">=</span> <span class="n">PartialPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span>\
-<span class="gp">... </span>                          <span class="n">t</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="s1">&#39;Soc&#39;</span><span class="p">][</span><span class="s1">&#39;criteria&#39;</span><span class="p">])</span>
+<span class="go">                              t.objectives[&#39;Soc&#39;][&#39;criteria&#39;])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tenv</span> <span class="o">=</span> <span class="n">PartialPerformanceTableau</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span>\
-<span class="gp">... </span>                          <span class="n">t</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="s1">&#39;Env&#39;</span><span class="p">][</span><span class="s1">&#39;criteria&#39;</span><span class="p">])</span>
+<span class="go">                              t.objectives[&#39;Env&#39;][&#39;criteria&#39;])</span>
 </pre></div>
 </td></tr></table></div>
 <p>One may thus compute a partial bipolar-valued outranking digraph for each individual objective.</p>
@@ -2832,7 +2832,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <div class="section" id="the-ranking-problem">
 <h3><a class="toc-backref" href="#id194">The ranking problem</a><a class="headerlink" href="#the-ranking-problem" title="Permalink to this headline">¶</a></h3>
-<p>We need to rank without ties a set <em>X</em> of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued <em>strict outranking</em> characteristics, i.e. <img class="math" src="_images/math/8b67fdd1fec2d221cdc78aa20ee647a5f54a2b20.png" alt="r(x\, &gt; \, y)"/> for all <em>x</em>, <em>y</em> in <em>X</em> (see <a class="reference internal" href="#codual-digraph-label"><span class="std std-ref">The strict outranking digraph</span></a> and <a class="reference internal" href="#bis-2013" id="id27"><span>[BIS-2013]</span></a>).</p>
+<p>We need to rank without ties a set <em>X</em> of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued <em>strict outranking</em> characteristics, i.e. <img class="math" src="_images/math/b3c692456cb86944b418cd612199cdd8e655968d.png" alt="r(x\, \succnsim \, y)"/> for all <em>x</em>, <em>y</em> in <em>X</em> (see <a class="reference internal" href="#codual-digraph-label"><span class="std std-ref">The strict outranking digraph</span></a> and <a class="reference internal" href="#bis-2013" id="id27"><span>[BIS-2013]</span></a>).</p>
 <p>Let us consider a didactic outranking digraph <em>g</em> generated from a random <a class="reference internal" href="#cost-benefit-performance-tableau-label"><span class="std std-ref">Cost-Benefit performance tableau</span></a> concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding <em>strict outranking digraph</em> with a <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> as follows.</p>
 <div class="literal-block-wrapper docutils container" id="strictoutranking">
 <div class="code-block-caption"><span class="caption-number">Listing 24 </span><span class="caption-text">Random bipolar-valued strict outranking relation characteristics</span><a class="headerlink" href="#strictoutranking" title="Permalink to this code">¶</a></div>
@@ -2855,7 +2855,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 17
 18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
-<span class="gp">... </span>                               <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="go">                                   numberOfCriteria=13,seed=200)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span> <span class="c1"># codual digraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -2892,7 +2892,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 13
 14
 15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ccd</span> <span class="o">=</span> <span class="n">PolarisedOutrankingDigraph</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">],</span>
-<span class="gp">... </span>                               <span class="n">KeepValues</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StrictCut</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">                                   KeepValues=False,StrictCut=True)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ccd</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">IntegerValues</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> *---- Relation Table -----</span>
 <span class="go">  r(&gt;)_med | &#39;a1&#39; &#39;a2&#39; &#39;a3&#39; &#39;a4&#39; &#39;a5&#39; &#39;a6&#39; &#39;a7&#39; &#39;a8&#39; &#39;a9&#39;</span>
@@ -2948,7 +2948,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <div class="section" id="the-copeland-ranking">
 <h3><a class="toc-backref" href="#id195">The <em>Copeland</em> ranking</a><a class="headerlink" href="#the-copeland-ranking" title="Permalink to this headline">¶</a></h3>
-<p><em>Copeland</em>’s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the median cut strict outranking digraph <em>ccd</em>. The rule computes for each alternative a score resulting from the sum of the differences between the crisp <strong>strict outranking</strong> characteristics <img class="math" src="_images/math/81f6903323c7dd650c516d24868431936ec3972d.png" alt="r(x\, &gt; \,y)_{&gt;0}"/> and the crisp <strong>strict outranked</strong> characteristics <img class="math" src="_images/math/962a674d6063ab93e929b0fd3b991ea40ace270c.png" alt="r(y\, &gt; \, x)_{&gt;0}"/>  for all pairs of alternatives where <em>y</em> is different from <em>x</em>. The alternatives are ranked in decreasing order of these <em>Copeland</em> scores; ties, the case given, being resolved by a lexicographical rule.</p>
+<p><em>Copeland</em>’s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the median cut strict outranking digraph <em>ccd</em>. The rule computes for each alternative a score resulting from the sum of the differences between the crisp <strong>strict outranking</strong> characteristics <img class="math" src="_images/math/0e350bdab12f7299ca1ed4f50545e0c3a933cc3a.png" alt="r(x\, \succnsim \,y)_{&gt;0}"/> and the crisp <strong>strict outranked</strong> characteristics <img class="math" src="_images/math/daf892b0ed0fbe3d636d7b1ba78e8e5432543fcc.png" alt="r(y\, \succnsim \, x)_{&gt;0}"/>  for all pairs of alternatives where <em>y</em> is different from <em>x</em>. The alternatives are ranked in decreasing order of these <em>Copeland</em> scores; ties, the case given, being resolved by a lexicographical rule.</p>
 <div class="literal-block-wrapper docutils container" id="copelandranking">
 <div class="code-block-caption"><span class="caption-number">Listing 26 </span><span class="caption-text">Computing a <em>Copeland</em> Ranking</span><a class="headerlink" href="#copelandranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -3060,7 +3060,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <div class="section" id="the-netflows-ranking">
 <span id="netflows-ranking-label"></span><h3><a class="toc-backref" href="#id196">The <em>NetFlows</em> ranking</a><a class="headerlink" href="#the-netflows-ranking" title="Permalink to this headline">¶</a></h3>
-<p>The valued version of the <em>Copeland</em> rule, called <strong>NetFlows</strong> rule, computes for each alternative <em>x</em> a <em>net flow</em> score,  i.e. the sum of the differences between the <strong>strict outranking</strong> characteristics <img class="math" src="_images/math/1a41461c251febdacb2b5d91ea15066b982188bf.png" alt="r(x\, &gt; \,y)"/> and the <strong>strict outranked</strong> characteristics <img class="math" src="_images/math/dad233e2d3a93c797174c851923036e3421d1ddf.png" alt="r(y\, &gt; \,x)"/> for all pairs of alternatives where <em>y</em> is different from <em>x</em>.</p>
+<p>The valued version of the <em>Copeland</em> rule, called <strong>NetFlows</strong> rule, computes for each alternative <em>x</em> a <em>net flow</em> score,  i.e. the sum of the differences between the <strong>strict outranking</strong> characteristics <img class="math" src="_images/math/1c819cb7cdff121f57fb47d8af3b1206a898f5be.png" alt="r(x\, \succnsim \,y)"/> and the <strong>strict outranked</strong> characteristics <img class="math" src="_images/math/38907f1805d67760576ad71199bcd8226aa60df4.png" alt="r(y\, \succnsim \,x)"/> for all pairs of alternatives where <em>y</em> is different from <em>x</em>.</p>
 <div class="literal-block-wrapper docutils container" id="netflowsranking">
 <div class="code-block-caption"><span class="caption-number">Listing 30 </span><span class="caption-text">Computing a <em>NetFlows</em> ranking</span><a class="headerlink" href="#netflowsranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -3495,7 +3495,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <h3><a class="toc-backref" href="#id200"><em>Tideman</em>’s ranked-pairs rule</a><a class="headerlink" href="#tideman-s-ranked-pairs-rule" title="Permalink to this headline">¶</a></h3>
 <p><em>Tideman</em>’s <em>ranking-by-choosing</em> heuristic, the <strong>RankedPairs</strong> rule, working best this time on the non strict outranking digraph <em>g</em>, is based on a <em>prudent incremental</em> construction of linear orders that avoids on the fly any cycling outrankings (see <a class="reference internal" href="#lam-2009" id="id33"><span>[LAM-2009]</span></a>). The ranking rule may be formulated as follows:</p>
 <ol class="arabic simple">
-<li><p>Rank the ordered pairs <img class="math" src="_images/math/349c0e2dbdade2e90e54c3fdf0342401c320c56e.png" alt="(x,y)"/> of alternatives in decreasing order of the outranking characteristic values <img class="math" src="_images/math/dcfba86ef069adff1592eaad3c40e0b2f498575d.png" alt="r(x\, \geq \,y)"/>;</p></li>
+<li><p>Rank the ordered pairs <img class="math" src="_images/math/349c0e2dbdade2e90e54c3fdf0342401c320c56e.png" alt="(x,y)"/> of alternatives in decreasing order of <img class="math" src="_images/math/2a9397d2cb0a802cc0c78da93a1f88371b8f88b9.png" alt="r(x\, \succsim \,y) \,+\, r(y\, \not\succsim \,x)"/>;</p></li>
 <li><p>Consider the pairs in that order (ties are resolved by a lexicographic rule):</p>
 <ul class="simple">
 <li><p>if the next pair does not create a <em>circuit</em> with the pairs already blocked, block this pair;</p></li>
@@ -4266,7 +4266,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">cRandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-<span class="gp">... </span>                              <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="go">                                  numberOfCriteria=7,seed=100)</span>
 </pre></div>
 </td></tr></table></div>
 <p>We sort the 100 decision alternatives into overlapping quartile classes and rank with respect to the average quantile limits.</p>
@@ -4621,16 +4621,16 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cIntegerOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ig</span> <span class="o">=</span> <span class="n">IntegerBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Complete outranking : </span><span class="si">%+.4f</span><span class="s1">&#39;</span>\
-<span class="gp">... </span>    <span class="o">%</span> <span class="p">(</span><span class="n">ig</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">ig</span><span class="o">.</span><span class="n">computeCopelandOrder</span><span class="p">())</span>\
-<span class="gp">... </span>       <span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]))</span>
+<span class="go">        % (ig.computeOrderCorrelation(ig.computeCopelandOrder())\</span>
+<span class="go">           [&#39;correlation&#39;]))</span>
 <span class="go"> Complete outranking : +0.7474</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sparse 4-tiling : </span><span class="si">%+.4f</span><span class="s1">&#39;</span>\
-<span class="gp">... </span>    <span class="o">%</span> <span class="p">(</span><span class="n">ig</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span>\
-<span class="gp">... </span>       <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">sg</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">)))[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]))</span>
+<span class="go">        % (ig.computeOrderCorrelation(\</span>
+<span class="go">           list(reversed(sg.boostedRanking)))[&#39;correlation&#39;]))</span>
 <span class="go"> Sparse 4-tiling          : +0.7172</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Optimzed sparse 4-tiling: </span><span class="si">%+.4f</span><span class="s1">&#39;</span>\
-<span class="go"> ...     % (ig.computeOrderCorrelation(\</span>
-<span class="go"> ...        list(reversed(qr.boostedRanking)))[&#39;correlation&#39;]))</span>
+<span class="go">         % (ig.computeOrderCorrelation(\</span>
+<span class="go">            list(reversed(qr.boostedRanking)))[&#39;correlation&#39;]))</span>
 <span class="go"> Optimzed sparse 4-tiling: +0.7051</span>
 </pre></div>
 </td></tr></table></div>
@@ -4702,24 +4702,24 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 37
 38
 39</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span>\
-<span class="gp">... </span>         <span class="n">cRandom3ObjectivesPerformanceTableau</span> <span class="k">as</span> <span class="n">cR3ObjPT</span>
+<span class="go">             cRandom3ObjectivesPerformanceTableau as cR3ObjPT</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">cR3ObjPT</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span>
-<span class="gp">... </span>         <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span>
-<span class="gp">... </span>         <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
-<span class="gp">... </span>         <span class="n">commonScale</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1000.0</span><span class="p">),</span>
-<span class="gp">... </span>         <span class="n">commonThresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">75.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)],</span>
-<span class="gp">... </span>         <span class="n">commonMode</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">,</span><span class="s1">&#39;variable&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">],</span>
-<span class="gp">... </span>         <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
-<span class="gp">... </span>         <span class="n">seed</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="go">             numberOfCriteria=21,</span>
+<span class="go">             weightDistribution=&#39;equiobjectives&#39;,</span>
+<span class="go">             commonScale = (0.0,1000.0),</span>
+<span class="go">             commonThresholds = [(2.5,0.0),(5.0,0.0),(75.0,0.0)],</span>
+<span class="go">             commonMode = [&#39;beta&#39;,&#39;variable&#39;,None],</span>
+<span class="go">             missingDataProbability=0.05,</span>
+<span class="go">             seed=16)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cSparseIntegerOutrankingDigraphs</span> <span class="k">as</span> <span class="nn">iBg</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span> <span class="o">=</span> <span class="n">iBg</span><span class="o">.</span><span class="n">cQuantilesRankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-<span class="gp">... </span>           <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;optimal&#39;</span><span class="p">,</span>
-<span class="gp">... </span>           <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-<span class="gp">... </span>           <span class="n">componentRankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
-<span class="gp">... </span>           <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="gp">... </span>           <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>           <span class="n">tempDir</span><span class="o">=</span><span class="s1">&#39;/tmp&#39;</span><span class="p">,</span>
-<span class="gp">... </span>           <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">28</span><span class="p">)</span>
+<span class="go">               quantilesOrderingStrategy=&#39;optimal&#39;,</span>
+<span class="go">               minimalComponentSize=1,</span>
+<span class="go">               componentRankingRule=&#39;NetFlows&#39;,</span>
+<span class="go">               LowerClosed=False,</span>
+<span class="go">               Threading=True,</span>
+<span class="go">               tempDir=&#39;/tmp&#39;,</span>
+<span class="go">               nbrOfCPUs=28)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span>
 <span class="go"> *----- Object instance description --------------*</span>
 <span class="go"> Instance class    : cQuantilesRankingDigraph</span>
@@ -4773,8 +4773,8 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 25
 26
 27</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span>\
-<span class="gp">... </span>              <span class="n">actionsSubset</span><span class="o">=</span><span class="n">qr</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span>\
-<span class="gp">... </span>              <span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">                  actionsSubset=qr.boostedRanking[:5],\</span>
+<span class="go">                  Transposed=True)</span>
 <span class="go"> *----  performance tableau -----*</span>
 <span class="go"> criteria | weights |  #773909  #668947  #567308  #578560  #426464</span>
 <span class="go"> ---------|-------------------------------------------------------</span>
@@ -4811,8 +4811,8 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 6
 7
 8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">qr</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>\
-<span class="gp">... </span>          <span class="n">pt</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">])</span>
+<span class="go">        print(pt.actions[x][&#39;name&#39;],\</span>
+<span class="go">              pt.actions[x][&#39;profile&#39;])</span>
 <span class="go"> #773909 {&#39;Eco&#39;: &#39;+&#39;, &#39;Soc&#39;: &#39;+&#39;, &#39;Env&#39;: &#39;+&#39;}</span>
 <span class="go"> #668947 {&#39;Eco&#39;: &#39;+&#39;, &#39;Soc&#39;: &#39;+&#39;, &#39;Env&#39;: &#39;+&#39;}</span>
 <span class="go"> #567308 {&#39;Eco&#39;: &#39;+&#39;, &#39;Soc&#39;: &#39;+&#39;, &#39;Env&#39;: &#39;+&#39;}</span>
@@ -5748,10 +5748,10 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
-<span class="gp">... </span>              <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+<span class="go">                  numberOfCriteria=nbrCrit,seed=seed)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span>\
-<span class="gp">... </span>              <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;quartiles&#39;</span><span class="p">,</span>\
-<span class="gp">... </span>              <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">                  numberOfBins = &#39;quartiles&#39;,\</span>
+<span class="go">                  LowerClosed=True)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 <span class="go"> dict_keys([&#39;objectives&#39;, &#39;LowerClosed&#39;, &#39;name&#39;,</span>
 <span class="go"> &#39;quantilesFrequencies&#39;, &#39;criteria&#39;, &#39;historySizes&#39;,</span>
@@ -5957,7 +5957,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <span class="go"> &#39;m3&#39;, &#39;a1003&#39;, &#39;a1001&#39;, &#39;a1007&#39;, &#39;a1004&#39;, &#39;a1009&#39;,</span>
 <span class="go"> &#39;m2&#39;, &#39;m1&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ranking correlation : </span><span class="si">%+.2f</span><span class="s1">&#39;</span> <span class="o">%</span>\
-<span class="go"> ...         (nqr.rankingCorrelation[&#39;correlation&#39;]) )</span>
+<span class="go">             (nqr.rankingCorrelation[&#39;correlation&#39;]) )</span>
 <span class="go"> Ranking correlation : +0.938</span>
 </pre></div>
 </td></tr></table></div>
@@ -5985,7 +5985,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <p>The same result may even more conveniently be consulted in a browser view via a specialised rating heatmap format ( see <code class="xref py py-meth docutils literal notranslate"><span class="pre">perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()</span></code> method (see <a class="reference internal" href="#heatmap1"><span class="std std-numref">Fig. 32</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quartiles Rating&#39;</span><span class="p">,</span>
-<span class="go"> ...               Correlations=True,colorLevels=5)</span>
+<span class="go">                   Correlations=True,colorLevels=5)</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="heatmap1">
@@ -6076,7 +6076,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 7
 8
 9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pq1</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;deciles&#39;</span><span class="p">,</span>\
-<span class="gp">... </span>             <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">                 LowerClosed=True)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq1</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="go"> *-------- Deciles rating result ---------</span>
@@ -6090,7 +6090,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <p>A browser view may again more conveniently illustrate this preciser <em>deciles</em> rating result (see <a class="reference internal" href="#heatmap2"><span class="std std-numref">Fig. 34</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of the deciles rating&#39;</span><span class="p">,</span>\
-<span class="gp">... </span>                           <span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">                               colorLevels=5,Correlations=True)</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="heatmap2">
@@ -6581,7 +6581,7 @@ frozenset([‘v6’,’v7’]) : -1,
 7
 8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">maxMatching</span> <span class="o">=</span> <span class="n">c8</span><span class="o">.</span><span class="n">computeMaximumMatching</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;maxMatchingcycleGraph&#39;</span><span class="p">,</span>
-<span class="gp">... </span>               <span class="n">matching</span><span class="o">=</span><span class="n">maxMatching</span><span class="p">)</span>
+<span class="go">                   matching=maxMatching)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to maxMatchingcyleGraph.dot</span>
 <span class="go"> Matching:  {frozenset({&#39;v1&#39;, &#39;v2&#39;}), frozenset({&#39;v5&#39;, &#39;v6&#39;}),</span>
@@ -6691,12 +6691,12 @@ frozenset([‘v6’,’v7’]) : -1,
 <span class="gp">&gt;&gt;&gt; </span><span class="n">verticesList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">vertices</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">verticesList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">verticesList</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">probs</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">... </span>    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="go">        probs[v] = (n - i)/(n*(n+1)/2)</span>
+<span class="go">        i += 1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">met</span> <span class="o">=</span> <span class="n">MetropolisChain</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">probs</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">frequency</span> <span class="o">=</span> <span class="n">met</span><span class="o">.</span><span class="n">checkSampling</span><span class="p">(</span><span class="n">verticesList</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">nSim</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">verticesList</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">probs</span><span class="p">[</span><span class="n">v</span><span class="p">],</span><span class="n">frequency</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
+<span class="go">        print(v,probs[v],frequency[v])</span>
 <span class="go"> v1 0.3333 0.3343</span>
 <span class="go"> v2 0.2666 0.2680</span>
 <span class="go"> v3 0.2    0.2030</span>
@@ -7237,7 +7237,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span> <span class="o">=</span> <span class="n">CycleGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">maxMatching</span> <span class="o">=</span> <span class="n">c8</span><span class="o">.</span><span class="n">computeMaximumMatching</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;maxMatchingcycleGraph&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                         <span class="n">matching</span><span class="o">=</span><span class="n">maxMatching</span><span class="p">)</span>
+<span class="go">                             matching=maxMatching)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to maxMatchingcyleGraph.dot</span>
 <span class="go"> Matching:  {frozenset({&#39;v1&#39;, &#39;v2&#39;}), frozenset({&#39;v5&#39;, &#39;v6&#39;}),</span>
@@ -7465,7 +7465,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <p>We call <strong>weak</strong>, a <em>chordless circuit</em> with <em>indeterminate inner part</em>. The <a class="reference internal" href="techDoc.html#digraphs.CirculantDigraph" title="digraphs.CirculantDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.CirculantDigraph</span></code></a> class provides a parameter for constructing such a kind of <em>weak chordless</em> circuits.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">c6</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">circulants</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
-<span class="gp">... </span>                       <span class="n">IndeterminateInnerPart</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">                           IndeterminateInnerPart=True)</span>
 </pre></div>
 </td></tr></table></div>
 <p>It is worth noticing that the <em>dual</em> version (<a class="footnote-reference brackets" href="#id113" id="id77">14</a>) of a <em>weak</em> circuit corresponds to its <em>converse</em> version, i.e. <em>-c6</em> = <em>~c6</em> (see <a class="reference internal" href="#weakchordlesscircuit"><span class="std std-numref">Fig. 47</span></a>).</p>
@@ -7527,7 +7527,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
 <span class="go"> []                 # no chordless circuits detected</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.2f%%</span><span class="s1">&#39;</span> <span class="o">%</span>\
-<span class="gp">... </span>              <span class="p">(</span><span class="n">rd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="p">))</span>
+<span class="go">                  (rd.computeTransitivityDegree()*100))</span>
 <span class="go"> Transitivity degree: 48.39%</span>
 </pre></div>
 </td></tr></table></div>
@@ -7609,8 +7609,8 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 4
 5
 6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;orientedLaterality&#39;</span><span class="p">,</span>\
-<span class="gp">... </span>                  <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span> <span class="s1">&#39;a4&#39;</span><span class="p">]),</span>\
-<span class="gp">... </span>                  <span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span> <span class="s1">&#39;a6&#39;</span><span class="p">]))</span>
+<span class="go">                      bestChoice=set([&#39;a3&#39;, &#39;a4&#39;]),\</span>
+<span class="go">                      worstChoice=set([&#39;a1&#39;, &#39;a6&#39;]))</span>
 <span class="go"> *---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go"> Exporting to orientedLaterality.dot</span>
 <span class="go"> dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png</span>
@@ -7752,7 +7752,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 3
 4
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;bestWorstOrientation&#39;</span><span class="p">,</span>
-<span class="gp">... </span>      <span class="n">bestChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a4&#39;</span><span class="p">],</span> <span class="n">worstChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a7&#39;</span><span class="p">])</span>
+<span class="go">          bestChoice=[&#39;a2&#39;,&#39;a4&#39;], worstChoice=[&#39;a7&#39;])</span>
 <span class="go"> *---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go"> Exporting to bestWorstOrientation.dot</span>
 <span class="go"> dot -Grankdir=BT -Tpng bestWorstOrientation.dot -o bestWorstOrientation.png</span>
@@ -7765,7 +7765,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>The gray arrows in <a class="reference internal" href="#bestworstorientation"><span class="std std-numref">Fig. 52</span></a>, like the one between actions ‘a4’ and ‘a1’, represent indeterminate preferential situations. Action ‘a1’ appears hence to be rather incomparable to all the other, except action ‘a7’. It may be interesting to compare this result with a <em>Copeland</em> ranking of the underlying performance tableau (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="gp">... </span>         <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">)</span>
+<span class="go">             Correlations=True, rankingRule=&#39;Copeland&#39;)</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="outrankingresult">
@@ -8264,7 +8264,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="go"> vertex 5: lightblue</span>
 <span class="go"> vertex 6: gold</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;coloredPermutationGraph&#39;</span><span class="p">,</span>\
-<span class="gp">... </span>                 <span class="n">WithVertexColoring</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">                     WithVertexColoring=True)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to coloredPermutationGraph.dot</span>
 <span class="go"> fdp -Tpng coloredPermutationGraph.dot -o coloredPermutationGraph.png</span>
@@ -8340,7 +8340,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dgd</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">transitiveOrientation</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dual transitivity degree: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span>\
-<span class="gp">... </span>            <span class="n">dgd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span> <span class="p">)</span>
+<span class="go">                dgd.computeTransitivityDegree() )</span>
 <span class="go"> Dual transitivity degree: 1.000</span>
 </pre></div>
 </td></tr></table></div>
@@ -8407,7 +8407,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 16
 17
 18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">isComparabilityGraph</span><span class="p">():</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">edgeOrientations</span><span class="p">)</span>
+<span class="go">        print(g.edgeOrientations)</span>
 <span class="go"> {(&#39;v1&#39;, &#39;v1&#39;): 0, (&#39;v1&#39;, &#39;v2&#39;): 1, (&#39;v2&#39;, &#39;v1&#39;): -1, (&#39;v1&#39;, &#39;v3&#39;): 1,</span>
 <span class="go">  (&#39;v3&#39;, &#39;v1&#39;): -1, (&#39;v1&#39;, &#39;v4&#39;): 1, (&#39;v4&#39;, &#39;v1&#39;): -1, (&#39;v1&#39;, &#39;v5&#39;): 0,</span>
 <span class="go">  (&#39;v5&#39;, &#39;v1&#39;): 0, (&#39;v1&#39;, &#39;v6&#39;): 1, (&#39;v6&#39;, &#39;v1&#39;): -1, (&#39;v1&#39;, &#39;v7&#39;): 0,</span>
@@ -8451,7 +8451,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 18
 19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gd</span> <span class="o">=</span> <span class="o">-</span><span class="n">g</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">gd</span><span class="o">.</span><span class="n">isComparabilityGraph</span><span class="p">():</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">gd</span><span class="o">.</span><span class="n">edgeOrientations</span><span class="p">)</span>
+<span class="go">        print(gd.edgeOrientations)</span>
 <span class="go"> {(&#39;v1&#39;, &#39;v1&#39;): 0, (&#39;v1&#39;, &#39;v2&#39;): 0, (&#39;v2&#39;, &#39;v1&#39;): 0, (&#39;v1&#39;, &#39;v3&#39;): 0,</span>
 <span class="go">  (&#39;v3&#39;, &#39;v1&#39;): 0, (&#39;v1&#39;, &#39;v4&#39;): 0, (&#39;v4&#39;, &#39;v1&#39;): 0, (&#39;v1&#39;, &#39;v5&#39;): 1,</span>
 <span class="go">  (&#39;v5&#39;, &#39;v1&#39;): -1, (&#39;v1&#39;, &#39;v6&#39;): 0, (&#39;v6&#39;, &#39;v1&#39;): 0, (&#39;v1&#39;, &#39;v7&#39;): 1,</span>
@@ -8524,7 +8524,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 4
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">permutation</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">order</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">order</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">permutation</span><span class="p">[</span><span class="n">s2</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">s1</span><span class="p">[</span><span class="n">j</span><span class="p">])]</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span>
+<span class="go">        permutation[s2.index(s1[j])] = j+1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">permutation</span><span class="p">)</span>
 <span class="go"> [5, 2, 4, 1, 6, 7, 8, 3]</span>
 </pre></div>
@@ -8661,7 +8661,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">code</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="n">code</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">choice</span><span class="p">(</span><span class="n">verticesList</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">        code.append( choice(verticesList) )</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">code</span><span class="p">)</span>
 <span class="go"> [&#39;v5&#39;, &#39;v7&#39;, &#39;v2&#39;, &#39;v5&#39;, &#39;v3&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomTree</span><span class="p">(</span><span class="n">prueferCode</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;v5&#39;</span><span class="p">,</span> <span class="s1">&#39;v7&#39;</span><span class="p">,</span> <span class="s1">&#39;v2&#39;</span><span class="p">,</span> <span class="s1">&#39;v5&#39;</span><span class="p">,</span> <span class="s1">&#39;v3&#39;</span><span class="p">])</span>
@@ -8711,9 +8711,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">RandomGraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">62</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">order</span> <span class="o">==</span> <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">g</span><span class="o">.</span><span class="n">isConnected</span><span class="p">():</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph is a tree ?&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">else</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The graph is a tree ?&#39;</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">        print(&#39;The graph is a tree ?&#39;, True)</span>
+<span class="go">    else:</span>
+<span class="go">        print(&#39;The graph is a tree ?&#39;,False)</span>
 <span class="go"> The graph is a tree ? True</span>
 </pre></div>
 </td></tr></table></div>
@@ -8780,7 +8780,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="go"> *---- RandomTree specific data ----*</span>
 <span class="go"> Prüfer code  : [&#39;v7&#39;, &#39;v9&#39;, &#39;v5&#39;, &#39;v1&#39;, &#39;v8&#39;, &#39;v4&#39;, &#39;v9&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">spt</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;randomSpanningTree&#39;</span><span class="p">,</span>\
-<span class="go"> ...                    WithSpanningTree=True)</span>
+<span class="go">                        WithSpanningTree=True)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to randomSpanningTree.dot</span>
 <span class="go"> [[&#39;v1&#39;, &#39;v5&#39;, &#39;v6&#39;, &#39;v5&#39;, &#39;v1&#39;, &#39;v8&#39;, &#39;v9&#39;, &#39;v3&#39;, &#39;v9&#39;, &#39;v4&#39;,</span>
@@ -8919,7 +8919,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 4
 5
 6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;bestDeterminedspanningTree&#39;</span><span class="p">,</span>\
-<span class="gp">... </span>                  <span class="n">WithSpanningTree</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">                      WithSpanningTree=True)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to spanningTree.dot</span>
 <span class="go"> [[&#39;v4&#39;, &#39;v2&#39;, &#39;v1&#39;, &#39;v3&#39;, &#39;v1&#39;, &#39;v2&#39;, &#39;v5&#39;, &#39;v2&#39;, &#39;v4&#39;]]</span>

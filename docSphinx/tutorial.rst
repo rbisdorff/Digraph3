@@ -424,7 +424,7 @@ We may now extract both the *symmetric* as well as the *asymmetric* part of digr
    :linenos:
 
    >>> from digraphs import AsymmetricPartialDigraph,
-   ...                      SymmetricPartialDigraph
+                            SymmetricPartialDigraph
    >>> asymDg = AsymmetricPartialDigraph(dg)
    >>> asymDg.exportGraphViz()
    >>> symDG = SymmetricPartialDigraph(dg)
@@ -728,7 +728,7 @@ Let us finally mention some special universal classes of digraphs that are readi
    :linenos:
 
    >>> from digraphs import CompleteDigraph,EmptyDigraph,
-   ...			 IndeterminateDigraph
+      			 IndeterminateDigraph
    >>> help(CompleteDigraph)
     Help on class CompleteDigraph in module digraphs:
     class CompleteDigraph(Digraph)
@@ -831,8 +831,8 @@ The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class
 
    >>> from votingProfiles import RandomLinearVotingProfile
    >>> v = RandomLinearVotingProfile(numberOfVoters=5,
-   ...                               numberOfCandidates=3,
-   ...                               RandomWeights=True)
+                                     numberOfCandidates=3,
+                                     RandomWeights=True)
    >>> v.candidates
     OrderedDict([ ('a1',{'name':'a1}), ('a2',{'name':'a2'}),
                   ('a3',{'name':'a3'}) ])
@@ -1075,7 +1075,7 @@ Many more tools for exploiting voting results are available like the browser hea
    :linenos:
 
    >>> v.showHTMLVotingHeatmap(rankingRule='NetFlows',
-   ...                         Transposed=False)
+                               Transposed=False)
 
 .. figure:: votingHeatmap.png
    :width: 550 px
@@ -1102,11 +1102,11 @@ Let us generate such a linear voting profile for an election with 1000 voters an
 
    >>> from votingProfiles import RandomLinearVotingProfile
    >>> lvp = RandomLinearVotingProfile(numberOfCandidates=15,
-   ...                         numberOfVoters=1000,
-   ...                         WithPolls=True,
-   ...                         partyRepartition=0.5,
-   ...                         other=0.1,
-   ...                         seed=0.9189670954954139)
+                               numberOfVoters=1000,
+                               WithPolls=True,
+                               partyRepartition=0.5,
+                               other=0.1,
+                               seed=0.9189670954954139)
    >>> lvp
     *------- VotingProfile instance description ------*
     Instance class   : RandomLinearVotingProfile
@@ -1179,7 +1179,7 @@ Is it also a *Condorcet* winner ? To verify, we start by creating the correspond
 We may visualize the resulting pairwise majority margins by showing the HTML formated version of the *cdg* relation table in a browser view.
 
    >>> cdg.showHTMLRelationTable(tableTitle='Pairwise majority margins',
-   ...                           relationName=M(x>y)')
+                                 relationName=M(x>y)')
 
 .. figure:: majorityMargins.png
    :width: 450 px
@@ -1840,10 +1840,10 @@ Example Python session
 		     
    >>> from randomPerfTabs import Random3ObjectivesPerformanceTableau
    >>> t = Random3ObjectivesPerformanceTableau(
-   ...           numberOfActions=31,
-   ...           numberOfCriteria=13,
-   ...           weightDistribution='equiobjectives',
-   ...           seed=120)
+                 numberOfActions=31,
+                 numberOfCriteria=13,
+                 weightDistribution='equiobjectives',
+                 seed=120)
    >>> t.showObjectives()
     *------ show objectives -------"
     Eco: Economical aspect
@@ -1895,11 +1895,11 @@ For testing purposes we provide a special :py:class:`perfTabs.PartialPerformance
 
    >>> from perfTabs import PartialPerformanceTableau
    >>> teco = PartialPerformanceTableau(t,criteriaSubset=\
-   ...                           t.objectives['Eco']['criteria'])
+                                 t.objectives['Eco']['criteria'])
    >>> tsoc = PartialPerformanceTableau(t,criteriaSubset=\
-   ...                           t.objectives['Soc']['criteria'])
+                                 t.objectives['Soc']['criteria'])
    >>> tenv = PartialPerformanceTableau(t,criteriaSubset=\
-   ...                           t.objectives['Env']['criteria'])
+                                 t.objectives['Env']['criteria'])
 
 One may thus compute a partial bipolar-valued outranking digraph for each individual objective.
 
@@ -2116,7 +2116,7 @@ Ranking with multiple incommensurable criteria
 The ranking problem
 ...................
 
-We need to rank without ties a set *X* of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued *strict outranking* characteristics, i.e. :math:`r(x\, > \, y)` for all *x*, *y* in *X* (see :ref:`CoDual-Digraph-label` and [BIS-2013]_).
+We need to rank without ties a set *X* of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued *strict outranking* characteristics, i.e. :math:`r(x\, \succnsim \, y)` for all *x*, *y* in *X* (see :ref:`CoDual-Digraph-label` and [BIS-2013]_).
 
 Let us consider a didactic outranking digraph *g* generated from a random :ref:`Cost-Benefit performance tableau <Cost-Benefit-Performance-Tableau-label>` concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding *strict outranking digraph* with a :ref:`codual transform <Codual-Transform-label>` as follows.
 
@@ -2127,7 +2127,7 @@ Let us consider a didactic outranking digraph *g* generated from a random :ref:`
 
    >>> from outrankingDigraphs import *
    >>> t = RandomCBPerformanceTableau(numberOfActions=9,
-   ...                                numberOfCriteria=13,seed=200)    
+                                      numberOfCriteria=13,seed=200)    
    >>> g = BipolarOutrankingDigraph(t,Normalized=True)
    >>> gcd = ~(-g) # codual digraph
    >>> gcd.showRelationTable(ReflexiveTerms=False)
@@ -2152,7 +2152,7 @@ Some ranking rules will work on the associated **Condorcet Digraph**, i.e. the c
    :linenos:
 
    >>> ccd = PolarisedOutrankingDigraph(gcd,level=g.valuationdomain['med'],
-   ...                                KeepValues=False,StrictCut=True)
+                                      KeepValues=False,StrictCut=True)
    >>> ccd.showRelationTable(ReflexiveTerms=False,IntegerValues=True)
     *---- Relation Table -----
      r(>)_med | 'a1' 'a2' 'a3' 'a4' 'a5' 'a6' 'a7' 'a8' 'a9'   
@@ -2210,7 +2210,7 @@ The Digraph3 resources provide some of the most common of these ranking rules, l
 The *Copeland* ranking
 ......................
 
-*Copeland*'s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the median cut strict outranking digraph *ccd*. The rule computes for each alternative a score resulting from the sum of the differences between the crisp **strict outranking** characteristics :math:`r(x\, > \,y)_{>0}` and the crisp **strict outranked** characteristics :math:`r(y\, > \, x)_{>0}`  for all pairs of alternatives where *y* is different from *x*. The alternatives are ranked in decreasing order of these *Copeland* scores; ties, the case given, being resolved by a lexicographical rule. 
+*Copeland*'s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the median cut strict outranking digraph *ccd*. The rule computes for each alternative a score resulting from the sum of the differences between the crisp **strict outranking** characteristics :math:`r(x\, \succnsim \,y)_{>0}` and the crisp **strict outranked** characteristics :math:`r(y\, \succnsim \, x)_{>0}`  for all pairs of alternatives where *y* is different from *x*. The alternatives are ranked in decreasing order of these *Copeland* scores; ties, the case given, being resolved by a lexicographical rule. 
 
 .. code-block:: pycon
    :name: CopelandRanking
@@ -2301,7 +2301,7 @@ Let us now consider a similar ranking rule, but working directly on the *bipolar
 The *NetFlows* ranking
 ......................
 
-The valued version of the *Copeland* rule, called **NetFlows** rule, computes for each alternative *x* a *net flow* score,  i.e. the sum of the differences between the **strict outranking** characteristics :math:`r(x\, > \,y)` and the **strict outranked** characteristics :math:`r(y\, > \,x)` for all pairs of alternatives where *y* is different from *x*.
+The valued version of the *Copeland* rule, called **NetFlows** rule, computes for each alternative *x* a *net flow* score,  i.e. the sum of the differences between the **strict outranking** characteristics :math:`r(x\, \succnsim \,y)` and the **strict outranked** characteristics :math:`r(y\, \succnsim \,x)` for all pairs of alternatives where *y* is different from *x*.
   
 .. code-block:: pycon
    :name: NetFlowsRanking
@@ -2625,7 +2625,7 @@ Let us finally mention another interesting *ranking-by-choosing* approach.
 
 *Tideman*'s *ranking-by-choosing* heuristic, the **RankedPairs** rule, working best this time on the non strict outranking digraph *g*, is based on a *prudent incremental* construction of linear orders that avoids on the fly any cycling outrankings (see [LAM-2009]_). The ranking rule may be formulated as follows:
 
-1. Rank the ordered pairs :math:`(x,y)` of alternatives in decreasing order of the outranking characteristic values :math:`r(x\, \geq \,y)`;
+1. Rank the ordered pairs :math:`(x,y)` of alternatives in decreasing order of :math:`r(x\, \succsim \,y) \,+\, r(y\, \not\succsim \,x)`;
 2. Consider the pairs in that order (ties are resolved by a lexicographic rule):
 
    - if the next pair does not create a *circuit* with the pairs already blocked, block this pair;
@@ -3159,7 +3159,7 @@ The idea is to first decompose the complete outranking relation into an ordered 
 
    >>> from cRandPerfTabs import *
    >>> t = cRandomPerformanceTableau(numberOfActions=100,
-   ...                               numberOfCriteria=7,seed=100)
+                                     numberOfCriteria=7,seed=100)
 
 We sort the 100 decision alternatives into overlapping quartile classes and rank with respect to the average quantile limits.
 
@@ -3378,16 +3378,16 @@ We observe an even more considerably less voluminous memory occupation: 208kB co
    >>> from cIntegerOutrankingDigraphs import *
    >>> ig = IntegerBipolarOutrankingDigraph(t)
    >>> print('Complete outranking : %+.4f'\
-   ...     % (ig.computeOrderCorrelation(ig.computeCopelandOrder())\
-   ...        ['correlation']))
+           % (ig.computeOrderCorrelation(ig.computeCopelandOrder())\
+              ['correlation']))
     Complete outranking : +0.7474
    >>> print('Sparse 4-tiling : %+.4f'\
-   ...     % (ig.computeOrderCorrelation(\
-   ...        list(reversed(sg.boostedRanking)))['correlation']))
+           % (ig.computeOrderCorrelation(\
+              list(reversed(sg.boostedRanking)))['correlation']))
     Sparse 4-tiling          : +0.7172
    >>> print('Optimzed sparse 4-tiling: %+.4f'\
-    ...     % (ig.computeOrderCorrelation(\
-    ...        list(reversed(qr.boostedRanking)))['correlation']))
+            % (ig.computeOrderCorrelation(\
+               list(reversed(qr.boostedRanking)))['correlation']))
     Optimzed sparse 4-tiling: +0.7051
 
 The best ranking correlation with the pairwise outranking situations (+0.75) is naturally given when we apply the *Copeland* rule to the complete outranking digraph. When we apply the same rule to the sparse 4-tiled outranking digraph, we get a correlation of +0.72, and when applying the *Copeland* rule to the optimised 4-tiled digraph, we still obtain a correlation of +0.71. These results actually depend on the number of quantiles we use as well as on the given model of random performance tableau. In case of Random3ObjectivesPerformanceTableau instances, for instance, we would get in a similar setting a complete outranking correlation of +0.86, a sparse 4-tiling correlation of +0.82, and an optimzed sparse 4-tiling correlation of +0.81.
@@ -3423,24 +3423,24 @@ Example python session on the HPC-UL Iris-126 -skylake node [7]_
 .. code-block:: pycon
 
    >>> from cRandPerfTabs import\
-   ...          cRandom3ObjectivesPerformanceTableau as cR3ObjPT
+                cRandom3ObjectivesPerformanceTableau as cR3ObjPT
    >>> pt = cR3ObjPT(numberOfActions=1000000,
-   ...          numberOfCriteria=21,
-   ...          weightDistribution='equiobjectives',
-   ...          commonScale = (0.0,1000.0),
-   ...          commonThresholds = [(2.5,0.0),(5.0,0.0),(75.0,0.0)],
-   ...          commonMode = ['beta','variable',None], 
-   ...          missingDataProbability=0.05,
-   ...          seed=16)
+                numberOfCriteria=21,
+                weightDistribution='equiobjectives',
+                commonScale = (0.0,1000.0),
+                commonThresholds = [(2.5,0.0),(5.0,0.0),(75.0,0.0)],
+                commonMode = ['beta','variable',None], 
+                missingDataProbability=0.05,
+                seed=16)
    >>> import cSparseIntegerOutrankingDigraphs as iBg
    >>> qr = iBg.cQuantilesRankingDigraph(pt,quantiles=10,
-   ...            quantilesOrderingStrategy='optimal',
-   ...            minimalComponentSize=1,
-   ...            componentRankingRule='NetFlows',
-   ...            LowerClosed=False,
-   ...            Threading=True,
-   ...            tempDir='/tmp',
-   ...            nbrOfCPUs=28)
+                  quantilesOrderingStrategy='optimal',
+                  minimalComponentSize=1,
+                  componentRankingRule='NetFlows',
+                  LowerClosed=False,
+                  Threading=True,
+                  tempDir='/tmp',
+                  nbrOfCPUs=28)
    >>> qr
     *----- Object instance description --------------*
     Instance class    : cQuantilesRankingDigraph
@@ -3474,8 +3474,8 @@ Let us inspect the 21 marginal performances of the five best-ranked alternatives
    :linenos:
 
    >>> pt.showPerformanceTableau(\
-   ...               actionsSubset=qr.boostedRanking[:5],\
-   ...               Transposed=True)
+                     actionsSubset=qr.boostedRanking[:5],\
+                     Transposed=True)
     *----  performance tableau -----*
     criteria | weights |  #773909  #668947  #567308  #578560  #426464
     ---------|-------------------------------------------------------
@@ -3509,8 +3509,8 @@ Their random performance evaluations were obviously drawn on all criteria with a
    :linenos:
 
    >>> for x in qr.boostedRanking[:5]:
-   ...     print(pt.actions[x]['name'],\
-   ...           pt.actions[x]['profile'])  
+           print(pt.actions[x]['name'],\
+                 pt.actions[x]['profile'])  
     #773909 {'Eco': '+', 'Soc': '+', 'Env': '+'}
     #668947 {'Eco': '+', 'Soc': '+', 'Env': '+'}
     #567308 {'Eco': '+', 'Soc': '+', 'Env': '+'}
@@ -4066,10 +4066,10 @@ Below, an example Python session concerning 900 decision alternatives randomly g
    >>> nbrCrit = 7
    >>> seed = 100
    >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-   ...               numberOfCriteria=nbrCrit,seed=seed)
+                     numberOfCriteria=nbrCrit,seed=seed)
    >>> pq = PerformanceQuantiles(tp,\
-   ...               numberOfBins = 'quartiles',\
-   ...               LowerClosed=True)
+                     numberOfBins = 'quartiles',\
+                     LowerClosed=True)
    >>> pq.__dict__.keys()
     dict_keys(['objectives', 'LowerClosed', 'name',
     'quantilesFrequencies', 'criteria', 'historySizes',
@@ -4229,7 +4229,7 @@ In this rating example, the *NetFlows* rule appears to be the more appropriate r
     'm3', 'a1003', 'a1001', 'a1007', 'a1004', 'a1009',
     'm2', 'm1']
    >>> print('Ranking correlation : %+.2f' %\
-    ...         (nqr.rankingCorrelation['correlation']) )
+                (nqr.rankingCorrelation['correlation']) )
     Ranking correlation : +0.938
 
 We achieve here a linear ranking without ties (from best to worst) of the digraph's actions, i.e. including the new decision alternatives as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense (*tau* = 0.94) to the underlying valued outranking relation.
@@ -4257,7 +4257,7 @@ The same result may even more conveniently be consulted in a browser view via a 
 .. code-block:: pycon
 
    >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quartiles Rating',
-    ...               Correlations=True,colorLevels=5)
+                      Correlations=True,colorLevels=5)
 
 .. figure:: heatMap1.png
     :name: heatMap1
@@ -4300,7 +4300,7 @@ A more precise rating result may be achieved when we use **deciles** instead of 
    :linenos:
 
    >>> pq1 = PerformanceQuantiles(tp, numberOfBins = 'deciles',\
-   ...              LowerClosed=True)
+                    LowerClosed=True)
    >>> nqr1 = NormedQuantilesRatingDigraph(pq1,newActions,rankingRule='best')
    >>> nqr1.showQuantilesRating()
     *-------- Deciles rating result ---------
@@ -4316,7 +4316,7 @@ A browser view may again more conveniently illustrate this preciser *deciles* ra
 .. code-block:: pycon
 
    >>> nqr1.showHTMLRatingHeatmap(pageTitle='Heatmap of the deciles rating',\
-   ...                            colorLevels=5,Correlations=True)
+                                  colorLevels=5,Correlations=True)
 
 .. figure:: heatMap2.png
     :name: heatMap2
@@ -4666,7 +4666,7 @@ The two last MISs of cardinality 4 (see Lines 13-16 above) give **isomorphic per
 
    >>> maxMatching = c8.computeMaximumMatching()
    >>> c8.exportGraphViz(fileName='maxMatchingcycleGraph',
-   ...		      matching=maxMatching)
+      		      matching=maxMatching)
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to maxMatchingcyleGraph.dot
     Matching:  {frozenset({'v1', 'v2'}), frozenset({'v5', 'v6'}),
@@ -4735,12 +4735,12 @@ Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specializati
    >>> verticesList = [x for x in g.vertices]
    >>> verticesList.sort()
    >>> for v in verticesList:
-   ...     probs[v] = (n - i)/(n*(n+1)/2)
-   ...     i += 1
+           probs[v] = (n - i)/(n*(n+1)/2)
+           i += 1
    >>> met = MetropolisChain(g,probs)
    >>> frequency = met.checkSampling(verticesList[0],nSim=30000)
    >>> for v in verticesList:
-   ...     print(v,probs[v],frequency[v])
+           print(v,probs[v],frequency[v])
     v1 0.3333 0.3343
     v2 0.2666 0.2680
     v3 0.2    0.2030
@@ -5132,7 +5132,7 @@ It is worthwhile noticing that the **maximal matchings** of a graph correspond b
    >>> c8 = CycleGraph(order=8)
    >>> maxMatching = c8.computeMaximumMatching()
    >>> c8.exportGraphViz(fileName='maxMatchingcycleGraph',
-   ...                          matching=maxMatching)
+                                matching=maxMatching)
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to maxMatchingcyleGraph.dot
     Matching:  {frozenset({'v1', 'v2'}), frozenset({'v5', 'v6'}),
@@ -5305,7 +5305,7 @@ We call **weak**, a *chordless circuit* with *indeterminate inner part*. The :py
    :linenos:
 
    >>> c6 = CirculantDigraph(order=6, circulants=[1],
-   ...                        IndeterminateInnerPart=True)
+                              IndeterminateInnerPart=True)
 
 It is worth noticing that the *dual* version ([14]_) of a *weak* circuit corresponds to its *converse* version, i.e. *-c6* = *~c6* (see :numref:`weakChordlessCircuit`).
 
@@ -5367,7 +5367,7 @@ The random digraph shown in :numref:`randomLaterality` above has no apparent spe
    >>> rd.computeChordlessCircuits()
     []                 # no chordless circuits detected
    >>> print('Transitivity degree: %.2f%%' %\
-   ...               (rd.computeTransitivityDegree()*100))
+                     (rd.computeTransitivityDegree()*100))
     Transitivity degree: 48.39%
 
 The given digraph instance is neither asymmetric (a3 <--> a6) nor symmetric (a2 --> a1, a1 -/> a2); there are no chordless circuits (see Line 5 above); and, the digraph is not transitive (a5 -> a2 -> a1, but a5 -/> a1). More than half of the required transitive closures are missing (see Line 8).
@@ -5417,8 +5417,8 @@ Among the six MISs contained in this random digraph (see above Lines 3-8) we dis
 .. code-block:: pycon
 
    >>> rd.exportGraphViz(fileName='orientedLaterality',\
-   ...                   bestChoice=set(['a3', 'a4']),\
-   ...                   worstChoice=set(['a1', 'a6']))
+                         bestChoice=set(['a3', 'a4']),\
+                         worstChoice=set(['a1', 'a6']))
     *---- exporting a dot file dor GraphViz tools ---------*
     Exporting to orientedLaterality.dot
     dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png
@@ -5535,7 +5535,7 @@ In :numref:`bestWorstOrientation` below, we orient the drawing of the strict out
 .. code-block:: pycon
 
    >>> gcd.exportGraphViz(fileName='bestWorstOrientation',
-   ...       bestChoice=['a2','a4'], worstChoice=['a7'])
+             bestChoice=['a2','a4'], worstChoice=['a7'])
     *---- exporting a dot file dor GraphViz tools ---------*
     Exporting to bestWorstOrientation.dot
     dot -Grankdir=BT -Tpng bestWorstOrientation.dot -o bestWorstOrientation.png
@@ -5553,7 +5553,7 @@ The gray arrows in :numref:`bestWorstOrientation`, like the one between actions 
 .. code-block:: pycon
 
    >>> g.showHTMLPerformanceHeatmap(colorLevels=5, ndigits=0,
-   ...          Correlations=True, rankingRule='Copeland')
+                Correlations=True, rankingRule='Copeland')
 
 .. figure:: outrankingResult.png
    :name: outrankingResult
@@ -5910,7 +5910,7 @@ By using color sorting queues, the minimal vertex coloring for a permutation gra
     vertex 5: lightblue
     vertex 6: gold
    >>> g.exportGraphViz(fileName='coloredPermutationGraph',\
-   ...                  WithVertexColoring=True) 
+                        WithVertexColoring=True) 
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to coloredPermutationGraph.dot
     fdp -Tpng coloredPermutationGraph.dot -o coloredPermutationGraph.png
@@ -5977,7 +5977,7 @@ The dual of a permutation graph is *again* a permutation graph and as such also 
 
    >>> dgd = (-g).transitiveOrientation()
    >>> print('Dual transitivity degree: %.3f' %\
-   ...             dgd.computeTransitivityDegree() ) 
+                   dgd.computeTransitivityDegree() ) 
     Dual transitivity degree: 1.000
 
 Recognizing permutation graphs
@@ -6021,7 +6021,7 @@ If the random perfect graph instance *g* (see :numref:`randomGraph4335`) is inde
    :linenos:
 
    >>> if g.isComparabilityGraph():
-   ...     print(g.edgeOrientations)
+           print(g.edgeOrientations)
     {('v1', 'v1'): 0, ('v1', 'v2'): 1, ('v2', 'v1'): -1, ('v1', 'v3'): 1,
      ('v3', 'v1'): -1, ('v1', 'v4'): 1, ('v4', 'v1'): -1, ('v1', 'v5'): 0,
      ('v5', 'v1'): 0, ('v1', 'v6'): 1, ('v6', 'v1'): -1, ('v1', 'v7'): 0,
@@ -6054,7 +6054,7 @@ The resulting orientation of the edges of *g* (see :numref:`transOrientGraph`) i
 
    >>> gd = -g
    >>> if gd.isComparabilityGraph():
-   ...     print(gd.edgeOrientations)
+           print(gd.edgeOrientations)
     {('v1', 'v1'): 0, ('v1', 'v2'): 0, ('v2', 'v1'): 0, ('v1', 'v3'): 0,
      ('v3', 'v1'): 0, ('v1', 'v4'): 0, ('v4', 'v1'): 0, ('v1', 'v5'): 1,
      ('v5', 'v1'): -1, ('v1', 'v6'): 0, ('v6', 'v1'): 0, ('v1', 'v7'): 1,
@@ -6126,7 +6126,7 @@ Vertex *v8* is put from position 5 to position 1, vertex *v7* is put from positi
 
    >>> permutation = [0 for j in range(g.order)]
    >>> for j in range(g.order):
-   ...     permutation[s2.index(s1[j])] = j+1
+           permutation[s2.index(s1[j])] = j+1
    >>> print(permutation)
     [5, 2, 4, 1, 6, 7, 8, 3]
 
@@ -6230,7 +6230,7 @@ It is as well possible to first, generate a random *Prüfer* code of length *n-2
    >>> seed(101)
    >>> code = []
    >>> for k in range(n-2):
-   ...     code.append( choice(verticesList) )
+           code.append( choice(verticesList) )
    >>> print(code)
     ['v5', 'v7', 'v2', 'v5', 'v3']
    >>> t = RandomTree(prueferCode=['v5', 'v7', 'v2', 'v5', 'v3'])
@@ -6279,9 +6279,9 @@ Assertion *A3*, for instance, gives a simple test for recognizing a tree graph. 
    >>> from graphs import RandomGraph
    >>> g = RandomGraph(order=6,edgeProbability=0.3,seed=62)
    >>> if g.order == (g.size +1) and g.isConnected():
-   ...     print('The graph is a tree ?', True)
-   ... else:
-   ...     print('The graph is a tree ?',False)
+           print('The graph is a tree ?', True)
+       else:
+           print('The graph is a tree ?',False)
     The graph is a tree ? True
 
 The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its *graphviz* drawing in :numref:`test62Tree` (see also the :py:func:`graphs.Graph.isTree` method for an implemented alternative test).
@@ -6334,7 +6334,7 @@ With the :py:class:`graphs.RandomSpanningTree` class we may generate, from a giv
     *---- RandomTree specific data ----*
     Prüfer code  : ['v7', 'v9', 'v5', 'v1', 'v8', 'v4', 'v9']
    >>> spt.exportGraphViz(fileName='randomSpanningTree',\
-    ...                    WithSpanningTree=True)
+                           WithSpanningTree=True)
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to randomSpanningTree.dot
     [['v1', 'v5', 'v6', 'v5', 'v1', 'v8', 'v9', 'v3', 'v9', 'v4',
@@ -6441,7 +6441,7 @@ The given graph is connected and, hence, admits a single spanning tree (see :num
    :linenos:
 
    >>> mt.exportGraphViz(fileName='bestDeterminedspanningTree',\
-   ...                   WithSpanningTree=True)
+                         WithSpanningTree=True)
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to spanningTree.dot
     [['v4', 'v2', 'v1', 'v3', 'v1', 'v2', 'v5', 'v2', 'v4']]

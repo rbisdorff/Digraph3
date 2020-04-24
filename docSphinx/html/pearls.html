@@ -100,8 +100,8 @@
 <p>To aggregate all the critics’ rating opinions, the <em>Graffiti</em> magazine provides for each movie a global score computed as an <em>average grade</em>, just ignoring the <em>not seen</em> data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic <em>SJ</em>, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?</p>
 <p>A better approach is to rank the movies on the basis of pairwise bipolar-valued  <em>at least as well rated as</em> opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the <a class="reference internal" href="tutorial.html#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> tutorial) of the 25 movies is provided, for instance, by the <strong>heat map</strong> view shown in <a class="reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 72</span></a>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="gp">... </span>                             <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                             <span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">                                 rankingRule=&#39;NetFlows&#39;,</span>
+<span class="go">                                 ndigits=0)</span>
 </pre></div>
 </div>
 <div class="figure align-center" id="graffiti07-2">
@@ -133,8 +133,8 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ranking</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">ranking</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>\
-<span class="gp">... </span><span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;Bipolar characteristic values of</span><span class="se">\</span>
-<span class="gp">... </span><span class="s1">&quot;rated at least as good as&quot; situations&#39;</span><span class="p">)</span>
+<span class="go">    tableTitle=&#39;Bipolar characteristic values of\</span>
+<span class="go">    &quot;rated at least as good as&quot; situations&#39;)</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="graffiti07-3">
@@ -342,9 +342,9 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="gp">&gt;&gt;&gt; </span><span class="n">M</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">);</span> <span class="n">D</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">eq</span><span class="o">.</span><span class="n">order</span><span class="o">*</span><span class="p">(</span><span class="n">eq</span><span class="o">.</span><span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">eq</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">eq</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
-<span class="gp">... </span>        <span class="n">M</span> <span class="o">+=</span> <span class="n">eq</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
-<span class="gp">... </span>        <span class="n">D</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">eq</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
+<span class="go">        for y in eq.actions:</span>
+<span class="go">            M += eq.relation[x][y]</span>
+<span class="go">            D += abs(eq.relation[x][y])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;r(R1&lt;=&gt;R2) = </span><span class="si">%+.3f</span><span class="s1">, d = </span><span class="si">%.3f</span><span class="s1">, tau = </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">M</span><span class="o">/</span><span class="n">n2</span><span class="p">,</span><span class="n">D</span><span class="o">/</span><span class="n">n2</span><span class="p">,</span><span class="n">M</span><span class="o">/</span><span class="n">D</span><span class="p">))</span>
 <span class="go"> r(R1&lt;=&gt;R2) = +0.026, d = 0.356, tau = +0.073</span>
 </pre></div>
@@ -448,9 +448,9 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="go">  &#39;mv_DJ&#39;, &#39;mv_AL&#39;, &#39;mv_RG&#39;, &#39;mv_MB&#39;, &#39;mv_GH&#39;, &#39;mv_HP&#39;, &#39;mv_BI&#39;,</span>
 <span class="go">  &#39;mv_DI&#39;, &#39;mv_FF&#39;, &#39;mv_GG&#39;, &#39;mv_TF&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>\
-<span class="gp">... </span><span class="n">g</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span>\
-<span class="gp">... </span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">)):</span>
-<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;r(</span><span class="si">%s</span><span class="s1">&lt;=&gt;nf) = </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
+<span class="go">    g.computeMarginalVersusGlobalRankingCorrelations(\</span>
+<span class="go">    nf.netFlowsRanking,ValuedCorrelation=True)):</span>
+<span class="go">       print(&#39;r(%s&lt;=&gt;nf) = %+.3f&#39; % (item[1],item[0]) )</span>
 <span class="go"> r(JH&lt;=&gt;nf) = +0.500</span>
 <span class="go"> r(JPT&lt;=&gt;nf)  = +0.430</span>
 <span class="go"> r(AP&lt;=&gt;nf) = +0.323</span>
@@ -760,9 +760,9 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 4
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k1Relation</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">domkernelrestrict</span><span class="p">([</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a4&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span>
-<span class="gp">... </span>     <span class="n">actionsList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a4&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a5&#39;</span><span class="p">,</span><span class="s1">&#39;a6&#39;</span><span class="p">,</span><span class="s1">&#39;a7&#39;</span><span class="p">],</span>
-<span class="gp">... </span>     <span class="n">relation</span><span class="o">=</span><span class="n">k1Relation</span><span class="p">,</span>
-<span class="gp">... </span>     <span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;K1 restricted adjacency table&#39;</span><span class="p">)</span>
+<span class="go">         actionsList=[&#39;a1&#39;,&#39;a2&#39;,&#39;a4&#39;,&#39;a3&#39;,&#39;a5&#39;,&#39;a6&#39;,&#39;a7&#39;],</span>
+<span class="go">         relation=k1Relation,</span>
+<span class="go">         tableTitle=&#39;K1 restricted adjacency table&#39;)</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="id29">
@@ -827,9 +827,9 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 4
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">k2Relation</span> <span class="o">=</span> <span class="n">gcd</span><span class="o">.</span><span class="n">abskernelrestrict</span><span class="p">([</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a7&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span>
-<span class="gp">... </span>     <span class="n">actionsList</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a7&#39;</span><span class="p">,</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a4&#39;</span><span class="p">,</span><span class="s1">&#39;a5&#39;</span><span class="p">,</span><span class="s1">&#39;a6&#39;</span><span class="p">],</span>
-<span class="gp">... </span>     <span class="n">relation</span><span class="o">=</span><span class="n">k2Relation</span><span class="p">,</span>
-<span class="gp">... </span>     <span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;K2 restricted adjacency table&#39;</span><span class="p">)</span>
+<span class="go">         actionsList=[&#39;a3&#39;,&#39;a7&#39;,&#39;a1&#39;,&#39;a2&#39;,&#39;a4&#39;,&#39;a5&#39;,&#39;a6&#39;],</span>
+<span class="go">         relation=k2Relation,</span>
+<span class="go">         tableTitle=&#39;K2 restricted adjacency table&#39;)</span>
 </pre></div>
 </td></tr></table></div>
 <div class="figure align-center" id="id30">
@@ -1208,7 +1208,7 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">    absorbency   :  0.2857</span>
 <span class="go">    covered      :  0.583</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd90</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;confidentOutranking&#39;</span><span class="p">,</span>
-<span class="gp">... </span>      <span class="n">bestChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span> <span class="s1">&#39;a7&#39;</span><span class="p">],</span><span class="n">worstChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span> <span class="s1">&#39;a5&#39;</span><span class="p">,</span> <span class="s1">&#39;a6&#39;</span><span class="p">])</span>
+<span class="go">          bestChoice=[&#39;a1&#39;, &#39;a7&#39;],worstChoice=[&#39;a2&#39;, &#39;a5&#39;, &#39;a6&#39;])</span>
 <span class="go"> *---- exporting a dot file dor GraphViz tools ---------*</span>
 <span class="go"> Exporting to confidentOutranking.dot</span>
 <span class="go"> dot -Grankdir=BT -Tpng confidentOutranking.dot -o confidentOutranking.png</span>
@@ -1378,7 +1378,7 @@ confidence level <em>alpha</em> %, if</p>
 33
 34</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>\
-<span class="gp">... </span>                                <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">102</span><span class="p">)</span>
+<span class="go">                                    numberOfCriteria=9,seed=102)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
 <span class="go"> *------- PerformanceTableau instance description ------*</span>
 <span class="go"> Instance class   : Random3ObjectivesPerformanceTableau</span>

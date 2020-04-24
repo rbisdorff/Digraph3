@@ -365,7 +365,8 @@ class RankedPairsRanking(LinearOrder):
         listPairs = []
         for x in actions:
             for y in (z for z in actions if z != x):
-                listPairs.append((-relation[x][y],(x,y),x,y))
+                linkCharacteristic = relation[x][y]-relation[y][x]
+                listPairs.append((-linkCharacteristic,(x,y),x,y))
         listPairs.sort(reverse=Leximin)
         if Debug:
             print(listPairs)
@@ -1763,7 +1764,7 @@ if __name__ == "__main__":
     ****************************************************
     """)
     import random
-    import time
+    from time import time
     print('*-------- Testing class and methods -------')
 
     Threading = False
@@ -1772,40 +1773,40 @@ if __name__ == "__main__":
     t = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=13,
                                    NegativeWeights=False,
                                    seed=seed)
-    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
+    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
     #t = PerformanceTableau('testLin')    
     g = BipolarOutrankingDigraph(t,Normalized=True)
     #g.showRelationTable()
-    mr = MedianRanking(g,Threading=False,nbrOfCPUs=8,Debug=False)
-    t.showHTMLPerformanceHeatmap(pageTitle='Median Ranking',actionsList=mr.medianRanking,
-                                 Correlations=True,colorLevels=5)
-    ke = KemenyRanking(g)
-    print('median')
-    for r in mr.maximalRankings:
-        corr = g.computeRankingConsensusQuality(r)
-        print(r,'%.4f' % (corr[1]), '%.4f' % (corr[2]) )
-    print('Kemeny')
+##    #mr = MedianRanking(g,Threading=False,nbrOfCPUs=8,Debug=False)
+##    t.showHTMLPerformanceHeatmap(pageTitle='Median Ranking',actionsList=mr.medianRanking,
+##                                 Correlations=True,colorLevels=5)
+##    #ke = KemenyRanking(g)
+##    print('median')
+##    for r in mr.maximalRankings:
+##        corr = g.computeRankingConsensusQuality(r)
+##        print(r,'%.4f' % (corr[1]), '%.4f' % (corr[2]) )
+##    print('Kemeny')
 ##    for r in ke.maximalRankings:
 ##        cons = g.computeRankingConsensusQuality(r)
 ##        print(r,cons[1],cons[2])
-    for r in ke.orderedMaximalRankings:
-        print(r[2],r[0],r[1])
-
-    time.sleep(3)
-    t.showHTMLPerformanceHeatmap(pageTitle='Kemeny Ranking',actionsList=ke.kemenyRanking,
-                                 Correlations=True,colorLevels=5)
+##    for r in ke.orderedMaximalRankings:
+##        print(r[2],r[0],r[1])
+##
+##    time.sleep(3)
+##    t.showHTMLPerformanceHeatmap(pageTitle='Kemeny Ranking',actionsList=ke.kemenyRanking,
+##                                 Correlations=True,colorLevels=5)
 ##    print()
 ##    print('==>> net flows ordering:')
 ##    t0 = time()
-    nf = NetFlowsOrder(g,Debug=False)
+##    nf = NetFlowsOrder(g,Debug=False)
 ##    #g.showRelationTable(actionsSubset=nf.netFlowsRanking,Sorted=False)
 ##    #print(nf.netFlowsRanking)
 ##    #print(nf.netFlowsOrder)
 ##    #corr = g.computeOrdinalCorrelation(nf)
 ##    #g.showCorrelation(corr)
 ##    #print(time()-t0)
-    t.showHTMLPerformanceHeatmap(pageTitle='NetFlows Ranking',actionsList=nf.netFlowsRanking,
-                                 colorLevels=5,Correlations=True)
+##    t.showHTMLPerformanceHeatmap(pageTitle='NetFlows Ranking',actionsList=nf.netFlowsRanking,
+##                                 colorLevels=5,Correlations=True)
 ##    print()
 ##    print('==>> iterated net flows ordering:')
 ##    from linearOrders import IteratedNetFlowsRanking
@@ -1896,38 +1897,38 @@ if __name__ == "__main__":
 ##    # print(g.computeOrdinalCorrelation(of))
 ##    # print(time()-t0)
 ##    # print()
-##    print('==>> Copeland ordering:')
-##    t0 = time()
-##    cop = CopelandOrder(g,Comments=True)
-##    g.showRelationTable(actionsSubset=cop.copelandRanking)
-##    print(cop.copelandRanking)
-##    print(cop.copelandOrder)
-##    print(g.computeOrdinalCorrelation(cop))
-##    print(time()-t0)
-##    print()
-##    print('==>> Kohler ordering:')
-##    t0 = time()
-##    ko = KohlerOrder(g)
-##    g.showRelationTable(actionsSubset=ko.kohlerRanking)
-##    print(ko.kohlerRanking)
-##    print(ko.kohlerOrder)
-##    print(g.computeOrdinalCorrelation(ko))
-##    print(time()-t0)
-##    print()
-##    print('==>> ranked pairs ordering:')
-##    t0 = time()
-##    rp = RankedPairsOrder(g)
-##    g.showRelationTable(actionsSubset=rp.rankedPairsRanking)
-##    print(rp.rankedPairsRanking)
-##    print(rp.rankedPairsOrder)
-##    print(g.computeOrdinalCorrelation(rp))
-##    print(time()-t0)
-##    print()
-##    print('==>> Leximin ordering:')
-##    le = RankedPairsOrder((-g),Leximin=True)
-##    g.showRelationTable()
-##    print(le.rankedPairsOrder)
-##    print((-g).computeOrdinalCorrelation(le))
+    print('==>> Copeland ordering:')
+    t0 = time()
+    cop = CopelandOrder(g,Comments=True)
+    g.showRelationTable(actionsSubset=cop.copelandRanking)
+    print(cop.copelandRanking)
+    print(cop.copelandOrder)
+    print(g.computeOrdinalCorrelation(cop))
+    print(time()-t0)
+    print()
+    print('==>> Kohler ordering:')
+    t0 = time()
+    ko = KohlerOrder(g)
+    g.showRelationTable(actionsSubset=ko.kohlerRanking)
+    print(ko.kohlerRanking)
+    print(ko.kohlerOrder)
+    print(g.computeOrdinalCorrelation(ko))
+    print(time()-t0)
+    print()
+    print('==>> ranked pairs ordering:')
+    t0 = time()
+    rp = RankedPairsOrder(g)
+    g.showRelationTable(actionsSubset=rp.rankedPairsRanking)
+    print(rp.rankedPairsRanking)
+    print(rp.rankedPairsOrder)
+    print(g.computeOrdinalCorrelation(rp))
+    print(time()-t0)
+    print()
+    print('==>> Leximin ordering:')
+    le = RankedPairsOrder((-g),Leximin=True)
+    g.showRelationTable()
+    print(le.rankedPairsOrder)
+    print((-g).computeOrdinalCorrelation(le))
 
     
 ##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
