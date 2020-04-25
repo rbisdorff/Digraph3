@@ -1997,35 +1997,57 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         
     def showVetos(self,cutLevel=None,realVetosOnly = False):
         """
-        prints all veto situations observed in the OutrankingDigraph instance.
+        prints all veto and counter-veto situations observed in the OutrankingDigraph instance.
         """
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        lpdCount = self.largePerformanceDifferencesCount
         print('*----  Veto situations ---')
-        nv, realveto = self.computeVetosShort()
+        #nv, realveto = self.computeVetosShort()
         vetos = self.vetos
-        vetos.sort()
-        if realVetosOnly:
-            print(self.valuationdomain)
-            cutveto = 0
-            if cutLevel == None:
-                cutLevel = self.valuationdomain['med']
+        #vetos.sort()
+        nv = len(vetos)
+        print('number of veto situations : %d ' % (nv))
+        for i in range(nv):
+            if lpdCount[vetos[i][0][0]][vetos[i][0][1]]['positive'] == 0:
+                if vetos[i][0][2] > Med:
+                    print('%d: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (i+1,vetos[i][0][0],vetos[i][0][1],vetos[i][0][2],Med) )
+                else:
+                    print('%d: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (i+1,vetos[i][0][0],vetos[i][0][1],vetos[i][0][2],Min) )
             else:
-                cutLevel = Decimal(str(cutLevel))
-            if cutLevel > self.valuationdomain['max']:
-                print("Error! min = %.3f, max = %.3f" % (self.valuationdomain['min'],self.valuationdomain['max']))
-                return None
-            print('Real vetos at cut level: %.3f' % (cutLevel))
-            for i in range(nv):
-                if self.vetos[i][0][2] > cutLevel:
-                    print('self.vetos[i][0][2]=',self.vetos[i][0][2])
-                    print(str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1]))
-                    cutveto += 1
-            return nv,realveto,cutveto
-        else:            
-            print('number of potential vetos: %d ' % (nv))
-            for i in range(nv):
-                print(str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1]))
-            print('number of real vetos: %d' % (realveto))
-            return nv,realveto
+                print('%d: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (i+1,vetos[i][0][0],vetos[i][0][1],vetos[i][0][2],Med) )
+            print('criteria: ' + str(vetos[i][1][0][0]))
+            print('Considerable performance difference : %.2f' % vetos[i][1][0][1][1] )
+            print('Veto discrimination threshold       : %.2f' % -vetos[i][1][0][1][3] )
+        #print('number of real vetos: %d' % (realveto))
+        #return nv,realveto
+        print('\n*----  Counter-veto situations ---')
+        negativeVetos = self.negativeVetos
+        #vetos.sort()
+        cv = len(negativeVetos)
+        print('number of counter-veto situations : %d ' % (nv))
+        for i in range(cv):
+            if lpdCount[negativeVetos[i][0][0]][negativeVetos[i][0][1]]['negative'] == 0:
+                if negativeVetos[i][0][2] < Med:
+                    print('%d: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (i+1,negativeVetos[i][0][0],\
+                       negativeVetos[i][0][1],negativeVetos[i][0][2],Med) )
+                else:
+                    print('%d: r(%s >= %s) = %.2f ==> %+.2f' %\
+                      (i+1,negativeVetos[i][0][0],\
+                        negativeVetos[i][0][1],negativeVetos[i][0][2],Max) )
+            else:
+                print('%d: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (i+1,negativeVetos[i][0][0],\
+                       negativeVetos[i][0][1],negativeVetos[i][0][2],Med) )
+               
+            print('criteria: ' + str(negativeVetos[i][1][0][0]))
+            print('Considerable performance difference : %.2f' % negativeVetos[i][1][0][1][1] )
+            print('Counter-veto threshold              : %.2f' % negativeVetos[i][1][0][1][3] )
 
     def saveXMLRubisOutrankingDigraph(self,name='temp',category='Rubis outranking digraph',subcategory='Choice recommendation',author='digraphs Module (RB)',reference='saved from Python',Comments=False,servingD3=True):
         """
@@ -9745,6 +9767,7 @@ if __name__ == "__main__":
 
     import copy
     from time import time, sleep
+    from random import randint
     from outrankingDigraphs import BipolarOutrankingDigraph
     from transitiveDigraphs import RankingByChoosingDigraph
     
@@ -9761,14 +9784,16 @@ if __name__ == "__main__":
 ##                                   seed=102)
     t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
                                    numberOfCriteria=9,\
-                                   seed=102)
+                                   seed=randint(1,1000))
+                                   #seed = 93)
     g = BipolarOutrankingDigraph(t,Normalized=True,
                                   tempDir=None,nbrCores=8,Comments=True,Debug=False)
-    g.showRelationTable(StabilityDenotation=True)
-    rg = RobustOutrankingDigraph(t,Debug=False)
-    rg.showRelationTable()
-    cg = ConfidentBipolarOutrankingDigraph(t)
-    cg.showRelationTable()
+    g.showVetos()
+##    g.showRelationTable(StabilityDenotation=True)
+##    rg = RobustOutrankingDigraph(t,Debug=False)
+##    rg.showRelationTable()
+##    cg = ConfidentBipolarOutrankingDigraph(t)
+##    cg.showRelationTable()
     
     #print(g1)
     #g1.saveXMCDA2RubisChoiceRecommendation()
