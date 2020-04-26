@@ -2010,19 +2010,22 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         nv = len(vetos)
         print('number of veto situations : %d ' % (nv))
         for i in range(nv):
-            if lpdCount[vetos[i][0][0]][vetos[i][0][1]]['positive'] == 0:
-                if vetos[i][0][2] > Med:
-                    print('%d: r(%s >= %s) = %.2f ==> %.2f' %\
-                      (i+1,vetos[i][0][0],vetos[i][0][1],vetos[i][0][2],Med) )
-                else:
-                    print('%d: r(%s >= %s) = %.2f ==> %.2f' %\
-                      (i+1,vetos[i][0][0],vetos[i][0][1],vetos[i][0][2],Min) )
-            else:
-                print('%d: r(%s >= %s) = %.2f ==> %.2f' %\
-                      (i+1,vetos[i][0][0],vetos[i][0][1],vetos[i][0][2],Med) )
+            print('%d: r(%s >= %s) = %.2f' %\
+                (i+1,vetos[i][0][0],vetos[i][0][1],vetos[i][0][2]) )
             print('criteria: ' + str(vetos[i][1][0][0]))
             print('Considerable performance difference : %.2f' % vetos[i][1][0][1][1] )
             print('Veto discrimination threshold       : %.2f' % -vetos[i][1][0][1][3] )
+            if lpdCount[vetos[i][0][0]][vetos[i][0][1]]['positive'] == 0:
+                if vetos[i][0][2] > Med:
+                    print('Polarisation: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (vetos[i][0][0],vetos[i][0][1],vetos[i][0][2],Med) )
+                else:
+                    print('Polarisation: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (vetos[i][0][0],vetos[i][0][1],vetos[i][0][2],Min) )
+            else:
+                print('Consirable contradictory performance differences!')
+                print('Polarisation: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (vetos[i][0][0],vetos[i][0][1],vetos[i][0][2],Med) )
         #print('number of real vetos: %d' % (realveto))
         #return nv,realveto
         print('\n*----  Counter-veto situations ---')
@@ -2031,23 +2034,27 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         cv = len(negativeVetos)
         print('number of counter-veto situations : %d ' % (nv))
         for i in range(cv):
-            if lpdCount[negativeVetos[i][0][0]][negativeVetos[i][0][1]]['negative'] == 0:
-                if negativeVetos[i][0][2] < Med:
-                    print('%d: r(%s >= %s) = %.2f ==> %.2f' %\
+            print('%d: r(%s >= %s) = %.2f' %\
                       (i+1,negativeVetos[i][0][0],\
-                       negativeVetos[i][0][1],negativeVetos[i][0][2],Med) )
-                else:
-                    print('%d: r(%s >= %s) = %.2f ==> %+.2f' %\
-                      (i+1,negativeVetos[i][0][0],\
-                        negativeVetos[i][0][1],negativeVetos[i][0][2],Max) )
-            else:
-                print('%d: r(%s >= %s) = %.2f ==> %.2f' %\
-                      (i+1,negativeVetos[i][0][0],\
-                       negativeVetos[i][0][1],negativeVetos[i][0][2],Med) )
-               
+                       negativeVetos[i][0][1],negativeVetos[i][0][2]) )
             print('criteria: ' + str(negativeVetos[i][1][0][0]))
             print('Considerable performance difference : %.2f' % negativeVetos[i][1][0][1][1] )
-            print('Counter-veto threshold              : %.2f' % negativeVetos[i][1][0][1][3] )
+            print('Counter-veto threshold              : %.2f' % negativeVetos[i][1][0][1][3] )            
+            if lpdCount[negativeVetos[i][0][0]][negativeVetos[i][0][1]]['negative'] == 0:
+                if negativeVetos[i][0][2] < Med:
+                    print('Polarisation: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (negativeVetos[i][0][0],\
+                       negativeVetos[i][0][1],negativeVetos[i][0][2],Med) )
+                else:
+                    print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                      (negativeVetos[i][0][0],\
+                        negativeVetos[i][0][1],negativeVetos[i][0][2],Max) )
+            else:
+                print('Consirable contradictory performance differences!')
+                print('Polarisation: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (negativeVetos[i][0][0],\
+                       negativeVetos[i][0][1],negativeVetos[i][0][2],Med) )
+               
 
     def saveXMLRubisOutrankingDigraph(self,name='temp',category='Rubis outranking digraph',subcategory='Choice recommendation',author='digraphs Module (RB)',reference='saved from Python',Comments=False,servingD3=True):
         """
