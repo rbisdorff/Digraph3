@@ -1810,8 +1810,6 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         if hasLPDDenotation:
             try:
                 largePerformanceDifferencesCount = self.largePerformanceDifferencesCount
-                gnv = BipolarOutrankingDigraph(self.performanceTableau,hasNoVeto=True)
-                gnv.recodeValuation(self.valuationdomain['min'],self.valuationdomain['max'])
             except:
                 hasLPDDenotation = False
         if StabilityDenotation:
@@ -1829,7 +1827,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             actions = actionsSubset
 
         if relation == None:
-            relation = self.relation
+            if hasLPDDenotation:
+                relation = self.relation
+            else:
+                relation = self.relation
             
         print('* ---- Relation Table -----\n', end=' ')
         if StabilityDenotation:
@@ -1873,29 +1874,29 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 if x == y:
                     if not ReflexiveTerms:
                         if hasLPDDenotation:
-                            print('  -  ', end=' ')
+                            print('   -   ', end=' ')
                         elif hasLatexFormat:
-                            print('$-$ &', end=' ')
+                            print('$\;-\;$ &', end=' ')
                         else:
                             print('  -  ', end=' ')
                     else:
                         if hasLPDDenotation:
-                            print(' +4 ', end=' ')
+                            print(' 1.00 ', end=' ')
                         elif hasLatexFormat:
-                            print('$+4$ &', end=' ')
+                            print('$+1.00$ &', end=' ')
                         else:
                             print(' +1.00 ', end=' ')
                 else:    
                     if hasIntegerValuation:
                         if hasLPDDenotation:
-                            print('%+d ' % (gnv.relation[x[1]][y[1]]), end=' ')
+                            print('%+d ' % (relation[x[1]][y[1]]), end=' ')
                         elif hasLatexFormat:
                             print('$%+d$ &' % (relation[x[1]][y[1]]), end=' ')
                         else:
                             print('%+d ' % (relation[x[1]][y[1]]), end=' ')
                     else:
                         if hasLPDDenotation:
-                            print('%+2.2f ' % (gnv.relation[x[1]][y[1]]), end=' ')
+                            print('%+2.2f ' % (relation[x[1]][y[1]]), end=' ')
                         elif hasLatexFormat:
                             print('$%+2.2f$ & ' % (relation[x[1]][y[1]]), end=' ')       
                         else:
@@ -1994,6 +1995,97 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         vetos['strong'] = strongVeto
         vetos['weak'] = weakVeto
         return vetos
+
+    def showConsiderablePerformancesPolarisation(self):
+        """
+        prints all considerable performance polarisations.
+        """
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        vet = self.vetos
+        negVet = self.negativeVetos
+        vp =  [(x[0][0],x[0][1]) for x in vet]
+        nvp = [(x[0][0],x[0][1]) for x in negVet]
+        print(vp)
+        print(nvp)
+        nv = len(vp)
+        nnv = len(nvp)
+        i = 0
+        j = 0
+        while i < nv or j < nnv:
+            if i < nv and j < nnv:
+                if vp[i] == nvp[j]:
+                    print('*----- Consirable contradictory performance difference! ------*')
+                    print('r(%s >= %s) = %.2f' %\
+                        (vet[i][0][0],vet[i][0][1],vet[i][0][2]) )
+                    print('criteria: ' + str(vet[i][1][0][0]))
+                    print('Considerable negative performance difference : %.2f' % vet[i][1][0][1][1] )
+                    print('Veto discrimination threshold       : %.2f' % -vet[i][1][0][1][3] )
+                    print('criteria: ' + str(negVet[i][1][0][0]))
+                    print('Considerable positive performance difference : %.2f' % negVet[i][1][0][1][1] )
+                    print('Counter-veto threshold              : %.2f' % negVet[i][1][0][1][3] )            
+                    print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                          (vet[i][0][0],vet[i][0][1],vet[i][0][2],Med) )                    
+                    i += 1; j +=1
+                elif vp[i] < nvp[j]:
+                    print('*------ Considerable negative performance difference -----"')
+                    print('r(%s >= %s) = %.2f' %\
+                            (vet[i][0][0],vet[i][0][1],vet[i][0][2]) )
+                    print('criteria: ' + str(vet[i][1][0][0]))
+                    print('Performance difference        : %.2f' % vet[i][1][0][1][1] )
+                    print('Veto discrimination threshold : %.2f' % -vet[i][1][0][1][3] )
+                    if vet[i][0][2] > Med:
+                        print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                          (vet[i][0][0],vet[i][0][1],vet[i][0][2],Med) )
+                    else:
+                        print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                          (vet[i][0][0],vet[i][0][1],vet[i][0][2],Min) )
+                    i += 1
+                else:
+                    print('*------ Considerable positive performance difference -----"')
+                    print('r(%s >= %s) = %.2f' %\
+                            (negVet[j][0][0],negVet[j][0][1],negVet[i][0][2]) )
+                    print('criteria: ' + str(negVet[j][1][0][0]))
+                    print('Performance difference        : %.2f' % negVet[j][1][0][1][1] )
+                    print('Counter-veto discrimination threshold : %.2f' % negVet[j][1][0][1][3] )
+                    if negVet[j][0][2] < Med:
+                        print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                          (negVet[j][0][0],negVet[j][0][1],negVet[j][0][2],Med) )
+                    else:
+                        print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                          (negVet[j][0][0],negVet[j][0][1],negVet[j][0][2],Max) )
+                    j += 1
+            else:
+                break
+        while i < nv:
+            print('*------ Considerable negative performance difference -----"')
+            print('r(%s >= %s) = %.2f' %\
+                    (vet[i][0][0],vet[i][0][1],vet[i][0][2]) )
+            print('criteria: ' + str(vet[i][1][0][0]))
+            print('Performance difference        : %.2f' % vet[i][1][0][1][1] )
+            print('Veto discrimination threshold : %.2f' % -vet[i][1][0][1][3] )
+            if vet[i][0][2] > Med:
+                print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                  (vet[i][0][0],vet[i][0][1],vet[i][0][2],Med) )
+            else:
+                print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                  (vet[i][0][0],vet[i][0][1],vet[i][0][2],Min) )
+            i +=1
+        while j < nnv:
+            print('*------ Considerable positive performance difference -----"')
+            print('r(%s >= %s) = %.2f' %\
+                    (negVet[j][0][0],negVet[j][0][1],negVet[j][0][2]) )
+            print('criteria: ' + str(negVet[j][1][0][0]))
+            print('Performance difference        : %.2f' % negVet[j][1][0][1][1] )
+            print('Counter-veto discrimination threshold : %.2f' % negVet[j][1][0][1][3] )
+            if negVet[j][0][2] < Med:
+                print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                  (negVet[j][0][0],negVet[j][0][1],negVet[j][0][2],Med) )
+            else:
+                print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                  (negVet[j][0][0],negVet[j][0][1],negVet[j][0][2],Max) )
+            j += 1
         
     def showVetos(self,cutLevel=None,realVetosOnly = False):
         """
@@ -9131,10 +9223,14 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
         print('Valuation domain   : [%+.3f; %+.3f] ' % (self.valuationdomain['min'],
                                                    self.valuationdomain['max']))
-        print('Uncertainty model  : %s(a=%.1f,b=%.1f) ' % (self.distribution,
+        if self.distribution == 'beta':
+            print('Uncertainty model  : %s(a=%.1f,b=%.1f) ' % (self.distribution,
                                                          self.betaParameter,
                                                          self.betaParameter)
                                                          )
+        else:
+            print('Uncertainty model  : %s(a=%s,b=%s) ' % (self.distribution,'0','2w') )
+          
         print('Likelihood domain  : [-1.0;+1.0] ')
         print('Confidence level   : %.2f (%.1f%%) ' % (self.bipolarConfidenceLevel,
                                                      (self.bipolarConfidenceLevel+1.0)/2.0*100.0))
@@ -9493,7 +9589,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 ##            try:
 ##                largePerformanceDifferencesCount = self.largePerformanceDifferencesCount
 ##                gnv = BipolarOutrankingDigraph(self.performanceTableau,hasNoVeto=True)
-##                gnv.recodeValuation(self.valuationdomain['min'],self.valuationdomain['max'])
+##                recodeValuation(self.valuationdomain['min'],self.valuationdomain['max'])
 ##            except:
 
         hasLPDDenotation = False
@@ -9555,14 +9651,14 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             for y in actionsList:
                 if hasIntegerValuation:
                     if hasLPDDenotation:
-                        print('%+d ' % (gnv.relation[x[1]][y[1]]), end=' ')
+                        print('%+d ' % (relation[x[1]][y[1]]), end=' ')
                     elif hasLatexFormat:
                         print('$%+d$ &' % (relation[x[1]][y[1]]), end=' ')
                     else:
                         print('%+d ' % (relation[x[1]][y[1]]), end=' ')
                 else:
                     if hasLPDDenotation:
-                        print('%+2.2f ' % (gnv.relation[x[1]][y[1]]), end=' ')
+                        print('%+2.2f ' % (relation[x[1]][y[1]]), end=' ')
                     elif hasLatexFormat:
                         print('$%+2.2f$ & ' % (relation[x[1]][y[1]]), end=' ')       
                     else:
@@ -9791,11 +9887,16 @@ if __name__ == "__main__":
 ##                                   seed=102)
     t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
                                    numberOfCriteria=9,\
+                                    vetoProbability=1.0,\
                                    seed=randint(1,1000))
-                                   #seed = 93)
+                                   #seed = 21)
     g = BipolarOutrankingDigraph(t,Normalized=True,
                                   tempDir=None,nbrCores=8,Comments=True,Debug=False)
-    g.showVetos()
+    g.showRelationTable(hasLPDDenotation=True,ReflexiveTerms=False)
+##    g.showVetos()
+##    g.showConsiderablePerformancesPolarisation()       
+    
+                  
 ##    g.showRelationTable(StabilityDenotation=True)
 ##    rg = RobustOutrankingDigraph(t,Debug=False)
 ##    rg.showRelationTable()
