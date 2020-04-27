@@ -192,7 +192,7 @@ def testConfidentVersusStdPreRankedOutrankingDigraph():
     bg2.showComponents(direction='descending')
     from transitiveDigraphs import RankingsFusion
     pr = RankingsFusion(bg1,[bg1.boostedRanking,bg2.boostedRanking])
-    pr.exportGraphViz('fusion-cpr-pr',graphType="pdf")
+    pr.exportGraphViz(fileName='fusion-cpr-pr',graphType="pdf")
 
 def testEstimateRankingCorrelation():
     print('====> Testing estimateRankingCorrelation')

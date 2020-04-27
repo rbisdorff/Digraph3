@@ -2019,12 +2019,14 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     print('*----- Consirable contradictory performance difference! ------*')
                     print('r(%s >= %s) = %.2f' %\
                         (vet[i][0][0],vet[i][0][1],vet[i][0][2]) )
-                    print('criteria: ' + str(vet[i][1][0][0]))
-                    print('Considerable negative performance difference : %.2f' % vet[i][1][0][1][1] )
-                    print('Veto discrimination threshold       : %.2f' % -vet[i][1][0][1][3] )
-                    print('criteria: ' + str(negVet[i][1][0][0]))
-                    print('Considerable positive performance difference : %.2f' % negVet[i][1][0][1][1] )
-                    print('Counter-veto threshold              : %.2f' % negVet[i][1][0][1][3] )            
+                    for lpd in vet[i][1]:
+                        print('criteria: ' + str(lpd[0]))
+                        print('Considerable negative performance difference : %.2f' % lpd[1][1] )
+                        print('Veto discrimination threshold       : %.2f' % -lpd[1][3] )
+                    for lpd in negVet[j][1]:
+                        print('criteria: ' + str(lpd[0]))
+                        print('Considerable positive performance difference : %.2f' % lpd[1][1] )
+                        print('Counter-veto threshold              : %.2f' % lpd[1][3] )            
                     print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
                           (vet[i][0][0],vet[i][0][1],vet[i][0][2],Med) )                    
                     i += 1; j +=1
@@ -2032,9 +2034,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     print('*------ Considerable negative performance difference -----"')
                     print('r(%s >= %s) = %.2f' %\
                             (vet[i][0][0],vet[i][0][1],vet[i][0][2]) )
-                    print('criteria: ' + str(vet[i][1][0][0]))
-                    print('Performance difference        : %.2f' % vet[i][1][0][1][1] )
-                    print('Veto discrimination threshold : %.2f' % -vet[i][1][0][1][3] )
+                    for lpd in vet[i][1]:
+                        print('criteria: ' + str(lpd[0]))
+                        print('Considerable negative performance difference : %.2f' % lpd[1][1] )
+                        print('Veto discrimination threshold       : %.2f' % -lpd[1][3] )
                     if vet[i][0][2] > Med:
                         print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
                           (vet[i][0][0],vet[i][0][1],vet[i][0][2],Med) )
@@ -2046,9 +2049,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     print('*------ Considerable positive performance difference -----"')
                     print('r(%s >= %s) = %.2f' %\
                             (negVet[j][0][0],negVet[j][0][1],negVet[i][0][2]) )
-                    print('criteria: ' + str(negVet[j][1][0][0]))
-                    print('Performance difference        : %.2f' % negVet[j][1][0][1][1] )
-                    print('Counter-veto discrimination threshold : %.2f' % negVet[j][1][0][1][3] )
+                    for lpd in negVet[j][1]:
+                        print('criteria: ' + str(lpd[0]))
+                        print('Considerable positive performance difference : %.2f' % lpd[1][1] )
+                        print('Counter-veto threshold              : %.2f' % lpd[1][3] )            
                     if negVet[j][0][2] < Med:
                         print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
                           (negVet[j][0][0],negVet[j][0][1],negVet[j][0][2],Med) )
@@ -2062,9 +2066,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('*------ Considerable negative performance difference -----"')
             print('r(%s >= %s) = %.2f' %\
                     (vet[i][0][0],vet[i][0][1],vet[i][0][2]) )
-            print('criteria: ' + str(vet[i][1][0][0]))
-            print('Performance difference        : %.2f' % vet[i][1][0][1][1] )
-            print('Veto discrimination threshold : %.2f' % -vet[i][1][0][1][3] )
+            for lpd in vet[i][1]:
+                print('criteria: ' + str(lpd[0]))
+                print('Considerable negative performance difference : %.2f' % lpd[1][1] )
+                print('Veto discrimination threshold       : %.2f' % -lpd[1][3] )
             if vet[i][0][2] > Med:
                 print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
                   (vet[i][0][0],vet[i][0][1],vet[i][0][2],Med) )
@@ -2076,9 +2081,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('*------ Considerable positive performance difference -----"')
             print('r(%s >= %s) = %.2f' %\
                     (negVet[j][0][0],negVet[j][0][1],negVet[j][0][2]) )
-            print('criteria: ' + str(negVet[j][1][0][0]))
-            print('Performance difference        : %.2f' % negVet[j][1][0][1][1] )
-            print('Counter-veto discrimination threshold : %.2f' % negVet[j][1][0][1][3] )
+            for lpd in negVet[j][1]:
+                print('criteria: ' + str(lpd[0]))
+                print('Considerable positive performance difference : %.2f' % lpd[1][1] )
+                print('Counter-veto threshold              : %.2f' % lpd[1][3] )            
             if negVet[j][0][2] < Med:
                 print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
                   (negVet[j][0][0],negVet[j][0][1],negVet[j][0][2],Med) )
@@ -2104,9 +2110,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         for i in range(nv):
             print('%d: r(%s >= %s) = %.2f' %\
                 (i+1,vetos[i][0][0],vetos[i][0][1],vetos[i][0][2]) )
-            print('criteria: ' + str(vetos[i][1][0][0]))
-            print('Considerable performance difference : %.2f' % vetos[i][1][0][1][1] )
-            print('Veto discrimination threshold       : %.2f' % -vetos[i][1][0][1][3] )
+            for lpd in vetos[i][1]:
+                print('criteria: ' + str(lpd[0]))
+                print('Considerable performance difference : %.2f' % lpd[1][1] )
+                print('Veto discrimination threshold       : %.2f' % -lpd[1][3] )
             if lpdCount[vetos[i][0][0]][vetos[i][0][1]]['positive'] == 0:
                 if vetos[i][0][2] > Med:
                     print('Polarisation: r(%s >= %s) = %.2f ==> %.2f' %\
@@ -2129,9 +2136,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('%d: r(%s >= %s) = %.2f' %\
                       (i+1,negativeVetos[i][0][0],\
                        negativeVetos[i][0][1],negativeVetos[i][0][2]) )
-            print('criteria: ' + str(negativeVetos[i][1][0][0]))
-            print('Considerable performance difference : %.2f' % negativeVetos[i][1][0][1][1] )
-            print('Counter-veto threshold              : %.2f' % negativeVetos[i][1][0][1][3] )            
+            for lpd in negativeVetos[i][1]:
+                print('criteria: ' + str(lpd[0]))
+                print('Considerable performance difference : %.2f' % lpd[1][1] )
+                print('Counter-veto threshold              : %.2f' % lpd[1][3] )            
             if lpdCount[negativeVetos[i][0][0]][negativeVetos[i][0][1]]['negative'] == 0:
                 if negativeVetos[i][0][2] < Med:
                     print('Polarisation: r(%s >= %s) = %.2f ==> %.2f' %\
@@ -9892,9 +9900,9 @@ if __name__ == "__main__":
                                    #seed = 21)
     g = BipolarOutrankingDigraph(t,Normalized=True,
                                   tempDir=None,nbrCores=8,Comments=True,Debug=False)
-    g.showRelationTable(hasLPDDenotation=True,ReflexiveTerms=False)
-##    g.showVetos()
-##    g.showConsiderablePerformancesPolarisation()       
+##    g.showRelationTable(hasLPDDenotation=True,ReflexiveTerms=False)
+    g.showVetos()
+    g.showConsiderablePerformancesPolarisation()       
     
                   
 ##    g.showRelationTable(StabilityDenotation=True)
