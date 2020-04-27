@@ -1907,7 +1907,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             else:
                 print()
             if hasLPDDenotation:
-                print("'"+x[0]+"' | ", end=' ')
+                print("       | ", end=' ')
                 for y in actionsList:
                     print('(%+d,%+d)' % (largePerformanceDifferencesCount[x[1]][y[1]]['positive'],\
                                           largePerformanceDifferencesCount[x[1]][y[1]]['negative']), end=' ')
@@ -2007,8 +2007,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         negVet = self.negativeVetos
         vp =  [(x[0][0],x[0][1]) for x in vet]
         nvp = [(x[0][0],x[0][1]) for x in negVet]
-        print(vp)
-        print(nvp)
+        #print(vp)
+        #print(nvp)
         nv = len(vp)
         nnv = len(nvp)
         i = 0
@@ -9895,7 +9895,7 @@ if __name__ == "__main__":
 ##                                   seed=102)
     t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
                                    numberOfCriteria=9,\
-                                    vetoProbability=1.0,\
+                                    vetoProbability=0.5,\
                                    seed=randint(1,1000))
                                    #seed = 21)
     g = BipolarOutrankingDigraph(t,Normalized=True,
