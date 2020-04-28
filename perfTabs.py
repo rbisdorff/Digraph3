@@ -1697,14 +1697,16 @@ The performance evaluations of each decision alternative on each criterion are g
                 html += '<td>%s</td><td>%s</td>' % (critg['name'],critg['comment'])
             except:
                 html += '<td>%s</td><td>No comment</td>' % (critg['name'])
-            html += '<td align="center">%.2f</td>' % critg['weight']
+            formatString = '<td align="center">%%.%df</td>' % ndigits
+            html += formatString % critg['weight']
             html += '<td align="center">%s</td>' % critg['preferenceDirection']
-            html += '<td align="center">%.2f</td>' % critg['scale'][0]
-            html += '<td align="center">%.2f</td>' % critg['scale'][1]
+            html += formatString % critg['scale'][0]
+            html += formatString % critg['scale'][1]
 
+            formatString = '<td align="center">%%.%dfx + %%.%df</td>' % (ndigits,ndigits)
             try:
                 if critg['thresholds']['ind'] != None:
-                    html += '<td align="center">%.2fx + %.2f</td>' %\
+                    html += formatString %\
                                 (critg['thresholds']['ind'][1],\
                                  critg['thresholds']['ind'][0])                
             except:
@@ -1712,14 +1714,14 @@ The performance evaluations of each decision alternative on each criterion are g
                 
             try:
                 if critg['thresholds']['pref'] != None:
-                    html += '<td align="center">%.2fx + %.2f</td>' %\
+                    html += formatString %\
                                 (critg['thresholds']['pref'][1],\
                                  critg['thresholds']['pref'][0])                
             except:
                 html += '<td></td>'
             try:
                 if critg['thresholds']['veto'] != None:
-                    html += '<td align="center">%.2fx + %.2f</td>' %\
+                    html += formatString %\
                                 (critg['thresholds']['veto'][1],\
                                  critg['thresholds']['veto'][0])                
             except:

@@ -818,9 +818,9 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
 
     
         for i in range(numberOfCriteria):
-            g = ('g%%0%dd' % ngd) % (i+1)
+            g = ('m%%0%dd' % ngd) % (i+1)
             criteria[g] = {}
-            criteria[g]['name']='RandomAcademicPerformanceTableau() instance'
+            criteria[g]['name']='Master course %d' % (i+1)
             criteria[g]['comment']=commentString
             try:
                 indThreshold  =(Decimal(str(commonThresholds['ind'][0])),
@@ -931,6 +931,31 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
 
+    def showStudents(self,WithComments=False):
+        """
+        Print a list of the students.
+        """
+        actions = self.actions
+        print('"------------ Registered students -------*')
+        print('key: \t Name \t\t Type')
+        print('----------------------------------')
+        for st in actions:
+            x = actions[st]
+            if WithComments:
+                print('%s: \t %s \t %s\n      %s' %\
+                      (st,x['name'],x['type'],x['comment']) )
+            else:
+                print('%s: \t %s \t %s' %\
+                      (st,x['name'],x['type']) )
+
+    def showCourses(self,coursesSubset=None,ndigits=0,\
+                    pageTitle='List of Courses'):
+        """
+        Print a list of the courses.
+        """
+        self.showHTMLCriteria(criteriaSubset=coursesSubset,ndigits=ndigits,\
+                              title=pageTitle)
+        
     def showPerformanceTableau(self,Transposed=False,studentsSubset=None,\
                                fromIndex=None,toIndex=None,Sorted=True,ndigits=0):
         """
@@ -3877,12 +3902,14 @@ if __name__ == "__main__":
                                 missingDataProbability=0.01,
                                 WithTypes=True,
                                 seed=1)
-    print('transposed')
-    t.showPerformanceTableau(Transposed=True)
-    print('not transposed')
-    t.showPerformanceTableau(Transposed=False)
+    t.showStudents()
+    t.showCourses()
+    #print('transposed')
+    #t.showPerformanceTableau(Transposed=True)
+    #print('not transposed')
+    #t.showPerformanceTableau(Transposed=False)
     #t.showHTMLPerformanceTableau(Transposed=True)
-    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
+    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
                                              
 
 

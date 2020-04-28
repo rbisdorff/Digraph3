@@ -184,11 +184,11 @@ Ordinal correlation equals bipolar-valued relational equivalence
 Kendall's *tau* index
 .....................
 
-*M. G. Kendall* ([KEN-1938p]_) defined his *ordinal correlation index* **tau** for linear orders of dimension *n* as a *balancing* of the number *#C* of correctly oriented pairs against the number *#I* of incorrectly oriented pairs. The total number of irreflexive pairs being *n(n-1)*, in the case of linear orders, *#C* + *#I* = *n(n-1)*.  Hence *tau* = (*#C* / *n(n-1)*) - (*#I* / *n(n-1)*). In case *#I* is zero, *tau* = +1 (all pairs are *equivalently oriented*); inversely, in case *C#* is zero, *tau* = -1 (all pairs are *differently oriented*).
+*M. G. Kendall* ([KEN-1938p]_) defined his *ordinal correlation* :math:`\tau` (**tau**) *index* for linear orders of dimension *n* as a *balancing* of the number *#Co* of correctly oriented pairs against the number *#In* of incorrectly oriented pairs. The total number of irreflexive pairs being *n(n-1)*, in the case of linear orders, *#Co* + *#In* = *n(n-1)*.  Hence *tau* = (*#Co* / *n(n-1)*) - (*#In* / *n(n-1)*). In case *#In* is zero, *tau* = +1 (all pairs are *equivalently oriented*); inversely, in case *Co* is zero, *tau* = -1 (all pairs are *differently oriented*).
 
-Noticing that (*#C* / *n(n-1)*) = 1 - (*#I* / *n(n-1)*), and recalling that the bipolar-valued negation is operated by changing the sign of the characteristic value, *Kendall*'s original *tau* definition implemented in fact the bipolar-valued **negation** of the **non equivalence** of two linear orders: 
+Noticing that :math:`\frac{\#Co}{n(n-1)} \;=\; 1 \,-\, \frac{\#In}{n(n-1)}`, and recalling that the bipolar-valued negation is operated by changing the sign of the characteristic value, *Kendall*'s original *tau* definition implemented in fact the bipolar-valued **negation** of the **non equivalence** of two linear orders: 
 
-    *tau* = 1 - 2(*#I* / *n(n-1)*) = -[2(*#I* / *n(n-1)*) - 1] = 2(*#C* / *n(n-1)*) - 1,
+:math:`\tau \;=\; 1 -2\frac{\#In}{n(n-1)} \;=\; -2\frac{\#In}{n(n-1)} \,-\, 1 \;=\; 2\frac{\#Co}{n(n-1)} \,-\, 1`
 
 i.e. the **normalized majority margin** of *equivalently oriented* irreflexive pairs.
 
@@ -216,7 +216,7 @@ Let *R1* and *R2* be two random crisp relations defined on a same set of 5 alter
    >>> E.correlation
     {'correlation': -0.1, 'determination': 1.0}
 
-In the table of the equivalence relation *R1<=>R2* above (see :numref:`relEqui1` Lines 9-13), we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall's *tau* index in this plainly determined crisp case (see :numref:`relEqui1` Line 16).
+In the table of the equivalence relation :math:`(R_1 \Leftrightarrow R_2)` above (see :numref:`relEqui1` Lines 9-13), we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall's *tau* index in this plainly determined crisp case (see :numref:`relEqui1` Line 16).
 
 What happens now with more or less determined and even partially indeterminate relations ? May we proceed in a similar way ?
 
@@ -272,32 +272,30 @@ We may notice in the relation tables shown above that 9 pairs, like *(a1,a2)* or
      'a5' | -0.02	 0.10	  0.00	  0.84	   - 	 
     Valuation domain: [-1.00;1.00]
 
-In our bipolar-valued epistemic logic, logical disjunctions and conjunctions are implemented as *max*, respectively *min* operators. Notice also that the logical equivalence *(R1<=>R2)* corresponds to a double implication *(R1 => R2) and (R2 => R1)* and that the implication *(R1 => R2)* is logically equivalent to the disjunction *(not R1 or R2)*.
+In our bipolar-valued epistemic logic, logical disjunctions and conjunctions are implemented as *max*, respectively *min* operators. Notice also that the logical equivalence :math:`(R_1 \Leftrightarrow R_2)` corresponds to a double implication :math:`(R_1 \Rightarrow R_)\, \wedge \, (R_2 \Rightarrow  R_1)` and that the implication :math:`(R_1 \Rightarrow R_2)` is logically equivalent to the disjunction :math:`\neg(R_1 \vee R_2)`.
 
-If *r(x R1 y)* and *r(x R2 y)* denote the bipolar-valued characteristic values of relation *R1*, resp. *R2*, we may hence compute as follows a majority margin *M(R1<=>R2)* between equivalently and not equivalently oriented irreflexive pairs *(x,y)*.
+If :math:`r(x R_1 y)` and :math:`r(x R_2 y)` denote the bipolar-valued characteristic values of relation *R1*, resp. *R2*, we may hence compute as follows a majority margin :math:`M(R_1 \Leftrightarrow R_2)` between equivalently and not equivalently oriented irreflexive pairs *(x,y)*.
 
-| *M(R1<=>R2)* = sum _ *(x,y)* { \
-|                   min [ max( *-r(x R1 y)*, *r(x R2 y)* ), \
-|                         max( *-r(x R2 y)*, *r(x R1 y)* ) ] }.
+:math:`(R_1 \Leftrightarrow R_2)  \;=\; \sum_{(x \neq y)} \Big[ \min \Big( \max \big( -r(x \,R_1\, y), r(x \,R_2\, y)\big) ,\max \big( -r(x \,R_2\, y), r(x \,R_1\, y)\big) \Big) \Big]`
 
-*M(R1<=>R2)* is thus given by the sum of the non reflexive terms of the relation table of *eq*, the relation equivalence digraph computed above.
+:math:`M(R_1 \Leftrightarrow R_2)` is thus given by the sum of the non reflexive terms of the relation table of *eq*, the relation equivalence digraph computed above (see :numref:`twoEqui2`).
 
-In the crisp case, *M(R1<=>R2)*  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r*-valued case, the maximal possible equivalence majority margin *M* corresponds to the sum *D* of the **conjoint determinations** of *(x R1 y)* and *(x R2 y)* (see [BIS-2012p]_). 
+In the crisp case, :math:`M(R_1 \Leftrightarrow R_2)`  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r*-valued case, the maximal possible equivalence majority margin *M* corresponds to the sum *D* of the **conjoint determinations** of *(x R1 y)* and *(x R2 y)* (see [BIS-2012p]_). 
 
-    *D* = sum _ *(x,y)* min [ abs(*r(x R1 y)*, abs(*r(x R2 y)*) ].
+    :math:`D \;=\; \sum_{x \neq y} \min \Big[ abs\big(r(x \,R_1\, y) \big), abs \big( r(x \,R_2\, y \big)  \Big]` 
 
 Thus, we obtain in the general *r* -valued case:
 
-    *tau(R1,R2)* =  *M(R1<=>R2)* / *D* .
+    :math:`\tau(R_1,R_2) \;=\; M(R_1 \Leftrightarrow R_2)`
 
-*tau(R1,R2)* corresponds thus to a classical ordinal correlation index, but restricted to the **conjointly determined parts** of the given relations *R1* and *R2*. In the limit case of two crisp linear orders, *D* equals *n(n-1)*, i.e. the number of irreflexive pairs, and we recover hence *Kendall* 's original *tau* index definition.
+:math:`\tau(R_1,R_2)` corresponds thus to a classical ordinal correlation index, but restricted to the **conjointly determined parts** of the given relations *R1* and *R2*. In the limit case of two crisp linear orders, *D* equals *n(n-1)*, i.e. the number of irreflexive pairs, and we recover hence *Kendall* 's original *tau* index definition.
 
-It is worthwhile noticing that the ordinal correlation index *tau(R1,R2)* we obtain above corresponds to the ratio of
+It is worthwhile noticing that the ordinal correlation index :math:`\tau(R_1,R_2)` we obtain above corresponds to the ratio of
 
-    * *r(R1<=>R2)* = *M(R1<=>R2)* / *n(n-1)*: The normalized majority margin of the pairwise relational equivalence statements, also called *valued ordinal correlation*, and 
-    * *d* = *D* / *n(n-1)*: The normalized determination of the corresponding pairwise relational equivalence statements, in fact the determinateness of the relational equivalence digraph.
+    * :math:`r(R_1 \Leftrightarrow R_2) \;=\; \frac{M(R_1 \Leftrightarrow R_2)}{n(n-1)}` : The normalized majority margin of the pairwise relational equivalence statements, also called *valued ordinal correlation*, and 
+    * :math:`d \;=\; \frac{D}{n(n-1)}` : The normalized determination of the corresponding pairwise relational equivalence statements, in fact the determinateness of the relational equivalence digraph.
 
-We have thus successfully **out-factored** the *determination* effect from the *correlation* effect. With completely determined relations, *tau(R1,R2)* = *r(R1<=>R2)*. By convention, we set the ordinal correlation with a *completely indeterminate* relation, i.e. when *D = 0*, to the *indeterminate* correlation value 0.0. With *uniformly* chosen random *r*-valued relations, the **expected** *tau* index is **0.0**, denoting in fact an **indeterminate** correlation. The corresponding expected normalized determination *d* is about 0.333 (see [BIS-2012p]_).
+We have thus successfully **out-factored** the *determination* effect from the *correlation* effect. With completely determined relations, :math:`\tau(R_1,R_2) \;=\; r(R_1 \Leftrightarrow R_2)`. By convention, we set the ordinal correlation with a *completely indeterminate* relation, i.e. when *D = 0*, to the *indeterminate* correlation value 0.0. With *uniformly* chosen random *r*-valued relations, the **expected** *tau* index is **0.0**, denoting in fact an **indeterminate** correlation. The corresponding expected normalized determination *d* is about 0.333 (see [BIS-2012p]_).
 
 We may verify these relations with help of the corresponding equivalence digraph *eq* (see :numref:`ordInd1`).
 
