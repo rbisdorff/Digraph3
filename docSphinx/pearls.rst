@@ -272,11 +272,11 @@ We may notice in the relation tables shown above that 9 pairs, like *(a1,a2)* or
      'a5' | -0.02	 0.10	  0.00	  0.84	   - 	 
     Valuation domain: [-1.00;1.00]
 
-In our bipolar-valued epistemic logic, logical disjunctions and conjunctions are implemented as *max*, respectively *min* operators. Notice also that the logical equivalence :math:`(R_1 \Leftrightarrow R_2)` corresponds to a double implication :math:`(R_1 \Rightarrow R_)\, \wedge \, (R_2 \Rightarrow  R_1)` and that the implication :math:`(R_1 \Rightarrow R_2)` is logically equivalent to the disjunction :math:`\neg(R_1 \vee R_2)`.
+In our bipolar-valued epistemic logic, logical disjunctions and conjunctions are implemented as *max*, respectively *min* operators. Notice also that the logical equivalence :math:`(R_1 \Leftrightarrow R_2)` corresponds to a double implication :math:`(R_1 \Rightarrow R_)\, \wedge \, (R_2 \Rightarrow  R_1)` and that the implication :math:`(R_1 \Rightarrow R_2)` is logically equivalent to the disjunction :math:`(\neg R_1 \vee R_2)`.
 
 If :math:`r(x R_1 y)` and :math:`r(x R_2 y)` denote the bipolar-valued characteristic values of relation *R1*, resp. *R2*, we may hence compute as follows a majority margin :math:`M(R_1 \Leftrightarrow R_2)` between equivalently and not equivalently oriented irreflexive pairs *(x,y)*.
 
-:math:`(R_1 \Leftrightarrow R_2)  \;=\; \sum_{(x \neq y)} \Big[ \min \Big( \max \big( -r(x \,R_1\, y), r(x \,R_2\, y)\big) ,\max \big( -r(x \,R_2\, y), r(x \,R_1\, y)\big) \Big) \Big]`
+:math:`(R_1 \Leftrightarrow R_2)  \;=\; \sum_{(x \neq y)} \Big[ \min \Big( \max \big( -r(x \,R_1\, y), r(x \,R_2\, y)\big), \max \big( -r(x \,R_2\, y), r(x \,R_1\, y)\big) \Big) \Big]`
 
 :math:`M(R_1 \Leftrightarrow R_2)` is thus given by the sum of the non reflexive terms of the relation table of *eq*, the relation equivalence digraph computed above (see :numref:`twoEqui2`).
 
