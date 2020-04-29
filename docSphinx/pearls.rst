@@ -184,7 +184,7 @@ Ordinal correlation equals bipolar-valued relational equivalence
 Kendall's *tau* index
 .....................
 
-*M. G. Kendall* ([KEN-1938p]_) defined his *ordinal correlation* :math:`\tau` (**tau**) *index* for linear orders of dimension *n* as a *balancing* of the number *#Co* of correctly oriented pairs against the number *#In* of incorrectly oriented pairs. The total number of irreflexive pairs being *n(n-1)*, in the case of linear orders, *#Co* + *#In* = *n(n-1)*.  Hence *tau* = (*#Co* / *n(n-1)*) - (*#In* / *n(n-1)*). In case *#In* is zero, *tau* = +1 (all pairs are *equivalently oriented*); inversely, in case *Co* is zero, *tau* = -1 (all pairs are *differently oriented*).
+*M. G. Kendall* ([KEN-1938p]_) defined his *ordinal correlation* :math:`\tau` (**tau**) *index* for linear orders of dimension *n* as a *balancing* of the number *#Co* of correctly oriented pairs against the number *#In* of incorrectly oriented pairs. The total number of irreflexive pairs being *n(n-1)*, in the case of linear orders, :math:`\#Co + \#In \;=\; n(n-1)`.  Hence :math:`\tau \;=\; \big(\frac{\#Co}{n(n-1)}\big) \,-\, \big(\frac{\#In}{n(n-1)}\big)`. In case *#In* is zero, :math:`\tau \;=\; +1`  (all pairs are *equivalently oriented*); inversely, in case *#Co* is zero, :math:`\tau \;=\; -1` (all pairs are *differently oriented*).
 
 Noticing that :math:`\frac{\#Co}{n(n-1)} \;=\; 1 \,-\, \frac{\#In}{n(n-1)}`, and recalling that the bipolar-valued negation is operated by changing the sign of the characteristic value, *Kendall*'s original *tau* definition implemented in fact the bipolar-valued **negation** of the **non equivalence** of two linear orders: 
 
@@ -274,19 +274,19 @@ We may notice in the relation tables shown above that 9 pairs, like *(a1,a2)* or
 
 In our bipolar-valued epistemic logic, logical disjunctions and conjunctions are implemented as *max*, respectively *min* operators. Notice also that the logical equivalence :math:`(R_1 \Leftrightarrow R_2)` corresponds to a double implication :math:`(R_1 \Rightarrow R_)\, \wedge \, (R_2 \Rightarrow  R_1)` and that the implication :math:`(R_1 \Rightarrow R_2)` is logically equivalent to the disjunction :math:`(\neg R_1 \vee R_2)`.
 
-If :math:`r(x R_1 y)` and :math:`r(x R_2 y)` denote the bipolar-valued characteristic values of relation *R1*, resp. *R2*, we may hence compute as follows a majority margin :math:`M(R_1 \Leftrightarrow R_2)` between equivalently and not equivalently oriented irreflexive pairs *(x,y)*.
+If :math:`r(x\,R_1\, y)` and :math:`r(x\,R_2\; y)` denote the bipolar-valued characteristic values of relation *R1*, resp. *R2*, we may hence compute as follows a majority margin :math:`M(R_1 \Leftrightarrow R_2)` between equivalently and not equivalently oriented irreflexive pairs *(x,y)*.
 
-:math:`(R_1 \Leftrightarrow R_2)  \;=\; \sum_{(x \neq y)} \Big[ \min \Big( \max \big( -r(x \,R_1\, y), r(x \,R_2\, y)\big), \max \big( -r(x \,R_2\, y), r(x \,R_1\, y)\big) \Big) \Big]`
+:math:`M(R_1 \Leftrightarrow R_2)  \;=\; \\ \sum_{(x \neq y)} \Big[ \min \Big( \max \big( -r(x \,R_1\, y), r(x \,R_2\, y)\big), \max \big( -r(x \,R_2\, y), r(x \,R_1\, y)\big) \Big) \Big]`
 
 :math:`M(R_1 \Leftrightarrow R_2)` is thus given by the sum of the non reflexive terms of the relation table of *eq*, the relation equivalence digraph computed above (see :numref:`twoEqui2`).
 
-In the crisp case, :math:`M(R_1 \Leftrightarrow R_2)`  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r*-valued case, the maximal possible equivalence majority margin *M* corresponds to the sum *D* of the **conjoint determinations** of *(x R1 y)* and *(x R2 y)* (see [BIS-2012p]_). 
+In the crisp case, :math:`M(R_1 \Leftrightarrow R_2)`  is now normalized with the maximum number of possible irreflexive pairs, namely *n(n-1)*. In a generalized *r*-valued case, the maximal possible equivalence majority margin *M* corresponds to the sum *D* of the **conjoint determinations** of :math:`(x \,R_1\, y)` and :math:`(x \,R2\, y)` (see [BIS-2012p]_). 
 
     :math:`D \;=\; \sum_{x \neq y} \min \Big[ abs\big(r(x \,R_1\, y) \big), abs \big( r(x \,R_2\, y \big)  \Big]` 
 
 Thus, we obtain in the general *r* -valued case:
 
-    :math:`\tau(R_1,R_2) \;=\; M(R_1 \Leftrightarrow R_2)`
+    :math:`\tau(R_1,R_2) \;=\; \frac{M(R_1 \Leftrightarrow R_2)}{D}`
 
 :math:`\tau(R_1,R_2)` corresponds thus to a classical ordinal correlation index, but restricted to the **conjointly determined parts** of the given relations *R1* and *R2*. In the limit case of two crisp linear orders, *D* equals *n(n-1)*, i.e. the number of irreflexive pairs, and we recover hence *Kendall* 's original *tau* index definition.
 

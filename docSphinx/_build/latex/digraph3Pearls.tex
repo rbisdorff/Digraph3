@@ -54,7 +54,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{April 28, 2020}
+\date{April 29, 2020}
 \release{3.8-3600+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -280,7 +280,7 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 
 \subsection{Kendall’s \sphinxstyleemphasis{tau} index}
 \label{\detokenize{pearls:kendall-s-tau-index}}
-\sphinxstyleemphasis{M. G. Kendall} (\sphinxcite{pearls:ken-1938p}) defined his \sphinxstyleemphasis{ordinal correlation} \(\tau\) (\sphinxstylestrong{tau}) \sphinxstyleemphasis{index} for linear orders of dimension \sphinxstyleemphasis{n} as a \sphinxstyleemphasis{balancing} of the number \sphinxstyleemphasis{\#Co} of correctly oriented pairs against the number \sphinxstyleemphasis{\#In} of incorrectly oriented pairs. The total number of irreflexive pairs being \sphinxstyleemphasis{n(n\sphinxhyphen{}1)}, in the case of linear orders, \sphinxstyleemphasis{\#Co} + \sphinxstyleemphasis{\#In} = \sphinxstyleemphasis{n(n\sphinxhyphen{}1)}.  Hence \sphinxstyleemphasis{tau} = (\sphinxstyleemphasis{\#Co} / \sphinxstyleemphasis{n(n\sphinxhyphen{}1)}) \sphinxhyphen{} (\sphinxstyleemphasis{\#In} / \sphinxstyleemphasis{n(n\sphinxhyphen{}1)}). In case \sphinxstyleemphasis{\#In} is zero, \sphinxstyleemphasis{tau} = +1 (all pairs are \sphinxstyleemphasis{equivalently oriented}); inversely, in case \sphinxstyleemphasis{Co} is zero, \sphinxstyleemphasis{tau} = \sphinxhyphen{}1 (all pairs are \sphinxstyleemphasis{differently oriented}).
+\sphinxstyleemphasis{M. G. Kendall} (\sphinxcite{pearls:ken-1938p}) defined his \sphinxstyleemphasis{ordinal correlation} \(\tau\) (\sphinxstylestrong{tau}) \sphinxstyleemphasis{index} for linear orders of dimension \sphinxstyleemphasis{n} as a \sphinxstyleemphasis{balancing} of the number \sphinxstyleemphasis{\#Co} of correctly oriented pairs against the number \sphinxstyleemphasis{\#In} of incorrectly oriented pairs. The total number of irreflexive pairs being \sphinxstyleemphasis{n(n\sphinxhyphen{}1)}, in the case of linear orders, \(\#Co + \#In \;=\; n(n-1)\).  Hence \(\tau \;=\; \big(\frac{\#Co}{n(n-1)}\big) \,-\, \big(\frac{\#In}{n(n-1)}\big)\). In case \sphinxstyleemphasis{\#In} is zero, \(\tau \;=\; +1\)  (all pairs are \sphinxstyleemphasis{equivalently oriented}); inversely, in case \sphinxstyleemphasis{\#Co} is zero, \(\tau \;=\; -1\) (all pairs are \sphinxstyleemphasis{differently oriented}).
 
 Noticing that \(\frac{\#Co}{n(n-1)} \;=\; 1 \,-\, \frac{\#In}{n(n-1)}\), and recalling that the bipolar\sphinxhyphen{}valued negation is operated by changing the sign of the characteristic value, \sphinxstyleemphasis{Kendall}’s original \sphinxstyleemphasis{tau} definition implemented in fact the bipolar\sphinxhyphen{}valued \sphinxstylestrong{negation} of the \sphinxstylestrong{non equivalence} of two linear orders:
 
@@ -362,15 +362,15 @@ We may notice in the relation tables shown above that 9 pairs, like \sphinxstyle
 \PYG{g+go}{ Valuation domain: [\PYGZhy{}1.00;1.00]}
 \end{sphinxVerbatim}
 
-In our bipolar\sphinxhyphen{}valued epistemic logic, logical disjunctions and conjunctions are implemented as \sphinxstyleemphasis{max}, respectively \sphinxstyleemphasis{min} operators. Notice also that the logical equivalence \((R_1 \Leftrightarrow R_2)\) corresponds to a double implication \((R_1 \Rightarrow R_)\, \wedge \, (R_2 \Rightarrow  R_1)\) and that the implication \((R_1 \Rightarrow R_2)\) is logically equivalent to the disjunction \(\neg(R_1 \vee R_2)\).
+In our bipolar\sphinxhyphen{}valued epistemic logic, logical disjunctions and conjunctions are implemented as \sphinxstyleemphasis{max}, respectively \sphinxstyleemphasis{min} operators. Notice also that the logical equivalence \((R_1 \Leftrightarrow R_2)\) corresponds to a double implication \((R_1 \Rightarrow R_)\, \wedge \, (R_2 \Rightarrow  R_1)\) and that the implication \((R_1 \Rightarrow R_2)\) is logically equivalent to the disjunction \((\neg R_1 \vee R_2)\).
 
-If \(r(x R_1 y)\) and \(r(x R_2 y)\) denote the bipolar\sphinxhyphen{}valued characteristic values of relation \sphinxstyleemphasis{R1}, resp. \sphinxstyleemphasis{R2}, we may hence compute as follows a majority margin \(M(R_1 \Leftrightarrow R_2)\) between equivalently and not equivalently oriented irreflexive pairs \sphinxstyleemphasis{(x,y)}.
+If \(r(x\,R_1\, y)\) and \(r(x\,R_2\; y)\) denote the bipolar\sphinxhyphen{}valued characteristic values of relation \sphinxstyleemphasis{R1}, resp. \sphinxstyleemphasis{R2}, we may hence compute as follows a majority margin \(M(R_1 \Leftrightarrow R_2)\) between equivalently and not equivalently oriented irreflexive pairs \sphinxstyleemphasis{(x,y)}.
 
-\((R_1 \Leftrightarrow R_2)  \;=\; \sum_{(x \neq y)} \Big[ \min \Big( \max \big( -r(x \,R_1\, y), r(x \,R_2\, y)\big) ,\max \big( -r(x \,R_2\, y), r(x \,R_1\, y)\big) \Big) \Big]\)
+\(M(R_1 \Leftrightarrow R_2)  \;=\; \\ \sum_{(x \neq y)} \Big[ \min \Big( \max \big( -r(x \,R_1\, y), r(x \,R_2\, y)\big), \max \big( -r(x \,R_2\, y), r(x \,R_1\, y)\big) \Big) \Big]\)
 
 \(M(R_1 \Leftrightarrow R_2)\) is thus given by the sum of the non reflexive terms of the relation table of \sphinxstyleemphasis{eq}, the relation equivalence digraph computed above (see \hyperref[\detokenize{pearls:twoequi2}]{Listing \ref{\detokenize{pearls:twoequi2}}}).
 
-In the crisp case, \(M(R_1 \Leftrightarrow R_2)\)  is now normalized with the maximum number of possible irreflexive pairs, namely \sphinxstyleemphasis{n(n\sphinxhyphen{}1)}. In a generalized \sphinxstyleemphasis{r}\sphinxhyphen{}valued case, the maximal possible equivalence majority margin \sphinxstyleemphasis{M} corresponds to the sum \sphinxstyleemphasis{D} of the \sphinxstylestrong{conjoint determinations} of \sphinxstyleemphasis{(x R1 y)} and \sphinxstyleemphasis{(x R2 y)} (see \sphinxcite{pearls:bis-2012p}).
+In the crisp case, \(M(R_1 \Leftrightarrow R_2)\)  is now normalized with the maximum number of possible irreflexive pairs, namely \sphinxstyleemphasis{n(n\sphinxhyphen{}1)}. In a generalized \sphinxstyleemphasis{r}\sphinxhyphen{}valued case, the maximal possible equivalence majority margin \sphinxstyleemphasis{M} corresponds to the sum \sphinxstyleemphasis{D} of the \sphinxstylestrong{conjoint determinations} of \((x \,R_1\, y)\) and \((x \,R2\, y)\) (see \sphinxcite{pearls:bis-2012p}).
 \begin{quote}
 
 \(D \;=\; \sum_{x \neq y} \min \Big[ abs\big(r(x \,R_1\, y) \big), abs \big( r(x \,R_2\, y \big)  \Big]\)
@@ -379,7 +379,7 @@ In the crisp case, \(M(R_1 \Leftrightarrow R_2)\)  is now normalized with the ma
 Thus, we obtain in the general \sphinxstyleemphasis{r} \sphinxhyphen{}valued case:
 \begin{quote}
 
-\(\tau(R_1,R_2) \;=\; M(R_1 \Leftrightarrow R_2)\)
+\(\tau(R_1,R_2) \;=\; \frac{M(R_1 \Leftrightarrow R_2)}{D}\)
 \end{quote}
 
 \(\tau(R_1,R_2)\) corresponds thus to a classical ordinal correlation index, but restricted to the \sphinxstylestrong{conjointly determined parts} of the given relations \sphinxstyleemphasis{R1} and \sphinxstyleemphasis{R2}. In the limit case of two crisp linear orders, \sphinxstyleemphasis{D} equals \sphinxstyleemphasis{n(n\sphinxhyphen{}1)}, i.e. the number of irreflexive pairs, and we recover hence \sphinxstyleemphasis{Kendall} ‘s original \sphinxstyleemphasis{tau} index definition.
