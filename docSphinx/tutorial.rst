@@ -2167,7 +2167,7 @@ Some ranking rules will work on the associated **Condorcet Digraph**, i.e. the c
         'a8'  |  -1   -1   -1   -1   -1   +1   -1    -   +1  
         'a9'  |   0   +1   -1   -1   -1   -1   -1   -1    -   
 
-Unfortunately, such crisp median-cut *Condorcet* digraphs, associated with a given strict outranking digraph, present only exceptionally a linear ordering. Usually, pairwise majority comparisons do not even render a complete or, at least, a transitive partial order. There may even frequently appear *cyclic* outranking situations (see the tutorial on :ref:`LinearVoting-tutorial-label`).
+Unfortunately, such crisp median-cut *Condorcet* digraphs, associated with a given strict outranking digraph, present only exceptionally a linear ordering. Usually, pairwise majority comparisons do not even render a *complete* or, at least, a *transitive* partial order. There may even frequently appear *cyclic* outranking situations (see the tutorial on :ref:`LinearVoting-tutorial-label`).
 
 To estimate how *difficult* this ranking problem here may be, we may have a look at the corresponding strict outranking digraph *graphviz* drawing ([1]_).
 
@@ -2185,7 +2185,7 @@ To estimate how *difficult* this ranking problem here may be, we may have a look
 
    The *strict outranking* digraph	   
 
-The shown strict outranking digraph is apparently *not transitive*: for instance, alternative *a8* outranks alternative *a6* and alternative *a6* outranks *a4*, however *a8* does not outrank *a4* (see :numref:`rankingTutorial`). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph *gcd*.
+The strict outranking relation  :math:`\succnsim` shown here is apparently *not transitive*: for instance, alternative *a8* outranks alternative *a6* and alternative *a6* outranks *a4*, however *a8* does not outrank *a4* (see :numref:`rankingTutorial`). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph *gcd*.
 
     >>> gcd.computeTransitivityDegree(Comments=True)
      Transitivity degree of graph
@@ -2203,14 +2203,14 @@ The strict outranking relation is hence very far from being transitive; a seriou
 
 There is one chordless circuit detected in the given strict outranking digraph *gcd*, namely *a6* outranks *a7*, the latter outranks *a8*, and *a8* outranks again *a6* (see :numref:`rankingTutorial`). Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.
 
-Several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.
+Now, several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.
 
 The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland*'s, *Kemeny*'s, *Slater*'s, *Kohler*'s, *Arrow-Raynaud*'s or *Tideman*'s ranking rule.
 
 The *Copeland* ranking
 ......................
 
-*Copeland*'s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the median cut strict outranking digraph *ccd*. The rule computes for each alternative a score resulting from the sum of the differences between the crisp **strict outranking** characteristics :math:`r(x\, \succnsim \,y)_{>0}` and the crisp **strict outranked** characteristics :math:`r(y\, \succnsim \, x)_{>0}`  for all pairs of alternatives where *y* is different from *x*. The alternatives are ranked in decreasing order of these *Copeland* scores; ties, the case given, being resolved by a lexicographical rule. 
+*Copeland*'s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the *median cut* strict outranking digraph *ccd*. The rule computes for each alternative a score resulting from the sum of the differences between the crisp **strict outranking** characteristics :math:`r(x\, \succnsim \,y)_{>0}` and the crisp **strict outranked** characteristics :math:`r(y\, \succnsim \, x)_{>0}`  for all pairs of alternatives where *y* is different from *x*. The alternatives are ranked in decreasing order of these *Copeland* scores; ties, the case given, being resolved by a lexicographical rule. 
 
 .. code-block:: pycon
    :name: CopelandRanking
@@ -2218,7 +2218,7 @@ The *Copeland* ranking
    :linenos:
 
    >>> from linearOrders import CopelandRanking
-   >>> cop = CopelandRanking(g,Comments=True)
+   >>> cop = CopelandRanking(gcd,Comments=True)
     Copeland decreasing scores
      a5 : 12
      a1 : 2
@@ -2232,7 +2232,7 @@ The *Copeland* ranking
     Copeland Ranking:
     ['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2']
 
-Alternative *a5* obtains the best *Copeland* score (+12), followed by alternatives *a1*, *a6* and *a7* with same score (+2); following the lexicographic rule, *a1* is hence ranked before *a6* and *a6* before *a7*. Same situation is observed for *a4* and *a9* with a score of -3 (see :numref:`CopelandRanking` Lines 4-12).
+Alternative *a5* obtains here the best *Copeland* score (+12), followed by alternatives *a1*, *a6* and *a7* with same score (+2); following the lexicographic rule, *a1* is hence ranked before *a6* and *a6* before *a7*. Same situation is observed for *a4* and *a9* with a score of -3 (see :numref:`CopelandRanking` Lines 4-12).
 
 *Copeland*'s ranking rule appears in fact **invariant** under the :ref:`codual transform <Codual-Transform-label>` and renders a same linear order indifferently from digraphs *g* or *gcd* . The resulting ranking (see :numref:`CopelandRanking` Line 14) is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal *Kendall* sense (see :numref:`CopelandCorrelationIndexes`).
 
@@ -2325,7 +2325,7 @@ The valued version of the *Copeland* rule, called **NetFlows** rule, computes fo
    >>> cop.copelandRanking
     ['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2']
 
-It is worthwhile noticing again, that similar to the *Copeland* ranking rule seen before, the *NetFlows* ranking rule is also **invariant** under the :ref:`codual transform <Codual-Transform-label>` and delivers the same ranking result indifferently from digraphs *g* or *gcd* (see :numref:`NetFlowsRanking` Line 14). 
+It is worthwhile noticing again, that similar to the *Copeland* ranking rule seen before, the *NetFlows* ranking rule is also **invariant** under the :ref:`codual transform <Codual-Transform-label>` and delivers again the same ranking result indifferently from digraphs *g* or *gcd* (see :numref:`NetFlowsRanking` Line 14). 
 
 In our example here, the *NetFlows* scores deliver  a ranking *without ties* which is rather different from the one delivered by *Copeland*'s rule (see :numref:`NetFlowsRanking` Line 16). It may happen, however, that we obtain, as with the *Copeland* scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a *weak ranking* with the corresponding :py:class:`transitiveDigraphs.WeakNetFlowsOrder` class.
 
@@ -2345,12 +2345,12 @@ The **NetFlows** ranking result appears to be slightly better correlated (+0.638
 
 Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *relational equivalence* characteristics of +0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs *g* or *gcd*  and the corresponding *NetFlows* ranking. This lesser ranking performance of the *Copeland* rule stems in this example essentially from the *weakness* of the actual ranking result and our subsequent *arbitrary* lexicographic resolution of the many ties given by the *Copeland* scores (see :numref:`weakRankingDrawing`).
 
-To appreciate now the absolute quality of both the *Copeland* and the *NetFlows* rankings, it is useful to consider *Kemeny*'s and *Slater*'s **optimal** ranking rules.
+To appreciate now the more or less correlation of both the *Copeland* and the *NetFlows* rankings with the underlying pairwise outranking relation, it is useful to consider *Kemeny*'s and *Slater*'s **best fitting** ranking rules.
 
 *Kemeny* rankings
 .................
 
-A **Kemeny** ranking is a linear order which is *closest*, in the sense of the ordinal *Kendall* distance (see [BIS-2012]_), to the given valued outranking digraphs *g* or *gcd*. The rule is indeed again *invariant* under the *codual* transform. As *Kemeny*'s rule proceeds by inspecting all possible permutations of the decision alternatives, it is unfortunately only computable for tiny outranking digraphs and the class constructor assumes by default that the order of the digraph does not exceed 7 (7! = 5040 permutations to inspect, see :numref:`KemenyRanking` Line 2). 
+A **Kemeny** ranking is a linear ranking without ties which is *closest*, in the sense of the ordinal *Kendall* distance (see [BIS-2012]_), to the given valued outranking digraphs *g* or *gcd*. This rule is also *invariant* under the *codual* transform. 
 
 .. code-block:: pycon
    :name: KemenyRanking
@@ -2358,19 +2358,19 @@ A **Kemeny** ranking is a linear order which is *closest*, in the sense of the o
    :linenos:
 
    >>> from linearOrders import KemenyRanking
-   >>> ke = KemenyRanking(g,orderLimit=9) # default orderLimit is 7
+   >>> ke = KemenyRanking(gcd,orderLimit=9) # default orderLimit is 7
    >>> ke.showRanking()
     ['a5', 'a6', 'a7', 'a3', 'a9', 'a4', 'a1', 'a8', 'a2']
-   >>> corr = g.computeOrdinalCorrelation(ke)
-   >>> g.showCorrelation(corr)
+   >>> corr = gcd.computeOrdinalCorrelation(ke)
+   >>> gcd.showCorrelation(corr)
     Correlation indexes:
      Extended Kendall tau       : +0.779
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.179
     
-So, **+0.779** represents the *highest possible* ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking digraph (see :numref:`KemenyRanking` Lines 7-10).
+So, **+0.779** represents the *highest possible* ordinal correlation (fitness) any potential linear ranking can achieve with the given pairwise outranking digraph (see :numref:`KemenyRanking` Lines 7-10).
 
-A *Kemeny* ranking may not be unique. In our example here, we obtain in fact two optimal *Kemeny* rankings with a same **maximal** *Kemeny* index. 
+A *Kemeny* ranking may not be unique. In our example here, we obtain in fact two *Kemeny* rankings with a same **maximal** *Kemeny* index of 12.9. 
 
 .. code-block:: pycon
    :caption: Optimal *Kemeny* rankings

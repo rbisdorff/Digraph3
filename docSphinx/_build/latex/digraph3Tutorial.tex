@@ -2459,7 +2459,7 @@ Some ranking rules will work on the associated \sphinxstylestrong{Condorcet Digr
 \PYG{g+go}{     \PYGZsq{}a9\PYGZsq{}  |   0   +1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1    \PYGZhy{}}
 \end{sphinxVerbatim}
 
-Unfortunately, such crisp median\sphinxhyphen{}cut \sphinxstyleemphasis{Condorcet} digraphs, associated with a given strict outranking digraph, present only exceptionally a linear ordering. Usually, pairwise majority comparisons do not even render a complete or, at least, a transitive partial order. There may even frequently appear \sphinxstyleemphasis{cyclic} outranking situations (see the tutorial on {\hyperref[\detokenize{tutorial:linearvoting-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing the winner of an election}}}}).
+Unfortunately, such crisp median\sphinxhyphen{}cut \sphinxstyleemphasis{Condorcet} digraphs, associated with a given strict outranking digraph, present only exceptionally a linear ordering. Usually, pairwise majority comparisons do not even render a \sphinxstyleemphasis{complete} or, at least, a \sphinxstyleemphasis{transitive} partial order. There may even frequently appear \sphinxstyleemphasis{cyclic} outranking situations (see the tutorial on {\hyperref[\detokenize{tutorial:linearvoting-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing the winner of an election}}}}).
 
 To estimate how \sphinxstyleemphasis{difficult} this ranking problem here may be, we may have a look at the corresponding strict outranking digraph \sphinxstyleemphasis{graphviz} drawing (\sphinxfootnotemark[1]).
 
@@ -2477,7 +2477,7 @@ To estimate how \sphinxstyleemphasis{difficult} this ranking problem here may be
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{rankingTutorial}.png}
 \caption{The \sphinxstyleemphasis{strict outranking} digraph}\label{\detokenize{tutorial:rankingtutorial}}\end{figure}
 
-The shown strict outranking digraph is apparently \sphinxstyleemphasis{not transitive}: for instance, alternative \sphinxstyleemphasis{a8} outranks alternative \sphinxstyleemphasis{a6} and alternative \sphinxstyleemphasis{a6} outranks \sphinxstyleemphasis{a4}, however \sphinxstyleemphasis{a8} does not outrank \sphinxstyleemphasis{a4} (see \hyperref[\detokenize{tutorial:rankingtutorial}]{Fig.\@ \ref{\detokenize{tutorial:rankingtutorial}}}). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph \sphinxstyleemphasis{gcd}.
+The strict outranking relation  \(\succnsim\) shown here is apparently \sphinxstyleemphasis{not transitive}: for instance, alternative \sphinxstyleemphasis{a8} outranks alternative \sphinxstyleemphasis{a6} and alternative \sphinxstyleemphasis{a6} outranks \sphinxstyleemphasis{a4}, however \sphinxstyleemphasis{a8} does not outrank \sphinxstyleemphasis{a4} (see \hyperref[\detokenize{tutorial:rankingtutorial}]{Fig.\@ \ref{\detokenize{tutorial:rankingtutorial}}}). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph \sphinxstyleemphasis{gcd}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeTransitivityDegree}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
@@ -2497,19 +2497,19 @@ The strict outranking relation is hence very far from being transitive; a seriou
 
 There is one chordless circuit detected in the given strict outranking digraph \sphinxstyleemphasis{gcd}, namely \sphinxstyleemphasis{a6} outranks \sphinxstyleemphasis{a7}, the latter outranks \sphinxstyleemphasis{a8}, and \sphinxstyleemphasis{a8} outranks again \sphinxstyleemphasis{a6} (see \hyperref[\detokenize{tutorial:rankingtutorial}]{Fig.\@ \ref{\detokenize{tutorial:rankingtutorial}}}). Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.
 
-Several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.
+Now, several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.
 
 The Digraph3 resources provide some of the most common of these ranking rules, like \sphinxstyleemphasis{Copeland}’s, \sphinxstyleemphasis{Kemeny}’s, \sphinxstyleemphasis{Slater}’s, \sphinxstyleemphasis{Kohler}’s, \sphinxstyleemphasis{Arrow\sphinxhyphen{}Raynaud}’s or \sphinxstyleemphasis{Tideman}’s ranking rule.
 
 
 \subsection{The \sphinxstyleemphasis{Copeland} ranking}
 \label{\detokenize{tutorial:the-copeland-ranking}}
-\sphinxstyleemphasis{Copeland}’s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the median cut strict outranking digraph \sphinxstyleemphasis{ccd}. The rule computes for each alternative a score resulting from the sum of the differences between the crisp \sphinxstylestrong{strict outranking} characteristics \(r(x\, \succnsim \,y)_{>0}\) and the crisp \sphinxstylestrong{strict outranked} characteristics \(r(y\, \succnsim \, x)_{>0}\)  for all pairs of alternatives where \sphinxstyleemphasis{y} is different from \sphinxstyleemphasis{x}. The alternatives are ranked in decreasing order of these \sphinxstyleemphasis{Copeland} scores; ties, the case given, being resolved by a lexicographical rule.
+\sphinxstyleemphasis{Copeland}’s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the \sphinxstyleemphasis{median cut} strict outranking digraph \sphinxstyleemphasis{ccd}. The rule computes for each alternative a score resulting from the sum of the differences between the crisp \sphinxstylestrong{strict outranking} characteristics \(r(x\, \succnsim \,y)_{>0}\) and the crisp \sphinxstylestrong{strict outranked} characteristics \(r(y\, \succnsim \, x)_{>0}\)  for all pairs of alternatives where \sphinxstyleemphasis{y} is different from \sphinxstyleemphasis{x}. The alternatives are ranked in decreasing order of these \sphinxstyleemphasis{Copeland} scores; ties, the case given, being resolved by a lexicographical rule.
 \sphinxSetupCaptionForVerbatim{Computing a \sphinxstyleemphasis{Copeland} Ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:copelandranking}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{CopelandRanking}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cop} \PYG{o}{=} \PYG{n}{CopelandRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cop} \PYG{o}{=} \PYG{n}{CopelandRanking}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ Copeland decreasing scores}
 \PYG{g+go}{  a5 : 12}
 \PYG{g+go}{  a1 : 2}
@@ -2524,7 +2524,7 @@ The Digraph3 resources provide some of the most common of these ranking rules, l
 \PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-Alternative \sphinxstyleemphasis{a5} obtains the best \sphinxstyleemphasis{Copeland} score (+12), followed by alternatives \sphinxstyleemphasis{a1}, \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a7} with same score (+2); following the lexicographic rule, \sphinxstyleemphasis{a1} is hence ranked before \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a6} before \sphinxstyleemphasis{a7}. Same situation is observed for \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a9} with a score of \sphinxhyphen{}3 (see \hyperref[\detokenize{tutorial:copelandranking}]{Listing \ref{\detokenize{tutorial:copelandranking}}} Lines 4\sphinxhyphen{}12).
+Alternative \sphinxstyleemphasis{a5} obtains here the best \sphinxstyleemphasis{Copeland} score (+12), followed by alternatives \sphinxstyleemphasis{a1}, \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a7} with same score (+2); following the lexicographic rule, \sphinxstyleemphasis{a1} is hence ranked before \sphinxstyleemphasis{a6} and \sphinxstyleemphasis{a6} before \sphinxstyleemphasis{a7}. Same situation is observed for \sphinxstyleemphasis{a4} and \sphinxstyleemphasis{a9} with a score of \sphinxhyphen{}3 (see \hyperref[\detokenize{tutorial:copelandranking}]{Listing \ref{\detokenize{tutorial:copelandranking}}} Lines 4\sphinxhyphen{}12).
 
 \sphinxstyleemphasis{Copeland}’s ranking rule appears in fact \sphinxstylestrong{invariant} under the {\hyperref[\detokenize{tutorial:codual-transform-label}]{\sphinxcrossref{\DUrole{std,std-ref}{codual transform}}}} and renders a same linear order indifferently from digraphs \sphinxstyleemphasis{g} or \sphinxstyleemphasis{gcd} . The resulting ranking (see \hyperref[\detokenize{tutorial:copelandranking}]{Listing \ref{\detokenize{tutorial:copelandranking}}} Line 14) is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal \sphinxstyleemphasis{Kendall} sense (see \hyperref[\detokenize{tutorial:copelandcorrelationindexes}]{Listing \ref{\detokenize{tutorial:copelandcorrelationindexes}}}).
 \sphinxSetupCaptionForVerbatim{Checking the quality of the \sphinxstyleemphasis{Copeland} Ranking}
@@ -2607,7 +2607,7 @@ The valued version of the \sphinxstyleemphasis{Copeland} rule, called \sphinxsty
 \PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-It is worthwhile noticing again, that similar to the \sphinxstyleemphasis{Copeland} ranking rule seen before, the \sphinxstyleemphasis{NetFlows} ranking rule is also \sphinxstylestrong{invariant} under the {\hyperref[\detokenize{tutorial:codual-transform-label}]{\sphinxcrossref{\DUrole{std,std-ref}{codual transform}}}} and delivers the same ranking result indifferently from digraphs \sphinxstyleemphasis{g} or \sphinxstyleemphasis{gcd} (see \hyperref[\detokenize{tutorial:netflowsranking}]{Listing \ref{\detokenize{tutorial:netflowsranking}}} Line 14).
+It is worthwhile noticing again, that similar to the \sphinxstyleemphasis{Copeland} ranking rule seen before, the \sphinxstyleemphasis{NetFlows} ranking rule is also \sphinxstylestrong{invariant} under the {\hyperref[\detokenize{tutorial:codual-transform-label}]{\sphinxcrossref{\DUrole{std,std-ref}{codual transform}}}} and delivers again the same ranking result indifferently from digraphs \sphinxstyleemphasis{g} or \sphinxstyleemphasis{gcd} (see \hyperref[\detokenize{tutorial:netflowsranking}]{Listing \ref{\detokenize{tutorial:netflowsranking}}} Line 14).
 
 In our example here, the \sphinxstyleemphasis{NetFlows} scores deliver  a ranking \sphinxstyleemphasis{without ties} which is rather different from the one delivered by \sphinxstyleemphasis{Copeland}’s rule (see \hyperref[\detokenize{tutorial:netflowsranking}]{Listing \ref{\detokenize{tutorial:netflowsranking}}} Line 16). It may happen, however, that we obtain, as with the \sphinxstyleemphasis{Copeland} scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a \sphinxstyleemphasis{weak ranking} with the corresponding \sphinxcode{\sphinxupquote{transitiveDigraphs.WeakNetFlowsOrder}} class.
 
@@ -2625,30 +2625,30 @@ The \sphinxstylestrong{NetFlows} ranking result appears to be slightly better co
 
 Indeed, the extended \sphinxstyleemphasis{Kendall} tau index of +0.638 leads to a bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{relational equivalence} characteristics of +0.147, i.e. a \sphinxstyleemphasis{majority} of 57.35\% of the criteria significance supports the relational equivalence between the given outranking digraphs \sphinxstyleemphasis{g} or \sphinxstyleemphasis{gcd}  and the corresponding \sphinxstyleemphasis{NetFlows} ranking. This lesser ranking performance of the \sphinxstyleemphasis{Copeland} rule stems in this example essentially from the \sphinxstyleemphasis{weakness} of the actual ranking result and our subsequent \sphinxstyleemphasis{arbitrary} lexicographic resolution of the many ties given by the \sphinxstyleemphasis{Copeland} scores (see \hyperref[\detokenize{tutorial:weakrankingdrawing}]{Fig.\@ \ref{\detokenize{tutorial:weakrankingdrawing}}}).
 
-To appreciate now the absolute quality of both the \sphinxstyleemphasis{Copeland} and the \sphinxstyleemphasis{NetFlows} rankings, it is useful to consider \sphinxstyleemphasis{Kemeny}’s and \sphinxstyleemphasis{Slater}’s \sphinxstylestrong{optimal} ranking rules.
+To appreciate now the more or less correlation of both the \sphinxstyleemphasis{Copeland} and the \sphinxstyleemphasis{NetFlows} rankings with the underlying pairwise outranking relation, it is useful to consider \sphinxstyleemphasis{Kemeny}’s and \sphinxstyleemphasis{Slater}’s \sphinxstylestrong{best fitting} ranking rules.
 
 
 \subsection{\sphinxstyleemphasis{Kemeny} rankings}
 \label{\detokenize{tutorial:kemeny-rankings}}
-A \sphinxstylestrong{Kemeny} ranking is a linear order which is \sphinxstyleemphasis{closest}, in the sense of the ordinal \sphinxstyleemphasis{Kendall} distance (see \sphinxcite{tutorial:bis-2012}), to the given valued outranking digraphs \sphinxstyleemphasis{g} or \sphinxstyleemphasis{gcd}. The rule is indeed again \sphinxstyleemphasis{invariant} under the \sphinxstyleemphasis{codual} transform. As \sphinxstyleemphasis{Kemeny}’s rule proceeds by inspecting all possible permutations of the decision alternatives, it is unfortunately only computable for tiny outranking digraphs and the class constructor assumes by default that the order of the digraph does not exceed 7 (7! = 5040 permutations to inspect, see \hyperref[\detokenize{tutorial:kemenyranking}]{Listing \ref{\detokenize{tutorial:kemenyranking}}} Line 2).
+A \sphinxstylestrong{Kemeny} ranking is a linear ranking without ties which is \sphinxstyleemphasis{closest}, in the sense of the ordinal \sphinxstyleemphasis{Kendall} distance (see \sphinxcite{tutorial:bis-2012}), to the given valued outranking digraphs \sphinxstyleemphasis{g} or \sphinxstyleemphasis{gcd}. This rule is also \sphinxstyleemphasis{invariant} under the \sphinxstyleemphasis{codual} transform.
 \sphinxSetupCaptionForVerbatim{Computing a \sphinxstyleemphasis{Kemeny} ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:kemenyranking}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{KemenyRanking}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ke} \PYG{o}{=} \PYG{n}{KemenyRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} default orderLimit is 7}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ke} \PYG{o}{=} \PYG{n}{KemenyRanking}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{orderLimit}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} default orderLimit is 7}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ke}\PYG{o}{.}\PYG{n}{showRanking}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{ke}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corr} \PYG{o}{=} \PYG{n}{gcd}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{ke}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
 \PYG{g+go}{  Extended Kendall tau       : +0.779}
 \PYG{g+go}{  Epistemic determination    :  0.230}
 \PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.179}
 \end{sphinxVerbatim}
 
-So, \sphinxstylestrong{+0.779} represents the \sphinxstyleemphasis{highest possible} ordinal correlation (fitness) any potential ranking can achieve with the given pairwise outranking digraph (see \hyperref[\detokenize{tutorial:kemenyranking}]{Listing \ref{\detokenize{tutorial:kemenyranking}}} Lines 7\sphinxhyphen{}10).
+So, \sphinxstylestrong{+0.779} represents the \sphinxstyleemphasis{highest possible} ordinal correlation (fitness) any potential linear ranking can achieve with the given pairwise outranking digraph (see \hyperref[\detokenize{tutorial:kemenyranking}]{Listing \ref{\detokenize{tutorial:kemenyranking}}} Lines 7\sphinxhyphen{}10).
 
-A \sphinxstyleemphasis{Kemeny} ranking may not be unique. In our example here, we obtain in fact two optimal \sphinxstyleemphasis{Kemeny} rankings with a same \sphinxstylestrong{maximal} \sphinxstyleemphasis{Kemeny} index.
+A \sphinxstyleemphasis{Kemeny} ranking may not be unique. In our example here, we obtain in fact two \sphinxstyleemphasis{Kemeny} rankings with a same \sphinxstylestrong{maximal} \sphinxstyleemphasis{Kemeny} index of 12.9.
 \sphinxSetupCaptionForVerbatim{Optimal \sphinxstyleemphasis{Kemeny} rankings}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:optimalkemeny}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]

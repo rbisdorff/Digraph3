@@ -276,7 +276,7 @@ In our bipolar-valued epistemic logic, logical disjunctions and conjunctions are
 
 If :math:`r(x\,R_1\, y)` and :math:`r(x\,R_2\; y)` denote the bipolar-valued characteristic values of relation *R1*, resp. *R2*, we may hence compute as follows a majority margin :math:`M(R_1 \Leftrightarrow R_2)` between equivalently and not equivalently oriented irreflexive pairs *(x,y)*.
 
-:math:`M(R_1 \Leftrightarrow R_2)  \;=\; \\ \sum_{(x \neq y)} \Big[ \min \Big( \max \big( -r(x \,R_1\, y), r(x \,R_2\, y)\big), \max \big( -r(x \,R_2\, y), r(x \,R_1\, y)\big) \Big) \Big]`
+:math:`M(R_1 \Leftrightarrow R_2)  \;=\; \\ \quad \quad \sum_{(x \neq y)} \Big[ \min \Big( \max \big( -r(x \,R_1\, y), r(x \,R_2\, y)\big), \max \big( -r(x \,R_2\, y), r(x \,R_1\, y)\big) \Big) \Big]`
 
 :math:`M(R_1 \Leftrightarrow R_2)` is thus given by the sum of the non reflexive terms of the relation table of *eq*, the relation equivalence digraph computed above (see :numref:`twoEqui2`).
 
