@@ -322,12 +322,12 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
 ##                    if rq > 0 and PrefThresholds:
 ##                        quantile += gPrefThrCst + quantile*gPrefThrSlope
                 else :
-                    if self.criteria[g]['preferenceDirection'] == 'min':
+                    #if self.criteria[g]['preferenceDirection'] == 'min':
                         #quantile = Decimal('100.0')
-                        quantile = gValues[-1]
-                    else:
+                    quantile = gValues[-1]
+                    #else:
                         #quantile = Decimal('200.0')
-                        quantile = gValues[-1] 
+                        #quantile = gValues[-1] 
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)               
@@ -340,12 +340,12 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                 if Debug:
                     print('r,rq',r,rq, end=' ')
                 if rq == 0:
-                    if self.criteria[g]['preferenceDirection'] == 'min':
+                    #if self.criteria[g]['preferenceDirection'] == 'min':
                         #quantile = Decimal('-200.0')
-                        quantile = gValues[0] 
-                    else:
+                    quantile = gValues[0] 
+                    #else:
                         #quantile = Decimal('-100.0')
-                        quantile = gValues[0] 
+                        #quantile = gValues[0] 
                 elif rq < (n-1):
                     quantile = gValues[rq]\
                         + ((r-Decimal(str(rq)))*(gValues[rq+1]-gValues[rq]))
@@ -355,10 +355,10 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
                     if n > 0:
                         quantile = gValues[n-1]
                     else:
-                        if self.criteria[g]['preferenceDirection'] == 'min':
-                            quantile = gValues[-1]
-                        else:
-                            quantile = gValues[-1]     
+                        #if self.criteria[g]['preferenceDirection'] == 'min':
+                        quantile = gValues[-1]
+                        #else:
+                            #quantile = gValues[-1]     
                 if Debug:
                     print('quantile',quantile)
                 gQuantiles.append(quantile)

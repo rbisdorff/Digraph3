@@ -3011,8 +3011,11 @@ The performance evaluations of each decision alternative on each criterion are g
         fo.write('criteria = OrderedDict([\n') 
         for g in criteria:
             fo.write('(\'%s\', {\n' % str(g))
-            for it in self.criteria[g].keys():
+            gKeys = list(self.criteria[g].keys())
+            for it in gKeys:
                 fo.write('\'%s\': %s,\n' % (it,repr(self.criteria[g][it])))
+            if 'prefrenceDirection' not in gKeys:
+                fo.write('\'preferenceDirection\': \'max\' \n')
             fo.write('}),\n')
 ##            fo.write('(\'' +str(g)+'\', {\n')
 ##            try:
