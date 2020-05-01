@@ -974,6 +974,17 @@ using the Pirlot’s fixpoint algorithm.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.computeBestChoiceRecommendation">
+<code class="sig-name descname">computeBestChoiceRecommendation</code><span class="sig-paren">(</span><em class="sig-param">Verbose=False</em>, <em class="sig-param">Comments=False</em>, <em class="sig-param">ChoiceVector=False</em>, <em class="sig-param">CoDual=True</em>, <em class="sig-param">Debug=False</em>, <em class="sig-param">_OldCoca=False</em>, <em class="sig-param">BrokenCocs=True</em>, <em class="sig-param">Cpp=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeBestChoiceRecommendation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets self.bestChoice, self.bestChoiceData, self.worstChoice and self.worstChoiceData
+with the showBestChoiceRecommendation method.</p>
+<p>Best and worst choices data is the following:
+[(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec,(7)cover]</p>
+<p>self.bestChoice = self.bestChoiceData[5]
+self.worstChoice = self.worstChoiceData[5]</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.computeBipolarCorrelation">
 <code class="sig-name descname">computeBipolarCorrelation</code><span class="sig-paren">(</span><em class="sig-param">other</em>, <em class="sig-param">MedianCut=False</em>, <em class="sig-param">filterRelation=None</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeBipolarCorrelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeBipolarCorrelation" title="Permalink to this definition">¶</a></dt>
 <dd><p>obsolete: dummy replacement for Digraph.computeOrdinalCorrelation method</p>
@@ -2242,11 +2253,13 @@ Renders the sharpest of two characteristic vectors v and w.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showBestChoiceRecommendation">
-<code class="sig-name descname">showBestChoiceRecommendation</code><span class="sig-paren">(</span><em class="sig-param">Comments=False</em>, <em class="sig-param">ChoiceVector=False</em>, <em class="sig-param">CoDual=True</em>, <em class="sig-param">Debug=False</em>, <em class="sig-param">_OldCoca=False</em>, <em class="sig-param">BrokenCocs=True</em>, <em class="sig-param">Cpp=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showBestChoiceRecommendation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the RuBis best choice recommendation.</p>
+<code class="sig-name descname">showBestChoiceRecommendation</code><span class="sig-paren">(</span><em class="sig-param">Verbose=False</em>, <em class="sig-param">Comments=True</em>, <em class="sig-param">ChoiceVector=False</em>, <em class="sig-param">CoDual=True</em>, <em class="sig-param">Debug=False</em>, <em class="sig-param">_OldCoca=False</em>, <em class="sig-param">BrokenCocs=True</em>, <em class="sig-param">Cpp=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showBestChoiceRecommendation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows the RuBis best choice recommendation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Computes by default the Rubis best choice recommendation on the corresponding strict (codual) outranking digraph.</p>
+<p>By default, with BrokenCocs=True, we brake all chordless circuits at their weakest determined ( abs(r(x&gt;y)) + abs(r(y&gt;x)) ) link.</p>
+<p>When BrokenCocs=False we proceed like follows:</p>
 <p>In case of chordless circuits, if supporting arcs are more credible
 than the reversed negating arcs, we collapse the circuits into hyper nodes.
 Inversely,  if supporting arcs are not more credible than the reversed negating arcs,
@@ -2591,8 +2604,8 @@ Kohler’s (rankingRule=”kohler”), and Tideman’s ranked pairs rule (rankin
 
 <dl class="method">
 <dt id="digraphs.Digraph.showRubyChoice">
-<code class="sig-name descname">showRubyChoice</code><span class="sig-paren">(</span><em class="sig-param">Comments=False</em>, <em class="sig-param">_OldCoca=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showRubyChoice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showRubyChoice" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dummy for showRubisBestChoiceRecommendation()
+<code class="sig-name descname">showRubyChoice</code><span class="sig-paren">(</span><em class="sig-param">Verbose=False</em>, <em class="sig-param">Comments=True</em>, <em class="sig-param">_OldCoca=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showRubyChoice"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showRubyChoice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dummy for showBestChoiceRecommendation()
 needed for older versions compatibility.</p>
 </dd></dl>
 
@@ -8450,13 +8463,13 @@ ranking-by-Rubis-choosing orderings.</p>
 
 <dl class="method">
 <dt id="transitiveDigraphs.RankingByChoosingDigraph.showRankingByChoosing">
-<code class="sig-name descname">showRankingByChoosing</code><span class="sig-paren">(</span><em class="sig-param">rankingByChoosing=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#RankingByChoosingDigraph.showRankingByChoosing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.RankingByChoosingDigraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showRankingByChoosing</code><span class="sig-paren">(</span><em class="sig-param">rankingByChoosing=None</em>, <em class="sig-param">rankingStrategy='optimistic'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#RankingByChoosingDigraph.showRankingByChoosing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.RankingByChoosingDigraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dummy for showTransitiveDigraph method</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="transitiveDigraphs.RankingByChoosingDigraph.showTransitiveDigraph">
-<code class="sig-name descname">showTransitiveDigraph</code><span class="sig-paren">(</span><em class="sig-param">rankingByChoosing=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#RankingByChoosingDigraph.showTransitiveDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.RankingByChoosingDigraph.showTransitiveDigraph" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showTransitiveDigraph</code><span class="sig-paren">(</span><em class="sig-param">rankingByChoosing=None</em>, <em class="sig-param">rankingStrategy='optimistic'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#RankingByChoosingDigraph.showTransitiveDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.RankingByChoosingDigraph.showTransitiveDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specialization of generic method.
 Without argument, a weak ordering is recomputed from the
 valued self relation.</p>

@@ -1880,12 +1880,13 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         else:
                             print('  -  ', end=' ')
                     else:
+                        Max = self.valuationdomain['max']
                         if hasLPDDenotation:
-                            print(' 1.00 ', end=' ')
+                            print(' %+.2f ' % Max, end=' ')
                         elif hasLatexFormat:
-                            print('$+1.00$ &', end=' ')
+                            print('$%.2f$ &' % Max, end=' ')
                         else:
-                            print(' +1.00 ', end=' ')
+                            print(' %+.2f ' % Max, end=' ')
                 else:    
                     if hasIntegerValuation:
                         if hasLPDDenotation:

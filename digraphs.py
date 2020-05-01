@@ -31,118 +31,6 @@ from digraphs import *
 from perfTabs import *
 from randomPerfTabs import *
 
-# #----------XML handling class obsolete -----------------
-# try:
-#     from xml.sax import *
-# except:
-#     print('XML extension will not work with this Python version!')
-
-# class _XMLDigraphHandler(ContentHandler):
-#     """
-#     A private handler to deal with digraphs stored in XML format.
-#     """
-
-#     inName = 0
-#     digraphName = ''
-#     inAction = 0
-#     actionName = ''
-#     actions = []
-#     iAction = ''
-#     tAction = ''
-#     inMin = 0
-#     minText = ''
-#     inMax = 0
-#     maxText = ''
-#     inValue = 0
-#     valueText = ''
-#     valuationdomain = {}
-#     relation = {}
-
-
-#     def startElement(self,nodeName,attrs):
-#         if nodeName == 'digraph':
-#             self.category = attrs.get("category", "")
-#             self.subcategory = attrs.get("subcategory", "")
-
-#         if nodeName == 'name':
-#             self.inName = 1
-
-#         if nodeName == 'nodes':
-#             self.actions = []
-
-#         if nodeName == 'node':
-#             self.actionName = ''
-#             self.inAction = 1
-
-#         if nodeName == 'min':
-#             self.inMin = 1
-
-#         if nodeName == 'max':
-#             self.inMax = 1
-
-#         if nodeName == 'relation':
-#             self.relation = {}
-#             for x in self.actions:
-#                 self.relation[x] = {}
-
-#         if nodeName == 'i':
-#             self.actionName = ''
-#             self.inAction = 1
-
-#         if nodeName == 't':
-#             self.actionName = ''
-#             self.inAction = 1
-
-#         if nodeName == 'v':
-#             self.valueText = ''
-#             self.inValue = 1
-
-
-#     def endElement(self,nodeName):
-
-#         if nodeName == 'name':
-#             self.inName = 0
-#             self.name = str(self.digraphName)
-
-#         if nodeName == 'node':
-#             self.actions.append(str(self.actionName))
-#             self.inAction = 0
-
-#         if nodeName == 'min':
-#             self.inMin = 0
-#             self.valuationdomain['min'] = eval(self.minText)
-
-#         if nodeName == 'max':
-#             self.inMax = 0
-#             self.valuationdomain['max'] = eval(self.maxText)
-
-#         if nodeName == 'i':
-#             self.inAction = 0
-#             self.iAction = str(self.actionName)
-
-#         if nodeName == 't':
-#             self.inAction = 0
-#             self.tAction = str(self.actionName)
-
-#         if nodeName == 'v':
-#             self.inValue = 0
-
-#         if nodeName == 'arc':
-#             self.relation[self.iAction][self.tAction] = eval(self.valueText)
-
-#     def characters(self, ch):
-#         if self.inName:
-#             self.digraphName += ch
-#         if self.inAction:
-#             self.actionName += ch
-#         if self.inMin:
-#             self.minText += ch
-#         if self.inMax:
-#             self.maxText += ch
-#         if self.inValue:
-#             self.valueText += ch
-
-
 #----------Digraph classes -----------------
 
 class Digraph(object):
@@ -706,6 +594,82 @@ class Digraph(object):
                 currGcd = CoDualDigraph(currG)
             else:
                 currGcd = deepcopy(currG)
+            currGcd.computeBestChoiceRecommendation(CoDual=CoDual,Debug=False)
+            k1 = currGcd.flatChoice(currGcd.worstChoice)
+            if Debug:
+                print('k1',k1)
+            ck1 = list(set(currG.actions)-set(k1))
+            if len(k1) > 0:
+                if len(ck1) > 0:
+                    k1Outranked = currG.computePairwiseClusterComparison(k1,ck1)
+                    if Debug:
+                        print('worst', k1, k1Outranked)
+                    worstChoice = ( min(-k1Outranked['P+'],k1Outranked['P-']), k1 )
+                else: 
+                    worstChoice = ( self.valuationdomain['max'], k1 )
+            else:
+                worstChoice = ( self.valuationdomain['med'], [] )
+                
+            if Debug:
+                print('worstChoice', i, worstChoice)
+
+            if (worstChoice[1] != []):
+                rankingByLastChoosing.append(worstChoice)                
+                for x in worstChoice[1]:
+                    try:
+                        remainingActions.remove(x)
+                    except:
+                        pass
+            if Debug:
+                print( i, worstChoice, remainingActions, rankingByLastChoosing)
+
+        if (worstChoice[1] == []):
+            #### only a singleton choice or a failure quadruple left to rank
+            if Debug:
+                print(worstChoice)
+            worstChoice = (self.valuationdomain['max'],remainingActions)
+            rankingByLastChoosing.append(worstChoice)
+            if Debug:
+                print(rankingByLastChoosing)
+
+        elif len(remainingActions) == 1:
+            #### only a singleton choice or a failure quadruple left to rank
+            if Debug:
+                print(worstChoice)
+            worstChoice = (self.valuationdomain['max'],remainingActions)
+            rankingByLastChoosing.append(worstChoice)
+            if Debug:
+                print(rankingByLastChoosing)
+        
+        self.rankingByLastChoosing = {'CoDual': CoDual, 'result': rankingByLastChoosing}
+        return {'CoDual': CoDual, 'result': rankingByLastChoosing}
+
+    def _computeRankingByLastChoosing(self,CoDual=False,CppAgrum=False,Debug=False):
+        """
+        Computes a weak preordring of the self.actions by iterating
+        worst choice elagations.
+
+        Stores in self.rankingByLastChoosing['result'] a list of (P-,worstChoice) pairs
+        where P- gives the worst choice complement outranked
+        average valuation via the computePairwiseClusterComparison
+        method.
+
+        If self.rankingByChoosing['CoDual'] is True, the ranking-by-last-chossing 
+        was computed on the codual of self.
+        """
+        from copy import copy, deepcopy
+        currG = deepcopy(self)
+        remainingActions = [x for x in self.actions]
+        rankingByLastChoosing = []
+        worstChoice = (None,None)
+        i = 0
+        while len(remainingActions) > 1 and worstChoice[1] != []:
+            i += 1
+            currG.actions = remainingActions
+            if CoDual:
+                currGcd = CoDualDigraph(currG)
+            else:
+                currGcd = deepcopy(currG)
             currGcd.computeRubisChoice(CppAgrum=CppAgrum,Comments=False)
             #currGcd.computeGoodChoices(Comments=Debug)
 
@@ -765,8 +729,7 @@ class Digraph(object):
                 print(rankingByLastChoosing)
         
         self.rankingByLastChoosing = {'CoDual': CoDual, 'result': rankingByLastChoosing}
-        return {'CoDual': CoDual, 'result': rankingByLastChoosing}
-
+        return {'CoDual': CoDual, 'result': rankingByLastChoosing}     
 
     def computeRankingByChoosing(self,actionsSubset=None,CppAgrum=False,Debug=False,CoDual=False):
         """
@@ -937,6 +900,155 @@ class Digraph(object):
         return {'CoDual': CoDual, 'result': rankingByChoosing}
 
     def computeRankingByBestChoosing(self,CoDual=False,CppAgrum=False,Debug=False,):
+        """
+        Computes a weak preordering of the self.actions by recursive
+        best choice elagations.
+
+        Stores in self.rankingByBestChoosing['result'] a list of (P+,bestChoice) tuples
+        where P+ gives the best choice complement outranking
+        average valuation via the computePairwiseClusterComparison
+        method.
+
+        If self.rankingByBestChoosing['CoDual'] is True, 
+        the ranking-by-choosing was computed on the codual of self.
+        """
+        if Debug:
+            print("===>>>> debugging computeByBestChoosing() digraphs methods")
+        from copy import copy, deepcopy
+        currG = copy(self)
+        remainingActions = [x for x in self.actions]
+        rankingByBestChoosing = []
+        bestChoice = (self.valuationdomain['med'],None)
+        i = 0
+        while len(remainingActions) > 2 and bestChoice[1] != []:
+            i += 1
+            currG.actions = remainingActions
+            if CoDual:
+                currGcd = CoDualDigraph(currG)
+            else:
+                currGcd = deepcopy(currG)
+            currGcd.computeBestChoiceRecommendation(CoDual=CoDual,Cpp=CppAgrum,Comments=Debug)
+            k1 = currGcd.flatChoice(currGcd.bestChoice)
+            if Debug:
+                print('flatening the choice:',currGcd.bestChoice,k1)
+            ck1 = list(set(currG.actions)-set(k1))
+            if len(k1) > 0:
+                if len(ck1) > 0:
+                    k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
+                    if Debug:
+                        print('good',currGcd.bestChoice, k1, k1Outranking)
+                        #bestChoiceCandidates.append((k1Outranking['P+'],k1))
+                    bestChoice = ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 )
+                else:
+                    bestChoice = ( self.valuationdomain['max'], k1 )
+            else:
+                bestChoice = (self.valuationdomain['med'],[])
+            if Debug:
+                print('bestChoice', i, bestChoice)
+
+            if bestChoice[1] != []:
+                if Debug:
+                    print('bestChoice[1] != []:', bestChoice[1])
+                rankingByBestChoosing.append(bestChoice)
+                for x in bestChoice[1]:
+                        remainingActions.remove(x)
+            if Debug:
+                print(i, bestChoice, remainingActions, rankingByBestChoosing)
+
+        if bestChoice[1] == []:
+            #### no best choice detacted, close the ranking with the remaining actions
+            if Debug:
+                print('bestChoice[1] == []:', bestChoice)
+            bestChoice = (self.valuationdomain['max'],remainingActions)
+            rankingByBestChoosing.append(bestChoice)
+            if Debug:
+                print(rankingByBestChoosing)
+
+        elif len(remainingActions) == 2:
+            if Debug:
+                print('len(remainingActions) == 2:',remainingActions)
+            i += 1
+            currG.actions = remainingActions
+            if CoDual:
+                currGcd = CoDualDigraph(currG)
+            else:
+                currGcd = copy(currG)
+            currGcd.computeBestChoiceRecommendation(CoDual=CoDual,Cpp=CppAgrum,Comments=Debug)
+            k1 = currGcd.flatChoice(currGcd.bestChoice)
+            if Debug:
+                print('flatening the choice:',currGcd.bestChoice,k1)
+            ck1 = list(set(currG.actions)-set(k1))
+            if len(k1) > 0:
+                if len(ck1) > 0:
+                    k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
+                    if Debug:
+                        print('good', currGcd.bestChoice, k1, k1Outranking)
+                        #bestChoiceCandidates.append((k1Outranking['P+'],k1))
+                        bestChoice = ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 )
+                else:
+                    bestChoice = ( self.valuationdomain['max'], k1 )
+            else:
+                bestChoice = (self.valuationdomain['med'],[])
+            if Debug:
+                print('bestChoice', i, bestChoice)
+
+            if bestChoice[1] != []:
+                if Debug:
+                    print('bestChoice[1] != []:', bestChoice[1])
+                rankingByBestChoosing.append(bestChoice)
+                
+##            bestChoiceCandidates = []
+##            j = 0
+##            for ch in currGcd.goodChoices:
+##                k1 = currGcd.flatChoice(ch[5])
+##                if Debug:
+##                    print(ch[5],k1)
+##                ck1 = list(set(currG.actions)-set(k1))
+##                if len(ck1) > 0:
+##                    j += 1
+##                    k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
+##                    if Debug:
+##                        print('good', j, ch[5], k1, k1Outranking)
+##                    #bestChoiceCandidates.append((k1Outranking['P+'],k1))
+##                    bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
+##                else:
+##                    bestChoiceCandidates.append((self.valuationdomain['max'],k1))
+##
+##            bestChoiceCandidates.sort(reverse=True)
+##            if Debug:
+##                print('bestChoice', i, bestChoice, bestChoiceCandidates)
+##
+##            try:
+##                bestChoice = bestChoiceCandidates[0]
+##            except:
+##                #print 'Error: no best choice in currGcd!'
+##                #currGcd.save('currGcd_errorBest')
+##                bestChoice = (self.valuationdomain['med'],[])
+##            rankingByBestChoosing.append(bestChoice)
+            for x in bestChoice[1]:
+                try:
+                    remainingActions.remove(x)
+                except:
+                    pass
+            if len(remainingActions) > 0:
+                lastBestChoice = (self.valuationdomain['max'],remainingActions)
+                rankingByBestChoosing.append(lastBestChoice)
+            if Debug:
+                print('lastBestChoice', i+1, lastBestChoice)
+
+        elif len(remainingActions) == 1:
+            #### only a singleton choice or a failure quadruple left to rank
+            if Debug:
+                print('!!! len(remainingActions) == 1: !!!', remainingActions)
+            bestChoice = (self.valuationdomain['max'],remainingActions)
+            rankingByBestChoosing.append(bestChoice)
+            if Debug:
+                print(rankingByBestChoosing)
+        self.rankingByBestChoosing = {'CoDual': CoDual, 'result': rankingByBestChoosing}
+        return {'CoDual': CoDual, 'result': rankingByBestChoosing}
+
+
+    def _computeRankingByBestChoosing(self,CoDual=False,CppAgrum=False,Debug=False,):
         """
         Computes a weak preordering of the self.actions by recursive
         best choice elagations.
@@ -7122,14 +7234,15 @@ class Digraph(object):
         return relation_k
 
 
-    def showRubyChoice(self,Comments=False,_OldCoca=True):
+    def showRubyChoice(self,Verbose=False,Comments=True,_OldCoca=True):
         """
-        Dummy for showRubisBestChoiceRecommendation()
+        Dummy for showBestChoiceRecommendation()
         needed for older versions compatibility.
         """
-        self.showBestChoiceRecommendation(Comments=Comments,_OldCoca=_OldCoca)
+        self.showBestChoiceRecommendation(Verbose=Verbose,Comments=Comments,_OldCoca=_OldCoca)
 
-    def showBestChoiceRecommendation(self,Comments=False,
+    def computeBestChoiceRecommendation(self,Verbose=False,
+                                          Comments=False,
                                           ChoiceVector=False,
                                           CoDual=True,
                                           Debug=False,
@@ -7137,11 +7250,43 @@ class Digraph(object):
                                           BrokenCocs=True,
                                           Cpp=False):
         """
-        Renders the RuBis best choice recommendation.
+        Sets self.bestChoice, self.bestChoiceData, self.worstChoice and self.worstChoiceData
+        with the showBestChoiceRecommendation method.
+
+        Best and worst choices data is the following:
+        [(0)-determ,(1)degirred,(2)degi,(3)degd,(4)dega,(5)str(choice),(6)domvec,(7)cover]
+
+        self.bestChoice = self.bestChoiceData[5]
+        self.worstChoice = self.worstChoiceData[5]
+        
+        """
+        self.showBestChoiceRecommendation(Verbose=Verbose,
+                                          Comments=Comments,
+                                          ChoiceVector=ChoiceVector,
+                                          CoDual=CoDual,
+                                          Debug=Debug,
+                                          _OldCoca=_OldCoca,
+                                          BrokenCocs=BrokenCocs,
+                                          Cpp=Cpp)
+
+    def showBestChoiceRecommendation(self,Verbose=False,
+                                          Comments=True,
+                                          ChoiceVector=False,
+                                          CoDual=True,
+                                          Debug=False,
+                                          _OldCoca=False,
+                                          BrokenCocs=True,
+                                          Cpp=False):
+        """
+        Shows the RuBis best choice recommendation.
 
         .. note::
 
             Computes by default the Rubis best choice recommendation on the corresponding strict (codual) outranking digraph.
+
+            By default, with BrokenCocs=True, we brake all chordless circuits at their weakest determined ( abs(r(x>y)) + abs(r(y>x)) ) link.
+
+            When BrokenCocs=False we proceed like follows:
 
             In case of chordless circuits, if supporting arcs are more credible
             than the reversed negating arcs, we collapse the circuits into hyper nodes.
@@ -7180,13 +7325,13 @@ class Digraph(object):
         """
         from copy import deepcopy
         from time import time
-        if Debug:
-            Comments = True
-        print('***********************')
+        if Comments:
+            print('***********************')
         #print('RuBis BCR')
         if Debug:
             print('All comments !!!')
-            Comments=True
+            Comments = True
+            Verbose = True
         t0 = time()
         n0 = self.order
         cpself = deepcopy(self)
@@ -7198,7 +7343,6 @@ class Digraph(object):
             _selfwcoc = CocaDigraph(g,Cpp=Cpp)
             b1 = 0
         elif BrokenCocs:
-            #print('passed here!')
             _selfwcoc = BrokenCocsDigraph(g,Cpp=Cpp)
             b1 = _selfwcoc.breakings
         else:
@@ -7222,7 +7366,7 @@ class Digraph(object):
             g.showRelationTable()
         #self.showPreKernels()
         actions = set([x for x in g.actions])
-        if Comments:
+        if Verbose:
             g.showPreKernels()
         if Debug:
             print(g.dompreKernels,g.abspreKernels)
@@ -7231,13 +7375,16 @@ class Digraph(object):
         if Debug:
             print('good and bad choices: ',g.goodChoices,g.badChoices)
         t1 = time()
-        print('Rubis best choice recommendation(s) (BCR)')
-        print(' (in decreasing order of determinateness)   ')
-        print('Credibility domain: [%.2f,%.2f]' % (g.valuationdomain['min'],\
+        if Comments:
+            print('Rubis best choice recommendation(s) (BCR)')
+            print(' (in decreasing order of determinateness)   ')
+            print('Credibility domain: [%.2f,%.2f]' % (g.valuationdomain['min'],\
                                                                         g.valuationdomain['max']) )
         Med = g.valuationdomain['med']
         bestChoice = set()
+        bestChoiceData = None
         worstChoice = set()
+        worstChoiceData = None
         for gch in g.goodChoices:
             if gch[0] >= Med:
                 goodChoice = True
@@ -7245,7 +7392,7 @@ class Digraph(object):
                     if gch[5] == bch[5]:
                         #if gch[0] == bch[0]:
                         if gch[3] == gch[4]:
-                            if Comments:
+                            if Verbose:
                                 print('ambiguous (good) choice ')
                                 g.showChoiceVector(gch,choiceType='good',
                                                       ChoiceVector=ChoiceVector)
@@ -7253,7 +7400,7 @@ class Digraph(object):
                                                       ChoiceVector=ChoiceVector)
                             goodChoice = False
                         elif gch[4] > gch[3]:
-                            if Comments:
+                            if Verbose:
                                 print('outranked (good) choice ')
                                 g.showChoiceVector(gch,choiceType='good',
                                                       ChoiceVector=ChoiceVector)
@@ -7263,13 +7410,16 @@ class Digraph(object):
                         else:
                             goodChoice = True
                 if goodChoice:
-                    print(' === >> potential best choice(s)')
-                    g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                    if Comments:
+                        print(' === >> potential best choice(s)')
+                        g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
                     if bestChoice == set():
                         bestChoice = gch[5]
+                        bestChoiceData = gch
             else:
-                print(' === >> non robust best choice(s)')
-                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                if Comments:
+                    print(' === >> non robust best choice(s)')
+                    g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
         for bch in g.badChoices:
             if bch[0] >= Med:
                 badChoice = True
@@ -7278,14 +7428,14 @@ class Digraph(object):
                     if bch[5] == gch[5]:
                         #if gch[0] == bch[0]:
                         if bch[3] == bch[4]:
-                            if Comments:
+                            if Verbose:
                                 print('ambiguous (bad) choice ')
                                 g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
                                 g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                             badChoice = False
                             nullChoice = True
                         elif bch[3] > bch[4]:
-                            if Comments:
+                            if Verbose:
                                 print('outranking (bad) choice ')
                                 g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
                                 g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
@@ -7293,31 +7443,32 @@ class Digraph(object):
                         else:
                             badChoice = True
                 if badChoice:
-                    print(' === >> potential worst choice(s) ')
-                    g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
+                    if Comments:
+                        print(' === >> potential worst choice(s) ')
+                        g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
+                        worstChoiceData = bch
                 elif nullChoice:
-                    print(' === >> ambiguous choice(s)')
-                    g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
+                    if Comments:
+                        print(' === >> ambiguous choice(s)')
+                        g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
+                        worstChoiceData = bch
 
             else:
-                print('=== >> non robust worst choice(s)')
-                g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
-        print()
-        print('Execution time: %.3f seconds' % (t1-t0))
-        print('*****************************')
+                if Comments:
+                    print('=== >> non robust worst choice(s)')
+                    g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
+        if Comments:
+            print()
+            print('Execution time: %.3f seconds' % (t1-t0))
+            print('*****************************')
         self.bestChoice = bestChoice
+        self.bestChoiceData = bestChoiceData
         self.worstChoice = worstChoice
-        #if nc > 0 or b1 > 0:
-##        self.actions = deepcopy(self.actions_orig)
-##        self.relation = deepcopy(self.relation_orig)
-##        self.order = len(self.actions)
-##        self.gamma = self.gammaSets()
-##        self.notGamma = self.notGammaSets()
-
+        self.worstChoiceData = worstChoiceData
 
     def showRubisBestChoiceRecommendation(self,**kwargs):
         """

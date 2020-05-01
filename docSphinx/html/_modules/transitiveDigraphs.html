@@ -753,27 +753,34 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
 
 
-<div class="viewcode-block" id="RankingByChoosingDigraph.showTransitiveDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.showTransitiveDigraph">[docs]</a>    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingByChoosingDigraph.showTransitiveDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.showTransitiveDigraph">[docs]</a>    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingStrategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialization of generic method.</span>
 <span class="sd">        Without argument, a weak ordering is recomputed from the</span>
 <span class="sd">        valued self relation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">rankingByChoosing</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">computeRankingByChoosing</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">rankingStrategy</span> <span class="o">==</span> <span class="s1">&#39;optimistic&#39;</span><span class="p">:</span>  
+                <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>\
+                            <span class="n">rankingByChoosing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">computeRankingByBestChoosing</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>\
+                            <span class="n">rankingByChoosing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">())</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="n">rankingByChoosing</span><span class="p">)</span></div>
 
 
 
-<div class="viewcode-block" id="RankingByChoosingDigraph.showRankingByChoosing"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.showRankingByChoosing">[docs]</a>    <span class="k">def</span> <span class="nf">showRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingByChoosingDigraph.showRankingByChoosing"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.showRankingByChoosing">[docs]</a>    <span class="k">def</span> <span class="nf">showRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingStrategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy for showTransitiveDigraph method</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">rankingByChoosing</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">computeRankingByChoosing</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="n">rankingByChoosing</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="n">rankingByChoosing</span><span class="p">,</span>\
+                                                 <span class="n">rankingStrategy</span><span class="o">=</span><span class="n">rankingStrategy</span><span class="p">)</span></div>
+<span class="c1">##        if rankingStrategy == &#39;best&#39;:</span>
+<span class="c1">##            TransitiveDigraph.showTransitiveDigraph(self,self.rankingByBestChoosing)</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            TransitiveDigraph.showTransitiveDigraph(self,self.rankingByLastChoosing)</span>
 
 <div class="viewcode-block" id="RankingByChoosingDigraph.computeRankingByBestChoosing"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.computeRankingByBestChoosing">[docs]</a>    <span class="k">def</span> <span class="nf">computeRankingByBestChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Forced</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

@@ -713,27 +713,34 @@ class RankingByChoosingDigraph(TransitiveDigraph):
         self.notGamma = self.notGammaSets()
 
 
-    def showTransitiveDigraph(self,rankingByChoosing=None):
+    def showTransitiveDigraph(self,rankingByChoosing=None,rankingStrategy='optimistic'):
         """
         Specialization of generic method.
         Without argument, a weak ordering is recomputed from the
         valued self relation.
         """
         if rankingByChoosing == None:
-            TransitiveDigraph.showTransitiveDigraph(self,rankingByChoosing=self.computeRankingByChoosing())
+            if rankingStrategy == 'optimistic':  
+                TransitiveDigraph.showTransitiveDigraph(self,\
+                            rankingByChoosing=self.computeRankingByBestChoosing())
+            else:
+                TransitiveDigraph.showTransitiveDigraph(self,\
+                            rankingByChoosing=self.computeRankingByLastChoosing())
         else:
             TransitiveDigraph.showTransitiveDigraph(self,rankingByChoosing=rankingByChoosing)
 
 
 
-    def showRankingByChoosing(self,rankingByChoosing=None):
+    def showRankingByChoosing(self,rankingByChoosing=None,rankingStrategy='optimistic'):
         """
         Dummy for showTransitiveDigraph method
         """
-        if rankingByChoosing == None:
-            TransitiveDigraph.showTransitiveDigraph(self,rankingByChoosing=self.computeRankingByChoosing())
-        else:
-            TransitiveDigraph.showTransitiveDigraph(self,rankingByChoosing=rankingByChoosing)
+        self.showTransitiveDigraph(rankingByChoosing=rankingByChoosing,\
+                                                 rankingStrategy=rankingStrategy)
+##        if rankingStrategy == 'best':
+##            TransitiveDigraph.showTransitiveDigraph(self,self.rankingByBestChoosing)
+##        else:
+##            TransitiveDigraph.showTransitiveDigraph(self,self.rankingByLastChoosing)
 
     def computeRankingByBestChoosing(self,Forced=False):
         """

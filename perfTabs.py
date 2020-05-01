@@ -1529,7 +1529,10 @@ The performance evaluations of each decision alternative on each criterion are g
             formatString = '%% .%df ' % ndigits
             for i in range(fromIndex,toIndex):
                 x = actionsList[i]
-                print('   \''+str(self.actions[x]['name'])+'\'   |' , end=' ')
+                try:
+                    print('   \''+str(self.actions[x]['shortName'])+'\'   |' , end=' ')
+                except KeyError:
+                    print('   \''+str(x)+'\'   |' , end=' ')        
                 for g in criteriaList:
                     evalgx = self.evaluation[g][x]
                     if evalgx == Decimal('-999'):
@@ -3014,7 +3017,7 @@ The performance evaluations of each decision alternative on each criterion are g
             gKeys = list(self.criteria[g].keys())
             for it in gKeys:
                 fo.write('\'%s\': %s,\n' % (it,repr(self.criteria[g][it])))
-            if 'prefrenceDirection' not in gKeys:
+            if 'preferenceDirection' not in gKeys:
                 fo.write('\'preferenceDirection\': \'max\' \n')
             fo.write('}),\n')
 ##            fo.write('(\'' +str(g)+'\', {\n')
