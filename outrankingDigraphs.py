@@ -4259,7 +4259,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                  actionsSubset=None,\
                  hasNoVeto=False,\
                  hasBipolarVeto=True,\
-                 Normalized=False,\
+                 Normalized=True,\
                  CopyPerfTab=True,\
                  BigData=False,\
                  Threading=False,\

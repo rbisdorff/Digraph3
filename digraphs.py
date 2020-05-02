@@ -2621,9 +2621,11 @@ class Digraph(object):
         """
         Produces the transitive closure of self.relation.
         """
-        import copy
+        if Reverse:
+            self.closeTransitive(Irreflexive=Irreflexive)
+        from copy import deepcopy
         actions = set(self.actions)
-        relation = copy.deepcopy(self.relation)
+        relation = deepcopy(self.relation)
         if Irreflexive:
             for x in actions:
                 relation[x][x] = self.valuationdomain['min']        
@@ -2635,7 +2637,7 @@ class Digraph(object):
                             relation[y][z] = self.valuationdomain['min']
                     else:
                         relation[y][z] = max(relation[y][z],min(relation[y][x],relation[x][z]))
-        self.relation = copy.deepcopy(relation)
+        self.relation = deepcopy(relation)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
