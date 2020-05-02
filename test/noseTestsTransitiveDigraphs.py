@@ -25,7 +25,7 @@ def testRankingByChoosingWithKernels():
     print('=== >>> last')
     rcg2 = RankingByLastChoosingDigraph(g,Debug=False)
     rcg2.showWeakOrder()
-    rcg2.exportGraphViz(direction="worst")
+    rcg2.exportGraphViz(fileName='test1',direction="worst")
     print(rcg2.computeOrdinalCorrelation(g))
 
 def testOrderedRelationTableShowing():
@@ -41,7 +41,7 @@ def testPrincipalInOutDegreesRanking():
     rcf = PrincipalInOutDegreesOrdering(g,imageType="pdf",Debug=False)
     rcf.showWeakOrder()
     print(rcf.computeOrdinalCorrelation(g))
-    rcf.exportGraphViz(direction="Colwise")
+    rcf.exportGraphViz(fileName='test2',direction="Colwise")
 
 def testRBCThreadingOptions():
     print('===>>> test threading option')
@@ -109,16 +109,16 @@ def testKohlerArrowRaynaudFusionDigraph():
     print(g.computeOrdinalCorrelation(ko))
     print(g.computeOrdinalCorrelation(ar))
     print(g.computeOrdinalCorrelation(koar))
-    koar.exportGraphViz('test')
+    koar.exportGraphViz(fileName='test3')
 
 def testKemenyWeakOrder():
     print('*====>>>> test KemenyWeakOrder class ---------')
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                    numberOfActions=8,seed=105)
     g = BipolarOutrankingDigraph(t)
-    g.exportGraphViz('testg')
+    g.exportGraphViz(fileName='test4')
     wke = KemenyWeakOrder(g,orderLimit=8,Debug=True)
-    wke.exportGraphViz('testwke')
+    wke.exportGraphViz(fileName='test5')
     print(wke.relation)
 
 def testPartialRanking():
@@ -132,7 +132,7 @@ def testPartialRanking():
     prp = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='pessimistic')
     r3 = prp.boostedRanking
     wqr = PartialRanking(pra,[r1,r2,r3])
-    wqr.exportGraphViz('partialRanking',graphType="pdf")
+    wqr.exportGraphViz(fileName='test6',graphType="pdf")
 
 def testWeakOrders():
     print('*====>>>> test weak orders ---------')

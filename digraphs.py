@@ -582,7 +582,10 @@ class Digraph(object):
         was computed on the codual of self.
         """
         from copy import copy, deepcopy
-        currG = deepcopy(self)
+        if CoDual:
+            currG = CoDualDigraph(self)
+        else:
+            currG = deepcopy(self)
         remainingActions = [x for x in self.actions]
         rankingByLastChoosing = []
         worstChoice = (None,None)
@@ -590,10 +593,10 @@ class Digraph(object):
         while len(remainingActions) > 1 and worstChoice[1] != []:
             i += 1
             currG.actions = remainingActions
-            if CoDual:
-                currGcd = CoDualDigraph(currG)
-            else:
-                currGcd = deepcopy(currG)
+##            if CoDual:
+##                currGcd = CoDualDigraph(currG)
+##            else:
+            currGcd = deepcopy(currG)
             currGcd.computeBestChoiceRecommendation(CoDual=CoDual,Debug=False)
             k1 = currGcd.flatChoice(currGcd.worstChoice)
             if Debug:
@@ -744,7 +747,10 @@ class Digraph(object):
         If self.rankingByChoosing['CoDual'] is True, the ranking-by-choosing was computed on the codual of self.
         """
         from copy import copy, deepcopy
-        currG = deepcopy(self)
+        if CoDual:
+            currG = CoDualDigraph(self)
+        else:
+            currG = deepcopy(self)
         if actionsSubset == None:
             remainingActions = [x for x in self.actions]
         else:
@@ -756,10 +762,7 @@ class Digraph(object):
         while len(remainingActions) > 2 and (bestChoice[1] != [] or worstChoice[1] != []):
             i += 1
             currG.actions = remainingActions
-            if CoDual:
-                currGcd = CoDualDigraph(currG)
-            else:
-                currGcd = deepcopy(currG)
+            currGcd = deepcopy(currG)
             currGcd.computeRubisChoice(CppAgrum=CppAgrum,Comments=Debug)
             #currGcd.computeGoodChoices(Comments=Debug)
             bestChoiceCandidates = []
@@ -915,18 +918,21 @@ class Digraph(object):
         if Debug:
             print("===>>>> debugging computeByBestChoosing() digraphs methods")
         from copy import copy, deepcopy
-        currG = copy(self)
+        if CoDual:
+            currG = CoDualDigraph(self)
+        else:
+            currG = deepcopy(self)
         remainingActions = [x for x in self.actions]
         rankingByBestChoosing = []
         bestChoice = (self.valuationdomain['med'],None)
         i = 0
-        while len(remainingActions) > 2 and bestChoice[1] != []:
+        while len(remainingActions) > 1 and bestChoice[1] != []:
             i += 1
             currG.actions = remainingActions
-            if CoDual:
-                currGcd = CoDualDigraph(currG)
-            else:
-                currGcd = deepcopy(currG)
+##            if CoDual:
+##                currGcd = CoDualDigraph(currG)
+##            else:
+            currGcd = deepcopy(currG)
             currGcd.computeBestChoiceRecommendation(CoDual=CoDual,Cpp=CppAgrum,Comments=Debug)
             k1 = currGcd.flatChoice(currGcd.bestChoice)
             if Debug:
@@ -951,7 +957,10 @@ class Digraph(object):
                     print('bestChoice[1] != []:', bestChoice[1])
                 rankingByBestChoosing.append(bestChoice)
                 for x in bestChoice[1]:
+                    try:
                         remainingActions.remove(x)
+                    except:
+                        pass
             if Debug:
                 print(i, bestChoice, remainingActions, rankingByBestChoosing)
 
@@ -964,79 +973,7 @@ class Digraph(object):
             if Debug:
                 print(rankingByBestChoosing)
 
-        elif len(remainingActions) == 2:
-            if Debug:
-                print('len(remainingActions) == 2:',remainingActions)
-            i += 1
-            currG.actions = remainingActions
-            if CoDual:
-                currGcd = CoDualDigraph(currG)
-            else:
-                currGcd = copy(currG)
-            currGcd.computeBestChoiceRecommendation(CoDual=CoDual,Cpp=CppAgrum,Comments=Debug)
-            k1 = currGcd.flatChoice(currGcd.bestChoice)
-            if Debug:
-                print('flatening the choice:',currGcd.bestChoice,k1)
-            ck1 = list(set(currG.actions)-set(k1))
-            if len(k1) > 0:
-                if len(ck1) > 0:
-                    k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
-                    if Debug:
-                        print('good', currGcd.bestChoice, k1, k1Outranking)
-                        #bestChoiceCandidates.append((k1Outranking['P+'],k1))
-                        bestChoice = ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 )
-                else:
-                    bestChoice = ( self.valuationdomain['max'], k1 )
-            else:
-                bestChoice = (self.valuationdomain['med'],[])
-            if Debug:
-                print('bestChoice', i, bestChoice)
-
-            if bestChoice[1] != []:
-                if Debug:
-                    print('bestChoice[1] != []:', bestChoice[1])
-                rankingByBestChoosing.append(bestChoice)
-                
-##            bestChoiceCandidates = []
-##            j = 0
-##            for ch in currGcd.goodChoices:
-##                k1 = currGcd.flatChoice(ch[5])
-##                if Debug:
-##                    print(ch[5],k1)
-##                ck1 = list(set(currG.actions)-set(k1))
-##                if len(ck1) > 0:
-##                    j += 1
-##                    k1Outranking = currG.computePairwiseClusterComparison(k1,ck1)
-##                    if Debug:
-##                        print('good', j, ch[5], k1, k1Outranking)
-##                    #bestChoiceCandidates.append((k1Outranking['P+'],k1))
-##                    bestChoiceCandidates.append( ( min(k1Outranking['P+'],-k1Outranking['P-']), k1 ) )
-##                else:
-##                    bestChoiceCandidates.append((self.valuationdomain['max'],k1))
-##
-##            bestChoiceCandidates.sort(reverse=True)
-##            if Debug:
-##                print('bestChoice', i, bestChoice, bestChoiceCandidates)
-##
-##            try:
-##                bestChoice = bestChoiceCandidates[0]
-##            except:
-##                #print 'Error: no best choice in currGcd!'
-##                #currGcd.save('currGcd_errorBest')
-##                bestChoice = (self.valuationdomain['med'],[])
-##            rankingByBestChoosing.append(bestChoice)
-            for x in bestChoice[1]:
-                try:
-                    remainingActions.remove(x)
-                except:
-                    pass
-            if len(remainingActions) > 0:
-                lastBestChoice = (self.valuationdomain['max'],remainingActions)
-                rankingByBestChoosing.append(lastBestChoice)
-            if Debug:
-                print('lastBestChoice', i+1, lastBestChoice)
-
-        elif len(remainingActions) == 1:
+        if len(remainingActions) == 1:
             #### only a singleton choice or a failure quadruple left to rank
             if Debug:
                 print('!!! len(remainingActions) == 1: !!!', remainingActions)
@@ -10303,12 +10240,13 @@ class FusionDigraph(Digraph):
             dg1x = dg1.relation[x]
             dg2x = dg2.relation[x]
             for y in self.actions:
-                if operator == "o-min":
-                    fx[y] = omin(Med,(dg1x[y],dg2x[y]))
-                elif operator == "o-max":
-                    fx[y] = omax(Med,(dg1x[y],dg2x[y]))
+                if x == y:
+                    fx[y] = Med
                 else:
-                    print('Error: invalid epistemic fusion operator %s' % operator)
+                    if operator == "o-min":
+                        fx[y] = omin(Med,(dg1x[y],dg2x[y]))
+                    else:
+                        fx[y] = omax(Med,(dg1x[y],dg2x[y]))
         self.relation = fusionRelation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -13402,12 +13340,34 @@ if __name__ == "__main__":
 
         from time import time
         from digraphsTools import *
+        t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                   numberOfActions=20,seed=105)
+        g = BipolarOutrankingDigraph(t)
+        g.computeRankingByBestChoosing(CoDual=True,Debug=False)
+        print(g.rankingByBestChoosing)
+        g.showRankingByBestChoosing()
+        g.computeRankingByLastChoosing(CoDual=True,Debug=False)
+        print(g.rankingByLastChoosing)
+        g.showRankingByLastChoosing()
+        from transitiveDigraphs import *
+        rbc = RankingByChoosingDigraph(g,CoDual=False,Threading=False)
+        rbc.showRankingByBestChoosing()
+        rbc.showRankingByLastChoosing()
+        rbc.showRankingByChoosing()
+##        print(rbc.rankingByLastChoosing)
+##        rbc.exportGraphViz(fileName='test5',direction='worst')
+##        print(rbc.rankingByBestChoosing)
+##        rbc.exportGraphViz(fileName='test6',direction='best')
+        #wke = KemenyWeakOrder(g,orderLimit=8,Debug=False)
+        #wke.exportGraphViz(fileName='test5')
+        #cop = CopelandOrder(g)
+        #cop.exportGraphViz(fileName='test')
         ##dg = RedhefferDigraph(order=113)
         #g = RandomTournament(order=10,seed=1)
-        g = RandomValuationDigraph(order=20)
+        #g = RandomValuationDigraph(order=20)
         #print(g)
         #g = CirculantDigraph(IndeterminateInnerPart=True)
-        g.computeMaxHoleSize(Comments=True)
+        #g.computeMaxHoleSize(Comments=True)
         
 ##        from outrankingDigraphs import BipolarOutrankingDigraph
 ##        from randomPerfTabs import Random3ObjectivesPerformanceTableau

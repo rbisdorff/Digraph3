@@ -143,7 +143,7 @@ class TransitiveDigraph(Digraph):
         """
         Digraph.exportGraphViz(self, fileName=fileName, bestChoice=bestChoice,worstChoice=worstChoice,Comments=Comments,graphType=graphType,graphSize=graphSize)
 
-    def exportGraphViz(self,digraphClass=None,fileName=None,relation=None,direction='best',\
+    def exportGraphViz(self,fileName=None,digraphClass=None,relation=None,direction='best',\
                        Comments=True,graphType='png',\
                        graphSize='7,7',\
                        fontSize=10):
@@ -162,30 +162,32 @@ class TransitiveDigraph(Digraph):
                 for i in range(1,n):
                     t1 += '%s%s' % ('_',t[i])
             return t1
-                
+        # working on a deepcopy of self
+        digraph = deepcopy(self)
+        
         if direction == 'best':
             try:
-                rankingByChoosing = self.rankingByBestChoosing['result']
+                rankingByChoosing = digraph.rankingByBestChoosing['result']
             except:
-                self.computeRankingByBestChoosing()
-                rankingByChoosing = self.rankingByBestChoosing['result']
+                digraph.computeRankingByBestChoosing()
+                rankingByChoosing = digraph.rankingByBestChoosing['result']
         else:
             try:
-                rankingByChoosing = self.rankingByLastChoosing['result']
+                rankingByChoosing = digraph.rankingByLastChoosing['result']
             except:
-                self.computeRankingByLastChoosing()
-                rankingByChoosing = self.rankingByLastChoosing['result']
+                digraph.computeRankingByLastChoosing()
+                rankingByChoosing = digraph.rankingByLastChoosing['result']
         
         if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
-        actionKeys = [x for x in self.actions]
+        actionKeys = [x for x in digraph.actions]
         n = len(actionKeys)
         if relation == None:
-            relation = deepcopy(self.relation)
-        Med = self.valuationdomain['med']
+            relation = deepcopy(digraph.relation)
+        Med = digraph.valuationdomain['med']
         i = 0
         if fileName == None:
-            name = self.name
+            name = digraph.name
         else:
             name = fileName
         dotName = name+'.dot'
@@ -204,17 +206,17 @@ class TransitiveDigraph(Digraph):
         for x in actionKeys:
             if digraphClass == NormedQuantilesRatingDigraph:
                 #print(digraphClass)
-                if x in self.profiles:
-                    cat = self.profiles[x]['category']
-                    if self.LowerClosed:
-                        nodeName = self.categories[cat]['lowLimit'] + ' -'
+                if x in digraph.profiles:
+                    cat = digraph.profiles[x]['category']
+                    if digraph.LowerClosed:
+                        nodeName = digraph.categories[cat]['lowLimit'] + ' -'
                     else:
-                        nodeName = '- ' +self.categories[cat]['highLimit']
+                        nodeName = '- ' +digraph.categories[cat]['highLimit']
                     node = '%s [shape = "box", fillcolor=lightcoral, style=filled, label = "%s", fontsize=%d];\n'\
                            % (str(x),nodeName,fontSize)           
                 else:
                     try:
-                        nodeName = self.actions[x]['shortName']
+                        nodeName = digraph.actions[x]['shortName']
                     except:
                         nodeName = str(x)
                     node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
@@ -222,7 +224,7 @@ class TransitiveDigraph(Digraph):
                    
             else: # standard TransitiveDigraphs  
                 try:
-                    nodeName = self.actions[x]['shortName']
+                    nodeName = digraph.actions[x]['shortName']
                 except:
                     nodeName = str(x)
                 node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
@@ -240,9 +242,9 @@ class TransitiveDigraph(Digraph):
             fo.write(sameRank)
 
         # save original relation
-        originalRelation = deepcopy(relation)
+        #originalRelation = deepcopy(relation)
         
-        self.closeTransitive(Reverse=True)
+        digraph.closeTransitive(Reverse=True)
         for i in range(k-1):
             ich = rankingByChoosing[i][1]
             for x in ich:
@@ -250,11 +252,11 @@ class TransitiveDigraph(Digraph):
                     jch = rankingByChoosing[j][1]
                     for y in jch:
                         #edge = 'n'+str(i+1)+'-> n'+str(i+2)+' [dir=forward,style="setlinewidth(1)",color=black, arrowhead=normal] ;\n'
-                        if self.relation[x][y] > self.valuationdomain['med']:
+                        if digraph.relation[x][y] > digraph.valuationdomain['med']:
                             arcColor = 'black'
                             edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(x),_safeName(y),1,arcColor)
                             fo.write(edge)
-                        elif self.relation[y][x] > self.valuationdomain['med']:
+                        elif digraph.relation[y][x] > digraph.valuationdomain['med']:
                             arcColor = 'black'
                             edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(y),_safeName(x),1,arcColor)
                             fo.write(edge)
@@ -262,7 +264,7 @@ class TransitiveDigraph(Digraph):
         fo.write('}\n \n')
         fo.close()
         # restore original relation
-        relation = deepcopy(originalRelation)
+        #relation = deepcopy(originalRelation)
         
         commandString = 'dot -Grankdir=TB -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
