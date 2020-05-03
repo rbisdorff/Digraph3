@@ -337,61 +337,76 @@ We are starting this tutorial with generating a randomly [-1;1]-valued (*Normali
 
 .. code-block:: pycon
    :linenos:
+   :name: tutRandValDigraph
+   :caption: Random bipolar-valued digraph instance
 
    >>> from randomDigraphs import RandomValuationDigraph
    >>> dg = RandomValuationDigraph(order=7,Normalized=True)
    >>> dg.save('tutRandValDigraph')
+   >>> dg = Digraph('tutRandValDigraph')
+   >>> dg
+    *------- Digraph instance description ------*
+    Instance class      : Digraph
+    Instance name       : tutRandValDigraph
+    Digraph Order       : 7
+    Digraph Size        : 22
+    Valuation domain    : [-1.00;1.00]
+    Determinateness (%) : 75.24
+    Attributes          : ['name', 'actions', 'order',
+                           'valuationdomain', 'relation',
+                           'gamma', 'notGamma']
+   
 
-With the ``save()`` method (see Line 3) we may keep a backup version for future use of *dg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The :py:class:`Digraph` class now provides some generic methods for exploring a given ``Digraph`` object, like the ``showShort()``, ``showAll()``, ``showRelationTable()`` and the ``showNeighborhoods()`` methods.
+With the ``save()`` method (see :numref:`tutRandValDigraph` Line 3) we may keep a backup version for future use of *dg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The genuine :py:class:`digraphs.Digraph` class constructor may retore the *dg* object from the stored file (Line 4). We may easily inspect the content of *dg* (Lines 5-). The digraph size 22 indicates the number of positively valued arcs. The valuation domain is normalized in the interval *[-1.0; 1.0]* and the mean absolute arc valuation is 0.7524. All :py:class:`digraphs.Digraph` objects contain at least the list of attributes shown here: a *name* (string), a dictionary of *actions* (digraph nodes), an *order* (integer) attribute containing the number of actions, a *valuationdomain* dictionary, a double dictionary *relation* representing the adjency table of the digraph relation, a gamma and a notGamma dictionary describing the direct neighbourhoods od each action.
+
+The :py:class:`Digraph` class now provides some generic methods for exploring a given ``Digraph`` object, like the ``showShort()``, ``showAll()``, ``showRelationTable()`` and the ``showNeighborhoods()`` methods.
 
 .. code-block:: pycon
-   :name: tutRandValDigraph
+   :name: tutRandValDigraphShowAll
    :caption: Example of random valuation digraph
    :linenos:
 
-   >>> dg.showShort()
-    *----- show summary -------------*
-    Digraph          : randomValuationDigraph
+   >>> dg.showAll()
+    *----- show detail -------------*
+     Digraph          : tutRandValDigraph
     *---- Actions ----*
-    ['1', '2', '3', '4', '5', '6', '7']
+     ['1', '2', '3', '4', '5', '6', '7']
     *---- Characteristic valuation domain ----*
-    {'med': Decimal('0.0'), 'hasIntegerValuation': False, 
-    'min': Decimal('-1.0'), 'max': Decimal('1.0')}
-    *--- Connected Components ---*
-    1: ['1', '2', '3', '4', '5', '6', '7']
-   >>> dg.showRelationTable(ReflexiveTerms=False)
+     {'med': Decimal('0.0'), 'hasIntegerValuation': False, 
+      'min': Decimal('-1.0'), 'max': Decimal('1.0')}
     * ---- Relation Table -----
     r(xSy) |  '1'    '2'   '3'  '4'   '5'    '6'  '7'	  
     -------|-------------------------------------------
-    '1'    |   -   -0.48  0.70  0.86  0.30  0.38  0.44	 
-    '2'    | -0.22   -   -0.38  0.50  0.80 -0.54  0.02	 
-    '3'    | -0.42  0.08   -    0.70 -0.56  0.84 -1.00	 
-    '4'    |  0.44 -0.40 -0.62   -    0.04  0.66  0.76	 
-    '5'    |  0.32 -0.48 -0.46  0.64   -   -0.22 -0.52	 
-    '6'    | -0.84  0.00 -0.40 -0.96 -0.18   -   -0.22	 
-    '7'    |  0.88  0.72  0.82  0.52 -0.84  0.04  -	 
-   >>> dg.showNeighborhoods()
-    Neighborhoods observed in digraph 'randomdomValuation' 
-    Gamma     :
-    '1': in => {'5', '7', '4'}, out => {'5', '7', '6', '3', '4'}
-    '2': in => {'7', '3'}, out => {'5', '7', '4'}
-    '3': in => {'7', '1'}, out => {'6', '2', '4'}
-    '4': in => {'5', '7', '1', '2', '3'}, out => {'5', '7', '1', '6'}
-    '5': in => {'1', '2', '4'}, out => {'1', '4'}
-    '6': in => {'7', '1', '3', '4'}, out => set()
-    '7': in => {'1', '2', '4'}, out => {'1', '2', '3', '4', '6'}
-     Not Gamma :
-    '1': in => {'6', '2', '3'}, out => {'2'}
-    '2': in => {'5', '1', '4'}, out => {'1', '6', '3'}
-    '3': in => {'5', '6', '2', '4'}, out => {'5', '7', '1'}
-    '4': in => {'6'}, out => {'2', '3'}
-    '5': in => {'7', '6', '3'}, out => {'7', '6', '2', '3'}
-    '6': in => {'5', '2'}, out => {'5', '7', '1', '3', '4'}
-    '7': in => {'5', '6', '3'}, out => {'5'}
+    '1'    |  0.00 -0.48  0.70  0.86  0.30  0.38  0.44	 
+    '2'    | -0.22  0.00 -0.38  0.50  0.80 -0.54  0.02	 
+    '3'    | -0.42  0.08  0.00  0.70 -0.56  0.84 -1.00	 
+    '4'    |  0.44 -0.40 -0.62  0.00  0.04  0.66  0.76	 
+    '5'    |  0.32 -0.48 -0.46  0.64  0.00 -0.22 -0.52	 
+    '6'    | -0.84  0.00 -0.40 -0.96 -0.18  0.00 -0.22	 
+    '7'    |  0.88  0.72  0.82  0.52 -0.84  0.04  0.00
+    *--- Connected Components ---*
+     1: ['1', '2', '3', '4', '5', '6', '7']
+    Neighborhoods:
+     Gamma:
+     '1': in => {'5', '7', '4'}, out => {'5', '7', '6', '3', '4'}
+     '2': in => {'7', '3'}, out => {'5', '7', '4'}
+     '3': in => {'7', '1'}, out => {'6', '2', '4'}
+     '4': in => {'5', '7', '1', '2', '3'}, out => {'5', '7', '1', '6'}
+     '5': in => {'1', '2', '4'}, out => {'1', '4'}
+     '6': in => {'7', '1', '3', '4'}, out => set()
+     '7': in => {'1', '2', '4'}, out => {'1', '2', '3', '4', '6'}
+     Not Gamma:
+     '1': in => {'6', '2', '3'}, out => {'2'}
+     '2': in => {'5', '1', '4'}, out => {'1', '6', '3'}
+     '3': in => {'5', '6', '2', '4'}, out => {'5', '7', '1'}
+     '4': in => {'6'}, out => {'2', '3'}
+     '5': in => {'7', '6', '3'}, out => {'7', '6', '2', '3'}
+     '6': in => {'5', '2'}, out => {'5', '7', '1', '3', '4'}
+     '7': in => {'5', '6', '3'}, out => {'5'}
     
 .. warning::
     
-    Mind that most Digraph class methods will ignore the reflexive couples by considering that the reflexive relations are **indeterminate**, i.e. the characteristic value :math:`r(x\,S\,x)` for all action *x* is put to the *median*, i.e. *indeterminate* value 0 in this case (see [BIS-2004]_).
+    Mind that most Digraph class methods will ignore the reflexive couples by considering that the reflexive relations are **indeterminate**, i.e. the characteristic value :math:`r(x\,S\,x)` for all action *x* is put to the *median*, i.e. *indeterminate* value 0 in this case (see :numref:`tutRandValDigraphShowAll` Lines 12-18 and [BIS-2004]_).
 
 Graphviz drawings
 .................
@@ -625,6 +640,8 @@ Symmetric and transitive closure in-site constructors are also available (see :n
 
 .. code-block:: pycon
    :linenos:
+   :name: transitiveClosure
+   :caption: Symmetric and transitive closures
 
    >>> dg.save('tutRandValDigraph')
    >>> dg.closeSymmetric()
@@ -637,7 +654,17 @@ Symmetric and transitive closure in-site constructors are also available (see :n
    :align: center
 
    Symmetric and transitive closure of the tutorial random valuation digraph
+
+The :py:meth:`digraphs.Digraph.closeSymmetric` method (see :numref:`transitiveClosure` Line 2), of complexity :math:`\mathcal{O}(n^2)` where *n* denotes the digraph's order, changes, on the one hand, all single pairwise links it may detect into double links by operating a disjunction of the pairwise relations. On the other hand, the :py:meth:`digraphs.Digraph.closeTransitive` method (see :numref:`transitiveClosure` Line 3), implements the *Roy-Warshall* transitive closure algorithm of complexity :math:`\mathcal{O}(n^3)`. ([17]_)
+
+.. note::
+
+   The same :py:meth:`digraphs.Digraph.closeTransitive` method with a *Reverse = True* flag may be readily used for eliminating all transitive arcs from a transitive digraph instance. We make usage of this feature when drawing *Hasse diagrams* of :py:class:`transitiveDigraphs.TransitiveDigraph` objects.
+
+.. warning::
    
+   Mind that by default, the :py:meth:`digraphs.Digraph.closeTransitive` method puts all reflexive links to *valuationdomain['min']*. This behavious may be changed with the *Irreflexive = False* flag.
+
 Strong components
 .................
 
@@ -726,6 +753,8 @@ Let us finally mention some special universal classes of digraphs that are readi
 
 .. code-block:: pycon
    :linenos:
+   :name: completeEmpty
+   :caption: Complete, empty and indeterminate digraphs
 
    >>> from digraphs import CompleteDigraph,EmptyDigraph,
       			 IndeterminateDigraph
@@ -744,13 +773,13 @@ Let us finally mention some special universal classes of digraphs that are readi
    >>> e = EmptyDigraph(order=5)
    >>> e.showRelationTable()
     * ---- Relation Table -----
-      S   |  '1'	  '2'	  '3'	  '4'	  '5'	  
-    ---- -|---------------------------------------
-    '1'   |  -1.00	 -1.00	 -1.00	 -1.00	 -1.00	 
-    '2'   |  -1.00	 -1.00	 -1.00	 -1.00	 -1.00	 
-    '3'   |  -1.00	 -1.00	 -1.00	 -1.00	 -1.00	 
-    '4'   |  -1.00	 -1.00	 -1.00	 -1.00	 -1.00	 
-    '5'   |  -1.00	 -1.00	 -1.00	 -1.00	 -1.00
+      S   |    '1'    '2'    '3'    '4'	   '5'	  
+    ---- -|-----------------------------------
+    '1'   |  -1.00  -1.00  -1.00  -1.00	 -1.00	 
+    '2'   |  -1.00  -1.00  -1.00  -1.00	 -1.00	 
+    '3'   |  -1.00  -1.00  -1.00  -1.00	 -1.00	 
+    '4'   |  -1.00  -1.00  -1.00  -1.00	 -1.00	 
+    '5'   |  -1.00  -1.00  -1.00  -1.00	 -1.00
     >>> e.showNeighborhoods() 
     Neighborhoods:
       Gamma     :
@@ -767,13 +796,13 @@ Let us finally mention some special universal classes of digraphs that are readi
     '4': in => {'1', '2', '5', '3'}, out => {'1', '2', '5', '3'}
    >>> i = IndeterminateDigraph()
     * ---- Relation Table -----
-      S   |  '1'	  '2'	  '3'	  '4'	  '5'	  
-    ------|--------------------------------------
-    '1'   |  0.00	 0.00	 0.00	 0.00	 0.00	 
-    '2'   |  0.00	 0.00	 0.00	 0.00	 0.00	 
-    '3'   |  0.00	 0.00	 0.00	 0.00	 0.00	 
-    '4'   |  0.00	 0.00	 0.00	 0.00	 0.00	 
-    '5'   |  0.00	 0.00	 0.00	 0.00	 0.00	 
+      S   |   '1'   '2'	  '3'	'4'   '5'	  
+    ------|------------------------------
+    '1'   |  0.00  0.00	 0.00  0.00  0.00	 
+    '2'   |  0.00  0.00	 0.00  0.00  0.00	 
+    '3'   |  0.00  0.00	 0.00  0.00  0.00	 
+    '4'   |  0.00  0.00	 0.00  0.00  0.00	 
+    '5'   |  0.00  0.00	 0.00  0.00  0.00	 
    >>> i.showNeighborhoods()
     Neighborhoods:
       Gamma     :
@@ -791,7 +820,7 @@ Let us finally mention some special universal classes of digraphs that are readi
 
 .. note::
 
-   Mind the subtle difference between the neighborhoods of an *empty* and the neighborhoods of an *indeterminate* digraph instance. In the first kind, the neighborhoods are known to be completely *empty* whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes. These two cases illustrate why in the case of a bipolar characteristic valuation domain, we need both a *gamma* **and** a *notGamma* function.
+   Mind the subtle difference between the neighborhoods of an *empty* and the neighborhoods of an *indeterminate* digraph instance . In the first kind, the neighborhoods are known to be completely *empty*  (see :numref:`completeEmpty` Lines 34-38) whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes  (see :numref:`completeEmpty` Lines 57-61). These two cases illustrate why in the case of bipolar-valued digraphs, we may need both a *gamma* **and** a *notGamma* function.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -6572,6 +6601,8 @@ Bibliography
 
 .. [15] The concept of *Condorcet* winner -a generalization of absolute majority winners- proposed by *Condorcet* in 1785, is an early historical example of *initial* digraph kernel (see the tutorial :ref:`Kernel-Tutorial-label`).                
 .. [16] Discrete random variables with a given empirical probability law (here the polls) are provided in the :py:mod:`randomNumbers` module by the :py:class:`randomNumbers.DiscreteRandomVariable` class.
+
+.. [17]  Roy, B. *Transitivité et connexité.* C. R. Acad. Sci. Paris 249, 216-218, 1959. Warshall, S. *A Theorem on Boolean Matrices.* J. ACM 9, 11-12, 1962. 
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
