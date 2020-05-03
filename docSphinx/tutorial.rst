@@ -661,10 +661,6 @@ The :py:meth:`digraphs.Digraph.closeSymmetric` method (see :numref:`transitiveCl
 
    The same :py:meth:`digraphs.Digraph.closeTransitive` method with a *Reverse = True* flag may be readily used for eliminating all transitive arcs from a transitive digraph instance. We make usage of this feature when drawing *Hasse diagrams* of :py:class:`transitiveDigraphs.TransitiveDigraph` objects.
 
-.. warning::
-   
-   Mind that by default, the :py:meth:`digraphs.Digraph.closeTransitive` method puts all reflexive links to *valuationdomain['min']*. This behavious may be changed with the *Irreflexive = False* flag.
-
 Strong components
 .................
 

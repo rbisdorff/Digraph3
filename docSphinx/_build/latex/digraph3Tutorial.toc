@@ -17,7 +17,7 @@
 \contentsline {subsection}{\numberline {2.7}Symmetric and transitive closures}{19}{subsection.2.7}%
 \contentsline {subsection}{\numberline {2.8}Strong components}{21}{subsection.2.8}%
 \contentsline {subsection}{\numberline {2.9}CSV storage}{21}{subsection.2.9}%
-\contentsline {subsection}{\numberline {2.10}Complete, empty and indeterminate digraphs}{23}{subsection.2.10}%
+\contentsline {subsection}{\numberline {2.10}Complete, empty and indeterminate digraphs}{22}{subsection.2.10}%
 \contentsline {section}{\numberline {3}Computing the winner of an election}{24}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Linear voting profiles}{25}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Computing the winner}{26}{subsection.3.2}%

@@ -2623,7 +2623,7 @@ class Digraph(object):
         return n1
 
 
-    def closeTransitive(self,Irreflexive=True,Reverse=False):
+    def closeTransitive(self,Irreflexive=False,Reverse=False):
         """
         Produces the transitive closure of self.relation.
         """
