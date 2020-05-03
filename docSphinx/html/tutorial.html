@@ -373,7 +373,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <span class="go"> strict absence density   : 0.20</span>
 <span class="go"> # components             :  1</span>
 <span class="go"> # strong components      :  1</span>
-<span class="go"> transitivity degree      : 0.48</span>
+<span class="go"> transitivity degree      : 0.24</span>
 <span class="go">                          :  [0, 1, 2, 3, 4, 5]</span>
 <span class="go"> outdegrees distribution  :  [0, 1, 1, 3, 0, 0]</span>
 <span class="go"> indegrees distribution   :  [0, 1, 2, 1, 1, 0]</span>
@@ -2963,13 +2963,14 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <a class="reference internal image-reference" href="_images/rankingTutorial.png"><img alt="_images/rankingTutorial.png" src="_images/rankingTutorial.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 20 </span><span class="caption-text">The <em>strict outranking</em> digraph</span><a class="headerlink" href="#rankingtutorial" title="Permalink to this image">¶</a></p>
 </div>
-<p>The strict outranking relation  <img class="math" src="_images/math/29f438ab7c1eebb4c06eeef486c6f1f1bb61e2a8.png" alt="\succnsim"/> shown here is apparently <em>not transitive</em>: for instance, alternative <em>a8</em> outranks alternative <em>a6</em> and alternative <em>a6</em> outranks <em>a4</em>, however <em>a8</em> does not outrank <em>a4</em> (see <a class="reference internal" href="#rankingtutorial"><span class="std std-numref">Fig. 20</span></a>). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph <em>gcd</em>.</p>
+<p>The strict outranking relation  <img class="math" src="_images/math/29f438ab7c1eebb4c06eeef486c6f1f1bb61e2a8.png" alt="\succnsim"/> shown here is apparently <em>not transitive</em>: for instance, alternative <em>a8</em> outranks alternative <em>a6</em> and alternative <em>a6</em> outranks <em>a4</em>, however <em>a8</em> does not outrank <em>a4</em> (see <a class="reference internal" href="#rankingtutorial"><span class="std std-numref">Fig. 20</span></a>). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the difference between the number of outranking arcs and the number of transitive arcs over the difference of the number of arcs of the transitive closure minus the transitive arcs of the digraph <em>gcd</em>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> Transitivity degree of graph</span>
-<span class="go"> &lt;converse-dual_rel_randomCBperftab&gt;: 0.46</span>
+<span class="go"> &lt;converse-dual_rel_randomCBperftab&gt;: 0.24</span>
+<span class="go"> 0.23529411764705882</span>
 </pre></div>
 </div>
-<p>The strict outranking relation is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.</p>
+<p>With only 24% of the required transitive arcs, the strict outranking relation here is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -7567,10 +7568,10 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <span class="go"> []                 # no chordless circuits detected</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.2f%%</span><span class="s1">&#39;</span> <span class="o">%</span>\
 <span class="go">                  (rd.computeTransitivityDegree()*100))</span>
-<span class="go"> Transitivity degree: 48.39%</span>
+<span class="go"> Transitivity degree: 27.27%</span>
 </pre></div>
 </td></tr></table></div>
-<p>The given digraph instance is neither asymmetric (a3 &lt;–&gt; a6) nor symmetric (a2 –&gt; a1, a1 -/&gt; a2); there are no chordless circuits (see Line 5 above); and, the digraph is not transitive (a5 -&gt; a2 -&gt; a1, but a5 -/&gt; a1). More than half of the required transitive closures are missing (see Line 8).</p>
+<p>The given digraph instance is neither asymmetric (a3 &lt;–&gt; a6) nor symmetric (a2 –&gt; a1, a1 -/&gt; a2); there are no chordless circuits (see Line 5 above); and, the digraph is not transitive (a5 -&gt; a2 -&gt; a1, but a5 -/&gt; a1). More than two third of the required transitive closure is missing (see Line 8 above).</p>
 <p>Now, we know that its potential prekernels must be among its set of maximal independent choices.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2

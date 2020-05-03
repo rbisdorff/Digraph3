@@ -269,7 +269,7 @@ Some simple methods are readly applicable to this instantiated Digraph object *d
     strict absence density   : 0.20
     # components             :  1
     # strong components      :  1
-    transitivity degree      : 0.48
+    transitivity degree      : 0.24
 			     :  [0, 1, 2, 3, 4, 5]
     outdegrees distribution  :  [0, 1, 1, 3, 0, 0]
     indegrees distribution   :  [0, 1, 2, 1, 1, 0]
@@ -2214,13 +2214,14 @@ To estimate how *difficult* this ranking problem here may be, we may have a look
 
    The *strict outranking* digraph	   
 
-The strict outranking relation  :math:`\succnsim` shown here is apparently *not transitive*: for instance, alternative *a8* outranks alternative *a6* and alternative *a6* outranks *a4*, however *a8* does not outrank *a4* (see :numref:`rankingTutorial`). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the number of outranking arcs over the number of arcs of the transitive closure of the digraph *gcd*.
+The strict outranking relation  :math:`\succnsim` shown here is apparently *not transitive*: for instance, alternative *a8* outranks alternative *a6* and alternative *a6* outranks *a4*, however *a8* does not outrank *a4* (see :numref:`rankingTutorial`). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the difference between the number of outranking arcs and the number of transitive arcs over the difference of the number of arcs of the transitive closure minus the transitive arcs of the digraph *gcd*.
 
     >>> gcd.computeTransitivityDegree(Comments=True)
      Transitivity degree of graph
-     <converse-dual_rel_randomCBperftab>: 0.46
+     <converse-dual_rel_randomCBperftab>: 0.24
+     0.23529411764705882
     
-The strict outranking relation is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
+With only 24% of the required transitive arcs, the strict outranking relation here is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
     
 .. code-block:: pycon
 
@@ -5397,9 +5398,9 @@ The random digraph shown in :numref:`randomLaterality` above has no apparent spe
     []                 # no chordless circuits detected
    >>> print('Transitivity degree: %.2f%%' %\
                      (rd.computeTransitivityDegree()*100))
-    Transitivity degree: 48.39%
+    Transitivity degree: 27.27%
 
-The given digraph instance is neither asymmetric (a3 <--> a6) nor symmetric (a2 --> a1, a1 -/> a2); there are no chordless circuits (see Line 5 above); and, the digraph is not transitive (a5 -> a2 -> a1, but a5 -/> a1). More than half of the required transitive closures are missing (see Line 8).
+The given digraph instance is neither asymmetric (a3 <--> a6) nor symmetric (a2 --> a1, a1 -/> a2); there are no chordless circuits (see Line 5 above); and, the digraph is not transitive (a5 -> a2 -> a1, but a5 -/> a1). More than two third of the required transitive closure is missing (see Line 8 above).
 
 Now, we know that its potential prekernels must be among its set of maximal independent choices. 
 
