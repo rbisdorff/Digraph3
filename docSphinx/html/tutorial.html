@@ -1652,42 +1652,10 @@ the current working directory a <code class="code docutils literal notranslate">
 17
 18
 19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go"> &gt;&gt;&gt; cdg.showRankingByChoosing()</span>
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="go"> &gt;&gt;&gt; cdg.showRankingByChoosing()</span>
 <span class="go">  Error: You must first run</span>
 <span class="go">   self.computeRankingByChoosing(CoDual=False(default)|True) !</span>
 <span class="go"> &gt;&gt;&gt; cdg.computeRankingByChoosing()</span>
-<span class="go">  {&#39;CoDual&#39;: False,</span>
-<span class="go">   &#39;result&#39;: [</span>
-<span class="go">   ((Decimal(&#39;475.2857142857142857142857143&#39;), [&#39;a06&#39;]),</span>
-<span class="go">    (Decimal(&#39;682.8571428571428571428571429&#39;), [&#39;a02&#39;])),</span>
-<span class="go">   ((Decimal(&#39;349.3333333333333333333333333&#39;), [&#39;a11&#39;]),</span>
-<span class="go">    (Decimal(&#39;415.8333333333333333333333333&#39;), [&#39;a05&#39;])),</span>
-<span class="go">   ((Decimal(&#39;278.4444444444444444444444444&#39;), [&#39;a07&#39;, &#39;a08&#39;]),</span>
-<span class="go">    (Decimal(&#39;353.4&#39;), [&#39;a10&#39;])),</span>
-<span class="go">   ((Decimal(&#39;265.4285714285714285714285714&#39;), [&#39;a03&#39;]),</span>
-<span class="go">    (Decimal(&#39;170.5714285714285714285714286&#39;), [&#39;a09&#39;])),</span>
-<span class="go">   ((Decimal(&#39;145.2&#39;), [&#39;a01&#39;]),</span>
-<span class="go">    (Decimal(&#39;130.0&#39;), [&#39;a15&#39;])),</span>
-<span class="go">   ((Decimal(&#39;104.0&#39;), [&#39;a13&#39;]),</span>
-<span class="go">    (Decimal(&#39;104.6666666666666666666666667&#39;), [&#39;a14&#39;])),</span>
-<span class="go">   ((Decimal(&#39;16.0&#39;), [&#39;a04&#39;]),</span>
-<span class="go">    (Decimal(&#39;16.0&#39;), [&#39;a12&#39;]))]}</span>
 <span class="go"> &gt;&gt;&gt; cdg.showRankingByChoosing()</span>
 <span class="go">  Ranking by Choosing and Rejecting</span>
 <span class="go">   1st first ranked [&#39;a06&#39;] (475.29)</span>
@@ -1707,13 +1675,13 @@ the current working directory a <code class="code docutils literal notranslate">
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Before showing the <em>ranking-by-choosing</em> result, we have to compute the iterated bipolar selection procedure (see <a class="reference internal" href="#rankingbychoosing"><span class="std std-numref">Listing 20</span></a> Line 2). The first selection concerns <em>a06</em> (first) and <em>a02</em> (last), followed by <em>a11</em> (first) opposed to <em>a05</em> (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely <em>[a04, a12]</em> (see Lines 29-30). The bracketed numbers, following the reiterated <em>first ranked</em> and <em>last ranked</em> candidates, indicate the average majority margin with which the <em>i</em>-th <em>first ranked</em> candidate(s), respectively the <em>i</em>-th <em>last ranked</em> candidate, is beating, resp. is beaten by, the remaining candidates at step <em>i</em>.</p>
-<p>Notice furthermore the first ranked candidates at iteration step 3 (see <a class="reference internal" href="#rankingbychoosing"><span class="std std-numref">Listing 20</span></a> Line 25), namely the pair <em>[a07, a08]</em>. Both candidates represent indeed conjointly the <em>first ranked</em> choice. We obtain here hence a <em>weak ranking</em>, i.e. a ranking with a tie.</p>
+<p>Before showing the <em>ranking-by-choosing</em> result, we have to compute the iterated bipolar selection procedure (see <a class="reference internal" href="#rankingbychoosing"><span class="std std-numref">Listing 20</span></a> Line 2). The first selection concerns <em>a06</em> (first) and <em>a02</em> (last), followed by <em>a11</em> (first) opposed to <em>a05</em> (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely <em>[a04, a12]</em> (see Lines 13-14). The bracketed numbers, following the reiterated <em>first ranked</em> and <em>last ranked</em> candidates, indicate the average majority margin with which the <em>i</em>-th <em>first ranked</em> candidate(s), respectively the <em>i</em>-th <em>last ranked</em> candidate, is beating, resp. is beaten by, the remaining candidates at step <em>i</em>.</p>
+<p>Notice furthermore the first ranked candidates at iteration step 3 (see <a class="reference internal" href="#rankingbychoosing"><span class="std std-numref">Listing 20</span></a> Line 9), namely the pair <em>[a07, a08]</em>. Both candidates represent indeed conjointly the <em>first ranked</em> choice. We obtain here hence a <em>weak ranking</em>, i.e. a ranking with a tie.</p>
 <p>Let us mention that the <em>instant-run-off</em> procedure, we used before (see <a class="reference internal" href="#uninominalwinner"><span class="std std-numref">Listing 18</span></a> Line 3), when operated with a <em>Comments=True</em> parameter setting, will deliver a more or less similar <em>reversed</em> linear <em>ordering-by-rejecting</em> result, namely [<em>a02</em>, <em>a10</em>, <em>a14</em>, <em>a05</em>, <em>a09</em>, <em>a13</em>, <em>a12</em>, <em>a15</em>, <em>a04</em>, <em>a01</em>, <em>a08</em>, <em>a03</em>, <em>a07</em>, <em>a11</em>, <em>a06</em>], ordered from the <em>last</em> to the <em>first</em> choice.</p>
-<p>Remarkable about both these <em>ranking-by-choosing</em> or <em>ordering-by-rejecting</em> results is the fact that the random voting behaviour, simulated here with the help of two discrete random variables (<a class="footnote-reference brackets" href="#id116" id="id16">16</a>), defined respectively by the two party polls, is rendering a ranking that is more or less in accordance with the simulated balance of the polls: -<em>Party_1</em> supporters : 460;  <em>Party_2</em> supporters: 436 (see <a class="reference internal" href="#rankingbychoosing"><span class="std std-numref">Listing 20</span></a> Lines 26-40 third column). Despite a random voting behaviour per voter, the given polls apparently show a <em>very strong incidence</em> on the eventual election result. In order to avoid any manipulation of the election outcome, public media are therefore in some countries not allowed to publish polls during the last weeks before a general election.</p>
+<p>Remarkable about both these <em>ranking-by-choosing</em> or <em>ordering-by-rejecting</em> results is the fact that the random voting behaviour, simulated here with the help of two discrete random variables (<a class="footnote-reference brackets" href="#id116" id="id16">16</a>), defined respectively by the two party polls, is rendering a ranking that is more or less in accordance with the simulated balance of the polls: -<em>Party_1</em> supporters : 460;  <em>Party_2</em> supporters: 436 (see <a class="reference internal" href="#linearvotingprofilewithpolls"><span class="std std-numref">Listing 17</span></a> Lines 26-40 third column). Despite a random voting behaviour per voter, the given polls apparently show a <em>very strong incidence</em> on the eventual election result. In order to avoid any manipulation of the election outcome, public media are therefore in some countries not allowed to publish polls during the last weeks before a general election.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Mind that the specific <em>ranking-by-choosing</em> procedure, we use here on the <em>Condorcet</em> digraph, operates the selection procedure by extracting at each step <em>initial</em> and <em>terminal</em> kernels, i.e. NP-hard operational problems (see tutorial <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a> and <a class="reference internal" href="#bis-1999" id="id17"><span>[BIS-1999]</span></a>); A technique that does not allow in general to tackle voting profiles with much more than 20 candidates. The tutorial on <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.</p>
+<p>Mind that the specific <em>ranking-by-choosing</em> procedure, we use here on the <em>Condorcet</em> digraph, operates the selection procedure by extracting at each step <em>initial</em> and <em>terminal</em> kernels, i.e. NP-hard operational problems (see tutorial <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a> and <a class="reference internal" href="#bis-1999" id="id17"><span>[BIS-1999]</span></a>); A technique that does not allow in general to tackle voting profiles with much more than 30 candidates. The tutorial on <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.</p>
 </div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 </div>

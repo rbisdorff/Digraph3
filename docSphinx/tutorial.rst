@@ -1230,22 +1230,6 @@ With the same *bipolar* -*first ranked* and *last ranked* candidate- selection p
      Error: You must first run
       self.computeRankingByChoosing(CoDual=False(default)|True) !
     >>> cdg.computeRankingByChoosing()
-     {'CoDual': False,
-      'result': [
-      ((Decimal('475.2857142857142857142857143'), ['a06']),
-       (Decimal('682.8571428571428571428571429'), ['a02'])),
-      ((Decimal('349.3333333333333333333333333'), ['a11']),
-       (Decimal('415.8333333333333333333333333'), ['a05'])),
-      ((Decimal('278.4444444444444444444444444'), ['a07', 'a08']),
-       (Decimal('353.4'), ['a10'])),
-      ((Decimal('265.4285714285714285714285714'), ['a03']),
-       (Decimal('170.5714285714285714285714286'), ['a09'])),
-      ((Decimal('145.2'), ['a01']),
-       (Decimal('130.0'), ['a15'])),
-      ((Decimal('104.0'), ['a13']),
-       (Decimal('104.6666666666666666666666667'), ['a14'])),
-      ((Decimal('16.0'), ['a04']),
-       (Decimal('16.0'), ['a12']))]} 
     >>> cdg.showRankingByChoosing()
      Ranking by Choosing and Rejecting
       1st first ranked ['a06'] (475.29)
@@ -1263,17 +1247,17 @@ With the same *bipolar* -*first ranked* and *last ranked* candidate- selection p
         2nd last ranked ['a05'] (415.83)
       1st last ranked ['a02'] (682.86)
 
-Before showing the *ranking-by-choosing* result, we have to compute the iterated bipolar selection procedure (see :numref:`rankingByChoosing` Line 2). The first selection concerns *a06* (first) and *a02* (last), followed by *a11* (first) opposed to *a05* (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely *[a04, a12]* (see Lines 29-30). The bracketed numbers, following the reiterated *first ranked* and *last ranked* candidates, indicate the average majority margin with which the *i*-th *first ranked* candidate(s), respectively the *i*-th *last ranked* candidate, is beating, resp. is beaten by, the remaining candidates at step *i*.
+Before showing the *ranking-by-choosing* result, we have to compute the iterated bipolar selection procedure (see :numref:`rankingByChoosing` Line 2). The first selection concerns *a06* (first) and *a02* (last), followed by *a11* (first) opposed to *a05* (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely *[a04, a12]* (see Lines 13-14). The bracketed numbers, following the reiterated *first ranked* and *last ranked* candidates, indicate the average majority margin with which the *i*-th *first ranked* candidate(s), respectively the *i*-th *last ranked* candidate, is beating, resp. is beaten by, the remaining candidates at step *i*.
 
-Notice furthermore the first ranked candidates at iteration step 3 (see :numref:`rankingByChoosing` Line 25), namely the pair *[a07, a08]*. Both candidates represent indeed conjointly the *first ranked* choice. We obtain here hence a *weak ranking*, i.e. a ranking with a tie.
+Notice furthermore the first ranked candidates at iteration step 3 (see :numref:`rankingByChoosing` Line 9), namely the pair *[a07, a08]*. Both candidates represent indeed conjointly the *first ranked* choice. We obtain here hence a *weak ranking*, i.e. a ranking with a tie.
 
 Let us mention that the *instant-run-off* procedure, we used before (see :numref:`uninominalWinner` Line 3), when operated with a *Comments=True* parameter setting, will deliver a more or less similar *reversed* linear *ordering-by-rejecting* result, namely [*a02*, *a10*, *a14*, *a05*, *a09*, *a13*, *a12*, *a15*, *a04*, *a01*, *a08*, *a03*, *a07*, *a11*, *a06*], ordered from the *last* to the *first* choice.
 
-Remarkable about both these *ranking-by-choosing* or *ordering-by-rejecting* results is the fact that the random voting behaviour, simulated here with the help of two discrete random variables ([16]_), defined respectively by the two party polls, is rendering a ranking that is more or less in accordance with the simulated balance of the polls: -*Party_1* supporters : 460;  *Party_2* supporters: 436 (see :numref:`rankingByChoosing` Lines 26-40 third column). Despite a random voting behaviour per voter, the given polls apparently show a *very strong incidence* on the eventual election result. In order to avoid any manipulation of the election outcome, public media are therefore in some countries not allowed to publish polls during the last weeks before a general election.
+Remarkable about both these *ranking-by-choosing* or *ordering-by-rejecting* results is the fact that the random voting behaviour, simulated here with the help of two discrete random variables ([16]_), defined respectively by the two party polls, is rendering a ranking that is more or less in accordance with the simulated balance of the polls: -*Party_1* supporters : 460;  *Party_2* supporters: 436 (see :numref:`linearVotingProfileWithPolls` Lines 26-40 third column). Despite a random voting behaviour per voter, the given polls apparently show a *very strong incidence* on the eventual election result. In order to avoid any manipulation of the election outcome, public media are therefore in some countries not allowed to publish polls during the last weeks before a general election.
 
 .. note::
 
-   Mind that the specific *ranking-by-choosing* procedure, we use here on the *Condorcet* digraph, operates the selection procedure by extracting at each step *initial* and *terminal* kernels, i.e. NP-hard operational problems (see tutorial :ref:`Kernel-Tutorial-label` and [BIS-1999]_); A technique that does not allow in general to tackle voting profiles with much more than 20 candidates. The tutorial on :ref:`Ranking-Tutorial-label` provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.  
+   Mind that the specific *ranking-by-choosing* procedure, we use here on the *Condorcet* digraph, operates the selection procedure by extracting at each step *initial* and *terminal* kernels, i.e. NP-hard operational problems (see tutorial :ref:`Kernel-Tutorial-label` and [BIS-1999]_); A technique that does not allow in general to tackle voting profiles with much more than 30 candidates. The tutorial on :ref:`Ranking-Tutorial-label` provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.  
 
 Back to :ref:`Content Table <Tutorial-label>`
 
