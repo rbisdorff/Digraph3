@@ -103,7 +103,7 @@ def testIConstructorLowerOpenCategories():
 def testLowerOpenClosedCategories():
     print('*-------- Testing lowerClosedOpen Categories -------')
     t = RandomCBPerformanceTableau()
-    t.save('test')
+    t.save(fileName='test')
     s = SortingDigraph(t,LowerClosed=True)
     s.showSorting(Reverse=True)
     s1 = SortingDigraph('test',LowerClosed=False)

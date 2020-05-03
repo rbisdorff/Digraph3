@@ -141,9 +141,9 @@ class SortingDigraph(BipolarOutrankingDigraph):
                                                numberOfCriteria=13)
         elif isinstance(argPerfTab,str):
             try:
-                perfTab = XMCDA2PerformanceTableau(argPerfTab)
+                perfTab = PerformanceTableau(argPerfTab)
             except:
-                print('Performance Tableau not in XMCDA2 format!')
+                print('file %s not in perfTabs.PerformanceTableauformat!')
                 perfTab = None
         else:
             perfTab = argPerfTab

@@ -181,9 +181,9 @@
                                                <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">,</span><span class="nb">str</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">perfTab</span> <span class="o">=</span> <span class="n">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">)</span>
+                <span class="n">perfTab</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Performance Tableau not in XMCDA2 format!&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;file </span><span class="si">%s</span><span class="s1"> not in perfTabs.PerformanceTableauformat!&#39;</span><span class="p">)</span>
                 <span class="n">perfTab</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">perfTab</span> <span class="o">=</span> <span class="n">argPerfTab</span>
