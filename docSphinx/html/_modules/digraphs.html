@@ -2612,26 +2612,32 @@
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="c1">#actionsList = [x for x in self.actions]</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
-        <span class="n">relationOrig</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
+        <span class="n">origRelation</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">()</span>
-        <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
-        <span class="n">n0</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
-        <span class="n">n1</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+        <span class="n">closedRelation</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">openedRelation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
+        <span class="n">nopen</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">nclosed</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">norig</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-            <span class="n">rox</span> <span class="o">=</span> <span class="n">relationOrig</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
-            <span class="n">rx</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="n">rorigx</span> <span class="o">=</span> <span class="n">origRelation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="n">rclosedx</span> <span class="o">=</span> <span class="n">closedRelation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="n">ropenx</span> <span class="o">=</span> <span class="n">openedRelation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">rox</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
-                    <span class="n">n0</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="k">if</span> <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
-                    <span class="n">n1</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">relationOrig</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">n1</span> <span class="o">&gt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">):</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="n">n0</span><span class="o">/</span><span class="n">n1</span>
+                <span class="k">if</span> <span class="n">ropenx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">nopen</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">rclosedx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">nclosed</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">rorigx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">norig</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">origRelation</span><span class="p">)</span>
+        <span class="c1">#self.gamma = self.gammaSets()</span>
+        <span class="c1">#self.notGamma = self.notGammaSets()</span>
+        <span class="k">if</span> <span class="n">nclosed</span> <span class="o">&gt;</span> <span class="n">nopen</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="p">(</span><span class="n">norig</span><span class="o">-</span><span class="n">nopen</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">nclosed</span><span class="o">-</span><span class="n">nopen</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree of graph &lt;</span><span class="si">%s</span><span class="s1">&gt; : </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">res</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">res</span></div>

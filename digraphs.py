@@ -2572,26 +2572,32 @@ class Digraph(object):
         Med = self.valuationdomain['med']
         #actionsList = [x for x in self.actions]
         actions = self.actions
-        relationOrig = copy.deepcopy(self.relation)
+        origRelation = copy.deepcopy(self.relation)
         self.closeTransitive()
-        relation = self.relation
-        n0 = Decimal('0')
-        n1 = Decimal('0')
+        closedRelation = copy.deepcopy(self.relation)
+        self.closeTransitive(Reverse=True)
+        openedRelation = self.relation
+        nopen = 0
+        nclosed = 0
+        norig = 0
         for x in actions:
-            rox = relationOrig[x]
-            rx = relation[x]
+            rorigx = origRelation[x]
+            rclosedx = closedRelation[x]
+            ropenx = openedRelation[x]
             for y in actions:
-                if rox[y] > Med:
-                    n0 += 1
-                if rx[y] > Med:
-                    n1 += 1
-        self.relation = copy.deepcopy(relationOrig)
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-        if n1 > Decimal('0'):
-            res = n0/n1
+                if ropenx[y] > Med:
+                    nopen += 1
+                if rclosedx[y] > Med:
+                    nclosed += 1
+                if rorigx[y] > Med:
+                    norig += 1
+        self.relation = copy.deepcopy(origRelation)
+        #self.gamma = self.gammaSets()
+        #self.notGamma = self.notGammaSets()
+        if nclosed > nopen:
+            res = (norig-nopen)/(nclosed-nopen)
         else:
-            res = Decimal('0')
+            res = 0.0
         if Comments:
             print('Transitivity degree of graph <%s> : %.2f' %(self.name,res))
         return res
@@ -2612,8 +2618,8 @@ class Digraph(object):
                 if rxy > Med:
                     n1 += 1
         self.relation = copy.deepcopy(relationOrig)
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
+        #self.gamma = self.gammaSets()
+        #self.notGamma = self.notGammaSets()
         return n1
 
 
