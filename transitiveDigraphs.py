@@ -243,7 +243,7 @@ class TransitiveDigraph(Digraph):
 
         # save original relation
         #originalRelation = deepcopy(relation)
-        
+        #digraph.closeTransitive(Reverse=False)
         digraph.closeTransitive(Reverse=True)
         for i in range(k-1):
             ich = rankingByChoosing[i][1]

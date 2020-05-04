@@ -2631,18 +2631,40 @@ class Digraph(object):
         actions = set(self.actions)
         relation = deepcopy(self.relation)
         Med = self.valuationdomain['med']
-        for x in actions:
-            for y in actions:
-                for z in actions:
-                    relation[y][z] =\
-                    max(relation[y][z],min(relation[y][x],relation[x][z]))
-        if Reverse:
-            for x in actions:
-                for y in actions:
-                    for z in actions:
-                        if min(relation[y][x],relation[x][z]) > Med \
-                            and relation[y][z] > Med:
-                            relation[y][z] = -relation[y][z]
+        if not Reverse:
+            Change = True
+            i = 0
+            while Change:
+                Change = False
+                i += 1
+                for x in actions:
+                    for y in actions:
+                        for z in actions:
+                            if min(relation[y][x],relation[x][z]) > Med \
+                                  and relation[y][z] < Med:
+                                relation[y][z] = -relation[y][z]
+                                Change = True
+                            #relation[y][z] =\
+                        #max(relation[y][z],min(relation[y][x],relation[x][z]))
+            if Comments:
+                print('iterations: %d' %i )
+        elif Reverse:
+            Change = True
+            i = 0
+            while Change:
+                Change = False
+                i += 1
+                for x in actions:
+                    for y in actions:
+                        for z in actions:
+                            if min(relation[y][x],relation[x][z]) > Med \
+                                and relation[y][z] > Med:
+                                relation[y][z] = -relation[y][z]
+                                Change = True
+                        #relation[y][z] =\
+                    #-(max(relation[y][z],min(relation[y][x],relation[x][z])))
+            if Comments:
+                print('reverse iterations: %d' %i)
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()

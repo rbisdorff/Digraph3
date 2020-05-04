@@ -283,7 +283,7 @@
 
         <span class="c1"># save original relation</span>
         <span class="c1">#originalRelation = deepcopy(relation)</span>
-        
+        <span class="c1">#digraph.closeTransitive(Reverse=False)</span>
         <span class="n">digraph</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
             <span class="n">ich</span> <span class="o">=</span> <span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
