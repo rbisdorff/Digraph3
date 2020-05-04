@@ -1178,7 +1178,7 @@ The performance evaluations of each decision alternative on each criterion are g
         fo.write(self.computeAllQuantiles(Sorted=Sorted,Comments=False))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
         
     def computeAllQuantiles(self,Sorted=True,Comments=False):
         """
@@ -1651,7 +1651,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                            title=title))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
 
     def _htmlCriteriaView(self,criteria=None,Sorted=False,\
                          ndigits=2,title='Family of Criteria'):
@@ -1757,8 +1757,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                            title=title))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
-           
+        webbrowser.open(url,new=2)
             
     def _htmlPerformanceTableau(self,actions=None,\
                                fromIndex=None,\
@@ -2390,7 +2389,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                              Debug=Debug))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
 
     def _htmlPerformanceHeatmap(self,argCriteriaList=None,
                                 argActionsList=None,

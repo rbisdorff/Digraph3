@@ -1737,7 +1737,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write(self.showPairwiseComparison(a,b,isReturningHTML=True))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
 
     def showPairwiseOutrankings(self,a,b,\
                                Debug=False,isReturningHTML=False,\
@@ -1766,8 +1766,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write(self.showPairwiseComparison(b,a,isReturningHTML=True))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
-
+        webbrowser.open(url,new=2)
 
     def showShort(self):
         """

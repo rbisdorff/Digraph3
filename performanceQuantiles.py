@@ -909,10 +909,7 @@ The number of so far observed evaluations per criteria are the following:
                                            title=title))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
-           
-            
-
+        webbrowser.open(url,new=2)
 
     def showLimitingQuantiles(self,ByObjectives=False,Sorted=False,ndigits=2):
         """

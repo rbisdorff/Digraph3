@@ -3433,8 +3433,7 @@ class Digraph(object):
                                         relationName=relationName))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
-        
+        webbrowser.open(url,new=2)
         
     def _htmlRelationMap(self,tableTitle='Relation Map',\
                           relationName='r(x R y)',\
@@ -3576,8 +3575,7 @@ class Digraph(object):
                                         ReflexiveTerms=ReflexiveTerms))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
-        
+        webbrowser.open(url,new=2)     
         
     def _htmlRelationTable(self,tableTitle='Valued Relation Table',
                            relation=None,
@@ -7444,8 +7442,7 @@ class Digraph(object):
             Cpp=Cpp))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
-
+        webbrowser.open(url,new=2)
 
     def htmlBestChoiceRecommendation(self,pageTitle=None,
                                           ChoiceVector=False,

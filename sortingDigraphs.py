@@ -3017,7 +3017,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                                               Comments=True))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
 
 
     def showHTMLSorting(self,Reverse=True):
@@ -3030,7 +3030,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         fo.write(self.showSorting(Reverse=Reverse,isReturningHTML=True))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
 
 
     def showSorting(self,Reverse=True,isReturningHTML=False,Debug=False):
@@ -4190,7 +4190,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                                              Debug=Debug))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
 
     def showHTMLQuantilesSorting(self,Descending=True,strategy='average'):
         """
@@ -4210,7 +4210,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                                               Comments=True))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
 
     def showOrderedRelationTable(self,relation=None,direction="decreasing"):
         """

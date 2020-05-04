@@ -1032,7 +1032,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                                            title=title))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
            
             
     def _htmlPerformanceTable(self,actions=None,isSorted=False,\

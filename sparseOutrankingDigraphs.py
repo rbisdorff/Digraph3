@@ -359,7 +359,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
                                         relationName=relationName))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
 
     def showHTMLRelationTable(self):
         """

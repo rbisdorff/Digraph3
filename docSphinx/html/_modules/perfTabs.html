@@ -1218,7 +1218,7 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computeAllQuantiles</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="n">Sorted</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
-        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
         
 <div class="viewcode-block" id="PerformanceTableau.computeAllQuantiles"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeAllQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">computeAllQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1691,7 +1691,7 @@
                                            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
-        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_htmlCriteriaView</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteria</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                          <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Family of Criteria&#39;</span><span class="p">):</span>
@@ -1797,8 +1797,7 @@
                                            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
-        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
-           
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
             
     <span class="k">def</span> <span class="nf">_htmlPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                                <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
@@ -2430,7 +2429,7 @@
                                              <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
-        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open_new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_htmlPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                 <span class="n">argActionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
