@@ -2623,27 +2623,56 @@ class Digraph(object):
         return n1
 
 
-    def closeTransitive(self,Irreflexive=False,Reverse=False):
+    def closeTransitive(self,Irreflexive=False,Reverse=False,Comments=False):
         """
         Produces the transitive closure of self.relation.
         """
-        if Reverse:
-            self.closeTransitive(Irreflexive=Irreflexive)
+##        if Reverse:
+##            self.closeTransitive(Irreflexive=Irreflexive)
         from copy import deepcopy
         actions = set(self.actions)
         relation = deepcopy(self.relation)
-        if Irreflexive:
-            for x in actions:
-                relation[x][x] = self.valuationdomain['min']        
-        for x in actions:
-            for y in actions:
-                for z in actions:
-                    if Reverse:
-                        if min(relation[y][x],relation[x][z]) > self.valuationdomain['med']:
-                            relation[y][z] = self.valuationdomain['min']
-                    else:
-                        relation[y][z] = max(relation[y][z],min(relation[y][x],relation[x][z]))
-        self.relation = deepcopy(relation)
+        Med = self.valuationdomain['med']
+##        if Irreflexive:
+##            for x in actions:
+##                relation[x][x] = self.valuationdomain['min']
+        if not Reverse:
+            Change=True
+            i = 0
+            while Change:
+                i +=1
+                Change = False
+                for x in actions:
+                    for y in actions:
+                        for z in actions:
+                            if min(relation[y][x],relation[x][z]) > Med \
+                                and relation[y][z] < Med:
+                                    relation[y][z] = min(relation[y][x],relation[x][z])
+                                    Change = True
+            if Comments:
+                print('iterations: %d' % i)
+        elif Reverse:
+            Change = True
+            i = 0
+            while Change:
+                i += 1
+                Change = False
+                for x in actions:
+                    for y in actions:
+                        for z in actions:
+                            if min(relation[y][x],relation[x][z]) > Med \
+                                and relation[y][z] > Med:
+                                    relation[y][z] = -relation[y][z]
+                                    Change = True
+            if Comments:
+                print('reverse iterations: %d' % i)
+ 
+##                    if Reverse:                        
+##                        if min(relation[y][x],relation[x][z]) > self.valuationdomain['med']:
+##                            relation[y][z] = min(-relation[y][z],relation[y][z])
+##                    else:
+##                        relation[y][z] = max(relation[y][z],min(relation[y][x],relation[x][z]))
+        self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
@@ -13346,7 +13375,7 @@ if __name__ == "__main__":
         from time import time
         from digraphsTools import *
         t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=20,seed=105)
+                                   numberOfActions=50,seed=105)
         g = BipolarOutrankingDigraph(t)
         g.computeRankingByBestChoosing(CoDual=True,Debug=False)
         print(g.rankingByBestChoosing)
