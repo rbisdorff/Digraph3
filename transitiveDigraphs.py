@@ -37,7 +37,7 @@ class TransitiveDigraph(Digraph):
         """
         if rankingByChoosing == None:
             try:
-                rankingByChoosing = self.rankingByBestChoosing['result']
+                rankingByChoosing = self.rankingByChoosing['result']
             except:
                 #print('Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !')
                 self.computeRankingByChoosing()
@@ -95,11 +95,11 @@ class TransitiveDigraph(Digraph):
                 print('  %s Ambiguous Choice %s' % (space,list(iach)))
             print(' %s%s%s last ranked %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))        
 
-    def showRankingByChoosing(self,actionsList=None,rankingByChoosing=None,direction='best'):
+    def showRankingByChoosing(self,actionsList=None,rankingByChoosing=None):
         """
         Dummy name for showTransitiveDigraph() method
         """
-        self.showTransitiveDigraph(rankingByChoosing=rankingByChoosing,direction=direction)
+        self.showTransitiveDigraph(rankingByChoosing=rankingByChoosing)
     
     def showOrderedRelationTable(self,direction="decreasing",originalRelation=False):
         """
@@ -745,10 +745,6 @@ class RankingByChoosingDigraph(TransitiveDigraph):
         """
         self.showTransitiveDigraph(rankingByChoosing=rankingByChoosing,\
                                                  rankingStrategy=rankingStrategy)
-##        if rankingStrategy == 'best':
-##            TransitiveDigraph.showTransitiveDigraph(self,self.rankingByBestChoosing)
-##        else:
-##            TransitiveDigraph.showTransitiveDigraph(self,self.rankingByLastChoosing)
 
     def computeRankingByBestChoosing(self,Forced=False):
         """
@@ -1586,17 +1582,19 @@ if __name__ == "__main__":
 ##                                  numberOfCandidates=9,seed=201)
 ##    g = CondorcetDigraph(v)
     g = RandomBipolarOutrankingDigraph(Normalized=True)
-    wc = WeakCopelandOrder(g,SelfCoDual=True,Debug=False)
-    wc.showRelationTable()
-    cop = CopelandOrder(g)
-    cop.showRelationTable()
-    wc.showScores()
-    cop.showScores()
-    g.showRelationTable()
-    order = g.computeCopelandOrder()
-    print(g.computeOrderCorrelation(order))
-    print(g.computeOrdinalCorrelation(cop))
-    print(g.computeOrdinalCorrelation(wc))
+    rbc = RankingByChoosingDigraph(g,Threading=False)
+    rbc.showRankingByChoosing()
+##    wc = WeakCopelandOrder(g,SelfCoDual=True,Debug=False)
+##    wc.showRelationTable()
+##    cop = CopelandOrder(g)
+##    cop.showRelationTable()
+##    wc.showScores()
+##    cop.showScores()
+##    g.showRelationTable()
+##    order = g.computeCopelandOrder()
+##    print(g.computeOrderCorrelation(order))
+##    print(g.computeOrdinalCorrelation(cop))
+##    print(g.computeOrdinalCorrelation(wc))
 ##    wnf = WeakNetFlowsOrder(g,SelfCoDual=False,Debug=False)
 ##    wnf.showRelationTable()
 ##    wnf.showScores()
