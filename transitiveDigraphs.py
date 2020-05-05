@@ -31,25 +31,24 @@ class TransitiveDigraph(Digraph):
         """
         self.showTransitiveDigraph()
         
-    def showTransitiveDigraph(self,rankingByChoosing=None,direction='best'):
+    def showTransitiveDigraph(self,rankingByChoosing=None):
         """
         A show method for self.rankinByChoosing result.
         """
         if rankingByChoosing == None:
-            if direction == 'best':
-                try:
-                    rankingByChoosing = self.rankingByBestChoosing['result']
-                except:
-                    #print('Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !')
-                    self.computeRankingByBestChoosing()
-                    rankingByChoosing = self.rankingByBestChoosing['result']
-            else:
-                try:
-                    rankingByChoosing = self.rankingByLastChoosing['result']
-                except:
-                    #print('Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !')
-                    self.computeRankingByLastChoosing()
-                    rankingByChoosing = self.rankingByLastChoosing['result']
+            try:
+                rankingByChoosing = self.rankingByBestChoosing['result']
+            except:
+                #print('Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !')
+                self.computeRankingByChoosing()
+                rankingByChoosing = self.rankingByChoosing['result']
+##            else:
+##                try:
+##                    rankingByChoosing = self.rankingByLastChoosing['result']
+##                except:
+##                    #print('Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !')
+##                    self.computeRankingByLastChoosing()
+##                    rankingByChoosing = self.rankingByLastChoosing['result']
         else:
             rankingByChoosing = rankingByChoosing['result']
         print('Ranking by Choosing and Rejecting')
