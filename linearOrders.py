@@ -227,7 +227,7 @@ class LinearOrder(Digraph):
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\ndigraphs module (graphviz), R. Bisdorff, 2015", size="')
+        fo.write('\\nDigraph3 (graphviz), R. Bisdorff, 2015", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             nodeName = str(actionkeys[i])

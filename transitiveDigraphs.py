@@ -200,7 +200,7 @@ class TransitiveDigraph(Digraph):
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nTransitiveDigraphs module (graphviz)\\n R. Bisdorff, 2014", size="')
+        fo.write('\\nDigraph3 (graphviz)\\n R. Bisdorff, 2020", size="')
         fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
         # nodes
         for x in actionKeys:

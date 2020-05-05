@@ -675,7 +675,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nRubis Python Server (graphviz), R. Bisdorff, 2008", size="')
+        fo.write('\\nDigraph3 (graphviz), R. Bisdorff, 2020", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -898,7 +898,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\ntransitiveDigraphs module (graphviz)\\n R. Bisdorff, 2014", size="')
+        fo.write('\\Digraph3 (graphviz)\\n R. Bisdorff, 2020", size="')
         fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
         # nodes
         for x in actionsKeys:

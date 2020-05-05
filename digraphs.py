@@ -2485,8 +2485,8 @@ class Digraph(object):
         actions = self.actions
         relation = self.relation
         valuationList = []
-        for x in dict.keys(actions):
-            for y in dict.keys(actions):
+        for x in actions:
+            for y in actions:
                 if relation[x][y] not in valuationList:
                     valuationList.append(relation[x][y])
         valuationList.sort()
@@ -2522,8 +2522,8 @@ class Digraph(object):
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         moreOrLessUnrelatedPairs = []
-        for x in dict.keys(actions):
-            for y in dict.keys(actions):
+        for x in actions:
+            for y in actions:
                 if x != y:
                     if relation[x][y] < Med and relation[x][y] > Min:
                         if relation[y][x] < Med and relation[y][x] > Min:
@@ -2540,8 +2540,8 @@ class Digraph(object):
         Min = self.valuationdomain['min']
         Med = self.valuationdomain['med']
         unrelatedPairs = []
-        for x in dict.keys(actions):
-            for y in dict.keys(actions):
+        for x in actions:
+            for y in actions:
                 if x != y:
                     if relation[x][y] < Med:
                         if relation[y][x] < Med:
@@ -2549,7 +2549,7 @@ class Digraph(object):
                                 unrelatedPairs.append(((x,y),(relation[x][y],relation[y][x])))
         return unrelatedPairs
 
-    def closeSymmetric(self):
+    def closeSymmetric(self,InSite=True):
         """
         Produces the symmetric closure of self.relation.
         """
@@ -2557,26 +2557,29 @@ class Digraph(object):
         symRelation = {}
         relation = self.relation
         for x in relation:
+            relx = relation[x]
             symRelation[x] = {} 
-            for y in relation[x]:
-                 symRelation[x][y] = max(relation[x][y],relation[y][x])
-        self.relation = symRelation
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
+            for y in relx:
+                rely = relation[y]
+                symRelation[x][y] = max(relx[y],rely[x])
+        if InSite:
+            self.relation = symRelation
+            self.gamma = self.gammaSets()
+            self.notGamma = self.notGammaSets()
+        else:
+            return symRelation
 
     def computeTransitivityDegree(self,Comments=False):
         """
         Renders the transitivity degree of a digraph.
         """
-        import copy
+        from copy import deepcopy
         Med = self.valuationdomain['med']
-        #actionsList = [x for x in self.actions]
         actions = self.actions
-        origRelation = copy.deepcopy(self.relation)
-        self.closeTransitive()
-        closedRelation = copy.deepcopy(self.relation)
-        self.closeTransitive(Reverse=True)
-        openedRelation = self.relation
+        origRelation = self.relation
+        closedRelation = self.closeTransitive(InSite=False,Comments=Comments)
+        openedRelation = self.closeTransitive(Reverse=True,\
+                                InSite=False,Comments=Comments)
         nopen = 0
         nclosed = 0
         norig = 0
@@ -2591,9 +2594,6 @@ class Digraph(object):
                     nclosed += 1
                 if rorigx[y] > Med:
                     norig += 1
-        self.relation = copy.deepcopy(origRelation)
-        #self.gamma = self.gammaSets()
-        #self.notGamma = self.notGammaSets()
         if nclosed > nopen:
             res = (norig-nopen)/(nclosed-nopen)
         else:
@@ -2608,66 +2608,63 @@ class Digraph(object):
         """
         import copy
         Med = self.valuationdomain['med']
-        #actionsList = [x for x in self.actions]
-        relationOrig = copy.deepcopy(self.relation)
-        self.closeTransitive()
-        #relation = self.relation
+        relation = self.closeTransitive(InSite=False)
         n1 = 0
-        for rx in self.relation.values():
+        for rx in relation.values():
             for rxy in rx.values():
                 if rxy > Med:
                     n1 += 1
-        self.relation = copy.deepcopy(relationOrig)
-        #self.gamma = self.gammaSets()
-        #self.notGamma = self.notGammaSets()
         return n1
 
 
-    def closeTransitive(self,Reverse=False,Comments=False):
+    def closeTransitive(self,Reverse=False,InSite=True,Comments=False):
         """
         Produces the transitive closure of self.relation.
         """
         from copy import deepcopy
         actions = set(self.actions)
-        relation = deepcopy(self.relation)
         Med = self.valuationdomain['med']
-        if not Reverse:
+        Change = True
+        i = 0
+        currRelation = deepcopy(self.relation)
+        while Change:
+            Change = False
+            curriRelation = deepcopy(currRelation)
+            i += 1
+            for x in actions:
+                for y in actions:
+                    for z in actions:
+                        if min(curriRelation[y][x],curriRelation[x][z]) > Med \
+                              and curriRelation[y][z] <= Med:
+                            currRelation[y][z] =\
+                              min(curriRelation[y][x],curriRelation[x][z])
+                            Change = True
+        if Comments:
+            print('iterations: %d' %i )
+        if Reverse:
             Change = True
             i = 0
             while Change:
                 Change = False
                 i += 1
+                curriRelation = deepcopy(currRelation)
                 for x in actions:
                     for y in actions:
                         for z in actions:
-                            if min(relation[y][x],relation[x][z]) > Med \
-                                  and relation[y][z] < Med:
-                                relation[y][z] = -relation[y][z]
+                            if min(curriRelation[y][x],curriRelation[x][z]) > Med \
+                                     and curriRelation[y][z] > Med:
+                                currRelation[y][z] = -curriRelation[y][z]
                                 Change = True
-                            #relation[y][z] =\
-                        #max(relation[y][z],min(relation[y][x],relation[x][z]))
-            if Comments:
-                print('iterations: %d' %i )
-        elif Reverse:
-            Change = True
-            i = 0
-            while Change:
-                Change = False
-                i += 1
-                for x in actions:
-                    for y in actions:
-                        for z in actions:
-                            if min(relation[y][x],relation[x][z]) > Med \
-                                and relation[y][z] > Med:
-                                relation[y][z] = -relation[y][z]
-                                Change = True
-                        #relation[y][z] =\
-                    #-(max(relation[y][z],min(relation[y][x],relation[x][z])))
+                    #relation[y][z] =\
+                #-(max(relation[y][z],min(relation[y][x],relation[x][z])))
             if Comments:
                 print('reverse iterations: %d' %i)
-        self.relation = relation
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
+        if InSite:
+            self.relation = deepcopy(currRelation)
+            self.gamma = self.gammaSets()
+            self.notGamma = self.notGammaSets()
+        else:
+            return currRelation
 
     def isCyclic(self, Debug=False):
         """
@@ -3893,7 +3890,7 @@ class Digraph(object):
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nRubis Python Server (graphviz), R. Bisdorff, 2008", size="')
+        fo.write('\\nDigraph3 (graphviz), R. Bisdorff, 2020", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
