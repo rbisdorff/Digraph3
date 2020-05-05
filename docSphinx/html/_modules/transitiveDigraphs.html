@@ -71,18 +71,25 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">()</span></div>
         
-<div class="viewcode-block" id="TransitiveDigraph.showTransitiveDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph">[docs]</a>    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="TransitiveDigraph.showTransitiveDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph">[docs]</a>    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A show method for self.rankinByChoosing result.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">rankingByChoosing</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="c1">#print(&#39;Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !&#39;)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">computeRankingByChoosing</span><span class="p">()</span>
-                <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
-                <span class="c1">#return</span>
+            <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;best&#39;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByBestChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="c1">#print(&#39;Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !&#39;)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">computeRankingByBestChoosing</span><span class="p">()</span>
+                    <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByBestChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByLastChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="c1">#print(&#39;Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !&#39;)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">()</span>
+                    <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByLastChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="n">rankingByChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ranking by Choosing and Rejecting&#39;</span><span class="p">)</span>
@@ -129,11 +136,11 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  </span><span class="si">%s</span><span class="s1"> Ambiguous Choice </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">space</span><span class="p">,</span><span class="nb">list</span><span class="p">(</span><span class="n">iach</span><span class="p">)))</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%s%s%s</span><span class="s1"> last ranked </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">space</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">,</span><span class="n">nstr</span><span class="p">,</span><span class="n">ch</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>        </div>
 
-<div class="viewcode-block" id="TransitiveDigraph.showRankingByChoosing"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showRankingByChoosing">[docs]</a>    <span class="k">def</span> <span class="nf">showRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="TransitiveDigraph.showRankingByChoosing"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showRankingByChoosing">[docs]</a>    <span class="k">def</span> <span class="nf">showRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy name for showTransitiveDigraph() method</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="n">rankingByChoosing</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="n">rankingByChoosing</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">)</span></div>
     
 <div class="viewcode-block" id="TransitiveDigraph.showOrderedRelationTable"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showOrderedRelationTable">[docs]</a>    <span class="k">def</span> <span class="nf">showOrderedRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">,</span><span class="n">originalRelation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
