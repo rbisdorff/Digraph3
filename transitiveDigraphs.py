@@ -31,18 +31,25 @@ class TransitiveDigraph(Digraph):
         """
         self.showTransitiveDigraph()
         
-    def showTransitiveDigraph(self,rankingByChoosing=None):
+    def showTransitiveDigraph(self,rankingByChoosing=None,direction='best'):
         """
         A show method for self.rankinByChoosing result.
         """
         if rankingByChoosing == None:
-            try:
-                rankingByChoosing = self.rankingByChoosing['result']
-            except:
-                #print('Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !')
-                self.computeRankingByChoosing()
-                rankingByChoosing = self.rankingByChoosing['result']
-                #return
+            if direction == 'best':
+                try:
+                    rankingByChoosing = self.rankingByBestChoosing['result']
+                except:
+                    #print('Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !')
+                    self.computeRankingByBestChoosing()
+                    rankingByChoosing = self.rankingByBestChoosing['result']
+            else:
+                try:
+                    rankingByChoosing = self.rankingByLastChoosing['result']
+                except:
+                    #print('Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !')
+                    self.computeRankingByLastChoosing()
+                    rankingByChoosing = self.rankingByLastChoosing['result']
         else:
             rankingByChoosing = rankingByChoosing['result']
         print('Ranking by Choosing and Rejecting')
@@ -89,11 +96,11 @@ class TransitiveDigraph(Digraph):
                 print('  %s Ambiguous Choice %s' % (space,list(iach)))
             print(' %s%s%s last ranked %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))        
 
-    def showRankingByChoosing(self,actionsList=None,rankingByChoosing=None):
+    def showRankingByChoosing(self,actionsList=None,rankingByChoosing=None,direction='best'):
         """
         Dummy name for showTransitiveDigraph() method
         """
-        self.showTransitiveDigraph(rankingByChoosing=rankingByChoosing)
+        self.showTransitiveDigraph(rankingByChoosing=rankingByChoosing,direction=direction)
     
     def showOrderedRelationTable(self,direction="decreasing",originalRelation=False):
         """
