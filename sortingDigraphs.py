@@ -792,6 +792,7 @@ class SortingDigraph(BipolarOutrankingDigraph):
             node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
                    % (str(_safeName(x)),_safeName(nodeName),fontSize)
             fo.write(node)
+            
         # same ranks for Hasses equivalence classes
         k = len(ordering)
         for i in range(k):
@@ -802,30 +803,31 @@ class SortingDigraph(BipolarOutrankingDigraph):
             sameRank += '}\n'
             print(i,sameRank)
             fo.write(sameRank)
-        # save original relation
-        originalRelation = copy(self.relation)
-        self.relation = relation
-        self.closeTransitive(Reverse=True)
+            
+        # write out skeleton of sorting relation
+        relation = self.closeTransitive(Reverse=True,InSite=False)
+        Mwd = self.valuationdomain['med']
         for i in range(k-1):
             ich = ordering[i]
             for x in ich:
+                relx = relation[x]
                 for j in range(i+1,k):
                     jch = ordering[j]
                     for y in jch:
-                        #edge = 'n'+str(i+1)+'-> n'+str(i+2)+' [dir=forward,style="setlinewidth(1)",color=black, arrowhead=normal] ;\n'
-                        if self.relation[x][y] > self.valuationdomain['med']:
+                        relxy = relx[y]
+                        if relxy > Med:
                             arcColor = 'black'
-                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(x),_safeName(y),1,arcColor)
+                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' %\
+                                   (_safeName(x),_safeName(y),1,arcColor)
                             fo.write(edge)
-                        elif self.relation[y][x] > self.valuationdomain['med']:
+                        elif relxy > Med:
                             arcColor = 'black'
-                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(y),_safeName(x),1,arcColor)
+                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' %\
+                                   (_safeName(y),_safeName(x),1,arcColor)
                             fo.write(edge)
                                                   
         fo.write('}\n \n')
         fo.close()
-        # restore original relation
-        self.relation = copy(originalRelation)
 
         commandString = 'dot -Grankdir=TB -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
@@ -1609,12 +1611,12 @@ class QuantilesSortingDigraph(SortingDigraph):
         # construct outranking relation
         t0 = time()
         self.hasNoVeto = hasNoVeto
-        minValuation = -100.0
-        maxValuation = 100.0
+        minValuation = -1.0
+        maxValuation = 1.0
         if CompleteOutranking:
             g = BipolarOutrankingDigraph(normPerfTab,hasNoVeto=hasNoVeto,
                                          Threading=Threading,nbrCores=nbrCores)
-            g.recodeValuation(minValuation,maxValuation)
+            #g.recodeValuation(minValuation,maxValuation)
             self.relationOrig = g.relation
             Min = g.valuationdomain['min']
             Max = g.valuationdomain['max']
@@ -1647,23 +1649,23 @@ class QuantilesSortingDigraph(SortingDigraph):
 
         if WithSortingRelation:
             if LowerClosed:
-                for x in dict.keys(actionsOrig):
+                for x in actionsOrig:
                     rx = relation[x]
-                    for y in dict.keys(actionsOrig):
+                    for y in actionsOrig:
                         rx[y] = Med
-                for x in dict.keys(profiles):
+                for x in profiles:
                     relation[x] = {}
                     rx = relation[x]
-                    for y in dict.keys(actions):
+                    for y in actions:
                         rx[y] = Med
             else:
-                for x in dict.keys(actionsOrig):
+                for x in actionsOrig:
                     relation[x] = {}
                     rx = relation[x]
-                    for y in dict.keys(actionsOrig):
+                    for y in actionsOrig:
                         rx[y] = Med
-                for y in dict.keys(profiles):
-                    for x in dict.keys(actions):
+                for y in profiles:
+                    for x in actions:
                         relation[x][y] = Med
             self.relation = relation
         self.runTimes['computeRelation'] = time() - t0
@@ -1678,10 +1680,10 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                           Debug=Debug,Comments=Comments,\
                                                           Threading=Threading,\
                                                           nbrOfCPUs=nbrOfProcesses)
-            for x in dict.keys(actionsOrig):
+            for x in actionsOrig:
                 rx = self.relation[x]
                 srx = sortingRelation[x]
-                for y in dict.keys(actionsOrig):
+                for y in actionsOrig:
                     rx[y] = srx[y]
                     
         self.runTimes['weakOrdering'] = time() - t0
