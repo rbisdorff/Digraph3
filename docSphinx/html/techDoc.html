@@ -7110,14 +7110,6 @@ and may not contain special characters like ‘-‘ or ‘_’.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.htmlRatingHeatmap">
-<code class="sig-name descname">htmlRatingHeatmap</code><span class="sig-paren">(</span><em class="sig-param">argCriteriaList=None</em>, <em class="sig-param">argActionsList=None</em>, <em class="sig-param">quantiles=None</em>, <em class="sig-param">ndigits=2</em>, <em class="sig-param">contentCentered=True</em>, <em class="sig-param">colorLevels=None</em>, <em class="sig-param">pageTitle='Rating Heatmap'</em>, <em class="sig-param">Correlations=False</em>, <em class="sig-param">Threading=False</em>, <em class="sig-param">nbrOfCPUs=1</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.htmlRatingHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.htmlRatingHeatmap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
-actions x criteria in html format.</p>
-<p>See the corresponding <code class="xref py py-meth docutils literal notranslate"><span class="pre">perfTabs.showHTMLPerformanceHeatMap()</span></code> method.</p>
-</dd></dl>
-
-<dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showActionCategories">
 <code class="sig-name descname">showActionCategories</code><span class="sig-paren">(</span><em class="sig-param">action</em>, <em class="sig-param">Debug=False</em>, <em class="sig-param">Comments=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showActionCategories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showActionCategories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the union of categories in which the given action is sorted positively or null into.
@@ -7129,6 +7121,47 @@ Returns a tuple : action, lowest category key, highest category key, membership 
 <code class="sig-name descname">showActionsSortingResult</code><span class="sig-paren">(</span><em class="sig-param">actionSubset=None</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showActionsSortingResult"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showActionsSortingResult" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shows the quantiles sorting result of all (default) or
 a subset of the decision actions.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLPerformanceHeatmap">
+<code class="sig-name descname">showHTMLPerformanceHeatmap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showHTMLPerformanceHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLPerformanceHeatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>shows the html heatmap version of the performance tableau in a browser window
+(see perfTabs.htmlPerformanceHeatMap() method ).</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show
+the decision alternatives, resp. criteria, in a given ordering.</p></li>
+<li><p><em>ndigits</em> = 0 may be used to show integer evaluation values.</p></li>
+<li><p>When no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
+ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>.</p></li>
+<li><p>When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</p></li>
+<li><p>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
+When <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
+in fact equivalent to the standard model.</p></li>
+<li><p><em>rankingRule</em> = ‘NetFlows’ (default) | ‘Copeland’ | ‘Kohler’ | ‘RankedPairs’ | ‘ArrowRaymond’
+| ‘IteratedNetFlows’ | ‘IteraredCopeland’. See tutorial on ranking mith multiple incommensurable criteria.</p></li>
+<li><p>when tghe <em>StoreRanking</em> flag is set to <em>True</em>, the ranking result is storted in <em>self</em>.</p></li>
+<li><p>Quantiles used for the pre-ranked decomposition are put by default to <em>n</em>
+(the number of decision alternatives) for <em>n</em> &lt; 50. For larger cardinalities up to 1000, quantiles = <em>n</em> /10.
+For bigger performance tableaux the <em>quantiles</em> parameter may be set to a much lower value
+not exceeding usually 1000.</p></li>
+<li><p>The pre-ranking may be obtained with three ordering strategies for the
+quantiles equivalence classes: ‘average’ (default), ‘optimistic’ or  ‘pessimistic’.</p></li>
+<li><p>With <em>Correlations</em> = <em>True</em> and <em>criteriaList</em> = <em>None</em>, the criteria will be presented from left to right in decreasing
+order of the correlations between the marginal criterion based ranking and the global ranking used for
+presenting the decision alternatives.</p></li>
+<li><p>For large performance Tableaux, <em>multiprocessing</em> techniques may be used by setting
+<em>Threading</em> = <em>True</em> in order to speed up the computations; especially when <em>Correlations</em> = <em>True</em>.</p></li>
+<li><p>By default, the number of cores available, will be detected. It may be efficient in a HPC context
+to indicate the exact number of singled threaded cores in fact allocated to the job.</p></li>
+</ul>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" /></a>
 </dd></dl>
 
 <dl class="method">
@@ -7147,7 +7180,7 @@ a subset of the decision actions.</p>
 
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLRatingHeatmap">
-<code class="sig-name descname">showHTMLRatingHeatmap</code><span class="sig-paren">(</span><em class="sig-param">actionsList=None</em>, <em class="sig-param">criteriaList=None</em>, <em class="sig-param">colorLevels=7</em>, <em class="sig-param">pageTitle=None</em>, <em class="sig-param">ndigits=2</em>, <em class="sig-param">quantiles=None</em>, <em class="sig-param">rankingRule=None</em>, <em class="sig-param">Correlations=False</em>, <em class="sig-param">Threading=False</em>, <em class="sig-param">nbrOfCPUs=None</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showHTMLRatingHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLRatingHeatmap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showHTMLRatingHeatmap</code><span class="sig-paren">(</span><em class="sig-param">actionsList=None</em>, <em class="sig-param">criteriaList=None</em>, <em class="sig-param">colorLevels=7</em>, <em class="sig-param">pageTitle=None</em>, <em class="sig-param">ndigits=2</em>, <em class="sig-param">rankingRule=None</em>, <em class="sig-param">Correlations=False</em>, <em class="sig-param">Threading=False</em>, <em class="sig-param">nbrOfCPUs=None</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.showHTMLRatingHeatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLRatingHeatmap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specialisation of html heatmap version showing the performance tableau in a browser window;
 see <code class="xref py py-meth docutils literal notranslate"><span class="pre">perfTabs.showHTMLPerformanceHeatMap()</span></code> method.</p>
 <p><strong>Parameters</strong>:</p>

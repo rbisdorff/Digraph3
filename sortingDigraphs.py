@@ -3872,9 +3872,9 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                              fontSize=fontSize)
         self.relation = self.relationOrig
 
-    def htmlRatingHeatmap(self,argCriteriaList=None,
+    def _htmlRatingHeatmap(self,argCriteriaList=None,
                                argActionsList=None,
-                               quantiles=None,
+                               #quantiles=None,
                                ndigits=2,
                                contentCentered=True,
                                colorLevels=None,
@@ -4031,7 +4031,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         if criteriaCorrelation != None:
             html += '<tr><th bgcolor=%s>tau<sup>(*)</sup></th>' % (columnHeaderColor)
             for cg in criteriaCorrelation:
-                html += '<td align="center">%.2f</td>' % (cg[0])
+                html += '<td align="center">%+.2f</td>' % (cg[0])
             html += '</tr>\n'
 ##        if Debug:
 ##            print(html)
@@ -4132,12 +4132,15 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         for x in actions:
             self.showActionCategories(x,Debug=Debug)
 
+
+    def showHTMLPerformanceHeatmap(self):
+        print('Please use the showHTMLRatingHeatmap() here !!')
+    
     def showHTMLRatingHeatmap(self,actionsList=None,
                                    criteriaList=None,
                                    colorLevels=7,
                                    pageTitle=None,
                                    ndigits=2,
-                                   quantiles=None,
                                    rankingRule=None,
                                    Correlations=False,
                                    Threading=False,
@@ -4179,10 +4182,10 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         fo = open(fileName,'w')
         if pageTitle == None:
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
-            
-        fo.write(self.htmlRatingHeatmap(argCriteriaList=criteriaList,
+        #quantiles = len(self.quantilesFrequencies)
+        fo.write(self._htmlRatingHeatmap(argCriteriaList=criteriaList,
                                              argActionsList=actionsList,
-                                             quantiles=quantiles,
+                                             #quantiles=quantiles,
                                              ndigits=ndigits,
                                              colorLevels=colorLevels,
                                              pageTitle=pageTitle,

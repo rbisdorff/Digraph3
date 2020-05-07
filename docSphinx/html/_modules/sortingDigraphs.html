@@ -3912,9 +3912,9 @@
                              <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relationOrig</span></div>
 
-<div class="viewcode-block" id="NormedQuantilesRatingDigraph.htmlRatingHeatmap"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.htmlRatingHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">htmlRatingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">_htmlRatingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">argActionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                               <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="c1">#quantiles=None,</span>
                                <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                                <span class="n">contentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">colorLevels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -4071,7 +4071,7 @@
         <span class="k">if</span> <span class="n">criteriaCorrelation</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=</span><span class="si">%s</span><span class="s1">&gt;tau&lt;sup&gt;(*)&lt;/sup&gt;&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">columnHeaderColor</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">criteriaCorrelation</span><span class="p">:</span>
-                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td align=&quot;center&quot;&gt;</span><span class="si">%.2f</span><span class="s1">&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td align=&quot;center&quot;&gt;</span><span class="si">%+.2f</span><span class="s1">&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
 <span class="c1">##        if Debug:</span>
 <span class="c1">##            print(html)</span>
@@ -4118,7 +4118,7 @@
 <span class="c1">##        if rankCorrelation != None:</span>
 <span class="c1">##            html += &#39;&lt;i&gt;Ordinal (Kendall) correlation between global ranking and outranking relation: %.2f.&lt;/i&gt;&#39; % (rankCorrelation[&#39;correlation&#39;])</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
-        <span class="k">return</span> <span class="n">html</span></div>
+        <span class="k">return</span> <span class="n">html</span>
 
 <div class="viewcode-block" id="NormedQuantilesRatingDigraph.showActionCategories"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">showActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -4172,12 +4172,15 @@
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
 
+
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.showHTMLPerformanceHeatmap"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLPerformanceHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Please use the showHTMLRatingHeatmap() here !!&#39;</span><span class="p">)</span></div>
+    
 <div class="viewcode-block" id="NormedQuantilesRatingDigraph.showHTMLRatingHeatmap"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.showHTMLRatingHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLRatingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
                                    <span class="n">pageTitle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                                   <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">rankingRule</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -4219,10 +4222,10 @@
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">pageTitle</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">pageTitle</span> <span class="o">=</span> <span class="s1">&#39;Heatmap of Performance Tableau </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
-            
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">htmlRatingHeatmap</span><span class="p">(</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="n">criteriaList</span><span class="p">,</span>
+        <span class="c1">#quantiles = len(self.quantilesFrequencies)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_htmlRatingHeatmap</span><span class="p">(</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="n">criteriaList</span><span class="p">,</span>
                                              <span class="n">argActionsList</span><span class="o">=</span><span class="n">actionsList</span><span class="p">,</span>
-                                             <span class="n">quantiles</span><span class="o">=</span><span class="n">quantiles</span><span class="p">,</span>
+                                             <span class="c1">#quantiles=quantiles,</span>
                                              <span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">,</span>
                                              <span class="n">colorLevels</span><span class="o">=</span><span class="n">colorLevels</span><span class="p">,</span>
                                              <span class="n">pageTitle</span><span class="o">=</span><span class="n">pageTitle</span><span class="p">,</span>
@@ -4350,7 +4353,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 3643 $                                 *</span>
+<span class="s2">    * $Revision: 3649 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -4571,7 +4574,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 3643 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 3649 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

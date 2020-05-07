@@ -202,7 +202,7 @@ def testStudentNormedRating():
                                           seed=100)
     ta.save(fileName='testPerfTab')
     from performanceQuantiles import PerformanceQuantiles
-    pqn = PerformanceQuantiles(ta,numberOfBins=5,LowerClosed=True)
+    pqn = PerformanceQuantiles(ta,numberOfBins=10,LowerClosed=True)
     pqn.showLimitingQuantiles()
     pqn.save(fileName='acadPerformanceNorms')
 
@@ -222,4 +222,5 @@ def testStudentNormedRating():
     nqr.showQuantilesRating()
     nqr.showHTMLRatingHeatmap(Correlations=True,colorLevels=5,ndigits=0)
     nqr.exportGraphViz()
+    nqr.showHTMLPerformanceHeatmap()
 
