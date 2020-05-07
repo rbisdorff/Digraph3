@@ -4069,6 +4069,8 @@ Below, an example Python session concerning 900 decision alternatives randomly g
 
 .. code-block:: pycon
    :linenos:
+   :name: perfQuantiles
+   :caption: Computing performance quantiles from a given performance tableau
 
    >>> from performanceQuantiles import PerformanceQuantiles
    >>> from randomPerfTabs import RandomCBPerformanceTableau
@@ -4078,19 +4080,30 @@ Below, an example Python session concerning 900 decision alternatives randomly g
    >>> tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
                      numberOfCriteria=nbrCrit,seed=seed)
    >>> pq = PerformanceQuantiles(tp,\
-                     numberOfBins = 'quartiles',\
-                     LowerClosed=True)
-   >>> pq.__dict__.keys()
-    dict_keys(['objectives', 'LowerClosed', 'name',
-    'quantilesFrequencies', 'criteria', 'historySizes',
-    'limitingQuantiles', ... ])
+                      numberOfBins = 'quartiles',\
+                      LowerClosed=True)
+   >>> pq
+    *------- PerformanceQuantiles instance description ------*
+    Instance class   : PerformanceQuantiles
+    Instance name    : 4-tiled_performances
+    # Objectives     : 2
+    # Criteria       : 7
+    # Quantiles      : 4
+    # History sizes  : {'c1': 887, 'b1': 888, 'b2': 891, 'b3': 895,
+                        'b4': 892, 'c2': 893, 'b5': 887}
+    Attributes       : ['perfTabType', 'valueDigits', 'actionsTypeStatistics',
+                        'objectives', 'BigData', 'missingDataProbability',
+			'criteria', 'LowerClosed', 'name',
+			'quantilesFrequencies', 'historySizes',
+			'limitingQuantiles', 'cdf']
 
-The :py:class:`performanceQuantiles.PerformanceQuantiles` class parameter *numberOfBins* (see Line 9 above), choosing the wished number of quantile frequencies, may be either **quartiles** (4 bins), **quintiles** (5 bins), **deciles** (10 bins), **dodeciles** (20 bins) or any other integer number of quantile bins. The quantile bins may be either **lower closed** (default) or **upper-closed**.
+The :py:class:`performanceQuantiles.PerformanceQuantiles` class parameter *numberOfBins* (see :numref:`perfQuantiles` Line 9 above), choosing the wished number of quantile frequencies, may be either **quartiles** (4 bins), **quintiles** (5 bins), **deciles** (10 bins), **dodeciles** (20 bins) or any other integer number of quantile bins. The quantile bins may be either **lower closed** (default) or **upper-closed**.
 
 .. code-block:: pycon
    :linenos:
+   :name: limitingQuartiles
+   :caption: Printing out the estimated quartile limits
 
-   >>> # Printing out the estimated quartile limits 
    >>> pq.showLimitingQuantiles(ByObjectives=True)
     ----  Historical performance quantiles -----*
     Costs
@@ -4107,7 +4120,7 @@ The :py:class:`performanceQuantiles.PerformanceQuantiles` class parameter *numbe
        'b4'  |    2    |  3.27    30.10    50.82     70.89    98.05  
        'b5'  |    2    |  0.85    29.08    48.55     69.98    97.56  
 
-Both objectives are **equi-important**; the sum of weights (10) of the *costs* criteria balance the sum of weights (10) of the *benefits* criteria (see column 2). The preference direction of the *costs* criteria *c1* and *c2* is **negative**; the lesser the costs the better it is, whereas all the *benefits* criteria *b1* to *b5* show **positive** preference directions, i.e. the higher the benefits the better it is. The columns entitled '0.0', resp. '1.0' show the *quartile* *Q0*, resp. *Q4*, i.e. the **worst**, resp. **best** performance observed so far on each criterion. Column '0.5' shows the **median** (*Q2*) observed on the criteria.  
+Both objectives are **equi-important**; the sum of weights (10) of the *costs* criteria balance the sum of weights (10) of the *benefits* criteria (see :numref:`limitingQuartiles` column 2). The preference direction of the *costs* criteria *c1* and *c2* is **negative**; the lesser the costs the better it is, whereas all the *benefits* criteria *b1* to *b5* show **positive** preference directions, i.e. the higher the benefits the better it is. The columns entitled '0.00', resp. '1.00' show the *quartile* *Q0*, resp. *Q4*, i.e. the **worst**, resp. **best** performance observed so far on each criterion. Column '0.50' shows the **median** (*Q2*) performance observed on the criteria.  
 
 New  decision alternatives with random multiple criteria performance vectors from the same random performance tableau model may now be generated with ad hoc random performance generators. We provide for experimental purpose, in the :py:mod:`randomPerfTabs` module, three such generators: one for the standard :py:class:`randomPerfTabs.RandomPerformanceTableau` model, one the for the two objectives :py:class:`randomPerfTabs.RandomCBPerformanceTableau` Cost-Benefit model, and one for the :py:class:`randomPerfTabs.Random3ObjectivesPerformanceTableau` model with three objectives concerning respectively  economic, environmental or social aspects.
 
@@ -4115,15 +4128,16 @@ Given a new Performance Tableau with 100 new decision alternatives, the so far e
 
 .. code-block:: pycon
    :linenos:
+   :name: perfGenerator
+   :caption: Generating 100 new random decision alternatives of the same model 	  
 
-   >>> # generate 100 new random decision alternatives
    >>> from randomPerfTabs import RandomPerformanceGenerator
    >>> rpg = RandomPerformanceGenerator(tp,seed=seed)
    >>> newTab = rpg.randomPerformanceTableau(100)
    >>> # Updating the quartile norms shown above 
    >>> pq.updateQuantiles(newTab,historySize=None)
 
-Parameter *historySize* (see Line 6) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance** the **new** evaluations against the **historical** ones. With **historySize = None** (the default setting), the balance in the example above is 900/1000 (90%, weight of historical data) against 100/1000 (10%, weight of the new incoming observations). Putting **historySize = 0**, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incoming data. The updated quantile limits may be shown in a browser view (see :numref:`examplePerfQuantiles`).
+Parameter *historySize* (see :numref:`perfGenerator` Line 5) of the :py:meth:`performanceQuantiles.PerformanceQuantiles.updateQuantiles` method allows to **balance** the **new** evaluations against the **historical** ones. With **historySize = None** (the default setting), the balance in the example above is 900/1000 (90%, weight of historical data) against 100/1000 (10%, weight of the new incoming observations). Putting **historySize = 0**, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incoming data. The updated quantile limits may be shown in a browser view (see :numref:`examplePerfQuantiles`).
 
 .. code-block:: pycon
 
@@ -4153,19 +4167,22 @@ The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuan
 We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed in the previous section. Let *newActions* be a list of 10 new decision alternatives generated with the same random performance tableau model and including the two decision alternatives *a1001* and *a1010* mentioned at the beginning.
 
 .. code-block:: pycon
-
+   :linenos:
+   :name: normedRatingGraph
+   :caption: Computing a normed rating of 10 new decision alternatives
+	     
    >>> from sortingDigraphs import NormedQuantilesRatingDigraph
-   >>> newActions = rpg.randomActions(10)
+   >>> newActions = rpg.randomActions(10,seed=seed)
    >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best')
-   >>> print(nqr)
+   >>> nqr
     *---- Object instance description
     Instance class      : NormedQuantilesRatingDigraph
     Instance name       : normedRatingDigraph
     # Criteria          : 7
     # Quantile profiles : 4
     # New actions       : 10
-    Size                : 93
-    Determinateness (%)     : 52.17
+    Size                : 96
+    Determinateness (%)     : 53.00
     Attributes: ['runTimes','objectives','criteria',
      'LowerClosed','quantilesFrequencies','limitingQuantiles',
      'historySizes','cdf','name','newActions','evaluation',
@@ -4173,23 +4190,25 @@ We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed 
      'hasNoVeto','actions','completeRelation','relation',
      'concordanceRelation','valuationdomain','order','gamma',
      'notGamma','rankingRule','rankingCorrelation','rankingScores',
-     'actionsRanking','ratingCategories','ratingRelation',
-     'relationOrig','rankingByBestChoosing']
+     'actionsRanking','ratingCategories','ratingRelation','relationOrig']
     *---- Constructor run times (in sec.)
     #Threads         : 1
-    Total time       : 0.01636
-    Data input       : 0.00051
-    Quantile classes : 0.00006
-    Compute profiles : 0.00005
-    Compute relation : 0.01420
-    Compute rating   : 0.00154
+     Total time       : 0.02218
+     Data input       : 0.00134
+     Quantile classes : 0.00008
+     Compute profiles : 0.00021
+     Compute relation : 0.01869
+     Compute rating   : 0.00186
+     Compute sorting  : 0.00000
 
-Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see Line 3) are a valid PerformanceQuantiles object *pq* and a compatible list *newActions* of new decision alternatives generated from the same random origin.
+Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see :numref:`normedRatingGraph` Line 3) are a valid PerformanceQuantiles object *pq* and a compatible list *newActions* of new decision alternatives generated from the same random origin.
 
 Let us have a look at the digraph's nodes, here called **newActions**.
 
 .. code-block:: pycon
    :linenos:
+   :name: newPerfTab
+   :caption: Performance tableau of the new incoming decision alternatives
 
    >>> nqr.showPerformanceTableau(actionsSubset=nqr.newActions)
     *----  performance tableau -----*
@@ -4203,66 +4222,75 @@ Let us have a look at the digraph's nodes, here called **newActions**.
        'c1'  |  -4.0  -6.0  -8.0  -5.0  -1.0  -5.0  -1.0  -6.0  -6.0  -4.0  
        'c2'  | -40.0 -23.0 -37.0 -37.0 -24.0 -27.0 -73.0 -43.0 -94.0 -35.0  
 
-Among the 10 new incoming decision alternatives (see below), we recognize alternatives *a1001* (see column 2) and *a1010* (see last column) we have mentioned in our introduction.
+Among the 10 new incoming decision alternatives (see :numref:`newPerfTab`), we recognize alternatives *a1001* (see column 2) and *a1010* (see last column) we have mentioned in our introduction.
 
-The :py:class:`NormedQuantilesRatingDigraphdigraph` instance's *actions* dictionary also contains the closed lower limits of the four quartile classes: *m1* = [0.0- [, *m2* = [0.25- [, *m3* = [0.5- [, *m4* = [0.75 - [.
+The :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance's *actions* dictionary includes as well the closed lower limits of the four quartile classes: *m1* = [0.0- [, *m2* = [0.25- [, *m3* = [0.5- [, *m4* = [0.75 - [. We find these limits in a *profiles* attribute (see :numref:`limitingProfiles` below).
 
 .. code-block:: pycon
    :linenos:
+   :name: limitingProfiles
+   :caption: Showing the limiting profiles of the rating quantiles
 
    >>> nqr.showPerformanceTableau(actionsSubset=nqr.profiles)
     *----  Quartiles limit profiles -----*
-    criteria |   'm1'   'm2'   'm3'   'm4'   
+    criteria |  'm1'   'm2'   'm3'   'm4'   
     ---------|----------------------------
-       'b1'  |    2.0   28.8   49.6   75.3  
-       'b2'  |    0.0    2.9    4.9    6.7  
-       'b3'  |    0.0    2.9    4.9    8.0  
-       'b4'  |    3.3   35.9   58.6   72.0  
-       'b5'  |    0.8   32.8   48.1   69.7  
-       'c1'  |  -10.0   -7.4   -5.4   -3.4  
-       'c2'  |  -96.4  -72.2  -52.3  -34.0  
+       'b1'  |  2.0    29.8   49.4   70.7  
+       'b2'  |  0.0     3.0    5.0    7.0  
+       'b3'  |  0.0     3.0    5.0    7.0  
+       'b4'  |  3.3    30.1   50.8   70.9  
+       'b5'  |  0.8    29.1   48.6   70.0  
+       'c1'  | -10.0   -7.0   -5.0   -3.0  
+       'c2'  | -96.4  -70.6  -50.1  -30.0
 
-The main run time (see Lines 23-29 of the object description above) is spent by the class constructor in computing a bipolar-valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, i.e. many new decision alternatives and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
+The main run time (see :numref:`normedRatingGraph` Lines 23-29) is spent by the class constructor in computing a bipolar-valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, i.e. many new decision alternatives and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
 
-The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar-valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see Line 2 above) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
+The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar-valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see :numref:`limitingProfiles` Line 2 ) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
 
-In this rating example, the *NetFlows* rule appears to be the more appropriate ranking rule.
+In this rating example, the *Copeland* rule appears to be the more appropriate ranking rule.
 
 .. code-block:: pycon
    :linenos:
+   :name: rankingCorrelation
+   :caption: Copeland ranking of new alternatives and historical quartile limits
 
-   >>> print('Ranking rule        :', nqr.rankingRule)
-    Ranking rule        : NetFlows
-   >>> print('Actions ranking     :', nqr.actionsRanking)
-    Actions ranking     : 
-    ['m4', 'a1005', 'a1010', 'a1008', 'a1002', 'a1006',
-    'm3', 'a1003', 'a1001', 'a1007', 'a1004', 'a1009',
-    'm2', 'm1']
-   >>> print('Ranking correlation : %+.2f' %\
-                (nqr.rankingCorrelation['correlation']) )
-    Ranking correlation : +0.938
+   >>> nqr.rankingRule
+    'Copeland'
+   >>> nqr.actionsRanking
+    ['m4',
+     'a1005', 'a1010', 'a1002', 'a1008', 'a1006', 'a1001', 'a1003',
+     'm3', 'a1007', 'a1004', 'a1009',
+     'm2',
+     'm1']    Actions ranking     : 
+   >>> nqr.showCorrelation(nqr.rankingCorrelation)
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.938
+     Epistemic determination    :  0.530
+     Bipolar-valued equivalence : +0.498
 
-We achieve here a linear ranking without ties (from best to worst) of the digraph's actions, i.e. including the new decision alternatives as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense (*tau* = 0.94) to the underlying valued outranking relation.
+We achieve here (see :numref:`rankingCorrelation`) a linear ranking without ties (from best to worst) of the digraph's actions set, i.e. including the new decision alternatives as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense :math:`(\tau = 0.94)` to the underlying strict outranking relation.
 
-The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes' contents in increasing order of the *quartiles* lower limits.
+The eventual rating procedure is based in this example on the *lower* quartile limits, such that we may collect the quartile classes' contents in increasing order of the *quartiles*.
 
 .. code-block:: pycon
 
-   >>> print('Rating categories:', nqr.ratingCategories)
-    Rating categories: OrderedDict([
-    ('m2', ['a1003', 'a1001', 'a1007', 'a1004', 'a1009']),
-    ('m3', ['a1005', 'a1010', 'a1008', 'a1002', 'a1006'])])
+   >>> nqr.ratingCategories
+    OrderedDict([
+    ('m2', ['a1007','a1004','a1009']),
+    ('m3', ['a1005','a1010','a1002','a1008','a1006','a1001','a1003'])
+    ])
     
-We notice above that no new decision alternative is rated in the lowest [0.0-0.25[, respectively highest [0.75- [ quartile class. Indeed, the rating result is shown, in descending order, as follows:
+We notice above that no new decision alternatives are actually rated in the lowest [0.0-0.25[, respectively highest [0.75- [ quartile classes. Indeed, the rating result is shown, in descending order, as follows:
 
 .. code-block:: pycon
 
    >>> nqr.showQuantilesRating()
     *-------- Quartiles rating result ---------
-    [0.50 - 0.75[ ['a1005', 'a1010', 'a1008', 'a1002', 'a1006']
-    [0.25 - 0.50[ ['a1003', 'a1001', 'a1007', 'a1004', 'a1009']
+    [0.50 - 0.75[ ['a1005', 'a1010', 'a1002', 'a1008',
+                   'a1006', 'a1001', 'a1003']
+    [0.25 - 0.50[ ['a1007', 'a1004', 'a1009']
     
-The same result may even more conveniently be consulted in a browser view via a specialised rating heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method (see :numref:`heatMap1`).
+The same result may more conveniently be consulted in a browser view via a specialised rating heatmap format ( see :py:meth:`perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap` method (see :numref:`heatMap1`).
 
 .. code-block:: pycon
 
@@ -4294,23 +4322,27 @@ Using furthermore a specialised version of the :py:meth:`transitiveDigraphs.Tran
 
     Normed quartiles rating digraph
 
-We may now answer the **normed rating decision problem** stated at the beginning. Decision alternative *a1001* is rated in quartile **Q2** and alternative *a1010* in quartile **Q3** (see Table below). Indeed, the performances of decision alternative *a1001* were generated with a triangular law at a *low* mode, i.e. low costs but also low benefits, whereas the performances of alternative *a1010* were generated with a *median* mode.   
+We may now answer the **normed rating decision problem** stated at the beginning. Decision alternative *a1001* and alternative *a1010* (see below) are both rated into the same quartile **Q3** class (see :numref:`normedRatingDigraph`), even if the *Copeland* ranking, obtained from the underlying strict outranking digraph (see :numref:`heatMap1`), suggests that alternative *a1010* is effectively *better performing than* alternative *a1001*. 
 
-   ============ =========== ======== ======== ======== ======== ======== ======== ========
-      Rating     Criterion     b1       b2       b3       b4       b5       c1       c2    
-   ============ =========== ======== ======== ======== ======== ======== ======== ========
-    quartiles      weight       2        2        2        2        2        5        5     
-      **Q2**       *a1001*    37.0      2        2      61.0     31.0       -4     -40.0    
-      **Q3**       *a1010*    32.0      9        6      55.0     51.0       -4     -35.0 
-   ============ =========== ======== ======== ======== ======== ======== ======== ========
+   ============= ======== ======== ======== ======== ======== ======== ======== 
+     Criterion      b1       b2       b3       b4       b5       c1      c2
+   ============= ======== ======== ======== ======== ======== ======== ========
+       weight        2        2        2        2        2        5       5
+   ------------- -------- -------- -------- -------- -------- -------- --------
+      *a1001*      37.0       2        2      61.0     31.0      -4    -40.0   
+      *a1010*      32.0       9        6      55.0     51.0      -4    -35.0
+   ============= ======== ======== ======== ======== ======== ======== ========
 
-A more precise rating result may be achieved when we use **deciles** instead of *quartiles* for estimating the historical cumulative distribution functions.
+A refined rating result may indeed be achieved when using **deciles** instead of *quartiles* for estimating the historical marginal cumulative distribution functions.
 
 .. code-block:: pycon
    :linenos:
+   :name: decilesRating
+   :caption: Normed deciles rating result 	  
 
    >>> pq1 = PerformanceQuantiles(tp, numberOfBins = 'deciles',\
                     LowerClosed=True)
+   >>> pq1.updateQuantiles(newTab,historySize=None)
    >>> nqr1 = NormedQuantilesRatingDigraph(pq1,newActions,rankingRule='best')
    >>> nqr1.showQuantilesRating()
     *-------- Deciles rating result ---------
@@ -4319,7 +4351,7 @@ A more precise rating result may be achieved when we use **deciles** instead of 
     [0.40 - 0.50[ ['a1007', 'a1004']
     [0.30 - 0.40[ ['a1009']
 
-Compared with the quartiles rating result, we notice that the five alternatives (*a1002*, *a1005*, *a1006*, *a1008*, and *a1010*), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives *a1002*, *a1005*, *a1008* and *a1010* attain the 7th decile class [0.6-0.7[, whereas alternative *a1006* attains only the the 6th decile class [0.5-0.6[. Of the five *Q2* [0.25-0.50[ rated alternatives (*a1001*, *a1003*, *a1004*, *a1006* and *a1007*), alternatives *a1001* and *a1003* are now rated in the 6th decile class [0.5 - 0.6[, whereas *a1004* and *a1007* are rated the 5th decile class [0.4-0.5[ and *a1009* is lowest rated in the 4th decile class [0.3 - 0.4[.
+Compared with the quartiles rating result, we notice in :numref:`decilesRating` that the seven alternatives (*a1001*, *a1002*, *a1003*, *a1005*, *a1006, *a1008* and *a1010*), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives *a1002*, *a1005*, *a1008* and *a1010* attain now the 7th decile class [0.60-0.70[, whereas alternatives *a1001*, *a1003* and *a1006* attains only the the 6th decile class [0.50-0.60[. Of the three *Q2* [0.25-0.50[ rated alternatives (*a1004*, *a1007* and *a1009*), alternatives *a1004* and *a1007* are now rated the 5th decile class [0.40-0.50[ and *a1009* is lowest rated in the 4th decile class [0.30-0.40[.
 
 A browser view may again more conveniently illustrate this preciser *deciles* rating result (see :numref:`heatMap2`).
 
@@ -4336,7 +4368,7 @@ A browser view may again more conveniently illustrate this preciser *deciles* ra
 
     heatmap of mormed deciles rating 
 
-In this preciser *deciles* rating, decision alternatives *a1001* and *a1010* are now rated in the *6th* decile (D6), respectively in the *7th* decile (D7).
+In this refined *deciles* rating, decision alternatives *a1001* and *a1010* are now, as expected, rated in the *6th* decile (D6), respectively in the *7th* decile (D7).
     
 More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions with **dodeciles** or even **centiles**. Especially if **tail** rating results, i.e. distinguishing **very best**, or **very worst** multiple criteria performances, becomes a critical purpose. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	
 

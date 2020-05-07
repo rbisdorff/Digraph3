@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{May 06, 2020}
+\date{May 07, 2020}
 \release{3.8-3600+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -4873,7 +4873,8 @@ An ordered dictionary \sphinxstylestrong{historySizes} for keeping track of the 
 \end{itemize}
 
 Below, an example Python session concerning 900 decision alternatives randomly generated from a \sphinxstyleemphasis{Cost\sphinxhyphen{}Benefit} Performance tableau model from which are also drawn the performances of alternatives \sphinxstyleemphasis{a1001} and \sphinxstyleemphasis{a1010} above.
-
+\sphinxSetupCaptionForVerbatim{Computing performance quantiles from a given performance tableau}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:perfquantiles}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{performanceQuantiles} \PYG{k+kn}{import} \PYG{n}{PerformanceQuantiles}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import} \PYG{n}{RandomCBPerformanceTableau}
@@ -4883,18 +4884,28 @@ Below, an example Python session concerning 900 decision alternatives randomly g
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{tp} \PYG{o}{=} \PYG{n}{RandomCBPerformanceTableau}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{n}{nbrActions}\PYG{p}{,}\PYGZbs{}
 \PYG{g+go}{                  numberOfCriteria=nbrCrit,seed=seed)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq} \PYG{o}{=} \PYG{n}{PerformanceQuantiles}\PYG{p}{(}\PYG{n}{tp}\PYG{p}{,}\PYGZbs{}
-\PYG{g+go}{                  numberOfBins = \PYGZsq{}quartiles\PYGZsq{},\PYGZbs{}}
-\PYG{g+go}{                  LowerClosed=True)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq}\PYG{o}{.}\PYG{n+nv+vm}{\PYGZus{}\PYGZus{}dict\PYGZus{}\PYGZus{}}\PYG{o}{.}\PYG{n}{keys}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ dict\PYGZus{}keys([\PYGZsq{}objectives\PYGZsq{}, \PYGZsq{}LowerClosed\PYGZsq{}, \PYGZsq{}name\PYGZsq{},}
-\PYG{g+go}{ \PYGZsq{}quantilesFrequencies\PYGZsq{}, \PYGZsq{}criteria\PYGZsq{}, \PYGZsq{}historySizes\PYGZsq{},}
-\PYG{g+go}{ \PYGZsq{}limitingQuantiles\PYGZsq{}, ... ])}
+\PYG{g+go}{                   numberOfBins = \PYGZsq{}quartiles\PYGZsq{},\PYGZbs{}}
+\PYG{g+go}{                   LowerClosed=True)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} PerformanceQuantiles instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{ Instance class   : PerformanceQuantiles}
+\PYG{g+go}{ Instance name    : 4\PYGZhy{}tiled\PYGZus{}performances}
+\PYG{g+go}{ \PYGZsh{} Objectives     : 2}
+\PYG{g+go}{ \PYGZsh{} Criteria       : 7}
+\PYG{g+go}{ \PYGZsh{} Quantiles      : 4}
+\PYG{g+go}{ \PYGZsh{} History sizes  : \PYGZob{}\PYGZsq{}c1\PYGZsq{}: 887, \PYGZsq{}b1\PYGZsq{}: 888, \PYGZsq{}b2\PYGZsq{}: 891, \PYGZsq{}b3\PYGZsq{}: 895,}
+\PYG{g+go}{                     \PYGZsq{}b4\PYGZsq{}: 892, \PYGZsq{}c2\PYGZsq{}: 893, \PYGZsq{}b5\PYGZsq{}: 887\PYGZcb{}}
+\PYG{g+go}{ Attributes       : [\PYGZsq{}perfTabType\PYGZsq{}, \PYGZsq{}valueDigits\PYGZsq{}, \PYGZsq{}actionsTypeStatistics\PYGZsq{},}
+\PYG{g+go}{                     \PYGZsq{}objectives\PYGZsq{}, \PYGZsq{}BigData\PYGZsq{}, \PYGZsq{}missingDataProbability\PYGZsq{},}
+\PYG{g+go}{                     \PYGZsq{}criteria\PYGZsq{}, \PYGZsq{}LowerClosed\PYGZsq{}, \PYGZsq{}name\PYGZsq{},}
+\PYG{g+go}{                     \PYGZsq{}quantilesFrequencies\PYGZsq{}, \PYGZsq{}historySizes\PYGZsq{},}
+\PYG{g+go}{                     \PYGZsq{}limitingQuantiles\PYGZsq{}, \PYGZsq{}cdf\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-The \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles}} class parameter \sphinxstyleemphasis{numberOfBins} (see Line 9 above), choosing the wished number of quantile frequencies, may be either \sphinxstylestrong{quartiles} (4 bins), \sphinxstylestrong{quintiles} (5 bins), \sphinxstylestrong{deciles} (10 bins), \sphinxstylestrong{dodeciles} (20 bins) or any other integer number of quantile bins. The quantile bins may be either \sphinxstylestrong{lower closed} (default) or \sphinxstylestrong{upper\sphinxhyphen{}closed}.
-
+The \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles}} class parameter \sphinxstyleemphasis{numberOfBins} (see \hyperref[\detokenize{tutorial:perfquantiles}]{Listing \ref{\detokenize{tutorial:perfquantiles}}} Line 9 above), choosing the wished number of quantile frequencies, may be either \sphinxstylestrong{quartiles} (4 bins), \sphinxstylestrong{quintiles} (5 bins), \sphinxstylestrong{deciles} (10 bins), \sphinxstylestrong{dodeciles} (20 bins) or any other integer number of quantile bins. The quantile bins may be either \sphinxstylestrong{lower closed} (default) or \sphinxstylestrong{upper\sphinxhyphen{}closed}.
+\sphinxSetupCaptionForVerbatim{Printing out the estimated quartile limits}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:limitingquartiles}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{} Printing out the estimated quartile limits}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq}\PYG{o}{.}\PYG{n}{showLimitingQuantiles}\PYG{p}{(}\PYG{n}{ByObjectives}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Historical performance quantiles \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Costs}
@@ -4912,14 +4923,14 @@ The \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles}} class
 \PYG{g+go}{    \PYGZsq{}b5\PYGZsq{}  |    2    |  0.85    29.08    48.55     69.98    97.56}
 \end{sphinxVerbatim}
 
-Both objectives are \sphinxstylestrong{equi\sphinxhyphen{}important}; the sum of weights (10) of the \sphinxstyleemphasis{costs} criteria balance the sum of weights (10) of the \sphinxstyleemphasis{benefits} criteria (see column 2). The preference direction of the \sphinxstyleemphasis{costs} criteria \sphinxstyleemphasis{c1} and \sphinxstyleemphasis{c2} is \sphinxstylestrong{negative}; the lesser the costs the better it is, whereas all the \sphinxstyleemphasis{benefits} criteria \sphinxstyleemphasis{b1} to \sphinxstyleemphasis{b5} show \sphinxstylestrong{positive} preference directions, i.e. the higher the benefits the better it is. The columns entitled ‘0.0’, resp. ‘1.0’ show the \sphinxstyleemphasis{quartile} \sphinxstyleemphasis{Q0}, resp. \sphinxstyleemphasis{Q4}, i.e. the \sphinxstylestrong{worst}, resp. \sphinxstylestrong{best} performance observed so far on each criterion. Column ‘0.5’ shows the \sphinxstylestrong{median} (\sphinxstyleemphasis{Q2}) observed on the criteria.
+Both objectives are \sphinxstylestrong{equi\sphinxhyphen{}important}; the sum of weights (10) of the \sphinxstyleemphasis{costs} criteria balance the sum of weights (10) of the \sphinxstyleemphasis{benefits} criteria (see \hyperref[\detokenize{tutorial:limitingquartiles}]{Listing \ref{\detokenize{tutorial:limitingquartiles}}} column 2). The preference direction of the \sphinxstyleemphasis{costs} criteria \sphinxstyleemphasis{c1} and \sphinxstyleemphasis{c2} is \sphinxstylestrong{negative}; the lesser the costs the better it is, whereas all the \sphinxstyleemphasis{benefits} criteria \sphinxstyleemphasis{b1} to \sphinxstyleemphasis{b5} show \sphinxstylestrong{positive} preference directions, i.e. the higher the benefits the better it is. The columns entitled ‘0.00’, resp. ‘1.00’ show the \sphinxstyleemphasis{quartile} \sphinxstyleemphasis{Q0}, resp. \sphinxstyleemphasis{Q4}, i.e. the \sphinxstylestrong{worst}, resp. \sphinxstylestrong{best} performance observed so far on each criterion. Column ‘0.50’ shows the \sphinxstylestrong{median} (\sphinxstyleemphasis{Q2}) performance observed on the criteria.
 
 New  decision alternatives with random multiple criteria performance vectors from the same random performance tableau model may now be generated with ad hoc random performance generators. We provide for experimental purpose, in the \sphinxcode{\sphinxupquote{randomPerfTabs}} module, three such generators: one for the standard \sphinxcode{\sphinxupquote{randomPerfTabs.RandomPerformanceTableau}} model, one the for the two objectives \sphinxcode{\sphinxupquote{randomPerfTabs.RandomCBPerformanceTableau}} Cost\sphinxhyphen{}Benefit model, and one for the \sphinxcode{\sphinxupquote{randomPerfTabs.Random3ObjectivesPerformanceTableau}} model with three objectives concerning respectively  economic, environmental or social aspects.
 
 Given a new Performance Tableau with 100 new decision alternatives, the so far estimated historical quantile limits may be updated as follows:
-
+\sphinxSetupCaptionForVerbatim{Generating 100 new random decision alternatives of the same model}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:perfgenerator}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{} generate 100 new random decision alternatives}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import} \PYG{n}{RandomPerformanceGenerator}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rpg} \PYG{o}{=} \PYG{n}{RandomPerformanceGenerator}\PYG{p}{(}\PYG{n}{tp}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{n}{seed}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{newTab} \PYG{o}{=} \PYG{n}{rpg}\PYG{o}{.}\PYG{n}{randomPerformanceTableau}\PYG{p}{(}\PYG{l+m+mi}{100}\PYG{p}{)}
@@ -4927,7 +4938,7 @@ Given a new Performance Tableau with 100 new decision alternatives, the so far e
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq}\PYG{o}{.}\PYG{n}{updateQuantiles}\PYG{p}{(}\PYG{n}{newTab}\PYG{p}{,}\PYG{n}{historySize}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-Parameter \sphinxstyleemphasis{historySize} (see Line 6) of the \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles.updateQuantiles()}} method allows to \sphinxstylestrong{balance} the \sphinxstylestrong{new} evaluations against the \sphinxstylestrong{historical} ones. With \sphinxstylestrong{historySize = None} (the default setting), the balance in the example above is 900/1000 (90\%, weight of historical data) against 100/1000 (10\%, weight of the new incoming observations). Putting \sphinxstylestrong{historySize = 0}, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incoming data. The updated quantile limits may be shown in a browser view (see \hyperref[\detokenize{tutorial:exampleperfquantiles}]{Fig.\@ \ref{\detokenize{tutorial:exampleperfquantiles}}}).
+Parameter \sphinxstyleemphasis{historySize} (see \hyperref[\detokenize{tutorial:perfgenerator}]{Listing \ref{\detokenize{tutorial:perfgenerator}}} Line 5) of the \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles.updateQuantiles()}} method allows to \sphinxstylestrong{balance} the \sphinxstylestrong{new} evaluations against the \sphinxstylestrong{historical} ones. With \sphinxstylestrong{historySize = None} (the default setting), the balance in the example above is 900/1000 (90\%, weight of historical data) against 100/1000 (10\%, weight of the new incoming observations). Putting \sphinxstylestrong{historySize = 0}, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incoming data. The updated quantile limits may be shown in a browser view (see \hyperref[\detokenize{tutorial:exampleperfquantiles}]{Fig.\@ \ref{\detokenize{tutorial:exampleperfquantiles}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{} showing the updated quantile limits in a browser view}
@@ -4953,20 +4964,21 @@ It is important to notice that the \sphinxcode{\sphinxupquote{sortingDigraphs.No
 \end{sphinxadmonition}
 
 We reconsider the \sphinxcode{\sphinxupquote{PerformanceQuantiles}} object instance \sphinxstyleemphasis{pq} as computed in the previous section. Let \sphinxstyleemphasis{newActions} be a list of 10 new decision alternatives generated with the same random performance tableau model and including the two decision alternatives \sphinxstyleemphasis{a1001} and \sphinxstyleemphasis{a1010} mentioned at the beginning.
-
+\sphinxSetupCaptionForVerbatim{Computing a normed rating of 10 new decision alternatives}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:normedratinggraph}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{sortingDigraphs} \PYG{k+kn}{import} \PYG{n}{NormedQuantilesRatingDigraph}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{newActions} \PYG{o}{=} \PYG{n}{rpg}\PYG{o}{.}\PYG{n}{randomActions}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{newActions} \PYG{o}{=} \PYG{n}{rpg}\PYG{o}{.}\PYG{n}{randomActions}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{n}{seed}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr} \PYG{o}{=} \PYG{n}{NormedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{best}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{nqr}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description}
 \PYG{g+go}{ Instance class      : NormedQuantilesRatingDigraph}
 \PYG{g+go}{ Instance name       : normedRatingDigraph}
 \PYG{g+go}{ \PYGZsh{} Criteria          : 7}
 \PYG{g+go}{ \PYGZsh{} Quantile profiles : 4}
 \PYG{g+go}{ \PYGZsh{} New actions       : 10}
-\PYG{g+go}{ Size                : 93}
-\PYG{g+go}{ Determinateness (\PYGZpc{})     : 52.17}
+\PYG{g+go}{ Size                : 96}
+\PYG{g+go}{ Determinateness (\PYGZpc{})     : 53.00}
 \PYG{g+go}{ Attributes: [\PYGZsq{}runTimes\PYGZsq{},\PYGZsq{}objectives\PYGZsq{},\PYGZsq{}criteria\PYGZsq{},}
 \PYG{g+go}{  \PYGZsq{}LowerClosed\PYGZsq{},\PYGZsq{}quantilesFrequencies\PYGZsq{},\PYGZsq{}limitingQuantiles\PYGZsq{},}
 \PYG{g+go}{  \PYGZsq{}historySizes\PYGZsq{},\PYGZsq{}cdf\PYGZsq{},\PYGZsq{}name\PYGZsq{},\PYGZsq{}newActions\PYGZsq{},\PYGZsq{}evaluation\PYGZsq{},}
@@ -4974,22 +4986,23 @@ We reconsider the \sphinxcode{\sphinxupquote{PerformanceQuantiles}} object insta
 \PYG{g+go}{  \PYGZsq{}hasNoVeto\PYGZsq{},\PYGZsq{}actions\PYGZsq{},\PYGZsq{}completeRelation\PYGZsq{},\PYGZsq{}relation\PYGZsq{},}
 \PYG{g+go}{  \PYGZsq{}concordanceRelation\PYGZsq{},\PYGZsq{}valuationdomain\PYGZsq{},\PYGZsq{}order\PYGZsq{},\PYGZsq{}gamma\PYGZsq{},}
 \PYG{g+go}{  \PYGZsq{}notGamma\PYGZsq{},\PYGZsq{}rankingRule\PYGZsq{},\PYGZsq{}rankingCorrelation\PYGZsq{},\PYGZsq{}rankingScores\PYGZsq{},}
-\PYG{g+go}{  \PYGZsq{}actionsRanking\PYGZsq{},\PYGZsq{}ratingCategories\PYGZsq{},\PYGZsq{}ratingRelation\PYGZsq{},}
-\PYG{g+go}{  \PYGZsq{}relationOrig\PYGZsq{},\PYGZsq{}rankingByBestChoosing\PYGZsq{}]}
+\PYG{g+go}{  \PYGZsq{}actionsRanking\PYGZsq{},\PYGZsq{}ratingCategories\PYGZsq{},\PYGZsq{}ratingRelation\PYGZsq{},\PYGZsq{}relationOrig\PYGZsq{}]}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Constructor run times (in sec.)}
 \PYG{g+go}{ \PYGZsh{}Threads         : 1}
-\PYG{g+go}{ Total time       : 0.01636}
-\PYG{g+go}{ Data input       : 0.00051}
-\PYG{g+go}{ Quantile classes : 0.00006}
-\PYG{g+go}{ Compute profiles : 0.00005}
-\PYG{g+go}{ Compute relation : 0.01420}
-\PYG{g+go}{ Compute rating   : 0.00154}
+\PYG{g+go}{  Total time       : 0.02218}
+\PYG{g+go}{  Data input       : 0.00134}
+\PYG{g+go}{  Quantile classes : 0.00008}
+\PYG{g+go}{  Compute profiles : 0.00021}
+\PYG{g+go}{  Compute relation : 0.01869}
+\PYG{g+go}{  Compute rating   : 0.00186}
+\PYG{g+go}{  Compute sorting  : 0.00000}
 \end{sphinxVerbatim}
 
-Data input to the \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class constructor (see Line 3) are a valid PerformanceQuantiles object \sphinxstyleemphasis{pq} and a compatible list \sphinxstyleemphasis{newActions} of new decision alternatives generated from the same random origin.
+Data input to the \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class constructor (see \hyperref[\detokenize{tutorial:normedratinggraph}]{Listing \ref{\detokenize{tutorial:normedratinggraph}}} Line 3) are a valid PerformanceQuantiles object \sphinxstyleemphasis{pq} and a compatible list \sphinxstyleemphasis{newActions} of new decision alternatives generated from the same random origin.
 
 Let us have a look at the digraph’s nodes, here called \sphinxstylestrong{newActions}.
-
+\sphinxSetupCaptionForVerbatim{Performance tableau of the new incoming decision alternatives}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:newperftab}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showPerformanceTableau}\PYG{p}{(}\PYG{n}{actionsSubset}\PYG{o}{=}\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{newActions}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  performance tableau \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -5004,64 +5017,71 @@ Let us have a look at the digraph’s nodes, here called \sphinxstylestrong{newA
 \PYG{g+go}{    \PYGZsq{}c2\PYGZsq{}  | \PYGZhy{}40.0 \PYGZhy{}23.0 \PYGZhy{}37.0 \PYGZhy{}37.0 \PYGZhy{}24.0 \PYGZhy{}27.0 \PYGZhy{}73.0 \PYGZhy{}43.0 \PYGZhy{}94.0 \PYGZhy{}35.0}
 \end{sphinxVerbatim}
 
-Among the 10 new incoming decision alternatives (see below), we recognize alternatives \sphinxstyleemphasis{a1001} (see column 2) and \sphinxstyleemphasis{a1010} (see last column) we have mentioned in our introduction.
+Among the 10 new incoming decision alternatives (see \hyperref[\detokenize{tutorial:newperftab}]{Listing \ref{\detokenize{tutorial:newperftab}}}), we recognize alternatives \sphinxstyleemphasis{a1001} (see column 2) and \sphinxstyleemphasis{a1010} (see last column) we have mentioned in our introduction.
 
-The \sphinxcode{\sphinxupquote{NormedQuantilesRatingDigraphdigraph}} instance’s \sphinxstyleemphasis{actions} dictionary also contains the closed lower limits of the four quartile classes: \sphinxstyleemphasis{m1} = {[}0.0\sphinxhyphen{} {[}, \sphinxstyleemphasis{m2} = {[}0.25\sphinxhyphen{} {[}, \sphinxstyleemphasis{m3} = {[}0.5\sphinxhyphen{} {[}, \sphinxstyleemphasis{m4} = {[}0.75 \sphinxhyphen{} {[}.
-
+The \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class instance’s \sphinxstyleemphasis{actions} dictionary includes as well the closed lower limits of the four quartile classes: \sphinxstyleemphasis{m1} = {[}0.0\sphinxhyphen{} {[}, \sphinxstyleemphasis{m2} = {[}0.25\sphinxhyphen{} {[}, \sphinxstyleemphasis{m3} = {[}0.5\sphinxhyphen{} {[}, \sphinxstyleemphasis{m4} = {[}0.75 \sphinxhyphen{} {[}. We find these limits in a \sphinxstyleemphasis{profiles} attribute (see \hyperref[\detokenize{tutorial:limitingprofiles}]{Listing \ref{\detokenize{tutorial:limitingprofiles}}} below).
+\sphinxSetupCaptionForVerbatim{Showing the limiting profiles of the rating quantiles}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:limitingprofiles}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showPerformanceTableau}\PYG{p}{(}\PYG{n}{actionsSubset}\PYG{o}{=}\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{profiles}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Quartiles limit profiles \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{ criteria |   \PYGZsq{}m1\PYGZsq{}   \PYGZsq{}m2\PYGZsq{}   \PYGZsq{}m3\PYGZsq{}   \PYGZsq{}m4\PYGZsq{}}
+\PYG{g+go}{ criteria |  \PYGZsq{}m1\PYGZsq{}   \PYGZsq{}m2\PYGZsq{}   \PYGZsq{}m3\PYGZsq{}   \PYGZsq{}m4\PYGZsq{}}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{    \PYGZsq{}b1\PYGZsq{}  |    2.0   28.8   49.6   75.3}
-\PYG{g+go}{    \PYGZsq{}b2\PYGZsq{}  |    0.0    2.9    4.9    6.7}
-\PYG{g+go}{    \PYGZsq{}b3\PYGZsq{}  |    0.0    2.9    4.9    8.0}
-\PYG{g+go}{    \PYGZsq{}b4\PYGZsq{}  |    3.3   35.9   58.6   72.0}
-\PYG{g+go}{    \PYGZsq{}b5\PYGZsq{}  |    0.8   32.8   48.1   69.7}
-\PYG{g+go}{    \PYGZsq{}c1\PYGZsq{}  |  \PYGZhy{}10.0   \PYGZhy{}7.4   \PYGZhy{}5.4   \PYGZhy{}3.4}
-\PYG{g+go}{    \PYGZsq{}c2\PYGZsq{}  |  \PYGZhy{}96.4  \PYGZhy{}72.2  \PYGZhy{}52.3  \PYGZhy{}34.0}
+\PYG{g+go}{    \PYGZsq{}b1\PYGZsq{}  |  2.0    29.8   49.4   70.7}
+\PYG{g+go}{    \PYGZsq{}b2\PYGZsq{}  |  0.0     3.0    5.0    7.0}
+\PYG{g+go}{    \PYGZsq{}b3\PYGZsq{}  |  0.0     3.0    5.0    7.0}
+\PYG{g+go}{    \PYGZsq{}b4\PYGZsq{}  |  3.3    30.1   50.8   70.9}
+\PYG{g+go}{    \PYGZsq{}b5\PYGZsq{}  |  0.8    29.1   48.6   70.0}
+\PYG{g+go}{    \PYGZsq{}c1\PYGZsq{}  | \PYGZhy{}10.0   \PYGZhy{}7.0   \PYGZhy{}5.0   \PYGZhy{}3.0}
+\PYG{g+go}{    \PYGZsq{}c2\PYGZsq{}  | \PYGZhy{}96.4  \PYGZhy{}70.6  \PYGZhy{}50.1  \PYGZhy{}30.0}
 \end{sphinxVerbatim}
 
-The main run time (see Lines 23\sphinxhyphen{}29 of the object description above) is spent by the class constructor in computing a bipolar\sphinxhyphen{}valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, i.e. many new decision alternatives and centile classes for instance, a multi\sphinxhyphen{}threading version may be used when multiple processing cores are available (see the technical description of the \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class).
+The main run time (see \hyperref[\detokenize{tutorial:normedratinggraph}]{Listing \ref{\detokenize{tutorial:normedratinggraph}}} Lines 23\sphinxhyphen{}29) is spent by the class constructor in computing a bipolar\sphinxhyphen{}valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, i.e. many new decision alternatives and centile classes for instance, a multi\sphinxhyphen{}threading version may be used when multiple processing cores are available (see the technical description of the \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class).
 
-The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar\sphinxhyphen{}valued outranking digraph. Two efficient and scalable ranking rules, the \sphinxstylestrong{Copeland} and its valued version, the \sphinxstylestrong{Netflows} rule may be used for this purpose. The \sphinxstyleemphasis{rankingRule} parameter allows to choose one of both. With \sphinxstyleemphasis{rankingRule=’best’} (see Line 2 above) the \sphinxcode{\sphinxupquote{NormedQuantilesRatingDigraph}} constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see \sphinxcite{tutorial:bis-2012}).
+The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar\sphinxhyphen{}valued outranking digraph. Two efficient and scalable ranking rules, the \sphinxstylestrong{Copeland} and its valued version, the \sphinxstylestrong{Netflows} rule may be used for this purpose. The \sphinxstyleemphasis{rankingRule} parameter allows to choose one of both. With \sphinxstyleemphasis{rankingRule=’best’} (see \hyperref[\detokenize{tutorial:limitingprofiles}]{Listing \ref{\detokenize{tutorial:limitingprofiles}}} Line 2 ) the \sphinxcode{\sphinxupquote{NormedQuantilesRatingDigraph}} constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see \sphinxcite{tutorial:bis-2012}).
 
-In this rating example, the \sphinxstyleemphasis{NetFlows} rule appears to be the more appropriate ranking rule.
+In this rating example, the \sphinxstyleemphasis{Copeland} rule appears to be the more appropriate ranking rule.
+\sphinxSetupCaptionForVerbatim{Copeland ranking of new alternatives and historical quartile limits}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:rankingcorrelation}}}
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{rankingRule}
+\PYG{g+go}{ \PYGZsq{}Copeland\PYGZsq{}}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{actionsRanking}
+\PYG{g+go}{ [\PYGZsq{}m4\PYGZsq{},}
+\PYG{g+go}{  \PYGZsq{}a1005\PYGZsq{}, \PYGZsq{}a1010\PYGZsq{}, \PYGZsq{}a1002\PYGZsq{}, \PYGZsq{}a1008\PYGZsq{}, \PYGZsq{}a1006\PYGZsq{}, \PYGZsq{}a1001\PYGZsq{}, \PYGZsq{}a1003\PYGZsq{},}
+\PYG{g+go}{  \PYGZsq{}m3\PYGZsq{}, \PYGZsq{}a1007\PYGZsq{}, \PYGZsq{}a1004\PYGZsq{}, \PYGZsq{}a1009\PYGZsq{},}
+\PYG{g+go}{  \PYGZsq{}m2\PYGZsq{},}
+\PYG{g+go}{  \PYGZsq{}m1\PYGZsq{}]    Actions ranking     :}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{rankingCorrelation}\PYG{p}{)}
+\PYG{g+go}{ Correlation indexes:}
+\PYG{g+go}{  Crisp ordinal correlation  : +0.938}
+\PYG{g+go}{  Epistemic determination    :  0.530}
+\PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.498}
+\end{sphinxVerbatim}
+
+We achieve here (see \hyperref[\detokenize{tutorial:rankingcorrelation}]{Listing \ref{\detokenize{tutorial:rankingcorrelation}}}) a linear ranking without ties (from best to worst) of the digraph’s actions set, i.e. including the new decision alternatives as well as the quartile limits \sphinxstyleemphasis{m1} to \sphinxstyleemphasis{m4}, which is very close in an ordinal sense \((\tau = 0.94)\) to the underlying strict outranking relation.
+
+The eventual rating procedure is based in this example on the \sphinxstyleemphasis{lower} quartile limits, such that we may collect the quartile classes’ contents in increasing order of the \sphinxstyleemphasis{quartiles}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Ranking rule        :}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{nqr}\PYG{o}{.}\PYG{n}{rankingRule}\PYG{p}{)}
-\PYG{g+go}{ Ranking rule        : NetFlows}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Actions ranking     :}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{nqr}\PYG{o}{.}\PYG{n}{actionsRanking}\PYG{p}{)}
-\PYG{g+go}{ Actions ranking     :}
-\PYG{g+go}{ [\PYGZsq{}m4\PYGZsq{}, \PYGZsq{}a1005\PYGZsq{}, \PYGZsq{}a1010\PYGZsq{}, \PYGZsq{}a1008\PYGZsq{}, \PYGZsq{}a1002\PYGZsq{}, \PYGZsq{}a1006\PYGZsq{},}
-\PYG{g+go}{ \PYGZsq{}m3\PYGZsq{}, \PYGZsq{}a1003\PYGZsq{}, \PYGZsq{}a1001\PYGZsq{}, \PYGZsq{}a1007\PYGZsq{}, \PYGZsq{}a1004\PYGZsq{}, \PYGZsq{}a1009\PYGZsq{},}
-\PYG{g+go}{ \PYGZsq{}m2\PYGZsq{}, \PYGZsq{}m1\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Ranking correlation : }\PYG{l+s+si}{\PYGZpc{}+.2f}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}}\PYGZbs{}
-\PYG{g+go}{             (nqr.rankingCorrelation[\PYGZsq{}correlation\PYGZsq{}]) )}
-\PYG{g+go}{ Ranking correlation : +0.938}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{ratingCategories}
+\PYG{g+go}{ OrderedDict([}
+\PYG{g+go}{ (\PYGZsq{}m2\PYGZsq{}, [\PYGZsq{}a1007\PYGZsq{},\PYGZsq{}a1004\PYGZsq{},\PYGZsq{}a1009\PYGZsq{}]),}
+\PYG{g+go}{ (\PYGZsq{}m3\PYGZsq{}, [\PYGZsq{}a1005\PYGZsq{},\PYGZsq{}a1010\PYGZsq{},\PYGZsq{}a1002\PYGZsq{},\PYGZsq{}a1008\PYGZsq{},\PYGZsq{}a1006\PYGZsq{},\PYGZsq{}a1001\PYGZsq{},\PYGZsq{}a1003\PYGZsq{}])}
+\PYG{g+go}{ ])}
 \end{sphinxVerbatim}
 
-We achieve here a linear ranking without ties (from best to worst) of the digraph’s actions, i.e. including the new decision alternatives as well as the quartile limits \sphinxstyleemphasis{m1} to \sphinxstyleemphasis{m4}, which is very close in an ordinal sense (\sphinxstyleemphasis{tau} = 0.94) to the underlying valued outranking relation.
-
-The eventual rating procedure is based on the lower quantile limits, such that we may collect the quartile classes’ contents in increasing order of the \sphinxstyleemphasis{quartiles} lower limits.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Rating categories:}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{n}{nqr}\PYG{o}{.}\PYG{n}{ratingCategories}\PYG{p}{)}
-\PYG{g+go}{ Rating categories: OrderedDict([}
-\PYG{g+go}{ (\PYGZsq{}m2\PYGZsq{}, [\PYGZsq{}a1003\PYGZsq{}, \PYGZsq{}a1001\PYGZsq{}, \PYGZsq{}a1007\PYGZsq{}, \PYGZsq{}a1004\PYGZsq{}, \PYGZsq{}a1009\PYGZsq{}]),}
-\PYG{g+go}{ (\PYGZsq{}m3\PYGZsq{}, [\PYGZsq{}a1005\PYGZsq{}, \PYGZsq{}a1010\PYGZsq{}, \PYGZsq{}a1008\PYGZsq{}, \PYGZsq{}a1002\PYGZsq{}, \PYGZsq{}a1006\PYGZsq{}])])}
-\end{sphinxVerbatim}
-
-We notice above that no new decision alternative is rated in the lowest {[}0.0\sphinxhyphen{}0.25{[}, respectively highest {[}0.75\sphinxhyphen{} {[} quartile class. Indeed, the rating result is shown, in descending order, as follows:
+We notice above that no new decision alternatives are actually rated in the lowest {[}0.0\sphinxhyphen{}0.25{[}, respectively highest {[}0.75\sphinxhyphen{} {[} quartile classes. Indeed, the rating result is shown, in descending order, as follows:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Quartiles rating result \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{ [0.50 \PYGZhy{} 0.75[ [\PYGZsq{}a1005\PYGZsq{}, \PYGZsq{}a1010\PYGZsq{}, \PYGZsq{}a1008\PYGZsq{}, \PYGZsq{}a1002\PYGZsq{}, \PYGZsq{}a1006\PYGZsq{}]}
-\PYG{g+go}{ [0.25 \PYGZhy{} 0.50[ [\PYGZsq{}a1003\PYGZsq{}, \PYGZsq{}a1001\PYGZsq{}, \PYGZsq{}a1007\PYGZsq{}, \PYGZsq{}a1004\PYGZsq{}, \PYGZsq{}a1009\PYGZsq{}]}
+\PYG{g+go}{ [0.50 \PYGZhy{} 0.75[ [\PYGZsq{}a1005\PYGZsq{}, \PYGZsq{}a1010\PYGZsq{}, \PYGZsq{}a1002\PYGZsq{}, \PYGZsq{}a1008\PYGZsq{},}
+\PYG{g+go}{                \PYGZsq{}a1006\PYGZsq{}, \PYGZsq{}a1001\PYGZsq{}, \PYGZsq{}a1003\PYGZsq{}]}
+\PYG{g+go}{ [0.25 \PYGZhy{} 0.50[ [\PYGZsq{}a1007\PYGZsq{}, \PYGZsq{}a1004\PYGZsq{}, \PYGZsq{}a1009\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-The same result may even more conveniently be consulted in a browser view via a specialised rating heatmap format ( see \sphinxcode{\sphinxupquote{perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()}} method (see \hyperref[\detokenize{tutorial:heatmap1}]{Fig.\@ \ref{\detokenize{tutorial:heatmap1}}}).
+The same result may more conveniently be consulted in a browser view via a specialised rating heatmap format ( see \sphinxcode{\sphinxupquote{perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()}} method (see \hyperref[\detokenize{tutorial:heatmap1}]{Fig.\@ \ref{\detokenize{tutorial:heatmap1}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showHTMLRatingHeatmap}\PYG{p}{(}\PYG{n}{pageTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Heatmap of Quartiles Rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
@@ -5091,17 +5111,15 @@ Using furthermore a specialised version of the \sphinxcode{\sphinxupquote{transi
 \noindent\sphinxincludegraphics[width=500\sphinxpxdimen]{{normedRatingDigraph}.png}
 \caption{Normed quartiles rating digraph}\label{\detokenize{tutorial:normedratingdigraph}}\end{figure}
 
-We may now answer the \sphinxstylestrong{normed rating decision problem} stated at the beginning. Decision alternative \sphinxstyleemphasis{a1001} is rated in quartile \sphinxstylestrong{Q2} and alternative \sphinxstyleemphasis{a1010} in quartile \sphinxstylestrong{Q3} (see Table below). Indeed, the performances of decision alternative \sphinxstyleemphasis{a1001} were generated with a triangular law at a \sphinxstyleemphasis{low} mode, i.e. low costs but also low benefits, whereas the performances of alternative \sphinxstyleemphasis{a1010} were generated with a \sphinxstyleemphasis{median} mode.
+We may now answer the \sphinxstylestrong{normed rating decision problem} stated at the beginning. Decision alternative \sphinxstyleemphasis{a1001} and alternative \sphinxstyleemphasis{a1010} (see below) are both rated into the same quartile \sphinxstylestrong{Q3} class (see \hyperref[\detokenize{tutorial:normedratingdigraph}]{Fig.\@ \ref{\detokenize{tutorial:normedratingdigraph}}}), even if the \sphinxstyleemphasis{Copeland} ranking, obtained from the underlying strict outranking digraph (see \hyperref[\detokenize{tutorial:heatmap1}]{Fig.\@ \ref{\detokenize{tutorial:heatmap1}}}), suggests that alternative \sphinxstyleemphasis{a1010} is effectively \sphinxstyleemphasis{better performing than} alternative \sphinxstyleemphasis{a1001}.
 \begin{quote}
 
 
 \begin{savenotes}\sphinxattablestart
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|T|T|T|}
+\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|T|T|}
 \hline
 \sphinxstyletheadfamily 
-Rating
-&\sphinxstyletheadfamily 
 Criterion
 &\sphinxstyletheadfamily 
 b1
@@ -5119,8 +5137,6 @@ c1
 c2
 \\
 \hline
-quartiles
-&
 weight
 &
 2
@@ -5138,8 +5154,6 @@ weight
 5
 \\
 \hline
-\sphinxstylestrong{Q2}
-&
 \sphinxstyleemphasis{a1001}
 &
 37.0
@@ -5157,8 +5171,6 @@ weight
 \sphinxhyphen{}40.0
 \\
 \hline
-\sphinxstylestrong{Q3}
-&
 \sphinxstyleemphasis{a1010}
 &
 32.0
@@ -5181,11 +5193,13 @@ weight
 \sphinxattableend\end{savenotes}
 \end{quote}
 
-A more precise rating result may be achieved when we use \sphinxstylestrong{deciles} instead of \sphinxstyleemphasis{quartiles} for estimating the historical cumulative distribution functions.
-
+A refined rating result may indeed be achieved when using \sphinxstylestrong{deciles} instead of \sphinxstyleemphasis{quartiles} for estimating the historical marginal cumulative distribution functions.
+\sphinxSetupCaptionForVerbatim{Normed deciles rating result}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:decilesrating}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq1} \PYG{o}{=} \PYG{n}{PerformanceQuantiles}\PYG{p}{(}\PYG{n}{tp}\PYG{p}{,} \PYG{n}{numberOfBins} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{deciles}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
 \PYG{g+go}{                 LowerClosed=True)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq1}\PYG{o}{.}\PYG{n}{updateQuantiles}\PYG{p}{(}\PYG{n}{newTab}\PYG{p}{,}\PYG{n}{historySize}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr1} \PYG{o}{=} \PYG{n}{NormedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq1}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{best}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr1}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Deciles rating result \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -5195,7 +5209,7 @@ A more precise rating result may be achieved when we use \sphinxstylestrong{deci
 \PYG{g+go}{ [0.30 \PYGZhy{} 0.40[ [\PYGZsq{}a1009\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-Compared with the quartiles rating result, we notice that the five alternatives (\sphinxstyleemphasis{a1002}, \sphinxstyleemphasis{a1005}, \sphinxstyleemphasis{a1006}, \sphinxstyleemphasis{a1008}, and \sphinxstyleemphasis{a1010}), rated before into the third quartile class {[}0.50\sphinxhyphen{}0.75{[}, are now divided up: alternatives \sphinxstyleemphasis{a1002}, \sphinxstyleemphasis{a1005}, \sphinxstyleemphasis{a1008} and \sphinxstyleemphasis{a1010} attain the 7th decile class {[}0.6\sphinxhyphen{}0.7{[}, whereas alternative \sphinxstyleemphasis{a1006} attains only the the 6th decile class {[}0.5\sphinxhyphen{}0.6{[}. Of the five \sphinxstyleemphasis{Q2} {[}0.25\sphinxhyphen{}0.50{[} rated alternatives (\sphinxstyleemphasis{a1001}, \sphinxstyleemphasis{a1003}, \sphinxstyleemphasis{a1004}, \sphinxstyleemphasis{a1006} and \sphinxstyleemphasis{a1007}), alternatives \sphinxstyleemphasis{a1001} and \sphinxstyleemphasis{a1003} are now rated in the 6th decile class {[}0.5 \sphinxhyphen{} 0.6{[}, whereas \sphinxstyleemphasis{a1004} and \sphinxstyleemphasis{a1007} are rated the 5th decile class {[}0.4\sphinxhyphen{}0.5{[} and \sphinxstyleemphasis{a1009} is lowest rated in the 4th decile class {[}0.3 \sphinxhyphen{} 0.4{[}.
+Compared with the quartiles rating result, we notice in \hyperref[\detokenize{tutorial:decilesrating}]{Listing \ref{\detokenize{tutorial:decilesrating}}} that the seven alternatives (\sphinxstyleemphasis{a1001}, \sphinxstyleemphasis{a1002}, \sphinxstyleemphasis{a1003}, \sphinxstyleemphasis{a1005}, \sphinxstyleemphasis{a1006, *a1008} and \sphinxstyleemphasis{a1010}), rated before into the third quartile class {[}0.50\sphinxhyphen{}0.75{[}, are now divided up: alternatives \sphinxstyleemphasis{a1002}, \sphinxstyleemphasis{a1005}, \sphinxstyleemphasis{a1008} and \sphinxstyleemphasis{a1010} attain now the 7th decile class {[}0.60\sphinxhyphen{}0.70{[}, whereas alternatives \sphinxstyleemphasis{a1001}, \sphinxstyleemphasis{a1003} and \sphinxstyleemphasis{a1006} attains only the the 6th decile class {[}0.50\sphinxhyphen{}0.60{[}. Of the three \sphinxstyleemphasis{Q2} {[}0.25\sphinxhyphen{}0.50{[} rated alternatives (\sphinxstyleemphasis{a1004}, \sphinxstyleemphasis{a1007} and \sphinxstyleemphasis{a1009}), alternatives \sphinxstyleemphasis{a1004} and \sphinxstyleemphasis{a1007} are now rated the 5th decile class {[}0.40\sphinxhyphen{}0.50{[} and \sphinxstyleemphasis{a1009} is lowest rated in the 4th decile class {[}0.30\sphinxhyphen{}0.40{[}.
 
 A browser view may again more conveniently illustrate this preciser \sphinxstyleemphasis{deciles} rating result (see \hyperref[\detokenize{tutorial:heatmap2}]{Fig.\@ \ref{\detokenize{tutorial:heatmap2}}}).
 
@@ -5211,7 +5225,7 @@ A browser view may again more conveniently illustrate this preciser \sphinxstyle
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{heatMap2}.png}
 \caption{heatmap of mormed deciles rating}\label{\detokenize{tutorial:heatmap2}}\end{figure}
 
-In this preciser \sphinxstyleemphasis{deciles} rating, decision alternatives \sphinxstyleemphasis{a1001} and \sphinxstyleemphasis{a1010} are now rated in the \sphinxstyleemphasis{6th} decile (D6), respectively in the \sphinxstyleemphasis{7th} decile (D7).
+In this refined \sphinxstyleemphasis{deciles} rating, decision alternatives \sphinxstyleemphasis{a1001} and \sphinxstyleemphasis{a1010} are now, as expected, rated in the \sphinxstyleemphasis{6th} decile (D6), respectively in the \sphinxstyleemphasis{7th} decile (D7).
 
 More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions with \sphinxstylestrong{dodeciles} or even \sphinxstylestrong{centiles}. Especially if \sphinxstylestrong{tail} rating results, i.e. distinguishing \sphinxstylestrong{very best}, or \sphinxstylestrong{very worst} multiple criteria performances, becomes a critical purpose. Similarly, the \sphinxstyleemphasis{historySize} parameter may be used for monitoring on the fly \sphinxstylestrong{unstable} random multiple criteria performance data.
 
