@@ -2260,7 +2260,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         return actionsCategIntervals
 
 
-    def computeQuantileOrdering(self,strategy=None,
+    def computeQuantileOrdering(self,strategy='average',
                                 Descending=True,
                                 HTML=False,
                                 title='Quantiles Preordering',
@@ -2269,7 +2269,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         """
         *Parameters*:
             * Descending: listing in *decreasing* (default) or *increasing* quantile order.
-            * strategy: ordering in an {'optimistic' (default) | 'pessimistic' | 'average'}
+            * strategy: ordering in an {'optimistic' | 'pessimistic' | 'average' (default)}
               in the uppest, the lowest or the average potential quantile.
         
         """
@@ -2286,40 +2286,40 @@ class QuantilesSortingDigraph(SortingDigraph):
         for x in self.actions:
             a,lowCateg,highCateg,credibility =\
                      self.showActionCategories(x,Comments=Debug)
+            ilowCateg = int(lowCateg)
+            ihighCateg = int(highCateg)
             #print(a,lowCateg,highCateg,credibility)
             if strategy == "optimistic":
                 try:
-                    actionsCategories[(highCateg,lowCateg,lowCateg)].append(a)
+                    actionsCategories[(ihighCateg,ilowCateg,ilowCateg)].append(a)
                 except:
-                    actionsCategories[(highCateg,lowCateg,lowCateg)] = [a]
+                    actionsCategories[(ihighCateg,ilowCateg,ilowCateg)] = [a]
             elif strategy == "pessimistic":
                 try:
-                    actionsCategories[(lowCateg,highCateg,lowCateg)].append(a)
+                    actionsCategories[(ilowCateg,ihighCateg,ilowCateg)].append(a)
                 except:
-                    actionsCategories[(lowCateg,highCateg,lowCateg)] = [a]
+                    actionsCategories[(ilowCateg,ihighCateg,ilowCateg)] = [a]
             elif strategy == "average":
                 lc = float(lowCateg)
                 hc = float(highCateg)
                 ac = (lc+hc)/2.0
                 try:
-                    actionsCategories[(ac,highCateg,lowCateg)].append(a)
+                    actionsCategories[(ac,ihighCateg,ilowCateg)].append(a)
                 except:
-                    actionsCategories[(ac,highCateg,lowCateg)] = [a]
-            else:  # optimistic by default
-                try:
-                    actionsCategories[(highCateg,lowCateg,lowCateg)].append(a)
-                except:
-                    actionsCategories[(highCateg,lowCateg,lowCateg)] = [a]      
+                    actionsCategories[(ac,ihighCateg,ilowCateg)] = [a]
+            else:
+                print('Error: %s not a valid ordering strategy !!!' % strategy)
+                break
                 
-        #actionsCategIntervals.sort(reverse=Descending)
+        # sorting the quantile equivalence classes
         actionsCategoriesKeys = [key for key in actionsCategories]
         actionsCategoriesKeys = sorted(actionsCategoriesKeys,key=itemgetter(0,1,2), reverse=True)
-
         actionsCategIntervals = []
         for interval in actionsCategoriesKeys:
             actionsCategIntervals.append([interval,\
                                           actionsCategories[interval]])
-        
+
+        # gathering the result with output when Comments=True
         weakOrdering = []
         for item in actionsCategIntervals:
             #print(item)
@@ -2389,10 +2389,12 @@ class QuantilesSortingDigraph(SortingDigraph):
         else:
             return weakOrdering
 
-    def showQuantileOrdering(self,strategy=None):
+    def showQuantileOrdering(self,strategy='average'):
         """
         Dummy show method for the commenting computeQuantileOrdering() method.
         """
+        if strategy == None:
+            strategy = 'average'
         self.computeQuantileOrdering(strategy=strategy,Comments=True)
 
 
