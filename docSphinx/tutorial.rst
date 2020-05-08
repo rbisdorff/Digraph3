@@ -4300,7 +4300,7 @@ The same result may more conveniently be consulted in a browser view via a speci
     :width: 400 px
     :align: center
 
-    heatmap of normed quartiles ranking 
+    Heatmap of normed quartiles ranking 
 	    
 Using furthermore a specialised version of the :py:meth:`transitiveDigraphs.TransitiveDigraph.exportGraphViz` method allows drawing the same rating result in a Hasse diagram format (see :numref:`normedRatingDigraph`).
 
@@ -4363,7 +4363,7 @@ A browser view may again more conveniently illustrate this refined rating result
     :width: 400 px
     :align: center
 
-    heatmap of mormed deciles rating 
+    Heatmap of normed deciles rating 
 
 In this *deciles* rating, decision alternatives *a1001* and *a1010* are now, as expected, rated in the *6th* decile (D6), respectively in the *7th* decile (D7).
     

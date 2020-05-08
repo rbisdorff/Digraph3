@@ -1,10 +1,10 @@
 # Fdb version 3
-["makeindex digraph3Pearls.idx"] 1580825225 "digraph3Pearls.idx" "digraph3Pearls.ind" "digraph3Pearls" 1588904123
+["makeindex digraph3Pearls.idx"] 1580825225 "digraph3Pearls.idx" "digraph3Pearls.ind" "digraph3Pearls" 1588904553
   "digraph3Pearls.idx" 1588904122 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
-  "digraph3Pearls.ilg"
   "digraph3Pearls.ind"
-["pdflatex"] 1588904121 "digraph3Pearls.tex" "digraph3Pearls.pdf" "digraph3Pearls" 1588904123
+  "digraph3Pearls.ilg"
+["pdflatex"] 1588904121 "digraph3Pearls.tex" "digraph3Pearls.pdf" "digraph3Pearls" 1588904553
   "/etc/texmf/web2c/texmf.cnf" 1587900120 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1587973237 31928 b6a0d95e5aac173e646f5786657faf1e ""
   "/home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk" 1587973238 49076 83e5c00506bea7380b8dbebce89bb761 ""
@@ -208,16 +208,16 @@
   "robustHeatmap.png" 1580704985 154058 8ede85365a1f8ca8940cef240e931fa3 ""
   "simulLikelihood.png" 1568211321 22562 cf4b77dc733a465112a7dad344b7c667 ""
   "sphinx.sty" 1576588962 81878 44d14f90f8cb22a202794c148df60b64 ""
-  "sphinxhighlight.sty" 1588904099 8137 38a433148fcb7611515a989ff1750dd5 ""
+  "sphinxhighlight.sty" 1588904531 8137 38a433148fcb7611515a989ff1750dd5 ""
   "sphinxhowto.cls" 1576588962 3253 f1422f11047981f159e1ea718dbe2c47 ""
-  "sphinxmessages.sty" 1588904121 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1588904553 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxmulticell.sty" 1576588962 14606 0b6edc2b1a83546ed92026d1f6a311b5 ""
   "symmetricPart.png" 1561456833 74487 bef1531d29a633b766bb94b1dcbb02bb ""
   "weightDistributions.png" 1568211349 96093 6882246be0684c7dd44502a778cc71de ""
   (generated)
-  "digraph3Pearls.out"
-  "digraph3Pearls.toc"
-  "digraph3Pearls.pdf"
   "digraph3Pearls.idx"
   "digraph3Pearls.aux"
+  "digraph3Pearls.toc"
+  "digraph3Pearls.out"
   "digraph3Pearls.log"
+  "digraph3Pearls.pdf"
