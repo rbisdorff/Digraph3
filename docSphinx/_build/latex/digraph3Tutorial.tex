@@ -54,7 +54,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{May 07, 2020}
+\date{May 08, 2020}
 \release{3.8-3600+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -5047,11 +5047,8 @@ In this rating example, the \sphinxstyleemphasis{Copeland} rule appears to be th
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{rankingRule}
 \PYG{g+go}{ \PYGZsq{}Copeland\PYGZsq{}}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{actionsRanking}
-\PYG{g+go}{ [\PYGZsq{}m4\PYGZsq{},}
-\PYG{g+go}{  \PYGZsq{}a1005\PYGZsq{}, \PYGZsq{}a1010\PYGZsq{}, \PYGZsq{}a1002\PYGZsq{}, \PYGZsq{}a1008\PYGZsq{}, \PYGZsq{}a1006\PYGZsq{}, \PYGZsq{}a1001\PYGZsq{}, \PYGZsq{}a1003\PYGZsq{},}
-\PYG{g+go}{  \PYGZsq{}m3\PYGZsq{}, \PYGZsq{}a1007\PYGZsq{}, \PYGZsq{}a1004\PYGZsq{}, \PYGZsq{}a1009\PYGZsq{},}
-\PYG{g+go}{  \PYGZsq{}m2\PYGZsq{},}
-\PYG{g+go}{  \PYGZsq{}m1\PYGZsq{}]    Actions ranking     :}
+\PYG{g+go}{ [\PYGZsq{}m4\PYGZsq{}, \PYGZsq{}a1005\PYGZsq{}, \PYGZsq{}a1010\PYGZsq{}, \PYGZsq{}a1002\PYGZsq{}, \PYGZsq{}a1008\PYGZsq{}, \PYGZsq{}a1006\PYGZsq{}, \PYGZsq{}a1001\PYGZsq{},}
+\PYG{g+go}{  \PYGZsq{}a1003\PYGZsq{}, \PYGZsq{}m3\PYGZsq{}, \PYGZsq{}a1007\PYGZsq{}, \PYGZsq{}a1004\PYGZsq{}, \PYGZsq{}a1009\PYGZsq{}, \PYGZsq{}m2\PYGZsq{}, \PYGZsq{}m1\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{rankingCorrelation}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
 \PYG{g+go}{  Crisp ordinal correlation  : +0.938}
@@ -5193,7 +5190,7 @@ weight
 \sphinxattableend\end{savenotes}
 \end{quote}
 
-A refined rating result may indeed be achieved when using \sphinxstylestrong{deciles} instead of \sphinxstyleemphasis{quartiles} for estimating the historical marginal cumulative distribution functions.
+A preciser rating result may indeed be achieved when using \sphinxstylestrong{deciles} instead of \sphinxstyleemphasis{quartiles} for estimating the historical marginal cumulative distribution functions.
 \sphinxSetupCaptionForVerbatim{Normed deciles rating result}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:decilesrating}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -5209,9 +5206,9 @@ A refined rating result may indeed be achieved when using \sphinxstylestrong{dec
 \PYG{g+go}{ [0.30 \PYGZhy{} 0.40[ [\PYGZsq{}a1009\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-Compared with the quartiles rating result, we notice in \hyperref[\detokenize{tutorial:decilesrating}]{Listing \ref{\detokenize{tutorial:decilesrating}}} that the seven alternatives (\sphinxstyleemphasis{a1001}, \sphinxstyleemphasis{a1002}, \sphinxstyleemphasis{a1003}, \sphinxstyleemphasis{a1005}, \sphinxstyleemphasis{a1006, *a1008} and \sphinxstyleemphasis{a1010}), rated before into the third quartile class {[}0.50\sphinxhyphen{}0.75{[}, are now divided up: alternatives \sphinxstyleemphasis{a1002}, \sphinxstyleemphasis{a1005}, \sphinxstyleemphasis{a1008} and \sphinxstyleemphasis{a1010} attain now the 7th decile class {[}0.60\sphinxhyphen{}0.70{[}, whereas alternatives \sphinxstyleemphasis{a1001}, \sphinxstyleemphasis{a1003} and \sphinxstyleemphasis{a1006} attains only the the 6th decile class {[}0.50\sphinxhyphen{}0.60{[}. Of the three \sphinxstyleemphasis{Q2} {[}0.25\sphinxhyphen{}0.50{[} rated alternatives (\sphinxstyleemphasis{a1004}, \sphinxstyleemphasis{a1007} and \sphinxstyleemphasis{a1009}), alternatives \sphinxstyleemphasis{a1004} and \sphinxstyleemphasis{a1007} are now rated the 5th decile class {[}0.40\sphinxhyphen{}0.50{[} and \sphinxstyleemphasis{a1009} is lowest rated in the 4th decile class {[}0.30\sphinxhyphen{}0.40{[}.
+Compared with the quartiles rating result, we notice in \hyperref[\detokenize{tutorial:decilesrating}]{Listing \ref{\detokenize{tutorial:decilesrating}}} that the seven alternatives (\sphinxstyleemphasis{a1001}, \sphinxstyleemphasis{a1002}, \sphinxstyleemphasis{a1003}, \sphinxstyleemphasis{a1005}, \sphinxstyleemphasis{a1006, *a1008} and \sphinxstyleemphasis{a1010}), rated before into the third quartile class {[}0.50\sphinxhyphen{}0.75{[}, are now divided up: alternatives \sphinxstyleemphasis{a1002}, \sphinxstyleemphasis{a1005}, \sphinxstyleemphasis{a1008} and \sphinxstyleemphasis{a1010} attain now the 7th decile class {[}0.60\sphinxhyphen{}0.70{[}, whereas alternatives \sphinxstyleemphasis{a1001}, \sphinxstyleemphasis{a1003} and \sphinxstyleemphasis{a1006} attain only the 6th decile class {[}0.50\sphinxhyphen{}0.60{[}. Of the three \sphinxstyleemphasis{Q2} {[}0.25\sphinxhyphen{}0.50{[} rated alternatives (\sphinxstyleemphasis{a1004}, \sphinxstyleemphasis{a1007} and \sphinxstyleemphasis{a1009}), alternatives \sphinxstyleemphasis{a1004} and \sphinxstyleemphasis{a1007} are now rated into the 5th decile class {[}0.40\sphinxhyphen{}0.50{[} and \sphinxstyleemphasis{a1009} is lowest rated into the 4th decile class {[}0.30\sphinxhyphen{}0.40{[}.
 
-A browser view may again more conveniently illustrate this preciser \sphinxstyleemphasis{deciles} rating result (see \hyperref[\detokenize{tutorial:heatmap2}]{Fig.\@ \ref{\detokenize{tutorial:heatmap2}}}).
+A browser view may again more conveniently illustrate this refined rating result (see \hyperref[\detokenize{tutorial:heatmap2}]{Fig.\@ \ref{\detokenize{tutorial:heatmap2}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr1}\PYG{o}{.}\PYG{n}{showHTMLRatingHeatmap}\PYG{p}{(}\PYG{n}{pageTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Heatmap of the deciles rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
@@ -5225,7 +5222,7 @@ A browser view may again more conveniently illustrate this preciser \sphinxstyle
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{heatMap2}.png}
 \caption{heatmap of mormed deciles rating}\label{\detokenize{tutorial:heatmap2}}\end{figure}
 
-In this refined \sphinxstyleemphasis{deciles} rating, decision alternatives \sphinxstyleemphasis{a1001} and \sphinxstyleemphasis{a1010} are now, as expected, rated in the \sphinxstyleemphasis{6th} decile (D6), respectively in the \sphinxstyleemphasis{7th} decile (D7).
+In this \sphinxstyleemphasis{deciles} rating, decision alternatives \sphinxstyleemphasis{a1001} and \sphinxstyleemphasis{a1010} are now, as expected, rated in the \sphinxstyleemphasis{6th} decile (D6), respectively in the \sphinxstyleemphasis{7th} decile (D7).
 
 More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions with \sphinxstylestrong{dodeciles} or even \sphinxstylestrong{centiles}. Especially if \sphinxstylestrong{tail} rating results, i.e. distinguishing \sphinxstylestrong{very best}, or \sphinxstylestrong{very worst} multiple criteria performances, becomes a critical purpose. Similarly, the \sphinxstyleemphasis{historySize} parameter may be used for monitoring on the fly \sphinxstylestrong{unstable} random multiple criteria performance data.
 

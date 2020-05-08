@@ -5989,17 +5989,11 @@ play much a role, it would be perhaps better to decide to move to the most advan
  7
  8
  9
-10
-11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">rankingRule</span>
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">rankingRule</span>
 <span class="go"> &#39;Copeland&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">actionsRanking</span>
-<span class="go"> [&#39;m4&#39;,</span>
-<span class="go">  &#39;a1005&#39;, &#39;a1010&#39;, &#39;a1002&#39;, &#39;a1008&#39;, &#39;a1006&#39;, &#39;a1001&#39;, &#39;a1003&#39;,</span>
-<span class="go">  &#39;m3&#39;, &#39;a1007&#39;, &#39;a1004&#39;, &#39;a1009&#39;,</span>
-<span class="go">  &#39;m2&#39;,</span>
-<span class="go">  &#39;m1&#39;]    Actions ranking     :</span>
+<span class="go"> [&#39;m4&#39;, &#39;a1005&#39;, &#39;a1010&#39;, &#39;a1002&#39;, &#39;a1008&#39;, &#39;a1006&#39;, &#39;a1001&#39;,</span>
+<span class="go">  &#39;a1003&#39;, &#39;m3&#39;, &#39;a1007&#39;, &#39;a1004&#39;, &#39;a1009&#39;, &#39;m2&#39;, &#39;m1&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">nqr</span><span class="o">.</span><span class="n">rankingCorrelation</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
 <span class="go">  Crisp ordinal correlation  : +0.938</span>
@@ -6112,7 +6106,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 </tbody>
 </table>
 </div></blockquote>
-<p>A refined rating result may indeed be achieved when using <strong>deciles</strong> instead of <em>quartiles</em> for estimating the historical marginal cumulative distribution functions.</p>
+<p>A preciser rating result may indeed be achieved when using <strong>deciles</strong> instead of <em>quartiles</em> for estimating the historical marginal cumulative distribution functions.</p>
 <div class="literal-block-wrapper docutils container" id="decilesrating">
 <div class="code-block-caption"><span class="caption-number">Listing 58 </span><span class="caption-text">Normed deciles rating result</span><a class="headerlink" href="#decilesrating" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -6137,8 +6131,8 @@ play much a role, it would be perhaps better to decide to move to the most advan
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Compared with the quartiles rating result, we notice in <a class="reference internal" href="#decilesrating"><span class="std std-numref">Listing 58</span></a> that the seven alternatives (<em>a1001</em>, <em>a1002</em>, <em>a1003</em>, <em>a1005</em>, <em>a1006, *a1008</em> and <em>a1010</em>), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives <em>a1002</em>, <em>a1005</em>, <em>a1008</em> and <em>a1010</em> attain now the 7th decile class [0.60-0.70[, whereas alternatives <em>a1001</em>, <em>a1003</em> and <em>a1006</em> attains only the the 6th decile class [0.50-0.60[. Of the three <em>Q2</em> [0.25-0.50[ rated alternatives (<em>a1004</em>, <em>a1007</em> and <em>a1009</em>), alternatives <em>a1004</em> and <em>a1007</em> are now rated the 5th decile class [0.40-0.50[ and <em>a1009</em> is lowest rated in the 4th decile class [0.30-0.40[.</p>
-<p>A browser view may again more conveniently illustrate this preciser <em>deciles</em> rating result (see <a class="reference internal" href="#heatmap2"><span class="std std-numref">Fig. 34</span></a>).</p>
+<p>Compared with the quartiles rating result, we notice in <a class="reference internal" href="#decilesrating"><span class="std std-numref">Listing 58</span></a> that the seven alternatives (<em>a1001</em>, <em>a1002</em>, <em>a1003</em>, <em>a1005</em>, <em>a1006, *a1008</em> and <em>a1010</em>), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives <em>a1002</em>, <em>a1005</em>, <em>a1008</em> and <em>a1010</em> attain now the 7th decile class [0.60-0.70[, whereas alternatives <em>a1001</em>, <em>a1003</em> and <em>a1006</em> attain only the 6th decile class [0.50-0.60[. Of the three <em>Q2</em> [0.25-0.50[ rated alternatives (<em>a1004</em>, <em>a1007</em> and <em>a1009</em>), alternatives <em>a1004</em> and <em>a1007</em> are now rated into the 5th decile class [0.40-0.50[ and <em>a1009</em> is lowest rated into the 4th decile class [0.30-0.40[.</p>
+<p>A browser view may again more conveniently illustrate this refined rating result (see <a class="reference internal" href="#heatmap2"><span class="std std-numref">Fig. 34</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of the deciles rating&#39;</span><span class="p">,</span>\
 <span class="go">                               colorLevels=5,Correlations=True)</span>
@@ -6148,7 +6142,7 @@ play much a role, it would be perhaps better to decide to move to the most advan
 <a class="reference internal image-reference" href="_images/heatMap2.png"><img alt="Heatmap of normed deciles rating" src="_images/heatMap2.png" style="width: 400px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 34 </span><span class="caption-text">heatmap of mormed deciles rating</span><a class="headerlink" href="#heatmap2" title="Permalink to this image">¶</a></p>
 </div>
-<p>In this refined <em>deciles</em> rating, decision alternatives <em>a1001</em> and <em>a1010</em> are now, as expected, rated in the <em>6th</em> decile (D6), respectively in the <em>7th</em> decile (D7).</p>
+<p>In this <em>deciles</em> rating, decision alternatives <em>a1001</em> and <em>a1010</em> are now, as expected, rated in the <em>6th</em> decile (D6), respectively in the <em>7th</em> decile (D7).</p>
 <p>More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions with <strong>dodeciles</strong> or even <strong>centiles</strong>. Especially if <strong>tail</strong> rating results, i.e. distinguishing <strong>very best</strong>, or <strong>very worst</strong> multiple criteria performances, becomes a critical purpose. Similarly, the <em>historySize</em> parameter may be used for monitoring on the fly <strong>unstable</strong> random multiple criteria performance data.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 </div>
