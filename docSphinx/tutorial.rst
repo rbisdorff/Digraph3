@@ -4350,7 +4350,7 @@ A preciser rating result may indeed be achieved when using **deciles** instead o
     [0.40 - 0.50[ ['a1007', 'a1004']
     [0.30 - 0.40[ ['a1009']
 
-Compared with the quartiles rating result, we notice in :numref:`decilesRating` that the seven alternatives (*a1001*, *a1002*, *a1003*, *a1005*, *a1006, *a1008* and *a1010*), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives *a1002*, *a1005*, *a1008* and *a1010* attain now the 7th decile class [0.60-0.70[, whereas alternatives *a1001*, *a1003* and *a1006* attain only the 6th decile class [0.50-0.60[. Of the three *Q2* [0.25-0.50[ rated alternatives (*a1004*, *a1007* and *a1009*), alternatives *a1004* and *a1007* are now rated into the 5th decile class [0.40-0.50[ and *a1009* is lowest rated into the 4th decile class [0.30-0.40[.
+Compared with the quartiles rating result, we notice in :numref:`decilesRating` that the seven alternatives (*a1001*, *a1002*, *a1003*, *a1005*, *a1006*, *a1008* and *a1010*), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives *a1002*, *a1005*, *a1008* and *a1010* attain now the 7th decile class [0.60-0.70[, whereas alternatives *a1001*, *a1003* and *a1006* attain only the 6th decile class [0.50-0.60[. Of the three *Q2* [0.25-0.50[ rated alternatives (*a1004*, *a1007* and *a1009*), alternatives *a1004* and *a1007* are now rated into the 5th decile class [0.40-0.50[ and *a1009* is lowest rated into the 4th decile class [0.30-0.40[.
 
 A browser view may again more conveniently illustrate this refined rating result (see :numref:`heatMap2`).
 
@@ -4384,7 +4384,7 @@ To avoid having to recompute performance deciles from historical data when wishi
                    'a1006', 'a1001', 'a1003']
     [0.25 - 0.50[ ['a1004', 'a1007', 'a1009']
 
-Whit the *quantiles* parameter (see :numref:`interpolatedQuartilesRating` Line 2), we may recover by interpolation the same quartiles rating as obtained directly with historical performance quartiles (see :numref:`quartilesRatingResult`). Mind that a correct interpolation of quantiles from a given cumulative distribution function requires uniform distributions of observations in each bin. 
+With the *quantiles* parameter (see :numref:`interpolatedQuartilesRating` Line 2), we may recover by interpolation the same quartiles rating as obtained directly with historical performance quartiles (see :numref:`quartilesRatingResult`). Mind that a correct interpolation of quantiles from a given cumulative distribution function requires more or less uniform distributions of observations in each bin. 
 
 More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions, especially when **tail** rating results, i.e. distinguishing **very best**, or **very worst** multiple criteria performances, become a critical issue. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	
 
