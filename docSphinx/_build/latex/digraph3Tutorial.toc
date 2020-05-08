@@ -70,10 +70,10 @@
 \contentsline {subsection}{\numberline {10.2}Incremental learning of historical performance quantiles}{110}{subsection.10.2}%
 \contentsline {subsection}{\numberline {10.3}Rating new performances with quantile norms}{113}{subsection.10.3}%
 \contentsline {section}{\numberline {11}Working with the \sphinxstyleliteralintitle {\sphinxupquote {graphs}} module}{121}{section.11}%
-\contentsline {subsection}{\numberline {11.1}Structure of a \sphinxstyleliteralintitle {\sphinxupquote {Graph}} object}{121}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.1}Structure of a \sphinxstyleliteralintitle {\sphinxupquote {Graph}} object}{122}{subsection.11.1}%
 \contentsline {subsection}{\numberline {11.2}q\sphinxhyphen {}coloring of a graph}{124}{subsection.11.2}%
-\contentsline {subsection}{\numberline {11.3}MIS and clique enumeration}{125}{subsection.11.3}%
-\contentsline {subsection}{\numberline {11.4}Line graphs and maximal matchings}{126}{subsection.11.4}%
+\contentsline {subsection}{\numberline {11.3}MIS and clique enumeration}{126}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}Line graphs and maximal matchings}{127}{subsection.11.4}%
 \contentsline {subsection}{\numberline {11.5}Grids and the Ising model}{129}{subsection.11.5}%
 \contentsline {subsection}{\numberline {11.6}Simulating Metropolis random walks}{130}{subsection.11.6}%
 \contentsline {section}{\numberline {12}Computing the non isomorphic MISs of the 12\sphinxhyphen {}cycle graph}{132}{section.12}%

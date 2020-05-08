@@ -593,6 +593,31 @@ class RankingByChoosingDigraph(TransitiveDigraph):
      'a01' |  -1.00  -0.33  -1.00  -0.33  -0.33    -     0.00	 
      'a05' |  -0.67  -1.00  -0.67  -0.17  -0.33   0.00    -
     """
+
+    def __repr__(self):
+        """
+        Presentation method for RankingByChoosing Digraph instance.
+        """
+        String =  '*-----  Object instance description -----------*\n'
+        String += 'Instance class      : %s\n' % self.__class__.__name__
+        String += 'Instance name       : %s\n' % self.name
+        String += '# Actions           : %d\n' % len(self.actions)
+        String += 'Valuation domain    : [%.2f-%.2f]\n' %\
+                  (self.valuationdomain['min'],self.valuationdomain['max'])
+        String += 'Size                : %d\n' % self.computeSize()
+        String += 'Attributes: %s\n' % list(self.__dict__.keys())
+        String += 'Determinateness (%%) : %.1f\n' %\
+                  self.computeDeterminateness(InPercents=True)
+        String += '*------  Constructor run times (in sec.) ------*\n'
+        String += '# Threads           : %d\n' % self.nbrThreads
+        String += 'Total time          : %.5f\n' % self.runTimes['totalTime']
+        String += 'Data input          : %.5f\n' % self.runTimes['dataInput']
+        String += 'Ranking-by-choosing : %.5f\n' % self.runTimes['bestLast']
+        String += 'Compute fusion      : %.5f\n' % self.runTimes['fusing']
+        String += 'Store results       : %.5f\n' % self.runTimes['storing']
+        return String 
+
+    
     def __init__(self,other,
                  fusionOperator = "o-max",
                  CoDual=False,
@@ -603,12 +628,15 @@ class RankingByChoosingDigraph(TransitiveDigraph):
         from digraphsTools import ranking2preorder, omax, omin        
         from copy import copy, deepcopy
         from pickle import dumps, loads, load
+        from time import time
 
         self.CoDual=CoDual
         self.Debug=Debug
         self.CppAgrum = CppAgrum
         self.Threading = Threading
-        
+
+        runTimes = {}
+        t0 = time()
         if Threading:
             from multiprocessing import Process, Lock, active_children, cpu_count
             class myThread(Process):
@@ -651,9 +679,13 @@ class RankingByChoosingDigraph(TransitiveDigraph):
         self.order = len(self.actions)
         self.valuationdomain = digraph.valuationdomain
         self.originalRelation = digraph.relation
+        runTimes['dataInput'] = time() - t0
 
+        # compute ranking by best and by last choosing
+        t1 = time()
         if Threading and cpu_count()>2:
             print('Threading ...')
+            self.nbrThreads = 2
             from tempfile import TemporaryDirectory
             with TemporaryDirectory() as tempDirName:
                 digraphFileName = tempDirName +'/dumpDigraph.py'
@@ -679,13 +711,17 @@ class RankingByChoosingDigraph(TransitiveDigraph):
                 digraph.rankingByLastChoosing = loads(fi.read())
                 fi.close()
             
-            
         else:
+            self.nbrThreads = 1
             from sys import setrecursionlimit
             setrecursionlimit(2**20)
             digraph.computeRankingByBestChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
             digraph.computeRankingByLastChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
             setrecursionlimit(1000)
+        runTimes['bestLast'] = time() - t1
+
+        # compute ranking fusion
+        t2 = time()
         relBest = digraph.computeRankingByBestChoosingRelation()
         if Debug:
             digraph.showRankingByBestChoosing()
@@ -708,18 +744,20 @@ class RankingByChoosingDigraph(TransitiveDigraph):
                 else:
                     print('Error: invalid epistemic fusion operator %s' % operator)
                     return
-##                if Debug:
-##                    print('!',x,y,relBest[x][y],relLast[x][y],relFusion[x][y])  
+        runTimes['fusing'] = time() - t2
+        # storing results
+        t3 = time()
         self.relation=relFusion
         self.rankingByLastChoosing = copy(digraph.rankingByLastChoosing)
         self.rankingByBestChoosing = copy(digraph.rankingByBestChoosing)
         if Debug:
             self.computeRankingByChoosing()
             self.showRankingByChoosing()
-        
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-
+        runTimes['storing'] = time() -t3
+        runTimes['totalTime'] = time() - t0
+        self.runTimes = runTimes
 
     def showTransitiveDigraph(self,rankingByChoosing=None,rankingStrategy='optimistic'):
         """
@@ -1584,6 +1622,7 @@ if __name__ == "__main__":
     g = RandomBipolarOutrankingDigraph(Normalized=True)
     rbc = RankingByChoosingDigraph(g,Threading=False)
     rbc.showRankingByChoosing()
+    print(rbc)
 ##    wc = WeakCopelandOrder(g,SelfCoDual=True,Debug=False)
 ##    wc.showRelationTable()
 ##    cop = CopelandOrder(g)

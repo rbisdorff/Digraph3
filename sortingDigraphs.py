@@ -3412,16 +3412,31 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             actionsList = cop.copelandRanking
             self.rankingRule = 'Copeland'
             self.rankingScores = cop.decCopelandScores
-        else: # net flows by default
+        elif rankingRule == 'NetFlows':
             from linearOrders import NetFlowsOrder
             nf = NetFlowsOrder(g)
             actionsList = nf.netFlowsRanking
             self.rankingRule = 'NetFlows'
             self.rankingScores = nf.netFlows
+        elif rankingRule == 'RankedPairs':
+            from linearOrders import RankedPairsRanking
+            rp = RankedPairsRanking(g)
+            actionsList = rp.rankedPairsRanking
+            self.rankingRule = 'RankedPairs'
+            self.rankingScores = None
+        elif rankingRule == 'Kemeny':
+            if g.order > 12:
+                print('Error: the digraph is to big for the Kemeny ranking rule üüü')
+            else:
+                from linearOrders import KemenyRanking
+                ke = KemenyRanking(g, orderLimit=g.order)
+                actionsList = ke.kemenyRanking
+                self.rankingRule = 'Kemeny'
+                self.rankingScores = None
+        else:
+            print('Errr: The ranking rule %s is not availbale !!' % rankingRule)
         if rankingRule != 'best':
-            actionsOrdering = list(actionsList)
-            actionsOrdering.reverse()
-            self.rankingCorrelation = g.computeOrderCorrelation(actionsOrdering)
+            self.rankingCorrelation = g.computeRankingCorrelation(actionsList)
         self.actionsRanking = actionsList
         if Debug:
             print('*',self.actionsRanking)
@@ -3431,7 +3446,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             print('Actions ranking     :', self.actionsRanking)
             print('Ranking correlation :', self.rankingCorrelation)
             print('Rating categories:', self.ratingCategories)
-        self.runTimes['rating'] = time() - t0
+        self.runTimes['ranking'] = time() - t0
                
         # compute quantiles sorting
         t0 = time()
@@ -3442,7 +3457,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 self.showSorting()
                 self.showActionsSortingResult()
                 self.showQuantileOrdering()
-        self.runTimes['sorting'] = time() - t0
+        self.runTimes['rating'] = time() - t0
 
         # end of the construction
         self.runTimes['totalTime'] = time() - tt
@@ -3455,10 +3470,15 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         String += 'Instance class      : %s\n' % self.__class__.__name__
         String += 'Instance name       : %s\n' % self.name
         String += '# Criteria          : %d\n' % len(self.criteria)
-        String += '# Quantile profiles : %d\n' % len(self.profiles)
+        String += '# Quantiles         : %d\n' % len(self.profiles)
+        String += 'Lower-closed bins   : %s\n' % str(self.LowerClosed)
         String += '# New actions       : %d\n' % len(self.newActions)
         String += 'Size                : %d\n' % self.computeSize()
-        String += 'Determinateness     : %.3f\n' % self.computeDeterminateness()
+        String += 'Determinateness (%%) : %.1f\n' %\
+                  self.computeDeterminateness(InPercents=True)
+        String += 'Ranking rule        : %s\n' % self.rankingRule
+        String += 'Ordinal correlation : %+.2f\n' %\
+                  self.rankingCorrelation['correlation']
         String += 'Attributes: %s\n' % list(self.__dict__.keys())
         String += '*------  Constructor run times (in sec.) ------*\n'
         try:
@@ -3471,8 +3491,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         String += 'Quantile classes : %.5f\n' % self.runTimes['categories']
         String += 'Compute profiles : %.5f\n' % self.runTimes['profiles']
         String += 'Compute relation : %.5f\n' % self.runTimes['computeRelation']
+        String += 'Compute ranking  : %.5f\n' % self.runTimes['ranking']
         String += 'Compute rating   : %.5f\n' % self.runTimes['rating']
-        String += 'Compute sorting  : %.5f\n' % self.runTimes['sorting']
         return String 
 
 # ------------ private methods ------------------
@@ -4433,13 +4453,13 @@ if __name__ == "__main__":
 ##
     from randomPerfTabs import Random3ObjectivesPerformanceTableau
     from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
-    nbrActions=100
+    nbrActions=1000
     nbrCrit = 21
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
                                     numberOfCriteria=nbrCrit,seed=seed)
 
-    qs = QuantilesSortingDigraph(tp,4,LowerClosed=True)
-    qs.showCriteriaCategoryLimits()
+##    qs = QuantilesSortingDigraph(tp,4,LowerClosed=True)
+##    qs.showCriteriaCategoryLimits()
 ##    #qs.showSorting()
 ##    print('==>> average')
 ##    qs.showHTMLQuantileOrdering(strategy='average')
@@ -4447,15 +4467,15 @@ if __name__ == "__main__":
 ##    qs.showQuantileOrdering(strategy='optimistic')
 ##    print('==>> pessimistic')
 ##    qs.showQuantileOrdering(strategy='pessimistic')
-##    pq = PerformanceQuantiles(tp,20,LowerClosed=True,Debug=False)
-##    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-##    newActions = tpg.randomActions(100)
-##    pq.updateQuantiles(newActions,historySize=None)
-##    ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=20,\
-##                                       #PrefThresholds=False,\
-##                                   WithSorting=True,Debug=False,\
-##                                       Threading=MP,nbrOfCPUs=nbrOfCPUs)
-##    print(ira)
+    pq = PerformanceQuantiles(tp,20,LowerClosed=True,Debug=False)
+    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
+    newActions = tpg.randomActions(5)
+    pq.updateQuantiles(newActions,historySize=None)
+    ira = NormedQuantilesRatingDigraph(pq,newActions,\
+                                    rankingRule='NetFlows',\
+                                   WithSorting=True,Debug=False,\
+                                       Threading=MP,nbrOfCPUs=nbrOfCPUs)
+    print(ira)
 ##    ira.showQuantilesRating()
 ##    #ira.sorting = ira.computeSortingCharacteristics()
 ##    #ira.categoryContent = ira.computeCategoryContents()

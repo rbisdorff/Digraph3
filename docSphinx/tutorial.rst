@@ -4156,7 +4156,7 @@ Parameter *historySize* (see :numref:`perfGenerator` Line 5) of the :py:meth:`pe
 Rating new performances with quantile norms
 ...........................................
 
-For *absolute rating* of a newly given set of decision alternatives with the help of empirical performance quantiles estimated from historical data, we provide the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, a specialisation of the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
+For *absolute rating* of a newly given set of decision alternatives with the help of empirical performance quantiles estimated from historical data, we provide the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, a specialisation of the :py:class:`sortingDigraphs.SortingDigraph` class.
 
 The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
 
@@ -4172,7 +4172,7 @@ We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed 
    :caption: Computing a normed rating of 10 new decision alternatives
 	     
    >>> from sortingDigraphs import NormedQuantilesRatingDigraph
-   >>> newActions = rpg.randomActions(10,seed=seed)
+   >>> newActions = rpg.randomActions(10)
    >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best')
    >>> nqr
     *---- Object instance description
@@ -4235,13 +4235,13 @@ The :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance's *a
     *----  Quartiles limit profiles -----*
     criteria |  'm1'   'm2'   'm3'   'm4'   
     ---------|----------------------------
-       'b1'  |  2.0    29.8   49.4   70.7  
-       'b2'  |  0.0     3.0    5.0    7.0  
-       'b3'  |  0.0     3.0    5.0    7.0  
-       'b4'  |  3.3    30.1   50.8   70.9  
-       'b5'  |  0.8    29.1   48.6   70.0  
-       'c1'  | -10.0   -7.0   -5.0   -3.0  
-       'c2'  | -96.4  -70.6  -50.1  -30.0
+       'b1'  |  2.0    28.8   49.6   75.3  
+       'b2'  |  0.0     2.9    4.9    6.7  
+       'b3'  |  0.0     2.9    4.9    8.0  
+       'b4'  |  3.3    35.9   58.6   72.0  
+       'b5'  |  0.8    32.8   48.1   69.7  
+       'c1'  | -10.0   -7.4   -5.4   -3.4  
+       'c2'  | -96.4  -72.2  -52.3  -34.0  
 
 The main run time (see :numref:`normedRatingGraph` Lines 23-29) is spent by the class constructor in computing a bipolar-valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, i.e. many new decision alternatives and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
 
@@ -4261,11 +4261,11 @@ In this rating example, the *Copeland* rule appears to be the more appropriate r
      'a1003', 'm3', 'a1007', 'a1004', 'a1009', 'm2', 'm1'] 
    >>> nqr.showCorrelation(nqr.rankingCorrelation)
     Correlation indexes:
-     Crisp ordinal correlation  : +0.938
-     Epistemic determination    :  0.530
-     Bipolar-valued equivalence : +0.498
+     Crisp ordinal correlation  : +0.945
+     Epistemic determination    :  0.522
+     Bipolar-valued equivalence : +0.493
 
-We achieve here (see :numref:`rankingCorrelation`) a linear ranking without ties (from best to worst) of the digraph's actions set, i.e. including the new decision alternatives as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense :math:`(\tau = 0.94)` to the underlying strict outranking relation.
+We achieve here (see :numref:`rankingCorrelation`) a linear ranking without ties (from best to worst) of the digraph's actions set, i.e. including the new decision alternatives as well as the quartile limits *m1* to *m4*, which is very close in an ordinal sense :math:`(\tau = 0.945)` to the underlying strict outranking relation.
 
 The eventual rating procedure is based in this example on the *lower* quartile limits, such that we may collect the quartile classes' contents in increasing order of the *quartiles*.
 
@@ -4280,6 +4280,8 @@ The eventual rating procedure is based in this example on the *lower* quartile l
 We notice above that no new decision alternatives are actually rated in the lowest [0.0-0.25[, respectively highest [0.75- [ quartile classes. Indeed, the rating result is shown, in descending order, as follows:
 
 .. code-block:: pycon
+   :name: quartilesRatingResult
+   :caption: Showing a quantiles rating result 
 
    >>> nqr.showQuantilesRating()
     *-------- Quartiles rating result ---------
@@ -4366,8 +4368,25 @@ A browser view may again more conveniently illustrate this refined rating result
     Heatmap of normed deciles rating 
 
 In this *deciles* rating, decision alternatives *a1001* and *a1010* are now, as expected, rated in the *6th* decile (D6), respectively in the *7th* decile (D7).
-    
-More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions with **dodeciles** or even **centiles**. Especially if **tail** rating results, i.e. distinguishing **very best**, or **very worst** multiple criteria performances, becomes a critical purpose. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	
+
+To avoid having to recompute performance deciles from historical data when wishing to refine a rating result, it is useful, depending on the actual size of the historical data, to initially compute performance quantiles with a relatively high number of bins, for instance *dodeciles* or *centiles*. It is then possible to correctly interpolate *quartiles* or *deciles* for instance, when constructing the rating digraph. 
+
+.. code-block:: pycon
+   :linenos:
+   :name: interpolatedQuartilesRating
+   :caption: From deciles interpolated quartiles rating result 	  
+
+   >>> nqr2 = NormedQuantilesRatingDigraph(pq1,newActions,
+                      quantiles='quartiles')
+   >>> nqr2.showQuantilesRating()
+    *-------- Deciles rating result ---------
+    [0.50 - 0.75[ ['a1005', 'a1010', 'a1002', 'a1008',
+                   'a1006', 'a1001', 'a1003']
+    [0.25 - 0.50[ ['a1004', 'a1007', 'a1009']
+
+Whit the *quantiles* parameter (see :numref:`interpolatedQuartilesRating` Line 2), we may recover by interpolation the same quartiles rating as obtained directly with historical performance quartiles (see :numref:`quartilesRatingResult`). Mind that a correct interpolation of quantiles from a given cumulative distribution function requires uniform distributions of observations in each bin. 
+
+More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions, especially when **tail** rating results, i.e. distinguishing **very best**, or **very worst** multiple criteria performances, become a critical issue. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
