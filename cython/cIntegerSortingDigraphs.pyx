@@ -669,7 +669,6 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)
                     splitThread.start()
-##                    splitThread.join()
                     
                 while active_children() != []:
                     pass
@@ -1507,7 +1506,6 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                                        LowerClosed,Debug)
                     process.start()
                     nbrOfThreads += 1
-                    #process.join()
                     
             while active_children() != []:
                 pass

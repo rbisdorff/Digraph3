@@ -1802,7 +1802,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                           hasLatexFormat=False,
                           hasIntegerValuation=False,
                           relation=None,
-                          ReflexiveTerms=True):
+                          ReflexiveTerms=True,
+                          fromIndex=None,
+                          toIndex=None):
         """
         prints the relation valuation in actions X actions table format.
         """
@@ -1838,9 +1840,13 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('r/(lh)| ', end=' ')
         else:
             print('  r   | ', end=' ')
-        #actions = [x for x in actions]
+        actions = [x for x in actions]
+        if fromIndex == None:
+            fromIndex = 0
+        if toIndex == None:
+            toIndex = len(actions)
         actionsList = []
-        for x in actions:
+        for x in actions[fromIndex:toIndex]:
             if isinstance(x,frozenset):
                 try:
                     actionsList += [(actions[x]['shortName'],x)]

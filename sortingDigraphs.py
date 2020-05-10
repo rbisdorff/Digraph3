@@ -4348,93 +4348,8 @@ if __name__ == "__main__":
 
 
     MP = False
-##    t = PerformanceTableau('auditor2_1')
-##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)
-##    t = XMCDA2PerformanceTableau('spiegel2004')
-##    t = XMCDA2PerformanceTableau('ex1')
-##    t = RandomCBPerformanceTableau(numberOfActions=25,
-##                                    numberOfCriteria=13,
-##                                             NegativeWeights=True,
-##                                    weightDistribution='equiobjectives',
-##                                    missingDataProbability=0.05,
-##                                    seed=1)
-##    #t.showHTMLPerformanceHeatmap(Correlations=True)
-##    nt = NormalizedPerformanceTableau(t)
-##    nt.showHTMLPerformanceHeatmap(Correlations=True)
-    
-##    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)
-####    so = SortingDigraph('grafittiPerfTab','grafittiCategories')
-##    so = SortingDigraph(t,scaleSteps=7,Debug=True)
-##    print(so.categories)
-##    so.saveCategories('testCategories')
-####    print(so.profiles)
-####    print(so.criteriaCategoryLimits)
-##    so.showSortingCharacteristics()
-##    so.showSorting(Reverse=False)
-##    so.showSorting()
-##    print('optimistic')
-##    so.showWeakOrder(Descending=True,strategy='optimistic')
-##    print('pessimistic')
-##    so.showWeakOrder(strategy='pessimistic')
-##    print('average')
-##    so.showWeakOrder()
-##    so1 = SortingDigraph(nt,scaleSteps=10,LowerClosed=False)
-##    so1.computeWeakOrder(Comments=True)
-##    so1.showPerformanceTableau(actionsSubset=so1.profiles['min'])
-##    so1.showPerformanceTableau(actionsSubset=so1.profiles['max'])
-##    so1.showSorting()
-##    so1.showSortingCharacteristics()
-    
-##    so.computeWeakOrder(Debug=True)
-##    so1.computeWeakOrder(Comments=True,Debug=True)
-                                                                            
-##    so.saveProfiles('testProfile')
-##    t.save()
-##    nt = NormalizedPerformanceTableau(t)
-##    so1 = SortingDigraph(nt,'testProfile')
-##    so1.showSorting()
-##    categoriesData = {'categories': so.categories,\
-##                      'criteriaCategoryLimits': so.criteriaCategoryLimits}
-##    so2 = SortingDigraph(nt,categoriesData)
-##    so2.showSorting()
-    
-##    t.saveXMCDA2('test',servingD3=False)
-##    #t = XMCDA2PerformanceTableau('test')  
-##    #t.showHTMLPerformanceHeatmap(colorLevels=5,ndigits=0,Correlations=True)
-##    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,
-##                                     Threading=MP,tempDir='.',Comments=True,
-##                                     Debug=False)
-##    qs.showHTMLQuantileOrdering(strategy='average')
-##    qs.showWeakOrder()
-##    qs.showQuantileOrdering(strategy='average')
-##    qs.showActionsSortingResult()
-##    qs0 = _QuantilesSortingDigraph(t,15,LowerClosed=False,
-##                                     Threading=False,
-##                                     Debug=False)
-##    qs0.showSorting()
-##    qs0.showSortingCharacteristics('a01')
-    #qs0.showWeakOrder()
-    #qs.showQuantileOrdering(strategy=None)
-    #qs0.exportGraphViz('test')
-    #qs0.showActionsSortingResult()
-    
-##    qs0.showOrderedRelationTable()
-##    qs0.exportGraphViz()
-##    qs0.showSorting()
-##    qs0.showActionsSortingResult(Debug=False)
-##    qs0.computeWeakOrder(Debug=True)
-##    qs0.recodeValuation()
-##    qs0.showSorting()
-##    qs0.showActionsSortingResult(Debug=False)
-##    qs0.computeWeakOrder(Debug=True)
-##    g = BipolarOutrankingDigraph(t,Normalized=True)
-##    print(g.computeOrdinalCorrelation(qs0))
-##    print(g.computeOrdinalCorrelation(qsrbc))
-    
-##    # test incremental rating agent
-    MP = False
-    seed = 1000
-    nbrOfCPUs = 4
+    seed = 1001
+    nbrOfCPUs = 6
 
 ##    from randomPerfTabs import RandomPerformanceTableau
 ##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
@@ -4467,26 +4382,26 @@ if __name__ == "__main__":
 ##    qs.showQuantileOrdering(strategy='optimistic')
 ##    print('==>> pessimistic')
 ##    qs.showQuantileOrdering(strategy='pessimistic')
-    pq = PerformanceQuantiles(tp,20,LowerClosed=True,Debug=False)
+    pq = PerformanceQuantiles(tp,20,LowerClosed=False,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-    newActions = tpg.randomActions(5)
+    newActions = tpg.randomActions(20)
     pq.updateQuantiles(newActions,historySize=None)
-    ira = NormedQuantilesRatingDigraph(pq,newActions,\
-                                    rankingRule='NetFlows',\
+    ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=5,\
+                                    rankingRule='best',\
                                    WithSorting=True,Debug=False,\
                                        Threading=MP,nbrOfCPUs=nbrOfCPUs)
     print(ira)
-##    ira.showQuantilesRating()
+    ira.showQuantilesRating()
 ##    #ira.sorting = ira.computeSortingCharacteristics()
 ##    #ira.categoryContent = ira.computeCategoryContents()
-##    ira.showSorting()
+    ira.showSorting()
 ##    for x in ira.newActions:
 ##        ira.showActionCategories(x,Comments=True)
 ##    ratingRelation = ira.computeRatingRelation()
 ##    ira.relation = ratingRelation
 ##    #ira.closeTransitive(Irreflexive=True,Reverse=True)
 ##    ira.showHTMLRelationTable(actionsList=ira.actionsRanking)
-##    ira.exportRatingGraphViz(graphType='pdf')
+    ira.exportRatingGraphViz('test',graphType='pdf')
 ##    #ira.showSorting()
 ##    #ira.showHTMLSorting()
 ##    ira.showActionsSortingResult()
@@ -4500,55 +4415,11 @@ if __name__ == "__main__":
 ##                                   #rankingRule='best',
 ##                                   )
 ##    ira.showRankingScores()
-##    print(ira)
+    print(ira)
 ##    print(ira.computeQuantileProfile(0.25))
 ##    print(ira.computeQuantileProfile(0.5))
 ##    print(ira.computeQuantileProfile(0.75))
 
-#     nbrActions=1000
-#     nbrCrit = 7
-#     seed = 105
-#     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-#                    numberOfCriteria=nbrCrit,seed=seed)
-#     from performanceQuantiles import PerformanceQuantiles
-#     pq = PerformanceQuantiles(tp,\
-#                    numberOfBins = 'deciles',\
-#                   LowerClosed=True,Debug=False)
-# ##    pq.showLimitingQuantiles(ByObjectives=True)
-#     # generate 100 new random decision actions
-#     from randomPerfTabs import RandomPerformanceGenerator
-#     rpg = RandomPerformanceGenerator(tp,seed=seed)
-#     newActions = rpg.randomPerformanceTableau(10)
-#     # Updating the quartile norms shown above
-#     pq.updateQuantiles(newActions,historySize=None)
-# ##    pq.showHTMLLimitingQuantiles(Transposed=True)
-# ##    from sortingDigraphs import NormedQuantilesRatingDigraph
-#     nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best',\
-#                                        quantiles=4,Debug=False)
-#     print(nqr)
-##    nqr.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings', colorLevels=5,
-##                                       Correlations=True,
-##                                       )
-##    nqr.showQuantilesRating()
-##    nqr.exportRatingGraphViz(Comments=False)
-##
-##
-##    pq1 = PerformanceQuantiles(tp,\
-##                   numberOfBins = 'deciles',\
-##                  LowerClosed=True,Debug=False)
-##    pq1.showLimitingQuantiles(ByObjectives=True)
-##    # Updating the quartile norms shown above
-##    pq1.updateQuantiles(newActions,historySize=None)
-##    pq1.showHTMLLimitingQuantiles(Transposed=True)
-##    from sortingDigraphs import NormedQuantilesRatingDigraph
-##    nqr1 = NormedQuantilesRatingDigraph(pq1,newActions,rankingRule='best',Debug=False)
-##    print(nqr1)
-##    nqr1.showHTMLRatingHeatmap(pageTitle='Heat map of the deciles rating',
-##                                       colorLevels=7,
-##                                       Correlations=True,
-##                                       )
-##    nqr1.showQuantilesRating()
-##    nqr1.exportRatingGraphViz(Comments=False)
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

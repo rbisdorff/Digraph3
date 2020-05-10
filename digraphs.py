@@ -3263,7 +3263,7 @@ class Digraph(object):
 
         print()
 
-    def showRelationMap(self,symbols=None,rankingRule="Copeland"):
+    def showRelationMap(self,symbols=None,rankingRule="Copeland",fromIndex=None,toIndex=None,actionsList=None):
         """
         Prints on the console, in text map format, the location of
         certainly validated and certainly invalidated outranking situations.
@@ -3314,24 +3314,31 @@ class Digraph(object):
         if symbols == None:
             symbols = {'max':'┬','positive': '+', 'median': ' ',
                        'negative': '-', 'min': '┴'}
-        if rankingRule == "Copeland":
-            ranking = self.computeCopelandRanking()
-        elif rankingRule == "netFlows":
-            ranking = self.computeNetFlowsRanking()
-        elif rankingRule == "rankedPairs":
-            ranking = self.computeRankedPairsRanking()
+        if actionsList == None:
+            if rankingRule == "Copeland":
+                ranking = self.computeCopelandRanking()
+            elif rankingRule == "netFlows":
+                ranking = self.computeNetFlowsRanking()
+            elif rankingRule == "rankedPairs":
+                ranking = self.computeRankedPairsRanking()
+            else:
+                rankingRule = "Alphabetic"
+                ranking = [x for x in self.actions]
+                ranking.sort()
         else:
-            rankingRule = "Alphabetic"
-            ranking = [x for x in self.actions]
-            ranking.sort()
+            ranking = actionsList
+        if fromIndex == None:
+            fromIndex = 0
+        if toIndex == None:
+            toIndex = len(ranking)
         relation = self.relation
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
-        for x in ranking:
+        for x in ranking[fromIndex:toIndex]:
             rx = relation[x]
             pictStr = ''
-            for y in ranking:
+            for y in ranking[fromIndex:toIndex]:
                 if rx[y] == Max:
                     pictStr += symbols['max']
                 elif rx[y] == Min:
@@ -3343,7 +3350,10 @@ class Digraph(object):
                 elif rx[y] < Med:
                     pictStr += symbols['negative']
             print(pictStr)
-        print('Ranking rule: %s' % rankingRule)
+        if actionsList == None:
+            print('Ranking rule: %s' % rankingRule)
+        else:
+            print('List of actions provided.')
       
 
     def showRelationTable(self,Sorted=True,\
@@ -3351,7 +3361,9 @@ class Digraph(object):
                           actionsSubset= None,\
                           relation=None,\
                           ndigits=2,\
-                          ReflexiveTerms=True):
+                          ReflexiveTerms=True,
+                          fromIndex=None,
+                          toIndex=None):
         """
         prints the relation valuation in actions X actions table format.
         """
@@ -3363,9 +3375,13 @@ class Digraph(object):
             relation = self.relation
         print('* ---- Relation Table -----\n', end=' ')
         print(' S   | ', end=' ')
-        #actions = [x for x in actions]
+        actionKeys = [x for x in actions]
+        if fromIndex == None:
+            fromIndex = 0
+        if toIndex == None:
+            toIndex = len(actionKeys)
         actionsList = []
-        for x in actions:
+        for x in actionKeys[fromIndex:toIndex]:
             if isinstance(x,frozenset):
                 try:
                     actionsList += [(actions[x]['shortName'],x)]
@@ -3419,7 +3435,9 @@ class Digraph(object):
                             Colored=True,\
                             tableTitle='Relation Map',\
                             relationName='r(x S y)',\
-                            symbols=['+','&middot;','&nbsp;','&#150;','&#151']
+                            symbols=['+','&middot;','&nbsp;','&#150;','&#151'],
+                            fromIndex=None,
+                            toIndex=None,
                             ):
         """
         Launches a browser window with the colored relation map of self.
@@ -3449,7 +3467,9 @@ class Digraph(object):
                                         tableTitle=tableTitle,
                                         symbols=symbols,
                                         ContentCentered=True,
-                                        relationName=relationName))
+                                        relationName=relationName,
+                                       fromIndex=fromIndex,
+                                       toIndex=toIndex))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open(url,new=2)
@@ -3460,7 +3480,9 @@ class Digraph(object):
                           rankingRule='Copeland',\
                           symbols=['+','&middot;','&nbsp;','-','_'],\
                           Colored=True,\
-                          ContentCentered=True):
+                          ContentCentered=True,
+                         fromIndex=None,
+                         toIndex=None):
         """
         renders the relation map in actions X actions html table format.
         """
@@ -3481,8 +3503,12 @@ class Digraph(object):
                 rankingRule = "Alphabetic"
                 ranking = [x for x in self.actions]
                 ranking.sort()
+        if fromIndex == None:
+            fromIndex = 0
+        if toIndex == None:
+            toIndex = len(ranking)
         actionsList = []
-        for x in ranking:
+        for x in ranking[fromIndex:toIndex]:
             if isinstance(x,frozenset):
                 try:
                     actionsList += [(actions[x]['shortName'],x)]
@@ -3577,7 +3603,9 @@ class Digraph(object):
                               Colored=True,\
                               tableTitle='Valued Adjacency Matrix',\
                               relationName='r(x S y)',\
-                              ReflexiveTerms=False):
+                              ReflexiveTerms=False,
+                              fromIndex=None,
+                              toIndex=None):
         """
         Launches a browser window with the colored relation table of self.
         """
@@ -3591,7 +3619,9 @@ class Digraph(object):
                                         hasIntegerValues=IntegerValues,
                                         tableTitle=tableTitle,
                                         relationName=relationName,
-                                        ReflexiveTerms=ReflexiveTerms))
+                                        ReflexiveTerms=ReflexiveTerms,
+                                         fromIndex=fromIndex,
+                                         toIndex=toIndex))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open(url,new=2)     
@@ -3603,7 +3633,9 @@ class Digraph(object):
                           hasIntegerValues=False,
                           actionsSubset= None,
                           isColored=False,
-                          ReflexiveTerms=False):
+                          ReflexiveTerms=False,
+                           fromIndex=None,
+                           toIndex=None):
         """
         renders the relation valuation in actions X actions html table format.
         """
@@ -3623,9 +3655,13 @@ class Digraph(object):
             s += '<tr bgcolor="#9acd32"><th>%s</th>' % relationName
         else:
             s += '<tr><th>%s</th>' % relationName
-        #actions = [x for x in actions]
+        actionKeys = [x for x in actions]
+        if fromIndex == None:
+            fromIndex = 0
+        if toIndex == None:
+            toIndex = len(actionKeys)
         actionsList = []
-        for x in actions:
+        for x in actionKeys[fromIndex:toIndex]:
             if isinstance(x,frozenset):
                 try:
                     actionsList += [(actions[x]['shortName'],x)]
