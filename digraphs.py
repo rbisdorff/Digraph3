@@ -3669,8 +3669,8 @@ class Digraph(object):
                     actionsList += [(actions[x]['name'],x)]
             else:
                 actionsList += [(str(x),x)]
-        if actionsSubset == None:
-            actionsList.sort()
+##        if actionsSubset == None:
+##            actionsList.sort()
         #print actionsList
         #actionsList.sort()
         if not hasIntegerValues: 
