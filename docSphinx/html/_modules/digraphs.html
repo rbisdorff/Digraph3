@@ -3303,7 +3303,7 @@
 
         <span class="nb">print</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Digraph.showRelationMap"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showRelationMap">[docs]</a>    <span class="k">def</span> <span class="nf">showRelationMap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s2">&quot;Copeland&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="Digraph.showRelationMap"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showRelationMap">[docs]</a>    <span class="k">def</span> <span class="nf">showRelationMap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s2">&quot;Copeland&quot;</span><span class="p">,</span><span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints on the console, in text map format, the location of</span>
 <span class="sd">        certainly validated and certainly invalidated outranking situations.</span>
@@ -3354,24 +3354,31 @@
         <span class="k">if</span> <span class="n">symbols</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">symbols</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="s1">&#39;┬&#39;</span><span class="p">,</span><span class="s1">&#39;positive&#39;</span><span class="p">:</span> <span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">:</span> <span class="s1">&#39; &#39;</span><span class="p">,</span>
                        <span class="s1">&#39;negative&#39;</span><span class="p">:</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="s1">&#39;┴&#39;</span><span class="p">}</span>
-        <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s2">&quot;Copeland&quot;</span><span class="p">:</span>
-            <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s2">&quot;netFlows&quot;</span><span class="p">:</span>
-            <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s2">&quot;rankedPairs&quot;</span><span class="p">:</span>
-            <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeRankedPairsRanking</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">actionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s2">&quot;Copeland&quot;</span><span class="p">:</span>
+                <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s2">&quot;netFlows&quot;</span><span class="p">:</span>
+                <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s2">&quot;rankedPairs&quot;</span><span class="p">:</span>
+                <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeRankedPairsRanking</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rankingRule</span> <span class="o">=</span> <span class="s2">&quot;Alphabetic&quot;</span>
+                <span class="n">ranking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+                <span class="n">ranking</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">rankingRule</span> <span class="o">=</span> <span class="s2">&quot;Alphabetic&quot;</span>
-            <span class="n">ranking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-            <span class="n">ranking</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+            <span class="n">ranking</span> <span class="o">=</span> <span class="n">actionsList</span>
+        <span class="k">if</span> <span class="n">fromIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fromIndex</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">toIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">toIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span>
         <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ranking</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ranking</span><span class="p">[</span><span class="n">fromIndex</span><span class="p">:</span><span class="n">toIndex</span><span class="p">]:</span>
             <span class="n">rx</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
             <span class="n">pictStr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">ranking</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">ranking</span><span class="p">[</span><span class="n">fromIndex</span><span class="p">:</span><span class="n">toIndex</span><span class="p">]:</span>
                 <span class="k">if</span> <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="n">Max</span><span class="p">:</span>
                     <span class="n">pictStr</span> <span class="o">+=</span> <span class="n">symbols</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
                 <span class="k">elif</span> <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="n">Min</span><span class="p">:</span>
@@ -3383,7 +3390,10 @@
                 <span class="k">elif</span> <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
                     <span class="n">pictStr</span> <span class="o">+=</span> <span class="n">symbols</span><span class="p">[</span><span class="s1">&#39;negative&#39;</span><span class="p">]</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">pictStr</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ranking rule: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">rankingRule</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">actionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ranking rule: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">rankingRule</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;List of actions provided.&#39;</span><span class="p">)</span></div>
       
 
 <div class="viewcode-block" id="Digraph.showRelationTable"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.showRelationTable">[docs]</a>    <span class="k">def</span> <span class="nf">showRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
@@ -3391,7 +3401,9 @@
                           <span class="n">actionsSubset</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                           <span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                           <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>\
-                          <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                          <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                          <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        prints the relation valuation in actions X actions table format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3403,9 +3415,13 @@
             <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* ---- Relation Table -----</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; S   | &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-        <span class="c1">#actions = [x for x in actions]</span>
+        <span class="n">actionKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">fromIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fromIndex</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">toIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">toIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionKeys</span><span class="p">)</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionKeys</span><span class="p">[</span><span class="n">fromIndex</span><span class="p">:</span><span class="n">toIndex</span><span class="p">]:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="nb">frozenset</span><span class="p">):</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">actionsList</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">)]</span>
@@ -3459,7 +3475,9 @@
                             <span class="n">Colored</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                             <span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;Relation Map&#39;</span><span class="p">,</span>\
                             <span class="n">relationName</span><span class="o">=</span><span class="s1">&#39;r(x S y)&#39;</span><span class="p">,</span>\
-                            <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;middot;&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;nbsp;&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;#150;&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;#151&#39;</span><span class="p">]</span>
+                            <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;middot;&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;nbsp;&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;#150;&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;#151&#39;</span><span class="p">],</span>
+                            <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                            <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                             <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Launches a browser window with the colored relation map of self.</span>
@@ -3489,7 +3507,9 @@
                                         <span class="n">tableTitle</span><span class="o">=</span><span class="n">tableTitle</span><span class="p">,</span>
                                         <span class="n">symbols</span><span class="o">=</span><span class="n">symbols</span><span class="p">,</span>
                                         <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                        <span class="n">relationName</span><span class="o">=</span><span class="n">relationName</span><span class="p">))</span>
+                                        <span class="n">relationName</span><span class="o">=</span><span class="n">relationName</span><span class="p">,</span>
+                                       <span class="n">fromIndex</span><span class="o">=</span><span class="n">fromIndex</span><span class="p">,</span>
+                                       <span class="n">toIndex</span><span class="o">=</span><span class="n">toIndex</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
@@ -3500,7 +3520,9 @@
                           <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>\
                           <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;middot;&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;nbsp;&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;_&#39;</span><span class="p">],</span>\
                           <span class="n">Colored</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
-                          <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                          <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the relation map in actions X actions html table format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3521,8 +3543,12 @@
                 <span class="n">rankingRule</span> <span class="o">=</span> <span class="s2">&quot;Alphabetic&quot;</span>
                 <span class="n">ranking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
                 <span class="n">ranking</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">fromIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fromIndex</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">toIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">toIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ranking</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ranking</span><span class="p">[</span><span class="n">fromIndex</span><span class="p">:</span><span class="n">toIndex</span><span class="p">]:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="nb">frozenset</span><span class="p">):</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">actionsList</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">)]</span>
@@ -3617,7 +3643,9 @@
                               <span class="n">Colored</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                               <span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;Valued Adjacency Matrix&#39;</span><span class="p">,</span>\
                               <span class="n">relationName</span><span class="o">=</span><span class="s1">&#39;r(x S y)&#39;</span><span class="p">,</span>\
-                              <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                              <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                              <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                              <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Launches a browser window with the colored relation table of self.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3631,7 +3659,9 @@
                                         <span class="n">hasIntegerValues</span><span class="o">=</span><span class="n">IntegerValues</span><span class="p">,</span>
                                         <span class="n">tableTitle</span><span class="o">=</span><span class="n">tableTitle</span><span class="p">,</span>
                                         <span class="n">relationName</span><span class="o">=</span><span class="n">relationName</span><span class="p">,</span>
-                                        <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="n">ReflexiveTerms</span><span class="p">))</span>
+                                        <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="n">ReflexiveTerms</span><span class="p">,</span>
+                                         <span class="n">fromIndex</span><span class="o">=</span><span class="n">fromIndex</span><span class="p">,</span>
+                                         <span class="n">toIndex</span><span class="o">=</span><span class="n">toIndex</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>     </div>
@@ -3643,7 +3673,9 @@
                           <span class="n">hasIntegerValues</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                           <span class="n">actionsSubset</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                           <span class="n">isColored</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                          <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                          <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                           <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                           <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the relation valuation in actions X actions html table format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3663,9 +3695,13 @@
             <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr bgcolor=&quot;#9acd32&quot;&gt;&lt;th&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="n">relationName</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="n">relationName</span>
-        <span class="c1">#actions = [x for x in actions]</span>
+        <span class="n">actionKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">fromIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fromIndex</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">toIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">toIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionKeys</span><span class="p">)</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionKeys</span><span class="p">[</span><span class="n">fromIndex</span><span class="p">:</span><span class="n">toIndex</span><span class="p">]:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="nb">frozenset</span><span class="p">):</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">actionsList</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">)]</span>

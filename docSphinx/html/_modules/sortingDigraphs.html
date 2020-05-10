@@ -4375,7 +4375,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 3656 $                                 *</span>
+<span class="s2">    * $Revision: 3658 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -4388,93 +4388,8 @@
 
 
     <span class="n">MP</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="c1">##    t = PerformanceTableau(&#39;auditor2_1&#39;)</span>
-<span class="c1">##    t.showHTMLPerformanceHeatmap(ndigits=0,quantiles=7,Correlations=True,Debug=False)</span>
-<span class="c1">##    t = XMCDA2PerformanceTableau(&#39;spiegel2004&#39;)</span>
-<span class="c1">##    t = XMCDA2PerformanceTableau(&#39;ex1&#39;)</span>
-<span class="c1">##    t = RandomCBPerformanceTableau(numberOfActions=25,</span>
-<span class="c1">##                                    numberOfCriteria=13,</span>
-<span class="c1">##                                             NegativeWeights=True,</span>
-<span class="c1">##                                    weightDistribution=&#39;equiobjectives&#39;,</span>
-<span class="c1">##                                    missingDataProbability=0.05,</span>
-<span class="c1">##                                    seed=1)</span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(Correlations=True)</span>
-<span class="c1">##    nt = NormalizedPerformanceTableau(t)</span>
-<span class="c1">##    nt.showHTMLPerformanceHeatmap(Correlations=True)</span>
-    
-<span class="c1">##    so = SortingDigraph(t,scaleSteps=5,LowerClosed=True,Debug=True)</span>
-<span class="c1">####    so = SortingDigraph(&#39;grafittiPerfTab&#39;,&#39;grafittiCategories&#39;)</span>
-<span class="c1">##    so = SortingDigraph(t,scaleSteps=7,Debug=True)</span>
-<span class="c1">##    print(so.categories)</span>
-<span class="c1">##    so.saveCategories(&#39;testCategories&#39;)</span>
-<span class="c1">####    print(so.profiles)</span>
-<span class="c1">####    print(so.criteriaCategoryLimits)</span>
-<span class="c1">##    so.showSortingCharacteristics()</span>
-<span class="c1">##    so.showSorting(Reverse=False)</span>
-<span class="c1">##    so.showSorting()</span>
-<span class="c1">##    print(&#39;optimistic&#39;)</span>
-<span class="c1">##    so.showWeakOrder(Descending=True,strategy=&#39;optimistic&#39;)</span>
-<span class="c1">##    print(&#39;pessimistic&#39;)</span>
-<span class="c1">##    so.showWeakOrder(strategy=&#39;pessimistic&#39;)</span>
-<span class="c1">##    print(&#39;average&#39;)</span>
-<span class="c1">##    so.showWeakOrder()</span>
-<span class="c1">##    so1 = SortingDigraph(nt,scaleSteps=10,LowerClosed=False)</span>
-<span class="c1">##    so1.computeWeakOrder(Comments=True)</span>
-<span class="c1">##    so1.showPerformanceTableau(actionsSubset=so1.profiles[&#39;min&#39;])</span>
-<span class="c1">##    so1.showPerformanceTableau(actionsSubset=so1.profiles[&#39;max&#39;])</span>
-<span class="c1">##    so1.showSorting()</span>
-<span class="c1">##    so1.showSortingCharacteristics()</span>
-    
-<span class="c1">##    so.computeWeakOrder(Debug=True)</span>
-<span class="c1">##    so1.computeWeakOrder(Comments=True,Debug=True)</span>
-                                                                            
-<span class="c1">##    so.saveProfiles(&#39;testProfile&#39;)</span>
-<span class="c1">##    t.save()</span>
-<span class="c1">##    nt = NormalizedPerformanceTableau(t)</span>
-<span class="c1">##    so1 = SortingDigraph(nt,&#39;testProfile&#39;)</span>
-<span class="c1">##    so1.showSorting()</span>
-<span class="c1">##    categoriesData = {&#39;categories&#39;: so.categories,\</span>
-<span class="c1">##                      &#39;criteriaCategoryLimits&#39;: so.criteriaCategoryLimits}</span>
-<span class="c1">##    so2 = SortingDigraph(nt,categoriesData)</span>
-<span class="c1">##    so2.showSorting()</span>
-    
-<span class="c1">##    t.saveXMCDA2(&#39;test&#39;,servingD3=False)</span>
-<span class="c1">##    #t = XMCDA2PerformanceTableau(&#39;test&#39;)  </span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(colorLevels=5,ndigits=0,Correlations=True)</span>
-<span class="c1">##    qs = QuantilesSortingDigraph(t,limitingQuantiles=7,LowerClosed=False,</span>
-<span class="c1">##                                     Threading=MP,tempDir=&#39;.&#39;,Comments=True,</span>
-<span class="c1">##                                     Debug=False)</span>
-<span class="c1">##    qs.showHTMLQuantileOrdering(strategy=&#39;average&#39;)</span>
-<span class="c1">##    qs.showWeakOrder()</span>
-<span class="c1">##    qs.showQuantileOrdering(strategy=&#39;average&#39;)</span>
-<span class="c1">##    qs.showActionsSortingResult()</span>
-<span class="c1">##    qs0 = _QuantilesSortingDigraph(t,15,LowerClosed=False,</span>
-<span class="c1">##                                     Threading=False,</span>
-<span class="c1">##                                     Debug=False)</span>
-<span class="c1">##    qs0.showSorting()</span>
-<span class="c1">##    qs0.showSortingCharacteristics(&#39;a01&#39;)</span>
-    <span class="c1">#qs0.showWeakOrder()</span>
-    <span class="c1">#qs.showQuantileOrdering(strategy=None)</span>
-    <span class="c1">#qs0.exportGraphViz(&#39;test&#39;)</span>
-    <span class="c1">#qs0.showActionsSortingResult()</span>
-    
-<span class="c1">##    qs0.showOrderedRelationTable()</span>
-<span class="c1">##    qs0.exportGraphViz()</span>
-<span class="c1">##    qs0.showSorting()</span>
-<span class="c1">##    qs0.showActionsSortingResult(Debug=False)</span>
-<span class="c1">##    qs0.computeWeakOrder(Debug=True)</span>
-<span class="c1">##    qs0.recodeValuation()</span>
-<span class="c1">##    qs0.showSorting()</span>
-<span class="c1">##    qs0.showActionsSortingResult(Debug=False)</span>
-<span class="c1">##    qs0.computeWeakOrder(Debug=True)</span>
-<span class="c1">##    g = BipolarOutrankingDigraph(t,Normalized=True)</span>
-<span class="c1">##    print(g.computeOrdinalCorrelation(qs0))</span>
-<span class="c1">##    print(g.computeOrdinalCorrelation(qsrbc))</span>
-    
-<span class="c1">##    # test incremental rating agent</span>
-    <span class="n">MP</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">seed</span> <span class="o">=</span> <span class="mi">1000</span>
-    <span class="n">nbrOfCPUs</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">seed</span> <span class="o">=</span> <span class="mi">1001</span>
+    <span class="n">nbrOfCPUs</span> <span class="o">=</span> <span class="mi">6</span>
 
 <span class="c1">##    from randomPerfTabs import RandomPerformanceTableau</span>
 <span class="c1">##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator</span>
@@ -4507,26 +4422,26 @@
 <span class="c1">##    qs.showQuantileOrdering(strategy=&#39;optimistic&#39;)</span>
 <span class="c1">##    print(&#39;==&gt;&gt; pessimistic&#39;)</span>
 <span class="c1">##    qs.showQuantileOrdering(strategy=&#39;pessimistic&#39;)</span>
-    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">ira</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span>\
-                                    <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>\
+    <span class="n">ira</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>\
+                                    <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span>\
                                    <span class="n">WithSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                                        <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">ira</span><span class="p">)</span>
-<span class="c1">##    ira.showQuantilesRating()</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="c1">##    #ira.sorting = ira.computeSortingCharacteristics()</span>
 <span class="c1">##    #ira.categoryContent = ira.computeCategoryContents()</span>
-<span class="c1">##    ira.showSorting()</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
 <span class="c1">##    for x in ira.newActions:</span>
 <span class="c1">##        ira.showActionCategories(x,Comments=True)</span>
 <span class="c1">##    ratingRelation = ira.computeRatingRelation()</span>
 <span class="c1">##    ira.relation = ratingRelation</span>
 <span class="c1">##    #ira.closeTransitive(Irreflexive=True,Reverse=True)</span>
 <span class="c1">##    ira.showHTMLRelationTable(actionsList=ira.actionsRanking)</span>
-<span class="c1">##    ira.exportRatingGraphViz(graphType=&#39;pdf&#39;)</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">)</span>
 <span class="c1">##    #ira.showSorting()</span>
 <span class="c1">##    #ira.showHTMLSorting()</span>
 <span class="c1">##    ira.showActionsSortingResult()</span>
@@ -4540,55 +4455,11 @@
 <span class="c1">##                                   #rankingRule=&#39;best&#39;,</span>
 <span class="c1">##                                   )</span>
 <span class="c1">##    ira.showRankingScores()</span>
-<span class="c1">##    print(ira)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ira</span><span class="p">)</span>
 <span class="c1">##    print(ira.computeQuantileProfile(0.25))</span>
 <span class="c1">##    print(ira.computeQuantileProfile(0.5))</span>
 <span class="c1">##    print(ira.computeQuantileProfile(0.75))</span>
 
-<span class="c1">#     nbrActions=1000</span>
-<span class="c1">#     nbrCrit = 7</span>
-<span class="c1">#     seed = 105</span>
-<span class="c1">#     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\</span>
-<span class="c1">#                    numberOfCriteria=nbrCrit,seed=seed)</span>
-<span class="c1">#     from performanceQuantiles import PerformanceQuantiles</span>
-<span class="c1">#     pq = PerformanceQuantiles(tp,\</span>
-<span class="c1">#                    numberOfBins = &#39;deciles&#39;,\</span>
-<span class="c1">#                   LowerClosed=True,Debug=False)</span>
-<span class="c1"># ##    pq.showLimitingQuantiles(ByObjectives=True)</span>
-<span class="c1">#     # generate 100 new random decision actions</span>
-<span class="c1">#     from randomPerfTabs import RandomPerformanceGenerator</span>
-<span class="c1">#     rpg = RandomPerformanceGenerator(tp,seed=seed)</span>
-<span class="c1">#     newActions = rpg.randomPerformanceTableau(10)</span>
-<span class="c1">#     # Updating the quartile norms shown above</span>
-<span class="c1">#     pq.updateQuantiles(newActions,historySize=None)</span>
-<span class="c1"># ##    pq.showHTMLLimitingQuantiles(Transposed=True)</span>
-<span class="c1"># ##    from sortingDigraphs import NormedQuantilesRatingDigraph</span>
-<span class="c1">#     nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule=&#39;best&#39;,\</span>
-<span class="c1">#                                        quantiles=4,Debug=False)</span>
-<span class="c1">#     print(nqr)</span>
-<span class="c1">##    nqr.showHTMLRatingHeatmap(pageTitle=&#39;Heat map of the ratings&#39;, colorLevels=5,</span>
-<span class="c1">##                                       Correlations=True,</span>
-<span class="c1">##                                       )</span>
-<span class="c1">##    nqr.showQuantilesRating()</span>
-<span class="c1">##    nqr.exportRatingGraphViz(Comments=False)</span>
-<span class="c1">##</span>
-<span class="c1">##</span>
-<span class="c1">##    pq1 = PerformanceQuantiles(tp,\</span>
-<span class="c1">##                   numberOfBins = &#39;deciles&#39;,\</span>
-<span class="c1">##                  LowerClosed=True,Debug=False)</span>
-<span class="c1">##    pq1.showLimitingQuantiles(ByObjectives=True)</span>
-<span class="c1">##    # Updating the quartile norms shown above</span>
-<span class="c1">##    pq1.updateQuantiles(newActions,historySize=None)</span>
-<span class="c1">##    pq1.showHTMLLimitingQuantiles(Transposed=True)</span>
-<span class="c1">##    from sortingDigraphs import NormedQuantilesRatingDigraph</span>
-<span class="c1">##    nqr1 = NormedQuantilesRatingDigraph(pq1,newActions,rankingRule=&#39;best&#39;,Debug=False)</span>
-<span class="c1">##    print(nqr1)</span>
-<span class="c1">##    nqr1.showHTMLRatingHeatmap(pageTitle=&#39;Heat map of the deciles rating&#39;,</span>
-<span class="c1">##                                       colorLevels=7,</span>
-<span class="c1">##                                       Correlations=True,</span>
-<span class="c1">##                                       )</span>
-<span class="c1">##    nqr1.showQuantilesRating()</span>
-<span class="c1">##    nqr1.exportRatingGraphViz(Comments=False)</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
@@ -4596,7 +4467,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 3656 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 3658 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

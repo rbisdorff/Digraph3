@@ -1842,7 +1842,9 @@
                           <span class="n">hasLatexFormat</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                           <span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                           <span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                          <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                          <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                          <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                          <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        prints the relation valuation in actions X actions table format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1878,9 +1880,13 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;r/(lh)| &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  r   | &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
-        <span class="c1">#actions = [x for x in actions]</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">fromIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fromIndex</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">toIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">toIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">[</span><span class="n">fromIndex</span><span class="p">:</span><span class="n">toIndex</span><span class="p">]:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="nb">frozenset</span><span class="p">):</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">actionsList</span> <span class="o">+=</span> <span class="p">[(</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">)]</span>

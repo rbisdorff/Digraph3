@@ -2335,7 +2335,7 @@ Dummy for showCircuits().</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showHTMLRelationMap">
-<code class="sig-name descname">showHTMLRelationMap</code><span class="sig-paren">(</span><em class="sig-param">actionsList=None, rankingRule='Copeland', Colored=True, tableTitle='Relation Map', relationName='r(x S y)', symbols=['+', '&amp;middot;', '&amp;nbsp;', '&amp;#150;', '&amp;#151']</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showHTMLRelationMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showHTMLRelationMap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showHTMLRelationMap</code><span class="sig-paren">(</span><em class="sig-param">actionsList=None, rankingRule='Copeland', Colored=True, tableTitle='Relation Map', relationName='r(x S y)', symbols=['+', '&amp;middot;', '&amp;nbsp;', '&amp;#150;', '&amp;#151'], fromIndex=None, toIndex=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showHTMLRelationMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showHTMLRelationMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Launches a browser window with the colored relation map of self.
 See corresponding Digraph.showRelationMap() method.</p>
 <p>Example:</p>
@@ -2351,7 +2351,7 @@ See corresponding Digraph.showRelationMap() method.</p>
 
 <dl class="method">
 <dt id="digraphs.Digraph.showHTMLRelationTable">
-<code class="sig-name descname">showHTMLRelationTable</code><span class="sig-paren">(</span><em class="sig-param">actionsList=None</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">IntegerValues=False</em>, <em class="sig-param">ndigits=2</em>, <em class="sig-param">Colored=True</em>, <em class="sig-param">tableTitle='Valued Adjacency Matrix'</em>, <em class="sig-param">relationName='r(x S y)'</em>, <em class="sig-param">ReflexiveTerms=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showHTMLRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showHTMLRelationTable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showHTMLRelationTable</code><span class="sig-paren">(</span><em class="sig-param">actionsList=None</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">IntegerValues=False</em>, <em class="sig-param">ndigits=2</em>, <em class="sig-param">Colored=True</em>, <em class="sig-param">tableTitle='Valued Adjacency Matrix'</em>, <em class="sig-param">relationName='r(x S y)'</em>, <em class="sig-param">ReflexiveTerms=False</em>, <em class="sig-param">fromIndex=None</em>, <em class="sig-param">toIndex=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showHTMLRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showHTMLRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Launches a browser window with the colored relation table of self.</p>
 </dd></dl>
 
@@ -2543,7 +2543,7 @@ See the <a class="reference internal" href="#digraphs.Digraph.readPerrinMisset" 
 
 <dl class="method">
 <dt id="digraphs.Digraph.showRelationMap">
-<code class="sig-name descname">showRelationMap</code><span class="sig-paren">(</span><em class="sig-param">symbols=None</em>, <em class="sig-param">rankingRule='Copeland'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showRelationMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showRelationMap</code><span class="sig-paren">(</span><em class="sig-param">symbols=None</em>, <em class="sig-param">rankingRule='Copeland'</em>, <em class="sig-param">fromIndex=None</em>, <em class="sig-param">toIndex=None</em>, <em class="sig-param">actionsList=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showRelationMap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showRelationMap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints on the console, in text map format, the location of
 certainly validated and certainly invalidated outranking situations.</p>
 <dl class="simple">
@@ -2592,7 +2592,7 @@ Kohler’s (rankingRule=”kohler”), and Tideman’s ranked pairs rule (rankin
 
 <dl class="method">
 <dt id="digraphs.Digraph.showRelationTable">
-<code class="sig-name descname">showRelationTable</code><span class="sig-paren">(</span><em class="sig-param">Sorted=True</em>, <em class="sig-param">IntegerValues=False</em>, <em class="sig-param">actionsSubset=None</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">ndigits=2</em>, <em class="sig-param">ReflexiveTerms=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showRelationTable</code><span class="sig-paren">(</span><em class="sig-param">Sorted=True</em>, <em class="sig-param">IntegerValues=False</em>, <em class="sig-param">actionsSubset=None</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">ndigits=2</em>, <em class="sig-param">ReflexiveTerms=True</em>, <em class="sig-param">fromIndex=None</em>, <em class="sig-param">toIndex=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>prints the relation valuation in actions X actions table format.</p>
 </dd></dl>
 
@@ -6083,7 +6083,7 @@ in html format</p>
 
 <dl class="method">
 <dt id="outrankingDigraphs.OutrankingDigraph.showRelationTable">
-<code class="sig-name descname">showRelationTable</code><span class="sig-paren">(</span><em class="sig-param">IntegerValues=False</em>, <em class="sig-param">actionsSubset=None</em>, <em class="sig-param">Sorted=True</em>, <em class="sig-param">hasLPDDenotation=False</em>, <em class="sig-param">StabilityDenotation=False</em>, <em class="sig-param">hasLatexFormat=False</em>, <em class="sig-param">hasIntegerValuation=False</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">ReflexiveTerms=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.showRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showRelationTable</code><span class="sig-paren">(</span><em class="sig-param">IntegerValues=False</em>, <em class="sig-param">actionsSubset=None</em>, <em class="sig-param">Sorted=True</em>, <em class="sig-param">hasLPDDenotation=False</em>, <em class="sig-param">StabilityDenotation=False</em>, <em class="sig-param">hasLatexFormat=False</em>, <em class="sig-param">hasIntegerValuation=False</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">ReflexiveTerms=True</em>, <em class="sig-param">fromIndex=None</em>, <em class="sig-param">toIndex=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.showRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.showRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>prints the relation valuation in actions X actions table format.</p>
 </dd></dl>
 
