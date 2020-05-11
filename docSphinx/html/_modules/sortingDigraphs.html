@@ -3210,7 +3210,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfQuantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">newData</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfQuantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">newData</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
                  <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="c1">#PrefThresholds=False,\</span>
@@ -3270,6 +3271,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;dataInput&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">tt</span>
         
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1.&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;new actions&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">newActions</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;new evaluations&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quantiles frequencies: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">)</span>
@@ -3301,6 +3303,7 @@
         <span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span>
 
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;2.&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">quantFreq</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">limitingQuantiles</span><span class="p">)</span>
             
@@ -3336,6 +3339,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;categories&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span>
 <span class="c1">##</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;3.&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;categories&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span><span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">categories</span><span class="p">)))</span>
 
@@ -3352,6 +3356,7 @@
                             <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">gQuantiles</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;4.&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CriteriaCategoryLimits&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">)</span>
 
         <span class="c1"># set the category limits type (LowerClosed = True is default)</span>
@@ -3382,6 +3387,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">profileLimits</span> <span class="o">=</span> <span class="n">profileLimits</span>
         
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;5.&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;self.profiles&#39;</span><span class="p">,</span><span class="n">profiles</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;self.profileLimits&#39;</span><span class="p">,</span><span class="n">profileLimits</span><span class="p">)</span>
             
@@ -3402,6 +3408,7 @@
         <span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
         
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;6.&#39;</span><span class="p">)</span>
             <span class="n">perfTab</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
             <span class="n">perfTab</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
             <span class="n">perfTab</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
@@ -3479,9 +3486,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingCorrelation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actionsRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;6.&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">actionsRanking</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ratingCategories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantilesRating</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;7.&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ranking rule        :&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Actions ranking     :&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">actionsRanking</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ranking correlation :&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingCorrelation</span><span class="p">)</span>
@@ -3494,9 +3503,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSortingCharacteristics</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">categoryContent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeCategoryContents</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;8.&#39;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">showQuantileOrdering</span><span class="p">()</span>
+                <span class="c1">#self.showQuantilesRating()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;rating&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
 
         <span class="c1"># end of the construction</span>
@@ -3726,7 +3737,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">weakOrdering</span></div>
 
-<div class="viewcode-block" id="NormedQuantilesRatingDigraph.computeQuantilesRating"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantilesRating">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantilesRating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.computeQuantilesRating"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.computeQuantilesRating">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantilesRating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">          Renders an ordered dictionary of non empty quantiles in ascending order.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3734,10 +3745,16 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">:</span> <span class="c1"># lower closed quantiles</span>
             <span class="n">ranking</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;9.1&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span>
         
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span>
         <span class="n">ratingCategories</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ranking</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span><span class="p">:</span>
+            <span class="n">ranking</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">ranking</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ranking</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">ranking</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1">##        else: if ranking[-1] in self.newActions: ranking[-1],ranking[-2]</span>
+<span class="c1">##            = ranking[-2],ranking[-1]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;swapping&#39;</span><span class="p">,</span><span class="n">ranking</span><span class="p">)</span>
         <span class="n">New</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">ranking</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span><span class="p">:</span>
@@ -4391,8 +4408,8 @@
     <span class="n">seed</span> <span class="o">=</span> <span class="mi">1001</span>
     <span class="n">nbrOfCPUs</span> <span class="o">=</span> <span class="mi">6</span>
 
-<span class="c1">##    from randomPerfTabs import RandomPerformanceTableau</span>
-<span class="c1">##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
 <span class="c1">##    nbrActions=1000</span>
 <span class="c1">##    nbrCrit = 13</span>
 <span class="c1">##    tp = RandomPerformanceTableau(numberOfActions=nbrActions,\</span>
@@ -4406,8 +4423,8 @@
 <span class="c1">##                                    numberOfCriteria=nbrCrit,\</span>
 <span class="c1">##                                    Threading=MP,seed=seed)</span>
 <span class="c1">##</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
+<span class="c1">##    from randomPerfTabs import Random3ObjectivesPerformanceTableau</span>
+<span class="c1">##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator</span>
     <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">21</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>\
@@ -4422,11 +4439,13 @@
 <span class="c1">##    qs.showQuantileOrdering(strategy=&#39;optimistic&#39;)</span>
 <span class="c1">##    print(&#39;==&gt;&gt; pessimistic&#39;)</span>
 <span class="c1">##    qs.showQuantileOrdering(strategy=&#39;pessimistic&#39;)</span>
-    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">##    from outrankingDigraphs import *</span>
+<span class="c1">##    tp = PerformanceTableau(&#39;exL10&#39;)</span>
+    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">ira</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>\
+    <span class="n">ira</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span>\
                                     <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span>\
                                    <span class="n">WithSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                                        <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>

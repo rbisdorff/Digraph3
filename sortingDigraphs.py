@@ -3170,7 +3170,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
     """
 
-    def __init__(self,argPerfQuantiles=None,newData=None,\
+    def __init__(self,argPerfQuantiles=None,
+                 newData=None, 
                  quantiles=None,\
                  hasNoVeto=False,\
                  #PrefThresholds=False,\
@@ -3230,6 +3231,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         self.runTimes['dataInput'] = time()-tt
         
         if Debug:
+            print('1.')
             print('new actions',self.newActions)
             print('new evaluations',self.evaluation)
             print('Quantiles frequencies: ', self.quantilesFrequencies)
@@ -3261,6 +3263,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         limitingQuantiles = self.limitingQuantiles
 
         if Debug:
+            print('2.')
             print(quantFreq)
             print(limitingQuantiles)
             
@@ -3296,6 +3299,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         self.runTimes['categories'] = time()-t0
 ##
         if Debug:
+            print('3.')
             print('categories',self.categories)
             print('list',list(dict.keys(categories)))
 
@@ -3312,6 +3316,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                             Debug=Debug)
             self.criteriaCategoryLimits[g] = gQuantiles
         if Debug:
+            print('4.')
             print('CriteriaCategoryLimits',self.criteriaCategoryLimits)
 
         # set the category limits type (LowerClosed = True is default)
@@ -3342,6 +3347,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         self.profileLimits = profileLimits
         
         if Debug:
+            print('5.')
             print('self.profiles',profiles)
             print('self.profileLimits',profileLimits)
             
@@ -3362,6 +3368,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         perfTab.evaluation = deepcopy(self.evaluation)
         
         if Debug:
+            print('6.')
             perfTab.showActions()
             perfTab.showCriteria()
             perfTab.showPerformanceTableau()
@@ -3439,9 +3446,11 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             self.rankingCorrelation = g.computeRankingCorrelation(actionsList)
         self.actionsRanking = actionsList
         if Debug:
+            print('6.')
             print('*',self.actionsRanking)
         self.ratingCategories = self.computeQuantilesRating(Debug=Debug)
         if Debug:
+            print('7.')
             print('Ranking rule        :', self.rankingRule)
             print('Actions ranking     :', self.actionsRanking)
             print('Ranking correlation :', self.rankingCorrelation)
@@ -3454,9 +3463,11 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             self.sorting = self.computeSortingCharacteristics()
             self.categoryContent = self.computeCategoryContents()
             if Debug:
+                print('8.')
                 self.showSorting()
                 self.showActionsSortingResult()
                 self.showQuantileOrdering()
+                #self.showQuantilesRating()
         self.runTimes['rating'] = time() - t0
 
         # end of the construction
@@ -3686,7 +3697,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         else:
             return weakOrdering
 
-    def computeQuantilesRating(self,Debug=True):
+    def computeQuantilesRating(self,Debug=False):
         """
           Renders an ordered dictionary of non empty quantiles in ascending order.
         """
@@ -3694,10 +3705,16 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         if self.LowerClosed: # lower closed quantiles
             ranking.reverse()
         if Debug:
+            print('9.1')
             print(ranking)
         
         n = len(ranking)
         ratingCategories = OrderedDict()
+        if ranking[0] in self.newActions:
+            ranking[0],ranking[1] = ranking[1],ranking[0]
+##        else: if ranking[-1] in self.newActions: ranking[-1],ranking[-2]
+##            = ranking[-2],ranking[-1]
+        print('swapping',ranking)
         New = True
         for i in range(n):
             if ranking[i] in self.newActions:
@@ -4351,8 +4368,8 @@ if __name__ == "__main__":
     seed = 1001
     nbrOfCPUs = 6
 
-##    from randomPerfTabs import RandomPerformanceTableau
-##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
+    from randomPerfTabs import RandomPerformanceTableau
+    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
 ##    nbrActions=1000
 ##    nbrCrit = 13
 ##    tp = RandomPerformanceTableau(numberOfActions=nbrActions,\
@@ -4366,8 +4383,8 @@ if __name__ == "__main__":
 ##                                    numberOfCriteria=nbrCrit,\
 ##                                    Threading=MP,seed=seed)
 ##
-    from randomPerfTabs import Random3ObjectivesPerformanceTableau
-    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
+##    from randomPerfTabs import Random3ObjectivesPerformanceTableau
+##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
     nbrActions=1000
     nbrCrit = 21
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
@@ -4382,11 +4399,13 @@ if __name__ == "__main__":
 ##    qs.showQuantileOrdering(strategy='optimistic')
 ##    print('==>> pessimistic')
 ##    qs.showQuantileOrdering(strategy='pessimistic')
-    pq = PerformanceQuantiles(tp,20,LowerClosed=False,Debug=False)
+##    from outrankingDigraphs import *
+##    tp = PerformanceTableau('exL10')
+    pq = PerformanceQuantiles(tp,5,LowerClosed=True,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
     newActions = tpg.randomActions(20)
     pq.updateQuantiles(newActions,historySize=None)
-    ira = NormedQuantilesRatingDigraph(pq,newActions,quantiles=5,\
+    ira = NormedQuantilesRatingDigraph(pq,newActions,\
                                     rankingRule='best',\
                                    WithSorting=True,Debug=False,\
                                        Threading=MP,nbrOfCPUs=nbrOfCPUs)
