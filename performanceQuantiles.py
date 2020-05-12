@@ -1082,11 +1082,11 @@ if __name__ == "__main__":
     #newActions = tpg.randomActions(10)
     #pq.updateQuantiles(newActions,historySize=0)
     #pq.showHTMLLimitingQuantiles(Transposed=True)
-    pq.save('test')
-    pq1 = PerformanceQuantiles('test')
-    from randomPerfTabs import *
-    rg = RandomPerformanceGenerator(pq1)
-    newTab = rg.randomPerformanceTableau(10)
+##    pq.save('test')
+##    pq1 = PerformanceQuantiles('test')
+##    from randomPerfTabs import *
+##    rg = RandomPerformanceGenerator(pq1)
+##    newTab = rg.randomPerformanceTableau(10)
 ##    from sortingDigraphs import NormedQuantilesRatingDigraph
 ##    nqr1 = NormedQuantilesRatingDigraph(pq,newActions,\
 ##                                        rankingRule='best',\

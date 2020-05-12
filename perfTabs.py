@@ -1083,7 +1083,7 @@ The performance evaluations of each decision alternative on each criterion are g
             print(quantiles)
         return quantiles
 
-    def computeActionQuantile(self,action,Debug=True):
+    def computeActionQuantile(self,action,Debug=False):
         """
         renders the overall performance quantile of action
         """
@@ -7507,7 +7507,7 @@ class CSVPerformanceTableau(PerformanceTableau):
     Param:
         fileName (without the extension .csv).
     """
-    def __init__(self,fileName='temp',Debug=True):
+    def __init__(self,fileName='temp',Debug=False):
         from csv import reader
         from collections import OrderedDict
 

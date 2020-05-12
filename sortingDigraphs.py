@@ -3177,7 +3177,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                  #PrefThresholds=False,\
                  valuationScale=(-1,1),\
                  rankingRule='best',\
-                 WithSorting=False,\
+                 WithSorting=True,\
                  Threading=False,\
                  tempDir=None,\
                  nbrOfCPUs=None,\
@@ -3508,7 +3508,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
 # ------------ private methods ------------------
 
-    def _computeLimitingQuantiles(self,g,_PrefThresholds=False,Debug=True):
+    def _computeLimitingQuantiles(self,g,_PrefThresholds=False,Debug=False):
         """
         Renders the list of limiting quantiles on criteria g
         """

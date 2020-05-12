@@ -1122,11 +1122,11 @@
     <span class="c1">#newActions = tpg.randomActions(10)</span>
     <span class="c1">#pq.updateQuantiles(newActions,historySize=0)</span>
     <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
-    <span class="n">pq</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
-    <span class="n">pq1</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="n">rg</span> <span class="o">=</span> <span class="n">RandomPerformanceGenerator</span><span class="p">(</span><span class="n">pq1</span><span class="p">)</span>
-    <span class="n">newTab</span> <span class="o">=</span> <span class="n">rg</span><span class="o">.</span><span class="n">randomPerformanceTableau</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1">##    pq.save(&#39;test&#39;)</span>
+<span class="c1">##    pq1 = PerformanceQuantiles(&#39;test&#39;)</span>
+<span class="c1">##    from randomPerfTabs import *</span>
+<span class="c1">##    rg = RandomPerformanceGenerator(pq1)</span>
+<span class="c1">##    newTab = rg.randomPerformanceTableau(10)</span>
 <span class="c1">##    from sortingDigraphs import NormedQuantilesRatingDigraph</span>
 <span class="c1">##    nqr1 = NormedQuantilesRatingDigraph(pq,newActions,\</span>
 <span class="c1">##                                        rankingRule=&#39;best&#39;,\</span>
