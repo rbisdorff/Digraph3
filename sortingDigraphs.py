@@ -3712,9 +3712,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         ratingCategories = OrderedDict()
         if ranking[0] in self.newActions:
             ranking[0],ranking[1] = ranking[1],ranking[0]
-##        else: if ranking[-1] in self.newActions: ranking[-1],ranking[-2]
-##            = ranking[-2],ranking[-1]
-        print('swapping',ranking)
+            if Debug:
+                print('swapping',ranking)
         New = True
         for i in range(n):
             if ranking[i] in self.newActions:
