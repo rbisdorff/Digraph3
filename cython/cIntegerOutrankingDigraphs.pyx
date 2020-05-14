@@ -1438,5 +1438,5 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                 except KeyError:
                     pass
                 print()
-                
+
 ############################

@@ -60,6 +60,121 @@ class SparseIntegerDigraph(object):
 
         return reprString
 
+    def _computeCopelandRanking(self):
+        """
+        CPython version:
+        Renders a linear ranking from best to worst of the actions
+        following Copelands's rule.
+        """
+        cdef int Max, Med, Min, copelandScore
+
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        actions = self.actions
+        incCopelandScores = []
+        decCopelandScores = []
+        for x in actions:
+            copelandScore = 0
+            for y in actions:
+                if x != y:
+                    if self.relation(x,y) > Med:
+                        copelandScore += 1
+                    elif self.relation(x,y) < Med:
+                        copelandScore += -1
+                    if self.relation(y,x) > Med:
+                        copelandScore += -1
+                    elif self.relation(y,x) < Med:
+                        copelandScore += 1
+            incCopelandScores.append((copelandScore,x))
+            decCopelandScores.append((-copelandScore,x))
+        # reversed sorting with keeping the actions initial ordering
+        # in case of ties
+        incCopelandScores.sort()
+        decCopelandScores.sort()
+        self.incCopelandScores = incCopelandScores
+        self.decCopelandScores = decCopelandScores
+        copelandRanking = [x[1] for x in decCopelandScores]
+        copelandOrder = [x[1] for x in incCopelandScores]
+        self.copelandRanking = copelandRanking
+        self.copelandOrder = copelandOrder
+
+    def computeCopelandRanking(self):
+        """
+        renders a linear ranking from best to worst of the actions following Arrow&Raynaud's rule.
+        """
+        try:
+            ranking = self.copelandRanking
+        except:
+            self._computeCopelandRanking()
+            ranking = self.copelandRanking
+        return ranking
+
+    def computeCopelandOrder(self):
+        """
+        renders a linear ranking from best to worst of the actions following Arrow&Raynaud's rule.
+        """
+        try:
+            ordering = self.copelandOrder
+        except:
+            self._computeCopelandRanking()
+            ordering = self.copelandOrder
+        return ordering
+
+    def _computeNetFlowsRanking(self):
+        """
+        CPython version:
+        Renders a linear ranking from best to worst of the actions
+        following Copelands's rule.
+        """
+        cdef int Max, Med, Min, netFlowsScore
+
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        actions = self.actions
+        incNetFlowsScores = []
+        decNetFlowsScores = []
+        for x in actions:
+            netFlowsScore = 0
+            for y in actions:
+                if x != y:
+                    netFlowsScore += (self.relation(x,y) - self.relation(y,x))
+            incNetFlowsScores.append((netFlowsScore,x))
+            decNetFlowsScores.append((-netFlowsScore,x))
+        # reversed sorting with keeping the actions initial ordering
+        # in case of ties
+        incNetFlowsScores.sort()
+        decNetFlowsScores.sort()
+        self.incNetFlowsScores = incNetFlowsScores
+        self.decNetFlowsScores = decNetFlowsScores
+        netFlowsRanking = [x[1] for x in decNetFlowsScores]
+        netFlowsOrder = [x[1] for x in incNetFlowsScores]
+        self.netFlowsRanking = netFlowsRanking
+        self.netFlowsOrder = netFlowsOrder
+
+    def computeNetFlowsRanking(self):
+        """
+        renders a linear ranking from best to worst of the actions following the NetFlows rule.
+        """
+        try:
+            ranking = self.netFlowsRanking
+        except:
+            self._computeNetFlowsRanking()
+            ranking = self.netFlowsRanking
+        return ranking
+
+    def computeNetFlowsOrder(self):
+        """
+        renders a linear ordering from worst to best of the actions following the NetFlowss rule.
+        """
+        try:
+            ordering = self.netFlowsOrder
+        except:
+            self._computeNetFlowsRanking()
+            ordering = self.netFlowsOrder
+        return ordering
+
     def showBestChoiceRecommendation(self,bint Comments=False,bint ChoiceVector=False,bint Debug=False):
         """
         *Parameters*:

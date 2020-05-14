@@ -36,6 +36,10 @@ def testSparseOutrankingDigraph():
     print("Sparse outranking digraph's correlation with standard outranking digraph")
     print(bg1.computeOrdinalCorrelation(gi,Debug=False))
     print(time()-t0)
+    print(bg1.computeCopelandRanking())
+    print(bg1.computeCopelandOrder())
+    print(bg1.computeNetFlowsRanking())
+    print(bg1.computeNetFlowsOrder())
 
 def testMinimalComponentSize():
     print('==>> Testing SparseOutrankingDigraph with minimal Component Size instantiation')

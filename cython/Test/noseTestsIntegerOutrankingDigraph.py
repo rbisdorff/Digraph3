@@ -63,6 +63,17 @@ def testSaveCPerformanceTableau():
     t1.showPerformanceTableau()
     g1 = IntegerBipolarOutrankingDigraph(t,Threading=True,nbrCores=4)
     g1.showRelationTable()
+
+def testCopelandOrdering():
+    print('==>> Testing Copeland order computation')
+    t = cR3ObjPT(numberOfActions=10,seed=1)
+    print(t)
+    t.showPerformanceTableau()
+    g = IntegerBipolarOutrankingDigraph(t,Threading=True,nbrCores=4)
+    print(g.computeCopelandRanking())
+    print(g.computeCopelandOrder())
+    g.showRelationMap()
+
     
         
 
