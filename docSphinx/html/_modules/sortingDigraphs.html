@@ -3752,9 +3752,8 @@
         <span class="n">ratingCategories</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">ranking</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span><span class="p">:</span>
             <span class="n">ranking</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">ranking</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ranking</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">ranking</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="c1">##        else: if ranking[-1] in self.newActions: ranking[-1],ranking[-2]</span>
-<span class="c1">##            = ranking[-2],ranking[-1]</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;swapping&#39;</span><span class="p">,</span><span class="n">ranking</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;swapping&#39;</span><span class="p">,</span><span class="n">ranking</span><span class="p">)</span>
         <span class="n">New</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">ranking</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span><span class="p">:</span>
@@ -4392,7 +4391,7 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python sortingDigraphs module                    *</span>
 <span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
-<span class="s2">    * $Revision: 3661 $                                 *</span>
+<span class="s2">    * $Revision: 3663 $                                 *</span>
 <span class="s2">    * Copyright (C) 2010 Raymond Bisdorff              *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
@@ -4486,7 +4485,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. december 2010                *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 3661 $                  *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 3663 $                  *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>

@@ -4812,7 +4812,7 @@ class Digraph(object):
         else:
             determination = D
         if InPercents:
-            return (determination / (Max-Med) + Decimal('1')) / Decimal('2') * Decimal('100.0')
+            return ( (determination / (Max-Med)) + Decimal('1.0')) / Decimal('2.0') * Decimal('100.0')
         else:
             return determination
 

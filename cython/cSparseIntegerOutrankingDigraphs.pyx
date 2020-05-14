@@ -943,7 +943,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
 
     >>> from cRandPerfTabs import *
     >>> tp = cRandomCBPerformanceTableau(numberOfActions=1000,
-    ...                        Threading=True,seed=100)
+                               Threading=True,seed=100)
     >>> tp
     *------- PerformanceTableau instance description ------*
     Instance class   : RandomCBPerformanceTableau
@@ -956,13 +956,13 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                         'evaluation', 'weightPreorder']
     >>> from cSparseIntegerOutrankingDigraphs import *
     >>> bg = SparseIntegerOutrankingDigraph(tp,quantiles=5,
-    ...                       quantilesOrderingStrategy='average',
-    ...                       LowerClosed=False,
-    ...                       minimalComponentSize=10,
-    ...                       Threading=True,nbrOfCPUs=8,
-    ...                       Debug=False)
+                           quantilesOrderingStrategy='average',
+                           LowerClosed=False,
+                           minimalComponentSize=10,
+                           Threading=True,nbrOfCPUs=8,
+                           Debug=False)
     >>> bg
-      *----- Object instance description --------------*
+     *----- Object instance description --------------*
       Instance class    : SparseIntegerOutrankingDigraph
       Instance name     : randomCBperftab_mp
       # Actions         : 1000
@@ -970,49 +970,56 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
       Sorting by        : 5-Tiling
       Ordering strategy : average
       Ranking rule      : Copeland
-      # Components      : 90
+      # Components      : 10
       Minimal order     : 10
-      Maximal order     : 24
-      Average order     : 12.5
-      fill rate         : 1.230%
-      ----  Constructor run times (in sec.) ----
-      Nbr of threads    : 8
-      Total time        : 0.19518
-      QuantilesSorting  : 0.07454
-      Preordering       : 0.00218
-      Decomposing       : 0.11841
+      Maximal order     : 438
+      Average order     : 100.0
+      fill rate         : 26.541%
+     ----  Constructor run times (in sec.) ----
+      # Threads         : 8
+      Total time        : 4.48622
+      QuantilesSorting  : 0.07092
+      Preordering       : 0.00159
+      Decomposing       : 4.41365
+      Ordering          : 0.00001
+      Attributes       : ['runTimes', 'name', 'actions', 'criteria', 
+                          'evaluation', 'order', 'dimension', 
+                          'sortingParameters', 'nbrOfCPUs', 'valuationdomain', 
+                          'profiles', 'categories', 'sorting', 
+                          'minimalComponentSize', 'decomposition', 
+                          'nbrComponents', 'nd', 'components', 'fillRate', 
+                          'maximalComponentSize', 'componentRankingRule', 
+                          'boostedRanking']
     >>> bg.showBestChoiceRecommendation()
       ***********************
       * --- Best choice recommendation(s) ---*
       (in decreasing order of determinateness)   
       Credibility domain:  {'min': -24, 'med': 0, 'max': 24, 
                             'hasIntegerValuation': True}
-      * choice              : [131, 151, 388]
-        +-irredundancy      : 0.00
+      * choice              : [132, 152, 680, 742]
         independence        : 0.00
         dominance           : 2.00
         absorbency          : -10.00
-        covering (%)        : 58.33
+        covering (%)        : 55.56
         determinateness (%) : 51.60
-        - most credible action(s) = { '679': 1.00, '131': 1.00, }
+        - most credible action(s) = { '680': 1.00, '132': 1.00, }
       ***********************
       * --- Worst choice recommendation(s) ---*
       (in decreasing order of determinateness)   
       Credibility domain:  {'min': -24, 'med': 0, 'max': 24, 
                             'hasIntegerValuation': True}
-      * choice              : [312]
-      +-irredundancy      : 24.00
-      independence        : 24.00
-      dominance           : -24.00
-      absorbency          : 10.00
-      covering (%)        : 0.00
-      determinateness (%) : 70.83
-      - most credible action(s) = { '312': 10.00, }
-    >>> print(bg.boostedRanking[:10],' ... ',bg.boostedRanking[-10:] )
-      [679, 388, 741, 131, 151, 275, 716, 623, 180, 579]  
-      ...  
-      [202, 32, 62, 680, 878, 549, 769, 859, 924, 312]
-    >>>
+      * choice              : [203, 313, 474, 970, 994]
+      independence        : 0.00
+      dominance           : -18.00
+      absorbency          : 2.00
+      covering (%)        : 3.10
+      determinateness (%) : 50.0
+      - most credible action(s) = {}
+    >>> print(bg.boostedRanking[:10],' ... ',\
+              bg.boostedRanking[-10:] )
+      [680, 389, 742, 152, 132, 276, 717, 604, 624, 181]  
+       ...  
+      [237, 681, 887, 879, 925, 970, 63, 714, 33, 313]
 
     """
     
