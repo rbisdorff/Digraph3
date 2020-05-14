@@ -946,7 +946,8 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                                Threading=True,seed=100)
     >>> tp
     *------- PerformanceTableau instance description ------*
-    Instance class   : RandomCBPerformanceTableau
+    Instance class   : cRandomCBPerformanceTableau
+    Seed             : 100
     Instance name    : randomCBperftab
     # Actions        : 1000
     # Objectives     : 2

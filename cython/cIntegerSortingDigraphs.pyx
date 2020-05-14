@@ -48,32 +48,79 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 
     Example Python session:
         >>> from cRandPerfTabs import *
-        >>> t = RandomPerformanceTableau(numberOfActions=25)
+        >>> t = cRandomPerformanceTableau(numberOfActions=25,seed=100)
+        >>> t
+         *------- PerformanceTableau instance description ------*
+          Instance class   : cRandomPerformanceTableau
+          Seed             : 100
+          Instance name    : cRandomperftab
+          # Actions        : 100
+          # Criteria       : 7
+          Attributes       : ['randomSeed', 'name', 'actions', 'criteria',
+                              'evaluation', 'weightPreorder']
         >>> from cIntegerSortingDigraphs import *
-        >>> so = IntegerQuantilesSortingDigraph(t,limitingQuantiles='quintiles')
-        >>> so.showSorting()
+        >>> so = IntegerQuantilesSortingDigraph(t,\
+                                       limitingQuantiles='deciles',\
+                                       StoreSorting=True)
+        >>> so
+         *-----  Object instance description -----------*
+          Instance class      : IntegerQuantilesSortingDigraph
+          Instance name       : sorting_with_10-tile_limits
+          # Actions           : 100
+          # Criteria          : 7
+          # Quantile profiles : 10
+          Attributes: ['actions', 'criteria', 'totalWeight', 'evaluation',
+                       'runTimes', 'name', 'limitingQuantiles',
+                       'LowerClosed', 'categories', 'criteriaCategoryLimits',
+                       'profiles', 'profileLimits', 'hasNoVeto',
+                       'valuationdomain', 'nbrThreads', sorting, 'categoryContent',
+                       'relation', 'order']
+        *------  Constructor run times (in sec.) ------*
+         #Threads         : 1
+         Total time       : 0.03369
+         Data input       : 0.00009
+         Quantile limits  : 0.00003
+         Quantile classes : 0.00211
+         Limit profiles   : 0.00004
+         Sorting relation : 0.03141
+        >>> so.showSorting(Reverse=True)
         *--- Sorting results in descending order ---*
-        ]0.80 - 1.00]: 	 [10, 17, 23, 24]
-        ]0.60 - 0.80]: 	 [0, 2, 4, 5, 6, 10, 11, 12, 17, 19, 23]
-        ]0.40 - 0.60]: 	 [1, 2, 3, 8, 9, 12, 13, 14, 16, 18, 19, 20, 21, 22]
-        ]0.20 - 0.40]: 	 [7, 13, 15, 20]
-        ]< - 0.20]: 	 []
-        >>> so.showSorting(Reverse=False)
-        *--- Sorting results in ascending order ---*
-        ]< - 0.20]: 	 []
-        ]0.20 - 0.40]: 	 [7, 13, 15, 20]
-        ]0.40 - 0.60]: 	 [1, 2, 3, 8, 9, 12, 13, 14, 16, 18, 19, 20, 21, 22]
-        ]0.60 - 0.80]: 	 [0, 2, 4, 5, 6, 10, 11, 12, 17, 19, 23]
-        ]0.80 - 1.00]: 	 [10, 17, 23, 24]
+        ]0.90 - 1.00]: 	 [22, 62]
+        ]0.80 - 0.90]: 	 [34, 44, 50, 53, 56, 58, 62, 63, 93]
+        ]0.70 - 0.80]: 	 [3, 5, 7, 24, 29, 34, 35, 41, 43, 48, 56,
+                          58, 59, 63, 70, 76, 81, 91, 93, 96]
+        ]0.60 - 0.70]: 	 [1, 8, 10, 11, 25, 27, 33, 36, 43, 48, 57,
+                          59, 61, 63, 65, 66, 68, 70, 71, 73, 76, 82,
+                          89, 90, 91, 92, 95, 97]
+        ]0.50 - 0.60]: 	 [2, 8, 10, 11, 17, 19, 20, 21, 26, 27, 28, 30,
+                          33, 40, 45, 46, 55, 61, 64, 65, 66, 68, 69, 71,
+                          82, 85, 87, 90, 94, 97, 98, 100]
+        ]0.40 - 0.50]: 	 [4, 6, 12, 13, 17, 18, 19, 26, 27, 31, 32, 37,
+                          38, 39, 40, 42, 46, 47, 55, 60, 64, 67, 69, 77,
+                          80, 87, 88, 98, 99, 100]
+        ]0.30 - 0.40]: 	 [9, 14, 15, 16, 23, 31, 39, 42, 49, 51, 52, 54,
+                          60, 72, 75, 78, 86, 99]
+        ]0.20 - 0.30]: 	 [14, 15, 16, 52, 74, 79, 83, 84, 86]
+        ]0.10 - 0.20]: 	 []
+        ]< - 0.10]: 	 []
         >>> so.showQuantileOrdering(strategy='average')
-        ]0.80-1.00] : [24]
-        ]0.60-1.00] : [10, 17, 23]
-        ]0.60-0.80] : [0, 4, 5, 6, 11]
-        ]0.40-0.80] : [2, 12, 19]
-        ]0.40-0.60] : [1, 3, 8, 9, 14, 16, 18, 21, 22]
-        ]0.20-0.60] : [13, 20]
-        ]0.20-0.40] : [7, 15]
-
+        ]0.90-1.00] : [22]
+        ]0.80-1.00] : [62]
+        ]0.80-0.90] : [44, 50, 53]
+        ]0.70-0.90] : [34, 56, 58, 93]
+        ]0.60-0.90] : [63]
+        ]0.70-0.80] : [3, 5, 7, 24, 29, 35, 41, 81, 96]
+        ]0.60-0.80] : [43, 48, 59, 70, 76, 91]
+        ]0.60-0.70] : [1, 25, 36, 57, 73, 89, 92, 95]
+        ]0.50-0.70] : [8, 10, 11, 33, 61, 65, 66, 68, 71, 82, 90, 97]
+        ]0.40-0.70] : [27]
+        ]0.50-0.60] : [2, 20, 21, 28, 30, 45, 85, 94]
+        ]0.40-0.60] : [17, 19, 26, 40, 46, 55, 64, 69, 87, 98, 100]
+        ]0.40-0.50] : [4, 6, 12, 13, 18, 32, 37, 38, 47, 67, 77, 80, 88]
+        ]0.30-0.50] : [31, 39, 42, 60, 99]
+        ]0.30-0.40] : [9, 23, 49, 51, 54, 72, 75, 78]
+        ]0.20-0.40] : [14, 15, 16, 52, 86]
+        ]0.20-0.30] : [74, 79, 83, 84]
     """
     def __init__(self,argPerfTab=None,\
                  limitingQuantiles=4,\
