@@ -26,7 +26,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         * hasNoVeto=False,
         * outrankingType = "bipolar",
         * CompleteOutranking = False,
-        * StoreSorting=False,
+        * StoreSorting=True,
         * CopyPerfTab=False,
         * Threading=False,
         * tempDir=None,
@@ -131,7 +131,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                  #bint IntegerValued=True,\
                  #WithSortingRelation=False,\
                  bint CompleteOutranking = False,\
-                 bint StoreSorting=False,\
+                 bint StoreSorting=True,\
                  bint CopyPerfTab=False,\
                  bint AddProfiles2Actions=False,\
                  bint Threading=False,\
