@@ -1018,7 +1018,8 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
 
     def showHTMLPerformanceTableau(self,studentsSubset=None,isSorted=True,\
                                    Transposed=False,ndigits=0,\
-                                   ContentCentered=True,title=None):
+                                   ContentCentered=True,title=None,\
+                                   fromIndex=None,toIndex=None):
         """
         shows the html version of the academic performance tableau in a browser window.
         """
@@ -1027,9 +1028,10 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         fo = open(fileName,'w')
         fo.write(self._htmlPerformanceTable(actions=studentsSubset,isSorted=isSorted,\
                                            Transposed=Transposed,\
-                                           ndigits=ndigits,
-                                           ContentCentered=ContentCentered,
-                                           title=title))
+                                           ndigits=ndigits,\
+                                           ContentCentered=ContentCentered,\
+                                           title=title,fromIndex=fromIndex,\
+                                            toIndex=toIndex))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open(url,new=2)
@@ -1038,7 +1040,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
     def _htmlPerformanceTable(self,actions=None,isSorted=False,\
                              Transposed=False,ndigits=0,\
                              ContentCentered=True,
-                             title=None):
+                             title=None,fromIndex=None,toIndex=None):
         """
         Renders the performance table citerion x actions in html format.
         """
@@ -1058,6 +1060,10 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
             actionsKeys = [x for x in actions]
         if isSorted:
             actionsKeys.sort()
+        if fromIndex == None:
+            fromIndex = 0
+        if toIndex == None:
+            toIndex = len(actionsKeys)
         evaluation = self.evaluation
         if ContentCentered:
             alignFormat = 'center'
@@ -1066,7 +1072,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         if Transposed:
             html += '<table style="background-color:White;" border="1">'
             html += '<tr bgcolor="#9acd32"><th>Courses<br/>(ECTS)</th>'
-            for x in actionsKeys:
+            for x in actionsKeys[fromIndex:toIndex]:
                 try:
                     xName = actions[x]['shortName']
                 except:
@@ -1079,7 +1085,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                 except:
                     gName = '%s (%d)' % (g,int(criteria[g]['weight']))
                 html += '<tr><th bgcolor="#FFF79B">%s</th>' % (gName)
-                for x in actionsKeys:
+                for x in actionsKeys[fromIndex:toIndex]:
                     if self.evaluation[g][x] != Decimal("-999"):
                         if self.evaluation[g][x] < Decimal('10'):
                             formatString = '<td bgcolor="#ffddff"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
@@ -1113,7 +1119,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                 gweight = criteria[g]['weight']
                 html += '<td  align="center" bgcolor="#FFF79B" ><i>%d</i></td>' % (int(gweight))
             html += '</tr>'
-            for x in actionsKeys:
+            for x in actionsKeys[fromIndex:toIndex]:
                 try:
                     xName = actions[x]['shortName']
                 except:
