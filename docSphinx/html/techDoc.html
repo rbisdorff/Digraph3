@@ -1558,6 +1558,15 @@ Return a tuple: slaterOrder, slaterIndex</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="digraphs.Digraph.computeTopologicalRanking">
+<code class="sig-name descname">computeTopologicalRanking</code><span class="sig-paren">(</span><em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeTopologicalRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeTopologicalRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>If self is acyclic, adds topological sort number to each node of self
+and renders ordered list of nodes. Otherwise renders None.
+Source: M. Golumbic Algorithmic Graph heory and Perfect Graphs,
+Annals Of Discrete Mathematics 57 2nd Ed. , Elsevier 2004, Algorithm 2.4 p.44.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="digraphs.Digraph.computeTransitivityDegree">
 <code class="sig-name descname">computeTransitivityDegree</code><span class="sig-paren">(</span><em class="sig-param">Comments=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeTransitivityDegree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeTransitivityDegree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the transitivity degree of a digraph.</p>
@@ -8550,6 +8559,12 @@ disjunctive or conjunctive fusion (omax|omin operator) of a list of rankings.</p
 <dl class="method">
 <dt id="transitiveDigraphs.TransitiveDigraph.exportGraphViz">
 <code class="sig-name descname">exportGraphViz</code><span class="sig-paren">(</span><em class="sig-param">fileName=None</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">direction='best'</em>, <em class="sig-param">Comments=True</em>, <em class="sig-param">graphType='png'</em>, <em class="sig-param">graphSize='7</em>, <em class="sig-param">7'</em>, <em class="sig-param">fontSize=10</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
+<dd><p>export GraphViz dot file for Hasse diagram drawing filtering.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="transitiveDigraphs.TransitiveDigraph.exportTopologicalGraphViz">
+<code class="sig-name descname">exportTopologicalGraphViz</code><span class="sig-paren">(</span><em class="sig-param">fileName=None</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">direction='best'</em>, <em class="sig-param">Comments=True</em>, <em class="sig-param">graphType='png'</em>, <em class="sig-param">graphSize='7</em>, <em class="sig-param">7'</em>, <em class="sig-param">fontSize=10</em>, <em class="sig-param">Debug=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.exportTopologicalGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.exportTopologicalGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>export GraphViz dot file for Hasse diagram drawing filtering.</p>
 </dd></dl>
 

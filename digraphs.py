@@ -422,6 +422,76 @@ class Digraph(object):
         return self.relation[x][y]
 #------------------------------------
 
+    def computeTopologicalRanking(self,Debug=False):
+        """
+        If self is acyclic, adds topological sort number to each node of self
+        and renders ordered list of nodes. Otherwise renders None.
+        Source: M. Golumbic Algorithmic Graph heory and Perfect Graphs,
+        Annals Of Discrete Mathematics 57 2nd Ed. , Elsevier 2004, Algorithm 2.4 p.44.
+        """
+        from collections import OrderedDict
+        def topSort(v,i,j,dfsNbr,tsNbr,Debug=False):
+            if Debug:
+                print('in',i,v,self.gamma[v],dfsNbr[v],tsNbr[v])
+            i += 1
+            dfsNbr[v] = i
+            for w in self.gamma[v][0]:
+                if Debug:
+                    print('successer',w,'of',v)
+                if dfsNbr[w] == 0:
+                    topSort(w,i,j,dfsNbr,tsNbr,Debug=Debug)
+                else:
+                    if tsNbr[w] == 0:
+                        self.Acyclic = False
+            tsNbr[v]=j
+            j -= 1
+            if Debug:
+                print('out',v,self.dfsNbr[v],self.tsNbr[v])
+            return i,j,dfsNbr,tsNbr
+
+        self.Acyclic = True
+        dfsNbr = {}
+        tsNbr = {}
+        for x in self.actions:
+            dfsNbr[x]=0
+            tsNbr[x]=0
+        j = len(self.actions)
+        i = 0
+        for x in self.actions:
+            if Debug:
+                print(x,self.gamma[x])
+            if dfsNbr[x] == 0:
+                i,j,dfsNbr,tsNbr = \
+                        topSort(x,i,j,dfsNbr,tsNbr,Debug=Debug)
+
+        if self.Acyclic:
+            for x in self.actions:
+                self.actions[x]['sortLevel'] = tsNbr[x]
+            tsLevels = [(x,tsNbr[x]) for x in tsNbr]
+            ordering = [x[0] for x in sorted(tsLevels,\
+                                             key = lambda tsLevels: tsLevels[1])]
+            topSortResult = OrderedDict()
+            for x in ordering:
+                try:
+                    topSortResult[tsNbr[x]].append(x)
+                except:
+                    topSortResult[tsNbr[x]] = [x]
+            i = 1
+            topologicalRanking = OrderedDict()
+            for tc in topSortResult:
+                topologicalRanking[i] = topSortResult[tc]
+                i += 1
+            self.topologicalRanking = topologicalRanking
+            
+            if Debug:
+                print(tsLevels,ordering,topologicalRanking)
+            return topologicalRanking
+        else:
+            if Debug:
+                print('Digraph instance %s is not acyclic!' % self.name)
+                print(dfsNbr,tsNbr)             
+            return None
+
     def topologicalSort(self,Debug=False):
         """
         If self is acyclic, adds topological sort number to each node of self
@@ -13401,7 +13471,7 @@ if __name__ == "__main__":
         from time import time
         from digraphsTools import *
         t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=50,seed=105)
+                                   numberOfActions=20,seed=105)
         g = BipolarOutrankingDigraph(t)
         g.computeRankingByBestChoosing(CoDual=True,Debug=False)
         print(g.rankingByBestChoosing)
@@ -13414,6 +13484,8 @@ if __name__ == "__main__":
         rbc.showRankingByBestChoosing()
         rbc.showRankingByLastChoosing()
         rbc.showRankingByChoosing()
+        print(rbc.computeTopologicalRanking())
+        print(rbc.topologicalSort())
 ##        print(rbc.rankingByLastChoosing)
 ##        rbc.exportGraphViz(fileName='test5',direction='worst')
 ##        print(rbc.rankingByBestChoosing)
