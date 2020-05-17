@@ -147,18 +147,22 @@ class TransitiveDigraph(Digraph):
         """
         export GraphViz dot file for digraph drawing filtering.
         """
-        Digraph.exportGraphViz(self, fileName=fileName, bestChoice=bestChoice,worstChoice=worstChoice,Comments=Comments,graphType=graphType,graphSize=graphSize)
+        Digraph.exportGraphViz(self, fileName=fileName,\
+                               bestChoice=bestChoice,\
+                               worstChoice=worstChoice,\
+                               Comments=Comments,\
+                               graphType=graphType,\
+                               graphSize=graphSize)
 
-    def exportGraphViz(self,fileName=None,digraphClass=None,relation=None,direction='best',\
+    def exportGraphViz(self,fileName=None,relation=None,direction='best',\
                        Comments=True,graphType='png',\
                        graphSize='7,7',\
-                       fontSize=10):
+                       fontSize=10,Debug=False):
         """
         export GraphViz dot file for Hasse diagram drawing filtering.
         """
         import os
         from copy import copy as deepcopy
-        from sortingDigraphs import NormedQuantilesRatingDigraph
             
         def _safeName(t0):
             t = t0.split(sep="-")
@@ -170,7 +174,6 @@ class TransitiveDigraph(Digraph):
             return t1
         # working on a deepcopy of self
         digraph = deepcopy(self)
-        
         if direction == 'best':
             try:
                 rankingByChoosing = digraph.rankingByBestChoosing['result']
@@ -183,6 +186,8 @@ class TransitiveDigraph(Digraph):
             except:
                 digraph.computeRankingByLastChoosing()
                 rankingByChoosing = digraph.rankingByLastChoosing['result']
+        if Debug:
+            print(rankingByChoosing)
         
         if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
@@ -209,32 +214,13 @@ class TransitiveDigraph(Digraph):
         fo.write('\\nDigraph3 (graphviz)\\n R. Bisdorff, 2020", size="')
         fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
         # nodes
-        for x in actionKeys:
-            if digraphClass == NormedQuantilesRatingDigraph:
-                #print(digraphClass)
-                if x in digraph.profiles:
-                    cat = digraph.profiles[x]['category']
-                    if digraph.LowerClosed:
-                        nodeName = digraph.categories[cat]['lowLimit'] + ' -'
-                    else:
-                        nodeName = '- ' +digraph.categories[cat]['highLimit']
-                    node = '%s [shape = "box", fillcolor=lightcoral, style=filled, label = "%s", fontsize=%d];\n'\
-                           % (str(x),nodeName,fontSize)           
-                else:
-                    try:
-                        nodeName = digraph.actions[x]['shortName']
-                    except:
-                        nodeName = str(x)
-                    node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
-                           % (str(_safeName(x)),_safeName(nodeName),fontSize)
-                   
-            else: # standard TransitiveDigraphs  
-                try:
-                    nodeName = digraph.actions[x]['shortName']
-                except:
-                    nodeName = str(x)
-                node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
-                       % (str(_safeName(x)),_safeName(nodeName),fontSize)
+        for x in actionKeys:  
+            try:
+                nodeName = digraph.actions[x]['shortName']
+            except:
+                nodeName = str(x)
+            node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
+                   % (str(_safeName(x)),_safeName(nodeName),fontSize)
             fo.write(node)
         # same ranks for Hasses equivalence classes
         k = len(rankingByChoosing)
@@ -250,7 +236,7 @@ class TransitiveDigraph(Digraph):
         # save original relation
         #originalRelation = deepcopy(relation)
         #digraph.closeTransitive(Reverse=False)
-        digraph.closeTransitive(Reverse=True)
+        relation = digraph.closeTransitive(Reverse=True,InSite=False)
         for i in range(k-1):
             ich = rankingByChoosing[i][1]
             for x in ich:
@@ -258,11 +244,11 @@ class TransitiveDigraph(Digraph):
                     jch = rankingByChoosing[j][1]
                     for y in jch:
                         #edge = 'n'+str(i+1)+'-> n'+str(i+2)+' [dir=forward,style="setlinewidth(1)",color=black, arrowhead=normal] ;\n'
-                        if digraph.relation[x][y] > digraph.valuationdomain['med']:
+                        if relation[x][y] > digraph.valuationdomain['med']:
                             arcColor = 'black'
                             edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(x),_safeName(y),1,arcColor)
                             fo.write(edge)
-                        elif digraph.relation[y][x] > digraph.valuationdomain['med']:
+                        elif relation[y][x] > digraph.valuationdomain['med']:
                             arcColor = 'black'
                             edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(y),_safeName(x),1,arcColor)
                             fo.write(edge)

@@ -7085,28 +7085,8 @@ low limit does not outrank x and the category high limit does outrank x.</p>
 
 <dl class="method">
 <dt id="sortingDigraphs.NormedQuantilesRatingDigraph.exportRatingGraphViz">
-<code class="sig-name descname">exportRatingGraphViz</code><span class="sig-paren">(</span><em class="sig-param">fileName=None</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">direction='best'</em>, <em class="sig-param">Comments=True</em>, <em class="sig-param">graphType='png'</em>, <em class="sig-param">graphSize='7</em>, <em class="sig-param">7'</em>, <em class="sig-param">fontSize=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.exportRatingGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.exportRatingGraphViz" title="Permalink to this definition">¶</a></dt>
-<dd><p>The rating drawing is using the <a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.exportGraphViz" title="transitiveDigraphs.TransitiveDigraph.exportGraphViz"><code class="xref py py-func docutils literal notranslate"><span class="pre">transitiveDigraphs.TransitiveDigraph.exportGraphViz()</span></code></a> method for
-drawing oriented Hasse diagrams of weak orderings, ie the negation
-of the corresponding preorder relation.</p>
-<p>Continuing the previous Python session:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
-<span class="go">*-------- Quantile sorting result ---------</span>
-<span class="go">[0.50 - 0.75[ [&#39;a01&#39;]</span>
-<span class="go">[0.25 - 0.50[ [&#39;a07&#39;, &#39;a02&#39;, &#39;a10&#39;, &#39;a06&#39;, &#39;a03&#39;, &#39;a08&#39;, &#39;a09&#39;, &#39;a04&#39;]</span>
-<span class="go">[0.00 - 0.25[ [&#39;a05&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="s1">&#39;quantilesRatingDigraph&#39;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
-<span class="go">Exporting to quantilesRatingDigraph.dot</span>
-<span class="go">dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png</span>
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/quantilesRatingDigraph.png"><img alt="usage example of Normed Quantiles Rating Digraph" class="align-center" src="_images/quantilesRatingDigraph.png" style="width: 400px;" /></a>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>For graphviz, nodes’ or actions’ keys of the digraph must start with a letter
-and may not contain special characters like ‘-‘ or ‘_’.</p>
-</div>
+<code class="sig-name descname">exportRatingGraphViz</code><span class="sig-paren">(</span><em class="sig-param">fileName=None</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">Comments=True</em>, <em class="sig-param">graphType='png'</em>, <em class="sig-param">graphSize='7</em>, <em class="sig-param">7'</em>, <em class="sig-param">fontSize=10</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#NormedQuantilesRatingDigraph.exportRatingGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sortingDigraphs.NormedQuantilesRatingDigraph.exportRatingGraphViz" title="Permalink to this definition">¶</a></dt>
+<dd><p>export GraphViz dot file for Hasse diagram drawing filtering.</p>
 </dd></dl>
 
 <dl class="method">
@@ -8569,7 +8549,7 @@ disjunctive or conjunctive fusion (omax|omin operator) of a list of rankings.</p
 
 <dl class="method">
 <dt id="transitiveDigraphs.TransitiveDigraph.exportGraphViz">
-<code class="sig-name descname">exportGraphViz</code><span class="sig-paren">(</span><em class="sig-param">fileName=None</em>, <em class="sig-param">digraphClass=None</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">direction='best'</em>, <em class="sig-param">Comments=True</em>, <em class="sig-param">graphType='png'</em>, <em class="sig-param">graphSize='7</em>, <em class="sig-param">7'</em>, <em class="sig-param">fontSize=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">exportGraphViz</code><span class="sig-paren">(</span><em class="sig-param">fileName=None</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">direction='best'</em>, <em class="sig-param">Comments=True</em>, <em class="sig-param">graphType='png'</em>, <em class="sig-param">graphSize='7</em>, <em class="sig-param">7'</em>, <em class="sig-param">fontSize=10</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>export GraphViz dot file for Hasse diagram drawing filtering.</p>
 </dd></dl>
 

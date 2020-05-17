@@ -3774,7 +3774,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         for eqcl in preRanking:
             currRest = currentActions - set(eqcl)
             if Debug:
-                print(currentActions, eqcl, currRest)
+                print('currentActions, eqcl, currRest', currentActions, eqcl, currRest)
             for x in eqcl:
                 for y in currRest:
                     ratingRelation[x][y] = Max
@@ -3866,7 +3866,166 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                                    graphSize=graphSize,
                                    fontSize=fontSize)
 
-    def exportRatingGraphViz(self,fileName=None,relation=None,\
+
+    def exportRatingGraphViz(self,fileName=None,
+                             relation=None,
+                             Comments=True,graphType='png',\
+                             graphSize='7,7',\
+                             fontSize=10,\
+                             Debug=False):
+        """
+        export GraphViz dot file for Hasse diagram drawing filtering.
+        """
+        import os
+        from copy import copy as deepcopy
+            
+        def _safeName(t0):
+            t = t0.split(sep="-")
+            t1 = t[0]
+            n = len(t)
+            if n > 1:
+                for i in range(1,n):
+                    t1 += '%s%s' % ('_',t[i])
+            return t1
+        
+        # working on a deepcopy of self
+        digraph = deepcopy(self)
+        print(digraph.profileLimits)
+        print(digraph.categoryContent)
+
+        # constructing rankingByBestChoosing result
+        rankingByChoosing = []
+        k = len(digraph.profileLimits)
+        if digraph.LowerClosed:
+            i = 0
+            j = 1
+            while i < k:
+                rankingByChoosing.append((Decimal('1'),[self.profileLimits[i]]))
+                if self.categoryContent[str(j)] != []:
+                    rankingByChoosing.append((Decimal('1'),self.categoryContent[str(j)]))
+                i += 1
+                j += 1
+        else:
+            i = 0
+            j = 1
+            while i < k:
+                if self.categoryContent[str(j)] != []:
+                    rankingByChoosing.append((Decimal('1'),self.categoryContent[str(j)]))
+                rankingByChoosing.append((Decimal('1'),[self.profileLimits[i]]))
+                i += 1
+                j += 1
+        if Debug:
+            print(rankingByChoosing)
+
+            
+        if Comments:
+            print('*---- exporting a dot file for GraphViz tools ---------*')
+
+        # install rating relation (weakly transitive)
+        if relation == None:
+            digraph.relation = digraph.computeRatingRelation()
+        #    if Debug:
+        #        actionKeys = digraph.computeCopelandRanking()
+        #        digraph.showHTMLRelationTable(actionsList=actionKeys)
+        
+        # sorting actionsKeys
+        actionKeys = digraph.computeCopelandRanking()
+        n = len(actionKeys)
+        
+        Med = digraph.valuationdomain['med']
+        i = 0
+        if fileName == None:
+            name = digraph.name
+        else:
+            name = fileName
+        dotName = name+'.dot'
+        if Comments:
+            print('Exporting to '+dotName)
+        fo = open(dotName,'w')
+        fo.write('digraph G {\n')
+        fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+        fo.write('\\nDigraph3 (graphviz)\\n R. Bisdorff, 2020", size="')
+        fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
+        # nodes
+        for x in actionKeys:
+            #print(digraphClass)
+            if x in digraph.profiles:
+                cat = digraph.profiles[x]['category']
+                if digraph.LowerClosed:
+                    nodeName = digraph.categories[cat]['lowLimit'] + ' -'
+                else:
+                    nodeName = '- ' +digraph.categories[cat]['highLimit']
+                node = '%s [shape = "box", fillcolor=lightcoral, style=filled, label = "%s", fontsize=%d];\n'\
+                       % (str(x),nodeName,fontSize)           
+            else:
+                try:
+                    nodeName = digraph.actions[x]['shortName']
+                except:
+                    nodeName = str(x)
+                node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
+                       % (str(_safeName(x)),_safeName(nodeName),fontSize)
+            fo.write(node)
+
+        fo.write(node)
+        # same ranks for Hasses equivalence classes
+        k = len(rankingByChoosing)
+        for i in range(k-1,0,-1):
+            sameRank = '{ rank = %d; ' % i
+            ich = rankingByChoosing[i][1]
+            for x in ich:
+                sameRank += str(_safeName(x))+'; '
+            sameRank += '}\n'
+            print(i,sameRank)
+            fo.write(sameRank)
+
+        # keep only relation skeleton
+        digraph.closeTransitive(Reverse=True,InSite=True)
+        if Debug:
+        #        actionKeys = digraph.computeCopelandRanking()
+            digraph.showHTMLRelationTable(actionsList=actionKeys)
+
+        # write out relations between nodes
+        for i in range(n):
+            x = actionKeys[i]
+            for j in range(i+1,n):
+                y = actionKeys[j]
+                if digraph.relation[x][y] > digraph.valuationdomain['med']:
+                    arcColor = 'black'
+                    edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(x),_safeName(y),1,arcColor)
+                    fo.write(edge)
+                
+
+        
+        # for i in range(k-1):
+        #     ich = rankingByChoosing[i][1]
+        #     for x in ich:
+        #         for j in range(i+1,k):
+        #             jch = rankingByChoosing[j][1]
+        #             for y in jch:
+        #                 #edge = 'n'+str(i+1)+'-> n'+str(i+2)+' [dir=forward,style="setlinewidth(1)",color=black, arrowhead=normal] ;\n'
+        #                 if digraph.relation[x][y] > digraph.valuationdomain['med']:
+        #                     arcColor = 'black'
+        #                     edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(x),_safeName(y),1,arcColor)
+        #                     fo.write(edge)
+        #                 elif digraph.relation[y][x] > digraph.valuationdomain['med']:
+        #                     arcColor = 'black'
+        #                     edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' % (_safeName(y),_safeName(x),1,arcColor)
+        #                     fo.write(edge)
+                                                  
+        fo.write('}\n \n')
+        fo.close()
+        
+        commandString = 'dot -Grankdir=TB -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+            #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+        if Comments:
+            print(commandString)
+        try:
+            os.system(commandString)
+        except:
+            if Comments:
+                print('graphViz tools not avalaible! Please check installation.')
+
+    def _exportRatingGraphViz(self,fileName=None,relation=None,\
                              direction='best',Comments=True,\
                              graphType='png',graphSize='7,7',\
                              fontSize=10):
@@ -4400,7 +4559,7 @@ if __name__ == "__main__":
 ##    qs.showQuantileOrdering(strategy='pessimistic')
 ##    from outrankingDigraphs import *
 ##    tp = PerformanceTableau('exL10')
-    pq = PerformanceQuantiles(tp,5,LowerClosed=True,Debug=False)
+    pq = PerformanceQuantiles(tp,5,LowerClosed=False,Debug=False)
     tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
     newActions = tpg.randomActions(20)
     pq.updateQuantiles(newActions,historySize=None)
@@ -4410,16 +4569,16 @@ if __name__ == "__main__":
                                        Threading=MP,nbrOfCPUs=nbrOfCPUs)
     print(ira)
     ira.showQuantilesRating()
-##    #ira.sorting = ira.computeSortingCharacteristics()
-##    #ira.categoryContent = ira.computeCategoryContents()
-    ira.showSorting()
-##    for x in ira.newActions:
-##        ira.showActionCategories(x,Comments=True)
-##    ratingRelation = ira.computeRatingRelation()
-##    ira.relation = ratingRelation
+    #ira.sorting = ira.computeSortingCharacteristics()
+    #ira.categoryContent = ira.computeCategoryContents()
+    #ira.showSorting()
+    #for x in ira.newActions:
+        #ira.showActionCategories(x,Comments=True)
+    #ratingRelation = ira.computeRatingRelation()
+    #ira.relation = ratingRelation
 ##    #ira.closeTransitive(Irreflexive=True,Reverse=True)
-##    ira.showHTMLRelationTable(actionsList=ira.actionsRanking)
-    ira.exportRatingGraphViz('test',graphType='pdf')
+    #ira.showHTMLRelationTable(actionsList=ira.actionsRanking)
+    ira.exportRatingGraphViz('test2',graphType='pdf')
 ##    #ira.showSorting()
 ##    #ira.showHTMLSorting()
 ##    ira.showActionsSortingResult()

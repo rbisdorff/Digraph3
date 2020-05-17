@@ -3814,7 +3814,7 @@
         <span class="k">for</span> <span class="n">eqcl</span> <span class="ow">in</span> <span class="n">preRanking</span><span class="p">:</span>
             <span class="n">currRest</span> <span class="o">=</span> <span class="n">currentActions</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">eqcl</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">currentActions</span><span class="p">,</span> <span class="n">eqcl</span><span class="p">,</span> <span class="n">currRest</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;currentActions, eqcl, currRest&#39;</span><span class="p">,</span> <span class="n">currentActions</span><span class="p">,</span> <span class="n">eqcl</span><span class="p">,</span> <span class="n">currRest</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">eqcl</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">currRest</span><span class="p">:</span>
                     <span class="n">ratingRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
@@ -3906,7 +3906,166 @@
                                    <span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">,</span>
                                    <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="NormedQuantilesRatingDigraph.exportRatingGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.exportRatingGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportRatingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph.exportRatingGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph.exportRatingGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportRatingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                             <span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                             <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>\
+                             <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>\
+                             <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>\
+                             <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        export GraphViz dot file for Hasse diagram drawing filtering.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">os</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
+            
+        <span class="k">def</span> <span class="nf">_safeName</span><span class="p">(</span><span class="n">t0</span><span class="p">):</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">t0</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+            <span class="n">t1</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                    <span class="n">t1</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">t1</span>
+        
+        <span class="c1"># working on a deepcopy of self</span>
+        <span class="n">digraph</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">profileLimits</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">categoryContent</span><span class="p">)</span>
+
+        <span class="c1"># constructing rankingByBestChoosing result</span>
+        <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">profileLimits</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">digraph</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+                <span class="n">rankingByChoosing</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">),[</span><span class="bp">self</span><span class="o">.</span><span class="n">profileLimits</span><span class="p">[</span><span class="n">i</span><span class="p">]]))</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">categoryContent</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)]</span> <span class="o">!=</span> <span class="p">[]:</span>
+                    <span class="n">rankingByChoosing</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">categoryContent</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)]))</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">categoryContent</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)]</span> <span class="o">!=</span> <span class="p">[]:</span>
+                    <span class="n">rankingByChoosing</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">),</span><span class="bp">self</span><span class="o">.</span><span class="n">categoryContent</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)]))</span>
+                <span class="n">rankingByChoosing</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">),[</span><span class="bp">self</span><span class="o">.</span><span class="n">profileLimits</span><span class="p">[</span><span class="n">i</span><span class="p">]]))</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="p">)</span>
+
+            
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
+
+        <span class="c1"># install rating relation (weakly transitive)</span>
+        <span class="k">if</span> <span class="n">relation</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">digraph</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">computeRatingRelation</span><span class="p">()</span>
+        <span class="c1">#    if Debug:</span>
+        <span class="c1">#        actionKeys = digraph.computeCopelandRanking()</span>
+        <span class="c1">#        digraph.showHTMLRelationTable(actionsList=actionKeys)</span>
+        
+        <span class="c1"># sorting actionsKeys</span>
+        <span class="n">actionKeys</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionKeys</span><span class="p">)</span>
+        
+        <span class="n">Med</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">fileName</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">fileName</span>
+        <span class="n">dotName</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.dot&#39;</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exporting to &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="p">)</span>
+        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">dotName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;digraph G {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;graph [ bgcolor = cornsilk, ordering = out, fontname = &quot;Helvetica-Oblique&quot;,</span><span class="se">\n</span><span class="s1"> fontsize = 12,</span><span class="se">\n</span><span class="s1"> label = &quot;&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nDigraph3 (graphviz)</span><span class="se">\\</span><span class="s1">n R. Bisdorff, 2020&quot;, size=&quot;&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">graphSize</span><span class="p">),</span><span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;,fontsize=</span><span class="si">%d</span><span class="s1">];</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">fontSize</span><span class="p">)</span>
+        <span class="c1"># nodes</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionKeys</span><span class="p">:</span>
+            <span class="c1">#print(digraphClass)</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">digraph</span><span class="o">.</span><span class="n">profiles</span><span class="p">:</span>
+                <span class="n">cat</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">profiles</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;category&#39;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">digraph</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">:</span>
+                    <span class="n">nodeName</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">cat</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; -&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">nodeName</span> <span class="o">=</span> <span class="s1">&#39;- &#39;</span> <span class="o">+</span><span class="n">digraph</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">cat</span><span class="p">][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">]</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> [shape = &quot;box&quot;, fillcolor=lightcoral, style=filled, label = &quot;</span><span class="si">%s</span><span class="s1">&quot;, fontsize=</span><span class="si">%d</span><span class="s1">];</span><span class="se">\n</span><span class="s1">&#39;</span>\
+                       <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">nodeName</span><span class="p">,</span><span class="n">fontSize</span><span class="p">)</span>           
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">nodeName</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="n">nodeName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> [shape = &quot;circle&quot;, label = &quot;</span><span class="si">%s</span><span class="s1">&quot;, fontsize=</span><span class="si">%d</span><span class="s1">];</span><span class="se">\n</span><span class="s1">&#39;</span>\
+                       <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">nodeName</span><span class="p">),</span><span class="n">fontSize</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="c1"># same ranks for Hasses equivalence classes</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">sameRank</span> <span class="o">=</span> <span class="s1">&#39;{ rank = </span><span class="si">%d</span><span class="s1">; &#39;</span> <span class="o">%</span> <span class="n">i</span>
+            <span class="n">ich</span> <span class="o">=</span> <span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ich</span><span class="p">:</span>
+                <span class="n">sameRank</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;; &#39;</span>
+            <span class="n">sameRank</span> <span class="o">+=</span> <span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">sameRank</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">sameRank</span><span class="p">)</span>
+
+        <span class="c1"># keep only relation skeleton</span>
+        <span class="n">digraph</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">InSite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+        <span class="c1">#        actionKeys = digraph.computeCopelandRanking()</span>
+            <span class="n">digraph</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">actionKeys</span><span class="p">)</span>
+
+        <span class="c1"># write out relations between nodes</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">actionKeys</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">actionKeys</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">digraph</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
+                    <span class="n">arcColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
+                    <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
+                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
+                
+
+        
+        <span class="c1"># for i in range(k-1):</span>
+        <span class="c1">#     ich = rankingByChoosing[i][1]</span>
+        <span class="c1">#     for x in ich:</span>
+        <span class="c1">#         for j in range(i+1,k):</span>
+        <span class="c1">#             jch = rankingByChoosing[j][1]</span>
+        <span class="c1">#             for y in jch:</span>
+        <span class="c1">#                 #edge = &#39;n&#39;+str(i+1)+&#39;-&gt; n&#39;+str(i+2)+&#39; [dir=forward,style=&quot;setlinewidth(1)&quot;,color=black, arrowhead=normal] ;\n&#39;</span>
+        <span class="c1">#                 if digraph.relation[x][y] &gt; digraph.valuationdomain[&#39;med&#39;]:</span>
+        <span class="c1">#                     arcColor = &#39;black&#39;</span>
+        <span class="c1">#                     edge = &#39;%s-&gt; %s [style=&quot;setlinewidth(%d)&quot;,color=%s] ;\n&#39; % (_safeName(x),_safeName(y),1,arcColor)</span>
+        <span class="c1">#                     fo.write(edge)</span>
+        <span class="c1">#                 elif digraph.relation[y][x] &gt; digraph.valuationdomain[&#39;med&#39;]:</span>
+        <span class="c1">#                     arcColor = &#39;black&#39;</span>
+        <span class="c1">#                     edge = &#39;%s-&gt; %s [style=&quot;setlinewidth(%d)&quot;,color=%s] ;\n&#39; % (_safeName(y),_safeName(x),1,arcColor)</span>
+        <span class="c1">#                     fo.write(edge)</span>
+                                                  
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}</span><span class="se">\n</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        
+        <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;dot -Grankdir=TB -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span> <span class="o">+</span><span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
+            <span class="c1">#commandString = &#39;dot -T&#39;+graphType+&#39; &#39; +dotName+&#39; -o &#39;+name+&#39;.&#39;+graphType</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_exportRatingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                              <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                              <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>\
                              <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
@@ -3948,7 +4107,7 @@
                              <span class="n">graphType</span><span class="o">=</span><span class="n">graphType</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">,</span>\
                              <span class="n">digraphClass</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span>\
                              <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relationOrig</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relationOrig</span>
 
     <span class="k">def</span> <span class="nf">_htmlRatingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">argActionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -4440,7 +4599,7 @@
 <span class="c1">##    qs.showQuantileOrdering(strategy=&#39;pessimistic&#39;)</span>
 <span class="c1">##    from outrankingDigraphs import *</span>
 <span class="c1">##    tp = PerformanceTableau(&#39;exL10&#39;)</span>
-    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newActions</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
@@ -4450,16 +4609,16 @@
                                        <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">ira</span><span class="p">)</span>
     <span class="n">ira</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
-<span class="c1">##    #ira.sorting = ira.computeSortingCharacteristics()</span>
-<span class="c1">##    #ira.categoryContent = ira.computeCategoryContents()</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">showSorting</span><span class="p">()</span>
-<span class="c1">##    for x in ira.newActions:</span>
-<span class="c1">##        ira.showActionCategories(x,Comments=True)</span>
-<span class="c1">##    ratingRelation = ira.computeRatingRelation()</span>
-<span class="c1">##    ira.relation = ratingRelation</span>
+    <span class="c1">#ira.sorting = ira.computeSortingCharacteristics()</span>
+    <span class="c1">#ira.categoryContent = ira.computeCategoryContents()</span>
+    <span class="c1">#ira.showSorting()</span>
+    <span class="c1">#for x in ira.newActions:</span>
+        <span class="c1">#ira.showActionCategories(x,Comments=True)</span>
+    <span class="c1">#ratingRelation = ira.computeRatingRelation()</span>
+    <span class="c1">#ira.relation = ratingRelation</span>
 <span class="c1">##    #ira.closeTransitive(Irreflexive=True,Reverse=True)</span>
-<span class="c1">##    ira.showHTMLRelationTable(actionsList=ira.actionsRanking)</span>
-    <span class="n">ira</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">)</span>
+    <span class="c1">#ira.showHTMLRelationTable(actionsList=ira.actionsRanking)</span>
+    <span class="n">ira</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="s1">&#39;test2&#39;</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">)</span>
 <span class="c1">##    #ira.showSorting()</span>
 <span class="c1">##    #ira.showHTMLSorting()</span>
 <span class="c1">##    ira.showActionsSortingResult()</span>
