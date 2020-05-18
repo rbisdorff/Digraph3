@@ -6735,8 +6735,8 @@ is by convention 0.0 at determination level 0.0 .</p>
 
 <dl class="method">
 <dt id="sparseOutrankingDigraphs.SparseOutrankingDigraph.exportGraphViz">
-<code class="sig-name descname">exportGraphViz</code><span class="sig-paren">(</span><em class="sig-param">fileName=None</em>, <em class="sig-param">actionsSubset=None</em>, <em class="sig-param">bestChoice={}</em>, <em class="sig-param">worstChoice={}</em>, <em class="sig-param">Comments=True</em>, <em class="sig-param">graphType='png'</em>, <em class="sig-param">graphSize='7</em>, <em class="sig-param">7'</em>, <em class="sig-param">relation=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sparseOutrankingDigraphs.html#SparseOutrankingDigraph.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sparseOutrankingDigraphs.SparseOutrankingDigraph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
-<dd><p>export GraphViz dot file  for graph drawing filtering.</p>
+<code class="sig-name descname">exportGraphViz</code><span class="sig-paren">(</span><em class="sig-param">fileName=None</em>, <em class="sig-param">actionsSubset=None</em>, <em class="sig-param">direction='decreasing'</em>, <em class="sig-param">Comments=True</em>, <em class="sig-param">graphType='pdf'</em>, <em class="sig-param">graphSize='7</em>, <em class="sig-param">7'</em>, <em class="sig-param">fontSize=10</em>, <em class="sig-param">relation=None</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sparseOutrankingDigraphs.html#SparseOutrankingDigraph.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sparseOutrankingDigraphs.SparseOutrankingDigraph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dummy for exportSortingDigraph.</p>
 </dd></dl>
 
 <dl class="method">
@@ -6856,6 +6856,21 @@ By default the valuation domain is normalized to [-1;1]</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="sparseOutrankingDigraphs.SparseOutrankingDigraph.showBestChoiceRecommendation">
+<code class="sig-name descname">showBestChoiceRecommendation</code><span class="sig-paren">(</span><em class="sig-param">Comments=False</em>, <em class="sig-param">ChoiceVector=False</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sparseOutrankingDigraphs.html#SparseOutrankingDigraph.showBestChoiceRecommendation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sparseOutrankingDigraphs.SparseOutrankingDigraph.showBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt><em>Parameters</em>:</dt><dd><ul class="simple">
+<li><p>Comments=False,</p></li>
+<li><p>ChoiceVector=False,</p></li>
+<li><p>Debug=False.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Update of rubisBestChoice Recommendation for big digraphs.
+To do: limit to best choice; worst choice should be a separate method()</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="sparseOutrankingDigraphs.SparseOutrankingDigraph.showDecomposition">
 <code class="sig-name descname">showDecomposition</code><span class="sig-paren">(</span><em class="sig-param">direction='decreasing'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sparseOutrankingDigraphs.html#SparseOutrankingDigraph.showDecomposition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sparseOutrankingDigraphs.SparseOutrankingDigraph.showDecomposition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints on the console the decomposition structure of the sparse outranking digraph instance
@@ -6968,6 +6983,12 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="method">
+<dt id="sparseOutrankingDigraphs.SparseOutrankingDigraph.showRubisBestChoiceRecommendation">
+<code class="sig-name descname">showRubisBestChoiceRecommendation</code><span class="sig-paren">(</span><em class="sig-param">Comments=False</em>, <em class="sig-param">ChoiceVector=False</em>, <em class="sig-param">Debug=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sparseOutrankingDigraphs.html#SparseOutrankingDigraph.showRubisBestChoiceRecommendation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sparseOutrankingDigraphs.SparseOutrankingDigraph.showRubisBestChoiceRecommendation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dummy for self.showBestChoiceRecommendation() method.</p>
 </dd></dl>
 
 <dl class="method">

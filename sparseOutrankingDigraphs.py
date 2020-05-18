@@ -641,121 +641,144 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
                         for comp in self.components.values())
         return fillRate/( self.order*(self.order-1) )
 
-    def exportGraphViz(self,fileName=None,actionsSubset=None,\
-                       bestChoice=set(),worstChoice=set(),\
-                       Comments=True,graphType='png',graphSize='7,7',
-                       relation=None):
+    def exportGraphViz(self,fileName=None,\
+                        actionsSubset=None,\
+                        direction='decreasing',\
+                       Comments=True,graphType='pdf',\
+                       graphSize='7,7',\
+                       fontSize=10,
+                       relation=None,
+                       Debug=False):
         """
-        export GraphViz dot file  for graph drawing filtering.
+        Dummy for exportSortingDigraph.
         """
-        import os
-        
-        if Comments:
-            print('*---- exporting a dot file dor GraphViz tools ---------*')
-        if actionsSubset == None:
-            actionkeys = [x for x in self.actions]
-        else:
-            actionkeys = [x for x in actionsSubset]
-        n = len(actionkeys)
-        if relation == None:
-            relation = self.relation
-        Med = self.valuationdomain['med']
-        i = 0
-        if fileName == None:
-            name = self.name
-        else:
-            name = fileName
-        dotName = name+'.dot'
-        if Comments:
-            print('Exporting to '+dotName)
-        if bestChoice != set():
-            rankBestString = '{rank=max; '
-        if worstChoice != set():
-            rankWorstString = '{rank=min; '
-        fo = open(dotName,'w')
-        fo.write('digraph G {\n')
-        fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nDigraph3 (graphviz), R. Bisdorff, 2020", size="')
-        fo.write(graphSize),fo.write('"];\n')
-        for i in range(n):
-            try:
-                nodeName = self.actions[actionkeys[i]]['shortName']
-            except:
-                try:
-                    nodeName = self.actions[actionskeys[i]]['name']
-                except:
-                    nodeName = str(actionkeys[i])
-            node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
-            if actionkeys[i] in bestChoice:
-                node += ', style = "filled", color = gold];\n'
-                rankBestString += 'n'+str(i+1)+' '
-            elif actionkeys[i] in worstChoice:
-                node += ', style = "filled", color = lightblue];\n'
-                rankWorstString += 'n'+str(i+1)+' '
-            else:
-                node += '];\n'
-            fo.write(node)
-        if bestChoice != set():
-            rankBestString += '}\n'
-        if worstChoice != set():
-            rankWorstString += '}\n'
-##         for i in range(n):
-##             edge = 'n'+str(i+1)
-##             for j in range(n):
-##                 if i != j and relation[actions[i]][actions[j]] > Med:
-##                     edge0 = edge+'-> n'+str(j+1)+';\n'
-##                     fo.write(edge0)
-##                     j += 1
-##             i += 1
-        for i in range(n):
-            for j in range(i+1, n):
-                edge = 'n'+str(i+1)
-                if relation(actionkeys[i],actionkeys[j]) > Med and relation(actionkeys[j],actionkeys[i])> Med:
-                    edge0 = edge+'-> n'+str(j+1)+' [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;\n'
-                    fo.write(edge0)
-                elif relation(actionkeys[i],actionkeys[j]) > Med and relation(actionkeys[j],actionkeys[i])== Med:
-                    edge0 = edge+'-> n'+str(j+1)+' [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;\n'
-                    fo.write(edge0)
-                elif relation(actionkeys[i],actionkeys[j]) == Med and relation(actionkeys[j],actionkeys[i]) > Med:
-                    edge0 = edge+'-> n'+str(j+1)+' [dir=both, color=black, arrowtail=normal, arrowhead=empty] ;\n'
-                    fo.write(edge0)
-                elif relation(actionkeys[i],actionkeys[j]) == Med and relation(actionkeys[j],actionkeys[i]) == Med:
-                    edge0 = edge+'-> n'+str(j+1)+' [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;\n'
-                    fo.write(edge0)
-                elif relation(actionkeys[i],actionkeys[j]) > Med and relation(actionkeys[j],actionkeys[i]) <  Med:
-                    edge0 = edge+'-> n'+str(j+1)+' [dir=forward, color=black] ;\n'
-                    fo.write(edge0)
-                elif relation(actionkeys[i],actionkeys[j]) == Med and relation(actionkeys[j],actionkeys[i]) <  Med:
-                    edge0 = edge+'-> n'+str(j+1)+' [dir=forward, color=grey, arrowhead=empty] ;\n'
-                    fo.write(edge0)
-                elif relation(actionkeys[i],actionkeys[j]) < Med and relation(actionkeys[j],actionkeys[i]) >  Med:
-                    edge0 = edge+'-> n'+str(j+1)+' [dir=back, color=black] ;\n'
-                    fo.write(edge0)
-                elif relation(actionkeys[i],actionkeys[j]) < Med and relation(actionkeys[j],actionkeys[i]) ==  Med:
-                    edge0 = edge+'-> n'+str(j+1)+' [dir=back, color=grey, arrowtail=empty] ;\n'
-                    fo.write(edge0)
+        self.exportSortingGraphViz(\
+            fileName=fileName,\
+            actionsSubset=actionsSubset,\
+            direction=direction,\
+                       Comments=Comments,\
+                        graphType=graphType,\
+                       graphSize=graphSize,\
+                       fontSize=fontSize,\
+                       relation=relation,\
+                       Debug=Debug)
 
-        if bestChoice != set():
-            fo.write(rankBestString)
-        if worstChoice != set():
-            fo.write(rankWorstString)
-        fo.write('}\n')
-        fo.close()
-        if type(self) == CirculantDigraph:
-            commandString = 'circo -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
-        # elif type(self) == RandomTree:
-        #     commandString = 'neato -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
-        else:
-            commandString = 'dot -Grankdir=BT -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
-            #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
 
-        if Comments:
-            print(commandString)
-        try:
-            os.system(commandString)
-        except:
-            if Comments:
-                print('graphViz tools not avalaible! Please check installation.')
+##    def _exportGraphViz(self,fileName=None,actionsSubset=None,\
+##                       bestChoice=set(),worstChoice=set(),\
+##                       Comments=True,graphType='png',graphSize='7,7',
+##                       relation=None):
+##        """
+##        export GraphViz dot file  for graph drawing filtering.
+##        """
+##        import os
+##        
+##        if Comments:
+##            print('*---- exporting a dot file dor GraphViz tools ---------*')
+##        if actionsSubset == None:
+##            actionkeys = [x for x in self.actions]
+##        else:
+##            actionkeys = [x for x in actionsSubset]
+##        n = len(actionkeys)
+##        if relation == None:
+##            relation = self.relation
+##        Med = self.valuationdomain['med']
+##        i = 0
+##        if fileName == None:
+##            name = self.name
+##        else:
+##            name = fileName
+##        dotName = name+'.dot'
+##        if Comments:
+##            print('Exporting to '+dotName)
+##        if bestChoice != set():
+##            rankBestString = '{rank=max; '
+##        if worstChoice != set():
+##            rankWorstString = '{rank=min; '
+##        fo = open(dotName,'w')
+##        fo.write('digraph G {\n')
+##        fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+##        fo.write('\\nDigraph3 (graphviz), R. Bisdorff, 2020", size="')
+##        fo.write(graphSize),fo.write('"];\n')
+##        for i in range(n):
+##            try:
+##                nodeName = self.actions[actionkeys[i]]['shortName']
+##            except:
+##                try:
+##                    nodeName = self.actions[actionskeys[i]]['name']
+##                except:
+##                    nodeName = str(actionkeys[i])
+##            node = 'n'+str(i+1)+' [shape = "circle", label = "' +nodeName+'"'
+##            if actionkeys[i] in bestChoice:
+##                node += ', style = "filled", color = gold];\n'
+##                rankBestString += 'n'+str(i+1)+' '
+##            elif actionkeys[i] in worstChoice:
+##                node += ', style = "filled", color = lightblue];\n'
+##                rankWorstString += 'n'+str(i+1)+' '
+##            else:
+##                node += '];\n'
+##            fo.write(node)
+##        if bestChoice != set():
+##            rankBestString += '}\n'
+##        if worstChoice != set():
+##            rankWorstString += '}\n'
+####         for i in range(n):
+####             edge = 'n'+str(i+1)
+####             for j in range(n):
+####                 if i != j and relation[actions[i]][actions[j]] > Med:
+####                     edge0 = edge+'-> n'+str(j+1)+';\n'
+####                     fo.write(edge0)
+####                     j += 1
+####             i += 1
+##        for i in range(n):
+##            for j in range(i+1, n):
+##                edge = 'n'+str(i+1)
+##                if relation(actionkeys[i],actionkeys[j]) > Med and relation(actionkeys[j],actionkeys[i])> Med:
+##                    edge0 = edge+'-> n'+str(j+1)+' [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;\n'
+##                    fo.write(edge0)
+##                elif relation(actionkeys[i],actionkeys[j]) > Med and relation(actionkeys[j],actionkeys[i])== Med:
+##                    edge0 = edge+'-> n'+str(j+1)+' [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;\n'
+##                    fo.write(edge0)
+##                elif relation(actionkeys[i],actionkeys[j]) == Med and relation(actionkeys[j],actionkeys[i]) > Med:
+##                    edge0 = edge+'-> n'+str(j+1)+' [dir=both, color=black, arrowtail=normal, arrowhead=empty] ;\n'
+##                    fo.write(edge0)
+##                elif relation(actionkeys[i],actionkeys[j]) == Med and relation(actionkeys[j],actionkeys[i]) == Med:
+##                    edge0 = edge+'-> n'+str(j+1)+' [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;\n'
+##                    fo.write(edge0)
+##                elif relation(actionkeys[i],actionkeys[j]) > Med and relation(actionkeys[j],actionkeys[i]) <  Med:
+##                    edge0 = edge+'-> n'+str(j+1)+' [dir=forward, color=black] ;\n'
+##                    fo.write(edge0)
+##                elif relation(actionkeys[i],actionkeys[j]) == Med and relation(actionkeys[j],actionkeys[i]) <  Med:
+##                    edge0 = edge+'-> n'+str(j+1)+' [dir=forward, color=grey, arrowhead=empty] ;\n'
+##                    fo.write(edge0)
+##                elif relation(actionkeys[i],actionkeys[j]) < Med and relation(actionkeys[j],actionkeys[i]) >  Med:
+##                    edge0 = edge+'-> n'+str(j+1)+' [dir=back, color=black] ;\n'
+##                    fo.write(edge0)
+##                elif relation(actionkeys[i],actionkeys[j]) < Med and relation(actionkeys[j],actionkeys[i]) ==  Med:
+##                    edge0 = edge+'-> n'+str(j+1)+' [dir=back, color=grey, arrowtail=empty] ;\n'
+##                    fo.write(edge0)
+##
+##        if bestChoice != set():
+##            fo.write(rankBestString)
+##        if worstChoice != set():
+##            fo.write(rankWorstString)
+##        fo.write('}\n')
+##        fo.close()
+##        if type(self) == CirculantDigraph:
+##            commandString = 'circo -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
+##        # elif type(self) == RandomTree:
+##        #     commandString = 'neato -T'+graphType+' '+dotName+' -o '+name+'.' + graphType
+##        else:
+##            commandString = 'dot -Grankdir=BT -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+##            #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+##
+##        if Comments:
+##            print(commandString)
+##        try:
+##            os.system(commandString)
+##        except:
+##            if Comments:
+##                print('graphViz tools not avalaible! Please check installation.')
 
     def exportSortingGraphViz(self,fileName=None,\
                               actionsSubset=None,\
@@ -951,6 +974,295 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         except:
             if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
+
+
+    def showRubisBestChoiceRecommendation(self,Comments=False,\
+                                     ChoiceVector=False,\
+                                     Debug=False):
+        """
+        Dummy for self.showBestChoiceRecommendation() method.
+        """
+        self.showBestChoiceRecommendation(Comments=Comments,\
+                                     ChoiceVector=ChoiceVector,\
+                                     Debug=Debug)
+
+    def showBestChoiceRecommendation(self,Comments=False,\
+                                     ChoiceVector=False,\
+                                     Debug=False):
+        """
+        *Parameters*:
+            * Comments=False,
+            * ChoiceVector=False,
+            * Debug=False.
+
+        Update of rubisBestChoice Recommendation for big digraphs.
+        To do: limit to best choice; worst choice should be a separate method()
+        """
+        from digraphs import Digraph as DG
+        # best choices
+        c1 = (list(self.components.keys()))[0]
+        g1 = self.components[c1]['subGraph']
+        if len(g1.actions) > 1:
+            self._showRubisBestChoiceRecommendation(g1,\
+                                                    Debug=Debug,\
+                                                    ChoiceVector=False,\
+                                                    Comments=Comments)
+        else:
+            actionsNames = [g1.actions[x]['name'] for x in g1.actions]
+            print('***********************')
+            print('Best choice recommendation:')
+            print(' " Choice: \'%s\'' % (actionsNames[0] ))
+        # worst choices
+        cn = (list(self.components.keys()))[-1]
+        gn = self.components[cn]['subGraph']
+        if len(gn.actions) > 1:
+            self._showRubisWorstChoiceRecommendation(gn,\
+                                                     Debug=Debug,\
+                                                     ChoiceVector=False,\
+                                                     Comments=Comments)
+        else:
+            actionsNames = [gn.actions[x]['name'] for x in gn.actions]
+            print('***********************')
+            print('Worst choice recommendation:')
+            print(' * Choice:  \'%s\'' % (actionsNames[-1]) )
+
+
+    def _showRubisBestChoiceRecommendation(self,g0=None,
+                                          Comments=False,
+                                          ChoiceVector=True,
+                                          Debug=False,
+                                          _OldCoca=False,
+                                          Cpp=False):
+        """
+        *Parameters*:
+            * g0=None (first component of self by default),
+            * Comments=False,
+            * ChoiceVector=True,
+            * Debug=False,
+            * _OldCoca=False,
+            * Cpp=False.
+
+        Renders the Rubis Best choice recommendation of the first component.
+        """
+        import copy,time
+        if Debug:
+            Comments = True
+        print('***********************')
+        print('Best Choice Recommendation')
+        if Comments:
+            print('All comments !!!')
+        t0 = time.time()
+        if g0 == None:
+            c1 = (list(self.components.keys()))[0]
+            g0 = self.components[c1]['subGraph']
+        g1 = ~(-g0)
+        if Comments:
+            print(g1)
+        n0 = g1.order
+        if _OldCoca:
+            _selfwcoc = CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
+            b1 = 0
+        else:
+            _selfwcoc = BrokenCocsDigraph(g1,Cpp=Cpp,Comments=Comments)
+            b1 = _selfwcoc.breakings
+        n1 = _selfwcoc.order
+        nc = n1 - n0
+        
+        g1.relation_orig = copy.deepcopy(g1.relation)
+        if nc > 0 or b1 > 0:
+            g1.actions_orig = copy.deepcopy(g1.actions)
+            g1.actions = copy.deepcopy(_selfwcoc.actions)
+            g1.order = len(g1.actions)
+            g1.relation = copy.deepcopy(_selfwcoc.relation)
+        if Comments:
+            print('List of pseudo-independent choices')
+            print(g1.actions)
+        g1.gamma = g1.gammaSets()
+        g1.notGamma = g1.notGammaSets()
+        if Debug:
+            g1.showRelationTable()
+        #self.showPreKernels()
+        actions = set([x for x in g1.actions])
+        g1.computePreKernels()
+        #if Debug:
+        #    print(self.dompreKernels,self.abspreKernels)
+        g1.computeGoodChoices(Comments=Comments)
+        g1.computeBadChoices(Comments=Comments)
+        if Debug:
+            print('good and bad choices: ',g1.goodChoices,g1.badChoices)
+        t1 = time.time()
+        print('* --- Best choice recommendation(s) ---*')
+        print(' (in decreasing order of determinateness)   ')
+        print(' Valuation domain: [%.2f;%.2f]' %\
+              (g1.valuationdomain['min'],g1.valuationdomain['max']) )
+        Med = g1.valuationdomain['med']
+        bestChoice = set()
+        worstChoice = set()
+        for gch in g1.goodChoices:
+            if gch[0] <= Med:
+                goodChoice = True
+                for bch in g1.badChoices:
+                    if gch[5] == bch[5]:
+                        #if gch[0] == bch[0]:
+                        if gch[3] == gch[4]:
+                            if Comments:
+                                print('null choice ')
+                                g1.showChoiceVector(gch,
+                                                      ChoiceVector=ChoiceVector)
+                                g1.showChoiceVector(bch,
+                                                      ChoiceVector=ChoiceVector)
+                            goodChoice = False
+                        elif gch[4] > gch[3]:
+                            if Comments:
+                                print('outranked choice ')
+                                g1.showChoiceVector(gch,
+                                                      ChoiceVector=ChoiceVector)
+                                g1.showChoiceVector(bch,
+                                                      ChoiceVector=ChoiceVector)
+                            goodChoice = False
+                        else:
+                            goodChoice = True
+                if goodChoice:
+                    print(' === >> potential BCR ')
+                    g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                    if bestChoice == set():
+                        bestChoice = gch[5]
+            else:
+                if Comments:
+                    print('non robust best choice ')
+                g1.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+        print()
+        print('Execution time: %.3f seconds' % (t1-t0))
+        print('*****************************')
+        self.bestChoice = bestChoice
+        #self.worstChoice = worstChoice
+        if nc > 0 or b1 > 0:
+            g1.actions = copy.deepcopy(g1.actions_orig)
+            g1.relation = copy.deepcopy(g1.relation_orig)
+            g1.order = len(g1.actions)
+            g1.gamma = g1.gammaSets()
+            g1.notGamma = g1.notGammaSets()
+
+    def _showRubisWorstChoiceRecommendation(self,g0=None,
+                                          Comments=False,
+                                          ChoiceVector=True,
+                                          Debug=False,
+                                          _OldCoca=False,
+                                          Cpp=False):
+        """
+        *Parameters*:
+            * g0=None (last component of self by default),
+            * Comments=False,
+            * ChoiceVector=True,
+            * Debug=False,
+            * _OldCoca=False,
+            * Cpp=False.
+
+        Renders the Rubis Worst choice recommendation of the first component.
+        """
+        import copy,time
+        if Debug:
+            Comments = True
+        print('***********************')
+        print('Worst Choice Recommendation')
+        if Comments:
+            print('All comments !!!')
+        t0 = time.time()
+        if g0 == None:
+            cn = (list(self.components.keys()))[-1]
+            g0 = self.components[c1]['subGraph']
+        gn = ~(-g0)
+        if Comments:
+            print(gn)
+        n0 = gn.order
+        if _OldCoca:
+            _selfwcoc = CocaDigraph(gn,Cpp=Cpp,Comments=Comments)
+            b1 = 0
+        else:
+            _selfwcoc = BrokenCocsDigraph(gn,Cpp=Cpp,Comments=Comments)
+            b1 = _selfwcoc.breakings
+        n1 = _selfwcoc.order
+        nc = n1 - n0
+        
+        gn.relation_orig = copy.deepcopy(gn.relation)
+        if nc > 0 or b1 > 0:
+            gn.actions_orig = copy.deepcopy(gn.actions)
+            gn.actions = copy.deepcopy(_selfwcoc.actions)
+            gn.order = len(gn.actions)
+            gn.relation = copy.deepcopy(_selfwcoc.relation)
+        if Comments:
+            print('List of pseudo-independent choices')
+            print(gn.actions)
+        gn.gamma = gn.gammaSets()
+        gn.notGamma = gn.notGammaSets()
+        if Debug:
+            gn.showRelationTable()
+        #self.showPreKernels()
+        actions = set([x for x in gn.actions])
+        gn.computePreKernels()
+        #if Debug:
+        #    print(self.dompreKernels,self.abspreKernels)
+        gn.computeGoodChoices(Comments=Comments)
+        gn.computeBadChoices(Comments=Comments)
+        if Debug:
+            print('good and bad choices: ',gn.goodChoices,gn.badChoices)
+        t1 = time.time()
+        print('* --- Worst choice recommendation(s) ---*')
+        print(' (in decreasing order of determinateness)   ')
+        print(' Valuation domain: [%.2f;%.2f]' %\
+              (gn.valuationdomain['min'], gn.valuationdomain['max']))
+        Med = gn.valuationdomain['med']
+        bestChoice = set()
+        worstChoice = set()
+        for bch in gn.badChoices:
+            if bch[0] <= Med:
+                badChoice = True
+                nullChoice = False
+                for gch in gn.goodChoices:
+                    if bch[5] == gch[5]:
+                        #if gch[0] == bch[0]:
+                        if bch[3] == bch[4]:
+                            if Comments:
+                                print('null choice ')
+                                gn.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                                gn.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                            badChoice = False
+                            nullChoice = True
+                        elif bch[3] > bch[4]:
+                            if Comments:
+                                print('outranking choice ')
+                                gn.showChoiceVector(gch,ChoiceVector=ChoiceVector)
+                                gn.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                            badChoice = False
+                        else:
+                            badChoice = True
+                if badChoice:
+                    print(' === >> potential worst choice ')
+                    gn.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                    if worstChoice == set():
+                        worstChoice = bch[5]
+                elif nullChoice:
+                    print(' === >> ambiguous choice ')
+                    gn.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+                    if worstChoice == set():
+                        worstChoice = bch[5]
+
+            else:
+                if Comments:
+                    print('non robust worst choice ')
+                gn.showChoiceVector(bch,ChoiceVector=ChoiceVector)
+        print()
+        print('Execution time: %.3f seconds' % (t1-t0))
+        print('*****************************')
+        #self.bestChoice = bestChoice
+        self.worstChoice = worstChoice
+        if nc > 0 or b1 > 0:
+            gn.actions = copy.deepcopy(gn.actions_orig)
+            gn.relation = copy.deepcopy(gn.relation_orig)
+            gn.order = len(gn.actions)
+            gn.gamma = gn.gammaSets()
+            gn.notGamma = gn.notGammaSets()
+
 
 ########################
 # multiprocessing workers
@@ -2768,7 +3080,7 @@ if __name__ == "__main__":
 ##    tp = XMCDA2PerformanceTableau('the_cs_2016')
 
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
-                                     BigData=True,seed=100)
+                                     BigData=False,seed=100)
     bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=10,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='Copeland',
