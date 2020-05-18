@@ -190,21 +190,25 @@ class SparseIntegerDigraph(object):
         c1 = (list(self.components.keys()))[0]
         g1 = self.components[c1]['subGraph']
         if len(g1.actions) > 1:
-            self.showRubisBestChoiceRecommendation(g1,Debug=Debug,ChoiceVector=False,Comments=Comments)
+            self._showRubisBestChoiceRecommendation(g1,Debug=Debug,ChoiceVector=False,Comments=Comments)
         else:
             actionsNames = [g1.actions[x]['name'] for x in g1.actions]
-            print('Best choice recommendation: \'%s\'' % (actionsNames[0]))
+            print('***********************')
+            print('Best choice recommendation:')
+            print(' * choice : \'%s\'' % (actionsNames[0]))
         # worst choices
         cn = (list(self.components.keys()))[-1]
         gn = self.components[cn]['subGraph']
         if len(gn.actions) > 1:
-            self.showRubisWorstChoiceRecommendation(gn,Debug=Debug,ChoiceVector=False,Comments=Comments)
+            self._showRubisWorstChoiceRecommendation(gn,Debug=Debug,ChoiceVector=False,Comments=Comments)
         else:
             actionsNames = [gn.actions[x]['name'] for x in gn.actions]
-            print('Worst choice recommendation: \'%s\'' % (actionsNames[-1]))
+            print('***********************')
+            print('Worst choice recommendation:')
+            print(' * choice : \'%s\'' % (actionsNames[-1]))
 
 
-    def showRubisBestChoiceRecommendation(self,g0=None,
+    def _showRubisBestChoiceRecommendation(self,g0=None,
                                           bint Comments=False,
                                           bint ChoiceVector=True,
                                           bint Debug=False,
@@ -269,8 +273,9 @@ class SparseIntegerDigraph(object):
             print('good and bad choices: ',g1.goodChoices,g1.badChoices)
         t1 = time.time()
         print('* --- Best choice recommendation(s) ---*')
-        print('  (in decreasing order of determinateness)   ')
-        print('Credibility domain: ', g1.valuationdomain)
+        print(' (in decreasing order of determinateness)   ')
+        print(' Valuation domain: [%.2f;%.2f]' %\
+              (g1.valuationdomain['min'], g1.valuationdomain['max']) )
         Med = g1.valuationdomain['med']
         bestChoice = set()
         worstChoice = set()
@@ -319,7 +324,7 @@ class SparseIntegerDigraph(object):
             g1.gamma = g1.gammaSets()
             g1.notGamma = g1.notGammaSets()
 
-    def showRubisWorstChoiceRecommendation(self,g0=None,
+    def _showRubisWorstChoiceRecommendation(self,g0=None,
                                           bint Comments=False,
                                           bint ChoiceVector=True,
                                           bint Debug=False,
@@ -384,8 +389,9 @@ class SparseIntegerDigraph(object):
             print('good and bad choices: ',gn.goodChoices,gn.badChoices)
         t1 = time.time()
         print('* --- Worst choice recommendation(s) ---*')
-        print('  (in decreasing order of determinateness)   ')
-        print('Credibility domain: ', gn.valuationdomain)
+        print(' (in decreasing order of determinateness)   ')
+        print(' Valuation domain: [%.2f;%.2f]' %\
+              (gn.valuationdomain['min'], gn.valuationdomain['max']) )
         Med = gn.valuationdomain['med']
         bestChoice = set()
         worstChoice = set()
@@ -437,7 +443,6 @@ class SparseIntegerDigraph(object):
             gn.order = len(gn.actions)
             gn.gamma = gn.gammaSets()
             gn.notGamma = gn.notGammaSets()
-
                   
     def relation(self, int x, int y):
         """
