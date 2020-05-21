@@ -356,7 +356,7 @@ class TransitiveDigraph(Digraph):
         # same ranks for Hasses equivalence classes
         k = len(rankingByChoosing)
         for i in range(k):
-            sameRank = '{ rank = same; '
+            sameRank = '{ rank = %d; ' % i
             ich = rankingByChoosing[i][1]
             for x in ich:
                 sameRank += str(_safeName(x))+'; '
