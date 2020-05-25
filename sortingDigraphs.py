@@ -796,7 +796,7 @@ class SortingDigraph(BipolarOutrankingDigraph):
         # same ranks for Hasses equivalence classes
         k = len(ordering)
         for i in range(k):
-            sameRank = '{ rank = same; '
+            sameRank = '{ rank = %d; ' % i
             ich = ordering[i]
             for x in ich:
                 sameRank += str(_safeName(x))+'; '
@@ -3176,7 +3176,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                  hasNoVeto=False,\
                  #PrefThresholds=False,\
                  valuationScale=(-1,1),\
-                 rankingRule='best',\
+                 rankingRule='NetFlows',\
                  WithSorting=True,\
                  Threading=False,\
                  tempDir=None,\
@@ -4076,6 +4076,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                                contentCentered=True,
                                colorLevels=None,
                                pageTitle='Rating Heatmap',
+                               rankingRule=None,
                                Correlations=False,
                                Threading=False,
                                nbrOfCPUs=1,
@@ -4150,12 +4151,20 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         else:
             criteriaList = argCriteriaList
 
-        rankingRule = self.rankingRule
-        
-        if argActionsList == None:
-            actionsList = self.actionsRanking
+        if rankingRule == None:
+            if argActionsList == None:
+                actionsList = self.actionsRanking
+                rankingRule = self.rankingRule
+            else:
+                actionsList = argActionsListrankingRule = self.rankingRule
         else:
-            actionsList = argActionsList
+            if argActionsList == None:
+                if rankingRule == 'Copeland':
+                    actionsList = self.computeCopelandRanking()
+                elif rankingRule == 'NetFlows':
+                    actionsList = self.computeNetFlowsRanking()
+            else:
+                rankingRule = None 
         na = len(actionsList)
         profiles = self.profiles
         categories = self.categories
@@ -4372,12 +4381,11 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
         
         """
-        if rankingRule != None:
-            print('A ranking rule - Copeland (default) or NetFlows may be given with the NormedQuantilesRatingDigraph constructor')
         import webbrowser
         fileName = '/tmp/performanceHeatmap.html'
         fo = open(fileName,'w')
         if pageTitle == None:
+            print('A ranking rule - Copeland (default) or NetFlows may be given with the NormedQuantilesRatingDigraph constructor')
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
         #quantiles = len(self.quantilesFrequencies)
         fo.write(self._htmlRatingHeatmap(argCriteriaList=criteriaList,
@@ -4386,6 +4394,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                                              ndigits=ndigits,
                                              colorLevels=colorLevels,
                                              pageTitle=pageTitle,
+                                             rankingRule=rankingRule,
                                              Correlations=Correlations,
                                              Threading=Threading,
                                              nbrOfCPUs=1,

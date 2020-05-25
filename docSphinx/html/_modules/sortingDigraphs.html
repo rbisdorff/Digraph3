@@ -836,7 +836,7 @@
         <span class="c1"># same ranks for Hasses equivalence classes</span>
         <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ordering</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-            <span class="n">sameRank</span> <span class="o">=</span> <span class="s1">&#39;{ rank = same; &#39;</span>
+            <span class="n">sameRank</span> <span class="o">=</span> <span class="s1">&#39;{ rank = </span><span class="si">%d</span><span class="s1">; &#39;</span> <span class="o">%</span> <span class="n">i</span>
             <span class="n">ich</span> <span class="o">=</span> <span class="n">ordering</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ich</span><span class="p">:</span>
                 <span class="n">sameRank</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;; &#39;</span>
@@ -3216,7 +3216,7 @@
                  <span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="c1">#PrefThresholds=False,\</span>
                  <span class="n">valuationScale</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>\
-                 <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span>\
+                 <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>\
                  <span class="n">WithSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                  <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
@@ -4116,6 +4116,7 @@
                                <span class="n">contentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">colorLevels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Rating Heatmap&#39;</span><span class="p">,</span>
+                               <span class="n">rankingRule</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -4190,12 +4191,20 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">criteriaList</span> <span class="o">=</span> <span class="n">argCriteriaList</span>
 
-        <span class="n">rankingRule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span>
-        
-        <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">actionsList</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actionsRanking</span>
+        <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">actionsList</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actionsRanking</span>
+                <span class="n">rankingRule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsListrankingRule</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">actionsList</span> <span class="o">=</span> <span class="n">argActionsList</span>
+            <span class="k">if</span> <span class="n">argActionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;Copeland&#39;</span><span class="p">:</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
+                <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;NetFlows&#39;</span><span class="p">:</span>
+                    <span class="n">actionsList</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rankingRule</span> <span class="o">=</span> <span class="kc">None</span> 
         <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
         <span class="n">profiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span>
         <span class="n">categories</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span>
@@ -4412,12 +4421,11 @@
 
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A ranking rule - Copeland (default) or NetFlows may be given with the NormedQuantilesRatingDigraph constructor&#39;</span><span class="p">)</span>
         <span class="kn">import</span> <span class="nn">webbrowser</span>
         <span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;/tmp/performanceHeatmap.html&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">pageTitle</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A ranking rule - Copeland (default) or NetFlows may be given with the NormedQuantilesRatingDigraph constructor&#39;</span><span class="p">)</span>
             <span class="n">pageTitle</span> <span class="o">=</span> <span class="s1">&#39;Heatmap of Performance Tableau </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
         <span class="c1">#quantiles = len(self.quantilesFrequencies)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_htmlRatingHeatmap</span><span class="p">(</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="n">criteriaList</span><span class="p">,</span>
@@ -4426,6 +4434,7 @@
                                              <span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">,</span>
                                              <span class="n">colorLevels</span><span class="o">=</span><span class="n">colorLevels</span><span class="p">,</span>
                                              <span class="n">pageTitle</span><span class="o">=</span><span class="n">pageTitle</span><span class="p">,</span>
+                                             <span class="n">rankingRule</span><span class="o">=</span><span class="n">rankingRule</span><span class="p">,</span>
                                              <span class="n">Correlations</span><span class="o">=</span><span class="n">Correlations</span><span class="p">,</span>
                                              <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
                                              <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
