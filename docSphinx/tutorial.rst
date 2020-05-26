@@ -1779,15 +1779,15 @@ A (potentially ranked) colored heatmap with 5 color levels is also provided.
 
    Unranked heatmap of a random Cost-Benefit performance tableau
    
-Such a performance tableau may be stored and re-accessed in the XMCDA2 encoded format.
+Such a performance tableau may be stored and re-accessed as follows.
 
 .. code-block:: pycon
 
-   >>> t.saveXMCDA2('temp')
+   >>> t.save('temp')
     *----- saving performance tableau in XMCDA 2.0 format  -------------*
-    File: temp.xml saved !
-   >>> from perfTabs import XMCDA2PerformanceTableau
-   >>> t = XMCDA2PerformanceTableau('temp')
+    File: temp.py saved !
+   >>> from perfTabs import PerformanceTableau
+   >>> t = PerformanceTableau('temp')
 
 If needed for instance in an R session, a CSV version of the performance tableau may be created as follows.
 
@@ -3672,9 +3672,9 @@ In view of this performance tableau, what is now the office site we may recommen
 Performance tableau
 ...................
 
-The XMCDA 2.0 encoded version of this performance tableau is available for downloading here `officeChoice.xml`_.
+A Python encoded  performance tableau is available for downloading here `officeChoice.py`_.
 
-   .. _officeChoice.xml: _static/officeChoice.xml
+   .. _officeChoice.py: _static/officeChoice.py
 
 We may inspect the performance tableau data with the computing resources provided by the :ref:`perfTabs-label` module.
 
@@ -3682,7 +3682,7 @@ We may inspect the performance tableau data with the computing resources provide
    :linenos:
 
    >>> from perfTabs import *
-   >>> t = XMCDA2PerformanceTableau('officeChoice')
+   >>> t = PerformanceTableau('officeChoice')
    >>> help(t) # for discovering all the methods available
    >>> t.showPerformanceTableau()
     *----  performance tableau -----*
@@ -5815,7 +5815,7 @@ Who is the liar ?
 
 *Claude Berge*'s famous mystery story (see [GOL-2004]_ p.20) may well illustrate the importance of being an **interval graph**.
 
-Suppose that the file ``berge.py`` contains the following :py:class:`graphs.Graph` instance data::
+Suppose that the file ``berge.py`` [18]_ contains the following :py:class:`graphs.Graph` instance data::
 
     vertices = {
     'A': {'name': 'Abe', 'shortName': 'A'},
@@ -6632,6 +6632,10 @@ Bibliography
 .. [16] Discrete random variables with a given empirical probability law (here the polls) are provided in the :py:mod:`randomNumbers` module by the :py:class:`randomNumbers.DiscreteRandomVariable` class.
 
 .. [17]  Roy, B. *Transitivité et connexité.* C. R. Acad. Sci. Paris 249, 216-218, 1959. Warshall, S. *A Theorem on Boolean Matrices.* J. ACM 9, 11-12, 1962. 
+
+.. [18] A Digraph3 *graphs.Graph* encoded file is available for downloading here `berge.py`_.
+
+   .. _berge.py: _static/berge.py
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive

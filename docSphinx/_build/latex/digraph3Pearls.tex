@@ -54,7 +54,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{May 08, 2020}
+\date{May 26, 2020}
 \release{3.8-3600+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -149,13 +149,13 @@ In marketing studies, interviewees will not always respond to all the submitted 
 \label{\detokenize{pearls:a-motivating-data-set}}
 Let us consider such a performance tableau gathering a \sphinxstyleemphasis{Movie Magazine} ‘s rating of some movies that could actually be seen in town %
 \begin{footnote}[1]\sphinxAtStartFootnote
-\sphinxstyleemphasis{Graffiti}, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file \sphinxstyleemphasis{graffiti07.xml} (XMCDA\sphinxhyphen{}2.0 Format) in the \sphinxstyleemphasis{examples/Graffiti} directory of the Digraph3 ressources.
+\sphinxstyleemphasis{Graffiti}, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file \sphinxstyleemphasis{graffiti07.py} (perfTabs.PerformanceTableau Format) in the \sphinxstyleemphasis{examples} directory of the Digraph3 ressources.
 %
 \end{footnote} (see \hyperref[\detokenize{pearls:graffiti07-1}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-1}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{XMCDA2PerformanceTableau}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{graffiti07}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{PerformanceTableau}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{graffiti07}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceTableau}\PYG{p}{(}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
 \end{sphinxVerbatim}
 

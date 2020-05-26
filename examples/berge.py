@@ -13,7 +13,7 @@ valuationDomain = {'min':-1,'med':0,'max':1}
 edges = {
 frozenset(['A','B']) : 1, 
 frozenset(['A','C']) : -1, 
-frozenset(['A','D']) : 0, 
+frozenset(['A','D']) : -1, 
 frozenset(['A','E']) : 1, 
 frozenset(['A','I']) : -1, 
 frozenset(['B','C']) : -1, 

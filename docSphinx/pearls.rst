@@ -76,7 +76,7 @@ Let us consider such a performance tableau gathering a *Movie Magazine* 's ratin
 .. code-block:: pycon
 
    >>> from outrankingDigraphs import *
-   >>> t = XMCDA2PerformanceTableau('graffiti07')
+   >>> t = PerformanceTableau('graffiti07')
    >>> t.showHTMLPerformanceTableau(ndigits=0)
 
 .. Figure:: graffiti07_1.png
@@ -1575,7 +1575,7 @@ Bibliography
     Footnotes
     .........
 
-.. [1] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file *graffiti07.xml* (XMCDA-2.0 Format) in the *examples/Graffiti* directory of the Digraph3 ressources.       
+.. [1] *Graffiti*, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file *graffiti07.py* (perfTabs.PerformanceTableau Format) in the *examples* directory of the Digraph3 ressources.       
 
 .. [2] The 3D PCA plot method requires a running *R statistics software*  (https://www.r-project.org/) installation and the Calmat matrix calculator (see the calmat directory in the Digraph3 ressources)
 
