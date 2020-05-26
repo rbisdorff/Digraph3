@@ -195,6 +195,10 @@ The performance evaluations of each decision alternative on each criterion are g
             exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
             self.name = str(filePerfTab)
             try:
+                self.description = argDict['description']
+            except:
+                pass
+            try:
                 self.actions = argDict['actions']
             except:
                 self.actions = argDict['actionset']
