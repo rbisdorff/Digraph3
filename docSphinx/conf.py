@@ -54,7 +54,7 @@ copyright = '2012-2020, Raymond Bisdorff'
 # built documents.
 #
 # The short X.Y version.
-version = '3.7'
+version = '3.8'
 # The full version, including alpha/beta/rc tags.
 release = '3.8-3600+'
 
@@ -199,6 +199,9 @@ latex_elements = {
     \usepackage{newunicodechar}
     \newunicodechar{┬}{\scriptsize{\ensuremath{\top}}}
     \newunicodechar{┴}{\scriptsize{\ensuremath{\bot}}}
+    \usepackage{chngcntr}
+    \counterwithout{figure}{section}
+    \counterwithout{table}{section}
 
 ''',
 'maketitle': r'''

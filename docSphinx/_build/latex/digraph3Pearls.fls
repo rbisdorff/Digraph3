@@ -170,6 +170,8 @@ INPUT sphinxmessages.sty
 INPUT sphinxmessages.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/newunicodechar/newunicodechar.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/newunicodechar/newunicodechar.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/chngcntr/chngcntr.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/chngcntr/chngcntr.sty
 OUTPUT digraph3Pearls.idx
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 INPUT /usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def

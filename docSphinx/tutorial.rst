@@ -6633,9 +6633,7 @@ Bibliography
 
 .. [17]  Roy, B. *Transitivité et connexité.* C. R. Acad. Sci. Paris 249, 216-218, 1959. Warshall, S. *A Theorem on Boolean Matrices.* J. ACM 9, 11-12, 1962. 
 
-.. [18] A Digraph3 *graphs.Graph* encoded file is available for downloading here `berge.py`_.
-
-   .. _berge.py: _static/berge.py
+.. [18] A Digraph3 *graphs.Graph* encoded file is available in the :code:`examples` directory of the Digraph3 software collection.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
