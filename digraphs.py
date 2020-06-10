@@ -23,8 +23,7 @@ Copyright (C) 2006-2019  Raymond Bisdorff
 
 #######################
 
-__version__ = "Branch: 3.5 $"
-# ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+__version__ = "Branch: 3.8 $"
 
 from digraphsTools import *
 from digraphs import *
@@ -37,7 +36,7 @@ class Digraph(object):
     
     """
     Genuine root class of all Digraph3 modules.
-    See `tutorial working with the digraphs module <http://leopold-loewenheim.uni.lu/docDigraph3/tutorial.html#digraph-object-structure>`_ 
+    See Digraph3 tutorials.
 
     All instances of the :py:class:`digraphs.Digraph` class contain at least the following components: 
 
@@ -4081,8 +4080,7 @@ class Digraph(object):
     def exportD3(self, fileName="index", Comments=True):
         """
     This function was designed and implemented by Gary Cornelius, 2014 for his bachelor thesis at the University of Luxembourg. 
-    The thesis document with more explanations can be found
-    `here <http://leopold-loewenheim.uni.lu/Digraph3/literature/>`_ .
+    The thesis document with more explanations can be found in the literature/Cornelius directory of a Digraph3 working copy. .
     
     *Parameters*:
         * fileName, name of the generated html file, default = None (graph name as defined in python);

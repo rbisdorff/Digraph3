@@ -11,8 +11,7 @@ Copyright (C) 2016-2020  Raymond Bisdorff
 
 """
 #######################
-__version__ = "Branch: 3.5 $"
-# ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+__version__ = "Branch: 3.8 $"
 
 """
 XMCDA 2.0 xsl style sheets and XMCDA save and show method
@@ -3005,7 +3004,7 @@ def saveXMCDARubisBestChoiceRecommendation(problemFileName=None,tempDir='.',valu
          The method requires an Unix like OS like Ubuntu or Mac OSX and depends on:
 
               - the R statistics package for Principal Component Analysis graphic,
-              - the C calmat matrix interpreter (On http://leopold-loewenheim.uni.lu/svn/repos/Calmat/  see README)
+              - the C calmat matrix interpreter (see Digraph3/calmat/README)
               - the xpdf ressources ( ...$ apt-get install xpdf on Ubuntu) for converting pdf files to ppm format, and ppm files to png format.  
         
     """

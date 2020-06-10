@@ -13,8 +13,8 @@ Copyright (C) 2015-2020  Raymond Bisdorff
 """
 #######################
 
-__version__ = "Branch: 3.3 $"
-# ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+__version__ = "Branch: 3.8 $"
+
 
 from digraphsTools import *
 from decimal import Decimal

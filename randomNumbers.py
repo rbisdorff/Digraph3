@@ -20,8 +20,7 @@ Copyright (C) 2014-2020  Raymond Bisdorff
 """
 #######################
 
-__version__ = "Branch: 3.6 $"
-# ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+__version__ = "Branch: 3.8 $"
 
 class IncrementalQuantilesEstimator(object):
     """

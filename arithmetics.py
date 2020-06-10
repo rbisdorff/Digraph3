@@ -20,8 +20,7 @@ from digraphs import Digraph
 from decimal import Decimal
 from collections import OrderedDict
 
-__version__ = "Branch: 3.5 $"
-# ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
+__version__ = "Branch: 3.8 $"
 
 """
 
