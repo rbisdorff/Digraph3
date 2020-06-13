@@ -188,7 +188,7 @@ Kendall's *tau* index
 
 Noticing that :math:`\frac{\#Co}{n(n-1)} \;=\; 1 \,-\, \frac{\#In}{n(n-1)}`, and recalling that the bipolar-valued negation is operated by changing the sign of the characteristic value, *Kendall*'s original *tau* definition implemented in fact the bipolar-valued **negation** of the **non equivalence** of two linear orders: 
 
-:math:`\tau \;=\; 1 -2\frac{\#In}{n(n-1)} \;=\; -2\frac{\#In}{n(n-1)} \,-\, 1 \;=\; 2\frac{\#Co}{n(n-1)} \,-\, 1`
+:math:`\tau \;=\; 1 -2\frac{\#In}{n(n-1)} \;=\; -\big(\,2\frac{\#In}{n(n-1)} \,-\, 1\,\big) \;=\; 2\frac{\#Co}{n(n-1)} \,-\, 1`
 
 i.e. the **normalized majority margin** of *equivalently oriented* irreflexive pairs.
 
