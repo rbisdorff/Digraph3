@@ -3611,17 +3611,17 @@ What site to choose ?
 
 A SME, specialized in printing and copy services, has to move into new offices, and its CEO has gathered seven **potential office sites**.
 
-  ====================== ==== ==================================================
-   address                ID   Comment
-  ====================== ==== ==================================================
-   Avenue de la liberté   A    High standing city center
-   Bonnevoie              B    Industrial environment
-   Cessange               C    Residential suburb location
-   Dommeldange            D    Industrial suburb environment
-   Esch-Belval            E    New and ambitious urbanization far from the city
-   Fentange               F    Out in the countryside
-   Avenue de la Gare      G    Main town shopping street
-  ====================== ==== ==================================================
+  ==== ====== ====================== ==================================================
+   ID   Name    Address               Comment
+  ==== ====== ====================== ==================================================
+   A    Ave    Avenue de la liberté   High standing city center
+   B    Bon    Bonnevoie              Industrial environment
+   C    Ces    Cessange               Residential suburb location
+   D    Dom    Dommeldange            Industrial suburb environment
+   E    Bel    Esch-Belval            New and ambitious urbanization far from the city
+   F    Fen    Fentange               Out in the countryside
+   G    Gar    Avenue de la Gare      Main city shopping street
+  ==== ====== ====================== ==================================================
 
 Three **decision objectives** are guiding the CEO's choice:
 
@@ -3650,22 +3650,22 @@ The evaluation of the seven potential sites on each criterion are gathered in th
    ============= ======== ======== ======== ======== ======== ======== ======== ======== 
     Criterion     weight   A        B        C        D        E         F         G
    ============= ======== ======== ======== ======== ======== ======== ======== ========
-    Costs         3.0     35.0K€   17.8K€   6.7K€    14.1K€   34.8K€   18.6K€   12.0K€
-    \             \       \        \        \        \        \        \        \
-    Stan          1.0     100      10       0        30       90       70       20
-    Visi          1.0     60       80       70       50       60       0        100 
-    Prox          1.0     100      20       80       70       40       0        60
-    \             \       \        \        \        \        \        \        \
-    Wksp          1.0     75       30       0        55       100      0        50
-    Wkcf          1.0     0        100      10       30       60       80       50
-    Park          1.0     90       30       100      90       70       0        80
+    Costs         45.0     35.0K€   17.8K€   6.7K€    14.1K€   34.8K€   18.6K€   12.0K€
+    \              \       \        \        \        \        \        \        \
+    Prox          32.0     100      20       80       70       40       0        60
+    Visi          26.0     60       80       70       50       60       0        100 
+    Stan          23.0     100      10       0        30       90       70       20
+    \              \       \        \        \        \        \        \        \
+    Wksp          10.0     75       30       0        55       100      0        50
+    Wkcf           6.0     0        100      10       30       60       80       50
+    Park           3.0     90       30       100      90       70       0        80
    ============= ======== ======== ======== ======== ======== ======== ======== ========
 
 Except the *Costs* criterion, all other criteria admit for grading a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site *A* is the most expensive, but also 100% satisfying the *Proximity* as well as the  *Standing* criterion. Whereas the site *C* is the cheapest one; providing however no satisfaction at all on both the *Standing* and the *Working Space* criteria.
 
-All qualitative criteria, supporting their respective objective, are considered to be *equi-significant* (weights = 1.0). As a consequence, the three objectives are considered *equally important* (total weight = 3.0 each).
+The *Costs* criterion admits the highest significance (45.0), followed by the *Future turnover* criteria (32.0 + 26.0 + 23.0), The *Working conditions* criteria are the less significant (10.0 + 6.0, + 3.0). It follows that the CEO considers *maximizing the future turnover* the most important objective (81.0), followed by the *minizing yearly Costs* objective (45.0), and less important, the *maximizing working conditions* objective (19.0). 
 
-Concerning annual costs, we notice that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a site if there is at least a positive difference of 2500€. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a *considerably large* performance difference, triggering a *veto* situation the case given (see [BIS-2013]_). 
+Concerning yearly costs, we notice that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a site if there is at least a positive difference of 2500€. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a *considerably large* performance difference, triggering a *veto* situation the case given (see [BIS-2013]_). 
 
 In view of this performance tableau, what is now the office site we may recommend to the CEO as **best choice** ?
 
@@ -3688,29 +3688,29 @@ We may inspect the performance tableau data with the computing resources provide
     *----  performance tableau -----*
     criteria |   weights |     'A'      'B'      'C'       'D'       'E'       'F'       'G'   
     ---------|---------------------------------------------------------------------------------
-    'C'      |    3.00   | -35000.00 -17800.00 -6700.00 -14100.00 -34800.00 -18600.00 -12000.00  
-    'Cf'     |    1.00   |      0.00    100.00    10.00     30.00     60.00     80.00     50.00  
-    'P'      |    1.00   |     90.00     30.00   100.00     90.00     70.00      0.00     80.00  
-    'Pr'     |    1.00   |    100.00     20.00    80.00     70.00     40.00      0.00     60.00  
-    'St'     |    1.00   |    100.00     10.00     0.00     30.00     90.00     70.00     20.00  
-    'V'      |    1.00   |     60.00     80.00    70.00     50.00     60.00      0.00    100.00  
-    'W'      |    1.00   |     75.00     30.00     0.00     55.00    100.00      0.00     50.00  
+    'C'      |     45    | -35000.00 -17800.00 -6700.00 -14100.00 -34800.00 -18600.00 -12000.00  
+    'Cf'     |      6    |      0.00    100.00    10.00     30.00     60.00     80.00     50.00  
+    'P'      |      3    |     90.00     30.00   100.00     90.00     70.00      0.00     80.00  
+    'Pr'     |     32    |    100.00     20.00    80.00     70.00     40.00      0.00     60.00  
+    'St'     |     23    |    100.00     10.00     0.00     30.00     90.00     70.00     20.00  
+    'V'      |     26    |     60.00     80.00    70.00     50.00     60.00      0.00    100.00  
+    'W'      |     10    |     75.00     30.00     0.00     55.00    100.00      0.00     50.00  
 
 We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the :py:func:`perfTabs.PerformanceTableau.showCriteria` method.
 
 .. code-block:: pycon
    :linenos:
 
-   >>> t.showCriteria()
+   >>> t.showCriteria(IntegerWeights=True)
     *----  criteria -----*
     C 'Costs'
     Scale = (Decimal('0.00'), Decimal('50000.00'))
-    Weight = 0.333 
+    Weight = 45
     Threshold ind : 1000.00 + 0.00x ; percentile:  0.095
     Threshold pref : 2500.00 + 0.00x ; percentile:  0.143
     Cf 'Comfort'
     Scale = (Decimal('0.00'), Decimal('100.00'))
-    Weight = 0.111 
+    Weight = 6
     Threshold ind : 10.00 + 0.00x ; percentile:  0.095
     Threshold pref : 20.00 + 0.00x ; percentile:  0.286
     Threshold veto : 80.00 + 0.00x ; percentile:  0.905
@@ -3718,17 +3718,18 @@ We thus recover all the input data. To measure the actual preference discriminat
 
 On the *Costs* criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative *Comfort* criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged *considerably large* (Line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria. 
  
-A colorful comparison of all the performances is shown by the **heatmap** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.
+A colorful comparison of all the performances is shown on :numref:`officeChoiceHeatmap` by the **heatmap** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.
 
-   >>> t.showHTMLPerformanceHeatmap(colorLevels=5)
+   >>> t.showHTMLPerformanceHeatmap(colorLevels=5,rankingRule=None)
 
 .. figure:: officeChoiceHeatmap.png
+   :name: officeChoiceHeatmap
    :width: 500 px
    :align: center
 
-   heatmap of the office choice performance tableau
+   Unranked heatmap of the office choice performance tableau
 	   
-Site *A* shows extreme and contradictory performances: highest *Costs* and no *Working Comfort* on one hand, and total satisfaction with respect to *Standing*, *Proximity* and *Parking facilities* on the other hand. Similar, but opposite, situation is given for site *C*: unsatisfactory *Working Space*, no *Standing* and no *Working Comfort* on the one hand, and lowest *Costs*, best *Proximity* and *Parking facilities* on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites *D* and *G*. Finally, site *F* is clearly the less satisfactory alternative of all.
+Site *Ave* shows extreme and contradictory performances: highest *Costs* and no *Working Comfort* on one hand, and total satisfaction with respect to *Standing*, *Proximity* and *Parking facilities* on the other hand. Similar, but opposite, situation is given for site *Ces*: unsatisfactory *Working Space*, no *Standing* and no *Working Comfort* on the one hand, and lowest *Costs*, best *Proximity* and *Parking facilities* on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites *Dom* and *Gar*. Finally, site *Fen* is clearly the less satisfactory alternative of all.
 
 Outranking digraph
 ..................
@@ -3738,7 +3739,7 @@ To help now the CEO choosing the best site, we are going to compute pairwise out
      1. a **significant majority** of criteria concordantly supporting that site *x* is *at least as satisfactory as* site *y*, and
      2. **no considerable** counter-performance observed on any discordant criterion.
 
-The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted r(*x* S *y*), is measured in a bipolar significance valuation [-100.00, 100.00], where **positive** terms r(*x* S *y*) > 0.0 indicate a **validated**, and **negative** terms r(*x* S *y*) < 0.0 indicate a **non-validated** outrankings; whereas the **median** value r(*x* S *y*) = 0.0 represents an **indeterminate** situation (see [BIS-2004]_).   
+The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted r(*x* S *y*), is measured in a bipolar significance valuation [-1.00, 1.00], where **positive** terms r(*x* S *y*) > 0.0 indicate a **validated**, and **negative** terms r(*x* S *y*) < 0.0 indicate a **non-validated** outrankings; whereas the **median** value r(*x* S *y*) = 0.0 represents an **indeterminate** situation (see [BIS-2004]_).   
 
 .. figure:: officeChoiceOutranking.png
    :name: officeChoiceOutranking
@@ -3755,7 +3756,7 @@ For computing such a bipolar-valued outranking digraph from the given performanc
    >>> g = BipolarOutrankingDigraph(t)
    >>> g.showHTMLRelationTable()
 	   
-We may notice that Alternative *D* is **positively outranking** all other potential office sites (a *Condorcet winner*). Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are *not* outranked by any other site; they are in fact **weak** *Condorcet winners*.
+In :numref:`officeChoiceOutranking` we may notice that Alternative *D* is **positively outranking** all other potential office sites (a *Condorcet winner*). Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are *not* outranked by any other site; they are in fact **weak** *Condorcet winners*.
 
 .. code-block:: pycon
 
@@ -3780,7 +3781,7 @@ We may get even more insight in the apparent outranking situations when looking 
 
    The office choice outranking digraph 	   
 
-One may check that the outranking digraph *g* does not admit in fact a cyclic strict preference situation.
+One may check that the outranking digraph *g* does not admit in fact any cyclic strict preference situation.
 
 .. code-block:: pycon
 
@@ -3794,34 +3795,46 @@ One may check that the outranking digraph *g* does not admit in fact a cyclic st
 *Rubis* best choice recommendations
 ...................................
 
-Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking prekernels --weakly independent and strictly outranking choices-- of the outranking digraph (see the tutorial on :ref:`Kernel-Tutorial-label`). The case given, we previously need to break open all chordless circuits at their weakest link. As we observe no such chordless circuits here, we may directly compute the prekernels of *g*.
+Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking prekernels --*weakly independent* and *strictly outranking* choices-- of the outranking digraph (see the tutorial on :ref:`Kernel-Tutorial-label`). The case given, we previously need to break open all chordless odd circuits at their weakest link.
 
 .. code-block:: pycon
+   :linenos:
+
+   >>> from digraphs import BrokenCocsDigraph
+   >>> bcg = BrokenCocsDigraph(g)
+   >>> bcg.brokenLinks
+    set()
+
+As we observe indeed no such chordless circuits here, we may directly compute the *prekernels* of the outranking digraph *g*.
+
+.. code-block:: pycon
+   :name: computePreKernels
+   :caption: Computing outranking and outranked prekernels
    :linenos:
 
    >>> g.showPreKernels()
     *--- Computing preKernels ---*
     Dominant preKernels :
     ['D']
-       independence :  100.0
-       dominance    :  11.111
-       absorbency   :  -100.0
+       independence :  1.0
+       dominance    :  0.02
+       absorbency   :  -1.0
        covering     :  1.000
     ['B', 'E', 'C']
        independence :  0.00
-       dominance    :  11.111
-       absorbency   :  -100.0
+       dominance    :  0.10
+       absorbency   :  -1.0
        covering     :  0.500
     ['A', 'G']
        independence :  0.00
-       dominance    :  55.556
+       dominance    :  0.78
        absorbency   :  0.00
        covering     :  0.700
     Absorbent preKernels :
     ['F', 'A']
        independence :  0.00
        dominance    :  0.00
-       absorbency   :  100.0
+       absorbency   :  1.0
        covering     :  0.700
     *----- statistics -----
     graph name:  rel_officeChoice.xml
@@ -3835,28 +3848,30 @@ Following the Rubis outranking method (see [BIS-2008]_), potential best choice r
     Execution time  : 0.00018 sec.
     Results in sets: dompreKernels and abspreKernels.
 
-We notice three potential best choice recommendations: the Condorcet winner *D* (Line 4), the triplet *B*, *C* and *E* (Line 9), and finally the pair *A* and *G* (Line 14). The Rubis best choice recommendation is given by the **most determined** prekernel; the one supported by the most significant criteria coalition. This result is shown with the following command.
+We notice in :numref:`computePreKernels` three potential best choice recommendations: the Condorcet winner *D* (Line 4), the triplet *B*, *C* and *E* (Line 9), and finally the pair *A* and *G* (Line 14). The best choice recommendation is now given by the **most determined** prekernel; the one supported by the most significant criteria coalition. This result is shown with the :code:`showBestChoiceRecommendation` command. Notice that this method actually works by default on the broken chords digraph *bcg*.
 
 .. code-block:: pycon
+   :name: showBestChoice
+   :caption: Computing a best choice recommendation
    :linenos:
 
    >>> g.showBestChoiceRecommendation(CoDual=False)
     *****************************************
     Rubis best choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   
-    Credibility domain: [-100.00,100.00]
+    Credibility domain: [-1.00,1.00]
     === >> potential best choice(s)
     * choice              : ['D']
-      independence        : 100.00
-      dominance           : 11.11
-      absorbency          : -100.00
+      independence        : 1.00
+      dominance           : 0.02
+      absorbency          : -1.00
       covering (%)        : 100.00
-      determinateness (%) : 55.56
-      - most credible action(s) = { 'D': 2.07, }
+      determinateness (%) : 51.03
+      - most credible action(s) = { 'D': 0.02, }
     === >> potential best choice(s)
     * choice              : ['A', 'G']
       independence        : 0.00
-      dominance           : 55.56
+      dominance           : 0.78
       absorbency          : 0.00
       covering (%)        : 70.00
       determinateness (%) : 50.00
@@ -3864,8 +3879,8 @@ We notice three potential best choice recommendations: the Condorcet winner *D* 
     === >> potential best choice(s)
     * choice              : ['B', 'C', 'E']
       independence        : 0.00
-      dominance           : 11.11
-      absorbency          : -100.00
+      dominance           : 0.10
+      absorbency          : -1.00
       covering (%)        : 50.00
       determinateness (%) : 50.00
       - most credible action(s) = { }
@@ -3873,15 +3888,15 @@ We notice three potential best choice recommendations: the Condorcet winner *D* 
     * choice              : ['A', 'F']
       independence        : 0.00
       dominance           : 0.00
-      absorbency          : 100.00
+      absorbency          : 1.00
       covered (%)         : 70.00
       determinateness (%) : 50.00
       - most credible action(s) = { }
     Execution time: 0.014 seconds
 
-We notice in Line 6 above that the most significantly supported best
-choice recommendation is indeed the *Condorcet* winner *D* with a
-majority of 56% of the criteria significance (see Line 12). Both other
+We notice in :numref:`showBestChoice` (Line 7) above that the most significantly supported best
+choice recommendation is indeed the *Condorcet* winner *D* supported by a
+majority of 51.03% of the criteria significance (see Line 12). Both other
 potential best choice recommendations, as well as the potential worst
 choice recommendation, are not positively validated as best,
 resp. worst choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see Lines 27 and 37) and seams hence not actually comparable to its competitors.
@@ -3890,7 +3905,7 @@ Computing *strict best* choice recommendations
 ..............................................
 
 When comparing now the performances of alternatives *D* and *G* on a
-pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D* ( r(*G* outranks *D*) = 100.0).
+pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D*:  r(*G* outranks *D*) = +145/145 = +1.0.
 
 .. code-block:: pycon
    :linenos:
@@ -3900,17 +3915,17 @@ pairwise perspective (see below), we notice that, with the given preference disc
     Comparing actions : (G, D)
     crit. wght.  g(x)      g(y)    diff.  |   ind     pref    concord 	|
     =========================================================================
-    C   3.00 -12000.00 -14100.00 +2100.00 | 1000.00 2500.00   +3.00 	| 
-    Cf  1.00     50.00     30.00   +20.00 |   10.00   20.00   +1.00 	| 
-    P   1.00     80.00     90.00   -10.00 |   10.00   20.00   +1.00 	| 
-    Pr  1.00     60.00     70.00   -10.00 |   10.00   20.00   +1.00 	| 
-    St  1.00     20.00     30.00   -10.00 |   10.00   20.00   +1.00 	| 
-    V   1.00    100.00     50.00   +50.00 |   10.00   20.00   +1.00 	| 
-    W   1.00     50.00     55.00    -5.00 |   10.00   20.00   +1.00 	|
+    C   45.00 -12000.00 -14100.00 +2100.00 | 1000.00 2500.00   +45.00 	| 
+    Cf   6.00     50.00     30.00   +20.00 |   10.00   20.00    +6.00 	| 
+    P    3.00     80.00     90.00   -10.00 |   10.00   20.00    +3.00 	| 
+    Pr  32.00     60.00     70.00   -10.00 |   10.00   20.00   +32.00 	| 
+    St  23.00     20.00     30.00   -10.00 |   10.00   20.00   +23.00 	| 
+    V   26.00    100.00     50.00   +50.00 |   10.00   20.00   +26.00 	| 
+    W   10.00     50.00     55.00    -5.00 |   10.00   20.00   +10.00 	|
     =========================================================================
-    Valuation in range: -9.00 to +9.00; global concordance: +9.00
+    Valuation in range: -145.00 to +145.00; global concordance: +145.00
 
-However, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*.
+However, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:  r(*C* outranks *G*) = +15/145 > 0.0, and r(*G* outranks *C*) = -15/145 < 0.0.
 
 .. code-block:: pycon
    :linenos:
@@ -3918,52 +3933,54 @@ However, we must as well notice that the cheapest alternative *C* is in fact **s
    >>> g.showPairwiseComparison('C','G')
     *------------  pairwise comparison ----*
     Comparing actions : (C, G)/(G, C)
-    crit. wght.   g(x)     g(y)      diff.  |   ind.   pref.   	(C,G)/(G,C) |
-    =============================================================================
-    C     3.00 -6700.00 -12000.00  +5300.00 | 1000.00 2500.00   +3.00/-3.00 | 
-    Cf    1.00    10.00     50.00    -40.00 |   10.00   20.00   -1.00/+1.00 | 
-    P     1.00   100.00     80.00    +20.00 |   10.00   20.00   +1.00/-1.00 | 
-    Pr    1.00    80.00     60.00    +20.00 |   10.00   20.00   +1.00/-1.00 | 
-    St    1.00     0.00     20.00    -20.00 |   10.00   20.00   -1.00/+1.00 | 
-    V     1.00    70.00    100.00    -30.00 |   10.00   20.00   -1.00/+1.00 | 
-    W     1.00     0.00     50.00    -50.00 |   10.00   20.00   -1.00/+1.00 |
+    crit. wght.   g(x)     g(y)      diff.  |   ind.   pref.   	(C,G)/(G,C)  |
+    ==========================================================================
+    C    45.00 -6700.00 -12000.00  +5300.00 | 1000.00 2500.00  +45.00/-45.00 | 
+    Cf    6.00    10.00     50.00    -40.00 |   10.00   20.00   -6.00/ +6.00 | 
+    P     3.00   100.00     80.00    +20.00 |   10.00   20.00   +3.00/ -3.00 | 
+    Pr   32.00    80.00     60.00    +20.00 |   10.00   20.00  +32.00/-32.00 | 
+    St   23.00     0.00     20.00    -20.00 |   10.00   20.00  -23.00/+23.00 | 
+    V    26.00    70.00    100.00    -30.00 |   10.00   20.00  -26.00/+26.00 | 
+    W    10.00     0.00     50.00    -50.00 |   10.00   20.00  -10.00/+10.00 |
     =========================================================================
-    Valuation in range: -9.00 to +9.00; global concordance: +1.00/-1.00
+    Valuation in range: -145.00 to +145.00; global concordance: +15.00/-15.00
 
 
-To model these *strict outranking* situations, we may compute the Rubis best choice recommendation on the **codual**, the converse (~) of the dual (-) [14]_, of the outranking digraph instance *g* (see [BIS-2013]_), as follows.
+To model these *strict outranking* situations, we may recompute the best choice recommendation on the **codual**, the converse (~) of the dual (-) [14]_, of the outranking digraph instance *g* (see [BIS-2013]_), as follows.
 
 .. code-block:: pycon
+   :name: strictBestChoice
+   :caption: Computing the strict best choice recommendation
    :linenos:
 
    >>> g.showBestChoiceRecommendation(CoDual=True,ChoiceVector=True)
     * --- Best and worst choice recommendation(s) ---*
-    (in decreasing order of determinateness)   
-    Credibility domain:  {'min':-100.0, 'max': 100.0', 'med':0.0'}
+     (in decreasing order of determinateness)   
+    Credibility domain: [-1.00,1.00]
     === >> potential best choice(s)
-    * choice                : ['A', 'C', 'D']
-      independence          : 0.00
-      dominance             : 11.11
-      absorbency            : 0.00
-      covering (%)          : 41.67
-      determinateness (%)   : 53.17
-      characteristic vector :  
-	 { 'D': 11.11, 'A': 0.00, 'C': 0.00, 'G': 0.00,
-	   'B': -11.11, 'E': -11.11, 'F': -11.11 }
-    === >> potential worst choice(s)
-    * choice                : ['A', 'F']
-      independence          : 0.00
-      dominance             : -55.56
-      absorbency            : 100.00
-      covered (%)           : 50.00
-      determinateness (%)   : 50.00
-      characteristic vector : 
-	 {'A': 0.00, 'B': 0.00, 'C': 0.00, 'D': 0.00, 
-	  'E': 0.00, 'F': 0.00, 'G': 0.00, }
+    * choice              : ['A', 'C', 'D']
+      independence        : 0.00
+      dominance           : 0.10
+      absorbency          : 0.00
+      covering (%)        : 41.67
+      determinateness (%) : 50.59
+      - characteristic vector = { 'D': 0.02, 'G': 0.00, 'C': 0.00,
+	                          'A': 0.00, 'F': -0.02, 'E': -0.02,
+				  'B': -0.02, }
+    === >> potential worst choice(s) 
+    * choice              : ['A', 'F']
+      independence        : 0.00
+      dominance           : -0.52
+      absorbency          : 1.00
+      covered (%)         : 50.00
+      determinateness (%) : 50.00
+      - characteristic vector = { 'G': 0.00, 'F': 0.00, 'E': 0.00,
+	                          'D': 0.00, 'C': 0.00, 'B': 0.00,
+				  'A': 0.00, }
+				  
+It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to **being or not being** a potential best choice candidate. 
 
-It is interesting to notice that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D' (see Line 6). In the corresponding characteristic vector (see Line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in the crisp best choice recommendation, shows as well an indeterminate situation with respect to being or not a potential best choice candidate. 
-
-We may also notice (see Line 17 and Line 21) that both alternatives *A* and *F* are reported as certainly outranked choices, hence a **potential worst choice recommendation** . This confirms again the global incomparability status of alternative *A*.
+We may also notice (see Line 17 and Line 21) that both alternatives *A* and *F* are reported as certainly outranked choices, hence as **potential worst choice recommendation** . This confirms again the global incomparability status of alternative *A*.
 
 Weakly ordering the outranking digraph
 ......................................
@@ -3973,7 +3990,7 @@ To get a more complete insight in the overall strict outranking situations, we m
 .. code-block:: pycon
    :linenos:
 
-   >>> from tranditiveDigraphs import RankingByChoosingDigraph
+   >>> from transitiveDigraphs import RankingByChoosingDigraph
    >>> gcd = ~(-g)
    >>> rbc = RankingByChoosingDigraph(gcd)
     Threading ...  ## multiprocessing if 2 cores are available
@@ -3981,8 +3998,8 @@ To get a more complete insight in the overall strict outranking situations, we m
    >>> rbc.showRankingByChoosing()
     Ranking by Choosing and Rejecting
     1st ranked ['D'] (0.28)
-       2nd ranked ['C', 'G'] (0.17)
-       2nd last ranked ['B', 'C', 'E'] (0.22)
+       2nd ranked ['C', 'G'] (0.26)
+       2nd last ranked ['B', 'C', 'E'] (0.34)
     1st last ranked ['A', 'F'] (0.50)
    >>> rbc.exportGraphViz('officeChoiceRanking')
     *---- exporting a dot file for GraphViz tools ---------*
@@ -4002,14 +4019,11 @@ To get a more complete insight in the overall strict outranking situations, we m
 In this **ranking-by-choosing** method, where we operate the *epistemic fusion* of iterated (strict) best and worst choices, compromise alternative *D* is indeed ranked before compromise alternative *G*. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation. 
 
 The best choice recommendation appears hence depending on the very
-importance the CEO is attaching to each of the three objectives he is
-considering. In the setting here, where he considers all three
-objectives to be **equally important** (minimize costs = 3.0, maximize
-turnover = 3.0, and maximize working conditions = 3.0), site *D*
-represents actually the best compromise. However, if *Costs* do not
+importance the CEO is attaching to each of the three decision objectives he is
+considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objectivem followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, site *D* represents actually the best compromise. However, if *Costs* do not
 play much a role, it would be perhaps better to decide to move to the most advantageous site *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
 
-It might be worth, as an **exercise**, to modify on the one hand this importance balance in the XMCDA data file by lowering the significance of the *Costs* criterion; all criteria are considered **equi-significant** (weight = 1.0) for instance. It may as well be opportune, on the other hand, to **rank** the importance of the three objectives as follows:  *minimize costs* (weight = 9.0) **>** *maximize turnover* (weight = 3 x 2.0) **>** *maximize working conditions* (weight = 3 x 1.0). What will become the best choice recommendation under both working hypotheses?  
+It might be worth, as an **exercise**, to modify these objective importance ranks in the data file by considering all three decision objectives are considered *equally important*, and all criteria under an objective are considered *equi-significant*. What will become the best choice recommendation under this working hypothesis?  
 
 For further reading about the *Rubis* Best Choice on may consult the following real decision aid case study about choosing a best poster in a scientific conference [BIS-2015]_ .
 
