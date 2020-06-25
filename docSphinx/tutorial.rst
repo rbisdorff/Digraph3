@@ -4022,7 +4022,11 @@ In this **ranking-by-choosing** method, where we operate the *epistemic fusion* 
 
 The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, site *D* represents actually the best compromise. However, if *Costs* do not play much a role, it would be perhaps better to decide to move to the most advantageous site *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
 
-It might be worth, as an **exercise**, to modify these objective importance ranks in the data file by considering all three decision objectives are *equally important*, and all criteria under an objective are *equi-significant*. What will become the best choice recommendation under this working hypothesis?  
+It might be worth, as an **exercise**, to modify these criteria significance weights in the :code:`officeChoice.py` data file in such a way that:
+    - all criteria under an objective appear *equi-significant*, and
+    - all three decision objectives are considered *equally important*.
+
+What will become the best choice recommendation under this working hypothesis?  
 
 For further reading about the *Rubis* Best Choice methodology, one may consult the following real *decision aid case study* about choosing a best poster in a scientific conference [BIS-2015]_ .
 
