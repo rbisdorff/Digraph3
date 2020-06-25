@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{June 24, 2020}
+\date{June 25, 2020}
 \release{3.8-3600+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -4460,7 +4460,8 @@ On the \sphinxstyleemphasis{Costs} criterion, 9.5\% of the performance differenc
 A colorful comparison of all the performances is shown on \hyperref[\detokenize{tutorial:officechoiceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:officechoiceheatmap}}} by the \sphinxstylestrong{heatmap} statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYGZbs{}
+\PYG{g+go}{                                 rankingRule=None)}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -4689,7 +4690,8 @@ To model these \sphinxstyleemphasis{strict outranking} situations, we may recomp
 \sphinxSetupCaptionForVerbatim{Computing the strict best choice recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:strictbestchoice}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{n}{CoDual}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{,}\PYG{n}{ChoiceVector}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{n}{CoDual}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{,}\PYGZbs{}
+\PYG{g+go}{                                   ChoiceVector=True)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{} Best and worst choice recommendation(s) \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  (in decreasing order of determinateness)}
 \PYG{g+go}{ Credibility domain: [\PYGZhy{}1.00,1.00]}
@@ -4755,14 +4757,11 @@ To get a more complete insight in the overall strict outranking situations, we m
 
 In this \sphinxstylestrong{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} method, where we operate the \sphinxstyleemphasis{epistemic fusion} of iterated (strict) best and worst choices, compromise alternative \sphinxstyleemphasis{D} is indeed ranked before compromise alternative \sphinxstyleemphasis{G}. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site \sphinxstyleemphasis{A}, and the cheapest site \sphinxstyleemphasis{C}, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking\sphinxhyphen{}by\sphinxhyphen{}choosing relation.
 
-The best choice recommendation appears hence depending on the very
-importance the CEO is attaching to each of the three decision objectives he is
-considering. In the setting here, where he considers that \sphinxstyleemphasis{maximizing the future turnover} is the most important objective followed by \sphinxstyleemphasis{minimizing the Costs} and, less important, \sphinxstyleemphasis{maximizing the working conditions}, site \sphinxstyleemphasis{D} represents actually the best compromise. However, if \sphinxstyleemphasis{Costs} do not
-play much a role, it would be perhaps better to decide to move to the most advantageous site \sphinxstyleemphasis{A}; or if, on the contrary, \sphinxstyleemphasis{Costs} do matter a lot, moving to the cheapest alternative \sphinxstyleemphasis{C} could definitely represent a more convincing recommendation.
+The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three decision objectives he is considering. In the setting here, where he considers that \sphinxstyleemphasis{maximizing the future turnover} is the most important objective followed by \sphinxstyleemphasis{minimizing the Costs} and, less important, \sphinxstyleemphasis{maximizing the working conditions}, site \sphinxstyleemphasis{D} represents actually the best compromise. However, if \sphinxstyleemphasis{Costs} do not play much a role, it would be perhaps better to decide to move to the most advantageous site \sphinxstyleemphasis{A}; or if, on the contrary, \sphinxstyleemphasis{Costs} do matter a lot, moving to the cheapest alternative \sphinxstyleemphasis{C} could definitely represent a more convincing recommendation.
 
-It might be worth, as an \sphinxstylestrong{exercise}, to modify these objective importance ranks in the data file by considering all three decision objectives are considered \sphinxstyleemphasis{equally important}, and all criteria under an objective are considered \sphinxstyleemphasis{equi\sphinxhyphen{}significant}. What will become the best choice recommendation under this working hypothesis?
+It might be worth, as an \sphinxstylestrong{exercise}, to modify these objective importance ranks in the data file by considering all three decision objectives are \sphinxstyleemphasis{equally important}, and all criteria under an objective are \sphinxstyleemphasis{equi\sphinxhyphen{}significant}. What will become the best choice recommendation under this working hypothesis?
 
-For further reading about the \sphinxstyleemphasis{Rubis} Best Choice on may consult the following real decision aid case study about choosing a best poster in a scientific conference \sphinxcite{tutorial:bis-2015} .
+For further reading about the \sphinxstyleemphasis{Rubis} Best Choice methodology, one may consult the following real \sphinxstyleemphasis{decision aid case study} about choosing a best poster in a scientific conference \sphinxcite{tutorial:bis-2015} .
 
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}}
 

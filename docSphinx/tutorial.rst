@@ -3720,7 +3720,8 @@ On the *Costs* criterion, 9.5% of the performance differences are considered ins
  
 A colorful comparison of all the performances is shown on :numref:`officeChoiceHeatmap` by the **heatmap** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.
 
-   >>> t.showHTMLPerformanceHeatmap(colorLevels=5,rankingRule=None)
+   >>> t.showHTMLPerformanceHeatmap(colorLevels=5,\
+                                    rankingRule=None)
 
 .. figure:: officeChoiceHeatmap.png
    :name: officeChoiceHeatmap
@@ -3953,7 +3954,8 @@ To model these *strict outranking* situations, we may recompute the best choice 
    :caption: Computing the strict best choice recommendation
    :linenos:
 
-   >>> g.showBestChoiceRecommendation(CoDual=True,ChoiceVector=True)
+   >>> g.showBestChoiceRecommendation(CoDual=True,\
+                                      ChoiceVector=True)
     * --- Best and worst choice recommendation(s) ---*
      (in decreasing order of determinateness)   
     Credibility domain: [-1.00,1.00]
@@ -4018,14 +4020,11 @@ To get a more complete insight in the overall strict outranking situations, we m
 	   
 In this **ranking-by-choosing** method, where we operate the *epistemic fusion* of iterated (strict) best and worst choices, compromise alternative *D* is indeed ranked before compromise alternative *G*. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation. 
 
-The best choice recommendation appears hence depending on the very
-importance the CEO is attaching to each of the three decision objectives he is
-considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, site *D* represents actually the best compromise. However, if *Costs* do not
-play much a role, it would be perhaps better to decide to move to the most advantageous site *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
+The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, site *D* represents actually the best compromise. However, if *Costs* do not play much a role, it would be perhaps better to decide to move to the most advantageous site *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
 
-It might be worth, as an **exercise**, to modify these objective importance ranks in the data file by considering all three decision objectives are considered *equally important*, and all criteria under an objective are considered *equi-significant*. What will become the best choice recommendation under this working hypothesis?  
+It might be worth, as an **exercise**, to modify these objective importance ranks in the data file by considering all three decision objectives are *equally important*, and all criteria under an objective are *equi-significant*. What will become the best choice recommendation under this working hypothesis?  
 
-For further reading about the *Rubis* Best Choice on may consult the following real decision aid case study about choosing a best poster in a scientific conference [BIS-2015]_ .
+For further reading about the *Rubis* Best Choice methodology, one may consult the following real *decision aid case study* about choosing a best poster in a scientific conference [BIS-2015]_ .
 
 Back to :ref:`Content Table <Tutorial-label>`
 

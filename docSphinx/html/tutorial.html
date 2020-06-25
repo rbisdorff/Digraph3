@@ -5254,7 +5254,8 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 <p>On the <em>Costs</em> criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative <em>Comfort</em> criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged <em>considerably large</em> (Line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria.</p>
 <p>A colorful comparison of all the performances is shown on <a class="reference internal" href="#officechoiceheatmap"><span class="std std-numref">Fig. 27</span></a> by the <strong>heatmap</strong> statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>\
+<span class="go">                                 rankingRule=None)</span>
 </pre></div>
 </div>
 <div class="figure align-center" id="officechoiceheatmap">
@@ -5588,7 +5589,9 @@ pairwise perspective (see below), we notice that, with the given preference disc
 21
 22
 23
-24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>\
+<span class="go">                                   ChoiceVector=True)</span>
 <span class="go"> * --- Best and worst choice recommendation(s) ---*</span>
 <span class="go">  (in decreasing order of determinateness)</span>
 <span class="go"> Credibility domain: [-1.00,1.00]</span>
@@ -5665,12 +5668,9 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">Ranking-by-choosing from the office choice outranking digraph</span><a class="headerlink" href="#id128" title="Permalink to this image">¶</a></p>
 </div>
 <p>In this <strong>ranking-by-choosing</strong> method, where we operate the <em>epistemic fusion</em> of iterated (strict) best and worst choices, compromise alternative <em>D</em> is indeed ranked before compromise alternative <em>G</em>. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site <em>A</em>, and the cheapest site <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation.</p>
-<p>The best choice recommendation appears hence depending on the very
-importance the CEO is attaching to each of the three decision objectives he is
-considering. In the setting here, where he considers that <em>maximizing the future turnover</em> is the most important objective followed by <em>minimizing the Costs</em> and, less important, <em>maximizing the working conditions</em>, site <em>D</em> represents actually the best compromise. However, if <em>Costs</em> do not
-play much a role, it would be perhaps better to decide to move to the most advantageous site <em>A</em>; or if, on the contrary, <em>Costs</em> do matter a lot, moving to the cheapest alternative <em>C</em> could definitely represent a more convincing recommendation.</p>
-<p>It might be worth, as an <strong>exercise</strong>, to modify these objective importance ranks in the data file by considering all three decision objectives are considered <em>equally important</em>, and all criteria under an objective are considered <em>equi-significant</em>. What will become the best choice recommendation under this working hypothesis?</p>
-<p>For further reading about the <em>Rubis</em> Best Choice on may consult the following real decision aid case study about choosing a best poster in a scientific conference <a class="reference internal" href="#bis-2015" id="id58"><span>[BIS-2015]</span></a> .</p>
+<p>The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three decision objectives he is considering. In the setting here, where he considers that <em>maximizing the future turnover</em> is the most important objective followed by <em>minimizing the Costs</em> and, less important, <em>maximizing the working conditions</em>, site <em>D</em> represents actually the best compromise. However, if <em>Costs</em> do not play much a role, it would be perhaps better to decide to move to the most advantageous site <em>A</em>; or if, on the contrary, <em>Costs</em> do matter a lot, moving to the cheapest alternative <em>C</em> could definitely represent a more convincing recommendation.</p>
+<p>It might be worth, as an <strong>exercise</strong>, to modify these objective importance ranks in the data file by considering all three decision objectives are <em>equally important</em>, and all criteria under an objective are <em>equi-significant</em>. What will become the best choice recommendation under this working hypothesis?</p>
+<p>For further reading about the <em>Rubis</em> Best Choice methodology, one may consult the following real <em>decision aid case study</em> about choosing a best poster in a scientific conference <a class="reference internal" href="#bis-2015" id="id58"><span>[BIS-2015]</span></a> .</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 </div>
 </div>
