@@ -20,7 +20,8 @@ Tutorials of the Digraph3 resources
 
 .. only:: html
 
-   :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
+   :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg,
+	    https://rbisdorff.github.io/
    :Version: Revision: Python 3.8
    :Copyright: R. Bisdorff 2013-2020
 
