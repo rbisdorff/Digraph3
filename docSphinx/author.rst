@@ -3,6 +3,7 @@ About the author
 ================
 
 :Author: **Raymond BISDORFF**, Emeritus Professor of *Computer Science* and *Applied Mathematics*, University of Luxembourg [raymond.bisdorff@uni.lu]
+:Url: https://rbisdorff.github.io/
 :Address: 50, Bvd G-D Charlotte, L-1130 Luxembourg (Europe)
 :Phone: 00 352 45 64 46 (Home Office)
 
