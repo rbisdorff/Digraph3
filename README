@@ -33,10 +33,6 @@ or, from sourceforge.net:
 
 ...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3
 
-You may as well check out a working copy using a subversion client:
-
-...$ svn co https://leopold-loewenheim.uni.lu/svn/repos/Digraph3
-
 You may also download and extract a zip archive fom the github link above, or a 
  zip archive (not always the latest) from 
 
@@ -65,4 +61,4 @@ http://digraph3.readthedocs.io/en/latest/
 
 Enjoy !!
 R Bisdorff
-http://leopold-loewenheim.uni.lu/bisdorff/
+http://rbisdorff.github.io/

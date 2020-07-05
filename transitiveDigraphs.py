@@ -13,7 +13,6 @@ Copyright (C) 2006-2020  Raymond Bisdorff
 #######################
 
 __version__ = "Branch: 3.3 $"
-# ..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Digraph3
 
 from digraphsTools import *
 from digraphs import *

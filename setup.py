@@ -26,12 +26,12 @@ if CythonInstalled:
             'graphs','htmlmodel','randomNumbers','randomDigraphs',\
             'randomPerfTabs', 'sparseOutrankingDigraphs','xmcda'],
           ext_modules=cythonize("cython/*.pyx",language_level=3),
-          license='http://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.html',
-          url='http://leoopold-loewenheim.uni.lu/docDigraph3/',
+          license='digraph3_copyright.html',
+          url='https://digraph3.readthedocs.io/en/latest/index.html',
           description='Lets you add bipolar graph and digraphs methods to your applications',
           author='Raymond Bisdorff',
           author_email='raymond.bisdorff@uni.lu',
-          contact='http://leopold-loewenheim.uni.lu/bisdorff/',
+          contact='https://rbisdorff.github.io/',
           )
 else:
     setup(name='Digraph3',
@@ -43,12 +43,12 @@ else:
             'linearOrders','transitiveDigraphs','graphs','htmlmodel','randomNumbers',\
             'randomDigraphs','randomPerfTabs','sparseOutrankingDigraphs',\
                       'xmcda'],
-          license='http://leopold-loewenheim.uni.lu/Digraph3/digraph3_copyright.html',
-          url='http://leoopold-loewenheim.uni.lu/docDigraph3/',
+          license='digraph3_copyright.html',
+          url='https://digraph3.readthedocs.io/en/latest/index.html',
           description='Lets you add bipolar graph and digraphs methods to your applications',
           author='Raymond Bisdorff',
           author_email='raymond.bisdorff@uni.lu',
-          contact='http://leopold-loewenheim.uni.lu/bisdorff/',
+          contact='https://rbisdorff.github.io/',
           )
     
     
