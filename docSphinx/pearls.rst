@@ -106,7 +106,7 @@ A better approach is to rank the movies on the basis of pairwise bipolar-valued 
 
    *Graffiti* magazine's ordered movie ratings from September 2007
 
-There is no doubt that movie *mv_QS*, with 6 '*must be seen*' marks, is correctly best-ranked and the movie *mv_TV* is worst-ranked with two '*don't like*' and three '*may be seen*' marks.
+There is no doubt that movie *mv_QS*, with 6 '*must be seen*' marks, is correctly best-ranked and movie *mv_TV*, with two '*don't like*' and three '*may be seen*' marks, appers worst-ranked.
 
 Modelling pairwise bipolar-valued rating opinions
 .................................................
