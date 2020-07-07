@@ -58,7 +58,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{July 05, 2020}
+\date{July 07, 2020}
 \release{3.8-3600+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -151,7 +151,7 @@ In marketing studies, interviewees will not always respond to all the submitted 
 
 \subsection{A motivating data set}
 \label{\detokenize{pearls:a-motivating-data-set}}
-Let us consider such a performance tableau gathering a \sphinxstyleemphasis{Movie Magazine} ‘s rating of some movies that could actually be seen in town %
+Let us consider such a performance tableau gathering a \sphinxstyleemphasis{Movie Magazine} ‘s rating of some movies that could be seen in town %
 \begin{footnote}[1]\sphinxAtStartFootnote
 \sphinxstyleemphasis{Graffiti}, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file \sphinxstyleemphasis{graffiti07.py} (perfTabs.PerformanceTableau Format) in the \sphinxstyleemphasis{examples} directory of the Digraph3 ressources.
 %
@@ -170,7 +170,7 @@ Let us consider such a performance tableau gathering a \sphinxstyleemphasis{Movi
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{graffiti07_1}.png}
 \caption{\sphinxstyleemphasis{Graffiti} magazine’s movie ratings from September 2007}\label{\detokenize{pearls:graffiti07-1}}\end{figure}
 
-15 journalists and movie critics provide here their rating of 25 movies: 5 stars (\sphinxstyleemphasis{masterpiece}), 4 stars (\sphinxstyleemphasis{must be seen}), 3 stars (\sphinxstyleemphasis{excellent}), 2 stars (\sphinxstyleemphasis{good}), 1 star (\sphinxstyleemphasis{could be seen}), \sphinxhyphen{}1 star (\sphinxstyleemphasis{I do not like}), \sphinxhyphen{}2 (\sphinxstyleemphasis{I hate}), NA (\sphinxstyleemphasis{not seen}).
+15 journalists and movie critics provide here their rating of 25 movies: 5 stars (\sphinxstyleemphasis{masterpiece}), 4 stars (\sphinxstyleemphasis{must be seen}), 3 stars (\sphinxstyleemphasis{excellent}), 2 stars (\sphinxstyleemphasis{good}), 1 star (\sphinxstyleemphasis{may be seen}), \sphinxhyphen{}1 star (\sphinxstyleemphasis{I don’t like}), \sphinxhyphen{}2 (\sphinxstyleemphasis{I hate}), NA (\sphinxstyleemphasis{not seen}).
 
 To aggregate all the critics’ rating opinions, the \sphinxstyleemphasis{Graffiti} magazine provides for each movie a global score computed as an \sphinxstyleemphasis{average grade}, just ignoring the \sphinxstyleemphasis{not seen} data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic \sphinxstyleemphasis{SJ}, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
 
@@ -189,7 +189,7 @@ A better approach is to rank the movies on the basis of pairwise bipolar\sphinxh
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{graffiti07_2}.png}
 \caption{\sphinxstyleemphasis{Graffiti} magazine’s ordered movie ratings from September 2007}\label{\detokenize{pearls:graffiti07-2}}\end{figure}
 
-There is no doubt that movie \sphinxstyleemphasis{mv\_QS}, with 6 ‘\sphinxstyleemphasis{must be seen}’ marks, is correctly best\sphinxhyphen{}ranked and the movie \sphinxstyleemphasis{mv\_TV} is worst\sphinxhyphen{}ranked with five ‘\sphinxstyleemphasis{don’t like}’ marks.
+There is no doubt that movie \sphinxstyleemphasis{mv\_QS}, with 6 ‘\sphinxstyleemphasis{must be seen}’ marks, is correctly best\sphinxhyphen{}ranked and the movie \sphinxstyleemphasis{mv\_TV} is worst\sphinxhyphen{}ranked with three ‘\sphinxstyleemphasis{don’t like}’ and two ‘\sphinxstyleemphasis{may be seen}’ marks.
 
 
 \subsection{Modelling pairwise bipolar\sphinxhyphen{}valued rating opinions}
@@ -411,7 +411,9 @@ We may verify these relations with help of the corresponding equivalence digraph
 \PYG{g+go}{        for y in eq.actions:}
 \PYG{g+go}{            M += eq.relation[x][y]}
 \PYG{g+go}{            D += abs(eq.relation[x][y])}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{r(R1\PYGZlt{}=\PYGZgt{}R2) = }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s1}{, d = }\PYG{l+s+si}{\PYGZpc{}.3f}\PYG{l+s+s1}{, tau = }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{M}\PYG{o}{/}\PYG{n}{n2}\PYG{p}{,}\PYG{n}{D}\PYG{o}{/}\PYG{n}{n2}\PYG{p}{,}\PYG{n}{M}\PYG{o}{/}\PYG{n}{D}\PYG{p}{)}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{r(R1\PYGZlt{}=\PYGZgt{}R2) = }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s1}{,}\PYG{l+s+se}{\PYGZbs{}}
+\PYG{g+go}{           d = \PYGZpc{}.3f, tau = \PYGZpc{}+.3f\PYGZsq{}\PYGZbs{}}
+\PYG{g+go}{           \PYGZpc{} (M/n2,D/n2,M/D))}
 \PYG{g+go}{ r(R1\PYGZlt{}=\PYGZgt{}R2) = +0.026, d = 0.356, tau = +0.073}
 \end{sphinxVerbatim}
 
@@ -423,7 +425,9 @@ In general we simply use the \sphinxcode{\sphinxupquote{digraphs.Digraph.compute
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{tau} \PYG{o}{=} \PYG{n}{corrR1R2}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{d} \PYG{o}{=} \PYG{n}{corrR1R2}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{determination}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{r} \PYG{o}{=} \PYG{n}{tau} \PYG{o}{*} \PYG{n}{d}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tau(R1,R2) = }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s1}{, d = }\PYG{l+s+si}{\PYGZpc{}.3f}\PYG{l+s+s1}{, r(R1\PYGZlt{}=\PYGZgt{}R2) = }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{tau}\PYG{p}{,} \PYG{n}{d}\PYG{p}{,} \PYG{n}{r}\PYG{p}{)}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tau(R1,R2) = }\PYG{l+s+si}{\PYGZpc{}+.3f}\PYG{l+s+s1}{,}\PYG{l+s+se}{\PYGZbs{}}
+\PYG{g+go}{           d = \PYGZpc{}.3f, r(R1\PYGZlt{}=\PYGZgt{}R2) = \PYGZpc{}+.3f\PYGZsq{}\PYGZbs{}}
+\PYG{g+go}{           \PYGZpc{} (tau, d, r) )}
 \PYG{g+go}{ tau(R1,R2) = +0.073, d = 0.356, r(R1\PYGZlt{}=\PYGZgt{}R2) = +0.026}
 \end{sphinxVerbatim}
 
@@ -480,7 +484,7 @@ Let us now compute the normalized majority margin \sphinxstyleemphasis{r(\textle
 \PYG{g+go}{    nf.netFlowsRanking,ValuedCorrelation=True)):}
 \PYG{g+go}{       print(\PYGZsq{}r(\PYGZpc{}s\PYGZlt{}=\PYGZgt{}nf) = \PYGZpc{}+.3f\PYGZsq{} \PYGZpc{} (item[1],item[0]) )}
 \PYG{g+go}{ r(JH\PYGZlt{}=\PYGZgt{}nf) = +0.500}
-\PYG{g+go}{ r(JPT\PYGZlt{}=\PYGZgt{}nf)  = +0.430}
+\PYG{g+go}{ r(JPT\PYGZlt{}=\PYGZgt{}nf) = +0.430}
 \PYG{g+go}{ r(AP\PYGZlt{}=\PYGZgt{}nf) = +0.323}
 \PYG{g+go}{ r(DR\PYGZlt{}=\PYGZgt{}nf) = +0.263}
 \PYG{g+go}{ r(MR\PYGZlt{}=\PYGZgt{}nf) = +0.247}
@@ -1149,7 +1153,7 @@ For the corresponding confident outranking digraph, we require a confidence leve
 \PYG{g+go}{   \PYGZsq{}a7\PYGZsq{} | +0.00   +0.71   +0.57   +0.43   +0.29   +0.00   +0.00}
 \PYG{g+go}{        |(\PYGZhy{}0.65) (+1.00) (+1.00) (+0.99) (+0.95) (\PYGZhy{}0.00)  ( \PYGZhy{} )}
 \PYG{g+go}{ Valuation domain   : [\PYGZhy{}1.000; +1.000]}
-\PYG{g+go}{ Uncertainty model  : triangular(a=2.0,b=2.0)}
+\PYG{g+go}{ Uncertainty model  : triangular(a=0,b=2w)}
 \PYG{g+go}{ Likelihood domain  : [\PYGZhy{}1.0;+1.0]}
 \PYG{g+go}{ Confidence level   : 0.80 (90.0\PYGZpc{})}
 \PYG{g+go}{ Confident majority : 0.14 (57.1\PYGZpc{})}

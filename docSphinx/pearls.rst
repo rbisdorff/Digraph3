@@ -72,7 +72,7 @@ In marketing studies, interviewees will not always respond to all the submitted 
 A motivating data set
 .....................
 
-Let us consider such a performance tableau gathering a *Movie Magazine* 's rating of some movies that could actually be seen in town [1]_ (see :numref:`graffiti07_1`).
+Let us consider such a performance tableau gathering a *Movie Magazine* 's rating of some movies that could be seen in town [1]_ (see :numref:`graffiti07_1`).
 
 .. code-block:: pycon
 
@@ -88,7 +88,7 @@ Let us consider such a performance tableau gathering a *Movie Magazine* 's ratin
 
    *Graffiti* magazine's movie ratings from September 2007
 
-15 journalists and movie critics provide here their rating of 25 movies: 5 stars (*masterpiece*), 4 stars (*must be seen*), 3 stars (*excellent*), 2 stars (*good*), 1 star (*could be seen*), -1 star (*I do not like*), -2 (*I hate*), NA (*not seen*).
+15 journalists and movie critics provide here their rating of 25 movies: 5 stars (*masterpiece*), 4 stars (*must be seen*), 3 stars (*excellent*), 2 stars (*good*), 1 star (*may be seen*), -1 star (*I don't like*), -2 (*I hate*), NA (*not seen*).
 
 To aggregate all the critics' rating opinions, the *Graffiti* magazine provides for each movie a global score computed as an *average grade*, just ignoring the *not seen* data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic *SJ*, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
 
@@ -106,7 +106,7 @@ A better approach is to rank the movies on the basis of pairwise bipolar-valued 
 
    *Graffiti* magazine's ordered movie ratings from September 2007
 
-There is no doubt that movie *mv_QS*, with 6 '*must be seen*' marks, is correctly best-ranked and the movie *mv_TV* is worst-ranked with five '*don't like*' marks.
+There is no doubt that movie *mv_QS*, with 6 '*must be seen*' marks, is correctly best-ranked and the movie *mv_TV* is worst-ranked with three '*don't like*' and two '*may be seen*' marks.
 
 Modelling pairwise bipolar-valued rating opinions
 .................................................
@@ -312,7 +312,9 @@ We may verify these relations with help of the corresponding equivalence digraph
            for y in eq.actions:
                M += eq.relation[x][y]
                D += abs(eq.relation[x][y])
-   >>> print('r(R1<=>R2) = %+.3f, d = %.3f, tau = %+.3f' % (M/n2,D/n2,M/D))
+   >>> print('r(R1<=>R2) = %+.3f,\
+              d = %.3f, tau = %+.3f'\
+	      % (M/n2,D/n2,M/D))
     r(R1<=>R2) = +0.026, d = 0.356, tau = +0.073  
 
 In general we simply use the :py:func:`digraphs.Digraph.computeOrdinalCorrelation` method which renders a dictionary with a '*correlation*' (*tau*) and a '*determination*' (*d*) attribute. We may recover *r(<=>)* by multiplying *tau* with *d* (see :numref:`ordInd2` Line 4). 
@@ -326,7 +328,9 @@ In general we simply use the :py:func:`digraphs.Digraph.computeOrdinalCorrelatio
    >>> tau = corrR1R2['correlation']
    >>> d = corrR1R2['determination']
    >>> r = tau * d
-   >>> print('tau(R1,R2) = %+.3f, d = %.3f, r(R1<=>R2) = %+.3f' % (tau, d, r))
+   >>> print('tau(R1,R2) = %+.3f,\
+              d = %.3f, r(R1<=>R2) = %+.3f'\
+	      % (tau, d, r) )
     tau(R1,R2) = +0.073, d = 0.356, r(R1<=>R2) = +0.026
 
 We provide for convenience a direct :py:meth:`digraphs.showCorrelation` method:
@@ -385,7 +389,7 @@ Let us now compute the normalized majority margin *r(<=>)*  of the equivalence b
        nf.netFlowsRanking,ValuedCorrelation=True)): 
           print('r(%s<=>nf) = %+.3f' % (item[1],item[0]) )
     r(JH<=>nf) = +0.500
-    r(JPT<=>nf)  = +0.430
+    r(JPT<=>nf) = +0.430
     r(AP<=>nf) = +0.323
     r(DR<=>nf) = +0.263
     r(MR<=>nf) = +0.247
@@ -999,7 +1003,7 @@ For the corresponding confident outranking digraph, we require a confidence leve
       'a7' | +0.00   +0.71   +0.57   +0.43   +0.29   +0.00   +0.00  
 	   |(-0.65) (+1.00) (+1.00) (+0.99) (+0.95) (-0.00)  ( - )  
     Valuation domain   : [-1.000; +1.000] 
-    Uncertainty model  : triangular(a=2.0,b=2.0) 
+    Uncertainty model  : triangular(a=0,b=2w) 
     Likelihood domain  : [-1.0;+1.0] 
     Confidence level   : 0.80 (90.0%) 
     Confident majority : 0.14 (57.1%) 
