@@ -30,7 +30,8 @@ Tutorials of the Digraph3 resources
 .. only:: html 
 
     .. contents:: Content Table
-       :depth: 2	
+       :depth: 1
+       :local:
 
 .. highlight:: python
 	:linenothreshold: 2

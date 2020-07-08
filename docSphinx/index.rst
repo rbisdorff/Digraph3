@@ -1,8 +1,9 @@
 Documentation of the Digraph3 resources
 =======================================
 :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
+	 https://rbisdorff.github.io/
 :Version: Revision: Python 3.8
-:Copyright: `R. Bisdorff <author.html>`_ Copyright 2013-2020
+:Copyright: R. Bisdorff Copyright 2013-2020
 
 .. _Documents:
 

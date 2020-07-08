@@ -14,7 +14,7 @@
          cautionBorderColor={named}{Cyan},
          cautionBgColor={named}{LightCyan}}
 
-========================
+
 Digraph3 Advanced Topics
 ========================
 
