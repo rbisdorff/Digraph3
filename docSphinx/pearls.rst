@@ -1072,7 +1072,7 @@ Now, what becomes this 90%-confident outranking digraph when we require a strong
      'a7' |  +0.00   +0.71   +0.57   +0.43   +0.00   +0.00   +0.00  
 	  | (-0.65) (+1.00) (+1.00) (+0.99) (+0.95) (-0.00)  ( - )  
     Valuation domain   : [-1.000; +1.000] 
-    Uncertainty model  : triangular(a=2.0,b=2.0) 
+    Uncertainty model  : triangular(a=0,b=2w) 
     Likelihood domain  : [-1.0;+1.0] 
     Confidence level   : 0.98 (99.0%) 
     Confident majority : 0.29 (64.3%) 
@@ -1105,7 +1105,7 @@ Finally, what becomes the previous 90%-confident outranking digraph if the uncer
      'a7' |  +0.00   +0.71   +0.57   +0.43   +0.29   +0.00   +0.00  
 	  | (-0.49) (+1.00) (+1.00) (+0.95) (+0.84) (-0.00)  ( - )  
     Valuation domain   : [-1.000; +1.000] 
-    Uncertainty model  : uniform(a=2.0,b=2.0) 
+    Uncertainty model  : uniform(a=0,b=2w) 
     Likelihood domain  : [-1.0;+1.0] 
     Confidence level   : 0.80 (90.0%) 
     Confident majority : 0.14 (57.1%) 
