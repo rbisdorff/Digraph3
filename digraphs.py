@@ -10343,15 +10343,16 @@ class ConverseDigraph(Digraph):
 
 class FusionDigraph(Digraph):
     """
-    Instantiates the epistemic disjunctive (default) or conjunctive fusion of 
+    Instantiates the epistemic fusion of 
     two given Digraph instances called dg1 and dg2.
 
     Parameter:
 
-        * operator = "o-max (default)" | "o-min" : epistemic disjunctive, resp. conjunctive fusion operator.
+        * operator = "o-max (default)" | "o-min | o-fusion" :
+        epistemic disjunctive, resp. conjunctive, resp. avarage fusion operator.
     """
 
-    def __init__(self,dg1,dg2,operator="o-max"):
+    def __init__(self,dg1,dg2,operator="o-max",weights=None):
         from copy import deepcopy
         from digraphsTools import omin, omax
         self.name = 'fusion-'+dg1.name+'-'+dg2.name
@@ -10371,10 +10372,15 @@ class FusionDigraph(Digraph):
                 if x == y:
                     fx[y] = Med
                 else:
-                    if operator == "o-min":
+                    if operator == "o-max":
+                        fx[y] = omax(Med,(dg1x[y],dg2x[y]))
+                    elif operator == "o-fusion":
+                        fx[y] = ofusion(Med,(dg1x[y],dg2x[y]),weights)
+                    elif operator == "o-min":
                         fx[y] = omin(Med,(dg1x[y],dg2x[y]))
                     else:
-                        fx[y] = omax(Med,(dg1x[y],dg2x[y]))
+                        print('!! Error: wrong operator %s argument' % operator)
+                        return
         self.relation = fusionRelation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
@@ -10388,7 +10394,7 @@ class FusionLDigraph(Digraph):
         * operator = "o-max" (default) | "o-min" : epistemic disjunctive or conjunctive fusion)
     """
 
-    def __init__(self,L,operator="o-max"):
+    def __init__(self,L,operator="o-max",weights=None):
         from copy import deepcopy
         self.name = 'fusion-'+L[0].name
         self.actions = deepcopy(L[0].actions)
@@ -10408,6 +10414,8 @@ class FusionLDigraph(Digraph):
                     fx[y] = omin(Med,args)
                 elif operator == "o-max":
                     fx[y] = omax(Med,args)
+                elif operator == "o-fusion":
+                    fx[y] = ofusion(Med,args,weights)     
                 else:
                     print('Error: invalid epistemic fusion operator %s' % operator)
         self.relation = fusionRelation

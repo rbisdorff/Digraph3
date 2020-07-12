@@ -3,7 +3,7 @@ About the author
 ================
 
 :Author: **Raymond BISDORFF**, Emeritus Professor of *Computer Science* and *Applied Mathematics*, University of Luxembourg [raymond.bisdorff@uni.lu]
-:Url: https://rbisdorff.github.io/
+:URL: https://rbisdorff.github.io/
 :Address: 50, Bvd G-D Charlotte, L-1130 Luxembourg (Europe)
 :Phone: 00 352 45 64 46 (Home Office)
 
@@ -85,6 +85,6 @@ Publications
 
 .. raw:: html
 	 
-   <a href="http://orbilu.uni.lu/simple-search?query=%28%28uid%3A50000801%29%29&amp;title=List+of+Publications+by+R.Bisdorff&amp;sort_by0=1&amp;order0=DESC&amp;sort_by1=3&amp;order1=ASC&amp;sort_by2=2&amp;order2=ASC" target="_blank">List of published work by descending date</a>
+   <a href="http://orbilu.uni.lu/simple-search?query=%28%28uid%3A50000801%29%29&amp;title=List+of+Publications+by+R.Bisdorff&amp;sort_by0=1&amp;order0=DESC&amp;sort_by1=3&amp;order1=ASC&amp;sort_by2=2&amp;order2=ASC" target="_blank"><font size=+2>List of published work by descending date</font></a>
 
 

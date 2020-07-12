@@ -134,6 +134,56 @@ def all_perms(str):
             for i in range(len(perm)+1):
                 yield perm[:i] + str[0:1] + perm[i:]
 
+#symmetric average epistemic fusion operator
+def ofusion(Med,L,weights=None,Debug=False):
+    """
+    [Weighted] Average epistemic data fusion for bipolar outranking characteristics
+    computation: Med is the valuation domain median and L is a list of
+    r-valued statement characteristics.
+
+    With only **positive** or only **negative** [and median] characteristic values,
+    the *ofusion* operator  renders the [weghted] average of the characteristics values.
+    
+    The mixture of **both positive and negative** characteristic values results in
+    an **indeterminate** value.
+
+    Likewise to a mean, the *ofusion* operator is not associative.
+    We therefore first assemble separately all positive, negative and null values 
+    and operate *ofusion* on the three assembled values.
+    
+    """
+    terms = list(L)
+    nt = len(terms)
+    termsPlus = Decimal('0')
+    np = 0
+    termsMinus = Decimal('0')
+    nm = 0
+##    termsNuls = []
+    if weights == None:
+        weights = [1 for i in range(nt)]
+    sumWeights = 0
+    for i in range(nt):
+        sumWeights += weights[i]
+        if terms[i] > Med:
+            termsPlus += terms[i]*Decimal(str(weights[i]))
+            np += weights[i]
+        elif terms[i] < Med:
+            termsMinus += terms[i]*Decimal(str(weights[i]))
+            nm += weights[i]
+##        else:
+##            termsNuls.append(terms[i])
+##    if Debug:
+##        print('terms', terms)
+##        print('termsPlus',termsPlus)
+##        print('termsMinus', termsMinus)
+##        print('termsNuls', termsNuls)
+    if np > 0 and nm == 0:
+        return termsPlus/Decimal(str(sumWeights))
+    elif nm > 0 and np == 0:
+        return termsMinus/Decimal(str(sumWeights))
+    else:
+        return Med
+
 #epistemic or symmetric disjunction operator
 def omax(Med,L, Debug=False):
     """
@@ -147,21 +197,22 @@ def omax(Med,L, Debug=False):
     The mixture of **both positive and negative** arguments results in
     an **indeterminate** value.
 
-    Likewise to a mean, the *omax* operator is not associative. We therefore first assemble all positive, negative and null terms
-    and operate omax on the three assembled arguments.
+    Likewise to a mean, the *omax* operator is not associative.
+    We therefore first assemble all positive and negative terms
+    and operate omax on the two assembled arguments.
     
     """
     terms = list(L)
     termsPlus = []
     termsMinus = []
-    termsNuls = []
+##    termsNuls = []
     for i in range(len(terms)):
         if terms[i] > Med:
             termsPlus.append(terms[i])
         elif terms[i] < Med:
             termsMinus.append(terms[i])
-        else:
-            termsNuls.append(terms[i])
+##        else:
+##            termsNuls.append(terms[i])
 ##    if Debug:
 ##        print('terms', terms)
 ##        print('termsPlus',termsPlus)
@@ -189,21 +240,21 @@ def omin(Med,L, Debug=False):
     in an **indeterminate** value.
 
     Likewise to a mean, the *omin* operator is not associative.
-    We therefore first assemble all positive, negative and null terms
-    and operate *omin* on the three assembled arguments. 
+    We therefore first assemble separately all positive and negative terms
+    and operate *omin* on the two assembled arguments. 
 
     """
     terms = list(L)
     termsPlus = []
     termsMinus = []
-    termsNuls = []
+##    termsNuls = []
     for i in range(len(terms)):
-        if terms[i] >= Med:
+        if terms[i] > Med:
             termsPlus.append(terms[i])
-        elif terms[i] <= Med:
+        elif terms[i] < Med:
             termsMinus.append(terms[i])
-        else:
-            termsNuls.append(terms[i])
+##        else:
+##            termsNuls.append(terms[i])
 ##    if Debug:
 ##        print('terms', terms)
 ##        print('termsPlus',termsPlus)
@@ -211,16 +262,12 @@ def omin(Med,L, Debug=False):
 ##        print('termsNuls', termsNuls)
     np = len(termsPlus)
     nm = len(termsMinus)
-    if np > 0:
-        if nm > 0:
-            return Med
-        else:
-            return min(termsPlus)
+    if np > 0 and nm == 0:
+        return min(termsPlus)
+    elif nm > 0 and np == 0:
+        return max(termsMinus)
     else:
-        if nm > 0:
-            return max(termsMinus)
-        else:
-            return Med
+        return Med
 
 # generate all subsets of a given set E
 # Discrete Mathematics BINFO 1 course Lesson 2-sets
@@ -437,7 +484,18 @@ def total_size(o, handlers={}, verbose=False):
 if __name__ == '__main__':
     ######  scratch pad for testing the module components
 
-    print(grayCode(4))
+    from randomDigraphs import *
+    g1 = RandomValuationDigraph(order=5,seed=1)
+    g2 = RandomValuationDigraph(order=5,seed=2)
+    g3 = RandomValuationDigraph(order=5,seed=3)
+    from digraphs import FusionLDigraph
+    fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-fusion')
+    g1.showRelationTable()
+    g2.showRelationTable()
+    g3.showRelationTable()
+    fga.showRelationTable()
+
+##    print(grayCode(4))
 ##    #print(list(generateBipolarGrayCode(4)))
 ##    print(list(generateGrayCode(4)))
 ##    print(list(generateLooplessGrayCode(4)))
