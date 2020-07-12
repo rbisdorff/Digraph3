@@ -176,6 +176,56 @@
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">perm</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                 <span class="k">yield</span> <span class="n">perm</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">perm</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
 
+<span class="c1">#symmetric average epistemic fusion operator</span>
+<div class="viewcode-block" id="ofusion"><a class="viewcode-back" href="../techDoc.html#digraphsTools.ofusion">[docs]</a><span class="k">def</span> <span class="nf">ofusion</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    [Weighted] Average epistemic data fusion for bipolar outranking characteristics</span>
+<span class="sd">    computation: Med is the valuation domain median and L is a list of</span>
+<span class="sd">    r-valued statement characteristics.</span>
+
+<span class="sd">    With only **positive** or only **negative** [and median] characteristic values,</span>
+<span class="sd">    the *ofusion* operator  renders the [weghted] average of the characteristics values.</span>
+<span class="sd">    </span>
+<span class="sd">    The mixture of **both positive and negative** characteristic values results in</span>
+<span class="sd">    an **indeterminate** value.</span>
+
+<span class="sd">    Likewise to a mean, the *ofusion* operator is not associative.</span>
+<span class="sd">    We therefore first assemble separately all positive, negative and null values </span>
+<span class="sd">    and operate *ofusion* on the three assembled values.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    <span class="n">nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span>
+    <span class="n">termsPlus</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">termsMinus</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
+    <span class="n">nm</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1">##    termsNuls = []</span>
+    <span class="k">if</span> <span class="n">weights</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="p">)]</span>
+    <span class="n">sumWeights</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="p">):</span>
+        <span class="n">sumWeights</span> <span class="o">+=</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+            <span class="n">termsPlus</span> <span class="o">+=</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="n">np</span> <span class="o">+=</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
+            <span class="n">termsMinus</span> <span class="o">+=</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="n">nm</span> <span class="o">+=</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            termsNuls.append(terms[i])</span>
+<span class="c1">##    if Debug:</span>
+<span class="c1">##        print(&#39;terms&#39;, terms)</span>
+<span class="c1">##        print(&#39;termsPlus&#39;,termsPlus)</span>
+<span class="c1">##        print(&#39;termsMinus&#39;, termsMinus)</span>
+<span class="c1">##        print(&#39;termsNuls&#39;, termsNuls)</span>
+    <span class="k">if</span> <span class="n">np</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">termsPlus</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">sumWeights</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">np</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">termsMinus</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">sumWeights</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Med</span></div>
+
 <span class="c1">#epistemic or symmetric disjunction operator</span>
 <div class="viewcode-block" id="omax"><a class="viewcode-back" href="../techDoc.html#digraphsTools.omax">[docs]</a><span class="k">def</span> <span class="nf">omax</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -189,21 +239,22 @@
 <span class="sd">    The mixture of **both positive and negative** arguments results in</span>
 <span class="sd">    an **indeterminate** value.</span>
 
-<span class="sd">    Likewise to a mean, the *omax* operator is not associative. We therefore first assemble all positive, negative and null terms</span>
-<span class="sd">    and operate omax on the three assembled arguments.</span>
+<span class="sd">    Likewise to a mean, the *omax* operator is not associative.</span>
+<span class="sd">    We therefore first assemble all positive and negative terms</span>
+<span class="sd">    and operate omax on the two assembled arguments.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">terms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
     <span class="n">termsPlus</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">termsMinus</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">termsNuls</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1">##    termsNuls = []</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
             <span class="n">termsPlus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
         <span class="k">elif</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
             <span class="n">termsMinus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">termsNuls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            termsNuls.append(terms[i])</span>
 <span class="c1">##    if Debug:</span>
 <span class="c1">##        print(&#39;terms&#39;, terms)</span>
 <span class="c1">##        print(&#39;termsPlus&#39;,termsPlus)</span>
@@ -231,21 +282,21 @@
 <span class="sd">    in an **indeterminate** value.</span>
 
 <span class="sd">    Likewise to a mean, the *omin* operator is not associative.</span>
-<span class="sd">    We therefore first assemble all positive, negative and null terms</span>
-<span class="sd">    and operate *omin* on the three assembled arguments. </span>
+<span class="sd">    We therefore first assemble separately all positive and negative terms</span>
+<span class="sd">    and operate *omin* on the two assembled arguments. </span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">terms</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
     <span class="n">termsPlus</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">termsMinus</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">termsNuls</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1">##    termsNuls = []</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)):</span>
-        <span class="k">if</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">Med</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
             <span class="n">termsPlus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="k">elif</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">Med</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
             <span class="n">termsMinus</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">termsNuls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">terms</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            termsNuls.append(terms[i])</span>
 <span class="c1">##    if Debug:</span>
 <span class="c1">##        print(&#39;terms&#39;, terms)</span>
 <span class="c1">##        print(&#39;termsPlus&#39;,termsPlus)</span>
@@ -253,16 +304,12 @@
 <span class="c1">##        print(&#39;termsNuls&#39;, termsNuls)</span>
     <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
     <span class="n">nm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">np</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Med</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">termsPlus</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">np</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">nm</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">termsMinus</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Med</span></div>
+        <span class="k">return</span> <span class="n">Med</span></div>
 
 <span class="c1"># generate all subsets of a given set E</span>
 <span class="c1"># Discrete Mathematics BINFO 1 course Lesson 2-sets</span>
@@ -479,7 +526,18 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1">######  scratch pad for testing the module components</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="n">grayCode</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+    <span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="n">g1</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">g2</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">g3</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">FusionLDigraph</span>
+    <span class="n">fga</span> <span class="o">=</span> <span class="n">FusionLDigraph</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span><span class="n">g2</span><span class="p">,</span><span class="n">g3</span><span class="p">],</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-fusion&#39;</span><span class="p">)</span>
+    <span class="n">g1</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="n">g2</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="n">g3</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="n">fga</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+
+<span class="c1">##    print(grayCode(4))</span>
 <span class="c1">##    #print(list(generateBipolarGrayCode(4)))</span>
 <span class="c1">##    print(list(generateGrayCode(4)))</span>
 <span class="c1">##    print(list(generateLooplessGrayCode(4)))</span>

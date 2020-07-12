@@ -151,7 +151,7 @@
 <ul>
 <li><dl>
 <dt><a class="reference internal" href="#digraphs-label"><span class="std std-ref">digraphs module</span></a></dt><dd><p>Main part of the Digraph3 source code with the root <a class="reference external" href="techDoc.html#digraphs.Digraph">Digraph</a> class.</p>
-<div class="graphviz"><img src="_images/inheritance-9cb54c555d40ea069640911aa07ee659ea1bbbce.png" alt="Inheritance diagram of digraphs" usemap="#inheritancec93c7841f3" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="_images/inheritance-438216296e20f68324301a51f15a4568ad05ffa3.png" alt="Inheritance diagram of digraphs" usemap="#inheritancec93c7841f3" class="inheritance graphviz" /></div>
 <map id="inheritancec93c7841f3" name="inheritancec93c7841f3">
 <area shape="rect" id="node1" href="#digraphs.AsymmetricPartialDigraph" target="_top" title="Renders the asymmetric part of a Digraph instance." alt="" coords="193,5,414,27"/>
 <area shape="rect" id="node2" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="5,565,121,587"/>
@@ -167,7 +167,7 @@
 <area shape="rect" id="node12" href="#digraphs.DualDigraph" target="_top" title="Instantiates the dual ( = negated valuation) Digraph object from a deep copy of a given other Digraph instance." alt="" coords="232,436,374,458"/>
 <area shape="rect" id="node13" href="#digraphs.EmptyDigraph" target="_top" title="Parameters:" alt="" coords="227,479,380,501"/>
 <area shape="rect" id="node14" href="#digraphs.EquivalenceDigraph" target="_top" title="Instantiates the logical equivalence digraph of two bipolar" alt="" coords="211,522,396,544"/>
-<area shape="rect" id="node15" href="#digraphs.FusionDigraph" target="_top" title="Instantiates the epistemic disjunctive (default) or conjunctive fusion of " alt="" coords="227,565,380,587"/>
+<area shape="rect" id="node15" href="#digraphs.FusionDigraph" target="_top" title="Instantiates the epistemic fusion of " alt="" coords="227,565,380,587"/>
 <area shape="rect" id="node16" href="#digraphs.FusionLDigraph" target="_top" title="Instantiates the epistemic fusion a list L of Digraph instances." alt="" coords="224,608,383,630"/>
 <area shape="rect" id="node17" href="#digraphs.GraphBorder" target="_top" title="Instantiates the partial digraph induced by its border," alt="" coords="232,651,375,673"/>
 <area shape="rect" id="node18" href="#digraphs.GraphInner" target="_top" title="Instantiates the partial digraph induced by the complement of its border," alt="" coords="236,694,371,716"/>
@@ -2769,20 +2769,22 @@ equivalence valuations.</p>
 
 <dl class="py class">
 <dt id="digraphs.FusionDigraph">
-<em class="property">class </em><code class="sig-prename descclassname">digraphs.</code><code class="sig-name descname">FusionDigraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dg1</span></em>, <em class="sig-param"><span class="n">dg2</span></em>, <em class="sig-param"><span class="n">operator</span><span class="o">=</span><span class="default_value">'o-max'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#FusionDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.FusionDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Instantiates the epistemic disjunctive (default) or conjunctive fusion of 
+<em class="property">class </em><code class="sig-prename descclassname">digraphs.</code><code class="sig-name descname">FusionDigraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dg1</span></em>, <em class="sig-param"><span class="n">dg2</span></em>, <em class="sig-param"><span class="n">operator</span><span class="o">=</span><span class="default_value">'o-max'</span></em>, <em class="sig-param"><span class="n">weights</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#FusionDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.FusionDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instantiates the epistemic fusion of 
 two given Digraph instances called dg1 and dg2.</p>
 <p>Parameter:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>operator = “o-max (default)” | “o-min” : epistemic disjunctive, resp. conjunctive fusion operator.</p></li>
+<li><p>operator := “o-max (default)” | “o-min | o-fusion” :
+epistemic disjunctive, resp. conjunctive, resp. avarage
+fusion operator.</p></li>
 </ul>
 </div></blockquote>
 </dd></dl>
 
 <dl class="py class">
 <dt id="digraphs.FusionLDigraph">
-<em class="property">class </em><code class="sig-prename descclassname">digraphs.</code><code class="sig-name descname">FusionLDigraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">L</span></em>, <em class="sig-param"><span class="n">operator</span><span class="o">=</span><span class="default_value">'o-max'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#FusionLDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.FusionLDigraph" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">digraphs.</code><code class="sig-name descname">FusionLDigraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">L</span></em>, <em class="sig-param"><span class="n">operator</span><span class="o">=</span><span class="default_value">'o-max'</span></em>, <em class="sig-param"><span class="n">weights</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#FusionLDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.FusionLDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instantiates the epistemic fusion a list L of Digraph instances.</p>
 <p>Parameter:</p>
 <blockquote>
@@ -9047,6 +9049,21 @@ Algorithm L</p>
 </dd></dl>
 
 <dl class="py function">
+<dt id="digraphsTools.ofusion">
+<code class="sig-prename descclassname">digraphsTools.</code><code class="sig-name descname">ofusion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Med</span></em>, <em class="sig-param"><span class="n">L</span></em>, <em class="sig-param"><span class="n">weights</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#ofusion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.ofusion" title="Permalink to this definition">¶</a></dt>
+<dd><p>[Weighted] Average epistemic data fusion for bipolar outranking characteristics
+computation: Med is the valuation domain median and L is a list of
+r-valued statement characteristics.</p>
+<p>With only <strong>positive</strong> or only <strong>negative</strong> [and median] characteristic values,
+the <em>ofusion</em> operator  renders the [weghted] average of the characteristics values.</p>
+<p>The mixture of <strong>both positive and negative</strong> characteristic values results in
+an <strong>indeterminate</strong> value.</p>
+<p>Likewise to a mean, the <em>ofusion</em> operator is not associative.
+We therefore first assemble separately all positive, negative and null values 
+and operate <em>ofusion</em> on the three assembled values.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt id="digraphsTools.omax">
 <code class="sig-prename descclassname">digraphsTools.</code><code class="sig-name descname">omax</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Med</span></em>, <em class="sig-param"><span class="n">L</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#omax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.omax" title="Permalink to this definition">¶</a></dt>
 <dd><p>Epistemic <strong>disjunction</strong> for bipolar outranking characteristics
@@ -9056,8 +9073,9 @@ r-valued statement characteristics.</p>
 with <strong>negative</strong> arguments, a <strong>min</strong>.</p>
 <p>The mixture of <strong>both positive and negative</strong> arguments results in
 an <strong>indeterminate</strong> value.</p>
-<p>Likewise to a mean, the <em>omax</em> operator is not associative. We therefore first assemble all positive, negative and null terms
-and operate omax on the three assembled arguments.</p>
+<p>Likewise to a mean, the <em>omax</em> operator is not associative.
+We therefore first assemble all positive and negative terms
+and operate omax on the two assembled arguments.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -9070,8 +9088,8 @@ with <strong>negative</strong> arguments, a <strong>max</strong>.</p>
 <p>The mixture of both <strong>positive and negative</strong> arguments results
 in an <strong>indeterminate</strong> value.</p>
 <p>Likewise to a mean, the <em>omin</em> operator is not associative.
-We therefore first assemble all positive, negative and null terms
-and operate <em>omin</em> on the three assembled arguments.</p>
+We therefore first assemble separately all positive and negative terms
+and operate <em>omin</em> on the two assembled arguments.</p>
 </dd></dl>
 
 <dl class="py function">

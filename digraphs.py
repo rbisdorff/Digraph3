@@ -10348,8 +10348,9 @@ class FusionDigraph(Digraph):
 
     Parameter:
 
-        * operator = "o-max (default)" | "o-min | o-fusion" :
-        epistemic disjunctive, resp. conjunctive, resp. avarage fusion operator.
+        * operator := "o-max (default)" | "o-min | o-fusion" :
+          epistemic disjunctive, resp. conjunctive, resp. avarage
+          fusion operator.
     """
 
     def __init__(self,dg1,dg2,operator="o-max",weights=None):
