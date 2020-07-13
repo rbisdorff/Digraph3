@@ -9692,6 +9692,156 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 
         print('\n')
 
+class SymmetricAverageFusionOutrankingDigraph(BipolarOutrankingDigraph):
+    """
+    in development !
+    """
+    def __init__(self,argPerfTab,actionsSubset=None,coalition=None,\
+                 CopyPerfTab=True,Normalized=True,Comments=False):
+        from copy import deepcopy
+        from time import time
+
+        # set initial time stamp
+        tt = time()
+        
+        # ----  performance tableau data input 
+        if argPerfTab == None:
+            print('Performance tableau required !')
+            #perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
+        elif isinstance(argPerfTab,(str)):
+            perfTab = PerformanceTableau(argPerfTab)
+        else:
+            perfTab = argPerfTab
+
+        # transfering the performance tableau data to self
+        self.name = 'symAvFusion_' + perfTab.name
+        # actions
+        if actionsSubset == None:
+            if isinstance(perfTab.actions,list):
+                actions = {}
+                for x in perfTab.actions:
+                    actions[x] = {'name': str(x)}
+                self.actions = actions
+            else:
+                if CopyPerfTab:
+                    self.actions = deepcopy(perfTab.actions)
+                else:
+                    self.actions = perfTab.actions
+        else:
+            actions = {}
+            for x in actionsSubset:
+                actions[x] = {'name': str(x)}
+            self.actions = actions
+     
+        # valuation domain
+        if Normalized:
+            Min =   Decimal('-1.0')
+            Med =   Decimal('0.0')
+            Max =   Decimal('1.0')
+        else:
+            Min =   Decimal('-100.0')
+            Med =   Decimal('0.0')
+            Max =   Decimal('100.0')
+        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        try:
+            self.valuationdomain['precision'] = perfTab.valuationPrecision
+        except:
+            self.valuationdomain['precision'] = Decimal('0')
+ 
+        # objectives and criteria
+        try:
+            if CopyPerfTab:
+                self.objectives = deepcopy(perfTab.objectives)
+            else:
+                self.objectives = perfTab.objectives
+        except:
+            pass
+        criteria = OrderedDict()
+        if coalition == None:
+            coalition = perfTab.criteria.keys()
+        for g in coalition:
+            if CopyPerfTab:
+                criteria[g] = deepcopy(perfTab.criteria[g])
+            else:
+                criteria[g] = perfTab.criteria[g]
+        self.criteria = criteria
+        self.convertWeight2Decimal()
+
+        #  install method Data and parameters
+        methodData = {}
+        try:
+            valuationType = perfTab.parameter['valuationType']
+            variant = perfTab.parameter['variant']
+        except:
+            valuationType = 'bipolar'
+            variant = 'standard'
+        methodData['parameter'] = {'valuationType': valuationType, 'variant': variant}
+        try:
+            vetoType = perfTab.parameter['vetoType']
+            methodData['parameter']['vetoType'] = vetoType
+        except:
+            vetoType = 'normal'
+            methodData['parameter']['vetoType'] = vetoType
+        if vetoType == 'bipolar':
+            hasBipolarVeto = True
+        self.methodData = methodData
+
+        # insert performance Data
+        if CopyPerfTab:
+            self.evaluation = deepcopy(perfTab.evaluation)
+        else:
+            self.evaluation = perfTab.evaluation
+        try:
+            if CopyPerfTab:
+                self.description = deepcopy(perfTab.description)
+        except:
+            pass
+        # init general digraph Data
+        self.order = len(self.actions)
+        
+        # finished data input time stamp
+        self.runTimes = {'dataInput': time()-tt }
+
+        # ---------- construct outranking relation
+        # initial time stamp
+        tcp = time()
+        
+        actions = self.actions
+        criteria = self.criteria
+        margG = []
+        for g in criteria:
+            gg = BipolarOutrankingDigraph(t,coalition=[g])
+            margG.append(gg)
+
+        # finished relation computing time stamp
+        self.runTimes['computeRelation'] = time() - tcp
+
+        margG = []
+        for g in t.criteria:
+            print(g)
+            gg = BipolarOutrankingDigraph(t,coalition=[g],\
+                                          CopyPerfTab=CopyPerfTab,\
+                                          Normalized=True)
+            margG.append(gg)
+        weights = [criteria[g]['weight'] for g in criteria]
+        fg = FusionLDigraph(margG,'o-average',weights)
+        self.relation = deepcopy(fg.relation)
+        
+        # finished relation computing time stamp
+        self.runTimes['computeRelation'] = time() - tcp
+
+        # ----  computing the gamma sets
+        tg = time()
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        self.runTimes['gammaSets'] = time() - tg 
+
+        # total constructor time
+        self.runTimes['totalTime'] = time() - tt
+        if Comments:
+            print(self)
+
+
 class _RubisRestServer(ServerProxy):
     """
     xmlrpc-cgi Proxy Server for accessing on-line
