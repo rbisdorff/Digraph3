@@ -868,3 +868,30 @@ def testmaxHoleSize():
     g.computeMaxHoleSize(Comments=True)
     print('Nbr of holes', g.nbrOfHoles)
     print('Maximal hole size', g.maxHoleSize) 
+
+def testFusionOperators():
+    print('*------- test fusion operators ------*')
+    from randomDigraphs import RandomValuationDigraph
+    g1 = RandomValuationDigraph(order=5,seed=1)
+    g2 = RandomValuationDigraph(order=5,seed=2)
+    g3 = RandomValuationDigraph(order=5,seed=3)
+    from digraphs import FusionLDigraph
+    g1.showRelationTable()
+    g2.showRelationTable()
+    g3.showRelationTable()
+    print('===> o-max')
+    fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-max')
+    fga.showRelationTable()
+    print('===> o-min')
+    fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-min')
+    fga.showRelationTable()
+    print('===> o-average')
+    fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-average')
+    fga.showRelationTable()
+    print('===> o-average, weights = [1,2,3]')
+    fga = FusionLDigraph([g1,g2,g3],weights=[1,2,3],operator='o-average')
+    fga.showRelationTable()
+
+
+
+    

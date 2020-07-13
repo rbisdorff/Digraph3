@@ -2775,9 +2775,10 @@ two given Digraph instances called dg1 and dg2.</p>
 <p>Parameter:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>operator := “o-max (default)” | “o-min | o-fusion” :
-epistemic disjunctive, resp. conjunctive, resp. avarage
+<li><p>operator := “o-max (default)” | “o-min | o-average” :
+symmetrix disjunctive, resp. conjunctive, resp. avarage
 fusion operator.</p></li>
+<li><p>weights := [a,b]: if None weights = [1,1]</p></li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -2789,7 +2790,10 @@ fusion operator.</p></li>
 <p>Parameter:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>operator = “o-max” (default) | “o-min” : epistemic disjunctive or conjunctive fusion)</p></li>
+<li><p>operator := “o-max” (default) | “o-min” | “0-average:
+epistemic disjunctive, conjunctive or symmetric average fusion.</p></li>
+<li><p>weights := [a,b, …]: len(weights) matching len(L).
+If None, weights = [1 for i in range(len(L))].</p></li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -9049,21 +9053,6 @@ Algorithm L</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="digraphsTools.ofusion">
-<code class="sig-prename descclassname">digraphsTools.</code><code class="sig-name descname">ofusion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Med</span></em>, <em class="sig-param"><span class="n">L</span></em>, <em class="sig-param"><span class="n">weights</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#ofusion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.ofusion" title="Permalink to this definition">¶</a></dt>
-<dd><p>[Weighted] Average epistemic data fusion for bipolar outranking characteristics
-computation: Med is the valuation domain median and L is a list of
-r-valued statement characteristics.</p>
-<p>With only <strong>positive</strong> or only <strong>negative</strong> [and median] characteristic values,
-the <em>ofusion</em> operator  renders the [weghted] average of the characteristics values.</p>
-<p>The mixture of <strong>both positive and negative</strong> characteristic values results in
-an <strong>indeterminate</strong> value.</p>
-<p>Likewise to a mean, the <em>ofusion</em> operator is not associative.
-We therefore first assemble separately all positive, negative and null values 
-and operate <em>ofusion</em> on the three assembled values.</p>
-</dd></dl>
-
-<dl class="py function">
 <dt id="digraphsTools.omax">
 <code class="sig-prename descclassname">digraphsTools.</code><code class="sig-name descname">omax</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Med</span></em>, <em class="sig-param"><span class="n">L</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#omax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.omax" title="Permalink to this definition">¶</a></dt>
 <dd><p>Epistemic <strong>disjunction</strong> for bipolar outranking characteristics
@@ -9107,6 +9096,21 @@ and operate <em>omin</em> on the two assembled arguments.</p>
 <p><em>p</em> is an upper-closed cumulative probabilitiy.</p>
 <p>Renders the quantile <em>q(p)</em>,
 i.e. the observation such that the probability to be lower or equal is <em>p</em>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="digraphsTools.symmetricAverage">
+<code class="sig-prename descclassname">digraphsTools.</code><code class="sig-name descname">symmetricAverage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Med</span></em>, <em class="sig-param"><span class="n">L</span></em>, <em class="sig-param"><span class="n">weights</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#symmetricAverage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphsTools.symmetricAverage" title="Permalink to this definition">¶</a></dt>
+<dd><p>[Weighted] symmetric average data fusion for bipolar outranking characteristics
+computation: Med is the valuation domain median and L is a list of
+r-valued statement characteristics.</p>
+<p>With only <strong>positive</strong> or only <strong>negative</strong> [and median] characteristic values,
+the <em>symmetricAverage</em> operator  renders the [weghted] average of the characteristics values.</p>
+<p>The mixture of <strong>both positive and negative</strong> characteristic values results in
+an <strong>indeterminate</strong> value.</p>
+<p>Likewise to a mean, the <em>symmetric</em> operator is not associative.
+We therefore first assemble separately all positive, negative and null values 
+and operate <em>ofusion</em> on the three assembled values.</p>
 </dd></dl>
 
 <dl class="py function">

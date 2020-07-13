@@ -134,20 +134,20 @@ def all_perms(str):
             for i in range(len(perm)+1):
                 yield perm[:i] + str[0:1] + perm[i:]
 
-#symmetric average epistemic fusion operator
-def ofusion(Med,L,weights=None,Debug=False):
+#symmetric average fusion operator
+def symmetricAverage(Med,L,weights=None,Debug=False):
     """
-    [Weighted] Average epistemic data fusion for bipolar outranking characteristics
+    [Weighted] symmetric average data fusion for bipolar outranking characteristics
     computation: Med is the valuation domain median and L is a list of
     r-valued statement characteristics.
 
     With only **positive** or only **negative** [and median] characteristic values,
-    the *ofusion* operator  renders the [weghted] average of the characteristics values.
+    the *symmetricAverage* operator  renders the [weghted] average of the characteristics values.
     
     The mixture of **both positive and negative** characteristic values results in
     an **indeterminate** value.
 
-    Likewise to a mean, the *ofusion* operator is not associative.
+    Likewise to a mean, the *symmetric* operator is not associative.
     We therefore first assemble separately all positive, negative and null values 
     and operate *ofusion* on the three assembled values.
     
@@ -489,10 +489,17 @@ if __name__ == '__main__':
     g2 = RandomValuationDigraph(order=5,seed=2)
     g3 = RandomValuationDigraph(order=5,seed=3)
     from digraphs import FusionLDigraph
-    fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-fusion')
+    #fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-average')
     g1.showRelationTable()
     g2.showRelationTable()
     g3.showRelationTable()
+    fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-max')
+    fga.showRelationTable()
+    fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-min')
+    fga.showRelationTable()
+    fga = FusionLDigraph([g1,g2,g3],weights=None,operator='o-average')
+    fga.showRelationTable()
+    fga = FusionLDigraph([g1,g2,g3],weights=[1,2,3],operator='o-average')
     fga.showRelationTable()
 
 ##    print(grayCode(4))

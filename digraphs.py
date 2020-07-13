@@ -10348,9 +10348,10 @@ class FusionDigraph(Digraph):
 
     Parameter:
 
-        * operator := "o-max (default)" | "o-min | o-fusion" :
-          epistemic disjunctive, resp. conjunctive, resp. avarage
+        * operator := "o-max (default)" | "o-min | o-average" :
+          symmetrix disjunctive, resp. conjunctive, resp. avarage
           fusion operator.
+        * weights := [a,b]: if None weights = [1,1]
     """
 
     def __init__(self,dg1,dg2,operator="o-max",weights=None):
@@ -10375,12 +10376,13 @@ class FusionDigraph(Digraph):
                 else:
                     if operator == "o-max":
                         fx[y] = omax(Med,(dg1x[y],dg2x[y]))
-                    elif operator == "o-fusion":
-                        fx[y] = ofusion(Med,(dg1x[y],dg2x[y]),weights)
+                    elif operator == "o-average":
+                        fx[y] = symmetricAverage(Med,(dg1x[y],dg2x[y]),weights)
                     elif operator == "o-min":
                         fx[y] = omin(Med,(dg1x[y],dg2x[y]))
                     else:
-                        print('!! Error: wrong operator %s argument' % operator)
+                        print('!! Error: wrong fusion operator: %s' % operator)
+                        print('operator := "o-max (default)" | "o-min" | "o-average"') 
                         return
         self.relation = fusionRelation
         self.gamma = self.gammaSets()
@@ -10392,7 +10394,11 @@ class FusionLDigraph(Digraph):
 
     Parameter:
 
-        * operator = "o-max" (default) | "o-min" : epistemic disjunctive or conjunctive fusion)
+        * operator := "o-max" (default) | "o-min" | "0-average:
+          epistemic disjunctive, conjunctive or symmetric average fusion.
+        * weights := [a,b, ...]: len(weights) matching len(L).
+          If None, weights = [1 for i in range(len(L))].
+        
     """
 
     def __init__(self,L,operator="o-max",weights=None):
@@ -10415,10 +10421,12 @@ class FusionLDigraph(Digraph):
                     fx[y] = omin(Med,args)
                 elif operator == "o-max":
                     fx[y] = omax(Med,args)
-                elif operator == "o-fusion":
-                    fx[y] = ofusion(Med,args,weights)     
+                elif operator == "o-average":
+                    fx[y] = symmetricAverage(Med,args,weights)     
                 else:
                     print('Error: invalid epistemic fusion operator %s' % operator)
+                    print('operator := "o-max (default)" | "o-min" | "o-average"') 
+                    return
         self.relation = fusionRelation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
