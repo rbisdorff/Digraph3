@@ -1,4 +1,5 @@
 #!/Usr/bin/env python3
+##############################
 """
 Python3+ implementation of Digraph3 tools
 
@@ -19,6 +20,7 @@ Copyright (C) 2016-2020 Raymond Bisdorff
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 """
+###################################
 __version__ = "Branch: 3.8 $"
 
 #from digraphs import *

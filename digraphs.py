@@ -1,5 +1,5 @@
 #!/Usr/bin/env python3
-
+#########################
 """
 Python3+ implementation of the digraphs module, root module of the Digraph3 resources.
 
@@ -20,7 +20,6 @@ Copyright (C) 2006-2019  Raymond Bisdorff
     51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 """
-
 #######################
 
 __version__ = "Branch: 3.8 $"
