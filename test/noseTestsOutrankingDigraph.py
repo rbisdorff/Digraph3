@@ -679,25 +679,6 @@ def testXMCDARubisSolver():
         problemFileName='testXMCDA',\
         valuationType='robust')
 
-##def testRubisRestServer():
-##    print('*------ test RubisRestServer class ----*')
-##    from time import sleep
-##    t = RandomCBPerformanceTableau(numberOfActions=5,\
-##                                   numberOfCriteria=7,\
-##                                   weightDistribution='equiobjectives',
-##                                   )
-##    t.saveXMCDA2('test')
-##    t = XMCDA2PerformanceTableau('test')
-##    solver1 = RubisRestServer(Debug=True)
-##    solver1.ping()
-##    solver1.submitProblem(t,valuation='robust',Debug=True)
-##    sleep(5)
-##    solver1.saveXMCDA2Solution()
-##    solver2 = RubisRestServer(Debug=True)
-##    solver2.submitXMCDA2Problem('test',Debug=False)
-##    sleep(5)
-##    solver2.saveXMCDA2Solution()
-
 def testFusionLDigraph():
     print('==>> Testing FusionLDigraph instantiation')
     t = Random3ObjectivesPerformanceTableau()
@@ -707,3 +688,16 @@ def testFusionLDigraph():
     gfus = FusionLDigraph([geco,genv,gsoc],operator='o-max')
     g = BipolarOutrankingDigraph(t,Normalized=True)
     print(g.computeOrdinalCorrelation(gfus))
+
+def testAverageFusionLDigraphs():
+    print('==>> Testing Average Fusion Digraphs instantiation')
+    from random import randint
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
+                                   numberOfCriteria=9,\
+                                   vetoProbability=0.5,\
+                                   seed=randint(1,1000))
+    print(t)
+    afg = ObjectivesFusionOutrankingDigraph(t,Comments=True)
+    afg.showRelationTable()
+    afg = SymmetricAverageFusionOutrankingDigraph(t,Comments=True)
+    afg.showRelationTable()

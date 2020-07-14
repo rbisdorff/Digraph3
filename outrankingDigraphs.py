@@ -9692,6 +9692,133 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 
         print('\n')
 
+class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
+    """
+    in development !
+    """
+    def __init__(self,argPerfTab,actionsSubset=None,\
+                 CopyPerfTab=True,Comments=False):
+        from copy import deepcopy
+        from time import time
+
+        # set initial time stamp
+        tt = time()
+        
+        # ----  performance tableau data input 
+        if argPerfTab == None:
+            print('Performance tableau required !')
+            #perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
+        elif isinstance(argPerfTab,(str)):
+            perfTab = PerformanceTableau(argPerfTab)
+        else:
+            perfTab = argPerfTab
+
+        # transfering the performance tableau data to self
+        self.name = 'symAvFusion_' + perfTab.name
+        # actions
+        if actionsSubset == None:
+            if isinstance(perfTab.actions,list):
+                actions = {}
+                for x in perfTab.actions:
+                    actions[x] = {'name': str(x)}
+                self.actions = actions
+            else:
+                if CopyPerfTab:
+                    self.actions = deepcopy(perfTab.actions)
+                else:
+                    self.actions = perfTab.actions
+        else:
+            actions = {}
+            for x in actionsSubset:
+                actions[x] = {'name': str(x)}
+            self.actions = actions
+     
+        # valuation domain
+        Min =   Decimal('-1.0')
+        Med =   Decimal('0.0')
+        Max =   Decimal('1.0')
+        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        try:
+            self.valuationdomain['precision'] = perfTab.valuationPrecision
+        except:
+            self.valuationdomain['precision'] = Decimal('0')
+ 
+        # objectives and criteria
+        try:
+            if CopyPerfTab:
+                self.objectives = deepcopy(perfTab.objectives)
+                self.criteria = deepcopy(perfTab.criteria)
+            else:
+                self.objectives = perfTab.objectives
+                self.criteria = perfTab.criteria
+        except:
+            print('!!! Error: performance tableau has no objectives')
+            return
+
+        #  install method Data and parameters
+        methodData = {}
+        try:
+            valuationType = perfTab.parameter['valuationType']
+            variant = perfTab.parameter['variant']
+        except:
+            valuationType = 'bipolar'
+            variant = 'standard'
+        methodData['parameter'] = {'valuationType': valuationType, 'variant': variant}
+        try:
+            vetoType = perfTab.parameter['vetoType']
+            methodData['parameter']['vetoType'] = vetoType
+        except:
+            vetoType = 'normal'
+            methodData['parameter']['vetoType'] = vetoType
+        if vetoType == 'bipolar':
+            hasBipolarVeto = True
+        self.methodData = methodData
+
+        # insert performance Data
+        if CopyPerfTab:
+            self.evaluation = deepcopy(perfTab.evaluation)
+        else:
+            self.evaluation = perfTab.evaluation
+        try:
+            if CopyPerfTab:
+                self.description = deepcopy(perfTab.description)
+        except:
+            pass
+        
+        # init general digraph Data
+        self.order = len(self.actions)
+        
+        # finished data input time stamp
+        self.runTimes = {'dataInput': time()-tt }
+
+        # ---------- construct outranking relation
+        # initial time stamp
+        tcp = time()
+        
+        actions = self.actions
+        objectives = self.objectives
+        margObj = []
+        for obj in objectives:
+            og = BipolarOutrankingDigraph(perfTab,coalition=objectives[obj]['criteria'])
+            margObj.append(og)
+        weights = [objectives[obj]['weight'] for obj in objectives]
+        fg = FusionLDigraph(margObj,'o-average',weights)
+        self.relation = deepcopy(fg.relation)
+
+        # finished relation computing time stamp
+        self.runTimes['computeRelation'] = time() - tcp
+
+        # ----  computing the gamma sets
+        tg = time()
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        self.runTimes['gammaSets'] = time() - tg 
+
+        # total constructor time
+        self.runTimes['totalTime'] = time() - tt
+        if Comments:
+            print(self)
+
 class SymmetricAverageFusionOutrankingDigraph(BipolarOutrankingDigraph):
     """
     in development !
@@ -9810,16 +9937,7 @@ class SymmetricAverageFusionOutrankingDigraph(BipolarOutrankingDigraph):
         criteria = self.criteria
         margG = []
         for g in criteria:
-            gg = BipolarOutrankingDigraph(t,coalition=[g])
-            margG.append(gg)
-
-        # finished relation computing time stamp
-        self.runTimes['computeRelation'] = time() - tcp
-
-        margG = []
-        for g in t.criteria:
-            print(g)
-            gg = BipolarOutrankingDigraph(t,coalition=[g],\
+            gg = BipolarOutrankingDigraph(perfTab,coalition=[g],\
                                           CopyPerfTab=CopyPerfTab,\
                                           Normalized=True)
             margG.append(gg)
@@ -10059,7 +10177,11 @@ if __name__ == "__main__":
 ##    g.showRelationTable(hasLPDDenotation=True,ReflexiveTerms=False)
     g.showVetos()
     g.showConsiderablePerformancesPolarisation()       
-    
+    afg = ObjectivesFusionOutrankingDigraph(t,Comments=True)
+    afg.showRelationTable()
+    afg = SymmetricAverageFusionOutrankingDigraph(t,Comments=True)
+    afg.showRelationTable()
+
                   
 ##    g.showRelationTable(StabilityDenotation=True)
 ##    rg = RobustOutrankingDigraph(t,Debug=False)
@@ -10143,42 +10265,4 @@ if __name__ == "__main__":
 
     
 #############################
-# Log record for changes:
-# $Log: outrankingDigraphs.py,v $
-# Revision 1.43  2013/01/01 14:10:53  bisi
-# added computePrudentBestChoiceRecommendation() method to the Digraph class
-#
-# Revision 1.42  2012/07/31 09:25:18  bisi
-# Added a constructor ConverseDigraph() for the reciprocal of a digraph
-#
-# Revision 1.38  2012/06/21 08:34:13  bisi
-# Added strict and weak Condorcet Winners detecters
-#
-# Revision 1.37  2012/06/20 18:35:38  bisi
-# Abstracted rankingByChoosing related methods to the generic Digraph class
-#
-# Revision 1.28  2012/06/16 12:49:03  bisi
-# refactoring ordinal correlation computation
-#
-# Revision 1.24  2012/06/13 15:26:25  bisi
-# Added ranking by choosing with progressive chordless circuits elimination
-#
-# Revision 1.22  2012/06/10 15:55:57  bisi
-# debugging digraph polarization methods
-#
-# Revision 1.17  2012/06/08 07:14:33  bisi
-# working on the ranking by choosing algorithm
-#
-# Revision 1.16  2012/06/07 12:15:47  bisi
-# working on chordless circuits elimination techniques
-#
-# Revision 1.15  2012/06/06 06:12:36  bisi
-# refining the circuits elimination strategy
-#
-# Revision 1.14  2012/06/05 11:28:31  bisi
-# new extraction of chordless odd cricuits
-#
-# Revision 1.9  2012/05/22 04:34:49  bisi
-# added equiobjectives weights generator to RandomCBPerformanceTableau()
-#
 ############################
