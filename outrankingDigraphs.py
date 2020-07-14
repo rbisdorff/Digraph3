@@ -9714,7 +9714,7 @@ class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
             perfTab = argPerfTab
 
         # transfering the performance tableau data to self
-        self.name = 'symAvFusion_' + perfTab.name
+        self.name = 'objectivesFusion_' + perfTab.name
         # actions
         if actionsSubset == None:
             if isinstance(perfTab.actions,list):
