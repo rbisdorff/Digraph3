@@ -1267,14 +1267,15 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
 ########################
 # multiprocessing workers
 def _worker(input):
+    global decomposition
     for Comments,args in iter(input.get, 'STOP'):
         result = _decompose(*args)
         if Comments:
             print(result)
-
-def _decompose(i, nc,tempDirName,componentRankingRule):
-    global perfTab
-    global decomposition
+            
+def _decompose(i, nc,tempDirName,perfTab,decomposition,componentRankingRule):
+    #global perfTab
+    #global decomposition
     from pickle import dumps
     from outrankingDigraphs import BipolarOutrankingDigraph
     from linearOrders import CopelandOrder,NetFlowsOrder
@@ -1330,6 +1331,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
     For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
 
     """
+
     def __init__(self,argPerfTab,\
                  quantiles=None,\
                  quantilesOrderingStrategy='average',\
@@ -1482,7 +1484,9 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 NUMBER_OF_WORKERS = nbrOfCPUs
                 tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
-                TASKS = [(Comments,(pos[0],nc,tempDirName,componentRankingRule)) for pos in tasksIndex]
+                TASKS = [(Comments,(pos[0],nc,tempDirName,\
+                          perfTab,decomposition,componentRankingRule))\
+                         for pos in tasksIndex]
                 task_queue = Queue()
                 for task in TASKS:
                     task_queue.put(task)
@@ -1802,6 +1806,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         If nbrCores is not set, the os.cpu_count() function is used to determine the number of available cores.
         """
         if Threading:
+            #from multiprocessing import set_start_method
+            #set_start_method("spawn")
             from multiprocessing import Pool
             from os import cpu_count
             if nbrCores == None:
@@ -2715,6 +2721,8 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
         else:   # if self.sortingParameters['Threading'] == True:
                 from copy import copy, deepcopy
                 from pickle import dumps, loads, load, dump
+                #from multiprocessing import set_start_method
+                #set_start_method("spawn")
                 from multiprocessing import Process, Queue,active_children, cpu_count
                 if Comments:
                     print('Processing the %d components' % nc )

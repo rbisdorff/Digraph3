@@ -18,6 +18,7 @@ from digraphsTools import *
 from digraphs import *
 from outrankingDigraphs import *
 from transitiveDigraphs import *
+from multiprocessing import Process, Lock, active_children, cpu_count
 
 
 class TransitiveDigraph(Digraph):
@@ -538,6 +539,43 @@ class KemenyOrdersFusion(TransitiveDigraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
+# myThread for KohlerArrawRaynaudFusion
+##        if Threading:
+##            from multiprocessing import Process, Lock, active_children, cpu_count
+class myKARThread(Process):
+    def __init__(self, threadID, name, direction, tempDirName, Debug):
+        Process.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.direction = direction
+        self.workingDirectory = tempDirName
+        self.Debug = Debug
+    def run(self):
+        from linearOrders import KohlerOrder
+        from pickle import dumps, loads
+        from os import chdir
+        chdir(self.workingDirectory)
+        from sys import setrecursionlimit
+        setrecursionlimit(2**20)
+        if self.Debug:
+            print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+        #threadLock.acquire()
+        fi = open('dumpDigraph.py','rb')
+        digraph = loads(fi.read())
+        fi.close()
+        if self.direction == 'best':
+            fo = open('ko.py','wb')
+            ko = KohlerOrder(digraph)
+            fo.write(dumps(ko.relation,-1))
+        elif self.direction == 'worst':
+            fo = open('ar.py','wb')
+            ar = KohlerOrder((~(-digraph)))
+            fo.write(dumps(ar.relation,-1))
+        fo.close()
+        #threadLock.release()
+
+
+
 class KohlerArrowRaynaudFusion(TransitiveDigraph):
     """
     Specialization of the abstract TransitiveDigraph class for 
@@ -557,38 +595,6 @@ class KohlerArrowRaynaudFusion(TransitiveDigraph):
         self.Debug=Debug
         self.Threading = Threading
         
-        if Threading:
-            from multiprocessing import Process, Lock, active_children, cpu_count
-            class myThread(Process):
-                def __init__(self, threadID, name, direction, tempDirName, Debug):
-                    Process.__init__(self)
-                    self.threadID = threadID
-                    self.name = name
-                    self.direction = direction
-                    self.workingDirectory = tempDirName
-                    self.Debug = Debug
-                def run(self):
-                    from pickle import dumps, loads
-                    from os import chdir
-                    chdir(self.workingDirectory)
-                    from sys import setrecursionlimit
-                    setrecursionlimit(2**20)
-                    if Debug:
-                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
-                    #threadLock.acquire()
-                    fi = open('dumpDigraph.py','rb')
-                    digraph = loads(fi.read())
-                    fi.close()
-                    if self.direction == 'best':
-                        fo = open('ko.py','wb')
-                        ko = KohlerOrder(digraph)
-                        fo.write(dumps(ko.relation,-1))
-                    elif self.direction == 'worst':
-                        fo = open('ar.py','wb')
-                        ar = KohlerOrder((~(-digraph)))
-                        fo.write(dumps(ar.relation,-1))
-                    fo.close()
-                    #threadLock.release()
                     
         digraph=deepcopy(outrankingDigraph)
         digraph.recodeValuation(-1.0,1.0)
@@ -610,8 +616,8 @@ class KohlerArrowRaynaudFusion(TransitiveDigraph):
                 pd = dumps(digraph,-1)
                 fo.write(pd)
                 fo.close()
-                threadBest = myThread(1,"ComputeBest","best",tempDirName,Debug)
-                threadWorst = myThread(2,"ComputeWorst","worst",tempDirName,Debug)
+                threadBest = myKARThread(1,"ComputeBest","best",tempDirName,Debug)
+                threadWorst = myKARThread(2,"ComputeWorst","worst",tempDirName,Debug)
                 threadBest.start()
                 threadWorst.start()
                 while active_children() != []:
@@ -657,6 +663,40 @@ class KohlerArrowRaynaudFusion(TransitiveDigraph):
         self.notGamma = self.notGammaSets()
 
 #---------------------
+# my Thread for the RankingByChoosing class
+class myRBCThread(Process):
+    def __init__(self, threadID, name, direction, tempDirName, CoDual, Debug):
+        Process.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.direction = direction
+        self.workingDirectory = tempDirName
+        self.CoDual = CoDual
+        self.Debug = Debug
+    def run(self):
+        from pickle import dumps, loads
+        from os import chdir
+        chdir(self.workingDirectory)
+        from sys import setrecursionlimit
+        setrecursionlimit(2**20)
+        Debug = self.Debug
+        CoDual = self.CoDual
+        if Debug:
+            print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+        #threadLock.acquire()
+        fi = open('dumpDigraph.py','rb')
+        digraph = loads(fi.read())
+        fi.close()
+        if self.direction == 'best':
+            fo = open('rbbc.py','wb')
+            rbbc = digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
+            fo.write(dumps(rbbc,-1))
+        elif self.direction == 'worst':
+            fo = open('rbwc.py','wb')
+            rbwc = digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
+            fo.write(dumps(rbwc,-1))
+        fo.close()
+
 class RankingByChoosingDigraph(TransitiveDigraph):
     """
     Specialization of the abstract TransitiveDigraph class for 
@@ -734,6 +774,7 @@ class RankingByChoosingDigraph(TransitiveDigraph):
         String += 'Store results       : %.5f\n' % self.runTimes['storing']
         return String 
 
+                    
     
     def __init__(self,other,
                  fusionOperator = "o-max",
@@ -754,40 +795,7 @@ class RankingByChoosingDigraph(TransitiveDigraph):
 
         runTimes = {}
         t0 = time()
-        if Threading:
-            from multiprocessing import Process, Lock, active_children, cpu_count
-            class myThread(Process):
-                def __init__(self, threadID, name, direction, tempDirName, Codual, Debug):
-                    Process.__init__(self)
-                    self.threadID = threadID
-                    self.name = name
-                    self.direction = direction
-                    self.workingDirectory = tempDirName
-                    self.Codual = Codual
-                    self.Debug = Debug
-                def run(self):
-                    from pickle import dumps, loads
-                    from os import chdir
-                    chdir(self.workingDirectory)
-                    from sys import setrecursionlimit
-                    setrecursionlimit(2**20)
-                    if Debug:
-                        print("Starting working in %s on %s" % (self.workingDirectory, self.name))
-                    #threadLock.acquire()
-                    fi = open('dumpDigraph.py','rb')
-                    digraph = loads(fi.read())
-                    fi.close()
-                    if self.direction == 'best':
-                        fo = open('rbbc.py','wb')
-                        rbbc = digraph.computeRankingByBestChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
-                        fo.write(dumps(rbbc,-1))
-                    elif self.direction == 'worst':
-                        fo = open('rbwc.py','wb')
-                        rbwc = digraph.computeRankingByLastChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
-                        fo.write(dumps(rbwc,-1))
-                    fo.close()
-                    #threadLock.release()
-                    
+        #if Threading:
         digraph=deepcopy(other)
         digraph.recodeValuation(-1.0,1.0)
         self.name = digraph.name
@@ -812,8 +820,8 @@ class RankingByChoosingDigraph(TransitiveDigraph):
                 pd = dumps(digraph,-1)
                 fo.write(pd)
                 fo.close()
-                threadBest = myThread(1,"ComputeBest","best",tempDirName,CoDual,Debug)
-                threadWorst = myThread(2,"ComputeWorst","worst",tempDirName,CoDual,Debug)
+                threadBest = myRBCThread(1,"ComputeBest","best",tempDirName,CoDual,Debug)
+                threadWorst = myRBCThread(2,"ComputeWorst","worst",tempDirName,CoDual,Debug)
                 threadBest.start()
                 threadWorst.start()
                 while active_children() != []:
@@ -1044,6 +1052,46 @@ class RankingByPrudentChoosingDigraph(RankingByChoosingDigraph):
             print('Determinateness : %.3f (%.3f)' % (corr['determination'],gdeter))
             print('Execution time  : %.4f sec.' % (t1-t0))
 
+# myPRIODThread for the prncipal fusion class
+from multiprocessing import Process, Lock, active_children, cpu_count
+class myPRIODThread(Process):
+    def __init__(self, threadID, name, direction,\
+                 tempDirName, imageType, plotFileName, Debug):
+        Process.__init__(self)
+        self.threadID = threadID
+        self.name = name
+        self.direction = direction
+        self.workingDirectory = tempDirName
+        self.imageType = imageType
+        self.plotFileName = plotFileName
+        self.Debug = Debug
+    def run(self):
+        from pickle import dumps, loads
+        from os import chdir
+        from linearOrders import PrincipalOrder
+        chdir(self.workingDirectory)
+        if self.Debug:
+            print("Starting working in %s on %s" % (self.workingDirectory,self.name) )
+        fi = open('dumpDigraph.py','rb')
+        digraph = loads(fi.read())
+        fi.close()
+        if self.direction == 'col':
+            fo = open('priCol.py','wb')
+            pc = PrincipalOrder(digraph,\
+                                Colwise=True,\
+                                imageType=self.imageType,\
+                                plotFileName=self.plotFileName,\
+                                Debug=self.Debug)
+            fo.write(dumps(pc,-1))
+        elif self.direction == 'row':
+            fo = open('priRow.py','wb')
+            pl = PrincipalOrder(digraph,\
+                                Colwise=False,\
+                                imageType=self.imageType,\
+                                plotFileName=self.plotFileName,\
+                                Debug=self.Debug)
+            fo.write(dumps(pl,-1))
+        fo.close()
 
 class PrincipalInOutDegreesOrderingFusion(TransitiveDigraph):
     """
@@ -1091,45 +1139,7 @@ class PrincipalInOutDegreesOrderingFusion(TransitiveDigraph):
         from linearOrders import PrincipalOrder
         from pickle import dumps, loads, load
 
-        if Threading:
-            from multiprocessing import Process, Lock, active_children, cpu_count
-            class myThread(Process):
-                def __init__(self, threadID, name, direction,\
-                             tempDirName, imageType, plotFileName, Debug):
-                    Process.__init__(self)
-                    self.threadID = threadID
-                    self.name = name
-                    self.direction = direction
-                    self.workingDirectory = tempDirName
-                    self.imageType = imageType
-                    self.plotFileName = plotFileName
-                    self.Debug = Debug
-                def run(self):
-                    from pickle import dumps, loads
-                    from os import chdir
-                    chdir(self.workingDirectory)
-                    if Debug:
-                        print("Starting working in %s on %s" % (self.workingDirectory,self.name) )
-                    fi = open('dumpDigraph.py','rb')
-                    digraph = loads(fi.read())
-                    fi.close()
-                    if self.direction == 'col':
-                        fo = open('priCol.py','wb')
-                        pc = PrincipalOrder(digraph,\
-                                            Colwise=True,\
-                                            imageType=imageType,\
-                                            plotFileName=plotFileName,\
-                                            Debug=Debug)
-                        fo.write(dumps(pc,-1))
-                    elif self.direction == 'row':
-                        fo = open('priRow.py','wb')
-                        pl = PrincipalOrder(digraph,\
-                                            Colwise=False,\
-                                            imageType=imageType,\
-                                            plotFileName=plotFileName,\
-                                            Debug=Debug)
-                        fo.write(dumps(pl,-1))
-                    fo.close()
+        #if Threading:
 
         digraph = deepcopy(other)
         digraph.recodeValuation(-1.0,1.0)
@@ -1156,12 +1166,12 @@ class PrincipalInOutDegreesOrderingFusion(TransitiveDigraph):
                 pd = dumps(digraph,-1)
                 fo.write(pd)
                 fo.close()
-                threadCol = myThread(1,"ComputeCol","col",\
+                threadCol = myPRIODThread(1,"ComputeCol","col",\
                                      tempDirName,\
                                      imageType=imageType,\
                                      plotFileName=plotFileName,\
                                      Debug=Debug)
-                threadRow = myThread(1,"ComputeRow","row",\
+                threadRow = myPRIODThread(1,"ComputeRow","row",\
                                      tempDirName,\
                                      imageType=imageType,\
                                      plotFileName=plotFileName,\
@@ -1737,7 +1747,7 @@ if __name__ == "__main__":
                                   numberOfCandidates=9,seed=201)
     g = CondorcetDigraph(v)
 ##    g = RandomBipolarOutrankingDigraph(Normalized=True)
-    rbc = RankingByChoosingDigraph(g,Threading=False)
+    rbc = RankingByChoosingDigraph(g,Threading=True,Debug=True)
     rbc.showRankingByChoosing()
     print(rbc)
     rbc.exportTopologicalGraphViz('test')

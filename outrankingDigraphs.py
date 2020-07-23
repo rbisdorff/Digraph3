@@ -26,6 +26,11 @@ from digraphsTools import *
 from digraphs import *
 from xmlrpc.client import ServerProxy
 from outrankingDigraphs import *
+from copy import copy, deepcopy
+from io import BytesIO
+from pickle import Pickler, dumps, loads, load
+from multiprocessing import Process, Lock,\
+                        active_children, cpu_count
 
 #-------------------------------------------
         
@@ -4197,6 +4202,78 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         else:
             return Decimal('0.0')
 
+# myBODGThread for BipolarOutrankingDigraph class
+class myBODGThread(Process):
+    def __init__(self, threadID,digraph,\
+                 InitialSplit, tempDirName,\
+                 splitActions,\
+                 hasNoVeto, hasBipolarVeto,\
+                 hasSymmetricThresholds, Debug):
+        Process.__init__(self)
+        self.threadID = threadID
+        self.digraph = digraph
+        self.InitialSplit = InitialSplit
+        self.workingDirectory = tempDirName
+        self.splitActions = splitActions
+        self.hasNoVeto = hasNoVeto
+        self.hasBipolarVeto = hasBipolarVeto,
+        self.hasSymmetricThresholds = hasSymmetricThresholds,
+        self.Debug = Debug
+    def run(self):
+        from io import BytesIO
+        from pickle import Pickler, dumps, loads
+        from os import chdir
+        chdir(self.workingDirectory)
+##                    if Debug:
+##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
+##                    fi = open('dumpSelf.py','rb')
+##                    digraph = loads(fi.read())
+##                    fi.close()
+        digraph = self.digraph
+        splitActions = self.splitActions
+##                    fiName = 'splitActions-'+str(self.threadID)+'.py'
+##                    fi = open(fiName,'rb')
+##                    splitActions = loads(fi.read())
+##                    fi.close()
+        # compute partiel relation
+        #if (not self.hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
+        #    constructRelation = BipolarOutrankingDigraph._constructRelation
+        #else:
+        constructRelation = BipolarOutrankingDigraph._constructRelationSimple
+        if self.InitialSplit:
+            #splitRelation = BipolarOutrankingDigraph._constructRelation(
+            splitRelation = constructRelation(
+                                digraph,digraph.criteria,\
+                                digraph.evaluation,
+                                initial=splitActions,
+                                #terminal=terminal,
+                                hasNoVeto=self.hasNoVeto,
+                                hasBipolarVeto=self.hasBipolarVeto,
+                                WithConcordanceRelation=False,
+                                WithVetoCounts=False,
+                                Debug=False,
+                                hasSymmetricThresholds=self.hasSymmetricThresholds)
+        else:
+            #splitRelation = BipolarOutrankingDigraph._constructRelation(
+            splitRelation = constructRelation(
+                                digraph,digraph.criteria,\
+                                digraph.evaluation,
+                                #initial=initial,
+                                terminal=splitActions,
+                                hasNoVeto=self.hasNoVeto,
+                                hasBipolarVeto=self.hasBipolarVeto,
+                                WithConcordanceRelation=False,
+                                WithVetoCounts=False,
+                                Debug=False,
+                                hasSymmetricThresholds=self.hasSymmetricThresholds)
+        # store partial relation
+        foName = 'splitRelation-'+str(self.threadID)+'.py'
+        fo = open(foName,'wb')
+        fo.write(dumps(splitRelation,-1))
+        fo.close()
+    # .......
+
+
 class BipolarOutrankingDigraph(OutrankingDigraph):
     """
     Specialization of the abstract OutrankingDigraph root class for generating
@@ -4516,78 +4593,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
             from copy import copy, deepcopy
             from io import BytesIO
             from pickle import Pickler, dumps, loads, load
-            from multiprocessing import Process, Lock,\
-                                        active_children, cpu_count
+            #from multiprocessing import Process, Lock,\
+            #                            active_children, cpu_count
             #Debug=True
-            class myThread(Process):
-                def __init__(self, threadID,digraph,\
-                             InitialSplit, tempDirName,\
-                             splitActions,\
-                             hasNoVeto, hasBipolarVeto,\
-                             hasSymmetricThresholds, Debug):
-                    Process.__init__(self)
-                    self.threadID = threadID
-                    self.digraph = digraph
-                    self.InitialSplit = InitialSplit
-                    self.workingDirectory = tempDirName
-                    self.splitActions = splitActions
-                    self.hasNoVeto = hasNoVeto
-                    self.hasBipolarVeto = hasBipolarVeto,
-                    hasSymmetricThresholds = hasSymmetricThresholds,
-                    self.Debug = Debug
-                def run(self):
-                    from io import BytesIO
-                    from pickle import Pickler, dumps, loads
-                    from os import chdir
-                    chdir(self.workingDirectory)
-##                    if Debug:
-##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
-##                    fi = open('dumpSelf.py','rb')
-##                    digraph = loads(fi.read())
-##                    fi.close()
-                    digraph = self.digraph
-                    splitActions = self.splitActions
-##                    fiName = 'splitActions-'+str(self.threadID)+'.py'
-##                    fi = open(fiName,'rb')
-##                    splitActions = loads(fi.read())
-##                    fi.close()
-                    # compute partiel relation
-                    if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
-                        constructRelation = BipolarOutrankingDigraph._constructRelation
-                    else:
-                        constructRelation = BipolarOutrankingDigraph._constructRelationSimple
-                    if self.InitialSplit:
-                        #splitRelation = BipolarOutrankingDigraph._constructRelation(
-                        splitRelation = constructRelation(
-                                            digraph,digraph.criteria,\
-                                            digraph.evaluation,
-                                            initial=splitActions,
-                                            #terminal=terminal,
-                                            hasNoVeto=hasNoVeto,
-                                            hasBipolarVeto=hasBipolarVeto,
-                                            WithConcordanceRelation=False,
-                                            WithVetoCounts=False,
-                                            Debug=False,
-                                            hasSymmetricThresholds=hasSymmetricThresholds)
-                    else:
-                        #splitRelation = BipolarOutrankingDigraph._constructRelation(
-                        splitRelation = constructRelation(
-                                            digraph,digraph.criteria,\
-                                            digraph.evaluation,
-                                            #initial=initial,
-                                            terminal=splitActions,
-                                            hasNoVeto=hasNoVeto,
-                                            hasBipolarVeto=hasBipolarVeto,
-                                            WithConcordanceRelation=False,
-                                            WithVetoCounts=False,
-                                            Debug=False,
-                                            hasSymmetricThresholds=hasSymmetricThresholds)
-                    # store partial relation
-                    foName = 'splitRelation-'+str(self.threadID)+'.py'
-                    fo = open(foName,'wb')
-                    fo.write(dumps(splitRelation,-1))
-                    fo.close()
-                # .......
              
             if Comments:
                 print('Threading ...')
@@ -4665,7 +4673,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
 ##                    spa = dumps(splitActions,-1)
 ##                    fo.write(spa)
 ##                    fo.close()
-                    splitThread = myThread(j,self,InitialSplit,
+                    splitThread = myBODGThread(j,self,InitialSplit,
                                            tempDirName,splitActions,
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)

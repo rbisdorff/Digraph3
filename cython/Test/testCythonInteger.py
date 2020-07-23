@@ -18,6 +18,15 @@
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 #######################
+if __name__ == '__main__':
+    from sys import platform
+    if platform == 'darwin':
+        print('start_method set to fork')
+        from multiprocessing import set_start_method, get_start_method, freeze_support
+        set_start_method('fork')
+        print(get_start_method())
+        freeze_support()
+    
 import outrankingDigraphs as ODG
 import cSparseIntegerOutrankingDigraphs as iBg
 #from SparseOutrankingDigraphs import *
@@ -25,8 +34,9 @@ from time import time
 from os import path
 from cRandPerfTabs import *
 from randomPerfTabs import Random3ObjectivesPerformanceTableau as R3ObjPT
-from multiprocessing import set_start_method
-
+#from multiprocessing import set_start_method, freeze_support
+#freeze_support()
+#set_start_method('fork')
 # parameters
 sampleSize = 1
 MP = True
@@ -35,7 +45,7 @@ nbrOfThreads = 8
 nbrOfSubProcesses = 0
 #set_start_method('fork')
 #componentThreadingThreshold = 500
-nbrActions = 50000
+nbrActions = 5000
 nbrCriteria = 21
 #commonPar = ('beta','variable',None)
 #commonPar = ('triangular','variable',0.5)
@@ -94,6 +104,7 @@ for s in range(sampleSize):
                                         seed=seed)
     print(tp2)
     print(time()-t0)
+    print(get_start_method())
 #    bg2 = iBg.SparseIntegerOutrankingDigraph(tp2,quantiles=qtiles,
     bg2 = iBg.cQuantilesRankingDigraph(tp2,quantiles=qtiles,
                                quantilesOrderingStrategy='average',
