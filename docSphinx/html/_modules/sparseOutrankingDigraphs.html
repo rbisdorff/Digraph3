@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sparseOutrankingDigraphs &#8212; Digraph3 3.8-3600+ documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -28,7 +29,8 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Digraph3 3.8-3600+ documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">sparseOutrankingDigraphs</a></li> 
       </ul>
     </div>  
 
@@ -1307,14 +1309,15 @@
 <span class="c1">########################</span>
 <span class="c1"># multiprocessing workers</span>
 <span class="k">def</span> <span class="nf">_worker</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">decomposition</span>
     <span class="k">for</span> <span class="n">Comments</span><span class="p">,</span><span class="n">args</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">input</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="s1">&#39;STOP&#39;</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">_decompose</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">_decompose</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">componentRankingRule</span><span class="p">):</span>
-    <span class="k">global</span> <span class="n">perfTab</span>
-    <span class="k">global</span> <span class="n">decomposition</span>
+            
+<span class="k">def</span> <span class="nf">_decompose</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">perfTab</span><span class="p">,</span><span class="n">decomposition</span><span class="p">,</span><span class="n">componentRankingRule</span><span class="p">):</span>
+    <span class="c1">#global perfTab</span>
+    <span class="c1">#global decomposition</span>
     <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span>
     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
     <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">CopelandOrder</span><span class="p">,</span><span class="n">NetFlowsOrder</span>
@@ -1370,6 +1373,7 @@
 <span class="sd">    For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                  <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>\
@@ -1522,7 +1526,9 @@
                 <span class="n">NUMBER_OF_WORKERS</span> <span class="o">=</span> <span class="n">nbrOfCPUs</span>
                 <span class="n">tasksIndex</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">decomposition</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">)]</span>
                 <span class="n">tasksIndex</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">pos</span><span class="p">:</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="n">TASKS</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Comments</span><span class="p">,(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">nc</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">componentRankingRule</span><span class="p">))</span> <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">tasksIndex</span><span class="p">]</span>
+                <span class="n">TASKS</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Comments</span><span class="p">,(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">nc</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span>\
+                          <span class="n">perfTab</span><span class="p">,</span><span class="n">decomposition</span><span class="p">,</span><span class="n">componentRankingRule</span><span class="p">))</span>\
+                         <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">tasksIndex</span><span class="p">]</span>
                 <span class="n">task_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
                 <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">TASKS</span><span class="p">:</span>
                     <span class="n">task_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
@@ -1842,6 +1848,8 @@
 <span class="sd">        If nbrCores is not set, the os.cpu_count() function is used to determine the number of available cores.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">Threading</span><span class="p">:</span>
+            <span class="c1">#from multiprocessing import set_start_method</span>
+            <span class="c1">#set_start_method(&quot;spawn&quot;)</span>
             <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
             <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">cpu_count</span>
             <span class="k">if</span> <span class="n">nbrCores</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -2755,6 +2763,8 @@
         <span class="k">else</span><span class="p">:</span>   <span class="c1"># if self.sortingParameters[&#39;Threading&#39;] == True:</span>
                 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
                 <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span><span class="p">,</span> <span class="n">dump</span>
+                <span class="c1">#from multiprocessing import set_start_method</span>
+                <span class="c1">#set_start_method(&quot;spawn&quot;)</span>
                 <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span><span class="p">,</span><span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>
                 <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Processing the </span><span class="si">%d</span><span class="s1"> components&#39;</span> <span class="o">%</span> <span class="n">nc</span> <span class="p">)</span>
@@ -3113,7 +3123,7 @@
 <span class="c1">##    pre = PreRankedOutrankingDigraph(tenv,Debug=True)</span>
 <span class="c1">##    print(pre.computeOrderCorrelation(pre.boostedOrder))</span>
 <span class="c1">##    tenv.showHTMLPerformanceHeatmap()</span>
-    <span class="n">MP</span>  <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">MP</span>  <span class="o">=</span> <span class="kc">True</span>
     <span class="n">nbrActions</span><span class="o">=</span><span class="mi">100</span>
 <span class="c1">##    t0 = time()</span>
 <span class="c1">##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=100)</span>
@@ -3153,6 +3163,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">bg1</span><span class="o">.</span><span class="n">estimateRankingCorrelation</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">,</span><span class="n">seed</span><span class="p">))</span>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -3167,7 +3178,7 @@
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -3182,12 +3193,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Digraph3 3.8-3600+ documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">sparseOutrankingDigraphs</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2020, Raymond Bisdorff.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>

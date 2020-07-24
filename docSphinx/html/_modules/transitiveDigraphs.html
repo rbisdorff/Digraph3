@@ -1,19 +1,20 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>transitiveDigraphs &#8212; Digraph3 3.8-3600+ documentation</title>
     <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -28,7 +29,8 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Digraph3 3.8-3600+ documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">transitiveDigraphs</a></li> 
       </ul>
     </div>  
 
@@ -58,6 +60,7 @@
 <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Lock</span><span class="p">,</span> <span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>
 
 
 <div class="viewcode-block" id="TransitiveDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph">[docs]</a><span class="k">class</span> <span class="nc">TransitiveDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
@@ -578,6 +581,43 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
 
+<span class="c1"># myThread for KohlerArrawRaynaudFusion</span>
+<span class="c1">##        if Threading:</span>
+<span class="c1">##            from multiprocessing import Process, Lock, active_children, cpu_count</span>
+<div class="viewcode-block" id="myKARThread"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.myKARThread">[docs]</a><span class="k">class</span> <span class="nc">myKARThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
+        <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">direction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">tempDirName</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
+<div class="viewcode-block" id="myKARThread.run"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.myKARThread.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">KohlerOrder</span>
+        <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
+        <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
+        <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">setrecursionlimit</span>
+        <span class="n">setrecursionlimit</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">20</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting working in </span><span class="si">%s</span><span class="s2"> on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="c1">#threadLock.acquire()</span>
+        <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dumpDigraph.py&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+        <span class="n">digraph</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+        <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;best&#39;</span><span class="p">:</span>
+            <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;ko.py&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">ko</span> <span class="o">=</span> <span class="n">KohlerOrder</span><span class="p">(</span><span class="n">digraph</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">ko</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;worst&#39;</span><span class="p">:</span>
+            <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;ar.py&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">ar</span> <span class="o">=</span> <span class="n">KohlerOrder</span><span class="p">((</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">digraph</span><span class="p">)))</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">ar</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+        <span class="c1">#threadLock.release()</span>
+
+
+
 <div class="viewcode-block" id="KohlerArrowRaynaudFusion"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.KohlerArrowRaynaudFusion">[docs]</a><span class="k">class</span> <span class="nc">KohlerArrowRaynaudFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the abstract TransitiveDigraph class for </span>
@@ -597,38 +637,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Threading</span> <span class="o">=</span> <span class="n">Threading</span>
         
-        <span class="k">if</span> <span class="n">Threading</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Lock</span><span class="p">,</span> <span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>
-            <span class="k">class</span> <span class="nc">myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-                <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
-                    <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">direction</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">tempDirName</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
-                <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                    <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
-                    <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
-                    <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
-                    <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">setrecursionlimit</span>
-                    <span class="n">setrecursionlimit</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">20</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting working in </span><span class="si">%s</span><span class="s2"> on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
-                    <span class="c1">#threadLock.acquire()</span>
-                    <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dumpDigraph.py&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-                    <span class="n">digraph</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-                    <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;best&#39;</span><span class="p">:</span>
-                        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;ko.py&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-                        <span class="n">ko</span> <span class="o">=</span> <span class="n">KohlerOrder</span><span class="p">(</span><span class="n">digraph</span><span class="p">)</span>
-                        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">ko</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-                    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;worst&#39;</span><span class="p">:</span>
-                        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;ar.py&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-                        <span class="n">ar</span> <span class="o">=</span> <span class="n">KohlerOrder</span><span class="p">((</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">digraph</span><span class="p">)))</span>
-                        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">ar</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-                    <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                    <span class="c1">#threadLock.release()</span>
                     
         <span class="n">digraph</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">outrankingDigraph</span><span class="p">)</span>
         <span class="n">digraph</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)</span>
@@ -650,8 +658,8 @@
                 <span class="n">pd</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">digraph</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
                 <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pd</span><span class="p">)</span>
                 <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="n">threadBest</span> <span class="o">=</span> <span class="n">myThread</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;ComputeBest&quot;</span><span class="p">,</span><span class="s2">&quot;best&quot;</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
-                <span class="n">threadWorst</span> <span class="o">=</span> <span class="n">myThread</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;ComputeWorst&quot;</span><span class="p">,</span><span class="s2">&quot;worst&quot;</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
+                <span class="n">threadBest</span> <span class="o">=</span> <span class="n">myKARThread</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;ComputeBest&quot;</span><span class="p">,</span><span class="s2">&quot;best&quot;</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
+                <span class="n">threadWorst</span> <span class="o">=</span> <span class="n">myKARThread</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;ComputeWorst&quot;</span><span class="p">,</span><span class="s2">&quot;worst&quot;</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
                 <span class="n">threadBest</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
                 <span class="n">threadWorst</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
                 <span class="k">while</span> <span class="n">active_children</span><span class="p">()</span> <span class="o">!=</span> <span class="p">[]:</span>
@@ -697,6 +705,40 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
 
 <span class="c1">#---------------------</span>
+<span class="c1"># my Thread for the RankingByChoosing class</span>
+<div class="viewcode-block" id="myRBCThread"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.myRBCThread">[docs]</a><span class="k">class</span> <span class="nc">myRBCThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span> <span class="n">CoDual</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
+        <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">direction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">tempDirName</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">CoDual</span> <span class="o">=</span> <span class="n">CoDual</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
+<div class="viewcode-block" id="myRBCThread.run"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.myRBCThread.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
+        <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
+        <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">setrecursionlimit</span>
+        <span class="n">setrecursionlimit</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">20</span><span class="p">)</span>
+        <span class="n">Debug</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span>
+        <span class="n">CoDual</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CoDual</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting working in </span><span class="si">%s</span><span class="s2"> on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+        <span class="c1">#threadLock.acquire()</span>
+        <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dumpDigraph.py&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+        <span class="n">digraph</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+        <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;best&#39;</span><span class="p">:</span>
+            <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;rbbc.py&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">rbbc</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">computeRankingByBestChoosing</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">rbbc</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;worst&#39;</span><span class="p">:</span>
+            <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;rbwc.py&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">rbwc</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">rbwc</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+
 <div class="viewcode-block" id="RankingByChoosingDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph">[docs]</a><span class="k">class</span> <span class="nc">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the abstract TransitiveDigraph class for </span>
@@ -774,6 +816,7 @@
         <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;Store results       : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;storing&#39;</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">String</span> 
 
+                    
     
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span>
                  <span class="n">fusionOperator</span> <span class="o">=</span> <span class="s2">&quot;o-max&quot;</span><span class="p">,</span>
@@ -794,40 +837,7 @@
 
         <span class="n">runTimes</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">Threading</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Lock</span><span class="p">,</span> <span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>
-            <span class="k">class</span> <span class="nc">myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-                <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span> <span class="n">Codual</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
-                    <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">direction</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">tempDirName</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">Codual</span> <span class="o">=</span> <span class="n">Codual</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
-                <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                    <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
-                    <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
-                    <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
-                    <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">setrecursionlimit</span>
-                    <span class="n">setrecursionlimit</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">20</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting working in </span><span class="si">%s</span><span class="s2"> on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
-                    <span class="c1">#threadLock.acquire()</span>
-                    <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dumpDigraph.py&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-                    <span class="n">digraph</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-                    <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;best&#39;</span><span class="p">:</span>
-                        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;rbbc.py&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-                        <span class="n">rbbc</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">computeRankingByBestChoosing</span><span class="p">(</span><span class="n">CppAgrum</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-                        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">rbbc</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-                    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;worst&#39;</span><span class="p">:</span>
-                        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;rbwc.py&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-                        <span class="n">rbwc</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">(</span><span class="n">CppAgrum</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-                        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">rbwc</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-                    <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                    <span class="c1">#threadLock.release()</span>
-                    
+        <span class="c1">#if Threading:</span>
         <span class="n">digraph</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">digraph</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">name</span>
@@ -852,8 +862,8 @@
                 <span class="n">pd</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">digraph</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
                 <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pd</span><span class="p">)</span>
                 <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="n">threadBest</span> <span class="o">=</span> <span class="n">myThread</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;ComputeBest&quot;</span><span class="p">,</span><span class="s2">&quot;best&quot;</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
-                <span class="n">threadWorst</span> <span class="o">=</span> <span class="n">myThread</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;ComputeWorst&quot;</span><span class="p">,</span><span class="s2">&quot;worst&quot;</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
+                <span class="n">threadBest</span> <span class="o">=</span> <span class="n">myRBCThread</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;ComputeBest&quot;</span><span class="p">,</span><span class="s2">&quot;best&quot;</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
+                <span class="n">threadWorst</span> <span class="o">=</span> <span class="n">myRBCThread</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;ComputeWorst&quot;</span><span class="p">,</span><span class="s2">&quot;worst&quot;</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
                 <span class="n">threadBest</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
                 <span class="n">threadWorst</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
                 <span class="k">while</span> <span class="n">active_children</span><span class="p">()</span> <span class="o">!=</span> <span class="p">[]:</span>
@@ -1084,6 +1094,46 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Determinateness : </span><span class="si">%.3f</span><span class="s1"> (</span><span class="si">%.3f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">corr</span><span class="p">[</span><span class="s1">&#39;determination&#39;</span><span class="p">],</span><span class="n">gdeter</span><span class="p">))</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Execution time  : </span><span class="si">%.4f</span><span class="s1"> sec.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">))</span></div>
 
+<span class="c1"># myPRIODThread for the prncipal fusion class</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Lock</span><span class="p">,</span> <span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>
+<div class="viewcode-block" id="myPRIODThread"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.myPRIODThread">[docs]</a><span class="k">class</span> <span class="nc">myPRIODThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span>\
+                 <span class="n">tempDirName</span><span class="p">,</span> <span class="n">imageType</span><span class="p">,</span> <span class="n">plotFileName</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
+        <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">direction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">tempDirName</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imageType</span> <span class="o">=</span> <span class="n">imageType</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plotFileName</span> <span class="o">=</span> <span class="n">plotFileName</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
+<div class="viewcode-block" id="myPRIODThread.run"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.myPRIODThread.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
+        <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
+        <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">PrincipalOrder</span>
+        <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting working in </span><span class="si">%s</span><span class="s2"> on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="p">)</span>
+        <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dumpDigraph.py&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+        <span class="n">digraph</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+        <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;col&#39;</span><span class="p">:</span>
+            <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;priCol.py&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">pc</span> <span class="o">=</span> <span class="n">PrincipalOrder</span><span class="p">(</span><span class="n">digraph</span><span class="p">,</span>\
+                                <span class="n">Colwise</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+                                <span class="n">imageType</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">imageType</span><span class="p">,</span>\
+                                <span class="n">plotFileName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">plotFileName</span><span class="p">,</span>\
+                                <span class="n">Debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">pc</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;row&#39;</span><span class="p">:</span>
+            <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;priRow.py&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">pl</span> <span class="o">=</span> <span class="n">PrincipalOrder</span><span class="p">(</span><span class="n">digraph</span><span class="p">,</span>\
+                                <span class="n">Colwise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+                                <span class="n">imageType</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">imageType</span><span class="p">,</span>\
+                                <span class="n">plotFileName</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">plotFileName</span><span class="p">,</span>\
+                                <span class="n">Debug</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
 
 <div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion">[docs]</a><span class="k">class</span> <span class="nc">PrincipalInOutDegreesOrderingFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1131,45 +1181,7 @@
         <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">PrincipalOrder</span>
         <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
 
-        <span class="k">if</span> <span class="n">Threading</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Lock</span><span class="p">,</span> <span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>
-            <span class="k">class</span> <span class="nc">myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-                <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span>\
-                             <span class="n">tempDirName</span><span class="p">,</span> <span class="n">imageType</span><span class="p">,</span> <span class="n">plotFileName</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
-                    <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">direction</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">tempDirName</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">imageType</span> <span class="o">=</span> <span class="n">imageType</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">plotFileName</span> <span class="o">=</span> <span class="n">plotFileName</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
-                <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                    <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
-                    <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
-                    <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting working in </span><span class="si">%s</span><span class="s2"> on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="p">)</span>
-                    <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dumpDigraph.py&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-                    <span class="n">digraph</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-                    <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;col&#39;</span><span class="p">:</span>
-                        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;priCol.py&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-                        <span class="n">pc</span> <span class="o">=</span> <span class="n">PrincipalOrder</span><span class="p">(</span><span class="n">digraph</span><span class="p">,</span>\
-                                            <span class="n">Colwise</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
-                                            <span class="n">imageType</span><span class="o">=</span><span class="n">imageType</span><span class="p">,</span>\
-                                            <span class="n">plotFileName</span><span class="o">=</span><span class="n">plotFileName</span><span class="p">,</span>\
-                                            <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-                        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">pc</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-                    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;row&#39;</span><span class="p">:</span>
-                        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;priRow.py&#39;</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-                        <span class="n">pl</span> <span class="o">=</span> <span class="n">PrincipalOrder</span><span class="p">(</span><span class="n">digraph</span><span class="p">,</span>\
-                                            <span class="n">Colwise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
-                                            <span class="n">imageType</span><span class="o">=</span><span class="n">imageType</span><span class="p">,</span>\
-                                            <span class="n">plotFileName</span><span class="o">=</span><span class="n">plotFileName</span><span class="p">,</span>\
-                                            <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-                        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-                    <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="c1">#if Threading:</span>
 
         <span class="n">digraph</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">digraph</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)</span>
@@ -1196,12 +1208,12 @@
                 <span class="n">pd</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">digraph</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
                 <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pd</span><span class="p">)</span>
                 <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="n">threadCol</span> <span class="o">=</span> <span class="n">myThread</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;ComputeCol&quot;</span><span class="p">,</span><span class="s2">&quot;col&quot;</span><span class="p">,</span>\
+                <span class="n">threadCol</span> <span class="o">=</span> <span class="n">myPRIODThread</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;ComputeCol&quot;</span><span class="p">,</span><span class="s2">&quot;col&quot;</span><span class="p">,</span>\
                                      <span class="n">tempDirName</span><span class="p">,</span>\
                                      <span class="n">imageType</span><span class="o">=</span><span class="n">imageType</span><span class="p">,</span>\
                                      <span class="n">plotFileName</span><span class="o">=</span><span class="n">plotFileName</span><span class="p">,</span>\
                                      <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-                <span class="n">threadRow</span> <span class="o">=</span> <span class="n">myThread</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;ComputeRow&quot;</span><span class="p">,</span><span class="s2">&quot;row&quot;</span><span class="p">,</span>\
+                <span class="n">threadRow</span> <span class="o">=</span> <span class="n">myPRIODThread</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;ComputeRow&quot;</span><span class="p">,</span><span class="s2">&quot;row&quot;</span><span class="p">,</span>\
                                      <span class="n">tempDirName</span><span class="p">,</span>\
                                      <span class="n">imageType</span><span class="o">=</span><span class="n">imageType</span><span class="p">,</span>\
                                      <span class="n">plotFileName</span><span class="o">=</span><span class="n">plotFileName</span><span class="p">,</span>\
@@ -1777,7 +1789,7 @@
                                   <span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 <span class="c1">##    g = RandomBipolarOutrankingDigraph(Normalized=True)</span>
-    <span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">rbc</span><span class="p">)</span>
     <span class="n">rbc</span><span class="o">.</span><span class="n">exportTopologicalGraphViz</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
@@ -1848,6 +1860,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -1862,7 +1875,7 @@
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1877,12 +1890,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Digraph3 3.8-3600+ documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">transitiveDigraphs</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2020, Raymond Bisdorff.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
     </div>
   </body>
 </html>
