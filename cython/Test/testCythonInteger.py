@@ -23,7 +23,7 @@ if __name__ == '__main__':
     if platform == 'darwin':
         print('start_method set to fork')
         from multiprocessing import set_start_method, get_start_method, freeze_support
-        set_start_method('fork')
+        set_start_method('spawn')
         print(get_start_method())
         freeze_support()
     

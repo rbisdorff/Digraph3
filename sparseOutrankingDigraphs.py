@@ -3081,7 +3081,7 @@ if __name__ == "__main__":
 ##    pre = PreRankedOutrankingDigraph(tenv,Debug=True)
 ##    print(pre.computeOrderCorrelation(pre.boostedOrder))
 ##    tenv.showHTMLPerformanceHeatmap()
-    MP  = False
+    MP  = True
     nbrActions=100
 ##    t0 = time()
 ##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=100)
