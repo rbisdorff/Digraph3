@@ -567,7 +567,7 @@ def testXMCDA2SaveReadPerformanceTableau():
     #t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),IntegerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
     #t.showAll()
     t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),IntegerWeights=True)
-    t.saveXMCDA('test')
+    t.saveXMCDA2('test')
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()
     t1 = XMCDA2PerformanceTableau('test')
