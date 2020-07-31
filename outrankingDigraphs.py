@@ -4337,6 +4337,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         return reprString
     
     def __init__(self,argPerfTab=None,\
+                 objectivesSubset=None,
+                 criteriaSubset=None,
                  coalition=None,\
                  actionsSubset=None,\
                  hasNoVeto=False,\
@@ -4406,22 +4408,44 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         except:
             self.valuationdomain['precision'] = Decimal('0')
             
-        # objectives and criteria
-        try:
-            if CopyPerfTab:
-                self.objectives = deepcopy(perfTab.objectives)
-            else:
-                self.objectives = perfTab.objectives
-        except:
-            pass
+        # objectives
+        if objectivesSubset == None:
+            try:
+                if CopyPerfTab:
+                    self.objectives = deepcopy(perfTab.objectives)
+                else:
+                    self.objectives = perfTab.objectives
+            except:
+                pass
+        else:
+            objectives = OrderedDict()
+            for obj in objectivesSubset:
+                if CopyPerfTab:
+                    objectives[obj] = deepcopy(perfTab.objectives[obj])
+                else:
+                    objectives[obj] = perfTab.objectives[obj]
+            self.objectives = objectives
+                
+        # criteria coalition
         criteria = OrderedDict()
-        if coalition == None:
-            coalition = perfTab.criteria.keys()
+        if objectivesSubset == None:
+            if coalition == None:
+                if criteriaSubset == None:
+                    coalition = list(perfTab.criteria.keys())
+                else:
+                    coalition = criteriaSubset
+        else:
+            coalition = []
+            for obj in objectives:
+                objCrit = self.objectives[obj]['criteria']
+                coalition += objCrit
+
         for g in coalition:
             if CopyPerfTab:
                 criteria[g] = deepcopy(perfTab.criteria[g])
             else:
                 criteria[g] = perfTab.criteria[g]
+                    
         self.criteria = criteria
         self.convertWeight2Decimal()
 
@@ -9699,7 +9723,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             
                 
         print('\n')
-
+    
 class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
     """
     in development !
@@ -9805,13 +9829,16 @@ class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
         
         actions = self.actions
         objectives = self.objectives
+        objectivesRelations = {}
         margObj = []
         for obj in objectives:
             og = BipolarOutrankingDigraph(perfTab,coalition=objectives[obj]['criteria'])
+            objectivesRelations[obj] = deepcopy(og.relation)
             margObj.append(og)
         weights = [objectives[obj]['weight'] for obj in objectives]
         fg = FusionLDigraph(margObj,'o-average',weights)
         self.relation = deepcopy(fg.relation)
+        self.objectivesRelations = objectivesRelations
 
         # finished relation computing time stamp
         self.runTimes['computeRelation'] = time() - tcp
@@ -9826,6 +9853,11 @@ class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
         self.runTimes['totalTime'] = time() - tt
         if Comments:
             print(self)
+
+class UnOpposedBipolarOutrankingDigraph(ObjectivesFusionOutrankingDigraph):
+    """
+    Renaming the ObjectivesFusionOutrankingDigraph.
+    """
 
 class SymmetricAverageFusionOutrankingDigraph(BipolarOutrankingDigraph):
     """
@@ -10177,18 +10209,20 @@ if __name__ == "__main__":
 ##                                   seed=102)
     t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
                                    numberOfCriteria=9,\
-                                    vetoProbability=0.5,\
-                                   seed=randint(1,1000))
-                                   #seed = 21)
+                                   vetoProbability=0.5,\
+                                   #seed=randint(1,1000),\
+                                   seed=21)
     g = BipolarOutrankingDigraph(t,Normalized=True,
-                                  tempDir=None,nbrCores=8,Comments=True,Debug=False)
+                                  tempDir=None,nbrCores=8,Comments=False,Debug=False)
 ##    g.showRelationTable(hasLPDDenotation=True,ReflexiveTerms=False)
-    g.showVetos()
-    g.showConsiderablePerformancesPolarisation()       
-    afg = ObjectivesFusionOutrankingDigraph(t,Comments=True)
+    g.showRelationTable()
+    g.exportGraphViz()
+##    g.showConsiderablePerformancesPolarisation()       
+    afg = UnOpposedBipolarOutrankingDigraph(t,Comments=False)
     afg.showRelationTable()
-    afg = SymmetricAverageFusionOutrankingDigraph(t,Comments=True)
-    afg.showRelationTable()
+    afg.exportGraphViz()
+##    afg = SymmetricAverageFusionOutrankingDigraph(t,Comments=True)
+##    afg.showRelationTable()
 
                   
 ##    g.showRelationTable(StabilityDenotation=True)
