@@ -4337,6 +4337,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         return reprString
     
     def __init__(self,argPerfTab=None,\
+                 objectivesSubset=None,
+                 criteriaSubset=None,
                  coalition=None,\
                  actionsSubset=None,\
                  hasNoVeto=False,\
@@ -4406,23 +4408,61 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         except:
             self.valuationdomain['precision'] = Decimal('0')
             
-        # objectives and criteria
-        try:
+        # objectives
+        if objectivesSubset == None:
+            try:
+                if CopyPerfTab:
+                    self.objectives = deepcopy(perfTab.objectives)
+                else:
+                    self.objectives = perfTab.objectives
+            except:
+                pass
+        else:
+            objectives = OrderedDict()
+            for obj in objectivesSubset:
+                if CopyPerfTab:
+                    objectives[obj] = deepcopy(perfTab.objectives[obj])
+                else:
+                    objectives[obj] = perfTab.objectives[obj]
+            self.objectives = objectives
+                
+        # criteria coalition
+        if criteriaSubset == None and objectivesSubset == None and coalition == None:
             if CopyPerfTab:
-                self.objectives = deepcopy(perfTab.objectives)
+                self.criteria = deepcopy(perfTab.criteria)
             else:
-                self.objectives = perfTab.objectives
-        except:
-            pass
-        criteria = OrderedDict()
-        if coalition == None:
-            coalition = perfTab.criteria.keys()
-        for g in coalition:
-            if CopyPerfTab:
-                criteria[g] = deepcopy(perfTab.criteria[g])
+                self.criteria = perfTab.criteria
+        else:
+            criteria = OrderedDict()
+            if criteriaSubset == None:
+                if objectivesSubset == None and coalition == None:
+                    if criteriaSubset == None:
+                        coalition = list(perfTab.criteria.keys())
+                    else:
+                        coalition = criteriaSubset
+
+                elif objectivesSubset != None and coalition == None:
+                    coalition = []
+                    for obj in objectivesSubset:
+                        objCrit = self.objectives[obj]['criteria']
+                        coalition += objCrit
+                elif objectivesSubset != None and coalition != None:
+                    print('Error: Objectives Subset and coalition given')
+                    return
+                else:
+                    for g in coalition:
+                        if CopyPerfTab:
+                            criteria[g] = deepcopy(perfTab.criteria[g])
+                        else:
+                            criteria[g] = perfTab.criteria[g]
             else:
-                criteria[g] = perfTab.criteria[g]
-        self.criteria = criteria
+                for g in criteriaSubset:
+                    if CopyPerfTab:
+                        criteria[g] = deepcopy(perfTab.criteria[g])
+                    else:
+                        criteria[g] = perfTab.criteria[g]
+            self.criteria = criteria
+        # convert criteria weights to Decimal format    
         self.convertWeight2Decimal()
 
         #  install method Data and parameters
@@ -9699,12 +9739,12 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             
                 
         print('\n')
-
-class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
+    
+class CoalitionsFusionOutrankingDigraph(BipolarOutrankingDigraph):
     """
-    in development !
+    When *coalitionsList* == None, an 'o-average' fusion of the objectives is produced.
     """
-    def __init__(self,argPerfTab,actionsSubset=None,\
+    def __init__(self,argPerfTab,coalitionsList=None,actionsSubset=None,\
                  CopyPerfTab=True,Comments=False):
         from copy import deepcopy
         from time import time
@@ -9760,8 +9800,7 @@ class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
                 self.objectives = perfTab.objectives
                 self.criteria = perfTab.criteria
         except:
-            print('!!! Error: performance tableau has no objectives')
-            return
+            pass
 
         #  install method Data and parameters
         methodData = {}
@@ -9804,14 +9843,30 @@ class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
         tcp = time()
         
         actions = self.actions
-        objectives = self.objectives
-        margObj = []
-        for obj in objectives:
-            og = BipolarOutrankingDigraph(perfTab,coalition=objectives[obj]['criteria'])
-            margObj.append(og)
-        weights = [objectives[obj]['weight'] for obj in objectives]
-        fg = FusionLDigraph(margObj,'o-average',weights)
+        if coalitionsList == None:
+            try:
+                objectives = self.objectives
+                coalitionsList = [objectives[obj]['criteria'] for obj in objectives]
+                #print(coalitionsList)
+            except:
+                print('!!! Error: No coalitions given and performance tableau has no objectives')
+                return
+        marginalRelations = {}
+        marginalDigraphs = []
+        for coalition in coalitionsList:
+            mg = BipolarOutrankingDigraph(perfTab,criteriaSubset=coalition)
+            marginalRelations[tuple(coalition)] = deepcopy(mg.relation)
+            marginalDigraphs.append(mg)
+        weights = []
+        for coalition in coalitionsList:
+            sumMarginalWeights = Decimal('0')
+            for g in coalition:
+                sumMarginalWeights += self.criteria[g]['weight']
+            weights.append(sumMarginalWeights)            
+        #weights = [objectives[obj]['weight'] for obj in objectives]
+        fg = FusionLDigraph(marginalDigraphs,'o-average',weights)
         self.relation = deepcopy(fg.relation)
+        self.marginalRelationsRelations = marginalRelations
 
         # finished relation computing time stamp
         self.runTimes['computeRelation'] = time() - tcp
@@ -9826,6 +9881,11 @@ class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
         self.runTimes['totalTime'] = time() - tt
         if Comments:
             print(self)
+
+class UnOpposedObjectivesOutrankingDigraph(CoalitionsFusionOutrankingDigraph):
+    """
+    Renaming the default CoalitionsFusionOutrankingDigraph.
+    """
 
 class SymmetricAverageFusionOutrankingDigraph(BipolarOutrankingDigraph):
     """
@@ -10177,18 +10237,20 @@ if __name__ == "__main__":
 ##                                   seed=102)
     t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
                                    numberOfCriteria=9,\
-                                    vetoProbability=0.5,\
-                                   seed=randint(1,1000))
-                                   #seed = 21)
+                                   vetoProbability=0.5,\
+                                   #seed=randint(1,1000),\
+                                   seed=21)
     g = BipolarOutrankingDigraph(t,Normalized=True,
-                                  tempDir=None,nbrCores=8,Comments=True,Debug=False)
+                                  tempDir=None,nbrCores=8,Comments=False,Debug=False)
 ##    g.showRelationTable(hasLPDDenotation=True,ReflexiveTerms=False)
-    g.showVetos()
-    g.showConsiderablePerformancesPolarisation()       
-    afg = ObjectivesFusionOutrankingDigraph(t,Comments=True)
+    g.showRelationTable()
+    g.exportGraphViz()
+##    g.showConsiderablePerformancesPolarisation()       
+    afg = UnOpposedBipolarOutrankingDigraph(t,Comments=False)
     afg.showRelationTable()
-    afg = SymmetricAverageFusionOutrankingDigraph(t,Comments=True)
-    afg.showRelationTable()
+    afg.exportGraphViz()
+##    afg = SymmetricAverageFusionOutrankingDigraph(t,Comments=True)
+##    afg.showRelationTable()
 
                   
 ##    g.showRelationTable(StabilityDenotation=True)

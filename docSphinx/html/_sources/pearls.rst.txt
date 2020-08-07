@@ -1537,6 +1537,7 @@ For concluding, let us mention that it is precisely again our bipolar-valued *lo
 
 Back to :ref:`Content Table <Pearls-label>`
 
+
 Bibliography
 ------------
 	  

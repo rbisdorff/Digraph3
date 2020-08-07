@@ -2263,6 +2263,10 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             weightMode = ('equisignificant',(1,1))
             weightScale =  weightMode[1]
             weightsList = [weightScale[0] for i in range(numberOfCriteria)]
+            sumWeights = Decimal('0.0')
+            for i in range(numberOfCriteria):
+                sumWeights += Decimal(str(weightScale[0]))
+                
         elif weightDistribution == 'random':
             weightMode = ('random',(1,numberOfCriteria))
             if weightScale == None:
@@ -2274,6 +2278,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                                                               weightScale[1]))))
                 sumWeights += weightsList[i]
             weightsList.reverse()
+            
         else:
             weightDistribution = 'equiobjectives'
             weightMode = (weightDistribution,None)
