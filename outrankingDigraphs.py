@@ -4427,7 +4427,6 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
             self.objectives = objectives
                 
         # criteria coalition
-<<<<<<< HEAD
         if criteriaSubset == None and objectivesSubset == None and coalition == None:
             if CopyPerfTab:
                 self.criteria = deepcopy(perfTab.criteria)
@@ -4464,7 +4463,6 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                         criteria[g] = perfTab.criteria[g]
             self.criteria = criteria
         # convert criteria weights to Decimal format    
-=======
         criteria = OrderedDict()
         if objectivesSubset == None:
             if coalition == None:
@@ -4485,7 +4483,6 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                 criteria[g] = perfTab.criteria[g]
                     
         self.criteria = criteria
->>>>>>> eb1947681bbc2ef0c80b479c8bbc81030c207235
         self.convertWeight2Decimal()
 
         #  install method Data and parameters
@@ -9763,11 +9760,8 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 
         print('\n')
     
-<<<<<<< HEAD
+
 class CoalitionsFusionOutrankingDigraph(BipolarOutrankingDigraph):
-=======
-class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
->>>>>>> eb1947681bbc2ef0c80b479c8bbc81030c207235
     """
     When *coalitionsList* == None, an 'o-average' fusion of the objectives is produced.
     """
@@ -9870,7 +9864,6 @@ class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
         tcp = time()
         
         actions = self.actions
-<<<<<<< HEAD
         if coalitionsList == None:
             try:
                 objectives = self.objectives
@@ -9895,19 +9888,6 @@ class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
         fg = FusionLDigraph(marginalDigraphs,'o-average',weights)
         self.relation = deepcopy(fg.relation)
         self.marginalRelationsRelations = marginalRelations
-=======
-        objectives = self.objectives
-        objectivesRelations = {}
-        margObj = []
-        for obj in objectives:
-            og = BipolarOutrankingDigraph(perfTab,coalition=objectives[obj]['criteria'])
-            objectivesRelations[obj] = deepcopy(og.relation)
-            margObj.append(og)
-        weights = [objectives[obj]['weight'] for obj in objectives]
-        fg = FusionLDigraph(margObj,'o-average',weights)
-        self.relation = deepcopy(fg.relation)
-        self.objectivesRelations = objectivesRelations
->>>>>>> eb1947681bbc2ef0c80b479c8bbc81030c207235
 
         # finished relation computing time stamp
         self.runTimes['computeRelation'] = time() - tcp
@@ -9923,15 +9903,10 @@ class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
         if Comments:
             print(self)
 
-<<<<<<< HEAD
+
 class UnOpposedObjectivesOutrankingDigraph(CoalitionsFusionOutrankingDigraph):
     """
     Renaming the default CoalitionsFusionOutrankingDigraph.
-=======
-class UnOpposedBipolarOutrankingDigraph(ObjectivesFusionOutrankingDigraph):
-    """
-    Renaming the ObjectivesFusionOutrankingDigraph.
->>>>>>> eb1947681bbc2ef0c80b479c8bbc81030c207235
     """
 
 class SymmetricAverageFusionOutrankingDigraph(BipolarOutrankingDigraph):
@@ -10293,7 +10268,7 @@ if __name__ == "__main__":
     g.showRelationTable()
     g.exportGraphViz()
 ##    g.showConsiderablePerformancesPolarisation()       
-    afg = UnOpposedBipolarOutrankingDigraph(t,Comments=False)
+    afg = UnOpposedObjectivesOutrankingDigraph(t,Comments=False)
     afg.showRelationTable()
     afg.exportGraphViz()
 ##    afg = SymmetricAverageFusionOutrankingDigraph(t,Comments=True)

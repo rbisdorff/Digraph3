@@ -4463,6 +4463,26 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                         criteria[g] = perfTab.criteria[g]
             self.criteria = criteria
         # convert criteria weights to Decimal format    
+        criteria = OrderedDict()
+        if objectivesSubset == None:
+            if coalition == None:
+                if criteriaSubset == None:
+                    coalition = list(perfTab.criteria.keys())
+                else:
+                    coalition = criteriaSubset
+        else:
+            coalition = []
+            for obj in objectives:
+                objCrit = self.objectives[obj]['criteria']
+                coalition += objCrit
+
+        for g in coalition:
+            if CopyPerfTab:
+                criteria[g] = deepcopy(perfTab.criteria[g])
+            else:
+                criteria[g] = perfTab.criteria[g]
+                    
+        self.criteria = criteria
         self.convertWeight2Decimal()
 
         #  install method Data and parameters
@@ -9740,6 +9760,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 
         print('\n')
     
+
 class CoalitionsFusionOutrankingDigraph(BipolarOutrankingDigraph):
     """
     When *coalitionsList* == None, an 'o-average' fusion of the objectives is produced.
@@ -9881,6 +9902,7 @@ class CoalitionsFusionOutrankingDigraph(BipolarOutrankingDigraph):
         self.runTimes['totalTime'] = time() - tt
         if Comments:
             print(self)
+
 
 class UnOpposedObjectivesOutrankingDigraph(CoalitionsFusionOutrankingDigraph):
     """
@@ -10246,7 +10268,7 @@ if __name__ == "__main__":
     g.showRelationTable()
     g.exportGraphViz()
 ##    g.showConsiderablePerformancesPolarisation()       
-    afg = UnOpposedBipolarOutrankingDigraph(t,Comments=False)
+    afg = UnOpposedObjectivesOutrankingDigraph(t,Comments=False)
     afg.showRelationTable()
     afg.exportGraphViz()
 ##    afg = SymmetricAverageFusionOutrankingDigraph(t,Comments=True)
