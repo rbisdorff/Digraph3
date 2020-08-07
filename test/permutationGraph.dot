@@ -1,0 +1,20 @@
+strict graph G {
+graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nDigraph3 (graphviz), R. Bisdorff, 2019", size="7,7"];
+n1 [shape = "circle", label = "1", style = "filled", color = lightcoral];
+n2 [shape = "circle", label = "2", style = "filled", color = lightcoral];
+n3 [shape = "circle", label = "3", style = "filled", color = lightblue];
+n4 [shape = "circle", label = "4", style = "filled", color = gold];
+n5 [shape = "circle", label = "5", style = "filled", color = lightblue];
+n6 [shape = "circle", label = "6", style = "filled", color = gold];
+n1-- n3 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n1-- n4 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n1-- n6 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n2-- n3 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n2-- n4 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n2-- n5 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n2-- n6 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n3-- n4 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+n5-- n6 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
+}

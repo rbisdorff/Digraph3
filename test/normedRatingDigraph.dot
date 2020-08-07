@@ -1,0 +1,64 @@
+digraph G {
+graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nDigraph3 (graphviz)\n R. Bisdorff, 2020", size="7,7",fontsize=10];
+m10 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.90 -", fontsize=10];
+m9 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.80 -", fontsize=10];
+m8 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.70 -", fontsize=10];
+s0012 [shape = "circle", label = "s0012g", fontsize=10];
+s0838 [shape = "circle", label = "s0838e", fontsize=10];
+m7 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.60 -", fontsize=10];
+m6 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.50 -", fontsize=10];
+s0025 [shape = "circle", label = "s0025f", fontsize=10];
+s0240 [shape = "circle", label = "s0240g", fontsize=10];
+s0516 [shape = "circle", label = "s0516g", fontsize=10];
+s0713 [shape = "circle", label = "s0713f", fontsize=10];
+s0741 [shape = "circle", label = "s0741f", fontsize=10];
+m5 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.40 -", fontsize=10];
+s0695 [shape = "circle", label = "s0695f", fontsize=10];
+m4 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.30 -", fontsize=10];
+s0890 [shape = "circle", label = "s0890w", fontsize=10];
+m3 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.20 -", fontsize=10];
+s0950 [shape = "circle", label = "s0950w", fontsize=10];
+m2 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.10 -", fontsize=10];
+m1 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.00 -", fontsize=10];
+m1 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.00 -", fontsize=10];
+{ rank = 13; m10; }
+{ rank = 12; m9; }
+{ rank = 11; s0240; s0838; }
+{ rank = 10; m8; }
+{ rank = 9; s0695; s0516; s0741; s0012; }
+{ rank = 8; m7; }
+{ rank = 7; m6; }
+{ rank = 6; s0025; s0713; }
+{ rank = 5; m5; }
+{ rank = 4; m4; }
+{ rank = 3; s0890; s0950; }
+{ rank = 2; m3; }
+{ rank = 1; m2; }
+m10-> m9 [style="setlinewidth(1)",color=black] ;
+m9-> m8 [style="setlinewidth(1)",color=black] ;
+m8-> s0012 [style="setlinewidth(1)",color=black] ;
+m8-> s0838 [style="setlinewidth(1)",color=black] ;
+s0012-> m7 [style="setlinewidth(1)",color=black] ;
+s0838-> m7 [style="setlinewidth(1)",color=black] ;
+m7-> m6 [style="setlinewidth(1)",color=black] ;
+m6-> s0025 [style="setlinewidth(1)",color=black] ;
+m6-> s0240 [style="setlinewidth(1)",color=black] ;
+m6-> s0516 [style="setlinewidth(1)",color=black] ;
+m6-> s0713 [style="setlinewidth(1)",color=black] ;
+m6-> s0741 [style="setlinewidth(1)",color=black] ;
+s0025-> m5 [style="setlinewidth(1)",color=black] ;
+s0240-> m5 [style="setlinewidth(1)",color=black] ;
+s0516-> m5 [style="setlinewidth(1)",color=black] ;
+s0713-> m5 [style="setlinewidth(1)",color=black] ;
+s0741-> m5 [style="setlinewidth(1)",color=black] ;
+m5-> s0695 [style="setlinewidth(1)",color=black] ;
+s0695-> m4 [style="setlinewidth(1)",color=black] ;
+m4-> s0890 [style="setlinewidth(1)",color=black] ;
+s0890-> m3 [style="setlinewidth(1)",color=black] ;
+m3-> s0950 [style="setlinewidth(1)",color=black] ;
+s0950-> m2 [style="setlinewidth(1)",color=black] ;
+m2-> m1 [style="setlinewidth(1)",color=black] ;
+}
+ 

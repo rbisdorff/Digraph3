@@ -1,0 +1,384 @@
+digraph G {
+graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\Digraph3 (graphviz)\n R. Bisdorff, 2020", size="7,7",fontsize=10];
+a100 [shape = "circle", label = "a100n", fontsize=10];
+a067 [shape = "circle", label = "a067a", fontsize=10];
+a046 [shape = "circle", label = "a046n", fontsize=10];
+a016 [shape = "circle", label = "a016n", fontsize=10];
+a079 [shape = "circle", label = "a079c", fontsize=10];
+a066 [shape = "circle", label = "a066a", fontsize=10];
+a086 [shape = "circle", label = "a086a", fontsize=10];
+a087 [shape = "circle", label = "a087a", fontsize=10];
+a042 [shape = "circle", label = "a042c", fontsize=10];
+a056 [shape = "circle", label = "a056a", fontsize=10];
+a019 [shape = "circle", label = "a019a", fontsize=10];
+a013 [shape = "circle", label = "a013c", fontsize=10];
+a080 [shape = "circle", label = "a080c", fontsize=10];
+a068 [shape = "circle", label = "a068n", fontsize=10];
+a039 [shape = "circle", label = "a039c", fontsize=10];
+a069 [shape = "circle", label = "a069a", fontsize=10];
+a049 [shape = "circle", label = "a049c", fontsize=10];
+a094 [shape = "circle", label = "a094c", fontsize=10];
+a085 [shape = "circle", label = "a085c", fontsize=10];
+a036 [shape = "circle", label = "a036a", fontsize=10];
+a041 [shape = "circle", label = "a041a", fontsize=10];
+a014 [shape = "circle", label = "a014c", fontsize=10];
+a045 [shape = "circle", label = "a045a", fontsize=10];
+a020 [shape = "circle", label = "a020a", fontsize=10];
+a055 [shape = "circle", label = "a055n", fontsize=10];
+a050 [shape = "circle", label = "a050c", fontsize=10];
+a054 [shape = "circle", label = "a054c", fontsize=10];
+a021 [shape = "circle", label = "a021c", fontsize=10];
+a082 [shape = "circle", label = "a082a", fontsize=10];
+a009 [shape = "circle", label = "a009n", fontsize=10];
+a038 [shape = "circle", label = "a038n", fontsize=10];
+a073 [shape = "circle", label = "a073a", fontsize=10];
+a043 [shape = "circle", label = "a043c", fontsize=10];
+a078 [shape = "circle", label = "a078n", fontsize=10];
+a092 [shape = "circle", label = "a092n", fontsize=10];
+a023 [shape = "circle", label = "a023c", fontsize=10];
+a097 [shape = "circle", label = "a097n", fontsize=10];
+a035 [shape = "circle", label = "a035n", fontsize=10];
+a074 [shape = "circle", label = "a074n", fontsize=10];
+a088 [shape = "circle", label = "a088n", fontsize=10];
+a060 [shape = "circle", label = "a060a", fontsize=10];
+a003 [shape = "circle", label = "a003n", fontsize=10];
+a037 [shape = "circle", label = "a037n", fontsize=10];
+a027 [shape = "circle", label = "a027c", fontsize=10];
+a072 [shape = "circle", label = "a072a", fontsize=10];
+a070 [shape = "circle", label = "a070a", fontsize=10];
+a024 [shape = "circle", label = "a024n", fontsize=10];
+a033 [shape = "circle", label = "a033c", fontsize=10];
+a048 [shape = "circle", label = "a048a", fontsize=10];
+a025 [shape = "circle", label = "a025c", fontsize=10];
+a030 [shape = "circle", label = "a030n", fontsize=10];
+a091 [shape = "circle", label = "a091a", fontsize=10];
+a032 [shape = "circle", label = "a032n", fontsize=10];
+a006 [shape = "circle", label = "a006n", fontsize=10];
+a058 [shape = "circle", label = "a058c", fontsize=10];
+a044 [shape = "circle", label = "a044c", fontsize=10];
+a061 [shape = "circle", label = "a061c", fontsize=10];
+a001 [shape = "circle", label = "a001c", fontsize=10];
+a089 [shape = "circle", label = "a089a", fontsize=10];
+a052 [shape = "circle", label = "a052c", fontsize=10];
+a007 [shape = "circle", label = "a007a", fontsize=10];
+a064 [shape = "circle", label = "a064a", fontsize=10];
+a077 [shape = "circle", label = "a077n", fontsize=10];
+a084 [shape = "circle", label = "a084n", fontsize=10];
+a057 [shape = "circle", label = "a057n", fontsize=10];
+a098 [shape = "circle", label = "a098c", fontsize=10];
+a015 [shape = "circle", label = "a015a", fontsize=10];
+a071 [shape = "circle", label = "a071n", fontsize=10];
+a081 [shape = "circle", label = "a081n", fontsize=10];
+a008 [shape = "circle", label = "a008n", fontsize=10];
+a002 [shape = "circle", label = "a002n", fontsize=10];
+a017 [shape = "circle", label = "a017n", fontsize=10];
+a093 [shape = "circle", label = "a093c", fontsize=10];
+a062 [shape = "circle", label = "a062a", fontsize=10];
+a083 [shape = "circle", label = "a083n", fontsize=10];
+a028 [shape = "circle", label = "a028c", fontsize=10];
+a031 [shape = "circle", label = "a031a", fontsize=10];
+a026 [shape = "circle", label = "a026c", fontsize=10];
+a090 [shape = "circle", label = "a090n", fontsize=10];
+a051 [shape = "circle", label = "a051c", fontsize=10];
+a095 [shape = "circle", label = "a095a", fontsize=10];
+a034 [shape = "circle", label = "a034n", fontsize=10];
+a022 [shape = "circle", label = "a022n", fontsize=10];
+a018 [shape = "circle", label = "a018c", fontsize=10];
+a047 [shape = "circle", label = "a047c", fontsize=10];
+a029 [shape = "circle", label = "a029n", fontsize=10];
+a076 [shape = "circle", label = "a076n", fontsize=10];
+a005 [shape = "circle", label = "a005a", fontsize=10];
+a096 [shape = "circle", label = "a096a", fontsize=10];
+a063 [shape = "circle", label = "a063c", fontsize=10];
+a059 [shape = "circle", label = "a059a", fontsize=10];
+a011 [shape = "circle", label = "a011c", fontsize=10];
+a040 [shape = "circle", label = "a040a", fontsize=10];
+a075 [shape = "circle", label = "a075a", fontsize=10];
+a099 [shape = "circle", label = "a099c", fontsize=10];
+a065 [shape = "circle", label = "a065a", fontsize=10];
+a010 [shape = "circle", label = "a010a", fontsize=10];
+a012 [shape = "circle", label = "a012a", fontsize=10];
+a053 [shape = "circle", label = "a053a", fontsize=10];
+a004 [shape = "circle", label = "a004c", fontsize=10];
+{ rank = same; a067; a100; }
+{ rank = same; a046; }
+{ rank = same; a016; a019; a042; a056; a066; a079; a086; a087; }
+{ rank = same; a013; a068; a080; }
+{ rank = same; a039; }
+{ rank = same; a069; }
+{ rank = same; a049; }
+{ rank = same; a036; a041; a085; a094; }
+{ rank = same; a014; a045; }
+{ rank = same; a020; }
+{ rank = same; a009; a021; a038; a050; a054; a055; a073; a082; }
+{ rank = same; a043; }
+{ rank = same; a078; a092; }
+{ rank = same; a003; a023; a027; a035; a037; a060; a072; a074; a088; a097; }
+{ rank = same; a070; }
+{ rank = same; a024; }
+{ rank = same; a033; }
+{ rank = same; a025; a030; a032; a048; a091; }
+{ rank = same; a006; }
+{ rank = same; a044; a058; a061; }
+{ rank = same; a001; }
+{ rank = same; a007; a008; a015; a052; a057; a064; a071; a077; a081; a084; a089; a098; }
+{ rank = same; a002; a017; a062; a093; }
+{ rank = same; a026; a028; a031; a034; a051; a083; a090; a095; }
+{ rank = same; a022; }
+{ rank = same; a005; a018; a029; a047; a076; }
+{ rank = same; a096; }
+{ rank = same; a063; }
+{ rank = same; a011; a040; a059; a075; a099; }
+{ rank = same; a065; }
+{ rank = same; a010; }
+{ rank = same; a012; a053; }
+{ rank = same; a004; }
+a067-> a046 [style="setlinewidth(1)",color=black] ;
+a100-> a046 [style="setlinewidth(1)",color=black] ;
+a046-> a016 [style="setlinewidth(1)",color=black] ;
+a046-> a019 [style="setlinewidth(1)",color=black] ;
+a046-> a042 [style="setlinewidth(1)",color=black] ;
+a046-> a056 [style="setlinewidth(1)",color=black] ;
+a046-> a066 [style="setlinewidth(1)",color=black] ;
+a046-> a079 [style="setlinewidth(1)",color=black] ;
+a046-> a086 [style="setlinewidth(1)",color=black] ;
+a046-> a087 [style="setlinewidth(1)",color=black] ;
+a016-> a013 [style="setlinewidth(1)",color=black] ;
+a016-> a068 [style="setlinewidth(1)",color=black] ;
+a016-> a080 [style="setlinewidth(1)",color=black] ;
+a019-> a013 [style="setlinewidth(1)",color=black] ;
+a019-> a068 [style="setlinewidth(1)",color=black] ;
+a019-> a080 [style="setlinewidth(1)",color=black] ;
+a042-> a013 [style="setlinewidth(1)",color=black] ;
+a042-> a068 [style="setlinewidth(1)",color=black] ;
+a042-> a080 [style="setlinewidth(1)",color=black] ;
+a056-> a013 [style="setlinewidth(1)",color=black] ;
+a056-> a068 [style="setlinewidth(1)",color=black] ;
+a056-> a080 [style="setlinewidth(1)",color=black] ;
+a066-> a013 [style="setlinewidth(1)",color=black] ;
+a066-> a068 [style="setlinewidth(1)",color=black] ;
+a066-> a080 [style="setlinewidth(1)",color=black] ;
+a079-> a013 [style="setlinewidth(1)",color=black] ;
+a079-> a068 [style="setlinewidth(1)",color=black] ;
+a079-> a080 [style="setlinewidth(1)",color=black] ;
+a086-> a013 [style="setlinewidth(1)",color=black] ;
+a086-> a068 [style="setlinewidth(1)",color=black] ;
+a086-> a080 [style="setlinewidth(1)",color=black] ;
+a087-> a013 [style="setlinewidth(1)",color=black] ;
+a087-> a068 [style="setlinewidth(1)",color=black] ;
+a087-> a080 [style="setlinewidth(1)",color=black] ;
+a013-> a039 [style="setlinewidth(1)",color=black] ;
+a068-> a039 [style="setlinewidth(1)",color=black] ;
+a080-> a039 [style="setlinewidth(1)",color=black] ;
+a039-> a069 [style="setlinewidth(1)",color=black] ;
+a069-> a049 [style="setlinewidth(1)",color=black] ;
+a049-> a036 [style="setlinewidth(1)",color=black] ;
+a049-> a041 [style="setlinewidth(1)",color=black] ;
+a049-> a085 [style="setlinewidth(1)",color=black] ;
+a049-> a094 [style="setlinewidth(1)",color=black] ;
+a036-> a014 [style="setlinewidth(1)",color=black] ;
+a036-> a045 [style="setlinewidth(1)",color=black] ;
+a041-> a014 [style="setlinewidth(1)",color=black] ;
+a041-> a045 [style="setlinewidth(1)",color=black] ;
+a085-> a014 [style="setlinewidth(1)",color=black] ;
+a085-> a045 [style="setlinewidth(1)",color=black] ;
+a094-> a014 [style="setlinewidth(1)",color=black] ;
+a094-> a045 [style="setlinewidth(1)",color=black] ;
+a014-> a020 [style="setlinewidth(1)",color=black] ;
+a045-> a020 [style="setlinewidth(1)",color=black] ;
+a020-> a009 [style="setlinewidth(1)",color=black] ;
+a020-> a021 [style="setlinewidth(1)",color=black] ;
+a020-> a038 [style="setlinewidth(1)",color=black] ;
+a020-> a050 [style="setlinewidth(1)",color=black] ;
+a020-> a054 [style="setlinewidth(1)",color=black] ;
+a020-> a055 [style="setlinewidth(1)",color=black] ;
+a020-> a073 [style="setlinewidth(1)",color=black] ;
+a020-> a082 [style="setlinewidth(1)",color=black] ;
+a009-> a043 [style="setlinewidth(1)",color=black] ;
+a021-> a043 [style="setlinewidth(1)",color=black] ;
+a038-> a043 [style="setlinewidth(1)",color=black] ;
+a050-> a043 [style="setlinewidth(1)",color=black] ;
+a054-> a043 [style="setlinewidth(1)",color=black] ;
+a055-> a043 [style="setlinewidth(1)",color=black] ;
+a073-> a043 [style="setlinewidth(1)",color=black] ;
+a082-> a043 [style="setlinewidth(1)",color=black] ;
+a043-> a078 [style="setlinewidth(1)",color=black] ;
+a043-> a092 [style="setlinewidth(1)",color=black] ;
+a078-> a003 [style="setlinewidth(1)",color=black] ;
+a078-> a023 [style="setlinewidth(1)",color=black] ;
+a078-> a027 [style="setlinewidth(1)",color=black] ;
+a078-> a035 [style="setlinewidth(1)",color=black] ;
+a078-> a037 [style="setlinewidth(1)",color=black] ;
+a078-> a060 [style="setlinewidth(1)",color=black] ;
+a078-> a072 [style="setlinewidth(1)",color=black] ;
+a078-> a074 [style="setlinewidth(1)",color=black] ;
+a078-> a088 [style="setlinewidth(1)",color=black] ;
+a078-> a097 [style="setlinewidth(1)",color=black] ;
+a092-> a003 [style="setlinewidth(1)",color=black] ;
+a092-> a023 [style="setlinewidth(1)",color=black] ;
+a092-> a027 [style="setlinewidth(1)",color=black] ;
+a092-> a035 [style="setlinewidth(1)",color=black] ;
+a092-> a037 [style="setlinewidth(1)",color=black] ;
+a092-> a060 [style="setlinewidth(1)",color=black] ;
+a092-> a072 [style="setlinewidth(1)",color=black] ;
+a092-> a074 [style="setlinewidth(1)",color=black] ;
+a092-> a088 [style="setlinewidth(1)",color=black] ;
+a092-> a097 [style="setlinewidth(1)",color=black] ;
+a003-> a070 [style="setlinewidth(1)",color=black] ;
+a023-> a070 [style="setlinewidth(1)",color=black] ;
+a027-> a070 [style="setlinewidth(1)",color=black] ;
+a035-> a070 [style="setlinewidth(1)",color=black] ;
+a037-> a070 [style="setlinewidth(1)",color=black] ;
+a060-> a070 [style="setlinewidth(1)",color=black] ;
+a072-> a070 [style="setlinewidth(1)",color=black] ;
+a074-> a070 [style="setlinewidth(1)",color=black] ;
+a088-> a070 [style="setlinewidth(1)",color=black] ;
+a097-> a070 [style="setlinewidth(1)",color=black] ;
+a070-> a024 [style="setlinewidth(1)",color=black] ;
+a024-> a033 [style="setlinewidth(1)",color=black] ;
+a033-> a025 [style="setlinewidth(1)",color=black] ;
+a033-> a030 [style="setlinewidth(1)",color=black] ;
+a033-> a032 [style="setlinewidth(1)",color=black] ;
+a033-> a048 [style="setlinewidth(1)",color=black] ;
+a033-> a091 [style="setlinewidth(1)",color=black] ;
+a025-> a006 [style="setlinewidth(1)",color=black] ;
+a030-> a006 [style="setlinewidth(1)",color=black] ;
+a032-> a006 [style="setlinewidth(1)",color=black] ;
+a048-> a006 [style="setlinewidth(1)",color=black] ;
+a091-> a006 [style="setlinewidth(1)",color=black] ;
+a006-> a044 [style="setlinewidth(1)",color=black] ;
+a006-> a058 [style="setlinewidth(1)",color=black] ;
+a006-> a061 [style="setlinewidth(1)",color=black] ;
+a044-> a001 [style="setlinewidth(1)",color=black] ;
+a058-> a001 [style="setlinewidth(1)",color=black] ;
+a061-> a001 [style="setlinewidth(1)",color=black] ;
+a001-> a007 [style="setlinewidth(1)",color=black] ;
+a001-> a008 [style="setlinewidth(1)",color=black] ;
+a001-> a015 [style="setlinewidth(1)",color=black] ;
+a001-> a052 [style="setlinewidth(1)",color=black] ;
+a001-> a057 [style="setlinewidth(1)",color=black] ;
+a001-> a064 [style="setlinewidth(1)",color=black] ;
+a001-> a071 [style="setlinewidth(1)",color=black] ;
+a001-> a077 [style="setlinewidth(1)",color=black] ;
+a001-> a081 [style="setlinewidth(1)",color=black] ;
+a001-> a084 [style="setlinewidth(1)",color=black] ;
+a001-> a089 [style="setlinewidth(1)",color=black] ;
+a001-> a098 [style="setlinewidth(1)",color=black] ;
+a007-> a002 [style="setlinewidth(1)",color=black] ;
+a007-> a017 [style="setlinewidth(1)",color=black] ;
+a007-> a062 [style="setlinewidth(1)",color=black] ;
+a007-> a093 [style="setlinewidth(1)",color=black] ;
+a008-> a002 [style="setlinewidth(1)",color=black] ;
+a008-> a017 [style="setlinewidth(1)",color=black] ;
+a008-> a062 [style="setlinewidth(1)",color=black] ;
+a008-> a093 [style="setlinewidth(1)",color=black] ;
+a015-> a002 [style="setlinewidth(1)",color=black] ;
+a015-> a017 [style="setlinewidth(1)",color=black] ;
+a015-> a062 [style="setlinewidth(1)",color=black] ;
+a015-> a093 [style="setlinewidth(1)",color=black] ;
+a052-> a002 [style="setlinewidth(1)",color=black] ;
+a052-> a017 [style="setlinewidth(1)",color=black] ;
+a052-> a062 [style="setlinewidth(1)",color=black] ;
+a052-> a093 [style="setlinewidth(1)",color=black] ;
+a057-> a002 [style="setlinewidth(1)",color=black] ;
+a057-> a017 [style="setlinewidth(1)",color=black] ;
+a057-> a062 [style="setlinewidth(1)",color=black] ;
+a057-> a093 [style="setlinewidth(1)",color=black] ;
+a064-> a002 [style="setlinewidth(1)",color=black] ;
+a064-> a017 [style="setlinewidth(1)",color=black] ;
+a064-> a062 [style="setlinewidth(1)",color=black] ;
+a064-> a093 [style="setlinewidth(1)",color=black] ;
+a071-> a002 [style="setlinewidth(1)",color=black] ;
+a071-> a017 [style="setlinewidth(1)",color=black] ;
+a071-> a062 [style="setlinewidth(1)",color=black] ;
+a071-> a093 [style="setlinewidth(1)",color=black] ;
+a077-> a002 [style="setlinewidth(1)",color=black] ;
+a077-> a017 [style="setlinewidth(1)",color=black] ;
+a077-> a062 [style="setlinewidth(1)",color=black] ;
+a077-> a093 [style="setlinewidth(1)",color=black] ;
+a081-> a002 [style="setlinewidth(1)",color=black] ;
+a081-> a017 [style="setlinewidth(1)",color=black] ;
+a081-> a062 [style="setlinewidth(1)",color=black] ;
+a081-> a093 [style="setlinewidth(1)",color=black] ;
+a084-> a002 [style="setlinewidth(1)",color=black] ;
+a084-> a017 [style="setlinewidth(1)",color=black] ;
+a084-> a062 [style="setlinewidth(1)",color=black] ;
+a084-> a093 [style="setlinewidth(1)",color=black] ;
+a089-> a002 [style="setlinewidth(1)",color=black] ;
+a089-> a017 [style="setlinewidth(1)",color=black] ;
+a089-> a062 [style="setlinewidth(1)",color=black] ;
+a089-> a093 [style="setlinewidth(1)",color=black] ;
+a098-> a002 [style="setlinewidth(1)",color=black] ;
+a098-> a017 [style="setlinewidth(1)",color=black] ;
+a098-> a062 [style="setlinewidth(1)",color=black] ;
+a098-> a093 [style="setlinewidth(1)",color=black] ;
+a002-> a026 [style="setlinewidth(1)",color=black] ;
+a002-> a028 [style="setlinewidth(1)",color=black] ;
+a002-> a031 [style="setlinewidth(1)",color=black] ;
+a002-> a034 [style="setlinewidth(1)",color=black] ;
+a002-> a051 [style="setlinewidth(1)",color=black] ;
+a002-> a083 [style="setlinewidth(1)",color=black] ;
+a002-> a090 [style="setlinewidth(1)",color=black] ;
+a002-> a095 [style="setlinewidth(1)",color=black] ;
+a017-> a026 [style="setlinewidth(1)",color=black] ;
+a017-> a028 [style="setlinewidth(1)",color=black] ;
+a017-> a031 [style="setlinewidth(1)",color=black] ;
+a017-> a034 [style="setlinewidth(1)",color=black] ;
+a017-> a051 [style="setlinewidth(1)",color=black] ;
+a017-> a083 [style="setlinewidth(1)",color=black] ;
+a017-> a090 [style="setlinewidth(1)",color=black] ;
+a017-> a095 [style="setlinewidth(1)",color=black] ;
+a062-> a026 [style="setlinewidth(1)",color=black] ;
+a062-> a028 [style="setlinewidth(1)",color=black] ;
+a062-> a031 [style="setlinewidth(1)",color=black] ;
+a062-> a034 [style="setlinewidth(1)",color=black] ;
+a062-> a051 [style="setlinewidth(1)",color=black] ;
+a062-> a083 [style="setlinewidth(1)",color=black] ;
+a062-> a090 [style="setlinewidth(1)",color=black] ;
+a062-> a095 [style="setlinewidth(1)",color=black] ;
+a093-> a026 [style="setlinewidth(1)",color=black] ;
+a093-> a028 [style="setlinewidth(1)",color=black] ;
+a093-> a031 [style="setlinewidth(1)",color=black] ;
+a093-> a034 [style="setlinewidth(1)",color=black] ;
+a093-> a051 [style="setlinewidth(1)",color=black] ;
+a093-> a083 [style="setlinewidth(1)",color=black] ;
+a093-> a090 [style="setlinewidth(1)",color=black] ;
+a093-> a095 [style="setlinewidth(1)",color=black] ;
+a026-> a022 [style="setlinewidth(1)",color=black] ;
+a028-> a022 [style="setlinewidth(1)",color=black] ;
+a031-> a022 [style="setlinewidth(1)",color=black] ;
+a034-> a022 [style="setlinewidth(1)",color=black] ;
+a051-> a022 [style="setlinewidth(1)",color=black] ;
+a083-> a022 [style="setlinewidth(1)",color=black] ;
+a090-> a022 [style="setlinewidth(1)",color=black] ;
+a095-> a022 [style="setlinewidth(1)",color=black] ;
+a022-> a005 [style="setlinewidth(1)",color=black] ;
+a022-> a018 [style="setlinewidth(1)",color=black] ;
+a022-> a029 [style="setlinewidth(1)",color=black] ;
+a022-> a047 [style="setlinewidth(1)",color=black] ;
+a022-> a076 [style="setlinewidth(1)",color=black] ;
+a005-> a096 [style="setlinewidth(1)",color=black] ;
+a018-> a096 [style="setlinewidth(1)",color=black] ;
+a029-> a096 [style="setlinewidth(1)",color=black] ;
+a047-> a096 [style="setlinewidth(1)",color=black] ;
+a076-> a096 [style="setlinewidth(1)",color=black] ;
+a096-> a063 [style="setlinewidth(1)",color=black] ;
+a063-> a011 [style="setlinewidth(1)",color=black] ;
+a063-> a040 [style="setlinewidth(1)",color=black] ;
+a063-> a059 [style="setlinewidth(1)",color=black] ;
+a063-> a075 [style="setlinewidth(1)",color=black] ;
+a063-> a099 [style="setlinewidth(1)",color=black] ;
+a011-> a065 [style="setlinewidth(1)",color=black] ;
+a040-> a065 [style="setlinewidth(1)",color=black] ;
+a059-> a065 [style="setlinewidth(1)",color=black] ;
+a075-> a065 [style="setlinewidth(1)",color=black] ;
+a099-> a065 [style="setlinewidth(1)",color=black] ;
+a065-> a010 [style="setlinewidth(1)",color=black] ;
+a010-> a012 [style="setlinewidth(1)",color=black] ;
+a010-> a053 [style="setlinewidth(1)",color=black] ;
+a012-> a004 [style="setlinewidth(1)",color=black] ;
+a053-> a004 [style="setlinewidth(1)",color=black] ;
+}
+ 

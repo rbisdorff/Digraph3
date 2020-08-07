@@ -1,0 +1,23 @@
+digraph G {
+graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nDigraph3 (graphviz), R. Bisdorff, 2020", size="7,7"];
+n1 [shape = "circle", label = "3"];
+n2 [shape = "circle", label = "5"];
+n3 [shape = "circle", label = "7"];
+n4 [shape = "circle", label = "11"];
+n5 [shape = "circle", label = "13"];
+n6 [shape = "circle", label = "17"];
+n7 [shape = "circle", label = "19"];
+n1-> n3 [dir=forward, color=black] ;
+n1-> n4 [dir=back, color=black] ;
+n1-> n5 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
+n1-> n7 [dir=forward, color=black] ;
+n2-> n4 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
+n2-> n7 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
+n3-> n4 [dir=forward, color=black] ;
+n3-> n7 [dir=back, color=black] ;
+n4-> n7 [dir=back, color=black] ;
+n5-> n6 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
+n6-> n7 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
+}

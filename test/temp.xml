@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xmcda2Rubis.xsl"?>
+<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2010/XMCDA-2.1.0-Rubis http://leopold-loewenheim.uni.lu/XMCDA2/XMCDA-2.1.0-Rubis.xsd" xmlns:xmcda="http://www.decision-deck.org/2010/XMCDA-2.1.0-Rubis" instanceID="void">
+<projectReference id="temp" name="temp.xml">
+<title>Sorting categories in XMCDA-2.0 format.</title>
+<author>sortinDigraphs Module (RB)</author>
+<version>saved from Python session</version>
+<comment>produced by saveProfilesXMCDA2()</comment>
+</projectReference>
+<categories mcdaConcept="categories">
+<description>
+<subTitle>Sorting categories.</subTitle>
+</description>
+<category id="0" name="c1" mcdaConcept="sortingCategory">
+<description>
+<comment>None</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</category>
+<category id="1" name="c2" mcdaConcept="sortingCategory">
+<description>
+<comment>None</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</category>
+<category id="2" name="c3" mcdaConcept="sortingCategory">
+<description>
+<comment>None</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</category>
+<category id="3" name="c4" mcdaConcept="sortingCategory">
+<description>
+<comment>None</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</category>
+<category id="4" name="c5" mcdaConcept="sortingCategory">
+<description>
+<comment>None</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</category>
+</categories>
+<criteriaCategoryLimits mcdaConcept="categoryProfiles">
+<description>
+<subTitle>Sorting profiles.</subTitle>
+</description>
+<criterionCategoryLimits id="lim_g1_0" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g1</criterionID>
+<categoryID>0</categoryID>
+<lowLimit><real>-100.00</real></lowLimit>
+<highLimit><real>20.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g1_1" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g1</criterionID>
+<categoryID>1</categoryID>
+<lowLimit><real>20.00</real></lowLimit>
+<highLimit><real>40.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g1_2" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g1</criterionID>
+<categoryID>2</categoryID>
+<lowLimit><real>40.00</real></lowLimit>
+<highLimit><real>60.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g1_3" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g1</criterionID>
+<categoryID>3</categoryID>
+<lowLimit><real>60.00</real></lowLimit>
+<highLimit><real>80.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g1_4" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g1</criterionID>
+<categoryID>4</categoryID>
+<lowLimit><real>80.00</real></lowLimit>
+<highLimit><real>200.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g2_0" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g2</criterionID>
+<categoryID>0</categoryID>
+<lowLimit><real>-100.00</real></lowLimit>
+<highLimit><real>20.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g2_1" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g2</criterionID>
+<categoryID>1</categoryID>
+<lowLimit><real>20.00</real></lowLimit>
+<highLimit><real>40.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g2_2" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g2</criterionID>
+<categoryID>2</categoryID>
+<lowLimit><real>40.00</real></lowLimit>
+<highLimit><real>60.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g2_3" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g2</criterionID>
+<categoryID>3</categoryID>
+<lowLimit><real>60.00</real></lowLimit>
+<highLimit><real>80.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g2_4" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g2</criterionID>
+<categoryID>4</categoryID>
+<lowLimit><real>80.00</real></lowLimit>
+<highLimit><real>200.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g3_0" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g3</criterionID>
+<categoryID>0</categoryID>
+<lowLimit><real>-100.00</real></lowLimit>
+<highLimit><real>20.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g3_1" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g3</criterionID>
+<categoryID>1</categoryID>
+<lowLimit><real>20.00</real></lowLimit>
+<highLimit><real>40.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g3_2" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g3</criterionID>
+<categoryID>2</categoryID>
+<lowLimit><real>40.00</real></lowLimit>
+<highLimit><real>60.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g3_3" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g3</criterionID>
+<categoryID>3</categoryID>
+<lowLimit><real>60.00</real></lowLimit>
+<highLimit><real>80.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g3_4" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g3</criterionID>
+<categoryID>4</categoryID>
+<lowLimit><real>80.00</real></lowLimit>
+<highLimit><real>200.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g4_0" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g4</criterionID>
+<categoryID>0</categoryID>
+<lowLimit><real>-100.00</real></lowLimit>
+<highLimit><real>20.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g4_1" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g4</criterionID>
+<categoryID>1</categoryID>
+<lowLimit><real>20.00</real></lowLimit>
+<highLimit><real>40.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g4_2" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g4</criterionID>
+<categoryID>2</categoryID>
+<lowLimit><real>40.00</real></lowLimit>
+<highLimit><real>60.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g4_3" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g4</criterionID>
+<categoryID>3</categoryID>
+<lowLimit><real>60.00</real></lowLimit>
+<highLimit><real>80.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g4_4" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g4</criterionID>
+<categoryID>4</categoryID>
+<lowLimit><real>80.00</real></lowLimit>
+<highLimit><real>200.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g5_0" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g5</criterionID>
+<categoryID>0</categoryID>
+<lowLimit><real>-100.00</real></lowLimit>
+<highLimit><real>20.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g5_1" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g5</criterionID>
+<categoryID>1</categoryID>
+<lowLimit><real>20.00</real></lowLimit>
+<highLimit><real>40.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g5_2" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g5</criterionID>
+<categoryID>2</categoryID>
+<lowLimit><real>40.00</real></lowLimit>
+<highLimit><real>60.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g5_3" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g5</criterionID>
+<categoryID>3</categoryID>
+<lowLimit><real>60.00</real></lowLimit>
+<highLimit><real>80.00</real></highLimit>
+</criterionCategoryLimits>
+<criterionCategoryLimits id="lim_g5_4" mcdaConcept="criterionCategoryLimits">
+<description>
+<comment>No comment</comment>
+<version>Rubis k-sorting</version>
+</description>
+<criterionID>g5</criterionID>
+<categoryID>4</categoryID>
+<lowLimit><real>80.00</real></lowLimit>
+<highLimit><real>200.00</real></highLimit>
+</criterionCategoryLimits>
+</criteriaCategoryLimits>
+</xmcda:XMCDA>

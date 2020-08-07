@@ -1,0 +1,23 @@
+strict digraph G {
+graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nDigraph3 (graphviz), R. Bisdorff, 2019", size="7,7"];
+n1 [shape = "circle", label = "1"pos="0,100"];
+n2 [shape = "circle", label = "2"pos="60,100"];
+n3 [shape = "circle", label = "3"pos="120,100"];
+n4 [shape = "circle", label = "4"pos="180,100"];
+n5 [shape = "circle", label = "5"pos="240,100"];
+n6 [shape = "circle", label = "6"pos="300,100"];
+n10 [shape = "circle", label = "4"pos="0,0"];
+n9 [shape = "circle", label = "3"pos="60,0"];
+n12 [shape = "circle", label = "6"pos="120,0"];
+n7 [shape = "circle", label = "1"pos="180,0"];
+n11 [shape = "circle", label = "5"pos="240,0"];
+n8 [shape = "circle", label = "2"pos="300,0"];
+n1-> n7 [dir=both, color=coral, style="setlinewidth(2)",                              arrowhead=none, arrowtail=none] ;
+n2-> n8 [dir=both, color=coral, style="setlinewidth(2)",                              arrowhead=none, arrowtail=none] ;
+n3-> n9 [dir=both, color=blue, style="setlinewidth(2)",                              arrowhead=none, arrowtail=none] ;
+n4-> n10 [dir=both, color=gold, style="setlinewidth(2)",                              arrowhead=none, arrowtail=none] ;
+n5-> n11 [dir=both, color=blue, style="setlinewidth(2)",                              arrowhead=none, arrowtail=none] ;
+n6-> n12 [dir=both, color=gold, style="setlinewidth(2)",                              arrowhead=none, arrowtail=none] ;
+}

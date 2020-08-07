@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"? -->
+<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.decision-deck.org/2008/UMCDA-ML-1.0 umcda-ml-1.0.xsd" xmlns:xmcda="http://www.decision-deck.org/2008/UMCDA-ML-1.0" instanceID="void">
+<caseReference>
+<title>Performance Tableau in XMCDA format.</title>
+<id>test</id>
+<name>test.xmcda</name>
+<type>root</type>
+<author>digraphs Module (RB)</author>
+<version>saved from Python session</version>
+</caseReference>
+<methodData>
+<description>
+<subTitle>Method data</subTitle>
+<id>Rubis</id>
+<name>Rubis best choice method</name>
+<type>methodData</type>
+<version>1.0</version>
+</description>
+<parameters>
+<parameter>
+<name>variant</name>
+<value>
+<label>Rubis</label>
+</value>
+</parameter>
+<parameter>
+<name>valuationType</name>
+<value>
+<label>standard</label>
+</value>
+</parameter>
+<parameter>
+<name>significanceThreshold</name>
+<value>
+<label>0.50</label>
+</value>
+</parameter>
+</parameters>
+</methodData>
+<alternatives>
+<description>
+<subTitle>Potential decision actions.</subTitle>
+<type>alternatives</type>
+</description>
+<alternative id="a1">
+<description>
+<name>action a1</name>
+<comment>Cost-Benefit</comment>
+</description>
+<alternativeType>potential</alternativeType>
+<status>active</status>
+</alternative>
+<alternative id="a2">
+<description>
+<name>action a2</name>
+<comment>Cost-Benefit</comment>
+</description>
+<alternativeType>potential</alternativeType>
+<status>active</status>
+</alternative>
+<alternative id="a3">
+<description>
+<name>action a3</name>
+<comment>Cost-Benefit</comment>
+</description>
+<alternativeType>potential</alternativeType>
+<status>active</status>
+</alternative>
+<alternative id="a4">
+<description>
+<name>action a4</name>
+<comment>Cost-Benefit</comment>
+</description>
+<alternativeType>potential</alternativeType>
+<status>active</status>
+</alternative>
+<alternative id="a5">
+<description>
+<name>action a5</name>
+<comment>Cost-Benefit</comment>
+</description>
+<alternativeType>potential</alternativeType>
+<status>active</status>
+</alternative>
+</alternatives>
+<criteria>
+<description>
+<subTitle>Family of criteria.</subTitle>
+<type>criteria</type>
+</description>
+<criterion id="b1" >
+<description>
+<name>random cardinal benefit criterion</name>
+<type>criterion</type>
+<comment>Evaluation generator: triangular law with variable mode (m) and probability repartition (p = 0.5). Cheap actions: m = 30%; neutral actions: m = 50%; advantageous actions: m = 70%.</comment>
+<version>performance</version>
+</description>
+<status>active</status>
+<significance><real>1.00</real></significance>
+<criterionFunction category="Rubis" subCategory="performance" >
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<min><real>0.00</real></min>
+<max><real>100.00</real></max>
+</quantitative>
+</scale>
+<thresholds>
+<threshold><type>ind</type>
+<function><constant>
+<real>0.64</real>
+</constant></function>
+</threshold>
+<threshold><type>pref</type>
+<function><constant>
+<real>0.64</real>
+</constant></function>
+</threshold>
+<threshold><type>veto</type>
+<function><constant>
+<real>10.85</real>
+</constant></function>
+</threshold>
+</thresholds>
+</criterionFunction>
+</criterion>
+<criterion id="b2" >
+<description>
+<name>random cardinal benefit criterion</name>
+<type>criterion</type>
+<comment>Evaluation generator: triangular law with variable mode (m) and probability repartition (p = 0.5). Cheap actions: m = 30%; neutral actions: m = 50%; advantageous actions: m = 70%.</comment>
+<version>performance</version>
+</description>
+<status>active</status>
+<significance><real>1.00</real></significance>
+<criterionFunction category="Rubis" subCategory="performance" >
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<min><real>0.00</real></min>
+<max><real>100.00</real></max>
+</quantitative>
+</scale>
+<thresholds>
+<threshold><type>ind</type>
+<function><constant>
+<real>0.05</real>
+</constant></function>
+</threshold>
+<threshold><type>pref</type>
+<function><constant>
+<real>0.05</real>
+</constant></function>
+</threshold>
+<threshold><type>veto</type>
+<function><constant>
+<real>75.08</real>
+</constant></function>
+</threshold>
+</thresholds>
+</criterionFunction>
+</criterion>
+<criterion id="b3" >
+<description>
+<name>random ordinal benefit criterion</name>
+<type>criterion</type>
+<comment>Evaluation generator: triangular law with variable mode (m) and probability repartition (p = 0.5). Cheap actions: m = 30%; neutral actions: m = 50%; advantageous actions: m = 70%.</comment>
+<version>performance</version>
+</description>
+<status>active</status>
+<significance><real>2.00</real></significance>
+<criterionFunction category="Rubis" subCategory="performance" >
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<min><real>0.00</real></min>
+<max><real>10.00</real></max>
+</quantitative>
+</scale>
+<thresholds>
+</thresholds>
+</criterionFunction>
+</criterion>
+<criterion id="c1" >
+<description>
+<name>random ordinal cost criterion</name>
+<type>criterion</type>
+<comment>Evaluation generator: triangular law with variable mode (m) and probability repartition (p = 0.5). Cheap actions: m = 30%; neutral actions: m = 50%; advantageous actions: m = 70%.</comment>
+<version>performance</version>
+</description>
+<status>active</status>
+<significance><real>7.00</real></significance>
+<criterionFunction category="Rubis" subCategory="performance" >
+<scale>
+<quantitative>
+<preferenceDirection>min</preferenceDirection>
+<min><real>0.00</real></min>
+<max><real>10.00</real></max>
+</quantitative>
+</scale>
+<thresholds>
+</thresholds>
+</criterionFunction>
+</criterion>
+<criterion id="c2" >
+<description>
+<name>random cardinal cost criterion</name>
+<type>criterion</type>
+<comment>Evaluation generator: triangular law with variable mode (m) and probability repartition (p = 0.5). Cheap actions: m = 30%; neutral actions: m = 50%; advantageous actions: m = 70%.</comment>
+<version>performance</version>
+</description>
+<status>active</status>
+<significance><real>3.00</real></significance>
+<criterionFunction category="Rubis" subCategory="performance" >
+<scale>
+<quantitative>
+<preferenceDirection>min</preferenceDirection>
+<min><real>0.00</real></min>
+<max><real>100.00</real></max>
+</quantitative>
+</scale>
+<thresholds>
+<threshold><type>ind</type>
+<function><constant>
+<real>1.84</real>
+</constant></function>
+</threshold>
+<threshold><type>pref</type>
+<function><constant>
+<real>1.84</real>
+</constant></function>
+</threshold>
+<threshold><type>veto</type>
+<function><constant>
+<real>56.91</real>
+</constant></function>
+</threshold>
+</thresholds>
+</criterionFunction>
+</criterion>
+<criterion id="c3" >
+<description>
+<name>random ordinal cost criterion</name>
+<type>criterion</type>
+<comment>Evaluation generator: triangular law with variable mode (m) and probability repartition (p = 0.5). Cheap actions: m = 30%; neutral actions: m = 50%; advantageous actions: m = 70%.</comment>
+<version>performance</version>
+</description>
+<status>active</status>
+<significance><real>4.00</real></significance>
+<criterionFunction category="Rubis" subCategory="performance" >
+<scale>
+<quantitative>
+<preferenceDirection>min</preferenceDirection>
+<min><real>0.00</real></min>
+<max><real>10.00</real></max>
+</quantitative>
+</scale>
+<thresholds>
+</thresholds>
+</criterionFunction>
+</criterion>
+<criterion id="c4" >
+<description>
+<name>random cardinal cost criterion</name>
+<type>criterion</type>
+<comment>Evaluation generator: triangular law with variable mode (m) and probability repartition (p = 0.5). Cheap actions: m = 30%; neutral actions: m = 50%; advantageous actions: m = 70%.</comment>
+<version>performance</version>
+</description>
+<status>active</status>
+<significance><real>2.00</real></significance>
+<criterionFunction category="Rubis" subCategory="performance" >
+<scale>
+<quantitative>
+<preferenceDirection>min</preferenceDirection>
+<min><real>0.00</real></min>
+<max><real>100.00</real></max>
+</quantitative>
+</scale>
+<thresholds>
+<threshold><type>ind</type>
+<function><constant>
+<real>0.64</real>
+</constant></function>
+</threshold>
+<threshold><type>pref</type>
+<function><constant>
+<real>0.64</real>
+</constant></function>
+</threshold>
+<threshold><type>veto</type>
+<function><constant>
+<real>45.92</real>
+</constant></function>
+</threshold>
+</thresholds>
+</criterionFunction>
+</criterion>
+</criteria>
+<performanceTable>
+<description>
+<subTitle>Rubis Performance Table.</subTitle>
+<type>performanceTable</type>
+</description>
+<criterionEvaluations>
+<criterionID>b1</criterionID>
+<evaluation>
+<alternativeID>a1</alternativeID>
+<value><real>64.95</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a2</alternativeID>
+<value><real>67.10</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a3</alternativeID>
+<value><real>59.50</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a4</alternativeID>
+<value><real>70.35</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a5</alternativeID>
+<value><real>65.59</real></value>
+</evaluation>
+</criterionEvaluations>
+<criterionEvaluations>
+<criterionID>b2</criterionID>
+<evaluation>
+<alternativeID>a1</alternativeID>
+<value><real>33.85</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a2</alternativeID>
+<value><real>28.59</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a3</alternativeID>
+<value><real>79.05</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a4</alternativeID>
+<value><real>79.10</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a5</alternativeID>
+<value><real>4.02</real></value>
+</evaluation>
+</criterionEvaluations>
+<criterionEvaluations>
+<criterionID>b3</criterionID>
+<evaluation>
+<alternativeID>a1</alternativeID>
+<value><real>7.00</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a2</alternativeID>
+<value><real>2.00</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a3</alternativeID>
+<value><real>6.00</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a4</alternativeID>
+<value><real>5.00</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a5</alternativeID>
+<value><real>3.00</real></value>
+</evaluation>
+</criterionEvaluations>
+<criterionEvaluations>
+<criterionID>c1</criterionID>
+<evaluation>
+<alternativeID>a1</alternativeID>
+<value><real>8.00</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a2</alternativeID>
+<value><real>3.00</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a3</alternativeID>
+<value><real>2.00</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a4</alternativeID>
+<value><real>9.00</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a5</alternativeID>
+<value><real>4.00</real></value>
+</evaluation>
+</criterionEvaluations>
+<criterionEvaluations>
+<criterionID>c2</criterionID>
+<evaluation>
+<alternativeID>a1</alternativeID>
+<value><real>60.74</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a2</alternativeID>
+<value><real>18.05</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a3</alternativeID>
+<value><real>72.68</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a4</alternativeID>
+<value><real>74.96</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a5</alternativeID>
+<value><real>70.84</real></value>
+</evaluation>
+</criterionEvaluations>
+<criterionEvaluations>
+<criterionID>c3</criterionID>
+<evaluation>
+<alternativeID>a1</alternativeID>
+<value><real>6.00</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a2</alternativeID>
+<value><real>6.00</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a3</alternativeID>
+<value><real>7.00</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a4</alternativeID>
+<value><real>2.00</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a5</alternativeID>
+<value><real>0.00</real></value>
+</evaluation>
+</criterionEvaluations>
+<criterionEvaluations>
+<criterionID>c4</criterionID>
+<evaluation>
+<alternativeID>a1</alternativeID>
+<value><real>71.28</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a2</alternativeID>
+<value><real>25.36</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a3</alternativeID>
+<value><real>51.74</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a4</alternativeID>
+<value><real>51.10</real></value>
+</evaluation>
+<evaluation>
+<alternativeID>a5</alternativeID>
+<value><real>63.31</real></value>
+</evaluation>
+</criterionEvaluations>
+</performanceTable>
+</xmcda:XMCDA>

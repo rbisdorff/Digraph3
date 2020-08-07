@@ -1,0 +1,19 @@
+*----- show short --------------*
+Instance name      : random3ObjectivesPerfTab_pr
+Size (in bytes)    : 1696313
+# Actions          : 100
+# Criteria         : 13
+Sorting by         : 5-Tiling
+Ordering strategy  : average
+Local ranking rule : Copeland
+# Components       : 9
+Minimal size       : 1
+Maximal order      : 37
+Average order      : 11.1
+Fill rate          : 26.525%
+*-- Constructor run times (in sec.) --*
+Total time         : 0.81001
+QuantilesSorting   : 0.17121
+Preordering        : 0.00093
+Decomposing        : 0.60206
+Ordering           : 0.02069

@@ -1,0 +1,6 @@
+"criteria","name","weight","scale","prefDir","thresholds","a1","a2","a3","a4","a5","a6","a7"
+"b1","random cardinal benefit criterion","2.0","(0.0, 100.0)","max","OrderedDict([('ind', (Decimal('0.17'), Decimal('0'))), ('pref', (Decimal('3.49'), Decimal('0'))), ('veto', (Decimal('43.27'), Decimal('0')))])",36.52,36.69,18.70,14.52,-999.00,57.79,22.19
+"b2","random cardinal benefit criterion","2.0","(0.0, 100.0)","max","OrderedDict([('ind', (Decimal('4.566588563803998'), Decimal('0'))), ('pref', (Decimal('9.23'), Decimal('0'))), ('veto', (Decimal('66.44282681068991'), Decimal('0')))])",19.24,85.88,19.45,71.80,81.03,41.21,53.19
+"b3","random ordinal benefit criterion","2.0","(0, 10)","max","OrderedDict()",6.00,1.00,5.00,6.00,5.00,5.00,4.00
+"c1","random ordinal cost criterion","-3.0","(0, 10)","min","OrderedDict()",3.00,4.00,7.00,9.00,7.00,7.00,7.00
+"c2","random cardinal cost criterion","-3.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('1.260297966912198'), Decimal('0'))), ('pref', (Decimal('8.26'), Decimal('0'))), ('veto', (Decimal('66.4297020330878'), Decimal('0')))])",40.49,87.85,21.46,58.06,20.81,39.19,29.72

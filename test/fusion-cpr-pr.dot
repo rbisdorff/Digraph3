@@ -1,0 +1,355 @@
+digraph G {
+graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nDigraph3 (graphviz)\n R. Bisdorff, 2020", size="7,7",fontsize=10];
+p001 [shape = "circle", label = "p001", fontsize=10];
+p002 [shape = "circle", label = "p002", fontsize=10];
+p003 [shape = "circle", label = "p003", fontsize=10];
+p004 [shape = "circle", label = "p004", fontsize=10];
+p005 [shape = "circle", label = "p005", fontsize=10];
+p006 [shape = "circle", label = "p006", fontsize=10];
+p007 [shape = "circle", label = "p007", fontsize=10];
+p008 [shape = "circle", label = "p008", fontsize=10];
+p009 [shape = "circle", label = "p009", fontsize=10];
+p010 [shape = "circle", label = "p010", fontsize=10];
+p011 [shape = "circle", label = "p011", fontsize=10];
+p012 [shape = "circle", label = "p012", fontsize=10];
+p013 [shape = "circle", label = "p013", fontsize=10];
+p014 [shape = "circle", label = "p014", fontsize=10];
+p015 [shape = "circle", label = "p015", fontsize=10];
+p016 [shape = "circle", label = "p016", fontsize=10];
+p017 [shape = "circle", label = "p017", fontsize=10];
+p018 [shape = "circle", label = "p018", fontsize=10];
+p019 [shape = "circle", label = "p019", fontsize=10];
+p020 [shape = "circle", label = "p020", fontsize=10];
+p021 [shape = "circle", label = "p021", fontsize=10];
+p022 [shape = "circle", label = "p022", fontsize=10];
+p023 [shape = "circle", label = "p023", fontsize=10];
+p024 [shape = "circle", label = "p024", fontsize=10];
+p025 [shape = "circle", label = "p025", fontsize=10];
+p026 [shape = "circle", label = "p026", fontsize=10];
+p027 [shape = "circle", label = "p027", fontsize=10];
+p028 [shape = "circle", label = "p028", fontsize=10];
+p029 [shape = "circle", label = "p029", fontsize=10];
+p030 [shape = "circle", label = "p030", fontsize=10];
+p031 [shape = "circle", label = "p031", fontsize=10];
+p032 [shape = "circle", label = "p032", fontsize=10];
+p033 [shape = "circle", label = "p033", fontsize=10];
+p034 [shape = "circle", label = "p034", fontsize=10];
+p035 [shape = "circle", label = "p035", fontsize=10];
+p036 [shape = "circle", label = "p036", fontsize=10];
+p037 [shape = "circle", label = "p037", fontsize=10];
+p038 [shape = "circle", label = "p038", fontsize=10];
+p039 [shape = "circle", label = "p039", fontsize=10];
+p040 [shape = "circle", label = "p040", fontsize=10];
+p041 [shape = "circle", label = "p041", fontsize=10];
+p042 [shape = "circle", label = "p042", fontsize=10];
+p043 [shape = "circle", label = "p043", fontsize=10];
+p044 [shape = "circle", label = "p044", fontsize=10];
+p045 [shape = "circle", label = "p045", fontsize=10];
+p046 [shape = "circle", label = "p046", fontsize=10];
+p047 [shape = "circle", label = "p047", fontsize=10];
+p048 [shape = "circle", label = "p048", fontsize=10];
+p049 [shape = "circle", label = "p049", fontsize=10];
+p050 [shape = "circle", label = "p050", fontsize=10];
+p051 [shape = "circle", label = "p051", fontsize=10];
+p052 [shape = "circle", label = "p052", fontsize=10];
+p053 [shape = "circle", label = "p053", fontsize=10];
+p054 [shape = "circle", label = "p054", fontsize=10];
+p055 [shape = "circle", label = "p055", fontsize=10];
+p056 [shape = "circle", label = "p056", fontsize=10];
+p057 [shape = "circle", label = "p057", fontsize=10];
+p058 [shape = "circle", label = "p058", fontsize=10];
+p059 [shape = "circle", label = "p059", fontsize=10];
+p060 [shape = "circle", label = "p060", fontsize=10];
+p061 [shape = "circle", label = "p061", fontsize=10];
+p062 [shape = "circle", label = "p062", fontsize=10];
+p063 [shape = "circle", label = "p063", fontsize=10];
+p064 [shape = "circle", label = "p064", fontsize=10];
+p065 [shape = "circle", label = "p065", fontsize=10];
+p066 [shape = "circle", label = "p066", fontsize=10];
+p067 [shape = "circle", label = "p067", fontsize=10];
+p068 [shape = "circle", label = "p068", fontsize=10];
+p069 [shape = "circle", label = "p069", fontsize=10];
+p070 [shape = "circle", label = "p070", fontsize=10];
+p071 [shape = "circle", label = "p071", fontsize=10];
+p072 [shape = "circle", label = "p072", fontsize=10];
+p073 [shape = "circle", label = "p073", fontsize=10];
+p074 [shape = "circle", label = "p074", fontsize=10];
+p075 [shape = "circle", label = "p075", fontsize=10];
+p076 [shape = "circle", label = "p076", fontsize=10];
+p077 [shape = "circle", label = "p077", fontsize=10];
+p078 [shape = "circle", label = "p078", fontsize=10];
+p079 [shape = "circle", label = "p079", fontsize=10];
+p080 [shape = "circle", label = "p080", fontsize=10];
+p081 [shape = "circle", label = "p081", fontsize=10];
+p082 [shape = "circle", label = "p082", fontsize=10];
+p083 [shape = "circle", label = "p083", fontsize=10];
+p084 [shape = "circle", label = "p084", fontsize=10];
+p085 [shape = "circle", label = "p085", fontsize=10];
+p086 [shape = "circle", label = "p086", fontsize=10];
+p087 [shape = "circle", label = "p087", fontsize=10];
+p088 [shape = "circle", label = "p088", fontsize=10];
+p089 [shape = "circle", label = "p089", fontsize=10];
+p090 [shape = "circle", label = "p090", fontsize=10];
+p091 [shape = "circle", label = "p091", fontsize=10];
+p092 [shape = "circle", label = "p092", fontsize=10];
+p093 [shape = "circle", label = "p093", fontsize=10];
+p094 [shape = "circle", label = "p094", fontsize=10];
+p095 [shape = "circle", label = "p095", fontsize=10];
+p096 [shape = "circle", label = "p096", fontsize=10];
+p097 [shape = "circle", label = "p097", fontsize=10];
+p098 [shape = "circle", label = "p098", fontsize=10];
+p099 [shape = "circle", label = "p099", fontsize=10];
+p100 [shape = "circle", label = "p100", fontsize=10];
+{ rank = 0; p048; p036; }
+{ rank = 1; p052; }
+{ rank = 2; p008; }
+{ rank = 3; p076; p075; p070; }
+{ rank = 4; p060; }
+{ rank = 5; p066; }
+{ rank = 6; p085; }
+{ rank = 7; p039; p080; p051; p007; }
+{ rank = 8; p016; p038; }
+{ rank = 9; p061; p049; }
+{ rank = 10; p092; p037; p004; }
+{ rank = 11; p009; p027; p003; }
+{ rank = 12; p046; p006; p062; p012; p019; }
+{ rank = 13; p026; p082; p100; p093; }
+{ rank = 14; p064; p067; p099; }
+{ rank = 15; p098; p050; p068; }
+{ rank = 16; p025; p058; p029; }
+{ rank = 17; p005; p014; }
+{ rank = 18; p081; p011; p089; }
+{ rank = 19; p020; p015; p063; p013; p047; }
+{ rank = 20; p087; p096; }
+{ rank = 21; p086; p053; }
+{ rank = 22; p035; p010; p018; }
+{ rank = 23; p017; p032; }
+{ rank = 24; p091; p095; }
+{ rank = 25; p072; p024; p031; }
+{ rank = 26; p097; p034; }
+{ rank = 27; p023; p083; p028; }
+{ rank = 28; p065; p055; p021; }
+{ rank = 29; p040; p030; p002; p071; }
+{ rank = 30; p045; p094; p074; }
+{ rank = 31; p073; p041; }
+{ rank = 32; p078; p042; }
+{ rank = 33; p088; p033; p057; }
+{ rank = 34; p022; p044; }
+{ rank = 35; p079; p001; }
+{ rank = 36; p069; }
+{ rank = 37; p056; p077; }
+{ rank = 38; p043; p090; p059; }
+{ rank = 39; p054; }
+{ rank = 40; p084; }
+p048-> p052 [style="setlinewidth(1)",color=black] ;
+p036-> p075 [style="setlinewidth(1)",color=black] ;
+p036-> p066 [style="setlinewidth(1)",color=black] ;
+p052-> p008 [style="setlinewidth(1)",color=black] ;
+p008-> p076 [style="setlinewidth(1)",color=black] ;
+p008-> p075 [style="setlinewidth(1)",color=black] ;
+p008-> p070 [style="setlinewidth(1)",color=black] ;
+p076-> p066 [style="setlinewidth(1)",color=black] ;
+p075-> p080 [style="setlinewidth(1)",color=black] ;
+p075-> p051 [style="setlinewidth(1)",color=black] ;
+p070-> p060 [style="setlinewidth(1)",color=black] ;
+p060-> p066 [style="setlinewidth(1)",color=black] ;
+p066-> p085 [style="setlinewidth(1)",color=black] ;
+p085-> p039 [style="setlinewidth(1)",color=black] ;
+p085-> p080 [style="setlinewidth(1)",color=black] ;
+p085-> p051 [style="setlinewidth(1)",color=black] ;
+p085-> p007 [style="setlinewidth(1)",color=black] ;
+p039-> p061 [style="setlinewidth(1)",color=black] ;
+p039-> p009 [style="setlinewidth(1)",color=black] ;
+p039-> p027 [style="setlinewidth(1)",color=black] ;
+p080-> p016 [style="setlinewidth(1)",color=black] ;
+p080-> p038 [style="setlinewidth(1)",color=black] ;
+p051-> p004 [style="setlinewidth(1)",color=black] ;
+p051-> p027 [style="setlinewidth(1)",color=black] ;
+p051-> p046 [style="setlinewidth(1)",color=black] ;
+p051-> p099 [style="setlinewidth(1)",color=black] ;
+p007-> p099 [style="setlinewidth(1)",color=black] ;
+p007-> p029 [style="setlinewidth(1)",color=black] ;
+p016-> p061 [style="setlinewidth(1)",color=black] ;
+p016-> p037 [style="setlinewidth(1)",color=black] ;
+p016-> p004 [style="setlinewidth(1)",color=black] ;
+p038-> p049 [style="setlinewidth(1)",color=black] ;
+p061-> p092 [style="setlinewidth(1)",color=black] ;
+p061-> p046 [style="setlinewidth(1)",color=black] ;
+p061-> p026 [style="setlinewidth(1)",color=black] ;
+p049-> p092 [style="setlinewidth(1)",color=black] ;
+p049-> p037 [style="setlinewidth(1)",color=black] ;
+p049-> p004 [style="setlinewidth(1)",color=black] ;
+p092-> p003 [style="setlinewidth(1)",color=black] ;
+p037-> p009 [style="setlinewidth(1)",color=black] ;
+p037-> p027 [style="setlinewidth(1)",color=black] ;
+p037-> p003 [style="setlinewidth(1)",color=black] ;
+p004-> p026 [style="setlinewidth(1)",color=black] ;
+p004-> p082 [style="setlinewidth(1)",color=black] ;
+p009-> p046 [style="setlinewidth(1)",color=black] ;
+p009-> p006 [style="setlinewidth(1)",color=black] ;
+p009-> p062 [style="setlinewidth(1)",color=black] ;
+p009-> p012 [style="setlinewidth(1)",color=black] ;
+p009-> p019 [style="setlinewidth(1)",color=black] ;
+p027-> p006 [style="setlinewidth(1)",color=black] ;
+p027-> p062 [style="setlinewidth(1)",color=black] ;
+p003-> p012 [style="setlinewidth(1)",color=black] ;
+p003-> p019 [style="setlinewidth(1)",color=black] ;
+p003-> p093 [style="setlinewidth(1)",color=black] ;
+p046-> p082 [style="setlinewidth(1)",color=black] ;
+p046-> p093 [style="setlinewidth(1)",color=black] ;
+p046-> p050 [style="setlinewidth(1)",color=black] ;
+p006-> p026 [style="setlinewidth(1)",color=black] ;
+p006-> p082 [style="setlinewidth(1)",color=black] ;
+p006-> p093 [style="setlinewidth(1)",color=black] ;
+p006-> p050 [style="setlinewidth(1)",color=black] ;
+p062-> p026 [style="setlinewidth(1)",color=black] ;
+p062-> p082 [style="setlinewidth(1)",color=black] ;
+p062-> p093 [style="setlinewidth(1)",color=black] ;
+p012-> p100 [style="setlinewidth(1)",color=black] ;
+p019-> p100 [style="setlinewidth(1)",color=black] ;
+p019-> p064 [style="setlinewidth(1)",color=black] ;
+p019-> p067 [style="setlinewidth(1)",color=black] ;
+p026-> p029 [style="setlinewidth(1)",color=black] ;
+p082-> p064 [style="setlinewidth(1)",color=black] ;
+p082-> p067 [style="setlinewidth(1)",color=black] ;
+p100-> p099 [style="setlinewidth(1)",color=black] ;
+p100-> p098 [style="setlinewidth(1)",color=black] ;
+p093-> p064 [style="setlinewidth(1)",color=black] ;
+p093-> p067 [style="setlinewidth(1)",color=black] ;
+p064-> p098 [style="setlinewidth(1)",color=black] ;
+p064-> p011 [style="setlinewidth(1)",color=black] ;
+p067-> p098 [style="setlinewidth(1)",color=black] ;
+p067-> p068 [style="setlinewidth(1)",color=black] ;
+p099-> p050 [style="setlinewidth(1)",color=black] ;
+p099-> p068 [style="setlinewidth(1)",color=black] ;
+p098-> p029 [style="setlinewidth(1)",color=black] ;
+p098-> p081 [style="setlinewidth(1)",color=black] ;
+p050-> p014 [style="setlinewidth(1)",color=black] ;
+p068-> p025 [style="setlinewidth(1)",color=black] ;
+p068-> p058 [style="setlinewidth(1)",color=black] ;
+p068-> p005 [style="setlinewidth(1)",color=black] ;
+p025-> p014 [style="setlinewidth(1)",color=black] ;
+p058-> p014 [style="setlinewidth(1)",color=black] ;
+p029-> p005 [style="setlinewidth(1)",color=black] ;
+p005-> p089 [style="setlinewidth(1)",color=black] ;
+p014-> p081 [style="setlinewidth(1)",color=black] ;
+p014-> p011 [style="setlinewidth(1)",color=black] ;
+p014-> p089 [style="setlinewidth(1)",color=black] ;
+p081-> p063 [style="setlinewidth(1)",color=black] ;
+p081-> p013 [style="setlinewidth(1)",color=black] ;
+p081-> p047 [style="setlinewidth(1)",color=black] ;
+p011-> p015 [style="setlinewidth(1)",color=black] ;
+p011-> p087 [style="setlinewidth(1)",color=black] ;
+p011-> p096 [style="setlinewidth(1)",color=black] ;
+p089-> p020 [style="setlinewidth(1)",color=black] ;
+p089-> p063 [style="setlinewidth(1)",color=black] ;
+p089-> p013 [style="setlinewidth(1)",color=black] ;
+p089-> p047 [style="setlinewidth(1)",color=black] ;
+p020-> p096 [style="setlinewidth(1)",color=black] ;
+p020-> p053 [style="setlinewidth(1)",color=black] ;
+p015-> p053 [style="setlinewidth(1)",color=black] ;
+p063-> p087 [style="setlinewidth(1)",color=black] ;
+p063-> p096 [style="setlinewidth(1)",color=black] ;
+p013-> p096 [style="setlinewidth(1)",color=black] ;
+p013-> p053 [style="setlinewidth(1)",color=black] ;
+p047-> p087 [style="setlinewidth(1)",color=black] ;
+p047-> p096 [style="setlinewidth(1)",color=black] ;
+p087-> p053 [style="setlinewidth(1)",color=black] ;
+p096-> p086 [style="setlinewidth(1)",color=black] ;
+p086-> p035 [style="setlinewidth(1)",color=black] ;
+p086-> p010 [style="setlinewidth(1)",color=black] ;
+p086-> p018 [style="setlinewidth(1)",color=black] ;
+p053-> p035 [style="setlinewidth(1)",color=black] ;
+p053-> p010 [style="setlinewidth(1)",color=black] ;
+p053-> p018 [style="setlinewidth(1)",color=black] ;
+p035-> p017 [style="setlinewidth(1)",color=black] ;
+p035-> p032 [style="setlinewidth(1)",color=black] ;
+p010-> p072 [style="setlinewidth(1)",color=black] ;
+p010-> p024 [style="setlinewidth(1)",color=black] ;
+p010-> p065 [style="setlinewidth(1)",color=black] ;
+p018-> p032 [style="setlinewidth(1)",color=black] ;
+p017-> p095 [style="setlinewidth(1)",color=black] ;
+p017-> p024 [style="setlinewidth(1)",color=black] ;
+p017-> p031 [style="setlinewidth(1)",color=black] ;
+p032-> p091 [style="setlinewidth(1)",color=black] ;
+p032-> p095 [style="setlinewidth(1)",color=black] ;
+p091-> p072 [style="setlinewidth(1)",color=black] ;
+p091-> p024 [style="setlinewidth(1)",color=black] ;
+p091-> p031 [style="setlinewidth(1)",color=black] ;
+p095-> p023 [style="setlinewidth(1)",color=black] ;
+p095-> p083 [style="setlinewidth(1)",color=black] ;
+p095-> p028 [style="setlinewidth(1)",color=black] ;
+p072-> p097 [style="setlinewidth(1)",color=black] ;
+p024-> p097 [style="setlinewidth(1)",color=black] ;
+p024-> p055 [style="setlinewidth(1)",color=black] ;
+p031-> p034 [style="setlinewidth(1)",color=black] ;
+p097-> p023 [style="setlinewidth(1)",color=black] ;
+p097-> p094 [style="setlinewidth(1)",color=black] ;
+p034-> p023 [style="setlinewidth(1)",color=black] ;
+p034-> p083 [style="setlinewidth(1)",color=black] ;
+p034-> p028 [style="setlinewidth(1)",color=black] ;
+p023-> p021 [style="setlinewidth(1)",color=black] ;
+p023-> p073 [style="setlinewidth(1)",color=black] ;
+p083-> p065 [style="setlinewidth(1)",color=black] ;
+p083-> p055 [style="setlinewidth(1)",color=black] ;
+p083-> p040 [style="setlinewidth(1)",color=black] ;
+p083-> p030 [style="setlinewidth(1)",color=black] ;
+p028-> p065 [style="setlinewidth(1)",color=black] ;
+p028-> p055 [style="setlinewidth(1)",color=black] ;
+p028-> p040 [style="setlinewidth(1)",color=black] ;
+p028-> p030 [style="setlinewidth(1)",color=black] ;
+p065-> p071 [style="setlinewidth(1)",color=black] ;
+p055-> p002 [style="setlinewidth(1)",color=black] ;
+p055-> p071 [style="setlinewidth(1)",color=black] ;
+p021-> p040 [style="setlinewidth(1)",color=black] ;
+p021-> p030 [style="setlinewidth(1)",color=black] ;
+p021-> p002 [style="setlinewidth(1)",color=black] ;
+p021-> p088 [style="setlinewidth(1)",color=black] ;
+p040-> p045 [style="setlinewidth(1)",color=black] ;
+p040-> p074 [style="setlinewidth(1)",color=black] ;
+p040-> p041 [style="setlinewidth(1)",color=black] ;
+p040-> p044 [style="setlinewidth(1)",color=black] ;
+p030-> p045 [style="setlinewidth(1)",color=black] ;
+p030-> p074 [style="setlinewidth(1)",color=black] ;
+p030-> p041 [style="setlinewidth(1)",color=black] ;
+p030-> p077 [style="setlinewidth(1)",color=black] ;
+p002-> p045 [style="setlinewidth(1)",color=black] ;
+p002-> p074 [style="setlinewidth(1)",color=black] ;
+p002-> p041 [style="setlinewidth(1)",color=black] ;
+p002-> p044 [style="setlinewidth(1)",color=black] ;
+p071-> p094 [style="setlinewidth(1)",color=black] ;
+p045-> p054 [style="setlinewidth(1)",color=black] ;
+p094-> p073 [style="setlinewidth(1)",color=black] ;
+p094-> p041 [style="setlinewidth(1)",color=black] ;
+p074-> p022 [style="setlinewidth(1)",color=black] ;
+p073-> p078 [style="setlinewidth(1)",color=black] ;
+p073-> p042 [style="setlinewidth(1)",color=black] ;
+p041-> p057 [style="setlinewidth(1)",color=black] ;
+p041-> p079 [style="setlinewidth(1)",color=black] ;
+p078-> p088 [style="setlinewidth(1)",color=black] ;
+p078-> p057 [style="setlinewidth(1)",color=black] ;
+p042-> p088 [style="setlinewidth(1)",color=black] ;
+p042-> p033 [style="setlinewidth(1)",color=black] ;
+p088-> p022 [style="setlinewidth(1)",color=black] ;
+p088-> p044 [style="setlinewidth(1)",color=black] ;
+p033-> p001 [style="setlinewidth(1)",color=black] ;
+p057-> p022 [style="setlinewidth(1)",color=black] ;
+p022-> p056 [style="setlinewidth(1)",color=black] ;
+p044-> p079 [style="setlinewidth(1)",color=black] ;
+p044-> p001 [style="setlinewidth(1)",color=black] ;
+p079-> p056 [style="setlinewidth(1)",color=black] ;
+p001-> p069 [style="setlinewidth(1)",color=black] ;
+p069-> p056 [style="setlinewidth(1)",color=black] ;
+p069-> p077 [style="setlinewidth(1)",color=black] ;
+p056-> p043 [style="setlinewidth(1)",color=black] ;
+p056-> p059 [style="setlinewidth(1)",color=black] ;
+p077-> p043 [style="setlinewidth(1)",color=black] ;
+p077-> p090 [style="setlinewidth(1)",color=black] ;
+p077-> p059 [style="setlinewidth(1)",color=black] ;
+p043-> p054 [style="setlinewidth(1)",color=black] ;
+p059-> p054 [style="setlinewidth(1)",color=black] ;
+p054-> p084 [style="setlinewidth(1)",color=black] ;
+}
+ 

@@ -1,0 +1,155 @@
+digraph G {
+graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nDigraph3 (graphviz)\n R. Bisdorff, 2020", size="7,7",fontsize=10];
+a01 [shape = "circle", label = "a01a", fontsize=10];
+a02 [shape = "circle", label = "a02c", fontsize=10];
+a03 [shape = "circle", label = "a03n", fontsize=10];
+a04 [shape = "circle", label = "a04n", fontsize=10];
+a05 [shape = "circle", label = "a05a", fontsize=10];
+a06 [shape = "circle", label = "a06c", fontsize=10];
+a07 [shape = "circle", label = "a07c", fontsize=10];
+a08 [shape = "circle", label = "a08n", fontsize=10];
+a09 [shape = "circle", label = "a09n", fontsize=10];
+a10 [shape = "circle", label = "a10n", fontsize=10];
+a11 [shape = "circle", label = "a11a", fontsize=10];
+a12 [shape = "circle", label = "a12c", fontsize=10];
+a13 [shape = "circle", label = "a13c", fontsize=10];
+a14 [shape = "circle", label = "a14a", fontsize=10];
+a15 [shape = "circle", label = "a15n", fontsize=10];
+a16 [shape = "circle", label = "a16n", fontsize=10];
+a17 [shape = "circle", label = "a17c", fontsize=10];
+a18 [shape = "circle", label = "a18c", fontsize=10];
+a19 [shape = "circle", label = "a19a", fontsize=10];
+a20 [shape = "circle", label = "a20n", fontsize=10];
+a21 [shape = "circle", label = "a21c", fontsize=10];
+a22 [shape = "circle", label = "a22n", fontsize=10];
+a23 [shape = "circle", label = "a23c", fontsize=10];
+a24 [shape = "circle", label = "a24a", fontsize=10];
+a25 [shape = "circle", label = "a25n", fontsize=10];
+a26 [shape = "circle", label = "a26n", fontsize=10];
+a27 [shape = "circle", label = "a27n", fontsize=10];
+a28 [shape = "circle", label = "a28n", fontsize=10];
+a29 [shape = "circle", label = "a29a", fontsize=10];
+a30 [shape = "circle", label = "a30n", fontsize=10];
+a31 [shape = "circle", label = "a31n", fontsize=10];
+a32 [shape = "circle", label = "a32c", fontsize=10];
+a33 [shape = "circle", label = "a33a", fontsize=10];
+a34 [shape = "circle", label = "a34n", fontsize=10];
+a35 [shape = "circle", label = "a35a", fontsize=10];
+a36 [shape = "circle", label = "a36n", fontsize=10];
+a37 [shape = "circle", label = "a37c", fontsize=10];
+a38 [shape = "circle", label = "a38n", fontsize=10];
+a39 [shape = "circle", label = "a39c", fontsize=10];
+a40 [shape = "circle", label = "a40n", fontsize=10];
+a41 [shape = "circle", label = "a41a", fontsize=10];
+a42 [shape = "circle", label = "a42n", fontsize=10];
+a43 [shape = "circle", label = "a43c", fontsize=10];
+a44 [shape = "circle", label = "a44a", fontsize=10];
+a45 [shape = "circle", label = "a45c", fontsize=10];
+a46 [shape = "circle", label = "a46c", fontsize=10];
+a47 [shape = "circle", label = "a47c", fontsize=10];
+a48 [shape = "circle", label = "a48c", fontsize=10];
+a49 [shape = "circle", label = "a49n", fontsize=10];
+a50 [shape = "circle", label = "a50a", fontsize=10];
+{ rank = 0; a39; }
+{ rank = 1; a36; }
+{ rank = 2; a11; }
+{ rank = 3; a27; }
+{ rank = 4; a47; }
+{ rank = 5; a26; }
+{ rank = 6; a16; }
+{ rank = 7; a17; }
+{ rank = 8; a19; }
+{ rank = 9; a41; }
+{ rank = 10; a13; }
+{ rank = 11; a40; }
+{ rank = 12; a05; }
+{ rank = 13; a12; }
+{ rank = 14; a02; }
+{ rank = 15; a34; }
+{ rank = 16; a22; }
+{ rank = 17; a03; }
+{ rank = 18; a31; }
+{ rank = 19; a29; }
+{ rank = 20; a28; }
+{ rank = 21; a45; }
+{ rank = 22; a23; }
+{ rank = 23; a38; }
+{ rank = 24; a25; }
+{ rank = 25; a49; }
+{ rank = 26; a35; }
+{ rank = 27; a30; }
+{ rank = 28; a18; }
+{ rank = 29; a44; }
+{ rank = 30; a43; a50; }
+{ rank = 31; a10; }
+{ rank = 32; a15; }
+{ rank = 33; a08; }
+{ rank = 34; a09; }
+{ rank = 35; a24; }
+{ rank = 36; a33; }
+{ rank = 37; a42; }
+{ rank = 38; a04; }
+{ rank = 39; a48; }
+{ rank = 40; a37; }
+{ rank = 41; a46; }
+{ rank = 42; a07; }
+{ rank = 43; a06; }
+{ rank = 44; a14; }
+{ rank = 45; a01; }
+{ rank = 46; a32; }
+{ rank = 47; a20; }
+{ rank = 48; a21; }
+a39-> a36 [style="setlinewidth(1)",color=black] ;
+a36-> a11 [style="setlinewidth(1)",color=black] ;
+a11-> a27 [style="setlinewidth(1)",color=black] ;
+a27-> a47 [style="setlinewidth(1)",color=black] ;
+a47-> a26 [style="setlinewidth(1)",color=black] ;
+a26-> a16 [style="setlinewidth(1)",color=black] ;
+a16-> a17 [style="setlinewidth(1)",color=black] ;
+a17-> a19 [style="setlinewidth(1)",color=black] ;
+a19-> a41 [style="setlinewidth(1)",color=black] ;
+a41-> a13 [style="setlinewidth(1)",color=black] ;
+a13-> a40 [style="setlinewidth(1)",color=black] ;
+a40-> a05 [style="setlinewidth(1)",color=black] ;
+a05-> a12 [style="setlinewidth(1)",color=black] ;
+a12-> a02 [style="setlinewidth(1)",color=black] ;
+a02-> a34 [style="setlinewidth(1)",color=black] ;
+a34-> a22 [style="setlinewidth(1)",color=black] ;
+a22-> a03 [style="setlinewidth(1)",color=black] ;
+a03-> a31 [style="setlinewidth(1)",color=black] ;
+a31-> a29 [style="setlinewidth(1)",color=black] ;
+a29-> a28 [style="setlinewidth(1)",color=black] ;
+a28-> a45 [style="setlinewidth(1)",color=black] ;
+a45-> a23 [style="setlinewidth(1)",color=black] ;
+a23-> a38 [style="setlinewidth(1)",color=black] ;
+a38-> a25 [style="setlinewidth(1)",color=black] ;
+a25-> a49 [style="setlinewidth(1)",color=black] ;
+a49-> a35 [style="setlinewidth(1)",color=black] ;
+a35-> a30 [style="setlinewidth(1)",color=black] ;
+a30-> a18 [style="setlinewidth(1)",color=black] ;
+a18-> a44 [style="setlinewidth(1)",color=black] ;
+a44-> a43 [style="setlinewidth(1)",color=black] ;
+a44-> a50 [style="setlinewidth(1)",color=black] ;
+a43-> a10 [style="setlinewidth(1)",color=black] ;
+a50-> a01 [style="setlinewidth(1)",color=black] ;
+a10-> a15 [style="setlinewidth(1)",color=black] ;
+a15-> a08 [style="setlinewidth(1)",color=black] ;
+a08-> a09 [style="setlinewidth(1)",color=black] ;
+a09-> a24 [style="setlinewidth(1)",color=black] ;
+a24-> a33 [style="setlinewidth(1)",color=black] ;
+a33-> a42 [style="setlinewidth(1)",color=black] ;
+a42-> a04 [style="setlinewidth(1)",color=black] ;
+a04-> a48 [style="setlinewidth(1)",color=black] ;
+a48-> a37 [style="setlinewidth(1)",color=black] ;
+a37-> a46 [style="setlinewidth(1)",color=black] ;
+a46-> a07 [style="setlinewidth(1)",color=black] ;
+a07-> a06 [style="setlinewidth(1)",color=black] ;
+a06-> a14 [style="setlinewidth(1)",color=black] ;
+a14-> a01 [style="setlinewidth(1)",color=black] ;
+a01-> a32 [style="setlinewidth(1)",color=black] ;
+a32-> a20 [style="setlinewidth(1)",color=black] ;
+a20-> a21 [style="setlinewidth(1)",color=black] ;
+}
+ 

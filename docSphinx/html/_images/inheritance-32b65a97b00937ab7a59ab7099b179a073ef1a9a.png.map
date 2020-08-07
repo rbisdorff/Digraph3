@@ -1,0 +1,8 @@
+<map id="inheritancef2ea2c13fe" name="inheritancef2ea2c13fe">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="20,3,77,15"/>
+<area shape="rect" id="node3" href="#outrankingDigraphs.OutrankingDigraph" target="_top" title="Abstract root class for **outranking digraphs** inheritating methods both from the generic :py:class:`digraphs.Digraph`" alt="" coords="118,3,235,15"/>
+<area shape="rect" id="node2" href="#outrankingDigraphs.BipolarOutrankingDigraph" target="_top" title="Specialization of the abstract OutrankingDigraph root class for generating" alt="" coords="258,3,395,15"/>
+<area shape="rect" id="node6" href="#sparseOutrankingDigraphs.SparseOutrankingDigraph" target="_top" title="Abstract root class for linearly decomposed sparse digraphs." alt="" coords="418,3,574,15"/>
+<area shape="rect" id="node4" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="3,26,95,38"/>
+<area shape="rect" id="node5" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" target="_top" title="Main class for the multiprocessing implementation of pre&#45;ranked sparse outranking digraphs." alt="" coords="597,15,765,27"/>
+</map>

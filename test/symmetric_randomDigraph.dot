@@ -1,0 +1,34 @@
+digraph G {
+graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nDigraph3 (graphviz), R. Bisdorff, 2020", size="7,7"];
+n1 [shape = "circle", label = "a1"];
+n2 [shape = "circle", label = "a2"];
+n3 [shape = "circle", label = "a3"];
+n4 [shape = "circle", label = "a4"];
+n5 [shape = "circle", label = "a5"];
+n6 [shape = "circle", label = "a6"];
+n7 [shape = "circle", label = "a7"];
+n8 [shape = "circle", label = "a8"];
+n9 [shape = "circle", label = "a9"];
+n1-> n3 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n1-> n4 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n1-> n7 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
+n1-> n9 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
+n2-> n3 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n2-> n4 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n2-> n8 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n2-> n9 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n3-> n4 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
+n3-> n7 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n3-> n9 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n4-> n5 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
+n4-> n6 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
+n4-> n7 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n4-> n8 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n4-> n9 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n5-> n6 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n5-> n9 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
+n6-> n7 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n7-> n8 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+}
