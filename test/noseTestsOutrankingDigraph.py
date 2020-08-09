@@ -697,7 +697,7 @@ def testAverageFusionLDigraphs():
                                    vetoProbability=0.5,\
                                    seed=randint(1,1000))
     print(t)
-    afg = CoalitionsFusionOutrankingDigraph(t,Comments=True)
+    afg = CoalitionsOutrankingsFusionDigraph(t,Comments=True)
     afg.showRelationTable()
     afg = UnOpposedObjectivesOutrankingDigraph(t,Comments=True)
     afg.showRelationTable()   

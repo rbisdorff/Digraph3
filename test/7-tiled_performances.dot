@@ -6,53 +6,51 @@ M7 [shape = "box", fillcolor=lightcoral, style=filled, label = "- 1.00]", fontsi
 M6 [shape = "box", fillcolor=lightcoral, style=filled, label = "- 0.86]", fontsize=10];
 M5 [shape = "box", fillcolor=lightcoral, style=filled, label = "- 0.71]", fontsize=10];
 M4 [shape = "box", fillcolor=lightcoral, style=filled, label = "- 0.57]", fontsize=10];
-M3 [shape = "box", fillcolor=lightcoral, style=filled, label = "- 0.43]", fontsize=10];
-a1012 [shape = "circle", label = "a1012a", fontsize=10];
-a1013 [shape = "circle", label = "a1013a", fontsize=10];
-a1014 [shape = "circle", label = "a1014n", fontsize=10];
-a1015 [shape = "circle", label = "a1015n", fontsize=10];
 a1016 [shape = "circle", label = "a1016n", fontsize=10];
-a1017 [shape = "circle", label = "a1017c", fontsize=10];
-a1018 [shape = "circle", label = "a1018c", fontsize=10];
-a1019 [shape = "circle", label = "a1019c", fontsize=10];
-a1020 [shape = "circle", label = "a1020a", fontsize=10];
+M3 [shape = "box", fillcolor=lightcoral, style=filled, label = "- 0.43]", fontsize=10];
+a1011 [shape = "circle", label = "a1011n", fontsize=10];
+a1013 [shape = "circle", label = "a1013a", fontsize=10];
+a1014 [shape = "circle", label = "a1014c", fontsize=10];
+a1017 [shape = "circle", label = "a1017a", fontsize=10];
+a1018 [shape = "circle", label = "a1018a", fontsize=10];
+a1020 [shape = "circle", label = "a1020c", fontsize=10];
 M2 [shape = "box", fillcolor=lightcoral, style=filled, label = "- 0.29]", fontsize=10];
-a1011 [shape = "circle", label = "a1011a", fontsize=10];
+a1012 [shape = "circle", label = "a1012n", fontsize=10];
+a1015 [shape = "circle", label = "a1015a", fontsize=10];
+a1019 [shape = "circle", label = "a1019c", fontsize=10];
 M1 [shape = "box", fillcolor=lightcoral, style=filled, label = "- 0.14]", fontsize=10];
 M1 [shape = "box", fillcolor=lightcoral, style=filled, label = "- 0.14]", fontsize=10];
-{ rank = 10; M7; }
-{ rank = 9; M6; }
-{ rank = 8; M5; }
-{ rank = 7; M4; }
-{ rank = 6; a1017; }
-{ rank = 5; M3; }
-{ rank = 4; a1011; a1015; a1016; a1019; }
-{ rank = 3; M2; }
-{ rank = 2; a1012; a1014; }
-{ rank = 1; M1; }
+{ rank = 9; M7; }
+{ rank = 8; M6; }
+{ rank = 7; M5; }
+{ rank = 6; M4; }
+{ rank = 5; a1016; a1020; }
+{ rank = 4; M3; }
+{ rank = 3; a1011; a1013; a1018; }
+{ rank = 2; M2; }
+{ rank = 1; a1011; a1012; a1014; a1015; a1017; a1019; }
 M7-> M6 [style="setlinewidth(1)",color=black] ;
 M6-> M5 [style="setlinewidth(1)",color=black] ;
 M5-> M4 [style="setlinewidth(1)",color=black] ;
-M4-> M3 [style="setlinewidth(1)",color=black] ;
-M3-> a1012 [style="setlinewidth(1)",color=black] ;
+M4-> a1016 [style="setlinewidth(1)",color=black] ;
+a1016-> M3 [style="setlinewidth(1)",color=black] ;
+M3-> a1011 [style="setlinewidth(1)",color=black] ;
 M3-> a1013 [style="setlinewidth(1)",color=black] ;
 M3-> a1014 [style="setlinewidth(1)",color=black] ;
-M3-> a1015 [style="setlinewidth(1)",color=black] ;
-M3-> a1016 [style="setlinewidth(1)",color=black] ;
 M3-> a1017 [style="setlinewidth(1)",color=black] ;
 M3-> a1018 [style="setlinewidth(1)",color=black] ;
-M3-> a1019 [style="setlinewidth(1)",color=black] ;
 M3-> a1020 [style="setlinewidth(1)",color=black] ;
-a1012-> M2 [style="setlinewidth(1)",color=black] ;
+a1011-> M2 [style="setlinewidth(1)",color=black] ;
 a1013-> M2 [style="setlinewidth(1)",color=black] ;
 a1014-> M2 [style="setlinewidth(1)",color=black] ;
-a1015-> M2 [style="setlinewidth(1)",color=black] ;
-a1016-> M2 [style="setlinewidth(1)",color=black] ;
 a1017-> M2 [style="setlinewidth(1)",color=black] ;
 a1018-> M2 [style="setlinewidth(1)",color=black] ;
-a1019-> M2 [style="setlinewidth(1)",color=black] ;
 a1020-> M2 [style="setlinewidth(1)",color=black] ;
-M2-> a1011 [style="setlinewidth(1)",color=black] ;
-a1011-> M1 [style="setlinewidth(1)",color=black] ;
+M2-> a1012 [style="setlinewidth(1)",color=black] ;
+M2-> a1015 [style="setlinewidth(1)",color=black] ;
+M2-> a1019 [style="setlinewidth(1)",color=black] ;
+a1012-> M1 [style="setlinewidth(1)",color=black] ;
+a1015-> M1 [style="setlinewidth(1)",color=black] ;
+a1019-> M1 [style="setlinewidth(1)",color=black] ;
 }
  

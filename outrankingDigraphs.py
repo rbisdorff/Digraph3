@@ -9761,8 +9761,11 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         print('\n')
     
 
-class CoalitionsFusionOutrankingDigraph(BipolarOutrankingDigraph):
+class CoalitionsOutrankingsFusionDigraph(BipolarOutrankingDigraph):
     """
+    With a list of criteria coalitions, a fusion digraph is constructed 
+    form the fusion of the corresponding marginal coalitions outranking digraphs.
+
     When *coalitionsList* == None, an 'o-average' fusion of the objectives is produced.
     """
     def __init__(self,argPerfTab,coalitionsList=None,actionsSubset=None,\
@@ -9904,11 +9907,37 @@ class CoalitionsFusionOutrankingDigraph(BipolarOutrankingDigraph):
             print(self)
 
 
-class UnOpposedObjectivesOutrankingDigraph(CoalitionsFusionOutrankingDigraph):
+class UnOpposedObjectivesOutrankingDigraph(CoalitionsOutrankingsFusionDigraph):
     """
-    Renaming the default CoalitionsFusionOutrankingDigraph.
+    under development !
+    def __init__(self,argPerfTab,coalitionsList=None,actionsSubset=None,\
+                 CopyPerfTab=True,Comments=False):
+ 
     """
 
+    def __init__(self,argPerfTab,actionsSubset=None,\
+                 CopyPerfTab=True,Comments=False):
+
+                 
+        from copy import deepcopy
+        coalitions = [argPerfTab.objectives[obj]['criteria'] for obj in argPerfTab.objectives]
+        if Comments:
+            print('coalitions:',coalitions)
+        #except:
+        #    print('!! Error: the given performance tableau does not contain objectives.')
+        #    return
+        uoo = CoalitionsOutrankingsFusionDigraph(argPerfTab,\
+                                            CopyPerfTab=True,\
+                                            coalitionsList=coalitions,\
+                                            actionsSubset=actionsSubset,\
+                                            Comments=Comments)
+        for att in uoo.__dict__:
+            self.__dict__[att] = uoo.__dict__[att]
+        self.name += '_unopposed_outrankings' 
+        
+        if Comments:
+            print(self)
+    
 class SymmetricAverageFusionOutrankingDigraph(BipolarOutrankingDigraph):
     """
     in development !
@@ -10268,7 +10297,7 @@ if __name__ == "__main__":
     g.showRelationTable()
     g.exportGraphViz()
 ##    g.showConsiderablePerformancesPolarisation()       
-    afg = UnOpposedObjectivesOutrankingDigraph(t,Comments=False)
+    afg = UnOpposedObjectivesOutrankingDigraph(t,Comments=True)
     afg.showRelationTable()
     afg.exportGraphViz()
 ##    afg = SymmetricAverageFusionOutrankingDigraph(t,Comments=True)
