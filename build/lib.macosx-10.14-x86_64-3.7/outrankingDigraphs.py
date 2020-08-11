@@ -4427,6 +4427,42 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
             self.objectives = objectives
                 
         # criteria coalition
+        if criteriaSubset == None and objectivesSubset == None and coalition == None:
+            if CopyPerfTab:
+                self.criteria = deepcopy(perfTab.criteria)
+            else:
+                self.criteria = perfTab.criteria
+        else:
+            criteria = OrderedDict()
+            if criteriaSubset == None:
+                if objectivesSubset == None and coalition == None:
+                    if criteriaSubset == None:
+                        coalition = list(perfTab.criteria.keys())
+                    else:
+                        coalition = criteriaSubset
+
+                elif objectivesSubset != None and coalition == None:
+                    coalition = []
+                    for obj in objectivesSubset:
+                        objCrit = self.objectives[obj]['criteria']
+                        coalition += objCrit
+                elif objectivesSubset != None and coalition != None:
+                    print('Error: Objectives Subset and coalition given')
+                    return
+                else:
+                    for g in coalition:
+                        if CopyPerfTab:
+                            criteria[g] = deepcopy(perfTab.criteria[g])
+                        else:
+                            criteria[g] = perfTab.criteria[g]
+            else:
+                for g in criteriaSubset:
+                    if CopyPerfTab:
+                        criteria[g] = deepcopy(perfTab.criteria[g])
+                    else:
+                        criteria[g] = perfTab.criteria[g]
+            self.criteria = criteria
+        # convert criteria weights to Decimal format    
         criteria = OrderedDict()
         if objectivesSubset == None:
             if coalition == None:
@@ -9724,11 +9760,15 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 
         print('\n')
     
-class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
+
+class CoalitionsOutrankingsFusionDigraph(BipolarOutrankingDigraph):
     """
-    in development !
+    With a list of criteria coalitions, a fusion digraph is constructed 
+    form the fusion of the corresponding marginal coalitions outranking digraphs.
+
+    When *coalitionsList* == None, an 'o-average' fusion of the objectives is produced.
     """
-    def __init__(self,argPerfTab,actionsSubset=None,\
+    def __init__(self,argPerfTab,coalitionsList=None,actionsSubset=None,\
                  CopyPerfTab=True,Comments=False):
         from copy import deepcopy
         from time import time
@@ -9784,8 +9824,7 @@ class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
                 self.objectives = perfTab.objectives
                 self.criteria = perfTab.criteria
         except:
-            print('!!! Error: performance tableau has no objectives')
-            return
+            pass
 
         #  install method Data and parameters
         methodData = {}
@@ -9828,17 +9867,30 @@ class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
         tcp = time()
         
         actions = self.actions
-        objectives = self.objectives
-        objectivesRelations = {}
-        margObj = []
-        for obj in objectives:
-            og = BipolarOutrankingDigraph(perfTab,coalition=objectives[obj]['criteria'])
-            objectivesRelations[obj] = deepcopy(og.relation)
-            margObj.append(og)
-        weights = [objectives[obj]['weight'] for obj in objectives]
-        fg = FusionLDigraph(margObj,'o-average',weights)
+        if coalitionsList == None:
+            try:
+                objectives = self.objectives
+                coalitionsList = [objectives[obj]['criteria'] for obj in objectives]
+                #print(coalitionsList)
+            except:
+                print('!!! Error: No coalitions given and performance tableau has no objectives')
+                return
+        marginalRelations = {}
+        marginalDigraphs = []
+        for coalition in coalitionsList:
+            mg = BipolarOutrankingDigraph(perfTab,criteriaSubset=coalition)
+            marginalRelations[tuple(coalition)] = deepcopy(mg.relation)
+            marginalDigraphs.append(mg)
+        weights = []
+        for coalition in coalitionsList:
+            sumMarginalWeights = Decimal('0')
+            for g in coalition:
+                sumMarginalWeights += self.criteria[g]['weight']
+            weights.append(sumMarginalWeights)            
+        #weights = [objectives[obj]['weight'] for obj in objectives]
+        fg = FusionLDigraph(marginalDigraphs,'o-average',weights)
         self.relation = deepcopy(fg.relation)
-        self.objectivesRelations = objectivesRelations
+        self.marginalRelationsRelations = marginalRelations
 
         # finished relation computing time stamp
         self.runTimes['computeRelation'] = time() - tcp
@@ -9854,11 +9906,40 @@ class ObjectivesFusionOutrankingDigraph(BipolarOutrankingDigraph):
         if Comments:
             print(self)
 
-class UnOpposedBipolarOutrankingDigraph(ObjectivesFusionOutrankingDigraph):
+
+class UnOpposedBipolarOutrankingDigraph(CoalitionsOutrankingsFusionDigraph):
     """
-    Renaming the ObjectivesFusionOutrankingDigraph.
+    When operating an *o-average* fusion of the mariginal outranking digraphs restricted to the coalition of criteria supporting each decision objective, we obtain **unopposed** outranking situtations, namely *validated* by one or more decision objectives without being *invalidated* by any other decision objective. 
+
+    These positive, as well as negative outranking characteristics, appear hence stable with respect to any potential choice of criteria significance weights. 
+
+    Furthermore, polarising the outranking digraph with considerable performance differences is here restricted to each decision objective, which makes it easier to decide on any veto discrimination threshold.
+   
     """
 
+    def __init__(self,argPerfTab,actionsSubset=None,\
+                 CopyPerfTab=True,Comments=False):
+
+                 
+        from copy import deepcopy
+        coalitions = [argPerfTab.objectives[obj]['criteria'] for obj in argPerfTab.objectives]
+        if Comments:
+            print('coalitions:',coalitions)
+        #except:
+        #    print('!! Error: the given performance tableau does not contain objectives.')
+        #    return
+        uoo = CoalitionsOutrankingsFusionDigraph(argPerfTab,\
+                                            CopyPerfTab=True,\
+                                            coalitionsList=coalitions,\
+                                            actionsSubset=actionsSubset,\
+                                            Comments=Comments)
+        for att in uoo.__dict__:
+            self.__dict__[att] = uoo.__dict__[att]
+        self.name += '_unopposed_outrankings' 
+        
+        if Comments:
+            print(self)
+    
 class SymmetricAverageFusionOutrankingDigraph(BipolarOutrankingDigraph):
     """
     in development !
@@ -10218,11 +10299,9 @@ if __name__ == "__main__":
     g.showRelationTable()
     g.exportGraphViz()
 ##    g.showConsiderablePerformancesPolarisation()       
-    afg = UnOpposedBipolarOutrankingDigraph(t,Comments=False)
-    afg.showRelationTable()
-    afg.exportGraphViz()
-##    afg = SymmetricAverageFusionOutrankingDigraph(t,Comments=True)
-##    afg.showRelationTable()
+    uog = UnOpposedBipolarOutrankingDigraph(t,Comments=True)
+    uog.showRelationTable()
+    uog.exportGraphViz()
 
                   
 ##    g.showRelationTable(StabilityDenotation=True)

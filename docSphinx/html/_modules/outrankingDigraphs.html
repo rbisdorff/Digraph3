@@ -9949,12 +9949,14 @@
             <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="UnOpposedObjectivesOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.UnOpposedObjectivesOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">UnOpposedObjectivesOutrankingDigraph</span><span class="p">(</span><span class="n">CoalitionsOutrankingsFusionDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="UnOpposedBipolarOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.UnOpposedBipolarOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">UnOpposedBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">CoalitionsOutrankingsFusionDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    under development !</span>
-<span class="sd">    def __init__(self,argPerfTab,coalitionsList=None,actionsSubset=None,\</span>
-<span class="sd">                 CopyPerfTab=True,Comments=False):</span>
-<span class="sd"> </span>
+<span class="sd">    When operating an *o-average* fusion of the mariginal outranking digraphs restricted to the coalition of criteria supporting each decision objective, we obtain **unopposed** outranking situtations, namely *validated* by one or more decision objectives without being *invalidated* by any other decision objective. </span>
+
+<span class="sd">    These positive, as well as negative outranking characteristics, appear hence stable with respect to any potential choice of criteria significance weights. </span>
+
+<span class="sd">    Furthermore, polarising the outranking digraph with considerable performance differences is here restricted to each decision objective, which makes it easier to decide on any veto discrimination threshold.</span>
+<span class="sd">   </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
@@ -10339,11 +10341,9 @@
     <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
     <span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="c1">##    g.showConsiderablePerformancesPolarisation()       </span>
-    <span class="n">afg</span> <span class="o">=</span> <span class="n">UnOpposedObjectivesOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">afg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
-    <span class="n">afg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-<span class="c1">##    afg = SymmetricAverageFusionOutrankingDigraph(t,Comments=True)</span>
-<span class="c1">##    afg.showRelationTable()</span>
+    <span class="n">uog</span> <span class="o">=</span> <span class="n">UnOpposedBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">uog</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="n">uog</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 
                   
 <span class="c1">##    g.showRelationTable(StabilityDenotation=True)</span>
