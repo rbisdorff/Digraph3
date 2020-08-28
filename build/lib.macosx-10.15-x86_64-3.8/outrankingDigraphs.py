@@ -9763,13 +9763,15 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
 class CoalitionsOutrankingsFusionDigraph(BipolarOutrankingDigraph):
     """
-    With a list of criteria coalitions, a fusion digraph is constructed 
-    form the fusion of the corresponding marginal coalitions outranking digraphs.
+    With a list of criteria coalitions, a fusion digraph is constructed form the fusion of the corresponding marginal coalitions restricted bipolar outranking digraphs.
 
-    When *coalitionsList* == None, an 'o-average' fusion of the objectives is produced.
+    When *coalitionsList* == None, an 'o-average' fusion of the decision objectives restricted outranking digraphs is produced (see *UnOpposedBipolarOutrankingDigraph* class).
     """
-    def __init__(self,argPerfTab,coalitionsList=None,actionsSubset=None,\
-                 CopyPerfTab=True,Comments=False):
+    def __init__(self,argPerfTab,\
+                     coalitionsList=None,\
+                     actionsSubset=None,\
+                     CopyPerfTab=True,\
+                     Comments=False):
         from copy import deepcopy
         from time import time
 
@@ -9907,12 +9909,14 @@ class CoalitionsOutrankingsFusionDigraph(BipolarOutrankingDigraph):
             print(self)
 
 
-class UnOpposedObjectivesOutrankingDigraph(CoalitionsOutrankingsFusionDigraph):
+class UnOpposedBipolarOutrankingDigraph(CoalitionsOutrankingsFusionDigraph):
     """
-    under development !
-    def __init__(self,argPerfTab,coalitionsList=None,actionsSubset=None,\
-                 CopyPerfTab=True,Comments=False):
- 
+    When operating an *o-average* fusion of the mariginal outranking digraphs restricted to the coalition of criteria supporting each decision objective, we obtain **unopposed** outranking situtations, namely *validated* by one or more decision objectives without being *invalidated* by any other decision objective. 
+
+    These positive, as well as negative outranking characteristics, appear hence stable with respect to the importance of the decision objectives when proportional criteria significances are given. 
+
+    Furthermore, polarising the outranking digraph with considerable performance differences is here restricted to each decision objective, which makes it easier to decide on veto discrimination thresholds.
+   
     """
 
     def __init__(self,argPerfTab,actionsSubset=None,\
@@ -10297,11 +10301,9 @@ if __name__ == "__main__":
     g.showRelationTable()
     g.exportGraphViz()
 ##    g.showConsiderablePerformancesPolarisation()       
-    afg = UnOpposedObjectivesOutrankingDigraph(t,Comments=True)
-    afg.showRelationTable()
-    afg.exportGraphViz()
-##    afg = SymmetricAverageFusionOutrankingDigraph(t,Comments=True)
-##    afg.showRelationTable()
+    uog = UnOpposedBipolarOutrankingDigraph(t,Comments=True)
+    uog.showRelationTable()
+    uog.exportGraphViz()
 
                   
 ##    g.showRelationTable(StabilityDenotation=True)
