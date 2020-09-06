@@ -2694,7 +2694,7 @@ A single criterion sorting category *K* is a (usually) lower-closed interval :ma
 
     #. :math:`x < m_k` and (:math:`x < M_k`): The performance *x* is lower than category *K*.
     #. :math:`x \geqslant m_k` and :math:`x < M_k`: The performance *x* belongs to category *K*.
-    #. :math:`x > m_k` and :math:`x \geqslant M_k`: The performance *x* is lower than category *K*.
+    #. :math:`x > m_k` and :math:`x \geqslant M_k`: The performance *x* is higher than category *K*.
 
 As the relation :math:`<` is the dual of :math:`\geqslant` (:math:`\not\geqslant`), it will be sufficient to check that :math:`x \geqslant m_k` as well as :math:`x \not\geqslant M_k` are true for *x* to be considered a member of category *K*.
 
