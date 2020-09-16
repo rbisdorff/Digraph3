@@ -658,26 +658,26 @@ def testComputeMarginalVersusGlobalRankingCorrelations():
     print(time()-t0)
     print(criteriaCorrelations)
 
-# def testXMCDARubisSolver():
-#     print('*------ test xmcda module ----*')
-#     t = RandomCBPerformanceTableau(numberOfActions=5,\
-#                                    numberOfCriteria=7,\
-#                                    weightDistribution='equiobjectives',\
-#                                    )
-#     t.saveXMCDA2('testXMCDA')
-#     import xmcda
-#     xmcda.saveXMCDARubisBestChoiceRecommendation(\
-#         problemFileName='testXMCDA',\
-#         valuationType=None)
-#     xmcda.saveXMCDARubisBestChoiceRecommendation(\
-#         problemFileName='testXMCDA',\
-#         valuationType='noVeto')
-#     xmcda.saveXMCDARubisBestChoiceRecommendation(\
-#         problemFileName='testXMCDA',\
-#         valuationType='confident')
-#     xmcda.saveXMCDARubisBestChoiceRecommendation(\
-#         problemFileName='testXMCDA',\
-#         valuationType='robust')
+def testXMCDARubisSolver():
+    print('*------ test xmcda module ----*')
+    t = RandomCBPerformanceTableau(numberOfActions=5,\
+                                   numberOfCriteria=7,\
+                                   weightDistribution='equiobjectives',\
+                                   )
+    t.saveXMCDA2('testXMCDA')
+    import xmcda
+    xmcda.saveXMCDARubisBestChoiceRecommendation(\
+        problemFileName='testXMCDA',\
+        valuationType=None)
+    xmcda.saveXMCDARubisBestChoiceRecommendation(\
+        problemFileName='testXMCDA',\
+        valuationType='noVeto')
+    xmcda.saveXMCDARubisBestChoiceRecommendation(\
+        problemFileName='testXMCDA',\
+        valuationType='confident')
+    xmcda.saveXMCDARubisBestChoiceRecommendation(\
+        problemFileName='testXMCDA',\
+        valuationType='robust')
 
 def testFusionLDigraph():
     print('==>> Testing FusionLDigraph instantiation')
@@ -697,9 +697,7 @@ def testAverageFusionLDigraphs():
                                    vetoProbability=0.5,\
                                    seed=randint(1,1000))
     print(t)
-    cog = CoalitionsOutrankingsFusionDigraph(t,Comments=True)
-    cog.showRelationTable()
-    uog = UnOpposedBipolarOutrankingDigraph(t,Comments=True)
-    uog.showRelationTable()   
+    afg = UnOpposedBipolarOutrankingDigraph(t,Comments=True)
+    afg.showRelationTable()
     afg = SymmetricAverageFusionOutrankingDigraph(t,Comments=True)
     afg.showRelationTable()
