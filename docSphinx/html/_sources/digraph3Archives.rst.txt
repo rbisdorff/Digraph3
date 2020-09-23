@@ -1,4 +1,3 @@
-=================
 Digraph3 Archives
 =================
 
@@ -6,7 +5,7 @@ Digraph3 Archives
 :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2020
 
 Introduction
-............
+------------
 
 The **Digraph3 Archives** gather historical case studies and example digraphs compiled before 2006 and concerning the active development of the Digraph3 collection of python3 modules for implementing tools and methods of the *Rubis decision aiding* approach (see [1]_).
 
@@ -20,7 +19,7 @@ Such bipolar-valued outranking digraphs are specifically characterised by the fa
 
 .. raw:: html
 	 
-   <h3><a href="_static/GraphDataSets/index.html" target="_blank">Link to the Digraph3 Archives</a></h3>
+   <h2><a href="_static/GraphDataSets/index.html" target="_blank">Link to the Digraph3 Archives</a></h2>
 
 **References**   
    

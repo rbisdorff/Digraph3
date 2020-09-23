@@ -110,22 +110,22 @@
 <thresholds>
 <threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>2.79</real>
+<real>5.37</real>
 </constant>
 </threshold>
 <threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>2.79</real>
+<real>5.37</real>
 </constant>
 </threshold>
 <threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>48.37</real>
+<real>71.63</real>
 </constant>
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="b2" name="random ordinal benefit criterion" mcdaConcept="criterion">
+<criterion id="b2" name="random cardinal benefit criterion" mcdaConcept="criterion">
 <description>
 <comment>Evaluation generator: triangular law with variable mode (m) and probability repartition (p = 0.5). Cheap actions: m = 30%; neutral actions: m = 50%; advantageous actions: m = 70%.</comment>
 <version>performance</version>
@@ -137,9 +137,26 @@
 <quantitative>
 <preferenceDirection>max</preferenceDirection>
 <minimum><real>0.00</real></minimum>
-<maximum><real>10.00</real></maximum>
+<maximum><real>100.00</real></maximum>
 </quantitative>
 </scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>7.64</real>
+</constant>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>7.64</real>
+</constant>
+</threshold>
+<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>66.89</real>
+</constant>
+</threshold>
+</thresholds>
 </criterion>
 <criterion id="b3" name="random cardinal benefit criterion" mcdaConcept="criterion">
 <description>
@@ -159,22 +176,22 @@
 <thresholds>
 <threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>1.73</real>
+<real>0.09</real>
 </constant>
 </threshold>
 <threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>1.73</real>
+<real>0.09</real>
 </constant>
 </threshold>
 <threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>40.07</real>
+<real>51.90</real>
 </constant>
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="b4" name="random ordinal benefit criterion" mcdaConcept="criterion">
+<criterion id="b4" name="random cardinal benefit criterion" mcdaConcept="criterion">
 <description>
 <comment>Evaluation generator: triangular law with variable mode (m) and probability repartition (p = 0.5). Cheap actions: m = 30%; neutral actions: m = 50%; advantageous actions: m = 70%.</comment>
 <version>performance</version>
@@ -186,9 +203,26 @@
 <quantitative>
 <preferenceDirection>max</preferenceDirection>
 <minimum><real>0.00</real></minimum>
-<maximum><real>10.00</real></maximum>
+<maximum><real>100.00</real></maximum>
 </quantitative>
 </scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>3.22</real>
+</constant>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>3.22</real>
+</constant>
+</threshold>
+<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>53.77</real>
+</constant>
+</threshold>
+</thresholds>
 </criterion>
 <criterion id="c1" name="random cardinal cost criterion" mcdaConcept="criterion">
 <description>
@@ -208,17 +242,17 @@
 <thresholds>
 <threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>0.94</real>
+<real>2.35</real>
 </constant>
 </threshold>
 <threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>0.94</real>
+<real>2.35</real>
 </constant>
 </threshold>
 <threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>42.27</real>
+<real>56.87</real>
 </constant>
 </threshold>
 </thresholds>
@@ -241,17 +275,17 @@
 <thresholds>
 <threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>2.16</real>
+<real>0.90</real>
 </constant>
 </threshold>
 <threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>2.16</real>
+<real>0.90</real>
 </constant>
 </threshold>
 <threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>90.35</real>
+<real>56.40</real>
 </constant>
 </threshold>
 </thresholds>
@@ -274,17 +308,17 @@
 <thresholds>
 <threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>0.35</real>
+<real>9.46</real>
 </constant>
 </threshold>
 <threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>0.35</real>
+<real>9.46</real>
 </constant>
 </threshold>
 <threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
 <constant>
-<real>44.54</real>
+<real>46.47</real>
 </constant>
 </threshold>
 </thresholds>
@@ -298,155 +332,155 @@
 <alternativeID>a1</alternativeID>
 <performance>
 <criterionID>b1</criterionID>
-<value><real>61.15</real></value>
+<value><real>27.82</real></value>
 </performance>
 <performance>
 <criterionID>b2</criterionID>
-<value><real>5.00</real></value>
+<value><real>26.06</real></value>
 </performance>
 <performance>
 <criterionID>b3</criterionID>
-<value><real>76.01</real></value>
+<value><real>33.60</real></value>
 </performance>
 <performance>
 <criterionID>b4</criterionID>
-<value><real>4.00</real></value>
+<value><real>76.54</real></value>
 </performance>
 <performance>
 <criterionID>c1</criterionID>
-<value><real>44.50</real></value>
+<value><real>18.47</real></value>
 </performance>
 <performance>
 <criterionID>c2</criterionID>
-<value><real>3.15</real></value>
+<value><real>20.68</real></value>
 </performance>
 <performance>
 <criterionID>c3</criterionID>
-<value><real>27.02</real></value>
+<value><real>47.40</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a2</alternativeID>
 <performance>
 <criterionID>b1</criterionID>
-<value><real>69.36</real></value>
+<value><real>33.19</real></value>
 </performance>
 <performance>
 <criterionID>b2</criterionID>
-<value><real>7.00</real></value>
+<value><real>33.72</real></value>
 </performance>
 <performance>
 <criterionID>b3</criterionID>
-<value><real>74.28</real></value>
+<value><real>80.28</real></value>
 </performance>
 <performance>
 <criterionID>b4</criterionID>
-<value><real>6.00</real></value>
+<value><real>80.35</real></value>
 </performance>
 <performance>
 <criterionID>c1</criterionID>
-<value><real>75.59</real></value>
+<value><real>57.00</real></value>
 </performance>
 <performance>
 <criterionID>c2</criterionID>
-<value><real>83.33</real></value>
+<value><real>70.12</real></value>
 </performance>
 <performance>
 <criterionID>c3</criterionID>
-<value><real>71.21</real></value>
+<value><NA>NA</NA></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a3</alternativeID>
 <performance>
 <criterionID>b1</criterionID>
-<value><real>83.22</real></value>
+<value><real>72.73</real></value>
 </performance>
 <performance>
 <criterionID>b2</criterionID>
-<value><real>10.00</real></value>
+<value><real>64.83</real></value>
 </performance>
 <performance>
 <criterionID>b3</criterionID>
-<value><real>40.35</real></value>
+<value><real>79.34</real></value>
 </performance>
 <performance>
 <criterionID>b4</criterionID>
-<value><real>8.00</real></value>
+<value><real>26.58</real></value>
 </performance>
 <performance>
 <criterionID>c1</criterionID>
-<value><real>86.77</real></value>
+<value><real>75.34</real></value>
 </performance>
 <performance>
 <criterionID>c2</criterionID>
-<value><real>91.34</real></value>
+<value><real>71.02</real></value>
 </performance>
 <performance>
 <criterionID>c3</criterionID>
-<value><real>71.56</real></value>
+<value><real>56.86</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a4</alternativeID>
 <performance>
 <criterionID>b1</criterionID>
-<value><real>58.36</real></value>
+<value><real>84.30</real></value>
 </performance>
 <performance>
 <criterionID>b2</criterionID>
-<value><real>3.00</real></value>
+<value><real>92.95</real></value>
 </performance>
 <performance>
 <criterionID>b3</criterionID>
-<value><real>42.16</real></value>
+<value><real>85.41</real></value>
 </performance>
 <performance>
 <criterionID>b4</criterionID>
-<value><real>6.00</real></value>
+<value><real>71.65</real></value>
 </performance>
 <performance>
 <criterionID>c1</criterionID>
-<value><real>59.76</real></value>
+<value><real>68.78</real></value>
 </performance>
 <performance>
 <criterionID>c2</criterionID>
-<value><real>93.50</real></value>
+<value><real>68.49</real></value>
 </performance>
 <performance>
 <criterionID>c3</criterionID>
-<value><real>50.65</real></value>
+<value><real>77.47</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a5</alternativeID>
 <performance>
 <criterionID>b1</criterionID>
-<value><real>34.85</real></value>
+<value><real>12.67</real></value>
 </performance>
 <performance>
 <criterionID>b2</criterionID>
-<value><real>1.00</real></value>
+<value><real>72.47</real></value>
 </performance>
 <performance>
 <criterionID>b3</criterionID>
-<value><real>80.42</real></value>
+<value><real>33.51</real></value>
 </performance>
 <performance>
 <criterionID>b4</criterionID>
-<value><real>6.00</real></value>
+<value><real>68.43</real></value>
 </performance>
 <performance>
 <criterionID>c1</criterionID>
-<value><real>76.53</real></value>
+<value><real>54.65</real></value>
 </performance>
 <performance>
 <criterionID>c2</criterionID>
-<value><real>74.78</real></value>
+<value><real>14.62</real></value>
 </performance>
 <performance>
 <criterionID>c3</criterionID>
-<value><real>38.70</real></value>
+<value><real>31.00</real></value>
 </performance>
 </alternativePerformances>
 </performanceTable>

@@ -82,7 +82,7 @@ a50 [shape = "circle", label = "a50a", fontsize=10];
 { rank = 27; a30; }
 { rank = 28; a18; }
 { rank = 29; a44; }
-{ rank = 30; a43; a50; }
+{ rank = 30; a50; a43; }
 { rank = 31; a10; }
 { rank = 32; a15; }
 { rank = 33; a08; }
@@ -130,10 +130,10 @@ a49-> a35 [style="setlinewidth(1)",color=black] ;
 a35-> a30 [style="setlinewidth(1)",color=black] ;
 a30-> a18 [style="setlinewidth(1)",color=black] ;
 a18-> a44 [style="setlinewidth(1)",color=black] ;
-a44-> a43 [style="setlinewidth(1)",color=black] ;
 a44-> a50 [style="setlinewidth(1)",color=black] ;
-a43-> a10 [style="setlinewidth(1)",color=black] ;
+a44-> a43 [style="setlinewidth(1)",color=black] ;
 a50-> a01 [style="setlinewidth(1)",color=black] ;
+a43-> a10 [style="setlinewidth(1)",color=black] ;
 a10-> a15 [style="setlinewidth(1)",color=black] ;
 a15-> a08 [style="setlinewidth(1)",color=black] ;
 a08-> a09 [style="setlinewidth(1)",color=black] ;
