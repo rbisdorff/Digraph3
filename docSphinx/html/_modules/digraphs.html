@@ -66,10 +66,10 @@
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;Branch: 3.8 $&quot;</span>
 
-<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">perfTabs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
 
 <span class="c1">#----------Digraph classes -----------------</span>
 
@@ -114,7 +114,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default presentation method for Digraph instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -130,10 +130,10 @@
        
         <span class="k">return</span> <span class="n">reprString</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
         <span class="c1">#import digraphs,sys,copy</span>
-        <span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="k">import</span> <span class="n">RandomValuationDigraph</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="k">if</span> <span class="n">file</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">name</span>
@@ -167,7 +167,7 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
 
-    <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make the negation operator -self available for Digraph instances. Returns a DualDigraph instance of self.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -175,7 +175,7 @@
         <span class="n">new</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span>
         <span class="k">return</span> <span class="n">new</span>
 
-    <span class="k">def</span> <span class="fm">__invert__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__invert__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make the inverting operator ~self available for Digraph instances. Returns a ConverseDigraph instance of self.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -242,8 +242,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">Odd</span> <span class="o">=</span> <span class="n">Odd</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Comments</span> <span class="o">=</span> <span class="n">Comments</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
-            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
-            <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Pool</span>
+            <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">cpu_count</span>
             <span class="k">if</span> <span class="n">nbrOfCPUs</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">nbrOfCPUs</span><span class="o">=</span> <span class="n">cpu_count</span><span class="p">()</span>
             <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">nbrOfCPUs</span><span class="p">)</span> <span class="k">as</span> <span class="n">proc</span><span class="p">:</span>   
@@ -469,7 +469,7 @@
 <span class="sd">        Source: M. Golumbic Algorithmic Graph heory and Perfect Graphs,</span>
 <span class="sd">        Annals Of Discrete Mathematics 57 2nd Ed. , Elsevier 2004, Algorithm 2.4 p.44.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="k">def</span> <span class="nf">topSort</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">dfsNbr</span><span class="p">,</span><span class="n">tsNbr</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;in&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">v</span><span class="p">],</span><span class="n">dfsNbr</span><span class="p">[</span><span class="n">v</span><span class="p">],</span><span class="n">tsNbr</span><span class="p">[</span><span class="n">v</span><span class="p">])</span>
@@ -589,8 +589,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert a Digraph instance to a Graph instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">Graph</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">Graph</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
         <span class="n">g</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_graph&#39;</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
@@ -691,7 +691,7 @@
 <span class="sd">        If self.rankingByChoosing[&#39;CoDual&#39;] is True, the ranking-by-last-chossing </span>
 <span class="sd">        was computed on the codual of self.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">CoDual</span><span class="p">:</span>
             <span class="n">currG</span> <span class="o">=</span> <span class="n">CoDualDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -770,7 +770,7 @@
 <span class="sd">        If self.rankingByChoosing[&#39;CoDual&#39;] is True, the ranking-by-last-chossing </span>
 <span class="sd">        was computed on the codual of self.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="n">currG</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">remainingActions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">rankingByLastChoosing</span> <span class="o">=</span> <span class="p">[]</span>
@@ -856,7 +856,7 @@
 
 <span class="sd">        If self.rankingByChoosing[&#39;CoDual&#39;] is True, the ranking-by-choosing was computed on the codual of self.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">CoDual</span><span class="p">:</span>
             <span class="n">currG</span> <span class="o">=</span> <span class="n">CoDualDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1027,7 +1027,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===&gt;&gt;&gt;&gt; debugging computeByBestChoosing() digraphs methods&quot;</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">CoDual</span><span class="p">:</span>
             <span class="n">currG</span> <span class="o">=</span> <span class="n">CoDualDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1110,7 +1110,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===&gt;&gt;&gt;&gt; debugging computeByBestChoosing() digraphs methods&quot;</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="n">currG</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">remainingActions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">rankingByBestChoosing</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1241,8 +1241,8 @@
 <span class="sd">            CoDual = False (default)/True</span>
 <span class="sd">            Limited = proportion (in [0,1]) * (max - med) valuationdomain</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span>
         <span class="n">gcd</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -1326,7 +1326,7 @@
 <span class="sd">        Returns the highest correlated rankingByChoosing with self or </span>
 <span class="sd">        codual of self, depending on the CoDual flagg.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span>
@@ -1429,7 +1429,7 @@
 <span class="sd">        Renders the best choice recommendation after eliminating</span>
 <span class="sd">        all odd chordless circuits with a minimal cut of the valuation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">optimalRankingByChoosing</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">,</span><span class="n">Limited</span><span class="o">=</span><span class="n">Limited</span><span class="p">)</span>
         <span class="c1">#if Comments:</span>
         <span class="c1">#    self.showRankingByChoosing()</span>
@@ -1523,8 +1523,8 @@
 <span class="sd">        Renders the bipolar-valued relation obtained from</span>
 <span class="sd">        the self.rankingByChoosing result.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">rankingByChoosing</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
@@ -1826,7 +1826,7 @@
 <span class="sd">        Renders the mean and variance of the valuation</span>
 <span class="sd">        of the non reflexive pairs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span>
         <span class="n">mean</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
         <span class="n">squares</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
         <span class="c1">#actions = self.actions</span>
@@ -1993,9 +1993,9 @@
 <span class="sd">             </span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">cpu_count</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+        <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">cpu_count</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1&#39;</span><span class="p">)</span> <span class="ow">or</span>\
            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the digraph instance self must be normalized - self.recodeValuation(-1,1) -first !&#39;</span><span class="p">)</span>
@@ -2023,20 +2023,20 @@
         <span class="n">correlation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
         <span class="n">determination</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Threading</span> <span class="ow">and</span> <span class="n">cpu_count</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">Pickler</span><span class="p">,</span><span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
-            <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Lock</span><span class="p">,</span>\
+            <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">Pickler</span><span class="p">,</span><span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
+            <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span>
+            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Lock</span><span class="p">,</span>\
                                         <span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>
             <span class="k">class</span> <span class="nc">myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-                <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span><span class="n">TempDirName</span><span class="p">,</span><span class="n">Debug</span><span class="p">):</span>
+                <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span><span class="n">TempDirName</span><span class="p">,</span><span class="n">Debug</span><span class="p">):</span>
                     <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">tempDirName</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
                 <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                    <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
-                    <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
-                    <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+                    <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
+                    <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">chdir</span>
+                    <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
                     <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
                     <span class="c1">#Debug=False</span>
                     <span class="c1">#if Debug:</span>
@@ -2091,7 +2091,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nbr of cpus = &#39;</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting correlation computation with </span><span class="si">%d</span><span class="s1"> threads ...&#39;</span> <span class="o">%</span> <span class="n">nbrOfCPUs</span><span class="p">)</span>
-            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">TemporaryDirectory</span>
             <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tempDirName</span><span class="p">:</span>
                 <span class="n">selfFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpActions.py&#39;</span>
                 <span class="c1">#if Debug:</span>
@@ -2241,7 +2241,7 @@
 <span class="sd">             is by convention 0.0 at determination level 0.0 .</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span>
@@ -2683,7 +2683,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the transitivity degree of a digraph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
         <span class="n">origRelation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
@@ -2731,7 +2731,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Produces the transitive closure of self.relation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">Change</span> <span class="o">=</span> <span class="kc">True</span>
@@ -5994,7 +5994,7 @@
 <span class="sd">        ie the minimum number of choice members that cover each</span>
 <span class="sd">        non selected object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">])</span>
         <span class="n">nonSelected</span> <span class="o">=</span> <span class="n">actions</span> <span class="o">-</span> <span class="n">choice</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span>
@@ -6015,7 +6015,7 @@
 <span class="sd">        ie the average number of choice members that cover each</span>
 <span class="sd">        non selected object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="n">choice</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">choice</span><span class="p">)</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">])</span>
         <span class="n">nonSelected</span> <span class="o">=</span> <span class="n">actions</span> <span class="o">-</span> <span class="n">choice</span>
@@ -6076,7 +6076,7 @@
 <span class="sd">            Default values gives a normalized valuation domain</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         
         <span class="n">oldMax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
         <span class="n">oldMin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
@@ -6503,7 +6503,7 @@
                 <span class="n">Dual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Converse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Diagonal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Persistent storage of a Digraph class instance in the form of</span>
 <span class="sd">            a csv file. &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="kn">import</span> <span class="nn">csv</span>
         <span class="n">com</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
         <span class="k">if</span> <span class="n">Normalized</span><span class="p">:</span>
@@ -6676,7 +6676,7 @@
 <span class="sd">        Returns a boolean value</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
-        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkstemp</span>
+        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">mkstemp</span>
         <span class="n">fd</span><span class="p">,</span> <span class="n">tempFileName</span> <span class="o">=</span> <span class="n">mkstemp</span><span class="p">()</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fdopen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
@@ -6724,7 +6724,7 @@
 <span class="sd">        exchange arguments with external temporary files</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
-        <span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">Popen</span><span class="p">,</span><span class="n">PIPE</span>
+        <span class="kn">from</span> <span class="nn">subprocess</span> <span class="k">import</span> <span class="n">Popen</span><span class="p">,</span><span class="n">PIPE</span>
 
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/usr/bin/enumChordlessCircuitsInOutPiping&#39;</span><span class="p">):</span>
             <span class="n">p</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;/usr/bin/enumChordlessCircuitsInOutPiping&#39;</span><span class="p">],</span><span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span><span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span>
@@ -6785,8 +6785,8 @@
 <span class="sd">        exchange arguments with external temporary files</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">os</span>
-        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkstemp</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">flatten</span>
+        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">mkstemp</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">flatten</span>
         
         <span class="n">fd</span><span class="p">,</span> <span class="n">tempFileName</span> <span class="o">=</span> <span class="n">mkstemp</span><span class="p">()</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fdopen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="s1">&#39;w+b&#39;</span><span class="p">)</span>
@@ -6863,7 +6863,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#import copy</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">flatten</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">flatten</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Odd</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- chordless odd circuits ---*&#39;</span><span class="p">)</span>
@@ -7430,8 +7430,8 @@
 <span class="sd">        *****************************</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;***********************&#39;</span><span class="p">)</span>
         <span class="c1">#print(&#39;RuBis BCR&#39;)</span>
@@ -7636,8 +7636,8 @@
 <span class="sd">        &gt;&gt;&gt; g.showHTMLBestChoiceRecommendation()</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="n">Comments</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="c1"># construct html text</span>
@@ -7837,10 +7837,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#print(&#39;Passing here&#39;,_OldCoca)</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+            <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
             <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="c1"># save original actions and relation</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions_orig</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions_orig</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
@@ -8009,7 +8009,7 @@
 <span class="sd">        | using the von Neumann dual fixoint equation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]))</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]))</span>
@@ -8074,7 +8074,7 @@
 <span class="sd">        | using the von Neumann dual fixoint equation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]))</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]))</span>
@@ -8153,7 +8153,7 @@
 <span class="sd">             </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]))</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]))</span>
@@ -8382,7 +8382,7 @@
 <span class="sd">             </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
 
         <span class="n">temp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
@@ -8463,7 +8463,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show procedure for annotated bipolar choices.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">flatten</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">flatten</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">determ</span> <span class="o">=</span> <span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -8519,7 +8519,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show procedure for annotated bipolar choices.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">flatten</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">flatten</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">determ</span> <span class="o">=</span> <span class="n">ch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -8580,7 +8580,7 @@
 <span class="sd">        Characteristic values for potentially good choices.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="n">Max</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
@@ -8655,7 +8655,7 @@
 <span class="sd">        Characteristic values for potentially bad choices.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
         <span class="n">temp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
         <span class="n">Max</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
@@ -9878,8 +9878,8 @@
 <span class="sd">             maxMarginalCorrelation, minMarginalCorrelationAmplitude)</span>
 <span class="sd">             </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">all_perms</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">factorial</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">all_perms</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">factorial</span>
 
 
         <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
@@ -9954,8 +9954,8 @@
 <span class="sd">             Returns a tuple: kemenyRanking (from best to worst), kemenyIndex.</span>
 <span class="sd">             </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">seed</span><span class="p">,</span> <span class="n">shuffle</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">all_perms</span>
+        <span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">seed</span><span class="p">,</span> <span class="n">shuffle</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">all_perms</span>
 
 
         <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
@@ -10059,9 +10059,9 @@
 <span class="sd">           (see Digraph.exportPrincipalImage method)</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">csv</span> <span class="kn">import</span> <span class="n">reader</span>
+        <span class="kn">from</span> <span class="nn">csv</span> <span class="k">import</span> <span class="n">reader</span>
         <span class="c1">#from operator import itemgetter, attrgetter</span>
-        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span><span class="p">,</span><span class="n">mkdtemp</span>
+        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">TemporaryDirectory</span><span class="p">,</span><span class="n">mkdtemp</span>
 <span class="c1">##        if tempDir == None:</span>
 <span class="c1">##            tempDirName = mkdtemp()</span>
 <span class="c1">##        else:</span>
@@ -10097,13 +10097,13 @@
 <span class="sd">        Renders a ranking of the actions with minimal Slater index.</span>
 <span class="sd">        Return a tuple: slaterOrder, slaterIndex</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">seed</span><span class="p">,</span> <span class="n">shuffle</span>
+        <span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">seed</span><span class="p">,</span> <span class="n">shuffle</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">copysign</span>
+            <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">copysign</span>
             <span class="n">CopySign</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">CopySign</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">all_perms</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">all_perms</span>
 
 
         <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
@@ -10213,7 +10213,7 @@
 <span class="sd">        {&#39;I&#39;: Decimal(),&#39;P+&#39;:Decimal(),&#39;P-&#39;:Decimal(),&#39;R&#39; :Decimal()}</span>
 <span class="sd">        where one and only one item is strictly positive.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">K1</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">K2</span><span class="p">)))</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -10257,8 +10257,8 @@
 <span class="sd">         and the other.evaluation dictionaries into self.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;codual-&#39;</span><span class="o">+</span><span class="n">other</span><span class="o">.</span><span class="n">name</span>
         <span class="n">att</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">]</span>
@@ -10295,8 +10295,8 @@
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;cover-&#39;</span><span class="o">+</span><span class="n">other</span><span class="o">.</span><span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;codual-&#39;</span><span class="o">+</span><span class="n">other</span><span class="o">.</span><span class="n">name</span>
@@ -10363,8 +10363,8 @@
 <span class="sd">    and the evaluation dictionaries into self.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span>
         <span class="n">att</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">]</span>
         <span class="n">att</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
@@ -10395,9 +10395,9 @@
 <span class="sd">        * weights := [a,b]: if None weights = [1,1]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dg1</span><span class="p">,</span><span class="n">dg2</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s2">&quot;o-max&quot;</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">omin</span><span class="p">,</span> <span class="n">omax</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dg1</span><span class="p">,</span><span class="n">dg2</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s2">&quot;o-max&quot;</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">omin</span><span class="p">,</span> <span class="n">omax</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;fusion-&#39;</span><span class="o">+</span><span class="n">dg1</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">dg2</span><span class="o">.</span><span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">dg1</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dg1</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -10442,8 +10442,8 @@
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s2">&quot;o-max&quot;</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">operator</span><span class="o">=</span><span class="s2">&quot;o-max&quot;</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;fusion-&#39;</span><span class="o">+</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -10479,8 +10479,8 @@
 <span class="sd">    Instantiates the partial digraph induced by its border,</span>
 <span class="sd">    i.e. be the union of its initial and terminal kernels.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="n">Digraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
@@ -10524,8 +10524,8 @@
 <span class="sd">    Instantiates the partial digraph induced by the complement of its border,</span>
 <span class="sd">    i.e. the nodes not included in the union of its initial and terminal kernels.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="n">Digraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
@@ -10576,8 +10576,8 @@
 <span class="sd">    and the evaluation dictionary into self.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">,</span><span class="n">ranking</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;best&quot;</span><span class="p">,</span><span class="n">ranking</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;preorder-&#39;</span><span class="o">+</span><span class="n">other</span><span class="o">.</span><span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;codual-&#39;</span><span class="o">+</span><span class="n">other</span><span class="o">.</span><span class="n">name</span>
@@ -10645,8 +10645,8 @@
 <span class="sd">    digraphs d1 and d2 of same order.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">d1</span><span class="p">,</span><span class="n">d2</span><span class="p">,</span><span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">d1</span><span class="p">,</span><span class="n">d2</span><span class="p">,</span><span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;XORDigraph&#39;</span>
         <span class="k">if</span> <span class="n">d1</span><span class="o">.</span><span class="n">order</span> <span class="o">!=</span> <span class="n">d2</span><span class="o">.</span><span class="n">order</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -10698,8 +10698,8 @@
 <span class="sd">    digraphs d1 and d2 of same order. Returns None if d1 and d2 are of different order</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">d1</span><span class="p">,</span><span class="n">d2</span><span class="p">,</span><span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">d1</span><span class="p">,</span><span class="n">d2</span><span class="p">,</span><span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;EquivDigraph&#39;</span>
         <span class="k">if</span> <span class="n">d1</span><span class="o">.</span><span class="n">order</span> <span class="o">!=</span> <span class="n">d2</span><span class="o">.</span><span class="n">order</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;EquivDigraph init ERROR:</span><span class="se">\n</span><span class="s2"> the input digraphs are not of the same order !&quot;</span><span class="p">)</span>
@@ -10792,7 +10792,7 @@
 
 <span class="sd">     &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">arcProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">Bipolar</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">arcProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">Bipolar</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="n">arcProbability</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">arcProbability</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">arcProbability</span> <span class="o">&gt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: arc probability too high !!&#39;</span><span class="p">)</span>
@@ -10800,7 +10800,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: arc probability too low !!&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">copy</span>
-            <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span>
+            <span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">random</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">EmptyDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">valuationdomain</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
@@ -10835,7 +10835,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">Normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">Normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomValuationDigraph&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
@@ -10881,9 +10881,9 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">weaknessDegree</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">weaknessDegree</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomWeakTournament&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
@@ -10976,9 +10976,9 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">isCrisp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">valuationDomain</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">isCrisp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">valuationDomain</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomTournament&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
@@ -11037,7 +11037,7 @@
 <span class="sd">       the new :py:class:`randomDigraphs.RandomFixedSizeDigraph` constructor. </span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
         <span class="c1"># check feasability</span>
         <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">order</span> <span class="o">*</span> <span class="n">order</span><span class="p">)</span> <span class="o">-</span> <span class="n">order</span>
@@ -11080,7 +11080,7 @@
 <span class="sd">       the new :py:class:`randomDigraphs.RandomFixedDegreeSequenceDigraph` constructor. </span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degreeSequence</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degreeSequence</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
         <span class="c1"># check feasability</span>
         <span class="n">degree</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">degreeSequence</span><span class="p">)</span>
@@ -11238,7 +11238,7 @@
 
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
         <span class="c1"># check feasability</span>
         <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">order</span> <span class="o">*</span> <span class="n">degree</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
@@ -11312,9 +11312,9 @@
 <span class="sd">    temporary empty graphs of given order in {-1,0,1}.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)):</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;empty&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
         <span class="n">actionlist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
@@ -11342,9 +11342,9 @@
 <span class="sd">    Specialization of the general Digraph class for generating</span>
 <span class="sd">    temporary empty graphs of order 5 in {-1,0,1}.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)):</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;indeterminate&#39;</span>
         <span class="k">if</span> <span class="n">other</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
@@ -11429,10 +11429,10 @@
 <span class="sd">        :align: center</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1.0&#39;</span><span class="p">),</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)},</span>\
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1.0&#39;</span><span class="p">),</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)},</span>\
                  <span class="n">circulants</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">IndeterminateInnerPart</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;c&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">circulants</span> <span class="o">=</span> <span class="n">circulants</span>
@@ -11491,7 +11491,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}):</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;kneser-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
@@ -11552,7 +11552,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>
                  <span class="n">hasRandomOrientation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">hasMedianSplitOrientation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;grid-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
@@ -11704,7 +11704,7 @@
 <span class="sd">        order &gt; 0; valuationdomain=(Min,Max).</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)):</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;complete&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
@@ -11743,7 +11743,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">############### helper functions</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)):</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Redheffer&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
@@ -11786,8 +11786,8 @@
 <span class="sd">           By default the polarised valuation domain is closed and the complementary indeterminate domain is open.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">KeepValues</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">AlphaCut</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StrictCut</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">KeepValues</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">AlphaCut</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StrictCut</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">digraph</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">digraph</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
@@ -11936,8 +11936,8 @@
 <span class="sd">         PolarisedDigraph class flagged with KeepValues=True.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Level</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Level</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">digraph</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">digraph</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
@@ -11991,8 +11991,8 @@
 <span class="sd">        In a bipolar valuation, the dual operator correspond to a simple changing of signs.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;dual_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="n">att</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">]</span>
@@ -12018,7 +12018,7 @@
 <span class="sd">    Obsolete constructor. Initiates the valued difference S(a,b) - S(b,a) of a Digraph instance.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
@@ -12051,8 +12051,8 @@
 <span class="sd">         - The constructor makes a deep copy of the given Digraph instance!</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;asymmetric_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -12092,8 +12092,8 @@
 <span class="sd">          - The constructor makes a deep copy of the given Digraph instance!</span>
 <span class="sd">          </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;symmetric_&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -12135,11 +12135,11 @@
 <span class="sd">        | k := cardinality of the choices</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
         <span class="k">if</span> <span class="n">digraph</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">digraph</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -12191,9 +12191,9 @@
 <span class="sd">    of weak chordless odd circuits augmented digraphs.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">comment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">comment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
 
         <span class="k">if</span> <span class="n">comment</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">silent</span> <span class="o">=</span> <span class="kc">True</span>
@@ -12337,10 +12337,10 @@
 <span class="sd">        - Piping: using OS pipes for data in- and output between Python and C++.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
 
         <span class="c1">## if comment == None:</span>
         <span class="c1">##     silent = True</span>
@@ -12388,8 +12388,8 @@
 <span class="sd">        and polarisedDigraph is the resulting digraph instance.</span>
 <span class="sd">        Renders (None,None) if no chordless odd circuit is detected.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span>
         <span class="n">gcd</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -12435,10 +12435,10 @@
 <span class="sd">    i.e. a link :math:`(x, y)` with minimal difference between :math:`r(x S y)` and :math:`r(y S x)`.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span>\
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span>\
              <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">,</span> <span class="n">ConfidentBipolarOutrankingDigraph</span>
         <span class="c1">## if comment == None:</span>
         <span class="c1">##     silent = True</span>
@@ -12514,7 +12514,7 @@
 <span class="sd">        Break all cricuits in self.circuits.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">time</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">flatten</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">flatten</span>
         
         <span class="n">newBreakings</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">,</span><span class="nb">dict</span><span class="p">)):</span>
@@ -12588,10 +12588,10 @@
 <span class="sd">    i.e. a link (*x*, *y*) with minimal difference between r(*x* S *y*) - r(*y* S *x*).</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
         <span class="c1">## if comment == None:</span>
         <span class="c1">##     silent = True</span>
         <span class="c1">## else:</span>
@@ -12676,7 +12676,7 @@
 <span class="sd">        Augmenting self with self.circuits.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">time</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">flatten</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">flatten</span>
         
         <span class="c1">#from copy import deepcopy</span>
         <span class="n">order0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span>
@@ -12845,9 +12845,9 @@
 <span class="sd">    of chordless odd circuits augmented digraphs.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
         <span class="c1">## if comment == None:</span>
         <span class="c1">##     silent = True</span>
         <span class="c1">## else:</span>
@@ -13024,9 +13024,9 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Reduction of Digraph object to its strong components.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="k">if</span> <span class="n">digraph</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: you must provide a valid digraph to the constructor!&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -13078,8 +13078,8 @@
 <span class="sd">    stored XML formatted digraphs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;testsaveXML&#39;</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">xml.sax</span> <span class="kn">import</span> <span class="n">make_parser</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;testsaveXML&#39;</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">xml.sax</span> <span class="k">import</span> <span class="n">make_parser</span>
         <span class="n">xmlDigraph</span> <span class="o">=</span> <span class="n">_XMLDigraphHandler</span><span class="p">()</span>
         <span class="n">saxParser</span> <span class="o">=</span> <span class="n">make_parser</span><span class="p">()</span>
         <span class="n">saxParser</span><span class="o">.</span><span class="n">setContentHandler</span><span class="p">(</span><span class="n">xmlDigraph</span><span class="p">)</span>
@@ -13197,8 +13197,8 @@
 <span class="sd">        fileName (without the extension .csv).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">valuationMin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">valuationMax</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">csv</span> <span class="kn">import</span> <span class="n">reader</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">valuationMin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">valuationMax</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">csv</span> <span class="k">import</span> <span class="n">reader</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">fileNameExt</span> <span class="o">=</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
@@ -13253,8 +13253,8 @@
 <span class="sd">        fileName (without the extension .xmcda). </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">xml.etree</span> <span class="kn">import</span> <span class="n">ElementTree</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">xml.etree</span> <span class="k">import</span> <span class="n">ElementTree</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">fileNameExt</span> <span class="o">=</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s1">&#39;.xmcda&#39;</span>
             <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileNameExt</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
@@ -13337,8 +13337,8 @@
 <span class="sd">        fileName (without the extension .xmcda).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">xml.etree</span> <span class="kn">import</span> <span class="n">ElementTree</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">xml.etree</span> <span class="k">import</span> <span class="n">ElementTree</span>
 
         <span class="n">fileNameExt</span> <span class="o">=</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s1">&#39;.xml&#39;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -13427,18 +13427,18 @@
 
 <span class="c1">###  replace the old outrankingDigraphs</span>
 <span class="c1">#from outrankingDigraphs import *</span>
-<span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 
 <span class="c1">#############################################</span>
 
 <span class="c1">#----------test Digraph class ----------------</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span>
-    <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span>\
+    <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span>\
     <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
-    <span class="kn">from</span> <span class="nn">votingProfiles</span> <span class="kn">import</span> <span class="n">CondorcetDigraph</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">votingProfiles</span> <span class="k">import</span> <span class="n">CondorcetDigraph</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
 
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*****************************************************&#39;</span><span class="p">)</span>
@@ -13524,8 +13524,8 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing classes and methods -------&#39;</span><span class="p">)</span>
 
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="o">*</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="o">*</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
                                    <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
@@ -13535,7 +13535,7 @@
         <span class="n">g</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">rankingByLastChoosing</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">showRankingByLastChoosing</span><span class="p">()</span>
-        <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+        <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="k">import</span> <span class="o">*</span>
         <span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByBestChoosing</span><span class="p">()</span>
         <span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByLastChoosing</span><span class="p">()</span>
@@ -13717,7 +13717,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2020, Raymond Bisdorff.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0.
     </div>
   </body>
 </html>

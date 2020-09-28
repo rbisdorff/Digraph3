@@ -64,14 +64,14 @@
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;Revision: Py38&quot;</span>
 
-<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">xmlrpc.client</span> <span class="kn">import</span> <span class="n">ServerProxy</span>
-<span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-<span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
-<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Lock</span><span class="p">,</span>\
+<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">xmlrpc.client</span> <span class="k">import</span> <span class="n">ServerProxy</span>
+<span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span>
+<span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Lock</span><span class="p">,</span>\
                         <span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>
 
 <span class="c1">#-------------------------------------------</span>
@@ -142,7 +142,7 @@
 <span class="sd">        If nbrCores is not set, the os.cpu_count() function is used to determine the number of</span>
 <span class="sd">        available cores.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="n">preorder</span> <span class="o">=</span> <span class="n">ranking2preorder</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span>
         <span class="n">preorderRelation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computePreorderRelation</span><span class="p">(</span><span class="n">preorder</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1&#39;</span><span class="p">)</span> <span class="ow">or</span>\
@@ -153,8 +153,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">Normalizing</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="n">Threading</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
-            <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Pool</span>
+            <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">cpu_count</span>
             <span class="k">if</span> <span class="n">nbrCores</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">nbrCores</span><span class="o">=</span> <span class="n">cpu_count</span><span class="p">()</span>
                 
@@ -223,7 +223,7 @@
 <span class="sd">        If nbrCores is not set, the os.cpu_count() function is used to determine the number of</span>
 <span class="sd">        available cores.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1&#39;</span><span class="p">)</span> <span class="ow">or</span>\
            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">):</span>
             <span class="n">origValuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
@@ -232,8 +232,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">Normalizing</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="n">Threading</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
-            <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Pool</span>
+            <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">cpu_count</span>
             <span class="k">if</span> <span class="n">nbrCores</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">nbrCores</span><span class="o">=</span> <span class="n">cpu_count</span><span class="p">()</span>
             <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
@@ -258,7 +258,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show method for computeCriterionCorrelation results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1&#39;</span><span class="p">)</span> <span class="ow">or</span>\
            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">):</span>
             <span class="n">origValuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
@@ -701,7 +701,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the comparison correlations between the actions</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         
         <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
@@ -741,7 +741,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the relation equivalence or correlation between the criteria</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">EquivalenceDigraph</span>
+        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">EquivalenceDigraph</span>
         <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">nPairs</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span><span class="o">*</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))))</span>
@@ -884,7 +884,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the ordinal criteria correlation digraph</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">Digraph</span>
+        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">Digraph</span>
         <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
         <span class="n">criteriaList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="n">corr</span><span class="p">,</span><span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeCriteriaCorrelations</span><span class="p">(</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="n">ValuedCorrelation</span><span class="p">)</span>
@@ -1063,7 +1063,7 @@
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">time</span>
-        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span><span class="p">,</span> <span class="n">gettempdir</span>
+        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">TemporaryDirectory</span><span class="p">,</span> <span class="n">gettempdir</span>
         <span class="kn">import</span> <span class="nn">os</span>
         <span class="n">currentDir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
         <span class="c1">#print(currentDir)</span>
@@ -3956,7 +3956,7 @@
 
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">copy</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">,</span> <span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">,</span><span class="n">RandomPerformanceTableau</span><span class="p">)):</span>
             <span class="n">perfTab</span> <span class="o">=</span> <span class="n">argPerfTab</span>
@@ -4246,7 +4246,7 @@
 
 <span class="c1"># myBODGThread for BipolarOutrankingDigraph class</span>
 <div class="viewcode-block" id="myBODGThread"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.myBODGThread">[docs]</a><span class="k">class</span> <span class="nc">myBODGThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span><span class="n">digraph</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span><span class="n">digraph</span><span class="p">,</span>\
                  <span class="n">InitialSplit</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span>\
                  <span class="n">splitActions</span><span class="p">,</span>\
                  <span class="n">hasNoVeto</span><span class="p">,</span> <span class="n">hasBipolarVeto</span><span class="p">,</span>\
@@ -4262,9 +4262,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">hasSymmetricThresholds</span> <span class="o">=</span> <span class="n">hasSymmetricThresholds</span><span class="p">,</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
 <div class="viewcode-block" id="myBODGThread.run"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.myBODGThread.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-        <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
-        <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
+        <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span>
+        <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
+        <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">chdir</span>
         <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
 <span class="c1">##                    if Debug:</span>
 <span class="c1">##                        print(&quot;Starting working in %s on thread %s&quot; % (self.workingDirectory, str(self.threadId)))</span>
@@ -4344,7 +4344,7 @@
 <span class="sd">        If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default presentation method for BipolarOutrankingDigraph instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -4378,7 +4378,7 @@
             <span class="k">pass</span>
         <span class="k">return</span> <span class="n">reprString</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">objectivesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">criteriaSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
@@ -4394,8 +4394,8 @@
                  <span class="n">WithVetoCounts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                  <span class="n">nbrCores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
         <span class="c1">#from digraphsTools import omax, omin</span>
 
         <span class="c1"># set initial time stamp</span>
@@ -4664,7 +4664,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialization of the corresponding BipolarOutrankingDigraph method</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+        <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">cpu_count</span>
         
         <span class="c1">##</span>
         
@@ -4692,18 +4692,18 @@
                                     <span class="n">hasSymmetricThresholds</span><span class="o">=</span><span class="n">hasSymmetricThresholds</span><span class="p">)</span>
         <span class="c1">##</span>
         <span class="k">else</span><span class="p">:</span>  <span class="c1"># parallel computation</span>
-            <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-            <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-            <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
+            <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+            <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span>
+            <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
             <span class="c1">#from multiprocessing import Process, Lock,\</span>
             <span class="c1">#                            active_children, cpu_count</span>
             <span class="c1">#Debug=True</span>
              
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Threading ...&#39;</span><span class="p">)</span>
-            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">TemporaryDirectory</span>
             <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="n">tempDir</span><span class="p">)</span> <span class="k">as</span> <span class="n">tempDirName</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+                <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
 
 <span class="c1">##                #selfDp = copy(self)</span>
 <span class="c1">##                selfFileName = tempDirName +&#39;/dumpSelf.py&#39;</span>
@@ -5000,7 +5000,7 @@
 <span class="sd">            * hasBipolarVeto = False allows to revert (if False) to standard Electre veto handling</span>
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">omax</span><span class="p">,</span><span class="n">omin</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="n">omax</span><span class="p">,</span><span class="n">omin</span>
         <span class="c1">## default setting for digraphs</span>
         <span class="k">if</span> <span class="n">initial</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">initial</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
@@ -5397,7 +5397,7 @@
 <span class="sd">        Removing this limitation is on the todo list and will be done soon.</span>
 <span class="sd">       </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">hasBipolarVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
@@ -5408,7 +5408,7 @@
                  <span class="n">WithVetoCounts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                  <span class="n">nbrCores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span> 
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span> 
         <span class="k">if</span> <span class="n">argPerfTab</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Performance tableau required !&#39;</span><span class="p">)</span>
             <span class="c1">#perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])</span>
@@ -5586,7 +5586,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialization of the corresponding BipolarOutrankingDigraph method</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+        <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">cpu_count</span>
         
         <span class="c1">##</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">Threading</span> <span class="ow">or</span> <span class="n">cpu_count</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
@@ -5602,14 +5602,14 @@
                                     <span class="n">hasSymmetricThresholds</span><span class="o">=</span><span class="n">hasSymmetricThresholds</span><span class="p">)</span>
         <span class="c1">##</span>
         <span class="k">else</span><span class="p">:</span>  <span class="c1"># parallel computation</span>
-            <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-            <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-            <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
-            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Lock</span><span class="p">,</span>\
+            <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+            <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span>
+            <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
+            <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Lock</span><span class="p">,</span>\
                                         <span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>
             <span class="c1">#Debug=True</span>
             <span class="k">class</span> <span class="nc">myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-                <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span>\
+                <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span>\
                              <span class="n">InitialSplit</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span>\
                              <span class="n">hasNoVeto</span><span class="p">,</span> <span class="n">hasBipolarVeto</span><span class="p">,</span>\
                              <span class="n">hasSymmetricThresholds</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
@@ -5622,9 +5622,9 @@
                     <span class="n">hasSymmetricThresholds</span> <span class="o">=</span> <span class="n">hasSymmetricThresholds</span><span class="p">,</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
                 <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                    <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
-                    <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
-                    <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
+                    <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span>
+                    <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
+                    <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">chdir</span>
                     <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting working in </span><span class="si">%s</span><span class="s2"> on thread </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threadId</span><span class="p">)))</span>
@@ -5672,9 +5672,9 @@
              
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Threading ...&#39;</span><span class="p">)</span>
-            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">TemporaryDirectory</span>
             <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tempDirName</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+                <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
                 <span class="c1">#selfDp = copy(self)</span>
                 <span class="n">selfFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpSelf.py&#39;</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -5784,7 +5784,7 @@
                     <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
                     <span class="c1">#relation.update(splitRelation)</span>
-                    <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+                    <span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
                     <span class="k">if</span> <span class="n">InitialSplit</span><span class="p">:</span>
                         <span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="n">splitActions</span><span class="p">,</span><span class="n">terminal</span><span class="p">):</span>
                         <span class="c1">#for x in splitActions:</span>
@@ -6184,7 +6184,7 @@
 <span class="sd">    new bipolar ordinal-valued outranking digraphs.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">copy</span>
         <span class="k">if</span> <span class="n">argPerfTab</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">perfTab</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">commonThresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">20.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">80.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">101.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)])</span>
@@ -6578,8 +6578,8 @@
 <span class="sd">    Specialization of the standard OutrankingDigraph class for generating</span>
 <span class="sd">    a median bipolar outranking digraph.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">percentile</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span>  <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">percentile</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span>  <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">,</span> <span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">,</span><span class="n">RandomPerformanceTableau</span><span class="p">)):</span>
             <span class="n">perfTab</span> <span class="o">=</span> <span class="n">argPerfTab</span>
         <span class="k">else</span><span class="p">:</span>
@@ -6631,7 +6631,7 @@
 <span class="sd">        Renders the quantile-outranking relation from the data</span>
 <span class="sd">        of a given performance tableau instantiation PerfTab.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         
         <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
@@ -6736,7 +6736,7 @@
 <span class="sd">    bipolar integer-valued outranking digraphs.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">hasBipolarVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                  <span class="n">hasSymmetricThresholds</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">copy</span>
@@ -7180,7 +7180,7 @@
 <span class="sd">    Digraphs from random performance tableaux.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="n">weightScale</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">commonScale</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">100.0</span><span class="p">],</span> <span class="n">commonThresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">20.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">80.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)],</span> <span class="n">commonMode</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">]):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="n">weightScale</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span> <span class="n">commonScale</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">100.0</span><span class="p">],</span> <span class="n">commonThresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">20.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">80.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)],</span> <span class="n">commonMode</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">]):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">time</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;rel_randomperftab&#39;</span>
         <span class="c1"># generate random performance tableau</span>
@@ -7212,7 +7212,7 @@
 <span class="sd">    Specialization of the OutrankingDigraph class for generating temporary</span>
 <span class="sd">    Digraphs from random performance tableaux.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
                  <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
                  <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">,</span>
                  <span class="n">weightScale</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span>
@@ -7260,7 +7260,7 @@
 <span class="sd">        If called with argument *digraph=None*, a RandomBipolarOutrankingDigraph instance is generated first.</span>
 <span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">KeepValues</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">AlphaCut</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StrictCut</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">KeepValues</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">AlphaCut</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StrictCut</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">copy</span>
         <span class="k">if</span> <span class="n">digraph</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">digraph</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">()</span>
@@ -7284,7 +7284,7 @@
 <span class="sd">    Specialization of the general OutrankingDigraph class for </span>
 <span class="sd">    temporary outranking digraphs with equisignificant criteria.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">copy</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">,</span> <span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">,</span><span class="n">RandomPerformanceTableau</span><span class="p">)):</span>
             <span class="n">perfTab</span> <span class="o">=</span> <span class="n">argPerfTab</span>
@@ -7385,7 +7385,7 @@
 <span class="sd">    Specialization of the general OutrankingDigraph class for </span>
 <span class="sd">    temporary ordinal outranking digraphs</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Generic constructor for many outranking digraph models.&quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">copy</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">,</span> <span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">,</span><span class="n">RandomPerformanceTableau</span><span class="p">)):</span>
@@ -7744,7 +7744,7 @@
 <span class="sd">    Specialization of the general OutrankingDigraph class for </span>
 <span class="sd">    temporary unanimous outranking digraphs</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Generic constructor for many outranking digraph models.&quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">copy</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">,</span> <span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">,</span><span class="n">RandomPerformanceTableau</span><span class="p">)):</span>
@@ -8021,7 +8021,7 @@
 <span class="sd">              |   (+2)   (+2)   (+2)   (+2)   (+2)   (-1)   (+4)  </span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filePerfTab</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filePerfTab</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         
         <span class="kn">import</span> <span class="nn">copy</span>
         
@@ -8188,7 +8188,7 @@
 <span class="sd">    Specialization of the general OutrankingDigraph class for </span>
 <span class="sd">    robustness analysis distinguishing 3 levels of stability.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filePerfTab</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filePerfTab</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         
         <span class="kn">import</span> <span class="nn">copy</span>
         
@@ -8782,7 +8782,7 @@
 <span class="sd">    Specialization of the OutrankingDigraph class for generating</span>
 <span class="sd">    temporary dissimilarity random graphs</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">argPerfTab</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Performance tableau required !&#39;</span><span class="p">)</span>
             <span class="n">perfTab</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">commonThresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">20.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">80.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">101.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)])</span>
@@ -8897,7 +8897,7 @@
 <span class="sd">    Specialization of the OutrankingDigraph class for generating</span>
 <span class="sd">    temporary multiple criteria based dissimilarity graphs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">perfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">filePerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">perfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">filePerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">copy</span>
         <span class="k">if</span> <span class="n">perfTab</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">filePerfTab</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -9037,7 +9037,7 @@
 <span class="sd">        * other standard parameters from the BipolarOutrankingDigraph class (see documentation).</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">distribution</span> <span class="o">=</span> <span class="s1">&#39;triangular&#39;</span><span class="p">,</span>
                  <span class="n">betaParameter</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
                  <span class="n">confidence</span> <span class="o">=</span> <span class="mf">90.0</span><span class="p">,</span>
@@ -9049,7 +9049,7 @@
                  <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,):</span>
         <span class="c1"># getting module ressources and setting the random seed</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="c1"># getting performance tableau</span>
         <span class="k">if</span> <span class="n">argPerfTab</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">perfTab</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">commonThresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">20.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">80.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">101.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)])</span>
@@ -9133,7 +9133,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">oldRelation</span><span class="p">,</span><span class="n">sumWeights</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
         
 <span class="c1">##        oldMax = Decimal(&#39;1&#39;)</span>
 <span class="c1">##        oldMin = Decimal(&#39;-1&#39;)</span>
@@ -9178,7 +9178,7 @@
 <span class="sd">        renders the Gauss cdf(z) = [erf( z ) + 1] / 2</span>
 <span class="sd">        sqrt(2) = 1.4142135623731</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span><span class="n">erf</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span><span class="p">,</span><span class="n">erf</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span> <span class="o">*</span> <span class="mf">1.4142135623731</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
@@ -9197,10 +9197,10 @@
 <span class="sd">        Renders the pairwise CLT likelihood of the at least as good as relation</span>
 <span class="sd">        neglecting all considerable large performance differences polarisations.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
-        <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">gauss</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span>
+        <span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">gauss</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">sumWeights</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
         <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
@@ -9390,7 +9390,7 @@
 <span class="sd">        * other standard parameters from the BipolarOutrankingDigraph class (see documentation).</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
                  <span class="n">samplingSeed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">distribution</span> <span class="o">=</span> <span class="s1">&#39;triangular&#39;</span><span class="p">,</span>
@@ -9403,13 +9403,13 @@
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">SeeSampleCounter</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="c1"># getting module ressources and setting the random seed</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;extTriangular&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">ExtendedTriangularRandomVariable</span>
+            <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">ExtendedTriangularRandomVariable</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">triangular</span><span class="p">,</span> <span class="n">uniform</span><span class="p">,</span> <span class="n">betavariate</span>
+            <span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">triangular</span><span class="p">,</span> <span class="n">uniform</span><span class="p">,</span> <span class="n">betavariate</span>
             <span class="k">if</span> <span class="n">samplingSeed</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">seed</span>
+                <span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">seed</span>
                 <span class="n">seed</span> <span class="o">=</span> <span class="n">samplingSeed</span>   
         <span class="c1"># getting performance tableau</span>
         <span class="k">if</span> <span class="n">argPerfTab</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -9562,7 +9562,7 @@
 <span class="sd">            * r(x,y)</span>
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">floor</span>
         <span class="n">fval</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">100.0</span> <span class="o">+</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">rValue</span><span class="p">)</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]))</span>\
                 <span class="o">/</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]))</span><span class="o">*</span><span class="mf">200.0</span><span class="p">)</span>
         <span class="n">val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">fval</span><span class="p">))</span>
@@ -9581,7 +9581,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        computes by interpolation the quantile of probability p of a list of sorted observations.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span><span class="p">,</span><span class="n">ceil</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">floor</span><span class="p">,</span><span class="n">ceil</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
             <span class="n">quantile</span> <span class="o">=</span> <span class="n">observations</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -9601,7 +9601,7 @@
 <span class="sd">        Results are stored in the self.relationStatistics[x][y] dictionary</span>
 <span class="sd">        with keys = &#39;sd&#39;,&#39;Q0,&#39;Q1,&#39;Q3&#39;,&#39;Q4&#39;.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">observations</span><span class="p">)</span>
         <span class="n">fn</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
         <span class="n">mean</span> <span class="o">=</span> <span class="mf">0.0</span>
@@ -9643,10 +9643,10 @@
 <span class="sd">        Renders the pairwise CLT likelihood of the at least as good as relation</span>
 <span class="sd">        neglecting all considerable large performance differences polarisations.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
-        <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-        <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span>
+        <span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">stats</span>
+        <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">norm</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">sumWeights</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
         <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
@@ -9708,7 +9708,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        prints the relation statistics in actions X actions table format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">copysign</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">copysign</span>
 <span class="c1">##        if hasLPDDenotation:</span>
 <span class="c1">##            try:</span>
 <span class="c1">##                largePerformanceDifferencesCount = self.largePerformanceDifferencesCount</span>
@@ -9809,13 +9809,13 @@
 
 <span class="sd">    When *coalitionsList* == None, an &#39;o-average&#39; fusion of the decision objectives restricted outranking digraphs is produced (see *UnOpposedBipolarOutrankingDigraph* class).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>\
                      <span class="n">coalitionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                      <span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                      <span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                      <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
 
         <span class="c1"># set initial time stamp</span>
         <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -9961,11 +9961,11 @@
 <span class="sd">   </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
                  
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="n">coalitions</span> <span class="o">=</span> <span class="p">[</span><span class="n">argPerfTab</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="n">obj</span><span class="p">][</span><span class="s1">&#39;criteria&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">argPerfTab</span><span class="o">.</span><span class="n">objectives</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;coalitions:&#39;</span><span class="p">,</span><span class="n">coalitions</span><span class="p">)</span>
@@ -9988,10 +9988,10 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    in development !</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
 
         <span class="c1"># set initial time stamp</span>
         <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -10155,7 +10155,7 @@
 <span class="sd">        &gt;&gt;&gt; ...</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;https://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py&quot;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;https://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py&quot;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Rubis Rest Server connection.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -10316,10 +10316,10 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
     <span class="kn">import</span> <span class="nn">copy</span>
-    <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span><span class="p">,</span> <span class="n">sleep</span>
-    <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
-    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
-    <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
+    <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span><span class="p">,</span> <span class="n">sleep</span>
+    <span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">randint</span>
+    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
+    <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="k">import</span> <span class="n">RankingByChoosingDigraph</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing classes and methods -------&#39;</span><span class="p">)</span>
 
@@ -10469,7 +10469,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2020, Raymond Bisdorff.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0.
     </div>
   </body>
 </html>

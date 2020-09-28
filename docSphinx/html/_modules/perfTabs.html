@@ -58,17 +58,17 @@
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;$Revision: 1.37 $&quot;</span>
 <span class="c1"># $Source: /home/cvsroot/Digraph/perfTabs.py,v $</span>
 
-<span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">perfTabs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">decimal</span>
-<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-<span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">literal_eval</span>
+<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">ast</span> <span class="k">import</span> <span class="n">literal_eval</span>
 
 <span class="c1"># ----------  old XML handling ------------------</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">xml.sax</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">xml.sax</span> <span class="k">import</span> <span class="o">*</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;XML extension will not work with this Python version!&#39;</span><span class="p">)</span>
 
@@ -208,7 +208,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default presentation method for PerformanceTableau instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -228,9 +228,9 @@
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Attributes       : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>     
         <span class="k">return</span> <span class="n">reprString</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filePerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">isEmpty</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filePerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">isEmpty</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="k">if</span> <span class="n">filePerfTab</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">filePerfTab</span> <span class="o">+</span> <span class="s1">&#39;.py&#39;</span>
             <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
@@ -266,7 +266,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">]</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">isEmpty</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">copy</span>
-            <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+            <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
             <span class="n">temp</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -286,7 +286,7 @@
 <span class="sd">        Verify if the given criteria[self][&#39;weight&#39;] are odd or not.</span>
 <span class="sd">        Return a Boolen value.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">powerset</span>
+        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">powerset</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">w</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
@@ -388,7 +388,7 @@
 <span class="sd">        renders the pairwise comprison parameters on all criteria</span>
 <span class="sd">        in html format</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -691,9 +691,9 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a cPerformanceTableau instance, by converting the action keys to integers and evaluations to floats, including the discrimination thresholds, the case given.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="n">cPerformanceTableau</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="k">import</span> <span class="n">cPerformanceTableau</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="n">isEmpty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;bgd_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
         <span class="n">att</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">]</span>
@@ -738,7 +738,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert evaluations from decimal format to float</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
@@ -757,7 +757,7 @@
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="n">th</span><span class="p">]</span> <span class="o">=</span> <span class="n">d1</span>
 
     <span class="k">def</span> <span class="nf">convertDiscriminationThresholds2Decimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">th</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">]:</span>
@@ -771,7 +771,7 @@
 <span class="sd">        Convert significance weights from obsolete float format</span>
 <span class="sd">        to decimal format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
@@ -782,7 +782,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert evaluations from obsolete float format to decimal format</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
@@ -795,7 +795,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Negates the weights of criteria to be minimzed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
@@ -814,7 +814,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Negates the weights of criteria to be minimzed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
@@ -896,7 +896,7 @@
 <span class="sd">        Adds to the criteria dictionary the ordered list of all observed performance differences.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
-        <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+        <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Pool</span>
         <span class="c1">#from os import cpu_count</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Compute performance differences on each criterion in parallel&#39;</span><span class="p">)</span>
@@ -1018,8 +1018,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the list of limiting quantiles *q(p)* on criteria *g* for *p* in *frequencies* </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">floor</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="n">gValues</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -1290,8 +1290,8 @@
 <span class="sd">        The actions are ordered along a decreasing Borda score of their ranking results.</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">PreRankedOutrankingDigraph</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="n">PreRankedOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">itemgetter</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="n">kBestFrequency</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">x</span><span class="p">,[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">])</span>
         <span class="n">ordering</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1531,7 +1531,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print the performance Tableau.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----  performance tableau -----*&#39;</span><span class="p">)</span>
         <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Sorted</span><span class="p">:</span>
@@ -2408,7 +2408,7 @@
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">webbrowser</span>
-        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
+        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="k">import</span> <span class="n">NamedTemporaryFile</span>
         <span class="n">fileName</span> <span class="o">=</span> <span class="p">(</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.html&#39;</span><span class="p">,</span><span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span><span class="o">.</span><span class="n">name</span>
         <span class="c1">#fileName = &#39;/tmp/performanceHeatmap.html&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
@@ -2462,7 +2462,7 @@
 
 <span class="sd">        See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
                     
         <span class="n">brewerRdYlGn9Colors</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1111&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D53E4F&quot;&#39;</span><span class="p">),</span>
                                <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2222&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#F46D43&quot;&#39;</span><span class="p">),</span>
@@ -2529,7 +2529,7 @@
             
             <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">SparseModel</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">PreRankedOutrankingDigraph</span>
+                <span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="n">PreRankedOutrankingDigraph</span>
                 <span class="k">if</span> <span class="n">quantiles</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">na</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
                         <span class="n">q</span> <span class="o">=</span> <span class="mi">5</span>
@@ -2545,7 +2545,7 @@
                 <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
                 
             <span class="k">else</span><span class="p">:</span> <span class="c1"># standard outranking model</span>
-                <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+                <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
                 <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">argActionsList</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;NetFlows&#39;</span><span class="p">:</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
@@ -2560,7 +2560,7 @@
                     <span class="k">if</span> <span class="n">StoreRanking</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">kohlerRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
                 <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;RankedPairs&#39;</span><span class="p">:</span>
-                    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">RankedPairsOrder</span>
+                    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">RankedPairsOrder</span>
                     <span class="n">rp</span> <span class="o">=</span> <span class="n">RankedPairsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">computeRanking</span><span class="p">()</span>
                     <span class="k">if</span> <span class="n">StoreRanking</span><span class="p">:</span>
@@ -2570,13 +2570,13 @@
                     <span class="k">if</span> <span class="n">StoreRanking</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">arrowRaynaudRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
                 <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;IteratedNetFlows&#39;</span><span class="p">:</span>
-                    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">IteratedNetFlowsRanking</span>
+                    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">IteratedNetFlowsRanking</span>
                     <span class="n">inf</span> <span class="o">=</span> <span class="n">IteratedNetFlowsRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">inf</span><span class="o">.</span><span class="n">iteratedNetFlowsRanking</span>
                     <span class="k">if</span> <span class="n">StoreRanking</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">iteratedNetFlowsRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
                 <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;IteratedCopeland&#39;</span><span class="p">:</span>
-                    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">IteratedCopelandRanking</span>
+                    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="n">IteratedCopelandRanking</span>
                     <span class="n">icop</span> <span class="o">=</span> <span class="n">IteratedCopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">icop</span><span class="o">.</span><span class="n">iteratedCopelandRanking</span>
                     <span class="k">if</span> <span class="n">StoreRanking</span><span class="p">:</span>
@@ -2598,7 +2598,7 @@
             <span class="k">if</span> <span class="n">SparseModel</span><span class="p">:</span>
                 <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+                <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
                 <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">argActionsList</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)))</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -2826,8 +2826,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the marginal criteria correlations with a given ranking with summary.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">marginalCorrelations</span> <span class="o">=</span>\
@@ -2875,8 +2875,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the marginal criteria correlations with a given ranking with summary.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">marginalCorrelations</span> <span class="o">=</span>\
@@ -2986,7 +2986,7 @@
 <span class="sd">        the values observed in the performance Tableau.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">math</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- Evaluation statistics ----*&#39;</span><span class="p">)</span>
         <span class="n">average</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
@@ -4655,8 +4655,8 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Template for PerformanceTableau objects.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;PerfTab-template&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
@@ -4668,10 +4668,10 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">inPerfTab</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">objectivesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">inPerfTab</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">objectivesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span>\
                                    <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">,</span>\
                                    <span class="n">RandomPerformanceTableau</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">inPerfTab</span><span class="o">.</span><span class="vm">__class__</span>
@@ -4782,9 +4782,9 @@
 <span class="sd">        * The *position* parameter (default = median performance) selects the constant performance in the respective scale of each performance criterion.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">inPerfTab</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">inPerfTab</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">position</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;constant-&#39;</span><span class="o">+</span><span class="n">inPerfTab</span><span class="o">.</span><span class="n">name</span>
 
@@ -4821,9 +4821,9 @@
 <span class="sd">    constructing normalized, 0 - 100, valued PerformanceTableau</span>
 <span class="sd">    instances from a given argPerfTab instance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">lowValue</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">highValue</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">lowValue</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">highValue</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">copy</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">,(</span><span class="nb">str</span><span class="p">)):</span>
             <span class="n">perfTab</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">argPerfTab</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
@@ -4864,7 +4864,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
@@ -5074,7 +5074,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">integerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                  <span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
@@ -5206,7 +5206,7 @@
 <span class="sd">    Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">weightDistribution</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">integerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">commonScale</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonMode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">weightDistribution</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">integerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">commonScale</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonMode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">random</span><span class="o">,</span><span class="nn">time</span><span class="o">,</span><span class="nn">math</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;fullrandomperftab&#39;</span>
         <span class="c1"># randomizer init</span>
@@ -5487,7 +5487,7 @@
 <span class="sd">    Obsolete class definition. Please use the corresponding randomPerfTabs module class instead.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">integerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">commonScale</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">commonMode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -5870,7 +5870,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> \
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> \
                  <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> \
                  <span class="n">weightDistribution</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
@@ -7084,9 +7084,9 @@
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">):</span>
         
-        <span class="kn">from</span> <span class="nn">xml.etree</span> <span class="kn">import</span> <span class="n">ElementTree</span>
+        <span class="kn">from</span> <span class="nn">xml.etree</span> <span class="k">import</span> <span class="n">ElementTree</span>
         
         <span class="n">fileNameExt</span> <span class="o">=</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s1">&#39;.xmcda&#39;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -7259,11 +7259,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#from collections import OrderedDict</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">HasSeparatedWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">HasSeparatedWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">HasSeparatedThresholds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">stringInput</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         
-        <span class="kn">from</span> <span class="nn">xml.etree</span> <span class="kn">import</span> <span class="n">ElementTree</span>
+        <span class="kn">from</span> <span class="nn">xml.etree</span> <span class="k">import</span> <span class="n">ElementTree</span>
         <span class="k">if</span> <span class="n">stringInput</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fileNameExt</span> <span class="o">=</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s1">&#39;.xmcda2&#39;</span>
             <span class="k">try</span><span class="p">:</span>
@@ -7275,7 +7275,7 @@
                 <span class="k">except</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: file </span><span class="si">%s</span><span class="s2">{.xmcda2|.xml} not found !&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fileName</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+            <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">StringIO</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">fo</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="n">stringInput</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
@@ -7553,9 +7553,9 @@
 <span class="sd">    Param:</span>
 <span class="sd">        fileName (without the extension .csv).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">csv</span> <span class="kn">import</span> <span class="n">reader</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">csv</span> <span class="k">import</span> <span class="n">reader</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">fileNameExt</span> <span class="o">=</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
@@ -7607,13 +7607,13 @@
 <span class="c1">#----------test Digraph class ----------------</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     
-    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
     <span class="kn">import</span> <span class="nn">sortingDigraphs</span>
-    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
     <span class="kn">import</span> <span class="nn">random</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing classes and methods -------&#39;</span><span class="p">)</span>
@@ -7716,7 +7716,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2020, Raymond Bisdorff.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0.
     </div>
   </body>
 </html>

@@ -5239,7 +5239,7 @@ Furthermore, as the kernel concept involves conjointly a **positive logical refu
 
 In such a  bipolar-valued context, we call **prekernel** a choice which is **externally stable** and for which the **internal stability** condition is **valid or indeterminate**. We say that the independence condition is in this case only **weakly** validated. Notice that all kernels are hence prekernels, but not vice-versa.
 
-In graphs or symmetric digraphs, where there is essentially no apparent ' *laterality* ', all kernels are *initial* **and** *terminal* at the same time. They correspond to what we call *holes* in the graph. An *universal* example is given by the **complete** digraph.
+In graphs or symmetric digraphs, where there is essentially no apparent ' *laterality* ', all prekernels are *initial* **and** *terminal* at the same time. They correspond to what we call *holes* in the graph. An *universal* example is given by the **complete** digraph.
 
 .. code-block:: pycon
 
@@ -5279,7 +5279,7 @@ In graphs or symmetric digraphs, where there is essentially no apparent ' *later
     Execution time  : 0.00004 sec.
     Results in sets: dompreKernels and abspreKernels.
 
-In a complete digraph, each single node is indeed both an initial and a terminal kernel candidate and there is no definite *begin* or *end* of the digraph to be detected. *Laterality* is here entirely *relative* to a specific singleton chosen as reference point of view. The same absence of laterality is apparent in two other universal digraph models, the **empty** and the **indeterminate** digraph. 
+In a complete digraph, each single node is indeed both an initial and a terminal prekernel candidate and there is no definite *begin* or *end* of the digraph to be detected. *Laterality* is here entirely *relative* to a specific singleton chosen as reference point of view. The same absence of laterality is apparent in two other universal digraph models, the **empty** and the **indeterminate** digraph. 
 
 .. code-block:: pycon
    :linenos:
@@ -5299,7 +5299,7 @@ In a complete digraph, each single node is indeed both an initial and a terminal
        absorbency   :  1.0
     ...
 
-In the empty digraph, the whole set of nodes gives indeed at the same time the **unique** *initial* **and** *terminal* kernel. Similarly, for the **indeterminate** digraph.
+In the empty digraph, the whole set of nodes gives indeed at the same time the **unique** *initial* **and** *terminal* prekernel. Similarly, for the **indeterminate** digraph.
 
 .. code-block:: pycon
    :linenos:
@@ -5319,9 +5319,9 @@ In the empty digraph, the whole set of nodes gives indeed at the same time the *
        dominance    :  1.0
        absorbency   :  1.0
 
-Both these results make sense, as in a completely empty or indeterminate digraph, there is no *interior* of the digraph defined, only a *border* which is hence at the same time an initial and terminal kernel.  Notice however, that in the latter indeterminate case, the complete set of nodes verifies only weakly the internal stability condition (see above).
+Both these results make sense, as in a completely empty or indeterminate digraph, there is no *interior* of the digraph defined, only a *border* which is hence at the same time an initial and terminal prekernel.  Notice however, that in the latter indeterminate case, the complete set of nodes verifies only weakly the internal stability condition (see above).
 
-Other common digraph models, although being clearly oriented, may show nevertheless no apparent laterality, like **odd chordless circuits**, i.e. *holes* surrounded by an *oriented cycle* -a circuit- of odd length. They do not admit in fact any initial or terminal kernel.
+Other common digraph models, although being clearly oriented, may show nevertheless no apparent laterality, like **odd chordless circuits**, i.e. *holes* surrounded by an *oriented cycle* -a circuit- of odd length. They do not admit in fact any initial or terminal prekernel.
 
 .. code-block:: pycon
    :linenos:
@@ -5335,7 +5335,7 @@ Other common digraph models, although being clearly oriented, may show neverthel
      dominant prekernels :  0
      absorbent prekernels:  0
 
-Chordless circuits of **even** length 2 x *k*, with *k* > 1, contain however two isomorphic kernels of cardinality *k* which qualify conjointly as initial and terminal candidates.
+Chordless circuits of **even** length 2 x *k*, with *k* > 1, contain however two isomorphic prekernels of cardinality *k* which qualify conjointly as initial and terminal candidates.
 
 .. code-block:: pycon
    :linenos:
@@ -5350,7 +5350,7 @@ Chordless circuits of **even** length 2 x *k*, with *k* > 1, contain however two
     ['1', '3', '5'] independence: 1.0, dominance: 1.0, absorbency: 1.0
     ['2', '4', '6'] independence: 1.0, dominance: 1.0, absorbency: 1.0
 
-Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of **all** chordless circuits of *odd* **or** *even* length, i.e. *filled* circuits also called **anti-holes** (see :numref:`dualChordlessCircuit`), never contain any potential kernel candidates.
+Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of **all** chordless circuits of *odd* **or** *even* length, i.e. *filled* circuits also called **anti-holes** (see :numref:`dualChordlessCircuit`), never contain any potential prekernel candidates.
 
 .. code-block:: pycon
    :linenos:
@@ -5604,7 +5604,7 @@ With such unique disjoint initial and terminal prekernels (see Line 4 and 10), t
       determinateness (%) : 64.62
       - most credible action(s) = { 'a7': 48.84, }
 
-Notice that solving the valued *Berge* kernel equations (see the Pearls of bipolar-valued epistemic logic) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions 'a2' and 'a4' are equivalent candidates for a unique best choice, and action 'a7' is clearly confirmed as the worst choice.
+Notice that solving the valued *Berge* kernel equations (see :ref:`Bipolar-Valued-Kernels-Tutorial-label` in the Advanced Topics) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions 'a2' and 'a4' are equivalent candidates for a unique best choice, and action 'a7' is clearly confirmed as the worst choice.
 
 In :numref:`bestWorstOrientation` below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations. 
 
