@@ -45,6 +45,8 @@ Digraph3 Advanced Topics
    .. raw:: latex
 
       \textbf{\Large{Digraph3 Advanced Topics}}
+
+      \href{https://digraph3.readthedocs.io/en/latest/index.html}{HTML Version}
       \vspace{5mm}
 
 .. only:: html
@@ -92,7 +94,7 @@ Let us consider such a performance tableau gathering a *Movie Magazine* 's ratin
 
 To aggregate all the critics' rating opinions, the *Graffiti* magazine provides for each movie a global score computed as an *average grade*, just ignoring the *not seen* data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic *SJ*, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
 
-A better approach is to rank the movies on the basis of pairwise bipolar-valued  *at least as well rated as* opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the :ref:`Ranking-Tutorial-label` tutorial) of the 25 movies is provided, for instance, by the **heat map** view shown in :numref:`graffiti07_2`.
+A better approach is to rank the movies on the basis of pairwise bipolar-valued  *at least as well rated as* opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the tutorial on :ref:`Ranking with incommenduarble performance criteria <Ranking-Tutorial-label>`) of the 25 movies is provided, for instance, by the **heat map** view shown in :numref:`graffiti07_2`.
 
 >>> t.showHTMLPerformanceHeatmap(Correlations=True,
                                  rankingRule='NetFlows',
@@ -451,7 +453,7 @@ The first 3 principal axes support together about 70% of the total inertia. Most
 Exploring the *better rated*  and the *as well as rated* opinions
 .................................................................
 
-In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asymmetric and symmetric parts of the '*at least as well rated as*' opinions (see the tutorial :ref:`Digraphs-Tutorial-label`).
+In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asymmetric and symmetric parts of the '*at least as well rated as*' opinions (see the tutorial on :ref:`Manipulating Digraph objects <Digraphs-Tutorial-label>`).
 
 Let us first have a look at the pairwise asymmetric part, namely the '*better rated than*' and '*less well rated than*' opinions of the movie critics. 
 
@@ -473,7 +475,7 @@ We notice here that the *Net-Flows* ranking rule inverts in fact just three '*le
    :width: 600 px
    :align: center
 
-Such a preordering of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -best remaining choices- and *absorbent kernels* -worst remaining choices- (see the tutorial :ref:`Kernel-Tutorial-label`). We operate therefore on the asymmetric '*better rated than*', i.e. the *codual* ([3]_) of the '*at least as well rated as*' opinions (see :numref:`rankGraf` Line 2).
+Such a preordering of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -best remaining choices- and *absorbent kernels* -worst remaining choices- (see the tutorial on :ref:`Computing Digraph Kernels <Kernel-Tutorial-label>`). We operate therefore on the asymmetric '*better rated than*', i.e. the *codual* ([3]_) of the '*at least as well rated as*' opinions (see :numref:`rankGraf` Line 2).
 
 .. code-block:: pycon
    :linenos:
@@ -494,7 +496,7 @@ Such a preordering of the movies may, for instance, be computed with the :py:fun
        2nd Worst Choice ['mv_DF', 'mv_DJ', 'mv_FF', 'mv_GG']
      1st Worst Choice ['mv_BI', 'mv_DI', 'mv_HP', 'mv_TF']
 
-In the tutorial :ref:`Kernel-Tutorial-label`, we thouroughly discuss the computation of *kernels* in bipolar-valued digraphs. Yet, we do not tackle there the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors. This is the topic for the next pearl of bipolar-valued epistemic logic.
+In the tutorial on :ref:`Computing Digraph Kernels <Kernel-Tutorial-label>`, we thouroughly discuss the computation of *kernels* in bipolar-valued digraphs. Yet, we do not tackle there the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors. This is the topic for the next pearl of bipolar-valued epistemic logic.
 
 Back to :ref:`Content Table <Pearls-label>`
 
@@ -578,7 +580,7 @@ Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extende
     | *in*  : bipolar-valued digraph *G(X,R)*,
     | *out* : set {*Y1*, *Y2*, .. } of bipolar-valued kernel membership characteristic vectors.
     
-    1. enumerate all initial and terminal crisp prekernels *K*, *K2*, ... in the given bipolar-valued digraph (see the ':ref:`Kernel-Tutorial-label`' tutorial);
+    1. enumerate all initial and terminal crisp prekernels *K*, *K2*, ... in the given bipolar-valued digraph (see the tutorial on :ref:`Computing Digraph Kernels <Kernel-Tutorial-label>`);
        
     #. for each crisp initial kernel *Ki*:
     
@@ -743,7 +745,7 @@ Again, we notice that this terminal prekernel is indeed only weakly independent.
 
 A unique stable bipolar-valued high and low fixpoint is attained at the third iteration with *a7* positively confirmed (about 75% criteria significance majority) as member of this terminal prekernel, whereas the membership of *a3* in this prekernel appears indeterminate. All the remaining nodes have *negative* membership characteristic values and are hence positively excluded from this prekernel.
 
-When we reconsider the graphviz drawing of this outranking digraph (see :numref:`bestWorstOrientation` in the tutorial ':ref:`Kernel-Tutorial-label`'),
+When we reconsider the graphviz drawing of this outranking digraph (see Fig. 52  in the tutorial on :ref:`Computing Digraph Kernels <Kernel-Tutorial-label>`),
 
 .. figure:: bestWorstOrientation.png
    :width: 300 px
@@ -752,7 +754,7 @@ When we reconsider the graphviz drawing of this outranking digraph (see :numref:
 
    The strict outranking digraph oriented by the positive members of its initial and terminal prekernels
 
-it becomes obvious why alternative *a1* is **neither included nor excluded** from the initial prekernel. Same observation is applicable to alternative *a3* which can **neither be included nor excluded** from the terminal prekernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent prekernel; the corresponding bipolar-valued membership characteristic vector being completely indeterminate (see for instance the tutorial ':ref:`Rubis-Tutorial-label`').
+it becomes obvious why alternative *a1* is **neither included nor excluded** from the initial prekernel. Same observation is applicable to alternative *a3* which can **neither be included nor excluded** from the terminal prekernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent prekernel; the corresponding bipolar-valued membership characteristic vector being completely indeterminate (see for instance the tutorial on :ref:`Computing a Best Choice Recommendation <Rubis-Tutorial-label>`).
 
 To illustrate finally why sometimes we need to operate an *epistemic disjunctive fusion* of **unequal** stable low and high membership characteristics vectors (see Step 2.c.), let us consider, for instance, the following crisp 7-*cycle* graph.
 

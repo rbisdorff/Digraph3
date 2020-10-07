@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  7 OCT 2020 14:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  7 OCT 2020 16:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -771,23 +771,19 @@ Package pdftex.def Info: k2restricted.png  used on input line 840.
 (pdftex.def)             Requested size: 301.12305pt x 172.93852pt.
 
 [21]
-Underfull \hbox (badness 5519) in paragraph at lines 870--871
-[]\T1/cmr/m/n/12 When we re-con-sider the graphviz draw-ing of this out-rank-in
-g di-graph (see
- []
-
 <bestWorstOrientation.png, id=390, 384.43625pt x 403.5075pt>
 File: bestWorstOrientation.png Graphic file (type png)
 <use bestWorstOrientation.png>
 Package pdftex.def Info: bestWorstOrientation.png  used on input line 876.
 (pdftex.def)             Requested size: 225.84229pt x 237.05145pt.
-[22 <./k2restricted.png>] [23 <./bestWorstOrientation.png>] [24]
+ [22 <./k2restricted.png>] [23 <./bestWorstOrientation.png>] [24]
 <weightDistributions.png, id=414, 738.76pt x 669.50125pt>
 File: weightDistributions.png Graphic file (type png)
 <use weightDistributions.png>
 Package pdftex.def Info: weightDistributions.png  used on input line 990.
 (pdftex.def)             Requested size: 338.76343pt x 307.00381pt.
- [25] [26 <./weightDistributions.png>]
+ [25]
+[26 <./weightDistributions.png>]
 <rCharacteristic.png, id=435, 764.8575pt x 411.5375pt>
 File: rCharacteristic.png Graphic file (type png)
 <use rCharacteristic.png>
@@ -805,7 +801,8 @@ File: confidentOutranking.png Graphic file (type png)
 <use confidentOutranking.png>
 Package pdftex.def Info: confidentOutranking.png  used on input line 1194.
 (pdftex.def)             Requested size: 263.48267pt x 294.53838pt.
- [31 <./confidentOutranking.png>] [32] [33] [34] [35] [36] [37]
+ [31 <./confidentOutranking.png>] [32] [33] [34] [35]
+[36] [37]
 Overfull \vbox (1.24075pt too high) detected at line 1526
  []
 
@@ -911,9 +908,9 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist
 /type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/symbols/msam10.pfb>
-Output written on digraph3Pearls.pdf (46 pages, 1752315 bytes).
+Output written on digraph3Pearls.pdf (46 pages, 1752002 bytes).
 PDF statistics:
- 1474 PDF objects out of 1728 (max. 8388607)
+ 1473 PDF objects out of 1728 (max. 8388607)
  671 compressed objects within 7 object streams
  153 named destinations out of 1000 (max. 500000)
  300 words of extra memory for PDF output out of 10000 (max. 10000000)

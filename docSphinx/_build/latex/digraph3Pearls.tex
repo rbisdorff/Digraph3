@@ -176,7 +176,7 @@ Let us consider such a performance tableau gathering a \sphinxstyleemphasis{Movi
 
 To aggregate all the critics’ rating opinions, the \sphinxstyleemphasis{Graffiti} magazine provides for each movie a global score computed as an \sphinxstyleemphasis{average grade}, just ignoring the \sphinxstyleemphasis{not seen} data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic \sphinxstyleemphasis{SJ}, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
 
-A better approach is to rank the movies on the basis of pairwise bipolar\sphinxhyphen{}valued  \sphinxstyleemphasis{at least as well rated as} opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the \DUrole{xref,std,std-ref}{Ranking\sphinxhyphen{}Tutorial\sphinxhyphen{}label} tutorial) of the 25 movies is provided, for instance, by the \sphinxstylestrong{heat map} view shown in \hyperref[\detokenize{pearls:graffiti07-2}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-2}}}.
+A better approach is to rank the movies on the basis of pairwise bipolar\sphinxhyphen{}valued  \sphinxstyleemphasis{at least as well rated as} opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the tutorial on \DUrole{xref,std,std-ref}{Ranking with incommenduarble performance criteria}) of the 25 movies is provided, for instance, by the \sphinxstylestrong{heat map} view shown in \hyperref[\detokenize{pearls:graffiti07-2}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-2}}}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}
@@ -551,7 +551,7 @@ The first 3 principal axes support together about 70\% of the total inertia. Mos
 
 \subsection{Exploring the \sphinxstyleemphasis{better rated}  and the \sphinxstyleemphasis{as well as rated} opinions}
 \label{\detokenize{pearls:exploring-the-better-rated-and-the-as-well-as-rated-opinions}}
-In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asymmetric and symmetric parts of the ‘\sphinxstyleemphasis{at least as well rated as}’ opinions (see the tutorial \DUrole{xref,std,std-ref}{Digraphs\sphinxhyphen{}Tutorial\sphinxhyphen{}label}).
+In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asymmetric and symmetric parts of the ‘\sphinxstyleemphasis{at least as well rated as}’ opinions (see the tutorial on \DUrole{xref,std,std-ref}{Manipulating Digraph objects}).
 
 Let us first have a look at the pairwise asymmetric part, namely the ‘\sphinxstyleemphasis{better rated than}’ and ‘\sphinxstyleemphasis{less well rated than}’ opinions of the movie critics.
 
@@ -571,7 +571,7 @@ We notice here that the \sphinxstyleemphasis{Net\sphinxhyphen{}Flows} ranking ru
 
 \noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{symmetricPart}.png}\hspace*{\fill}}
 
-Such a preordering of the movies may, for instance, be computed with the \sphinxcode{\sphinxupquote{digraphs.Digraph.computeRankingByChoosing()}} method, where we iteratively extract \sphinxstyleemphasis{dominant kernels} \sphinxhyphen{}best remaining choices\sphinxhyphen{} and \sphinxstyleemphasis{absorbent kernels} \sphinxhyphen{}worst remaining choices\sphinxhyphen{} (see the tutorial \DUrole{xref,std,std-ref}{Kernel\sphinxhyphen{}Tutorial\sphinxhyphen{}label}). We operate therefore on the asymmetric ‘\sphinxstyleemphasis{better rated than}’, i.e. the \sphinxstyleemphasis{codual} (%
+Such a preordering of the movies may, for instance, be computed with the \sphinxcode{\sphinxupquote{digraphs.Digraph.computeRankingByChoosing()}} method, where we iteratively extract \sphinxstyleemphasis{dominant kernels} \sphinxhyphen{}best remaining choices\sphinxhyphen{} and \sphinxstyleemphasis{absorbent kernels} \sphinxhyphen{}worst remaining choices\sphinxhyphen{} (see the tutorial on \DUrole{xref,std,std-ref}{Computing Digraph Kernels}). We operate therefore on the asymmetric ‘\sphinxstyleemphasis{better rated than}’, i.e. the \sphinxstyleemphasis{codual} (%
 \begin{footnote}[3]\sphinxAtStartFootnote
 A \sphinxstyleemphasis{kernel} in a digraph \sphinxstyleemphasis{g} is a \sphinxstyleemphasis{clique} in the dual digraph \sphinxstyleemphasis{\sphinxhyphen{}g}.
 %
@@ -594,7 +594,7 @@ A \sphinxstyleemphasis{kernel} in a digraph \sphinxstyleemphasis{g} is a \sphinx
 \PYG{g+go}{  1st Worst Choice [\PYGZsq{}mv\PYGZus{}BI\PYGZsq{}, \PYGZsq{}mv\PYGZus{}DI\PYGZsq{}, \PYGZsq{}mv\PYGZus{}HP\PYGZsq{}, \PYGZsq{}mv\PYGZus{}TF\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-In the tutorial \DUrole{xref,std,std-ref}{Kernel\sphinxhyphen{}Tutorial\sphinxhyphen{}label}, we thouroughly discuss the computation of \sphinxstyleemphasis{kernels} in bipolar\sphinxhyphen{}valued digraphs. Yet, we do not tackle there the problem of computing the corresponding bipolar\sphinxhyphen{}valued \sphinxstylestrong{kernel membership} characteristic vectors. This is the topic for the next pearl of bipolar\sphinxhyphen{}valued epistemic logic.
+In the tutorial on \DUrole{xref,std,std-ref}{Computing Digraph Kernels}, we thouroughly discuss the computation of \sphinxstyleemphasis{kernels} in bipolar\sphinxhyphen{}valued digraphs. Yet, we do not tackle there the problem of computing the corresponding bipolar\sphinxhyphen{}valued \sphinxstylestrong{kernel membership} characteristic vectors. This is the topic for the next pearl of bipolar\sphinxhyphen{}valued epistemic logic.
 
 Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}}
 
@@ -697,7 +697,7 @@ Following the \sphinxstyleemphasis{von Neumann} fixpoint algorithm, a similar bi
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
-enumerate all initial and terminal crisp prekernels \sphinxstyleemphasis{K}, \sphinxstyleemphasis{K2}, … in the given bipolar\sphinxhyphen{}valued digraph (see the ‘\DUrole{xref,std,std-ref}{Kernel\sphinxhyphen{}Tutorial\sphinxhyphen{}label}’ tutorial);
+enumerate all initial and terminal crisp prekernels \sphinxstyleemphasis{K}, \sphinxstyleemphasis{K2}, … in the given bipolar\sphinxhyphen{}valued digraph (see the tutorial on \DUrole{xref,std,std-ref}{Computing Digraph Kernels});
 
 \item {} 
 for each crisp initial kernel \sphinxstyleemphasis{Ki}:
@@ -867,7 +867,7 @@ Again, we notice that this terminal prekernel is indeed only weakly independent.
 
 A unique stable bipolar\sphinxhyphen{}valued high and low fixpoint is attained at the third iteration with \sphinxstyleemphasis{a7} positively confirmed (about 75\% criteria significance majority) as member of this terminal prekernel, whereas the membership of \sphinxstyleemphasis{a3} in this prekernel appears indeterminate. All the remaining nodes have \sphinxstyleemphasis{negative} membership characteristic values and are hence positively excluded from this prekernel.
 
-When we reconsider the graphviz drawing of this outranking digraph (see \sphinxcode{\sphinxupquote{bestWorstOrientation}} in the tutorial ‘\DUrole{xref,std,std-ref}{Kernel\sphinxhyphen{}Tutorial\sphinxhyphen{}label}’),
+When we reconsider the graphviz drawing of this outranking digraph (see Fig. 52  in the tutorial on \DUrole{xref,std,std-ref}{Computing Digraph Kernels}),
 
 \begin{figure}[H]
 \centering
@@ -876,7 +876,7 @@ When we reconsider the graphviz drawing of this outranking digraph (see \sphinxc
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{bestWorstOrientation}.png}
 \caption{The strict outranking digraph oriented by the positive members of its initial and terminal prekernels}\label{\detokenize{pearls:id31}}\end{figure}
 
-it becomes obvious why alternative \sphinxstyleemphasis{a1} is \sphinxstylestrong{neither included nor excluded} from the initial prekernel. Same observation is applicable to alternative \sphinxstyleemphasis{a3} which can \sphinxstylestrong{neither be included nor excluded} from the terminal prekernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent prekernel; the corresponding bipolar\sphinxhyphen{}valued membership characteristic vector being completely indeterminate (see for instance the tutorial ‘\DUrole{xref,std,std-ref}{Rubis\sphinxhyphen{}Tutorial\sphinxhyphen{}label}’).
+it becomes obvious why alternative \sphinxstyleemphasis{a1} is \sphinxstylestrong{neither included nor excluded} from the initial prekernel. Same observation is applicable to alternative \sphinxstyleemphasis{a3} which can \sphinxstylestrong{neither be included nor excluded} from the terminal prekernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent prekernel; the corresponding bipolar\sphinxhyphen{}valued membership characteristic vector being completely indeterminate (see for instance the tutorial on \DUrole{xref,std,std-ref}{Computing a Best Choice Recommendation}).
 
 To illustrate finally why sometimes we need to operate an \sphinxstyleemphasis{epistemic disjunctive fusion} of \sphinxstylestrong{unequal} stable low and high membership characteristics vectors (see Step 2.c.), let us consider, for instance, the following crisp 7\sphinxhyphen{}\sphinxstyleemphasis{cycle} graph.
 
