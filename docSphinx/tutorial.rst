@@ -21,8 +21,9 @@ Tutorials of the Digraph3 resources
 .. only:: html
 
    :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg,
-	    https://rbisdorff.github.io/
+   :URL: https://rbisdorff.github.io/
    :Version: Revision: Python 3.8
+   :PDF: http://hdl.handle.net/10993/37886
    :Copyright: R. Bisdorff 2013-2020
 
 .. _Tutorial-label:
@@ -40,6 +41,8 @@ Tutorials of the Digraph3 resources
    .. raw:: latex
 
       \textbf{\Large{Tutorials of the \textsc{Digraph3} Resources}}
+
+      \href{https://digraph3.readthedocs.io/en/latest/index.html}{HTML Version}
       \vspace{5mm}
 
 .. only:: html

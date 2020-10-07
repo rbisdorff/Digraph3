@@ -22,6 +22,7 @@ Digraph3 Advanced Topics
    :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
    :URL: https://rbisdorff.github.io/
    :Version: Revision: Python 3.8
+   :PDF: http://hdl.handle.net/10993/42390
    :Copyright: R. Bisdorff 2013-2020
 
 .. _Pearls-label:
@@ -44,6 +45,8 @@ Digraph3 Advanced Topics
    .. raw:: latex
 
       \textbf{\Large{Digraph3 Advanced Topics}}
+
+      \href{https://digraph3.readthedocs.io/en/latest/index.html}{HTML Version}
       \vspace{5mm}
 
 .. only:: html
