@@ -37,35 +37,35 @@
 <title>List of Alternatives</title>
 <subTitle>Potential decision actions.</subTitle>
 </description>
-<alternative id="p1" name="action p1 Eco- Soc- Env+">
+<alternative id="p1" name="action p1 Eco+ Soc~ Env-">
 <description>
 <comment>random public polivy</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="p2" name="action p2 Eco~ Soc+ Env-">
+<alternative id="p2" name="action p2 Eco+ Soc- Env+">
 <description>
 <comment>random public polivy</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="p3" name="action p3 Eco+ Soc~ Env+">
+<alternative id="p3" name="action p3 Eco- Soc- Env~">
 <description>
 <comment>random public polivy</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="p4" name="action p4 Eco~ Soc+ Env~">
+<alternative id="p4" name="action p4 Eco- Soc- Env-">
 <description>
 <comment>random public polivy</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="p5" name="action p5 Eco- Soc+ Env~">
+<alternative id="p5" name="action p5 Eco~ Soc+ Env-">
 <description>
 <comment>random public polivy</comment>
 </description>
@@ -83,8 +83,8 @@
 <version>Rubis</version>
 </description>
 <active>true</active>
-<weight><value><real>4.00</real></value></weight>
-<objectiveCriteria>['ec1', 'ec4', 'ec5', 'ec7']</objectiveCriteria>
+<weight><value><real>2.00</real></value></weight>
+<objectiveCriteria>['ec1', 'ec4']</objectiveCriteria>
 </objective>
 <objective id="Env" name="Environmental aspect" mcdaConcept="objective">
 <description>
@@ -92,8 +92,8 @@
 <version>Rubis</version>
 </description>
 <active>true</active>
-<weight><value><real>1.00</real></value></weight>
-<objectiveCriteria>['en3']</objectiveCriteria>
+<weight><value><real>2.00</real></value></weight>
+<objectiveCriteria>['en3', 'en7']</objectiveCriteria>
 </objective>
 <objective id="Soc" name="Societal aspect" mcdaConcept="objective">
 <description>
@@ -101,8 +101,8 @@
 <version>Rubis</version>
 </description>
 <active>true</active>
-<weight><value><real>2.00</real></value></weight>
-<objectiveCriteria>['so2', 'so6']</objectiveCriteria>
+<weight><value><real>3.00</real></value></weight>
+<objectiveCriteria>['so2', 'so5', 'so6']</objectiveCriteria>
 </objective>
 </objectives>
 <criteria mcdaConcept="criteria">
@@ -168,72 +168,6 @@
 <real>10.00</real>
 </constant>
 </threshold>
-<threshold id="veto">
-<constant>
-<real>50.00</real>
-</constant>
-</threshold>
-</thresholds>
-</criterion>
-<criterion id="ec5" name="criterion of objective Eco" mcdaConcept="criterion">
-<description>
-<comment>Constant beta law with parameters = 0.5, None</comment>
-<version>performance</version>
-</description>
-<active>true</active>
-<criterionObjective>Eco</criterionObjective>
-<criterionValue><value><real>1.00</real></value></criterionValue>
-<scale>
-<quantitative>
-<preferenceDirection>max</preferenceDirection>
-<minimum><real>0.00</real></minimum>
-<maximum><real>100.00</real></maximum>
-</quantitative>
-</scale>
-<thresholds>
-<threshold id="ind">
-<constant>
-<real>5.00</real>
-</constant>
-</threshold>
-<threshold id="pref">
-<constant>
-<real>10.00</real>
-</constant>
-</threshold>
-</thresholds>
-</criterion>
-<criterion id="ec7" name="criterion of objective Eco" mcdaConcept="criterion">
-<description>
-<comment>Constant beta law with parameters = 0.5, None</comment>
-<version>performance</version>
-</description>
-<active>true</active>
-<criterionObjective>Eco</criterionObjective>
-<criterionValue><value><real>1.00</real></value></criterionValue>
-<scale>
-<quantitative>
-<preferenceDirection>max</preferenceDirection>
-<minimum><real>0.00</real></minimum>
-<maximum><real>100.00</real></maximum>
-</quantitative>
-</scale>
-<thresholds>
-<threshold id="ind">
-<constant>
-<real>5.00</real>
-</constant>
-</threshold>
-<threshold id="pref">
-<constant>
-<real>10.00</real>
-</constant>
-</threshold>
-<threshold id="veto">
-<constant>
-<real>50.00</real>
-</constant>
-</threshold>
 </thresholds>
 </criterion>
 <criterion id="en3" name="criterion of objective Env" mcdaConcept="criterion">
@@ -262,9 +196,32 @@
 <real>10.00</real>
 </constant>
 </threshold>
-<threshold id="veto">
+</thresholds>
+</criterion>
+<criterion id="en7" name="criterion of objective Env" mcdaConcept="criterion">
+<description>
+<comment>Constant beta law with parameters = 0.5, None</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionObjective>Env</criterionObjective>
+<criterionValue><value><real>1.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind">
 <constant>
-<real>50.00</real>
+<real>5.00</real>
+</constant>
+</threshold>
+<threshold id="pref">
+<constant>
+<real>10.00</real>
 </constant>
 </threshold>
 </thresholds>
@@ -295,9 +252,14 @@
 <real>10.00</real>
 </constant>
 </threshold>
+<threshold id="veto">
+<constant>
+<real>50.00</real>
+</constant>
+</threshold>
 </thresholds>
 </criterion>
-<criterion id="so6" name="criterion of objective Soc" mcdaConcept="criterion">
+<criterion id="so5" name="criterion of objective Soc" mcdaConcept="criterion">
 <description>
 <comment>Constant beta law with parameters = 0.5, None</comment>
 <version>performance</version>
@@ -330,6 +292,34 @@
 </threshold>
 </thresholds>
 </criterion>
+<criterion id="so6" name="criterion of objective Soc" mcdaConcept="criterion">
+<description>
+<comment>Constant beta law with parameters = 0.5, None</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionObjective>Soc</criterionObjective>
+<criterionValue><value><real>1.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind">
+<constant>
+<real>5.00</real>
+</constant>
+</threshold>
+<threshold id="pref">
+<constant>
+<real>10.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
 </criteria>
 <performanceTable mcdaConcept="performanceTable">
 <description>
@@ -339,154 +329,155 @@
 <alternativeID>p1</alternativeID>
 <performance>
 <criterionID>ec1</criterionID>
-<value><real>11.84</real></value>
+<value><real>65.64</real></value>
 </performance>
 <performance>
 <criterionID>ec4</criterionID>
-<value><real>60.67</real></value>
-</performance>
-<performance>
-<criterionID>ec5</criterionID>
-<value><real>88.15</real></value>
-</performance>
-<performance>
-<criterionID>ec7</criterionID>
-<value><real>59.93</real></value>
+<value><real>60.52</real></value>
 </performance>
 <performance>
 <criterionID>en3</criterionID>
-<value><real>70.70</real></value>
+<value><real>40.91</real></value>
+</performance>
+<performance>
+<criterionID>en7</criterionID>
+<value><real>44.60</real></value>
 </performance>
 <performance>
 <criterionID>so2</criterionID>
-<value><real>18.42</real></value>
+<value><real>38.38</real></value>
+</performance>
+<performance>
+<criterionID>so5</criterionID>
+<value><real>34.29</real></value>
 </performance>
 <performance>
 <criterionID>so6</criterionID>
-<value><real>46.94</real></value>
+<value><real>91.03</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>p2</alternativeID>
 <performance>
 <criterionID>ec1</criterionID>
-<value><real>40.60</real></value>
+<value><real>53.37</real></value>
 </performance>
 <performance>
 <criterionID>ec4</criterionID>
-<value><real>35.99</real></value>
-</performance>
-<performance>
-<criterionID>ec5</criterionID>
-<value><real>91.65</real></value>
-</performance>
-<performance>
-<criterionID>ec7</criterionID>
-<value><NA>NA</NA></value>
+<value><real>38.69</real></value>
 </performance>
 <performance>
 <criterionID>en3</criterionID>
-<value><real>51.16</real></value>
+<value><real>65.86</real></value>
+</performance>
+<performance>
+<criterionID>en7</criterionID>
+<value><real>73.77</real></value>
 </performance>
 <performance>
 <criterionID>so2</criterionID>
-<value><real>13.09</real></value>
+<value><real>23.43</real></value>
+</performance>
+<performance>
+<criterionID>so5</criterionID>
+<value><real>62.00</real></value>
 </performance>
 <performance>
 <criterionID>so6</criterionID>
-<value><real>89.49</real></value>
+<value><real>6.20</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>p3</alternativeID>
 <performance>
 <criterionID>ec1</criterionID>
-<value><real>13.93</real></value>
+<value><real>69.77</real></value>
 </performance>
 <performance>
 <criterionID>ec4</criterionID>
-<value><real>77.44</real></value>
-</performance>
-<performance>
-<criterionID>ec5</criterionID>
-<value><real>35.29</real></value>
-</performance>
-<performance>
-<criterionID>ec7</criterionID>
-<value><real>56.03</real></value>
+<value><real>24.03</real></value>
 </performance>
 <performance>
 <criterionID>en3</criterionID>
-<value><real>59.43</real></value>
+<value><real>50.75</real></value>
+</performance>
+<performance>
+<criterionID>en7</criterionID>
+<value><real>51.40</real></value>
 </performance>
 <performance>
 <criterionID>so2</criterionID>
-<value><real>84.34</real></value>
+<value><real>67.56</real></value>
+</performance>
+<performance>
+<criterionID>so5</criterionID>
+<value><real>50.35</real></value>
 </performance>
 <performance>
 <criterionID>so6</criterionID>
-<value><real>42.71</real></value>
+<value><real>27.36</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>p4</alternativeID>
 <performance>
 <criterionID>ec1</criterionID>
-<value><real>53.49</real></value>
+<value><real>85.10</real></value>
 </performance>
 <performance>
 <criterionID>ec4</criterionID>
-<value><real>63.98</real></value>
-</performance>
-<performance>
-<criterionID>ec5</criterionID>
-<value><real>17.88</real></value>
-</performance>
-<performance>
-<criterionID>ec7</criterionID>
-<value><real>26.60</real></value>
+<value><real>62.66</real></value>
 </performance>
 <performance>
 <criterionID>en3</criterionID>
-<value><real>21.68</real></value>
+<value><real>46.05</real></value>
+</performance>
+<performance>
+<criterionID>en7</criterionID>
+<value><real>74.26</real></value>
 </performance>
 <performance>
 <criterionID>so2</criterionID>
-<value><real>86.37</real></value>
+<value><real>54.76</real></value>
+</performance>
+<performance>
+<criterionID>so5</criterionID>
+<value><real>57.08</real></value>
 </performance>
 <performance>
 <criterionID>so6</criterionID>
-<value><real>27.14</real></value>
+<value><real>70.61</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>p5</alternativeID>
 <performance>
 <criterionID>ec1</criterionID>
-<value><real>78.77</real></value>
+<value><real>37.39</real></value>
 </performance>
 <performance>
 <criterionID>ec4</criterionID>
-<value><real>31.66</real></value>
-</performance>
-<performance>
-<criterionID>ec5</criterionID>
-<value><NA>NA</NA></value>
-</performance>
-<performance>
-<criterionID>ec7</criterionID>
-<value><real>35.60</real></value>
+<value><real>32.59</real></value>
 </performance>
 <performance>
 <criterionID>en3</criterionID>
-<value><real>46.23</real></value>
+<value><real>18.84</real></value>
 </performance>
 <performance>
-<criterionID>so2</crit<value><r<value><real>51.71</real></value>
+<criterionID>en7</criterionID>
+<value><real>85.01</real></value>
+</performance>
+<performance>
+<criterionID>so2</criterionID>
+<value><real>85.56</real></value>
+</performance>
+<performance>
+<criterionID>so5</criterionID>
+<value><real>66.22</real></value>
 </performance>
 <performance>
 <criterionID>so6</criterionID>
-<value><real>16.26</real></value>
+<value><real>34.01</real></value>
 </performance>
 </alternativePerformances>
 </performanceTable>
@@ -504,237 +495,237 @@
 <pair>
 <initial><criterionID>ec1</criterionID></initial>
 <terminal><criterionID>ec4</criterionID></terminal>
-<value><real>-0.50</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec1</criterionID></initial>
-<terminal><criterionID>ec5</criterionID></terminal>
-<value><real>-0.33</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec1</criterionID></initial>
-<terminal><criterionID>ec7</criterionID></terminal>
-<value><real>-0.45</real></value>
+<value><real>0.44</real></value>
 </pair>
 <pair>
 <initial><criterionID>ec1</criterionID></initial>
 <terminal><criterionID>en3</criterionID></terminal>
-<value><real>-0.58</real></value>
+<value><real>0.22</real></value>
 </pair>
 <pair>
 <initial><criterionID>ec1</criterionID></initial>
-<terminal><criterionID>so2</criterionID></terminal>
-<value><real>0.05</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec1</criterionID></initial>
-<terminal><criterionID>so6</criterionID></terminal>
-<value><real>-0.40</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec4</criterionID></initial>
-<terminal><criterionID>ec1</criterionID></terminal>
-<value><real>-0.50</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec4</criterionID></initial>
-<terminal><criterionID>ec4</criterionID></terminal>
-<value><real>1.00</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec4</criterionID></initial>
-<terminal><criterionID>ec5</criterionID></terminal>
-<value><real>-0.33</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec4</criterionID></initial>
-<terminal><criterionID>ec7</criterionID></terminal>
-<value><real>0.45</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec4</criterionID></initial>
-<terminal><criterionID>en3</criterionID></terminal>
-<value><real>0.26</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec4</criterionID></initial>
-<terminal><criterionID>so2</criterionID></terminal>
-<value><real>0.47</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec4</criterionID></initial>
-<terminal><criterionID>so6</criterionID></terminal>
-<value><real>0.10</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec5</criterionID></initial>
-<terminal><criterionID>ec1</criterionID></terminal>
-<value><real>-0.33</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec5</criterionID></initial>
-<terminal><criterionID>ec4</criterionID></terminal>
-<value><real>-0.33</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec5</criterionID></initial>
-<terminal><criterionID>ec5</criterionID></terminal>
-<value><real>1.00</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec5</criterionID></initial>
-<terminal><criterionID>ec7</criterionID></terminal>
-<value><real>0.67</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec5</criterionID></initial>
-<terminal><criterionID>en3</criterionID></terminal>
-<value><real>0.64</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec5</criterionID></initial>
-<terminal><criterionID>so2</criterionID></terminal>
-<value><real>-0.64</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec5</criterionID></initial>
-<terminal><criterionID>so6</criterionID></terminal>
-<value><real>0.67</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec7</criterionID></initial>
-<terminal><criterionID>ec1</criterionID></terminal>
-<value><real>-0.45</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec7</criterionID></initial>
-<terminal><criterionID>ec4</criterionID></terminal>
-<value><real>0.45</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec7</criterionID></initial>
-<terminal><criterionID>ec5</criterionID></terminal>
-<value><real>0.67</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec7</criterionID></initial>
-<terminal><criterionID>ec7</criterionID></terminal>
-<value><real>1.00</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec7</criterionID></initial>
-<terminal><criterionID>en3</criterionID></terminal>
-<value><real>0.82</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec7</criterionID></initial>
-<terminal><criterionID>so2</criterionID></terminal>
-<value><real>-0.27</real></value>
-</pair>
-<pair>
-<initial><criterionID>ec7</criterionID></initial>
-<terminal><criterionID>so6</criterionID></terminal>
-<value><real>0.82</real></value>
-</pair>
-<pair>
-<initial><criterionID>en3</criterionID></initial>
-<terminal><criterionID>ec1</criterionID></terminal>
-<value><real>-0.58</real></value>
-</pair>
-<pair>
-<initial><criterionID>en3</criterionID></initial>
-<terminal><criterionID>ec4</criterionID></terminal>
-<value><real>0.26</real></value>
-</pair>
-<pair>
-<initial><criterionID>en3</criterionID></initial>
-<terminal><criterionID>ec5</criterionID></terminal>
-<value><real>0.64</real></value>
-</pair>
-<pair>
-<initial><criterionID>en3</criterionID></initial>
-<terminal><criterionID>ec7</criterionID></terminal>
-<value><real>0.82</real></value>
-</pair>
-<pair>
-<initial><criterionID>en3</criterionID></initial>
-<terminal><criterionID>en3</criterionID></terminal>
-<value><real>1.00</real></value>
-</pair>
-<pair>
-<initial><criterionID>en3</criterionID></initial>
-<terminal><criterionID>so2</criterionID></terminal>
-<value><real>-0.33</real></value>
-</pair>
-<pair>
-<initial><criterionID>en3</criterionID></initial>
-<terminal><criterionID>so6</criterionID></terminal>
-<value><real>0.26</real></value>
-</pair>
-<pair>
-<initial><criterionID>so2</criterionID></initial>
-<terminal><criterionID>ec1</criterionID></terminal>
-<value><real>0.05</real></value>
-</pair>
-<pair>
-<initial><criterionID>so2</criterionID></initial>
-<terminal><criterionID>ec4</criterionID></terminal>
-<value><real>0.47</real></value>
-</pair>
-<pair>
-<initial><criterionID>so2</criterionID></initial>
-<terminal><criterionID>ec5</criterionID></terminal>
-<value><real>-0.64</real></value>
-</pair>
-<pair>
-<initial><criterionID>so2</criterionID></initial>
-<terminal><criterionID>ec7</criterionID></terminal>
-<value><real>-0.27</real></value>
-</pair>
-<pair>
-<initial><criterionID>so2</criterionID></initial>
-<terminal><criterionID>en3</criterionID></terminal>
-<value><real>-0.33</real></value>
-</pair>
-<pair>
-<initial><criterionID>so2</criterionID></initial>
-<terminal><criterionID>so2</criterionID></terminal>
-<value><real>1.00</real></value>
-</pair>
-<pair>
-<initial><criterionID>so2</criterionID></initial>
-<terminal><criterionID>so6</criterionID></terminal>
+<terminal><criterionID>en7</criterionID></terminal>
 <value><real>-0.37</real></value>
 </pair>
 <pair>
+<initial><criterionID>ec1</criterionID></initial>
+<terminal><criterionID>so2</criterionID></terminal>
+<value><real>-0.10</real></value>
+</pair>
+<pair>
+<initial><criterionID>ec1</criterionID></initial>
+<terminal><criterionID>so5</criterionID></terminal>
+<value><real>-0.33</real></value>
+</pair>
+<pair>
+<initial><criterionID>ec1</criterionID></initial>
+<terminal><criterionID>so6</criterionID></terminal>
+<value><real>0.37</real></value>
+</pair>
+<pair>
+<initial><criterionID>ec4</criterionID></initial>
+<terminal><criterionID>ec1</criterionID></terminal>
+<value><real>0.44</real></value>
+</pair>
+<pair>
+<initial><criterionID>ec4</criterionID></initial>
+<terminal><criterionID>ec4</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+<pair>
+<initial><criterionID>ec4</criterionID></initial>
+<terminal><criterionID>en3</criterionID></terminal>
+<value><real>0.12</real></value>
+</pair>
+<pair>
+<initial><criterionID>ec4</criterionID></initial>
+<terminal><criterionID>en7</criterionID></terminal>
+<value><real>-0.18</real></value>
+</pair>
+<pair>
+<initial><criterionID>ec4</criterionID></initial>
+<terminal><criterionID>so2</criterionID></terminal>
+<value><real>-0.33</real></value>
+</pair>
+<pair>
+<initial><criterionID>ec4</criterionID></initial>
+<terminal><criterionID>so5</criterionID></terminal>
+<value><real>-0.12</real></value>
+</pair>
+<pair>
+<initial><criterionID>ec4</criterionID></initial>
+<terminal><criterionID>so6</criterionID></terminal>
+<value><real>0.56</real></value>
+</pair>
+<pair>
+<initial><criterionID>en3</criterionID></initial>
+<terminal><criterionID>ec1</criterionID></terminal>
+<value><real>0.22</real></value>
+</pair>
+<pair>
+<initial><criterionID>en3</criterionID></initial>
+<terminal><criterionID>ec4</criterionID></terminal>
+<value><real>0.12</real></value>
+</pair>
+<pair>
+<initial><criterionID>en3</criterionID></initial>
+<terminal><criterionID>en3</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+<pair>
+<initial><criterionID>en3</criterionID></initial>
+<terminal><criterionID>en7</criterionID></terminal>
+<value><real>-0.11</real></value>
+</pair>
+<pair>
+<initial><criterionID>en3</criterionID></initial>
+<terminal><criterionID>so2</criterionID></terminal>
+<value><real>-0.67</real></value>
+</pair>
+<pair>
+<initial><criterionID>en3</criterionID></initial>
+<terminal><criterionID>so5</criterionID></terminal>
+<value><real>0.12</real></value>
+</pair>
+<pair>
+<initial><criterionID>en3</criterionID></initial>
+<terminal><criterionID>so6</criterionID></terminal>
+<value><real>-0.41</real></value>
+</pair>
+<pair>
+<initial><criterionID>en7</criterionID></initial>
+<terminal><criterionID>ec1</criterionID></terminal>
+<value><real>-0.37</real></value>
+</pair>
+<pair>
+<initial><criterionID>en7</criterionID></initial>
+<terminal><criterionID>ec4</criterionID></terminal>
+<value><real>-0.18</real></value>
+</pair>
+<pair>
+<initial><criterionID>en7</criterionID></initial>
+<terminal><criterionID>en3</criterionID></terminal>
+<value><real>-0.11</real></value>
+</pair>
+<pair>
+<initial><criterionID>en7</criterionID></initial>
+<terminal><criterionID>en7</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+<pair>
+<initial><criterionID>en7</criterionID></initial>
+<terminal><criterionID>so2</criterionID></terminal>
+<value><real>0.26</real></value>
+</pair>
+<pair>
+<initial><criterionID>en7</criterionID></initial>
+<terminal><criterionID>so5</criterionID></terminal>
+<value><real>0.88</real></value>
+</pair>
+<pair>
+<initial><criterionID>en7</criterionID></initial>
+<terminal><criterionID>so6</criterionID></terminal>
+<value><real>-0.33</real></value>
+</pair>
+<pair>
+<initial><criterionID>so2</criterionID></initial>
+<terminal><criterionID>ec1</criterionID></terminal>
+<value><real>-0.10</real></value>
+</pair>
+<pair>
+<initial><criterionID>so2</criterionID></initial>
+<terminal><criterionID>ec4</criterionID></terminal>
+<value><real>-0.33</real></value>
+</pair>
+<pair>
+<initial><criterionID>so2</criterionID></initial>
+<terminal><criterionID>en3</criterionID></terminal>
+<value><real>-0.67</real></value>
+</pair>
+<pair>
+<initial><criterionID>so2</criterionID></initial>
+<terminal><criterionID>en7</criterionID></terminal>
+<value><real>0.26</real></value>
+</pair>
+<pair>
+<initial><criterionID>so2</criterionID></initial>
+<terminal><criterionID>so2</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+<pair>
+<initial><criterionID>so2</criterionID></initial>
+<terminal><criterionID>so5</criterionID></terminal>
+<value><real>0.22</real></value>
+</pair>
+<pair>
+<initial><criterionID>so2</criterionID></initial>
+<terminal><criterionID>so6</criterionID></terminal>
+<value><real>-0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>so5</criterionID></initial>
+<terminal><criterionID>ec1</criterionID></terminal>
+<value><real>-0.33</real></value>
+</pair>
+<pair>
+<initial><criterionID>so5</criterionID></initial>
+<terminal><criterionID>ec4</criterionID></terminal>
+<value><real>-0.12</real></value>
+</pair>
+<pair>
+<initial><criterionID>so5</criterionID></initial>
+<terminal><criterionID>en3</criterionID></terminal>
+<value><real>0.12</real></value>
+</pair>
+<pair>
+<initial><criterionID>so5</criterionID></initial>
+<terminal><criterionID>en7</criterionID></terminal>
+<value><real>0.88</real></value>
+</pair>
+<pair>
+<initial><criterionID>so5</criterionID></initial>
+<terminal><criterionID>so2</criterionID></terminal>
+<value><real>0.22</real></value>
+</pair>
+<pair>
+<initial><criterionID>so5</criterionID></initial>
+<terminal><criterionID>so5</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+<pair>
+<initial><criterionID>so5</criterionID></initial>
+<terminal><criterionID>so6</criterionID></terminal>
+<value><real>-0.53</real></value>
+</pair>
+<pair>
 <initial><criterionID>so6</criterionID></initial>
 <terminal><criterionID>ec1</criterionID></terminal>
-<value><real>-0.40</real></value>
+<value><real>0.37</real></value>
 </pair>
 <pair>
 <initial><criterionID>so6</criterionID></initial>
 <terminal><criterionID>ec4</criterionID></terminal>
-<value><real>0.10</real></value>
-</pair>
-<pair>
-<initial><criterionID>so6</criterionID></initial>
-<terminal><criterionID>ec5</criterionID></terminal>
-<value><real>0.67</real></value>
-</pair>
-<pair>
-<initial><criterionID>so6</criterionID></initial>
-<terminal><criterionID>ec7</criterionID></terminal>
-<value><real>0.82</real></value>
+<value><real>0.56</real></value>
 </pair>
 <pair>
 <initial><criterionID>so6</criterionID></initial>
 <terminal><criterionID>en3</criterionID></terminal>
-<value><real>0.26</real></value>
+<value><real>-0.41</real></value>
+</pair>
+<pair>
+<initial><criterionID>so6</criterionID></initial>
+<terminal><criterionID>en7</criterionID></terminal>
+<value><real>-0.33</real></value>
 </pair>
 <pair>
 <initial><criterionID>so6</criterionID></initial>
 <terminal><criterionID>so2</criterionID></terminal>
-<value><real>-0.37</real></value>
+<value><real>-0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>so6</criterionID></initial>
+<terminal><criterionID>so5</criterionID></terminal>
+<value><real>-0.53</real></value>
 </pair>
 <pair>
 <initial><criterionID>so6</criterionID></initial>
@@ -768,71 +759,71 @@
 <pair>
 <initial><alternativeID>p1</alternativeID></initial>
 <terminal><alternativeID>p2</alternativeID></terminal>
-<value><real>0.29</real></value></pair>
-<pair>
-<initial><alternativeID>p1</alternativeID></initial>
-<terminal><alternativeID>p3</alternativeID></terminal>
-<value><real>0.43</real></value></pair>
-<pair>
-<initial><alternativeID>p1</alternativeID></initial>
-<terminal><alternativeID>p4</alternativeID></terminal>
-<value><real>0.43</real></value></pair>
-<pair>
-<initial><alternativeID>p1</alternativeID></initial>
-<terminal><alternativeID>p5</alternativeID></terminal>
-<value><real>0.00</real></value></pair>
-<pair>
-<initial><alternativeID>p2</alternativeID></initial>
-<terminal><alternativeID>p1</alternativeID></terminal>
 <value><real>0.14</real></value></pair>
 <pair>
-<initial><alternativeID>p2</alternativeID></initial>
-<terminal><alternativeID>p2</alternativeID></terminal>
-<value><real>0.00</real></value></pair>
-<pair>
-<initial><alternativeID>p2</alternativeID></initial>
+<initial><alternativeID>p1</alternativeID></initial>
 <terminal><alternativeID>p3</alternativeID></terminal>
 <value><real>0.14</real></value></pair>
 <pair>
-<initial><alternativeID>p2</alternativeID></initial>
+<initial><alternativeID>p1</alternativeID></initial>
 <terminal><alternativeID>p4</alternativeID></terminal>
-<value><real>1.00</real></value></pair>
+<value><real>-0.29</real></value></pair>
+<pair>
+<initial><alternativeID>p1</alternativeID></initial>
+<terminal><alternativeID>p5</alternativeID></terminal>
+<value><real>0.14</real></value></pair>
 <pair>
 <initial><alternativeID>p2</alternativeID></initial>
-<terminal><alternativeID>p5</alternativeID></terminal>
-<value><real>1.00</real></value></pair>
-<pair>
-<initial><alternativeID>p3</alternativeID></initial>
-<terminal><alternativeID>p1</alternativeID></terminal>
-<value><real>0.43</real></value></pair>
-<pair>
-<initial><alternativeID>p3</alternativeID></initial>
-<terminal><alternativeID>p2</alternativeID></terminal>
-<value><real>0.00</real></value></pair>
-<pair>
-<initial><alternativeID>p3</alternativeID></initial>
-<terminal><alternativeID>p3</alternativeID></terminal>
-<value><real>0.00</real></value></pair>
-<pair>
-<initial><alternativeID>p3</alternativeID></initial>
-<terminal><alternativeID>p4</alternativeID></terminal>
-<value><real>0.71</real></value></pair>
-<pair>
-<initial><alternativeID>p3</alternativeID></initial>
-<terminal><alternativeID>p5</alternativeID></terminal>
-<value><real>0.00</real></value></pair>
-<pair>
-<initial><alternativeID>p4</alternativeID></initial>
 <terminal><alternativeID>p1</alternativeID></terminal>
 <value><real>-0.14</real></value></pair>
 <pair>
+<initial><alternativeID>p2</alternativeID></initial>
+<terminal><alternativeID>p2</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>p2</alternativeID></initial>
+<terminal><alternativeID>p3</alternativeID></terminal>
+<value><real>0.14</real></value></pair>
+<pair>
+<initial><alternativeID>p2</alternativeID></initial>
+<terminal><alternativeID>p4</alternativeID></terminal>
+<value><real>-0.14</real></value></pair>
+<pair>
+<initial><alternativeID>p2</alternativeID></initial>
+<terminal><alternativeID>p5</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>p3</alternativeID></initial>
+<terminal><alternativeID>p1</alternativeID></terminal>
+<value><real>0.43</real></value></pair>
+<pair>
+<initial><alternativeID>p3</alternativeID></initial>
+<terminal><alternativeID>p2</alternativeID></terminal>
+<value><real>-0.14</real></value></pair>
+<pair>
+<initial><alternativeID>p3</alternativeID></initial>
+<terminal><alternativeID>p3</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>p3</alternativeID></initial>
+<terminal><alternativeID>p4</alternativeID></terminal>
+<value><real>-0.29</real></value></pair>
+<pair>
+<initial><alternativeID>p3</alternativeID></initial>
+<terminal><alternativeID>p5</alternativeID></terminal>
+<value><real>-0.14</real></value></pair>
+<pair>
+<initial><alternativeID>p4</alternativeID></initial>
+<terminal><alternativeID>p1</alternativeID></terminal>
+<value><real>0.71</real></value></pair>
+<pair>
 <initial><alternativeID>p4</alternativeID></initial>
 <terminal><alternativeID>p2</alternativeID></terminal>
-<value><real>-1.00</real></value></pair>
+<value><real>0.71</real></value></pair>
 <pair>
 <initial><alternativeID>p4</alternativeID></initial>
 <terminal><alternativeID>p3</alternativeID></terminal>
-<value><real>-0.43</real></value></pair>
+<value><real>0.71</real></value></pair>
 <pair>
 <initial><alternativeID>p4</alternativeID></initial>
 <terminal><alternativeID>p4</alternativeID></terminal>
@@ -840,23 +831,23 @@
 <pair>
 <initial><alternativeID>p4</alternativeID></initial>
 <terminal><alternativeID>p5</alternativeID></terminal>
-<value><real>0.14</real></value></pair>
+<value><real>0.29</real></value></pair>
 <pair>
 <initial><alternativeID>p5</alternativeID></initial>
 <terminal><alternativeID>p1</alternativeID></terminal>
-<value><real>0.00</real></value></pair>
+<value><real>-0.14</real></value></pair>
 <pair>
 <initial><alternativeID>p5</alternativeID></initial>
 <terminal><alternativeID>p2</alternativeID></terminal>
-<value><real>0.00</real></value></pair>
+<value><real>1.00</real></value></pair>
 <pair>
 <initial><alternativeID>p5</alternativeID></initial>
 <terminal><alternativeID>p3</alternativeID></terminal>
-<value><real>0.00</real></value></pair>
+<value><real>0.43</real></value></pair>
 <pair>
 <initial><alternativeID>p5</alternativeID></initial>
 <terminal><alternativeID>p4</alternativeID></terminal>
-<value><real>0.00</real></value></pair>
+<value><real>-0.14</real></value></pair>
 <pair>
 <initial><alternativeID>p5</alternativeID></initial>
 <terminal><alternativeID>p5</alternativeID></terminal>
@@ -873,64 +864,16 @@
 </description>
 <pair>
 <description>
-<comment>concordance degree:0.29</comment>
+<comment>concordance degree:0.14</comment>
 </description>
-<initial><alternativeID>p1</alternativeID></initial>
+<initial><alternativeID>p2</alternativeID></initial>
 <terminal><alternativeID>p5</alternativeID></terminal>
-<values id="ec1">
+<values id="so2">
 <description>
 <comment>effective veto</comment>
 </description>
 <value name="performanceDifference">
-<real>-66.93</real></value>
-<value name="vetoCharacteristic">
-<real>1.00</real></value>
-</values>
-</pair>
-<pair>
-<description>
-<comment>concordance degree:0.57</comment>
-</description>
-<initial><alternativeID>p3</alternativeID></initial>
-<terminal><alternativeID>p5</alternativeID></terminal>
-<values id="ec1">
-<description>
-<comment>effective veto</comment>
-</description>
-<value name="performanceDifference">
-<real>-64.84</real></value>
-<value name="vetoCharacteristic">
-<real>1.00</real></value>
-</values>
-</pair>
-<pair>
-<description>
-<comment>concordance degree:0.00</comment>
-</description>
-<initial><alternativeID>p4</alternativeID></initial>
-<terminal><alternativeID>p2</alternativeID></terminal>
-<values id="so6">
-<description>
-<comment>effective veto</comment>
-</description>
-<value name="performanceDifference">
-<real>-62.35</real></value>
-<value name="vetoCharacteristic">
-<real>1.00</real></value>
-</values>
-</pair>
-<pair>
-<description>
-<comment>concordance degree:0.43</comment>
-</description>
-<initial><alternativeID>p5</alternativeID></initial>
-<terminal><alternativeID>p2</alternativeID></terminal>
-<values id="so6">
-<description>
-<comment>effective veto</comment>
-</description>
-<value name="performanceDifference">
-<real>-73.23</real></value>
+<real>-62.13</real></value>
 <value name="vetoCharacteristic">
 <real>1.00</real></value>
 </values>
@@ -947,30 +890,13 @@
 <comment>Best choice</comment>
 </description>
 <element>
-<alternativeID>p2</alternativeID>
+<alternativeID>p4</alternativeID>
 </element>
 <values>
 <value name="choiceSet independence"><real>100.00</real></value>
-<value name="outranking"><real>57.14</real></value>
-<value name="outranked"><real>0.00</real></value>
-<value name="determinateness"><real>57.14</real></value>
-</values>
-</alternativesSet>
-<alternativesSet id="good_2" mcdaConcept="goodChoice">
-<description>
-<comment>Potential good choice</comment>
-</description>
-<element>
-<alternativeID>p1</alternativeID>
-</element>
-<element>
-<alternativeID>p5</alternativeID>
-</element>
-<values>
-<value name="choiceSet independence"><real>50.00</real></value>
 <value name="outranking"><real>64.29</real></value>
-<value name="outranked"><real>57.14</real></value>
-<value name="determinateness"><real>50.00</real></value>
+<value name="outranked"><real>35.71</real></value>
+<value name="determinateness"><real>64.29</real></value>
 </values>
 </alternativesSet>
 </alternativesSets>
@@ -983,79 +909,14 @@
 <description>
 <comment>Bad choice</comment>
 </description>
-<element>
-<alternativeID>p5</alternativeID>
-</element>
 <element>
 <alternativeID>p3</alternativeID>
 </element>
 <values>
-<value name="choiceSet independence"><real>50.00</real></value>
-<value name="outranking"><real>50.00</real></value>
+<value name="choiceSet independence"><real>100.00</real></value>
+<value name="outranking"><real>35.71</real></value>
 <value name="outranked"><real>57.14</real></value>
-<value name="determinateness"><real>50.00</real></value>
-</values>
-</alternativesSet>
-<alternativesSet id="bad_2" mcdaConcept="badChoice">
-<description>
-<comment>Ambiguous choice</comment>
-</description>
-<element>
-<alternativeID>p1</alternativeID>
-</element>
-<element>
-<alternativeID>p5</alternativeID>
-</element>
-<values>
-<value name="choiceSet independence"><real>50.00</real></value>
-<value name="outranking"><real>64.29</real></value>
-<value name="outranked"><real>57.14</real></value>
-<value name="determinateness"><real>50.00</real></value>
-</values>
-</alternativesSet>
-</alternativesSets>
-</xmcda:XMCDA>
-="determinateness"><real>50.00</real></value>
-</values>
-</alternativesSet>
-</alternativesSets>
-<alternativesSets mcdaConcept="badChoices">
-<description>
-<subTitle>Potentially Bad Choices</subTitle>
-<comment>All values expressed in %.</comment>
-</description>
-<alternativesSet id="bad_1" mcdaConcept="badChoice">
-<description>
-<comment>Bad choice</comment>
-</description>
-<element>
-<alternativeID>p2</alternativeID>
-</element>
-<element>
-<alternativeID>p4</alternativeID>
-</element>
-<values>
-<value name="choiceSet independence"><real>50.00</real></value>
-<value name="outranking"><real>50.00</real></value>
-<value name="outranked"><real>64.29</real></value>
-<value name="determinateness"><real>50.00</real></value>
-</values>
-</alternativesSet>
-<alternativesSet id="bad_2" mcdaConcept="badChoice">
-<description>
-<comment>Bad choice</comment>
-</description>
-<element>
-<alternativeID>p5</alternativeID>
-</element>
-<element>
-<alternativeID>p4</alternativeID>
-</element>
-<values>
-<value name="choiceSet independence"><real>50.00</real></value>
-<value name="outranking"><real>50.00</real></value>
-<value name="outranked"><real>64.29</real></value>
-<value name="determinateness"><real>50.00</real></value>
+<value name="determinateness"><real>57.14</real></value>
 </values>
 </alternativesSet>
 </alternativesSets>

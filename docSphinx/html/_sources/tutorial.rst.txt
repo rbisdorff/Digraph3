@@ -1113,7 +1113,7 @@ Many more tools for exploiting voting results are available like the browser hea
 
    Visualizing a linear voting profile in a heatmap format
 
-Notice that the importance weights of the voters are *negative*, which means that the preference direction of the criteria (in this case the individual voters) is *decreasing*, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise *NetFlows* ranking *[a4,a5,a2,a1,a3]*, shown in this heatmap (see :numref:`cyclicVoting`) results in an optimal *ordinal correlation* index of +0.778 with the pairwise majority voting margins (see tutorials :ref:`OrdinalCorrelation-Tutorial-label` and :ref:`Ranking-Tutorial-label`). The number of voters is usually much larger than the number of candidates. In that case, it is better to generate a transposed *voters X candidates* view (see :numref:`votingHeatmap` Line 2) 
+Notice that the importance weights of the voters are *negative*, which means that the preference direction of the criteria (in this case the individual voters) is *decreasing*, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise *NetFlows* ranking *[a4,a5,a2,a1,a3]*, shown in this heatmap (see :numref:`cyclicVoting`) results in an optimal *ordinal correlation* index of +0.778 with the pairwise majority voting margins (see Adavanced topic on tutorials :ref:`Ordinal Correlation equals Relational Equivalence <OrdinalCorrelation-Tutorial-label>` and :ref:`Ranking-Tutorial-label`). The number of voters is usually much larger than the number of candidates. In that case, it is better to generate a transposed *voters X candidates* view (see :numref:`votingHeatmap` Line 2) 
 
 On generating random linear voting profiles
 ...........................................
@@ -1270,7 +1270,7 @@ Working with the ``outrankingDigraphs`` module
 	:depth: 2
 	:local:
 
-See also the technical documentation of the :ref:`outrankingDigraphs-label`.
+See also the technical documentation of the :ref:`outrankingDigraphs module <outrankingDigraphs-label>`.
 
 Outranking digraph model
 ........................
@@ -1539,7 +1539,7 @@ The resulting XML file may be visualized in a browser window (other than Chrome 
 
 We recover the original bipolar-valued outranking characteristics, and we may restart again the preference modelling process. 
 
-Many more tools for exploiting bipolar-valued outranking digraphs are available in the Digraph3 resources (see the technical documentation of the :ref:`outrankingDiGraphs-label` and the :ref:`perfTabs-label`).
+Many more tools for exploiting bipolar-valued outranking digraphs are available in the Digraph3 resources (see the technical documentation of the :ref:`outrankingDigraphs module <outrankingDiGraphs-label>` and the :ref:`perfTabs module <perfTabs-label>`).
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -3680,7 +3680,7 @@ A Python encoded  performance tableau is available for downloading here `officeC
 
    .. _officeChoice.py: _static/officeChoice.py
 
-We may inspect the performance tableau data with the computing resources provided by the :ref:`perfTabs-label` module.
+We may inspect the performance tableau data with the computing resources provided by the :ref:`perfTabs module <perfTabs-label>`.
 
 .. code-block:: pycon
    :linenos:
@@ -3753,7 +3753,7 @@ The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted
 
    The office choice outranking digraph  
 
-For computing such a bipolar-valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigraph`` constructor from the :ref:`outrankingDigraphs-label` module. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window (see :numref:`officeChoiceOutranking`).
+For computing such a bipolar-valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigraph`` constructor from the :ref:`outrankingDigraphs module <outrankingDigraphs-label>`. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window (see :numref:`officeChoiceOutranking`).
 
 .. code-block:: pycon
 
@@ -3991,7 +3991,7 @@ We may also notice (see Line 17 and Line 21) that both alternatives *A* and *F* 
 Weakly ordering the outranking digraph
 ......................................
 
-To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor imported from the :ref:`transitiveDigraphs-label`, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*.
+To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor imported from the :ref:`transitiveDigraphs module <transitiveDigraphs-label>`, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*.
 
 .. code-block:: pycon
    :linenos:
@@ -4075,7 +4075,7 @@ To solve this *absolute* rating decision problem, first, we need to estimate mul
 Incremental learning of historical performance quantiles
 ........................................................
 
-See also the technical documentation of the :ref:`performanceQuantiles-label`.
+See also the technical documentation of the :ref:`performanceQuantiles module <performanceQuantiles-label>`.
 
 Suppose that we see flying in random multiple criteria performances from a given model of random performance tableau (see the :py:mod:`randomPerfTabs` module). The question we address here is to estimate empirical performance quantiles on the basis of so far observed performance vectors. For this task, we are inspired by [CHAM-2006]_ and [NR3-2007]_, who present an efficient algorithm for incrementally updating a quantile-binned cumulative distribution function (CDF) with newly observed CDFs.
 
@@ -4420,7 +4420,7 @@ Working with the :code:`graphs` module
 	:depth: 2
 	:local:
 
-See also the technical documentation of the :ref:`graphs-label`.
+See also the technical documentation of the :ref:`graphs module <graphs-label>`.
 
 Structure of a ``Graph`` object
 ...............................
@@ -4432,7 +4432,7 @@ In the :py:mod:`graphs` module, the root :py:class:`graphs.Graph` class provides
 3. the graph **edges** : a dictionary with frozensets of pairs of vertices as entries carrying a characteristic value in the range of the previous valuation domain,
 4. and its associated **gamma function** : a dictionary containing the direct neighbors of each vertex, automatically added by the object constructor.
 
-See the technical documentation of the :ref:`graphs-label`.
+See the technical documentation of the :ref:`graphs module <graphs-label>`.
 
 Example Python3 session
 
@@ -4837,7 +4837,7 @@ Finally, we provide the :py:class:`graphs.MetropolisChain` class, a specializati
 
 The ``checkSampling()`` method (see Line 23) generates a random walk of *nSim=30000* steps on the given graph and records by the way the observed relative frequency with which each vertex is passed by. In this example, the stationary transition probability distribution, shown by the ``showTransitionMatrix()`` method above (see Lines 31-), is quite adequately simulated.
 
-For more technical information and more code examples, look into the technical documentation of the :ref:`graphs-label`. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström's 2002 book: [FMCAA]_.
+For more technical information and more code examples, look into the technical documentation of the :ref:`graphs module <graphs-label>`. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström's 2002 book: [FMCAA]_.
 
 Back to :ref:`Content Table <Tutorial-label>`  
 
@@ -5607,7 +5607,7 @@ With such unique disjoint initial and terminal prekernels (see Line 4 and 10), t
       determinateness (%) : 64.62
       - most credible action(s) = { 'a7': 48.84, }
 
-Notice that solving the valued *Berge* kernel equations (see :ref:`Bipolar-Valued-Kernels-Tutorial-label` in the Advanced Topics) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions 'a2' and 'a4' are equivalent candidates for a unique best choice, and action 'a7' is clearly confirmed as the worst choice.
+Notice that solving the valued *Berge* kernel equations (see :ref:`Bipolar-Valued Kernels <Bipolar-Valued-Kernels-Tutorial-label>` in the Advanced Topics) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions 'a2' and 'a4' are equivalent candidates for a unique best choice, and action 'a7' is clearly confirmed as the worst choice.
 
 In :numref:`bestWorstOrientation` below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations. 
 
