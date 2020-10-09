@@ -365,6 +365,11 @@ INPUT ./robustHeatmap.png
 INPUT ./robustHeatmap.png
 INPUT robustHeatmap.png
 INPUT ./robustHeatmap.png
+INPUT unopDigraph.png
+INPUT ./unopDigraph.png
+INPUT ./unopDigraph.png
+INPUT unopDigraph.png
+INPUT ./unopDigraph.png
 INPUT digraph3Pearls.ind
 INPUT digraph3Pearls.ind
 INPUT digraph3Pearls.aux

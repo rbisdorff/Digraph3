@@ -20,5 +20,6 @@
 \contentsline {subsection}{\numberline {5.2}Qualifying the stability of outranking situations}{35}{subsection.5.2}%
 \contentsline {subsection}{\numberline {5.3}Computing the stability denotation of outranking situations}{39}{subsection.5.3}%
 \contentsline {subsection}{\numberline {5.4}Robust bipolar\sphinxhyphen {}valued outranking digraphs}{41}{subsection.5.4}%
-\contentsline {section}{\numberline {6}Bibliography}{44}{section.6}%
-\contentsline {section}{References}{44}{section.6}%
+\contentsline {subsection}{\numberline {5.5}Unopposed outranking situations}{44}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Bibliography}{48}{section.6}%
+\contentsline {section}{References}{48}{section.6}%
