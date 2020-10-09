@@ -1537,6 +1537,141 @@ As the inital prekernel is here validated at stability level +2, recommending al
 
 For concluding, let us mention that it is precisely again our bipolar-valued *logical characteristic framework* that provides us here with a **first order distributional dominance** test for effectively qualifying the stability level 2 *robustness* of an outranking digraph when facing performance tableaux with criteria of only ordinal-valued significances. A real world application of our stability analysis with such a kind of performance tableau may be consulted in [BIS-2015p]_.
 
+
+Unopposed outranking situations
+...............................
+
+When facing a performance tableau involving multiple decision objectives of ordinal importance, the previous robusteness level +/-3 may lead to distinguishing *unopposed* outranking situations, namely preferential situations that are validated from each decision objective's perspective.  
+
+We say that decision alternative *x* **outranks** decision alternative *y* **unopposed** when, limited to **each decision objective**:
+
+   * *x* positively outranks *y* and we may not observe any *considerable counter-performance* of *x* on that decision objective.
+
+Dually, we say that decision alternative *x* **does not outrank** decision alternative *y* **unopposed** when
+
+   * *x* negatively outranks *y* and we may not observe any considerable *better performance* of *x* on that decision objective.
+
+Let us reconsider, for instance, the previous performance tableau with three decision objective:
+
+.. code-block:: pycon
+   :linenos:
+   :caption: Performance tableau with three decision objectives
+   :name: unOpposed1
+
+   >>> from randomPerfTabs import Random3ObjectivesPerformanceTableau
+   >>> t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
+                                     numberOfCriteria=9,seed=102)
+   >>> t.showObjectives()
+    *------ show objectives -------"
+    Eco: Economical aspect
+     ec1 criterion of objective Eco 8
+     ec4 criterion of objective Eco 8
+     ec8 criterion of objective Eco 8
+    Total weight: 24.00 (3 criteria)
+    Soc: Societal aspect
+     so2 criterion of objective Soc 12
+     so7 criterion of objective Soc 12
+    Total weight: 24.00 (2 criteria)
+    Env: Environmental aspect
+     en3 criterion of objective Env 6
+     en5 criterion of objective Env 6
+     en6 criterion of objective Env 6
+     en9 criterion of objective Env 6
+    Total weight: 24.00 (4 criteria)
+
+We notice in this example three decision objectives of equal importance. What will be the outranking situations that are positively or negatively validated for each one of the decision objectives taken individually ?
+
+For computing this kind of *unopposed* outranking digraphs, the outrankingDigraphs module provides a specific constructor :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph`. We obtain indeed *unopposed* outranking situtations by operating an *o-average fusion* of the mariginal outranking digraphs restricted to the coalition of criteria supporting each decision objective,  namely validated by one or more decision objectives without being invalidated by any other decision objective.
+
+These positive, as well as negative outranking characteristics, appear hence **stable** with respect to the importance of the decision objectives when proportional criteria significances are given.
+
+.. code-block:: pycon
+   :linenos:
+   :caption: Unopposed outranking digraph constructor
+   :name: unOpposed2
+
+   >>> from outrankingDigraphs import\
+	      UnOpposedBipolarOutrankingDigraph
+   >>> uopg = UnOpposedBipolarOutrankingDigraph(t)
+   >>> uopg
+    *------- Object instance description ------*
+    Instance class      : UnOpposedBipolarOutrankingDigraph
+    Instance name       : unopposed_outrankings
+    # Actions           : 7
+    # Criteria          : 9
+    Size                : 13
+    Determinateness (%) : 61.71
+    Valuation domain    : [-1.00;1.00]
+    Attributes          : ['name', 'actions', 'valuationdomain', 'objectives',
+			   'criteria', 'methodData', 'evaluation', 'order',
+			   'runTimes', 'relation', 'marginalRelationsRelations',
+			   'gamma', 'notGamma']
+    ----  Constructor run times (in sec.) ----
+    Total time       : 0.01163
+    Data input       : 0.00125
+    Compute relation : 0.01032
+    Gamma sets       : 0.00006
+    # Threads        : 1
+
+The resulting *unopposed* outranking digraph keeps 13 (see :numref:`unOpposed2` Line 10) out of the 23 positively validated standard outranking situations. 
+
+Let us recompute a corresponding best choice recommendataion.
+
+.. code-block:: pycon
+   :linenos:
+   :caption: Unopposed best choice recommendation
+   :name: unOpposed3
+
+   >>> uopg.showBestChoiceRecommendation(CoDual=False)
+    ***********************
+    Best choice recommendation(s) (BCR)
+     (in decreasing order of determinateness)   
+    Credibility domain: [-1.00,1.00]
+     === >> potential best choice(s)
+      choice              : ['p2', 'p4']
+      independence        : 0.00
+      dominance           : 0.67
+      absorbency          : 0.00
+      covering (%)        : 60.00
+      determinateness (%) : 50.00
+      - most credible action(s) = { }
+     === >> potential worst choice(s) 
+      choice              : ['p3', 'p6']
+      independence        : 0.00
+      dominance           : 0.00
+      absorbency          : 0.11
+      covered (%)         : 60.00
+      determinateness (%) : 50.00
+      - most credible action(s) = { }
+     === >> potential worst choice(s) 
+     choice              : ['p2', 'p5']
+      independence        : 0.00
+      dominance           : 0.00
+      absorbency          : 0.17
+      covered (%)         : 50.00
+      determinateness (%) : 50.00
+      - most credible action(s) = { }
+
+Our previous robust best choice recommendation remains, in this example here, **stable** (see :numref:`unOpposed3` Line 7). We recover indeed the best choice recommendation ['p2', 'p4'], independently of the very importance weight one may eventually allocate to each one of the three decision objectives. Yet notice that decision alternative 'p2' appears to be at the same time a potential *best* as well as a potential *worst* choice recommendation (see Line 23). This confirms the previous robust ranking result rendered by the heatmap view of the underlying performance table (see :numref:`robustHeatmap` above).
+
+We may visualize this robustness result in :numref:`unopDigraph` below.
+
+    >>> (~(-uog)).exportGraphViz(fileName = 'unopDigraph',\
+                                 bestChoice = ['p2', 'p4'],\
+                                 worstChoice = ['p3', 'p5', 'p6'])
+     *---- exporting a dot file dor GraphViz tools ---------*
+      Exporting to unopDigraph.dot
+      dot -Grankdir=BT -Tpng unopDigraph.dot -o unopDigraph.png
+
+.. Figure:: unopDigraph.png
+   :name: unopDigraph
+   :alt: Standard versus Unopposed Strict Outranking Digraphs
+   :width: 600 px
+   :align: center
+
+   Standard versus *unopposed* strict outranking digraphs oriented by best and worst choice recommendations
+
+
 Back to :ref:`Content Table <Pearls-label>`
 
 
