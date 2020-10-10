@@ -1599,7 +1599,7 @@ We may obtain such *unopposed* outranking situtations by operating an **epistemi
                              weights=objectiveWeights)
    >>> uopg.showRelationTable()
     * ---- Relation Table -----
-    r(xy) |  'p1'  'p2'	 'p3'  'p4'  'p5'  'p6'  'p7'	  
+    r(x>y)|  'p1'  'p2'	 'p3'  'p4'  'p5'  'p6'  'p7'	  
     ------|-------------------------------------------
      'p1' |  0.00  0.00	 0.00 -0.69  0.39  0.11	 0.00	 
      'p2' |  0.00  0.00	 0.83  0.00  0.00  0.00	 0.00	 
@@ -1610,7 +1610,7 @@ We may obtain such *unopposed* outranking situtations by operating an **epistemi
      'p7' |  0.00  0.00	 0.00  0.00  0.78  0.42	 0.00	 
     Valuation domain: [-1.00;1.00]
 
-Positive (respectively negative) r-characteristic, like r('p1','p5') = 0.35 (see :numref:`unOpposed2` Line 11), show outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective. When fixed proportional criteria significances per objective are given, these outranking characteristics, appear hence **stable** with respect to any importance weight we may allocate to the decision objectives.
+Positive (respectively negative) r-characteristic values, like :math:`r(p1 \succsim p5) = 0.35` (see :numref:`unOpposed2` Line 14), show outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective. When fixed proportional criteria significances per objective are given, these outranking characteristics, appear hence **stable** with respect to any importance weight we may allocate to the decision objectives.
 
 For easily computing this kind of *unopposed* outranking digraphs, the :py:mod:`outrankingDigraphs module <outrankingDigraphs>` provides conveniently a corresponding :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph` constructor.
 
@@ -1636,7 +1636,7 @@ For easily computing this kind of *unopposed* outranking digraphs, the :py:mod:`
 			   'runTimes', 'relation', 'marginalRelationsRelations',
 			   'gamma', 'notGamma']
 
-We may now verify the unopposed status of the outranking situation observed between alternatives 'p1' and 'p5'.
+We may now verify the unopposed status of the outranking situation observed between alternatives *p1* and *p5*.
 
 .. code-block:: pycon
    :linenos:
@@ -1658,7 +1658,7 @@ We may now verify the unopposed status of the outranking situation observed betw
     so7   12.00  28.41  44.92  -16.51 	| 5.00  10.00   -12.00
      Valuation in range: -72.00 to +72.00; global concordance: +28.00
 
-In :numref:`unOpposed4` we may notice that alternative 'p1' does indeed positively outrank alternative 'p5' from the economic perspective (16/24) as well as from the societal perspective (18/14). And, from the environmental perspective, both alternatives appear incomparable.
+In :numref:`unOpposed4` we may notice that alternative 'p1' does indeed positively outrank alternative 'p5' from the economic perspective (:math:`r(p1 \succsim p5) = +16/24`) as well as from the societal perspective (:math:`r(p1 \succsim p5) = +18/24`). And, from the environmental perspective, both alternatives appear incomparable (:math:`r(p1 \succsim p5) = 0/24`).
 
 The resulting *unopposed* outranking digraph keeps in fact 13 (see :numref:`unOpposed3` Line 10) out of the 23 positively validated standard outranking situations. Let us recompute a corresponding best choice recommendation.
 
@@ -1688,7 +1688,7 @@ The resulting *unopposed* outranking digraph keeps in fact 13 (see :numref:`unOp
       determinateness (%) : 50.00
       - most credible action(s) = { }
 
-Our previous robust best choice recommendation remains, in this example here, **stable** (see :numref:`unOpposed5` Line 6). We recover indeed the best choice recommendation ['p2', 'p4'], independently of the very importance weight one may eventually allocate to each one of the three decision objectives. Yet notice that decision alternative 'p7' appears to be at the same time a potential *best* as well as a potential *worst* choice recommendation (see Line 14).
+Our previous robust best choice recommendation remains, in this example here, **stable** (see :numref:`unOpposed5` Line 6). We recover indeed the best choice recommendation ['p2', 'p4'], independently of the very importance weight one may eventually allocate to each one of the three decision objectives. Yet notice that decision alternative 'p7' appears to be at the same time a potential *best* as well as a potential *worst* choice recommendation (see Lines 6 and 14).
 
 We may visualize this unopposed robustness result in :numref:`unopDigraph` below.
 

@@ -1989,7 +1989,7 @@ We may obtain such \sphinxstyleemphasis{unopposed} outranking situtations by ope
 \PYG{g+go}{                          weights=objectiveWeights)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{ r(xy) |  \PYGZsq{}p1\PYGZsq{}  \PYGZsq{}p2\PYGZsq{}  \PYGZsq{}p3\PYGZsq{}  \PYGZsq{}p4\PYGZsq{}  \PYGZsq{}p5\PYGZsq{}  \PYGZsq{}p6\PYGZsq{}  \PYGZsq{}p7\PYGZsq{}}
+\PYG{g+go}{ r(x\PYGZgt{}y)|  \PYGZsq{}p1\PYGZsq{}  \PYGZsq{}p2\PYGZsq{}  \PYGZsq{}p3\PYGZsq{}  \PYGZsq{}p4\PYGZsq{}  \PYGZsq{}p5\PYGZsq{}  \PYGZsq{}p6\PYGZsq{}  \PYGZsq{}p7\PYGZsq{}}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{  \PYGZsq{}p1\PYGZsq{} |  0.00  0.00  0.00 \PYGZhy{}0.69  0.39  0.11  0.00}
 \PYG{g+go}{  \PYGZsq{}p2\PYGZsq{} |  0.00  0.00  0.83  0.00  0.00  0.00  0.00}
@@ -2001,7 +2001,7 @@ We may obtain such \sphinxstyleemphasis{unopposed} outranking situtations by ope
 \PYG{g+go}{ Valuation domain: [\PYGZhy{}1.00;1.00]}
 \end{sphinxVerbatim}
 
-Positive (respectively negative) r\sphinxhyphen{}characteristic, like r(‘p1’,’p5’) = 0.35 (see \hyperref[\detokenize{pearls:unopposed2}]{Listing \ref{\detokenize{pearls:unopposed2}}} Line 11), show outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective. When fixed proportional criteria significances per objective are given, these outranking characteristics, appear hence \sphinxstylestrong{stable} with respect to any importance weight we may allocate to the decision objectives.
+Positive (respectively negative) r\sphinxhyphen{}characteristic values, like \(r(p1 \succsim p5) = 0.35\) (see \hyperref[\detokenize{pearls:unopposed2}]{Listing \ref{\detokenize{pearls:unopposed2}}} Line 14), show outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective. When fixed proportional criteria significances per objective are given, these outranking characteristics, appear hence \sphinxstylestrong{stable} with respect to any importance weight we may allocate to the decision objectives.
 
 For easily computing this kind of \sphinxstyleemphasis{unopposed} outranking digraphs, the \sphinxcode{\sphinxupquote{outrankingDigraphs module}} provides conveniently a corresponding \sphinxcode{\sphinxupquote{outrankingDigraphs.UnOpposedBipolarOutrankingDigraph}} constructor.
 \sphinxSetupCaptionForVerbatim{Unopposed outranking digraph constructor}
@@ -2025,7 +2025,7 @@ For easily computing this kind of \sphinxstyleemphasis{unopposed} outranking dig
 \PYG{g+go}{                        \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-We may now verify the unopposed status of the outranking situation observed between alternatives ‘p1’ and ‘p5’.
+We may now verify the unopposed status of the outranking situation observed between alternatives \sphinxstyleemphasis{p1} and \sphinxstyleemphasis{p5}.
 \sphinxSetupCaptionForVerbatim{Example of unopposed outranking situation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed4}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -2045,7 +2045,7 @@ We may now verify the unopposed status of the outranking situation observed betw
 \PYG{g+go}{  Valuation in range: \PYGZhy{}72.00 to +72.00; global concordance: +28.00}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{pearls:unopposed4}]{Listing \ref{\detokenize{pearls:unopposed4}}} we may notice that alternative ‘p1’ does indeed positively outrank alternative ‘p5’ from the economic perspective (16/24) as well as from the societal perspective (18/14). And, from the environmental perspective, both alternatives appear incomparable.
+In \hyperref[\detokenize{pearls:unopposed4}]{Listing \ref{\detokenize{pearls:unopposed4}}} we may notice that alternative ‘p1’ does indeed positively outrank alternative ‘p5’ from the economic perspective (\(r(p1 \succsim p5) = +16/24\)) as well as from the societal perspective (\(r(p1 \succsim p5) = +18/24\)). And, from the environmental perspective, both alternatives appear incomparable (\(r(p1 \succsim p5) = 0/24\)).
 
 The resulting \sphinxstyleemphasis{unopposed} outranking digraph keeps in fact 13 (see \hyperref[\detokenize{pearls:unopposed3}]{Listing \ref{\detokenize{pearls:unopposed3}}} Line 10) out of the 23 positively validated standard outranking situations. Let us recompute a corresponding best choice recommendation.
 \sphinxSetupCaptionForVerbatim{Unopposed best choice recommendation}
@@ -2073,7 +2073,7 @@ The resulting \sphinxstyleemphasis{unopposed} outranking digraph keeps in fact 1
 \PYG{g+go}{   \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZcb{}}
 \end{sphinxVerbatim}
 
-Our previous robust best choice recommendation remains, in this example here, \sphinxstylestrong{stable} (see \hyperref[\detokenize{pearls:unopposed5}]{Listing \ref{\detokenize{pearls:unopposed5}}} Line 6). We recover indeed the best choice recommendation {[}‘p2’, ‘p4’{]}, independently of the very importance weight one may eventually allocate to each one of the three decision objectives. Yet notice that decision alternative ‘p7’ appears to be at the same time a potential \sphinxstyleemphasis{best} as well as a potential \sphinxstyleemphasis{worst} choice recommendation (see Line 14).
+Our previous robust best choice recommendation remains, in this example here, \sphinxstylestrong{stable} (see \hyperref[\detokenize{pearls:unopposed5}]{Listing \ref{\detokenize{pearls:unopposed5}}} Line 6). We recover indeed the best choice recommendation {[}‘p2’, ‘p4’{]}, independently of the very importance weight one may eventually allocate to each one of the three decision objectives. Yet notice that decision alternative ‘p7’ appears to be at the same time a potential \sphinxstyleemphasis{best} as well as a potential \sphinxstyleemphasis{worst} choice recommendation (see Lines 6 and 14).
 
 We may visualize this unopposed robustness result in \hyperref[\detokenize{pearls:unopdigraph}]{Fig.\@ \ref{\detokenize{pearls:unopdigraph}}} below.
 
