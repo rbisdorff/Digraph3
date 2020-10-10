@@ -58,7 +58,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{October 09, 2020}
+\date{October 10, 2020}
 \release{3.8-3600+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1930,7 +1930,7 @@ For concluding, let us mention that it is precisely again our bipolar\sphinxhyph
 
 \subsection{Unopposed outranking situations}
 \label{\detokenize{pearls:unopposed-outranking-situations}}
-When facing a performance tableau involving multiple decision objectives of ordinal importance, the previous robusteness level +/\sphinxhyphen{}3 may lead to distinguishing \sphinxstyleemphasis{unopposed} outranking situations, namely preferential situations that are validated from each decision objective’s perspective.
+When facing a performance tableau involving multiple decision objectives of ordinal importance, the previous robusteness level +/\sphinxhyphen{}3 may lead to distinguishing \sphinxstyleemphasis{unopposed} outranking situations, namely preferential situations that are more or less validated from each decision objective’s perspective.
 
 We say that decision alternative \sphinxstyleemphasis{x} \sphinxstylestrong{outranks} decision alternative \sphinxstyleemphasis{y} \sphinxstylestrong{unopposed} when, limited to \sphinxstylestrong{each decision objective}:
 \begin{itemize}
@@ -1946,7 +1946,7 @@ Dually, we say that decision alternative \sphinxstyleemphasis{x} \sphinxstylestr
 
 \end{itemize}
 
-Let us reconsider, for instance, the previous performance tableau with three decision objective:
+Let us reconsider, for instance, the previous performance tableau with three decision objectives:
 \sphinxSetupCaptionForVerbatim{Performance tableau with three decision objectives}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed1}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -1972,13 +1972,37 @@ Let us reconsider, for instance, the previous performance tableau with three dec
 \PYG{g+go}{ Total weight: 24.00 (4 criteria)}
 \end{sphinxVerbatim}
 
-We notice in this example three decision objectives of equal importance. What will be the outranking situations that are positively or negatively validated for each one of the decision objectives taken individually ?
+We notice in this example three decision objectives of equal importance (see \hyperref[\detokenize{pearls:unopposed1}]{Listing \ref{\detokenize{pearls:unopposed1}}}). What will be the outranking situations that are positively or negatively validated for each one of the decision objectives taken individually ?
 
-For computing this kind of \sphinxstyleemphasis{unopposed} outranking digraphs, the outrankingDigraphs module provides a specific constructor \sphinxcode{\sphinxupquote{outrankingDigraphs.UnOpposedBipolarOutrankingDigraph}}. We obtain indeed \sphinxstyleemphasis{unopposed} outranking situtations by operating an \sphinxstyleemphasis{o\sphinxhyphen{}average fusion} of the mariginal outranking digraphs restricted to the coalition of criteria supporting each decision objective,  namely validated by one or more decision objectives without being invalidated by any other decision objective.
-
-These positive, as well as negative outranking characteristics, appear hence \sphinxstylestrong{stable} with respect to the importance of the decision objectives when proportional criteria significances are given.
+We may obtain such \sphinxstyleemphasis{unopposed} outranking situtations by operating an \sphinxstylestrong{epistemic o\sphinxhyphen{}average fusion} (see the \sphinxcode{\sphinxupquote{digraphsTools.symmetricAverage}} method) of the mariginal outranking digraphs restricted to the coalition of criteria supporting each one of the decision objectives (see \hyperref[\detokenize{pearls:unopposed2}]{Listing \ref{\detokenize{pearls:unopposed2}}} below).
 \sphinxSetupCaptionForVerbatim{Unopposed outranking digraph constructor}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed2}}}
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{geco} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{objectivesSubset}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Eco}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gsoc} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{objectivesSubset}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Soc}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{genv} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{objectivesSubset}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Env}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{FusionLDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg} \PYG{o}{=} \PYG{n}{FusionLDigraph}\PYG{p}{(}\PYG{p}{[}\PYG{n}{geco}\PYG{p}{,}\PYG{n}{gsoc}\PYG{p}{,}\PYG{n}{genv}\PYG{p}{]}\PYG{p}{,}\PYG{n}{operator}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{o\PYGZhy{}average}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{ r(xy) |  \PYGZsq{}p1\PYGZsq{}  \PYGZsq{}p2\PYGZsq{}  \PYGZsq{}p3\PYGZsq{}  \PYGZsq{}p4\PYGZsq{}  \PYGZsq{}p5\PYGZsq{}  \PYGZsq{}p6\PYGZsq{}  \PYGZsq{}p7\PYGZsq{}}
+\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{  \PYGZsq{}p1\PYGZsq{} |  0.00  0.00  0.00 \PYGZhy{}0.69  0.39  0.11  0.00}
+\PYG{g+go}{  \PYGZsq{}p2\PYGZsq{} |  0.00  0.00  0.83  0.00  0.00  0.00  0.00}
+\PYG{g+go}{  \PYGZsq{}p3\PYGZsq{} |  0.00 \PYGZhy{}0.33  0.00  0.00  0.50  0.00  0.00}
+\PYG{g+go}{  \PYGZsq{}p4\PYGZsq{} |  0.78  0.00  0.61  0.00  1.00  1.00  0.67}
+\PYG{g+go}{  \PYGZsq{}p5\PYGZsq{} | \PYGZhy{}0.11  0.00  0.00 \PYGZhy{}0.89  0.00  0.11  0.00}
+\PYG{g+go}{  \PYGZsq{}p6\PYGZsq{} |  0.00  0.00  0.00 \PYGZhy{}0.44  0.17  0.00  0.00}
+\PYG{g+go}{  \PYGZsq{}p7\PYGZsq{} |  0.00  0.00  0.00  0.00  0.78  0.42  0.00}
+\PYG{g+go}{ Valuation domain: [\PYGZhy{}1.00;1.00]}
+\end{sphinxVerbatim}
+
+Positive (respectively negative) r\sphinxhyphen{}characteristic, like r(‘p1’,’p5’) = 0.35 (see \hyperref[\detokenize{pearls:unopposed2}]{Listing \ref{\detokenize{pearls:unopposed2}}} Line 11), show outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective. When fixed proportional criteria significances per objective are given, these outranking characteristics, appear hence \sphinxstylestrong{stable} with respect to any importance weight we may allocate to the decision objectives.
+
+For easily computing this kind of \sphinxstyleemphasis{unopposed} outranking digraphs, the \sphinxcode{\sphinxupquote{outrankingDigraphs module}} provides conveniently a corresponding constructor \sphinxcode{\sphinxupquote{outrankingDigraphs.UnOpposedBipolarOutrankingDigraph}}.
+\sphinxSetupCaptionForVerbatim{Unopposed outranking digraph constructor}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed3}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import}\PYGZbs{}
 \PYG{g+go}{           UnOpposedBipolarOutrankingDigraph}
@@ -1996,57 +2020,62 @@ These positive, as well as negative outranking characteristics, appear hence \sp
 \PYG{g+go}{                        \PYGZsq{}criteria\PYGZsq{}, \PYGZsq{}methodData\PYGZsq{}, \PYGZsq{}evaluation\PYGZsq{}, \PYGZsq{}order\PYGZsq{},}
 \PYG{g+go}{                        \PYGZsq{}runTimes\PYGZsq{}, \PYGZsq{}relation\PYGZsq{}, \PYGZsq{}marginalRelationsRelations\PYGZsq{},}
 \PYG{g+go}{                        \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
-\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Constructor run times (in sec.) \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{ Total time       : 0.01163}
-\PYG{g+go}{ Data input       : 0.00125}
-\PYG{g+go}{ Compute relation : 0.01032}
-\PYG{g+go}{ Gamma sets       : 0.00006}
-\PYG{g+go}{ \PYGZsh{} Threads        : 1}
 \end{sphinxVerbatim}
 
-The resulting \sphinxstyleemphasis{unopposed} outranking digraph keeps 13 (see \hyperref[\detokenize{pearls:unopposed2}]{Listing \ref{\detokenize{pearls:unopposed2}}} Line 10) out of the 23 positively validated standard outranking situations.
-
-Let us recompute a corresponding best choice recommendataion.
-\sphinxSetupCaptionForVerbatim{Unopposed best choice recommendation}
-\def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed3}}}
+We may now verify the unopposed status of the outranking situation observed between alternatives ‘p1’ and ‘p5’.
+\sphinxSetupCaptionForVerbatim{Example of unopposed outranking situation}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed4}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{n}{CoDual}\PYG{o}{=}\PYG{n+nb+bp}{False}\PYG{p}{)}
-\PYG{g+go}{ ***********************}
-\PYG{g+go}{ Best choice recommendation(s) (BCR)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg}\PYG{o}{.}\PYG{n}{showPairwiseComparison}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{p5}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  pairwise comparison \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{ Comparing actions : (p1, p5)}
+\PYG{g+go}{ crit. wght.  g(x)  g(y)    diff     | ind   pref    r()     |}
+\PYG{g+go}{ ec1   8.00  38.11  46.75  \PYGZhy{}8.64     | 5.00  10.00   +0.00   |}
+\PYG{g+go}{ ec4   8.00  22.65  8.96  +13.69     | 5.00  10.00   +8.00   |}
+\PYG{g+go}{ ec8   8.00  77.02  35.91  +41.11    | 5.00  10.00   +8.00   |}
+\PYG{g+go}{ en3   6.00  58.16  31.05  +27.11    | 5.00  10.00   +6.00   |}
+\PYG{g+go}{ en5   6.00  31.40  29.52  +1.88     | 5.00  10.00   +6.00   |}
+\PYG{g+go}{ en6   6.00  11.41  31.22  \PYGZhy{}19.81    | 5.00  10.00   \PYGZhy{}6.00   |}
+\PYG{g+go}{ en9   6.00  44.37  9.83  +34.54     | 5.00  10.00   +6.00   |}
+\PYG{g+go}{ so2   12.00  22.43  12.36  +10.07   | 5.00  10.00   +12.00  |}
+\PYG{g+go}{ so7   12.00  28.41  44.92  \PYGZhy{}16.51   | 5.00  10.00   \PYGZhy{}12.00}
+\PYG{g+go}{  Valuation in range: \PYGZhy{}72.00 to +72.00; global concordance: +28.00}
+\end{sphinxVerbatim}
+
+In \hyperref[\detokenize{pearls:unopposed4}]{Listing \ref{\detokenize{pearls:unopposed4}}} we may notice that alternative ‘p1’ does indeed positively outrank alternative ‘p5’ from the economic perspective (16/24) as well as from the societal perspective (18/14). And, from the environmental perspective, both alternatives appear incomparable.
+
+The resulting \sphinxstyleemphasis{unopposed} outranking digraph keeps in fact 13 (see \hyperref[\detokenize{pearls:unopposed3}]{Listing \ref{\detokenize{pearls:unopposed3}}} Line 10) out of the 23 positively validated standard outranking situations. Let us recompute a corresponding best choice recommendation.
+\sphinxSetupCaptionForVerbatim{Unopposed best choice recommendation}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed5}}}
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ Rubis best choice recommendation(s) (BCR)}
 \PYG{g+go}{  (in decreasing order of determinateness)}
 \PYG{g+go}{ Credibility domain: [\PYGZhy{}1.00,1.00]}
 \PYG{g+go}{  === \PYGZgt{}\PYGZgt{} potential best choice(s)}
-\PYG{g+go}{   choice              : [\PYGZsq{}p2\PYGZsq{}, \PYGZsq{}p4\PYGZsq{}]}
+\PYG{g+go}{  choice              : [\PYGZsq{}p2\PYGZsq{}, \PYGZsq{}p4\PYGZsq{}, \PYGZsq{}p7\PYGZsq{}]}
 \PYG{g+go}{   independence        : 0.00}
-\PYG{g+go}{   dominance           : 0.67}
+\PYG{g+go}{   dominance           : 0.33}
 \PYG{g+go}{   absorbency          : 0.00}
-\PYG{g+go}{   covering (\PYGZpc{})        : 60.00}
+\PYG{g+go}{   covering (\PYGZpc{})        : 33.33}
 \PYG{g+go}{   determinateness (\PYGZpc{}) : 50.00}
 \PYG{g+go}{   \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZcb{}}
 \PYG{g+go}{  === \PYGZgt{}\PYGZgt{} potential worst choice(s)}
-\PYG{g+go}{   choice              : [\PYGZsq{}p3\PYGZsq{}, \PYGZsq{}p6\PYGZsq{}]}
+\PYG{g+go}{  choice              : [\PYGZsq{}p3\PYGZsq{}, \PYGZsq{}p5\PYGZsq{}, \PYGZsq{}p6\PYGZsq{}, \PYGZsq{}p7\PYGZsq{}]}
 \PYG{g+go}{   independence        : 0.00}
-\PYG{g+go}{   dominance           : 0.00}
+\PYG{g+go}{   dominance           : \PYGZhy{}0.61}
 \PYG{g+go}{   absorbency          : 0.11}
-\PYG{g+go}{   covered (\PYGZpc{})         : 60.00}
-\PYG{g+go}{   determinateness (\PYGZpc{}) : 50.00}
-\PYG{g+go}{   \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZcb{}}
-\PYG{g+go}{  === \PYGZgt{}\PYGZgt{} potential worst choice(s)}
-\PYG{g+go}{  choice              : [\PYGZsq{}p2\PYGZsq{}, \PYGZsq{}p5\PYGZsq{}]}
-\PYG{g+go}{   independence        : 0.00}
-\PYG{g+go}{   dominance           : 0.00}
-\PYG{g+go}{   absorbency          : 0.17}
-\PYG{g+go}{   covered (\PYGZpc{})         : 50.00}
+\PYG{g+go}{   covered (\PYGZpc{})         : 33.33}
 \PYG{g+go}{   determinateness (\PYGZpc{}) : 50.00}
 \PYG{g+go}{   \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZcb{}}
 \end{sphinxVerbatim}
 
-Our previous robust best choice recommendation remains, in this example here, \sphinxstylestrong{stable} (see \hyperref[\detokenize{pearls:unopposed3}]{Listing \ref{\detokenize{pearls:unopposed3}}} Line 7). We recover indeed the best choice recommendation {[}‘p2’, ‘p4’{]}, independently of the very importance weight one may eventually allocate to each one of the three decision objectives. Yet notice that decision alternative ‘p2’ appears to be at the same time a potential \sphinxstyleemphasis{best} as well as a potential \sphinxstyleemphasis{worst} choice recommendation (see Line 23). This confirms the previous robust ranking result rendered by the heatmap view of the underlying performance table (see \hyperref[\detokenize{pearls:robustheatmap}]{Fig.\@ \ref{\detokenize{pearls:robustheatmap}}} above).
+Our previous robust best choice recommendation remains, in this example here, \sphinxstylestrong{stable} (see \hyperref[\detokenize{pearls:unopposed5}]{Listing \ref{\detokenize{pearls:unopposed5}}} Line 6). We recover indeed the best choice recommendation {[}‘p2’, ‘p4’{]}, independently of the very importance weight one may eventually allocate to each one of the three decision objectives. Yet notice that decision alternative ‘p7’ appears to be at the same time a potential \sphinxstyleemphasis{best} as well as a potential \sphinxstyleemphasis{worst} choice recommendation (see Line 14).
 
-We may visualize this robustness result in \hyperref[\detokenize{pearls:unopdigraph}]{Fig.\@ \ref{\detokenize{pearls:unopdigraph}}} below.
+We may visualize this unopposed robustness result in \hyperref[\detokenize{pearls:unopdigraph}]{Fig.\@ \ref{\detokenize{pearls:unopdigraph}}} below.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{uog}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{unopDigraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{uopg}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{unopDigraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
 \PYG{g+go}{                             bestChoice = [\PYGZsq{}p2\PYGZsq{}, \PYGZsq{}p4\PYGZsq{}],\PYGZbs{}}
 \PYG{g+go}{                             worstChoice = [\PYGZsq{}p3\PYGZsq{}, \PYGZsq{}p5\PYGZsq{}, \PYGZsq{}p6\PYGZsq{}])}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file dor GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}

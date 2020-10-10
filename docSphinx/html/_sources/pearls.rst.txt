@@ -1541,7 +1541,7 @@ For concluding, let us mention that it is precisely again our bipolar-valued *lo
 Unopposed outranking situations
 ...............................
 
-When facing a performance tableau involving multiple decision objectives of ordinal importance, the previous robusteness level +/-3 may lead to distinguishing *unopposed* outranking situations, namely preferential situations that are validated from each decision objective's perspective.  
+When facing a performance tableau involving multiple decision objectives of ordinal importance, the previous robusteness level +/-3 may lead to distinguishing *unopposed* outranking situations, namely preferential situations that are more or less validated from each decision objective's perspective.  
 
 We say that decision alternative *x* **outranks** decision alternative *y* **unopposed** when, limited to **each decision objective**:
 
@@ -1551,7 +1551,7 @@ Dually, we say that decision alternative *x* **does not outrank** decision alter
 
    * *x* negatively outranks *y* and we may not observe any considerable *better performance* of *x* on that decision objective.
 
-Let us reconsider, for instance, the previous performance tableau with three decision objective:
+Let us reconsider, for instance, the previous performance tableau with three decision objectives:
 
 .. code-block:: pycon
    :linenos:
@@ -1579,16 +1579,42 @@ Let us reconsider, for instance, the previous performance tableau with three dec
      en9 criterion of objective Env 6
     Total weight: 24.00 (4 criteria)
 
-We notice in this example three decision objectives of equal importance. What will be the outranking situations that are positively or negatively validated for each one of the decision objectives taken individually ?
+We notice in this example three decision objectives of equal importance (see :numref:`unOpposed1`). What will be the outranking situations that are positively or negatively validated for each one of the decision objectives taken individually ?
 
-For computing this kind of *unopposed* outranking digraphs, the outrankingDigraphs module provides a specific constructor :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph`. We obtain indeed *unopposed* outranking situtations by operating an *o-average fusion* of the mariginal outranking digraphs restricted to the coalition of criteria supporting each decision objective,  namely validated by one or more decision objectives without being invalidated by any other decision objective.
-
-These positive, as well as negative outranking characteristics, appear hence **stable** with respect to the importance of the decision objectives when proportional criteria significances are given.
+We may obtain such *unopposed* outranking situtations by operating an **epistemic o-average fusion** (see the :py:func:`digraphsTools.symmetricAverage <digraphsTools.symmetricAverage>` method) of the mariginal outranking digraphs restricted to the coalition of criteria supporting each one of the decision objectives (see :numref:`unOpposed2` below).
 
 .. code-block:: pycon
    :linenos:
    :caption: Unopposed outranking digraph constructor
    :name: unOpposed2
+
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
+   >>> geco = BipolarOutrankingDigraph(t,objectivesSubset=['Eco'])
+   >>> gsoc = BipolarOutrankingDigraph(t,objectivesSubset=['Soc'])
+   >>> genv = BipolarOutrankingDigraph(t,objectivesSubset=['Env'])
+   >>> from digraphs import FusionLDigraph
+   >>> uopg = FusionLDigraph([geco,gsoc,genv],operator='o-average')
+   >>> uopg.showRelationTable()
+    * ---- Relation Table -----
+    r(xy) |  'p1'  'p2'	 'p3'  'p4'  'p5'  'p6'  'p7'	  
+    ------|-------------------------------------------
+     'p1' |  0.00  0.00	 0.00 -0.69  0.39  0.11	 0.00	 
+     'p2' |  0.00  0.00	 0.83  0.00  0.00  0.00	 0.00	 
+     'p3' |  0.00 -0.33	 0.00  0.00  0.50  0.00	 0.00	 
+     'p4' |  0.78  0.00	 0.61  0.00  1.00  1.00	 0.67	 
+     'p5' | -0.11  0.00	 0.00 -0.89  0.00  0.11	 0.00	 
+     'p6' |  0.00  0.00	 0.00 -0.44  0.17  0.00	 0.00	 
+     'p7' |  0.00  0.00	 0.00  0.00  0.78  0.42	 0.00	 
+    Valuation domain: [-1.00;1.00]
+
+Positive (respectively negative) r-characteristic, like r('p1','p5') = 0.35 (see :numref:`unOpposed2` Line 11), show outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective. When fixed proportional criteria significances per objective are given, these outranking characteristics, appear hence **stable** with respect to any importance weight we may allocate to the decision objectives.
+
+For easily computing this kind of *unopposed* outranking digraphs, the :py:mod:`outrankingDigraphs module <outrankingDigraphs>` provides conveniently a corresponding constructor :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph`.
+
+.. code-block:: pycon
+   :linenos:
+   :caption: Unopposed outranking digraph constructor
+   :name: unOpposed3
 
    >>> from outrankingDigraphs import\
 	      UnOpposedBipolarOutrankingDigraph
@@ -1606,57 +1632,64 @@ These positive, as well as negative outranking characteristics, appear hence **s
 			   'criteria', 'methodData', 'evaluation', 'order',
 			   'runTimes', 'relation', 'marginalRelationsRelations',
 			   'gamma', 'notGamma']
-    ----  Constructor run times (in sec.) ----
-    Total time       : 0.01163
-    Data input       : 0.00125
-    Compute relation : 0.01032
-    Gamma sets       : 0.00006
-    # Threads        : 1
 
-The resulting *unopposed* outranking digraph keeps 13 (see :numref:`unOpposed2` Line 10) out of the 23 positively validated standard outranking situations. 
+We may now verify the unopposed status of the outranking situation observed between alternatives 'p1' and 'p5'.
 
-Let us recompute a corresponding best choice recommendataion.
+.. code-block:: pycon
+   :linenos:
+   :caption: Example of unopposed outranking situation
+   :name: unOpposed4
+	  
+   >>> uopg.showPairwiseComparison('p1','p5')
+    *------------  pairwise comparison ----*
+    Comparing actions : (p1, p5)
+    crit. wght.  g(x)  g(y)    diff  	| ind   pref    r() 	| 
+    ec1   8.00  38.11  46.75  -8.64 	| 5.00  10.00   +0.00 	| 
+    ec4   8.00  22.65  8.96  +13.69 	| 5.00  10.00   +8.00 	| 
+    ec8   8.00  77.02  35.91  +41.11 	| 5.00  10.00   +8.00 	| 
+    en3   6.00  58.16  31.05  +27.11 	| 5.00  10.00   +6.00 	| 
+    en5   6.00  31.40  29.52  +1.88 	| 5.00  10.00   +6.00 	| 
+    en6   6.00  11.41  31.22  -19.81 	| 5.00  10.00   -6.00 	| 
+    en9   6.00  44.37  9.83  +34.54 	| 5.00  10.00   +6.00 	| 
+    so2   12.00  22.43  12.36  +10.07 	| 5.00  10.00   +12.00 	| 
+    so7   12.00  28.41  44.92  -16.51 	| 5.00  10.00   -12.00
+     Valuation in range: -72.00 to +72.00; global concordance: +28.00
+
+In :numref:`unOpposed4` we may notice that alternative 'p1' does indeed positively outrank alternative 'p5' from the economic perspective (16/24) as well as from the societal perspective (18/14). And, from the environmental perspective, both alternatives appear incomparable.
+
+The resulting *unopposed* outranking digraph keeps in fact 13 (see :numref:`unOpposed3` Line 10) out of the 23 positively validated standard outranking situations. Let us recompute a corresponding best choice recommendation.
 
 .. code-block:: pycon
    :linenos:
    :caption: Unopposed best choice recommendation
-   :name: unOpposed3
+   :name: unOpposed5
 
-   >>> uopg.showBestChoiceRecommendation(CoDual=False)
-    ***********************
-    Best choice recommendation(s) (BCR)
+   >>> uopg.showBestChoiceRecommendation()
+    Rubis best choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   
     Credibility domain: [-1.00,1.00]
      === >> potential best choice(s)
-      choice              : ['p2', 'p4']
+     choice              : ['p2', 'p4', 'p7']
       independence        : 0.00
-      dominance           : 0.67
+      dominance           : 0.33
       absorbency          : 0.00
-      covering (%)        : 60.00
+      covering (%)        : 33.33
       determinateness (%) : 50.00
       - most credible action(s) = { }
      === >> potential worst choice(s) 
-      choice              : ['p3', 'p6']
+     choice              : ['p3', 'p5', 'p6', 'p7']
       independence        : 0.00
-      dominance           : 0.00
+      dominance           : -0.61
       absorbency          : 0.11
-      covered (%)         : 60.00
-      determinateness (%) : 50.00
-      - most credible action(s) = { }
-     === >> potential worst choice(s) 
-     choice              : ['p2', 'p5']
-      independence        : 0.00
-      dominance           : 0.00
-      absorbency          : 0.17
-      covered (%)         : 50.00
+      covered (%)         : 33.33
       determinateness (%) : 50.00
       - most credible action(s) = { }
 
-Our previous robust best choice recommendation remains, in this example here, **stable** (see :numref:`unOpposed3` Line 7). We recover indeed the best choice recommendation ['p2', 'p4'], independently of the very importance weight one may eventually allocate to each one of the three decision objectives. Yet notice that decision alternative 'p2' appears to be at the same time a potential *best* as well as a potential *worst* choice recommendation (see Line 23). This confirms the previous robust ranking result rendered by the heatmap view of the underlying performance table (see :numref:`robustHeatmap` above).
+Our previous robust best choice recommendation remains, in this example here, **stable** (see :numref:`unOpposed5` Line 6). We recover indeed the best choice recommendation ['p2', 'p4'], independently of the very importance weight one may eventually allocate to each one of the three decision objectives. Yet notice that decision alternative 'p7' appears to be at the same time a potential *best* as well as a potential *worst* choice recommendation (see Line 14).
 
-We may visualize this robustness result in :numref:`unopDigraph` below.
+We may visualize this unopposed robustness result in :numref:`unopDigraph` below.
 
-    >>> (~(-uog)).exportGraphViz(fileName = 'unopDigraph',\
+    >>> (~(-uopg)).exportGraphViz(fileName = 'unopDigraph',\
                                  bestChoice = ['p2', 'p4'],\
                                  worstChoice = ['p3', 'p5', 'p6'])
      *---- exporting a dot file dor GraphViz tools ---------*
