@@ -1593,7 +1593,10 @@ We may obtain such *unopposed* outranking situtations by operating an **epistemi
    >>> gsoc = BipolarOutrankingDigraph(t,objectivesSubset=['Soc'])
    >>> genv = BipolarOutrankingDigraph(t,objectivesSubset=['Env'])
    >>> from digraphs import FusionLDigraph
-   >>> uopg = FusionLDigraph([geco,gsoc,genv],operator='o-average')
+   >>> objectiveWeights = [t.objectives[obj]['weight']\
+                                        for obj in t.objectives] 
+   >>> uopg = FusionLDigraph([geco,gsoc,genv],operator='o-average',\
+                             weights=objectiveWeights)
    >>> uopg.showRelationTable()
     * ---- Relation Table -----
     r(xy) |  'p1'  'p2'	 'p3'  'p4'  'p5'  'p6'  'p7'	  
@@ -1609,7 +1612,7 @@ We may obtain such *unopposed* outranking situtations by operating an **epistemi
 
 Positive (respectively negative) r-characteristic, like r('p1','p5') = 0.35 (see :numref:`unOpposed2` Line 11), show outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective. When fixed proportional criteria significances per objective are given, these outranking characteristics, appear hence **stable** with respect to any importance weight we may allocate to the decision objectives.
 
-For easily computing this kind of *unopposed* outranking digraphs, the :py:mod:`outrankingDigraphs module <outrankingDigraphs>` provides conveniently a corresponding constructor :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph`.
+For easily computing this kind of *unopposed* outranking digraphs, the :py:mod:`outrankingDigraphs module <outrankingDigraphs>` provides conveniently a corresponding :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph` constructor.
 
 .. code-block:: pycon
    :linenos:
