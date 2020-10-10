@@ -2001,7 +2001,7 @@ We may obtain such \sphinxstyleemphasis{unopposed} outranking situtations by ope
 \PYG{g+go}{ Valuation domain: [\PYGZhy{}1.00;1.00]}
 \end{sphinxVerbatim}
 
-Positive (respectively negative) r\sphinxhyphen{}characteristic values, like \(r(p1 \succsim p5) = 0.35\) (see \hyperref[\detokenize{pearls:unopposed2}]{Listing \ref{\detokenize{pearls:unopposed2}}} Line 14), show outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective. When fixed proportional criteria significances per objective are given, these outranking characteristics, appear hence \sphinxstylestrong{stable} with respect to any importance weight we may allocate to the decision objectives.
+Positive (respectively negative) r\sphinxhyphen{}characteristic values, like \(r(p1 \succsim p5) = 0.39\) (see \hyperref[\detokenize{pearls:unopposed2}]{Listing \ref{\detokenize{pearls:unopposed2}}} Line 14), show outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective. When fixed proportional criteria significances per objective are given, these outranking characteristics, appear hence \sphinxstylestrong{stable} with respect to any importance weight we may allocate to the decision objectives.
 
 For easily computing this kind of \sphinxstyleemphasis{unopposed} outranking digraphs, the \sphinxcode{\sphinxupquote{outrankingDigraphs module}} provides conveniently a corresponding \sphinxcode{\sphinxupquote{outrankingDigraphs.UnOpposedBipolarOutrankingDigraph}} constructor.
 \sphinxSetupCaptionForVerbatim{Unopposed outranking digraph constructor}
@@ -2045,7 +2045,7 @@ We may now verify the unopposed status of the outranking situation observed betw
 \PYG{g+go}{  Valuation in range: \PYGZhy{}72.00 to +72.00; global concordance: +28.00}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{pearls:unopposed4}]{Listing \ref{\detokenize{pearls:unopposed4}}} we may notice that alternative ‘p1’ does indeed positively outrank alternative ‘p5’ from the economic perspective (\(r(p1 \succsim p5) = +16/24\)) as well as from the societal perspective (\(r(p1 \succsim p5) = +18/24\)). And, from the environmental perspective, both alternatives appear incomparable (\(r(p1 \succsim p5) = 0/24\)).
+In \hyperref[\detokenize{pearls:unopposed4}]{Listing \ref{\detokenize{pearls:unopposed4}}} we may notice that alternative ‘p1’ does indeed positively outrank alternative ‘p5’ from the economic perspective (\(r(p1 \succsim_{Eco} p5) = +16/24\)) as well as from the environmental perspective (\(r(p1 \succsim_{Env} p5) = +18/24\)). And, from the societal perspective, both alternatives appear incomparable (\(r(p1 \succsim_{Soc} p5) = 0/24\)).
 
 The resulting \sphinxstyleemphasis{unopposed} outranking digraph keeps in fact 13 (see \hyperref[\detokenize{pearls:unopposed3}]{Listing \ref{\detokenize{pearls:unopposed3}}} Line 10) out of the 23 positively validated standard outranking situations. Let us recompute a corresponding best choice recommendation.
 \sphinxSetupCaptionForVerbatim{Unopposed best choice recommendation}

@@ -1610,7 +1610,7 @@ We may obtain such *unopposed* outranking situtations by operating an **epistemi
      'p7' |  0.00  0.00	 0.00  0.00  0.78  0.42	 0.00	 
     Valuation domain: [-1.00;1.00]
 
-Positive (respectively negative) r-characteristic values, like :math:`r(p1 \succsim p5) = 0.35` (see :numref:`unOpposed2` Line 14), show outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective. When fixed proportional criteria significances per objective are given, these outranking characteristics, appear hence **stable** with respect to any importance weight we may allocate to the decision objectives.
+Positive (respectively negative) r-characteristic values, like :math:`r(p1 \succsim p5) = 0.39` (see :numref:`unOpposed2` Line 14), show outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective. When fixed proportional criteria significances per objective are given, these outranking characteristics, appear hence **stable** with respect to any importance weight we may allocate to the decision objectives.
 
 For easily computing this kind of *unopposed* outranking digraphs, the :py:mod:`outrankingDigraphs module <outrankingDigraphs>` provides conveniently a corresponding :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph` constructor.
 
@@ -1658,7 +1658,7 @@ We may now verify the unopposed status of the outranking situation observed betw
     so7   12.00  28.41  44.92  -16.51 	| 5.00  10.00   -12.00
      Valuation in range: -72.00 to +72.00; global concordance: +28.00
 
-In :numref:`unOpposed4` we may notice that alternative 'p1' does indeed positively outrank alternative 'p5' from the economic perspective (:math:`r(p1 \succsim p5) = +16/24`) as well as from the societal perspective (:math:`r(p1 \succsim p5) = +18/24`). And, from the environmental perspective, both alternatives appear incomparable (:math:`r(p1 \succsim p5) = 0/24`).
+In :numref:`unOpposed4` we may notice that alternative 'p1' does indeed positively outrank alternative 'p5' from the economic perspective (:math:`r(p1 \succsim_{Eco} p5) = +16/24`) as well as from the environmental perspective (:math:`r(p1 \succsim_{Env} p5) = +18/24`). And, from the societal perspective, both alternatives appear incomparable (:math:`r(p1 \succsim_{Soc} p5) = 0/24`).
 
 The resulting *unopposed* outranking digraph keeps in fact 13 (see :numref:`unOpposed3` Line 10) out of the 23 positively validated standard outranking situations. Let us recompute a corresponding best choice recommendation.
 
