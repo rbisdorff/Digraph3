@@ -1707,7 +1707,7 @@ We may visualize this **unopposed robustness** result in :numref:`unopDigraph` b
 
    Standard versus *unopposed* strict outranking digraphs oriented by best and worst choice recommendations
 
-Let us finally remark that in a social choice context, where our objectives would match different political coalitions, our unopposed best choice recommendations represent in fact **robust multipartisan consensus choices**.
+Let us finally remark that in a social choice context, where decision objectives would match different political parties, our unopposed best choice recommendations represent in fact **robust multipartisan consensus choices**.
 
 Back to :ref:`Content Table <Pearls-label>`
 
