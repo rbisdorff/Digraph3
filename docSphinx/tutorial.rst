@@ -3688,7 +3688,7 @@ We may inspect the performance tableau data with the computing resources provide
    >>> from perfTabs import *
    >>> t = PerformanceTableau('officeChoice')
    >>> help(t) # for discovering all the methods available
-   >>> t.showPerformanceTableau()
+   >>> t.showPerformanceTableau(Transposed=True)
     *----  performance tableau -----*
     criteria |   weights |     'A'      'B'      'C'       'D'       'E'       'F'       'G'   
     ---------|---------------------------------------------------------------------------------

@@ -1541,17 +1541,17 @@ For concluding, let us mention that it is precisely again our bipolar-valued *lo
 Unopposed outranking situations
 ...............................
 
-When facing a performance tableau involving multiple decision objectives of ordinal importance, the previous robusteness level +/-3 may lead to distinguishing **unopposed** outranking situations, namely preferential situations that are more or less validated by one or more decision objectives without being invalidated by any decision objective.  
+When facing a performance tableau involving multiple decision objectives of ordinal importance, the previous robusteness level **+/-3** may lead to distinguishing what we call **unopposed** outranking situations, like the one between alternative *p4* and *p1* we have seen in the previous Section (:math:`r(p4 \succsim p1) = +0.78`, see :numref:`stabDenot` Line11), namely preferential situations that are more or less validated by all the decision objectives.  
 
-We say that decision alternative *x* **outranks** decision alternative *y* **unopposed** when, limited to **each decision objective**:
+Formally, we say that decision alternative *x* **outranks** decision alternative *y* **unopposed** when
 
-   * *x* positively outranks *y* and we may not observe any *considerable counter-performance* of *x* on that decision objective.
+   * *x* positively outranks *y* on one or more decision objective without *x* being positively outranked by *y* on any decision objective.
 
 Dually, we say that decision alternative *x* **does not outrank** decision alternative *y* **unopposed** when
 
-   * *x* negatively outranks *y* and we may not observe any considerable *better performance* of *x* on that decision objective.
+   * *x* is positively outranked by *y* on one or more decision objective without *x* outranking *y* on any decision objective.
 
-Let us reconsider, for instance, the previous performance tableau with three decision objectives:
+Let us reconsider, for instance, the previous performance tableau with three decision objectives (see :numref:`3ObjExample`):
 
 .. code-block:: pycon
    :linenos:
@@ -1585,7 +1585,7 @@ We may obtain such *unopposed* outranking situtations by operating an **epistemi
 
 .. code-block:: pycon
    :linenos:
-   :caption: Unopposed outranking digraph constructor
+   :caption: Computing unopposed outranking situations
    :name: unOpposed2
 
    >>> from outrankingDigraphs import BipolarOutrankingDigraph
@@ -1597,22 +1597,22 @@ We may obtain such *unopposed* outranking situtations by operating an **epistemi
                                         for obj in t.objectives] 
    >>> uopg = FusionLDigraph([geco,gsoc,genv],operator='o-average',\
                              weights=objectiveWeights)
-   >>> uopg.showRelationTable()
-    * ---- Relation Table -----
-    r(x>y)|  'p1'  'p2'	 'p3'  'p4'  'p5'  'p6'  'p7'	  
-    ------|-------------------------------------------
-     'p1' |  0.00  0.00	 0.00 -0.69  0.39  0.11	 0.00	 
-     'p2' |  0.00  0.00	 0.83  0.00  0.00  0.00	 0.00	 
-     'p3' |  0.00 -0.33	 0.00  0.00  0.50  0.00	 0.00	 
-     'p4' |  0.78  0.00	 0.61  0.00  1.00  1.00	 0.67	 
-     'p5' | -0.11  0.00	 0.00 -0.89  0.00  0.11	 0.00	 
-     'p6' |  0.00  0.00	 0.00 -0.44  0.17  0.00	 0.00	 
-     'p7' |  0.00  0.00	 0.00  0.00  0.78  0.42	 0.00	 
-    Valuation domain: [-1.00;1.00]
+   >>> uopg.showRelationTable(ReflexiveTerms=False)
+   * ---- Relation Table -----
+    r   |  'p1'   'p2'   'p3'   'p4'   'p5'   'p6'   'p7'   
+   -----|------------------------------------------------------------
+   'p1' |    -   +0.00  +0.00  -0.69  +0.39  +0.11  +0.00  
+   'p2' | +0.00    -    +0.83  +0.00  +0.00  +0.00  +0.00  
+   'p3' | +0.00  -0.33    -    +0.00  +0.50  +0.00  +0.00  
+   'p4' | +0.78  +0.00  +0.61    -    +1.00  +1.00  +0.67  
+   'p5' | -0.11  +0.00  +0.00  -0.89    -    +0.11  +0.00  
+   'p6' | +0.00  +0.00  +0.00  -0.44  +0.17    -    +0.00  
+   'p7' | +0.00  +0.00  +0.00  +0.00  +0.78  +0.42    -   
+   Valuation domain: [-1.000; 1.000]
 
-Positive (resp. negative) r-characteristic values, like :math:`r(p1 \succsim p5) = 0.39` (see :numref:`unOpposed2` Line 14), show outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective.
+Positive (resp. negative) :math:`r(x \succsim y)` characteristic values, like :math:`r(p1 \succsim p5) = 0.39` (see :numref:`unOpposed2` Line 14), show now ony outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective.
 
-For easily computing this kind of *unopposed* outranking digraphs, the :py:mod:`outrankingDigraphs module <outrankingDigraphs>` provides conveniently a corresponding :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph` constructor.
+For easily computing this kind of *unopposed* outranking digraphs, the :py:mod:`outrankingDigraphs module <outrankingDigraphs>` conveniently provides a corresponding :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph` constructor.
 
 .. code-block:: pycon
    :linenos:

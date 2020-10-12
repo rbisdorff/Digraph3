@@ -2045,20 +2045,20 @@ confidence level <em>alpha</em> %, if</p>
 </div>
 <div class="section" id="unopposed-outranking-situations">
 <h3><a class="toc-backref" href="#id54">Unopposed outranking situations</a><a class="headerlink" href="#unopposed-outranking-situations" title="Permalink to this headline">¶</a></h3>
-<p>When facing a performance tableau involving multiple decision objectives of ordinal importance, the previous robusteness level +/-3 may lead to distinguishing <strong>unopposed</strong> outranking situations, namely preferential situations that are more or less validated by one or more decision objectives without being invalidated by any decision objective.</p>
-<p>We say that decision alternative <em>x</em> <strong>outranks</strong> decision alternative <em>y</em> <strong>unopposed</strong> when, limited to <strong>each decision objective</strong>:</p>
+<p>When facing a performance tableau involving multiple decision objectives of ordinal importance, the previous robusteness level <strong>+/-3</strong> may lead to distinguishing what we call <strong>unopposed</strong> outranking situations, like the one between alternative <em>p4</em> and <em>p1</em> we have seen in the previous Section (<img class="math" src="_images/math/9ef995da2786edd2994715c24d67517487a75867.png" alt="r(p4 \succsim p1) = +0.78"/>, see <a class="reference internal" href="#stabdenot"><span class="std std-numref">Listing 82</span></a> Line11), namely preferential situations that are more or less validated by all the decision objectives.</p>
+<p>Formally, we say that decision alternative <em>x</em> <strong>outranks</strong> decision alternative <em>y</em> <strong>unopposed</strong> when</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><em>x</em> positively outranks <em>y</em> and we may not observe any <em>considerable counter-performance</em> of <em>x</em> on that decision objective.</p></li>
+<li><p><em>x</em> positively outranks <em>y</em> on one or more decision objective without <em>x</em> being positively outranked by <em>y</em> on any decision objective.</p></li>
 </ul>
 </div></blockquote>
 <p>Dually, we say that decision alternative <em>x</em> <strong>does not outrank</strong> decision alternative <em>y</em> <strong>unopposed</strong> when</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><em>x</em> negatively outranks <em>y</em> and we may not observe any considerable <em>better performance</em> of <em>x</em> on that decision objective.</p></li>
+<li><p><em>x</em> is positively outranked by <em>y</em> on one or more decision objective without <em>x</em> outranking <em>y</em> on any decision objective.</p></li>
 </ul>
 </div></blockquote>
-<p>Let us reconsider, for instance, the previous performance tableau with three decision objectives:</p>
+<p>Let us reconsider, for instance, the previous performance tableau with three decision objectives (see <a class="reference internal" href="#objexample"><span class="std std-numref">Listing 79</span></a>):</p>
 <div class="literal-block-wrapper docutils container" id="unopposed1">
 <div class="code-block-caption"><span class="caption-number">Listing 89 </span><span class="caption-text">Performance tableau with three decision objectives</span><a class="headerlink" href="#unopposed1" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2106,7 +2106,7 @@ confidence level <em>alpha</em> %, if</p>
 <p>We notice in this example three decision objectives of equal importance (see <a class="reference internal" href="#unopposed1"><span class="std std-numref">Listing 89</span></a>). What will be the outranking situations that are positively (resp.  negatively) validated for each one of the decision objectives taken individually ?</p>
 <p>We may obtain such <em>unopposed</em> outranking situtations by operating an <strong>epistemic o-average fusion</strong> (see the <a class="reference internal" href="techDoc.html#digraphsTools.symmetricAverage" title="digraphsTools.symmetricAverage"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphsTools.symmetricAverage</span></code></a> method) of the mariginal outranking digraphs restricted to the coalition of criteria supporting each one of the decision objectives (see <a class="reference internal" href="#unopposed2"><span class="std std-numref">Listing 90</span></a> below).</p>
 <div class="literal-block-wrapper docutils container" id="unopposed2">
-<div class="code-block-caption"><span class="caption-number">Listing 90 </span><span class="caption-text">Unopposed outranking digraph constructor</span><a class="headerlink" href="#unopposed2" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 90 </span><span class="caption-text">Computing unopposed outranking situations</span><a class="headerlink" href="#unopposed2" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2136,23 +2136,23 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">                                     for obj in t.objectives]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">uopg</span> <span class="o">=</span> <span class="n">FusionLDigraph</span><span class="p">([</span><span class="n">geco</span><span class="p">,</span><span class="n">gsoc</span><span class="p">,</span><span class="n">genv</span><span class="p">],</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-average&#39;</span><span class="p">,</span>\
 <span class="go">                          weights=objectiveWeights)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">uopg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
-<span class="go"> * ---- Relation Table -----</span>
-<span class="go"> r(x&gt;y)|  &#39;p1&#39;  &#39;p2&#39;  &#39;p3&#39;  &#39;p4&#39;  &#39;p5&#39;  &#39;p6&#39;  &#39;p7&#39;</span>
-<span class="go"> ------|-------------------------------------------</span>
-<span class="go">  &#39;p1&#39; |  0.00  0.00  0.00 -0.69  0.39  0.11  0.00</span>
-<span class="go">  &#39;p2&#39; |  0.00  0.00  0.83  0.00  0.00  0.00  0.00</span>
-<span class="go">  &#39;p3&#39; |  0.00 -0.33  0.00  0.00  0.50  0.00  0.00</span>
-<span class="go">  &#39;p4&#39; |  0.78  0.00  0.61  0.00  1.00  1.00  0.67</span>
-<span class="go">  &#39;p5&#39; | -0.11  0.00  0.00 -0.89  0.00  0.11  0.00</span>
-<span class="go">  &#39;p6&#39; |  0.00  0.00  0.00 -0.44  0.17  0.00  0.00</span>
-<span class="go">  &#39;p7&#39; |  0.00  0.00  0.00  0.00  0.78  0.42  0.00</span>
-<span class="go"> Valuation domain: [-1.00;1.00]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">uopg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go"> r   |  &#39;p1&#39;   &#39;p2&#39;   &#39;p3&#39;   &#39;p4&#39;   &#39;p5&#39;   &#39;p6&#39;   &#39;p7&#39;</span>
+<span class="go">-----|------------------------------------------------------------</span>
+<span class="go">&#39;p1&#39; |    -   +0.00  +0.00  -0.69  +0.39  +0.11  +0.00</span>
+<span class="go">&#39;p2&#39; | +0.00    -    +0.83  +0.00  +0.00  +0.00  +0.00</span>
+<span class="go">&#39;p3&#39; | +0.00  -0.33    -    +0.00  +0.50  +0.00  +0.00</span>
+<span class="go">&#39;p4&#39; | +0.78  +0.00  +0.61    -    +1.00  +1.00  +0.67</span>
+<span class="go">&#39;p5&#39; | -0.11  +0.00  +0.00  -0.89    -    +0.11  +0.00</span>
+<span class="go">&#39;p6&#39; | +0.00  +0.00  +0.00  -0.44  +0.17    -    +0.00</span>
+<span class="go">&#39;p7&#39; | +0.00  +0.00  +0.00  +0.00  +0.78  +0.42    -</span>
+<span class="go">Valuation domain: [-1.000; 1.000]</span>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Positive (resp. negative) r-characteristic values, like <img class="math" src="_images/math/673a1c651b90cd1a8d30f8116bb1c9aeda07eedc.png" alt="r(p1 \succsim p5) = 0.39"/> (see <a class="reference internal" href="#unopposed2"><span class="std std-numref">Listing 90</span></a> Line 14), show outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective.</p>
-<p>For easily computing this kind of <em>unopposed</em> outranking digraphs, the <a class="reference internal" href="techDoc.html#module-outrankingDigraphs" title="outrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">outrankingDigraphs</span> <span class="pre">module</span></code></a> provides conveniently a corresponding <a class="reference internal" href="techDoc.html#outrankingDigraphs.UnOpposedBipolarOutrankingDigraph" title="outrankingDigraphs.UnOpposedBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.UnOpposedBipolarOutrankingDigraph</span></code></a> constructor.</p>
+<p>Positive (resp. negative) <img class="math" src="_images/math/bdaafcd4d24eb3ad63ff8748325475a2e2e7f1c2.png" alt="r(x \succsim y)"/> characteristic values, like <img class="math" src="_images/math/673a1c651b90cd1a8d30f8116bb1c9aeda07eedc.png" alt="r(p1 \succsim p5) = 0.39"/> (see <a class="reference internal" href="#unopposed2"><span class="std std-numref">Listing 90</span></a> Line 14), show now ony outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective.</p>
+<p>For easily computing this kind of <em>unopposed</em> outranking digraphs, the <a class="reference internal" href="techDoc.html#module-outrankingDigraphs" title="outrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">outrankingDigraphs</span> <span class="pre">module</span></code></a> conveniently provides a corresponding <a class="reference internal" href="techDoc.html#outrankingDigraphs.UnOpposedBipolarOutrankingDigraph" title="outrankingDigraphs.UnOpposedBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.UnOpposedBipolarOutrankingDigraph</span></code></a> constructor.</p>
 <div class="literal-block-wrapper docutils container" id="unopposed3">
 <div class="code-block-caption"><span class="caption-number">Listing 91 </span><span class="caption-text">Unopposed outranking digraph constructor</span><a class="headerlink" href="#unopposed3" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1

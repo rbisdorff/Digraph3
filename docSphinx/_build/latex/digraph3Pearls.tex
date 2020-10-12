@@ -58,7 +58,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{October 10, 2020}
+\date{October 12, 2020}
 \release{3.8-3600+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1930,23 +1930,23 @@ For concluding, let us mention that it is precisely again our bipolar\sphinxhyph
 
 \subsection{Unopposed outranking situations}
 \label{\detokenize{pearls:unopposed-outranking-situations}}
-When facing a performance tableau involving multiple decision objectives of ordinal importance, the previous robusteness level +/\sphinxhyphen{}3 may lead to distinguishing \sphinxstylestrong{unopposed} outranking situations, namely preferential situations that are more or less validated by one or more decision objectives without being invalidated by any decision objective.
+When facing a performance tableau involving multiple decision objectives of ordinal importance, the previous robusteness level \sphinxstylestrong{+/\sphinxhyphen{}3} may lead to distinguishing what we call \sphinxstylestrong{unopposed} outranking situations, like the one between alternative \sphinxstyleemphasis{p4} and \sphinxstyleemphasis{p1} we have seen in the previous Section (\(r(p4 \succsim p1) = +0.78\), see \hyperref[\detokenize{pearls:stabdenot}]{Listing \ref{\detokenize{pearls:stabdenot}}} Line11), namely preferential situations that are more or less validated by all the decision objectives.
 
-We say that decision alternative \sphinxstyleemphasis{x} \sphinxstylestrong{outranks} decision alternative \sphinxstyleemphasis{y} \sphinxstylestrong{unopposed} when, limited to \sphinxstylestrong{each decision objective}:
+Formally, we say that decision alternative \sphinxstyleemphasis{x} \sphinxstylestrong{outranks} decision alternative \sphinxstyleemphasis{y} \sphinxstylestrong{unopposed} when
 \begin{itemize}
 \item {} 
-\sphinxstyleemphasis{x} positively outranks \sphinxstyleemphasis{y} and we may not observe any \sphinxstyleemphasis{considerable counter\sphinxhyphen{}performance} of \sphinxstyleemphasis{x} on that decision objective.
+\sphinxstyleemphasis{x} positively outranks \sphinxstyleemphasis{y} on one or more decision objective without \sphinxstyleemphasis{x} being positively outranked by \sphinxstyleemphasis{y} on any decision objective.
 
 \end{itemize}
 
 Dually, we say that decision alternative \sphinxstyleemphasis{x} \sphinxstylestrong{does not outrank} decision alternative \sphinxstyleemphasis{y} \sphinxstylestrong{unopposed} when
 \begin{itemize}
 \item {} 
-\sphinxstyleemphasis{x} negatively outranks \sphinxstyleemphasis{y} and we may not observe any considerable \sphinxstyleemphasis{better performance} of \sphinxstyleemphasis{x} on that decision objective.
+\sphinxstyleemphasis{x} is positively outranked by \sphinxstyleemphasis{y} on one or more decision objective without \sphinxstyleemphasis{x} outranking \sphinxstyleemphasis{y} on any decision objective.
 
 \end{itemize}
 
-Let us reconsider, for instance, the previous performance tableau with three decision objectives:
+Let us reconsider, for instance, the previous performance tableau with three decision objectives (see \hyperref[\detokenize{pearls:objexample}]{Listing \ref{\detokenize{pearls:objexample}}}):
 \sphinxSetupCaptionForVerbatim{Performance tableau with three decision objectives}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed1}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -1975,7 +1975,7 @@ Let us reconsider, for instance, the previous performance tableau with three dec
 We notice in this example three decision objectives of equal importance (see \hyperref[\detokenize{pearls:unopposed1}]{Listing \ref{\detokenize{pearls:unopposed1}}}). What will be the outranking situations that are positively (resp.  negatively) validated for each one of the decision objectives taken individually ?
 
 We may obtain such \sphinxstyleemphasis{unopposed} outranking situtations by operating an \sphinxstylestrong{epistemic o\sphinxhyphen{}average fusion} (see the \sphinxcode{\sphinxupquote{digraphsTools.symmetricAverage}} method) of the mariginal outranking digraphs restricted to the coalition of criteria supporting each one of the decision objectives (see \hyperref[\detokenize{pearls:unopposed2}]{Listing \ref{\detokenize{pearls:unopposed2}}} below).
-\sphinxSetupCaptionForVerbatim{Unopposed outranking digraph constructor}
+\sphinxSetupCaptionForVerbatim{Computing unopposed outranking situations}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed2}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
@@ -1987,23 +1987,23 @@ We may obtain such \sphinxstyleemphasis{unopposed} outranking situtations by ope
 \PYG{g+go}{                                     for obj in t.objectives]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg} \PYG{o}{=} \PYG{n}{FusionLDigraph}\PYG{p}{(}\PYG{p}{[}\PYG{n}{geco}\PYG{p}{,}\PYG{n}{gsoc}\PYG{p}{,}\PYG{n}{genv}\PYG{p}{]}\PYG{p}{,}\PYG{n}{operator}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{o\PYGZhy{}average}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
 \PYG{g+go}{                          weights=objectiveWeights)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{ r(x\PYGZgt{}y)|  \PYGZsq{}p1\PYGZsq{}  \PYGZsq{}p2\PYGZsq{}  \PYGZsq{}p3\PYGZsq{}  \PYGZsq{}p4\PYGZsq{}  \PYGZsq{}p5\PYGZsq{}  \PYGZsq{}p6\PYGZsq{}  \PYGZsq{}p7\PYGZsq{}}
-\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{  \PYGZsq{}p1\PYGZsq{} |  0.00  0.00  0.00 \PYGZhy{}0.69  0.39  0.11  0.00}
-\PYG{g+go}{  \PYGZsq{}p2\PYGZsq{} |  0.00  0.00  0.83  0.00  0.00  0.00  0.00}
-\PYG{g+go}{  \PYGZsq{}p3\PYGZsq{} |  0.00 \PYGZhy{}0.33  0.00  0.00  0.50  0.00  0.00}
-\PYG{g+go}{  \PYGZsq{}p4\PYGZsq{} |  0.78  0.00  0.61  0.00  1.00  1.00  0.67}
-\PYG{g+go}{  \PYGZsq{}p5\PYGZsq{} | \PYGZhy{}0.11  0.00  0.00 \PYGZhy{}0.89  0.00  0.11  0.00}
-\PYG{g+go}{  \PYGZsq{}p6\PYGZsq{} |  0.00  0.00  0.00 \PYGZhy{}0.44  0.17  0.00  0.00}
-\PYG{g+go}{  \PYGZsq{}p7\PYGZsq{} |  0.00  0.00  0.00  0.00  0.78  0.42  0.00}
-\PYG{g+go}{ Valuation domain: [\PYGZhy{}1.00;1.00]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{n+nb+bp}{False}\PYG{p}{)}
+\PYG{g+go}{* \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{ r   |  \PYGZsq{}p1\PYGZsq{}   \PYGZsq{}p2\PYGZsq{}   \PYGZsq{}p3\PYGZsq{}   \PYGZsq{}p4\PYGZsq{}   \PYGZsq{}p5\PYGZsq{}   \PYGZsq{}p6\PYGZsq{}   \PYGZsq{}p7\PYGZsq{}}
+\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{\PYGZsq{}p1\PYGZsq{} |    \PYGZhy{}   +0.00  +0.00  \PYGZhy{}0.69  +0.39  +0.11  +0.00}
+\PYG{g+go}{\PYGZsq{}p2\PYGZsq{} | +0.00    \PYGZhy{}    +0.83  +0.00  +0.00  +0.00  +0.00}
+\PYG{g+go}{\PYGZsq{}p3\PYGZsq{} | +0.00  \PYGZhy{}0.33    \PYGZhy{}    +0.00  +0.50  +0.00  +0.00}
+\PYG{g+go}{\PYGZsq{}p4\PYGZsq{} | +0.78  +0.00  +0.61    \PYGZhy{}    +1.00  +1.00  +0.67}
+\PYG{g+go}{\PYGZsq{}p5\PYGZsq{} | \PYGZhy{}0.11  +0.00  +0.00  \PYGZhy{}0.89    \PYGZhy{}    +0.11  +0.00}
+\PYG{g+go}{\PYGZsq{}p6\PYGZsq{} | +0.00  +0.00  +0.00  \PYGZhy{}0.44  +0.17    \PYGZhy{}    +0.00}
+\PYG{g+go}{\PYGZsq{}p7\PYGZsq{} | +0.00  +0.00  +0.00  +0.00  +0.78  +0.42    \PYGZhy{}}
+\PYG{g+go}{Valuation domain: [\PYGZhy{}1.000; 1.000]}
 \end{sphinxVerbatim}
 
-Positive (resp. negative) r\sphinxhyphen{}characteristic values, like \(r(p1 \succsim p5) = 0.39\) (see \hyperref[\detokenize{pearls:unopposed2}]{Listing \ref{\detokenize{pearls:unopposed2}}} Line 14), show outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective.
+Positive (resp. negative) \(r(x \succsim y)\) characteristic values, like \(r(p1 \succsim p5) = 0.39\) (see \hyperref[\detokenize{pearls:unopposed2}]{Listing \ref{\detokenize{pearls:unopposed2}}} Line 14), show now ony outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective.
 
-For easily computing this kind of \sphinxstyleemphasis{unopposed} outranking digraphs, the \sphinxcode{\sphinxupquote{outrankingDigraphs module}} provides conveniently a corresponding \sphinxcode{\sphinxupquote{outrankingDigraphs.UnOpposedBipolarOutrankingDigraph}} constructor.
+For easily computing this kind of \sphinxstyleemphasis{unopposed} outranking digraphs, the \sphinxcode{\sphinxupquote{outrankingDigraphs module}} conveniently provides a corresponding \sphinxcode{\sphinxupquote{outrankingDigraphs.UnOpposedBipolarOutrankingDigraph}} constructor.
 \sphinxSetupCaptionForVerbatim{Unopposed outranking digraph constructor}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed3}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
