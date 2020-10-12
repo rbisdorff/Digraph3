@@ -2151,7 +2151,7 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Positive (resp. negative) <img class="math" src="_images/math/bdaafcd4d24eb3ad63ff8748325475a2e2e7f1c2.png" alt="r(x \succsim y)"/> characteristic values, like <img class="math" src="_images/math/673a1c651b90cd1a8d30f8116bb1c9aeda07eedc.png" alt="r(p1 \succsim p5) = 0.39"/> (see <a class="reference internal" href="#unopposed2"><span class="std std-numref">Listing 90</span></a> Line 14), show now ony outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective.</p>
+<p>Positive (resp. negative) <img class="math" src="_images/math/bdaafcd4d24eb3ad63ff8748325475a2e2e7f1c2.png" alt="r(x \succsim y)"/> characteristic values, like <img class="math" src="_images/math/673a1c651b90cd1a8d30f8116bb1c9aeda07eedc.png" alt="r(p1 \succsim p5) = 0.39"/> (see <a class="reference internal" href="#unopposed2"><span class="std std-numref">Listing 90</span></a> Line 14), show now only outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective.</p>
 <p>For easily computing this kind of <em>unopposed</em> outranking digraphs, the <a class="reference internal" href="techDoc.html#module-outrankingDigraphs" title="outrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">outrankingDigraphs</span> <span class="pre">module</span></code></a> conveniently provides a corresponding <a class="reference internal" href="techDoc.html#outrankingDigraphs.UnOpposedBipolarOutrankingDigraph" title="outrankingDigraphs.UnOpposedBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.UnOpposedBipolarOutrankingDigraph</span></code></a> constructor.</p>
 <div class="literal-block-wrapper docutils container" id="unopposed3">
 <div class="code-block-caption"><span class="caption-number">Listing 91 </span><span class="caption-text">Unopposed outranking digraph constructor</span><a class="headerlink" href="#unopposed3" title="Permalink to this code">¶</a></div>
@@ -2189,7 +2189,7 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>We may now verify the unopposed status of the outranking situation observed between alternatives <em>p1</em> and <em>p5</em>.</p>
+<p>We may now, for instance, verify the unopposed status of the outranking situation observed between alternatives <em>p1</em> and <em>p5</em>.</p>
 <div class="literal-block-wrapper docutils container" id="unopposed4">
 <div class="code-block-caption"><span class="caption-number">Listing 92 </span><span class="caption-text">Example of unopposed outranking situation</span><a class="headerlink" href="#unopposed4" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2222,7 +2222,7 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>In <a class="reference internal" href="#unopposed4"><span class="std std-numref">Listing 92</span></a> we may notice that alternative <em>p1</em> does indeed positively outrank alternative <em>p5</em> from the economic perspective (<img class="math" src="_images/math/52d6330fa4b8f2a405695bb03abb73a9fc4154dd.png" alt="r(p1 \succsim_{Eco} p5) = +16/24"/>) as well as from the environmental perspective (<img class="math" src="_images/math/3b4338e950d7c3283bf8d514eef42b30d691fc69.png" alt="r(p1 \succsim_{Env} p5) = +12/24"/>). And, from the societal perspective, both alternatives appear incomparable (<img class="math" src="_images/math/16a329e29693548a82cc2fa41cf1f791184f99cf.png" alt="r(p1 \succsim_{Soc} p5) = 0/24"/>). When fixed proportional criteria significances per objective are given, these outranking situations appear hence <strong>stable</strong> with respect to all possible importance weights we could allocate to the decision objectives.</p>
+<p>In <a class="reference internal" href="#unopposed4"><span class="std std-numref">Listing 92</span></a> we may notice that alternative <em>p1</em> does indeed positively outrank alternative <em>p5</em> from the economic perspective (<img class="math" src="_images/math/52d6330fa4b8f2a405695bb03abb73a9fc4154dd.png" alt="r(p1 \succsim_{Eco} p5) = +16/24"/>) as well as from the environmental perspective (<img class="math" src="_images/math/3b4338e950d7c3283bf8d514eef42b30d691fc69.png" alt="r(p1 \succsim_{Env} p5) = +12/24"/>). Whereas, from the societal perspective, both alternatives appear incomparable (<img class="math" src="_images/math/16a329e29693548a82cc2fa41cf1f791184f99cf.png" alt="r(p1 \succsim_{Soc} p5) = 0/24"/>). When fixed proportional criteria significances per objective are given, these outranking situations appear hence <strong>stable</strong> with respect to all possible importance weights we could allocate to the decision objectives.</p>
 <p>The resulting <em>unopposed</em> outranking digraph keeps in fact 13 (see <a class="reference internal" href="#unopposed3"><span class="std std-numref">Listing 91</span></a> Line 10) out of the 23 positively validated <em>standard</em> outranking situations.</p>
 <p>Let us finally recompute a corresponding <strong>unopposed best choice recommendation</strong>.</p>
 <div class="literal-block-wrapper docutils container" id="unopposed5">
@@ -2265,7 +2265,7 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Our previous <em>robust best choice recommendation</em> remains, in this example here, <strong>stable</strong> (see <a class="reference internal" href="#unopposed5"><span class="std std-numref">Listing 93</span></a> Line 6). We recover indeed the best choice recommendation [‘p2’, ‘p4’], independently of the very importance weight one may eventually allocate to each one of the three decision objectives. Yet, notice that decision alternative <em>p7</em> appears to be at the same time a potential <em>best</em> as well as a potential <em>worst</em> choice recommendation (see Lines 6 and 13).</p>
+<p>Our previous <em>robust best choice recommendation</em> (<em>p2</em> and <em>p4</em>, see <a class="reference internal" href="#robstdstrictog"><span class="std std-numref">Fig. 85</span></a>) remains, in this example here, <strong>stable</strong>. We recover indeed the best choice recommendation [‘p2’, ‘p4’, ‘p7’] (see <a class="reference internal" href="#unopposed5"><span class="std std-numref">Listing 93</span></a> Line 6). Yet, notice that decision alternative <em>p7</em> appears to be at the same time a potential <em>best</em> as well as a potential <em>worst</em> choice recommendation (see Line 13).</p>
 <p>We may visualize this <strong>unopposed robustness</strong> result in <a class="reference internal" href="#unopdigraph"><span class="std std-numref">Fig. 87</span></a> below.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">uopg</span><span class="p">))</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;unopDigraph&#39;</span><span class="p">,</span>\
 <span class="go">                             bestChoice = [&#39;p2&#39;, &#39;p4&#39;],\</span>
@@ -2279,7 +2279,7 @@ confidence level <em>alpha</em> %, if</p>
 <a class="reference internal image-reference" href="_images/unopDigraph.png"><img alt="Standard versus Unopposed Strict Outranking Digraphs" src="_images/unopDigraph.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 87 </span><span class="caption-text">Standard versus <em>unopposed</em> strict outranking digraphs oriented by best and worst choice recommendations</span><a class="headerlink" href="#unopdigraph" title="Permalink to this image">¶</a></p>
 </div>
-<p>Let us finally remark that in a social choice context, where our objectives would match different political coalitions, our unopposed best choice recommendations represent in fact general multipartisan supported choices.</p>
+<p>Let us finally remark that in a social choice context, where our objectives would match different political coalitions, our unopposed best choice recommendations represent in fact <strong>robust multipartisan consensus choices</strong>.</p>
 <p>Back to <a class="reference internal" href="#pearls-label"><span class="std std-ref">Content Table</span></a></p>
 </div>
 </div>
