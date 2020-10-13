@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  13 OCT 2020 12:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  13 OCT 2020 13:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -892,25 +892,17 @@ Underfull \vbox (badness 10000) detected at line 3260
 Overfull \vbox (1.33827pt too high) detected at line 3303
  []
 
-[81]
-Underfull \hbox (badness 5374) in paragraph at lines 3335--3337
-[]\T1/cmr/bx/n/12 Warning:  \T1/cmr/m/n/12 These cythonized mod-ules, specif-i-
-cally de-signed for be-ing
- []
-
-
-Underfull \hbox (badness 6675) in paragraph at lines 3335--3337
-\T1/cmr/m/n/12 run on HPC clus-ters (see [][]$https : / / hpc . uni . lu$[][]),
- re-quire the \T1/cmr/m/it/12 fork-ing \T1/cmr/m/n/12 start
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 3335--3337
+[81] [82]
+Underfull \hbox (badness 10000) in paragraph at lines 3362--3364
 \T1/cmr/m/n/12 (https://docs.python.org/3/library/multiprocessing.html#contexts
 -and-start-
  []
 
-[82] [83]
+
+Overfull \vbox (1.66432pt too high) detected at line 3417
+ []
+
+[83]
 Overfull \vbox (3.24768pt too high) detected at line 3465
  []
 
@@ -1430,7 +1422,7 @@ e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on digraph3Tutorial.pdf (180 pages, 3683062 bytes).
+Output written on digraph3Tutorial.pdf (180 pages, 3683097 bytes).
 PDF statistics:
  3538 PDF objects out of 3580 (max. 8388607)
  2216 compressed objects within 23 object streams

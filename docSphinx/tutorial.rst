@@ -3003,10 +3003,6 @@ HPC ranking with big outranking digraphs
 	:depth: 1
 	:local:
 
-.. warning::
-
-   These cythonized modules, specifically designed for being run on HPC clusters (see https://hpc.uni.lu), require the *forking* start method of subprocesses (see start methods of the `multiprocessing module <https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods>`_ and therefore, due to problems under Mac OS may only run on Linux nachines. 
-
 C-compiled Python modules
 .........................
 
@@ -3021,6 +3017,9 @@ Four cythonized Digraph3 modules, prefixed with the letter *c* and taking a *pyx
 
 Their automatic compilation and installation, alongside the standard Digraph3 python3 modules, requires the *cython* compiler [6]_ ( ...$ pip3 install cython ) and a C compiler (...$ sudo apt install gcc on Ubuntu).
 
+.. warning::
+
+   These cythonized modules, specifically designed for being run on HPC clusters (see https://hpc.uni.lu), require the Unix *forking* start method of subprocesses (see start methods of the `multiprocessing module <https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods>`_)  and therefore, due to forking problems on Mac OS platforms, may only operate safely on Linux platforms. 
 
 Big Data performance tableaux
 .............................

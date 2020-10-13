@@ -3332,10 +3332,6 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \end{itemize}
 \end{sphinxShadowBox}
 
-\begin{sphinxadmonition}{warning}{Warning:}
-These cythonized modules, specifically designed for being run on HPC clusters (see \sphinxurl{https://hpc.uni.lu}), require the \sphinxstyleemphasis{forking} start method of subprocesses (see start methods of the \sphinxhref{https://docs.python.org/3/library/multiprocessing.html\#contexts-and-start-methods}{multiprocessing module} (https://docs.python.org/3/library/multiprocessing.html\#contexts\sphinxhyphen{}and\sphinxhyphen{}start\sphinxhyphen{}methods) and therefore, due to problems under Mac OS may only run on Linux nachines.
-\end{sphinxadmonition}
-
 
 \subsection{C\sphinxhyphen{}compiled Python modules}
 \label{\detokenize{tutorial:c-compiled-python-modules}}
@@ -3362,6 +3358,10 @@ Four cythonized Digraph3 modules, prefixed with the letter \sphinxstyleemphasis{
 \end{itemize}
 
 Their automatic compilation and installation, alongside the standard Digraph3 python3 modules, requires the \sphinxstyleemphasis{cython} compiler \sphinxfootnotemark[6] ( …\$ pip3 install cython ) and a C compiler (…\$ sudo apt install gcc on Ubuntu).
+
+\begin{sphinxadmonition}{warning}{Warning:}
+These cythonized modules, specifically designed for being run on HPC clusters (see \sphinxurl{https://hpc.uni.lu}), require the Unix \sphinxstyleemphasis{forking} start method of subprocesses (see start methods of the \sphinxhref{https://docs.python.org/3/library/multiprocessing.html\#contexts-and-start-methods}{multiprocessing module} (https://docs.python.org/3/library/multiprocessing.html\#contexts\sphinxhyphen{}and\sphinxhyphen{}start\sphinxhyphen{}methods))  and therefore, due to forking problems on Mac OS platforms, may only operate safely on Linux platforms.
+\end{sphinxadmonition}
 
 
 \subsection{Big Data performance tableaux}
