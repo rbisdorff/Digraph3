@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{October 12, 2020}
+\date{October 13, 2020}
 \release{3.8-3600+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -3331,6 +3331,10 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 \end{itemize}
 \end{sphinxShadowBox}
+
+\begin{sphinxadmonition}{warning}{Warning:}
+These cythonized modules, specifically designed for being run on HPC clusters (see \sphinxurl{https://hpc.uni.lu}), require the \sphinxstyleemphasis{forking} start method of subprocesses (see start methods of the \sphinxhref{https://docs.python.org/3/library/multiprocessing.html\#contexts-and-start-methods}{multiprocessing module} (https://docs.python.org/3/library/multiprocessing.html\#contexts\sphinxhyphen{}and\sphinxhyphen{}start\sphinxhyphen{}methods) and therefore, due to problems under Mac OS may only run on Linux nachines.
+\end{sphinxadmonition}
 
 
 \subsection{C\sphinxhyphen{}compiled Python modules}

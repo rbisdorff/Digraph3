@@ -3003,6 +3003,10 @@ HPC ranking with big outranking digraphs
 	:depth: 1
 	:local:
 
+.. warning::
+
+   These cythonized modules, specifically designed for being run on HPC clusters (see https://hpc.uni.lu), require the *forking* start method of subprocesses (see start methods of the `multiprocessing module <https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods>`_ and therefore, due to problems under Mac OS may only run on Linux nachines. 
+
 C-compiled Python modules
 .........................
 
