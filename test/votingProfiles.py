@@ -222,6 +222,38 @@ class LinearVotingProfile(VotingProfile):
             self.name = str(fileVotingProfile)
             self.candidates = argDict['candidates']
             self.voters = argDict['voters']
+            try:
+                self.seed = argDict('seed')
+            except:
+                pass
+            try:
+                self.withPolls = argDict('WithPolls')
+            except:
+                self.WithPolls = False
+            try:
+                self.RandomWeights = argDict('RandomWeights')
+            except:
+                pass
+            try:
+                self.sumWeights = argDict('sumWeights')
+            except:
+                pass
+            try:
+                self.poll1 = argDict('poll1')
+            except:
+                pass
+            try:
+                self.poll2 = argDict('poll2')
+            except:
+                pass
+            try:
+                self.other = argDict('other')
+            except:
+                pass
+            try:
+                self.partyRepartition = argDict('partyRepartition')
+            except:
+                pass
             self.linearBallot = argDict['linearBallot']
             self.ballot = self.computeBallot()
         else:
@@ -508,12 +540,33 @@ class LinearVotingProfile(VotingProfile):
                 fo.write('\'%s\': %s,\n' % (it,repr(self.candidates[x][it])) )
             fo.write('}),\n')
         fo.write('])\n')
-        # no objectives
-        fo.write('objectives = OrderedDict()\n')            
+        # writing objectives if WithPolls
+        if self.WithPolls:
+            fo.write('objectives = OrderedDict([\n')
+            p0 = [v for v in self.voters if self.voters[v]['party'] == 0]
+            p1 = [v for v in self.voters if self.voters[v]['party'] == 1]
+            p2 = [v for v in self.voters if self.voters[v]['party'] == 2]
+            n0 = len(p0)
+            n1 = len(p1)
+            n2 = len(p2)          
+            fo.write('(\'party0\',{\'name\':\'other\',\n')
+            fo.write('\'weight\': %.2f,\n' % Decimal(str(n0)) )
+            fo.write('\'criteria\': %s }),\n' % p0)
+            fo.write('(\'party1\',{\'name\':\'party 1\',\n')
+            fo.write('\'weight\': %.2f,\n' % Decimal(str(n1)) )
+            fo.write('\'criteria\': %s }),\n' % p1)
+            fo.write('(\'party2\',{\'name\':\'party 2\',\n')
+            fo.write('\'weight\': %.2f,\n' % Decimal(str(n2)) )
+            fo.write('\'criteria\': %s }),\n' % p2)
+            fo.write('])\n')
+        else:
+            fo.write('objectives = OrderedDict()\n')  
         # criteria
-        fo.write('criteria = OrderedDict([\n') 
+        if self.WithPolls:
+            _NegativeWeights = False
+        fo.write('criteria = OrderedDict([\n')
         for g in self.voters:
-            fo.write('(\'%s\', {\n' % str(g))
+            fo.write('(\'%s\', {\'name\': \'%s\',\n' % (str(g),str(g)) )
             for it in self.voters[g].keys():
                 if it == 'weight':
                     if _NegativeWeights:
@@ -1047,14 +1100,15 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         self.seed = seed
         self.candidates = candidates
         self.voters = voters
+        self.WithPolls = WithPolls
         self.RandomWeights = RandomWeights
         self.sumWeights = Decimal('0')
         for v in self.voters:
             self.sumWeights += self.voters[v]['weight']
         if WithPolls:
             self.linearBallot =\
-                self.generateRandomLinearBallotWithPoll(partyRepartition=partyRepartition,
-                                                        other=other,seed=seed)
+                self.generateRandomLinearBallotWithPoll(\
+                        partyRepartition,other,seed=seed)
         else:
             self.linearBallot = self.generateRandomLinearBallot(seed)
         self.ballot = self.computeBallot()
@@ -1076,7 +1130,8 @@ class RandomLinearVotingProfile(LinearVotingProfile):
             linearBallot[v] = candidatesList.copy()
         return linearBallot
 
-    def generateRandomLinearBallotWithPoll(self,partyRepartition=0.5,other=0.05,seed=None,Debug=False):
+    def generateRandomLinearBallotWithPoll(self,partyRepartition,\
+                                           other,seed=None,Debug=False):
         """
         Renders a random linear ballot in accordance with the given polls:
         self.poll1 and self.poll2.
@@ -1780,7 +1835,15 @@ if __name__ == "__main__":
                             #seed=0.8077233289616987)  # 2 circuits !
                             seed = None)
 ##    ## lvp = LinearVotingProfile('templinearprofile')
-##    lvp.save()
+    lvp.save('test')
+    lvp1 = LinearVotingProfile('test')
+    lvp.save2PerfTab()
+    from outrankingDigraphs import *
+    t = PerformanceTableau('votingPerfTab')
+    g = BipolarOutrankingDigraph(t)
+    g.showRelationTable()
+    uog = UnOpposedBipolarOutrankingDigraph(t)
+    uog.showRelationTable()
 ##    lvp1 = LinearVotingProfile('templinearprofile')
 ##    lvp1 = LinearVotingProfile('example1')
 ##    lvp1.computeBallot()
@@ -1797,31 +1860,31 @@ if __name__ == "__main__":
 ##    t = PerformanceTableau('votingPerfTab')
 ##    #t.showHTMLPerformanceHeatmap(Transposed=True,Correlations=True,ndigits=0)
 ##    #lvp.showHTMLVotingHeatmap(Correlations=True)
-    c = CondorcetDigraph(lvp)
-    #c.recodeValuation()
-    c.showRelationTable()
+    # c = CondorcetDigraph(lvp)
+    # #c.recodeValuation()
+    # c.showRelationTable()
 ##    (~(-c)).showRelationTable()
-    print(c.computeCopelandRanking(Debug=False))
-    print(c.computeNetFlowsRanking(Debug=False))
-    lvp.showRandomPolls()
-    print(c.computeTransitivityDegree())
-    c.computeChordlessCircuits()
-    c.showChordlessCircuits()
-    if c.chordlessCircuits != []:
-        #MP = True
-        c.recodeValuation()
-        wc = WeakCopelandOrder(c)
-        print('Weak Copeland ranking')
-        wc.showRankingByChoosing()
-        corr = c.computeRankingCorrelation(wc.copelandRanking)
-        wc.showCorrelation(corr)
-        wn = WeakNetFlowsOrder(c)
-        print('Weak NetFlows ranking')
-        wn.showRankingByChoosing()
-        corr = c.computeRankingCorrelation(wn.netFlowsRanking)
-        wn.showCorrelation(corr)
-        lvp.showRandomPolls()
-        print(lvp.seed)
+    # print(c.computeCopelandRanking(Debug=False))
+    # print(c.computeNetFlowsRanking(Debug=False))
+    # lvp.showRandomPolls()
+    # print(c.computeTransitivityDegree())
+    # c.computeChordlessCircuits()
+    # c.showChordlessCircuits()
+    # if c.chordlessCircuits != []:
+    #     #MP = True
+    #     c.recodeValuation()
+    #     wc = WeakCopelandOrder(c)
+    #     print('Weak Copeland ranking')
+    #     wc.showRankingByChoosing()
+    #     corr = c.computeRankingCorrelation(wc.copelandRanking)
+    #     wc.showCorrelation(corr)
+    #     wn = WeakNetFlowsOrder(c)
+    #     print('Weak NetFlows ranking')
+    #     wn.showRankingByChoosing()
+    #     corr = c.computeRankingCorrelation(wn.netFlowsRanking)
+    #     wn.showCorrelation(corr)
+    #     lvp.showRandomPolls()
+    #     print(lvp.seed)
 
 ##    from linearOrders import NetFlowsOrder
 ##    nf = NetFlowsOrder(c,Debug=True)

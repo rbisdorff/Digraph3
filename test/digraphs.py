@@ -10393,7 +10393,7 @@ class FusionLDigraph(Digraph):
 
     Parameter:
 
-        * operator := "o-max" (default) | "o-min" | "0-average:
+        * operator := "o-max" (default) | "o-min" | "o-average:
           epistemic disjunctive, conjunctive or symmetric average fusion.
         * weights := [a,b, ...]: len(weights) matching len(L).
           If None, weights = [1 for i in range(len(L))].
