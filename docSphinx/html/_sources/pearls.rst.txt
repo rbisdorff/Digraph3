@@ -1866,12 +1866,12 @@ We may visualise the corresponding bipolar-valued relation table by orienting th
 .. Figure:: unOpposedOutrankings.png
    :name: unOpposedOutrankings
    :alt: Relation table of unopposed outrankings
-   :width: 400 px
+   :width: 600 px
    :align: center
 
    Relation table of multipartisan outranking digraph
 
-In :numref:`unOpposedOutrankings`, we may notice the the dominating outranking prekernel **['a11', 'a06', 'a13', 'a15']** gathers in fact a **multipartisan selection** of potential election winners. It is worthwhile noticing in :numref:`unOpposedOutrankings` btw that the majority margins obtained from a linear voting profile do verify the zero-sum rule (:math:`r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0`). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.
+In :numref:`unOpposedOutrankings`, we may notice the the dominating outranking prekernel **['a06', 'a11', 'a13', 'a15']** gathers in fact a **multipartisan selection** of potential election winners. It is worthwhile noticing in :numref:`unOpposedOutrankings` btw that the majority margins obtained from a linear voting profile do verify the zero-sum rule (:math:`r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0`). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.
 
 When restricting now, in a secondary election stage, the set of potential election winners to this dominating prekernel, we may compute the actual best social choice.
 
@@ -1896,14 +1896,6 @@ When restricting now, in a secondary election stage, the set of potential electi
       covering (%)        : 100.00
       determinateness (%) : 55.10
       - most credible action(s) = { 'a06': 0.10, }
-     === >> potential worst choice(s) 
-     choice              : ['a15']
-      independence        : 1.00
-      dominance           : -0.52
-      absorbency          : 0.19
-      covered (%)         : 100.00
-      determinateness (%) : 59.30
-      - most credible action(s) = { 'a15': 0.19, }
    >>> g.computeCopelandRanking()
     ['a06', 'a11', 'a13', 'a15']
 
@@ -1928,9 +1920,10 @@ We may eventually check that candidate *a06* represents effectively the *simple 
 
 Back to :ref:`Content Table <Pearls-label>`
 
-
-Bibliography
-------------
+.. only:: html
+   
+    Bibliography
+    ------------
 	  
 .. [BIS-2015p] Bisdorff R. (2015). "The EURO 2004 Best Poster Award: Choosing the Best Poster in a Scientific Conference". Chapter 5 in R. Bisdorff, L. Dias, P. Meyer, V. Mousseau, and M. Pirlot (Eds.), *Evaluation and Decision Models with Multiple Criteria: Case Studies*. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, DOI 10.1007/978-3-662-46816-6_1, pp. 117-166 (downloadable `PDF file 754.7 kB <http://hdl.handle.net/10993/23714>`_).
 	       
