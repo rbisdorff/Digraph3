@@ -370,6 +370,11 @@ INPUT ./unopDigraph.png
 INPUT ./unopDigraph.png
 INPUT unopDigraph.png
 INPUT ./unopDigraph.png
+INPUT unOpposedOutrankings.png
+INPUT ./unOpposedOutrankings.png
+INPUT ./unOpposedOutrankings.png
+INPUT unOpposedOutrankings.png
+INPUT ./unOpposedOutrankings.png
 INPUT digraph3Pearls.ind
 INPUT digraph3Pearls.ind
 INPUT digraph3Pearls.aux

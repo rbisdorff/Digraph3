@@ -1877,6 +1877,8 @@
                             <span class="c1">#seed=0.8077233289616987)  # 2 circuits !</span>
                             <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 <span class="c1">##    ## lvp = LinearVotingProfile(&#39;templinearprofile&#39;)</span>
+    <span class="n">lvp</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+    <span class="n">lvp1</span> <span class="o">=</span> <span class="n">LinearVotingProfile</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
     <span class="n">lvp</span><span class="o">.</span><span class="n">save2PerfTab</span><span class="p">()</span>
     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">)</span>

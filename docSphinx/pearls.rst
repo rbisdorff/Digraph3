@@ -1538,10 +1538,21 @@ As the inital prekernel is here validated at stability level +2, recommending al
 For concluding, let us mention that it is precisely again our bipolar-valued *logical characteristic framework* that provides us here with a **first order distributional dominance** test for effectively qualifying the stability level 2 *robustness* of an outranking digraph when facing performance tableaux with criteria of only ordinal-valued significances. A real world application of our stability analysis with such a kind of performance tableau may be consulted in [BIS-2015p]_.
 
 
-Unopposed outranking situations
-...............................
+.. _UnOpposed-Outranking-Tutorial-label:
 
-When facing a performance tableau involving multiple decision objectives of ordinal importance, the previous robusteness level **+/-3** may lead to distinguishing what we call **unopposed** outranking situations, like the one between alternative *p4* and *p1* we have seen in the previous Section (:math:`r(p4 \succsim p1) = +0.78`, see :numref:`stabDenot` Line11), namely preferential situations that are more or less validated by all the decision objectives.  
+
+On unopposed multiobjective outranking digraphs
+-----------------------------------------------
+
+.. contents:: 
+	:depth: 1
+	:local:
+
+When facing a performance tableau involving multiple decision objectives, the robusteness level **+/-3**, introduced in the previous Section, may lead to distinguishing what we call **unopposed** outranking situations, like the one shown between alternative *p4* and *p1* (:math:`r(p4 \succsim p1) = +0.78`, see :numref:`stabDenot` Line11), namely preferential situations that are more or less validated by all the decision objectives.  
+
+
+Characterising unopposed multiobjective outranking situations
+.............................................................
 
 Formally, we say that decision alternative *x* **outranks** decision alternative *y* **unopposed** when
 
@@ -1581,7 +1592,7 @@ Let us reconsider, for instance, the previous performance tableau with three dec
 
 We notice in this example three decision objectives of equal importance (see :numref:`unOpposed1`). What will be the outranking situations that are positively (resp.  negatively) validated for each one of the decision objectives taken individually ?
 
-We may obtain such *unopposed* outranking situtations by operating an **epistemic o-average fusion** (see the :py:func:`digraphsTools.symmetricAverage <digraphsTools.symmetricAverage>` method) of the mariginal outranking digraphs restricted to the coalition of criteria supporting each one of the decision objectives (see :numref:`unOpposed2` below).
+We may obtain such *unopposed multiobjective* outranking situtations by operating an **epistemic o-average fusion** (see the :py:func:`digraphsTools.symmetricAverage <digraphsTools.symmetricAverage>` method) of the mariginal outranking digraphs restricted to the coalition of criteria supporting each one of the decision objectives (see :numref:`unOpposed2` below).
 
 .. code-block:: pycon
    :linenos:
@@ -1610,9 +1621,9 @@ We may obtain such *unopposed* outranking situtations by operating an **epistemi
    'p7' | +0.00  +0.00  +0.00  +0.00  +0.78  +0.42    -   
    Valuation domain: [-1.000; 1.000]
 
-Positive (resp. negative) :math:`r(x \succsim y)` characteristic values, like :math:`r(p1 \succsim p5) = 0.39` (see :numref:`unOpposed2` Line 14), show now only outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective.
+Positive (resp. negative) :math:`r(x \succsim y)` characteristic values, like :math:`r(p1 \succsim p5) = 0.39` (see :numref:`unOpposed2` Line 14), show hence only outranking situations being validated (resp. invalidated) by one or more decision objectives without being invalidated (resp. validated) by any other decision objective.
 
-For easily computing this kind of *unopposed* outranking digraphs, the :py:mod:`outrankingDigraphs module <outrankingDigraphs>` conveniently provides a corresponding :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph` constructor.
+For easily computing this kind of *unopposed multiobjective* outranking digraphs, the :py:mod:`outrankingDigraphs module <outrankingDigraphs>` conveniently provides a corresponding :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph` constructor.
 
 .. code-block:: pycon
    :linenos:
@@ -1640,7 +1651,7 @@ We may now, for instance, verify the unopposed status of the outranking situatio
 
 .. code-block:: pycon
    :linenos:
-   :caption: Example of unopposed outranking situation
+   :caption: Example of unopposed multiobjective outranking situation
    :name: unOpposed4
 	  
    >>> uopg.showPairwiseComparison('p1','p5')
@@ -1662,15 +1673,18 @@ In :numref:`unOpposed4` we may notice that alternative *p1* does indeed positive
 
 The resulting *unopposed* outranking digraph keeps in fact 13 (see :numref:`unOpposed3` Line 10) out of the 23 positively validated *standard* outranking situations.
 
-Let us finally recompute a corresponding **unopposed best choice recommendation**.
+Unopposed best multiobjective choice recommendations
+....................................................
+
+Let us compute now *best choice recommendations* from such an unopposed multiobjective outranking digraph.
 
 .. code-block:: pycon
    :linenos:
-   :caption: Unopposed best choice recommendation
+   :caption: Unopposed multiobjective best choice recommendation
    :name: unOpposed5
 
    >>> uopg.showBestChoiceRecommendation()
-    Rubis best choice recommendation(s) (BCR)
+    Best choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   
     Credibility domain: [-1.00,1.00]
      === >> potential best choice(s)
@@ -1709,11 +1723,207 @@ We may visualize this **unopposed robustness** result in :numref:`unopDigraph` b
 
 Let us finally remark that in a social choice context, where decision objectives would match different political parties, our unopposed best choice recommendations represent in fact **robust multipartisan consensus choices**.
 
+Two-stage elections with unopposed primary selection
+....................................................
+
+We shall illustrate this point with a voting profile we discuss in the tutorial on `generating random linear voting profiles <LinearVoting-Tutorial-label>`_.
+
+.. code-block:: pycon
+   :name: Example3PartiesVotingProfile
+   :caption: Example of a 3 parties voting profile 	  
+   :linenos:
+
+   >>> from votingProfiles import RandomLinearVotingProfile
+   >>> lvp = RandomLinearVotingProfile(numberOfCandidates=15,
+                               numberOfVoters=1000,
+                               WithPolls=True,
+                               partyRepartition=0.5,
+                               other=0.1,
+                               seed=0.9189670954954139)
+   >>> lvp
+    *------- VotingProfile instance description ------*
+    Instance class   : RandomLinearVotingProfile
+    Instance name    : randLinearProfile
+    # Candidates     : 15
+    # Voters         : 1000
+    Attributes       : ['name', 'seed', 'candidates',
+                        'voters', 'WithPolls', 'RandomWeights',
+			'sumWeights', 'poll1', 'poll2',
+			'other', partyRepartition,
+			'linearBallot', 'ballot']
+   >>> lvp.showRandomPolls()
+    Random repartition of voters
+     Party_1 supporters : 460 (46.0%)
+     Party_2 supporters : 436 (43.6%)
+     Other voters       : 104 (10.4%)
+    *---------------- random polls ---------------
+     Party_1(46.0%) | Party_2(43.6%)|  expected  
+    -----------------------------------------------
+      a06 : 19.91%  | a11 : 22.94%  | a06 : 15.00%
+      a07 : 14.27%  | a08 : 15.65%  | a11 : 13.08%
+      a03 : 10.02%  | a04 : 15.07%  | a08 : 09.01%
+      a13 : 08.39%  | a06 : 13.40%  | a07 : 08.79%
+      a15 : 08.39%  | a03 : 06.49%  | a03 : 07.44%
+      a11 : 06.70%  | a09 : 05.63%  | a04 : 07.11%
+      a01 : 06.17%  | a07 : 05.10%  | a01 : 05.06%
+      a12 : 04.81%  | a01 : 05.09%  | a13 : 05.04%
+      a08 : 04.75%  | a12 : 03.43%  | a15 : 04.23%
+      a10 : 04.66%  | a13 : 02.71%  | a12 : 03.71%
+      a14 : 04.42%  | a14 : 02.70%  | a14 : 03.21%
+      a05 : 04.01%  | a15 : 00.86%  | a09 : 03.10%
+      a09 : 01.40%  | a10 : 00.44%  | a10 : 02.34%
+      a04 : 01.18%  | a05 : 00.29%  | a05 : 01.97%
+      a02 : 00.90%  | a02 : 00.21%  | a02 : 00.51%
+
+In this example (see :numref:`linearVotingProfileWithPolls` Lines 18-), we obtained 460 Party_1 supporters (46%), 436 Party_2 supporters (43.6%) and 104 other voters (10.4%). Favorite candidates of *Party_1* supporters, with more than 10%, appeared to be *a06* (19.91%), *a07* (14.27%) and *a03* (10.02%). Whereas for *Party_2* supporters, favorite candidates appeared to be *a11* (22.94%), followed by *a08* (15.65%), *a04* (15.07%) and *a06* (13.4%).
+
+We may convert this linear voting profile into a PerformanceTableau object where each party corresponds to decision objective.
+
+.. code-block:: pycon
+   :name: ConvertVotingProfile2PerfTab
+   :caption: Converting a voting profile into a performance tableau 	  
+   :linenos:
+
+   >>> lvp.save2PerfTab('votingPerfTab')
+   >>> from perfTabs import PerformanceTableau
+   >>> vpt = PerformanceTableau('votingPerfTab')
+   >>> vpt
+    *------- PerformanceTableau instance description ------*
+     Instance class   : PerformanceTableau
+     Instance name    : votingPerfTab
+     # Actions        : 15
+     # Objectives     : 3
+     # Criteria       : 1000
+     Attributes       : ['name', 'actions', 'objectives',
+                         'criteria', 'weightPreorder', 'evaluation']
+   >>> vpt.objectives
+   OrderedDict([
+    ('party0', {'name': 'other', 'weight': Decimal('104'),
+     'criteria': ['v0003', 'v0008', 'v0011', ... ']}),
+    ('party1', {'name': 'party 1', 'weight': Decimal('460'),
+     'criteria': ['v0002', 'v0006', 'v0007', ...]}),
+    ('party2', {'name': 'party 2', 'weight': Decimal('436'),
+      'criteria': ['v0001', 'v0004', 'v0005', ... ]})
+    ])
+
+In :numref:`ConvertVotingProfile2PerfTab` we first store the linear voting in a :py:class:`perfTabs.PerformanceTableau` format (se Line 1). In Line 3, we reload this performance tableau data. The three parties of the linear voting profile represent three decision objectives and the voters are distributed as performance criteria according to the party they support.
+
+In order to make now a **primary multipartisan selection** of potential election winners, we compute the corresponding *unopposed multiobjective outranking* digraph.
+
+.. code-block:: pycon
+   :name: ComputingUnOpposedVotingResult
+   :caption: Computing unopposed multiobjective outranking situations 	  
+   :linenos:
+
+   >>> from outrankingDigraphs import \
+             UnOpposedBipolarOutrankingDigraph
+   >>> uog = UnOpposedBipolarOutrankingDigraph(vpt)
+   >>> uog
+    *------- Object instance description ------*
+     Instance class      : UnOpposedBipolarOutrankingDigraph
+     Instance name       : unopposed_outrankings
+     # Actions           : 15
+     # Criteria          : 1000
+     Size                : 34
+     Determinateness (%) : 57.61
+     Valuation domain    : [-1.00;1.00]
+     Attributes          : ['name', 'actions', 'valuationdomain',
+                            'objectives', 'criteria', 'methodData',
+			    'evaluation', 'order', 'runTimes', '
+			    relation', 'marginalRelationsRelations',
+			    'gamma', 'notGamma']
+
+From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situtaion. 
+
+We may visualise the corresponding bipolar-valued relation table by orienting the list of candidates with the help of the *inital* and the *terminal prekernels*.
+
+.. code-block:: pycon
+   :name: VisualisingUnOpposedOutrankings
+   :caption: Visualising the unopposed outranking relation 	  
+   :linenos:
+  
+   >>> uog.showPrekernels()
+    *--- Computing preKernels ---*
+    Dominant preKernels :
+    ['a11', 'a06', 'a13', 'a15']
+       independence :  0.0
+       dominance    :  0.1760000000000000000000000
+       absorbency   :  -0.6580000000000000000000000
+       covering     :  0.432
+    Absorbent preKernels :
+    ['a02', 'a04', 'a14', 'a03']
+       independence :  0.0
+       dominance    :  0.0
+       absorbency   :  0.3680000000000000000000000
+       covered      :  0.455
+   >>> orientedCandidatesList = ['a06','a11','a13','a15',
+                      'a01','a05','a07','a08','a09','a10','a12',
+                      'a02','a03','a04','a14']
+   >>> uog.showHTMLRelationTable(
+                tableTitle='Unopposed threepartisan outrankings')
+
+
+.. Figure:: unOpposedOutrankings.png
+   :name: unOpposedOutrankings
+   :alt: Relation table of unopposed outrankings
+   :width: 600 px
+   :align: center
+
+   Relation table of multipartisan outranking digraph
+
+In :numref:`unOpposedOutrankings`, we may notice the the dominating outranking prekernel **['a06', 'a11', 'a13', 'a15']** gathers in fact a **multipartisan selection** of potential election winners. It is worthwhile noticing in :numref:`unOpposedOutrankings` btw that the majority margins obtained from a linear voting profile do verify the zero-sum rule (:math:`r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0`). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.
+
+When restricting now, in a secondary election stage, the set of potential election winners to this dominating prekernel, we may compute the actual best social choice.
+
+.. code-block:: pycon
+   :name: bestChoiceRecommendation
+   :caption: Secondary election winner recommendation 	  
+   :linenos:
+
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
+   >>> g = BipolarOutrankingDigraph(vpt,\
+                      actionsSubset=['a06','a11','a13','a15'])
+   >>> g.showBestChoiceRecommendation()
+    ***********************
+    Best choice recommendation(s) (BCR)
+     (in decreasing order of determinateness)   
+    Credibility domain: [-1.00,1.00]
+     === >> potential best choice(s)
+     choice              : ['a06']
+      independence        : 1.00
+      dominance           : 0.10
+      absorbency          : -0.52
+      covering (%)        : 100.00
+      determinateness (%) : 55.10
+      - most credible action(s) = { 'a06': 0.10, }
+   >>> g.computeCopelandRanking()
+    ['a06', 'a11', 'a13', 'a15']
+
+We may eventually check that candidate *a06* represents effectively the *simple majority* winner, the *instant-run-off* winner, the *Borda*, as well as the *Condorcet winner* of the initially given linear voting profile *lvp* (see :numref:`Example3PartiesVotingProfile`).
+
+.. code-block:: pycon
+   :name: verificationBestChoice
+   :caption: Secondary election winner recommendation verification 	  
+   :linenos:
+
+   >>> lvp.computeSimpleMajorityWinner()
+    ['a06']
+   >>> lvp.computeInstantRunoffWinner()
+    ['a06']
+   >>> lvp.computeBordaWinners()
+    ['a06']
+   >>> from votingProfiles import CondorcetDigraph
+   >>> cd = CondorcetDigraph(lvp)
+   >>> cd.condorcetWinners()
+    ['a06']
+
+
 Back to :ref:`Content Table <Pearls-label>`
 
-
-Bibliography
-------------
+.. only:: html
+   
+    Bibliography
+    ------------
 	  
 .. [BIS-2015p] Bisdorff R. (2015). "The EURO 2004 Best Poster Award: Choosing the Best Poster in a Scientific Conference". Chapter 5 in R. Bisdorff, L. Dias, P. Meyer, V. Mousseau, and M. Pirlot (Eds.), *Evaluation and Decision Models with Multiple Criteria: Case Studies*. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, DOI 10.1007/978-3-662-46816-6_1, pp. 117-166 (downloadable `PDF file 754.7 kB <http://hdl.handle.net/10993/23714>`_).
 	       
