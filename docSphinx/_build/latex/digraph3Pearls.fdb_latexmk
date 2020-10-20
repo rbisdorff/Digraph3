@@ -1,10 +1,10 @@
 # Fdb version 3
-["makeindex digraph3Pearls.idx"] 1591701136 "digraph3Pearls.idx" "digraph3Pearls.ind" "digraph3Pearls" 1603111863
-  "digraph3Pearls.idx" 1603111862 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex digraph3Pearls.idx"] 1591701136 "digraph3Pearls.idx" "digraph3Pearls.ind" "digraph3Pearls" 1603190694
+  "digraph3Pearls.idx" 1603190692 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
-  "digraph3Pearls.ind"
   "digraph3Pearls.ilg"
-["pdflatex"] 1603111862 "digraph3Pearls.tex" "digraph3Pearls.pdf" "digraph3Pearls" 1603111863
+  "digraph3Pearls.ind"
+["pdflatex"] 1603190692 "digraph3Pearls.tex" "digraph3Pearls.pdf" "digraph3Pearls" 1603190694
   "/etc/texmf/web2c/texmf.cnf" 1587900120 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1587973237 31928 b6a0d95e5aac173e646f5786657faf1e ""
   "/home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk" 1587973238 49076 83e5c00506bea7380b8dbebce89bb761 ""
@@ -190,11 +190,11 @@
   "confidentOutranking.png" 1585648195 56799 6ac2e3a0f932e350904c344b3748f86d ""
   "correlationPCA.png" 1585648195 78215 c7f1b61ed10691fd34a9236a5544f860 ""
   "correlationTable.png" 1585648195 50102 7e60e3c38680cfc795a5a7bb6851b804 ""
-  "digraph3Pearls.aux" 1603111863 28908 779f0ae36fc14e7358b13675901511b7 "pdflatex"
+  "digraph3Pearls.aux" 1603190694 29159 6d6be694d58ebb147f4a1a242fb6751f "pdflatex"
   "digraph3Pearls.ind" 1585648195 0 d41d8cd98f00b204e9800998ecf8427e "makeindex digraph3Pearls.idx"
-  "digraph3Pearls.out" 1603111863 7639 4a83a24e356d4670ee2b61cd2a8dc664 "pdflatex"
-  "digraph3Pearls.tex" 1603111859 201972 926cd80d6b24bfadc18bb46a9f108640 ""
-  "digraph3Pearls.toc" 1603111863 3096 0b68c10140eef3a32f67897abc1e0ce2 "pdflatex"
+  "digraph3Pearls.out" 1603190694 7808 321d6c3b46eceb5136736ea8357867ff "pdflatex"
+  "digraph3Pearls.tex" 1603190690 202150 e27d250498f5305a94046451c8e15c9c ""
+  "digraph3Pearls.toc" 1603190694 3171 c0cdec025df6bc03d20a0cfb0a6d67d2 "pdflatex"
   "footnotehyper-sphinx.sty" 1585648195 8888 1bbd7bdeae8c8bed1d10d551bddb1cc9 ""
   "graffiti07_1.png" 1585648195 86325 73d109f767c498d16cf4e79babd7b1c8 ""
   "graffiti07_2.png" 1585648195 140697 1d11aa0ded92858e199d1ab661c39298 ""
@@ -209,9 +209,9 @@
   "robustHeatmap.png" 1585648195 154058 8ede85365a1f8ca8940cef240e931fa3 ""
   "simulLikelihood.png" 1585648195 22562 cf4b77dc733a465112a7dad344b7c667 ""
   "sphinx.sty" 1593940817 82020 a38700b8aa22dfd94a8a5b905e69be73 ""
-  "sphinxhighlight.sty" 1603111837 8137 38a433148fcb7611515a989ff1750dd5 ""
+  "sphinxhighlight.sty" 1603190667 8137 38a433148fcb7611515a989ff1750dd5 ""
   "sphinxhowto.cls" 1585648195 3253 f1422f11047981f159e1ea718dbe2c47 ""
-  "sphinxmessages.sty" 1603111859 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1603190690 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxmulticell.sty" 1585648195 14606 0b6edc2b1a83546ed92026d1f6a311b5 ""
   "symmetricPart.png" 1585648195 74487 bef1531d29a633b766bb94b1dcbb02bb ""
   "unOpposedOutrankings.png" 1603108497 96501 a681b593ae8a94902f526172b011e5dd ""
@@ -219,8 +219,8 @@
   "weightDistributions.png" 1585648195 96093 6882246be0684c7dd44502a778cc71de ""
   (generated)
   "digraph3Pearls.toc"
-  "digraph3Pearls.idx"
-  "digraph3Pearls.out"
-  "digraph3Pearls.aux"
-  "digraph3Pearls.log"
   "digraph3Pearls.pdf"
+  "digraph3Pearls.aux"
+  "digraph3Pearls.idx"
+  "digraph3Pearls.log"
+  "digraph3Pearls.out"

@@ -1541,14 +1541,14 @@ For concluding, let us mention that it is precisely again our bipolar-valued *lo
 .. _UnOpposed-Outranking-Tutorial-label:
 
 
-On unopposed multiobjective outranking digraphs
------------------------------------------------
+On unopposed multiobjective and multipartisan outrankings
+---------------------------------------------------------
 
 .. contents:: 
 	:depth: 1
 	:local:
 
-When facing a performance tableau involving multiple decision objectives, the robusteness level **+/-3**, introduced in the previous Section, may lead to distinguishing what we call **unopposed** outranking situations, like the one shown between alternative *p4* and *p1* (:math:`r(p4 \succsim p1) = +0.78`, see :numref:`stabDenot` Line11), namely preferential situations that are more or less validated by all the decision objectives.  
+When facing a performance tableau involving multiple decision objectives (or a linear voting profile with multiple parties), the robusteness level **+/-3**, introduced in the previous Section, may lead to distinguishing what we call **unopposed** outranking situations, like the one shown between alternative *p4* and *p1* (:math:`r(p4 \succsim p1) = +0.78`, see :numref:`stabDenot` Line11), namely preferential situations that are more or less validated or invalidated by all the decision objectives.  
 
 
 Characterising unopposed multiobjective outranking situations
@@ -1721,12 +1721,14 @@ We may visualize this **unopposed robustness** result in :numref:`unopDigraph` b
 
    Standard versus *unopposed* strict outranking digraphs oriented by best and worst choice recommendations
 
+----------
+
 Let us finally remark that in a social choice context, where decision objectives would match different political parties, our unopposed best choice recommendations represent in fact **robust multipartisan consensus choices**.
 
-Two-stage elections with unopposed primary selection
-....................................................
+Two-stage elections with multipartisan primary selection
+........................................................
 
-We shall illustrate this point with a voting profile we discuss in the tutorial on `generating random linear voting profiles <LinearVoting-Tutorial-label>`_.
+We shall illustrate this point with a voting profile we discuss in the tutorial on :ref:`generating random linear voting profiles <LinearVoting-Tutorial-label>`.
 
 .. code-block:: pycon
    :name: Example3PartiesVotingProfile
@@ -1917,13 +1919,10 @@ We may eventually check that candidate *a06* represents effectively the *simple 
    >>> cd.condorcetWinners()
     ['a06']
 
-
 Back to :ref:`Content Table <Pearls-label>`
 
-.. only:: html
-   
-    Bibliography
-    ------------
+Bibliography
+------------
 	  
 .. [BIS-2015p] Bisdorff R. (2015). "The EURO 2004 Best Poster Award: Choosing the Best Poster in a Scientific Conference". Chapter 5 in R. Bisdorff, L. Dias, P. Meyer, V. Mousseau, and M. Pirlot (Eds.), *Evaluation and Decision Models with Multiple Criteria: Case Studies*. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, DOI 10.1007/978-3-662-46816-6_1, pp. 117-166 (downloadable `PDF file 754.7 kB <http://hdl.handle.net/10993/23714>`_).
 	       
