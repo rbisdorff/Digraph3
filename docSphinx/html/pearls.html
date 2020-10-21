@@ -2499,20 +2499,20 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go"> Dominant preKernels :</span>
 <span class="go"> [&#39;a11&#39;, &#39;a06&#39;, &#39;a13&#39;, &#39;a15&#39;]</span>
 <span class="go">    independence :  0.0</span>
-<span class="go">    dominance    :  0.1760000000000000000000000</span>
-<span class="go">    absorbency   :  -0.6580000000000000000000000</span>
-<span class="go">    covering     :  0.432</span>
+<span class="go">    dominance    :  0.18</span>
+<span class="go">    absorbency   :  -0.66</span>
+<span class="go">    covering     :  0.43</span>
 <span class="go"> Absorbent preKernels :</span>
 <span class="go"> [&#39;a02&#39;, &#39;a04&#39;, &#39;a14&#39;, &#39;a03&#39;]</span>
 <span class="go">    independence :  0.0</span>
 <span class="go">    dominance    :  0.0</span>
-<span class="go">    absorbency   :  0.3680000000000000000000000</span>
-<span class="go">    covered      :  0.455</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">orientedCandidatesList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a06&#39;</span><span class="p">,</span><span class="s1">&#39;a11&#39;</span><span class="p">,</span><span class="s1">&#39;a13&#39;</span><span class="p">,</span><span class="s1">&#39;a15&#39;</span><span class="p">,</span>
-<span class="go">                   &#39;a01&#39;,&#39;a05&#39;,&#39;a07&#39;,&#39;a08&#39;,&#39;a09&#39;,&#39;a10&#39;,&#39;a12&#39;,</span>
-<span class="go">                   &#39;a02&#39;,&#39;a03&#39;,&#39;a04&#39;,&#39;a14&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">uog</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span>
-<span class="go">             tableTitle=&#39;Unopposed three-partisan outrankings&#39;)</span>
+<span class="go">    absorbency   :  0.37</span>
+<span class="go">    covered      :  0.46</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">orientedCandidatesList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a06&#39;</span><span class="p">,</span><span class="s1">&#39;a11&#39;</span><span class="p">,</span><span class="s1">&#39;a13&#39;</span><span class="p">,</span><span class="s1">&#39;a15&#39;</span><span class="p">,</span>\
+<span class="go">            &#39;a01&#39;,&#39;a05&#39;,&#39;a07&#39;,&#39;a08&#39;,&#39;a09&#39;,&#39;a10&#39;,&#39;a12&#39;,\</span>
+<span class="go">            &#39;a02&#39;,&#39;a03&#39;,&#39;a04&#39;,&#39;a14&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">uog</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span>\
+<span class="go">     tableTitle=&#39;Unopposed three-partisan outrankings&#39;)</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -2521,7 +2521,7 @@ confidence level <em>alpha</em> %, if</p>
 <p class="caption"><span class="caption-number">Fig. 88 </span><span class="caption-text">Relation table of multipartisan outranking digraph</span><a class="headerlink" href="#unopposedoutrankings" title="Permalink to this image">¶</a></p>
 </div>
 <p>In <a class="reference internal" href="#unopposedoutrankings"><span class="std std-numref">Fig. 88</span></a>, we may notice that the dominating outranking prekernel <strong>[‘a06’, ‘a11’, ‘a13’, ‘a15’]</strong> gathers in fact a <strong>multipartisan selection</strong> of potential election winners. It is worthwhile noticing that in <a class="reference internal" href="#unopposedoutrankings"><span class="std std-numref">Fig. 88</span></a> the majority margins obtained from a linear voting profile do verify the zero-sum rule (<img class="math" src="_images/math/c6586f93adc1ec4ea9ebb3813b6053540bb8ee3b.png" alt="r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0"/>). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.</p>
-<p>When restricting now, in a secondary election stage, the set of potential election winners to this dominating prekernel, we may compute the actual best social choice.</p>
+<p>When restricting now, in a secondary election stage, the set of eligible candidates to this dominating prekernel, we may compute the actual best social choice.</p>
 <div class="literal-block-wrapper docutils container" id="bestchoicerecommendation">
 <div class="code-block-caption"><span class="caption-number">Listing 98 </span><span class="caption-text">Secondary election winner recommendation</span><a class="headerlink" href="#bestchoicerecommendation" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2587,7 +2587,7 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>In our example voting profile here, the multipartisan primary selection stage appears quite effective in reducing the number of potential candidates to four out of a set of 15 candidates without btw rejecting the actual winning candidate.</p>
+<p>In our example voting profile here, the multipartisan primary selection stage appears quite effective in reducing the number of eligible candidates to four out of a set of 15 candidates without btw rejecting the actual winning candidate.</p>
 <p>However, in a very <strong>divisive two major party system</strong>, like in the US, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate.</p>
 <p>In <a class="reference internal" href="#divisivepolitics"><span class="std std-numref">Listing 100</span></a> below we generate such a divisive kind of linear voting profile with the help of the <em>DivisivePolitics</em> flag  <a class="footnote-reference brackets" href="#id30" id="id25">5</a> (see Lines 4 and 15-21).</p>
 <div class="literal-block-wrapper docutils container" id="divisivepolitics">
@@ -2662,7 +2662,7 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>As a consequence, a <strong>multipartisan primary selection</strong>, computed with a <code class="code docutils literal notranslate"><span class="pre">uodg.showBestChoiceRecommendation()</span></code> method,  will keep the complete initial set of candidates and, hence, becomes <strong>ineffective</strong> ((see <a class="reference internal" href="#ineffectiveprimaryselection"><span class="std std-numref">Listing 101</span></a> Line 6).</p>
+<p>As a consequence, a <strong>multipartisan primary selection</strong>, computed with a <code class="code docutils literal notranslate"><span class="pre">uodg.showBestChoiceRecommendation()</span></code> method,  will keep the complete initial set of eligible candidates and, hence, becomes <strong>ineffective</strong> ((see <a class="reference internal" href="#ineffectiveprimaryselection"><span class="std std-numref">Listing 101</span></a> Line 6).</p>
 <div class="literal-block-wrapper docutils container" id="ineffectiveprimaryselection">
 <div class="code-block-caption"><span class="caption-number">Listing 101 </span><span class="caption-text">Example of ineffective primary multipartisan selection</span><a class="headerlink" href="#ineffectiveprimaryselection" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1

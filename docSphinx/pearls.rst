@@ -1849,20 +1849,20 @@ We may visualize the corresponding bipolar-valued relation table by orienting th
     Dominant preKernels :
     ['a11', 'a06', 'a13', 'a15']
        independence :  0.0
-       dominance    :  0.1760000000000000000000000
-       absorbency   :  -0.6580000000000000000000000
-       covering     :  0.432
+       dominance    :  0.18
+       absorbency   :  -0.66
+       covering     :  0.43
     Absorbent preKernels :
     ['a02', 'a04', 'a14', 'a03']
        independence :  0.0
        dominance    :  0.0
-       absorbency   :  0.3680000000000000000000000
-       covered      :  0.455
-   >>> orientedCandidatesList = ['a06','a11','a13','a15',
-                      'a01','a05','a07','a08','a09','a10','a12',
-                      'a02','a03','a04','a14']
-   >>> uog.showHTMLRelationTable(
-                tableTitle='Unopposed three-partisan outrankings')
+       absorbency   :  0.37
+       covered      :  0.46
+   >>> orientedCandidatesList = ['a06','a11','a13','a15',\
+               'a01','a05','a07','a08','a09','a10','a12',\
+               'a02','a03','a04','a14']
+   >>> uog.showHTMLRelationTable(\
+        tableTitle='Unopposed three-partisan outrankings')
 
 
 .. Figure:: unOpposedOutrankings.png
@@ -1875,7 +1875,7 @@ We may visualize the corresponding bipolar-valued relation table by orienting th
 
 In :numref:`unOpposedOutrankings`, we may notice that the dominating outranking prekernel **['a06', 'a11', 'a13', 'a15']** gathers in fact a **multipartisan selection** of potential election winners. It is worthwhile noticing that in :numref:`unOpposedOutrankings` the majority margins obtained from a linear voting profile do verify the zero-sum rule (:math:`r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0`). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.
 
-When restricting now, in a secondary election stage, the set of potential election winners to this dominating prekernel, we may compute the actual best social choice.
+When restricting now, in a secondary election stage, the set of eligible candidates to this dominating prekernel, we may compute the actual best social choice.
 
 .. code-block:: pycon
    :name: bestChoiceRecommendation
@@ -1919,7 +1919,7 @@ We may eventually check the quality of this best choice by noticing that candida
    >>> cd.condorcetWinners()
     ['a06']
 
-In our example voting profile here, the multipartisan primary selection stage appears quite effective in reducing the number of potential candidates to four out of a set of 15 candidates without btw rejecting the actual winning candidate.
+In our example voting profile here, the multipartisan primary selection stage appears quite effective in reducing the number of eligible candidates to four out of a set of 15 candidates without btw rejecting the actual winning candidate.
 
 However, in a very **divisive two major party system**, like in the US, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate.
 
@@ -1965,7 +1965,7 @@ In :numref:`divisivePolitics` below we generate such a divisive kind of linear v
     'a7' |  +0.00  +0.00  +0.00  +0.00  +0.00  +0.00    -   
     Valuation domain: [-1.000; 1.000]
       
-As a consequence, a **multipartisan primary selection**, computed with a :code:`uodg.showBestChoiceRecommendation()` method,  will keep the complete initial set of candidates and, hence, becomes **ineffective** ((see :numref:`ineffectivePrimarySelection` Line 6).
+As a consequence, a **multipartisan primary selection**, computed with a :code:`uodg.showBestChoiceRecommendation()` method,  will keep the complete initial set of eligible candidates and, hence, becomes **ineffective** ((see :numref:`ineffectivePrimarySelection` Line 6).
 
 .. code-block:: pycon
    :name: ineffectivePrimarySelection
