@@ -2053,7 +2053,7 @@ confidence level <em>alpha</em> %, if</p>
 <li><p><a class="reference internal" href="#two-stage-elections-with-multipartisan-primary-selection" id="id60">Two-stage elections with multipartisan primary selection</a></p></li>
 </ul>
 </div>
-<p>When facing a performance tableau involving multiple decision objectives (or a linear voting profile with multiple parties), the robusteness level <strong>+/-3</strong>, introduced in the previous Section, may lead to distinguishing what we call <strong>unopposed</strong> outranking situations, like the one shown between alternative <em>p4</em> and <em>p1</em> (<img class="math" src="_images/math/9ef995da2786edd2994715c24d67517487a75867.png" alt="r(p4 \succsim p1) = +0.78"/>, see <a class="reference internal" href="#stabdenot"><span class="std std-numref">Listing 82</span></a> Line11), namely preferential situations that are more or less validated or invalidated by all the decision objectives.</p>
+<p>When facing a performance tableau involving multiple decision objectives (or a linear voting profile with multiple parties), the robustness level <strong>+/-3</strong>, introduced in the previous Section, may lead to distinguishing what we call <strong>unopposed</strong> outranking situations, like the one shown between alternative <em>p4</em> and <em>p1</em> (<img class="math" src="_images/math/9ef995da2786edd2994715c24d67517487a75867.png" alt="r(p4 \succsim p1) = +0.78"/>, see <a class="reference internal" href="#stabdenot"><span class="std std-numref">Listing 82</span></a> Line11), namely preferential situations that are more or less validated or invalidated by all the decision objectives.</p>
 <div class="section" id="characterising-unopposed-multiobjective-outranking-situations">
 <h3><a class="toc-backref" href="#id58">Characterising unopposed multiobjective outranking situations</a><a class="headerlink" href="#characterising-unopposed-multiobjective-outranking-situations" title="Permalink to this headline">¶</a></h3>
 <p>Formally, we say that decision alternative <em>x</em> <strong>outranks</strong> decision alternative <em>y</em> <strong>unopposed</strong> when</p>
@@ -2114,7 +2114,7 @@ confidence level <em>alpha</em> %, if</p>
 </td></tr></table></div>
 </div>
 <p>We notice in this example three decision objectives of equal importance (see <a class="reference internal" href="#unopposed1"><span class="std std-numref">Listing 89</span></a>). What will be the outranking situations that are positively (resp.  negatively) validated for each one of the decision objectives taken individually ?</p>
-<p>We may obtain such <em>unopposed multiobjective</em> outranking situtations by operating an <strong>epistemic o-average fusion</strong> (see the <a class="reference internal" href="techDoc.html#digraphsTools.symmetricAverage" title="digraphsTools.symmetricAverage"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphsTools.symmetricAverage</span></code></a> method) of the marginal outranking digraphs restricted to the coalition of criteria supporting each one of the decision objectives (see <a class="reference internal" href="#unopposed2"><span class="std std-numref">Listing 90</span></a> below).</p>
+<p>We may obtain such <em>unopposed multiobjective</em> outranking situations by operating an <strong>epistemic o-average fusion</strong> (see the <a class="reference internal" href="techDoc.html#digraphsTools.symmetricAverage" title="digraphsTools.symmetricAverage"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphsTools.symmetricAverage</span></code></a> method) of the marginal outranking digraphs restricted to the coalition of criteria supporting each one of the decision objectives (see <a class="reference internal" href="#unopposed2"><span class="std std-numref">Listing 90</span></a> below).</p>
 <div class="literal-block-wrapper docutils container" id="unopposed2">
 <div class="code-block-caption"><span class="caption-number">Listing 90 </span><span class="caption-text">Computing unopposed outranking situations</span><a class="headerlink" href="#unopposed2" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2385,7 +2385,7 @@ confidence level <em>alpha</em> %, if</p>
 </td></tr></table></div>
 </div>
 <p>In this example (see <a class="reference internal" href="tutorial.html#linearvotingprofilewithpolls"><span class="std std-numref">Listing 17</span></a> Lines 18-), we obtained 460 Party_1 supporters (46%), 436 Party_2 supporters (43.6%) and 104 other voters (10.4%). Favorite candidates of <em>Party_1</em> supporters, with more than 10%, appeared to be <em>a06</em> (19.91%), <em>a07</em> (14.27%) and <em>a03</em> (10.02%). Whereas for <em>Party_2</em> supporters, favorite candidates appeared to be <em>a11</em> (22.94%), followed by <em>a08</em> (15.65%), <em>a04</em> (15.07%) and <em>a06</em> (13.4%).</p>
-<p>We may convert this linear voting profile into a PerformanceTableau object where each party corresponds to decision objective.</p>
+<p>We may convert this linear voting profile into a PerformanceTableau object where each party corresponds to a decision objective.</p>
 <div class="literal-block-wrapper docutils container" id="convertvotingprofile2perftab">
 <div class="code-block-caption"><span class="caption-number">Listing 95 </span><span class="caption-text">Converting a voting profile into a performance tableau</span><a class="headerlink" href="#convertvotingprofile2perftab" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2432,7 +2432,7 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>In <a class="reference internal" href="#convertvotingprofile2perftab"><span class="std std-numref">Listing 95</span></a> we first store the linear voting in a <a class="reference internal" href="techDoc.html#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">perfTabs.PerformanceTableau</span></code></a> format (se Line 1). In Line 3, we reload this performance tableau data. The three parties of the linear voting profile represent three decision objectives and the voters are distributed as performance criteria according to the party they support.</p>
+<p>In <a class="reference internal" href="#convertvotingprofile2perftab"><span class="std std-numref">Listing 95</span></a> we first store the linear voting in a <a class="reference internal" href="techDoc.html#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">perfTabs.PerformanceTableau</span></code></a> format (see Line 1). In Line 3, we reload this performance tableau data. The three parties of the linear voting profile represent three decision objectives and the voters are distributed as performance criteria according to the party they support.</p>
 <p>In order to make now a <strong>primary multipartisan selection</strong> of potential election winners, we compute the corresponding <em>unopposed multiobjective outranking</em> digraph.</p>
 <div class="literal-block-wrapper docutils container" id="computingunopposedvotingresult">
 <div class="code-block-caption"><span class="caption-number">Listing 96 </span><span class="caption-text">Computing unopposed multiobjective outranking situations</span><a class="headerlink" href="#computingunopposedvotingresult" title="Permalink to this code">¶</a></div>
@@ -2472,10 +2472,10 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situtaion.</p>
-<p>We may visualise the corresponding bipolar-valued relation table by orienting the list of candidates with the help of the <em>inital</em> and the <em>terminal prekernels</em>.</p>
+<p>From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situation.</p>
+<p>We may visualize the corresponding bipolar-valued relation table by orienting the list of candidates with the help of the <em>initial</em> and the <em>terminal prekernels</em>.</p>
 <div class="literal-block-wrapper docutils container" id="visualisingunopposedoutrankings">
-<div class="code-block-caption"><span class="caption-number">Listing 97 </span><span class="caption-text">Visualising the unopposed outranking relation</span><a class="headerlink" href="#visualisingunopposedoutrankings" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 97 </span><span class="caption-text">Visualizing the unopposed outranking relation</span><a class="headerlink" href="#visualisingunopposedoutrankings" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2512,7 +2512,7 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">                   &#39;a01&#39;,&#39;a05&#39;,&#39;a07&#39;,&#39;a08&#39;,&#39;a09&#39;,&#39;a10&#39;,&#39;a12&#39;,</span>
 <span class="go">                   &#39;a02&#39;,&#39;a03&#39;,&#39;a04&#39;,&#39;a14&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">uog</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span>
-<span class="go">             tableTitle=&#39;Unopposed threepartisan outrankings&#39;)</span>
+<span class="go">             tableTitle=&#39;Unopposed three-partisan outrankings&#39;)</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -2520,7 +2520,7 @@ confidence level <em>alpha</em> %, if</p>
 <a class="reference internal image-reference" href="_images/unOpposedOutrankings.png"><img alt="Relation table of unopposed outrankings" src="_images/unOpposedOutrankings.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 88 </span><span class="caption-text">Relation table of multipartisan outranking digraph</span><a class="headerlink" href="#unopposedoutrankings" title="Permalink to this image">¶</a></p>
 </div>
-<p>In <a class="reference internal" href="#unopposedoutrankings"><span class="std std-numref">Fig. 88</span></a>, we may notice that the dominating outranking prekernel <strong>[‘a06’, ‘a11’, ‘a13’, ‘a15’]</strong> gathers in fact a <strong>multipartisan selection</strong> of potential election winners. It is worthwhile noticing in <a class="reference internal" href="#unopposedoutrankings"><span class="std std-numref">Fig. 88</span></a> btw that the majority margins obtained from a linear voting profile do verify the zero-sum rule (<img class="math" src="_images/math/c6586f93adc1ec4ea9ebb3813b6053540bb8ee3b.png" alt="r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0"/>). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.</p>
+<p>In <a class="reference internal" href="#unopposedoutrankings"><span class="std std-numref">Fig. 88</span></a>, we may notice that the dominating outranking prekernel <strong>[‘a06’, ‘a11’, ‘a13’, ‘a15’]</strong> gathers in fact a <strong>multipartisan selection</strong> of potential election winners. It is worthwhile noticing that in <a class="reference internal" href="#unopposedoutrankings"><span class="std std-numref">Fig. 88</span></a> the majority margins obtained from a linear voting profile do verify the zero-sum rule (<img class="math" src="_images/math/c6586f93adc1ec4ea9ebb3813b6053540bb8ee3b.png" alt="r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0"/>). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.</p>
 <p>When restricting now, in a secondary election stage, the set of potential election winners to this dominating prekernel, we may compute the actual best social choice.</p>
 <div class="literal-block-wrapper docutils container" id="bestchoicerecommendation">
 <div class="code-block-caption"><span class="caption-number">Listing 98 </span><span class="caption-text">Secondary election winner recommendation</span><a class="headerlink" href="#bestchoicerecommendation" title="Permalink to this code">¶</a></div>
@@ -2587,7 +2587,7 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>In this example, the multipartisan primary selection stage was quite effective in reducing the number of potential candidates to four out of a set of 15 candidadates without rejecting the actual winning candidate.</p>
+<p>In this example, the multipartisan primary selection stage was quite effective in reducing the number of potential candidates to four out of a set of 15 candidates without rejecting the actual winning candidate.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In a very <strong>divisive two major party system</strong>, like in the US <a class="footnote-reference brackets" href="#id30" id="id25">5</a>, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate. As a consequence, a <strong>multipartisan primary selection</strong> will keep more or less the complete initial set of candidates and, hence, becomes <strong>ineffective</strong>.</p>

@@ -1052,6 +1052,8 @@ class RandomLinearVotingProfile(LinearVotingProfile):
           set of voters. If set to 0.0 or 1.0, only self.poll2, resp. self.poll1, will orient
           the respective party supporters.
         * The *other* paraemter sets the theoretical proportion of non party supporters.
+        * The *DivisivePolitics* flag provides, if True, two reversed polls for
+          generating the random linear ballots. 
         * The *votersWeights* parameter may be a list of positive integers in order to
           deterministically attribute weights to the voters.
           Is ignored when *RandomWeights* is True.
@@ -1064,8 +1066,10 @@ class RandomLinearVotingProfile(LinearVotingProfile):
                  WithPolls=False,
                  partyRepartition=0.5,
                  other=0.05,
+                 DivisivePolitics=False,
                  votersWeights=None,
-                 RandomWeights=False,seed=None):
+                 RandomWeights=False,
+                 seed=None,Debug=False):
         """
         """
         from collections import OrderedDict
@@ -1108,7 +1112,8 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         if WithPolls:
             self.linearBallot =\
                 self.generateRandomLinearBallotWithPoll(\
-                        partyRepartition,other,seed=seed)
+                        partyRepartition,other,DivisivePolitics,\
+                        seed=seed,Debug=Debug)
         else:
             self.linearBallot = self.generateRandomLinearBallot(seed)
         self.ballot = self.computeBallot()
@@ -1131,7 +1136,8 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         return linearBallot
 
     def generateRandomLinearBallotWithPoll(self,partyRepartition,\
-                                           other,seed=None,Debug=False):
+                                           other,DivisivePolitics,\
+                                           seed=None,Debug=False):
         """
         Renders a random linear ballot in accordance with the given polls:
         self.poll1 and self.poll2.
@@ -1165,7 +1171,7 @@ class RandomLinearVotingProfile(LinearVotingProfile):
 ##            poll1[ci1] = xci
 ##            poll2[ci2] = xci
            
-        # independent polls
+        # divisive or independent polls
         poll1 = {}
         sumPoll = 0.0
         for c in candidatesList:
@@ -1176,9 +1182,26 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         self.poll1 = poll1
         poll2 = {}
         sumPoll = 0.0
-        for c in candidatesList:
-            poll2[c] = random.expovariate(1)
-            sumPoll += poll2[c]
+        if DivisivePolitics:
+            p1 = [(poll1[c],c) for c in candidatesList]
+            p1 = list(sorted(p1))
+            p2 = list(reversed(p1))
+            if Debug:
+                print(p1,p2)
+            nc = len(candidatesList)
+            for i in range(nc):
+            #for c in candidatesList:
+                #c = candidatesList[i]
+                #poll2[c] = random.expovariate(1)
+                c = p1[i][1]
+                poll2[c] = p2[i][0]
+                sumPoll += poll2[c]
+##            for c in poll2:
+##                poll2[c] /= sumPoll
+        else:
+            for c in candidatesList:
+                poll2[c] = random.expovariate(1)
+                sumPoll += poll2[c]
         for c in poll2:
             poll2[c] /= sumPoll
 
@@ -1221,15 +1244,15 @@ class RandomLinearVotingProfile(LinearVotingProfile):
                             NotShuffled = False
                     shuffledCandidatesList.append(xc)
                     currPoll.pop(xc)
-                    if Debug:
-                        print(i,shuffledCandidatesList)
+##                    if Debug:
+##                        print(i,shuffledCandidatesList)
                             
                 shc = set(shuffledCandidatesList)
                 sc = set(candidatesList)
                 xc = (sc-shc).pop()
                 shuffledCandidatesList.append(xc)
-                if Debug:
-                    print('==>>', v,shuffledCandidatesList)           
+##                if Debug:
+##                    print('==>>', v,shuffledCandidatesList)           
                 j += 1
                 linearBallot[v] = shuffledCandidatesList
             
@@ -1826,17 +1849,20 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-    lvp = RandomLinearVotingProfile(numberOfCandidates=15,
-                            numberOfVoters=1000,
+    lvp = RandomLinearVotingProfile(numberOfCandidates=5,
+                            numberOfVoters=100,
                             WithPolls=True,
                             partyRepartition=0.5,
                             other=0.1,
+                            DivisivePolitics=True,
                             #seed=0.20990710811162194) # 1 circuit
                             #seed=0.8077233289616987)  # 2 circuits !
-                            seed = None)
+                            seed = 1,
+                                    Debug=False)
+    lvp.showRandomPolls()
 ##    ## lvp = LinearVotingProfile('templinearprofile')
     lvp.save('test')
-    lvp1 = LinearVotingProfile('test')
+##    lvp1 = LinearVotingProfile('test')
     lvp.save2PerfTab()
     from outrankingDigraphs import *
     t = PerformanceTableau('votingPerfTab')

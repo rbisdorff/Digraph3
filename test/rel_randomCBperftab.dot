@@ -2,34 +2,34 @@ digraph G {
 graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",
  fontsize = 12,
  label = "\nDigraph3 (graphviz), R. Bisdorff, 2020", size="7,7"];
-n1 [shape = "circle", label = "a1c", style = "filled", color = gold];
-n2 [shape = "circle", label = "a2a", style = "filled", color = lightblue];
-n3 [shape = "circle", label = "a3c"];
-n4 [shape = "circle", label = "a4a", style = "filled", color = gold];
-n5 [shape = "circle", label = "a5a", style = "filled", color = lightblue];
+n1 [shape = "circle", label = "a1n"];
+n2 [shape = "circle", label = "a2c"];
+n3 [shape = "circle", label = "a3c", style = "filled", color = lightblue];
+n4 [shape = "circle", label = "a4c", style = "filled", color = gold];
+n5 [shape = "circle", label = "a5a", style = "filled", color = gold];
 n6 [shape = "circle", label = "a6n"];
-n7 [shape = "circle", label = "a7n"];
-n1-> n2 [dir=forward, color=black] ;
+n7 [shape = "circle", label = "a7a", style = "filled", color = lightblue];
+n1-> n2 [dir=back, color=black] ;
 n1-> n3 [dir=forward, color=black] ;
-n1-> n4 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
-n1-> n5 [dir=forward, color=black] ;
-n1-> n6 [dir=forward, color=black] ;
-n1-> n7 [dir=forward, color=black] ;
-n2-> n3 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
-n2-> n4 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
-n2-> n5 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n1-> n4 [dir=back, color=black] ;
+n1-> n5 [dir=back, color=black] ;
+n1-> n6 [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;
+n1-> n7 [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;
+n2-> n3 [dir=forward, color=black] ;
+n2-> n4 [dir=back, color=black] ;
+n2-> n5 [dir=forward, color=black] ;
 n2-> n6 [dir=forward, color=black] ;
-n2-> n7 [dir=both, color=black, arrowtail=normal, arrowhead=empty] ;
-n3-> n4 [dir=back, color=black] ;
-n3-> n5 [dir=forward, color=black] ;
-n3-> n6 [dir=forward, color=black] ;
-n3-> n7 [dir=back, color=black] ;
-n4-> n5 [dir=forward, color=black] ;
+n2-> n7 [dir=forward, color=black] ;
+n3-> n4 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
+n3-> n5 [dir=back, color=black] ;
+n3-> n6 [dir=both,style="setlinewidth(2)",color=black, arrowhead=normal, arrowtail=normal] ;
+n3-> n7 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n4-> n5 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
 n4-> n6 [dir=forward, color=black] ;
-n4-> n7 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
-n5-> n6 [dir=both, color=black, arrowtail=normal, arrowhead=empty] ;
-n5-> n7 [dir=back, color=black] ;
-n6-> n7 [dir=back, color=black] ;
-{rank=max; n1 n4 }
-{rank=min; n2 n5 }
+n4-> n7 [dir=forward, color=black] ;
+n5-> n6 [dir=back, color=black] ;
+n5-> n7 [dir=forward, color=black] ;
+n6-> n7 [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;
+{rank=max; n4 n5 }
+{rank=min; n3 n7 }
 }

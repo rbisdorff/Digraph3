@@ -1548,7 +1548,7 @@ On unopposed multiobjective and multipartisan outrankings
 	:depth: 1
 	:local:
 
-When facing a performance tableau involving multiple decision objectives (or a linear voting profile with multiple parties), the robusteness level **+/-3**, introduced in the previous Section, may lead to distinguishing what we call **unopposed** outranking situations, like the one shown between alternative *p4* and *p1* (:math:`r(p4 \succsim p1) = +0.78`, see :numref:`stabDenot` Line11), namely preferential situations that are more or less validated or invalidated by all the decision objectives.  
+When facing a performance tableau involving multiple decision objectives (or a linear voting profile with multiple parties), the robustness level **+/-3**, introduced in the previous Section, may lead to distinguishing what we call **unopposed** outranking situations, like the one shown between alternative *p4* and *p1* (:math:`r(p4 \succsim p1) = +0.78`, see :numref:`stabDenot` Line11), namely preferential situations that are more or less validated or invalidated by all the decision objectives.  
 
 
 Characterising unopposed multiobjective outranking situations
@@ -1592,7 +1592,7 @@ Let us reconsider, for instance, the previous performance tableau with three dec
 
 We notice in this example three decision objectives of equal importance (see :numref:`unOpposed1`). What will be the outranking situations that are positively (resp.  negatively) validated for each one of the decision objectives taken individually ?
 
-We may obtain such *unopposed multiobjective* outranking situtations by operating an **epistemic o-average fusion** (see the :py:func:`digraphsTools.symmetricAverage <digraphsTools.symmetricAverage>` method) of the marginal outranking digraphs restricted to the coalition of criteria supporting each one of the decision objectives (see :numref:`unOpposed2` below).
+We may obtain such *unopposed multiobjective* outranking situations by operating an **epistemic o-average fusion** (see the :py:func:`digraphsTools.symmetricAverage <digraphsTools.symmetricAverage>` method) of the marginal outranking digraphs restricted to the coalition of criteria supporting each one of the decision objectives (see :numref:`unOpposed2` below).
 
 .. code-block:: pycon
    :linenos:
@@ -1779,7 +1779,7 @@ We shall illustrate this point with a voting profile we discuss in the tutorial 
 
 In this example (see :numref:`linearVotingProfileWithPolls` Lines 18-), we obtained 460 Party_1 supporters (46%), 436 Party_2 supporters (43.6%) and 104 other voters (10.4%). Favorite candidates of *Party_1* supporters, with more than 10%, appeared to be *a06* (19.91%), *a07* (14.27%) and *a03* (10.02%). Whereas for *Party_2* supporters, favorite candidates appeared to be *a11* (22.94%), followed by *a08* (15.65%), *a04* (15.07%) and *a06* (13.4%).
 
-We may convert this linear voting profile into a PerformanceTableau object where each party corresponds to decision objective.
+We may convert this linear voting profile into a PerformanceTableau object where each party corresponds to a decision objective.
 
 .. code-block:: pycon
    :name: ConvertVotingProfile2PerfTab
@@ -1808,7 +1808,7 @@ We may convert this linear voting profile into a PerformanceTableau object where
       'criteria': ['v0001', 'v0004', 'v0005', ... ]})
     ])
 
-In :numref:`ConvertVotingProfile2PerfTab` we first store the linear voting in a :py:class:`perfTabs.PerformanceTableau` format (se Line 1). In Line 3, we reload this performance tableau data. The three parties of the linear voting profile represent three decision objectives and the voters are distributed as performance criteria according to the party they support.
+In :numref:`ConvertVotingProfile2PerfTab` we first store the linear voting in a :py:class:`perfTabs.PerformanceTableau` format (see Line 1). In Line 3, we reload this performance tableau data. The three parties of the linear voting profile represent three decision objectives and the voters are distributed as performance criteria according to the party they support.
 
 In order to make now a **primary multipartisan selection** of potential election winners, we compute the corresponding *unopposed multiobjective outranking* digraph.
 
@@ -1835,13 +1835,13 @@ In order to make now a **primary multipartisan selection** of potential election
 			    relation', 'marginalRelationsRelations',
 			    'gamma', 'notGamma']
 
-From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situtaion. 
+From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situation. 
 
-We may visualise the corresponding bipolar-valued relation table by orienting the list of candidates with the help of the *inital* and the *terminal prekernels*.
+We may visualize the corresponding bipolar-valued relation table by orienting the list of candidates with the help of the *initial* and the *terminal prekernels*.
 
 .. code-block:: pycon
    :name: VisualisingUnOpposedOutrankings
-   :caption: Visualising the unopposed outranking relation 	  
+   :caption: Visualizing the unopposed outranking relation 	  
    :linenos:
   
    >>> uog.showPrekernels()
@@ -1862,7 +1862,7 @@ We may visualise the corresponding bipolar-valued relation table by orienting th
                       'a01','a05','a07','a08','a09','a10','a12',
                       'a02','a03','a04','a14']
    >>> uog.showHTMLRelationTable(
-                tableTitle='Unopposed threepartisan outrankings')
+                tableTitle='Unopposed three-partisan outrankings')
 
 
 .. Figure:: unOpposedOutrankings.png
@@ -1873,7 +1873,7 @@ We may visualise the corresponding bipolar-valued relation table by orienting th
 
    Relation table of multipartisan outranking digraph
 
-In :numref:`unOpposedOutrankings`, we may notice that the dominating outranking prekernel **['a06', 'a11', 'a13', 'a15']** gathers in fact a **multipartisan selection** of potential election winners. It is worthwhile noticing in :numref:`unOpposedOutrankings` btw that the majority margins obtained from a linear voting profile do verify the zero-sum rule (:math:`r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0`). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.
+In :numref:`unOpposedOutrankings`, we may notice that the dominating outranking prekernel **['a06', 'a11', 'a13', 'a15']** gathers in fact a **multipartisan selection** of potential election winners. It is worthwhile noticing that in :numref:`unOpposedOutrankings` the majority margins obtained from a linear voting profile do verify the zero-sum rule (:math:`r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0`). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.
 
 When restricting now, in a secondary election stage, the set of potential election winners to this dominating prekernel, we may compute the actual best social choice.
 
@@ -1919,7 +1919,7 @@ We may eventually check the quality of this best choice by noticing that candida
    >>> cd.condorcetWinners()
     ['a06']
 
-In this example, the multipartisan primary selection stage was quite effective in reducing the number of potential candidates to four out of a set of 15 candidadates without rejecting the actual winning candidate.
+In this example, the multipartisan primary selection stage was quite effective in reducing the number of potential candidates to four out of a set of 15 candidates without rejecting the actual winning candidate.
 
 .. note::
 

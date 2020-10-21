@@ -1941,7 +1941,7 @@ For concluding, let us mention that it is precisely again our bipolar\sphinxhyph
 \end{itemize}
 \end{sphinxShadowBox}
 
-When facing a performance tableau involving multiple decision objectives (or a linear voting profile with multiple parties), the robusteness level \sphinxstylestrong{+/\sphinxhyphen{}3}, introduced in the previous Section, may lead to distinguishing what we call \sphinxstylestrong{unopposed} outranking situations, like the one shown between alternative \sphinxstyleemphasis{p4} and \sphinxstyleemphasis{p1} (\(r(p4 \succsim p1) = +0.78\), see \hyperref[\detokenize{pearls:stabdenot}]{Listing \ref{\detokenize{pearls:stabdenot}}} Line11), namely preferential situations that are more or less validated or invalidated by all the decision objectives.
+When facing a performance tableau involving multiple decision objectives (or a linear voting profile with multiple parties), the robustness level \sphinxstylestrong{+/\sphinxhyphen{}3}, introduced in the previous Section, may lead to distinguishing what we call \sphinxstylestrong{unopposed} outranking situations, like the one shown between alternative \sphinxstyleemphasis{p4} and \sphinxstyleemphasis{p1} (\(r(p4 \succsim p1) = +0.78\), see \hyperref[\detokenize{pearls:stabdenot}]{Listing \ref{\detokenize{pearls:stabdenot}}} Line11), namely preferential situations that are more or less validated or invalidated by all the decision objectives.
 
 
 \subsection{Characterising unopposed multiobjective outranking situations}
@@ -1988,7 +1988,7 @@ Let us reconsider, for instance, the previous performance tableau with three dec
 
 We notice in this example three decision objectives of equal importance (see \hyperref[\detokenize{pearls:unopposed1}]{Listing \ref{\detokenize{pearls:unopposed1}}}). What will be the outranking situations that are positively (resp.  negatively) validated for each one of the decision objectives taken individually ?
 
-We may obtain such \sphinxstyleemphasis{unopposed multiobjective} outranking situtations by operating an \sphinxstylestrong{epistemic o\sphinxhyphen{}average fusion} (see the \sphinxcode{\sphinxupquote{digraphsTools.symmetricAverage}} method) of the marginal outranking digraphs restricted to the coalition of criteria supporting each one of the decision objectives (see \hyperref[\detokenize{pearls:unopposed2}]{Listing \ref{\detokenize{pearls:unopposed2}}} below).
+We may obtain such \sphinxstyleemphasis{unopposed multiobjective} outranking situations by operating an \sphinxstylestrong{epistemic o\sphinxhyphen{}average fusion} (see the \sphinxcode{\sphinxupquote{digraphsTools.symmetricAverage}} method) of the marginal outranking digraphs restricted to the coalition of criteria supporting each one of the decision objectives (see \hyperref[\detokenize{pearls:unopposed2}]{Listing \ref{\detokenize{pearls:unopposed2}}} below).
 \sphinxSetupCaptionForVerbatim{Computing unopposed outranking situations}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed2}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -2168,7 +2168,7 @@ We shall illustrate this point with a voting profile we discuss in the tutorial 
 
 In this example (see \sphinxcode{\sphinxupquote{linearVotingProfileWithPolls}} Lines 18\sphinxhyphen{}), we obtained 460 Party\_1 supporters (46\%), 436 Party\_2 supporters (43.6\%) and 104 other voters (10.4\%). Favorite candidates of \sphinxstyleemphasis{Party\_1} supporters, with more than 10\%, appeared to be \sphinxstyleemphasis{a06} (19.91\%), \sphinxstyleemphasis{a07} (14.27\%) and \sphinxstyleemphasis{a03} (10.02\%). Whereas for \sphinxstyleemphasis{Party\_2} supporters, favorite candidates appeared to be \sphinxstyleemphasis{a11} (22.94\%), followed by \sphinxstyleemphasis{a08} (15.65\%), \sphinxstyleemphasis{a04} (15.07\%) and \sphinxstyleemphasis{a06} (13.4\%).
 
-We may convert this linear voting profile into a PerformanceTableau object where each party corresponds to decision objective.
+We may convert this linear voting profile into a PerformanceTableau object where each party corresponds to a decision objective.
 \sphinxSetupCaptionForVerbatim{Converting a voting profile into a performance tableau}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:convertvotingprofile2perftab}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -2195,7 +2195,7 @@ We may convert this linear voting profile into a PerformanceTableau object where
 \PYG{g+go}{ ])}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{pearls:convertvotingprofile2perftab}]{Listing \ref{\detokenize{pearls:convertvotingprofile2perftab}}} we first store the linear voting in a \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau}} format (se Line 1). In Line 3, we reload this performance tableau data. The three parties of the linear voting profile represent three decision objectives and the voters are distributed as performance criteria according to the party they support.
+In \hyperref[\detokenize{pearls:convertvotingprofile2perftab}]{Listing \ref{\detokenize{pearls:convertvotingprofile2perftab}}} we first store the linear voting in a \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau}} format (see Line 1). In Line 3, we reload this performance tableau data. The three parties of the linear voting profile represent three decision objectives and the voters are distributed as performance criteria according to the party they support.
 
 In order to make now a \sphinxstylestrong{primary multipartisan selection} of potential election winners, we compute the corresponding \sphinxstyleemphasis{unopposed multiobjective outranking} digraph.
 \sphinxSetupCaptionForVerbatim{Computing unopposed multiobjective outranking situations}
@@ -2220,10 +2220,10 @@ In order to make now a \sphinxstylestrong{primary multipartisan selection} of po
 \PYG{g+go}{                         \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situtaion.
+From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situation.
 
-We may visualise the corresponding bipolar\sphinxhyphen{}valued relation table by orienting the list of candidates with the help of the \sphinxstyleemphasis{inital} and the \sphinxstyleemphasis{terminal prekernels}.
-\sphinxSetupCaptionForVerbatim{Visualising the unopposed outranking relation}
+We may visualize the corresponding bipolar\sphinxhyphen{}valued relation table by orienting the list of candidates with the help of the \sphinxstyleemphasis{initial} and the \sphinxstyleemphasis{terminal prekernels}.
+\sphinxSetupCaptionForVerbatim{Visualizing the unopposed outranking relation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:visualisingunopposedoutrankings}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uog}\PYG{o}{.}\PYG{n}{showPrekernels}\PYG{p}{(}\PYG{p}{)}
@@ -2244,7 +2244,7 @@ We may visualise the corresponding bipolar\sphinxhyphen{}valued relation table b
 \PYG{g+go}{                   \PYGZsq{}a01\PYGZsq{},\PYGZsq{}a05\PYGZsq{},\PYGZsq{}a07\PYGZsq{},\PYGZsq{}a08\PYGZsq{},\PYGZsq{}a09\PYGZsq{},\PYGZsq{}a10\PYGZsq{},\PYGZsq{}a12\PYGZsq{},}
 \PYG{g+go}{                   \PYGZsq{}a02\PYGZsq{},\PYGZsq{}a03\PYGZsq{},\PYGZsq{}a04\PYGZsq{},\PYGZsq{}a14\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uog}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}
-\PYG{g+go}{             tableTitle=\PYGZsq{}Unopposed threepartisan outrankings\PYGZsq{})}
+\PYG{g+go}{             tableTitle=\PYGZsq{}Unopposed three\PYGZhy{}partisan outrankings\PYGZsq{})}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -2254,7 +2254,7 @@ We may visualise the corresponding bipolar\sphinxhyphen{}valued relation table b
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{unOpposedOutrankings}.png}
 \caption{Relation table of multipartisan outranking digraph}\label{\detokenize{pearls:unopposedoutrankings}}\end{figure}
 
-In \hyperref[\detokenize{pearls:unopposedoutrankings}]{Fig.\@ \ref{\detokenize{pearls:unopposedoutrankings}}}, we may notice that the dominating outranking prekernel \sphinxstylestrong{{[}‘a06’, ‘a11’, ‘a13’, ‘a15’{]}} gathers in fact a \sphinxstylestrong{multipartisan selection} of potential election winners. It is worthwhile noticing in \hyperref[\detokenize{pearls:unopposedoutrankings}]{Fig.\@ \ref{\detokenize{pearls:unopposedoutrankings}}} btw that the majority margins obtained from a linear voting profile do verify the zero\sphinxhyphen{}sum rule (\(r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0\)). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.
+In \hyperref[\detokenize{pearls:unopposedoutrankings}]{Fig.\@ \ref{\detokenize{pearls:unopposedoutrankings}}}, we may notice that the dominating outranking prekernel \sphinxstylestrong{{[}‘a06’, ‘a11’, ‘a13’, ‘a15’{]}} gathers in fact a \sphinxstylestrong{multipartisan selection} of potential election winners. It is worthwhile noticing that in \hyperref[\detokenize{pearls:unopposedoutrankings}]{Fig.\@ \ref{\detokenize{pearls:unopposedoutrankings}}} the majority margins obtained from a linear voting profile do verify the zero\sphinxhyphen{}sum rule (\(r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0\)). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.
 
 When restricting now, in a secondary election stage, the set of potential election winners to this dominating prekernel, we may compute the actual best social choice.
 \sphinxSetupCaptionForVerbatim{Secondary election winner recommendation}
@@ -2296,7 +2296,7 @@ We may eventually check the quality of this best choice by noticing that candida
 \PYG{g+go}{ [\PYGZsq{}a06\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-In this example, the multipartisan primary selection stage was quite effective in reducing the number of potential candidates to four out of a set of 15 candidadates without rejecting the actual winning candidate.
+In this example, the multipartisan primary selection stage was quite effective in reducing the number of potential candidates to four out of a set of 15 candidates without rejecting the actual winning candidate.
 
 \begin{sphinxadmonition}{note}{Note:}
 In a very \sphinxstylestrong{divisive two major party system}, like in the US %

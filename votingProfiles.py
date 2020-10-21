@@ -1849,16 +1849,16 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-    lvp = RandomLinearVotingProfile(numberOfCandidates=5,
-                            numberOfVoters=100,
+    lvp = RandomLinearVotingProfile(numberOfCandidates=10,
+                            numberOfVoters=500,
                             WithPolls=True,
-                            partyRepartition=0.5,
-                            other=0.1,
-                            DivisivePolitics=True,
+                            partyRepartition=0.4,
+                            other=0.2,
+                            DivisivePolitics=False,
                             #seed=0.20990710811162194) # 1 circuit
                             #seed=0.8077233289616987)  # 2 circuits !
-                            seed = 1,
-                                    Debug=False)
+                            seed=None,
+                            Debug=False)
     lvp.showRandomPolls()
 ##    ## lvp = LinearVotingProfile('templinearprofile')
     lvp.save('test')
@@ -1870,6 +1870,7 @@ if __name__ == "__main__":
     g.showRelationTable()
     uog = UnOpposedBipolarOutrankingDigraph(t)
     uog.showRelationTable()
+    print(uog)
 ##    lvp1 = LinearVotingProfile('templinearprofile')
 ##    lvp1 = LinearVotingProfile('example1')
 ##    lvp1.computeBallot()

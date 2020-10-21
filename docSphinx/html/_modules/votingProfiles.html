@@ -1891,16 +1891,16 @@
     <span class="c1">## for x in arrowRaynaudRanking:</span>
     <span class="c1">##     print &#39;%s: %d (%.2f)&#39; % (x[1], x[0], aar[x[1]][&#39;majorityMargin&#39;])</span>
 
-    <span class="n">lvp</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                            <span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">lvp</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                            <span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
                             <span class="n">WithPolls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                            <span class="n">partyRepartition</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-                            <span class="n">other</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-                            <span class="n">DivisivePolitics</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">partyRepartition</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+                            <span class="n">other</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                            <span class="n">DivisivePolitics</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                             <span class="c1">#seed=0.20990710811162194) # 1 circuit</span>
                             <span class="c1">#seed=0.8077233289616987)  # 2 circuits !</span>
-                            <span class="n">seed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                            <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                            <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">lvp</span><span class="o">.</span><span class="n">showRandomPolls</span><span class="p">()</span>
 <span class="c1">##    ## lvp = LinearVotingProfile(&#39;templinearprofile&#39;)</span>
     <span class="n">lvp</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
@@ -1912,6 +1912,7 @@
     <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
     <span class="n">uog</span> <span class="o">=</span> <span class="n">UnOpposedBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
     <span class="n">uog</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">uog</span><span class="p">)</span>
 <span class="c1">##    lvp1 = LinearVotingProfile(&#39;templinearprofile&#39;)</span>
 <span class="c1">##    lvp1 = LinearVotingProfile(&#39;example1&#39;)</span>
 <span class="c1">##    lvp1.computeBallot()</span>
