@@ -1919,11 +1919,71 @@ We may eventually check the quality of this best choice by noticing that candida
    >>> cd.condorcetWinners()
     ['a06']
 
-In this example, the multipartisan primary selection stage was quite effective in reducing the number of potential candidates to four out of a set of 15 candidates without rejecting the actual winning candidate.
+In our example voting profile here, the multipartisan primary selection stage appears quite effective in reducing the number of potential candidates to four out of a set of 15 candidates without btw rejecting the actual winning candidate.
 
-.. note::
+However, in a very **divisive two major party system**, like in the US, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate.
 
-   In a very **divisive two major party system**, like in the US [5]_, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate. As a consequence, a **multipartisan primary selection** will keep more or less the complete initial set of candidates and, hence, becomes **ineffective**.
+In :numref:`divisivePolitics` below we generate such a divisive kind of linear voting profile with the help of the *DivisivePolitics* flag  [5]_ (see Lines 4 and 15-21).
+
+.. code-block:: pycon
+   :name: divisivePolitics
+   :caption: A divisive two-party example of a random linear voting profile
+   :linenos:
+
+   >>> lvp = RandomLinearVotingProfile(\
+              numberOfCandidates=7,numberOfVoters=500,\
+              WithPolls=True, partyRepartition=0.4,other=0.2,«
+	      DivisivePolitics=True, seed=1)
+    >>> lvp.showRandomPolls()
+     Random repartition of voters
+      Party_1 supporters : 240 (48.00%)
+      Party_2 supporters : 160 (32.00%)
+      Other voters       : 100 (20.00%)
+     *---------------- random polls ---------------
+     Party_1(48.0%) | Party_2(32.0%)|   expected  
+     -----------------------------------------------
+      a2 : 30.84%  |  a1 : 30.84%  |  a2 : 15.56%
+      a3 : 23.67%  |  a4 : 23.67%  |  a3 : 12.91%
+      a7 : 17.29%  |  a6 : 17.29%  |  a7 : 11.43%
+      a5 : 11.22%  |  a5 : 11.22%  |  a1 : 11.00%
+      a6 : 09.79%  |  a7 : 09.79%  |  a6 : 10.23%
+      a4 : 04.83%  |  a3 : 04.83%  |  a4 : 09.89%
+      a1 : 02.37%  |  a2 : 02.37%  |  a5 : 08.98%
+    >>> lvp.save2PerfTab('divisiveExample')
+    >>> dvp = PerformanceTableau('divisiveExample')
+    >>> uodg = UnOpposedBipolarOutrankingDigraph(dvp)
+    >>> uodg.showRelationTable()
+    * ---- Relation Table -----
+     r   |  'a1'   'a2'   'a3'   'a4'   'a5'   'a6'   'a7'   
+    -----|-------------------------------------------------
+    'a1' |     -   +0.00  +0.00  +0.00  +0.00  +0.00  +0.00  
+    'a2' |  +0.00    -    +0.00  +0.00  +0.00  +0.00  +0.00  
+    'a3' |  +0.00  +0.00    -    +0.00  +0.00  +0.00  +0.00  
+    'a4' |  +0.00  +0.00  +0.00    -    +0.00  +0.00  +0.00  
+    'a5' |  +0.00  +0.00  +0.00  +0.00    -    +0.00  +0.00  
+    'a6' |  +0.00  +0.00  +0.00  +0.00  +0.00    -    +0.00  
+    'a7' |  +0.00  +0.00  +0.00  +0.00  +0.00  +0.00    -   
+    Valuation domain: [-1.000; 1.000]
+      
+As a consequence, a **multipartisan primary selection**, computed with a :code:`uodg.showBestChoiceRecommendation()` method,  will keep the complete initial set of candidates and, hence, becomes **ineffective** ((see :numref:`ineffectivePrimarySelection` Line 6).
+
+.. code-block:: pycon
+   :name: ineffectivePrimarySelection
+   :caption: Example of ineffective primary multipartisan selection
+   :linenos:
+
+   >>> uodg.showBestChoiceRecommendation()
+    Rubis best choice recommendation(s) (BCR)
+     (in decreasing order of determinateness)   
+    Credibility domain: [-1.00,1.00]
+    === >> ambiguous choice(s)
+    choice              : ['a1','a2','a3','a4','a5','a6','a7']
+    independence        : 0.00
+    dominance           : 1.00
+    absorbency          : 1.00
+    covered (%)         : 100.00
+    determinateness (%) : 50.00
+     - most credible action(s) = { }
 
 Back to :ref:`Content Table <Pearls-label>`
 

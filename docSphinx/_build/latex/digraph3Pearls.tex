@@ -2296,15 +2296,71 @@ We may eventually check the quality of this best choice by noticing that candida
 \PYG{g+go}{ [\PYGZsq{}a06\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-In this example, the multipartisan primary selection stage was quite effective in reducing the number of potential candidates to four out of a set of 15 candidates without rejecting the actual winning candidate.
+In our example voting profile here, the multipartisan primary selection stage appears quite effective in reducing the number of potential candidates to four out of a set of 15 candidates without btw rejecting the actual winning candidate.
 
-\begin{sphinxadmonition}{note}{Note:}
-In a very \sphinxstylestrong{divisive two major party system}, like in the US %
+However, in a very \sphinxstylestrong{divisive two major party system}, like in the US, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate.
+
+In \hyperref[\detokenize{pearls:divisivepolitics}]{Listing \ref{\detokenize{pearls:divisivepolitics}}} below we generate such a divisive kind of linear voting profile with the help of the \sphinxstyleemphasis{DivisivePolitics} flag  %
 \begin{footnote}[5]\sphinxAtStartFootnote
 The \sphinxcode{\sphinxupquote{votingProfiles.RandomLinearVotingProfile}} constructor provides a \sphinxstyleemphasis{DivisivePolitics} flag (\sphinxstyleemphasis{False} by default) for generating random linear voting profiles based on a divisive polls strucure.
 %
-\end{footnote}, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate. As a consequence, a \sphinxstylestrong{multipartisan primary selection} will keep more or less the complete initial set of candidates and, hence, becomes \sphinxstylestrong{ineffective}.
-\end{sphinxadmonition}
+\end{footnote} (see Lines 4 and 15\sphinxhyphen{}21).
+\sphinxSetupCaptionForVerbatim{A divisive two\sphinxhyphen{}party example of a random linear voting profile}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:divisivepolitics}}}
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp} \PYG{o}{=} \PYG{n}{RandomLinearVotingProfile}\PYG{p}{(}\PYGZbs{}
+\PYG{g+go}{           numberOfCandidates=7,numberOfVoters=500,\PYGZbs{}}
+\PYG{g+go}{           WithPolls=True, partyRepartition=0.4,other=0.2,«}
+\PYG{g+go}{           DivisivePolitics=True, seed=1)}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} lvp.showRandomPolls()}
+\PYG{g+go}{  Random repartition of voters}
+\PYG{g+go}{   Party\PYGZus{}1 supporters : 240 (48.00\PYGZpc{})}
+\PYG{g+go}{   Party\PYGZus{}2 supporters : 160 (32.00\PYGZpc{})}
+\PYG{g+go}{   Other voters       : 100 (20.00\PYGZpc{})}
+\PYG{g+go}{  *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} random polls \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{  Party\PYGZus{}1(48.0\PYGZpc{}) | Party\PYGZus{}2(32.0\PYGZpc{})|   expected}
+\PYG{g+go}{  \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{   a2 : 30.84\PYGZpc{}  |  a1 : 30.84\PYGZpc{}  |  a2 : 15.56\PYGZpc{}}
+\PYG{g+go}{   a3 : 23.67\PYGZpc{}  |  a4 : 23.67\PYGZpc{}  |  a3 : 12.91\PYGZpc{}}
+\PYG{g+go}{   a7 : 17.29\PYGZpc{}  |  a6 : 17.29\PYGZpc{}  |  a7 : 11.43\PYGZpc{}}
+\PYG{g+go}{   a5 : 11.22\PYGZpc{}  |  a5 : 11.22\PYGZpc{}  |  a1 : 11.00\PYGZpc{}}
+\PYG{g+go}{   a6 : 09.79\PYGZpc{}  |  a7 : 09.79\PYGZpc{}  |  a6 : 10.23\PYGZpc{}}
+\PYG{g+go}{   a4 : 04.83\PYGZpc{}  |  a3 : 04.83\PYGZpc{}  |  a4 : 09.89\PYGZpc{}}
+\PYG{g+go}{   a1 : 02.37\PYGZpc{}  |  a2 : 02.37\PYGZpc{}  |  a5 : 08.98\PYGZpc{}}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} lvp.save2PerfTab(\PYGZsq{}divisiveExample\PYGZsq{})}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} dvp = PerformanceTableau(\PYGZsq{}divisiveExample\PYGZsq{})}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} uodg = UnOpposedBipolarOutrankingDigraph(dvp)}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} uodg.showRelationTable()}
+\PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{  r   |  \PYGZsq{}a1\PYGZsq{}   \PYGZsq{}a2\PYGZsq{}   \PYGZsq{}a3\PYGZsq{}   \PYGZsq{}a4\PYGZsq{}   \PYGZsq{}a5\PYGZsq{}   \PYGZsq{}a6\PYGZsq{}   \PYGZsq{}a7\PYGZsq{}}
+\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{ \PYGZsq{}a1\PYGZsq{} |     \PYGZhy{}   +0.00  +0.00  +0.00  +0.00  +0.00  +0.00}
+\PYG{g+go}{ \PYGZsq{}a2\PYGZsq{} |  +0.00    \PYGZhy{}    +0.00  +0.00  +0.00  +0.00  +0.00}
+\PYG{g+go}{ \PYGZsq{}a3\PYGZsq{} |  +0.00  +0.00    \PYGZhy{}    +0.00  +0.00  +0.00  +0.00}
+\PYG{g+go}{ \PYGZsq{}a4\PYGZsq{} |  +0.00  +0.00  +0.00    \PYGZhy{}    +0.00  +0.00  +0.00}
+\PYG{g+go}{ \PYGZsq{}a5\PYGZsq{} |  +0.00  +0.00  +0.00  +0.00    \PYGZhy{}    +0.00  +0.00}
+\PYG{g+go}{ \PYGZsq{}a6\PYGZsq{} |  +0.00  +0.00  +0.00  +0.00  +0.00    \PYGZhy{}    +0.00}
+\PYG{g+go}{ \PYGZsq{}a7\PYGZsq{} |  +0.00  +0.00  +0.00  +0.00  +0.00  +0.00    \PYGZhy{}}
+\PYG{g+go}{ Valuation domain: [\PYGZhy{}1.000; 1.000]}
+\end{sphinxVerbatim}
+
+As a consequence, a \sphinxstylestrong{multipartisan primary selection}, computed with a \sphinxcode{\sphinxupquote{uodg.showBestChoiceRecommendation()}} method,  will keep the complete initial set of candidates and, hence, becomes \sphinxstylestrong{ineffective} ((see \hyperref[\detokenize{pearls:ineffectiveprimaryselection}]{Listing \ref{\detokenize{pearls:ineffectiveprimaryselection}}} Line 6).
+\sphinxSetupCaptionForVerbatim{Example of ineffective primary multipartisan selection}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:ineffectiveprimaryselection}}}
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uodg}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ Rubis best choice recommendation(s) (BCR)}
+\PYG{g+go}{  (in decreasing order of determinateness)}
+\PYG{g+go}{ Credibility domain: [\PYGZhy{}1.00,1.00]}
+\PYG{g+go}{ === \PYGZgt{}\PYGZgt{} ambiguous choice(s)}
+\PYG{g+go}{ choice              : [\PYGZsq{}a1\PYGZsq{},\PYGZsq{}a2\PYGZsq{},\PYGZsq{}a3\PYGZsq{},\PYGZsq{}a4\PYGZsq{},\PYGZsq{}a5\PYGZsq{},\PYGZsq{}a6\PYGZsq{},\PYGZsq{}a7\PYGZsq{}]}
+\PYG{g+go}{ independence        : 0.00}
+\PYG{g+go}{ dominance           : 1.00}
+\PYG{g+go}{ absorbency          : 1.00}
+\PYG{g+go}{ covered (\PYGZpc{})         : 100.00}
+\PYG{g+go}{ determinateness (\PYGZpc{}) : 50.00}
+\PYG{g+go}{  \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZcb{}}
+\end{sphinxVerbatim}
 
 Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}}
 

@@ -2587,10 +2587,109 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>In this example, the multipartisan primary selection stage was quite effective in reducing the number of potential candidates to four out of a set of 15 candidates without rejecting the actual winning candidate.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In a very <strong>divisive two major party system</strong>, like in the US <a class="footnote-reference brackets" href="#id30" id="id25">5</a>, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate. As a consequence, a <strong>multipartisan primary selection</strong> will keep more or less the complete initial set of candidates and, hence, becomes <strong>ineffective</strong>.</p>
+<p>In our example voting profile here, the multipartisan primary selection stage appears quite effective in reducing the number of potential candidates to four out of a set of 15 candidates without btw rejecting the actual winning candidate.</p>
+<p>However, in a very <strong>divisive two major party system</strong>, like in the US, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate.</p>
+<p>In <a class="reference internal" href="#divisivepolitics"><span class="std std-numref">Listing 100</span></a> below we generate such a divisive kind of linear voting profile with the help of the <em>DivisivePolitics</em> flag  <a class="footnote-reference brackets" href="#id30" id="id25">5</a> (see Lines 4 and 15-21).</p>
+<div class="literal-block-wrapper docutils container" id="divisivepolitics">
+<div class="code-block-caption"><span class="caption-number">Listing 100 </span><span class="caption-text">A divisive two-party example of a random linear voting profile</span><a class="headerlink" href="#divisivepolitics" title="Permalink to this code">¶</a></div>
+<div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lvp</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span>\
+<span class="go">           numberOfCandidates=7,numberOfVoters=500,\</span>
+<span class="go">           WithPolls=True, partyRepartition=0.4,other=0.2,«</span>
+<span class="go">           DivisivePolitics=True, seed=1)</span>
+<span class="go"> &gt;&gt;&gt; lvp.showRandomPolls()</span>
+<span class="go">  Random repartition of voters</span>
+<span class="go">   Party_1 supporters : 240 (48.00%)</span>
+<span class="go">   Party_2 supporters : 160 (32.00%)</span>
+<span class="go">   Other voters       : 100 (20.00%)</span>
+<span class="go">  *---------------- random polls ---------------</span>
+<span class="go">  Party_1(48.0%) | Party_2(32.0%)|   expected</span>
+<span class="go">  -----------------------------------------------</span>
+<span class="go">   a2 : 30.84%  |  a1 : 30.84%  |  a2 : 15.56%</span>
+<span class="go">   a3 : 23.67%  |  a4 : 23.67%  |  a3 : 12.91%</span>
+<span class="go">   a7 : 17.29%  |  a6 : 17.29%  |  a7 : 11.43%</span>
+<span class="go">   a5 : 11.22%  |  a5 : 11.22%  |  a1 : 11.00%</span>
+<span class="go">   a6 : 09.79%  |  a7 : 09.79%  |  a6 : 10.23%</span>
+<span class="go">   a4 : 04.83%  |  a3 : 04.83%  |  a4 : 09.89%</span>
+<span class="go">   a1 : 02.37%  |  a2 : 02.37%  |  a5 : 08.98%</span>
+<span class="go"> &gt;&gt;&gt; lvp.save2PerfTab(&#39;divisiveExample&#39;)</span>
+<span class="go"> &gt;&gt;&gt; dvp = PerformanceTableau(&#39;divisiveExample&#39;)</span>
+<span class="go"> &gt;&gt;&gt; uodg = UnOpposedBipolarOutrankingDigraph(dvp)</span>
+<span class="go"> &gt;&gt;&gt; uodg.showRelationTable()</span>
+<span class="go"> * ---- Relation Table -----</span>
+<span class="go">  r   |  &#39;a1&#39;   &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;   &#39;a5&#39;   &#39;a6&#39;   &#39;a7&#39;</span>
+<span class="go"> -----|-------------------------------------------------</span>
+<span class="go"> &#39;a1&#39; |     -   +0.00  +0.00  +0.00  +0.00  +0.00  +0.00</span>
+<span class="go"> &#39;a2&#39; |  +0.00    -    +0.00  +0.00  +0.00  +0.00  +0.00</span>
+<span class="go"> &#39;a3&#39; |  +0.00  +0.00    -    +0.00  +0.00  +0.00  +0.00</span>
+<span class="go"> &#39;a4&#39; |  +0.00  +0.00  +0.00    -    +0.00  +0.00  +0.00</span>
+<span class="go"> &#39;a5&#39; |  +0.00  +0.00  +0.00  +0.00    -    +0.00  +0.00</span>
+<span class="go"> &#39;a6&#39; |  +0.00  +0.00  +0.00  +0.00  +0.00    -    +0.00</span>
+<span class="go"> &#39;a7&#39; |  +0.00  +0.00  +0.00  +0.00  +0.00  +0.00    -</span>
+<span class="go"> Valuation domain: [-1.000; 1.000]</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>As a consequence, a <strong>multipartisan primary selection</strong>, computed with a <code class="code docutils literal notranslate"><span class="pre">uodg.showBestChoiceRecommendation()</span></code> method,  will keep the complete initial set of candidates and, hence, becomes <strong>ineffective</strong> ((see <a class="reference internal" href="#ineffectiveprimaryselection"><span class="std std-numref">Listing 101</span></a> Line 6).</p>
+<div class="literal-block-wrapper docutils container" id="ineffectiveprimaryselection">
+<div class="code-block-caption"><span class="caption-number">Listing 101 </span><span class="caption-text">Example of ineffective primary multipartisan selection</span><a class="headerlink" href="#ineffectiveprimaryselection" title="Permalink to this code">¶</a></div>
+<div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">uodg</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">()</span>
+<span class="go"> Rubis best choice recommendation(s) (BCR)</span>
+<span class="go">  (in decreasing order of determinateness)</span>
+<span class="go"> Credibility domain: [-1.00,1.00]</span>
+<span class="go"> === &gt;&gt; ambiguous choice(s)</span>
+<span class="go"> choice              : [&#39;a1&#39;,&#39;a2&#39;,&#39;a3&#39;,&#39;a4&#39;,&#39;a5&#39;,&#39;a6&#39;,&#39;a7&#39;]</span>
+<span class="go"> independence        : 0.00</span>
+<span class="go"> dominance           : 1.00</span>
+<span class="go"> absorbency          : 1.00</span>
+<span class="go"> covered (%)         : 100.00</span>
+<span class="go"> determinateness (%) : 50.00</span>
+<span class="go">  - most credible action(s) = { }</span>
+</pre></div>
+</td></tr></table></div>
 </div>
 <p>Back to <a class="reference internal" href="#pearls-label"><span class="std std-ref">Content Table</span></a></p>
 </div>
