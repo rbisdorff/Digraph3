@@ -31,10 +31,15 @@ numfig = True
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest',
               'sphinx.ext.intersphinx','sphinx.ext.imgmath',
-              'sphinx.ext.viewcode','sphinx.ext.inheritance_diagram']
+              'sphinx.ext.viewcode','sphinx.ext.inheritance_diagram',
+              'sphinx.ext.autosectionlabel']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
+
+# prefix section label with the name of the document
+autosectionlabel_prefix_document = True
+autosectionlabel_maxdepth = 1
 
 # The suffix of source filenames.
 source_suffix = '.rst'

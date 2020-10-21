@@ -1592,7 +1592,7 @@ Let us reconsider, for instance, the previous performance tableau with three dec
 
 We notice in this example three decision objectives of equal importance (see :numref:`unOpposed1`). What will be the outranking situations that are positively (resp.  negatively) validated for each one of the decision objectives taken individually ?
 
-We may obtain such *unopposed multiobjective* outranking situtations by operating an **epistemic o-average fusion** (see the :py:func:`digraphsTools.symmetricAverage <digraphsTools.symmetricAverage>` method) of the mariginal outranking digraphs restricted to the coalition of criteria supporting each one of the decision objectives (see :numref:`unOpposed2` below).
+We may obtain such *unopposed multiobjective* outranking situtations by operating an **epistemic o-average fusion** (see the :py:func:`digraphsTools.symmetricAverage <digraphsTools.symmetricAverage>` method) of the marginal outranking digraphs restricted to the coalition of criteria supporting each one of the decision objectives (see :numref:`unOpposed2` below).
 
 .. code-block:: pycon
    :linenos:
@@ -1873,7 +1873,7 @@ We may visualise the corresponding bipolar-valued relation table by orienting th
 
    Relation table of multipartisan outranking digraph
 
-In :numref:`unOpposedOutrankings`, we may notice the the dominating outranking prekernel **['a06', 'a11', 'a13', 'a15']** gathers in fact a **multipartisan selection** of potential election winners. It is worthwhile noticing in :numref:`unOpposedOutrankings` btw that the majority margins obtained from a linear voting profile do verify the zero-sum rule (:math:`r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0`). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.
+In :numref:`unOpposedOutrankings`, we may notice that the dominating outranking prekernel **['a06', 'a11', 'a13', 'a15']** gathers in fact a **multipartisan selection** of potential election winners. It is worthwhile noticing in :numref:`unOpposedOutrankings` btw that the majority margins obtained from a linear voting profile do verify the zero-sum rule (:math:`r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0`). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.
 
 When restricting now, in a secondary election stage, the set of potential election winners to this dominating prekernel, we may compute the actual best social choice.
 
@@ -1901,7 +1901,7 @@ When restricting now, in a secondary election stage, the set of potential electi
    >>> g.computeCopelandRanking()
     ['a06', 'a11', 'a13', 'a15']
 
-We may eventually check that candidate *a06* represents effectively the *simple majority* winner, the *instant-run-off* winner, the *Borda*, as well as the *Condorcet winner* of the initially given linear voting profile *lvp* (see :numref:`Example3PartiesVotingProfile`).
+We may eventually check the quality of this best choice by noticing that candidate *a06* represents indeed the *simple majority* winner, the *instant-run-off* winner, the *Borda*, as well as the *Condorcet winner* of the initially given linear voting profile *lvp* (see :numref:`Example3PartiesVotingProfile`).
 
 .. code-block:: pycon
    :name: verificationBestChoice
@@ -1918,6 +1918,12 @@ We may eventually check that candidate *a06* represents effectively the *simple 
    >>> cd = CondorcetDigraph(lvp)
    >>> cd.condorcetWinners()
     ['a06']
+
+In this example, the multipartisan primary selection stage was quite effective in reducing the number of potential candidates to four out of a set of 15 candidadates without rejecting the actual winning candidate.
+
+.. note::
+
+   In a very **divisive two major party system**, like in the US [5]_, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate. As a consequence, a **multipartisan primary selection** will keep more or less the complete initial set of candidates and, hence, becomes **ineffective**.
 
 Back to :ref:`Content Table <Pearls-label>`
 
@@ -1967,6 +1973,8 @@ Bibliography
 .. [3] A *kernel* in a digraph *g* is a *clique* in the dual digraph *-g*.
 
 .. [4] The Gnu Regression, Econometrics and Time-series Library http://gretl.sourceforge.net/ .
+
+.. [5] The :py:class:`votingProfiles.RandomLinearVotingProfile` constructor provides a *DivisivePolitics* flag (*False* by default) for generating random linear voting profiles based on a divisive polls strucure.
 
 .. raw:: latex
 

@@ -1094,6 +1094,8 @@
 <span class="sd">          set of voters. If set to 0.0 or 1.0, only self.poll2, resp. self.poll1, will orient</span>
 <span class="sd">          the respective party supporters.</span>
 <span class="sd">        * The *other* paraemter sets the theoretical proportion of non party supporters.</span>
+<span class="sd">        * The *DivisivePolitics* flag provides, if True, two reversed polls for</span>
+<span class="sd">          generating the random linear ballots. </span>
 <span class="sd">        * The *votersWeights* parameter may be a list of positive integers in order to</span>
 <span class="sd">          deterministically attribute weights to the voters.</span>
 <span class="sd">          Is ignored when *RandomWeights* is True.</span>
@@ -1106,8 +1108,10 @@
                  <span class="n">WithPolls</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">partyRepartition</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
                  <span class="n">other</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                 <span class="n">DivisivePolitics</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">votersWeights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">RandomWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                 <span class="n">RandomWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">OrderedDict</span>
@@ -1150,7 +1154,8 @@
         <span class="k">if</span> <span class="n">WithPolls</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span> <span class="o">=</span>\
                 <span class="bp">self</span><span class="o">.</span><span class="n">generateRandomLinearBallotWithPoll</span><span class="p">(</span>\
-                        <span class="n">partyRepartition</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+                        <span class="n">partyRepartition</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">DivisivePolitics</span><span class="p">,</span>\
+                        <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">linearBallot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generateRandomLinearBallot</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
@@ -1173,7 +1178,8 @@
         <span class="k">return</span> <span class="n">linearBallot</span></div>
 
 <div class="viewcode-block" id="RandomLinearVotingProfile.generateRandomLinearBallotWithPoll"><a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomLinearVotingProfile.generateRandomLinearBallotWithPoll">[docs]</a>    <span class="k">def</span> <span class="nf">generateRandomLinearBallotWithPoll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">partyRepartition</span><span class="p">,</span>\
-                                           <span class="n">other</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                                           <span class="n">other</span><span class="p">,</span><span class="n">DivisivePolitics</span><span class="p">,</span>\
+                                           <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a random linear ballot in accordance with the given polls:</span>
 <span class="sd">        self.poll1 and self.poll2.</span>
@@ -1207,7 +1213,7 @@
 <span class="c1">##            poll1[ci1] = xci</span>
 <span class="c1">##            poll2[ci2] = xci</span>
            
-        <span class="c1"># independent polls</span>
+        <span class="c1"># divisive or independent polls</span>
         <span class="n">poll1</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">sumPoll</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidatesList</span><span class="p">:</span>
@@ -1218,9 +1224,26 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">poll1</span> <span class="o">=</span> <span class="n">poll1</span>
         <span class="n">poll2</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">sumPoll</span> <span class="o">=</span> <span class="mf">0.0</span>
-        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidatesList</span><span class="p">:</span>
-            <span class="n">poll2</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">expovariate</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-            <span class="n">sumPoll</span> <span class="o">+=</span> <span class="n">poll2</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">DivisivePolitics</span><span class="p">:</span>
+            <span class="n">p1</span> <span class="o">=</span> <span class="p">[(</span><span class="n">poll1</span><span class="p">[</span><span class="n">c</span><span class="p">],</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidatesList</span><span class="p">]</span>
+            <span class="n">p1</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">p1</span><span class="p">))</span>
+            <span class="n">p2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">p1</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">p2</span><span class="p">)</span>
+            <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">candidatesList</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
+            <span class="c1">#for c in candidatesList:</span>
+                <span class="c1">#c = candidatesList[i]</span>
+                <span class="c1">#poll2[c] = random.expovariate(1)</span>
+                <span class="n">c</span> <span class="o">=</span> <span class="n">p1</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">poll2</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">p2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">sumPoll</span> <span class="o">+=</span> <span class="n">poll2</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
+<span class="c1">##            for c in poll2:</span>
+<span class="c1">##                poll2[c] /= sumPoll</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidatesList</span><span class="p">:</span>
+                <span class="n">poll2</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">expovariate</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">sumPoll</span> <span class="o">+=</span> <span class="n">poll2</span><span class="p">[</span><span class="n">c</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">poll2</span><span class="p">:</span>
             <span class="n">poll2</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">/=</span> <span class="n">sumPoll</span>
 
@@ -1263,15 +1286,15 @@
                             <span class="n">NotShuffled</span> <span class="o">=</span> <span class="kc">False</span>
                     <span class="n">shuffledCandidatesList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xc</span><span class="p">)</span>
                     <span class="n">currPoll</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">xc</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">shuffledCandidatesList</span><span class="p">)</span>
+<span class="c1">##                    if Debug:</span>
+<span class="c1">##                        print(i,shuffledCandidatesList)</span>
                             
                 <span class="n">shc</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">shuffledCandidatesList</span><span class="p">)</span>
                 <span class="n">sc</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">candidatesList</span><span class="p">)</span>
                 <span class="n">xc</span> <span class="o">=</span> <span class="p">(</span><span class="n">sc</span><span class="o">-</span><span class="n">shc</span><span class="p">)</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
                 <span class="n">shuffledCandidatesList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xc</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt;&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span><span class="n">shuffledCandidatesList</span><span class="p">)</span>           
+<span class="c1">##                if Debug:</span>
+<span class="c1">##                    print(&#39;==&gt;&gt;&#39;, v,shuffledCandidatesList)           </span>
                 <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">linearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">shuffledCandidatesList</span>
             
@@ -1868,17 +1891,20 @@
     <span class="c1">## for x in arrowRaynaudRanking:</span>
     <span class="c1">##     print &#39;%s: %d (%.2f)&#39; % (x[1], x[0], aar[x[1]][&#39;majorityMargin&#39;])</span>
 
-    <span class="n">lvp</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
-                            <span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">lvp</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                            <span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                             <span class="n">WithPolls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="n">partyRepartition</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
                             <span class="n">other</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                            <span class="n">DivisivePolitics</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="c1">#seed=0.20990710811162194) # 1 circuit</span>
                             <span class="c1">#seed=0.8077233289616987)  # 2 circuits !</span>
-                            <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
+                            <span class="n">seed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">lvp</span><span class="o">.</span><span class="n">showRandomPolls</span><span class="p">()</span>
 <span class="c1">##    ## lvp = LinearVotingProfile(&#39;templinearprofile&#39;)</span>
     <span class="n">lvp</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
-    <span class="n">lvp1</span> <span class="o">=</span> <span class="n">LinearVotingProfile</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+<span class="c1">##    lvp1 = LinearVotingProfile(&#39;test&#39;)</span>
     <span class="n">lvp</span><span class="o">.</span><span class="n">save2PerfTab</span><span class="p">()</span>
     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">)</span>

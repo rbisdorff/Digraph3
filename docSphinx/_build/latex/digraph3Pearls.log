@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  20 OCT 2020 12:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  21 OCT 2020 12:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -852,36 +852,36 @@ File: unOpposedOutrankings.png Graphic file (type png)
 Package pdftex.def Info: unOpposedOutrankings.png  used on input line 2254.
 (pdftex.def)             Requested size: 451.68457pt x 306.35443pt.
  [52 <./unOpposedOutrankings.png>] [53]
-Underfull \hbox (badness 10000) in paragraph at lines 2312--2313
+Underfull \hbox (badness 10000) in paragraph at lines 2322--2323
 \T1/cmr/m/n/12 Per-for-mance Dif-fer-ences^^Q \T1/cmr/m/it/12 Jour-nal of Multi
 -Criteria De-ci-sion Anal-
  []
 
 
-Underfull \hbox (badness 8113) in paragraph at lines 2312--2313
+Underfull \hbox (badness 8113) in paragraph at lines 2322--2323
 \T1/cmr/m/it/12 y-sis \T1/cmr/m/n/12 (Wi-ley) \T1/cmr/bx/n/12 20\T1/cmr/m/n/12 
 :3-12 (down-load-able preprint [][]PDF file 403.5 Kb[][]
  []
 
 
-Underfull \hbox (badness 5460) in paragraph at lines 2316--2317
+Underfull \hbox (badness 5460) in paragraph at lines 2326--2327
 \T1/cmr/m/n/12 ker-nels from bipo-lar val-ued di-graphs^^Q. \T1/cmr/m/it/12 Eu-
 ro-pean Jour-nal of Op-er-
  []
 
 
-Underfull \hbox (badness 6559) in paragraph at lines 2316--2317
+Underfull \hbox (badness 6559) in paragraph at lines 2326--2327
 \T1/cmr/m/it/12 a-tional Re-search\T1/cmr/m/n/12 , 175 (2006) 155-170. (On-line
 ) Elec-tronic ver-sion:
  []
 
 [54] (./digraph3Pearls.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2335.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2345.
  [55]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2335.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2345.
  (./digraph3Pearls.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2335.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2335.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2345.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2345.
 
 Package rerunfilecheck Info: File `digraph3Pearls.out' has not changed.
 (rerunfilecheck)             Checksum: 321D6C3B46ECEB5136736EA8357867FF;7808.
@@ -889,56 +889,57 @@ Package rerunfilecheck Info: File `digraph3Pearls.out' has not changed.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2335.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2345.
  ) 
 Here is how much of TeX's memory you used:
- 14063 strings out of 482504
- 201587 string characters out of 5947330
+ 14067 strings out of 482504
+ 201636 string characters out of 5947330
  614638 words of memory out of 5000000
- 28566 multiletter control sequences out of 15000+600000
- 558045 words of font info for 79 fonts, out of 8000000 for 9000
+ 28567 multiletter control sequences out of 15000+600000
+ 558358 words of font info for 80 fonts, out of 8000000 for 9000
  396 hyphenation exceptions out of 8191
  38i,12n,49p,1265b,881s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecss1200.
-600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsi1
+ </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.
+600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecss1
 200.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/e
-ctt1200.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/
-ec/ecso1440.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknap
-pen/ec/ecit1095.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/j
-knappen/ec/ecrm1000.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfo
-ur/jknappen/ec/ecti1000.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/
-ljfour/jknappen/ec/ecrm0700.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts
-/pk/ljfour/jknappen/ec/tctt1095.600pk> </home/bisdorff/.texlive2019/texmf-var/f
-onts/pk/ljfour/jknappen/ec/ectt1095.600pk> </home/bisdorff/.texlive2019/texmf-v
-ar/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </home/bisdorff/.texlive2019/tex
-mf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/bisdorff/.texlive2019
-/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </home/bisdorff/.texlive
-2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </home/bisdorff/.tex
-live2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </home/bisdorff/
-.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/bisdo
-rff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/b
-isdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1728.600pk> </ho
-me/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> 
-</home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600
-pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200
+csi1200.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/
+ec/ectt1200.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/ecso1440.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/j
+knappen/ec/ecit1095.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfo
+ur/jknappen/ec/ecrm1000.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/
+ljfour/jknappen/ec/ecti1000.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts
+/pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/bisdorff/.texlive2019/texmf-var/f
+onts/pk/ljfour/jknappen/ec/tctt1095.600pk> </home/bisdorff/.texlive2019/texmf-v
+ar/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> </home/bisdorff/.texlive2019/tex
+mf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </home/bisdorff/.texlive2019
+/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/bisdorff/.texlive
+2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </home/bisdorff/.tex
+live2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk> </home/bisdorff/
+.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1200.600pk> </home/bisdo
+rff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/b
+isdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </ho
+me/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1728.600pk> 
+</home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600
+pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095
 .600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx
-2488.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/
-ecxc1728.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen
-/ec/ecbx1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
-12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/symbols/msam10.pfb>
-Output written on digraph3Pearls.pdf (56 pages, 1933839 bytes).
+1200.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/
+ecbx2488.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen
+/ec/ecxc1728.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jkna
+ppen/ec/ecbx1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/symbols/msam10.pfb>
+Output written on digraph3Pearls.pdf (56 pages, 1942347 bytes).
 PDF statistics:
- 1608 PDF objects out of 1728 (max. 8388607)
- 777 compressed objects within 8 object streams
- 183 named destinations out of 1000 (max. 500000)
+ 1643 PDF objects out of 1728 (max. 8388607)
+ 784 compressed objects within 8 object streams
+ 184 named destinations out of 1000 (max. 500000)
  342 words of extra memory for PDF output out of 10000 (max. 10000000)
 
