@@ -206,7 +206,7 @@ class LinearOrder(Digraph):
         """
         import os
         if Comments:
-            print('*---- exporting a dot file dor GraphViz tools ---------*')
+            print('*---- exporting a dot file for GraphViz tools ---------*')
         #actionkeys = [x for x in self.actions]
         actionkeys = self.computeOrder()
         n = len(actionkeys)

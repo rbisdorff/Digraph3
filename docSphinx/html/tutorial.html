@@ -4895,7 +4895,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 2
 3
 4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">))</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-<span class="go"> *---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to converse-dual_rel_best10.dot</span>
 <span class="go"> dot -Tpng converse-dual_rel_best10.dot -o converse-dual_rel_best10.png</span>
 </pre></div>
@@ -7565,7 +7565,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <span class="go">  dominant prekernels :  0</span>
 <span class="go">  absorbent prekernels:  0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dc6</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;dualChordlessCircuit&#39;</span><span class="p">)</span>
-<span class="go"> *---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to dualChordlessCircuit.dot</span>
 <span class="go"> circo -Tpng dualChordlessCircuit.dot -o dualChordlessCircuit.png</span>
 </pre></div>
@@ -7589,11 +7589,11 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 6
 7
 8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">-</span><span class="n">c6</span><span class="p">)</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-<span class="go"> *---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to dual_c6.dot</span>
 <span class="go"> circo -Tpng dual_c6.dot -o dual_c6.png</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">~</span><span class="n">c6</span><span class="p">)</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-<span class="go"> *---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to converse_c6.dot</span>
 <span class="go"> circo -Tpng converse_c6.dot -o converse_c6.png</span>
 </pre></div>
@@ -7616,7 +7616,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="n">RandomDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span> <span class="o">=</span> <span class="n">RandomDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">arcProbability</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;randomLaterality&#39;</span><span class="p">)</span>
-<span class="go"> *---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to randomLaterality.dot</span>
 <span class="go"> dot -Grankdir=BT -Tpng randomLaterality.dot -o randomLaterality.png</span>
 </pre></div>
@@ -7723,7 +7723,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;orientedLaterality&#39;</span><span class="p">,</span>\
 <span class="go">                      bestChoice=set([&#39;a3&#39;, &#39;a4&#39;]),\</span>
 <span class="go">                      worstChoice=set([&#39;a1&#39;, &#39;a6&#39;]))</span>
-<span class="go"> *---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to orientedLaterality.dot</span>
 <span class="go"> dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png</span>
 </pre></div>
@@ -7774,7 +7774,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 4
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>  <span class="c1"># Codual: the converse of the negation</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tutOutRanking&#39;</span><span class="p">)</span>
-<span class="go"> *---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to tutOutranking.dot</span>
 <span class="go"> dot -Grankdir=BT -Tpng tutOutranking.dot -o tutOutranking.png</span>
 </pre></div>
@@ -7865,7 +7865,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 4
 5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;bestWorstOrientation&#39;</span><span class="p">,</span>
 <span class="go">          bestChoice=[&#39;a2&#39;,&#39;a4&#39;], worstChoice=[&#39;a7&#39;])</span>
-<span class="go"> *---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to bestWorstOrientation.dot</span>
 <span class="go"> dot -Grankdir=BT -Tpng bestWorstOrientation.dot -o bestWorstOrientation.png</span>
 </pre></div>

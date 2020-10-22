@@ -3970,7 +3970,7 @@ class Digraph(object):
         """
         import os
         if Comments:
-            print('*---- exporting a dot file dor GraphViz tools ---------*')
+            print('*---- exporting a dot file for GraphViz tools ---------*')
         if actionsSubset == None:
             actionkeys = [x for x in self.actions]
         else:
@@ -11356,7 +11356,7 @@ class CirculantDigraph(Digraph):
         >>> from digraphs import CirculantDigraph
         >>> c8 = CirculantDigraph(order=8,circulants=[1,3])
         >>> c8.exportGraphViz('c8')
-        *---- exporting a dot file dor GraphViz tools ---------*
+        *---- exporting a dot file for GraphViz tools ---------*
         Exporting to c8.dot
         circo -Tpng c8.dot -o c8.png
         # see below the graphviz drawing

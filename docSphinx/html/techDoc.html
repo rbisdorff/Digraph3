@@ -598,7 +598,7 @@ and/or negative circular shifts of value 1 to n.</div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">CirculantDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">circulants</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;c8&#39;</span><span class="p">)</span>
-<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to c8.dot</span>
 <span class="go">circo -Tpng c8.dot -o c8.png</span>
 <span class="go"># see below the graphviz drawing</span>
@@ -7819,7 +7819,7 @@ bipolar-valued marginal pairwise majority difference digraphs.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeCondorcetWinner</span><span class="p">()</span>
 <span class="go">[&#39;a1&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-<span class="go">*---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to rel_randLinearProfile.dot</span>
 <span class="go">dot -Grankdir=BT -Tpng rel_randLinearProfile.dot -o rel_randLinearProfile.png</span>
 </pre></div>

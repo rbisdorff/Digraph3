@@ -1209,7 +1209,7 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">    covered      :  0.583</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd90</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;confidentOutranking&#39;</span><span class="p">,</span>
 <span class="go">          bestChoice=[&#39;a1&#39;, &#39;a7&#39;],worstChoice=[&#39;a2&#39;, &#39;a5&#39;, &#39;a6&#39;])</span>
-<span class="go"> *---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to confidentOutranking.dot</span>
 <span class="go"> dot -Grankdir=BT -Tpng confidentOutranking.dot -o confidentOutranking.png</span>
 </pre></div>
@@ -2283,7 +2283,7 @@ confidence level <em>alpha</em> %, if</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">uopg</span><span class="p">))</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;unopDigraph&#39;</span><span class="p">,</span>\
 <span class="go">                             bestChoice = [&#39;p2&#39;, &#39;p4&#39;],\</span>
 <span class="go">                             worstChoice = [&#39;p3&#39;, &#39;p5&#39;, &#39;p6&#39;])</span>
-<span class="go"> *---- exporting a dot file dor GraphViz tools ---------*</span>
+<span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">  Exporting to unopDigraph.dot</span>
 <span class="go">  dot -Grankdir=BT -Tpng unopDigraph.dot -o unopDigraph.png</span>
 </pre></div>
@@ -2701,7 +2701,7 @@ confidence level <em>alpha</em> %, if</p>
 </div>
 <p>With such king of divisive voting profile, there may not always exist an obvious winner. But in our example here, we are lucky.</p>
 <div class="literal-block-wrapper docutils container" id="uncertainwinner">
-<div class="code-block-caption"><span class="caption-number">Listing 102 </span><span class="caption-text">Example of uncertain secondary selection</span><a class="headerlink" href="#uncertainwinner" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 102 </span><span class="caption-text">Example of secondary selection</span><a class="headerlink" href="#uncertainwinner" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2748,17 +2748,19 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>In <a class="reference internal" href="#uncertainwinner"><span class="std std-numref">Listing 102</span></a> we see, for instance, that the <em>simple majority</em> winnner is <em>a2</em> (Line 2), whereas the <em>instant-run-off</em> winner is <em>a6</em> (Line 4). When constructing the Condorcet Digraph with the pairwise majority margins, a <em>Condorcet winner</em>, namely <em>a3</em> becomes apparent (Line 13). More interesting even is to notice that the pairwise majority margins model in fact a linear ranking <em>[‘a3’, ‘a7’, ‘a6’, ‘a2’, ‘a5’, ‘a4’, ‘a1’]</em> of all the eligible candidates, as shown with a Copeland ranking rule (Lines 21-22).</p>
-<p>We may visualize this ranking in a graphviz drawing by previously dropping the transitive closing arcs (see <a class="reference internal" href="#drawingranking"><span class="std std-numref">Listing 103</span></a> Line 1).</p>
+<p>In <a class="reference internal" href="#uncertainwinner"><span class="std std-numref">Listing 102</span></a> we see, for instance, that the <em>simple majority</em> winnner is <em>a2</em> (Line 2), whereas the <em>instant-run-off</em> winner is <em>a6</em> (Line 4). However, when constructing with the pairwise majority margins the corresponding <em>Condorcet</em> digraph (Lines 5-6), a <em>Condorcet winner</em>, namely <em>a3</em> becomes apparent (Line 13). More interesting even is to notice that the apparent <em>Condorcet</em> digraph models in fact a linear ranking <em>[‘a3’, ‘a7’, ‘a6’, ‘a2’, ‘a5’, ‘a4’, ‘a1’]</em> of all the eligible candidates, as shown with a Copeland ranking rule (Lines 21-22).</p>
+<p>We may eventually visualize in <a class="reference internal" href="#drawingranking"><span class="std std-numref">Listing 103</span></a> this ranking with a graphviz drawing where we drop the transitive closing arcs (Line 1) and orient the drawing with <em>Condorcet</em> winner <em>a3</em> and looser <em>a1</em> (Lines 2-3).</p>
 <div class="literal-block-wrapper docutils container" id="drawingranking">
 <div class="code-block-caption"><span class="caption-number">Listing 103 </span><span class="caption-text">Drawing the linear ordering</span><a class="headerlink" href="#drawingranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;divGraph&#39;</span><span class="p">,</span><span class="n">bestChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a3&#39;</span><span class="p">],</span><span class="n">worstChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a1&#39;</span><span class="p">])</span>
-<span class="go"> *---- exporting a dot file dor GraphViz tools ---------*</span>
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;divGraph&#39;</span><span class="p">,</span><span class="n">bestChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a3&#39;</span><span class="p">],</span>\
+<span class="go">                                 worstChoice=[&#39;a1&#39;])</span>
+<span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">  Exporting to divGraph.dot</span>
 <span class="go">  dot -Grankdir=BT -Tpng divGraph.dot -o divGraph.png</span>
 </pre></div>

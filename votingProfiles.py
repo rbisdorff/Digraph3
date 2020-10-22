@@ -1409,7 +1409,7 @@ class CondorcetDigraph(Digraph):
     >>> g.computeCondorcetWinner()
     ['a1']
     >>> g.exportGraphViz()
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to rel_randLinearProfile.dot
     dot -Grankdir=BT -Tpng rel_randLinearProfile.dot -o rel_randLinearProfile.png
 

@@ -3571,7 +3571,7 @@ Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, 
 .. code-block:: pycon
 
    >>> (~(-g)).exportGraphViz()
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to converse-dual_rel_best10.dot
     dot -Tpng converse-dual_rel_best10.dot -o converse-dual_rel_best10.png
 
@@ -5369,7 +5369,7 @@ Chordless circuits of even length may thus be indifferently oriented along two o
      dominant prekernels :  0
      absorbent prekernels:  0
    >>> dc6.exportGraphViz(fileName='dualChordlessCircuit')
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to dualChordlessCircuit.dot
     circo -Tpng dualChordlessCircuit.dot -o dualChordlessCircuit.png
 
@@ -5395,11 +5395,11 @@ It is worth noticing that the *dual* version ([14]_) of a *weak* circuit corresp
    :linenos:
 
    >>> (-c6).exportGraphViz()
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to dual_c6.dot
     circo -Tpng dual_c6.dot -o dual_c6.png
    >>> (~c6).exportGraphViz()
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to converse_c6.dot
     circo -Tpng converse_c6.dot -o converse_c6.png 
 
@@ -5426,7 +5426,7 @@ In genuine random digraphs, however, we may need to check for each of its MISs, 
    >>> from randomDigraphs import RandomDigraph
    >>> rd = RandomDigraph(order=7,arcProbability=0.3,seed=5)
    >>> rd.exportGraphViz('randomLaterality')
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to randomLaterality.dot
     dot -Grankdir=BT -Tpng randomLaterality.dot -o randomLaterality.png
 
@@ -5501,7 +5501,7 @@ Among the six MISs contained in this random digraph (see above Lines 3-8) we dis
    >>> rd.exportGraphViz(fileName='orientedLaterality',\
                          bestChoice=set(['a3', 'a4']),\
                          worstChoice=set(['a1', 'a6']))
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to orientedLaterality.dot
     dot -Grankdir=BT -Tpng orientedLaterality.dot -o orientedLaterality.png
 
@@ -5551,7 +5551,7 @@ The underlying random performance tableau (see :numref:`randomOutranking`) shows
 
    >>> gcd = ~(-g)  # Codual: the converse of the negation
    >>> gcd.exportGraphViz(fileName='tutOutRanking')
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to tutOutranking.dot
     dot -Grankdir=BT -Tpng tutOutranking.dot -o tutOutranking.png
 
@@ -5618,7 +5618,7 @@ In :numref:`bestWorstOrientation` below, we orient the drawing of the strict out
 
    >>> gcd.exportGraphViz(fileName='bestWorstOrientation',
              bestChoice=['a2','a4'], worstChoice=['a7'])
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to bestWorstOrientation.dot
     dot -Grankdir=BT -Tpng bestWorstOrientation.dot -o bestWorstOrientation.png
 

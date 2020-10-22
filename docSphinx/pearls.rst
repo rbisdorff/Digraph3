@@ -1033,7 +1033,7 @@ We may draw the corresponding strict 90%-confident outranking digraph, oriented 
        covered      :  0.583
    >>> gcd90.exportGraphViz(fileName='confidentOutranking',
              bestChoice=['a1', 'a7'],worstChoice=['a2', 'a5', 'a6'])
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to confidentOutranking.dot
     dot -Grankdir=BT -Tpng confidentOutranking.dot -o confidentOutranking.png
 
@@ -1709,7 +1709,7 @@ We may visualize this **unopposed robustness** result in :numref:`unopDigraph` b
     >>> (~(-uopg)).exportGraphViz(fileName = 'unopDigraph',\
                                  bestChoice = ['p2', 'p4'],\
                                  worstChoice = ['p3', 'p5', 'p6'])
-     *---- exporting a dot file dor GraphViz tools ---------*
+     *---- exporting a dot file for GraphViz tools ---------*
       Exporting to unopDigraph.dot
       dot -Grankdir=BT -Tpng unopDigraph.dot -o unopDigraph.png
 
@@ -1999,7 +1999,7 @@ With such king of divisive voting profile, there may not always exist an obvious
 
 .. code-block:: pycon
    :name: UncertainWinner
-   :caption: Example of uncertain secondary selection
+   :caption: Example of secondary selection
    :linenos:
 
    >>> lvp.computeSimpleMajorityWinner()
@@ -2026,9 +2026,9 @@ With such king of divisive voting profile, there may not always exist an obvious
     ['a3', 'a7', 'a6', 'a2', 'a5', 'a4', 'a1']
     
 
-In :numref:`UncertainWinner` we see, for instance, that the *simple majority* winnner is *a2* (Line 2), whereas the *instant-run-off* winner is *a6* (Line 4). When constructing the Condorcet Digraph with the pairwise majority margins, a *Condorcet winner*, namely *a3* becomes apparent (Line 13). More interesting even is to notice that the pairwise majority margins model in fact a linear ranking *['a3', 'a7', 'a6', 'a2', 'a5', 'a4', 'a1']* of all the eligible candidates, as shown with a Copeland ranking rule (Lines 21-22).
+In :numref:`UncertainWinner` we see, for instance, that the *simple majority* winnner is *a2* (Line 2), whereas the *instant-run-off* winner is *a6* (Line 4). However, when constructing with the pairwise majority margins the corresponding *Condorcet* digraph (Lines 5-6), a *Condorcet winner*, namely *a3* becomes apparent (Line 13). More interesting even is to notice that the apparent *Condorcet* digraph models in fact a linear ranking *['a3', 'a7', 'a6', 'a2', 'a5', 'a4', 'a1']* of all the eligible candidates, as shown with a Copeland ranking rule (Lines 21-22).
 
-We may visualize this ranking in a graphviz drawing by previously dropping the transitive closing arcs (see :numref:`drawingRanking` Line 1).
+We may eventually visualize in :numref:`drawingRanking` this ranking with a graphviz drawing where we drop the transitive closing arcs (Line 1) and orient the drawing with *Condorcet* winner *a3* and looser *a1* (Lines 2-3).
 
 .. code-block:: pycon
    :name: drawingRanking
@@ -2036,8 +2036,9 @@ We may visualize this ranking in a graphviz drawing by previously dropping the t
    :linenos:
 
    >>> cg.closeTransitive(Reverse=True)
-   >>> cg.exportGraphViz('divGraph',bestChoice=['a3'],worstChoice=['a1'])
-    *---- exporting a dot file dor GraphViz tools ---------*
+   >>> cg.exportGraphViz('divGraph',bestChoice=['a3'],\
+                                    worstChoice=['a1'])
+    *---- exporting a dot file for GraphViz tools ---------*
      Exporting to divGraph.dot
      dot -Grankdir=BT -Tpng divGraph.dot -o divGraph.png
 
