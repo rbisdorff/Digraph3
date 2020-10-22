@@ -28,5 +28,5 @@
 \contentsline {subsection}{\numberline {7.2}Multipartisan primary selection of eligible candidates}{51}{subsection.7.2}%
 \contentsline {subsection}{\numberline {7.3}Secondary election winner determination}{52}{subsection.7.3}%
 \contentsline {subsection}{\numberline {7.4}Multipartisan preferences in divisive politics}{54}{subsection.7.4}%
-\contentsline {section}{\numberline {8}Bibliography}{55}{section.8}%
-\contentsline {section}{References}{55}{section.8}%
+\contentsline {section}{\numberline {8}Bibliography}{57}{section.8}%
+\contentsline {section}{References}{57}{section.8}%

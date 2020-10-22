@@ -2315,7 +2315,7 @@ The \sphinxcode{\sphinxupquote{votingProfiles.RandomLinearVotingProfile}} constr
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp} \PYG{o}{=} \PYG{n}{RandomLinearVotingProfile}\PYG{p}{(}\PYGZbs{}
 \PYG{g+go}{           numberOfCandidates=7,numberOfVoters=500,\PYGZbs{}}
-\PYG{g+go}{           WithPolls=True, partyRepartition=0.4,other=0.2,«}
+\PYG{g+go}{           WithPolls=True, partyRepartition=0.4,other=0.2,\PYGZbs{}}
 \PYG{g+go}{           DivisivePolitics=True, seed=1)}
 \PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} lvp.showRandomPolls()}
 \PYG{g+go}{  Random repartition of voters}
@@ -2366,6 +2366,54 @@ As a consequence, a \sphinxstylestrong{multipartisan primary selection}, compute
 \PYG{g+go}{ determinateness (\PYGZpc{}) : 50.00}
 \PYG{g+go}{  \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZcb{}}
 \end{sphinxVerbatim}
+
+With such king of divisive voting profile, there may not always exist an obvious winner. But in our example here, we are lucky.
+\sphinxSetupCaptionForVerbatim{Example of uncertain secondary selection}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:uncertainwinner}}}
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp}\PYG{o}{.}\PYG{n}{computeSimpleMajorityWinner}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ [\PYGZsq{}a2\PYGZsq{}]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvp}\PYG{o}{.}\PYG{n}{computeInstantRunoffWinner}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ [\PYGZsq{}a6\PYGZsq{}]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{n}{CondorcetDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cg} \PYG{o}{=} \PYG{n}{CondorcetDigraph}\PYG{p}{(}\PYG{n}{lvp}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{n+nb+bp}{False}\PYG{p}{)}
+\PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{   S   |  \PYGZsq{}a1\PYGZsq{} \PYGZsq{}a2\PYGZsq{} \PYGZsq{}a3\PYGZsq{} \PYGZsq{}a4\PYGZsq{} \PYGZsq{}a5\PYGZsq{} \PYGZsq{}a6\PYGZsq{} \PYGZsq{}a7\PYGZsq{}}
+\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{  \PYGZsq{}a1\PYGZsq{} |   \PYGZhy{}   \PYGZhy{}68  \PYGZhy{}90  \PYGZhy{}46  \PYGZhy{}68  \PYGZhy{}88  \PYGZhy{}84}
+\PYG{g+go}{  \PYGZsq{}a2\PYGZsq{} |  +68   \PYGZhy{}   \PYGZhy{}32  +80  +46   \PYGZhy{}6  \PYGZhy{}24}
+\PYG{g+go}{  \PYGZsq{}a3\PYGZsq{} |  +90  +32   \PYGZhy{}   +58  +46   +4   +8}
+\PYG{g+go}{  \PYGZsq{}a4\PYGZsq{} |   +4  \PYGZhy{}80  \PYGZhy{}58   \PYGZhy{}   \PYGZhy{}16  \PYGZhy{}68  \PYGZhy{}72}
+\PYG{g+go}{  \PYGZsq{}a5\PYGZsq{} |  +68  \PYGZhy{}46  \PYGZhy{}46  +16   \PYGZhy{}   \PYGZhy{}26  \PYGZhy{}64}
+\PYG{g+go}{  \PYGZsq{}a6\PYGZsq{} |  +88   +6   \PYGZhy{}4  +68  \PYGZdq{}26   \PYGZhy{}    \PYGZhy{}2}
+\PYG{g+go}{  \PYGZsq{}a7\PYGZsq{} |  +84  +24   \PYGZhy{}8  +72  \PYGZdq{}64   \PYGZdq{}2   \PYGZhy{}}
+\PYG{g+go}{ Valuation domain: [\PYGZhy{}500;+500]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cg}\PYG{o}{.}\PYG{n}{condorcetWinners}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ [\PYGZsq{}a3\PYGZsq{}]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cg}\PYG{o}{.}\PYG{n}{computeCopelandRanking}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ [\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]}
+\end{sphinxVerbatim}
+
+In \hyperref[\detokenize{pearls:uncertainwinner}]{Listing \ref{\detokenize{pearls:uncertainwinner}}} we see, for instance, that the \sphinxstyleemphasis{simple majority} winnner is \sphinxstyleemphasis{a2} (Line 2), whereas the \sphinxstyleemphasis{instant\sphinxhyphen{}run\sphinxhyphen{}off} winner is \sphinxstyleemphasis{a6} (Line 4). When constructing the Condorcet Digraph with the pairwise majority margins, a \sphinxstyleemphasis{Condorcet winner}, namely \sphinxstyleemphasis{a3} becomes apparent (Line 13). More interesting even is to notice that the pairwise majority margins model in fact a linear ranking \sphinxstyleemphasis{{[}‘a3’, ‘a7’, ‘a6’, ‘a2’, ‘a5’, ‘a4’, ‘a1’{]}} of all the eligible candidates, as shown with a Copeland ranking rule (Lines 21\sphinxhyphen{}22).
+
+We may visualize this ranking in a graphviz drawing by previously dropping the transitive closing arcs (see \hyperref[\detokenize{pearls:drawingranking}]{Listing \ref{\detokenize{pearls:drawingranking}}} Line 1).
+\sphinxSetupCaptionForVerbatim{Drawing the linear ordering}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:drawingranking}}}
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cg}\PYG{o}{.}\PYG{n}{closeTransitive}\PYG{p}{(}\PYG{n}{Reverse}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cg}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{divGraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{bestChoice}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{,}\PYG{n}{worstChoice}\PYG{o}{=}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file dor GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{  Exporting to divGraph.dot}
+\PYG{g+go}{  dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng divGraph.dot \PYGZhy{}o divGraph.png}
+\end{sphinxVerbatim}
+
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=250\sphinxpxdimen]{{divGraph}.png}
+\caption{Linear ordering of the eligible candidates}\label{\detokenize{pearls:divisivegraph}}\end{figure}
 
 Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}}
 

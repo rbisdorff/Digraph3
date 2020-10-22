@@ -1942,7 +1942,7 @@ In :numref:`divisivePolitics` below we generate such a divisive kind of linear v
 
    >>> lvp = RandomLinearVotingProfile(\
               numberOfCandidates=7,numberOfVoters=500,\
-              WithPolls=True, partyRepartition=0.4,other=0.2,«
+              WithPolls=True, partyRepartition=0.4,other=0.2,\
 	      DivisivePolitics=True, seed=1)
     >>> lvp.showRandomPolls()
      Random repartition of voters
@@ -1994,6 +1994,60 @@ As a consequence, a **multipartisan primary selection**, computed with a :code:`
     covered (%)         : 100.00
     determinateness (%) : 50.00
      - most credible action(s) = { }
+
+With such king of divisive voting profile, there may not always exist an obvious winner. But in our example here, we are lucky.
+
+.. code-block:: pycon
+   :name: UncertainWinner
+   :caption: Example of uncertain secondary selection
+   :linenos:
+
+   >>> lvp.computeSimpleMajorityWinner()
+    ['a2']
+   >>> lvp.computeInstantRunoffWinner()
+    ['a6']
+   >>> from votingProfiles import CondorcetDigraph
+   >>> cg = CondorcetDigraph(lvp)
+   >>> cg.showRelationTable(ReflexiveTerms=False)
+    * ---- Relation Table -----
+      S   |  'a1' 'a2' 'a3' 'a4' 'a5' 'a6' 'a7'	  
+    ------|------------------------------------
+     'a1' |   -   -68  -90  -46	 -68  -88  -84	 
+     'a2' |  +68   -   -32  +80	 +46   -6  -24	 
+     'a3' |  +90  +32   -   +58	 +46   +4   +8	 
+     'a4' |   +4  -80  -58   - 	 -16  -68  -72	 
+     'a5' |  +68  -46  -46  +16	  -   -26  -64	 
+     'a6' |  +88   +6   -4  +68	 "26   -    -2	 
+     'a7' |  +84  +24   -8  +72	 "64   "2   - 	 
+    Valuation domain: [-500;+500]
+   >>> cg.condorcetWinners()
+    ['a3']
+   >>> cg.computeCopelandRanking()
+    ['a3', 'a7', 'a6', 'a2', 'a5', 'a4', 'a1']
+    
+
+In :numref:`UncertainWinner` we see, for instance, that the *simple majority* winnner is *a2* (Line 2), whereas the *instant-run-off* winner is *a6* (Line 4). When constructing the Condorcet Digraph with the pairwise majority margins, a *Condorcet winner*, namely *a3* becomes apparent (Line 13). More interesting even is to notice that the pairwise majority margins model in fact a linear ranking *['a3', 'a7', 'a6', 'a2', 'a5', 'a4', 'a1']* of all the eligible candidates, as shown with a Copeland ranking rule (Lines 21-22).
+
+We may visualize this ranking in a graphviz drawing by previously dropping the transitive closing arcs (see :numref:`drawingRanking` Line 1).
+
+.. code-block:: pycon
+   :name: drawingRanking
+   :caption: Drawing the linear ordering
+   :linenos:
+
+   >>> cg.closeTransitive(Reverse=True)
+   >>> cg.exportGraphViz('divGraph',bestChoice=['a3'],worstChoice=['a1'])
+    *---- exporting a dot file dor GraphViz tools ---------*
+     Exporting to divGraph.dot
+     dot -Grankdir=BT -Tpng divGraph.dot -o divGraph.png
+
+.. Figure:: divGraph.png
+   :name: divisiveGraph
+   :alt: Majority margins ranking
+   :width: 250 px
+   :align: center
+
+   Linear ordering of the eligible candidates
 
 Back to :ref:`Content Table <Pearls-label>`
 

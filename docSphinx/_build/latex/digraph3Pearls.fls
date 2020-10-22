@@ -376,6 +376,11 @@ INPUT ./unOpposedOutrankings.png
 INPUT unOpposedOutrankings.png
 INPUT ./unOpposedOutrankings.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm
+INPUT divGraph.png
+INPUT ./divGraph.png
+INPUT ./divGraph.png
+INPUT divGraph.png
+INPUT ./divGraph.png
 INPUT digraph3Pearls.ind
 INPUT digraph3Pearls.ind
 INPUT digraph3Pearls.aux
