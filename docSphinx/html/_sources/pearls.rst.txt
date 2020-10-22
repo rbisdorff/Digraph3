@@ -1933,7 +1933,7 @@ Multipartisan preferences in divisive politics
 
 However, in a very **divisive two major party system**, like in the US, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate.
 
-In :numref:`divisivePolitics` below we generate such a divisive kind of linear voting profile with the help of the *DivisivePolitics* flag  [5]_ (see Lines 4 and 15-21).
+In :numref:`divisivePolitics` below we generate such a divisive kind of linear voting profile with the help of the *DivisivePolitics* flag  [5]_ (see Lines 4 and 13-19).
 
 .. code-block:: pycon
    :name: divisivePolitics
