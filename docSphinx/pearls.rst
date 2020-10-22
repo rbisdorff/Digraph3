@@ -1721,12 +1721,13 @@ We may visualize this **unopposed robustness** result in :numref:`unopDigraph` b
 
    Standard versus *unopposed* strict outranking digraphs oriented by best and worst choice recommendations
 
-----------
+Two-stage elections with multipartisan primary selection
+--------------------------------------------------------
 
 Let us finally remark that in a social choice context, where decision objectives would match different political parties, our unopposed best choice recommendations represent in fact **robust multipartisan consensus choices**.
 
-Two-stage elections with multipartisan primary selection
-........................................................
+Converting voting profiles into performance tableaux
+....................................................
 
 We shall illustrate this point with a voting profile we discuss in the tutorial on :ref:`generating random linear voting profiles <LinearVoting-Tutorial-label>`.
 
@@ -1810,6 +1811,9 @@ We may convert this linear voting profile into a PerformanceTableau object where
 
 In :numref:`ConvertVotingProfile2PerfTab` we first store the linear voting in a :py:class:`perfTabs.PerformanceTableau` format (see Line 1). In Line 3, we reload this performance tableau data. The three parties of the linear voting profile represent three decision objectives and the voters are distributed as performance criteria according to the party they support.
 
+Multipartisan primary selection of eligible candidates
+......................................................
+
 In order to make now a **primary multipartisan selection** of potential election winners, we compute the corresponding *unopposed multiobjective outranking* digraph.
 
 .. code-block:: pycon
@@ -1875,6 +1879,9 @@ We may visualize the corresponding bipolar-valued relation table by orienting th
 
 In :numref:`unOpposedOutrankings`, we may notice that the dominating outranking prekernel **['a06', 'a11', 'a13', 'a15']** gathers in fact a **multipartisan selection** of potential election winners. It is worthwhile noticing that in :numref:`unOpposedOutrankings` the majority margins obtained from a linear voting profile do verify the zero-sum rule (:math:`r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0`). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.
 
+Secondary election winner determination
+.......................................
+
 When restricting now, in a secondary election stage, the set of eligible candidates to this dominating prekernel, we may compute the actual best social choice.
 
 .. code-block:: pycon
@@ -1883,23 +1890,23 @@ When restricting now, in a secondary election stage, the set of eligible candida
    :linenos:
 
    >>> from outrankingDigraphs import BipolarOutrankingDigraph
-   >>> g = BipolarOutrankingDigraph(vpt,\
+   >>> g2 = BipolarOutrankingDigraph(vpt,\
                       actionsSubset=['a06','a11','a13','a15'])
-   >>> g.showBestChoiceRecommendation()
-    ***********************
-    Best choice recommendation(s) (BCR)
-     (in decreasing order of determinateness)   
-    Credibility domain: [-1.00,1.00]
-     === >> potential best choice(s)
-     choice              : ['a06']
-      independence        : 1.00
-      dominance           : 0.10
-      absorbency          : -0.52
-      covering (%)        : 100.00
-      determinateness (%) : 55.10
-      - most credible action(s) = { 'a06': 0.10, }
-   >>> g.computeCopelandRanking()
+   >>> g2.showRelationTable(ReflexiveTerms=False)
+    * ---- Relation Table -----
+      r    | 'a06'  'a11'  'a13'  'a15'   
+    .------|-------------------------------
+     'a06' |   -    +0.10  +0.48  +0.52  
+     'a11' | -0.10    -    +0.27  +0.29  
+     'a13' | -0.48  -0.27    -    +0.19  
+     'a15' | -0.52  -0.29  -0.19    -   
+    Valuation domain: [-1.000; 1.000]
+   >>> g2.computeCondorcetWinners()
+    ['a06']
+   >>> g2.computeCopelandRanking()
     ['a06', 'a11', 'a13', 'a15']
+
+Candidate *a06* appears clearly to be the winner of this election. Notice by the way that the restricted pairwise outranking relation shown in :numref:`bestChoiceRecommendation` represents a linear ordering of the preselected candidates.
 
 We may eventually check the quality of this best choice by noticing that candidate *a06* represents indeed the *simple majority* winner, the *instant-run-off* winner, the *Borda*, as well as the *Condorcet winner* of the initially given linear voting profile *lvp* (see :numref:`Example3PartiesVotingProfile`).
 
@@ -1920,6 +1927,9 @@ We may eventually check the quality of this best choice by noticing that candida
     ['a06']
 
 In our example voting profile here, the multipartisan primary selection stage appears quite effective in reducing the number of eligible candidates to four out of a set of 15 candidates without btw rejecting the actual winning candidate.
+
+Multipartisan preferences in divisive politics
+..............................................
 
 However, in a very **divisive two major party system**, like in the US, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate.
 

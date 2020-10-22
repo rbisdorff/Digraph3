@@ -75,7 +75,8 @@
 <li><p><a class="reference internal" href="#on-confident-outrankings-with-uncertain-criteria-significances" id="id38">On confident outrankings with uncertain criteria significances</a></p></li>
 <li><p><a class="reference internal" href="#robustness-analysis-of-bipolar-valued-outranking-digraphs" id="id39">Robustness analysis of bipolar-valued outranking digraphs</a></p></li>
 <li><p><a class="reference internal" href="#on-unopposed-multiobjective-and-multipartisan-outrankings" id="id40">On unopposed multiobjective and multipartisan outrankings</a></p></li>
-<li><p><a class="reference internal" href="#bibliography" id="id41">Bibliography</a></p></li>
+<li><p><a class="reference internal" href="#two-stage-elections-with-multipartisan-primary-selection" id="id41">Two-stage elections with multipartisan primary selection</a></p></li>
+<li><p><a class="reference internal" href="#bibliography" id="id42">Bibliography</a></p></li>
 </ul>
 </div>
 <p><strong>Preface</strong></p>
@@ -84,15 +85,15 @@
 <span id="copingmissing-data-label"></span><h2><a class="toc-backref" href="#id35">Coping with missing data and indeterminateness</a><a class="headerlink" href="#coping-with-missing-data-and-indeterminateness" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id1">
 <ul class="simple">
-<li><p><a class="reference internal" href="#a-motivating-data-set" id="id42">A motivating data set</a></p></li>
-<li><p><a class="reference internal" href="#modelling-pairwise-bipolar-valued-rating-opinions" id="id43">Modelling pairwise bipolar-valued rating opinions</a></p></li>
+<li><p><a class="reference internal" href="#a-motivating-data-set" id="id43">A motivating data set</a></p></li>
+<li><p><a class="reference internal" href="#modelling-pairwise-bipolar-valued-rating-opinions" id="id44">Modelling pairwise bipolar-valued rating opinions</a></p></li>
 </ul>
 </div>
 <p>In a stubborn keeping with a two-valued logic, where every argument can only be true or false, there is no place for efficiently taking into account missing data or logical indeterminateness. These cases are seen as problematic and, at best are simply ignored. Worst, in modern data science, missing data get often replaced with <em>fictive</em> values, potentially falsifying hence all subsequent computations.</p>
 <p>In social choice problems like elections, <em>abstentions</em> are, however, frequently observed and represent a social expression that may be significant for revealing non represented social preferences.</p>
 <p>In marketing studies, interviewees will not always respond to all the submitted questions. Again, such abstentions do sometimes contain nevertheless valid information concerning consumer preferences.</p>
 <div class="section" id="a-motivating-data-set">
-<h3><a class="toc-backref" href="#id42">A motivating data set</a><a class="headerlink" href="#a-motivating-data-set" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id43">A motivating data set</a><a class="headerlink" href="#a-motivating-data-set" title="Permalink to this headline">¶</a></h3>
 <p>Let us consider such a performance tableau gathering a <em>Movie Magazine</em> ‘s rating of some movies that could actually be seen in town <a class="footnote-reference brackets" href="#id26" id="id2">1</a> (see <a class="reference internal" href="#graffiti07-1"><span class="std std-numref">Fig. 71</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -120,7 +121,7 @@
 <p>There is no doubt that movie <em>mv_QS</em>, with 6 ‘<em>must be seen</em>’ marks, is correctly best-ranked and the movie <em>mv_TV</em> is worst-ranked with five ‘<em>don’t like</em>’ marks.</p>
 </div>
 <div class="section" id="modelling-pairwise-bipolar-valued-rating-opinions">
-<h3><a class="toc-backref" href="#id43">Modelling pairwise bipolar-valued rating opinions</a><a class="headerlink" href="#modelling-pairwise-bipolar-valued-rating-opinions" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id44">Modelling pairwise bipolar-valued rating opinions</a><a class="headerlink" href="#modelling-pairwise-bipolar-valued-rating-opinions" title="Permalink to this headline">¶</a></h3>
 <p>Let us explicitly construct the underlying bipolar-valued outranking digraph and consult in <a class="reference internal" href="#graffiti07-45"><span class="std std-numref">Fig. 73</span></a> the pairwise characteristic values we observe between the two best-ranked movies, namely <em>mv_QS</em> and <em>mv_RR</em>.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -174,15 +175,15 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span id="ordinalcorrelation-tutorial-label"></span><h2><a class="toc-backref" href="#id36">Ordinal correlation equals bipolar-valued relational equivalence</a><a class="headerlink" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id3">
 <ul class="simple">
-<li><p><a class="reference internal" href="#kendall-s-tau-index" id="id44">Kendall’s <em>tau</em> index</a></p></li>
-<li><p><a class="reference internal" href="#bipolar-valued-relational-equivalence" id="id45">Bipolar-valued relational equivalence</a></p></li>
-<li><p><a class="reference internal" href="#fitness-of-ranking-heuristics" id="id46">Fitness of ranking heuristics</a></p></li>
-<li><p><a class="reference internal" href="#illustrating-preference-divergences" id="id47">Illustrating preference divergences</a></p></li>
-<li><p><a class="reference internal" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions" id="id48">Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions</a></p></li>
+<li><p><a class="reference internal" href="#kendall-s-tau-index" id="id45">Kendall’s <em>tau</em> index</a></p></li>
+<li><p><a class="reference internal" href="#bipolar-valued-relational-equivalence" id="id46">Bipolar-valued relational equivalence</a></p></li>
+<li><p><a class="reference internal" href="#fitness-of-ranking-heuristics" id="id47">Fitness of ranking heuristics</a></p></li>
+<li><p><a class="reference internal" href="#illustrating-preference-divergences" id="id48">Illustrating preference divergences</a></p></li>
+<li><p><a class="reference internal" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions" id="id49">Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions</a></p></li>
 </ul>
 </div>
 <div class="section" id="kendall-s-tau-index">
-<h3><a class="toc-backref" href="#id44">Kendall’s <em>tau</em> index</a><a class="headerlink" href="#kendall-s-tau-index" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id45">Kendall’s <em>tau</em> index</a><a class="headerlink" href="#kendall-s-tau-index" title="Permalink to this headline">¶</a></h3>
 <p><em>M. G. Kendall</em> (<a class="reference internal" href="#ken-1938p" id="id4"><span>[KEN-1938p]</span></a>) defined his <em>ordinal correlation</em> <img class="math" src="_images/math/914b2d4b6659b86d3153d5510839dfb254dfc8a3.png" alt="\tau"/> (<strong>tau</strong>) <em>index</em> for linear orders of dimension <em>n</em> as a <em>balancing</em> of the number <em>#Co</em> of correctly oriented pairs against the number <em>#In</em> of incorrectly oriented pairs. The total number of irreflexive pairs being <em>n(n-1)</em>, in the case of linear orders, <img class="math" src="_images/math/cc1381f429e25ffcb437b16f7bb9927df7e88d31.png" alt="\#Co + \#In \;=\; n(n-1)"/>.  Hence <img class="math" src="_images/math/987ef0789be95a81a87903c5cbbc1c9dc8d6a3e2.png" alt="\tau \;=\; \big(\frac{\#Co}{n(n-1)}\big) \,-\, \big(\frac{\#In}{n(n-1)}\big)"/>. In case <em>#In</em> is zero, <img class="math" src="_images/math/6e3b85adbb278c4ab9b16935b125f48e78f649d5.png" alt="\tau \;=\; +1"/>  (all pairs are <em>equivalently oriented</em>); inversely, in case <em>#Co</em> is zero, <img class="math" src="_images/math/2c76c8cc03e5d5605f653ad55c2d0670d9d91195.png" alt="\tau \;=\; -1"/> (all pairs are <em>differently oriented</em>).</p>
 <p>Noticing that <img class="math" src="_images/math/82483d015808fb70f05b9c57fe9add655b3a6ab5.png" alt="\frac{\#Co}{n(n-1)} \;=\; 1 \,-\, \frac{\#In}{n(n-1)}"/>, and recalling that the bipolar-valued negation is operated by changing the sign of the characteristic value, <em>Kendall</em>’s original <em>tau</em> definition implemented in fact the bipolar-valued <strong>negation</strong> of the <strong>non equivalence</strong> of two linear orders:</p>
 <p><img class="math" src="_images/math/753a1d450d1b72a8d0ed97208c4a799dc46dcf6b.png" alt="\tau \;=\; 1 -2\frac{\#In}{n(n-1)} \;=\; -\big(\,2\frac{\#In}{n(n-1)} \,-\, 1\,\big) \;=\; 2\frac{\#Co}{n(n-1)} \,-\, 1"/></p>
@@ -228,7 +229,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <p>What happens now with more or less determined and even partially indeterminate relations ? May we proceed in a similar way ?</p>
 </div>
 <div class="section" id="bipolar-valued-relational-equivalence">
-<h3><a class="toc-backref" href="#id45">Bipolar-valued relational equivalence</a><a class="headerlink" href="#bipolar-valued-relational-equivalence" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id46">Bipolar-valued relational equivalence</a><a class="headerlink" href="#bipolar-valued-relational-equivalence" title="Permalink to this headline">¶</a></h3>
 <p>Let us now consider two randomly bipolar-valued digraphs <em>R1</em> and <em>R2</em> of order five.</p>
 <div class="literal-block-wrapper docutils container" id="tworand">
 <div class="code-block-caption"><span class="caption-number">Listing 68 </span><span class="caption-text">Two Random Bipolar-valued Digraphs</span><a class="headerlink" href="#tworand" title="Permalink to this code">¶</a></div>
@@ -378,7 +379,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <p>We may now illustrate the quality of the global ranking of the movies shown with the heat map in <a class="reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 72</span></a>.</p>
 </div>
 <div class="section" id="fitness-of-ranking-heuristics">
-<h3><a class="toc-backref" href="#id46">Fitness of ranking heuristics</a><a class="headerlink" href="#fitness-of-ranking-heuristics" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id47">Fitness of ranking heuristics</a><a class="headerlink" href="#fitness-of-ranking-heuristics" title="Permalink to this headline">¶</a></h3>
 <p>We reconsider the bipolar-valued outranking digraph <em>g</em> modelling the pairwise global ‘<em>at least as well rated as</em>’ relation among the 25 movies seen above (see <a class="reference internal" href="#exmoviesbg"><span class="std std-numref">Listing 72</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="exmoviesbg">
 <div class="code-block-caption"><span class="caption-number">Listing 72 </span><span class="caption-text">Global Movies Outranking Digraph</span><a class="headerlink" href="#exmoviesbg" title="Permalink to this code">¶</a></div>
@@ -490,7 +491,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <p>It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the <em>Copeland</em> or the <em>Kohler</em> ranking rule.</p>
 </div>
 <div class="section" id="illustrating-preference-divergences">
-<h3><a class="toc-backref" href="#id47">Illustrating preference divergences</a><a class="headerlink" href="#illustrating-preference-divergences" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id48">Illustrating preference divergences</a><a class="headerlink" href="#illustrating-preference-divergences" title="Permalink to this headline">¶</a></h3>
 <p>The valued relational equivalence index gives us a further measure for studying how <strong>divergent</strong> appear the rating opinions expressed by the movie critics.</p>
 <div class="figure align-center" id="correlationtable">
 <a class="reference internal image-reference" href="_images/correlationTable.png"><img alt="Pairwise valued correlation of movie critics" src="_images/correlationTable.png" style="width: 600px;" /></a>
@@ -507,7 +508,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <p>The first 3 principal axes support together about 70% of the total inertia. Most <em>eccentric</em> and <em>opposed</em> in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written media appear most opposed to the radio media.</p>
 </div>
 <div class="section" id="exploring-the-better-rated-and-the-as-well-as-rated-opinions">
-<h3><a class="toc-backref" href="#id48">Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions</a><a class="headerlink" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id49">Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions</a><a class="headerlink" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions" title="Permalink to this headline">¶</a></h3>
 <p>In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asymmetric and symmetric parts of the ‘<em>at least as well rated as</em>’ opinions (see the tutorial on <a class="reference internal" href="tutorial.html#digraphs-tutorial-label"><span class="std std-ref">Manipulating Digraph objects</span></a>).</p>
 <p>Let us first have a look at the pairwise asymmetric part, namely the ‘<em>better rated than</em>’ and ‘<em>less well rated than</em>’ opinions of the movie critics.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ag</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
@@ -560,12 +561,12 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span id="bipolar-valued-kernels-tutorial-label"></span><h2><a class="toc-backref" href="#id37">Bipolar-valued kernel membership characteristic vectors</a><a class="headerlink" href="#bipolar-valued-kernel-membership-characteristic-vectors" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id9">
 <ul class="simple">
-<li><p><a class="reference internal" href="#claude-berge-s-kernel-equation-systems" id="id49"><em>Claude Berge</em>’s kernel equation systems</a></p></li>
-<li><p><a class="reference internal" href="#solving-bipolar-valued-kernel-equation-systems" id="id50">Solving bipolar-valued kernel equation systems</a></p></li>
+<li><p><a class="reference internal" href="#claude-berge-s-kernel-equation-systems" id="id50"><em>Claude Berge</em>’s kernel equation systems</a></p></li>
+<li><p><a class="reference internal" href="#solving-bipolar-valued-kernel-equation-systems" id="id51">Solving bipolar-valued kernel equation systems</a></p></li>
 </ul>
 </div>
 <div class="section" id="claude-berge-s-kernel-equation-systems">
-<h3><a class="toc-backref" href="#id49"><em>Claude Berge</em>’s kernel equation systems</a><a class="headerlink" href="#claude-berge-s-kernel-equation-systems" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id50"><em>Claude Berge</em>’s kernel equation systems</a><a class="headerlink" href="#claude-berge-s-kernel-equation-systems" title="Permalink to this headline">¶</a></h3>
 <p>Let <em>G(X,R)</em> be a crisp irreflexive digraph defined on a finite set <em>X</em> of nodes and where <em>R</em> is the corresponding {-1,+1}-valued adjacency matrix. Let <em>Y</em> be the {-1,+1}-valued membership characteristic (row) vector of a choice in <em>X</em>. When <em>Y</em> satisfies the following equation system</p>
 <blockquote>
 <div><p><img class="math" src="_images/math/40d68affcfedbe051e19caa0c9bcfafeb35e49c4.png" alt="Y \circ R \; = \; -Y\;,"/></p>
@@ -633,7 +634,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </div></blockquote>
 </div>
 <div class="section" id="solving-bipolar-valued-kernel-equation-systems">
-<h3><a class="toc-backref" href="#id50">Solving bipolar-valued kernel equation systems</a><a class="headerlink" href="#solving-bipolar-valued-kernel-equation-systems" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id51">Solving bipolar-valued kernel equation systems</a><a class="headerlink" href="#solving-bipolar-valued-kernel-equation-systems" title="Permalink to this headline">¶</a></h3>
 <p><em>John von Neumann</em> showed indeed that, when a digraph <em>G(X,R)</em> is <strong>acyclic</strong> with a  <strong>unique initial kernel</strong> <em>K</em> characterised by its membership characteristics vector <em>Yk</em>, then the following double bipolar-valued fixpoint equation</p>
 <blockquote>
 <div><p><img class="math" src="_images/math/e8801a1214db64aa368aca3176b1032e9950d636.png" alt="T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;."/></p>
@@ -965,16 +966,16 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span id="bipolar-valued-likelihood-tutorial-label"></span><h2><a class="toc-backref" href="#id38">On confident outrankings with uncertain criteria significances</a><a class="headerlink" href="#on-confident-outrankings-with-uncertain-criteria-significances" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id15">
 <ul class="simple">
-<li><p><a class="reference internal" href="#modelling-uncertain-criteria-significances" id="id51">Modelling uncertain criteria significances</a></p></li>
-<li><p><a class="reference internal" href="#bipolar-valued-likelihood-of-at-least-as-good-as-situations" id="id52">Bipolar-valued likelihood of ‘’at least as good as ” situations</a></p></li>
-<li><p><a class="reference internal" href="#confidence-level-of-outranking-situations" id="id53">Confidence level of outranking situations</a></p></li>
+<li><p><a class="reference internal" href="#modelling-uncertain-criteria-significances" id="id52">Modelling uncertain criteria significances</a></p></li>
+<li><p><a class="reference internal" href="#bipolar-valued-likelihood-of-at-least-as-good-as-situations" id="id53">Bipolar-valued likelihood of ‘’at least as good as ” situations</a></p></li>
+<li><p><a class="reference internal" href="#confidence-level-of-outranking-situations" id="id54">Confidence level of outranking situations</a></p></li>
 </ul>
 </div>
 <p>When modelling preferences following the outranking approach, the signs of the majority margins do sharply distribute validation and invalidation of pairwise outranking situations. How can we be confident in the resulting outranking digraph, when we acknowledge the usual imprecise knowledge of criteria significance weights coupled with small majority margins?</p>
 <p>To answer this question, one usually requires <em>qualified</em> majority margins for confirming outranking situations. But how to choose such a qualifying majority level: two third, three fourth of the significances ?</p>
 <p>In this tutorial we propose to link the qualifying significance majority with a required alpha%-confidence level. We model therefore the significance weights as random variables following more or less widespread distributions around an average significance value that corresponds to the given deterministic weight. As the bipolar-valued random credibility of an outranking statement hence results from the simple sum of positive or negative independent random variables, we may apply the Central Limit Theorem (CLT) for computing the <em>bipolar likelihood</em> that the expected majority margin will indeed be positive, respectively negative.</p>
 <div class="section" id="modelling-uncertain-criteria-significances">
-<h3><a class="toc-backref" href="#id51">Modelling uncertain criteria significances</a><a class="headerlink" href="#modelling-uncertain-criteria-significances" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id52">Modelling uncertain criteria significances</a><a class="headerlink" href="#modelling-uncertain-criteria-significances" title="Permalink to this headline">¶</a></h3>
 <p>Let us consider the significance weights of a family <em>F</em> of <em>m</em> criteria to be <strong>independent random variables</strong> <em>Wj</em>, distributing the potential significance weights of each criterion <em>j</em> = 1, …, <em>m</em> around a mean value <em>E(Wj)</em> with variance <em>V(Wj)</em>.</p>
 <p>Choosing a specific stochastic model of uncertainty is usually application specific. In the limited scope of this tutorial, we will illustrate the consequence of this design decision on the resulting outranking modelling with four slightly different models for taking into account the uncertainty with which we know the numerical significance weights: <em>uniform</em>, <em>triangular</em>, and two models of <em>Beta laws</em>, one more <em>widespread</em> and, the other, more <em>concentrated</em>.</p>
 <p>When considering, for instance, that the potential range of a significance weight is distributed between 0 and two times its mean value, we obtain the following random variates:</p>
@@ -999,7 +1000,7 @@ parameters <em>alpha</em> = 4 and <em>beta</em> = 4. Thus <em>Wj</em> ~ Beta(4,4
 <p>It is worthwhile noticing that these four uncertainty models all admit the same expected value, <em>E(Wj)</em>, however, with a respective variance which goes decreasing from 1/3, to 1/9 of the square of <em>E(W)</em> (see <a class="reference internal" href="#weightdistributions"><span class="std std-numref">Fig. 81</span></a>).</p>
 </div>
 <div class="section" id="bipolar-valued-likelihood-of-at-least-as-good-as-situations">
-<h3><a class="toc-backref" href="#id52">Bipolar-valued likelihood of ‘’at least as good as ” situations</a><a class="headerlink" href="#bipolar-valued-likelihood-of-at-least-as-good-as-situations" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id53">Bipolar-valued likelihood of ‘’at least as good as ” situations</a><a class="headerlink" href="#bipolar-valued-likelihood-of-at-least-as-good-as-situations" title="Permalink to this headline">¶</a></h3>
 <p>Let <em>A</em> = {<em>x</em>, <em>y</em>, <em>z</em>,…} be a finite set of <em>n</em> potential decision actions, evaluated on <em>F</em> = {1,…, <em>m</em>}, a <em>finite</em> and <em>coherent</em> family of <em>m</em> performance criteria. On each criterion <em>j</em> in <em>F</em>, the decision actions are evaluated on a real performance scale [0; <em>Mj</em> ], supporting an upper-closed indifference threshold <em>indj</em> and a lower-closed preference threshold <em>prj</em> such that 0 &lt;= <em>indj</em> &lt; <em>prj</em> &lt;= <em>Mj</em>. The marginal performance of object <em>x</em> on criterion <em>j</em> is denoted <em>xj</em>. Each criterion <em>j</em> is thus characterising a marginal double threshold order <img class="math" src="_images/math/2a68d1c1c26c22c0eb6f85891cd001a15cf19c46.png" alt="\geq_j"/> on <em>A</em> (see <a class="reference internal" href="#rcharacteristic"><span class="std std-numref">Fig. 82</span></a>):</p>
 <p><img class="math" src="_images/math/48c4103879e22b95162e58ef3cbe8cba3d332f6a.png" alt="r(x \geq_j y) \; = \; \begin{cases} +1 \quad \text{if} \quad x_j - y_j \leq ind_j,\\  -1 \quad \text{if} \quad x_j - y_j \leq pr_j,\\ 0 \quad \text{otherwise}. \end{cases}"/></p>
 <dl class="simple">
@@ -1037,7 +1038,7 @@ unclear whether, on criterion <em>j</em>, <em>x</em> is performing at least as g
 <p>Indeed, <img class="math" src="_images/math/c40d978ff265e6f3d7d701b16be6adc1e93e0076.png" alt="\tilde{r}(x \geq y) \leadsto Y = \mathcal{N}(1.03,1.089)"/>, with an empirical probability of observing a negative majority margin of about 17%.</p>
 </div>
 <div class="section" id="confidence-level-of-outranking-situations">
-<h3><a class="toc-backref" href="#id53">Confidence level of outranking situations</a><a class="headerlink" href="#confidence-level-of-outranking-situations" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id54">Confidence level of outranking situations</a><a class="headerlink" href="#confidence-level-of-outranking-situations" title="Permalink to this headline">¶</a></h3>
 <p>Now, following the classical outranking approach (see <a class="reference internal" href="#bis-2013p" id="id17"><span>[BIS-2013p]</span></a> ), we may say, from an epistemic perspective, that decision action <em>x</em> <strong>outranks</strong> decision action <em>y</em> at <em>confidence</em> level <em>alpha</em> %, if</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -1331,14 +1332,14 @@ confidence level <em>alpha</em> %, if</p>
 <span id="stable-outranking-tutorial-label"></span><h2><a class="toc-backref" href="#id39">Robustness analysis of bipolar-valued outranking digraphs</a><a class="headerlink" href="#robustness-analysis-of-bipolar-valued-outranking-digraphs" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id18">
 <ul class="simple">
-<li><p><a class="reference internal" href="#cardinal-or-ordinal-criteria-significances" id="id54">Cardinal or ordinal criteria significances</a></p></li>
-<li><p><a class="reference internal" href="#qualifying-the-stability-of-outranking-situations" id="id55">Qualifying the stability of outranking situations</a></p></li>
-<li><p><a class="reference internal" href="#computing-the-stability-denotation-of-outranking-situations" id="id56">Computing the stability denotation of outranking situations</a></p></li>
-<li><p><a class="reference internal" href="#robust-bipolar-valued-outranking-digraphs" id="id57">Robust bipolar-valued outranking digraphs</a></p></li>
+<li><p><a class="reference internal" href="#cardinal-or-ordinal-criteria-significances" id="id55">Cardinal or ordinal criteria significances</a></p></li>
+<li><p><a class="reference internal" href="#qualifying-the-stability-of-outranking-situations" id="id56">Qualifying the stability of outranking situations</a></p></li>
+<li><p><a class="reference internal" href="#computing-the-stability-denotation-of-outranking-situations" id="id57">Computing the stability denotation of outranking situations</a></p></li>
+<li><p><a class="reference internal" href="#robust-bipolar-valued-outranking-digraphs" id="id58">Robust bipolar-valued outranking digraphs</a></p></li>
 </ul>
 </div>
 <div class="section" id="cardinal-or-ordinal-criteria-significances">
-<h3><a class="toc-backref" href="#id54">Cardinal or ordinal criteria significances</a><a class="headerlink" href="#cardinal-or-ordinal-criteria-significances" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id55">Cardinal or ordinal criteria significances</a><a class="headerlink" href="#cardinal-or-ordinal-criteria-significances" title="Permalink to this headline">¶</a></h3>
 <p>The required cardinal significance weights of the performance criteria represent the <em>Achilles</em>’ heel of the outranking approach. Rarely will indeed a decision maker be cognitively competent for suggesting precise decimal-valued criteria significance weights. More often, the decision problem will involve more or less equally important decision objectives with more or less equi-significant criteria. A random example of such a decision problem may be generated with the <a class="reference internal" href="techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="randomPerfTabs.Random3ObjectivesPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomPerfTabs.Random3ObjectivesPerformanceTableau</span></code></a> class.</p>
 <div class="literal-block-wrapper docutils container" id="objexample">
 <div class="code-block-caption"><span class="caption-number">Listing 79 </span><span class="caption-text">Random 3 Objectives Performance Tableau</span><a class="headerlink" href="#objexample" title="Permalink to this code">¶</a></div>
@@ -1429,7 +1430,7 @@ confidence level <em>alpha</em> %, if</p>
 <p>How stable appear now the outranking situations when assuming only ordinal significance weights?</p>
 </div>
 <div class="section" id="qualifying-the-stability-of-outranking-situations">
-<h3><a class="toc-backref" href="#id55">Qualifying the stability of outranking situations</a><a class="headerlink" href="#qualifying-the-stability-of-outranking-situations" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id56">Qualifying the stability of outranking situations</a><a class="headerlink" href="#qualifying-the-stability-of-outranking-situations" title="Permalink to this headline">¶</a></h3>
 <p>Let us construct the normalized bipolar-valued outranking digraph corresponding with the previous 3 Objectives performance tableau <em>t</em>.</p>
 <div class="literal-block-wrapper docutils container" id="exbg">
 <div class="code-block-caption"><span class="caption-number">Listing 81 </span><span class="caption-text">Example Bipolar Outranking Digraph</span><a class="headerlink" href="#exbg" title="Permalink to this code">¶</a></div>
@@ -1706,7 +1707,7 @@ confidence level <em>alpha</em> %, if</p>
 <p>In both cases, choosing significances that are just compatible with the given weights preorder will not always result in positively validated  outranking situations.</p>
 </div>
 <div class="section" id="computing-the-stability-denotation-of-outranking-situations">
-<h3><a class="toc-backref" href="#id56">Computing the stability denotation of outranking situations</a><a class="headerlink" href="#computing-the-stability-denotation-of-outranking-situations" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id57">Computing the stability denotation of outranking situations</a><a class="headerlink" href="#computing-the-stability-denotation-of-outranking-situations" title="Permalink to this headline">¶</a></h3>
 <p>Stability levels 4 and 3 are easy to detect, the case given. Detecting a stability level 2 is far less obvious.  Now, it is precisely again the bipolar-valued epistemic characteristic domain that will give us a way to implement an effective test for stability level +2 and -2 (see <a class="reference internal" href="#bis-2004-1p" id="id20"><span>[BIS-2004_1p]</span></a>, <a class="reference internal" href="#bis-2004-2p" id="id21"><span>[BIS-2004_2p]</span></a>).</p>
 <p>Let us consider the significance equivalence classes we observe in the given weights preorder. Here we observe three classes: 6, 8, and 12, in increasing order (see <a class="reference internal" href="#weightspreorder"><span class="std std-numref">Listing 80</span></a>). In the pairwise comparisons shown above these equivalence classes may appear positively or negatively, besides the indeterminate significance of value <em>0</em>. We thus get the following ordered bipolar list of significance weights:</p>
 <p><em>W</em> = [-12. -8. -6, 0, 6, 8, 12].</p>
@@ -1901,7 +1902,7 @@ confidence level <em>alpha</em> %, if</p>
 <p>Using this stability denotation, we may, hence, define the following <strong>robust</strong> version of a bipolar-valued outranking digraph.</p>
 </div>
 <div class="section" id="robust-bipolar-valued-outranking-digraphs">
-<h3><a class="toc-backref" href="#id57">Robust bipolar-valued outranking digraphs</a><a class="headerlink" href="#robust-bipolar-valued-outranking-digraphs" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id58">Robust bipolar-valued outranking digraphs</a><a class="headerlink" href="#robust-bipolar-valued-outranking-digraphs" title="Permalink to this headline">¶</a></h3>
 <p>We say that decision alternative <em>x</em> <strong>robustly outranks</strong> decision alternative <em>y</em> when</p>
 <blockquote>
 <div><ul class="simple">
@@ -2048,14 +2049,13 @@ confidence level <em>alpha</em> %, if</p>
 <span id="unopposed-outranking-tutorial-label"></span><h2><a class="toc-backref" href="#id40">On unopposed multiobjective and multipartisan outrankings</a><a class="headerlink" href="#on-unopposed-multiobjective-and-multipartisan-outrankings" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id24">
 <ul class="simple">
-<li><p><a class="reference internal" href="#characterising-unopposed-multiobjective-outranking-situations" id="id58">Characterising unopposed multiobjective outranking situations</a></p></li>
-<li><p><a class="reference internal" href="#unopposed-best-multiobjective-choice-recommendations" id="id59">Unopposed best multiobjective choice recommendations</a></p></li>
-<li><p><a class="reference internal" href="#two-stage-elections-with-multipartisan-primary-selection" id="id60">Two-stage elections with multipartisan primary selection</a></p></li>
+<li><p><a class="reference internal" href="#characterising-unopposed-multiobjective-outranking-situations" id="id59">Characterising unopposed multiobjective outranking situations</a></p></li>
+<li><p><a class="reference internal" href="#unopposed-best-multiobjective-choice-recommendations" id="id60">Unopposed best multiobjective choice recommendations</a></p></li>
 </ul>
 </div>
 <p>When facing a performance tableau involving multiple decision objectives (or a linear voting profile with multiple parties), the robustness level <strong>+/-3</strong>, introduced in the previous Section, may lead to distinguishing what we call <strong>unopposed</strong> outranking situations, like the one shown between alternative <em>p4</em> and <em>p1</em> (<img class="math" src="_images/math/9ef995da2786edd2994715c24d67517487a75867.png" alt="r(p4 \succsim p1) = +0.78"/>, see <a class="reference internal" href="#stabdenot"><span class="std std-numref">Listing 82</span></a> Line11), namely preferential situations that are more or less validated or invalidated by all the decision objectives.</p>
 <div class="section" id="characterising-unopposed-multiobjective-outranking-situations">
-<h3><a class="toc-backref" href="#id58">Characterising unopposed multiobjective outranking situations</a><a class="headerlink" href="#characterising-unopposed-multiobjective-outranking-situations" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id59">Characterising unopposed multiobjective outranking situations</a><a class="headerlink" href="#characterising-unopposed-multiobjective-outranking-situations" title="Permalink to this headline">¶</a></h3>
 <p>Formally, we say that decision alternative <em>x</em> <strong>outranks</strong> decision alternative <em>y</em> <strong>unopposed</strong> when</p>
 <blockquote>
 <div><ul class="simple">
@@ -2236,7 +2236,7 @@ confidence level <em>alpha</em> %, if</p>
 <p>The resulting <em>unopposed</em> outranking digraph keeps in fact 13 (see <a class="reference internal" href="#unopposed3"><span class="std std-numref">Listing 91</span></a> Line 10) out of the 23 positively validated <em>standard</em> outranking situations.</p>
 </div>
 <div class="section" id="unopposed-best-multiobjective-choice-recommendations">
-<h3><a class="toc-backref" href="#id59">Unopposed best multiobjective choice recommendations</a><a class="headerlink" href="#unopposed-best-multiobjective-choice-recommendations" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id60">Unopposed best multiobjective choice recommendations</a><a class="headerlink" href="#unopposed-best-multiobjective-choice-recommendations" title="Permalink to this headline">¶</a></h3>
 <p>Let us compute now <em>best choice recommendations</em> from such an unopposed multiobjective outranking digraph.</p>
 <div class="literal-block-wrapper docutils container" id="unopposed5">
 <div class="code-block-caption"><span class="caption-number">Listing 93 </span><span class="caption-text">Unopposed multiobjective best choice recommendation</span><a class="headerlink" href="#unopposed5" title="Permalink to this code">¶</a></div>
@@ -2292,11 +2292,13 @@ confidence level <em>alpha</em> %, if</p>
 <a class="reference internal image-reference" href="_images/unopDigraph.png"><img alt="Standard versus Unopposed Strict Outranking Digraphs" src="_images/unopDigraph.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 87 </span><span class="caption-text">Standard versus <em>unopposed</em> strict outranking digraphs oriented by best and worst choice recommendations</span><a class="headerlink" href="#unopdigraph" title="Permalink to this image">¶</a></p>
 </div>
-<hr class="docutils" />
-<p>Let us finally remark that in a social choice context, where decision objectives would match different political parties, our unopposed best choice recommendations represent in fact <strong>robust multipartisan consensus choices</strong>.</p>
+</div>
 </div>
 <div class="section" id="two-stage-elections-with-multipartisan-primary-selection">
-<h3><a class="toc-backref" href="#id60">Two-stage elections with multipartisan primary selection</a><a class="headerlink" href="#two-stage-elections-with-multipartisan-primary-selection" title="Permalink to this headline">¶</a></h3>
+<h2><a class="toc-backref" href="#id41">Two-stage elections with multipartisan primary selection</a><a class="headerlink" href="#two-stage-elections-with-multipartisan-primary-selection" title="Permalink to this headline">¶</a></h2>
+<p>Let us finally remark that in a social choice context, where decision objectives would match different political parties, our unopposed best choice recommendations represent in fact <strong>robust multipartisan consensus choices</strong>.</p>
+<div class="section" id="converting-voting-profiles-into-performance-tableaux">
+<h3>Converting voting profiles into performance tableaux<a class="headerlink" href="#converting-voting-profiles-into-performance-tableaux" title="Permalink to this headline">¶</a></h3>
 <p>We shall illustrate this point with a voting profile we discuss in the tutorial on <a class="reference internal" href="tutorial.html#linearvoting-tutorial-label"><span class="std std-ref">generating random linear voting profiles</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="example3partiesvotingprofile">
 <div class="code-block-caption"><span class="caption-number">Listing 94 </span><span class="caption-text">Example of a 3 parties voting profile</span><a class="headerlink" href="#example3partiesvotingprofile" title="Permalink to this code">¶</a></div>
@@ -2433,6 +2435,9 @@ confidence level <em>alpha</em> %, if</p>
 </td></tr></table></div>
 </div>
 <p>In <a class="reference internal" href="#convertvotingprofile2perftab"><span class="std std-numref">Listing 95</span></a> we first store the linear voting in a <a class="reference internal" href="techDoc.html#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">perfTabs.PerformanceTableau</span></code></a> format (see Line 1). In Line 3, we reload this performance tableau data. The three parties of the linear voting profile represent three decision objectives and the voters are distributed as performance criteria according to the party they support.</p>
+</div>
+<div class="section" id="multipartisan-primary-selection-of-eligible-candidates">
+<h3>Multipartisan primary selection of eligible candidates<a class="headerlink" href="#multipartisan-primary-selection-of-eligible-candidates" title="Permalink to this headline">¶</a></h3>
 <p>In order to make now a <strong>primary multipartisan selection</strong> of potential election winners, we compute the corresponding <em>unopposed multiobjective outranking</em> digraph.</p>
 <div class="literal-block-wrapper docutils container" id="computingunopposedvotingresult">
 <div class="code-block-caption"><span class="caption-number">Listing 96 </span><span class="caption-text">Computing unopposed multiobjective outranking situations</span><a class="headerlink" href="#computingunopposedvotingresult" title="Permalink to this code">¶</a></div>
@@ -2521,6 +2526,9 @@ confidence level <em>alpha</em> %, if</p>
 <p class="caption"><span class="caption-number">Fig. 88 </span><span class="caption-text">Relation table of multipartisan outranking digraph</span><a class="headerlink" href="#unopposedoutrankings" title="Permalink to this image">¶</a></p>
 </div>
 <p>In <a class="reference internal" href="#unopposedoutrankings"><span class="std std-numref">Fig. 88</span></a>, we may notice that the dominating outranking prekernel <strong>[‘a06’, ‘a11’, ‘a13’, ‘a15’]</strong> gathers in fact a <strong>multipartisan selection</strong> of potential election winners. It is worthwhile noticing that in <a class="reference internal" href="#unopposedoutrankings"><span class="std std-numref">Fig. 88</span></a> the majority margins obtained from a linear voting profile do verify the zero-sum rule (<img class="math" src="_images/math/c6586f93adc1ec4ea9ebb3813b6053540bb8ee3b.png" alt="r(x \succsim y) \,+\, r(y \succsim x) \;=\; 0.0"/>). To each positive outranking situation corresponds indeed an equivalent negative converse situation and the resulting outranking and strict outranking digraphs are the same.</p>
+</div>
+<div class="section" id="secondary-election-winner-determination">
+<h3>Secondary election winner determination<a class="headerlink" href="#secondary-election-winner-determination" title="Permalink to this headline">¶</a></h3>
 <p>When restricting now, in a secondary election stage, the set of eligible candidates to this dominating prekernel, we may compute the actual best social choice.</p>
 <div class="literal-block-wrapper docutils container" id="bestchoicerecommendation">
 <div class="code-block-caption"><span class="caption-number">Listing 98 </span><span class="caption-text">Secondary election winner recommendation</span><a class="headerlink" href="#bestchoicerecommendation" title="Permalink to this code">¶</a></div>
@@ -2539,29 +2547,26 @@ confidence level <em>alpha</em> %, if</p>
 13
 14
 15
-16
-17
-18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">vpt</span><span class="p">,</span>\
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">vpt</span><span class="p">,</span>\
 <span class="go">                   actionsSubset=[&#39;a06&#39;,&#39;a11&#39;,&#39;a13&#39;,&#39;a15&#39;])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">()</span>
-<span class="go"> ***********************</span>
-<span class="go"> Best choice recommendation(s) (BCR)</span>
-<span class="go">  (in decreasing order of determinateness)</span>
-<span class="go"> Credibility domain: [-1.00,1.00]</span>
-<span class="go">  === &gt;&gt; potential best choice(s)</span>
-<span class="go">  choice              : [&#39;a06&#39;]</span>
-<span class="go">   independence        : 1.00</span>
-<span class="go">   dominance           : 0.10</span>
-<span class="go">   absorbency          : -0.52</span>
-<span class="go">   covering (%)        : 100.00</span>
-<span class="go">   determinateness (%) : 55.10</span>
-<span class="go">   - most credible action(s) = { &#39;a06&#39;: 0.10, }</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="go"> * ---- Relation Table -----</span>
+<span class="go">   r    | &#39;a06&#39;  &#39;a11&#39;  &#39;a13&#39;  &#39;a15&#39;</span>
+<span class="go"> .------|-------------------------------</span>
+<span class="go">  &#39;a06&#39; |   -    +0.10  +0.48  +0.52</span>
+<span class="go">  &#39;a11&#39; | -0.10    -    +0.27  +0.29</span>
+<span class="go">  &#39;a13&#39; | -0.48  -0.27    -    +0.19</span>
+<span class="go">  &#39;a15&#39; | -0.52  -0.29  -0.19    -</span>
+<span class="go"> Valuation domain: [-1.000; 1.000]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span><span class="o">.</span><span class="n">computeCondorcetWinners</span><span class="p">()</span>
+<span class="go"> [&#39;a06&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
 <span class="go"> [&#39;a06&#39;, &#39;a11&#39;, &#39;a13&#39;, &#39;a15&#39;]</span>
 </pre></div>
 </td></tr></table></div>
 </div>
+<p>Candidate <em>a06</em> appears clearly to be the winner of this election. Notice by the way that the restricted pairwise outranking relation shown in <a class="reference internal" href="#bestchoicerecommendation"><span class="std std-numref">Listing 98</span></a> represents a linear ordering of the preselected candidates.</p>
 <p>We may eventually check the quality of this best choice by noticing that candidate <em>a06</em> represents indeed the <em>simple majority</em> winner, the <em>instant-run-off</em> winner, the <em>Borda</em>, as well as the <em>Condorcet winner</em> of the initially given linear voting profile <em>lvp</em> (see <a class="reference internal" href="#example3partiesvotingprofile"><span class="std std-numref">Listing 94</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="verificationbestchoice">
 <div class="code-block-caption"><span class="caption-number">Listing 99 </span><span class="caption-text">Secondary election winner recommendation verification</span><a class="headerlink" href="#verificationbestchoice" title="Permalink to this code">¶</a></div>
@@ -2588,6 +2593,9 @@ confidence level <em>alpha</em> %, if</p>
 </td></tr></table></div>
 </div>
 <p>In our example voting profile here, the multipartisan primary selection stage appears quite effective in reducing the number of eligible candidates to four out of a set of 15 candidates without btw rejecting the actual winning candidate.</p>
+</div>
+<div class="section" id="multipartisan-preferences-in-divisive-politics">
+<h3>Multipartisan preferences in divisive politics<a class="headerlink" href="#multipartisan-preferences-in-divisive-politics" title="Permalink to this headline">¶</a></h3>
 <p>However, in a very <strong>divisive two major party system</strong>, like in the US, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate.</p>
 <p>In <a class="reference internal" href="#divisivepolitics"><span class="std std-numref">Listing 100</span></a> below we generate such a divisive kind of linear voting profile with the help of the <em>DivisivePolitics</em> flag  <a class="footnote-reference brackets" href="#id30" id="id25">5</a> (see Lines 4 and 15-21).</p>
 <div class="literal-block-wrapper docutils container" id="divisivepolitics">
@@ -2695,7 +2703,7 @@ confidence level <em>alpha</em> %, if</p>
 </div>
 </div>
 <div class="section" id="bibliography">
-<h2><a class="toc-backref" href="#id41">Bibliography</a><a class="headerlink" href="#bibliography" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id42">Bibliography</a><a class="headerlink" href="#bibliography" title="Permalink to this headline">¶</a></h2>
 <dl class="citation">
 <dt class="label" id="bis-2015p"><span class="brackets"><a class="fn-backref" href="#id23">BIS-2015p</a></span></dt>
 <dd><p>Bisdorff R. (2015). “The EURO 2004 Best Poster Award: Choosing the Best Poster in a Scientific Conference”. Chapter 5 in R. Bisdorff, L. Dias, P. Meyer, V. Mousseau, and M. Pirlot (Eds.), <em>Evaluation and Decision Models with Multiple Criteria: Case Studies</em>. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, DOI 10.1007/978-3-662-46816-6_1, pp. 117-166 (downloadable <a class="reference external" href="http://hdl.handle.net/10993/23714">PDF file 754.7 kB</a>).</p>
@@ -2806,7 +2814,13 @@ confidence level <em>alpha</em> %, if</p>
 <li><a class="reference internal" href="#on-unopposed-multiobjective-and-multipartisan-outrankings">On unopposed multiobjective and multipartisan outrankings</a><ul>
 <li><a class="reference internal" href="#characterising-unopposed-multiobjective-outranking-situations">Characterising unopposed multiobjective outranking situations</a></li>
 <li><a class="reference internal" href="#unopposed-best-multiobjective-choice-recommendations">Unopposed best multiobjective choice recommendations</a></li>
-<li><a class="reference internal" href="#two-stage-elections-with-multipartisan-primary-selection">Two-stage elections with multipartisan primary selection</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#two-stage-elections-with-multipartisan-primary-selection">Two-stage elections with multipartisan primary selection</a><ul>
+<li><a class="reference internal" href="#converting-voting-profiles-into-performance-tableaux">Converting voting profiles into performance tableaux</a></li>
+<li><a class="reference internal" href="#multipartisan-primary-selection-of-eligible-candidates">Multipartisan primary selection of eligible candidates</a></li>
+<li><a class="reference internal" href="#secondary-election-winner-determination">Secondary election winner determination</a></li>
+<li><a class="reference internal" href="#multipartisan-preferences-in-divisive-politics">Multipartisan preferences in divisive politics</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#bibliography">Bibliography</a><ul>
