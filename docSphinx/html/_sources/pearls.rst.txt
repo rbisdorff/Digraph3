@@ -1537,19 +1537,16 @@ As the inital prekernel is here validated at stability level +2, recommending al
 
 For concluding, let us mention that it is precisely again our bipolar-valued *logical characteristic framework* that provides us here with a **first order distributional dominance** test for effectively qualifying the stability level 2 *robustness* of an outranking digraph when facing performance tableaux with criteria of only ordinal-valued significances. A real world application of our stability analysis with such a kind of performance tableau may be consulted in [BIS-2015p]_.
 
-
 .. _UnOpposed-Outranking-Tutorial-label:
 
-
-On unopposed multiobjective and multipartisan outrankings
----------------------------------------------------------
+On unopposed outrankings with multiple decision objectives
+----------------------------------------------------------
 
 .. contents:: 
 	:depth: 1
 	:local:
 
-When facing a performance tableau involving multiple decision objectives (or a linear voting profile with multiple parties), the robustness level **+/-3**, introduced in the previous Section, may lead to distinguishing what we call **unopposed** outranking situations, like the one shown between alternative *p4* and *p1* (:math:`r(p4 \succsim p1) = +0.78`, see :numref:`stabDenot` Line11), namely preferential situations that are more or less validated or invalidated by all the decision objectives.  
-
+When facing a performance tableau involving multiple decision objectives, the robustness level **+/-3**, introduced in the previous Section, may lead to distinguishing what we call **unopposed** outranking situations, like the one shown between alternative *p4* and *p1* (:math:`r(p4 \succsim p1) = +0.78`, see :numref:`stabDenot` Line11), namely preferential situations that are more or less validated or invalidated by all the decision objectives.  
 
 Characterising unopposed multiobjective outranking situations
 .............................................................
@@ -1724,7 +1721,7 @@ We may visualize this **unopposed robustness** result in :numref:`unopDigraph` b
 Two-stage elections with multipartisan primary selection
 --------------------------------------------------------
 
-Let us finally remark that in a social choice context, where decision objectives would match different political parties, our unopposed best choice recommendations represent in fact **robust multipartisan consensus choices**.
+Let us finally remark that in a social choice context, where decision objectives would match different political parties, our previous *unopposed best choice recommendations* represent in fact **robust multipartisan consensus choices**.
 
 Converting voting profiles into performance tableaux
 ....................................................

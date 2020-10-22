@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  22 OCT 2020 15:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  22 OCT 2020 15:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -882,7 +882,7 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2455.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2455.
 
 Package rerunfilecheck Info: File `digraph3Pearls.out' has not changed.
-(rerunfilecheck)             Checksum: 79EE428ADC0E02862475353A61B87D9C;9032.
+(rerunfilecheck)             Checksum: 1BA0C24D7163298FD55864B06B6A2236;9040.
 
 
 LaTeX Warning: There were undefined references.
@@ -891,8 +891,8 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2455.
  ) 
 Here is how much of TeX's memory you used:
  14096 strings out of 482504
- 202263 string characters out of 5947330
- 615239 words of memory out of 5000000
+ 202264 string characters out of 5947330
+ 615243 words of memory out of 5000000
  28584 multiletter control sequences out of 15000+600000
  558358 words of font info for 80 fonts, out of 8000000 for 9000
  396 hyphenation exceptions out of 8191
@@ -934,7 +934,7 @@ dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/symbols/msam10.pfb>
-Output written on digraph3Pearls.pdf (59 pages, 1967634 bytes).
+Output written on digraph3Pearls.pdf (59 pages, 1967587 bytes).
 PDF statistics:
  1696 PDF objects out of 1728 (max. 8388607)
  828 compressed objects within 9 object streams
