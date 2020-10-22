@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  22 OCT 2020 15:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  22 OCT 2020 18:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -847,39 +847,39 @@ Package pdftex.def Info: unOpposedOutrankings.png  used on input line 2253.
 <divGraph.png, id=774, 295.1025pt x 500.87125pt>
 File: divGraph.png Graphic file (type png)
 <use divGraph.png>
-Package pdftex.def Info: divGraph.png  used on input line 2416.
+Package pdftex.def Info: divGraph.png  used on input line 2417.
 (pdftex.def)             Requested size: 188.2019pt x 319.43301pt.
  [56 <./divGraph.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 2432--2433
+Underfull \hbox (badness 10000) in paragraph at lines 2433--2434
 \T1/cmr/m/n/12 Per-for-mance Dif-fer-ences^^Q \T1/cmr/m/it/12 Jour-nal of Multi
 -Criteria De-ci-sion Anal-
  []
 
 
-Underfull \hbox (badness 8113) in paragraph at lines 2432--2433
+Underfull \hbox (badness 8113) in paragraph at lines 2433--2434
 \T1/cmr/m/it/12 y-sis \T1/cmr/m/n/12 (Wi-ley) \T1/cmr/bx/n/12 20\T1/cmr/m/n/12 
 :3-12 (down-load-able preprint [][]PDF file 403.5 Kb[][]
  []
 
 
-Underfull \hbox (badness 5460) in paragraph at lines 2436--2437
+Underfull \hbox (badness 5460) in paragraph at lines 2437--2438
 \T1/cmr/m/n/12 ker-nels from bipo-lar val-ued di-graphs^^Q. \T1/cmr/m/it/12 Eu-
 ro-pean Jour-nal of Op-er-
  []
 
 
-Underfull \hbox (badness 6559) in paragraph at lines 2436--2437
+Underfull \hbox (badness 6559) in paragraph at lines 2437--2438
 \T1/cmr/m/it/12 a-tional Re-search\T1/cmr/m/n/12 , 175 (2006) 155-170. (On-line
 ) Elec-tronic ver-sion:
  []
 
 [57] (./digraph3Pearls.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2455.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2456.
  [58]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2455.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2456.
  (./digraph3Pearls.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2455.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2455.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2456.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2456.
 
 Package rerunfilecheck Info: File `digraph3Pearls.out' has not changed.
 (rerunfilecheck)             Checksum: 1BA0C24D7163298FD55864B06B6A2236;9040.
@@ -887,7 +887,7 @@ Package rerunfilecheck Info: File `digraph3Pearls.out' has not changed.
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2455.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2456.
  ) 
 Here is how much of TeX's memory you used:
  14096 strings out of 482504
@@ -934,7 +934,7 @@ dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/symbols/msam10.pfb>
-Output written on digraph3Pearls.pdf (59 pages, 1967587 bytes).
+Output written on digraph3Pearls.pdf (59 pages, 1967767 bytes).
 PDF statistics:
  1696 PDF objects out of 1728 (max. 8388607)
  828 compressed objects within 9 object streams

@@ -1042,7 +1042,7 @@ class RandomApprovalVotingProfile(ApprovalVotingProfile):
 
 class RandomLinearVotingProfile(LinearVotingProfile):
     """
-    A specialized class for generating random linwear voting profiles.
+    A specialized class for generating random liwear voting profiles.
 
     *Parameters*   
         * When *WithPolls* is True, each party supporting voter's linear ballot is randomly oriented

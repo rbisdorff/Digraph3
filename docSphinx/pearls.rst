@@ -1930,7 +1930,7 @@ Multipartisan preferences in divisive politics
 
 However, in a very **divisive two major party system**, like in the US, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate.
 
-In :numref:`divisivePolitics` below we generate such a divisive kind of linear voting profile with the help of the *DivisivePolitics* flag  [5]_ (see Lines 4 and 13-19).
+In :numref:`divisivePolitics` below we generate such a divisive kind of linear voting profile with the help of the *DivisivePolitics* flag  [5]_ (see Lines 4 and 13-19). When now converting the voting profile into a performance tableau (Lines 20-21), we may compute the corresponding unopposed outranking digraph which appears to be indeed completely indeterminate (Line 22- ).
 
 .. code-block:: pycon
    :name: divisivePolitics
@@ -1959,7 +1959,7 @@ In :numref:`divisivePolitics` below we generate such a divisive kind of linear v
     >>> lvp.save2PerfTab('divisiveExample')
     >>> dvp = PerformanceTableau('divisiveExample')
     >>> uodg = UnOpposedBipolarOutrankingDigraph(dvp)
-    >>> uodg.showRelationTable()
+    >>> uodg.showRelationTable(ReflexiveTerms=False)
     * ---- Relation Table -----
      r   |  'a1'   'a2'   'a3'   'a4'   'a5'   'a6'   'a7'   
     -----|-------------------------------------------------
@@ -1972,7 +1972,7 @@ In :numref:`divisivePolitics` below we generate such a divisive kind of linear v
     'a7' |  +0.00  +0.00  +0.00  +0.00  +0.00  +0.00    -   
     Valuation domain: [-1.000; 1.000]
       
-As a consequence, a **multipartisan primary selection**, computed with a :code:`uodg.showBestChoiceRecommendation()` method,  will keep the complete initial set of eligible candidates and, hence, becomes **ineffective** ((see :numref:`ineffectivePrimarySelection` Line 6).
+As a consequence, a **multipartisan primary selection**, computed with a :code:`uodg.showBestChoiceRecommendation()` method,  will keep the complete initial set of eligible candidates and, hence, becomes **ineffective** (see :numref:`ineffectivePrimarySelection` Line 6).
 
 .. code-block:: pycon
    :name: ineffectivePrimarySelection
@@ -1992,7 +1992,8 @@ As a consequence, a **multipartisan primary selection**, computed with a :code:`
     determinateness (%) : 50.00
      - most credible action(s) = { }
 
-With such king of divisive voting profile, there may not always exist an obvious winner. But in our example here, we are lucky.
+With such king of divisive voting profile, there may not always exist an obvious winner. In :numref:`UncertainWinner` below, we see, for instance, that the *simple majority* winnner is *a2* (Line 2), whereas the *instant-run-off* winner is *a6* (Line 4).
+
 
 .. code-block:: pycon
    :name: UncertainWinner
@@ -2017,15 +2018,16 @@ With such king of divisive voting profile, there may not always exist an obvious
      'a6' |  +88   +6   -4  +68	 "26   -    -2	 
      'a7' |  +84  +24   -8  +72	 "64   "2   - 	 
     Valuation domain: [-500;+500]
-   >>> cg.condorcetWinners()
+   >>> cg.computeCondorcetWinners()
     ['a3']
+   >>> cp.computeBordaWinners()
+    ['a3','a7']
    >>> cg.computeCopelandRanking()
     ['a3', 'a7', 'a6', 'a2', 'a5', 'a4', 'a1']
-    
 
-In :numref:`UncertainWinner` we see, for instance, that the *simple majority* winnner is *a2* (Line 2), whereas the *instant-run-off* winner is *a6* (Line 4). However, when constructing with the pairwise majority margins the corresponding *Condorcet* digraph (Lines 5-6), a *Condorcet winner*, namely *a3* becomes apparent (Line 13). More interesting even is to notice that the apparent *Condorcet* digraph models in fact a linear ranking *['a3', 'a7', 'a6', 'a2', 'a5', 'a4', 'a1']* of all the eligible candidates, as shown with a Copeland ranking rule (Lines 21-22).
+But in our example here, we are lucky. When constructing with the pairwise majority margins the corresponding *Condorcet* digraph (Lines 5-6), a *Condorcet winner*, namely *a3* becomes apparent (Lines 13,19-20), which is also one of the two *Borda* winners. More interesting even is to notice that the apparent *Condorcet* digraph models in fact a linear ranking *['a3', 'a7', 'a6', 'a2', 'a5', 'a4', 'a1']* of all the eligible candidates, as shown with a Copeland ranking rule (Lines 23-24).
 
-We may eventually visualize in :numref:`drawingRanking` this ranking with a graphviz drawing where we drop the transitive closing arcs (Line 1) and orient the drawing with *Condorcet* winner *a3* and looser *a1* (Lines 2-3).
+We may eventually visualize in :numref:`drawingRanking` this linear ranking with a graphviz drawing where we drop all transitive arcs (Line 1) and orient the drawing with *Condorcet* winner *a3* and looser *a1* (Lines 2).
 
 .. code-block:: pycon
    :name: drawingRanking
@@ -2033,8 +2035,7 @@ We may eventually visualize in :numref:`drawingRanking` this ranking with a grap
    :linenos:
 
    >>> cg.closeTransitive(Reverse=True)
-   >>> cg.exportGraphViz('divGraph',bestChoice=['a3'],\
-                                    worstChoice=['a1'])
+   >>> cg.exportGraphViz('divGraph',bestChoice=['a3'],worstChoice=['a1'])
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to divGraph.dot
      dot -Grankdir=BT -Tpng divGraph.dot -o divGraph.png

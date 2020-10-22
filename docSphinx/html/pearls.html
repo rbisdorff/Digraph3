@@ -2597,7 +2597,7 @@ confidence level <em>alpha</em> %, if</p>
 <div class="section" id="multipartisan-preferences-in-divisive-politics">
 <h3>Multipartisan preferences in divisive politics<a class="headerlink" href="#multipartisan-preferences-in-divisive-politics" title="Permalink to this headline">¶</a></h3>
 <p>However, in a very <strong>divisive two major party system</strong>, like in the US, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate.</p>
-<p>In <a class="reference internal" href="#divisivepolitics"><span class="std std-numref">Listing 100</span></a> below we generate such a divisive kind of linear voting profile with the help of the <em>DivisivePolitics</em> flag  <a class="footnote-reference brackets" href="#id30" id="id25">5</a> (see Lines 4 and 13-19).</p>
+<p>In <a class="reference internal" href="#divisivepolitics"><span class="std std-numref">Listing 100</span></a> below we generate such a divisive kind of linear voting profile with the help of the <em>DivisivePolitics</em> flag  <a class="footnote-reference brackets" href="#id30" id="id25">5</a> (see Lines 4 and 13-19). When now converting the voting profile into a performance tableau (Lines 20-21), we may compute the corresponding unopposed outranking digraph which appears to be indeed completely indeterminate (Line 22- ).</p>
 <div class="literal-block-wrapper docutils container" id="divisivepolitics">
 <div class="code-block-caption"><span class="caption-number">Listing 100 </span><span class="caption-text">A divisive two-party example of a random linear voting profile</span><a class="headerlink" href="#divisivepolitics" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2655,7 +2655,7 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go"> &gt;&gt;&gt; lvp.save2PerfTab(&#39;divisiveExample&#39;)</span>
 <span class="go"> &gt;&gt;&gt; dvp = PerformanceTableau(&#39;divisiveExample&#39;)</span>
 <span class="go"> &gt;&gt;&gt; uodg = UnOpposedBipolarOutrankingDigraph(dvp)</span>
-<span class="go"> &gt;&gt;&gt; uodg.showRelationTable()</span>
+<span class="go"> &gt;&gt;&gt; uodg.showRelationTable(ReflexiveTerms=False)</span>
 <span class="go"> * ---- Relation Table -----</span>
 <span class="go">  r   |  &#39;a1&#39;   &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;   &#39;a5&#39;   &#39;a6&#39;   &#39;a7&#39;</span>
 <span class="go"> -----|-------------------------------------------------</span>
@@ -2670,7 +2670,7 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>As a consequence, a <strong>multipartisan primary selection</strong>, computed with a <code class="code docutils literal notranslate"><span class="pre">uodg.showBestChoiceRecommendation()</span></code> method,  will keep the complete initial set of eligible candidates and, hence, becomes <strong>ineffective</strong> ((see <a class="reference internal" href="#ineffectiveprimaryselection"><span class="std std-numref">Listing 101</span></a> Line 6).</p>
+<p>As a consequence, a <strong>multipartisan primary selection</strong>, computed with a <code class="code docutils literal notranslate"><span class="pre">uodg.showBestChoiceRecommendation()</span></code> method,  will keep the complete initial set of eligible candidates and, hence, becomes <strong>ineffective</strong> (see <a class="reference internal" href="#ineffectiveprimaryselection"><span class="std std-numref">Listing 101</span></a> Line 6).</p>
 <div class="literal-block-wrapper docutils container" id="ineffectiveprimaryselection">
 <div class="code-block-caption"><span class="caption-number">Listing 101 </span><span class="caption-text">Example of ineffective primary multipartisan selection</span><a class="headerlink" href="#ineffectiveprimaryselection" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2699,7 +2699,7 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>With such king of divisive voting profile, there may not always exist an obvious winner. But in our example here, we are lucky.</p>
+<p>With such king of divisive voting profile, there may not always exist an obvious winner. In <a class="reference internal" href="#uncertainwinner"><span class="std std-numref">Listing 102</span></a> below, we see, for instance, that the <em>simple majority</em> winnner is <em>a2</em> (Line 2), whereas the <em>instant-run-off</em> winner is <em>a6</em> (Line 4).</p>
 <div class="literal-block-wrapper docutils container" id="uncertainwinner">
 <div class="code-block-caption"><span class="caption-number">Listing 102 </span><span class="caption-text">Example of secondary selection</span><a class="headerlink" href="#uncertainwinner" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2723,7 +2723,9 @@ confidence level <em>alpha</em> %, if</p>
 19
 20
 21
-22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lvp</span><span class="o">.</span><span class="n">computeSimpleMajorityWinner</span><span class="p">()</span>
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lvp</span><span class="o">.</span><span class="n">computeSimpleMajorityWinner</span><span class="p">()</span>
 <span class="go"> [&#39;a2&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lvp</span><span class="o">.</span><span class="n">computeInstantRunoffWinner</span><span class="p">()</span>
 <span class="go"> [&#39;a6&#39;]</span>
@@ -2741,25 +2743,25 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">  &#39;a6&#39; |  +88   +6   -4  +68  &quot;26   -    -2</span>
 <span class="go">  &#39;a7&#39; |  +84  +24   -8  +72  &quot;64   &quot;2   -</span>
 <span class="go"> Valuation domain: [-500;+500]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">condorcetWinners</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">computeCondorcetWinners</span><span class="p">()</span>
 <span class="go"> [&#39;a3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cp</span><span class="o">.</span><span class="n">computeBordaWinners</span><span class="p">()</span>
+<span class="go"> [&#39;a3&#39;,&#39;a7&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
 <span class="go"> [&#39;a3&#39;, &#39;a7&#39;, &#39;a6&#39;, &#39;a2&#39;, &#39;a5&#39;, &#39;a4&#39;, &#39;a1&#39;]</span>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>In <a class="reference internal" href="#uncertainwinner"><span class="std std-numref">Listing 102</span></a> we see, for instance, that the <em>simple majority</em> winnner is <em>a2</em> (Line 2), whereas the <em>instant-run-off</em> winner is <em>a6</em> (Line 4). However, when constructing with the pairwise majority margins the corresponding <em>Condorcet</em> digraph (Lines 5-6), a <em>Condorcet winner</em>, namely <em>a3</em> becomes apparent (Line 13). More interesting even is to notice that the apparent <em>Condorcet</em> digraph models in fact a linear ranking <em>[‘a3’, ‘a7’, ‘a6’, ‘a2’, ‘a5’, ‘a4’, ‘a1’]</em> of all the eligible candidates, as shown with a Copeland ranking rule (Lines 21-22).</p>
-<p>We may eventually visualize in <a class="reference internal" href="#drawingranking"><span class="std std-numref">Listing 103</span></a> this ranking with a graphviz drawing where we drop the transitive closing arcs (Line 1) and orient the drawing with <em>Condorcet</em> winner <em>a3</em> and looser <em>a1</em> (Lines 2-3).</p>
+<p>But in our example here, we are lucky. When constructing with the pairwise majority margins the corresponding <em>Condorcet</em> digraph (Lines 5-6), a <em>Condorcet winner</em>, namely <em>a3</em> becomes apparent (Lines 13,19-20), which is also one of the two <em>Borda</em> winners. More interesting even is to notice that the apparent <em>Condorcet</em> digraph models in fact a linear ranking <em>[‘a3’, ‘a7’, ‘a6’, ‘a2’, ‘a5’, ‘a4’, ‘a1’]</em> of all the eligible candidates, as shown with a Copeland ranking rule (Lines 23-24).</p>
+<p>We may eventually visualize in <a class="reference internal" href="#drawingranking"><span class="std std-numref">Listing 103</span></a> this linear ranking with a graphviz drawing where we drop all transitive arcs (Line 1) and orient the drawing with <em>Condorcet</em> winner <em>a3</em> and looser <em>a1</em> (Lines 2).</p>
 <div class="literal-block-wrapper docutils container" id="drawingranking">
 <div class="code-block-caption"><span class="caption-number">Listing 103 </span><span class="caption-text">Drawing the linear ordering</span><a class="headerlink" href="#drawingranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;divGraph&#39;</span><span class="p">,</span><span class="n">bestChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a3&#39;</span><span class="p">],</span>\
-<span class="go">                                 worstChoice=[&#39;a1&#39;])</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;divGraph&#39;</span><span class="p">,</span><span class="n">bestChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a3&#39;</span><span class="p">],</span><span class="n">worstChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a1&#39;</span><span class="p">])</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">  Exporting to divGraph.dot</span>
 <span class="go">  dot -Grankdir=BT -Tpng divGraph.dot -o divGraph.png</span>
