@@ -4312,7 +4312,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         reprString += '# Actions           : %d\n' % self.order
         reprString += '# Criteria          : %d\n' % len(self.criteria)
         reprString += 'Size                : %d\n' % self.computeSize()
-        reprString += 'Determinateness (%%) : %.2f\n' % self.computeDeterminateness(InPercents=True)
+        try:
+            oppDeg = self.computeOppositeness(InPercents=True)
+            reprString += 'Oppositeness (%%)    : %.2f\n' % (oppDeg['oppositeness'])
+        except:
+            pass
+        reprString += 'Determinateness (%%) : %.2f\n' %\
+                      self.computeDeterminateness(InPercents=True)
         reprString += 'Valuation domain    : [%.2f;%.2f]\n'\
                       % (self.valuationdomain['min'],self.valuationdomain['max'])
         #reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
@@ -9924,24 +9930,51 @@ class UnOpposedBipolarOutrankingDigraph(CoalitionsOutrankingsFusionDigraph):
 
                  
         from copy import deepcopy
-        coalitions = [argPerfTab.objectives[obj]['criteria'] for obj in argPerfTab.objectives]
-        if Comments:
-            print('coalitions:',coalitions)
-        #except:
-        #    print('!! Error: the given performance tableau does not contain objectives.')
-        #    return
+        for att in argPerfTab.__dict__:
+            self.__dict__[att] = argPerfTab.__dict__[att]
+        try:
+            coalitions = [self.objectives[obj]['criteria'] for obj in self.objectives]
+            if Comments:
+                print('coalitions:',coalitions)
+        except:
+            print('!! Error: the given performance tableau does not contain objectives.')
+            return
         uoo = CoalitionsOutrankingsFusionDigraph(argPerfTab,\
-                                            CopyPerfTab=True,\
+                                            CopyPerfTab=False,\
                                             coalitionsList=coalitions,\
                                             actionsSubset=actionsSubset,\
                                             Comments=Comments)
         for att in uoo.__dict__:
             self.__dict__[att] = uoo.__dict__[att]
-        self.name += '_unopposed_outrankings' 
-        
+        self.name += '_unopposed_outrankings'
         if Comments:
             print(self)
+
+    def computeOppositeness(self,InPercents=False):
+        """
+        Computes the degree in *[0.0, 1.0]* of oppositeness --**preferential disagreement**-- of the multiple decision objectives.
+        
+        Renders a dictionary with three entries:
+
+        - *standardSize* : size of the corresponding
+          standard bipolar-valued outranking digraph;
+        - *unopposedSize* : size of the the corresponding
+          unopposed bipolar-valued outranking digraph;
+        - *oppositeness* : (1.0 - unopposedSize/standardSize);
+          if *InPercents* has value True, the *oppositeness* is rendered in percents format.
     
+        """
+        from outrankingDigraphs import BipolarOutrankingDigraph
+        du = self.computeSize()
+        g = BipolarOutrankingDigraph(self)
+        d = g.computeSize()
+        if InPercents:
+            op = (1.0 -(du/d))*100.0
+        else:
+            op = (1.0 -(du/d))
+        return {'standardSize': d, 'unopposedSize': du, 'oppositeness': op}
+        
+        
 class SymmetricAverageFusionOutrankingDigraph(BipolarOutrankingDigraph):
     """
     in development !
@@ -10290,8 +10323,8 @@ if __name__ == "__main__":
 ##                                    NegativeWeights=True,
 ##                                    negativeWeightProbability=0.25,
 ##                                   seed=102)
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
-                                   numberOfCriteria=9,\
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=15,\
+                                   numberOfCriteria=13,\
                                    vetoProbability=0.5,\
                                    #seed=randint(1,1000),\
                                    seed=21)

@@ -6346,6 +6346,21 @@ neglecting all considerable large performance differences polarisations.</p>
 <dd><p>When operating an <em>o-average</em> fusion of the mariginal outranking digraphs restricted to the coalition of criteria supporting each decision objective, we obtain <strong>unopposed</strong> outranking situtations, namely <em>validated</em> by one or more decision objectives without being <em>invalidated</em> by any other decision objective.</p>
 <p>These positive, as well as negative outranking characteristics, appear hence stable with respect to the importance of the decision objectives when proportional criteria significances are given.</p>
 <p>Furthermore, polarising the outranking digraph with considerable performance differences is here restricted to each decision objective, which makes it easier to decide on veto discrimination thresholds.</p>
+<dl class="py method">
+<dt id="outrankingDigraphs.UnOpposedBipolarOutrankingDigraph.computeOppositeness">
+<code class="sig-name descname">computeOppositeness</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">InPercents</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#UnOpposedBipolarOutrankingDigraph.computeOppositeness"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#outrankingDigraphs.UnOpposedBipolarOutrankingDigraph.computeOppositeness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the degree in <em>[0.0, 1.0]</em> of oppositeness –<strong>preferential disagreement</strong>– of the multiple decision objectives.</p>
+<p>Renders a dictionary with three entries:</p>
+<ul class="simple">
+<li><p><em>standardSize</em> : size of the corresponding
+standard bipolar-valued outranking digraph;</p></li>
+<li><p><em>unopposedSize</em> : size of the the corresponding
+unopposed bipolar-valued outranking digraph;</p></li>
+<li><p><em>oppositeness</em> : (1.0 - unopposedSize/standardSize);
+if <em>InPercents</em> has value True, the <em>oppositeness</em> is rendered in percents format.</p></li>
+</ul>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">

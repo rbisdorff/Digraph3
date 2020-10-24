@@ -1042,7 +1042,7 @@ class RandomApprovalVotingProfile(ApprovalVotingProfile):
 
 class RandomLinearVotingProfile(LinearVotingProfile):
     """
-    A specialized class for generating random linwear voting profiles.
+    A specialized class for generating random liwear voting profiles.
 
     *Parameters*   
         * When *WithPolls* is True, each party supporting voter's linear ballot is randomly oriented
@@ -1409,7 +1409,7 @@ class CondorcetDigraph(Digraph):
     >>> g.computeCondorcetWinner()
     ['a1']
     >>> g.exportGraphViz()
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to rel_randLinearProfile.dot
     dot -Grankdir=BT -Tpng rel_randLinearProfile.dot -o rel_randLinearProfile.png
 
@@ -1849,27 +1849,30 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-    lvp = RandomLinearVotingProfile(numberOfCandidates=5,
-                            numberOfVoters=100,
+    lvp = RandomLinearVotingProfile(numberOfCandidates=7,
+                            numberOfVoters=500,
                             WithPolls=True,
-                            partyRepartition=0.5,
-                            other=0.1,
+                            partyRepartition=0.4,
+                            other=0.2,
                             DivisivePolitics=True,
                             #seed=0.20990710811162194) # 1 circuit
                             #seed=0.8077233289616987)  # 2 circuits !
-                            seed = 1,
-                                    Debug=False)
+                            seed=1,
+                            Debug=False)
     lvp.showRandomPolls()
 ##    ## lvp = LinearVotingProfile('templinearprofile')
-    lvp.save('test')
+##    lvp.save('test')
 ##    lvp1 = LinearVotingProfile('test')
     lvp.save2PerfTab()
     from outrankingDigraphs import *
     t = PerformanceTableau('votingPerfTab')
-    g = BipolarOutrankingDigraph(t)
-    g.showRelationTable()
+##    g = BipolarOutrankingDigraph(t)
+##    g.showRelationTable(ReflexiveTerms=False)
     uog = UnOpposedBipolarOutrankingDigraph(t)
-    uog.showRelationTable()
+    uog.showRelationTable(ReflexiveTerms=False)
+    print(uog)
+    uog.showPreKernels()
+    uog.showBestChoiceRecommendation()
 ##    lvp1 = LinearVotingProfile('templinearprofile')
 ##    lvp1 = LinearVotingProfile('example1')
 ##    lvp1.computeBallot()
