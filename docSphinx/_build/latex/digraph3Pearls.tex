@@ -58,7 +58,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{October 22, 2020}
+\date{October 25, 2020}
 \release{3.8-3600+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -2028,13 +2028,19 @@ For easily computing this kind of \sphinxstyleemphasis{unopposed multiobjective}
 \PYG{g+go}{ \PYGZsh{} Actions           : 7}
 \PYG{g+go}{ \PYGZsh{} Criteria          : 9}
 \PYG{g+go}{ Size                : 13}
+\PYG{g+go}{ Oppositeness (\PYGZpc{})    : 43.48}
 \PYG{g+go}{ Determinateness (\PYGZpc{}) : 61.71}
 \PYG{g+go}{ Valuation domain    : [\PYGZhy{}1.00;1.00]}
 \PYG{g+go}{ Attributes          : [\PYGZsq{}name\PYGZsq{}, \PYGZsq{}actions\PYGZsq{}, \PYGZsq{}valuationdomain\PYGZsq{}, \PYGZsq{}objectives\PYGZsq{},}
 \PYG{g+go}{                        \PYGZsq{}criteria\PYGZsq{}, \PYGZsq{}methodData\PYGZsq{}, \PYGZsq{}evaluation\PYGZsq{}, \PYGZsq{}order\PYGZsq{},}
 \PYG{g+go}{                        \PYGZsq{}runTimes\PYGZsq{}, \PYGZsq{}relation\PYGZsq{}, \PYGZsq{}marginalRelationsRelations\PYGZsq{},}
 \PYG{g+go}{                        \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg}\PYG{o}{.}\PYG{n}{computeOppositeness}\PYG{p}{(}\PYG{n}{InPercents}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
+\PYG{g+go}{ \PYGZob{}\PYGZsq{}standardSize\PYGZsq{}: 23, \PYGZsq{}unopposedSize\PYGZsq{}: 13,}
+\PYG{g+go}{  \PYGZsq{}oppositeness\PYGZsq{}: 43.47826086956522\PYGZcb{}}
 \end{sphinxVerbatim}
+
+The resulting \sphinxstyleemphasis{unopposed} outranking digraph keeps in fact 13 (see \hyperref[\detokenize{pearls:unopposed3}]{Listing \ref{\detokenize{pearls:unopposed3}}} Line 17\sphinxhyphen{}19) out of the 23 positively validated \sphinxstyleemphasis{standard} outranking situations, leading to a degree of \sphinxstylestrong{oppositeness} \sphinxhyphen{}preferential disagreement between decision objectives\sphinxhyphen{} of \((1.0 - 13/23)\,=\,0.4348\).
 
 We may now, for instance, verify the unopposed status of the outranking situation observed between alternatives \sphinxstyleemphasis{p1} and \sphinxstyleemphasis{p5}.
 \sphinxSetupCaptionForVerbatim{Example of unopposed multiobjective outranking situation}
@@ -2056,9 +2062,7 @@ We may now, for instance, verify the unopposed status of the outranking situatio
 \PYG{g+go}{  Valuation in range: \PYGZhy{}72.00 to +72.00; global concordance: +28.00}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{pearls:unopposed4}]{Listing \ref{\detokenize{pearls:unopposed4}}} we may notice that alternative \sphinxstyleemphasis{p1} does indeed positively outrank alternative \sphinxstyleemphasis{p5} from the economic perspective (\(r(p1 \succsim_{Eco} p5) = +16/24\)) as well as from the environmental perspective (\(r(p1 \succsim_{Env} p5) = +12/24\)). Whereas, from the societal perspective, both alternatives appear incomparable (\(r(p1 \succsim_{Soc} p5) = 0/24\)). When fixed proportional criteria significances per objective are given, these outranking situations appear hence \sphinxstylestrong{stable} with respect to all possible importance weights we could allocate to the decision objectives.
-
-The resulting \sphinxstyleemphasis{unopposed} outranking digraph keeps in fact 13 (see \hyperref[\detokenize{pearls:unopposed3}]{Listing \ref{\detokenize{pearls:unopposed3}}} Line 10) out of the 23 positively validated \sphinxstyleemphasis{standard} outranking situations.
+In \hyperref[\detokenize{pearls:unopposed4}]{Listing \ref{\detokenize{pearls:unopposed4}}} we see that alternative \sphinxstyleemphasis{p1} does indeed positively outrank alternative \sphinxstyleemphasis{p5} from the economic perspective (\(r(p1 \succsim_{Eco} p5) = +16/24\)) as well as from the environmental perspective (\(r(p1 \succsim_{Env} p5) = +12/24\)). Whereas, from the societal perspective, both alternatives appear incomparable (\(r(p1 \succsim_{Soc} p5) = 0/24\)). When fixed proportional criteria significances per objective are given, these outranking situations appear hence \sphinxstylestrong{stable} with respect to all possible importance weights we could allocate to the decision objectives.
 
 
 \subsection{Unopposed best multiobjective choice recommendations}
@@ -2210,6 +2214,7 @@ In order to make now a \sphinxstylestrong{primary multipartisan selection} of po
 \PYG{g+go}{  \PYGZsh{} Actions           : 15}
 \PYG{g+go}{  \PYGZsh{} Criteria          : 1000}
 \PYG{g+go}{  Size                : 34}
+\PYG{g+go}{  Oppositeness (\PYGZpc{})    : 67.31}
 \PYG{g+go}{  Determinateness (\PYGZpc{}) : 57.61}
 \PYG{g+go}{  Valuation domain    : [\PYGZhy{}1.00;1.00]}
 \PYG{g+go}{  Attributes          : [\PYGZsq{}name\PYGZsq{}, \PYGZsq{}actions\PYGZsq{}, \PYGZsq{}valuationdomain\PYGZsq{},}
@@ -2219,7 +2224,7 @@ In order to make now a \sphinxstylestrong{primary multipartisan selection} of po
 \PYG{g+go}{                         \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situation.
+From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situation, leading to a degree of \sphinxstyleemphasis{oppositeness} between political parties of 67.31\%.
 
 We may visualize the corresponding bipolar\sphinxhyphen{}valued relation table by orienting the list of candidates with the help of the \sphinxstyleemphasis{initial} and the \sphinxstyleemphasis{terminal prekernels}.
 \sphinxSetupCaptionForVerbatim{Visualizing the unopposed outranking relation}
@@ -2309,7 +2314,7 @@ In \hyperref[\detokenize{pearls:divisivepolitics}]{Listing \ref{\detokenize{pear
 \begin{footnote}[5]\sphinxAtStartFootnote
 The \sphinxcode{\sphinxupquote{votingProfiles.RandomLinearVotingProfile}} constructor provides a \sphinxstyleemphasis{DivisivePolitics} flag (\sphinxstyleemphasis{False} by default) for generating random linear voting profiles based on a divisive polls strucure.
 %
-\end{footnote} (see Lines 4 and 13\sphinxhyphen{}19). When now converting the voting profile into a performance tableau (Lines 20\sphinxhyphen{}21), we may compute the corresponding unopposed outranking digraph which appears to be indeed completely indeterminate (Line 22\sphinxhyphen{} ).
+\end{footnote} (see Lines 4 and 13\sphinxhyphen{}19). When now converting the voting profile into a performance tableau (Lines 20\sphinxhyphen{}21), we may compute the corresponding unopposed outranking digraph.
 \sphinxSetupCaptionForVerbatim{A divisive two\sphinxhyphen{}party example of a random linear voting profile}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:divisivepolitics}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -2335,18 +2340,33 @@ The \sphinxcode{\sphinxupquote{votingProfiles.RandomLinearVotingProfile}} constr
 \PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} lvp.save2PerfTab(\PYGZsq{}divisiveExample\PYGZsq{})}
 \PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} dvp = PerformanceTableau(\PYGZsq{}divisiveExample\PYGZsq{})}
 \PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} uodg = UnOpposedBipolarOutrankingDigraph(dvp)}
-\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} uodg.showRelationTable(ReflexiveTerms=False)}
-\PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{  r   |  \PYGZsq{}a1\PYGZsq{}   \PYGZsq{}a2\PYGZsq{}   \PYGZsq{}a3\PYGZsq{}   \PYGZsq{}a4\PYGZsq{}   \PYGZsq{}a5\PYGZsq{}   \PYGZsq{}a6\PYGZsq{}   \PYGZsq{}a7\PYGZsq{}}
-\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{ \PYGZsq{}a1\PYGZsq{} |     \PYGZhy{}   +0.00  +0.00  +0.00  +0.00  +0.00  +0.00}
-\PYG{g+go}{ \PYGZsq{}a2\PYGZsq{} |  +0.00    \PYGZhy{}    +0.00  +0.00  +0.00  +0.00  +0.00}
-\PYG{g+go}{ \PYGZsq{}a3\PYGZsq{} |  +0.00  +0.00    \PYGZhy{}    +0.00  +0.00  +0.00  +0.00}
-\PYG{g+go}{ \PYGZsq{}a4\PYGZsq{} |  +0.00  +0.00  +0.00    \PYGZhy{}    +0.00  +0.00  +0.00}
-\PYG{g+go}{ \PYGZsq{}a5\PYGZsq{} |  +0.00  +0.00  +0.00  +0.00    \PYGZhy{}    +0.00  +0.00}
-\PYG{g+go}{ \PYGZsq{}a6\PYGZsq{} |  +0.00  +0.00  +0.00  +0.00  +0.00    \PYGZhy{}    +0.00}
-\PYG{g+go}{ \PYGZsq{}a7\PYGZsq{} |  +0.00  +0.00  +0.00  +0.00  +0.00  +0.00    \PYGZhy{}}
-\PYG{g+go}{ Valuation domain: [\PYGZhy{}1.000; 1.000]}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} uodg}
+\PYG{g+go}{  *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{   Instance class      : UnOpposedBipolarOutrankingDigraph}
+\PYG{g+go}{   Instance name       : unopposed\PYGZus{}outrankings}
+\PYG{g+go}{   \PYGZsh{} Actions           : 7}
+\PYG{g+go}{   \PYGZsh{} Criteria          : 500}
+\PYG{g+go}{   Size                : 0}
+\PYG{g+go}{   Oppositeness (\PYGZpc{})    : 100.00}
+\PYG{g+go}{   Determinateness (\PYGZpc{}) : 50.00}
+\PYG{g+go}{   Valuation domain    : [\PYGZhy{}1.00;1.00]}
+\end{sphinxVerbatim}
+
+With an oppositeness degree of 100.0\% (see \hyperref[\detokenize{pearls:divisivepolitics}]{Listing \ref{\detokenize{pearls:divisivepolitics}}} Line 30), the preferential disagreement between the political parties is complete, and the unopposed outranking digraph \sphinxstyleemphasis{uodg} becomes completely \sphinxstylestrong{indeterminate} as shown in the relation table below.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uodg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+go}{* \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{ r   |  \PYGZsq{}a1\PYGZsq{}   \PYGZsq{}a2\PYGZsq{}   \PYGZsq{}a3\PYGZsq{}   \PYGZsq{}a4\PYGZsq{}   \PYGZsq{}a5\PYGZsq{}   \PYGZsq{}a6\PYGZsq{}   \PYGZsq{}a7\PYGZsq{}}
+\PYG{g+go}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{\PYGZsq{}a1\PYGZsq{} |     \PYGZhy{}   +0.00  +0.00  +0.00  +0.00  +0.00  +0.00}
+\PYG{g+go}{\PYGZsq{}a2\PYGZsq{} |  +0.00    \PYGZhy{}    +0.00  +0.00  +0.00  +0.00  +0.00}
+\PYG{g+go}{\PYGZsq{}a3\PYGZsq{} |  +0.00  +0.00    \PYGZhy{}    +0.00  +0.00  +0.00  +0.00}
+\PYG{g+go}{\PYGZsq{}a4\PYGZsq{} |  +0.00  +0.00  +0.00    \PYGZhy{}    +0.00  +0.00  +0.00}
+\PYG{g+go}{\PYGZsq{}a5\PYGZsq{} |  +0.00  +0.00  +0.00  +0.00    \PYGZhy{}    +0.00  +0.00}
+\PYG{g+go}{\PYGZsq{}a6\PYGZsq{} |  +0.00  +0.00  +0.00  +0.00  +0.00    \PYGZhy{}    +0.00}
+\PYG{g+go}{\PYGZsq{}a7\PYGZsq{} |  +0.00  +0.00  +0.00  +0.00  +0.00  +0.00    \PYGZhy{}}
+\PYG{g+go}{Valuation domain: [\PYGZhy{}1.000; 1.000]}
 \end{sphinxVerbatim}
 
 As a consequence, a \sphinxstylestrong{multipartisan primary selection}, computed with a \sphinxcode{\sphinxupquote{uodg.showBestChoiceRecommendation()}} method,  will keep the complete initial set of eligible candidates and, hence, becomes \sphinxstylestrong{ineffective} (see \hyperref[\detokenize{pearls:ineffectiveprimaryselection}]{Listing \ref{\detokenize{pearls:ineffectiveprimaryselection}}} Line 6).

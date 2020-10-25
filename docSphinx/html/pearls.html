@@ -2180,7 +2180,11 @@ confidence level <em>alpha</em> %, if</p>
 13
 14
 15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span>\
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span>\
 <span class="go">           UnOpposedBipolarOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">uopg</span> <span class="o">=</span> <span class="n">UnOpposedBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">uopg</span>
@@ -2190,15 +2194,20 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go"> # Actions           : 7</span>
 <span class="go"> # Criteria          : 9</span>
 <span class="go"> Size                : 13</span>
+<span class="go"> Oppositeness (%)    : 43.48</span>
 <span class="go"> Determinateness (%) : 61.71</span>
 <span class="go"> Valuation domain    : [-1.00;1.00]</span>
 <span class="go"> Attributes          : [&#39;name&#39;, &#39;actions&#39;, &#39;valuationdomain&#39;, &#39;objectives&#39;,</span>
 <span class="go">                        &#39;criteria&#39;, &#39;methodData&#39;, &#39;evaluation&#39;, &#39;order&#39;,</span>
 <span class="go">                        &#39;runTimes&#39;, &#39;relation&#39;, &#39;marginalRelationsRelations&#39;,</span>
 <span class="go">                        &#39;gamma&#39;, &#39;notGamma&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">uopg</span><span class="o">.</span><span class="n">computeOppositeness</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go"> {&#39;standardSize&#39;: 23, &#39;unopposedSize&#39;: 13,</span>
+<span class="go">  &#39;oppositeness&#39;: 43.47826086956522}</span>
 </pre></div>
 </td></tr></table></div>
 </div>
+<p>The resulting <em>unopposed</em> outranking digraph keeps in fact 13 (see <a class="reference internal" href="#unopposed3"><span class="std std-numref">Listing 91</span></a> Line 17-19) out of the 23 positively validated <em>standard</em> outranking situations, leading to a degree of <strong>oppositeness</strong> -preferential disagreement between decision objectives- of <img class="math" src="_images/math/e7f55a2a5a978a720d6f968afa383454cf18fe69.png" alt="(1.0 - 13/23)\,=\,0.4348"/>.</p>
 <p>We may now, for instance, verify the unopposed status of the outranking situation observed between alternatives <em>p1</em> and <em>p5</em>.</p>
 <div class="literal-block-wrapper docutils container" id="unopposed4">
 <div class="code-block-caption"><span class="caption-number">Listing 92 </span><span class="caption-text">Example of unopposed multiobjective outranking situation</span><a class="headerlink" href="#unopposed4" title="Permalink to this code">¶</a></div>
@@ -2232,8 +2241,7 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>In <a class="reference internal" href="#unopposed4"><span class="std std-numref">Listing 92</span></a> we may notice that alternative <em>p1</em> does indeed positively outrank alternative <em>p5</em> from the economic perspective (<img class="math" src="_images/math/52d6330fa4b8f2a405695bb03abb73a9fc4154dd.png" alt="r(p1 \succsim_{Eco} p5) = +16/24"/>) as well as from the environmental perspective (<img class="math" src="_images/math/3b4338e950d7c3283bf8d514eef42b30d691fc69.png" alt="r(p1 \succsim_{Env} p5) = +12/24"/>). Whereas, from the societal perspective, both alternatives appear incomparable (<img class="math" src="_images/math/16a329e29693548a82cc2fa41cf1f791184f99cf.png" alt="r(p1 \succsim_{Soc} p5) = 0/24"/>). When fixed proportional criteria significances per objective are given, these outranking situations appear hence <strong>stable</strong> with respect to all possible importance weights we could allocate to the decision objectives.</p>
-<p>The resulting <em>unopposed</em> outranking digraph keeps in fact 13 (see <a class="reference internal" href="#unopposed3"><span class="std std-numref">Listing 91</span></a> Line 10) out of the 23 positively validated <em>standard</em> outranking situations.</p>
+<p>In <a class="reference internal" href="#unopposed4"><span class="std std-numref">Listing 92</span></a> we see that alternative <em>p1</em> does indeed positively outrank alternative <em>p5</em> from the economic perspective (<img class="math" src="_images/math/52d6330fa4b8f2a405695bb03abb73a9fc4154dd.png" alt="r(p1 \succsim_{Eco} p5) = +16/24"/>) as well as from the environmental perspective (<img class="math" src="_images/math/3b4338e950d7c3283bf8d514eef42b30d691fc69.png" alt="r(p1 \succsim_{Env} p5) = +12/24"/>). Whereas, from the societal perspective, both alternatives appear incomparable (<img class="math" src="_images/math/16a329e29693548a82cc2fa41cf1f791184f99cf.png" alt="r(p1 \succsim_{Soc} p5) = 0/24"/>). When fixed proportional criteria significances per objective are given, these outranking situations appear hence <strong>stable</strong> with respect to all possible importance weights we could allocate to the decision objectives.</p>
 </div>
 <div class="section" id="unopposed-best-multiobjective-choice-recommendations">
 <h3><a class="toc-backref" href="#id60">Unopposed best multiobjective choice recommendations</a><a class="headerlink" href="#unopposed-best-multiobjective-choice-recommendations" title="Permalink to this headline">¶</a></h3>
@@ -2457,7 +2465,8 @@ confidence level <em>alpha</em> %, if</p>
 14
 15
 16
-17</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> \
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> \
 <span class="go">          UnOpposedBipolarOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">uog</span> <span class="o">=</span> <span class="n">UnOpposedBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">vpt</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">uog</span>
@@ -2467,6 +2476,7 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">  # Actions           : 15</span>
 <span class="go">  # Criteria          : 1000</span>
 <span class="go">  Size                : 34</span>
+<span class="go">  Oppositeness (%)    : 67.31</span>
 <span class="go">  Determinateness (%) : 57.61</span>
 <span class="go">  Valuation domain    : [-1.00;1.00]</span>
 <span class="go">  Attributes          : [&#39;name&#39;, &#39;actions&#39;, &#39;valuationdomain&#39;,</span>
@@ -2477,7 +2487,7 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situation.</p>
+<p>From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situation, leading to a degree of <em>oppositeness</em> between political parties of 67.31%.</p>
 <p>We may visualize the corresponding bipolar-valued relation table by orienting the list of candidates with the help of the <em>initial</em> and the <em>terminal prekernels</em>.</p>
 <div class="literal-block-wrapper docutils container" id="visualisingunopposedoutrankings">
 <div class="code-block-caption"><span class="caption-number">Listing 97 </span><span class="caption-text">Visualizing the unopposed outranking relation</span><a class="headerlink" href="#visualisingunopposedoutrankings" title="Permalink to this code">¶</a></div>
@@ -2597,7 +2607,7 @@ confidence level <em>alpha</em> %, if</p>
 <div class="section" id="multipartisan-preferences-in-divisive-politics">
 <h3>Multipartisan preferences in divisive politics<a class="headerlink" href="#multipartisan-preferences-in-divisive-politics" title="Permalink to this headline">¶</a></h3>
 <p>However, in a very <strong>divisive two major party system</strong>, like in the US, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate.</p>
-<p>In <a class="reference internal" href="#divisivepolitics"><span class="std std-numref">Listing 100</span></a> below we generate such a divisive kind of linear voting profile with the help of the <em>DivisivePolitics</em> flag  <a class="footnote-reference brackets" href="#id30" id="id25">5</a> (see Lines 4 and 13-19). When now converting the voting profile into a performance tableau (Lines 20-21), we may compute the corresponding unopposed outranking digraph which appears to be indeed completely indeterminate (Line 22- ).</p>
+<p>In <a class="reference internal" href="#divisivepolitics"><span class="std std-numref">Listing 100</span></a> below we generate such a divisive kind of linear voting profile with the help of the <em>DivisivePolitics</em> flag  <a class="footnote-reference brackets" href="#id30" id="id25">5</a> (see Lines 4 and 13-19). When now converting the voting profile into a performance tableau (Lines 20-21), we may compute the corresponding unopposed outranking digraph.</p>
 <div class="literal-block-wrapper docutils container" id="divisivepolitics">
 <div class="code-block-caption"><span class="caption-number">Listing 100 </span><span class="caption-text">A divisive two-party example of a random linear voting profile</span><a class="headerlink" href="#divisivepolitics" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -2631,9 +2641,7 @@ confidence level <em>alpha</em> %, if</p>
 29
 30
 31
-32
-33
-34</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lvp</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span>\
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lvp</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span>\
 <span class="go">           numberOfCandidates=7,numberOfVoters=500,\</span>
 <span class="go">           WithPolls=True, partyRepartition=0.4,other=0.2,\</span>
 <span class="go">           DivisivePolitics=True, seed=1)</span>
@@ -2655,20 +2663,33 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go"> &gt;&gt;&gt; lvp.save2PerfTab(&#39;divisiveExample&#39;)</span>
 <span class="go"> &gt;&gt;&gt; dvp = PerformanceTableau(&#39;divisiveExample&#39;)</span>
 <span class="go"> &gt;&gt;&gt; uodg = UnOpposedBipolarOutrankingDigraph(dvp)</span>
-<span class="go"> &gt;&gt;&gt; uodg.showRelationTable(ReflexiveTerms=False)</span>
-<span class="go"> * ---- Relation Table -----</span>
-<span class="go">  r   |  &#39;a1&#39;   &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;   &#39;a5&#39;   &#39;a6&#39;   &#39;a7&#39;</span>
-<span class="go"> -----|-------------------------------------------------</span>
-<span class="go"> &#39;a1&#39; |     -   +0.00  +0.00  +0.00  +0.00  +0.00  +0.00</span>
-<span class="go"> &#39;a2&#39; |  +0.00    -    +0.00  +0.00  +0.00  +0.00  +0.00</span>
-<span class="go"> &#39;a3&#39; |  +0.00  +0.00    -    +0.00  +0.00  +0.00  +0.00</span>
-<span class="go"> &#39;a4&#39; |  +0.00  +0.00  +0.00    -    +0.00  +0.00  +0.00</span>
-<span class="go"> &#39;a5&#39; |  +0.00  +0.00  +0.00  +0.00    -    +0.00  +0.00</span>
-<span class="go"> &#39;a6&#39; |  +0.00  +0.00  +0.00  +0.00  +0.00    -    +0.00</span>
-<span class="go"> &#39;a7&#39; |  +0.00  +0.00  +0.00  +0.00  +0.00  +0.00    -</span>
-<span class="go"> Valuation domain: [-1.000; 1.000]</span>
+<span class="go"> &gt;&gt;&gt; uodg</span>
+<span class="go">  *------- Object instance description ------*</span>
+<span class="go">   Instance class      : UnOpposedBipolarOutrankingDigraph</span>
+<span class="go">   Instance name       : unopposed_outrankings</span>
+<span class="go">   # Actions           : 7</span>
+<span class="go">   # Criteria          : 500</span>
+<span class="go">   Size                : 0</span>
+<span class="go">   Oppositeness (%)    : 100.00</span>
+<span class="go">   Determinateness (%) : 50.00</span>
+<span class="go">   Valuation domain    : [-1.00;1.00]</span>
 </pre></div>
 </td></tr></table></div>
+</div>
+<p>With an oppositeness degree of 100.0% (see <a class="reference internal" href="#divisivepolitics"><span class="std std-numref">Listing 100</span></a> Line 30), the preferential disagreement between the political parties is complete, and the unopposed outranking digraph <em>uodg</em> becomes completely <strong>indeterminate</strong> as shown in the relation table below.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">uodg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go"> r   |  &#39;a1&#39;   &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;   &#39;a5&#39;   &#39;a6&#39;   &#39;a7&#39;</span>
+<span class="go">-----|-------------------------------------------------</span>
+<span class="go">&#39;a1&#39; |     -   +0.00  +0.00  +0.00  +0.00  +0.00  +0.00</span>
+<span class="go">&#39;a2&#39; |  +0.00    -    +0.00  +0.00  +0.00  +0.00  +0.00</span>
+<span class="go">&#39;a3&#39; |  +0.00  +0.00    -    +0.00  +0.00  +0.00  +0.00</span>
+<span class="go">&#39;a4&#39; |  +0.00  +0.00  +0.00    -    +0.00  +0.00  +0.00</span>
+<span class="go">&#39;a5&#39; |  +0.00  +0.00  +0.00  +0.00    -    +0.00  +0.00</span>
+<span class="go">&#39;a6&#39; |  +0.00  +0.00  +0.00  +0.00  +0.00    -    +0.00</span>
+<span class="go">&#39;a7&#39; |  +0.00  +0.00  +0.00  +0.00  +0.00  +0.00    -</span>
+<span class="go">Valuation domain: [-1.000; 1.000]</span>
+</pre></div>
 </div>
 <p>As a consequence, a <strong>multipartisan primary selection</strong>, computed with a <code class="code docutils literal notranslate"><span class="pre">uodg.showBestChoiceRecommendation()</span></code> method,  will keep the complete initial set of eligible candidates and, hence, becomes <strong>ineffective</strong> (see <a class="reference internal" href="#ineffectiveprimaryselection"><span class="std std-numref">Listing 101</span></a> Line 6).</p>
 <div class="literal-block-wrapper docutils container" id="ineffectiveprimaryselection">

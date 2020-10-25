@@ -1637,12 +1637,18 @@ For easily computing this kind of *unopposed multiobjective* outranking digraphs
     # Actions           : 7
     # Criteria          : 9
     Size                : 13
+    Oppositeness (%)    : 43.48
     Determinateness (%) : 61.71
     Valuation domain    : [-1.00;1.00]
     Attributes          : ['name', 'actions', 'valuationdomain', 'objectives',
 			   'criteria', 'methodData', 'evaluation', 'order',
 			   'runTimes', 'relation', 'marginalRelationsRelations',
 			   'gamma', 'notGamma']
+   >>> uopg.computeOppositeness(InPercents=True)
+    {'standardSize': 23, 'unopposedSize': 13,
+     'oppositeness': 43.47826086956522}			   
+
+The resulting *unopposed* outranking digraph keeps in fact 13 (see :numref:`unOpposed3` Line 17-19) out of the 23 positively validated *standard* outranking situations, leading to a degree of **oppositeness** -preferential disagreement between decision objectives- of :math:`(1.0 - 13/23)\,=\,0.4348`.
 
 We may now, for instance, verify the unopposed status of the outranking situation observed between alternatives *p1* and *p5*.
 
@@ -1666,9 +1672,7 @@ We may now, for instance, verify the unopposed status of the outranking situatio
     so7   12.00  28.41  44.92  -16.51 	| 5.00  10.00   -12.00  |
      Valuation in range: -72.00 to +72.00; global concordance: +28.00
 
-In :numref:`unOpposed4` we may notice that alternative *p1* does indeed positively outrank alternative *p5* from the economic perspective (:math:`r(p1 \succsim_{Eco} p5) = +16/24`) as well as from the environmental perspective (:math:`r(p1 \succsim_{Env} p5) = +12/24`). Whereas, from the societal perspective, both alternatives appear incomparable (:math:`r(p1 \succsim_{Soc} p5) = 0/24`). When fixed proportional criteria significances per objective are given, these outranking situations appear hence **stable** with respect to all possible importance weights we could allocate to the decision objectives.
-
-The resulting *unopposed* outranking digraph keeps in fact 13 (see :numref:`unOpposed3` Line 10) out of the 23 positively validated *standard* outranking situations.
+In :numref:`unOpposed4` we see that alternative *p1* does indeed positively outrank alternative *p5* from the economic perspective (:math:`r(p1 \succsim_{Eco} p5) = +16/24`) as well as from the environmental perspective (:math:`r(p1 \succsim_{Env} p5) = +12/24`). Whereas, from the societal perspective, both alternatives appear incomparable (:math:`r(p1 \succsim_{Soc} p5) = 0/24`). When fixed proportional criteria significances per objective are given, these outranking situations appear hence **stable** with respect to all possible importance weights we could allocate to the decision objectives.
 
 Unopposed best multiobjective choice recommendations
 ....................................................
@@ -1828,6 +1832,7 @@ In order to make now a **primary multipartisan selection** of potential election
      # Actions           : 15
      # Criteria          : 1000
      Size                : 34
+     Oppositeness (%)    : 67.31
      Determinateness (%) : 57.61
      Valuation domain    : [-1.00;1.00]
      Attributes          : ['name', 'actions', 'valuationdomain',
@@ -1836,7 +1841,7 @@ In order to make now a **primary multipartisan selection** of potential election
 			    relation', 'marginalRelationsRelations',
 			    'gamma', 'notGamma']
 
-From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situation. 
+From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situation, leading to a degree of *oppositeness* between political parties of 67.31%.
 
 We may visualize the corresponding bipolar-valued relation table by orienting the list of candidates with the help of the *initial* and the *terminal prekernels*.
 
@@ -1930,7 +1935,7 @@ Multipartisan preferences in divisive politics
 
 However, in a very **divisive two major party system**, like in the US, where preferences of the supporters of one party appear to be very opposite to the preferences of the supporters of the other major party, the multipartisan outranking digraph will become nearly indeterminate.
 
-In :numref:`divisivePolitics` below we generate such a divisive kind of linear voting profile with the help of the *DivisivePolitics* flag  [5]_ (see Lines 4 and 13-19). When now converting the voting profile into a performance tableau (Lines 20-21), we may compute the corresponding unopposed outranking digraph which appears to be indeed completely indeterminate (Line 22- ).
+In :numref:`divisivePolitics` below we generate such a divisive kind of linear voting profile with the help of the *DivisivePolitics* flag  [5]_ (see Lines 4 and 13-19). When now converting the voting profile into a performance tableau (Lines 20-21), we may compute the corresponding unopposed outranking digraph.
 
 .. code-block:: pycon
    :name: divisivePolitics
@@ -1959,6 +1964,19 @@ In :numref:`divisivePolitics` below we generate such a divisive kind of linear v
     >>> lvp.save2PerfTab('divisiveExample')
     >>> dvp = PerformanceTableau('divisiveExample')
     >>> uodg = UnOpposedBipolarOutrankingDigraph(dvp)
+    >>> uodg
+     *------- Object instance description ------*
+      Instance class      : UnOpposedBipolarOutrankingDigraph
+      Instance name       : unopposed_outrankings
+      # Actions           : 7
+      # Criteria          : 500
+      Size                : 0
+      Oppositeness (%)    : 100.00
+      Determinateness (%) : 50.00
+      Valuation domain    : [-1.00;1.00]
+
+With an oppositeness degree of 100.0% (see :numref:`divisivePolitics` Line 30), the preferential disagreement between the political parties is complete, and the unopposed outranking digraph *uodg* becomes completely **indeterminate** as shown in the relation table below.
+
     >>> uodg.showRelationTable(ReflexiveTerms=False)
     * ---- Relation Table -----
      r   |  'a1'   'a2'   'a3'   'a4'   'a5'   'a6'   'a7'   
