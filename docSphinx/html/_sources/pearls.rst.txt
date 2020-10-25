@@ -1648,7 +1648,7 @@ For easily computing this kind of *unopposed multiobjective* outranking digraphs
     {'standardSize': 23, 'unopposedSize': 13,
      'oppositeness': 43.47826086956522}			   
 
-The resulting *unopposed* outranking digraph keeps in fact 13 (see :numref:`unOpposed3` Line 17-19) out of the 23 positively validated *standard* outranking situations, leading to a degree of **oppositeness** -preferential disagreement between decision objectives- of :math:`(1.0 - 13/23)\,=\,0.4348`.
+The resulting *unopposed* outranking digraph keeps in fact 13 (see :numref:`unOpposed3` Line 18-20) out of the 23 positively validated *standard* outranking situations, leading to a degree of **oppositeness** -preferential disagreement between decision objectives- of :math:`(1.0 - 13/23)\,=\,0.4348`.
 
 We may now, for instance, verify the unopposed status of the outranking situation observed between alternatives *p1* and *p5*.
 
