@@ -1672,16 +1672,20 @@ We may now, for instance, verify the unopposed status of the outranking situatio
     so7   12.00  28.41  44.92  -16.51 	| 5.00  10.00   -12.00  |
      Valuation in range: -72.00 to +72.00; global concordance: +28.00
 
-In :numref:`unOpposed4` we see that alternative *p1* does indeed positively outrank alternative *p5* from the economic perspective (:math:`r(p1 \succsim_{Eco} p5) = +16/24`) as well as from the environmental perspective (:math:`r(p1 \succsim_{Env} p5) = +12/24`). Whereas, from the societal perspective, both alternatives appear incomparable (:math:`r(p1 \succsim_{Soc} p5) = 0/24`). When fixed proportional criteria significances per objective are given, these outranking situations appear hence **stable** with respect to all possible importance weights we could allocate to the decision objectives.
+In :numref:`unOpposed4` we see that alternative *p1* does indeed positively outrank alternative *p5* from the economic perspective (:math:`r(p1 \succsim_{Eco} p5) = +16/24`) as well as from the environmental perspective (:math:`r(p1 \succsim_{Env} p5) = +12/24`). Whereas, from the societal perspective, both alternatives appear incomparable (:math:`r(p1 \succsim_{Soc} p5) = 0/24`).
 
-Unopposed best multiobjective choice recommendations
-....................................................
+When fixed proportional criteria significances per objective are given, these outranking situations appear hence **stable** with respect to all possible importance weights we could allocate to the decision objectives.
 
-Let us compute now *best choice recommendations* from such an unopposed multiobjective outranking digraph.
+This gives way for computing multiobjective **Pareto efficient** choice recommendations. 
+
+Computing multiobjective *Pareto* efficient choice sets
+.......................................................
+
+Indeed, unopposed best choice recommendations, computed from an unopposed multiobjective outranking digraph, will infact deliver **Pareto efficient** choice sets. 
 
 .. code-block:: pycon
    :linenos:
-   :caption: Unopposed multiobjective best choice recommendation
+   :caption: Multiobjective Pareto efficient choice recommendation
    :name: unOpposed5
 
    >>> uopg.showBestChoiceRecommendation()
@@ -1703,9 +1707,9 @@ Let us compute now *best choice recommendations* from such an unopposed multiobj
       covered (%)         : 33.33
       determinateness (%) : 50.00
 
-Our previous *robust best choice recommendation* (*p2* and *p4*, see :numref:`robStdStrictOG`) remains, in this example here, **stable**. We recover indeed the best choice recommendation ['p2', 'p4', 'p7'] (see :numref:`unOpposed5` Line 6). Yet, notice that decision alternative *p7* appears to be at the same time a potential *best* as well as a potential *worst* choice recommendation (see Line 13).
+Our previous *robust best choice recommendation* (*p2* and *p4*, see :numref:`robStdStrictOG`) remains, in this example here, **stable**. We recover indeed the best choice recommendation ['p2', 'p4', 'p7'] (see :numref:`unOpposed5` Line 6). Yet, notice that decision alternative *p7* appears to be at the same time a potential *best* as well as a potential *worst* choice recommendation (see Line 13), a consequence of *p7* being completely *incomparable* to the other decision alternatives when restricting the comparability to only unopposed outranking situations. 
 
-We may visualize this **unopposed robustness** result in :numref:`unopDigraph` below.
+We may visualize this kind of **Pareto efficient** result in :numref:`unopDigraph` below.
 
     >>> (~(-uopg)).exportGraphViz(fileName = 'unopDigraph',\
                                  bestChoice = ['p2', 'p4'],\
@@ -1722,11 +1726,16 @@ We may visualize this **unopposed robustness** result in :numref:`unopDigraph` b
 
    Standard versus *unopposed* strict outranking digraphs oriented by best and worst choice recommendations
 
+In order to make now an eventual best unique choice, a decision maker will necessarily have to ponder, in a second stage of the decision aiding process, the relative importance of the individual decision objectives (see tutorial on :ref:`computing a best choice recommendation <Rubis-Tutorial-label>`).
+
+
 Two-stage elections with multipartisan primary selection
 --------------------------------------------------------
 
-Let us finally remark that in a social choice context, where decision objectives would match different political parties, our previous *unopposed best choice recommendations* represent in fact **robust multipartisan consensus choices**.
+Let us finally remark that in a *social choice* context, where decision objectives would match different political parties, *Pareto efficient choice recommendations* represent in fact **multipartisan social choice recommendations** that could deliver the primary selection in a two stage election system.
 
+To compute such Pareto efficient social choices we need to, first, convert a given linear voting profile (with polls) into a corresponding performance tableau.
+ 
 Converting voting profiles into performance tableaux
 ....................................................
 
@@ -1841,7 +1850,7 @@ In order to make now a **primary multipartisan selection** of potential election
 			    relation', 'marginalRelationsRelations',
 			    'gamma', 'notGamma']
 
-From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situation, leading to a degree of *oppositeness* between political parties of 67.31%.
+From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situations, leading to a degree of *oppositeness* between political parties of 67.31%.
 
 We may visualize the corresponding bipolar-valued relation table by orienting the list of candidates with the help of the *initial* and the *terminal prekernels*.
 

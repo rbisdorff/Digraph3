@@ -58,7 +58,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{October 25, 2020}
+\date{October 26, 2020}
 \release{3.8-3600+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1933,7 +1933,7 @@ For concluding, let us mention that it is precisely again our bipolar\sphinxhyph
 \phantomsection\label{\detokenize{pearls:id59}}{\hyperref[\detokenize{pearls:characterising-unopposed-multiobjective-outranking-situations}]{\sphinxcrossref{Characterising unopposed multiobjective outranking situations}}}
 
 \item {} 
-\phantomsection\label{\detokenize{pearls:id60}}{\hyperref[\detokenize{pearls:unopposed-best-multiobjective-choice-recommendations}]{\sphinxcrossref{Unopposed best multiobjective choice recommendations}}}
+\phantomsection\label{\detokenize{pearls:id60}}{\hyperref[\detokenize{pearls:computing-multiobjective-pareto-efficient-choice-sets}]{\sphinxcrossref{Computing multiobjective \sphinxstyleemphasis{Pareto} efficient choice sets}}}
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -2062,13 +2062,17 @@ We may now, for instance, verify the unopposed status of the outranking situatio
 \PYG{g+go}{  Valuation in range: \PYGZhy{}72.00 to +72.00; global concordance: +28.00}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{pearls:unopposed4}]{Listing \ref{\detokenize{pearls:unopposed4}}} we see that alternative \sphinxstyleemphasis{p1} does indeed positively outrank alternative \sphinxstyleemphasis{p5} from the economic perspective (\(r(p1 \succsim_{Eco} p5) = +16/24\)) as well as from the environmental perspective (\(r(p1 \succsim_{Env} p5) = +12/24\)). Whereas, from the societal perspective, both alternatives appear incomparable (\(r(p1 \succsim_{Soc} p5) = 0/24\)). When fixed proportional criteria significances per objective are given, these outranking situations appear hence \sphinxstylestrong{stable} with respect to all possible importance weights we could allocate to the decision objectives.
+In \hyperref[\detokenize{pearls:unopposed4}]{Listing \ref{\detokenize{pearls:unopposed4}}} we see that alternative \sphinxstyleemphasis{p1} does indeed positively outrank alternative \sphinxstyleemphasis{p5} from the economic perspective (\(r(p1 \succsim_{Eco} p5) = +16/24\)) as well as from the environmental perspective (\(r(p1 \succsim_{Env} p5) = +12/24\)). Whereas, from the societal perspective, both alternatives appear incomparable (\(r(p1 \succsim_{Soc} p5) = 0/24\)).
+
+When fixed proportional criteria significances per objective are given, these outranking situations appear hence \sphinxstylestrong{stable} with respect to all possible importance weights we could allocate to the decision objectives.
+
+This gives way for computing multiobjective \sphinxstylestrong{Pareto efficient} choice recommendations.
 
 
-\subsection{Unopposed best multiobjective choice recommendations}
-\label{\detokenize{pearls:unopposed-best-multiobjective-choice-recommendations}}
-Let us compute now \sphinxstyleemphasis{best choice recommendations} from such an unopposed multiobjective outranking digraph.
-\sphinxSetupCaptionForVerbatim{Unopposed multiobjective best choice recommendation}
+\subsection{Computing multiobjective \sphinxstyleemphasis{Pareto} efficient choice sets}
+\label{\detokenize{pearls:computing-multiobjective-pareto-efficient-choice-sets}}
+Indeed, unopposed best choice recommendations, computed from an unopposed multiobjective outranking digraph, will infact deliver \sphinxstylestrong{Pareto efficient} choice sets.
+\sphinxSetupCaptionForVerbatim{Multiobjective Pareto efficient choice recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed5}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
@@ -2091,9 +2095,9 @@ Let us compute now \sphinxstyleemphasis{best choice recommendations} from such a
 \PYG{g+go}{   determinateness (\PYGZpc{}) : 50.00}
 \end{sphinxVerbatim}
 
-Our previous \sphinxstyleemphasis{robust best choice recommendation} (\sphinxstyleemphasis{p2} and \sphinxstyleemphasis{p4}, see \hyperref[\detokenize{pearls:robstdstrictog}]{Fig.\@ \ref{\detokenize{pearls:robstdstrictog}}}) remains, in this example here, \sphinxstylestrong{stable}. We recover indeed the best choice recommendation {[}‘p2’, ‘p4’, ‘p7’{]} (see \hyperref[\detokenize{pearls:unopposed5}]{Listing \ref{\detokenize{pearls:unopposed5}}} Line 6). Yet, notice that decision alternative \sphinxstyleemphasis{p7} appears to be at the same time a potential \sphinxstyleemphasis{best} as well as a potential \sphinxstyleemphasis{worst} choice recommendation (see Line 13).
+Our previous \sphinxstyleemphasis{robust best choice recommendation} (\sphinxstyleemphasis{p2} and \sphinxstyleemphasis{p4}, see \hyperref[\detokenize{pearls:robstdstrictog}]{Fig.\@ \ref{\detokenize{pearls:robstdstrictog}}}) remains, in this example here, \sphinxstylestrong{stable}. We recover indeed the best choice recommendation {[}‘p2’, ‘p4’, ‘p7’{]} (see \hyperref[\detokenize{pearls:unopposed5}]{Listing \ref{\detokenize{pearls:unopposed5}}} Line 6). Yet, notice that decision alternative \sphinxstyleemphasis{p7} appears to be at the same time a potential \sphinxstyleemphasis{best} as well as a potential \sphinxstyleemphasis{worst} choice recommendation (see Line 13), a consequence of \sphinxstyleemphasis{p7} being completely \sphinxstyleemphasis{incomparable} to the other decision alternatives when restricting the comparability to only unopposed outranking situations.
 
-We may visualize this \sphinxstylestrong{unopposed robustness} result in \hyperref[\detokenize{pearls:unopdigraph}]{Fig.\@ \ref{\detokenize{pearls:unopdigraph}}} below.
+We may visualize this kind of \sphinxstylestrong{Pareto efficient} result in \hyperref[\detokenize{pearls:unopdigraph}]{Fig.\@ \ref{\detokenize{pearls:unopdigraph}}} below.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{uopg}\PYG{p}{)}\PYG{p}{)}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{unopDigraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
@@ -2111,10 +2115,14 @@ We may visualize this \sphinxstylestrong{unopposed robustness} result in \hyperr
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{unopDigraph}.png}
 \caption{Standard versus \sphinxstyleemphasis{unopposed} strict outranking digraphs oriented by best and worst choice recommendations}\label{\detokenize{pearls:unopdigraph}}\end{figure}
 
+In order to make now an eventual best unique choice, a decision maker will necessarily have to ponder, in a second stage of the decision aiding process, the relative importance of the individual decision objectives (see tutorial on \DUrole{xref,std,std-ref}{computing a best choice recommendation}).
+
 
 \section{Two\sphinxhyphen{}stage elections with multipartisan primary selection}
 \label{\detokenize{pearls:two-stage-elections-with-multipartisan-primary-selection}}
-Let us finally remark that in a social choice context, where decision objectives would match different political parties, our previous \sphinxstyleemphasis{unopposed best choice recommendations} represent in fact \sphinxstylestrong{robust multipartisan consensus choices}.
+Let us finally remark that in a \sphinxstyleemphasis{social choice} context, where decision objectives would match different political parties, \sphinxstyleemphasis{Pareto efficient choice recommendations} represent in fact \sphinxstylestrong{multipartisan social choice recommendations} that could deliver the primary selection in a two stage election system.
+
+To compute such Pareto efficient social choices we need to, first, convert a given linear voting profile (with polls) into a corresponding performance tableau.
 
 
 \subsection{Converting voting profiles into performance tableaux}
@@ -2224,7 +2232,7 @@ In order to make now a \sphinxstylestrong{primary multipartisan selection} of po
 \PYG{g+go}{                         \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situation, leading to a degree of \sphinxstyleemphasis{oppositeness} between political parties of 67.31\%.
+From the potential 105 pairwise outranking situations, we keep 34 positively validated outranking situations, leading to a degree of \sphinxstyleemphasis{oppositeness} between political parties of 67.31\%.
 
 We may visualize the corresponding bipolar\sphinxhyphen{}valued relation table by orienting the list of candidates with the help of the \sphinxstyleemphasis{initial} and the \sphinxstyleemphasis{terminal prekernels}.
 \sphinxSetupCaptionForVerbatim{Visualizing the unopposed outranking relation}

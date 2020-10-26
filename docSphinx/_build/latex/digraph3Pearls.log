@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  25 OCT 2020 17:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  26 OCT 2020 16:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -839,80 +839,72 @@ Underfull \vbox (badness 2818) detected at line 2041
 <unopDigraph.png, id=702, 807.015pt x 467.7475pt>
 File: unopDigraph.png Graphic file (type png)
 <use unopDigraph.png>
-Package pdftex.def Info: unopDigraph.png  used on input line 2111.
+Package pdftex.def Info: unopDigraph.png  used on input line 2115.
 (pdftex.def)             Requested size: 451.68457pt x 261.8012pt.
- [48]
-Overfull \vbox (2.89876pt too high) detected at line 2167
- []
-
-[49 <./unopDigraph.png>]
-Underfull \vbox (badness 2495) detected at line 2196
- []
-
-[50] [51]
+ [48] [49 <./unopDigraph.png>] [50] [51]
 <unOpposedOutrankings.png, id=728, 779.91376pt x 528.97626pt>
 File: unOpposedOutrankings.png Graphic file (type png)
 <use unOpposedOutrankings.png>
-Package pdftex.def Info: unOpposedOutrankings.png  used on input line 2258.
+Package pdftex.def Info: unOpposedOutrankings.png  used on input line 2266.
 (pdftex.def)             Requested size: 451.68457pt x 306.35443pt.
  [52] [53 <./unOpposedOutrankings.png>] [54]
-Overfull \vbox (1.2081pt too high) detected at line 2370
+Overfull \vbox (1.2081pt too high) detected at line 2378
  []
 
 [55]
-Overfull \vbox (2.28831pt too high) detected at line 2418
+Overfull \vbox (2.28831pt too high) detected at line 2426
  []
 
 [56]
 <divGraph.png, id=780, 295.1025pt x 500.87125pt>
 File: divGraph.png Graphic file (type png)
 <use divGraph.png>
-Package pdftex.def Info: divGraph.png  used on input line 2437.
+Package pdftex.def Info: divGraph.png  used on input line 2445.
 (pdftex.def)             Requested size: 188.2019pt x 319.43301pt.
  [57 <./divGraph.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 2453--2454
+Underfull \hbox (badness 10000) in paragraph at lines 2461--2462
 \T1/cmr/m/n/12 Per-for-mance Dif-fer-ences^^Q \T1/cmr/m/it/12 Jour-nal of Multi
 -Criteria De-ci-sion Anal-
  []
 
 
-Underfull \hbox (badness 8113) in paragraph at lines 2453--2454
+Underfull \hbox (badness 8113) in paragraph at lines 2461--2462
 \T1/cmr/m/it/12 y-sis \T1/cmr/m/n/12 (Wi-ley) \T1/cmr/bx/n/12 20\T1/cmr/m/n/12 
 :3-12 (down-load-able preprint [][]PDF file 403.5 Kb[][]
  []
 
 
-Underfull \hbox (badness 5460) in paragraph at lines 2457--2458
+Underfull \hbox (badness 5460) in paragraph at lines 2465--2466
 \T1/cmr/m/n/12 ker-nels from bipo-lar val-ued di-graphs^^Q. \T1/cmr/m/it/12 Eu-
 ro-pean Jour-nal of Op-er-
  []
 
 
-Underfull \hbox (badness 6559) in paragraph at lines 2457--2458
+Underfull \hbox (badness 6559) in paragraph at lines 2465--2466
 \T1/cmr/m/it/12 a-tional Re-search\T1/cmr/m/n/12 , 175 (2006) 155-170. (On-line
 ) Elec-tronic ver-sion:
  []
 
 [58] (./digraph3Pearls.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2476.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2484.
  [59]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2476.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2484.
  (./digraph3Pearls.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2476.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2476.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2484.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2484.
 
 Package rerunfilecheck Info: File `digraph3Pearls.out' has not changed.
-(rerunfilecheck)             Checksum: 1BA0C24D7163298FD55864B06B6A2236;9040.
+(rerunfilecheck)             Checksum: 05504205D5C380CC058740CABE485568;9048.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2476.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2484.
  ) 
 Here is how much of TeX's memory you used:
  14097 strings out of 482504
- 202271 string characters out of 5947330
- 615243 words of memory out of 5000000
+ 202272 string characters out of 5947330
+ 615249 words of memory out of 5000000
  28584 multiletter control sequences out of 15000+600000
  558358 words of font info for 80 fonts, out of 8000000 for 9000
  396 hyphenation exceptions out of 8191
@@ -954,9 +946,9 @@ dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/symbols/msam10.pfb>
-Output written on digraph3Pearls.pdf (60 pages, 1970030 bytes).
+Output written on digraph3Pearls.pdf (60 pages, 1971501 bytes).
 PDF statistics:
- 1703 PDF objects out of 1728 (max. 8388607)
+ 1706 PDF objects out of 1728 (max. 8388607)
  833 compressed objects within 9 object streams
  196 named destinations out of 1000 (max. 500000)
  379 words of extra memory for PDF output out of 10000 (max. 10000000)

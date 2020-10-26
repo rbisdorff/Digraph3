@@ -22,9 +22,9 @@
 \contentsline {subsection}{\numberline {5.4}Robust bipolar\sphinxhyphen {}valued outranking digraphs}{41}{subsection.5.4}%
 \contentsline {section}{\numberline {6}On unopposed outrankings with multiple decision objectives}{44}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Characterising unopposed multiobjective outranking situations}{45}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Unopposed best multiobjective choice recommendations}{48}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.2}Computing multiobjective \sphinxstyleemphasis {Pareto} efficient choice sets}{48}{subsection.6.2}%
 \contentsline {section}{\numberline {7}Two\sphinxhyphen {}stage elections with multipartisan primary selection}{49}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Converting voting profiles into performance tableaux}{49}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.1}Converting voting profiles into performance tableaux}{50}{subsection.7.1}%
 \contentsline {subsection}{\numberline {7.2}Multipartisan primary selection of eligible candidates}{51}{subsection.7.2}%
 \contentsline {subsection}{\numberline {7.3}Secondary election winner determination}{53}{subsection.7.3}%
 \contentsline {subsection}{\numberline {7.4}Multipartisan preferences in divisive politics}{54}{subsection.7.4}%
