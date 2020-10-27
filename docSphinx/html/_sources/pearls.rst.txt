@@ -1681,7 +1681,7 @@ This gives way for computing multiobjective **Pareto efficient** choice recommen
 Computing multiobjective *Pareto* efficient choice sets
 .......................................................
 
-Indeed, unopposed best choice recommendations, computed from an unopposed multiobjective outranking digraph, will infact deliver **Pareto efficient** choice sets. 
+Indeed, best choice recommendations, computed from an *unopposed multiobjective* outranking digraph, will in fact deliver **Pareto efficient** choices. 
 
 .. code-block:: pycon
    :linenos:
@@ -1726,15 +1726,15 @@ We may visualize this kind of **Pareto efficient** result in :numref:`unopDigrap
 
    Standard versus *unopposed* strict outranking digraphs oriented by best and worst choice recommendations
 
-In order to make now an eventual best unique choice, a decision maker will necessarily have to ponder, in a second stage of the decision aiding process, the relative importance of the individual decision objectives (see tutorial on :ref:`computing a best choice recommendation <Rubis-Tutorial-label>`).
+In order to make now an eventual best unique choice, a decision maker will necessarily have to weight, in a second stage of the decision aiding process, the relative importance of the individual decision objectives (see tutorial on :ref:`computing a best choice recommendation <Rubis-Tutorial-label>`).
 
 
 Two-stage elections with multipartisan primary selection
 --------------------------------------------------------
 
-Let us finally remark that in a *social choice* context, where decision objectives would match different political parties, *Pareto efficient choice recommendations* represent in fact **multipartisan social choice recommendations** that could deliver the primary selection in a two stage election system.
+Let us finally remark that in a *social choice* context, where decision objectives would match different political parties, *Pareto efficient choice recommendations* represent in fact **multipartisan social choices** that could judiciously deliver the primary selection in a two stage election system.
 
-To compute such Pareto efficient social choices we need to, first, convert a given linear voting profile (with polls) into a corresponding performance tableau.
+To compute such *Pareto* efficient social choices we need to, first, convert a given linear voting profile (with polls) into a corresponding performance tableau.
  
 Converting voting profiles into performance tableaux
 ....................................................
