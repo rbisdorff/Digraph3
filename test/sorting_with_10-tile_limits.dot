@@ -3,90 +3,83 @@ graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",
  fontsize = 12,
  label = "\Digraph3 (graphviz)\n R. Bisdorff, 2020", size="7,7",fontsize=10];
 a01 [shape = "circle", label = "a01c", fontsize=10];
-a02 [shape = "circle", label = "a02c", fontsize=10];
+a02 [shape = "circle", label = "a02n", fontsize=10];
 a03 [shape = "circle", label = "a03c", fontsize=10];
 a04 [shape = "circle", label = "a04n", fontsize=10];
-a05 [shape = "circle", label = "a05n", fontsize=10];
+a05 [shape = "circle", label = "a05a", fontsize=10];
 a06 [shape = "circle", label = "a06n", fontsize=10];
 a07 [shape = "circle", label = "a07n", fontsize=10];
 a08 [shape = "circle", label = "a08c", fontsize=10];
-a09 [shape = "circle", label = "a09n", fontsize=10];
-a10 [shape = "circle", label = "a10c", fontsize=10];
-a11 [shape = "circle", label = "a11a", fontsize=10];
-a12 [shape = "circle", label = "a12a", fontsize=10];
+a09 [shape = "circle", label = "a09c", fontsize=10];
+a10 [shape = "circle", label = "a10n", fontsize=10];
+a11 [shape = "circle", label = "a11n", fontsize=10];
+a12 [shape = "circle", label = "a12c", fontsize=10];
 a13 [shape = "circle", label = "a13c", fontsize=10];
 a14 [shape = "circle", label = "a14n", fontsize=10];
-a15 [shape = "circle", label = "a15n", fontsize=10];
-a16 [shape = "circle", label = "a16n", fontsize=10];
-a17 [shape = "circle", label = "a17c", fontsize=10];
+a15 [shape = "circle", label = "a15c", fontsize=10];
+a16 [shape = "circle", label = "a16a", fontsize=10];
+a17 [shape = "circle", label = "a17a", fontsize=10];
 a18 [shape = "circle", label = "a18a", fontsize=10];
-a19 [shape = "circle", label = "a19c", fontsize=10];
-a20 [shape = "circle", label = "a20c", fontsize=10];
-{ rank = 0; a19; }
-{ rank = 1; a08; a01; a09; a20; a11; }
-{ rank = 2; a06; a07; a16; }
-{ rank = 3; a05; a17; a10; a12; }
-{ rank = 4; a04; a18; a02; a13; }
-{ rank = 5; a15; a03; }
-{ rank = 6; a14; }
-a19-> a05 [style="setlinewidth(1)",color=black] ;
-a19-> a17 [style="setlinewidth(1)",color=black] ;
-a19-> a10 [style="setlinewidth(1)",color=black] ;
-a19-> a12 [style="setlinewidth(1)",color=black] ;
-a08-> a06 [style="setlinewidth(1)",color=black] ;
-a08-> a07 [style="setlinewidth(1)",color=black] ;
-a08-> a16 [style="setlinewidth(1)",color=black] ;
-a01-> a06 [style="setlinewidth(1)",color=black] ;
-a01-> a07 [style="setlinewidth(1)",color=black] ;
-a01-> a16 [style="setlinewidth(1)",color=black] ;
-a09-> a06 [style="setlinewidth(1)",color=black] ;
-a09-> a07 [style="setlinewidth(1)",color=black] ;
-a09-> a16 [style="setlinewidth(1)",color=black] ;
-a20-> a06 [style="setlinewidth(1)",color=black] ;
-a20-> a07 [style="setlinewidth(1)",color=black] ;
-a20-> a16 [style="setlinewidth(1)",color=black] ;
-a11-> a06 [style="setlinewidth(1)",color=black] ;
-a11-> a07 [style="setlinewidth(1)",color=black] ;
-a11-> a16 [style="setlinewidth(1)",color=black] ;
-a06-> a05 [style="setlinewidth(1)",color=black] ;
-a06-> a17 [style="setlinewidth(1)",color=black] ;
-a06-> a10 [style="setlinewidth(1)",color=black] ;
-a06-> a12 [style="setlinewidth(1)",color=black] ;
-a07-> a05 [style="setlinewidth(1)",color=black] ;
-a07-> a17 [style="setlinewidth(1)",color=black] ;
-a07-> a10 [style="setlinewidth(1)",color=black] ;
-a07-> a12 [style="setlinewidth(1)",color=black] ;
-a16-> a05 [style="setlinewidth(1)",color=black] ;
-a16-> a17 [style="setlinewidth(1)",color=black] ;
-a16-> a10 [style="setlinewidth(1)",color=black] ;
-a16-> a12 [style="setlinewidth(1)",color=black] ;
-a05-> a04 [style="setlinewidth(1)",color=black] ;
-a05-> a18 [style="setlinewidth(1)",color=black] ;
-a05-> a02 [style="setlinewidth(1)",color=black] ;
-a05-> a13 [style="setlinewidth(1)",color=black] ;
-a05-> a15 [style="setlinewidth(1)",color=black] ;
+a19 [shape = "circle", label = "a19n", fontsize=10];
+a20 [shape = "circle", label = "a20n", fontsize=10];
+{ rank = 0; a09; a17; a02; }
+{ rank = 1; a04; }
+{ rank = 2; a11; a19; }
+{ rank = 3; a07; a13; a03; a06; a01; a14; a12; a08; }
+{ rank = 4; a18; a15; }
+{ rank = 5; a05; a20; a10; }
+{ rank = 6; a16; }
+a09-> a04 [style="setlinewidth(1)",color=black] ;
+a09-> a05 [style="setlinewidth(1)",color=black] ;
 a17-> a04 [style="setlinewidth(1)",color=black] ;
-a17-> a18 [style="setlinewidth(1)",color=black] ;
-a17-> a02 [style="setlinewidth(1)",color=black] ;
-a17-> a13 [style="setlinewidth(1)",color=black] ;
-a17-> a15 [style="setlinewidth(1)",color=black] ;
-a10-> a04 [style="setlinewidth(1)",color=black] ;
-a10-> a18 [style="setlinewidth(1)",color=black] ;
-a10-> a02 [style="setlinewidth(1)",color=black] ;
-a10-> a13 [style="setlinewidth(1)",color=black] ;
-a10-> a15 [style="setlinewidth(1)",color=black] ;
-a12-> a04 [style="setlinewidth(1)",color=black] ;
+a17-> a05 [style="setlinewidth(1)",color=black] ;
+a02-> a04 [style="setlinewidth(1)",color=black] ;
+a02-> a05 [style="setlinewidth(1)",color=black] ;
+a04-> a11 [style="setlinewidth(1)",color=black] ;
+a04-> a19 [style="setlinewidth(1)",color=black] ;
+a11-> a07 [style="setlinewidth(1)",color=black] ;
+a11-> a13 [style="setlinewidth(1)",color=black] ;
+a11-> a03 [style="setlinewidth(1)",color=black] ;
+a11-> a06 [style="setlinewidth(1)",color=black] ;
+a11-> a01 [style="setlinewidth(1)",color=black] ;
+a11-> a14 [style="setlinewidth(1)",color=black] ;
+a11-> a12 [style="setlinewidth(1)",color=black] ;
+a11-> a08 [style="setlinewidth(1)",color=black] ;
+a19-> a07 [style="setlinewidth(1)",color=black] ;
+a19-> a13 [style="setlinewidth(1)",color=black] ;
+a19-> a03 [style="setlinewidth(1)",color=black] ;
+a19-> a06 [style="setlinewidth(1)",color=black] ;
+a19-> a01 [style="setlinewidth(1)",color=black] ;
+a19-> a14 [style="setlinewidth(1)",color=black] ;
+a19-> a12 [style="setlinewidth(1)",color=black] ;
+a19-> a08 [style="setlinewidth(1)",color=black] ;
+a07-> a18 [style="setlinewidth(1)",color=black] ;
+a07-> a15 [style="setlinewidth(1)",color=black] ;
+a07-> a16 [style="setlinewidth(1)",color=black] ;
+a13-> a18 [style="setlinewidth(1)",color=black] ;
+a13-> a15 [style="setlinewidth(1)",color=black] ;
+a13-> a16 [style="setlinewidth(1)",color=black] ;
+a03-> a18 [style="setlinewidth(1)",color=black] ;
+a03-> a15 [style="setlinewidth(1)",color=black] ;
+a03-> a16 [style="setlinewidth(1)",color=black] ;
+a06-> a18 [style="setlinewidth(1)",color=black] ;
+a06-> a15 [style="setlinewidth(1)",color=black] ;
+a06-> a16 [style="setlinewidth(1)",color=black] ;
+a01-> a18 [style="setlinewidth(1)",color=black] ;
+a01-> a15 [style="setlinewidth(1)",color=black] ;
+a01-> a16 [style="setlinewidth(1)",color=black] ;
+a14-> a18 [style="setlinewidth(1)",color=black] ;
+a14-> a15 [style="setlinewidth(1)",color=black] ;
+a14-> a16 [style="setlinewidth(1)",color=black] ;
 a12-> a18 [style="setlinewidth(1)",color=black] ;
-a12-> a02 [style="setlinewidth(1)",color=black] ;
-a12-> a13 [style="setlinewidth(1)",color=black] ;
 a12-> a15 [style="setlinewidth(1)",color=black] ;
-a04-> a03 [style="setlinewidth(1)",color=black] ;
-a04-> a14 [style="setlinewidth(1)",color=black] ;
-a18-> a03 [style="setlinewidth(1)",color=black] ;
-a18-> a14 [style="setlinewidth(1)",color=black] ;
-a02-> a03 [style="setlinewidth(1)",color=black] ;
-a02-> a14 [style="setlinewidth(1)",color=black] ;
-a13-> a03 [style="setlinewidth(1)",color=black] ;
-a13-> a14 [style="setlinewidth(1)",color=black] ;
+a12-> a16 [style="setlinewidth(1)",color=black] ;
+a08-> a18 [style="setlinewidth(1)",color=black] ;
+a08-> a15 [style="setlinewidth(1)",color=black] ;
+a08-> a16 [style="setlinewidth(1)",color=black] ;
+a18-> a20 [style="setlinewidth(1)",color=black] ;
+a18-> a10 [style="setlinewidth(1)",color=black] ;
+a15-> a20 [style="setlinewidth(1)",color=black] ;
+a15-> a10 [style="setlinewidth(1)",color=black] ;
 }
  

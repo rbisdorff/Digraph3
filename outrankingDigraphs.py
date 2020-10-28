@@ -4202,8 +4202,8 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         else:
             return Decimal('0.0')
 
-# myBODGThread for BipolarOutrankingDigraph class
-class myBODGThread(Process):
+# multiprocessing thread for BipolarOutrankingDigraph class
+class _myBODGThread(Process):
     def __init__(self, threadID,digraph,\
                  InitialSplit, tempDirName,\
                  splitActions,\
@@ -4739,7 +4739,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
 ##                    spa = dumps(splitActions,-1)
 ##                    fo.write(spa)
 ##                    fo.close()
-                    splitThread = myBODGThread(j,self,InitialSplit,
+                    splitThread = _myBODGThread(j,self,InitialSplit,
                                            tempDirName,splitActions,
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)

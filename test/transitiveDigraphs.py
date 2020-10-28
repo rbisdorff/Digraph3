@@ -542,7 +542,7 @@ class KemenyOrdersFusion(TransitiveDigraph):
 # myThread for KohlerArrawRaynaudFusion
 ##        if Threading:
 ##            from multiprocessing import Process, Lock, active_children, cpu_count
-class myKARThread(Process):
+class _myKARThread(Process):
     def __init__(self, threadID, name, direction, tempDirName, Debug):
         Process.__init__(self)
         self.threadID = threadID
@@ -616,8 +616,8 @@ class KohlerArrowRaynaudFusion(TransitiveDigraph):
                 pd = dumps(digraph,-1)
                 fo.write(pd)
                 fo.close()
-                threadBest = myKARThread(1,"ComputeBest","best",tempDirName,Debug)
-                threadWorst = myKARThread(2,"ComputeWorst","worst",tempDirName,Debug)
+                threadBest = _myKARThread(1,"ComputeBest","best",tempDirName,Debug)
+                threadWorst = _myKARThread(2,"ComputeWorst","worst",tempDirName,Debug)
                 threadBest.start()
                 threadWorst.start()
                 while active_children() != []:
@@ -664,7 +664,7 @@ class KohlerArrowRaynaudFusion(TransitiveDigraph):
 
 #---------------------
 # my Thread for the RankingByChoosing class
-class myRBCThread(Process):
+class _myRBCThread(Process):
     def __init__(self, threadID, name, direction, tempDirName, CoDual, Debug):
         Process.__init__(self)
         self.threadID = threadID
@@ -820,8 +820,8 @@ class RankingByChoosingDigraph(TransitiveDigraph):
                 pd = dumps(digraph,-1)
                 fo.write(pd)
                 fo.close()
-                threadBest = myRBCThread(1,"ComputeBest","best",tempDirName,CoDual,Debug)
-                threadWorst = myRBCThread(2,"ComputeWorst","worst",tempDirName,CoDual,Debug)
+                threadBest = _myRBCThread(1,"ComputeBest","best",tempDirName,CoDual,Debug)
+                threadWorst = _myRBCThread(2,"ComputeWorst","worst",tempDirName,CoDual,Debug)
                 threadBest.start()
                 threadWorst.start()
                 while active_children() != []:
@@ -1052,9 +1052,9 @@ class RankingByPrudentChoosingDigraph(RankingByChoosingDigraph):
             print('Determinateness : %.3f (%.3f)' % (corr['determination'],gdeter))
             print('Execution time  : %.4f sec.' % (t1-t0))
 
-# myPRIODThread for the prncipal fusion class
+# multiprocessing thread for the principal fusion class
 from multiprocessing import Process, Lock, active_children, cpu_count
-class myPRIODThread(Process):
+class _myPRIODThread(Process):
     def __init__(self, threadID, name, direction,\
                  tempDirName, imageType, plotFileName, Debug):
         Process.__init__(self)
@@ -1166,12 +1166,12 @@ class PrincipalInOutDegreesOrderingFusion(TransitiveDigraph):
                 pd = dumps(digraph,-1)
                 fo.write(pd)
                 fo.close()
-                threadCol = myPRIODThread(1,"ComputeCol","col",\
+                threadCol = _myPRIODThread(1,"ComputeCol","col",\
                                      tempDirName,\
                                      imageType=imageType,\
                                      plotFileName=plotFileName,\
                                      Debug=Debug)
-                threadRow = myPRIODThread(1,"ComputeRow","row",\
+                threadRow = _myPRIODThread(1,"ComputeRow","row",\
                                      tempDirName,\
                                      imageType=imageType,\
                                      plotFileName=plotFileName,\

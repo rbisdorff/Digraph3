@@ -4202,8 +4202,8 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         else:
             return Decimal('0.0')
 
-# myBODGThread for BipolarOutrankingDigraph class
-class myBODGThread(Process):
+# multiprocessing thread for BipolarOutrankingDigraph class
+class _myBODGThread(Process):
     def __init__(self, threadID,digraph,\
                  InitialSplit, tempDirName,\
                  splitActions,\
@@ -4739,7 +4739,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
 ##                    spa = dumps(splitActions,-1)
 ##                    fo.write(spa)
 ##                    fo.close()
-                    splitThread = myBODGThread(j,self,InitialSplit,
+                    splitThread = _myBODGThread(j,self,InitialSplit,
                                            tempDirName,splitActions,
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)
@@ -9960,10 +9960,9 @@ class UnOpposedBipolarOutrankingDigraph(CoalitionsOutrankingsFusionDigraph):
           standard bipolar-valued outranking digraph;
         - *unopposedSize* : size of the the corresponding
           unopposed bipolar-valued outranking digraph;
-        - *oppositeness* : (1.0 - unopposedSize/standardSize)
-    *Parameters*:
-
-        - If *InPercents* has value True, the *oppositeness* is rendered in percents format.
+        - *oppositeness* : (1.0 - unopposedSize/standardSize);
+          if *InPercents* has value True, the *oppositeness* is rendered in percents format.
+    
         """
         from outrankingDigraphs import BipolarOutrankingDigraph
         du = self.computeSize()

@@ -32,7 +32,7 @@ from multiprocessing import Process, active_children
 
 # mySDGThread for SortingDigraph class
 
-class myThread(Process):
+class _myThread(Process):
     def __init__(self, threadID, tempDirName, actions, catKeys,LowerClosed,Debug):
         Process.__init__(self)
         self.threadID = threadID
@@ -1410,13 +1410,13 @@ class SortingDigraph(BipolarOutrankingDigraph):
         self.relation = copy(newrelation)
 
 #-------------
-# myQSDGThread for QuantilesSortingDigraph class
+# multiprocessing thread for QuantilesSortingDigraph class
 from copy import copy, deepcopy
 from io import BytesIO
 from pickle import Pickler, dumps, loads, load
 from multiprocessing import Process, Lock,\
                             active_children, cpu_count
-class myQSDGThread(Process):
+class _myQSDGThread(Process):
     def __init__(self, threadID,\
                  InitialSplit, tempDirName,\
                  splitActions,\
@@ -1998,7 +1998,7 @@ class QuantilesSortingDigraph(SortingDigraph):
 ##                        print(actionsRemain)
                     splitActionsList.append(splitActions)
 
-                    splitThread = myQSDGThread(j,InitialSplit,
+                    splitThread = _myQSDGThread(j,InitialSplit,
                                            tempDirName,splitActions,
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)
@@ -2719,7 +2719,7 @@ class QuantilesSortingDigraph(SortingDigraph):
             from time import time
 ##            if Comments:
 ##                self.Debug = True
-            class myThread(Process):
+            class _myThread(Process):
                 def __init__(self, threadID, tempDirName,
                              nq, Min, Max, LowerClosed, Debug):
                     Process.__init__(self)
@@ -2853,7 +2853,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                     pd = dumps(thActions,-1)
                     fo.write(pd)
                     fo.close()            
-                    process = myThread(j,tempDirName,nq,Min,Max,
+                    process = _myThread(j,tempDirName,nq,Min,Max,
                                        LowerClosed,Debug)
                     process.start()
                     nbrOfThreads += 1

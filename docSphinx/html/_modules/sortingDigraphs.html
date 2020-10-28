@@ -74,7 +74,7 @@
 
 <span class="c1"># mySDGThread for SortingDigraph class</span>
 
-<div class="viewcode-block" id="myThread"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.myThread">[docs]</a><span class="k">class</span> <span class="nc">myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">catKeys</span><span class="p">,</span><span class="n">LowerClosed</span><span class="p">,</span><span class="n">Debug</span><span class="p">):</span>
         <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
@@ -83,7 +83,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">catKeys</span> <span class="o">=</span> <span class="n">catKeys</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span> <span class="o">=</span> <span class="n">LowerClosed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
-<div class="viewcode-block" id="myThread.run"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.myThread.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
         <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">chdir</span>
         <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
@@ -128,7 +128,7 @@
         <span class="n">foName</span> <span class="o">=</span> <span class="s1">&#39;sorting-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threadID</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">foName</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">sorting</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 <div class="viewcode-block" id="SortingDigraph"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph">[docs]</a><span class="k">class</span> <span class="nc">SortingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1452,13 +1452,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">newrelation</span><span class="p">)</span></div></div>
 
 <span class="c1">#-------------</span>
-<span class="c1"># myQSDGThread for QuantilesSortingDigraph class</span>
+<span class="c1"># multiprocessing thread for QuantilesSortingDigraph class</span>
 <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
 <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span>
 <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
 <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Lock</span><span class="p">,</span>\
                             <span class="n">active_children</span><span class="p">,</span> <span class="n">cpu_count</span>
-<div class="viewcode-block" id="myQSDGThread"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.myQSDGThread">[docs]</a><span class="k">class</span> <span class="nc">myQSDGThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_myQSDGThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span>\
                  <span class="n">InitialSplit</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span>\
                  <span class="n">splitActions</span><span class="p">,</span>\
@@ -1473,7 +1473,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">hasBipolarVeto</span> <span class="o">=</span> <span class="n">hasBipolarVeto</span><span class="p">,</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hasSymmetricThresholds</span> <span class="o">=</span> <span class="n">hasSymmetricThresholds</span><span class="p">,</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
-<div class="viewcode-block" id="myQSDGThread.run"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.myQSDGThread.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">io</span> <span class="k">import</span> <span class="n">BytesIO</span>
         <span class="kn">from</span> <span class="nn">pickle</span> <span class="k">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
         <span class="kn">from</span> <span class="nn">os</span> <span class="k">import</span> <span class="n">chdir</span>
@@ -1565,7 +1565,7 @@
         <span class="n">foName</span> <span class="o">=</span> <span class="s1">&#39;splitCategoryContent-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threadID</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">foName</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">categoryContent</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         
     <span class="c1"># .......</span>
 <div class="viewcode-block" id="QuantilesSortingDigraph"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph">[docs]</a><span class="k">class</span> <span class="nc">QuantilesSortingDigraph</span><span class="p">(</span><span class="n">SortingDigraph</span><span class="p">):</span>
@@ -2040,7 +2040,7 @@
 <span class="c1">##                        print(actionsRemain)</span>
                     <span class="n">splitActionsList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">splitActions</span><span class="p">)</span>
 
-                    <span class="n">splitThread</span> <span class="o">=</span> <span class="n">myQSDGThread</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">InitialSplit</span><span class="p">,</span>
+                    <span class="n">splitThread</span> <span class="o">=</span> <span class="n">_myQSDGThread</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">InitialSplit</span><span class="p">,</span>
                                            <span class="n">tempDirName</span><span class="p">,</span><span class="n">splitActions</span><span class="p">,</span>
                                            <span class="n">hasNoVeto</span><span class="p">,</span><span class="n">hasBipolarVeto</span><span class="p">,</span>
                                            <span class="n">hasSymmetricThresholds</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
@@ -2761,7 +2761,7 @@
             <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
 <span class="c1">##            if Comments:</span>
 <span class="c1">##                self.Debug = True</span>
-            <span class="k">class</span> <span class="nc">myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+            <span class="k">class</span> <span class="nc">_myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
                 <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span>
                              <span class="n">nq</span><span class="p">,</span> <span class="n">Min</span><span class="p">,</span> <span class="n">Max</span><span class="p">,</span> <span class="n">LowerClosed</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
                     <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -2895,7 +2895,7 @@
                     <span class="n">pd</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">thActions</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
                     <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pd</span><span class="p">)</span>
                     <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>            
-                    <span class="n">process</span> <span class="o">=</span> <span class="n">myThread</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">nq</span><span class="p">,</span><span class="n">Min</span><span class="p">,</span><span class="n">Max</span><span class="p">,</span>
+                    <span class="n">process</span> <span class="o">=</span> <span class="n">_myThread</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">nq</span><span class="p">,</span><span class="n">Min</span><span class="p">,</span><span class="n">Max</span><span class="p">,</span>
                                        <span class="n">LowerClosed</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
                     <span class="n">process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
                     <span class="n">nbrOfThreads</span> <span class="o">+=</span> <span class="mi">1</span>

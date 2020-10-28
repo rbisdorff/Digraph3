@@ -131,3 +131,41 @@ QuantilesSorting   : 0.05466
 Preordering        : 0.00027
 Decomposing        : 0.23466
 Ordering           : 0.01028
+*----- show short --------------*
+Instance name      : random3ObjectivesPerfTab_pr
+Size (in bytes)    : 1663185
+# Actions          : 100
+# Criteria         : 13
+Sorting by         : 5-Tiling
+Ordering strategy  : average
+Local ranking rule : Copeland
+# Components       : 7
+Minimal size       : 1
+Maximal order      : 42
+Average order      : 14.3
+Fill rate          : 27.273%
+*-- Constructor run times (in sec.) --*
+Total time         : 0.27331
+QuantilesSorting   : 0.05170
+Preordering        : 0.00024
+Decomposing        : 0.20661
+Ordering           : 0.00901
+*----- show short --------------*
+Instance name      : random3ObjectivesPerfTab_pr
+Size (in bytes)    : 1774161
+# Actions          : 100
+# Criteria         : 13
+Sorting by         : 5-Tiling
+Ordering strategy  : average
+Local ranking rule : Copeland
+# Components       : 6
+Minimal size       : 1
+Maximal order      : 43
+Average order      : 16.7
+Fill rate          : 31.192%
+*-- Constructor run times (in sec.) --*
+Total time         : 0.31331
+QuantilesSorting   : 0.05152
+Preordering        : 0.00027
+Decomposing        : 0.24660
+Ordering           : 0.00953
