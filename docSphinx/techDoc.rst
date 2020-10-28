@@ -177,7 +177,7 @@ Sorting, rating and ranking tools
 
      .. inheritance-diagram:: sortingDigraphs
 	:top-classes: sortingDigraphs.SortingDigraph
-	:parts: 0
+	:parts: -1
      
 * :ref:`linearOrders-label` 
      Additional tools for solving linearly ranking problems with the
@@ -185,14 +185,14 @@ Sorting, rating and ranking tools
      class;
 
      .. inheritance-diagram:: linearOrders
-	:parts: 0
+	:parts: -1
      
 * :ref:`transitiveDigraphs-label` 
      Additional tools for solving pre-ranking problems with
      root `TransitiveDigraph <techDoc.html#transitiveDigraphs.TransitiveDigraph>`_ class.
 
      .. inheritance-diagram:: transitiveDigraphs
-	:parts: 0
+	:parts: -1
 
 Miscellaneous tools
 ...................
