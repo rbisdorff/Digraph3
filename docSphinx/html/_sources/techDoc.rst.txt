@@ -80,7 +80,7 @@ Basic modules
      <techDoc.html#digraphs.Digraph>`_ class.
 
      .. inheritance-diagram:: digraphs
-	:parts: -1
+	:parts: 0
      
 * :ref:`graphs-label`
      Resources for handling undirected graphs with the root `Graph
@@ -88,7 +88,7 @@ Basic modules
      ``digraphs`` module resources.
 
      .. inheritance-diagram:: graphs
-	:parts: -1
+	:parts: 0
      
 * :ref:`perfTabs-label`
      Tools for handling multiple criteria performance tableaux with
@@ -96,7 +96,7 @@ Basic modules
      <techDoc.html#perfTabs.PerformanceTableau>`_ class.
 
      .. inheritance-diagram:: perfTabs
-	:parts: -1
+	:parts: 0
      
 * :ref:`outrankingDigraphs-label`
      Root module for handling outranking digraphs with the abstract root :py:class:`outrankingDigraphs.OutrankingDigraph` classs and the main
@@ -106,7 +106,7 @@ Basic modules
 
      .. inheritance-diagram:: outrankingDigraphs
 	:top-classes: outrankingDigraphs.outrankingDigraph, outrankingDigraphs.BipolarOutrankingDigraph
-	:parts: -1
+	:parts: 0
 
 * :ref:`votingProfiles-label` 
      Classes and methods for handling voting ballots and computing election results
@@ -115,7 +115,7 @@ Basic modules
 
      .. inheritance-diagram:: votingProfiles
 	:top-classes: votingProfiles.VotingProfile
-	:parts: -1
+	:parts: 0
      
 
 Various Random generators
@@ -125,20 +125,20 @@ Various Random generators
      Various implemented random digraph models.
 
      .. inheritance-diagram:: randomDigraphs
-	:parts: -1
+	:parts: 0
 
 * :ref:`randomPerfTabs-label` 
      Various implemented random performance tableau models.
 
      .. inheritance-diagram:: randomPerfTabs
-	:parts: -1
+	:parts: 0
 
 * :ref:`randomNumbers-label` 
      Additional random number generators, not available in the
      standard python random.py library.
 
      .. inheritance-diagram:: randomNumbers
-	:parts: -1
+	:parts: 0
 
 Handling big data
 .................
@@ -149,7 +149,7 @@ Handling big data
      :py:mod:`randomPerfTabs` module.   
 
      .. inheritance-diagram:: performanceQuantiles
-        :parts: -1
+        :parts: 0
 
 * :ref:`sparseOutrankingDigraphs-label` 
      Sparse implementation design for large bipolar outranking digraphs (order
@@ -157,7 +157,7 @@ Handling big data
 
      .. inheritance-diagram:: sparseOutrankingDigraphs
 	:top-classes: sparseOutrankingDigraphs.SparseOutrankingDigraph
-	:parts: -1
+	:parts: 0
 
 Cythonized modules
 ..................
@@ -177,7 +177,7 @@ Sorting, rating and ranking tools
 
      .. inheritance-diagram:: sortingDigraphs
 	:top-classes: sortingDigraphs.SortingDigraph
-	:parts: -1
+	:parts: 0
      
 * :ref:`linearOrders-label` 
      Additional tools for solving linearly ranking problems with the
@@ -185,14 +185,14 @@ Sorting, rating and ranking tools
      class;
 
      .. inheritance-diagram:: linearOrders
-	:parts: -1
+	:parts: 0
      
 * :ref:`transitiveDigraphs-label` 
      Additional tools for solving pre-ranking problems with
      root `TransitiveDigraph <techDoc.html#transitiveDigraphs.TransitiveDigraph>`_ class.
 
      .. inheritance-diagram:: transitiveDigraphs
-	:parts: -1
+	:parts: 0
 
 Miscellaneous tools
 ...................

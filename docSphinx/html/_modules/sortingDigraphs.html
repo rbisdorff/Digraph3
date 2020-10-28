@@ -72,7 +72,7 @@
 <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="k">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">active_children</span>
 
 
-<span class="c1"># mySDGThread for SortingDigraph class</span>
+<span class="c1"># multiprocessing thread for SortingDigraph class</span>
 
 <span class="k">class</span> <span class="nc">_myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">catKeys</span><span class="p">,</span><span class="n">LowerClosed</span><span class="p">,</span><span class="n">Debug</span><span class="p">):</span>

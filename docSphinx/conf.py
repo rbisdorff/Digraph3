@@ -32,7 +32,9 @@ numfig = True
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest',
               'sphinx.ext.intersphinx','sphinx.ext.imgmath',
               'sphinx.ext.viewcode','sphinx.ext.inheritance_diagram',
-              'sphinx.ext.autosectionlabel']
+              'sphinx.ext.autosectionlabel','sphinx.ext.graphviz']
+
+# inheritance_graph_attrs = dict(rankdir="TB", size='""')
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
