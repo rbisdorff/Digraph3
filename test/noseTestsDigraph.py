@@ -184,31 +184,31 @@ def testRandomFixedDegreeSequenceDigraph():
     g.showAll()
     g.showStatistics()
 
-def testRandomS3PerformanceTableau():
-    print('*==>> various tests for random performance tableaux -----*')
-    t = RandomS3PerformanceTableau(numberOfActions=20,numberOfCriteria=13,commonThresholds=[(2.5,0.0),(5.0,0.0),(30.0,0.0)])
-    t.saveXMCDA()
-    #t = XMCDAPerformanceTableau('temp')
-    g = Electre3OutrankingDigraph(t)
-    #g = BipolarOutrankingDigraph(t)
-    g.showVetos()
-    print(g.showVetos(cutLevel=60.0,realVetosOnly=True))
-    #g.showEvaluationStatistics()
-    print(g.computeVetoesStatistics())
-    g.showCriteria()
-    gini = g.computeConcentrationIndex(list(range(len(g.actions))),g.outDegreesDistribution())
-    print('gini: %2.4f' % (gini))
-    ## g.showStatistics()
-    percentages = [0,20,33,40,50,60,66,75,80,100]
-    percentiles = g.computeValuationPercentiles(g.actions,percentages)
-    print('Percentiles:')
-    for p in percentages:
-        print('%d : %.2f ' % (p,percentiles[p]))
-    percentiles = [20,33,40,50,60,66,75,80]
-    percentages = g.computeValuationPercentages(g.actions,percentiles)
-    print('Percentages: ')
-    for p in percentiles:
-        print('%d : %.3f ' % (p,percentages[p]))
+# def testRandomS3PerformanceTableau():
+#     print('*==>> various tests for random performance tableaux -----*')
+#     t = RandomS3PerformanceTableau(numberOfActions=20,numberOfCriteria=13,commonThresholds=[(2.5,0.0),(5.0,0.0),(30.0,0.0)])
+#     t.saveXMCDA()
+#     #t = XMCDAPerformanceTableau('temp')
+#     g = Electre3OutrankingDigraph(t)
+#     #g = BipolarOutrankingDigraph(t)
+#     g.showVetos()
+#     print(g.showVetos(cutLevel=60.0,realVetosOnly=True))
+#     #g.showEvaluationStatistics()
+#     print(g.computeVetoesStatistics())
+#     g.showCriteria()
+#     gini = g.computeConcentrationIndex(list(range(len(g.actions))),g.outDegreesDistribution())
+#     print('gini: %2.4f' % (gini))
+#     ## g.showStatistics()
+#     percentages = [0,20,33,40,50,60,66,75,80,100]
+#     percentiles = g.computeValuationPercentiles(g.actions,percentages)
+#     print('Percentiles:')
+#     for p in percentages:
+#         print('%d : %.2f ' % (p,percentiles[p]))
+#     percentiles = [20,33,40,50,60,66,75,80]
+#     percentages = g.computeValuationPercentages(g.actions,percentiles)
+#     print('Percentages: ')
+#     for p in percentiles:
+#         print('%d : %.3f ' % (p,percentages[p]))
 
 def testFullRandomOutrankingDigraph():
     print('*==>> testing full random outranking Digraphs ----*')
@@ -340,26 +340,26 @@ def testPerformanceTableauStatistics():
     t.showStatistics()
     t.showEvaluationStatistics()
 
-def testMoreOrlessRelatedPairs():
-    print('*==>> test more or less unrelated pairs extraction ---*')
-    #g = BipolarIntegerOutrankingDigraph()
-    g = Electre3OutrankingDigraph()
-    g.showRelationTable()
-    print(g.valuationdomain)
-    print('unrelated pairs:')
-    print(g.computeUnrelatedPairs())
-    print('more or less unrelated pairs:')
-    print(g.computeMoreOrLessUnrelatedPairs())
-    g.showVetos()
+# def testMoreOrlessRelatedPairs():
+#     print('*==>> test more or less unrelated pairs extraction ---*')
+#     #g = BipolarIntegerOutrankingDigraph()
+#     g = Electre3OutrankingDigraph()
+#     g.showRelationTable()
+#     print(g.valuationdomain)
+#     print('unrelated pairs:')
+#     print(g.computeUnrelatedPairs())
+#     print('more or less unrelated pairs:')
+#     print(g.computeMoreOrLessUnrelatedPairs())
+#     g.showVetos()
 
-def testXMLRubisSaveReadMethods():
-    print('*==>> test rubisOutrankingDigraph XML saving ------------*')
-    t = FullRandomPerformanceTableau(numberOfActions=5,commonMode=['uniform',None,None],IntegerWeights=True)
-    t.save('testperf')
+# def testXMLRubisSaveReadMethods():
+#     print('*==>> test rubisOutrankingDigraph XML saving ------------*')
+#     t = FullRandomPerformanceTableau(numberOfActions=5,commonMode=['uniform',None,None],IntegerWeights=True)
+#     t.save('testperf')
 
-    g = BipolarOutrankingDigraph(t)
-    g.saveXMLRubisOutrankingDigraph('testrel',servingD3=False)
-    g.showVetos()
+#     g = BipolarOutrankingDigraph(t)
+#     g.saveXMLRubisOutrankingDigraph('testrel',servingD3=False)
+#     g.showVetos()
 
 def testZoomingValuations():
     print('*==>> zooming the valuation of digraphs ------*')
@@ -493,27 +493,27 @@ def testCBPerformanceTableau():
     #g.showRelationTable()
     #g.showRubyChoice()
 
-def testRandomS3PerformanceTableau():
-    print('*==>> random S3 Performance Tableaux ------------*')
-    t = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=7,VariableGenerators=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(65.0,0.0)],commonMode=['beta',0.5,None],Debug=False,OrdinalScales=False,Coalitions=False,RandomCoalitions=True)
-    t.saveXMCDA2(fileName='randomS3PerformanceTableau',servingD3=False)
-    for g in t.criteria:
-        print('==>>', g, t.computeThresholdPercentile(g,'ind'))
-        for a in t.actions:
-            print(t.actions[a]['generators'][g])
-    t = XMCDA2PerformanceTableau('randomS3PerformanceTableau')
-    g = Electre3OutrankingDigraph(t)
-    #g.defaultDiscriminationThresholds()
-    g.showCriteria()
-    g.showCriteriaCorrelationTable()
-    ## ## g.exportGraphViz()
-    t.showPerformanceTableau()
-    g.showRelationTable()
-    g.showRubyChoice()
+# def testRandomS3PerformanceTableau():
+#     print('*==>> random S3 Performance Tableaux ------------*')
+#     t = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=7,VariableGenerators=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(65.0,0.0)],commonMode=['beta',0.5,None],Debug=False,OrdinalScales=False,Coalitions=False,RandomCoalitions=True)
+#     t.saveXMCDA2(fileName='randomS3PerformanceTableau',servingD3=False)
+#     for g in t.criteria:
+#         print('==>>', g, t.computeThresholdPercentile(g,'ind'))
+#         for a in t.actions:
+#             print(t.actions[a]['generators'][g])
+#     t = XMCDA2PerformanceTableau('randomS3PerformanceTableau')
+#     g = Electre3OutrankingDigraph(t)
+#     #g.defaultDiscriminationThresholds()
+#     g.showCriteria()
+#     g.showCriteriaCorrelationTable()
+#     ## ## g.exportGraphViz()
+#     t.showPerformanceTableau()
+#     g.showRelationTable()
+#     g.showRubyChoice()
 
 def testPercentilesOfThresholds():
     print('*---------- test percentiles of variable thresholds --------*')
-    t = RandomS3PerformanceTableau()
+    t = RandomPerformanceTableau()
     t.computeDefaultDiscriminationThresholds(quantile={'ind':10.0,'pref':20.0,'weakVeto':90.0,'veto':95.0})
     for g in [y for y in t.criteria]:
         print(g, t.criteria[g]['thresholds'])
@@ -526,32 +526,32 @@ def testPercentilesOfThresholds():
     t.showPerformanceTableau()
     t.showCriteria(Debug=False)
 
-def testCriterionRelationTable():
-    print('*---- testing criterion relation table ----*')
-    t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=5)
-    g = Electre3OutrankingDigraph(t)
-    for c in g.criteria:
-        g.showCriterionRelationTable(c)
-    ## gr = OldRobustOutrankingDigraph(t)
-    ## gr.showRelationTable()
-    ## go = BipolarOutrankingDigraph(t)
-    for x in g.actions:
-        for y in g.actions:
-            g.showPairwiseComparison(x,y)
-    ## go.showRelationTable()
-    ## go.showPairwiseComparison('a03','a05')
+# def testCriterionRelationTable():
+#     print('*---- testing criterion relation table ----*')
+#     t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=5)
+#     g = Electre3OutrankingDigraph(t)
+#     for c in g.criteria:
+#         g.showCriterionRelationTable(c)
+#     ## gr = OldRobustOutrankingDigraph(t)
+#     ## gr.showRelationTable()
+#     ## go = BipolarOutrankingDigraph(t)
+#     for x in g.actions:
+#         for y in g.actions:
+#             g.showPairwiseComparison(x,y)
+#     ## go.showRelationTable()
+#     ## go.showPairwiseComparison('a03','a05')
 
-def testAMPLDataFileGeneration():
-    print('*----- save AMPL Data file from robust outranking digraph ---*')
-    #t = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),IntegerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0)])
-    t = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),IntegerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
-    t.saveXMCDA('temp1',servingD3=False)
-    #t = XMCDAPerformanceTableau('temp1')
-    gr = OldRobustOutrankingDigraph(t)
-    gr.saveAMPLDataFile(Unique=True,Comments=True)
-    #gr.showCriteria()
-    gr.showRelationTable()
-    #print go.relation['a13']['a11']
+# def testAMPLDataFileGeneration():
+#     print('*----- save AMPL Data file from robust outranking digraph ---*')
+#     #t = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),IntegerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0)])
+#     t = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),IntegerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
+#     t.saveXMCDA('temp1',servingD3=False)
+#     #t = XMCDAPerformanceTableau('temp1')
+#     gr = OldRobustOutrankingDigraph(t)
+#     gr.saveAMPLDataFile(Unique=True,Comments=True)
+#     #gr.showCriteria()
+#     gr.showRelationTable()
+#     #print go.relation['a13']['a11']
 
 def testXMCDA2SaveReadDigraph():
     print('*==>> save and read XMCDA-2.0 Digraph instances --------------*')

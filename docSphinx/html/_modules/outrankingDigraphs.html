@@ -3946,7 +3946,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="n">selfOrig</span><span class="o">.</span><span class="vm">__dict__</span></div></div>
         
 
-<div class="viewcode-block" id="Electre3OutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.Electre3OutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">Electre3OutrankingDigraph</span><span class="p">(</span><span class="n">OutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_Electre3OutrankingDigraph</span><span class="p">(</span><span class="n">OutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the standard OutrankingDigraph class for generating classical Electre III outranking digraphs (with vetoes and no counter-vetoes).</span>
 
@@ -3998,7 +3998,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         
 
-<div class="viewcode-block" id="Electre3OutrankingDigraph.showVetos"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.Electre3OutrankingDigraph.showVetos">[docs]</a>    <span class="k">def</span> <span class="nf">showVetos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">cutLevel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">realVetosOnly</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showVetos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">cutLevel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">realVetosOnly</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        prints all veto situations observed in the OutrankingDigraph instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -4036,9 +4036,9 @@
                     <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;: relation: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">vetos</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;, criteria: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">vetos</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;number of real vetos: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">realveto</span><span class="p">))</span>
-            <span class="k">return</span> <span class="n">nv</span><span class="p">,</span><span class="n">realveto</span></div>
+            <span class="k">return</span> <span class="n">nv</span><span class="p">,</span><span class="n">realveto</span>
 
-<div class="viewcode-block" id="Electre3OutrankingDigraph.computeVetos"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.Electre3OutrankingDigraph.computeVetos">[docs]</a>    <span class="k">def</span> <span class="nf">computeVetos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">cutLevel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">realVetosOnly</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeVetos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">cutLevel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">realVetosOnly</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        prints all veto situations observed in the OutrankingDigraph instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -4059,7 +4059,7 @@
                     <span class="n">cutveto</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">return</span> <span class="n">nv</span><span class="p">,</span><span class="n">realveto</span><span class="p">,</span><span class="n">cutveto</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">nv</span><span class="p">,</span><span class="n">realveto</span></div>
+            <span class="k">return</span> <span class="n">nv</span><span class="p">,</span><span class="n">realveto</span>
 
 
     <span class="k">def</span> <span class="nf">_constructRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteria</span><span class="p">,</span><span class="n">evaluation</span><span class="p">,</span><span class="n">hasNoVeto</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -4140,7 +4140,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">vetos</span> <span class="o">=</span> <span class="n">vetos</span>
         <span class="k">return</span> <span class="n">relation</span>
 
-<div class="viewcode-block" id="Electre3OutrankingDigraph.computeCriterionRelation"><a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.Electre3OutrankingDigraph.computeCriterionRelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeCriterionRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">hasSymmetricThresholds</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeCriterionRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">hasSymmetricThresholds</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute the outranking characteristic for actions x and y</span>
 <span class="sd">        on criterion c.</span>
@@ -4185,7 +4185,7 @@
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_localConcordance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">ind</span><span class="p">,</span><span class="n">wp</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
 
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.5&quot;</span><span class="p">)</span></div>
+                <span class="k">return</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.5&quot;</span><span class="p">)</span>
 
 
     <span class="k">def</span> <span class="nf">_localConcordance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">ind</span><span class="p">,</span><span class="n">wp</span><span class="p">,</span><span class="n">p</span><span class="p">):</span>
@@ -4242,7 +4242,7 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span></div>
+            <span class="k">return</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
 
 <span class="c1"># multiprocessing thread for BipolarOutrankingDigraph class</span>
 <span class="k">class</span> <span class="nc">_myBODGThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
@@ -7176,7 +7176,7 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
-<span class="k">class</span> <span class="nc">_RandomElectre3OutrankingDigraph</span><span class="p">(</span><span class="n">Electre3OutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">_RandomElectre3OutrankingDigraph</span><span class="p">(</span><span class="n">_Electre3OutrankingDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parameters:</span>
 <span class="sd">        | n := nbr of actions, p := number criteria, scale := [Min,Max],</span>

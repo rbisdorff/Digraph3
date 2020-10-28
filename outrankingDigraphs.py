@@ -3904,7 +3904,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         self.__dict__ = selfOrig.__dict__
         
 
-class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
+class _Electre3OutrankingDigraph(OutrankingDigraph):
     """
     Specialization of the standard OutrankingDigraph class for generating classical Electre III outranking digraphs (with vetoes and no counter-vetoes).
 
@@ -7134,7 +7134,7 @@ class _BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTable
         fo.close()
 
 
-class _RandomElectre3OutrankingDigraph(Electre3OutrankingDigraph,PerformanceTableau):
+class _RandomElectre3OutrankingDigraph(_Electre3OutrankingDigraph):
     """
     Parameters:
         | n := nbr of actions, p := number criteria, scale := [Min,Max],

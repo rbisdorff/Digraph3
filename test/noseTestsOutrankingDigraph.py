@@ -17,12 +17,12 @@ from randomPerfTabs import _FullRandomPerformanceTableau as\
 from randomPerfTabs import _RandomCoalitionsPerformanceTableau as\
      RandomCoalitionsPerformanceTableau
 
-def testElectre3OutrankingDigraph():
-    print('==>> Testing Electre 3 Outranking Digraph instantiation')
-    g = RandomElectre3OutrankingDigraph(numberOfActions=5)
-    g.showAll()
-    g.showStatistics()
-    g.showPerformanceTableau()
+# def testElectre3OutrankingDigraph():
+#     print('==>> Testing Electre 3 Outranking Digraph instantiation')
+#     g = _RandomElectre3OutrankingDigraph(numberOfActions=5)
+#     g.showAll()
+#     g.showStatistics()
+#     g.showPerformanceTableau()
 
 def testOrdinalOutrankingDigraph():
 
@@ -86,13 +86,13 @@ def testFullRandomOutrankingDigraph():
     g.showVetos(realVetosOnly=True)
     print('criteria significance concentration: ', g.computeWeightsConcentrationIndex())
 
-def testElectre3OutrankingDigraph():
-    print('*==>> testing Electre III outranking Digraphs ----*')
-    t = FullRandomPerformanceTableau(numberOfActions=10)
-    g3 = Electre3OutrankingDigraph(t)
-    g3.showRelationTable()
-    g = BipolarOutrankingDigraph(t)
-    g.showRelationTable()
+# def testElectre3OutrankingDigraph():
+#     print('*==>> testing Electre III outranking Digraphs ----*')
+#     t = FullRandomPerformanceTableau(numberOfActions=10)
+#     g3 = Electre3OutrankingDigraph(t)
+#     g3.showRelationTable()
+#     g = BipolarOutrankingDigraph(t)
+#     g.showRelationTable()
 
 def testForcedBestSingleChoice():
     print('*==>> testing forced best single choice  ----*')
@@ -126,14 +126,15 @@ def testComputeRubisChoice():
     
 def testMoreOrlessRelatedPairs():
     print('*==>> test more or less unrelated pairs extraction ---*')
-    #g = BipolarIntegerOutrankingDigraph()
-    g = Electre3OutrankingDigraph()
-    g.showRelationTable()
-    print(g.valuationdomain)
+    t = RandomPerformanceTableau(numberOfActions=7)
+    g = BipolarOutrankingDigraph(t)
+    gcd = ~(-g)
+    gcd.showRelationTable()
+    print(gcd.valuationdomain)
     print('unrelated pairs:')
-    print(g.computeUnrelatedPairs())
+    print(gcd.computeUnrelatedPairs())
     print('more or less unrelated pairs:')
-    print(g.computeMoreOrLessUnrelatedPairs())
+    print(gcd.computeMoreOrLessUnrelatedPairs())
     g.showVetos()
 
 def testXMLRubisSaveReadMethods():
@@ -289,23 +290,23 @@ def testGlobalOutrankingCorrelation():
         #print medianKCorrelation[x]
     print('median K-Correlation:', medianKCorrelation)
 
-def testElectre3OutrankingDigraph():
-    print('*----- test Electre3 outranking Digraph -----*')
-    t3 = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=13,weightDistribution="random",weightScale=(1,13),IntegerWeights=True,commonThresholds=[(2.5,0.1),(5.0,0.15),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None],Electre3=False, vetoProbability=0.5)
-    gs3 = Electre3OutrankingDigraph(t3,hasNoVeto=False)
-    print(gs3.computeVetos(realVetosOnly=True))
-    g = BipolarOutrankingDigraph(t3)
-    gnv = BipolarOutrankingDigraph(t3,hasNoVeto=True)
-    g.showRelationTable()
-    gnv.showRelationTable()
-    actionsList=[x for x in g.actions]
-    actionsList.sort()
-    for x in actionsList:
-        for y in actionsList:
-            print(x, y, gnv.relation[x][y]-g.relation[x][y])
-    g.showRelationTable()
-    gs3.showPairwiseComparison('a07','a03')
-    g.showPairwiseComparison('a07','a03')
+# def testElectre3OutrankingDigraph():
+#     print('*----- test Electre3 outranking Digraph -----*')
+#     t3 = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=13,weightDistribution="random",weightScale=(1,13),IntegerWeights=True,commonThresholds=[(2.5,0.1),(5.0,0.15),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None],Electre3=False, vetoProbability=0.5)
+#     gs3 = Electre3OutrankingDigraph(t3,hasNoVeto=False)
+#     print(gs3.computeVetos(realVetosOnly=True))
+#     g = BipolarOutrankingDigraph(t3)
+#     gnv = BipolarOutrankingDigraph(t3,hasNoVeto=True)
+#     g.showRelationTable()
+#     gnv.showRelationTable()
+#     actionsList=[x for x in g.actions]
+#     actionsList.sort()
+#     for x in actionsList:
+#         for y in actionsList:
+#             print(x, y, gnv.relation[x][y]-g.relation[x][y])
+#     g.showRelationTable()
+#     gs3.showPairwiseComparison('a07','a03')
+#     g.showPairwiseComparison('a07','a03')
 
 def testsaveXMCDA2RubisChoiceRecommendation():
     print('*----- test saveXMCDA2RubisChoiceRecommendation -----*')
