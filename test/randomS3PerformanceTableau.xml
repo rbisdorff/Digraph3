@@ -29,70 +29,70 @@
 <description>
 <subTitle>Potential decision actions.</subTitle>
 </description>
-<alternative id="a01" name="random decision action A~ B~ C+" mcdaConcept="potentialDecisionAction">
+<alternative id="a01" name="random decision action A- B~ C-" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="a02" name="random decision action A~ B~ C-" mcdaConcept="potentialDecisionAction">
+<alternative id="a02" name="random decision action A+ B+ C~" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="a03" name="random decision action A~ B~ C-" mcdaConcept="potentialDecisionAction">
+<alternative id="a03" name="random decision action A~ B- C~" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="a04" name="random decision action A+ B~ C-" mcdaConcept="potentialDecisionAction">
+<alternative id="a04" name="random decision action A~ B~ C+" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="a05" name="random decision action A- B+ C~" mcdaConcept="potentialDecisionAction">
+<alternative id="a05" name="random decision action A+ B~ C-" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="a06" name="random decision action A~ B+ C~" mcdaConcept="potentialDecisionAction">
+<alternative id="a06" name="random decision action A+ B- C~" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="a07" name="random decision action A+ B~ C+" mcdaConcept="potentialDecisionAction">
+<alternative id="a07" name="random decision action A- B- C-" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="a08" name="random decision action A+ B- C~" mcdaConcept="potentialDecisionAction">
+<alternative id="a08" name="random decision action A+ B+ C-" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="a09" name="random decision action A~ B~ C~" mcdaConcept="potentialDecisionAction">
+<alternative id="a09" name="random decision action A~ B- C-" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="a10" name="random decision action A~ B~ C~" mcdaConcept="potentialDecisionAction">
+<alternative id="a10" name="random decision action A+ B- C~" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
@@ -104,9 +104,9 @@
 <description>
 <subTitle>Family of criteria.</subTitle>
 </description>
-<criterion id="g1" name="random criterion of coalition A" mcdaConcept="criterion">
+<criterion id="g1" name="random criterion of coalition C" mcdaConcept="criterion">
 <description>
-<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
+<comment>Variable triangular performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
 </description>
 <active>true</active>
@@ -136,9 +136,9 @@
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="g2" name="random criterion of coalition A" mcdaConcept="criterion">
+<criterion id="g2" name="random criterion of coalition B" mcdaConcept="criterion">
 <description>
-<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
+<comment>Variable triangular performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
 </description>
 <active>true</active>
@@ -168,9 +168,9 @@
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="g3" name="random criterion of coalition B" mcdaConcept="criterion">
+<criterion id="g3" name="random criterion of coalition A" mcdaConcept="criterion">
 <description>
-<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
+<comment>Variable triangular performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
 </description>
 <active>true</active>
@@ -200,9 +200,9 @@
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="g4" name="random criterion of coalition B" mcdaConcept="criterion">
+<criterion id="g4" name="random criterion of coalition C" mcdaConcept="criterion">
 <description>
-<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
+<comment>Variable triangular performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
 </description>
 <active>true</active>
@@ -232,9 +232,9 @@
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="g5" name="random criterion of coalition A" mcdaConcept="criterion">
+<criterion id="g5" name="random criterion of coalition C" mcdaConcept="criterion">
 <description>
-<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
+<comment>Variable triangular performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
 </description>
 <active>true</active>
@@ -264,9 +264,9 @@
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="g6" name="random criterion of coalition C" mcdaConcept="criterion">
+<criterion id="g6" name="random criterion of coalition B" mcdaConcept="criterion">
 <description>
-<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
+<comment>Variable triangular performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
 </description>
 <active>true</active>
@@ -296,9 +296,9 @@
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="g7" name="random criterion of coalition C" mcdaConcept="criterion">
+<criterion id="g7" name="random criterion of coalition A" mcdaConcept="criterion">
 <description>
-<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
+<comment>Variable triangular performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
 </description>
 <active>true</active>
@@ -337,310 +337,310 @@
 <alternativeID>a01</alternativeID>
 <performance>
 <criterionID>g1</criterionID>
-<value><real>57.97</real></value>
+<value><real>62.83</real></value>
 </performance>
 <performance>
 <criterionID>g2</criterionID>
-<value><real>40.10</real></value>
+<value><real>61.18</real></value>
 </performance>
 <performance>
 <criterionID>g3</criterionID>
-<value><real>56.53</real></value>
+<value><real>42.62</real></value>
 </performance>
 <performance>
 <criterionID>g4</criterionID>
-<value><real>54.37</real></value>
+<value><real>17.62</real></value>
 </performance>
 <performance>
 <criterionID>g5</criterionID>
-<value><real>30.80</real></value>
+<value><real>2.48</real></value>
 </performance>
 <performance>
 <criterionID>g6</criterionID>
-<value><real>76.26</real></value>
+<value><real>60.95</real></value>
 </performance>
 <performance>
 <criterionID>g7</criterionID>
-<value><real>70.08</real></value>
+<value><real>8.27</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a02</alternativeID>
 <performance>
 <criterionID>g1</criterionID>
-<value><real>38.49</real></value>
+<value><real>66.01</real></value>
 </performance>
 <performance>
 <criterionID>g2</criterionID>
-<value><real>59.47</real></value>
+<value><real>55.02</real></value>
 </performance>
 <performance>
 <criterionID>g3</criterionID>
-<value><real>22.99</real></value>
+<value><real>16.17</real></value>
 </performance>
 <performance>
 <criterionID>g4</criterionID>
-<value><real>41.10</real></value>
+<value><real>16.05</real></value>
 </performance>
 <performance>
 <criterionID>g5</criterionID>
-<value><real>45.35</real></value>
+<value><real>66.43</real></value>
 </performance>
 <performance>
 <criterionID>g6</criterionID>
-<value><real>31.92</real></value>
+<value><real>72.25</real></value>
 </performance>
 <performance>
 <criterionID>g7</criterionID>
-<value><real>13.04</real></value>
+<value><real>13.43</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a03</alternativeID>
 <performance>
 <criterionID>g1</criterionID>
-<value><real>62.32</real></value>
+<value><real>23.84</real></value>
 </performance>
 <performance>
 <criterionID>g2</criterionID>
-<value><real>51.65</real></value>
+<value><real>33.49</real></value>
 </performance>
 <performance>
 <criterionID>g3</criterionID>
-<value><real>70.96</real></value>
+<value><real>69.05</real></value>
 </performance>
 <performance>
 <criterionID>g4</criterionID>
-<value><real>47.66</real></value>
+<value><real>72.52</real></value>
 </performance>
 <performance>
 <criterionID>g5</criterionID>
-<value><real>47.35</real></value>
+<value><real>74.09</real></value>
 </performance>
 <performance>
 <criterionID>g6</criterionID>
-<value><real>82.41</real></value>
+<value><real>29.11</real></value>
 </performance>
 <performance>
 <criterionID>g7</criterionID>
-<value><real>6.37</real></value>
+<value><real>75.18</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a04</alternativeID>
 <performance>
 <criterionID>g1</criterionID>
-<value><real>64.43</real></value>
+<value><real>57.90</real></value>
 </performance>
 <performance>
 <criterionID>g2</criterionID>
-<value><real>80.54</real></value>
+<value><real>32.37</real></value>
 </performance>
 <performance>
 <criterionID>g3</criterionID>
-<value><real>52.23</real></value>
+<value><real>27.38</real></value>
 </performance>
 <performance>
 <criterionID>g4</criterionID>
-<value><real>72.95</real></value>
+<value><real>53.40</real></value>
 </performance>
 <performance>
 <criterionID>g5</criterionID>
-<value><real>56.86</real></value>
+<value><real>16.29</real></value>
 </performance>
 <performance>
 <criterionID>g6</criterionID>
-<value><real>9.94</real></value>
+<value><real>54.87</real></value>
 </performance>
 <performance>
 <criterionID>g7</criterionID>
-<value><real>34.35</real></value>
+<value><real>28.13</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a05</alternativeID>
 <performance>
 <criterionID>g1</criterionID>
-<value><real>28.97</real></value>
+<value><real>68.77</real></value>
 </performance>
 <performance>
 <criterionID>g2</criterionID>
-<value><real>46.37</real></value>
+<value><real>18.01</real></value>
 </performance>
 <performance>
 <criterionID>g3</criterionID>
-<value><real>87.64</real></value>
+<value><real>64.23</real></value>
 </performance>
 <performance>
 <criterionID>g4</criterionID>
-<value><real>81.22</real></value>
+<value><real>58.69</real></value>
 </performance>
 <performance>
 <criterionID>g5</criterionID>
-<value><real>17.85</real></value>
+<value><real>79.66</real></value>
 </performance>
 <performance>
 <criterionID>g6</criterionID>
-<value><real>54.70</real></value>
+<value><real>72.31</real></value>
 </performance>
 <performance>
 <criterionID>g7</criterionID>
-<value><real>76.96</real></value>
+<value><real>16.39</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a06</alternativeID>
 <performance>
 <criterionID>g1</criterionID>
-<value><real>32.55</real></value>
+<value><real>13.50</real></value>
 </performance>
 <performance>
 <criterionID>g2</criterionID>
-<value><real>45.19</real></value>
+<value><real>26.96</real></value>
 </performance>
 <performance>
 <criterionID>g3</criterionID>
-<value><real>89.53</real></value>
+<value><real>79.17</real></value>
 </performance>
 <performance>
 <criterionID>g4</criterionID>
-<value><real>79.42</real></value>
+<value><real>35.72</real></value>
 </performance>
 <performance>
 <criterionID>g5</criterionID>
-<value><real>55.54</real></value>
+<value><real>19.03</real></value>
 </performance>
 <performance>
 <criterionID>g6</criterionID>
-<value><real>54.63</real></value>
+<value><real>54.52</real></value>
 </performance>
 <performance>
 <criterionID>g7</criterionID>
-<value><real>55.29</real></value>
+<value><real>33.92</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a07</alternativeID>
 <performance>
 <criterionID>g1</criterionID>
-<value><real>75.88</real></value>
+<value><real>50.72</real></value>
 </performance>
 <performance>
 <criterionID>g2</criterionID>
-<value><real>94.84</real></value>
+<value><real>23.17</real></value>
 </performance>
 <performance>
 <criterionID>g3</criterionID>
-<value><real>71.85</real></value>
+<value><real>45.54</real></value>
 </performance>
 <performance>
 <criterionID>g4</criterionID>
-<value><real>16.31</real></value>
+<value><real>74.67</real></value>
 </performance>
 <performance>
 <criterionID>g5</criterionID>
-<value><real>72.10</real></value>
+<value><real>67.66</real></value>
 </performance>
 <performance>
 <criterionID>g6</criterionID>
-<value><real>78.73</real></value>
+<value><real>78.42</real></value>
 </performance>
 <performance>
 <criterionID>g7</criterionID>
-<value><real>84.65</real></value>
+<value><real>40.08</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a08</alternativeID>
 <performance>
 <criterionID>g1</criterionID>
-<value><real>90.54</real></value>
+<value><real>39.45</real></value>
 </performance>
 <performance>
 <criterionID>g2</criterionID>
-<value><real>75.42</real></value>
+<value><real>51.08</real></value>
 </performance>
 <performance>
 <criterionID>g3</criterionID>
-<value><real>42.27</real></value>
+<value><real>43.28</real></value>
 </performance>
 <performance>
 <criterionID>g4</criterionID>
-<value><real>39.49</real></value>
+<value><real>35.54</real></value>
 </performance>
 <performance>
 <criterionID>g5</criterionID>
-<value><real>91.03</real></value>
+<value><real>57.63</real></value>
 </performance>
 <performance>
 <criterionID>g6</criterionID>
-<value><real>58.54</real></value>
+<value><real>62.17</real></value>
 </performance>
 <performance>
 <criterionID>g7</criterionID>
-<value><real>36.00</real></value>
+<value><real>74.78</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a09</alternativeID>
 <performance>
 <criterionID>g1</criterionID>
-<value><real>64.25</real></value>
+<value><real>57.29</real></value>
 </performance>
 <performance>
 <criterionID>g2</criterionID>
-<value><real>55.71</real></value>
+<value><real>41.30</real></value>
 </performance>
 <performance>
 <criterionID>g3</criterionID>
-<value><real>43.17</real></value>
+<value><real>52.83</real></value>
 </performance>
 <performance>
 <criterionID>g4</criterionID>
-<value><real>71.01</real></value>
+<value><real>22.00</real></value>
 </performance>
 <performance>
 <criterionID>g5</criterionID>
-<value><real>48.55</real></value>
+<value><real>78.76</real></value>
 </performance>
 <performance>
 <criterionID>g6</criterionID>
-<value><real>49.86</real></value>
+<value><real>4.51</real></value>
 </performance>
 <performance>
 <criterionID>g7</criterionID>
-<value><real>21.45</real></value>
+<value><real>23.14</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a10</alternativeID>
 <performance>
 <criterionID>g1</criterionID>
-<value><real>46.90</real></value>
+<value><real>36.82</real></value>
 </performance>
 <performance>
 <criterionID>g2</criterionID>
-<value><real>54.96</real></value>
+<value><real>24.59</real></value>
 </performance>
 <performance>
 <criterionID>g3</criterionID>
-<value><real>72.29</real></value>
+<value><real>65.48</real></value>
 </performance>
 <performance>
 <criterionID>g4</criterionID>
-<value><real>32.49</real></value>
+<value><real>92.47</real></value>
 </performance>
 <performance>
 <criterionID>g5</criterionID>
-<value><real>34.08</real></value>
+<value><real>63.00</real></value>
 </performance>
 <performance>
 <criterionID>g6</criterionID>
-<value><real>31.54</real></value>
+<value><real>25.34</real></value>
 </performance>
 <performance>
 <criterionID>g7</criterionID>
-<value><real>7.50</real></value>
+<value><real>54.48</real></value>
 </performance>
 </alternativePerformances>
 </performanceTable>
