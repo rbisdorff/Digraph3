@@ -1,0 +1,23 @@
+<map id="inheritance04483c24d1" name="inheritance04483c24d1">
+<area shape="rect" id="node1" href="#outrankingDigraphs.BipolarOutrankingDigraph" target="_top" title="Specialization of the abstract OutrankingDigraph root class for generating" alt="" coords="5,416,172,438"/>
+<area shape="rect" id="node2" href="#outrankingDigraphs.CoalitionsOutrankingsFusionDigraph" target="_top" title="With a list of criteria coalitions, a fusion digraph is constructed form the fusion of the corresponding marginal coalitions restricted bipolar outranking digraphs." alt="" coords="237,265,464,287"/>
+<area shape="rect" id="node3" href="#outrankingDigraphs.ConfidentBipolarOutrankingDigraph" target="_top" title="Confident bipolar outranking digraph based on multiple criteria of" alt="" coords="239,308,462,330"/>
+<area shape="rect" id="node9" href="#outrankingDigraphs.EquiSignificanceMajorityOutrankingDigraph" target="_top" title="Parameters:" alt="" coords="217,351,485,373"/>
+<area shape="rect" id="node11" href="#outrankingDigraphs.OldRobustOutrankingDigraph" target="_top" title="Parameters:" alt="" coords="258,395,444,417"/>
+<area shape="rect" id="node15" href="#outrankingDigraphs.RandomBipolarOutrankingDigraph" target="_top" title="Parameters:" alt="" coords="243,438,458,460"/>
+<area shape="rect" id="node17" href="#outrankingDigraphs.RobustOutrankingDigraph" target="_top" title="*Parameters*:" alt="" coords="267,481,434,503"/>
+<area shape="rect" id="node18" href="#outrankingDigraphs.StochasticBipolarOutrankingDigraph" target="_top" title="Stochastic bipolar outranking digraph based on multiple criteria of uncertain significance." alt="" coords="237,524,464,547"/>
+<area shape="rect" id="node19" href="#outrankingDigraphs.SymmetricAverageFusionOutrankingDigraph" target="_top" title="in development !" alt="" coords="214,568,487,590"/>
+<area shape="rect" id="node20" href="#outrankingDigraphs.UnOpposedBipolarOutrankingDigraph" target="_top" title="When operating an *o&#45;average* fusion of the mariginal outranking digraphs restricted to the coalition of criteria supporting each decision objective, we obtain **unopposed** outranking situtations, namely *validated* by one or more decision objectives without being *invalidated* by any other decision objective. " alt="" coords="529,265,763,287"/>
+<area shape="rect" id="node4" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="56,80,121,102"/>
+<area shape="rect" id="node6" href="#outrankingDigraphs.OutrankingDigraph" target="_top" title="Abstract root class for **outranking digraphs** inheritating methods both from the generic :py:class:`digraphs.Digraph`" alt="" coords="287,112,414,135"/>
+<area shape="rect" id="node13" href="#digraphs.PolarisedDigraph" target="_top" title="Renders the polarised valuation of a Digraph class instance:" alt="" coords="292,26,409,48"/>
+<area shape="rect" id="node5" href="#outrankingDigraphs.DissimilarityOutrankingDigraph" target="_top" title="Parameters:" alt="" coords="546,91,746,114"/>
+<area shape="rect" id="node7" href="#outrankingDigraphs.Electre3OutrankingDigraph" target="_top" title="Specialization of the standard OutrankingDigraph class for generating classical Electre III outranking digraphs (with vetoes and no counter&#45;vetoes)." alt="" coords="559,221,733,244"/>
+<area shape="rect" id="node10" href="#outrankingDigraphs.MultiCriteriaDissimilarityDigraph" target="_top" title="Parameters:" alt="" coords="542,135,750,157"/>
+<area shape="rect" id="node12" href="#outrankingDigraphs.OrdinalOutrankingDigraph" target="_top" title="Parameters:" alt="" coords="562,178,731,200"/>
+<area shape="rect" id="node14" href="#outrankingDigraphs.PolarisedOutrankingDigraph" target="_top" title="Specilised :py:class:`digraphs.PolarisedDigraph` instance for Outranking Digraphs." alt="" coords="556,5,736,27"/>
+<area shape="rect" id="node21" href="#outrankingDigraphs.UnanimousOutrankingDigraph" target="_top" title="Parameters:" alt="" coords="550,48,742,70"/>
+<area shape="rect" id="node8" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="20,162,156,184"/>
+<area shape="rect" id="node16" href="#outrankingDigraphs.RandomOutrankingDigraph" target="_top" title="Dummy for obsolete RandomOutrankingDigraph Class" alt="" coords="559,438,733,460"/>
+</map>

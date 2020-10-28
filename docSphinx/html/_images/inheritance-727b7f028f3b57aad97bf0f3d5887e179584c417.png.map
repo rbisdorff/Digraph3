@@ -1,0 +1,9 @@
+<map id="inheritance8def6f3175" name="inheritance8def6f3175">
+<area shape="rect" id="node1" href="#sortingDigraphs.NormedQuantilesRatingDigraph" target="_top" title="Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class" alt="" coords="441,79,671,104"/>
+<area shape="rect" id="node2" href="#sortingDigraphs.QuantilesSortingDigraph" target="_top" title="Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class" alt="" coords="212,67,393,92"/>
+<area shape="rect" id="node3" href="#performanceQuantiles.PerformanceQuantiles" target="_top" title="Implements the incremental performance quantiles representation of a" alt="" coords="219,116,386,141"/>
+<area shape="rect" id="node4" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="7,116,162,141"/>
+<area shape="rect" id="node5" href="#sortingDigraphs.SortingDigraph" target="_top" title="Specialisation of the digraphs.BipolarOutrankingDigraph Class" alt="" coords="25,67,144,92"/>
+<area shape="rect" id="node8" href="#sortingDigraphs.myThread" target="_top" title="myThread" alt="" coords="512,5,600,31"/>
+<area shape="rect" id="node7" title="Process objects represent activity that is run in a separate process" alt="" coords="5,5,164,31"/>
+</map>

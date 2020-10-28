@@ -1,0 +1,10 @@
+<map id="inheritance85c572a299" name="inheritance85c572a299">
+<area shape="rect" id="node1" href="#votingProfiles.ApprovalVotingProfile" target="_top" title="A specialised class for approval voting profiles" alt="" coords="157,55,320,80"/>
+<area shape="rect" id="node6" href="#votingProfiles.RandomApprovalVotingProfile" target="_top" title="A specialized class for generating random approval voting profiles." alt="" coords="368,55,584,80"/>
+<area shape="rect" id="node2" href="#votingProfiles.VotingProfile" target="_top" title="A generic class for storing voting profiles." alt="" coords="5,104,109,129"/>
+<area shape="rect" id="node5" href="#votingProfiles.LinearVotingProfile" target="_top" title="A specialised class for linear voting profiles" alt="" coords="167,104,311,129"/>
+<area shape="rect" id="node8" href="#votingProfiles.RandomVotingProfile" target="_top" title="A subclass for generating random voting profiles." alt="" coords="159,153,318,179"/>
+<area shape="rect" id="node3" href="#votingProfiles.CondorcetDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="169,5,308,31"/>
+<area shape="rect" id="node4" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="21,5,94,31"/>
+<area shape="rect" id="node7" href="#votingProfiles.RandomLinearVotingProfile" target="_top" title="A specialized class for generating random liwear voting profiles." alt="" coords="377,104,575,129"/>
+</map>

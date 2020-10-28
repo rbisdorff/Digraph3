@@ -1,0 +1,9 @@
+<map id="inheritance4583e8fd15" name="inheritance4583e8fd15">
+<area shape="rect" id="node1" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="40,104,195,129"/>
+<area shape="rect" id="node2" href="#randomPerfTabs.Random3ObjectivesPerformanceTableau" target="_top" title="Specialization of the :py:class:`perfTabs.PerformanceTableau` class " alt="" coords="277,5,564,31"/>
+<area shape="rect" id="node3" href="#randomPerfTabs.RandomAcademicPerformanceTableau" target="_top" title="Specialization of the PerformanceTableau class for generating a temporary" alt="" coords="284,55,557,80"/>
+<area shape="rect" id="node4" href="#randomPerfTabs.RandomCBPerformanceTableau" target="_top" title="Full automatic generation of random Costs versus Benefits" alt="" coords="307,104,534,129"/>
+<area shape="rect" id="node6" href="#randomPerfTabs.RandomPerformanceTableau" target="_top" title="Specialization of the generic :py:class:`perftabs.PerformanceTableau` class for generating a temporary random performance tableau." alt="" coords="316,153,525,179"/>
+<area shape="rect" id="node7" href="#randomPerfTabs.RandomRankPerformanceTableau" target="_top" title="Specialization of the PerformanceTableau class for generating a temporary" alt="" coords="299,203,542,228"/>
+<area shape="rect" id="node5" href="#randomPerfTabs.RandomPerformanceGenerator" target="_top" title="Generic wrapper for generating new decision actions or performance tableaux" alt="" coords="5,55,229,80"/>
+</map>

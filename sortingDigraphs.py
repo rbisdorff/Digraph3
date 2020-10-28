@@ -30,7 +30,7 @@ from sortingDigraphs import *
 from multiprocessing import Process, active_children
 
 
-# mySDGThread for SortingDigraph class
+# multiprocessing thread for SortingDigraph class
 
 class _myThread(Process):
     def __init__(self, threadID, tempDirName, actions, catKeys,LowerClosed,Debug):
