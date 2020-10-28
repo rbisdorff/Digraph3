@@ -2050,7 +2050,7 @@ confidence level <em>alpha</em> %, if</p>
 <div class="contents local topic" id="id24">
 <ul class="simple">
 <li><p><a class="reference internal" href="#characterising-unopposed-multiobjective-outranking-situations" id="id59">Characterising unopposed multiobjective outranking situations</a></p></li>
-<li><p><a class="reference internal" href="#computing-multiobjective-pareto-efficient-choice-sets" id="id60">Computing multiobjective <em>Pareto</em> efficient choice sets</a></p></li>
+<li><p><a class="reference internal" href="#computing-pareto-efficient-multiobjective-choices" id="id60">Computing <em>Pareto</em> efficient multiobjective  choices</a></p></li>
 </ul>
 </div>
 <p>When facing a performance tableau involving multiple decision objectives, the robustness level <strong>+/-3</strong>, introduced in the previous Section, may lead to distinguishing what we call <strong>unopposed</strong> outranking situations, like the one shown between alternative <em>p4</em> and <em>p1</em> (<img class="math" src="_images/math/9ef995da2786edd2994715c24d67517487a75867.png" alt="r(p4 \succsim p1) = +0.78"/>, see <a class="reference internal" href="#stabdenot"><span class="std std-numref">Listing 82</span></a> Line11), namely preferential situations that are more or less validated or invalidated by all the decision objectives.</p>
@@ -2245,11 +2245,11 @@ confidence level <em>alpha</em> %, if</p>
 <p>When fixed proportional criteria significances per objective are given, these outranking situations appear hence <strong>stable</strong> with respect to all possible importance weights we could allocate to the decision objectives.</p>
 <p>This gives way for computing multiobjective <strong>Pareto efficient</strong> choice recommendations.</p>
 </div>
-<div class="section" id="computing-multiobjective-pareto-efficient-choice-sets">
-<h3><a class="toc-backref" href="#id60">Computing multiobjective <em>Pareto</em> efficient choice sets</a><a class="headerlink" href="#computing-multiobjective-pareto-efficient-choice-sets" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="computing-pareto-efficient-multiobjective-choices">
+<h3><a class="toc-backref" href="#id60">Computing <em>Pareto</em> efficient multiobjective  choices</a><a class="headerlink" href="#computing-pareto-efficient-multiobjective-choices" title="Permalink to this headline">¶</a></h3>
 <p>Indeed, best choice recommendations, computed from an <em>unopposed multiobjective</em> outranking digraph, will in fact deliver <strong>Pareto efficient</strong> choices.</p>
 <div class="literal-block-wrapper docutils container" id="unopposed5">
-<div class="code-block-caption"><span class="caption-number">Listing 93 </span><span class="caption-text">Multiobjective Pareto efficient choice recommendation</span><a class="headerlink" href="#unopposed5" title="Permalink to this code">¶</a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 93 </span><span class="caption-text">Pareto efficient multiobjective choice recommendation</span><a class="headerlink" href="#unopposed5" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -2288,7 +2288,7 @@ confidence level <em>alpha</em> %, if</p>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Our previous <em>robust best choice recommendation</em> (<em>p2</em> and <em>p4</em>, see <a class="reference internal" href="#robstdstrictog"><span class="std std-numref">Fig. 85</span></a>) remains, in this example here, <strong>stable</strong>. We recover indeed the best choice recommendation [‘p2’, ‘p4’, ‘p7’] (see <a class="reference internal" href="#unopposed5"><span class="std std-numref">Listing 93</span></a> Line 6). Yet, notice that decision alternative <em>p7</em> appears to be at the same time a potential <em>best</em> as well as a potential <em>worst</em> choice recommendation (see Line 13), a consequence of <em>p7</em> being completely <em>incomparable</em> to the other decision alternatives when restricting the comparability to only unopposed outranking situations.</p>
+<p>Our previous <em>robust best choice recommendation</em> (<em>p2</em> and <em>p4</em>, see <a class="reference internal" href="#robstdstrictog"><span class="std std-numref">Fig. 85</span></a>) remains, in this example here, <strong>stable</strong>. We recover indeed the best choice recommendation [‘p2’, ‘p4’, ‘p7’] (see <a class="reference internal" href="#unopposed5"><span class="std std-numref">Listing 93</span></a> Line 6). Yet, notice that decision alternative <em>p7</em> appears to be at the same time a potential <em>best</em> as well as a potential <em>worst</em> choice recommendation (see Line 13), a consequence of <em>p7</em> being completely <em>incomparable</em> to the other decision alternatives when restricting the comparability to only unopposed strict outranking situations.</p>
 <p>We may visualize this kind of <strong>Pareto efficient</strong> result in <a class="reference internal" href="#unopdigraph"><span class="std std-numref">Fig. 87</span></a> below.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">uopg</span><span class="p">))</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;unopDigraph&#39;</span><span class="p">,</span>\
 <span class="go">                             bestChoice = [&#39;p2&#39;, &#39;p4&#39;],\</span>
@@ -2911,7 +2911,7 @@ confidence level <em>alpha</em> %, if</p>
 </li>
 <li><a class="reference internal" href="#on-unopposed-outrankings-with-multiple-decision-objectives">On unopposed outrankings with multiple decision objectives</a><ul>
 <li><a class="reference internal" href="#characterising-unopposed-multiobjective-outranking-situations">Characterising unopposed multiobjective outranking situations</a></li>
-<li><a class="reference internal" href="#computing-multiobjective-pareto-efficient-choice-sets">Computing multiobjective <em>Pareto</em> efficient choice sets</a></li>
+<li><a class="reference internal" href="#computing-pareto-efficient-multiobjective-choices">Computing <em>Pareto</em> efficient multiobjective  choices</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#two-stage-elections-with-multipartisan-primary-selection">Two-stage elections with multipartisan primary selection</a><ul>

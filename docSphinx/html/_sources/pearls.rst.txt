@@ -1678,14 +1678,14 @@ When fixed proportional criteria significances per objective are given, these ou
 
 This gives way for computing multiobjective **Pareto efficient** choice recommendations. 
 
-Computing multiobjective *Pareto* efficient choice sets
-.......................................................
+Computing *Pareto* efficient multiobjective  choices
+....................................................
 
 Indeed, best choice recommendations, computed from an *unopposed multiobjective* outranking digraph, will in fact deliver **Pareto efficient** choices. 
 
 .. code-block:: pycon
    :linenos:
-   :caption: Multiobjective Pareto efficient choice recommendation
+   :caption: Pareto efficient multiobjective choice recommendation
    :name: unOpposed5
 
    >>> uopg.showBestChoiceRecommendation()
@@ -1707,7 +1707,7 @@ Indeed, best choice recommendations, computed from an *unopposed multiobjective*
       covered (%)         : 33.33
       determinateness (%) : 50.00
 
-Our previous *robust best choice recommendation* (*p2* and *p4*, see :numref:`robStdStrictOG`) remains, in this example here, **stable**. We recover indeed the best choice recommendation ['p2', 'p4', 'p7'] (see :numref:`unOpposed5` Line 6). Yet, notice that decision alternative *p7* appears to be at the same time a potential *best* as well as a potential *worst* choice recommendation (see Line 13), a consequence of *p7* being completely *incomparable* to the other decision alternatives when restricting the comparability to only unopposed outranking situations. 
+Our previous *robust best choice recommendation* (*p2* and *p4*, see :numref:`robStdStrictOG`) remains, in this example here, **stable**. We recover indeed the best choice recommendation ['p2', 'p4', 'p7'] (see :numref:`unOpposed5` Line 6). Yet, notice that decision alternative *p7* appears to be at the same time a potential *best* as well as a potential *worst* choice recommendation (see Line 13), a consequence of *p7* being completely *incomparable* to the other decision alternatives when restricting the comparability to only unopposed strict outranking situations. 
 
 We may visualize this kind of **Pareto efficient** result in :numref:`unopDigraph` below.
 

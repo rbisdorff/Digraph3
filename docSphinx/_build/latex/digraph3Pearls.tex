@@ -58,7 +58,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{October 27, 2020}
+\date{October 28, 2020}
 \release{3.8-3600+}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1933,7 +1933,7 @@ For concluding, let us mention that it is precisely again our bipolar\sphinxhyph
 \phantomsection\label{\detokenize{pearls:id59}}{\hyperref[\detokenize{pearls:characterising-unopposed-multiobjective-outranking-situations}]{\sphinxcrossref{Characterising unopposed multiobjective outranking situations}}}
 
 \item {} 
-\phantomsection\label{\detokenize{pearls:id60}}{\hyperref[\detokenize{pearls:computing-multiobjective-pareto-efficient-choice-sets}]{\sphinxcrossref{Computing multiobjective \sphinxstyleemphasis{Pareto} efficient choice sets}}}
+\phantomsection\label{\detokenize{pearls:id60}}{\hyperref[\detokenize{pearls:computing-pareto-efficient-multiobjective-choices}]{\sphinxcrossref{Computing \sphinxstyleemphasis{Pareto} efficient multiobjective  choices}}}
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -2069,10 +2069,10 @@ When fixed proportional criteria significances per objective are given, these ou
 This gives way for computing multiobjective \sphinxstylestrong{Pareto efficient} choice recommendations.
 
 
-\subsection{Computing multiobjective \sphinxstyleemphasis{Pareto} efficient choice sets}
-\label{\detokenize{pearls:computing-multiobjective-pareto-efficient-choice-sets}}
+\subsection{Computing \sphinxstyleemphasis{Pareto} efficient multiobjective  choices}
+\label{\detokenize{pearls:computing-pareto-efficient-multiobjective-choices}}
 Indeed, best choice recommendations, computed from an \sphinxstyleemphasis{unopposed multiobjective} outranking digraph, will in fact deliver \sphinxstylestrong{Pareto efficient} choices.
-\sphinxSetupCaptionForVerbatim{Multiobjective Pareto efficient choice recommendation}
+\sphinxSetupCaptionForVerbatim{Pareto efficient multiobjective choice recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:unopposed5}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uopg}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
@@ -2095,7 +2095,7 @@ Indeed, best choice recommendations, computed from an \sphinxstyleemphasis{unopp
 \PYG{g+go}{   determinateness (\PYGZpc{}) : 50.00}
 \end{sphinxVerbatim}
 
-Our previous \sphinxstyleemphasis{robust best choice recommendation} (\sphinxstyleemphasis{p2} and \sphinxstyleemphasis{p4}, see \hyperref[\detokenize{pearls:robstdstrictog}]{Fig.\@ \ref{\detokenize{pearls:robstdstrictog}}}) remains, in this example here, \sphinxstylestrong{stable}. We recover indeed the best choice recommendation {[}‘p2’, ‘p4’, ‘p7’{]} (see \hyperref[\detokenize{pearls:unopposed5}]{Listing \ref{\detokenize{pearls:unopposed5}}} Line 6). Yet, notice that decision alternative \sphinxstyleemphasis{p7} appears to be at the same time a potential \sphinxstyleemphasis{best} as well as a potential \sphinxstyleemphasis{worst} choice recommendation (see Line 13), a consequence of \sphinxstyleemphasis{p7} being completely \sphinxstyleemphasis{incomparable} to the other decision alternatives when restricting the comparability to only unopposed outranking situations.
+Our previous \sphinxstyleemphasis{robust best choice recommendation} (\sphinxstyleemphasis{p2} and \sphinxstyleemphasis{p4}, see \hyperref[\detokenize{pearls:robstdstrictog}]{Fig.\@ \ref{\detokenize{pearls:robstdstrictog}}}) remains, in this example here, \sphinxstylestrong{stable}. We recover indeed the best choice recommendation {[}‘p2’, ‘p4’, ‘p7’{]} (see \hyperref[\detokenize{pearls:unopposed5}]{Listing \ref{\detokenize{pearls:unopposed5}}} Line 6). Yet, notice that decision alternative \sphinxstyleemphasis{p7} appears to be at the same time a potential \sphinxstyleemphasis{best} as well as a potential \sphinxstyleemphasis{worst} choice recommendation (see Line 13), a consequence of \sphinxstyleemphasis{p7} being completely \sphinxstyleemphasis{incomparable} to the other decision alternatives when restricting the comparability to only unopposed strict outranking situations.
 
 We may visualize this kind of \sphinxstylestrong{Pareto efficient} result in \hyperref[\detokenize{pearls:unopdigraph}]{Fig.\@ \ref{\detokenize{pearls:unopdigraph}}} below.
 
