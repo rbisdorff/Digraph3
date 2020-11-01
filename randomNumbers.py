@@ -20,7 +20,7 @@ Copyright (C) 2014-2020  Raymond Bisdorff
 """
 #######################
 
-__version__ = "Branch: 3.8 $"
+__version__ = "Branch: 3.9 $"
 
 class IncrementalQuantilesEstimator(object):
     """

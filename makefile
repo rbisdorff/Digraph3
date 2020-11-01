@@ -1,6 +1,6 @@
 ## makefile for digraphs module installation
-## R Bisdorff July 2018
-## version 3.7
+## R Bisdorff Nov 2020
+## version 3.9
 ########################
 PYTHON=python3
 NOSETESTS=nosetests
@@ -12,7 +12,7 @@ CFLAGS=-Wall -O3
 modules = arithmetics.py digraphs.py digraphsTools.py graphs.py linearOrders.py outrankingDigraphs.py performanceQuantiles.py perfTabs.py randomDigraphs.py randomNumbers.py randomPerfTabs.py sortingDigraphs.py sparseOutrankingDigraphs.py transitiveDigraphs.py votingProfiles.py xmcda.py
 
 readme:
-		echo -n " Digraph3 python3 modules' installer \n (c) R Bisdorff 2013-2014 University of Luxembourg\n Usage: \n ..> make install # installs in Python3, Python3.3 and Python3.4 (Linux, Mac OS)\n ..> make tests # runs the nose tests\n ..> make verbosetests # runs the verbose nose tests\n ..> make pTests # runs all available nose tests with GNU parallel\n\n Technical documentation available here:\n http://digraph3.readthedocs.io/en/latest/ or here:\n http://leopold-loewenheim.uni.lu/docDigraph3/ \n"
+		echo -n " Digraph3 python3 modules' installer \n (c) R Bisdorff 2013-2014 University of Luxembourg\n Usage: \n ..> make install # installs in Python3+ (Linux, Mac OS)\n ..> make tests # runs the nose tests\n ..> make verbosetests # runs the verbose nose tests\n ..> make pTests # runs all available nose tests with GNU parallel\n\n Technical documentation available here:\n http://digraph3.readthedocs.io/en/latest/ or here:\n http://leopold-loewenheim.uni.lu/docDigraph3/ \n"
 sphinx:
 		(cd docSphinx; \
 		${SPHINX} -Ea . html/ )

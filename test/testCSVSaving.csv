@@ -1,6 +1,6 @@
 "criteria","name","weight","scale","prefDir","thresholds","a1","a2","a3","a4","a5","a6","a7"
-"b1","random cardinal benefit criterion","2.0","(0.0, 100.0)","max","OrderedDict([('ind', (Decimal('1.4439627699664568'), Decimal('0'))), ('pref', (Decimal('1.83'), Decimal('0'))), ('veto', (Decimal('55.20436124530483'), Decimal('0')))])",81.54,80.65,78.82,77.34,63.29,25.50,41.14
-"b2","random ordinal benefit criterion","2.0","(0, 10)","max","OrderedDict()",8.00,7.00,8.00,8.00,6.00,1.00,5.00
-"b3","random cardinal benefit criterion","2.0","(0.0, 100.0)","max","OrderedDict([('ind', (Decimal('2.2114487928733966'), Decimal('0'))), ('pref', (Decimal('4.17'), Decimal('0'))), ('veto', (Decimal('56.95470381227097'), Decimal('0')))])",54.93,50.63,77.19,73.02,52.85,16.32,24.85
-"c1","random cardinal cost criterion","-3.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('3.2014190595041025'), Decimal('0'))), ('pref', (Decimal('3.98'), Decimal('0'))), ('veto', (Decimal('65.16583977154751'), Decimal('0')))])",85.10,81.12,81.73,76.47,45.06,67.67,16.77
-"c2","random cardinal cost criterion","-3.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('4.616830622343956'), Decimal('0'))), ('pref', (Decimal('5.33'), Decimal('0'))), ('veto', (Decimal('68.8450166458678'), Decimal('0')))])",69.88,80.76,82.10,18.88,86.93,28.22,13.55
+"b1","random ordinal benefit criterion","1.0","(0, 10)","max","OrderedDict()",2.00,7.00,7.00,3.00,7.00,4.00,2.00
+"b2","random ordinal benefit criterion","1.0","(0, 10)","max","OrderedDict()",1.00,5.00,7.00,4.00,3.00,4.00,5.00
+"b3","random ordinal benefit criterion","1.0","(0, 10)","max","OrderedDict()",0.00,6.00,5.00,2.00,5.00,2.00,5.00
+"b4","random cardinal benefit criterion","1.0","(0.0, 100.0)","max","OrderedDict([('ind', (Decimal('1.6128975857467929'), Decimal('0'))), ('pref', (Decimal('2.06'), Decimal('0'))), ('veto', (Decimal('35.26245806872082'), Decimal('0')))])",72.89,56.23,49.08,47.45,46.10,58.29,82.63
+"c1","random ordinal cost criterion","-4.0","(0, 10)","min","OrderedDict()",8.00,8.00,7.00,4.00,3.00,3.00,6.00

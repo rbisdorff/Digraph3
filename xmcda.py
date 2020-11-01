@@ -11,7 +11,7 @@ Copyright (C) 2016-2020  Raymond Bisdorff
 
 """
 #######################
-__version__ = "Branch: 3.8 $"
+__version__ = "Branch: 3.9 $"
 
 """
 XMCDA 2.0 xsl style sheets and XMCDA save and show method

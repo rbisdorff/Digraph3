@@ -21,7 +21,7 @@ Copyright (C) 2016-2020 Raymond Bisdorff
 
 """
 ###################################
-__version__ = "Branch: 3.8 $"
+__version__ = "Branch: 3.9 $"
 
 #from digraphs import *
 #from perfTabs import *

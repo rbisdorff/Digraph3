@@ -13,7 +13,7 @@ Copyright (C) 2011-2020  Raymond Bisdorff
 """
 #######################
 
-__version__ = "$Revision: 1.18 $"
+__version__ = "$Revision: Py39 $"
 # $Source: /home/cvsroot/Digraph/linearOrders.py,v $
 
 from digraphsTools import *

@@ -13,7 +13,7 @@ Copyright (C) 2011-2020  Raymond Bisdorff
 """
 #######################
 
-__version__ = "$Revision: 1.37 $"
+__version__ = "$Revision: Python 3.9$"
 # $Source: /home/cvsroot/Digraph/perfTabs.py,v $
 
 from perfTabs import *
@@ -7063,7 +7063,8 @@ class _XMCDAPerformanceTableau(PerformanceTableau):
         xmcdaPerformanceTableau = ElementTree.parse(fo).getroot()
         # get description
         description = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('caseReference').getchildren()]:
+        #for elem in [x for x in xmcdaPerformanceTableau.find('caseReference').getchildren()]:
+        for elem in [x for x in xmcdaPerformanceTableau.find('caseReference')]:
             if elem.tag == 'bibliography':
                 description[elem.tag] = {'description': {'subSubTitle': 'Bibliography'}}
                 i = 0
@@ -7087,7 +7088,8 @@ class _XMCDAPerformanceTableau(PerformanceTableau):
             pass
         # get method Data
         parameter = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('methodData').find('parameters').getchildren()]:
+        #for elem in [x for x in xmcdaPerformanceTableau.find('methodData').find('parameters').getchildren()]:
+        for elem in [x for x in xmcdaPerformanceTableau.find('methodData').find('parameters')]:
             tag = elem.find('name').text
             try:
                 value = elem.find('value').find('label').text
@@ -7101,7 +7103,8 @@ class _XMCDAPerformanceTableau(PerformanceTableau):
         actions = {}
         # get alternatives' description
         description = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('alternatives').find('description').getchildren()]:
+        #for elem in [x for x in xmcdaPerformanceTableau.find('alternatives').find('description').getchildren()]:
+        for elem in [x for x in xmcdaPerformanceTableau.find('alternatives').find('description')]:
             description[elem.tag] = elem.text
         self.actionsDescription = description
         # get alternatives
@@ -7115,13 +7118,15 @@ class _XMCDAPerformanceTableau(PerformanceTableau):
                 Active = True
             if Active:
                 actions[x.attrib['id']] = {}
-                for elem in [y for y in x.find('description').getchildren()]:
+                #for elem in [y for y in x.find('description').getchildren()]:
+                for elem in [y for y in x.find('description')]:
                     actions[x.attrib['id']][elem.tag] = elem.text
         self.actions = actions
         criteria = {}
         # get criteria' description
         description = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('criteria').find('description').getchildren()]:
+        #for elem in [x for x in xmcdaPerformanceTableau.find('criteria').find('description').getchildren()]:
+        for elem in [x for x in xmcdaPerformanceTableau.find('criteria').find('description')]:
             description[elem.tag] = elem.text
         self.criteriaDescription = description
         ## get criteria
@@ -7136,7 +7141,8 @@ class _XMCDAPerformanceTableau(PerformanceTableau):
                 Active = True
             if Active:
                 criteria[g.attrib['id']] = {}
-                for elem in [y for y in g.find('description').getchildren()]:
+                #for elem in [y for y in g.find('description').getchildren()]:
+                for elem in [y for y in g.find('description')]:
                     criteria[g.attrib['id']][elem.tag] = elem.text
                 criteria[g.attrib['id']]['scale'] = {}
                 Min = Decimal(g.find('criterionFunction').find('scale').find('quantitative').find('min').find('real').text)
@@ -7176,7 +7182,8 @@ class _XMCDAPerformanceTableau(PerformanceTableau):
         self.criteria = criteria
         # get evaluations' description
         description = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('performanceTable').find('description').getchildren()]:
+        #for elem in [x for x in xmcdaPerformanceTableau.find('performanceTable').find('description').getchildren()]:
+        for elem in [x for x in xmcdaPerformanceTableau.find('performanceTable').find('description')]:
             description[elem.tag] = elem.text
         self.evaluationDescription = description
         # get evaluations
@@ -7247,7 +7254,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
             self.name = 'temp'
         # get description
         description = {}
-        for elem in [x for x in XMCDA.find('projectReference').getchildren()]:
+        #for elem in [x for x in XMCDA.find('projectReference').getchildren()]:
+        for elem in [x for x in XMCDA.find('projectReference')]:
             if elem.tag == 'bibliography':
                 description[elem.tag] = {'description': {'subSubTitle': 'Bibliography'}}
                 i = 0
@@ -7287,7 +7295,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
         actions = OrderedDict()
         # get alternatives' description
         description = {}
-        for elem in [x for x in XMCDA.find('alternatives').find('description').getchildren()]:
+        #for elem in [x for x in XMCDA.find('alternatives').find('description').getchildren()]:
+        for elem in [x for x in XMCDA.find('alternatives').find('description')]:
             description[elem.tag] = elem.text
         self.actionsDescription = description
         # get alternatives
@@ -7303,7 +7312,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                 actions[x.attrib['id']] = {}
                 actions[x.attrib['id']]['name'] = x.attrib['name']
                 try:
-                    for elem in [y for y in x.find('description').getchildren()]:
+                    #for elem in [y for y in x.find('description').getchildren()]:
+                    for elem in [y for y in x.find('description')]:
                         actions[x.attrib['id']][elem.tag] = elem.text
                 except:
                     pass
@@ -7314,7 +7324,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
             # get objectives' description
             if XMCDA.find('objectives').find('description') != None:
                 description = {}
-                for elem in [x for x in XMCDA.find('criteria').find('description').getchildren()]:
+                #for elem in [x for x in XMCDA.find('criteria').find('description').getchildren()]:
+                for elem in [x for x in XMCDA.find('criteria').find('description')]:
                     description[elem.tag] = elem.text
                 self.objectivesDescription = description
             ## get objectives
@@ -7333,7 +7344,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                     #name
                     objectives[obj.attrib['id']]['name'] =obj.attrib['name']
                     #description
-                    for elem in [y for y in obj.find('description').getchildren()]:
+                    #for elem in [y for y in obj.find('description').getchildren()]:
+                    for elem in [y for y in obj.find('description')]:
                         objectives[obj.attrib['id']][elem.tag] = elem.text
                     if obj.find('weight') != None:
                         try:
@@ -7350,7 +7362,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
         # get criteria' description
         if XMCDA.find('criteria').find('description') != None:
             description = {}
-            for elem in [x for x in XMCDA.find('criteria').find('description').getchildren()]:
+            #for elem in [x for x in XMCDA.find('criteria').find('description').getchildren()]:
+            for elem in [x for x in XMCDA.find('criteria').find('description')]:
                 description[elem.tag] = elem.text
             self.criteriaDescription = description
         ## get criteria
@@ -7369,7 +7382,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                 #name
                 criteria[g.attrib['id']]['name'] =g.attrib['name']
                 #description
-                for elem in [y for y in g.find('description').getchildren()]:
+                #for elem in [y for y in g.find('description').getchildren()]:
+                for elem in [y for y in g.find('description')]:
                     criteria[g.attrib['id']][elem.tag] = elem.text
                 try:
                     criteria[g.attrib['id']]['objective'] = g.find('criterionObjective').text
@@ -7460,7 +7474,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
         
         # get evaluations' description
         description = {}
-        for elem in [x for x in XMCDA.find('performanceTable').find('description').getchildren()]:
+        #for elem in [x for x in XMCDA.find('performanceTable').find('description').getchildren()]:
+        for elem in [x for x in XMCDA.find('performanceTable').find('description')]:
             description[elem.tag] = elem.text
         self.evaluationDescription = description
         # get evaluations

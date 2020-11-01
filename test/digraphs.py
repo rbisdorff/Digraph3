@@ -13224,7 +13224,8 @@ class _XMCDADigraph(Digraph):
                 print("Error: file %s{.xml|.xmcda}  not found" % (fileName))
         XMCDA = ElementTree.parse(fo).getroot()
         description = {}
-        for elem in [x for x in XMCDA.find('caseReference').getchildren()]:
+        #for elem in [x for x in XMCDA.find('caseReference').getchildren()]:
+        for elem in [x for x in XMCDA.find('caseReference')]:
             description[elem.tag] = elem.text
         self.description = description
         try:
@@ -13239,8 +13240,10 @@ class _XMCDADigraph(Digraph):
             self.reference = description['comment']
         except:
             self.reference = 'XMCDA 1.0 Digraph input method.'        
-        Min = Decimal(XMCDA.find('relationOnAlternatives').find('valuationDomain').find('minimum').getchildren().pop().text)
-        Max = Decimal(XMCDA.find('relationOnAlternatives').find('valuationDomain').find('maximum').getchildren().pop().text)
+        #Min = Decimal(XMCDA.find('relationOnAlternatives').find('valuationDomain').find('minimum').getchildren().pop().text)
+        #Max = Decimal(XMCDA.find('relationOnAlternatives').find('valuationDomain').find('maximum').getchildren().pop().text)
+        Min = Decimal(XMCDA.find('relationOnAlternatives').find('valuationDomain').find('minimum').pop().text)
+        Max = Decimal(XMCDA.find('relationOnAlternatives').find('valuationDomain').find('maximum').pop().text)
         Med = Min + ((Max - Min)/Decimal('2.0'))
         valuationdomain = {}
         valuationdomain['min'] = Min
@@ -13251,7 +13254,8 @@ class _XMCDADigraph(Digraph):
         for alternative in XMCDA.find('alternatives').findall('alternative'):
             id = alternative.attrib['id']
             actions[id] = {}
-            for elem in [x for x in alternative.find('description').getchildren()]:
+            #for elem in [x for x in alternative.find('description').getchildren()]:
+            for elem in [x for x in alternative.find('description')]:
                 actions[id][elem.tag] = elem.text    
         self.actions = actions
         relation = {}
@@ -13320,7 +13324,8 @@ class XMCDA2Digraph(Digraph):
             self.name ='temp'
 
         description = {}
-        for elem in [x for x in XMCDA.find('projectReference').getchildren()]:
+        #for elem in [x for x in XMCDA.find('projectReference').getchildren()]:
+        for elem in [x for x in XMCDA.find('projectReference')]:
             description[elem.tag] = elem.text
         self.description = description
         try:
@@ -13332,8 +13337,10 @@ class XMCDA2Digraph(Digraph):
         except:
             self.reference = 'XMCDA 1.0 Digraph input method.'
 
-        Min = Decimal(XMCDA.find('alternativesComparisons').find('valuation').find('quantitative').find('minimum').getchildren().pop().text)
-        Max = Decimal(XMCDA.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').getchildren().pop().text)
+        #Min = Decimal(XMCDA.find('alternativesComparisons').find('valuation').find('quantitative').find('minimum').getchildren().pop().text)
+        #Max = Decimal(XMCDA.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').getchildren().pop().text)
+        Min = Decimal(XMCDA.find('alternativesComparisons').find('valuation').find('quantitative').find('minimum').find('real').text)
+        Max = Decimal(XMCDA.find('alternativesComparisons').find('valuation').find('quantitative').find('maximum').find('real').text)
         Med = Min + ((Max - Min)/Decimal('2.0'))
         valuationdomain = {}
         valuationdomain['min'] = Min
@@ -13347,9 +13354,11 @@ class XMCDA2Digraph(Digraph):
             id = alternative.attrib['id']
             actions[id] = {}
             actions[id]['name'] = alternative.attrib['name']
-            for elem in [x for x in alternative.find('description').getchildren()]:
+            #for elem in [x for x in alternative.find('description').getchildren()]:
+            for elem in [x for x in alternative.find('description')]:
                 actions[id][elem.tag] = elem.text
         self.actions = actions
+        self.order = len(actions)
 
 
         relation = {}

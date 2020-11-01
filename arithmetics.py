@@ -20,7 +20,7 @@ from digraphs import Digraph
 from decimal import Decimal
 from collections import OrderedDict
 
-__version__ = "Branch: 3.8 $"
+__version__ = "Branch: 3.9 $"
 
 """
 

@@ -31,271 +31,535 @@
 </actions>
 <criteria>
 <comment>List of performance criteria </comment>
-<criterion id="g1" category="performance">
+<criterion id="g01" category="performance">
 <name>random criterion</name>
 <comment>Evaluation generator: uniform, 0.00, 100.00</comment>
 <scale><min>0.00</min><max>100.00</max></scale>
 <thresholds>
-<indifference>(1.30,0.00)</indifference>
-<preference>(9.82,0.00)</preference>
-<weakVeto>(71.27,0.00)</weakVeto>
-<veto>(92.20,0.00)</veto>
-</thresholds><weight>5.00</weight></criterion>
-<criterion id="g2" category="performance">
-<name>random criterion</name>
-<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
-<scale><min>0.00</min><max>100.00</max></scale>
-<thresholds>
-<indifference>(14.24,0.00)</indifference>
-<preference>(17.05,0.00)</preference>
-<weakVeto>(97.79,0.00)</weakVeto>
-<veto>(99.68,0.00)</veto>
-</thresholds><weight>3.00</weight></criterion>
-<criterion id="g3" category="performance">
-<name>random criterion</name>
-<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
-<scale><min>0.00</min><max>100.00</max></scale>
-<thresholds>
-<indifference>(0.32,0.00)</indifference>
-<preference>(33.07,0.00)</preference>
-<weakVeto>(72.95,0.00)</weakVeto>
-<veto>(81.03,0.00)</veto>
-</thresholds><weight>3.00</weight></criterion>
-<criterion id="g4" category="performance">
-<name>random criterion</name>
-<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
-<scale><min>0.00</min><max>100.00</max></scale>
-<thresholds>
-<indifference>(5.01,0.00)</indifference>
-<preference>(18.93,0.00)</preference>
-<weakVeto>(98.04,0.00)</weakVeto>
-<veto>(99.06,0.00)</veto>
+<indifference>(18.90,0.00)</indifference>
+<preference>(19.20,0.00)</preference>
+<weakVeto>(99.54,0.00)</weakVeto>
+<veto>(99.66,0.00)</veto>
 </thresholds><weight>1.00</weight></criterion>
-<criterion id="g5" category="performance">
+<criterion id="g02" category="performance">
 <name>random criterion</name>
 <comment>Evaluation generator: uniform, 0.00, 100.00</comment>
 <scale><min>0.00</min><max>100.00</max></scale>
 <thresholds>
-<indifference>(10.00,0.00)</indifference>
-<preference>(32.84,0.00)</preference>
-<weakVeto>(95.77,0.00)</weakVeto>
-<veto>(98.78,0.00)</veto>
-</thresholds><weight>2.00</weight></criterion>
-<criterion id="g6" category="performance">
-<name>random criterion</name>
-<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
-<scale><min>0.00</min><max>100.00</max></scale>
-<thresholds>
-<indifference>(14.27,0.00)</indifference>
-<preference>(21.10,0.00)</preference>
-<weakVeto>(93.79,0.00)</weakVeto>
-<veto>(97.68,0.00)</veto>
-</thresholds><weight>3.00</weight></criterion>
-<criterion id="g7" category="performance">
-<name>random criterion</name>
-<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
-<scale><min>0.00</min><max>100.00</max></scale>
-<thresholds>
-<indifference>(7.56,0.00)</indifference>
-<preference>(22.70,0.00)</preference>
-<weakVeto>(78.63,0.00)</weakVeto>
-<veto>(82.64,0.00)</veto>
+<indifference>(11.07,0.00)</indifference>
+<preference>(14.59,0.00)</preference>
+<weakVeto>(95.54,0.00)</weakVeto>
+<veto>(98.62,0.00)</veto>
 </thresholds><weight>1.00</weight></criterion>
-<criterion id="g8" category="performance">
+<criterion id="g03" category="performance">
 <name>random criterion</name>
 <comment>Evaluation generator: uniform, 0.00, 100.00</comment>
 <scale><min>0.00</min><max>100.00</max></scale>
 <thresholds>
-<indifference>(1.21,0.00)</indifference>
-<preference>(6.25,0.00)</preference>
-<weakVeto>(95.00,0.00)</weakVeto>
-<veto>(97.02,0.00)</veto>
+<indifference>(0.39,0.00)</indifference>
+<preference>(30.10,0.00)</preference>
+<weakVeto>(93.10,0.00)</weakVeto>
+<veto>(97.27,0.00)</veto>
+</thresholds><weight>1.00</weight></criterion>
+<criterion id="g04" category="performance">
+<name>random criterion</name>
+<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
+<scale><min>0.00</min><max>100.00</max></scale>
+<thresholds>
+<indifference>(4.07,0.00)</indifference>
+<preference>(5.03,0.00)</preference>
+<weakVeto>(79.36,0.00)</weakVeto>
+<veto>(99.86,0.00)</veto>
+</thresholds><weight>1.00</weight></criterion>
+<criterion id="g05" category="performance">
+<name>random criterion</name>
+<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
+<scale><min>0.00</min><max>100.00</max></scale>
+<thresholds>
+<indifference>(10.97,0.00)</indifference>
+<preference>(22.87,0.00)</preference>
+<weakVeto>(81.09,0.00)</weakVeto>
+<veto>(87.61,0.00)</veto>
+</thresholds><weight>1.00</weight></criterion>
+<criterion id="g06" category="performance">
+<name>random criterion</name>
+<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
+<scale><min>0.00</min><max>100.00</max></scale>
+<thresholds>
+<indifference>(17.71,0.00)</indifference>
+<preference>(19.61,0.00)</preference>
+<weakVeto>(84.49,0.00)</weakVeto>
+<veto>(92.15,0.00)</veto>
+</thresholds><weight>1.00</weight></criterion>
+<criterion id="g07" category="performance">
+<name>random criterion</name>
+<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
+<scale><min>0.00</min><max>100.00</max></scale>
+<thresholds>
+<indifference>(17.43,0.00)</indifference>
+<preference>(25.88,0.00)</preference>
+<weakVeto>(72.53,0.00)</weakVeto>
+<veto>(93.35,0.00)</veto>
+</thresholds><weight>1.00</weight></criterion>
+<criterion id="g08" category="performance">
+<name>random criterion</name>
+<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
+<scale><min>0.00</min><max>100.00</max></scale>
+<thresholds>
+<indifference>(14.43,0.00)</indifference>
+<preference>(31.62,0.00)</preference>
+<weakVeto>(73.78,0.00)</weakVeto>
+<veto>(92.14,0.00)</veto>
+</thresholds><weight>1.00</weight></criterion>
+<criterion id="g09" category="performance">
+<name>random criterion</name>
+<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
+<scale><min>0.00</min><max>100.00</max></scale>
+<thresholds>
+<indifference>(18.50,0.00)</indifference>
+<preference>(25.54,0.00)</preference>
+<weakVeto>(99.06,0.00)</weakVeto>
+<veto>(99.44,0.00)</veto>
+</thresholds><weight>1.00</weight></criterion>
+<criterion id="g10" category="performance">
+<name>random criterion</name>
+<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
+<scale><min>0.00</min><max>100.00</max></scale>
+<thresholds>
+<indifference>(18.81,0.00)</indifference>
+<preference>(25.44,0.00)</preference>
+<weakVeto>(76.13,0.00)</weakVeto>
+<veto>(79.13,0.00)</veto>
+</thresholds><weight>1.00</weight></criterion>
+<criterion id="g11" category="performance">
+<name>random criterion</name>
+<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
+<scale><min>0.00</min><max>100.00</max></scale>
+<thresholds>
+<indifference>(3.15,0.00)</indifference>
+<preference>(24.24,0.00)</preference>
+<weakVeto>(97.47,0.00)</weakVeto>
+<veto>(99.01,0.00)</veto>
+</thresholds><weight>1.00</weight></criterion>
+<criterion id="g12" category="performance">
+<name>random criterion</name>
+<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
+<scale><min>0.00</min><max>100.00</max></scale>
+<thresholds>
+<indifference>(7.96,0.00)</indifference>
+<preference>(18.63,0.00)</preference>
+<weakVeto>(84.34,0.00)</weakVeto>
+<veto>(96.24,0.00)</veto>
+</thresholds><weight>1.00</weight></criterion>
+<criterion id="g13" category="performance">
+<name>random criterion</name>
+<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
+<scale><min>0.00</min><max>100.00</max></scale>
+<thresholds>
+<indifference>(1.42,0.00)</indifference>
+<preference>(24.35,0.00)</preference>
+<weakVeto>(92.87,0.00)</weakVeto>
+<veto>(98.84,0.00)</veto>
+</thresholds><weight>1.00</weight></criterion>
+<criterion id="g14" category="performance">
+<name>random criterion</name>
+<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
+<scale><min>0.00</min><max>100.00</max></scale>
+<thresholds>
+<indifference>(5.07,0.00)</indifference>
+<preference>(18.55,0.00)</preference>
+<weakVeto>(87.87,0.00)</weakVeto>
+<veto>(95.71,0.00)</veto>
+</thresholds><weight>1.00</weight></criterion>
+<criterion id="g15" category="performance">
+<name>random criterion</name>
+<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
+<scale><min>0.00</min><max>100.00</max></scale>
+<thresholds>
+<indifference>(11.36,0.00)</indifference>
+<preference>(15.98,0.00)</preference>
+<weakVeto>(86.77,0.00)</weakVeto>
+<veto>(98.66,0.00)</veto>
+</thresholds><weight>1.00</weight></criterion>
+<criterion id="g16" category="performance">
+<name>random criterion</name>
+<comment>Evaluation generator: uniform, 0.00, 100.00</comment>
+<scale><min>0.00</min><max>100.00</max></scale>
+<thresholds>
+<indifference>(8.77,0.00)</indifference>
+<preference>(24.08,0.00)</preference>
+<weakVeto>(72.79,0.00)</weakVeto>
+<veto>(94.44,0.00)</veto>
 </thresholds><weight>1.00</weight></criterion>
 </criteria>
 <evaluations>
 <comment>performance table </comment>
 <evaluation>
-<criterionID>g1</criterionID>
+<criterionID>g01</criterionID>
 <performance>
 <actionID>a1</actionID>
-<value>7.76</value>
+<value>64.13</value>
 </performance>
 <performance>
 <actionID>a2</actionID>
-<value>79.31</value>
+<value>56.61</value>
 </performance>
 <performance>
 <actionID>a3</actionID>
-<value>18.47</value>
+<value>58.19</value>
 </performance>
 <performance>
 <actionID>a4</actionID>
-<value>15.07</value>
+<value>52.85</value>
 </performance>
 <performance>
 <actionID>a5</actionID>
-<value>5.94</value>
+<value>26.78</value>
 </performance>
 </evaluation>
 <evaluation>
-<criterionID>g2</criterionID>
+<criterionID>g02</criterionID>
 <performance>
 <actionID>a1</actionID>
-<value>50.52</value>
+<value>84.26</value>
 </performance>
 <performance>
 <actionID>a2</actionID>
-<value>86.56</value>
+<value>29.52</value>
 </performance>
 <performance>
 <actionID>a3</actionID>
-<value>89.83</value>
+<value>34.96</value>
 </performance>
 <performance>
 <actionID>a4</actionID>
-<value>16.39</value>
+<value>9.25</value>
 </performance>
 <performance>
 <actionID>a5</actionID>
-<value>19.09</value>
+<value>77.49</value>
 </performance>
 </evaluation>
 <evaluation>
-<criterionID>g3</criterionID>
+<criterionID>g03</criterionID>
 <performance>
 <actionID>a1</actionID>
-<value>0.18</value>
+<value>0.68</value>
 </performance>
 <performance>
 <actionID>a2</actionID>
-<value>98.53</value>
+<value>58.89</value>
 </performance>
 <performance>
 <actionID>a3</actionID>
-<value>5.08</value>
+<value>62.80</value>
 </performance>
 <performance>
 <actionID>a4</actionID>
-<value>32.72</value>
+<value>21.56</value>
 </performance>
 <performance>
 <actionID>a5</actionID>
-<value>32.64</value>
+<value>61.23</value>
 </performance>
 </evaluation>
 <evaluation>
-<criterionID>g4</criterionID>
+<criterionID>g04</criterionID>
 <performance>
 <actionID>a1</actionID>
-<value>94.99</value>
+<value>58.30</value>
 </performance>
 <performance>
 <actionID>a2</actionID>
-<value>26.00</value>
+<value>79.38</value>
 </performance>
 <performance>
 <actionID>a3</actionID>
-<value>6.64</value>
+<value>74.50</value>
 </performance>
 <performance>
 <actionID>a4</actionID>
-<value>76.24</value>
+<value>19.14</value>
 </performance>
 <performance>
 <actionID>a5</actionID>
-<value>83.38</value>
+<value>16.48</value>
 </performance>
 </evaluation>
 <evaluation>
-<criterionID>g5</criterionID>
+<criterionID>g05</criterionID>
 <performance>
 <actionID>a1</actionID>
-<value>54.86</value>
+<value>67.19</value>
 </performance>
 <performance>
 <actionID>a2</actionID>
-<value>61.96</value>
+<value>84.90</value>
 </performance>
 <performance>
 <actionID>a3</actionID>
-<value>49.99</value>
+<value>81.39</value>
 </performance>
 <performance>
 <actionID>a4</actionID>
-<value>64.10</value>
+<value>32.47</value>
 </performance>
 <performance>
 <actionID>a5</actionID>
-<value>71.08</value>
+<value>10.86</value>
 </performance>
 </evaluation>
 <evaluation>
-<criterionID>g6</criterionID>
+<criterionID>g06</criterionID>
 <performance>
 <actionID>a1</actionID>
-<value>1.18</value>
+<value>58.94</value>
 </performance>
 <performance>
 <actionID>a2</actionID>
-<value>74.63</value>
+<value>69.29</value>
 </performance>
 <performance>
 <actionID>a3</actionID>
-<value>70.18</value>
+<value>25.66</value>
 </performance>
 <performance>
 <actionID>a4</actionID>
-<value>87.30</value>
+<value>26.73</value>
 </performance>
 <performance>
 <actionID>a5</actionID>
-<value>63.02</value>
+<value>22.74</value>
 </performance>
 </evaluation>
 <evaluation>
-<criterionID>g7</criterionID>
+<criterionID>g07</criterionID>
 <performance>
 <actionID>a1</actionID>
-<value>41.29</value>
+<value>62.29</value>
 </performance>
 <performance>
 <actionID>a2</actionID>
-<value>71.63</value>
+<value>10.54</value>
 </performance>
 <performance>
 <actionID>a3</actionID>
-<value>52.32</value>
+<value>2.02</value>
 </performance>
 <performance>
 <actionID>a4</actionID>
-<value>26.72</value>
+<value>28.31</value>
 </performance>
 <performance>
 <actionID>a5</actionID>
-<value>73.87</value>
+<value>39.66</value>
 </performance>
 </evaluation>
 <evaluation>
-<criterionID>g8</criterionID>
+<criterionID>g08</criterionID>
 <performance>
 <actionID>a1</actionID>
-<value>25.97</value>
+<value>35.20</value>
 </performance>
 <performance>
 <actionID>a2</actionID>
-<value>27.11</value>
+<value>86.00</value>
 </performance>
 <performance>
 <actionID>a3</actionID>
-<value>13.45</value>
+<value>48.27</value>
 </performance>
 <performance>
 <actionID>a4</actionID>
-<value>34.69</value>
+<value>56.61</value>
 </performance>
 <performance>
 <actionID>a5</actionID>
-<value>35.88</value>
+<value>22.77</value>
+</performance>
+</evaluation>
+<evaluation>
+<criterionID>g09</criterionID>
+<performance>
+<actionID>a1</actionID>
+<value>92.86</value>
+</performance>
+<performance>
+<actionID>a2</actionID>
+<value>10.45</value>
+</performance>
+<performance>
+<actionID>a3</actionID>
+<value>1.19</value>
+</performance>
+<performance>
+<actionID>a4</actionID>
+<value>82.41</value>
+</performance>
+<performance>
+<actionID>a5</actionID>
+<value>65.90</value>
+</performance>
+</evaluation>
+<evaluation>
+<criterionID>g10</criterionID>
+<performance>
+<actionID>a1</actionID>
+<value>42.19</value>
+</performance>
+<performance>
+<actionID>a2</actionID>
+<value>63.66</value>
+</performance>
+<performance>
+<actionID>a3</actionID>
+<value>14.73</value>
+</performance>
+<performance>
+<actionID>a4</actionID>
+<value>38.07</value>
+</performance>
+<performance>
+<actionID>a5</actionID>
+<value>14.95</value>
+</performance>
+</evaluation>
+<evaluation>
+<criterionID>g11</criterionID>
+<performance>
+<actionID>a1</actionID>
+<value>23.03</value>
+</performance>
+<performance>
+<actionID>a2</actionID>
+<value>14.97</value>
+</performance>
+<performance>
+<actionID>a3</actionID>
+<value>50.45</value>
+</performance>
+<performance>
+<actionID>a4</actionID>
+<value>7.54</value>
+</performance>
+<performance>
+<actionID>a5</actionID>
+<value>11.85</value>
+</performance>
+</evaluation>
+<evaluation>
+<criterionID>g12</criterionID>
+<performance>
+<actionID>a1</actionID>
+<value>56.61</value>
+</performance>
+<performance>
+<actionID>a2</actionID>
+<value>83.07</value>
+</performance>
+<performance>
+<actionID>a3</actionID>
+<value>85.57</value>
+</performance>
+<performance>
+<actionID>a4</actionID>
+<value>72.09</value>
+</performance>
+<performance>
+<actionID>a5</actionID>
+<value>85.19</value>
+</performance>
+</evaluation>
+<evaluation>
+<criterionID>g13</criterionID>
+<performance>
+<actionID>a1</actionID>
+<value>67.67</value>
+</performance>
+<performance>
+<actionID>a2</actionID>
+<value>4.89</value>
+</performance>
+<performance>
+<actionID>a3</actionID>
+<value>37.35</value>
+</performance>
+<performance>
+<actionID>a4</actionID>
+<value>7.91</value>
+</performance>
+<performance>
+<actionID>a5</actionID>
+<value>30.20</value>
+</performance>
+</evaluation>
+<evaluation>
+<criterionID>g14</criterionID>
+<performance>
+<actionID>a1</actionID>
+<value>94.58</value>
+</performance>
+<performance>
+<actionID>a2</actionID>
+<value>15.79</value>
+</performance>
+<performance>
+<actionID>a3</actionID>
+<value>71.47</value>
+</performance>
+<performance>
+<actionID>a4</actionID>
+<value>34.94</value>
+</performance>
+<performance>
+<actionID>a5</actionID>
+<value>5.07</value>
+</performance>
+</evaluation>
+<evaluation>
+<criterionID>g15</criterionID>
+<performance>
+<actionID>a1</actionID>
+<value>80.68</value>
+</performance>
+<performance>
+<actionID>a2</actionID>
+<value>19.70</value>
+</performance>
+<performance>
+<actionID>a3</actionID>
+<value>0.11</value>
+</performance>
+<performance>
+<actionID>a4</actionID>
+<value>87.10</value>
+</performance>
+<performance>
+<actionID>a5</actionID>
+<value>91.67</value>
+</performance>
+</evaluation>
+<evaluation>
+<criterionID>g16</criterionID>
+<performance>
+<actionID>a1</actionID>
+<value>29.14</value>
+</performance>
+<performance>
+<actionID>a2</actionID>
+<value>55.74</value>
+</performance>
+<performance>
+<actionID>a3</actionID>
+<value>2.32</value>
+</performance>
+<performance>
+<actionID>a4</actionID>
+<value>44.10</value>
+</performance>
+<performance>
+<actionID>a5</actionID>
+<value>95.98</value>
 </performance>
 </evaluation>
 </evaluations>
@@ -313,27 +577,27 @@
 <arc>
 <initialActionID>a1</initialActionID>
 <terminalActionID>a2</terminalActionID>
-<value>-1.00</value>
+<value>0.25</value>
 </arc>
 <arc>
 <initialActionID>a1</initialActionID>
 <terminalActionID>a3</terminalActionID>
-<value>-0.37</value>
+<value>0.44</value>
 </arc>
 <arc>
 <initialActionID>a1</initialActionID>
 <terminalActionID>a4</terminalActionID>
-<value>0.16</value>
+<value>0.75</value>
 </arc>
 <arc>
 <initialActionID>a1</initialActionID>
 <terminalActionID>a5</terminalActionID>
-<value>0.21</value>
+<value>0.62</value>
 </arc>
 <arc>
 <initialActionID>a2</initialActionID>
 <terminalActionID>a1</terminalActionID>
-<value>1.00</value>
+<value>0.19</value>
 </arc>
 <arc>
 <initialActionID>a2</initialActionID>
@@ -343,27 +607,27 @@
 <arc>
 <initialActionID>a2</initialActionID>
 <terminalActionID>a3</terminalActionID>
-<value>1.00</value>
+<value>0.56</value>
 </arc>
 <arc>
 <initialActionID>a2</initialActionID>
 <terminalActionID>a4</terminalActionID>
-<value>0.79</value>
+<value>0.50</value>
 </arc>
 <arc>
 <initialActionID>a2</initialActionID>
 <terminalActionID>a5</terminalActionID>
-<value>0.79</value>
+<value>0.19</value>
 </arc>
 <arc>
 <initialActionID>a3</initialActionID>
 <terminalActionID>a1</terminalActionID>
-<value>0.79</value>
+<value>-0.12</value>
 </arc>
 <arc>
 <initialActionID>a3</initialActionID>
 <terminalActionID>a2</terminalActionID>
-<value>-1.00</value>
+<value>0.31</value>
 </arc>
 <arc>
 <initialActionID>a3</initialActionID>
@@ -373,27 +637,27 @@
 <arc>
 <initialActionID>a3</initialActionID>
 <terminalActionID>a4</terminalActionID>
-<value>0.37</value>
+<value>0.44</value>
 </arc>
 <arc>
 <initialActionID>a3</initialActionID>
 <terminalActionID>a5</terminalActionID>
-<value>0.47</value>
+<value>0.38</value>
 </arc>
 <arc>
 <initialActionID>a4</initialActionID>
 <terminalActionID>a1</terminalActionID>
-<value>0.58</value>
+<value>0.06</value>
 </arc>
 <arc>
 <initialActionID>a4</initialActionID>
 <terminalActionID>a2</terminalActionID>
-<value>-0.26</value>
+<value>0.00</value>
 </arc>
 <arc>
 <initialActionID>a4</initialActionID>
 <terminalActionID>a3</terminalActionID>
-<value>0.32</value>
+<value>0.06</value>
 </arc>
 <arc>
 <initialActionID>a4</initialActionID>
@@ -403,27 +667,27 @@
 <arc>
 <initialActionID>a4</initialActionID>
 <terminalActionID>a5</terminalActionID>
-<value>0.84</value>
+<value>0.44</value>
 </arc>
 <arc>
 <initialActionID>a5</initialActionID>
 <terminalActionID>a1</terminalActionID>
-<value>0.37</value>
+<value>-0.12</value>
 </arc>
 <arc>
 <initialActionID>a5</initialActionID>
 <terminalActionID>a2</terminalActionID>
-<value>-0.16</value>
+<value>0.19</value>
 </arc>
 <arc>
 <initialActionID>a5</initialActionID>
 <terminalActionID>a3</terminalActionID>
-<value>0.16</value>
+<value>0.19</value>
 </arc>
 <arc>
 <initialActionID>a5</initialActionID>
 <terminalActionID>a4</terminalActionID>
-<value>0.42</value>
+<value>0.50</value>
 </arc>
 <arc>
 <initialActionID>a5</initialActionID>
@@ -435,50 +699,50 @@
 <comment>Effective and potential weto situations.</comment>
 <veto>
 <arc>
-<initialActionID>a1</initialActionID>
-<terminalActionID>a2</terminalActionID>
-<concordanceDegree>-0.58</concordanceDegree>
+<initialActionID>a3</initialActionID>
+<terminalActionID>a4</terminalActionID>
+<concordanceDegree>0.44</concordanceDegree>
 </arc>
 <vetoSituations>
 <vetoSituation>
-<criterionID>g1</criterionID>
-<performanceDifference>-71.55</performanceDifference>
+<criterionID>g15</criterionID>
+<performanceDifference>-86.99</performanceDifference>
 <vetoCharacteristic>0.00</vetoCharacteristic>
-<comment>potential weak veto</comment>
-</vetoSituation>
-<vetoSituation>
-<criterionID>g3</criterionID>
-<performanceDifference>-98.35</performanceDifference>
-<vetoCharacteristic>1.00</vetoCharacteristic>
-<comment>potential veto</comment>
+<comment>effective weak veto</comment>
 </vetoSituation>
 </vetoSituations>
 </veto>
 <veto>
 <arc>
 <initialActionID>a3</initialActionID>
-<terminalActionID>a2</terminalActionID>
-<concordanceDegree>-0.21</concordanceDegree>
+<terminalActionID>a5</terminalActionID>
+<concordanceDegree>0.38</concordanceDegree>
 </arc>
 <vetoSituations>
 <vetoSituation>
-<criterionID>g3</criterionID>
-<performanceDifference>-93.45</performanceDifference>
-<vetoCharacteristic>1.00</vetoCharacteristic>
-<comment>potential veto</comment>
+<criterionID>g15</criterionID>
+<performanceDifference>-91.56</performanceDifference>
+<vetoCharacteristic>0.00</vetoCharacteristic>
+<comment>effective weak veto</comment>
+</vetoSituation>
+<vetoSituation>
+<criterionID>g16</criterionID>
+<performanceDifference>-93.66</performanceDifference>
+<vetoCharacteristic>0.00</vetoCharacteristic>
+<comment>effective weak veto</comment>
 </vetoSituation>
 </vetoSituations>
 </veto>
 <veto>
 <arc>
 <initialActionID>a5</initialActionID>
-<terminalActionID>a2</terminalActionID>
-<concordanceDegree>-0.16</concordanceDegree>
+<terminalActionID>a1</terminalActionID>
+<concordanceDegree>-0.12</concordanceDegree>
 </arc>
 <vetoSituations>
 <vetoSituation>
-<criterionID>g1</criterionID>
-<performanceDifference>-73.37</performanceDifference>
+<criterionID>g14</criterionID>
+<performanceDifference>-89.51</performanceDifference>
 <vetoCharacteristic>0.00</vetoCharacteristic>
 <comment>potential weak veto</comment>
 </vetoSituation>
@@ -488,26 +752,31 @@
 <choiceRecommendation category="Rubis">
 <comment>List of good and bad choices following the Rubis methodology.</comment>
 <goodChoices>
-<choiceSet independence="1.00" outranking="0.79" outranked="-1.00" determinateness="-89.47" >
+<choiceSet independence="1.00" outranking="0.25" outranked="-0.12" determinateness="-62.50" >
+<choiceActions>
+<actionID>a1</actionID>
+</choiceActions>
+</choiceSet>
+<choiceSet independence="1.00" outranking="0.19" outranked="0.00" determinateness="-59.38" >
 <choiceActions>
 <actionID>a2</actionID>
 </choiceActions>
 </choiceSet>
 </goodChoices>
 <badChoices>
-<choiceSet independence="1.00" outranking="-1.00" outranked="0.37" determinateness="-68.42" >
+<choiceSet independence="1.00" outranking="0.00" outranked="0.44" determinateness="-71.88" >
 <choiceActions>
-<actionID>a1</actionID>
+<actionID>a4</actionID>
 </choiceActions>
 </choiceSet>
-<choiceSet independence="1.00" outranking="-0.16" outranked="0.21" determinateness="-60.53" >
+<choiceSet independence="1.00" outranking="-0.12" outranked="0.19" determinateness="-59.38" >
 <choiceActions>
 <actionID>a5</actionID>
 </choiceActions>
 </choiceSet>
-<choiceSet independence="1.00" outranking="-0.26" outranked="0.16" determinateness="-57.89" >
+<choiceSet independence="1.00" outranking="-0.12" outranked="0.06" determinateness="-53.12" >
 <choiceActions>
-<actionID>a4</actionID>
+<actionID>a3</actionID>
 </choiceActions>
 </choiceSet>
 </badChoices>
