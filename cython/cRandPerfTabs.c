@@ -40537,10 +40537,10 @@ static PyMethodDef __pyx_methods[] = {
 
 static int __pyx_import_star_set(PyObject *o, PyObject* py_name, char *name) {
   static const char* internal_type_names[] = {
+    "__pyx_ctuple_7b3a2____dunderpyx_ctuple_double__dunderand_double__and___dunderpyx_ctuple_double__dunderand_double__and___dunderpyx_ctuple_double__dunderand_double__etc",
+    "__pyx_ctuple_7b3a2____dunderpyx_ctuple_double__dunderand_double__and___dunderpyx_ctuple_double__dunderand_double__and___dunderpyx_ctuple_double__dunderand_double__etc_struct",
     "__pyx_ctuple_Py_ssize_t",
     "__pyx_ctuple_Py_ssize_t_struct",
-    "__pyx_ctuple_a138a____dunderpyx_ctuple_double__dunderand_double__and___dunderpyx_ctuple_double__dunderand_double__and___dunderpyx_ctuple_double__dunderand_double__etc",
-    "__pyx_ctuple_a138a____dunderpyx_ctuple_double__dunderand_double__and___dunderpyx_ctuple_double__dunderand_double__and___dunderpyx_ctuple_double__dunderand_double__etc_struct",
     "__pyx_ctuple_double",
     "__pyx_ctuple_double__and_double",
     "__pyx_ctuple_double__and_double__and_int",

@@ -21,7 +21,7 @@ Digraph3 Advanced Topics
 
    :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
    :URL: https://rbisdorff.github.io/
-   :Version: Revision: Python 3.8
+   :Version: Revision: Python 3.9
    :PDF: http://hdl.handle.net/10993/42390
    :Copyright: R. Bisdorff 2013-2020
 
