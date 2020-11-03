@@ -13,7 +13,7 @@ Copyright (C) 2015-2020  Raymond Bisdorff
 """
 #######################
 
-__version__ = "$Revision: 1.01 $"
+__version__ = "$Revision: py39 $"
 # $Source: /home/cvsroot/Digraph/randomPerfTabs.py,v $
 
 from perfTabs import PerformanceTableau

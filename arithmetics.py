@@ -410,14 +410,14 @@ def zn_units(n,Comments=False):
 
 def computePiDecimals(decimalWordLength=4,nbrOfWords=600,Comments=False):
     """
-    Renders at least decimalWordLenght * nbrOfWords (default: 4x600=2400) decimals of :math:`\pi`.
+    Renders at least decimalWordLenght * nbrOfWords (default: 4x600=2400) decimals of :math:`\\pi`.
     The Python transcription here recodes an original C code of unknown author (see [*]_).
 
     Uses the following infinite Euler series:
     
-         :math:`\pi = 2 * \sum_{n=0}^{\infty} [ (n !) / (1 * 3  * 5 ... * (2n+1)) ].`
+         :math:`\\pi = 2 * \\sum_{n=0}^{\\infty} [ (n !) / (1 * 3  * 5 ... * (2n+1)) ].`
     
-    The series gives a new :math:`\pi` decimal after adding in average 3.32 terms.
+    The series gives a new :math:`\\pi` decimal after adding in average 3.32 terms.
 
         >>> from arithmetics import computePiDecimals
         >>> from time import time
@@ -433,7 +433,7 @@ def computePiDecimals(decimalWordLength=4,nbrOfWords=600,Comments=False):
         >>> print('%.4f' % (t1-t0)+' sec.')
         0.0338 sec.
     
-    .. [*] *Source:* J.-P. Delahaye "*Le fascinant nombre* :math:`\pi`", Pour la science Belin 1997 p.95.
+    .. [*] *Source:* J.-P. Delahaye "*Le fascinant nombre* :math:`\\pi`", Pour la science Belin 1997 p.95.
     """
     na =    decimalWordLength  # maximal string length of a number expressed in base a
     a = 10**na                             # base of the integer computations of the decimals

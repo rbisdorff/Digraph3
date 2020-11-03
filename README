@@ -50,10 +50,10 @@ If the cython C-compiled modules for Big Data are required, the Cython package m
 
 .. /Digraph3$ make tests
 
-runs a nose test suite in the ./test directory ( python3 nose package required  ...$ pip3.5+ install nose )
+runs a pytest suite in the ./test directory ( python3 pytest package required  ...$ pip3 install pytest )
 
 .. /Digraph3$ make verboseTests
-runs a verbose (with stdout not captured) nose test suite 
+runs a verbose (with stdout not captured) pytest suite 
 
 Tutorials and technical documentation of modules, classes and methods are available under the following link:
 

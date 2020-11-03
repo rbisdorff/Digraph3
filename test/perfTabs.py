@@ -13,7 +13,7 @@ Copyright (C) 2011-2020  Raymond Bisdorff
 """
 #######################
 
-__version__ = "$Revision: 1.37 $"
+__version__ = "$Revision: Python 3.9$"
 # $Source: /home/cvsroot/Digraph/perfTabs.py,v $
 
 from perfTabs import *

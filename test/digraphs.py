@@ -22,7 +22,7 @@ Copyright (C) 2006-2019  Raymond Bisdorff
 """
 #######################
 
-__version__ = "Branch: 3.8 $"
+__version__ = "Branch: Python3.9 $"
 
 from digraphsTools import *
 from digraphs import *
@@ -13068,83 +13068,7 @@ class _XMLDigraph24(Digraph):
         else:
             Digraph.showAll(self)
 
-##class _XMLDigraph(Digraph):
-##    """
-##    Specialization of the general Digraph class for reading
-##    stored XML formatted digraphs. Using the inbuilt module
-##    xml.etree (for Python 2.5+).
-##
-##    Param:
-##        fileName (without the extension .xml).
-##    """
-##
-##    def __init__(self,fileName='testsaveXML'):
-##        from xml.etree import ElementTree
-##        fileNameExt = fileName + '.xml'
-##        fo = open(fileNameExt,'r')
-##        digraph = ElementTree.parse(fo).getroot()
-##        self.category = digraph.attrib['category']
-##        self.subcategory = digraph.attrib['subcategory']
-##        self.name = digraph.find('header').find('name').text
-##        self.author = digraph.find('header').find('author').text
-##        self.reference = digraph.find('header').find('reference').text
-##        Min = Decimal(digraph.find('valuationdomain').find('min').text)
-##        Max = Decimal(digraph.find('valuationdomain').find('max').text)
-##        Med = Min + ((Max - Min)/Decimal('2.0'))
-##        valuationdomain = {}
-##        valuationdomain['min'] = Min
-##        valuationdomain['med'] = Med
-##        valuationdomain['max'] = Max
-##        self.valuationdomain = valuationdomain
-##        actions = [action.text for action in digraph.find('nodes').findall('node')]
-##        self.actions = actions
-##        relation = {}
-##        for x in actions:
-##            relation[x] = {}
-##        for arc in digraph.find('relation').findall('arc'):
-##            relation[arc.find('i').text][arc.find('t').text] = Decimal(arc.find('v').text)
-##        self.relation = relation
-##        self.gamma = self.gammaSets()
-##        self.notGamma = self.notGammaSets()
-##
-##class _XMLDigraph(Digraph):
-##    """
-##    Specialization of the general Digraph class for reading
-##    stored XML formatted digraphs. Using the inbuilt module
-##    xml.etree (for Python 2.5+).
-##
-##    Param:
-##        fileName (without the extension .xml).
-##    """
-##
-##    def __init__(self,fileName='testsaveXML'):
-##        from xml.etree import ElementTree
-##        fileNameExt = fileName + '.xml'
-##        fo = open(fileNameExt,'r')
-##        digraph = ElementTree.parse(fo).getroot()
-##        self.category = digraph.attrib['category']
-##        self.subcategory = digraph.attrib['subcategory']
-##        self.name = digraph.find('header').find('name').text
-##        self.author = digraph.find('header').find('author').text
-##        self.reference = digraph.find('header').find('reference').text
-##        Min = Decimal(digraph.find('valuationdomain').find('min').text)
-##        Max = Decimal(digraph.find('valuationdomain').find('max').text)
-##        Med = Min + ((Max - Min)/Decimal('2.0'))
-##        valuationdomain = {}
-##        valuationdomain['min'] = Min
-##        valuationdomain['med'] = Med
-##        valuationdomain['max'] = Max
-##        self.valuationdomain = valuationdomain
-##        actions = [action.text for action in digraph.find('nodes').findall('node')]
-##        self.actions = actions
-##        relation = {}
-##        for x in actions:
-##            relation[x] = {}
-##        for arc in digraph.find('relation').findall('arc'):
-##            relation[arc.find('i').text][arc.find('t').text] = Decimal(arc.find('v').text)
-##        self.relation = relation
-##        self.gamma = self.gammaSets()
-##        self.notGamma = self.notGammaSets()
+#----------------
 
 class CSVDigraph(Digraph):
     """
@@ -13200,6 +13124,8 @@ class CSVDigraph(Digraph):
                 Digraph.showAll(self)
         except:
             Digraph.showAll(self)
+
+#--------
 
 class _XMCDADigraph(Digraph):
     """
@@ -13288,6 +13214,8 @@ class _XMCDADigraph(Digraph):
                 Digraph.showAll(self)
         except:
             Digraph.showAll(self)
+
+#------------
 
 class XMCDA2Digraph(Digraph):
     """

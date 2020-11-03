@@ -1886,7 +1886,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         if hasLPDDenotation:
                             print('   -   ', end=' ')
                         elif hasLatexFormat:
-                            print('$\;-\;$ &', end=' ')
+                            print('$\\;-\\;$ &', end=' ')
                         else:
                             print('  -  ', end=' ')
                     else:

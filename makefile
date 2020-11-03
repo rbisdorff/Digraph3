@@ -3,7 +3,7 @@
 ## version 3.9
 ########################
 PYTHON=python3
-NOSETESTS=nosetests
+PYTEST=pytest
 SPHINX=sphinx-build
 INSTALLDIR=/usr/local/bin
 CC=gcc
@@ -34,193 +34,168 @@ pydocs:
 
 pTests:
 		parallel --gnu cp {}.py test/ ::: arithmetics digraphsTools digraphs outrankingDigraphs perfTabs performanceQuantiles sortingDigraphs votingProfiles linearOrders transitiveDigraphs graphs randomNumbers randomDigraphs randomPerfTabs sparseOutrankingDigraphs xmcda
-		(cd test; parallel --gnu -k ${NOSETESTS} -v ::: noseTests*.py )
+		(cd test; parallel --gnu -k ${PYTEST} -v ::: pytests*)
 
 tests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -v noseTestsArithmetics.py)
-		(cd test; ${NOSETESTS} -v noseTestsDigraph.py)
-		(cd test; ${NOSETESTS} -v noseTestsOutrankingDigraph.py)
-		(cd test; ${NOSETESTS} -v noseTestsPerfTab.py)
-		(cd test; ${NOSETESTS} -v noseTestsRandomPerfTab.py)
-		(cd test; ${NOSETESTS} -v noseTestsSortingDigraph.py)
-		(cd test; ${NOSETESTS} -v noseTestsVotingProfile.py)
-		(cd test; ${NOSETESTS} -v noseTestsLinearOrder.py)
-		(cd test; ${NOSETESTS} -v noseTestsTransitiveDigraphs.py)
-		(cd test; ${NOSETESTS} -v noseTestsGraph.py)
-		(cd test; ${NOSETESTS} -v noseTestsRandomNumbers.py)
-		(cd test; ${NOSETESTS} -v noseTestsRandomDigraph.py)
-		(cd test; ${NOSETESTS} -v noseTestsSparseOutrankingDigraph.py)
-
+		(cd test; ${PYTEST} -v pytests*)
 
 verboseTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -vs noseTestsArithmetics.py)
-		(cd test; ${NOSETESTS} -vs noseTestsDigraph.py)
-		(cd test; ${NOSETESTS} -vs noseTestsOutrankingDigraph.py)
-		(cd test; ${NOSETESTS} -vs noseTestsPerfTab.py)
-		(cd test; ${NOSETESTS} -vs noseTestsRandomPerfTab.py)
-		(cd test; ${NOSETESTS} -vs noseTestsSortingDigraph.py)
-		(cd test; ${NOSETESTS} -vs noseTestsVotingProfile.py)
-		(cd test; ${NOSETESTS} -vs noseTestsLinearOrder.py)
-		(cd test; ${NOSETESTS} -vs noseTestsTransitiveDigraphs.py)
-		(cd test; ${NOSETESTS} -vs noseTestsGraph.py)
-		(cd test; ${NOSETESTS} -vs noseTestsRandomNumbers.py)
-		(cd test; ${NOSETESTS} -vs noseTestsRandomDigraph.py)
-		(cd test; ${NOSETESTS} -vs noseTestsSparseOutrankingDigraph.py)
+		(cd test; ${PYTEST} -vs pytests*)
 
 digraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -v noseTestsDigraph.py)
+		(cd test; ${PYTEST} -v pytestsDigraphs.py)
 
 verboseDigraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -vs noseTestsDigraph.py)
+		(cd test; ${PYTEST} -vs pytestsDigraphs.py)
 
 sparseOutrankingDigraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -v noseTestsSparseOutrankingDigraph.py)
+		(cd test; ${PYTEST} -v pytestsSparseOutrankingDigraphs.py)
 
 verboseSparseOutrankingDigraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -vs noseTestsSparseOutrankingDigraph.py)
+		(cd test; ${PYTEST} -vs pytestsSparseOutrankingDigraphs.py)
 
 graphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -v noseTestsGraph.py)
+		(cd test; ${PYTEST} -v pytestsGraphs.py)
 
 verboseGraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -vs noseTestsGraph.py)
+		(cd test; ${PYTEST} -vs pytestsGraphs.py)
 
 perfTabsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -v noseTestsPerfTab.py)
+		(cd test; ${PYTEST} -v pytestsPerfTab.py)
 
 randomPerfTabsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -v noseTestsRandomPerfTab.py)
+		(cd test; ${PYTEST} -v pytestsRandomPerfTab.py)
 
 verbosePerfTabsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -vs noseTestsPerfTab.py)
+		(cd test; ${PYTEST} -vs pytestsPerfTab.py)
 
 verboseRandomPerfTabsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -vs noseTestsRandomPerfTab.py)
+		(cd test; ${PYTEST} -vs pytestsRandomPerfTab.py)
 
 outrankingDigraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -v noseTestsOutrankingDigraph.py)
+		(cd test; ${PYTEST} -v pytestsOutrankingDigraphs.py)
 
 verboseOutrankingDigraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -vs noseTestsOutrankingDigraph.py)
+		(cd test; ${PYTEST} -vs pytestsOutrankingDigraphs.py)
 
 sortingDigraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -v noseTestsSortingDigraph.py)
+		(cd test; ${PYTEST} -v pytestsSortingDigraphs.py)
 
 verboseSortingDigraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -vs noseTestsSortingDigraph.py)
+		(cd test; ${PYTEST} -vs pytestsSortingDigraphs.py)
 
 votingProfilesTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -v noseTestsVotingProfile.py)
+		(cd test; ${PYTEST} -v pytestsVotingProfile.py)
 
 verboseVotingProfilesTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -vs noseTestsVotingProfile.py)
+		(cd test; ${PYTEST} -vs pytestsVotingProfile.py)
 
 linearOrdersTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -v noseTestsLinearOrder.py)
+		(cd test; ${PYTEST} -v pytestsLinearOrder.py)
 
 verboseLinearOrdersTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -vs noseTestsLinearOrder.py)
+		(cd test; ${PYTEST} -vs pytestsLinearOrder.py)
 
 transitiveDigraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -v noseTestsTransitiveDigraphs.py)
+		(cd test; ${PYTEST} -v pytestsTransitiveDigraphs.py)
 
 verboseTransitiveDigraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -vs noseTestsTransitiveDigraphs.py)
+		(cd test; ${PYTEST} -vs pytestsTransitiveDigraphs.py)
 
 randomDigraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -v noseTestsRandomDigraph.py)
+		(cd test; ${PYTEST} -v pytestsRandomDigraphs.py)
 
 verboseRandomDigraphsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${NOSETESTS} -vs noseTestsRandomDigraph.py)
+		(cd test; ${PYTEST} -vs pytestsRandomDigraphs.py)
 
 randomNumbersTests:
 		cp digraphsTools.py test/
 		cp randomNumbers.py test/
-		(cd test; ${NOSETESTS} -v noseTestsRandomNumbers.py)
+		(cd test; ${PYTEST} -v pytestsRandomNumbers.py)
 
 verboseRandomNumbersTests:
 		cp digraphsTools.py test/
 		cp randomNumbers.py test/
-		(cd test; ${NOSETESTS} -vs noseTestsRandomNumbers.py)
+		(cd test; ${PYTEST} -vs pytestsRandomNumbers.py)
 
 arithmeticsTests:
 		cp arithmetics.py test/
-		(cd test; ${NOSETESTS} -v noseTestsArithmetics.py)
+		(cd test; ${PYTEST} -v pytestsArithmetics.py)
 verboseArithmeticsTests:
 		cp arithmetics.py test/
-		(cd test; ${NOSETESTS} -vs noseTestsArithmetics.py)
+		(cd test; ${PYTEST} -vs pytestsArithmetics.py)
 
 cythonTests:
 		(cd cython; make tests)

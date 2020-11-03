@@ -20,7 +20,7 @@ Copyright (C) 2006-2020  Raymond Bisdorff
 
 """
 
-__version__ = "Revision: Py38"
+__version__ = "Revision: Py39"
 
 from digraphsTools import *
 from digraphs import *
@@ -1886,7 +1886,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         if hasLPDDenotation:
                             print('   -   ', end=' ')
                         elif hasLatexFormat:
-                            print('$\;-\;$ &', end=' ')
+                            print('$\\;-\\;$ &', end=' ')
                         else:
                             print('  -  ', end=' ')
                     else:

@@ -13,7 +13,7 @@ Copyright (C) 2015-2020  Raymond Bisdorff
 """
 #######################
 
-__version__ = "Branch: 3.8 $"
+__version__ = "Branch: 3.9 $"
 
 
 from digraphsTools import *
