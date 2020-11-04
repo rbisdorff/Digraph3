@@ -32,7 +32,7 @@ numfig = True
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest',
               'sphinx.ext.intersphinx','sphinx.ext.imgmath',
               'sphinx.ext.viewcode','sphinx.ext.inheritance_diagram',
-              'sphinx.ext.autosectionlabel','sphinx.ext.graphviz']
+              'sphinx.ext.autosectionlabel']
 
 # inheritance_graph_attrs = dict(rankdir="TB", size='""')
 
