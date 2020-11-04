@@ -55,7 +55,7 @@ runs a verbose (with stdout not captured) pytest suite::
 
      ../Digraph3$ make pTests
 
-runs the nose test suite in multiple processing mode when the GNU `parallel <https://www.gnu.org/software/parallel/>`_ shell tool is installed and multiple cores are detected.
+runs the pytest suite in multiple processing mode when the GNU `parallel <https://www.gnu.org/software/parallel/>`_ shell tool is installed and multiple cores are detected.
 
 **Dependencies**
 
