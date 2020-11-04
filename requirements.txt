@@ -1,2 +1,1 @@
 cython>=0.20
-sphinx>=3.0
