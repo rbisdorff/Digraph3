@@ -42,16 +42,16 @@ If the **cython** (https://cython.org/) C-compiled modules for Big Data applicat
 
      ...$ pip3.5+ install cython
 
-It is recommended to run a nose test suite::
+It is recommended to run a pytest suite::
     
      .../Digraph3$ make tests
 
-Test results are stored in the <Digraph3/test> directory. Notice, the python3 nose package is required::
+Test results are stored in the <Digraph3/test> directory. Notice, the python3 pytest package is required::
 
-      ...$ pip3 install nose
+      ...$ pip3 install pytest
       .../Digraph3$ make verboseTests
 
-runs a verbose (with stdout not captured) nose test suite::
+runs a verbose (with stdout not captured) pytest suite::
 
      ../Digraph3$ make pTests
 

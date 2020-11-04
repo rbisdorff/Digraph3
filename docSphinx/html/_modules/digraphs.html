@@ -13110,83 +13110,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">Digraph</span><span class="o">.</span><span class="n">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-<span class="c1">##class _XMLDigraph(Digraph):</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##    Specialization of the general Digraph class for reading</span>
-<span class="c1">##    stored XML formatted digraphs. Using the inbuilt module</span>
-<span class="c1">##    xml.etree (for Python 2.5+).</span>
-<span class="c1">##</span>
-<span class="c1">##    Param:</span>
-<span class="c1">##        fileName (without the extension .xml).</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##</span>
-<span class="c1">##    def __init__(self,fileName=&#39;testsaveXML&#39;):</span>
-<span class="c1">##        from xml.etree import ElementTree</span>
-<span class="c1">##        fileNameExt = fileName + &#39;.xml&#39;</span>
-<span class="c1">##        fo = open(fileNameExt,&#39;r&#39;)</span>
-<span class="c1">##        digraph = ElementTree.parse(fo).getroot()</span>
-<span class="c1">##        self.category = digraph.attrib[&#39;category&#39;]</span>
-<span class="c1">##        self.subcategory = digraph.attrib[&#39;subcategory&#39;]</span>
-<span class="c1">##        self.name = digraph.find(&#39;header&#39;).find(&#39;name&#39;).text</span>
-<span class="c1">##        self.author = digraph.find(&#39;header&#39;).find(&#39;author&#39;).text</span>
-<span class="c1">##        self.reference = digraph.find(&#39;header&#39;).find(&#39;reference&#39;).text</span>
-<span class="c1">##        Min = Decimal(digraph.find(&#39;valuationdomain&#39;).find(&#39;min&#39;).text)</span>
-<span class="c1">##        Max = Decimal(digraph.find(&#39;valuationdomain&#39;).find(&#39;max&#39;).text)</span>
-<span class="c1">##        Med = Min + ((Max - Min)/Decimal(&#39;2.0&#39;))</span>
-<span class="c1">##        valuationdomain = {}</span>
-<span class="c1">##        valuationdomain[&#39;min&#39;] = Min</span>
-<span class="c1">##        valuationdomain[&#39;med&#39;] = Med</span>
-<span class="c1">##        valuationdomain[&#39;max&#39;] = Max</span>
-<span class="c1">##        self.valuationdomain = valuationdomain</span>
-<span class="c1">##        actions = [action.text for action in digraph.find(&#39;nodes&#39;).findall(&#39;node&#39;)]</span>
-<span class="c1">##        self.actions = actions</span>
-<span class="c1">##        relation = {}</span>
-<span class="c1">##        for x in actions:</span>
-<span class="c1">##            relation[x] = {}</span>
-<span class="c1">##        for arc in digraph.find(&#39;relation&#39;).findall(&#39;arc&#39;):</span>
-<span class="c1">##            relation[arc.find(&#39;i&#39;).text][arc.find(&#39;t&#39;).text] = Decimal(arc.find(&#39;v&#39;).text)</span>
-<span class="c1">##        self.relation = relation</span>
-<span class="c1">##        self.gamma = self.gammaSets()</span>
-<span class="c1">##        self.notGamma = self.notGammaSets()</span>
-<span class="c1">##</span>
-<span class="c1">##class _XMLDigraph(Digraph):</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##    Specialization of the general Digraph class for reading</span>
-<span class="c1">##    stored XML formatted digraphs. Using the inbuilt module</span>
-<span class="c1">##    xml.etree (for Python 2.5+).</span>
-<span class="c1">##</span>
-<span class="c1">##    Param:</span>
-<span class="c1">##        fileName (without the extension .xml).</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##</span>
-<span class="c1">##    def __init__(self,fileName=&#39;testsaveXML&#39;):</span>
-<span class="c1">##        from xml.etree import ElementTree</span>
-<span class="c1">##        fileNameExt = fileName + &#39;.xml&#39;</span>
-<span class="c1">##        fo = open(fileNameExt,&#39;r&#39;)</span>
-<span class="c1">##        digraph = ElementTree.parse(fo).getroot()</span>
-<span class="c1">##        self.category = digraph.attrib[&#39;category&#39;]</span>
-<span class="c1">##        self.subcategory = digraph.attrib[&#39;subcategory&#39;]</span>
-<span class="c1">##        self.name = digraph.find(&#39;header&#39;).find(&#39;name&#39;).text</span>
-<span class="c1">##        self.author = digraph.find(&#39;header&#39;).find(&#39;author&#39;).text</span>
-<span class="c1">##        self.reference = digraph.find(&#39;header&#39;).find(&#39;reference&#39;).text</span>
-<span class="c1">##        Min = Decimal(digraph.find(&#39;valuationdomain&#39;).find(&#39;min&#39;).text)</span>
-<span class="c1">##        Max = Decimal(digraph.find(&#39;valuationdomain&#39;).find(&#39;max&#39;).text)</span>
-<span class="c1">##        Med = Min + ((Max - Min)/Decimal(&#39;2.0&#39;))</span>
-<span class="c1">##        valuationdomain = {}</span>
-<span class="c1">##        valuationdomain[&#39;min&#39;] = Min</span>
-<span class="c1">##        valuationdomain[&#39;med&#39;] = Med</span>
-<span class="c1">##        valuationdomain[&#39;max&#39;] = Max</span>
-<span class="c1">##        self.valuationdomain = valuationdomain</span>
-<span class="c1">##        actions = [action.text for action in digraph.find(&#39;nodes&#39;).findall(&#39;node&#39;)]</span>
-<span class="c1">##        self.actions = actions</span>
-<span class="c1">##        relation = {}</span>
-<span class="c1">##        for x in actions:</span>
-<span class="c1">##            relation[x] = {}</span>
-<span class="c1">##        for arc in digraph.find(&#39;relation&#39;).findall(&#39;arc&#39;):</span>
-<span class="c1">##            relation[arc.find(&#39;i&#39;).text][arc.find(&#39;t&#39;).text] = Decimal(arc.find(&#39;v&#39;).text)</span>
-<span class="c1">##        self.relation = relation</span>
-<span class="c1">##        self.gamma = self.gammaSets()</span>
-<span class="c1">##        self.notGamma = self.notGammaSets()</span>
+<span class="c1">#----------------</span>
 
 <div class="viewcode-block" id="CSVDigraph"><a class="viewcode-back" href="../techDoc.html#digraphs.CSVDigraph">[docs]</a><span class="k">class</span> <span class="nc">CSVDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -13242,6 +13166,8 @@
                 <span class="n">Digraph</span><span class="o">.</span><span class="n">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">Digraph</span><span class="o">.</span><span class="n">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
+
+<span class="c1">#--------</span>
 
 <span class="k">class</span> <span class="nc">_XMCDADigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -13330,6 +13256,8 @@
                 <span class="n">Digraph</span><span class="o">.</span><span class="n">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">Digraph</span><span class="o">.</span><span class="n">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="c1">#------------</span>
 
 <div class="viewcode-block" id="XMCDA2Digraph"><a class="viewcode-back" href="../techDoc.html#digraphs.XMCDA2Digraph">[docs]</a><span class="k">class</span> <span class="nc">XMCDA2Digraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>

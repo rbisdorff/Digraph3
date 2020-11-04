@@ -1,6 +1,6 @@
 FLAG = --inplace
 PYTHON = python3
-NOSETESTS = nosetests3
+PYTEST = pytest
 
 inplace:
 		${PYTHON} csetupRandPerfTabs.py build_ext ${FLAG}
@@ -18,20 +18,20 @@ installVenv:
 		${PYTHON} csetupSOInteger.py install
 		${PYTHON} csetupSparseInteger.py install
 testsSparse:
-		(cd Test; ${NOSETESTS} -vs noseTestsSparseIntegerOutrankingDigraph.py)
+		(cd Test; ${PYTEST} -vs pytestsSparseIntegerOutrankingDigraphs.py)
 testsInteger:
-		(cd Test; ${NOSETESTS} -vs noseTestsIntegerOutrankingDigraph.py)
+		(cd Test; ${PYTEST} -vs pytestsIntegerOutrankingDigraphs.py)
 testsCorrelation:
-		(cd Test; ${NOSETESTS} -vs noseTestsVerifyFitness.py)
+		(cd Test; ${PYTEST} -vs pytestsVerifyFitness.py)
 
 tests:
-		(cd Test; ${NOSETESTS} -v noseTestsSparseIntegerOutrankingDigraph.py)
-		(cd Test; ${NOSETESTS} -v noseTestsIntegerOutrankingDigraph.py)
-		(cd Test; ${NOSETESTS} -v noseTestsVerifyFitness.py)
+		(cd Test; ${PYTEST} -v pytestsSparseIntegerOutrankingDigraphs.py)
+		(cd Test; ${PYTEST} -v pytestsIntegerOutrankingDigraphs.py)
+		(cd Test; ${PYTEST} -v pytestsVerifyFitness.py)
 
 verboseTests:
-		(cd Test; ${NOSETESTS} -vs noseTestsSparseIntegerOutrankingDigraph.py)
-		(cd Test; ${NOSETESTS} -vs noseTestsIntegerOutrankingDigraph.py)
-		(cd Test; ${NOSETESTS} -vs noseTestsVerifyFitness.py)
+		(cd Test; ${PYTEST} -vs pytestsSparseIntegerOutrankingDigraphs.py)
+		(cd Test; ${PYTEST} -vs pytestsIntegerOutrankingDigraphs.py)
+		(cd Test; ${PYTEST} -vs pytestsVerifyFitness.py)
 
 
