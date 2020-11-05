@@ -87,7 +87,7 @@ The Python development of these computing resources offers the advantage of an e
 Downloading of the Digraph3 resources
 .....................................
 
-Using the Digraph3 modules is easy. You only need to have installed on your system the `Python <https://www.python.org/doc/>`_ programming language of version 3.+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, the Python standard decimal module implements very efficiently its decimal.Decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic r-valuation functions, which makes the recent python-3.3+ versions much faster (more than twice as fast) when extensive digraph operations are performed.
+Using the Digraph3 modules is easy. You only need to have installed on your system the `Python <https://www.python.org/doc/>`_ programming language of version 3.+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, the Python standard decimal module implements very efficiently its decimal.Decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic r-valuation functions, which makes the recent python-3.7+ versions much faster (more than twice as fast) when extensive digraph operations are performed.
 
 Several download options (easiest under Linux or Mac OS-X) are given.
 
@@ -118,10 +118,10 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
 .. code-block:: bash 
 
    $HOME/.../Digraph3$ python3
-   Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
-   [GCC 8.2.0] on linux
+   Python 3.9.0 (default, Nov  1 2020, 09:59:50) 
+   [GCC 9.3.0] on linux
    Type "help", "copyright", "credits" or
-	  "license" for more information.
+          "license" for more information.
    >>> ...
 
 .. code-block:: pycon
@@ -163,7 +163,7 @@ All :py:class:`digraphs.Digraph` objects contain at least the following attribut
 
 .. only:: html
 
-    See the technical documentation of root the :py:class:`digraphs.Digraph` class.
+    See the technical documentation of the root :py:class:`digraphs.Digraph` class.
 
 Permanent storage
 .................
@@ -321,7 +321,7 @@ Some special classes of digraphs, like the :py:class:`digraphs.CompleteDigraph`,
 
 .. only:: html
 
-    For more information about its resources, see the technical documentation of the :ref:`digraphs-label`. 
+    For more information about its resources, see the :ref:`technical documentation of the digraphs module <Modules-organisation-label>`. 
 
 Back to :ref:`Content Table <Tutorial-label>`
 
