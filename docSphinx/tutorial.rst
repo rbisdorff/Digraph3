@@ -4077,7 +4077,7 @@ Four **decision objectives** of more or less equal importance are guiding Alice'
 
     #. *maximize* the attractiveness of the study place (GEO),
     #. *maximize* the attractiveness in her further studies (LEA),
-    #. *minimze*  her financial dependency on her parents (FIN),
+    #. *minimize*  her financial dependency on her parents (FIN),
     #. *maximize* her professional perspectives (PPA).
 
 The performance tableau
@@ -4102,9 +4102,9 @@ The decision consequences Alice wishes to take into account for evaluating the p
     PR   Prestige     Occupational prestige (max)              PRA         2 
    ==== ============ ======================================== =========== ========
 
-Alice is subjectively evaluating the attractiveness of the studies on a three level ordinal scale from 0 (weeak), 1 (fair) to 2 (good). Similarly, she is evaluating subjectively the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the occupational prestige she looked up the SIOPS [20]_. For all the other evaluation data she looked up the the internet.
+Alice is subjectively evaluating the attractiveness of the studies on a three level ordinal scale from 0 (weak), 1 (fair) to 2 (good). Similarly, she is evaluating subjectively the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the occupational prestige she looked up the SIOPS [20]_. For all the other evaluation data she looked up the the internet.
 
-The actual evaluations of Alice's potential study programms are gathered in a :py:class:`perfTabs.PerformanceTableau` object [21]_.
+The actual evaluations of Alice's potential study programs are gathered in a :py:class:`perfTabs.PerformanceTableau` object [21]_.
 
 .. code-block:: pycon
    :name: alicePerfTab
@@ -4120,7 +4120,7 @@ The actual evaluations of Alice's potential study programms are gathered in a :p
        BC Number of inhabitants     3
        Total weight: 6 (2 criteria)
      LEA: Learning aspect
-       AS Attractivity of the study program 6
+       AS Attractiveness of the study program 6
        Total weight: 6.00 (1 criteria)
      FIN: Financial aspect
        SF Annual registration fees 2
@@ -4128,7 +4128,7 @@ The actual evaluations of Alice's potential study programms are gathered in a :p
        SL study time               2
        Total weight: 6.00 (3 criteria)
      PRA: Professional aspect
-       AP Attractivity of the profession            2
+       AP Attractiveness of the profession          2
        AI Annual professional income after studying 2
        OP Occupational Prestige                     2
        Total weight: 6.00 (3 criteria)
@@ -4144,7 +4144,7 @@ Details of the performance criteria may be consulted in a browser view (see :num
    :width: 750 px
    :align: center
    
-It is worthwhile noticing in :numref:`aliceCriteria` above, that Alice considers a difference of 7 points on her subjective attractiveness scale of the study programs (criterion *AS*) as a *considerable performance difference* triggering, the cas given, a *veto situtuation*. Notice also the proportional *indifference* (5%) and *preference* (10%) performance discrimination thresholds shown on criterion *BC*-number of inhabitants.
+It is worthwhile noticing in :numref:`aliceCriteria` above, that Alice considers a difference of 7 points on her subjective attractiveness scale of the study programs (criterion *AS*) as a *considerable performance difference* triggering, the case given, a *veto situation*. Notice also the proportional *indifference* (5%) and *preference* (10%) performance discrimination thresholds shown on criterion *BC*-number of inhabitants.
 
 We may now consult Alice's actual evaluations of her ten potential study programs with the following heatmap view:
 
@@ -4155,16 +4155,16 @@ We may now consult Alice's actual evaluations of her ten potential study program
    :width: 650 px
    :align: center
 
-Her ten potential study programs (see :numref:`aliceHeatmap`) are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph. Graduate interpreter studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by Graduate Translator studies in Köln (*T-FHK*) appear to be Alice's most prefered alternatives. The least attractive study programs appear to be for her the studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
+Her ten potential study programs (see :numref:`aliceHeatmap`) are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph. Graduate interpreter studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by Graduate Translator studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs appear to be for her the studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
 
-The performance criteria are ordered by decreasing ordinal correlation with this global *NetFlows* ranking. It is interesting to notice that for Alice the most significant performance criteria appear to be the *attractiveness* of the study programm (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear on the other side to be not so significant.
+The performance criteria are ordered by decreasing ordinal correlation with this global *NetFlows* ranking. It is interesting to notice that for Alice the most significant performance criteria appear to be the *attractiveness* of the study program (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear on the other side to be not so significant.
 
 Notice by the way that evaluations on performance criteria to be minimized, like *distance to home* (*DH*) or *study times* (*SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
 
 Building a best choice recommendation
 .....................................
 
-Let us now have a llok at the underlying bipolar-valued pairwise outranking digraph.
+Let us now have a look at the underlying bipolar-valued pairwise outranking digraph.
 
 .. code-block:: pycon
    :name: aliceOutranking
@@ -4221,7 +4221,7 @@ Furthermore, the four best ranked study programs are *Condorcet* winners, i.e. t
      determinateness (%) : 58.33
      most credible action(s) = { 'S-HKK': 0.17, 'C-HKK': 0.17, }
 
-Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study programm at the *Technical Highschool* Köln (see :numref:`` Line 12) with a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` majority of criteria significance.
+Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High school* Köln (see :numref:`` Line 12) with a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` majority of criteria significance.
 
 A graphviz drawing of the corresponding strict outranking digraph may finally well illustrate the best choice recommendation for Alice.
 

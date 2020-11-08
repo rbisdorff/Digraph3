@@ -5777,7 +5777,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <div><ol class="arabic simple">
 <li><p><em>maximize</em> the attractiveness of the study place (GEO),</p></li>
 <li><p><em>maximize</em> the attractiveness in her further studies (LEA),</p></li>
-<li><p><em>minimze</em>  her financial dependency on her parents (FIN),</p></li>
+<li><p><em>minimize</em>  her financial dependency on her parents (FIN),</p></li>
 <li><p><em>maximize</em> her professional perspectives (PPA).</p></li>
 </ol>
 </div></blockquote>
@@ -5878,8 +5878,8 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </tbody>
 </table>
 </div></blockquote>
-<p>Alice is subjectively evaluating the attractiveness of the studies on a three level ordinal scale from 0 (weeak), 1 (fair) to 2 (good). Similarly, she is evaluating subjectively the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the occupational prestige she looked up the SIOPS <a class="footnote-reference brackets" href="#id126" id="id61">20</a>. For all the other evaluation data she looked up the the internet.</p>
-<p>The actual evaluations of Alice’s potential study programms are gathered in a <a class="reference internal" href="techDoc.html#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">perfTabs.PerformanceTableau</span></code></a> object <a class="footnote-reference brackets" href="#id127" id="id62">21</a>.</p>
+<p>Alice is subjectively evaluating the attractiveness of the studies on a three level ordinal scale from 0 (weak), 1 (fair) to 2 (good). Similarly, she is evaluating subjectively the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the occupational prestige she looked up the SIOPS <a class="footnote-reference brackets" href="#id126" id="id61">20</a>. For all the other evaluation data she looked up the the internet.</p>
+<p>The actual evaluations of Alice’s potential study programs are gathered in a <a class="reference internal" href="techDoc.html#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">perfTabs.PerformanceTableau</span></code></a> object <a class="footnote-reference brackets" href="#id127" id="id62">21</a>.</p>
 <div class="literal-block-wrapper docutils container" id="aliceperftab">
 <div class="code-block-caption"><span class="caption-number">Listing 54 </span><span class="caption-text">Alice’s performance tableau</span><a class="headerlink" href="#aliceperftab" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -5911,7 +5911,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span class="go">    BC Number of inhabitants     3</span>
 <span class="go">    Total weight: 6 (2 criteria)</span>
 <span class="go">  LEA: Learning aspect</span>
-<span class="go">    AS Attractivity of the study program 6</span>
+<span class="go">    AS Attractiveness of the study program 6</span>
 <span class="go">    Total weight: 6.00 (1 criteria)</span>
 <span class="go">  FIN: Financial aspect</span>
 <span class="go">    SF Annual registration fees 2</span>
@@ -5919,7 +5919,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span class="go">    SL study time               2</span>
 <span class="go">    Total weight: 6.00 (3 criteria)</span>
 <span class="go">  PRA: Professional aspect</span>
-<span class="go">    AP Attractivity of the profession            2</span>
+<span class="go">    AP Attractiveness of the profession          2</span>
 <span class="go">    AI Annual professional income after studying 2</span>
 <span class="go">    OP Occupational Prestige                     2</span>
 <span class="go">    Total weight: 6.00 (3 criteria)</span>
@@ -5934,7 +5934,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <div class="figure align-center" id="alicecriteria">
 <a class="reference internal image-reference" href="_images/aliceCriteria.png"><img alt="_images/aliceCriteria.png" src="_images/aliceCriteria.png" style="width: 750px;" /></a>
 </div>
-<p>It is worthwhile noticing in <a class="reference internal" href="#alicecriteria"><span class="std std-numref">Fig. 31</span></a> above, that Alice considers a difference of 7 points on her subjective attractiveness scale of the study programs (criterion <em>AS</em>) as a <em>considerable performance difference</em> triggering, the cas given, a <em>veto situtuation</em>. Notice also the proportional <em>indifference</em> (5%) and <em>preference</em> (10%) performance discrimination thresholds shown on criterion <em>BC</em>-number of inhabitants.</p>
+<p>It is worthwhile noticing in <a class="reference internal" href="#alicecriteria"><span class="std std-numref">Fig. 31</span></a> above, that Alice considers a difference of 7 points on her subjective attractiveness scale of the study programs (criterion <em>AS</em>) as a <em>considerable performance difference</em> triggering, the case given, a <em>veto situation</em>. Notice also the proportional <em>indifference</em> (5%) and <em>preference</em> (10%) performance discrimination thresholds shown on criterion <em>BC</em>-number of inhabitants.</p>
 <p>We may now consult Alice’s actual evaluations of her ten potential study programs with the following heatmap view:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
@@ -5942,13 +5942,13 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <div class="figure align-center" id="aliceheatmap">
 <a class="reference internal image-reference" href="_images/aliceHeatmap.png"><img alt="_images/aliceHeatmap.png" src="_images/aliceHeatmap.png" style="width: 650px;" /></a>
 </div>
-<p>Her ten potential study programs (see <a class="reference internal" href="#aliceheatmap"><span class="std std-numref">Fig. 32</span></a>) are ordered with the <em>NetFlows</em> ranking rule applied to the corresponding bipolar-valued outranking digraph. Graduate interpreter studies in Köln (<em>I-FHK</em>) or Saarbrücken (<em>I-USB</em>), followed by Graduate Translator studies in Köln (<em>T-FHK</em>) appear to be Alice’s most prefered alternatives. The least attractive study programs appear to be for her the studies at the Chamber of Commerce of Köln (<em>C-HKK</em>, <em>S-HKK</em>).</p>
-<p>The performance criteria are ordered by decreasing ordinal correlation with this global <em>NetFlows</em> ranking. It is interesting to notice that for Alice the most significant performance criteria appear to be the <em>attractiveness</em> of the study programm (<em>AS</em>, +0.72) followed by the <em>attractiveness</em> of the future profession (<em>AP</em>, +0.62). <em>Study times</em> (<em>SL</em>, -024), <em>big city</em> (<em>BC</em>, -0.07) and <em>monthly living costs</em> (<em>LC</em>, -0.04) ) appear on the other side to be not so significant.</p>
+<p>Her ten potential study programs (see <a class="reference internal" href="#aliceheatmap"><span class="std std-numref">Fig. 32</span></a>) are ordered with the <em>NetFlows</em> ranking rule applied to the corresponding bipolar-valued outranking digraph. Graduate interpreter studies in Köln (<em>I-FHK</em>) or Saarbrücken (<em>I-USB</em>), followed by Graduate Translator studies in Köln (<em>T-FHK</em>) appear to be Alice’s most preferred alternatives. The least attractive study programs appear to be for her the studies at the Chamber of Commerce of Köln (<em>C-HKK</em>, <em>S-HKK</em>).</p>
+<p>The performance criteria are ordered by decreasing ordinal correlation with this global <em>NetFlows</em> ranking. It is interesting to notice that for Alice the most significant performance criteria appear to be the <em>attractiveness</em> of the study program (<em>AS</em>, +0.72) followed by the <em>attractiveness</em> of the future profession (<em>AP</em>, +0.62). <em>Study times</em> (<em>SL</em>, -024), <em>big city</em> (<em>BC</em>, -0.07) and <em>monthly living costs</em> (<em>LC</em>, -0.04) ) appear on the other side to be not so significant.</p>
 <p>Notice by the way that evaluations on performance criteria to be minimized, like <em>distance to home</em> (<em>DH</em>) or <em>study times</em> (<em>SL</em>), are registered as <em>negative</em> values, so that smaller measures are, in this case, preferred to larger ones.</p>
 </div>
 <div class="section" id="building-a-best-choice-recommendation">
 <h3><a class="toc-backref" href="#id230">Building a best choice recommendation</a><a class="headerlink" href="#building-a-best-choice-recommendation" title="Permalink to this headline">¶</a></h3>
-<p>Let us now have a llok at the underlying bipolar-valued pairwise outranking digraph.</p>
+<p>Let us now have a look at the underlying bipolar-valued pairwise outranking digraph.</p>
 <div class="literal-block-wrapper docutils container" id="aliceoutranking">
 <div class="code-block-caption"><span class="caption-number">Listing 55 </span><span class="caption-text">Alice’s outranking digraph</span><a class="headerlink" href="#aliceoutranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -6037,7 +6037,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Recommended best choice for Alice eventually becomes the <em>Graduate Interpreter</em> study programm at the <em>Technical Highschool</em> Köln (see :numref:`` Line 12) with a <img class="math" src="_images/math/356069832af8e8b1c29682449232f80318cb11fc.png" alt="(0.75 + 1)/2.0 \,=\,87.5\%"/> majority of criteria significance.</p>
+<p>Recommended best choice for Alice eventually becomes the <em>Graduate Interpreter</em> study program at the <em>Technical High school</em> Köln (see :numref:`` Line 12) with a <img class="math" src="_images/math/356069832af8e8b1c29682449232f80318cb11fc.png" alt="(0.75 + 1)/2.0 \,=\,87.5\%"/> majority of criteria significance.</p>
 <p>A graphviz drawing of the corresponding strict outranking digraph may finally well illustrate the best choice recommendation for Alice.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dgcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">dg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dgcd</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;aliceBestChoice&#39;</span><span class="p">,</span>

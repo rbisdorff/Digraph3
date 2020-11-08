@@ -4929,7 +4929,7 @@ Four \sphinxstylestrong{decision objectives} of more or less equal importance ar
 \sphinxstyleemphasis{maximize} the attractiveness in her further studies (LEA),
 
 \item {} 
-\sphinxstyleemphasis{minimze}  her financial dependency on her parents (FIN),
+\sphinxstyleemphasis{minimize}  her financial dependency on her parents (FIN),
 
 \item {} 
 \sphinxstyleemphasis{maximize} her professional perspectives (PPA).
@@ -5096,13 +5096,13 @@ PRA
 \sphinxattableend\end{savenotes}
 \end{quote}
 
-Alice is subjectively evaluating the attractiveness of the studies on a three level ordinal scale from 0 (weeak), 1 (fair) to 2 (good). Similarly, she is evaluating subjectively the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the occupational prestige she looked up the SIOPS %
+Alice is subjectively evaluating the attractiveness of the studies on a three level ordinal scale from 0 (weak), 1 (fair) to 2 (good). Similarly, she is evaluating subjectively the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the occupational prestige she looked up the SIOPS %
 \begin{footnote}[20]\sphinxAtStartFootnote
 Ganzeboom H.B.G, Treiman D.J. \sphinxstyleemphasis{Internationally Comparable Measures of Occupational Status for the 1988 International Standard Classification of Occupations}, Social Science Research 25, 201\textendash{}239 (1996).
 %
 \end{footnote}. For all the other evaluation data she looked up the the internet.
 
-The actual evaluations of Alice’s potential study programms are gathered in a \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau}} object %
+The actual evaluations of Alice’s potential study programs are gathered in a \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau}} object %
 \begin{footnote}[21]\sphinxAtStartFootnote
 Alice’s performance tableau \sphinxcode{\sphinxupquote{AliceChoice.py}} is available in the \sphinxcode{\sphinxupquote{examples}} directory of the Digraph3 software collection.
 %
@@ -5119,7 +5119,7 @@ Alice’s performance tableau \sphinxcode{\sphinxupquote{AliceChoice.py}} is ava
 \PYG{g+go}{    BC Number of inhabitants     3}
 \PYG{g+go}{    Total weight: 6 (2 criteria)}
 \PYG{g+go}{  LEA: Learning aspect}
-\PYG{g+go}{    AS Attractivity of the study program 6}
+\PYG{g+go}{    AS Attractiveness of the study program 6}
 \PYG{g+go}{    Total weight: 6.00 (1 criteria)}
 \PYG{g+go}{  FIN: Financial aspect}
 \PYG{g+go}{    SF Annual registration fees 2}
@@ -5127,7 +5127,7 @@ Alice’s performance tableau \sphinxcode{\sphinxupquote{AliceChoice.py}} is ava
 \PYG{g+go}{    SL study time               2}
 \PYG{g+go}{    Total weight: 6.00 (3 criteria)}
 \PYG{g+go}{  PRA: Professional aspect}
-\PYG{g+go}{    AP Attractivity of the profession            2}
+\PYG{g+go}{    AP Attractiveness of the profession          2}
 \PYG{g+go}{    AI Annual professional income after studying 2}
 \PYG{g+go}{    OP Occupational Prestige                     2}
 \PYG{g+go}{    Total weight: 6.00 (3 criteria)}
@@ -5147,7 +5147,7 @@ Details of the performance criteria may be consulted in a browser view (see \hyp
 \noindent\sphinxincludegraphics[width=750\sphinxpxdimen]{{aliceCriteria}.png}
 \end{figure}
 
-It is worthwhile noticing in \hyperref[\detokenize{tutorial:alicecriteria}]{Fig.\@ \ref{\detokenize{tutorial:alicecriteria}}} above, that Alice considers a difference of 7 points on her subjective attractiveness scale of the study programs (criterion \sphinxstyleemphasis{AS}) as a \sphinxstyleemphasis{considerable performance difference} triggering, the cas given, a \sphinxstyleemphasis{veto situtuation}. Notice also the proportional \sphinxstyleemphasis{indifference} (5\%) and \sphinxstyleemphasis{preference} (10\%) performance discrimination thresholds shown on criterion \sphinxstyleemphasis{BC}\sphinxhyphen{}number of inhabitants.
+It is worthwhile noticing in \hyperref[\detokenize{tutorial:alicecriteria}]{Fig.\@ \ref{\detokenize{tutorial:alicecriteria}}} above, that Alice considers a difference of 7 points on her subjective attractiveness scale of the study programs (criterion \sphinxstyleemphasis{AS}) as a \sphinxstyleemphasis{considerable performance difference} triggering, the case given, a \sphinxstyleemphasis{veto situation}. Notice also the proportional \sphinxstyleemphasis{indifference} (5\%) and \sphinxstyleemphasis{preference} (10\%) performance discrimination thresholds shown on criterion \sphinxstyleemphasis{BC}\sphinxhyphen{}number of inhabitants.
 
 We may now consult Alice’s actual evaluations of her ten potential study programs with the following heatmap view:
 
@@ -5161,16 +5161,16 @@ We may now consult Alice’s actual evaluations of her ten potential study progr
 \noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{aliceHeatmap}.png}
 \end{figure}
 
-Her ten potential study programs (see \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}) are ordered with the \sphinxstyleemphasis{NetFlows} ranking rule applied to the corresponding bipolar\sphinxhyphen{}valued outranking digraph. Graduate interpreter studies in Köln (\sphinxstyleemphasis{I\sphinxhyphen{}FHK}) or Saarbrücken (\sphinxstyleemphasis{I\sphinxhyphen{}USB}), followed by Graduate Translator studies in Köln (\sphinxstyleemphasis{T\sphinxhyphen{}FHK}) appear to be Alice’s most prefered alternatives. The least attractive study programs appear to be for her the studies at the Chamber of Commerce of Köln (\sphinxstyleemphasis{C\sphinxhyphen{}HKK}, \sphinxstyleemphasis{S\sphinxhyphen{}HKK}).
+Her ten potential study programs (see \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}) are ordered with the \sphinxstyleemphasis{NetFlows} ranking rule applied to the corresponding bipolar\sphinxhyphen{}valued outranking digraph. Graduate interpreter studies in Köln (\sphinxstyleemphasis{I\sphinxhyphen{}FHK}) or Saarbrücken (\sphinxstyleemphasis{I\sphinxhyphen{}USB}), followed by Graduate Translator studies in Köln (\sphinxstyleemphasis{T\sphinxhyphen{}FHK}) appear to be Alice’s most preferred alternatives. The least attractive study programs appear to be for her the studies at the Chamber of Commerce of Köln (\sphinxstyleemphasis{C\sphinxhyphen{}HKK}, \sphinxstyleemphasis{S\sphinxhyphen{}HKK}).
 
-The performance criteria are ordered by decreasing ordinal correlation with this global \sphinxstyleemphasis{NetFlows} ranking. It is interesting to notice that for Alice the most significant performance criteria appear to be the \sphinxstyleemphasis{attractiveness} of the study programm (\sphinxstyleemphasis{AS}, +0.72) followed by the \sphinxstyleemphasis{attractiveness} of the future profession (\sphinxstyleemphasis{AP}, +0.62). \sphinxstyleemphasis{Study times} (\sphinxstyleemphasis{SL}, \sphinxhyphen{}024), \sphinxstyleemphasis{big city} (\sphinxstyleemphasis{BC}, \sphinxhyphen{}0.07) and \sphinxstyleemphasis{monthly living costs} (\sphinxstyleemphasis{LC}, \sphinxhyphen{}0.04) ) appear on the other side to be not so significant.
+The performance criteria are ordered by decreasing ordinal correlation with this global \sphinxstyleemphasis{NetFlows} ranking. It is interesting to notice that for Alice the most significant performance criteria appear to be the \sphinxstyleemphasis{attractiveness} of the study program (\sphinxstyleemphasis{AS}, +0.72) followed by the \sphinxstyleemphasis{attractiveness} of the future profession (\sphinxstyleemphasis{AP}, +0.62). \sphinxstyleemphasis{Study times} (\sphinxstyleemphasis{SL}, \sphinxhyphen{}024), \sphinxstyleemphasis{big city} (\sphinxstyleemphasis{BC}, \sphinxhyphen{}0.07) and \sphinxstyleemphasis{monthly living costs} (\sphinxstyleemphasis{LC}, \sphinxhyphen{}0.04) ) appear on the other side to be not so significant.
 
 Notice by the way that evaluations on performance criteria to be minimized, like \sphinxstyleemphasis{distance to home} (\sphinxstyleemphasis{DH}) or \sphinxstyleemphasis{study times} (\sphinxstyleemphasis{SL}), are registered as \sphinxstyleemphasis{negative} values, so that smaller measures are, in this case, preferred to larger ones.
 
 
 \subsection{Building a best choice recommendation}
 \label{\detokenize{tutorial:building-a-best-choice-recommendation}}
-Let us now have a llok at the underlying bipolar\sphinxhyphen{}valued pairwise outranking digraph.
+Let us now have a look at the underlying bipolar\sphinxhyphen{}valued pairwise outranking digraph.
 \sphinxSetupCaptionForVerbatim{Alice’s outranking digraph}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:aliceoutranking}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -5223,7 +5223,7 @@ Furthermore, the four best ranked study programs are \sphinxstyleemphasis{Condor
 \PYG{g+go}{  most credible action(s) = \PYGZob{} \PYGZsq{}S\PYGZhy{}HKK\PYGZsq{}: 0.17, \PYGZsq{}C\PYGZhy{}HKK\PYGZsq{}: 0.17, \PYGZcb{}}
 \end{sphinxVerbatim}
 
-Recommended best choice for Alice eventually becomes the \sphinxstyleemphasis{Graduate Interpreter} study programm at the \sphinxstyleemphasis{Technical Highschool} Köln (see :numref:\textasciigrave{}\textasciigrave{} Line 12) with a \((0.75 + 1)/2.0 \,=\,87.5\%\) majority of criteria significance.
+Recommended best choice for Alice eventually becomes the \sphinxstyleemphasis{Graduate Interpreter} study program at the \sphinxstyleemphasis{Technical High school} Köln (see :numref:\textasciigrave{}\textasciigrave{} Line 12) with a \((0.75 + 1)/2.0 \,=\,87.5\%\) majority of criteria significance.
 
 A graphviz drawing of the corresponding strict outranking digraph may finally well illustrate the best choice recommendation for Alice.
 
