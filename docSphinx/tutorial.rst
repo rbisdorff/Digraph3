@@ -4035,13 +4035,212 @@ It might be worth, as an **exercise**, to modify these criteria significance wei
 
 What will become the best choice recommendation under this working hypothesis?  
 
-For further reading about the *Rubis* Best Choice methodology, one may consult the following real *decision aid case study* about choosing a best poster in a scientific conference [BIS-2015]_ .
+See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
-..
-   See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
+.. _Alice-Tutorial-label:
 
+Alice's best choice: A case study [19]_
+---------------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+|aliceImage| Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her "Abitur" with satisfactory and/or good marks and  wants to start her further studies thereafter. She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees, as well as, her living costs during her studies.
+
+.. |aliceImage| image:: AliceF.png
+   :align: top
+
+The decision problem
+....................
+
+Alice has already identified 10 **potential study programs**:
+
+======= ============================ =============================== =============
+ ID      Diploma                      Institution                      City
+======= ============================ =============================== =============
+ T-UD    Qualified translator (T)     University (UD)                 Düsseldorf
+ T-FHK   Qualified translator (T)     Higher Technical School (FHK)   Köln
+ T-FHM   Qualified translator (T)     Higher Technical School (FHM)   München
+ I-FHK   Graduate interpreter (I)     Higher Technical School (FHK)   Köln
+ T-USB   Qualified translator (T)     University (USB)                Saarbrücken
+ I-USB   Graduate interpreter (I)     University (USB)                Saarbrücken
+ T-UHB   Qualified translator (T)     University (UHB)                Heidelberg
+ I-UHB   Graduate interpreter (I)     University (UHB)                Heidelberg
+ S-HKK   Specialized secretary (S)    Chamber of Commerce (HKK)       Köln
+ C-HKK   Foreign correspondent (C)    Chamber of Commerce (HKK)       Köln
+======= ============================ =============================== =============
+
+Four **decision objectives** of more or less equal importance are guiding Alice's choice:
+
+    #. *maximize* the attractiveness of the study place (GEO),
+    #. *maximize* the attractiveness in her further studies (LEA),
+    #. *minimze*  her financial dependency on her parents (FIN),
+    #. *maximize* her professional perspectives (PPA).
+
+The performance tableau
+.......................
+
+The decision consequences Alice wishes to take into account for evaluating the potential study programs with respect to each of the four objectives are modelled by the following **family of criteria**.
+
+   ==== ============ ======================================== =========== ========
+    ID   Name         Comment                                  Objective   Weight
+   ==== ============ ======================================== =========== ========
+    DH   Proximity    Distance in km to her home (min)         GEA         3
+    BC   Big City     Number of inhabitants (max)              GEA         3
+    \    \            \                                        \           \
+    AS   Studies      Attractiveness of the studies (max)      LEA         6
+    \    \            \                                        \           \
+    SF   Fees         Annual study fees (min)                  FIN         2
+    LC   Living       Monthly living costs (min)               FIN         2
+    SL   Length       Length of the studies (min)              FIN         2
+    \     \            \                                       \           \
+    AP   Profession   Attractiveness of the profession (max)   PRA         2
+    AI   Income       Annual income after studying (max)       PRA         2
+    PR   Prestige     Occupational prestige (max)              PRA         2 
+   ==== ============ ======================================== =========== ========
+
+Alice is subjectively evaluating the attractiveness of the studies on a three level ordinal scale from 0 (weeak), 1 (fair) to 2 (good). Similarly, she is evaluating subjectively the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the occupational prestige she looked up the SIOPS [20]_. For all the other evaluation data she looked up the the internet.
+
+The actual evaluations of Alice's potential study programms are gathered in a :py:class:`perfTabs.PerformanceTableau` object [21]_.
+
+.. code-block:: pycon
+   :name: alicePerfTab
+   :linenos:
+   :caption: Alice's performance tableau
+
+   >>> from perfTabs import PerformanceTableau
+   >>> t = PerformanceTableau('AliceChoice')
+   >>> t.showObjectives()
+     *------ decision objectives -------"
+     GEO: Geographical aspect
+       DH Distance to parent's home 3
+       BC Number of inhabitants     3
+       Total weight: 6 (2 criteria)
+     LEA: Learning aspect
+       AS Attractivity of the study program 6
+       Total weight: 6.00 (1 criteria)
+     FIN: Financial aspect
+       SF Annual registration fees 2
+       LC Monthly living costs     2
+       SL study time               2
+       Total weight: 6.00 (3 criteria)
+     PRA: Professional aspect
+       AP Attractivity of the profession            2
+       AI Annual professional income after studying 2
+       OP Occupational Prestige                     2
+       Total weight: 6.00 (3 criteria)
+
+Within each decision objective, the performance criteria are considered to be equisignificant. Hence, the four decision objectives show a same importance weight of 6 (see :numref:`alicePerfTab`).
+
+Details of the performance criteria may be consulted in a browser view (see :numref:`aliceCriteria` below).
+
+   >>> t.showHTMLCriteria()
+
+.. figure:: aliceCriteria.png
+   :name: aliceCriteria
+   :width: 750 px
+   :align: center
+   
+It is worthwhile noticing in :numref:`aliceCriteria` above, that Alice considers a difference of 7 points on her subjective attractiveness scale of the study programs (criterion *AS*) as a *considerable performance difference* triggering, the cas given, a *veto situtuation*. Notice also the proportional *indifference* (5%) and *preference* (10%) performance discrimination thresholds shown on criterion *BC*-number of inhabitants.
+
+We may now consult Alice's actual evaluations of her ten potential study programs with the following heatmap view:
+
+   >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,ndigits=0)
+
+.. figure:: aliceHeatmap.png
+   :name: aliceHeatmap
+   :width: 650 px
+   :align: center
+
+Her ten potential study programs (see :numref:`aliceHeatmap`) are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph. Graduate interpreter studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by Graduate Translator studies in Köln (*T-FHK*) appear to be Alice's most prefered alternatives. The least attractive study programs appear to be for her the studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
+
+The performance criteria are ordered by decreasing ordinal correlation with this global *NetFlows* ranking. It is interesting to notice that for Alice the most significant performance criteria appear to be the *attractiveness* of the study programm (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear on the other side to be not so significant.
+
+Notice by the way that evaluations on performance criteria to be minimized, like *distance to home* (*DH*) or *study times* (*SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
+
+Building a best choice recommendation
+.....................................
+
+Let us now have a llok at the underlying bipolar-valued pairwise outranking digraph.
+
+.. code-block:: pycon
+   :name: aliceOutranking
+   :linenos:
+   :caption: Alice's outranking digraph
+
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
+   >>> dg = BipolarOutrankingDigraph(t) 
+   >>> dg
+    *------- Object instance description ------*
+    Instance class      : BipolarOutrankingDigraph
+    Instance name       : rel_AliceChoice
+    # Actions           : 10
+    # Criteria          : 9
+    Size                : 67
+    Determinateness (%) : 73.91
+    Valuation domain    : [-1.00;1.00]
+    Attributes          : ['name', 'actions', 'valuationdomain',
+                           'objectives', 'criteria', 'methodData',
+                           'evaluation', 'order', 'vetos', 'negativeVetos',
+                           'largePerformanceDifferencesCount', 'relation',
+                           'gamma', 'notGamma']
+   >>> dg.computeCondorcetWinners()
+    ['I-FHK', 'I-UHB', 'I-USB', 'T-FHK']
+
+Despite rather weakly discriminating performance evaluations, the 67 pairwise outranking situations positively validated in the digraph *dg* obtained from Alice's performance tableau (see :numref:`aliceOutranking` Line 9) is supported by a 74% majority of criteria significance (Line 10).
+
+Furthermore, the four best ranked study programs are *Condorcet* winners, i.e. they positively outrank all other alternatives. The best choice recommendation below, confirms this result.
+   
+.. code-block:: pycon
+   :name: aliceBestChoice
+   :linenos:
+   :caption: Alice's best choice recommendations
+
+   >>> dg.showBestChoiceRecommendation()
+    Best choice recommendation(s) (BCR)
+    (in decreasing order of determinateness)   
+    Credibility domain: [-1.00,1.00]
+    === >> potential best choice(s)
+    choice              : ['I-FHK', 'I-UHB', 'I-USB', 'T-FHK']
+     independence        : 0.17
+     dominance           : 0.08
+     absorbency          : -0.83
+     covering (%)        : 62.50
+     determinateness (%) : 68.75
+     most credible action(s) = { 'I-FHK': 0.75, 'T-FHK': 0.17,
+                                 'I-USB': 0.17, 'I-UHB': 0.17, }
+    === >> potential worst choice(s) 
+    choice              : ['C-HKK', 'S-HKK']
+     independence        : 0.50
+     dominance           : -0.83
+     absorbency          : 0.17
+     covered (%)         : 100.00
+     determinateness (%) : 58.33
+     most credible action(s) = { 'S-HKK': 0.17, 'C-HKK': 0.17, }
+
+Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study programm at the *Technical Highschool* Köln (see :numref:`` Line 12) with a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` majority of criteria significance.
+
+A graphviz drawing of the corresponding strict outranking digraph may finally well illustrate the best choice recommendation for Alice.
+
+    >>> dgcd = ~(-dg)
+    >>> dgcd.exportGraphViz('aliceBestChoice',
+        bestChoice=['I-FHK'],worstChoice=['S-HKK','C-HKK'])
+     *---- exporting a dot file for GraphViz tools ---------*
+      Exporting to aliceBestChoice.dot
+      dot -Grankdir=BT -Tpng aliceBestChoice.dot -o aliceBestChoice.png
+
+.. figure:: aliceBestChoice.png
+   :name: aliceBestChoiceImage
+   :width: 400 px
+   :align: center
+
+For further reading about the *Rubis* Best Choice methodology, one may consult the following real *decision aid case study* about choosing a best poster in a scientific conference [BIS-2015]_ .
+
+Back to :ref:`Content Table <Tutorial-label>`
+   
 .. _Rating-Tutorial-label:
 
 Rating with learned quantile norms
@@ -6652,12 +6851,19 @@ Bibliography
 
 .. [14] Not to be confused with the *dual graph* of a plane graph *g* that has a vertex for each face of *g*. Here we mean the *less than* (strict converse) relation corresponding to a *greater or equal* relation, or the *less than or equal* relation corresponding to a (strict) *better than* relation.
 
-.. [15] The concept of *Condorcet* winner -a generalization of absolute majority winners- proposed by *Condorcet* in 1785, is an early historical example of *initial* digraph kernel (see the tutorial :ref:`Kernel-Tutorial-label`).                
+.. [15] The concept of *Condorcet* winner -a generalization of absolute majority winners- proposed by *Condorcet* in 1785, is an early historical example of *initial* digraph kernel (see the tutorial :ref:`Kernel-Tutorial-label`).
+        
 .. [16] Discrete random variables with a given empirical probability law (here the polls) are provided in the :py:mod:`randomNumbers` module by the :py:class:`randomNumbers.DiscreteRandomVariable` class.
 
 .. [17]  Roy, B. *Transitivité et connexité.* C. R. Acad. Sci. Paris 249, 216-218, 1959. Warshall, S. *A Theorem on Boolean Matrices.* J. ACM 9, 11-12, 1962. 
 
 .. [18] A Digraph3 *graphs.Graph* encoded file is available in the :code:`examples` directory of the Digraph3 software collection.
+
+.. [19] This case study is taken from a "Multiple Criteria Decision Analysis* case study by Eisenführ Fr., Langer Th., and Weber M., *Fallstudien zu rationalem Entscheiden*, Springer 2001, pp. 1 -- 17.
+
+.. [20] Ganzeboom H.B.G, Treiman D.J. *Internationally Comparable Measures of Occupational Status for the 1988 International Standard Classification of Occupations*, Social Science Research 25, 201–239 (1996).
+
+.. [21] Alice's performance tableau :code:`AliceChoice.py` is available in the :code:`examples` directory of the Digraph3 software collection.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
