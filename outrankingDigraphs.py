@@ -4318,7 +4318,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         except:
             pass
         try:
-            reprString += 'Confidence level (%%)     : %.2f\n' % ((1.0 + self.bipolarConfidenceLevel)/2.0)
+            reprString += 'Confidence level (%%) : %.2f\n' % ((1.0 + self.bipolarConfidenceLevel)/2.0)
         except:
             pass
         reprString += 'Determinateness (%%)  : %.2f\n' %\

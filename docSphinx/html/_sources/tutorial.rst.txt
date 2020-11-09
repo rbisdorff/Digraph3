@@ -1094,7 +1094,7 @@ But, there may be many cycles appearing in a *Condorcet* digraph, and, we may de
      (['a2', 'a4', 'a5'], frozenset({'a2', 'a5', 'a4'})), 
      (['a2', 'a4', 'a1'], frozenset({'a2', 'a1', 'a4'}))]
 
-*Condorcet* 's approach for determining the winner of an election is hence *not decisive* in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see the tutorial on :ref:`Ranking-Tutorial-label` and [BIS-2008]_). 
+*Condorcet* 's approach for determining the winner of an election is hence *not decisive* in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>` and [BIS-2008]_). 
 
 Many more tools for exploiting voting results are available like the browser heat map view on voting profiles (see the technical documentation of the :py:mod:`votingProfiles` module).
 
@@ -4088,8 +4088,8 @@ The decision consequences Alice wishes to take into account for evaluating the p
    ==== ============ ======================================== =========== ========
     ID   Name         Comment                                  Objective   Weight
    ==== ============ ======================================== =========== ========
-    DH   Proximity    Distance in km to her home (min)         GEA         3
-    BC   Big City     Number of inhabitants (max)              GEA         3
+    DH   Proximity    Distance in km to her home (min)         GEO         3
+    BC   Big City     Number of inhabitants (max)              GEO         3
     \    \            \                                        \           \
     AS   Studies      Attractiveness of the studies (max)      LEA         6
     \    \            \                                        \           \
@@ -4102,7 +4102,7 @@ The decision consequences Alice wishes to take into account for evaluating the p
     PR   Prestige     Occupational prestige (max)              PRA         2 
    ==== ============ ======================================== =========== ========
 
-Alice is subjectively evaluating the attractiveness of the studies on a three level ordinal scale from 0 (weak), 1 (fair) to 2 (good). Similarly, she is evaluating subjectively the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the occupational prestige she looked up the SIOPS [20]_. For all the other evaluation data she looked up the the internet.
+Alice is subjectively evaluating the *attractiveness* of the studies on a three level ordinal scale from 0 (*weak*), 1 (*fair*) to 2 (*good*). Similarly, she is evaluating subjectively the *attractiveness* of the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the *occupational prestige* she looked up the SIOPS [20]_. For all the other evaluation data she looked up the internet.
 
 The actual evaluations of Alice's potential study programs are gathered in a :py:class:`perfTabs.PerformanceTableau` object [21]_.
 
@@ -4146,7 +4146,7 @@ Details of the performance criteria may be consulted in a browser view (see :num
 
    Alice's performance criteria	   
    
-It is worthwhile noticing in :numref:`aliceCriteria` above, that Alice considers a difference of 7 points on her subjective attractiveness scale of the study programs (criterion *AS*) as a *considerable performance difference* triggering, the case given, a *veto situation*. Notice also the proportional *indifference* (5%) and *preference* (10%) performance discrimination thresholds shown on criterion *BC*-number of inhabitants.
+It is worthwhile noticing in :numref:`aliceCriteria` above, that Alice considers a difference of 7 points on her subjective attractiveness scale of the study programs (criterion *AS*) as a *considerable performance difference* triggering, the case given, a *veto situation*. Notice also the proportional *indifference* (5%) and *preference* (10%) discrimination thresholds shown on criterion *BC*-number of inhabitants.
 
 We may now consult Alice's actual evaluations of her ten potential study programs with the following heatmap view:
 
@@ -4159,9 +4159,9 @@ We may now consult Alice's actual evaluations of her ten potential study program
 
    Heatmap of Alice's performance tableau	   
 
-Her ten potential study programs (see :numref:`aliceHeatmap`) are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph. Graduate interpreter studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by Graduate Translator studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs appear to be for her the studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
+Her ten potential study programs (see :numref:`aliceHeatmap`) are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph [23]_. *Graduate interpreter* studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by *Graduate Translator* studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs for her appear to be studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
 
-The performance criteria are ordered by decreasing ordinal correlation with this global *NetFlows* ranking. It is interesting to notice that for Alice the most significant performance criteria appear to be the *attractiveness* of the study program (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear on the other side to be not so significant.
+It is interesting to notice that for Alice the most significant performance criteria appear to be, on one side, the *attractiveness* of the study program (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear to be, on the other side, not *so* significant.
 
 Notice by the way that evaluations on performance criteria to be minimized, like *distance to home* (*DH*) or *study times* (*SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
 
@@ -4232,14 +4232,14 @@ We have mentioned that Alice considers a performance difference of 7 points on t
      Counter-veto threshold              : 7.00
      Polarisation: r(I-UHB >= S-HKK) = 0.17 ==> +1.00
 
-In :numref:`aliceVetos` we may notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. Yet, they only polarise *valid* outranking situations to *certainly true* (Lines 8, 13, 18) and corresponding *invalid* converse outranking situations to *certainly false* (Lines 24, 29, 34).
+In :numref:`aliceVetos` we may notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. Yet, they only polarise *invalid* outranking situations to *certainly false* (Lines 8, 13, 18) and corresponding *valid* converse outranking situations to *certainly true* (Lines 24, 29, 34).
 
-We may check furthermore that no outranking circuits do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs (see :numref:`aliceHeatmap`) are even *Condorcet* winners (Line 3), i.e. they positively outrank all the other alternatives, a result confirmed by best choice recommendation below (Lne 10).
+We may check furthermore that no outranking circuits do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs (see :numref:`aliceHeatmap`) are in fact *Condorcet* winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed by our best choice recommendation below (Lne 10).
    
 .. code-block:: pycon
    :name: aliceBestChoice
    :linenos:
-   :caption: Alice's best choice recommendations
+   :caption: Alice's best choice recommendation
 
    >>> dg.computeChordlessCircuits()
     []
@@ -4267,7 +4267,7 @@ We may check furthermore that no outranking circuits do appear (see :numref:`ali
      determinateness (%) : 58.33
      most credible action(s) = { 'S-HKK': 0.17, 'C-HKK': 0.17, }
 
-Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High school* Köln (see :numref:`aliceBestChoice` Line 16) with a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` majority of global criteria significance.
+Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High school* Köln (see :numref:`aliceBestChoice` Line 16) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` majority of global criteria significance.
 
 A graphviz drawing of the *skeleton* of the corresponding strict outranking digraph (see Line 2 in :numref:`aliceBestChoiceDrawing` below) may finally well illustrate our *best choice recommendation* for Alice.
 
@@ -4291,14 +4291,14 @@ A graphviz drawing of the *skeleton* of the corresponding strict outranking digr
 
    Alice's best choice recommendation	   
 
-In :numref:`aliceBestChoiceImage` we may by the way notice that the *Graduate Interpreter* studies come first, followed by the *Graduate Translator* studies. Last come the *Chamber of Commerce* specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
+In :numref:`aliceBestChoiceImage` we may notice that the *Graduate Interpreter* studies come first, followed by the *Graduate Translator* studies. Last come the *Chamber of Commerce*'s specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
 
 Robustness analysis
 ...................
 
 Alice considers her four decision objectives as being *more or less* equally important. Here we have, however, allocated *strictly equal* importance weights with *strictly* equi-significant criteria per objective.
 
-Yet, how robust is our previous best decision recommendation when, now, we must consider the importance of the objectives and, hence, the significance of the respective performance criteria to be *more or less uncertain* ?
+Yet, how robust is our previous best decision recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be *more or less uncertain* ?
 
 To answer this question, we will consider the respective criteria significance weights *wj* to be triangular random variables in the range 0 to *2wj* with mode = *wj*. We may compute a corresponding 90% confident outranking digraph with the help of the :py:class:`outrankingDigraphs.ConfidentBipolarOutrankingDigraph` constructor [22]_.
 
@@ -4326,7 +4326,7 @@ To answer this question, we will consider the respective criteria significance w
     ***********************
     Best choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   
-    Credibility domain: [-1.00,1.00]
+     Credibility domain: [-1.00,1.00]
      === >> potential best choice(s)
      choice              : ['I-FHK','I-UHB','I-USB','T-FHK','T-FHM']
       independence        : 0.00
@@ -4715,6 +4715,10 @@ With the *quantiles* parameter (see :numref:`interpolatedQuartilesRating` Line 2
 More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions, especially when **tail** rating results, i.e. distinguishing **very best**, or **very worst** multiple criteria performances, become a critical issue. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	
 
 Back to :ref:`Content Table <Tutorial-label>`   
+
+
+---------------
+
 
 .. _Graphs-Tutorial-label:
 
@@ -6969,6 +6973,8 @@ Bibliography
 .. [21] Alice's performance tableau :code:`AliceChoice.py` is available in the :code:`examples` directory of the Digraph3 software collection.
 
 .. [22] See also the corresponding :ref:`Advanced Topic<Bipolar-Valued-Likelihood-Tutorial-label>` in the Digraph3 documentation.
+
+.. [23] See the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`. 
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
