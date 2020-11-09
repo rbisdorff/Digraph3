@@ -4189,7 +4189,7 @@ Let us now have a look at the underlying bipolar-valued pairwise outranking digr
 
 Despite rather weakly discriminating performance evaluations, the 67 pairwise outranking situations positively validated in the digraph *dg* obtained from Alice's performance tableau (see :numref:`aliceOutranking` Line 9) are supported by a 74% majority of criteria significance (Line 10).
 
-We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion *AS* to be considerable which triggers, the case given, a veto situation. We may inspect the occurrence os such veto or counter-veto situations.
+We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion *AS* to be considerable which triggers, the case given, a potential polarisation of the outranking chaacteristics. We may inspect the occurrence os such polarisations.
 
 .. code-block:: pycon
    :name: aliceVetos
@@ -4232,9 +4232,9 @@ We have mentioned that Alice considers a performance difference of 7 points on t
      Counter-veto threshold              : 7.00
      Polarisation: r(I-UHB >= S-HKK) = 0.17 ==> +1.00
 
-In :numref:`aliceVetos` we may notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. Yet, they only polarise *invalid* outranking situations to *certainly false* (Lines 9, 14, 19) and corresponding *valid* converse outranking situations to *certainly true* (Lines 25, 30, 35).
+In :numref:`aliceVetos` we may notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *invalid* outranking situations to *certainly false* (Lines 9, 14, 19) and corresponding three *valid* converse outranking situations to *certainly true* (Lines 25, 30, 35).
 
-We may check furthermore that no outranking circuits do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs (see :numref:`aliceHeatmap`) are in fact *Condorcet* winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed by our best choice recommendation below (Lne 10).
+We may furthermore check that no outranking circuits do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs (see :numref:`aliceHeatmap`) are in fact *Condorcet* winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed by our best choice recommendation below (Lne 10).
    
 .. code-block:: pycon
    :name: aliceBestChoice
