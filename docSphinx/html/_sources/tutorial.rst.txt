@@ -4747,7 +4747,7 @@ Example Python3 session
    >>> g = Graph(numberOfVertices=7,edgeProbability=0.5)
    >>> g.save(fileName='tutorialGraph')
 
-The saved Graph instance named :code:`tutorialGraph.py` is encoded in python3 as follows::
+The saved Graph instance named :code:`tutorialGraph.py` is encoded in python3 as follows.
 
 .. code-block:: python
 
