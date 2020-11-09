@@ -4143,6 +4143,8 @@ Details of the performance criteria may be consulted in a browser view (see :num
    :name: aliceCriteria
    :width: 750 px
    :align: center
+
+   Alice's performance criteria	   
    
 It is worthwhile noticing in :numref:`aliceCriteria` above, that Alice considers a difference of 7 points on her subjective attractiveness scale of the study programs (criterion *AS*) as a *considerable performance difference* triggering, the case given, a *veto situation*. Notice also the proportional *indifference* (5%) and *preference* (10%) performance discrimination thresholds shown on criterion *BC*-number of inhabitants.
 
@@ -4154,6 +4156,8 @@ We may now consult Alice's actual evaluations of her ten potential study program
    :name: aliceHeatmap
    :width: 650 px
    :align: center
+
+   Heatmap of Alice's performance tableau	   
 
 Her ten potential study programs (see :numref:`aliceHeatmap`) are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph. Graduate interpreter studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by Graduate Translator studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs appear to be for her the studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
 
@@ -4182,23 +4186,65 @@ Let us now have a look at the underlying bipolar-valued pairwise outranking digr
     Size                : 67
     Determinateness (%) : 73.91
     Valuation domain    : [-1.00;1.00]
-    Attributes          : ['name', 'actions', 'valuationdomain',
-                           'objectives', 'criteria', 'methodData',
-                           'evaluation', 'order', 'vetos', 'negativeVetos',
-                           'largePerformanceDifferencesCount', 'relation',
-                           'gamma', 'notGamma']
-   >>> dg.computeCondorcetWinners()
-    ['I-FHK', 'I-UHB', 'I-USB', 'T-FHK']
 
-Despite rather weakly discriminating performance evaluations, the 67 pairwise outranking situations positively validated in the digraph *dg* obtained from Alice's performance tableau (see :numref:`aliceOutranking` Line 9) is supported by a 74% majority of criteria significance (Line 10).
+Despite rather weakly discriminating performance evaluations, the 67 pairwise outranking situations positively validated in the digraph *dg* obtained from Alice's performance tableau (see :numref:`aliceOutranking` Line 9) are supported by a 74% majority of criteria significance (Line 10).
 
-Furthermore, the four best ranked study programs are *Condorcet* winners, i.e. they positively outrank all other alternatives. The best choice recommendation below, confirms this result.
+We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion *AS* to be considerable which triggers, the case given, a veto situation. We may inspect the occurrence os such veto or counter-veto situations.
+
+.. code-block:: pycon
+   :name: aliceVetos
+   :linenos:
+   :caption: Veto and counter-veto situations
+
+   >>> dg.showVetos()
+    *----  Veto situations ---
+    number of veto situations : 3 
+    1: r(S-HKK >= I-FHK) = -0.17
+     criterion: AS
+     Considerable performance difference : -7.00
+     Veto discrimination threshold       : -7.00
+     Polarisation: r(S-HKK >= I-FHK) = -0.17 ==> -1.00
+    2: r(S-HKK >= I-USB) = -0.17
+     criterion: AS
+     Considerable performance difference : -7.00
+     Veto discrimination threshold       : -7.00
+     Polarisation: r(S-HKK >= I-USB) = -0.17 ==> -1.00
+    3: r(S-HKK >= I-UHB) = -0.17
+     criterion: AS
+     Considerable performance difference : -7.00
+     Veto discrimination threshold       : -7.00
+     Polarisation: r(S-HKK >= I-UHB) = -0.17 ==> -1.00
+    *----  Counter-veto situations ---
+    number of counter-veto situations : 3 
+    1: r(I-FHK >= S-HKK) = 0.83
+     criterion: AS
+     Considerable performance difference : 7.00
+     Counter-veto threshold              : 7.00
+     Polarisation: r(I-FHK >= S-HKK) = 0.83 ==> +1.00
+    2: r(I-USB >= S-HKK) = 0.17
+     criterion: AS
+     Considerable performance difference : 7.00
+     Counter-veto threshold              : 7.00
+     Polarisation: r(I-USB >= S-HKK) = 0.17 ==> +1.00
+    3: r(I-UHB >= S-HKK) = 0.17
+     criterion: AS
+     Considerable performance difference : 7.00
+     Counter-veto threshold              : 7.00
+     Polarisation: r(I-UHB >= S-HKK) = 0.17 ==> +1.00
+
+In :numref:`aliceVetos` we may notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. Yet, they only polarise *valid* outranking situations to *certainly true* (Lines 8, 13, 18) and corresponding *invalid* converse outranking situations to *certainly false* (Lines 24, 29, 34).
+
+We may check furthermore that no outranking circuits do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs (see :numref:`aliceHeatmap`) are even *Condorcet* winners (Line 3), i.e. they positively outrank all the other alternatives, a result confirmed by best choice recommendation below (Lne 10).
    
 .. code-block:: pycon
    :name: aliceBestChoice
    :linenos:
    :caption: Alice's best choice recommendations
 
+   >>> dg.computeChordlessCircuits()
+    []
+   >>> dg.computeCondorcetWinners()
+    ['I-FHK', 'I-UHB', 'I-USB', 'T-FHK'] 
    >>> dg.showBestChoiceRecommendation()
     Best choice recommendation(s) (BCR)
     (in decreasing order of determinateness)   
@@ -4221,23 +4267,80 @@ Furthermore, the four best ranked study programs are *Condorcet* winners, i.e. t
      determinateness (%) : 58.33
      most credible action(s) = { 'S-HKK': 0.17, 'C-HKK': 0.17, }
 
-Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High school* Köln (see :numref:`` Line 12) with a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` majority of criteria significance.
+Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High school* Köln (see :numref:`aliceBestChoice` Line 16) with a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` majority of global criteria significance.
 
-A graphviz drawing of the corresponding strict outranking digraph may finally well illustrate the best choice recommendation for Alice.
+A graphviz drawing of the *skeleton* of the corresponding strict outranking digraph (see Line 2 in :numref:`aliceBestChoiceDrawing` below) may finally well illustrate our *best choice recommendation* for Alice.
 
-    >>> dgcd = ~(-dg)
-    >>> dgcd.exportGraphViz('aliceBestChoice',
+.. code-block:: pycon
+   :name: aliceBestChoiceDrawing
+   :linenos:
+   :caption: Drawing Alice's best choice recommendation 
+
+   >>> dgcd = ~(-dg)
+   >>> dgcd.closeTransitive(Reverse=True)
+   >>> dgcd.exportGraphViz('aliceBestChoice',
         bestChoice=['I-FHK'],worstChoice=['S-HKK','C-HKK'])
-     *---- exporting a dot file for GraphViz tools ---------*
-      Exporting to aliceBestChoice.dot
-      dot -Grankdir=BT -Tpng aliceBestChoice.dot -o aliceBestChoice.png
+    *---- exporting a dot file for GraphViz tools ---------*
+     Exporting to aliceBestChoice.dot
+     dot -Grankdir=BT -Tpng aliceBestChoice.dot -o aliceBestChoice.png
 
 .. figure:: aliceBestChoice.png
    :name: aliceBestChoiceImage
    :width: 400 px
    :align: center
 
-For further reading about the *Rubis* Best Choice methodology, one may consult the following real *decision aid case study* about choosing a best poster in a scientific conference [BIS-2015]_ .
+   Alice's best choice recommendation	   
+
+In :numref:`aliceBestChoiceImage` we may by the way notice that the *Graduate Interpreter* studies come first, followed by the *Graduate Translator* studies. Last come the *Chamber of Commerce* specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
+
+Robustness analysis
+...................
+
+Alice considers her four decision objectives as being *more or less* equally important. Here we have, however, allocated *strictly equal* importance weights with *strictly* equi-significant criteria per objective.
+
+Yet, how robust is our previous best decision recommendation when, now, we must consider the importance of the objectives and, hence, the significance of the respective performance criteria to be *more or less uncertain* ?
+
+To answer this question, we will consider the respective criteria significance weights *wj* to be triangular random variables in the range 0 to *2wj* with mode = *wj*. We may compute a corresponding 90% confident outranking digraph with the help of the :py:class:`outrankingDigraphs.ConfidentBipolarOutrankingDigraph` constructor [22]_.
+
+.. code-block:: pycon
+   :name: aliceConfidentBestChoice
+   :linenos:
+   :caption: Alice's confident best choice recommendation 
+
+   >>> from outrankingDigraphs import ConfidentOutrankingDigraph
+   >>> cdg = ConfidentBipolarOutrankingDigraph(t,\
+		       distribution='triangular',confidence=90.0)
+   >>> cdg
+    *------- Object instance description ------*
+    Instance class       : ConfidentBipolarOutrankingDigraph
+    Instance name        : rel_AliceChoice_CLT
+    # Actions            : 10
+    # Criteria           : 9
+    Size                 : 44
+    Confidence level (%) : 90.0
+    Determinateness (%)  : 68.19
+    Valuation domain     : [-1.00;1.00]
+   >>> cdg.computeCondorcetWinners()
+    ['I-FHK']
+   >>> cdg.showBestChoiceRecommendation()
+    ***********************
+    Best choice recommendation(s) (BCR)
+     (in decreasing order of determinateness)   
+    Credibility domain: [-1.00,1.00]
+     === >> potential best choice(s)
+     choice              : ['I-FHK','I-UHB','I-USB','T-FHK','T-FHM']
+      independence        : 0.00
+      dominance           : 0.42
+      absorbency          : 0.00
+      covering (%)        : 20.00
+      determinateness (%) : 61.25
+      - most credible action(s) = { 'I-FHK': 0.75, }
+
+We are lucky. The *Graduate Interpreter* studies in Köln remain indeed a 90% confident *Condorcet* winner (see :numref:`aliceConfidentBestChoice` Line 15) and, hence, a 90% confident best choice recommendation with continual 87.5% majority support of the global criteria significance (see Lines 22 and 28).
+
+-------------
+
+For further reading about the *Digraph3* Best Choice methodology, one may consult the following real *decision aid case study* about choosing a best poster in a scientific conference [BIS-2015]_ .
 
 Back to :ref:`Content Table <Tutorial-label>`
    
@@ -6864,6 +6967,8 @@ Bibliography
 .. [20] Ganzeboom H.B.G, Treiman D.J. *Internationally Comparable Measures of Occupational Status for the 1988 International Standard Classification of Occupations*, Social Science Research 25, 201–239 (1996).
 
 .. [21] Alice's performance tableau :code:`AliceChoice.py` is available in the :code:`examples` directory of the Digraph3 software collection.
+
+.. [22] See also the corresponding :ref:`Advanced Topic<Bipolar-Valued-Likelihood-Tutorial-label>` in the Digraph3 documentation.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
