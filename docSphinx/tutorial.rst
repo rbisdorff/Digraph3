@@ -4234,7 +4234,7 @@ We have mentioned that Alice considers a performance difference of 7 points on t
 
 In :numref:`aliceVetos` we may notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *invalid* outranking situations to *certainly false* (Lines 9, 14, 19) and corresponding three *valid* converse outranking situations to *certainly true* (Lines 25, 30, 35).
 
-We may furthermore check that no outranking circuits do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs (see :numref:`aliceHeatmap`) are in fact *Condorcet* winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed by our best choice recommendation below (Lne 10).
+We may furthermore check that no outranking circuits do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs in the heatmap (see :numref:`aliceHeatmap`) are in fact *Condorcet* winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed by our best choice recommendation below (Lne 10).
    
 .. code-block:: pycon
    :name: aliceBestChoice
