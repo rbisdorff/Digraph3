@@ -465,6 +465,11 @@ INPUT ./aliceBestChoice.png
 INPUT ./aliceBestChoice.png
 INPUT aliceBestChoice.png
 INPUT ./aliceBestChoice.png
+INPUT pairwiseComparison.png
+INPUT ./pairwiseComparison.png
+INPUT ./pairwiseComparison.png
+INPUT pairwiseComparison.png
+INPUT ./pairwiseComparison.png
 INPUT examplePerfQuantiles.png
 INPUT ./examplePerfQuantiles.png
 INPUT ./examplePerfQuantiles.png

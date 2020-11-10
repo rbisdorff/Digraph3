@@ -4078,7 +4078,7 @@ Four **decision objectives** of more or less equal importance are guiding Alice'
     #. *maximize* the attractiveness of the study place (GEO),
     #. *maximize* the attractiveness in her further studies (LEA),
     #. *minimize*  her financial dependency on her parents (FIN),
-    #. *maximize* her professional perspectives (PPA).
+    #. *maximize* her professional perspectives (PRA).
 
 The performance tableau
 .......................
@@ -4102,7 +4102,7 @@ The decision consequences Alice wishes to take into account for evaluating the p
     PR   Prestige     Occupational prestige (max)              PRA         2 
    ==== ============ ======================================== =========== ========
 
-Alice is subjectively evaluating the *attractiveness* of the studies on a three level ordinal scale from 0 (*weak*), 1 (*fair*) to 2 (*good*). Similarly, she is evaluating subjectively the *attractiveness* of the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the *occupational prestige* she looked up the SIOPS [20]_. For all the other evaluation data she looked up the internet.
+Alice is subjectively evaluating the *attractiveness* of the studies on a three level ordinal scale from 0 (*weak*), 1 (*fair*) to 2 (*good*). Similarly, she is subjectively evaluating the *attractiveness* of the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the *occupational prestige* she looked up the SIOPS [20]_. All the other evaluation data could be looked up on the internet.
 
 The actual evaluations of Alice's potential study programs are gathered in a :py:class:`perfTabs.PerformanceTableau` object [21]_.
 
@@ -4148,7 +4148,7 @@ Details of the performance criteria may be consulted in a browser view (see :num
    
 It is worthwhile noticing in :numref:`aliceCriteria` above, that Alice considers a difference of 7 points on her subjective attractiveness scale of the study programs (criterion *AS*) as a *considerable performance difference* triggering, the case given, a *veto situation*. Notice also the proportional *indifference* (5%) and *preference* (10%) discrimination thresholds shown on criterion *BC*-number of inhabitants.
 
-We may now consult Alice's actual evaluations of her ten potential study programs with the following heatmap view:
+With the following heatmap view, we may now consult Alice's performance evaluations.
 
    >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,ndigits=0)
 
@@ -4161,7 +4161,7 @@ We may now consult Alice's actual evaluations of her ten potential study program
 
 Her ten potential study programs (see :numref:`aliceHeatmap`) are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph [23]_. *Graduate interpreter* studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by *Graduate Translator* studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs for her appear to be studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
 
-It is interesting to notice that for Alice the most significant performance criteria appear to be, on one side, the *attractiveness* of the study program (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear to be, on the other side, not *so* significant.
+It is interesting to notice that for Alice the most significant performance criteria appear to be, on the one side, the *attractiveness* of the study program (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear to be, on the other side, not *so* significant.
 
 Notice by the way that evaluations on performance criteria to be minimized, like *distance to home* (*DH*) or *study times* (*SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
 
@@ -4187,9 +4187,9 @@ Let us now have a look at the underlying bipolar-valued pairwise outranking digr
     Determinateness (%) : 73.91
     Valuation domain    : [-1.00;1.00]
 
-Despite rather weakly discriminating performance evaluations, the 67 pairwise outranking situations positively validated in the digraph *dg* obtained from Alice's performance tableau (see :numref:`aliceOutranking` Line 9) are supported by a 74% majority of criteria significance (Line 10).
+Despite rather poorly discriminating performance evaluations, the 67 pairwise outranking situations, positively validated in the digraph *dg* obtained from Alice's performance tableau (see :numref:`aliceOutranking` Line 9), are supported by a 74% majority of criteria significance (Line 10).
 
-We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion *AS* to be considerable which triggers, the case given, a potential polarisation of the outranking chaacteristics. We may inspect the occurrence os such polarisations.
+We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion *AS* to be considerable which triggers, the case given, a potential polarisation of the outranking chaacteristics. We may inspect the occurrence os such polarisations as follows.
 
 .. code-block:: pycon
    :name: aliceVetos
@@ -4232,7 +4232,7 @@ We have mentioned that Alice considers a performance difference of 7 points on t
      Counter-veto threshold              : 7.00
      Polarisation: r(I-UHB >= S-HKK) = 0.17 ==> +1.00
 
-In :numref:`aliceVetos` we may notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *invalid* outranking situations to *certainly false* (Lines 9, 14, 19) and corresponding three *valid* converse outranking situations to *certainly true* (Lines 25, 30, 35).
+In :numref:`aliceVetos` we notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 9, 14, 19) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35).
 
 We may furthermore check that no outranking circuits do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs in the heatmap (see :numref:`aliceHeatmap`) are in fact *Condorcet* winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed by our best choice recommendation below (Lne 10).
    
@@ -4267,7 +4267,7 @@ We may furthermore check that no outranking circuits do appear (see :numref:`ali
      determinateness (%) : 58.33
      most credible action(s) = { 'S-HKK': 0.17, 'C-HKK': 0.17, }
 
-Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High school* Köln (see :numref:`aliceBestChoice` Line 16) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` majority of global criteria significance.
+Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High school* Köln (see :numref:`aliceBestChoice` Line 16) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
 
 A graphviz drawing of the *skeleton* of the corresponding strict outranking digraph (see Line 2 in :numref:`aliceBestChoiceDrawing` below) may finally well illustrate our *best choice recommendation* for Alice.
 
@@ -4291,21 +4291,32 @@ A graphviz drawing of the *skeleton* of the corresponding strict outranking digr
 
    Alice's best choice recommendation	   
 
-In :numref:`aliceBestChoiceImage` we may notice that the *Graduate Interpreter* studies come first, followed by the *Graduate Translator* studies. Last come the *Chamber of Commerce*'s specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
+In :numref:`aliceBestChoiceImage` we notice that the *Graduate Interpreter* studies come first, followed by the *Graduate Translator* studies. Last come the *Chamber of Commerce*'s specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
+
+We may, furthermore, check the pairwise outranking situations observed  between the first and second-ranked alternatives, ie *Garduate Interpreter* studies in Köln verse *Graduate Interpreter* studies in Saabrücken (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
+
+   >>> dg.showHTMLPairwiseOutrankings('I-FHK','I-USB')
+
+.. figure:: pairwiseComparison.png
+   :name: pairwiseComparison
+   :width: 550 px
+   :align: center
+
+   Pairwise comparing the first and second best-ranked study programs	   
+
+The *Köln* alternative is performing **at least as well as** the *Saarbrücken* alternative on all the performance criteria, except the *Annual income* (of significance 2/24). Conversely, the *Saarbrücken* alternative is clearly **outperformed** from the *geographical* (0/6) as well as from the *financial* perspective (2/6).
+
+Alice considers her four decision objectives as being *more or less* equally important. Here we have, however, allocated *strictly equal* importance weights with *strictly* equi-significant criteria per objective. How robust is our previous best decision recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be *more or less uncertain* ?
 
 Robustness analysis
 ...................
 
-Alice considers her four decision objectives as being *more or less* equally important. Here we have, however, allocated *strictly equal* importance weights with *strictly* equi-significant criteria per objective.
-
-Yet, how robust is our previous best decision recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be *more or less uncertain* ?
-
-To answer this question, we will consider the respective criteria significance weights *wj* to be triangular random variables in the range 0 to *2wj* with mode = *wj*. We may compute a corresponding 90% confident outranking digraph with the help of the :py:class:`outrankingDigraphs.ConfidentBipolarOutrankingDigraph` constructor [22]_.
+To answer this question, we will consider the respective criteria significance weights *wj* to be **triangular random variables** in the range 0 to *2wj* with *mode* = *wj*. We may compute a corresponding **90%-confident outranking digraph** with the help of the :py:class:`outrankingDigraphs.ConfidentBipolarOutrankingDigraph` constructor [22]_.
 
 .. code-block:: pycon
-   :name: aliceConfidentBestChoice
+   :name: aliceConfidentDigraph
    :linenos:
-   :caption: Alice's confident best choice recommendation 
+   :caption: The 90% confident outranking digraph
 
    >>> from outrankingDigraphs import ConfidentOutrankingDigraph
    >>> cdg = ConfidentBipolarOutrankingDigraph(t,\
@@ -4317,9 +4328,22 @@ To answer this question, we will consider the respective criteria significance w
     # Actions            : 10
     # Criteria           : 9
     Size                 : 44
-    Confidence level (%) : 90.0
-    Determinateness (%)  : 68.19
     Valuation domain     : [-1.00;1.00]
+    Uncertainty model    : triangular(a=0,b=2w) 
+    Likelihood domain    : [-1.0;+1.0] 
+    Confidence level     : 90.0% 
+    Confident majority   : 14/24 (58.3%) 
+    Determinateness (%)  : 68.19
+
+Of the original 67 valid outranking situations, we retain 44 outranking situations as being 90%-*confident* (see :numref:`aliceConfidentDigraph` Line 10). The corresponding 90%-*confident* qualified majority of criteria significance amounts to 14/24 = 58.3% (Line 15).  
+
+Concerning now a 90%-*confident* best choice recommendation, we are lucky, as gets apparent in :numref:`aliceConfidentBestChoice` below. 
+
+.. code-block:: pycon
+   :name: aliceConfidentBestChoice
+   :linenos:
+   :caption: The 90% confident best choice recommendation
+
    >>> cdg.computeCondorcetWinners()
     ['I-FHK']
    >>> cdg.showBestChoiceRecommendation()
@@ -4336,7 +4360,7 @@ To answer this question, we will consider the respective criteria significance w
       determinateness (%) : 61.25
       - most credible action(s) = { 'I-FHK': 0.75, }
 
-We are lucky. The *Graduate Interpreter* studies in Köln remain indeed a 90% confident *Condorcet* winner (see :numref:`aliceConfidentBestChoice` Line 15) and, hence, a 90% confident best choice recommendation with continual 87.5% majority support of the global criteria significance (see Lines 22 and 28).
+The *Graduate Interpreter* studies in Köln remain indeed a 90%-confident *Condorcet* winner (Line 2). Hence, the same study program also remains our 90%-confident best choice recommendation supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9 and 15).
 
 -------------
 
@@ -6974,7 +6998,9 @@ Bibliography
 
 .. [22] See also the corresponding :ref:`Advanced Topic<Bipolar-Valued-Likelihood-Tutorial-label>` in the Digraph3 documentation.
 
-.. [23] See the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`. 
+.. [23] See the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`.
+
+.. [24] See also the :ref:`Advanced Topic <Bipolar-Valued-Kernels-Tutorial-label>` about computing best choice membership characteristics in the Digraph3 documentation.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive

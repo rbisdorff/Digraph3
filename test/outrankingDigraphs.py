@@ -2031,7 +2031,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     print('r(%s >= %s) = %.2f' %\
                         (vet[i][0][0],vet[i][0][1],vet[i][0][2]) )
                     for lpd in vet[i][1]:
-                        print('criteria: ' + str(lpd[0]))
+                        print('criterion: ' + str(lpd[0]))
                         print('Considerable negative performance difference : %.2f' % lpd[1][1] )
                         print('Veto discrimination threshold       : %.2f' % -lpd[1][3] )
                     for lpd in negVet[j][1]:
@@ -2046,7 +2046,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     print('r(%s >= %s) = %.2f' %\
                             (vet[i][0][0],vet[i][0][1],vet[i][0][2]) )
                     for lpd in vet[i][1]:
-                        print('criteria: ' + str(lpd[0]))
+                        print('criterion: ' + str(lpd[0]))
                         print('Considerable negative performance difference : %.2f' % lpd[1][1] )
                         print('Veto discrimination threshold       : %.2f' % -lpd[1][3] )
                     if vet[i][0][2] > Med:
@@ -2078,7 +2078,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('r(%s >= %s) = %.2f' %\
                     (vet[i][0][0],vet[i][0][1],vet[i][0][2]) )
             for lpd in vet[i][1]:
-                print('criteria: ' + str(lpd[0]))
+                print('criterion: ' + str(lpd[0]))
                 print('Considerable negative performance difference : %.2f' % lpd[1][1] )
                 print('Veto discrimination threshold       : %.2f' % -lpd[1][3] )
             if vet[i][0][2] > Med:
@@ -2093,7 +2093,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('r(%s >= %s) = %.2f' %\
                     (negVet[j][0][0],negVet[j][0][1],negVet[j][0][2]) )
             for lpd in negVet[j][1]:
-                print('criteria: ' + str(lpd[0]))
+                print('criterion: ' + str(lpd[0]))
                 print('Considerable positive performance difference : %.2f' % lpd[1][1] )
                 print('Counter-veto threshold              : %.2f' % lpd[1][3] )            
             if negVet[j][0][2] < Med:
@@ -2122,7 +2122,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('%d: r(%s >= %s) = %.2f' %\
                 (i+1,vetos[i][0][0],vetos[i][0][1],vetos[i][0][2]) )
             for lpd in vetos[i][1]:
-                print('criteria: ' + str(lpd[0]))
+                print('criterion: ' + str(lpd[0]))
                 print('Considerable performance difference : %.2f' % lpd[1][1] )
                 print('Veto discrimination threshold       : %.2f' % -lpd[1][3] )
             if lpdCount[vetos[i][0][0]][vetos[i][0][1]]['positive'] == 0:
@@ -2148,7 +2148,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                       (i+1,negativeVetos[i][0][0],\
                        negativeVetos[i][0][1],negativeVetos[i][0][2]) )
             for lpd in negativeVetos[i][1]:
-                print('criteria: ' + str(lpd[0]))
+                print('criterion: ' + str(lpd[0]))
                 print('Considerable performance difference : %.2f' % lpd[1][1] )
                 print('Counter-veto threshold              : %.2f' % lpd[1][3] )            
             if lpdCount[negativeVetos[i][0][0]][negativeVetos[i][0][1]]['negative'] == 0:
@@ -4307,20 +4307,36 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         Default presentation method for BipolarOutrankingDigraph instance.
         """
         reprString = '*------- Object instance description ------*\n'
-        reprString += 'Instance class      : %s\n' % self.__class__.__name__
-        reprString += 'Instance name       : %s\n' % self.name
-        reprString += '# Actions           : %d\n' % self.order
-        reprString += '# Criteria          : %d\n' % len(self.criteria)
-        reprString += 'Size                : %d\n' % self.computeSize()
+        reprString += 'Instance class       : %s\n' % self.__class__.__name__
+        reprString += 'Instance name        : %s\n' % self.name
+        reprString += '# Actions            : %d\n' % self.order
+        reprString += '# Criteria           : %d\n' % len(self.criteria)
+        reprString += 'Size                 : %d\n' % self.computeSize()
         try:
             oppDeg = self.computeOppositeness(InPercents=True)
             reprString += 'Oppositeness (%%)    : %.2f\n' % (oppDeg['oppositeness'])
         except:
             pass
-        reprString += 'Determinateness (%%) : %.2f\n' %\
+        try:
+            if self.distribution == 'beta':
+                reprString += 'Uncertainty model  : %s(a=%.1f,b=%.1f)\n' %\
+                    (self.distribution,self.betaParameter,self.betaParameter)
+            else:
+                reprString += 'Uncertainty model  : %s(a=%s,b=%s\n) ' %\
+                             (self.distribution,'0','2w') 
+            reprString += 'Likelihood domain  : [-1.0;+1.0]\n'
+            reprString += 'Confidence level   : %.2f (%.1f%%\n)' %\
+                         (self.bipolarConfidenceLevel,\
+                         (self.bipolarConfidenceLevel+1.0)/2.0*100.0)
+            reprString += 'Confident majority : %.2f (%.1f%%)\n' %\
+                (self.confidenceCutLevel,\
+                (self.confidenceCutLevel+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'))
+        except:
+            pass
+        reprString += 'Determinateness (%%)  : %.2f\n' %\
                       self.computeDeterminateness(InPercents=True)
-        reprString += 'Valuation domain    : [%.2f;%.2f]\n'\
-                      % (self.valuationdomain['min'],self.valuationdomain['max'])
+        reprString += 'Valuation domain     : [%.2f;%.2f]\n' \
+            % (self.valuationdomain['min'],self.valuationdomain['max'])
         #reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
         reprString += 'Attributes          : %s\n' % list(self.__dict__.keys())
         try:
@@ -9325,7 +9341,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
         print('Confident majority : %.2f (%.1f%%) ' % (self.confidenceCutLevel,\
                             (self.confidenceCutLevel+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0')))
-        deter = self.computeDeterminateness()
+        deter = self.computeDeterminateness(InPercents=False)
         print('Determinateness    : %.2f (%.1f%%)' % (deter,\
                             (deter+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0')))
         print('\n')

@@ -1,10 +1,10 @@
 # Fdb version 3
-["makeindex digraph3Tutorial.idx"] 1591703140 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1604997252
-  "digraph3Tutorial.idx" 1604997249 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex digraph3Tutorial.idx"] 1591703140 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1605018543
+  "digraph3Tutorial.idx" 1605018539 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
-  "digraph3Tutorial.ind"
   "digraph3Tutorial.ilg"
-["pdflatex"] 1604997248 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1604997252
+  "digraph3Tutorial.ind"
+["pdflatex"] 1605018539 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1605018543
   "/etc/texmf/web2c/texmf.cnf" 1587900120 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk" 1587973246 42704 d368a7ce1aec4e25702f76b9f9b826e8 ""
   "/home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1587973237 31928 b6a0d95e5aac173e646f5786657faf1e ""
@@ -221,11 +221,11 @@
   "coloredPermutationGraph.png" 1585648195 21229 add9dd95863e3174ea798afe34f56afe ""
   "converse-dual_rel_best10.png" 1585648195 65760 5d5d409f110f9914d7fe19fce26ff459 ""
   "cycles.png" 1585648195 38389 9515e841f4881dd2df51947edd07b3e9 ""
-  "digraph3Tutorial.aux" 1604997252 86747 a4e0312fc2a7188b0c773fb063d0e95b "pdflatex"
+  "digraph3Tutorial.aux" 1605018543 87395 3576a4b6e1c130ce6da9016cade25d76 "pdflatex"
   "digraph3Tutorial.ind" 1585648195 0 d41d8cd98f00b204e9800998ecf8427e "makeindex digraph3Tutorial.idx"
-  "digraph3Tutorial.out" 1604997252 21948 1da19e9ff1cc2d73571611c1c51a668d "pdflatex"
-  "digraph3Tutorial.tex" 1604997242 699693 ac7e2087ba28cf45eeb0b6b65d14ebc3 ""
-  "digraph3Tutorial.toc" 1604997252 10665 cb62714072d3229608a3cee04a3888f7 "pdflatex"
+  "digraph3Tutorial.out" 1605018543 21948 1da19e9ff1cc2d73571611c1c51a668d "pdflatex"
+  "digraph3Tutorial.tex" 1605018535 702594 6252adf168ce690f6826fa2b2d3df57d ""
+  "digraph3Tutorial.toc" 1605018543 10665 5faa835fa7ba0f81762df1664cbf99da "pdflatex"
   "dualChordlessCircuit.png" 1585648195 42179 2859130e8357d66ccd923f51dd2efd4b ""
   "examplePerfQuantiles.png" 1585648195 30034 de4be4a13314dc1ab56736b4dc6e1d3c ""
   "footnotehyper-sphinx.sty" 1585648195 8888 1bbd7bdeae8c8bed1d10d551bddb1cc9 ""
@@ -247,6 +247,7 @@
   "orientedLaterality.png" 1585648195 48968 5e18e6c29cc602b47a51bb113f41c81e ""
   "oriented_permutationGraph.png" 1585648195 20831 9aa4215f96b7c918d38c8532010bbd8a ""
   "outrankingResult.png" 1585648195 70569 018aabbd2b37fe3acc17a1f1ac1c8fdb ""
+  "pairwiseComparison.png" 1605004483 115291 e5cbb01c0dc10d2bc12ba00daa93cbc2 ""
   "perm_permutationGraph.png" 1585648195 19706 b063270359fa02a6fa5853cbe4d7faa9 ""
   "permutationGraph.png" 1585648195 25021 a67f71ad880fdfdba06b0a37a9beeae0 ""
   "random3RegularGraph-mis.png" 1585648195 47062 acdc7c0d5b2c1c0e13c6667470bd8f63 ""
@@ -266,9 +267,9 @@
   "spanningForest.png" 1585648195 50782 a3bc0381daeccbc2812bcc4195a99052 ""
   "sparseRelationMap.png" 1585648195 13187 df51199ccfddd95f44d62a9338454774 ""
   "sphinx.sty" 1593940817 82020 a38700b8aa22dfd94a8a5b905e69be73 ""
-  "sphinxhighlight.sty" 1604997218 8137 38a433148fcb7611515a989ff1750dd5 ""
+  "sphinxhighlight.sty" 1605018511 8137 38a433148fcb7611515a989ff1750dd5 ""
   "sphinxhowto.cls" 1585648195 3253 f1422f11047981f159e1ea718dbe2c47 ""
-  "sphinxmessages.sty" 1604997246 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1605018539 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxmulticell.sty" 1585648195 14606 0b6edc2b1a83546ed92026d1f6a311b5 ""
   "strongComponents.png" 1585648195 79190 bf10e090cef5309997c9efe66fbb33a5 ""
   "test62.png" 1585648195 29015 19c1cd8671e48efcd2958695a01f10c1 ""
@@ -292,9 +293,9 @@
   "weakChordlessCircuit.png" 1585648195 65619 d9ee17dd6ac35e83e1cbbd889663c392 ""
   "weakCopelandRanking.png" 1585648196 26872 7f7bedb326411ae7ecc65d34ddabc4cb ""
   (generated)
+  "digraph3Tutorial.pdf"
   "digraph3Tutorial.aux"
   "digraph3Tutorial.log"
-  "digraph3Tutorial.pdf"
-  "digraph3Tutorial.toc"
   "digraph3Tutorial.idx"
+  "digraph3Tutorial.toc"
   "digraph3Tutorial.out"

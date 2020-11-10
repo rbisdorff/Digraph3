@@ -4318,13 +4318,25 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         except:
             pass
         try:
-            reprString += 'Confidence level (%%) : %.2f\n' % ((1.0 + self.bipolarConfidenceLevel)/2.0)
+            if self.distribution == 'beta':
+                reprString += 'Uncertainty model  : %s(a=%.1f,b=%.1f)\n' %\
+                    (self.distribution,self.betaParameter,self.betaParameter)
+            else:
+                reprString += 'Uncertainty model  : %s(a=%s,b=%s\n) ' %\
+                             (self.distribution,'0','2w') 
+            reprString += 'Likelihood domain  : [-1.0;+1.0]\n'
+            reprString += 'Confidence level   : %.2f (%.1f%%\n)' %\
+                         (self.bipolarConfidenceLevel,\
+                         (self.bipolarConfidenceLevel+1.0)/2.0*100.0)
+            reprString += 'Confident majority : %.2f (%.1f%%)\n' %\
+                (self.confidenceCutLevel,\
+                (self.confidenceCutLevel+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'))
         except:
             pass
         reprString += 'Determinateness (%%)  : %.2f\n' %\
                       self.computeDeterminateness(InPercents=True)
-        reprString += 'Valuation domain     : [%.2f;%.2f]\n'\
-                      % (self.valuationdomain['min'],self.valuationdomain['max'])
+        reprString += 'Valuation domain     : [%.2f;%.2f]\n' \
+            % (self.valuationdomain['min'],self.valuationdomain['max'])
         #reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
         reprString += 'Attributes          : %s\n' % list(self.__dict__.keys())
         try:
@@ -9329,7 +9341,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
         print('Confident majority : %.2f (%.1f%%) ' % (self.confidenceCutLevel,\
                             (self.confidenceCutLevel+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0')))
-        deter = self.computeDeterminateness()
+        deter = self.computeDeterminateness(InPercents=False)
         print('Determinateness    : %.2f (%.1f%%)' % (deter,\
                             (deter+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0')))
         print('\n')
