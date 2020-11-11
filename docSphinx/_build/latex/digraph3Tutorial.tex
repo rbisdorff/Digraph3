@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{November 10, 2020}
+\date{November 11, 2020}
 \release{3.9.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -5151,9 +5151,9 @@ Details of the performance criteria may be consulted in a browser view (see \hyp
 \noindent\sphinxincludegraphics[width=750\sphinxpxdimen]{{aliceCriteria}.png}
 \caption{Alice’s performance criteria}\label{\detokenize{tutorial:alicecriteria}}\end{figure}
 
-It is worthwhile noticing in \hyperref[\detokenize{tutorial:alicecriteria}]{Fig.\@ \ref{\detokenize{tutorial:alicecriteria}}} above, that Alice considers a difference of 7 points on her subjective attractiveness scale of the study programs (criterion \sphinxstyleemphasis{AS}) as a \sphinxstyleemphasis{considerable performance difference} triggering, the case given, a \sphinxstyleemphasis{veto situation}. Notice also the proportional \sphinxstyleemphasis{indifference} (5\%) and \sphinxstyleemphasis{preference} (10\%) discrimination thresholds shown on criterion \sphinxstyleemphasis{BC}\sphinxhyphen{}number of inhabitants.
+It is worthwhile noticing in \hyperref[\detokenize{tutorial:alicecriteria}]{Fig.\@ \ref{\detokenize{tutorial:alicecriteria}}} above that, on her subjective attractiveness scale of the study programs (criterion \sphinxstyleemphasis{AS}), Alice considers a performance differences of 7 points to be \sphinxstyleemphasis{considerable} and triggering, the case given, a \sphinxstyleemphasis{veto situation}. Notice also the proportional \sphinxstyleemphasis{indifference} (5\%) and \sphinxstyleemphasis{preference} (10\%) discrimination thresholds shown on criterion \sphinxstyleemphasis{BC}\sphinxhyphen{}number of inhabitants.
 
-With the following heatmap view, we may now consult Alice’s performance evaluations.
+In the following \sphinxstyleemphasis{heatmap view}, we may now consult Alice’s performance evaluations.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
@@ -5172,7 +5172,7 @@ See the tutorial on {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sp
 %
 \end{footnote}. \sphinxstyleemphasis{Graduate interpreter} studies in Köln (\sphinxstyleemphasis{I\sphinxhyphen{}FHK}) or Saarbrücken (\sphinxstyleemphasis{I\sphinxhyphen{}USB}), followed by \sphinxstyleemphasis{Graduate Translator} studies in Köln (\sphinxstyleemphasis{T\sphinxhyphen{}FHK}) appear to be Alice’s most preferred alternatives. The least attractive study programs for her appear to be studies at the Chamber of Commerce of Köln (\sphinxstyleemphasis{C\sphinxhyphen{}HKK}, \sphinxstyleemphasis{S\sphinxhyphen{}HKK}).
 
-It is interesting to notice that for Alice the most significant performance criteria appear to be, on the one side, the \sphinxstyleemphasis{attractiveness} of the study program (\sphinxstyleemphasis{AS}, +0.72) followed by the \sphinxstyleemphasis{attractiveness} of the future profession (\sphinxstyleemphasis{AP}, +0.62). \sphinxstyleemphasis{Study times} (\sphinxstyleemphasis{SL}, \sphinxhyphen{}024), \sphinxstyleemphasis{big city} (\sphinxstyleemphasis{BC}, \sphinxhyphen{}0.07) and \sphinxstyleemphasis{monthly living costs} (\sphinxstyleemphasis{LC}, \sphinxhyphen{}0.04) ) appear to be, on the other side, not \sphinxstyleemphasis{so} significant.
+It is interesting to observe that for Alice, the most significant performance criteria, appear to be, on the one side, the \sphinxstyleemphasis{attractiveness} of the study program (\sphinxstyleemphasis{AS}, +0.72) followed by the \sphinxstyleemphasis{attractiveness} of the future profession (\sphinxstyleemphasis{AP}, +0.62). \sphinxstyleemphasis{Study times} (\sphinxstyleemphasis{SL}, \sphinxhyphen{}024), \sphinxstyleemphasis{big city} (\sphinxstyleemphasis{BC}, \sphinxhyphen{}0.07) and \sphinxstyleemphasis{monthly living costs} (\sphinxstyleemphasis{LC}, \sphinxhyphen{}0.04) ) appear to be, on the other side, not \sphinxstyleemphasis{so} significant.
 
 Notice by the way that evaluations on performance criteria to be minimized, like \sphinxstyleemphasis{distance to home} (\sphinxstyleemphasis{DH}) or \sphinxstyleemphasis{study times} (\sphinxstyleemphasis{SL}), are registered as \sphinxstyleemphasis{negative} values, so that smaller measures are, in this case, preferred to larger ones.
 
@@ -5198,7 +5198,7 @@ Let us now have a look at the underlying bipolar\sphinxhyphen{}valued pairwise o
 
 Despite rather poorly discriminating performance evaluations, the 67 pairwise outranking situations, positively validated in the digraph \sphinxstyleemphasis{dg} obtained from Alice’s performance tableau (see \hyperref[\detokenize{tutorial:aliceoutranking}]{Listing \ref{\detokenize{tutorial:aliceoutranking}}} Line 9), are supported by a 74\% majority of criteria significance (Line 10).
 
-We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion \sphinxstyleemphasis{AS} to be considerable which triggers, the case given, a potential polarisation of the outranking chaacteristics. We may inspect the occurrence os such polarisations as follows.
+We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion \sphinxstyleemphasis{AS} to be considerable which triggers, the case given, a potential polarisation of the outranking characteristics. We may inspect the occurrence os such polarisations as follows.
 \sphinxSetupCaptionForVerbatim{Veto and counter\sphinxhyphen{}veto situations}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:alicevetos}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -5239,9 +5239,9 @@ We have mentioned that Alice considers a performance difference of 7 points on t
 \PYG{g+go}{  Polarisation: r(I\PYGZhy{}UHB \PYGZgt{}= S\PYGZhy{}HKK) = 0.17 ==\PYGZgt{} +1.00}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{tutorial:alicevetos}]{Listing \ref{\detokenize{tutorial:alicevetos}}} we notice that \sphinxstyleemphasis{considerable performance differences} concerning the \sphinxstyleemphasis{Attractiveness of the studies} (\sphinxstyleemphasis{AS} criterion) are indeed observed between the \sphinxstyleemphasis{Specialised Secretary} study programm offered in Köln and the \sphinxstyleemphasis{Graduate Interpreter} study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three \sphinxstyleemphasis{more or less invalid} outranking situations to \sphinxstyleemphasis{certainly invalid} (Lines 9, 14, 19) and corresponding three \sphinxstyleemphasis{more or less valid} converse outranking situations to \sphinxstyleemphasis{certainly valid} ones (Lines 25, 30, 35).
+In \hyperref[\detokenize{tutorial:alicevetos}]{Listing \ref{\detokenize{tutorial:alicevetos}}}, we notice that \sphinxstyleemphasis{considerable performance differences} concerning the \sphinxstyleemphasis{Attractiveness of the studies} (\sphinxstyleemphasis{AS} criterion) are indeed observed between the \sphinxstyleemphasis{Specialised Secretary} study programm offered in Köln and the \sphinxstyleemphasis{Graduate Interpreter} study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three \sphinxstyleemphasis{more or less invalid} outranking situations to \sphinxstyleemphasis{certainly invalid} (Lines 9, 14, 19) and corresponding three \sphinxstyleemphasis{more or less valid} converse outranking situations to \sphinxstyleemphasis{certainly valid} ones (Lines 25, 30, 35).
 
-We may furthermore check that no outranking circuits do appear (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 1) and that the four best ranked study programs in the heatmap (see \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}) are in fact \sphinxstyleemphasis{Condorcet} winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed by our best choice recommendation below (Lne 10).
+We may furthermore check that no outranking circuits do appear (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 1) and that the four best ranked study programs in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}} are in fact \sphinxstyleemphasis{Condorcet} winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 10).
 \sphinxSetupCaptionForVerbatim{Alice’s best choice recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:alicebestchoice}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -5272,14 +5272,14 @@ We may furthermore check that no outranking circuits do appear (see \hyperref[\d
 \PYG{g+go}{  most credible action(s) = \PYGZob{} \PYGZsq{}S\PYGZhy{}HKK\PYGZsq{}: 0.17, \PYGZsq{}C\PYGZhy{}HKK\PYGZsq{}: 0.17, \PYGZcb{}}
 \end{sphinxVerbatim}
 
-Recommended best choice for Alice eventually becomes the \sphinxstyleemphasis{Graduate Interpreter} study program at the \sphinxstyleemphasis{Technical High school} Köln (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 16) supported by a \((0.75 + 1)/2.0 \,=\,87.5\%\) (18/24) majority of global criteria significance %
+Recommended best choice for Alice eventually becomes the \sphinxstyleemphasis{Graduate Interpreter} study program at the \sphinxstyleemphasis{Technical High School} Köln (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 16) supported by a \((0.75 + 1)/2.0 \,=\,87.5\%\) (18/24) majority of global criteria significance %
 \begin{footnote}[24]\sphinxAtStartFootnote
 See also the \DUrole{xref,std,std-ref}{Advanced Topic} about computing best choice membership characteristics in the Digraph3 documentation.
 %
 \end{footnote}.
 
-A graphviz drawing of the \sphinxstyleemphasis{skeleton} of the corresponding strict outranking digraph (see Line 2 in \hyperref[\detokenize{tutorial:alicebestchoicedrawing}]{Listing \ref{\detokenize{tutorial:alicebestchoicedrawing}}} below) may finally well illustrate our \sphinxstyleemphasis{best choice recommendation} for Alice.
-\sphinxSetupCaptionForVerbatim{Drawing Alice’s best choice recommendation}
+A graphviz drawing of the \sphinxstyleemphasis{skeleton} of the corresponding strict outranking digraph (see Line 2 in \hyperref[\detokenize{tutorial:alicebestchoicedrawing}]{Listing \ref{\detokenize{tutorial:alicebestchoicedrawing}}} below) may finally well illustrate our \sphinxstyleemphasis{best choice recommendation}.
+\sphinxSetupCaptionForVerbatim{Drawing the best choice recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:alicebestchoicedrawing}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dgcd} \PYG{o}{=} \PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{dg}\PYG{p}{)}
@@ -5311,11 +5311,11 @@ We may, furthermore, check the pairwise outranking situations observed  between 
 \capstart
 
 \noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{pairwiseComparison}.png}
-\caption{Pairwise comparing the first and second best\sphinxhyphen{}ranked study programs}\label{\detokenize{tutorial:pairwisecomparison}}\end{figure}
+\caption{Comparing the first and second best\sphinxhyphen{}ranked study programs}\label{\detokenize{tutorial:pairwisecomparison}}\end{figure}
 
 The \sphinxstyleemphasis{Köln} alternative is performing \sphinxstylestrong{at least as well as} the \sphinxstyleemphasis{Saarbrücken} alternative on all the performance criteria, except the \sphinxstyleemphasis{Annual income} (of significance 2/24). Conversely, the \sphinxstyleemphasis{Saarbrücken} alternative is clearly \sphinxstylestrong{outperformed} from the \sphinxstyleemphasis{geographical} (0/6) as well as from the \sphinxstyleemphasis{financial} perspective (2/6).
 
-Alice considers her four decision objectives as being \sphinxstyleemphasis{more or less} equally important. Here we have, however, allocated \sphinxstyleemphasis{strictly equal} importance weights with \sphinxstyleemphasis{strictly} equi\sphinxhyphen{}significant criteria per objective. How robust is our previous best decision recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be \sphinxstyleemphasis{more or less uncertain} ?
+Alice considers her four decision objectives as being \sphinxstyleemphasis{more or less} equally important. Here we have, however, allocated \sphinxstyleemphasis{strictly equal} importance weights with \sphinxstyleemphasis{strictly} equi\sphinxhyphen{}significant criteria per objective. How robust is our previous best choice recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be \sphinxstyleemphasis{more or less uncertain} ?
 
 
 \subsection{Robustness analysis}
@@ -5348,7 +5348,7 @@ See also the corresponding \DUrole{xref,std,std-ref}{Advanced Topic} in the Digr
 
 Of the original 67 valid outranking situations, we retain 44 outranking situations as being 90\%\sphinxhyphen{}\sphinxstyleemphasis{confident} (see \hyperref[\detokenize{tutorial:aliceconfidentdigraph}]{Listing \ref{\detokenize{tutorial:aliceconfidentdigraph}}} Line 10). The corresponding 90\%\sphinxhyphen{}\sphinxstyleemphasis{confident} qualified majority of criteria significance amounts to 14/24 = 58.3\% (Line 15).
 
-Concerning now a 90\%\sphinxhyphen{}\sphinxstyleemphasis{confident} best choice recommendation, we are lucky, as gets apparent in \hyperref[\detokenize{tutorial:aliceconfidentbestchoice}]{Listing \ref{\detokenize{tutorial:aliceconfidentbestchoice}}} below.
+Concerning now a 90\%\sphinxhyphen{}\sphinxstyleemphasis{confident} best choice recommendation, we are lucky (see \hyperref[\detokenize{tutorial:aliceconfidentbestchoice}]{Listing \ref{\detokenize{tutorial:aliceconfidentbestchoice}}} below).
 \sphinxSetupCaptionForVerbatim{The 90\% confident best choice recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:aliceconfidentbestchoice}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]

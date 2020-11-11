@@ -4146,9 +4146,9 @@ Details of the performance criteria may be consulted in a browser view (see :num
 
    Alice's performance criteria	   
    
-It is worthwhile noticing in :numref:`aliceCriteria` above, that Alice considers a difference of 7 points on her subjective attractiveness scale of the study programs (criterion *AS*) as a *considerable performance difference* triggering, the case given, a *veto situation*. Notice also the proportional *indifference* (5%) and *preference* (10%) discrimination thresholds shown on criterion *BC*-number of inhabitants.
+It is worthwhile noticing in :numref:`aliceCriteria` above that, on her subjective attractiveness scale of the study programs (criterion *AS*), Alice considers a performance differences of 7 points to be *considerable* and triggering, the case given, a *veto situation*. Notice also the proportional *indifference* (5%) and *preference* (10%) discrimination thresholds shown on criterion *BC*-number of inhabitants.
 
-With the following heatmap view, we may now consult Alice's performance evaluations.
+In the following *heatmap view*, we may now consult Alice's performance evaluations.
 
    >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,ndigits=0)
 
@@ -4161,7 +4161,7 @@ With the following heatmap view, we may now consult Alice's performance evaluati
 
 Her ten potential study programs (see :numref:`aliceHeatmap`) are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph [23]_. *Graduate interpreter* studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by *Graduate Translator* studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs for her appear to be studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
 
-It is interesting to notice that for Alice the most significant performance criteria appear to be, on the one side, the *attractiveness* of the study program (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear to be, on the other side, not *so* significant.
+It is interesting to observe that for Alice, the most significant performance criteria, appear to be, on the one side, the *attractiveness* of the study program (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear to be, on the other side, not *so* significant.
 
 Notice by the way that evaluations on performance criteria to be minimized, like *distance to home* (*DH*) or *study times* (*SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
 
@@ -4189,7 +4189,7 @@ Let us now have a look at the underlying bipolar-valued pairwise outranking digr
 
 Despite rather poorly discriminating performance evaluations, the 67 pairwise outranking situations, positively validated in the digraph *dg* obtained from Alice's performance tableau (see :numref:`aliceOutranking` Line 9), are supported by a 74% majority of criteria significance (Line 10).
 
-We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion *AS* to be considerable which triggers, the case given, a potential polarisation of the outranking chaacteristics. We may inspect the occurrence os such polarisations as follows.
+We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion *AS* to be considerable which triggers, the case given, a potential polarisation of the outranking characteristics. We may inspect the occurrence os such polarisations as follows.
 
 .. code-block:: pycon
    :name: aliceVetos
@@ -4232,9 +4232,9 @@ We have mentioned that Alice considers a performance difference of 7 points on t
      Counter-veto threshold              : 7.00
      Polarisation: r(I-UHB >= S-HKK) = 0.17 ==> +1.00
 
-In :numref:`aliceVetos` we notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 9, 14, 19) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35).
+In :numref:`aliceVetos`, we notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 9, 14, 19) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35).
 
-We may furthermore check that no outranking circuits do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs in the heatmap (see :numref:`aliceHeatmap`) are in fact *Condorcet* winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed by our best choice recommendation below (Lne 10).
+We may furthermore check that no outranking circuits do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs in :numref:`aliceHeatmap` are in fact *Condorcet* winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (see :numref:`aliceBestChoice` Line 10).
    
 .. code-block:: pycon
    :name: aliceBestChoice
@@ -4267,14 +4267,14 @@ We may furthermore check that no outranking circuits do appear (see :numref:`ali
      determinateness (%) : 58.33
      most credible action(s) = { 'S-HKK': 0.17, 'C-HKK': 0.17, }
 
-Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High school* Köln (see :numref:`aliceBestChoice` Line 16) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
+Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High School* Köln (see :numref:`aliceBestChoice` Line 16) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
 
-A graphviz drawing of the *skeleton* of the corresponding strict outranking digraph (see Line 2 in :numref:`aliceBestChoiceDrawing` below) may finally well illustrate our *best choice recommendation* for Alice.
+A graphviz drawing of the *skeleton* of the corresponding strict outranking digraph (see Line 2 in :numref:`aliceBestChoiceDrawing` below) may finally well illustrate our *best choice recommendation*.
 
 .. code-block:: pycon
    :name: aliceBestChoiceDrawing
    :linenos:
-   :caption: Drawing Alice's best choice recommendation 
+   :caption: Drawing the best choice recommendation 
 
    >>> dgcd = ~(-dg)
    >>> dgcd.closeTransitive(Reverse=True)
@@ -4302,11 +4302,11 @@ We may, furthermore, check the pairwise outranking situations observed  between 
    :width: 550 px
    :align: center
 
-   Pairwise comparing the first and second best-ranked study programs	   
+   Comparing the first and second best-ranked study programs	   
 
 The *Köln* alternative is performing **at least as well as** the *Saarbrücken* alternative on all the performance criteria, except the *Annual income* (of significance 2/24). Conversely, the *Saarbrücken* alternative is clearly **outperformed** from the *geographical* (0/6) as well as from the *financial* perspective (2/6).
 
-Alice considers her four decision objectives as being *more or less* equally important. Here we have, however, allocated *strictly equal* importance weights with *strictly* equi-significant criteria per objective. How robust is our previous best decision recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be *more or less uncertain* ?
+Alice considers her four decision objectives as being *more or less* equally important. Here we have, however, allocated *strictly equal* importance weights with *strictly* equi-significant criteria per objective. How robust is our previous best choice recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be *more or less uncertain* ?
 
 Robustness analysis
 ...................
@@ -4337,7 +4337,7 @@ To answer this question, we will consider the respective criteria significance w
 
 Of the original 67 valid outranking situations, we retain 44 outranking situations as being 90%-*confident* (see :numref:`aliceConfidentDigraph` Line 10). The corresponding 90%-*confident* qualified majority of criteria significance amounts to 14/24 = 58.3% (Line 15).  
 
-Concerning now a 90%-*confident* best choice recommendation, we are lucky, as gets apparent in :numref:`aliceConfidentBestChoice` below. 
+Concerning now a 90%-*confident* best choice recommendation, we are lucky (see :numref:`aliceConfidentBestChoice` below). 
 
 .. code-block:: pycon
    :name: aliceConfidentBestChoice

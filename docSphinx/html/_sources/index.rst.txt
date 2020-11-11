@@ -24,7 +24,7 @@ Contents
 Introduction
 ````````````
 
-This documentation, available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a *bipolar-valued outranking* approach ([1]_, [2]_). These computing resources are useful in the field of `Algorithmic Decision Theory <https://www.lamsade.dauphine.fr/~projet_cost/ALGORITHMIC_DECISION_THEORY/ALGORITHMIC_DECISION_THEORY.html>`_ and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They provide the practical tools for a Master Course |location_link4| at the University of Luxembourg.
+This documentation, available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a *bipolar-valued outranking* approach ([1]_, [2]_). These computing resources are useful in the field of `Algorithmic Decision Theory <https://www.lamsade.dauphine.fr/~projet_cost/ALGORITHMIC_DECISION_THEORY/ALGORITHMIC_DECISION_THEORY.html>`_ and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They provided the practical tools for a Master Course |location_link4| at the University of Luxembourg.
 
 .. image:: introDoc2.png
     :width: 500pt
