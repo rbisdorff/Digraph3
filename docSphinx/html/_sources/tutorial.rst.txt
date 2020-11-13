@@ -4362,6 +4362,57 @@ Concerning now a 90%-*confident* best choice recommendation, we are lucky (see :
 
 The *Graduate Interpreter* studies in Köln remain indeed a 90%-confident *Condorcet* winner (Line 2). Hence, the same study program also remains our 90%-confident best choice recommendation supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9 and 15).
 
+When pairwise comparing the two best-ranked study programs (see :numref:`pairwiseComparison`), we have observed that *I-FHK* actually positively outranks *I-USB* on all four decision objectives. This outranking situation is hence valid independently of the importance weights Alice may allocate to each of her decision objectives.
+
+We may compute these **unopposed** outranking situations [25]_ with help of the :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph` constructor.
+
+.. code-block:: pycon
+   :name: aliceUnopposedOutrankings
+   :linenos:
+   :caption: Computing the unopposed outranking situations
+
+   >>> from outrankingDigraphs import UnOpposedBipolarOutrankingDigraph
+   >>> uop = UnOpposedBipolarOutrankingDigraph(t)
+   >>> uop
+    *------- Object instance description ------*
+     Instance class       : UnOpposedBipolarOutrankingDigraph
+     Instance name        : AliceChoice_unopposed_outrankings
+     # Actions            : 10
+     # Criteria           : 9
+     Size                 : 28
+     Oppositeness (%)    : 58.21
+     Determinateness (%)  : 62.94
+     Valuation domain     : [-1.00;1.00]
+   >>> uop.computeTransitivityDegree()
+    1.0
+
+We keep 28 out the 67 standard outranking situations, which lead to an **oppositeness degree** of (1.0 - 28/67) = 58.21% (:numref:`aliceUnopposedOutrankings` Line 10). What is remarkable now is to notice that this unopposed outranking digraph *uop* is actually a transitive digraph modelling a partial linear ranking of the study programs (Line 14).
+
+We may hence make use of the :code:`exportGraphViz` method of the :py:class:`transitiveDigraphs.TransitiveDigraph` class for drawing the corresponding topological sorting diagram.
+
+    >>> from transitiveDigraphs import TransitiveDigraph
+    >>> TransitiveDigraph.exportGraphViz(uop,'AliceChoice_unopposed')
+     *---- exporting a dot file for GraphViz tools ---------*
+     Exporting to AliceChoice_unopposed.dot
+      0 { rank = 0; I_FHK; }
+      1 { rank = 1; I_USB; T_FHK; }
+      2 { rank = 2; T_UD; I_UHB; C_HKK; }
+      3 { rank = 3; T_USB; S_HKK; }
+      4 { rank = 4; T_UHB; }
+      5 { rank = 5; T_FHM; }
+     dot -Grankdir=TB -Tpng AliceChoice_unopposed.dot -o AliceChoice_unopposed.png
+
+.. figure:: AliceChoice_unopposed.png
+   :name: AliceChoice_unopposed
+   :width: 200 px
+   :align: center
+
+   Unopposed partial ranking of the study programs	   
+
+Again, we observe in :numref:`AliceChoice_unopposed` that *I-FHK* remains the best choice recommendation, independently of the actual importance weights that Alise may allocate to her four decision objectives.
+
+In view of her performance tableau, *Graduate Interpreter* studies at the *Technical High School Köln* represent thus definitely Alice's very best choice.
+
 -------------
 
 For further reading about the *Digraph3* Best Choice methodology, one may consult the following real *decision aid case study* about choosing a best poster in a scientific conference [BIS-2015]_ .
@@ -6996,11 +7047,14 @@ Bibliography
 
 .. [21] Alice's performance tableau :code:`AliceChoice.py` is available in the :code:`examples` directory of the Digraph3 software collection.
 
-.. [22] See also the corresponding :ref:`Advanced Topic<Bipolar-Valued-Likelihood-Tutorial-label>` in the Digraph3 documentation.
+.. [22] See also the corresponding :ref:`Advanced Topic <Bipolar-Valued-Likelihood-Tutorial-label>` in the Digraph3 documentation.
 
 .. [23] See the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`.
 
 .. [24] See also the :ref:`Advanced Topic <Bipolar-Valued-Kernels-Tutorial-label>` about computing best choice membership characteristics in the Digraph3 documentation.
+
+.. [25] See also the corresponding :ref:`Advanced Topic <UnOpposed-Outranking-Tutorial-label>` in the Digraph3 documentation.
+
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
