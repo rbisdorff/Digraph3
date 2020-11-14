@@ -2690,6 +2690,825 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 --------------
 
+.. _Rubis-Tutorial-label:
+
+Computing a best choice recommendation
+--------------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
+
+What site to choose ?
+.....................
+
+A SME, specialized in printing and copy services, has to move into new offices, and its CEO has gathered seven **potential office sites**.
+
+  ==== ====== ====================== ==================================================
+   ID   Name    Address               Comment
+  ==== ====== ====================== ==================================================
+   A    Ave    Avenue de la liberté   High standing city center
+   B    Bon    Bonnevoie              Industrial environment
+   C    Ces    Cessange               Residential suburb location
+   D    Dom    Dommeldange            Industrial suburb environment
+   E    Bel    Esch-Belval            New and ambitious urbanization far from the city
+   F    Fen    Fentange               Out in the countryside
+   G    Gar    Avenue de la Gare      Main city shopping street
+  ==== ====== ====================== ==================================================
+
+Three **decision objectives** are guiding the CEO's choice:
+
+      1. *minimize* the yearly costs induced by the moving,
+      2. *maximize* the future turnover of the SME,
+      3. *maximize* the new working conditions.
+
+The decision consequences to take into account for evaluating the potential new office sites with respect to each of the three objectives are modelled by the following **family of criteria**.
+
+   ==================== ==== ============ =========================================
+    Objective            ID   Name         Comment
+   ==================== ==== ============ =========================================
+    Yearly costs         C    Costs        Annual rent, charges, and cleaning
+    \                    \    \            \
+    Future turnover      St   Standing     Image and presentation
+    Future turnover      V    Visibility   Circulation of potential customers 
+    Future turnover      Pr   Proximity    Distance from town center
+    \                    \    \            \
+    Working conditions   W    Space        Working space
+    Working conditions   Cf   Comfort      Quality of office equipment
+    Working conditions   P    Parking      Available parking facilities
+   ==================== ==== ============ =========================================
+
+The evaluation of the seven potential sites on each criterion are gathered in the following **performance tableau**.
+
+   ============= ======== ======== ======== ======== ======== ======== ======== ======== 
+    Criterion     weight   A        B        C        D        E         F         G
+   ============= ======== ======== ======== ======== ======== ======== ======== ========
+    Costs         45.0     35.0K€   17.8K€   6.7K€    14.1K€   34.8K€   18.6K€   12.0K€
+    \              \       \        \        \        \        \        \        \
+    Prox          32.0     100      20       80       70       40       0        60
+    Visi          26.0     60       80       70       50       60       0        100 
+    Stan          23.0     100      10       0        30       90       70       20
+    \              \       \        \        \        \        \        \        \
+    Wksp          10.0     75       30       0        55       100      0        50
+    Wkcf           6.0     0        100      10       30       60       80       50
+    Park           3.0     90       30       100      90       70       0        80
+   ============= ======== ======== ======== ======== ======== ======== ======== ========
+
+Except the *Costs* criterion, all other criteria admit for grading a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site *A* is the most expensive, but also 100% satisfying the *Proximity* as well as the  *Standing* criterion. Whereas the site *C* is the cheapest one; providing however no satisfaction at all on both the *Standing* and the *Working Space* criteria.
+
+The *Costs* criterion admits the highest significance (45.0), followed by the *Future turnover* criteria (32.0 + 26.0 + 23.0), The *Working conditions* criteria are the less significant (10.0 + 6.0, + 3.0). It follows that the CEO considers *maximizing the future turnover* the most important objective (81.0), followed by the *minizing yearly Costs* objective (45.0), and less important, the *maximizing working conditions* objective (19.0). 
+
+Concerning yearly costs, we notice that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a site if there is at least a positive difference of 2500€. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a *considerably large* performance difference, triggering a *veto* situation the case given (see [BIS-2013]_). 
+
+In view of this performance tableau, what is now the office site we may recommend to the CEO as **best choice** ?
+
+Performance tableau
+...................
+
+A Python encoded  performance tableau is available for downloading here `officeChoice.py`_.
+
+   .. _officeChoice.py: _static/officeChoice.py
+
+We may inspect the performance tableau data with the computing resources provided by the :ref:`perfTabs module <perfTabs-label>`.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from perfTabs import *
+   >>> t = PerformanceTableau('officeChoice')
+   >>> help(t) # for discovering all the methods available
+   >>> t.showPerformanceTableau(Transposed=True)
+    *----  performance tableau -----*
+    criteria |   weights |     'A'      'B'      'C'       'D'       'E'       'F'       'G'   
+    ---------|---------------------------------------------------------------------------------
+    'C'      |     45    | -35000.00 -17800.00 -6700.00 -14100.00 -34800.00 -18600.00 -12000.00  
+    'Cf'     |      6    |      0.00    100.00    10.00     30.00     60.00     80.00     50.00  
+    'P'      |      3    |     90.00     30.00   100.00     90.00     70.00      0.00     80.00  
+    'Pr'     |     32    |    100.00     20.00    80.00     70.00     40.00      0.00     60.00  
+    'St'     |     23    |    100.00     10.00     0.00     30.00     90.00     70.00     20.00  
+    'V'      |     26    |     60.00     80.00    70.00     50.00     60.00      0.00    100.00  
+    'W'      |     10    |     75.00     30.00     0.00     55.00    100.00      0.00     50.00  
+
+We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the :py:func:`perfTabs.PerformanceTableau.showCriteria` method.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> t.showCriteria(IntegerWeights=True)
+    *----  criteria -----*
+    C 'Costs'
+    Scale = (Decimal('0.00'), Decimal('50000.00'))
+    Weight = 45
+    Threshold ind : 1000.00 + 0.00x ; percentile:  0.095
+    Threshold pref : 2500.00 + 0.00x ; percentile:  0.143
+    Cf 'Comfort'
+    Scale = (Decimal('0.00'), Decimal('100.00'))
+    Weight = 6
+    Threshold ind : 10.00 + 0.00x ; percentile:  0.095
+    Threshold pref : 20.00 + 0.00x ; percentile:  0.286
+    Threshold veto : 80.00 + 0.00x ; percentile:  0.905
+    ...
+
+On the *Costs* criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative *Comfort* criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged *considerably large* (Line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria. 
+ 
+A colorful comparison of all the performances is shown on :numref:`officeChoiceHeatmap` by the **heatmap** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.
+
+   >>> t.showHTMLPerformanceHeatmap(colorLevels=5,\
+                                    rankingRule=None)
+
+.. figure:: officeChoiceHeatmap.png
+   :name: officeChoiceHeatmap
+   :width: 500 px
+   :align: center
+
+   Unranked heatmap of the office choice performance tableau
+	   
+Site *Ave* shows extreme and contradictory performances: highest *Costs* and no *Working Comfort* on one hand, and total satisfaction with respect to *Standing*, *Proximity* and *Parking facilities* on the other hand. Similar, but opposite, situation is given for site *Ces*: unsatisfactory *Working Space*, no *Standing* and no *Working Comfort* on the one hand, and lowest *Costs*, best *Proximity* and *Parking facilities* on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites *Dom* and *Gar*. Finally, site *Fen* is clearly the less satisfactory alternative of all.
+
+Outranking digraph
+..................
+
+To help now the CEO choosing the best site, we are going to compute pairwise outrankings (see [BIS-2013]_) on the set of potential sites. For two sites *x* and *y*, the situation "*x* outranks *y*", denoted (*x* S *y*), is given if there is:
+
+     1. a **significant majority** of criteria concordantly supporting that site *x* is *at least as satisfactory as* site *y*, and
+     2. **no considerable** counter-performance observed on any discordant criterion.
+
+The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted r(*x* S *y*), is measured in a bipolar significance valuation [-1.00, 1.00], where **positive** terms r(*x* S *y*) > 0.0 indicate a **validated**, and **negative** terms r(*x* S *y*) < 0.0 indicate a **non-validated** outrankings; whereas the **median** value r(*x* S *y*) = 0.0 represents an **indeterminate** situation (see [BIS-2004]_).   
+
+.. figure:: officeChoiceOutranking.png
+   :name: officeChoiceOutranking
+   :width: 400 px
+   :align: center
+
+   The office choice outranking digraph  
+
+For computing such a bipolar-valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigraph`` constructor from the :ref:`outrankingDigraphs module <outrankingDigraphs-label>`. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window (see :numref:`officeChoiceOutranking`).
+
+.. code-block:: pycon
+
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
+   >>> g = BipolarOutrankingDigraph(t)
+   >>> g.showHTMLRelationTable()
+	   
+In :numref:`officeChoiceOutranking` we may notice that Alternative *D* is **positively outranking** all other potential office sites (a *Condorcet winner*). Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are *not* outranked by any other site; they are in fact **weak** *Condorcet winners*.
+
+.. code-block:: pycon
+
+   >>> g.condorcetWinners()
+    ['D']
+   >>> g.weakCondorcetWinners()
+    ['A', 'C', 'D']
+
+We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph (see :numref:`officeChoice`).
+
+.. code-block:: pycon
+
+   >>> g.exportGraphViz('officeChoice')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to officeChoice.dot
+    dot -Grankdir=BT -Tpng officeChoice.dot -o officeChoice.png
+
+.. figure:: officeChoice.png
+   :name: officeChoice	    
+   :width: 300 px
+   :align: center
+
+   The office choice outranking digraph 	   
+
+One may check that the outranking digraph *g* does not admit in fact any cyclic strict preference situation.
+
+.. code-block:: pycon
+
+   >>> g.computeChordlessCircuits()
+    []
+   >>> g.showChordlessCircuits()
+    No circuits observed in this digraph.
+    *---- Chordless circuits ----*
+    0 circuits.
+
+*Rubis* best choice recommendations
+...................................
+
+Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking prekernels --*weakly independent* and *strictly outranking* choices-- of the outranking digraph (see the tutorial on :ref:`Kernel-Tutorial-label`). The case given, we previously need to break open all chordless odd circuits at their weakest link.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from digraphs import BrokenCocsDigraph
+   >>> bcg = BrokenCocsDigraph(g)
+   >>> bcg.brokenLinks
+    set()
+
+As we observe indeed no such chordless circuits here, we may directly compute the *prekernels* of the outranking digraph *g*.
+
+.. code-block:: pycon
+   :name: computePreKernels
+   :caption: Computing outranking and outranked prekernels
+   :linenos:
+
+   >>> g.showPreKernels()
+    *--- Computing preKernels ---*
+    Dominant preKernels :
+    ['D']
+       independence :  1.0
+       dominance    :  0.02
+       absorbency   :  -1.0
+       covering     :  1.000
+    ['B', 'E', 'C']
+       independence :  0.00
+       dominance    :  0.10
+       absorbency   :  -1.0
+       covering     :  0.500
+    ['A', 'G']
+       independence :  0.00
+       dominance    :  0.78
+       absorbency   :  0.00
+       covering     :  0.700
+    Absorbent preKernels :
+    ['F', 'A']
+       independence :  0.00
+       dominance    :  0.00
+       absorbency   :  1.0
+       covering     :  0.700
+    *----- statistics -----
+    graph name:  rel_officeChoice.xml
+    number of solutions
+     dominant kernels :  3
+     absorbent kernels:  1
+    cardinality frequency distributions
+    cardinality     :  [0, 1, 2, 3, 4, 5, 6, 7]
+    dominant kernel :  [0, 1, 1, 1, 0, 0, 0, 0]
+    absorbent kernel:  [0, 0, 1, 0, 0, 0, 0, 0]
+    Execution time  : 0.00018 sec.
+    Results in sets: dompreKernels and abspreKernels.
+
+We notice in :numref:`computePreKernels` three potential best choice recommendations: the Condorcet winner *D* (Line 4), the triplet *B*, *C* and *E* (Line 9), and finally the pair *A* and *G* (Line 14). The best choice recommendation is now given by the **most determined** prekernel; the one supported by the most significant criteria coalition. This result is shown with the :code:`showBestChoiceRecommendation` command. Notice that this method actually works by default on the broken chords digraph *bcg*.
+
+.. code-block:: pycon
+   :name: showBestChoice
+   :caption: Computing a best choice recommendation
+   :linenos:
+
+   >>> g.showBestChoiceRecommendation(CoDual=False)
+    *****************************************
+    Rubis best choice recommendation(s) (BCR)
+     (in decreasing order of determinateness)   
+    Credibility domain: [-1.00,1.00]
+    === >> potential best choice(s)
+    * choice              : ['D']
+      independence        : 1.00
+      dominance           : 0.02
+      absorbency          : -1.00
+      covering (%)        : 100.00
+      determinateness (%) : 51.03
+      - most credible action(s) = { 'D': 0.02, }
+    === >> potential best choice(s)
+    * choice              : ['A', 'G']
+      independence        : 0.00
+      dominance           : 0.78
+      absorbency          : 0.00
+      covering (%)        : 70.00
+      determinateness (%) : 50.00
+      - most credible action(s) = { }
+    === >> potential best choice(s)
+    * choice              : ['B', 'C', 'E']
+      independence        : 0.00
+      dominance           : 0.10
+      absorbency          : -1.00
+      covering (%)        : 50.00
+      determinateness (%) : 50.00
+      - most credible action(s) = { }
+    === >> potential worst choice(s) 
+    * choice              : ['A', 'F']
+      independence        : 0.00
+      dominance           : 0.00
+      absorbency          : 1.00
+      covered (%)         : 70.00
+      determinateness (%) : 50.00
+      - most credible action(s) = { }
+    Execution time: 0.014 seconds
+
+We notice in :numref:`showBestChoice` (Line 7) above that the most significantly supported best
+choice recommendation is indeed the *Condorcet* winner *D* supported by a
+majority of 51.03% of the criteria significance (see Line 12). Both other
+potential best choice recommendations, as well as the potential worst
+choice recommendation, are not positively validated as best,
+resp. worst choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see Lines 27 and 37) and seams hence not actually comparable to its competitors.
+
+Computing *strict best* choice recommendations
+..............................................
+
+When comparing now the performances of alternatives *D* and *G* on a
+pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D*:  r(*G* outranks *D*) = +145/145 = +1.0.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> g.showPairwiseComparison('G','D')
+    *------------  pairwise comparison ----*
+    Comparing actions : (G, D)
+    crit. wght.  g(x)      g(y)    diff.  |   ind     pref    concord 	|
+    =========================================================================
+    C   45.00 -12000.00 -14100.00 +2100.00 | 1000.00 2500.00   +45.00 	| 
+    Cf   6.00     50.00     30.00   +20.00 |   10.00   20.00    +6.00 	| 
+    P    3.00     80.00     90.00   -10.00 |   10.00   20.00    +3.00 	| 
+    Pr  32.00     60.00     70.00   -10.00 |   10.00   20.00   +32.00 	| 
+    St  23.00     20.00     30.00   -10.00 |   10.00   20.00   +23.00 	| 
+    V   26.00    100.00     50.00   +50.00 |   10.00   20.00   +26.00 	| 
+    W   10.00     50.00     55.00    -5.00 |   10.00   20.00   +10.00 	|
+    =========================================================================
+    Valuation in range: -145.00 to +145.00; global concordance: +145.00
+
+However, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:  r(*C* outranks *G*) = +15/145 > 0.0, and r(*G* outranks *C*) = -15/145 < 0.0.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> g.showPairwiseComparison('C','G')
+    *------------  pairwise comparison ----*
+    Comparing actions : (C, G)/(G, C)
+    crit. wght.   g(x)     g(y)      diff.  |   ind.   pref.   	(C,G)/(G,C)  |
+    ==========================================================================
+    C    45.00 -6700.00 -12000.00  +5300.00 | 1000.00 2500.00  +45.00/-45.00 | 
+    Cf    6.00    10.00     50.00    -40.00 |   10.00   20.00   -6.00/ +6.00 | 
+    P     3.00   100.00     80.00    +20.00 |   10.00   20.00   +3.00/ -3.00 | 
+    Pr   32.00    80.00     60.00    +20.00 |   10.00   20.00  +32.00/-32.00 | 
+    St   23.00     0.00     20.00    -20.00 |   10.00   20.00  -23.00/+23.00 | 
+    V    26.00    70.00    100.00    -30.00 |   10.00   20.00  -26.00/+26.00 | 
+    W    10.00     0.00     50.00    -50.00 |   10.00   20.00  -10.00/+10.00 |
+    =========================================================================
+    Valuation in range: -145.00 to +145.00; global concordance: +15.00/-15.00
+
+
+To model these *strict outranking* situations, we may recompute the best choice recommendation on the **codual**, the converse (~) of the dual (-) [14]_, of the outranking digraph instance *g* (see [BIS-2013]_), as follows.
+
+.. code-block:: pycon
+   :name: strictBestChoice
+   :caption: Computing the strict best choice recommendation
+   :linenos:
+
+   >>> g.showBestChoiceRecommendation(CoDual=True,\
+                                      ChoiceVector=True)
+    * --- Best and worst choice recommendation(s) ---*
+     (in decreasing order of determinateness)   
+    Credibility domain: [-1.00,1.00]
+    === >> potential best choice(s)
+    * choice              : ['A', 'C', 'D']
+      independence        : 0.00
+      dominance           : 0.10
+      absorbency          : 0.00
+      covering (%)        : 41.67
+      determinateness (%) : 50.59
+      - characteristic vector = { 'D': 0.02, 'G': 0.00, 'C': 0.00,
+	                          'A': 0.00, 'F': -0.02, 'E': -0.02,
+				  'B': -0.02, }
+    === >> potential worst choice(s) 
+    * choice              : ['A', 'F']
+      independence        : 0.00
+      dominance           : -0.52
+      absorbency          : 1.00
+      covered (%)         : 50.00
+      determinateness (%) : 50.00
+      - characteristic vector = { 'G': 0.00, 'F': 0.00, 'E': 0.00,
+	                          'D': 0.00, 'C': 0.00, 'B': 0.00,
+				  'A': 0.00, }
+				  
+It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to **being or not being** a potential best choice candidate. 
+
+We may also notice (see Line 17 and Line 21) that both alternatives *A* and *F* are reported as certainly outranked choices, hence as **potential worst choice recommendation** . This confirms again the global incomparability status of alternative *A*.
+
+Weakly ordering the outranking digraph
+......................................
+
+To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor imported from the :ref:`transitiveDigraphs module <transitiveDigraphs-label>`, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from transitiveDigraphs import RankingByChoosingDigraph
+   >>> gcd = ~(-g)
+   >>> rbc = RankingByChoosingDigraph(gcd)
+    Threading ...  ## multiprocessing if 2 cores are available
+    Exiting computing threads
+   >>> rbc.showRankingByChoosing()
+    Ranking by Choosing and Rejecting
+    1st ranked ['D'] (0.28)
+       2nd ranked ['C', 'G'] (0.26)
+       2nd last ranked ['B', 'C', 'E'] (0.34)
+    1st last ranked ['A', 'F'] (0.50)
+   >>> rbc.exportGraphViz('officeChoiceRanking')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to officeChoiceRanking.dot
+    0 { rank = same; A; C; D; }
+    1 { rank = same; G; } 
+    2 { rank = same; E; B; }
+    3 { rank = same; F; }
+    dot -Grankdir=TB -Tpng officeChoiceRanking.dot -o officeChoiceRanking.png
+
+.. figure:: officeChoiceRanking.png
+   :width: 200 px
+   :align: center
+
+   Ranking-by-choosing from the office choice outranking digraph
+	   
+In this **ranking-by-choosing** method, where we operate the *epistemic fusion* of iterated (strict) best and worst choices, compromise alternative *D* is indeed ranked before compromise alternative *G*. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation. 
+
+The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, site *D* represents actually the best compromise. However, if *Costs* do not play much a role, it would be perhaps better to decide to move to the most advantageous site *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
+
+It might be worth, as an **exercise**, to modify these criteria significance weights in the :code:`officeChoice.py` data file in such a way that:
+    - all criteria under an objective appear *equi-significant*, and
+    - all three decision objectives are considered *equally important*.
+
+What will become the best choice recommendation under this working hypothesis?  
+
+See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
+
+Back to :ref:`Content Table <Tutorial-label>`
+
+--------------
+
+.. _Alice-Tutorial-label:
+
+Alice's best choice: A case study [19]_
+---------------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+|aliceImage| Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her "Abitur" with satisfactory and/or good marks and  wants to start her further studies thereafter. She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees, as well as, her living costs during her studies.
+
+.. |aliceImage| image:: AliceF.png
+   :align: top
+
+The decision problem
+....................
+
+Alice has already identified 10 **potential study programs**:
+
+======= ============================ =============================== =============
+ ID      Diploma                      Institution                      City
+======= ============================ =============================== =============
+ T-UD    Qualified translator (T)     University (UD)                 Düsseldorf
+ T-FHK   Qualified translator (T)     Higher Technical School (FHK)   Köln
+ T-FHM   Qualified translator (T)     Higher Technical School (FHM)   München
+ I-FHK   Graduate interpreter (I)     Higher Technical School (FHK)   Köln
+ T-USB   Qualified translator (T)     University (USB)                Saarbrücken
+ I-USB   Graduate interpreter (I)     University (USB)                Saarbrücken
+ T-UHB   Qualified translator (T)     University (UHB)                Heidelberg
+ I-UHB   Graduate interpreter (I)     University (UHB)                Heidelberg
+ S-HKK   Specialized secretary (S)    Chamber of Commerce (HKK)       Köln
+ C-HKK   Foreign correspondent (C)    Chamber of Commerce (HKK)       Köln
+======= ============================ =============================== =============
+
+Four **decision objectives** of more or less equal importance are guiding Alice's choice:
+
+    #. *maximize* the attractiveness of the study place (GEO),
+    #. *maximize* the attractiveness in her further studies (LEA),
+    #. *minimize*  her financial dependency on her parents (FIN),
+    #. *maximize* her professional perspectives (PRA).
+
+The performance tableau
+.......................
+
+The decision consequences Alice wishes to take into account for evaluating the potential study programs with respect to each of the four objectives are modelled by the following **family of criteria**.
+
+   ==== ============ ======================================== =========== ========
+    ID   Name         Comment                                  Objective   Weight
+   ==== ============ ======================================== =========== ========
+    DH   Proximity    Distance in km to her home (min)         GEO         3
+    BC   Big City     Number of inhabitants (max)              GEO         3
+    \    \            \                                        \           \
+    AS   Studies      Attractiveness of the studies (max)      LEA         6
+    \    \            \                                        \           \
+    SF   Fees         Annual study fees (min)                  FIN         2
+    LC   Living       Monthly living costs (min)               FIN         2
+    SL   Length       Length of the studies (min)              FIN         2
+    \     \            \                                       \           \
+    AP   Profession   Attractiveness of the profession (max)   PRA         2
+    AI   Income       Annual income after studying (max)       PRA         2
+    PR   Prestige     Occupational prestige (max)              PRA         2 
+   ==== ============ ======================================== =========== ========
+
+Alice is subjectively evaluating the *attractiveness* of the studies on a three level ordinal scale from 0 (*weak*), 1 (*fair*) to 2 (*good*). Similarly, she is subjectively evaluating the *attractiveness* of the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the *occupational prestige* she looked up the SIOPS [20]_. All the other evaluation data could be looked up on the internet.
+
+The actual evaluations of Alice's potential study programs are gathered in a :py:class:`perfTabs.PerformanceTableau` object [21]_.
+
+.. code-block:: pycon
+   :name: alicePerfTab
+   :linenos:
+   :caption: Alice's performance tableau
+
+   >>> from perfTabs import PerformanceTableau
+   >>> t = PerformanceTableau('AliceChoice')
+   >>> t.showObjectives()
+     *------ decision objectives -------"
+     GEO: Geographical aspect
+       DH Distance to parent's home 3
+       BC Number of inhabitants     3
+       Total weight: 6 (2 criteria)
+     LEA: Learning aspect
+       AS Attractiveness of the study program 6
+       Total weight: 6.00 (1 criteria)
+     FIN: Financial aspect
+       SF Annual registration fees 2
+       LC Monthly living costs     2
+       SL study time               2
+       Total weight: 6.00 (3 criteria)
+     PRA: Professional aspect
+       AP Attractiveness of the profession          2
+       AI Annual professional income after studying 2
+       OP Occupational Prestige                     2
+       Total weight: 6.00 (3 criteria)
+
+Within each decision objective, the performance criteria are considered to be equisignificant. Hence, the four decision objectives show a same importance weight of 6 (see :numref:`alicePerfTab`).
+
+Details of the performance criteria may be consulted in a browser view (see :numref:`aliceCriteria` below).
+
+   >>> t.showHTMLCriteria()
+
+.. figure:: aliceCriteria.png
+   :name: aliceCriteria
+   :width: 750 px
+   :align: center
+
+   Alice's performance criteria	   
+   
+It is worthwhile noticing in :numref:`aliceCriteria` above that, on her subjective attractiveness scale of the study programs (criterion *AS*), Alice considers a performance differences of 7 points to be *considerable* and triggering, the case given, a *veto situation*. Notice also the proportional *indifference* (5%) and *preference* (10%) discrimination thresholds shown on criterion *BC*-number of inhabitants.
+
+In the following *heatmap view*, we may now consult Alice's performance evaluations.
+
+   >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,ndigits=0)
+
+.. figure:: aliceHeatmap.png
+   :name: aliceHeatmap
+   :width: 650 px
+   :align: center
+
+   Heatmap of Alice's performance tableau	   
+
+Her ten potential study programs (see :numref:`aliceHeatmap`) are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph [23]_. *Graduate interpreter* studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by *Graduate Translator* studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs for her appear to be studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
+
+It is interesting to observe that for Alice, the most significant performance criteria, appear to be, on the one side, the *attractiveness* of the study program (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear to be, on the other side, not *so* significant.
+
+Notice by the way that evaluations on performance criteria to be minimized, like *distance to home* (*DH*) or *study times* (*SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
+
+Building a best choice recommendation
+.....................................
+
+Let us now have a look at the underlying bipolar-valued pairwise outranking digraph.
+
+.. code-block:: pycon
+   :name: aliceOutranking
+   :linenos:
+   :caption: Alice's outranking digraph
+
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
+   >>> dg = BipolarOutrankingDigraph(t) 
+   >>> dg
+    *------- Object instance description ------*
+    Instance class      : BipolarOutrankingDigraph
+    Instance name       : rel_AliceChoice
+    # Actions           : 10
+    # Criteria          : 9
+    Size                : 67
+    Determinateness (%) : 73.91
+    Valuation domain    : [-1.00;1.00]
+
+Despite rather poorly discriminating performance evaluations, the 67 pairwise outranking situations, positively validated in the digraph *dg* obtained from Alice's performance tableau (see :numref:`aliceOutranking` Line 9), are supported by a 74% majority of criteria significance (Line 10).
+
+We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion *AS* to be considerable which triggers, the case given, a potential polarisation of the outranking characteristics. We may inspect the occurrence os such polarisations as follows.
+
+.. code-block:: pycon
+   :name: aliceVetos
+   :linenos:
+   :caption: Veto and counter-veto situations
+
+   >>> dg.showVetos()
+    *----  Veto situations ---
+    number of veto situations : 3 
+    1: r(S-HKK >= I-FHK) = -0.17
+     criterion: AS
+     Considerable performance difference : -7.00
+     Veto discrimination threshold       : -7.00
+     Polarisation: r(S-HKK >= I-FHK) = -0.17 ==> -1.00
+    2: r(S-HKK >= I-USB) = -0.17
+     criterion: AS
+     Considerable performance difference : -7.00
+     Veto discrimination threshold       : -7.00
+     Polarisation: r(S-HKK >= I-USB) = -0.17 ==> -1.00
+    3: r(S-HKK >= I-UHB) = -0.17
+     criterion: AS
+     Considerable performance difference : -7.00
+     Veto discrimination threshold       : -7.00
+     Polarisation: r(S-HKK >= I-UHB) = -0.17 ==> -1.00
+    *----  Counter-veto situations ---
+    number of counter-veto situations : 3 
+    1: r(I-FHK >= S-HKK) = 0.83
+     criterion: AS
+     Considerable performance difference : 7.00
+     Counter-veto threshold              : 7.00
+     Polarisation: r(I-FHK >= S-HKK) = 0.83 ==> +1.00
+    2: r(I-USB >= S-HKK) = 0.17
+     criterion: AS
+     Considerable performance difference : 7.00
+     Counter-veto threshold              : 7.00
+     Polarisation: r(I-USB >= S-HKK) = 0.17 ==> +1.00
+    3: r(I-UHB >= S-HKK) = 0.17
+     criterion: AS
+     Considerable performance difference : 7.00
+     Counter-veto threshold              : 7.00
+     Polarisation: r(I-UHB >= S-HKK) = 0.17 ==> +1.00
+
+In :numref:`aliceVetos`, we notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 9, 14, 19) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35).
+
+We may furthermore check that no outranking circuits do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs in :numref:`aliceHeatmap` are in fact *Condorcet* winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (see :numref:`aliceBestChoice` Line 10).
+   
+.. code-block:: pycon
+   :name: aliceBestChoice
+   :linenos:
+   :caption: Alice's best choice recommendation
+
+   >>> dg.computeChordlessCircuits()
+    []
+   >>> dg.computeCondorcetWinners()
+    ['I-FHK', 'I-UHB', 'I-USB', 'T-FHK'] 
+   >>> dg.showBestChoiceRecommendation()
+    Best choice recommendation(s) (BCR)
+    (in decreasing order of determinateness)   
+    Credibility domain: [-1.00,1.00]
+    === >> potential best choice(s)
+    choice              : ['I-FHK', 'I-UHB', 'I-USB', 'T-FHK']
+     independence        : 0.17
+     dominance           : 0.08
+     absorbency          : -0.83
+     covering (%)        : 62.50
+     determinateness (%) : 68.75
+     most credible action(s) = { 'I-FHK': 0.75, 'T-FHK': 0.17,
+                                 'I-USB': 0.17, 'I-UHB': 0.17, }
+    === >> potential worst choice(s) 
+    choice              : ['C-HKK', 'S-HKK']
+     independence        : 0.50
+     dominance           : -0.83
+     absorbency          : 0.17
+     covered (%)         : 100.00
+     determinateness (%) : 58.33
+     most credible action(s) = { 'S-HKK': 0.17, 'C-HKK': 0.17, }
+
+Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High School* Köln (see :numref:`aliceBestChoice` Line 16) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
+
+A graphviz drawing of the *skeleton* of the corresponding strict outranking digraph (see Line 2 in :numref:`aliceBestChoiceDrawing` below) may finally well illustrate our *best choice recommendation*.
+
+.. code-block:: pycon
+   :name: aliceBestChoiceDrawing
+   :linenos:
+   :caption: Drawing the best choice recommendation 
+
+   >>> dgcd = ~(-dg)
+   >>> dgcd.closeTransitive(Reverse=True)
+   >>> dgcd.exportGraphViz('aliceBestChoice',
+        bestChoice=['I-FHK'],worstChoice=['S-HKK','C-HKK'])
+    *---- exporting a dot file for GraphViz tools ---------*
+     Exporting to aliceBestChoice.dot
+     dot -Grankdir=BT -Tpng aliceBestChoice.dot -o aliceBestChoice.png
+
+.. figure:: aliceBestChoice.png
+   :name: aliceBestChoiceImage
+   :width: 400 px
+   :align: center
+
+   Alice's best choice recommendation	   
+
+In :numref:`aliceBestChoiceImage` we notice that the *Graduate Interpreter* studies come first, followed by the *Graduate Translator* studies. Last come the *Chamber of Commerce*'s specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
+
+We may, furthermore, check the pairwise outranking situations observed  between the first and second-ranked alternatives, ie *Garduate Interpreter* studies in Köln verse *Graduate Interpreter* studies in Saabrücken (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
+
+   >>> dg.showHTMLPairwiseOutrankings('I-FHK','I-USB')
+
+.. figure:: pairwiseComparison.png
+   :name: pairwiseComparison
+   :width: 550 px
+   :align: center
+
+   Comparing the first and second best-ranked study programs	   
+
+The *Köln* alternative is performing **at least as well as** the *Saarbrücken* alternative on all the performance criteria, except the *Annual income* (of significance 2/24). Conversely, the *Saarbrücken* alternative is clearly **outperformed** from the *geographical* (0/6) as well as from the *financial* perspective (2/6).
+
+Alice considers her four decision objectives as being *more or less* equally important. Here we have, however, allocated *strictly equal* importance weights with *strictly* equi-significant criteria per objective. How robust is our previous best choice recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be *more or less uncertain* ?
+
+Robustness analysis
+...................
+
+To answer this question, we will consider the respective criteria significance weights *wj* to be **triangular random variables** in the range 0 to *2wj* with *mode* = *wj*. We may compute a corresponding **90%-confident outranking digraph** with the help of the :py:class:`outrankingDigraphs.ConfidentBipolarOutrankingDigraph` constructor [22]_.
+
+.. code-block:: pycon
+   :name: aliceConfidentDigraph
+   :linenos:
+   :caption: The 90% confident outranking digraph
+
+   >>> from outrankingDigraphs import ConfidentOutrankingDigraph
+   >>> cdg = ConfidentBipolarOutrankingDigraph(t,\
+		       distribution='triangular',confidence=90.0)
+   >>> cdg
+    *------- Object instance description ------*
+    Instance class       : ConfidentBipolarOutrankingDigraph
+    Instance name        : rel_AliceChoice_CLT
+    # Actions            : 10
+    # Criteria           : 9
+    Size                 : 44
+    Valuation domain     : [-1.00;1.00]
+    Uncertainty model    : triangular(a=0,b=2w) 
+    Likelihood domain    : [-1.0;+1.0] 
+    Confidence level     : 90.0% 
+    Confident majority   : 14/24 (58.3%) 
+    Determinateness (%)  : 68.19
+
+Of the original 67 valid outranking situations, we retain 44 outranking situations as being 90%-*confident* (see :numref:`aliceConfidentDigraph` Line 10). The corresponding 90%-*confident* qualified majority of criteria significance amounts to 14/24 = 58.3% (Line 15).  
+
+Concerning now a 90%-*confident* best choice recommendation, we are lucky (see :numref:`aliceConfidentBestChoice` below). 
+
+.. code-block:: pycon
+   :name: aliceConfidentBestChoice
+   :linenos:
+   :caption: The 90% confident best choice recommendation
+
+   >>> cdg.computeCondorcetWinners()
+    ['I-FHK']
+   >>> cdg.showBestChoiceRecommendation()
+    ***********************
+    Best choice recommendation(s) (BCR)
+     (in decreasing order of determinateness)   
+     Credibility domain: [-1.00,1.00]
+     === >> potential best choice(s)
+     choice              : ['I-FHK','I-UHB','I-USB','T-FHK','T-FHM']
+      independence        : 0.00
+      dominance           : 0.42
+      absorbency          : 0.00
+      covering (%)        : 20.00
+      determinateness (%) : 61.25
+      - most credible action(s) = { 'I-FHK': 0.75, }
+
+The *Graduate Interpreter* studies in Köln remain indeed a 90%-confident *Condorcet* winner (Line 2). Hence, the same study program also remains our 90%-confident best choice recommendation supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9 and 15).
+
+When pairwise comparing the two best-ranked study programs (see :numref:`pairwiseComparison`), we have observed that *I-FHK* actually positively outranks *I-USB* on all four decision objectives. When we admit equi-significant criteria significances per objective, this outranking situation is hence valid independently of the importance weights Alice may allocate to each of her decision objectives. 
+
+We may compute these **unopposed** outranking situations [25]_ with help of the :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph` constructor.
+
+.. code-block:: pycon
+   :name: aliceUnopposedOutrankings
+   :linenos:
+   :caption: Computing the unopposed outranking situations
+
+   >>> from outrankingDigraphs import UnOpposedBipolarOutrankingDigraph
+   >>> uop = UnOpposedBipolarOutrankingDigraph(t)
+   >>> uop
+    *------- Object instance description ------*
+     Instance class       : UnOpposedBipolarOutrankingDigraph
+     Instance name        : AliceChoice_unopposed_outrankings
+     # Actions            : 10
+     # Criteria           : 9
+     Size                 : 28
+     Oppositeness (%)    : 58.21
+     Determinateness (%)  : 62.94
+     Valuation domain     : [-1.00;1.00]
+   >>> uop.computeTransitivityDegree()
+    1.0
+
+We keep 28 out the 67 standard outranking situations, which leads to an **oppositeness degree** of (1.0 - 28/67) = 58.21% (:numref:`aliceUnopposedOutrankings` Line 10). Remarkable furthermore is that this unopposed outranking digraph *uop* is actually *transitive*, i.e. modelling a *partial ranking* of the study programs (Line 14).
+
+We may hence make use of the :code:`exportGraphViz` method of the :py:class:`transitiveDigraphs.TransitiveDigraph` class for drawing the corresponding topological sorting diagram.
+
+    >>> from transitiveDigraphs import TransitiveDigraph
+    >>> TransitiveDigraph.exportGraphViz(uop,'AliceChoice_unopposed')
+     *---- exporting a dot file for GraphViz tools ---------*
+     Exporting to AliceChoice_unopposed.dot
+      0 { rank = 0; I_FHK; }
+      1 { rank = 1; I_USB; T_FHK; }
+      2 { rank = 2; T_UD; I_UHB; C_HKK; }
+      3 { rank = 3; T_USB; S_HKK; }
+      4 { rank = 4; T_UHB; }
+      5 { rank = 5; T_FHM; }
+     dot -Grankdir=TB -Tpng AliceChoice_unopposed.dot -o AliceChoice_unopposed.png
+
+.. figure:: AliceChoice_unopposed.png
+   :name: AliceChoice_unopposed
+   :width: 200 px
+   :align: center
+
+   Unopposed partial ranking of the potential study programs	   
+
+Again, when *equi-signficant* performance criteria are assumed per decision objective, we observe in :numref:`AliceChoice_unopposed` that *I-FHK* remains the stable best choice recommendation, *independently* of the actual importance weights that Alice may wish to allocate to her four decision objectives.
+
+In view of her performance tableau in :numref:`aliceHeatmap`, *Graduate Interpreter* studies at the *Technical High School Köln*, thus, represent definitely **Alice's very best choice**.
+
+For further reading about the *Digraph3* Best Choice methodology, one may consult the following real *decision aid case study* about choosing a best poster in a scientific conference [BIS-2015]_ .
+
+Back to :ref:`Content Table <Tutorial-label>`
+
+-------------
+
 .. _QuantilesRating-Tutorial-label:
 
 Rating with multiple incommensurable criteria
@@ -3617,825 +4436,6 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
 Back to :ref:`Content Table <Tutorial-label>`
 
 ----------------
-
-.. _Rubis-Tutorial-label:
-
-Computing a best choice recommendation
---------------------------------------
-
-.. contents:: 
-	:depth: 2
-	:local:
-
-See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
-
-What site to choose ?
-.....................
-
-A SME, specialized in printing and copy services, has to move into new offices, and its CEO has gathered seven **potential office sites**.
-
-  ==== ====== ====================== ==================================================
-   ID   Name    Address               Comment
-  ==== ====== ====================== ==================================================
-   A    Ave    Avenue de la liberté   High standing city center
-   B    Bon    Bonnevoie              Industrial environment
-   C    Ces    Cessange               Residential suburb location
-   D    Dom    Dommeldange            Industrial suburb environment
-   E    Bel    Esch-Belval            New and ambitious urbanization far from the city
-   F    Fen    Fentange               Out in the countryside
-   G    Gar    Avenue de la Gare      Main city shopping street
-  ==== ====== ====================== ==================================================
-
-Three **decision objectives** are guiding the CEO's choice:
-
-      1. *minimize* the yearly costs induced by the moving,
-      2. *maximize* the future turnover of the SME,
-      3. *maximize* the new working conditions.
-
-The decision consequences to take into account for evaluating the potential new office sites with respect to each of the three objectives are modelled by the following **family of criteria**.
-
-   ==================== ==== ============ =========================================
-    Objective            ID   Name         Comment
-   ==================== ==== ============ =========================================
-    Yearly costs         C    Costs        Annual rent, charges, and cleaning
-    \                    \    \            \
-    Future turnover      St   Standing     Image and presentation
-    Future turnover      V    Visibility   Circulation of potential customers 
-    Future turnover      Pr   Proximity    Distance from town center
-    \                    \    \            \
-    Working conditions   W    Space        Working space
-    Working conditions   Cf   Comfort      Quality of office equipment
-    Working conditions   P    Parking      Available parking facilities
-   ==================== ==== ============ =========================================
-
-The evaluation of the seven potential sites on each criterion are gathered in the following **performance tableau**.
-
-   ============= ======== ======== ======== ======== ======== ======== ======== ======== 
-    Criterion     weight   A        B        C        D        E         F         G
-   ============= ======== ======== ======== ======== ======== ======== ======== ========
-    Costs         45.0     35.0K€   17.8K€   6.7K€    14.1K€   34.8K€   18.6K€   12.0K€
-    \              \       \        \        \        \        \        \        \
-    Prox          32.0     100      20       80       70       40       0        60
-    Visi          26.0     60       80       70       50       60       0        100 
-    Stan          23.0     100      10       0        30       90       70       20
-    \              \       \        \        \        \        \        \        \
-    Wksp          10.0     75       30       0        55       100      0        50
-    Wkcf           6.0     0        100      10       30       60       80       50
-    Park           3.0     90       30       100      90       70       0        80
-   ============= ======== ======== ======== ======== ======== ======== ======== ========
-
-Except the *Costs* criterion, all other criteria admit for grading a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site *A* is the most expensive, but also 100% satisfying the *Proximity* as well as the  *Standing* criterion. Whereas the site *C* is the cheapest one; providing however no satisfaction at all on both the *Standing* and the *Working Space* criteria.
-
-The *Costs* criterion admits the highest significance (45.0), followed by the *Future turnover* criteria (32.0 + 26.0 + 23.0), The *Working conditions* criteria are the less significant (10.0 + 6.0, + 3.0). It follows that the CEO considers *maximizing the future turnover* the most important objective (81.0), followed by the *minizing yearly Costs* objective (45.0), and less important, the *maximizing working conditions* objective (19.0). 
-
-Concerning yearly costs, we notice that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a site if there is at least a positive difference of 2500€. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a *considerably large* performance difference, triggering a *veto* situation the case given (see [BIS-2013]_). 
-
-In view of this performance tableau, what is now the office site we may recommend to the CEO as **best choice** ?
-
-Performance tableau
-...................
-
-A Python encoded  performance tableau is available for downloading here `officeChoice.py`_.
-
-   .. _officeChoice.py: _static/officeChoice.py
-
-We may inspect the performance tableau data with the computing resources provided by the :ref:`perfTabs module <perfTabs-label>`.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from perfTabs import *
-   >>> t = PerformanceTableau('officeChoice')
-   >>> help(t) # for discovering all the methods available
-   >>> t.showPerformanceTableau(Transposed=True)
-    *----  performance tableau -----*
-    criteria |   weights |     'A'      'B'      'C'       'D'       'E'       'F'       'G'   
-    ---------|---------------------------------------------------------------------------------
-    'C'      |     45    | -35000.00 -17800.00 -6700.00 -14100.00 -34800.00 -18600.00 -12000.00  
-    'Cf'     |      6    |      0.00    100.00    10.00     30.00     60.00     80.00     50.00  
-    'P'      |      3    |     90.00     30.00   100.00     90.00     70.00      0.00     80.00  
-    'Pr'     |     32    |    100.00     20.00    80.00     70.00     40.00      0.00     60.00  
-    'St'     |     23    |    100.00     10.00     0.00     30.00     90.00     70.00     20.00  
-    'V'      |     26    |     60.00     80.00    70.00     50.00     60.00      0.00    100.00  
-    'W'      |     10    |     75.00     30.00     0.00     55.00    100.00      0.00     50.00  
-
-We thus recover all the input data. To measure the actual preference discrimination we observe on each criterion, we may use the :py:func:`perfTabs.PerformanceTableau.showCriteria` method.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> t.showCriteria(IntegerWeights=True)
-    *----  criteria -----*
-    C 'Costs'
-    Scale = (Decimal('0.00'), Decimal('50000.00'))
-    Weight = 45
-    Threshold ind : 1000.00 + 0.00x ; percentile:  0.095
-    Threshold pref : 2500.00 + 0.00x ; percentile:  0.143
-    Cf 'Comfort'
-    Scale = (Decimal('0.00'), Decimal('100.00'))
-    Weight = 6
-    Threshold ind : 10.00 + 0.00x ; percentile:  0.095
-    Threshold pref : 20.00 + 0.00x ; percentile:  0.286
-    Threshold veto : 80.00 + 0.00x ; percentile:  0.905
-    ...
-
-On the *Costs* criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative *Comfort* criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged *considerably large* (Line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria. 
- 
-A colorful comparison of all the performances is shown on :numref:`officeChoiceHeatmap` by the **heatmap** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.
-
-   >>> t.showHTMLPerformanceHeatmap(colorLevels=5,\
-                                    rankingRule=None)
-
-.. figure:: officeChoiceHeatmap.png
-   :name: officeChoiceHeatmap
-   :width: 500 px
-   :align: center
-
-   Unranked heatmap of the office choice performance tableau
-	   
-Site *Ave* shows extreme and contradictory performances: highest *Costs* and no *Working Comfort* on one hand, and total satisfaction with respect to *Standing*, *Proximity* and *Parking facilities* on the other hand. Similar, but opposite, situation is given for site *Ces*: unsatisfactory *Working Space*, no *Standing* and no *Working Comfort* on the one hand, and lowest *Costs*, best *Proximity* and *Parking facilities* on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites *Dom* and *Gar*. Finally, site *Fen* is clearly the less satisfactory alternative of all.
-
-Outranking digraph
-..................
-
-To help now the CEO choosing the best site, we are going to compute pairwise outrankings (see [BIS-2013]_) on the set of potential sites. For two sites *x* and *y*, the situation "*x* outranks *y*", denoted (*x* S *y*), is given if there is:
-
-     1. a **significant majority** of criteria concordantly supporting that site *x* is *at least as satisfactory as* site *y*, and
-     2. **no considerable** counter-performance observed on any discordant criterion.
-
-The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted r(*x* S *y*), is measured in a bipolar significance valuation [-1.00, 1.00], where **positive** terms r(*x* S *y*) > 0.0 indicate a **validated**, and **negative** terms r(*x* S *y*) < 0.0 indicate a **non-validated** outrankings; whereas the **median** value r(*x* S *y*) = 0.0 represents an **indeterminate** situation (see [BIS-2004]_).   
-
-.. figure:: officeChoiceOutranking.png
-   :name: officeChoiceOutranking
-   :width: 400 px
-   :align: center
-
-   The office choice outranking digraph  
-
-For computing such a bipolar-valued outranking digraph from the given performance tableau *t*, we use the ``BipolarOutrankingDigraph`` constructor from the :ref:`outrankingDigraphs module <outrankingDigraphs-label>`. The ``Digraph.showHTMLRelationTable`` method shows here the resulting bipolar-valued adjacency matrix in a system browser window (see :numref:`officeChoiceOutranking`).
-
-.. code-block:: pycon
-
-   >>> from outrankingDigraphs import BipolarOutrankingDigraph
-   >>> g = BipolarOutrankingDigraph(t)
-   >>> g.showHTMLRelationTable()
-	   
-In :numref:`officeChoiceOutranking` we may notice that Alternative *D* is **positively outranking** all other potential office sites (a *Condorcet winner*). Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are *not* outranked by any other site; they are in fact **weak** *Condorcet winners*.
-
-.. code-block:: pycon
-
-   >>> g.condorcetWinners()
-    ['D']
-   >>> g.weakCondorcetWinners()
-    ['A', 'C', 'D']
-
-We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph (see :numref:`officeChoice`).
-
-.. code-block:: pycon
-
-   >>> g.exportGraphViz('officeChoice')
-    *---- exporting a dot file for GraphViz tools ---------*
-    Exporting to officeChoice.dot
-    dot -Grankdir=BT -Tpng officeChoice.dot -o officeChoice.png
-
-.. figure:: officeChoice.png
-   :name: officeChoice	    
-   :width: 300 px
-   :align: center
-
-   The office choice outranking digraph 	   
-
-One may check that the outranking digraph *g* does not admit in fact any cyclic strict preference situation.
-
-.. code-block:: pycon
-
-   >>> g.computeChordlessCircuits()
-    []
-   >>> g.showChordlessCircuits()
-    No circuits observed in this digraph.
-    *---- Chordless circuits ----*
-    0 circuits.
-
-*Rubis* best choice recommendations
-...................................
-
-Following the Rubis outranking method (see [BIS-2008]_), potential best choice recommendations are determined by the outranking prekernels --*weakly independent* and *strictly outranking* choices-- of the outranking digraph (see the tutorial on :ref:`Kernel-Tutorial-label`). The case given, we previously need to break open all chordless odd circuits at their weakest link.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from digraphs import BrokenCocsDigraph
-   >>> bcg = BrokenCocsDigraph(g)
-   >>> bcg.brokenLinks
-    set()
-
-As we observe indeed no such chordless circuits here, we may directly compute the *prekernels* of the outranking digraph *g*.
-
-.. code-block:: pycon
-   :name: computePreKernels
-   :caption: Computing outranking and outranked prekernels
-   :linenos:
-
-   >>> g.showPreKernels()
-    *--- Computing preKernels ---*
-    Dominant preKernels :
-    ['D']
-       independence :  1.0
-       dominance    :  0.02
-       absorbency   :  -1.0
-       covering     :  1.000
-    ['B', 'E', 'C']
-       independence :  0.00
-       dominance    :  0.10
-       absorbency   :  -1.0
-       covering     :  0.500
-    ['A', 'G']
-       independence :  0.00
-       dominance    :  0.78
-       absorbency   :  0.00
-       covering     :  0.700
-    Absorbent preKernels :
-    ['F', 'A']
-       independence :  0.00
-       dominance    :  0.00
-       absorbency   :  1.0
-       covering     :  0.700
-    *----- statistics -----
-    graph name:  rel_officeChoice.xml
-    number of solutions
-     dominant kernels :  3
-     absorbent kernels:  1
-    cardinality frequency distributions
-    cardinality     :  [0, 1, 2, 3, 4, 5, 6, 7]
-    dominant kernel :  [0, 1, 1, 1, 0, 0, 0, 0]
-    absorbent kernel:  [0, 0, 1, 0, 0, 0, 0, 0]
-    Execution time  : 0.00018 sec.
-    Results in sets: dompreKernels and abspreKernels.
-
-We notice in :numref:`computePreKernels` three potential best choice recommendations: the Condorcet winner *D* (Line 4), the triplet *B*, *C* and *E* (Line 9), and finally the pair *A* and *G* (Line 14). The best choice recommendation is now given by the **most determined** prekernel; the one supported by the most significant criteria coalition. This result is shown with the :code:`showBestChoiceRecommendation` command. Notice that this method actually works by default on the broken chords digraph *bcg*.
-
-.. code-block:: pycon
-   :name: showBestChoice
-   :caption: Computing a best choice recommendation
-   :linenos:
-
-   >>> g.showBestChoiceRecommendation(CoDual=False)
-    *****************************************
-    Rubis best choice recommendation(s) (BCR)
-     (in decreasing order of determinateness)   
-    Credibility domain: [-1.00,1.00]
-    === >> potential best choice(s)
-    * choice              : ['D']
-      independence        : 1.00
-      dominance           : 0.02
-      absorbency          : -1.00
-      covering (%)        : 100.00
-      determinateness (%) : 51.03
-      - most credible action(s) = { 'D': 0.02, }
-    === >> potential best choice(s)
-    * choice              : ['A', 'G']
-      independence        : 0.00
-      dominance           : 0.78
-      absorbency          : 0.00
-      covering (%)        : 70.00
-      determinateness (%) : 50.00
-      - most credible action(s) = { }
-    === >> potential best choice(s)
-    * choice              : ['B', 'C', 'E']
-      independence        : 0.00
-      dominance           : 0.10
-      absorbency          : -1.00
-      covering (%)        : 50.00
-      determinateness (%) : 50.00
-      - most credible action(s) = { }
-    === >> potential worst choice(s) 
-    * choice              : ['A', 'F']
-      independence        : 0.00
-      dominance           : 0.00
-      absorbency          : 1.00
-      covered (%)         : 70.00
-      determinateness (%) : 50.00
-      - most credible action(s) = { }
-    Execution time: 0.014 seconds
-
-We notice in :numref:`showBestChoice` (Line 7) above that the most significantly supported best
-choice recommendation is indeed the *Condorcet* winner *D* supported by a
-majority of 51.03% of the criteria significance (see Line 12). Both other
-potential best choice recommendations, as well as the potential worst
-choice recommendation, are not positively validated as best,
-resp. worst choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see Lines 27 and 37) and seams hence not actually comparable to its competitors.
-
-Computing *strict best* choice recommendations
-..............................................
-
-When comparing now the performances of alternatives *D* and *G* on a
-pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D*:  r(*G* outranks *D*) = +145/145 = +1.0.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> g.showPairwiseComparison('G','D')
-    *------------  pairwise comparison ----*
-    Comparing actions : (G, D)
-    crit. wght.  g(x)      g(y)    diff.  |   ind     pref    concord 	|
-    =========================================================================
-    C   45.00 -12000.00 -14100.00 +2100.00 | 1000.00 2500.00   +45.00 	| 
-    Cf   6.00     50.00     30.00   +20.00 |   10.00   20.00    +6.00 	| 
-    P    3.00     80.00     90.00   -10.00 |   10.00   20.00    +3.00 	| 
-    Pr  32.00     60.00     70.00   -10.00 |   10.00   20.00   +32.00 	| 
-    St  23.00     20.00     30.00   -10.00 |   10.00   20.00   +23.00 	| 
-    V   26.00    100.00     50.00   +50.00 |   10.00   20.00   +26.00 	| 
-    W   10.00     50.00     55.00    -5.00 |   10.00   20.00   +10.00 	|
-    =========================================================================
-    Valuation in range: -145.00 to +145.00; global concordance: +145.00
-
-However, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:  r(*C* outranks *G*) = +15/145 > 0.0, and r(*G* outranks *C*) = -15/145 < 0.0.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> g.showPairwiseComparison('C','G')
-    *------------  pairwise comparison ----*
-    Comparing actions : (C, G)/(G, C)
-    crit. wght.   g(x)     g(y)      diff.  |   ind.   pref.   	(C,G)/(G,C)  |
-    ==========================================================================
-    C    45.00 -6700.00 -12000.00  +5300.00 | 1000.00 2500.00  +45.00/-45.00 | 
-    Cf    6.00    10.00     50.00    -40.00 |   10.00   20.00   -6.00/ +6.00 | 
-    P     3.00   100.00     80.00    +20.00 |   10.00   20.00   +3.00/ -3.00 | 
-    Pr   32.00    80.00     60.00    +20.00 |   10.00   20.00  +32.00/-32.00 | 
-    St   23.00     0.00     20.00    -20.00 |   10.00   20.00  -23.00/+23.00 | 
-    V    26.00    70.00    100.00    -30.00 |   10.00   20.00  -26.00/+26.00 | 
-    W    10.00     0.00     50.00    -50.00 |   10.00   20.00  -10.00/+10.00 |
-    =========================================================================
-    Valuation in range: -145.00 to +145.00; global concordance: +15.00/-15.00
-
-
-To model these *strict outranking* situations, we may recompute the best choice recommendation on the **codual**, the converse (~) of the dual (-) [14]_, of the outranking digraph instance *g* (see [BIS-2013]_), as follows.
-
-.. code-block:: pycon
-   :name: strictBestChoice
-   :caption: Computing the strict best choice recommendation
-   :linenos:
-
-   >>> g.showBestChoiceRecommendation(CoDual=True,\
-                                      ChoiceVector=True)
-    * --- Best and worst choice recommendation(s) ---*
-     (in decreasing order of determinateness)   
-    Credibility domain: [-1.00,1.00]
-    === >> potential best choice(s)
-    * choice              : ['A', 'C', 'D']
-      independence        : 0.00
-      dominance           : 0.10
-      absorbency          : 0.00
-      covering (%)        : 41.67
-      determinateness (%) : 50.59
-      - characteristic vector = { 'D': 0.02, 'G': 0.00, 'C': 0.00,
-	                          'A': 0.00, 'F': -0.02, 'E': -0.02,
-				  'B': -0.02, }
-    === >> potential worst choice(s) 
-    * choice              : ['A', 'F']
-      independence        : 0.00
-      dominance           : -0.52
-      absorbency          : 1.00
-      covered (%)         : 50.00
-      determinateness (%) : 50.00
-      - characteristic vector = { 'G': 0.00, 'F': 0.00, 'E': 0.00,
-	                          'D': 0.00, 'C': 0.00, 'B': 0.00,
-				  'A': 0.00, }
-				  
-It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Line 14-15), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential best choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to **being or not being** a potential best choice candidate. 
-
-We may also notice (see Line 17 and Line 21) that both alternatives *A* and *F* are reported as certainly outranked choices, hence as **potential worst choice recommendation** . This confirms again the global incomparability status of alternative *A*.
-
-Weakly ordering the outranking digraph
-......................................
-
-To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor imported from the :ref:`transitiveDigraphs module <transitiveDigraphs-label>`, for computing a **ranking-by-choosing** result from the strict outranking digraph instance *gcd*.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from transitiveDigraphs import RankingByChoosingDigraph
-   >>> gcd = ~(-g)
-   >>> rbc = RankingByChoosingDigraph(gcd)
-    Threading ...  ## multiprocessing if 2 cores are available
-    Exiting computing threads
-   >>> rbc.showRankingByChoosing()
-    Ranking by Choosing and Rejecting
-    1st ranked ['D'] (0.28)
-       2nd ranked ['C', 'G'] (0.26)
-       2nd last ranked ['B', 'C', 'E'] (0.34)
-    1st last ranked ['A', 'F'] (0.50)
-   >>> rbc.exportGraphViz('officeChoiceRanking')
-    *---- exporting a dot file for GraphViz tools ---------*
-    Exporting to officeChoiceRanking.dot
-    0 { rank = same; A; C; D; }
-    1 { rank = same; G; } 
-    2 { rank = same; E; B; }
-    3 { rank = same; F; }
-    dot -Grankdir=TB -Tpng officeChoiceRanking.dot -o officeChoiceRanking.png
-
-.. figure:: officeChoiceRanking.png
-   :width: 200 px
-   :align: center
-
-   Ranking-by-choosing from the office choice outranking digraph
-	   
-In this **ranking-by-choosing** method, where we operate the *epistemic fusion* of iterated (strict) best and worst choices, compromise alternative *D* is indeed ranked before compromise alternative *G*. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation. 
-
-The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, site *D* represents actually the best compromise. However, if *Costs* do not play much a role, it would be perhaps better to decide to move to the most advantageous site *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
-
-It might be worth, as an **exercise**, to modify these criteria significance weights in the :code:`officeChoice.py` data file in such a way that:
-    - all criteria under an objective appear *equi-significant*, and
-    - all three decision objectives are considered *equally important*.
-
-What will become the best choice recommendation under this working hypothesis?  
-
-See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
-
-Back to :ref:`Content Table <Tutorial-label>`
-
---------------
-
-.. _Alice-Tutorial-label:
-
-Alice's best choice: A case study [19]_
----------------------------------------
-
-.. contents:: 
-	:depth: 2
-	:local:
-
-|aliceImage| Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her "Abitur" with satisfactory and/or good marks and  wants to start her further studies thereafter. She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees, as well as, her living costs during her studies.
-
-.. |aliceImage| image:: AliceF.png
-   :align: top
-
-The decision problem
-....................
-
-Alice has already identified 10 **potential study programs**:
-
-======= ============================ =============================== =============
- ID      Diploma                      Institution                      City
-======= ============================ =============================== =============
- T-UD    Qualified translator (T)     University (UD)                 Düsseldorf
- T-FHK   Qualified translator (T)     Higher Technical School (FHK)   Köln
- T-FHM   Qualified translator (T)     Higher Technical School (FHM)   München
- I-FHK   Graduate interpreter (I)     Higher Technical School (FHK)   Köln
- T-USB   Qualified translator (T)     University (USB)                Saarbrücken
- I-USB   Graduate interpreter (I)     University (USB)                Saarbrücken
- T-UHB   Qualified translator (T)     University (UHB)                Heidelberg
- I-UHB   Graduate interpreter (I)     University (UHB)                Heidelberg
- S-HKK   Specialized secretary (S)    Chamber of Commerce (HKK)       Köln
- C-HKK   Foreign correspondent (C)    Chamber of Commerce (HKK)       Köln
-======= ============================ =============================== =============
-
-Four **decision objectives** of more or less equal importance are guiding Alice's choice:
-
-    #. *maximize* the attractiveness of the study place (GEO),
-    #. *maximize* the attractiveness in her further studies (LEA),
-    #. *minimize*  her financial dependency on her parents (FIN),
-    #. *maximize* her professional perspectives (PRA).
-
-The performance tableau
-.......................
-
-The decision consequences Alice wishes to take into account for evaluating the potential study programs with respect to each of the four objectives are modelled by the following **family of criteria**.
-
-   ==== ============ ======================================== =========== ========
-    ID   Name         Comment                                  Objective   Weight
-   ==== ============ ======================================== =========== ========
-    DH   Proximity    Distance in km to her home (min)         GEO         3
-    BC   Big City     Number of inhabitants (max)              GEO         3
-    \    \            \                                        \           \
-    AS   Studies      Attractiveness of the studies (max)      LEA         6
-    \    \            \                                        \           \
-    SF   Fees         Annual study fees (min)                  FIN         2
-    LC   Living       Monthly living costs (min)               FIN         2
-    SL   Length       Length of the studies (min)              FIN         2
-    \     \            \                                       \           \
-    AP   Profession   Attractiveness of the profession (max)   PRA         2
-    AI   Income       Annual income after studying (max)       PRA         2
-    PR   Prestige     Occupational prestige (max)              PRA         2 
-   ==== ============ ======================================== =========== ========
-
-Alice is subjectively evaluating the *attractiveness* of the studies on a three level ordinal scale from 0 (*weak*), 1 (*fair*) to 2 (*good*). Similarly, she is subjectively evaluating the *attractiveness* of the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the *occupational prestige* she looked up the SIOPS [20]_. All the other evaluation data could be looked up on the internet.
-
-The actual evaluations of Alice's potential study programs are gathered in a :py:class:`perfTabs.PerformanceTableau` object [21]_.
-
-.. code-block:: pycon
-   :name: alicePerfTab
-   :linenos:
-   :caption: Alice's performance tableau
-
-   >>> from perfTabs import PerformanceTableau
-   >>> t = PerformanceTableau('AliceChoice')
-   >>> t.showObjectives()
-     *------ decision objectives -------"
-     GEO: Geographical aspect
-       DH Distance to parent's home 3
-       BC Number of inhabitants     3
-       Total weight: 6 (2 criteria)
-     LEA: Learning aspect
-       AS Attractiveness of the study program 6
-       Total weight: 6.00 (1 criteria)
-     FIN: Financial aspect
-       SF Annual registration fees 2
-       LC Monthly living costs     2
-       SL study time               2
-       Total weight: 6.00 (3 criteria)
-     PRA: Professional aspect
-       AP Attractiveness of the profession          2
-       AI Annual professional income after studying 2
-       OP Occupational Prestige                     2
-       Total weight: 6.00 (3 criteria)
-
-Within each decision objective, the performance criteria are considered to be equisignificant. Hence, the four decision objectives show a same importance weight of 6 (see :numref:`alicePerfTab`).
-
-Details of the performance criteria may be consulted in a browser view (see :numref:`aliceCriteria` below).
-
-   >>> t.showHTMLCriteria()
-
-.. figure:: aliceCriteria.png
-   :name: aliceCriteria
-   :width: 750 px
-   :align: center
-
-   Alice's performance criteria	   
-   
-It is worthwhile noticing in :numref:`aliceCriteria` above that, on her subjective attractiveness scale of the study programs (criterion *AS*), Alice considers a performance differences of 7 points to be *considerable* and triggering, the case given, a *veto situation*. Notice also the proportional *indifference* (5%) and *preference* (10%) discrimination thresholds shown on criterion *BC*-number of inhabitants.
-
-In the following *heatmap view*, we may now consult Alice's performance evaluations.
-
-   >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,ndigits=0)
-
-.. figure:: aliceHeatmap.png
-   :name: aliceHeatmap
-   :width: 650 px
-   :align: center
-
-   Heatmap of Alice's performance tableau	   
-
-Her ten potential study programs (see :numref:`aliceHeatmap`) are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph [23]_. *Graduate interpreter* studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by *Graduate Translator* studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs for her appear to be studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
-
-It is interesting to observe that for Alice, the most significant performance criteria, appear to be, on the one side, the *attractiveness* of the study program (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear to be, on the other side, not *so* significant.
-
-Notice by the way that evaluations on performance criteria to be minimized, like *distance to home* (*DH*) or *study times* (*SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
-
-Building a best choice recommendation
-.....................................
-
-Let us now have a look at the underlying bipolar-valued pairwise outranking digraph.
-
-.. code-block:: pycon
-   :name: aliceOutranking
-   :linenos:
-   :caption: Alice's outranking digraph
-
-   >>> from outrankingDigraphs import BipolarOutrankingDigraph
-   >>> dg = BipolarOutrankingDigraph(t) 
-   >>> dg
-    *------- Object instance description ------*
-    Instance class      : BipolarOutrankingDigraph
-    Instance name       : rel_AliceChoice
-    # Actions           : 10
-    # Criteria          : 9
-    Size                : 67
-    Determinateness (%) : 73.91
-    Valuation domain    : [-1.00;1.00]
-
-Despite rather poorly discriminating performance evaluations, the 67 pairwise outranking situations, positively validated in the digraph *dg* obtained from Alice's performance tableau (see :numref:`aliceOutranking` Line 9), are supported by a 74% majority of criteria significance (Line 10).
-
-We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion *AS* to be considerable which triggers, the case given, a potential polarisation of the outranking characteristics. We may inspect the occurrence os such polarisations as follows.
-
-.. code-block:: pycon
-   :name: aliceVetos
-   :linenos:
-   :caption: Veto and counter-veto situations
-
-   >>> dg.showVetos()
-    *----  Veto situations ---
-    number of veto situations : 3 
-    1: r(S-HKK >= I-FHK) = -0.17
-     criterion: AS
-     Considerable performance difference : -7.00
-     Veto discrimination threshold       : -7.00
-     Polarisation: r(S-HKK >= I-FHK) = -0.17 ==> -1.00
-    2: r(S-HKK >= I-USB) = -0.17
-     criterion: AS
-     Considerable performance difference : -7.00
-     Veto discrimination threshold       : -7.00
-     Polarisation: r(S-HKK >= I-USB) = -0.17 ==> -1.00
-    3: r(S-HKK >= I-UHB) = -0.17
-     criterion: AS
-     Considerable performance difference : -7.00
-     Veto discrimination threshold       : -7.00
-     Polarisation: r(S-HKK >= I-UHB) = -0.17 ==> -1.00
-    *----  Counter-veto situations ---
-    number of counter-veto situations : 3 
-    1: r(I-FHK >= S-HKK) = 0.83
-     criterion: AS
-     Considerable performance difference : 7.00
-     Counter-veto threshold              : 7.00
-     Polarisation: r(I-FHK >= S-HKK) = 0.83 ==> +1.00
-    2: r(I-USB >= S-HKK) = 0.17
-     criterion: AS
-     Considerable performance difference : 7.00
-     Counter-veto threshold              : 7.00
-     Polarisation: r(I-USB >= S-HKK) = 0.17 ==> +1.00
-    3: r(I-UHB >= S-HKK) = 0.17
-     criterion: AS
-     Considerable performance difference : 7.00
-     Counter-veto threshold              : 7.00
-     Polarisation: r(I-UHB >= S-HKK) = 0.17 ==> +1.00
-
-In :numref:`aliceVetos`, we notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 9, 14, 19) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35).
-
-We may furthermore check that no outranking circuits do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs in :numref:`aliceHeatmap` are in fact *Condorcet* winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (see :numref:`aliceBestChoice` Line 10).
-   
-.. code-block:: pycon
-   :name: aliceBestChoice
-   :linenos:
-   :caption: Alice's best choice recommendation
-
-   >>> dg.computeChordlessCircuits()
-    []
-   >>> dg.computeCondorcetWinners()
-    ['I-FHK', 'I-UHB', 'I-USB', 'T-FHK'] 
-   >>> dg.showBestChoiceRecommendation()
-    Best choice recommendation(s) (BCR)
-    (in decreasing order of determinateness)   
-    Credibility domain: [-1.00,1.00]
-    === >> potential best choice(s)
-    choice              : ['I-FHK', 'I-UHB', 'I-USB', 'T-FHK']
-     independence        : 0.17
-     dominance           : 0.08
-     absorbency          : -0.83
-     covering (%)        : 62.50
-     determinateness (%) : 68.75
-     most credible action(s) = { 'I-FHK': 0.75, 'T-FHK': 0.17,
-                                 'I-USB': 0.17, 'I-UHB': 0.17, }
-    === >> potential worst choice(s) 
-    choice              : ['C-HKK', 'S-HKK']
-     independence        : 0.50
-     dominance           : -0.83
-     absorbency          : 0.17
-     covered (%)         : 100.00
-     determinateness (%) : 58.33
-     most credible action(s) = { 'S-HKK': 0.17, 'C-HKK': 0.17, }
-
-Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High School* Köln (see :numref:`aliceBestChoice` Line 16) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
-
-A graphviz drawing of the *skeleton* of the corresponding strict outranking digraph (see Line 2 in :numref:`aliceBestChoiceDrawing` below) may finally well illustrate our *best choice recommendation*.
-
-.. code-block:: pycon
-   :name: aliceBestChoiceDrawing
-   :linenos:
-   :caption: Drawing the best choice recommendation 
-
-   >>> dgcd = ~(-dg)
-   >>> dgcd.closeTransitive(Reverse=True)
-   >>> dgcd.exportGraphViz('aliceBestChoice',
-        bestChoice=['I-FHK'],worstChoice=['S-HKK','C-HKK'])
-    *---- exporting a dot file for GraphViz tools ---------*
-     Exporting to aliceBestChoice.dot
-     dot -Grankdir=BT -Tpng aliceBestChoice.dot -o aliceBestChoice.png
-
-.. figure:: aliceBestChoice.png
-   :name: aliceBestChoiceImage
-   :width: 400 px
-   :align: center
-
-   Alice's best choice recommendation	   
-
-In :numref:`aliceBestChoiceImage` we notice that the *Graduate Interpreter* studies come first, followed by the *Graduate Translator* studies. Last come the *Chamber of Commerce*'s specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
-
-We may, furthermore, check the pairwise outranking situations observed  between the first and second-ranked alternatives, ie *Garduate Interpreter* studies in Köln verse *Graduate Interpreter* studies in Saabrücken (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
-
-   >>> dg.showHTMLPairwiseOutrankings('I-FHK','I-USB')
-
-.. figure:: pairwiseComparison.png
-   :name: pairwiseComparison
-   :width: 550 px
-   :align: center
-
-   Comparing the first and second best-ranked study programs	   
-
-The *Köln* alternative is performing **at least as well as** the *Saarbrücken* alternative on all the performance criteria, except the *Annual income* (of significance 2/24). Conversely, the *Saarbrücken* alternative is clearly **outperformed** from the *geographical* (0/6) as well as from the *financial* perspective (2/6).
-
-Alice considers her four decision objectives as being *more or less* equally important. Here we have, however, allocated *strictly equal* importance weights with *strictly* equi-significant criteria per objective. How robust is our previous best choice recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be *more or less uncertain* ?
-
-Robustness analysis
-...................
-
-To answer this question, we will consider the respective criteria significance weights *wj* to be **triangular random variables** in the range 0 to *2wj* with *mode* = *wj*. We may compute a corresponding **90%-confident outranking digraph** with the help of the :py:class:`outrankingDigraphs.ConfidentBipolarOutrankingDigraph` constructor [22]_.
-
-.. code-block:: pycon
-   :name: aliceConfidentDigraph
-   :linenos:
-   :caption: The 90% confident outranking digraph
-
-   >>> from outrankingDigraphs import ConfidentOutrankingDigraph
-   >>> cdg = ConfidentBipolarOutrankingDigraph(t,\
-		       distribution='triangular',confidence=90.0)
-   >>> cdg
-    *------- Object instance description ------*
-    Instance class       : ConfidentBipolarOutrankingDigraph
-    Instance name        : rel_AliceChoice_CLT
-    # Actions            : 10
-    # Criteria           : 9
-    Size                 : 44
-    Valuation domain     : [-1.00;1.00]
-    Uncertainty model    : triangular(a=0,b=2w) 
-    Likelihood domain    : [-1.0;+1.0] 
-    Confidence level     : 90.0% 
-    Confident majority   : 14/24 (58.3%) 
-    Determinateness (%)  : 68.19
-
-Of the original 67 valid outranking situations, we retain 44 outranking situations as being 90%-*confident* (see :numref:`aliceConfidentDigraph` Line 10). The corresponding 90%-*confident* qualified majority of criteria significance amounts to 14/24 = 58.3% (Line 15).  
-
-Concerning now a 90%-*confident* best choice recommendation, we are lucky (see :numref:`aliceConfidentBestChoice` below). 
-
-.. code-block:: pycon
-   :name: aliceConfidentBestChoice
-   :linenos:
-   :caption: The 90% confident best choice recommendation
-
-   >>> cdg.computeCondorcetWinners()
-    ['I-FHK']
-   >>> cdg.showBestChoiceRecommendation()
-    ***********************
-    Best choice recommendation(s) (BCR)
-     (in decreasing order of determinateness)   
-     Credibility domain: [-1.00,1.00]
-     === >> potential best choice(s)
-     choice              : ['I-FHK','I-UHB','I-USB','T-FHK','T-FHM']
-      independence        : 0.00
-      dominance           : 0.42
-      absorbency          : 0.00
-      covering (%)        : 20.00
-      determinateness (%) : 61.25
-      - most credible action(s) = { 'I-FHK': 0.75, }
-
-The *Graduate Interpreter* studies in Köln remain indeed a 90%-confident *Condorcet* winner (Line 2). Hence, the same study program also remains our 90%-confident best choice recommendation supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9 and 15).
-
-When pairwise comparing the two best-ranked study programs (see :numref:`pairwiseComparison`), we have observed that *I-FHK* actually positively outranks *I-USB* on all four decision objectives. When we admit equi-significant criteria significances per objective, this outranking situation is hence valid independently of the importance weights Alice may allocate to each of her decision objectives. 
-
-We may compute these **unopposed** outranking situations [25]_ with help of the :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph` constructor.
-
-.. code-block:: pycon
-   :name: aliceUnopposedOutrankings
-   :linenos:
-   :caption: Computing the unopposed outranking situations
-
-   >>> from outrankingDigraphs import UnOpposedBipolarOutrankingDigraph
-   >>> uop = UnOpposedBipolarOutrankingDigraph(t)
-   >>> uop
-    *------- Object instance description ------*
-     Instance class       : UnOpposedBipolarOutrankingDigraph
-     Instance name        : AliceChoice_unopposed_outrankings
-     # Actions            : 10
-     # Criteria           : 9
-     Size                 : 28
-     Oppositeness (%)    : 58.21
-     Determinateness (%)  : 62.94
-     Valuation domain     : [-1.00;1.00]
-   >>> uop.computeTransitivityDegree()
-    1.0
-
-We keep 28 out the 67 standard outranking situations, which leads to an **oppositeness degree** of (1.0 - 28/67) = 58.21% (:numref:`aliceUnopposedOutrankings` Line 10). Remarkable furthermore is that this unopposed outranking digraph *uop* is actually *transitive*, i.e. modelling a *partial ranking* of the study programs (Line 14).
-
-We may hence make use of the :code:`exportGraphViz` method of the :py:class:`transitiveDigraphs.TransitiveDigraph` class for drawing the corresponding topological sorting diagram.
-
-    >>> from transitiveDigraphs import TransitiveDigraph
-    >>> TransitiveDigraph.exportGraphViz(uop,'AliceChoice_unopposed')
-     *---- exporting a dot file for GraphViz tools ---------*
-     Exporting to AliceChoice_unopposed.dot
-      0 { rank = 0; I_FHK; }
-      1 { rank = 1; I_USB; T_FHK; }
-      2 { rank = 2; T_UD; I_UHB; C_HKK; }
-      3 { rank = 3; T_USB; S_HKK; }
-      4 { rank = 4; T_UHB; }
-      5 { rank = 5; T_FHM; }
-     dot -Grankdir=TB -Tpng AliceChoice_unopposed.dot -o AliceChoice_unopposed.png
-
-.. figure:: AliceChoice_unopposed.png
-   :name: AliceChoice_unopposed
-   :width: 200 px
-   :align: center
-
-   Unopposed partial ranking of the potential study programs	   
-
-Again, when *equi-signficant* performance criteria are assumed per decision objective, we observe in :numref:`AliceChoice_unopposed` that *I-FHK* remains the stable best choice recommendation, *independently* of the actual importance weights that Alice may wish to allocate to her four decision objectives.
-
-In view of her performance tableau in :numref:`aliceHeatmap`, *Graduate Interpreter* studies at the *Technical High School Köln*, thus, represent definitely **Alice's very best choice**.
-
-For further reading about the *Digraph3* Best Choice methodology, one may consult the following real *decision aid case study* about choosing a best poster in a scientific conference [BIS-2015]_ .
-
-Back to :ref:`Content Table <Tutorial-label>`
-
--------------
 
 .. _Rating-Tutorial-label:
 
