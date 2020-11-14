@@ -430,6 +430,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </div>
 <p>For more information about its resources, see the <a class="reference internal" href="techDoc.html#modules-organisation-label"><span class="std std-ref">technical documentation of the digraphs module</span></a>.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="manipulating-digraph-objects">
@@ -1114,6 +1115,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <p>Mind the subtle difference between the neighborhoods of an <em>empty</em> and the neighborhoods of an <em>indeterminate</em> digraph instance . In the first kind, the neighborhoods are known to be completely <em>empty</em>  (see <a class="reference internal" href="#completeempty"><span class="std std-numref">Listing 9</span></a> Lines 34-38) whereas, in the latter, <em>nothing is known</em> about the actual neighborhoods of the nodes  (see <a class="reference internal" href="#completeempty"><span class="std std-numref">Listing 9</span></a> Lines 57-61). These two cases illustrate why in the case of bipolar-valued digraphs, we may need both a <em>gamma</em> <strong>and</strong> a <em>notGamma</em> function.</p>
 </div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="computing-the-winner-of-an-election">
@@ -1689,6 +1691,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <p>Mind that the specific <em>ranking-by-choosing</em> procedure, we use here on the <em>Condorcet</em> digraph, operates the selection procedure by extracting at each step <em>initial</em> and <em>terminal</em> kernels, i.e. NP-hard operational problems (see tutorial <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a> and <a class="reference internal" href="#bis-1999" id="id17"><span>[BIS-1999]</span></a>); A technique that does not allow in general to tackle voting profiles with much more than 30 candidates. The tutorial on <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a> provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.</p>
 </div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="working-with-the-outrankingdigraphs-module">
@@ -2046,6 +2049,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <p>We recover the original bipolar-valued outranking characteristics, and we may restart again the preference modelling process.</p>
 <p>Many more tools for exploiting bipolar-valued outranking digraphs are available in the Digraph3 resources (see the technical documentation of the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><span class="std std-ref">outrankingDigraphs module</span></a> and the <a class="reference internal" href="techDoc.html#perftabs-label"><span class="std std-ref">perfTabs module</span></a>).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="generating-random-performance-tableaux">
@@ -2827,6 +2831,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </dd>
 </dl>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="ranking-with-multiple-incommensurable-criteria">
@@ -3552,6 +3557,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Similar to <em>Kohler</em>’s rule, the <em>RankedPairs</em> rule has also a prudent <em>dual</em> version, the <strong>Dias-Lamboray</strong> <em>ordering-by-choosing</em> rule, which produces, when working this time on the codual <em>strict outranking</em> digraph <em>gcd</em>, a similar ranking result (see <a class="reference internal" href="#lam-2009" id="id35"><span>[LAM-2009]</span></a>, <a class="reference internal" href="#dia-2010" id="id36"><span>[DIA-2010]</span></a>).</p>
 <p>Besides of not providing a unique linear ranking, the <em>ranking-by-choosing</em> rules, as well as their dual <em>ordering-by-choosing</em> rules, are unfortunately <em>not scalable</em> to outranking digraphs of larger orders (&gt; 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the <em>Copeland</em>, the <em>NetFlows</em> ranking-by-scoring rules, with a polynomial complexity of <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/>, where <em>n</em> is the order of the outranking digraph, remain in fact computationally tractable.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="rating-with-multiple-incommensurable-criteria">
@@ -4009,6 +4015,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <p>The <em>NetFlows</em> as well as the <em>Copeland</em> ranking heuristics are readily scalable with ad hoc HPC tuning to several millions of decision alternatives (see <a class="reference internal" href="#bis-2016" id="id38"><span>[BIS-2016]</span></a>).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="hpc-ranking-with-big-outranking-digraphs">
@@ -4928,6 +4935,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <p>It is therefore <em>important</em> to always keep in mind that, based on pairwise outranking situations, there <strong>does not exist</strong> any <strong>unique optimal ranking</strong>; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimised quantile ordering strategy, all this will indeed produce, sometimes even substantially, diverse global ranking results.</p>
 </div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="computing-a-best-choice-recommendation">
@@ -5690,6 +5698,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>What will become the best choice recommendation under this working hypothesis?</p>
 <p>See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: <a class="reference internal" href="#adt-l7" id="id58"><span>[ADT-L7]</span></a>.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="alice-s-best-choice-a-case-study-19">
@@ -6256,7 +6265,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>We keep 28 out the 67 standard outranking situations, which leads to an <strong>oppositeness degree</strong> of (1.0 - 28/67) = 58.21% (<a class="reference internal" href="#aliceunopposedoutrankings"><span class="std std-numref">Listing 61</span></a> Line 10). What is furthermore remarkable is that this unopposed outranking digraph <em>uop</em> is actually a <em>transitive</em> digraph modelling a <em>partial ranking</em> of the study programs (Line 14).</p>
+<p>We keep 28 out the 67 standard outranking situations, which leads to an <strong>oppositeness degree</strong> of (1.0 - 28/67) = 58.21% (<a class="reference internal" href="#aliceunopposedoutrankings"><span class="std std-numref">Listing 61</span></a> Line 10). Remarkable furthermore is that this unopposed outranking digraph <em>uop</em> is actually <em>transitive</em>, i.e. modelling a <em>partial ranking</em> of the study programs (Line 14).</p>
 <p>We may hence make use of the <code class="code docutils literal notranslate"><span class="pre">exportGraphViz</span></code> method of the <a class="reference internal" href="techDoc.html#transitiveDigraphs.TransitiveDigraph" title="transitiveDigraphs.TransitiveDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.TransitiveDigraph</span></code></a> class for drawing the corresponding topological sorting diagram.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="k">import</span> <span class="n">TransitiveDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">uop</span><span class="p">,</span><span class="s1">&#39;AliceChoice_unopposed&#39;</span><span class="p">)</span>
@@ -6277,9 +6286,9 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <p>Again, when <em>equi-signficant</em> performance criteria are assumed per decision objective, we observe in <a class="reference internal" href="#alicechoice-unopposed"><span class="std std-numref">Fig. 35</span></a> that <em>I-FHK</em> remains the stable best choice recommendation, <em>independently</em> of the actual importance weights that Alice may wish to allocate to her four decision objectives.</p>
 <p>In view of her performance tableau in <a class="reference internal" href="#aliceheatmap"><span class="std std-numref">Fig. 32</span></a>, <em>Graduate Interpreter</em> studies at the <em>Technical High School Köln</em>, thus, represent definitely <strong>Alice’s very best choice</strong>.</p>
-<hr class="docutils" />
 <p>For further reading about the <em>Digraph3</em> Best Choice methodology, one may consult the following real <em>decision aid case study</em> about choosing a best poster in a scientific conference <a class="reference internal" href="#bis-2015" id="id67"><span>[BIS-2015]</span></a> .</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="rating-with-learned-quantile-norms">
@@ -7450,6 +7459,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>The <code class="docutils literal notranslate"><span class="pre">checkSampling()</span></code> method (see Line 23) generates a random walk of <em>nSim=30000</em> steps on the given graph and records by the way the observed relative frequency with which each vertex is passed by. In this example, the stationary transition probability distribution, shown by the <code class="docutils literal notranslate"><span class="pre">showTransitionMatrix()</span></code> method above (see Lines 31-), is quite adequately simulated.</p>
 <p>For more technical information and more code examples, look into the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><span class="std std-ref">graphs module</span></a>. For the readers interested in algorithmic applications of Markov Chains we may recommend consulting O. Häggström’s 2002 book: <a class="reference internal" href="#fmcaa" id="id77"><span>[FMCAA]</span></a>.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="computing-the-non-isomorphic-miss-of-the-12-cycle-graph">
@@ -7705,6 +7715,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <p>The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of ‘2’s and ‘3’s without distinguishing opposite directions of writing. The first orbit corresponds to writing six times a ‘2’; the second orbit corresponds to writing four times a ‘3’. The third and fourth orbit correspond to writing two times a ‘3’ and three times a ‘2’. There are two non isomorphic ways to do this latter circular sum. Either separating the ‘3’s by one and two ‘2’s, or by zero and three ‘2’s (see Bisdorff &amp; Marichal <a class="reference internal" href="#isomis-08" id="id83"><span>[ISOMIS-08]</span></a> ).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="on-computing-digraph-kernels">
@@ -8645,6 +8656,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </pre></div>
 </td></tr></table></div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="about-split-interval-and-permutation-graphs">
@@ -9309,6 +9321,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 <p>And, we recover indeed two <em>isomorphic copies</em> of the original random graph (compare <a class="reference internal" href="#isomorphicpermgraphs"><span class="std std-numref">Fig. 69</span></a> with <a class="reference internal" href="#randomgraph4335"><span class="std std-numref">Fig. 66</span></a>).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
+<hr class="docutils" />
 </div>
 </div>
 <div class="section" id="on-tree-graphs-and-graph-forests">

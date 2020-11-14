@@ -54,7 +54,7 @@
 \contentsline {section}{\numberline {8}HPC ranking with big outranking digraphs}{82}{section.8}%
 \contentsline {subsection}{\numberline {8.1}C\sphinxhyphen {}compiled Python modules}{82}{subsection.8.1}%
 \contentsline {subsection}{\numberline {8.2}Big Data performance tableaux}{83}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}C\sphinxhyphen {}implemented integer\sphinxhyphen {}valued outranking digraphs}{84}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.3}C\sphinxhyphen {}implemented integer\sphinxhyphen {}valued outranking digraphs}{85}{subsection.8.3}%
 \contentsline {subsection}{\numberline {8.4}The sparse outranking digraph implementation}{86}{subsection.8.4}%
 \contentsline {subsection}{\numberline {8.5}Ranking big sets of decision alternatives}{90}{subsection.8.5}%
 \contentsline {subsection}{\numberline {8.6}HPC quantiles ranking records}{92}{subsection.8.6}%
@@ -99,8 +99,8 @@
 \contentsline {subsection}{\numberline {15.4}Recognizing permutation graphs}{178}{subsection.15.4}%
 \contentsline {section}{\numberline {16}On tree graphs and graph forests}{183}{section.16}%
 \contentsline {subsection}{\numberline {16.1}Generating random tree graphs}{184}{subsection.16.1}%
-\contentsline {subsection}{\numberline {16.2}Recognizing tree graphs}{186}{subsection.16.2}%
-\contentsline {subsection}{\numberline {16.3}Spanning trees and forests}{187}{subsection.16.3}%
-\contentsline {subsection}{\numberline {16.4}Maximum determined spanning forests}{189}{subsection.16.4}%
-\contentsline {section}{\numberline {17}Bibliography}{191}{section.17}%
-\contentsline {section}{References}{191}{section.17}%
+\contentsline {subsection}{\numberline {16.2}Recognizing tree graphs}{187}{subsection.16.2}%
+\contentsline {subsection}{\numberline {16.3}Spanning trees and forests}{188}{subsection.16.3}%
+\contentsline {subsection}{\numberline {16.4}Maximum determined spanning forests}{190}{subsection.16.4}%
+\contentsline {section}{\numberline {17}Bibliography}{192}{section.17}%
+\contentsline {section}{References}{192}{section.17}%

@@ -325,6 +325,8 @@ Some special classes of digraphs, like the :py:class:`digraphs.CompleteDigraph`,
 
 Back to :ref:`Content Table <Tutorial-label>`
 
+----------------
+
 .. _Digraph-Tools-label:
 
 Manipulating ``Digraph`` objects
@@ -824,6 +826,8 @@ Let us finally mention some special universal classes of digraphs that are readi
 
 Back to :ref:`Content Table <Tutorial-label>`
 
+----------------
+
 .. _LinearVoting-Tutorial-label:
 
 Computing the winner of an election
@@ -1261,6 +1265,8 @@ Remarkable about both these *ranking-by-choosing* or *ordering-by-rejecting* res
 
 Back to :ref:`Content Table <Tutorial-label>`
 
+---------------
+
 .. _OutrankingDigraphs-Tutorial-label:
 
 Working with the ``outrankingDigraphs`` module
@@ -1542,6 +1548,8 @@ We recover the original bipolar-valued outranking characteristics, and we may re
 Many more tools for exploiting bipolar-valued outranking digraphs are available in the Digraph3 resources (see the technical documentation of the :ref:`outrankingDigraphs module <outrankingDiGraphs-label>` and the :ref:`perfTabs module <perfTabs-label>`).
 
 Back to :ref:`Content Table <Tutorial-label>`
+
+-------------------
 
 .. _RandomPerformanceTableau-Tutorial-label:
 
@@ -2117,6 +2125,8 @@ This type of random performance tableau is matching the :py:class:`votingProfile
 
 Back to :ref:`Content Table <Tutorial-label>`
 
+--------------
+
 .. _Ranking-Tutorial-label:
 
 Ranking with multiple incommensurable criteria
@@ -2678,6 +2688,8 @@ Besides of not providing a unique linear ranking, the *ranking-by-choosing* rule
 
 Back to :ref:`Content Table <Tutorial-label>`
 
+--------------
+
 .. _QuantilesRating-Tutorial-label:
 
 Rating with multiple incommensurable criteria
@@ -2993,6 +3005,8 @@ Alternative *100* appears *first ranked*, whereas alternative *4* is *last ranke
 The *NetFlows* as well as the *Copeland* ranking heuristics are readily scalable with ad hoc HPC tuning to several millions of decision alternatives (see [BIS-2016]_).
 
 Back to :ref:`Content Table <Tutorial-label>`
+
+--------------
 
 .. _HPC-Tutorial-label:
 
@@ -3602,6 +3616,8 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
 
 Back to :ref:`Content Table <Tutorial-label>`
 
+----------------
+
 .. _Rubis-Tutorial-label:
 
 Computing a best choice recommendation
@@ -4039,6 +4055,8 @@ See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: [
 
 Back to :ref:`Content Table <Tutorial-label>`
 
+--------------
+
 .. _Alice-Tutorial-label:
 
 Alice's best choice: A case study [19]_
@@ -4386,7 +4404,7 @@ We may compute these **unopposed** outranking situations [25]_ with help of the 
    >>> uop.computeTransitivityDegree()
     1.0
 
-We keep 28 out the 67 standard outranking situations, which leads to an **oppositeness degree** of (1.0 - 28/67) = 58.21% (:numref:`aliceUnopposedOutrankings` Line 10). What is furthermore remarkable is that this unopposed outranking digraph *uop* is actually a *transitive* digraph modelling a *partial ranking* of the study programs (Line 14).
+We keep 28 out the 67 standard outranking situations, which leads to an **oppositeness degree** of (1.0 - 28/67) = 58.21% (:numref:`aliceUnopposedOutrankings` Line 10). Remarkable furthermore is that this unopposed outranking digraph *uop* is actually *transitive*, i.e. modelling a *partial ranking* of the study programs (Line 14).
 
 We may hence make use of the :code:`exportGraphViz` method of the :py:class:`transitiveDigraphs.TransitiveDigraph` class for drawing the corresponding topological sorting diagram.
 
@@ -4413,12 +4431,12 @@ Again, when *equi-signficant* performance criteria are assumed per decision obje
 
 In view of her performance tableau in :numref:`aliceHeatmap`, *Graduate Interpreter* studies at the *Technical High School Köln*, thus, represent definitely **Alice's very best choice**.
 
--------------
-
 For further reading about the *Digraph3* Best Choice methodology, one may consult the following real *decision aid case study* about choosing a best poster in a scientific conference [BIS-2015]_ .
 
 Back to :ref:`Content Table <Tutorial-label>`
-   
+
+-------------
+
 .. _Rating-Tutorial-label:
 
 Rating with learned quantile norms
@@ -4791,9 +4809,7 @@ More generally, in the case of industrial production monitoring problems, for in
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
-
 ---------------
-
 
 .. _Graphs-Tutorial-label:
 
@@ -5225,6 +5241,8 @@ For more technical information and more code examples, look into the technical d
 
 Back to :ref:`Content Table <Tutorial-label>`  
 
+----------------
+
 .. _IsomorphicMIS-Tutorial-label:
 
 Computing the non isomorphic MISs of the 12-cycle graph
@@ -5410,6 +5428,8 @@ The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 12 sy
 The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of '2's and '3's without distinguishing opposite directions of writing. The first orbit corresponds to writing six times a '2'; the second orbit corresponds to writing four times a '3'. The third and fourth orbit correspond to writing two times a '3' and three times a '2'. There are two non isomorphic ways to do this latter circular sum. Either separating the '3's by one and two '2's, or by zero and three '2's (see Bisdorff & Marichal [ISOMIS-08]_ ).
 
 Back to :ref:`Content Table <Tutorial-label>`
+
+--------------
 
 .. _Kernel-Tutorial-label:
 
@@ -6121,6 +6141,8 @@ And, checking maximality of independent choices via the external stability condi
 
 Back to :ref:`Content Table <Tutorial-label>`
 
+----------------
+
 .. _Permutation-Tutorial-label:
 
 About split, interval and permutation graphs
@@ -6636,6 +6658,8 @@ We may finally check that, for instance, the two permutations [2, 3, 4, 8, 6, 1,
 And, we recover indeed two *isomorphic copies* of the original random graph (compare :numref:`isomorphicPermGraphs` with :numref:`randomGraph4335`).
 
 Back to :ref:`Content Table <Tutorial-label>`
+
+--------------
 
 .. _Trees-Tutorial-label:
 
