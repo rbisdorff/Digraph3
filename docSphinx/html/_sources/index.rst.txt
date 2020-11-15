@@ -15,19 +15,19 @@ Contents
 
 1. `Tutorials <tutorial.html>`_
 
-   Start here
+   *Start here*
    
 2. `Reference manual <techDoc.html>`_
 
-   Technical documentation and source of all modules
+   *Technical documentation and source code of all modules*
    
 3. `Advanced topics <pearls.html>`_
 
-   Pearls of bipolar-valued epistemic logic
+   *Pearls of bipolar-valued epistemic logic*
    
 4. `Archives <digraph3Archives.html>`_
 
-   Historical case studies and example graphs
+   *Historical case studies and example graphs*
 
 * :ref:`genindex`
 * :ref:`modindex`

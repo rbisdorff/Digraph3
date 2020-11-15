@@ -2724,7 +2724,7 @@ Three **decision objectives** are guiding the CEO's choice:
       2. *maximize* the future turnover of the SME,
       3. *maximize* the new working conditions.
 
-The decision consequences to take into account for evaluating the potential new office sites with respect to each of the three objectives are modelled by the following **family of criteria**.
+The decision consequences to take into account for evaluating the potential new office sites with respect to each of the three objectives are modelled by the following **coherent family of criteria** [26]_.
 
    ==================== ==== ============ =========================================
     Objective            ID   Name         Comment
@@ -3192,8 +3192,6 @@ The decision consequences Alice wishes to take into account for evaluating the p
     PR   Prestige     Occupational prestige (max)              PRA         2 
    ==== ============ ======================================== =========== ========
 
-Alice is subjectively evaluating the *attractiveness* of the studies on a three level ordinal scale from 0 (*weak*), 1 (*fair*) to 2 (*good*). Similarly, she is subjectively evaluating the *attractiveness* of the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the *occupational prestige* she looked up the SIOPS [20]_. All the other evaluation data could be looked up on the internet.
-
 The actual evaluations of Alice's potential study programs are gathered in a :py:class:`perfTabs.PerformanceTableau` object [21]_.
 
 .. code-block:: pycon
@@ -3249,11 +3247,14 @@ In the following *heatmap view*, we may now consult Alice's performance evaluati
 
    Heatmap of Alice's performance tableau	   
 
-Her ten potential study programs (see :numref:`aliceHeatmap`) are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph [23]_. *Graduate interpreter* studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by *Graduate Translator* studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs for her appear to be studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
+Alice is subjectively evaluating the *attractiveness* of the studies on a three level ordinal scale from 0 (*weak*), 1 (*fair*) to 2 (*good*). Similarly, she is subjectively evaluating the *attractiveness* of the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the *occupational prestige* she looked up the SIOPS [20]_. All the other evaluation data could be looked up on the internet (see :numref:`aliceHeatmap`).
+
+Notice by the way that evaluations on performance criteria to be minimized, like *distance to home* (*DH*) or *study times* (*SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
+
+Her ten potential study programs are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph [23]_. *Graduate interpreter* studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by *Graduate Translator* studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs for her appear to be studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
 
 It is interesting to observe that for Alice, the most significant performance criteria, appear to be, on the one side, the *attractiveness* of the study program (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear to be, on the other side, not *so* significant.
 
-Notice by the way that evaluations on performance criteria to be minimized, like *distance to home* (*DH*) or *study times* (*SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
 
 Building a best choice recommendation
 .....................................
@@ -7079,6 +7080,7 @@ Bibliography
 
 .. [25] See also the corresponding :ref:`Advanced Topic <UnOpposed-Outranking-Tutorial-label>` in the Digraph3 documentation.
 
+.. [26] A *coherent family* of performance criteria verifies: a) *Exhaustiveness*: No argument acceptable to all stakeholders can be put forward to justify a preference in favour of action *x* versus action *y*  when *x* and *y* have the same performance level on each of the criteria of the family; b) *Cohesiveness*: Stakeholders unanimously recognize that action *x* must be preferred to action *y* whenever the performance level of *x* is significantly better than that of *x* on one of the criteria of positive weight, performance levels of *x* and *y* being the same on each of the other criteria; c) *Nonredundancy*: One of the above requirements is violated if one of the criteria is left out from the family. *Source*: European Working Group “*Multicriteria Aid for Decisions*” Series 3, no1, Spring, 2000.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
