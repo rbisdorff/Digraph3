@@ -49,21 +49,21 @@
 \contentsline {subsection}{\numberline {6.7}\sphinxstyleemphasis {Tideman}’s ranked\sphinxhyphen {}pairs rule}{73}{subsection.6.7}%
 \contentsline {section}{\numberline {7}Computing a best choice recommendation}{74}{section.7}%
 \contentsline {subsection}{\numberline {7.1}What site to choose ?}{75}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Performance tableau}{77}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Outranking digraph}{79}{subsection.7.3}%
-\contentsline {subsection}{\numberline {7.4}\sphinxstyleemphasis {Rubis} best choice recommendations}{81}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.2}Performance tableau}{76}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Outranking digraph}{78}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}\sphinxstyleemphasis {Rubis} best choice recommendations}{80}{subsection.7.4}%
 \contentsline {subsection}{\numberline {7.5}Computing \sphinxstyleemphasis {strict best} choice recommendations}{83}{subsection.7.5}%
-\contentsline {subsection}{\numberline {7.6}Weakly ordering the outranking digraph}{85}{subsection.7.6}%
-\contentsline {section}{\numberline {8}Alice’s best choice: A case study }{87}{section.8}%
-\contentsline {subsection}{\numberline {8.1}The decision problem}{88}{subsection.8.1}%
+\contentsline {subsection}{\numberline {7.6}Weakly ordering the outranking digraph}{84}{subsection.7.6}%
+\contentsline {section}{\numberline {8}Alice’s best choice: A case study }{86}{section.8}%
+\contentsline {subsection}{\numberline {8.1}The decision problem}{87}{subsection.8.1}%
 \contentsline {subsection}{\numberline {8.2}The performance tableau}{88}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}Building a best choice recommendation}{92}{subsection.8.3}%
-\contentsline {subsection}{\numberline {8.4}Robustness analysis}{96}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.3}Building a best choice recommendation}{91}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Robustness analysis}{95}{subsection.8.4}%
 \contentsline {section}{\numberline {9}Rating with multiple incommensurable criteria}{99}{section.9}%
 \contentsline {subsection}{\numberline {9.1}K\sphinxhyphen {}sorting on a single criterion}{99}{subsection.9.1}%
 \contentsline {subsection}{\numberline {9.2}Quantiles sorting with multiple criteria}{100}{subsection.9.2}%
 \contentsline {subsection}{\numberline {9.3}Ranking big performance tableaux}{104}{subsection.9.3}%
-\contentsline {section}{\numberline {10}HPC ranking with big outranking digraphs}{107}{section.10}%
+\contentsline {section}{\numberline {10}HPC ranking with big outranking digraphs}{106}{section.10}%
 \contentsline {subsection}{\numberline {10.1}C\sphinxhyphen {}compiled Python modules}{107}{subsection.10.1}%
 \contentsline {subsection}{\numberline {10.2}Big Data performance tableaux}{108}{subsection.10.2}%
 \contentsline {subsection}{\numberline {10.3}C\sphinxhyphen {}implemented integer\sphinxhyphen {}valued outranking digraphs}{109}{subsection.10.3}%

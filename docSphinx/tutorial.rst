@@ -2704,19 +2704,22 @@ See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: [
 What site to choose ?
 .....................
 
-A SME, specialized in printing and copy services, has to move into new offices, and its CEO has gathered seven **potential office sites**.
+A SME, specialized in printing and copy services, has to move into new offices, and its CEO has gathered seven **potential office sites** (see :numref:`newOffSites`).
 
-  ==== ====== ====================== ==================================================
-   ID   Name    Address               Comment
-  ==== ====== ====================== ==================================================
-   A    Ave    Avenue de la liberté   High standing city center
-   B    Bon    Bonnevoie              Industrial environment
-   C    Ces    Cessange               Residential suburb location
-   D    Dom    Dommeldange            Industrial suburb environment
-   E    Bel    Esch-Belval            New and ambitious urbanization far from the city
-   F    Fen    Fentange               Out in the countryside
-   G    Gar    Avenue de la Gare      Main city shopping street
-  ==== ====== ====================== ==================================================
+.. table:: The potential new office sites
+   :name: newOffSites
+	  
+   ==== ====== ====================== ==================================================
+    ID   Name    Address               Comment
+   ==== ====== ====================== ==================================================
+    A    Ave    Avenue de la liberté   High standing city center
+    B    Bon    Bonnevoie              Industrial environment
+    C    Ces    Cessange               Residential suburb location
+    D    Dom    Dommeldange            Industrial suburb environment
+    E    Bel    Esch-Belval            New and ambitious urbanization far from the city
+    F    Fen    Fentange               Out in the countryside
+    G    Gar    Avenue de la Gare      Main city shopping street
+   ==== ====== ====================== ==================================================
 
 Three **decision objectives** are guiding the CEO's choice:
 
@@ -2726,6 +2729,9 @@ Three **decision objectives** are guiding the CEO's choice:
 
 The decision consequences to take into account for evaluating the potential new office sites with respect to each of the three objectives are modelled by the following **coherent family of criteria** [26]_.
 
+.. table:: The coherent family of performance criteria
+   :name: offCrit
+	 
    ==================== ==== ============ =========================================
     Objective            ID   Name         Comment
    ==================== ==== ============ =========================================
@@ -2742,6 +2748,9 @@ The decision consequences to take into account for evaluating the potential new 
 
 The evaluation of the seven potential sites on each criterion are gathered in the following **performance tableau**.
 
+.. table:: Performance evaluations of the potential office sites
+   :name: offPerfTab
+
    ============= ======== ======== ======== ======== ======== ======== ======== ======== 
     Criterion     weight   A        B        C        D        E         F         G
    ============= ======== ======== ======== ======== ======== ======== ======== ========
@@ -2756,13 +2765,13 @@ The evaluation of the seven potential sites on each criterion are gathered in th
     Park           3.0     90       30       100      90       70       0        80
    ============= ======== ======== ======== ======== ======== ======== ======== ========
 
-Except the *Costs* criterion, all other criteria admit for grading a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice that site *A* is the most expensive, but also 100% satisfying the *Proximity* as well as the  *Standing* criterion. Whereas the site *C* is the cheapest one; providing however no satisfaction at all on both the *Standing* and the *Working Space* criteria.
+Except the *Costs* criterion, all other criteria admit for grading a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice in :numref:`offPerfTab` that site *A* is the most expensive, but also 100% satisfying the *Proximity* as well as the  *Standing* criterion. Whereas the site *C* is the cheapest one; providing however no satisfaction at all on both the *Standing* and the *Working Space* criteria.
 
-The *Costs* criterion admits the highest significance (45.0), followed by the *Future turnover* criteria (32.0 + 26.0 + 23.0), The *Working conditions* criteria are the less significant (10.0 + 6.0, + 3.0). It follows that the CEO considers *maximizing the future turnover* the most important objective (81.0), followed by the *minizing yearly Costs* objective (45.0), and less important, the *maximizing working conditions* objective (19.0). 
+In :numref:`offPerfTab` we may also see that the *Costs* criterion admits the highest significance (45.0), followed by the *Future turnover* criteria (32.0 + 26.0 + 23.0 = 81.0), The *Working conditions* criteria are the less significant (10.0 + 6.0, + 3.0 = 19.0). It follows that the CEO considers *maximizing the future turnover* the most important objective (81.0), followed by the *minizing yearly Costs* objective (45.0), and less important, the *maximizing working conditions* objective (19.0). 
 
-Concerning yearly costs, we notice that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a site if there is at least a positive difference of 2500€. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a *considerably large* performance difference, triggering a *veto* situation the case given (see [BIS-2013]_). 
+Concerning yearly costs, we suppose that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a site if there is at least a positive difference of 2500€. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a *considerably large* performance difference, triggering a *veto* situation the case given (see [BIS-2013]_). 
 
-In view of this performance tableau, what is now the office site we may recommend to the CEO as **best choice** ?
+In view of :numref:`offPerfTab`, what is now the office site we may recommend to the CEO as **best choice** ?
 
 Performance tableau
 ...................
@@ -3146,22 +3155,27 @@ Alice's best choice: A case study [19]_
 The decision problem
 ....................
 
-Alice has already identified 10 **potential study programs**:
+Alice has already identified 10 **potential study programs**.
 
-======= ============================ =============================== =============
- ID      Diploma                      Institution                      City
-======= ============================ =============================== =============
- T-UD    Qualified translator (T)     University (UD)                 Düsseldorf
- T-FHK   Qualified translator (T)     Higher Technical School (FHK)   Köln
- T-FHM   Qualified translator (T)     Higher Technical School (FHM)   München
- I-FHK   Graduate interpreter (I)     Higher Technical School (FHK)   Köln
- T-USB   Qualified translator (T)     University (USB)                Saarbrücken
- I-USB   Graduate interpreter (I)     University (USB)                Saarbrücken
- T-UHB   Qualified translator (T)     University (UHB)                Heidelberg
- I-UHB   Graduate interpreter (I)     University (UHB)                Heidelberg
- S-HKK   Specialized secretary (S)    Chamber of Commerce (HKK)       Köln
- C-HKK   Foreign correspondent (C)    Chamber of Commerce (HKK)       Köln
-======= ============================ =============================== =============
+.. table:: Alice's potential study programs
+   :name: studProgs
+	  
+   ======= ============================ =============================== =============
+    ID      Diploma                      Institution                      City
+   ======= ============================ =============================== =============
+    T-UD    Qualified translator (T)     University (UD)                 Düsseldorf
+    T-FHK   Qualified translator (T)     Higher Technical School (FHK)   Köln
+    T-FHM   Qualified translator (T)     Higher Technical School (FHM)   München
+    I-FHK   Graduate interpreter (I)     Higher Technical School (FHK)   Köln
+    T-USB   Qualified translator (T)     University (USB)                Saarbrücken
+    I-USB   Graduate interpreter (I)     University (USB)                Saarbrücken
+    T-UHB   Qualified translator (T)     University (UHB)                Heidelberg
+    I-UHB   Graduate interpreter (I)     University (UHB)                Heidelberg
+    S-HKK   Specialized secretary (S)    Chamber of Commerce (HKK)       Köln
+    C-HKK   Foreign correspondent (C)    Chamber of Commerce (HKK)       Köln
+   ======= ============================ =============================== =============
+
+In :numref:`studProgs` we notice that Alice considers three *Graduate Interpreter* studies (8 or 9 Semesters), respectively in Köln, in Saarbrücken or in Heidelberg; and five *Qualified translator* studies (8 or 9 Semesters), respectively in Köln, in Düsseldorf, in Saarbrücken, in Heidelberg or in Munich. She also considers two short (4 Semesters) study programs at the Chamber of Commerce in Köln. 
 
 Four **decision objectives** of more or less equal importance are guiding Alice's choice:
 
@@ -3170,11 +3184,11 @@ Four **decision objectives** of more or less equal importance are guiding Alice'
     #. *minimize*  her financial dependency on her parents (FIN),
     #. *maximize* her professional perspectives (PRA).
 
-The performance tableau
-.......................
-
 The decision consequences Alice wishes to take into account for evaluating the potential study programs with respect to each of the four objectives are modelled by the following **family of criteria**.
 
+.. table:: Alice's family of performance criteria
+   :name: famCrit
+	  
    ==== ============ ======================================== =========== ========
     ID   Name         Comment                                  Objective   Weight
    ==== ============ ======================================== =========== ========
@@ -3191,6 +3205,12 @@ The decision consequences Alice wishes to take into account for evaluating the p
     AI   Income       Annual income after studying (max)       PRA         2
     PR   Prestige     Occupational prestige (max)              PRA         2 
    ==== ============ ======================================== =========== ========
+
+Within each decision objective, the performance criteria are considered to be equisignificant. Hence, the four decision objectives show a same importance weight of 6 (see :numref:`famCrit`).
+
+
+The performance tableau
+.......................
 
 The actual evaluations of Alice's potential study programs are gathered in a :py:class:`perfTabs.PerformanceTableau` object [21]_.
 
@@ -3221,8 +3241,6 @@ The actual evaluations of Alice's potential study programs are gathered in a :py
        OP Occupational Prestige                     2
        Total weight: 6.00 (3 criteria)
 
-Within each decision objective, the performance criteria are considered to be equisignificant. Hence, the four decision objectives show a same importance weight of 6 (see :numref:`alicePerfTab`).
-
 Details of the performance criteria may be consulted in a browser view (see :numref:`aliceCriteria` below).
 
    >>> t.showHTMLCriteria()
@@ -3251,15 +3269,15 @@ Alice is subjectively evaluating the *attractiveness* of the studies on a three 
 
 Notice by the way that evaluations on performance criteria to be minimized, like *distance to home* (*DH*) or *study times* (*SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
 
-Her ten potential study programs are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph [23]_. *Graduate interpreter* studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by *Graduate Translator* studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs for her appear to be studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
+Her ten potential study programs are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph [23]_. *Graduate interpreter* studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by *Qualified Translator* studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs for her appear to be studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
 
-It is interesting to observe that for Alice, the most significant performance criteria, appear to be, on the one side, the *attractiveness* of the study program (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear to be, on the other side, not *so* significant.
+It is interesting to observe that for Alice, the most significant performance criteria, appear to be, on the one side, the *attractiveness* of the study program (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear to be, on the other side, not *so* significant [27]_.
 
 
 Building a best choice recommendation
 .....................................
 
-Let us now have a look at the underlying bipolar-valued pairwise outranking digraph.
+Let us now have a look at the resultng pairwise outranking situations.
 
 .. code-block:: pycon
    :name: aliceOutranking
@@ -3325,7 +3343,7 @@ We have mentioned that Alice considers a performance difference of 7 points on t
 
 In :numref:`aliceVetos`, we notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 9, 14, 19) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35).
 
-We may furthermore check that no outranking circuits do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs in :numref:`aliceHeatmap` are in fact *Condorcet* winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (see :numref:`aliceBestChoice` Line 10).
+We may furthermore check that no outranking *circuits* do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs in :numref:`aliceHeatmap` are in fact *Condorcet* winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (see :numref:`aliceBestChoice` Line 10).
    
 .. code-block:: pycon
    :name: aliceBestChoice
@@ -3382,9 +3400,9 @@ A graphviz drawing of the *skeleton* of the corresponding strict outranking digr
 
    Alice's best choice recommendation	   
 
-In :numref:`aliceBestChoiceImage` we notice that the *Graduate Interpreter* studies come first, followed by the *Graduate Translator* studies. Last come the *Chamber of Commerce*'s specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
+In :numref:`aliceBestChoiceImage` we notice that the *Graduate Interpreter* studies come first, followed by the *Qualified Translator* studies. Last come the *Chamber of Commerce*'s specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
 
-We may, furthermore, check the pairwise outranking situations observed  between the first and second-ranked alternatives, ie *Garduate Interpreter* studies in Köln verse *Graduate Interpreter* studies in Saabrücken (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
+We may, furthermore, check the pairwise outranking situations observed  between the first and second-ranked alternatives, ie *Garduate Interpreter* studies in Köln versus *Graduate Interpreter* studies in Saabrücken (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
 
    >>> dg.showHTMLPairwiseOutrankings('I-FHK','I-USB')
 
@@ -3504,7 +3522,7 @@ Again, when *equi-signficant* performance criteria are assumed per decision obje
 
 In view of her performance tableau in :numref:`aliceHeatmap`, *Graduate Interpreter* studies at the *Technical High School Köln*, thus, represent definitely **Alice's very best choice**.
 
-For further reading about the *Digraph3* Best Choice methodology, one may consult the following real *decision aid case study* about choosing a best poster in a scientific conference [BIS-2015]_ .
+For further reading about the *Rubis* Best Choice methodology, one may consult the following real *decision aid case study* about choosing a best poster in a scientific conference [BIS-2015]_ .
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -7081,6 +7099,9 @@ Bibliography
 .. [25] See also the corresponding :ref:`Advanced Topic <UnOpposed-Outranking-Tutorial-label>` in the Digraph3 documentation.
 
 .. [26] A *coherent family* of performance criteria verifies: a) *Exhaustiveness*: No argument acceptable to all stakeholders can be put forward to justify a preference in favour of action *x* versus action *y*  when *x* and *y* have the same performance level on each of the criteria of the family; b) *Cohesiveness*: Stakeholders unanimously recognize that action *x* must be preferred to action *y* whenever the performance level of *x* is significantly better than that of *x* on one of the criteria of positive weight, performance levels of *x* and *y* being the same on each of the other criteria; c) *Nonredundancy*: One of the above requirements is violated if one of the criteria is left out from the family. *Source*: European Working Group “*Multicriteria Aid for Decisions*” Series 3, no1, Spring, 2000.
+
+.. [27] See also the corresponding :ref:`Advanced Topic <OrdinalCorrelation-Tutorial-label>` in the Digraph3 documentation.
+
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
