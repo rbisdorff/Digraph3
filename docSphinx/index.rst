@@ -67,7 +67,6 @@ The fourth section gathers historical case studies and example digraphs compiled
 
    .. toctree:: digraph3Archives
       :maxdepth: 2
-		 
 
 
 References
