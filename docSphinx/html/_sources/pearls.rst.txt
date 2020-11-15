@@ -1117,8 +1117,8 @@ Back to :ref:`Content Table <Pearls-label>`
 
 .. _Stable-Outranking-Tutorial-label:
 
-Robustness analysis of bipolar-valued outranking digraphs
----------------------------------------------------------
+On stable outrankings with ordinal criteria significance
+--------------------------------------------------------
 
 .. contents:: 
 	:depth: 1
