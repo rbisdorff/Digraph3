@@ -49,18 +49,21 @@ This documentation, available on the `Read The Docs <https://readthedocs.org/>`_
 
   .. toctree:: techDoc
      :maxdepth: 2
+		
 
 
 3. The third section exhibits some pearls of *bipolar-valued epistemic logic* that enrich the Digraph3 resources. These short texts illustrate well the very computational benefit one may get when working in a bipolar-valued logical framework. And, more specifically, the essential part the logically neutral *undeterminate* value is judiciously playing therein.  
 
    .. toctree:: pearls
       :maxdepth: 2
+		 
 
 
 4. The fourth section gathers historical case studies and example digraphs compiled before 2006 and concerning the active development of the Digraph3 collection of python3 modules for implementing tools and methods of the *Rubis decision aiding* approach. 
 
    .. toctree:: digraph3Archives
-      :maxdepth: 2	     
+      :maxdepth: 2
+		 
 
 
 References
