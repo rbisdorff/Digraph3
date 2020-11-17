@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  15 NOV 2020 12:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  17 NOV 2020 09:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -757,7 +757,11 @@ File: symmetricPart.png Graphic file (type png)
 <use symmetricPart.png>
 Package pdftex.def Info: symmetricPart.png  used on input line 572.
 (pdftex.def)             Requested size: 451.68457pt x 224.90585pt.
- [15 <./asymmetricPart.png>] [16 <./symmetricPart.png>] [17] [18] [19]
+ [15 <./asymmetricPart.png>] [16 <./symmetricPart.png>]
+Overfull \vbox (0.52747pt too high) detected at line 665
+ []
+
+[17] [18] [19]
 <k1restricted.png, id=417, 644.4075pt x 375.4025pt>
 File: k1restricted.png Graphic file (type png)
 <use k1restricted.png>
@@ -769,27 +773,27 @@ File: k2restricted.png Graphic file (type png)
 <use k2restricted.png>
 Package pdftex.def Info: k2restricted.png  used on input line 840.
 (pdftex.def)             Requested size: 301.12305pt x 172.93852pt.
-
-[21]
+ [21]
 <bestWorstOrientation.png, id=430, 384.43625pt x 403.5075pt>
 File: bestWorstOrientation.png Graphic file (type png)
 <use bestWorstOrientation.png>
 Package pdftex.def Info: bestWorstOrientation.png  used on input line 876.
 (pdftex.def)             Requested size: 225.84229pt x 237.05145pt.
- [22 <./k2restricted.png>] [23 <./bestWorstOrientation.png>] [24]
+ [22 <./k2restricted.png>]
+[23 <./bestWorstOrientation.png>] [24]
 <weightDistributions.png, id=455, 738.76pt x 669.50125pt>
 File: weightDistributions.png Graphic file (type png)
 <use weightDistributions.png>
 Package pdftex.def Info: weightDistributions.png  used on input line 990.
 (pdftex.def)             Requested size: 338.76343pt x 307.00381pt.
- [25]
-[26 <./weightDistributions.png>]
+ [25] [26 <./weightDistributions.png>]
 <rCharacteristic.png, id=476, 764.8575pt x 411.5375pt>
 File: rCharacteristic.png Graphic file (type png)
 <use rCharacteristic.png>
 Package pdftex.def Info: rCharacteristic.png  used on input line 1023.
 (pdftex.def)             Requested size: 338.76343pt x 182.27644pt.
- [27 <./rCharacteristic.png>]
+
+[27 <./rCharacteristic.png>]
 <simulLikelihood.png, id=486, 361.35pt x 252.945pt>
 File: simulLikelihood.png Graphic file (type png)
 <use simulLikelihood.png>
@@ -801,8 +805,7 @@ File: confidentOutranking.png Graphic file (type png)
 <use confidentOutranking.png>
 Package pdftex.def Info: confidentOutranking.png  used on input line 1194.
 (pdftex.def)             Requested size: 263.48267pt x 294.53838pt.
- [31 <./confidentOutranking.png>] [32] [33] [34] [35]
-[36] [37]
+ [31 <./confidentOutranking.png>] [32] [33] [34] [35] [36] [37]
 Overfull \vbox (1.24075pt too high) detected at line 1526
  []
 
@@ -946,7 +949,7 @@ dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/symbols/msam10.pfb>
-Output written on digraph3Pearls.pdf (60 pages, 1971773 bytes).
+Output written on digraph3Pearls.pdf (60 pages, 1972148 bytes).
 PDF statistics:
  1707 PDF objects out of 1728 (max. 8388607)
  833 compressed objects within 9 object streams

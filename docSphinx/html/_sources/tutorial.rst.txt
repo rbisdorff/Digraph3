@@ -3126,7 +3126,8 @@ In this **ranking-by-choosing** method, where we operate the *epistemic fusion* 
 
 The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, site *D* represents actually the best compromise. However, if *Costs* do not play much a role, it would be perhaps better to decide to move to the most advantageous site *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
 
-It might be worth, as an **exercise**, to modify these criteria significance weights in the :code:`officeChoice.py` data file in such a way that:
+It might be worth, as an **exercise**, to modify these criteria significance weights in the :code:`officeChoice.py` data file in such a way that
+
     - all criteria under an objective appear *equi-significant*, and
     - all three decision objectives are considered *equally important*.
 
@@ -3277,7 +3278,7 @@ It is interesting to observe that for Alice, the most significant performance cr
 Building a best choice recommendation
 .....................................
 
-Let us now have a look at the resultng pairwise outranking situations.
+Let us now have a look at the resulting pairwise outranking situations.
 
 .. code-block:: pycon
    :name: aliceOutranking
@@ -3298,7 +3299,7 @@ Let us now have a look at the resultng pairwise outranking situations.
 
 Despite rather poorly discriminating performance evaluations, the 67 pairwise outranking situations, positively validated in the digraph *dg* obtained from Alice's performance tableau (see :numref:`aliceOutranking` Line 9), are supported by a 74% majority of criteria significance (Line 10).
 
-We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion *AS* to be considerable which triggers, the case given, a potential polarisation of the outranking characteristics. We may inspect the occurrence os such polarisations as follows.
+We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion *AS* to be considerable which triggers, the case given, a potential polarisation of the outranking characteristics. We may inspect the occurrence of such polarisations as follows.
 
 .. code-block:: pycon
    :name: aliceVetos
@@ -3471,7 +3472,7 @@ Concerning now a 90%-*confident* best choice recommendation, we are lucky (see :
 
 The *Graduate Interpreter* studies in Köln remain indeed a 90%-confident *Condorcet* winner (Line 2). Hence, the same study program also remains our 90%-confident best choice recommendation supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9 and 15).
 
-When pairwise comparing the two best-ranked study programs (see :numref:`pairwiseComparison`), we have observed that *I-FHK* actually positively outranks *I-USB* on all four decision objectives. When we admit equi-significant criteria significances per objective, this outranking situation is hence valid independently of the importance weights Alice may allocate to each of her decision objectives. 
+When previously comparing the two best-ranked study programs (see :numref:`pairwiseComparison`), we have observed that *I-FHK* actually positively outranks *I-USB* on all four decision objectives. When admitting equi-significant criteria significances per objective, this outranking situation is hence valid independently of the importance weights Alice may allocate to each of her decision objectives. 
 
 We may compute these **unopposed** outranking situations [25]_ with help of the :py:class:`outrankingDigraphs.UnOpposedBipolarOutrankingDigraph` constructor.
 
@@ -3522,7 +3523,7 @@ Again, when *equi-signficant* performance criteria are assumed per decision obje
 
 In view of her performance tableau in :numref:`aliceHeatmap`, *Graduate Interpreter* studies at the *Technical High School Köln*, thus, represent definitely **Alice's very best choice**.
 
-For further reading about the *Rubis* Best Choice methodology, one may consult the following real *decision aid case study* about choosing a best poster in a scientific conference [BIS-2015]_ .
+For further reading about the *Rubis* Best Choice methodology, one may consult in [BIS-2015]_ the study of a *real decision aid case* about choosing a best poster in a scientific conference.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -6964,9 +6965,13 @@ The given graph is connected and, hence, admits a single spanning tree (see :num
 One may easily verify that all other potential spanning trees, including instead the edges {*v3*, *v5*} and/or {*v4*, *v5*} - will show a lower average determination.
 
 Back to :ref:`Content Table <Tutorial-label>`
-	   	  
-Bibliography
-------------
+
+---------------------
+
+.. only:: html
+
+    Bibliography
+    ............
 
 .. [CPSTAT-L5] Bisdorff R. (2017) "Simulating from abitrary empirical random distributions". MICS *Computational Statistics* course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winter Semester 2017 (see http://hdl.handle.net/10993/37933).
 
@@ -7084,7 +7089,7 @@ Bibliography
 
 .. [18] A Digraph3 *graphs.Graph* encoded file is available in the :code:`examples` directory of the Digraph3 software collection.
 
-.. [19] This case study is taken from a "Multiple Criteria Decision Analysis* case study by Eisenführ Fr., Langer Th., and Weber M., *Fallstudien zu rationalem Entscheiden*, Springer 2001, pp. 1 -- 17.
+.. [19] This case study is inspired by a "Multiple Criteria Decision Analysis* case study published in Eisenführ Fr., Langer Th., and Weber M., *Fallstudien zu rationalem Entscheiden*, Springer 2001, pp. 1-17.
 
 .. [20] Ganzeboom H.B.G, Treiman D.J. *Internationally Comparable Measures of Occupational Status for the 1988 International Standard Classification of Occupations*, Social Science Research 25, 201–239 (1996).
 

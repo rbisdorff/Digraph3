@@ -88,7 +88,6 @@
 <li><p><a class="reference internal" href="#on-computing-digraph-kernels" id="id179">On computing digraph kernels</a></p></li>
 <li><p><a class="reference internal" href="#about-split-interval-and-permutation-graphs" id="id180">About split, interval and permutation graphs</a></p></li>
 <li><p><a class="reference internal" href="#on-tree-graphs-and-graph-forests" id="id181">On tree graphs and graph forests</a></p></li>
-<li><p><a class="reference internal" href="#bibliography" id="id182">Bibliography</a></p></li>
 </ul>
 </li>
 </ul>
@@ -103,22 +102,22 @@
 <span id="digraphs-tutorial-label"></span><h2><a class="toc-backref" href="#id166">Working with the <em>Digraph3</em> software resources</a><a class="headerlink" href="#working-with-the-digraph3-software-resources" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#purpose" id="id183">Purpose</a></p></li>
-<li><p><a class="reference internal" href="#downloading-of-the-digraph3-resources" id="id184">Downloading of the Digraph3 resources</a></p></li>
-<li><p><a class="reference internal" href="#starting-a-python3-session" id="id185">Starting a Python3 session</a></p></li>
-<li><p><a class="reference internal" href="#digraph-object-structure" id="id186"><code class="docutils literal notranslate"><span class="pre">Digraph</span></code> object structure</a></p></li>
-<li><p><a class="reference internal" href="#permanent-storage" id="id187">Permanent storage</a></p></li>
-<li><p><a class="reference internal" href="#inspecting-a-digraph-object" id="id188">Inspecting a <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> object</a></p></li>
-<li><p><a class="reference internal" href="#special-classes" id="id189">Special classes</a></p></li>
+<li><p><a class="reference internal" href="#purpose" id="id182">Purpose</a></p></li>
+<li><p><a class="reference internal" href="#downloading-of-the-digraph3-resources" id="id183">Downloading of the Digraph3 resources</a></p></li>
+<li><p><a class="reference internal" href="#starting-a-python3-session" id="id184">Starting a Python3 session</a></p></li>
+<li><p><a class="reference internal" href="#digraph-object-structure" id="id185"><code class="docutils literal notranslate"><span class="pre">Digraph</span></code> object structure</a></p></li>
+<li><p><a class="reference internal" href="#permanent-storage" id="id186">Permanent storage</a></p></li>
+<li><p><a class="reference internal" href="#inspecting-a-digraph-object" id="id187">Inspecting a <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> object</a></p></li>
+<li><p><a class="reference internal" href="#special-classes" id="id188">Special classes</a></p></li>
 </ul>
 </div>
 <div class="section" id="purpose">
-<h3><a class="toc-backref" href="#id183">Purpose</a><a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id182">Purpose</a><a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
 <p>The basic idea of the Digraph3 Python resources is to make easy python interactive sessions or write short Python3 scripts for computing all kind of results from a bipolar-valued digraph or graph. These include such features as maximal independent, maximal dominant or absorbent choices, rankings, outrankings, linear ordering, etc. Most of the available computing resources are meant to illustrate a Master Course <a href="http://hdl.handle.net/10993/37933" target="_blank"> on Algorithmic Decision Theory</i></a>  given at the University of Luxembourg in the context of its <em>Master in Information and Computer Science</em> (MICS).</p>
 <p>The Python development of these computing resources offers the advantage of an easy to write and maintain OOP source code as expected from a performing scripting language without loosing on efficiency in execution times compared to compiled languages such as C++ or Java.</p>
 </div>
 <div class="section" id="downloading-of-the-digraph3-resources">
-<h3><a class="toc-backref" href="#id184">Downloading of the Digraph3 resources</a><a class="headerlink" href="#downloading-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id183">Downloading of the Digraph3 resources</a><a class="headerlink" href="#downloading-of-the-digraph3-resources" title="Permalink to this headline">¶</a></h3>
 <p>Using the Digraph3 modules is easy. You only need to have installed on your system the <a class="reference external" href="https://www.python.org/doc/">Python</a> programming language of version 3.+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, the Python standard decimal module implements very efficiently its decimal.Decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic r-valuation functions, which makes the recent python-3.7+ versions much faster (more than twice as fast) when extensive digraph operations are performed.</p>
 <p>Several download options (easiest under Linux or Mac OS-X) are given.</p>
 <ol class="arabic simple">
@@ -139,7 +138,7 @@
 <p>See the <a class="reference external" href="techDoc.html#installation">Installation section</a> in the Technical Reference.</p>
 </div>
 <div class="section" id="starting-a-python3-session">
-<h3><a class="toc-backref" href="#id185">Starting a Python3 session</a><a class="headerlink" href="#starting-a-python3-session" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id184">Starting a Python3 session</a><a class="headerlink" href="#starting-a-python3-session" title="Permalink to this headline">¶</a></h3>
 <p>You may start an interactive Python3 session in the <code class="code docutils literal notranslate"><span class="pre">Digraph3</span></code> directory for exploring the classes and methods provided by the <code class="code docutils literal notranslate"><span class="pre">Digraph3</span></code> modules (see the <a class="reference external" href="techDoc.html">Reference manual</a>). To do so, enter the <code class="docutils literal notranslate"><span class="pre">python3</span></code> commands following the session prompts marked with &gt;&gt;&gt;. The lines without the prompt are output from the Python interpreter.</p>
 <div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -190,7 +189,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <p>We may directly inspect the content of python object <em>dg</em> (Line 3)</p>
 </div>
 <div class="section" id="digraph-object-structure">
-<h3><a class="toc-backref" href="#id186"><code class="docutils literal notranslate"><span class="pre">Digraph</span></code> object structure</a><a class="headerlink" href="#digraph-object-structure" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id185"><code class="docutils literal notranslate"><span class="pre">Digraph</span></code> object structure</a><a class="headerlink" href="#digraph-object-structure" title="Permalink to this headline">¶</a></h3>
 <p>All <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a> objects contain at least the following attributes (see <a class="reference internal" href="#digraphs"><span class="std std-numref">Listing 1</span></a> Lines 11-12):</p>
 <ol class="arabic simple" start="0">
 <li><p>A <strong>name</strong> attribute, holding usually the actual name of the stored instance that was used to create the instance;</p></li>
@@ -204,7 +203,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <p>See the technical documentation of the root <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a> class.</p>
 </div>
 <div class="section" id="permanent-storage">
-<h3><a class="toc-backref" href="#id187">Permanent storage</a><a class="headerlink" href="#permanent-storage" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id186">Permanent storage</a><a class="headerlink" href="#permanent-storage" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="techDoc.html#digraphs.Digraph.save" title="digraphs.Digraph.save"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.save()</span></code></a> method (see <a class="reference internal" href="#digraphs"><span class="std std-numref">Listing 1</span></a> Line 13 above) stores the digraph object <em>dg</em> in a file named <code class="code docutils literal notranslate"><span class="pre">tutorialDigraph.py</span></code> with the following content.</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -241,7 +240,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 </div>
 <div class="section" id="inspecting-a-digraph-object">
-<h3><a class="toc-backref" href="#id188">Inspecting a <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> object</a><a class="headerlink" href="#inspecting-a-digraph-object" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id187">Inspecting a <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> object</a><a class="headerlink" href="#inspecting-a-digraph-object" title="Permalink to this headline">¶</a></h3>
 <p>We may reload the previously saved digraph object from the file named <code class="code docutils literal notranslate"><span class="pre">tutorialDigraph.py</span></code> with the <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a> class constructor and the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showAll" title="digraphs.Digraph.showAll"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.showAll()</span></code></a> method output reveals us that <em>dg</em> is a <em>connected</em> and <em>irreflexive</em> digraph of <em>order</em> five, evaluated in an integer <em>valuation domain</em> [-1,0,+1} (see <a class="reference internal" href="#tutorialdigraph"><span class="std std-numref">Listing 2</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="tutorialdigraph">
 <div class="code-block-caption"><span class="caption-number">Listing 2 </span><span class="caption-text">Random crisp digraph example</span><a class="headerlink" href="#tutorialdigraph" title="Permalink to this code">¶</a></div>
@@ -409,7 +408,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </td></tr></table></div>
 </div>
 <div class="section" id="special-classes">
-<h3><a class="toc-backref" href="#id189">Special classes</a><a class="headerlink" href="#special-classes" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id188">Special classes</a><a class="headerlink" href="#special-classes" title="Permalink to this headline">¶</a></h3>
 <p>Some special classes of digraphs, like the <a class="reference internal" href="techDoc.html#digraphs.CompleteDigraph" title="digraphs.CompleteDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.CompleteDigraph</span></code></a>, the <a class="reference internal" href="techDoc.html#digraphs.EmptyDigraph" title="digraphs.EmptyDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.EmptyDigraph</span></code></a> or the oriented <a class="reference internal" href="techDoc.html#digraphs.GridDigraph" title="digraphs.GridDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.GridDigraph</span></code></a> class for instance, are readily available (see <a class="reference internal" href="#tutorialgrid"><span class="std std-numref">Fig. 2</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -437,20 +436,20 @@ the current working directory a <code class="code docutils literal notranslate">
 <span id="digraph-tools-label"></span><h2><a class="toc-backref" href="#id167">Manipulating <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> objects</a><a class="headerlink" href="#manipulating-digraph-objects" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id2">
 <ul class="simple">
-<li><p><a class="reference internal" href="#random-digraphs" id="id190">Random digraphs</a></p></li>
-<li><p><a class="reference internal" href="#graphviz-drawings" id="id191">Graphviz drawings</a></p></li>
-<li><p><a class="reference internal" href="#asymmetric-and-symmetric-parts" id="id192">Asymmetric and symmetric parts</a></p></li>
-<li><p><a class="reference internal" href="#border-and-inner-parts" id="id193">Border and inner parts</a></p></li>
-<li><p><a class="reference internal" href="#fusion-by-epistemic-disjunction" id="id194">Fusion by epistemic disjunction</a></p></li>
-<li><p><a class="reference internal" href="#dual-converse-and-codual-digraphs" id="id195">Dual, converse and codual digraphs</a></p></li>
-<li><p><a class="reference internal" href="#symmetric-and-transitive-closures" id="id196">Symmetric and transitive closures</a></p></li>
-<li><p><a class="reference internal" href="#strong-components" id="id197">Strong components</a></p></li>
-<li><p><a class="reference internal" href="#csv-storage" id="id198">CSV storage</a></p></li>
-<li><p><a class="reference internal" href="#complete-empty-and-indeterminate-digraphs" id="id199">Complete, empty and indeterminate digraphs</a></p></li>
+<li><p><a class="reference internal" href="#random-digraphs" id="id189">Random digraphs</a></p></li>
+<li><p><a class="reference internal" href="#graphviz-drawings" id="id190">Graphviz drawings</a></p></li>
+<li><p><a class="reference internal" href="#asymmetric-and-symmetric-parts" id="id191">Asymmetric and symmetric parts</a></p></li>
+<li><p><a class="reference internal" href="#border-and-inner-parts" id="id192">Border and inner parts</a></p></li>
+<li><p><a class="reference internal" href="#fusion-by-epistemic-disjunction" id="id193">Fusion by epistemic disjunction</a></p></li>
+<li><p><a class="reference internal" href="#dual-converse-and-codual-digraphs" id="id194">Dual, converse and codual digraphs</a></p></li>
+<li><p><a class="reference internal" href="#symmetric-and-transitive-closures" id="id195">Symmetric and transitive closures</a></p></li>
+<li><p><a class="reference internal" href="#strong-components" id="id196">Strong components</a></p></li>
+<li><p><a class="reference internal" href="#csv-storage" id="id197">CSV storage</a></p></li>
+<li><p><a class="reference internal" href="#complete-empty-and-indeterminate-digraphs" id="id198">Complete, empty and indeterminate digraphs</a></p></li>
 </ul>
 </div>
 <div class="section" id="random-digraphs">
-<h3><a class="toc-backref" href="#id190">Random digraphs</a><a class="headerlink" href="#random-digraphs" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id189">Random digraphs</a><a class="headerlink" href="#random-digraphs" title="Permalink to this headline">¶</a></h3>
 <p>We are starting this tutorial with generating a randomly [-1;1]-valued (<em>Normalized=True</em>) digraph of order 7, denoted <em>dg</em> and modelling a binary relation (<em>x S y</em>) defined on the set of nodes of <em>dg</em>. For this purpose, the <code class="docutils literal notranslate"><span class="pre">Digraph3</span></code> collection contains a <a class="reference internal" href="techDoc.html#module-randomDigraphs" title="randomDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">randomDigraphs</span></code></a> module providing a specific <a class="reference internal" href="techDoc.html#randomDigraphs.RandomValuationDigraph" title="randomDigraphs.RandomValuationDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomDigraphs.RandomValuationDigraph</span></code></a> constructor.</p>
 <div class="literal-block-wrapper docutils container" id="tutrandvaldigraph">
 <div class="code-block-caption"><span class="caption-number">Listing 3 </span><span class="caption-text">Random bipolar-valued digraph instance</span><a class="headerlink" href="#tutrandvaldigraph" title="Permalink to this code">¶</a></div>
@@ -572,7 +571,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </div>
 </div>
 <div class="section" id="graphviz-drawings">
-<h3><a class="toc-backref" href="#id191">Graphviz drawings</a><a class="headerlink" href="#graphviz-drawings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id190">Graphviz drawings</a><a class="headerlink" href="#graphviz-drawings" title="Permalink to this headline">¶</a></h3>
 <p>We may have an even better insight into the <code class="docutils literal notranslate"><span class="pre">Digraph</span></code> object <em>dg</em> by looking at a <a class="reference external" href="https://graphviz.org/">graphviz</a>  drawing <a class="footnote-reference brackets" href="#id116" id="id5">1</a> .</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -590,7 +589,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <p>Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (<img class="math" src="_images/math/2f1b05e066b9ac2f72940502a457f46271d5f8f0.png" alt="r(6\,S\,2) = 0.00"/>) observed between nodes ‘6’ and ‘2’. The corresponding link is marked in gray with an open arrowhead in the drawing (see <a class="reference internal" href="#tutorialvaldigraph"><span class="std std-numref">Fig. 3</span></a>).</p>
 </div>
 <div class="section" id="asymmetric-and-symmetric-parts">
-<h3><a class="toc-backref" href="#id192">Asymmetric and symmetric parts</a><a class="headerlink" href="#asymmetric-and-symmetric-parts" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id191">Asymmetric and symmetric parts</a><a class="headerlink" href="#asymmetric-and-symmetric-parts" title="Permalink to this headline">¶</a></h3>
 <p>We may now extract both the <em>symmetric</em> as well as the <em>asymmetric</em> part of digraph <em>dg</em> with the help of two corresponding constructors (see <a class="reference internal" href="#asymsymparts"><span class="std std-numref">Fig. 4</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -657,7 +656,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </td></tr></table></div>
 </div>
 <div class="section" id="border-and-inner-parts">
-<h3><a class="toc-backref" href="#id193">Border and inner parts</a><a class="headerlink" href="#border-and-inner-parts" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id192">Border and inner parts</a><a class="headerlink" href="#border-and-inner-parts" title="Permalink to this headline">¶</a></h3>
 <p>We may also extract the border -the part of a digraph induced by the union of its initial and terminal prekernels (see tutorial <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>)-  as well as, the inner part -the <em>complement</em> of the border- with the help of two corresponding class constructors: <a class="reference internal" href="techDoc.html#digraphs.GraphBorder" title="digraphs.GraphBorder"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.GraphBorder</span></code></a> and <a class="reference internal" href="techDoc.html#digraphs.GraphInner" title="digraphs.GraphInner"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.GraphInner</span></code></a> (see <a class="reference internal" href="#borderinnerpart"><span class="std std-numref">Listing 5</span></a>  Line 1).</p>
 <p>Let us illustrate these parts on a linear ordering obtained from the tutorial random valuation digraph <em>dg</em> (see <a class="reference internal" href="#borderinnerpart"><span class="std std-numref">Listing 5</span></a> Line 2-3) with the <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">NetFlows ranking rule</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="borderinnerpart">
@@ -699,7 +698,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <p>Indeed, a <em>complete</em> digraph on the limit has no inner part (privacy!) at all, whereas <em>empty</em> and <em>indeterminate</em> digraphs admit both, an empty border and an empty inner part.</p>
 </div>
 <div class="section" id="fusion-by-epistemic-disjunction">
-<span id="epistemic-fusion-label"></span><h3><a class="toc-backref" href="#id194">Fusion by epistemic disjunction</a><a class="headerlink" href="#fusion-by-epistemic-disjunction" title="Permalink to this headline">¶</a></h3>
+<span id="epistemic-fusion-label"></span><h3><a class="toc-backref" href="#id193">Fusion by epistemic disjunction</a><a class="headerlink" href="#fusion-by-epistemic-disjunction" title="Permalink to this headline">¶</a></h3>
 <p>We may recover object <em>dg</em> from both partial objects <em>asymDg</em> and <em>symDg</em>, or as well from the border <em>bg</em> and the inner part <em>ig</em>, with a <strong>bipolar fusion</strong> constructor, also called <strong>epistemic disjunction</strong>, available via the <a class="reference internal" href="techDoc.html#digraphs.FusionDigraph" title="digraphs.FusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.FusionDigraph</span></code></a> class (see <a class="reference internal" href="#tutrandvaldigraph"><span class="std std-numref">Listing 3</span></a> Lines 12- 21).</p>
 <div class="literal-block-wrapper docutils container" id="epistemicfusion">
 <div class="code-block-caption"><span class="caption-number">Listing 6 </span><span class="caption-text">Epistemic fusion of partial diagraphs</span><a class="headerlink" href="#epistemicfusion" title="Permalink to this code">¶</a></div>
@@ -744,7 +743,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </div></blockquote>
 </div>
 <div class="section" id="dual-converse-and-codual-digraphs">
-<span id="codual-transform-label"></span><h3><a class="toc-backref" href="#id195">Dual, converse and codual digraphs</a><a class="headerlink" href="#dual-converse-and-codual-digraphs" title="Permalink to this headline">¶</a></h3>
+<span id="codual-transform-label"></span><h3><a class="toc-backref" href="#id194">Dual, converse and codual digraphs</a><a class="headerlink" href="#dual-converse-and-codual-digraphs" title="Permalink to this headline">¶</a></h3>
 <p>We may as readily compute the <strong>dual</strong> (negated relation <a class="footnote-reference brackets" href="#id126" id="id6">14</a>), the <strong>converse</strong> (transposed relation) and the <strong>codual</strong> (transposed and negated relation) of the digraph instance <em>dg</em>.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -854,7 +853,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </div>
 </div>
 <div class="section" id="symmetric-and-transitive-closures">
-<h3><a class="toc-backref" href="#id196">Symmetric and transitive closures</a><a class="headerlink" href="#symmetric-and-transitive-closures" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id195">Symmetric and transitive closures</a><a class="headerlink" href="#symmetric-and-transitive-closures" title="Permalink to this headline">¶</a></h3>
 <p>Symmetric and transitive closure in-site constructors are also available (see <a class="reference internal" href="#strongcomponents"><span class="std std-numref">Fig. 7</span></a>). Note that it is a good idea, before going ahead with these in-site operations who irreversibly modify the original <em>dg</em> object, to previously make a backup version of <em>dg</em>. The simplest storage method, always provided by the generic <a class="reference internal" href="techDoc.html#digraphs.Digraph.save" title="digraphs.Digraph.save"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.save()</span></code></a>, writes out in a named file the python content of the Digraph object in string representation.</p>
 <div class="literal-block-wrapper docutils container" id="transitiveclosure">
 <div class="code-block-caption"><span class="caption-number">Listing 8 </span><span class="caption-text">Symmetric and transitive closures</span><a class="headerlink" href="#transitiveclosure" title="Permalink to this code">¶</a></div>
@@ -879,7 +878,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </div>
 </div>
 <div class="section" id="strong-components">
-<h3><a class="toc-backref" href="#id197">Strong components</a><a class="headerlink" href="#strong-components" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id196">Strong components</a><a class="headerlink" href="#strong-components" title="Permalink to this headline">¶</a></h3>
 <p>As the original digraph <em>dg</em> was connected (see above the result of the <code class="docutils literal notranslate"><span class="pre">dg.showShort()</span></code> command), both the symmetric and transitive closures operated together, will necessarily produce a single strong component, i.e. a complete digraph. We may sometimes wish to collapse all strong components in a given digraph and construct the so reduced digraph. Using the <a class="reference internal" href="techDoc.html#digraphs.StrongComponentsCollapsedDigraph" title="digraphs.StrongComponentsCollapsedDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.StrongComponentsCollapsedDigraph</span></code></a> constructor here will render a single hyper-node gathering all the original nodes.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -920,7 +919,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </td></tr></table></div>
 </div>
 <div class="section" id="csv-storage">
-<h3><a class="toc-backref" href="#id198">CSV storage</a><a class="headerlink" href="#csv-storage" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id197">CSV storage</a><a class="headerlink" href="#csv-storage" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes it is required to exchange the graph valuation data in CSV format with a statistical package like <a class="reference external" href="https://www.r-project.org/">R</a>. For this purpose it is possible to export the digraph data into a CSV file. The valuation domain is hereby normalized by default to the range [-1,1] and the diagonal put by default to the minimal value -1.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -982,7 +981,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <p>Positive arcs are shown in <em>green</em> and negative arcs in <em>red</em>. Indeterminate -zero-valued- links, like the reflexive diagonal ones or the link between node <em>6</em> and node <em>2</em>, are shown in <em>gray</em>.</p>
 </div>
 <div class="section" id="complete-empty-and-indeterminate-digraphs">
-<h3><a class="toc-backref" href="#id199">Complete, empty and indeterminate digraphs</a><a class="headerlink" href="#complete-empty-and-indeterminate-digraphs" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id198">Complete, empty and indeterminate digraphs</a><a class="headerlink" href="#complete-empty-and-indeterminate-digraphs" title="Permalink to this headline">¶</a></h3>
 <p>Let us finally mention some special universal classes of digraphs that are readily available in the <a class="reference internal" href="techDoc.html#module-digraphs" title="digraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">digraphs</span></code></a> module, like the <a class="reference internal" href="techDoc.html#digraphs.CompleteDigraph" title="digraphs.CompleteDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.CompleteDigraph</span></code></a>, the <a class="reference internal" href="techDoc.html#digraphs.EmptyDigraph" title="digraphs.EmptyDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.EmptyDigraph</span></code></a> and the <a class="reference internal" href="techDoc.html#digraphs.IndeterminateDigraph" title="digraphs.IndeterminateDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.IndeterminateDigraph</span></code></a> classes, which put all characteristic values respectively to the <em>maximum</em>, the <em>minimum</em> or the median <em>indeterminate</em> characteristic value.</p>
 <div class="literal-block-wrapper docutils container" id="completeempty">
 <div class="code-block-caption"><span class="caption-number">Listing 9 </span><span class="caption-text">Complete, empty and indeterminate digraphs</span><a class="headerlink" href="#completeempty" title="Permalink to this code">¶</a></div>
@@ -1122,15 +1121,15 @@ the current working directory a <code class="code docutils literal notranslate">
 <span id="linearvoting-tutorial-label"></span><h2><a class="toc-backref" href="#id168">Computing the winner of an election</a><a class="headerlink" href="#computing-the-winner-of-an-election" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id8">
 <ul class="simple">
-<li><p><a class="reference internal" href="#linear-voting-profiles" id="id200">Linear voting profiles</a></p></li>
-<li><p><a class="reference internal" href="#computing-the-winner" id="id201">Computing the winner</a></p></li>
-<li><p><a class="reference internal" href="#the-condorcet-winner" id="id202">The Condorcet winner</a></p></li>
-<li><p><a class="reference internal" href="#cyclic-social-preferences" id="id203">Cyclic social preferences</a></p></li>
-<li><p><a class="reference internal" href="#on-generating-random-linear-voting-profiles" id="id204">On generating random linear voting profiles</a></p></li>
+<li><p><a class="reference internal" href="#linear-voting-profiles" id="id199">Linear voting profiles</a></p></li>
+<li><p><a class="reference internal" href="#computing-the-winner" id="id200">Computing the winner</a></p></li>
+<li><p><a class="reference internal" href="#the-condorcet-winner" id="id201">The Condorcet winner</a></p></li>
+<li><p><a class="reference internal" href="#cyclic-social-preferences" id="id202">Cyclic social preferences</a></p></li>
+<li><p><a class="reference internal" href="#on-generating-random-linear-voting-profiles" id="id203">On generating random linear voting profiles</a></p></li>
 </ul>
 </div>
 <div class="section" id="linear-voting-profiles">
-<h3><a class="toc-backref" href="#id200">Linear voting profiles</a><a class="headerlink" href="#linear-voting-profiles" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id199">Linear voting profiles</a><a class="headerlink" href="#linear-voting-profiles" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="techDoc.html#module-votingProfiles" title="votingProfiles"><code class="xref py py-mod docutils literal notranslate"><span class="pre">votingProfiles</span></code></a> module provides resources for handling election results <a class="reference internal" href="#adt-l2" id="id9"><span>[ADT-L2]</span></a>, like the <a class="reference internal" href="techDoc.html#votingProfiles.LinearVotingProfile" title="votingProfiles.LinearVotingProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">votingProfiles.LinearVotingProfile</span></code></a> class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary.</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -1218,7 +1217,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </td></tr></table></div>
 </div>
 <div class="section" id="computing-the-winner">
-<h3><a class="toc-backref" href="#id201">Computing the winner</a><a class="headerlink" href="#computing-the-winner" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id200">Computing the winner</a><a class="headerlink" href="#computing-the-winner" title="Permalink to this headline">¶</a></h3>
 <p>We may easily compute <strong>uni-nominal votes</strong>, i.e. how many times a candidate was ranked first, and see who is consequently the <strong>simple majority</strong> winner(s) in this election.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -1314,7 +1313,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <p>In our randomly generated election results, we are lucky: The instant runoff winner and the <em>Borda</em> winner both are candidate <em>a1</em> (see <a class="reference internal" href="#instantrunoff"><span class="std std-numref">Listing 11</span></a> and <a class="reference internal" href="#rankanalysis"><span class="std std-numref">Listing 13</span></a>). However, we could also follow the <em>Marquis de Condorcet</em>’s advice, and compute the <strong>majority margins</strong> obtained by voting for each individual pair of candidates.</p>
 </div>
 <div class="section" id="the-condorcet-winner">
-<h3><a class="toc-backref" href="#id202">The Condorcet winner</a><a class="headerlink" href="#the-condorcet-winner" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id201">The Condorcet winner</a><a class="headerlink" href="#the-condorcet-winner" title="Permalink to this headline">¶</a></h3>
 <p>For instance, candidate <em>a1</em> is ranked four times before and once behind candidate <em>a2</em>. Hence the corresponding <strong>majority margin</strong> <em>M(a1,a2)</em> is 4 - 1 = +3. These <em>majority margins</em> define on the set of candidates what we call the <strong>Condorcet digraph</strong>. The <a class="reference internal" href="techDoc.html#votingProfiles.CondorcetDigraph" title="votingProfiles.CondorcetDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">votingProfiles.CondorcetDigraph</span></code></a> class (a specialization of the <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a> class) is available for handling such kind of digraphs.</p>
 <div class="literal-block-wrapper docutils container" id="condorcetdigraph">
 <div class="code-block-caption"><span class="caption-number">Listing 14 </span><span class="caption-text">Example of <em>Condorcet</em> digraph</span><a class="headerlink" href="#condorcetdigraph" title="Permalink to this code">¶</a></div>
@@ -1402,7 +1401,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <p>In <a class="reference internal" href="#tutoriallinearballots"><span class="std std-numref">Fig. 9</span></a> we notice that the <em>Condorcet</em> digraph from our example linear voting profile gives a linear order of the candidates: [‘a1’, ‘a3’, ‘a2], the same actually as given by the <em>Borda</em> scores (see <a class="reference internal" href="#bordascores"><span class="std std-numref">Listing 12</span></a>). This is by far not given in general. Usually, when aggregating linear ballots, there appear cyclic social preferences.</p>
 </div>
 <div class="section" id="cyclic-social-preferences">
-<h3><a class="toc-backref" href="#id203">Cyclic social preferences</a><a class="headerlink" href="#cyclic-social-preferences" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id202">Cyclic social preferences</a><a class="headerlink" href="#cyclic-social-preferences" title="Permalink to this headline">¶</a></h3>
 <p>Let us consider for instance the following linear voting profile and construct the corresponding Condorcet digraph.</p>
 <div class="literal-block-wrapper docutils container" id="linearvotingprofile2">
 <div class="code-block-caption"><span class="caption-number">Listing 15 </span><span class="caption-text">Example of cyclic social preferences</span><a class="headerlink" href="#linearvotingprofile2" title="Permalink to this code">¶</a></div>
@@ -1491,7 +1490,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <p>Notice that the importance weights of the voters are <em>negative</em>, which means that the preference direction of the criteria (in this case the individual voters) is <em>decreasing</em>, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise <em>NetFlows</em> ranking <em>[a4,a5,a2,a1,a3]</em>, shown in this heatmap (see <a class="reference internal" href="#cyclicvoting"><span class="std std-numref">Fig. 11</span></a>) results in an optimal <em>ordinal correlation</em> index of +0.778 with the pairwise majority voting margins (see Adavanced topic on tutorials <a class="reference internal" href="pearls.html#ordinalcorrelation-tutorial-label"><span class="std std-ref">Ordinal Correlation equals Relational Equivalence</span></a> and <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a>). The number of voters is usually much larger than the number of candidates. In that case, it is better to generate a transposed <em>voters X candidates</em> view (see <a class="reference internal" href="#votingheatmap"><span class="std std-numref">Listing 16</span></a> Line 2)</p>
 </div>
 <div class="section" id="on-generating-random-linear-voting-profiles">
-<h3><a class="toc-backref" href="#id204">On generating random linear voting profiles</a><a class="headerlink" href="#on-generating-random-linear-voting-profiles" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id203">On generating random linear voting profiles</a><a class="headerlink" href="#on-generating-random-linear-voting-profiles" title="Permalink to this headline">¶</a></h3>
 <p>By default, the <a class="reference internal" href="techDoc.html#votingProfiles.RandomLinearVotingProfile" title="votingProfiles.RandomLinearVotingProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">votingProfiles.RandomLinearVotingProfile</span></code></a> class generates random linear voting profiles where every candidates has the same uniform probabilities to be ranked at a certain position by all the voters. For each voter’s random linear ballot is indeed generated  via a uniform shuffling of the list of candidates.</p>
 <p>In reality, political election data appear quite different. There will usually be different favorite and marginal candidates for each political party. To simulate these aspects into our random generator, we are using two random exponentially distributed polls of the candidates and consider a bipartisan political landscape with a certain random balance (default theoretical party repartition = 0.50) between the two sets of potential party supporters (see <a class="reference internal" href="techDoc.html#votingProfiles.LinearVotingProfile" title="votingProfiles.LinearVotingProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">votingProfiles.LinearVotingProfile</span></code></a> class). A certain theoretical proportion (default = 0.1) will not support any party.</p>
 <p>Let us generate such a linear voting profile for an election with 1000 voters and 15 candidates.</p>
@@ -1698,18 +1697,18 @@ the current working directory a <code class="code docutils literal notranslate">
 <span id="outrankingdigraphs-tutorial-label"></span><h2><a class="toc-backref" href="#id169">Working with the <code class="docutils literal notranslate"><span class="pre">outrankingDigraphs</span></code> module</a><a class="headerlink" href="#working-with-the-outrankingdigraphs-module" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id18">
 <ul class="simple">
-<li><p><a class="reference internal" href="#outranking-digraph-model" id="id205">Outranking digraph model</a></p></li>
-<li><p><a class="reference internal" href="#browsing-the-performances" id="id206">Browsing the performances</a></p></li>
-<li><p><a class="reference internal" href="#valuation-semantics" id="id207">Valuation semantics</a></p></li>
-<li><p><a class="reference internal" href="#pairwise-comparisons" id="id208">Pairwise comparisons</a></p></li>
-<li><p><a class="reference internal" href="#recoding-the-digraph-valuation" id="id209">Recoding the digraph valuation</a></p></li>
-<li><p><a class="reference internal" href="#the-strict-outranking-digraph" id="id210">The strict outranking digraph</a></p></li>
-<li><p><a class="reference internal" href="#xmcda-2-0" id="id211">XMCDA 2.0</a></p></li>
+<li><p><a class="reference internal" href="#outranking-digraph-model" id="id204">Outranking digraph model</a></p></li>
+<li><p><a class="reference internal" href="#browsing-the-performances" id="id205">Browsing the performances</a></p></li>
+<li><p><a class="reference internal" href="#valuation-semantics" id="id206">Valuation semantics</a></p></li>
+<li><p><a class="reference internal" href="#pairwise-comparisons" id="id207">Pairwise comparisons</a></p></li>
+<li><p><a class="reference internal" href="#recoding-the-digraph-valuation" id="id208">Recoding the digraph valuation</a></p></li>
+<li><p><a class="reference internal" href="#the-strict-outranking-digraph" id="id209">The strict outranking digraph</a></p></li>
+<li><p><a class="reference internal" href="#xmcda-2-0" id="id210">XMCDA 2.0</a></p></li>
 </ul>
 </div>
 <p>See also the technical documentation of the <a class="reference internal" href="techDoc.html#outrankingdigraphs-label"><span class="std std-ref">outrankingDigraphs module</span></a>.</p>
 <div class="section" id="outranking-digraph-model">
-<h3><a class="toc-backref" href="#id205">Outranking digraph model</a><a class="headerlink" href="#outranking-digraph-model" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id204">Outranking digraph model</a><a class="headerlink" href="#outranking-digraph-model" title="Permalink to this headline">¶</a></h3>
 <p>In this <em>Digraph3</em> module, the main <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class provides a generic <strong>bipolar-valued outranking digraph</strong> model. A given object of this class consists in</p>
 <ol class="arabic simple">
 <li><p>a potential set of decision <strong>actions</strong> : a dictionary describing the potential decision actions or alternatives with ‘name’ and ‘comment’ attributes,</p></li>
@@ -1822,7 +1821,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </td></tr></table></div>
 </div>
 <div class="section" id="browsing-the-performances">
-<h3><a class="toc-backref" href="#id206">Browsing the performances</a><a class="headerlink" href="#browsing-the-performances" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id205">Browsing the performances</a><a class="headerlink" href="#browsing-the-performances" title="Permalink to this headline">¶</a></h3>
 <p>We may visualize the same performance tableau in a two-colors setting in the default system browser with the command.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showHTMLPerformanceTableau</span><span class="p">()</span>
 </pre></div>
@@ -1843,7 +1842,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <p>There is no doubt that action <em>a03</em>, with a performance in the highest quintile in five out of seven criteria, appears definitely to be best performing. Action <em>a05</em> shows a more or less average performance on most criteria, whereas action <em>a02</em> appears to be the weakest alternative.</p>
 </div>
 <div class="section" id="valuation-semantics">
-<h3><a class="toc-backref" href="#id207">Valuation semantics</a><a class="headerlink" href="#valuation-semantics" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id206">Valuation semantics</a><a class="headerlink" href="#valuation-semantics" title="Permalink to this headline">¶</a></h3>
 <p>Considering the given performance tableau, the <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class constructor computes the characteristic value <img class="math" src="_images/math/6c2e22ef23bafc04fe512d491f14d5ee085715c1.png" alt="r(x\,S\,y)"/> of a pairwise outranking relation “<img class="math" src="_images/math/78786a3299438dce5f9e087c0ce072e8fccd73fd.png" alt="x\,S\,y"/>” (see <a class="reference internal" href="#bis-2013" id="id19"><span>[BIS-2013]</span></a>, <a class="reference internal" href="#adt-l7" id="id20"><span>[ADT-L7]</span></a>) in a default valuation domain [-100.0,+100.0] with the median value 0.0 acting as indeterminate characteristic value. The semantics of r(x S y) are the following.</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -1884,7 +1883,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </td></tr></table></div>
 </div>
 <div class="section" id="pairwise-comparisons">
-<h3><a class="toc-backref" href="#id208">Pairwise comparisons</a><a class="headerlink" href="#pairwise-comparisons" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id207">Pairwise comparisons</a><a class="headerlink" href="#pairwise-comparisons" title="Permalink to this headline">¶</a></h3>
 <p>From above given semantics, we may consider that <em>a01</em> outranks <em>a02</em> (<img class="math" src="_images/math/e8886dc9b460e11936eeaa10e95273eceb529a4d.png" alt="r(a_{01}\,S\,a_{02}) &gt; 0.0"/>), but not <em>a03</em> (<img class="math" src="_images/math/27e0afaf36d3bb89c22a4026b1670fe2b15cb0c0.png" alt="r(a_{01}\,S\,a_{03}) &lt; 0.0"/>). In order to comprehend the characteristic values shown in the relation table above, we may furthermore have a look at the pairwise multiple criteria comparison between alternatives <em>a01</em> and <em>a02</em>.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -1948,7 +1947,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <p>This time, we observe a considerable out-performance of <em>a03</em> against <em>a02</em> on criterion g02 (see second row in the relation table above). We therefore notice a positively polarized <em>certainly confirmed</em> outranking situation in this case <a class="reference internal" href="#bis-2013" id="id21"><span>[BIS-2013]</span></a>.</p>
 </div>
 <div class="section" id="recoding-the-digraph-valuation">
-<h3><a class="toc-backref" href="#id209">Recoding the digraph valuation</a><a class="headerlink" href="#recoding-the-digraph-valuation" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id208">Recoding the digraph valuation</a><a class="headerlink" href="#recoding-the-digraph-valuation" title="Permalink to this headline">¶</a></h3>
 <p>All outranking digraphs, being of root type <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a>, inherit the methods available under this class. The characteristic valuation domain of an outranking digraph may be recoded with the <code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.recodeValutaion()</span></code> method below to the integer range [-37,+37], i.e. plus or minus the global significance of the family of criteria considered in this example instance.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -1989,7 +1988,7 @@ the current working directory a <code class="code docutils literal notranslate">
 </div>
 </div>
 <div class="section" id="the-strict-outranking-digraph">
-<span id="codual-digraph-label"></span><h3><a class="toc-backref" href="#id210">The strict outranking digraph</a><a class="headerlink" href="#the-strict-outranking-digraph" title="Permalink to this headline">¶</a></h3>
+<span id="codual-digraph-label"></span><h3><a class="toc-backref" href="#id209">The strict outranking digraph</a><a class="headerlink" href="#the-strict-outranking-digraph" title="Permalink to this headline">¶</a></h3>
 <p>From the theory (see <a class="reference internal" href="#bis-2013" id="id22"><span>[BIS-2013]</span></a>, <a class="reference internal" href="#adt-l7" id="id23"><span>[ADT-L7]</span></a> )  we know that a bipolar-valued outranking digraph is <strong>weakly complete</strong>, i.e. if <img class="math" src="_images/math/a18515fe14803dd47599781d224772c1773f6381.png" alt="r(x\,S\,y) &lt; 0.0"/> then <img class="math" src="_images/math/6be274a29005a32c68e6875af3a1cd774ae6817c.png" alt="r(y\,S\,x) &gt;= 0.0"/> . From this property follows that a bipolar-valued outranking relation verifies the <strong>coduality</strong> principle: the dual (strict negation - <a class="footnote-reference brackets" href="#id126" id="id24">14</a>) of the converse (inverse ~) of the outranking relation corresponds to its strict outranking part. We may visualize the codual (strict) outranking digraph with a graphviz drawing <a class="footnote-reference brackets" href="#id116" id="id25">1</a>.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -2009,7 +2008,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <p>It becomes readily clear now from the picture above that alternative <em>a03</em> strictly outranks in fact all the other alternatives. Hence, <em>a03</em> appears as <strong>Condorcet winner</strong> and may be recommended as <em>best decision action</em> in this illustrative preference modelling exercise.</p>
 </div>
 <div class="section" id="xmcda-2-0">
-<h3><a class="toc-backref" href="#id211">XMCDA 2.0</a><a class="headerlink" href="#xmcda-2-0" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id210">XMCDA 2.0</a><a class="headerlink" href="#xmcda-2-0" title="Permalink to this headline">¶</a></h3>
 <p>As with all Digraph instances, it is possible to store permanently a copy of the outranking digraph <em>odg</em>. As its outranking relation is automatically generated by the <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.BipolarOutrankingDigraph</span></code></a> class constructor on the basis of a given performance tableau, it is sufficient to save only the latter. For this purpose we are using the <a class="reference external" href="https://www.decision-deck.org/xmcda/">XMCDA 2.00</a> XML encoding scheme of MCDA data, as provided by the Decision Deck Project (see <a class="reference external" href="https://www.decision-deck.org/">https://www.decision-deck.org/</a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -2056,16 +2055,16 @@ the current working directory a <code class="code docutils literal notranslate">
 <span id="randomperformancetableau-tutorial-label"></span><h2><a class="toc-backref" href="#id170">Generating random performance tableaux</a><a class="headerlink" href="#generating-random-performance-tableaux" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id26">
 <ul class="simple">
-<li><p><a class="reference internal" href="#introduction" id="id212">Introduction</a></p></li>
-<li><p><a class="reference internal" href="#random-standard-performance-tableaux" id="id213">Random standard performance tableaux</a></p></li>
-<li><p><a class="reference internal" href="#random-cost-benefit-performance-tableaux" id="id214">Random Cost-Benefit performance tableaux</a></p></li>
-<li><p><a class="reference internal" href="#random-three-objectives-performance-tableaux" id="id215">Random three objectives performance tableaux</a></p></li>
-<li><p><a class="reference internal" href="#random-academic-performance-tableaux" id="id216">Random academic performance tableaux</a></p></li>
-<li><p><a class="reference internal" href="#random-linearly-ranked-performance-tableaux" id="id217">Random linearly ranked performance tableaux</a></p></li>
+<li><p><a class="reference internal" href="#introduction" id="id211">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#random-standard-performance-tableaux" id="id212">Random standard performance tableaux</a></p></li>
+<li><p><a class="reference internal" href="#random-cost-benefit-performance-tableaux" id="id213">Random Cost-Benefit performance tableaux</a></p></li>
+<li><p><a class="reference internal" href="#random-three-objectives-performance-tableaux" id="id214">Random three objectives performance tableaux</a></p></li>
+<li><p><a class="reference internal" href="#random-academic-performance-tableaux" id="id215">Random academic performance tableaux</a></p></li>
+<li><p><a class="reference internal" href="#random-linearly-ranked-performance-tableaux" id="id216">Random linearly ranked performance tableaux</a></p></li>
 </ul>
 </div>
 <div class="section" id="introduction">
-<h3><a class="toc-backref" href="#id212">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id211">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="techDoc.html#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">randomPerfTabs</span></code></a> module provides several constructors for random performance tableaux models of different kind, mainly for the purpose of testing implemented methods and tools presented and discussed in the Algorithmic Decision Theory course at the University of Luxembourg. This tutorial concerns the most useful models.</p>
 <p>The simplest model, called <strong>RandomPerformanceTableau</strong>, generates
 a set of <em>n</em> decision actions, a set of <em>m</em> real-valued
@@ -2102,7 +2101,7 @@ specific performance tableau model called <strong>RandomRankPerformanceTableau</
 which provides ranks (linearly ordered performances without ties) of a given number of election candidates (decision actions) for a given number of weighted voters (performance criteria).</p>
 </div>
 <div class="section" id="random-standard-performance-tableaux">
-<h3><a class="toc-backref" href="#id213">Random standard performance tableaux</a><a class="headerlink" href="#random-standard-performance-tableaux" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id212">Random standard performance tableaux</a><a class="headerlink" href="#random-standard-performance-tableaux" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomPerformanceTableau" title="randomPerfTabs.RandomPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomPerfTabs.RandomPerformanceTableau</span></code></a> class, the simplest of the kind, specializes the generic <code class="xref py py-class docutils literal notranslate"><span class="pre">prefTabs.PerformanceTableau</span></code> class, and takes the following parameters.</p>
 <blockquote>
 <div><ul>
@@ -2210,7 +2209,7 @@ which provides ranks (linearly ordered performances without ties) of a given num
 </div>
 </div>
 <div class="section" id="random-cost-benefit-performance-tableaux">
-<span id="cost-benefit-performance-tableau-label"></span><h3><a class="toc-backref" href="#id214">Random Cost-Benefit performance tableaux</a><a class="headerlink" href="#random-cost-benefit-performance-tableaux" title="Permalink to this headline">¶</a></h3>
+<span id="cost-benefit-performance-tableau-label"></span><h3><a class="toc-backref" href="#id213">Random Cost-Benefit performance tableaux</a><a class="headerlink" href="#random-cost-benefit-performance-tableaux" title="Permalink to this headline">¶</a></h3>
 <p>We provide the <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomCBPerformanceTableau" title="randomPerfTabs.RandomCBPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomPerfTabs.RandomCBPerformanceTableau</span></code></a> class for generating random <em>Cost</em> versus <em>Benefit</em> organized performance tableaux following the directives below:</p>
 <blockquote>
 <div><ul class="simple">
@@ -2416,7 +2415,7 @@ which provides ranks (linearly ordered performances without ties) of a given num
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 </div>
 <div class="section" id="random-three-objectives-performance-tableaux">
-<h3><a class="toc-backref" href="#id215">Random three objectives performance tableaux</a><a class="headerlink" href="#random-three-objectives-performance-tableaux" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id214">Random three objectives performance tableaux</a><a class="headerlink" href="#random-three-objectives-performance-tableaux" title="Permalink to this headline">¶</a></h3>
 <p>We provide the <a class="reference internal" href="techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau" title="randomPerfTabs.Random3ObjectivesPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomPerfTabs.Random3ObjectivesPerformanceTableau</span></code></a> class for generating random performance tableaux concerning potential public policies evaluated with respect to three preferential decision objectives taking respectively into account <em>economical</em>, <em>societal</em> as well as <em>environmental</em> aspects.</p>
 <p>Each public policy is qualified randomly as performing <strong>weak</strong> (-), <strong>fair</strong> (~) or <strong>good</strong> (+) on each of the three objectives.</p>
 <p>Generator directives are the following:</p>
@@ -2635,7 +2634,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Public policy <em>p26</em> (Eco+ Soc+ Env-) appears dominating the other policies, whereas policy <em>p30</em> (Eco- Soc- Env-) appears to be dominated by all the others.</p>
 </div>
 <div class="section" id="random-academic-performance-tableaux">
-<h3><a class="toc-backref" href="#id216">Random academic performance tableaux</a><a class="headerlink" href="#random-academic-performance-tableaux" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id215">Random academic performance tableaux</a><a class="headerlink" href="#random-academic-performance-tableaux" title="Permalink to this headline">¶</a></h3>
 <p>The <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau" title="randomPerfTabs.RandomAcademicPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomPerfTabs.RandomAcademicPerformanceTableau</span></code></a> class generates temporary performance tableaux with random grades for a given number of students in different courses (see Lecture 4: <em>Grading</em>, Algorithmic decision Theory Course <a class="reference external" href="http://hdl.handle.net/10993/37933">http://hdl.handle.net/10993/37933</a>)</p>
 <p><em>Parameters</em>:</p>
 <blockquote>
@@ -2807,7 +2806,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 </div>
 <div class="section" id="random-linearly-ranked-performance-tableaux">
-<h3><a class="toc-backref" href="#id217">Random linearly ranked performance tableaux</a><a class="headerlink" href="#random-linearly-ranked-performance-tableaux" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id216">Random linearly ranked performance tableaux</a><a class="headerlink" href="#random-linearly-ranked-performance-tableaux" title="Permalink to this headline">¶</a></h3>
 <p>Finally, we provide the <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomRankPerformanceTableau" title="randomPerfTabs.RandomRankPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomPerfTabs.RandomRankPerformanceTableau</span></code></a> class for generating multiple criteria ranked performance tableaux, i.e. on each criterion, all decision action’s evaluations appear linearly ordered without ties.</p>
 <p>This type of random performance tableau is matching the <a class="reference internal" href="techDoc.html#votingProfiles.RandomLinearVotingProfile" title="votingProfiles.RandomLinearVotingProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">votingProfiles.RandomLinearVotingProfile</span></code></a> class provided by the <a class="reference internal" href="techDoc.html#module-votingProfiles" title="votingProfiles"><code class="xref py py-mod docutils literal notranslate"><span class="pre">votingProfiles</span></code></a> module.</p>
 <dl>
@@ -2838,17 +2837,17 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span id="ranking-tutorial-label"></span><h2><a class="toc-backref" href="#id171">Ranking with multiple incommensurable criteria</a><a class="headerlink" href="#ranking-with-multiple-incommensurable-criteria" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id27">
 <ul class="simple">
-<li><p><a class="reference internal" href="#the-ranking-problem" id="id218">The ranking problem</a></p></li>
-<li><p><a class="reference internal" href="#the-copeland-ranking" id="id219">The <em>Copeland</em> ranking</a></p></li>
-<li><p><a class="reference internal" href="#the-netflows-ranking" id="id220">The <em>NetFlows</em> ranking</a></p></li>
-<li><p><a class="reference internal" href="#kemeny-rankings" id="id221"><em>Kemeny</em> rankings</a></p></li>
-<li><p><a class="reference internal" href="#slater-rankings" id="id222"><em>Slater</em> rankings</a></p></li>
-<li><p><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule" id="id223"><em>Kohler</em>’s ranking-by-choosing rule</a></p></li>
-<li><p><a class="reference internal" href="#tideman-s-ranked-pairs-rule" id="id224"><em>Tideman</em>’s ranked-pairs rule</a></p></li>
+<li><p><a class="reference internal" href="#the-ranking-problem" id="id217">The ranking problem</a></p></li>
+<li><p><a class="reference internal" href="#the-copeland-ranking" id="id218">The <em>Copeland</em> ranking</a></p></li>
+<li><p><a class="reference internal" href="#the-netflows-ranking" id="id219">The <em>NetFlows</em> ranking</a></p></li>
+<li><p><a class="reference internal" href="#kemeny-rankings" id="id220"><em>Kemeny</em> rankings</a></p></li>
+<li><p><a class="reference internal" href="#slater-rankings" id="id221"><em>Slater</em> rankings</a></p></li>
+<li><p><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule" id="id222"><em>Kohler</em>’s ranking-by-choosing rule</a></p></li>
+<li><p><a class="reference internal" href="#tideman-s-ranked-pairs-rule" id="id223"><em>Tideman</em>’s ranked-pairs rule</a></p></li>
 </ul>
 </div>
 <div class="section" id="the-ranking-problem">
-<h3><a class="toc-backref" href="#id218">The ranking problem</a><a class="headerlink" href="#the-ranking-problem" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id217">The ranking problem</a><a class="headerlink" href="#the-ranking-problem" title="Permalink to this headline">¶</a></h3>
 <p>We need to rank without ties a set <em>X</em> of items (usually decision alternatives) that are evaluated on multiple incommensurable performance criteria; yet, for which we may know their pairwise bipolar-valued <em>strict outranking</em> characteristics, i.e. <img class="math" src="_images/math/b3c692456cb86944b418cd612199cdd8e655968d.png" alt="r(x\, \succnsim \, y)"/> for all <em>x</em>, <em>y</em> in <em>X</em> (see <a class="reference internal" href="#codual-digraph-label"><span class="std std-ref">The strict outranking digraph</span></a> and <a class="reference internal" href="#bis-2013" id="id28"><span>[BIS-2013]</span></a>).</p>
 <p>Let us consider a didactic outranking digraph <em>g</em> generated from a random <a class="reference internal" href="#cost-benefit-performance-tableau-label"><span class="std std-ref">Cost-Benefit performance tableau</span></a> concerning 9 decision alternatives evaluated on 13 performance criteria. We may compute the corresponding <em>strict outranking digraph</em> with a <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> as follows.</p>
 <div class="literal-block-wrapper docutils container" id="strictoutranking">
@@ -2965,7 +2964,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>The Digraph3 resources provide some of the most common of these ranking rules, like <em>Copeland</em>’s, <em>Kemeny</em>’s, <em>Slater</em>’s, <em>Kohler</em>’s, <em>Arrow-Raynaud</em>’s or <em>Tideman</em>’s ranking rule.</p>
 </div>
 <div class="section" id="the-copeland-ranking">
-<h3><a class="toc-backref" href="#id219">The <em>Copeland</em> ranking</a><a class="headerlink" href="#the-copeland-ranking" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id218">The <em>Copeland</em> ranking</a><a class="headerlink" href="#the-copeland-ranking" title="Permalink to this headline">¶</a></h3>
 <p><em>Copeland</em>’s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the <em>median cut</em> strict outranking digraph <em>ccd</em>. The rule computes for each alternative a score resulting from the sum of the differences between the crisp <strong>strict outranking</strong> characteristics <img class="math" src="_images/math/0e350bdab12f7299ca1ed4f50545e0c3a933cc3a.png" alt="r(x\, \succnsim \,y)_{&gt;0}"/> and the crisp <strong>strict outranked</strong> characteristics <img class="math" src="_images/math/daf892b0ed0fbe3d636d7b1ba78e8e5432543fcc.png" alt="r(y\, \succnsim \, x)_{&gt;0}"/>  for all pairs of alternatives where <em>y</em> is different from <em>x</em>. The alternatives are ranked in decreasing order of these <em>Copeland</em> scores; ties, the case given, being resolved by a lexicographical rule.</p>
 <div class="literal-block-wrapper docutils container" id="copelandranking">
 <div class="code-block-caption"><span class="caption-number">Listing 29 </span><span class="caption-text">Computing a <em>Copeland</em> Ranking</span><a class="headerlink" href="#copelandranking" title="Permalink to this code">¶</a></div>
@@ -3077,7 +3076,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Let us now consider a similar ranking rule, but working directly on the <em>bipolar-valued</em> outranking digraph.</p>
 </div>
 <div class="section" id="the-netflows-ranking">
-<span id="netflows-ranking-label"></span><h3><a class="toc-backref" href="#id220">The <em>NetFlows</em> ranking</a><a class="headerlink" href="#the-netflows-ranking" title="Permalink to this headline">¶</a></h3>
+<span id="netflows-ranking-label"></span><h3><a class="toc-backref" href="#id219">The <em>NetFlows</em> ranking</a><a class="headerlink" href="#the-netflows-ranking" title="Permalink to this headline">¶</a></h3>
 <p>The valued version of the <em>Copeland</em> rule, called <strong>NetFlows</strong> rule, computes for each alternative <em>x</em> a <em>net flow</em> score,  i.e. the sum of the differences between the <strong>strict outranking</strong> characteristics <img class="math" src="_images/math/1c819cb7cdff121f57fb47d8af3b1206a898f5be.png" alt="r(x\, \succnsim \,y)"/> and the <strong>strict outranked</strong> characteristics <img class="math" src="_images/math/38907f1805d67760576ad71199bcd8226aa60df4.png" alt="r(y\, \succnsim \,x)"/> for all pairs of alternatives where <em>y</em> is different from <em>x</em>.</p>
 <div class="literal-block-wrapper docutils container" id="netflowsranking">
 <div class="code-block-caption"><span class="caption-number">Listing 33 </span><span class="caption-text">Computing a <em>NetFlows</em> ranking</span><a class="headerlink" href="#netflowsranking" title="Permalink to this code">¶</a></div>
@@ -3138,7 +3137,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>To appreciate now the more or less correlation of both the <em>Copeland</em> and the <em>NetFlows</em> rankings with the underlying pairwise outranking relation, it is useful to consider <em>Kemeny</em>’s and <em>Slater</em>’s <strong>best fitting</strong> ranking rules.</p>
 </div>
 <div class="section" id="kemeny-rankings">
-<h3><a class="toc-backref" href="#id221"><em>Kemeny</em> rankings</a><a class="headerlink" href="#kemeny-rankings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id220"><em>Kemeny</em> rankings</a><a class="headerlink" href="#kemeny-rankings" title="Permalink to this headline">¶</a></h3>
 <p>A <strong>Kemeny</strong> ranking is a linear ranking without ties which is <em>closest</em>, in the sense of the ordinal <em>Kendall</em> distance (see <a class="reference internal" href="#bis-2012" id="id31"><span>[BIS-2012]</span></a>), to the given valued outranking digraphs <em>g</em> or <em>gcd</em>. This rule is also <em>invariant</em> under the <em>codual</em> transform.</p>
 <div class="literal-block-wrapper docutils container" id="kemenyranking">
 <div class="code-block-caption"><span class="caption-number">Listing 35 </span><span class="caption-text">Computing a <em>Kemeny</em> ranking</span><a class="headerlink" href="#kemenyranking" title="Permalink to this code">¶</a></div>
@@ -3311,7 +3310,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>When several rankings with maximal Kemeny index are given, the <a class="reference internal" href="techDoc.html#linearOrders.KemenyRanking" title="linearOrders.KemenyRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.KemenyRanking</span></code></a> class constructor instantiates a <em>most consensual</em> one, i.e. a ranking with <em>highest</em> mean marginal correlation and, in case of ties, with <em>lowest</em> weighted standard deviation. Here we obtain ranking: [‘a5’, ‘a6’, ‘a7’, ‘a3’, ‘a9’, ‘a4’, ‘a1’, ‘a8’, ‘a2’] (see <a class="reference internal" href="#kemenyranking"><span class="std std-numref">Listing 35</span></a> Line 4).</p>
 </div>
 <div class="section" id="slater-rankings">
-<h3><a class="toc-backref" href="#id222"><em>Slater</em> rankings</a><a class="headerlink" href="#slater-rankings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id221"><em>Slater</em> rankings</a><a class="headerlink" href="#slater-rankings" title="Permalink to this headline">¶</a></h3>
 <p>The <strong>Slater</strong> ranking rule is identical to <em>Kemeny</em>’s, but it is working, instead, on the <em>median cut polarised</em> digraph. <em>Slater</em>’s ranking rule is also <em>invariant</em> under the <em>codual</em> transform and delivers again indifferently on <em>g</em> or <em>gcd</em> the following results.</p>
 <div class="literal-block-wrapper docutils container" id="slaterranking">
 <div class="code-block-caption"><span class="caption-number">Listing 39 </span><span class="caption-text">Computing a <em>Slater</em> ranking</span><a class="headerlink" href="#slaterranking" title="Permalink to this code">¶</a></div>
@@ -3378,7 +3377,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>More efficient ranking heuristics, like the <em>Copeland</em> and the <em>NetFlows</em> rules, are therefore needed in practice. Let us finally, after these <em>ranking-by-scoring</em> strategies, also present two popular <em>ranking-by-choosing</em> strategies.</p>
 </div>
 <div class="section" id="kohler-s-ranking-by-choosing-rule">
-<h3><a class="toc-backref" href="#id223"><em>Kohler</em>’s ranking-by-choosing rule</a><a class="headerlink" href="#kohler-s-ranking-by-choosing-rule" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id222"><em>Kohler</em>’s ranking-by-choosing rule</a><a class="headerlink" href="#kohler-s-ranking-by-choosing-rule" title="Permalink to this headline">¶</a></h3>
 <p><strong>Kohler</strong>’s <em>ranking-by-choosing</em> rule can be formulated like this.</p>
 <p>At step <em>i</em> (<em>i</em> goes from 1 to <em>n</em>) do the following:</p>
 <ol class="arabic simple">
@@ -3510,7 +3509,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Let us finally mention another interesting <em>ranking-by-choosing</em> approach.</p>
 </div>
 <div class="section" id="tideman-s-ranked-pairs-rule">
-<h3><a class="toc-backref" href="#id224"><em>Tideman</em>’s ranked-pairs rule</a><a class="headerlink" href="#tideman-s-ranked-pairs-rule" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id223"><em>Tideman</em>’s ranked-pairs rule</a><a class="headerlink" href="#tideman-s-ranked-pairs-rule" title="Permalink to this headline">¶</a></h3>
 <p><em>Tideman</em>’s <em>ranking-by-choosing</em> heuristic, the <strong>RankedPairs</strong> rule, working best this time on the non strict outranking digraph <em>g</em>, is based on a <em>prudent incremental</em> construction of linear orders that avoids on the fly any cycling outrankings (see <a class="reference internal" href="#lam-2009" id="id34"><span>[LAM-2009]</span></a>). The ranking rule may be formulated as follows:</p>
 <ol class="arabic simple">
 <li><p>Rank the ordered pairs <img class="math" src="_images/math/349c0e2dbdade2e90e54c3fdf0342401c320c56e.png" alt="(x,y)"/> of alternatives in decreasing order of <img class="math" src="_images/math/2a9397d2cb0a802cc0c78da93a1f88371b8f88b9.png" alt="r(x\, \succsim \,y) \,+\, r(y\, \not\succsim \,x)"/>;</p></li>
@@ -3564,17 +3563,17 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span id="rubis-tutorial-label"></span><h2><a class="toc-backref" href="#id172">Computing a best choice recommendation</a><a class="headerlink" href="#computing-a-best-choice-recommendation" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id37">
 <ul class="simple">
-<li><p><a class="reference internal" href="#what-site-to-choose" id="id225">What site to choose ?</a></p></li>
-<li><p><a class="reference internal" href="#performance-tableau" id="id226">Performance tableau</a></p></li>
-<li><p><a class="reference internal" href="#outranking-digraph" id="id227">Outranking digraph</a></p></li>
-<li><p><a class="reference internal" href="#rubis-best-choice-recommendations" id="id228"><em>Rubis</em> best choice recommendations</a></p></li>
-<li><p><a class="reference internal" href="#computing-strict-best-choice-recommendations" id="id229">Computing <em>strict best</em> choice recommendations</a></p></li>
-<li><p><a class="reference internal" href="#weakly-ordering-the-outranking-digraph" id="id230">Weakly ordering the outranking digraph</a></p></li>
+<li><p><a class="reference internal" href="#what-site-to-choose" id="id224">What site to choose ?</a></p></li>
+<li><p><a class="reference internal" href="#performance-tableau" id="id225">Performance tableau</a></p></li>
+<li><p><a class="reference internal" href="#outranking-digraph" id="id226">Outranking digraph</a></p></li>
+<li><p><a class="reference internal" href="#rubis-best-choice-recommendations" id="id227"><em>Rubis</em> best choice recommendations</a></p></li>
+<li><p><a class="reference internal" href="#computing-strict-best-choice-recommendations" id="id228">Computing <em>strict best</em> choice recommendations</a></p></li>
+<li><p><a class="reference internal" href="#weakly-ordering-the-outranking-digraph" id="id229">Weakly ordering the outranking digraph</a></p></li>
 </ul>
 </div>
 <p>See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: <a class="reference internal" href="#adt-l7" id="id38"><span>[ADT-L7]</span></a>.</p>
 <div class="section" id="what-site-to-choose">
-<h3><a class="toc-backref" href="#id225">What site to choose ?</a><a class="headerlink" href="#what-site-to-choose" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id224">What site to choose ?</a><a class="headerlink" href="#what-site-to-choose" title="Permalink to this headline">¶</a></h3>
 <p>A SME, specialized in printing and copy services, has to move into new offices, and its CEO has gathered seven <strong>potential office sites</strong> (see <a class="reference internal" href="#newoffsites"><span class="std std-numref">Table 1</span></a>).</p>
 <table class="docutils align-default" id="newoffsites">
 <caption><span class="caption-number">Table 1 </span><span class="caption-text">The potential new office sites</span><a class="headerlink" href="#newoffsites" title="Permalink to this table">¶</a></caption>
@@ -3826,7 +3825,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>In view of <a class="reference internal" href="#offperftab"><span class="std std-numref">Table 3</span></a>, what is now the office site we may recommend to the CEO as <strong>best choice</strong> ?</p>
 </div>
 <div class="section" id="performance-tableau">
-<h3><a class="toc-backref" href="#id226">Performance tableau</a><a class="headerlink" href="#performance-tableau" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id225">Performance tableau</a><a class="headerlink" href="#performance-tableau" title="Permalink to this headline">¶</a></h3>
 <p>A Python encoded  performance tableau is available for downloading here <a class="reference external" href="_static/officeChoice.py">officeChoice.py</a>.</p>
 <blockquote>
 <div></div></blockquote>
@@ -3903,7 +3902,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Site <em>Ave</em> shows extreme and contradictory performances: highest <em>Costs</em> and no <em>Working Comfort</em> on one hand, and total satisfaction with respect to <em>Standing</em>, <em>Proximity</em> and <em>Parking facilities</em> on the other hand. Similar, but opposite, situation is given for site <em>Ces</em>: unsatisfactory <em>Working Space</em>, no <em>Standing</em> and no <em>Working Comfort</em> on the one hand, and lowest <em>Costs</em>, best <em>Proximity</em> and <em>Parking facilities</em> on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites <em>Dom</em> and <em>Gar</em>. Finally, site <em>Fen</em> is clearly the less satisfactory alternative of all.</p>
 </div>
 <div class="section" id="outranking-digraph">
-<h3><a class="toc-backref" href="#id227">Outranking digraph</a><a class="headerlink" href="#outranking-digraph" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id226">Outranking digraph</a><a class="headerlink" href="#outranking-digraph" title="Permalink to this headline">¶</a></h3>
 <p>To help now the CEO choosing the best site, we are going to compute pairwise outrankings (see <a class="reference internal" href="#bis-2013" id="id41"><span>[BIS-2013]</span></a>) on the set of potential sites. For two sites <em>x</em> and <em>y</em>, the situation “<em>x</em> outranks <em>y</em>”, denoted (<em>x</em> S <em>y</em>), is given if there is:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -3964,7 +3963,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </td></tr></table></div>
 </div>
 <div class="section" id="rubis-best-choice-recommendations">
-<h3><a class="toc-backref" href="#id228"><em>Rubis</em> best choice recommendations</a><a class="headerlink" href="#rubis-best-choice-recommendations" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id227"><em>Rubis</em> best choice recommendations</a><a class="headerlink" href="#rubis-best-choice-recommendations" title="Permalink to this headline">¶</a></h3>
 <p>Following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id44"><span>[BIS-2008]</span></a>), potential best choice recommendations are determined by the outranking prekernels –<em>weakly independent</em> and <em>strictly outranking</em> choices– of the outranking digraph (see the tutorial on <a class="reference internal" href="#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>). The case given, we previously need to break open all chordless odd circuits at their weakest link.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -4139,7 +4138,7 @@ choice recommendation, are not positively validated as best,
 resp. worst choices. They may or may not be considered so. Alternative <em>A</em>, with extreme contradictory performances, appears both, in a best and a worst choice recommendation (see Lines 27 and 37) and seams hence not actually comparable to its competitors.</p>
 </div>
 <div class="section" id="computing-strict-best-choice-recommendations">
-<h3><a class="toc-backref" href="#id229">Computing <em>strict best</em> choice recommendations</a><a class="headerlink" href="#computing-strict-best-choice-recommendations" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id228">Computing <em>strict best</em> choice recommendations</a><a class="headerlink" href="#computing-strict-best-choice-recommendations" title="Permalink to this headline">¶</a></h3>
 <p>When comparing now the performances of alternatives <em>D</em> and <em>G</em> on a
 pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em>:  r(<em>G</em> outranks <em>D</em>) = +145/145 = +1.0.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -4260,7 +4259,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>We may also notice (see Line 17 and Line 21) that both alternatives <em>A</em> and <em>F</em> are reported as certainly outranked choices, hence as <strong>potential worst choice recommendation</strong> . This confirms again the global incomparability status of alternative <em>A</em>.</p>
 </div>
 <div class="section" id="weakly-ordering-the-outranking-digraph">
-<h3><a class="toc-backref" href="#id230">Weakly ordering the outranking digraph</a><a class="headerlink" href="#weakly-ordering-the-outranking-digraph" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id229">Weakly ordering the outranking digraph</a><a class="headerlink" href="#weakly-ordering-the-outranking-digraph" title="Permalink to this headline">¶</a></h3>
 <p>To get a more complete insight in the overall strict outranking situations, we may use the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingByChoosingDigraph" title="transitiveDigraphs.RankingByChoosingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.RankingByChoosingDigraph</span></code></a> constructor imported from the <a class="reference internal" href="techDoc.html#transitivedigraphs-label"><span class="std std-ref">transitiveDigraphs module</span></a>, for computing a <strong>ranking-by-choosing</strong> result from the strict outranking digraph instance <em>gcd</em>.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -4307,13 +4306,13 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <p>In this <strong>ranking-by-choosing</strong> method, where we operate the <em>epistemic fusion</em> of iterated (strict) best and worst choices, compromise alternative <em>D</em> is indeed ranked before compromise alternative <em>G</em>. If the computing node supports multiple processor cores, best and worst choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site <em>A</em>, and the cheapest site <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram (see above) of the ranking-by-choosing relation.</p>
 <p>The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three decision objectives he is considering. In the setting here, where he considers that <em>maximizing the future turnover</em> is the most important objective followed by <em>minimizing the Costs</em> and, less important, <em>maximizing the working conditions</em>, site <em>D</em> represents actually the best compromise. However, if <em>Costs</em> do not play much a role, it would be perhaps better to decide to move to the most advantageous site <em>A</em>; or if, on the contrary, <em>Costs</em> do matter a lot, moving to the cheapest alternative <em>C</em> could definitely represent a more convincing recommendation.</p>
-<dl class="simple">
-<dt>It might be worth, as an <strong>exercise</strong>, to modify these criteria significance weights in the <code class="code docutils literal notranslate"><span class="pre">officeChoice.py</span></code> data file in such a way that:</dt><dd><ul class="simple">
+<p>It might be worth, as an <strong>exercise</strong>, to modify these criteria significance weights in the <code class="code docutils literal notranslate"><span class="pre">officeChoice.py</span></code> data file in such a way that</p>
+<blockquote>
+<div><ul class="simple">
 <li><p>all criteria under an objective appear <em>equi-significant</em>, and</p></li>
 <li><p>all three decision objectives are considered <em>equally important</em>.</p></li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 <p>What will become the best choice recommendation under this working hypothesis?</p>
 <p>See also the lecture 7 notes from the MICS Algorithmic Decision Theory course: <a class="reference internal" href="#adt-l7" id="id49"><span>[ADT-L7]</span></a>.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
@@ -4324,15 +4323,15 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span id="alice-tutorial-label"></span><h2><a class="toc-backref" href="#id173">Alice’s best choice: A case study <a class="footnote-reference brackets" href="#id131" id="id50">19</a></a><a class="headerlink" href="#alice-s-best-choice-a-case-study-19" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id51">
 <ul class="simple">
-<li><p><a class="reference internal" href="#the-decision-problem" id="id231">The decision problem</a></p></li>
-<li><p><a class="reference internal" href="#the-performance-tableau" id="id232">The performance tableau</a></p></li>
-<li><p><a class="reference internal" href="#building-a-best-choice-recommendation" id="id233">Building a best choice recommendation</a></p></li>
-<li><p><a class="reference internal" href="#robustness-analysis" id="id234">Robustness analysis</a></p></li>
+<li><p><a class="reference internal" href="#the-decision-problem" id="id230">The decision problem</a></p></li>
+<li><p><a class="reference internal" href="#the-performance-tableau" id="id231">The performance tableau</a></p></li>
+<li><p><a class="reference internal" href="#building-a-best-choice-recommendation" id="id232">Building a best choice recommendation</a></p></li>
+<li><p><a class="reference internal" href="#robustness-analysis" id="id233">Robustness analysis</a></p></li>
 </ul>
 </div>
 <p><img alt="aliceImage" class="align-top" src="_images/AliceF.png" /> Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her “Abitur” with satisfactory and/or good marks and  wants to start her further studies thereafter. She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees, as well as, her living costs during her studies.</p>
 <div class="section" id="the-decision-problem">
-<h3><a class="toc-backref" href="#id231">The decision problem</a><a class="headerlink" href="#the-decision-problem" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id230">The decision problem</a><a class="headerlink" href="#the-decision-problem" title="Permalink to this headline">¶</a></h3>
 <p>Alice has already identified 10 <strong>potential study programs</strong>.</p>
 <table class="docutils align-default" id="studprogs">
 <caption><span class="caption-number">Table 4 </span><span class="caption-text">Alice’s potential study programs</span><a class="headerlink" href="#studprogs" title="Permalink to this table">¶</a></caption>
@@ -4508,7 +4507,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>Within each decision objective, the performance criteria are considered to be equisignificant. Hence, the four decision objectives show a same importance weight of 6 (see <a class="reference internal" href="#famcrit"><span class="std std-numref">Table 5</span></a>).</p>
 </div>
 <div class="section" id="the-performance-tableau">
-<h3><a class="toc-backref" href="#id232">The performance tableau</a><a class="headerlink" href="#the-performance-tableau" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id231">The performance tableau</a><a class="headerlink" href="#the-performance-tableau" title="Permalink to this headline">¶</a></h3>
 <p>The actual evaluations of Alice’s potential study programs are gathered in a <a class="reference internal" href="techDoc.html#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">perfTabs.PerformanceTableau</span></code></a> object <a class="footnote-reference brackets" href="#id133" id="id52">21</a>.</p>
 <div class="literal-block-wrapper docutils container" id="aliceperftab">
 <div class="code-block-caption"><span class="caption-number">Listing 47 </span><span class="caption-text">Alice’s performance tableau</span><a class="headerlink" href="#aliceperftab" title="Permalink to this code">¶</a></div>
@@ -4579,8 +4578,8 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>It is interesting to observe that for Alice, the most significant performance criteria, appear to be, on the one side, the <em>attractiveness</em> of the study program (<em>AS</em>, +0.72) followed by the <em>attractiveness</em> of the future profession (<em>AP</em>, +0.62). <em>Study times</em> (<em>SL</em>, -024), <em>big city</em> (<em>BC</em>, -0.07) and <em>monthly living costs</em> (<em>LC</em>, -0.04) ) appear to be, on the other side, not <em>so</em> significant <a class="footnote-reference brackets" href="#id139" id="id55">27</a>.</p>
 </div>
 <div class="section" id="building-a-best-choice-recommendation">
-<h3><a class="toc-backref" href="#id233">Building a best choice recommendation</a><a class="headerlink" href="#building-a-best-choice-recommendation" title="Permalink to this headline">¶</a></h3>
-<p>Let us now have a look at the resultng pairwise outranking situations.</p>
+<h3><a class="toc-backref" href="#id232">Building a best choice recommendation</a><a class="headerlink" href="#building-a-best-choice-recommendation" title="Permalink to this headline">¶</a></h3>
+<p>Let us now have a look at the resulting pairwise outranking situations.</p>
 <div class="literal-block-wrapper docutils container" id="aliceoutranking">
 <div class="code-block-caption"><span class="caption-number">Listing 48 </span><span class="caption-text">Alice’s outranking digraph</span><a class="headerlink" href="#aliceoutranking" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -4608,7 +4607,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </td></tr></table></div>
 </div>
 <p>Despite rather poorly discriminating performance evaluations, the 67 pairwise outranking situations, positively validated in the digraph <em>dg</em> obtained from Alice’s performance tableau (see <a class="reference internal" href="#aliceoutranking"><span class="std std-numref">Listing 48</span></a> Line 9), are supported by a 74% majority of criteria significance (Line 10).</p>
-<p>We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion <em>AS</em> to be considerable which triggers, the case given, a potential polarisation of the outranking characteristics. We may inspect the occurrence os such polarisations as follows.</p>
+<p>We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion <em>AS</em> to be considerable which triggers, the case given, a potential polarisation of the outranking characteristics. We may inspect the occurrence of such polarisations as follows.</p>
 <div class="literal-block-wrapper docutils container" id="alicevetos">
 <div class="code-block-caption"><span class="caption-number">Listing 49 </span><span class="caption-text">Veto and counter-veto situations</span><a class="headerlink" href="#alicevetos" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -4776,7 +4775,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>Alice considers her four decision objectives as being <em>more or less</em> equally important. Here we have, however, allocated <em>strictly equal</em> importance weights with <em>strictly</em> equi-significant criteria per objective. How robust is our previous best choice recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be <em>more or less uncertain</em> ?</p>
 </div>
 <div class="section" id="robustness-analysis">
-<h3><a class="toc-backref" href="#id234">Robustness analysis</a><a class="headerlink" href="#robustness-analysis" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id233">Robustness analysis</a><a class="headerlink" href="#robustness-analysis" title="Permalink to this headline">¶</a></h3>
 <p>To answer this question, we will consider the respective criteria significance weights <em>wj</em> to be <strong>triangular random variables</strong> in the range 0 to <em>2wj</em> with <em>mode</em> = <em>wj</em>. We may compute a corresponding <strong>90%-confident outranking digraph</strong> with the help of the <a class="reference internal" href="techDoc.html#outrankingDigraphs.ConfidentBipolarOutrankingDigraph" title="outrankingDigraphs.ConfidentBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.ConfidentBipolarOutrankingDigraph</span></code></a> constructor <a class="footnote-reference brackets" href="#id134" id="id57">22</a>.</p>
 <div class="literal-block-wrapper docutils container" id="aliceconfidentdigraph">
 <div class="code-block-caption"><span class="caption-number">Listing 52 </span><span class="caption-text">The 90% confident outranking digraph</span><a class="headerlink" href="#aliceconfidentdigraph" title="Permalink to this code">¶</a></div>
@@ -4851,7 +4850,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </td></tr></table></div>
 </div>
 <p>The <em>Graduate Interpreter</em> studies in Köln remain indeed a 90%-confident <em>Condorcet</em> winner (Line 2). Hence, the same study program also remains our 90%-confident best choice recommendation supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9 and 15).</p>
-<p>When pairwise comparing the two best-ranked study programs (see <a class="reference internal" href="#pairwisecomparison"><span class="std std-numref">Fig. 31</span></a>), we have observed that <em>I-FHK</em> actually positively outranks <em>I-USB</em> on all four decision objectives. When we admit equi-significant criteria significances per objective, this outranking situation is hence valid independently of the importance weights Alice may allocate to each of her decision objectives.</p>
+<p>When previously comparing the two best-ranked study programs (see <a class="reference internal" href="#pairwisecomparison"><span class="std std-numref">Fig. 31</span></a>), we have observed that <em>I-FHK</em> actually positively outranks <em>I-USB</em> on all four decision objectives. When admitting equi-significant criteria significances per objective, this outranking situation is hence valid independently of the importance weights Alice may allocate to each of her decision objectives.</p>
 <p>We may compute these <strong>unopposed</strong> outranking situations <a class="footnote-reference brackets" href="#id137" id="id58">25</a> with help of the <a class="reference internal" href="techDoc.html#outrankingDigraphs.UnOpposedBipolarOutrankingDigraph" title="outrankingDigraphs.UnOpposedBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.UnOpposedBipolarOutrankingDigraph</span></code></a> constructor.</p>
 <div class="literal-block-wrapper docutils container" id="aliceunopposedoutrankings">
 <div class="code-block-caption"><span class="caption-number">Listing 54 </span><span class="caption-text">Computing the unopposed outranking situations</span><a class="headerlink" href="#aliceunopposedoutrankings" title="Permalink to this code">¶</a></div>
@@ -4906,7 +4905,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <p>Again, when <em>equi-signficant</em> performance criteria are assumed per decision objective, we observe in <a class="reference internal" href="#alicechoice-unopposed"><span class="std std-numref">Fig. 32</span></a> that <em>I-FHK</em> remains the stable best choice recommendation, <em>independently</em> of the actual importance weights that Alice may wish to allocate to her four decision objectives.</p>
 <p>In view of her performance tableau in <a class="reference internal" href="#aliceheatmap"><span class="std std-numref">Fig. 29</span></a>, <em>Graduate Interpreter</em> studies at the <em>Technical High School Köln</em>, thus, represent definitely <strong>Alice’s very best choice</strong>.</p>
-<p>For further reading about the <em>Rubis</em> Best Choice methodology, one may consult the following real <em>decision aid case study</em> about choosing a best poster in a scientific conference <a class="reference internal" href="#bis-2015" id="id59"><span>[BIS-2015]</span></a> .</p>
+<p>For further reading about the <em>Rubis</em> Best Choice methodology, one may consult in <a class="reference internal" href="#bis-2015" id="id59"><span>[BIS-2015]</span></a> the study of a <em>real decision aid case</em> about choosing a best poster in a scientific conference.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
 </div>
@@ -4915,14 +4914,14 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span id="quantilesrating-tutorial-label"></span><h2><a class="toc-backref" href="#id174">Rating with multiple incommensurable criteria</a><a class="headerlink" href="#rating-with-multiple-incommensurable-criteria" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id60">
 <ul class="simple">
-<li><p><a class="reference internal" href="#k-sorting-on-a-single-criterion" id="id235">K-sorting on a single criterion</a></p></li>
-<li><p><a class="reference internal" href="#quantiles-sorting-with-multiple-criteria" id="id236">Quantiles sorting with multiple criteria</a></p></li>
-<li><p><a class="reference internal" href="#ranking-big-performance-tableaux" id="id237">Ranking big performance tableaux</a></p></li>
+<li><p><a class="reference internal" href="#k-sorting-on-a-single-criterion" id="id234">K-sorting on a single criterion</a></p></li>
+<li><p><a class="reference internal" href="#quantiles-sorting-with-multiple-criteria" id="id235">Quantiles sorting with multiple criteria</a></p></li>
+<li><p><a class="reference internal" href="#ranking-big-performance-tableaux" id="id236">Ranking big performance tableaux</a></p></li>
 </ul>
 </div>
 <p>We apply order statistics for sorting a set <em>X</em> of <em>n</em> potential decision actions, evaluated on <em>m</em> incommensurable performance criteria, into <em>q</em> quantile equivalence classes, based on pairwise outranking characteristics involving the quantile class limits observed on each criterion. Thus we may implement a weak ordering algorithm of complexity <em>O(nmq)</em>.</p>
 <div class="section" id="k-sorting-on-a-single-criterion">
-<h3><a class="toc-backref" href="#id235">K-sorting on a single criterion</a><a class="headerlink" href="#k-sorting-on-a-single-criterion" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id234">K-sorting on a single criterion</a><a class="headerlink" href="#k-sorting-on-a-single-criterion" title="Permalink to this headline">¶</a></h3>
 <p>A single criterion sorting category <em>K</em> is a (usually) lower-closed interval <img class="math" src="_images/math/520d94885338f1841285bf5dcacadbba35ad8253.png" alt="[m_k ; M_k["/> on a real-valued performance measurement scale, with <img class="math" src="_images/math/6a6b37081a3a3ccd406b7e2eea9bf698b687648f.png" alt="m_k \leq M_k"/>. If <em>x</em> is a measured performance on this scale, we may distinguish three sorting situations.</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -4939,7 +4938,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p><strong>Example</strong>: Let <em>A</em> = { <img class="math" src="_images/math/233f0d810da1485db58eea5fe55c1432938d3452.png" alt="a_7 = 7.03"/>, <img class="math" src="_images/math/5e44bcda8208e2f9448906a6dc3eb14e91d0f67e.png" alt="a_{15}=9.45"/>, <img class="math" src="_images/math/dfb0eb57ac448f5c4c28c147865759cf0755617b.png" alt="a_{11}= 20.35"/>, <img class="math" src="_images/math/f79d158ba853a0b0798ce9668a426c1e9c8a8426.png" alt="a_{16}= 25.94"/>, <img class="math" src="_images/math/aa2ab1ada0ac9220e799f4756a50a2b550a48166.png" alt="a_{10}= 31.44"/>, <img class="math" src="_images/math/cab1fa04ee9ec75b98860a83d16480f2c7dc0bed.png" alt="a_9= 34.48"/>, <img class="math" src="_images/math/e760d6996466364af7bb8687cdcdcd1cd115d694.png" alt="a_{12}= 34.50"/>, <img class="math" src="_images/math/6b537aef0402462b4a07686cf4a46e20f8310574.png" alt="a_{13}= 35.61"/>, <img class="math" src="_images/math/b82ca80eb3a98339cef5fefe29e0fb5952d1e81b.png" alt="a_{14}= 36.54"/>, <img class="math" src="_images/math/47858a716e4624da3eef44d376f48b61bf72a7fe.png" alt="a_{19}= 42.83"/>, <img class="math" src="_images/math/135e3182b7130f2d1d1ad44201c0c5224c79355a.png" alt="a_5= 50.04"/>, <img class="math" src="_images/math/e6d336bb529e163f055634e3e402bc5fc86fc712.png" alt="a_2= 59.85"/>, <img class="math" src="_images/math/9b3983d6a70bb9722461863ab86ccc55d7fd3cd9.png" alt="a_{17}= 61.35"/>, <img class="math" src="_images/math/68162e67edac1dfcd2a86d50d72a6f0f26354c59.png" alt="a_{18}= 61.61"/>, <img class="math" src="_images/math/1f92f5e588839243a126f3c206f074a93758311b.png" alt="a_3= 76.91"/>, <img class="math" src="_images/math/95999bffb0b2f20efbe44a68bfff1966de722e51.png" alt="a_6= 91.39"/>, <img class="math" src="_images/math/c8af3a3d04d462c5702ffb19831a2ad8a8a9b902.png" alt="a_1= 91.79"/>, <img class="math" src="_images/math/07d9e10e666a89bf0bc81aaca3307827206f586c.png" alt="a_4= 96.52"/>, <img class="math" src="_images/math/0221290e8a3b0aa5e5b9d29bb9de856d08c897f7.png" alt="a_8= 96.56"/>, <img class="math" src="_images/math/cb1f2529ded1749d1dc6e765a80bd62aa3391495.png" alt="a_{20}= 98.42"/> } be a set of 20 increasing performance measures observed on a given criterion. The lower-closed category limits we obtain with quartiles (<em>q</em> = 4) are: <img class="math" src="_images/math/0c0cd1688db1f9a074302782417265dfba224225.png" alt="Q_0 = 7.03"/> = <img class="math" src="_images/math/c1a2f67850d95175f6ed8e0b22209c0eb097b8a2.png" alt="a_7"/>, <img class="math" src="_images/math/0a5915f0a9067cc3d6b5502169ef559b430f93d7.png" alt="Q_1= 34.485"/>, <img class="math" src="_images/math/986d750b8f220daa16400ac4dc2f97ba54e996e1.png" alt="Q_2= 54.945"/> (median performance), and <img class="math" src="_images/math/d61c0eab2639a4f7b8a59f308614c28cd0bdb588.png" alt="Q_3= 91.69"/>. And the sorting into these four categories defines on <em>A</em> a complete preorder with the following four equivalence classes: <img class="math" src="_images/math/0fafa7564dc6cc26c285c198cda2cdb3b550789b.png" alt="K_1=\{a_7,a_{10},a_{11},a_{10},a_{15},a_{16}\}"/>, <img class="math" src="_images/math/4c461c4703f093fa788a0e02565a8a6d8187933c.png" alt="K_2=\{a_5,a_9,a_{13},a_{14},a_{19}\}"/>, <img class="math" src="_images/math/71f889af2d51df299d857e8cbd2dbd99bb02cba3.png" alt="K_3=\{a_2,a_3,a_6,a_{17},a_{18}\}"/>, and <img class="math" src="_images/math/5670bba32f875f57ad0dcb260ab3c2800500f22d.png" alt="K_4=\{a_1,a_4,a_8,a_{20}\}"/>.</p>
 </div>
 <div class="section" id="quantiles-sorting-with-multiple-criteria">
-<h3><a class="toc-backref" href="#id236">Quantiles sorting with multiple criteria</a><a class="headerlink" href="#quantiles-sorting-with-multiple-criteria" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id235">Quantiles sorting with multiple criteria</a><a class="headerlink" href="#quantiles-sorting-with-multiple-criteria" title="Permalink to this headline">¶</a></h3>
 <p>Let us now suppose that we are given a performance tableau with a set <em>X</em> of <em>n</em> decision alternatives evaluated on a coherent family of <em>m</em> performance criteria associated with the corresponding outranking relation <img class="math" src="_images/math/18d18c189056a3fb3ca4dfd6addc30f83ed4fcb5.png" alt="\succsim"/> defined on <em>X</em>. We denote <img class="math" src="_images/math/ab9afdaf786ce53318d75d81f050af8560822fcd.png" alt="x_j"/> the performance of alternative <em>x</em> observed on criterion <em>j</em>.</p>
 <p>Suppose furthermore that we want to sort the decision alternatives into <em>q</em> upper-closed quantile equivalence classes. We therefore consider a series : <img class="math" src="_images/math/bbd9eeb0dd8b1449b1580860f8bb4d931d219f58.png" alt="k = k/q"/> for <em>k</em> = 0, …, <em>q</em> of <em>q+1</em> equally spaced quantiles, like quartiles: 0, 0.25, 0.5, 0.75, 1; quintiles: 0, 0.2, 0.4, 0.6, 0.8, 1: or deciles: 0, 0.1, 0.2, …, 0.9, 1, for instance.</p>
 <p>The upper-closed <img class="math" src="_images/math/200bcc998bae75818c67b9ddcd9c71e8f9f5f6f0.png" alt="\mathbf{q}^k"/> class corresponds to the <em>m</em> quantile intervals <img class="math" src="_images/math/7cd8754c01e689a7c7618dd8c7ee669ec4a0ecb5.png" alt="]q_j(p_{k-1});q_j(p_k)]"/> observed on each criterion <em>j</em>,  where <em>k</em> = 2, …, <em>q</em> , <img class="math" src="_images/math/7a626e0e3d62bd5420477d409ffd3359738d84a4.png" alt="q_j(p_q) =  \max_X(x_j)"/>, and the first class gathers all performances below or equal to <img class="math" src="_images/math/9f012dab2fe09fd5dc5dd02df607f5cc40f35638.png" alt="Q_j(p_1)"/>.</p>
@@ -5175,7 +5174,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>Noticing the computational efficiency of the quantiles sorting construction (see <a class="reference internal" href="#quantilessorting"><span class="std std-numref">Listing 55</span></a> Lines 23-29), coupled with the separability property of the quantile class membership characteristics computation, we will make usage of the <a class="reference internal" href="techDoc.html#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> class for ranking big performance tableaux.</p>
 </div>
 <div class="section" id="ranking-big-performance-tableaux">
-<h3><a class="toc-backref" href="#id237">Ranking big performance tableaux</a><a class="headerlink" href="#ranking-big-performance-tableaux" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id236">Ranking big performance tableaux</a><a class="headerlink" href="#ranking-big-performance-tableaux" title="Permalink to this headline">¶</a></h3>
 <p>Indeed, none of the usual ranking heuristics (see previous tutorial), using essentially only the information given by the pairwise outranking characteristics, are scalable for <strong>big outranking digraphs</strong> gathering millions of pairwise outranking situations. We may notice, however, that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance data for linearly decomposing big sets of decision alternatives into <strong>ordered quantiles equivalence classes</strong> using the quantiles sorting technique seen in the previous Section. This decomposition will lead to a <em>pre-ranked sparse</em> outranking digraph model.</p>
 <p>In the coding example in <a class="reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 58</span></a>, we generate for instance, first (Lines 2-4), a cost benefit performance tableau of 100 decision alternatives and, secondly (Lines 5-6), we construct a <a class="reference internal" href="techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="sparseOutrankingDigraphs.PreRankedOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sparseOutrankingDigraphs.PreRankedOutrankingDigraph</span></code></a> instance called <em>bg</em>. Notice by the way the <em>BigData</em> flag (Line 4) used here for generating a parsimoniously commented performance tableau.</p>
 <div class="literal-block-wrapper docutils container" id="prerankedoutrankingdigraph">
@@ -5373,16 +5372,16 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span id="hpc-tutorial-label"></span><h2><a class="toc-backref" href="#id175">HPC ranking with big outranking digraphs</a><a class="headerlink" href="#hpc-ranking-with-big-outranking-digraphs" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id62">
 <ul class="simple">
-<li><p><a class="reference internal" href="#c-compiled-python-modules" id="id238">C-compiled Python modules</a></p></li>
-<li><p><a class="reference internal" href="#big-data-performance-tableaux" id="id239">Big Data performance tableaux</a></p></li>
-<li><p><a class="reference internal" href="#c-implemented-integer-valued-outranking-digraphs" id="id240">C-implemented integer-valued outranking digraphs</a></p></li>
-<li><p><a class="reference internal" href="#the-sparse-outranking-digraph-implementation" id="id241">The sparse outranking digraph implementation</a></p></li>
-<li><p><a class="reference internal" href="#ranking-big-sets-of-decision-alternatives" id="id242">Ranking big sets of decision alternatives</a></p></li>
-<li><p><a class="reference internal" href="#hpc-quantiles-ranking-records" id="id243">HPC quantiles ranking records</a></p></li>
+<li><p><a class="reference internal" href="#c-compiled-python-modules" id="id237">C-compiled Python modules</a></p></li>
+<li><p><a class="reference internal" href="#big-data-performance-tableaux" id="id238">Big Data performance tableaux</a></p></li>
+<li><p><a class="reference internal" href="#c-implemented-integer-valued-outranking-digraphs" id="id239">C-implemented integer-valued outranking digraphs</a></p></li>
+<li><p><a class="reference internal" href="#the-sparse-outranking-digraph-implementation" id="id240">The sparse outranking digraph implementation</a></p></li>
+<li><p><a class="reference internal" href="#ranking-big-sets-of-decision-alternatives" id="id241">Ranking big sets of decision alternatives</a></p></li>
+<li><p><a class="reference internal" href="#hpc-quantiles-ranking-records" id="id242">HPC quantiles ranking records</a></p></li>
 </ul>
 </div>
 <div class="section" id="c-compiled-python-modules">
-<h3><a class="toc-backref" href="#id238">C-compiled Python modules</a><a class="headerlink" href="#c-compiled-python-modules" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id237">C-compiled Python modules</a><a class="headerlink" href="#c-compiled-python-modules" title="Permalink to this headline">¶</a></h3>
 <p>The Digraph3 collection provides cythonized <a class="footnote-reference brackets" href="#id122" id="id63">6</a>, i.e. C-compiled and optimised versions of the main python modules for tackling multiple criteria decision problems facing very large sets of decision alternatives ( &gt; 10000 ). Such problems appear usually with a combinatorial organisation of the potential decision alternatives, as is frequently the case in bioinformatics for instance. If HPC facilities with nodes supporting numerous cores (&gt; 20) and big RAM (&gt; 50GB) are available, ranking up to several millions of alternatives (see <a class="reference internal" href="#bis-2016" id="id64"><span>[BIS-2016]</span></a>) becomes effectively tractable.</p>
 <p>Four cythonized Digraph3 modules, prefixed with the letter <em>c</em> and taking a <em>pyx</em> extension, are provided with their corresponding setup tools in the <em>Digraph3/cython</em> directory, namely</p>
 <blockquote>
@@ -5400,7 +5399,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 </div>
 <div class="section" id="big-data-performance-tableaux">
-<h3><a class="toc-backref" href="#id239">Big Data performance tableaux</a><a class="headerlink" href="#big-data-performance-tableaux" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id238">Big Data performance tableaux</a><a class="headerlink" href="#big-data-performance-tableaux" title="Permalink to this headline">¶</a></h3>
 <p>In order to efficiently type the C variables, the <a class="reference internal" href="techDoc.html#module-cRandPerfTabs" title="cRandPerfTabs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">cRandPerfTabs</span></code></a> module provides the usual random performance tableau models, but, with <strong>integer</strong> action keys, <strong>float</strong> performance evaluations, <strong>integer</strong> criteria weights and <strong>float</strong> discrimination thresholds. And, to limit as much as possible memory occupation of class instances, all the usual verbose comments are dropped from the description of the <em>actions</em> and <em>criteria</em> dictionaries.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -5521,7 +5520,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </td></tr></table></div>
 </div>
 <div class="section" id="c-implemented-integer-valued-outranking-digraphs">
-<h3><a class="toc-backref" href="#id240">C-implemented integer-valued outranking digraphs</a><a class="headerlink" href="#c-implemented-integer-valued-outranking-digraphs" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id239">C-implemented integer-valued outranking digraphs</a><a class="headerlink" href="#c-implemented-integer-valued-outranking-digraphs" title="Permalink to this headline">¶</a></h3>
 <p>The C compiled version of the bipolar-valued digraph models takes integer relation characteristic values.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -5635,7 +5634,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>About 103MB for <em>g</em> and 202MB for <em>g1</em>. The standard <em>Decimal</em> valued <code class="code docutils literal notranslate"><span class="pre">BipolarOutrankingDigraph</span></code> instance <em>g1</em> thus nearly doubles the memory occupation of the corresponding <code class="code docutils literal notranslate"><span class="pre">IntegerBipolarOutrankingDigraph</span></code> <em>g</em> instance (see Line 3 and 5 above). 3/4 of this memory occupation is due to the <em>g.relation</em> (34%) and the <em>g.gamma</em> (45%) dictionaries. And these ratios quadratically grow with the digraph order. To limit the object sizes for really big outranking digraphs, we need to abandon the complete implementation of adjacency tables and gamma functions.</p>
 </div>
 <div class="section" id="the-sparse-outranking-digraph-implementation">
-<h3><a class="toc-backref" href="#id241">The sparse outranking digraph implementation</a><a class="headerlink" href="#the-sparse-outranking-digraph-implementation" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id240">The sparse outranking digraph implementation</a><a class="headerlink" href="#the-sparse-outranking-digraph-implementation" title="Permalink to this headline">¶</a></h3>
 <p>The idea is to first decompose the complete outranking relation into an ordered collection of equivalent quantile performance classes. Let us consider for this illustration a random performance tableau with 100 decision alternatives evaluated on 7 criteria.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -5829,7 +5828,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </td></tr></table></div>
 </div>
 <div class="section" id="ranking-big-sets-of-decision-alternatives">
-<h3><a class="toc-backref" href="#id242">Ranking big sets of decision alternatives</a><a class="headerlink" href="#ranking-big-sets-of-decision-alternatives" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id241">Ranking big sets of decision alternatives</a><a class="headerlink" href="#ranking-big-sets-of-decision-alternatives" title="Permalink to this headline">¶</a></h3>
 <p>We may now rank the complete set of 100 decision alternatives by locally ranking with the <em>Copeland</em> or the <em>NetFlows</em> rule, for instance, all these individual components.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -6012,7 +6011,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>The best ranking correlation with the pairwise outranking situations (+0.75) is naturally given when we apply the <em>Copeland</em> rule to the complete outranking digraph. When we apply the same rule to the sparse 4-tiled outranking digraph, we get a correlation of +0.72, and when applying the <em>Copeland</em> rule to the optimised 4-tiled digraph, we still obtain a correlation of +0.71. These results actually depend on the number of quantiles we use as well as on the given model of random performance tableau. In case of Random3ObjectivesPerformanceTableau instances, for instance, we would get in a similar setting a complete outranking correlation of +0.86, a sparse 4-tiling correlation of +0.82, and an optimzed sparse 4-tiling correlation of +0.81.</p>
 </div>
 <div class="section" id="hpc-quantiles-ranking-records">
-<h3><a class="toc-backref" href="#id243">HPC quantiles ranking records</a><a class="headerlink" href="#hpc-quantiles-ranking-records" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id242">HPC quantiles ranking records</a><a class="headerlink" href="#hpc-quantiles-ranking-records" title="Permalink to this headline">¶</a></h3>
 <p>Following from the separability property of the <em>q</em>-tiles sorting of each action into each <em>q</em>-tiles class, the <em>q</em>-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph.</p>
 <p>Using the HPC platform of the University of Luxembourg (<a class="reference external" href="https://hpc.uni.lu/">https://hpc.uni.lu/</a>), the following run times for very big ranking problems could be achieved both:</p>
 <blockquote>
@@ -6293,13 +6292,13 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <span id="rating-tutorial-label"></span><h2><a class="toc-backref" href="#id176">Rating with learned quantile norms</a><a class="headerlink" href="#rating-with-learned-quantile-norms" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id70">
 <ul class="simple">
-<li><p><a class="reference internal" href="#id71" id="id244">Introduction</a></p></li>
-<li><p><a class="reference internal" href="#incremental-learning-of-historical-performance-quantiles" id="id245">Incremental learning of historical performance quantiles</a></p></li>
-<li><p><a class="reference internal" href="#rating-new-performances-with-quantile-norms" id="id246">Rating new performances with quantile norms</a></p></li>
+<li><p><a class="reference internal" href="#id71" id="id243">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#incremental-learning-of-historical-performance-quantiles" id="id244">Incremental learning of historical performance quantiles</a></p></li>
+<li><p><a class="reference internal" href="#rating-new-performances-with-quantile-norms" id="id245">Rating new performances with quantile norms</a></p></li>
 </ul>
 </div>
 <div class="section" id="id71">
-<h3><a class="toc-backref" href="#id244">Introduction</a><a class="headerlink" href="#id71" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id243">Introduction</a><a class="headerlink" href="#id71" title="Permalink to this headline">¶</a></h3>
 <p>In this tutorial we address the problem of <strong>rating multiple criteria performances</strong> of a set of potential decision alternatives with respect to empirical order statistics, i.e. performance quantiles learned from historical performance data gathered from similar decision alternatives observed in the past (see <a class="reference internal" href="#cpstat-l5" id="id72"><span>[CPSTAT-L5]</span></a>).</p>
 <p>To illustrate the decision problem we face, consider for a moment that, in a given decision aid study, we observe, for instance in the Table below, the multi-criteria performances of two potential decision alternatives, named <em>a1001</em> and <em>a1010</em>, marked on 7 <strong>incommensurable</strong> preference criteria: 2 <strong>costs</strong> criteria <em>c1</em> and <em>c2</em> (to <strong>minimize</strong>) and 6 <strong>benefits</strong> criteria <em>b1</em> to <em>b5</em> (to <strong>maximize</strong>).</p>
 <blockquote>
@@ -6362,7 +6361,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <p>To solve this <em>absolute</em> rating decision problem, first, we need to estimate multi-criteria <strong>performance quantiles</strong> from historical records.</p>
 </div>
 <div class="section" id="incremental-learning-of-historical-performance-quantiles">
-<h3><a class="toc-backref" href="#id245">Incremental learning of historical performance quantiles</a><a class="headerlink" href="#incremental-learning-of-historical-performance-quantiles" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id244">Incremental learning of historical performance quantiles</a><a class="headerlink" href="#incremental-learning-of-historical-performance-quantiles" title="Permalink to this headline">¶</a></h3>
 <p>See also the technical documentation of the <a class="reference internal" href="techDoc.html#performancequantiles-label"><span class="std std-ref">performanceQuantiles module</span></a>.</p>
 <p>Suppose that we see flying in random multiple criteria performances from a given model of random performance tableau (see the <a class="reference internal" href="techDoc.html#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">randomPerfTabs</span></code></a> module). The question we address here is to estimate empirical performance quantiles on the basis of so far observed performance vectors. For this task, we are inspired by <a class="reference internal" href="#cham-2006" id="id73"><span>[CHAM-2006]</span></a> and <a class="reference internal" href="#nr3-2007" id="id74"><span>[NR3-2007]</span></a>, who present an efficient algorithm for incrementally updating a quantile-binned cumulative distribution function (CDF) with newly observed CDFs.</p>
 <p>The <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal notranslate"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> class implements such a performance quantiles estimation based on a given performance tableau. Its main components are:</p>
@@ -6491,7 +6490,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </div>
 </div>
 <div class="section" id="rating-new-performances-with-quantile-norms">
-<h3><a class="toc-backref" href="#id246">Rating new performances with quantile norms</a><a class="headerlink" href="#rating-new-performances-with-quantile-norms" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id245">Rating new performances with quantile norms</a><a class="headerlink" href="#rating-new-performances-with-quantile-norms" title="Permalink to this headline">¶</a></h3>
 <p>For <em>absolute rating</em> of a newly given set of decision alternatives with the help of empirical performance quantiles estimated from historical data, we provide the <a class="reference internal" href="techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph" title="sortingDigraphs.NormedQuantilesRatingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sortingDigraphs.NormedQuantilesRatingDigraph</span></code></a> class, a specialisation of the <a class="reference internal" href="techDoc.html#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sortingDigraphs.SortingDigraph</span></code></a> class.</p>
 <p>The constructor requires a valid <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal notranslate"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> instance.</p>
 <div class="admonition note">
@@ -6817,17 +6816,17 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <span id="graphs-tutorial-label"></span><h2><a class="toc-backref" href="#id177">Working with the <code class="code docutils literal notranslate"><span class="pre">graphs</span></code> module</a><a class="headerlink" href="#working-with-the-graphs-module" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id76">
 <ul class="simple">
-<li><p><a class="reference internal" href="#structure-of-a-graph-object" id="id247">Structure of a <code class="docutils literal notranslate"><span class="pre">Graph</span></code> object</a></p></li>
-<li><p><a class="reference internal" href="#q-coloring-of-a-graph" id="id248">q-coloring of a graph</a></p></li>
-<li><p><a class="reference internal" href="#mis-and-clique-enumeration" id="id249">MIS and clique enumeration</a></p></li>
-<li><p><a class="reference internal" href="#line-graphs-and-maximal-matchings" id="id250">Line graphs and maximal matchings</a></p></li>
-<li><p><a class="reference internal" href="#grids-and-the-ising-model" id="id251">Grids and the Ising model</a></p></li>
-<li><p><a class="reference internal" href="#simulating-metropolis-random-walks" id="id252">Simulating Metropolis random walks</a></p></li>
+<li><p><a class="reference internal" href="#structure-of-a-graph-object" id="id246">Structure of a <code class="docutils literal notranslate"><span class="pre">Graph</span></code> object</a></p></li>
+<li><p><a class="reference internal" href="#q-coloring-of-a-graph" id="id247">q-coloring of a graph</a></p></li>
+<li><p><a class="reference internal" href="#mis-and-clique-enumeration" id="id248">MIS and clique enumeration</a></p></li>
+<li><p><a class="reference internal" href="#line-graphs-and-maximal-matchings" id="id249">Line graphs and maximal matchings</a></p></li>
+<li><p><a class="reference internal" href="#grids-and-the-ising-model" id="id250">Grids and the Ising model</a></p></li>
+<li><p><a class="reference internal" href="#simulating-metropolis-random-walks" id="id251">Simulating Metropolis random walks</a></p></li>
 </ul>
 </div>
 <p>See also the technical documentation of the <a class="reference internal" href="techDoc.html#graphs-label"><span class="std std-ref">graphs module</span></a>.</p>
 <div class="section" id="structure-of-a-graph-object">
-<h3><a class="toc-backref" href="#id247">Structure of a <code class="docutils literal notranslate"><span class="pre">Graph</span></code> object</a><a class="headerlink" href="#structure-of-a-graph-object" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id246">Structure of a <code class="docutils literal notranslate"><span class="pre">Graph</span></code> object</a><a class="headerlink" href="#structure-of-a-graph-object" title="Permalink to this headline">¶</a></h3>
 <p>In the <a class="reference internal" href="techDoc.html#module-graphs" title="graphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">graphs</span></code></a> module, the root <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.Graph</span></code></a> class provides a generic <strong>simple graph model</strong>, without loops and multiple links. A given object of this class consists in:</p>
 <ol class="arabic simple">
 <li><p>the graph <strong>vertices</strong> : a dictionary of vertices with ‘name’ and ‘shortName’ attributes,</p></li>
@@ -7030,7 +7029,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 </div>
 <div class="section" id="q-coloring-of-a-graph">
-<h3><a class="toc-backref" href="#id248">q-coloring of a graph</a><a class="headerlink" href="#q-coloring-of-a-graph" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id247">q-coloring of a graph</a><a class="headerlink" href="#q-coloring-of-a-graph" title="Permalink to this headline">¶</a></h3>
 <p>A 3-coloring of the tutorial graph <em>g</em> may for instance be computed and plotted with the <a class="reference internal" href="techDoc.html#graphs.Q_Coloring" title="graphs.Q_Coloring"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.Q_Coloring</span></code></a> class as follows.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -7105,7 +7104,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </div>
 </div>
 <div class="section" id="mis-and-clique-enumeration">
-<h3><a class="toc-backref" href="#id249">MIS and clique enumeration</a><a class="headerlink" href="#mis-and-clique-enumeration" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id248">MIS and clique enumeration</a><a class="headerlink" href="#mis-and-clique-enumeration" title="Permalink to this headline">¶</a></h3>
 <p>2-colorings define independent sets of vertices that are maximal in cardinality; for short called a <strong>MIS</strong>. Computing such MISs in a given <code class="code docutils literal notranslate"><span class="pre">Graph</span></code> instance may be achieved by the <cite>graphs.Graph.showMIS()</cite> method.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -7192,7 +7191,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 </div>
 <div class="section" id="line-graphs-and-maximal-matchings">
-<h3><a class="toc-backref" href="#id250">Line graphs and maximal matchings</a><a class="headerlink" href="#line-graphs-and-maximal-matchings" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id249">Line graphs and maximal matchings</a><a class="headerlink" href="#line-graphs-and-maximal-matchings" title="Permalink to this headline">¶</a></h3>
 <p>The module also provides a <a class="reference internal" href="techDoc.html#graphs.LineGraph" title="graphs.LineGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.LineGraph</span></code></a> constructor. A <strong>line graph</strong> represents the <strong>adjacencies between edges</strong> of the given graph instance. We may compute for instance the line graph of the 5-cycle graph.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -7336,7 +7335,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </div>
 </div>
 <div class="section" id="grids-and-the-ising-model">
-<h3><a class="toc-backref" href="#id251">Grids and the Ising model</a><a class="headerlink" href="#grids-and-the-ising-model" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id250">Grids and the Ising model</a><a class="headerlink" href="#grids-and-the-ising-model" title="Permalink to this headline">¶</a></h3>
 <p>Special classes of graphs, like <em>n</em> x <em>m</em> <strong>rectangular</strong> or <strong>triangular grids</strong> (<a class="reference internal" href="techDoc.html#graphs.GridGraph" title="graphs.GridGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.GridGraph</span></code></a> and <a class="reference internal" href="techDoc.html#graphs.IsingModel" title="graphs.IsingModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.IsingModel</span></code></a>) are available in the <a class="reference internal" href="techDoc.html#module-graphs" title="graphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">graphs</span></code></a> module. For instance, we may use a Gibbs sampler again for simulating an <strong>Ising Model</strong> on such a grid.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -7373,7 +7372,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </div>
 </div>
 <div class="section" id="simulating-metropolis-random-walks">
-<h3><a class="toc-backref" href="#id252">Simulating Metropolis random walks</a><a class="headerlink" href="#simulating-metropolis-random-walks" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id251">Simulating Metropolis random walks</a><a class="headerlink" href="#simulating-metropolis-random-walks" title="Permalink to this headline">¶</a></h3>
 <p>Finally, we provide the <a class="reference internal" href="techDoc.html#graphs.MetropolisChain" title="graphs.MetropolisChain"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.MetropolisChain</span></code></a> class, a specialization of the <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.Graph</span></code></a> class, for implementing a generic <strong>Metropolis MCMC</strong> (Monte Carlo Markov Chain) sampler for simulating random walks on a given graph following a given probability  <code class="code docutils literal notranslate"><span class="pre">probs</span> <span class="pre">=</span> <span class="pre">{‘v1’:</span> <span class="pre">x,</span> <span class="pre">‘v2’:</span> <span class="pre">y,</span> <span class="pre">...}</span></code> for visiting each vertex (see Lines 14-22).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -7464,14 +7463,14 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <span id="isomorphicmis-tutorial-label"></span><h2><a class="toc-backref" href="#id178">Computing the non isomorphic MISs of the 12-cycle graph</a><a class="headerlink" href="#computing-the-non-isomorphic-miss-of-the-12-cycle-graph" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id80">
 <ul class="simple">
-<li><p><a class="reference internal" href="#id81" id="id253">Introduction</a></p></li>
-<li><p><a class="reference internal" href="#computing-the-maximal-independent-sets-miss" id="id254">Computing the maximal independent sets (MISs)</a></p></li>
-<li><p><a class="reference internal" href="#computing-the-automorphism-group" id="id255">Computing the automorphism group</a></p></li>
-<li><p><a class="reference internal" href="#computing-the-isomorphic-miss" id="id256">Computing the isomorphic MISs</a></p></li>
+<li><p><a class="reference internal" href="#id81" id="id252">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#computing-the-maximal-independent-sets-miss" id="id253">Computing the maximal independent sets (MISs)</a></p></li>
+<li><p><a class="reference internal" href="#computing-the-automorphism-group" id="id254">Computing the automorphism group</a></p></li>
+<li><p><a class="reference internal" href="#computing-the-isomorphic-miss" id="id255">Computing the isomorphic MISs</a></p></li>
 </ul>
 </div>
 <div class="section" id="id81">
-<h3><a class="toc-backref" href="#id253">Introduction</a><a class="headerlink" href="#id81" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id252">Introduction</a><a class="headerlink" href="#id81" title="Permalink to this headline">¶</a></h3>
 <p>Due to the public success of our common 2008 publication with Jean-Luc Marichal <a class="reference internal" href="#isomis-08" id="id82"><span>[ISOMIS-08]</span></a> , we present in this tutorial an example Python session for computing the <strong>non isomorphic maximal independent sets</strong> (MISs) from the 12-cycle graph, i.e. a <a class="reference internal" href="techDoc.html#digraphs.CirculantDigraph" title="digraphs.CirculantDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.CirculantDigraph</span></code></a> class instance of order 12 and symmetric circulants 1 and -1.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -7532,7 +7531,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </div>
 </div>
 <div class="section" id="computing-the-maximal-independent-sets-miss">
-<h3><a class="toc-backref" href="#id254">Computing the maximal independent sets (MISs)</a><a class="headerlink" href="#computing-the-maximal-independent-sets-miss" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id253">Computing the maximal independent sets (MISs)</a><a class="headerlink" href="#computing-the-maximal-independent-sets-miss" title="Permalink to this headline">¶</a></h3>
 <p>A non isomorphic MIS corresponds in fact to a set of isomorphic MISs, i.e. an orbit of MISs under the automorphism group of the 12-cycle graph. We are now first computing all maximal independent sets that are detectable in the 12-cycle digraph with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showMIS" title="digraphs.Digraph.showMIS"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.showMIS()</span></code></a> method.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -7649,7 +7648,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 </div>
 <div class="section" id="computing-the-automorphism-group">
-<h3><a class="toc-backref" href="#id255">Computing the automorphism group</a><a class="headerlink" href="#computing-the-automorphism-group" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id254">Computing the automorphism group</a><a class="headerlink" href="#computing-the-automorphism-group" title="Permalink to this headline">¶</a></h3>
 <p>For computing the corresponding non isomorphic MISs, we actually need the automorphism group of the c12-cycle graph. The <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a> class therefore provides the <a class="reference internal" href="techDoc.html#digraphs.Digraph.automorphismGenerators" title="digraphs.Digraph.automorphismGenerators"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.automorphismGenerators()</span></code></a> method which adds automorphism group generators to a <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a> class instance with the help of the external shell &lt;<code class="code docutils literal notranslate"><span class="pre">dreadnaut</span></code>&gt; command from the <strong>nauty</strong> software package <a class="footnote-reference brackets" href="#id118" id="id84">2</a>.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -7677,7 +7676,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <p>The 12-cycle graph automorphism group is generated with both the permutations above and has group size 24.</p>
 </div>
 <div class="section" id="computing-the-isomorphic-miss">
-<h3><a class="toc-backref" href="#id256">Computing the isomorphic MISs</a><a class="headerlink" href="#computing-the-isomorphic-miss" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id255">Computing the isomorphic MISs</a><a class="headerlink" href="#computing-the-isomorphic-miss" title="Permalink to this headline">¶</a></h3>
 <p>The command <a class="reference internal" href="techDoc.html#digraphs.Digraph.showOrbits" title="digraphs.Digraph.showOrbits"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.showOrbits()</span></code></a> renders now the labelled representatives of each of the four orbits of isomorphic MISs observed in the 12-cycle graph (see Lines 7-10).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -7720,15 +7719,15 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <span id="kernel-tutorial-label"></span><h2><a class="toc-backref" href="#id179">On computing digraph kernels</a><a class="headerlink" href="#on-computing-digraph-kernels" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id86">
 <ul class="simple">
-<li><p><a class="reference internal" href="#what-is-a-graph-kernel" id="id257">What is a graph kernel ?</a></p></li>
-<li><p><a class="reference internal" href="#initial-and-terminal-kernels" id="id258">Initial and terminal kernels</a></p></li>
-<li><p><a class="reference internal" href="#kernels-in-lateralized-digraphs" id="id259">Kernels in lateralized digraphs</a></p></li>
-<li><p><a class="reference internal" href="#computing-good-and-bad-choice-recommendations" id="id260">Computing good and bad choice recommendations</a></p></li>
-<li><p><a class="reference internal" href="#tractability" id="id261">Tractability</a></p></li>
+<li><p><a class="reference internal" href="#what-is-a-graph-kernel" id="id256">What is a graph kernel ?</a></p></li>
+<li><p><a class="reference internal" href="#initial-and-terminal-kernels" id="id257">Initial and terminal kernels</a></p></li>
+<li><p><a class="reference internal" href="#kernels-in-lateralized-digraphs" id="id258">Kernels in lateralized digraphs</a></p></li>
+<li><p><a class="reference internal" href="#computing-good-and-bad-choice-recommendations" id="id259">Computing good and bad choice recommendations</a></p></li>
+<li><p><a class="reference internal" href="#tractability" id="id260">Tractability</a></p></li>
 </ul>
 </div>
 <div class="section" id="what-is-a-graph-kernel">
-<h3><a class="toc-backref" href="#id257">What is a graph kernel ?</a><a class="headerlink" href="#what-is-a-graph-kernel" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id256">What is a graph kernel ?</a><a class="headerlink" href="#what-is-a-graph-kernel" title="Permalink to this headline">¶</a></h3>
 <p>We call <strong>choice</strong> in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice <em>Y</em> is called <strong>internally stable</strong> or <strong>independent</strong> when there exist <strong>no links</strong> (edges) or relations (arcs) between its members. Furthermore, a choice <em>Y</em> is called <strong>externally stable</strong> when for each vertex, node or action <em>x</em> not in <em>Y</em>, there exists at least a member <em>y</em> of <em>Y</em> such that <em>x</em> is linked or related to <em>y</em>. Now, an internally <strong>and</strong> externally stable choice is called a <strong>kernel</strong>.</p>
 <p>A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see <a class="reference internal" href="#isomorphicmis-tutorial-label"><span class="std std-ref">Computing the non isomorphic MISs of the 12-cycle graph</span></a>). Indeed, each MIS in the n-cycle graph is by definition independent, i.e. internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in <a class="reference internal" href="#misc12"><span class="std std-numref">Fig. 46</span></a>.</p>
 <p>In all graph or symmetric digraph, the <em>maximality condition</em> imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal <strong>holes</strong> in the given graph.</p>
@@ -7995,7 +7994,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <p>In the context of digraphs, i.e. <em>oriented</em> graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.</p>
 </div>
 <div class="section" id="initial-and-terminal-kernels">
-<h3><a class="toc-backref" href="#id258">Initial and terminal kernels</a><a class="headerlink" href="#initial-and-terminal-kernels" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id257">Initial and terminal kernels</a><a class="headerlink" href="#initial-and-terminal-kernels" title="Permalink to this headline">¶</a></h3>
 <p>In an oriented graph context, the internal stability condition of the kernel concept remains untouched; however, the external stability condition gets indeed split up by the <em>orientation</em> into two lateral cases:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -8236,7 +8235,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <p>It immediately follows that weak chordless circuits are part of the class of digraphs that are <strong>invariant</strong> under the <em>codual</em> transform, <em>cn</em> = - (~ <em>cn</em> ) = ~ ( -<em>cn</em> ) <a class="footnote-reference brackets" href="#id125" id="id90">13</a>. In the case, now, of an <em>odd</em> weak chordless circuit, <em>neither</em> the weak chordless circuit, <em>nor</em> its dual, converse, or codual versions will admit <em>any</em> initial or terminal prekernels.</p>
 </div>
 <div class="section" id="kernels-in-lateralized-digraphs">
-<h3><a class="toc-backref" href="#id259">Kernels in lateralized digraphs</a><a class="headerlink" href="#kernels-in-lateralized-digraphs" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id258">Kernels in lateralized digraphs</a><a class="headerlink" href="#kernels-in-lateralized-digraphs" title="Permalink to this headline">¶</a></h3>
 <p>Humans do live in an apparent physical space of plain transitive <strong>lateral orientation</strong>, fully empowered in finite geometrical 3D models with <strong>linear orders</strong>, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite <strong>preorders</strong>, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite <strong>partial orders</strong>, i.e. asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.</p>
 <p>In genuine random digraphs, however, we may need to check for each of its MISs, whether <em>one</em>, <em>both</em>, or <em>none</em> of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30%.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -8367,7 +8366,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see <a class="reference internal" href="#rubis-tutorial-label"><span class="std std-ref">Computing a best choice recommendation</span></a>).</p>
 </div>
 <div class="section" id="computing-good-and-bad-choice-recommendations">
-<h3><a class="toc-backref" href="#id260">Computing good and bad choice recommendations</a><a class="headerlink" href="#computing-good-and-bad-choice-recommendations" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id259">Computing good and bad choice recommendations</a><a class="headerlink" href="#computing-good-and-bad-choice-recommendations" title="Permalink to this headline">¶</a></h3>
 <p>To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolar-valued <strong>outranking</strong> digraph.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -8518,7 +8517,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>In the resulting linear ranking (see <a class="reference internal" href="#outrankingresult"><span class="std std-numref">Fig. 58</span></a>), action ‘a4’ is set at first rank, followed by action ‘a2’. This makes sense as ‘a4’ shows three performances in the first quintile, whereas ‘a2’ is only partially evaluated and shows only two such excellent performances. But ‘a4’ also shows a very weak performance in the first quintile. Both decision actions, hence, don’t show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any ‘forced’ linear ranking result as shown in <a class="reference internal" href="#outrankingresult"><span class="std std-numref">Fig. 58</span></a> above.</p>
 </div>
 <div class="section" id="tractability">
-<h3><a class="toc-backref" href="#id261">Tractability</a><a class="headerlink" href="#tractability" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id260">Tractability</a><a class="headerlink" href="#tractability" title="Permalink to this headline">¶</a></h3>
 <p>Finally, let us give some hints on the <strong>tractability</strong> of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraph may get hard already for tiny sparse digraphs of order <em>n</em> &gt; 20 (see <a class="reference internal" href="#bis-2006b" id="id91"><span>[BIS-2006b]</span></a>). Indeed, the worst case is given by an empty or indeterminate digraph where the set of all potential independent choices to check is in fact the power set of the vertices.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -8661,14 +8660,14 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span id="permutation-tutorial-label"></span><h2><a class="toc-backref" href="#id180">About split, interval and permutation graphs</a><a class="headerlink" href="#about-split-interval-and-permutation-graphs" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id94">
 <ul class="simple">
-<li><p><a class="reference internal" href="#a-multiply-perfect-graph" id="id262">A multiply <em>perfect</em> graph</a></p></li>
-<li><p><a class="reference internal" href="#who-is-the-liar" id="id263">Who is the liar ?</a></p></li>
-<li><p><a class="reference internal" href="#generating-permutation-graphs" id="id264">Generating permutation graphs</a></p></li>
-<li><p><a class="reference internal" href="#recognizing-permutation-graphs" id="id265">Recognizing permutation graphs</a></p></li>
+<li><p><a class="reference internal" href="#a-multiply-perfect-graph" id="id261">A multiply <em>perfect</em> graph</a></p></li>
+<li><p><a class="reference internal" href="#who-is-the-liar" id="id262">Who is the liar ?</a></p></li>
+<li><p><a class="reference internal" href="#generating-permutation-graphs" id="id263">Generating permutation graphs</a></p></li>
+<li><p><a class="reference internal" href="#recognizing-permutation-graphs" id="id264">Recognizing permutation graphs</a></p></li>
 </ul>
 </div>
 <div class="section" id="a-multiply-perfect-graph">
-<h3><a class="toc-backref" href="#id262">A multiply <em>perfect</em> graph</a><a class="headerlink" href="#a-multiply-perfect-graph" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id261">A multiply <em>perfect</em> graph</a><a class="headerlink" href="#a-multiply-perfect-graph" title="Permalink to this headline">¶</a></h3>
 <p>Following Martin Golumbic (see <a class="reference internal" href="#gol-2004" id="id95"><span>[GOL-2004]</span></a> p. 149), we call a given graph <em>g</em>:</p>
 <blockquote>
 <div><ul class="simple">
@@ -8780,7 +8779,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>are <em>independent</em> of one another (see <a class="reference internal" href="#gol-2004" id="id96"><span>[GOL-2004]</span></a> p. 275).</p>
 </div>
 <div class="section" id="who-is-the-liar">
-<h3><a class="toc-backref" href="#id263">Who is the liar ?</a><a class="headerlink" href="#who-is-the-liar" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id262">Who is the liar ?</a><a class="headerlink" href="#who-is-the-liar" title="Permalink to this headline">¶</a></h3>
 <p><em>Claude Berge</em>’s famous mystery story (see <a class="reference internal" href="#gol-2004" id="id97"><span>[GOL-2004]</span></a> p.20) may well illustrate the importance of being an <strong>interval graph</strong>.</p>
 <p>Suppose that the file <code class="docutils literal notranslate"><span class="pre">berge.py</span></code> <a class="footnote-reference brackets" href="#id130" id="id98">18</a> contains the following <a class="reference internal" href="techDoc.html#graphs.Graph" title="graphs.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.Graph</span></code></a> instance data:</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -8945,7 +8944,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 </div>
 <div class="section" id="generating-permutation-graphs">
-<h3><a class="toc-backref" href="#id264">Generating permutation graphs</a><a class="headerlink" href="#generating-permutation-graphs" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id263">Generating permutation graphs</a><a class="headerlink" href="#generating-permutation-graphs" title="Permalink to this headline">¶</a></h3>
 <p>A graph is called a <strong>permutation</strong> or <em>inversion</em> graph if there exists a permutation of its list of vertices such that the graph is isomorphic to the inversions operated by the permutation in this list (see <a class="reference internal" href="#gol-2004" id="id99"><span>[GOL-2004]</span></a> Chapter 7, pp 157-170). This kind is also part of the class of perfect graphs.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -9090,7 +9089,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 </div>
 <div class="section" id="recognizing-permutation-graphs">
-<h3><a class="toc-backref" href="#id265">Recognizing permutation graphs</a><a class="headerlink" href="#recognizing-permutation-graphs" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id264">Recognizing permutation graphs</a><a class="headerlink" href="#recognizing-permutation-graphs" title="Permalink to this headline">¶</a></h3>
 <p>Now, a given graph <em>g</em> is a <strong>permutation</strong> graph <strong>if and only if</strong> both <em>g</em> <strong>and</strong> <em>-g</em> are <em>transitively orientable</em>. This  property gives a polynomial test procedure (in <img class="math" src="_images/math/174aef04544e022a085aab16ddeae821c5667e2b.png" alt="O(n^3)"/> due to the transitivity check) for recognizing permutation graphs.</p>
 <p>Let us consider, for instance, the following random graph of <em>order</em> 8 generated with an <em>edge probability</em> of 40% and a <em>random seed</em> equal to 4335.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -9326,14 +9325,14 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span id="trees-tutorial-label"></span><h2><a class="toc-backref" href="#id181">On tree graphs and graph forests</a><a class="headerlink" href="#on-tree-graphs-and-graph-forests" title="Permalink to this headline">¶</a></h2>
 <div class="contents local topic" id="id106">
 <ul class="simple">
-<li><p><a class="reference internal" href="#generating-random-tree-graphs" id="id266">Generating random tree graphs</a></p></li>
-<li><p><a class="reference internal" href="#recognizing-tree-graphs" id="id267">Recognizing tree graphs</a></p></li>
-<li><p><a class="reference internal" href="#spanning-trees-and-forests" id="id268">Spanning trees and forests</a></p></li>
-<li><p><a class="reference internal" href="#maximum-determined-spanning-forests" id="id269">Maximum determined spanning forests</a></p></li>
+<li><p><a class="reference internal" href="#generating-random-tree-graphs" id="id265">Generating random tree graphs</a></p></li>
+<li><p><a class="reference internal" href="#recognizing-tree-graphs" id="id266">Recognizing tree graphs</a></p></li>
+<li><p><a class="reference internal" href="#spanning-trees-and-forests" id="id267">Spanning trees and forests</a></p></li>
+<li><p><a class="reference internal" href="#maximum-determined-spanning-forests" id="id268">Maximum determined spanning forests</a></p></li>
 </ul>
 </div>
 <div class="section" id="generating-random-tree-graphs">
-<h3><a class="toc-backref" href="#id266">Generating random tree graphs</a><a class="headerlink" href="#generating-random-tree-graphs" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id265">Generating random tree graphs</a><a class="headerlink" href="#generating-random-tree-graphs" title="Permalink to this headline">¶</a></h3>
 <p>Using the <a class="reference internal" href="techDoc.html#graphs.RandomTree" title="graphs.RandomTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.RandomTree</span></code></a> class, we may, for instance, generate a random tree graph with 9 vertices.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
@@ -9435,7 +9434,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>Given a genuine graph, how can we recognize that it is in fact a tree instance ?</p>
 </div>
 <div class="section" id="recognizing-tree-graphs">
-<h3><a class="toc-backref" href="#id267">Recognizing tree graphs</a><a class="headerlink" href="#recognizing-tree-graphs" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id266">Recognizing tree graphs</a><a class="headerlink" href="#recognizing-tree-graphs" title="Permalink to this headline">¶</a></h3>
 <p>Given a graph <em>g</em> of order <em>n</em> and size <em>s</em>, the following 5 assertions <em>A1</em>, <em>A2</em>, <em>A3</em>, <em>A4</em> and <em>A5</em> are all equivalent (see <a class="reference internal" href="#bar-1991" id="id109"><span>[BAR-1991]</span></a>):</p>
 <blockquote>
 <div><ul class="simple">
@@ -9482,7 +9481,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>Let us now turn toward a major application of tree graphs, namely <em>spanning trees</em> and <em>forests</em> related to graph traversals.</p>
 </div>
 <div class="section" id="spanning-trees-and-forests">
-<h3><a class="toc-backref" href="#id268">Spanning trees and forests</a><a class="headerlink" href="#spanning-trees-and-forests" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id267">Spanning trees and forests</a><a class="headerlink" href="#spanning-trees-and-forests" title="Permalink to this headline">¶</a></h3>
 <p>With the <a class="reference internal" href="techDoc.html#graphs.RandomSpanningTree" title="graphs.RandomSpanningTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.RandomSpanningTree</span></code></a> class we may generate, from a given <strong>connected</strong> graph <em>g</em> instance, <strong>uniform random</strong> instances of a <strong>spanning tree</strong> by using <em>Wilson</em>’s algorithm <a class="reference internal" href="#wil-1996" id="id110"><span>[WIL-1996]</span></a></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -9575,7 +9574,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 </div>
 <div class="section" id="maximum-determined-spanning-forests">
-<h3><a class="toc-backref" href="#id269">Maximum determined spanning forests</a><a class="headerlink" href="#maximum-determined-spanning-forests" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id268">Maximum determined spanning forests</a><a class="headerlink" href="#maximum-determined-spanning-forests" title="Permalink to this headline">¶</a></h3>
 <p>In case of valued graphs supporting weighted edges, we may finally construct a <strong>most determined</strong> spanning tree (or forest if not connected) using <em>Kruskal</em>’s <em>greedy</em> <strong>minimum-spanning-tree algorithm</strong> <a class="footnote-reference brackets" href="#id121" id="id112">5</a> on the <em>dual</em> valuation of the graph <a class="reference internal" href="#kru-1956" id="id113"><span>[KRU-1956]</span></a>.</p>
 <p>We consider, for instance, a randomly valued graph with five vertices and seven edges bipolar-valued in [-1.0; 1.0].</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -9677,10 +9676,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 <p>One may easily verify that all other potential spanning trees, including instead the edges {<em>v3</em>, <em>v5</em>} and/or {<em>v4</em>, <em>v5</em>} - will show a lower average determination.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
-</div>
-</div>
-<div class="section" id="bibliography">
-<h2><a class="toc-backref" href="#id182">Bibliography</a><a class="headerlink" href="#bibliography" title="Permalink to this headline">¶</a></h2>
+<hr class="docutils" />
 <dl class="citation">
 <dt class="label" id="cpstat-l5"><span class="brackets"><a class="fn-backref" href="#id72">CPSTAT-L5</a></span></dt>
 <dd><p>Bisdorff R. (2017) “Simulating from abitrary empirical random distributions”. MICS <em>Computational Statistics</em> course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winter Semester 2017 (see <a class="reference external" href="http://hdl.handle.net/10993/37933">http://hdl.handle.net/10993/37933</a>).</p>
@@ -9752,25 +9748,6 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <dd><p>Kruskal J.B. (1956), <em>On the shortest spanning subtree of a graph and the traveling salesman problem</em>, Proceedings of the American Mathematical Society. 7: 48–50.</p>
 </dd>
 </dl>
-<div class="section" id="documents">
-<h3>Documents<a class="headerlink" href="#documents" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p><a class="reference external" href="index.html">Introduction</a></p></li>
-<li><p><a class="reference external" href="techDoc.html">Reference manual</a></p></li>
-<li><p><a class="reference external" href="tutorial.html">Tutorial</a></p></li>
-</ul>
-</div>
-<div class="section" id="indices-and-tables">
-<h3>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
-</div>
-<div class="section" id="footnotes">
-<h3>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h3>
-</div>
 <dl class="footnote brackets">
 <dt class="label" id="id116"><span class="brackets">1</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id5">2</a>,<a href="#id12">3</a>,<a href="#id25">4</a>,<a href="#id29">5</a>,<a href="#id77">6</a>)</span></dt>
 <dd><p>The <code class="docutils literal notranslate"><span class="pre">exportGraphViz</span></code> method is depending on drawing tools from <a class="reference external" href="https://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">graphviz</span></code> to install them. There are ready <code class="docutils literal notranslate"><span class="pre">dmg</span></code> installers for Mac OSX.</p>
@@ -9815,7 +9792,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <dd><p>A Digraph3 <em>graphs.Graph</em> encoded file is available in the <code class="code docutils literal notranslate"><span class="pre">examples</span></code> directory of the Digraph3 software collection.</p>
 </dd>
 <dt class="label" id="id131"><span class="brackets"><a class="fn-backref" href="#id50">19</a></span></dt>
-<dd><p>This case study is taken from a “Multiple Criteria Decision Analysis* case study by Eisenführ Fr., Langer Th., and Weber M., <em>Fallstudien zu rationalem Entscheiden</em>, Springer 2001, pp. 1 – 17.</p>
+<dd><p>This case study is inspired by a “Multiple Criteria Decision Analysis* case study published in Eisenführ Fr., Langer Th., and Weber M., <em>Fallstudien zu rationalem Entscheiden</em>, Springer 2001, pp. 1-17.</p>
 </dd>
 <dt class="label" id="id132"><span class="brackets"><a class="fn-backref" href="#id53">20</a></span></dt>
 <dd><p>Ganzeboom H.B.G, Treiman D.J. <em>Internationally Comparable Measures of Occupational Status for the 1988 International Standard Classification of Occupations</em>, Social Science Research 25, 201–239 (1996).</p>
@@ -9842,6 +9819,29 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <dd><p>See also the corresponding <a class="reference internal" href="pearls.html#ordinalcorrelation-tutorial-label"><span class="std std-ref">Advanced Topic</span></a> in the Digraph3 documentation.</p>
 </dd>
 </dl>
+</div>
+<div class="section" id="bibliography">
+<h3>Bibliography<a class="headerlink" href="#bibliography" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="documents">
+<h3>Documents<a class="headerlink" href="#documents" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="index.html">Introduction</a></p></li>
+<li><p><a class="reference external" href="techDoc.html">Reference manual</a></p></li>
+<li><p><a class="reference external" href="tutorial.html">Tutorial</a></p></li>
+</ul>
+</div>
+<div class="section" id="indices-and-tables">
+<h3>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="footnotes">
+<h3>Footnotes<a class="headerlink" href="#footnotes" title="Permalink to this headline">¶</a></h3>
+</div>
 </div>
 <div class="section" id="appendices">
 <h2>Appendices<a class="headerlink" href="#appendices" title="Permalink to this headline">¶</a></h2>
@@ -9991,9 +9991,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <li><a class="reference internal" href="#recognizing-tree-graphs">Recognizing tree graphs</a></li>
 <li><a class="reference internal" href="#spanning-trees-and-forests">Spanning trees and forests</a></li>
 <li><a class="reference internal" href="#maximum-determined-spanning-forests">Maximum determined spanning forests</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#bibliography">Bibliography</a><ul>
+<li><a class="reference internal" href="#bibliography">Bibliography</a></li>
 <li><a class="reference internal" href="#documents">Documents</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 <li><a class="reference internal" href="#footnotes">Footnotes</a></li>
