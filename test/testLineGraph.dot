@@ -2,9 +2,9 @@ strict graph G {
 graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",
  fontsize = 12,
  label = "\nDigraph3 (graphviz), R. Bisdorff, 2019", size="7,7"];
-n1 [shape = "circle", label = "['v2', 'v1']"];
-n2 [shape = "circle", label = "['v6', 'v1']"];
-n3 [shape = "circle", label = "['v2', 'v3']"];
+n1 [shape = "circle", label = "['v1', 'v2']"];
+n2 [shape = "circle", label = "['v1', 'v6']"];
+n3 [shape = "circle", label = "['v3', 'v2']"];
 n4 [shape = "circle", label = "['v3', 'v4']"];
 n5 [shape = "circle", label = "['v5', 'v4']"];
 n6 [shape = "circle", label = "['v5', 'v6']"];

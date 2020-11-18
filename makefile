@@ -136,25 +136,25 @@ votingProfilesTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${PYTEST} -v pytestsVotingProfile.py)
+		(cd test; ${PYTEST} -v pytestsVotingProfiles.py)
 
 verboseVotingProfilesTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${PYTEST} -vs pytestsVotingProfile.py)
+		(cd test; ${PYTEST} -vs pytestsVotingProfiles.py)
 
 linearOrdersTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${PYTEST} -v pytestsLinearOrder.py)
+		(cd test; ${PYTEST} -v pytestsLinearOrders.py)
 
 verboseLinearOrdersTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${PYTEST} -vs pytestsLinearOrder.py)
+		(cd test; ${PYTEST} -vs pytestsLinearOrders.py)
 
 transitiveDigraphsTests:
 		for md in ${modules}; do \

@@ -107,9 +107,8 @@ class TransitiveDigraph(Digraph):
         """
         Dummy name for showTransitiveDigraph() method
         """
-        self.showTransitiveDigraph(actionsList=actionsList,\
-                                   rankingByChoosing=rankingByChoosing,\
-                                   WithCoverCredibility=CoverCredibility)
+        self.showTransitiveDigraph(rankingByChoosing=rankingByChoosing,\
+                                   WithCoverCredibility=WithCoverCredibility)
     
     def showOrderedRelationTable(self,direction="decreasing",originalRelation=False):
         """

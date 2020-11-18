@@ -1639,9 +1639,11 @@ class Digraph(object):
             currActions = currActions - iwch
         return rankingRelation
 
-    def showRankingByChoosing(self,rankingByChoosing=None):
+    def showRankingByChoosing(self,rankingByChoosing=None,WithCoverCredibility=False):
         """
         A show method for self.rankinByChoosing result.
+        
+        When parameter *WithCoverCredibility* is set to True, the credibility of outranking, respectively being outranked is indicated at each selection step. 
 
         .. warning::
 
@@ -1674,7 +1676,11 @@ class Digraph(object):
             #print 'ibch, iwch, iach', i, ibch,iwch,iach
             ch = list(ibch)
             ch.sort()
-            print(' %s%s%s Best Choice %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0]))
+            if WithCoverCredibility:
+                print(' %s%s%s Best Choice %s (%.2f)' %\
+                      (space,i+1,nstr,ch,rankingByChoosing[i][0][0]))
+            else:
+                print(' %s%s%s Best Choice %s' % (space,i+1,nstr,ch) )
             if len(iach) > 0 and i < n-1:
                 print('  %s Ambiguous Choice %s' % (space,list(iach)))
                 space += '  '
@@ -1698,7 +1704,11 @@ class Digraph(object):
             if len(iach) > 0 and i > 0:
                 space = space[:-2]
                 print('  %s Ambiguous Choice %s' % (space,list(iach)))
-            print(' %s%s%s Worst Choice %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
+            if WithCoverCredibility:
+                print(' %s%s%s Worst Choice %s (%.2f)' %\
+                        (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
+            else:
+                print(' %s%s%s Worst Choice %s' % (space,n-i,nstr,ch) )                
         corr1 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(rankingByChoosing))
         print('Ordinal bipolar correlation with outranking relation: tau = %+.3f (D = %.1f)'% (corr1['correlation'],corr1['determination']))
         corr2 = self.computeBipolarCorrelation(self.computeRankingByChoosingRelation(rankingByChoosing),MedianCut=True)
@@ -13434,7 +13444,7 @@ if __name__ == "__main__":
         rbc = RankingByChoosingDigraph(g,CoDual=False,Threading=False)
         rbc.showRankingByBestChoosing()
         rbc.showRankingByLastChoosing()
-        rbc.showRankingByChoosing()
+        rbc.showRankingByChoosing(WithCoverCredibility=True)
         print(rbc.computeTopologicalRanking())
         print(rbc.topologicalSort())
 ##        print(rbc.rankingByLastChoosing)
