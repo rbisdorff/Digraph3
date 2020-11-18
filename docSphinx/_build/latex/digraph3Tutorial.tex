@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{November 17, 2020}
+\date{November 18, 2020}
 \release{3.9.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -4197,7 +4197,8 @@ It is worthwhile noticing in \hyperref[\detokenize{tutorial:alicecriteria}]{Fig.
 In the following \sphinxstyleemphasis{heatmap view}, we may now consult Alice’s performance evaluations.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}
+\PYG{g+go}{       colorLevels=5,Correlations=True,ndigits=0)}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -4305,14 +4306,14 @@ We may furthermore check that no outranking \sphinxstyleemphasis{circuits} do ap
 \PYG{g+go}{ (in decreasing order of determinateness)}
 \PYG{g+go}{ Credibility domain: [\PYGZhy{}1.00,1.00]}
 \PYG{g+go}{ === \PYGZgt{}\PYGZgt{} potential best choice(s)}
-\PYG{g+go}{ choice              : [\PYGZsq{}I\PYGZhy{}FHK\PYGZsq{}, \PYGZsq{}I\PYGZhy{}UHB\PYGZsq{}, \PYGZsq{}I\PYGZhy{}USB\PYGZsq{}, \PYGZsq{}T\PYGZhy{}FHK\PYGZsq{}]}
+\PYG{g+go}{ choice              : [\PYGZsq{}I\PYGZhy{}FHK\PYGZsq{},\PYGZsq{}I\PYGZhy{}UHB\PYGZsq{},\PYGZsq{}I\PYGZhy{}USB\PYGZsq{},\PYGZsq{}T\PYGZhy{}FHK\PYGZsq{}]}
 \PYG{g+go}{  independence        : 0.17}
 \PYG{g+go}{  dominance           : 0.08}
 \PYG{g+go}{  absorbency          : \PYGZhy{}0.83}
 \PYG{g+go}{  covering (\PYGZpc{})        : 62.50}
 \PYG{g+go}{  determinateness (\PYGZpc{}) : 68.75}
-\PYG{g+go}{  most credible action(s) = \PYGZob{} \PYGZsq{}I\PYGZhy{}FHK\PYGZsq{}: 0.75, \PYGZsq{}T\PYGZhy{}FHK\PYGZsq{}: 0.17,}
-\PYG{g+go}{                              \PYGZsq{}I\PYGZhy{}USB\PYGZsq{}: 0.17, \PYGZsq{}I\PYGZhy{}UHB\PYGZsq{}: 0.17, \PYGZcb{}}
+\PYG{g+go}{  most credible action(s) = \PYGZob{}\PYGZsq{}I\PYGZhy{}FHK\PYGZsq{}: 0.75,\PYGZsq{}T\PYGZhy{}FHK\PYGZsq{}: 0.17,}
+\PYG{g+go}{                             \PYGZsq{}I\PYGZhy{}USB\PYGZsq{}: 0.17,\PYGZsq{}I\PYGZhy{}UHB\PYGZsq{}: 0.17\PYGZcb{}}
 \PYG{g+go}{ === \PYGZgt{}\PYGZgt{} potential worst choice(s)}
 \PYG{g+go}{ choice              : [\PYGZsq{}C\PYGZhy{}HKK\PYGZsq{}, \PYGZsq{}S\PYGZhy{}HKK\PYGZsq{}]}
 \PYG{g+go}{  independence        : 0.50}
@@ -4320,7 +4321,7 @@ We may furthermore check that no outranking \sphinxstyleemphasis{circuits} do ap
 \PYG{g+go}{  absorbency          : 0.17}
 \PYG{g+go}{  covered (\PYGZpc{})         : 100.00}
 \PYG{g+go}{  determinateness (\PYGZpc{}) : 58.33}
-\PYG{g+go}{  most credible action(s) = \PYGZob{} \PYGZsq{}S\PYGZhy{}HKK\PYGZsq{}: 0.17, \PYGZsq{}C\PYGZhy{}HKK\PYGZsq{}: 0.17, \PYGZcb{}}
+\PYG{g+go}{  most credible action(s) = \PYGZob{}\PYGZsq{}S\PYGZhy{}HKK\PYGZsq{}: 0.17,\PYGZsq{}C\PYGZhy{}HKK\PYGZsq{}: 0.17\PYGZcb{}}
 \end{sphinxVerbatim}
 
 Recommended best choice for Alice eventually becomes the \sphinxstyleemphasis{Graduate Interpreter} study program at the \sphinxstyleemphasis{Technical High School} Köln (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 16) supported by a \((0.75 + 1)/2.0 \,=\,87.5\%\) (18/24) majority of global criteria significance %
@@ -4329,14 +4330,17 @@ See also the \DUrole{xref,std,std-ref}{Advanced Topic} about computing best choi
 %
 \end{footnote}.
 
-A graphviz drawing of the \sphinxstyleemphasis{skeleton} of the corresponding strict outranking digraph (see Line 2 in \hyperref[\detokenize{tutorial:alicebestchoicedrawing}]{Listing \ref{\detokenize{tutorial:alicebestchoicedrawing}}} below) may finally well illustrate our \sphinxstyleemphasis{best choice recommendation}.
+The strict outranking digraph being actually \sphinxstyleemphasis{transitive} (see \hyperref[\detokenize{tutorial:alicebestchoicedrawing}]{Listing \ref{\detokenize{tutorial:alicebestchoicedrawing}}}), a graphviz drawing of its skeleton, oriented by the previous \sphinxstyleemphasis{best}, respectively \sphinxstyleemphasis{worst} choice, may well illustrate our \sphinxstyleemphasis{choice recommendation}.
 \sphinxSetupCaptionForVerbatim{Drawing the best choice recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:alicebestchoicedrawing}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dgcd} \PYG{o}{=} \PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{dg}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dgcd}\PYG{o}{.}\PYG{n}{computeTransitivityDegree}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ 1.0}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dgcd}\PYG{o}{.}\PYG{n}{closeTransitive}\PYG{p}{(}\PYG{n}{Reverse}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dgcd}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{aliceBestChoice}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+go}{     bestChoice=[\PYGZsq{}I\PYGZhy{}FHK\PYGZsq{}],worstChoice=[\PYGZsq{}S\PYGZhy{}HKK\PYGZsq{},\PYGZsq{}C\PYGZhy{}HKK\PYGZsq{}])}
+\PYG{g+go}{          bestChoice=[\PYGZsq{}I\PYGZhy{}FHK\PYGZsq{},\PYGZsq{}I\PYGZhy{}UHB\PYGZsq{},\PYGZsq{}I\PYGZhy{}USB\PYGZsq{},\PYGZsq{}T\PYGZhy{}FHK\PYGZsq{}],}
+\PYG{g+go}{          worstChoice=[\PYGZsq{}S\PYGZhy{}HKK\PYGZsq{},\PYGZsq{}C\PYGZhy{}HKK\PYGZsq{}])}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Exporting to aliceBestChoice.dot}
 \PYG{g+go}{  dot \PYGZhy{}Grankdir=BT \PYGZhy{}Tpng aliceBestChoice.dot \PYGZhy{}o aliceBestChoice.png}
@@ -4349,9 +4353,9 @@ A graphviz drawing of the \sphinxstyleemphasis{skeleton} of the corresponding st
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{aliceBestChoice}.png}
 \caption{Alice’s best choice recommendation}\label{\detokenize{tutorial:alicebestchoiceimage}}\end{figure}
 
-In \hyperref[\detokenize{tutorial:alicebestchoiceimage}]{Fig.\@ \ref{\detokenize{tutorial:alicebestchoiceimage}}} we notice that the \sphinxstyleemphasis{Graduate Interpreter} studies come first, followed by the \sphinxstyleemphasis{Qualified Translator} studies. Last come the \sphinxstyleemphasis{Chamber of Commerce}’s specialised studies. This confirms again the high significance that Alice attaches to the \sphinxstyleemphasis{attractiveness} of her further studies and of her future profession (see criteria \sphinxstyleemphasis{AS} and \sphinxstyleemphasis{AP} in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}).
+In \hyperref[\detokenize{tutorial:alicebestchoiceimage}]{Fig.\@ \ref{\detokenize{tutorial:alicebestchoiceimage}}} we notice that, except for the \sphinxstyleemphasis{Qualified Translator} studies in Köln, the \sphinxstyleemphasis{Graduate Interpreter} studies come first, followed by the other \sphinxstyleemphasis{Qualified Translator} studies. Last come the \sphinxstyleemphasis{Chamber of Commerce}’s specialised studies. This confirms again the high significance that Alice attaches to the \sphinxstyleemphasis{attractiveness} of her further studies and of her future profession (see criteria \sphinxstyleemphasis{AS} and \sphinxstyleemphasis{AP} in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}).
 
-We may, furthermore, check the pairwise outranking situations observed  between the first and second\sphinxhyphen{}ranked alternatives, ie \sphinxstyleemphasis{Garduate Interpreter} studies in Köln versus \sphinxstyleemphasis{Graduate Interpreter} studies in Saabrücken (see \sphinxstyleemphasis{I\sphinxhyphen{}FHK} and \sphinxstyleemphasis{I\sphinxhyphen{}USB} in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}).
+We may, for instance, check the pairwise outranking situations observed  between the first and second\sphinxhyphen{}ranked alternatives, ie \sphinxstyleemphasis{Garduate Interpreter} studies in Köln versus \sphinxstyleemphasis{Graduate Interpreter} studies in Saabrücken (see \sphinxstyleemphasis{I\sphinxhyphen{}FHK} and \sphinxstyleemphasis{I\sphinxhyphen{}USB} in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{showHTMLPairwiseOutrankings}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{I\PYGZhy{}FHK}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{I\PYGZhy{}USB}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -4366,11 +4370,48 @@ We may, furthermore, check the pairwise outranking situations observed  between 
 
 The \sphinxstyleemphasis{Köln} alternative is performing \sphinxstylestrong{at least as well as} the \sphinxstyleemphasis{Saarbrücken} alternative on all the performance criteria, except the \sphinxstyleemphasis{Annual income} (of significance 2/24). Conversely, the \sphinxstyleemphasis{Saarbrücken} alternative is clearly \sphinxstylestrong{outperformed} from the \sphinxstyleemphasis{geographical} (0/6) as well as from the \sphinxstyleemphasis{financial} perspective (2/6).
 
-Alice considers her four decision objectives as being \sphinxstyleemphasis{more or less} equally important. Here we have, however, allocated \sphinxstyleemphasis{strictly equal} importance weights with \sphinxstyleemphasis{strictly} equi\sphinxhyphen{}significant criteria per objective. How robust is our previous best choice recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be \sphinxstyleemphasis{more or less uncertain} ?
+Let us finally compute, in a similar way, a \sphinxstyleemphasis{ranking} of all the potential study programs with the the help of the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingByChoosingDigraph}} constructor, who computes a conjoint ranking by \sphinxstyleemphasis{best\sphinxhyphen{}choosing} and \sphinxstyleemphasis{last\sphinxhyphen{}choosing} (see \hyperref[\detokenize{tutorial:computerankingbychoosing}]{Listing \ref{\detokenize{tutorial:computerankingbychoosing}}} below).
+\sphinxSetupCaptionForVerbatim{Computing a ranking by choosing}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:computerankingbychoosing}}}
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import}\PYGZbs{}
+\PYG{g+go}{               RankingByChoosingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rbc} \PYG{o}{=} \PYG{n}{RankingByChoosingDigraph}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rbc}\PYG{o}{.}\PYG{n}{showRankingByChoosing}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ Ranking by Choosing and Rejecting}
+\PYG{g+go}{  1st ranked [\PYGZsq{}I\PYGZhy{}FHK\PYGZsq{}]}
+\PYG{g+go}{    2nd ranked [\PYGZsq{}I\PYGZhy{}USB\PYGZsq{}]}
+\PYG{g+go}{      3rd ranked [\PYGZsq{}I\PYGZhy{}UHB\PYGZsq{}]}
+\PYG{g+go}{        4th ranked [\PYGZsq{}T\PYGZhy{}FHK\PYGZsq{}]}
+\PYG{g+go}{          5th ranked [\PYGZsq{}T\PYGZhy{}UD\PYGZsq{}]}
+\PYG{g+go}{          5th last ranked [\PYGZsq{}T\PYGZhy{}UD\PYGZsq{}]}
+\PYG{g+go}{        4th last ranked [\PYGZsq{}T\PYGZhy{}UHB\PYGZsq{}, \PYGZsq{}T\PYGZhy{}USB\PYGZsq{}]}
+\PYG{g+go}{      3rd last ranked [\PYGZsq{}T\PYGZhy{}FHM\PYGZsq{}]}
+\PYG{g+go}{    2nd last ranked [\PYGZsq{}C\PYGZhy{}HKK\PYGZsq{}]}
+\PYG{g+go}{  1st last ranked [\PYGZsq{}S\PYGZhy{}HKK\PYGZsq{}]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rbc}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{aliceRankingByChoosing}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{  Exporting to aliceRankingByChoosing.dot}
+\PYG{g+go}{  dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng aliceRankingByChoosing.dot\PYGZbs{}}
+\PYG{g+go}{                   \PYGZhy{}o aliceRankingByChoosing.png}
+\end{sphinxVerbatim}
+
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=100\sphinxpxdimen]{{aliceRankingByChoosing}.png}
+\caption{Partial ranking by best and last choosing}\label{\detokenize{tutorial:alicerankingbychoosing}}\end{figure}
+
+In \hyperref[\detokenize{tutorial:alicerankingbychoosing}]{Fig.\@ \ref{\detokenize{tutorial:alicerankingbychoosing}}}, we find confirmed that the \sphinxstyleemphasis{Interpreter} studies appear all preferrred to the \sphinxstyleemphasis{Translator} studies. Furthermore, the Interpreter studies in Saarbrücken appear preferred to the same studies in Heidelberg. The Köln alternative is apparently the preferred one of all the \sphinxstyleemphasis{Translater} studies. And, second\sphinxhyphen{}last and last ranked appear the \sphinxstyleemphasis{Foreign Correspondent} and the \sphinxstyleemphasis{Specialised Secretary} studies.
+
+Yet, how \sphinxstyleemphasis{robust} are our findings with respect to potential settings of the decision objectives importance and the performance criteria significance ?
 
 
 \subsection{Robustness analysis}
 \label{\detokenize{tutorial:robustness-analysis}}
+Alice considers her four decision objectives as being \sphinxstyleemphasis{more or less} equally important. Here we have, however, allocated \sphinxstyleemphasis{strictly equal} importance weights with \sphinxstyleemphasis{strictly} equi\sphinxhyphen{}significant criteria per objective. How robust is our previous best choice recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be \sphinxstyleemphasis{more or less uncertain} ?
+
 To answer this question, we will consider the respective criteria significance weights \sphinxstyleemphasis{wj} to be \sphinxstylestrong{triangular random variables} in the range 0 to \sphinxstyleemphasis{2wj} with \sphinxstyleemphasis{mode} = \sphinxstyleemphasis{wj}. We may compute a corresponding \sphinxstylestrong{90\%\sphinxhyphen{}confident outranking digraph} with the help of the \sphinxcode{\sphinxupquote{outrankingDigraphs.ConfidentBipolarOutrankingDigraph}} constructor %
 \begin{footnote}[22]\sphinxAtStartFootnote
 See also the corresponding \DUrole{xref,std,std-ref}{Advanced Topic} in the Digraph3 documentation.
@@ -4379,7 +4420,8 @@ See also the corresponding \DUrole{xref,std,std-ref}{Advanced Topic} in the Digr
 \sphinxSetupCaptionForVerbatim{The 90\% confident outranking digraph}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:aliceconfidentdigraph}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{ConfidentOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import}\PYGZbs{}
+\PYG{g+go}{         ConfidentBipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cdg} \PYG{o}{=} \PYG{n}{ConfidentBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYGZbs{}
 \PYG{g+go}{                    distribution=\PYGZsq{}triangular\PYGZsq{},confidence=90.0)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cdg}
@@ -4411,7 +4453,8 @@ Concerning now a 90\%\sphinxhyphen{}\sphinxstyleemphasis{confident} best choice 
 \PYG{g+go}{  (in decreasing order of determinateness)}
 \PYG{g+go}{  Credibility domain: [\PYGZhy{}1.00,1.00]}
 \PYG{g+go}{  === \PYGZgt{}\PYGZgt{} potential best choice(s)}
-\PYG{g+go}{  choice              : [\PYGZsq{}I\PYGZhy{}FHK\PYGZsq{},\PYGZsq{}I\PYGZhy{}UHB\PYGZsq{},\PYGZsq{}I\PYGZhy{}USB\PYGZsq{},\PYGZsq{}T\PYGZhy{}FHK\PYGZsq{},\PYGZsq{}T\PYGZhy{}FHM\PYGZsq{}]}
+\PYG{g+go}{  choice              : [\PYGZsq{}I\PYGZhy{}FHK\PYGZsq{},\PYGZsq{}I\PYGZhy{}UHB\PYGZsq{},\PYGZsq{}I\PYGZhy{}USB\PYGZsq{},}
+\PYG{g+go}{                         \PYGZsq{}T\PYGZhy{}FHK\PYGZsq{},\PYGZsq{}T\PYGZhy{}FHM\PYGZsq{}]}
 \PYG{g+go}{   independence        : 0.00}
 \PYG{g+go}{   dominance           : 0.42}
 \PYG{g+go}{   absorbency          : 0.00}
@@ -4420,7 +4463,7 @@ Concerning now a 90\%\sphinxhyphen{}\sphinxstyleemphasis{confident} best choice 
 \PYG{g+go}{   \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZsq{}I\PYGZhy{}FHK\PYGZsq{}: 0.75, \PYGZcb{}}
 \end{sphinxVerbatim}
 
-The \sphinxstyleemphasis{Graduate Interpreter} studies in Köln remain indeed a 90\%\sphinxhyphen{}confident \sphinxstyleemphasis{Condorcet} winner (Line 2). Hence, the same study program also remains our 90\%\sphinxhyphen{}confident best choice recommendation supported by a continual 18/24 (87.5\%) majority of the global criteria significance (see Lines 9 and 15).
+The \sphinxstyleemphasis{Graduate Interpreter} studies in Köln remain indeed a 90\%\sphinxhyphen{}confident \sphinxstyleemphasis{Condorcet} winner (Line 2). Hence, the same study program also remains our 90\%\sphinxhyphen{}confident most credible best choice recommendation supported by a continual 18/24 (87.5\%) majority of the global criteria significance (see Lines 9 and 15).
 
 When previously comparing the two best\sphinxhyphen{}ranked study programs (see \hyperref[\detokenize{tutorial:pairwisecomparison}]{Fig.\@ \ref{\detokenize{tutorial:pairwisecomparison}}}), we have observed that \sphinxstyleemphasis{I\sphinxhyphen{}FHK} actually positively outranks \sphinxstyleemphasis{I\sphinxhyphen{}USB} on all four decision objectives. When admitting equi\sphinxhyphen{}significant criteria significances per objective, this outranking situation is hence valid independently of the importance weights Alice may allocate to each of her decision objectives.
 
@@ -4450,20 +4493,16 @@ See also the corresponding \DUrole{xref,std,std-ref}{Advanced Topic} in the Digr
 
 We keep 28 out the 67 standard outranking situations, which leads to an \sphinxstylestrong{oppositeness degree} of (1.0 \sphinxhyphen{} 28/67) = 58.21\% (\hyperref[\detokenize{tutorial:aliceunopposedoutrankings}]{Listing \ref{\detokenize{tutorial:aliceunopposedoutrankings}}} Line 10). Remarkable furthermore is that this unopposed outranking digraph \sphinxstyleemphasis{uop} is actually \sphinxstyleemphasis{transitive}, i.e. modelling a \sphinxstyleemphasis{partial ranking} of the study programs (Line 14).
 
-We may hence make use of the \sphinxcode{\sphinxupquote{exportGraphViz}} method of the \sphinxcode{\sphinxupquote{transitiveDigraphs.TransitiveDigraph}} class for drawing the corresponding topological sorting diagram.
+We may hence make use of the \sphinxcode{\sphinxupquote{exportGraphViz}} method of the \sphinxcode{\sphinxupquote{transitiveDigraphs.TransitiveDigraph}} class for drawing the corresponding partial ranking.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k}{import} \PYG{n}{TransitiveDigraph}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{TransitiveDigraph}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{uop}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{AliceChoice\PYGZus{}unopposed}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{TransitiveDigraph}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{uop}\PYG{p}{,}\PYGZbs{}
+\PYG{g+go}{                                \PYGZsq{}AliceChoice\PYGZus{}unopposed\PYGZsq{})}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{ Exporting to AliceChoice\PYGZus{}unopposed.dot}
-\PYG{g+go}{  0 \PYGZob{} rank = 0; I\PYGZus{}FHK; \PYGZcb{}}
-\PYG{g+go}{  1 \PYGZob{} rank = 1; I\PYGZus{}USB; T\PYGZus{}FHK; \PYGZcb{}}
-\PYG{g+go}{  2 \PYGZob{} rank = 2; T\PYGZus{}UD; I\PYGZus{}UHB; C\PYGZus{}HKK; \PYGZcb{}}
-\PYG{g+go}{  3 \PYGZob{} rank = 3; T\PYGZus{}USB; S\PYGZus{}HKK; \PYGZcb{}}
-\PYG{g+go}{  4 \PYGZob{} rank = 4; T\PYGZus{}UHB; \PYGZcb{}}
-\PYG{g+go}{  5 \PYGZob{} rank = 5; T\PYGZus{}FHM; \PYGZcb{}}
-\PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng AliceChoice\PYGZus{}unopposed.dot \PYGZhy{}o AliceChoice\PYGZus{}unopposed.png}
+\PYG{g+go}{  Exporting to AliceChoice\PYGZus{}unopposed.dot}
+\PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng AliceChoice\PYGZus{}unopposed.dot\PYGZbs{}}
+\PYG{g+go}{                  \PYGZhy{}o AliceChoice\PYGZus{}unopposed.png}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]

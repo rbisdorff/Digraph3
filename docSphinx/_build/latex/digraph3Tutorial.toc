@@ -58,48 +58,48 @@
 \contentsline {subsection}{\numberline {8.1}The decision problem}{89}{subsection.8.1}%
 \contentsline {subsection}{\numberline {8.2}The performance tableau}{90}{subsection.8.2}%
 \contentsline {subsection}{\numberline {8.3}Building a best choice recommendation}{93}{subsection.8.3}%
-\contentsline {subsection}{\numberline {8.4}Robustness analysis}{97}{subsection.8.4}%
-\contentsline {section}{\numberline {9}Rating with multiple incommensurable criteria}{101}{section.9}%
-\contentsline {subsection}{\numberline {9.1}K\sphinxhyphen {}sorting on a single criterion}{101}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Quantiles sorting with multiple criteria}{102}{subsection.9.2}%
-\contentsline {subsection}{\numberline {9.3}Ranking big performance tableaux}{106}{subsection.9.3}%
-\contentsline {section}{\numberline {10}HPC ranking with big outranking digraphs}{109}{section.10}%
-\contentsline {subsection}{\numberline {10.1}C\sphinxhyphen {}compiled Python modules}{109}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}Big Data performance tableaux}{110}{subsection.10.2}%
-\contentsline {subsection}{\numberline {10.3}C\sphinxhyphen {}implemented integer\sphinxhyphen {}valued outranking digraphs}{111}{subsection.10.3}%
-\contentsline {subsection}{\numberline {10.4}The sparse outranking digraph implementation}{113}{subsection.10.4}%
-\contentsline {subsection}{\numberline {10.5}Ranking big sets of decision alternatives}{117}{subsection.10.5}%
-\contentsline {subsection}{\numberline {10.6}HPC quantiles ranking records}{119}{subsection.10.6}%
-\contentsline {section}{\numberline {11}Rating with learned quantile norms}{125}{section.11}%
-\contentsline {subsection}{\numberline {11.1}Introduction}{125}{subsection.11.1}%
-\contentsline {subsection}{\numberline {11.2}Incremental learning of historical performance quantiles}{126}{subsection.11.2}%
-\contentsline {subsection}{\numberline {11.3}Rating new performances with quantile norms}{129}{subsection.11.3}%
-\contentsline {section}{\numberline {12}Working with the \sphinxstyleliteralintitle {\sphinxupquote {graphs}} module}{136}{section.12}%
-\contentsline {subsection}{\numberline {12.1}Structure of a \sphinxstyleliteralintitle {\sphinxupquote {Graph}} object}{137}{subsection.12.1}%
-\contentsline {subsection}{\numberline {12.2}q\sphinxhyphen {}coloring of a graph}{140}{subsection.12.2}%
-\contentsline {subsection}{\numberline {12.3}MIS and clique enumeration}{141}{subsection.12.3}%
-\contentsline {subsection}{\numberline {12.4}Line graphs and maximal matchings}{142}{subsection.12.4}%
-\contentsline {subsection}{\numberline {12.5}Grids and the Ising model}{145}{subsection.12.5}%
-\contentsline {subsection}{\numberline {12.6}Simulating Metropolis random walks}{146}{subsection.12.6}%
-\contentsline {section}{\numberline {13}Computing the non isomorphic MISs of the 12\sphinxhyphen {}cycle graph}{148}{section.13}%
-\contentsline {subsection}{\numberline {13.1}Introduction}{148}{subsection.13.1}%
-\contentsline {subsection}{\numberline {13.2}Computing the maximal independent sets (MISs)}{149}{subsection.13.2}%
-\contentsline {subsection}{\numberline {13.3}Computing the automorphism group}{151}{subsection.13.3}%
-\contentsline {subsection}{\numberline {13.4}Computing the isomorphic MISs}{151}{subsection.13.4}%
-\contentsline {section}{\numberline {14}On computing digraph kernels}{153}{section.14}%
-\contentsline {subsection}{\numberline {14.1}What is a graph kernel ?}{153}{subsection.14.1}%
-\contentsline {subsection}{\numberline {14.2}Initial and terminal kernels}{158}{subsection.14.2}%
-\contentsline {subsection}{\numberline {14.3}Kernels in lateralized digraphs}{163}{subsection.14.3}%
-\contentsline {subsection}{\numberline {14.4}Computing good and bad choice recommendations}{166}{subsection.14.4}%
-\contentsline {subsection}{\numberline {14.5}Tractability}{170}{subsection.14.5}%
-\contentsline {section}{\numberline {15}About split, interval and permutation graphs}{172}{section.15}%
-\contentsline {subsection}{\numberline {15.1}A multiply \sphinxstyleemphasis {perfect} graph}{172}{subsection.15.1}%
-\contentsline {subsection}{\numberline {15.2}Who is the liar ?}{174}{subsection.15.2}%
-\contentsline {subsection}{\numberline {15.3}Generating permutation graphs}{177}{subsection.15.3}%
-\contentsline {subsection}{\numberline {15.4}Recognizing permutation graphs}{180}{subsection.15.4}%
-\contentsline {section}{\numberline {16}On tree graphs and graph forests}{185}{section.16}%
-\contentsline {subsection}{\numberline {16.1}Generating random tree graphs}{186}{subsection.16.1}%
-\contentsline {subsection}{\numberline {16.2}Recognizing tree graphs}{189}{subsection.16.2}%
-\contentsline {subsection}{\numberline {16.3}Spanning trees and forests}{190}{subsection.16.3}%
-\contentsline {subsection}{\numberline {16.4}Maximum determined spanning forests}{192}{subsection.16.4}%
-\contentsline {section}{References}{194}{figure.75}%
+\contentsline {subsection}{\numberline {8.4}Robustness analysis}{100}{subsection.8.4}%
+\contentsline {section}{\numberline {9}Rating with multiple incommensurable criteria}{103}{section.9}%
+\contentsline {subsection}{\numberline {9.1}K\sphinxhyphen {}sorting on a single criterion}{103}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Quantiles sorting with multiple criteria}{104}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Ranking big performance tableaux}{108}{subsection.9.3}%
+\contentsline {section}{\numberline {10}HPC ranking with big outranking digraphs}{111}{section.10}%
+\contentsline {subsection}{\numberline {10.1}C\sphinxhyphen {}compiled Python modules}{111}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Big Data performance tableaux}{112}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}C\sphinxhyphen {}implemented integer\sphinxhyphen {}valued outranking digraphs}{113}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}The sparse outranking digraph implementation}{115}{subsection.10.4}%
+\contentsline {subsection}{\numberline {10.5}Ranking big sets of decision alternatives}{119}{subsection.10.5}%
+\contentsline {subsection}{\numberline {10.6}HPC quantiles ranking records}{121}{subsection.10.6}%
+\contentsline {section}{\numberline {11}Rating with learned quantile norms}{127}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Introduction}{127}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Incremental learning of historical performance quantiles}{128}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Rating new performances with quantile norms}{131}{subsection.11.3}%
+\contentsline {section}{\numberline {12}Working with the \sphinxstyleliteralintitle {\sphinxupquote {graphs}} module}{138}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Structure of a \sphinxstyleliteralintitle {\sphinxupquote {Graph}} object}{139}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}q\sphinxhyphen {}coloring of a graph}{142}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}MIS and clique enumeration}{143}{subsection.12.3}%
+\contentsline {subsection}{\numberline {12.4}Line graphs and maximal matchings}{144}{subsection.12.4}%
+\contentsline {subsection}{\numberline {12.5}Grids and the Ising model}{147}{subsection.12.5}%
+\contentsline {subsection}{\numberline {12.6}Simulating Metropolis random walks}{148}{subsection.12.6}%
+\contentsline {section}{\numberline {13}Computing the non isomorphic MISs of the 12\sphinxhyphen {}cycle graph}{150}{section.13}%
+\contentsline {subsection}{\numberline {13.1}Introduction}{150}{subsection.13.1}%
+\contentsline {subsection}{\numberline {13.2}Computing the maximal independent sets (MISs)}{151}{subsection.13.2}%
+\contentsline {subsection}{\numberline {13.3}Computing the automorphism group}{153}{subsection.13.3}%
+\contentsline {subsection}{\numberline {13.4}Computing the isomorphic MISs}{153}{subsection.13.4}%
+\contentsline {section}{\numberline {14}On computing digraph kernels}{155}{section.14}%
+\contentsline {subsection}{\numberline {14.1}What is a graph kernel ?}{155}{subsection.14.1}%
+\contentsline {subsection}{\numberline {14.2}Initial and terminal kernels}{160}{subsection.14.2}%
+\contentsline {subsection}{\numberline {14.3}Kernels in lateralized digraphs}{165}{subsection.14.3}%
+\contentsline {subsection}{\numberline {14.4}Computing good and bad choice recommendations}{168}{subsection.14.4}%
+\contentsline {subsection}{\numberline {14.5}Tractability}{172}{subsection.14.5}%
+\contentsline {section}{\numberline {15}About split, interval and permutation graphs}{174}{section.15}%
+\contentsline {subsection}{\numberline {15.1}A multiply \sphinxstyleemphasis {perfect} graph}{174}{subsection.15.1}%
+\contentsline {subsection}{\numberline {15.2}Who is the liar ?}{176}{subsection.15.2}%
+\contentsline {subsection}{\numberline {15.3}Generating permutation graphs}{179}{subsection.15.3}%
+\contentsline {subsection}{\numberline {15.4}Recognizing permutation graphs}{182}{subsection.15.4}%
+\contentsline {section}{\numberline {16}On tree graphs and graph forests}{187}{section.16}%
+\contentsline {subsection}{\numberline {16.1}Generating random tree graphs}{188}{subsection.16.1}%
+\contentsline {subsection}{\numberline {16.2}Recognizing tree graphs}{191}{subsection.16.2}%
+\contentsline {subsection}{\numberline {16.3}Spanning trees and forests}{192}{subsection.16.3}%
+\contentsline {subsection}{\numberline {16.4}Maximum determined spanning forests}{194}{subsection.16.4}%
+\contentsline {section}{References}{196}{figure.76}%

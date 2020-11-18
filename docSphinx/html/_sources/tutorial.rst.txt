@@ -3257,7 +3257,8 @@ It is worthwhile noticing in :numref:`aliceCriteria` above that, on her subjecti
 
 In the following *heatmap view*, we may now consult Alice's performance evaluations.
 
-   >>> t.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True,ndigits=0)
+   >>> t.showHTMLPerformanceHeatmap(
+          colorLevels=5,Correlations=True,ndigits=0)
 
 .. figure:: aliceHeatmap.png
    :name: aliceHeatmap
@@ -3360,14 +3361,14 @@ We may furthermore check that no outranking *circuits* do appear (see :numref:`a
     (in decreasing order of determinateness)   
     Credibility domain: [-1.00,1.00]
     === >> potential best choice(s)
-    choice              : ['I-FHK', 'I-UHB', 'I-USB', 'T-FHK']
+    choice              : ['I-FHK','I-UHB','I-USB','T-FHK']
      independence        : 0.17
      dominance           : 0.08
      absorbency          : -0.83
      covering (%)        : 62.50
      determinateness (%) : 68.75
-     most credible action(s) = { 'I-FHK': 0.75, 'T-FHK': 0.17,
-                                 'I-USB': 0.17, 'I-UHB': 0.17, }
+     most credible action(s) = {'I-FHK': 0.75,'T-FHK': 0.17,
+                                'I-USB': 0.17,'I-UHB': 0.17}
     === >> potential worst choice(s) 
     choice              : ['C-HKK', 'S-HKK']
      independence        : 0.50
@@ -3375,11 +3376,11 @@ We may furthermore check that no outranking *circuits* do appear (see :numref:`a
      absorbency          : 0.17
      covered (%)         : 100.00
      determinateness (%) : 58.33
-     most credible action(s) = { 'S-HKK': 0.17, 'C-HKK': 0.17, }
+     most credible action(s) = {'S-HKK': 0.17,'C-HKK': 0.17}
 
 Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High School* Köln (see :numref:`aliceBestChoice` Line 16) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
 
-A graphviz drawing of the *skeleton* of the corresponding strict outranking digraph (see Line 2 in :numref:`aliceBestChoiceDrawing` below) may finally well illustrate our *best choice recommendation*.
+The strict outranking digraph being actually *transitive* (see :numref:`aliceBestChoiceDrawing`), a graphviz drawing of its skeleton, oriented by the previous *best*, respectively *worst* choice, may well illustrate our *choice recommendation*.
 
 .. code-block:: pycon
    :name: aliceBestChoiceDrawing
@@ -3387,9 +3388,12 @@ A graphviz drawing of the *skeleton* of the corresponding strict outranking digr
    :caption: Drawing the best choice recommendation 
 
    >>> dgcd = ~(-dg)
+   >>> dgcd.computeTransitivityDegree()
+    1.0
    >>> dgcd.closeTransitive(Reverse=True)
    >>> dgcd.exportGraphViz('aliceBestChoice',
-        bestChoice=['I-FHK'],worstChoice=['S-HKK','C-HKK'])
+             bestChoice=['I-FHK','I-UHB','I-USB','T-FHK'],
+	     worstChoice=['S-HKK','C-HKK'])
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to aliceBestChoice.dot
      dot -Grankdir=BT -Tpng aliceBestChoice.dot -o aliceBestChoice.png
@@ -3401,9 +3405,9 @@ A graphviz drawing of the *skeleton* of the corresponding strict outranking digr
 
    Alice's best choice recommendation	   
 
-In :numref:`aliceBestChoiceImage` we notice that the *Graduate Interpreter* studies come first, followed by the *Qualified Translator* studies. Last come the *Chamber of Commerce*'s specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
+In :numref:`aliceBestChoiceImage` we notice that, except for the *Qualified Translator* studies in Köln, the *Graduate Interpreter* studies come first, followed by the other *Qualified Translator* studies. Last come the *Chamber of Commerce*'s specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
 
-We may, furthermore, check the pairwise outranking situations observed  between the first and second-ranked alternatives, ie *Garduate Interpreter* studies in Köln versus *Graduate Interpreter* studies in Saabrücken (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
+We may, for instance, check the pairwise outranking situations observed  between the first and second-ranked alternatives, ie *Garduate Interpreter* studies in Köln versus *Graduate Interpreter* studies in Saabrücken (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
 
    >>> dg.showHTMLPairwiseOutrankings('I-FHK','I-USB')
 
@@ -3416,10 +3420,49 @@ We may, furthermore, check the pairwise outranking situations observed  between 
 
 The *Köln* alternative is performing **at least as well as** the *Saarbrücken* alternative on all the performance criteria, except the *Annual income* (of significance 2/24). Conversely, the *Saarbrücken* alternative is clearly **outperformed** from the *geographical* (0/6) as well as from the *financial* perspective (2/6).
 
-Alice considers her four decision objectives as being *more or less* equally important. Here we have, however, allocated *strictly equal* importance weights with *strictly* equi-significant criteria per objective. How robust is our previous best choice recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be *more or less uncertain* ?
+Let us finally compute, in a similar way, a *ranking* of all the potential study programs with the the help of the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor, who computes a conjoint ranking by *best-choosing* and *last-choosing* (see :numref:`computeRankingByChoosing` below).
 
+.. code-block:: pycon
+   :name: computeRankingByChoosing
+   :linenos:
+   :caption: Computing a ranking by choosing 
+
+   >>> from transitiveDigraphs import\
+                  RankingByChoosingDigraph
+   >>> rbc = RankingByChoosingDigraph(g)
+   >>> rbc.showRankingByChoosing()
+    Ranking by Choosing and Rejecting
+     1st ranked ['I-FHK'] 
+       2nd ranked ['I-USB']
+	 3rd ranked ['I-UHB']
+	   4th ranked ['T-FHK']
+	     5th ranked ['T-UD']
+	     5th last ranked ['T-UD']
+	   4th last ranked ['T-UHB', 'T-USB']
+	 3rd last ranked ['T-FHM']
+       2nd last ranked ['C-HKK']
+     1st last ranked ['S-HKK']
+   >>> rbc.exportGraphViz('aliceRankingByChoosing')
+    *---- exporting a dot file for GraphViz tools ---------*
+     Exporting to aliceRankingByChoosing.dot
+     dot -Grankdir=TB -Tpng aliceRankingByChoosing.dot\
+		      -o aliceRankingByChoosing.png
+
+.. figure:: aliceRankingByChoosing.png
+   :name: aliceRankingByChoosing
+   :width: 100 px
+   :align: center
+
+   Partial ranking by best and last choosing	   
+
+In :numref:`aliceRankingByChoosing`, we find confirmed that the *Interpreter* studies appear all preferrred to the *Translator* studies. Furthermore, the Interpreter studies in Saarbrücken appear preferred to the same studies in Heidelberg. The Köln alternative is apparently the preferred one of all the *Translater* studies. And, second-last and last ranked appear the *Foreign Correspondent* and the *Specialised Secretary* studies.
+
+Yet, how *robust* are our findings with respect to potential settings of the decision objectives importance and the performance criteria significance ?
+		
 Robustness analysis
 ...................
+
+Alice considers her four decision objectives as being *more or less* equally important. Here we have, however, allocated *strictly equal* importance weights with *strictly* equi-significant criteria per objective. How robust is our previous best choice recommendation when, now, we would consider the importance of the objectives and, hence, the significance of the respective performance criteria to be *more or less uncertain* ?
 
 To answer this question, we will consider the respective criteria significance weights *wj* to be **triangular random variables** in the range 0 to *2wj* with *mode* = *wj*. We may compute a corresponding **90%-confident outranking digraph** with the help of the :py:class:`outrankingDigraphs.ConfidentBipolarOutrankingDigraph` constructor [22]_.
 
@@ -3428,7 +3471,8 @@ To answer this question, we will consider the respective criteria significance w
    :linenos:
    :caption: The 90% confident outranking digraph
 
-   >>> from outrankingDigraphs import ConfidentOutrankingDigraph
+   >>> from outrankingDigraphs import\
+            ConfidentBipolarOutrankingDigraph
    >>> cdg = ConfidentBipolarOutrankingDigraph(t,\
 		       distribution='triangular',confidence=90.0)
    >>> cdg
@@ -3462,7 +3506,8 @@ Concerning now a 90%-*confident* best choice recommendation, we are lucky (see :
      (in decreasing order of determinateness)   
      Credibility domain: [-1.00,1.00]
      === >> potential best choice(s)
-     choice              : ['I-FHK','I-UHB','I-USB','T-FHK','T-FHM']
+     choice              : ['I-FHK','I-UHB','I-USB',
+                            'T-FHK','T-FHM']
       independence        : 0.00
       dominance           : 0.42
       absorbency          : 0.00
@@ -3470,7 +3515,7 @@ Concerning now a 90%-*confident* best choice recommendation, we are lucky (see :
       determinateness (%) : 61.25
       - most credible action(s) = { 'I-FHK': 0.75, }
 
-The *Graduate Interpreter* studies in Köln remain indeed a 90%-confident *Condorcet* winner (Line 2). Hence, the same study program also remains our 90%-confident best choice recommendation supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9 and 15).
+The *Graduate Interpreter* studies in Köln remain indeed a 90%-confident *Condorcet* winner (Line 2). Hence, the same study program also remains our 90%-confident most credible best choice recommendation supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9 and 15).
 
 When previously comparing the two best-ranked study programs (see :numref:`pairwiseComparison`), we have observed that *I-FHK* actually positively outranks *I-USB* on all four decision objectives. When admitting equi-significant criteria significances per objective, this outranking situation is hence valid independently of the importance weights Alice may allocate to each of her decision objectives. 
 
@@ -3498,19 +3543,15 @@ We may compute these **unopposed** outranking situations [25]_ with help of the 
 
 We keep 28 out the 67 standard outranking situations, which leads to an **oppositeness degree** of (1.0 - 28/67) = 58.21% (:numref:`aliceUnopposedOutrankings` Line 10). Remarkable furthermore is that this unopposed outranking digraph *uop* is actually *transitive*, i.e. modelling a *partial ranking* of the study programs (Line 14).
 
-We may hence make use of the :code:`exportGraphViz` method of the :py:class:`transitiveDigraphs.TransitiveDigraph` class for drawing the corresponding topological sorting diagram.
+We may hence make use of the :code:`exportGraphViz` method of the :py:class:`transitiveDigraphs.TransitiveDigraph` class for drawing the corresponding partial ranking.
 
     >>> from transitiveDigraphs import TransitiveDigraph
-    >>> TransitiveDigraph.exportGraphViz(uop,'AliceChoice_unopposed')
+    >>> TransitiveDigraph.exportGraphViz(uop,\
+                                    'AliceChoice_unopposed')
      *---- exporting a dot file for GraphViz tools ---------*
-     Exporting to AliceChoice_unopposed.dot
-      0 { rank = 0; I_FHK; }
-      1 { rank = 1; I_USB; T_FHK; }
-      2 { rank = 2; T_UD; I_UHB; C_HKK; }
-      3 { rank = 3; T_USB; S_HKK; }
-      4 { rank = 4; T_UHB; }
-      5 { rank = 5; T_FHM; }
-     dot -Grankdir=TB -Tpng AliceChoice_unopposed.dot -o AliceChoice_unopposed.png
+      Exporting to AliceChoice_unopposed.dot
+     dot -Grankdir=TB -Tpng AliceChoice_unopposed.dot\
+                      -o AliceChoice_unopposed.png
 
 .. figure:: AliceChoice_unopposed.png
    :name: AliceChoice_unopposed

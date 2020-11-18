@@ -1,4 +1,9 @@
-# Saved performance Tableau: 
+###################################
+# Digraph3 documentation
+# Alice's best choice: Case study
+# (C) R. Bisdorff Nov 2020
+# Digraph3/examples/AliceChoice.py
+##################################3
 from decimal import Decimal
 from collections import OrderedDict
 actions = OrderedDict([
@@ -98,7 +103,7 @@ criteria = OrderedDict([
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.01')), 'pref': (Decimal('0.0'), Decimal('0.05'))},
 'scale': (0.0, 2000.0),
 'weight': 3,
-'comment': 'Geographical aspect: measured in x * 1000',
+'comment': 'Geographical aspect: measured in x / 1000',
 }),
 ('AS', {
 'objective': 'LEA',
@@ -148,7 +153,7 @@ criteria = OrderedDict([
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('1.00'), Decimal('0.0'))},
 'scale': (0.0, 50.0),
 'weight': 2,
-'comment': 'Professional aspect measured in  x * 1000 Euros',
+'comment': 'Professional aspect measured in  x / 1000 Euros',
 }),
 ('AP', {
 'objective': 'PRA',
