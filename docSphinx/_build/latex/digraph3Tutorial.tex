@@ -1360,23 +1360,23 @@ With the same \sphinxstyleemphasis{bipolar} \sphinxhyphen{}\sphinxstyleemphasis{
 \PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} cdg.computeRankingByChoosing()}
 \PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} cdg.showRankingByChoosing()}
 \PYG{g+go}{  Ranking by Choosing and Rejecting}
-\PYG{g+go}{   1st first ranked [\PYGZsq{}a06\PYGZsq{}] (475.29)}
-\PYG{g+go}{     2nd first ranked [\PYGZsq{}a11\PYGZsq{}] (349.33)}
-\PYG{g+go}{       3rd first ranked [\PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}] (278.44)}
-\PYG{g+go}{         4th first ranked [\PYGZsq{}a03\PYGZsq{}] (265.43)}
-\PYG{g+go}{           5th first ranked [\PYGZsq{}a01\PYGZsq{}] (145.20)}
-\PYG{g+go}{             6th first ranked [\PYGZsq{}a13\PYGZsq{}] (104.00)}
-\PYG{g+go}{               7th first ranked [\PYGZsq{}a04\PYGZsq{}] (16.00)}
-\PYG{g+go}{               7th last ranked [\PYGZsq{}a12\PYGZsq{}] (16.00)}
-\PYG{g+go}{             6th last ranked [\PYGZsq{}a14\PYGZsq{}] (104.67)}
-\PYG{g+go}{           5th last ranked [\PYGZsq{}a15\PYGZsq{}] (130.00)}
-\PYG{g+go}{         4th last ranked [\PYGZsq{}a09\PYGZsq{}] (170.57)}
-\PYG{g+go}{       3rd last ranked [\PYGZsq{}a10\PYGZsq{}] (353.40)}
-\PYG{g+go}{     2nd last ranked [\PYGZsq{}a05\PYGZsq{}] (415.83)}
-\PYG{g+go}{   1st last ranked [\PYGZsq{}a02\PYGZsq{}] (682.86)}
+\PYG{g+go}{   1st first ranked [\PYGZsq{}a06\PYGZsq{}]}
+\PYG{g+go}{     2nd first ranked [\PYGZsq{}a11\PYGZsq{}]}
+\PYG{g+go}{       3rd first ranked [\PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a08\PYGZsq{}]}
+\PYG{g+go}{         4th first ranked [\PYGZsq{}a03\PYGZsq{}]}
+\PYG{g+go}{           5th first ranked [\PYGZsq{}a01\PYGZsq{}]}
+\PYG{g+go}{             6th first ranked [\PYGZsq{}a13\PYGZsq{}]}
+\PYG{g+go}{               7th first ranked [\PYGZsq{}a04\PYGZsq{}]}
+\PYG{g+go}{               7th last ranked [\PYGZsq{}a12\PYGZsq{}]}
+\PYG{g+go}{             6th last ranked [\PYGZsq{}a14\PYGZsq{}]}
+\PYG{g+go}{           5th last ranked [\PYGZsq{}a15\PYGZsq{}]}
+\PYG{g+go}{         4th last ranked [\PYGZsq{}a09\PYGZsq{}]}
+\PYG{g+go}{       3rd last ranked [\PYGZsq{}a10\PYGZsq{}]}
+\PYG{g+go}{     2nd last ranked [\PYGZsq{}a05\PYGZsq{}]}
+\PYG{g+go}{   1st last ranked [\PYGZsq{}a02\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-Before showing the \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} result, we have to compute the iterated bipolar selection procedure (see \hyperref[\detokenize{tutorial:rankingbychoosing}]{Listing \ref{\detokenize{tutorial:rankingbychoosing}}} Line 2). The first selection concerns \sphinxstyleemphasis{a06} (first) and \sphinxstyleemphasis{a02} (last), followed by \sphinxstyleemphasis{a11} (first) opposed to \sphinxstyleemphasis{a05} (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely \sphinxstyleemphasis{{[}a04, a12{]}} (see Lines 13\sphinxhyphen{}14). The bracketed numbers, following the reiterated \sphinxstyleemphasis{first ranked} and \sphinxstyleemphasis{last ranked} candidates, indicate the average majority margin with which the \sphinxstyleemphasis{i}\sphinxhyphen{}th \sphinxstyleemphasis{first ranked} candidate(s), respectively the \sphinxstyleemphasis{i}\sphinxhyphen{}th \sphinxstyleemphasis{last ranked} candidate, is beating, resp. is beaten by, the remaining candidates at step \sphinxstyleemphasis{i}.
+Before showing the \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} result, we have to compute the iterated bipolar selection procedure (see \hyperref[\detokenize{tutorial:rankingbychoosing}]{Listing \ref{\detokenize{tutorial:rankingbychoosing}}} Line 2). The first selection concerns \sphinxstyleemphasis{a06} (first) and \sphinxstyleemphasis{a02} (last), followed by \sphinxstyleemphasis{a11} (first) opposed to \sphinxstyleemphasis{a05} (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely \sphinxstyleemphasis{{[}a04, a12{]}} (see Lines 13\sphinxhyphen{}14).
 
 Notice furthermore the first ranked candidates at iteration step 3 (see \hyperref[\detokenize{tutorial:rankingbychoosing}]{Listing \ref{\detokenize{tutorial:rankingbychoosing}}} Line 9), namely the pair \sphinxstyleemphasis{{[}a07, a08{]}}. Both candidates represent indeed conjointly the \sphinxstyleemphasis{first ranked} choice. We obtain here hence a \sphinxstyleemphasis{weak ranking}, i.e. a ranking with a tie.
 
@@ -2584,15 +2584,15 @@ The \sphinxstyleemphasis{Copeland} scores deliver actually only a unique \sphinx
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wcop} \PYG{o}{=} \PYG{n}{WeakCopelandOrder}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wcop}\PYG{o}{.}\PYG{n}{showRankingByChoosing}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Ranking by Choosing and Rejecting}
-\PYG{g+go}{  1st ranked [\PYGZsq{}a5\PYGZsq{}] (1.00)}
-\PYG{g+go}{    2nd ranked [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}] (1.00)}
-\PYG{g+go}{      3rd ranked [\PYGZsq{}a8\PYGZsq{}] (1.00)}
-\PYG{g+go}{      3rd last ranked [\PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}] (1.00)}
-\PYG{g+go}{    2nd last ranked [\PYGZsq{}a3\PYGZsq{}] (1.00)}
-\PYG{g+go}{  1st last ranked [\PYGZsq{}a2\PYGZsq{}] (1.00)}
+\PYG{g+go}{  1st ranked [\PYGZsq{}a5\PYGZsq{}]}
+\PYG{g+go}{    2nd ranked [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}]}
+\PYG{g+go}{      3rd ranked [\PYGZsq{}a8\PYGZsq{}]}
+\PYG{g+go}{      3rd last ranked [\PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}]}
+\PYG{g+go}{    2nd last ranked [\PYGZsq{}a3\PYGZsq{}]}
+\PYG{g+go}{  1st last ranked [\PYGZsq{}a2\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-We recover in \hyperref[\detokenize{tutorial:weakcopelandranking}]{Listing \ref{\detokenize{tutorial:weakcopelandranking}}} above, the ranking with ties delivered by the \sphinxstyleemphasis{Copeland} scores (see \hyperref[\detokenize{tutorial:copelandranking}]{Listing \ref{\detokenize{tutorial:copelandranking}}}). The bracketed numbers indicate that this weak ranking is certainly valid. We may draw its corresponding \sphinxstyleemphasis{Hasse} diagram (see \hyperref[\detokenize{tutorial:weakcopelandrankingdrawing}]{Listing \ref{\detokenize{tutorial:weakcopelandrankingdrawing}}}).
+We recover in \hyperref[\detokenize{tutorial:weakcopelandranking}]{Listing \ref{\detokenize{tutorial:weakcopelandranking}}} above, the ranking with ties delivered by the \sphinxstyleemphasis{Copeland} scores (see \hyperref[\detokenize{tutorial:copelandranking}]{Listing \ref{\detokenize{tutorial:copelandranking}}}). We may draw its corresponding \sphinxstyleemphasis{Hasse} diagram (see \hyperref[\detokenize{tutorial:weakcopelandrankingdrawing}]{Listing \ref{\detokenize{tutorial:weakcopelandrankingdrawing}}}).
 \sphinxSetupCaptionForVerbatim{Drawing a weak \sphinxstyleemphasis{Copeland} ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:weakcopelandrankingdrawing}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]

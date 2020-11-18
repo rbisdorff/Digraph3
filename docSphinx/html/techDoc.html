@@ -2550,8 +2550,9 @@ See the <a class="reference internal" href="#digraphs.Digraph.readPerrinMisset" 
 
 <dl class="py method">
 <dt id="digraphs.Digraph.showRankingByChoosing">
-<code class="sig-name descname">showRankingByChoosing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rankingByChoosing</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showRankingByChoosing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showRankingByChoosing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rankingByChoosing</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showRankingByChoosing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
 <dd><p>A show method for self.rankinByChoosing result.</p>
+<p>When parameter <em>WithCoverCredibility</em> is set to True, the credibility of outranking, respectively being outranked is indicated at each selection step.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The self.computeRankingByChoosing(CoDual=False/True) method instantiating the self.rankingByChoosing slot is pre-required !</p>
@@ -8542,13 +8543,13 @@ ranking-by-Rubis-choosing orderings.</p>
 
 <dl class="py method">
 <dt id="transitiveDigraphs.RankingByChoosingDigraph.showRankingByChoosing">
-<code class="sig-name descname">showRankingByChoosing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rankingByChoosing</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rankingStrategy</span><span class="o">=</span><span class="default_value">'optimistic'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#RankingByChoosingDigraph.showRankingByChoosing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.RankingByChoosingDigraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showRankingByChoosing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rankingByChoosing</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rankingStrategy</span><span class="o">=</span><span class="default_value">'optimistic'</span></em>, <em class="sig-param"><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#RankingByChoosingDigraph.showRankingByChoosing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.RankingByChoosingDigraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dummy for showTransitiveDigraph method</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="transitiveDigraphs.RankingByChoosingDigraph.showTransitiveDigraph">
-<code class="sig-name descname">showTransitiveDigraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rankingByChoosing</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rankingStrategy</span><span class="o">=</span><span class="default_value">'optimistic'</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#RankingByChoosingDigraph.showTransitiveDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.RankingByChoosingDigraph.showTransitiveDigraph" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showTransitiveDigraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rankingByChoosing</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rankingStrategy</span><span class="o">=</span><span class="default_value">'optimistic'</span></em>, <em class="sig-param"><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#RankingByChoosingDigraph.showTransitiveDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.RankingByChoosingDigraph.showTransitiveDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specialization of generic method.
 Without argument, a weak ordering is recomputed from the
 valued self relation.</p>
@@ -8633,13 +8634,13 @@ disjunctive or conjunctive fusion (omax|omin operator) of a list of rankings.</p
 
 <dl class="py method">
 <dt id="transitiveDigraphs.TransitiveDigraph.showRankingByChoosing">
-<code class="sig-name descname">showRankingByChoosing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">actionsList</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rankingByChoosing</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.showRankingByChoosing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showRankingByChoosing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">actionsList</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rankingByChoosing</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.showRankingByChoosing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dummy name for showTransitiveDigraph() method</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph">
-<code class="sig-name descname">showTransitiveDigraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rankingByChoosing</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.showTransitiveDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showTransitiveDigraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rankingByChoosing</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.showTransitiveDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>A show method for self.rankinByChoosing result.</p>
 </dd></dl>
 

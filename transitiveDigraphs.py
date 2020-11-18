@@ -31,7 +31,7 @@ class TransitiveDigraph(Digraph):
         """
         self.showTransitiveDigraph()
         
-    def showTransitiveDigraph(self,rankingByChoosing=None):
+    def showTransitiveDigraph(self,rankingByChoosing=None,WithCoverCredibility=False):
         """
         A show method for self.rankinByChoosing result.
         """
@@ -69,7 +69,11 @@ class TransitiveDigraph(Digraph):
             #print 'ibch, iwch, iach', i, ibch,iwch,iach
             ch = list(ibch)
             ch.sort()
-            print(' %s%s%s ranked %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0]))
+            if WithCoverCredibility:
+                print(' %s%s%s ranked %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0]))
+            else:
+                print(' %s%s%s ranked %s' % (space,i+1,nstr,ch) )
+                
             if len(iach) > 0 and i < n-1:
                 print('  %s Ambiguous Choice %s' % (space,list(iach)))
                 space += '  '
@@ -93,13 +97,19 @@ class TransitiveDigraph(Digraph):
             if len(iach) > 0 and i > 0:
                 space = space[:-2]
                 print('  %s Ambiguous Choice %s' % (space,list(iach)))
-            print(' %s%s%s last ranked %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))        
+            if WithCoverCredibility:
+                print(' %s%s%s last ranked %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
+            else:
+                print(' %s%s%s last ranked %s)' % (space,n-i,nstr,ch) )
+                
 
-    def showRankingByChoosing(self,actionsList=None,rankingByChoosing=None):
+    def showRankingByChoosing(self,actionsList=None,rankingByChoosing=None,WithCoverCredibility=False):
         """
         Dummy name for showTransitiveDigraph() method
         """
-        self.showTransitiveDigraph(rankingByChoosing=rankingByChoosing)
+        self.showTransitiveDigraph(actionsList=actionsList,\
+                                   rankingByChoosing=rankingByChoosing,\
+                                   WithCoverCredibility=CoverCredibility)
     
     def showOrderedRelationTable(self,direction="decreasing",originalRelation=False):
         """
@@ -884,7 +894,7 @@ class RankingByChoosingDigraph(TransitiveDigraph):
         runTimes['totalTime'] = time() - t0
         self.runTimes = runTimes
 
-    def showTransitiveDigraph(self,rankingByChoosing=None,rankingStrategy='optimistic'):
+    def showTransitiveDigraph(self,rankingByChoosing=None,rankingStrategy='optimistic',WithCoverCredibility=False):
         """
         Specialization of generic method.
         Without argument, a weak ordering is recomputed from the
@@ -893,21 +903,22 @@ class RankingByChoosingDigraph(TransitiveDigraph):
         if rankingByChoosing == None:
             if rankingStrategy == 'optimistic':  
                 TransitiveDigraph.showTransitiveDigraph(self,\
-                            rankingByChoosing=self.computeRankingByBestChoosing())
+                    rankingByChoosing=self.computeRankingByBestChoosing())
             else:
                 TransitiveDigraph.showTransitiveDigraph(self,\
-                            rankingByChoosing=self.computeRankingByLastChoosing())
+                    rankingByChoosing=self.computeRankingByLastChoosing())
         else:
             TransitiveDigraph.showTransitiveDigraph(self,rankingByChoosing=rankingByChoosing)
 
 
 
-    def showRankingByChoosing(self,rankingByChoosing=None,rankingStrategy='optimistic'):
+    def showRankingByChoosing(self,rankingByChoosing=None,rankingStrategy='optimistic',WithCoverCredibility=False):
         """
         Dummy for showTransitiveDigraph method
         """
         self.showTransitiveDigraph(rankingByChoosing=rankingByChoosing,\
-                                                 rankingStrategy=rankingStrategy)
+                                   rankingStrategy=rankingStrategy,\
+                                   WithCoverCredibility=WithCoverCredibility)
 
     def computeRankingByBestChoosing(self,Forced=False):
         """

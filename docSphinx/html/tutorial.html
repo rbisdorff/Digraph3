@@ -1664,24 +1664,24 @@ the current working directory a <code class="code docutils literal notranslate">
 <span class="go"> &gt;&gt;&gt; cdg.computeRankingByChoosing()</span>
 <span class="go"> &gt;&gt;&gt; cdg.showRankingByChoosing()</span>
 <span class="go">  Ranking by Choosing and Rejecting</span>
-<span class="go">   1st first ranked [&#39;a06&#39;] (475.29)</span>
-<span class="go">     2nd first ranked [&#39;a11&#39;] (349.33)</span>
-<span class="go">       3rd first ranked [&#39;a07&#39;, &#39;a08&#39;] (278.44)</span>
-<span class="go">         4th first ranked [&#39;a03&#39;] (265.43)</span>
-<span class="go">           5th first ranked [&#39;a01&#39;] (145.20)</span>
-<span class="go">             6th first ranked [&#39;a13&#39;] (104.00)</span>
-<span class="go">               7th first ranked [&#39;a04&#39;] (16.00)</span>
-<span class="go">               7th last ranked [&#39;a12&#39;] (16.00)</span>
-<span class="go">             6th last ranked [&#39;a14&#39;] (104.67)</span>
-<span class="go">           5th last ranked [&#39;a15&#39;] (130.00)</span>
-<span class="go">         4th last ranked [&#39;a09&#39;] (170.57)</span>
-<span class="go">       3rd last ranked [&#39;a10&#39;] (353.40)</span>
-<span class="go">     2nd last ranked [&#39;a05&#39;] (415.83)</span>
-<span class="go">   1st last ranked [&#39;a02&#39;] (682.86)</span>
+<span class="go">   1st first ranked [&#39;a06&#39;]</span>
+<span class="go">     2nd first ranked [&#39;a11&#39;]</span>
+<span class="go">       3rd first ranked [&#39;a07&#39;, &#39;a08&#39;]</span>
+<span class="go">         4th first ranked [&#39;a03&#39;]</span>
+<span class="go">           5th first ranked [&#39;a01&#39;]</span>
+<span class="go">             6th first ranked [&#39;a13&#39;]</span>
+<span class="go">               7th first ranked [&#39;a04&#39;]</span>
+<span class="go">               7th last ranked [&#39;a12&#39;]</span>
+<span class="go">             6th last ranked [&#39;a14&#39;]</span>
+<span class="go">           5th last ranked [&#39;a15&#39;]</span>
+<span class="go">         4th last ranked [&#39;a09&#39;]</span>
+<span class="go">       3rd last ranked [&#39;a10&#39;]</span>
+<span class="go">     2nd last ranked [&#39;a05&#39;]</span>
+<span class="go">   1st last ranked [&#39;a02&#39;]</span>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Before showing the <em>ranking-by-choosing</em> result, we have to compute the iterated bipolar selection procedure (see <a class="reference internal" href="#rankingbychoosing"><span class="std std-numref">Listing 20</span></a> Line 2). The first selection concerns <em>a06</em> (first) and <em>a02</em> (last), followed by <em>a11</em> (first) opposed to <em>a05</em> (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely <em>[a04, a12]</em> (see Lines 13-14). The bracketed numbers, following the reiterated <em>first ranked</em> and <em>last ranked</em> candidates, indicate the average majority margin with which the <em>i</em>-th <em>first ranked</em> candidate(s), respectively the <em>i</em>-th <em>last ranked</em> candidate, is beating, resp. is beaten by, the remaining candidates at step <em>i</em>.</p>
+<p>Before showing the <em>ranking-by-choosing</em> result, we have to compute the iterated bipolar selection procedure (see <a class="reference internal" href="#rankingbychoosing"><span class="std std-numref">Listing 20</span></a> Line 2). The first selection concerns <em>a06</em> (first) and <em>a02</em> (last), followed by <em>a11</em> (first) opposed to <em>a05</em> (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely <em>[a04, a12]</em> (see Lines 13-14).</p>
 <p>Notice furthermore the first ranked candidates at iteration step 3 (see <a class="reference internal" href="#rankingbychoosing"><span class="std std-numref">Listing 20</span></a> Line 9), namely the pair <em>[a07, a08]</em>. Both candidates represent indeed conjointly the <em>first ranked</em> choice. We obtain here hence a <em>weak ranking</em>, i.e. a ranking with a tie.</p>
 <p>Let us mention that the <em>instant-run-off</em> procedure, we used before (see <a class="reference internal" href="#uninominalwinner"><span class="std std-numref">Listing 18</span></a> Line 3), when operated with a <em>Comments=True</em> parameter setting, will deliver a more or less similar <em>reversed</em> linear <em>ordering-by-rejecting</em> result, namely [<em>a02</em>, <em>a10</em>, <em>a14</em>, <em>a05</em>, <em>a09</em>, <em>a13</em>, <em>a12</em>, <em>a15</em>, <em>a04</em>, <em>a01</em>, <em>a08</em>, <em>a03</em>, <em>a07</em>, <em>a11</em>, <em>a06</em>], ordered from the <em>last</em> to the <em>first</em> choice.</p>
 <p>Remarkable about both these <em>ranking-by-choosing</em> or <em>ordering-by-rejecting</em> results is the fact that the random voting behaviour, simulated here with the help of two discrete random variables (<a class="footnote-reference brackets" href="#id128" id="id16">16</a>), defined respectively by the two party polls, is rendering a ranking that is more or less in accordance with the simulated balance of the polls: -<em>Party_1</em> supporters : 460;  <em>Party_2</em> supporters: 436 (see <a class="reference internal" href="#linearvotingprofilewithpolls"><span class="std std-numref">Listing 17</span></a> Lines 26-40 third column). Despite a random voting behaviour per voter, the given polls apparently show a <em>very strong incidence</em> on the eventual election result. In order to avoid any manipulation of the election outcome, public media are therefore in some countries not allowed to publish polls during the last weeks before a general election.</p>
@@ -3033,16 +3033,16 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wcop</span> <span class="o">=</span> <span class="n">WeakCopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wcop</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
 <span class="go"> Ranking by Choosing and Rejecting</span>
-<span class="go">  1st ranked [&#39;a5&#39;] (1.00)</span>
-<span class="go">    2nd ranked [&#39;a1&#39;, &#39;a6&#39;, &#39;a7&#39;] (1.00)</span>
-<span class="go">      3rd ranked [&#39;a8&#39;] (1.00)</span>
-<span class="go">      3rd last ranked [&#39;a4&#39;, &#39;a9&#39;] (1.00)</span>
-<span class="go">    2nd last ranked [&#39;a3&#39;] (1.00)</span>
-<span class="go">  1st last ranked [&#39;a2&#39;] (1.00)</span>
+<span class="go">  1st ranked [&#39;a5&#39;]</span>
+<span class="go">    2nd ranked [&#39;a1&#39;, &#39;a6&#39;, &#39;a7&#39;]</span>
+<span class="go">      3rd ranked [&#39;a8&#39;]</span>
+<span class="go">      3rd last ranked [&#39;a4&#39;, &#39;a9&#39;]</span>
+<span class="go">    2nd last ranked [&#39;a3&#39;]</span>
+<span class="go">  1st last ranked [&#39;a2&#39;]</span>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>We recover in <a class="reference internal" href="#weakcopelandranking"><span class="std std-numref">Listing 31</span></a> above, the ranking with ties delivered by the <em>Copeland</em> scores (see <a class="reference internal" href="#copelandranking"><span class="std std-numref">Listing 29</span></a>). The bracketed numbers indicate that this weak ranking is certainly valid. We may draw its corresponding <em>Hasse</em> diagram (see <a class="reference internal" href="#weakcopelandrankingdrawing"><span class="std std-numref">Listing 32</span></a>).</p>
+<p>We recover in <a class="reference internal" href="#weakcopelandranking"><span class="std std-numref">Listing 31</span></a> above, the ranking with ties delivered by the <em>Copeland</em> scores (see <a class="reference internal" href="#copelandranking"><span class="std std-numref">Listing 29</span></a>). We may draw its corresponding <em>Hasse</em> diagram (see <a class="reference internal" href="#weakcopelandrankingdrawing"><span class="std std-numref">Listing 32</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="weakcopelandrankingdrawing">
 <div class="code-block-caption"><span class="caption-number">Listing 32 </span><span class="caption-text">Drawing a weak <em>Copeland</em> ranking</span><a class="headerlink" href="#weakcopelandrankingdrawing" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1

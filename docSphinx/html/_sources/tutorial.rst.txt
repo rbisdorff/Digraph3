@@ -1236,22 +1236,22 @@ With the same *bipolar* -*first ranked* and *last ranked* candidate- selection p
     >>> cdg.computeRankingByChoosing()
     >>> cdg.showRankingByChoosing()
      Ranking by Choosing and Rejecting
-      1st first ranked ['a06'] (475.29)
-        2nd first ranked ['a11'] (349.33)
-	  3rd first ranked ['a07', 'a08'] (278.44)
-	    4th first ranked ['a03'] (265.43)
-	      5th first ranked ['a01'] (145.20)
-	        6th first ranked ['a13'] (104.00)
-		  7th first ranked ['a04'] (16.00)
-		  7th last ranked ['a12'] (16.00)
-	        6th last ranked ['a14'] (104.67)
-	      5th last ranked ['a15'] (130.00)
-	    4th last ranked ['a09'] (170.57)
-	  3rd last ranked ['a10'] (353.40)
-        2nd last ranked ['a05'] (415.83)
-      1st last ranked ['a02'] (682.86)
+      1st first ranked ['a06']
+        2nd first ranked ['a11']
+	  3rd first ranked ['a07', 'a08']
+	    4th first ranked ['a03']
+	      5th first ranked ['a01']
+	        6th first ranked ['a13']
+		  7th first ranked ['a04']
+		  7th last ranked ['a12']
+	        6th last ranked ['a14']
+	      5th last ranked ['a15']
+	    4th last ranked ['a09']
+	  3rd last ranked ['a10']
+        2nd last ranked ['a05']
+      1st last ranked ['a02']
 
-Before showing the *ranking-by-choosing* result, we have to compute the iterated bipolar selection procedure (see :numref:`rankingByChoosing` Line 2). The first selection concerns *a06* (first) and *a02* (last), followed by *a11* (first) opposed to *a05* (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely *[a04, a12]* (see Lines 13-14). The bracketed numbers, following the reiterated *first ranked* and *last ranked* candidates, indicate the average majority margin with which the *i*-th *first ranked* candidate(s), respectively the *i*-th *last ranked* candidate, is beating, resp. is beaten by, the remaining candidates at step *i*.
+Before showing the *ranking-by-choosing* result, we have to compute the iterated bipolar selection procedure (see :numref:`rankingByChoosing` Line 2). The first selection concerns *a06* (first) and *a02* (last), followed by *a11* (first) opposed to *a05* (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely *[a04, a12]* (see Lines 13-14).
 
 Notice furthermore the first ranked candidates at iteration step 3 (see :numref:`rankingByChoosing` Line 9), namely the pair *[a07, a08]*. Both candidates represent indeed conjointly the *first ranked* choice. We obtain here hence a *weak ranking*, i.e. a ranking with a tie.
 
@@ -2285,14 +2285,14 @@ The *Copeland* scores deliver actually only a unique *weak ranking*, i.e. a rank
    >>> wcop = WeakCopelandOrder(g)
    >>> wcop.showRankingByChoosing()
     Ranking by Choosing and Rejecting
-     1st ranked ['a5'] (1.00)
-       2nd ranked ['a1', 'a6', 'a7'] (1.00)
-	 3rd ranked ['a8'] (1.00)
-	 3rd last ranked ['a4', 'a9'] (1.00)
-       2nd last ranked ['a3'] (1.00)
-     1st last ranked ['a2'] (1.00)
+     1st ranked ['a5']
+       2nd ranked ['a1', 'a6', 'a7']
+	 3rd ranked ['a8']
+	 3rd last ranked ['a4', 'a9']
+       2nd last ranked ['a3']
+     1st last ranked ['a2']
 
-We recover in :numref:`weakCopelandRanking` above, the ranking with ties delivered by the *Copeland* scores (see :numref:`CopelandRanking`). The bracketed numbers indicate that this weak ranking is certainly valid. We may draw its corresponding *Hasse* diagram (see :numref:`weakCopelandRankingDrawing`).
+We recover in :numref:`weakCopelandRanking` above, the ranking with ties delivered by the *Copeland* scores (see :numref:`CopelandRanking`). We may draw its corresponding *Hasse* diagram (see :numref:`weakCopelandRankingDrawing`).
 
 .. code-block:: pycon
    :name: weakCopelandRankingDrawing
