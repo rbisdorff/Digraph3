@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{November 18, 2020}
+\date{November 19, 2020}
 \release{3.9.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -4339,7 +4339,7 @@ The strict outranking digraph being actually \sphinxstyleemphasis{transitive} (s
 \PYG{g+go}{ 1.0}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dgcd}\PYG{o}{.}\PYG{n}{closeTransitive}\PYG{p}{(}\PYG{n}{Reverse}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dgcd}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{aliceBestChoice}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+go}{          bestChoice=[\PYGZsq{}I\PYGZhy{}FHK\PYGZsq{},\PYGZsq{}I\PYGZhy{}UHB\PYGZsq{},\PYGZsq{}I\PYGZhy{}USB\PYGZsq{},\PYGZsq{}T\PYGZhy{}FHK\PYGZsq{}],}
+\PYG{g+go}{          bestChoice=[\PYGZsq{}I\PYGZhy{}FHK\PYGZsq{}],}
 \PYG{g+go}{          worstChoice=[\PYGZsq{}S\PYGZhy{}HKK\PYGZsq{},\PYGZsq{}C\PYGZhy{}HKK\PYGZsq{}])}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Exporting to aliceBestChoice.dot}
@@ -4353,9 +4353,9 @@ The strict outranking digraph being actually \sphinxstyleemphasis{transitive} (s
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{aliceBestChoice}.png}
 \caption{Alice’s best choice recommendation}\label{\detokenize{tutorial:alicebestchoiceimage}}\end{figure}
 
-In \hyperref[\detokenize{tutorial:alicebestchoiceimage}]{Fig.\@ \ref{\detokenize{tutorial:alicebestchoiceimage}}} we notice that, except for the \sphinxstyleemphasis{Qualified Translator} studies in \sphinxstyleemphasis{Köln}, the \sphinxstyleemphasis{Graduate Interpreter} studies come first, followed by the other \sphinxstyleemphasis{Qualified Translator} studies. Last come the \sphinxstyleemphasis{Chamber of Commerce}’s specialised studies. This confirms again the high significance that Alice attaches to the \sphinxstyleemphasis{attractiveness} of her further studies and of her future profession (see criteria \sphinxstyleemphasis{AS} and \sphinxstyleemphasis{AP} in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}).
+In \hyperref[\detokenize{tutorial:alicebestchoiceimage}]{Fig.\@ \ref{\detokenize{tutorial:alicebestchoiceimage}}} we notice that the \sphinxstyleemphasis{Graduate Interpreter} studies come first, followed by the \sphinxstyleemphasis{Qualified Translator} studies. Last come the \sphinxstyleemphasis{Chamber of Commerce}’s specialised studies. This confirms again the high significance that Alice attaches to the \sphinxstyleemphasis{attractiveness} of her further studies and of her future profession (see criteria \sphinxstyleemphasis{AS} and \sphinxstyleemphasis{AP} in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}).
 
-We may, for instance, check the pairwise outranking situations observed  between the first and second\sphinxhyphen{}ranked alternatives, ie \sphinxstyleemphasis{Garduate Interpreter} studies in \sphinxstyleemphasis{Köln} versus \sphinxstyleemphasis{Graduate Interpreter} studies in \sphinxstyleemphasis{Saabrücken} (see \sphinxstyleemphasis{I\sphinxhyphen{}FHK} and \sphinxstyleemphasis{I\sphinxhyphen{}USB} in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}).
+Let us, for instance, check now the pairwise outranking situations observed between the first and second\sphinxhyphen{}ranked alternative, ie \sphinxstyleemphasis{Garduate Interpreter} studies in \sphinxstyleemphasis{Köln} versus \sphinxstyleemphasis{Graduate Interpreter} studies in \sphinxstyleemphasis{Saabrücken} (see \sphinxstyleemphasis{I\sphinxhyphen{}FHK} and \sphinxstyleemphasis{I\sphinxhyphen{}USB} in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{showHTMLPairwiseOutrankings}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{I\PYGZhy{}FHK}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{I\PYGZhy{}USB}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -4370,7 +4370,7 @@ We may, for instance, check the pairwise outranking situations observed  between
 
 The \sphinxstyleemphasis{Köln} alternative is performing \sphinxstylestrong{at least as well as} the \sphinxstyleemphasis{Saarbrücken} alternative on all the performance criteria, except the \sphinxstyleemphasis{Annual income} (of significance 2/24). Conversely, the \sphinxstyleemphasis{Saarbrücken} alternative is clearly \sphinxstylestrong{outperformed} from the \sphinxstyleemphasis{geographical} (0/6) as well as from the \sphinxstyleemphasis{financial} perspective (2/6).
 
-Let us finally compute, in a similar way, a \sphinxstyleemphasis{weak ranking} of all the potential study programs with the the help of the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingByChoosingDigraph}} constructor, who computes a bipolar ranking by conjointly \sphinxstyleemphasis{best\sphinxhyphen{}choosing} and \sphinxstyleemphasis{last\sphinxhyphen{}choosing} (see \hyperref[\detokenize{tutorial:alicerankingbychoosing}]{Listing \ref{\detokenize{tutorial:alicerankingbychoosing}}} below).
+In a similar way, we may finally compute a \sphinxstyleemphasis{partial ranking} of all the potential study programs with the the help of the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingByChoosingDigraph}} constructor, who computes a bipolar ranking by conjointly \sphinxstyleemphasis{best\sphinxhyphen{}choosing} and \sphinxstyleemphasis{last\sphinxhyphen{}choosing} (see \hyperref[\detokenize{tutorial:alicerankingbychoosing}]{Listing \ref{\detokenize{tutorial:alicerankingbychoosing}}} below).
 \sphinxSetupCaptionForVerbatim{Computing a weak ranking by best and last choosing}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:alicerankingbychoosing}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4391,7 +4391,7 @@ Let us finally compute, in a similar way, a \sphinxstyleemphasis{weak ranking} o
 \PYG{g+go}{  1st last ranked [\PYGZsq{}S\PYGZhy{}HKK\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{tutorial:alicerankingbychoosing}]{Listing \ref{\detokenize{tutorial:alicerankingbychoosing}}}, we find confirmed that the \sphinxstyleemphasis{Interpreter} studies appear all preferrred to the \sphinxstyleemphasis{Translator} studies. Furthermore, the Interpreter studies in \sphinxstyleemphasis{Saarbrücken} appear preferred to the same studies in \sphinxstyleemphasis{Heidelberg}. The \sphinxstyleemphasis{Köln} alternative is apparently the preferred one of all the \sphinxstyleemphasis{Translater} studies. And, second\sphinxhyphen{}last and last ranked appear the \sphinxstyleemphasis{Foreign Correspondent} and the \sphinxstyleemphasis{Specialised Secretary} studies.
+In \hyperref[\detokenize{tutorial:alicerankingbychoosing}]{Listing \ref{\detokenize{tutorial:alicerankingbychoosing}}}, we find confirmed that the \sphinxstyleemphasis{Interpreter} studies appear all preferrred to the \sphinxstyleemphasis{Translator} studies. Furthermore, the Interpreter studies in \sphinxstyleemphasis{Saarbrücken} appear preferred to the same studies in \sphinxstyleemphasis{Heidelberg}. The \sphinxstyleemphasis{Köln} alternative is apparently the preferred one of all the \sphinxstyleemphasis{Translater} studies. And, the \sphinxstyleemphasis{Foreign Correspondent} and the \sphinxstyleemphasis{Specialised Secretary} studies appear second\sphinxhyphen{}last and last ranked.
 
 Yet, how \sphinxstyleemphasis{robust} are our findings with respect to potential settings of the decision objectives importance and the performance criteria significance ?
 

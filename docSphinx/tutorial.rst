@@ -3392,7 +3392,7 @@ The strict outranking digraph being actually *transitive* (see :numref:`aliceBes
     1.0
    >>> dgcd.closeTransitive(Reverse=True)
    >>> dgcd.exportGraphViz('aliceBestChoice',
-             bestChoice=['I-FHK','I-UHB','I-USB','T-FHK'],
+             bestChoice=['I-FHK'],
 	     worstChoice=['S-HKK','C-HKK'])
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to aliceBestChoice.dot
@@ -3405,9 +3405,9 @@ The strict outranking digraph being actually *transitive* (see :numref:`aliceBes
 
    Alice's best choice recommendation	   
 
-In :numref:`aliceBestChoiceImage` we notice that, except for the *Qualified Translator* studies in *Köln*, the *Graduate Interpreter* studies come first, followed by the other *Qualified Translator* studies. Last come the *Chamber of Commerce*'s specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
+In :numref:`aliceBestChoiceImage` we notice that the *Graduate Interpreter* studies come first, followed by the *Qualified Translator* studies. Last come the *Chamber of Commerce*'s specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
 
-We may, for instance, check the pairwise outranking situations observed  between the first and second-ranked alternatives, ie *Garduate Interpreter* studies in *Köln* versus *Graduate Interpreter* studies in *Saabrücken* (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
+Let us, for instance, check now the pairwise outranking situations observed between the first and second-ranked alternative, ie *Garduate Interpreter* studies in *Köln* versus *Graduate Interpreter* studies in *Saabrücken* (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
 
    >>> dg.showHTMLPairwiseOutrankings('I-FHK','I-USB')
 
@@ -3420,7 +3420,7 @@ We may, for instance, check the pairwise outranking situations observed  between
 
 The *Köln* alternative is performing **at least as well as** the *Saarbrücken* alternative on all the performance criteria, except the *Annual income* (of significance 2/24). Conversely, the *Saarbrücken* alternative is clearly **outperformed** from the *geographical* (0/6) as well as from the *financial* perspective (2/6).
 
-Let us finally compute, in a similar way, a *weak ranking* of all the potential study programs with the the help of the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor, who computes a bipolar ranking by conjointly *best-choosing* and *last-choosing* (see :numref:`aliceRankingByChoosing` below).
+In a similar way, we may finally compute a *partial ranking* of all the potential study programs with the the help of the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor, who computes a bipolar ranking by conjointly *best-choosing* and *last-choosing* (see :numref:`aliceRankingByChoosing` below).
 
 .. code-block:: pycon
    :name: aliceRankingByChoosing
@@ -3443,7 +3443,7 @@ Let us finally compute, in a similar way, a *weak ranking* of all the potential 
        2nd last ranked ['C-HKK']
      1st last ranked ['S-HKK']
 
-In :numref:`aliceRankingByChoosing`, we find confirmed that the *Interpreter* studies appear all preferrred to the *Translator* studies. Furthermore, the Interpreter studies in *Saarbrücken* appear preferred to the same studies in *Heidelberg*. The *Köln* alternative is apparently the preferred one of all the *Translater* studies. And, second-last and last ranked appear the *Foreign Correspondent* and the *Specialised Secretary* studies.
+In :numref:`aliceRankingByChoosing`, we find confirmed that the *Interpreter* studies appear all preferrred to the *Translator* studies. Furthermore, the Interpreter studies in *Saarbrücken* appear preferred to the same studies in *Heidelberg*. The *Köln* alternative is apparently the preferred one of all the *Translater* studies. And, the *Foreign Correspondent* and the *Specialised Secretary* studies appear second-last and last ranked.
 
 Yet, how *robust* are our findings with respect to potential settings of the decision objectives importance and the performance criteria significance ?
 		
