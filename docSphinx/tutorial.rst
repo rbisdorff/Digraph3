@@ -3423,12 +3423,12 @@ Let us, for instance, check now the pairwise outranking situations observed betw
 
 The *Köln* alternative is performing **at least as well as** the *Saarbrücken* alternative on all the performance criteria, except the *Annual income* (of significance 2/24). Conversely, the *Saarbrücken* alternative is clearly **outperformed** from the *geographical* (0/6) as well as from the *financial* perspective (2/6).
 
-In a similar way, we may finally compute a *partial ranking* of all the potential study programs with the the help of the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor (see :numref:`aliceRankingByChoosing` below), who computes a bipolar ranking by conjointly *best-choosing* and *last-choosing* [BIS-1999]_.
+In a similar way, we may finally compute a *partial ranking* of all the potential study programs with the the help of the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor (see :numref:`aliceRankingByChoosing` below), who computes a bipolar ranking by conjointly *best-choosing* and *last-rejecting* [BIS-1999]_.
 
 .. code-block:: pycon
    :name: aliceRankingByChoosing
    :linenos:
-   :caption: Computing a weak ranking by bipolar best- and last-choosing 
+   :caption: Weakly ranking by bipolar best-choosing and last-rejecting 
 
    >>> from transitiveDigraphs import\
                   RankingByChoosingDigraph
@@ -3480,7 +3480,7 @@ To answer this question, we will consider the respective criteria significance w
     Confident majority   : 14/24 (58.3%) 
     Determinateness (%)  : 68.19
 
-Of the original 67 valid outranking situations, we retain 44 outranking situations as being 90%-*confident* (see :numref:`aliceConfidentDigraph` Line 10). The corresponding 90%-*confident* qualified majority of criteria significance amounts to 14/24 = 58.3% (Line 15).  
+Of the original 67 valid outranking situations, we retain 44 outranking situations as being 90%-*confident* (see :numref:`aliceConfidentDigraph` Line 10). The corresponding 90%-*confident* **qualified majority** of criteria significance amounts to 14/24 = 58.3% (Line 15).  
 
 Concerning now a 90%-*confident* best choice recommendation, we are lucky (see :numref:`aliceConfidentBestChoice` below). 
 

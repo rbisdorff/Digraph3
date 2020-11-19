@@ -4372,8 +4372,8 @@ Let us, for instance, check now the pairwise outranking situations observed betw
 
 The \sphinxstyleemphasis{Köln} alternative is performing \sphinxstylestrong{at least as well as} the \sphinxstyleemphasis{Saarbrücken} alternative on all the performance criteria, except the \sphinxstyleemphasis{Annual income} (of significance 2/24). Conversely, the \sphinxstyleemphasis{Saarbrücken} alternative is clearly \sphinxstylestrong{outperformed} from the \sphinxstyleemphasis{geographical} (0/6) as well as from the \sphinxstyleemphasis{financial} perspective (2/6).
 
-In a similar way, we may finally compute a \sphinxstyleemphasis{partial ranking} of all the potential study programs with the the help of the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingByChoosingDigraph}} constructor (see \hyperref[\detokenize{tutorial:alicerankingbychoosing}]{Listing \ref{\detokenize{tutorial:alicerankingbychoosing}}} below), who computes a bipolar ranking by conjointly \sphinxstyleemphasis{best\sphinxhyphen{}choosing} and \sphinxstyleemphasis{last\sphinxhyphen{}choosing} \sphinxcite{tutorial:bis-1999}.
-\sphinxSetupCaptionForVerbatim{Computing a weak ranking by bipolar best\sphinxhyphen{} and last\sphinxhyphen{}choosing}
+In a similar way, we may finally compute a \sphinxstyleemphasis{partial ranking} of all the potential study programs with the the help of the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingByChoosingDigraph}} constructor (see \hyperref[\detokenize{tutorial:alicerankingbychoosing}]{Listing \ref{\detokenize{tutorial:alicerankingbychoosing}}} below), who computes a bipolar ranking by conjointly \sphinxstyleemphasis{best\sphinxhyphen{}choosing} and \sphinxstyleemphasis{last\sphinxhyphen{}rejecting} \sphinxcite{tutorial:bis-1999}.
+\sphinxSetupCaptionForVerbatim{Weakly ranking by bipolar best\sphinxhyphen{}choosing and last\sphinxhyphen{}rejecting}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:alicerankingbychoosing}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import}\PYGZbs{}
@@ -4429,7 +4429,7 @@ See also the corresponding \DUrole{xref,std,std-ref}{Advanced Topic} in the Digr
 \PYG{g+go}{ Determinateness (\PYGZpc{})  : 68.19}
 \end{sphinxVerbatim}
 
-Of the original 67 valid outranking situations, we retain 44 outranking situations as being 90\%\sphinxhyphen{}\sphinxstyleemphasis{confident} (see \hyperref[\detokenize{tutorial:aliceconfidentdigraph}]{Listing \ref{\detokenize{tutorial:aliceconfidentdigraph}}} Line 10). The corresponding 90\%\sphinxhyphen{}\sphinxstyleemphasis{confident} qualified majority of criteria significance amounts to 14/24 = 58.3\% (Line 15).
+Of the original 67 valid outranking situations, we retain 44 outranking situations as being 90\%\sphinxhyphen{}\sphinxstyleemphasis{confident} (see \hyperref[\detokenize{tutorial:aliceconfidentdigraph}]{Listing \ref{\detokenize{tutorial:aliceconfidentdigraph}}} Line 10). The corresponding 90\%\sphinxhyphen{}\sphinxstyleemphasis{confident} \sphinxstylestrong{qualified majority} of criteria significance amounts to 14/24 = 58.3\% (Line 15).
 
 Concerning now a 90\%\sphinxhyphen{}\sphinxstyleemphasis{confident} best choice recommendation, we are lucky (see \hyperref[\detokenize{tutorial:aliceconfidentbestchoice}]{Listing \ref{\detokenize{tutorial:aliceconfidentbestchoice}}} below).
 \sphinxSetupCaptionForVerbatim{The 90\% confident best choice recommendation}
