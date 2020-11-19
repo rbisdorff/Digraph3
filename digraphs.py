@@ -2647,6 +2647,42 @@ class Digraph(object):
         else:
             return symRelation
 
+    def computeSymmetryDegree(self,Comments=False):
+        """
+        Renders the symmetry degree of the reflexive part of a digraph.
+        """
+        from copy import deepcopy
+        Med = self.valuationdomain['med']
+        na  = len(self.actions)
+        actions = [x for x in self.actions]
+        relation = self.relation
+        narcs = 0
+        nsymArc = 0
+        for i in range(na):
+            x = actions[i]
+            for j in range(i+1,na):
+                y = actions[j]
+                if relation[x][y] > Med:
+                    narcs += 1
+                    if relation[y][x] > Med:
+                        nsymArc += 1
+        res = Decimal(str(nsymArc))/Decimal(str(narcs))
+        if Comments:
+            print('Symmetry degree of graph <%s> : %.2f' %(self.name,res))
+        return res
+
+    def isSymmetric(self,Comments=False):
+        """
+        True if symmetry degree == 1.0.
+        """
+        sd = self.computeSymmetryDegree()
+        if Comments:
+            print('Symmetry degree of graph <%s> : %.2f' %(self.name,sd))
+        if sd == Decimal('1.0'):
+            return True
+        else:
+            return False
+            
     def computeTransitivityDegree(self,Comments=False):
         """
         Renders the transitivity degree of a digraph.
@@ -2679,6 +2715,18 @@ class Digraph(object):
         if Comments:
             print('Transitivity degree of graph <%s> : %.2f' %(self.name,res))
         return res
+
+    def isTransitive(self,Comments=False):
+        """
+        True if transitivity degree == 1.0.
+        """
+        td = self.computeTransitivityDegree()
+        if Comments:
+            print('Transitivity degree of graph <%s> : %.2f' %(self.name,td))
+        if td == Decimal('1.0'):
+            return True
+        else:
+            return False
 
     def computeSizeTransitiveClosure(self):
         """
@@ -13434,6 +13482,12 @@ if __name__ == "__main__":
         t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                    numberOfActions=20,seed=105)
         g = BipolarOutrankingDigraph(t)
+        #g.closeSymmetric()
+        print(g.computeSymmetryDegree(Comments=True))
+        print(g.isSymmetric(Comments=True))
+        #g.closeTransitive(Reverse=True)
+        print(g.computeTransitivityDegree(Comments=False))
+        print(g.isTransitive(Comments=True))
         g.computeRankingByBestChoosing(CoDual=True,Debug=False)
         print(g.rankingByBestChoosing)
         g.showRankingByBestChoosing()
@@ -13444,7 +13498,7 @@ if __name__ == "__main__":
         rbc = RankingByChoosingDigraph(g,CoDual=False,Threading=False)
         rbc.showRankingByBestChoosing()
         rbc.showRankingByLastChoosing()
-        rbc.showRankingByChoosing(WithCoverCredibility=True)
+        rbc.showRankingByChoosing()
         print(rbc.computeTopologicalRanking())
         print(rbc.topologicalSort())
 ##        print(rbc.rankingByLastChoosing)

@@ -235,6 +235,15 @@ def testTransitivityDegree():
     g.showStatistics()
     d = g.computeTransitivityDegree()
     print('n0/n1', d)
+    g.isTransitive(Comments=True)
+
+def testSymmetryDegree():
+    print("==>> Testing the symmetry degree ---")
+    g = RandomDigraph()
+    g.showStatistics()
+    d = g.computeSymmetryDegree()
+    print('n0/n1', d)
+    g.isSymmetric(Comments=True)
 
 def testStrongComponents():
     print("==>> Testing the strong components ---")

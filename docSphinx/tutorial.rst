@@ -3388,8 +3388,8 @@ The strict outranking digraph being actually *transitive* (see :numref:`aliceBes
    :caption: Drawing the best choice recommendation 
 
    >>> dgcd = ~(-dg)
-   >>> dgcd.computeTransitivityDegree()
-    1.0
+   >>> dgcd.isTransitive()
+    True
    >>> dgcd.closeTransitive(Reverse=True)
    >>> dgcd.exportGraphViz('aliceBestChoice',
              bestChoice=['I-FHK'],
@@ -3420,7 +3420,7 @@ Let us, for instance, check now the pairwise outranking situations observed betw
 
 The *Köln* alternative is performing **at least as well as** the *Saarbrücken* alternative on all the performance criteria, except the *Annual income* (of significance 2/24). Conversely, the *Saarbrücken* alternative is clearly **outperformed** from the *geographical* (0/6) as well as from the *financial* perspective (2/6).
 
-In a similar way, we may finally compute a *partial ranking* of all the potential study programs with the the help of the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor, who computes a bipolar ranking by conjointly *best-choosing* and *last-choosing* (see :numref:`aliceRankingByChoosing` below).
+In a similar way, we may finally compute a *partial ranking* of all the potential study programs with the the help of the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor (see :numref:`aliceRankingByChoosing` below), who computes a bipolar ranking by conjointly *best-choosing* and *last-choosing* [BIS-1999]_.
 
 .. code-block:: pycon
    :name: aliceRankingByChoosing
@@ -3443,7 +3443,7 @@ In a similar way, we may finally compute a *partial ranking* of all the potentia
        2nd last ranked ['C-HKK']
      1st last ranked ['S-HKK']
 
-In :numref:`aliceRankingByChoosing`, we find confirmed that the *Interpreter* studies appear all preferrred to the *Translator* studies. Furthermore, the Interpreter studies in *Saarbrücken* appear preferred to the same studies in *Heidelberg*. The *Köln* alternative is apparently the preferred one of all the *Translater* studies. And, the *Foreign Correspondent* and the *Specialised Secretary* studies appear second-last and last ranked.
+In :numref:`aliceRankingByChoosing`, we find confirmed that the *Interpreter* studies appear all preferrred to the *Translator* studies. Furthermore, the *Interpreter* studies in *Saarbrücken* appear preferred to the same studies in *Heidelberg*. The *Köln* alternative is apparently the preferred one of all the *Translater* studies. And, the *Foreign Correspondent* and the *Specialised Secretary* studies appear second-last and last ranked.
 
 Yet, how *robust* are our findings with respect to potential settings of the decision objectives importance and the performance criteria significance ?
 		
@@ -3526,8 +3526,8 @@ We may compute these **unopposed** outranking situations [25]_ with help of the 
      Oppositeness (%)    : 58.21
      Determinateness (%)  : 62.94
      Valuation domain     : [-1.00;1.00]
-   >>> uop.computeTransitivityDegree()
-    1.0
+   >>> uop.isTransitivity()
+    True
 
 We keep 28 out the 67 standard outranking situations, which leads to an **oppositeness degree** of (1.0 - 28/67) = 58.21% (:numref:`aliceUnopposedOutrankings` Line 10). Remarkable furthermore is that this unopposed outranking digraph *uop* is actually *transitive*, i.e. modelling a *partial ranking* of the study programs (Line 14).
 

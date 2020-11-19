@@ -1583,6 +1583,12 @@ Return a tuple: slaterOrder, slaterIndex</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="digraphs.Digraph.computeSymmetryDegree">
+<code class="sig-name descname">computeSymmetryDegree</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeSymmetryDegree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeSymmetryDegree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the symmetry degree of the reflexive part of a digraph.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="digraphs.Digraph.computeTopologicalRanking">
 <code class="sig-name descname">computeTopologicalRanking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeTopologicalRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeTopologicalRanking" title="Permalink to this definition">¶</a></dt>
 <dd><p>If self is acyclic, adds topological sort number to each node of self
@@ -2044,6 +2050,18 @@ for a reflexive loop in its transitive closure-</p>
 <p class="admonition-title">Warning</p>
 <p>self.relation is supposed to be irreflexive !</p>
 </div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="digraphs.Digraph.isSymmetric">
+<code class="sig-name descname">isSymmetric</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.isSymmetric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.isSymmetric" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if symmetry degree == 1.0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="digraphs.Digraph.isTransitive">
+<code class="sig-name descname">isTransitive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.isTransitive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.isTransitive" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if transitivity degree == 1.0.</p>
 </dd></dl>
 
 <dl class="py method">
