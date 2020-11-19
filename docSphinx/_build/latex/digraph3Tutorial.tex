@@ -4148,11 +4148,13 @@ Within each decision objective, the performance criteria are considered to be eq
 
 \subsection{The performance tableau}
 \label{\detokenize{tutorial:the-performance-tableau}}
-The actual evaluations of Alice’s potential study programs are gathered in a \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau}} object %
+The actual evaluations of Alice’s potential study programs are stored in a file named \sphinxhref{\_static/AliceChoice.py}{AliceChoice.py} of \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau}} format %
 \begin{footnote}[21]\sphinxAtStartFootnote
 Alice’s performance tableau \sphinxcode{\sphinxupquote{AliceChoice.py}} is available in the \sphinxcode{\sphinxupquote{examples}} directory of the Digraph3 software collection.
 %
 \end{footnote}.
+\begin{quote}
+\end{quote}
 \sphinxSetupCaptionForVerbatim{Alice’s performance tableau}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:aliceperftab}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4208,7 +4210,7 @@ In the following \sphinxstyleemphasis{heatmap view}, we may now consult Alice’
 \noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{aliceHeatmap}.png}
 \caption{Heatmap of Alice’s performance tableau}\label{\detokenize{tutorial:aliceheatmap}}\end{figure}
 
-Alice is subjectively evaluating the \sphinxstyleemphasis{attractiveness} of the studies on a three level ordinal scale from 0 (\sphinxstyleemphasis{weak}), 1 (\sphinxstyleemphasis{fair}) to 2 (\sphinxstyleemphasis{good}). Similarly, she is subjectively evaluating the \sphinxstyleemphasis{attractiveness} of the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the \sphinxstyleemphasis{occupational prestige} she looked up the SIOPS %
+Alice is subjectively evaluating the \sphinxstyleemphasis{Attractiveness} of the studies on a three level ordinal scale from 0 (\sphinxstyleemphasis{weak}), 1 (\sphinxstyleemphasis{fair}) to 2 (\sphinxstyleemphasis{good}). Similarly, she is subjectively evaluating the \sphinxstyleemphasis{Attractiveness} of the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the \sphinxstyleemphasis{occupational prestige} she looked up the SIOPS %
 \begin{footnote}[20]\sphinxAtStartFootnote
 Ganzeboom H.B.G, Treiman D.J. \sphinxstyleemphasis{Internationally Comparable Measures of Occupational Status for the 1988 International Standard Classification of Occupations}, Social Science Research 25, 201\textendash{}239 (1996).
 %
@@ -4222,7 +4224,7 @@ See the tutorial on {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sp
 %
 \end{footnote}. \sphinxstyleemphasis{Graduate interpreter} studies in Köln (\sphinxstyleemphasis{I\sphinxhyphen{}FHK}) or Saarbrücken (\sphinxstyleemphasis{I\sphinxhyphen{}USB}), followed by \sphinxstyleemphasis{Qualified Translator} studies in Köln (\sphinxstyleemphasis{T\sphinxhyphen{}FHK}) appear to be Alice’s most preferred alternatives. The least attractive study programs for her appear to be studies at the Chamber of Commerce of Köln (\sphinxstyleemphasis{C\sphinxhyphen{}HKK}, \sphinxstyleemphasis{S\sphinxhyphen{}HKK}).
 
-It is interesting to observe that for Alice, the most significant performance criteria, appear to be, on the one side, the \sphinxstyleemphasis{attractiveness} of the study program (\sphinxstyleemphasis{AS}, +0.72) followed by the \sphinxstyleemphasis{attractiveness} of the future profession (\sphinxstyleemphasis{AP}, +0.62). \sphinxstyleemphasis{Study times} (\sphinxstyleemphasis{SL}, \sphinxhyphen{}024), \sphinxstyleemphasis{big city} (\sphinxstyleemphasis{BC}, \sphinxhyphen{}0.07) and \sphinxstyleemphasis{monthly living costs} (\sphinxstyleemphasis{LC}, \sphinxhyphen{}0.04) ) appear to be, on the other side, not \sphinxstyleemphasis{so} significant %
+It is interesting to observe that for Alice, the most significant performance criteria, appear to be, on the one side, the \sphinxstyleemphasis{Attractiveness} of the study program (\sphinxstyleemphasis{AS}, +0.72) followed by the \sphinxstyleemphasis{Attractiveness} of the future profession (\sphinxstyleemphasis{AP}, +0.62). \sphinxstyleemphasis{Study times} (\sphinxstyleemphasis{SL}, \sphinxhyphen{}024), \sphinxstyleemphasis{big city} (\sphinxstyleemphasis{BC}, \sphinxhyphen{}0.07) and \sphinxstyleemphasis{monthly living costs} (\sphinxstyleemphasis{LC}, \sphinxhyphen{}0.04) ) appear to be, on the other side, not \sphinxstyleemphasis{so} significant %
 \begin{footnote}[27]\sphinxAtStartFootnote
 See also the corresponding \DUrole{xref,std,std-ref}{Advanced Topic} in the Digraph3 documentation.
 %
@@ -4324,13 +4326,13 @@ We may furthermore check that no outranking \sphinxstyleemphasis{circuits} do ap
 \PYG{g+go}{  most credible action(s) = \PYGZob{}\PYGZsq{}S\PYGZhy{}HKK\PYGZsq{}: 0.17,\PYGZsq{}C\PYGZhy{}HKK\PYGZsq{}: 0.17\PYGZcb{}}
 \end{sphinxVerbatim}
 
-Recommended best choice for Alice eventually becomes the \sphinxstyleemphasis{Graduate Interpreter} study program at the \sphinxstyleemphasis{Technical High School} in \sphinxstyleemphasis{Köln} (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 16) supported by a \((0.75 + 1)/2.0 \,=\,87.5\%\) (18/24) majority of global criteria significance %
+Most credible best choice for Alice eventually becomes the \sphinxstyleemphasis{Graduate Interpreter} study program at the \sphinxstyleemphasis{Technical High School} in \sphinxstyleemphasis{Köln} (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 16) supported by a \((0.75 + 1)/2.0 \,=\,87.5\%\) (18/24) majority of global criteria significance %
 \begin{footnote}[24]\sphinxAtStartFootnote
 See also the \DUrole{xref,std,std-ref}{Advanced Topic} about computing best choice membership characteristics in the Digraph3 documentation.
 %
 \end{footnote}.
 
-The strict outranking digraph being actually \sphinxstyleemphasis{transitive} (see \hyperref[\detokenize{tutorial:alicebestchoicedrawing}]{Listing \ref{\detokenize{tutorial:alicebestchoicedrawing}}}), a graphviz drawing of its skeleton, oriented by the previous \sphinxstyleemphasis{best}, respectively \sphinxstyleemphasis{worst} choice, may well illustrate our \sphinxstyleemphasis{choice recommendation}.
+The strict outranking digraph being actually \sphinxstyleemphasis{transitive} (see \hyperref[\detokenize{tutorial:alicebestchoicedrawing}]{Listing \ref{\detokenize{tutorial:alicebestchoicedrawing}}} Line 2), a graphviz drawing of its skeleton, oriented by the previous \sphinxstyleemphasis{best}, respectively \sphinxstyleemphasis{worst} choice, may well illustrate our \sphinxstyleemphasis{choice recommendation}.
 \sphinxSetupCaptionForVerbatim{Drawing the best choice recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:alicebestchoicedrawing}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4355,7 +4357,7 @@ The strict outranking digraph being actually \sphinxstyleemphasis{transitive} (s
 
 In \hyperref[\detokenize{tutorial:alicebestchoiceimage}]{Fig.\@ \ref{\detokenize{tutorial:alicebestchoiceimage}}} we notice that the \sphinxstyleemphasis{Graduate Interpreter} studies come first, followed by the \sphinxstyleemphasis{Qualified Translator} studies. Last come the \sphinxstyleemphasis{Chamber of Commerce}’s specialised studies. This confirms again the high significance that Alice attaches to the \sphinxstyleemphasis{attractiveness} of her further studies and of her future profession (see criteria \sphinxstyleemphasis{AS} and \sphinxstyleemphasis{AP} in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}).
 
-Let us, for instance, check now the pairwise outranking situations observed between the first and second\sphinxhyphen{}ranked alternative, ie \sphinxstyleemphasis{Garduate Interpreter} studies in \sphinxstyleemphasis{Köln} versus \sphinxstyleemphasis{Graduate Interpreter} studies in \sphinxstyleemphasis{Saabrücken} (see \sphinxstyleemphasis{I\sphinxhyphen{}FHK} and \sphinxstyleemphasis{I\sphinxhyphen{}USB} in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}).
+Let us, for instance, check now the pairwise outranking situations observed between the first and second\sphinxhyphen{}ranked alternative, i.e. \sphinxstyleemphasis{Garduate Interpreter} studies in \sphinxstyleemphasis{Köln} versus \sphinxstyleemphasis{Graduate Interpreter} studies in \sphinxstyleemphasis{Saabrücken} (see \sphinxstyleemphasis{I\sphinxhyphen{}FHK} and \sphinxstyleemphasis{I\sphinxhyphen{}USB} in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{showHTMLPairwiseOutrankings}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{I\PYGZhy{}FHK}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{I\PYGZhy{}USB}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -4371,7 +4373,7 @@ Let us, for instance, check now the pairwise outranking situations observed betw
 The \sphinxstyleemphasis{Köln} alternative is performing \sphinxstylestrong{at least as well as} the \sphinxstyleemphasis{Saarbrücken} alternative on all the performance criteria, except the \sphinxstyleemphasis{Annual income} (of significance 2/24). Conversely, the \sphinxstyleemphasis{Saarbrücken} alternative is clearly \sphinxstylestrong{outperformed} from the \sphinxstyleemphasis{geographical} (0/6) as well as from the \sphinxstyleemphasis{financial} perspective (2/6).
 
 In a similar way, we may finally compute a \sphinxstyleemphasis{partial ranking} of all the potential study programs with the the help of the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingByChoosingDigraph}} constructor (see \hyperref[\detokenize{tutorial:alicerankingbychoosing}]{Listing \ref{\detokenize{tutorial:alicerankingbychoosing}}} below), who computes a bipolar ranking by conjointly \sphinxstyleemphasis{best\sphinxhyphen{}choosing} and \sphinxstyleemphasis{last\sphinxhyphen{}choosing} \sphinxcite{tutorial:bis-1999}.
-\sphinxSetupCaptionForVerbatim{Computing a weak ranking by best and last choosing}
+\sphinxSetupCaptionForVerbatim{Computing a weak ranking by bipolar best\sphinxhyphen{} and last\sphinxhyphen{}choosing}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:alicerankingbychoosing}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import}\PYGZbs{}
@@ -4393,7 +4395,7 @@ In a similar way, we may finally compute a \sphinxstyleemphasis{partial ranking}
 
 In \hyperref[\detokenize{tutorial:alicerankingbychoosing}]{Listing \ref{\detokenize{tutorial:alicerankingbychoosing}}}, we find confirmed that the \sphinxstyleemphasis{Interpreter} studies appear all preferrred to the \sphinxstyleemphasis{Translator} studies. Furthermore, the \sphinxstyleemphasis{Interpreter} studies in \sphinxstyleemphasis{Saarbrücken} appear preferred to the same studies in \sphinxstyleemphasis{Heidelberg}. The \sphinxstyleemphasis{Köln} alternative is apparently the preferred one of all the \sphinxstyleemphasis{Translater} studies. And, the \sphinxstyleemphasis{Foreign Correspondent} and the \sphinxstyleemphasis{Specialised Secretary} studies appear second\sphinxhyphen{}last and last ranked.
 
-Yet, how \sphinxstyleemphasis{robust} are our findings with respect to potential settings of the decision objectives importance and the performance criteria significance ?
+Yet, how \sphinxstyleemphasis{robust} are our findings with respect to potential settings of the decision objectives’ importance and the performance criteria significance ?
 
 
 \subsection{Robustness analysis}
@@ -4451,7 +4453,7 @@ Concerning now a 90\%\sphinxhyphen{}\sphinxstyleemphasis{confident} best choice 
 \PYG{g+go}{   \PYGZhy{} most credible action(s) = \PYGZob{} \PYGZsq{}I\PYGZhy{}FHK\PYGZsq{}: 0.75, \PYGZcb{}}
 \end{sphinxVerbatim}
 
-The \sphinxstyleemphasis{Graduate Interpreter} studies in Köln remain indeed a 90\%\sphinxhyphen{}confident \sphinxstyleemphasis{Condorcet} winner (Line 2). Hence, the same study program also remains our 90\%\sphinxhyphen{}confident most credible best choice recommendation supported by a continual 18/24 (87.5\%) majority of the global criteria significance (see Lines 9 and 15).
+The \sphinxstyleemphasis{Graduate Interpreter} studies in Köln remain indeed a 90\%\sphinxhyphen{}confident \sphinxstyleemphasis{Condorcet} winner (Line 2). Hence, the same study program also remains our 90\%\sphinxhyphen{}confident most credible best choice supported by a continual 18/24 (87.5\%) majority of the global criteria significance (see Lines 9 and 15).
 
 When previously comparing the two best\sphinxhyphen{}ranked study programs (see \hyperref[\detokenize{tutorial:pairwisecomparison}]{Fig.\@ \ref{\detokenize{tutorial:pairwisecomparison}}}), we have observed that \sphinxstyleemphasis{I\sphinxhyphen{}FHK} actually positively outranks \sphinxstyleemphasis{I\sphinxhyphen{}USB} on all four decision objectives. When admitting equi\sphinxhyphen{}significant criteria significances per objective, this outranking situation is hence valid independently of the importance weights Alice may allocate to each of her decision objectives.
 
@@ -4500,7 +4502,7 @@ We may hence make use of the \sphinxcode{\sphinxupquote{exportGraphViz}} method 
 \noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{AliceChoice_unopposed}.png}
 \caption{Unopposed partial ranking of the potential study programs}\label{\detokenize{tutorial:alicechoice-unopposed}}\end{figure}
 
-Again, when \sphinxstyleemphasis{equi\sphinxhyphen{}signficant} performance criteria are assumed per decision objective, we observe in \hyperref[\detokenize{tutorial:alicechoice-unopposed}]{Fig.\@ \ref{\detokenize{tutorial:alicechoice-unopposed}}} that \sphinxstyleemphasis{I\sphinxhyphen{}FHK} remains the stable best choice recommendation, \sphinxstyleemphasis{independently} of the actual importance weights that Alice may wish to allocate to her four decision objectives.
+Again, when \sphinxstyleemphasis{equi\sphinxhyphen{}signficant} performance criteria are assumed per decision objective, we observe in \hyperref[\detokenize{tutorial:alicechoice-unopposed}]{Fig.\@ \ref{\detokenize{tutorial:alicechoice-unopposed}}} that \sphinxstyleemphasis{I\sphinxhyphen{}FHK} remains the stable best choice, \sphinxstyleemphasis{independently} of the actual importance weights that Alice may wish to allocate to her four decision objectives.
 
 In view of her performance tableau in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}, \sphinxstyleemphasis{Graduate Interpreter} studies at the \sphinxstyleemphasis{Technical High School Köln}, thus, represent definitely \sphinxstylestrong{Alice’s very best choice}.
 

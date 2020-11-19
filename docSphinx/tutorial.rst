@@ -3213,7 +3213,10 @@ Within each decision objective, the performance criteria are considered to be eq
 The performance tableau
 .......................
 
-The actual evaluations of Alice's potential study programs are gathered in a :py:class:`perfTabs.PerformanceTableau` object [21]_.
+The actual evaluations of Alice's potential study programs are stored in a file named `AliceChoice.py`_ of :py:class:`perfTabs.PerformanceTableau` format [21]_.
+
+    .. _AliceChoice.py: _static/AliceChoice.py
+
 
 .. code-block:: pycon
    :name: alicePerfTab
@@ -3267,13 +3270,13 @@ In the following *heatmap view*, we may now consult Alice's performance evaluati
 
    Heatmap of Alice's performance tableau	   
 
-Alice is subjectively evaluating the *attractiveness* of the studies on a three level ordinal scale from 0 (*weak*), 1 (*fair*) to 2 (*good*). Similarly, she is subjectively evaluating the *attractiveness* of the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the *occupational prestige* she looked up the SIOPS [20]_. All the other evaluation data could be looked up on the internet (see :numref:`aliceHeatmap`).
+Alice is subjectively evaluating the *Attractiveness* of the studies on a three level ordinal scale from 0 (*weak*), 1 (*fair*) to 2 (*good*). Similarly, she is subjectively evaluating the *Attractiveness* of the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the *occupational prestige* she looked up the SIOPS [20]_. All the other evaluation data could be looked up on the internet (see :numref:`aliceHeatmap`).
 
 Notice by the way that evaluations on performance criteria to be minimized, like *distance to home* (*DH*) or *study times* (*SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
 
 Her ten potential study programs are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph [23]_. *Graduate interpreter* studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by *Qualified Translator* studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs for her appear to be studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
 
-It is interesting to observe that for Alice, the most significant performance criteria, appear to be, on the one side, the *attractiveness* of the study program (*AS*, +0.72) followed by the *attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear to be, on the other side, not *so* significant [27]_.
+It is interesting to observe that for Alice, the most significant performance criteria, appear to be, on the one side, the *Attractiveness* of the study program (*AS*, +0.72) followed by the *Attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear to be, on the other side, not *so* significant [27]_.
 
 
 Building a best choice recommendation
@@ -3378,9 +3381,9 @@ We may furthermore check that no outranking *circuits* do appear (see :numref:`a
      determinateness (%) : 58.33
      most credible action(s) = {'S-HKK': 0.17,'C-HKK': 0.17}
 
-Recommended best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High School* in *Köln* (see :numref:`aliceBestChoice` Line 16) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
+Most credible best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High School* in *Köln* (see :numref:`aliceBestChoice` Line 16) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
 
-The strict outranking digraph being actually *transitive* (see :numref:`aliceBestChoiceDrawing`), a graphviz drawing of its skeleton, oriented by the previous *best*, respectively *worst* choice, may well illustrate our *choice recommendation*.
+The strict outranking digraph being actually *transitive* (see :numref:`aliceBestChoiceDrawing` Line 2), a graphviz drawing of its skeleton, oriented by the previous *best*, respectively *worst* choice, may well illustrate our *choice recommendation*.
 
 .. code-block:: pycon
    :name: aliceBestChoiceDrawing
@@ -3407,7 +3410,7 @@ The strict outranking digraph being actually *transitive* (see :numref:`aliceBes
 
 In :numref:`aliceBestChoiceImage` we notice that the *Graduate Interpreter* studies come first, followed by the *Qualified Translator* studies. Last come the *Chamber of Commerce*'s specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
 
-Let us, for instance, check now the pairwise outranking situations observed between the first and second-ranked alternative, ie *Garduate Interpreter* studies in *Köln* versus *Graduate Interpreter* studies in *Saabrücken* (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
+Let us, for instance, check now the pairwise outranking situations observed between the first and second-ranked alternative, i.e. *Garduate Interpreter* studies in *Köln* versus *Graduate Interpreter* studies in *Saabrücken* (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
 
    >>> dg.showHTMLPairwiseOutrankings('I-FHK','I-USB')
 
@@ -3425,7 +3428,7 @@ In a similar way, we may finally compute a *partial ranking* of all the potentia
 .. code-block:: pycon
    :name: aliceRankingByChoosing
    :linenos:
-   :caption: Computing a weak ranking by best and last choosing 
+   :caption: Computing a weak ranking by bipolar best- and last-choosing 
 
    >>> from transitiveDigraphs import\
                   RankingByChoosingDigraph
@@ -3445,7 +3448,7 @@ In a similar way, we may finally compute a *partial ranking* of all the potentia
 
 In :numref:`aliceRankingByChoosing`, we find confirmed that the *Interpreter* studies appear all preferrred to the *Translator* studies. Furthermore, the *Interpreter* studies in *Saarbrücken* appear preferred to the same studies in *Heidelberg*. The *Köln* alternative is apparently the preferred one of all the *Translater* studies. And, the *Foreign Correspondent* and the *Specialised Secretary* studies appear second-last and last ranked.
 
-Yet, how *robust* are our findings with respect to potential settings of the decision objectives importance and the performance criteria significance ?
+Yet, how *robust* are our findings with respect to potential settings of the decision objectives' importance and the performance criteria significance ?
 		
 Robustness analysis
 ...................
@@ -3503,7 +3506,7 @@ Concerning now a 90%-*confident* best choice recommendation, we are lucky (see :
       determinateness (%) : 61.25
       - most credible action(s) = { 'I-FHK': 0.75, }
 
-The *Graduate Interpreter* studies in Köln remain indeed a 90%-confident *Condorcet* winner (Line 2). Hence, the same study program also remains our 90%-confident most credible best choice recommendation supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9 and 15).
+The *Graduate Interpreter* studies in Köln remain indeed a 90%-confident *Condorcet* winner (Line 2). Hence, the same study program also remains our 90%-confident most credible best choice supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9 and 15).
 
 When previously comparing the two best-ranked study programs (see :numref:`pairwiseComparison`), we have observed that *I-FHK* actually positively outranks *I-USB* on all four decision objectives. When admitting equi-significant criteria significances per objective, this outranking situation is hence valid independently of the importance weights Alice may allocate to each of her decision objectives. 
 
@@ -3548,7 +3551,7 @@ We may hence make use of the :code:`exportGraphViz` method of the :py:class:`tra
 
    Unopposed partial ranking of the potential study programs	   
 
-Again, when *equi-signficant* performance criteria are assumed per decision objective, we observe in :numref:`AliceChoice_unopposed` that *I-FHK* remains the stable best choice recommendation, *independently* of the actual importance weights that Alice may wish to allocate to her four decision objectives.
+Again, when *equi-signficant* performance criteria are assumed per decision objective, we observe in :numref:`AliceChoice_unopposed` that *I-FHK* remains the stable best choice, *independently* of the actual importance weights that Alice may wish to allocate to her four decision objectives.
 
 In view of her performance tableau in :numref:`aliceHeatmap`, *Graduate Interpreter* studies at the *Technical High School Köln*, thus, represent definitely **Alice's very best choice**.
 

@@ -1,6 +1,6 @@
 "criteria","name","weight","scale","prefDir","thresholds","a1","a2","a3","a4","a5","a6","a7"
-"b1","random ordinal benefit criterion","3.0","(0, 10)","max","OrderedDict()",5.00,3.00,8.00,5.00,2.00,6.00,7.00
-"b2","random ordinal benefit criterion","3.0","(0, 10)","max","OrderedDict()",9.00,3.00,3.00,5.00,4.00,4.00,7.00
-"c1","random ordinal cost criterion","-2.0","(0, 10)","min","OrderedDict()",7.00,7.00,7.00,8.00,2.00,6.00,3.00
-"c2","random cardinal cost criterion","-2.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('3.112186276811568'), Decimal('0'))), ('pref', (Decimal('4.1'), Decimal('0'))), ('veto', (Decimal('33.48753062296087'), Decimal('0')))])",44.79,54.14,57.40,30.42,26.04,53.30,63.64
-"c3","random cardinal cost criterion","-2.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('5.825992629979602'), Decimal('0'))), ('pref', (Decimal('10.96'), Decimal('0'))), ('veto', (Decimal('59.768312706952976'), Decimal('0')))])",6.71,33.39,18.33,72.14,44.35,66.11,47.04
+"b1","random cardinal benefit criterion","2.0","(0.0, 100.0)","max","OrderedDict([('ind', (Decimal('1.376789580656362'), Decimal('0'))), ('pref', (Decimal('5.379999999999999'), Decimal('0'))), ('veto', (Decimal('48.04551207126603'), Decimal('0')))])",30.50,54.07,59.45,68.66,69.68,78.46,79.86
+"b2","random cardinal benefit criterion","2.0","(0.0, 100.0)","max","OrderedDict([('ind', (Decimal('4.441292376074974'), Decimal('0'))), ('pref', (Decimal('4.64'), Decimal('0'))), ('veto', (Decimal('43.38302782754226'), Decimal('0')))])",83.95,40.84,61.48,88.42,65.48,70.12,53.16
+"b3","random ordinal benefit criterion","2.0","(0, 10)","max","OrderedDict()",8.00,5.00,8.00,5.00,5.00,3.00,1.00
+"c1","random cardinal cost criterion","-3.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('1.3256387546951633'), Decimal('0'))), ('pref', (Decimal('12.169999999999998'), Decimal('0'))), ('veto', (Decimal('45.946711055647484'), Decimal('0')))])",61.64,76.17,31.01,31.50,43.67,18.13,63.02
+"c2","random ordinal cost criterion","-3.0","(0, 10)","min","OrderedDict()",5.00,5.00,6.00,9.00,6.00,2.00,2.00
