@@ -3391,7 +3391,7 @@ We may furthermore notice in :numref:`aliceRelationMap` that the four best-ranke
 
 Most credible best choice among the four best-ranked study programs eventually becomes the *Graduate Interpreter* study program at the *Technical High School* in *Köln* (see :numref:`aliceBestChoice` Line 14) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
 
-The strict outranking digraph being actually *transitive* (see :numref:`aliceBestChoiceDrawing` Line 2), a graphviz drawing of its skeleton, oriented by the previous *best*, respectively *worst* choice, may well illustrate our *choice recommendation*.
+In the relation map shown in :numref:`aliceRelationMap`, we may notice in the left lower corner that the *asymmetric part* of the outranking relation, i.e. the corresponding *strict* outranking relation, is actually *transitive* (see :numref:`aliceBestChoiceDrawing` Line 2), a graphviz drawing of its skeleton, oriented by the previous *best*, respectively *worst* choice, may well illustrate our *choice recommendation*.
 
 .. code-block:: pycon
    :name: aliceBestChoiceDrawing
@@ -3418,7 +3418,7 @@ The strict outranking digraph being actually *transitive* (see :numref:`aliceBes
 
 In :numref:`aliceBestChoiceImage` we notice that the *Graduate Interpreter* studies come first, followed by the *Qualified Translator* studies. Last come the *Chamber of Commerce*'s specialised studies. This confirms again the high significance that Alice attaches to the *attractiveness* of her further studies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
 
-Let us, for instance, check now the pairwise outranking situations observed between the first and second-ranked alternative, i.e. *Garduate Interpreter* studies in *Köln* versus *Graduate Interpreter* studies in *Saabrücken* (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
+Let us now, for instance, check the pairwise outranking situations observed between the first and second-ranked alternative, i.e. *Garduate Interpreter* studies in *Köln* versus *Graduate Interpreter* studies in *Saabrücken* (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
 
    >>> dg.showHTMLPairwiseOutrankings('I-FHK','I-USB')
 
@@ -3431,7 +3431,7 @@ Let us, for instance, check now the pairwise outranking situations observed betw
 
 The *Köln* alternative is performing **at least as well as** the *Saarbrücken* alternative on all the performance criteria, except the *Annual income* (of significance 2/24). Conversely, the *Saarbrücken* alternative is clearly **outperformed** from the *geographical* (0/6) as well as from the *financial* perspective (2/6).
 
-In a similar way, we may finally compute a *partial ranking* of all the potential study programs with the the help of the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor (see :numref:`aliceRankingByChoosing` below), who computes a bipolar ranking by conjointly *best-choosing* and *last-rejecting* [BIS-1999]_.
+In a similar way, we may finally compute a *weak ranking* of all the potential study programs with the the help of the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor (see :numref:`aliceRankingByChoosing` below), who computes a bipolar ranking by conjointly *best-choosing* and *last-rejecting* [BIS-1999]_.
 
 .. code-block:: pycon
    :name: aliceRankingByChoosing
