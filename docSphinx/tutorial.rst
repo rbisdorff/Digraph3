@@ -3346,17 +3346,25 @@ We have mentioned that Alice considers a performance difference of 7 points on t
      Counter-veto threshold              : 7.00
      Polarisation: r(I-UHB >= S-HKK) = 0.17 ==> +1.00
 
-In :numref:`aliceVetos`, we notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 9, 14, 19) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35).
+In :numref:`aliceVetos`, we notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 9, 14, 19) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35). In :numref:`aliceRelationMap` below, these polarisations appear in the last column and last row.
 
-We may furthermore check that no outranking *circuits* do appear (see :numref:`aliceBestChoice` Line 1) and that the four best ranked study programs in :numref:`aliceHeatmap` are in fact *Condorcet* winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (see :numref:`aliceBestChoice` Line 10).
+    >>> gg.showHTMLRelationMap(tableTitle='Outranking relation map',\
+                               rankingRule='Copeland')
+
+.. figure:: aliceRelationMap.png
+   :name: aliceRelationMap
+   :width: 550 px
+   :align: center
+
+   'Copeland'-ranked outranking relation map	   
+
+We may furthermore notice in :numref:`aliceRelationMap` that the four best-ranked study programs, *I-FHK*, *I-USB*, *I-UHB* and *T-FHK*,  are in fact *Condorcet* winners (see :numref:`aliceBestChoice` Line 2), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (Line 8).
    
 .. code-block:: pycon
    :name: aliceBestChoice
    :linenos:
    :caption: Alice's best choice recommendation
 
-   >>> dg.computeChordlessCircuits()
-    []
    >>> dg.computeCondorcetWinners()
     ['I-FHK', 'I-UHB', 'I-USB', 'T-FHK'] 
    >>> dg.showBestChoiceRecommendation()
@@ -3381,7 +3389,7 @@ We may furthermore check that no outranking *circuits* do appear (see :numref:`a
      determinateness (%) : 58.33
      most credible action(s) = {'S-HKK': 0.17,'C-HKK': 0.17}
 
-Most credible best choice for Alice eventually becomes the *Graduate Interpreter* study program at the *Technical High School* in *Köln* (see :numref:`aliceBestChoice` Line 16) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
+Most credible best choice among the four best-ranked study programs eventually becomes the *Graduate Interpreter* study program at the *Technical High School* in *Köln* (see :numref:`aliceBestChoice` Line 14) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
 
 The strict outranking digraph being actually *transitive* (see :numref:`aliceBestChoiceDrawing` Line 2), a graphviz drawing of its skeleton, oriented by the previous *best*, respectively *worst* choice, may well illustrate our *choice recommendation*.
 

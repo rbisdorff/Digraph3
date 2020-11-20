@@ -3440,8 +3440,8 @@
 <span class="sd">                               &#39;negative&#39;: &#39;-&#39;, &#39;min&#39;: &#39;┴&#39;}</span>
 
 <span class="sd">        The default ordering of the output is following the Copeland ranking rule</span>
-<span class="sd">        from best to worst actions. Further available ranking rules are net flows (rankingRule=&quot;netFlows&quot;),</span>
-<span class="sd">        Kohler&#39;s (rankingRule=&quot;kohler&quot;), and Tideman&#39;s ranked pairs rule (rankingRule=&quot;rankedPairs&quot;).</span>
+<span class="sd">        from best to worst actions. Further available ranking rule is the &#39;NetFlows&#39; net flows rule.</span>
+<span class="sd">        </span>
 
 <span class="sd">        Example::</span>
 
@@ -3449,7 +3449,7 @@
 <span class="sd">            &gt;&gt;&gt; t = RandomCBPerformanceTableau(numberOfActions=25,seed=1)</span>
 <span class="sd">            &gt;&gt;&gt; g = BipolarOutrankingDigraph(t,Normalized=True)</span>
 <span class="sd">            &gt;&gt;&gt; gcd = ~(-g)  # strict outranking relation</span>
-<span class="sd">            &gt;&gt;&gt; gcd.showRelationMap(rankingRule=&quot;netFlows&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; gcd.showRelationMap(rankingRule=&quot;NetFlows&quot;)</span>
 <span class="sd">             -   ++++++++  +++++┬+┬┬+</span>
 <span class="sd">            - -   + +++++ ++┬+┬+++┬++</span>
 <span class="sd">            ┴+  ┴ + ++  ++++┬+┬┬++┬++</span>
@@ -3475,7 +3475,7 @@
 <span class="sd">            ┴┴┴----+-┴+┴---┴-+---+ ┴+</span>
 <span class="sd">            ┴┴-┴┴┴-┴- - -┴┴---┴┴+ ┬ -</span>
 <span class="sd">            ----┴┴-┴-----┴┴---  - -- </span>
-<span class="sd">            Ranking rule: netFlows</span>
+<span class="sd">            Ranking rule: NetFlows</span>
 <span class="sd">            &gt;&gt;&gt; </span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3485,10 +3485,10 @@
         <span class="k">if</span> <span class="n">actionsList</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s2">&quot;Copeland&quot;</span><span class="p">:</span>
                 <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
-            <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s2">&quot;netFlows&quot;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s2">&quot;NetFlows&quot;</span><span class="p">:</span>
                 <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
-            <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s2">&quot;rankedPairs&quot;</span><span class="p">:</span>
-                <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeRankedPairsRanking</span><span class="p">()</span>
+            <span class="c1"># elif rankingRule == &quot;RankedPairs&quot;:</span>
+            <span class="c1">#     ranking = self.computeRankedPairsRanking()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">rankingRule</span> <span class="o">=</span> <span class="s2">&quot;Alphabetic&quot;</span>
                 <span class="n">ranking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
@@ -3617,7 +3617,7 @@
 <span class="sd">            &gt;&gt;&gt; t = RandomCBPerformanceTableau(numberOfActions=25,seed=1)</span>
 <span class="sd">            &gt;&gt;&gt; g = BipolarOutrankingDigraph(t,Normalized=True)</span>
 <span class="sd">            &gt;&gt;&gt; gcd = ~(-g)  # strict outranking relation</span>
-<span class="sd">            &gt;&gt;&gt; gcd.showHTMLRelationMap(rankingRule=&quot;netFlows&quot;)</span>
+<span class="sd">            &gt;&gt;&gt; gcd.showHTMLRelationMap(rankingRule=&quot;NetFlows&quot;)</span>
 <span class="sd">            </span>
 <span class="sd">        .. image:: relationMap.png</span>
 <span class="sd">           :alt: Browser view of a relation map</span>
@@ -3663,10 +3663,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s2">&quot;Copeland&quot;</span><span class="p">:</span>
                 <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeCopelandRanking</span><span class="p">()</span>
-            <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s2">&quot;netFlows&quot;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s2">&quot;NetFlows&quot;</span><span class="p">:</span>
                 <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
-            <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s2">&quot;rankedPairs&quot;</span><span class="p">:</span>
-                <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeRankedPairsRanking</span><span class="p">()</span>
+            <span class="c1"># elif rankingRule == &quot;RankedPairs&quot;:</span>
+            <span class="c1">#     ranking = self.computeRankedPairsRanking()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">rankingRule</span> <span class="o">=</span> <span class="s2">&quot;Alphabetic&quot;</span>
                 <span class="n">ranking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>

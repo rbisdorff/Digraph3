@@ -2394,7 +2394,7 @@ See corresponding Digraph.showRelationMap() method.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>  <span class="c1"># strict outranking relation</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showHTMLRelationMap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s2">&quot;netFlows&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showHTMLRelationMap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s2">&quot;NetFlows&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/relationMap.png"><img alt="Browser view of a relation map" class="align-center" src="_images/relationMap.png" style="width: 600px;" /></a>
@@ -2603,14 +2603,13 @@ certainly validated and certainly invalidated outranking situations.</p>
 </dd>
 </dl>
 <p>The default ordering of the output is following the Copeland ranking rule
-from best to worst actions. Further available ranking rules are net flows (rankingRule=”netFlows”),
-Kohler’s (rankingRule=”kohler”), and Tideman’s ranked pairs rule (rankingRule=”rankedPairs”).</p>
+from best to worst actions. Further available ranking rule is the ‘NetFlows’ net flows rule.</p>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>  <span class="c1"># strict outranking relation</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showRelationMap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s2">&quot;netFlows&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showRelationMap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s2">&quot;NetFlows&quot;</span><span class="p">)</span>
 <span class="go"> -   ++++++++  +++++┬+┬┬+</span>
 <span class="go">- -   + +++++ ++┬+┬+++┬++</span>
 <span class="go">┴+  ┴ + ++  ++++┬+┬┬++┬++</span>
@@ -2636,7 +2635,7 @@ Kohler’s (rankingRule=”kohler”), and Tideman’s ranked pairs rule (rankin
 <span class="go">┴┴┴----+-┴+┴---┴-+---+ ┴+</span>
 <span class="go">┴┴-┴┴┴-┴- - -┴┴---┴┴+ ┬ -</span>
 <span class="go">----┴┴-┴-----┴┴---  - -- </span>
-<span class="go">Ranking rule: netFlows</span>
+<span class="go">Ranking rule: NetFlows</span>
 <span class="gp">&gt;&gt;&gt; </span>
 </pre></div>
 </div>

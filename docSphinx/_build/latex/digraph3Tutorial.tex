@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{November 19, 2020}
+\date{November 20, 2020}
 \release{3.9.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -4293,14 +4293,24 @@ We have mentioned that Alice considers a performance difference of 7 points on t
 \PYG{g+go}{  Polarisation: r(I\PYGZhy{}UHB \PYGZgt{}= S\PYGZhy{}HKK) = 0.17 ==\PYGZgt{} +1.00}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{tutorial:alicevetos}]{Listing \ref{\detokenize{tutorial:alicevetos}}}, we notice that \sphinxstyleemphasis{considerable performance differences} concerning the \sphinxstyleemphasis{Attractiveness of the studies} (\sphinxstyleemphasis{AS} criterion) are indeed observed between the \sphinxstyleemphasis{Specialised Secretary} study programm offered in Köln and the \sphinxstyleemphasis{Graduate Interpreter} study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three \sphinxstyleemphasis{more or less invalid} outranking situations to \sphinxstyleemphasis{certainly invalid} (Lines 9, 14, 19) and corresponding three \sphinxstyleemphasis{more or less valid} converse outranking situations to \sphinxstyleemphasis{certainly valid} ones (Lines 25, 30, 35).
+In \hyperref[\detokenize{tutorial:alicevetos}]{Listing \ref{\detokenize{tutorial:alicevetos}}}, we notice that \sphinxstyleemphasis{considerable performance differences} concerning the \sphinxstyleemphasis{Attractiveness of the studies} (\sphinxstyleemphasis{AS} criterion) are indeed observed between the \sphinxstyleemphasis{Specialised Secretary} study programm offered in Köln and the \sphinxstyleemphasis{Graduate Interpreter} study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three \sphinxstyleemphasis{more or less invalid} outranking situations to \sphinxstyleemphasis{certainly invalid} (Lines 9, 14, 19) and corresponding three \sphinxstyleemphasis{more or less valid} converse outranking situations to \sphinxstyleemphasis{certainly valid} ones (Lines 25, 30, 35). In \hyperref[\detokenize{tutorial:alicerelationmap}]{Fig.\@ \ref{\detokenize{tutorial:alicerelationmap}}} below, these polarisations appear in the last column and last row.
 
-We may furthermore check that no outranking \sphinxstyleemphasis{circuits} do appear (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 1) and that the four best ranked study programs in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}} are in fact \sphinxstyleemphasis{Condorcet} winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 10).
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gg}\PYG{o}{.}\PYG{n}{showHTMLRelationMap}\PYG{p}{(}\PYG{n}{tableTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Outranking relation map}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
+\PYG{g+go}{                           rankingRule=\PYGZsq{}Copeland\PYGZsq{})}
+\end{sphinxVerbatim}
+
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{aliceRelationMap}.png}
+\caption{‘Copeland’\sphinxhyphen{}ranked outranking relation map}\label{\detokenize{tutorial:alicerelationmap}}\end{figure}
+
+We may furthermore notice in \hyperref[\detokenize{tutorial:alicerelationmap}]{Fig.\@ \ref{\detokenize{tutorial:alicerelationmap}}} that the four best\sphinxhyphen{}ranked study programs, \sphinxstyleemphasis{I\sphinxhyphen{}FHK}, \sphinxstyleemphasis{I\sphinxhyphen{}USB}, \sphinxstyleemphasis{I\sphinxhyphen{}UHB} and \sphinxstyleemphasis{T\sphinxhyphen{}FHK},  are in fact \sphinxstyleemphasis{Condorcet} winners (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 2), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (Line 8).
 \sphinxSetupCaptionForVerbatim{Alice’s best choice recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:alicebestchoice}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{computeChordlessCircuits}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ []}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{computeCondorcetWinners}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ [\PYGZsq{}I\PYGZhy{}FHK\PYGZsq{}, \PYGZsq{}I\PYGZhy{}UHB\PYGZsq{}, \PYGZsq{}I\PYGZhy{}USB\PYGZsq{}, \PYGZsq{}T\PYGZhy{}FHK\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
@@ -4326,7 +4336,7 @@ We may furthermore check that no outranking \sphinxstyleemphasis{circuits} do ap
 \PYG{g+go}{  most credible action(s) = \PYGZob{}\PYGZsq{}S\PYGZhy{}HKK\PYGZsq{}: 0.17,\PYGZsq{}C\PYGZhy{}HKK\PYGZsq{}: 0.17\PYGZcb{}}
 \end{sphinxVerbatim}
 
-Most credible best choice for Alice eventually becomes the \sphinxstyleemphasis{Graduate Interpreter} study program at the \sphinxstyleemphasis{Technical High School} in \sphinxstyleemphasis{Köln} (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 16) supported by a \((0.75 + 1)/2.0 \,=\,87.5\%\) (18/24) majority of global criteria significance %
+Most credible best choice among the four best\sphinxhyphen{}ranked study programs eventually becomes the \sphinxstyleemphasis{Graduate Interpreter} study program at the \sphinxstyleemphasis{Technical High School} in \sphinxstyleemphasis{Köln} (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 14) supported by a \((0.75 + 1)/2.0 \,=\,87.5\%\) (18/24) majority of global criteria significance %
 \begin{footnote}[24]\sphinxAtStartFootnote
 See also the \DUrole{xref,std,std-ref}{Advanced Topic} about computing best choice membership characteristics in the Digraph3 documentation.
 %

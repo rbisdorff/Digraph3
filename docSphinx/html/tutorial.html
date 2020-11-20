@@ -4685,8 +4685,16 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>In <a class="reference internal" href="#alicevetos"><span class="std std-numref">Listing 49</span></a>, we notice that <em>considerable performance differences</em> concerning the <em>Attractiveness of the studies</em> (<em>AS</em> criterion) are indeed observed between the <em>Specialised Secretary</em> study programm offered in Köln and the <em>Graduate Interpreter</em> study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three <em>more or less invalid</em> outranking situations to <em>certainly invalid</em> (Lines 9, 14, 19) and corresponding three <em>more or less valid</em> converse outranking situations to <em>certainly valid</em> ones (Lines 25, 30, 35).</p>
-<p>We may furthermore check that no outranking <em>circuits</em> do appear (see <a class="reference internal" href="#alicebestchoice"><span class="std std-numref">Listing 50</span></a> Line 1) and that the four best ranked study programs in <a class="reference internal" href="#aliceheatmap"><span class="std std-numref">Fig. 29</span></a> are in fact <em>Condorcet</em> winners (Line 3), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (see <a class="reference internal" href="#alicebestchoice"><span class="std std-numref">Listing 50</span></a> Line 10).</p>
+<p>In <a class="reference internal" href="#alicevetos"><span class="std std-numref">Listing 49</span></a>, we notice that <em>considerable performance differences</em> concerning the <em>Attractiveness of the studies</em> (<em>AS</em> criterion) are indeed observed between the <em>Specialised Secretary</em> study programm offered in Köln and the <em>Graduate Interpreter</em> study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three <em>more or less invalid</em> outranking situations to <em>certainly invalid</em> (Lines 9, 14, 19) and corresponding three <em>more or less valid</em> converse outranking situations to <em>certainly valid</em> ones (Lines 25, 30, 35). In <a class="reference internal" href="#alicerelationmap"><span class="std std-numref">Fig. 30</span></a> below, these polarisations appear in the last column and last row.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gg</span><span class="o">.</span><span class="n">showHTMLRelationMap</span><span class="p">(</span><span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;Outranking relation map&#39;</span><span class="p">,</span>\
+<span class="go">                           rankingRule=&#39;Copeland&#39;)</span>
+</pre></div>
+</div>
+<div class="figure align-center" id="alicerelationmap">
+<a class="reference internal image-reference" href="_images/aliceRelationMap.png"><img alt="_images/aliceRelationMap.png" src="_images/aliceRelationMap.png" style="width: 550px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">‘Copeland’-ranked outranking relation map</span><a class="headerlink" href="#alicerelationmap" title="Permalink to this image">¶</a></p>
+</div>
+<p>We may furthermore notice in <a class="reference internal" href="#alicerelationmap"><span class="std std-numref">Fig. 30</span></a> that the four best-ranked study programs, <em>I-FHK</em>, <em>I-USB</em>, <em>I-UHB</em> and <em>T-FHK</em>,  are in fact <em>Condorcet</em> winners (see <a class="reference internal" href="#alicebestchoice"><span class="std std-numref">Listing 50</span></a> Line 2), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (Line 8).</p>
 <div class="literal-block-wrapper docutils container" id="alicebestchoice">
 <div class="code-block-caption"><span class="caption-number">Listing 50 </span><span class="caption-text">Alice’s best choice recommendation</span><a class="headerlink" href="#alicebestchoice" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -4711,11 +4719,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 20
 21
 22
-23
-24
-25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
-<span class="go"> []</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">computeCondorcetWinners</span><span class="p">()</span>
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">computeCondorcetWinners</span><span class="p">()</span>
 <span class="go"> [&#39;I-FHK&#39;, &#39;I-UHB&#39;, &#39;I-USB&#39;, &#39;T-FHK&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">()</span>
 <span class="go"> Best choice recommendation(s) (BCR)</span>
@@ -4741,7 +4745,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Most credible best choice for Alice eventually becomes the <em>Graduate Interpreter</em> study program at the <em>Technical High School</em> in <em>Köln</em> (see <a class="reference internal" href="#alicebestchoice"><span class="std std-numref">Listing 50</span></a> Line 16) supported by a <img class="math" src="_images/math/356069832af8e8b1c29682449232f80318cb11fc.png" alt="(0.75 + 1)/2.0 \,=\,87.5\%"/> (18/24) majority of global criteria significance <a class="footnote-reference brackets" href="#id137" id="id56">24</a>.</p>
+<p>Most credible best choice among the four best-ranked study programs eventually becomes the <em>Graduate Interpreter</em> study program at the <em>Technical High School</em> in <em>Köln</em> (see <a class="reference internal" href="#alicebestchoice"><span class="std std-numref">Listing 50</span></a> Line 14) supported by a <img class="math" src="_images/math/356069832af8e8b1c29682449232f80318cb11fc.png" alt="(0.75 + 1)/2.0 \,=\,87.5\%"/> (18/24) majority of global criteria significance <a class="footnote-reference brackets" href="#id137" id="id56">24</a>.</p>
 <p>The strict outranking digraph being actually <em>transitive</em> (see <a class="reference internal" href="#alicebestchoicedrawing"><span class="std std-numref">Listing 51</span></a> Line 2), a graphviz drawing of its skeleton, oriented by the previous <em>best</em>, respectively <em>worst</em> choice, may well illustrate our <em>choice recommendation</em>.</p>
 <div class="literal-block-wrapper docutils container" id="alicebestchoicedrawing">
 <div class="code-block-caption"><span class="caption-number">Listing 51 </span><span class="caption-text">Drawing the best choice recommendation</span><a class="headerlink" href="#alicebestchoicedrawing" title="Permalink to this code">¶</a></div>
@@ -4769,16 +4773,16 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <div class="figure align-center" id="alicebestchoiceimage">
 <a class="reference internal image-reference" href="_images/aliceBestChoice.png"><img alt="_images/aliceBestChoice.png" src="_images/aliceBestChoice.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">Alice’s best choice recommendation</span><a class="headerlink" href="#alicebestchoiceimage" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Alice’s best choice recommendation</span><a class="headerlink" href="#alicebestchoiceimage" title="Permalink to this image">¶</a></p>
 </div>
-<p>In <a class="reference internal" href="#alicebestchoiceimage"><span class="std std-numref">Fig. 30</span></a> we notice that the <em>Graduate Interpreter</em> studies come first, followed by the <em>Qualified Translator</em> studies. Last come the <em>Chamber of Commerce</em>’s specialised studies. This confirms again the high significance that Alice attaches to the <em>attractiveness</em> of her further studies and of her future profession (see criteria <em>AS</em> and <em>AP</em> in <a class="reference internal" href="#aliceheatmap"><span class="std std-numref">Fig. 29</span></a>).</p>
+<p>In <a class="reference internal" href="#alicebestchoiceimage"><span class="std std-numref">Fig. 31</span></a> we notice that the <em>Graduate Interpreter</em> studies come first, followed by the <em>Qualified Translator</em> studies. Last come the <em>Chamber of Commerce</em>’s specialised studies. This confirms again the high significance that Alice attaches to the <em>attractiveness</em> of her further studies and of her future profession (see criteria <em>AS</em> and <em>AP</em> in <a class="reference internal" href="#aliceheatmap"><span class="std std-numref">Fig. 29</span></a>).</p>
 <p>Let us, for instance, check now the pairwise outranking situations observed between the first and second-ranked alternative, i.e. <em>Garduate Interpreter</em> studies in <em>Köln</em> versus <em>Graduate Interpreter</em> studies in <em>Saabrücken</em> (see <em>I-FHK</em> and <em>I-USB</em> in <a class="reference internal" href="#aliceheatmap"><span class="std std-numref">Fig. 29</span></a>).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showHTMLPairwiseOutrankings</span><span class="p">(</span><span class="s1">&#39;I-FHK&#39;</span><span class="p">,</span><span class="s1">&#39;I-USB&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-center" id="pairwisecomparison">
 <a class="reference internal image-reference" href="_images/pairwiseComparison.png"><img alt="_images/pairwiseComparison.png" src="_images/pairwiseComparison.png" style="width: 550px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 31 </span><span class="caption-text">Comparing the first and second best-ranked study programs</span><a class="headerlink" href="#pairwisecomparison" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text">Comparing the first and second best-ranked study programs</span><a class="headerlink" href="#pairwisecomparison" title="Permalink to this image">¶</a></p>
 </div>
 <p>The <em>Köln</em> alternative is performing <strong>at least as well as</strong> the <em>Saarbrücken</em> alternative on all the performance criteria, except the <em>Annual income</em> (of significance 2/24). Conversely, the <em>Saarbrücken</em> alternative is clearly <strong>outperformed</strong> from the <em>geographical</em> (0/6) as well as from the <em>financial</em> perspective (2/6).</p>
 <p>In a similar way, we may finally compute a <em>partial ranking</em> of all the potential study programs with the the help of the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingByChoosingDigraph" title="transitiveDigraphs.RankingByChoosingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.RankingByChoosingDigraph</span></code></a> constructor (see <a class="reference internal" href="#alicerankingbychoosing"><span class="std std-numref">Listing 52</span></a> below), who computes a bipolar ranking by conjointly <em>best-choosing</em> and <em>last-rejecting</em> <a class="reference internal" href="#bis-1999" id="id57"><span>[BIS-1999]</span></a>.</p>
@@ -4900,7 +4904,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </td></tr></table></div>
 </div>
 <p>The <em>Graduate Interpreter</em> studies in Köln remain indeed a 90%-confident <em>Condorcet</em> winner (Line 2). Hence, the same study program also remains our 90%-confident most credible best choice supported by a continual 18/24 (87.5%) majority of the global criteria significance (see Lines 9 and 15).</p>
-<p>When previously comparing the two best-ranked study programs (see <a class="reference internal" href="#pairwisecomparison"><span class="std std-numref">Fig. 31</span></a>), we have observed that <em>I-FHK</em> actually positively outranks <em>I-USB</em> on all four decision objectives. When admitting equi-significant criteria significances per objective, this outranking situation is hence valid independently of the importance weights Alice may allocate to each of her decision objectives.</p>
+<p>When previously comparing the two best-ranked study programs (see <a class="reference internal" href="#pairwisecomparison"><span class="std std-numref">Fig. 32</span></a>), we have observed that <em>I-FHK</em> actually positively outranks <em>I-USB</em> on all four decision objectives. When admitting equi-significant criteria significances per objective, this outranking situation is hence valid independently of the importance weights Alice may allocate to each of her decision objectives.</p>
 <p>We may compute these <strong>unopposed</strong> outranking situations <a class="footnote-reference brackets" href="#id138" id="id59">25</a> with help of the <a class="reference internal" href="techDoc.html#outrankingDigraphs.UnOpposedBipolarOutrankingDigraph" title="outrankingDigraphs.UnOpposedBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">outrankingDigraphs.UnOpposedBipolarOutrankingDigraph</span></code></a> constructor.</p>
 <div class="literal-block-wrapper docutils container" id="aliceunopposedoutrankings">
 <div class="code-block-caption"><span class="caption-number">Listing 55 </span><span class="caption-text">Computing the unopposed outranking situations</span><a class="headerlink" href="#aliceunopposedoutrankings" title="Permalink to this code">¶</a></div>
@@ -4947,9 +4951,9 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <div class="figure align-center" id="alicechoice-unopposed">
 <a class="reference internal image-reference" href="_images/AliceChoice_unopposed.png"><img alt="_images/AliceChoice_unopposed.png" src="_images/AliceChoice_unopposed.png" style="width: 200px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 32 </span><span class="caption-text">Unopposed partial ranking of the potential study programs</span><a class="headerlink" href="#alicechoice-unopposed" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text">Unopposed partial ranking of the potential study programs</span><a class="headerlink" href="#alicechoice-unopposed" title="Permalink to this image">¶</a></p>
 </div>
-<p>Again, when <em>equi-signficant</em> performance criteria are assumed per decision objective, we observe in <a class="reference internal" href="#alicechoice-unopposed"><span class="std std-numref">Fig. 32</span></a> that <em>I-FHK</em> remains the stable best choice, <em>independently</em> of the actual importance weights that Alice may wish to allocate to her four decision objectives.</p>
+<p>Again, when <em>equi-signficant</em> performance criteria are assumed per decision objective, we observe in <a class="reference internal" href="#alicechoice-unopposed"><span class="std std-numref">Fig. 33</span></a> that <em>I-FHK</em> remains the stable best choice, <em>independently</em> of the actual importance weights that Alice may wish to allocate to her four decision objectives.</p>
 <p>In view of her performance tableau in <a class="reference internal" href="#aliceheatmap"><span class="std std-numref">Fig. 29</span></a>, <em>Graduate Interpreter</em> studies at the <em>Technical High School Köln</em>, thus, represent definitely <strong>Alice’s very best choice</strong>.</p>
 <p>For further reading about the <em>Rubis</em> Best Choice methodology, one may consult in <a class="reference internal" href="#bis-2015" id="id60"><span>[BIS-2015]</span></a> the study of a <em>real decision aid case</em> about choosing a best poster in a scientific conference.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
@@ -5787,7 +5791,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <div class="figure align-center" id="id148">
 <a class="reference internal image-reference" href="_images/sparseRelationMap.png"><img alt="_images/sparseRelationMap.png" src="_images/sparseRelationMap.png" style="width: 450px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 33 </span><span class="caption-text">Sparse quartiles-sorting decomposed outranking relation (extract).</span><a class="headerlink" href="#id148" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 34 </span><span class="caption-text">Sparse quartiles-sorting decomposed outranking relation (extract).</span><a class="headerlink" href="#id148" title="Permalink to this image">¶</a></p>
 </div>
 <dl class="simple">
 <dt><strong>Legend</strong>:</dt><dd><ul class="simple">
@@ -6069,7 +6073,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>by running the cythonized python modules in an Intel compiled virtual Python 3.6.5 environment [GCC Intel(R) 17.0.1 –enable-optimizations c++ gcc 6.3 mode] on Debian 8 Linux.</p>
 <div class="figure align-center" id="id149">
 <a class="reference internal image-reference" href="_images/rankingRecords.png"><img alt="_images/rankingRecords.png" src="_images/rankingRecords.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 34 </span><span class="caption-text">HPC-UL Ranking Performance Records (Spring 2018)</span><a class="headerlink" href="#id149" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 35 </span><span class="caption-text">HPC-UL Ranking Performance Records (Spring 2018)</span><a class="headerlink" href="#id149" title="Permalink to this image">¶</a></p>
 </div>
 <p>Example python session on the HPC-UL Iris-126 -skylake node <a class="footnote-reference brackets" href="#id124" id="id69">7</a></p>
 <div class="highlight-bash notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -6294,7 +6298,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <span class="go"> Decimal(&#39;0.78&#39;)</span>
 </pre></div>
 </td></tr></table></div>
-<p>Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each <strong>positively outrank</strong> all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the <em>strict</em> outranking digraph (i.e. the codual ~(-<em>g</em>) of <em>g</em>) shown in <a class="reference internal" href="#converse-dual-rel-best10"><span class="std std-numref">Fig. 35</span></a>.</p>
+<p>Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each <strong>positively outrank</strong> all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the <em>strict</em> outranking digraph (i.e. the codual ~(-<em>g</em>) of <em>g</em>) shown in <a class="reference internal" href="#converse-dual-rel-best10"><span class="std std-numref">Fig. 36</span></a>.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6306,7 +6310,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 <div class="figure align-center" id="converse-dual-rel-best10">
 <a class="reference internal image-reference" href="_images/converse-dual_rel_best10.png"><img alt="_images/converse-dual_rel_best10.png" src="_images/converse-dual_rel_best10.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 35 </span><span class="caption-text">Validated <em>strict</em> outranking situations between the ten best-ranked alternatives</span><a class="headerlink" href="#converse-dual-rel-best10" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 36 </span><span class="caption-text">Validated <em>strict</em> outranking situations between the ten best-ranked alternatives</span><a class="headerlink" href="#converse-dual-rel-best10" title="Permalink to this image">¶</a></p>
 </div>
 <p>Restricted to these ten best-ranked alternatives, the <em>Copeland</em>, the <em>NetFlows</em> as well as the <em>Kemeny</em> ranking rule will all rank alternative #426464 first and alternative #578560 last. Otherwise the three ranking rules produce in this case more or less different rankings.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -6524,7 +6528,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Parameter <em>historySize</em> (see <a class="reference internal" href="#perfgenerator"><span class="std std-numref">Listing 65</span></a> Line 5) of the <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles" title="performanceQuantiles.PerformanceQuantiles.updateQuantiles"><code class="xref py py-meth docutils literal notranslate"><span class="pre">performanceQuantiles.PerformanceQuantiles.updateQuantiles()</span></code></a> method allows to <strong>balance</strong> the <strong>new</strong> evaluations against the <strong>historical</strong> ones. With <strong>historySize = None</strong> (the default setting), the balance in the example above is 900/1000 (90%, weight of historical data) against 100/1000 (10%, weight of the new incoming observations). Putting <strong>historySize = 0</strong>, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incoming data. The updated quantile limits may be shown in a browser view (see <a class="reference internal" href="#exampleperfquantiles"><span class="std std-numref">Fig. 36</span></a>).</p>
+<p>Parameter <em>historySize</em> (see <a class="reference internal" href="#perfgenerator"><span class="std std-numref">Listing 65</span></a> Line 5) of the <a class="reference internal" href="techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles" title="performanceQuantiles.PerformanceQuantiles.updateQuantiles"><code class="xref py py-meth docutils literal notranslate"><span class="pre">performanceQuantiles.PerformanceQuantiles.updateQuantiles()</span></code></a> method allows to <strong>balance</strong> the <strong>new</strong> evaluations against the <strong>historical</strong> ones. With <strong>historySize = None</strong> (the default setting), the balance in the example above is 900/1000 (90%, weight of historical data) against 100/1000 (10%, weight of the new incoming observations). Putting <strong>historySize = 0</strong>, for instance, will ignore all historical data (0/100 against 100/100) and restart building the quantile estimation with solely the new incoming data. The updated quantile limits may be shown in a browser view (see <a class="reference internal" href="#exampleperfquantiles"><span class="std std-numref">Fig. 37</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># showing the updated quantile limits in a browser view</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span><span class="o">.</span><span class="n">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
@@ -6532,7 +6536,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 <div class="figure align-center" id="exampleperfquantiles">
 <a class="reference internal image-reference" href="_images/examplePerfQuantiles.png"><img alt="Example limiting quantiles html show method" src="_images/examplePerfQuantiles.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 36 </span><span class="caption-text">Showing the updated quartiles limits</span><a class="headerlink" href="#exampleperfquantiles" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 37 </span><span class="caption-text">Showing the updated quartiles limits</span><a class="headerlink" href="#exampleperfquantiles" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="rating-new-performances-with-quantile-norms">
@@ -6717,7 +6721,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>The same result may more conveniently be consulted in a browser view via a specialised rating heatmap format ( see <code class="xref py py-meth docutils literal notranslate"><span class="pre">perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()</span></code> method (see <a class="reference internal" href="#heatmap1"><span class="std std-numref">Fig. 37</span></a>).</p>
+<p>The same result may more conveniently be consulted in a browser view via a specialised rating heatmap format ( see <code class="xref py py-meth docutils literal notranslate"><span class="pre">perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()</span></code> method (see <a class="reference internal" href="#heatmap1"><span class="std std-numref">Fig. 38</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quartiles Rating&#39;</span><span class="p">,</span>
 <span class="go">                   Correlations=True,colorLevels=5)</span>
@@ -6725,9 +6729,9 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 <div class="figure align-center" id="heatmap1">
 <a class="reference internal image-reference" href="_images/heatMap1.png"><img alt="heatmap of Normed Quartiles Rating" src="_images/heatMap1.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 37 </span><span class="caption-text">Heatmap of normed quartiles ranking</span><a class="headerlink" href="#heatmap1" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 38 </span><span class="caption-text">Heatmap of normed quartiles ranking</span><a class="headerlink" href="#heatmap1" title="Permalink to this image">¶</a></p>
 </div>
-<p>Using furthermore a specialised version of the <a class="reference internal" href="techDoc.html#transitiveDigraphs.TransitiveDigraph.exportGraphViz" title="transitiveDigraphs.TransitiveDigraph.exportGraphViz"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transitiveDigraphs.TransitiveDigraph.exportGraphViz()</span></code></a> method allows drawing the same rating result in a Hasse diagram format (see <a class="reference internal" href="#normedratingdigraph"><span class="std std-numref">Fig. 38</span></a>).</p>
+<p>Using furthermore a specialised version of the <a class="reference internal" href="techDoc.html#transitiveDigraphs.TransitiveDigraph.exportGraphViz" title="transitiveDigraphs.TransitiveDigraph.exportGraphViz"><code class="xref py py-meth docutils literal notranslate"><span class="pre">transitiveDigraphs.TransitiveDigraph.exportGraphViz()</span></code></a> method allows drawing the same rating result in a Hasse diagram format (see <a class="reference internal" href="#normedratingdigraph"><span class="std std-numref">Fig. 39</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6739,9 +6743,9 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 <div class="figure align-center" id="normedratingdigraph">
 <a class="reference internal image-reference" href="_images/normedRatingDigraph.png"><img alt="drawing of normed Quartiles Rating Digraph" src="_images/normedRatingDigraph.png" style="width: 500px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 38 </span><span class="caption-text">Normed quartiles rating digraph</span><a class="headerlink" href="#normedratingdigraph" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 39 </span><span class="caption-text">Normed quartiles rating digraph</span><a class="headerlink" href="#normedratingdigraph" title="Permalink to this image">¶</a></p>
 </div>
-<p>We may now answer the <strong>normed rating decision problem</strong> stated at the beginning. Decision alternative <em>a1001</em> and alternative <em>a1010</em> (see below) are both rated into the same quartile <strong>Q3</strong> class (see <a class="reference internal" href="#normedratingdigraph"><span class="std std-numref">Fig. 38</span></a>), even if the <em>Copeland</em> ranking, obtained from the underlying strict outranking digraph (see <a class="reference internal" href="#heatmap1"><span class="std std-numref">Fig. 37</span></a>), suggests that alternative <em>a1010</em> is effectively <em>better performing than</em> alternative <em>a1001</em>.</p>
+<p>We may now answer the <strong>normed rating decision problem</strong> stated at the beginning. Decision alternative <em>a1001</em> and alternative <em>a1010</em> (see below) are both rated into the same quartile <strong>Q3</strong> class (see <a class="reference internal" href="#normedratingdigraph"><span class="std std-numref">Fig. 39</span></a>), even if the <em>Copeland</em> ranking, obtained from the underlying strict outranking digraph (see <a class="reference internal" href="#heatmap1"><span class="std std-numref">Fig. 38</span></a>), suggests that alternative <em>a1010</em> is effectively <em>better performing than</em> alternative <em>a1001</em>.</p>
 <blockquote>
 <div><table class="docutils align-default">
 <colgroup>
@@ -6822,7 +6826,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 </div>
 <p>Compared with the quartiles rating result, we notice in <a class="reference internal" href="#decilesrating"><span class="std std-numref">Listing 71</span></a> that the seven alternatives (<em>a1001</em>, <em>a1002</em>, <em>a1003</em>, <em>a1005</em>, <em>a1006</em>, <em>a1008</em> and <em>a1010</em>), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives <em>a1002</em>, <em>a1005</em>, <em>a1008</em> and <em>a1010</em> attain now the 7th decile class [0.60-0.70[, whereas alternatives <em>a1001</em>, <em>a1003</em> and <em>a1006</em> attain only the 6th decile class [0.50-0.60[. Of the three <em>Q2</em> [0.25-0.50[ rated alternatives (<em>a1004</em>, <em>a1007</em> and <em>a1009</em>), alternatives <em>a1004</em> and <em>a1007</em> are now rated into the 5th decile class [0.40-0.50[ and <em>a1009</em> is lowest rated into the 4th decile class [0.30-0.40[.</p>
-<p>A browser view may again more conveniently illustrate this refined rating result (see <a class="reference internal" href="#heatmap2"><span class="std std-numref">Fig. 39</span></a>).</p>
+<p>A browser view may again more conveniently illustrate this refined rating result (see <a class="reference internal" href="#heatmap2"><span class="std std-numref">Fig. 40</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of the deciles rating&#39;</span><span class="p">,</span>\
 <span class="go">                               colorLevels=5,Correlations=True)</span>
@@ -6830,7 +6834,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 <div class="figure align-center" id="heatmap2">
 <a class="reference internal image-reference" href="_images/heatMap2.png"><img alt="Heatmap of normed deciles rating" src="_images/heatMap2.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 39 </span><span class="caption-text">Heatmap of normed deciles rating</span><a class="headerlink" href="#heatmap2" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 40 </span><span class="caption-text">Heatmap of normed deciles rating</span><a class="headerlink" href="#heatmap2" title="Permalink to this image">¶</a></p>
 </div>
 <p>In this <em>deciles</em> rating, decision alternatives <em>a1001</em> and <em>a1010</em> are now, as expected, rated in the <em>6th</em> decile (D6), respectively in the <em>7th</em> decile (D7).</p>
 <p>To avoid having to recompute performance deciles from historical data when wishing to refine a rating result, it is useful, depending on the actual size of the historical data, to initially compute performance quantiles with a relatively high number of bins, for instance <em>dodeciles</em> or <em>centiles</em>. It is then possible to correctly interpolate <em>quartiles</em> or <em>deciles</em> for instance, when constructing the rating digraph.</p>
@@ -6973,7 +6977,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 <div class="figure align-center" id="id150">
 <a class="reference internal image-reference" href="_images/tutorialGraph.png"><img alt="_images/tutorialGraph.png" src="_images/tutorialGraph.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 40 </span><span class="caption-text">Tutorial graph instance</span><a class="headerlink" href="#id150" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 41 </span><span class="caption-text">Tutorial graph instance</span><a class="headerlink" href="#id150" title="Permalink to this image">¶</a></p>
 </div>
 <p>Properties, like the gamma function and vertex degrees and neighbourhood depths may be shown with a <cite>graphs.Graph.showShort()</cite> method.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -7112,7 +7116,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 <div class="figure align-center" id="id151">
 <a class="reference internal image-reference" href="_images/tutorial-3-coloring.png"><img alt="_images/tutorial-3-coloring.png" src="_images/tutorial-3-coloring.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 41 </span><span class="caption-text">3-Coloring of the tutorial graph</span><a class="headerlink" href="#id151" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 42 </span><span class="caption-text">3-Coloring of the tutorial graph</span><a class="headerlink" href="#id151" title="Permalink to this image">¶</a></p>
 </div>
 <p>Actually, with the given tutorial graph instance, a 2-coloring is already feasible.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -7146,7 +7150,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 <div class="figure align-center" id="id152">
 <a class="reference internal image-reference" href="_images/tutorial-2-coloring.png"><img alt="_images/tutorial-2-coloring.png" src="_images/tutorial-2-coloring.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 42 </span><span class="caption-text">2-coloring of the tutorial graph</span><a class="headerlink" href="#id152" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 43 </span><span class="caption-text">2-coloring of the tutorial graph</span><a class="headerlink" href="#id152" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="mis-and-clique-enumeration">
@@ -7377,7 +7381,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 <div class="figure align-center" id="id153">
 <a class="reference internal image-reference" href="_images/maxMatchingcycleGraph.png"><img alt="maximum matching colored c8" src="_images/maxMatchingcycleGraph.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 43 </span><span class="caption-text">A perfect maximum matching of the 8-cycle graph</span><a class="headerlink" href="#id153" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 44 </span><span class="caption-text">A perfect maximum matching of the 8-cycle graph</span><a class="headerlink" href="#id153" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="grids-and-the-ising-model">
@@ -7414,7 +7418,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 <div class="figure align-center" id="id154">
 <a class="reference internal image-reference" href="_images/grid-15-15-ising.png"><img alt="_images/grid-15-15-ising.png" src="_images/grid-15-15-ising.png" style="width: 600px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 44 </span><span class="caption-text">Ising model of the 15x15 grid graph</span><a class="headerlink" href="#id154" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 45 </span><span class="caption-text">Ising model of the 15x15 grid graph</span><a class="headerlink" href="#id154" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="simulating-metropolis-random-walks">
@@ -7573,7 +7577,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 </td></tr></table></div>
 <div class="figure align-center" id="id155">
 <a class="reference internal image-reference" href="_images/cg12.png"><img alt="The 12-cycle graph" src="_images/cg12.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 45 </span><span class="caption-text">The 12-cycle graph</span><a class="headerlink" href="#id155" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 46 </span><span class="caption-text">The 12-cycle graph</span><a class="headerlink" href="#id155" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="computing-the-maximal-independent-sets-miss">
@@ -7751,10 +7755,10 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <span class="go">   frequency      : [0, 2, 0, ..., 1, 0, ...,  1,  0, ...]</span>
 </pre></div>
 </td></tr></table></div>
-<p>The corresponding group stabilizers’ sizes and frequencies – orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of <a class="reference internal" href="#misc12"><span class="std std-numref">Fig. 46</span></a> below.</p>
+<p>The corresponding group stabilizers’ sizes and frequencies – orbit 1 with 12 symmetry axes, orbit 2 with 8 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of <a class="reference internal" href="#misc12"><span class="std std-numref">Fig. 47</span></a> below.</p>
 <div class="figure align-center" id="misc12">
 <a class="reference internal image-reference" href="_images/c12.png"><img alt="The 4 non isomorphic MIS of the 12-cycle graph" src="_images/c12.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 46 </span><span class="caption-text">The symmetry axes of the four non isomorphic MISs of the 12-cycle graph</span><a class="headerlink" href="#misc12" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 47 </span><span class="caption-text">The symmetry axes of the four non isomorphic MISs of the 12-cycle graph</span><a class="headerlink" href="#misc12" title="Permalink to this image">¶</a></p>
 </div>
 <p>The non isomorphic MISs in the 12-cycle graph represent in fact all the ways one may write the number 12 as the circular sum of ‘2’s and ‘3’s without distinguishing opposite directions of writing. The first orbit corresponds to writing six times a ‘2’; the second orbit corresponds to writing four times a ‘3’. The third and fourth orbit correspond to writing two times a ‘3’ and three times a ‘2’. There are two non isomorphic ways to do this latter circular sum. Either separating the ‘3’s by one and two ‘2’s, or by zero and three ‘2’s (see Bisdorff &amp; Marichal <a class="reference internal" href="#isomis-08" id="id86"><span>[ISOMIS-08]</span></a> ).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
@@ -7775,11 +7779,11 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <div class="section" id="what-is-a-graph-kernel">
 <h3><a class="toc-backref" href="#id257">What is a graph kernel ?</a><a class="headerlink" href="#what-is-a-graph-kernel" title="Permalink to this headline">¶</a></h3>
 <p>We call <strong>choice</strong> in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice <em>Y</em> is called <strong>internally stable</strong> or <strong>independent</strong> when there exist <strong>no links</strong> (edges) or relations (arcs) between its members. Furthermore, a choice <em>Y</em> is called <strong>externally stable</strong> when for each vertex, node or action <em>x</em> not in <em>Y</em>, there exists at least a member <em>y</em> of <em>Y</em> such that <em>x</em> is linked or related to <em>y</em>. Now, an internally <strong>and</strong> externally stable choice is called a <strong>kernel</strong>.</p>
-<p>A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see <a class="reference internal" href="#isomorphicmis-tutorial-label"><span class="std std-ref">Computing the non isomorphic MISs of the 12-cycle graph</span></a>). Indeed, each MIS in the n-cycle graph is by definition independent, i.e. internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in <a class="reference internal" href="#misc12"><span class="std std-numref">Fig. 46</span></a>.</p>
+<p>A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see <a class="reference internal" href="#isomorphicmis-tutorial-label"><span class="std std-ref">Computing the non isomorphic MISs of the 12-cycle graph</span></a>). Indeed, each MIS in the n-cycle graph is by definition independent, i.e. internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in <a class="reference internal" href="#misc12"><span class="std std-numref">Fig. 47</span></a>.</p>
 <p>In all graph or symmetric digraph, the <em>maximality condition</em> imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal <strong>holes</strong> in the given graph.</p>
 <p>We may illustrate this coincidence between MISs and kernels in graphs
 and symmetric digraphs with the following random 3-regular graph
-instance (see <a class="reference internal" href="#random3regulargraph"><span class="std std-numref">Fig. 47</span></a>).</p>
+instance (see <a class="reference internal" href="#random3regulargraph"><span class="std std-numref">Fig. 48</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -7795,7 +7799,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 </td></tr></table></div>
 <div class="figure align-center" id="random3regulargraph">
 <a class="reference internal image-reference" href="_images/random3RegularGraph.png"><img alt="A random 3-regular graph instance" src="_images/random3RegularGraph.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 47 </span><span class="caption-text">A random 3-regular graph instance</span><a class="headerlink" href="#random3regulargraph" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 48 </span><span class="caption-text">A random 3-regular graph instance</span><a class="headerlink" href="#random3regulargraph" title="Permalink to this image">¶</a></p>
 </div>
 <p>A random MIS in this graph may be computed for instance by using the <a class="reference internal" href="techDoc.html#graphs.MISModel" title="graphs.MISModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.MISModel</span></code></a> class.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -7819,9 +7823,9 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 </td></tr></table></div>
 <div class="figure align-center" id="random3regulargraphmis">
 <a class="reference internal image-reference" href="_images/random3RegularGraph-mis.png"><img alt="A random MIS colored in the graph." src="_images/random3RegularGraph-mis.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 48 </span><span class="caption-text">A random MIS colored in the random 3-regular graph</span><a class="headerlink" href="#random3regulargraphmis" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 49 </span><span class="caption-text">A random MIS colored in the random 3-regular graph</span><a class="headerlink" href="#random3regulargraphmis" title="Permalink to this image">¶</a></p>
 </div>
-<p>It is easily verified in <a class="reference internal" href="#random3regulargraphmis"><span class="std std-numref">Fig. 48</span></a> above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance coincides hence with the set of its MISs.</p>
+<p>It is easily verified in <a class="reference internal" href="#random3regulargraphmis"><span class="std std-numref">Fig. 49</span></a> above, that the computed MIS renders indeed a valid kernel of the given graph. The complete set of kernels of this 3-regular graph instance coincides hence with the set of its MISs.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8005,10 +8009,10 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <span class="go"> frequency        :  [11, 0]</span>
 </pre></div>
 </td></tr></table></div>
-<p>In our random 3-regular graph instance (see <a class="reference internal" href="#random3regulargraph"><span class="std std-numref">Fig. 47</span></a>), we may thus find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in <a class="reference internal" href="#random3regulargraphmis"><span class="std std-numref">Fig. 48</span></a> .</p>
+<p>In our random 3-regular graph instance (see <a class="reference internal" href="#random3regulargraph"><span class="std std-numref">Fig. 48</span></a>), we may thus find eleven non isomorphic kernels with orbit sizes equal to two. We illustrate below the isomorphic twin of the random MIS example shown in <a class="reference internal" href="#random3regulargraphmis"><span class="std std-numref">Fig. 49</span></a> .</p>
 <div class="figure align-center" id="random3regulargraphkernelorbit">
 <a class="reference internal image-reference" href="_images/random3RegularGraphKernelOrbit.png"><img alt="Two isomorphic kernels of the random 3-regular graph instance" src="_images/random3RegularGraphKernelOrbit.png" style="width: 700px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 49 </span><span class="caption-text">Two isomorphic kernels of the random 3-regular graph instance</span><a class="headerlink" href="#random3regulargraphkernelorbit" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 50 </span><span class="caption-text">Two isomorphic kernels of the random 3-regular graph instance</span><a class="headerlink" href="#random3regulargraphkernelorbit" title="Permalink to this image">¶</a></p>
 </div>
 <p>All graphs and symmetric digraphs admit MISs, hence also kernels.</p>
 <p>It is worthwhile noticing that the <strong>maximal matchings</strong> of a graph correspond bijectively to its line graph’s <strong>kernels</strong> (see the <a class="reference internal" href="techDoc.html#graphs.LineGraph" title="graphs.LineGraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.LineGraph</span></code></a> class).</p>
@@ -8035,7 +8039,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 </td></tr></table></div>
 <div class="figure align-center" id="id156">
 <a class="reference internal image-reference" href="_images/maxMatchingcycleGraph.png"><img alt="Perfect maximum matching in the 8.cycle graph" src="_images/maxMatchingcycleGraph.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 50 </span><span class="caption-text">Perfect maximum matching in the 8-cycle graph</span><a class="headerlink" href="#id156" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 51 </span><span class="caption-text">Perfect maximum matching in the 8-cycle graph</span><a class="headerlink" href="#id156" title="Permalink to this image">¶</a></p>
 </div>
 <p>In the context of digraphs, i.e. <em>oriented</em> graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.</p>
 </div>
@@ -8222,7 +8226,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <span class="go"> [&#39;2&#39;, &#39;4&#39;, &#39;6&#39;] independence: 1.0, dominance: 1.0, absorbency: 1.0</span>
 </pre></div>
 </td></tr></table></div>
-<p>Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of <strong>all</strong> chordless circuits of <em>odd</em> <strong>or</strong> <em>even</em> length, i.e. <em>filled</em> circuits also called <strong>anti-holes</strong> (see <a class="reference internal" href="#dualchordlesscircuit"><span class="std std-numref">Fig. 51</span></a>), never contain any potential prekernel candidates.</p>
+<p>Chordless circuits of even length may thus be indifferently oriented along two opposite directions. Notice by the way that the duals of <strong>all</strong> chordless circuits of <em>odd</em> <strong>or</strong> <em>even</em> length, i.e. <em>filled</em> circuits also called <strong>anti-holes</strong> (see <a class="reference internal" href="#dualchordlesscircuit"><span class="std std-numref">Fig. 52</span></a>), never contain any potential prekernel candidates.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -8248,7 +8252,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 </td></tr></table></div>
 <div class="figure align-center" id="dualchordlesscircuit">
 <a class="reference internal image-reference" href="_images/dualChordlessCircuit.png"><img alt="The dual of the chordless 6-circuit" src="_images/dualChordlessCircuit.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 51 </span><span class="caption-text">The dual of the chordless 6-circuit</span><a class="headerlink" href="#dualchordlesscircuit" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 52 </span><span class="caption-text">The dual of the chordless 6-circuit</span><a class="headerlink" href="#dualchordlesscircuit" title="Permalink to this image">¶</a></p>
 </div>
 <p>We call <strong>weak</strong>, a <em>chordless circuit</em> with <em>indeterminate inner part</em>. The <a class="reference internal" href="techDoc.html#digraphs.CirculantDigraph" title="digraphs.CirculantDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.CirculantDigraph</span></code></a> class provides a parameter for constructing such a kind of <em>weak chordless</em> circuits.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -8256,7 +8260,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <span class="go">                           IndeterminateInnerPart=True)</span>
 </pre></div>
 </td></tr></table></div>
-<p>It is worth noticing that the <em>dual</em> version (<a class="footnote-reference brackets" href="#id127" id="id90">14</a>) of a <em>weak</em> circuit corresponds to its <em>converse</em> version, i.e. <em>-c6</em> = <em>~c6</em> (see <a class="reference internal" href="#weakchordlesscircuit"><span class="std std-numref">Fig. 52</span></a>).</p>
+<p>It is worth noticing that the <em>dual</em> version (<a class="footnote-reference brackets" href="#id127" id="id90">14</a>) of a <em>weak</em> circuit corresponds to its <em>converse</em> version, i.e. <em>-c6</em> = <em>~c6</em> (see <a class="reference internal" href="#weakchordlesscircuit"><span class="std std-numref">Fig. 53</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -8276,7 +8280,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 </td></tr></table></div>
 <div class="figure align-center" id="weakchordlesscircuit">
 <a class="reference internal image-reference" href="_images/weakChordlessCircuit.png"><img alt="The chordless 6-circuit with indeterminate inner part" src="_images/weakChordlessCircuit.png" style="width: 550px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 52 </span><span class="caption-text">Dual and converse of the weak 6-circuit</span><a class="headerlink" href="#weakchordlesscircuit" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 53 </span><span class="caption-text">Dual and converse of the weak 6-circuit</span><a class="headerlink" href="#weakchordlesscircuit" title="Permalink to this image">¶</a></p>
 </div>
 <p>It immediately follows that weak chordless circuits are part of the class of digraphs that are <strong>invariant</strong> under the <em>codual</em> transform, <em>cn</em> = - (~ <em>cn</em> ) = ~ ( -<em>cn</em> ) <a class="footnote-reference brackets" href="#id126" id="id91">13</a>. In the case, now, of an <em>odd</em> weak chordless circuit, <em>neither</em> the weak chordless circuit, <em>nor</em> its dual, converse, or codual versions will admit <em>any</em> initial or terminal prekernels.</p>
 </div>
@@ -8299,9 +8303,9 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 </td></tr></table></div>
 <div class="figure align-center" id="randomlaterality">
 <a class="reference internal image-reference" href="_images/randomLaterality.png"><img alt="A random digraph instance" src="_images/randomLaterality.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 53 </span><span class="caption-text">A random digraph instance of order 7 and arc probability 0.3</span><a class="headerlink" href="#randomlaterality" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 54 </span><span class="caption-text">A random digraph instance of order 7 and arc probability 0.3</span><a class="headerlink" href="#randomlaterality" title="Permalink to this image">¶</a></p>
 </div>
-<p>The random digraph shown in <a class="reference internal" href="#randomlaterality"><span class="std std-numref">Fig. 53</span></a> above has no apparent special properties, except from being connected.</p>
+<p>The random digraph shown in <a class="reference internal" href="#randomlaterality"><span class="std std-numref">Fig. 54</span></a> above has no apparent special properties, except from being connected.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -8390,7 +8394,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <span class="go"> ...</span>
 </pre></div>
 </td></tr></table></div>
-<p>Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showPreKernels" title="digraphs.Digraph.showPreKernels"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.showPreKernels()</span></code></a> method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph’s <em>laterality</em>. We may hence redraw the same digraph in <a class="reference internal" href="#orientedlaterality"><span class="std std-numref">Fig. 54</span></a> by looking into its interior via the <em>best covering</em> initial kernel candidate: the dominant choice {‘a3’,’4a’} (coloured in yellow), and looking out of it via the <em>best covered</em> terminal kernel candidate: the absorbent choice {‘a1’,’a6’} (coloured in blue).</p>
+<p>Among the six MISs contained in this random digraph (see above Lines 3-8) we discover two initial and two terminal kernels (Lines 12-34). Notice by the way the covering values (between 0.0 and 1.0) shown by the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showPreKernels" title="digraphs.Digraph.showPreKernels"><code class="xref py py-func docutils literal notranslate"><span class="pre">digraphs.Digraph.showPreKernels()</span></code></a> method (Lines 17, 22, 28 and 33). The higher this value, the more the corresponding kernel candidate makes apparent the digraph’s <em>laterality</em>. We may hence redraw the same digraph in <a class="reference internal" href="#orientedlaterality"><span class="std std-numref">Fig. 55</span></a> by looking into its interior via the <em>best covering</em> initial kernel candidate: the dominant choice {‘a3’,’4a’} (coloured in yellow), and looking out of it via the <em>best covered</em> terminal kernel candidate: the absorbent choice {‘a1’,’a6’} (coloured in blue).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -8406,7 +8410,7 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 </td></tr></table></div>
 <div class="figure align-center" id="orientedlaterality">
 <a class="reference internal image-reference" href="_images/orientedLaterality.png"><img alt="A random digraph oriented by best covering initial and terminal kernels" src="_images/orientedLaterality.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 54 </span><span class="caption-text">A random digraph oriented by best covering initial and
+<p class="caption"><span class="caption-number">Fig. 55 </span><span class="caption-text">A random digraph oriented by best covering initial and
 best covered terminal kernel</span><a class="headerlink" href="#orientedlaterality" title="Permalink to this image">¶</a></p>
 </div>
 <p>In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see <a class="reference internal" href="#rubis-tutorial-label"><span class="std std-ref">Computing a best choice recommendation</span></a>).</p>
@@ -8441,9 +8445,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="randomoutranking">
 <a class="reference internal image-reference" href="_images/randomOutranking.png"><img alt="A random performance tableau" src="_images/randomOutranking.png" style="width: 550px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 55 </span><span class="caption-text">The performance tableau of a random outranking digraph instance</span><a class="headerlink" href="#randomoutranking" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 56 </span><span class="caption-text">The performance tableau of a random outranking digraph instance</span><a class="headerlink" href="#randomoutranking" title="Permalink to this image">¶</a></p>
 </div>
-<p>The underlying random performance tableau (see <a class="reference internal" href="#randomoutranking"><span class="std std-numref">Fig. 55</span></a>) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions ‘a2’ and ‘a5’. The resulting <strong>strict outranking</strong> - i.e. a weighted majority supported - <em>better than without considerable counter-performance</em> - digraph is shown in <a class="reference internal" href="#tutoutranking"><span class="std std-numref">Fig. 56</span></a> below.</p>
+<p>The underlying random performance tableau (see <a class="reference internal" href="#randomoutranking"><span class="std std-numref">Fig. 56</span></a>) shows the performance grading of 7 potential decision actions with respect to 7 decision criteria supporting each an increasing performance scale from 0 to 100. Notice the missing performance data concerning decision actions ‘a2’ and ‘a5’. The resulting <strong>strict outranking</strong> - i.e. a weighted majority supported - <em>better than without considerable counter-performance</em> - digraph is shown in <a class="reference internal" href="#tutoutranking"><span class="std std-numref">Fig. 57</span></a> below.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -8457,7 +8461,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="tutoutranking">
 <a class="reference internal image-reference" href="_images/tutOutranking.png"><img alt="A random performance tableau" src="_images/tutOutranking.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 56 </span><span class="caption-text">A random strict outranking digraph instance</span><a class="headerlink" href="#tutoutranking" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 57 </span><span class="caption-text">A random strict outranking digraph instance</span><a class="headerlink" href="#tutoutranking" title="Permalink to this image">¶</a></p>
 </div>
 <p>All decision actions appear strictly better performing than action ‘a7’. We call it a <strong>Condorcet looser</strong> and it is an evident terminal prekernel candidate. On the other side, three actions: ‘a1’, ‘a2’ and ‘a4’ are not dominated. They give together an initial prekernel candidate.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -8534,7 +8538,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </pre></div>
 </td></tr></table></div>
 <p>Notice that solving the valued <em>Berge</em> kernel equations (see <a class="reference internal" href="pearls.html#bipolar-valued-kernels-tutorial-label"><span class="std std-ref">Bipolar-Valued Kernels</span></a> in the Advanced Topics) provides furthermore a positive characterization of the most credible decision actions in each respective choice recommendation (see Lines 14 and 23 above). Actions ‘a2’ and ‘a4’ are equivalent candidates for a unique best choice, and action ‘a7’ is clearly confirmed as the worst choice.</p>
-<p>In <a class="reference internal" href="#bestworstorientation"><span class="std std-numref">Fig. 57</span></a> below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations.</p>
+<p>In <a class="reference internal" href="#bestworstorientation"><span class="std std-numref">Fig. 58</span></a> below, we orient the drawing of the strict outranking digraph instance with the help of these best and worst choice recommendations.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -8548,9 +8552,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="bestworstorientation">
 <a class="reference internal image-reference" href="_images/bestWorstOrientation.png"><img alt="The random outranking digraph oriented by its initial and terminal prekernels" src="_images/bestWorstOrientation.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 57 </span><span class="caption-text">The strict outranking digraph oriented by its best and worst choice recommendations</span><a class="headerlink" href="#bestworstorientation" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 58 </span><span class="caption-text">The strict outranking digraph oriented by its best and worst choice recommendations</span><a class="headerlink" href="#bestworstorientation" title="Permalink to this image">¶</a></p>
 </div>
-<p>The gray arrows in <a class="reference internal" href="#bestworstorientation"><span class="std std-numref">Fig. 57</span></a>, like the one between actions ‘a4’ and ‘a1’, represent indeterminate preferential situations. Action ‘a1’ appears hence to be rather incomparable to all the other, except action ‘a7’. It may be interesting to compare this result with a <em>Copeland</em> ranking of the underlying performance tableau (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a>).</p>
+<p>The gray arrows in <a class="reference internal" href="#bestworstorientation"><span class="std std-numref">Fig. 58</span></a>, like the one between actions ‘a4’ and ‘a1’, represent indeterminate preferential situations. Action ‘a1’ appears hence to be rather incomparable to all the other, except action ‘a7’. It may be interesting to compare this result with a <em>Copeland</em> ranking of the underlying performance tableau (see <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
 <span class="go">             Correlations=True, rankingRule=&#39;Copeland&#39;)</span>
@@ -8558,9 +8562,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="outrankingresult">
 <a class="reference internal image-reference" href="_images/outrankingResult.png"><img alt="Copeland ranking of the random outranking digraph instance" src="_images/outrankingResult.png" style="width: 550px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 58 </span><span class="caption-text">heatmap with Copeland ranking of the performance tableau</span><a class="headerlink" href="#outrankingresult" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 59 </span><span class="caption-text">heatmap with Copeland ranking of the performance tableau</span><a class="headerlink" href="#outrankingresult" title="Permalink to this image">¶</a></p>
 </div>
-<p>In the resulting linear ranking (see <a class="reference internal" href="#outrankingresult"><span class="std std-numref">Fig. 58</span></a>), action ‘a4’ is set at first rank, followed by action ‘a2’. This makes sense as ‘a4’ shows three performances in the first quintile, whereas ‘a2’ is only partially evaluated and shows only two such excellent performances. But ‘a4’ also shows a very weak performance in the first quintile. Both decision actions, hence, don’t show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any ‘forced’ linear ranking result as shown in <a class="reference internal" href="#outrankingresult"><span class="std std-numref">Fig. 58</span></a> above.</p>
+<p>In the resulting linear ranking (see <a class="reference internal" href="#outrankingresult"><span class="std std-numref">Fig. 59</span></a>), action ‘a4’ is set at first rank, followed by action ‘a2’. This makes sense as ‘a4’ shows three performances in the first quintile, whereas ‘a2’ is only partially evaluated and shows only two such excellent performances. But ‘a4’ also shows a very weak performance in the first quintile. Both decision actions, hence, don’t show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any ‘forced’ linear ranking result as shown in <a class="reference internal" href="#outrankingresult"><span class="std std-numref">Fig. 59</span></a> above.</p>
 </div>
 <div class="section" id="tractability">
 <h3><a class="toc-backref" href="#id261">Tractability</a><a class="headerlink" href="#tractability" title="Permalink to this headline">¶</a></h3>
@@ -8810,9 +8814,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 <div class="figure align-center" id="randomsplitgraph">
 <a class="reference internal image-reference" href="_images/randomSplitGraph.png"><img alt="Random split graph" src="_images/randomSplitGraph.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 59 </span><span class="caption-text">A conjointly triangulated, comparability, interval, permutation and split graph</span><a class="headerlink" href="#randomsplitgraph" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 60 </span><span class="caption-text">A conjointly triangulated, comparability, interval, permutation and split graph</span><a class="headerlink" href="#randomsplitgraph" title="Permalink to this image">¶</a></p>
 </div>
-<p>In <a class="reference internal" href="#randomsplitgraph"><span class="std std-numref">Fig. 59</span></a> we may readily recognize the essential characteristic of <strong>split graphs</strong>, namely being always splitable into two disjoint sub-graphs: an <em>independent choice</em> (<em>v6</em>) and a <em>clique</em> (<em>v1</em>, <em>v2</em>, <em>v3</em>, <em>v4</em>, <em>v5</em>, <em>v7</em>, <em>v8</em>); which explains their name.</p>
+<p>In <a class="reference internal" href="#randomsplitgraph"><span class="std std-numref">Fig. 60</span></a> we may readily recognize the essential characteristic of <strong>split graphs</strong>, namely being always splitable into two disjoint sub-graphs: an <em>independent choice</em> (<em>v6</em>) and a <em>clique</em> (<em>v1</em>, <em>v2</em>, <em>v3</em>, <em>v4</em>, <em>v5</em>, <em>v7</em>, <em>v8</em>); which explains their name.</p>
 <p>Notice however that the four properties:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -8921,7 +8925,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="id157">
 <a class="reference internal image-reference" href="_images/berge1.png"><img alt="_images/berge1.png" src="_images/berge1.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 60 </span><span class="caption-text">Graph representation of the testimonies of the professors</span><a class="headerlink" href="#id157" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 61 </span><span class="caption-text">Graph representation of the testimonies of the professors</span><a class="headerlink" href="#id157" title="Permalink to this image">¶</a></p>
 </div>
 <p>From graph theory we know that time interval intersections graphs must in fact be interval graphs, i.e. <em>triangulated</em> and <em>co-comparative</em> graphs. The testimonies graph should therefore not contain any chordless cycle of four and more vertices. Now, the presence or not of such chordless cycles in the testimonies graph may be checked as follows.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -8986,7 +8990,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="id158">
 <a class="reference internal image-reference" href="_images/berge2.png"><img alt="_images/berge2.png" src="_images/berge2.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 61 </span><span class="caption-text">The triangulated testimonies graph</span><a class="headerlink" href="#id158" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 62 </span><span class="caption-text">The triangulated testimonies graph</span><a class="headerlink" href="#id158" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="generating-permutation-graphs">
@@ -9031,7 +9035,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="id159">
 <a class="reference internal image-reference" href="_images/permutationGraph.png"><img alt="Default permutation graph" src="_images/permutationGraph.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 62 </span><span class="caption-text">The default permutation graph</span><a class="headerlink" href="#id159" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 63 </span><span class="caption-text">The default permutation graph</span><a class="headerlink" href="#id159" title="Permalink to this image">¶</a></p>
 </div>
 <p>By using color sorting queues, the minimal vertex coloring for a permutation graph is computable in <img class="math" src="_images/math/91a306aa240434cc3d521e95741c53eb7b764d4a.png" alt="O(n log(n))"/> (see <a class="reference internal" href="#gol-2004" id="id101"><span>[GOL-2004]</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -9061,9 +9065,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="id160">
 <a class="reference internal image-reference" href="_images/coloredPermutationGraph.png"><img alt="minimal vertex coloring" src="_images/coloredPermutationGraph.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 63 </span><span class="caption-text">Minimal vertex coloring of the permutation graph</span><a class="headerlink" href="#id160" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 64 </span><span class="caption-text">Minimal vertex coloring of the permutation graph</span><a class="headerlink" href="#id160" title="Permalink to this image">¶</a></p>
 </div>
-<p>The correspondingly colored <strong>matching diagram</strong> of the nine <strong>inversions</strong> -the actual <em>edges</em> of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz <em>neato</em> layout and explicitly positioned horizontal lists of vertices (see <a class="reference internal" href="#perm-permutationgraph"><span class="std std-numref">Fig. 64</span></a>).</p>
+<p>The correspondingly colored <strong>matching diagram</strong> of the nine <strong>inversions</strong> -the actual <em>edges</em> of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz <em>neato</em> layout and explicitly positioned horizontal lists of vertices (see <a class="reference internal" href="#perm-permutationgraph"><span class="std std-numref">Fig. 65</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -9075,7 +9079,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="perm-permutationgraph">
 <a class="reference internal image-reference" href="_images/perm_permutationGraph.png"><img alt="The inversions of the permutation [4, 3, 6, 1, 5, 2]" src="_images/perm_permutationGraph.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 64 </span><span class="caption-text">Colored matching diagram of the permutation [4, 3, 6, 1, 5, 2]</span><a class="headerlink" href="#perm-permutationgraph" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 65 </span><span class="caption-text">Colored matching diagram of the permutation [4, 3, 6, 1, 5, 2]</span><a class="headerlink" href="#perm-permutationgraph" title="Permalink to this image">¶</a></p>
 </div>
 <p>As mentioned before, a permutation graph and its dual are <strong>transitively orientable</strong>. The <a class="reference internal" href="techDoc.html#graphs.PermutationGraph.transitiveOrientation" title="graphs.PermutationGraph.transitiveOrientation"><code class="xref py py-func docutils literal notranslate"><span class="pre">graphs.PermutationGraph.transitiveOrientation()</span></code></a> method constructs from a given permutation graph a digraph where each edge of the permutation graph is converted into an arc oriented in increasing alphabetic order of the adjacent vertices’ keys (see <a class="reference internal" href="#gol-2004" id="id102"><span>[GOL-2004]</span></a>). This orientation of the edges of a permutation graph is always transitive and delivers a <em>transitive ordering</em> of the vertices.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -9121,7 +9125,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="id161">
 <a class="reference internal image-reference" href="_images/oriented_permutationGraph.png"><img alt="Hasse diagram of the orientationofof a permutation graph" src="_images/oriented_permutationGraph.png" style="width: 200px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 65 </span><span class="caption-text">Hasse diagram of the transitive orientation of the permutation graph</span><a class="headerlink" href="#id161" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 66 </span><span class="caption-text">Hasse diagram of the transitive orientation of the permutation graph</span><a class="headerlink" href="#id161" title="Permalink to this image">¶</a></p>
 </div>
 <p>The dual of a permutation graph is <em>again</em> a permutation graph and as such also transitively orientable.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -9175,9 +9179,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="randomgraph4335">
 <a class="reference internal image-reference" href="_images/randomGraph4335.png"><img alt="Random graph" src="_images/randomGraph4335.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 66 </span><span class="caption-text">Random graph of order 8 generated with edge probability 0.4</span><a class="headerlink" href="#randomgraph4335" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 67 </span><span class="caption-text">Random graph of order 8 generated with edge probability 0.4</span><a class="headerlink" href="#randomgraph4335" title="Permalink to this image">¶</a></p>
 </div>
-<p>If the random perfect graph instance <em>g</em> (see <a class="reference internal" href="#randomgraph4335"><span class="std std-numref">Fig. 66</span></a>) is indeed a permutation graph, <em>g</em> and its dual <em>-g</em> should be <em>transitively orientable</em>, i.e. <strong>comparability graphs</strong> (see <a class="reference internal" href="#gol-2004" id="id103"><span>[GOL-2004]</span></a>). With the <a class="reference internal" href="techDoc.html#graphs.Graph.isComparabilityGraph" title="graphs.Graph.isComparabilityGraph"><code class="xref py py-func docutils literal notranslate"><span class="pre">graphs.Graph.isComparabilityGraph()</span></code></a> test, we may easily check this fact. This method proceeds indeed by trying to construct a transitive neighbourhood decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a <em>self.edgeOrientations</em> attribute (see <a class="reference internal" href="#gol-2004" id="id104"><span>[GOL-2004]</span></a> p.129-132).</p>
+<p>If the random perfect graph instance <em>g</em> (see <a class="reference internal" href="#randomgraph4335"><span class="std std-numref">Fig. 67</span></a>) is indeed a permutation graph, <em>g</em> and its dual <em>-g</em> should be <em>transitively orientable</em>, i.e. <strong>comparability graphs</strong> (see <a class="reference internal" href="#gol-2004" id="id103"><span>[GOL-2004]</span></a>). With the <a class="reference internal" href="techDoc.html#graphs.Graph.isComparabilityGraph" title="graphs.Graph.isComparabilityGraph"><code class="xref py py-func docutils literal notranslate"><span class="pre">graphs.Graph.isComparabilityGraph()</span></code></a> test, we may easily check this fact. This method proceeds indeed by trying to construct a transitive neighbourhood decomposition of a given graph instance and, if successful, stores the resulting edge orientations into a <em>self.edgeOrientations</em> attribute (see <a class="reference internal" href="#gol-2004" id="id104"><span>[GOL-2004]</span></a> p.129-132).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -9217,9 +9221,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="transorientgraph">
 <a class="reference internal image-reference" href="_images/transOrientGraph.png"><img alt="transitive orientation of a graph" src="_images/transOrientGraph.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 67 </span><span class="caption-text">Transitive neighbourhoods of the graph <em>g</em></span><a class="headerlink" href="#transorientgraph" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 68 </span><span class="caption-text">Transitive neighbourhoods of the graph <em>g</em></span><a class="headerlink" href="#transorientgraph" title="Permalink to this image">¶</a></p>
 </div>
-<p>The resulting orientation of the edges of <em>g</em> (see <a class="reference internal" href="#transorientgraph"><span class="std std-numref">Fig. 67</span></a>) is indeed transitive. The same procedure applied to the dual graph <em>gd = -g</em> gives a transitive orientation to the edges of <em>-g</em>.</p>
+<p>The resulting orientation of the edges of <em>g</em> (see <a class="reference internal" href="#transorientgraph"><span class="std std-numref">Fig. 68</span></a>) is indeed transitive. The same procedure applied to the dual graph <em>gd = -g</em> gives a transitive orientation to the edges of <em>-g</em>.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -9261,9 +9265,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="transorientdualgraph">
 <a class="reference internal image-reference" href="_images/transOrientDualGraph.png"><img alt="transitive orientation of the dual graph" src="_images/transOrientDualGraph.png" style="width: 400px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 68 </span><span class="caption-text">Transitive neighbourhoods of the dual graph <em>-g</em></span><a class="headerlink" href="#transorientdualgraph" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 69 </span><span class="caption-text">Transitive neighbourhoods of the dual graph <em>-g</em></span><a class="headerlink" href="#transorientdualgraph" title="Permalink to this image">¶</a></p>
 </div>
-<p>It is worthwhile noticing that the orientation of <em>g</em> is achieved with a <em>single neighbourhood</em> decomposition, covering all the vertices. Whereas, the orientation of the dual <em>-g</em> needs a decomposition into <em>three subsequent neighbourhoods</em> marked in black, red and blue (see <a class="reference internal" href="#transorientdualgraph"><span class="std std-numref">Fig. 68</span></a>).</p>
+<p>It is worthwhile noticing that the orientation of <em>g</em> is achieved with a <em>single neighbourhood</em> decomposition, covering all the vertices. Whereas, the orientation of the dual <em>-g</em> needs a decomposition into <em>three subsequent neighbourhoods</em> marked in black, red and blue (see <a class="reference internal" href="#transorientdualgraph"><span class="std std-numref">Fig. 69</span></a>).</p>
 <p>Let us recheck these facts by explicitly constructing transitively oriented digraph instances with the <a class="reference internal" href="techDoc.html#graphs.Graph.computeTransitivelyOrientedDigraph" title="graphs.Graph.computeTransitivelyOrientedDigraph"><code class="xref py py-func docutils literal notranslate"><span class="pre">graphs.Graph.computeTransitivelyOrientedDigraph()</span></code></a> method.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -9360,9 +9364,9 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="isomorphicpermgraphs">
 <a class="reference internal image-reference" href="_images/isomorphicPerms.png"><img alt="Isomorphic permutation graphs" src="_images/isomorphicPerms.png" style="width: 700px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 69 </span><span class="caption-text">Isomorphic permutation graphs</span><a class="headerlink" href="#isomorphicpermgraphs" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 70 </span><span class="caption-text">Isomorphic permutation graphs</span><a class="headerlink" href="#isomorphicpermgraphs" title="Permalink to this image">¶</a></p>
 </div>
-<p>And, we recover indeed two <em>isomorphic copies</em> of the original random graph (compare <a class="reference internal" href="#isomorphicpermgraphs"><span class="std std-numref">Fig. 69</span></a> with <a class="reference internal" href="#randomgraph4335"><span class="std std-numref">Fig. 66</span></a>).</p>
+<p>And, we recover indeed two <em>isomorphic copies</em> of the original random graph (compare <a class="reference internal" href="#isomorphicpermgraphs"><span class="std std-numref">Fig. 70</span></a> with <a class="reference internal" href="#randomgraph4335"><span class="std std-numref">Fig. 67</span></a>).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
 </div>
@@ -9415,7 +9419,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="id162">
 <a class="reference internal image-reference" href="_images/tutRandomTree.png"><img alt="Random tree instance" src="_images/tutRandomTree.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 70 </span><span class="caption-text">Random Tree instance of order 9</span><a class="headerlink" href="#id162" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 71 </span><span class="caption-text">Random Tree instance of order 9</span><a class="headerlink" href="#id162" title="Permalink to this image">¶</a></p>
 </div>
 <p>A tree graph of order <em>n</em> contains <em>n-1</em> edges (see Line 8 and 9) and we may distinguish vertices like <em>v1</em>, <em>v2</em>, <em>v4</em>, <em>v5</em> or <em>v9</em>  of degree 1, called the <strong>leaves</strong> of the tree, and vertices like <em>v3</em>, <em>v6</em>, <em>v7</em> or <em>v8</em> of degree 2 or more, called the <strong>nodes</strong> of the tree.</p>
 <p>The structure of a tree of order <img class="math" src="_images/math/1c76ca0f1804c78d5a3f4b41490081526fe0c75b.png" alt="n &gt; 2"/> is entirely characterised by a corresponding <em>Prüfer</em> <strong>code</strong> -i.e. a <em>list of vertices keys</em>- of length <em>n-2</em>. See, for instance in Line 12 the code [‘v3’, ‘v8’, ‘v8’, ‘v3’, ‘v7’, ‘v6’, ‘v7’] corresponding to our sample tree graph <em>t</em>.</p>
@@ -9474,7 +9478,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="id163">
 <a class="reference internal image-reference" href="_images/tutPruefTree.png"><img alt="Tree instance from a random Prüfer code" src="_images/tutPruefTree.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 71 </span><span class="caption-text">Tree instance from a random Prüfer code</span><a class="headerlink" href="#id163" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 72 </span><span class="caption-text">Tree instance from a random Prüfer code</span><a class="headerlink" href="#id163" title="Permalink to this image">¶</a></p>
 </div>
 <p>Following from the bijection between a labelled tree and its <em>Prüfer</em> code, we actually know that there exist <img class="math" src="_images/math/1ccae85f2d0e38d86c3612a23dfd01935cd97970.png" alt="n^{n-2}"/> different tree graphs with the same <em>n</em> vertices.</p>
 <p>Given a genuine graph, how can we recognize that it is in fact a tree instance ?</p>
@@ -9507,7 +9511,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="go"> The graph is a tree ? True</span>
 </pre></div>
 </td></tr></table></div>
-<p>The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its <em>graphviz</em> drawing in <a class="reference internal" href="#test62tree"><span class="std std-numref">Fig. 72</span></a> (see also the <a class="reference internal" href="techDoc.html#graphs.Graph.isTree" title="graphs.Graph.isTree"><code class="xref py py-func docutils literal notranslate"><span class="pre">graphs.Graph.isTree()</span></code></a> method for an implemented alternative test).</p>
+<p>The random graph of order 6 and edge probability 30%, generated with seed 62, is actually a tree graph instance, as we may readily confirm from its <em>graphviz</em> drawing in <a class="reference internal" href="#test62tree"><span class="std std-numref">Fig. 73</span></a> (see also the <a class="reference internal" href="techDoc.html#graphs.Graph.isTree" title="graphs.Graph.isTree"><code class="xref py py-func docutils literal notranslate"><span class="pre">graphs.Graph.isTree()</span></code></a> method for an implemented alternative test).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to test62.dot</span>
@@ -9516,7 +9520,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 <div class="figure align-center" id="test62tree">
 <a class="reference internal image-reference" href="_images/test62.png"><img alt="Recognizing a tree" src="_images/test62.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 72 </span><span class="caption-text">Recognizing a tree instance</span><a class="headerlink" href="#test62tree" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 73 </span><span class="caption-text">Recognizing a tree instance</span><a class="headerlink" href="#test62tree" title="Permalink to this image">¶</a></p>
 </div>
 <p>Yet, we still have to recover its corresponding <em>Prüfer</em> code. Therefore, we may use the <a class="reference internal" href="techDoc.html#graphs.RandomTree.tree2Pruefer" title="graphs.RandomTree.tree2Pruefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">graphs.RandomTree.tree2Pruefer()</span></code></a> method.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">RandomTree</span>
@@ -9580,7 +9584,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="id164">
 <a class="reference internal image-reference" href="_images/randomSpanningTree.png"><img alt="randomSpanningTree instance" src="_images/randomSpanningTree.png" style="width: 300px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 73 </span><span class="caption-text">Random spanning tree</span><a class="headerlink" href="#id164" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 74 </span><span class="caption-text">Random spanning tree</span><a class="headerlink" href="#id164" title="Permalink to this image">¶</a></p>
 </div>
 <p>More general, and in case of a not connected graph, we may generate with the <a class="reference internal" href="techDoc.html#graphs.RandomSpanningForest" title="graphs.RandomSpanningForest"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphs.RandomSpanningForest</span></code></a> class a <em>not necessarily uniform</em> random instance of a <strong>spanning forest</strong> -one or more random tree graphs- generated from a <strong>random depth first search</strong> of the graph components’ traversals.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -9616,7 +9620,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="id165">
 <a class="reference internal image-reference" href="_images/spanningForest.png"><img alt="Random spanning forest instance" src="_images/spanningForest.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 74 </span><span class="caption-text">Random spanning forest instance</span><a class="headerlink" href="#id165" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 75 </span><span class="caption-text">Random spanning forest instance</span><a class="headerlink" href="#id165" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="maximum-determined-spanning-forests">
@@ -9702,7 +9706,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="go"> Average determination(s) : [Decimal(&#39;0.655&#39;)]</span>
 </pre></div>
 </td></tr></table></div>
-<p>The given graph is connected and, hence, admits a single spanning tree (see <a class="reference internal" href="#bestdeterminedspanningtree"><span class="std std-numref">Fig. 75</span></a>) of <strong>maximum mean determination</strong> = (0.47 + 0.91 + 0.90 + 0.34)/4 = <strong>0.655</strong> (see Lines 9, 6 and 10 in the relation table above).</p>
+<p>The given graph is connected and, hence, admits a single spanning tree (see <a class="reference internal" href="#bestdeterminedspanningtree"><span class="std std-numref">Fig. 76</span></a>) of <strong>maximum mean determination</strong> = (0.47 + 0.91 + 0.90 + 0.34)/4 = <strong>0.655</strong> (see Lines 9, 6 and 10 in the relation table above).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -9718,7 +9722,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </td></tr></table></div>
 <div class="figure align-center" id="bestdeterminedspanningtree">
 <a class="reference internal image-reference" href="_images/bestDeterminedSpanningTree.png"><img alt="Best determined spanning tree" src="_images/bestDeterminedSpanningTree.png" style="width: 350px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 75 </span><span class="caption-text">Best determined spanning tree</span><a class="headerlink" href="#bestdeterminedspanningtree" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-number">Fig. 76 </span><span class="caption-text">Best determined spanning tree</span><a class="headerlink" href="#bestdeterminedspanningtree" title="Permalink to this image">¶</a></p>
 </div>
 <p>One may easily verify that all other potential spanning trees, including instead the edges {<em>v3</em>, <em>v5</em>} and/or {<em>v4</em>, <em>v5</em>} - will show a lower average determination.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>

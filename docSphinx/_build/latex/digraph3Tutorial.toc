@@ -102,4 +102,4 @@
 \contentsline {subsection}{\numberline {16.2}Recognizing tree graphs}{188}{subsection.16.2}%
 \contentsline {subsection}{\numberline {16.3}Spanning trees and forests}{189}{subsection.16.3}%
 \contentsline {subsection}{\numberline {16.4}Maximum determined spanning forests}{191}{subsection.16.4}%
-\contentsline {section}{References}{193}{figure.75}%
+\contentsline {section}{References}{193}{figure.76}%

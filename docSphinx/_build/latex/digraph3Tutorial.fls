@@ -437,6 +437,11 @@ INPUT ./aliceHeatmap.png
 INPUT ./aliceHeatmap.png
 INPUT aliceHeatmap.png
 INPUT ./aliceHeatmap.png
+INPUT aliceRelationMap.png
+INPUT ./aliceRelationMap.png
+INPUT ./aliceRelationMap.png
+INPUT aliceRelationMap.png
+INPUT ./aliceRelationMap.png
 INPUT aliceBestChoice.png
 INPUT ./aliceBestChoice.png
 INPUT ./aliceBestChoice.png

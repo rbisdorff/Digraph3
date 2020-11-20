@@ -3398,8 +3398,8 @@ class Digraph(object):
                                'negative': '-', 'min': '┴'}
 
         The default ordering of the output is following the Copeland ranking rule
-        from best to worst actions. Further available ranking rules are net flows (rankingRule="netFlows"),
-        Kohler's (rankingRule="kohler"), and Tideman's ranked pairs rule (rankingRule="rankedPairs").
+        from best to worst actions. Further available ranking rule is the 'NetFlows' net flows rule.
+        
 
         Example::
 
@@ -3407,7 +3407,7 @@ class Digraph(object):
             >>> t = RandomCBPerformanceTableau(numberOfActions=25,seed=1)
             >>> g = BipolarOutrankingDigraph(t,Normalized=True)
             >>> gcd = ~(-g)  # strict outranking relation
-            >>> gcd.showRelationMap(rankingRule="netFlows")
+            >>> gcd.showRelationMap(rankingRule="NetFlows")
              -   ++++++++  +++++┬+┬┬+
             - -   + +++++ ++┬+┬+++┬++
             ┴+  ┴ + ++  ++++┬+┬┬++┬++
@@ -3433,7 +3433,7 @@ class Digraph(object):
             ┴┴┴----+-┴+┴---┴-+---+ ┴+
             ┴┴-┴┴┴-┴- - -┴┴---┴┴+ ┬ -
             ----┴┴-┴-----┴┴---  - -- 
-            Ranking rule: netFlows
+            Ranking rule: NetFlows
             >>> 
 
         """
@@ -3443,10 +3443,10 @@ class Digraph(object):
         if actionsList == None:
             if rankingRule == "Copeland":
                 ranking = self.computeCopelandRanking()
-            elif rankingRule == "netFlows":
+            elif rankingRule == "NetFlows":
                 ranking = self.computeNetFlowsRanking()
-            elif rankingRule == "rankedPairs":
-                ranking = self.computeRankedPairsRanking()
+            # elif rankingRule == "RankedPairs":
+            #     ranking = self.computeRankedPairsRanking()
             else:
                 rankingRule = "Alphabetic"
                 ranking = [x for x in self.actions]
@@ -3575,7 +3575,7 @@ class Digraph(object):
             >>> t = RandomCBPerformanceTableau(numberOfActions=25,seed=1)
             >>> g = BipolarOutrankingDigraph(t,Normalized=True)
             >>> gcd = ~(-g)  # strict outranking relation
-            >>> gcd.showHTMLRelationMap(rankingRule="netFlows")
+            >>> gcd.showHTMLRelationMap(rankingRule="NetFlows")
             
         .. image:: relationMap.png
            :alt: Browser view of a relation map
@@ -3621,10 +3621,10 @@ class Digraph(object):
         else:
             if rankingRule == "Copeland":
                 ranking = self.computeCopelandRanking()
-            elif rankingRule == "netFlows":
+            elif rankingRule == "NetFlows":
                 ranking = self.computeNetFlowsRanking()
-            elif rankingRule == "rankedPairs":
-                ranking = self.computeRankedPairsRanking()
+            # elif rankingRule == "RankedPairs":
+            #     ranking = self.computeRankedPairsRanking()
             else:
                 rankingRule = "Alphabetic"
                 ranking = [x for x in self.actions]
