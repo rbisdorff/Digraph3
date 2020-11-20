@@ -3391,7 +3391,7 @@ We may furthermore notice in :numref:`aliceRelationMap` that the four best-ranke
 
 Most credible best choice among the four best-ranked study programs eventually becomes the *Graduate Interpreter* study program at the *Technical High School* in *Köln* (see :numref:`aliceBestChoice` Line 14) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
 
-In the relation map shown in :numref:`aliceRelationMap`, we may notice in the left lower corner that the *asymmetric part* of the outranking relation, i.e. the corresponding *strict* outranking relation, is actually *transitive* (see :numref:`aliceBestChoiceDrawing` Line 2), a graphviz drawing of its skeleton, oriented by the previous *best*, respectively *worst* choice, may well illustrate our *choice recommendation*.
+In the relation map shown in :numref:`aliceRelationMap`, we see in the left lower corner that the *asymmetric part* of the outranking relation, i.e. the corresponding *strict* outranking relation, is actually *transitive* (see :numref:`aliceBestChoiceDrawing` Line 2). Hence, a graphviz drawing of its *skeleton*, oriented by the previous *best*, respectively *worst* choice, may well illustrate our *best choice recommendation*.
 
 .. code-block:: pycon
    :name: aliceBestChoiceDrawing
