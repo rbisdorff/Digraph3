@@ -7010,9 +7010,9 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. only:: html
 
-    Bibliography
-    ............
+   **Bibliography**
 
+   
 .. [CPSTAT-L5] Bisdorff R. (2017) "Simulating from abitrary empirical random distributions". MICS *Computational Statistics* course, Lecture 5. FSTC/ILIAS University of Luxembourg, Winter Semester 2017 (see http://hdl.handle.net/10993/37933).
 
 .. [BIS-2016] Bisdorff R. (2016). "Computing linear rankings from trillions of pairwise outranking situations". In Proceedings of DA2PL'2016 *From Multiple Criteria Decision Aid to Preference Learning*, R. Busa-Fekete, E. Hüllermeier, V. Mousseau and K. Pfannschmidt (Eds.), University of Paderborn (Germany), Nov. 7-8 2016: 1-6 (downloadable `PDF file 451.4 kB <http://hdl.handle.net/10993/28613>`_)
@@ -7058,7 +7058,6 @@ Back to :ref:`Content Table <Tutorial-label>`
 .. [BAR-1991] Barthélemy J.-P. and Guenoche A. (1991), *Trees and Proximities Representations*, Wiley, ISBN: 978-0471922636.
 
 
-
 .. [KRU-1956] Kruskal J.B. (1956), *On the shortest spanning subtree of a graph and the traveling salesman problem*, Proceedings of the American Mathematical Society. 7: 48–50.
 	    
 
@@ -7070,36 +7069,26 @@ Back to :ref:`Content Table <Tutorial-label>`
 
    on \emph{Algorithmic Decision Theory} (https://orbilu.uni.lu/handle/10993/37933)
 
-	      
+	     
 .. only:: html
 
-    Appendices
-    ----------
-
-    
-.. only:: html
-	  
-    Documents
-    .........
+    **Documents**
      
     * `Introduction <index.html>`_
     * `Reference manual <techDoc.html>`_
     * `Tutorial <tutorial.html>`_
+    * `Advanced Topics <pearls.html>`_
 
-.. only:: html
 
-    Indices and tables
-    ..................
+    **Indices and tables**
 
     * :ref:`genindex`
     * :ref:`modindex`
     * :ref:`search`
 	  
 
-.. only:: html
-
-    Footnotes
-    .........
+    **Endnotes**
+    
 
 .. [1] The ``exportGraphViz`` method is depending on drawing tools from `graphviz <https://graphviz.org/>`_. On Linux Ubuntu or Debian you may try ``sudo apt-get install graphviz`` to install them. There are ready ``dmg`` installers for Mac OSX. 
 

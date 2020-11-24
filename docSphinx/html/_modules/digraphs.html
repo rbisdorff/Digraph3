@@ -2708,7 +2708,14 @@
                     <span class="n">narcs</span> <span class="o">+=</span> <span class="mi">1</span>
                     <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
                         <span class="n">nsymArc</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">nsymArc</span><span class="p">))</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">narcs</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">narcs</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">nsymArc</span><span class="p">))</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">narcs</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Digraph instance </span><span class="si">%s</span><span class="s1"> is empty&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Symmetry degree of graph &lt;</span><span class="si">%s</span><span class="s1">&gt; : </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">res</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">res</span></div>
@@ -13524,25 +13531,28 @@
         <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
                                    <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="c1">#g = EmptyDigraph()</span>
+        <span class="c1">#g = CirculantDigraph(circulants=[1,-1])</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">IndeterminateDigraph</span><span class="p">()</span>
         <span class="c1">#g.closeSymmetric()</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeSymmetryDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">isSymmetric</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
         <span class="c1">#g.closeTransitive(Reverse=True)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">isTransitive</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">computeRankingByBestChoosing</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">rankingByBestChoosing</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">showRankingByBestChoosing</span><span class="p">()</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">rankingByLastChoosing</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">showRankingByLastChoosing</span><span class="p">()</span>
-        <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="k">import</span> <span class="o">*</span>
-        <span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByBestChoosing</span><span class="p">()</span>
-        <span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByLastChoosing</span><span class="p">()</span>
-        <span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">rbc</span><span class="o">.</span><span class="n">computeTopologicalRanking</span><span class="p">())</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">rbc</span><span class="o">.</span><span class="n">topologicalSort</span><span class="p">())</span>
+        <span class="c1"># g.computeRankingByBestChoosing(CoDual=True,Debug=False)</span>
+        <span class="c1"># print(g.rankingByBestChoosing)</span>
+        <span class="c1"># g.showRankingByBestChoosing()</span>
+        <span class="c1"># g.computeRankingByLastChoosing(CoDual=True,Debug=False)</span>
+        <span class="c1"># print(g.rankingByLastChoosing)</span>
+        <span class="c1"># g.showRankingByLastChoosing()</span>
+        <span class="c1"># from transitiveDigraphs import *</span>
+        <span class="c1"># rbc = RankingByChoosingDigraph(g,CoDual=False,Threading=False)</span>
+        <span class="c1"># rbc.showRankingByBestChoosing()</span>
+        <span class="c1"># rbc.showRankingByLastChoosing()</span>
+        <span class="c1"># rbc.showRankingByChoosing()</span>
+        <span class="c1"># print(rbc.computeTopologicalRanking())</span>
+        <span class="c1"># print(rbc.topologicalSort())</span>
 <span class="c1">##        print(rbc.rankingByLastChoosing)</span>
 <span class="c1">##        rbc.exportGraphViz(fileName=&#39;test5&#39;,direction=&#39;worst&#39;)</span>
 <span class="c1">##        print(rbc.rankingByBestChoosing)</span>

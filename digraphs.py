@@ -2666,7 +2666,14 @@ class Digraph(object):
                     narcs += 1
                     if relation[y][x] > Med:
                         nsymArc += 1
-        res = Decimal(str(nsymArc))/Decimal(str(narcs))
+                elif relation[y][x] > Med:
+                    narcs += 1
+        try:
+            res = Decimal(str(nsymArc))/Decimal(str(narcs))
+        except:
+            res = Decimal('1.0')
+            if Comments:
+                print('Digraph instance %s is empty' % self.name)
         if Comments:
             print('Symmetry degree of graph <%s> : %.2f' %(self.name,res))
         return res
@@ -13482,25 +13489,28 @@ if __name__ == "__main__":
         t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                    numberOfActions=20,seed=105)
         g = BipolarOutrankingDigraph(t)
+        #g = EmptyDigraph()
+        #g = CirculantDigraph(circulants=[1,-1])
+        g = IndeterminateDigraph()
         #g.closeSymmetric()
         print(g.computeSymmetryDegree(Comments=True))
         print(g.isSymmetric(Comments=True))
         #g.closeTransitive(Reverse=True)
         print(g.computeTransitivityDegree(Comments=False))
         print(g.isTransitive(Comments=True))
-        g.computeRankingByBestChoosing(CoDual=True,Debug=False)
-        print(g.rankingByBestChoosing)
-        g.showRankingByBestChoosing()
-        g.computeRankingByLastChoosing(CoDual=True,Debug=False)
-        print(g.rankingByLastChoosing)
-        g.showRankingByLastChoosing()
-        from transitiveDigraphs import *
-        rbc = RankingByChoosingDigraph(g,CoDual=False,Threading=False)
-        rbc.showRankingByBestChoosing()
-        rbc.showRankingByLastChoosing()
-        rbc.showRankingByChoosing()
-        print(rbc.computeTopologicalRanking())
-        print(rbc.topologicalSort())
+        # g.computeRankingByBestChoosing(CoDual=True,Debug=False)
+        # print(g.rankingByBestChoosing)
+        # g.showRankingByBestChoosing()
+        # g.computeRankingByLastChoosing(CoDual=True,Debug=False)
+        # print(g.rankingByLastChoosing)
+        # g.showRankingByLastChoosing()
+        # from transitiveDigraphs import *
+        # rbc = RankingByChoosingDigraph(g,CoDual=False,Threading=False)
+        # rbc.showRankingByBestChoosing()
+        # rbc.showRankingByLastChoosing()
+        # rbc.showRankingByChoosing()
+        # print(rbc.computeTopologicalRanking())
+        # print(rbc.topologicalSort())
 ##        print(rbc.rankingByLastChoosing)
 ##        rbc.exportGraphViz(fileName='test5',direction='worst')
 ##        print(rbc.rankingByBestChoosing)
