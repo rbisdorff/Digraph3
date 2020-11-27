@@ -2,8 +2,7 @@
 """
 Python 3 implementation of voting digraphs
 Refactored from revision 1.549 of the digraphs module
-Current revision $Revision: 2484 $
-Copyright (C) 2011-2019 Raymond Bisdorff
+Copyright (C) 2011-2020 Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -124,15 +123,15 @@ class VotingProfile(object):
             print()
         print('\n')
 
-    def save(self,name='tempVprofile'):
+    def save(self,fileName='tempVprofile'):
         """
         Persistant storage of an approval voting profile.
         """
-        print('*--- Saving voting profile in file: <' + str(name) + '.py> ---*')
+        print('*--- Saving voting profile in file: <' + str(fileName) + '.py> ---*')
         candidates = self.candidates
         voters = self.voters
         ballot = self.ballot
-        saveFileName = str(name)+str('.py')
+        saveFileName = str(fileName)+str('.py')
         fo = open(saveFileName, 'w')
         fo.write('# Saved voting profile: \n')
         fo.write('from collections import OrderedDict \n')
@@ -212,7 +211,8 @@ class LinearVotingProfile(VotingProfile):
     ['a1']
 
     """
-    def __init__(self,fileVotingProfile=None,numberOfCandidates=5,numberOfVoters=9,seed=None):
+    def __init__(self,fileVotingProfile=None,numberOfCandidates=5,
+                 numberOfVoters=9):
         if fileVotingProfile != None:
             fileName = fileVotingProfile + '.py'
         ## else:
@@ -222,12 +222,44 @@ class LinearVotingProfile(VotingProfile):
             self.name = str(fileVotingProfile)
             self.candidates = argDict['candidates']
             self.voters = argDict['voters']
+            try:
+                self.seed = argDict('seed')
+            except:
+                pass
+            try:
+                self.withPolls = argDict('WithPolls')
+            except:
+                self.WithPolls = False
+            try:
+                self.RandomWeights = argDict('RandomWeights')
+            except:
+                pass
+            try:
+                self.sumWeights = argDict('sumWeights')
+            except:
+                pass
+            try:
+                self.poll1 = argDict('poll1')
+            except:
+                pass
+            try:
+                self.poll2 = argDict('poll2')
+            except:
+                pass
+            try:
+                self.other = argDict('other')
+            except:
+                pass
+            try:
+                self.partyRepartition = argDict('partyRepartition')
+            except:
+                pass
             self.linearBallot = argDict['linearBallot']
             self.ballot = self.computeBallot()
         else:
             print('!!! Error: The name of a stored linear voting profile is required !!!')
             return
-        self.sumWeights = Decimal('0')
+        self.sumWeights = 0.0
         for v in self.voters:
             self.sumWeights += self.voters[v]['weight']
 
@@ -254,18 +286,18 @@ class LinearVotingProfile(VotingProfile):
         self.ballot = ballot
         return ballot
 
-    def save(self,name='templinearprofile'):
+    def save(self,fileName='templinearprofile'):
         """
         Persistant storage of a linear voting profile.
 
         Parameter:
             name of file (without <.py> extension!).
         """
-        print('*--- Saving linear profile in file: <' + str(name) + '.py> ---*')
+        print('*--- Saving linear profile in file: <' + str(fileName) + '.py> ---*')
         candidates = self.candidates
         voters = self.voters
         linearBallot = self.linearBallot
-        saveFileName = str(name)+str('.py')
+        saveFileName = str(fileName)+str('.py')
         fo = open(saveFileName, 'w')
         fo.write('# Saved linear voting profile: \n')
         fo.write('from collections import OrderedDict \n')
@@ -444,7 +476,7 @@ class LinearVotingProfile(VotingProfile):
         while len(remainingCandidates) > 1:
             uninominalVotes = self.computeUninominalVotes(remainingCandidates,remainingLinearBallot)
             if Comments:
-                print('>>> stage = ', stage)
+                print(' ==> stage = ', stage)
                 print('    remaining candidates', remainingCandidates)
                 print('    uninominal votes', uninominalVotes)
             minVotes = totalWeight
@@ -481,15 +513,18 @@ class LinearVotingProfile(VotingProfile):
                         return [x]
         return remainingCandidates
 
-    def save2PerfTab(self,fileName='votingPerfTab',isDecimal=True,valueDigits=2):
+    def save2PerfTab(self,fileName='votingPerfTab',isDecimal=True,
+                     valueDigits=2,_NegativeWeights=True,Comments=False):
         """
         Persistant storage of a linear voting profile in the format of a rank performance Tableau.
         For each voter *v*, the rank performance of candidate *x* corresponds to:
 
         number of candidates - linearProfile[v].index(x)
+        
         """
         from copy import deepcopy
-        print('*--- Saving as performance tableau in file: <' + str(fileName) + '.py> ---*')
+        if Comments:
+            print('*--- Saving as performance tableau in file: <' + str(fileName) + '.py> ---*')
         objectives = {}
         fileNameExt = str(fileName)+str('.py')
         fo = open(fileNameExt, 'w')
@@ -505,17 +540,41 @@ class LinearVotingProfile(VotingProfile):
                 fo.write('\'%s\': %s,\n' % (it,repr(self.candidates[x][it])) )
             fo.write('}),\n')
         fo.write('])\n')
-        # no objectives
-        fo.write('objectives = OrderedDict()\n')            
+        # writing objectives if WithPolls
+        if self.WithPolls:
+            fo.write('objectives = OrderedDict([\n')
+            p0 = [v for v in self.voters if self.voters[v]['party'] == 0]
+            p1 = [v for v in self.voters if self.voters[v]['party'] == 1]
+            p2 = [v for v in self.voters if self.voters[v]['party'] == 2]
+            n0 = len(p0)
+            n1 = len(p1)
+            n2 = len(p2)          
+            fo.write('(\'party0\',{\'name\':\'other\',\n')
+            fo.write('\'weight\': %.2f,\n' % Decimal(str(n0)) )
+            fo.write('\'criteria\': %s }),\n' % p0)
+            fo.write('(\'party1\',{\'name\':\'party 1\',\n')
+            fo.write('\'weight\': %.2f,\n' % Decimal(str(n1)) )
+            fo.write('\'criteria\': %s }),\n' % p1)
+            fo.write('(\'party2\',{\'name\':\'party 2\',\n')
+            fo.write('\'weight\': %.2f,\n' % Decimal(str(n2)) )
+            fo.write('\'criteria\': %s }),\n' % p2)
+            fo.write('])\n')
+        else:
+            fo.write('objectives = OrderedDict()\n')  
         # criteria
-        fo.write('criteria = OrderedDict([\n') 
+        if self.WithPolls:
+            _NegativeWeights = False
+        fo.write('criteria = OrderedDict([\n')
         for g in self.voters:
-            fo.write('(\'%s\', {\n' % str(g))
+            fo.write('(\'%s\', {\'name\': \'%s\',\n' % (str(g),str(g)) )
             for it in self.voters[g].keys():
                 if it == 'weight':
-                    fo.write('\'%s\': Decimal(\'%s\'),\n' % (it,repr(-self.voters[g][it])))
+                    if _NegativeWeights:
+                        fo.write('\'%s\': %s,\n' % (it,repr(-self.voters[g][it])))
+                    else:
+                        fo.write('\'%s\': %s,\n' % (it,repr(self.voters[g][it])))
                 else:
-                    fo.write('\'%s\': Decimal(\'%s\'),\n' % (it,repr(self.voters[g][it])))
+                    fo.write('\'%s\': %s,\n' % (it,repr(self.voters[g][it])))
             fo.write("\'scale\':(Decimal(1),Decimal(%d)),\n" % nc)
             fo.write("\'preferenceDirection\': \'%s\'" % 'min')
             fo.write('}),\n')
@@ -532,9 +591,12 @@ class LinearVotingProfile(VotingProfile):
                         xval = (self.linearBallot[g].index(x) + 1)
                     except:
                         xval = -999
-                    fo.write(evaluationString % (x,Decimal(str(xval))))
+                    if _NegativeWeights:
+                        fo.write(evaluationString % (x,Decimal(str(xval))))
+                    else:
+                        fo.write(evaluationString % (x,Decimal(str(-xval))))
                 else:
-                    fo.write('\'' + str(x) + '\':' + str(evaluation[g][x]) + ',\n')
+                    fo.write('\'' + str(x) + '\':' + str(-evaluation[g][x]) + ',\n')
                     
             fo.write('},\n')
         fo.write( '}\n')
@@ -542,6 +604,9 @@ class LinearVotingProfile(VotingProfile):
 
     def showHTMLVotingHeatmap(self,criteriaList=None, \
                               actionsList=None,\
+                              fromIndex=None,\
+                              toIndex=None,\
+                              Transposed=True,\
                               SparseModel=False,\
                               minimalComponentSize=1, \
                               rankingRule='Copeland',\
@@ -563,14 +628,18 @@ class LinearVotingProfile(VotingProfile):
         from tempfile import mkdtemp
         tempDir = mkdtemp()
         perfTabFileName = '%s/votingPerfTab' % tempDir
-        self.save2PerfTab(perfTabFileName)
+        if SparseModel:
+            self.save2PerfTab(perfTabFileName,_NegativeWeights=False)
+        else:
+            self.save2PerfTab(perfTabFileName)
         t = PerformanceTableau(perfTabFileName)
-        t.showHTMLPerformanceHeatmap(criteriaList=criteriaList, actionsList=actionsList,\
+        t.showHTMLPerformanceHeatmap(criteriaList=criteriaList, actionsList=actionsList, \
+                               fromIndex=fromIndex,toIndex=toIndex,Transposed=Transposed,\
                               SparseModel=SparseModel, minimalComponentSize=minimalComponentSize, \
                               rankingRule=rankingRule, quantiles=quantiles, strategy=strategy, \
                               ndigits=ndigits, colorLevels=colorLevels, \
-                              pageTitle=pageTitle, \
-                              Correlations=True, Threading=Threading, nbrOfCPUs=nbrOfCPUs, Debug=Debug)
+                              pageTitle=pageTitle, Correlations=Correlations,\
+                              Threading=Threading, nbrOfCPUs=nbrOfCPUs, Debug=Debug)
     
 
 
@@ -787,18 +856,18 @@ class ApprovalVotingProfile(VotingProfile):
 ##        self.ballot = ballot
 ##        return ballot
 
-    def save(self,name='tempAVprofile'):
+    def save(self,fileName='tempAVprofile'):
         """
         Persistant storage of an approval voting profile.
 
         Parameter:
             name of file (without <.py> extension!).
         """
-        print('*--- Saving AV profile in file: <' + str(name) + '.py> ---*')
+        print('*--- Saving AV profile in file: <' + str(fileName) + '.py> ---*')
         candidates = self.candidates
         voters = self.voters
         approvalBallot = self.approvalBallot
-        saveFileName = str(name)+str('.py')
+        saveFileName = str(fileName)+str('.py')
         fo = open(saveFileName, 'w')
         fo.write('# Saved approval voting profile: \n')
         fo.write('from collections import OrderedDict \n')
@@ -892,9 +961,17 @@ class ApprovalVotingProfile(VotingProfile):
 
 class RandomApprovalVotingProfile(ApprovalVotingProfile):
     """
-    A specialized class for approval voting profiles.
+    A specialized class for generating random approval voting profiles.
+
+    *Parameters*
+        * *minSizeBallot* : integer, determines the minimum of
+           candidates that must be approved.
+        * *maxSizeBallot* : integer, determines the maximum of
+          candidates that may be approved.
+        
     """
-    def __init__(self,numberOfVoters=9,numberOfCandidates=5,minSizeOfBallot=1,maxSizeOfBallot=2,seed=None):
+    def __init__(self,numberOfVoters=9,numberOfCandidates=5,
+                 minSizeOfBallot=1,maxSizeOfBallot=2,seed=None):
         """
         Random profile creation parameters:
             | numberOfVoters=9, numberOfCandidates=5,
@@ -943,7 +1020,7 @@ class RandomApprovalVotingProfile(ApprovalVotingProfile):
 
     def generateRandomDisApprovalBallot(self,minSizeOfBallot,maxSizeOfBallot,seed=None):
         """
-        Renders a randomly generated approval ballot.
+        Renders a randomly generated disapproval ballot.
         """
         import random,copy
         random.seed(seed)
@@ -965,42 +1042,80 @@ class RandomApprovalVotingProfile(ApprovalVotingProfile):
 
 class RandomLinearVotingProfile(LinearVotingProfile):
     """
-    A specialized class for random linwear voting profiles.
-    Random reation parameters:
-    
-        numberOfVoters=5, numberOfCandidates=5,
-        votersWeights = optional list of positive integers for instance [2,3,4,1,5].
-        
+    A specialized class for generating random liwear voting profiles.
+
+    *Parameters*   
+        * When *WithPolls* is True, each party supporting voter's linear ballot is randomly oriented
+          by one of two random exponential poll results. The corresponding polls are stored
+          in self.poll1, respectively self.poll2.
+        * The *partyRepartition* sets the theoretical distribution of the two polls over the
+          set of voters. If set to 0.0 or 1.0, only self.poll2, resp. self.poll1, will orient
+          the respective party supporters.
+        * The *other* paraemter sets the theoretical proportion of non party supporters.
+        * The *DivisivePolitics* flag provides, if True, two reversed polls for
+          generating the random linear ballots. 
+        * The *votersWeights* parameter may be a list of positive integers in order to
+          deterministically attribute weights to the voters.
+          Is ignored when *RandomWeights* is True.
+        * When *voterWeights* are None and *RandomWeights* is False, each voter
+          obtains a single vote (default setting).
+          
     """
-    def __init__(self,numberOfVoters=9,numberOfCandidates=5,votersWeights=None,seed=None):
+    def __init__(self,numberOfVoters=10,
+                 numberOfCandidates=5,
+                 WithPolls=False,
+                 partyRepartition=0.5,
+                 other=0.05,
+                 DivisivePolitics=False,
+                 votersWeights=None,
+                 RandomWeights=False,
+                 seed=None,Debug=False):
         """
         """
         from collections import OrderedDict
+        import random
+        if seed == None:
+            seed = random.random()
+        random.seed(seed)
         votersList = [x for x in range(1,numberOfVoters + 1)]
         voters = OrderedDict()
+        nd = len(str(numberOfVoters))
         for v in votersList:
-            voterID = 'v%d' % v
+            voterID = ('v%%0%dd' % nd) % (v)
             if votersWeights != None:
                 try:
                     weight = votersWeights[v-1]
                 except:
                     weight = 1
             else:
-                weight = 1
+                if RandomWeights:
+                    weight = random.randint(1,numberOfVoters)
+                else:
+                    weight = 1
             voters[voterID] = {'weight':Decimal('%d' % weight)}
         candidatesList = [x for x in range(1,numberOfCandidates + 1)]
         candidates = OrderedDict()
+        na = len(str(numberOfCandidates))
         for c in candidatesList:
-            candidateID = 'a%d' % c
+            candidateID =('a%%0%dd' % na) % (c)
             candidates[candidateID] = {'name': candidateID}
+        # store instance attributes
         self.name = str('randLinearProfile')
+        self.seed = seed
         self.candidates = candidates
         self.voters = voters
+        self.WithPolls = WithPolls
+        self.RandomWeights = RandomWeights
         self.sumWeights = Decimal('0')
         for v in self.voters:
             self.sumWeights += self.voters[v]['weight']
-        self.linearBallot = self.generateRandomLinearBallot(seed)
-        #print self.linearBallot
+        if WithPolls:
+            self.linearBallot =\
+                self.generateRandomLinearBallotWithPoll(\
+                        partyRepartition,other,DivisivePolitics,\
+                        seed=seed,Debug=Debug)
+        else:
+            self.linearBallot = self.generateRandomLinearBallot(seed)
         self.ballot = self.computeBallot()
 
 
@@ -1012,14 +1127,186 @@ class RandomLinearVotingProfile(LinearVotingProfile):
         random.seed(seed)
         linearBallot = {}
         voters = self.voters
-        candidateList = [x for x in self.candidates]
-        #print candidateList
+        candidatesList = [x for x in self.candidates]
+        #print candidatesList
         for v in voters:
-            random.shuffle(candidateList)
+            random.shuffle(candidatesList)
             #print candidateList
-            linearBallot[v] = candidateList.copy()
+            linearBallot[v] = candidatesList.copy()
         return linearBallot
 
+    def generateRandomLinearBallotWithPoll(self,partyRepartition,\
+                                           other,DivisivePolitics,\
+                                           seed=None,Debug=False):
+        """
+        Renders a random linear ballot in accordance with the given polls:
+        self.poll1 and self.poll2.
+
+        Polls are distributed in the *bipartisan* proportion.
+        
+        """
+        import random
+        random.seed(seed)
+        from randomNumbers import DiscreteRandomVariable
+        voters = self.voters
+        candidatesList = [x for x in self.candidates]
+        if Debug:
+            print(candidatesList)
+        nc = len(candidatesList)
+
+##        # inverse polls
+##        poll = []
+##        sumPoll = 0.0
+##        for c in candidatesList:
+##            valc = random.expovariate(1)
+##            poll.append( (valc,c) )
+##            sumPoll += valc
+##        poll.sort(reverse=True)
+##        poll1 = {}
+##        poll2 = {}
+##        for i in range(nc):
+##            ci1 = poll[i][1]
+##            ci2 = poll[-1-i][1]
+##            xci = poll[i][0]/sumPoll
+##            poll1[ci1] = xci
+##            poll2[ci2] = xci
+           
+        # divisive or independent polls
+        poll1 = {}
+        sumPoll = 0.0
+        for c in candidatesList:
+            poll1[c] = random.expovariate(1)
+            sumPoll += poll1[c]
+        for c in poll1:
+            poll1[c] /= sumPoll
+        self.poll1 = poll1
+        poll2 = {}
+        sumPoll = 0.0
+        if DivisivePolitics:
+            p1 = [(poll1[c],c) for c in candidatesList]
+            p1 = list(sorted(p1))
+            p2 = list(reversed(p1))
+            if Debug:
+                print(p1,p2)
+            nc = len(candidatesList)
+            for i in range(nc):
+            #for c in candidatesList:
+                #c = candidatesList[i]
+                #poll2[c] = random.expovariate(1)
+                c = p1[i][1]
+                poll2[c] = p2[i][0]
+                sumPoll += poll2[c]
+##            for c in poll2:
+##                poll2[c] /= sumPoll
+        else:
+            for c in candidatesList:
+                poll2[c] = random.expovariate(1)
+                sumPoll += poll2[c]
+        for c in poll2:
+            poll2[c] /= sumPoll
+
+        # storing polls    
+        self.poll1 = poll1
+        self.poll2 = poll2
+        self.other = other
+        self.partyRepartition = partyRepartition
+        if Debug:
+            print(poll1,poll2,other,partyRepartition)
+
+        # generating random linear ballots
+        linearBallot = {}
+        j = 1
+        for v in voters:
+            # each voter is attached to one of the polls
+            u = random.random()
+            if u < other: # random voting
+                otherCandidatesList = list(candidatesList)
+                random.shuffle(otherCandidatesList)
+                voters[v]['party'] = 0
+                linearBallot[v] = otherCandidatesList
+            else:  # poll driven random
+                
+                if partyRepartition < random.random():
+                    pollv = poll1
+                    voters[v]['party'] = 1
+                else:
+                    pollv = poll2
+                    voters[v]['party'] = 2
+                # generating a random linear ranking    
+                shuffledCandidatesList = []
+                for i in range(nc-1):
+                    NotShuffled = True
+                    currPoll = pollv.copy()
+                    rdv = DiscreteRandomVariable(currPoll,seed=j)
+                    while NotShuffled:
+                        xc = rdv.random()
+                        if xc not in shuffledCandidatesList:
+                            NotShuffled = False
+                    shuffledCandidatesList.append(xc)
+                    currPoll.pop(xc)
+##                    if Debug:
+##                        print(i,shuffledCandidatesList)
+                            
+                shc = set(shuffledCandidatesList)
+                sc = set(candidatesList)
+                xc = (sc-shc).pop()
+                shuffledCandidatesList.append(xc)
+##                if Debug:
+##                    print('==>>', v,shuffledCandidatesList)           
+                j += 1
+                linearBallot[v] = shuffledCandidatesList
+            
+        return linearBallot
+
+    def showRandomPolls(self,Debug=False):
+        """
+        Shows the random polls, the case given.
+        """
+        try:
+            poll1 = [(self.poll1[x],x) for x in self.poll1]
+        except:
+            poll1 = []
+        nc = len(poll1)
+        if nc > 1:
+            voters = self.voters
+            nv = len(voters)
+            supportersParty1 = [x for x in voters if voters[x]['party'] == 1]
+            supportersParty2 = [x for x in voters if voters[x]['party'] == 2]
+            otherSupporters = [x for x in voters if voters[x]['party'] == 0]
+            n0 = len(otherSupporters)
+            p0 = float(n0)/float(nv)
+            n1 = len(supportersParty1)
+            p1 = float(n1)/float(nv)
+            n2 = len(supportersParty2)
+            p2 = float(n2)/float(nv)
+            if Debug:
+                print(n1,p1,n2,p2,n0,p0)
+            poll1.sort(reverse=True)
+            poll2 = [(self.poll2[x],x) for x in self.poll2]
+            poll2.sort(reverse=True)
+            poll = []
+            for x in self.candidates:
+                res = p1 * self.poll1[x] +\
+                      p2 * self.poll2[x]
+                poll.append( (res,x) )
+            poll.sort(reverse=True)
+            # print polls
+            print('Random repartition of voters')
+            print(' Party_1 supporters : %d (%05.2f%%)' % (n1,p1*100))
+            print(' Party_2 supporters : %d (%05.2f%%)' % (n2,p2*100))
+            print(' Other voters       : %d (%05.2f%%)' % (n0,p0*100))
+            print('*---------------- random polls ---------------')
+            print(' Party_1(%04.1f%%) | Party_2(%04.1f%%)|   expected  '%\
+                   (p1*100, p2*100) )
+            print('-----------------------------------------------')
+            for i in range(nc):
+                print("  %s : %05.2f%%  |  %s : %05.2f%%  |  %s : %05.2f%%" %\
+                  (poll1[i][1],poll1[i][0]*100.0,
+                   poll2[i][1],poll2[i][0]*100.0,
+                    poll[i][1], poll[i][0]*100.0) )
+        else:
+            print('No polls defined !')
+        
 class RandomVotingProfile(VotingProfile):
     """
     A subclass for generating random voting profiles.
@@ -1122,7 +1409,7 @@ class CondorcetDigraph(Digraph):
     >>> g.computeCondorcetWinner()
     ['a1']
     >>> g.exportGraphViz()
-    *---- exporting a dot file dor GraphViz tools ---------*
+    *---- exporting a dot file for GraphViz tools ---------*
     Exporting to rel_randLinearProfile.dot
     dot -Grankdir=BT -Tpng rel_randLinearProfile.dot -o rel_randLinearProfile.png
 
@@ -1349,8 +1636,12 @@ class CondorcetDigraph(Digraph):
             for y in actions:
                 if relation[x][y] > Med:
                     scores[x] += 1
+                if relation[x][y] < Med:
+                    scores[x] -= 1
                 if relation[y][x] > Med:
                     scores[x] -= 1
+                if relation[y][x] < Med:
+                    scores[x] += 1
         scoresRanking = [(x,scores[x]) for x in scores]
         scoresRanking = sorted(scoresRanking,key = itemgetter(1),reverse=True)
         ranking = [x[0] for x in scoresRanking]
@@ -1380,7 +1671,7 @@ class CondorcetDigraph(Digraph):
             scores[x] = 0
         for x in actions:
             for y in actions:
-                scores[x] += relation[x][y]
+                scores[x] += relation[x][y] - relation[y][x]
         scoresRanking = [(x,scores[x]) for x in scores]
         scoresRanking = sorted(scoresRanking,key = itemgetter(1),reverse=True)
         ranking = [x[0] for x in scoresRanking]
@@ -1456,9 +1747,78 @@ class CondorcetDigraph(Digraph):
             print(rank)
         return rank
 
+    def showRankingByChoosing(self,rankingByChoosing=None):
+        """
+        A specialized show method for self.rankinByChoosing result from CondorcetDigraphs.
+
+        The bracketed numbers  following the reiterated *first* and *last* choices,
+        indicate the average majority margin with which the *i*-th *first* choice,
+        respectively the *i*-th *last* choice, is beating, resp. is beaten by,
+        the remaining candidates at step *i*.
+
+        .. warning::
+
+           The self.computeRankingByChoosing(CoDual=False/True) method instantiating
+           the self.rankingByChoosing slot is pre-required !
+             
+        """
+        if rankingByChoosing == None:
+            try:
+                rankingByChoosing = self.rankingByChoosing['result']
+            except:
+                print('Error: You must first run self.computeRankingByChoosing(CoDual=False(default)|True) !')
+            #rankingByChoosing = self.computeRankingByChoosing(Debug,CoDual)
+                return
+        else:
+            rankingByChoosing = rankingByChoosing['result']
+        print('Ranking by Choosing and Rejecting')
+        print('---------------------------------')
+        space = ''
+        n = len(rankingByChoosing)
+        for i in range(n):
+            if i+1 == 1:
+                nstr='st'
+            elif i+1 == 2:
+                nstr='nd'
+            elif i+1 == 3:
+                nstr='rd'
+            else:
+                nstr='th'
+            ibch = set(rankingByChoosing[i][0][1])
+            iwch = set(rankingByChoosing[i][1][1])
+            iach = iwch & ibch
+            #print 'ibch, iwch, iach', i, ibch,iwch,iach
+            ch = list(ibch)
+            ch.sort()
+            print(' %s%s%s first ranked: %s (%.2f)' % (space,i+1,nstr,ch,rankingByChoosing[i][0][0]))
+            if len(iach) > 0 and i < n-1:
+                print('  %s Ambiguous ranking %s' % (space,list(iach)))
+                space += '  '
+            space += '  '
+        for i in range(n):
+            if n-i == 1:
+                nstr='st'
+            elif n-i == 2:
+                nstr='nd'
+            elif n-i == 3:
+                nstr='rd'
+            else:
+                nstr='th'
+            space = space[:-2]
+            ibch = set(rankingByChoosing[n-i-1][0][1])
+            iwch = set(rankingByChoosing[n-i-1][1][1])
+            iach = iwch & ibch
+            #print 'ibch, iwch, iach', i, ibch,iwch,iach
+            ch = list(iwch)
+            ch.sort()
+            if len(iach) > 0 and i > 0:
+                space = space[:-2]
+                print('  %s Ambiguous ranking %s' % (space,list(iach)))
+            print(' %s%s%s last ranked: %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
+
 #----------test voting Digraph class ----------------
 if __name__ == "__main__":
-    import sys,array
+    from transitiveDigraphs import *
 
     print('****************************************************')
     print('* Python voting digraphs module                    *')
@@ -1489,32 +1849,72 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-    lvp = RandomLinearVotingProfile(numberOfCandidates=5,
-                              numberOfVoters=9,
-                              votersWeights=[1,2,3,4,3,2,1,3,2],seed=1)
+    lvp = RandomLinearVotingProfile(numberOfCandidates=7,
+                            numberOfVoters=500,
+                            WithPolls=True,
+                            partyRepartition=0.4,
+                            other=0.2,
+                            DivisivePolitics=True,
+                            #seed=0.20990710811162194) # 1 circuit
+                            #seed=0.8077233289616987)  # 2 circuits !
+                            seed=1,
+                            Debug=False)
+    lvp.showRandomPolls()
 ##    ## lvp = LinearVotingProfile('templinearprofile')
-    lvp.save()
-    lvp1 = LinearVotingProfile('templinearprofile')
-##    lvp1 = LinearVotingProfile('example1')
-    lvp1.computeBallot()
-    ## for x in lvp.voters:
-    ##    print x, lvp.linearBallot[x]
-    lvp1.showLinearBallots(IntegerWeights=True)
-    lvp1.showVoterBallot('v1')
-##    print(lvp.computeRankAnalysis())
-    lvp1.computeInstantRunoffWinner()
-    lvp1.showRankAnalysisTable(Debug=False)
-    lvp1.showBordaRanking()
-    lvp1.computeBordaWinners()
-    lvp1.save2PerfTab('votingPerfTab')
+##    lvp.save('test')
+##    lvp1 = LinearVotingProfile('test')
+    lvp.save2PerfTab()
+    from outrankingDigraphs import *
     t = PerformanceTableau('votingPerfTab')
-    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
-    c = CondorcetDigraph(lvp1)
-    #c.recodeValuation()
-    c.showRelationTable()
-    print(c.computeCopelandRanking(Debug=True))
-    print(c.computeNetFlowsRanking(Debug=True))
-    
+##    g = BipolarOutrankingDigraph(t)
+##    g.showRelationTable(ReflexiveTerms=False)
+    uog = UnOpposedBipolarOutrankingDigraph(t)
+    uog.showRelationTable(ReflexiveTerms=False)
+    print(uog)
+    uog.showPreKernels()
+    uog.showBestChoiceRecommendation()
+##    lvp1 = LinearVotingProfile('templinearprofile')
+##    lvp1 = LinearVotingProfile('example1')
+##    lvp1.computeBallot()
+##    ## for x in lvp.voters:
+##    ##    print x, lvp.linearBallot[x]
+##    lvp1.showLinearBallots(IntegerWeights=True)
+##    lvp1.showVoterBallot('v001')
+####    print(lvp.computeRankAnalysis())
+##    lvp1.computeInstantRunoffWinner()
+##    lvp1.showRankAnalysisTable(Debug=False)
+##    lvp1.showBordaRanking()
+##    lvp1.computeBordaWinners()
+##    lvp1.save2PerfTab('votingPerfTab')
+##    t = PerformanceTableau('votingPerfTab')
+##    #t.showHTMLPerformanceHeatmap(Transposed=True,Correlations=True,ndigits=0)
+##    #lvp.showHTMLVotingHeatmap(Correlations=True)
+    # c = CondorcetDigraph(lvp)
+    # #c.recodeValuation()
+    # c.showRelationTable()
+##    (~(-c)).showRelationTable()
+    # print(c.computeCopelandRanking(Debug=False))
+    # print(c.computeNetFlowsRanking(Debug=False))
+    # lvp.showRandomPolls()
+    # print(c.computeTransitivityDegree())
+    # c.computeChordlessCircuits()
+    # c.showChordlessCircuits()
+    # if c.chordlessCircuits != []:
+    #     #MP = True
+    #     c.recodeValuation()
+    #     wc = WeakCopelandOrder(c)
+    #     print('Weak Copeland ranking')
+    #     wc.showRankingByChoosing()
+    #     corr = c.computeRankingCorrelation(wc.copelandRanking)
+    #     wc.showCorrelation(corr)
+    #     wn = WeakNetFlowsOrder(c)
+    #     print('Weak NetFlows ranking')
+    #     wn.showRankingByChoosing()
+    #     corr = c.computeRankingCorrelation(wn.netFlowsRanking)
+    #     wn.showCorrelation(corr)
+    #     lvp.showRandomPolls()
+    #     print(lvp.seed)
+
 ##    from linearOrders import NetFlowsOrder
 ##    nf = NetFlowsOrder(c,Debug=True)
 ##    from outrankingDigraphs import *

@@ -2,7 +2,7 @@
 """
 Python implementation of linear orders
 Dependancy: digraphs module
-Copyright (C) 2011-2019  Raymond Bisdorff
+Copyright (C) 2011-2020  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 
@@ -13,7 +13,7 @@ Copyright (C) 2011-2019  Raymond Bisdorff
 """
 #######################
 
-__version__ = "$Revision: 1.18 $"
+__version__ = "$Revision: Py39 $"
 # $Source: /home/cvsroot/Digraph/linearOrders.py,v $
 
 from digraphsTools import *
@@ -206,7 +206,7 @@ class LinearOrder(Digraph):
         """
         import os
         if Comments:
-            print('*---- exporting a dot file dor GraphViz tools ---------*')
+            print('*---- exporting a dot file for GraphViz tools ---------*')
         #actionkeys = [x for x in self.actions]
         actionkeys = self.computeOrder()
         n = len(actionkeys)
@@ -227,7 +227,7 @@ class LinearOrder(Digraph):
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\ndigraphs module (graphviz), R. Bisdorff, 2015", size="')
+        fo.write('\\nDigraph3 (graphviz), R. Bisdorff, 2015", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             nodeName = str(actionkeys[i])
@@ -334,7 +334,7 @@ class RandomLinearOrder(LinearOrder):
             print(self.computeOrder())
         
 ######   instantiable class of linear orders
-class RankedPairsOrder(LinearOrder):
+class RankedPairsRanking(LinearOrder):
     """
     instantiates the Extended Prudent Ranked Pairs Order from
     a given bipolar-valued Digraph instance
@@ -365,7 +365,8 @@ class RankedPairsOrder(LinearOrder):
         listPairs = []
         for x in actions:
             for y in (z for z in actions if z != x):
-                listPairs.append((-relation[x][y],(x,y),x,y))
+                linkCharacteristic = relation[x][y]-relation[y][x]
+                listPairs.append((-linkCharacteristic,(x,y),x,y))
         listPairs.sort(reverse=Leximin)
         if Debug:
             print(listPairs)
@@ -488,8 +489,12 @@ class RankedPairsOrder(LinearOrder):
         if Debug:
             print('Ranked Pairs Order = ', self.rankedPairsRanking)
 
-    
-class KohlerOrder(LinearOrder):
+class RankedPairsOrder(RankedPairsRanking):
+    """
+    Dummy for RankedPairsRanking class
+    """
+#----------------  
+class KohlerRanking(LinearOrder):
     """
     instantiates the Kohler Order from
     a given bipolar-valued Digraph instance
@@ -591,12 +596,17 @@ class KohlerOrder(LinearOrder):
             self.showRelationTable()
             print('Kohler ranking: ', self.kohlerRanking)
 
-class NetFlowsOrder(LinearOrder):
+class KohlerOrder(KohlerRanking):
     """
-    instantiates the net flows Order from
+    Dummay for KohlerRanking class
+    """
+
+class NetFlowsRanking(LinearOrder):
+    """
+    instantiates the net flows ranking from
     a given bipolar-valued Digraph instance
     """
-    def __init__(self,other,coDual=False,Debug=False):
+    def __init__(self,other,coDual=False,Comments=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph following
@@ -607,6 +617,8 @@ class NetFlowsOrder(LinearOrder):
         from collections import OrderedDict
         from time import time
 
+        if Debug:
+            Comments=True
         #timings
         tt = time()
         runTimes = OrderedDict()
@@ -634,6 +646,8 @@ class NetFlowsOrder(LinearOrder):
         tnf = time()
         netFlows = []
         if other.valuationdomain['med'] == Med:
+            if Debug:
+                print('standard')
             for x in actions:
                 xnetflows = sum((otherRelation[x][y] - otherRelation[y][x])\
                                  for y in actions)
@@ -657,8 +671,10 @@ class NetFlowsOrder(LinearOrder):
         # in case of ties
         netFlows.sort(reverse=True)
         self.netFlows = netFlows
-##        if Debug:
-##            print(netFlows)
+        if Comments:
+            print('Net Flows :')
+            for x in netFlows:
+                print( '%s : %.3f' % (x[1],x[0]) )
 
         netFlowsRanking = [x[1] for x in netFlows]
         self.netFlowsRanking = netFlowsRanking
@@ -667,6 +683,9 @@ class NetFlowsOrder(LinearOrder):
         if Debug:
             print(self.netFlowsRanking)
             print(self.netFlowsOrder)
+        if Comments:
+            print('NetFlows Ranking:')
+            print(netFlowsRanking)
         runTimes['netFlows'] = time() - tnf
 
         # init relation
@@ -705,6 +724,326 @@ class NetFlowsOrder(LinearOrder):
         else:
             for x in reversed(self.netFlows):
                 print('%s \t %.2f' %(x[1],x[0]))
+
+class NetFlowsOrder(NetFlowsRanking):
+    """
+    Dummy for NetFlowsRanking class
+    """
+
+class IteratedNetFlowsRanking(LinearOrder):
+    """
+    instantiates the iterated NetFlows order from
+    a given bipolar-valued Digraph instance
+    """
+    def __init__(self,other,coDual=False,Valued=False,Comments=False,Debug=False):
+        """
+        constructor for generating a linear order
+        from a given other digraph following
+        the iterated NetFlows rules
+        """
+        from copy import copy, deepcopy
+        from collections import OrderedDict
+        # construct ranked pairs
+        if coDual:
+            otherCoDual = CoDualDigraph(other)
+            relation = otherCoDual.relation
+            Max = otherCoDual.valuationdomain['max']
+            if Debug:
+                otherCoDual.showRelationTable()
+                print(otherCoDual.valuationdomain)
+        else:
+            relation = other.relation
+            Max = other.valuationdomain['max']
+            if Debug:
+                other.showRelationTable()
+                print(other.valuationdomain)
+                
+            
+        actions = [x for x in other.actions]
+        actions.sort()
+        n = len(actions)
+        
+        # instatiates a Digraph template
+        g = IndeterminateDigraph(order=n)
+        g.actions = actions
+        g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
+        g.relation = {}
+        for x in g.actions:
+            g.relation[x] = {}
+            for y in g.actions:
+                g.relation[x][y] = g.valuationdomain['med']
+
+        # construct ranking
+        actionsList = [x for x in g.actions]
+
+        rank = OrderedDict()
+        order = OrderedDict()
+        k = 1
+        while actionsList != []:
+            knetFlows = []
+            for x in actionsList:
+                ca = 0
+                kxnetFlows = Decimal('0')
+                for y in actionsList:
+                    if x != y:
+                        kxnetFlows += relation[x][y] - relation[y][x]
+                        ca += 2
+                if Debug:
+                    print('k,ca,kxnetFlows', k,ca, kxnetFlows)                        
+                if ca > 0:
+                    kxnetFlows = kxnetFlows / Decimal(str(ca))
+                if Debug:
+                    print('k,x,kxnetFlows', k,x, kxnetFlows)
+                knetFlows.append((kxnetFlows,x))
+            knetFlows.sort()
+            if Comments:
+                print('k,knetFlows, knetFlows[-1][1]',k,knetFlows, knetFlows[-1][1])
+            rank[knetFlows[-1][1]] = {'rank':k,'netFlows':knetFlows[-1][0]}
+            order[knetFlows[0][1]] = {'order':k,'netFlows':knetFlows[0][0]}
+            
+            actionsList.remove(knetFlows[-1][1])
+            k += 1
+            if Debug:
+                print('actionsList', actionsList)
+        self.valuedRanks = rank
+        # construct ordering
+        actionsList = [x for x in g.actions]
+        order = OrderedDict()
+        k = 1
+        while actionsList != []:
+            knetFlows = []
+            for x in actionsList:
+                ca = 0
+                kxnetFlows = Decimal('0')
+                for y in actionsList:
+                    if x != y:
+                        kxnetFlows += relation[x][y] - relation[y][x]
+                        ca += 2
+                if Debug:
+                    print('k,ca,kxnetFlows', k,ca, kxnetFlows)                        
+                if ca > 0:
+                    kxnetFlows = kxnetFlows / Decimal(str(ca))
+                if Debug:
+                    print('k,x,kxnetFlows', k,x, kxnetFlows)
+                knetFlows.append((kxnetFlows,x))
+            knetFlows.sort()
+            if Comments:
+                print('k,knetFlows, knetFlows[-1][1]',k,knetFlows, knetFlows[-1][1])
+            order[knetFlows[0][1]] = {'order':k,'netFlows':knetFlows[0][0]}
+            
+            actionsList.remove(knetFlows[0][1])
+            k += 1
+            if Debug:
+                print('actionsList', actionsList)
+        self.valuedOrdering = order 
+        if Debug:
+            print(rank)
+            print(order)
+
+##        iteratedNetFlowsRanking = []
+##        for x in rank:
+##            iteratedNetFlowsRanking.append((rank[x]['rank'],x))
+        #iteratedNetFlowsOrder.sort()
+        iteratedNetFlowsRanking = [x for x in rank]
+        #kohlerRanking.reverse()
+        self.iteratedNetFlowsRanking = iteratedNetFlowsRanking
+##        for x in rank:
+        #    iteratedNetFlowsOrder.append((order[x]['rank'],x))
+        #iteratedNetFlowsOrder.sort()
+        iteratedNetFlowsOrdering = [x for x in order]
+        #kohlerRanking.reverse()
+        self.iteratedNetFlowsOrdering = iteratedNetFlowsOrdering
+        
+        if Debug:
+            print('Iterated netflows ranks: ', iteratedNetFlowsRanking)
+            print('Iterated netflows ordering: ', iteratedNetFlowsOrdering)
+
+        if Valued:
+            n = len(g.actions)
+            for i in range(n):
+                for j in range(i+1,n):
+                    x = iteratedNetFlowsRanking[i]
+                    y = iteratedNetFlowsRanking[j]
+                    g.relation[x][y] = rank[x]['netFlows']
+                    g.relation[y][x] = -rank[x]['netFlows']
+        else:
+            n = len(g.actions)
+            for i in range(n):
+                for j in range(i+1,n):
+                    x = iteratedNetFlowsRanking[i]
+                    y = iteratedNetFlowsRanking[j]
+                    g.relation[x][y] = g.valuationdomain['max']
+                    g.relation[y][x] = g.valuationdomain['min']
+
+            
+        self.name = other.name + '_ranked'        
+        self.actions = copy(other.actions)
+        self.order = len(self.actions)
+        self.valuationdomain = copy(g.valuationdomain)
+        self.relation = copy(g.relation)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        if Debug:
+            self.showRelationTable()
+            print('Iterated NetFlows ranking: ', self.iteratedNetFlowsRanking)
+
+class IteratedCopelandRanking(LinearOrder):
+    """
+    instantiates the iterated Copeland ranking from
+    a given bipolar-valued Digraph instance
+    """
+    def __init__(self,other,coDual=False,Valued=False,Comments=False,Debug=False):
+        """
+        constructor for generating a linear order
+        from a given other digraph following
+        the iterated Copeland rules
+        """
+        from copy import copy, deepcopy
+        from collections import OrderedDict
+        # construct ranked pairs
+        if coDual:
+            otherCoDual = CoDualDigraph(other)
+            relation = otherCoDual.relation
+            Max = otherCoDual.valuationdomain['max']
+            if Debug:
+                otherCoDual.showRelationTable()
+                print(otherCoDual.valuationdomain)
+        else:
+            relation = other.relation
+            Max = other.valuationdomain['max']
+            if Debug:
+                other.showRelationTable()
+                print(other.valuationdomain)
+                
+            
+        actions = [x for x in other.actions]
+        actions.sort()
+        n = len(actions)
+        
+        # instatiates a Digraph template
+        g = IndeterminateDigraph(order=n)
+        g.actions = actions
+        g.valuationdomain = {'min':Decimal('-1'), 'med': Decimal('0'), 'max': Decimal('1')}
+        g.relation = {}
+        for x in g.actions:
+            g.relation[x] = {}
+            for y in g.actions:
+                g.relation[x][y] = g.valuationdomain['med']
+
+        # construct ranking
+        actionsList = [x for x in g.actions]
+        c = PolarisedDigraph(other)
+
+        rank = OrderedDict()
+        order = OrderedDict()
+        k = 1
+        while actionsList != []:
+            knetFlows = []
+            for x in actionsList:
+                ca = 0
+                kxnetFlows = Decimal('0')
+                for y in actionsList:
+                    if x != y:
+                        kxnetFlows += c.relation[x][y] - c.relation[y][x]
+                        ca += 2
+                if Debug:
+                    print('k,ca,kxnetFlows', k,ca, kxnetFlows)                        
+                if ca > 0:
+                    kxnetFlows = kxnetFlows / Decimal(str(ca))
+                if Debug:
+                    print('k,x,kxnetFlows', k,x, kxnetFlows)
+                knetFlows.append((kxnetFlows,x))
+            knetFlows.sort()
+            if Comments:
+                print('k,knetFlows, knetFlows[-1][1]',k,knetFlows, knetFlows[-1][1])
+            rank[knetFlows[-1][1]] = {'rank':k,'netFlows':knetFlows[-1][0]}
+            order[knetFlows[0][1]] = {'order':k,'netFlows':knetFlows[0][0]}
+            
+            actionsList.remove(knetFlows[-1][1])
+            k += 1
+            if Debug:
+                print('actionsList', actionsList)
+        self.valuedRanks = rank
+        # construct ordering
+        actionsList = [x for x in g.actions]
+        order = OrderedDict()
+        k = 1
+        while actionsList != []:
+            knetFlows = []
+            for x in actionsList:
+                ca = 0
+                kxnetFlows = Decimal('0')
+                for y in actionsList:
+                    if x != y:
+                        kxnetFlows += c.relation[x][y] - c.relation[y][x]
+                        ca += 2
+                if Debug:
+                    print('k,ca,kxnetFlows', k,ca, kxnetFlows)                        
+                if ca > 0:
+                    kxnetFlows = kxnetFlows / Decimal(str(ca))
+                if Debug:
+                    print('k,x,kxnetFlows', k,x, kxnetFlows)
+                knetFlows.append((kxnetFlows,x))
+            knetFlows.sort()
+            if Comments:
+                print('k,knetFlows, knetFlows[-1][1]',k,knetFlows, knetFlows[-1][1])
+            order[knetFlows[0][1]] = {'order':k,'netFlows':knetFlows[0][0]}
+            
+            actionsList.remove(knetFlows[0][1])
+            k += 1
+            if Debug:
+                print('actionsList', actionsList)
+        self.valuedOrdering = order 
+        if Debug:
+            print(rank)
+            print(order)
+
+##        iteratedNetFlowsRanking = []
+##        for x in rank:
+##            iteratedNetFlowsRanking.append((rank[x]['rank'],x))
+        #iteratedNetFlowsOrder.sort()
+        iteratedCopelandRanking = [x for x in rank]
+        #kohlerRanking.reverse()
+        self.iteratedCopelandRanking = iteratedCopelandRanking
+##        for x in rank:
+        #    iteratedNetFlowsOrder.append((order[x]['rank'],x))
+        #iteratedNetFlowsOrder.sort()
+        iteratedCopelandOrdering = [x for x in order]
+        #kohlerRanking.reverse()
+        self.iteratedCopelandOrdering = iteratedCopelandOrdering
+        
+        if Debug:
+            print('Iterated Copeland ranks: ', iteratedCopelandRanking)
+            print('Iterated Copeland ordering: ', iteratedCopelandOrdering)
+
+        if Valued:
+            n = len(g.actions)
+            for i in range(n):
+                for j in range(i+1,n):
+                    x = iteratedCopelandRanking[i]
+                    y = iteratedCopelandRanking[j]
+                    g.relation[x][y] = rank[x]['Copeland']
+                    g.relation[y][x] = -rank[x]['Copeland']
+        else:
+            n = len(g.actions)
+            for i in range(n):
+                for j in range(i+1,n):
+                    x = iteratedCopelandRanking[i]
+                    y = iteratedCopelandRanking[j]
+                    g.relation[x][y] = g.valuationdomain['max']
+                    g.relation[y][x] = g.valuationdomain['min']
+
+            
+        self.name = other.name + '_ranked'        
+        self.actions = copy(other.actions)
+        self.order = len(self.actions)
+        self.valuationdomain = copy(g.valuationdomain)
+        self.relation = copy(g.relation)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        if Debug:
+            self.showRelationTable()
+            print('Iterated Copelans ranking: ', self.iteratedCopelandRanking)
 
 class _OutFlowsOrder(LinearOrder):
     """
@@ -820,22 +1159,35 @@ class _OutFlowsOrder(LinearOrder):
             for x in reversed(self.outFlows):
                 print('%s \t %.2f' %(x[1],x[0]))
 
-class CopelandOrder(LinearOrder):
+class CopelandRanking(LinearOrder):
     """
     instantiates the Copeland Order from
     a given bipolar-valued Digraph instance
     """
-    def __init__(self,other,coDual=False,Debug=False):
+    def __init__(self,other,coDual=False,Gamma=False,\
+                 RankingRelation=True,Comments=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph following
         the Copeland ordering rule
+
+        When Gamma == True, the Copeland scores
+        are computed with the help of the gama functions as
+        the difference between outdegrees and indegrees.
+        If False, they are computed as the sum of the differences
+        between the polarised outranking characteristics.
+
+        When RankingRelation == True, *Copeland* scores equivalent classes are ordered
+        in decreasing lexicographic order. Otherwise, they are ordered in increasing
+        lexicographic order.
+        
         """
 
         #from copy import deepcopy
         from collections import OrderedDict
         from time import time
-
+        if Debug:
+            Comments=True
         #timings
         tt = time()
         runTimes = OrderedDict()
@@ -862,40 +1214,69 @@ class CopelandOrder(LinearOrder):
         
         # compute net flows
         tnf = time()
-        copelandScores = []
-        c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
+        incCopelandScores = []
+        decCopelandScores = []
+        # with gamma functions
+        if Gamma:
+            for x in actions:
+                copelandScore = len(gamma[x][0]) - len(gamma[x][1])
+                incCopelandScores.append((copelandScore,x))
+                decCopelandScores.append((-copelandScore,x))
+        else: # with Condorcet Digraph valuation
+            c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
                              StrictCut=True,KeepValues=False)
-        print(c)
-        c.recodeValuation()
-        cRelation = c.relation
-        for x in actions:
-            copelandScore = Decimal('0')
-            for y in actions:
-                copelandScore += cRelation[x][y] - cRelation[y][x]
-##        for x in actions:
-##            copelandScore = len(gamma[x][0]) - len(gamma[x][1])
-            copelandScores.append((copelandScore,x))
+            if Debug:
+                print(c)
+            c.recodeValuation()
+            cRelation = c.relation
+            for x in actions:
+                copelandScore = Decimal('0')
+                for y in actions:
+                    copelandScore += cRelation[x][y] - cRelation[y][x]
+                incCopelandScores.append((copelandScore,x))
+                decCopelandScores.append((-copelandScore,x))
         # reversed sorting with keeping the actions initial ordering
         # in case of ties
-        copelandScores.sort(reverse=True)
-        self.copelandScores = copelandScores
+        incCopelandScores.sort()
+        decCopelandScores.sort()
+        self.decCopelandScores = decCopelandScores
+        self.incCopelandScores = incCopelandScores
+    
+        if Comments:
+            print('Copeland decreasing scores')
+            for x in decCopelandScores:
+                print( '%s : %d' %( x[1],int(-x[0]) ) )
+            print('Copeland increasing scores')
+            for x in incCopelandScores:
+                print( '%s : %d' %( x[1],int(x[0]) ) )
 
-        copelandRanking = [x[1] for x in copelandScores]
+        copelandRanking = [x[1] for x in decCopelandScores]
         self.copelandRanking = copelandRanking
-        copelandOrder = list(reversed(copelandRanking))
+        copelandOrder = [x[1] for x in incCopelandScores]
         self.copelandOrder = copelandOrder
+
+        if Comments:
+            print('Copeland Ranking:')
+            print(copelandRanking)
+            
         runTimes['copeland'] = time() - tnf
 
         # init relation
+        if RankingRelation:
+            relOrdering = copelandRanking
+        else:
+            relOrdering = list(reversed(copelandOrder))
         tr = time()
         for i in range(n):
-            x = copelandRanking[i]
+            x = relOrdering[i]
             selfRelation[x] = {}
             srx = selfRelation[x]
             for j in range(n):
-                y = copelandRanking[j]
+                y = relOrdering[j]
                 if i < j:
                     srx[y] = Max
+                elif i == j:
+                    srx[y] = Med
                 else:
                     srx[y] = Min
         runTimes['relation'] = time() - tr      
@@ -915,13 +1296,16 @@ class CopelandOrder(LinearOrder):
         print('Copeland scores in %s order' % direction)
         print('action \t score')
         if direction == 'descending':
-            for x in self.copelandScores:
-                print('%s \t %.2f' %(x[1],x[0]))
+            for x in self.decCopelandScores:
+                print('%s \t %.2f' %(x[1],-x[0]))
         else:
-            for x in reversed(self.copelandScores):
+            for x in reversed(self.incCopelandScores):
                 print('%s \t %.2f' %(x[1],x[0]))
          
-
+class CopelandOrder(CopelandRanking):
+    """
+    Dummy for CopelandRanking class
+    """
 
 ##class _CopelandOrder(LinearOrder):
 ##    """
@@ -1012,10 +1396,99 @@ class CopelandOrder(LinearOrder):
 
 ########  instantiates optimal linear orderings
 
-class KemenyOrder(LinearOrder):
+class MedianRanking(LinearOrder):
     """
-    instantiates the exact Kemeny Order from
+    instantiates the ranking of highest mean marginal correlation and lowest amplitude from
     a given bipolar-valued Digraph instance of small order 
+    """
+    def __init__(self,other,orderLimit=7,Threading=False,nbrOfCPUs=1,Comments=False,Debug=False):
+        """
+        constructor for generating a linear order
+        from a given other digraph by exact enumeration
+        of all permutations of actions.
+        """
+        if other.order > orderLimit:
+            print('Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.' % (other.order) )
+            return
+                  
+        from digraphs import all_perms
+        from copy import copy,deepcopy
+        from decimal import Decimal
+        
+        Min = other.valuationdomain['min']
+        Max = other.valuationdomain['max']
+        Med = other.valuationdomain['med']
+        #relation = copy(other.relation)
+        medianRankings = other.computeMedianRanking(orderLimit=orderLimit,
+                                                    Threading=Threading,
+                                                    nbrOfCPUs=nbrOfCPUs,
+                                                    Comments=Comments,
+                                                    Debug=Debug)
+        # [0] = ordered actions list, [1] = maximal marginal corrleation index,
+        # [2] = minimal marginal correlation amplitude,
+        
+        medianRanking = medianRankings[0]
+        maxMarginalCorrelation = medianRankings[1]
+        minMarginalCorrelationAmplitude = medianRanking[2]
+        maximalRankings = deepcopy(other.maximalRankings)
+        
+        if medianRankings == None:
+            print('Intantiation error: unable to compute a median ranking !!!')
+            print('Digraph order %d is required to be lower than 8!' % n)
+            return
+        if Debug:
+            print(medianRankings,other.maximalRankings)
+        
+        # instatiates a Digraph template
+        actions = deepcopy(other.actions)
+        Min = Decimal('-1.0')
+        Max = Decimal('1.0')
+        Med = Decimal('0.0')
+        valuationdomain = {'min': Min, 'med': Med, 'max': Max}
+        relation = {}
+        n = len(actions)
+        self.order = n
+        for i in range(n):
+            x = medianRanking[i]
+            relation[x] = {}
+            for j in range(n):
+                y = medianRanking[j]
+                relation[x][y] = Med
+                if i < j:
+                    relation[x][y] = Max
+                    try:
+                        relation[y][x] = Min
+                    except:
+                        relation[y] = {x: Min}
+                elif i > j:
+                    relation[x][y] = Min
+                    try:
+                        relation[y][x] = Max
+                    except:
+                        relation[y] = {y: Max}
+
+        self.name = other.name + '_ranked'        
+        self.actions = actions
+        self.order = n
+        self.valuationdomain = valuationdomain
+        self.relation = relation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        self.medianRanking = medianRanking
+        self.maxMarginalCorrelation = maxMarginalCorrelation
+        self.minMarginalCorrelationAmplitude = minMarginalCorrelationAmplitude
+        self.maximalRankings = maximalRankings
+        self.medianOrder = list(reversed(list(medianRanking)))
+        if Debug:
+            self.showRelationTable()
+            print('Median Ranking = ', self.medianRanking)
+
+class KemenyRanking(LinearOrder):
+    """
+    Instantiates the Kemeny Ranking wrt the outranking relation from
+    a given bipolar-valued Digraph instance of small order.
+    Multiple Kemeny rankings are sorted in decreasing order of their mean marginal correlations
+    and the resulting Kemeny ranking is the first one in this list.
     """
     def __init__(self,other,orderLimit=7,Debug=False):
         """
@@ -1035,19 +1508,45 @@ class KemenyOrder(LinearOrder):
         Max = other.valuationdomain['max']
         Med = other.valuationdomain['med']
         #relation = copy(other.relation)
+##        kemenyRankings = other.computeKemenyRanking(orderLimit=orderLimit,Debug=False)
+##        # [0] = ordered actions list, [1] = maximal Kemeny index
+##        
+##        kemenyRanking = kemenyRankings[0]
+##        maxKemenyIndex = kemenyRankings[1]
+##        maximalRankings = deepcopy(other.maximalRankings)
         kemenyRankings = other.computeKemenyRanking(orderLimit=orderLimit,Debug=False)
-        # [0] = ordered actions list, [1] = maximal Kemeny index
-        
-        kemenyRanking = kemenyRankings[0]
-        maxKemenyIndex = kemenyRankings[1]
-        maximalRankings = deepcopy(other.maximalRankings)
-        
         if kemenyRankings == None:
             print('Intantiation error: unable to compute the Kemeny Order !!!')
             print('Digraph order %d is required to be lower than 8!' % n)
             return
+##        elif len(other.maximalRankings) == 1:
+##            kemenyRanking = kemenyRankings[0]
+##            maxKemenyIndex = kemenyRankings[1]
+##            maximalRankings = list(other.maximalRankings)
+        else:
+            from operator import itemgetter
+            orderedMaximalRankings = []
+            for r in other.maximalRankings:
+                try:
+                    margCorr = other.computeRankingConsensusQuality(r)
+                except:
+                    kemenyRanking = kemenyRankings[0]
+                    maxKemenyIndex = kemenyRankings[1]
+                    maximalRankings = list(other.maximalRankings)
+                    break
+                orderedMaximalRankings.append(('%.4f' % (margCorr[1]), '%.4f' % (margCorr[2]),r))
+            if len(orderedMaximalRankings) > 1:
+                s = sorted(orderedMaximalRankings,key=itemgetter(1))
+                s = sorted(s,key=itemgetter(0),reverse=True)
+                orderedMaximalRankings = s
+                kemenyRanking = orderedMaximalRankings[0][2]
+            else:
+                kemenyRanking = kemenyRankings[0]
+            maxKemenyIndex = kemenyRankings[1]
+            maximalRankings = list(other.maximalRankings)
+            
         if Debug:
-            print(kemenyRankings,other.maximalRankings)
+            print(kemenyRankings,maximalRankings,orderedMaximalRankings)
         
         # instatiates a Digraph template
         actions = deepcopy(other.actions)
@@ -1087,11 +1586,49 @@ class KemenyOrder(LinearOrder):
         self.kemenyRanking = kemenyRanking
         self.maxKemenyIndex = maxKemenyIndex
         self.maximalRankings = maximalRankings
+        self.orderedMaximalRankings = orderedMaximalRankings
         self.kemenyOrder = list(reversed(list(kemenyRanking)))
         if Debug:
             self.showRelationTable()
             print('Kemeny Ranking = ', self.kemenyRanking)
 
+
+class KemenyOrder(KemenyRanking):
+    """
+    Dummy class
+    """
+
+class SlaterRanking(KemenyRanking):
+    """
+    Instantiates a Slater ranking by instantiating a *KemenyRanking* from the Condorcet Digraph -the median cut polarised digraph
+    given bipolarised digraph- of a given bipolar-valued Digraph instance. 
+    """
+    def __init__(self,other,orderLimit=7,Debug=False):
+        """
+        A constructor for generating a linear order
+        from a given other digraph by exact enumeration
+        """
+        from digraphs import PolarisedDigraph
+        from copy import copy,deepcopy
+        c = PolarisedDigraph(other)
+        sl = KemenyOrder(c,orderLimit=orderLimit,Debug=Debug)
+        self.name = other.name + '_ranked'        
+        self.actions = deepcopy(other.actions)
+        self.order = len(self.actions)
+        self.valuationdomain = copy(sl.valuationdomain)
+        self.relation = deepcopy(sl.relation)
+        self.slaterOrder = copy(sl.kemenyOrder)
+        self.slaterRanking = copy(sl.kemenyRanking)
+        self.slaterIndex = copy(sl.maxKemenyIndex)
+        self.maximalRankings = copy(sl.maximalRankings)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+
+class SlaterOrder(SlaterRanking):
+    """
+    Dummy class
+    """
+        
 ########  instantiates principal scores' ordering
 
 class PrincipalOrder(LinearOrder):
@@ -1226,58 +1763,143 @@ if __name__ == "__main__":
     * redistribute it if it remains free software.     *
     ****************************************************
     """)
-
+    import random
+    from time import time
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    print('*-------- Testing KemenyOrder class -------')
-    t = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=13,seed=None)
+    seed = random.randint(1,1000)
+    print('*-------- Testing MedianRanking class -------')
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=13,
+                                   NegativeWeights=False,
+                                   seed=seed)
+    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
     #t = PerformanceTableau('testLin')    
     g = BipolarOutrankingDigraph(t,Normalized=True)
-    g.showRelationTable()
-    print()
-    print('==>> Kemeny ordering:')
-    t0 = time()
-    ke = KemenyOrder(g,Debug=False,orderLimit=9)
     #g.showRelationTable()
-    try:
-        print(ke.kemenyRanking)
-        print(ke.kemenyOrder)
-        print(g.computeOrdinalCorrelation(ke))
-        print(time()-t0)
-    except:
-        pass
-    print()
-    print('==>> principal ordering:')
-    t0 = time()    
-    pri = PrincipalOrder(g,tempDir=None)
-    g.showRelationTable(actionsSubset=pri.principalRanking)
-    print(pri.principalRanking)
-    print(pri.principalOrder)
-    print(g.computeOrdinalCorrelation(pri))
-    print(time()-t0)
-    print()
-    print('==>> net flows ordering:')
-    t0 = time()
-    nf = NetFlowsOrder(g)
-    g.showRelationTable(actionsSubset=nf.netFlowsRanking)
-    print(nf.netFlowsRanking)
-    print(nf.netFlowsOrder)
-    print(g.computeOrdinalCorrelation(nf))
-    print(time()-t0)
-    print()
-    # print('==>> out flows ordering:')
-    # t0 = time()
-    # of = OutFlowsOrder(g)
-    # g.showRelationTable(actionsSubset=of.outFlowsRanking)
-    # print(of.outFlowsRanking)
-    # print(of.outFlowsOrder)
-    # print(g.computeOrdinalCorrelation(of))
-    # print(time()-t0)
-    # print()
+##    #mr = MedianRanking(g,Threading=False,nbrOfCPUs=8,Debug=False)
+##    t.showHTMLPerformanceHeatmap(pageTitle='Median Ranking',actionsList=mr.medianRanking,
+##                                 Correlations=True,colorLevels=5)
+##    #ke = KemenyRanking(g)
+##    print('median')
+##    for r in mr.maximalRankings:
+##        corr = g.computeRankingConsensusQuality(r)
+##        print(r,'%.4f' % (corr[1]), '%.4f' % (corr[2]) )
+##    print('Kemeny')
+##    for r in ke.maximalRankings:
+##        cons = g.computeRankingConsensusQuality(r)
+##        print(r,cons[1],cons[2])
+##    for r in ke.orderedMaximalRankings:
+##        print(r[2],r[0],r[1])
+##
+##    time.sleep(3)
+##    t.showHTMLPerformanceHeatmap(pageTitle='Kemeny Ranking',actionsList=ke.kemenyRanking,
+##                                 Correlations=True,colorLevels=5)
+##    print()
+##    print('==>> net flows ordering:')
+##    t0 = time()
+##    nf = NetFlowsOrder(g,Debug=False)
+##    #g.showRelationTable(actionsSubset=nf.netFlowsRanking,Sorted=False)
+##    #print(nf.netFlowsRanking)
+##    #print(nf.netFlowsOrder)
+##    #corr = g.computeOrdinalCorrelation(nf)
+##    #g.showCorrelation(corr)
+##    #print(time()-t0)
+##    t.showHTMLPerformanceHeatmap(pageTitle='NetFlows Ranking',actionsList=nf.netFlowsRanking,
+##                                 colorLevels=5,Correlations=True)
+##    print()
+##    print('==>> iterated net flows ordering:')
+##    from linearOrders import IteratedNetFlowsRanking
+##    t0 = time()
+##    inf = IteratedNetFlowsRanking(g,Comments=False,Valued=False,Debug=False)
+##    inf.showRelationTable(actionsSubset=inf.iteratedNetFlowsRanking,Sorted=False)
+##    print(inf.iteratedNetFlowsRanking)
+##    print(inf.iteratedNetFlowsOrdering)
+##    print('netfloes')
+##    corr = g.computeOrdinalCorrelation(nf)
+##    g.showCorrelation(corr)
+##    g.computeRankingConsensusQuality(inf.iteratedNetFlowsRanking,
+##                                     Comments=True)
+##    print(time()-t0)
+##    print('iterated netflows')
+##    corr = g.computeRankingCorrelation(inf.iteratedNetFlowsRanking)
+##    g.showCorrelation(corr)
+##    corr = g.computeOrderCorrelation(inf.iteratedNetFlowsOrdering)
+##    g.showCorrelation(corr)
+##    
+##    print('==>> iterated Copeland ordering:')
+##    from linearOrders import IteratedCopelandRanking
+##    t0 = time()
+##    icop = IteratedCopelandRanking(g,Comments=False,Valued=False,Debug=False)
+##    icop.showRelationTable(actionsSubset=icop.iteratedCopelandRanking,Sorted=False)
+##    print(icop.iteratedCopelandRanking)
+##    print(icop.iteratedCopelandOrdering)
+##    print('Copeland')
+##    from linearOrders import CopelandOrder
+##    cop = CopelandOrder(g)
+##    print(cop.copelandRanking)
+##    corr = g.computeOrdinalCorrelation(cop)
+##    g.showCorrelation(corr)
+##    g.computeRankingConsensusQuality(icop.iteratedCopelandRanking,
+##                                     Comments=True)
+##    print(time()-t0)
+##    print('iterated Copeland')
+##    corr = g.computeRankingCorrelation(icop.iteratedCopelandRanking)
+##    g.showCorrelation(corr)
+##    corr = g.computeOrderCorrelation(icop.iteratedCopelandOrdering)
+##    g.showCorrelation(corr)
+##
+##    #t.showHTMLPerformanceHeatmap(actionsList=inf.iteratedNetFlowsRanking,Correlations=True)
+##    print()
+##    print('==>> Kemeny ordering:')
+##    t0 = time()
+##    ke = KemenyOrder(g,Debug=False,orderLimit=9)
+##    #g.showRelationTable()
+##    try:
+##        print(ke.kemenyRanking)
+##        print(ke.kemenyOrder)
+##        corr = g.computeOrdinalCorrelation(ke)
+##        ke.showCorrelation(corr)
+##        print(ke.maximalRankings)
+##        print(time()-t0)
+##    except:
+##        pass
+##    print()
+##    print('==>> slater ordering:')
+##    sl = SlaterOrder(g,Debug=False,orderLimit=9)
+##    #g.showRelationTable()
+##    try:
+##        print(sl.slaterRanking)
+##        print(sl.slaterOrder)
+##        corr = g.computeOrdinalCorrelation(sl)
+##        sl.showCorrelation(corr)
+##        print(sl.maximalRankings)
+##        print(time()-t0)
+##    except:
+##        pass
+##    print()
+     
+##    print('==>> principal ordering:')
+##    t0 = time()    
+##    pri = PrincipalOrder(g,tempDir=None)
+##    g.showRelationTable(actionsSubset=pri.principalRanking)
+##    print(pri.principalRanking)
+##    print(pri.principalOrder)
+##    print(g.computeOrdinalCorrelation(pri))
+##    print(time()-t0)
+##    print()
+##    # print('==>> out flows ordering:')
+##    # t0 = time()
+##    # of = OutFlowsOrder(g)
+##    # g.showRelationTable(actionsSubset=of.outFlowsRanking)
+##    # print(of.outFlowsRanking)
+##    # print(of.outFlowsOrder)
+##    # print(g.computeOrdinalCorrelation(of))
+##    # print(time()-t0)
+##    # print()
     print('==>> Copeland ordering:')
     t0 = time()
-    cop = CopelandOrder(g)
+    cop = CopelandOrder(g,Comments=True)
     g.showRelationTable(actionsSubset=cop.copelandRanking)
     print(cop.copelandRanking)
     print(cop.copelandOrder)
@@ -1302,11 +1924,11 @@ if __name__ == "__main__":
     print(g.computeOrdinalCorrelation(rp))
     print(time()-t0)
     print()
-##    print('==>> Leximin ordering:')
-##    le = RankedPairsOrder((-g),Leximin=True)
-##    g.showRelationTable()
-##    print(le.rankedPairsOrder)
-##    print((-g).computeOrdinalCorrelation(le))
+    print('==>> Leximin ordering:')
+    le = RankedPairsOrder((-g),Leximin=True)
+    g.showRelationTable()
+    print(le.rankedPairsOrder)
+    print((-g).computeOrdinalCorrelation(le))
 
     
 ##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",

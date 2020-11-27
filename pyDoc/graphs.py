@@ -2,7 +2,7 @@
 """
   Digraph3 graphs.py module
   Python3.3+ computing resources
-  Copyright (C)  2011-2019 Raymond Bisdorff
+  Copyright (C)  2011-2020 Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -1207,7 +1207,7 @@ class Graph(object):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
+        fo.write('\\nDigraph3 (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -1349,7 +1349,7 @@ class Graph(object):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
+        fo.write('\\nDigraph3 (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -1505,7 +1505,7 @@ class Graph(object):
         fo = open(dotName,'w')
         fo.write('strict digraph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
+        fo.write('\\nDigraph3 (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         # horizontally positioned initial nodes at line 100
         # horinzontal space = 75
@@ -1783,7 +1783,7 @@ class Graph(object):
                 return False        
         else:
             if Comments:
-                print('Graph \%s\' is not triangulated' % self.name)
+                print('Graph \'%s\' is not triangulated' % self.name)
             return False
 
     def isPermutationGraph(self,Comments=False):
@@ -1810,7 +1810,7 @@ class Graph(object):
                 return False        
         else:
             if Comments:
-                print('Graph \%s\' is not transitively orientable' % self.name)
+                print('Graph \'%s\' is not transitively orientable' % self.name)
             return False
          
     def isTree(self):
@@ -1867,7 +1867,7 @@ class Graph(object):
                 return False        
         else:
             if Comments:
-                print('Graph \%s\' is not triangulated' % self.name)
+                print('Graph \'%s\' is not triangulated' % self.name)
             return False
 
     def isPerfectGraph(self,Comments=False,Debug=False):
@@ -3510,7 +3510,7 @@ class Q_Coloring(Graph):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
+        fo.write('\\nDigraph3 (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -3677,7 +3677,7 @@ class IsingModel(Graph):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
+        fo.write('\\nDigraph3 (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:
@@ -4096,7 +4096,7 @@ class MISModel(Graph):
         fo = open(dotName,'w')
         fo.write('strict graph G {\n')
         fo.write('graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nGraphs Python module (graphviz), R. Bisdorff, 2019", size="')
+        fo.write('\\nDigraph3 (graphviz), R. Bisdorff, 2019", size="')
         fo.write(graphSize),fo.write('"];\n')
         for i in range(n):
             try:

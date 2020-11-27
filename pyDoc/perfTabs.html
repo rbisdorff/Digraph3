@@ -6,12 +6,12 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>perfTabs</strong></big></big> (version 1.37)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>perfTabs</strong></big></big> (version Python 3.9)</font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/perfTabs.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/perfTabs.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/GitHub/Digraph3Git/pyDoc/perfTabs.py">/home/bisdorff/Documents/GitHub/Digraph3Git/pyDoc/perfTabs.py</a></font></td></tr></table>
     <p><tt>Python&nbsp;implementation&nbsp;of&nbsp;digraphs<br>
 Module&nbsp;for&nbsp;working&nbsp;with&nbsp;performance&nbsp;tableaux&nbsp;&nbsp;<br>
-Copyright&nbsp;(C)&nbsp;2011-2019&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
+Copyright&nbsp;(C)&nbsp;2011-2020&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
 &nbsp;<br>
@@ -63,7 +63,7 @@ Copyright&nbsp;(C)&nbsp;2011-2019&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 <font color="#000000" face="helvetica, arial"><a name="CSVPerformanceTableau">class <strong>CSVPerformanceTableau</strong></a>(<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#CSVPerformanceTableau">CSVPerformanceTableau</a>(fileName='temp',&nbsp;Debug=True)<br>
+<td colspan=2><tt><a href="#CSVPerformanceTableau">CSVPerformanceTableau</a>(fileName='temp',&nbsp;Debug=False)<br>
 &nbsp;<br>
 Reading&nbsp;stored&nbsp;CSV&nbsp;encoded&nbsp;actions&nbsp;x&nbsp;criteria&nbsp;<a href="#PerformanceTableau">PerformanceTableau</a>&nbsp;instances,&nbsp;Using&nbsp;the&nbsp;inbuilt&nbsp;module&nbsp;csv.<br>
 &nbsp;<br>
@@ -77,7 +77,7 @@ Param:<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="CSVPerformanceTableau-__init__"><strong>__init__</strong></a>(self, fileName='temp', Debug=True)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+<dl><dt><a name="CSVPerformanceTableau-__init__"><strong>__init__</strong></a>(self, fileName='temp', Debug=False)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
 
 <hr>
 Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>:<br>
@@ -87,7 +87,7 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="CSVPerformanceTableau-computeActionCriterionQuantile"><strong>computeActionCriterionQuantile</strong></a>(self, action, criterion, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;quantile&nbsp;of&nbsp;the&nbsp;performance&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
 
-<dl><dt><a name="CSVPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
+<dl><dt><a name="CSVPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
 <dl><dt><a name="CSVPerformanceTableau-computeAllQuantiles"><strong>computeAllQuantiles</strong></a>(self, Sorted=True, Comments=False)</dt><dd><tt>renders&nbsp;a&nbsp;html&nbsp;string&nbsp;showing&nbsp;the&nbsp;table&nbsp;of<br>
 the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
@@ -127,6 +127,8 @@ The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;an&nbsp;increasing&nbsp;B
 <dl><dt><a name="CSVPerformanceTableau-computeQuantileSort"><strong>computeQuantileSort</strong></a>(self)</dt><dd><tt>shows&nbsp;a&nbsp;sorting&nbsp;of&nbsp;the&nbsp;actions&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles</tt></dd></dl>
 
 <dl><dt><a name="CSVPerformanceTableau-computeQuantiles"><strong>computeQuantiles</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion&nbsp;with&nbsp;the&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="CSVPerformanceTableau-computeRankingConsensusQuality"><strong>computeRankingConsensusQuality</strong></a>(self, ranking, Comments=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
 
 <dl><dt><a name="CSVPerformanceTableau-computeThresholdPercentile"><strong>computeThresholdPercentile</strong></a>(self, criterion, threshold, Debug=False)</dt><dd><tt>computes&nbsp;for&nbsp;a&nbsp;given&nbsp;criterion&nbsp;the&nbsp;quantile<br>
 of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;constant&nbsp;threshold.</tt></dd></dl>
@@ -207,33 +209,36 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="CSVPerformanceTableau-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
 
-<dl><dt><a name="CSVPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="CSVPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;It&nbsp;may&nbsp;interesting&nbsp;in&nbsp;some&nbsp;cases&nbsp;to&nbsp;use&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
+*&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
+&nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
+*&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
+&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
+*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
+&nbsp;&nbsp;When&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
+&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
+*&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
+&nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
+*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
+&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
+&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+*&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
+*&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
+&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
+&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
+*&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
+&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
+*&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
+&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
 &nbsp;<br>
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;RandomPerformanceTableau<br>
@@ -257,6 +262,8 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 <dl><dt><a name="CSVPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="CSVPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#CSVPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#CSVPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="CSVPerformanceTableau-showRankingConsensusQuality"><strong>showRankingConsensusQuality</strong></a>(self, ranking)</dt><dd><tt>shows&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
 
 <dl><dt><a name="CSVPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
@@ -305,7 +312,7 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="ConstantPerformanceTableau-computeActionCriterionQuantile"><strong>computeActionCriterionQuantile</strong></a>(self, action, criterion, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;quantile&nbsp;of&nbsp;the&nbsp;performance&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
 
-<dl><dt><a name="ConstantPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
+<dl><dt><a name="ConstantPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
 <dl><dt><a name="ConstantPerformanceTableau-computeAllQuantiles"><strong>computeAllQuantiles</strong></a>(self, Sorted=True, Comments=False)</dt><dd><tt>renders&nbsp;a&nbsp;html&nbsp;string&nbsp;showing&nbsp;the&nbsp;table&nbsp;of<br>
 the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
@@ -345,6 +352,8 @@ The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;an&nbsp;increasing&nbsp;B
 <dl><dt><a name="ConstantPerformanceTableau-computeQuantileSort"><strong>computeQuantileSort</strong></a>(self)</dt><dd><tt>shows&nbsp;a&nbsp;sorting&nbsp;of&nbsp;the&nbsp;actions&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles</tt></dd></dl>
 
 <dl><dt><a name="ConstantPerformanceTableau-computeQuantiles"><strong>computeQuantiles</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion&nbsp;with&nbsp;the&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="ConstantPerformanceTableau-computeRankingConsensusQuality"><strong>computeRankingConsensusQuality</strong></a>(self, ranking, Comments=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
 
 <dl><dt><a name="ConstantPerformanceTableau-computeThresholdPercentile"><strong>computeThresholdPercentile</strong></a>(self, criterion, threshold, Debug=False)</dt><dd><tt>computes&nbsp;for&nbsp;a&nbsp;given&nbsp;criterion&nbsp;the&nbsp;quantile<br>
 of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;constant&nbsp;threshold.</tt></dd></dl>
@@ -425,33 +434,36 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="ConstantPerformanceTableau-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
 
-<dl><dt><a name="ConstantPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="ConstantPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;It&nbsp;may&nbsp;interesting&nbsp;in&nbsp;some&nbsp;cases&nbsp;to&nbsp;use&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
+*&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
+&nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
+*&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
+&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
+*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
+&nbsp;&nbsp;When&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
+&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
+*&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
+&nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
+*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
+&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
+&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+*&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
+*&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
+&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
+&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
+*&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
+&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
+*&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
+&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
 &nbsp;<br>
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;RandomPerformanceTableau<br>
@@ -475,6 +487,8 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 <dl><dt><a name="ConstantPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="ConstantPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#ConstantPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#ConstantPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="ConstantPerformanceTableau-showRankingConsensusQuality"><strong>showRankingConsensusQuality</strong></a>(self, ranking)</dt><dd><tt>shows&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
 
 <dl><dt><a name="ConstantPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
@@ -515,7 +529,7 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="EmptyPerformanceTableau-computeActionCriterionQuantile"><strong>computeActionCriterionQuantile</strong></a>(self, action, criterion, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;quantile&nbsp;of&nbsp;the&nbsp;performance&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
 
-<dl><dt><a name="EmptyPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
+<dl><dt><a name="EmptyPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
 <dl><dt><a name="EmptyPerformanceTableau-computeAllQuantiles"><strong>computeAllQuantiles</strong></a>(self, Sorted=True, Comments=False)</dt><dd><tt>renders&nbsp;a&nbsp;html&nbsp;string&nbsp;showing&nbsp;the&nbsp;table&nbsp;of<br>
 the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
@@ -555,6 +569,8 @@ The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;an&nbsp;increasing&nbsp;B
 <dl><dt><a name="EmptyPerformanceTableau-computeQuantileSort"><strong>computeQuantileSort</strong></a>(self)</dt><dd><tt>shows&nbsp;a&nbsp;sorting&nbsp;of&nbsp;the&nbsp;actions&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles</tt></dd></dl>
 
 <dl><dt><a name="EmptyPerformanceTableau-computeQuantiles"><strong>computeQuantiles</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion&nbsp;with&nbsp;the&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="EmptyPerformanceTableau-computeRankingConsensusQuality"><strong>computeRankingConsensusQuality</strong></a>(self, ranking, Comments=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
 
 <dl><dt><a name="EmptyPerformanceTableau-computeThresholdPercentile"><strong>computeThresholdPercentile</strong></a>(self, criterion, threshold, Debug=False)</dt><dd><tt>computes&nbsp;for&nbsp;a&nbsp;given&nbsp;criterion&nbsp;the&nbsp;quantile<br>
 of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;constant&nbsp;threshold.</tt></dd></dl>
@@ -635,33 +651,36 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="EmptyPerformanceTableau-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
 
-<dl><dt><a name="EmptyPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="EmptyPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;It&nbsp;may&nbsp;interesting&nbsp;in&nbsp;some&nbsp;cases&nbsp;to&nbsp;use&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
+*&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
+&nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
+*&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
+&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
+*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
+&nbsp;&nbsp;When&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
+&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
+*&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
+&nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
+*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
+&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
+&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+*&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
+*&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
+&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
+&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
+*&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
+&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
+*&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
+&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
 &nbsp;<br>
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;RandomPerformanceTableau<br>
@@ -685,6 +704,8 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 <dl><dt><a name="EmptyPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="EmptyPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#EmptyPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#EmptyPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="EmptyPerformanceTableau-showRankingConsensusQuality"><strong>showRankingConsensusQuality</strong></a>(self, ranking)</dt><dd><tt>shows&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
 
 <dl><dt><a name="EmptyPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
@@ -729,7 +750,7 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="NormalizedPerformanceTableau-computeActionCriterionQuantile"><strong>computeActionCriterionQuantile</strong></a>(self, action, criterion, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;quantile&nbsp;of&nbsp;the&nbsp;performance&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
 
-<dl><dt><a name="NormalizedPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
+<dl><dt><a name="NormalizedPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
 <dl><dt><a name="NormalizedPerformanceTableau-computeAllQuantiles"><strong>computeAllQuantiles</strong></a>(self, Sorted=True, Comments=False)</dt><dd><tt>renders&nbsp;a&nbsp;html&nbsp;string&nbsp;showing&nbsp;the&nbsp;table&nbsp;of<br>
 the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
@@ -769,6 +790,8 @@ The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;an&nbsp;increasing&nbsp;B
 <dl><dt><a name="NormalizedPerformanceTableau-computeQuantileSort"><strong>computeQuantileSort</strong></a>(self)</dt><dd><tt>shows&nbsp;a&nbsp;sorting&nbsp;of&nbsp;the&nbsp;actions&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles</tt></dd></dl>
 
 <dl><dt><a name="NormalizedPerformanceTableau-computeQuantiles"><strong>computeQuantiles</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion&nbsp;with&nbsp;the&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="NormalizedPerformanceTableau-computeRankingConsensusQuality"><strong>computeRankingConsensusQuality</strong></a>(self, ranking, Comments=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
 
 <dl><dt><a name="NormalizedPerformanceTableau-computeThresholdPercentile"><strong>computeThresholdPercentile</strong></a>(self, criterion, threshold, Debug=False)</dt><dd><tt>computes&nbsp;for&nbsp;a&nbsp;given&nbsp;criterion&nbsp;the&nbsp;quantile<br>
 of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;constant&nbsp;threshold.</tt></dd></dl>
@@ -849,33 +872,36 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="NormalizedPerformanceTableau-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
 
-<dl><dt><a name="NormalizedPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="NormalizedPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;It&nbsp;may&nbsp;interesting&nbsp;in&nbsp;some&nbsp;cases&nbsp;to&nbsp;use&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
+*&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
+&nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
+*&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
+&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
+*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
+&nbsp;&nbsp;When&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
+&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
+*&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
+&nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
+*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
+&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
+&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+*&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
+*&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
+&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
+&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
+*&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
+&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
+*&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
+&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
 &nbsp;<br>
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;RandomPerformanceTableau<br>
@@ -899,6 +925,8 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 <dl><dt><a name="NormalizedPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="NormalizedPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#NormalizedPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#NormalizedPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="NormalizedPerformanceTableau-showRankingConsensusQuality"><strong>showRankingConsensusQuality</strong></a>(self, ranking)</dt><dd><tt>shows&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
 
 <dl><dt><a name="NormalizedPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
@@ -941,7 +969,7 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="PartialPerformanceTableau-computeActionCriterionQuantile"><strong>computeActionCriterionQuantile</strong></a>(self, action, criterion, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;quantile&nbsp;of&nbsp;the&nbsp;performance&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
 
-<dl><dt><a name="PartialPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
+<dl><dt><a name="PartialPerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
 <dl><dt><a name="PartialPerformanceTableau-computeAllQuantiles"><strong>computeAllQuantiles</strong></a>(self, Sorted=True, Comments=False)</dt><dd><tt>renders&nbsp;a&nbsp;html&nbsp;string&nbsp;showing&nbsp;the&nbsp;table&nbsp;of<br>
 the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
@@ -981,6 +1009,8 @@ The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;an&nbsp;increasing&nbsp;B
 <dl><dt><a name="PartialPerformanceTableau-computeQuantileSort"><strong>computeQuantileSort</strong></a>(self)</dt><dd><tt>shows&nbsp;a&nbsp;sorting&nbsp;of&nbsp;the&nbsp;actions&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles</tt></dd></dl>
 
 <dl><dt><a name="PartialPerformanceTableau-computeQuantiles"><strong>computeQuantiles</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion&nbsp;with&nbsp;the&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-computeRankingConsensusQuality"><strong>computeRankingConsensusQuality</strong></a>(self, ranking, Comments=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
 
 <dl><dt><a name="PartialPerformanceTableau-computeThresholdPercentile"><strong>computeThresholdPercentile</strong></a>(self, criterion, threshold, Debug=False)</dt><dd><tt>computes&nbsp;for&nbsp;a&nbsp;given&nbsp;criterion&nbsp;the&nbsp;quantile<br>
 of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;constant&nbsp;threshold.</tt></dd></dl>
@@ -1061,33 +1091,36 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="PartialPerformanceTableau-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
 
-<dl><dt><a name="PartialPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="PartialPerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;It&nbsp;may&nbsp;interesting&nbsp;in&nbsp;some&nbsp;cases&nbsp;to&nbsp;use&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
+*&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
+&nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
+*&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
+&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
+*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
+&nbsp;&nbsp;When&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
+&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
+*&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
+&nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
+*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
+&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
+&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+*&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
+*&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
+&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
+&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
+*&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
+&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
+*&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
+&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
 &nbsp;<br>
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;RandomPerformanceTableau<br>
@@ -1111,6 +1144,8 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 <dl><dt><a name="PartialPerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="PartialPerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#PartialPerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#PartialPerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="PartialPerformanceTableau-showRankingConsensusQuality"><strong>showRankingConsensusQuality</strong></a>(self, ranking)</dt><dd><tt>shows&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
 
 <dl><dt><a name="PartialPerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
@@ -1248,7 +1283,7 @@ The&nbsp;performance&nbsp;evaluations&nbsp;of&nbsp;each&nbsp;decision&nbsp;alter
 
 <dl><dt><a name="PerformanceTableau-computeActionCriterionQuantile"><strong>computeActionCriterionQuantile</strong></a>(self, action, criterion, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;quantile&nbsp;of&nbsp;the&nbsp;performance&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
 
-<dl><dt><a name="PerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
+<dl><dt><a name="PerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
 <dl><dt><a name="PerformanceTableau-computeAllQuantiles"><strong>computeAllQuantiles</strong></a>(self, Sorted=True, Comments=False)</dt><dd><tt>renders&nbsp;a&nbsp;html&nbsp;string&nbsp;showing&nbsp;the&nbsp;table&nbsp;of<br>
 the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
@@ -1288,6 +1323,8 @@ The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;an&nbsp;increasing&nbsp;B
 <dl><dt><a name="PerformanceTableau-computeQuantileSort"><strong>computeQuantileSort</strong></a>(self)</dt><dd><tt>shows&nbsp;a&nbsp;sorting&nbsp;of&nbsp;the&nbsp;actions&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles</tt></dd></dl>
 
 <dl><dt><a name="PerformanceTableau-computeQuantiles"><strong>computeQuantiles</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion&nbsp;with&nbsp;the&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="PerformanceTableau-computeRankingConsensusQuality"><strong>computeRankingConsensusQuality</strong></a>(self, ranking, Comments=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
 
 <dl><dt><a name="PerformanceTableau-computeThresholdPercentile"><strong>computeThresholdPercentile</strong></a>(self, criterion, threshold, Debug=False)</dt><dd><tt>computes&nbsp;for&nbsp;a&nbsp;given&nbsp;criterion&nbsp;the&nbsp;quantile<br>
 of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;constant&nbsp;threshold.</tt></dd></dl>
@@ -1368,33 +1405,36 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="PerformanceTableau-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
 
-<dl><dt><a name="PerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="PerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;It&nbsp;may&nbsp;interesting&nbsp;in&nbsp;some&nbsp;cases&nbsp;to&nbsp;use&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
+*&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
+&nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
+*&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
+&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
+*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
+&nbsp;&nbsp;When&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
+&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
+*&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
+&nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
+*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
+&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
+&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+*&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
+*&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
+&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
+&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
+*&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
+&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
+*&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
+&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
 &nbsp;<br>
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;RandomPerformanceTableau<br>
@@ -1418,6 +1458,8 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 <dl><dt><a name="PerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="PerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#PerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#PerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceTableau-showRankingConsensusQuality"><strong>showRankingConsensusQuality</strong></a>(self, ranking)</dt><dd><tt>shows&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
 
 <dl><dt><a name="PerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>
@@ -1468,7 +1510,7 @@ Methods inherited from <a href="perfTabs.html#PerformanceTableau">PerformanceTab
 
 <dl><dt><a name="XMCDA2PerformanceTableau-computeActionCriterionQuantile"><strong>computeActionCriterionQuantile</strong></a>(self, action, criterion, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;quantile&nbsp;of&nbsp;the&nbsp;performance&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2PerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=True)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
+<dl><dt><a name="XMCDA2PerformanceTableau-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2PerformanceTableau-computeAllQuantiles"><strong>computeAllQuantiles</strong></a>(self, Sorted=True, Comments=False)</dt><dd><tt>renders&nbsp;a&nbsp;html&nbsp;string&nbsp;showing&nbsp;the&nbsp;table&nbsp;of<br>
 the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
@@ -1508,6 +1550,8 @@ The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;an&nbsp;increasing&nbsp;B
 <dl><dt><a name="XMCDA2PerformanceTableau-computeQuantileSort"><strong>computeQuantileSort</strong></a>(self)</dt><dd><tt>shows&nbsp;a&nbsp;sorting&nbsp;of&nbsp;the&nbsp;actions&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2PerformanceTableau-computeQuantiles"><strong>computeQuantiles</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion&nbsp;with&nbsp;the&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="XMCDA2PerformanceTableau-computeRankingConsensusQuality"><strong>computeRankingConsensusQuality</strong></a>(self, ranking, Comments=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2PerformanceTableau-computeThresholdPercentile"><strong>computeThresholdPercentile</strong></a>(self, criterion, threshold, Debug=False)</dt><dd><tt>computes&nbsp;for&nbsp;a&nbsp;given&nbsp;criterion&nbsp;the&nbsp;quantile<br>
 of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;constant&nbsp;threshold.</tt></dd></dl>
@@ -1588,33 +1632,36 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="XMCDA2PerformanceTableau-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
 
-<dl><dt><a name="XMCDA2PerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='Copeland', quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="XMCDA2PerformanceTableau-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;It&nbsp;may&nbsp;interesting&nbsp;in&nbsp;some&nbsp;cases&nbsp;to&nbsp;use&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
+*&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
+&nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
+*&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
+&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
+*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
+&nbsp;&nbsp;When&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
+&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
+*&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
+&nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
+*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
+&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
+&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+*&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
+*&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
+&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
+&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
+*&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
+&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
+*&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
+&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
 &nbsp;<br>
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;RandomPerformanceTableau<br>
@@ -1638,6 +1685,8 @@ in&nbsp;html&nbsp;format</tt></dd></dl>
 <dl><dt><a name="XMCDA2PerformanceTableau-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2PerformanceTableau-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#XMCDA2PerformanceTableau-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#XMCDA2PerformanceTableau-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="XMCDA2PerformanceTableau-showRankingConsensusQuality"><strong>showRankingConsensusQuality</strong></a>(self, ranking)</dt><dd><tt>shows&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
 
 <dl><dt><a name="XMCDA2PerformanceTableau-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
 on&nbsp;each&nbsp;criteria.</tt></dd></dl>

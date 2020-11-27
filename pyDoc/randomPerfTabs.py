@@ -2,7 +2,7 @@
 """
 Python implementation of digraphs
 Module for generating random performance tableaux  
-Copyright (C) 2015-2019  Raymond Bisdorff
+Copyright (C) 2015-2020  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 
@@ -13,7 +13,7 @@ Copyright (C) 2015-2019  Raymond Bisdorff
 """
 #######################
 
-__version__ = "$Revision: 1.01 $"
+__version__ = "$Revision: py39 $"
 # $Source: /home/cvsroot/Digraph/randomPerfTabs.py,v $
 
 from perfTabs import PerformanceTableau
@@ -625,11 +625,116 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         * IntegerWeights := Boolean (True = default)
         * commonScale := (0,20) (default)
         * ndigits := 0
+        * WithTypes := Boolean (False = default)
         * commonMode := ('triangular',xm=14,r=0.25)
         * commonThresholds (default) := {
             | 'ind':(0,0),
             | 'pref':(1,0),
             | } (default)
+        
+    When parameter *WithTypes* is set to *True*, the students are randomly allocated
+    to one of the four categories: *weak* (1/6), *fair* (1/3), *good* (1/3),
+    and *excellent* (1/3), in the bracketed proportions.
+    In a default 0-20 grading range, the random range of a weak student is 0-10,
+    of a fair student 4-16, of a good student 8-20, and of an excellent student 12-20.
+    The random grading generator follows a double triangular probablity law
+    with *mode* equal to the middle of the random range and *median repartition* of
+    probability each side of the mode.
+
+    >>> from randomPerfTabs import RandomAcademicPerformanceTableau
+    >>> t = RandomAcademicPerformanceTableau(numberOfStudents=7,
+    ...              numberOfCourses=5, missingDataProbability=0.03,
+    ...              WithTypes=True, seed=100)
+    >>> t
+     *------- PerformanceTableau instance description ------*
+     Instance class   : RandomAcademicPerformanceTableau
+     Seed             : 100
+     Instance name    : randstudPerf
+     # Actions        : 7
+     # Criteria       : 5
+     Attributes       : ['randomSeed', 'name', 'actions',
+                         'criteria', 'evaluation', 'weightPreorder']
+    >>> t.showPerformanceTableau()
+     *----  performance tableau -----*
+      Courses |  'g1' 'g2' 'g3' 'g4' 'g5' 
+        ECTS  |   5    1    5    4    3   
+     ---------|--------------------------
+        's1f' |  12   10   14   14   13  
+        's2g' |  14   12   16   12   14  
+        's3g' |  13   10   NA   12   17  
+        's4f' |  10   13   NA   13   12  
+        's5e' |  17   12   16   17   12  
+        's6g' |  17   17   12   16   14  
+        's7e' |  12   13   13   16   NA  
+    >>> t.weightPreorder
+     [['g2'], ['g5'], ['g4'], ['g1', 'g3']]
+
+    The random instance generated here with seed = 100 results in a set of only
+    excellent (2), good (3) and fair (2) student performances. We observe 3 missing grades (NA).
+    We may show a statistical summary per course (performance criterion) with more than 5 grades.
+    
+    >>> t.showStatistics()
+     *-------- Performance tableau summary statistics -------*
+     Instance name      : randstudPerf
+     #Actions           : 7
+     #Criteria          : 5
+     *Statistics per Criterion*
+     Criterion name       : g1
+     Criterion weight     : 5
+      criterion scale      : 0.00 - 20.00
+      # missing evaluations : 0
+      mean evaluation       : 13.57
+      standard deviation    : 2.44
+      maximal evaluation    : 17.00
+      quantile Q3 (x_75)    : 17.00
+      median evaluation     : 13.50
+      quantile Q1 (x_25)    : 12.00
+      minimal evaluation    : 10.00
+      mean absolute difference      : 2.69
+      standard difference deviation : 3.45
+     Criterion name       : g2
+     Criterion weight     : 1
+      criterion scale      : 0.00 - 20.00
+      # missing evaluations : 0
+      mean evaluation       : 12.43
+      standard deviation    : 2.19
+      maximal evaluation    : 17.00
+      quantile Q3 (x_75)    : 14.00
+      median evaluation     : 12.50
+      quantile Q1 (x_25)    : 11.50
+      minimal evaluation    : 10.00
+      mean absolute difference      : 2.29
+      standard difference deviation : 3.10
+     Criterion name       : g3
+     Criterion weight     : 5
+      criterion scale      : 0.00 - 20.00
+      # missing evaluations : 2
+     Criterion name       : g4
+     Criterion weight     : 4
+      criterion scale      : 0.00 - 20.00
+      # missing evaluations : 0
+      mean evaluation       : 14.29
+      standard deviation    : 1.91
+      maximal evaluation    : 17.00
+      quantile Q3 (x_75)    : 16.25
+      median evaluation     : 15.00
+      quantile Q1 (x_25)    : 12.75
+      minimal evaluation    : 12.00
+      mean absolute difference      : 2.12
+      standard difference deviation : 2.70
+     Criterion name       : g5
+     Criterion weight     : 3
+      criterion scale      : 0.00 - 20.00
+      # missing evaluations : 1
+      mean evaluation       : 13.67
+      standard deviation    : 1.70
+      maximal evaluation    : 17.00
+      quantile Q3 (x_75)    : 15.50
+      median evaluation     : 14.00
+      quantile Q1 (x_25)    : 12.50
+      minimal evaluation    : 12.00
+      mean absolute difference      : 1.78
+      standard difference deviation : 2.40
 
     """
     def __init__(self,numberOfStudents = 10, numberOfCourses = 5,\
@@ -671,13 +776,15 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                 
             else:   
                 actionKey = ('s%%0%dd' % (nd)) % (i+1)
-                actions[actionKey] = {'shortName':actionKey,
-                        'name': 'student',
-                        'comment': 'RandomAcademicPerformanceTableau() generated.' }
                 if WithTypes:
-                    actions[actionKey]['type'] = types[ri]
-                    actions[actionKey]['shortName'] = '%s%s' %\
-                                        (actionKey,actions[actionKey]['type'][0])
+                    actions[actionKey]= {'type': types[ri],
+                        'shortName': '%s%s' % (actionKey,types[ri][0]),
+                        'name': 'student %s%s' % (actionKey,types[ri][0]),
+                        'comment': 'RandomAcademicPerformanceTableau() generated.'}
+                else:
+                    actions[actionKey] = {'shortName':actionKey,
+                        'name': 'student %s' % actionKey,
+                        'comment': 'RandomAcademicPerformanceTableau() generated.' }
             
         # generate the criteria weights
         numberOfCriteria = numberOfCourses 
@@ -706,11 +813,14 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         commentString += '; weightScale='+str(weightScale)
         commentString += '; IntegerWeights='+str(IntegerWeights)
         commentString += '; commonThresholds='+str(commonThresholds)
+        commentString += '; missingDataProbability='+str(missingDataProbability)
+        commentString += '; WithTypes=='+str(WithTypes)
+
     
         for i in range(numberOfCriteria):
-            g = ('g%%0%dd' % ngd) % (i+1)
+            g = ('m%%0%dd' % ngd) % (i+1)
             criteria[g] = {}
-            criteria[g]['name']='RandomAcademicPerformanceTableau() instance'
+            criteria[g]['name']='Master course %d' % (i+1)
             criteria[g]['comment']=commentString
             try:
                 indThreshold  =(Decimal(str(commonThresholds['ind'][0])),
@@ -733,6 +843,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
  #                                             'veto': vetoThreshold
                                               }
             criteria[g]['scale'] = commonScale
+            criteria[g]['preferenceDirection'] = 'max'
                                              
             if IntegerWeights:
                 criteria[g]['weight'] = weightsList[i]
@@ -808,6 +919,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                     evaluation[g][x] = Decimal(str(round(randeval,digits)))
 
         # randomly insert missing data
+        # self.missingDataProbability = missingDataProbability
         for c in criteria:
             for x in actions:
                 if random.random() < missingDataProbability:
@@ -819,9 +931,95 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
 
+    def showStudents(self,WithComments=False):
+        """
+        Print a list of the students.
+        """
+        actions = self.actions
+        print('"------------ Registered students -------*')
+        print('key: \t Name \t\t Type')
+        print('----------------------------------')
+        for st in actions:
+            x = actions[st]
+            if WithComments:
+                print('%s: \t %s \t %s\n      %s' %\
+                      (st,x['name'],x['type'],x['comment']) )
+            else:
+                print('%s: \t %s \t %s' %\
+                      (st,x['name'],x['type']) )
+
+    def showCourses(self,coursesSubset=None,ndigits=0,\
+                    pageTitle='List of Courses'):
+        """
+        Print a list of the courses.
+        """
+        self.showHTMLCriteria(criteriaSubset=coursesSubset,ndigits=ndigits,\
+                              title=pageTitle)
+        
+    def showPerformanceTableau(self,Transposed=False,studentsSubset=None,\
+                               fromIndex=None,toIndex=None,Sorted=True,ndigits=0):
+        """
+        Print the performance Tableau.
+        """
+        from decimal import Decimal
+        print('*----  performance tableau -----*')
+        criteriaList = list(self.criteria)
+        if Sorted:
+            criteriaList.sort()
+        if studentsSubset == None:
+            actionsList = list(self.actions)
+            if Sorted:
+                actionsList.sort()
+        else:
+            actionsList = list(studentsSubset)
+        if fromIndex == None:
+            fromIndex = 0
+        if toIndex == None:
+            toIndex=len(actionsList)
+        # view criteria x actions
+        if Transposed:
+            print(' Courses | ETCS |', end=' ')
+            for x in actionsList:
+                xName = self.actions[x]['shortName']
+                print('\''+xName+'\'', end=' ')
+            print('\n---------|-----------------------------------------')
+            formatString = ' %%0%d.%df ' % (2,ndigits)
+            for g in criteriaList:
+                print('  \'' +str(g)+'\'  |  '+str(self.criteria[g]['weight'])+'   |', end='  ')
+                for i in range(fromIndex,toIndex):
+                    x = actionsList[i]
+                    evalgx = self.evaluation[g][x]
+                    if evalgx == Decimal('-999'):
+                        print(' NA ', end='  ')
+                    else:                    
+                        print(formatString % (evalgx), end='  ')
+                print()
+        # view actions x criteria
+        else:
+            print(' Courses | ', end=' ')
+            for g in criteriaList:
+                print('\''+str(g)+'\'', end=' ')
+            print('\n   ECTS  | ', end='  ')
+            for g in criteriaList:
+                print(' %s  ' % str(self.criteria[g]['weight'] ), end='  ')          
+            print('\n---------|-----------------------------------------')
+            formatString = ' %%0%d.%df ' % (2,ndigits)
+            for i in range(fromIndex,toIndex):
+                x = actionsList[i]
+                print('  \''+str(self.actions[x]['shortName'])+'\' |' , end='   ')
+                for g in criteriaList:
+                    evalgx = self.evaluation[g][x]
+                    if evalgx == Decimal('-999'):
+                        print(' NA ', end='  ')
+                    else:                    
+                        print(formatString % (evalgx), end='  ')
+                print()
+
+
     def showHTMLPerformanceTableau(self,studentsSubset=None,isSorted=True,\
                                    Transposed=False,ndigits=0,\
-                                   ContentCentered=True,title=None):
+                                   ContentCentered=True,title=None,\
+                                   fromIndex=None,toIndex=None):
         """
         shows the html version of the academic performance tableau in a browser window.
         """
@@ -830,18 +1028,19 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         fo = open(fileName,'w')
         fo.write(self._htmlPerformanceTable(actions=studentsSubset,isSorted=isSorted,\
                                            Transposed=Transposed,\
-                                           ndigits=ndigits,
-                                           ContentCentered=ContentCentered,
-                                           title=title))
+                                           ndigits=ndigits,\
+                                           ContentCentered=ContentCentered,\
+                                           title=title,fromIndex=fromIndex,\
+                                            toIndex=toIndex))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
            
             
     def _htmlPerformanceTable(self,actions=None,isSorted=False,\
                              Transposed=False,ndigits=0,\
                              ContentCentered=True,
-                             title=None):
+                             title=None,fromIndex=None,toIndex=None):
         """
         Renders the performance table citerion x actions in html format.
         """
@@ -861,6 +1060,10 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
             actionsKeys = [x for x in actions]
         if isSorted:
             actionsKeys.sort()
+        if fromIndex == None:
+            fromIndex = 0
+        if toIndex == None:
+            toIndex = len(actionsKeys)
         evaluation = self.evaluation
         if ContentCentered:
             alignFormat = 'center'
@@ -868,8 +1071,8 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
             alignFormat = 'right'
         if Transposed:
             html += '<table style="background-color:White;" border="1">'
-            html += '<tr bgcolor="#9acd32"><th>Courses</th>'
-            for x in actionsKeys:
+            html += '<tr bgcolor="#9acd32"><th>Courses<br/>(ECTS)</th>'
+            for x in actionsKeys[fromIndex:toIndex]:
                 try:
                     xName = actions[x]['shortName']
                 except:
@@ -882,7 +1085,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                 except:
                     gName = '%s (%d)' % (g,int(criteria[g]['weight']))
                 html += '<tr><th bgcolor="#FFF79B">%s</th>' % (gName)
-                for x in actionsKeys:
+                for x in actionsKeys[fromIndex:toIndex]:
                     if self.evaluation[g][x] != Decimal("-999"):
                         if self.evaluation[g][x] < Decimal('10'):
                             formatString = '<td bgcolor="#ffddff"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
@@ -911,12 +1114,12 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                     gName = str(g)
                 html += '<th bgcolor="#FFF79B">%s</th>' % (gName)
             html += '</tr>'
-            html += '<tr><th bgcolor="#9acd32" >Students</th>'
+            html += '<tr><th bgcolor="#9acd32" >ECTS</th>'
             for g in criteriaKeys:
                 gweight = criteria[g]['weight']
                 html += '<td  align="center" bgcolor="#FFF79B" ><i>%d</i></td>' % (int(gweight))
             html += '</tr>'
-            for x in actionsKeys:
+            for x in actionsKeys[fromIndex:toIndex]:
                 try:
                     xName = actions[x]['shortName']
                 except:
@@ -944,8 +1147,107 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
             html += '</table>'
             
         return html
-                                            
-    
+
+    def showCourseStatistics(self,courseID,Debug=False):
+        """
+        show statistics concerning the grades' distributions in the given course.
+        """
+        import math
+        criteriaKeys = [x for x in self.criteria]
+        criteriaKeys.sort()
+        nc = len(self.criteria)
+        evaluation = self.evaluation
+        actions = self.actions
+        g = courseID
+        n = len(actions)
+        print('*----- Summary performance statistics  ------*')
+        print('  Course name    :', g)
+        print('  Course weight  :', self.criteria[g]['weight'])
+        print('  # Students     :', n)
+        averageEvaluation = Decimal('0.0')
+        varianceEvaluation = Decimal('0.0')
+        Max = Decimal(str(self.criteria[g]['scale'][1]))
+        Min = Decimal(str(self.criteria[g]['scale'][0]))
+        minEvaluation = Max
+        maxEvaluation = Min
+        evaluationList = []
+        for x in actions:
+            if evaluation[g][x] != Decimal('-999'):
+                evaluationList.append(evaluation[g][x])
+                averageEvaluation += evaluation[g][x]
+                varianceEvaluation += evaluation[g][x]**Decimal('2')
+                if evaluation[g][x] < minEvaluation:
+                    minEvaluation = evaluation[g][x]
+                if evaluation[g][x] > maxEvaluation:
+                    maxEvaluation = evaluation[g][x]
+        evaluationList.sort()
+        na = len(evaluationList)
+        if Debug:
+            print(evaluationList)
+        try:
+            if self.criteria[g]['preferenceDirection'] == 'max':
+                print('  grading scale  : %.2f - %.2f' % (Min, Max))
+            else:
+                print('  grading scale  : %.2f - %.2f' % (-Max, Min))
+        except:
+            print('  grading scale  : %.2f - %.2f' % (Min, Max))
+        print('  # missing evaluations : %d'   % (n-na))
+        # !! index on evaluation List goes from 0 to na -1 !!
+        if na > 5:
+            rankQ1 = na / 4.0
+            lowRankQ1 = int(math.floor(rankQ1))
+            proportQ1 = Decimal(str(rankQ1 - lowRankQ1))
+            quantileQ1 = evaluationList[lowRankQ1] + (proportQ1 * (evaluationList[lowRankQ1+1]-evaluationList[lowRankQ1]) )
+            #print rankQ1, lowRankQ1, proportQ1
+
+            rankQ2 = na / 2.0
+            lowRankQ2 = int(math.floor(rankQ2))
+            proportQ2 = Decimal(str(rankQ2 - lowRankQ2))
+            
+            quantileQ2 = evaluationList[lowRankQ2] + (proportQ2 * ( evaluationList[lowRankQ2+1] - evaluationList[lowRankQ2]) )
+
+            rankQ3 = (na * 3.0) / 4.0
+            lowRankQ3 = int(math.floor(rankQ3))
+            proportQ3 = Decimal(str(rankQ3 - lowRankQ3))
+                          
+            quantileQ3 = evaluationList[lowRankQ3] + ( proportQ3 * (evaluationList[lowRankQ3+1]-evaluationList[lowRankQ3]) )
+                
+            averageEvaluation /= Decimal(str(na))
+            varianceEvaluation = varianceEvaluation/na - averageEvaluation**Decimal('2')
+            stdDevEvaluation = math.sqrt(varianceEvaluation)
+            print('  mean evaluation       : %.2f' % (averageEvaluation))
+            print('  standard deviation    : %.2f' % (stdDevEvaluation))
+            print('  maximal evaluation    : %.2f' % (maxEvaluation))
+            print('  quantile Q3 (x_75)    : %.2f' % (quantileQ3))
+            print('  median evaluation     : %.2f' % (quantileQ2))
+            print('  quantile Q1 (x_25)    : %.2f' % (quantileQ1))
+            print('  minimal evaluation    : %.2f' % (minEvaluation))
+            averageAbsDiffEvaluation = Decimal('0.0')
+            varianceDiffEvaluation = Decimal('0.0')
+            nd = 0
+            for x in actions:
+                for y in actions:
+                    if evaluation[g][x] != Decimal('-999') and evaluation[g][y] != Decimal('-999'):
+                        diffxy = (evaluation[g][x] - evaluation[g][y])
+                        averageAbsDiffEvaluation += abs(diffxy)
+                        varianceDiffEvaluation += diffxy**Decimal('2')
+                        nd += 1
+#            print '  Sum of evaluation differences = ', averageAbsDiffEvaluation
+            averageAbsDiffEvaluation /= Decimal(str(nd))
+            ## averageDiffEvaluation == 0 per construction  
+            varianceDiffEvaluation = varianceDiffEvaluation/Decimal(str(nd))
+            stdDevDiffEvaluation = math.sqrt(varianceDiffEvaluation)
+            print('  mean absolute difference      : %.2f' % (averageAbsDiffEvaluation))
+            print('  standard difference deviation : %.2f' % (stdDevDiffEvaluation))
+        else:
+            print('  !! not enough evaluations !!')
+
+    def showStatistics(self):
+        """
+        Obsolete
+        """
+        print('Obsolete ! use instaed self.showCourseStatistics(courseID)')
+        
 #-----------------
 class RandomRankPerformanceTableau(PerformanceTableau):
     """
@@ -1822,16 +2124,15 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         * shortNamePrefix := 'a' (default)
         * number of Criteria := 13 (default)
         * weightDistribution := 'equiobjectives' (default)
-                              | 'equisignificant' (weights set all to 1)
-                              | 'random' (in the range 1 to numberOfCriteria)
+                | 'equisignificant' (weights set all to 1)
+                | 'random' (in the range 1 to numberOfCriteria)
         * weightScale := [1,numerOfCriteria] (random default)
         * IntegerWeights := True (default) / False
         * OrdinalScales := True / False (default), if True commonScale is set to (0,10)
         * NegativeWeights := True (default) / False. If False, evaluations to be minimized are negative.
         * negativeWeightProbability := [0,1] (default 0.10), 'min' preference direction probability  
         * commonScale := (Min, Max)
-                | when common Scale = False, (0.0,10.0) by default if OrdinalScales == True and CommonScale=None,
-                | and (0.0,100.0) by default otherwise 
+                | when commonScale == None, (Min=0.0,Max=10.0) by default if OrdinalScales == True and (Min=0.0,Max=100.0) by default otherwise
         * commonThresholds := ((Ind,Ind_slope),(Pref,Pref_slope),(Veto,Veto_slope)) with
                 | Ind < Pref < Veto in [0.0,100.0] such that 
                 | (Ind/100.0*span + Ind_slope*x) < (Pref/100.0*span + Pref_slope*x) < (Pref/100.0*span + Pref_slope*x)
@@ -1844,7 +2145,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 | (5.8661,2.62203),(5.05556,5.05556) and (2.62203, 5.8661)
                 | chosen by default for 'good', 'fair' and 'weak' evaluations. 
                 | Constant parameters may be provided.
-        * valueDigits := 2 (default, for cardinal scales only)
+        * valueDigits := 2 (default)
         * vetoProbability := x in ]0.0-1.0[ (0.5 default), probability that a cardinal criterion shows a veto preference discrimination threshold.
         * Debug := True / False (default)
 
@@ -1882,28 +2183,28 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
     >>> t.showActions()
     *----- show decision action --------------*
     key:  a1
-      short name:  a1
-      name:       random decision action Eco+ Soc- Env+
+      short name:  p1
+      name:       random public plicy Eco+ Soc- Env+
       profile:    {'Eco': 'good', 'Soc': 'weak', 'Env': 'good'}
     key:  a2
-      short name:  a2
-      name:       random decision action Eco~ Soc+ Env~
+      short name:  p2
+      name:       random public policy Eco~ Soc+ Env~
       profile:    {'Eco': 'fair', 'Soc': 'good', 'Env': 'fair'}
     key:  a3
-      short name:  a3
-      name:       random decision action Eco~ Soc~ Env-
+      short name:  p3
+      name:       random public policy Eco~ Soc~ Env-
       profile:    {'Eco': 'fair', 'Soc': 'fair', 'Env': 'weak'}
     key:  a4
-      short name:  a4
-      name:       random decision action Eco~ Soc+ Env+
+      short name:  p4
+      name:       random public policy Eco~ Soc+ Env+
       profile:    {'Eco': 'fair', 'Soc': 'good', 'Env': 'good'}
     key:  a5
-      short name:  a5
-      name:       random decision action Eco~ Soc+ Env~
+      short name:  p5
+      name:       random public policy Eco~ Soc+ Env~
       profile:    {'Eco': 'fair', 'Soc': 'good', 'Env': 'fair'}
     >>> t.showPerformanceTableau()
     *----  performance tableau -----*
-    criteria | weights |  'a1'   'a2'   'a3'   'a4'   'a5'   
+    criteria | weights |  'p1'   'p2'   'p3'   'p4'   'p5'   
     ---------|---------------------------------------------
     'g1Eco'  |    1    | 36.29  85.17  34.49    NA   56.58  
     'g2Soc'  |    1    | 55.00  56.33    NA   67.36  72.22  
@@ -1912,7 +2213,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
         
     """
 
-    def __init__(self,numberOfActions=20,shortNamePrefix='a',numberOfCriteria=13,\
+    def __init__(self,numberOfActions=20,shortNamePrefix='p',numberOfCriteria=13,\
                  weightDistribution='equiobjectives',weightScale=None,\
                  IntegerWeights=True,OrdinalScales=False,\
                  NegativeWeights=False,negativeWeightProbability=0.0,\
@@ -1951,7 +2252,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             else:      
                 actions[actionKey] = {'shortName': '%s' % (actionKey),
                         'name': 'action %s' % actionKey,
-                        'comment': '3 Objectives',
+                        'comment': 'random public polivy',
                         'generators': {}}
 ##        self.actions = actions
 ##        actionsList = [x for x in self.actions]
@@ -1962,6 +2263,10 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             weightMode = ('equisignificant',(1,1))
             weightScale =  weightMode[1]
             weightsList = [weightScale[0] for i in range(numberOfCriteria)]
+            sumWeights = Decimal('0.0')
+            for i in range(numberOfCriteria):
+                sumWeights += Decimal(str(weightScale[0]))
+                
         elif weightDistribution == 'random':
             weightMode = ('random',(1,numberOfCriteria))
             if weightScale == None:
@@ -1973,6 +2278,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                                                               weightScale[1]))))
                 sumWeights += weightsList[i]
             weightsList.reverse()
+            
         else:
             weightDistribution = 'equiobjectives'
             weightMode = (weightDistribution,None)
@@ -2038,7 +2344,8 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
             else:
                 criteria[g]['preferenceDirection'] = 'min'
             criteria[g]['name'] = 'criterion of objective %s' % (criterionObjective)
-            criteria[g]['shortName'] = g + criterionObjective[0:2]
+            criteria[g]['shortName'] = g
+            #criteria[g]['shortName'] = g + criterionObjective[0:2]
             span = commonScale[1] - commonScale[0]
             if commonThresholds == None:                    
                 if OrdinalScales:
@@ -3601,14 +3908,19 @@ if __name__ == "__main__":
 ##    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
 ##                                         commonMode=('uniform',None,None),
 ##                                         missingDataProbability=0.01)
-##    t = RandomAcademicPerformanceTableau(numberOfStudents=20,numberOfCourses=10,
-##                                         commonMode=('triangular',14,0.4),
-##                                         missingDataProbability=0.01,
-##                                         WithTypes=True,
-##                                         seed=1)
-##    print(t)
-##    t.showHTMLPerformanceTableau(Transposed=True)
-##    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
+    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=10,
+                                commonMode=('triangular',14,0.4),
+                                missingDataProbability=0.01,
+                                WithTypes=True,
+                                seed=1)
+    t.showStudents()
+    t.showCourses()
+    #print('transposed')
+    #t.showPerformanceTableau(Transposed=True)
+    #print('not transposed')
+    #t.showPerformanceTableau(Transposed=False)
+    #t.showHTMLPerformanceTableau(Transposed=True)
+    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
                                              
 
 
@@ -3623,24 +3935,24 @@ if __name__ == "__main__":
 ##    print(time()-t0)
 ##    t.saveXMCDA2('test2')
 ##    t.showCriteria()
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,
-                                            numberOfCriteria=13,
-                                            OrdinalScales=False,
-                                            commonScale=None,
-                                            weightDistribution='equiobjectives',
-     #weightScale=(1,5),
-                                            commonMode=('triangular','variable',None),
-                                            vetoProbability=0.5,
-                                            NegativeWeights=False,
-                                            negativeWeightProbability=0.25,
-                                            seed=120,Debug=False)
+    # t = Random3ObjectivesPerformanceTableau(numberOfActions=10,
+    #                                         numberOfCriteria=13,
+    #                                         OrdinalScales=False,
+    #                                         commonScale=None,
+    #                                         weightDistribution='equiobjectives',
+    #  #weightScale=(1,5),
+    #                                         commonMode=('triangular','variable',None),
+    #                                         vetoProbability=0.5,
+    #                                         NegativeWeights=False,
+    #                                         negativeWeightProbability=0.25,
+    #                                         seed=120,Debug=False)
 
-    t.showObjectives()
-    t.showCriteria()
-    t.showPerformanceTableau()
-    t.csvAllQuantiles('q')
-    t.showAllQuantiles()
-    t.showStatistics()
+    # t.showObjectives()
+    # t.showCriteria()
+    # t.showPerformanceTableau()
+    # t.csvAllQuantiles('q')
+    # t.showAllQuantiles()
+    # t.showStatistics()
     
 ##    #t.showActions(Debug=True)
 ##    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Eco']['criteria'])

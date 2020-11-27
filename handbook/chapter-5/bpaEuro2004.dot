@@ -1,0 +1,45 @@
+digraph G {
+graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nDigraph3 (graphviz)\n R. Bisdorff, 2020", size="7,7",fontsize=10];
+p01 [shape = "circle", label = "p01", fontsize=10];
+p02 [shape = "circle", label = "p02", fontsize=10];
+p03 [shape = "circle", label = "p03", fontsize=10];
+p04 [shape = "circle", label = "p04", fontsize=10];
+p05 [shape = "circle", label = "p05", fontsize=10];
+p06 [shape = "circle", label = "p06", fontsize=10];
+p07 [shape = "circle", label = "p07", fontsize=10];
+p08 [shape = "circle", label = "p08", fontsize=10];
+p09 [shape = "circle", label = "p09", fontsize=10];
+p10 [shape = "circle", label = "p10", fontsize=10];
+p11 [shape = "circle", label = "p11", fontsize=10];
+p12 [shape = "circle", label = "p12", fontsize=10];
+p13 [shape = "circle", label = "p13", fontsize=10];
+{ rank = 0; p04; p10; p12; p13; }
+{ rank = 1; p02; p03; p05; }
+{ rank = 2; p06; p07; p01; }
+{ rank = 3; p11; p08; }
+{ rank = 4; p09; }
+p04-> p06 [style="setlinewidth(1)",color=black] ;
+p04-> p01 [style="setlinewidth(1)",color=black] ;
+p04-> p11 [style="setlinewidth(1)",color=black] ;
+p04-> p08 [style="setlinewidth(1)",color=black] ;
+p10-> p03 [style="setlinewidth(1)",color=black] ;
+p10-> p05 [style="setlinewidth(1)",color=black] ;
+p12-> p06 [style="setlinewidth(1)",color=black] ;
+p12-> p01 [style="setlinewidth(1)",color=black] ;
+p12-> p11 [style="setlinewidth(1)",color=black] ;
+p13-> p06 [style="setlinewidth(1)",color=black] ;
+p13-> p07 [style="setlinewidth(1)",color=black] ;
+p08-> p02 [style="setlinewidth(1)",color=black] ;
+p02-> p09 [style="setlinewidth(1)",color=black] ;
+p03-> p06 [style="setlinewidth(1)",color=black] ;
+p03-> p07 [style="setlinewidth(1)",color=black] ;
+p03-> p01 [style="setlinewidth(1)",color=black] ;
+p05-> p07 [style="setlinewidth(1)",color=black] ;
+p06-> p09 [style="setlinewidth(1)",color=black] ;
+p07-> p11 [style="setlinewidth(1)",color=black] ;
+p07-> p08 [style="setlinewidth(1)",color=black] ;
+p01-> p09 [style="setlinewidth(1)",color=black] ;
+}
+ 

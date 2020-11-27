@@ -6,12 +6,12 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>digraphsTools</strong></big></big> (version Branch: 3.7 $)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>digraphsTools</strong></big></big> (version Branch: 3.9 $)</font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/digraphsTools.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/digraphsTools.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/GitHub/Digraph3Git/pyDoc/digraphsTools.py">/home/bisdorff/Documents/GitHub/Digraph3Git/pyDoc/digraphsTools.py</a></font></td></tr></table>
     <p><tt>Python3+&nbsp;implementation&nbsp;of&nbsp;Digraph3&nbsp;tools<br>
 &nbsp;<br>
-Copyright&nbsp;(C)&nbsp;2016-2019&nbsp;Raymond&nbsp;Bisdorff<br>
+Copyright&nbsp;(C)&nbsp;2016-2020&nbsp;Raymond&nbsp;Bisdorff<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify<br>
 &nbsp;&nbsp;&nbsp;&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by<br>
@@ -70,8 +70,9 @@ with&nbsp;**negative**&nbsp;arguments,&nbsp;a&nbsp;**min**.<br>
 The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;arguments&nbsp;results&nbsp;in<br>
 an&nbsp;**indeterminate**&nbsp;value.<br>
 &nbsp;<br>
-Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.&nbsp;We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
+Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omax*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.<br>
+We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive&nbsp;and&nbsp;negative&nbsp;terms<br>
+and&nbsp;operate&nbsp;omax&nbsp;on&nbsp;the&nbsp;two&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
  <dl><dt><a name="-omin"><strong>omin</strong></a>(Med, L, Debug=False)</dt><dd><tt>Epistemic&nbsp;**conjunction**&nbsp;of&nbsp;a&nbsp;list&nbsp;L&nbsp;of&nbsp;bipolar&nbsp;outranking&nbsp;characteristics.<br>
 Med&nbsp;is&nbsp;the&nbsp;given&nbsp;valuation&nbsp;domain&nbsp;median.<br>
 &nbsp;<br>
@@ -82,8 +83,8 @@ The&nbsp;mixture&nbsp;of&nbsp;both&nbsp;**positive&nbsp;and&nbsp;negative**&nbsp
 in&nbsp;an&nbsp;**indeterminate**&nbsp;value.<br>
 &nbsp;<br>
 Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*omin*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.<br>
-We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;terms<br>
-and&nbsp;operate&nbsp;*omin*&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
+We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;separately&nbsp;all&nbsp;positive&nbsp;and&nbsp;negative&nbsp;terms<br>
+and&nbsp;operate&nbsp;*omin*&nbsp;on&nbsp;the&nbsp;two&nbsp;assembled&nbsp;arguments.</tt></dd></dl>
  <dl><dt><a name="-powerset"><strong>powerset</strong></a>(S)</dt><dd><tt>Power&nbsp;set&nbsp;generator&nbsp;iterator.<br>
 &nbsp;<br>
 Parameter&nbsp;S&nbsp;may&nbsp;be&nbsp;any&nbsp;object&nbsp;that&nbsp;is&nbsp;accepted&nbsp;as&nbsp;input&nbsp;by&nbsp;the&nbsp;set&nbsp;class&nbsp;constructor.</tt></dd></dl>
@@ -97,6 +98,19 @@ Renders&nbsp;the&nbsp;quantile&nbsp;*q(p)*,<br>
 i.e.&nbsp;the&nbsp;observation&nbsp;such&nbsp;that&nbsp;the&nbsp;probability&nbsp;to&nbsp;be&nbsp;lower&nbsp;or&nbsp;equal&nbsp;is&nbsp;*p*.</tt></dd></dl>
  <dl><dt><a name="-ranking2preorder"><strong>ranking2preorder</strong></a>(R)</dt><dd><tt>#&nbsp;transforms&nbsp;a&nbsp;ranking&nbsp;(list&nbsp;from&nbsp;best&nbsp;to&nbsp;worst)&nbsp;into<br>
 #&nbsp;a&nbsp;preorder&nbsp;(&nbsp;a&nbsp;list&nbsp;of&nbsp;list&nbsp;from&nbsp;worst&nbsp;to&nbsp;best)</tt></dd></dl>
+ <dl><dt><a name="-symmetricAverage"><strong>symmetricAverage</strong></a>(Med, L, weights=None, Debug=False)</dt><dd><tt>[Weighted]&nbsp;symmetric&nbsp;average&nbsp;data&nbsp;fusion&nbsp;for&nbsp;bipolar&nbsp;outranking&nbsp;characteristics<br>
+computation:&nbsp;Med&nbsp;is&nbsp;the&nbsp;valuation&nbsp;domain&nbsp;median&nbsp;and&nbsp;L&nbsp;is&nbsp;a&nbsp;list&nbsp;of<br>
+r-valued&nbsp;statement&nbsp;characteristics.<br>
+&nbsp;<br>
+With&nbsp;only&nbsp;**positive**&nbsp;or&nbsp;only&nbsp;**negative**&nbsp;[and&nbsp;median]&nbsp;characteristic&nbsp;values,<br>
+the&nbsp;*symmetricAverage*&nbsp;operator&nbsp;&nbsp;renders&nbsp;the&nbsp;[weghted]&nbsp;average&nbsp;of&nbsp;the&nbsp;characteristics&nbsp;values.<br>
+&nbsp;<br>
+The&nbsp;mixture&nbsp;of&nbsp;**both&nbsp;positive&nbsp;and&nbsp;negative**&nbsp;characteristic&nbsp;values&nbsp;results&nbsp;in<br>
+an&nbsp;**indeterminate**&nbsp;value.<br>
+&nbsp;<br>
+Likewise&nbsp;to&nbsp;a&nbsp;mean,&nbsp;the&nbsp;*symmetric*&nbsp;operator&nbsp;is&nbsp;not&nbsp;associative.<br>
+We&nbsp;therefore&nbsp;first&nbsp;assemble&nbsp;separately&nbsp;all&nbsp;positive,&nbsp;negative&nbsp;and&nbsp;null&nbsp;values&nbsp;<br>
+and&nbsp;operate&nbsp;*ofusion*&nbsp;on&nbsp;the&nbsp;three&nbsp;assembled&nbsp;values.</tt></dd></dl>
  <dl><dt><a name="-time"><strong>time</strong></a>(...)</dt><dd><tt><a href="#-time">time</a>()&nbsp;-&gt;&nbsp;floating&nbsp;point&nbsp;number<br>
 &nbsp;<br>
 Return&nbsp;the&nbsp;current&nbsp;time&nbsp;in&nbsp;seconds&nbsp;since&nbsp;the&nbsp;Epoch.<br>

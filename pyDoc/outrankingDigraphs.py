@@ -2,7 +2,7 @@
 """
 Python implementation of outranking digraphs.
 
-Copyright (C) 2006-20019  Raymond Bisdorff
+Copyright (C) 2006-2020  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,12 +20,17 @@ Copyright (C) 2006-20019  Raymond Bisdorff
 
 """
 
-__version__ = "Revision: Py35"
+__version__ = "Revision: Py39"
 
 from digraphsTools import *
 from digraphs import *
 from xmlrpc.client import ServerProxy
 from outrankingDigraphs import *
+from copy import copy, deepcopy
+from io import BytesIO
+from pickle import Pickler, dumps, loads, load
+from multiprocessing import Process, Lock,\
+                        active_children, cpu_count
 
 #-------------------------------------------
         
@@ -1737,7 +1742,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write(self.showPairwiseComparison(a,b,isReturningHTML=True))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
 
     def showPairwiseOutrankings(self,a,b,\
                                Debug=False,isReturningHTML=False,\
@@ -1766,8 +1771,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         fo.write(self.showPairwiseComparison(b,a,isReturningHTML=True))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
-
+        webbrowser.open(url,new=2)
 
     def showShort(self):
         """
@@ -1803,15 +1807,15 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                           hasLatexFormat=False,
                           hasIntegerValuation=False,
                           relation=None,
-                          ReflexiveTerms=True):
+                          ReflexiveTerms=True,
+                          fromIndex=None,
+                          toIndex=None):
         """
         prints the relation valuation in actions X actions table format.
         """
         if hasLPDDenotation:
             try:
                 largePerformanceDifferencesCount = self.largePerformanceDifferencesCount
-                gnv = BipolarOutrankingDigraph(self.performanceTableau,hasNoVeto=True)
-                gnv.recodeValuation(self.valuationdomain['min'],self.valuationdomain['max'])
             except:
                 hasLPDDenotation = False
         if StabilityDenotation:
@@ -1829,7 +1833,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             actions = actionsSubset
 
         if relation == None:
-            relation = self.relation
+            if hasLPDDenotation:
+                relation = self.relation
+            else:
+                relation = self.relation
             
         print('* ---- Relation Table -----\n', end=' ')
         if StabilityDenotation:
@@ -1838,9 +1845,13 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             print('r/(lh)| ', end=' ')
         else:
             print('  r   | ', end=' ')
-        #actions = [x for x in actions]
+        actions = [x for x in actions]
+        if fromIndex == None:
+            fromIndex = 0
+        if toIndex == None:
+            toIndex = len(actions)
         actionsList = []
-        for x in actions:
+        for x in actions[fromIndex:toIndex]:
             if isinstance(x,frozenset):
                 try:
                     actionsList += [(actions[x]['shortName'],x)]
@@ -1873,29 +1884,30 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 if x == y:
                     if not ReflexiveTerms:
                         if hasLPDDenotation:
-                            print('  -  ', end=' ')
+                            print('   -   ', end=' ')
                         elif hasLatexFormat:
-                            print('$-$ &', end=' ')
+                            print('$\\;-\\;$ &', end=' ')
                         else:
                             print('  -  ', end=' ')
                     else:
+                        Max = self.valuationdomain['max']
                         if hasLPDDenotation:
-                            print(' +4 ', end=' ')
+                            print(' %+.2f ' % Max, end=' ')
                         elif hasLatexFormat:
-                            print('$+4$ &', end=' ')
+                            print('$%.2f$ &' % Max, end=' ')
                         else:
-                            print(' +1.00 ', end=' ')
+                            print(' %+.2f ' % Max, end=' ')
                 else:    
                     if hasIntegerValuation:
                         if hasLPDDenotation:
-                            print('%+d ' % (gnv.relation[x[1]][y[1]]), end=' ')
+                            print('%+d ' % (relation[x[1]][y[1]]), end=' ')
                         elif hasLatexFormat:
                             print('$%+d$ &' % (relation[x[1]][y[1]]), end=' ')
                         else:
                             print('%+d ' % (relation[x[1]][y[1]]), end=' ')
                     else:
                         if hasLPDDenotation:
-                            print('%+2.2f ' % (gnv.relation[x[1]][y[1]]), end=' ')
+                            print('%+2.2f ' % (relation[x[1]][y[1]]), end=' ')
                         elif hasLatexFormat:
                             print('$%+2.2f$ & ' % (relation[x[1]][y[1]]), end=' ')       
                         else:
@@ -1906,7 +1918,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             else:
                 print()
             if hasLPDDenotation:
-                print("'"+x[0]+"' | ", end=' ')
+                print("       | ", end=' ')
                 for y in actionsList:
                     print('(%+d,%+d)' % (largePerformanceDifferencesCount[x[1]][y[1]]['positive'],\
                                           largePerformanceDifferencesCount[x[1]][y[1]]['negative']), end=' ')
@@ -1918,11 +1930,22 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                         print(' (+4) ', end=' ')
                     else:
                         print(' (%+d) ' % stability[x[1]][y[1]], end=' ')
-                print()
+                print('')
+        print('Valuation domain: [%.3f; %.3f]' %\
+                  (self.valuationdomain['min'],self.valuationdomain['max']) )
+        if StabilityDenotation:
+            print('Stability denotation semantics:')
+            print(' +4|-4 : unanimous outranking | outranked situation;')
+            print(' +3|-3 : validated outranking | outranked situation')
+            print('         in each coalition of equisignificant criteria;')
+            print(' +2|-2 : outranking | outranked situation validated')
+            print('         with all potential significance weights that are')
+            print('         compatible with the given significance preorder;')
+            print(' +1|-1 : validated outranking | outranked situation with')
+            print('         the given significance weights;')
+            print('   0   : indeterminate relational situation.')
+            print()
             
-                
-        print('\n')
-
     def showPerformanceTableau(self,actionsSubset=None):
         """
         Print the performance Tableau.
@@ -1983,38 +2006,166 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         vetos['strong'] = strongVeto
         vetos['weak'] = weakVeto
         return vetos
+
+    def showConsiderablePerformancesPolarisation(self):
+        """
+        prints all considerable performance polarisations.
+        """
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        vet = self.vetos
+        negVet = self.negativeVetos
+        vp =  [(x[0][0],x[0][1]) for x in vet]
+        nvp = [(x[0][0],x[0][1]) for x in negVet]
+        #print(vp)
+        #print(nvp)
+        nv = len(vp)
+        nnv = len(nvp)
+        i = 0
+        j = 0
+        while i < nv or j < nnv:
+            if i < nv and j < nnv:
+                if vp[i] == nvp[j]:
+                    print('*----- Consirable contradictory performance difference! ------*')
+                    print('r(%s >= %s) = %.2f' %\
+                        (vet[i][0][0],vet[i][0][1],vet[i][0][2]) )
+                    for lpd in vet[i][1]:
+                        print('criterion: ' + str(lpd[0]))
+                        print('Considerable negative performance difference : %.2f' % lpd[1][1] )
+                        print('Veto discrimination threshold       : %.2f' % -lpd[1][3] )
+                    for lpd in negVet[j][1]:
+                        print('criteria: ' + str(lpd[0]))
+                        print('Considerable positive performance difference : %.2f' % lpd[1][1] )
+                        print('Counter-veto threshold              : %.2f' % lpd[1][3] )            
+                    print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                          (vet[i][0][0],vet[i][0][1],vet[i][0][2],Med) )                    
+                    i += 1; j +=1
+                elif vp[i] < nvp[j]:
+                    print('*------ Considerable negative performance difference -----"')
+                    print('r(%s >= %s) = %.2f' %\
+                            (vet[i][0][0],vet[i][0][1],vet[i][0][2]) )
+                    for lpd in vet[i][1]:
+                        print('criterion: ' + str(lpd[0]))
+                        print('Considerable negative performance difference : %.2f' % lpd[1][1] )
+                        print('Veto discrimination threshold       : %.2f' % -lpd[1][3] )
+                    if vet[i][0][2] > Med:
+                        print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                          (vet[i][0][0],vet[i][0][1],vet[i][0][2],Med) )
+                    else:
+                        print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                          (vet[i][0][0],vet[i][0][1],vet[i][0][2],Min) )
+                    i += 1
+                else:
+                    print('*------ Considerable positive performance difference -----"')
+                    print('r(%s >= %s) = %.2f' %\
+                            (negVet[j][0][0],negVet[j][0][1],negVet[i][0][2]) )
+                    for lpd in negVet[j][1]:
+                        print('criteria: ' + str(lpd[0]))
+                        print('Considerable positive performance difference : %.2f' % lpd[1][1] )
+                        print('Counter-veto threshold              : %.2f' % lpd[1][3] )            
+                    if negVet[j][0][2] < Med:
+                        print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                          (negVet[j][0][0],negVet[j][0][1],negVet[j][0][2],Med) )
+                    else:
+                        print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                          (negVet[j][0][0],negVet[j][0][1],negVet[j][0][2],Max) )
+                    j += 1
+            else:
+                break
+        while i < nv:
+            print('*------ Considerable negative performance difference -----"')
+            print('r(%s >= %s) = %.2f' %\
+                    (vet[i][0][0],vet[i][0][1],vet[i][0][2]) )
+            for lpd in vet[i][1]:
+                print('criterion: ' + str(lpd[0]))
+                print('Considerable negative performance difference : %.2f' % lpd[1][1] )
+                print('Veto discrimination threshold       : %.2f' % -lpd[1][3] )
+            if vet[i][0][2] > Med:
+                print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                  (vet[i][0][0],vet[i][0][1],vet[i][0][2],Med) )
+            else:
+                print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                  (vet[i][0][0],vet[i][0][1],vet[i][0][2],Min) )
+            i +=1
+        while j < nnv:
+            print('*------ Considerable positive performance difference -----"')
+            print('r(%s >= %s) = %.2f' %\
+                    (negVet[j][0][0],negVet[j][0][1],negVet[j][0][2]) )
+            for lpd in negVet[j][1]:
+                print('criterion: ' + str(lpd[0]))
+                print('Considerable positive performance difference : %.2f' % lpd[1][1] )
+                print('Counter-veto threshold              : %.2f' % lpd[1][3] )            
+            if negVet[j][0][2] < Med:
+                print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                  (negVet[j][0][0],negVet[j][0][1],negVet[j][0][2],Med) )
+            else:
+                print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                  (negVet[j][0][0],negVet[j][0][1],negVet[j][0][2],Max) )
+            j += 1
         
     def showVetos(self,cutLevel=None,realVetosOnly = False):
         """
-        prints all veto situations observed in the OutrankingDigraph instance.
+        prints all veto and counter-veto situations observed in the OutrankingDigraph instance.
         """
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        lpdCount = self.largePerformanceDifferencesCount
         print('*----  Veto situations ---')
-        nv, realveto = self.computeVetosShort()
+        #nv, realveto = self.computeVetosShort()
         vetos = self.vetos
-        vetos.sort()
-        if realVetosOnly:
-            print(self.valuationdomain)
-            cutveto = 0
-            if cutLevel == None:
-                cutLevel = self.valuationdomain['med']
+        #vetos.sort()
+        nv = len(vetos)
+        print('number of veto situations : %d ' % (nv))
+        for i in range(nv):
+            print('%d: r(%s >= %s) = %.2f' %\
+                (i+1,vetos[i][0][0],vetos[i][0][1],vetos[i][0][2]) )
+            for lpd in vetos[i][1]:
+                print('criterion: ' + str(lpd[0]))
+                print('Considerable performance difference : %.2f' % lpd[1][1] )
+                print('Veto discrimination threshold       : %.2f' % -lpd[1][3] )
+            if lpdCount[vetos[i][0][0]][vetos[i][0][1]]['positive'] == 0:
+                if vetos[i][0][2] > Med:
+                    print('Polarisation: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (vetos[i][0][0],vetos[i][0][1],vetos[i][0][2],Med) )
+                else:
+                    print('Polarisation: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (vetos[i][0][0],vetos[i][0][1],vetos[i][0][2],Min) )
             else:
-                cutLevel = Decimal(str(cutLevel))
-            if cutLevel > self.valuationdomain['max']:
-                print("Error! min = %.3f, max = %.3f" % (self.valuationdomain['min'],self.valuationdomain['max']))
-                return None
-            print('Real vetos at cut level: %.3f' % (cutLevel))
-            for i in range(nv):
-                if self.vetos[i][0][2] > cutLevel:
-                    print('self.vetos[i][0][2]=',self.vetos[i][0][2])
-                    print(str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1]))
-                    cutveto += 1
-            return nv,realveto,cutveto
-        else:            
-            print('number of potential vetos: %d ' % (nv))
-            for i in range(nv):
-                print(str(i)+': relation: '+str(vetos[i][0])+', criteria: ' + str(vetos[i][1]))
-            print('number of real vetos: %d' % (realveto))
-            return nv,realveto
+                print('Consirable contradictory performance differences!')
+                print('Polarisation: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (vetos[i][0][0],vetos[i][0][1],vetos[i][0][2],Med) )
+        #print('number of real vetos: %d' % (realveto))
+        #return nv,realveto
+        print('\n*----  Counter-veto situations ---')
+        negativeVetos = self.negativeVetos
+        #vetos.sort()
+        cv = len(negativeVetos)
+        print('number of counter-veto situations : %d ' % (nv))
+        for i in range(cv):
+            print('%d: r(%s >= %s) = %.2f' %\
+                      (i+1,negativeVetos[i][0][0],\
+                       negativeVetos[i][0][1],negativeVetos[i][0][2]) )
+            for lpd in negativeVetos[i][1]:
+                print('criterion: ' + str(lpd[0]))
+                print('Considerable performance difference : %.2f' % lpd[1][1] )
+                print('Counter-veto threshold              : %.2f' % lpd[1][3] )            
+            if lpdCount[negativeVetos[i][0][0]][negativeVetos[i][0][1]]['negative'] == 0:
+                if negativeVetos[i][0][2] < Med:
+                    print('Polarisation: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (negativeVetos[i][0][0],\
+                       negativeVetos[i][0][1],negativeVetos[i][0][2],Med) )
+                else:
+                    print('Polarisation: r(%s >= %s) = %.2f ==> %+.2f' %\
+                      (negativeVetos[i][0][0],\
+                        negativeVetos[i][0][1],negativeVetos[i][0][2],Max) )
+            else:
+                print('Consirable contradictory performance differences!')
+                print('Polarisation: r(%s >= %s) = %.2f ==> %.2f' %\
+                      (negativeVetos[i][0][0],\
+                       negativeVetos[i][0][1],negativeVetos[i][0][2],Med) )
+               
 
     def saveXMLRubisOutrankingDigraph(self,name='temp',category='Rubis outranking digraph',subcategory='Choice recommendation',author='digraphs Module (RB)',reference='saved from Python',Comments=False,servingD3=True):
         """
@@ -3753,7 +3904,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         self.__dict__ = selfOrig.__dict__
         
 
-class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
+class _Electre3OutrankingDigraph(OutrankingDigraph):
     """
     Specialization of the standard OutrankingDigraph class for generating classical Electre III outranking digraphs (with vetoes and no counter-vetoes).
 
@@ -4051,6 +4202,78 @@ class Electre3OutrankingDigraph(OutrankingDigraph,PerformanceTableau):
         else:
             return Decimal('0.0')
 
+# multiprocessing thread for BipolarOutrankingDigraph class
+class _myBODGThread(Process):
+    def __init__(self, threadID,digraph,\
+                 InitialSplit, tempDirName,\
+                 splitActions,\
+                 hasNoVeto, hasBipolarVeto,\
+                 hasSymmetricThresholds, Debug):
+        Process.__init__(self)
+        self.threadID = threadID
+        self.digraph = digraph
+        self.InitialSplit = InitialSplit
+        self.workingDirectory = tempDirName
+        self.splitActions = splitActions
+        self.hasNoVeto = hasNoVeto
+        self.hasBipolarVeto = hasBipolarVeto,
+        self.hasSymmetricThresholds = hasSymmetricThresholds,
+        self.Debug = Debug
+    def run(self):
+        from io import BytesIO
+        from pickle import Pickler, dumps, loads
+        from os import chdir
+        chdir(self.workingDirectory)
+##                    if Debug:
+##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
+##                    fi = open('dumpSelf.py','rb')
+##                    digraph = loads(fi.read())
+##                    fi.close()
+        digraph = self.digraph
+        splitActions = self.splitActions
+##                    fiName = 'splitActions-'+str(self.threadID)+'.py'
+##                    fi = open(fiName,'rb')
+##                    splitActions = loads(fi.read())
+##                    fi.close()
+        # compute partiel relation
+        #if (not self.hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
+        #    constructRelation = BipolarOutrankingDigraph._constructRelation
+        #else:
+        constructRelation = BipolarOutrankingDigraph._constructRelationSimple
+        if self.InitialSplit:
+            #splitRelation = BipolarOutrankingDigraph._constructRelation(
+            splitRelation = constructRelation(
+                                digraph,digraph.criteria,\
+                                digraph.evaluation,
+                                initial=splitActions,
+                                #terminal=terminal,
+                                hasNoVeto=self.hasNoVeto,
+                                hasBipolarVeto=self.hasBipolarVeto,
+                                WithConcordanceRelation=False,
+                                WithVetoCounts=False,
+                                Debug=False,
+                                hasSymmetricThresholds=self.hasSymmetricThresholds)
+        else:
+            #splitRelation = BipolarOutrankingDigraph._constructRelation(
+            splitRelation = constructRelation(
+                                digraph,digraph.criteria,\
+                                digraph.evaluation,
+                                #initial=initial,
+                                terminal=splitActions,
+                                hasNoVeto=self.hasNoVeto,
+                                hasBipolarVeto=self.hasBipolarVeto,
+                                WithConcordanceRelation=False,
+                                WithVetoCounts=False,
+                                Debug=False,
+                                hasSymmetricThresholds=self.hasSymmetricThresholds)
+        # store partial relation
+        foName = 'splitRelation-'+str(self.threadID)+'.py'
+        fo = open(foName,'wb')
+        fo.write(dumps(splitRelation,-1))
+        fo.close()
+    # .......
+
+
 class BipolarOutrankingDigraph(OutrankingDigraph):
     """
     Specialization of the abstract OutrankingDigraph root class for generating
@@ -4084,14 +4307,36 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         Default presentation method for BipolarOutrankingDigraph instance.
         """
         reprString = '*------- Object instance description ------*\n'
-        reprString += 'Instance class      : %s\n' % self.__class__.__name__
-        reprString += 'Instance name       : %s\n' % self.name
-        reprString += '# Actions           : %d\n' % self.order
-        reprString += '# Criteria          : %d\n' % len(self.criteria)
-        reprString += 'Size                : %d\n' % self.computeSize()
-        reprString += 'Determinateness (%%) : %.2f\n' % self.computeDeterminateness(InPercents=True)
-        reprString += 'Valuation domain    : [%.2f;%.2f]\n'\
-                      % (self.valuationdomain['min'],self.valuationdomain['max'])
+        reprString += 'Instance class       : %s\n' % self.__class__.__name__
+        reprString += 'Instance name        : %s\n' % self.name
+        reprString += '# Actions            : %d\n' % self.order
+        reprString += '# Criteria           : %d\n' % len(self.criteria)
+        reprString += 'Size                 : %d\n' % self.computeSize()
+        try:
+            oppDeg = self.computeOppositeness(InPercents=True)
+            reprString += 'Oppositeness (%%)    : %.2f\n' % (oppDeg['oppositeness'])
+        except:
+            pass
+        try:
+            if self.distribution == 'beta':
+                reprString += 'Uncertainty model  : %s(a=%.1f,b=%.1f)\n' %\
+                    (self.distribution,self.betaParameter,self.betaParameter)
+            else:
+                reprString += 'Uncertainty model  : %s(a=%s,b=%s\n) ' %\
+                             (self.distribution,'0','2w') 
+            reprString += 'Likelihood domain  : [-1.0;+1.0]\n'
+            reprString += 'Confidence level   : %.2f (%.1f%%\n)' %\
+                         (self.bipolarConfidenceLevel,\
+                         (self.bipolarConfidenceLevel+1.0)/2.0*100.0)
+            reprString += 'Confident majority : %.2f (%.1f%%)\n' %\
+                (self.confidenceCutLevel,\
+                (self.confidenceCutLevel+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'))
+        except:
+            pass
+        reprString += 'Determinateness (%%)  : %.2f\n' %\
+                      self.computeDeterminateness(InPercents=True)
+        reprString += 'Valuation domain     : [%.2f;%.2f]\n' \
+            % (self.valuationdomain['min'],self.valuationdomain['max'])
         #reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
         reprString += 'Attributes          : %s\n' % list(self.__dict__.keys())
         try:
@@ -4114,11 +4359,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         return reprString
     
     def __init__(self,argPerfTab=None,\
+                 objectivesSubset=None,
+                 criteriaSubset=None,
                  coalition=None,\
                  actionsSubset=None,\
                  hasNoVeto=False,\
                  hasBipolarVeto=True,\
-                 Normalized=False,\
+                 Normalized=True,\
                  CopyPerfTab=True,\
                  BigData=False,\
                  Threading=False,\
@@ -4183,22 +4430,80 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         except:
             self.valuationdomain['precision'] = Decimal('0')
             
-        # objectives and criteria
-        try:
+        # objectives
+        if objectivesSubset == None:
+            try:
+                if CopyPerfTab:
+                    self.objectives = deepcopy(perfTab.objectives)
+                else:
+                    self.objectives = perfTab.objectives
+            except:
+                pass
+        else:
+            objectives = OrderedDict()
+            for obj in objectivesSubset:
+                if CopyPerfTab:
+                    objectives[obj] = deepcopy(perfTab.objectives[obj])
+                else:
+                    objectives[obj] = perfTab.objectives[obj]
+            self.objectives = objectives
+                
+        # criteria coalition
+        if criteriaSubset == None and objectivesSubset == None and coalition == None:
             if CopyPerfTab:
-                self.objectives = deepcopy(perfTab.objectives)
+                self.criteria = deepcopy(perfTab.criteria)
             else:
-                self.objectives = perfTab.objectives
-        except:
-            pass
+                self.criteria = perfTab.criteria
+        else:
+            criteria = OrderedDict()
+            if criteriaSubset == None:
+                if objectivesSubset == None and coalition == None:
+                    if criteriaSubset == None:
+                        coalition = list(perfTab.criteria.keys())
+                    else:
+                        coalition = criteriaSubset
+
+                elif objectivesSubset != None and coalition == None:
+                    coalition = []
+                    for obj in objectivesSubset:
+                        objCrit = self.objectives[obj]['criteria']
+                        coalition += objCrit
+                elif objectivesSubset != None and coalition != None:
+                    print('Error: Objectives Subset and coalition given')
+                    return
+                else:
+                    for g in coalition:
+                        if CopyPerfTab:
+                            criteria[g] = deepcopy(perfTab.criteria[g])
+                        else:
+                            criteria[g] = perfTab.criteria[g]
+            else:
+                for g in criteriaSubset:
+                    if CopyPerfTab:
+                        criteria[g] = deepcopy(perfTab.criteria[g])
+                    else:
+                        criteria[g] = perfTab.criteria[g]
+            self.criteria = criteria
+        # convert criteria weights to Decimal format    
         criteria = OrderedDict()
-        if coalition == None:
-            coalition = perfTab.criteria.keys()
+        if objectivesSubset == None:
+            if coalition == None:
+                if criteriaSubset == None:
+                    coalition = list(perfTab.criteria.keys())
+                else:
+                    coalition = criteriaSubset
+        else:
+            coalition = []
+            for obj in objectives:
+                objCrit = self.objectives[obj]['criteria']
+                coalition += objCrit
+
         for g in coalition:
             if CopyPerfTab:
                 criteria[g] = deepcopy(perfTab.criteria[g])
             else:
                 criteria[g] = perfTab.criteria[g]
+                    
         self.criteria = criteria
         self.convertWeight2Decimal()
 
@@ -4370,78 +4675,9 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
             from copy import copy, deepcopy
             from io import BytesIO
             from pickle import Pickler, dumps, loads, load
-            from multiprocessing import Process, Lock,\
-                                        active_children, cpu_count
+            #from multiprocessing import Process, Lock,\
+            #                            active_children, cpu_count
             #Debug=True
-            class myThread(Process):
-                def __init__(self, threadID,digraph,\
-                             InitialSplit, tempDirName,\
-                             splitActions,\
-                             hasNoVeto, hasBipolarVeto,\
-                             hasSymmetricThresholds, Debug):
-                    Process.__init__(self)
-                    self.threadID = threadID
-                    self.digraph = digraph
-                    self.InitialSplit = InitialSplit
-                    self.workingDirectory = tempDirName
-                    self.splitActions = splitActions
-                    self.hasNoVeto = hasNoVeto
-                    self.hasBipolarVeto = hasBipolarVeto,
-                    hasSymmetricThresholds = hasSymmetricThresholds,
-                    self.Debug = Debug
-                def run(self):
-                    from io import BytesIO
-                    from pickle import Pickler, dumps, loads
-                    from os import chdir
-                    chdir(self.workingDirectory)
-##                    if Debug:
-##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
-##                    fi = open('dumpSelf.py','rb')
-##                    digraph = loads(fi.read())
-##                    fi.close()
-                    digraph = self.digraph
-                    splitActions = self.splitActions
-##                    fiName = 'splitActions-'+str(self.threadID)+'.py'
-##                    fi = open(fiName,'rb')
-##                    splitActions = loads(fi.read())
-##                    fi.close()
-                    # compute partiel relation
-                    if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
-                        constructRelation = BipolarOutrankingDigraph._constructRelation
-                    else:
-                        constructRelation = BipolarOutrankingDigraph._constructRelationSimple
-                    if self.InitialSplit:
-                        #splitRelation = BipolarOutrankingDigraph._constructRelation(
-                        splitRelation = constructRelation(
-                                            digraph,digraph.criteria,\
-                                            digraph.evaluation,
-                                            initial=splitActions,
-                                            #terminal=terminal,
-                                            hasNoVeto=hasNoVeto,
-                                            hasBipolarVeto=hasBipolarVeto,
-                                            WithConcordanceRelation=False,
-                                            WithVetoCounts=False,
-                                            Debug=False,
-                                            hasSymmetricThresholds=hasSymmetricThresholds)
-                    else:
-                        #splitRelation = BipolarOutrankingDigraph._constructRelation(
-                        splitRelation = constructRelation(
-                                            digraph,digraph.criteria,\
-                                            digraph.evaluation,
-                                            #initial=initial,
-                                            terminal=splitActions,
-                                            hasNoVeto=hasNoVeto,
-                                            hasBipolarVeto=hasBipolarVeto,
-                                            WithConcordanceRelation=False,
-                                            WithVetoCounts=False,
-                                            Debug=False,
-                                            hasSymmetricThresholds=hasSymmetricThresholds)
-                    # store partial relation
-                    foName = 'splitRelation-'+str(self.threadID)+'.py'
-                    fo = open(foName,'wb')
-                    fo.write(dumps(splitRelation,-1))
-                    fo.close()
-                # .......
              
             if Comments:
                 print('Threading ...')
@@ -4519,7 +4755,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
 ##                    spa = dumps(splitActions,-1)
 ##                    fo.write(spa)
 ##                    fo.close()
-                    splitThread = myThread(j,self,InitialSplit,
+                    splitThread = _myBODGThread(j,self,InitialSplit,
                                            tempDirName,splitActions,
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)
@@ -6914,7 +7150,7 @@ class _BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTable
         fo.close()
 
 
-class _RandomElectre3OutrankingDigraph(Electre3OutrankingDigraph,PerformanceTableau):
+class _RandomElectre3OutrankingDigraph(_Electre3OutrankingDigraph):
     """
     Parameters:
         | n := nbr of actions, p := number criteria, scale := [Min,Max],
@@ -7886,7 +8122,43 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph):
                     relation[a][b] = Med
         self.relation = relation
         return stability
-         
+
+    def showRelationTable(self,IntegerValues=False,
+                          actionsSubset= None,
+                          Sorted=True,
+                          hasLPDDenotation=False,
+                          StabilityDenotation=True,
+                          hasLatexFormat=False,
+                          hasIntegerValuation=False,
+                          relation=None,
+                          ReflexiveTerms=True):
+        """
+        prints the relation valuation in actions X actions table format by default with
+        the stability denotation in brackets:
+
+        +4 | -4 : unanimous outranking | outranked situation;
+
+        +3 | -3 : validated outranking | outranked situation in each coalition
+        of equisignificant criteria;
+
+        +2 | -2 : outranking | outranked situation validated with all potential significance weights
+        that are compatible with the given significance preorder;
+
+        +1 | -1 : validated outranking | outranked situation with the given significance weights;
+
+        0 : indeterminate relational situation.
+
+        """
+        OutrankingDigraph.showRelationTable(self,
+                          IntegerValues=IntegerValues,
+                          actionsSubset= actionsSubset,
+                          Sorted=Sorted,
+                          hasLPDDenotation=hasLPDDenotation,
+                          StabilityDenotation=StabilityDenotation,
+                          hasLatexFormat=hasLatexFormat,
+                          hasIntegerValuation=hasIntegerValuation,
+                          relation=relation,
+                          ReflexiveTerms=ReflexiveTerms)
 
 class OldRobustOutrankingDigraph(BipolarOutrankingDigraph):
     """
@@ -9055,17 +9327,21 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
         print('Valuation domain   : [%+.3f; %+.3f] ' % (self.valuationdomain['min'],
                                                    self.valuationdomain['max']))
-        print('Uncertainty model  : %s(a=%.1f,b=%.1f) ' % (self.distribution,
+        if self.distribution == 'beta':
+            print('Uncertainty model  : %s(a=%.1f,b=%.1f) ' % (self.distribution,
                                                          self.betaParameter,
                                                          self.betaParameter)
                                                          )
+        else:
+            print('Uncertainty model  : %s(a=%s,b=%s) ' % (self.distribution,'0','2w') )
+          
         print('Likelihood domain  : [-1.0;+1.0] ')
         print('Confidence level   : %.2f (%.1f%%) ' % (self.bipolarConfidenceLevel,
                                                      (self.bipolarConfidenceLevel+1.0)/2.0*100.0))
 
         print('Confident majority : %.2f (%.1f%%) ' % (self.confidenceCutLevel,\
                             (self.confidenceCutLevel+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0')))
-        deter = self.computeDeterminateness()
+        deter = self.computeDeterminateness(InPercents=False)
         print('Determinateness    : %.2f (%.1f%%)' % (deter,\
                             (deter+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0')))
         print('\n')
@@ -9417,7 +9693,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 ##            try:
 ##                largePerformanceDifferencesCount = self.largePerformanceDifferencesCount
 ##                gnv = BipolarOutrankingDigraph(self.performanceTableau,hasNoVeto=True)
-##                gnv.recodeValuation(self.valuationdomain['min'],self.valuationdomain['max'])
+##                recodeValuation(self.valuationdomain['min'],self.valuationdomain['max'])
 ##            except:
 
         hasLPDDenotation = False
@@ -9479,14 +9755,14 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             for y in actionsList:
                 if hasIntegerValuation:
                     if hasLPDDenotation:
-                        print('%+d ' % (gnv.relation[x[1]][y[1]]), end=' ')
+                        print('%+d ' % (relation[x[1]][y[1]]), end=' ')
                     elif hasLatexFormat:
                         print('$%+d$ &' % (relation[x[1]][y[1]]), end=' ')
                     else:
                         print('%+d ' % (relation[x[1]][y[1]]), end=' ')
                 else:
                     if hasLPDDenotation:
-                        print('%+2.2f ' % (gnv.relation[x[1]][y[1]]), end=' ')
+                        print('%+2.2f ' % (relation[x[1]][y[1]]), end=' ')
                     elif hasLatexFormat:
                         print('$%+2.2f$ & ' % (relation[x[1]][y[1]]), end=' ')       
                     else:
@@ -9505,6 +9781,356 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             
                 
         print('\n')
+    
+
+class CoalitionsOutrankingsFusionDigraph(BipolarOutrankingDigraph):
+    """
+    With a list of criteria coalitions, a fusion digraph is constructed form the fusion of the corresponding marginal coalitions restricted bipolar outranking digraphs.
+
+    When *coalitionsList* == None, an 'o-average' fusion of the decision objectives restricted outranking digraphs is produced (see *UnOpposedBipolarOutrankingDigraph* class).
+    """
+    def __init__(self,argPerfTab,\
+                     coalitionsList=None,\
+                     actionsSubset=None,\
+                     CopyPerfTab=True,\
+                     Comments=False):
+        from copy import deepcopy
+        from time import time
+
+        # set initial time stamp
+        tt = time()
+        
+        # ----  performance tableau data input 
+        if argPerfTab == None:
+            print('Performance tableau required !')
+            #perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
+        elif isinstance(argPerfTab,(str)):
+            perfTab = PerformanceTableau(argPerfTab)
+        else:
+            perfTab = argPerfTab
+
+        # transfering the performance tableau data to self
+        self.name = 'objectivesFusion_' + perfTab.name
+        # actions
+        if actionsSubset == None:
+            if isinstance(perfTab.actions,list):
+                actions = {}
+                for x in perfTab.actions:
+                    actions[x] = {'name': str(x)}
+                self.actions = actions
+            else:
+                if CopyPerfTab:
+                    self.actions = deepcopy(perfTab.actions)
+                else:
+                    self.actions = perfTab.actions
+        else:
+            actions = {}
+            for x in actionsSubset:
+                actions[x] = {'name': str(x)}
+            self.actions = actions
+     
+        # valuation domain
+        Min =   Decimal('-1.0')
+        Med =   Decimal('0.0')
+        Max =   Decimal('1.0')
+        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        try:
+            self.valuationdomain['precision'] = perfTab.valuationPrecision
+        except:
+            self.valuationdomain['precision'] = Decimal('0')
+ 
+        # objectives and criteria
+        try:
+            if CopyPerfTab:
+                self.objectives = deepcopy(perfTab.objectives)
+                self.criteria = deepcopy(perfTab.criteria)
+            else:
+                self.objectives = perfTab.objectives
+                self.criteria = perfTab.criteria
+        except:
+            pass
+
+        #  install method Data and parameters
+        methodData = {}
+        try:
+            valuationType = perfTab.parameter['valuationType']
+            variant = perfTab.parameter['variant']
+        except:
+            valuationType = 'bipolar'
+            variant = 'standard'
+        methodData['parameter'] = {'valuationType': valuationType, 'variant': variant}
+        try:
+            vetoType = perfTab.parameter['vetoType']
+            methodData['parameter']['vetoType'] = vetoType
+        except:
+            vetoType = 'normal'
+            methodData['parameter']['vetoType'] = vetoType
+        if vetoType == 'bipolar':
+            hasBipolarVeto = True
+        self.methodData = methodData
+
+        # insert performance Data
+        if CopyPerfTab:
+            self.evaluation = deepcopy(perfTab.evaluation)
+        else:
+            self.evaluation = perfTab.evaluation
+        try:
+            if CopyPerfTab:
+                self.description = deepcopy(perfTab.description)
+        except:
+            pass
+        
+        # init general digraph Data
+        self.order = len(self.actions)
+        
+        # finished data input time stamp
+        self.runTimes = {'dataInput': time()-tt }
+
+        # ---------- construct outranking relation
+        # initial time stamp
+        tcp = time()
+        
+        actions = self.actions
+        if coalitionsList == None:
+            try:
+                objectives = self.objectives
+                coalitionsList = [objectives[obj]['criteria'] for obj in objectives]
+                #print(coalitionsList)
+            except:
+                print('!!! Error: No coalitions given and performance tableau has no objectives')
+                return
+        marginalRelations = {}
+        marginalDigraphs = []
+        for coalition in coalitionsList:
+            mg = BipolarOutrankingDigraph(perfTab,criteriaSubset=coalition)
+            marginalRelations[tuple(coalition)] = deepcopy(mg.relation)
+            marginalDigraphs.append(mg)
+        weights = []
+        for coalition in coalitionsList:
+            sumMarginalWeights = Decimal('0')
+            for g in coalition:
+                sumMarginalWeights += self.criteria[g]['weight']
+            weights.append(sumMarginalWeights)            
+        #weights = [objectives[obj]['weight'] for obj in objectives]
+        fg = FusionLDigraph(marginalDigraphs,'o-average',weights)
+        self.relation = deepcopy(fg.relation)
+        self.marginalRelationsRelations = marginalRelations
+
+        # finished relation computing time stamp
+        self.runTimes['computeRelation'] = time() - tcp
+
+        # ----  computing the gamma sets
+        tg = time()
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        self.runTimes['gammaSets'] = time() - tg 
+
+        # total constructor time
+        self.runTimes['totalTime'] = time() - tt
+        if Comments:
+            print(self)
+
+
+class UnOpposedBipolarOutrankingDigraph(CoalitionsOutrankingsFusionDigraph):
+    """
+    When operating an *o-average* fusion of the mariginal outranking digraphs restricted to the coalition of criteria supporting each decision objective, we obtain **unopposed** outranking situtations, namely *validated* by one or more decision objectives without being *invalidated* by any other decision objective. 
+
+    These positive, as well as negative outranking characteristics, appear hence stable with respect to the importance of the decision objectives when proportional criteria significances are given. 
+
+    Furthermore, polarising the outranking digraph with considerable performance differences is here restricted to each decision objective, which makes it easier to decide on veto discrimination thresholds.
+   
+    """
+
+    def __init__(self,argPerfTab,actionsSubset=None,\
+                 CopyPerfTab=True,Comments=False):
+
+                 
+        from copy import deepcopy
+        for att in argPerfTab.__dict__:
+            self.__dict__[att] = argPerfTab.__dict__[att]
+        try:
+            coalitions = [self.objectives[obj]['criteria'] for obj in self.objectives]
+            if Comments:
+                print('coalitions:',coalitions)
+        except:
+            print('!! Error: the given performance tableau does not contain objectives.')
+            return
+        uoo = CoalitionsOutrankingsFusionDigraph(argPerfTab,\
+                                            CopyPerfTab=False,\
+                                            coalitionsList=coalitions,\
+                                            actionsSubset=actionsSubset,\
+                                            Comments=Comments)
+        for att in uoo.__dict__:
+            self.__dict__[att] = uoo.__dict__[att]
+        self.name += '_unopposed_outrankings'
+        if Comments:
+            print(self)
+
+    def computeOppositeness(self,InPercents=False):
+        """
+        Computes the degree in *[0.0, 1.0]* of oppositeness --**preferential disagreement**-- of the multiple decision objectives.
+        
+        Renders a dictionary with three entries:
+
+        - *standardSize* : size of the corresponding
+          standard bipolar-valued outranking digraph;
+        - *unopposedSize* : size of the the corresponding
+          unopposed bipolar-valued outranking digraph;
+        - *oppositeness* : (1.0 - unopposedSize/standardSize);
+          if *InPercents* has value True, the *oppositeness* is rendered in percents format.
+    
+        """
+        from outrankingDigraphs import BipolarOutrankingDigraph
+        du = self.computeSize()
+        g = BipolarOutrankingDigraph(self)
+        d = g.computeSize()
+        if InPercents:
+            op = (1.0 -(du/d))*100.0
+        else:
+            op = (1.0 -(du/d))
+        return {'standardSize': d, 'unopposedSize': du, 'oppositeness': op}
+        
+        
+class SymmetricAverageFusionOutrankingDigraph(BipolarOutrankingDigraph):
+    """
+    in development !
+    """
+    def __init__(self,argPerfTab,actionsSubset=None,coalition=None,\
+                 CopyPerfTab=True,Normalized=True,Comments=False):
+        from copy import deepcopy
+        from time import time
+
+        # set initial time stamp
+        tt = time()
+        
+        # ----  performance tableau data input 
+        if argPerfTab == None:
+            print('Performance tableau required !')
+            #perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
+        elif isinstance(argPerfTab,(str)):
+            perfTab = PerformanceTableau(argPerfTab)
+        else:
+            perfTab = argPerfTab
+
+        # transfering the performance tableau data to self
+        self.name = 'symAvFusion_' + perfTab.name
+        # actions
+        if actionsSubset == None:
+            if isinstance(perfTab.actions,list):
+                actions = {}
+                for x in perfTab.actions:
+                    actions[x] = {'name': str(x)}
+                self.actions = actions
+            else:
+                if CopyPerfTab:
+                    self.actions = deepcopy(perfTab.actions)
+                else:
+                    self.actions = perfTab.actions
+        else:
+            actions = {}
+            for x in actionsSubset:
+                actions[x] = {'name': str(x)}
+            self.actions = actions
+     
+        # valuation domain
+        if Normalized:
+            Min =   Decimal('-1.0')
+            Med =   Decimal('0.0')
+            Max =   Decimal('1.0')
+        else:
+            Min =   Decimal('-100.0')
+            Med =   Decimal('0.0')
+            Max =   Decimal('100.0')
+        self.valuationdomain = {'min':Min,'med':Med,'max':Max}
+        try:
+            self.valuationdomain['precision'] = perfTab.valuationPrecision
+        except:
+            self.valuationdomain['precision'] = Decimal('0')
+ 
+        # objectives and criteria
+        try:
+            if CopyPerfTab:
+                self.objectives = deepcopy(perfTab.objectives)
+            else:
+                self.objectives = perfTab.objectives
+        except:
+            pass
+        criteria = OrderedDict()
+        if coalition == None:
+            coalition = perfTab.criteria.keys()
+        for g in coalition:
+            if CopyPerfTab:
+                criteria[g] = deepcopy(perfTab.criteria[g])
+            else:
+                criteria[g] = perfTab.criteria[g]
+        self.criteria = criteria
+        self.convertWeight2Decimal()
+
+        #  install method Data and parameters
+        methodData = {}
+        try:
+            valuationType = perfTab.parameter['valuationType']
+            variant = perfTab.parameter['variant']
+        except:
+            valuationType = 'bipolar'
+            variant = 'standard'
+        methodData['parameter'] = {'valuationType': valuationType, 'variant': variant}
+        try:
+            vetoType = perfTab.parameter['vetoType']
+            methodData['parameter']['vetoType'] = vetoType
+        except:
+            vetoType = 'normal'
+            methodData['parameter']['vetoType'] = vetoType
+        if vetoType == 'bipolar':
+            hasBipolarVeto = True
+        self.methodData = methodData
+
+        # insert performance Data
+        if CopyPerfTab:
+            self.evaluation = deepcopy(perfTab.evaluation)
+        else:
+            self.evaluation = perfTab.evaluation
+        try:
+            if CopyPerfTab:
+                self.description = deepcopy(perfTab.description)
+        except:
+            pass
+        # init general digraph Data
+        self.order = len(self.actions)
+        
+        # finished data input time stamp
+        self.runTimes = {'dataInput': time()-tt }
+
+        # ---------- construct outranking relation
+        # initial time stamp
+        tcp = time()
+        
+        actions = self.actions
+        criteria = self.criteria
+        margG = []
+        for g in criteria:
+            gg = BipolarOutrankingDigraph(perfTab,coalition=[g],\
+                                          CopyPerfTab=CopyPerfTab,\
+                                          Normalized=True)
+            margG.append(gg)
+        weights = [criteria[g]['weight'] for g in criteria]
+        fg = FusionLDigraph(margG,'o-average',weights)
+        self.relation = deepcopy(fg.relation)
+        
+        # finished relation computing time stamp
+        self.runTimes['computeRelation'] = time() - tcp
+
+        # ----  computing the gamma sets
+        tg = time()
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        self.runTimes['gammaSets'] = time() - tg 
+
+        # total constructor time
+        self.runTimes['totalTime'] = time() - tt
+        if Comments:
+            print(self)
+
 
 class _RubisRestServer(ServerProxy):
     """
@@ -9698,6 +10324,7 @@ if __name__ == "__main__":
 
     import copy
     from time import time, sleep
+    from random import randint
     from outrankingDigraphs import BipolarOutrankingDigraph
     from transitiveDigraphs import RankingByChoosingDigraph
     
@@ -9712,16 +10339,27 @@ if __name__ == "__main__":
 ##                                    NegativeWeights=True,
 ##                                    negativeWeightProbability=0.25,
 ##                                   seed=102)
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=7,\
-                                   numberOfCriteria=9,\
-                                   seed=102)
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=15,\
+                                   numberOfCriteria=13,\
+                                   vetoProbability=0.5,\
+                                   #seed=randint(1,1000),\
+                                   seed=21)
     g = BipolarOutrankingDigraph(t,Normalized=True,
-                                  tempDir=None,nbrCores=8,Comments=True,Debug=False)
-    g.showRelationTable(StabilityDenotation=True)
-    rg = RobustOutrankingDigraph(t,Debug=False)
-    rg.showRelationTable(StabilityDenotation=True)
-    cg = ConfidentBipolarOutrankingDigraph(t)
-    cg.showRelationTable()
+                                  tempDir=None,nbrCores=8,Comments=False,Debug=False)
+##    g.showRelationTable(hasLPDDenotation=True,ReflexiveTerms=False)
+    g.showRelationTable()
+    g.exportGraphViz()
+##    g.showConsiderablePerformancesPolarisation()       
+    uog = UnOpposedBipolarOutrankingDigraph(t,Comments=True)
+    uog.showRelationTable()
+    uog.exportGraphViz()
+
+                  
+##    g.showRelationTable(StabilityDenotation=True)
+##    rg = RobustOutrankingDigraph(t,Debug=False)
+##    rg.showRelationTable()
+##    cg = ConfidentBipolarOutrankingDigraph(t)
+##    cg.showRelationTable()
     
     #print(g1)
     #g1.saveXMCDA2RubisChoiceRecommendation()
@@ -9799,42 +10437,4 @@ if __name__ == "__main__":
 
     
 #############################
-# Log record for changes:
-# $Log: outrankingDigraphs.py,v $
-# Revision 1.43  2013/01/01 14:10:53  bisi
-# added computePrudentBestChoiceRecommendation() method to the Digraph class
-#
-# Revision 1.42  2012/07/31 09:25:18  bisi
-# Added a constructor ConverseDigraph() for the reciprocal of a digraph
-#
-# Revision 1.38  2012/06/21 08:34:13  bisi
-# Added strict and weak Condorcet Winners detecters
-#
-# Revision 1.37  2012/06/20 18:35:38  bisi
-# Abstracted rankingByChoosing related methods to the generic Digraph class
-#
-# Revision 1.28  2012/06/16 12:49:03  bisi
-# refactoring ordinal correlation computation
-#
-# Revision 1.24  2012/06/13 15:26:25  bisi
-# Added ranking by choosing with progressive chordless circuits elimination
-#
-# Revision 1.22  2012/06/10 15:55:57  bisi
-# debugging digraph polarization methods
-#
-# Revision 1.17  2012/06/08 07:14:33  bisi
-# working on the ranking by choosing algorithm
-#
-# Revision 1.16  2012/06/07 12:15:47  bisi
-# working on chordless circuits elimination techniques
-#
-# Revision 1.15  2012/06/06 06:12:36  bisi
-# refining the circuits elimination strategy
-#
-# Revision 1.14  2012/06/05 11:28:31  bisi
-# new extraction of chordless odd cricuits
-#
-# Revision 1.9  2012/05/22 04:34:49  bisi
-# added equiobjectives weights generator to RandomCBPerformanceTableau()
-#
 ############################

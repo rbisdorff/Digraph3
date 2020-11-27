@@ -6,11 +6,11 @@
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
 <tr bgcolor="#7799ee">
 <td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>xmcda</strong></big></big> (version Branch: 3.5 $)</font></td
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>xmcda</strong></big></big> (version Branch: 3.9 $)</font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/xmcda.py">/home/bisdorff/Documents/LoewSVN/Digraph3/pyDoc/xmcda.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/GitHub/Digraph3Git/pyDoc/xmcda.py">/home/bisdorff/Documents/GitHub/Digraph3Git/pyDoc/xmcda.py</a></font></td></tr></table>
     <p><tt>Python3+&nbsp;implementation&nbsp;of&nbsp;xmcda&nbsp;tools<br>
-Copyright&nbsp;(C)&nbsp;2016-2019&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
+Copyright&nbsp;(C)&nbsp;2016-2020&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
 &nbsp;<br>
@@ -27,14 +27,13 @@ Copyright&nbsp;(C)&nbsp;2016-2019&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="itertools.html">itertools</a><br>
 <a href="collections.abc.html">collections.abc</a><br>
 <a href="codecs.html">codecs</a><br>
-</td><td width="25%" valign=top><a href="copy.html">copy</a><br>
-<a href="decimal.html">decimal</a><br>
+</td><td width="25%" valign=top><a href="decimal.html">decimal</a><br>
 <a href="xml.sax.handler.html">xml.sax.handler</a><br>
-</td><td width="25%" valign=top><a href="json.html">json</a><br>
-<a href="os.html">os</a><br>
+<a href="json.html">json</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
 <a href="string.html">string</a><br>
-</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
-<a href="tempfile.html">tempfile</a><br>
+<a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top><a href="tempfile.html">tempfile</a><br>
 <a href="xml.sax.xmlreader.html">xml.sax.xmlreader</a><br>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -43,7 +42,57 @@ Copyright&nbsp;(C)&nbsp;2016-2019&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-saveRobustRubisChoiceXSL"><strong>saveRobustRubisChoiceXSL</strong></a>(fileName='xmcda2RubisRobustChoice.xsl')</dt><dd><tt>Save&nbsp;the&nbsp;robust&nbsp;version&nbsp;of&nbsp;the&nbsp;Rubis&nbsp;Best-Choice&nbsp;XMCDA&nbsp;2.0&nbsp;XSL&nbsp;style&nbsp;sheet&nbsp;in&nbsp;the&nbsp;current&nbsp;working&nbsp;directory<br>
+<td width="100%"><dl><dt><a name="-dumps"><strong>dumps</strong></a>(obj, protocol=None, *, fix_imports=True)</dt><dd><tt>Return&nbsp;the&nbsp;pickled&nbsp;representation&nbsp;of&nbsp;the&nbsp;object&nbsp;as&nbsp;a&nbsp;bytes&nbsp;object.<br>
+&nbsp;<br>
+The&nbsp;optional&nbsp;*protocol*&nbsp;argument&nbsp;tells&nbsp;the&nbsp;pickler&nbsp;to&nbsp;use&nbsp;the&nbsp;given<br>
+protocol;&nbsp;supported&nbsp;protocols&nbsp;are&nbsp;0,&nbsp;1,&nbsp;2,&nbsp;3&nbsp;and&nbsp;4.&nbsp;&nbsp;The&nbsp;default<br>
+protocol&nbsp;is&nbsp;3;&nbsp;a&nbsp;backward-incompatible&nbsp;protocol&nbsp;designed&nbsp;for&nbsp;Python&nbsp;3.<br>
+&nbsp;<br>
+Specifying&nbsp;a&nbsp;negative&nbsp;protocol&nbsp;version&nbsp;selects&nbsp;the&nbsp;highest&nbsp;protocol<br>
+version&nbsp;supported.&nbsp;&nbsp;The&nbsp;higher&nbsp;the&nbsp;protocol&nbsp;used,&nbsp;the&nbsp;more&nbsp;recent&nbsp;the<br>
+version&nbsp;of&nbsp;Python&nbsp;needed&nbsp;to&nbsp;read&nbsp;the&nbsp;pickle&nbsp;produced.<br>
+&nbsp;<br>
+If&nbsp;*fix_imports*&nbsp;is&nbsp;True&nbsp;and&nbsp;*protocol*&nbsp;is&nbsp;less&nbsp;than&nbsp;3,&nbsp;pickle&nbsp;will<br>
+try&nbsp;to&nbsp;map&nbsp;the&nbsp;new&nbsp;Python&nbsp;3&nbsp;names&nbsp;to&nbsp;the&nbsp;old&nbsp;module&nbsp;names&nbsp;used&nbsp;in<br>
+Python&nbsp;2,&nbsp;so&nbsp;that&nbsp;the&nbsp;pickle&nbsp;data&nbsp;stream&nbsp;is&nbsp;readable&nbsp;with&nbsp;Python&nbsp;2.</tt></dd></dl>
+ <dl><dt><a name="-load"><strong>load</strong></a>(file, *, fix_imports=True, encoding='ASCII', errors='strict')</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;an&nbsp;object&nbsp;from&nbsp;the&nbsp;pickle&nbsp;data&nbsp;stored&nbsp;in&nbsp;a&nbsp;file.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;equivalent&nbsp;to&nbsp;``Unpickler(file).<a href="#-load">load</a>()``,&nbsp;but&nbsp;may&nbsp;be&nbsp;more<br>
+efficient.<br>
+&nbsp;<br>
+The&nbsp;protocol&nbsp;version&nbsp;of&nbsp;the&nbsp;pickle&nbsp;is&nbsp;detected&nbsp;automatically,&nbsp;so&nbsp;no<br>
+protocol&nbsp;argument&nbsp;is&nbsp;needed.&nbsp;&nbsp;Bytes&nbsp;past&nbsp;the&nbsp;pickled&nbsp;object's<br>
+representation&nbsp;are&nbsp;ignored.<br>
+&nbsp;<br>
+The&nbsp;argument&nbsp;*file*&nbsp;must&nbsp;have&nbsp;two&nbsp;methods,&nbsp;a&nbsp;read()&nbsp;method&nbsp;that&nbsp;takes<br>
+an&nbsp;integer&nbsp;argument,&nbsp;and&nbsp;a&nbsp;readline()&nbsp;method&nbsp;that&nbsp;requires&nbsp;no<br>
+arguments.&nbsp;&nbsp;Both&nbsp;methods&nbsp;should&nbsp;return&nbsp;bytes.&nbsp;&nbsp;Thus&nbsp;*file*&nbsp;can&nbsp;be&nbsp;a<br>
+binary&nbsp;file&nbsp;object&nbsp;opened&nbsp;for&nbsp;reading,&nbsp;an&nbsp;io.BytesIO&nbsp;object,&nbsp;or&nbsp;any<br>
+other&nbsp;custom&nbsp;object&nbsp;that&nbsp;meets&nbsp;this&nbsp;interface.<br>
+&nbsp;<br>
+Optional&nbsp;keyword&nbsp;arguments&nbsp;are&nbsp;*fix_imports*,&nbsp;*encoding*&nbsp;and&nbsp;*errors*,<br>
+which&nbsp;are&nbsp;used&nbsp;to&nbsp;control&nbsp;compatibility&nbsp;support&nbsp;for&nbsp;pickle&nbsp;stream<br>
+generated&nbsp;by&nbsp;Python&nbsp;2.&nbsp;&nbsp;If&nbsp;*fix_imports*&nbsp;is&nbsp;True,&nbsp;pickle&nbsp;will&nbsp;try&nbsp;to<br>
+map&nbsp;the&nbsp;old&nbsp;Python&nbsp;2&nbsp;names&nbsp;to&nbsp;the&nbsp;new&nbsp;names&nbsp;used&nbsp;in&nbsp;Python&nbsp;3.&nbsp;&nbsp;The<br>
+*encoding*&nbsp;and&nbsp;*errors*&nbsp;tell&nbsp;pickle&nbsp;how&nbsp;to&nbsp;decode&nbsp;8-bit&nbsp;string<br>
+instances&nbsp;pickled&nbsp;by&nbsp;Python&nbsp;2;&nbsp;these&nbsp;default&nbsp;to&nbsp;'ASCII'&nbsp;and&nbsp;'strict',<br>
+respectively.&nbsp;&nbsp;The&nbsp;*encoding*&nbsp;can&nbsp;be&nbsp;'bytes'&nbsp;to&nbsp;read&nbsp;these&nbsp;8-bit<br>
+string&nbsp;instances&nbsp;as&nbsp;bytes&nbsp;objects.</tt></dd></dl>
+ <dl><dt><a name="-loads"><strong>loads</strong></a>(data, *, fix_imports=True, encoding='ASCII', errors='strict')</dt><dd><tt>Read&nbsp;and&nbsp;return&nbsp;an&nbsp;object&nbsp;from&nbsp;the&nbsp;given&nbsp;pickle&nbsp;data.<br>
+&nbsp;<br>
+The&nbsp;protocol&nbsp;version&nbsp;of&nbsp;the&nbsp;pickle&nbsp;is&nbsp;detected&nbsp;automatically,&nbsp;so&nbsp;no<br>
+protocol&nbsp;argument&nbsp;is&nbsp;needed.&nbsp;&nbsp;Bytes&nbsp;past&nbsp;the&nbsp;pickled&nbsp;object's<br>
+representation&nbsp;are&nbsp;ignored.<br>
+&nbsp;<br>
+Optional&nbsp;keyword&nbsp;arguments&nbsp;are&nbsp;*fix_imports*,&nbsp;*encoding*&nbsp;and&nbsp;*errors*,<br>
+which&nbsp;are&nbsp;used&nbsp;to&nbsp;control&nbsp;compatibility&nbsp;support&nbsp;for&nbsp;pickle&nbsp;stream<br>
+generated&nbsp;by&nbsp;Python&nbsp;2.&nbsp;&nbsp;If&nbsp;*fix_imports*&nbsp;is&nbsp;True,&nbsp;pickle&nbsp;will&nbsp;try&nbsp;to<br>
+map&nbsp;the&nbsp;old&nbsp;Python&nbsp;2&nbsp;names&nbsp;to&nbsp;the&nbsp;new&nbsp;names&nbsp;used&nbsp;in&nbsp;Python&nbsp;3.&nbsp;&nbsp;The<br>
+*encoding*&nbsp;and&nbsp;*errors*&nbsp;tell&nbsp;pickle&nbsp;how&nbsp;to&nbsp;decode&nbsp;8-bit&nbsp;string<br>
+instances&nbsp;pickled&nbsp;by&nbsp;Python&nbsp;2;&nbsp;these&nbsp;default&nbsp;to&nbsp;'ASCII'&nbsp;and&nbsp;'strict',<br>
+respectively.&nbsp;&nbsp;The&nbsp;*encoding*&nbsp;can&nbsp;be&nbsp;'bytes'&nbsp;to&nbsp;read&nbsp;these&nbsp;8-bit<br>
+string&nbsp;instances&nbsp;as&nbsp;bytes&nbsp;objects.</tt></dd></dl>
+ <dl><dt><a name="-saveRobustRubisChoiceXSL"><strong>saveRobustRubisChoiceXSL</strong></a>(fileName='xmcda2RubisRobustChoice.xsl')</dt><dd><tt>Save&nbsp;the&nbsp;robust&nbsp;version&nbsp;of&nbsp;the&nbsp;Rubis&nbsp;Best-Choice&nbsp;XMCDA&nbsp;2.0&nbsp;XSL&nbsp;style&nbsp;sheet&nbsp;in&nbsp;the&nbsp;current&nbsp;working&nbsp;directory<br>
 This&nbsp;style&nbsp;sheet&nbsp;allows&nbsp;to&nbsp;browse&nbsp;an&nbsp;XMCDA&nbsp;2.0&nbsp;encoded&nbsp;robust&nbsp;Rubis&nbsp;Best-Choice&nbsp;recommendation.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
@@ -79,7 +128,7 @@ This&nbsp;style&nbsp;sheet&nbsp;allows&nbsp;to&nbsp;visualize&nbsp;an&nbsp;XMCDA
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;method&nbsp;requires&nbsp;an&nbsp;Unix&nbsp;like&nbsp;OS&nbsp;like&nbsp;Ubuntu&nbsp;or&nbsp;Mac&nbsp;OSX&nbsp;and&nbsp;depends&nbsp;on:<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;the&nbsp;R&nbsp;statistics&nbsp;package&nbsp;for&nbsp;Principal&nbsp;Component&nbsp;Analysis&nbsp;graphic,<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;the&nbsp;C&nbsp;calmat&nbsp;matrix&nbsp;interpreter&nbsp;(On&nbsp;<a href="http://leopold-loewenheim.uni.lu/svn/repos/Calmat/">http://leopold-loewenheim.uni.lu/svn/repos/Calmat/</a>&nbsp;&nbsp;see&nbsp;README)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;the&nbsp;C&nbsp;calmat&nbsp;matrix&nbsp;interpreter&nbsp;(see&nbsp;Digraph3/calmat/README)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;the&nbsp;xpdf&nbsp;ressources&nbsp;(&nbsp;...$&nbsp;apt-get&nbsp;install&nbsp;xpdf&nbsp;on&nbsp;Ubuntu)&nbsp;for&nbsp;converting&nbsp;pdf&nbsp;files&nbsp;to&nbsp;ppm&nbsp;format,&nbsp;and&nbsp;ppm&nbsp;files&nbsp;to&nbsp;png&nbsp;format.</tt></dd></dl>
  <dl><dt><a name="-showXMCDARubisBestChoiceRecommendation"><strong>showXMCDARubisBestChoiceRecommendation</strong></a>(problemFileName=None, valuationType=None)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;XMCDA2&nbsp;solution&nbsp;of&nbsp;the<br>
 Rubis&nbsp;Solver&nbsp;computed&nbsp;from&nbsp;a&nbsp;stored&nbsp;XMCDA2&nbsp;encoded&nbsp;performance&nbsp;tableau.<br>

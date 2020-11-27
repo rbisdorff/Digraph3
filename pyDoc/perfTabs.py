@@ -2,7 +2,7 @@
 """
 Python implementation of digraphs
 Module for working with performance tableaux  
-Copyright (C) 2011-2019  Raymond Bisdorff
+Copyright (C) 2011-2020  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 
@@ -13,7 +13,7 @@ Copyright (C) 2011-2019  Raymond Bisdorff
 """
 #######################
 
-__version__ = "$Revision: 1.37 $"
+__version__ = "$Revision: Python 3.9$"
 # $Source: /home/cvsroot/Digraph/perfTabs.py,v $
 
 from perfTabs import *
@@ -194,6 +194,10 @@ The performance evaluations of each decision alternative on each criterion are g
             argDict = {}
             exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
             self.name = str(filePerfTab)
+            try:
+                self.description = argDict['description']
+            except:
+                pass
             try:
                 self.actions = argDict['actions']
             except:
@@ -1083,7 +1087,7 @@ The performance evaluations of each decision alternative on each criterion are g
             print(quantiles)
         return quantiles
 
-    def computeActionQuantile(self,action,Debug=True):
+    def computeActionQuantile(self,action,Debug=False):
         """
         renders the overall performance quantile of action
         """
@@ -1178,7 +1182,7 @@ The performance evaluations of each decision alternative on each criterion are g
         fo.write(self.computeAllQuantiles(Sorted=Sorted,Comments=False))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
         
     def computeAllQuantiles(self,Sorted=True,Comments=False):
         """
@@ -1529,7 +1533,10 @@ The performance evaluations of each decision alternative on each criterion are g
             formatString = '%% .%df ' % ndigits
             for i in range(fromIndex,toIndex):
                 x = actionsList[i]
-                print('   \''+str(self.actions[x]['name'])+'\'   |' , end=' ')
+                try:
+                    print('   \''+str(self.actions[x]['shortName'])+'\'   |' , end=' ')
+                except KeyError:
+                    print('   \''+str(x)+'\'   |' , end=' ')        
                 for g in criteriaList:
                     evalgx = self.evaluation[g][x]
                     if evalgx == Decimal('-999'):
@@ -1648,7 +1655,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                            title=title))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
 
     def _htmlCriteriaView(self,criteria=None,Sorted=False,\
                          ndigits=2,title='Family of Criteria'):
@@ -1697,14 +1704,16 @@ The performance evaluations of each decision alternative on each criterion are g
                 html += '<td>%s</td><td>%s</td>' % (critg['name'],critg['comment'])
             except:
                 html += '<td>%s</td><td>No comment</td>' % (critg['name'])
-            html += '<td align="center">%.2f</td>' % critg['weight']
+            formatString = '<td align="center">%%.%df</td>' % ndigits
+            html += formatString % critg['weight']
             html += '<td align="center">%s</td>' % critg['preferenceDirection']
-            html += '<td align="center">%.2f</td>' % critg['scale'][0]
-            html += '<td align="center">%.2f</td>' % critg['scale'][1]
+            html += formatString % critg['scale'][0]
+            html += formatString % critg['scale'][1]
 
+            formatString = '<td align="center">%%.%dfx + %%.%df</td>' % (ndigits,ndigits)
             try:
                 if critg['thresholds']['ind'] != None:
-                    html += '<td align="center">%.2fx + %.2f</td>' %\
+                    html += formatString %\
                                 (critg['thresholds']['ind'][1],\
                                  critg['thresholds']['ind'][0])                
             except:
@@ -1712,14 +1721,14 @@ The performance evaluations of each decision alternative on each criterion are g
                 
             try:
                 if critg['thresholds']['pref'] != None:
-                    html += '<td align="center">%.2fx + %.2f</td>' %\
+                    html += formatString %\
                                 (critg['thresholds']['pref'][1],\
                                  critg['thresholds']['pref'][0])                
             except:
                 html += '<td></td>'
             try:
                 if critg['thresholds']['veto'] != None:
-                    html += '<td align="center">%.2fx + %.2f</td>' %\
+                    html += formatString %\
                                 (critg['thresholds']['veto'][1],\
                                  critg['thresholds']['veto'][0])                
             except:
@@ -1752,8 +1761,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                            title=title))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
-           
+        webbrowser.open(url,new=2)
             
     def _htmlPerformanceTableau(self,actions=None,\
                                fromIndex=None,\
@@ -2299,13 +2307,15 @@ The performance evaluations of each decision alternative on each criterion are g
     def showHTMLPerformanceHeatmap(self,actionsList=None,\
                                    fromIndex=None,\
                                    toIndex=None,\
+                                   Transposed=False,\
                                    criteriaList=None,\
                                    colorLevels=7,\
                                    pageTitle=None,\
                                    ndigits=2,\
                                    SparseModel=False,\
                                    minimalComponentSize=1,\
-                                   rankingRule='Copeland',\
+                                   rankingRule='NetFlows',\
+                                   StoreRanking=True,\
                                    quantiles=None,\
                                    strategy='average',\
                                    Correlations=False,\
@@ -2317,29 +2327,32 @@ The performance evaluations of each decision alternative on each criterion are g
         (see perfTabs.htmlPerformanceHeatMap() method ).
 
         **Parameters**:
-
-              - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.
-              - *ndigits* = 0 may be used to show integer evaluation values.
-              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
-                ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.
-                When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                
-              - The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
-                If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
-                in fact equivalent to the standard model.
-              - It may interesting in some cases to use *rankingRule* = 'NetFlows'.
-              - Quantiles used for the pre-ranked decomposition are put by default to *n*
-                (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10.
-                For bigger performance tableaux the *quantiles* parameter may be set to a much lower value
-                not exceeding usually 1000.
-              - The pre-ranking may be obtained with three ordering strategies for the
-                quantiles equivalence classes: 'average' (default), 'optimistic' or  'pessimistic'.
-              - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing
-                order of the correlations between the marginal criterion based ranking and the global ranking used for
-                presenting the decision alternatives.
-              - For large performance Tableaux, *multiprocessing* techniques may be used by setting
-                *Threading* = *True* in order to speed up the computations; especially when *Correlations* = *True*.
-              - By default, the number of cores available, will be detected. It may be efficient in a HPC context
-                to indicate the exact number of singled threaded cores in fact allocated to the job.
+        
+        * *actionsList* and *criteriaList*, if provided,  give the possibility to show
+          the decision alternatives, resp. criteria, in a given ordering.
+        * *ndigits* = 0 may be used to show integer evaluation values.
+        * When no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
+          ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.
+        * When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                
+        * The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
+          When *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
+          in fact equivalent to the standard model.
+        * *rankingRule* = 'NetFlows' (default) | 'Copeland' | 'Kohler' | 'RankedPairs' | 'ArrowRaymond'
+          | 'IteratedNetFlows' | 'IteraredCopeland'. See tutorial on ranking mith multiple incommensurable criteria.
+        * when tghe *StoreRanking* flag is set to *True*, the ranking result is storted in *self*.
+        * Quantiles used for the pre-ranked decomposition are put by default to *n*
+          (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10.
+          For bigger performance tableaux the *quantiles* parameter may be set to a much lower value
+          not exceeding usually 1000.
+        * The pre-ranking may be obtained with three ordering strategies for the
+          quantiles equivalence classes: 'average' (default), 'optimistic' or  'pessimistic'.
+        * With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing
+          order of the correlations between the marginal criterion based ranking and the global ranking used for
+          presenting the decision alternatives.
+        * For large performance Tableaux, *multiprocessing* techniques may be used by setting
+          *Threading* = *True* in order to speed up the computations; especially when *Correlations* = *True*.
+        * By default, the number of cores available, will be detected. It may be efficient in a HPC context
+          to indicate the exact number of singled threaded cores in fact allocated to the job.
 
 
         >>> from randomPerfTabs import RandomPerformanceTableau
@@ -2353,7 +2366,9 @@ The performance evaluations of each decision alternative on each criterion are g
         
         """
         import webbrowser
-        fileName = '/tmp/performanceHeatmap.html'
+        from tempfile import NamedTemporaryFile
+        fileName = (NamedTemporaryFile(suffix='.html',delete=False)).name
+        #fileName = '/tmp/performanceHeatmap.html'
         fo = open(fileName,'w')
         if pageTitle == None:
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
@@ -2361,10 +2376,12 @@ The performance evaluations of each decision alternative on each criterion are g
         fo.write(self._htmlPerformanceHeatmap(argCriteriaList=criteriaList,
                                              argActionsList=actionsList,
                                              fromIndex=fromIndex,
+                                             Transposed=Transposed,
                                              toIndex=toIndex,
                                              SparseModel=SparseModel,
                                              minimalComponentSize=minimalComponentSize,
                                              rankingRule=rankingRule,
+                                             StoreRanking=StoreRanking,
                                              quantiles=quantiles,
                                              strategy=strategy,
                                              ndigits=ndigits,
@@ -2376,25 +2393,27 @@ The performance evaluations of each decision alternative on each criterion are g
                                              Debug=Debug))
         fo.close()
         url = 'file://'+fileName
-        webbrowser.open_new(url)
+        webbrowser.open(url,new=2)
 
     def _htmlPerformanceHeatmap(self,argCriteriaList=None,
-                               argActionsList=None,
-                               fromIndex=None,
-                               toIndex=None,
-                               SparseModel=False,
-                               minimalComponentSize=1,
-                               rankingRule='Copeland',
-                               quantiles=None,
-                               strategy='average',
-                               ndigits=2,
-                               ContentCentered=True,
-                               colorLevels=None,
-                               pageTitle='Performance Heatmap',
-                               Correlations=False,
-                               Threading=False,
-                               nbrOfCPUs=1,
-                               Debug=False):
+                                argActionsList=None,
+                                fromIndex=None,
+                                toIndex=None,
+                                Transposed=False,
+                                SparseModel=False,
+                                minimalComponentSize=1,
+                                rankingRule=None,
+                                StoreRanking=False,
+                                quantiles=None,
+                                strategy='average',
+                                ndigits=2,
+                                ContentCentered=True,
+                                colorLevels=None,
+                                pageTitle='Performance Heatmap',
+                                Correlations=False,
+                                Threading=False,
+                                nbrOfCPUs=1,
+                                Debug=False):
         """       
         Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
         actions x criteria in html format.
@@ -2461,9 +2480,10 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             criteriaList = argCriteriaList
 
+##        if rankingRule == None:
+##            rankingRule = 'NetFlows'
+
         if argActionsList == None: # actions ranking is needed
-            if rankingRule == None:
-                rankingRule = 'Copeland'
             
             na = len(self.actions)
             if SparseModel:
@@ -2480,43 +2500,91 @@ The performance evaluations of each decision alternative on each criterion are g
                                            componentRankingRule=rankingRule,Threading=Threading,
                                            nbrOfCPUs=nbrOfCPUs)
                 actionsList = g.boostedRanking
+                rankCorrelation = None
                 
             else: # standard outranking model
                 from outrankingDigraphs import BipolarOutrankingDigraph
                 g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
                 if rankingRule == 'NetFlows':
                     actionsList = g.computeNetFlowsRanking()
+                    if StoreRanking:
+                        self.netFlowsRanking = actionsList
+                if rankingRule == 'Copeland':
+                    actionsList = g.computeCopelandRanking()
+                    if StoreRanking:
+                        self.copelandRanking = actionsList
                 elif rankingRule == 'Kohler':
-                    actionsList = g.computeKohlerRanking()
+                    actionsList = (~(-g)).computeKohlerRanking()
+                    if StoreRanking:
+                        self.kohlerRanking = actionsList
                 elif rankingRule == 'RankedPairs':
                     from linearOrders import RankedPairsOrder
                     rp = RankedPairsOrder(g)
                     actionsList = rp.computeRanking()
+                    if StoreRanking:
+                        self.rankedPairsRanking = actionsList
                 elif rankingRule == 'ArrowRaynaud':
                     actionsList = g.computeArrowRaynaudRanking()
+                    if StoreRanking:
+                        self.arrowRaynaudRanking = actionsList
+                elif rankingRule == 'IteratedNetFlows':
+                    from linearOrders import IteratedNetFlowsRanking
+                    inf = IteratedNetFlowsRanking(g)
+                    actionsList = inf.iteratedNetFlowsRanking
+                    if StoreRanking:
+                        self.iteratedNetFlowsRanking = actionsList
+                elif rankingRule == 'IteratedCopeland':
+                    from linearOrders import IteratedCopelandRanking
+                    icop = IteratedCopelandRanking(g)
+                    actionsList = icop.iteratedCopelandRanking
+                    if StoreRanking:
+                        self.iteratedCopelandRanking = actionsList
+                elif rankingRule == None:
+                    actionsList = list(self.actions.keys())
                 else: # default ranking rule
-                    actionsList = g.computeCopelandRanking()
+                    actionsList = g.computeNetFlowsRanking()
+                    rankingRule='NetFlows'
+                    if StoreRanking:
+                        self.netFlowsRanking = actionsList
+                rankCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
 
+        else:  # actions list given
+            actionsList = argActionsList
+            rankingRule = None
+            #Correlations = False
+            rankCorrelation = None
             if SparseModel:
                 rankCorrelation = None
             else:
+                from outrankingDigraphs import BipolarOutrankingDigraph
+                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
                 rankCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
-            if Debug:
-                print('1',actionsList)
-                print('2',rankCorrelation)
-        else:  # actions list given
-            actionsList = argActionsList
-            Correlations = False
-            rankCorrelation = None
+        if Debug:
+            print('1',actionsList)
+            print('2',rankCorrelation)
             
         ##########
         criteria = self.criteria
         if criteriaList == None:
             if Correlations:
-                criteriaCorrelation =\
-                        g.computeMarginalVersusGlobalRankingCorrelations(\
-                                actionsList,ValuedCorrelation=True,Threading=Threading,
-                                nbrCores=nbrOfCPUs)
+                marginalCorrelations = g.computeRankingConsensusQuality(actionsList)
+                criteriaCorrelation = marginalCorrelations[0]
+                meanMarginalCriteriaCorrelation = marginalCorrelations[1]
+                sdMarginalCriteriaCorrelation = marginalCorrelations[2]             
+##                from math import sqrt
+##                criteriaCorrelation =\
+##                        g.computeMarginalVersusGlobalRankingCorrelations(\
+##                                actionsList,ValuedCorrelation=True,Threading=Threading,
+##                                nbrCores=nbrOfCPUs)
+##                meanMarginalCriteriaCorrelation = Decimal('0.0')
+##                sdMarginalCriteriaCorrelation = Decimal('0.0')
+##                for cg in criteriaCorrelation:
+##                    meanMarginalCriteriaCorrelation += cg[0]
+##                    sdMarginalCriteriaCorrelation += cg[0]*cg[0]
+##                meanMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
+##                sdMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
+##                sdMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation
+##                sdMarginalCriteriaCorrelation = sqrt(sdMarginalCriteriaCorrelation)
                 criteriaList = [c[1] for c in criteriaCorrelation]
             else:
                 criteriaList = list(criteria.keys())
@@ -2525,17 +2593,33 @@ The performance evaluations of each decision alternative on each criterion are g
                 criteriaWeightsList.sort(reverse=False)
                 criteriaList = [g[1] for g in criteriaWeightsList]
                 criteriaCorrelation = None
+                rankCorrelation = None
         else:
             criteriaList = list(criteria.keys())
-            if argActionsList != None:
-                Correlations = False
+##            if argActionsList != None:
+##                Correlations = False
             if Correlations:
-                criteriaCorrelation =\
-                        g.computeMarginalVersusGlobalRankingCorrelations(\
-                                actionsList,ValuedCorrelation=True,Threading=Threading,
-                                nbrCores=nbrOfCPUs)
+                marginalCorrelations = g.computeRankingConsensusQuality(actionsList)
+                criteriaCorrelation = marginalCorrelations[0]
+                meanMarginalCriteriaCorrelation = marginalCorrelations[1]
+                sdMarginalCriteriaCorrelation = marginalCorrelations[2]             
+##                from math import sqrt
+##                criteriaCorrelation =\
+##                        g.computeMarginalVersusGlobalRankingCorrelations(\
+##                                actionsList,ValuedCorrelation=True,Threading=Threading,
+##                                nbrCores=nbrOfCPUs)
+##                meanMarginalCriteriaCorrelation = Decimal('0.0')
+##                sdMarginalCriteriaCorrelation = Decimal('0.0')
+##                for cg in criteriaCorrelation:
+##                    meanMarginalCriteriaCorrelation += cg[0]
+##                    sdMarginalCriteriaCorrelation += cg[0]*cg[0]
+##                meanMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
+##                sdMarginalCriteriaCorrelation /= Decimal(str(len(criteriaCorrelation)))
+##                sdMarginalCriteriaCorrelation -= meanMarginalCriteriaCorrelation*meanMarginalCriteriaCorrelation
+##                sdMarginalCriteriaCorrelation = sqrt(sdMarginalCriteriaCorrelation)
             else:
                 criteriaCorrelation = None
+                rankCorrelation = None
         quantileColor={}
         for x in actionsList:
             quantileColor[x] = {}
@@ -2572,48 +2656,107 @@ The performance evaluations of each decision alternative on each criterion are g
 ##            html += '<td bgcolor=%s>%s</td>' % (colorPalette[col][1],str(colorPalette[col][0]))
 ##        html += '</tr>\n'
 ##        html += '</table>\n'
-        # heatmap
-        html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
-        html += '<tr bgcolor=%s><th>criteria</th>' % (columnHeaderColor)
-        for g in criteriaList:
-            try:
-                gName = self.criteria[g]['shortName']
-            except:
-                gName = str(g)
-            html += '<th>%s</th>' % (gName)
-        html += '</tr>\n'
-        html += '<tr><th bgcolor=%s>weights</th>' % (columnHeaderColor)
-        for g in criteriaList:
-            html += '<td align="center">%+.2f</td>' % (self.criteria[g]['weight'])
-        html += '</tr>\n'
-        if criteriaCorrelation != None:
-            html += '<tr><th bgcolor=%s>tau<sup>(*)</sup></th>' % (columnHeaderColor)
-            for cg in criteriaCorrelation:
-                html += '<td align="center">%+.2f</td>' % (cg[0])
+        # heatmap with transposed criteria x actions layout
+        if Transposed:
+            html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+            html += '<tr bgcolor=%s><th>criteria</th>' % (columnHeaderColor)
+            html += '<th>weight</th>'
+            if Correlations:
+                html += '<th>tau*</th>'
+            if fromIndex == None:
+                fromIndex = 0
+            if toIndex == None:
+                toIndex = len(actionsList)
+            for i in range(fromIndex,toIndex):
+                x = actionsList[i]
+                try:
+                    xName = actions[x]['shortName']
+                except:
+                    xName = str(x)
+                html += '<th bgcolor="#FFF79B">%s</th>' % (xName)
             html += '</tr>\n'
-        if Debug:
-            print(html)
-        if fromIndex == None:
-            fromIndex=0
-        if toIndex == None:
-            toIndex = len(actionsList)
-        for i in range(fromIndex,toIndex):
-            x = actionsList[i]
-            try:
-                xName = self.actions[x]['shortName']
-            except:
-                xName = str(x)
-            html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)
-            for g in criteriaList:
-                if self.evaluation[g][x] != Decimal("-999"):
-                    formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
-                    html += formatString % (self.evaluation[g][x])
-                else:
-                    html += '<td bgcolor=%s class="na">NA</td>' % naColor
+            gn = len(criteriaList)
+            for i in range(gn):
+                g = criteriaList[i]
+                try:
+                    gName = self.criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<tr><th bgcolor="#FFF79B">%s</th>' % (gName)
+                html += '<td align="center">%+.2f</td>' % (self.criteria[g]['weight'])
+                if criteriaCorrelation != None:
+                    cg = criteriaCorrelation[i]
+                    html += '<td align="center">%+.2f</td>' % (cg[0])
                 if Debug:
                     print(html)
+                if fromIndex == None:
+                    fromIndex = 0
+                if toIndex == None:
+                    toIndex = len(actionsList)
+                for j in range(fromIndex,toIndex):
+                    x = actionsList[j]
+                    try:
+                        xName = self.actions[x]['shortName']
+                    except:
+                        xName = str(x)
+                    if self.evaluation[g][x] != Decimal("-999"):
+                        formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
+                        html += formatString % (self.evaluation[g][x])
+                    else:
+                        html += '<td bgcolor=%s class="na">NA</td>' % naColor
+                html += '</tr>'
+                if Debug:
+                    print(html)
+            html += '</table>\n'
+##            if criteriaCorrelation != None:
+##                html += '<b>(*) tau:</b> <i>Ordinal (Kendall) correlation between marginal criterion and global ranking relation</i><br/>\n'
+##            if rankCorrelation != None:
+##                html += '<i>Ranking rule</i>: <b>%s</b><br/>\n' % rankingRule
+##                html += '<i>Ordinal (Kendall) correlation between global ranking and global outranking relation:</i> <b>%+.3f</b><br/>\n' % (rankCorrelation['correlation'])
+##                html += '</body></html>'
+##            return html
+        else: # standard actions x criteria layout
+            html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
+            html += '<tr bgcolor=%s><th>criteria</th>' % (columnHeaderColor)
+            for g in criteriaList:
+                try:
+                    gName = self.criteria[g]['shortName']
+                except:
+                    gName = str(g)
+                html += '<th>%s</th>' % (gName)
             html += '</tr>\n'
-        html += '</table>\n'
+            html += '<tr><th bgcolor=%s>weights</th>' % (columnHeaderColor)
+            for g in criteriaList:
+                html += '<td align="center">%+.2f</td>' % (self.criteria[g]['weight'])
+            html += '</tr>\n'
+            if criteriaCorrelation != None:
+                html += '<tr><th bgcolor=%s>tau<sup>(*)</sup></th>' % (columnHeaderColor)
+                for cg in criteriaCorrelation:
+                    html += '<td align="center">%+.2f</td>' % (cg[0])
+                html += '</tr>\n'
+            if Debug:
+                print(html)
+            if fromIndex == None:
+                fromIndex=0
+            if toIndex == None:
+                toIndex = len(actionsList)
+            for i in range(fromIndex,toIndex):
+                x = actionsList[i]
+                try:
+                    xName = self.actions[x]['shortName']
+                except:
+                    xName = str(x)
+                html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)
+                for g in criteriaList:
+                    if self.evaluation[g][x] != Decimal("-999"):
+                        formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
+                        html += formatString % (self.evaluation[g][x])
+                    else:
+                        html += '<td bgcolor=%s class="na">NA</td>' % naColor
+                    if Debug:
+                        print(html)
+                html += '</tr>\n'
+            html += '</table>\n'
         # legend
         html += '<i>Color legend: </i>\n'
         html += '<table style="background-color:%s;" border="1">\n' % (backGroundColor) 
@@ -2630,8 +2773,114 @@ The performance evaluations of each decision alternative on each criterion are g
         if rankCorrelation != None:
             html += '<i>Ranking rule</i>: <b>%s</b><br/>\n' % rankingRule
             html += '<i>Ordinal (Kendall) correlation between global ranking and global outranking relation:</i> <b>%+.3f</b><br/>\n' % (rankCorrelation['correlation'])
+            html += '<i>Mean marginal correlation (a)               :</i> <b>%+.3f</b><br/>\n' % (meanMarginalCriteriaCorrelation)
+            html += '<i>Standard marginal correlation deviation (b) :</i> <b>%+.3f</b><br/>\n' % (sdMarginalCriteriaCorrelation)
+            html += '<i>Ranking fairness (a) - (b)                  :</i> <b>%+.3f</b><br/>\n' %\
+                             (float(meanMarginalCriteriaCorrelation) - sdMarginalCriteriaCorrelation)
             html += '</body></html>'
         return html
+
+    def _computeRankingConsensusQuality(self,ranking,Comments=False,Threading=False,nbrOfCPUs=1):
+        """
+        Renders the marginal criteria correlations with a given ranking with summary.
+        """
+        from outrankingDigraphs import BipolarOutrankingDigraph
+        from math import sqrt
+        g = BipolarOutrankingDigraph(self,Normalized=True)
+        criteria = self.criteria
+        marginalCorrelations =\
+                        g.computeMarginalVersusGlobalRankingCorrelations(\
+                                ranking,ValuedCorrelation=True,Threading=Threading,
+                                nbrCores=nbrOfCPUs)
+        ncrit = Decimal(str(len(marginalCorrelations)))
+        meanMarginalCorrelation = Decimal('0.0')
+        varMarginalCorrelation = Decimal('0.0')
+        moment4 = Decimal('0.0')
+        sumWeights = Decimal('0.0')
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            sumWeights += abs(criteria[cg[1]]['weight'])
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            cgw = abs(criteria[cg[1]]['weight'])/sumWeights
+            meanMarginalCorrelation += cg[0]*cgw
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            cgw = abs(criteria[cg[1]]['weight'])/sumWeights
+            varMarginalCorrelation += ((cg[0]-meanMarginalCorrelation)**2)*cgw
+            moment4 += ((cg[0]-meanMarginalCorrelation)**4)*cgw
+            #varMarginalCorrelation += (cg[0]**2)*cgw
+        #meanMarginalCriteriaCorrelation /= ncrit
+        #varMarginalCriteriaCorrelation /= ncrit
+        #varMarginalCorrelation -= meanMarginalCorrelation*meanMarginalCriteriaCorrelation
+        sdMarginalCorrelation = sqrt(varMarginalCorrelation)
+        kurtosis = moment4 -3
+        # showing the results
+        if Comments:
+            print('Consensus quality of ranking:')
+            print(ranking)
+            print('criterion (weight): correlation')
+            print('-------------------------------')
+            for cg in marginalCorrelations:
+                print('%s (%.3f): %+.3f' % (cg[1],abs(criteria[cg[1]]['weight'])/sumWeights,cg[0]) )
+            print('Summary:')
+            print('Weighted mean marginal correlation (a): %+.3f' % meanMarginalCorrelation)
+            print('Standard deviation (b)                : %+.3f' % sdMarginalCorrelation)
+            print('Ranking fairness (Kurtosis a^4/b^4)   : %+.3f' % kurtosis)
+        return (marginalCorrelations,meanMarginalCorrelation,sdMarginalCorrelation)
+
+    def computeRankingConsensusQuality(self,ranking,Comments=False,Threading=False,nbrOfCPUs=1):
+        """
+        Renders the marginal criteria correlations with a given ranking with summary.
+        """
+        from outrankingDigraphs import BipolarOutrankingDigraph
+        from math import sqrt
+        g = BipolarOutrankingDigraph(self,Normalized=True)
+        criteria = self.criteria
+        marginalCorrelations =\
+                        g.computeMarginalVersusGlobalRankingCorrelations(\
+                                ranking,ValuedCorrelation=True,Threading=Threading,
+                                nbrCores=nbrOfCPUs)
+        ncrit = Decimal(str(len(marginalCorrelations)))
+        meanMarginalCorrelation = Decimal('0.0')
+        varMarginalCorrelation = Decimal('0.0')
+        sumWeights = Decimal('0.0')
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            sumWeights += abs(criteria[cg[1]]['weight'])
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            cgw = abs(criteria[cg[1]]['weight'])/sumWeights
+            meanMarginalCorrelation += cg[0]*cgw
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            cgw = abs(criteria[cg[1]]['weight'])/sumWeights
+            varMarginalCorrelation += ((cg[0]-meanMarginalCorrelation)**2)*cgw
+            #varMarginalCorrelation += (cg[0]**2)*cgw
+        #meanMarginalCriteriaCorrelation /= ncrit
+        #varMarginalCriteriaCorrelation /= ncrit
+        #varMarginalCorrelation -= meanMarginalCorrelation*meanMarginalCriteriaCorrelation
+        sdMarginalCorrelation = sqrt(varMarginalCorrelation) 
+        # showing the results
+        if Comments:
+            print('Consensus quality of ranking:')
+            print(ranking)
+            print('criterion (weight): correlation')
+            print('-------------------------------')
+            for cg in marginalCorrelations:
+                print('%s (%.3f): %+.3f' % (cg[1],abs(criteria[cg[1]]['weight'])/sumWeights,cg[0]) )
+            print('Summary:')
+            print('Weighted mean marginal correlation (a): %+.3f' % meanMarginalCorrelation)
+            print('Standard deviation (b)                : %+.3f' % sdMarginalCorrelation)
+            print('Ranking fairness (a)-(b)              : %+.3f' %\
+                  (float(meanMarginalCorrelation) - sdMarginalCorrelation) )
+        return (marginalCorrelations,meanMarginalCorrelation,sdMarginalCorrelation)
+        
+    def showRankingConsensusQuality(self,ranking):
+        """
+        shows the marginal criteria correlations with a given ranking with summary.
+        """
+        self.computeRankingConsensusQuality(ranking,Comments=True)
 
     def computeWeightPreorder(self):
         """
@@ -2719,7 +2968,8 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         Persistant storage of Performance Tableaux.
         """
-        print('*--- Saving performance tableau in file: <' + str(fileName) + '.py> ---*')
+        print('*--- Saving performance tableau in file: <' +\
+              str(fileName) + '.py> ---*')
         actions = self.actions
         try:
             objectives = self.objectives
@@ -2767,8 +3017,11 @@ The performance evaluations of each decision alternative on each criterion are g
         fo.write('criteria = OrderedDict([\n') 
         for g in criteria:
             fo.write('(\'%s\', {\n' % str(g))
-            for it in self.criteria[g].keys():
+            gKeys = list(self.criteria[g].keys())
+            for it in gKeys:
                 fo.write('\'%s\': %s,\n' % (it,repr(self.criteria[g][it])))
+            if 'preferenceDirection' not in gKeys:
+                fo.write('\'preferenceDirection\': \'max\' \n')
             fo.write('}),\n')
 ##            fo.write('(\'' +str(g)+'\', {\n')
 ##            try:
@@ -6810,7 +7063,8 @@ class _XMCDAPerformanceTableau(PerformanceTableau):
         xmcdaPerformanceTableau = ElementTree.parse(fo).getroot()
         # get description
         description = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('caseReference').getchildren()]:
+        #for elem in [x for x in xmcdaPerformanceTableau.find('caseReference').getchildren()]:
+        for elem in [x for x in xmcdaPerformanceTableau.find('caseReference')]:
             if elem.tag == 'bibliography':
                 description[elem.tag] = {'description': {'subSubTitle': 'Bibliography'}}
                 i = 0
@@ -6834,7 +7088,8 @@ class _XMCDAPerformanceTableau(PerformanceTableau):
             pass
         # get method Data
         parameter = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('methodData').find('parameters').getchildren()]:
+        #for elem in [x for x in xmcdaPerformanceTableau.find('methodData').find('parameters').getchildren()]:
+        for elem in [x for x in xmcdaPerformanceTableau.find('methodData').find('parameters')]:
             tag = elem.find('name').text
             try:
                 value = elem.find('value').find('label').text
@@ -6848,7 +7103,8 @@ class _XMCDAPerformanceTableau(PerformanceTableau):
         actions = {}
         # get alternatives' description
         description = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('alternatives').find('description').getchildren()]:
+        #for elem in [x for x in xmcdaPerformanceTableau.find('alternatives').find('description').getchildren()]:
+        for elem in [x for x in xmcdaPerformanceTableau.find('alternatives').find('description')]:
             description[elem.tag] = elem.text
         self.actionsDescription = description
         # get alternatives
@@ -6862,13 +7118,15 @@ class _XMCDAPerformanceTableau(PerformanceTableau):
                 Active = True
             if Active:
                 actions[x.attrib['id']] = {}
-                for elem in [y for y in x.find('description').getchildren()]:
+                #for elem in [y for y in x.find('description').getchildren()]:
+                for elem in [y for y in x.find('description')]:
                     actions[x.attrib['id']][elem.tag] = elem.text
         self.actions = actions
         criteria = {}
         # get criteria' description
         description = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('criteria').find('description').getchildren()]:
+        #for elem in [x for x in xmcdaPerformanceTableau.find('criteria').find('description').getchildren()]:
+        for elem in [x for x in xmcdaPerformanceTableau.find('criteria').find('description')]:
             description[elem.tag] = elem.text
         self.criteriaDescription = description
         ## get criteria
@@ -6883,7 +7141,8 @@ class _XMCDAPerformanceTableau(PerformanceTableau):
                 Active = True
             if Active:
                 criteria[g.attrib['id']] = {}
-                for elem in [y for y in g.find('description').getchildren()]:
+                #for elem in [y for y in g.find('description').getchildren()]:
+                for elem in [y for y in g.find('description')]:
                     criteria[g.attrib['id']][elem.tag] = elem.text
                 criteria[g.attrib['id']]['scale'] = {}
                 Min = Decimal(g.find('criterionFunction').find('scale').find('quantitative').find('min').find('real').text)
@@ -6923,7 +7182,8 @@ class _XMCDAPerformanceTableau(PerformanceTableau):
         self.criteria = criteria
         # get evaluations' description
         description = {}
-        for elem in [x for x in xmcdaPerformanceTableau.find('performanceTable').find('description').getchildren()]:
+        #for elem in [x for x in xmcdaPerformanceTableau.find('performanceTable').find('description').getchildren()]:
+        for elem in [x for x in xmcdaPerformanceTableau.find('performanceTable').find('description')]:
             description[elem.tag] = elem.text
         self.evaluationDescription = description
         # get evaluations
@@ -6994,7 +7254,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
             self.name = 'temp'
         # get description
         description = {}
-        for elem in [x for x in XMCDA.find('projectReference').getchildren()]:
+        #for elem in [x for x in XMCDA.find('projectReference').getchildren()]:
+        for elem in [x for x in XMCDA.find('projectReference')]:
             if elem.tag == 'bibliography':
                 description[elem.tag] = {'description': {'subSubTitle': 'Bibliography'}}
                 i = 0
@@ -7034,7 +7295,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
         actions = OrderedDict()
         # get alternatives' description
         description = {}
-        for elem in [x for x in XMCDA.find('alternatives').find('description').getchildren()]:
+        #for elem in [x for x in XMCDA.find('alternatives').find('description').getchildren()]:
+        for elem in [x for x in XMCDA.find('alternatives').find('description')]:
             description[elem.tag] = elem.text
         self.actionsDescription = description
         # get alternatives
@@ -7050,7 +7312,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                 actions[x.attrib['id']] = {}
                 actions[x.attrib['id']]['name'] = x.attrib['name']
                 try:
-                    for elem in [y for y in x.find('description').getchildren()]:
+                    #for elem in [y for y in x.find('description').getchildren()]:
+                    for elem in [y for y in x.find('description')]:
                         actions[x.attrib['id']][elem.tag] = elem.text
                 except:
                     pass
@@ -7061,7 +7324,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
             # get objectives' description
             if XMCDA.find('objectives').find('description') != None:
                 description = {}
-                for elem in [x for x in XMCDA.find('criteria').find('description').getchildren()]:
+                #for elem in [x for x in XMCDA.find('criteria').find('description').getchildren()]:
+                for elem in [x for x in XMCDA.find('criteria').find('description')]:
                     description[elem.tag] = elem.text
                 self.objectivesDescription = description
             ## get objectives
@@ -7080,7 +7344,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                     #name
                     objectives[obj.attrib['id']]['name'] =obj.attrib['name']
                     #description
-                    for elem in [y for y in obj.find('description').getchildren()]:
+                    #for elem in [y for y in obj.find('description').getchildren()]:
+                    for elem in [y for y in obj.find('description')]:
                         objectives[obj.attrib['id']][elem.tag] = elem.text
                     if obj.find('weight') != None:
                         try:
@@ -7097,7 +7362,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
         # get criteria' description
         if XMCDA.find('criteria').find('description') != None:
             description = {}
-            for elem in [x for x in XMCDA.find('criteria').find('description').getchildren()]:
+            #for elem in [x for x in XMCDA.find('criteria').find('description').getchildren()]:
+            for elem in [x for x in XMCDA.find('criteria').find('description')]:
                 description[elem.tag] = elem.text
             self.criteriaDescription = description
         ## get criteria
@@ -7116,7 +7382,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                 #name
                 criteria[g.attrib['id']]['name'] =g.attrib['name']
                 #description
-                for elem in [y for y in g.find('description').getchildren()]:
+                #for elem in [y for y in g.find('description').getchildren()]:
+                for elem in [y for y in g.find('description')]:
                     criteria[g.attrib['id']][elem.tag] = elem.text
                 try:
                     criteria[g.attrib['id']]['objective'] = g.find('criterionObjective').text
@@ -7207,7 +7474,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
         
         # get evaluations' description
         description = {}
-        for elem in [x for x in XMCDA.find('performanceTable').find('description').getchildren()]:
+        #for elem in [x for x in XMCDA.find('performanceTable').find('description').getchildren()]:
+        for elem in [x for x in XMCDA.find('performanceTable').find('description')]:
             description[elem.tag] = elem.text
         self.evaluationDescription = description
         # get evaluations
@@ -7258,7 +7526,7 @@ class CSVPerformanceTableau(PerformanceTableau):
     Param:
         fileName (without the extension .csv).
     """
-    def __init__(self,fileName='temp',Debug=True):
+    def __init__(self,fileName='temp',Debug=False):
         from csv import reader
         from collections import OrderedDict
 
@@ -7315,28 +7583,58 @@ if __name__ == "__main__":
     from digraphs import *
     from outrankingDigraphs import *
     import sortingDigraphs
-    import linearOrders
+    from linearOrders import *
     from transitiveDigraphs import *
     from randomPerfTabs import *
     from time import time
+    import random
     
     print('*-------- Testing classes and methods -------')
 
 ##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     ## t.showStatistics()
-    t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,
-                                   numberOfActions=10,
+##    t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,
+##                                   numberOfActions=20,
+##                                   weightDistribution='equiobjectives',
+##                                   IntegerWeights=True,
+##                                   #NegativeWeights=False,
+##                                   Debug=False,
+##                                   missingDataProbability=0.1,
+##                                   seed=101,
+##                                            #Threading=False
+##                                            )
+##    t.showWeightPreorder()
+##    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows',Transposed=False)
+##    t.computeRankingConsensusQuality(t.netFlowsRanking)
+##    print('*------ test performance heatmap -----*')
+    randomSeed = random.randint(1,1000)
+    t = RandomCBPerformanceTableau(numberOfCriteria=21,
+                                   numberOfActions=13,
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
-                                   #NegativeWeights=False,
-                                   Debug=False,
-                                   missingDataProbability=0.1,
-                                   seed=10,
-                                            #Threading=False
-                                            )
-    t.showWeightPreorder()
-   
-    
+                                   NegativeWeights=False,
+                                   seed=randomSeed,
+                                   Debug=False)
+##    actionsList = [x for x in t.actions.keys()]
+##    criteriaList = [g for g in t.criteria.keys()]
+##    print(t._htmlPerformanceHeatmap(argActionsList=actionsList,
+##                                   argCriteriaList=criteriaList,
+##                                   colorLevels=9,
+##                                   Correlations=True,
+##                                   ndigits=4,
+##                                   Debug=False))
+##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
+##                                 rankingRule=None,Transposed=False)
+##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
+##                                 rankingRule='NetFlows',Transposed=False)
+    g = BipolarOutrankingDigraph(t,Normalized=True)
+    nf = NetFlowsRanking(g)
+    t.showRankingConsensusQuality(nf.netFlowsRanking)
+##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
+##                                 rankingRule='Copeland',Transposed=False)
+    cop = CopelandRanking(g)
+    t.showRankingConsensusQuality(cop.copelandRanking)
+
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
