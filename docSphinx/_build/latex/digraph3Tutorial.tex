@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{November 24, 2020}
+\date{November 27, 2020}
 \release{3.9.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1244,7 +1244,7 @@ Many more tools for exploiting voting results are available like the browser hea
 \noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{votingHeatmap}.png}
 \caption{Visualizing a linear voting profile in a heatmap format}\label{\detokenize{tutorial:cyclicvoting}}\end{figure}
 
-Notice that the importance weights of the voters are \sphinxstyleemphasis{negative}, which means that the preference direction of the criteria (in this case the individual voters) is \sphinxstyleemphasis{decreasing}, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise \sphinxstyleemphasis{NetFlows} ranking \sphinxstyleemphasis{{[}a4,a5,a2,a1,a3{]}}, shown in this heatmap (see \hyperref[\detokenize{tutorial:cyclicvoting}]{Fig.\@ \ref{\detokenize{tutorial:cyclicvoting}}}) results in an optimal \sphinxstyleemphasis{ordinal correlation} index of +0.778 with the pairwise majority voting margins (see Adavanced topic on tutorials \DUrole{xref,std,std-ref}{Ordinal Correlation equals Relational Equivalence} and {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}})). The number of voters is usually much larger than the number of candidates. In that case, it is better to generate a transposed \sphinxstyleemphasis{voters X candidates} view (see \hyperref[\detokenize{tutorial:votingheatmap}]{Listing \ref{\detokenize{tutorial:votingheatmap}}} Line 2)
+Notice that the importance weights of the voters are \sphinxstyleemphasis{negative}, which means that the preference direction of the criteria (in this case the individual voters) is \sphinxstyleemphasis{decreasing}, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise \sphinxstyleemphasis{NetFlows} ranking \sphinxstyleemphasis{{[}a4,a5,a2,a1,a3{]}}, shown in this heatmap (see \hyperref[\detokenize{tutorial:cyclicvoting}]{Fig.\@ \ref{\detokenize{tutorial:cyclicvoting}}}) results in an optimal \sphinxstyleemphasis{ordinal correlation} index of +0.778 with the pairwise majority voting margins (see the Adavanced topic on  \DUrole{xref,std,std-ref}{Ordinal Correlation equals Relational Equivalence} and {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}})). The number of voters is usually much larger than the number of candidates. In that case, it is better to generate a transposed \sphinxstyleemphasis{voters X candidates} view (see \hyperref[\detokenize{tutorial:votingheatmap}]{Listing \ref{\detokenize{tutorial:votingheatmap}}} Line 2)
 
 
 \subsection{On generating random linear voting profiles}
@@ -1344,7 +1344,7 @@ We may visualize the resulting pairwise majority margins by showing the HTML for
 \noindent\sphinxincludegraphics[width=450\sphinxpxdimen]{{majorityMargins}.png}
 \caption{Browsing the majority margins of a \sphinxstyleemphasis{Condorcet} digraph}\label{\detokenize{tutorial:majoritymargins}}\end{figure}
 
-In \hyperref[\detokenize{tutorial:majoritymargins}]{Fig.\@ \ref{\detokenize{tutorial:majoritymargins}}}, \sphinxstyleemphasis{light green} cells contain the positive majority margins, whereas \sphinxstyleemphasis{light red} cells contain the negative majority margins. A complete \sphinxstyleemphasis{light green} row reveals hence a \sphinxstyleemphasis{Condorcet} \sphinxstylestrong{winner}, whereas a complete \sphinxstyleemphasis{light green} column reveals a \sphinxstyleemphasis{Condorcet} \sphinxstylestrong{looser}. We recover again candidate \sphinxstyleemphasis{a06} as \sphinxstyleemphasis{Condorcet} winner (%
+In \hyperref[\detokenize{tutorial:majoritymargins}]{Fig.\@ \ref{\detokenize{tutorial:majoritymargins}}}, \sphinxstyleemphasis{light green} cells contain the positive majority margins, whereas \sphinxstyleemphasis{light red} cells contain the negative majority margins. A complete \sphinxstyleemphasis{light green} row reveals hence a \sphinxstyleemphasis{Condorcet} \sphinxstylestrong{winner}, whereas a complete \sphinxstyleemphasis{light red} column reveals a \sphinxstyleemphasis{Condorcet} \sphinxstylestrong{looser}. We recover again candidate \sphinxstyleemphasis{a06} as \sphinxstyleemphasis{Condorcet} winner (%
 \begin{footnote}[15]\sphinxAtStartFootnote
 The concept of \sphinxstyleemphasis{Condorcet} winner \sphinxhyphen{}a generalization of absolute majority winners\sphinxhyphen{} proposed by \sphinxstyleemphasis{Condorcet} in 1785, is an early historical example of \sphinxstyleemphasis{initial} digraph kernel (see the tutorial {\hyperref[\detokenize{tutorial:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{On computing digraph kernels}}}} (\autopageref*{\detokenize{tutorial:kernel-tutorial-label}})).
 %
