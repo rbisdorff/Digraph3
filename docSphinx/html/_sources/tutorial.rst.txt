@@ -14,6 +14,7 @@
          cautionBorderColor={named}{Cyan},
          cautionBgColor={named}{LightCyan}}
 
+.. _Tutorials-label:
 
 Tutorials of the Digraph3 resources
 ===================================
@@ -45,9 +46,11 @@ Tutorials of the Digraph3 resources
       \href{https://digraph3.readthedocs.io/en/latest/index.html}{HTML Version}
       \vspace{5mm}
 
+
 .. only:: html
 
    **Preface**
+
 
 The tutorials in this document describe the practical usage of our *Digraph3* Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg.
 
@@ -7008,6 +7011,11 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 ---------------------
 
+.. _Appendices-label:
+
+Appendices
+----------
+
 .. only:: html
 
    **Bibliography**
@@ -7076,9 +7084,7 @@ Back to :ref:`Content Table <Tutorial-label>`
      
     * `Introduction <index.html>`_
     * `Reference manual <techDoc.html>`_
-    * `Tutorial <tutorial.html>`_
     * `Advanced Topics <pearls.html>`_
-
 
     **Indices and tables**
 

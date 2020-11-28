@@ -968,6 +968,10 @@ For the corresponding confident outranking digraph, we require a confidence leve
     # Actions           : 7
     # Criteria          : 7
     Size                : 15
+    Uncertainty model   : triangular(a=0,b=2w)
+    Likelihood domain   : [-1.0;+1.0]
+    Confidence level    : 0.80 (90.0%)
+    Confident majority  : 0.14 (57.1%)
     Determinateness (%) : 62.07
     Valuation domain    : [-1.00;1.00]
     Attributes          : ['name', 'bipolarConfidenceLevel',
