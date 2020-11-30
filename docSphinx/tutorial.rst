@@ -29,7 +29,7 @@ Tutorials of the Digraph3 resources
 
 .. _Tutorial-label:
 
-.. only:: html 
+.. only:: html
 
     .. contents:: Content Table
        :depth: 2	
@@ -49,8 +49,8 @@ Tutorials of the Digraph3 resources
 
 .. only:: html
 
-   **Preface**
-
+   Preface
+   -------
 
 The tutorials in this document describe the practical usage of our *Digraph3* Python3 software resources in the field of *Algorithmic Decision Theory* and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They mainly illustrate practical tools for a Master Course |location_link4| at the University of Luxembourg.
 
@@ -7129,9 +7129,9 @@ Appendices
 
 .. [18] A Digraph3 *graphs.Graph* encoded file is available in the :code:`examples` directory of the Digraph3 software collection.
 
-.. [19] This case study is inspired by a "Multiple Criteria Decision Analysis* case study published in Eisenführ Fr., Langer Th., and Weber M., *Fallstudien zu rationalem Entscheiden*, Springer 2001, pp. 1-17.
+.. [19] This case study is inspired by a *Multiple Criteria Decision Analysis* case study published in Eisenführ Fr., Langer Th., and Weber M., *Fallstudien zu rationalem Entscheiden*, Springer 2001, pp. 1-17.
 
-.. [20] Ganzeboom H.B.G, Treiman D.J. *Internationally Comparable Measures of Occupational Status for the 1988 International Standard Classification of Occupations*, Social Science Research 25, 201–239 (1996).
+.. [20] Ganzeboom H.B.G, Treiman D.J. "Internationally Comparable Measures of Occupational Status for the 1988 International Standard Classification of Occupations", *Social Science Research* 25, 201–239 (1996).
 
 .. [21] Alice's performance tableau :code:`AliceChoice.py` is available in the :code:`examples` directory of the Digraph3 software collection.
 

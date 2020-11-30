@@ -9,6 +9,11 @@ Documentation of the Digraph3 resources
     :width: 500pt
     :align: center
 
+
+.. note:: 
+       
+    This documentation is dedicated to our late colleague and dear friend *Marc ROUBENS* who, through his expertise in fuzzy sets and systems, greatly stimulated our research in bipolar-valued epistemic logic.
+
 .. _Documents:
 
 Contents
