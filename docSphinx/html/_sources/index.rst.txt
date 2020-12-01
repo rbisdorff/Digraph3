@@ -51,9 +51,9 @@ Contents
 
 Documentation parts
 ```````````````````
-This documentation, available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a *bipolar-valued outranking* approach ([1]_, [2]_). These computing resources are useful in the field of `Algorithmic Decision Theory <https://www.lamsade.dauphine.fr/~projet_cost/ALGORITHMIC_DECISION_THEORY/ALGORITHMIC_DECISION_THEORY.html>`_ and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They provided the practical tools for a Master Course |location_link4| at the University of Luxembourg.
+This documentation, available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a *bipolar-valued outranking* approach ([BISD-15]_, [BISD-00]_). These computing resources are useful in the field of `Algorithmic Decision Theory <https://www.lamsade.dauphine.fr/~projet_cost/ALGORITHMIC_DECISION_THEORY/ALGORITHMIC_DECISION_THEORY.html>`_ and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They provided the practical tools for a Master Course |location_link4| at the University of Luxembourg.
 
-The documentation contains, first, a set of tutorials introducing the main objects like digraphs, outranking digraphs and performance tableaux. There is also a tutorial provided on undirected graphs. Some tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to linearly rank or rate with multiple incommensurable performance criteria. Other tutorials concern more specifically operational aspects of computing maximal independent sets (MISs) and kernels in graphs and digraphs. The tutorial about split, interval and permutation graphs is inspired by Martin Golumbic's book on *Algorithmic Graph Theory and Perfect Graphs* ([3]_). We also provide a tutorial on tree graphs and spanning forests.
+The documentation contains, first, a set of tutorials introducing the main objects like digraphs, outranking digraphs and performance tableaux. There is also a tutorial provided on undirected graphs. Some tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to linearly rank or rate with multiple incommensurable performance criteria. Other tutorials concern more specifically operational aspects of computing maximal independent sets (MISs) and kernels in graphs and digraphs. The tutorial about split, interval and permutation graphs is inspired by Martin Golumbic's book on *Algorithmic Graph Theory and Perfect Graphs* ([GOLU-04]_). We also provide a tutorial on tree graphs and spanning forests.
 
    .. toctree:: tutorial
       :maxdepth: 2
@@ -76,11 +76,11 @@ The fourth section gathers historical case studies and example digraphs compiled
 
 References
 ``````````
-.. [1] R. Bisdorff, L.C. Dias, P. Meyer, V. Mousseau and M. Pirlot (Eds.) (2015). *Evaluation and decision models with multiple criteria: Case studies*. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, `ISBN 978-3-662-46815-9 <https://link.springer.com/book/10.1007/978-3-662-46816-6>`_, 643 pages (see http://hdl.handle.net/10993/23698).
+.. [BISD-15] R. Bisdorff, L.C. Dias, P. Meyer, V. Mousseau and M. Pirlot (Eds.) (2015). *Evaluation and decision models with multiple criteria: Case studies*. Springer-Verlag Berlin Heidelberg, International Handbooks on Information Systems, `ISBN 978-3-662-46815-9 <https://link.springer.com/book/10.1007/978-3-662-46816-6>`_, 643 pages (see http://hdl.handle.net/10993/23698).
 
-.. [2] R. Bisdorff (2000). "Logical foundation of fuzzy preferential systems with application to the Electre decision aid methods", *Computers and Operations Research*, 27: 673-687 (downloadable `PDF file 159.1kB <http://hdl.handle.net/10993/23724>`_)
+.. [BISD-00] R. Bisdorff (2000). "Logical foundation of fuzzy preferential systems with application to the Electre decision aid methods", *Computers and Operations Research*, 27: 673-687 (downloadable `PDF file 159.1kB <http://hdl.handle.net/10993/23724>`_)
 
-.. [3] M. Ch. Golumbic (2004), *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier.
+.. [GOLU-04] M. Ch. Golumbic (2004), *Agorithmic Graph Theory and Perfect Graphs* 2nd Ed., Annals of Discrete Mathematics 57, Elsevier.
        
 
 |location_link3|
