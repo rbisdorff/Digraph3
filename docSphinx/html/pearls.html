@@ -1,52 +1,215 @@
 
-<!DOCTYPE html>
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digraph3 Advanced Topics &#8212; Digraph3 3.9.0 documentation</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Digraph3 Advanced Topics &mdash; Digraph3 3.9.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
-    <script src="_static/sidebar.js"></script>
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Digraph3 Archives" href="digraph3Archives.html" />
     <link rel="prev" title="Technical Reference of the Digraph3 modules" href="techDoc.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="digraph3Archives.html" title="Digraph3 Archives"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="techDoc.html" title="Technical Reference of the Digraph3 modules"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Digraph3 3.9.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Digraph3 Advanced Topics</a></li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Digraph3
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                3.9
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorials of the Digraph3 resources</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="techDoc.html">Technical Reference of the Digraph3 modules</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Digraph3 Advanced Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#coping-with-missing-data-and-indeterminateness">Coping with missing data and indeterminateness</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-motivating-data-set">A motivating data set</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelling-pairwise-bipolar-valued-rating-opinions">Modelling pairwise bipolar-valued rating opinions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence">Ordinal correlation equals bipolar-valued relational equivalence</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#kendall-s-tau-index">Kendall’s <em>tau</em> index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bipolar-valued-relational-equivalence">Bipolar-valued relational equivalence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fitness-of-ranking-heuristics">Fitness of ranking heuristics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#illustrating-preference-divergences">Illustrating preference divergences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions">Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bipolar-valued-kernel-membership-characteristic-vectors">Bipolar-valued kernel membership characteristic vectors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#claude-berge-s-kernel-equation-systems"><em>Claude Berge</em>’s kernel equation systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#solving-bipolar-valued-kernel-equation-systems">Solving bipolar-valued kernel equation systems</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#on-confident-outrankings-with-uncertain-criteria-significances">On confident outrankings with uncertain criteria significances</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modelling-uncertain-criteria-significances">Modelling uncertain criteria significances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#bipolar-valued-likelihood-of-at-least-as-good-as-situations">Bipolar-valued likelihood of ‘’at least as good as ” situations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#confidence-level-of-outranking-situations">Confidence level of outranking situations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#on-stable-outrankings-with-ordinal-criteria-significance">On stable outrankings with ordinal criteria significance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cardinal-or-ordinal-criteria-significances">Cardinal or ordinal criteria significances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#qualifying-the-stability-of-outranking-situations">Qualifying the stability of outranking situations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#computing-the-stability-denotation-of-outranking-situations">Computing the stability denotation of outranking situations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#robust-bipolar-valued-outranking-digraphs">Robust bipolar-valued outranking digraphs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#on-unopposed-outrankings-with-multiple-decision-objectives">On unopposed outrankings with multiple decision objectives</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#characterising-unopposed-multiobjective-outranking-situations">Characterising unopposed multiobjective outranking situations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#computing-pareto-efficient-multiobjective-choices">Computing <em>Pareto</em> efficient multiobjective  choices</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#two-stage-elections-with-multipartisan-primary-selection">Two-stage elections with multipartisan primary selection</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#converting-voting-profiles-into-performance-tableaux">Converting voting profiles into performance tableaux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multipartisan-primary-selection-of-eligible-candidates">Multipartisan primary selection of eligible candidates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#secondary-election-winner-determination">Secondary election winner determination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multipartisan-preferences-in-divisive-politics">Multipartisan preferences in divisive politics</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bibliography">Bibliography</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#documents">Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#footnotes">Footnotes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="digraph3Archives.html">Digraph3 Archives</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Digraph3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Digraph3 Advanced Topics</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="digraph3-advanced-topics">
 <h1>Digraph3 Advanced Topics<a class="headerlink" href="#digraph3-advanced-topics" title="Permalink to this headline">¶</a></h1>
@@ -2879,116 +3042,59 @@ confidence level <em>alpha</em> %, if</p>
 </div>
 
 
-            <div class="clearer"></div>
+           </div>
+           
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Digraph3 Advanced Topics</a><ul>
-<li><a class="reference internal" href="#coping-with-missing-data-and-indeterminateness">Coping with missing data and indeterminateness</a><ul>
-<li><a class="reference internal" href="#a-motivating-data-set">A motivating data set</a></li>
-<li><a class="reference internal" href="#modelling-pairwise-bipolar-valued-rating-opinions">Modelling pairwise bipolar-valued rating opinions</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence">Ordinal correlation equals bipolar-valued relational equivalence</a><ul>
-<li><a class="reference internal" href="#kendall-s-tau-index">Kendall’s <em>tau</em> index</a></li>
-<li><a class="reference internal" href="#bipolar-valued-relational-equivalence">Bipolar-valued relational equivalence</a></li>
-<li><a class="reference internal" href="#fitness-of-ranking-heuristics">Fitness of ranking heuristics</a></li>
-<li><a class="reference internal" href="#illustrating-preference-divergences">Illustrating preference divergences</a></li>
-<li><a class="reference internal" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions">Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#bipolar-valued-kernel-membership-characteristic-vectors">Bipolar-valued kernel membership characteristic vectors</a><ul>
-<li><a class="reference internal" href="#claude-berge-s-kernel-equation-systems"><em>Claude Berge</em>’s kernel equation systems</a></li>
-<li><a class="reference internal" href="#solving-bipolar-valued-kernel-equation-systems">Solving bipolar-valued kernel equation systems</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#on-confident-outrankings-with-uncertain-criteria-significances">On confident outrankings with uncertain criteria significances</a><ul>
-<li><a class="reference internal" href="#modelling-uncertain-criteria-significances">Modelling uncertain criteria significances</a></li>
-<li><a class="reference internal" href="#bipolar-valued-likelihood-of-at-least-as-good-as-situations">Bipolar-valued likelihood of ‘’at least as good as ” situations</a></li>
-<li><a class="reference internal" href="#confidence-level-of-outranking-situations">Confidence level of outranking situations</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#on-stable-outrankings-with-ordinal-criteria-significance">On stable outrankings with ordinal criteria significance</a><ul>
-<li><a class="reference internal" href="#cardinal-or-ordinal-criteria-significances">Cardinal or ordinal criteria significances</a></li>
-<li><a class="reference internal" href="#qualifying-the-stability-of-outranking-situations">Qualifying the stability of outranking situations</a></li>
-<li><a class="reference internal" href="#computing-the-stability-denotation-of-outranking-situations">Computing the stability denotation of outranking situations</a></li>
-<li><a class="reference internal" href="#robust-bipolar-valued-outranking-digraphs">Robust bipolar-valued outranking digraphs</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#on-unopposed-outrankings-with-multiple-decision-objectives">On unopposed outrankings with multiple decision objectives</a><ul>
-<li><a class="reference internal" href="#characterising-unopposed-multiobjective-outranking-situations">Characterising unopposed multiobjective outranking situations</a></li>
-<li><a class="reference internal" href="#computing-pareto-efficient-multiobjective-choices">Computing <em>Pareto</em> efficient multiobjective  choices</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#two-stage-elections-with-multipartisan-primary-selection">Two-stage elections with multipartisan primary selection</a><ul>
-<li><a class="reference internal" href="#converting-voting-profiles-into-performance-tableaux">Converting voting profiles into performance tableaux</a></li>
-<li><a class="reference internal" href="#multipartisan-primary-selection-of-eligible-candidates">Multipartisan primary selection of eligible candidates</a></li>
-<li><a class="reference internal" href="#secondary-election-winner-determination">Secondary election winner determination</a></li>
-<li><a class="reference internal" href="#multipartisan-preferences-in-divisive-politics">Multipartisan preferences in divisive politics</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#bibliography">Bibliography</a><ul>
-<li><a class="reference internal" href="#documents">Documents</a></li>
-<li><a class="reference internal" href="#footnotes">Footnotes</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="digraph3Archives.html" class="btn btn-neutral float-right" title="Digraph3 Archives" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="techDoc.html" class="btn btn-neutral float-left" title="Technical Reference of the Digraph3 modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="techDoc.html"
-                        title="previous chapter">Technical Reference of the Digraph3 modules</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="digraph3Archives.html"
-                        title="next chapter">Digraph3 Archives</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/pearls.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2012-2020, Raymond Bisdorff
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="digraph3Archives.html" title="Digraph3 Archives"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="techDoc.html" title="Technical Reference of the Digraph3 modules"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Digraph3 3.9.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Digraph3 Advanced Topics</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2012-2020, Raymond Bisdorff.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.0.
-    </div>
-  </body>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
 </html>

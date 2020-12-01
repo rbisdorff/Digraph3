@@ -29,7 +29,9 @@ numfig = True
 
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest',
+import sphinx_rtd_theme
+extensions = ['sphinx_rtd_theme',
+              'sphinx.ext.autodoc', 'sphinx.ext.doctest',
               'sphinx.ext.intersphinx','sphinx.ext.imgmath',
               'sphinx.ext.viewcode','sphinx.ext.inheritance_diagram',
               'sphinx.ext.autosectionlabel']
@@ -109,15 +111,31 @@ autodoc_default_option = ['members', 'undoc-members', 'inherited-members','show-
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'classic'
+#html_theme = 'classic'
 #html_theme = 'alabaster'
-#html_theme = 'sphinxdoc'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #html_theme_options = {}
-html_theme_options = {"stickysidebar": "true", "collapsiblesidebar": "true", "externalrefs": "true"}
+#html_theme_options = {"stickysidebar": "true", "collapsiblesidebar": "true", "externalrefs": "true"}
+html_theme_options = {
+    'canonical_url': '',
+    #'analytics_id': 'UA-XXXXXXX-1',  #  Provided by Google in your dashboard
+    'logo_only': False,
+    'display_version': True,
+    'prev_next_buttons_location': 'bottom',
+    'style_external_links': False,
+    #'vcs_pageview_mode': '',
+    'style_nav_header_background': 'white',
+    # Toc options
+    'collapse_navigation': True,
+    'sticky_navigation': True,
+    'navigation_depth': 4,
+    'includehidden': True,
+    'titles_only': False
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
@@ -169,6 +187,7 @@ html_static_path = ['_static']
 
 # If true, links to the reST sources are added to the pages.
 # html_show_sourcelink = True
+html_show_sourcelink = False
 
 # If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
 #html_show_sphinx = True

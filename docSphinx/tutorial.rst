@@ -3434,7 +3434,7 @@ Let us now, for instance, check the pairwise outranking situations observed betw
 
 The *Köln* alternative is performing **at least as well as** the *Saarbrücken* alternative on all the performance criteria, except the *Annual income* (of significance 2/24). Conversely, the *Saarbrücken* alternative is clearly **outperformed** from the *geographical* (0/6) as well as from the *financial* perspective (2/6).
 
-In a similar way, we may finally compute a *weak ranking* of all the potential study programs with the the help of the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor (see :numref:`aliceRankingByChoosing` below), who computes a bipolar ranking by conjointly *best-choosing* and *last-rejecting* [BIS-1999]_.
+In a similar way, we may finally compute a *weak ranking* of all the potential study programs with the help of the :py:class:`transitiveDigraphs.RankingByChoosingDigraph` constructor (see :numref:`aliceRankingByChoosing` below), who computes a bipolar ranking by conjointly *best-choosing* and *last-rejecting* [BIS-1999]_.
 
 .. code-block:: pycon
    :name: aliceRankingByChoosing
