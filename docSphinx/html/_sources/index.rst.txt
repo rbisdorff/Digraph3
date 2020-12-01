@@ -1,6 +1,6 @@
 Documentation of the Digraph3 resources
 =======================================
-:Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg
+:Author: Raymond Bisdorff, Emeritus Professor of Computer Science and Applied Mathematics
 :Version: Revision: Python 3.9
 :URL: https://rbisdorff.github.io/
 :Copyright: R. Bisdorff |location_link3| 2013-2020
@@ -8,11 +8,6 @@ Documentation of the Digraph3 resources
 .. image:: introDoc2.png
     :width: 500pt
     :align: center
-
-
-.. note:: 
-       
-    This documentation is dedicated to our late colleague and dear friend *Marc ROUBENS* who, through his expertise in fuzzy sets and systems, greatly stimulated our research in bipolar-valued epistemic logic.
 
 .. _Documents:
 
@@ -43,32 +38,44 @@ Contents
 
        <small><i>Historical case studies and example graphs</i></small>
 
+Indices and tables
+``````````````````
+
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
 
+
 .. _Introduction-label:
 
-Documentation parts
-```````````````````
-This documentation, available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a *bipolar-valued outranking* approach ([BISD-15]_, [BISD-00]_). These computing resources are useful in the field of `Algorithmic Decision Theory <https://www.lamsade.dauphine.fr/~projet_cost/ALGORITHMIC_DECISION_THEORY/ALGORITHMIC_DECISION_THEORY.html>`_ and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They provided the practical tools for a Master Course |location_link4| at the University of Luxembourg.
+Introduction
+````````````
 
-The documentation contains, first, a set of tutorials introducing the main objects like digraphs, outranking digraphs and performance tableaux. There is also a tutorial provided on undirected graphs. Some tutorials are problem oriented and show how to compute the winner of an election, how to build a best choice recommendation, or how to linearly rank or rate with multiple incommensurable performance criteria. Other tutorials concern more specifically operational aspects of computing maximal independent sets (MISs) and kernels in graphs and digraphs. The tutorial about split, interval and permutation graphs is inspired by Martin Golumbic's book on *Algorithmic Graph Theory and Perfect Graphs* ([GOLU-04]_). We also provide a tutorial on tree graphs and spanning forests.
+|
+|      *This documentation is dedicated*
+|      *to our late colleague and dear friend* Marc ROUBENS
+|      *who, through his expertise in fuzzy sets and systems*,
+|      *greatly stimulated our research in bipolar-valued epistemic logic*.
+|
+
+The *Digraph3 documentation*, available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a *bipolar-valued outranking* approach ([BISD-15]_, [BISD-00]_). These computing resources are useful in the field of `Algorithmic Decision Theory <https://www.lamsade.dauphine.fr/~projet_cost/ALGORITHMIC_DECISION_THEORY/ALGORITHMIC_DECISION_THEORY.html>`_ and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They provided the practical tools for a Master Course |location_link4| at the University of Luxembourg.
+
+The documentation contains, first, a set of tutorials introducing the main objects like **digraphs**, **outranking digraphs** and **performance tableaux**. There is also a tutorial provided on **undirected graphs**. Some tutorials are problem oriented and show how to compute the *winner of an election*, how to build a *best choice recommendation*, or *how to linearly rank or rate* with multiple incommensurable performance criteria. Other tutorials concern more specifically operational aspects of computing **maximal independent sets** (MISs) and **kernels** in graphs and digraphs. The tutorial about *split*, *interval* and *permutation graphs* is inspired by *Martin Golumbic* 's book on *Algorithmic Graph Theory and Perfect Graphs* ([GOLU-04]_). We also provide a tutorial on *tree graphs* and *spanning forests*.
 
    .. toctree:: tutorial
       :maxdepth: 2
 
-The second Section concerns the extensive reference manual of the collection of provided Python3 modules, classes and methods. The main classes in this collection are the :py:class:`digraphs.Digraph` overall root class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. The technical documentation also provides insight into the complete source code of all modules, classes and methods.
+The second Section concerns the **extensive reference manual** of the collection of provided Python3 modules, classes and methods. The main classes in this collection are the :py:class:`digraphs.Digraph` overall root class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. The technical documentation also provides insight into the complete source code of all modules, classes and methods.
 
   .. toctree:: techDoc
      :maxdepth: 2
 		
-The third Section exhibits some pearls of *bipolar-valued epistemic logic* that enrich the Digraph3 resources. These short texts illustrate well the very computational benefit one may get when working in a bipolar-valued logical framework. And, more specifically, the essential part the logically neutral *undeterminate* value is judiciously playing therein.  
+The third Section exhibits some pearls of **bipolar-valued epistemic logic** that enrich the Digraph3 resources. These short texts illustrate well the very computational benefit one may get when working in a bipolar-valued logical framework. And, more specifically, the essential part the logically neutral *undeterminate* value is judiciously playing therein.  
 
    .. toctree:: pearls
       :maxdepth: 2
 		 
-The fourth section gathers historical case studies and example digraphs compiled before 2006 and concerning the active development of the Digraph3 collection of python3 modules for implementing tools and methods for enumerating *non isomorphic maximal independent sets* in undirected graphs and computing *dominant digraph kernels*. 
+The fourth section gathers **historical case studies** with example digraphs compiled before 2006 and concerning the active development of the Digraph3 collection of python3 modules for implementing tools and methods for enumerating *non isomorphic maximal independent sets* in undirected graphs and computing *dominant digraph kernels*. 
 
    .. toctree:: digraph3Archives
       :maxdepth: 2
