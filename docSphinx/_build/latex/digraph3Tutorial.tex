@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{November 30, 2020}
+\date{December 02, 2020}
 \release{3.9.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -4382,7 +4382,7 @@ Let us now, for instance, check the pairwise outranking situations observed betw
 
 The \sphinxstyleemphasis{Köln} alternative is performing \sphinxstylestrong{at least as well as} the \sphinxstyleemphasis{Saarbrücken} alternative on all the performance criteria, except the \sphinxstyleemphasis{Annual income} (of significance 2/24). Conversely, the \sphinxstyleemphasis{Saarbrücken} alternative is clearly \sphinxstylestrong{outperformed} from the \sphinxstyleemphasis{geographical} (0/6) as well as from the \sphinxstyleemphasis{financial} perspective (2/6).
 
-In a similar way, we may finally compute a \sphinxstyleemphasis{weak ranking} of all the potential study programs with the the help of the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingByChoosingDigraph}} constructor (see \hyperref[\detokenize{tutorial:alicerankingbychoosing}]{Listing \ref{\detokenize{tutorial:alicerankingbychoosing}}} below), who computes a bipolar ranking by conjointly \sphinxstyleemphasis{best\sphinxhyphen{}choosing} and \sphinxstyleemphasis{last\sphinxhyphen{}rejecting} \sphinxcite{tutorial:bis-1999}.
+In a similar way, we may finally compute a \sphinxstyleemphasis{weak ranking} of all the potential study programs with the help of the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingByChoosingDigraph}} constructor (see \hyperref[\detokenize{tutorial:alicerankingbychoosing}]{Listing \ref{\detokenize{tutorial:alicerankingbychoosing}}} below), who computes a bipolar ranking by conjointly \sphinxstyleemphasis{best\sphinxhyphen{}choosing} and \sphinxstyleemphasis{last\sphinxhyphen{}rejecting} \sphinxcite{tutorial:bis-1999}.
 \sphinxSetupCaptionForVerbatim{Weakly ranking by bipolar best\sphinxhyphen{}choosing and last\sphinxhyphen{}rejecting}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:alicerankingbychoosing}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4657,7 +4657,7 @@ We may compute, for instance, a five\sphinxhyphen{}tiling of a given random perf
 \PYG{g+go}{  ]   \PYGZlt{} \PYGZhy{} 0.20]: [\PYGZsq{}a44\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-Most of the decision actions (26) are gathered in the median quintile \(!0.40 - 0.60]\) class, whereas the highest quintile \(]0.80-1.00]\) and the lowest quintile \(]< - 0.20]\) classes gather each one a unique decision alternative (\sphinxstyleemphasis{a22}, resp. \sphinxstyleemphasis{a44}) (see \hyperref[\detokenize{tutorial:quantilessorting}]{Listing \ref{\detokenize{tutorial:quantilessorting}}} Lines 43\sphinxhyphen{}).
+Most of the decision actions (26) are gathered in the median quintile \([0.40 - 0.60]\) class, whereas the highest quintile \(]0.80-1.00]\) and the lowest quintile \(]< - 0.20]\) classes gather each one a unique decision alternative (\sphinxstyleemphasis{a22}, resp. \sphinxstyleemphasis{a44}) (see \hyperref[\detokenize{tutorial:quantilessorting}]{Listing \ref{\detokenize{tutorial:quantilessorting}}} Lines 43\sphinxhyphen{}).
 
 We may inspect as follows the details of the corresponding sorting characteristics.
 \sphinxSetupCaptionForVerbatim{Bipolar\sphinxhyphen{}valued sorting characteristics (extract)}

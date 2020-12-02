@@ -21,11 +21,11 @@ Tutorials of the Digraph3 resources
 
 .. only:: html
 
-   :Author: Raymond Bisdorff, Emeritus Professor, University of Luxembourg,
-   :URL: https://rbisdorff.github.io/
+   :Author: Raymond Bisdorff, Emeritus Professor of Computer Science and Applied Mathematics
+   :Url: https://rbisdorff.github.io/
    :Version: Revision: Python 3.9
-   :PDF: http://hdl.handle.net/10993/37886
-   :Copyright: R. Bisdorff 2013-2020
+   :PDF version: http://hdl.handle.net/10993/37886
+   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2020
 
 .. _Tutorial-label:
 
