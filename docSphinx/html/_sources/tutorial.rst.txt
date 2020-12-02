@@ -3690,7 +3690,7 @@ We may compute, for instance, a five-tiling of a given random performance tablea
 		     'a45', 'a49']
      ]   < - 0.20]: ['a44']
 
-Most of the decision actions (26) are gathered in the median quintile :math:`!0.40 - 0.60]` class, whereas the highest quintile :math:`]0.80-1.00]` and the lowest quintile :math:`]< - 0.20]` classes gather each one a unique decision alternative (*a22*, resp. *a44*) (see :numref:`quantilesSorting` Lines 43-).
+Most of the decision actions (26) are gathered in the median quintile :math:`[0.40 - 0.60]` class, whereas the highest quintile :math:`]0.80-1.00]` and the lowest quintile :math:`]< - 0.20]` classes gather each one a unique decision alternative (*a22*, resp. *a44*) (see :numref:`quantilesSorting` Lines 43-).
 
 We may inspect as follows the details of the corresponding sorting characteristics.
 

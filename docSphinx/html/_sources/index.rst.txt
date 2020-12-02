@@ -52,10 +52,9 @@ Introduction
 ````````````
 
 |
-|      *This documentation is dedicated*
-|      *to our late colleague and dear friend* Marc ROUBENS
-|      *who, through his expertise in fuzzy sets and systems*,
-|      *greatly stimulated our research in bipolar-valued epistemic logic*.
+|      *This documentation is dedicated to*
+|      *our late colleague and dear friend*
+|                  Marc ROUBENS.
 |
 
 The *Digraph3 documentation*, available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a *bipolar-valued outranking* approach ([BISD-15]_, [BISD-00]_). These computing resources are useful in the field of `Algorithmic Decision Theory <https://www.lamsade.dauphine.fr/~projet_cost/ALGORITHMIC_DECISION_THEORY/ALGORITHMIC_DECISION_THEORY.html>`_ and more specifically in **outranking** based *Multiple Criteria Decision Aid* (MCDA). They provided the practical tools for a Master Course |location_link4| at the University of Luxembourg.
