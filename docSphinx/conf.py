@@ -63,7 +63,7 @@ copyright = '2012-2020, Raymond Bisdorff'
 # built documents.
 #
 # The short X.Y version.
-version = '3.9'
+version = 'Python 3.9'
 # The full version, including alpha/beta/rc tags.
 release = '3.9.0'
 
@@ -289,7 +289,7 @@ latex_logo = 'introDoc3.png'
 #latex_use_parts = False
 
 # If true, show page references after internal links.
-latex_show_pagerefs =  True
+latex_show_pagerefs = True
 
 # If true, show URL addresses after external links.
 latex_show_urls =  'True'
@@ -336,5 +336,5 @@ texinfo_documents = [
 #texinfo_show_urls = 'footnote'
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'python': ('https://docs.python.org/3.8', None)}
+intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
 #{'http://docs.python.org/': None}

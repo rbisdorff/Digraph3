@@ -2,7 +2,7 @@ Technical Reference of the Digraph3 modules
 ===========================================
 :Author: Raymond Bisdorff, Emeritus Professor of Computer Science and Applied Mathematics
 :Url: https://rbisdorff.github.io/
-:Version: Revision: Python 3.9
+:Version: |version|
 :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2020
 
 .. contents:: Table of Contents
