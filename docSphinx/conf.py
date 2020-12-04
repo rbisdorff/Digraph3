@@ -128,7 +128,7 @@ html_theme_options = {
     'prev_next_buttons_location': 'both',
     'style_external_links': True,
     #'vcs_pageview_mode': '',
-    'style_nav_header_background': '#2980B9',
+    #'style_nav_header_background': '',
     # Toc options
     'collapse_navigation': True,
     'sticky_navigation': True,
@@ -142,7 +142,7 @@ html_theme_options = {
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-#html_title = None
+html_title = 'Digraph3 Documentation'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None

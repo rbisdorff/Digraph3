@@ -4,10 +4,12 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
-  
+  <meta content="Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory" name="description" />
+<meta content="Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid" name="keywords" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tutorials of the Digraph3 resources &mdash; Digraph3 3.9.0 documentation</title>
+  <title>Tutorials of the Digraph3 resources &mdash; Digraph3 Documentation</title>
   
 
   
@@ -48,7 +50,7 @@
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search"  style="background: #2980B9" >
+        <div class="wy-side-nav-search" >
           
 
           
@@ -4873,7 +4875,9 @@ pairwise perspective (see below), we notice that, with the given preference disc
  8
  9
 10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span>
 <span class="go"> *------- Object instance description ------*</span>
@@ -4884,11 +4888,22 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span class="go"> Size                : 67</span>
 <span class="go"> Determinateness (%) : 73.91</span>
 <span class="go"> Valuation domain    : [-1.00;1.00]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeSymmetryDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go"> Symmetry degree of graph &lt;rel_AliceChoice&gt; : 0.49</span>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Despite rather poorly discriminating performance evaluations, the 67 pairwise outranking situations, positively validated in the digraph <em>dg</em> obtained from Alice’s performance tableau (see <a class="reference internal" href="#aliceoutranking"><span class="std std-numref">Listing 48</span></a> Line 9), are supported by a 74% majority of criteria significance (Line 10).</p>
-<p>We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion <em>AS</em> to be considerable which triggers, the case given, a potential polarisation of the outranking characteristics. We may inspect the occurrence of such polarisations as follows.</p>
+<p>From Alice’s performance tableau we obtain 67 positively validated pairwise outranking situations in the digraph <em>dg</em>, supported by a 74% majority of criteria significance(see <a class="reference internal" href="#aliceoutranking"><span class="std std-numref">Listing 48</span></a> Line 9-10).</p>
+<p>Due to the poorly discriminating performance evaluations, nearly half of these outranking situations (see Line 12) are <em>symmetric</em> and reveal actually <em>more or less indifference</em> situations between the potential study programs. This is well illustrated in the <strong>relation map</strong> of the outranking digraph (see <a class="reference internal" href="#alicerelationmap"><span class="std std-numref">Fig. 30</span></a>).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gg</span><span class="o">.</span><span class="n">showHTMLRelationMap</span><span class="p">(</span><span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;Outranking relation map&#39;</span><span class="p">,</span>\
+<span class="go">                           rankingRule=&#39;Copeland&#39;)</span>
+</pre></div>
+</div>
+<div class="figure align-center" id="alicerelationmap">
+<a class="reference internal image-reference" href="_images/aliceRelationMap.png"><img alt="_images/aliceRelationMap.png" src="_images/aliceRelationMap.png" style="width: 550px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">‘Copeland’-ranked outranking relation map</span><a class="headerlink" href="#alicerelationmap" title="Permalink to this image">¶</a></p>
+</div>
+<p>We have mentioned that Alice considers a performance difference of 7 points on the <em>Attractiveness of studies</em> criterion <em>AS</em> to be considerable which triggers, the case given, a potential polarisation of the outranking characteristics. In <a class="reference internal" href="#alicerelationmap"><span class="std std-numref">Fig. 30</span></a> above, these polarisations appear in the last column and last row. We may inspect the occurrence of such polarisations as follows.</p>
 <div class="literal-block-wrapper docutils container" id="alicevetos">
 <div class="code-block-caption"><span class="caption-number">Listing 49 </span><span class="caption-text">Veto and counter-veto situations</span><a class="headerlink" href="#alicevetos" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -4963,16 +4978,8 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>In <a class="reference internal" href="#alicevetos"><span class="std std-numref">Listing 49</span></a>, we notice that <em>considerable performance differences</em> concerning the <em>Attractiveness of the studies</em> (<em>AS</em> criterion) are indeed observed between the <em>Specialised Secretary</em> study programm offered in Köln and the <em>Graduate Interpreter</em> study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three <em>more or less invalid</em> outranking situations to <em>certainly invalid</em> (Lines 9, 14, 19) and corresponding three <em>more or less valid</em> converse outranking situations to <em>certainly valid</em> ones (Lines 25, 30, 35). In <a class="reference internal" href="#alicerelationmap"><span class="std std-numref">Fig. 30</span></a> below, these polarisations appear in the last column and last row.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gg</span><span class="o">.</span><span class="n">showHTMLRelationMap</span><span class="p">(</span><span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;Outranking relation map&#39;</span><span class="p">,</span>\
-<span class="go">                           rankingRule=&#39;Copeland&#39;)</span>
-</pre></div>
-</div>
-<div class="figure align-center" id="alicerelationmap">
-<a class="reference internal image-reference" href="_images/aliceRelationMap.png"><img alt="_images/aliceRelationMap.png" src="_images/aliceRelationMap.png" style="width: 550px;" /></a>
-<p class="caption"><span class="caption-number">Fig. 30 </span><span class="caption-text">‘Copeland’-ranked outranking relation map</span><a class="headerlink" href="#alicerelationmap" title="Permalink to this image">¶</a></p>
-</div>
-<p>We may furthermore notice in <a class="reference internal" href="#alicerelationmap"><span class="std std-numref">Fig. 30</span></a> that the four best-ranked study programs, <em>I-FHK</em>, <em>I-USB</em>, <em>I-UHB</em> and <em>T-FHK</em>,  are in fact <em>Condorcet</em> winners (see <a class="reference internal" href="#alicebestchoice"><span class="std std-numref">Listing 50</span></a> Line 2), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (Line 8).</p>
+<p>In <a class="reference internal" href="#alicevetos"><span class="std std-numref">Listing 49</span></a>, we see that <em>considerable performance differences</em> concerning the <em>Attractiveness of the studies</em> (<em>AS</em> criterion) are indeed observed between the <em>Specialised Secretary</em> study programm offered in Köln and the <em>Graduate Interpreter</em> study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three <em>more or less invalid</em> outranking situations to <em>certainly invalid</em> (Lines 9, 14, 19) and corresponding three <em>more or less valid</em> converse outranking situations to <em>certainly valid</em> ones (Lines 25, 30, 35).</p>
+<p>We may finally notice in <a class="reference internal" href="#alicerelationmap"><span class="std std-numref">Fig. 30</span></a> that the four best-ranked study programs, <em>I-FHK</em>, <em>I-USB</em>, <em>I-UHB</em> and <em>T-FHK</em>,  are in fact <em>Condorcet</em> winners (see <a class="reference internal" href="#alicebestchoice"><span class="std std-numref">Listing 50</span></a> Line 2), i.e. they are all four <em>indifferent</em> one of the other <strong>and</strong> positively <em>outrank</em> all other alternatives, a result confirmed below by our best choice recommendation (Line 8).</p>
 <div class="literal-block-wrapper docutils container" id="alicebestchoice">
 <div class="code-block-caption"><span class="caption-number">Listing 50 </span><span class="caption-text">Alice’s best choice recommendation</span><a class="headerlink" href="#alicebestchoice" title="Permalink to this code">¶</a></div>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -5395,7 +5402,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Most of the decision actions (26) are gathered in the median quintile <img class="math" src="_images/math/a94f0f30b551e572b7e3d59fbfc44ab8383441fc.png" alt="[0.40 - 0.60]"/> class, whereas the highest quintile <img class="math" src="_images/math/0a7b2cc4f3bbd9a493a829eb1d91019568ee8d20.png" alt="]0.80-1.00]"/> and the lowest quintile <img class="math" src="_images/math/c0eb2132b6e6546a8c3d238e441955c458437103.png" alt="]&lt; - 0.20]"/> classes gather each one a unique decision alternative (<em>a22</em>, resp. <em>a44</em>) (see <a class="reference internal" href="#quantilessorting"><span class="std std-numref">Listing 56</span></a> Lines 43-).</p>
+<p>Most of the decision actions (26) are gathered in the median quintile <img class="math" src="_images/math/2831c2ff13dd957b076d14de5ea60dc66165e93f.png" alt="]0.40 - 0.60]"/> class, whereas the highest quintile <img class="math" src="_images/math/0a7b2cc4f3bbd9a493a829eb1d91019568ee8d20.png" alt="]0.80-1.00]"/> and the lowest quintile <img class="math" src="_images/math/c0eb2132b6e6546a8c3d238e441955c458437103.png" alt="]&lt; - 0.20]"/> classes gather each one a unique decision alternative (<em>a22</em>, resp. <em>a44</em>) (see <a class="reference internal" href="#quantilessorting"><span class="std std-numref">Listing 56</span></a> Lines 43-).</p>
 <p>We may inspect as follows the details of the corresponding sorting characteristics.</p>
 <div class="literal-block-wrapper docutils container" id="sortingcharacteristics">
 <div class="code-block-caption"><span class="caption-number">Listing 57 </span><span class="caption-text">Bipolar-valued sorting characteristics (extract)</span><a class="headerlink" href="#sortingcharacteristics" title="Permalink to this code">¶</a></div>

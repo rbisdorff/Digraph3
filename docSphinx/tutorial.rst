@@ -1,3 +1,7 @@
+.. meta::
+   :description: Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory
+   :keywords: Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid
+
 .. raw:: latex
 
    \begingroup
@@ -3309,10 +3313,24 @@ Let us now have a look at the resulting pairwise outranking situations.
     Size                : 67
     Determinateness (%) : 73.91
     Valuation domain    : [-1.00;1.00]
+   >>> g.computeSymmetryDegree(Comments=True)
+    Symmetry degree of graph <rel_AliceChoice> : 0.49
 
-Despite rather poorly discriminating performance evaluations, the 67 pairwise outranking situations, positively validated in the digraph *dg* obtained from Alice's performance tableau (see :numref:`aliceOutranking` Line 9), are supported by a 74% majority of criteria significance (Line 10).
+From Alice's performance tableau we obtain 67 positively validated pairwise outranking situations in the digraph *dg*, supported by a 74% majority of criteria significance(see :numref:`aliceOutranking` Line 9-10).
 
-We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion *AS* to be considerable which triggers, the case given, a potential polarisation of the outranking characteristics. We may inspect the occurrence of such polarisations as follows.
+Due to the poorly discriminating performance evaluations, nearly half of these outranking situations (see Line 12) are *symmetric* and reveal actually *more or less indifference* situations between the potential study programs. This is well illustrated in the **relation map** of the outranking digraph (see :numref:`aliceRelationMap`).
+
+    >>> gg.showHTMLRelationMap(tableTitle='Outranking relation map',\
+                               rankingRule='Copeland')
+
+.. figure:: aliceRelationMap.png
+   :name: aliceRelationMap
+   :width: 550 px
+   :align: center
+
+   'Copeland'-ranked outranking relation map	   
+
+We have mentioned that Alice considers a performance difference of 7 points on the *Attractiveness of studies* criterion *AS* to be considerable which triggers, the case given, a potential polarisation of the outranking characteristics. In :numref:`aliceRelationMap` above, these polarisations appear in the last column and last row. We may inspect the occurrence of such polarisations as follows.
 
 .. code-block:: pycon
    :name: aliceVetos
@@ -3355,19 +3373,9 @@ We have mentioned that Alice considers a performance difference of 7 points on t
      Counter-veto threshold              : 7.00
      Polarisation: r(I-UHB >= S-HKK) = 0.17 ==> +1.00
 
-In :numref:`aliceVetos`, we notice that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 9, 14, 19) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35). In :numref:`aliceRelationMap` below, these polarisations appear in the last column and last row.
+In :numref:`aliceVetos`, we see that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 9, 14, 19) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35). 
 
-    >>> gg.showHTMLRelationMap(tableTitle='Outranking relation map',\
-                               rankingRule='Copeland')
-
-.. figure:: aliceRelationMap.png
-   :name: aliceRelationMap
-   :width: 550 px
-   :align: center
-
-   'Copeland'-ranked outranking relation map	   
-
-We may furthermore notice in :numref:`aliceRelationMap` that the four best-ranked study programs, *I-FHK*, *I-USB*, *I-UHB* and *T-FHK*,  are in fact *Condorcet* winners (see :numref:`aliceBestChoice` Line 2), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (Line 8).
+We may finally notice in :numref:`aliceRelationMap` that the four best-ranked study programs, *I-FHK*, *I-USB*, *I-UHB* and *T-FHK*,  are in fact *Condorcet* winners (see :numref:`aliceBestChoice` Line 2), i.e. they are all four *indifferent* one of the other **and** positively *outrank* all other alternatives, a result confirmed below by our best choice recommendation (Line 8).
    
 .. code-block:: pycon
    :name: aliceBestChoice
@@ -3696,7 +3704,7 @@ We may compute, for instance, a five-tiling of a given random performance tablea
 		     'a45', 'a49']
      ]   < - 0.20]: ['a44']
 
-Most of the decision actions (26) are gathered in the median quintile :math:`[0.40 - 0.60]` class, whereas the highest quintile :math:`]0.80-1.00]` and the lowest quintile :math:`]< - 0.20]` classes gather each one a unique decision alternative (*a22*, resp. *a44*) (see :numref:`quantilesSorting` Lines 43-).
+Most of the decision actions (26) are gathered in the median quintile :math:`]0.40 - 0.60]` class, whereas the highest quintile :math:`]0.80-1.00]` and the lowest quintile :math:`]< - 0.20]` classes gather each one a unique decision alternative (*a22*, resp. *a44*) (see :numref:`quantilesSorting` Lines 43-).
 
 We may inspect as follows the details of the corresponding sorting characteristics.
 

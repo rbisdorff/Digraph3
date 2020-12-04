@@ -1,3 +1,8 @@
+.. meta::
+   :description: Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory
+   :keywords: Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid
+
+
 Technical Reference of the Digraph3 modules
 ===========================================
 :Author: Raymond Bisdorff, Emeritus Professor of Computer Science and Applied Mathematics
