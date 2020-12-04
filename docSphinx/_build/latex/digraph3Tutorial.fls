@@ -422,11 +422,11 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
-INPUT AliceF.png
-INPUT ./AliceF.png
-INPUT ./AliceF.png
-INPUT AliceF.png
-INPUT ./AliceF.png
+INPUT AliceFo.png
+INPUT ./AliceFo.png
+INPUT ./AliceFo.png
+INPUT AliceFo.png
+INPUT ./AliceFo.png
 INPUT aliceCriteria.png
 INPUT ./aliceCriteria.png
 INPUT ./aliceCriteria.png

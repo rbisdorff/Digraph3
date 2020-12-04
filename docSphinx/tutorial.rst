@@ -3151,20 +3151,30 @@ Back to :ref:`Content Table <Tutorial-label>`
 Alice's best choice: A case study [19]_
 ---------------------------------------
 
-.. sidebar:: Alice D.
-
-    .. image:: AliceF.png
-       :width: 200 px
-       :align: center
-
 .. contents:: 
 	:depth: 2
 	:local:
 
-Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her "Abitur" with satisfactory and/or good marks and  wants to start her further studies thereafter.
+.. only:: html
+   
+   .. sidebar:: Alice D.
 
-She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees, as well as, her living costs during her studies.
+      .. image:: AliceF.png
+         :width: 200 px
+         :align: center
 
+   Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her "Abitur" with satisfactory and/or good marks and  wants to start her further studies thereafter.
+
+   She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees, as well as, her living costs during her studies.
+
+.. only:: latex
+
+   |linkAlice| Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her "Abitur" with satisfactory and/or good marks and  wants to start her further studies thereafter.
+
+   She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees, as well as, her living costs during her studies.
+
+   .. |linkAlice| image:: AliceFo.png
+                   :width: 100px
 
 The decision problem
 ....................

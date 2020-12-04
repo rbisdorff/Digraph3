@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{December 03, 2020}
+\date{December 04, 2020}
 \release{3.9.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -3829,12 +3829,6 @@ This case study is inspired by a \sphinxstyleemphasis{Multiple Criteria Decision
 %
 \end{footnotetext}\ignorespaces 
 \begin{sphinxShadowBox}
-\sphinxstylesidebartitle{Alice D.}
-
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=200\sphinxpxdimen]{{AliceF}.png}\hspace*{\fill}}
-\end{sphinxShadowBox}
-
-\begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id232}}{\hyperref[\detokenize{tutorial:the-decision-problem}]{\sphinxcrossref{The decision problem}}} (\autopageref*{\detokenize{tutorial:the-decision-problem}})
@@ -3851,7 +3845,7 @@ This case study is inspired by a \sphinxstyleemphasis{Multiple Criteria Decision
 \end{itemize}
 \end{sphinxShadowBox}
 
-Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her “Abitur” with satisfactory and/or good marks and  wants to start her further studies thereafter.
+\sphinxincludegraphics[width=100\sphinxpxdimen]{{AliceFo}.png} Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her “Abitur” with satisfactory and/or good marks and  wants to start her further studies thereafter.
 
 She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees, as well as, her living costs during her studies.
 
@@ -4256,11 +4250,27 @@ Let us now have a look at the resulting pairwise outranking situations.
 \PYG{g+go}{ Size                : 67}
 \PYG{g+go}{ Determinateness (\PYGZpc{}) : 73.91}
 \PYG{g+go}{ Valuation domain    : [\PYGZhy{}1.00;1.00]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeSymmetryDegree}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
+\PYG{g+go}{ Symmetry degree of graph \PYGZlt{}rel\PYGZus{}AliceChoice\PYGZgt{} : 0.49}
 \end{sphinxVerbatim}
 
-Despite rather poorly discriminating performance evaluations, the 67 pairwise outranking situations, positively validated in the digraph \sphinxstyleemphasis{dg} obtained from Alice’s performance tableau (see \hyperref[\detokenize{tutorial:aliceoutranking}]{Listing \ref{\detokenize{tutorial:aliceoutranking}}} Line 9), are supported by a 74\% majority of criteria significance (Line 10).
+From Alice’s performance tableau we obtain 67 positively validated pairwise outranking situations in the digraph \sphinxstyleemphasis{dg}, supported by a 74\% majority of criteria significance(see \hyperref[\detokenize{tutorial:aliceoutranking}]{Listing \ref{\detokenize{tutorial:aliceoutranking}}} Line 9\sphinxhyphen{}10).
 
-We have mentioned that Alice considers a performance difference of 7 points on the Attractiveness of studies criterion \sphinxstyleemphasis{AS} to be considerable which triggers, the case given, a potential polarisation of the outranking characteristics. We may inspect the occurrence of such polarisations as follows.
+Due to the poorly discriminating performance evaluations, nearly half of these outranking situations (see Line 12) are \sphinxstyleemphasis{symmetric} and reveal actually \sphinxstyleemphasis{more or less indifference} situations between the potential study programs. This is well illustrated in the \sphinxstylestrong{relation map} of the outranking digraph (see \hyperref[\detokenize{tutorial:alicerelationmap}]{Fig.\@ \ref{\detokenize{tutorial:alicerelationmap}}}).
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gg}\PYG{o}{.}\PYG{n}{showHTMLRelationMap}\PYG{p}{(}\PYG{n}{tableTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Outranking relation map}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
+\PYG{g+go}{                           rankingRule=\PYGZsq{}Copeland\PYGZsq{})}
+\end{sphinxVerbatim}
+
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{aliceRelationMap}.png}
+\caption{‘Copeland’\sphinxhyphen{}ranked outranking relation map}\label{\detokenize{tutorial:alicerelationmap}}\end{figure}
+
+We have mentioned that Alice considers a performance difference of 7 points on the \sphinxstyleemphasis{Attractiveness of studies} criterion \sphinxstyleemphasis{AS} to be considerable which triggers, the case given, a potential polarisation of the outranking characteristics. In \hyperref[\detokenize{tutorial:alicerelationmap}]{Fig.\@ \ref{\detokenize{tutorial:alicerelationmap}}} above, these polarisations appear in the last column and last row. We may inspect the occurrence of such polarisations as follows.
 \sphinxSetupCaptionForVerbatim{Veto and counter\sphinxhyphen{}veto situations}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:alicevetos}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4301,21 +4311,9 @@ We have mentioned that Alice considers a performance difference of 7 points on t
 \PYG{g+go}{  Polarisation: r(I\PYGZhy{}UHB \PYGZgt{}= S\PYGZhy{}HKK) = 0.17 ==\PYGZgt{} +1.00}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{tutorial:alicevetos}]{Listing \ref{\detokenize{tutorial:alicevetos}}}, we notice that \sphinxstyleemphasis{considerable performance differences} concerning the \sphinxstyleemphasis{Attractiveness of the studies} (\sphinxstyleemphasis{AS} criterion) are indeed observed between the \sphinxstyleemphasis{Specialised Secretary} study programm offered in Köln and the \sphinxstyleemphasis{Graduate Interpreter} study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three \sphinxstyleemphasis{more or less invalid} outranking situations to \sphinxstyleemphasis{certainly invalid} (Lines 9, 14, 19) and corresponding three \sphinxstyleemphasis{more or less valid} converse outranking situations to \sphinxstyleemphasis{certainly valid} ones (Lines 25, 30, 35). In \hyperref[\detokenize{tutorial:alicerelationmap}]{Fig.\@ \ref{\detokenize{tutorial:alicerelationmap}}} below, these polarisations appear in the last column and last row.
+In \hyperref[\detokenize{tutorial:alicevetos}]{Listing \ref{\detokenize{tutorial:alicevetos}}}, we see that \sphinxstyleemphasis{considerable performance differences} concerning the \sphinxstyleemphasis{Attractiveness of the studies} (\sphinxstyleemphasis{AS} criterion) are indeed observed between the \sphinxstyleemphasis{Specialised Secretary} study programm offered in Köln and the \sphinxstyleemphasis{Graduate Interpreter} study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three \sphinxstyleemphasis{more or less invalid} outranking situations to \sphinxstyleemphasis{certainly invalid} (Lines 9, 14, 19) and corresponding three \sphinxstyleemphasis{more or less valid} converse outranking situations to \sphinxstyleemphasis{certainly valid} ones (Lines 25, 30, 35).
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gg}\PYG{o}{.}\PYG{n}{showHTMLRelationMap}\PYG{p}{(}\PYG{n}{tableTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Outranking relation map}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
-\PYG{g+go}{                           rankingRule=\PYGZsq{}Copeland\PYGZsq{})}
-\end{sphinxVerbatim}
-
-\begin{figure}[H]
-\centering
-\capstart
-
-\noindent\sphinxincludegraphics[width=550\sphinxpxdimen]{{aliceRelationMap}.png}
-\caption{‘Copeland’\sphinxhyphen{}ranked outranking relation map}\label{\detokenize{tutorial:alicerelationmap}}\end{figure}
-
-We may furthermore notice in \hyperref[\detokenize{tutorial:alicerelationmap}]{Fig.\@ \ref{\detokenize{tutorial:alicerelationmap}}} that the four best\sphinxhyphen{}ranked study programs, \sphinxstyleemphasis{I\sphinxhyphen{}FHK}, \sphinxstyleemphasis{I\sphinxhyphen{}USB}, \sphinxstyleemphasis{I\sphinxhyphen{}UHB} and \sphinxstyleemphasis{T\sphinxhyphen{}FHK},  are in fact \sphinxstyleemphasis{Condorcet} winners (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 2), i.e. they positively outrank all other alternatives, a result confirmed below by our best choice recommendation (Line 8).
+We may finally notice in \hyperref[\detokenize{tutorial:alicerelationmap}]{Fig.\@ \ref{\detokenize{tutorial:alicerelationmap}}} that the four best\sphinxhyphen{}ranked study programs, \sphinxstyleemphasis{I\sphinxhyphen{}FHK}, \sphinxstyleemphasis{I\sphinxhyphen{}USB}, \sphinxstyleemphasis{I\sphinxhyphen{}UHB} and \sphinxstyleemphasis{T\sphinxhyphen{}FHK},  are in fact \sphinxstyleemphasis{Condorcet} winners (see \hyperref[\detokenize{tutorial:alicebestchoice}]{Listing \ref{\detokenize{tutorial:alicebestchoice}}} Line 2), i.e. they are all four \sphinxstyleemphasis{indifferent} one of the other \sphinxstylestrong{and} positively \sphinxstyleemphasis{outrank} all other alternatives, a result confirmed below by our best choice recommendation (Line 8).
 \sphinxSetupCaptionForVerbatim{Alice’s best choice recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:alicebestchoice}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4665,7 +4663,7 @@ We may compute, for instance, a five\sphinxhyphen{}tiling of a given random perf
 \PYG{g+go}{  ]   \PYGZlt{} \PYGZhy{} 0.20]: [\PYGZsq{}a44\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-Most of the decision actions (26) are gathered in the median quintile \([0.40 - 0.60]\) class, whereas the highest quintile \(]0.80-1.00]\) and the lowest quintile \(]< - 0.20]\) classes gather each one a unique decision alternative (\sphinxstyleemphasis{a22}, resp. \sphinxstyleemphasis{a44}) (see \hyperref[\detokenize{tutorial:quantilessorting}]{Listing \ref{\detokenize{tutorial:quantilessorting}}} Lines 43\sphinxhyphen{}).
+Most of the decision actions (26) are gathered in the median quintile \(]0.40 - 0.60]\) class, whereas the highest quintile \(]0.80-1.00]\) and the lowest quintile \(]< - 0.20]\) classes gather each one a unique decision alternative (\sphinxstyleemphasis{a22}, resp. \sphinxstyleemphasis{a44}) (see \hyperref[\detokenize{tutorial:quantilessorting}]{Listing \ref{\detokenize{tutorial:quantilessorting}}} Lines 43\sphinxhyphen{}).
 
 We may inspect as follows the details of the corresponding sorting characteristics.
 \sphinxSetupCaptionForVerbatim{Bipolar\sphinxhyphen{}valued sorting characteristics (extract)}
