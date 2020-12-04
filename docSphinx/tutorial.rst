@@ -3165,7 +3165,7 @@ Alice's best choice: A case study [19]_
 
    Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her "Abitur" with satisfactory and/or good marks and  wants to start her further studies thereafter.
 
-   She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees, as well as, her living costs during her studies.
+   She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees as well as her living costs during her studies.
 
 .. only:: latex
 
@@ -3293,13 +3293,13 @@ In the following *heatmap view*, we may now consult Alice's performance evaluati
 
    Heatmap of Alice's performance tableau	   
 
-Alice is subjectively evaluating the *Attractiveness* of the studies on a three level ordinal scale from 0 (*weak*), 1 (*fair*) to 2 (*good*). Similarly, she is subjectively evaluating the *Attractiveness* of the respective professions on an ordinal scale from 0 (weak) to 10 (excellent). Considering the *occupational prestige* she looked up the SIOPS [20]_. All the other evaluation data could be looked up on the internet (see :numref:`aliceHeatmap`).
+Alice is subjectively evaluating the *Attractiveness* of the studies (criterion *AS*) on an ordinal scale from 0 (weak) to 10 (excellent). Similarly, she is subjectively evaluating the *Attractiveness* of the respective professions (criterion *AP*) on a three level ordinal scale from 0 (*weak*), 1 (*fair*) to 2 (*good*). Considering the *Occupational Prestige* (criterion *OP*), she looked up the SIOPS [20]_. All the other evaluation data she found on the internet (see :numref:`aliceHeatmap`).
 
-Notice by the way that evaluations on performance criteria to be minimized, like *distance to home* (*DH*) or *study times* (*SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
+Notice by the way that evaluations on performance criteria to be *minimized*, like *Distance to Home* (criterion *DH*) or *Study times* (criterion *SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
 
 Her ten potential study programs are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph [23]_. *Graduate interpreter* studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by *Qualified Translator* studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs for her appear to be studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
 
-It is interesting to observe that for Alice, the most significant performance criteria, appear to be, on the one side, the *Attractiveness* of the study program (*AS*, +0.72) followed by the *Attractiveness* of the future profession (*AP*, +0.62). *Study times* (*SL*, -024), *big city* (*BC*, -0.07) and *monthly living costs* (*LC*, -0.04) ) appear to be, on the other side, not *so* significant [27]_.
+It is finally interesting to observe in :numref:`aliceHeatmap` (third row) that the *most significant* performance criteria, appear to be for Alice, on the one side, the *Attractiveness* of the study program (criterion *AS*, tau = +0.72) followed by the *Attractiveness* of the future profession (criterion *AP*, tau = +0.62). On the other side, *Study times* (criterion *SL*, tau = -0.24), *Big city* (criterion *BC*, tau = -0.07) as well as *Monthly living costs* (criterion *LC*, tau = -0.04) appear to be for her  *not so* significant [27]_.
 
 
 Building a best choice recommendation
@@ -3326,7 +3326,7 @@ Let us now have a look at the resulting pairwise outranking situations.
    >>> g.computeSymmetryDegree(Comments=True)
     Symmetry degree of graph <rel_AliceChoice> : 0.49
 
-From Alice's performance tableau we obtain 67 positively validated pairwise outranking situations in the digraph *dg*, supported by a 74% majority of criteria significance(see :numref:`aliceOutranking` Line 9-10).
+From Alice's performance tableau we obtain 67 positively validated pairwise outranking situations in the digraph *dg*, supported by a 74% majority of criteria significance (see :numref:`aliceOutranking` Line 9-10).
 
 Due to the poorly discriminating performance evaluations, nearly half of these outranking situations (see Line 12) are *symmetric* and reveal actually *more or less indifference* situations between the potential study programs. This is well illustrated in the **relation map** of the outranking digraph (see :numref:`aliceRelationMap`).
 
@@ -3385,7 +3385,7 @@ We have mentioned that Alice considers a performance difference of 7 points on t
 
 In :numref:`aliceVetos`, we see that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 9, 14, 19) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35). 
 
-We may finally notice in :numref:`aliceRelationMap` that the four best-ranked study programs, *I-FHK*, *I-USB*, *I-UHB* and *T-FHK*,  are in fact *Condorcet* winners (see :numref:`aliceBestChoice` Line 2), i.e. they are all four *indifferent* one of the other **and** positively *outrank* all other alternatives, a result confirmed below by our best choice recommendation (Line 8).
+We may finally notice in the relation map, shown in :numref:`aliceRelationMap`, that the four best-ranked study programs, *I-FHK*, *I-USB*, *I-UHB* and *T-FHK*,  are in fact *Condorcet* winners (see :numref:`aliceBestChoice` Line 2), i.e. they are all four *indifferent* one of the other **and** positively *outrank* all other alternatives, a result confirmed below by our best choice recommendation (Line 8).
    
 .. code-block:: pycon
    :name: aliceBestChoice
@@ -3418,7 +3418,7 @@ We may finally notice in :numref:`aliceRelationMap` that the four best-ranked st
 
 Most credible best choice among the four best-ranked study programs eventually becomes the *Graduate Interpreter* study program at the *Technical High School* in *Köln* (see :numref:`aliceBestChoice` Line 14) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
 
-In the relation map shown in :numref:`aliceRelationMap`, we see in the left lower corner that the *asymmetric part* of the outranking relation, i.e. the corresponding *strict* outranking relation, is actually *transitive* (see :numref:`aliceBestChoiceDrawing` Line 2). Hence, a graphviz drawing of its *skeleton*, oriented by the previous *best*, respectively *worst* choice, may well illustrate our *best choice recommendation*.
+In the relation map, shown in :numref:`aliceRelationMap`, we see in the left lower corner that the *asymmetric part* of the outranking relation, i.e. the corresponding *strict* outranking relation, is actually *transitive* (see :numref:`aliceBestChoiceDrawing` Line 2). Hence, a graphviz drawing of its *skeleton*, oriented by the previous *best*, respectively *worst* choice, may well illustrate our *best choice recommendation*.
 
 .. code-block:: pycon
    :name: aliceBestChoiceDrawing

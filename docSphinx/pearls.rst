@@ -2027,7 +2027,7 @@ As a consequence, a **multipartisan primary selection**, computed with a :code:`
     determinateness (%) : 50.00
      - most credible action(s) = { }
 
-With such king of divisive voting profile, there may not always exist an obvious winner. In :numref:`UncertainWinner` below, we see, for instance, that the *simple majority* winnner is *a2* (Line 2), whereas the *instant-run-off* winner is *a6* (Line 4).
+With such kind of divisive voting profile, there may not always exist an obvious winner. In :numref:`UncertainWinner` below, we see, for instance, that the *simple majority* winnner is *a2* (Line 2), whereas the *instant-run-off* winner is *a6* (Line 4).
 
 
 .. code-block:: pycon
