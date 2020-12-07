@@ -58,7 +58,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{December 04, 2020}
+\date{December 07, 2020}
 \release{3.9.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -92,7 +92,11 @@
         \small  Last updated : \today
         
         \vspace{10mm}
-        \emph{This documentation is dedicated to late Marc ROUBENS who, through his expertise in fuzzy sets and systems, greatly stimulated our research in bipolar-valued epistemic logic.} 
+        \begin{center}
+        \emph{This documentation is dedicated to our}\\
+        \emph{late colleague and dear friend}\\
+         Marc ROUBENS.
+        \end{center}
 
         %% \vfill adds at the bottom
         \vfill
@@ -523,9 +527,10 @@ The valued relational equivalence index gives us a further measure for studying 
 
 \begin{figure}[H]
 \centering
+\capstart
 
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{correlationTable}.png}
-\end{figure}
+\caption{Pairwise valued correlation of movie critics}\label{\detokenize{pearls:correlationtable}}\end{figure}
 
 It is remarkable to notice in the criteria correlation matrix (see \hyperref[\detokenize{pearls:correlationtable}]{Fig.\@ \ref{\detokenize{pearls:correlationtable}}}) that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes \sphinxstyleemphasis{r(x\textless{}=\textgreater{}y)} appear to be of low value, except the \sphinxstyleemphasis{diagonal} ones. These reflexive indexes \sphinxstyleemphasis{r(x\textless{}=\textgreater{}x)} would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score \sphinxstyleemphasis{d}, i.e. the \sphinxstyleemphasis{proportion} of pairs of movies each critic did evaluate. Critic \sphinxstyleemphasis{JPT} (the editor of the Graffiti magazine), for instance, evaluated all but one (\sphinxstyleemphasis{d} = 24*23/600 = 0.92), whereas critic \sphinxstyleemphasis{FG} evaluated only 10 movies among the 25 in discussion (\sphinxstyleemphasis{d} = 10*9/600 = 0.15).
 
@@ -560,7 +565,12 @@ Let us first have a look at the pairwise asymmetric part, namely the ‘\sphinxs
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ag}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeNetFlowsRanking}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{asymmetricPart}.png}\hspace*{\fill}}
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{asymmetricPart}.png}
+\caption{Asymmetric part of graffiti07 digraph}\label{\detokenize{pearls:asymmetricpart}}\end{figure}
 
 We notice here that the \sphinxstyleemphasis{Net\sphinxhyphen{}Flows} ranking rule inverts in fact just three ‘\sphinxstyleemphasis{less well ranked than}’ opinions and four ‘\sphinxstyleemphasis{better ranked than}’ ones. A similar look at the symmetric part, the pairwise ‘\sphinxstyleemphasis{as well rated as}’ opinions, suggests a preordered preference structure in several \sphinxstyleemphasis{equivalently rated} classes.
 
@@ -569,7 +579,12 @@ We notice here that the \sphinxstyleemphasis{Net\sphinxhyphen{}Flows} ranking ru
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sg}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeNetFlowsRanking}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
 \end{sphinxVerbatim}
 
-\noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{symmetricPart}.png}\hspace*{\fill}}
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{symmetricPart}.png}
+\caption{Symmetric part of graffiti07 digraph}\label{\detokenize{pearls:symmetricpart}}\end{figure}
 
 Such a preordering of the movies may, for instance, be computed with the \sphinxcode{\sphinxupquote{digraphs.Digraph.computeRankingByChoosing()}} method, where we iteratively extract \sphinxstyleemphasis{dominant kernels} \sphinxhyphen{}best remaining choices\sphinxhyphen{} and \sphinxstyleemphasis{absorbent kernels} \sphinxhyphen{}worst remaining choices\sphinxhyphen{} (see the tutorial on \DUrole{xref,std,std-ref}{Computing Digraph Kernels}). We operate therefore on the asymmetric ‘\sphinxstyleemphasis{better rated than}’, i.e. the \sphinxstyleemphasis{codual} (%
 \begin{footnote}[3]\sphinxAtStartFootnote

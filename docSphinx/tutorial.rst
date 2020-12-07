@@ -20,8 +20,8 @@
 
 .. _Tutorials-label:
 
-Tutorials of the Digraph3 resources
-===================================
+Digraph3 Tutorials
+==================
 
 .. only:: html
 
@@ -148,7 +148,7 @@ You may start an interactive Python3 session in the :code:`Digraph3` directory f
     Determinateness  : 100.000
     Attributes       : ['actions', 'valuationdomain', 'relation',
 			'order', 'name', 'gamma', 'notGamma']
-    >>> dg.save('tutorialDigraph')
+   >>> dg.save('tutorialDigraph')
     *--- Saving digraph in file: <tutorialDigraph.py> ---*
 
 From the :py:mod:`randomDigraphs` module we import the :py:class:`randomDigraphs.RandomDigraph` class in order to generate, for instance, a crisp *digraph* object *dg* of order 5 - number of nodes or (decision) *actions* - and size 12 - number of directed *arcs* (see :numref:`digraphs` Lines 1-2).

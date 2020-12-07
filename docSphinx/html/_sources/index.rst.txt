@@ -78,7 +78,7 @@ The third Section exhibits some pearls of **bipolar-valued epistemic logic** tha
    .. toctree:: pearls
       :maxdepth: 2
 		 
-The fourth section gathers **historical case studies** with example digraphs compiled before 2006 and concerning the active development of the Digraph3 collection of python3 modules for implementing tools and methods for enumerating *non isomorphic maximal independent sets* in undirected graphs and computing *dominant digraph kernels*. 
+The fourth section gathers **historical case studies** with example digraphs compiled before 2006 and concerning the early development of the Digraph3 collection of python3 modules for implementing tools and methods for enumerating *non isomorphic maximal independent sets* in undirected graphs and computing *dominant digraph kernels*. 
 
    .. toctree:: digraph3Archives
       :maxdepth: 2

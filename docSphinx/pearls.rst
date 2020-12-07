@@ -18,8 +18,8 @@
    :description: Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory
    :keywords: Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid
 
-Digraph3 Advanced Topics
-========================
+Advanced Topics
+===============
 
 .. only:: html
 
@@ -432,10 +432,12 @@ Illustrating preference divergences
 The valued relational equivalence index gives us a further measure for studying how **divergent** appear the rating opinions expressed by the movie critics.
 
 .. Figure:: correlationTable.png
-   :alt: Pairwise valued correlation of movie critics
    :name: correlationTable
    :width: 600 px
    :align: center
+   :alt: Pairwise valued correlation of movie critics
+
+   Pairwise valued correlation of movie critics
 
 It is remarkable to notice in the criteria correlation matrix (see :numref:`correlationTable`) that, due to the quite numerous missing data, all pairwise valued ordinal correlation indexes *r(x<=>y)* appear to be of low value, except the *diagonal* ones. These reflexive indexes *r(x<=>x)* would trivially all amount to +1.0 in a plainly determined case. Here they indicate a reflexive normalized determination score *d*, i.e. the *proportion* of pairs of movies each critic did evaluate. Critic *JPT* (the editor of the Graffiti magazine), for instance, evaluated all but one (*d* = 24*23/600 = 0.92), whereas critic *FG* evaluated only 10 movies among the 25 in discussion (*d* = 10*9/600 = 0.15).
 
@@ -464,20 +466,26 @@ Let us first have a look at the pairwise asymmetric part, namely the '*better ra
    >>> ag = AsymmetricPartialDigraph(g)
    >>> ag.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
 
-.. image:: asymmetricPart.png
+.. figure:: asymmetricPart.png
    :alt: asymmetric part of graffiti07 digraph
    :width: 600 px
    :align: center
+   :name: asymmetricPart
+
+   Asymmetric part of graffiti07 digraph
 
 We notice here that the *Net-Flows* ranking rule inverts in fact just three '*less well ranked than*' opinions and four '*better ranked than*' ones. A similar look at the symmetric part, the pairwise '*as well rated as*' opinions, suggests a preordered preference structure in several *equivalently rated* classes.
 
    >>> sg = SymmetricPartialDigraph(g)
    >>> sg.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
 
-.. image:: symmetricPart.png
+.. Figure:: symmetricPart.png
    :alt: symmetric part of graffiti07 digraph
    :width: 600 px
    :align: center
+   :name: symmetricPart
+
+   Symmetric part of graffiti07 digraph
 
 Such a preordering of the movies may, for instance, be computed with the :py:func:`digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -best remaining choices- and *absorbent kernels* -worst remaining choices- (see the tutorial on :ref:`Computing Digraph Kernels <Kernel-Tutorial-label>`). We operate therefore on the asymmetric '*better rated than*', i.e. the *codual* ([3]_) of the '*at least as well rated as*' opinions (see :numref:`rankGraf` Line 2).
 

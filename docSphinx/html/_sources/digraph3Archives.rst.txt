@@ -8,7 +8,7 @@ Digraph3 Archives
 Introduction
 ------------
 
-The **Digraph3 Archives** gather historical case studies and example digraphs compiled before 2006 and concerning the active development of the Digraph3 collection of python3 modules for implementing tools and methods of the *Rubis decision aiding* approach (see [1]_).
+The **Digraph3 Archives** gather historical case studies and example digraphs compiled before 2006 and concerning the early development of the Digraph3 collection of python3 modules for implementing tools and methods of the *Rubis decision aiding* approach (see [1]_).
 
 A first collection of pages is devoted to the problem of enumerating *non isomorphic kernels* in symmetric digraphs like the *Petersen*, the *Coxeter* and the *Chvátal* graph for instance (see :ref:`IsomorphicMIS-Tutorial-label`). A second collection concerns the early development of the *Rubis best choice algorithm* (see :ref:`Rubis-Tutorial-label`). And, a third collection finally illustrates the concepts of *hyperkernels* and *prekernels* in digraphs (see :ref:`Kernel-Tutorial-label`).
 

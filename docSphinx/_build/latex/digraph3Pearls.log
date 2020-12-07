@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  4 DEC 2020 13:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  7 DEC 2020 10:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -655,7 +655,7 @@ Package pdftex.def Info: introDoc3.png  used on input line 82.
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./introDoc3.png>]
 LaTeX Font Info:    Trying to load font information for T1+cmss on input line 1
-07.
+11.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmss.fd
 File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
@@ -677,15 +677,15 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
-62.
+66.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 163.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 167.
 LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-164.
+168.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
@@ -693,225 +693,212 @@ File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 <graffiti07_1.png, id=195, 768.8725pt x 779.91376pt>
 File: graffiti07_1.png Graphic file (type png)
 <use graffiti07_1.png>
-Package pdftex.def Info: graffiti07_1.png  used on input line 172.
+Package pdftex.def Info: graffiti07_1.png  used on input line 176.
 (pdftex.def)             Requested size: 451.68457pt x 458.18155pt.
  [2] [3 <./graffiti07_1.png>]
 <graffiti07_2.png, id=220, 907.39pt x 915.42pt>
 File: graffiti07_2.png Graphic file (type png)
 <use graffiti07_2.png>
-Package pdftex.def Info: graffiti07_2.png  used on input line 191.
+Package pdftex.def Info: graffiti07_2.png  used on input line 195.
 (pdftex.def)             Requested size: 451.68457pt x 455.68349pt.
  [4 <./graffiti07_2.png>]
 <graffiti07_45.png, id=229, 981.6675pt x 420.57124pt>
 File: graffiti07_45.png Graphic file (type png)
 <use graffiti07_45.png>
-Package pdftex.def Info: graffiti07_45.png  used on input line 211.
+Package pdftex.def Info: graffiti07_45.png  used on input line 215.
 (pdftex.def)             Requested size: 451.68457pt x 193.51004pt.
 <graffiti07_3.png, id=234, 1204.5pt x 600.2425pt>
 File: graffiti07_3.png Graphic file (type png)
 <use graffiti07_3.png>
-Package pdftex.def Info: graffiti07_3.png  used on input line 231.
+Package pdftex.def Info: graffiti07_3.png  used on input line 235.
 (pdftex.def)             Requested size: 452.97293pt x 225.7315pt.
  [5 <./graffiti07_45.png>]
 <graffiti07_6.png, id=245, 651.43375pt x 553.06625pt>
 File: graffiti07_6.png Graphic file (type png)
 <use graffiti07_6.png>
-Package pdftex.def Info: graffiti07_6.png  used on input line 251.
+Package pdftex.def Info: graffiti07_6.png  used on input line 255.
 (pdftex.def)             Requested size: 301.12305pt x 255.66255pt.
  [6 <./graffiti07_3.png>] [7 <./graffiti07_6.png>]
 Package hyperref Info: bookmark level for unknown literalblock defaults to 0 on
- input line 300.
+ input line 304.
  [8] [9] [10]
-Overfull \vbox (2.64749pt too high) detected at line 465
+Overfull \vbox (2.64749pt too high) detected at line 469
  []
 
 [11] [12]
 <correlationTable.png, id=343, 847.165pt x 355.3275pt>
 File: correlationTable.png Graphic file (type png)
 <use correlationTable.png>
-Package pdftex.def Info: correlationTable.png  used on input line 527.
+Package pdftex.def Info: correlationTable.png  used on input line 532.
 (pdftex.def)             Requested size: 451.68457pt x 189.45041pt.
-
-
-LaTeX Warning: Hyper reference `pearls:correlationtable' on page 13 undefined o
-n input line 530.
-
-
-LaTeX Warning: Reference `pearls:correlationtable' on page 13 undefined on inpu
-t line 530.
-
-[13 <./correlationTable.png>]
-<correlationPCA.png, id=354, 766.865pt x 771.88374pt>
+ [13 <./correlationTable.png>]
+<correlationPCA.png, id=357, 766.865pt x 771.88374pt>
 File: correlationPCA.png Graphic file (type png)
 <use correlationPCA.png>
-Package pdftex.def Info: correlationPCA.png  used on input line 546.
+Package pdftex.def Info: correlationPCA.png  used on input line 551.
 (pdftex.def)             Requested size: 301.12305pt x 303.09459pt.
  [14 <./correlationPCA.png>]
-<asymmetricPart.png, id=362, 1210.5225pt x 600.2425pt>
+<asymmetricPart.png, id=365, 1210.5225pt x 600.2425pt>
 File: asymmetricPart.png Graphic file (type png)
 <use asymmetricPart.png>
-Package pdftex.def Info: asymmetricPart.png  used on input line 563.
+Package pdftex.def Info: asymmetricPart.png  used on input line 572.
 (pdftex.def)             Requested size: 451.68457pt x 223.97299pt.
-<symmetricPart.png, id=363, 1209.51875pt x 602.25pt>
+<symmetricPart.png, id=366, 1209.51875pt x 602.25pt>
 File: symmetricPart.png Graphic file (type png)
 <use symmetricPart.png>
-Package pdftex.def Info: symmetricPart.png  used on input line 572.
+Package pdftex.def Info: symmetricPart.png  used on input line 586.
 (pdftex.def)             Requested size: 451.68457pt x 224.90585pt.
  [15 <./asymmetricPart.png>] [16 <./symmetricPart.png>]
-Overfull \vbox (0.52747pt too high) detected at line 665
+Overfull \vbox (0.52747pt too high) detected at line 680
  []
 
 [17] [18] [19]
-<k1restricted.png, id=417, 644.4075pt x 375.4025pt>
+<k1restricted.png, id=422, 644.4075pt x 375.4025pt>
 File: k1restricted.png Graphic file (type png)
 <use k1restricted.png>
-Package pdftex.def Info: k1restricted.png  used on input line 791.
+Package pdftex.def Info: k1restricted.png  used on input line 806.
 (pdftex.def)             Requested size: 301.12305pt x 175.42531pt.
  [20 <./k1restricted.png>]
-<k2restricted.png, id=425, 648.4225pt x 372.39125pt>
+<k2restricted.png, id=430, 648.4225pt x 372.39125pt>
 File: k2restricted.png Graphic file (type png)
 <use k2restricted.png>
-Package pdftex.def Info: k2restricted.png  used on input line 840.
+Package pdftex.def Info: k2restricted.png  used on input line 855.
 (pdftex.def)             Requested size: 301.12305pt x 172.93852pt.
  [21]
-<bestWorstOrientation.png, id=430, 384.43625pt x 403.5075pt>
+<bestWorstOrientation.png, id=435, 384.43625pt x 403.5075pt>
 File: bestWorstOrientation.png Graphic file (type png)
 <use bestWorstOrientation.png>
-Package pdftex.def Info: bestWorstOrientation.png  used on input line 876.
+Package pdftex.def Info: bestWorstOrientation.png  used on input line 891.
 (pdftex.def)             Requested size: 225.84229pt x 237.05145pt.
  [22 <./k2restricted.png>]
 [23 <./bestWorstOrientation.png>] [24]
-<weightDistributions.png, id=455, 738.76pt x 669.50125pt>
+<weightDistributions.png, id=460, 738.76pt x 669.50125pt>
 File: weightDistributions.png Graphic file (type png)
 <use weightDistributions.png>
-Package pdftex.def Info: weightDistributions.png  used on input line 990.
+Package pdftex.def Info: weightDistributions.png  used on input line 1005.
 (pdftex.def)             Requested size: 338.76343pt x 307.00381pt.
  [25] [26 <./weightDistributions.png>]
-<rCharacteristic.png, id=476, 764.8575pt x 411.5375pt>
+<rCharacteristic.png, id=481, 764.8575pt x 411.5375pt>
 File: rCharacteristic.png Graphic file (type png)
 <use rCharacteristic.png>
-Package pdftex.def Info: rCharacteristic.png  used on input line 1023.
+Package pdftex.def Info: rCharacteristic.png  used on input line 1038.
 (pdftex.def)             Requested size: 338.76343pt x 182.27644pt.
 
 [27 <./rCharacteristic.png>]
-<simulLikelihood.png, id=486, 361.35pt x 252.945pt>
+<simulLikelihood.png, id=491, 361.35pt x 252.945pt>
 File: simulLikelihood.png Graphic file (type png)
 <use simulLikelihood.png>
-Package pdftex.def Info: simulLikelihood.png  used on input line 1060.
+Package pdftex.def Info: simulLikelihood.png  used on input line 1075.
 (pdftex.def)             Requested size: 414.04419pt x 289.83467pt.
  [28 <./simulLikelihood.png>] [29] [30]
-<confidentOutranking.png, id=512, 383.4325pt x 428.60126pt>
+<confidentOutranking.png, id=517, 383.4325pt x 428.60126pt>
 File: confidentOutranking.png Graphic file (type png)
 <use confidentOutranking.png>
-Package pdftex.def Info: confidentOutranking.png  used on input line 1198.
+Package pdftex.def Info: confidentOutranking.png  used on input line 1213.
 (pdftex.def)             Requested size: 263.48267pt x 294.53838pt.
  [31 <./confidentOutranking.png>] [32] [33] [34] [35] [36] [37]
-Overfull \vbox (1.24075pt too high) detected at line 1530
+Overfull \vbox (1.24075pt too high) detected at line 1545
  []
 
 [38] [39] [40]
-Underfull \hbox (badness 8038) in paragraph at lines 1837--1838
+Underfull \hbox (badness 8038) in paragraph at lines 1852--1853
 []\T1/cmr/m/n/12 The cor-re-spond-ing \T1/cmr/m/it/12 ro-bust \T1/cmr/m/n/12 ou
 t-rank-ing di-graph may be com-puted with the
  []
 
 [41]
-<robStdStrictOutranking.png, id=634, 1010.77625pt x 569.12625pt>
+<robStdStrictOutranking.png, id=639, 1010.77625pt x 569.12625pt>
 File: robStdStrictOutranking.png Graphic file (type png)
 <use robStdStrictOutranking.png>
-Package pdftex.def Info: robStdStrictOutranking.png  used on input line 1909.
+Package pdftex.def Info: robStdStrictOutranking.png  used on input line 1924.
 (pdftex.def)             Requested size: 451.68457pt x 254.32419pt.
  [42]
-<robustHeatmap.png, id=646, 1026.83624pt x 525.965pt>
+<robustHeatmap.png, id=651, 1026.83624pt x 525.965pt>
 File: robustHeatmap.png Graphic file (type png)
 <use robustHeatmap.png>
-Package pdftex.def Info: robustHeatmap.png  used on input line 1924.
+Package pdftex.def Info: robustHeatmap.png  used on input line 1939.
 (pdftex.def)             Requested size: 451.68457pt x 231.3611pt.
  [43 <./robStdStrictOutranking.png>] [44 <./robustHeatmap.png>]
 [45]
-Underfull \hbox (badness 7759) in paragraph at lines 2021--2022
+Underfull \hbox (badness 7759) in paragraph at lines 2036--2037
 []\T1/cmr/m/n/12 For eas-ily com-put-ing this kind of \T1/cmr/m/it/12 un-op-pos
 ed mul-ti-ob-jec-tive \T1/cmr/m/n/12 out-rank-ing di-
  []
 
 
-Underfull \vbox (badness 2818) detected at line 2045
+Underfull \vbox (badness 2818) detected at line 2060
  []
 
 [46] [47]
-<unopDigraph.png, id=702, 807.015pt x 467.7475pt>
+<unopDigraph.png, id=707, 807.015pt x 467.7475pt>
 File: unopDigraph.png Graphic file (type png)
 <use unopDigraph.png>
-Package pdftex.def Info: unopDigraph.png  used on input line 2119.
+Package pdftex.def Info: unopDigraph.png  used on input line 2134.
 (pdftex.def)             Requested size: 451.68457pt x 261.8012pt.
  [48] [49 <./unopDigraph.png>] [50] [51]
-<unOpposedOutrankings.png, id=728, 779.91376pt x 528.97626pt>
+<unOpposedOutrankings.png, id=733, 779.91376pt x 528.97626pt>
 File: unOpposedOutrankings.png Graphic file (type png)
 <use unOpposedOutrankings.png>
-Package pdftex.def Info: unOpposedOutrankings.png  used on input line 2270.
+Package pdftex.def Info: unOpposedOutrankings.png  used on input line 2285.
 (pdftex.def)             Requested size: 451.68457pt x 306.35443pt.
  [52] [53 <./unOpposedOutrankings.png>] [54]
-Overfull \vbox (1.2081pt too high) detected at line 2382
+Overfull \vbox (1.2081pt too high) detected at line 2397
  []
 
 [55]
-Overfull \vbox (2.28831pt too high) detected at line 2430
+Overfull \vbox (2.28831pt too high) detected at line 2445
  []
 
 [56]
-<divGraph.png, id=780, 295.1025pt x 500.87125pt>
+<divGraph.png, id=785, 295.1025pt x 500.87125pt>
 File: divGraph.png Graphic file (type png)
 <use divGraph.png>
-Package pdftex.def Info: divGraph.png  used on input line 2449.
+Package pdftex.def Info: divGraph.png  used on input line 2464.
 (pdftex.def)             Requested size: 188.2019pt x 319.43301pt.
  [57 <./divGraph.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 2465--2466
+Underfull \hbox (badness 10000) in paragraph at lines 2480--2481
 \T1/cmr/m/n/12 Per-for-mance Dif-fer-ences^^Q \T1/cmr/m/it/12 Jour-nal of Multi
 -Criteria De-ci-sion Anal-
  []
 
 
-Underfull \hbox (badness 8113) in paragraph at lines 2465--2466
+Underfull \hbox (badness 8113) in paragraph at lines 2480--2481
 \T1/cmr/m/it/12 y-sis \T1/cmr/m/n/12 (Wi-ley) \T1/cmr/bx/n/12 20\T1/cmr/m/n/12 
 :3-12 (down-load-able preprint [][]PDF file 403.5 Kb[][]
  []
 
 
-Underfull \hbox (badness 5460) in paragraph at lines 2469--2470
+Underfull \hbox (badness 5460) in paragraph at lines 2484--2485
 \T1/cmr/m/n/12 ker-nels from bipo-lar val-ued di-graphs^^Q. \T1/cmr/m/it/12 Eu-
 ro-pean Jour-nal of Op-er-
  []
 
 
-Underfull \hbox (badness 6559) in paragraph at lines 2469--2470
+Underfull \hbox (badness 6559) in paragraph at lines 2484--2485
 \T1/cmr/m/it/12 a-tional Re-search\T1/cmr/m/n/12 , 175 (2006) 155-170. (On-line
 ) Elec-tronic ver-sion:
  []
 
 [58] (./digraph3Pearls.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2488.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2503.
  [59]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2488.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2503.
  (./digraph3Pearls.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2488.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2488.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2503.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2503.
 
 Package rerunfilecheck Info: File `digraph3Pearls.out' has not changed.
 (rerunfilecheck)             Checksum: AE246BEE7B226E39E0E3FF3593A76A23;9023.
-
-
-LaTeX Warning: There were undefined references.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2488.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2503.
  ) 
 Here is how much of TeX's memory you used:
- 14097 strings out of 482504
- 202267 string characters out of 5947330
- 615224 words of memory out of 5000000
- 28584 multiletter control sequences out of 15000+600000
+ 14102 strings out of 482504
+ 202369 string characters out of 5947330
+ 615559 words of memory out of 5000000
+ 28586 multiletter control sequences out of 15000+600000
  558358 words of font info for 80 fonts, out of 8000000 for 9000
  396 hyphenation exceptions out of 8191
- 38i,12n,49p,1265b,933s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,12n,49p,1265b,932s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.
 600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecss1
 200.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/e
@@ -949,10 +936,10 @@ dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/symbols/msam10.pfb>
-Output written on digraph3Pearls.pdf (60 pages, 1971852 bytes).
+Output written on digraph3Pearls.pdf (60 pages, 1970082 bytes).
 PDF statistics:
  1706 PDF objects out of 1728 (max. 8388607)
- 833 compressed objects within 9 object streams
- 196 named destinations out of 1000 (max. 500000)
+ 839 compressed objects within 9 object streams
+ 199 named destinations out of 1000 (max. 500000)
  379 words of extra memory for PDF output out of 10000 (max. 10000000)
 
