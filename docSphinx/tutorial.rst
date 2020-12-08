@@ -3160,7 +3160,7 @@ Alice's best choice: A case study [19]_
    .. sidebar:: Alice D.
 
       .. image:: AliceF.png
-         :width: 200 px
+         :width: 150 px
          :align: center
 
    Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her "Abitur" with satisfactory and/or good marks and  wants to start her further studies thereafter.
@@ -3204,11 +3204,11 @@ In :numref:`studProgs` we notice that Alice considers three *Graduate Interprete
 Four **decision objectives** of more or less equal importance are guiding Alice's choice:
 
     #. *maximize* the attractiveness of the study place (GEO),
-    #. *maximize* the attractiveness in her further studies (LEA),
+    #. *maximize* the attractiveness of her further studies (LEA),
     #. *minimize*  her financial dependency on her parents (FIN),
     #. *maximize* her professional perspectives (PRA).
 
-The decision consequences Alice wishes to take into account for evaluating the potential study programs with respect to each of the four objectives are modelled by the following **family of criteria**.
+The decision consequences Alice wishes to take into account for evaluating the potential study programs with respect to each of the four objectives are modelled by the following **coherent family of criteria** [26]_.
 
 .. table:: Alice's family of performance criteria
    :name: famCrit
@@ -3260,7 +3260,7 @@ The actual evaluations of Alice's potential study programs are stored in a file 
      FIN: Financial aspect
        SF Annual registration fees 2
        LC Monthly living costs     2
-       SL study time               2
+       SL Study time               2
        Total weight: 6.00 (3 criteria)
      PRA: Professional aspect
        AP Attractiveness of the profession          2
@@ -3279,7 +3279,7 @@ Details of the performance criteria may be consulted in a browser view (see :num
 
    Alice's performance criteria	   
    
-It is worthwhile noticing in :numref:`aliceCriteria` above that, on her subjective attractiveness scale of the study programs (criterion *AS*), Alice considers a performance differences of 7 points to be *considerable* and triggering, the case given, a *veto situation*. Notice also the proportional *indifference* (5%) and *preference* (10%) discrimination thresholds shown on criterion *BC*-number of inhabitants.
+It is worthwhile noticing in :numref:`aliceCriteria` above that, on her subjective attractiveness scale of the study programs (criterion *AS*), Alice considers a performance differences of 7 points to be *considerable* and triggering, the case given, a *veto situation*. Notice also the proportional *indifference* (1%) and *preference* (5%) discrimination thresholds shown on criterion *BC*-number of inhabitants.
 
 In the following *heatmap view*, we may now consult Alice's performance evaluations.
 
@@ -3295,7 +3295,7 @@ In the following *heatmap view*, we may now consult Alice's performance evaluati
 
 Alice is subjectively evaluating the *Attractiveness* of the studies (criterion *AS*) on an ordinal scale from 0 (weak) to 10 (excellent). Similarly, she is subjectively evaluating the *Attractiveness* of the respective professions (criterion *AP*) on a three level ordinal scale from 0 (*weak*), 1 (*fair*) to 2 (*good*). Considering the *Occupational Prestige* (criterion *OP*), she looked up the SIOPS [20]_. All the other evaluation data she found on the internet (see :numref:`aliceHeatmap`).
 
-Notice by the way that evaluations on performance criteria to be *minimized*, like *Distance to Home* (criterion *DH*) or *Study times* (criterion *SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
+Notice by the way that evaluations on performance criteria to be *minimized*, like *Distance to Home* (criterion *DH*) or *Study time* (criterion *SL*), are registered as *negative* values, so that smaller measures are, in this case, preferred to larger ones.
 
 Her ten potential study programs are ordered with the *NetFlows* ranking rule applied to the corresponding bipolar-valued outranking digraph [23]_. *Graduate interpreter* studies in Köln (*I-FHK*) or Saarbrücken (*I-USB*), followed by *Qualified Translator* studies in Köln (*T-FHK*) appear to be Alice's most preferred alternatives. The least attractive study programs for her appear to be studies at the Chamber of Commerce of Köln (*C-HKK*, *S-HKK*).
 

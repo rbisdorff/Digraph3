@@ -128,7 +128,7 @@ criteria = OrderedDict([
 ('SL', {
 'objective': 'FIN',
 'preferenceDirection': 'min',
-'name': 'study time',
+'name': 'Study time',
 'shortName': 'SL',
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('0.5'), Decimal('0.0'))},
 'scale': (0.0, 10.0),
