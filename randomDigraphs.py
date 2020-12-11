@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Python3+ implementation of random digraphs
+Python3+ implementation of some models of random digraphs
 Based on Digraphs3 ressources
 Copyright (C) 2015-2020  Raymond Bisdorff
 
@@ -33,7 +33,7 @@ class RandomDigraph(Digraph):
         * arcProbability (in [0.,1.], default=0.5)
         * IntegerValuation (default = True);
         * If Bipolar=True, valuation domain = {-1,1} otherwise = {0,1}
-        * Is seed != None, the random generator is seeded 
+        * If seed != None, the random generator is seeded 
 
      """
 
@@ -100,10 +100,9 @@ class RandomValuationDigraph(Digraph):
         * order > 0, number of arcs;
         * ndigits > 0, number of digits if IntegerValuation = True, 
           otherwise number of decimals;
-        * Normalized = True (r in [-1,1], r in [0,1] if False/default);
+        * Normalized = True (r in [-1,1] (default), r in [0,1] if False);
         * IntegerValuation = False (default)
         * If seed != none, the random generator is seeded
-
 
     Example python3 session:
         >>> from digraphs import RandomValuationDigraph
@@ -196,7 +195,7 @@ class RandomValuationDigraph(Digraph):
 class RandomWeakTournament(Digraph):
     """
     Specialization of the general Digraph class for generating
-    temporary bipolar-valued weak tournaments
+    temporary bipolar-valued weak, i.e. partially determinate, tournaments.
 
     *Parameters*:
         * order = n > 0
@@ -309,7 +308,7 @@ class RandomWeakTournament(Digraph):
 class RandomTournament(Digraph):
     """
     Specialization of the general Digraph class for generating
-    temporary weak tournaments
+    temporary weak tournaments.
 
     *Parameter*:
        * order = n > 0
@@ -395,8 +394,11 @@ class RandomTournament(Digraph):
 
 class RandomFixedSizeDigraph(Digraph):
     """
-    Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers of arcs
-    from random choices in the set of potential oriented pairs of nodes numbered from 1 to order. 
+    Generates a random crisp digraph with a fixed size, 
+    by instantiating a fixed numbers of arcs
+    from random choices in the set of potential oriented 
+    pairs of nodes numbered from 1 to order. 
+
     """
     def __init__(self,order=7,size=14,seed=None):
         import random,copy
@@ -527,10 +529,10 @@ class RandomFixedDegreeSequenceDigraph(Digraph):
 
 class RandomRegularDigraph(Digraph):
     """
-    Parameters:
-        order and degree.
-
     Specialization of Digraph class for random regular symmetric instances.
+
+    *Parameters*:
+        order and degree.
 
     """
     def __init__(self,order=7,degree=2, seed=None):
@@ -615,6 +617,7 @@ class RandomGridDigraph(GridDigraph):
     Parameters:
         * n,m > 0;
         * valuationdomain ={'min':-1 (default),'max': 1 (default)}.
+
     """
 
     def __init__(self,n=5,m=5,valuationdomain = {'min':-1.0,'max':1.0},

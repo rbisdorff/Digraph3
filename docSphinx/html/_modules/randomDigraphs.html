@@ -165,7 +165,7 @@
   <h1>Source code for randomDigraphs</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python3</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Python3+ implementation of random digraphs</span>
+<span class="sd">Python3+ implementation of some models of random digraphs</span>
 <span class="sd">Based on Digraphs3 ressources</span>
 <span class="sd">Copyright (C) 2015-2020  Raymond Bisdorff</span>
 
@@ -198,7 +198,7 @@
 <span class="sd">        * arcProbability (in [0.,1.], default=0.5)</span>
 <span class="sd">        * IntegerValuation (default = True);</span>
 <span class="sd">        * If Bipolar=True, valuation domain = {-1,1} otherwise = {0,1}</span>
-<span class="sd">        * Is seed != None, the random generator is seeded </span>
+<span class="sd">        * If seed != None, the random generator is seeded </span>
 
 <span class="sd">     &quot;&quot;&quot;</span>
 
@@ -265,10 +265,9 @@
 <span class="sd">        * order &gt; 0, number of arcs;</span>
 <span class="sd">        * ndigits &gt; 0, number of digits if IntegerValuation = True, </span>
 <span class="sd">          otherwise number of decimals;</span>
-<span class="sd">        * Normalized = True (r in [-1,1], r in [0,1] if False/default);</span>
+<span class="sd">        * Normalized = True (r in [-1,1] (default), r in [0,1] if False);</span>
 <span class="sd">        * IntegerValuation = False (default)</span>
 <span class="sd">        * If seed != none, the random generator is seeded</span>
-
 
 <span class="sd">    Example python3 session:</span>
 <span class="sd">        &gt;&gt;&gt; from digraphs import RandomValuationDigraph</span>
@@ -361,7 +360,7 @@
 <div class="viewcode-block" id="RandomWeakTournament"><a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomWeakTournament">[docs]</a><span class="k">class</span> <span class="nc">RandomWeakTournament</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for generating</span>
-<span class="sd">    temporary bipolar-valued weak tournaments</span>
+<span class="sd">    temporary bipolar-valued weak, i.e. partially determinate, tournaments.</span>
 
 <span class="sd">    *Parameters*:</span>
 <span class="sd">        * order = n &gt; 0</span>
@@ -474,7 +473,7 @@
 <div class="viewcode-block" id="RandomTournament"><a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomTournament">[docs]</a><span class="k">class</span> <span class="nc">RandomTournament</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for generating</span>
-<span class="sd">    temporary weak tournaments</span>
+<span class="sd">    temporary weak tournaments.</span>
 
 <span class="sd">    *Parameter*:</span>
 <span class="sd">       * order = n &gt; 0</span>
@@ -560,8 +559,11 @@
 
 <div class="viewcode-block" id="RandomFixedSizeDigraph"><a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomFixedSizeDigraph">[docs]</a><span class="k">class</span> <span class="nc">RandomFixedSizeDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers of arcs</span>
-<span class="sd">    from random choices in the set of potential oriented pairs of nodes numbered from 1 to order. </span>
+<span class="sd">    Generates a random crisp digraph with a fixed size, </span>
+<span class="sd">    by instantiating a fixed numbers of arcs</span>
+<span class="sd">    from random choices in the set of potential oriented </span>
+<span class="sd">    pairs of nodes numbered from 1 to order. </span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
@@ -692,10 +694,10 @@
 
 <div class="viewcode-block" id="RandomRegularDigraph"><a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomRegularDigraph">[docs]</a><span class="k">class</span> <span class="nc">RandomRegularDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Parameters:</span>
-<span class="sd">        order and degree.</span>
-
 <span class="sd">    Specialization of Digraph class for random regular symmetric instances.</span>
+
+<span class="sd">    *Parameters*:</span>
+<span class="sd">        order and degree.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -780,6 +782,7 @@
 <span class="sd">    Parameters:</span>
 <span class="sd">        * n,m &gt; 0;</span>
 <span class="sd">        * valuationdomain ={&#39;min&#39;:-1 (default),&#39;max&#39;: 1 (default)}.</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>

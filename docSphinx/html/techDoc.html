@@ -453,14 +453,14 @@ with main <a class="reference external" href="techDoc.html#votingProfiles.Linear
 <ul>
 <li><dl>
 <dt><a class="reference internal" href="#randomdigraphs-label"><span class="std std-ref">randomDigraphs module</span></a></dt><dd><p>Various implemented random digraph models.</p>
-<div class="graphviz"><img src="_images/inheritance-6dbfc26e2c55c24d6a647ec7b316f9f6d64ed569.png" alt="Inheritance diagram of randomDigraphs" usemap="#inheritance869eb85165" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="_images/inheritance-40f97ea6057c91ecdc58817832546b39a501d80f.png" alt="Inheritance diagram of randomDigraphs" usemap="#inheritance869eb85165" class="inheritance graphviz" /></div>
 <map id="inheritance869eb85165" name="inheritance869eb85165">
 <area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="5,179,79,204"/>
 <area shape="rect" id="node2" href="#digraphs.GridDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="212,5,312,31"/>
 <area shape="rect" id="node3" href="#randomDigraphs.RandomDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="199,55,325,80"/>
 <area shape="rect" id="node4" href="#randomDigraphs.RandomFixedDegreeSequenceDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="127,104,397,129"/>
-<area shape="rect" id="node5" href="#randomDigraphs.RandomFixedSizeDigraph" target="_top" title="Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers of arcs" alt="" coords="168,153,356,179"/>
-<area shape="rect" id="node7" href="#randomDigraphs.RandomRegularDigraph" target="_top" title="Parameters:" alt="" coords="173,203,351,228"/>
+<area shape="rect" id="node5" href="#randomDigraphs.RandomFixedSizeDigraph" target="_top" title="Generates a random crisp digraph with a fixed size, " alt="" coords="168,153,356,179"/>
+<area shape="rect" id="node7" href="#randomDigraphs.RandomRegularDigraph" target="_top" title="Specialization of Digraph class for random regular symmetric instances." alt="" coords="173,203,351,228"/>
 <area shape="rect" id="node8" href="#randomDigraphs.RandomTournament" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="185,252,339,277"/>
 <area shape="rect" id="node9" href="#randomDigraphs.RandomValuationDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="168,301,356,327"/>
 <area shape="rect" id="node10" href="#randomDigraphs.RandomWeakTournament" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="167,351,357,376"/>
@@ -3164,7 +3164,7 @@ a digraph of all k-choices collapsed actions.</p>
 </div>
 <div class="section" id="module-randomDigraphs">
 <span id="randomdigraphs-module"></span><span id="randomdigraphs-label"></span><h2><a class="toc-backref" href="#id6">randomDigraphs module</a><a class="headerlink" href="#module-randomDigraphs" title="Permalink to this headline">¶</a></h2>
-<p>Python3+ implementation of random digraphs
+<p>Python3+ implementation of some models of random digraphs
 Based on Digraphs3 ressources
 Copyright (C) 2015-2020  Raymond Bisdorff</p>
 <blockquote>
@@ -3183,7 +3183,7 @@ temporary crisp (irreflexive) random crisp digraphs.</p>
 <li><p>arcProbability (in [0.,1.], default=0.5)</p></li>
 <li><p>IntegerValuation (default = True);</p></li>
 <li><p>If Bipolar=True, valuation domain = {-1,1} otherwise = {0,1}</p></li>
-<li><p>Is seed != None, the random generator is seeded</p></li>
+<li><p>If seed != None, the random generator is seeded</p></li>
 </ul>
 </dd>
 </dl>
@@ -3207,8 +3207,10 @@ temporary random crisp graphs (symmetric digraphs) with a fixed sequence of degr
 <dl class="py class">
 <dt id="randomDigraphs.RandomFixedSizeDigraph">
 <em class="property">class </em><code class="sig-prename descclassname">randomDigraphs.</code><code class="sig-name descname">RandomFixedSizeDigraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">order</span><span class="o">=</span><span class="default_value">7</span></em>, <em class="sig-param"><span class="n">size</span><span class="o">=</span><span class="default_value">14</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomFixedSizeDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomFixedSizeDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates a random crisp digraph with a fixed size, by instantiating a fixed numbers of arcs
-from random choices in the set of potential oriented pairs of nodes numbered from 1 to order.</p>
+<dd><p>Generates a random crisp digraph with a fixed size, 
+by instantiating a fixed numbers of arcs
+from random choices in the set of potential oriented 
+pairs of nodes numbered from 1 to order.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -3229,18 +3231,18 @@ temporary randomly oriented Grid digraphs of dimension n time m
 <dl class="py class">
 <dt id="randomDigraphs.RandomRegularDigraph">
 <em class="property">class </em><code class="sig-prename descclassname">randomDigraphs.</code><code class="sig-name descname">RandomRegularDigraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">order</span><span class="o">=</span><span class="default_value">7</span></em>, <em class="sig-param"><span class="n">degree</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomRegularDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomRegularDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="simple">
-<dt>Parameters:</dt><dd><p>order and degree.</p>
+<dd><p>Specialization of Digraph class for random regular symmetric instances.</p>
+<dl class="simple">
+<dt><em>Parameters</em>:</dt><dd><p>order and degree.</p>
 </dd>
 </dl>
-<p>Specialization of Digraph class for random regular symmetric instances.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="randomDigraphs.RandomTournament">
 <em class="property">class </em><code class="sig-prename descclassname">randomDigraphs.</code><code class="sig-name descname">RandomTournament</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">order</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">ndigits</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">Crisp</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">valuationDomain</span><span class="o">=</span><span class="default_value">[- 1, 1]</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomTournament"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomTournament" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specialization of the general Digraph class for generating
-temporary weak tournaments</p>
+temporary weak tournaments.</p>
 <dl class="simple">
 <dt><em>Parameter</em>:</dt><dd><ul class="simple">
 <li><p>order = n &gt; 0</p></li>
@@ -3261,7 +3263,7 @@ temporary uniformly valuated random digraphs.</p>
 <li><p>order &gt; 0, number of arcs;</p></li>
 <li><p>ndigits &gt; 0, number of digits if IntegerValuation = True, 
 otherwise number of decimals;</p></li>
-<li><p>Normalized = True (r in [-1,1], r in [0,1] if False/default);</p></li>
+<li><p>Normalized = True (r in [-1,1] (default), r in [0,1] if False);</p></li>
 <li><p>IntegerValuation = False (default)</p></li>
 <li><p>If seed != none, the random generator is seeded</p></li>
 </ul>
@@ -3313,7 +3315,7 @@ otherwise number of decimals;</p></li>
 <dt id="randomDigraphs.RandomWeakTournament">
 <em class="property">class </em><code class="sig-prename descclassname">randomDigraphs.</code><code class="sig-name descname">RandomWeakTournament</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">order</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">ndigits</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">IntegerValuation</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">weaknessDegree</span><span class="o">=</span><span class="default_value">0.25</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomDigraphs.html#RandomWeakTournament"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#randomDigraphs.RandomWeakTournament" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specialization of the general Digraph class for generating
-temporary bipolar-valued weak tournaments</p>
+temporary bipolar-valued weak, i.e. partially determinate, tournaments.</p>
 <dl class="simple">
 <dt><em>Parameters</em>:</dt><dd><ul class="simple">
 <li><p>order = n &gt; 0</p></li>
