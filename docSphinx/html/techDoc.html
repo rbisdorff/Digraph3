@@ -4940,6 +4940,7 @@ the values observed in the performance Tableau.</p>
 <li><p><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show
 the decision alternatives, resp. criteria, in a given ordering.</p></li>
 <li><p><em>ndigits</em> = 0 may be used to show integer evaluation values.</p></li>
+<li><p><em>colorLevels</em> may be 3, 5, 7, or 9.</p></li>
 <li><p>When no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
 ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>.</p></li>
 <li><p>When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</p></li>
@@ -4948,11 +4949,11 @@ When <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions)
 in fact equivalent to the standard model.</p></li>
 <li><p><em>rankingRule</em> = ‘NetFlows’ (default) | ‘Copeland’ | ‘Kohler’ | ‘RankedPairs’ | ‘ArrowRaymond’
 | ‘IteratedNetFlows’ | ‘IteraredCopeland’. See tutorial on ranking mith multiple incommensurable criteria.</p></li>
-<li><p>when tghe <em>StoreRanking</em> flag is set to <em>True</em>, the ranking result is storted in <em>self</em>.</p></li>
+<li><p>when the <em>StoreRanking</em> flag is set to <em>True</em>, the ranking result is storted in <em>self</em>.</p></li>
 <li><p>Quantiles used for the pre-ranked decomposition are put by default to <em>n</em>
 (the number of decision alternatives) for <em>n</em> &lt; 50. For larger cardinalities up to 1000, quantiles = <em>n</em> /10.
 For bigger performance tableaux the <em>quantiles</em> parameter may be set to a much lower value
-not exceeding usually 1000.</p></li>
+not exceeding usually 10.</p></li>
 <li><p>The pre-ranking may be obtained with three ordering strategies for the
 quantiles equivalence classes: ‘average’ (default), ‘optimistic’ or  ‘pessimistic’.</p></li>
 <li><p>With <em>Correlations</em> = <em>True</em> and <em>criteriaList</em> = <em>None</em>, the criteria will be presented from left to right in decreasing
@@ -7365,6 +7366,7 @@ a subset of the decision actions.</p>
 <li><p><em>actionsList</em> and <em>criteriaList</em>, if provided,  give the possibility to show
 the decision alternatives, resp. criteria, in a given ordering.</p></li>
 <li><p><em>ndigits</em> = 0 may be used to show integer evaluation values.</p></li>
+<li><p><em>colorLevels</em> may be 3, 5, 7, or 9.</p></li>
 <li><p>When no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
 ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>.</p></li>
 <li><p>When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</p></li>
@@ -7373,11 +7375,11 @@ When <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions)
 in fact equivalent to the standard model.</p></li>
 <li><p><em>rankingRule</em> = ‘NetFlows’ (default) | ‘Copeland’ | ‘Kohler’ | ‘RankedPairs’ | ‘ArrowRaymond’
 | ‘IteratedNetFlows’ | ‘IteraredCopeland’. See tutorial on ranking mith multiple incommensurable criteria.</p></li>
-<li><p>when tghe <em>StoreRanking</em> flag is set to <em>True</em>, the ranking result is storted in <em>self</em>.</p></li>
+<li><p>when the <em>StoreRanking</em> flag is set to <em>True</em>, the ranking result is storted in <em>self</em>.</p></li>
 <li><p>Quantiles used for the pre-ranked decomposition are put by default to <em>n</em>
 (the number of decision alternatives) for <em>n</em> &lt; 50. For larger cardinalities up to 1000, quantiles = <em>n</em> /10.
 For bigger performance tableaux the <em>quantiles</em> parameter may be set to a much lower value
-not exceeding usually 1000.</p></li>
+not exceeding usually 10.</p></li>
 <li><p>The pre-ranking may be obtained with three ordering strategies for the
 quantiles equivalence classes: ‘average’ (default), ‘optimistic’ or  ‘pessimistic’.</p></li>
 <li><p>With <em>Correlations</em> = <em>True</em> and <em>criteriaList</em> = <em>None</em>, the criteria will be presented from left to right in decreasing
