@@ -964,10 +964,12 @@ The performance evaluations of each decision alternative on each criterion are g
                 ## indx = self.criteria[criterion]['thresholds']['ind'][0] + self.criteria[criterion]['thresholds']['pref'][1]*perfx
             except:
                 indx = Decimal('0')
-            quantile = float(len([y for y in perfsy\
-                                  if (y in self.actions) and (perfsy[y] != Decimal(-999)) and \
-                                  #(perfsy[y] <= perfx+indx)]) )/float(len(self.actions))
-                                  (perfsy[y] <= perfx)]) )/float(len(self.actions))
+            validperfsy = [y for y in perfsy\
+                           if (y in self.actions) and (perfsy[y] != Decimal(-999))]
+            nvperfsy = len(validperfsy)
+            qperfsy = [y for y in validperfsy if (perfsy[y] <= perfx)]
+            nqperfsy = len(qperfsy)
+            quantile = float(nqperfsy) / float(nvperfsy)
             return quantile
         else:
             return 'NA'
@@ -2331,6 +2333,7 @@ The performance evaluations of each decision alternative on each criterion are g
         * *actionsList* and *criteriaList*, if provided,  give the possibility to show
           the decision alternatives, resp. criteria, in a given ordering.
         * *ndigits* = 0 may be used to show integer evaluation values.
+        * *colorLevels* may be 3, 5, 7, or 9. 
         * When no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
           ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.
         * When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                
@@ -2339,11 +2342,11 @@ The performance evaluations of each decision alternative on each criterion are g
           in fact equivalent to the standard model.
         * *rankingRule* = 'NetFlows' (default) | 'Copeland' | 'Kohler' | 'RankedPairs' | 'ArrowRaymond'
           | 'IteratedNetFlows' | 'IteraredCopeland'. See tutorial on ranking mith multiple incommensurable criteria.
-        * when tghe *StoreRanking* flag is set to *True*, the ranking result is storted in *self*.
+        * when the *StoreRanking* flag is set to *True*, the ranking result is storted in *self*.
         * Quantiles used for the pre-ranked decomposition are put by default to *n*
           (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10.
           For bigger performance tableaux the *quantiles* parameter may be set to a much lower value
-          not exceeding usually 1000.
+          not exceeding usually 10.
         * The pre-ranking may be obtained with three ordering strategies for the
           quantiles equivalence classes: 'average' (default), 'optimistic' or  'pessimistic'.
         * With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing
@@ -2389,7 +2392,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                              pageTitle=pageTitle,
                                              Correlations=Correlations,
                                              Threading=Threading,
-                                             nbrOfCPUs=1,
+                                             nbrOfCPUs=nbrOfCPUs,
                                              Debug=Debug))
         fo.close()
         url = 'file://'+fileName
@@ -2415,7 +2418,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                 nbrOfCPUs=1,
                                 Debug=False):
         """       
-        Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
+        Renders the Brewer RdYlGn 3, 5, 7, or 9 levels colored heatmap of the performance table
         actions x criteria in html format.
 
         See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.
@@ -2447,6 +2450,11 @@ The performance evaluations of each decision alternative on each criterion are g
                                (Decimal('0.8'),'"#D9EF8B"'),
                                (Decimal('1.0'),'"#A6D96A"')
                                ]
+        brewerRdYlGn3Colors = [
+                               (Decimal('0.3333'),'"#FEE08B"'),
+                               (Decimal('0.6666'),'"#FFFFBF"'),
+                               (Decimal('1.0'),'"#D9EF8B"'),
+                               ]
         if colorLevels == None:
             colorLevels = 7
         if colorLevels == 7:
@@ -2455,6 +2463,8 @@ The performance evaluations of each decision alternative on each criterion are g
             colorPalette = brewerRdYlGn9Colors
         elif colorLevels == 5:
             colorPalette = brewerRdYlGn5Colors
+        elif colorLevels == 3:
+            colorPalette = brewerRdYlGn3Colors
         else:
             colorPalette = brewerRdYlGn7Colors
         nc = len(colorPalette)

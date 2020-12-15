@@ -3759,7 +3759,7 @@ Quantiles sorting results indeed always verify the following **Properties**.
 
 The *q-tiles* sorting result leaves us hence with more or less *overlapping* ordered quantile equivalence classes. For constructing now a linearly ranked q-tiles partition of *X* , we may apply three strategies:
 
-   #. **Average** (default): In decreasing lexicographic order of the average of the lower and upper quantile limits and the upper quantile class limit.
+   #. **Average** (default): In decreasing lexicographic order of the average of the lower and upper quantile limits and the upper quantile class limit;
    #. **Optimistic**: In decreasing lexicographic order of the upper and lower quantile class limits;
    #. **Pessimistic**: In decreasing lexicographic order of the lower and upper quantile class limits;
 

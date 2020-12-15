@@ -1480,3 +1480,117 @@ QuantilesSorting   : 0.32887
 Preordering        : 0.00499
 Decomposing        : 12.02772
 Ordering           : 0.00000
+*----- show short --------------*
+Instance name      : randomCBperftab_pr
+Size (in bytes)    : 1625163
+# Actions          : 100
+# Criteria         : 7
+Sorting by         : 20-Tiling
+Ordering strategy  : average
+Local ranking rule : Copeland
+# Components       : 33
+Minimal size       : 1
+Maximal order      : 12
+Average order      : 3.0
+Fill rate          : 4.990%
+*-- Constructor run times (in sec.) --*
+Total time         : 0.12468
+QuantilesSorting   : 0.06530
+Preordering        : 0.00070
+Decomposing        : 0.05742
+Ordering           : 0.00000
+*----- show short --------------*
+Instance name      : random3ObjectivesPerfTab_conf_pr
+Size (in bytes)    : 3019262
+# Actions          : 100
+# Criteria         : 13
+Sorting by         : 5-Tiling
+Ordering strategy  : average
+Local ranking rule : Copeland
+# Components       : 11
+Minimal size       : 1
+Maximal order      : 17
+Average order      : 9.1
+Fill rate          : 10.000%
+*-- Constructor run times (in sec.) --*
+Total time         : 0.68154
+QuantilesSorting   : 0.05766
+Preordering        : 0.00034
+Decomposing        : 0.08315
+Ordering           : 0.00682
+*----- show short --------------*
+Instance name      : random3ObjectivesPerfTab_pr
+Size (in bytes)    : 12781878
+# Actions          : 1000
+# Criteria         : 13
+Sorting by         : 4-Tiling
+Ordering strategy  : optimal
+Local ranking rule : NetFlows
+# Components       : 566
+Minimal size       : 1
+Maximal order      : 19
+Average order      : 1.8
+Fill rate          : 0.266%
+*-- Constructor run times (in sec.) --*
+Total time         : 12.86271
+QuantilesSorting   : 0.34265
+Preordering        : 0.00746
+Decomposing        : 12.45522
+Ordering           : 0.00000
+*----- show short --------------*
+Instance name      : randomCBperftab_pr
+Size (in bytes)    : 1625163
+# Actions          : 100
+# Criteria         : 7
+Sorting by         : 20-Tiling
+Ordering strategy  : average
+Local ranking rule : Copeland
+# Components       : 33
+Minimal size       : 1
+Maximal order      : 12
+Average order      : 3.0
+Fill rate          : 4.990%
+*-- Constructor run times (in sec.) --*
+Total time         : 0.14831
+QuantilesSorting   : 0.07593
+Preordering        : 0.00064
+Decomposing        : 0.07050
+Ordering           : 0.00000
+*----- show short --------------*
+Instance name      : random3ObjectivesPerfTab_conf_pr
+Size (in bytes)    : 3070975
+# Actions          : 100
+# Criteria         : 13
+Sorting by         : 5-Tiling
+Ordering strategy  : average
+Local ranking rule : Copeland
+# Components       : 9
+Minimal size       : 1
+Maximal order      : 20
+Average order      : 11.1
+Fill rate          : 14.687%
+*-- Constructor run times (in sec.) --*
+Total time         : 0.77609
+QuantilesSorting   : 0.06009
+Preordering        : 0.00034
+Decomposing        : 0.13405
+Ordering           : 0.00797
+*----- show short --------------*
+Instance name      : random3ObjectivesPerfTab_pr
+Size (in bytes)    : 12781878
+# Actions          : 1000
+# Criteria         : 13
+Sorting by         : 4-Tiling
+Ordering strategy  : optimal
+Local ranking rule : NetFlows
+# Components       : 566
+Minimal size       : 1
+Maximal order      : 19
+Average order      : 1.8
+Fill rate          : 0.266%
+*-- Constructor run times (in sec.) --*
+Total time         : 12.76938
+QuantilesSorting   : 0.32169
+Preordering        : 0.00519
+Decomposing        : 12.38836
+Ordering           : 0.00000

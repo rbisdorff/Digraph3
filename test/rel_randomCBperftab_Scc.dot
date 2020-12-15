@@ -3,4 +3,9 @@ graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",
  fontsize = 12,
  label = "\nDigraph3 (graphviz), R. Bisdorff, 2020", size="7,7"];
 n1 [shape = "circle", label = "Scc_1"];
+n2 [shape = "circle", label = "Scc_2"];
+n3 [shape = "circle", label = "Scc_3"];
+n1-> n2 [dir=back, color=black] ;
+n1-> n3 [dir=forward, color=black] ;
+n2-> n3 [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;
 }

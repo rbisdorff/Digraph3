@@ -3759,7 +3759,7 @@ Quantiles sorting results indeed always verify the following **Properties**.
 
 The *q-tiles* sorting result leaves us hence with more or less *overlapping* ordered quantile equivalence classes. For constructing now a linearly ranked q-tiles partition of *X* , we may apply three strategies:
 
-   #. **Average** (default): In decreasing lexicographic order of the average of the lower and upper quantile limits and the upper quantile class limit.
+   #. **Average** (default): In decreasing lexicographic order of the average of the lower and upper quantile limits and the upper quantile class limit;
    #. **Optimistic**: In decreasing lexicographic order of the upper and lower quantile class limits;
    #. **Pessimistic**: In decreasing lexicographic order of the lower and upper quantile class limits;
 
@@ -4893,6 +4893,34 @@ To avoid having to recompute performance deciles from historical data when wishi
 With the *quantiles* parameter (see :numref:`interpolatedQuartilesRating` Line 2), we may recover by interpolation the same quartiles rating as obtained directly with historical performance quartiles (see :numref:`quartilesRatingResult`). Mind that a correct interpolation of quantiles from a given cumulative distribution function requires more or less uniform distributions of observations in each bin. 
 
 More generally, in the case of industrial production monitoring problems, for instance, where large volumes of historical performance data may be available, it may be of interest to estimate even more precisely the marginal cumulative distribution functions, especially when **tail** rating results, i.e. distinguishing **very best**, or **very worst** multiple criteria performances, become a critical issue. Similarly, the *historySize* parameter may be used for monitoring on the fly **unstable** random multiple criteria performance data.  	
+
+Back to :ref:`Content Table <Tutorial-label>`   
+
+---------------
+
+.. _RatingUniversities-Tutorial-label:
+
+Rating Universities: A case study
+---------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+The rating problem
+..................
+
+under development
+
+The performance tableau
+.......................
+
+under development
+
+Three-tiling the universities
+.............................
+
+under development
 
 Back to :ref:`Content Table <Tutorial-label>`   
 

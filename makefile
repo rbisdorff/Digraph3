@@ -88,25 +88,25 @@ perfTabsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${PYTEST} -v pytestsPerfTab.py)
+		(cd test; ${PYTEST} -v pytestsPerfTabs.py)
 
 randomPerfTabsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${PYTEST} -v pytestsRandomPerfTab.py)
+		(cd test; ${PYTEST} -v pytestsRandomPerfTabs.py)
 
 verbosePerfTabsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${PYTEST} -vs pytestsPerfTab.py)
+		(cd test; ${PYTEST} -vs pytestsPerfTabs.py)
 
 verboseRandomPerfTabsTests:
 		for md in ${modules}; do \
 		    cp $$md test/; \
 		done
-		(cd test; ${PYTEST} -vs pytestsRandomPerfTab.py)
+		(cd test; ${PYTEST} -vs pytestsRandomPerfTabs.py)
 
 outrankingDigraphsTests:
 		for md in ${modules}; do \
