@@ -4898,6 +4898,34 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 ---------------
 
+.. _RatingUniversities-Tutorial-label:
+
+Rating Universities: A case study
+---------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+The rating problem
+..................
+
+under development
+
+The performance tableau
+.......................
+
+under development
+
+Three-tiling the universities
+.............................
+
+under development
+
+Back to :ref:`Content Table <Tutorial-label>`   
+
+---------------
+
 .. _Graphs-Tutorial-label:
 
 Working with the :code:`graphs` module
