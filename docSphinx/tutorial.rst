@@ -3323,14 +3323,14 @@ Let us now have a look at the resulting pairwise outranking situations.
     Size                : 67
     Determinateness (%) : 73.91
     Valuation domain    : [-1.00;1.00]
-   >>> g.computeSymmetryDegree(Comments=True)
+   >>> dg.computeSymmetryDegree(Comments=True)
     Symmetry degree of graph <rel_AliceChoice> : 0.49
 
 From Alice's performance tableau we obtain 67 positively validated pairwise outranking situations in the digraph *dg*, supported by a 74% majority of criteria significance (see :numref:`aliceOutranking` Line 9-10).
 
 Due to the poorly discriminating performance evaluations, nearly half of these outranking situations (see Line 12) are *symmetric* and reveal actually *more or less indifference* situations between the potential study programs. This is well illustrated in the **relation map** of the outranking digraph (see :numref:`aliceRelationMap`).
 
-    >>> gg.showHTMLRelationMap(tableTitle='Outranking relation map',\
+    >>> dg.showHTMLRelationMap(tableTitle='Outranking relation map',\
                                rankingRule='Copeland')
 
 .. figure:: aliceRelationMap.png
@@ -3467,7 +3467,7 @@ In a similar way, we may finally compute a *weak ranking* of all the potential s
 
    >>> from transitiveDigraphs import\
                   RankingByChoosingDigraph
-   >>> rbc = RankingByChoosingDigraph(g)
+   >>> rbc = RankingByChoosingDigraph(dg)
    >>> rbc.showRankingByChoosing()
     Ranking by Choosing and Rejecting
      1st ranked ['I-FHK'] 
