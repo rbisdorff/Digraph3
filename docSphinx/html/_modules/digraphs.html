@@ -2952,7 +2952,13 @@
 
 <div class="viewcode-block" id="Digraph.closeTransitive"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.closeTransitive">[docs]</a>    <span class="k">def</span> <span class="nf">closeTransitive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">InSite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Produces the transitive closure of self.relation.</span>
+<span class="sd">        Produces the transitive closure of self.relation. </span>
+<span class="sd">        </span>
+<span class="sd">        *Parameters*:</span>
+
+<span class="sd">            - If *Reverse* == True (False default) all transitive links are dropped, otherwise all transitive links are closed with min[r(x,y),r(y,z)];</span>
+<span class="sd">            - If *Insite* == False (True by default) the methods return a modified copy of self.relation without altering the original self.relation, otherwise self.relation is modified.</span>
+<span class="sd">           </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -2966,12 +2972,14 @@
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="n">curriRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">],</span><span class="n">curriRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">z</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">Med</span> \
-                              <span class="ow">and</span> <span class="n">curriRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">Med</span><span class="p">:</span>
-                            <span class="n">currRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]</span> <span class="o">=</span>\
-                              <span class="nb">min</span><span class="p">(</span><span class="n">curriRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">],</span><span class="n">curriRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">z</span><span class="p">])</span>
-                            <span class="n">Change</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">z</span> <span class="o">!=</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">z</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span> 
+                                <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="n">curriRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">],</span><span class="n">curriRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">z</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">Med</span> \
+                                      <span class="ow">and</span> <span class="n">curriRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">Med</span><span class="p">:</span>
+                                    <span class="n">currRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]</span> <span class="o">=</span>\
+                                      <span class="nb">min</span><span class="p">(</span><span class="n">curriRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">],</span><span class="n">curriRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">z</span><span class="p">])</span>
+                                    <span class="n">Change</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;iterations: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="n">i</span> <span class="p">)</span>
         <span class="k">if</span> <span class="n">Reverse</span><span class="p">:</span>
@@ -13690,7 +13698,7 @@
                                    <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">105</span><span class="p">)</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="c1">#g = EmptyDigraph()</span>
         <span class="c1">#g = CirculantDigraph(circulants=[1,-1])</span>

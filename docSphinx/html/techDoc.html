@@ -1110,6 +1110,13 @@ Optimized with marking of visited chordless P1s.</p>
 <dt id="digraphs.Digraph.closeTransitive">
 <code class="sig-name descname">closeTransitive</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Reverse</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">InSite</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.closeTransitive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.closeTransitive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Produces the transitive closure of self.relation.</p>
+<p><em>Parameters</em>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If <em>Reverse</em> == True (False default) all transitive links are dropped, otherwise all transitive links are closed with min[r(x,y),r(y,z)];</p></li>
+<li><p>If <em>Insite</em> == False (True by default) the methods return a modified copy of self.relation without altering the original self.relation, otherwise self.relation is modified.</p></li>
+</ul>
+</div></blockquote>
 </dd></dl>
 
 <dl class="py method">

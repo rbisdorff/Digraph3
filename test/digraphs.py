@@ -2649,7 +2649,7 @@ class Digraph(object):
 
     def computeSymmetryDegree(self,Comments=False):
         """
-        Renders the symmetry degree of the reflexive part of a digraph.
+        Renders the symmetry degree (Decimal) of the reflexive part of a digraph.
         """
         from copy import deepcopy
         Med = self.valuationdomain['med']
@@ -2669,7 +2669,7 @@ class Digraph(object):
                 elif relation[y][x] > Med:
                     narcs += 1
         try:
-            res = Decimal(str(nsymArc))/Decimal(str(narcs))
+            res = float(nsymArc)/float(narcs)
         except:
             res = Decimal('1.0')
             if Comments:
@@ -2717,10 +2717,11 @@ class Digraph(object):
             res = float(norig-nop)/float(ncl-nop)
         else:
             res = 1.0
-
         if Comments:
-            print('norig,ncl,nop', norig,ncl,nop)
-            print('Transitivity degree of graph <%s> : %.2f' %(self.name,res))
+            print('#original: %d, #closed: %d, #opened: %d triples x->y->z:' %\
+                  (norig,ncl,nop) )
+            print('Transitivity degree of graph <%s>' % self.name)
+            print('(#original - #opened)/(#closed - #opened) =  %.2f' %(res) )
 
         return res
             
@@ -2786,7 +2787,13 @@ class Digraph(object):
 
     def closeTransitive(self,Reverse=False,InSite=True,Comments=False):
         """
-        Produces the transitive closure of self.relation.
+        Produces the transitive closure of self.relation. 
+        
+        *Parameters*:
+
+            - If *Reverse* == True (False default) all transitive links are dropped, otherwise all transitive links are closed with min[r(x,y),r(y,z)];
+            - If *Insite* == False (True by default) the methods return a modified copy of self.relation without altering the original self.relation, otherwise self.relation is modified.
+           
         """
         from copy import deepcopy
         actions = set(self.actions)
@@ -2800,12 +2807,14 @@ class Digraph(object):
             i += 1
             for x in actions:
                 for y in actions:
-                    for z in actions:
-                        if min(curriRelation[y][x],curriRelation[x][z]) > Med \
-                              and curriRelation[y][z] <= Med:
-                            currRelation[y][z] =\
-                              min(curriRelation[y][x],curriRelation[x][z])
-                            Change = True
+                    if x != y:
+                        for z in actions:
+                            if z != x and z != y: 
+                                if min(curriRelation[y][x],curriRelation[x][z]) > Med \
+                                      and curriRelation[y][z] <= Med:
+                                    currRelation[y][z] =\
+                                      min(curriRelation[y][x],curriRelation[x][z])
+                                    Change = True
         if Comments:
             print('iterations: %d' %i )
         if Reverse:
