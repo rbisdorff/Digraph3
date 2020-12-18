@@ -2689,39 +2689,73 @@ class Digraph(object):
             return True
         else:
             return False
-            
-    def computeTransitivityDegree(self,Comments=False):
+
+    def computeTransitivityDegree(self, Comments=False):
         """
-        Renders the transitivity degree of a digraph.
+        Renders the transitivity degree (float) of a digraph.
+
+        .. note:: An empty or indeterminate digraph is considered to be transitive.
+
         """
-        from copy import deepcopy
         Med = self.valuationdomain['med']
-        actions = self.actions
-        origRelation = self.relation
-        closedRelation = self.closeTransitive(InSite=False,Comments=Comments)
-        openedRelation = self.closeTransitive(Reverse=True,\
-                                InSite=False,Comments=Comments)
-        nopen = 0
-        nclosed = 0
+        nop = 0
+        ncl = 0
         norig = 0
-        for x in actions:
-            rorigx = origRelation[x]
-            rclosedx = closedRelation[x]
-            ropenx = openedRelation[x]
-            for y in actions:
-                if ropenx[y] > Med:
-                    nopen += 1
-                if rclosedx[y] > Med:
-                    nclosed += 1
-                if rorigx[y] > Med:
-                    norig += 1
-        if nclosed > nopen:
-            res = (norig-nopen)/(nclosed-nopen)
+        for x in self.actions:
+            for y in self.actions:
+                if x != y:
+                    for z in self.actions:
+                        if z != x and z != y:
+                            if self.relation[x][y] > Med and\
+                               self.relation[y][z] > Med:
+                                ncl += 1
+                                if self.relation[x][z] > Med:
+                                    norig += 1
+                                else:
+                                    nop += 1
+        if (ncl-nop) > 0:
+            res = float(norig-nop)/float(ncl-nop)
         else:
-            res = 0.0
+            res = 1.0
+
         if Comments:
+            print('norig,ncl,nop', norig,ncl,nop)
             print('Transitivity degree of graph <%s> : %.2f' %(self.name,res))
+
         return res
+            
+    # def _computeTransitivityDegree(self,Comments=False):
+    #     """
+    #     Renders the transitivity degree of a digraph.
+    #     """
+    #     from copy import deepcopy
+    #     Med = self.valuationdomain['med']
+    #     actions = self.actions
+    #     origRelation = self.relation
+    #     closedRelation = self.closeTransitive(InSite=False,Comments=Comments)
+    #     openedRelation = self.closeTransitive(Reverse=True,\
+    #                             InSite=False,Comments=Comments)
+    #     nopen = 0
+    #     nclosed = 0
+    #     norig = 0
+    #     for x in actions:
+    #         rorigx = origRelation[x]
+    #         rclosedx = closedRelation[x]
+    #         ropenx = openedRelation[x]
+    #         for y in actions:
+    #             if ropenx[y] > Med:
+    #                 nopen += 1
+    #             if rclosedx[y] > Med:
+    #                 nclosed += 1
+    #             if rorigx[y] > Med:
+    #                 norig += 1
+    #     if nclosed > nopen:
+    #         res = (norig-nopen)/(nclosed-nopen)
+    #     else:
+    #         res = 0.0
+    #     if Comments:
+    #         print('Transitivity degree of graph <%s> : %.2f' %(self.name,res))
+    #     return res
 
     def isTransitive(self,Comments=False):
         """
@@ -13489,15 +13523,21 @@ if __name__ == "__main__":
         t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                    numberOfActions=20,seed=105)
         g = BipolarOutrankingDigraph(t)
+        g.computeTransitivityDegree(Comments=True)
+        g.closeTransitive(Reverse=False)
+        g.computeTransitivityDegree(Comments=True)
         #g = EmptyDigraph()
         #g = CirculantDigraph(circulants=[1,-1])
-        g = IndeterminateDigraph()
+        g = EmptyDigraph()
+        g.computeTransitivityDegree(Comments=True)
+        g = CompleteDigraph()
+        g.computeTransitivityDegree(Comments=True)
         #g.closeSymmetric()
-        print(g.computeSymmetryDegree(Comments=True))
-        print(g.isSymmetric(Comments=True))
-        #g.closeTransitive(Reverse=True)
-        print(g.computeTransitivityDegree(Comments=False))
-        print(g.isTransitive(Comments=True))
+        # print(g.computeSymmetryDegree(Comments=True))
+        # print(g.isSymmetric(Comments=True))
+        # #g.closeTransitive(Reverse=True)
+        # print(g.computeTransitivityDegree(Comments=False))
+        # print(g.isTransitive(Comments=True))
         # g.computeRankingByBestChoosing(CoDual=True,Debug=False)
         # print(g.rankingByBestChoosing)
         # g.showRankingByBestChoosing()
