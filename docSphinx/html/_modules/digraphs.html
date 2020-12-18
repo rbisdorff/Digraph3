@@ -2814,7 +2814,7 @@
 
 <div class="viewcode-block" id="Digraph.computeSymmetryDegree"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeSymmetryDegree">[docs]</a>    <span class="k">def</span> <span class="nf">computeSymmetryDegree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders the symmetry degree of the reflexive part of a digraph.</span>
+<span class="sd">        Renders the symmetry degree (Decimal) of the reflexive part of a digraph.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
@@ -2834,7 +2834,7 @@
                 <span class="k">elif</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
                     <span class="n">narcs</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">nsymArc</span><span class="p">))</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">narcs</span><span class="p">))</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">nsymArc</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">narcs</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
@@ -2882,10 +2882,11 @@
             <span class="n">res</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">norig</span><span class="o">-</span><span class="n">nop</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">ncl</span><span class="o">-</span><span class="n">nop</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">res</span> <span class="o">=</span> <span class="mf">1.0</span>
-
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;norig,ncl,nop&#39;</span><span class="p">,</span> <span class="n">norig</span><span class="p">,</span><span class="n">ncl</span><span class="p">,</span><span class="n">nop</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree of graph &lt;</span><span class="si">%s</span><span class="s1">&gt; : </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="n">res</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#original: </span><span class="si">%d</span><span class="s1">, #closed: </span><span class="si">%d</span><span class="s1">, #opened: </span><span class="si">%d</span><span class="s1"> triples x-&gt;y-&gt;z:&#39;</span> <span class="o">%</span>\
+                  <span class="p">(</span><span class="n">norig</span><span class="p">,</span><span class="n">ncl</span><span class="p">,</span><span class="n">nop</span><span class="p">)</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree of graph &lt;</span><span class="si">%s</span><span class="s1">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;(#original - #opened)/(#closed - #opened) =  </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">res</span></div>
             
