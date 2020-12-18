@@ -2826,11 +2826,13 @@ class Digraph(object):
                 curriRelation = deepcopy(currRelation)
                 for x in actions:
                     for y in actions:
-                        for z in actions:
-                            if min(curriRelation[y][x],curriRelation[x][z]) > Med \
-                                     and curriRelation[y][z] > Med:
-                                currRelation[y][z] = -curriRelation[y][z]
-                                Change = True
+                            if x != y:
+                                for z in actions:
+                                    if z != x and z != y:
+                                        if min(curriRelation[y][x],curriRelation[x][z]) > Med \
+                                           and curriRelation[y][z] > Med:
+                                            currRelation[y][z] = -curriRelation[y][z]
+                                            Change = True
                     #relation[y][z] =\
                 #-(max(relation[y][z],min(relation[y][x],relation[x][z])))
             if Comments:
@@ -13533,7 +13535,8 @@ if __name__ == "__main__":
                                    numberOfActions=20,seed=105)
         g = BipolarOutrankingDigraph(t)
         g.computeTransitivityDegree(Comments=True)
-        g.closeTransitive(Reverse=False,Comments=True)
+        g.closeTransitive(Reverse=True,Comments=True)
+        print(g)
         g.computeTransitivityDegree(Comments=True)
         #g = EmptyDigraph()
         #g = CirculantDigraph(circulants=[1,-1])
