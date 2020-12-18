@@ -15,21 +15,21 @@ a10 [shape = "circle", label = "a10", fontsize=10];
 { rank = 0; a01; }
 { rank = 1; a06; }
 { rank = 2; a02; }
-{ rank = 3; a10; }
-{ rank = 4; a08; }
-{ rank = 5; a09; }
+{ rank = 3; a05; }
+{ rank = 4; a07; }
+{ rank = 5; a03; }
 { rank = 6; a04; }
-{ rank = 7; a05; a03; }
-{ rank = 8; a07; }
+{ rank = 7; a10; }
+{ rank = 8; a09; }
+{ rank = 9; a08; }
 a01-> a06 [style="setlinewidth(1)",color=black] ;
 a06-> a02 [style="setlinewidth(1)",color=black] ;
-a02-> a10 [style="setlinewidth(1)",color=black] ;
-a10-> a08 [style="setlinewidth(1)",color=black] ;
-a08-> a09 [style="setlinewidth(1)",color=black] ;
-a09-> a04 [style="setlinewidth(1)",color=black] ;
-a04-> a05 [style="setlinewidth(1)",color=black] ;
-a04-> a03 [style="setlinewidth(1)",color=black] ;
+a02-> a05 [style="setlinewidth(1)",color=black] ;
 a05-> a07 [style="setlinewidth(1)",color=black] ;
-a03-> a07 [style="setlinewidth(1)",color=black] ;
+a07-> a03 [style="setlinewidth(1)",color=black] ;
+a03-> a04 [style="setlinewidth(1)",color=black] ;
+a04-> a10 [style="setlinewidth(1)",color=black] ;
+a10-> a09 [style="setlinewidth(1)",color=black] ;
+a09-> a08 [style="setlinewidth(1)",color=black] ;
 }
  
