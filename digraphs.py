@@ -2679,9 +2679,10 @@ class Digraph(object):
             res = Decimal('1.0')
             if Comments:
                 print('Digraph instance %s is empty' % self.name)
+        if InPercents:
+            res *= Decimal('100.0') 
         if Comments:
             if InPercents:
-                res *= Decimal('100.0') 
                 print('Symmetry degree (%%) of digraph <%s>:' % self.name)
                 print(' #arcs x>y: %d, #symmetric: %d, #asymmetric: %d' %\
                       (narcs,nsymArc,narcs-nsymArc) )
@@ -2690,7 +2691,7 @@ class Digraph(object):
                 print('Symmetry degree of digraph <%s>:' % self.name)
                 print(' #arcs x>y: %d, #symmetric: %d %d, #asymmetric: %d' %\
                       (narcs,nsymArc,narcs-nsymArc) )
-                print(' #arcs/#symmetric =  %.2f' %(res) )
+                print(' #arcs/#symmetric =  %.3f' %(res) )
         return res
 
     def isSymmetric(self,Comments=False):
@@ -2717,6 +2718,7 @@ class Digraph(object):
         """
         from decimal import Decimal
         Med = self.valuationdomain['med']
+        transRel = self.closeTransitive(InSite=False)
         ntriples = 0
         nclosed = 0
         for x in self.actions:
@@ -2724,8 +2726,8 @@ class Digraph(object):
                 if x != y:
                     for z in self.actions:
                         if z != x and z != y:
-                            if self.relation[x][y] > Med and\
-                               self.relation[y][z] > Med:
+                            if transRel[x][y] > Med and\
+                               transRel[y][z] > Med:
                                 ntriples += 1
                                 if self.relation[x][z] > Med:
                                     nclosed += 1
@@ -2733,21 +2735,22 @@ class Digraph(object):
             res = Decimal(str(nclosed))/Decimal(str(ntriples))
         else:
             res = Decimal('1.0')
+        if InPercents:
+            res *= Decimal('100.0') 
         if Comments:
             if InPercents:
-                res *= Decimal('100.0') 
                 print('Transitivity degree (%%) of digraph <%s>:' % self.name)
                 print(' #triples x>y>z: %d, #closed: %d, #open: %d' %\
-                      (ntriples,nclosed,ntriples-nclosed) )
-                print('(#closed)/(#triples) =  %.1f' %(res) )
+                  (ntriples,nclosed,ntriples-nclosed) )
+                print(' (#closed/#triples) =  %.1f' %(res) )
             else:
                 print('Transitivity degree of digraph <%s>:' % self.name)
                 print(' #triples x>y>z: %d, #closed: %d, #open: %d' %\
-                      (ntriples,nclosed,ntriples-nclosed) )
-                print(' (#closed)/(#triples) =  %.2f' %(res) )
+                  (ntriples,nclosed,ntriples-nclosed) )
+                print(' (#closed/#triples) =  %.3f' %(res) )
         return res
             
-    # def _computeTransitivityDegree(self,Comments=False):
+    # def computeTransitivityDegreeOld(self,Comments=False):
     #     """
     #     Renders the transitivity degree of a digraph.
     #     """
@@ -5060,22 +5063,24 @@ class Digraph(object):
 ##                    deter += abs(rxy - Med)
 ##        deter /= order * (order-1) * (Max - Med)
         deter = self.computeDeterminateness(InPercents=True)
+        trans = self.computeTransitivityDegree(InPercents=True)
+        sym = self.computeSymmetryDegree(InPercents=True)
         #  output results
         print('for digraph              : <' + str(self.name) + '.py>')
         print('order                    :', self.order, 'nodes')
         print('size                     :', self.size, 'arcs')
         print('# undetermined           :', self.undeterm, 'arcs')
-        print('determinateness (in %%)   : %.2f' % (deter))
+        print('determinateness (%%)      : %.1f' % (deter))
         print("arc density              : %.2f" % (density['arc']))
         print("double arc density       : %.2f" % (density['double']))
         print("single arc density       : %.2f" % (density['single']))
         print("absence density          : %.2f" % (density['absence']))
         print("strict single arc density: %.2f" % (density['strictSingle']))
         print("strict absence density   : %.2f" % (density['strictAbsence']))
-        print('# components             : ', nbrcomp)
-        print('# strong components      : ', nbrstrcomp)
-        print('transitivity degree      : %.2f' % (self.computeTransitivityDegree()))
-
+        print('# components             :', nbrcomp)
+        print('# strong components      :', nbrstrcomp)
+        print('transitivity degree (%%)  : %.1f' % (trans) )
+        print('symmetry degree (%%)      : %.1f' % (sym) )
         print('                         :', list(range(len(outDegrees))))
         print('outdegrees distribution  :', list(outDegrees))
         print('indegrees distribution   :', list(inDegrees))
@@ -13554,11 +13559,12 @@ if __name__ == "__main__":
         from time import time
         from digraphsTools import *
         t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                   numberOfActions=20,seed=105)
+                                       numberOfActions=20,seed=106)
         g = BipolarOutrankingDigraph(t)
         g.computeTransitivityDegree(Comments=True)
+        #g.computeTransitivityDegreeOld(Comments=True)
         g.closeTransitive(Reverse=True,Comments=True)
-        print(g)
+        #print(g)
         g.computeTransitivityDegree(Comments=True)
         #g = EmptyDigraph()
         #g = CirculantDigraph(circulants=[1,-1])

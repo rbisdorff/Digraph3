@@ -268,34 +268,34 @@ Some simple methods are readly applicable to this instantiated Digraph object *d
    >>> dg.showStatistics()
     *----- general statistics -------------*
     for digraph              : <tutorialDigraph.py>
-    order                    :  5 nodes
-    size                     :  12 arcs
-    # undetermined           :  0 arcs
-    determinateness          : 1.00
+    order                    : 5 nodes
+    size                     : 12 arcs
+    # undetermined           : 0 arcs
+    determinateness (%)      : 100.0
     arc density              : 0.60
     double arc density       : 0.40
     single arc density       : 0.40
     absence density          : 0.20
     strict single arc density: 0.40
     strict absence density   : 0.20
-    # components             :  1
-    # strong components      :  1
-    transitivity degree      : 0.11
-			     :  [0, 1, 2, 3, 4, 5]
-    outdegrees distribution  :  [0, 1, 1, 3, 0, 0]
-    indegrees distribution   :  [0, 1, 2, 1, 1, 0]
+    # components             : 1
+    # strong components      : 1
+    transitivity degree (%)  : 53.0
+			     : [0, 1, 2, 3, 4, 5]
+    outdegrees distribution  : [0, 1, 1, 3, 0, 0]
+    indegrees distribution   : [0, 1, 2, 1, 1, 0]
     mean outdegree           : 2.40
     mean indegree            : 2.40
-			     :  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    symmetric degrees dist.  :  [0, 0, 0, 0, 1, 4, 0, 0, 0, 0, 0]
+			     : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    symmetric degrees dist.  : [0, 0, 0, 0, 1, 4, 0, 0, 0, 0, 0]
     mean symmetric degree    : 4.80
     outdegrees concentration index   : 0.1667
     indegrees concentration index    : 0.2333
     symdegrees concentration index   : 0.0333
-				     :  [0, 1, 2, 3, 4, 'inf']
-    neighbourhood depths distribution:  [0, 1, 4, 0, 0, 0]
+				     : [0, 1, 2, 3, 4, 'inf']
+    neighbourhood depths distribution: [0, 1, 4, 0, 0, 0]
     mean neighbourhood depth         : 1.80 
-    digraph diameter                 :  2
+    digraph diameter                 : 2
     agglomeration distribution       : 
     a1 : 58.33
     a2 : 33.33
