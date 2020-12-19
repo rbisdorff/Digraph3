@@ -656,7 +656,7 @@ the current working directory a <code class="code docutils literal notranslate">
 <span class="go"> strict absence density   : 0.20</span>
 <span class="go"> # components             :  1</span>
 <span class="go"> # strong components      :  1</span>
-<span class="go"> transitivity degree      : 0.24</span>
+<span class="go"> transitivity degree      : 0.11</span>
 <span class="go">                          :  [0, 1, 2, 3, 4, 5]</span>
 <span class="go"> outdegrees distribution  :  [0, 1, 1, 3, 0, 0]</span>
 <span class="go"> indegrees distribution   :  [0, 1, 2, 1, 1, 0]</span>
@@ -3217,12 +3217,12 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <p>The strict outranking relation  <img class="math" src="_images/math/29f438ab7c1eebb4c06eeef486c6f1f1bb61e2a8.png" alt="\succnsim"/> shown here is apparently <em>not transitive</em>: for instance, alternative <em>a8</em> outranks alternative <em>a6</em> and alternative <em>a6</em> outranks <em>a4</em>, however <em>a8</em> does not outrank <em>a4</em> (see <a class="reference internal" href="#rankingtutorial"><span class="std std-numref">Fig. 20</span></a>). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the difference between the number of outranking arcs and the number of transitive arcs over the difference of the number of arcs of the transitive closure minus the transitive arcs of the digraph <em>gcd</em>.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go"> Transitivity degree of graph</span>
-<span class="go"> &lt;converse-dual_rel_randomCBperftab&gt;: 0.24</span>
-<span class="go"> 0.23529411764705882</span>
+<span class="go"> Transitivity degree of graph &lt;codual_rel_randomCBperftab&gt;</span>
+<span class="go">  #triples x&gt;y&gt;z: 20, #closed: 7, #open: 13</span>
+<span class="go">  #closed/#triples =  0.35</span>
 </pre></div>
 </div>
-<p>With only 24% of the required transitive arcs, the strict outranking relation here is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.</p>
+<p>With only 35% of the required transitive arcs, the strict outranking relation here is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -6580,7 +6580,7 @@ Type <span class="s2">&quot;help&quot;</span>, <span class="s2">&quot;copyright&
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
 <span class="go"> []</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
-<span class="go"> Decimal(&#39;0.78&#39;)</span>
+<span class="go"> 0.78</span>
 </pre></div>
 </td></tr></table></div>
 <p>Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each <strong>positively outrank</strong> all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the <em>strict</em> outranking digraph (i.e. the codual ~(-<em>g</em>) of <em>g</em>) shown in <a class="reference internal" href="#converse-dual-rel-best10"><span class="std std-numref">Fig. 36</span></a>.</p>
@@ -8590,25 +8590,35 @@ instance (see <a class="reference internal" href="#random3regulargraph"><span cl
 <a class="reference internal image-reference" href="_images/randomLaterality.png"><img alt="A random digraph instance" src="_images/randomLaterality.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 54 </span><span class="caption-text">A random digraph instance of order 7 and arc probability 0.3</span><a class="headerlink" href="#randomlaterality" title="Permalink to this image">¶</a></p>
 </div>
-<p>The random digraph shown in <a class="reference internal" href="#randomlaterality"><span class="std std-numref">Fig. 54</span></a> above has no apparent special properties, except from being connected.</p>
-<div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">showComponents</span><span class="p">()</span>
+<p>The random digraph shown in <a class="reference internal" href="#randomlaterality"><span class="std std-numref">Fig. 54</span></a> above has no apparent special properties, except from being connected (see Line 3 below).</p>
+<div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">showComponents</span><span class="p">()</span>
 <span class="go"> *--- Connected Components ---*</span>
 <span class="go"> 1: [&#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;, &#39;a4&#39;, &#39;a5&#39;, &#39;a6&#39;, &#39;a7&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">computeSymmetryDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">InPercents</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go"> Symmetry degree (%) of digraph &lt;randomDigraph&gt;:</span>
+<span class="go">  #arcs x&gt;y: 14, #symmetric: 1, #asymmetric: 13</span>
+<span class="go">  #symmetric/#arcs =  7.1</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
-<span class="go"> []                 # no chordless circuits detected</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree: </span><span class="si">%.2f%%</span><span class="s1">&#39;</span> <span class="o">%</span>\
-<span class="go">                  (rd.computeTransitivityDegree()*100))</span>
-<span class="go"> Transitivity degree: 27.27%</span>
+<span class="go"> []  # no chordless circuits detected</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rd</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">InPercents</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="go"> Transitivity degree (%) of graph &lt;randomDigraph&gt;:</span>
+<span class="go">  #triples x&gt;y&gt;z: 23, #closed: 11, #open: 12</span>
+<span class="go">  #closed/#triples =  47.8</span>
 </pre></div>
 </td></tr></table></div>
-<p>The given digraph instance is neither asymmetric (a3 &lt;–&gt; a6) nor symmetric (a2 –&gt; a1, a1 -/&gt; a2); there are no chordless circuits (see Line 5 above); and, the digraph is not transitive (a5 -&gt; a2 -&gt; a1, but a5 -/&gt; a1). More than two third of the required transitive closure is missing (see Line 8 above).</p>
+<p>The given digraph instance is neither asymmetric (a3 &lt;–&gt; a6) nor symmetric (a2 –&gt; a1, a1 -/&gt; a2) (see Line 6 above); there are no chordless circuits (see Line 9 above); and, the digraph is not transitive (a5 -&gt; a2 -&gt; a1, but a5 -/&gt; a1). More than half of the required transitive closure is missing (see Line 12 above).</p>
 <p>Now, we know that its potential prekernels must be among its set of maximal independent choices.</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2

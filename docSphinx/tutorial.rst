@@ -280,7 +280,7 @@ Some simple methods are readly applicable to this instantiated Digraph object *d
     strict absence density   : 0.20
     # components             :  1
     # strong components      :  1
-    transitivity degree      : 0.24
+    transitivity degree      : 0.11
 			     :  [0, 1, 2, 3, 4, 5]
     outdegrees distribution  :  [0, 1, 1, 3, 0, 0]
     indegrees distribution   :  [0, 1, 2, 1, 1, 0]
@@ -2217,12 +2217,12 @@ To estimate how *difficult* this ranking problem here may be, we may have a look
 
 The strict outranking relation  :math:`\succnsim` shown here is apparently *not transitive*: for instance, alternative *a8* outranks alternative *a6* and alternative *a6* outranks *a4*, however *a8* does not outrank *a4* (see :numref:`rankingTutorial`). We may compute the transitivity degree of the outranking digraph, i.e. the ratio of the difference between the number of outranking arcs and the number of transitive arcs over the difference of the number of arcs of the transitive closure minus the transitive arcs of the digraph *gcd*.
 
-    >>> gcd.computeTransitivityDegree(Comments=True)
-     Transitivity degree of graph
-     <converse-dual_rel_randomCBperftab>: 0.24
-     0.23529411764705882
+   >>> gcd.computeTransitivityDegree(Comments=True)
+    Transitivity degree of graph <codual_rel_randomCBperftab>
+     #triples x>y>z: 20, #closed: 7, #open: 13
+     #closed/#triples =  0.35
     
-With only 24% of the required transitive arcs, the strict outranking relation here is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
+With only 35% of the required transitive arcs, the strict outranking relation here is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
     
 .. code-block:: pycon
 
@@ -4484,7 +4484,7 @@ We consider now a partial performance tableau *best10*, consisting only, for ins
    >>> g.computeChordlessCircuits()
     []
    >>> g.computeTransitivityDegree()
-    Decimal('0.78')
+    0.78
 
 Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each **positively outrank** all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking digraph (i.e. the codual ~(-*g*) of *g*) shown in :numref:`converse-dual_rel_best10`.
   
@@ -5926,7 +5926,7 @@ In genuine random digraphs, however, we may need to check for each of its MISs, 
 
    A random digraph instance of order 7 and arc probability 0.3
 
-The random digraph shown in :numref:`randomLaterality` above has no apparent special properties, except from being connected.
+The random digraph shown in :numref:`randomLaterality` above has no apparent special properties, except from being connected (see Line 3 below).
 
 .. code-block:: pycon
    :linenos:
@@ -5934,13 +5934,18 @@ The random digraph shown in :numref:`randomLaterality` above has no apparent spe
    >>> rd.showComponents()
     *--- Connected Components ---*
     1: ['a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7']
+   >>> rd.computeSymmetryDegree(Comments=True,InPercents=True)
+    Symmetry degree (%) of digraph <randomDigraph>:
+     #arcs x>y: 14, #symmetric: 1, #asymmetric: 13
+     #symmetric/#arcs =  7.1
    >>> rd.computeChordlessCircuits()
-    []                 # no chordless circuits detected
-   >>> print('Transitivity degree: %.2f%%' %\
-                     (rd.computeTransitivityDegree()*100))
-    Transitivity degree: 27.27%
+    []  # no chordless circuits detected
+   >>> rd.computeTransitivityDegree(Comments=True,InPercents=True)
+    Transitivity degree (%) of graph <randomDigraph>:
+     #triples x>y>z: 23, #closed: 11, #open: 12
+     #closed/#triples =  47.8
 
-The given digraph instance is neither asymmetric (a3 <--> a6) nor symmetric (a2 --> a1, a1 -/> a2); there are no chordless circuits (see Line 5 above); and, the digraph is not transitive (a5 -> a2 -> a1, but a5 -/> a1). More than two third of the required transitive closure is missing (see Line 8 above).
+The given digraph instance is neither asymmetric (a3 <--> a6) nor symmetric (a2 --> a1, a1 -/> a2) (see Line 6 above); there are no chordless circuits (see Line 9 above); and, the digraph is not transitive (a5 -> a2 -> a1, but a5 -/> a1). More than half of the required transitive closure is missing (see Line 12 above).
 
 Now, we know that its potential prekernels must be among its set of maximal independent choices. 
 

@@ -1759,8 +1759,12 @@ Return a tuple: slaterOrder, slaterIndex</p>
 
 <dl class="py method">
 <dt id="digraphs.Digraph.computeSymmetryDegree">
-<code class="sig-name descname">computeSymmetryDegree</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeSymmetryDegree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeSymmetryDegree" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">computeSymmetryDegree</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">InPercents</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeSymmetryDegree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeSymmetryDegree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renders the symmetry degree (Decimal) of the reflexive part of a digraph.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Empty and indeterminate digraphs are considered to be symmetric.</p>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -1774,8 +1778,8 @@ Annals Of Discrete Mathematics 57 2nd Ed. , Elsevier 2004, Algorithm 2.4 p.44.</
 
 <dl class="py method">
 <dt id="digraphs.Digraph.computeTransitivityDegree">
-<code class="sig-name descname">computeTransitivityDegree</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeTransitivityDegree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeTransitivityDegree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the transitivity degree (float) of a digraph.</p>
+<code class="sig-name descname">computeTransitivityDegree</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">InPercents</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeTransitivityDegree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeTransitivityDegree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the transitivity degree (Decimal) of a digraph.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>An empty or indeterminate digraph is considered to be transitive.</p>
