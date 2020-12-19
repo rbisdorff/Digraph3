@@ -412,7 +412,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="BipolarOutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="BipolarOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="BipolarOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="BipolarOutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -801,14 +806,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="BipolarOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="BipolarOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="BipolarOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="BipolarOutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="BipolarOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="BipolarOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="BipolarOutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -1556,6 +1569,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -1564,11 +1578,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -1865,7 +1879,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="CoalitionsOutrankingsFusionDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="CoalitionsOutrankingsFusionDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="CoalitionsOutrankingsFusionDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="CoalitionsOutrankingsFusionDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -2254,14 +2273,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="CoalitionsOutrankingsFusionDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="CoalitionsOutrankingsFusionDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="CoalitionsOutrankingsFusionDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="CoalitionsOutrankingsFusionDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="CoalitionsOutrankingsFusionDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="CoalitionsOutrankingsFusionDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="CoalitionsOutrankingsFusionDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -3009,6 +3036,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -3017,11 +3045,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -3335,7 +3363,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="ConfidentBipolarOutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="ConfidentBipolarOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="ConfidentBipolarOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="ConfidentBipolarOutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -3724,14 +3757,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="ConfidentBipolarOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="ConfidentBipolarOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="ConfidentBipolarOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="ConfidentBipolarOutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="ConfidentBipolarOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="ConfidentBipolarOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="ConfidentBipolarOutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -4479,6 +4520,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -4487,11 +4529,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -4780,7 +4822,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="DissimilarityOutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="DissimilarityOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="DissimilarityOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="DissimilarityOutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -5169,14 +5216,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="DissimilarityOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="DissimilarityOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="DissimilarityOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="DissimilarityOutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="DissimilarityOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="DissimilarityOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="DissimilarityOutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -5924,6 +5979,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -5932,11 +5988,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -6235,7 +6291,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="EquiSignificanceMajorityOutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="EquiSignificanceMajorityOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="EquiSignificanceMajorityOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="EquiSignificanceMajorityOutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -6624,14 +6685,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="EquiSignificanceMajorityOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="EquiSignificanceMajorityOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="EquiSignificanceMajorityOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="EquiSignificanceMajorityOutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="EquiSignificanceMajorityOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="EquiSignificanceMajorityOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="EquiSignificanceMajorityOutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -7379,6 +7448,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -7387,11 +7457,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -7681,7 +7751,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="MultiCriteriaDissimilarityDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="MultiCriteriaDissimilarityDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="MultiCriteriaDissimilarityDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="MultiCriteriaDissimilarityDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -8070,14 +8145,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="MultiCriteriaDissimilarityDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="MultiCriteriaDissimilarityDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="MultiCriteriaDissimilarityDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="MultiCriteriaDissimilarityDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="MultiCriteriaDissimilarityDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="MultiCriteriaDissimilarityDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="MultiCriteriaDissimilarityDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -8825,6 +8908,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -8833,11 +8917,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -9138,7 +9222,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="OldRobustOutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="OldRobustOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="OldRobustOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="OldRobustOutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -9527,14 +9616,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="OldRobustOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="OldRobustOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="OldRobustOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="OldRobustOutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="OldRobustOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="OldRobustOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="OldRobustOutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -10282,6 +10379,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -10290,11 +10388,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -10584,7 +10682,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="OrdinalOutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="OrdinalOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="OrdinalOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="OrdinalOutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -10973,14 +11076,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="OrdinalOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="OrdinalOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="OrdinalOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="OrdinalOutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="OrdinalOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="OrdinalOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="OrdinalOutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -11728,6 +11839,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -11736,11 +11848,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -12043,7 +12155,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="OutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="OutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="OutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="OutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -12432,14 +12549,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="OutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="OutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="OutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="OutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="OutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="OutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="OutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -13187,6 +13312,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -13195,11 +13321,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -13490,7 +13616,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="PolarisedOutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="PolarisedOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="PolarisedOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="PolarisedOutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -13879,14 +14010,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="PolarisedOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="PolarisedOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="PolarisedOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="PolarisedOutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="PolarisedOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="PolarisedOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="PolarisedOutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -14634,6 +14773,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -14642,11 +14782,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -14946,7 +15086,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="RandomBipolarOutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="RandomBipolarOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="RandomBipolarOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="RandomBipolarOutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -15335,14 +15480,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="RandomBipolarOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="RandomBipolarOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RandomBipolarOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="RandomBipolarOutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="RandomBipolarOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RandomBipolarOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="RandomBipolarOutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -16090,6 +16243,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -16098,11 +16252,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -16398,7 +16552,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="RandomOutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="RandomOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="RandomOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="RandomOutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -16787,14 +16946,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="RandomOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="RandomOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RandomOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="RandomOutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="RandomOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RandomOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="RandomOutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -17542,6 +17709,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -17550,11 +17718,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -17945,7 +18113,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="RobustOutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="RobustOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="RobustOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="RobustOutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -18334,14 +18507,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="RobustOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="RobustOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RobustOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="RobustOutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="RobustOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RobustOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="RobustOutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -19089,6 +19270,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -19097,11 +19279,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -19426,7 +19608,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="StochasticBipolarOutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="StochasticBipolarOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="StochasticBipolarOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="StochasticBipolarOutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -19815,14 +20002,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="StochasticBipolarOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="StochasticBipolarOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="StochasticBipolarOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="StochasticBipolarOutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="StochasticBipolarOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="StochasticBipolarOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="StochasticBipolarOutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -20570,6 +20765,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -20578,11 +20774,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -20877,7 +21073,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="SymmetricAverageFusionOutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="SymmetricAverageFusionOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="SymmetricAverageFusionOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="SymmetricAverageFusionOutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -21266,14 +21467,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="SymmetricAverageFusionOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="SymmetricAverageFusionOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="SymmetricAverageFusionOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="SymmetricAverageFusionOutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="SymmetricAverageFusionOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="SymmetricAverageFusionOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="SymmetricAverageFusionOutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -22021,6 +22230,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -22029,11 +22239,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -22344,7 +22554,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="UnOpposedBipolarOutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="UnOpposedBipolarOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="UnOpposedBipolarOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="UnOpposedBipolarOutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -22733,14 +22948,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="UnOpposedBipolarOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="UnOpposedBipolarOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="UnOpposedBipolarOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="UnOpposedBipolarOutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="UnOpposedBipolarOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="UnOpposedBipolarOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="UnOpposedBipolarOutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -23488,6 +23711,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -23496,11 +23720,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
@@ -23790,7 +24014,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="UnanimousOutrankingDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="UnanimousOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="UnanimousOutrankingDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="UnanimousOutrankingDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -24179,14 +24408,22 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="UnanimousOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="UnanimousOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="UnanimousOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="UnanimousOutrankingDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="UnanimousOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="UnanimousOutrankingDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="UnanimousOutrankingDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -24934,6 +25171,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -24942,11 +25180,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>

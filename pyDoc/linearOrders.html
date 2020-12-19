@@ -230,7 +230,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="CopelandOrder-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="CopelandOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -620,14 +625,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="CopelandOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="CopelandOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="CopelandOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="CopelandOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="CopelandOrder-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -1403,7 +1416,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="CopelandRanking-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="CopelandRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="CopelandRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="CopelandRanking-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -1793,14 +1811,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="CopelandRanking-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="CopelandRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="CopelandRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="CopelandRanking-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="CopelandRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="CopelandRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="CopelandRanking-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -2564,7 +2590,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="IteratedCopelandRanking-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="IteratedCopelandRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="IteratedCopelandRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="IteratedCopelandRanking-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -2954,14 +2985,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="IteratedCopelandRanking-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="IteratedCopelandRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="IteratedCopelandRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="IteratedCopelandRanking-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="IteratedCopelandRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="IteratedCopelandRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="IteratedCopelandRanking-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -3725,7 +3764,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="IteratedNetFlowsRanking-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="IteratedNetFlowsRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="IteratedNetFlowsRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="IteratedNetFlowsRanking-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -4115,14 +4159,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="IteratedNetFlowsRanking-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="IteratedNetFlowsRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="IteratedNetFlowsRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="IteratedNetFlowsRanking-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="IteratedNetFlowsRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="IteratedNetFlowsRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="IteratedNetFlowsRanking-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -4886,7 +4938,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="KemenyOrder-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="KemenyOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -5276,14 +5333,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="KemenyOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="KemenyOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="KemenyOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="KemenyOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="KemenyOrder-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -6049,7 +6114,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="KemenyRanking-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="KemenyRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="KemenyRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="KemenyRanking-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -6439,14 +6509,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="KemenyRanking-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="KemenyRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="KemenyRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="KemenyRanking-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="KemenyRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="KemenyRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="KemenyRanking-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -7210,7 +7288,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="KohlerOrder-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="KohlerOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -7600,14 +7683,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="KohlerOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="KohlerOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="KohlerOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="KohlerOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="KohlerOrder-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -8371,7 +8462,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="KohlerRanking-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="KohlerRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="KohlerRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="KohlerRanking-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -8761,14 +8857,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="KohlerRanking-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="KohlerRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="KohlerRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="KohlerRanking-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="KohlerRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="KohlerRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="KohlerRanking-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -9527,7 +9631,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="LinearOrder-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="LinearOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -9917,14 +10026,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="LinearOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="LinearOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="LinearOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="LinearOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="LinearOrder-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -10688,7 +10805,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="MedianRanking-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="MedianRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="MedianRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="MedianRanking-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -11078,14 +11200,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="MedianRanking-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="MedianRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="MedianRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="MedianRanking-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="MedianRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="MedianRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="MedianRanking-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -11851,7 +11981,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="NetFlowsOrder-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="NetFlowsOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -12241,14 +12376,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="NetFlowsOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="NetFlowsOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="NetFlowsOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsOrder-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -13014,7 +13157,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="NetFlowsRanking-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="NetFlowsRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsRanking-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -13404,14 +13552,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="NetFlowsRanking-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="NetFlowsRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsRanking-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="NetFlowsRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="NetFlowsRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="NetFlowsRanking-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -14183,7 +14339,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="PrincipalOrder-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="PrincipalOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -14573,14 +14734,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="PrincipalOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="PrincipalOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="PrincipalOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="PrincipalOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="PrincipalOrder-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -15341,7 +15510,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="RandomLinearOrder-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="RandomLinearOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -15731,14 +15905,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="RandomLinearOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RandomLinearOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="RandomLinearOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RandomLinearOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="RandomLinearOrder-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -16503,7 +16685,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="RankedPairsOrder-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="RankedPairsOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -16893,14 +17080,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="RankedPairsOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RankedPairsOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RankedPairsOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsOrder-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -17665,7 +17860,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="RankedPairsRanking-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="RankedPairsRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsRanking-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -18055,14 +18255,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="RankedPairsRanking-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RankedPairsRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsRanking-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="RankedPairsRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="RankedPairsRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="RankedPairsRanking-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -18826,7 +19034,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="SlaterOrder-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="SlaterOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="SlaterOrder-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="SlaterOrder-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -19216,14 +19429,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="SlaterOrder-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="SlaterOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="SlaterOrder-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="SlaterOrder-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="SlaterOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="SlaterOrder-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="SlaterOrder-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 
@@ -19987,7 +20208,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="SlaterRanking-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="SlaterRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="SlaterRanking-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="SlaterRanking-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -20377,14 +20603,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="SlaterRanking-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="SlaterRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="SlaterRanking-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="SlaterRanking-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="SlaterRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="SlaterRanking-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="SlaterRanking-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 

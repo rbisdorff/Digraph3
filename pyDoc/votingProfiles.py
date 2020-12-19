@@ -1371,7 +1371,7 @@ class RandomVotingProfile(VotingProfile):
         return ballot
 
 #--------------------------------
-class CondorcetDigraph(Digraph):
+class CondorcetDigraph(Digraph,VotingProfile):
     """
     Specialization of the general Digraph class for generating
     bipolar-valued marginal pairwise majority difference digraphs.

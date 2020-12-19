@@ -250,6 +250,7 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
 *&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -258,11 +259,11 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
 *&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
 &nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
-*&nbsp;when&nbsp;tghe&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
 *&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
 &nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
 &nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
-&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;1000.<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
 *&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
 &nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
 *&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>

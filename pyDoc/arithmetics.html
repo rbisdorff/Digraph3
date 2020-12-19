@@ -158,7 +158,12 @@ Optimized&nbsp;with&nbsp;marking&nbsp;of&nbsp;visited&nbsp;chordless&nbsp;P1s.</
 
 <dl><dt><a name="QuadraticResiduesDigraph-closeSymmetric"><strong>closeSymmetric</strong></a>(self, InSite=True)</dt><dd><tt>Produces&nbsp;the&nbsp;symmetric&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
 
-<dl><dt><a name="QuadraticResiduesDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.</tt></dd></dl>
+<dl><dt><a name="QuadraticResiduesDigraph-closeTransitive"><strong>closeTransitive</strong></a>(self, Reverse=False, InSite=True, Comments=False)</dt><dd><tt>Produces&nbsp;the&nbsp;transitive&nbsp;closure&nbsp;of&nbsp;self.<strong>relation</strong>.&nbsp;<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Reverse*&nbsp;==&nbsp;True&nbsp;(False&nbsp;default)&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;dropped,&nbsp;otherwise&nbsp;all&nbsp;transitive&nbsp;links&nbsp;are&nbsp;closed&nbsp;with&nbsp;min[r(x,y),r(y,z)];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;If&nbsp;*Insite*&nbsp;==&nbsp;False&nbsp;(True&nbsp;by&nbsp;default)&nbsp;the&nbsp;methods&nbsp;return&nbsp;a&nbsp;modified&nbsp;copy&nbsp;of&nbsp;self.<strong>relation</strong>&nbsp;without&nbsp;altering&nbsp;the&nbsp;original&nbsp;self.<strong>relation</strong>,&nbsp;otherwise&nbsp;self.<strong>relation</strong>&nbsp;is&nbsp;modified.</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-components"><strong>components</strong></a>(self)</dt><dd><tt>Renders&nbsp;the&nbsp;list&nbsp;of&nbsp;connected&nbsp;components.</tt></dd></dl>
 
@@ -552,14 +557,22 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="QuadraticResiduesDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="QuadraticResiduesDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="QuadraticResiduesDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;Empty&nbsp;and&nbsp;indeterminate&nbsp;digraphs&nbsp;are&nbsp;considered&nbsp;to&nbsp;be&nbsp;symmetric.</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-computeTopologicalRanking"><strong>computeTopologicalRanking</strong></a>(self, Debug=False)</dt><dd><tt>If&nbsp;self&nbsp;is&nbsp;acyclic,&nbsp;adds&nbsp;topological&nbsp;sort&nbsp;number&nbsp;to&nbsp;each&nbsp;node&nbsp;of&nbsp;self<br>
 and&nbsp;renders&nbsp;ordered&nbsp;list&nbsp;of&nbsp;nodes.&nbsp;Otherwise&nbsp;renders&nbsp;None.<br>
 Source:&nbsp;M.&nbsp;Golumbic&nbsp;Algorithmic&nbsp;Graph&nbsp;heory&nbsp;and&nbsp;Perfect&nbsp;Graphs,<br>
 Annals&nbsp;Of&nbsp;Discrete&nbsp;Mathematics&nbsp;57&nbsp;2nd&nbsp;Ed.&nbsp;,&nbsp;Elsevier&nbsp;2004,&nbsp;Algorithm&nbsp;2.4&nbsp;p.44.</tt></dd></dl>
 
-<dl><dt><a name="QuadraticResiduesDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+<dl><dt><a name="QuadraticResiduesDigraph-computeTransitivityDegree"><strong>computeTransitivityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;transitivity&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;a&nbsp;digraph.<br>
+&nbsp;<br>
+..&nbsp;note::&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;An&nbsp;empty&nbsp;or&nbsp;indeterminate&nbsp;digraph&nbsp;is&nbsp;considered&nbsp;to&nbsp;be&nbsp;transitive.</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-computeUnrelatedPairs"><strong>computeUnrelatedPairs</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;list&nbsp;of&nbsp;more&nbsp;or&nbsp;less&nbsp;unrelated&nbsp;pairs.</tt></dd></dl>
 

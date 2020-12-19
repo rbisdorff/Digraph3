@@ -2647,11 +2647,16 @@ class Digraph(object):
         else:
             return symRelation
 
-    def computeSymmetryDegree(self,Comments=False):
+    def computeSymmetryDegree(self,InPercents=False,Comments=False):
         """
-        Renders the symmetry degree of the reflexive part of a digraph.
+        Renders the symmetry degree (Decimal) of the reflexive part of a digraph.
+
+        .. note::
+
+           Empty and indeterminate digraphs are considered to be symmetric.
+
         """
-        from copy import deepcopy
+        from decimal import Decimal
         Med = self.valuationdomain['med']
         na  = len(self.actions)
         actions = [x for x in self.actions]
@@ -2675,7 +2680,17 @@ class Digraph(object):
             if Comments:
                 print('Digraph instance %s is empty' % self.name)
         if Comments:
-            print('Symmetry degree of graph <%s> : %.2f' %(self.name,res))
+            if InPercents:
+                res *= Decimal('100.0') 
+                print('Symmetry degree (%%) of digraph <%s>:' % self.name)
+                print(' #arcs x>y: %d, #symmetric: %d, #asymmetric: %d' %\
+                      (narcs,nsymArc,narcs-nsymArc) )
+                print(' #symmetric/#arcs =  %.1f' %(res) )
+            else:
+                print('Symmetry degree of digraph <%s>:' % self.name)
+                print(' #arcs x>y: %d, #symmetric: %d %d, #asymmetric: %d' %\
+                      (narcs,nsymArc,narcs-nsymArc) )
+                print(' #arcs/#symmetric =  %.2f' %(res) )
         return res
 
     def isSymmetric(self,Comments=False):
@@ -2689,39 +2704,81 @@ class Digraph(object):
             return True
         else:
             return False
-            
-    def computeTransitivityDegree(self,Comments=False):
+
+    def computeTransitivityDegree(self,\
+                InPercents=False,Comments=False):
         """
-        Renders the transitivity degree of a digraph.
+        Renders the transitivity degree (Decimal) of a digraph.
+
+        .. note:: 
+
+           An empty or indeterminate digraph is considered to be transitive.
+
         """
-        from copy import deepcopy
+        from decimal import Decimal
         Med = self.valuationdomain['med']
-        actions = self.actions
-        origRelation = self.relation
-        closedRelation = self.closeTransitive(InSite=False,Comments=Comments)
-        openedRelation = self.closeTransitive(Reverse=True,\
-                                InSite=False,Comments=Comments)
-        nopen = 0
+        ntriples = 0
         nclosed = 0
-        norig = 0
-        for x in actions:
-            rorigx = origRelation[x]
-            rclosedx = closedRelation[x]
-            ropenx = openedRelation[x]
-            for y in actions:
-                if ropenx[y] > Med:
-                    nopen += 1
-                if rclosedx[y] > Med:
-                    nclosed += 1
-                if rorigx[y] > Med:
-                    norig += 1
-        if nclosed > nopen:
-            res = (norig-nopen)/(nclosed-nopen)
+        for x in self.actions:
+            for y in self.actions:
+                if x != y:
+                    for z in self.actions:
+                        if z != x and z != y:
+                            if self.relation[x][y] > Med and\
+                               self.relation[y][z] > Med:
+                                ntriples += 1
+                                if self.relation[x][z] > Med:
+                                    nclosed += 1
+        if (ntriples) > 0:
+            res = Decimal(str(nclosed))/Decimal(str(ntriples))
         else:
-            res = 0.0
+            res = Decimal('1.0')
         if Comments:
-            print('Transitivity degree of graph <%s> : %.2f' %(self.name,res))
+            if InPercents:
+                res *= Decimal('100.0') 
+                print('Transitivity degree (%%) of digraph <%s>:' % self.name)
+                print(' #triples x>y>z: %d, #closed: %d, #open: %d' %\
+                      (ntriples,nclosed,ntriples-nclosed) )
+                print('(#closed)/(#triples) =  %.1f' %(res) )
+            else:
+                print('Transitivity degree of digraph <%s>:' % self.name)
+                print(' #triples x>y>z: %d, #closed: %d, #open: %d' %\
+                      (ntriples,nclosed,ntriples-nclosed) )
+                print(' (#closed)/(#triples) =  %.2f' %(res) )
         return res
+            
+    # def _computeTransitivityDegree(self,Comments=False):
+    #     """
+    #     Renders the transitivity degree of a digraph.
+    #     """
+    #     from copy import deepcopy
+    #     Med = self.valuationdomain['med']
+    #     actions = self.actions
+    #     origRelation = self.relation
+    #     closedRelation = self.closeTransitive(InSite=False,Comments=Comments)
+    #     openedRelation = self.closeTransitive(Reverse=True,\
+    #                             InSite=False,Comments=Comments)
+    #     nopen = 0
+    #     nclosed = 0
+    #     norig = 0
+    #     for x in actions:
+    #         rorigx = origRelation[x]
+    #         rclosedx = closedRelation[x]
+    #         ropenx = openedRelation[x]
+    #         for y in actions:
+    #             if ropenx[y] > Med:
+    #                 nopen += 1
+    #             if rclosedx[y] > Med:
+    #                 nclosed += 1
+    #             if rorigx[y] > Med:
+    #                 norig += 1
+    #     if nclosed > nopen:
+    #         res = (norig-nopen)/(nclosed-nopen)
+    #     else:
+    #         res = 0.0
+    #     if Comments:
+    #         print('Transitivity degree of graph <%s> : %.2f' %(self.name,res))
+    #     return res
 
     def isTransitive(self,Comments=False):
         """
@@ -2752,7 +2809,13 @@ class Digraph(object):
 
     def closeTransitive(self,Reverse=False,InSite=True,Comments=False):
         """
-        Produces the transitive closure of self.relation.
+        Produces the transitive closure of self.relation. 
+        
+        *Parameters*:
+
+            - If *Reverse* == True (False default) all transitive links are dropped, otherwise all transitive links are closed with min[r(x,y),r(y,z)];
+            - If *Insite* == False (True by default) the methods return a modified copy of self.relation without altering the original self.relation, otherwise self.relation is modified.
+           
         """
         from copy import deepcopy
         actions = set(self.actions)
@@ -2766,12 +2829,14 @@ class Digraph(object):
             i += 1
             for x in actions:
                 for y in actions:
-                    for z in actions:
-                        if min(curriRelation[y][x],curriRelation[x][z]) > Med \
-                              and curriRelation[y][z] <= Med:
-                            currRelation[y][z] =\
-                              min(curriRelation[y][x],curriRelation[x][z])
-                            Change = True
+                    if x != y:
+                        for z in actions:
+                            if z != x and z != y: 
+                                if min(curriRelation[y][x],curriRelation[x][z]) > Med \
+                                      and curriRelation[y][z] <= Med:
+                                    currRelation[y][z] =\
+                                      min(curriRelation[y][x],curriRelation[x][z])
+                                    Change = True
         if Comments:
             print('iterations: %d' %i )
         if Reverse:
@@ -2783,11 +2848,13 @@ class Digraph(object):
                 curriRelation = deepcopy(currRelation)
                 for x in actions:
                     for y in actions:
-                        for z in actions:
-                            if min(curriRelation[y][x],curriRelation[x][z]) > Med \
-                                     and curriRelation[y][z] > Med:
-                                currRelation[y][z] = -curriRelation[y][z]
-                                Change = True
+                            if x != y:
+                                for z in actions:
+                                    if z != x and z != y:
+                                        if min(curriRelation[y][x],curriRelation[x][z]) > Med \
+                                           and curriRelation[y][z] > Med:
+                                            currRelation[y][z] = -curriRelation[y][z]
+                                            Change = True
                     #relation[y][z] =\
                 #-(max(relation[y][z],min(relation[y][x],relation[x][z])))
             if Comments:
@@ -13489,15 +13556,22 @@ if __name__ == "__main__":
         t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
                                    numberOfActions=20,seed=105)
         g = BipolarOutrankingDigraph(t)
+        g.computeTransitivityDegree(Comments=True)
+        g.closeTransitive(Reverse=True,Comments=True)
+        print(g)
+        g.computeTransitivityDegree(Comments=True)
         #g = EmptyDigraph()
         #g = CirculantDigraph(circulants=[1,-1])
-        g = IndeterminateDigraph()
+        g = EmptyDigraph()
+        g.computeTransitivityDegree(Comments=True)
+        g = CompleteDigraph()
+        g.computeTransitivityDegree(Comments=True)
         #g.closeSymmetric()
-        print(g.computeSymmetryDegree(Comments=True))
-        print(g.isSymmetric(Comments=True))
-        #g.closeTransitive(Reverse=True)
-        print(g.computeTransitivityDegree(Comments=False))
-        print(g.isTransitive(Comments=True))
+        # print(g.computeSymmetryDegree(Comments=True))
+        # print(g.isSymmetric(Comments=True))
+        # #g.closeTransitive(Reverse=True)
+        # print(g.computeTransitivityDegree(Comments=False))
+        # print(g.isTransitive(Comments=True))
         # g.computeRankingByBestChoosing(CoDual=True,Debug=False)
         # print(g.rankingByBestChoosing)
         # g.showRankingByBestChoosing()
@@ -13515,123 +13589,7 @@ if __name__ == "__main__":
 ##        rbc.exportGraphViz(fileName='test5',direction='worst')
 ##        print(rbc.rankingByBestChoosing)
 ##        rbc.exportGraphViz(fileName='test6',direction='best')
-        #wke = KemenyWeakOrder(g,orderLimit=8,Debug=False)
-        #wke.exportGraphViz(fileName='test5')
-        #cop = CopelandOrder(g)
-        #cop.exportGraphViz(fileName='test')
-        ##dg = RedhefferDigraph(order=113)
-        #g = RandomTournament(order=10,seed=1)
-        #g = RandomValuationDigraph(order=20)
-        #print(g)
-        #g = CirculantDigraph(IndeterminateInnerPart=True)
-        #g.computeMaxHoleSize(Comments=True)
         
-##        from outrankingDigraphs import BipolarOutrankingDigraph
-##        from randomPerfTabs import Random3ObjectivesPerformanceTableau
-####        from linearOrders import CopelandOrder
-##        t1 = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=7,seed=101)
-##        g = BipolarOutrankingDigraph(t1,Normalized=True)
-##        g.showRelationTable()
-##        print(g.computeDeterminateness())
-##        print(g.computeDeterminateness(InPercents=True))
-##        g.recodeValuation(0,1)
-##        print(g.computeDeterminateness())
-##        print(g.computeDeterminateness(InPercents=True))
-##      
-##        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
-##        g.showPreKernels()
-##        g.showRelationTable()
-##        g.showHTMLBestChoiceRecommendation(ChoiceVector=False)
-##        gcd = ~(-g)
-##        cocb = BrokenCocsDigraph(gcd,Comments=True)
-##        print(cocb.brokenLinks)
-##        gcd.computeRubisChoice()
-##        gcd.showGoodChoices()
-##        g = RandomValuationDigraph(order=10,seed=3)
-##        g.showHTMLPerformanceTableau(ndigits=0)
-##        g.showHTMLRelationTable(IntegerValues=True)
-##        g.recodeValuation()
-##        g.showHTMLRelationTable(IntegerValues=True)
-##        g.showHTMLPerformanceTableau(ndigits=0)
-        
-##        h3 = BrokenCocsDigraph(digraph=g,Comments=False)
-##        h3.save('resbreakco2')
-##        h3.showAll()
-
-##        cop = CopelandOrder(g)
-##        #g.showHTMLRelationMap(rankingRule='rankedPairs')
-##        gcd = CoDualDigraph(g)
-##        #gcd.showHTMLRelationMap(cop.copelandOrder)
-##        g.showRubisBestChoiceRecommendation()
-##        t1.computeQuantileOrder(3,10)
-##        #g.showHTMLRelationMap(Colored=False)
-##        #g.exportGraphViz()
-##        from outrankingDigraphs import BipolarOutrankingDigraph
-##        from randomPerfTabs import RandomCBPerformanceTableau
-##        MP = False
-##        with open('resGR.csv','w') as fo:
-##            #fo.write('"card","tnewMP","tnew","told"\n')
-##            for s in range(2,3):
-##                print('Simulation: ',s)
-##                t1 = Random3ObjectivesPerformanceTableau(numberOfActions=100,seed=s)
-##                g = BipolarOutrankingDigraph(t1,Normalized=True)
-##                #g = RandomDigraph(order=250,seed=s)
-##                #g = RandomTournament(order=25,seed=s)
-##                #g = GridDigraph(8,8,hasMedianSplitOrientation=True)
-##                t0 = time()
-##                print(len(g.computeChordlessCircuitsMP(Odd=False,
-##                                                       Comments=False,
-##                                                       Threading=MP)))
-##                tnewMP = (time()-t0)
-##                print(tnewMP)     
-##                #g.showChordlessCircuits()
-##                t0 = time()
-##                print(len(g._computeChordlessCircuits(Odd=False,
-##                                                       Comments=False)))
-##                tnew = (time()-t0)
-##                print(tnew)     
-##                new = len(g.circuitsList)
-##                t0 = time()
-##                print(len(g.computeChordlessCircuits(Odd=False,Comments=False)))
-##                told = (time()-t0)
-##                print(told)
-##                #g.showChordlessCircuits()
-##                #g.showRelationTable(actionsSubset=['a05', 'a13', 'a17', 'a01', 'a08'])
-##                old = len(g.circuitsList)
-##                if new != old:
-##                    print(s,new,old)
-##                    break
-##                #fo.write('%d,%.5f,%.5f,%.5f\n' %(new,tnewMP,tnew,told))
-
-            
-        #print(g.circuits)
-        #from csv import reader
-        #g = RandomValuationDigraph()
-        #g.showAll()
-##        MP=False
-##        from outrankingDigraphs import BipolarOutrankingDigraph
-##        from randomPerfTabs import RandomCBPerformanceTableau
-##        t1 = RandomCBPerformanceTableau(numberOfActions=10,seed=1)
-####        t1.saveXMCDA2('testP2')
-####        t1.showCriteria()
-##        t2 = RandomCBPerformanceTableau(numberOfActions=10,seed=2)
-####        t1.saveXMCDA2('testP2')
-####        t1.showCriteria()
-##        #t = XMCDA2PerformanceTableau('testP')
-##        g1 = BipolarOutrankingDigraph(t1,Normalized=True,Threading=MP)
-##        g2 = BipolarOutrankingDigraph(t2,Normalized=True,Threading=MP)
-##        print(g1.computeOrdinalCorrelationMP(g2,Comments=True,nbrOfCPUs=4,Threading=MP))        
-##        gcd = ~(-g)
-##        gcd.computeChordlessCircuits(Odd=True,Comments=True)
-##        gcd.showPreKernels()
-##        g.computeRubisChoice(Comments=True)
-##        g.showCriteria()
-##        print(gcd.dompreKernels)
-##        print(gcd.abspreKernels)
-##        for ker in gcd.dompreKernels:
-##            print(ker, gcd.computeGoodChoiceVector(ker,Comments=False))
-##        for ker in gcd.abspreKernels:
-##            print(ker, gcd.computeGoodChoiceVector(ker,Comments=False))
        
 
         print('*------------------*')
