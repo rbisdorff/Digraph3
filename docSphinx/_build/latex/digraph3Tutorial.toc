@@ -18,27 +18,27 @@
 \contentsline {subsection}{\numberline {2.8}Strong components}{21}{subsection.2.8}%
 \contentsline {subsection}{\numberline {2.9}CSV storage}{21}{subsection.2.9}%
 \contentsline {subsection}{\numberline {2.10}Complete, empty and indeterminate digraphs}{22}{subsection.2.10}%
-\contentsline {section}{\numberline {3}Computing the winner of an election}{24}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Linear voting profiles}{25}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Computing the winner}{26}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}The Condorcet winner}{27}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Cyclic social preferences}{29}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}On generating random linear voting profiles}{32}{subsection.3.5}%
-\contentsline {section}{\numberline {4}Working with the \sphinxstyleliteralintitle {\sphinxupquote {outrankingDigraphs}} module}{36}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Outranking digraph model}{36}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Browsing the performances}{38}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Valuation semantics}{40}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Pairwise comparisons}{40}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}Recoding the digraph valuation}{41}{subsection.4.5}%
-\contentsline {subsection}{\numberline {4.6}The strict outranking digraph}{42}{subsection.4.6}%
-\contentsline {subsection}{\numberline {4.7}XMCDA 2.0}{43}{subsection.4.7}%
-\contentsline {section}{\numberline {5}Generating random performance tableaux}{44}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Introduction}{44}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Random standard performance tableaux}{45}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Random Cost\sphinxhyphen {}Benefit performance tableaux}{47}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Random three objectives performance tableaux}{51}{subsection.5.4}%
-\contentsline {subsection}{\numberline {5.5}Random academic performance tableaux}{55}{subsection.5.5}%
-\contentsline {subsection}{\numberline {5.6}Random linearly ranked performance tableaux}{58}{subsection.5.6}%
+\contentsline {section}{\numberline {3}Working with the \sphinxstyleliteralintitle {\sphinxupquote {outrankingDigraphs}} module}{24}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Outranking digraph model}{25}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Browsing the performances}{26}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Valuation semantics}{28}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Pairwise comparisons}{28}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Recoding the digraph valuation}{30}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}The strict outranking digraph}{30}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}XMCDA 2.0}{31}{subsection.3.7}%
+\contentsline {section}{\numberline {4}Generating random performance tableaux}{32}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Introduction}{32}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Random standard performance tableaux}{33}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Random Cost\sphinxhyphen {}Benefit performance tableaux}{35}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Random three objectives performance tableaux}{39}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Random academic performance tableaux}{43}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Random linearly ranked performance tableaux}{46}{subsection.4.6}%
+\contentsline {section}{\numberline {5}Computing the winner of an election}{47}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Linear voting profiles}{47}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Computing the winner}{48}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}The Condorcet winner}{50}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Cyclic social preferences}{52}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}On generating random linear voting profiles}{54}{subsection.5.5}%
 \contentsline {section}{\numberline {6}Ranking with multiple incommensurable criteria}{59}{section.6}%
 \contentsline {subsection}{\numberline {6.1}The ranking problem}{59}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}The \sphinxstyleemphasis {Copeland} ranking}{62}{subsection.6.2}%

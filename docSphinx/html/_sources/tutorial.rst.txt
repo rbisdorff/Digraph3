@@ -833,445 +833,6 @@ Let us finally mention some special universal classes of digraphs that are readi
 
 Back to :ref:`Content Table <Tutorial-label>`
 
-----------------
-
-.. _LinearVoting-Tutorial-label:
-
-Computing the winner of an election
------------------------------------
-
-.. contents:: 
-	:depth: 2
-	:local:
-
-Linear voting profiles
-......................
-
-The :py:mod:`votingProfiles` module provides resources for handling election results [ADT-L2]_, like the :py:class:`votingProfiles.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary.
-
-.. code-block:: python
-   :linenos:
-
-    candidates = OrderedDict([('a1',...), ('a2',...), ('a3', ...), ...}
-    voters = OrderedDict([('v1',{'weight':10}), ('v2',{'weight':3}), ...}
-    ## each voter specifies a linearly ranked list of candidates
-    ## from the best to the worst (without ties
-    linearBallot = {
-    'v1' : ['a2','a3','a1', ...],
-    'v2' : ['a1','a2','a3', ...],
-    ...
-    }
-
-The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class for generating random instances of the :py:class:`votingProfiles.LinearVotingProfile` class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result.
-
-.. code-block:: pycon
-   :name: randomProfile1
-   :caption: Example of random linear voting profile 
-   :linenos:
-
-   >>> from votingProfiles import RandomLinearVotingProfile
-   >>> v = RandomLinearVotingProfile(numberOfVoters=5,
-                                     numberOfCandidates=3,
-                                     RandomWeights=True)
-   >>> v.candidates
-    OrderedDict([ ('a1',{'name':'a1}), ('a2',{'name':'a2'}),
-                  ('a3',{'name':'a3'}) ])
-   >>> v.voters
-    OrderedDict([('v1',{'weight': 2}), ('v2':{'weight': 3}), 
-     ('v3',{'weight': 1}), ('v4':{'weight': 5}), 
-     ('v5',{'weight': 4})])
-   >>> v.linearBallot
-    {'v1': ['a1', 'a2', 'a3',],
-     'v2': ['a3', 'a2', 'a1',],
-     'v3': ['a1', 'a3', 'a2',],
-     'v4': ['a1', 'a3', 'a2',],
-     'v5': ['a2', 'a3', 'a1',]} 
-
-Notice that in this random example, the five voters are weighted (see :numref:`randomProfile1` Line 6-7). Their linear ballots can be viewed with the :py:func:`votingProfiles.LinearVotingProfile.showLinearBallots` method.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> v.showLinearBallots()
-    voters(weight)	 candidates rankings
-    v1(2): 	 ['a2', 'a1', 'a3']
-    v2(3): 	 ['a3', 'a1', 'a2']
-    v3(1): 	 ['a1', 'a3', 'a2']
-    v4(5): 	 ['a1', 'a2', 'a3']
-    v5(4): 	 ['a3', 'a1', 'a2']
-    # voters: 15
-
-Editing of the linear voting profile may be achieved by storing the data in a file, edit it, and reload it again.
-
-.. code-block:: pycon
-
-   >>> v.save(fileName='tutorialLinearVotingProfile1')
-    *--- Saving linear profile in file: <tutorialLinearVotingProfile1.py> ---*
-   >>> v = LinearVotingProfile('tutorialLinearVotingProfile1')
-
-Computing the winner
-....................
-
-We may easily compute **uni-nominal votes**, i.e. how many times a candidate was ranked first, and see who is consequently the **simple majority** winner(s) in this election.
-
-.. code-block:: pycon
-
-   >>> v.computeUninominalVotes()
-    {'a2': 2, 'a1': 6, 'a3': 7}
-   >>> v.computeSimpleMajorityWinner()
-    ['a3']
-
-As we observe no absolute majority (8/15) of votes for any of the three candidate, we may look for the **instant runoff** winner instead (see [ADT-L2]_).
-
-.. code-block:: pycon
-   :name: instantRunOff
-   :caption: Example Instant Run Off Winner
-
-   >>> v.computeInstantRunoffWinner(Comments=True)
-    Half of the Votes =  7.50
-    ==> stage =  1
-	remaining candidates ['a1', 'a2', 'a3']
-	uninominal votes {'a1': 6, 'a2': 2, 'a3': 7}
-	minimal number of votes =  2
-	maximal number of votes =  7
-	candidate to remove =  a2
-	remaining candidates =  ['a1', 'a3']
-    ==> stage =  2
-	remaining candidates ['a1', 'a3']
-	uninominal votes {'a1': 8, 'a3': 7}
-	minimal number of votes =  7
-	maximal number of votes =  8
-	candidate a1 obtains an absolute majority
-    Instant run off winner: ['a1']
-
-In stage 1, no candidate obtains an absolute majority of votes. Candidate *a2* obtains the minimal number of votes (2/15) and is, hence, eliminated. In stage 2, candidate *a1* obtains an absolute majority of the votes (8/15) and is eventually elected (see :numref:`instantRunOff`).
-
-We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** -the average rank- of each candidate and hence determine the *Borda* **winner(s)**.
-
-.. code-block:: pycon
-   :name: BordaScores
-   :caption: Example of *Borda* rank scores
-   :linenos:
-
-   >>> v.computeRankAnalysis()
-    {'a2': [2, 5, 8], 'a1': [6, 9, 0], 'a3': [7, 1, 7]}
-   >>> v.computeBordaScores()
-    OrderedDict([
-      ('a1', {'BordaScore': 24, 'averageBordaScore': 1.6}),
-      ('a3', {'BordaScore': 30, 'averageBordaScore': 2.0}),
-      ('a2', {'BordaScore': 36, 'averageBordaScore': 2.4}) ])
-   >>> v.computeBordaWinners()
-    ['a1']
-
-Candidate *a1* obtains the minimal *Borda* score, followed by candidate *a3* and finally candidate *a2* (see :numref:`BordaScores`). The corresponding *Borda* **rank analysis table** may be printed out with a corresponding ``show`` command.
-
-.. code-block:: pycon
-   :name: rankAnalysis
-   :caption: Rank analysis example
-   :linenos:
-
-   >>> v.showRankAnalysisTable()
-    *----  Borda rank analysis tableau -----*
-    candi- | alternative-to-rank |     Borda
-    dates  |   1     2     3     | score  average
-    -------|-------------------------------------
-     'a1'  |   6     9     0     | 24/15   1.60
-     'a3'  |   7     1     7     | 30/15   2.00
-     'a2'  |   2     5     8     | 36/15   2.40
-
-In our randomly generated election results, we are lucky: The instant runoff winner and the *Borda* winner both are candidate *a1* (see :numref:`instantRunOff` and :numref:`rankAnalysis`). However, we could also follow the *Marquis de Condorcet*'s advice, and compute the **majority margins** obtained by voting for each individual pair of candidates.
-
-The Condorcet winner
-....................
-
-For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the corresponding **majority margin** *M(a1,a2)* is 4 - 1 = +3. These *majority margins* define on the set of candidates what we call the **Condorcet digraph**. The :py:class:`votingProfiles.CondorcetDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such kind of digraphs.
-
-.. code-block:: pycon
-   :name: condorcetDigraph
-   :caption: Example of *Condorcet* digraph
-   :linenos:
-
-   >>> from votingProfiles import CondorcetDigraph
-   >>> cdg = CondorcetDigraph(v,hasIntegerValuation=True)
-   >>> cdg
-    *------- Digraph instance description ------*
-    Instance class      : CondorcetDigraph
-    Instance name       : rel_randomLinearVotingProfile1
-    Digraph Order       : 3
-    Digraph Size        : 3
-    Valuation domain    : [-15.00;15.00]
-    Determinateness (%) : 64.44
-    Attributes          : ['name', 'actions', 'voters',
-                           'ballot', 'valuationdomain',
-			   'relation', 'order',
-			   'gamma', 'notGamma']
-   >>> cdg.showAll()
-    *----- show detail -------------*
-    Digraph          : rel_randLinearVotingProfile1
-    *---- Actions ----*
-    ['a1', 'a2', 'a3']
-    *---- Characteristic valuation domain ----*
-    {'max': Decimal('15.0'), 'med': Decimal('0'),
-     'min': Decimal('-15.0'), 'hasIntegerValuation': True}
-    * ---- majority margins -----
-       M(x,y)   |  'a1'	  'a2'  'a3'	  
-      ----------|-------------------
-        'a1'    |    0     11     1	 
-        'a2'    |  -11      0    -1	 
-        'a3'    |   -1      1     0	 
-    Valuation domain: [-15;+15]
-
-Notice that in the case of linear voting profiles, majority margins always verify a zero sum property: *M(x,y)* + *M(y,x)* = 0 for all candidates *x* and *y* (see :numref:`condorcetDigraph` Lines 26-28). This is not true in general for arbitrary voting profiles. The *Condorcet* digraph of linear voting profiles defines in fact a *weak tournament* and belongs, hence, to the class of *self-codual* bipolar-valued digraphs ([13]_).
-    
-Now, a candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the *Condorcet* digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner** (see :numref:`condorcetDigraph` Line 26).
-
-.. code-block:: pycon
-
-   >>> cdg.computeCondorcetWinner()
-    ['a1']  
-    
-By seeing the majority margins like a *bipolar-valued characteristic function* of a global preference relation defined on the set of candidates, we may use all operational resources of the generic ``Digraph`` class (see :ref:`Digraphs-Tutorial-label`), and especially its ``exportGraphViz`` method [1]_, for visualizing an election result.
-
-.. code-block:: pycon
-
-   >>> cdg.exportGraphViz(fileName='tutorialLinearBallots')
-   *---- exporting a dot file for GraphViz tools ---------*
-   Exporting to tutorialLinearBallots.dot
-   dot -Grankdir=BT -Tpng tutorialLinearBallots.dot -o tutorialLinearBallots.png
-
-.. Figure:: tutorialLinearBallots.png
-   :name: tutorialLinearBallots
-   :width: 300 px
-   :align: center
-
-   Visualizing an election result
-
-In :numref:`tutorialLinearBallots` we notice that the *Condorcet* digraph from our example linear voting profile gives a linear order of the candidates: ['a1', 'a3', 'a2], the same actually as given by the *Borda* scores (see :numref:`BordaScores`). This is by far not given in general. Usually, when aggregating linear ballots, there appear cyclic social preferences.
-
-Cyclic social preferences
-.........................
-
-Let us consider for instance the following linear voting profile and construct the corresponding Condorcet digraph.
-
-.. code-block:: pycon
-   :name: linearVotingProfile2
-   :caption: Example of cyclic social preferences 	  
-   :linenos:
-
-   >>> v.showLinearBallots()
-    voters(weight)	 candidates rankings
-    v1(1): 	 ['a1', 'a3', 'a5', 'a2', 'a4']
-    v2(1): 	 ['a1', 'a2', 'a4', 'a3', 'a5']
-    v3(1): 	 ['a5', 'a2', 'a4', 'a3', 'a1']
-    v4(1): 	 ['a3', 'a4', 'a1', 'a5', 'a2']
-    v5(1): 	 ['a4', 'a2', 'a3', 'a5', 'a1']
-    v6(1): 	 ['a2', 'a4', 'a5', 'a1', 'a3']
-    v7(1): 	 ['a5', 'a4', 'a3', 'a1', 'a2']
-    v8(1): 	 ['a2', 'a4', 'a5', 'a1', 'a3']
-    v9(1): 	 ['a5', 'a3', 'a4', 'a1', 'a2']
-   >>> cdg = CondorcetDigraph(v)
-   >>> cdg.showRelationTable()
-    * ---- Relation Table -----
-      S   |  'a1'   'a2'   'a3'	  'a4'	  'a5'	  
-    ------|----------------------------------------
-    'a1'  |   -     0.11  -0.11	 -0.56	 -0.33	 
-    'a2'  | -0.11    -	   0.11	  0.11	 -0.11	 
-    'a3'  |  0.11  -0.11    -	 -0.33	 -0.11	 
-    'a4'  |  0.56  -0.11   0.33	   -	  0.11	 
-    'a5'  |  0.33   0.11   0.11	 -0.11	   -	 
-    
-Now, we cannot find any completely positive row in the relation table (see :numref:`linearVotingProfile2` Lines 17 - ). No one of the five candidates is beating all the others with an absolute majority of votes. There is no *Condorcet* winner anymore. In fact, when looking at a graphviz drawing of this *Condorcet* digraph, we may observe *cyclic* preferences, like (*a1* > *a2* > *a3* > *a1*) for instance (see :numref:`cyclicSocialPreferences`).
-
-.. code-block:: pycon
-
-   >>> cdg.exportGraphViz('cycles')
-    *---- exporting a dot file for GraphViz tools ---------*
-    Exporting to cycles.dot
-    dot -Grankdir=BT -Tpng cycles.dot -o cycles.png
-
-.. Figure:: cycles.png
-   :name: cyclicSocialPreferences	    
-   :width: 200 px
-   :align: center
-
-   Cyclic social preferences
-	   
-But, there may be many cycles appearing in a *Condorcet* digraph, and, we may detect and enumerate all minimal chordless circuits in a Digraph instance with the :py:func:`digraphs.Digraph.computeChordlessCircuits` method.
-
-.. code-block:: pycon
-
-   >>> cdg.computeChordlessCircuits()
-    [(['a2', 'a3', 'a1'], frozenset({'a2', 'a3', 'a1'})), 
-     (['a2', 'a4', 'a5'], frozenset({'a2', 'a5', 'a4'})), 
-     (['a2', 'a4', 'a1'], frozenset({'a2', 'a1', 'a4'}))]
-
-*Condorcet* 's approach for determining the winner of an election is hence *not decisive* in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>` and [BIS-2008]_). 
-
-Many more tools for exploiting voting results are available like the browser heat map view on voting profiles (see the technical documentation of the :py:mod:`votingProfiles` module).
-
-.. code-block:: pycon
-   :name: votingHeatmap
-   :caption: Example linear voting heatmap
-   :linenos:
-
-   >>> v.showHTMLVotingHeatmap(rankingRule='NetFlows',
-                               Transposed=False)
-
-.. figure:: votingHeatmap.png
-   :width: 550 px
-   :align: center
-   :name: cyclicVoting	   
-
-   Visualizing a linear voting profile in a heatmap format
-
-Notice that the importance weights of the voters are *negative*, which means that the preference direction of the criteria (in this case the individual voters) is *decreasing*, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise *NetFlows* ranking *[a4,a5,a2,a1,a3]*, shown in this heatmap (see :numref:`cyclicVoting`) results in an optimal *ordinal correlation* index of +0.778 with the pairwise majority voting margins (see the Adavanced topic on  :ref:`Ordinal Correlation equals Relational Equivalence <OrdinalCorrelation-Tutorial-label>` and :ref:`Ranking-Tutorial-label`). The number of voters is usually much larger than the number of candidates. In that case, it is better to generate a transposed *voters X candidates* view (see :numref:`votingHeatmap` Line 2) 
-
-On generating random linear voting profiles
-...........................................
-
-By default, the :py:class:`votingProfiles.RandomLinearVotingProfile` class generates random linear voting profiles where every candidates has the same uniform probabilities to be ranked at a certain position by all the voters. For each voter's random linear ballot is indeed generated  via a uniform shuffling of the list of candidates.
-
-In reality, political election data appear quite different. There will usually be different favorite and marginal candidates for each political party. To simulate these aspects into our random generator, we are using two random exponentially distributed polls of the candidates and consider a bipartisan political landscape with a certain random balance (default theoretical party repartition = 0.50) between the two sets of potential party supporters (see :py:class:`votingProfiles.LinearVotingProfile` class). A certain theoretical proportion (default = 0.1) will not support any party.
-
-Let us generate such a linear voting profile for an election with 1000 voters and 15 candidates.
-
-.. code-block:: pycon
-   :name: linearVotingProfileWithPolls
-   :caption: Generating a linear voting profile with random polls 	  
-   :linenos:
-
-   >>> from votingProfiles import RandomLinearVotingProfile
-   >>> lvp = RandomLinearVotingProfile(numberOfCandidates=15,
-                               numberOfVoters=1000,
-                               WithPolls=True,
-                               partyRepartition=0.5,
-                               other=0.1,
-                               seed=0.9189670954954139)
-   >>> lvp
-    *------- VotingProfile instance description ------*
-    Instance class   : RandomLinearVotingProfile
-    Instance name    : randLinearProfile
-    # Candidates     : 15
-    # Voters         : 1000
-    Attributes       : ['name', 'seed', 'candidates',
-                        'voters', 'RandomWeights',
-			'sumWeights', 'poll1', 'poll2',
-			'bipartisan', 'linearBallot', 'ballot']
-   >>> lvp.showRandomPolls()
-    Random repartition of voters
-     Party_1 supporters : 460 (46.0%)
-     Party_2 supporters : 436 (43.6%)
-     Other voters       : 104 (10.4%)
-    *---------------- random polls ---------------
-     Party_1(46.0%) | Party_2(43.6%)|  expected  
-    -----------------------------------------------
-      a06 : 19.91%  | a11 : 22.94%  | a06 : 15.00%
-      a07 : 14.27%  | a08 : 15.65%  | a11 : 13.08%
-      a03 : 10.02%  | a04 : 15.07%  | a08 : 09.01%
-      a13 : 08.39%  | a06 : 13.40%  | a07 : 08.79%
-      a15 : 08.39%  | a03 : 06.49%  | a03 : 07.44%
-      a11 : 06.70%  | a09 : 05.63%  | a04 : 07.11%
-      a01 : 06.17%  | a07 : 05.10%  | a01 : 05.06%
-      a12 : 04.81%  | a01 : 05.09%  | a13 : 05.04%
-      a08 : 04.75%  | a12 : 03.43%  | a15 : 04.23%
-      a10 : 04.66%  | a13 : 02.71%  | a12 : 03.71%
-      a14 : 04.42%  | a14 : 02.70%  | a14 : 03.21%
-      a05 : 04.01%  | a15 : 00.86%  | a09 : 03.10%
-      a09 : 01.40%  | a10 : 00.44%  | a10 : 02.34%
-      a04 : 01.18%  | a05 : 00.29%  | a05 : 01.97%
-      a02 : 00.90%  | a02 : 00.21%  | a02 : 00.51%
-
-In this example (see :numref:`linearVotingProfileWithPolls` Lines 18-), we obtain 460 Party_1 supporters (46%), 436 Party_2 supporters (43.6%) and 104 other voters (10.4%). Favorite candidates of *Party_1* supporters, with more than 10%, appear to be *a06* (19.91%), *a07* (14.27%) and *a03* (10.02%). Whereas for *Party_2* supporters, favorite candidates appear to be *a11* (22.94%), followed by *a08* (15.65%), *a04* (15.07%) and *a06* (13.4%). Being *first* choice for *Party_1* supporters and *fourth* choice for *Party_2* supporters, this candidate *a06* is a natural candidate for clearly winning this election game (see :numref:`uninominalWinner`).
-
-.. code-block:: pycon
-   :name: uninominalWinner
-   :caption: The uninominal election winner 	  
-   :linenos:
-
-   >>> lvp.computeSimpleMajorityWinner()
-    ['a06']
-   >>> lvp.computeInstantRunoffWinner()
-    ['a06']  
-   >>> lvp.computeBordaWinners()
-    ['a06']
-
-Is it also a *Condorcet* winner ? To verify, we start by creating the corresponding *Condorcet* digraph *cdg* with the help of the :py:class:`votingProfiles.CondorcetDigraph` class. The created digraph instance contains 15 *actions* -the candidates- and 105 *oriented* arcs -the *positive* majority margins- (see :numref:`CondorcetWinner` Lines 6-7).
-
-.. code-block:: pycon
-   :name: CondorcetWinner
-   :caption: A Condorcet digraph constructed from a linear voting profile 
-   :linenos:
-
-   >>> from votingProfiles import CondorcetDigraph
-   >>> cdg = CondorcetDigraph(lvp)
-    *------- Digraph instance description ------*
-    Instance class      : CondorcetDigraph
-    Instance name       : rel_randLinearProfile
-    Digraph Order       : 15
-    Digraph Size        : 104
-    Valuation domain    : [-1000.00;1000.00]
-    Determinateness (%) : 67.08
-    Attributes          : ['name', 'actions', 'voters',
-                           'ballot', 'valuationdomain',
-			   'relation', 'order',
-			   'gamma', 'notGamma']
-
-We may visualize the resulting pairwise majority margins by showing the HTML formated version of the *cdg* relation table in a browser view.
-
-   >>> cdg.showHTMLRelationTable(tableTitle='Pairwise majority margins',
-                                 relationName=M(x>y)')
-
-.. figure:: majorityMargins.png
-   :width: 450 px
-   :align: center
-   :name: majorityMargins	   
-
-   Browsing the majority margins of a *Condorcet* digraph
-
-In :numref:`majorityMargins`, *light green* cells contain the positive majority margins, whereas *light red* cells contain the negative majority margins. A complete *light green* row reveals hence a *Condorcet* **winner**, whereas a complete *light green* column reveals a *Condorcet* **looser**. We recover again candidate *a06* as *Condorcet* winner ([15]_), whereas the obvious *Condorcet* looser is here candidate *a02*, the candidate with the lowest support in both parties (see :numref:`linearVotingProfileWithPolls` Line 40).
-
-With a same *bipolar* -*first ranked* and *last ranked* candidate- selection procedure, we may *weakly rank* the candidates (with possible ties) by iterating these *first ranked* and *last ranked* choices among the remaining candidates ([BIS-1999]_).
-
-.. code-block:: pycon
-   :name: rankingByChoosing
-   :caption: Ranking by iterating choosing the *first* and *last* remaining candidates  
-   :linenos:
-
-    >>> cdg.showRankingByChoosing()
-     Error: You must first run
-      self.computeRankingByChoosing(CoDual=False(default)|True) !
-    >>> cdg.computeRankingByChoosing()
-    >>> cdg.showRankingByChoosing()
-     Ranking by Choosing and Rejecting
-      1st first ranked ['a06']
-        2nd first ranked ['a11']
-	  3rd first ranked ['a07', 'a08']
-	    4th first ranked ['a03']
-	      5th first ranked ['a01']
-	        6th first ranked ['a13']
-		  7th first ranked ['a04']
-		  7th last ranked ['a12']
-	        6th last ranked ['a14']
-	      5th last ranked ['a15']
-	    4th last ranked ['a09']
-	  3rd last ranked ['a10']
-        2nd last ranked ['a05']
-      1st last ranked ['a02']
-
-Before showing the *ranking-by-choosing* result, we have to compute the iterated bipolar selection procedure (see :numref:`rankingByChoosing` Line 2). The first selection concerns *a06* (first) and *a02* (last), followed by *a11* (first) opposed to *a05* (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely *[a04, a12]* (see Lines 13-14).
-
-Notice furthermore the first ranked candidates at iteration step 3 (see :numref:`rankingByChoosing` Line 9), namely the pair *[a07, a08]*. Both candidates represent indeed conjointly the *first ranked* choice. We obtain here hence a *weak ranking*, i.e. a ranking with a tie.
-
-Let us mention that the *instant-run-off* procedure, we used before (see :numref:`uninominalWinner` Line 3), when operated with a *Comments=True* parameter setting, will deliver a more or less similar *reversed* linear *ordering-by-rejecting* result, namely [*a02*, *a10*, *a14*, *a05*, *a09*, *a13*, *a12*, *a15*, *a04*, *a01*, *a08*, *a03*, *a07*, *a11*, *a06*], ordered from the *last* to the *first* choice.
-
-Remarkable about both these *ranking-by-choosing* or *ordering-by-rejecting* results is the fact that the random voting behaviour, simulated here with the help of two discrete random variables ([16]_), defined respectively by the two party polls, is rendering a ranking that is more or less in accordance with the simulated balance of the polls: -*Party_1* supporters : 460;  *Party_2* supporters: 436 (see :numref:`linearVotingProfileWithPolls` Lines 26-40 third column). Despite a random voting behaviour per voter, the given polls apparently show a *very strong incidence* on the eventual election result. In order to avoid any manipulation of the election outcome, public media are therefore in some countries not allowed to publish polls during the last weeks before a general election.
-
-.. note::
-
-   Mind that the specific *ranking-by-choosing* procedure, we use here on the *Condorcet* digraph, operates the selection procedure by extracting at each step *initial* and *terminal* kernels, i.e. NP-hard operational problems (see tutorial :ref:`Kernel-Tutorial-label` and [BIS-1999]_); A technique that does not allow in general to tackle voting profiles with much more than 30 candidates. The tutorial on :ref:`Ranking-Tutorial-label` provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.  
-
-Back to :ref:`Content Table <Tutorial-label>`
-
 ---------------
 
 .. _OutrankingDigraphs-Tutorial-label:
@@ -1999,7 +1560,7 @@ The :py:class:`randomPerfTabs.RandomAcademicPerformanceTableau` class generates 
 
     * number of students,
     * number of courses,
-    * weightDistribution := equisignificant | random (default)
+    * weightDistribution := 'equisignificant' | 'random' (default)
     * weightScale := (1, 1 | numberOfCourses (default when random))
     * IntegerWeights := Boolean (True = default)
     * commonScale := (0,20) (default)
@@ -2120,8 +1681,8 @@ This type of random performance tableau is matching the :py:class:`votingProfile
 *Parameters*:
     * number of actions,
     * number of performance criteria,
-    * weightDistribution := equisignificant | random (default, see `above <tutorial.html#the-randomperformancetableau-generator>`_ above)
-    * weightScale := (1, 1 | numberOfCriteria (default when random))
+    * weightDistribution := 'equisignificant' | 'random' (default, see `above <tutorial.html#the-randomperformancetableau-generator>`_,)
+    * weightScale := (1, 1 | numberOfCriteria (default when random)).
     * integerWeights := Boolean (True = default) 
     * commonThresholds (default) := {
       
@@ -2133,6 +1694,445 @@ This type of random performance tableau is matching the :py:class:`votingProfile
 Back to :ref:`Content Table <Tutorial-label>`
 
 --------------
+
+.. _LinearVoting-Tutorial-label:
+
+Computing the winner of an election
+-----------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+Linear voting profiles
+......................
+
+The :py:mod:`votingProfiles` module provides resources for handling election results [ADT-L2]_, like the :py:class:`votingProfiles.LinearVotingProfile` class. We consider an election involving a finite set of candidates and finite set of weighted voters, who express their voting preferences in a complete linear ranking (without ties) of the candidates. The data is internally stored in two ordered dictionaries, one for the voters and another one for the candidates. The linear ballots are stored in a standard dictionary.
+
+.. code-block:: python
+   :linenos:
+
+    candidates = OrderedDict([('a1',...), ('a2',...), ('a3', ...), ...}
+    voters = OrderedDict([('v1',{'weight':10}), ('v2',{'weight':3}), ...}
+    ## each voter specifies a linearly ranked list of candidates
+    ## from the best to the worst (without ties
+    linearBallot = {
+    'v1' : ['a2','a3','a1', ...],
+    'v2' : ['a1','a2','a3', ...],
+    ...
+    }
+
+The module provides a :py:class:`votingProfiles.RandomLinearVotingProfile` class for generating random instances of the :py:class:`votingProfiles.LinearVotingProfile` class. In an interactive Python session we may obtain for the election of 3 candidates by 5 voters the following result.
+
+.. code-block:: pycon
+   :name: randomProfile1
+   :caption: Example of random linear voting profile 
+   :linenos:
+
+   >>> from votingProfiles import RandomLinearVotingProfile
+   >>> v = RandomLinearVotingProfile(numberOfVoters=5,
+                                     numberOfCandidates=3,
+                                     RandomWeights=True)
+   >>> v.candidates
+    OrderedDict([ ('a1',{'name':'a1}), ('a2',{'name':'a2'}),
+                  ('a3',{'name':'a3'}) ])
+   >>> v.voters
+    OrderedDict([('v1',{'weight': 2}), ('v2':{'weight': 3}), 
+     ('v3',{'weight': 1}), ('v4':{'weight': 5}), 
+     ('v5',{'weight': 4})])
+   >>> v.linearBallot
+    {'v1': ['a1', 'a2', 'a3',],
+     'v2': ['a3', 'a2', 'a1',],
+     'v3': ['a1', 'a3', 'a2',],
+     'v4': ['a1', 'a3', 'a2',],
+     'v5': ['a2', 'a3', 'a1',]} 
+
+Notice that in this random example, the five voters are weighted (see :numref:`randomProfile1` Line 6-7). Their linear ballots can be viewed with the :py:func:`votingProfiles.LinearVotingProfile.showLinearBallots` method.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> v.showLinearBallots()
+    voters(weight)	 candidates rankings
+    v1(2): 	 ['a2', 'a1', 'a3']
+    v2(3): 	 ['a3', 'a1', 'a2']
+    v3(1): 	 ['a1', 'a3', 'a2']
+    v4(5): 	 ['a1', 'a2', 'a3']
+    v5(4): 	 ['a3', 'a1', 'a2']
+    # voters: 15
+
+Editing of the linear voting profile may be achieved by storing the data in a file, edit it, and reload it again.
+
+.. code-block:: pycon
+
+   >>> v.save(fileName='tutorialLinearVotingProfile1')
+    *--- Saving linear profile in file: <tutorialLinearVotingProfile1.py> ---*
+   >>> v = LinearVotingProfile('tutorialLinearVotingProfile1')
+
+Computing the winner
+....................
+
+We may easily compute **uni-nominal votes**, i.e. how many times a candidate was ranked first, and see who is consequently the **simple majority** winner(s) in this election.
+
+.. code-block:: pycon
+
+   >>> v.computeUninominalVotes()
+    {'a2': 2, 'a1': 6, 'a3': 7}
+   >>> v.computeSimpleMajorityWinner()
+    ['a3']
+
+As we observe no absolute majority (8/15) of votes for any of the three candidate, we may look for the **instant runoff** winner instead (see [ADT-L2]_).
+
+.. code-block:: pycon
+   :name: instantRunOff
+   :caption: Example Instant Run Off Winner
+
+   >>> v.computeInstantRunoffWinner(Comments=True)
+    Half of the Votes =  7.50
+    ==> stage =  1
+	remaining candidates ['a1', 'a2', 'a3']
+	uninominal votes {'a1': 6, 'a2': 2, 'a3': 7}
+	minimal number of votes =  2
+	maximal number of votes =  7
+	candidate to remove =  a2
+	remaining candidates =  ['a1', 'a3']
+    ==> stage =  2
+	remaining candidates ['a1', 'a3']
+	uninominal votes {'a1': 8, 'a3': 7}
+	minimal number of votes =  7
+	maximal number of votes =  8
+	candidate a1 obtains an absolute majority
+    Instant run off winner: ['a1']
+
+In stage 1, no candidate obtains an absolute majority of votes. Candidate *a2* obtains the minimal number of votes (2/15) and is, hence, eliminated. In stage 2, candidate *a1* obtains an absolute majority of the votes (8/15) and is eventually elected (see :numref:`instantRunOff`).
+
+We may also follow the *Chevalier de Borda*'s advice and, after a **rank analysis** of the linear ballots, compute the **Borda score** -the average rank- of each candidate and hence determine the *Borda* **winner(s)**.
+
+.. code-block:: pycon
+   :name: BordaScores
+   :caption: Example of *Borda* rank scores
+   :linenos:
+
+   >>> v.computeRankAnalysis()
+    {'a2': [2, 5, 8], 'a1': [6, 9, 0], 'a3': [7, 1, 7]}
+   >>> v.computeBordaScores()
+    OrderedDict([
+      ('a1', {'BordaScore': 24, 'averageBordaScore': 1.6}),
+      ('a3', {'BordaScore': 30, 'averageBordaScore': 2.0}),
+      ('a2', {'BordaScore': 36, 'averageBordaScore': 2.4}) ])
+   >>> v.computeBordaWinners()
+    ['a1']
+
+Candidate *a1* obtains the minimal *Borda* score, followed by candidate *a3* and finally candidate *a2* (see :numref:`BordaScores`). The corresponding *Borda* **rank analysis table** may be printed out with a corresponding ``show`` command.
+
+.. code-block:: pycon
+   :name: rankAnalysis
+   :caption: Rank analysis example
+   :linenos:
+
+   >>> v.showRankAnalysisTable()
+    *----  Borda rank analysis tableau -----*
+    candi- | alternative-to-rank |     Borda
+    dates  |   1     2     3     | score  average
+    -------|-------------------------------------
+     'a1'  |   6     9     0     | 24/15   1.60
+     'a3'  |   7     1     7     | 30/15   2.00
+     'a2'  |   2     5     8     | 36/15   2.40
+
+In our randomly generated election results, we are lucky: The instant runoff winner and the *Borda* winner both are candidate *a1* (see :numref:`instantRunOff` and :numref:`rankAnalysis`). However, we could also follow the *Marquis de Condorcet*'s advice, and compute the **majority margins** obtained by voting for each individual pair of candidates.
+
+The Condorcet winner
+....................
+
+For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the corresponding **majority margin** *M(a1,a2)* is 4 - 1 = +3. These *majority margins* define on the set of candidates what we call the **Condorcet digraph**. The :py:class:`votingProfiles.CondorcetDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such kind of digraphs.
+
+.. code-block:: pycon
+   :name: condorcetDigraph
+   :caption: Example of *Condorcet* digraph
+   :linenos:
+
+   >>> from votingProfiles import CondorcetDigraph
+   >>> cdg = CondorcetDigraph(v,hasIntegerValuation=True)
+   >>> cdg
+    *------- Digraph instance description ------*
+    Instance class      : CondorcetDigraph
+    Instance name       : rel_randomLinearVotingProfile1
+    Digraph Order       : 3
+    Digraph Size        : 3
+    Valuation domain    : [-15.00;15.00]
+    Determinateness (%) : 64.44
+    Attributes          : ['name', 'actions', 'voters',
+                           'ballot', 'valuationdomain',
+			   'relation', 'order',
+			   'gamma', 'notGamma']
+   >>> cdg.showAll()
+    *----- show detail -------------*
+    Digraph          : rel_randLinearVotingProfile1
+    *---- Actions ----*
+    ['a1', 'a2', 'a3']
+    *---- Characteristic valuation domain ----*
+    {'max': Decimal('15.0'), 'med': Decimal('0'),
+     'min': Decimal('-15.0'), 'hasIntegerValuation': True}
+    * ---- majority margins -----
+       M(x,y)   |  'a1'	  'a2'  'a3'	  
+      ----------|-------------------
+        'a1'    |    0     11     1	 
+        'a2'    |  -11      0    -1	 
+        'a3'    |   -1      1     0	 
+    Valuation domain: [-15;+15]
+
+Notice that in the case of linear voting profiles, majority margins always verify a zero sum property: *M(x,y)* + *M(y,x)* = 0 for all candidates *x* and *y* (see :numref:`condorcetDigraph` Lines 26-28). This is not true in general for arbitrary voting profiles. The *Condorcet* digraph of linear voting profiles defines in fact a *weak tournament* and belongs, hence, to the class of *self-codual* bipolar-valued digraphs ([13]_).
+    
+Now, a candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the *Condorcet* digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner** (see :numref:`condorcetDigraph` Line 26).
+
+.. code-block:: pycon
+
+   >>> cdg.computeCondorcetWinner()
+    ['a1']  
+    
+By seeing the majority margins like a *bipolar-valued characteristic function* of a global preference relation defined on the set of candidates, we may use all operational resources of the generic ``Digraph`` class (see :ref:`Digraphs-Tutorial-label`), and especially its ``exportGraphViz`` method [1]_, for visualizing an election result.
+
+.. code-block:: pycon
+
+   >>> cdg.exportGraphViz(fileName='tutorialLinearBallots')
+   *---- exporting a dot file for GraphViz tools ---------*
+   Exporting to tutorialLinearBallots.dot
+   dot -Grankdir=BT -Tpng tutorialLinearBallots.dot -o tutorialLinearBallots.png
+
+.. Figure:: tutorialLinearBallots.png
+   :name: tutorialLinearBallots
+   :width: 300 px
+   :align: center
+
+   Visualizing an election result
+
+In :numref:`tutorialLinearBallots` we notice that the *Condorcet* digraph from our example linear voting profile gives a linear order of the candidates: ['a1', 'a3', 'a2], the same actually as given by the *Borda* scores (see :numref:`BordaScores`). This is by far not given in general. Usually, when aggregating linear ballots, there appear cyclic social preferences.
+
+Cyclic social preferences
+.........................
+
+Let us consider for instance the following linear voting profile and construct the corresponding Condorcet digraph.
+
+.. code-block:: pycon
+   :name: linearVotingProfile2
+   :caption: Example of cyclic social preferences 	  
+   :linenos:
+
+   >>> v.showLinearBallots()
+    voters(weight)	 candidates rankings
+    v1(1): 	 ['a1', 'a3', 'a5', 'a2', 'a4']
+    v2(1): 	 ['a1', 'a2', 'a4', 'a3', 'a5']
+    v3(1): 	 ['a5', 'a2', 'a4', 'a3', 'a1']
+    v4(1): 	 ['a3', 'a4', 'a1', 'a5', 'a2']
+    v5(1): 	 ['a4', 'a2', 'a3', 'a5', 'a1']
+    v6(1): 	 ['a2', 'a4', 'a5', 'a1', 'a3']
+    v7(1): 	 ['a5', 'a4', 'a3', 'a1', 'a2']
+    v8(1): 	 ['a2', 'a4', 'a5', 'a1', 'a3']
+    v9(1): 	 ['a5', 'a3', 'a4', 'a1', 'a2']
+   >>> cdg = CondorcetDigraph(v)
+   >>> cdg.showRelationTable()
+    * ---- Relation Table -----
+      S   |  'a1'   'a2'   'a3'	  'a4'	  'a5'	  
+    ------|----------------------------------------
+    'a1'  |   -     0.11  -0.11	 -0.56	 -0.33	 
+    'a2'  | -0.11    -	   0.11	  0.11	 -0.11	 
+    'a3'  |  0.11  -0.11    -	 -0.33	 -0.11	 
+    'a4'  |  0.56  -0.11   0.33	   -	  0.11	 
+    'a5'  |  0.33   0.11   0.11	 -0.11	   -	 
+    
+Now, we cannot find any completely positive row in the relation table (see :numref:`linearVotingProfile2` Lines 17 - ). No one of the five candidates is beating all the others with an absolute majority of votes. There is no *Condorcet* winner anymore. In fact, when looking at a graphviz drawing of this *Condorcet* digraph, we may observe *cyclic* preferences, like (*a1* > *a2* > *a3* > *a1*) for instance (see :numref:`cyclicSocialPreferences`).
+
+.. code-block:: pycon
+
+   >>> cdg.exportGraphViz('cycles')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to cycles.dot
+    dot -Grankdir=BT -Tpng cycles.dot -o cycles.png
+
+.. Figure:: cycles.png
+   :name: cyclicSocialPreferences	    
+   :width: 200 px
+   :align: center
+
+   Cyclic social preferences
+	   
+But, there may be many cycles appearing in a *Condorcet* digraph, and, we may detect and enumerate all minimal chordless circuits in a Digraph instance with the :py:func:`digraphs.Digraph.computeChordlessCircuits` method.
+
+.. code-block:: pycon
+
+   >>> cdg.computeChordlessCircuits()
+    [(['a2', 'a3', 'a1'], frozenset({'a2', 'a3', 'a1'})), 
+     (['a2', 'a4', 'a5'], frozenset({'a2', 'a5', 'a4'})), 
+     (['a2', 'a4', 'a1'], frozenset({'a2', 'a1', 'a4'}))]
+
+*Condorcet* 's approach for determining the winner of an election is hence *not decisive* in all circumstances and we need to exploit more sophisticated approaches for finding the winner of the election on the basis of the majority margins of the given linear ballots (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>` and [BIS-2008]_). 
+
+Many more tools for exploiting voting results are available like the browser heat map view on voting profiles (see the technical documentation of the :py:mod:`votingProfiles` module).
+
+.. code-block:: pycon
+   :name: votingHeatmap
+   :caption: Example linear voting heatmap
+   :linenos:
+
+   >>> v.showHTMLVotingHeatmap(rankingRule='NetFlows',
+                               Transposed=False)
+
+.. figure:: votingHeatmap.png
+   :width: 550 px
+   :align: center
+   :name: cyclicVoting	   
+
+   Visualizing a linear voting profile in a heatmap format
+
+Notice that the importance weights of the voters are *negative*, which means that the preference direction of the criteria (in this case the individual voters) is *decreasing*, i.e. goes from lowest (best) rank to highest (worst) rank. Notice also, that the compromise *NetFlows* ranking *[a4,a5,a2,a1,a3]*, shown in this heatmap (see :numref:`cyclicVoting`) results in an optimal *ordinal correlation* index of +0.778 with the pairwise majority voting margins (see the Adavanced topic on  :ref:`Ordinal Correlation equals Relational Equivalence <OrdinalCorrelation-Tutorial-label>` and :ref:`Ranking-Tutorial-label`). The number of voters is usually much larger than the number of candidates. In that case, it is better to generate a transposed *voters X candidates* view (see :numref:`votingHeatmap` Line 2) 
+
+On generating random linear voting profiles
+...........................................
+
+By default, the :py:class:`votingProfiles.RandomLinearVotingProfile` class generates random linear voting profiles where every candidates has the same uniform probabilities to be ranked at a certain position by all the voters. For each voter's random linear ballot is indeed generated  via a uniform shuffling of the list of candidates.
+
+In reality, political election data appear quite different. There will usually be different favorite and marginal candidates for each political party. To simulate these aspects into our random generator, we are using two random exponentially distributed polls of the candidates and consider a bipartisan political landscape with a certain random balance (default theoretical party repartition = 0.50) between the two sets of potential party supporters (see :py:class:`votingProfiles.LinearVotingProfile` class). A certain theoretical proportion (default = 0.1) will not support any party.
+
+Let us generate such a linear voting profile for an election with 1000 voters and 15 candidates.
+
+.. code-block:: pycon
+   :name: linearVotingProfileWithPolls
+   :caption: Generating a linear voting profile with random polls 	  
+   :linenos:
+
+   >>> from votingProfiles import RandomLinearVotingProfile
+   >>> lvp = RandomLinearVotingProfile(numberOfCandidates=15,
+                               numberOfVoters=1000,
+                               WithPolls=True,
+                               partyRepartition=0.5,
+                               other=0.1,
+                               seed=0.9189670954954139)
+   >>> lvp
+    *------- VotingProfile instance description ------*
+    Instance class   : RandomLinearVotingProfile
+    Instance name    : randLinearProfile
+    # Candidates     : 15
+    # Voters         : 1000
+    Attributes       : ['name', 'seed', 'candidates',
+                        'voters', 'RandomWeights',
+			'sumWeights', 'poll1', 'poll2',
+			'bipartisan', 'linearBallot', 'ballot']
+   >>> lvp.showRandomPolls()
+    Random repartition of voters
+     Party_1 supporters : 460 (46.0%)
+     Party_2 supporters : 436 (43.6%)
+     Other voters       : 104 (10.4%)
+    *---------------- random polls ---------------
+     Party_1(46.0%) | Party_2(43.6%)|  expected  
+    -----------------------------------------------
+      a06 : 19.91%  | a11 : 22.94%  | a06 : 15.00%
+      a07 : 14.27%  | a08 : 15.65%  | a11 : 13.08%
+      a03 : 10.02%  | a04 : 15.07%  | a08 : 09.01%
+      a13 : 08.39%  | a06 : 13.40%  | a07 : 08.79%
+      a15 : 08.39%  | a03 : 06.49%  | a03 : 07.44%
+      a11 : 06.70%  | a09 : 05.63%  | a04 : 07.11%
+      a01 : 06.17%  | a07 : 05.10%  | a01 : 05.06%
+      a12 : 04.81%  | a01 : 05.09%  | a13 : 05.04%
+      a08 : 04.75%  | a12 : 03.43%  | a15 : 04.23%
+      a10 : 04.66%  | a13 : 02.71%  | a12 : 03.71%
+      a14 : 04.42%  | a14 : 02.70%  | a14 : 03.21%
+      a05 : 04.01%  | a15 : 00.86%  | a09 : 03.10%
+      a09 : 01.40%  | a10 : 00.44%  | a10 : 02.34%
+      a04 : 01.18%  | a05 : 00.29%  | a05 : 01.97%
+      a02 : 00.90%  | a02 : 00.21%  | a02 : 00.51%
+
+In this example (see :numref:`linearVotingProfileWithPolls` Lines 18-), we obtain 460 Party_1 supporters (46%), 436 Party_2 supporters (43.6%) and 104 other voters (10.4%). Favorite candidates of *Party_1* supporters, with more than 10%, appear to be *a06* (19.91%), *a07* (14.27%) and *a03* (10.02%). Whereas for *Party_2* supporters, favorite candidates appear to be *a11* (22.94%), followed by *a08* (15.65%), *a04* (15.07%) and *a06* (13.4%). Being *first* choice for *Party_1* supporters and *fourth* choice for *Party_2* supporters, this candidate *a06* is a natural candidate for clearly winning this election game (see :numref:`uninominalWinner`).
+
+.. code-block:: pycon
+   :name: uninominalWinner
+   :caption: The uninominal election winner 	  
+   :linenos:
+
+   >>> lvp.computeSimpleMajorityWinner()
+    ['a06']
+   >>> lvp.computeInstantRunoffWinner()
+    ['a06']  
+   >>> lvp.computeBordaWinners()
+    ['a06']
+
+Is it also a *Condorcet* winner ? To verify, we start by creating the corresponding *Condorcet* digraph *cdg* with the help of the :py:class:`votingProfiles.CondorcetDigraph` class. The created digraph instance contains 15 *actions* -the candidates- and 105 *oriented* arcs -the *positive* majority margins- (see :numref:`CondorcetWinner` Lines 6-7).
+
+.. code-block:: pycon
+   :name: CondorcetWinner
+   :caption: A Condorcet digraph constructed from a linear voting profile 
+   :linenos:
+
+   >>> from votingProfiles import CondorcetDigraph
+   >>> cdg = CondorcetDigraph(lvp)
+    *------- Digraph instance description ------*
+    Instance class      : CondorcetDigraph
+    Instance name       : rel_randLinearProfile
+    Digraph Order       : 15
+    Digraph Size        : 104
+    Valuation domain    : [-1000.00;1000.00]
+    Determinateness (%) : 67.08
+    Attributes          : ['name', 'actions', 'voters',
+                           'ballot', 'valuationdomain',
+			   'relation', 'order',
+			   'gamma', 'notGamma']
+
+We may visualize the resulting pairwise majority margins by showing the HTML formated version of the *cdg* relation table in a browser view.
+
+   >>> cdg.showHTMLRelationTable(tableTitle='Pairwise majority margins',
+                                 relationName=M(x>y)')
+
+.. figure:: majorityMargins.png
+   :width: 450 px
+   :align: center
+   :name: majorityMargins	   
+
+   Browsing the majority margins of a *Condorcet* digraph
+
+In :numref:`majorityMargins`, *light green* cells contain the positive majority margins, whereas *light red* cells contain the negative majority margins. A complete *light green* row reveals hence a *Condorcet* **winner**, whereas a complete *light green* column reveals a *Condorcet* **looser**. We recover again candidate *a06* as *Condorcet* winner ([15]_), whereas the obvious *Condorcet* looser is here candidate *a02*, the candidate with the lowest support in both parties (see :numref:`linearVotingProfileWithPolls` Line 40).
+
+With a same *bipolar* -*first ranked* and *last ranked* candidate- selection procedure, we may *weakly rank* the candidates (with possible ties) by iterating these *first ranked* and *last ranked* choices among the remaining candidates ([BIS-1999]_).
+
+.. code-block:: pycon
+   :name: rankingByChoosing
+   :caption: Ranking by iterating choosing the *first* and *last* remaining candidates  
+   :linenos:
+
+    >>> cdg.showRankingByChoosing()
+     Error: You must first run
+      self.computeRankingByChoosing(CoDual=False(default)|True) !
+    >>> cdg.computeRankingByChoosing()
+    >>> cdg.showRankingByChoosing()
+     Ranking by Choosing and Rejecting
+      1st first ranked ['a06']
+        2nd first ranked ['a11']
+	  3rd first ranked ['a07', 'a08']
+	    4th first ranked ['a03']
+	      5th first ranked ['a01']
+	        6th first ranked ['a13']
+		  7th first ranked ['a04']
+		  7th last ranked ['a12']
+	        6th last ranked ['a14']
+	      5th last ranked ['a15']
+	    4th last ranked ['a09']
+	  3rd last ranked ['a10']
+        2nd last ranked ['a05']
+      1st last ranked ['a02']
+
+Before showing the *ranking-by-choosing* result, we have to compute the iterated bipolar selection procedure (see :numref:`rankingByChoosing` Line 2). The first selection concerns *a06* (first) and *a02* (last), followed by *a11* (first) opposed to *a05* (last), and so on, until there remains at iteration step 7 a last pair of candidates, namely *[a04, a12]* (see Lines 13-14).
+
+Notice furthermore the first ranked candidates at iteration step 3 (see :numref:`rankingByChoosing` Line 9), namely the pair *[a07, a08]*. Both candidates represent indeed conjointly the *first ranked* choice. We obtain here hence a *weak ranking*, i.e. a ranking with a tie.
+
+Let us mention that the *instant-run-off* procedure, we used before (see :numref:`uninominalWinner` Line 3), when operated with a *Comments=True* parameter setting, will deliver a more or less similar *reversed* linear *ordering-by-rejecting* result, namely [*a02*, *a10*, *a14*, *a05*, *a09*, *a13*, *a12*, *a15*, *a04*, *a01*, *a08*, *a03*, *a07*, *a11*, *a06*], ordered from the *last* to the *first* choice.
+
+Remarkable about both these *ranking-by-choosing* or *ordering-by-rejecting* results is the fact that the random voting behaviour, simulated here with the help of two discrete random variables ([16]_), defined respectively by the two party polls, is rendering a ranking that is more or less in accordance with the simulated balance of the polls: -*Party_1* supporters : 460;  *Party_2* supporters: 436 (see :numref:`linearVotingProfileWithPolls` Lines 26-40 third column). Despite a random voting behaviour per voter, the given polls apparently show a *very strong incidence* on the eventual election result. In order to avoid any manipulation of the election outcome, public media are therefore in some countries not allowed to publish polls during the last weeks before a general election.
+
+.. note::
+
+   Mind that the specific *ranking-by-choosing* procedure, we use here on the *Condorcet* digraph, operates the selection procedure by extracting at each step *initial* and *terminal* kernels, i.e. NP-hard operational problems (see tutorial :ref:`Kernel-Tutorial-label` and [BIS-1999]_); A technique that does not allow in general to tackle voting profiles with much more than 30 candidates. The tutorial on :ref:`Ranking-Tutorial-label` provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.  
+
+Back to :ref:`Content Table <Tutorial-label>`
+
+------------------------
 
 .. _Ranking-Tutorial-label:
 
@@ -2219,8 +2219,8 @@ The strict outranking relation  :math:`\succnsim` shown here is apparently *not 
 
    >>> gcd.computeTransitivityDegree(Comments=True)
     Transitivity degree of graph <codual_rel_randomCBperftab>
-     #triples x>y>z: 20, #closed: 7, #open: 13
-     #closed/#triples =  0.35
+     #triples x>y>z: 78, #closed: 38, #open: 40
+     #closed/#triples =  0.487
     
 With only 35% of the required transitive arcs, the strict outranking relation here is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
     
