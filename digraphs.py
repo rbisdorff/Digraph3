@@ -2689,7 +2689,7 @@ class Digraph(object):
                 print(' #symmetric/#arcs =  %.1f' %(res) )
             else:
                 print('Symmetry degree of digraph <%s>:' % self.name)
-                print(' #arcs x>y: %d, #symmetric: %d %d, #asymmetric: %d' %\
+                print(' #arcs x>y: %d, #symmetric: %d, #asymmetric: %d' %\
                       (narcs,nsymArc,narcs-nsymArc) )
                 print(' #arcs/#symmetric =  %.3f' %(res) )
         return res
