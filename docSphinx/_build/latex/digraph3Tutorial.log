@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  21 DEC 2020 14:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  24 DEC 2020 10:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -646,7 +646,7 @@ LaTeX Info: Redefining \nameref on input line 67.
 \@outlinefile=\write5
 \openout5 = `digraph3Tutorial.out'.
 
-<introDoc3.png, id=426, 594.22pt x 624.3325pt>
+<introDoc3.png, id=442, 594.22pt x 624.3325pt>
 File: introDoc3.png Graphic file (type png)
 <use introDoc3.png>
 Package pdftex.def Info: introDoc3.png  used on input line 82.
@@ -705,53 +705,52 @@ ile named
  []
 
 [7]
-<tutorialDigraph.png, id=647, 382.42876pt x 305.14pt>
+<tutorialDigraph.png, id=663, 382.42876pt x 305.14pt>
 File: tutorialDigraph.png Graphic file (type png)
 <use tutorialDigraph.png>
 Package pdftex.def Info: tutorialDigraph.png  used on input line 367.
 (pdftex.def)             Requested size: 225.84229pt x 180.19864pt.
- [8 <./tutorialDigraph.png>]
-<tutorialGrid.png, id=655, 275.0275pt x 674.52pt>
+ [8 <./tutorialDigraph.png>] [9]
+<tutorialGrid.png, id=680, 275.0275pt x 674.52pt>
 File: tutorialGrid.png Graphic file (type png)
 <use tutorialGrid.png>
 Package pdftex.def Info: tutorialGrid.png  used on input line 431.
 (pdftex.def)             Requested size: 150.56152pt x 369.26833pt.
- [9]
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/cmtt/m/n' tried instead on input line 441.
  [10 <./tutorialGrid.png>] [11] [12]
-<tutRandValDigraph.png, id=707, 382.42876pt x 490.83376pt>
+<tutRandValDigraph.png, id=727, 382.42876pt x 490.83376pt>
 File: tutRandValDigraph.png Graphic file (type png)
 <use tutRandValDigraph.png>
 Package pdftex.def Info: tutRandValDigraph.png  used on input line 567.
 (pdftex.def)             Requested size: 225.84229pt x 289.85902pt.
 
 [13 <./tutRandValDigraph.png>]
-<asymSymParts.png, id=717, 749.80125pt x 488.82625pt>
+<asymSymParts.png, id=737, 749.80125pt x 488.82625pt>
 File: asymSymParts.png Graphic file (type png)
 <use asymSymParts.png>
 Package pdftex.def Info: asymSymParts.png  used on input line 590.
 (pdftex.def)             Requested size: 451.68457pt x 294.4765pt.
  [14 <./asymSymParts.png>]
-<graphBorderAndInner1.png, id=731, 862.22125pt x 622.325pt>
+<graphBorderAndInner1.png, id=751, 862.22125pt x 622.325pt>
 File: graphBorderAndInner1.png Graphic file (type png)
 <use graphBorderAndInner1.png>
 Package pdftex.def Info: graphBorderAndInner1.png  used on input line 646.
 (pdftex.def)             Requested size: 451.68457pt x 326.00383pt.
  [15]
-<graphBorderAndInner.png, id=747, 770.88pt x 394.47375pt>
+<graphBorderAndInner.png, id=767, 770.88pt x 394.47375pt>
 File: graphBorderAndInner.png Graphic file (type png)
 <use graphBorderAndInner.png>
 Package pdftex.def Info: graphBorderAndInner.png  used on input line 661.
 (pdftex.def)             Requested size: 451.68457pt x 231.13638pt.
  [16 <./graphBorderAndInner1.png>] [17 <./graphBorderAndInner.png>] [18]
-<strongComponents.png, id=779, 511.9125pt x 674.52pt>
+<strongComponents.png, id=799, 511.9125pt x 674.52pt>
 File: strongComponents.png Graphic file (type png)
 <use strongComponents.png>
 Package pdftex.def Info: strongComponents.png  used on input line 789.
 (pdftex.def)             Requested size: 225.84229pt x 297.58223pt.
  [19] [20 <./strongComponents.png>] [21]
-<htmlTutorialDigraph.png, id=806, 463.7325pt x 292.09125pt>
+<htmlTutorialDigraph.png, id=826, 463.7325pt x 292.09125pt>
 File: htmlTutorialDigraph.png Graphic file (type png)
 <use htmlTutorialDigraph.png>
 Package pdftex.def Info: htmlTutorialDigraph.png  used on input line 874.
@@ -761,13 +760,13 @@ Underfull \vbox (badness 10000) detected at line 947
  []
 
 [23] [24] [25]
-<tutorialPerfTab.png, id=850, 458.71375pt x 284.06125pt>
+<tutorialPerfTab.png, id=870, 458.71375pt x 284.06125pt>
 File: tutorialPerfTab.png Graphic file (type png)
 <use tutorialPerfTab.png>
 Package pdftex.def Info: tutorialPerfTab.png  used on input line 1089.
 (pdftex.def)             Requested size: 301.12305pt x 186.47974pt.
  [26]
-<tutorialHeatmap.png, id=855, 485.815pt x 390.45876pt>
+<tutorialHeatmap.png, id=875, 485.815pt x 390.45876pt>
 File: tutorialHeatmap.png Graphic file (type png)
 <use tutorialHeatmap.png>
 Package pdftex.def Info: tutorialHeatmap.png  used on input line 1104.
@@ -779,13 +778,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 1112--1113
  []
 
 [28] [29]
-<codualOdg.png, id=882, 420.57124pt x 346.29375pt>
+<codualOdg.png, id=903, 420.57124pt x 346.29375pt>
 File: codualOdg.png Graphic file (type png)
 <use codualOdg.png>
 Package pdftex.def Info: codualOdg.png  used on input line 1233.
 (pdftex.def)             Requested size: 225.84229pt x 185.95488pt.
  [30] [31 <./codualOdg.png>] [32] [33] [34]
-<randomPerfTab1.png, id=927, 752.8125pt x 676.5275pt>
+<randomPerfTab1.png, id=947, 752.8125pt x 676.5275pt>
 File: randomPerfTab1.png Graphic file (type png)
 <use randomPerfTab1.png>
 Package pdftex.def Info: randomPerfTab1.png  used on input line 1441.
@@ -795,50 +794,50 @@ Overfull \vbox (1.03847pt too high) detected at line 1571
  []
 
 [37]
-<randomCBHeatmap.png, id=948, 454.69875pt x 363.3575pt>
+<randomCBHeatmap.png, id=968, 454.69875pt x 363.3575pt>
 File: randomCBHeatmap.png Graphic file (type png)
 <use randomCBHeatmap.png>
 Package pdftex.def Info: randomCBHeatmap.png  used on input line 1583.
 (pdftex.def)             Requested size: 301.12305pt x 240.63725pt.
  [38 <./randomCBHeatmap.png>] [39] [40] [41]
-<sccFusionObjectives.png, id=970, 382.42876pt x 418.56375pt>
+<sccFusionObjectives.png, id=990, 382.42876pt x 418.56375pt>
 File: sccFusionObjectives.png Graphic file (type png)
 <use sccFusionObjectives.png>
 Package pdftex.def Info: sccFusionObjectives.png  used on input line 1791.
 (pdftex.def)             Requested size: 225.84229pt x 247.18039pt.
  [42] [43 <./sccFusionObjectives.png>] [44]
-<rankingStudents.png, id=990, 487.8225pt x 471.7625pt>
+<rankingStudents.png, id=1011, 487.8225pt x 471.7625pt>
 File: rankingStudents.png Graphic file (type png)
 <use rankingStudents.png>
 Package pdftex.def Info: rankingStudents.png  used on input line 1905.
 (pdftex.def)             Requested size: 301.12305pt x 291.20839pt.
  [45 <./rankingStudents.png>] [46] [47] [48] [49] [50]
-<tutorialLinearBallots.png, id=1063, 382.42876pt x 306.14375pt>
+<tutorialLinearBallots.png, id=1083, 382.42876pt x 306.14375pt>
 File: tutorialLinearBallots.png Graphic file (type png)
 <use tutorialLinearBallots.png>
 Package pdftex.def Info: tutorialLinearBallots.png  used on input line 2191.
 (pdftex.def)             Requested size: 225.84229pt x 180.79141pt.
  [51 <./tutorialLinearBallots.png>]
-<cycles.png, id=1078, 382.42876pt x 504.88625pt>
+<cycles.png, id=1098, 382.42876pt x 504.88625pt>
 File: cycles.png Graphic file (type png)
 <use cycles.png>
 Package pdftex.def Info: cycles.png  used on input line 2239.
 (pdftex.def)             Requested size: 150.56152pt x 198.76918pt.
  [52]
-<votingHeatmap.png, id=1087, 937.5025pt x 456.70625pt>
+<votingHeatmap.png, id=1107, 937.5025pt x 456.70625pt>
 File: votingHeatmap.png Graphic file (type png)
 <use votingHeatmap.png>
 Package pdftex.def Info: votingHeatmap.png  used on input line 2265.
 (pdftex.def)             Requested size: 414.04419pt x 201.69702pt.
  [53 <./cycles.png>] [54 <./votingHeatmap.png>]
 [55]
-<majorityMargins.png, id=1119, 837.1275pt x 607.26875pt>
+<majorityMargins.png, id=1140, 837.1275pt x 607.26875pt>
 File: majorityMargins.png Graphic file (type png)
 <use majorityMargins.png>
 Package pdftex.def Info: majorityMargins.png  used on input line 2365.
 (pdftex.def)             Requested size: 338.76343pt x 245.73865pt.
  [56] [57 <./majorityMargins.png>] [58] [59]
-<rankingTutorial.png, id=1190, 350.30875pt x 674.52pt>
+<rankingTutorial.png, id=1210, 350.30875pt x 674.52pt>
 File: rankingTutorial.png Graphic file (type png)
 <use rankingTutorial.png>
 Package pdftex.def Info: rankingTutorial.png  used on input line 2516.
@@ -848,7 +847,7 @@ Overfull \vbox (2.94064pt too high) detected at line 2614
  []
 
 [63]
-<weakCopelandRanking.png, id=1237, 249.93375pt x 597.23125pt>
+<weakCopelandRanking.png, id=1257, 249.93375pt x 597.23125pt>
 File: weakCopelandRanking.png Graphic file (type png)
 <use weakCopelandRanking.png>
 Package pdftex.def Info: weakCopelandRanking.png  used on input line 2620.
@@ -858,7 +857,7 @@ Overfull \vbox (2.94987pt too high) detected at line 2720
  []
 
 [66]
-<tutorialKemeny.png, id=1272, 213.79875pt x 674.52pt>
+<tutorialKemeny.png, id=1292, 213.79875pt x 674.52pt>
 File: tutorialKemeny.png Graphic file (type png)
 <use tutorialKemeny.png>
 Package pdftex.def Info: tutorialKemeny.png  used on input line 2726.
@@ -868,7 +867,7 @@ Underfull \vbox (badness 3179) detected at line 2777
  []
 
 [68] [69]
-<tutorialSlater.png, id=1303, 243.91125pt x 674.52pt>
+<tutorialSlater.png, id=1323, 243.91125pt x 674.52pt>
 File: tutorialSlater.png Graphic file (type png)
 <use tutorialSlater.png>
 Package pdftex.def Info: tutorialSlater.png  used on input line 2826.
@@ -878,49 +877,49 @@ Overfull \vbox (3.09079pt too high) detected at line 2938
  []
 
 [72] [73] [74] [75] [76] [77]
-<officeChoiceHeatmap.png, id=1414, 655.44875pt x 362.35374pt>
+<officeChoiceHeatmap.png, id=1434, 655.44875pt x 362.35374pt>
 File: officeChoiceHeatmap.png Graphic file (type png)
 <use officeChoiceHeatmap.png>
 Package pdftex.def Info: officeChoiceHeatmap.png  used on input line 3517.
 (pdftex.def)             Requested size: 376.40381pt x 208.08638pt.
-<officeChoiceOutranking.png, id=1418, 460.72125pt x 322.20375pt>
+<officeChoiceOutranking.png, id=1438, 460.72125pt x 322.20375pt>
 File: officeChoiceOutranking.png Graphic file (type png)
 <use officeChoiceOutranking.png>
 Package pdftex.def Info: officeChoiceOutranking.png  used on input line 3542.
 (pdftex.def)             Requested size: 301.12305pt x 210.58531pt.
  [78 <./officeChoiceHeatmap.png>]
-<officeChoice.png, id=1434, 511.9125pt x 674.52pt>
+<officeChoice.png, id=1454, 511.9125pt x 674.52pt>
 File: officeChoice.png Graphic file (type png)
 <use officeChoice.png>
 Package pdftex.def Info: officeChoice.png  used on input line 3575.
 (pdftex.def)             Requested size: 225.84229pt x 297.58223pt.
  [79 <./officeChoiceOutranking.png>] [80 <./officeChoice.png>] [81] [82] [83] [
 84]
-<officeChoiceRanking.png, id=1481, 233.87375pt x 404.51125pt>
+<officeChoiceRanking.png, id=1501, 233.87375pt x 404.51125pt>
 File: officeChoiceRanking.png Graphic file (type png)
 <use officeChoiceRanking.png>
 Package pdftex.def Info: officeChoiceRanking.png  used on input line 3801.
 (pdftex.def)             Requested size: 150.56152pt x 260.42322pt.
  [85 <./officeChoiceRanking.png>]
-<AliceFo.png, id=1494, 158.5925pt x 223.83624pt>
+<AliceFo.png, id=1514, 158.5925pt x 223.83624pt>
 File: AliceFo.png Graphic file (type png)
 <use AliceFo.png>
 Package pdftex.def Info: AliceFo.png  used on input line 3852.
 (pdftex.def)             Requested size: 75.28076pt x 106.25159pt.
  [86 <./AliceFo.png>] [87] [88]
-<aliceCriteria.png, id=1529, 1115.16624pt x 603.25375pt>
+<aliceCriteria.png, id=1549, 1115.16624pt x 603.25375pt>
 File: aliceCriteria.png Graphic file (type png)
 <use aliceCriteria.png>
 Package pdftex.def Info: aliceCriteria.png  used on input line 4200.
 (pdftex.def)             Requested size: 452.96712pt x 245.03441pt.
-<aliceHeatmap.png, id=1532, 773.89125pt x 511.9125pt>
+<aliceHeatmap.png, id=1552, 773.89125pt x 511.9125pt>
 File: aliceHeatmap.png Graphic file (type png)
 <use aliceHeatmap.png>
 Package pdftex.def Info: aliceHeatmap.png  used on input line 4216.
 (pdftex.def)             Requested size: 452.96663pt x 299.62773pt.
  [89 <./aliceCriteria.png>]
 [90 <./aliceHeatmap.png>]
-<aliceRelationMap.png, id=1560, 691.58376pt x 527.9725pt>
+<aliceRelationMap.png, id=1580, 691.58376pt x 527.9725pt>
 File: aliceRelationMap.png Graphic file (type png)
 <use aliceRelationMap.png>
 Package pdftex.def Info: aliceRelationMap.png  used on input line 4274.
@@ -930,20 +929,20 @@ Underfull \vbox (badness 1509) detected at line 4347
  []
 
 [93]
-<aliceBestChoice.png, id=1595, 586.19pt x 452.69125pt>
+<aliceBestChoice.png, id=1615, 586.19pt x 452.69125pt>
 File: aliceBestChoice.png Graphic file (type png)
 <use aliceBestChoice.png>
 Package pdftex.def Info: aliceBestChoice.png  used on input line 4375.
 (pdftex.def)             Requested size: 301.12305pt x 232.54109pt.
  [94]
-<pairwiseComparison.png, id=1609, 656.4525pt x 803.0pt>
+<pairwiseComparison.png, id=1629, 656.4525pt x 803.0pt>
 File: pairwiseComparison.png Graphic file (type png)
 <use pairwiseComparison.png>
 Package pdftex.def Info: pairwiseComparison.png  used on input line 4390.
 (pdftex.def)             Requested size: 414.04419pt x 506.48082pt.
  [95 <./aliceBestChoice.png>] [96 <./pairwiseComparison.png>] [97]
 [98]
-<AliceChoice_unopposed.png, id=1651, 249.93375pt x 674.52pt>
+<AliceChoice_unopposed.png, id=1671, 249.93375pt x 674.52pt>
 File: AliceChoice_unopposed.png Graphic file (type png)
 <use AliceChoice_unopposed.png>
 Package pdftex.def Info: AliceChoice_unopposed.png  used on input line 4522.
@@ -956,391 +955,436 @@ Underfull \vbox (badness 10000) detected at line 4668
 Overfull \vbox (0.5249pt too high) detected at line 4668
  []
 
-[103] [104] [105] [106] [107] [108]
-Underfull \hbox (badness 10000) in paragraph at lines 4929--4931
-\T1/cmr/m/n/12 (https://docs.python.org/3/library/multiprocessing.html#contexts
--and-start-
- []
-
-[109] [110]
-Underfull \hbox (badness 8151) in paragraph at lines 5034--5035
-[]\T1/cmr/m/n/12 On a clas-sic intel-i7 equipped PC with four sin-gle threaded 
-cores, the
- []
-
-[111] [112] [113]
-<sparseRelationMap.png, id=1789, 453.695pt x 865.2325pt>
-File: sparseRelationMap.png Graphic file (type png)
-<use sparseRelationMap.png>
-Package pdftex.def Info: sparseRelationMap.png  used on input line 5150.
-(pdftex.def)             Requested size: 338.76343pt x 646.05788pt.
- [114] [115 <./sparseRelationMap.png>] [116]
-Underfull \hbox (badness 10000) in paragraph at lines 5245--5246
-[]\T1/cmr/m/n/12 We pro-vide there-fore the \T1/cmtt/m/n/12 cSparseIntegerOutra
-nkingDigraphs.
- []
-
-[117] [118]
-<rankingRecords.png, id=1821, 748.7975pt x 351.3125pt>
-File: rankingRecords.png Graphic file (type png)
-<use rankingRecords.png>
-Package pdftex.def Info: rankingRecords.png  used on input line 5365.
-(pdftex.def)             Requested size: 263.48267pt x 123.6152pt.
- [119]
-Overfull \vbox (2.55533pt too high) detected at line 5418
- []
-
-[120 <./rankingRecords.png>] [121]
-Underfull \vbox (badness 1590) detected at line 5502
- []
-
-[122]
-<converse-dual_rel_best10.png, id=1846, 626.34pt x 647.41875pt>
-File: converse-dual_rel_best10.png Graphic file (type png)
-<use converse-dual_rel_best10.png>
-Package pdftex.def Info: converse-dual_rel_best10.png  used on input line 5517.
-
-(pdftex.def)             Requested size: 301.12305pt x 311.26128pt.
- [123] [124 <./converse-dual_rel_best10.png>] [125] [126] [127]
-<examplePerfQuantiles.png, id=1892, 426.59375pt x 331.2375pt>
+[103] [104] [105] [106] [107] [108] [109] [110] [111]
+<examplePerfQuantiles.png, id=1805, 426.59375pt x 331.2375pt>
 File: examplePerfQuantiles.png Graphic file (type png)
 <use examplePerfQuantiles.png>
-Package pdftex.def Info: examplePerfQuantiles.png  used on input line 5755.
+Package pdftex.def Info: examplePerfQuantiles.png  used on input line 5088.
 (pdftex.def)             Requested size: 301.12305pt x 233.82571pt.
- [128 <./examplePerfQuantiles.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 5765--5767
+ [112 <./examplePerfQuantiles.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 5098--5100
 \T1/cmr/bx/n/12 Note:  \T1/cmr/m/n/12 It is im-por-tant to no-tice that the \T1
 /cmtt/m/n/12 sortingDigraphs.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 5765--5767
+Underfull \hbox (badness 10000) in paragraph at lines 5098--5100
 \T1/cmtt/m/n/12 OutrankingDigraph \T1/cmr/m/n/12 class, does not in-herit from 
 the generic \T1/cmtt/m/n/12 perfTabs.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 5765--5767
+Underfull \hbox (badness 10000) in paragraph at lines 5098--5100
 \T1/cmtt/m/n/12 PerformanceTableau \T1/cmr/m/n/12 class, but in-stead from the 
 \T1/cmtt/m/n/12 performanceQuantiles.
  []
 
 
-Underfull \hbox (badness 7851) in paragraph at lines 5765--5767
+Underfull \hbox (badness 7851) in paragraph at lines 5098--5100
 \T1/cmtt/m/n/12 PerformanceQuantiles \T1/cmr/m/n/12 class. The \T1/cmr/bx/n/12 
 ac-tions \T1/cmr/m/n/12 in such a \T1/cmtt/m/n/12 sortingDigraphs.
  []
 
 
-Overfull \vbox (2.3388pt too high) detected at line 5802
+Overfull \vbox (2.3388pt too high) detected at line 5135
  []
 
-[129] [130] [131]
-Underfull \hbox (badness 6348) in paragraph at lines 5885--5886
+[113] [114] [115]
+Underfull \hbox (badness 6348) in paragraph at lines 5218--5219
 []\T1/cmr/m/n/12 The same re-sult may more con-ve-niently be con-sulted in a br
 owser view
  []
 
-<heatMap1.png, id=1931, 528.97626pt x 669.50125pt>
+<heatMap1.png, id=1846, 528.97626pt x 669.50125pt>
 File: heatMap1.png Graphic file (type png)
 <use heatMap1.png>
-Package pdftex.def Info: heatMap1.png  used on input line 5896.
+Package pdftex.def Info: heatMap1.png  used on input line 5229.
 (pdftex.def)             Requested size: 301.12305pt x 381.11911pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 5899--5900
+Underfull \hbox (badness 10000) in paragraph at lines 5232--5233
 []\T1/cmr/m/n/12 Using fur-ther-more a spe-cialised ver-sion of the \T1/cmtt/m/
 n/12 transitiveDigraphs.
  []
 
-[132 <./heatMap1.png>]
-<normedRatingDigraph.png, id=1943, 670.505pt x 648.4225pt>
+[116 <./heatMap1.png>]
+<normedRatingDigraph.png, id=1856, 670.505pt x 648.4225pt>
 File: normedRatingDigraph.png Graphic file (type png)
 <use normedRatingDigraph.png>
-Package pdftex.def Info: normedRatingDigraph.png  used on input line 5912.
+Package pdftex.def Info: normedRatingDigraph.png  used on input line 5245.
 (pdftex.def)             Requested size: 376.40381pt x 364.0046pt.
- [133 <./normedRatingDigraph.png>]
-<heatMap2.png, id=1957, 482.80376pt x 793.96625pt>
+ [117 <./normedRatingDigraph.png>]
+<heatMap2.png, id=1870, 482.80376pt x 793.96625pt>
 File: heatMap2.png Graphic file (type png)
 <use heatMap2.png>
-Package pdftex.def Info: heatMap2.png  used on input line 6026.
+Package pdftex.def Info: heatMap2.png  used on input line 5359.
 (pdftex.def)             Requested size: 301.12305pt x 495.21004pt.
- [134] [135 <./heatMap2.png>] [136] [137]
-<tutorialGraph.png, id=2000, 398.48875pt x 260.975pt>
+ [118] [119 <./heatMap2.png>] [120]
+<ratingData.png, id=1907, 655.44875pt x 914.41624pt>
+File: ratingData.png Graphic file (type png)
+<use ratingData.png>
+Package pdftex.def Info: ratingData.png  used on input line 5438.
+(pdftex.def)             Requested size: 451.68457pt x 630.15259pt.
+ [121] [122 <./ratingData.png>]
+<spiegelCriteria.png, id=1926, 1062.97125pt x 460.72125pt>
+File: spiegelCriteria.png Graphic file (type png)
+<use spiegelCriteria.png>
+Package pdftex.def Info: spiegelCriteria.png  used on input line 5455.
+(pdftex.def)             Requested size: 452.96518pt x 196.3347pt.
+ [123 <./spiegelCriteria.png>]
+[124] [125]
+<score9Limits.png, id=1952, 552.0625pt x 528.97626pt>
+File: score9Limits.png Graphic file (type png)
+<use score9Limits.png>
+Package pdftex.def Info: score9Limits.png  used on input line 5576.
+(pdftex.def)             Requested size: 263.48267pt x 252.47705pt.
+ [126 <./score9Limits.png>]
+<nineTilingResult.png, id=1965, 492.84125pt x 891.33pt>
+File: nineTilingResult.png Graphic file (type png)
+<use nineTilingResult.png>
+Package pdftex.def Info: nineTilingResult.png  used on input line 5615.
+(pdftex.def)             Requested size: 387.3249pt x 700.51164pt.
+ [127]
+Overfull \vbox (26.83276pt too high) has occurred while \output is active []
+
+
+[128 <./nineTilingResult.png>]
+<ratingResult.png, id=1979, 701.62125pt x 1156.32pt>
+File: ratingResult.png Graphic file (type png)
+<use ratingResult.png>
+Package pdftex.def Info: ratingResult.png  used on input line 5634.
+(pdftex.def)             Requested size: 425.05492pt x 700.50208pt.
+ [129]
+Overfull \vbox (26.83276pt too high) has occurred while \output is active []
+
+
+[130 <./ratingResult.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 5696--5698
+\T1/cmr/m/n/12 (https://docs.python.org/3/library/multiprocessing.html#contexts
+-and-start-
+ []
+
+[131] [132]
+Overfull \vbox (3.24768pt too high) detected at line 5799
+ []
+
+[133]
+Underfull \hbox (badness 8151) in paragraph at lines 5801--5802
+[]\T1/cmr/m/n/12 On a clas-sic intel-i7 equipped PC with four sin-gle threaded 
+cores, the
+ []
+
+[134] [135]
+<sparseRelationMap.png, id=2030, 453.695pt x 865.2325pt>
+File: sparseRelationMap.png Graphic file (type png)
+<use sparseRelationMap.png>
+Package pdftex.def Info: sparseRelationMap.png  used on input line 5917.
+(pdftex.def)             Requested size: 338.76343pt x 646.05788pt.
+ [136] [137 <./sparseRelationMap.png>] [138]
+Underfull \hbox (badness 10000) in paragraph at lines 6012--6013
+[]\T1/cmr/m/n/12 We pro-vide there-fore the \T1/cmtt/m/n/12 cSparseIntegerOutra
+nkingDigraphs.
+ []
+
+[139] [140]
+<rankingRecords.png, id=2061, 748.7975pt x 351.3125pt>
+File: rankingRecords.png Graphic file (type png)
+<use rankingRecords.png>
+Package pdftex.def Info: rankingRecords.png  used on input line 6132.
+(pdftex.def)             Requested size: 263.48267pt x 123.6152pt.
+ [141]
+Overfull \vbox (2.55533pt too high) detected at line 6185
+ []
+
+[142 <./rankingRecords.png>] [143]
+Underfull \vbox (badness 1590) detected at line 6269
+ []
+
+[144]
+<converse-dual_rel_best10.png, id=2087, 626.34pt x 647.41875pt>
+File: converse-dual_rel_best10.png Graphic file (type png)
+<use converse-dual_rel_best10.png>
+Package pdftex.def Info: converse-dual_rel_best10.png  used on input line 6284.
+
+(pdftex.def)             Requested size: 301.12305pt x 311.26128pt.
+ [145] [146 <./converse-dual_rel_best10.png>] [147]
+<tutorialGraph.png, id=2118, 398.48875pt x 260.975pt>
 File: tutorialGraph.png Graphic file (type png)
 <use tutorialGraph.png>
-Package pdftex.def Info: tutorialGraph.png  used on input line 6165.
+Package pdftex.def Info: tutorialGraph.png  used on input line 6421.
 (pdftex.def)             Requested size: 301.12305pt x 197.21611pt.
- [138 <./tutorialGraph.png>] [139]
-<tutorial-3-coloring.png, id=2011, 398.48875pt x 276.03125pt>
+ [148] [149 <./tutorialGraph.png>]
+<tutorial-3-coloring.png, id=2128, 398.48875pt x 276.03125pt>
 File: tutorial-3-coloring.png Graphic file (type png)
 <use tutorial-3-coloring.png>
-Package pdftex.def Info: tutorial-3-coloring.png  used on input line 6253.
+Package pdftex.def Info: tutorial-3-coloring.png  used on input line 6509.
 (pdftex.def)             Requested size: 301.12305pt x 208.59395pt.
- [140 <./tutorial-3-coloring.png>]
-<tutorial-2-coloring.png, id=2018, 398.48875pt x 276.03125pt>
+ [150]
+<tutorial-2-coloring.png, id=2134, 398.48875pt x 276.03125pt>
 File: tutorial-2-coloring.png Graphic file (type png)
 <use tutorial-2-coloring.png>
-Package pdftex.def Info: tutorial-2-coloring.png  used on input line 6279.
+Package pdftex.def Info: tutorial-2-coloring.png  used on input line 6535.
 (pdftex.def)             Requested size: 301.12305pt x 208.59395pt.
- [141 <./tutorial-2-coloring.png>] [142] [143]
-<maxMatchingcycleGraph.png, id=2033, 441.65pt x 487.8225pt>
+ [151 <./tutorial-3-coloring.png>] [152 <./tutorial-2-coloring.png>] [153] [154
+]
+<maxMatchingcycleGraph.png, id=2155, 441.65pt x 487.8225pt>
 File: maxMatchingcycleGraph.png Graphic file (type png)
 <use maxMatchingcycleGraph.png>
-Package pdftex.def Info: maxMatchingcycleGraph.png  used on input line 6424.
+Package pdftex.def Info: maxMatchingcycleGraph.png  used on input line 6680.
 (pdftex.def)             Requested size: 225.84229pt x 249.4561pt.
- [144 <./maxMatchingcycleGraph.png>]
-<grid-15-15-ising.png, id=2041, 674.52pt x 595.22375pt>
+
+Overfull \vbox (1.08887pt too high) detected at line 6703
+ []
+
+[155 <./maxMatchingcycleGraph.png>]
+<grid-15-15-ising.png, id=2162, 674.52pt x 595.22375pt>
 File: grid-15-15-ising.png Graphic file (type png)
 <use grid-15-15-ising.png>
-Package pdftex.def Info: grid-15-15-ising.png  used on input line 6453.
+Package pdftex.def Info: grid-15-15-ising.png  used on input line 6709.
 (pdftex.def)             Requested size: 451.68457pt x 398.58896pt.
- [145]
-Overfull \vbox (1.8217pt too high) detected at line 6501
- []
-
-[146 <./grid-15-15-ising.png>] [147] [148]
-<cg12.png, id=2073, 631.35875pt x 674.52pt>
+ [156 <./grid-15-15-ising.png>] [157]
+[158]
+<cg12.png, id=2191, 631.35875pt x 674.52pt>
 File: cg12.png Graphic file (type png)
 <use cg12.png>
-Package pdftex.def Info: cg12.png  used on input line 6575.
+Package pdftex.def Info: cg12.png  used on input line 6831.
 (pdftex.def)             Requested size: 301.12305pt x 321.70746pt.
- [149 <./cg12.png>] [150]
-Overfull \vbox (0.55684pt too high) detected at line 6698
+ [159 <./cg12.png>] [160]
+Overfull \vbox (0.55684pt too high) detected at line 6954
  []
 
-[151]
-<c12.png, id=2096, 372.1905pt x 341.47575pt>
+[161]
+<c12.png, id=2213, 372.1905pt x 341.47575pt>
 File: c12.png Graphic file (type png)
 <use c12.png>
-Package pdftex.def Info: c12.png  used on input line 6706.
+Package pdftex.def Info: c12.png  used on input line 6962.
 (pdftex.def)             Requested size: 301.12305pt x 276.27078pt.
- [152 <./c12.png (PNG copy)>]
-<random3RegularGraph.png, id=2114, 493.845pt x 386.44376pt>
+ [162 <./c12.png (PNG copy)>]
+<random3RegularGraph.png, id=2232, 493.845pt x 386.44376pt>
 File: random3RegularGraph.png Graphic file (type png)
 <use random3RegularGraph.png>
-Package pdftex.def Info: random3RegularGraph.png  used on input line 6766.
+Package pdftex.def Info: random3RegularGraph.png  used on input line 7022.
 (pdftex.def)             Requested size: 263.48267pt x 206.17633pt.
- [153]
-<random3RegularGraph-mis.png, id=2126, 493.845pt x 386.44376pt>
+ [163]
+<random3RegularGraph-mis.png, id=2244, 493.845pt x 386.44376pt>
 File: random3RegularGraph-mis.png Graphic file (type png)
 <use random3RegularGraph-mis.png>
-Package pdftex.def Info: random3RegularGraph-mis.png  used on input line 6787.
+Package pdftex.def Info: random3RegularGraph-mis.png  used on input line 7043.
 (pdftex.def)             Requested size: 263.48267pt x 206.17633pt.
- [154 <./random3RegularGraph.png> <./random3RegularGraph-mis.png>]
-Underfull \vbox (badness 1675) detected at line 6888
+ [164 <./random3RegularGraph.png> <./random3RegularGraph-mis.png>]
+Underfull \vbox (badness 1675) detected at line 7144
  []
 
-[155]
-Underfull \vbox (badness 10000) detected at line 6888
+[165]
+Underfull \vbox (badness 10000) detected at line 7144
  []
 
 
-Underfull \vbox (badness 10000) detected at line 6888
+Underfull \vbox (badness 10000) detected at line 7144
  []
 
-[156]
-<random3RegularGraphKernelOrbit.png, id=2147, 989.6975pt x 386.44376pt>
+[166]
+<random3RegularGraphKernelOrbit.png, id=2264, 989.6975pt x 386.44376pt>
 File: random3RegularGraphKernelOrbit.png Graphic file (type png)
 <use random3RegularGraphKernelOrbit.png>
 Package pdftex.def Info: random3RegularGraphKernelOrbit.png  used on input line
- 6896.
+ 7152.
 (pdftex.def)             Requested size: 452.97095pt x 176.87pt.
 File: maxMatchingcycleGraph.png Graphic file (type png)
 <use maxMatchingcycleGraph.png>
-Package pdftex.def Info: maxMatchingcycleGraph.png  used on input line 6920.
+Package pdftex.def Info: maxMatchingcycleGraph.png  used on input line 7176.
 (pdftex.def)             Requested size: 225.84229pt x 249.4561pt.
- [157 <./random3RegularGraphKernelOrbit.png>] [158] [159] [160]
-<dualChordlessCircuit.png, id=2176, 382.42876pt x 345.29pt>
+ [167 <./random3RegularGraphKernelOrbit.png>] [168] [169] [170]
+<dualChordlessCircuit.png, id=2294, 382.42876pt x 345.29pt>
 File: dualChordlessCircuit.png Graphic file (type png)
 <use dualChordlessCircuit.png>
-Package pdftex.def Info: dualChordlessCircuit.png  used on input line 7072.
+Package pdftex.def Info: dualChordlessCircuit.png  used on input line 7328.
 (pdftex.def)             Requested size: 263.48267pt x 237.90788pt.
- [161 <./dualChordlessCircuit.png>]
-<weakChordlessCircuit.png, id=2186, 791.95876pt x 404.51125pt>
+ [171 <./dualChordlessCircuit.png>]
+<weakChordlessCircuit.png, id=2303, 791.95876pt x 404.51125pt>
 File: weakChordlessCircuit.png Graphic file (type png)
 <use weakChordlessCircuit.png>
-Package pdftex.def Info: weakChordlessCircuit.png  used on input line 7099.
+Package pdftex.def Info: weakChordlessCircuit.png  used on input line 7355.
 (pdftex.def)             Requested size: 414.04419pt x 211.48276pt.
- [162 <./weakChordlessCircuit.png>]
-<randomLaterality.png, id=2194, 382.42876pt x 601.24625pt>
+ [172 <./weakChordlessCircuit.png>]
+<randomLaterality.png, id=2311, 382.42876pt x 601.24625pt>
 File: randomLaterality.png Graphic file (type png)
 <use randomLaterality.png>
-Package pdftex.def Info: randomLaterality.png  used on input line 7124.
+Package pdftex.def Info: randomLaterality.png  used on input line 7380.
 (pdftex.def)             Requested size: 225.84229pt x 355.06247pt.
- [163 <./randomLaterality.png>]
-Overfull \vbox (1.2909pt too high) detected at line 7184
+ [173 <./randomLaterality.png>]
+Overfull \vbox (1.2909pt too high) detected at line 7440
  []
 
-[164]
-<orientedLaterality.png, id=2209, 382.42876pt x 502.87875pt>
+[174]
+<orientedLaterality.png, id=2327, 382.42876pt x 502.87875pt>
 File: orientedLaterality.png Graphic file (type png)
 <use orientedLaterality.png>
-Package pdftex.def Info: orientedLaterality.png  used on input line 7201.
+Package pdftex.def Info: orientedLaterality.png  used on input line 7457.
 (pdftex.def)             Requested size: 225.84229pt x 296.97212pt.
- [165 <./orientedLaterality.png>]
-<randomOutranking.png, id=2217, 945.5325pt x 389.455pt>
+ [175 <./orientedLaterality.png>]
+<randomOutranking.png, id=2335, 945.5325pt x 389.455pt>
 File: randomOutranking.png Graphic file (type png)
 <use randomOutranking.png>
-Package pdftex.def Info: randomOutranking.png  used on input line 7231.
+Package pdftex.def Info: randomOutranking.png  used on input line 7487.
 (pdftex.def)             Requested size: 414.04419pt x 170.54065pt.
- [166 <./randomOutranking.png>]
-<tutOutranking.png, id=2229, 427.5975pt x 601.24625pt>
+ [176 <./randomOutranking.png>]
+<tutOutranking.png, id=2347, 427.5975pt x 601.24625pt>
 File: tutOutranking.png Graphic file (type png)
 <use tutOutranking.png>
-Package pdftex.def Info: tutOutranking.png  used on input line 7248.
+Package pdftex.def Info: tutOutranking.png  used on input line 7504.
 (pdftex.def)             Requested size: 225.84229pt x 317.55807pt.
- [167 <./tutOutranking.png>]
-<bestWorstOrientation.png, id=2237, 384.43625pt x 403.5075pt>
+ [177 <./tutOutranking.png>]
+<bestWorstOrientation.png, id=2355, 384.43625pt x 403.5075pt>
 File: bestWorstOrientation.png Graphic file (type png)
 <use bestWorstOrientation.png>
-Package pdftex.def Info: bestWorstOrientation.png  used on input line 7312.
+Package pdftex.def Info: bestWorstOrientation.png  used on input line 7568.
 (pdftex.def)             Requested size: 225.84229pt x 237.05145pt.
- [168]
-<outrankingResult.png, id=2247, 850.17625pt x 486.81876pt>
+ [178]
+<outrankingResult.png, id=2364, 850.17625pt x 486.81876pt>
 File: outrankingResult.png Graphic file (type png)
 <use outrankingResult.png>
-Package pdftex.def Info: outrankingResult.png  used on input line 7326.
+Package pdftex.def Info: outrankingResult.png  used on input line 7582.
 (pdftex.def)             Requested size: 414.04419pt x 237.08734pt.
- [169 <./bestWorstOrientation.png> <./outrankingResult.png>] [170] [171] [172]
-<randomSplitGraph.png, id=2289, 398.48875pt x 381.425pt>
+ [179 <./bestWorstOrientation.png> <./outrankingResult.png>] [180] [181] [182]
+<randomSplitGraph.png, id=2407, 398.48875pt x 381.425pt>
 File: randomSplitGraph.png Graphic file (type png)
 <use randomSplitGraph.png>
-Package pdftex.def Info: randomSplitGraph.png  used on input line 7518.
+Package pdftex.def Info: randomSplitGraph.png  used on input line 7774.
 (pdftex.def)             Requested size: 263.48267pt x 252.20688pt.
- [173] [174 <./randomSplitGraph.png>]
-<berge1.png, id=2312, 398.48875pt x 237.88875pt>
+ [183] [184 <./randomSplitGraph.png>]
+<berge1.png, id=2428, 398.48875pt x 237.88875pt>
 File: berge1.png Graphic file (type png)
 <use berge1.png>
-Package pdftex.def Info: berge1.png  used on input line 7609.
+Package pdftex.def Info: berge1.png  used on input line 7865.
 (pdftex.def)             Requested size: 301.12305pt x 179.77005pt.
- [175] [176 <./berge1.png>]
-<berge2.png, id=2322, 398.48875pt x 247.92625pt>
+ [185] [186 <./berge1.png>]
+<berge2.png, id=2440, 398.48875pt x 247.92625pt>
 File: berge2.png Graphic file (type png)
 <use berge2.png>
-Package pdftex.def Info: berge2.png  used on input line 7656.
+Package pdftex.def Info: berge2.png  used on input line 7912.
 (pdftex.def)             Requested size: 301.12305pt x 187.3553pt.
- [177 <./berge2.png>]
-<permutationGraph.png, id=2330, 398.48875pt x 259.97125pt>
+ [187 <./berge2.png>]
+<permutationGraph.png, id=2448, 398.48875pt x 259.97125pt>
 File: permutationGraph.png Graphic file (type png)
 <use permutationGraph.png>
-Package pdftex.def Info: permutationGraph.png  used on input line 7689.
+Package pdftex.def Info: permutationGraph.png  used on input line 7945.
 (pdftex.def)             Requested size: 225.84229pt x 147.33624pt.
-<coloredPermutationGraph.png, id=2332, 398.48875pt x 259.97125pt>
+<coloredPermutationGraph.png, id=2450, 398.48875pt x 259.97125pt>
 File: coloredPermutationGraph.png Graphic file (type png)
 <use coloredPermutationGraph.png>
-Package pdftex.def Info: coloredPermutationGraph.png  used on input line 7713.
+Package pdftex.def Info: coloredPermutationGraph.png  used on input line 7969.
 (pdftex.def)             Requested size: 225.84229pt x 147.33624pt.
- [178 <./permutationGraph.png> <./coloredPermutationGraph.png>]
-<perm_permutationGraph.png, id=2343, 460.72125pt x 239.89626pt>
+ [188 <./permutationGraph.png> <./coloredPermutationGraph.png>]
+<perm_permutationGraph.png, id=2461, 460.72125pt x 239.89626pt>
 File: perm_permutationGraph.png Graphic file (type png)
 <use perm_permutationGraph.png>
-Package pdftex.def Info: perm_permutationGraph.png  used on input line 7729.
+Package pdftex.def Info: perm_permutationGraph.png  used on input line 7985.
 (pdftex.def)             Requested size: 301.12305pt x 156.79092pt.
 
-Overfull \vbox (10.53098pt too high) detected at line 7755
+Overfull \vbox (10.53098pt too high) detected at line 8011
  []
 
-[179 <./perm_permutationGraph.png>]
-<oriented_permutationGraph.png, id=2351, 209.78375pt x 308.15125pt>
+[189 <./perm_permutationGraph.png>]
+<oriented_permutationGraph.png, id=2469, 209.78375pt x 308.15125pt>
 File: oriented_permutationGraph.png Graphic file (type png)
 <use oriented_permutationGraph.png>
-Package pdftex.def Info: oriented_permutationGraph.png  used on input line 7761
+Package pdftex.def Info: oriented_permutationGraph.png  used on input line 8017
 .
 (pdftex.def)             Requested size: 150.56152pt x 221.1587pt.
- [180 <./oriented_permutationGraph.png>]
-<randomGraph4335.png, id=2359, 398.48875pt x 329.23pt>
+ [190 <./oriented_permutationGraph.png>]
+<randomGraph4335.png, id=2476, 398.48875pt x 329.23pt>
 File: randomGraph4335.png Graphic file (type png)
 <use randomGraph4335.png>
-Package pdftex.def Info: randomGraph4335.png  used on input line 7804.
+Package pdftex.def Info: randomGraph4335.png  used on input line 8060.
 (pdftex.def)             Requested size: 301.12305pt x 248.7957pt.
 
-[181 <./randomGraph4335.png>]
-<transOrientGraph.png, id=2369, 398.48875pt x 329.23pt>
+[191 <./randomGraph4335.png>]
+<transOrientGraph.png, id=2486, 398.48875pt x 329.23pt>
 File: transOrientGraph.png Graphic file (type png)
 <use transOrientGraph.png>
-Package pdftex.def Info: transOrientGraph.png  used on input line 7834.
+Package pdftex.def Info: transOrientGraph.png  used on input line 8090.
 (pdftex.def)             Requested size: 301.12305pt x 248.7957pt.
- [182 <./transOrientGraph.png>]
-<transOrientDualGraph.png, id=2377, 441.65pt x 277.035pt>
+ [192 <./transOrientGraph.png>]
+<transOrientDualGraph.png, id=2495, 441.65pt x 277.035pt>
 File: transOrientDualGraph.png Graphic file (type png)
 <use transOrientDualGraph.png>
-Package pdftex.def Info: transOrientDualGraph.png  used on input line 7865.
+Package pdftex.def Info: transOrientDualGraph.png  used on input line 8121.
 (pdftex.def)             Requested size: 301.12305pt x 188.89279pt.
- [183 <./transOrientDualGraph.png>] [184]
-<isomorphicPerms.png, id=2396, 921.4425pt x 396.48125pt>
+ [193 <./transOrientDualGraph.png>] [194]
+<isomorphicPerms.png, id=2514, 921.4425pt x 396.48125pt>
 File: isomorphicPerms.png Graphic file (type png)
 <use isomorphicPerms.png>
-Package pdftex.def Info: isomorphicPerms.png  used on input line 7957.
+Package pdftex.def Info: isomorphicPerms.png  used on input line 8213.
 (pdftex.def)             Requested size: 452.95897pt x 194.90668pt.
- [185 <./isomorphicPerms.png>]
-<tutRandomTree.png, id=2415, 398.48875pt x 578.16pt>
+ [195 <./isomorphicPerms.png>]
+<tutRandomTree.png, id=2533, 398.48875pt x 578.16pt>
 File: tutRandomTree.png Graphic file (type png)
 <use tutRandomTree.png>
-Package pdftex.def Info: tutRandomTree.png  used on input line 8016.
+Package pdftex.def Info: tutRandomTree.png  used on input line 8272.
 (pdftex.def)             Requested size: 225.84229pt x 327.66672pt.
- [186] [187 <./tutRandomTree.png>]
-<tutPruefTree.png, id=2431, 478.78876pt x 421.575pt>
+ [196] [197 <./tutRandomTree.png>]
+<tutPruefTree.png, id=2548, 478.78876pt x 421.575pt>
 File: tutPruefTree.png Graphic file (type png)
 <use tutPruefTree.png>
-Package pdftex.def Info: tutPruefTree.png  used on input line 8059.
+Package pdftex.def Info: tutPruefTree.png  used on input line 8315.
 (pdftex.def)             Requested size: 263.48267pt x 231.9956pt.
- [188 <./tutPruefTree.png>]
-<test62.png, id=2441, 398.48875pt x 368.37625pt>
+ [198 <./tutPruefTree.png>]
+<test62.png, id=2559, 398.48875pt x 368.37625pt>
 File: test62.png Graphic file (type png)
 <use test62.png>
-Package pdftex.def Info: test62.png  used on input line 8113.
+Package pdftex.def Info: test62.png  used on input line 8369.
 (pdftex.def)             Requested size: 263.48267pt x 243.57874pt.
- [189] [190 <./test62.png>]
-<randomSpanningTree.png, id=2459, 398.48875pt x 333.245pt>
+ [199] [200 <./test62.png>]
+<randomSpanningTree.png, id=2577, 398.48875pt x 333.245pt>
 File: randomSpanningTree.png Graphic file (type png)
 <use randomSpanningTree.png>
-Package pdftex.def Info: randomSpanningTree.png  used on input line 8168.
+Package pdftex.def Info: randomSpanningTree.png  used on input line 8424.
 (pdftex.def)             Requested size: 225.84229pt x 188.86345pt.
- [191 <./randomSpanningTree.png>]
-<spanningForest.png, id=2466, 587.19376pt x 499.8675pt>
+ [201 <./randomSpanningTree.png>]
+<spanningForest.png, id=2584, 587.19376pt x 499.8675pt>
 File: spanningForest.png Graphic file (type png)
 <use spanningForest.png>
-Package pdftex.def Info: spanningForest.png  used on input line 8195.
+Package pdftex.def Info: spanningForest.png  used on input line 8451.
 (pdftex.def)             Requested size: 263.48267pt x 224.29759pt.
- [192 <./spanningForest.png>]
-<bestDeterminedSpanningTree.png, id=2481, 398.48875pt x 280.04625pt>
+ [202 <./spanningForest.png>]
+<bestDeterminedSpanningTree.png, id=2598, 398.48875pt x 280.04625pt>
 File: bestDeterminedSpanningTree.png Graphic file (type png)
 <use bestDeterminedSpanningTree.png>
-Package pdftex.def Info: bestDeterminedSpanningTree.png  used on input line 827
-4.
+Package pdftex.def Info: bestDeterminedSpanningTree.png  used on input line 853
+0.
 (pdftex.def)             Requested size: 263.48267pt x 185.17293pt.
- [193] [194 <./bestDeterminedSpanningTree.png>]
-Underfull \hbox (badness 7362) in paragraph at lines 8312--8313
+ [203] [204 <./bestDeterminedSpanningTree.png>]
+Underfull \hbox (badness 7362) in paragraph at lines 8568--8569
 \T1/cmr/m/it/12 te-ger Se-quences\T1/cmr/m/n/12 , Vol. 11 Ar-ti-cle 08.5.7 ([][
 ]openly ac-ces-si-ble here[][]
  []
 
 
-Underfull \hbox (badness 5105) in paragraph at lines 8318--8319
+Underfull \hbox (badness 5105) in paragraph at lines 8574--8575
 \T1/cmr/m/n/12 nels from bipo-lar val-ued di-graphs^^Q. \T1/cmr/m/it/12 Eu-ro-p
 ean Jour-nal of Op-er-a-
  []
 
-[195] (./digraph3Tutorial.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 8343.
- [196]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 8343.
+[205] (./digraph3Tutorial.ind)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 8599.
+ [206]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 8599.
  (./digraph3Tutorial.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 8343.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 8343.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 8599.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 8599.
 
 Package rerunfilecheck Info: File `digraph3Tutorial.out' has not changed.
-(rerunfilecheck)             Checksum: 2FF0EBD293F19D68A8663C4A650C0BAE;21942.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 8343.
+(rerunfilecheck)             Checksum: 42E3B57FA4F65636B2E31F9896EBCBFD;22938.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 8599.
  ) 
 Here is how much of TeX's memory you used:
- 15282 strings out of 482504
- 224265 string characters out of 5947330
- 656285 words of memory out of 5000000
- 29231 multiletter control sequences out of 15000+600000
+ 15363 strings out of 482504
+ 225773 string characters out of 5947330
+ 660114 words of memory out of 5000000
+ 29278 multiletter control sequences out of 15000+600000
  564467 words of font info for 98 fonts, out of 8000000 for 9000
  396 hyphenation exceptions out of 8191
- 38i,12n,49p,1412b,1527s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,12n,49p,1412b,1571s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecss1200.
 600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecso1
 440.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/e
@@ -1349,11 +1393,11 @@ ec/tcit1095.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknap
 pen/ec/ecit1095.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/j
 knappen/ec/ectt1728.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfo
 ur/jknappen/ec/ectt1000.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts/pk/
-ljfour/jknappen/ec/ecrm1000.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts
-/pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/bisdorff/.texlive2019/texmf-var/f
-onts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/bisdorff/.texlive2019/texmf-v
-ar/fonts/pk/ljfour/jknappen/ec/ectt1440.600pk> </home/bisdorff/.texlive2019/tex
-mf-var/fonts/pk/ljfour/jknappen/ec/tctt1095.600pk> </home/bisdorff/.texlive2019
+ljfour/jknappen/ec/ecrm0700.600pk> </home/bisdorff/.texlive2019/texmf-var/fonts
+/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/bisdorff/.texlive2019/texmf-var/f
+onts/pk/ljfour/jknappen/ec/ectt1440.600pk> </home/bisdorff/.texlive2019/texmf-v
+ar/fonts/pk/ljfour/jknappen/ec/tctt1095.600pk> </home/bisdorff/.texlive2019/tex
+mf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/bisdorff/.texlive2019
 /texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </home/bisdorff/.texlive
 2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1095.600pk> </home/bisdorff/.tex
 live2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsx1440.600pk> </home/bisdorff/
@@ -1384,10 +1428,10 @@ e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on digraph3Tutorial.pdf (197 pages, 4071371 bytes).
+Output written on digraph3Tutorial.pdf (207 pages, 4802262 bytes).
 PDF statistics:
- 3807 PDF objects out of 4296 (max. 8388607)
- 2428 compressed objects within 25 object streams
- 650 named destinations out of 1000 (max. 500000)
- 1246 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3934 PDF objects out of 4296 (max. 8388607)
+ 2530 compressed objects within 26 object streams
+ 679 named destinations out of 1000 (max. 500000)
+ 1303 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -6469,7 +6469,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </td></tr></table></div>
 </div>
 <div class="figure align-center" id="score9limits">
-<a class="reference internal image-reference" href="_images/score9Limits.png"><img alt="_images/score9Limits.png" src="_images/score9Limits.png" style="width: 450px;" /></a>
+<a class="reference internal image-reference" href="_images/score9Limits.png"><img alt="_images/score9Limits.png" src="_images/score9Limits.png" style="width: 350px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 40 </span><span class="caption-text">9-tiling score limits per academic discipline</span><a class="headerlink" href="#score9limits" title="Permalink to this image">¶</a></p>
 </div>
 <p>The history sizes reported in <a class="reference internal" href="#performancequantiles"><span class="std std-numref">Listing 76</span></a> indicate the number of Universities offering each one of the fifteen disciplines. <em>German Studies</em>, for instance, are thus offered in 39 out of 41 Universities, whereas <em>Electrical</em> and <em>Mechanical Engineering</em> are only offered in 14, respectively 13 Instituions. None of the fifteen disciplines are offered in all the 41 Universities.</p>
@@ -6508,26 +6508,27 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>The average enrolment quality of the Universities of <em>Freiburg</em> and <em>München</em>, as well as of the Technical University of <em>München</em> are first rated (see <a class="reference internal" href="#ninetiling"><span class="std std-numref">Listing 77</span></a> Line 5). The University of <em>Duisburg</em> is last rated (Line 15). Midfield appear to be the Universities of <em>Jena</em>, <em>Dresden</em>, <em>Würzburg</em>, <em>Marburg</em>, <em>Saarbrücken</em>, <em>Kaiserslautern</em>, <em>Berlin</em> (Frei), <em>Chemnitz</em>, <em>Erlangen-Nürnberg</em>, <em>Göttingen</em>, <em>Trier</em> and <em>Köln</em>.</p>
-<p>We may nicely illustrate this 9-tiles rating result with the help of a corresponding heatmap view.</p>
+<p>The average enrolment quality at the Universities of <em>Freiburg</em> and <em>München</em>, as well as at the Technical University of <em>München</em> are first rated (see <a class="reference internal" href="#ninetiling"><span class="std std-numref">Listing 77</span></a> Line 5). Last-rated appears the average enrolment quality at the University of <em>Duisburg</em> (Line 15). Midfield appear to be the Universities of <em>Jena</em>, <em>Dresden</em>, <em>Würzburg</em>, <em>Marburg</em>, <em>Saarbrücken</em>, <em>Kaiserslautern</em>, <em>Berlin</em> (Frei), <em>Chemnitz</em>, <em>Erlangen-Nürnberg</em>, <em>Göttingen</em>, <em>Trier</em> and <em>Köln</em>.</p>
+<p>We may nicely illustrate this rating result with the help of a corresponding heatmap view.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>\
 <span class="go">                ndigits=1,rankingRule=&#39;NetFlows&#39;)</span>
 </pre></div>
 </div>
 <div class="figure align-center" id="ninetiledheatmap">
-<a class="reference internal image-reference" href="_images/nineTilingResult.png"><img alt="_images/nineTilingResult.png" src="_images/nineTilingResult.png" style="width: 700px;" /></a>
+<a class="reference internal image-reference" href="_images/nineTilingResult.png"><img alt="_images/nineTilingResult.png" src="_images/nineTilingResult.png" style="width: 650px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 41 </span><span class="caption-text">Heatmap view of the 9-tiles rating result</span><a class="headerlink" href="#ninetiledheatmap" title="Permalink to this image">¶</a></p>
 </div>
+<p>The ranking correlation between the pairwise outranking situations and the shown <em>NetFlows</em> ranking is quite high ( +0.923, see <a class="reference internal" href="#ninetiledheatmap"><span class="std std-numref">Fig. 41</span></a> first row).</p>
 <p>A corresponding graphviz drawing gives the following result.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;ratingResult&#39;</span><span class="p">,</span>\
-<span class="go">                             graphSize=&#39;11,11&#39;)</span>
+<span class="go">                             graphSize=&#39;12,12&#39;)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">Exporting to ratingResult.dot</span>
 <span class="go">dot -Grankdir=TB -Tpdf dot -o ratingResult.pdf</span>
 </pre></div>
 </div>
 <div class="figure align-center" id="ratingresult">
-<a class="reference internal image-reference" href="_images/ratingResult.png"><img alt="_images/ratingResult.png" src="_images/ratingResult.png" style="width: 800px;" /></a>
+<a class="reference internal image-reference" href="_images/ratingResult.png"><img alt="_images/ratingResult.png" src="_images/ratingResult.png" style="width: 650px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 42 </span><span class="caption-text">Graphviz drawing of the 9-tiles rating result</span><a class="headerlink" href="#ratingresult" title="Permalink to this image">¶</a></p>
 </div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>

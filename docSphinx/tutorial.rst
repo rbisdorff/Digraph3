@@ -4466,7 +4466,7 @@ We are going to rate the Universities with a normed 9-tiles rating procedure. Th
 
 .. figure:: score9Limits.png
    :name: score9Limits
-   :width: 450 px
+   :width: 350 px
    :align: center
 
    9-tiling score limits per academic discipline
@@ -4496,31 +4496,33 @@ We add, now, these nine-tiling score limits to the 41 Universities and sort out,
                     'boc', 'bie']
      [0.11 - 0.22[ ['duis']
 
-The average enrolment quality of the Universities of *Freiburg* and *München*, as well as of the Technical University of *München* are first rated (see :numref:`ninetiling` Line 5). The University of *Duisburg* is last rated (Line 15). Midfield appear to be the Universities of *Jena*, *Dresden*, *Würzburg*, *Marburg*, *Saarbrücken*, *Kaiserslautern*, *Berlin* (Frei), *Chemnitz*, *Erlangen-Nürnberg*, *Göttingen*, *Trier* and *Köln*.
+The average enrolment quality at the Universities of *Freiburg* and *München*, as well as at the Technical University of *München* are first rated (see :numref:`ninetiling` Line 5). Last-rated appears the average enrolment quality at the University of *Duisburg* (Line 15). Midfield appear to be the Universities of *Jena*, *Dresden*, *Würzburg*, *Marburg*, *Saarbrücken*, *Kaiserslautern*, *Berlin* (Frei), *Chemnitz*, *Erlangen-Nürnberg*, *Göttingen*, *Trier* and *Köln*.
 
-We may nicely illustrate this 9-tiles rating result with the help of a corresponding heatmap view.
+We may nicely illustrate this rating result with the help of a corresponding heatmap view.
 
 >>> nqr.showHTMLRatingHeatmap(colorLevels=7,\
                 ndigits=1,rankingRule='NetFlows')
 
 .. figure:: nineTilingResult.png
    :name: ninetiledHeatmap
-   :width: 700 px
+   :width: 650 px
    :align: center
 
-   Heatmap view of the 9-tiles rating result 
+   Heatmap view of the 9-tiles rating result
+
+The ranking correlation between the pairwise outranking situations and the shown *NetFlows* ranking is quite high ( +0.923, see :numref:`ninetiledHeatmap` first row). 
 
 A corresponding graphviz drawing gives the following result.
 
 >>> nqr.exportRatingGraphViz(fileName='ratingResult',\
-                             graphSize='11,11')
+                             graphSize='12,12')
 *---- exporting a dot file for GraphViz tools ---------*
 Exporting to ratingResult.dot
 dot -Grankdir=TB -Tpdf dot -o ratingResult.pdf
 
 .. figure:: ratingResult.png
    :name: ratingResult
-   :width: 800 px
+   :width: 650 px
    :align: center
 
    Graphviz drawing of the 9-tiles rating result 
