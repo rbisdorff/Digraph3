@@ -4299,7 +4299,7 @@ Where do study the best students ? : A case study
 
 In 2004, the German magazine *Der Spiegel* conducted an extensive online survey assessing the apparent quality of German University students [28]_. About 70,000 university students from 15 academic disciplines, like German studies, Economics, Physics, Mathematics, Medecine, were questioned on their 'Abitur' and university examens' marks, time of studies and age, grants, awards and publications, IT proficiency, linguistic skills, practical work experience, foreign mobility and civil engagement. Each student received in return a global quality score by a specific weighing of the collected data depending on the disicpline of the student. [29]_.
 
-The published results of the survey concern eventually about 50,000 students majorly enroled in one of the fifteen academic disciplines at the 41 German Universities or Higher Technical Institutes offering at least 8 of the fifteen disciplines.
+The published results of the survey concern eventually about 50,000 students mainly enroled in one of the fifteen academic disciplines at the 41 German Universities or Higher Technical Institutes offering at least 8 of the fifteen disciplines.
 
 We would like now to rate these 41 German higher education institutions with respect to their apparent enrolment quality.
 
@@ -4344,7 +4344,7 @@ Details of the rating criteria may be consulted in a browser view (see :numref:`
 
    Detals of the rating criteria
 
-The computing of a quality score for a student actually depends on the enroled discipline. The average quality measurement scales may thus differ from discipline to discipline, like *Law Studies* and *Politology* (see :numref:`spiegelCriteria`). The average enrolment quality scores shown in :numref:`spiegelCriteria`, hence, appear to be **incommensurable** between disciplines. To take furthermore into account a potential *imprecision* of the individual scores' computation, we shall assume that, for all disciplines, a difference of 0.1 is *insignificant* and a difference of 0.5 *positively attests* a better average students' quality.
+The computing of a quality score for a student actually depends on the enroled discipline [29]_. The average quality measurement scales may thus differ from discipline to discipline, like *Law Studies* and *Politology* (see :numref:`spiegelCriteria`). The average enrolment quality scores shown in :numref:`spiegelCriteria`, hence, appear to be **incommensurable** between disciplines. To take furthermore into account a potential *imprecision* of the individual scores' computation, we shall assume that, for all disciplines, a difference of 0.1 is *insignificant* and a difference of 0.5 *positively attests* a better average students' quality.
 
 Let us now inspect the resulting bipolar-valued outranking digraph.
 
@@ -4437,7 +4437,7 @@ We may furthermore check if there exists any *cyclic* outranking situations.
 
 Here we observe 46 such outranking circuits, like: *Konstanz* >= *Berlin-Humboldt* >= *Stuttgart* >= *Konstanz* (see :numref:`chordlessCircuits` circuit 6 above), With the *NetFlows* ranking rule, they appear in fact 6th, 7th and 8th ranked (see (:numref:`rankedQualityScores`). The occurence of so many outranking circuits makes any linear ranking doubtful, independently of the specific ranking rule we might apply.
 
-In this case, it is more convincing to operate quantiles rating of the sutdents' quality scores, as is, indeed, proposed by the Spiegel magazine publication.
+In this case, it is more convincing to operate quantiles rating of the sutdents' quality scores, as is, indeed, proposed by the *Spiegel* magazine publication [29]_.
 
 Nine-tiling the average enrolment quality scores
 ................................................
@@ -7419,7 +7419,7 @@ Appendices
 
 .. [27] See also the corresponding :ref:`Advanced Topic <OrdinalCorrelation-Tutorial-label>` in the Digraph3 documentation.
 
-.. [28] Ref: Der Spiegel 48/2004 p.181 Url: https://www.spiegel.de/thema/studentenspiegel/ .
+.. [28] Ref: *Der Spiegel* 48/2004 p.181, Url: https://www.spiegel.de/thema/studentenspiegel/ .
 
 .. [29] The methology guiding the *Spiegel* survey may be consulted in German `here <_static/spiegelMethod>`_ .
 
