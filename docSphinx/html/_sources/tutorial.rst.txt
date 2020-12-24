@@ -7421,7 +7421,7 @@ Appendices
 
 .. [28] Ref: *Der Spiegel* 48/2004 p.181, Url: https://www.spiegel.de/thema/studentenspiegel/ .
 
-.. [29] The methology guiding the *Spiegel* survey may be consulted in German `here <_static/spiegelMethod>`_ .
+.. [29] The methology guiding the *Spiegel* survey may be consulted in German `here <_static/spiegelMethod.pdf>`_ . A copy may be consulted in *examples* directory of the *Digraph3* ressources.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
