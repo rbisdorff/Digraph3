@@ -4404,7 +4404,7 @@ We may furthermore check if there exists any *cyclic* outranking situations.
      92:  ['marb', 'saar', 'wrzb'] , credibility : 0.067
      93:  ['mnh', 'mu', 'stu'] , credibility : 0.133
 
-Here we observe 93 such outranking circuits, like: *Berlin Humboldt* >= *Konstanz* >= *Stuttgart* >= *Berlin Humboldt* (see :numref:`chordlessCircuits` circuit 20 above). With the *NetFlows* ranking rule, they appear in fact 6th, 7th and 8th ranked (see (:numref:`rankedQualityScores`). The occurence of so many outranking circuits makes any *forced* linear ranking doubtful, independently of the specific ranking rule we might apply.
+Here we observe 93 such outranking circuits, like: *Berlin Humboldt* >= *Konstanz* >= *Stuttgart* >= *Berlin Humboldt* (see :numref:`chordlessCircuits` circuit 28 above). With the *NetFlows* ranking rule, they appear in fact 7th, 6th and 8th ranked (see (:numref:`rankedQualityScores`). The occurence of so many outranking circuits makes any *forced* linear ranking doubtful, independently of the specific ranking rule we might apply.
 
 In this case, it is more convincing to operate quantiles rating of the sutdents' quality scores, as is, indeed, proposed by the *Spiegel* magazine publication [29]_.
 
