@@ -1,6 +1,7 @@
 #from perfTabs import *
 from outrankingDigraphs import *
 t = PerformanceTableau('studentenSpiegel04')
+t.showHTMLCriteria()
 from linearOrders import *
 thlm = PartialPerformanceTableau(t,objectivesSubset=['HLM'])
 ghlm = BipolarOutrankingDigraph(thlm)

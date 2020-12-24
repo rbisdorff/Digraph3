@@ -4363,19 +4363,19 @@ The outranking digraph
       Instance name        : rel_studentenSpiegel04
       # Actions            : 41
       # Criteria           : 15
-      Size                 : 863
-      Determinateness (%)  : 63.75
+      Size                 : 828
+      Determinateness (%)  : 63.67
       Valuation domain     : [-1.00;1.00]
    >>> g.computeTransitivityDegree(Comments=True)
     Transitivity degree of digraph <rel_studentenSpiegel04>:
-     #triples x>y>z: 57837, #closed: 32009, #open: 25828
-     (#closed/#triples) =  0.553
+     #triples x>y>z: 57837, #closed: 30714, #open: 27123
+     (#closed/#triples) =  0.531
    >>>  g.computeSymmetryDegree(Comments=True)
     Symmetry degree of digraph <rel_studentenSpiegel04>:
-     #arcs x>y: 793, #symmetric: 70, #asymmetric: 723
-     #arcs/#symmetric =  0.088
+     #arcs x>y: 793, #symmetric: 35, #asymmetric: 758
+     #arcs/#symmetric =  0.044
 
-The actual outranking digraph obtained with the average quality scores per academic discipline shows 863 validatesd pairwise outranking situations between the Universities. Unfortunately, the transitivity of the outranking digraph is far from being satisfied: nearly half of the transitive closure is missing. Despite the rather large preference discrimination threshold we have assumed, there does not occur many indifference situations.
+The actual outranking digraph obtained with the average quality scores per academic discipline shows 828 validatesd pairwise outranking situations between the Universities. Unfortunately, the transitivity of the outranking digraph is far from being satisfied: nearly half of the transitive closure is missing. Despite the rather large preference discrimination threshold we have assumed, there does not occur many indifference situations.
 
 We may furthermore check if there exists any *cyclic* outranking situations.
     
@@ -4387,55 +4387,24 @@ We may furthermore check if there exists any *cyclic* outranking situations.
    >>> g.computeChordlessCircuits()
    >>> g.showChordlessCircuits()
     *---- Chordless circuits ----*
-     46 circuits.
-      1:  ['aach', 'bertu', 'brau'] , credibility : 0.200
+     93 circuits.
+      1:  ['aach', 'bertu', 'ham'] , credibility : 0.200
       2:  ['aach', 'bertu', 'brem'] , credibility : 0.067
-      3:  ['aach', 'bie', 'darm', 'brau'] , credibility : 0.067
-      4:  ['aug', 'saar', 'mnst'] , credibility : 0.133
-      5:  ['aug', 'main', 'mnh'] , credibility : 0.067
-      6:  ['aug', 'mu', 'mnst'] , credibility : 0.133
-      7:  ['aug', 'mu', 'hei'] , credibility : 0.067
-      8:  ['berf', 'ksl', 'chem'] , credibility : 0.067
-      9:  ['berf', 'ksl', 'dres'] , credibility : 0.067
-     10:  ['berf', 'tri', 'marb'] , credibility : 0.067
-     11:  ['berh', 'kons', 'stu'] , credibility : 0.133
-     12:  ['berh', 'kons', 'hei'] , credibility : 0.067
-     13:  ['bie', 'darm', 'boc'] , credibility : 0.067
-     14:  ['bie', 'darm', 'gie'] , credibility : 0.067
-     15:  ['bon', 'tri', 'marb'] , credibility : 0.067
-     16:  ['brau', 'dsd', 'darm'] , credibility : 0.067
-     17:  ['chem', 'marb', 'koel'] , credibility : 0.067
-     18:  ['chem', 'marb', 'ksl'] , credibility : 0.133
-     19:  ['chem', 'wrzb', 'koel'] , credibility : 0.067
-     20:  ['chem', 'wrzb', 'reg'] , credibility : 0.133
-     21:  ['chem', 'wrzb', 'ksl'] , credibility : 0.133
-     22:  ['chem', 'saar', 'koel'] , credibility : 0.067
-     23:  ['chem', 'saar', 'ksl'] , credibility : 0.133
-     24:  ['chem', 'saar', 'dres'] , credibility : 0.133
-     25:  ['chem', 'saar', 'mnst'] , credibility : 0.133
-     26:  ['chem', 'jena', 'koel'] , credibility : 0.067
-     27:  ['chem', 'jena', 'ksl'] , credibility : 0.133
-     28:  ['chem', 'jena', 'dres'] , credibility : 0.133
-     29:  ['dres', 'marb', 'ksl'] , credibility : 0.067
-     30:  ['dres', 'marb', 'saar'] , credibility : 0.067
-     31:  ['dres', 'main', 'mnh'] , credibility : 0.067
-     32:  ['erl', 'tri', 'marb'] , credibility : 0.067
-     33:  ['goet', 'tri', 'marb'] , credibility : 0.067
-     34:  ['jena', 'saar', 'mnst'] , credibility : 0.133
-     35:  ['jena', 'main', 'mnh'] , credibility : 0.067
-     36:  ['koel', 'main', 'mnh'] , credibility : 0.067
-     37:  ['koel', 'tri', 'marb'] , credibility : 0.067
-     38:  ['ksl', 'main', 'mnh'] , credibility : 0.067
-     39:  ['ksl', 'tri', 'marb'] , credibility : 0.067
-     40:  ['main', 'mnh', 'marb'] , credibility : 0.067
-     41:  ['main', 'mnh', 'wrzb'] , credibility : 0.067
-     42:  ['main', 'mnh', 'mu'] , credibility : 0.067
-     43:  ['marb', 'saar', 'wrzb'] , credibility : 0.133
-     44:  ['marb', 'saar', 'tri'] , credibility : 0.067
-     45:  ['marb', 'saar', 'mnst'] , credibility : 0.133
-     46:  ['mnh', 'mu', 'stu'] , credibility : 0.133
+      3:  ['aach', 'bertu', 'brau'] , credibility : 0.200
+      4:  ['aach', 'bie', 'darm', 'brau'] , credibility : 0.067
+      5:  ['aug', 'tri', 'marb'] , credibility : 0.067
+      6:  ['aug', 'dres', 'koel'] , credibility : 0.067
+     ...
+     ...
+     28:  ['berh', 'kons', 'stu'] , credibility : 0.133
+     ...
+     ...
+     90:  ['marb', 'saar', 'reg'] , credibility : 0.067
+     91:  ['marb', 'saar', 'mnst'] , credibility : 0.133
+     92:  ['marb', 'saar', 'wrzb'] , credibility : 0.067
+     93:  ['mnh', 'mu', 'stu'] , credibility : 0.133
 
-Here we observe 46 such outranking circuits, like: *Konstanz* >= *Berlin-Humboldt* >= *Stuttgart* >= *Konstanz* (see :numref:`chordlessCircuits` circuit 6 above), With the *NetFlows* ranking rule, they appear in fact 6th, 7th and 8th ranked (see (:numref:`rankedQualityScores`). The occurence of so many outranking circuits makes any linear ranking doubtful, independently of the specific ranking rule we might apply.
+Here we observe 93 such outranking circuits, like: *Berlin Humboldt* >= *Konstanz* >= *Stuttgart* >= *Berlin Humboldt* (see :numref:`chordlessCircuits` circuit 20 above). With the *NetFlows* ranking rule, they appear in fact 6th, 7th and 8th ranked (see (:numref:`rankedQualityScores`). The occurence of so many outranking circuits makes any *forced* linear ranking doubtful, independently of the specific ranking rule we might apply.
 
 In this case, it is more convincing to operate quantiles rating of the sutdents' quality scores, as is, indeed, proposed by the *Spiegel* magazine publication [29]_.
 
@@ -4484,19 +4453,18 @@ We add, now, these nine-tiling score limits to the 41 Universities and sort out,
    >>> nqr = NormedQuantilesRatingDigraph(pq,t,rankingRule='NetFlows')
    >>> nqr.showQuantilesRating()
     *-------- Quantiles rating result ---------
-     [0.67 - 0.78[ ['frei', 'tum', 'mu']
-     [0.56 - 0.67[ ['hei', 'kons', 'leip', 'berh', 'stu',
-                    'tueb', 'aug', 'mnst', 'reg', 'mnh']
-     [0.44 - 0.56[ ['jena', 'dres', 'wrzb', 'marb', 'saar',
-                   'ksl', 'berf', 'chem', 'erl', 'goet',
-		   'tri', 'koel']
+     [0.67 - 0.78[ ['frei', 'tum', 'mu', 'hei', 'leip']
+     [0.56 - 0.67[ ['kons', 'berh', 'stu', 'tueb', 'aug', 'mnst']
+     [0.44 - 0.56[ ['mnh', 'jena', 'reg', 'dres', 'wrzb', 'marb',
+                    'ksl', 'saar', 'berf', 'chem', 'erl', 'goet',
+		    'tri', 'koel']
      [0.33 - 0.44[ ['bon', 'main', 'brem', 'darm', 'gie',
-                    'bertu', 'ham', 'aach']
-     [0.22 - 0.33[ ['fran', 'dsd', 'brau', 'han', 'kiel',
-                    'boc', 'bie']
+                    'bertu', 'aach', 'ham']
+     [0.22 - 0.33[ ['fran', 'brau', 'dsd', 'han', 'kiel',
+                     'boc', 'bie']
      [0.11 - 0.22[ ['duis']
 
-The average enrolment quality at the Universities of *Freiburg* and *München*, as well as at the Technical University of *München* are first rated (see :numref:`ninetiling` Line 5). Last-rated appears the average enrolment quality at the University of *Duisburg* (Line 15). Midfield appear to be the Universities of *Jena*, *Dresden*, *Würzburg*, *Marburg*, *Saarbrücken*, *Kaiserslautern*, *Berlin* (Frei), *Chemnitz*, *Erlangen-Nürnberg*, *Göttingen*, *Trier* and *Köln*.
+The average enrolment quality at the Universities of *Freiburg*, *München*, Technical University of *München*, *Heidelberg* as well as *Leipzig* are first rated (see :numref:`ninetiling` Line 5). Last-rated appears the average enrolment quality at the University of *Duisburg* (Line 14). Midfield appear to be the Universities of *Mannheim*, *Jena*, *Regensburg*, *Dresden*, *Würzburg*, *Marburg*, *Saarbrücken*, *Kaiserslautern*, *Berlin* (Frei), *Chemnitz*, *Erlangen-Nürnberg*, *Göttingen*, *Trier* and *Köln* (Line 7).
 
 We may nicely illustrate this rating result with the help of a corresponding heatmap view.
 
@@ -4510,7 +4478,7 @@ We may nicely illustrate this rating result with the help of a corresponding hea
 
    Heatmap view of the 9-tiles rating result
 
-The ranking correlation between the pairwise outranking situations and the shown *NetFlows* ranking is quite high ( +0.923, see :numref:`ninetiledHeatmap` first row). 
+The ranking correlation between the pairwise outranking situations and the shown *NetFlows* ranking is quite high ( +0.939, see :numref:`ninetiledHeatmap` first row). 
 
 A corresponding graphviz drawing gives the following result.
 

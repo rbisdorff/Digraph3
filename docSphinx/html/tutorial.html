@@ -6310,21 +6310,21 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span class="go">   Instance name        : rel_studentenSpiegel04</span>
 <span class="go">   # Actions            : 41</span>
 <span class="go">   # Criteria           : 15</span>
-<span class="go">   Size                 : 863</span>
-<span class="go">   Determinateness (%)  : 63.75</span>
+<span class="go">   Size                 : 828</span>
+<span class="go">   Determinateness (%)  : 63.67</span>
 <span class="go">   Valuation domain     : [-1.00;1.00]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go"> Transitivity degree of digraph &lt;rel_studentenSpiegel04&gt;:</span>
-<span class="go">  #triples x&gt;y&gt;z: 57837, #closed: 32009, #open: 25828</span>
-<span class="go">  (#closed/#triples) =  0.553</span>
+<span class="go">  #triples x&gt;y&gt;z: 57837, #closed: 30714, #open: 27123</span>
+<span class="go">  (#closed/#triples) =  0.531</span>
 <span class="gp">&gt;&gt;&gt; </span> <span class="n">g</span><span class="o">.</span><span class="n">computeSymmetryDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go"> Symmetry degree of digraph &lt;rel_studentenSpiegel04&gt;:</span>
-<span class="go">  #arcs x&gt;y: 793, #symmetric: 70, #asymmetric: 723</span>
-<span class="go">  #arcs/#symmetric =  0.088</span>
+<span class="go">  #arcs x&gt;y: 793, #symmetric: 35, #asymmetric: 758</span>
+<span class="go">  #arcs/#symmetric =  0.044</span>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>The actual outranking digraph obtained with the average quality scores per academic discipline shows 863 validatesd pairwise outranking situations between the Universities. Unfortunately, the transitivity of the outranking digraph is far from being satisfied: nearly half of the transitive closure is missing. Despite the rather large preference discrimination threshold we have assumed, there does not occur many indifference situations.</p>
+<p>The actual outranking digraph obtained with the average quality scores per academic discipline shows 828 validatesd pairwise outranking situations between the Universities. Unfortunately, the transitivity of the outranking digraph is far from being satisfied: nearly half of the transitive closure is missing. Despite the rather large preference discrimination threshold we have assumed, there does not occur many indifference situations.</p>
 <p>We may furthermore check if there exists any <em>cyclic</em> outranking situations.</p>
 <div class="literal-block-wrapper docutils container" id="chordlesscircuits">
 <div class="code-block-caption"><span class="caption-number">Listing 75 </span><span class="caption-text">Computing the chordlessCircuits</span><a class="headerlink" href="#chordlesscircuits" title="Permalink to this code">¶</a></div>
@@ -6346,91 +6346,29 @@ pairwise perspective (see below), we notice that, with the given preference disc
 16
 17
 18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
+19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showChordlessCircuits</span><span class="p">()</span>
 <span class="go"> *---- Chordless circuits ----*</span>
-<span class="go">  46 circuits.</span>
-<span class="go">   1:  [&#39;aach&#39;, &#39;bertu&#39;, &#39;brau&#39;] , credibility : 0.200</span>
+<span class="go">  93 circuits.</span>
+<span class="go">   1:  [&#39;aach&#39;, &#39;bertu&#39;, &#39;ham&#39;] , credibility : 0.200</span>
 <span class="go">   2:  [&#39;aach&#39;, &#39;bertu&#39;, &#39;brem&#39;] , credibility : 0.067</span>
-<span class="go">   3:  [&#39;aach&#39;, &#39;bie&#39;, &#39;darm&#39;, &#39;brau&#39;] , credibility : 0.067</span>
-<span class="go">   4:  [&#39;aug&#39;, &#39;saar&#39;, &#39;mnst&#39;] , credibility : 0.133</span>
-<span class="go">   5:  [&#39;aug&#39;, &#39;main&#39;, &#39;mnh&#39;] , credibility : 0.067</span>
-<span class="go">   6:  [&#39;aug&#39;, &#39;mu&#39;, &#39;mnst&#39;] , credibility : 0.133</span>
-<span class="go">   7:  [&#39;aug&#39;, &#39;mu&#39;, &#39;hei&#39;] , credibility : 0.067</span>
-<span class="go">   8:  [&#39;berf&#39;, &#39;ksl&#39;, &#39;chem&#39;] , credibility : 0.067</span>
-<span class="go">   9:  [&#39;berf&#39;, &#39;ksl&#39;, &#39;dres&#39;] , credibility : 0.067</span>
-<span class="go">  10:  [&#39;berf&#39;, &#39;tri&#39;, &#39;marb&#39;] , credibility : 0.067</span>
-<span class="go">  11:  [&#39;berh&#39;, &#39;kons&#39;, &#39;stu&#39;] , credibility : 0.133</span>
-<span class="go">  12:  [&#39;berh&#39;, &#39;kons&#39;, &#39;hei&#39;] , credibility : 0.067</span>
-<span class="go">  13:  [&#39;bie&#39;, &#39;darm&#39;, &#39;boc&#39;] , credibility : 0.067</span>
-<span class="go">  14:  [&#39;bie&#39;, &#39;darm&#39;, &#39;gie&#39;] , credibility : 0.067</span>
-<span class="go">  15:  [&#39;bon&#39;, &#39;tri&#39;, &#39;marb&#39;] , credibility : 0.067</span>
-<span class="go">  16:  [&#39;brau&#39;, &#39;dsd&#39;, &#39;darm&#39;] , credibility : 0.067</span>
-<span class="go">  17:  [&#39;chem&#39;, &#39;marb&#39;, &#39;koel&#39;] , credibility : 0.067</span>
-<span class="go">  18:  [&#39;chem&#39;, &#39;marb&#39;, &#39;ksl&#39;] , credibility : 0.133</span>
-<span class="go">  19:  [&#39;chem&#39;, &#39;wrzb&#39;, &#39;koel&#39;] , credibility : 0.067</span>
-<span class="go">  20:  [&#39;chem&#39;, &#39;wrzb&#39;, &#39;reg&#39;] , credibility : 0.133</span>
-<span class="go">  21:  [&#39;chem&#39;, &#39;wrzb&#39;, &#39;ksl&#39;] , credibility : 0.133</span>
-<span class="go">  22:  [&#39;chem&#39;, &#39;saar&#39;, &#39;koel&#39;] , credibility : 0.067</span>
-<span class="go">  23:  [&#39;chem&#39;, &#39;saar&#39;, &#39;ksl&#39;] , credibility : 0.133</span>
-<span class="go">  24:  [&#39;chem&#39;, &#39;saar&#39;, &#39;dres&#39;] , credibility : 0.133</span>
-<span class="go">  25:  [&#39;chem&#39;, &#39;saar&#39;, &#39;mnst&#39;] , credibility : 0.133</span>
-<span class="go">  26:  [&#39;chem&#39;, &#39;jena&#39;, &#39;koel&#39;] , credibility : 0.067</span>
-<span class="go">  27:  [&#39;chem&#39;, &#39;jena&#39;, &#39;ksl&#39;] , credibility : 0.133</span>
-<span class="go">  28:  [&#39;chem&#39;, &#39;jena&#39;, &#39;dres&#39;] , credibility : 0.133</span>
-<span class="go">  29:  [&#39;dres&#39;, &#39;marb&#39;, &#39;ksl&#39;] , credibility : 0.067</span>
-<span class="go">  30:  [&#39;dres&#39;, &#39;marb&#39;, &#39;saar&#39;] , credibility : 0.067</span>
-<span class="go">  31:  [&#39;dres&#39;, &#39;main&#39;, &#39;mnh&#39;] , credibility : 0.067</span>
-<span class="go">  32:  [&#39;erl&#39;, &#39;tri&#39;, &#39;marb&#39;] , credibility : 0.067</span>
-<span class="go">  33:  [&#39;goet&#39;, &#39;tri&#39;, &#39;marb&#39;] , credibility : 0.067</span>
-<span class="go">  34:  [&#39;jena&#39;, &#39;saar&#39;, &#39;mnst&#39;] , credibility : 0.133</span>
-<span class="go">  35:  [&#39;jena&#39;, &#39;main&#39;, &#39;mnh&#39;] , credibility : 0.067</span>
-<span class="go">  36:  [&#39;koel&#39;, &#39;main&#39;, &#39;mnh&#39;] , credibility : 0.067</span>
-<span class="go">  37:  [&#39;koel&#39;, &#39;tri&#39;, &#39;marb&#39;] , credibility : 0.067</span>
-<span class="go">  38:  [&#39;ksl&#39;, &#39;main&#39;, &#39;mnh&#39;] , credibility : 0.067</span>
-<span class="go">  39:  [&#39;ksl&#39;, &#39;tri&#39;, &#39;marb&#39;] , credibility : 0.067</span>
-<span class="go">  40:  [&#39;main&#39;, &#39;mnh&#39;, &#39;marb&#39;] , credibility : 0.067</span>
-<span class="go">  41:  [&#39;main&#39;, &#39;mnh&#39;, &#39;wrzb&#39;] , credibility : 0.067</span>
-<span class="go">  42:  [&#39;main&#39;, &#39;mnh&#39;, &#39;mu&#39;] , credibility : 0.067</span>
-<span class="go">  43:  [&#39;marb&#39;, &#39;saar&#39;, &#39;wrzb&#39;] , credibility : 0.133</span>
-<span class="go">  44:  [&#39;marb&#39;, &#39;saar&#39;, &#39;tri&#39;] , credibility : 0.067</span>
-<span class="go">  45:  [&#39;marb&#39;, &#39;saar&#39;, &#39;mnst&#39;] , credibility : 0.133</span>
-<span class="go">  46:  [&#39;mnh&#39;, &#39;mu&#39;, &#39;stu&#39;] , credibility : 0.133</span>
+<span class="go">   3:  [&#39;aach&#39;, &#39;bertu&#39;, &#39;brau&#39;] , credibility : 0.200</span>
+<span class="go">   4:  [&#39;aach&#39;, &#39;bie&#39;, &#39;darm&#39;, &#39;brau&#39;] , credibility : 0.067</span>
+<span class="go">   5:  [&#39;aug&#39;, &#39;tri&#39;, &#39;marb&#39;] , credibility : 0.067</span>
+<span class="go">   6:  [&#39;aug&#39;, &#39;dres&#39;, &#39;koel&#39;] , credibility : 0.067</span>
+<span class="go">  ...</span>
+<span class="go">  ...</span>
+<span class="go">  28:  [&#39;berh&#39;, &#39;kons&#39;, &#39;stu&#39;] , credibility : 0.133</span>
+<span class="go">  ...</span>
+<span class="go">  ...</span>
+<span class="go">  90:  [&#39;marb&#39;, &#39;saar&#39;, &#39;reg&#39;] , credibility : 0.067</span>
+<span class="go">  91:  [&#39;marb&#39;, &#39;saar&#39;, &#39;mnst&#39;] , credibility : 0.133</span>
+<span class="go">  92:  [&#39;marb&#39;, &#39;saar&#39;, &#39;wrzb&#39;] , credibility : 0.067</span>
+<span class="go">  93:  [&#39;mnh&#39;, &#39;mu&#39;, &#39;stu&#39;] , credibility : 0.133</span>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Here we observe 46 such outranking circuits, like: <em>Konstanz</em> &gt;= <em>Berlin-Humboldt</em> &gt;= <em>Stuttgart</em> &gt;= <em>Konstanz</em> (see <a class="reference internal" href="#chordlesscircuits"><span class="std std-numref">Listing 75</span></a> circuit 6 above), With the <em>NetFlows</em> ranking rule, they appear in fact 6th, 7th and 8th ranked (see (<a class="reference internal" href="#rankedqualityscores"><span class="std std-numref">Fig. 38</span></a>). The occurence of so many outranking circuits makes any linear ranking doubtful, independently of the specific ranking rule we might apply.</p>
+<p>Here we observe 93 such outranking circuits, like: <em>Berlin Humboldt</em> &gt;= <em>Konstanz</em> &gt;= <em>Stuttgart</em> &gt;= <em>Berlin Humboldt</em> (see <a class="reference internal" href="#chordlesscircuits"><span class="std std-numref">Listing 75</span></a> circuit 20 above). With the <em>NetFlows</em> ranking rule, they appear in fact 6th, 7th and 8th ranked (see (<a class="reference internal" href="#rankedqualityscores"><span class="std std-numref">Fig. 38</span></a>). The occurence of so many outranking circuits makes any <em>forced</em> linear ranking doubtful, independently of the specific ranking rule we might apply.</p>
 <p>In this case, it is more convincing to operate quantiles rating of the sutdents’ quality scores, as is, indeed, proposed by the <em>Spiegel</em> magazine publication <a class="footnote-reference brackets" href="#id149" id="id75">29</a>.</p>
 </div>
 <div class="section" id="nine-tiling-the-average-enrolment-quality-scores">
@@ -6489,26 +6427,24 @@ pairwise perspective (see below), we notice that, with the given preference disc
 11
 12
 13
-14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="n">NormedQuantilesRatingDigraph</span>
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="n">NormedQuantilesRatingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span> <span class="o">=</span> <span class="n">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="go"> *-------- Quantiles rating result ---------</span>
-<span class="go">  [0.67 - 0.78[ [&#39;frei&#39;, &#39;tum&#39;, &#39;mu&#39;]</span>
-<span class="go">  [0.56 - 0.67[ [&#39;hei&#39;, &#39;kons&#39;, &#39;leip&#39;, &#39;berh&#39;, &#39;stu&#39;,</span>
-<span class="go">                 &#39;tueb&#39;, &#39;aug&#39;, &#39;mnst&#39;, &#39;reg&#39;, &#39;mnh&#39;]</span>
-<span class="go">  [0.44 - 0.56[ [&#39;jena&#39;, &#39;dres&#39;, &#39;wrzb&#39;, &#39;marb&#39;, &#39;saar&#39;,</span>
-<span class="go">                &#39;ksl&#39;, &#39;berf&#39;, &#39;chem&#39;, &#39;erl&#39;, &#39;goet&#39;,</span>
-<span class="go">                &#39;tri&#39;, &#39;koel&#39;]</span>
+<span class="go">  [0.67 - 0.78[ [&#39;frei&#39;, &#39;tum&#39;, &#39;mu&#39;, &#39;hei&#39;, &#39;leip&#39;]</span>
+<span class="go">  [0.56 - 0.67[ [&#39;kons&#39;, &#39;berh&#39;, &#39;stu&#39;, &#39;tueb&#39;, &#39;aug&#39;, &#39;mnst&#39;]</span>
+<span class="go">  [0.44 - 0.56[ [&#39;mnh&#39;, &#39;jena&#39;, &#39;reg&#39;, &#39;dres&#39;, &#39;wrzb&#39;, &#39;marb&#39;,</span>
+<span class="go">                 &#39;ksl&#39;, &#39;saar&#39;, &#39;berf&#39;, &#39;chem&#39;, &#39;erl&#39;, &#39;goet&#39;,</span>
+<span class="go">                 &#39;tri&#39;, &#39;koel&#39;]</span>
 <span class="go">  [0.33 - 0.44[ [&#39;bon&#39;, &#39;main&#39;, &#39;brem&#39;, &#39;darm&#39;, &#39;gie&#39;,</span>
-<span class="go">                 &#39;bertu&#39;, &#39;ham&#39;, &#39;aach&#39;]</span>
-<span class="go">  [0.22 - 0.33[ [&#39;fran&#39;, &#39;dsd&#39;, &#39;brau&#39;, &#39;han&#39;, &#39;kiel&#39;,</span>
-<span class="go">                 &#39;boc&#39;, &#39;bie&#39;]</span>
+<span class="go">                 &#39;bertu&#39;, &#39;aach&#39;, &#39;ham&#39;]</span>
+<span class="go">  [0.22 - 0.33[ [&#39;fran&#39;, &#39;brau&#39;, &#39;dsd&#39;, &#39;han&#39;, &#39;kiel&#39;,</span>
+<span class="go">                  &#39;boc&#39;, &#39;bie&#39;]</span>
 <span class="go">  [0.11 - 0.22[ [&#39;duis&#39;]</span>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>The average enrolment quality at the Universities of <em>Freiburg</em> and <em>München</em>, as well as at the Technical University of <em>München</em> are first rated (see <a class="reference internal" href="#ninetiling"><span class="std std-numref">Listing 77</span></a> Line 5). Last-rated appears the average enrolment quality at the University of <em>Duisburg</em> (Line 15). Midfield appear to be the Universities of <em>Jena</em>, <em>Dresden</em>, <em>Würzburg</em>, <em>Marburg</em>, <em>Saarbrücken</em>, <em>Kaiserslautern</em>, <em>Berlin</em> (Frei), <em>Chemnitz</em>, <em>Erlangen-Nürnberg</em>, <em>Göttingen</em>, <em>Trier</em> and <em>Köln</em>.</p>
+<p>The average enrolment quality at the Universities of <em>Freiburg</em>, <em>München</em>, Technical University of <em>München</em>, <em>Heidelberg</em> as well as <em>Leipzig</em> are first rated (see <a class="reference internal" href="#ninetiling"><span class="std std-numref">Listing 77</span></a> Line 5). Last-rated appears the average enrolment quality at the University of <em>Duisburg</em> (Line 14). Midfield appear to be the Universities of <em>Mannheim</em>, <em>Jena</em>, <em>Regensburg</em>, <em>Dresden</em>, <em>Würzburg</em>, <em>Marburg</em>, <em>Saarbrücken</em>, <em>Kaiserslautern</em>, <em>Berlin</em> (Frei), <em>Chemnitz</em>, <em>Erlangen-Nürnberg</em>, <em>Göttingen</em>, <em>Trier</em> and <em>Köln</em> (Line 7).</p>
 <p>We may nicely illustrate this rating result with the help of a corresponding heatmap view.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>\
 <span class="go">                ndigits=1,rankingRule=&#39;NetFlows&#39;)</span>
@@ -6518,7 +6454,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <a class="reference internal image-reference" href="_images/nineTilingResult.png"><img alt="_images/nineTilingResult.png" src="_images/nineTilingResult.png" style="width: 650px;" /></a>
 <p class="caption"><span class="caption-number">Fig. 41 </span><span class="caption-text">Heatmap view of the 9-tiles rating result</span><a class="headerlink" href="#ninetiledheatmap" title="Permalink to this image">¶</a></p>
 </div>
-<p>The ranking correlation between the pairwise outranking situations and the shown <em>NetFlows</em> ranking is quite high ( +0.923, see <a class="reference internal" href="#ninetiledheatmap"><span class="std std-numref">Fig. 41</span></a> first row).</p>
+<p>The ranking correlation between the pairwise outranking situations and the shown <em>NetFlows</em> ranking is quite high ( +0.939, see <a class="reference internal" href="#ninetiledheatmap"><span class="std std-numref">Fig. 41</span></a> first row).</p>
 <p>A corresponding graphviz drawing gives the following result.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;ratingResult&#39;</span><span class="p">,</span>\
 <span class="go">                             graphSize=&#39;12,12&#39;)</span>

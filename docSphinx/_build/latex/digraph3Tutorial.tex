@@ -5471,20 +5471,20 @@ Let us now inspect the resulting bipolar\sphinxhyphen{}valued outranking digraph
 \PYG{g+go}{   Instance name        : rel\PYGZus{}studentenSpiegel04}
 \PYG{g+go}{   \PYGZsh{} Actions            : 41}
 \PYG{g+go}{   \PYGZsh{} Criteria           : 15}
-\PYG{g+go}{   Size                 : 863}
-\PYG{g+go}{   Determinateness (\PYGZpc{})  : 63.75}
+\PYG{g+go}{   Size                 : 828}
+\PYG{g+go}{   Determinateness (\PYGZpc{})  : 63.67}
 \PYG{g+go}{   Valuation domain     : [\PYGZhy{}1.00;1.00]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeTransitivityDegree}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
 \PYG{g+go}{ Transitivity degree of digraph \PYGZlt{}rel\PYGZus{}studentenSpiegel04\PYGZgt{}:}
-\PYG{g+go}{  \PYGZsh{}triples x\PYGZgt{}y\PYGZgt{}z: 57837, \PYGZsh{}closed: 32009, \PYGZsh{}open: 25828}
-\PYG{g+go}{  (\PYGZsh{}closed/\PYGZsh{}triples) =  0.553}
+\PYG{g+go}{  \PYGZsh{}triples x\PYGZgt{}y\PYGZgt{}z: 57837, \PYGZsh{}closed: 30714, \PYGZsh{}open: 27123}
+\PYG{g+go}{  (\PYGZsh{}closed/\PYGZsh{}triples) =  0.531}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} } \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeSymmetryDegree}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
 \PYG{g+go}{ Symmetry degree of digraph \PYGZlt{}rel\PYGZus{}studentenSpiegel04\PYGZgt{}:}
-\PYG{g+go}{  \PYGZsh{}arcs x\PYGZgt{}y: 793, \PYGZsh{}symmetric: 70, \PYGZsh{}asymmetric: 723}
-\PYG{g+go}{  \PYGZsh{}arcs/\PYGZsh{}symmetric =  0.088}
+\PYG{g+go}{  \PYGZsh{}arcs x\PYGZgt{}y: 793, \PYGZsh{}symmetric: 35, \PYGZsh{}asymmetric: 758}
+\PYG{g+go}{  \PYGZsh{}arcs/\PYGZsh{}symmetric =  0.044}
 \end{sphinxVerbatim}
 
-The actual outranking digraph obtained with the average quality scores per academic discipline shows 863 validatesd pairwise outranking situations between the Universities. Unfortunately, the transitivity of the outranking digraph is far from being satisfied: nearly half of the transitive closure is missing. Despite the rather large preference discrimination threshold we have assumed, there does not occur many indifference situations.
+The actual outranking digraph obtained with the average quality scores per academic discipline shows 828 validatesd pairwise outranking situations between the Universities. Unfortunately, the transitivity of the outranking digraph is far from being satisfied: nearly half of the transitive closure is missing. Despite the rather large preference discrimination threshold we have assumed, there does not occur many indifference situations.
 
 We may furthermore check if there exists any \sphinxstyleemphasis{cyclic} outranking situations.
 \sphinxSetupCaptionForVerbatim{Computing the chordlessCircuits}
@@ -5493,56 +5493,25 @@ We may furthermore check if there exists any \sphinxstyleemphasis{cyclic} outran
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeChordlessCircuits}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showChordlessCircuits}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Chordless circuits \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{  46 circuits.}
-\PYG{g+go}{   1:  [\PYGZsq{}aach\PYGZsq{}, \PYGZsq{}bertu\PYGZsq{}, \PYGZsq{}brau\PYGZsq{}] , credibility : 0.200}
+\PYG{g+go}{  93 circuits.}
+\PYG{g+go}{   1:  [\PYGZsq{}aach\PYGZsq{}, \PYGZsq{}bertu\PYGZsq{}, \PYGZsq{}ham\PYGZsq{}] , credibility : 0.200}
 \PYG{g+go}{   2:  [\PYGZsq{}aach\PYGZsq{}, \PYGZsq{}bertu\PYGZsq{}, \PYGZsq{}brem\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{   3:  [\PYGZsq{}aach\PYGZsq{}, \PYGZsq{}bie\PYGZsq{}, \PYGZsq{}darm\PYGZsq{}, \PYGZsq{}brau\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{   4:  [\PYGZsq{}aug\PYGZsq{}, \PYGZsq{}saar\PYGZsq{}, \PYGZsq{}mnst\PYGZsq{}] , credibility : 0.133}
-\PYG{g+go}{   5:  [\PYGZsq{}aug\PYGZsq{}, \PYGZsq{}main\PYGZsq{}, \PYGZsq{}mnh\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{   6:  [\PYGZsq{}aug\PYGZsq{}, \PYGZsq{}mu\PYGZsq{}, \PYGZsq{}mnst\PYGZsq{}] , credibility : 0.133}
-\PYG{g+go}{   7:  [\PYGZsq{}aug\PYGZsq{}, \PYGZsq{}mu\PYGZsq{}, \PYGZsq{}hei\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{   8:  [\PYGZsq{}berf\PYGZsq{}, \PYGZsq{}ksl\PYGZsq{}, \PYGZsq{}chem\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{   9:  [\PYGZsq{}berf\PYGZsq{}, \PYGZsq{}ksl\PYGZsq{}, \PYGZsq{}dres\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  10:  [\PYGZsq{}berf\PYGZsq{}, \PYGZsq{}tri\PYGZsq{}, \PYGZsq{}marb\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  11:  [\PYGZsq{}berh\PYGZsq{}, \PYGZsq{}kons\PYGZsq{}, \PYGZsq{}stu\PYGZsq{}] , credibility : 0.133}
-\PYG{g+go}{  12:  [\PYGZsq{}berh\PYGZsq{}, \PYGZsq{}kons\PYGZsq{}, \PYGZsq{}hei\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  13:  [\PYGZsq{}bie\PYGZsq{}, \PYGZsq{}darm\PYGZsq{}, \PYGZsq{}boc\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  14:  [\PYGZsq{}bie\PYGZsq{}, \PYGZsq{}darm\PYGZsq{}, \PYGZsq{}gie\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  15:  [\PYGZsq{}bon\PYGZsq{}, \PYGZsq{}tri\PYGZsq{}, \PYGZsq{}marb\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  16:  [\PYGZsq{}brau\PYGZsq{}, \PYGZsq{}dsd\PYGZsq{}, \PYGZsq{}darm\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  17:  [\PYGZsq{}chem\PYGZsq{}, \PYGZsq{}marb\PYGZsq{}, \PYGZsq{}koel\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  18:  [\PYGZsq{}chem\PYGZsq{}, \PYGZsq{}marb\PYGZsq{}, \PYGZsq{}ksl\PYGZsq{}] , credibility : 0.133}
-\PYG{g+go}{  19:  [\PYGZsq{}chem\PYGZsq{}, \PYGZsq{}wrzb\PYGZsq{}, \PYGZsq{}koel\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  20:  [\PYGZsq{}chem\PYGZsq{}, \PYGZsq{}wrzb\PYGZsq{}, \PYGZsq{}reg\PYGZsq{}] , credibility : 0.133}
-\PYG{g+go}{  21:  [\PYGZsq{}chem\PYGZsq{}, \PYGZsq{}wrzb\PYGZsq{}, \PYGZsq{}ksl\PYGZsq{}] , credibility : 0.133}
-\PYG{g+go}{  22:  [\PYGZsq{}chem\PYGZsq{}, \PYGZsq{}saar\PYGZsq{}, \PYGZsq{}koel\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  23:  [\PYGZsq{}chem\PYGZsq{}, \PYGZsq{}saar\PYGZsq{}, \PYGZsq{}ksl\PYGZsq{}] , credibility : 0.133}
-\PYG{g+go}{  24:  [\PYGZsq{}chem\PYGZsq{}, \PYGZsq{}saar\PYGZsq{}, \PYGZsq{}dres\PYGZsq{}] , credibility : 0.133}
-\PYG{g+go}{  25:  [\PYGZsq{}chem\PYGZsq{}, \PYGZsq{}saar\PYGZsq{}, \PYGZsq{}mnst\PYGZsq{}] , credibility : 0.133}
-\PYG{g+go}{  26:  [\PYGZsq{}chem\PYGZsq{}, \PYGZsq{}jena\PYGZsq{}, \PYGZsq{}koel\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  27:  [\PYGZsq{}chem\PYGZsq{}, \PYGZsq{}jena\PYGZsq{}, \PYGZsq{}ksl\PYGZsq{}] , credibility : 0.133}
-\PYG{g+go}{  28:  [\PYGZsq{}chem\PYGZsq{}, \PYGZsq{}jena\PYGZsq{}, \PYGZsq{}dres\PYGZsq{}] , credibility : 0.133}
-\PYG{g+go}{  29:  [\PYGZsq{}dres\PYGZsq{}, \PYGZsq{}marb\PYGZsq{}, \PYGZsq{}ksl\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  30:  [\PYGZsq{}dres\PYGZsq{}, \PYGZsq{}marb\PYGZsq{}, \PYGZsq{}saar\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  31:  [\PYGZsq{}dres\PYGZsq{}, \PYGZsq{}main\PYGZsq{}, \PYGZsq{}mnh\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  32:  [\PYGZsq{}erl\PYGZsq{}, \PYGZsq{}tri\PYGZsq{}, \PYGZsq{}marb\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  33:  [\PYGZsq{}goet\PYGZsq{}, \PYGZsq{}tri\PYGZsq{}, \PYGZsq{}marb\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  34:  [\PYGZsq{}jena\PYGZsq{}, \PYGZsq{}saar\PYGZsq{}, \PYGZsq{}mnst\PYGZsq{}] , credibility : 0.133}
-\PYG{g+go}{  35:  [\PYGZsq{}jena\PYGZsq{}, \PYGZsq{}main\PYGZsq{}, \PYGZsq{}mnh\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  36:  [\PYGZsq{}koel\PYGZsq{}, \PYGZsq{}main\PYGZsq{}, \PYGZsq{}mnh\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  37:  [\PYGZsq{}koel\PYGZsq{}, \PYGZsq{}tri\PYGZsq{}, \PYGZsq{}marb\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  38:  [\PYGZsq{}ksl\PYGZsq{}, \PYGZsq{}main\PYGZsq{}, \PYGZsq{}mnh\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  39:  [\PYGZsq{}ksl\PYGZsq{}, \PYGZsq{}tri\PYGZsq{}, \PYGZsq{}marb\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  40:  [\PYGZsq{}main\PYGZsq{}, \PYGZsq{}mnh\PYGZsq{}, \PYGZsq{}marb\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  41:  [\PYGZsq{}main\PYGZsq{}, \PYGZsq{}mnh\PYGZsq{}, \PYGZsq{}wrzb\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  42:  [\PYGZsq{}main\PYGZsq{}, \PYGZsq{}mnh\PYGZsq{}, \PYGZsq{}mu\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  43:  [\PYGZsq{}marb\PYGZsq{}, \PYGZsq{}saar\PYGZsq{}, \PYGZsq{}wrzb\PYGZsq{}] , credibility : 0.133}
-\PYG{g+go}{  44:  [\PYGZsq{}marb\PYGZsq{}, \PYGZsq{}saar\PYGZsq{}, \PYGZsq{}tri\PYGZsq{}] , credibility : 0.067}
-\PYG{g+go}{  45:  [\PYGZsq{}marb\PYGZsq{}, \PYGZsq{}saar\PYGZsq{}, \PYGZsq{}mnst\PYGZsq{}] , credibility : 0.133}
-\PYG{g+go}{  46:  [\PYGZsq{}mnh\PYGZsq{}, \PYGZsq{}mu\PYGZsq{}, \PYGZsq{}stu\PYGZsq{}] , credibility : 0.133}
+\PYG{g+go}{   3:  [\PYGZsq{}aach\PYGZsq{}, \PYGZsq{}bertu\PYGZsq{}, \PYGZsq{}brau\PYGZsq{}] , credibility : 0.200}
+\PYG{g+go}{   4:  [\PYGZsq{}aach\PYGZsq{}, \PYGZsq{}bie\PYGZsq{}, \PYGZsq{}darm\PYGZsq{}, \PYGZsq{}brau\PYGZsq{}] , credibility : 0.067}
+\PYG{g+go}{   5:  [\PYGZsq{}aug\PYGZsq{}, \PYGZsq{}tri\PYGZsq{}, \PYGZsq{}marb\PYGZsq{}] , credibility : 0.067}
+\PYG{g+go}{   6:  [\PYGZsq{}aug\PYGZsq{}, \PYGZsq{}dres\PYGZsq{}, \PYGZsq{}koel\PYGZsq{}] , credibility : 0.067}
+\PYG{g+go}{  ...}
+\PYG{g+go}{  ...}
+\PYG{g+go}{  28:  [\PYGZsq{}berh\PYGZsq{}, \PYGZsq{}kons\PYGZsq{}, \PYGZsq{}stu\PYGZsq{}] , credibility : 0.133}
+\PYG{g+go}{  ...}
+\PYG{g+go}{  ...}
+\PYG{g+go}{  90:  [\PYGZsq{}marb\PYGZsq{}, \PYGZsq{}saar\PYGZsq{}, \PYGZsq{}reg\PYGZsq{}] , credibility : 0.067}
+\PYG{g+go}{  91:  [\PYGZsq{}marb\PYGZsq{}, \PYGZsq{}saar\PYGZsq{}, \PYGZsq{}mnst\PYGZsq{}] , credibility : 0.133}
+\PYG{g+go}{  92:  [\PYGZsq{}marb\PYGZsq{}, \PYGZsq{}saar\PYGZsq{}, \PYGZsq{}wrzb\PYGZsq{}] , credibility : 0.067}
+\PYG{g+go}{  93:  [\PYGZsq{}mnh\PYGZsq{}, \PYGZsq{}mu\PYGZsq{}, \PYGZsq{}stu\PYGZsq{}] , credibility : 0.133}
 \end{sphinxVerbatim}
 
-Here we observe 46 such outranking circuits, like: \sphinxstyleemphasis{Konstanz} \textgreater{}= \sphinxstyleemphasis{Berlin\sphinxhyphen{}Humboldt} \textgreater{}= \sphinxstyleemphasis{Stuttgart} \textgreater{}= \sphinxstyleemphasis{Konstanz} (see \hyperref[\detokenize{tutorial:chordlesscircuits}]{Listing \ref{\detokenize{tutorial:chordlesscircuits}}} circuit 6 above), With the \sphinxstyleemphasis{NetFlows} ranking rule, they appear in fact 6th, 7th and 8th ranked (see (\hyperref[\detokenize{tutorial:rankedqualityscores}]{Fig.\@ \ref{\detokenize{tutorial:rankedqualityscores}}}). The occurence of so many outranking circuits makes any linear ranking doubtful, independently of the specific ranking rule we might apply.
+Here we observe 93 such outranking circuits, like: \sphinxstyleemphasis{Berlin Humboldt} \textgreater{}= \sphinxstyleemphasis{Konstanz} \textgreater{}= \sphinxstyleemphasis{Stuttgart} \textgreater{}= \sphinxstyleemphasis{Berlin Humboldt} (see \hyperref[\detokenize{tutorial:chordlesscircuits}]{Listing \ref{\detokenize{tutorial:chordlesscircuits}}} circuit 20 above). With the \sphinxstyleemphasis{NetFlows} ranking rule, they appear in fact 6th, 7th and 8th ranked (see (\hyperref[\detokenize{tutorial:rankedqualityscores}]{Fig.\@ \ref{\detokenize{tutorial:rankedqualityscores}}}). The occurence of so many outranking circuits makes any \sphinxstyleemphasis{forced} linear ranking doubtful, independently of the specific ranking rule we might apply.
 
 In this case, it is more convincing to operate quantiles rating of the sutdents’ quality scores, as is, indeed, proposed by the \sphinxstyleemphasis{Spiegel} magazine publication \sphinxfootnotemark[29].
 
@@ -5586,20 +5555,19 @@ We add, now, these nine\sphinxhyphen{}tiling score limits to the 41 Universities
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr} \PYG{o}{=} \PYG{n}{NormedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq}\PYG{p}{,}\PYG{n}{t}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NetFlows}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Quantiles rating result \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{  [0.67 \PYGZhy{} 0.78[ [\PYGZsq{}frei\PYGZsq{}, \PYGZsq{}tum\PYGZsq{}, \PYGZsq{}mu\PYGZsq{}]}
-\PYG{g+go}{  [0.56 \PYGZhy{} 0.67[ [\PYGZsq{}hei\PYGZsq{}, \PYGZsq{}kons\PYGZsq{}, \PYGZsq{}leip\PYGZsq{}, \PYGZsq{}berh\PYGZsq{}, \PYGZsq{}stu\PYGZsq{},}
-\PYG{g+go}{                 \PYGZsq{}tueb\PYGZsq{}, \PYGZsq{}aug\PYGZsq{}, \PYGZsq{}mnst\PYGZsq{}, \PYGZsq{}reg\PYGZsq{}, \PYGZsq{}mnh\PYGZsq{}]}
-\PYG{g+go}{  [0.44 \PYGZhy{} 0.56[ [\PYGZsq{}jena\PYGZsq{}, \PYGZsq{}dres\PYGZsq{}, \PYGZsq{}wrzb\PYGZsq{}, \PYGZsq{}marb\PYGZsq{}, \PYGZsq{}saar\PYGZsq{},}
-\PYG{g+go}{                \PYGZsq{}ksl\PYGZsq{}, \PYGZsq{}berf\PYGZsq{}, \PYGZsq{}chem\PYGZsq{}, \PYGZsq{}erl\PYGZsq{}, \PYGZsq{}goet\PYGZsq{},}
-\PYG{g+go}{                \PYGZsq{}tri\PYGZsq{}, \PYGZsq{}koel\PYGZsq{}]}
+\PYG{g+go}{  [0.67 \PYGZhy{} 0.78[ [\PYGZsq{}frei\PYGZsq{}, \PYGZsq{}tum\PYGZsq{}, \PYGZsq{}mu\PYGZsq{}, \PYGZsq{}hei\PYGZsq{}, \PYGZsq{}leip\PYGZsq{}]}
+\PYG{g+go}{  [0.56 \PYGZhy{} 0.67[ [\PYGZsq{}kons\PYGZsq{}, \PYGZsq{}berh\PYGZsq{}, \PYGZsq{}stu\PYGZsq{}, \PYGZsq{}tueb\PYGZsq{}, \PYGZsq{}aug\PYGZsq{}, \PYGZsq{}mnst\PYGZsq{}]}
+\PYG{g+go}{  [0.44 \PYGZhy{} 0.56[ [\PYGZsq{}mnh\PYGZsq{}, \PYGZsq{}jena\PYGZsq{}, \PYGZsq{}reg\PYGZsq{}, \PYGZsq{}dres\PYGZsq{}, \PYGZsq{}wrzb\PYGZsq{}, \PYGZsq{}marb\PYGZsq{},}
+\PYG{g+go}{                 \PYGZsq{}ksl\PYGZsq{}, \PYGZsq{}saar\PYGZsq{}, \PYGZsq{}berf\PYGZsq{}, \PYGZsq{}chem\PYGZsq{}, \PYGZsq{}erl\PYGZsq{}, \PYGZsq{}goet\PYGZsq{},}
+\PYG{g+go}{                 \PYGZsq{}tri\PYGZsq{}, \PYGZsq{}koel\PYGZsq{}]}
 \PYG{g+go}{  [0.33 \PYGZhy{} 0.44[ [\PYGZsq{}bon\PYGZsq{}, \PYGZsq{}main\PYGZsq{}, \PYGZsq{}brem\PYGZsq{}, \PYGZsq{}darm\PYGZsq{}, \PYGZsq{}gie\PYGZsq{},}
-\PYG{g+go}{                 \PYGZsq{}bertu\PYGZsq{}, \PYGZsq{}ham\PYGZsq{}, \PYGZsq{}aach\PYGZsq{}]}
-\PYG{g+go}{  [0.22 \PYGZhy{} 0.33[ [\PYGZsq{}fran\PYGZsq{}, \PYGZsq{}dsd\PYGZsq{}, \PYGZsq{}brau\PYGZsq{}, \PYGZsq{}han\PYGZsq{}, \PYGZsq{}kiel\PYGZsq{},}
-\PYG{g+go}{                 \PYGZsq{}boc\PYGZsq{}, \PYGZsq{}bie\PYGZsq{}]}
+\PYG{g+go}{                 \PYGZsq{}bertu\PYGZsq{}, \PYGZsq{}aach\PYGZsq{}, \PYGZsq{}ham\PYGZsq{}]}
+\PYG{g+go}{  [0.22 \PYGZhy{} 0.33[ [\PYGZsq{}fran\PYGZsq{}, \PYGZsq{}brau\PYGZsq{}, \PYGZsq{}dsd\PYGZsq{}, \PYGZsq{}han\PYGZsq{}, \PYGZsq{}kiel\PYGZsq{},}
+\PYG{g+go}{                  \PYGZsq{}boc\PYGZsq{}, \PYGZsq{}bie\PYGZsq{}]}
 \PYG{g+go}{  [0.11 \PYGZhy{} 0.22[ [\PYGZsq{}duis\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-The average enrolment quality at the Universities of \sphinxstyleemphasis{Freiburg} and \sphinxstyleemphasis{München}, as well as at the Technical University of \sphinxstyleemphasis{München} are first rated (see \hyperref[\detokenize{tutorial:ninetiling}]{Listing \ref{\detokenize{tutorial:ninetiling}}} Line 5). Last\sphinxhyphen{}rated appears the average enrolment quality at the University of \sphinxstyleemphasis{Duisburg} (Line 15). Midfield appear to be the Universities of \sphinxstyleemphasis{Jena}, \sphinxstyleemphasis{Dresden}, \sphinxstyleemphasis{Würzburg}, \sphinxstyleemphasis{Marburg}, \sphinxstyleemphasis{Saarbrücken}, \sphinxstyleemphasis{Kaiserslautern}, \sphinxstyleemphasis{Berlin} (Frei), \sphinxstyleemphasis{Chemnitz}, \sphinxstyleemphasis{Erlangen\sphinxhyphen{}Nürnberg}, \sphinxstyleemphasis{Göttingen}, \sphinxstyleemphasis{Trier} and \sphinxstyleemphasis{Köln}.
+The average enrolment quality at the Universities of \sphinxstyleemphasis{Freiburg}, \sphinxstyleemphasis{München}, Technical University of \sphinxstyleemphasis{München}, \sphinxstyleemphasis{Heidelberg} as well as \sphinxstyleemphasis{Leipzig} are first rated (see \hyperref[\detokenize{tutorial:ninetiling}]{Listing \ref{\detokenize{tutorial:ninetiling}}} Line 5). Last\sphinxhyphen{}rated appears the average enrolment quality at the University of \sphinxstyleemphasis{Duisburg} (Line 14). Midfield appear to be the Universities of \sphinxstyleemphasis{Mannheim}, \sphinxstyleemphasis{Jena}, \sphinxstyleemphasis{Regensburg}, \sphinxstyleemphasis{Dresden}, \sphinxstyleemphasis{Würzburg}, \sphinxstyleemphasis{Marburg}, \sphinxstyleemphasis{Saarbrücken}, \sphinxstyleemphasis{Kaiserslautern}, \sphinxstyleemphasis{Berlin} (Frei), \sphinxstyleemphasis{Chemnitz}, \sphinxstyleemphasis{Erlangen\sphinxhyphen{}Nürnberg}, \sphinxstyleemphasis{Göttingen}, \sphinxstyleemphasis{Trier} and \sphinxstyleemphasis{Köln} (Line 7).
 
 We may nicely illustrate this rating result with the help of a corresponding heatmap view.
 
@@ -5615,7 +5583,7 @@ We may nicely illustrate this rating result with the help of a corresponding hea
 \noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{nineTilingResult}.png}
 \caption{Heatmap view of the 9\sphinxhyphen{}tiles rating result}\label{\detokenize{tutorial:ninetiledheatmap}}\end{figure}
 
-The ranking correlation between the pairwise outranking situations and the shown \sphinxstyleemphasis{NetFlows} ranking is quite high ( +0.923, see \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}} first row).
+The ranking correlation between the pairwise outranking situations and the shown \sphinxstyleemphasis{NetFlows} ranking is quite high ( +0.939, see \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}} first row).
 
 A corresponding graphviz drawing gives the following result.
 
