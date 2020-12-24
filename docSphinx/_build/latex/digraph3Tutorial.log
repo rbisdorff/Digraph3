@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  24 DEC 2020 12:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  24 DEC 2020 13:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1025,20 +1025,23 @@ File: ratingData.png Graphic file (type png)
 Package pdftex.def Info: ratingData.png  used on input line 5438.
 (pdftex.def)             Requested size: 451.68457pt x 630.15259pt.
  [121] [122 <./ratingData.png>]
-<spiegelCriteria.png, id=1926, 1062.97125pt x 460.72125pt>
+<spiegelCriteria.png, id=1926, 1156.32pt x 462.72874pt>
 File: spiegelCriteria.png Graphic file (type png)
 <use spiegelCriteria.png>
 Package pdftex.def Info: spiegelCriteria.png  used on input line 5455.
-(pdftex.def)             Requested size: 452.96518pt x 196.3347pt.
+(pdftex.def)             Requested size: 452.95676pt x 181.2684pt.
  [123 <./spiegelCriteria.png>]
+Overfull \vbox (3.2884pt too high) detected at line 5543
+ []
+
 [124] [125]
-<score9Limits.png, id=1952, 552.0625pt x 528.97626pt>
+<score9Limits.png, id=1953, 552.0625pt x 528.97626pt>
 File: score9Limits.png Graphic file (type png)
 <use score9Limits.png>
 Package pdftex.def Info: score9Limits.png  used on input line 5576.
 (pdftex.def)             Requested size: 263.48267pt x 252.47705pt.
  [126 <./score9Limits.png>]
-<nineTilingResult.png, id=1965, 492.84125pt x 891.33pt>
+<nineTilingResult.png, id=1966, 492.84125pt x 891.33pt>
 File: nineTilingResult.png Graphic file (type png)
 <use nineTilingResult.png>
 Package pdftex.def Info: nineTilingResult.png  used on input line 5615.
@@ -1380,7 +1383,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 8599.
 Here is how much of TeX's memory you used:
  15363 strings out of 482504
  225773 string characters out of 5947330
- 660114 words of memory out of 5000000
+ 660111 words of memory out of 5000000
  29278 multiletter control sequences out of 15000+600000
  564467 words of font info for 98 fonts, out of 8000000 for 9000
  396 hyphenation exceptions out of 8191
@@ -1428,7 +1431,7 @@ e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on digraph3Tutorial.pdf (207 pages, 4802782 bytes).
+Output written on digraph3Tutorial.pdf (207 pages, 4818634 bytes).
 PDF statistics:
  3935 PDF objects out of 4296 (max. 8388607)
  2530 compressed objects within 26 object streams

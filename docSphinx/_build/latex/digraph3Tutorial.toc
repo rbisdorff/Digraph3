@@ -69,8 +69,8 @@
 \contentsline {subsection}{\numberline {10.3}Rating new performances with quantile norms}{113}{subsection.10.3}%
 \contentsline {section}{\numberline {11}Where do study the best students ? : A case study}{120}{section.11}%
 \contentsline {subsection}{\numberline {11.1}The performance tableau}{121}{subsection.11.1}%
-\contentsline {subsection}{\numberline {11.2}The outranking digraph}{124}{subsection.11.2}%
-\contentsline {subsection}{\numberline {11.3}Nine\sphinxhyphen {}tiling the average enrolment quality scores}{126}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.2}The outranking digraph}{123}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Nine\sphinxhyphen {}tiling the average enrolment quality scores}{125}{subsection.11.3}%
 \contentsline {section}{\numberline {12}HPC ranking with big outranking digraphs}{131}{section.12}%
 \contentsline {subsection}{\numberline {12.1}C\sphinxhyphen {}compiled Python modules}{131}{subsection.12.1}%
 \contentsline {subsection}{\numberline {12.2}Big Data performance tableaux}{132}{subsection.12.2}%
