@@ -4472,7 +4472,7 @@ Let us first inspect the underlying bipolar-valued outranking digraph.
      #arcs x>y: 793, #symmetric: 35, #asymmetric: 758
      #arcs/#symmetric =  0.044
 
-The bipolar-valued outranking digraph obtained with the given performance tableau *t* (see :numref:`stSpPerfTab`) shows 828 validated pairwise outranking situations between the Universities (see :numref:`outrankings` Line 8). Unfortunately, the transitivity of the outranking digraph is far from being satisfied: nearly half of the transitive closure is missing (Line 15). Despite the rather large preference discrimination threshold we have assumed, there does not occur many indifference situations (Line 19).
+The bipolar-valued outranking digraph obtained with the given performance tableau *t* (see :numref:`stSpPerfTab`) shows 828 validated pairwise outranking situations between the Universities (see :numref:`outrankings` Line 9). Unfortunately, the transitivity of the outranking digraph is far from being satisfied: nearly half of the transitive closure is missing (Line 15). Despite the rather large preference discrimination threshold we have assumed, there does not occur many indifference situations (Line 19).
 
 We may furthermore check if there exists any *cyclic* outranking situations.
     
