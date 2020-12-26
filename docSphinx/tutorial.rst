@@ -4425,7 +4425,7 @@ From the actual ranking position of the 9-tile class limits, we may now immediat
      [0.11 - 0.22[ ['gie', 'dsd', 'bie', 'boc', 'han']
      [0.00 - 0.11[ ['duis']
 
-The average enrollment quality at the Technical University of *München*, the Universities *Freiburg*, *Konstanz*, *Leipzig*, *München* as well as  *Heidelberg* appear best rated (:math:`[0.78 - 0.89[`, see :numref:`quantilesRating` Line 3). Last-rated appears the average enrollment quality at the University of *Duisburg* (Line 13). Midfield appear to be the Universities of *Würzburg*, *Dresden*, *Kaiserslautern*, *Marburg*, *Berlin* (Frei), *Chemnitz*, *Köln* , *Erlangen-Nürnberg* and *Trier* (Lines 8-9). A corresponding graphviz drawing gives the following result.
+The average enrollment quality at the Technical University of *München*, the Universities *Freiburg*, *Konstanz*, *Leipzig*, *München* as well as  *Heidelberg* appear best rated (:math:`[0.78 - 0.89[`, see :numref:`quantilesRating` Line 4). Last-rated appears the average enrollment quality at the University of *Duisburg* (Line 14). Midfield appear to be the Universities of *Würzburg*, *Dresden*, *Kaiserslautern*, *Marburg*, *Berlin* (Frei), *Chemnitz*, *Köln* , *Erlangen-Nürnberg* and *Trier* (Lines 8-9). A corresponding graphviz drawing gives the following result.
 
    >>> nqr.exportRatingGraphViz(fileName='ratingResult',\
 				 graphSize='12,12')
@@ -4440,7 +4440,7 @@ The average enrollment quality at the Technical University of *München*, the Un
 
    Graphviz drawing of the 9-tiles rating result
 
-Considering the abundant amount of missing data (27%), how confident is our rating-by-ranking result? 
+Considering the large amount of missing data (27%), how confident is our rating-by-ranking result? 
    
 Inspecting the outranking digraph
 .................................
@@ -4506,12 +4506,12 @@ We may furthermore check if there exists any *cyclic* outranking situations.
 
 Here we observe indeed 93 such outranking circuits, like: *Berlin Humboldt* >= *Konstanz* >= *München* >= *Berlin Humboldt* (see :numref:`chordlessCircuits` circuit 29 above). With the *Copeland* ranking rule, they appear in fact respectively at rank 8, 3 and 5 (see (:numref:`ninetiledHeatmap`).
 
-The occurrence of so many outranking circuits makes any *forced* linear ranking doubtful, independently of the specific ranking rule we might apply. To check the quality of the previous rating-ranking result, we shall now compute a direct quantiles sorting of the enrollment quality scores without using any ranking rule (see tutorial on rating with incommensurable criteria).
+The occurrence of so many outranking circuits makes any *forced* linear ranking doubtful, independently of the specific ranking rule we might apply. To check the quality of the previous rating-by-ranking result, we shall now compute a direct quantiles sorting of the enrollment quality scores without using any ranking rule (see tutorial on rating with incommensurable criteria).
 
 Rating-by-sorting
 .................
 
-For this rating-by-sorting approach we are using the :py:class:`sortingDigrahs.QuantilesSortingDigraph` constructor.
+For this *rating-by-sorting* approach we are using the :py:class:`sortingDigrahs.QuantilesSortingDigraph` constructor.
 
 .. code-block:: pycon
    :name: nineTilesSorting
@@ -4564,9 +4564,9 @@ For this rating-by-sorting approach we are using the :py:class:`sortingDigrahs.Q
     [0.89 - <[: tum with credibility: 0.07 = min(0.07,1.00)
     [0.44 - 0.56[: wrzb with credibility: 0.13 = min(0.20,0.13)
 
-In :numref:`nineTilesSorting` Line 5, we may notice that the Higher Technical School of *Aachen* is rated precisely into the second 9-tile class (:math:`[0.22 - 0.33[`), whereas the University of *Augsburg* is less precisely rated into the fourth until the second highest 9-tile classes (:math:`[0.44 - 0.78[`). The Technical University *München* appears best rated into the highest 9-tiles class (:math:`[0.89 - <[`).
+In :numref:`nineTilesSorting` Line 5, we may notice that the Higher Technical School of *Aachen* is rated precisely into the second 9-tile class (:math:`[0.22 - 0.33[`) with the support of a 53.5% majority of disciplines [31]_, whereas the University of *Augsburg* is less precisely rated into the fourth until the second highest 9-tile classes (:math:`[0.44 - 0.78[`) yet, with the support of a 63.5% majority of disciplines. The Technical University *München* appears best rated into the highest 9-tiles class (:math:`[0.89 - <[`) with the support of a 56.5% of disciplines.
 
-We may now order this result lexicographically by *average rated limits* and rated highest 9-tile class limits.
+We may now lexicographically order this rating result by *average rated class limits* and highest-rated 9-tile class limit.
 
 >>> qs.showHTMLQuantileOrdering(strategy='average')
 
@@ -4577,9 +4577,9 @@ We may now order this result lexicographically by *average rated limits* and rat
 
    Ordering the 9-tiles sorting by average rating limits
 
-In :numref:`nineTilingOrdering` we may indeed notice that the Universities *Augsburg*, *Saarbrücken* and *Tübingen* show the same average limit of 0.615, yet the rated high 9-tile limit for *Augsburg* is higher (0.78) than the one of both the other Universities (0.67). 
+In :numref:`nineTilingOrdering` we may notice, for instance, that the Universities *Augsburg*, *Saarbrücken* and *Tübingen* show the same average rating of 0.615, yet the rated high 9-tile limit for *Augsburg* is higher (0.78) than the one of both the other Universities (0.67). 
 
-The preordered 9-tiles sorting result may eventually be illustrated with a corresponding graphviz drawing.
+The eventual preordered 9-tiles sorting result may be furthermore illustrated with a graphviz drawing of the corresponding :code:`QuantilesSorting` digraph instance *qs*.
 
    >>> qs.exportGraphViz('nineTilingDrawing',graphSize='12,12')
     *---- exporting a dot file for GraphViz tools ---------*
@@ -4597,7 +4597,7 @@ The preordered 9-tiles sorting result may eventually be illustrated with a corre
 To conclude
 ...........
 
-In the end, both the *rating-by-ranking* and the *rating-by-sorting* show very similar results. The first approach, with its forced linear ranking, gives an apparent *precisely determined* rating result, whereas the rating-by-sorting leads to a less preciser and *prudent* rating result, yet much less easy to communicate and interpret.
+In the end, both the *rating-by-ranking*, as well as the *rating-by-sorting* show very similar results. The first approach, with its forced linear ranking, gives an apparent *precisely determined* rating result, whereas the *rating-by-sorting* leads to a less preciser but *prudent* individual University enrollment quality rating, supported with a known majority of disciplines; a result, yet, much less easy to communicate and interpret.
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
@@ -7496,6 +7496,8 @@ Appendices
 .. [29] The methology guiding the *Spiegel* survey may be consulted in German `here <_static/spiegelMethod.pdf>`_ . A copy may be consulted in *examples* directory of the *Digraph3* ressources.
 
 .. [30] It would have been much more accurate to estimate quantile limits from the 50,000 qualities scores of the enrolled students. But this data was not available.
+
+.. [31] Converted from a bipolar-valued credibility 0.07 to a majority significance: (1.0 + 0.07)/2 = 0.535.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
