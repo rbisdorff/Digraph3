@@ -4429,7 +4429,7 @@ The average enrollment quality at the Technical University of *München*, the Un
 				 graphSize='12,12')
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to ratingResult.dot
-     dot -Grankdir=TB -Tpdf dot -o ratingResult.pdf
+     dot -Grankdir=TB -Tpdf dot -o ratingResult.png
 
 .. figure:: ratingResult.png
    :name: ratingResult
